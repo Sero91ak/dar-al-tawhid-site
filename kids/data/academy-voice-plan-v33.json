@@ -1,0 +1,3385 @@
+{
+  "schemaVersion": 1,
+  "version": "academy-voice-plan-v33-20261013",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "purpose": "Unrecorded owner narration and question prompts for lessons 79–82, age-tiered, zero credits, review required.",
+  "policy": {
+    "nativeTtsFallback": false,
+    "arabicQuranRecitationIsSeparate": true,
+    "reviewRequiredBeforePublicPlayback": true,
+    "autoPublishUnreviewed": false,
+    "generateCreditsUsed": 0
+  },
+  "lessonCount": 4,
+  "curriculumIds": [
+    "adab-freundlich-um-etwas-bitten",
+    "tarbiyah-lernziel-freundlich-planen",
+    "nafs-bei-angst-hilfe-holen",
+    "fiqh-wann-wudu-noetig"
+  ],
+  "phraseCount": 224,
+  "phrases": [
+    {
+      "text": "Abū Hurayrah überlieferte in al-Buḫārī 135, dass das Gebet nach Ḥadaṯ erst nach erneuter Reinigung gültig ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Angst darf ausgesprochen werden. Ich kann Hilfe bei vertrauten Erwachsenen suchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Daraus üben wir eine konkrete Bitte: klar, höflich und ohne Druck.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Darf ich den Stift benutzen, bitte? Es ist auch in Ordnung, wenn du Nein sagst.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Das ist weder eine religiöse Pflicht zur Selbstoptimierung noch ein Urteil über den Wert einer Person.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der authentische Ḥadīṯ Muslim 2664 fordert dazu auf, sich um das Nützliche zu bemühen und Allah um Hilfe zu bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Ḥadīṯ enthält keine Stundenplan-Methode; sie ist eine praktische Lernhilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte, dass nach Eintritt von Ḥadaṯ das Gebet nicht angenommen wird, bis man Wuḍūʾ vollzogen hat. (Sinngemäß)",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ erläuterte, dass Ḥadaṯ den Wuḍūʾ aufhebt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte Sanftmut im Umgang miteinander.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass Allah Sanftmut liebt und für Sanftmut Gutes gewährt. (Sinngemäß, nicht wörtlich übersetzt)",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass Allah Seinem Diener hilft, solange dieser seinem Bruder hilft. (Teilauszug, sinngemäß)",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, Menschen in Not zu unterstützen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ riet, sich um das Nützliche zu bemühen, Allah um Hilfe zu bitten und nicht aufzugeben. (Sinngemäßer Teilauszug)",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Vers lehrt gute Worte. Die Stift-Szene ist eine erfundene Alltagsübung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Wortlaut von 18:23–24 verbindet Vorhaben für morgen mit Allahs Willen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die andere Person darf ablehnen, und ich darf ebenfalls freundlich Nein sagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Die Beispiele sind Schutzpädagogik und keine überlieferte Geschichte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Die Gebetszeit allein hebt einen bestehenden Wuḍūʾ nicht auf; mehrere Gebete mit derselben gültigen Waschung sind möglich.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die konkrete Hilfe-Anleitung ist pädagogisch; sie wird nicht als zusätzlicher Ḥadīṯtext ausgegeben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die Regel der bestehenden Reinheit wird als grundlegender fiqhrechtlicher Unterricht vermittelt; daraus folgt keine Pflicht für kleine Kinder vor der Pubertät.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die rituelle Waschung muss gültig sein, wenn wir beten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Die sozialen Übungsregeln werden aus allgemeinen Belegen abgeleitet, nicht als wörtliches Gebot des Ḥadīṯ dargestellt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die Wochenaufgabe ist unsere Idee. Der Qurʾān lehrt, 'wenn Allah will' zu sagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ein Erwachsener zeigt es mir.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ein freundlicher Wunsch respektiert auch die Entscheidung der anderen Person.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ein gutes Ziel ist erreichbar, freundlich und veränderbar.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ein Nein darf ich akzeptieren.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Eine Ablehnung bedeutet nicht, dass man die andere Person beleidigen darf; im Notfall darf man direkt und dringend um Hilfe rufen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Eine gute Bitte achtet die Würde und die Grenzen beider Seiten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Es ist keine Schwäche, einer vertrauenswürdigen Person Sorgen, Grenzverletzungen oder eine Bedrohung mitzuteilen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Fragen über Sonderfälle, Tayammum, Ghusl oder einzelne Wuḍūʾ-Brecher behandeln wir sorgfältig mit qualifizierter Begleitung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Freundliches Bitten besteht aus mehr als einem besonderen Wort.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Habe ich noch gültigen Wuḍūʾ, brauche ich ihn nicht nur wegen einer neuen Gebetszeit zu wiederholen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ḥadaṯ wird hier als Aufhebung des Wuḍūʾ erklärt; strittige Detailfälle werden nicht behandelt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Hilfe suchen ist eine gute und sichere Möglichkeit, mit Sorgen umzugehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich darf sagen: Ich habe Angst.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich darf weitere vertraute Erwachsene ansprechen, wenn die erste Person mir nicht hilft.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich formuliere, was ich benötige, ohne jemanden anzuschreien.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich frage: Darf ich ihn bitte kurz haben?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich gehe zu einer vertrauten erwachsenen Person.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich habe Angst und brauche deine Hilfe. Kannst du mir bitte zuhören?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann ein freiwilliges Ziel formulieren, einen passenden Schritt wählen und Veränderungen zulassen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann ein ungutes Gefühl benennen und eine sichere erwachsene Vertrauensperson ansprechen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann eine Bitte in ruhigen Worten aussprechen und akzeptiere eine höfliche Absage.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich lasse dem anderen Kind Zeit zu antworten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich lerne mit einem Erwachsenen, was Wuḍūʾ bedeutet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich möchte in dieser Woche etwas Kleines lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich sage: Bitte hilf mir.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich übe, wenn es gut für mich passt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich unterscheide: noch bestehender Wuḍūʾ oder aufgehobene Reinheit; bei Fragen hole ich die Hilfe eines Erwachsenen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich wähle ein kleines Lernziel für die Woche und plane eine kurze Übung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich wähle: Ich lerne ein neues gutes Wort.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "In Qurʾān 18:23–24 lernen wir, künftige Vorhaben Allahs Willen anzuvertrauen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "In Qurʾān 2:83 werden gute Worte gegenüber Menschen genannt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "In Qurʾān 5:6 wird die Waschung im Zusammenhang mit dem Gebet erklärt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "In shāʾ Allāh lerne ich diese Woche eine kurze Erklärung und bitte um Hilfe, wenn ich sie brauche.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Manchmal bleibt die Waschung für mehrere Gebete gültig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Manchmal macht mir etwas Angst.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Muslim 2593 lehrt die besondere Bedeutung von Rifq, also sanfter Haltung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Muslim 2664 ermuntert zu hilfreichem Bemühen und dazu, Allah um Hilfe zu bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Muslim 2699 erklärt die Bedeutung menschlicher Unterstützung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Niemand darf dich mit einem vermeintlichen religiösen Gebot zum Verschweigen von gefährlichen Situationen zwingen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Planen heißt, bewusst zu handeln und zugleich Grenzen anzuerkennen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 2:83 gebietet im überlieferten Text gute Rede gegenüber Menschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 5:2 fordert dazu auf, sich beim Guten zu helfen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 5:6 enthält die grundlegenden Bestimmungen zur Reinigung vor der Ṣalāh.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 5:6 nennt die Reinigung vor dem Gebet; wir lernen ohne Druck.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān und Sunnah lehren Hilfe. Die Sätze sind eigene Schutzübungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān und Sunnah liefern Grundsätze; keine bestimmte deutsche Bitte-Formel ist als Wortlaut offenbart.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Sūrat al-Māʾidah 5:2 fordert gegenseitige Hilfe im Guten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Unsere Übung übersetzt diese Grundsätze in ein freiwilliges Wochenziel mit einem machbaren Schritt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wenn es nicht gelingt, frage ich nach Hilfe oder passe meinen Plan an.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich Angst habe, darf ich genau sagen, was mir Sorgen macht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich Hilfe brauche, frage ich ruhig nach.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich mehr Zeit brauche, ist das in Ordnung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich noch Wuḍūʾ habe, kann ich damit beten. Wenn es aufgehoben wurde, muss ich mich vor dem Gebet neu reinigen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wenn jemand nicht zuhört, suche ich eine andere sichere Person.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen, dass die rituelle Reinheit für das Gebet nötig ist, und wann eine neue Waschung erforderlich wird.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir suchen dann eine andere Lösung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir trennen Offenbarung von pädagogischen Techniken wie Wochenplan und Erfolgskontrolle.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir üben, Angst ernst zu nehmen und sichere Hilfewege zu erkennen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden die Pflicht zur Reinheit von einer empfohlenen Erneuerung der Waschung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir wählen ein erreichbares Ziel für diese Woche, ohne uns wegen Fehlern abzuwerten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wuḍūʾ ist eine Waschung vor dem Gebet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wurde er aufgehoben, reinige ich mich vor dem Gebet erneut und frage bei Zweifeln eine vertrauenswürdige Person.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Zum Gebet gehört Reinheit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Zwei Kinder möchten denselben Stift benutzen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Braucht man immer neues Wuḍūʾ, nur weil ein neues Gebet beginnt?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Die erste erwachsene Person hört nicht zu. Was dann?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Du bekommst Angst. Was darfst du sagen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Formuliere ein erreichbares Wochenziel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Formuliere eine Bitte, bei der ein Nein erlaubt bleibt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wann darf man eine Unterhaltung dringend unterbrechen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wann ist neuer Wuḍūʾ nötig?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Was fordert Qurʾān 2:83?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Was gebietet Qurʾān 5:2?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Was gehört zu einer höflichen Bitte?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was ist bei einem zu schweren Ziel richtig?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was ist keine wörtliche Vorschrift aus den Belegen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was kannst du tun, wenn jemand dich einschüchtert?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was kannst du tun, wenn jemand Nein sagt?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Was lehrt Muslim 2593?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Was lernen wir aus 18:23–24 über Pläne?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Was lernen wir vor dem Gebet?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Was machst du bei einer beängstigenden Situation?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Was machst du bei Unsicherheit über Wuḍūʾ?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Was machst du, wenn es noch nicht klappt?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Welche Aussage folgt pädagogisch aus den Quellen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Welche Aussage ist fiqhrechtlich richtig?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Welche Aussage ist quellentreu?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Welche Bitte kannst du sagen, wenn du Angst hast?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Welche Fälle werden in späteren Stunden eigens geprüft?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Welches Ziel ist freundlich zu dir?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn du etwas nicht verstehst, was kannst du tun?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wie fragst du nach dem Stift?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wie hängen Qurʾān 5:6 und al-Buḫārī 135 zusammen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wie passen Qurʾān 18:23–24 und Muslim 2664 zusammen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Worin unterscheiden sich Offenbarung und Lernübung?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wozu rät Muslim 2664?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Allahs Wille gehört zu unseren Plänen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Bitte hilf mir.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Darf ich den Stift bitte haben?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Das Nein respektieren.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Das Nützliche tun und Allah um Hilfe bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Die Quellen lehren gutes Sprechen und Sanftmut; unsere deutsche Bitte ist ein Beispiel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Einander im Guten helfen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Eine andere sichere Person suchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Eine neue Gebetszeit hebt einen gültigen Wuḍūʾ nicht automatisch auf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Einen vertrauten Erwachsenen fragen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Für jeden Lernenden genau sieben Kontrollkästchen zu machen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Gute Worte gegenüber Menschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Hilfe zu suchen und zu leisten ist gut und gehört zu einer sicheren Gemeinschaft.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich bitte um Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich lerne ein kleines Wort.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Nein, wenn die Reinigung noch gültig ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Sanftmut wird von Allah geliebt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Wenn die rituelle Reinheit aufgehoben wurde.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Wir sagen 'in shāʾ Allāh', wenn wir etwas für morgen vorhaben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Wuḍūʾ und Reinheit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Zu einer sicheren erwachsenen Person gehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Absichtlich unrein zu bleiben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Allahs Willen in Vorhaben berücksichtigen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Alles allein geheim halten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Alles wird immer genauso klappen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Andere beim Bitten bedrohen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Bei Gefahr nie helfen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Der Prophet ﷺ befahl genau den deutschen Satz 'Bitte gib mir den Stift'.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Dich dafür schämen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Die Person anschreien.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Gefährliche Geheimnisse müssen immer verborgen bleiben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Gib sofort her!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich beschimpfe mich.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich muss alles sofort können.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich muss es für immer geheim halten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ja, jede neue Uhrzeit hebt die Reinheit auf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Jede Mühe verweigern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Jedes Gebet erfordert zwingend eine neue Waschung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Nach jedem gelesenen Wort.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Niemals wieder etwas sagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Schreien führt immer zum Ziel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Beachte den Schutz von Kindern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Darf ich bitte mitspielen? Falls es nicht klappt, ist das in Ordnung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "example",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Denke an den Vers.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Denke an die bestehende Reinheit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Denke an freundliche Worte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Vers erklärt die Reinigung vor dem Gebet; der Ḥadīṯ betont die Notwendigkeit erneuter Reinheit nach Ḥadaṯ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "example",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Vers spricht von Zusammenarbeit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Die Quelle behandelt Ḥadaṯ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die Wochenliste ist unsere eigene Methode.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "feedback",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Du darfst Hilfe bekommen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Du darfst immer um Hilfe bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Du darfst mit Erwachsenen reden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Du darfst ruhig lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Du musst nicht jedes Erlebnis in der Gruppe erzählen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ein neuer Versuch ist gut.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Eine Bitte ist kein Befehl.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Eine gültige Waschung kann erhalten bleiben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Eine gute Vorbereitung ist wichtig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Eine ruhige Bitte ist gut.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Eine sichere Person kann helfen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Entscheidend ist die bestehende Reinheit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "feedback",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre eine sichere Lösung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Fragen hilft.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Gib ein konkretes Beispiel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Gute Worte gehören zum Adab.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ḥadaṯ ist entscheidend.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Hilfe holen ist gut.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Hilfesuche ist erlaubt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "feedback",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Höflichkeit darf Sicherheit nicht verhindern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ich frage einen Erwachsenen, der die Regeln kennt, und lerne ohne Angst.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "example",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich fühle mich nicht sicher. Bitte hör mir zu und hilf mir.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "example",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich passe es an, hole Hilfe oder pausiere, ohne mich abzuwerten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "example",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ich plane im Bewusstsein von Allahs Willen und bemühe mich um das Nützliche mit Seiner Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "example",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ich sage klar, was ich brauche, frage ruhig und respektiere die Entscheidung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "example",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ich suche eine sichere erwachsene Person und erzähle, dass ich Hilfe brauche.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "example",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "In shāʾ Allāh lerne ich zwei gute Wörter und übe zweimal kurz.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "example",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Jeder darf Grenzen haben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Kleine Übungen sind erlaubt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Lernen darf Zeit brauchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Nenne beide Quellen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Nenne beide Stellen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Nicht ständig aus bloßem Zweifel wiederholen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Nimm ein erreichbares Ziel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Originalbeleg und Anwendung trennen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Rifq heißt sanft handeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Sanftmut ist ein guter Charakterzug.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Sicherheit zuerst.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Tayammum, Ghusl, einzelne Wuḍūʾ-Brecher und Unterschiede in besonderen Situationen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "example",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Trenne Original und Anwendung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Unterscheide Unterrichtsmethode und Offenbarung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Verbinde Bemühung und Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Vermeide ungeprüfte Einzelfallurteile.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Vers und Ḥadīṯ handeln von Hilfe; die konkrete Sicherheitsübung haben Erwachsene pädagogisch formuliert.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "example",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Versuche es bei einer weiteren vertrauten Person.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich Schutz oder unmittelbare Hilfe brauche, darf ich direkt sprechen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "example",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wenn Wuḍūʾ aufgehoben wurde, erneuern wir ihn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir bemühen uns.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir erfinden kein Zitat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "feedback",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir helfen im Guten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-bei-angst-hilfe-holen",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir suchen eine andere Lösung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-freundlich-um-etwas-bitten",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir vertrauen auf Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wuḍūʾ ist die Waschung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-wann-wudu-noetig",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ziel und kleine Handlung nennen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-lernziel-freundlich-planen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    }
+  ]
+}

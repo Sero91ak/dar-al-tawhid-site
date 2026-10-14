@@ -70,7 +70,7 @@ assert.equal(graduate.active,null);
 assert.equal(graduate.upcoming,null);
 assert.equal(graduate.access(ids[57]),"review");
 const html=read("kids/akademie/index.html");
-assert.ok(html.includes('school-progress-v11.js?v=20261012-28'));
+assert.ok(html.includes('school-progress-v11.js?v=20261012-30'));
 assert.ok(html.includes('data-preview-release="V17.0-voice-sandbox-20261011"')||html.includes('data-preview-release="V12.0-voicepilot-20261010"')||html.includes('data-preview-release="V11.0-20261010"'),"Supported sequential school release marker");
 assert.ok(html.includes('academySchoolState().access(chosen)'));
 assert.ok(html.includes('card.disabled=locked'));

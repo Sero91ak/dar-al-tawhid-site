@@ -1,0 +1,3331 @@
+{
+  "schemaVersion": 1,
+  "version": "academy-voice-plan-v34-20261013",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "purpose": "Four authenticated lessons 83-86, voice scripts for 4-5, 6-8, and 9-10; no generated or approved recordings.",
+  "policy": {
+    "nativeTtsFallback": false,
+    "arabicQuranRecitationIsSeparate": true,
+    "reviewRequiredBeforePublicPlayback": true,
+    "autoPublishUnreviewed": false,
+    "generateCreditsUsed": 0,
+    "quranArabicExcludedFromSyntheticNarration": true
+  },
+  "lessonCount": 4,
+  "curriculumIds": [
+    "quran-al-falaq-kennenlernen",
+    "sirah-ismail-kaaba-gemeinsam-bauen",
+    "dua-nach-aufwachen-dankbar",
+    "family-streit-ohne-gewalt-loesen"
+  ],
+  "phraseCount": 219,
+  "phrases": [
+    {
+      "text": "Al-Buḫārī 5017 überliefert, dass der Prophet ﷺ die Sūrah gemeinsam mit al-Ikhlāṣ und an-Nās vor dem Schlafen las.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Al-Buḫārī 6114 beschreibt Selbstbeherrschung bei Ärger als wahre Stärke.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Al-Buḫārī 6312 überliefert bei Ḥuḏayfah die authentischen Worte nach dem Erwachen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Alle Sätze stammen sinngemäß aus Qurʾān 2:127 und al-Buḫārī 3364.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Bei Drohungen oder Gewalt übernimmt eine vertrauenswürdige erwachsene Person die Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Beide baten Allah: Unser Herr, nimm es von uns an.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Dabei baten sie Allah, ihre Arbeit anzunehmen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Das bedeutet: Ich suche Schutz beim Herrn des Tagesanbruchs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Dhikr enthält das Lob Allahs, das Erwachen nach Schlaf und die Rückkehr zu Ihm.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der erste Vers ist wörtlicher Qurʾān; die weiteren Sätze sind Lernhilfen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Ḥadīṯ al-Buḫārī 5017 belegt die Rezitation vor dem Schlafen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte: Wirkliche Stärke ist nicht, andere zu besiegen, sondern sich bei Ärger zu beherrschen. (Sinngemäße Bedeutung)",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte ein besonderes Gedenken nach dem Aufwachen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass echte Stärke im Beherrschen des Ärgers liegt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān berichtet, dass Ibrāhīm und Ismāʿīl die Fundamente des Hauses erhoben und Allah um Annahme baten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Schlaf wird im Qurʾān erwähnt; das genaue Gedenken steht in al-Buḫārī 6312.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Vers nennt ihr gemeinsames Werk und die Duʿāʾ; die einzelnen Bauhandlungen stammen aus der Sunnah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die authentische Überlieferung in al-Buḫārī 3364 ergänzt die konkrete Mithilfe Ismāʿīls beim Tragen und Reichen der Steine.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die Baugeschichte ist überliefert; wir ergänzen keine erfundenen Gespräche oder Szenen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Die deutsche Bedeutung ist eine gekennzeichnete Übersetzung; die akustische Rezitation gehört nicht zur synthetischen Masterstimme.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die deutsche Erklärung ist eine sinngemäße Übersetzung, keine veränderte Duʿāʾ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Die Geschichte zeigt Zusammenarbeit und Gottesdienst anhand genau überlieferter Worte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die konkrete Konfliktlösung stammt aus pädagogischer Anwendung der allgemeinen Quellen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die Schritte sind Schutzpädagogik, kein wörtliches Ḥadīṯ-Zitat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Die Sūrah 113:1–5 beginnt mit der Bitte um Zuflucht beim Herrn des Tagesanbruchs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die Sūrah lehrt, Allah um Schutz vor Bösem zu bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Die weiteren Verse bitten um Schutz vor Bösem, Dunkelheit, schädlichen Handlungen und Neid.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ein Erwachsener kann die Sūrah langsam mit mir hören.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ein Erwachsener kann mir die Wörter in Ruhe vorsprechen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Es ist normal, manchmal unterschiedliche Wünsche zu haben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Friedensstiften bedeutet nicht, gefährliche Situationen hinzunehmen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Gemeint ist die Kaʿbah, die sie gemeinsam erbauten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Heute bin ich aufgewacht und beginne einen neuen Tag.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ḥuḏayfah berichtete die Worte des Propheten ﷺ nach dem Aufwachen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ibn ʿAbbās berichtete, dass Ismāʿīl die Steine reichte und Ibrāhīm baute.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ibn ʿAbbās überlieferte die Geschichte, dass Ibrāhīm die Kaʿbah baute und Ismāʿīl ihm die Steine reichte, während beide Allah baten, das Werk anzunehmen. (Sinngemäßer Auszug aus einer längeren Überlieferung)",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ibrāhīm und Ismāʿīl arbeiteten zusammen und baten: Unser Herr, nimm es von uns an.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ibrāhīm war ein Prophet Allahs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich darf langsam lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich erkenne den arabischen Wortlaut des Morgengedankens und verstehe, dass darin Allah gelobt wird.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich erkenne den Beginn der Sūrah und weiß, dass wir Allah um Schutz bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich halte Abstand, wenn jemand grob wird.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich hole eine vertraute erwachsene Person.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann Allah für den neuen Morgen loben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann Stopp sagen, Abstand halten und andere nicht schlagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann Streit ohne Schlagen unterbrechen, Grenzen setzen und bei Bedarf Hilfe holen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich kenne Ismāʿīls belegte Mitwirkung am Bau der Kaʿbah und seine aufrichtige Bittgebetshaltung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich sage: Stopp, bitte nicht schubsen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ihr Duʿāʾ im Vers lautet sinngemäß: Unser Herr, nimm es von uns an, Du bist der Allhörende, Allwissende.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "In Sūrat al-Baqarah 2:127 werden Ibrāhīm und Ismāʿīl beim Erheben der Grundmauern des Hauses erwähnt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "In Vers 1 lernen wir: Ich suche Zuflucht beim Herrn des Tagesanbruchs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Nach dem Aufwachen sagte der Prophet ﷺ: «الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ». (Originalformel; sinngemäß: Allah gebührt Lob, Der uns nach unserem Schlaf wieder erwachen ließ, und zu Ihm ist die Auferstehung.)",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 2:127 nennt Ibrāhīm und Ismāʿīl beim Errichten des Hauses.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 30:23 nennt unseren Schlaf als Zeichen Allahs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 49:10 ruft dazu auf, zwischen Gläubigen Frieden zu schaffen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān und Sunnah lehren Frieden und Selbstbeherrschung; die Spielszene ist eine Übung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Sein Sohn Ismāʿīl war ebenfalls ein Prophet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Sie beginnen mit: Al-ḥamdu lillāhi llaḏī aḥyānā.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Sie halfen gemeinsam beim Bau der Kaʿbah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Stopp, ich möchte nicht geschubst werden. Ich hole jetzt Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Sūrat al-Falaq beginnt mit: Qul aʿūdhu bi-rabbi l-falaq.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Sūrat al-Falaq gehört zum Qurʾān und hat fünf Verse.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Sūrat al-Ḥuǧurāt 49:10 enthält den Auftrag zur Versöhnung unter Gläubigen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Sūrat ar-Rūm 30:23 nennt den Schlaf am Tag und in der Nacht als eines von Allahs Zeichen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wer bedroht oder geschlagen wird, muss nicht die Verantwortung für eine Versöhnung übernehmen; zuerst hat Sicherheit Vorrang.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir dürfen Allah um Schutz bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir hören eine authentische Rezitation und erklären die Bedeutung ohne Angstgeschichten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir hören eine kurze Sūrah über Schutz bei Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir können später eine friedliche Lösung suchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen den authentischen Dhikr nach dem Aufwachen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen die feste Morgenformel aus authentischer Sunnah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen freiwillige, sichere Zusammenarbeit und Aufrichtigkeit; kein Kind soll gefährliche Anweisungen ungeprüft befolgen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen Sūrat al-Falaq als Bittgebet um Allahs Schutz kennen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen von Ismāʿīls Hilfe bei einer wichtigen Aufgabe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir lesen Sūrat al-Falaq vollständig und achten auf den genauen Sinn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir üben Deeskalation: nicht zurückschlagen, Grenzen benennen, Abstand gewinnen und Hilfe suchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir üben den gesamten arabischen Wortlaut, ohne die Wörter zu verändern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir üben ruhige Worte, sichere Grenzen und Hilfe, wenn ein Streit zu groß wird.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden den exakten arabischen Text von einer pädagogischen Umschreibung und sprechen ihn respektvoll.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden den genauen Qurʾāntext von freien Geschichten und nutzen ausschließlich eine echte geprüfte Qurʾānrezitation.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir verbinden den Beginn des Tages mit Lob für Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wortlaut und Kontext des Morgen-Dhikr sind durch al-Buḫārī 6312 belegt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Zwei Kinder streiten über ein Spielzeug.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Zwei Propheten halfen bei einer guten Aufgabe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "ʿĀʾishah berichtete, dass der Prophet ﷺ sie vor dem Schlafengehen rezitierte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "ʿĀʾishah berichtete, dass der Prophet ﷺ vor dem Schlafengehen Sūrat al-Ikhlāṣ sowie Sūrat al-Falaq und Sūrat an-Nās rezitierte. (Sinngemäß)",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "summary",
+          "age": "all"
+        },
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "sample",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Jemand schubst dich. Was kannst du tun?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Nenne die Quelle der Morgenformel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Schreibe den arabischen Morgen-Dhikr aus al-Buḫārī 6312.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wann sagen wir den hier gelernten Dhikr?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Warum bedeutet gutes Helfen nicht blinden Gehorsam gegenüber Menschen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Warum ist eine deutsche Erklärung nicht dasselbe wie die feste Duʿāʾ?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Warum verwenden wir keine generierte Qurʾānrezitation?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was berichtet der Ḥadīṯ über die Sūrah?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Was empfiehlt Qurʾān 49:10?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Was heißt wahre Stärke laut al-Buḫārī 6114?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Was ist die Kernaussage von al-Falaq?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was ist ein sicherer Satz im Konflikt?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Was können wir aus Ismāʿīls Verhalten sicher lernen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was nennt der Qurʾānvers 30:23?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was tat Ismāʿīl laut al-Buḫārī 3364?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Welche Aussage schützt Kinder richtig?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Welche drei Sūren nennt al-Buḫārī 5017?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Welche Qurʾānstelle nennt die beiden Propheten beim Bau?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Welche Schritte helfen bei eskalierendem Streit?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Welcher Unterschied besteht zwischen Vers und Ḥadīṯ?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wen baten die beiden um Annahme?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wen bitten wir um Schutz?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wen dürfen wir nach dem Aufwachen loben?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn Streit gefährlich wird, wer hilft?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wer half Ibrāhīm beim Bau der Kaʿbah?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wie beginnen die Worte?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wie beginnt die Sūrah?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wie darfst du lernen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wie kannst du den Qurʾān kennenlernen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wie lautet ihr Bittgebet sinngemäß?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wie verbinden sich Qurʾān 49:10 und al-Buḫārī 6114?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wie viele Verse hat Sūrat al-Falaq?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Achte auf die Nummer.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Al-ḥamdu lillāh.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Al-Ikhlāṣ, al-Falaq und an-Nās.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "sample",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Allah ist die Zuflucht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "feedback",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Alle drei stehen im Ḥadīṯ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Alles Lob gebührt Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "An einer guten Aufgabe mitwirken und Allah um Annahme bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "sample",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: 2:127.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Al-ḥamdu lillāh.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Bei Allah Schutz vor Bösem suchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Bei Gewalt steht Schutz und Hilfe vor erzwungener Versöhnung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Den Schlaf als Zeichen Allahs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Der Vers nennt Werk und Bittgebet; der Ḥadīṯ beschreibt die Mithilfe beim Bauen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Eine echte Rezitation mit einem Erwachsenen hören.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Eine sichere erwachsene Person.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Er reichte die Steine.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Frieden zwischen Gläubigen stiften.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Fünf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ismāʿīl.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Nach dem Aufwachen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Qul aʿūdhu bi-rabbi l-falaq.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ruhig und mit Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Sich bei Ärger beherrschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Stopp sagen und Hilfe holen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: 113:1.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Al-ḥamdu lillāh.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Das Opfer muss sich allein beim Täter entschuldigen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Den anderen schlagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Den Wortlaut einer langen Morgen-Duʿāʾ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Der Vers berichtet alle Steinbewegungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Die Steine.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Eine ausgedachte Figur.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Eine erfundene Macht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Er war in dieser Geschichte gar nicht beteiligt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Nur das bedrohte Kind allein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Nur eine erfundene Geschichte erzählen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Nur mitten im Schulunterricht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Qul huwa llāhu aḥad.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Streit immer größer machen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Unter Zwang und Angst.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Wegen Dunkelheit Angstgeschichten erfinden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Zurückschlagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Zwanzig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Beachte die jeweiligen Originalquellen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Beschreibe ein sicheres Vorgehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Das steht im Vers.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Denk an den Beginn der Sūrah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Denk an den neuen Tag.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Denke an den Herrn des Tagesanbruchs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Denke an den Tagesbeginn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Denke an die Zusammenarbeit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Denke an seinen Sohn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Dhikr stammt aus dem Ḥadīṯ.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "feedback",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ rezitierte al-Falaq vor dem Schlafen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "sample",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾāntext soll mit echter und geprüfter Rezitation gehört werden; eine nachgemachte Stimme wird nicht als authentische Tilāwah ausgegeben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "sample",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Vers betont Versöhnung; der Ḥadīṯ verlangt Selbstbeherrschung bei Ärger.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "sample",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die Worte beginnen mit Lob.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Dies ist eine heutige Schutzregel, kein direktes Zitat aus der Baugeschichte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Du darfst Stopp sagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Eine klare Grenze ist gut.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Er half bei dem Bau.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Er ist für das Erwachen überliefert.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erwachsene schützen Kinder.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Es geht um Versöhnung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Gemeinsam zuhören hilft.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Hilfe ist gut.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Hilfe suchen ist erlaubt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Höre das Bittgebet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ismāʿīl half seinem Vater.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Keine erfundenen historischen Details.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Kraft bedeutet Selbstbeherrschung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Lernen braucht Zeit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Lies die Sūrah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Nenne beide Quellen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Nicht Gewalt, sondern Kontrolle.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Nicht jede Einzelheit stammt aus demselben Text.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "feedback",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Original und sinngemäße Bedeutung trennen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Quelle: al-Buḫārī 5017.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 2:127.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ṣaḥīḥ al-Buḫārī 6312, von Ḥuḏayfah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "sample",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Schau auf die Schutzbitte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Schau in Sūrat al-Baqarah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "hint",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Sichere Grenzen sind wichtig; gefährliche Aufforderungen darf ich ablehnen und Hilfe suchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "sample",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Sicherheit ist wichtig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "feedback",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Sie baten Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Sie enthält fünf Verse.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Sie erläutert den Sinn, ersetzt aber nicht den überlieferten arabischen Wortlaut.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "sample",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "So beginnt 113:1.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Stopp sagen, Abstand schaffen, nicht zurückschlagen und vertrauenswürdige Erwachsene holen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "sample",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Stopp, ich möchte das nicht. Ich hole Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "sample",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Suche Sicherheit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Trenne allgemeine und konkrete Quelle.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Trenne Erklärung und Rezitation.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Trenne Friedensstiften und Kinderschutz.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Überlieferte Worte nicht umformen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-nach-aufwachen-dankbar",
+          "kind": "hint",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Unser Herr, nimm es von uns an. Du bist der Allhörende, Allwissende.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-ismail-kaaba-gemeinsam-bauen",
+          "kind": "sample",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen den echten Text.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "hint",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir suchen gute Lösungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-streit-ohne-gewalt-loesen",
+          "kind": "feedback",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir suchen Zuflucht bei Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-al-falaq-kennenlernen",
+          "kind": "feedback",
+          "age": "4-5"
+        }
+      ]
+    }
+  ]
+}

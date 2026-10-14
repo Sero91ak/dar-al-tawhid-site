@@ -1,0 +1,40 @@
+name: Kids Academy Source and Progress QA
+on:
+  pull_request:
+    paths:
+      - 'kids/akademie/**'
+      - 'kids/data/academy-year-52weeks-v1.json'
+      - 'kids/data/academy-expansion-roadmap-v23.json'
+      - 'kids/data/academy-voice-plan-v*.json'
+      - 'kids/unterrichtsarchiv.html'
+      - 'kids/tools/test-academy-sequential-lock-v27.cjs'
+      - 'kids/tools/test-academy-v23-roadmap.cjs'
+      - '.github/workflows/check-kids-academy-content-isolated.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'kids/akademie/**'
+      - 'kids/data/academy-year-52weeks-v1.json'
+      - 'kids/data/academy-expansion-roadmap-v23.json'
+      - 'kids/data/academy-voice-plan-v*.json'
+      - 'kids/unterrichtsarchiv.html'
+      - 'kids/tools/test-academy-sequential-lock-v27.cjs'
+permissions:
+  contents: read
+jobs:
+  verify-curriculum:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate all new curriculum JS pack syntax
+        run: |
+          for v in v27 v28 v29 v30 v31 v32 v33 v34; do
+            node --check "kids/akademie/curriculum-$v.js"
+          done
+      - name: Enforce year-plan, ordered unlocks, archived lessons and audio gates
+        run: node kids/tools/test-academy-sequential-lock-v27.cjs
+      - name: Enforce 208 editorial slots and 12 authentic topic strands
+        run: node kids/tools/test-academy-v23-roadmap.cjs
+      - name: Confirm exact missing Serhat audio inventories without API or credits
+        run: node scripts/test-kids-academy-audio-queue-v18.js
