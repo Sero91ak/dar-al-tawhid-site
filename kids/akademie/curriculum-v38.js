@@ -1265,49 +1265,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Rücksicht in der Moschee?",
+          "prompt": "Wie nehmen wir in der Moschee Rücksicht?",
           "options": [
-            "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen.",
-            "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um."
+            "Wir gehen ruhig und stören betende Menschen nicht.",
+            "Wir rennen absichtlich laut zwischen betenden Menschen herum."
           ],
-          "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um."
+          "correct": 0,
+          "hint": "Erinnere dich an den Unterricht.",
+          "explain": "Mā schāʾ Allāh! Wir gehen ruhig und stören betende Menschen nicht."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Wie üben wir Rücksicht im Gebetsraum?",
           "options": [
-            "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
-            "Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre."
+            "Wir lassen unsere Schuhe absichtlich mitten im Weg liegen.",
+            "Wir gehen leise und stellen unsere Schuhe ordentlich hin."
           ],
-          "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "correct": 1,
+          "hint": "Denke an das Beispiel aus der Stunde.",
+          "explain": "Mā schāʾ Allāh! Wir gehen leise und stellen unsere Schuhe ordentlich hin."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Rücksicht in der Moschee?",
+          "prompt": "Wie nehmen wir in der Moschee Rücksicht?",
           "options": [
-            "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
-            "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen."
+            "Wir rennen absichtlich laut zwischen betenden Menschen herum.",
+            "Wir gehen ruhig und stören betende Menschen nicht."
           ],
-          "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um."
+          "correct": 1,
+          "hint": "Erinnere dich an den Unterricht.",
+          "explain": "Mā schāʾ Allāh! Wir gehen ruhig und stören betende Menschen nicht."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Wie üben wir Rücksicht im Gebetsraum?",
           "options": [
-            "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
-            "Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre."
+            "Wir gehen leise und stellen unsere Schuhe ordentlich hin.",
+            "Wir lassen unsere Schuhe absichtlich mitten im Weg liegen."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an das Beispiel aus der Stunde.",
+          "explain": "Mā schāʾ Allāh! Wir gehen leise und stellen unsere Schuhe ordentlich hin."
         },
         {
           "type": "text",
@@ -1334,14 +1334,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was ist gutes Benehmen, wenn Menschen neben dir beten?",
           "options": [
-            "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen.",
-            "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um."
+            "Absichtlich laut rufen, damit alle auf uns achten.",
+            "Leise sein und ihnen Platz und Ruhe lassen."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Erinnere dich an den Unterricht.",
+          "explain": "Mā schāʾ Allāh! Leise sein und ihnen Platz und Ruhe lassen."
         }
       ]
     },
@@ -1483,49 +1483,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Eigene Grenzen respektieren?",
+          "prompt": "Was darfst du tun, wenn jemand deine Grenze nicht respektiert?",
           "options": [
-            "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
-            "Bevor wir ein Haus betreten, fragen wir und grüßen."
+            "Nein sagen und Hilfe bei einer vertrauten erwachsenen Person holen.",
+            "Mitmachen, weil dich jemand drängt."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe."
+          "hint": "Erinnere dich an den Unterricht.",
+          "explain": "Mā schāʾ Allāh! Nein sagen und Hilfe bei einer vertrauten erwachsenen Person holen."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Was kannst du sagen, wenn sich ein Spiel falsch anfühlt?",
           "options": [
-            "Wir üben Anklopfen, Warten und einen friedlichen Gruß.",
-            "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue."
+            "Ich darf das niemandem erzählen.",
+            "Nein. Ich möchte das nicht. Ich hole mir Hilfe."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denke an das Beispiel aus der Stunde.",
+          "explain": "Mā schāʾ Allāh! Nein. Ich möchte das nicht. Ich hole mir Hilfe."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Eigene Grenzen respektieren?",
+          "prompt": "Was darfst du tun, wenn jemand deine Grenze nicht respektiert?",
           "options": [
-            "Bevor wir ein Haus betreten, fragen wir und grüßen.",
-            "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe."
+            "Mitmachen, weil dich jemand drängt.",
+            "Nein sagen und Hilfe bei einer vertrauten erwachsenen Person holen."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe."
+          "hint": "Erinnere dich an den Unterricht.",
+          "explain": "Mā schāʾ Allāh! Nein sagen und Hilfe bei einer vertrauten erwachsenen Person holen."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Was kannst du sagen, wenn sich ein Spiel falsch anfühlt?",
           "options": [
-            "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
-            "Wir üben Anklopfen, Warten und einen friedlichen Gruß."
+            "Nein. Ich möchte das nicht. Ich hole mir Hilfe.",
+            "Ich darf das niemandem erzählen."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an das Beispiel aus der Stunde.",
+          "explain": "Mā schāʾ Allāh! Nein. Ich möchte das nicht. Ich hole mir Hilfe."
         },
         {
           "type": "text",
@@ -1552,14 +1552,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was ist bei wiederholtem Druck wichtig?",
           "options": [
-            "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
-            "Bevor wir ein Haus betreten, fragen wir und grüßen."
+            "Die Situation allein aushalten und niemandem etwas sagen.",
+            "Eine vertrauenswürdige erwachsene Person informieren und weiter Hilfe suchen, falls nötig."
           ],
-          "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "correct": 1,
+          "hint": "Erinnere dich an den Unterricht.",
+          "explain": "Mā schāʾ Allāh! Eine vertrauenswürdige erwachsene Person informieren und weiter Hilfe suchen, falls nötig."
         }
       ]
     },
@@ -1701,49 +1701,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Neid erkennen ohne Beschämung?",
+          "prompt": "Wie gehen wir mit Neid um?",
           "options": [
-            "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
-            "Neid fühlt sich eng an."
+            "Wir versuchen, anderen Gutes zu gönnen.",
+            "Wir ärgern andere, wenn sie ein Geschenk bekommen."
           ],
-          "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Neid fühlt sich eng an."
+          "correct": 0,
+          "hint": "Erinnere dich an den Unterricht.",
+          "explain": "Mā schāʾ Allāh! Wir versuchen, anderen Gutes zu gönnen."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Was kannst du dir beim Neidgefühl sagen?",
           "options": [
-            "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz.",
-            "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers."
+            "Ich muss dir das Geschenk wegnehmen.",
+            "Ich gönne es dir, und ich bitte Allah um ein gutes Herz."
           ],
-          "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "correct": 1,
+          "hint": "Denke an das Beispiel aus der Stunde.",
+          "explain": "Mā schāʾ Allāh! Ich gönne es dir, und ich bitte Allah um ein gutes Herz."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Neid erkennen ohne Beschämung?",
+          "prompt": "Wie gehen wir mit Neid um?",
           "options": [
-            "Neid fühlt sich eng an.",
-            "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt."
+            "Wir ärgern andere, wenn sie ein Geschenk bekommen.",
+            "Wir versuchen, anderen Gutes zu gönnen."
           ],
-          "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Neid fühlt sich eng an."
+          "correct": 1,
+          "hint": "Erinnere dich an den Unterricht.",
+          "explain": "Mā schāʾ Allāh! Wir versuchen, anderen Gutes zu gönnen."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Was kannst du dir beim Neidgefühl sagen?",
           "options": [
-            "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers.",
-            "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
+            "Ich gönne es dir, und ich bitte Allah um ein gutes Herz.",
+            "Ich muss dir das Geschenk wegnehmen."
           ],
-          "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "correct": 0,
+          "hint": "Denke an das Beispiel aus der Stunde.",
+          "explain": "Mā schāʾ Allāh! Ich gönne es dir, und ich bitte Allah um ein gutes Herz."
         },
         {
           "type": "text",
@@ -1770,14 +1770,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Wie gehen wir mit Neid um, ohne jemanden zu beschämen?",
           "options": [
-            "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
-            "Neid fühlt sich eng an."
+            "Wir machen ein Kind vor allen wegen seines Gefühls schlecht.",
+            "Wir erkennen das Gefühl und vermeiden verletzende Handlungen."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Erinnere dich an den Unterricht.",
+          "explain": "Mā schāʾ Allāh! Wir erkennen das Gefühl und vermeiden verletzende Handlungen."
         }
       ]
     },
@@ -1932,49 +1932,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Reinheit der Gebetskleidung?",
+          "prompt": "Ist jeder Staubfleck auf Kleidung rituell unrein?",
           "options": [
-            "Vor dem Gebet schauen wir, ob die Kleidung sauber ist.",
-            "Nach einem Fehler bleibt die Tür zur Besserung offen."
+            "Nein. Gewöhnlicher Staub ist nicht automatisch Naǧāsah.",
+            "Ja. Jeder sichtbare Staubfleck macht jedes Gebet ungültig."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Vor dem Gebet schauen wir, ob die Kleidung sauber ist."
+          "hint": "Erinnere dich an den Unterricht.",
+          "explain": "Mā schāʾ Allāh! Nein. Gewöhnlicher Staub ist nicht automatisch Naǧāsah."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Was tun wir bei einer Unsicherheit über die Reinheit?",
           "options": [
-            "Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
-            "Wir sagen: Ich kann es besser machen, und nennen einen kleinen nächsten Schritt."
+            "Wir erfinden selbst eine neue religiöse Vorschrift.",
+            "Wir fragen eine kundige erwachsene Person."
           ],
-          "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "correct": 1,
+          "hint": "Denke an das Beispiel aus der Stunde.",
+          "explain": "Mā schāʾ Allāh! Wir fragen eine kundige erwachsene Person."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Reinheit der Gebetskleidung?",
+          "prompt": "Ist jeder Staubfleck auf Kleidung rituell unrein?",
           "options": [
-            "Nach einem Fehler bleibt die Tür zur Besserung offen.",
-            "Vor dem Gebet schauen wir, ob die Kleidung sauber ist."
+            "Ja. Jeder sichtbare Staubfleck macht jedes Gebet ungültig.",
+            "Nein. Gewöhnlicher Staub ist nicht automatisch Naǧāsah."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Vor dem Gebet schauen wir, ob die Kleidung sauber ist."
+          "hint": "Erinnere dich an den Unterricht.",
+          "explain": "Mā schāʾ Allāh! Nein. Gewöhnlicher Staub ist nicht automatisch Naǧāsah."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Was tun wir bei einer Unsicherheit über die Reinheit?",
           "options": [
-            "Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
-            "Wir sagen: Ich kann es besser machen, und nennen einen kleinen nächsten Schritt."
+            "Wir fragen eine kundige erwachsene Person.",
+            "Wir erfinden selbst eine neue religiöse Vorschrift."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an das Beispiel aus der Stunde.",
+          "explain": "Mā schāʾ Allāh! Wir fragen eine kundige erwachsene Person."
         },
         {
           "type": "choice",
