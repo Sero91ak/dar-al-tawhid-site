@@ -28,7 +28,7 @@
     "catalogQuestionsVerified": 20,
     "correctAnswersVerified": 20,
     "sourceReferencesPresent": 20,
-    "audioRenderedForAllQuestionStates": 10,
+    "audioRenderedForAllQuestionStates": 11,
     "humanAudioApproved": 0,
     "audioOriginalGenerationCount": 10,
     "audioHumanApproved": 0,
@@ -658,9 +658,45 @@
       "originalExplanation": "Ein Gruß wird gleich gut oder besser erwidert.",
       "source": "Qurʾān 4:86",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "TOmzCA1rpf6IoZlTeqVP",
+          "sessionId": "13UoSI47n8ZSQPnuvtAm",
+          "status": "completed",
+          "generationId": "e7lTv7dMahCs1GtCpCI5",
+          "credits": 143.4217797356828,
+          "durationSeconds": 10.48
+        },
+        {
+          "part": "correct",
+          "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "DX5z8FWaCS4FDx3KrloO",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "TOmzCA1rpf6IoZlTeqVP",
+          "sessionId": "gVYjCW8lFVIB4fQ5uXLN",
+          "status": "completed",
+          "generationId": "1UyvifNP12RBOeZ0NWnN",
+          "credits": 63.95836123348018,
+          "durationSeconds": 4.48
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-012",
@@ -679,9 +715,43 @@
       "originalExplanation": "Allah verbietet, andere Menschen zu verspotten.",
       "source": "Qurʾān 49:11",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generation-started-review-status",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "TOmzCA1rpf6IoZlTeqVP",
+          "sessionId": "slkIO4D3KJcHCCOKBhSc",
+          "status": "generating",
+          "generationId": "kEEjOsweh2aEq9h2i4hN",
+          "credits": 162.8031013215859
+        },
+        {
+          "part": "correct",
+          "generationId": "aoKJuahenrKHfUE5OD9j",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "2xy9ZLej1wPTrnvAr9p7",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "TOmzCA1rpf6IoZlTeqVP",
+          "sessionId": "4xFk1er3do5TpINioFfz",
+          "status": "generating",
+          "generationId": "heZyGLFXcuaMa8GMuj2W",
+          "credits": 64.92742731277534
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-013",
@@ -863,6 +933,6 @@
     "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios.",
     "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie."
   ],
-  "actualPaidCreditsThisBatch": 2605.8186872246697,
+  "actualPaidCreditsThisBatch": 3040.9293568281937,
   "previouslyPaidCreditsReusedForQuestion002": 122.102325991
 }
