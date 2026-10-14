@@ -28,7 +28,7 @@
     "catalogQuestionsVerified": 20,
     "correctAnswersVerified": 20,
     "sourceReferencesPresent": 20,
-    "audioRenderedForAllQuestionStates": 3,
+    "audioRenderedForAllQuestionStates": 5,
     "humanAudioApproved": 0,
     "audioOriginalGenerationCount": 10,
     "audioHumanApproved": 0,
@@ -310,9 +310,51 @@
       "originalExplanation": "Vor der Rezitation suchen wir bei Allah Zuflucht vor dem verfluchten Shayṭān.",
       "source": "Qurʾān 16:98",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "s6bYuuL7PBYQHFFIPvas",
+          "sessionId": "ifCRUXRIx832RwvvuiDo",
+          "status": "completed",
+          "generationId": "gvvqrpjWHAaExFgBVxn8",
+          "credits": 156.01963876651982,
+          "durationSeconds": 11.84
+        },
+        {
+          "part": "correct",
+          "modelId": "eleven_v4",
+          "flowId": "s6bYuuL7PBYQHFFIPvas",
+          "sessionId": "TCQuui6c69TSDhf45rbn",
+          "status": "completed",
+          "generationId": "WxoYkACzIX3S8abYxVUj",
+          "credits": 64.92742731277534,
+          "durationSeconds": 5.6
+        },
+        {
+          "part": "retry",
+          "modelId": "eleven_v4",
+          "flowId": "s6bYuuL7PBYQHFFIPvas",
+          "sessionId": "EzEt9TkdVFyPPuNxqsvp",
+          "status": "completed",
+          "generationId": "gDb5M7BuACNw47ZwudZ3",
+          "credits": 75.58715418502203,
+          "durationSeconds": 5.84
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "s6bYuuL7PBYQHFFIPvas",
+          "sessionId": "hb6lZgMk8If0Q67Kmvvp",
+          "status": "completed",
+          "generationId": "9ueos9DiBfnV0vn9lRNg",
+          "credits": 93.99940969162996,
+          "durationSeconds": 6.48
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-006",
@@ -331,9 +373,45 @@
       "originalExplanation": "Zum Īmān gehört der Glaube an Allahs Engel.",
       "source": "Ṣaḥīḥ Muslim 8",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generation-started-review-status",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "s6bYuuL7PBYQHFFIPvas",
+          "sessionId": "KSjjFTrAck4b4qWSDdQj",
+          "status": "generating",
+          "generationId": "cqo0lP0WnVegMrRV7v2R",
+          "credits": 141.4836475770925,
+          "durationSeconds": null
+        },
+        {
+          "part": "correct",
+          "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "DX5z8FWaCS4FDx3KrloO",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "s6bYuuL7PBYQHFFIPvas",
+          "sessionId": "PFMVrbhCB9CHZ8HjzPJy",
+          "status": "generating",
+          "generationId": "H5QwmSxLr7ahVkERWoN2",
+          "credits": 61.051162995594716,
+          "durationSeconds": null
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-007",
@@ -641,6 +719,6 @@
     "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios.",
     "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie."
   ],
-  "actualPaidCreditsThisBatch": 1156.095832599119,
+  "actualPaidCreditsThisBatch": 1749.1642731277534,
   "previouslyPaidCreditsReusedForQuestion002": 122.102325991
 }
