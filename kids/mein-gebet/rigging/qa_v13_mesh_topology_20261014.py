@@ -31,23 +31,33 @@ def audit(path):
     affected = []
     for mesh_index, mesh in enumerate(gltf.get("meshes", [])):
         for prim_index, primitive in enumerate(mesh.get("primitives", [])):
-            if primitive.get("mode", 4) != 4 or "indices" not in primitive:
+            if primitive.get("mode", 4) != 4:
                 continue
-            accessor = gltf["accessors"][primitive["indices"]]
-            if accessor.get("type") != "SCALAR":
-                raise ValueError("Indices must be SCALAR")
-            fmt = COMPONENTS[accessor["componentType"]]
-            view = gltf["bufferViews"][accessor["bufferView"]]
-            size = struct.calcsize("<" + fmt)
-            stride = view.get("byteStride", size)
-            start = bin_pos + view.get("byteOffset", 0) + accessor.get("byteOffset", 0)
-            count = accessor["count"]
-            if count % 3 or (count and start + (count-1)*stride + size > bin_pos + bin_size):
-                raise ValueError("Invalid triangle index accessor")
-            indices = [struct.unpack_from("<" + fmt, blob, start + i*stride)[0] for i in range(count)]
-            vertex_count = gltf["accessors"][primitive["attributes"]["POSITION"]]["count"]
-            if indices and max(indices) >= vertex_count:
-                raise ValueError("Triangle index exceeds POSITION accessor")
+            position = gltf["accessors"][primitive["attributes"]["POSITION"]]
+            if position.get("type") != "VEC3":
+                raise ValueError("POSITION must be VEC3")
+            vertex_count = position["count"]
+            if "indices" in primitive:
+                accessor = gltf["accessors"][primitive["indices"]]
+                if accessor.get("type") != "SCALAR":
+                    raise ValueError("Indices must be SCALAR")
+                fmt = COMPONENTS[accessor["componentType"]]
+                view = gltf["bufferViews"][accessor["bufferView"]]
+                size = struct.calcsize("<" + fmt)
+                stride = view.get("byteStride", size)
+                start = bin_pos + view.get("byteOffset", 0) + accessor.get("byteOffset", 0)
+                count = accessor["count"]
+                if count % 3 or (count and start + (count-1)*stride + size > bin_pos + bin_size):
+                    raise ValueError("Invalid triangle index accessor")
+                indices = [struct.unpack_from("<" + fmt, blob, start + i*stride)[0] for i in range(count)]
+                if indices and max(indices) >= vertex_count:
+                    raise ValueError("Triangle index exceeds POSITION accessor")
+            else:
+                # glTF triangle primitives without an index accessor use consecutive vertices.
+                count = vertex_count
+                if count % 3:
+                    raise ValueError("Invalid non-indexed triangle vertex count")
+                indices = range(count)
             edges = collections.Counter()
             winding = collections.Counter()
             repeated = 0
