@@ -1,0 +1,30 @@
+{
+  "scope": "KIDS_V4_450_ORIGINAL_MP3_QA",
+  "savedClipCount": 2,
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "clips": [
+    {
+      "textSha256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 1.489,
+      "mp3Bytes": 24284,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -20.5
+    },
+    {
+      "textSha256": "a135b4a44a6031f6642c9618b7650f253eecc52eb80188100e3802a5ebd7c64a",
+      "technicalPassed": true,
+      "listeningApproved": false,
+      "durationSeconds": 1.489,
+      "mp3Bytes": 24284,
+      "sampleRateHz": 44100,
+      "meanVolumeDB": -21.6
+    }
+  ],
+  "overallTechnicalPass": true,
+  "allHumanListeningApproved": false,
+  "readyForLive": false,
+  "synthesisCallsMade": 0
+}
