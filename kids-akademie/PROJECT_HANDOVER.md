@@ -1,10 +1,18 @@
 # START HERE – CHATGPT HANDOVER
 
+## Zusätzlicher geprüfter Stand · 14. Oktober 2026
+
+- **V38-Quellenanzeige:** Bei mehrversigen Stellen jetzt explizite Versbereiche (z. B. 33:41–43, 94:5–6, 94:7–8 und 112:1–4); die Audioanzeige sagt ausdrücklich, wenn nur der **erste** Vers des angezeigten Abschnitts angehört wird. Sachliche Tafsīr-Kommentare wurden aus mehreren Feldern für die unmittelbare Qurʾān-Bedeutung entfernt.
+- **Slot 186 – Rukūʿ:** Acht bisher teils themenfremde Quizfragen durch agegerechte Fachfragen ersetzt. Primärstelle al-Mughnī 15/570 eingesehen; Handhaltung auf den Knien nach Ibn Qudāmah empfohlen und von der Grundverbeugung unterschieden. Fachliche Endfreigabe bleibt offen. Quellenakte: `kids-akademie/research/INDEPENDENT_FIQH_REVIEW_186.md`.
+- **Zusätzliche Quellenakten:** `kids-akademie/research/FIQH_SLOT_106_PRIMARY_REVIEW_20261014.md` und `FIQH_SLOT_118_PRIMARY_REVIEW_20261014.md`. Die Unterrichtsregeln zu Staub, Naǧāsah und Gebetsplatz nicht als völlig identisch vermitteln.
+- **Sprechtext-Abgleich:** `node kids/tools/sync-academy-voice-plan-v38.cjs --check` erkennt Textabweichungen auch in allen 111 Zusammenfassungen. `--write` synchronisiert **nur den ungenerierten Textplan**; keine API-Kosten und keine Audioerzeugung. Danach `node kids/tools/audit-academy-visitor-copy-v1.cjs --strict` ausführen. Bei jeder Textänderung neu prüfen, sonst drohen veraltete Sprechfassungen.
+- **Freigabe-/Releasestatus unverändert:** 0/624 wissenschaftliche Altersfreigaben, kein Merge auf `main`, kein Live-Deploy. Die genannten Code-Prüfungen sind noch nicht als vollständig lokal ausgeführter Node-/Browser-/CI-Lauf bestätigt.
+
 ## Aktueller Stand nach der redaktionellen Korrekturrunde
 
 **Aktueller Arbeitsstand: nur PR #1113, keine Veröffentlichung.** Seit der ursprünglichen Übergabe wurden die 111 Einheiten in `curriculum-v38.js` redaktionell bearbeitet: sichtbare QA-/Freigabe- und URL-Hinweise aus Kindertexten entfernt, fehlende Belege nicht als Hadithe angezeigt, 110 Quizpakete neu auf das Lernziel ausgerichtet und 33 leere gesprochene Textzeilen wiederhergestellt. Die gesonderte Kinderschutzlektion 98 behält ihren Schwerpunkt. Die Altersgruppe 9–10 sieht keine internen Quellenprüfvermerke mehr; die Grenzen stehen in `sourceAudit` und der Quellenakte.
 
-**Zählung aus der aktuellen Datei:** 111 V38-Entwürfe mit 333 Altersfassungen, 888 Quizfragen und 1.407 eindeutigen, nicht erzeugten deutschen Sprechtextbausteinen (2.109 Verwendungskontexte). Projektweit weiterhin 208 Unterrichts-IDs, 624 Altersfassungen als Entwurf und 0 wissenschaftlich freigegebene Fassungen.
+**Zählung aus der aktuellen Datei:** 111 V38-Entwürfe mit 333 Altersfassungen, 888 Quizfragen und nicht erzeugten deutschen Sprechtextbausteinen (2.109 Verwendungskontexte; die Anzahl unterschiedlicher Texte nach jeder Änderung dynamisch neu ermitteln). Projektweit weiterhin 208 Unterrichts-IDs, 624 Altersfassungen als Entwurf und 0 wissenschaftlich freigegebene Fassungen.
 
 **Wichtig:** Die neue Inhalts-/Strukturprüfung wurde programmgesteuert anhand der GitHub-Dateien durchgeführt; der Repository-Node-Testlauf `node kids/tools/audit-academy-visitor-copy-v1.cjs --strict` ist als zusätzlicher verpflichtender Prüfschritt vorgesehen und in dieser Sitzung **noch nicht als ausgeführter Node-Lauf bestätigt**. Es wurde keine externe fachliche Quellenfreigabe vorgenommen. Die 17 offenen hanbalitischen Fiqh-Lektionen und die übrigen nicht unabhängig geprüften Belege bleiben gesperrt.
 
