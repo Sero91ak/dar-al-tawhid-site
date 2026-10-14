@@ -34,7 +34,14 @@ try:
     report.update(success=True,sha256=hashlib.sha256(audio).hexdigest(),bytes=len(audio),durationSeconds=round(duration,3),localPath=str(out))
 except urllib.error.HTTPError as e:
     report["httpError"]=e.code
-    report["error"]="The signed Flow read endpoint denied or cannot find this paid clip"
+    try:
+        detail=json.loads(e.read().decode("utf-8"))
+        reason=detail.get("detail") or detail.get("error") or {}
+        report["providerErrorCode"]=str(reason.get("status") or reason.get("code") or "unknown")[:64] if isinstance(reason,dict) else "unknown"
+        report["providerMessage"]=str(reason.get("message") or "")[:190] if isinstance(reason,dict) else str(reason)[:190]
+    except Exception:
+        report["providerErrorCode"]="unavailable"
+    report["error"]="The documented Flow GET endpoint rejected the read-only original MP3 retrieval"
 except Exception as e:
     report["error"]=str(e)[:160]
 Path("kids/data/quiz-v4-flow-get-probe.json").write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n")
