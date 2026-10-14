@@ -171,8 +171,10 @@ const revisions={
 const ages=["4-5","6-8","9-10"];
 const ids=Object.keys(revisions);
 if(ids.length!==12)throw Error("V40 requires 12 lesson entries");
+const deferredFiqh=new Set(["fiqh-gebetsplatz-vorbereiten"]); 
 const updated={...prior};
 for(const [id,blocks] of Object.entries(revisions)){
+ if(deferredFiqh.has(id))continue; // V38 source-checked fiqh quiz takes priority
  const existing=prior[id];
  if(!existing||existing.sourceAudit?.scientificApproval!==false)
   throw Error("V40 missing or approved lesson "+id);
@@ -189,7 +191,7 @@ for(const [id,blocks] of Object.entries(revisions)){
 }
 window.DARKidsAcademyCurriculum=Object.freeze(updated);
 window.DARKidsAcademyCurriculumV40=Object.freeze({
- version:"20261014-v40",revisedSlots:[111,112,113,114,115,116,117,118,119,120,121,122],
- ids,approvedAgeVersions:0,religiousSourcesVerified:false,voiceRecordingsApproved:false
+ version:"20261014-v40",revisedSlots:[111,112,113,114,115,116,117,119,120,121,122],
+ ids:ids.filter(id=>!deferredFiqh.has(id)),approvedAgeVersions:0,religiousSourcesVerified:false,voiceRecordingsApproved:false
 });
 })();
