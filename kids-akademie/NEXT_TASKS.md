@@ -1,3 +1,12 @@
+## 14.10.2026 · Fortschritt nach der ersten V38-Korrekturrunde
+
+- **Fiqh 118 – Gebetsplatz:** `al-Mughnī`, Bd. 1, S. 404–405 (Islamweb 15/788) wurde gelesen. Kein besonderer Teppich aus Qurʾān 2:238 abzuleiten. Drei Belegerklärungen und acht Altersquizfragen korrigiert.
+- **Fiqh 130 – Gebetszeiten:** `al-Mughnī`, Bd. 1, S. 224–227 (Islamweb 15/425, 15/428, 15/429) zu den Zeitgrenzen gelesen. Drei Belegerklärungen und acht Altersquizfragen korrigiert.
+- Nachweis: `kids-akademie/research/INDEPENDENT_FIQH_REVIEW_118_130.md`.
+- **Weiterhin 17/17 Fiqh-Lektionen mit menschlichem Fiqh-Prüfbedarf**, darunter die jetzt teilweise gegen Quellen geprüften 106, 118 und 130. Es wurde kein wissenschaftlicher Freigabestatus hochgesetzt.
+- Die Aktualisierung ändert keine Kinder-Audiotexte; der unvertönte Sprechplan muss dafür nicht neu generiert werden.
+- Nächster Fiqh-Fokus: 142 (Namen der fünf Gebete), dann 154 (Niyyah); pädagogische Einzelprüfung aller 208 Lektionen bleibt offen.
+
 # Nächste Aufgaben
 
 ## Neu: erste unabhängige Quellen-Teilabgleiche
