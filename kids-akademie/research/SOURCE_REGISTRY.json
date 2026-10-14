@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 173,
+  "sourceCount": 177,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -4009,7 +4009,8 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Islamweb direkt, Ibn Qudāmah al-Mughnī 15/132, Bd. 1 S. 83",
       "lessonIds": [
-        "fiqh-wudu-gesicht-und-arme"
+        "fiqh-wudu-gesicht-und-arme",
+        "fiqh-reinheit-unterscheiden"
       ],
       "binding": "classical Hanbali primary Fiqh source for the face; nuance about mouth/nose retained; final scholarly approval pending",
       "topic": "Gesicht bei der Gebetswaschung"
@@ -4035,7 +4036,8 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Islamweb direkt, Ibn Qudāmah al-Mughnī 15/135, Bd. 1 S. 85",
       "lessonIds": [
-        "fiqh-wudu-gesicht-und-arme"
+        "fiqh-wudu-gesicht-und-arme",
+        "fiqh-reinheit-unterscheiden"
       ],
       "binding": "classical Hanbali primary Fiqh source for washing arms including elbows; final human review pending",
       "topic": "Arme bis zu den Ellenbogen im Wuḍūʾ"
@@ -4405,6 +4407,110 @@
       ],
       "binding": "authentic Sunnah on teaching with gentleness, separate from Quran 20:132",
       "topic": "Lernen ohne Abschreckung"
+    },
+    {
+      "sourceId": "SRC-CORE45-IBNKATHIR-1958",
+      "key": "quran-91-9-tazkiyat-nafs",
+      "author": "Ibn Kaṯīr",
+      "work": "Tafsīr al-Qurʾān al-ʿAẓīm",
+      "narrator": null,
+      "arabic": "قَدْ أَفْلَحَ مَنْ زَكَّاهَا",
+      "germanTranslation": null,
+      "locus": "Tafsīr Sūrat aš-Šams Qurʾān 91:9, Bd. 8, Abschnitt zu 91:1–10",
+      "volume": "8",
+      "page": null,
+      "chapter": "Tazkiyat an-Nafs",
+      "number": null,
+      "edition": "Islamweb Tafsīr Ibn Kaṯīr 49/1958",
+      "directLink": "https://islamweb.net/ar/library/content/49/1958#:~:text=%D9%82%D8%AF%20%D8%A3%D9%81%D9%84%D8%AD%20%D9%85%D9%86%20%D8%B2%D9%83%D8%A7%D9%87%D8%A7",
+      "authenticityNote": "Tafsīr Ibn Kaṯīr zu 91:9 am 14.10.2026 auf Islamweb eingesehen; nennt klassische Deutungen zu Läuterung der eigenen Seele durch Gehorsam und Charakterverbesserung. Einzelne dort angeführte Ḥadīṯ-Isnāde nicht gesondert klassifiziert; kein erfundener einzelner Belohnungswert.",
+      "safeApplication": "Kinder lernen eine freundliche Verbesserung des Verhaltens, nicht öffentlich fremde Herzen zu beurteilen oder sich selbst ungesichert als sündig/verdorben einzuordnen; keine Strafbilder oder innere Ranglisten.",
+      "verificationStatus": "primary-page-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Ibn Kaṯīr Islamweb 49/1958 direkt eingesehen",
+      "lessonIds": [
+        "akhlaq-nafs-gutes-herz"
+      ],
+      "binding": "classical tafsir for Quran 91:9 independent from Hadith 2564",
+      "topic": "Gute innere Haltung"
+    },
+    {
+      "sourceId": "SRC-CORE45-MUSLIM-2564",
+      "key": "allah-hearts-and-deeds",
+      "author": "Muslim",
+      "work": "Ṣaḥīḥ Muslim",
+      "narrator": "Abū Hurayrah",
+      "arabic": "إِنَّ اللَّهَ لَا يَنْظُرُ إِلَى صُوَرِكُمْ وَأَمْوَالِكُمْ وَلَكِنْ يَنْظُرُ إِلَى قُلُوبِكُمْ وَأَعْمَالِكُمْ",
+      "germanTranslation": null,
+      "locus": "Das Herz und Handeln statt Aussehen und Besitz als Gegenstand der Bewertung",
+      "volume": null,
+      "page": null,
+      "chapter": "Ādāb und Innere Einstellung",
+      "number": "2564",
+      "edition": "Dorar 207905, Muslim 2564",
+      "directLink": "https://dorar.net/hadith/sharh/207905#:~:text=%D9%8A%D9%8E%D9%86%D9%92%D8%B8%D9%8F%D8%B1%D9%8F%20%D8%A5%D9%90%D9%84%D9%8E%D9%89%20%D9%82%D9%8F%D9%84%D9%8F%D9%88%D8%A8%D9%90%D9%83%D9%8F%D9%85%D9%92",
+      "authenticityNote": "Am 14.10.2026 authentischer Muslim-2564-Eintrag direkt auf Dorar 207905 abgeglichen, Erzähler Abū Hurayrah. Digitale Wiedergabe statt gesondert eingesehener Druckedition.",
+      "safeApplication": "Kinder nicht wegen Aussehen, Behinderung, Besitz oder verborgener Absichten vergleichen und herabsetzen. Ein Schulkind kann nicht den inneren religiösen Stand anderer Menschen feststellen.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar 207905 Muslim 2564 überprüft",
+      "lessonIds": [
+        "akhlaq-nafs-gutes-herz"
+      ],
+      "binding": "authentic Sunnah for behavior and intention, distinct from Quran 91:9",
+      "topic": "Herz und Taten"
+    },
+    {
+      "sourceId": "SRC-CORE46-IBNKATHIR-376",
+      "key": "quran-5-6-wudu-tafsir",
+      "author": "Ibn Kaṯīr",
+      "work": "Tafsīr al-Qurʾān al-ʿAẓīm",
+      "narrator": null,
+      "arabic": "فَاغْسِلُوا وُجُوهَكُمْ وَأَيْدِيَكُمْ إِلَى الْمَرَافِقِ وَامْسَحُوا بِرُءُوسِكُمْ وَأَرْجُلَكُمْ إِلَى الْكَعْبَيْنِ",
+      "germanTranslation": null,
+      "locus": "Tafsīr Sūrat al-Māʾidah, Qurʾān 5:6, Auszug: Wuḍūʾ-Glieder; ganzer Vers behandelt auch Ǧanābah, Krankheit und Tayammum",
+      "volume": "3",
+      "page": null,
+      "chapter": "Wuḍūʾ und rituelle Reinheit",
+      "number": null,
+      "edition": "Islamweb Tafsīr Ibn Kaṯīr 49/376",
+      "directLink": "https://islamweb.net/ar/library/content/49/376#:~:text=%D9%81%D8%A7%D8%BA%D8%B3%D9%84%D9%88%D8%A7%20%D9%88%D8%AC%D9%88%D9%87%D9%83%D9%85",
+      "authenticityNote": "Originaltext Qurʾān 5:6 und begleitender Ibn-Kaṯīr-Tafsīr auf Islamweb 49/376 am 14.10.2026 eingesehen. Hier absichtlich Auszug, nicht den vollständigen Vers als zitierten Wortlaut ausgeben. Einzelne Ḥadīṯberichte im Tafsīr nicht separat überprüft.",
+      "safeApplication": "Gewöhnliche Sauberkeit (Händewaschen, Aufräumen) von ritueller Gebetswaschung unterscheiden; nicht jeden Schmutz als Naǧāsah ausgeben und keine Wasseranwendung bei Krankheit erzwingen. Hanbalitische Details müssen anhand al-Mughnī und Fachperson endgültig geprüft werden.",
+      "verificationStatus": "primary-page-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Ibn Kaṯīr Islamweb 49/376 direkt eingesehen",
+      "lessonIds": [
+        "fiqh-reinheit-unterscheiden"
+      ],
+      "binding": "Quran 5:6 primary tafsir alongside classical Hanbali Mughni",
+      "topic": "Reinheit und Wuḍūʾ"
+    },
+    {
+      "sourceId": "SRC-CORE46-MUSLIM-223",
+      "key": "tuhur-half-faith",
+      "author": "Muslim",
+      "work": "Ṣaḥīḥ Muslim",
+      "narrator": "Abū Mālik al-Ašʿarī",
+      "arabic": "الطُّهُورُ شَطْرُ الْإِيمَانِ",
+      "germanTranslation": null,
+      "locus": "Ḥadīṯ über die Bedeutung von Ṭuhūr und ʿIbādah, nicht bloß Zimmerhygiene",
+      "volume": null,
+      "page": null,
+      "chapter": "Rituelle Reinheit",
+      "number": "223",
+      "edition": "Dorar 139891, direkt identifizierte Muslim-Fassung",
+      "directLink": "https://dorar.net/hadith/sharh/139891#:~:text=%D8%A7%D9%84%D8%B7%D9%8F%D9%91%D9%87%D9%8F%D9%88%D8%B1%D9%8F%20%D8%B4%D9%8E%D8%B7%D9%92%D8%B1%D9%8F%20%D8%A7%D9%84%D9%92%D8%A5%D9%90%D9%8A%D9%85%D9%8E%D8%A7%D9%86%D9%90",
+      "authenticityNote": "Am 14.10.2026 digital direkt auf Dorar 139891 gelesen: Abū Mālik al-Ašʿarī, Ṣaḥīḥ Muslim 223. Die Darstellungsseite enthält auch andere Rezensionen; ausdrücklich Muslim-Wiedergabe gemeint. Keine unabhängig eingesehene gedruckte Primärsammlung.",
+      "safeApplication": "Der Bericht wird zum Verständnis religiöser Ṭahārah genutzt, nicht als Formel für das Aufräumen einer Bank. Kinder dürfen bei Unsicherheit, Krankheit, Verletzung und Behinderung eine erwachsene fachkundige Lehrperson um Hilfe bitten.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar 139891 speziell Muslim 223 direkt geprüft",
+      "lessonIds": [
+        "fiqh-reinheit-unterscheiden"
+      ],
+      "binding": "authentic Sunnah for ritual Taharah distinguished from ordinary tidiness",
+      "topic": "Ṭahārah und Glauben"
     }
   ]
 }
