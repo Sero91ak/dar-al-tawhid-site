@@ -14,6 +14,10 @@ for(const src of file.sources){
  ids.add(src.sourceId);
 }
 const required={
+"adab-worte":{"SRC-CORE6-TABARI-3021":["islamweb.net","50/3021"]},
+"akhlaq-amanah":{"SRC-CORE9-IBNALJAWZI-1676":["islamweb.net","ID=1676"]},
+"adab-respekt":{"SRC-CORE10-IBNKATHIR-1005":["islamweb.net","49/1005"]},
+"aqidah-ikhlas":{"SRC-CORE12-TABARI-4233":["islamweb.net","50/4233"]},
 "adab-salam":{
  "SRC-CORE2-QURTUBI-1095":["islamweb.net","48/1095"],
  "SRC-CORE2-MUSLIM-54":["islamweb.net","1/152"]
@@ -104,6 +108,15 @@ for(const [id,status] of earlyPrimary){const src=file.sources.find(x=>x.sourceId
  assert.ok(src,"Early-core primary-source gap: "+id);
  assert.equal(src.verificationStatus,status,"Direct reading needs exact honest status: "+id);
  assert.ok(src.checkedBy&&src.authenticityNote&&src.safeApplication&&src.arabic,"Source evidence metadata incomplete: "+id);
+ assert.notEqual(src.verificationStatus,"scientifically-approved");
+}
+const newlyReadEarly=["SRC-CORE6-TABARI-3021","SRC-CORE9-IBNALJAWZI-1676","SRC-CORE10-IBNKATHIR-1005","SRC-CORE12-TABARI-4233"];
+for(const id of newlyReadEarly){
+ const src=file.sources.find(x=>x.sourceId===id);
+ assert.ok(src,"Missing direct classical early source: "+id);
+ assert.equal(src.verificationStatus,"primary-page-direct-read-2026-10-14");
+ assert.ok(src.checkedBy&&src.authenticityNote&&src.safeApplication&&src.arabic,"Incomplete early source metadata: "+id);
+ assert.match(src.authenticityNote,/nicht|nicht allein|eigenst\u00e4ndig|gesondert/i,"Must distinguish Quran source and hadith status");
  assert.notEqual(src.verificationStatus,"scientifically-approved");
 }
 const ikhlas=file.sources.find(x=>x.sourceId==="SRC-V38-112-1");
