@@ -1,0 +1,51 @@
+name: KIDS Akademie Editorial Draft QA (read only)
+
+# Safe-only checks for an unpublished draft branch. No deploy, no merge, no audio.
+on:
+  push:
+    branches:
+      - chatgpt/kids-akademie-155-158-20261014
+    paths:
+      - '.github/workflows/kids-akademie-editorial-readonly-qa.yml'
+      - 'kids/akademie/curriculum-editorial-*.js'
+      - 'kids/akademie/index.html'
+      - 'kids/data/academy-voice-editorial-*-delta-v1.json'
+      - 'kids-akademie/LESSON_STATUS.json'
+      - 'kids/tools/audit-academy-editorial-155-208-v1.cjs'
+      - 'kids/tools/test-academy-editorial-*.cjs'
+
+permissions:
+  contents: read
+
+jobs:
+  editorial-no-deploy-checks:
+    name: 54 lessons / 162 ages / 1026 text contexts
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout draft branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Check node version
+        run: node --version
+      - name: Check syntax of 14 editorial overlays
+        shell: bash
+        run: |
+          set -euo pipefail
+          for block in 155-158 159-162 163-166 167-170 171-174 175-178 179-182 183-186 187-190 191-194 195-198 199-202 203-205 206-208; do
+            node --check "kids/akademie/curriculum-editorial-${block}-v1.js"
+          done
+      - name: Check protected complete editorial chain
+        run: node kids/tools/test-academy-editorial-fullchain-v1.cjs
+      - name: Cross-check original immutable IDs and 1026 contexts
+        run: node kids/tools/test-academy-editorial-155-208-integrity-v1.cjs
+      - name: Cross-check all 208-slot ledger and 12 Fiqh holds
+        run: node kids/tools/audit-academy-editorial-155-208-v1.cjs
+      - name: Run all 14 small-batch unit tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          for block in 155-158 159-162 163-166 167-170 171-174 175-178 179-182 183-186 187-190 191-194 195-198 199-202 203-205 206-208; do
+            node "kids/tools/test-academy-editorial-${block}-v1.cjs"
+          done
