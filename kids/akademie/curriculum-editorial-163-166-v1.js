@@ -166,7 +166,7 @@ const drafts={
       ],
       "situation": "Die Lerngruppe überprüft zwei übertriebene Aussagen zur Stehpflicht und gesundheitlichen Erleichterung.",
       "practice": "Gesundes Stehen und begründete Erleichterung im Pflichtgebet unterscheiden und fremde Fähigkeiten nicht bewerten.",
-      "evidence": "Qurʾān 2:238, Ibn Kaṯīr 49/205; Ibn Qudāmah, al-Mughnī, Teil 1, Islamweb 15/861, Masʾalah 1064. Al-Buḫārī-Überlieferung von ʿImrān ibn Ḥuṣayn ohne hier unbestätigte Nummer. fiqhHumanReviewNeeded bleibt true.",
+      "evidence": "Qurʾān 2:238, Ibn Kaṯīr 49/205; Ibn Qudāmah, al-Mughnī, Teil 1, Islamweb 15/861, Masʾalah 1064. Al-Buḫārī-Überlieferung von ʿImrān ibn Ḥuṣayn ohne hier unbestätigte Nummer. Die genaue Anwendung bei körperlichen Einschränkungen muss fachkundig geprüft werden.",
       "summary": "Die Gebetsgrundregel und ihr krankheitsbedingter Ausnahmefall werden mit getrennten Quellen gelernt."
     }
   }
