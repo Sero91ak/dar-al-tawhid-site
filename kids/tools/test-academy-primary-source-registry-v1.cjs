@@ -17,7 +17,8 @@ const required={
 "sidq":{"SRC-CORE1-IBNKATHIR-698":["islamweb.net","49/698"],"SRC-CORE1-MUSLIM-2607":["dorar.net","10209"]},
 "aqidah-iman":{"SRC-CORE8-IBNATIYYAH-21":["islamweb.net","207/21"],"SRC-CORE8-MUSLIM-8":["dorar.net","63778"]},
 "adab-worte":{"SRC-CORE6-TABARI-3021":["islamweb.net","50/3021"],"SRC-CORE6-BUKHARI-6018":["dorar.net","4361"]},
-"akhlaq-amanah":{"SRC-CORE9-IBNALJAWZI-1676":["islamweb.net","ID=1676"]},
+"akhlaq-sabr":{"SRC-CORE5-IBNKATHIR-184":["islamweb.net","49/184"],"SRC-CORE5-TABARI-467":["islamweb.net","50/467"],"SRC-CORE5-BUKHARI-1469":["dorar.net","7038"]},
+"akhlaq-amanah":{"SRC-CORE9-IBNALJAWZI-1676":["islamweb.net","ID=1676"],"SRC-CORE9-BUKHARI-33":["dorar.net","5952"]},
 "adab-respekt":{"SRC-CORE10-IBNKATHIR-1005":["islamweb.net","49/1005"],"SRC-CORE10-BUKHARI-5971":["dorar.net","151125"]},
 "aqidah-ikhlas":{"SRC-CORE12-TABARI-4233":["islamweb.net","50/4233"]},
 "adab-salam":{
@@ -164,6 +165,31 @@ for(const id of newlyReadEarly){
 const ikhlas=file.sources.find(x=>x.sourceId==="SRC-V38-112-1");
 assert.ok(ikhlas?.lessonIds?.includes("aqidah-tawhid"),"Reuse original Sūrah 112 source rather than duplicate");
 assert.equal(ikhlas.locus,"Qurʾān 112:1–4");
+const newCore=[
+ ["SRC-CORE5-IBNKATHIR-184","akhlaq-sabr","Qurʾān 2:153","primary-page-direct-read-2026-10-14"],
+ ["SRC-CORE5-TABARI-467","akhlaq-sabr","Qurʾān 2:153","primary-page-direct-read-2026-10-14"],
+ ["SRC-CORE5-BUKHARI-1469","akhlaq-sabr",null,"primary-report-direct-read-2026-10-14"],
+ ["SRC-CORE9-BUKHARI-33","akhlaq-amanah",null,"primary-report-direct-read-2026-10-14"],
+ ["SRC-BANK-001","aqidah-ikhlas",null,"primary-report-direct-read-2026-10-14"]
+];
+for(const [sourceId,lessonId,locus,verificationStatus] of newCore){
+ const src=file.sources.find(x=>x.sourceId===sourceId);
+ assert.ok(src,"Missing directly checked early source: "+sourceId);
+ assert.ok(src.lessonIds.includes(lessonId),"Wrong lesson link: "+sourceId);
+ if(locus)assert.equal(src.locus,locus,"Incorrect Quran verse for "+sourceId);
+ assert.equal(src.verificationStatus,verificationStatus,"Verification status is not an approval: "+sourceId);
+ assert.equal(src.checkedOn,"2026-10-14");
+ assert.ok(src.narrator||src.author,"Reporter or original author required: "+sourceId);
+ assert.ok(src.arabic&&src.directLink&&src.authenticityNote&&src.safeApplication,"Missing direct source metadata: "+sourceId);
+ assert.ok(src.safeApplication.match(/Kind|Kinder/),"Child safety boundary missing: "+sourceId);
+ assert.notEqual(src.verificationStatus,"scientifically-approved");
+}
+assert.equal(file.sources.find(s=>s.sourceId==="SRC-CORE5-BUKHARI-1469").narrator,"Abū Saʿīd al-Ḫudrī");
+assert.match(file.sources.find(s=>s.sourceId==="SRC-CORE5-BUKHARI-1469").number,/1469/);
+assert.equal(file.sources.find(s=>s.sourceId==="SRC-CORE9-BUKHARI-33").narrator,"Abū Hurayrah");
+assert.match(file.sources.find(s=>s.sourceId==="SRC-CORE9-BUKHARI-33").arabic,/اؤْتُمِنَ/);
+assert.match(file.sources.find(s=>s.sourceId==="SRC-BANK-001").number,/1/);
+assert.equal(file.sources.filter(s=>s.sourceId==="SRC-BANK-001").length,1,"Reuse hadith bank 1 without duplication");
 let count=0;
 for(const [lessonId,expected] of Object.entries(required)){
  for(const [id,[host,fragment]] of Object.entries(expected)){
