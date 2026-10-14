@@ -1,0 +1,74 @@
+name: KIDS Quiz V4 Full 900 Production Plan (no paid synthesis)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/prepare_quiz_v4_all900_segmented.py'
+      - '.github/workflows/kids-quiz-v4-all900-plan.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tawhid-kids-v4-all900-plan
+  cancel-in-progress: false
+
+jobs:
+  verify-900:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout review branch (never main)
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          persist-credentials: true
+
+      - name: Syntax and model/voice guard
+        run: |
+          python3 -m py_compile kids/tools/prepare_quiz_v4_all900_segmented.py
+          python3 kids/tools/prepare_quiz_v4_all900_segmented.py --check
+
+      - name: Build full 900-question V4 segment plan with ZERO credits
+        run: python3 kids/tools/prepare_quiz_v4_all900_segmented.py
+
+      - name: Enforce exact counts and no premature publication
+        run: |
+          python3 - <<'PY'
+          import json
+          from collections import Counter
+          p=json.load(open('kids/data/quiz-v4-all900-segmented-review.json'))
+          assert p['questionCount']==900 and p['totalSpokenFieldAssignments']==3600
+          assert p['ageBandCounts']=={'4-6':300,'7-8':300,'9-10':300}
+          assert len(p['recipes'])==900
+          assert len({x['questionId'] for x in p['recipes']})==900
+          assert Counter(x['ageBand'] for x in p['recipes'])=={'4-6':300,'7-8':300,'9-10':300}
+          assert p['modelId']=='eleven_v4' and p['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert len(p['segments'])==p['uniqueSegmentTexts']
+          assert p['costControl']['paidSynthesisEnabled'] is False
+          assert p['costControl']['liveReleaseAllowed'] is False
+          assert p['statusQuestionsPublishedWithNewV4']==0
+          print('PASS: 900 questions 3 age groups, exact reconstructed speech and source, zero credits, NO live')
+          PY
+
+      - name: Save versioned planning artifact on review branch
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-all900-segmented-review.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'review(kids quiz): complete 900 V4 age-banded segmented narration plans, zero credits'
+            git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014
+          fi
+
+      - name: Archive full 900-question narration plan
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-900-review-plan
+          if-no-files-found: warn
+          retention-days: 30
+          path: kids/data/quiz-v4-all900-segmented-review.json
