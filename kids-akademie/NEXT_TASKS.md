@@ -1,3 +1,11 @@
+## 14.10.2026 · Individuelle Redaktion bis Slot 198/208 · geschützter PR #1142
+
+- **195–198:** Verantwortung für Worte (Qurʾān 49:11), Jüngere freundlich behandeln (49:10), das Herz mit guten Taten pflegen (98:5), Suǧūd kennenlernen (22:77). `kids/akademie/curriculum-editorial-195-198-v1.js` enthält vier bestehende IDs mit **12 individuellen Altersversionen** für 4–5, 6–8 und 9–10 Jahre.
+- **Fiqh 198:** Ibn Qudāmah, al-Mughnī, Bd. 1 S. 303–305, [Islamweb 15/592](https://islamweb.net/ar/library/content/15/592), tatsächlich gelesen: sieben Niederwerfungsstellen, unterschiedliche Ansichten zur Reihenfolge von Knien/Händen und zur Nase. Die Verse selbst geben keine Handwinkel vor. `fiqhHumanReviewNeeded=true` und `scientificApproval=false` bleiben erhalten; individuelle körperliche Ausnahmen noch offen.
+- **Text/Audio:** `kids/data/academy-voice-editorial-195-198-delta-v1.json` enthält **76 nicht generierte Textkontexte**, null Credits. Die 12 Altersfassungen wurden gegen ihre Texte abgeglichen: **12/12 erfolgreich**, keine QA-/Freigabewörter in den Kindertexten. Der Index lädt das Modul **genau einmal** nach 191–194. Node-Test `kids/tools/test-academy-editorial-195-198-v1.cjs` hinterlegt, aber **nicht als ausgeführter Node-/Browser-/CI-Test ausgeben**.
+- **Quellen- und pädagogische Akte:** `kids-akademie/research/EDITORIAL_REVIEW_195_198_20261014.md`. Qurʾān, Tafsīr, klassische Fiqh-Quelle und eigene Fallgeschichten ausdrücklich getrennt. Vorhandene Quiz- und Lernfortschrittsdaten beibehalten.
+- **Nächster konkreter Abschnitt:** Lektionen **199–202**. Individuelle Redaktion **198/208**, **10 weitere 199–208** offen, wissenschaftliche Endkontrolle aller **624 Altersfassungen** weiter erforderlich und keine als endgültig freigegeben. Kein Live-Deploy, kein Merge, keine Audioerzeugung und kein Copilot.
+
 ## 14.10.2026 · Unterricht bis 194/208 redaktionell ausgearbeitet, geschützter PR #1142
 
 - **191–194:** Istighfār, Aufrichten aus dem Rukūʿ, Tawḥīd mit eigenen Worten und Überblick über die Glaubenssäulen; `kids/akademie/curriculum-editorial-191-194-v1.js` enthält **12 altersdifferenzierte Unterrichtstexte** mit vier Abschnitten, Lernziel, Szene, Übung und Quellenabgrenzung.
