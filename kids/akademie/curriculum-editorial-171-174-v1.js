@@ -166,7 +166,7 @@ const drafts={
       ],
       "situation": "Eine Lerngruppe unterscheidet eine allgemeine Verherrlichung von der spezifischen Eröffnungsformel im Gebet.",
       "practice": "Die Aussage des Qurʾān und die konkrete Rechtsregel nach al-Mughnī getrennt erklären; Ausnahmefälle nicht eigenmächtig entscheiden.",
-      "evidence": "Qurʾān 17:111, Ibn Kaṯīr 49/1054; Ibn Qudāmah al-Mughnī, Kitāb aṣ-Ṣalāh, Bd. 1 S. 275–277, Islamweb 15/532, 15/533 und 15/534. Bei Unfähigkeit zu Arabisch oder Hör-/Sprechbeeinträchtigung sind gesonderte Rechtstexte und menschliche Fiqh-Überprüfung nötig. scientificApproval=false, fiqhHumanReviewNeeded=true.",
+      "evidence": "Qurʾān 17:111, Ibn Kaṯīr 49/1054; Ibn Qudāmah al-Mughnī, Kitāb aṣ-Ṣalāh, Bd. 1 S. 275–277, Islamweb 15/532, 15/533 und 15/534. Bei Unfähigkeit zur arabischen Aussprache oder bei einer Sprech- beziehungsweise Hörbeeinträchtigung ist eine individuelle fachkundige Erklärung erforderlich.",
       "summary": "Takbīrat al-Iḥrām ist die verbindliche Eröffnungsformel »Allāhu akbar«; Fiqh-Details und individuelle Ausnahmen verlangen sorgfältige Prüfung."
     }
   }
