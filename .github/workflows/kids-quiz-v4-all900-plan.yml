@@ -9,6 +9,8 @@ on:
       - 'kids/tools/quiz_v4_all900_release_gate.py'
       - 'kids/tools/split_quiz_v4_all900_packets.py'
       - 'kids/tools/curate_quiz_450_audio_first.py'
+      - 'kids/tools/quiz_v4_selected450_release_gate.py'
+      - 'kids/data/quiz-curation-release.json'
       - '.github/workflows/kids-quiz-v4-all900-plan.yml'
 
 permissions:
@@ -67,6 +69,22 @@ jobs:
           python3 -m py_compile kids/tools/curate_quiz_450_audio_first.py
           python3 kids/tools/curate_quiz_450_audio_first.py
 
+      - name: Check 450/450 source partition and strict original V4 launch lock
+        run: |
+          python3 -m py_compile kids/tools/quiz_v4_selected450_release_gate.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py
+          python3 - <<'PY'
+          import json,subprocess
+          flag=json.load(open('kids/data/quiz-curation-release.json'))
+          assert flag['fullCatalogQuestions']==900
+          assert flag['curatedQuestions']==450
+          assert flag['reserveQuestions']==450
+          if flag['enabled']:
+              subprocess.run(['python3','kids/tools/quiz_v4_selected450_release_gate.py','--strict'],check=True)
+          else:
+              print('PUBLIC AUDIO RELEASE OFF: original 900 quiz corpus remains available')
+          PY
+
       - name: Ensure FFmpeg for private non-speech joining QA
         shell: bash
         run: |
@@ -108,7 +126,7 @@ jobs:
             python3 kids/tools/split_quiz_v4_all900_packets.py
             python3 kids/tools/curate_quiz_450_audio_first.py
             python3 kids/tools/quiz_v4_all900_audio_assembler.py --audit
-            git add kids/data/quiz-v4-all900-segmented-review.json kids/data/quiz-v4-all900-production-packets.json kids/data/quiz-v4-all900-production-summary.json kids/data/quiz-kids-curated-450-review.json kids/data/quiz-kids-expansion-reserve-450.json kids/data/quiz-v4-curated-450-production-review.json
+            git add kids/data/quiz-v4-all900-segmented-review.json kids/data/quiz-v4-all900-production-packets.json kids/data/quiz-v4-all900-production-summary.json kids/data/quiz-kids-curated-450-review.json kids/data/quiz-kids-expansion-reserve-450.json kids/data/quiz-v4-curated-450-production-review.json kids/data/quiz-v4-curated-450-summary.json
             if git diff --cached --quiet; then
               echo "All 900 review plan/packet files already present and current."
               exit 0
@@ -137,3 +155,4 @@ jobs:
             kids/data/quiz-kids-curated-450-review.json
             kids/data/quiz-kids-expansion-reserve-450.json
             kids/data/quiz-v4-curated-450-production-review.json
+            kids/data/quiz-v4-curated-450-summary.json
