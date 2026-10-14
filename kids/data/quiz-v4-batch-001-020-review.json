@@ -28,7 +28,7 @@
     "catalogQuestionsVerified": 20,
     "correctAnswersVerified": 20,
     "sourceReferencesPresent": 20,
-    "audioRenderedForAllQuestionStates": 13,
+    "audioRenderedForAllQuestionStates": 14,
     "humanAudioApproved": 0,
     "audioOriginalGenerationCount": 10,
     "audioHumanApproved": 0,
@@ -994,9 +994,45 @@
       "originalExplanation": "Allah erlaubt Essen und Trinken, aber keine Maßlosigkeit.",
       "source": "Qurʾān 7:31",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "flowId": "STGZWLMW9lDACqvI8OBg",
+          "sessionId": "fzOFKB9WILMoNzF1NIZ0",
+          "status": "completed",
+          "modelId": "eleven_v4",
+          "generationId": "LMzdpuJ5eW3SkiL9FK54",
+          "credits": 144.39084581497798,
+          "durationSeconds": 10.08
+        },
+        {
+          "part": "correct",
+          "generationId": "aoKJuahenrKHfUE5OD9j",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "2xy9ZLej1wPTrnvAr9p7",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "flowId": "STGZWLMW9lDACqvI8OBg",
+          "sessionId": "mmIVK6WRfdPT6xnbeAG6",
+          "status": "completed",
+          "modelId": "eleven_v4",
+          "generationId": "klBmSK0vYZFnsmjDCUzQ",
+          "credits": 74.61808810572687,
+          "durationSeconds": 5.44
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-018",
@@ -1015,9 +1051,43 @@
       "originalExplanation": "Allah lehrt die Bitte: Mein Herr, mehre mich an Wissen.",
       "source": "Qurʾān 20:114",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generation-started-review-status",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "flowId": "STGZWLMW9lDACqvI8OBg",
+          "sessionId": "ELUSiveEWLtSxP2ltj5G",
+          "status": "generating",
+          "modelId": "eleven_v4",
+          "generationId": "qRVJETdkA6tqyNfSm65J",
+          "credits": 144.39084581497798
+        },
+        {
+          "part": "correct",
+          "generationId": "oTZw9J8BXouAWeocufYC",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "zz0jZ6ybshrDKTqeYHh7",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "flowId": "STGZWLMW9lDACqvI8OBg",
+          "sessionId": "4DQANff7ThzUikJ8T5uE",
+          "status": "pending",
+          "modelId": "eleven_v4",
+          "generationId": "wrJPUpiOo2YwL3y4vXqH",
+          "credits": 72.67995594713656
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-019",
@@ -1073,6 +1143,6 @@
     "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios.",
     "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie."
   ],
-  "actualPaidCreditsThisBatch": 3872.388052863436,
+  "actualPaidCreditsThisBatch": 4308.467788546255,
   "previouslyPaidCreditsReusedForQuestion002": 122.102325991
 }
