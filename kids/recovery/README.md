@@ -1,111 +1,63 @@
-# DĀR AL TAWḤĪD KIDS · Kontohilfe und Wiederherstellung
+# DĀR AL TAWḤĪD KIDS · verpflichtende Eltern-E-Mail
 
-**Stand:** 11.10.2026 · **Stufe 1: Sicherheitsfundament / KEIN aktiver Passwort-Reset**
+**Stand: 12.10.2026 · Nur Entwicklungszweig / Draft-PR #1057. NICHT produktiv.**
 
-## Support-Kontakt
+## Produktentscheidung und Kompatibilität
 
-Offizielles Postfach: `dar.al.tauhid91@gmail.com`.
+- Jedes **NEUE** Kinderkonto erfordert eine bestätigte **Eltern-E-Mail-Adresse**.
+- Bestehende Kinderkonten, Passwörter, Profile und Lernfortschritte bleiben unverändert. Keine nachträgliche Zwangsregistrierung, keine Kontoübernahme allein aufgrund einer E-Mail.
+- Gastmodus ohne registriertes Konto bleibt möglich.
+- Nur ein Server, der einen von Supabase Auth **verifizierten Eltern-Token** prüft, darf anschließend ein neues Kinderkonto erstellen.
+- Die Erklärung „Ich bin erziehungsberechtigt“ ist eine bewusste Bestätigung der anlegenden Person, aber **kein unabhängig überprüfter rechtlicher Nachweis der Elternschaft**.
 
-**Wichtig:** Die derzeit in ChatGPT verbundenen Gmail-Konten sind *andere* Postfächer.
-Die Verbindung eines Gmail-Kontos zu ChatGPT ist außerdem **kein dauerhaft
-autonomer Gmail-Server-Trigger**. Dieser benötigt eine separat autorisierte
-Google-Apps-Script-Installation direkt im Support-Postfach.
+## Bereits im isolierten Entwicklungszweig geschrieben
 
-## Was jetzt implementiert wird
+1. `kids/index.html`, `kids/start.html`, `kids/shell.html`: Neues Pflichtfeld für die Eltern-E-Mail, Zustimmungsfeld und sechsstellige Einmalcode-Eingabe. Der neue Erstellungsweg nutzt `POST /auth/v1/otp` und `POST /auth/v1/verify` (Supabase Auth), danach ausschließlich die Edge Function `kids-parent-register`. Der alte öffentliche `kids_register`-Aufruf ist aus diesem Frontend-Erstellungspfad **entfernt**.
+2. `kids/recovery/edge/kids-parent-register/index.ts`: **NOCH NICHT DEPLOYTER** JWT-geschützter Backend-Endpunkt. Liest E-Mail und Verifizierungsstatus aus Supabase Auth, nicht aus unbestätigten Browserangaben, und ruft ausschließlich eine Service-Role-RPC auf.
+3. `kids/recovery/db/20261012_parent_auth_registration_stage.sql`: **NOCH NICHT ANGEWENDETES** Schema für atomare Kontoerstellung und bestätigte Elternbindung. Verweigert direkte Nutzung durch `anon`/`authenticated`. Begrenzung auf fünf neue Kinderkonten je bestätigter Auth-Identität und Stunde.
+4. `kids/recovery/db/20261012_legacy_register_release_gate_REVIEW.sql`: **NOCH NICHT ANGEWENDETE** Umstellung der bisherigen `kids_register`-RPC, damit alte Clients keine neuen Kinderkonten ohne Elternprüfung anlegen können. Bestehende Nutzer können sich weiterhin mit `kids_login` anmelden und per `kids_save` ihre Fortschritte speichern.
+5. `kids/recovery/tests/parent-registration.test.cjs` und `scripts/test-kids-account-registration-v1.js`: Statische Schutzinvarianten, simulierte OTP-/Backend-Fehler und Erfolg nur nach nachgewiesenem Serverergebnis.
+6. Bereits früher in der **Produktionsdatenbank** vorhandene vier Service-Role-only-Kontohilfe-Tabellen bleiben bestehen. Dieses Feature verändert derzeit keine Produktionsdatenbank.
 
-- SQL-Schema für Service-Role-only Elternkontakte, Wiederherstellungsanfragen,
-  Einmal-Code-Digests und lückenlose Sicherheitsereignisse.
-- Gmail-Apps-Script für das offizielle Support-Postfach: jede fünf Minuten
-  nur passende KIDS-Anfragen suchen; automatisch neutral bestätigen;
-  ohne Offenlegung, ob der behauptete Kinder-Anmeldename existiert;
-  als **manuell zu prüfen** markieren.
-- Technische Tests für das Schema und die Postfach-Automatik.
-- Keine Änderung oder Zurücksetzung irgendeines Kinderpassworts, auch
-  nicht bei bestehenden Konten ohne verifizierte Eltern-E-Mail.
-- Keine ungesicherte Admin-Oberfläche, denn die bisherige browserseitige
-  Admin-PIN ist KEIN geeigneter Schutz für diese sensiblen Daten.
+## Kostenschutz – SMTP erst nach ausdrücklicher Prüfung
 
-## Einmalige Aktivierung der Postfach-Automatik durch den Postfachinhaber
+**Supabase Auths eingebauter SMTP-Dienst verschickt auf dem Free-Tier KEINE E-Mails an beliebige Eltern-Adressen** (nur zuvor autorisierte Team-Adressen). Deshalb ist eine neue Freischaltung nicht möglich, bevor eigener SMTP-Versand funktioniert. Die ChatGPT-Verbindung `DĀR AL TAWḤĪD SUPPORT` ist **keine SMTP-Konfiguration**.
 
-1. Melde dich **direkt als** `dar.al.tauhid91@gmail.com` an.
-2. Öffne `https://script.google.com/` und erstelle ein neues privates Apps-Script-Projekt.
-3. Übertrage den Inhalt aus `kids/recovery/gmail/DarKidsSupportIntake.gs`
-   unverändert in den Script-Editor.
-4. Prüfe den Kontonamen. Starte einmal
-   `darKidsInstallFiveMinuteIntake` und stimme nur den für Gmail
-   und zeitgesteuerte Skripte benötigten Google-Berechtigungen zu.
-5. Schreibe von einer **anderen** E-Mail-Adresse eine Testmail mit
-   Betreff `DAR AL TAWHID KIDS - Kontohilfe`.
-6. Nach etwa fünf Minuten prüfen: Es muss genau **eine** neutrale Antwort
-   angekommen sein; im Support-Gmail ist der Thread als
-   `DAR KIDS/02 Manuell pruefen` sowie klassifiziert markiert.
-7. Wiederhole den Durchlauf: keine zweite Antwort auf denselben Thread.
-8. Bei Fehlern den Apps-Script-Trigger deaktivieren. Bei zukünftiger
-   Weiterentwicklung nur nach Codeprüfung neu aktivieren.
+### Option A: Vorhandenes Support-Gmail, ggf. 0 € Zusatzkosten
 
-Es werden **keine** Kontozugangsdaten, E-Mail-Passwörter, API-Schlüssel oder
-persönlichen Kinderinformationen im GitHub-Repository gespeichert.
+Wenn das Support-Google-Konto **2-Faktor-Authentifizierung** und **App-Passwörter** erlaubt, kann der Betreiber im eigenen Browser direkt in Supabase Auth `Authentication → Email/SMTP` den bestehenden Gmail-SMTP-Dienst konfigurieren:
 
-## Nächste Stufe (durch fehlende Anbindung noch blockiert)
+- Host: `smtp.gmail.com`
+- Port: `465` (TLS) oder `587` (STARTTLS), mit kompatibler Supabase-Konfiguration
+- Benutzer/Absender: `dar.al.tauhid91@gmail.com`
+- SMTP-Passwort: **neu erstelltes Google-App-Passwort**, nicht das Google-Kontopasswort
+- Anzeigename: `DĀR AL TAWḤĪD KIDS Support`
 
-1. **Eltern-E-Mail verifizieren:** Beim Registrieren freiwillig eine
-   Eltern-E-Mail angeben; eine einmalige Codebestätigung an diese Adresse.
-   Bei **bestehenden** Konten darf die Adresse nur nach erfolgreicher
-   Anmeldung mit dem alten Passwort oder vorab ausgestelltem, gültigem
-   Wiederherstellungscode hinzugefügt werden.
-2. **Konto-Anfragen serverseitig eröffnen:** Rate-limitierte,
-   spamsichere Supabase Edge Function. Die Antwort bleibt für jeden
-   angeblichen Anmeldenamen gleich; weder öffentliches Konto-Lookup
-   noch Bestätigung über Kontenexistenz.
-3. **Code zustellen:** Einmalcode nur an die *bereits verifizierte*
-   Elternadresse, mindestens 128 Bit Entropie für Token,
-   serverseitig nur HMAC-Hash mit Secret speichern;
-   Ablauf nach höchstens 30 Minuten, begrenzte Fehlversuche.
-4. **Passwort ändern:** Nach nachgewiesener Berechtigung; alte
-   Lernfortschritte und Profileinstellungen nicht anfassen.
-   Nur ein sicherer serverseitiger Endpunkt darf den Hash ändern.
-   Langfristig Passworthash auf Argon2id mit individuellem Salt
-   migrieren; bisherige SHA-256-Bestandslogins kompatibel halten,
-   bis Nutzer authentifiziert umgestellt werden können.
-5. **Admin-Warteschlange:** Eigenständiger Adminbereich mit
-   **serverseitig** geprüftem Besitzer-Zugang/MFA, nicht mit dem
-   bestehenden JavaScript-PIN. Nur minimal nötige Daten anzeigen;
-   keine Klartext-Passwörter, Reset-Codes, vollständigen Inhalte
-   von Kinder-Lernständen oder ungeschützte Excel-Exporte.
-6. **Gmail ↔ Datenbank:** Nach autorisiertem OAuth/Apps-Script-Backend
-   eine serverseitige, authentifizierte Ingest-API mit
-   Idempotenz je Gmail-Message-ID-Hash bauen. Nur dann erscheint
-   jeder Eingang automatisch als Ticket im Adminbereich.
-   Der bisherige Gmail-Label-Ordner dient bis dahin als sichere
-   manuelle Warteschlange.
-7. **Status-Automation:** Eingang, Eingangsbestätigung, Code zugestellt,
-   erfolgreich nachgewiesen → erst danach ggf. manuelle Freigabe.
-   Manuelle Ablehnung bei Verdacht, Sperrung auffälliger Vorgänge,
-   Protokoll aller relevanten Entscheidungen.
-8. **Datenschutz:** Nur Elternkontakt und Konto-ID speichern;
-   kein Geburtsdatum, Ausweisbild oder Familienbeziehungsbeleg.
-   Kinderbezogene Tickets spätestens 30 Tage nach Erledigung
-   löschen/anonymisieren, minimale Sicherheitsereignisse
-   maximal 90 Tage halten; DSGVO-Informationspflicht prüfen.
+**Kein SMTP-Passwort, API-Schlüssel, sechsstelligen Elterncode oder Google-2FA-Code im Chat, in GitHub, im Browser-Screenshot oder im KIDS-Frontend veröffentlichen.** Der Betreiber muss dies ausschließlich in der geschützten Google-/Supabase-Oberfläche selbst eingeben. Ein App-Passwort hat weitreichende Rechte für das Postfach und ist widerrufbar; nur erstellen, wenn Gmail SMTP wirklich gewählt wird. Ist das Konto (z. B. per Altersbeschränkung oder Sicherheitsrichtlinie) nicht berechtigt, **nicht versuchen, die Kontosperre zu umgehen**.
 
-## Besonderheit bestehender Konten ohne hinterlegte Elternadresse
+Gmail hat Versandlimits; externe Zustellung ist nicht garantiert. Vor öffentlicher Nutzung müssen Zustellbarkeit, Abuse-Schutz und die rechtliche Eignung für transaktionale Mails getestet werden. Ein Free-Tier-Versanddienst (z. B. mit eigenem kostenlosem Tarif) ist nur eine Alternative nach gesonderter Genehmigung, **kein automatischer Vertragsabschluss**.
 
-Eine Mail von einem beliebigen Absender und ein korrekt genannter
-Kinder-Anmeldename sind **kein Eigentumsnachweis**. Auch der Betreiber
-darf daraus keine Berechtigung ableiten.
+### Zusätzliche Auth-Konfiguration
 
-- Existiert auf einem Gerät noch eine **gültige authentifizierte Sitzung**,
-  kann dort nach erneuter Prüfung eine Wiederherstellungsmethode gebunden werden.
-- Gibt es weder Passwort noch bereits verifizierten Elternkontakt noch
-  vorab ausgestellten Wiederherstellungscode, darf das Konto
-  *nicht automatisch freigegeben* werden.
-- Ein administrativer Ausnahmepfad darf nur mit dokumentiertem
-  unabhängigen Berechtigungsnachweis existieren. Andernfalls muss der
-  Fall ungelöst bleiben, statt fremde Konten zu kompromittieren.
+- Supabase Auth E-Mail-Anmeldung aktivieren und E-Mail-Bestätigung **nicht abschalten**.
+- Für diese UI einen **sechsstelligen OTP** konfigurieren: `Authentication → Email Templates → Magic Link` mit dem sicheren E-Mail-Template-Token `{{ .Token }}`, nicht nur dem Magic Link; Vorlagenänderung mit eigenem SMTP auf Free-Tier zulässig. Die sechs Stellen entsprechen Supabase Auths Standard-E-Mail-OTP.
+- OTP-Ablauf und Ratenbegrenzungen auf sichere Werte konfigurieren, Spam-/CAPTCHA-Schutz vor öffentlicher Freigabe testen. Nicht allein auf den Client-Button als Rate-Limit vertrauen.
+- Erst mit einer kontrollierten, berechtigten Testadresse den vollständigen Ablauf prüfen. Alte Kinderkonten als Negativ-Test verifizieren: keine E-Mail ohne Rechte anbinden und keinen Lernfortschritt überschreiben.
 
-## Abgrenzung
+## Unverzichtbare Freigabe-Reihenfolge
 
-`kids/recovery/db/20261011_foundation.sql` enthält **keine**
-öffentlichen Datenbank-Policies und **keinen** Kennwort-Reset-Endpunkt.
-Ein zweiter erfolgreicher Schritt ist erforderlich, bevor echte
-E-Mail-Verifizierung oder Admin-Synchronisierung freigegeben wird.
+1. Kein Kauf, kein kostenpflichtiger Tarif, keine DNS-/Website-Änderung ohne Nutzerfreigabe.
+2. Offiziellen kostenfreien SMTP-Weg in der geschützten Supabase-Oberfläche einrichten und den tatsächlichen Versand an eine Testadresse prüfen.
+3. Den neuen, ausschließlich mit Service-Role ausführbaren Registrierungs-RPC als Migration bereitstellen.
+4. Authentifizierte KIDS-Edge-Function mit JWT-Prüfung und kontrollierten CORS-Ursprüngen bereitstellen. Service-Role-Key verbleibt auf dem Server, nie in GitHub oder Client-Code.
+5. **Vor dem Besucher-Rollout** die alte öffentliche Neuanlage über `kids_register` serverseitig blockieren. `kids_login`, `kids_save` und existierende Lernstände nicht beschädigen.
+6. Automatische Regressionstests und reale Negativtests: fehlende Elternadresse, keine Zustimmung, falscher/abgelaufener Code, Spam, erneute Versuche, gelöschte/gesperrte Konten, gleicher Kindername, sichere alte Konten, iPhone-WKWebView.
+7. Neue UI **zuerst in KIDS TEST** (nicht in Erwachsenen-App oder normaler Website) testen. Erst nach visueller und funktionaler Freigabe des Nutzers Besucher-Release.
+
+## Offene Weiterentwicklung
+
+- Sichere Wiederherstellung bestehender Kinderkonten mit bereits bestätigter Eltern-E-Mail, Einmalbestätigung und getrennter Autorisierung; bei alten Konten ohne Elternkontakt kein automatischer Reset.
+- Eigenständiger, serverseitig geschützter Admin-Review-Bereich. Die alte browserseitige Admin-PIN ist dafür ungeeignet.
+- Verbindung Gmail-Kennzeichnungen ↔ Datenbanktickets ist nicht implementiert. Kein Mail-Trigger von Google Apps Script aktiv; ChatGPT-Zentralüberwachung ist nur eine zeitgesteuerte Prüfung, kein dauerhaft laufender Gmail-E-Mail-Server.
+
+**Aktuell:** Keine echte Eltern-Code-Zustellung, keine produktive Datenbankänderung, kein neues Live-KIDS-Registrierungsverhalten und keine neuen Kosten. Der Draft-PR darf nicht gemergt werden, bis alle Release-Gates erfüllt sind.

@@ -2406,6 +2406,8 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .kids-join button,.kids-join-go{min-height:52px;border:0;border-radius:16px;background:#e2bd72;color:#1a2430;font-weight:800;cursor:pointer}
 .kids-join .ghost{background:rgba(255,255,255,.08);color:#fff}
 .kids-join input{width:100%;min-height:48px;border-radius:14px;border:0;margin:0 0 10px;padding:0 12px;background:rgba(255,255,255,.08);color:#fff}
+.kids-join .kids-parent-consent{display:flex;align-items:center;gap:10px;font-size:13px;line-height:1.4;margin:4px 0 10px}
+.kids-join .kids-parent-consent input{flex:0 0 19px;width:19px;min-height:19px;height:19px;margin:0;accent-color:#e2bd72}
 .kids-join .join-feedback{display:block;margin:10px 0 8px;padding:10px 12px;border-radius:12px;line-height:1.4;font-size:14px;font-weight:650;background:rgba(127,196,205,.12);color:#f6f0de;border:1px solid rgba(232,203,151,.35)}
 .kids-join .join-feedback[hidden],.kids-join #joinLoginExisting[hidden]{display:none!important}
 .kids-join .join-feedback[data-kind="error"]{background:rgba(174,68,71,.22);border-color:rgba(249,158,159,.65);color:#fff2ec}
@@ -3041,7 +3043,7 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
   <div class="kids-join-card">
     <div class="step on" data-step="hello">
       <h2>Willkommen</h2>
-      <p>Ein Konto ist freiwillig. Du kannst einfach spielen. Später kannst du unter Eltern ein Konto anlegen, wenn du den Fortschritt merken willst. Ohne E-Mail.</p>
+      <p>Ein Konto ist freiwillig. Du kannst einfach spielen. Für ein neues Kinderkonto ist eine bestätigte Eltern-E-Mail erforderlich. Ohne Konto kannst du direkt starten.</p>
       <button type="button" id="joinNextHello">Weiter</button>
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
     </div>
@@ -3068,14 +3070,26 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
     </div>
     <div class="step" data-step="name">
       <h2>Name merken</h2>
-      <p>Nur wenn du ein Konto willst. Sonst einfach überspringen – du kommst direkt in die Kinderwelt.</p>
+      <p>Für ein neues Konto müssen die Eltern ihre eigene E-Mail-Adresse bestätigen. Du kannst sonst ohne Konto weitermachen.</p>
       <input id="joinName" maxlength="24" placeholder="Name des Kindes" autocomplete="off">
       <input id="joinPass" type="password" maxlength="40" placeholder="Passwort" autocomplete="new-password">
+      <label for="joinParentEmail">E-Mail-Adresse der Eltern (Pflicht für neue Konten)</label>
+      <input id="joinParentEmail" type="email" inputmode="email" maxlength="254" placeholder="eltern@beispiel.de" autocomplete="email" required aria-required="true">
+      <p class="parent-note">Bitte nur die E-Mail-Adresse einer erziehungsberechtigten Person angeben. Sie wird vor der Kontofreischaltung bestätigt.</p>
+      <label class="kids-parent-consent"><input id="joinParentConsent" type="checkbox" required><span>Ich bin erziehungsberechtigt und möchte dieses Kinderkonto anlegen.</span></label>
       <button type="button" id="joinSave">Konto anlegen</button>
       <p id="joinStatus" class="join-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p>
       <button type="button" id="joinLoginExisting" class="ghost" style="margin-top:8px;width:100%" hidden>Vorhandenes Konto anmelden</button>
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Ohne Konto weitermachen</button>
       <button type="button" class="ghost" data-back="age" style="margin-top:8px;width:100%">Zurück</button>
+    </div>
+    <div class="step" data-step="parentverify">
+      <h2>Eltern-E-Mail bestätigen</h2>
+      <p>Gib den sechsstelligen Code aus der Eltern-E-Mail ein. Das Kinderkonto wird erst nach der Bestätigung angelegt.</p>
+      <input id="joinParentCode" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="one-time-code" placeholder="6-stelliger Code" aria-label="Bestätigungscode der Eltern-E-Mail">
+      <button type="button" id="joinParentVerify">E-Mail bestätigen &amp; Konto anlegen</button>
+      <p id="joinParentStatus" class="join-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p>
+      <button type="button" class="ghost" data-back="name" style="margin-top:8px;width:100%">Zurück</button>
     </div>
     <div class="step" data-step="login" role="group" aria-labelledby="kidsExistingLoginTitle">
       <h2 id="kidsExistingLoginTitle">Vorhandenes Kind anmelden</h2>
@@ -6579,10 +6593,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   var ACTIVE="kids.activeProfile";
   var API="https://djyfkttjbdraynuxrzno.supabase.co/rest/v1/rpc/";
   var APIKEY="sb_publishable_kR6b1SlL3uoVq4gbTFWKkQ_a2Rcfg2i";
+  var AUTH_API="https://djyfkttjbdraynuxrzno.supabase.co/auth/v1/";
+  var PARENT_REGISTER_EDGE="https://djyfkttjbdraynuxrzno.supabase.co/functions/v1/kids-parent-register";
   var join=document.getElementById("kidsJoin");
   var draft={gender:"boy",age:"6–8"};
   var askId="";
   var joinScrollY=0;
+  var joinParentPending=null;
   var GUEST_GENDER="kids.guest.gender.v1";
   try{if("scrollRestoration" in history)history.scrollRestoration="manual"}catch(e){}
   function load(){try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch(e){return []}}
@@ -6625,13 +6642,17 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   function joinFeedback(msg,kind){
     var loginStep=join.querySelector('[data-step="login"]');
     var isLogin=loginStep&&loginStep.classList.contains("on");
-    var s=document.getElementById(isLogin?"deviceLoginStatus":"joinStatus");if(!s)return;
+    var verifyStep=join.querySelector('[data-step="parentverify"]');
+    var isVerify=verifyStep&&verifyStep.classList.contains("on");
+    var s=document.getElementById(isVerify?"joinParentStatus":isLogin?"deviceLoginStatus":"joinStatus");if(!s)return;
     s.textContent=msg||"";s.hidden=!msg;s.dataset.kind=kind||"info";
   }
   function joinPending(v){
     joinBusy=!!v;
     var save=document.getElementById("joinSave"),login=document.getElementById("joinLoginExisting");
     save.disabled=joinBusy;save.textContent=joinBusy?"Bitte warten …":"Konto anlegen";
+    var parentVerify=document.getElementById("joinParentVerify");
+    if(parentVerify)parentVerify.disabled=joinBusy;
     if(login)login.disabled=joinBusy;
     var deviceLogin=document.getElementById("deviceLoginSubmit");
     if(deviceLogin){deviceLogin.disabled=joinBusy;deviceLogin.textContent=joinBusy?"Anmeldung läuft …":"Anmelden und Lernstand laden"}
@@ -6663,6 +6684,13 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var pw=document.getElementById(isRestore?"deviceLoginPass":"joinPass").value||"";
     if(name.length<2){joinFeedback("Bitte einen Namen mit mindestens zwei Zeichen eingeben.","error");return}
     if(pw.length<4){joinFeedback("Bitte ein Passwort mit mindestens vier Zeichen eingeben.","error");return}
+    var parentEmail=mode==="register"?(document.getElementById("joinParentEmail").value||"").trim().toLowerCase():"";
+    if(mode==="register"&&(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(parentEmail)||parentEmail.length>254)){
+      joinFeedback("Für ein neues Kinderkonto ist eine gültige Eltern-E-Mail-Adresse erforderlich.","error");return;
+    }
+    if(mode==="register"&&!document.getElementById("joinParentConsent").checked){
+      joinFeedback("Eine erziehungsberechtigte Person muss die Erstellung bestätigen.","error");return;
+    }
     if(mode!=="login"&&!isRestore)document.getElementById("joinLoginExisting").hidden=true;
     joinPending(true);
     joinFeedback(mode==="login"||isRestore?"Anmeldung wird geprüft …":"Konto wird geprüft …","info");
@@ -6672,26 +6700,71 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
         if(isRestore){joinFeedback((existing&&existing.error)||"Name oder Passwort passt nicht. Bitte erneut versuchen.","error");return}
         if(mode==="login"){joinExistingHint("Name oder Passwort passt nicht. Bitte erneut versuchen.");return}
         if(existing&&/Keine Verbindung/i.test(existing.error||"")){joinFeedback(existing.error,"error");return}
-        return rpc("kids_register",{p_name:name,p_hash:h,p_gender:draft.gender,p_age:draft.age,p_data:bag()}).then(function(res){
-          if(!res||res.ok!==true){
-            if(/vergeben/i.test(res&&res.error||""))joinExistingHint();
-            else joinFeedback(res&&res.error||"Konto konnte nicht angelegt werden. Bitte erneut versuchen.","error");
+        return fetch(AUTH_API+"otp",{
+          method:"POST",
+          headers:{"Content-Type":"application/json","apikey":APIKEY},
+          body:JSON.stringify({email:parentEmail,create_user:true})
+        }).then(function(response){
+          if(!response.ok){
+            joinFeedback("Der Bestätigungscode kann derzeit nicht versendet werden. Bitte später erneut versuchen.","error");
             return;
           }
-          if(res.linked){return rpc("kids_login",{p_name:name,p_hash:h}).then(function(r){acceptExistingAccount(name,h,r)})}
-          rememberCurrent();
-          var app=document.querySelector(".app");
-          if(app)app.setAttribute("data-gender",draft.gender);
-          var ageBtn=document.querySelector('.age-tabs [data-age="'+draft.age+'"]');
-          if(ageBtn)ageBtn.click();
-          var p={id:String(Date.now()),name:name,pass:h,gender:draft.gender,age:draft.age,data:bag()};
-          var list=load();list.push(p);save(list);localStorage.setItem(ACTIVE,p.id);
-          syncConfirmed[p.id]=profileSnapshot(p);
-          joinFeedback("Konto erfolgreich angelegt.","success");closeJoin();renderList();
+          // A successful Auth OTP request is not yet proof of account ownership.
+          joinParentPending={name:name,hash:h,email:parentEmail,gender:draft.gender,age:draft.age,data:bag()};
+          document.getElementById("joinParentCode").value="";
+          step("parentverify");
+          joinFeedback("Bitte den sechsstelligen Code aus der Eltern-E-Mail eingeben.","info");
         });
       });
     }).catch(function(){joinFeedback("Verbindung oder Passwortverarbeitung fehlgeschlagen. Bitte erneut versuchen.","error")})
       .finally(function(){joinPending(false)});
+  }
+
+  /* STAGED: Supabase Auth verifies the emailed OTP first. The subsequent
+     backend must revalidate the resulting JWT and verified parent address.
+     This flow NEVER calls public.kids_register to create a new account. */
+  function verifyParentRegistration(){
+    if(joinBusy||!joinParentPending)return;
+    var code=(document.getElementById("joinParentCode").value||"").replace(/\s+/g,"");
+    if(!/^[0-9]{6}$/.test(code)){joinFeedback("Bitte den sechsstelligen Code eingeben.","error");return}
+    var p=joinParentPending;
+    joinPending(true);joinFeedback("Bestätigung wird geprüft …","info");
+    fetch(AUTH_API+"verify",{
+      method:"POST",
+      headers:{"Content-Type":"application/json","apikey":APIKEY},
+      body:JSON.stringify({email:p.email,token:code,type:"email"})
+    }).then(function(response){
+      if(!response.ok)throw Error("invalid-code");
+      return response.json();
+    }).then(function(auth){
+      if(!auth||!auth.access_token)throw Error("missing-session");
+      return fetch(PARENT_REGISTER_EDGE,{
+        method:"POST",
+        headers:{"Content-Type":"application/json","apikey":APIKEY,"Authorization":"Bearer "+auth.access_token},
+        body:JSON.stringify({
+          p_name:p.name,p_hash:p.hash,p_parent_email:p.email,
+          p_gender:p.gender,p_age:p.age,p_data:p.data,parent_consent:true
+        })
+      }).then(function(response){
+        if(!response.ok)throw Error("registration-rejected");
+        return response.json();
+      });
+    }).then(function(res){
+      if(!res||res.ok!==true||res.verified!==true)throw Error("not-verified");
+      rememberCurrent();
+      var app=document.querySelector(".app");
+      if(app)app.setAttribute("data-gender",p.gender);
+      var ageBtn=document.querySelector('.age-tabs [data-age="'+p.age+'"]');
+      if(ageBtn)ageBtn.click();
+      var profile={id:String(Date.now()),name:p.name,pass:p.hash,gender:p.gender,age:p.age,data:p.data};
+      var list=load();list.push(profile);save(list);localStorage.setItem(ACTIVE,profile.id);
+      syncConfirmed[profile.id]=profileSnapshot(profile);
+      joinParentPending=null;
+      joinFeedback("Eltern-E-Mail bestätigt. Konto erfolgreich angelegt.","success");
+      closeJoin();renderList();
+    }).catch(function(){
+      joinFeedback("Der Code oder die Kontoanlage konnte nicht bestätigt werden. Bitte erneut prüfen; es wurde kein neues Kinderkonto freigeschaltet.","error");
+    }).finally(function(){joinPending(false)});
   }
   function step(name){
     if(name==="place")name="name";
@@ -6729,6 +6802,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     step(from||"hello");
   }
   function closeJoin(){
+    joinParentPending=null;
     try{
       if(document.activeElement&&/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName))document.activeElement.blur();
     }catch(e){}
@@ -6861,6 +6935,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   var cancel=document.getElementById("joinCancel");
   if(cancel)cancel.addEventListener("click",function(){if(localStorage.getItem(ACTIVE))closeJoin()});
   document.getElementById("joinSave").addEventListener("click",function(){submitJoin("register")});
+  document.getElementById("joinParentVerify").addEventListener("click",verifyParentRegistration);
   document.getElementById("joinLoginExisting").addEventListener("click",function(){submitJoin("login")});
   var add=document.getElementById("profileAdd");
   if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8"};openJoin(load().length?"who":"hello")});
