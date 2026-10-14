@@ -1,0 +1,71 @@
+name: Deploy TAWḤĪD KIDS TEST (Android PWA)
+# ISOLATED_KIDS_TEST_WORKER_V1 — NEVER publishes the real visitor Kids app.
+on:
+  push:
+    branches:
+      - kids-test-staging
+    paths:
+      - "kids/**"
+      - ".github/workflows/deploy-kids-android-test.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-test-android-workers-dev
+  cancel-in-progress: false
+
+jobs:
+  deploy-kids-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout isolated Kids TEST branch
+        uses: actions/checkout@v4
+      - name: Node 24
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - name: Dependencies
+        run: npm ci
+      - name: Validate the Kids TEST PWA and route guards
+        run: |
+          set -euo pipefail
+          test "$(git branch --show-current)" = "kids-test-staging"
+          node --check kids/test-android/worker.js
+          node kids/test-android/test-preview.cjs
+          test -s kids/index.html
+          test -s kids/start.html
+          test -s kids/sw.js
+          echo "KIDS TEST only: visitor routes, Android APK, Play Store and app store untouched"
+      - name: Publish isolated workers.dev-only KIDS TEST
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          set -euo pipefail
+          npx wrangler deploy -c kids/test-android/wrangler.toml
+      - name: Verify Android install and staged Kids entry
+        run: |
+          set -euo pipefail
+          BASE="https://dar-al-tawhid-kids-test.sero91ak.workers.dev"
+          for n in 1 2 3 4 5 6; do
+            CODE="$(curl -sSL -o /tmp/kids-test-pwa -w '%{http_code}' "$BASE/kids/manifest.webmanifest" || true)"
+            if [ "$CODE" = 200 ] && grep -q 'KIDS TEST' /tmp/kids-test-pwa; then break; fi
+            sleep 5
+          done
+          test "$CODE" = 200
+          grep -q '"id":"/kids/test-android-app"' /tmp/kids-test-pwa
+          for PATH in /kids/test-install.html /kids/start.html /kids/icons/icon-192.png /kids/sw.js; do
+            CODE="$(curl -sSL -o /tmp/kids-test-route -w '%{http_code}' "$BASE$PATH")"
+            if [ "$CODE" != 200 ] || [ ! -s /tmp/kids-test-route ]; then
+              echo "::error::Kids TEST preview failed for $PATH ($CODE)"
+              exit 1
+            fi
+            echo "Kids TEST OK: $PATH"
+          done
+          CODE="$(curl -sSL -o /tmp/kids-test-forbidden -w '%{http_code}' "$BASE/test/")"
+          test "$CODE" = 404
+          CODE="$(curl -sSL -o /tmp/kids-test-forbidden -w '%{http_code}' "$BASE/kids/test-android/worker.js")"
+          test "$CODE" = 404
+          echo "Android KIDS TEST worker isolated and verified; no production domain deployment"
