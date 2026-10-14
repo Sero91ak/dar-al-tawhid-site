@@ -3,7 +3,7 @@
 const assert=require("node:assert/strict");
 const {audit,validV4,normalize}=require("../kids/tools/audit-academy-voice-coverage-v18.js");
 const r=audit();
-assert.equal(r.catalogLessonCount,90);
+assert.equal(r.catalogLessonCount,208);
 assert.deepEqual(r.uncoveredLessons,[]);
 assert.ok(r.uniquePhrases>=600);
 assert.equal(Object.values(r.totals).reduce((a,b)=>a+b,0),r.uniquePhrases);
