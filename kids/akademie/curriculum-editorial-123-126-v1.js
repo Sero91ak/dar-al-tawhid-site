@@ -180,7 +180,7 @@ for(const [id,versions] of Object.entries(drafts)){
  for(const age of ["4-5","6-8","9-10"]){
   const d=versions[age],previous=old.ageText[age];
   if(!previous||d.lines.length!==4||d.lines.some(s=>typeof s!=="string"||s.length<30))throw Error("Incomplete age version "+id+"/"+age);
-  ageText[age]={...previous,goal:d.goal,lines:d.lines,intro:d.lines.join(" "),situation:d.situation,practice:d.practice,evidence:d.evidence,summary:d.summary,audioScript:old.topic+". "+d.lines.join(" ")};
+  ageText[age]={...previous,goal:d.goal,lines:d.lines,intro:d.lines.join(" "),situation:d.situation,practice:d.practice,evidence:d.evidence,summary:d.summary,audioScript:old.topic+". "+d.lines.join(" ").replaceAll("lā nufarriqu bayna aḥadin minhum","die Aussage über den Glauben an alle Gesandten").replaceAll("Fa-man yaʿmal miṯqāla ḏarratin ḫayran yarah","der Satz aus Qurʾān 99, Vers 7")};
  }
  const audit={...old.sourceAudit,scientificApproval:false,editorialScopeNote:(old.sourceAudit.editorialScopeNote||"")+" | Einzelredaktion 2026-10-14 Slots 123–126; drei individuell verfasste Altersfassungen; keine wissenschaftliche Freigabe."};
  const patch=id==="ikhlas-kleine-taten-wertvoll"?{
