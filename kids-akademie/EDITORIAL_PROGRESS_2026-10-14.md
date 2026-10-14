@@ -1,5 +1,21 @@
 # Redaktioneller Arbeitsstand – 14. Oktober 2026
 
+## Ergänzung · Unterrichtsredaktion 119–129 (14.10.2026)
+
+**Aktueller dokumentierter Umfang der individuellen Redaktion:** 29 Lektionen / 87 Altersfassungen im V38-Ausbau: zuvor 18 Lektionen aus 99–117 (ohne Fiqh 106) plus die elf Lektionen **119–129** (ohne die getrennt quellengeprüfte Fiqh-Stunde 118). Ein vorhandener Entwurf allein zählt nicht als pädagogisch geprüft.
+
+- Neue Arbeitsmodule: `kids/akademie/curriculum-editorial-119-122-v1.js`, `curriculum-editorial-123-126-v1.js`, `curriculum-editorial-127-129-v1.js`. Alle drei werden in dieser Reihenfolge **nur auf dem PR-Arbeitszweig** in der Akademieansicht geladen.
+- **Vier konkrete Qurʾān-Textkorrekturen** im effektiven Datenbestand: 6:59 arabische Wortgrenze `وَلَا يَابِسٍ`; 99:7 getrennt von 99:8; 2:286 als **Ausschnitt** statt vollständiger Vers; 39:53 mit `قُلْ` und ohne die eigenständigen Verse 39:54–55.
+- Redaktion für 127–129: Gastfreundschaft und persönliche Grenzen; Lernpausen ohne erfundene Minutenregel; Reue, Hoffnung und Wiedergutmachung ohne Beschämung.
+- **Lesende Konsistenzkontrolle:** 11 Lektionen × 3 Altersgruppen × (1 Intro + 4 Unterrichtszeilen + 1 Sprechskript) = **198/198 übereinstimmende Texte**; dazu die Einbindung der drei Module in korrekter Reihenfolge geprüft.
+- Ungenerierter Sprechplan: **1.514 verschiedene Textbausteine / 2.109 Verwendungen / 0 Audio-Credits.** Keine Audioerzeugung, keine synthetische Qurʾān-Rezitation.
+- Quellenakten: `research/INDEPENDENT_QURAN_AUDIT_123_126_20261014.md`, `research/INDEPENDENT_REVIEW_127_129_20261014.md`. Das sind **Teilprüfungen**, keine Gesamtfreigaben.
+- **Freigabe weiter 0/624**. GitHub-PR #1113 bleibt Draft, kein Merge auf `main`, kein Live-Deploy.
+- **Nächster Unterrichtstext-Block: 131–133**; Fiqh-Slot 130 bleibt unabhängig quellen- und pädagogisch prüfpflichtig. Künftige V38-Arabisch-Konsolidierung darf die jetzt korrigierten Versgrenzen nicht verlieren.
+
+---
+
+
 ## Fortschreibung: Altersredaktion 119–129
 
 - Die Unterrichtsblöcke **119–122, 123–126 und 127–129** sind in `kids/akademie/index.html` auf dem Arbeitszweig eingebunden. **11 weitere Lektionen / 33 Altersfassungen** besitzen nun individuelle Unterrichtstexte; zusammen mit der hier zuvor dokumentierten Arbeit an 99–117 sind dies **29 gezielt redaktionell vertiefte Lektionen / 87 Altersfassungen** (keine unabhängige Gesamtfreigabe).
