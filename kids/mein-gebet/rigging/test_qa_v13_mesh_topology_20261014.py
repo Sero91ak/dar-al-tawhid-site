@@ -67,11 +67,13 @@ def test_topology():
     else:
         raise AssertionError("Out-of-range indices were not rejected")
 
-    # Known coverage gap in current audit: unindexed triangles are silently skipped.
+    # Non-indexed glTF TRIANGLES use consecutive POSITION vertices (glTF 2.0).
     unindexed = _run(_glb([0, 1, 2], 3, indexed=False))
-    assert unindexed["totals"].get("triangles", 0) == 0, unindexed
+    assert unindexed["totals"]["triangles"] == 1, unindexed
+    assert unindexed["totals"]["boundary_edges"] == 3, unindexed
+    assert unindexed["totals"]["nonmanifold_edges"] == 0, unindexed
     assert unindexed["approved"] is False
-    print("PASS: 7 synthetic topology cases; WARNING: unindexed primitives are not audited.")
+    print("PASS: 7 synthetic topology cases, including non-indexed triangles; release remains blocked.")
 
 
 if __name__ == "__main__":
