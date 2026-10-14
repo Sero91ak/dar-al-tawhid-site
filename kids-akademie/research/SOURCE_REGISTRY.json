@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 165,
+  "sourceCount": 167,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -26,7 +26,8 @@
       "checkedBy": "Dorar Hadith-Sharḥ 3429 direkt abgerufen 2026-10-14 (Ṣaḥīḥ al-Buḫārī 1, ʿUmar ibn al-Ḫaṭṭāb)",
       "lessonIds": [
         "aqidah-ikhlas",
-        "aqidah-ikhlas-gutes-ohne-lob"
+        "aqidah-ikhlas-gutes-ohne-lob",
+        "aqidah-ikhlas-gute-absichten"
       ],
       "binding": "authentic Sunnah linked to early lesson 12 Ikhlāṣ; separate from Tafsīr of 39:11",
       "topic": "Absicht der Taten"
@@ -3648,7 +3649,8 @@
       "checkedBy": "Islamweb Tafsīr aṭ-Ṭabarī 50/4233, verse 39:11 gelesen",
       "lessonIds": [
         "aqidah-ikhlas",
-        "aqidah-ikhlas-gutes-ohne-lob"
+        "aqidah-ikhlas-gutes-ohne-lob",
+        "aqidah-ikhlas-gute-absichten"
       ],
       "binding": "primary early tafsīr for Ikhlāṣ; Sunnah verification pending",
       "topic": "Ikhlāṣ"
@@ -4179,10 +4181,63 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Dorar 12044 Originalbericht und Bukhari-/Muslim-Quellenangaben unmittelbar eingesehen",
       "lessonIds": [
-        "fiqh-salah-allah-gedenken"
+        "fiqh-salah-allah-gedenken",
+        "fiqh-salah-gebet-lernen"
       ],
       "binding": "authentic Sunnah on prayer practice, distinct from Quran 20:14",
       "topic": "Gebet nach der Anleitung des Propheten ﷺ"
+    },
+    {
+      "sourceId": "SRC-CORE35-BUKHARI-5376",
+      "key": "core35-food-bismillah-prophetic-kindness",
+      "author": "Muḥammad ﷺ, überliefert in Ṣaḥīḥ al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "ʿUmar ibn Abī Salamah",
+      "arabic": "يَا غُلَامُ، سَمِّ اللَّهَ، وَكُلْ بِيَمِينِكَ، وَكُلْ مِمَّا يَلِيكَ",
+      "germanTranslation": null,
+      "locus": "Kitāb al-Aṭʿimah; freundliche Unterweisung eines jungen Kindes zu Beginn der Mahlzeit",
+      "volume": null,
+      "page": null,
+      "chapter": "Essen mit Bismillāh und Rücksicht auf Mitessende",
+      "number": "5376; auch Muslim 2022",
+      "edition": "Dorar 14362, Zuordnung al-Buḫārī Nr. 5376",
+      "directLink": "https://dorar.net/hadith/sharh/14362#:~:text=%D9%8A%D8%A7%20%D8%BA%D9%84%D8%A7%D9%85%20%D8%B3%D9%85%20%D8%A7%D9%84%D9%84%D9%87",
+      "authenticityNote": "Arabischer Hadith und Buḫārī-5376-/Muslim-2022-Zuordnung am 14.10.2026 direkt auf Dorar 14362 gelesen. Der Prophet ﷺ richtete die freundliche Unterweisung an den damals jungen ʿUmar ibn Abī Salamah. Eine eigenständig geprüfte gedruckte Ausgabe wird nicht behauptet; das arabische Fragment ist ein gekennzeichneter Auszug.",
+      "safeApplication": "Kinder sollen Bismillāh vor dem Essen in freundlichem Ton lernen; Hilfe bei der Aussprache, körperlichen Einschränkungen und Essenssituationen zulassen. Den Hadith nicht zu Essenszwang, Beschämung oder strengen Vorschriften für linkshändige Behinderungen umdeuten; die konkreten rechtlichen Sonderfälle brauchen fachkundige Prüfung.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar Hadith-Sharḥ 14362, arabischer Originalbericht und Authentizitätsangaben al-Buḫārī 5376/Muslim 2022 direkt gelesen",
+      "lessonIds": [
+        "adab-essen-bismillah"
+      ],
+      "binding": "Authentischer Prophetenbericht für Bismillāh und Tisch-Adab; Kinderpädagogik separat",
+      "topic": "Essen mit Bismillāh"
+    },
+    {
+      "sourceId": "SRC-CORE36-BUKHARI-2363",
+      "key": "core36-mercy-to-thirsty-animals",
+      "author": "Muḥammad ﷺ, überliefert in Ṣaḥīḥ al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "Abū Hurayrah",
+      "arabic": "فِي كُلِّ كَبِدٍ رَطْبَةٍ أَجْرٌ",
+      "germanTranslation": null,
+      "locus": "Bericht über einen durstigen Hund und Lohn für Barmherzigkeit zu Lebewesen",
+      "volume": null,
+      "page": null,
+      "chapter": "Freundlicher Umgang mit Tieren",
+      "number": "2363; auch Muslim 2244",
+      "edition": "Dorar 72367; zitierter Buḫārī 2363",
+      "directLink": "https://dorar.net/hadith/sharh/72367#:~:text=%D9%81%D9%8A%20%D9%83%D9%84%20%D9%83%D8%A8%D8%AF%20%D8%B1%D8%B7%D8%A8%D8%A9",
+      "authenticityNote": "Am 14.10.2026 Dorar 72367 mit dem arabischen Ausspruch über lebende Wesen und dem authentischen Buḫārī-Bericht Nr. 2363 von Abū Hurayrah gelesen; Muslim 2244 wird dort als sinngemäß gleiche Überlieferung genannt. Nicht der vollständige Hadithtext und keine Druckedition unabhängig kontrolliert.",
+      "safeApplication": "Kinder dürfen Tieren mit respektvollem Abstand und unter Erwachsenensicht helfen. Niemals unbekannte oder aggressive Tiere anfassen oder Brunnen/Verkehrswege betreten; stattdessen einen Erwachsenen holen. Die im Bericht beschriebene Brunnenhandlung nicht als nachzumachende Kindermutprobe darstellen.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar Hadith-Sharḥ 72367, arabischer Bericht und Buḫārī-2363-/Muslim-2244-Quellenangaben direkt gelesen",
+      "lessonIds": [
+        "akhlaq-tiere-barmherzigkeit"
+      ],
+      "binding": "Authentischer Sunnah-Beleg für Barmherzigkeit zu Tieren, Kindersicherheit ausdrücklich getrennt",
+      "topic": "Barmherzig zu Tieren"
     }
   ]
 }
