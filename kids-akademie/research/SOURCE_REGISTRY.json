@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 167,
+  "sourceCount": 168,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -544,7 +544,8 @@
       "checkedBy": "page fetched from islamweb.net library content 49",
       "lessonIds": [
         "adab-ruecksicht-in-der-moschee",
-        "adab-mit-essen-nicht-spielen"
+        "adab-mit-essen-nicht-spielen",
+        "adab-essen-bismillah"
       ],
       "binding": "verse span for kids academy draft",
       "topic": "Rücksicht in der Moschee"
@@ -4155,7 +4156,8 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Islamweb aṭ-Ṭabarī 50/3226 unmittelbar eingesehen; keine neue Hadithbewertung aus eingebetteten Athār",
       "lessonIds": [
-        "fiqh-salah-allah-gedenken"
+        "fiqh-salah-allah-gedenken",
+        "fiqh-salah-gebet-lernen"
       ],
       "binding": "authentic early Quran exegesis on prayer and remembrance; human fiqh review pending",
       "topic": "Allah im Gebet gedenken"
@@ -4238,6 +4240,32 @@
       ],
       "binding": "Authentischer Sunnah-Beleg für Barmherzigkeit zu Tieren, Kindersicherheit ausdrücklich getrennt",
       "topic": "Barmherzig zu Tieren"
+    },
+    {
+      "sourceId": "SRC-CORE36-IBNKATHIR-638",
+      "key": "tafsir-anam-6-38-animal-communities",
+      "author": "Ibn Kaṯīr",
+      "work": "Tafsīr al-Qurʾān al-ʿAẓīm",
+      "narrator": null,
+      "arabic": "وَمَا مِنْ دَابَّةٍ فِي الْأَرْضِ وَلَا طَائِرٍ يَطِيرُ بِجَنَاحَيْهِ إِلَّا أُمَمٌ أَمْثَالُكُمْ",
+      "germanTranslation": null,
+      "locus": "Tafsīr Sūrat al-Anʿām, Qurʾān 6:38 (Auszug); die Tiere und Vögel als Gemeinschaften",
+      "volume": null,
+      "page": null,
+      "chapter": "Auslegung der Tiergemeinschaften",
+      "number": null,
+      "edition": "Qurʾān-Projekt König-Saud-Universität, Ibn Kaṯīr zu 6:38",
+      "directLink": "https://quran.ksu.edu.sa/tafseer/katheer/sura6-aya38.html#:~:text=%D9%88%D9%85%D8%A7%20%D9%85%D9%86%20%D8%AF%D8%A7%D8%A8%D8%A9%20%D9%81%D9%8A%20%D8%A7%D9%84%D8%A3%D8%B1%D8%B6",
+      "authenticityNote": "Am 14.10.2026 den zu Qurʾān 6:38 ausgewiesenen arabischen Ibn-Kaṯīr-Tafsīr auf quran.ksu.edu.sa direkt eingesehen. Dort nennt er Deutungen von Muǧāhid, Qatādah und as-Suddī über Tierarten/Gemeinschaften. Dies ist ein Tafsīr-Beleg, kein direktes Gebot, Kinder sollten fremde Tiere anfassen; seine Einzelaussagen sind nicht separat als authentische Überlieferungen eingestuft.",
+      "safeApplication": "Den Kindern zeigen, dass Allah Tiere und Vögel erschuf und der Qurʾān sie als Gemeinschaften beschreibt. Keine gleichwertigen menschlichen Rechtsansprüche oder konkrete Gebetspflichten der Tiere aus diesem Vers erfinden; Barmherzigkeit durch die gesonderte authentische Sunnah belegen und Abstand zu fremden Tieren halten.",
+      "verificationStatus": "primary-page-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "quran.ksu.edu.sa Ibn Kathīr 6:38 arabischer Tafsīr direkt eingesehen",
+      "lessonIds": [
+        "akhlaq-tiere-barmherzigkeit"
+      ],
+      "binding": "primary tafsir for Quran 6:38, source of verse separate from authenticated hadith",
+      "topic": "Tiergemeinschaften als Zeichen Allahs"
     }
   ]
 }
