@@ -59,9 +59,8 @@
       '</div>'+
     '</header>'+
     '<div class="salaf-wrap">'+
-      '<div class="salaf-intro"><div class="salaf-intro-top"><span class="salaf-eyebrow">DEINE GESCHICHTENWELT</span>'+
-      '<span class="salaf-age" id="salafAge"></span></div><h3>Was möchtest du entdecken?</h3>'+ 
-       '<span class="salaf-collection-mark">8 Themen entdecken</span></div>'+
+      '<div class="salaf-intro"><div class="salaf-intro-top">'+
+      '<h3>Was möchtest du entdecken?</h3><span class="salaf-age" id="salafAge"></span></div></div>'+
       '<div class="salaf-switch" role="group" aria-label="Bibliotheksansicht">'+
         '<button type="button" data-salaf-tab="all" class="selected">Themen</button>'+
         '<button type="button" data-salaf-tab="people">Personen</button>'+
@@ -152,7 +151,7 @@
           return '<button type="button" class="salaf-topic" data-topic="'+c.id+'" aria-label="'+esc(c.title)+' öffnen">'+
             '<span class="salaf-topic-image" style="background-image:url(&quot;'+esc(c.img)+'&quot;)"></span>'+
             '<span class="salaf-topic-copy"><strong>'+esc(c.short)+'</strong><small>'+esc(c.caption)+'</small></span>'+
-            (count?'<span class="salaf-card-count">'+count+' Geschichten</span>':"")+'</button>';
+            (count?'<span class="salaf-card-count">'+count+(count===1?' Geschichte':' Geschichten')+'</span>':"")+'</button>';
         }).join("")+'</div>';
         /* SALAF_CATEGORIES_ONLY_V1400: The overview contains ONLY the eight
            topic categories. Story cards belong solely to their category.
