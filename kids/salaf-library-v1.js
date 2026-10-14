@@ -151,7 +151,7 @@
           return '<button type="button" class="salaf-topic" data-topic="'+c.id+'" aria-label="'+esc(c.title)+' öffnen">'+
             '<span class="salaf-topic-image" style="background-image:url(&quot;'+esc(c.img)+'&quot;)"></span>'+
             '<span class="salaf-topic-copy"><strong>'+esc(c.short)+'</strong><small>'+esc(c.caption)+'</small></span>'+
-            (count?'<span class="salaf-card-count">'+count+(count===1?' Geschichte':' Geschichten')+'</span>':"")+'</button>';
+            (count?'<span class="salaf-card-count">Geschichten: '+count+'</span>':"")+'</button>';
         }).join("")+'</div>';
         /* SALAF_CATEGORIES_ONLY_V1400: The overview contains ONLY the eight
            topic categories. Story cards belong solely to their category.
