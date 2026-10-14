@@ -1,5 +1,21 @@
 # Redaktioneller Arbeitsstand – 14. Oktober 2026
 
+## Ergänzung · Unterrichtsredaktion 131–133 (14.10.2026)
+
+**Redaktionell einzeln vertieft: insgesamt 32 Lektionen / 96 Altersfassungen** (18 frühere, elf aus 119–129, drei weitere aus 131–133). Die übrigen Entwürfe sind damit **nicht** redaktionell freigegeben.
+
+- Neuer Arbeitszweig-Baustein `kids/akademie/curriculum-editorial-131-133-v1.js` nach den drei vorangegangenen Unterrichts-Overlays eingebunden.
+- Qurʾān 73:4: tartīl kindgerecht und ohne erfundene Rezitationsnorm; Qurʾān 96:1 mit unabhängig überprüftem Sīrah-Bericht von **ʿĀʾishah, Ṣaḥīḥ al-Buḫārī Nr. 3**; Qurʾān 2:172 mit überprüftem Dank-Hadith von **Anas, Ṣaḥīḥ Muslim Nr. 2734**.
+- Original- und Hadithtexte werden von deutscher Sinnerklärung sowie pädagogischen erfundenen Beispielen getrennt; 2:172-Arabischfeld zur Worttrennung `يَا أَيُّهَا` berichtigt. Im Sprechplan keine arabische synthetische Qurʾān-Rezitation.
+- **14 Unterrichtslektionen / 42 Altersfassungen aus 119–133: 252/252 Textzuordnungen** für Einleitungen, 4 Unterrichtszeilen und geplante Skripte in einer unabhängigen Datenprüfung ohne Befund.
+- Ungenerierter Sprechplan: **1.531 verschiedene Textbausteine, 2.109 Kontexte, 0 generierte Audios / 0 Credits**.
+- Neues Prüfprotokoll: `kids-akademie/research/INDEPENDENT_REVIEW_131_133_20261014.md`.
+- **Keine** wissenschaftliche Freigabe: **0/624**. Kein Merge auf `main`, kein Live-Deploy. Node-/Browser-Regression und unabhängige menschliche Prüfung weiterhin offen.
+- **Nächster Unterrichtsblock: 134–136**; besondere Fiqh-Prüfungen bleiben getrennt und werden nicht als freigegeben behandelt.
+
+---
+
+
 ## Ergänzung · Unterrichtsredaktion 119–129 (14.10.2026)
 
 **Aktueller dokumentierter Umfang der individuellen Redaktion:** 29 Lektionen / 87 Altersfassungen im V38-Ausbau: zuvor 18 Lektionen aus 99–117 (ohne Fiqh 106) plus die elf Lektionen **119–129** (ohne die getrennt quellengeprüfte Fiqh-Stunde 118). Ein vorhandener Entwurf allein zählt nicht als pädagogisch geprüft.
