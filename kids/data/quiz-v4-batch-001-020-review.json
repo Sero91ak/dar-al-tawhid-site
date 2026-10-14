@@ -28,8 +28,11 @@
     "catalogQuestionsVerified": 20,
     "correctAnswersVerified": 20,
     "sourceReferencesPresent": 20,
-    "audioRenderedForAllQuestionStates": 0,
-    "humanAudioApproved": 0
+    "audioRenderedForAllQuestionStates": 1,
+    "humanAudioApproved": 0,
+    "audioOriginalGenerationCount": 4,
+    "audioHumanApproved": 0,
+    "audioFilesImportedToGitHub": 0
   },
   "items": [
     {
@@ -43,15 +46,46 @@
       "revision": "quiz-academy-praise-v4-20261013",
       "questionAudioText": "Hör einmal aufmerksam zu. Wen beten wir an? Antwort 1: Allah allein. Antwort 2: Menschen. Welche Antwort passt deiner Meinung nach?",
       "correctAudioText": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
-      "retryAudioText": "In schāʾ Allāh – wenn Allah will – klappt es beim nächsten Versuch. Denk in Ruhe nach!",
+      "retryAudioText": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
       "explanationAudioText": "Das merken wir uns: Wir dienen Allah allein.",
       "originalQuestion": "Wen beten wir an?",
       "originalExplanation": "Wir dienen Allah allein.",
       "source": "Qurʾān 1:5",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generated-pending-human-review-and-asset-import",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "four-v4-original-generations-completed-pending-human-review",
+      "flowId": "3opB2L8NB0ChRtz3I28a",
+      "recordings": [
+        {
+          "part": "question",
+          "generationId": "ki4e57kvaTCDQxzLio3o",
+          "modelId": "eleven_v4",
+          "credits": 126.9476563876652,
+          "durationSeconds": 10.4
+        },
+        {
+          "part": "correct",
+          "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+          "modelId": "eleven_v4",
+          "credits": 66.86555947136564,
+          "durationSeconds": 5.68
+        },
+        {
+          "part": "retry",
+          "generationId": "DX5z8FWaCS4FDx3KrloO",
+          "modelId": "eleven_v4",
+          "credits": 75.58715418502203,
+          "durationSeconds": 5.44
+        },
+        {
+          "part": "explanation",
+          "generationId": "AToalNGbxiRe1zfOnDG3",
+          "modelId": "eleven_v4",
+          "credits": 42.63890748898678,
+          "durationSeconds": 3.44
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-002",
@@ -457,6 +491,9 @@
     "Quelltext und Sprachausgabe entsprechen genau der aktuellen quiz_joy_v4_script.py-Logik.",
     "Keine neu generierten Audios oder Testbezeichnungen in der Besucher-App freigeben.",
     "Die vorhandenen kostenpflichtigen V4-Takes für #002 und #020 nicht erneut erzeugen.",
-    "Status not-generated pro Vollfrage gilt auch dann, wenn separate V4-Teile im ElevenLabs-Konto existieren."
-  ]
+    "Status not-generated pro Vollfrage gilt auch dann, wenn separate V4-Teile im ElevenLabs-Konto existieren.",
+    "Quiz 001 vier Originalaufnahmen bei ElevenLabs V4 erzeugt, aber wegen fehlendem importiertem Asset und Hörfreigabe NICHT in App/Manifest freigegeben.",
+    "Ein sanfter Retry-Satz wurde in Python- und JS-Sprachvertrag einheitlich korrigiert. CI/Hörfreigabe ausstehend."
+  ],
+  "actualPaidCreditsThisBatch": 312.03927753303964
 }
