@@ -34,7 +34,7 @@ const publicRouterPath = path.join(root, "cloudflare/site-router.js");
 let router = "";
 if (fs.existsSync(publicRouterPath)) {
   router = fs.readFileSync(publicRouterPath, "utf8");
-  assert.ok(router.includes('id="darIosAppStorePromo"'), "Existing iOS promotion must remain");
+  assert.ok(router.includes("https://apps.apple.com/de/app/") && router.includes("APPLE · IPHONE & IPAD"), "Existing iOS App Store fallback must remain");
   assert.ok(router.includes("window.darInstallAndroidPwa=async function"), "Main website Android PWA installer missing");
   assert.ok(router.includes("__darEarlyInstallPrompt"), "Early Android beforeinstallprompt capture missing");
   assert.ok(router.includes("var installEvent=window.__darEarlyInstallPrompt||deferredInstall;"), "Android install prompt must use the earliest captured native prompt directly inside the user gesture");
