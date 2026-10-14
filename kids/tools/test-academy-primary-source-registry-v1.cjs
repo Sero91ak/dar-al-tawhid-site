@@ -14,6 +14,10 @@ for(const src of file.sources){
  ids.add(src.sourceId);
 }
 const required={
+"fiqh-salah-gebet-lernen":{"SRC-CORE30-BUKHARI-631":["dorar.net","12044"]},
+"aqidah-ikhlas-gute-absichten":{"SRC-CORE12-TABARI-4233":["islamweb.net","50/4233"],"SRC-BANK-001":["dorar.net","3429"]},
+"adab-essen-bismillah":{"SRC-CORE35-BUKHARI-5376":["dorar.net","14362"]},
+"akhlaq-tiere-barmherzigkeit":{"SRC-CORE36-BUKHARI-2363":["dorar.net","72367"]},
 "adab-respekt-eltern-zuhoren":{"SRC-CORE10-IBNKATHIR-1005":["islamweb.net","49/1005"],"SRC-CORE10-BUKHARI-5971":["dorar.net","151125"]},
 "fiqh-salah-allah-gedenken":{"SRC-CORE30-ZAJJAJ-1714":["islamweb.net","233/1714"]},
 "aqidah-ikhlas-gutes-ohne-lob":{"SRC-CORE12-TABARI-4233":["islamweb.net","50/4233"],"SRC-BANK-001":["dorar.net","3429"]},
@@ -97,6 +101,28 @@ const required={
  "SRC-FIQH206-MUGHNI-729":["islamweb.net","15/729"]
 }};
 assert.equal(file.sourceCount,file.sources.length,"sourceCount metadata must match actual source IDs");
+
+const childrenHadith=[["SRC-CORE35-BUKHARI-5376","ʿUmar ibn Abī Salamah","5376","2022","adab-essen-bismillah"],
+["SRC-CORE36-BUKHARI-2363","Abū Hurayrah","2363","2244","akhlaq-tiere-barmherzigkeit"]];
+for(const [sourceId,narrator,number,muslim,lesson] of childrenHadith){
+ const src=file.sources.find(x=>x.sourceId===sourceId);
+ assert.ok(src,"Missing verified authentic teaching source: "+sourceId);
+ assert.equal(src.narrator,narrator);
+ assert.match(src.number,new RegExp(number));
+ assert.match(src.number,new RegExp(muslim));
+ assert.equal(src.verificationStatus,"primary-report-direct-read-2026-10-14");
+ assert.ok(src.lessonIds?.includes(lesson));
+ assert.ok(src.arabic&&src.directLink&&src.authenticityNote&&src.safeApplication);
+ assert.match(src.safeApplication,/Kinder|Kind/);
+ assert.notEqual(src.verificationStatus,"scientifically-approved");
+}
+assert.match(file.sources.find(x=>x.sourceId==="SRC-CORE35-BUKHARI-5376").arabic,/يَا غُلَامُ/);
+assert.match(file.sources.find(x=>x.sourceId==="SRC-CORE36-BUKHARI-2363").arabic,/كَبِدٍ/);
+const v2ForLessons=fs.readFileSync(path.join(root,"kids/akademie/curriculum-v2.js"),"utf8");
+for(const id of ["fiqh-salah-gebet-lernen","aqidah-ikhlas-gute-absichten","adab-essen-bismillah","akhlaq-tiere-barmherzigkeit"]){
+ assert.ok(v2ForLessons.includes('"'+id+'"'),"Source must refer to original curriculum ID "+id);
+}
+
 
 // The purpose of ṣalāh in 20:14 requires its own classical interpretation; it is not a full Fiqh chapter.
 const prayerRemembrance=file.sources.find(x=>x.sourceId==="SRC-CORE30-ZAJJAJ-1714");
