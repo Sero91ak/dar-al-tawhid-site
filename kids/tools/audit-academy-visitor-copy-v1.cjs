@@ -27,7 +27,11 @@ const banned = [
   /technische vollständigkeit ersetzt/i,
   /nicht belegt und deshalb nicht behauptet/i,
   /(?:https?:\/\/|www\.)\S+/i,
-  /am 13\. Oktober 2026/i
+  /am 13\. Oktober 2026/i,
+  /computerstimme/i,
+  /in diesem Paket gibt es keine Aufnahme/i,
+  /bezeichnungen der App/i,
+  /der gespeicherte (?:Text|Auszug)/i
 ];
 const violations = [];
 const issue = (where, what) => violations.push(where + ": " + what);
