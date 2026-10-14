@@ -25,7 +25,7 @@
 ## 166 · Zum Gebet stehen — hanbalitischer Fiqh-Teilabgleich
 
 - **Qurʾān 2:238:** `حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَى وَقُومُوا لِلَّهِ قَانِتِينَ`. [Ibn Kaṯīr, Tafsīr al-Baqarah, Islamweb 49/205](https://www.islamweb.net/ar/library/content/49/205).
-- **Tatsächlich eingesehene klassische hanbalitische Primärquelle:** **Ibn Qudāmah, al-Mughnī**, Kitāb aṣ-Ṣalāh, Masʾalah (1064), [Islamweb 15/861](https://www.islamweb.net/ar/library/content/15/861#:~:text=%D8%A7%D9%84%D9%85%D8%B1%D9%8A%D8%B6%20%D8%A5%D8%B0%D8%A7%20%D9%83%D8%A7%D9%86%20%D8%A7%D9%84%D9%82%D9%8A%D8%A7%D9%85). Er behandelt die Erleichterung des Sitzens bei Unfähigkeit zu stehen sowie bei Krankheit, die sich durch Stehen verschlechtert oder bei erheblicher Härte. Zitiert dabei den Bericht von ʿImrān ibn Ḥuṣayn über Stehen, Sitzen und Seitenlage, überliefert von al-Buḫārī; keine ungeprüfte Nummer eingefügt.
+- **Tatsächlich eingesehene klassische hanbalitische Primärquelle:** **Ibn Qudāmah, al-Mughnī**, Kitāb aṣ-Ṣalāh, Masʾalah (1064), [Islamweb 15/861](https://www.islamweb.net/ar/library/content/15/861#:~:text=%D8%A7%D9%84%D9%85%D8%B1%D9%8A%D8%B6%20%D8%A5%D8%B0%D8%A7%20%D9%83%D8%A7%D9%86%20%D8%A7%D9%84%D9%82%D9%8A%D8%A7%D9%85). Er behandelt die Erleichterung des Sitzens bei Unfähigkeit zu stehen sowie bei Krankheit, die sich durch Stehen verschlechtert oder bei erheblicher Härte. Zitiert dabei den Bericht von ʿImrān ibn Ḥuṣayn über Stehen, Sitzen und Seitenlage. **Am 14.10.2026 nachgeprüft:** Ṣaḥīḥ al-Buḫārī **1117**, arabischer Wortlaut und Nummer über [Dorar (mit al-Buḫārī-Originalverweis)](https://dorar.net/h/S96kr3LZ?osoul=1); nun als `SRC-FIQH166-BUKHARI-1117` registriert. Die zugehörige hanbalitische Primärquelle ist als `SRC-FIQH166-MUGHNI-861` registriert. Beide Quellen-Nachweise in alle drei Kinder-Quellenfelder nachgetragen, **ohne Unterrichtssätze oder Voice-Texte zu ändern**.
 - **Trennung:** Der Qurʾān gibt den Grundtext, das Rechtskapitel erklärt die körperliche Ausnahme. Das Stehen in den Kinderübungen wird nicht gegen Schmerz oder Krankheit erzwungen. Die Lernerklärung ersetzt keine individuell anzuwendende Fiqh-Prüfung. Kein ungeprüftes Arm-/Fußmaß und keine ungesicherte Vorschrift aus diesem Vers.
 - **Sperre:** `fiqhHumanReviewNeeded=true`, `scientificApproval=false` trotz gelesener Teilstelle. Eine **vollständige** hanbalitische Madhhab- und Ausnahmeprüfung steht weiterhin aus.
 
@@ -36,3 +36,9 @@
 - `kids/data/academy-voice-editorial-163-166-delta-v1.json`: 76 deutsche Text-Kontexte, `generateCreditsUsed=0`; vor jeglicher Sprachproduktion weitere Prüfung und kanonische Zusammenführung nötig.
 - Stand nach dieser redaktionellen Runde: **166/208 individuell ausgearbeitet, 42 individuelle Entwürfe 167–208 offen; 0/624 wissenschaftliche Endfreigaben.**
 - Der eigenständige Node-Test ist beigefügt, **nicht als tatsächlich durchgeführter Node-/Browser-/CI-Lauf ausgeben**. Alles verbleibt auf geschütztem Entwurfszweig.
+
+## Quellenvertiefung · 14.10.2026
+
+- **Ṣaḥīḥ al-Buḫārī 1117** [Dorar, mit Originaltext](https://dorar.net/h/S96kr3LZ?osoul=1) bestätigt den Bericht des ʿImrān ibn Ḥuṣayn: Stehen, bei Unfähigkeit Sitzen, bei weiterer Unfähigkeit Seitenlage.
+- **Ibn Qudāmah, al-Mughnī, Masʾalah 1064, Bd. 1 S. 444**, [Islamweb 15/861](https://www.islamweb.net/ar/library/content/15/861) behandelt die krankheitsbedingte Erleichterung und zitiert den Bericht.
+- Als zwei gesonderte Einträge im zentralen `SOURCE_REGISTRY.json` vorhanden. Die Kindertext-Quellenfelder nennen nun genau diese Nachweise, bleiben jedoch pädagogisch und wissenschaftlich **nicht endgültig freigegeben**. Keine Audioerzeugung.
