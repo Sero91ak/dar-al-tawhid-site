@@ -1,3 +1,13 @@
+## 14.10.2026 · Slot 154 · Fiqh-Niyyah korrigiert
+
+- **Lektion 154** (`fiqh-absicht-zum-gebet`) mit **drei eigenständigen Altersfassungen** und hinreichend getrenntem Qurʾān-Beleg, klassischem Fiqh und kindlicher Übung als Overlay `kids/akademie/curriculum-editorial-154-v1.js` im PR #1113 eingebunden.
+- **Quellenkorrektur an realen arabischen Qurʾān-Daten:** Das bisher unter 6:162 gespeicherte arabische Feld begann ohne `قُلْ` und enthielt am Ende Teile von **6:163**. Jetzt ist **exakt der vollständige Vers 6:162** gespeichert: `قُلْ إِنَّ صَلَاتِي وَنُسُكِي وَمَحْيَايَ وَمَمَاتِي لِلَّهِ رَبِّ الْعَالَمِينَ`. Abgleich mit Ibn Kaṯīr/Islamweb 49/486. Deutsche Sinnerklärung entsprechend korrigiert.
+- **Hanbalitischer Originaltext:** Ibn Qudāmah, `al-Mughnī`, Bd. 1 S. 278, Islamweb 15/542, tatsächlich über Web-Suche eingesehen: Niyyah = Absicht, ihr Ort ist das Herz; Lautäußerung wird als mögliche Bekräftigung erwähnt, **nicht als zusätzliche Pflichtformel**. Keine erfundene gesprochene Niyyah. Prüfbericht: `kids-akademie/research/EDITORIAL_REVIEW_154_20261014.md`.
+- **19 unvertonte Sprechtextkontexte** in `kids/data/academy-voice-editorial-154-delta-v1.json` mit Textabgleich **0 Abweichungen**. Für den vorherigen 151–153-Block ebenso **57 Kontexte, 0 Abweichungen**. **0 generierte Audios / 0 Credits**.
+- Regressionstest `kids/tools/test-academy-editorial-154-v1.cjs` ist im Repo hinterlegt; vollständiger Node-/Browser-Lauf **noch ausstehend**.
+- **Fortlaufende Redaktionsarbeit bis Slot 154/208, damit 54 weitere Unterrichtslektionen (155–208)**. Weiterhin **0/624 endgültige wissenschaftliche Freigaben**. Kein Merge, kein Live-Deploy.
+- Als Nächstes **155–158**: Qurʾān/Hadith unterscheiden, Sīrah, Duʿāʾ und familiäres Miteinander.
+
 ## 14.10.2026 · Unterricht bis Lektion 153 redaktionell erweitert
 
 - **Lektionen 151–153** (achtsam mit Lebensmitteln umgehen, kleine Aufgaben übernehmen, unbegründete Verdächtigungen prüfen) sind in `kids/akademie/curriculum-editorial-151-153-v1.js` als **neun inhaltlich unterschiedliche Altersfassungen** für 4–5, 6–8 und 9–10 Jahre eingebunden. Vier vollständige Unterrichtsabschnitte, Beispiel, Übung, Quellenabgrenzung und Zusammenfassung pro Altersstufe.
