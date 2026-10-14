@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "version": "academy-voice-plan-v38-20261014-source-copy-cleanup",
+  "version": "academy-voice-plan-v38-20261014-editorial-lessons-119-126",
   "voiceProfileId": "serhat-owner-voice-2026",
   "voiceName": "Serhat Abu Malik – Master",
   "modelId": "eleven_v4",
-  "purpose": "German voice text inventory for lessons 98–208, synchronized with V38 child-visible scripts; not generated, not approved, not published. No synthetic Quran recitation.",
+  "purpose": "Unproduced German voice-text inventory (lessons 98–208); editorial versions 119–126 synchronized. Do not generate/publish synthetic Quran recitations.",
   "policy": {
     "nativeTtsFallback": false,
     "arabicQuranRecitationIsSeparate": true,
@@ -127,7 +127,7 @@
     "fiqh-ramadan-fasten",
     "fiqh-zakah-und-hajj"
   ],
-  "phraseCount": 1448,
+  "phraseCount": 1506,
   "phrases": [
     {
       "text": "Adhkār ohne Zwang wiederholen. Danach folgen weitere Worte der Seite. Am Morgen sagt ein Kind einmal: Alles Lob gehört Allah. Wer nicht möchte, hört nur zu. Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste.",
@@ -581,21 +581,6 @@
       ]
     },
     {
-      "text": "Allahs Wissen verstehen. Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "audio",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
       "text": "Allahs Wissen verstehen. Wir können etwas verstecken. Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -605,33 +590,8 @@
       "contexts": [
         {
           "lessonId": "tawhid-allahs-wissen",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "audio",
-          "age": "9-10"
-        },
-        {
-          "lessonId": "tawhid-allahs-wissen",
           "kind": "summary",
           "age": "all"
-        }
-      ]
-    },
-    {
-      "text": "Allen Gesandten mit Respekt begegnen. Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "audio",
-          "age": "6-8"
         }
       ]
     },
@@ -643,16 +603,6 @@
       "priority": 1,
       "reviewStatus": "not-generated",
       "contexts": [
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "audio",
-          "age": "9-10"
-        },
         {
           "lessonId": "iman-allen-gesandten-respekt",
           "kind": "summary",
@@ -896,21 +846,6 @@
       ]
     },
     {
-      "text": "Arabischen Text und Übersetzung unterscheiden. Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Der gespeicherte Vers lautet: Alles Lob gehört Allah, dem Herrn der Welten. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "audio",
-          "age": "9-10"
-        }
-      ]
-    },
-    {
       "text": "Arabischen Text und Übersetzung unterscheiden. Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -920,28 +855,8 @@
       "contexts": [
         {
           "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
           "kind": "summary",
           "age": "all"
-        }
-      ]
-    },
-    {
-      "text": "Arabischen Text und Übersetzung unterscheiden. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "audio",
-          "age": "6-8"
         }
       ]
     },
@@ -2199,21 +2114,6 @@
       ]
     },
     {
-      "text": "Bescheiden bleiben. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "audio",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
       "text": "Bescheiden bleiben. Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -2221,16 +2121,6 @@
       "priority": 1,
       "reviewStatus": "not-generated",
       "contexts": [
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "audio",
-          "age": "9-10"
-        },
         {
           "lessonId": "akhlaq-bescheiden-bleiben",
           "kind": "summary",
@@ -2891,11 +2781,6 @@
           "lessonId": "sirah-muhammad-barmherziger-lehrer",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -4054,11 +3939,6 @@
           "lessonId": "ikhlas-kleine-taten-wertvoll",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -4682,21 +4562,6 @@
       ]
     },
     {
-      "text": "Gemeinsam in der Moschee lernen. Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "audio",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
       "text": "Gemeinsam in der Moschee lernen. Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -4704,16 +4569,6 @@
       "priority": 1,
       "reviewStatus": "not-generated",
       "contexts": [
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "audio",
-          "age": "9-10"
-        },
         {
           "lessonId": "family-gemeinsam-in-der-moschee",
           "kind": "summary",
@@ -5243,36 +5098,6 @@
       ]
     },
     {
-      "text": "In schwierigen Momenten Duʿāʾ. Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "audio",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
-      "text": "In schwierigen Momenten Duʿāʾ. Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Der folgende Satz der Seite warnt die, die sich Seiner Anbetung gegenüber großtun. Diesen Satz machen wir nicht zu einem Angstbild. Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "audio",
-          "age": "9-10"
-        }
-      ]
-    },
-    {
       "text": "In schwierigen Momenten Duʿāʾ. Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -5280,11 +5105,6 @@
       "priority": 1,
       "reviewStatus": "not-generated",
       "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "audio",
-          "age": "4-5"
-        },
         {
           "lessonId": "dua-in-schwierigen-momenten",
           "kind": "summary",
@@ -5375,36 +5195,6 @@
           "lessonId": "tawhid-keine-goettliche-macht-fuer-geschoepfe",
           "kind": "audio",
           "age": "9-10"
-        }
-      ]
-    },
-    {
-      "text": "Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten. Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "audio",
-          "age": "9-10"
-        }
-      ]
-    },
-    {
-      "text": "Kleine Taten können wertvoll sein. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "audio",
-          "age": "6-8"
         }
       ]
     },
@@ -5743,21 +5533,6 @@
       ]
     },
     {
-      "text": "Muḥammad Friede sei mit ihm als barmherziger Lehrer. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "audio",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
       "text": "Muḥammad Friede sei mit ihm in Makkah. Die Seite bricht den Ausdruck dort ab. Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -5769,21 +5544,6 @@
           "lessonId": "sirah-muhammad-in-makkah",
           "kind": "audio",
           "age": "6-8"
-        }
-      ]
-    },
-    {
-      "text": "Muḥammad ﷺ als barmherziger Lehrer. Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Er nennt auch Verzeihen, um Vergebung bitten und Beratung. Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -10182,36 +9942,6 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Allahs Wissen verstehen. Wir können etwas verstecken. In Qurʾān 6:59 lernen wir sinngemäß: Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. ġayb bedeutet das Verborgene. mafātiḥ bedeutet Schlüssel. Stell dir diese Situation vor: Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Welcher nächste Schritt ist gut? Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "intro",
-          "age": "9-10"
-        }
-      ]
-    },
-    {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Allen Gesandten mit Respekt begegnen. Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. In Qurʾān 2:136 lernen wir sinngemäß: Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. anbiyāʾ bedeutet Propheten. salām bedeutet Friede; der Gruß, den wir beim Namen sagen, steht nicht als Formel in diesem Vers. Stell dir diese Situation vor: Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Welcher nächste Schritt ist gut? Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "intro",
-          "age": "9-10"
-        }
-      ]
-    },
-    {
       "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Als Gast gute Sitten zeigen. Bevor wir ein Haus betreten, fragen wir und grüßen. In Qurʾān 24:27 lernen wir sinngemäß: Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben. istaʾnisū bedeutet um Erlaubnis bitten, die Bewohner ansprechen. sallimū bedeutet grüßt. Stell dir diese Situation vor: Ein Kind steht vor der Wohnungstür der Nachbarn und wartet, bis geöffnet wird. Welcher nächste Schritt ist gut? Wir üben Anklopfen, Warten und einen friedlichen Gruß. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -10272,21 +10002,6 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Arabischen Text und Übersetzung unterscheiden. Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. In Qurʾān 1:2 lernen wir sinngemäß: Der gespeicherte Vers lautet: Alles Lob gehört Allah, dem Herrn der Welten. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. ḥamd bedeutet Lob. rabb al-ʿālamīn bedeutet Herr der Welten. Stell dir diese Situation vor: Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Welcher nächste Schritt ist gut? Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "intro",
-          "age": "9-10"
-        }
-      ]
-    },
-    {
       "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Aufrichtigkeit von Außenwirkung unterscheiden. Wir helfen, weil es richtig ist, nicht damit alle klatschen. In Qurʾān 2:264 lernen wir sinngemäß: Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt. riyāʾ bedeutet etwas tun, damit die Leute es sehen. mann bedeutet Vorhaltung, mit der man eine Gabe schwer macht. Stell dir diese Situation vor: Ein Kind räumt nur auf, solange die Lehrperson schaut, und hört auf, sobald sie weg ist. Wir sprechen darüber. Welcher nächste Schritt ist gut? Wir tun eine kleine Hilfe und erzählen sie danach nicht herum. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -10341,21 +10056,6 @@
       "contexts": [
         {
           "lessonId": "iman-bemuehen-und-vertrauen",
-          "kind": "intro",
-          "age": "9-10"
-        }
-      ]
-    },
-    {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Bescheiden bleiben. Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. In Qurʾān 25:63 lernen wir sinngemäß: Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. hawn bedeutet Ruhe, Bescheidenheit im Gang. salām bedeutet friedliche Antwort. Stell dir diese Situation vor: Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Welcher nächste Schritt ist gut? Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
           "kind": "intro",
           "age": "9-10"
         }
@@ -10677,21 +10377,6 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Gemeinsam in der Moschee lernen. Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. In Qurʾān 24:36 lernen wir sinngemäß: Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. buyūt bedeutet Häuser; hier die Orte, die der Vers nennt. tasbīḥ bedeutet Allah preisen. Stell dir diese Situation vor: Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Welcher nächste Schritt ist gut? Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "intro",
-          "age": "9-10"
-        }
-      ]
-    },
-    {
       "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Gemeinsame Aufgaben ohne Eitelkeit. Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst. In Qurʾān 5:2 lernen wir sinngemäß: Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde. taʿāwun bedeutet gegenseitige Hilfe. riyāʾ bedeutet das Tun, damit andere es sehen; das Wort steht in diesem Vers nicht. Stell dir diese Situation vor: Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen. Welcher nächste Schritt ist gut? Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -10827,21 +10512,6 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: In schwierigen Momenten Duʿāʾ. Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. In Qurʾān 40:60 lernen wir sinngemäß: Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Der folgende Satz der Seite warnt die, die sich Seiner Anbetung gegenüber großtun. Diesen Satz machen wir nicht zu einem Angstbild. udʿūnī bedeutet ruft Mich an. astaǧib bedeutet Ich erhöre. Stell dir diese Situation vor: Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Welcher nächste Schritt ist gut? Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "intro",
-          "age": "9-10"
-        }
-      ]
-    },
-    {
       "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Jüngere freundlich behandeln. Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam. In Qurʾān 49:10 lernen wir sinngemäß: Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen. rifq bedeutet Behutsamkeit; Unterrichtswort. aḫ bedeutet Geschwister im Glauben. Stell dir diese Situation vor: Ein kleineres Kind kommt die Treppe herauf. Das größere wartet und hält nicht den Arm fest. Welcher nächste Schritt ist gut? Wir üben, den Weg freizumachen und leise zu erklären. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -10866,21 +10536,6 @@
       "contexts": [
         {
           "lessonId": "tawhid-keine-goettliche-macht-fuer-geschoepfe",
-          "kind": "intro",
-          "age": "9-10"
-        }
-      ]
-    },
-    {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. In Qurʾān 99:7 lernen wir sinngemäß: Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten. miṯqāl bedeutet Gewicht. ḏarrah bedeutet ein sehr kleines Stäubchen. Stell dir diese Situation vor: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Welcher nächste Schritt ist gut? Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
           "kind": "intro",
           "age": "9-10"
         }
@@ -10956,21 +10611,6 @@
       "contexts": [
         {
           "lessonId": "adab-mit-gaesten-freundlich",
-          "kind": "intro",
-          "age": "9-10"
-        }
-      ]
-    },
-    {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Muḥammad ﷺ als barmherziger Lehrer. Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. In Qurʾān 3:159 lernen wir sinngemäß: Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Er nennt auch Verzeihen, um Vergebung bitten und Beratung. linta bedeutet du warst mild. raḥmah bedeutet Barmherzigkeit. Stell dir diese Situation vor: Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Welcher nächste Schritt ist gut? Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
           "kind": "intro",
           "age": "9-10"
         }
@@ -11772,21 +11412,6 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Wir lesen Qurʾān 3:159. Der Vers bedeutet sinngemäß: Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Er nennt auch Verzeihen, um Vergebung bitten und Beratung. So kann das im Alltag aussehen: Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Die Aufgabe: Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten. linta bedeutet: du warst mild. raḥmah bedeutet: Barmherzigkeit.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "intro",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
       "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Wir lesen Qurʾān 2:285. Der Vers bedeutet sinngemäß: Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt und zwischen keinem Seiner Gesandten einen Unterschied macht. So kann das im Alltag aussehen: Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht. Die Aufgabe: Wir wiederholen nur die vier Worte des Verses als gelesen und nennen die Sechszahl als bekannte Unterrichtsreihe, die hier nicht neu belegt wurde. malāʾikah bedeutet: Engel. kutub bedeutet: Bücher, Schriften.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -11811,21 +11436,6 @@
       "contexts": [
         {
           "lessonId": "akhlaq-guter-charakter-rueckblick",
-          "kind": "intro",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Wir lesen Qurʾān 1:2. Der Vers bedeutet sinngemäß: Der gespeicherte Vers lautet: Alles Lob gehört Allah, dem Herrn der Welten. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. So kann das im Alltag aussehen: Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Die Aufgabe: Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen. ḥamd bedeutet: Lob. rabb al-ʿālamīn bedeutet: Herr der Welten.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
           "kind": "intro",
           "age": "6-8"
         }
@@ -11922,21 +11532,6 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Eine kleine Hilfe kann vor Allah Gewicht haben. Wir lesen Qurʾān 99:7. Der Vers bedeutet sinngemäß: Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten. So kann das im Alltag aussehen: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Die Aufgabe: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. miṯqāl bedeutet: Gewicht. ḏarrah bedeutet: ein sehr kleines Stäubchen.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "intro",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
       "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Eine vereinbarte Bildschirmzeit halten wir ein. Wir lesen Qurʾān 17:36. Der Vers bedeutet sinngemäß: Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Gehör, Augenlicht und Herz werden danach gefragt. So kann das im Alltag aussehen: Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht. Die Aufgabe: Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein. lā taqfu bedeutet: folge nicht. ʿilm bedeutet: Wissen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -12021,21 +11616,6 @@
       "contexts": [
         {
           "lessonId": "tawhid-im-alltag",
-          "kind": "intro",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Wir lesen Qurʾān 24:36. Der Vers bedeutet sinngemäß: Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. So kann das im Alltag aussehen: Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Die Aufgabe: Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird. buyūt bedeutet: Häuser; hier die Orte, die der Vers nennt. tasbīḥ bedeutet: Allah preisen.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
           "kind": "intro",
           "age": "6-8"
         }
@@ -12477,21 +12057,6 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Wir lesen Qurʾān 40:60. Der Vers bedeutet sinngemäß: Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Der folgende Satz der Seite warnt die, die sich Seiner Anbetung gegenüber großtun. Diesen Satz machen wir nicht zu einem Angstbild. So kann das im Alltag aussehen: Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Die Aufgabe: Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden. udʿūnī bedeutet: ruft Mich an. astaǧib bedeutet: Ich erhöre.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "intro",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
       "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson. Wir lesen Qurʾān 21:7. Der Vers bedeutet sinngemäß: Dieselbe Stelle wie in der Fragestunde sagt: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. So kann das im Alltag aussehen: Ein Kind hat vergessen, ob es schon in der Verbeugung war. Es stoppt und fragt, statt allein eine Extra-Bewegung zu machen. Die Aufgabe: Wir üben den Fragesatz: Ich bin unsicher. Bitte zeig es mir. saǧdat as-sahw bedeutet: die Niederwerfung des Vergessens; hier ausdrücklich nicht belegt. ahl aḏ-ḏikr bedeutet: Leute des Wissens.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -12627,36 +12192,6 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir können etwas verstecken. Wir lesen Qurʾān 6:59. Der Vers bedeutet sinngemäß: Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. So kann das im Alltag aussehen: Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Die Aufgabe: Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es. ġayb bedeutet: das Verborgene. mafātiḥ bedeutet: Schlüssel.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "intro",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Wir lesen Qurʾān 25:63. Der Vers bedeutet sinngemäß: Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. So kann das im Alltag aussehen: Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Die Aufgabe: Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind. hawn bedeutet: Ruhe, Bescheidenheit im Gang. salām bedeutet: friedliche Antwort.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "intro",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
       "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir lernen für die Aufgabe und bitten Allah um Hilfe. Wir lesen Qurʾān 2:45. Der Vers bedeutet sinngemäß: Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet. Es ist wahrlich schwer, außer für die Demütigen. So kann das im Alltag aussehen: Vor einer kleinen Übung liest das Kind noch einmal und spricht danach eine kurze Bitte. Die Aufgabe: Wir tun beides: einen echten Versuch und eine Bitte. Nicht nur eines von beiden. istiʿānah bedeutet: Hilfe suchen. ṣalāh bedeutet: Gebet.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -12681,21 +12216,6 @@
       "contexts": [
         {
           "lessonId": "adab-weniger-verschwenden",
-          "kind": "intro",
-          "age": "6-8"
-        }
-      ]
-    },
-    {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Wir lesen Qurʾān 2:136. Der Vers bedeutet sinngemäß: Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. So kann das im Alltag aussehen: Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Die Aufgabe: Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz. anbiyāʾ bedeutet: Propheten. salām bedeutet: Friede; der Gruß, den wir beim Namen sagen, steht nicht als Formel in diesem Vers.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
           "kind": "intro",
           "age": "6-8"
         }
@@ -13275,22 +12795,6 @@
       ]
     },
     {
-      "text": "Der gespeicherte Vers lautet: Alles Lob gehört Allah, dem Herrn der Welten. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "line",
-          "age": "9-10",
-          "index": 1
-        }
-      ]
-    },
-    {
       "text": "Der gespeicherte Vers lautet: Und du bist wahrlich auf einem gewaltigen Charakter. Die Seite beginnt danach mit einer Erklärung.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -13619,103 +13123,6 @@
           "lessonId": "adab-aeltere-respektvoll",
           "kind": "line",
           "age": "9-10",
-          "index": 1
-        }
-      ]
-    },
-    {
-      "text": "Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "line",
-          "age": "4-5",
-          "index": 1
-        },
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "line",
-          "age": "6-8",
-          "index": 1
-        }
-      ]
-    },
-    {
-      "text": "Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Der folgende Satz der Seite warnt die, die sich Seiner Anbetung gegenüber großtun. Diesen Satz machen wir nicht zu einem Angstbild.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "line",
-          "age": "9-10",
-          "index": 1
-        }
-      ]
-    },
-    {
-      "text": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "line",
-          "age": "4-5",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Stell dir vor: Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Heute üben wir: Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten. Die arabischen Worte spricht die Lehrperson.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "intro",
-          "age": "4-5"
-        }
-      ]
-    },
-    {
-      "text": "Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "line",
-          "age": "9-10",
-          "index": 1
-        },
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "line",
-          "age": "4-5",
-          "index": 1
-        },
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "line",
-          "age": "6-8",
           "index": 1
         }
       ]
@@ -14535,34 +13942,6 @@
       ]
     },
     {
-      "text": "Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "line",
-          "age": "9-10",
-          "index": 1
-        },
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "line",
-          "age": "4-5",
-          "index": 1
-        },
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "line",
-          "age": "6-8",
-          "index": 1
-        }
-      ]
-    },
-    {
       "text": "Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt und zwischen keinem Seiner Gesandten einen Unterschied macht.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -14624,44 +14003,6 @@
           "lessonId": "akhlaq-versoehnung-nach-streit",
           "kind": "line",
           "age": "6-8",
-          "index": 1
-        }
-      ]
-    },
-    {
-      "text": "Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "line",
-          "age": "4-5",
-          "index": 1
-        },
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "line",
-          "age": "6-8",
-          "index": 1
-        }
-      ]
-    },
-    {
-      "text": "Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Er nennt auch Verzeihen, um Vergebung bitten und Beratung.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "line",
-          "age": "9-10",
           "index": 1
         }
       ]
@@ -15241,34 +14582,6 @@
       ]
     },
     {
-      "text": "Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "line",
-          "age": "9-10",
-          "index": 1
-        },
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "line",
-          "age": "4-5",
-          "index": 1
-        },
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "line",
-          "age": "6-8",
-          "index": 1
-        }
-      ]
-    },
-    {
       "text": "Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -15332,42 +14645,6 @@
       "priority": 2,
       "reviewStatus": "not-generated",
       "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "line",
-          "age": "6-8",
-          "index": 3
-        },
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "line",
-          "age": "6-8",
-          "index": 3
-        },
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "line",
-          "age": "6-8",
-          "index": 3
-        },
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "line",
-          "age": "6-8",
-          "index": 3
-        },
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "line",
-          "age": "6-8",
-          "index": 3
-        },
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "line",
-          "age": "6-8",
-          "index": 3
-        },
         {
           "lessonId": "adab-mit-gaesten-freundlich",
           "kind": "line",
@@ -15707,37 +14984,6 @@
       ]
     },
     {
-      "text": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "line",
-          "age": "4-5",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung. Stell dir vor: Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat. Heute üben wir: Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen. Die arabischen Worte spricht die Lehrperson.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "intro",
-          "age": "4-5"
-        }
-      ]
-    },
-    {
       "text": "Die beiden gespeicherten Sätze lauten: Er spricht nicht aus Neigung. Es ist nichts als eine Offenbarung, die eingegeben wird. Das sagt die Stelle über die Rede des Propheten, Friede sei mit ihm.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -15778,28 +15024,6 @@
           "kind": "line",
           "age": "9-10",
           "index": 2
-        }
-      ]
-    },
-    {
-      "text": "Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "line",
-          "age": "4-5",
-          "index": 1
-        },
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "line",
-          "age": "6-8",
-          "index": 1
         }
       ]
     },
@@ -16370,34 +15594,6 @@
           "lessonId": "family-mobbing-erkennen-hilfe-holen",
           "kind": "intro",
           "age": "9-10"
-        }
-      ]
-    },
-    {
-      "text": "Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "line",
-          "age": "9-10",
-          "index": 1
-        },
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "line",
-          "age": "4-5",
-          "index": 1
-        },
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "line",
-          "age": "6-8",
-          "index": 1
         }
       ]
     },
@@ -17398,34 +16594,6 @@
       ]
     },
     {
-      "text": "Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "line",
-          "age": "4-5",
-          "index": 2
-        },
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "line",
-          "age": "6-8",
-          "index": 2
-        },
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "line",
-          "age": "9-10",
-          "index": 2
-        }
-      ]
-    },
-    {
       "text": "Ein Kind hat eine Aufgabe falsch gemacht und darf sie noch einmal versuchen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -17594,34 +16762,6 @@
       ]
     },
     {
-      "text": "Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "line",
-          "age": "4-5",
-          "index": 2
-        },
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "line",
-          "age": "6-8",
-          "index": 2
-        },
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "line",
-          "age": "9-10",
-          "index": 2
-        }
-      ]
-    },
-    {
       "text": "Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -17650,34 +16790,6 @@
       ]
     },
     {
-      "text": "Ein Kind hört die arabischen Worte und sagt danach mit eigenen deutschen Worten, was es verstanden hat.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "line",
-          "age": "4-5",
-          "index": 2
-        },
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "line",
-          "age": "6-8",
-          "index": 2
-        },
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "line",
-          "age": "9-10",
-          "index": 2
-        }
-      ]
-    },
-    {
       "text": "Ein Kind hört die beiden Namen und sagt: Beide gehören Allah, nicht einem Menschen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -17699,34 +16811,6 @@
         },
         {
           "lessonId": "tawhid-rahman-rahim",
-          "kind": "line",
-          "age": "9-10",
-          "index": 2
-        }
-      ]
-    },
-    {
-      "text": "Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "line",
-          "age": "4-5",
-          "index": 2
-        },
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "line",
-          "age": "6-8",
-          "index": 2
-        },
-        {
-          "lessonId": "tawhid-allahs-wissen",
           "kind": "line",
           "age": "9-10",
           "index": 2
@@ -18282,34 +17366,6 @@
       ]
     },
     {
-      "text": "Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "line",
-          "age": "4-5",
-          "index": 2
-        },
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "line",
-          "age": "6-8",
-          "index": 2
-        },
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "line",
-          "age": "9-10",
-          "index": 2
-        }
-      ]
-    },
-    {
       "text": "Ein Kind will das Brot zu einer Figur drücken. Es lässt es liegen und isst einen Bissen oder gibt es zurück.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -18659,37 +17715,6 @@
       "contexts": [
         {
           "lessonId": "iman-fragen-stellen",
-          "kind": "intro",
-          "age": "4-5"
-        }
-      ]
-    },
-    {
-      "text": "Eine kleine Hilfe kann vor Allah Gewicht haben.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "line",
-          "age": "4-5",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Eine kleine Hilfe kann vor Allah Gewicht haben. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Stell dir vor: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Heute üben wir: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. Die arabischen Worte spricht die Lehrperson.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
           "kind": "intro",
           "age": "4-5"
         }
@@ -19114,37 +18139,6 @@
       ]
     },
     {
-      "text": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "line",
-          "age": "4-5",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird. Stell dir vor: Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen. Heute üben wir: Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird. Die arabischen Worte spricht die Lehrperson.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "intro",
-          "age": "4-5"
-        }
-      ]
-    },
-    {
       "text": "Im Kreis ist es eng. Die Kinder rücken einen Handbreit und lassen ein weiteres Kind sitzen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -19166,56 +18160,6 @@
         },
         {
           "lessonId": "adab-anderen-platz-machen",
-          "kind": "line",
-          "age": "9-10",
-          "index": 2
-        }
-      ]
-    },
-    {
-      "text": "Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "line",
-          "age": "4-5",
-          "index": 1
-        },
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "line",
-          "age": "6-8",
-          "index": 1
-        }
-      ]
-    },
-    {
-      "text": "Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "line",
-          "age": "4-5",
-          "index": 2
-        },
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "line",
-          "age": "6-8",
-          "index": 2
-        },
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
           "kind": "line",
           "age": "9-10",
           "index": 2
@@ -19375,34 +18319,6 @@
         },
         {
           "lessonId": "adab-beim-unterricht-aufmerksam",
-          "kind": "line",
-          "age": "9-10",
-          "index": 2
-        }
-      ]
-    },
-    {
-      "text": "Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "line",
-          "age": "4-5",
-          "index": 2
-        },
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "line",
-          "age": "6-8",
-          "index": 2
-        },
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
           "kind": "line",
           "age": "9-10",
           "index": 2
@@ -20064,22 +18980,6 @@
       ]
     },
     {
-      "text": "Qurʾān 1:2 ist die gelesene Stelle.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "line",
-          "age": "6-8",
-          "index": 0
-        }
-      ]
-    },
-    {
       "text": "Qurʾān 1:5 ist die gelesene Stelle.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -20390,22 +19290,6 @@
       ]
     },
     {
-      "text": "Qurʾān 2:136 ist die gelesene Stelle.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "line",
-          "age": "6-8",
-          "index": 0
-        }
-      ]
-    },
-    {
       "text": "Qurʾān 2:172 ist die gelesene Stelle.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -20704,38 +19588,6 @@
       ]
     },
     {
-      "text": "Qurʾān 24:36 ist die gelesene Stelle.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "line",
-          "age": "6-8",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Qurʾān 25:63 ist die gelesene Stelle.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "line",
-          "age": "6-8",
-          "index": 0
-        }
-      ]
-    },
-    {
       "text": "Qurʾān 3:134 ist die gelesene Stelle.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -20745,22 +19597,6 @@
       "contexts": [
         {
           "lessonId": "akhlaq-ruhig-beim-verlieren",
-          "kind": "line",
-          "age": "6-8",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Qurʾān 3:159 ist die gelesene Stelle.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
           "kind": "line",
           "age": "6-8",
           "index": 0
@@ -20931,12 +19767,6 @@
       "priority": 2,
       "reviewStatus": "not-generated",
       "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "line",
-          "age": "6-8",
-          "index": 0
-        },
         {
           "lessonId": "ikhlas-dua-aufrichtig",
           "kind": "line",
@@ -21216,22 +20046,6 @@
       ]
     },
     {
-      "text": "Qurʾān 6:59 ist die gelesene Stelle.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "line",
-          "age": "6-8",
-          "index": 0
-        }
-      ]
-    },
-    {
       "text": "Qurʾān 68:4 ist die gelesene Stelle.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -21488,38 +20302,6 @@
       ]
     },
     {
-      "text": "Qurʾān 99:7 ist die gelesene Stelle.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "line",
-          "age": "6-8",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "line",
-          "age": "9-10",
-          "index": 1
-        }
-      ]
-    },
-    {
       "text": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -21741,22 +20523,6 @@
       ]
     },
     {
-      "text": "Unsere Qurʾān-Stelle ist Qurʾān 1:2.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "line",
-          "age": "9-10",
-          "index": 0
-        }
-      ]
-    },
-    {
       "text": "Unsere Qurʾān-Stelle ist Qurʾān 1:5.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -21964,22 +20730,6 @@
       "contexts": [
         {
           "lessonId": "dua-beim-verlassen-des-hauses",
-          "kind": "line",
-          "age": "9-10",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Unsere Qurʾān-Stelle ist Qurʾān 2:136.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
           "kind": "line",
           "age": "9-10",
           "index": 0
@@ -22237,38 +20987,6 @@
       ]
     },
     {
-      "text": "Unsere Qurʾān-Stelle ist Qurʾān 24:36.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "line",
-          "age": "9-10",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Unsere Qurʾān-Stelle ist Qurʾān 25:63.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "line",
-          "age": "9-10",
-          "index": 0
-        }
-      ]
-    },
-    {
       "text": "Unsere Qurʾān-Stelle ist Qurʾān 3:134.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -22278,22 +20996,6 @@
       "contexts": [
         {
           "lessonId": "akhlaq-ruhig-beim-verlieren",
-          "kind": "line",
-          "age": "9-10",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Unsere Qurʾān-Stelle ist Qurʾān 3:159.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
           "kind": "line",
           "age": "9-10",
           "index": 0
@@ -22464,12 +21166,6 @@
       "priority": 2,
       "reviewStatus": "not-generated",
       "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "line",
-          "age": "9-10",
-          "index": 0
-        },
         {
           "lessonId": "ikhlas-dua-aufrichtig",
           "kind": "line",
@@ -22678,22 +21374,6 @@
       "contexts": [
         {
           "lessonId": "adab-weniger-verschwenden",
-          "kind": "line",
-          "age": "9-10",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Unsere Qurʾān-Stelle ist Qurʾān 6:59.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "tawhid-allahs-wissen",
           "kind": "line",
           "age": "9-10",
           "index": 0
@@ -22934,22 +21614,6 @@
       "contexts": [
         {
           "lessonId": "nafs-herz-mit-guten-taten",
-          "kind": "line",
-          "age": "9-10",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Unsere Qurʾān-Stelle ist Qurʾān 99:7.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
           "kind": "line",
           "age": "9-10",
           "index": 0
@@ -23342,37 +22006,6 @@
       ]
     },
     {
-      "text": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "line",
-          "age": "4-5",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch. Stell dir vor: Ein Kind versteht eine Aufgabe nicht und bittet Allah leise um Hilfe, dann fragt es die Lehrperson. Heute üben wir: Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden. Die arabischen Worte spricht die Lehrperson.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "intro",
-          "age": "4-5"
-        }
-      ]
-    },
-    {
       "text": "Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -23682,34 +22315,6 @@
       ]
     },
     {
-      "text": "Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "line",
-          "age": "9-10",
-          "index": 3
-        },
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "line",
-          "age": "6-8",
-          "index": 3
-        },
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "line",
-          "age": "4-5",
-          "index": 3
-        }
-      ]
-    },
-    {
       "text": "Wir glauben, dass es einen Jüngsten Tag gibt.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -23868,68 +22473,6 @@
           "kind": "line",
           "age": "4-5",
           "index": 2
-        }
-      ]
-    },
-    {
-      "text": "Wir können etwas verstecken.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "line",
-          "age": "4-5",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Wir können etwas verstecken. Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß. Stell dir vor: Ein Kind legt einen Stein hinter den Rücken. Die anderen sehen ihn nicht. Die Stunde sagt: Allahs Wissen ist damit nicht begrenzt. Heute üben wir: Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "intro",
-          "age": "4-5"
-        }
-      ]
-    },
-    {
-      "text": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "line",
-          "age": "4-5",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen. Stell dir vor: Ein Kind hat ein Rätsel gelöst und sagt: Schön, dass es geklappt hat, statt: Ihr seid dumm. Heute üben wir: Wir formulieren einen Satz über einen Erfolg ohne ein schlechtes Wort über ein anderes Kind.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "akhlaq-bescheiden-bleiben",
-          "kind": "intro",
-          "age": "4-5"
         }
       ]
     },
@@ -24211,34 +22754,6 @@
         },
         {
           "lessonId": "tarbiyah-bildschirme-bewusst",
-          "kind": "line",
-          "age": "4-5",
-          "index": 3
-        }
-      ]
-    },
-    {
-      "text": "Wir nennen ein kleines Ding, das Menschen gerade nicht sehen, und wiederholen: Allah weiß es.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "line",
-          "age": "9-10",
-          "index": 3
-        },
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "line",
-          "age": "6-8",
-          "index": 3
-        },
-        {
-          "lessonId": "tawhid-allahs-wissen",
           "kind": "line",
           "age": "4-5",
           "index": 3
@@ -24718,59 +23233,6 @@
       ]
     },
     {
-      "text": "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "line",
-          "age": "4-5",
-          "index": 0
-        }
-      ]
-    },
-    {
-      "text": "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen. Stell dir vor: Jemand sagt einen Prophetnamen achtlos. Das Kind wiederholt den Namen ruhig und mit Respekt. Heute üben wir: Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz. Die arabischen Worte spricht die Lehrperson.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "intro",
-          "age": "4-5"
-        }
-      ]
-    },
-    {
-      "text": "Wir sprechen drei im Vers genannte Namen langsam und ohne einen Witz.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "line",
-          "age": "9-10",
-          "index": 3
-        },
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "line",
-          "age": "4-5",
-          "index": 3
-        }
-      ]
-    },
-    {
       "text": "Wir sprechen eine Bitte ruhig und meinen sie ernst.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -24817,28 +23279,6 @@
         },
         {
           "lessonId": "ikhlas-dua-aufrichtig",
-          "kind": "line",
-          "age": "4-5",
-          "index": 3
-        }
-      ]
-    },
-    {
-      "text": "Wir sprechen eine kurze eigene Bitte auf Deutsch und nennen danach die Person, die wir bei einer echten Not holen würden.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "line",
-          "age": "9-10",
-          "index": 3
-        },
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
           "kind": "line",
           "age": "4-5",
           "index": 3
@@ -24998,28 +23438,6 @@
         },
         {
           "lessonId": "tawhid-vertrauen-und-bemuehen",
-          "kind": "line",
-          "age": "4-5",
-          "index": 3
-        }
-      ]
-    },
-    {
-      "text": "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "line",
-          "age": "9-10",
-          "index": 3
-        },
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
           "kind": "line",
           "age": "4-5",
           "index": 3
@@ -25485,28 +23903,6 @@
       ]
     },
     {
-      "text": "Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "line",
-          "age": "9-10",
-          "index": 3
-        },
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "line",
-          "age": "4-5",
-          "index": 3
-        }
-      ]
-    },
-    {
       "text": "Wir üben einen Glückwunsch ohne einen Witz über das Bild.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -25726,28 +24122,6 @@
         },
         {
           "lessonId": "adab-weniger-verschwenden",
-          "kind": "line",
-          "age": "4-5",
-          "index": 3
-        }
-      ]
-    },
-    {
-      "text": "Wir üben, leise Platz zu machen und den Raum so zu verlassen, dass niemand angestoßen wird.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "line",
-          "age": "9-10",
-          "index": 3
-        },
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
           "kind": "line",
           "age": "4-5",
           "index": 3
@@ -26182,28 +24556,6 @@
       ]
     },
     {
-      "text": "Wir zeigen auf die arabische Zeile und danach auf die deutsche Erklärung und sagen: Das eine ist der Vers, das andere ist unsere Hilfe zum Verstehen.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "line",
-          "age": "9-10",
-          "index": 3
-        },
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "line",
-          "age": "4-5",
-          "index": 3
-        }
-      ]
-    },
-    {
       "text": "Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -26397,34 +24749,6 @@
       ]
     },
     {
-      "text": "Zwei Kinder wollen denselben Platz. Sie rücken zusammen, statt zu schubsen.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "line",
-          "age": "4-5",
-          "index": 2
-        },
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "line",
-          "age": "6-8",
-          "index": 2
-        },
-        {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "line",
-          "age": "9-10",
-          "index": 2
-        }
-      ]
-    },
-    {
       "text": "Zwischen zwei Niederwerfungen gibt es ein kurzes Sitzen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -26483,6 +24807,2262 @@
           "lessonId": "tawhid-bedeutung-ibadah",
           "kind": "intro",
           "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Heute sehen wir zwei Zeilen. Eine ist auf Arabisch geschrieben, die andere auf Deutsch. Der arabische Qurʾān-Vers steht oben in seiner eigenen Zeile. Auf Deutsch erklären wir seinen Sinn: Alles Lob gehört Allah, dem Herrn der Welten. Maryam hört aufmerksam zu. Dann zeigt sie mit dem Finger auf die arabische Zeile und danach auf die deutschen Wörter. Sie erkennt: Das sind zwei verschiedene Sprachen. Jetzt bist du dran. Zeige auf beide Zeilen und sage: Das ist der arabische Qurʾān; das ist die deutsche Erklärung. Mā schāʾ Allāh!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Heute sehen wir zwei Zeilen. Eine ist auf Arabisch geschrieben, die andere auf Deutsch.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "line",
+          "age": "4-5",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Der arabische Qurʾān-Vers steht oben in seiner eigenen Zeile. Auf Deutsch erklären wir seinen Sinn: Alles Lob gehört Allah, dem Herrn der Welten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "line",
+          "age": "4-5",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Maryam hört aufmerksam zu. Dann zeigt sie mit dem Finger auf die arabische Zeile und danach auf die deutschen Wörter. Sie erkennt: Das sind zwei verschiedene Sprachen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "line",
+          "age": "4-5",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Jetzt bist du dran. Zeige auf beide Zeilen und sage: Das ist der arabische Qurʾān; das ist die deutsche Erklärung. Mā schāʾ Allāh!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "line",
+          "age": "4-5",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Arabischen Text und Übersetzung unterscheiden. Assalāmu ʿalaikum, liebes Kind! Heute sehen wir zwei Zeilen. Eine ist auf Arabisch geschrieben, die andere auf Deutsch. Der arabische Qurʾān-Vers steht oben in seiner eigenen Zeile. Auf Deutsch erklären wir seinen Sinn: Alles Lob gehört Allah, dem Herrn der Welten. Maryam hört aufmerksam zu. Dann zeigt sie mit dem Finger auf die arabische Zeile und danach auf die deutschen Wörter. Sie erkennt: Das sind zwei verschiedene Sprachen. Jetzt bist du dran. Zeige auf beide Zeilen und sage: Das ist der arabische Qurʾān; das ist die deutsche Erklärung. Mā schāʾ Allāh!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Heute schauen wir genau hin: Was ist ein Qurʾān-Vers, und was hilft uns, ihn zu verstehen? In al-Fātiḥah 1:2 steht oben der arabische Originalvers. Die deutsche Sinnwiedergabe lautet: Alles Lob gebührt Allah, dem Herrn der Welten. Ḥamd heißt Lob. Yūsuf zeigt seiner Schwester eine Karte mit arabischen Buchstaben und eine zweite Karte auf Deutsch. Sie ordnen die Karten: Der Qurʾān wurde auf Arabisch offenbart; die deutsche Karte gibt seinen Sinn wieder. Sortiere ebenfalls beide Karten. Nenne danach eine Sache, für die du Allah lobst, und sage deutlich: Mein Beispiel steht nicht wörtlich in diesem Vers. Allāhumma bārik!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Heute schauen wir genau hin: Was ist ein Qurʾān-Vers, und was hilft uns, ihn zu verstehen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "line",
+          "age": "6-8",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "In al-Fātiḥah 1:2 steht oben der arabische Originalvers. Die deutsche Sinnwiedergabe lautet: Alles Lob gebührt Allah, dem Herrn der Welten. Ḥamd heißt Lob.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "line",
+          "age": "6-8",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Yūsuf zeigt seiner Schwester eine Karte mit arabischen Buchstaben und eine zweite Karte auf Deutsch. Sie ordnen die Karten: Der Qurʾān wurde auf Arabisch offenbart; die deutsche Karte gibt seinen Sinn wieder.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "line",
+          "age": "6-8",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Sortiere ebenfalls beide Karten. Nenne danach eine Sache, für die du Allah lobst, und sage deutlich: Mein Beispiel steht nicht wörtlich in diesem Vers. Allāhumma bārik!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "line",
+          "age": "6-8",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Arabischen Text und Übersetzung unterscheiden. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Heute schauen wir genau hin: Was ist ein Qurʾān-Vers, und was hilft uns, ihn zu verstehen? In al-Fātiḥah 1:2 steht oben der arabische Originalvers. Die deutsche Sinnwiedergabe lautet: Alles Lob gebührt Allah, dem Herrn der Welten. Ḥamd heißt Lob. Yūsuf zeigt seiner Schwester eine Karte mit arabischen Buchstaben und eine zweite Karte auf Deutsch. Sie ordnen die Karten: Der Qurʾān wurde auf Arabisch offenbart; die deutsche Karte gibt seinen Sinn wieder. Sortiere ebenfalls beide Karten. Nenne danach eine Sache, für die du Allah lobst, und sage deutlich: Mein Beispiel steht nicht wörtlich in diesem Vers. Allāhumma bārik!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "audio",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wer aus dem Qurʾān lernt, achtet darauf, nichts Eigenes als Allahs Wort auszugeben. Lies den arabischen Originaltext im Qurʾān-Feld von al-Fātiḥah 1:2. Sinngemäß bedeutet er: Alles Lob gebührt Allah, dem Herrn der Welten. Rabb heißt Herr; al-ʿālamīn bezeichnet die Welten. Auf dem Tisch liegen drei Karten: der arabische Vers, die deutsche Sinnwiedergabe und der Satz »Ich danke Allah für meinen heutigen Tag«. Die dritte Karte ist unsere eigene Anwendung, kein Qurʾān-Zitat. Ordne alle drei Karten begründet zu. Erkläre, warum eine hilfreiche Übersetzung nicht einfach mit dem arabischen Originaltext gleichgesetzt werden darf. Assalāmu ʿalaikum!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wer aus dem Qurʾān lernt, achtet darauf, nichts Eigenes als Allahs Wort auszugeben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "line",
+          "age": "9-10",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Lies den arabischen Originaltext im Qurʾān-Feld von al-Fātiḥah 1:2. Sinngemäß bedeutet er: Alles Lob gebührt Allah, dem Herrn der Welten. Rabb heißt Herr; al-ʿālamīn bezeichnet die Welten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "line",
+          "age": "9-10",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Auf dem Tisch liegen drei Karten: der arabische Vers, die deutsche Sinnwiedergabe und der Satz »Ich danke Allah für meinen heutigen Tag«. Die dritte Karte ist unsere eigene Anwendung, kein Qurʾān-Zitat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "line",
+          "age": "9-10",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Ordne alle drei Karten begründet zu. Erkläre, warum eine hilfreiche Übersetzung nicht einfach mit dem arabischen Originaltext gleichgesetzt werden darf. Assalāmu ʿalaikum!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "line",
+          "age": "9-10",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Arabischen Text und Übersetzung unterscheiden. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wer aus dem Qurʾān lernt, achtet darauf, nichts Eigenes als Allahs Wort auszugeben. Lies den arabischen Originaltext im Qurʾān-Feld von al-Fātiḥah 1:2. Sinngemäß bedeutet er: Alles Lob gebührt Allah, dem Herrn der Welten. Rabb heißt Herr; al-ʿālamīn bezeichnet die Welten. Auf dem Tisch liegen drei Karten: der arabische Vers, die deutsche Sinnwiedergabe und der Satz »Ich danke Allah für meinen heutigen Tag«. Die dritte Karte ist unsere eigene Anwendung, kein Qurʾān-Zitat. Ordne alle drei Karten begründet zu. Erkläre, warum eine hilfreiche Übersetzung nicht einfach mit dem arabischen Originaltext gleichgesetzt werden darf. Assalāmu ʿalaikum!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Allah erzählt im Qurʾān, dass der Prophet Muḥammad ﷺ mild zu den Menschen war. Qurʾān 3:159 sagt uns: Allah schenkte ihm Barmherzigkeit und Freundlichkeit. Milde bedeutet, nicht grob und hart mit Menschen umzugehen. Im Lernkreis möchte Zaynab etwas erzählen. Alle lassen sie freundlich ausreden. Das ist unser eigenes Beispiel aus einem Lernkreis, keine Geschichte aus dem Leben des Propheten. Übe den Satz: »Erzähl ruhig weiter, ich höre dir zu.« Warte danach, bis dein Gegenüber fertig ist. Mā schāʾ Allāh!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Allah erzählt im Qurʾān, dass der Prophet Muḥammad ﷺ mild zu den Menschen war.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "line",
+          "age": "4-5",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 3:159 sagt uns: Allah schenkte ihm Barmherzigkeit und Freundlichkeit. Milde bedeutet, nicht grob und hart mit Menschen umzugehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "line",
+          "age": "4-5",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Im Lernkreis möchte Zaynab etwas erzählen. Alle lassen sie freundlich ausreden. Das ist unser eigenes Beispiel aus einem Lernkreis, keine Geschichte aus dem Leben des Propheten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "line",
+          "age": "4-5",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Übe den Satz: »Erzähl ruhig weiter, ich höre dir zu.« Warte danach, bis dein Gegenüber fertig ist. Mā schāʾ Allāh!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "line",
+          "age": "4-5",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Muḥammad ﷺ als barmherziger Lehrer. Assalāmu ʿalaikum, liebes Kind! Allah erzählt im Qurʾān, dass der Prophet Muḥammad ﷺ mild zu den Menschen war. Qurʾān 3:159 sagt uns: Allah schenkte ihm Barmherzigkeit und Freundlichkeit. Milde bedeutet, nicht grob und hart mit Menschen umzugehen. Im Lernkreis möchte Zaynab etwas erzählen. Alle lassen sie freundlich ausreden. Das ist unser eigenes Beispiel aus einem Lernkreis, keine Geschichte aus dem Leben des Propheten. Übe den Satz: »Erzähl ruhig weiter, ich höre dir zu.« Warte danach, bis dein Gegenüber fertig ist. Mā schāʾ Allāh!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Heute lernen wir, warum ein freundlicher Umgang mit Menschen wichtig ist. Allah erklärt in Qurʾān 3:159 sinngemäß: Durch Allahs Barmherzigkeit war der Prophet ﷺ sanft im Umgang. Wäre er grob und hartherzig gewesen, hätten sich die Menschen von ihm entfernt. Raḥmah heißt Barmherzigkeit. Ḥamzah versteht die Aufgabe noch nicht. Die Lehrperson verspottet ihn nicht, sondern erklärt geduldig weiter. Das ist unser erfundenes Beispiel für Milde, kein überlieferter Vorfall. Spielt nur eine freundliche Übung: Ein Kind fragt »Kannst du mir helfen?«, das andere antwortet respektvoll. Niemand wird bloßgestellt. Allāhumma bārik!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Heute lernen wir, warum ein freundlicher Umgang mit Menschen wichtig ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "line",
+          "age": "6-8",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Allah erklärt in Qurʾān 3:159 sinngemäß: Durch Allahs Barmherzigkeit war der Prophet ﷺ sanft im Umgang. Wäre er grob und hartherzig gewesen, hätten sich die Menschen von ihm entfernt. Raḥmah heißt Barmherzigkeit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "line",
+          "age": "6-8",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Ḥamzah versteht die Aufgabe noch nicht. Die Lehrperson verspottet ihn nicht, sondern erklärt geduldig weiter. Das ist unser erfundenes Beispiel für Milde, kein überlieferter Vorfall.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "line",
+          "age": "6-8",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Spielt nur eine freundliche Übung: Ein Kind fragt »Kannst du mir helfen?«, das andere antwortet respektvoll. Niemand wird bloßgestellt. Allāhumma bārik!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "line",
+          "age": "6-8",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Muḥammad ﷺ als barmherziger Lehrer. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Heute lernen wir, warum ein freundlicher Umgang mit Menschen wichtig ist. Allah erklärt in Qurʾān 3:159 sinngemäß: Durch Allahs Barmherzigkeit war der Prophet ﷺ sanft im Umgang. Wäre er grob und hartherzig gewesen, hätten sich die Menschen von ihm entfernt. Raḥmah heißt Barmherzigkeit. Ḥamzah versteht die Aufgabe noch nicht. Die Lehrperson verspottet ihn nicht, sondern erklärt geduldig weiter. Das ist unser erfundenes Beispiel für Milde, kein überlieferter Vorfall. Spielt nur eine freundliche Übung: Ein Kind fragt »Kannst du mir helfen?«, das andere antwortet respektvoll. Niemand wird bloßgestellt. Allāhumma bārik!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "audio",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wir lesen eine echte Aussage des Qurʾān über den Umgang des Propheten ﷺ mit den Menschen. Qurʾān 3:159 führt seine Milde auf Allahs Barmherzigkeit zurück. Der Vers nennt außerdem Verzeihen, die Bitte um Vergebung, Beratung und das Vertrauen auf Allah nach einem Entschluss. Drei Kinder versuchen, ein gemeinsames Lernprojekt zu planen. Sie sind uneinig und fragen einander nach ihren Ideen, statt sich lächerlich zu machen. Diese Situation veranschaulicht Beratung; sie ist kein historischer Sīrah-Bericht. Schreibe zwei Aussagen aus dem Vers und eine eigene Alltagsanwendung auf. Begründe, warum eine erfundene Szene nicht als authentische Geschichte über den Propheten weitererzählt werden darf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wir lesen eine echte Aussage des Qurʾān über den Umgang des Propheten ﷺ mit den Menschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "line",
+          "age": "9-10",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 3:159 führt seine Milde auf Allahs Barmherzigkeit zurück. Der Vers nennt außerdem Verzeihen, die Bitte um Vergebung, Beratung und das Vertrauen auf Allah nach einem Entschluss.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "line",
+          "age": "9-10",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Drei Kinder versuchen, ein gemeinsames Lernprojekt zu planen. Sie sind uneinig und fragen einander nach ihren Ideen, statt sich lächerlich zu machen. Diese Situation veranschaulicht Beratung; sie ist kein historischer Sīrah-Bericht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "line",
+          "age": "9-10",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Schreibe zwei Aussagen aus dem Vers und eine eigene Alltagsanwendung auf. Begründe, warum eine erfundene Szene nicht als authentische Geschichte über den Propheten weitererzählt werden darf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "line",
+          "age": "9-10",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Muḥammad ﷺ als barmherziger Lehrer. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wir lesen eine echte Aussage des Qurʾān über den Umgang des Propheten ﷺ mit den Menschen. Qurʾān 3:159 führt seine Milde auf Allahs Barmherzigkeit zurück. Der Vers nennt außerdem Verzeihen, die Bitte um Vergebung, Beratung und das Vertrauen auf Allah nach einem Entschluss. Drei Kinder versuchen, ein gemeinsames Lernprojekt zu planen. Sie sind uneinig und fragen einander nach ihren Ideen, statt sich lächerlich zu machen. Diese Situation veranschaulicht Beratung; sie ist kein historischer Sīrah-Bericht. Schreibe zwei Aussagen aus dem Vers und eine eigene Alltagsanwendung auf. Begründe, warum eine erfundene Szene nicht als authentische Geschichte über den Propheten weitererzählt werden darf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Wenn du etwas schwer findest, darfst du Allah bitten und jemanden um Hilfe fragen. Allah sagt in Qurʾān 40:60 sinngemäß: »Ruft Mich an, so erhöre Ich euch.« Duʿāʾ bedeutet, Allah zu bitten. Bilāl findet seine Tasche nicht. Er bittet Allah um Hilfe und erzählt seiner Mama oder einer anderen sicheren erwachsenen Person davon. Sage eine kleine Bitte mit deinen eigenen Worten oder denke sie still. Dann zeige, an wen du dich wenden kannst. Wenn dich jemand verletzt, hole sofort Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Wenn du etwas schwer findest, darfst du Allah bitten und jemanden um Hilfe fragen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "line",
+          "age": "4-5",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Allah sagt in Qurʾān 40:60 sinngemäß: »Ruft Mich an, so erhöre Ich euch.« Duʿāʾ bedeutet, Allah zu bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "line",
+          "age": "4-5",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Bilāl findet seine Tasche nicht. Er bittet Allah um Hilfe und erzählt seiner Mama oder einer anderen sicheren erwachsenen Person davon.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "line",
+          "age": "4-5",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Sage eine kleine Bitte mit deinen eigenen Worten oder denke sie still. Dann zeige, an wen du dich wenden kannst. Wenn dich jemand verletzt, hole sofort Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "line",
+          "age": "4-5",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "In schwierigen Momenten Duʿāʾ. Assalāmu ʿalaikum, liebes Kind! Wenn du etwas schwer findest, darfst du Allah bitten und jemanden um Hilfe fragen. Allah sagt in Qurʾān 40:60 sinngemäß: »Ruft Mich an, so erhöre Ich euch.« Duʿāʾ bedeutet, Allah zu bitten. Bilāl findet seine Tasche nicht. Er bittet Allah um Hilfe und erzählt seiner Mama oder einer anderen sicheren erwachsenen Person davon. Sage eine kleine Bitte mit deinen eigenen Worten oder denke sie still. Dann zeige, an wen du dich wenden kannst. Wenn dich jemand verletzt, hole sofort Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Manchmal sind wir unsicher oder traurig. Mit Allah sprechen und menschliche Hilfe annehmen passt zusammen. In Qurʾān 40:60 fordert Allah dazu auf, Ihn anzurufen, und verheißt Erhörung. Duʿāʾ ist die Bitte an Allah. Wir erfinden für diesen Vers keine feste arabische Notfallformel. Amīnah ist mit ihrer Aufgabe überfordert. Sie bittet Allah mit eigenen Worten um Hilfe und sagt ihrer Lehrperson, bei welchem Teil sie nicht weiterkommt. Formuliere eine eigene kurze deutsche Bitte. Überlege danach: Welche zwei sicheren Erwachsenen können dir helfen? Bei Gefahr suchst du Schutz, statt allein zu warten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Manchmal sind wir unsicher oder traurig. Mit Allah sprechen und menschliche Hilfe annehmen passt zusammen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "line",
+          "age": "6-8",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "In Qurʾān 40:60 fordert Allah dazu auf, Ihn anzurufen, und verheißt Erhörung. Duʿāʾ ist die Bitte an Allah. Wir erfinden für diesen Vers keine feste arabische Notfallformel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "line",
+          "age": "6-8",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Amīnah ist mit ihrer Aufgabe überfordert. Sie bittet Allah mit eigenen Worten um Hilfe und sagt ihrer Lehrperson, bei welchem Teil sie nicht weiterkommt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "line",
+          "age": "6-8",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Formuliere eine eigene kurze deutsche Bitte. Überlege danach: Welche zwei sicheren Erwachsenen können dir helfen? Bei Gefahr suchst du Schutz, statt allein zu warten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "line",
+          "age": "6-8",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "In schwierigen Momenten Duʿāʾ. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Manchmal sind wir unsicher oder traurig. Mit Allah sprechen und menschliche Hilfe annehmen passt zusammen. In Qurʾān 40:60 fordert Allah dazu auf, Ihn anzurufen, und verheißt Erhörung. Duʿāʾ ist die Bitte an Allah. Wir erfinden für diesen Vers keine feste arabische Notfallformel. Amīnah ist mit ihrer Aufgabe überfordert. Sie bittet Allah mit eigenen Worten um Hilfe und sagt ihrer Lehrperson, bei welchem Teil sie nicht weiterkommt. Formuliere eine eigene kurze deutsche Bitte. Überlege danach: Welche zwei sicheren Erwachsenen können dir helfen? Bei Gefahr suchst du Schutz, statt allein zu warten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "audio",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wir lernen heute, aufrichtig zu Allah zu beten und in schwierigen Situationen klug zu handeln. Qurʾān 40:60 lädt zum Bittgebet ein. Der Vers warnt zugleich vor Hochmut gegenüber der Anbetung Allahs. Wir verwandeln diese ernste Warnung nicht in ein Angstbild und erfinden keine feste Duʿāʾ-Formel. Ein Kind wird wiederholt verspottet. Es kann Allah um Hilfe bitten, aber es muss sich dem verletzenden Verhalten nicht allein stellen. Es sagt einer vertrauenswürdigen erwachsenen Person Bescheid und sucht Schutz. Unterscheide drei Sätze: die Aufforderung zum Duʿāʾ im Vers, deine selbst formulierte Bitte und zwei sichere Schritte gegen Mobbing. Was ist Offenbarung, was ist eigene Übung?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wir lernen heute, aufrichtig zu Allah zu beten und in schwierigen Situationen klug zu handeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "line",
+          "age": "9-10",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 40:60 lädt zum Bittgebet ein. Der Vers warnt zugleich vor Hochmut gegenüber der Anbetung Allahs. Wir verwandeln diese ernste Warnung nicht in ein Angstbild und erfinden keine feste Duʿāʾ-Formel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "line",
+          "age": "9-10",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Ein Kind wird wiederholt verspottet. Es kann Allah um Hilfe bitten, aber es muss sich dem verletzenden Verhalten nicht allein stellen. Es sagt einer vertrauenswürdigen erwachsenen Person Bescheid und sucht Schutz.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "line",
+          "age": "9-10",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Unterscheide drei Sätze: die Aufforderung zum Duʿāʾ im Vers, deine selbst formulierte Bitte und zwei sichere Schritte gegen Mobbing. Was ist Offenbarung, was ist eigene Übung?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "line",
+          "age": "9-10",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "In schwierigen Momenten Duʿāʾ. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wir lernen heute, aufrichtig zu Allah zu beten und in schwierigen Situationen klug zu handeln. Qurʾān 40:60 lädt zum Bittgebet ein. Der Vers warnt zugleich vor Hochmut gegenüber der Anbetung Allahs. Wir verwandeln diese ernste Warnung nicht in ein Angstbild und erfinden keine feste Duʿāʾ-Formel. Ein Kind wird wiederholt verspottet. Es kann Allah um Hilfe bitten, aber es muss sich dem verletzenden Verhalten nicht allein stellen. Es sagt einer vertrauenswürdigen erwachsenen Person Bescheid und sucht Schutz. Unterscheide drei Sätze: die Aufforderung zum Duʿāʾ im Vers, deine selbst formulierte Bitte und zwei sichere Schritte gegen Mobbing. Was ist Offenbarung, was ist eigene Übung?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Heute besuchen wir in unserem Beispiel eine Moschee, in der Menschen Allah gedenken. Qurʾān 24:36 spricht von Häusern, in denen Allahs Name genannt und Er gepriesen wird. Darum behandeln wir solche Orte mit Respekt. Zwei Kinder wollen bei ihrer Familie sitzen. Sie drängeln nicht, sondern fragen freundlich, ob ein Platz frei ist. Übe den Satz: »Darf ich mich hier hinsetzen?« Wenn es eng wird, fragst du einen sicheren Erwachsenen. Mā schāʾ Allāh!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Heute besuchen wir in unserem Beispiel eine Moschee, in der Menschen Allah gedenken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "line",
+          "age": "4-5",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 24:36 spricht von Häusern, in denen Allahs Name genannt und Er gepriesen wird. Darum behandeln wir solche Orte mit Respekt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "line",
+          "age": "4-5",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Zwei Kinder wollen bei ihrer Familie sitzen. Sie drängeln nicht, sondern fragen freundlich, ob ein Platz frei ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "line",
+          "age": "4-5",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Übe den Satz: »Darf ich mich hier hinsetzen?« Wenn es eng wird, fragst du einen sicheren Erwachsenen. Mā schāʾ Allāh!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "line",
+          "age": "4-5",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Gemeinsam in der Moschee lernen. Assalāmu ʿalaikum, liebes Kind! Heute besuchen wir in unserem Beispiel eine Moschee, in der Menschen Allah gedenken. Qurʾān 24:36 spricht von Häusern, in denen Allahs Name genannt und Er gepriesen wird. Darum behandeln wir solche Orte mit Respekt. Zwei Kinder wollen bei ihrer Familie sitzen. Sie drängeln nicht, sondern fragen freundlich, ob ein Platz frei ist. Übe den Satz: »Darf ich mich hier hinsetzen?« Wenn es eng wird, fragst du einen sicheren Erwachsenen. Mā schāʾ Allāh!",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! In der Moschee lernen Menschen und beten gemeinsam. Dabei brauchen alle Rücksicht. Qurʾān 24:36 spricht von Häusern, in denen Allahs Name erwähnt wird. Ibn Kaṯīr erklärt diese Häuser auch im Zusammenhang mit den Moscheen. Tasbīḥ bedeutet, Allah zu preisen. Eine Familie möchte durch die Tür gehen. Andere Kinder machen den Weg frei, ohne jemanden zu schubsen. Wir nehmen Rücksicht, damit alle gut vorbeikommen. Überlege zwei höfliche Sätze am Eingang. Welche Regeln die Moschee vor Ort hat, erfahren wir von den Verantwortlichen; eine Schuhablage-Pflicht steht nicht in diesem Vers.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! In der Moschee lernen Menschen und beten gemeinsam. Dabei brauchen alle Rücksicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "line",
+          "age": "6-8",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 24:36 spricht von Häusern, in denen Allahs Name erwähnt wird. Ibn Kaṯīr erklärt diese Häuser auch im Zusammenhang mit den Moscheen. Tasbīḥ bedeutet, Allah zu preisen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "line",
+          "age": "6-8",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Eine Familie möchte durch die Tür gehen. Andere Kinder machen den Weg frei, ohne jemanden zu schubsen. Wir nehmen Rücksicht, damit alle gut vorbeikommen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "line",
+          "age": "6-8",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Überlege zwei höfliche Sätze am Eingang. Welche Regeln die Moschee vor Ort hat, erfahren wir von den Verantwortlichen; eine Schuhablage-Pflicht steht nicht in diesem Vers.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "line",
+          "age": "6-8",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Gemeinsam in der Moschee lernen. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! In der Moschee lernen Menschen und beten gemeinsam. Dabei brauchen alle Rücksicht. Qurʾān 24:36 spricht von Häusern, in denen Allahs Name erwähnt wird. Ibn Kaṯīr erklärt diese Häuser auch im Zusammenhang mit den Moscheen. Tasbīḥ bedeutet, Allah zu preisen. Eine Familie möchte durch die Tür gehen. Andere Kinder machen den Weg frei, ohne jemanden zu schubsen. Wir nehmen Rücksicht, damit alle gut vorbeikommen. Überlege zwei höfliche Sätze am Eingang. Welche Regeln die Moschee vor Ort hat, erfahren wir von den Verantwortlichen; eine Schuhablage-Pflicht steht nicht in diesem Vers.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "audio",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Heute trennen wir den Qurʾān-Beleg und die praktische Ordnung in einer Moschee. Qurʾān 24:36 nennt Häuser, in denen Allahs Name erwähnt und Er gepriesen wird. Ibn Kaṯīr deutet diese Stelle auf Moscheen und erklärt, dass unangemessene Worte und Taten dort zu vermeiden sind. Nach dem Unterricht bleibt eine Lerngruppe mitten im Eingang stehen. Andere Besucher kommen nicht vorbei. Die Gruppe rückt zur Seite und lässt den Weg frei. Dies ist unser eigenes modernes Beispiel, kein Bericht über einen Ṣaḥābī. Ordne drei Sätze: »Dort wird Allahs Name genannt«, »Wir halten die Tür frei« und »Jede Moschee muss dieselbe Schuhablage haben«. Was steht im Vers, was ist unsere Rücksichtnahme, und was darf man nicht pauschal behaupten?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Heute trennen wir den Qurʾān-Beleg und die praktische Ordnung in einer Moschee.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "line",
+          "age": "9-10",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 24:36 nennt Häuser, in denen Allahs Name erwähnt und Er gepriesen wird. Ibn Kaṯīr deutet diese Stelle auf Moscheen und erklärt, dass unangemessene Worte und Taten dort zu vermeiden sind.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "line",
+          "age": "9-10",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Nach dem Unterricht bleibt eine Lerngruppe mitten im Eingang stehen. Andere Besucher kommen nicht vorbei. Die Gruppe rückt zur Seite und lässt den Weg frei. Dies ist unser eigenes modernes Beispiel, kein Bericht über einen Ṣaḥābī.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "line",
+          "age": "9-10",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Ordne drei Sätze: »Dort wird Allahs Name genannt«, »Wir halten die Tür frei« und »Jede Moschee muss dieselbe Schuhablage haben«. Was steht im Vers, was ist unsere Rücksichtnahme, und was darf man nicht pauschal behaupten?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "line",
+          "age": "9-10",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Gemeinsam in der Moschee lernen. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Heute trennen wir den Qurʾān-Beleg und die praktische Ordnung in einer Moschee. Qurʾān 24:36 nennt Häuser, in denen Allahs Name erwähnt und Er gepriesen wird. Ibn Kaṯīr deutet diese Stelle auf Moscheen und erklärt, dass unangemessene Worte und Taten dort zu vermeiden sind. Nach dem Unterricht bleibt eine Lerngruppe mitten im Eingang stehen. Andere Besucher kommen nicht vorbei. Die Gruppe rückt zur Seite und lässt den Weg frei. Dies ist unser eigenes modernes Beispiel, kein Bericht über einen Ṣaḥābī. Ordne drei Sätze: »Dort wird Allahs Name genannt«, »Wir halten die Tür frei« und »Jede Moschee muss dieselbe Schuhablage haben«. Was steht im Vers, was ist unsere Rücksichtnahme, und was darf man nicht pauschal behaupten?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Schau einmal aus dem Fenster. Vielleicht siehst du einen Baum mit vielen Blättern. Kannst du jedes Blatt zählen? Das ist gar nicht leicht. In Qurʾān 6:59 sagt Allah sinngemäß, dass Er sogar von jedem Blatt weiß, das herunterfällt. Allah kennt auch das, was wir Menschen nicht wissen. Das Verborgene heißt auf Arabisch ġayb. Maryam entdeckt unter einem großen Blatt einen kleinen Käfer. Vorher hatte sie ihn nicht gesehen. Sie staunt: Menschen entdecken Dinge erst nach und nach. Allahs Wissen ist nicht so begrenzt wie unseres. Das ist eine erfundene Lernszene. Zeige auf ein Blatt und erzähle, was du daran beobachten kannst. Dann sage: Allah weiß mehr als ich. Du darfst fragen und lernen. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Schau einmal aus dem Fenster. Vielleicht siehst du einen Baum mit vielen Blättern. Kannst du jedes Blatt zählen? Das ist gar nicht leicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "line",
+          "age": "4-5",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "In Qurʾān 6:59 sagt Allah sinngemäß, dass Er sogar von jedem Blatt weiß, das herunterfällt. Allah kennt auch das, was wir Menschen nicht wissen. Das Verborgene heißt auf Arabisch ġayb.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "line",
+          "age": "4-5",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Maryam entdeckt unter einem großen Blatt einen kleinen Käfer. Vorher hatte sie ihn nicht gesehen. Sie staunt: Menschen entdecken Dinge erst nach und nach. Allahs Wissen ist nicht so begrenzt wie unseres. Das ist eine erfundene Lernszene.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "line",
+          "age": "4-5",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Zeige auf ein Blatt und erzähle, was du daran beobachten kannst. Dann sage: Allah weiß mehr als ich. Du darfst fragen und lernen. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "line",
+          "age": "4-5",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Allahs Wissen verstehen. Assalāmu ʿalaikum, liebes Kind! Schau einmal aus dem Fenster. Vielleicht siehst du einen Baum mit vielen Blättern. Kannst du jedes Blatt zählen? Das ist gar nicht leicht. In Qurʾān 6:59 sagt Allah sinngemäß, dass Er sogar von jedem Blatt weiß, das herunterfällt. Allah kennt auch das, was wir Menschen nicht wissen. Das Verborgene heißt auf Arabisch ġayb. Maryam entdeckt unter einem großen Blatt einen kleinen Käfer. Vorher hatte sie ihn nicht gesehen. Sie staunt: Menschen entdecken Dinge erst nach und nach. Allahs Wissen ist nicht so begrenzt wie unseres. Das ist eine erfundene Lernszene. Zeige auf ein Blatt und erzähle, was du daran beobachten kannst. Dann sage: Allah weiß mehr als ich. Du darfst fragen und lernen. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wir Menschen lernen jeden Tag etwas Neues. Manches finden wir erst heraus, wenn wir genau hinschauen oder jemanden fragen. Allah nennt in Qurʾān 6:59 die Schlüssel des Verborgenen, das Wissen über Land und Meer und sogar ein einzelnes fallendes Blatt. Ġayb bedeutet das Verborgene. Die Stelle lehrt Allahs vollkommenes Wissen; wir erfinden dazu keine weitere Liste unsichtbarer Dinge. Yūsuf sucht im Garten einen bestimmten Stein. Er weiß nicht, wo er liegt, und fragt seinen Vater. Menschen brauchen Beobachtung und Hilfe. Aus dieser erfundenen Szene machen wir keine Beschreibung davon, wie Allah Wissen erlangt: Allah muss nichts erst suchen. Suche im Zimmer drei Dinge, die du sehen kannst. Nenne danach eine Frage, deren Antwort du noch lernen musst. Erkläre freundlich: Mein Wissen wächst, Allahs Wissen nicht. Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wir Menschen lernen jeden Tag etwas Neues. Manches finden wir erst heraus, wenn wir genau hinschauen oder jemanden fragen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "line",
+          "age": "6-8",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Allah nennt in Qurʾān 6:59 die Schlüssel des Verborgenen, das Wissen über Land und Meer und sogar ein einzelnes fallendes Blatt. Ġayb bedeutet das Verborgene. Die Stelle lehrt Allahs vollkommenes Wissen; wir erfinden dazu keine weitere Liste unsichtbarer Dinge.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "line",
+          "age": "6-8",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Yūsuf sucht im Garten einen bestimmten Stein. Er weiß nicht, wo er liegt, und fragt seinen Vater. Menschen brauchen Beobachtung und Hilfe. Aus dieser erfundenen Szene machen wir keine Beschreibung davon, wie Allah Wissen erlangt: Allah muss nichts erst suchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "line",
+          "age": "6-8",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Suche im Zimmer drei Dinge, die du sehen kannst. Nenne danach eine Frage, deren Antwort du noch lernen musst. Erkläre freundlich: Mein Wissen wächst, Allahs Wissen nicht. Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "line",
+          "age": "6-8",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Allahs Wissen verstehen. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wir Menschen lernen jeden Tag etwas Neues. Manches finden wir erst heraus, wenn wir genau hinschauen oder jemanden fragen. Allah nennt in Qurʾān 6:59 die Schlüssel des Verborgenen, das Wissen über Land und Meer und sogar ein einzelnes fallendes Blatt. Ġayb bedeutet das Verborgene. Die Stelle lehrt Allahs vollkommenes Wissen; wir erfinden dazu keine weitere Liste unsichtbarer Dinge. Yūsuf sucht im Garten einen bestimmten Stein. Er weiß nicht, wo er liegt, und fragt seinen Vater. Menschen brauchen Beobachtung und Hilfe. Aus dieser erfundenen Szene machen wir keine Beschreibung davon, wie Allah Wissen erlangt: Allah muss nichts erst suchen. Suche im Zimmer drei Dinge, die du sehen kannst. Nenne danach eine Frage, deren Antwort du noch lernen musst. Erkläre freundlich: Mein Wissen wächst, Allahs Wissen nicht. Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "audio",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Ein guter Schüler erkennt auch, was er selbst noch nicht weiß. Heute lesen wir über Allahs Wissen, ohne Ihm Eigenschaften von Geschöpfen zuzuschreiben. Qurʾān 6:59 spricht von den Schlüsseln des ġayb, dem Verborgenen, die niemand außer Allah kennt. Weiter werden Land und Meer, ein fallendes Blatt und ein Korn in der dunklen Erde genannt. Die bildhafte Rede von Schlüsseln berechtigt uns nicht, eine erfundene Gegenstandsliste zu behaupten. Eine Lerngruppe entdeckt in einem Buch eine Karte des Meeres. Sie erkennt: Wissenschaftler erforschen nach und nach vieles, aber nicht alles. Das ist ein heutiges Schulbeispiel, keine überlieferte Geschichte. Allahs Wissen hängt weder von solchen Karten noch von Forschung ab. Arbeite mit zwei Spalten: Was weiß ein Mensch durch Beobachtung? Was sagt Qurʾān 6:59 über Allah? Schreibe einen Versinhalt und eine eigene Anwendung getrennt auf. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Ein guter Schüler erkennt auch, was er selbst noch nicht weiß. Heute lesen wir über Allahs Wissen, ohne Ihm Eigenschaften von Geschöpfen zuzuschreiben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "line",
+          "age": "9-10",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 6:59 spricht von den Schlüsseln des ġayb, dem Verborgenen, die niemand außer Allah kennt. Weiter werden Land und Meer, ein fallendes Blatt und ein Korn in der dunklen Erde genannt. Die bildhafte Rede von Schlüsseln berechtigt uns nicht, eine erfundene Gegenstandsliste zu behaupten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "line",
+          "age": "9-10",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Eine Lerngruppe entdeckt in einem Buch eine Karte des Meeres. Sie erkennt: Wissenschaftler erforschen nach und nach vieles, aber nicht alles. Das ist ein heutiges Schulbeispiel, keine überlieferte Geschichte. Allahs Wissen hängt weder von solchen Karten noch von Forschung ab.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "line",
+          "age": "9-10",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Arbeite mit zwei Spalten: Was weiß ein Mensch durch Beobachtung? Was sagt Qurʾān 6:59 über Allah? Schreibe einen Versinhalt und eine eigene Anwendung getrennt auf. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "line",
+          "age": "9-10",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Allahs Wissen verstehen. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Ein guter Schüler erkennt auch, was er selbst noch nicht weiß. Heute lesen wir über Allahs Wissen, ohne Ihm Eigenschaften von Geschöpfen zuzuschreiben. Qurʾān 6:59 spricht von den Schlüsseln des ġayb, dem Verborgenen, die niemand außer Allah kennt. Weiter werden Land und Meer, ein fallendes Blatt und ein Korn in der dunklen Erde genannt. Die bildhafte Rede von Schlüsseln berechtigt uns nicht, eine erfundene Gegenstandsliste zu behaupten. Eine Lerngruppe entdeckt in einem Buch eine Karte des Meeres. Sie erkennt: Wissenschaftler erforschen nach und nach vieles, aber nicht alles. Das ist ein heutiges Schulbeispiel, keine überlieferte Geschichte. Allahs Wissen hängt weder von solchen Karten noch von Forschung ab. Arbeite mit zwei Spalten: Was weiß ein Mensch durch Beobachtung? Was sagt Qurʾān 6:59 über Allah? Schreibe einen Versinhalt und eine eigene Anwendung getrennt auf. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Heute sprechen wir freundlich über Allahs Gesandte. Sie haben den Menschen Allahs Botschaft überbracht. In Qurʾān 2:136 stehen Namen wie Ibrāhīm, Mūsā und ʿĪsā, Friede sei mit ihnen. Wir glauben an die Gesandten Allahs. Keinen von ihnen dürfen wir aus unserem Glauben ausschließen. Zaynab hat drei Namenskarten vor sich. Sie liest die Namen langsam und legt jede Karte behutsam hin. Dabei macht sie keine Witze über einen Propheten. Zaynab gehört zu unserer ausgedachten Unterrichtsgeschichte. Sprich, wenn du magst, die drei Namen nach. Du kannst auch zuhören oder mit dem Finger auf die Karten zeigen. So üben wir Respekt. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Heute sprechen wir freundlich über Allahs Gesandte. Sie haben den Menschen Allahs Botschaft überbracht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "line",
+          "age": "4-5",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "In Qurʾān 2:136 stehen Namen wie Ibrāhīm, Mūsā und ʿĪsā, Friede sei mit ihnen. Wir glauben an die Gesandten Allahs. Keinen von ihnen dürfen wir aus unserem Glauben ausschließen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "line",
+          "age": "4-5",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Zaynab hat drei Namenskarten vor sich. Sie liest die Namen langsam und legt jede Karte behutsam hin. Dabei macht sie keine Witze über einen Propheten. Zaynab gehört zu unserer ausgedachten Unterrichtsgeschichte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "line",
+          "age": "4-5",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Sprich, wenn du magst, die drei Namen nach. Du kannst auch zuhören oder mit dem Finger auf die Karten zeigen. So üben wir Respekt. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "line",
+          "age": "4-5",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Allen Gesandten mit Respekt begegnen. Assalāmu ʿalaikum, liebes Kind! Heute sprechen wir freundlich über Allahs Gesandte. Sie haben den Menschen Allahs Botschaft überbracht. In Qurʾān 2:136 stehen Namen wie Ibrāhīm, Mūsā und ʿĪsā, Friede sei mit ihnen. Wir glauben an die Gesandten Allahs. Keinen von ihnen dürfen wir aus unserem Glauben ausschließen. Zaynab hat drei Namenskarten vor sich. Sie liest die Namen langsam und legt jede Karte behutsam hin. Dabei macht sie keine Witze über einen Propheten. Zaynab gehört zu unserer ausgedachten Unterrichtsgeschichte. Sprich, wenn du magst, die drei Namen nach. Du kannst auch zuhören oder mit dem Finger auf die Karten zeigen. So üben wir Respekt. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wir kennen verschiedene Propheten aus dem Qurʾān. Keinen davon machen wir zum Gegenstand von Spott oder Ablehnung. Qurʾān 2:136 nennt unter anderem Ibrāhīm, Ismāʿīl, Isḥāq, Yaʿqūb, Mūsā und ʿĪsā, Friede sei mit ihnen. Der Vers lehrt: Wir glauben an die Gesandten Allahs und weisen keinen von ihnen zurück. Das heißt nicht, dass jeder im Qurʾān denselben Auftrag oder Rang hat. Amīnah und Bilāl gestalten ein Heft über die Propheten. Bilāl kennt Mūsā schon gut und Amīnah kennt ʿĪsā. Sie hören einander zu und lernen neue Namen. Die Kinder gehören nur zu unserer Lernszene, nicht zu einer alten Überlieferung. Nenne zwei Propheten aus dem Vers und einen Satz darüber, was sie als Gesandte verbindet. Prüfe danach: Ist unser Heft eine Lernhilfe oder selbst Offenbarung? Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wir kennen verschiedene Propheten aus dem Qurʾān. Keinen davon machen wir zum Gegenstand von Spott oder Ablehnung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "line",
+          "age": "6-8",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 2:136 nennt unter anderem Ibrāhīm, Ismāʿīl, Isḥāq, Yaʿqūb, Mūsā und ʿĪsā, Friede sei mit ihnen. Der Vers lehrt: Wir glauben an die Gesandten Allahs und weisen keinen von ihnen zurück. Das heißt nicht, dass jeder im Qurʾān denselben Auftrag oder Rang hat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "line",
+          "age": "6-8",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Amīnah und Bilāl gestalten ein Heft über die Propheten. Bilāl kennt Mūsā schon gut und Amīnah kennt ʿĪsā. Sie hören einander zu und lernen neue Namen. Die Kinder gehören nur zu unserer Lernszene, nicht zu einer alten Überlieferung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "line",
+          "age": "6-8",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Nenne zwei Propheten aus dem Vers und einen Satz darüber, was sie als Gesandte verbindet. Prüfe danach: Ist unser Heft eine Lernhilfe oder selbst Offenbarung? Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "line",
+          "age": "6-8",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Allen Gesandten mit Respekt begegnen. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wir kennen verschiedene Propheten aus dem Qurʾān. Keinen davon machen wir zum Gegenstand von Spott oder Ablehnung. Qurʾān 2:136 nennt unter anderem Ibrāhīm, Ismāʿīl, Isḥāq, Yaʿqūb, Mūsā und ʿĪsā, Friede sei mit ihnen. Der Vers lehrt: Wir glauben an die Gesandten Allahs und weisen keinen von ihnen zurück. Das heißt nicht, dass jeder im Qurʾān denselben Auftrag oder Rang hat. Amīnah und Bilāl gestalten ein Heft über die Propheten. Bilāl kennt Mūsā schon gut und Amīnah kennt ʿĪsā. Sie hören einander zu und lernen neue Namen. Die Kinder gehören nur zu unserer Lernszene, nicht zu einer alten Überlieferung. Nenne zwei Propheten aus dem Vers und einen Satz darüber, was sie als Gesandte verbindet. Prüfe danach: Ist unser Heft eine Lernhilfe oder selbst Offenbarung? Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "audio",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Nicht alles, was ähnlich klingt, bedeutet das Gleiche. Deshalb lesen wir Qurʾān 2:136 sorgfältig. Der Vers bekräftigt den Glauben an Allahs Offenbarung und nennt mehrere Gesandte. Der Satz 'lā nufarriqu bayna aḥadin minhum' bedeutet hier: Wir glauben nicht an einige und verwerfen andere. Ibn Kaṯīr erläutert diese Glaubensregel. Daraus folgt nicht, dass alle Gesandten denselben Rang haben; das wäre eine andere Frage. Eine Lerngruppe erstellt eine Übersicht: Welche Propheten werden im Vers namentlich genannt? Welche werden zusammenfassend erwähnt? Die Kinder vermeiden erfundene Begegnungen, Aussagen und Geschichten über Gesandte. Markiere im Vers Namen und den Glaubenssatz. Formuliere anschließend: 'Wir erkennen alle Gesandten Allahs an.' Erkläre, warum dieser Satz präziser ist als 'Alle Gesandten hatten genau denselben Rang'. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Nicht alles, was ähnlich klingt, bedeutet das Gleiche. Deshalb lesen wir Qurʾān 2:136 sorgfältig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "line",
+          "age": "9-10",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Der Vers bekräftigt den Glauben an Allahs Offenbarung und nennt mehrere Gesandte. Der Satz 'lā nufarriqu bayna aḥadin minhum' bedeutet hier: Wir glauben nicht an einige und verwerfen andere. Ibn Kaṯīr erläutert diese Glaubensregel. Daraus folgt nicht, dass alle Gesandten denselben Rang haben; das wäre eine andere Frage.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "line",
+          "age": "9-10",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Eine Lerngruppe erstellt eine Übersicht: Welche Propheten werden im Vers namentlich genannt? Welche werden zusammenfassend erwähnt? Die Kinder vermeiden erfundene Begegnungen, Aussagen und Geschichten über Gesandte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "line",
+          "age": "9-10",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Markiere im Vers Namen und den Glaubenssatz. Formuliere anschließend: 'Wir erkennen alle Gesandten Allahs an.' Erkläre, warum dieser Satz präziser ist als 'Alle Gesandten hatten genau denselben Rang'. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "line",
+          "age": "9-10",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Allen Gesandten mit Respekt begegnen. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Nicht alles, was ähnlich klingt, bedeutet das Gleiche. Deshalb lesen wir Qurʾān 2:136 sorgfältig. Der Vers bekräftigt den Glauben an Allahs Offenbarung und nennt mehrere Gesandte. Der Satz 'die Aussage über den Glauben an alle Gesandten' bedeutet hier: Wir glauben nicht an einige und verwerfen andere. Ibn Kaṯīr erläutert diese Glaubensregel. Daraus folgt nicht, dass alle Gesandten denselben Rang haben; das wäre eine andere Frage. Eine Lerngruppe erstellt eine Übersicht: Welche Propheten werden im Vers namentlich genannt? Welche werden zusammenfassend erwähnt? Die Kinder vermeiden erfundene Begegnungen, Aussagen und Geschichten über Gesandte. Markiere im Vers Namen und den Glaubenssatz. Formuliere anschließend: 'Wir erkennen alle Gesandten Allahs an.' Erkläre, warum dieser Satz präziser ist als 'Alle Gesandten hatten genau denselben Rang'. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Manchmal ist eine gute Tat ganz klein. Trotzdem ist sie nicht bedeutungslos. Allah sagt in Qurʾān 99:7 sinngemäß: Wer das Gewicht eines winzigen Stäubchens Gutes tut, wird es sehen. Das macht uns Mut, auch kleine Hilfen ernst zu nehmen. Maryam sieht einen Stift auf dem Boden. Sie hebt ihn auf und gibt ihn freundlich zurück. Niemand muss dafür klatschen. Maryam ist nur eine Figur in unserer heutigen Übung. Überlege dir eine kleine Hilfe: ein Buch zurücklegen, jemandem Platz machen oder freundlich antworten. Du musst nichts vor allen beweisen. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Manchmal ist eine gute Tat ganz klein. Trotzdem ist sie nicht bedeutungslos.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "4-5",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Allah sagt in Qurʾān 99:7 sinngemäß: Wer das Gewicht eines winzigen Stäubchens Gutes tut, wird es sehen. Das macht uns Mut, auch kleine Hilfen ernst zu nehmen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "4-5",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Maryam sieht einen Stift auf dem Boden. Sie hebt ihn auf und gibt ihn freundlich zurück. Niemand muss dafür klatschen. Maryam ist nur eine Figur in unserer heutigen Übung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "4-5",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Überlege dir eine kleine Hilfe: ein Buch zurücklegen, jemandem Platz machen oder freundlich antworten. Du musst nichts vor allen beweisen. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "4-5",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Kleine Taten können wertvoll sein. Assalāmu ʿalaikum, liebes Kind! Manchmal ist eine gute Tat ganz klein. Trotzdem ist sie nicht bedeutungslos. Allah sagt in Qurʾān 99:7 sinngemäß: Wer das Gewicht eines winzigen Stäubchens Gutes tut, wird es sehen. Das macht uns Mut, auch kleine Hilfen ernst zu nehmen. Maryam sieht einen Stift auf dem Boden. Sie hebt ihn auf und gibt ihn freundlich zurück. Niemand muss dafür klatschen. Maryam ist nur eine Figur in unserer heutigen Übung. Überlege dir eine kleine Hilfe: ein Buch zurücklegen, jemandem Platz machen oder freundlich antworten. Du musst nichts vor allen beweisen. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Du musst nicht etwas Großes schaffen, um freundlich und hilfreich zu handeln. Qurʾān 99:7 sagt sinngemäß: Wer auch nur das Gewicht einer ḏarrah an Gutem tut, wird es sehen. Ḏarrah bezeichnet hier etwas winzig Kleines. Der folgende Gedanke über Schlechtes steht in Vers 8 und darf nicht als Teil von Vers 7 ausgegeben werden. Yūsuf merkt, dass ein neues Kind keinen Stift dabeihat. Er bietet einen Ersatzstift an, ohne eine Belohnung einzufordern. So besprechen wir freiwillige Hilfe. Diese Szene ist unsere Anwendung, kein berichteter Vorfall aus der Sunnah. Wähle eine kleine gute Tat, die du sicher und gern tun kannst. Erkläre danach: Wo ist der Qurʾān-Beleg, und wo beginnt unsere Lernidee? Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Du musst nicht etwas Großes schaffen, um freundlich und hilfreich zu handeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "6-8",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 99:7 sagt sinngemäß: Wer auch nur das Gewicht einer ḏarrah an Gutem tut, wird es sehen. Ḏarrah bezeichnet hier etwas winzig Kleines. Der folgende Gedanke über Schlechtes steht in Vers 8 und darf nicht als Teil von Vers 7 ausgegeben werden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "6-8",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Yūsuf merkt, dass ein neues Kind keinen Stift dabeihat. Er bietet einen Ersatzstift an, ohne eine Belohnung einzufordern. So besprechen wir freiwillige Hilfe. Diese Szene ist unsere Anwendung, kein berichteter Vorfall aus der Sunnah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "6-8",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Wähle eine kleine gute Tat, die du sicher und gern tun kannst. Erkläre danach: Wo ist der Qurʾān-Beleg, und wo beginnt unsere Lernidee? Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "6-8",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Kleine Taten können wertvoll sein. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Du musst nicht etwas Großes schaffen, um freundlich und hilfreich zu handeln. Qurʾān 99:7 sagt sinngemäß: Wer auch nur das Gewicht einer ḏarrah an Gutem tut, wird es sehen. Ḏarrah bezeichnet hier etwas winzig Kleines. Der folgende Gedanke über Schlechtes steht in Vers 8 und darf nicht als Teil von Vers 7 ausgegeben werden. Yūsuf merkt, dass ein neues Kind keinen Stift dabeihat. Er bietet einen Ersatzstift an, ohne eine Belohnung einzufordern. So besprechen wir freiwillige Hilfe. Diese Szene ist unsere Anwendung, kein berichteter Vorfall aus der Sunnah. Wähle eine kleine gute Tat, die du sicher und gern tun kannst. Erkläre danach: Wo ist der Qurʾān-Beleg, und wo beginnt unsere Lernidee? Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "audio",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wissenschaftlich sorgfältig zu lernen bedeutet auch, an der richtigen Versgrenze aufzuhören. Qurʾān 99:7 lautet: 'Fa-man yaʿmal miṯqāla ḏarratin ḫayran yarah' – sinngemäß: Wer das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der Satz über Schlechtes gehört zu Qurʾān 99:8. Ibn Kaṯīr behandelt beide zusammen, aber sie bleiben zwei verschiedene Verse. Bei einem Klassenprojekt trägt ein Kind unauffällig Stühle zurück. Ein anderes Kind bemerkt die Hilfe nicht. Im Qurʾān steht keine Regel, dass gute Taten nur dann zählen, wenn Menschen dafür applaudieren. Wir beschreiben hier eine moderne Lernszene, keine Überlieferung. Schreibe die Versnummern 99:7 und 99:8 unter zwei getrennte Zeilen. Beschreibe danach eine kleine gute Tat und kennzeichne ausdrücklich, was dein eigenes Beispiel ist. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wissenschaftlich sorgfältig zu lernen bedeutet auch, an der richtigen Versgrenze aufzuhören.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "9-10",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 99:7 lautet: 'Fa-man yaʿmal miṯqāla ḏarratin ḫayran yarah' – sinngemäß: Wer das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der Satz über Schlechtes gehört zu Qurʾān 99:8. Ibn Kaṯīr behandelt beide zusammen, aber sie bleiben zwei verschiedene Verse.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "9-10",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Bei einem Klassenprojekt trägt ein Kind unauffällig Stühle zurück. Ein anderes Kind bemerkt die Hilfe nicht. Im Qurʾān steht keine Regel, dass gute Taten nur dann zählen, wenn Menschen dafür applaudieren. Wir beschreiben hier eine moderne Lernszene, keine Überlieferung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "9-10",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Schreibe die Versnummern 99:7 und 99:8 unter zwei getrennte Zeilen. Beschreibe danach eine kleine gute Tat und kennzeichne ausdrücklich, was dein eigenes Beispiel ist. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "9-10",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Kleine Taten können wertvoll sein. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wissenschaftlich sorgfältig zu lernen bedeutet auch, an der richtigen Versgrenze aufzuhören. Qurʾān 99:7 lautet: 'der Satz aus Qurʾān 99, Vers 7' – sinngemäß: Wer das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der Satz über Schlechtes gehört zu Qurʾān 99:8. Ibn Kaṯīr behandelt beide zusammen, aber sie bleiben zwei verschiedene Verse. Bei einem Klassenprojekt trägt ein Kind unauffällig Stühle zurück. Ein anderes Kind bemerkt die Hilfe nicht. Im Qurʾān steht keine Regel, dass gute Taten nur dann zählen, wenn Menschen dafür applaudieren. Wir beschreiben hier eine moderne Lernszene, keine Überlieferung. Schreibe die Versnummern 99:7 und 99:8 unter zwei getrennte Zeilen. Beschreibe danach eine kleine gute Tat und kennzeichne ausdrücklich, was dein eigenes Beispiel ist. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Du darfst dich freuen, wenn dir etwas gelingt. Auch ein anderes Kind darf sich freuen. Qurʾān 25:63 beschreibt die Diener des Allerbarmers als Menschen, die ohne Hochmut gehen und friedlich sprechen. Bescheiden bedeutet: Ich muss niemanden kleiner machen. Bilāl baut einen hohen Turm. Daneben fällt Zaynabs Turm um. Bilāl sagt freundlich: 'Möchtest du es noch einmal probieren?' Er prahlt nicht über die andere Person. Diese Geschichte ist nur unser Spielbeispiel. Übe den Satz: 'Ich freue mich, dass es geklappt hat.' Sage danach einem anderen Kind etwas Freundliches. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "intro",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebes Kind! Du darfst dich freuen, wenn dir etwas gelingt. Auch ein anderes Kind darf sich freuen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "line",
+          "age": "4-5",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 25:63 beschreibt die Diener des Allerbarmers als Menschen, die ohne Hochmut gehen und friedlich sprechen. Bescheiden bedeutet: Ich muss niemanden kleiner machen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "line",
+          "age": "4-5",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Bilāl baut einen hohen Turm. Daneben fällt Zaynabs Turm um. Bilāl sagt freundlich: 'Möchtest du es noch einmal probieren?' Er prahlt nicht über die andere Person. Diese Geschichte ist nur unser Spielbeispiel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "line",
+          "age": "4-5",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Übe den Satz: 'Ich freue mich, dass es geklappt hat.' Sage danach einem anderen Kind etwas Freundliches. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "line",
+          "age": "4-5",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Bescheiden bleiben. Assalāmu ʿalaikum, liebes Kind! Du darfst dich freuen, wenn dir etwas gelingt. Auch ein anderes Kind darf sich freuen. Qurʾān 25:63 beschreibt die Diener des Allerbarmers als Menschen, die ohne Hochmut gehen und friedlich sprechen. Bescheiden bedeutet: Ich muss niemanden kleiner machen. Bilāl baut einen hohen Turm. Daneben fällt Zaynabs Turm um. Bilāl sagt freundlich: 'Möchtest du es noch einmal probieren?' Er prahlt nicht über die andere Person. Diese Geschichte ist nur unser Spielbeispiel. Übe den Satz: 'Ich freue mich, dass es geklappt hat.' Sage danach einem anderen Kind etwas Freundliches. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Ein Erfolg ist schön, aber er ist kein Grund, andere auszulachen. In Qurʾān 25:63 beschreibt Allah die Diener des Allerbarmers: Sie gehen mit Ruhe und ohne Überheblichkeit; bei unbedachten oder verletzenden Worten antworten sie friedlich. Ibn Kaṯīr erklärt 'hawn' als Würde und Ruhe, nicht als Schauspiel oder absichtliche Schwäche. Amīnah gewinnt beim Lesen ein kleines Spiel. Ein anderes Kind hat sich vertan. Sie sagt: 'Gut gemacht, wir können weiterüben', statt jemanden bloßzustellen. Diese Situation ist erfunden und veranschaulicht freundliches Verhalten. Formuliere zwei Sätze: einen, mit dem du deinen Erfolg benennst, und einen, mit dem du jemandem Mut machst. Wenn jemand dich wiederholt beleidigt, darfst du zusätzlich Hilfe holen. Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "intro",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Ein Erfolg ist schön, aber er ist kein Grund, andere auszulachen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "line",
+          "age": "6-8",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "In Qurʾān 25:63 beschreibt Allah die Diener des Allerbarmers: Sie gehen mit Ruhe und ohne Überheblichkeit; bei unbedachten oder verletzenden Worten antworten sie friedlich. Ibn Kaṯīr erklärt 'hawn' als Würde und Ruhe, nicht als Schauspiel oder absichtliche Schwäche.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "line",
+          "age": "6-8",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Amīnah gewinnt beim Lesen ein kleines Spiel. Ein anderes Kind hat sich vertan. Sie sagt: 'Gut gemacht, wir können weiterüben', statt jemanden bloßzustellen. Diese Situation ist erfunden und veranschaulicht freundliches Verhalten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "line",
+          "age": "6-8",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Formuliere zwei Sätze: einen, mit dem du deinen Erfolg benennst, und einen, mit dem du jemandem Mut machst. Wenn jemand dich wiederholt beleidigt, darfst du zusätzlich Hilfe holen. Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "line",
+          "age": "6-8",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Bescheiden bleiben. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Ein Erfolg ist schön, aber er ist kein Grund, andere auszulachen. In Qurʾān 25:63 beschreibt Allah die Diener des Allerbarmers: Sie gehen mit Ruhe und ohne Überheblichkeit; bei unbedachten oder verletzenden Worten antworten sie friedlich. Ibn Kaṯīr erklärt 'hawn' als Würde und Ruhe, nicht als Schauspiel oder absichtliche Schwäche. Amīnah gewinnt beim Lesen ein kleines Spiel. Ein anderes Kind hat sich vertan. Sie sagt: 'Gut gemacht, wir können weiterüben', statt jemanden bloßzustellen. Diese Situation ist erfunden und veranschaulicht freundliches Verhalten. Formuliere zwei Sätze: einen, mit dem du deinen Erfolg benennst, und einen, mit dem du jemandem Mut machst. Wenn jemand dich wiederholt beleidigt, darfst du zusätzlich Hilfe holen. Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "audio",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wer etwas gut kann, muss andere nicht erniedrigen. Gleichzeitig bedeutet Bescheidenheit nicht, über Unrecht zu schweigen. Qurʾān 25:63 beschreibt Menschen, die mit 'hawn' über die Erde gehen und auf törichte Anreden mit friedlichen Worten reagieren. Ibn Kaṯīr erläutert dies als Besonnenheit und Würde ohne Hochmut. Der Vers verlangt keine gespielte Schwäche und macht verletzendes Verhalten anderer nicht richtig. Ein Schüler erhält Lob für sein Referat. Danach hilft er einem Freund, ohne dessen schwächere Leistung zu verspotten. In einer anderen Situation wird er beleidigt: Dann darf er sich abgrenzen und Unterstützung suchen. Beide Szenen sind pädagogische Beispiele. Vergleiche die Begriffe Würde, Hochmut und Selbstschutz. Schreibe auf, was direkt in Qurʾān 25:63 angesprochen wird und welche Schutzregel wir selbst ergänzen. Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "intro",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wer etwas gut kann, muss andere nicht erniedrigen. Gleichzeitig bedeutet Bescheidenheit nicht, über Unrecht zu schweigen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "line",
+          "age": "9-10",
+          "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 25:63 beschreibt Menschen, die mit 'hawn' über die Erde gehen und auf törichte Anreden mit friedlichen Worten reagieren. Ibn Kaṯīr erläutert dies als Besonnenheit und Würde ohne Hochmut. Der Vers verlangt keine gespielte Schwäche und macht verletzendes Verhalten anderer nicht richtig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "line",
+          "age": "9-10",
+          "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Ein Schüler erhält Lob für sein Referat. Danach hilft er einem Freund, ohne dessen schwächere Leistung zu verspotten. In einer anderen Situation wird er beleidigt: Dann darf er sich abgrenzen und Unterstützung suchen. Beide Szenen sind pädagogische Beispiele.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "line",
+          "age": "9-10",
+          "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Vergleiche die Begriffe Würde, Hochmut und Selbstschutz. Schreibe auf, was direkt in Qurʾān 25:63 angesprochen wird und welche Schutzregel wir selbst ergänzen. Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "line",
+          "age": "9-10",
+          "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Bescheiden bleiben. Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wer etwas gut kann, muss andere nicht erniedrigen. Gleichzeitig bedeutet Bescheidenheit nicht, über Unrecht zu schweigen. Qurʾān 25:63 beschreibt Menschen, die mit 'hawn' über die Erde gehen und auf törichte Anreden mit friedlichen Worten reagieren. Ibn Kaṯīr erläutert dies als Besonnenheit und Würde ohne Hochmut. Der Vers verlangt keine gespielte Schwäche und macht verletzendes Verhalten anderer nicht richtig. Ein Schüler erhält Lob für sein Referat. Danach hilft er einem Freund, ohne dessen schwächere Leistung zu verspotten. In einer anderen Situation wird er beleidigt: Dann darf er sich abgrenzen und Unterstützung suchen. Beide Szenen sind pädagogische Beispiele. Vergleiche die Begriffe Würde, Hochmut und Selbstschutz. Schreibe auf, was direkt in Qurʾān 25:63 angesprochen wird und welche Schutzregel wir selbst ergänzen. Allāhumma bārik! Wa-s-salāmu ʿalaikum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     }
