@@ -127,7 +127,7 @@
     "fiqh-ramadan-fasten",
     "fiqh-zakah-und-hajj"
   ],
-  "phraseCount": 1417,
+  "phraseCount": 1433,
   "phrases": [
     {
       "text": "Familie · Mobbing erkennen und Hilfe holen: Wenn jemand immer wieder gemein ist, bist du nicht schuld. Sag es einer erwachsenen Person, der du vertraust.",
@@ -2110,7 +2110,7 @@
       ]
     },
     {
-      "text": "Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen.",
+      "text": "Qiyām ist das Stehen im Gebet.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -2122,13 +2122,33 @@
           "kind": "line",
           "age": "9-10",
           "index": 1
-        },
+        }
+      ]
+    },
+    {
+      "text": "Ich stelle mich ruhig hin, wenn ich gut stehen kann.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-zum-gebet-stehen",
           "kind": "line",
           "age": "4-5",
           "index": 1
-        },
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 2:238 spricht vom Gebet und demütigen Stehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-zum-gebet-stehen",
           "kind": "line",
@@ -2298,7 +2318,7 @@
       ]
     },
     {
-      "text": "Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen.",
+      "text": "Die Eröffnung des Gebets heißt Takbīrat al-Iḥrām.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -2310,13 +2330,33 @@
           "kind": "line",
           "age": "9-10",
           "index": 1
-        },
+        }
+      ]
+    },
+    {
+      "text": "Das bedeutet: Allah ist größer.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-takbirat-al-ihram",
           "kind": "line",
           "age": "4-5",
           "index": 1
-        },
+        }
+      ]
+    },
+    {
+      "text": "Seine Worte sind Allāhu akbar.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-takbirat-al-ihram",
           "kind": "line",
@@ -4668,7 +4708,7 @@
       ]
     },
     {
-      "text": "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
+      "text": "Ein Kind mit Einschränkungen wird respektvoll unterstützt, nicht zur Bewegung gezwungen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -4680,13 +4720,33 @@
           "kind": "line",
           "age": "9-10",
           "index": 3
-        },
+        }
+      ]
+    },
+    {
+      "text": "Wir zwingen kein Kind, trotz Schmerzen aufzustehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-zum-gebet-stehen",
           "kind": "line",
           "age": "6-8",
           "index": 3
-        },
+        }
+      ]
+    },
+    {
+      "text": "Wer nicht stehen kann, darf im Unterricht im Sitzen üben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-zum-gebet-stehen",
           "kind": "line",
@@ -4856,7 +4916,7 @@
       ]
     },
     {
-      "text": "Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
+      "text": "Die Einzelheiten der Gebetseröffnung werden mit der Sunnah erläutert.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -4868,13 +4928,33 @@
           "kind": "line",
           "age": "9-10",
           "index": 3
-        },
+        }
+      ]
+    },
+    {
+      "text": "Al-Mughnī erläutert das Allāhu akbar zum Gebetsbeginn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-takbirat-al-ihram",
           "kind": "line",
           "age": "6-8",
           "index": 3
-        },
+        }
+      ]
+    },
+    {
+      "text": "Wir üben die Worte ruhig mit der Lehrperson.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-takbirat-al-ihram",
           "kind": "line",
@@ -9776,13 +9856,23 @@
           "index": 0
         },
         {
-          "lessonId": "fiqh-zum-gebet-stehen",
+          "lessonId": "fiqh-tashahhud",
           "kind": "line",
           "age": "6-8",
           "index": 0
-        },
+        }
+      ]
+    },
+    {
+      "text": "Qiyām heißt das Stehen im Gebet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
-          "lessonId": "fiqh-tashahhud",
+          "lessonId": "fiqh-zum-gebet-stehen",
           "kind": "line",
           "age": "6-8",
           "index": 0
@@ -9819,13 +9909,23 @@
           "index": 0
         },
         {
-          "lessonId": "fiqh-zum-gebet-stehen",
+          "lessonId": "fiqh-tashahhud",
           "kind": "line",
           "age": "9-10",
           "index": 0
-        },
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 2:238 ruft zum Bewahren der Gebete und zum demütigen Stehen auf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
-          "lessonId": "fiqh-tashahhud",
+          "lessonId": "fiqh-zum-gebet-stehen",
           "kind": "line",
           "age": "9-10",
           "index": 0
@@ -18666,7 +18766,7 @@
       ]
     },
     {
-      "text": "Fiqh · Zum Gebet stehen: Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
+      "text": "Fiqh · Zum Gebet stehen: Beim Pflichtgebet stehen Menschen, die dazu in der Lage sind, zu Beginn aufrecht vor Allah. Wer gesundheitlich nicht stehen kann, braucht eine passende Erleichterung.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -18681,7 +18781,7 @@
       ]
     },
     {
-      "text": "Zum Gebet stehen. Wir stellen uns ruhig hin, wenn wir das Gebet üben. Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
+      "text": "Zum Gebet stehen. Assalāmu ʿalaikum! Qiyām heißt Stehen. Wir stellen uns ruhig hin, wenn wir stehen können. Wer Schmerzen hat, darf beim Lernen sitzen. Wir nehmen freundlich Rücksicht aufeinander.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -18692,7 +18792,17 @@
           "lessonId": "fiqh-zum-gebet-stehen",
           "kind": "audio",
           "age": "4-5"
-        },
+        }
+      ]
+    },
+    {
+      "text": "Zum Gebet stehen. Assalāmu ʿalaikum! Qurʾān 2:238 erinnert an das demütige Stehen. Ibn Qudāmah erklärt den Takbīr im Stehen beim Pflichtgebet und auch Ausnahmen. Wir stehen ruhig, soweit es uns möglich ist, und nehmen Rücksicht auf Menschen mit Einschränkungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-zum-gebet-stehen",
           "kind": "audio",
@@ -18701,7 +18811,7 @@
       ]
     },
     {
-      "text": "Wir stellen uns ruhig hin, wenn wir das Gebet üben. Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. Stell dir vor: Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Heute üben wir: Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
+      "text": "Assalāmu ʿalaikum, liebe Kinder! Heute üben wir das ruhige Stehen beim Gebet. Das heißt Qiyām. Wenn es deinem Körper gut geht und du stehen kannst, stellst du dich mit der Lehrperson ruhig und aufrecht hin. Allah erinnert uns im Qurʾān daran, auf die Gebete zu achten. Manche Kinder können nicht gut stehen oder haben Schmerzen. Dann helfen wir ihnen und lassen sie im Sitzen üben. Niemand muss eine schmerzhafte Bewegung machen. Sag freundlich Bescheid, wenn du Hilfe brauchst.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -18716,7 +18826,7 @@
       ]
     },
     {
-      "text": "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
+      "text": "Qiyām bedeutet: Stehen beim Gebet.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -18732,7 +18842,7 @@
       ]
     },
     {
-      "text": "Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher.",
+      "text": "Wir achten freundlich aufeinander.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -18744,13 +18854,33 @@
           "kind": "line",
           "age": "4-5",
           "index": 2
-        },
+        }
+      ]
+    },
+    {
+      "text": "Al-Mughnī erläutert den eröffnenden Takbīr im Stehen und besondere Ausnahmen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-zum-gebet-stehen",
           "kind": "line",
           "age": "6-8",
           "index": 2
-        },
+        }
+      ]
+    },
+    {
+      "text": "Al-Mughnī behandelt den eröffnenden Takbīr im Stehen und unterscheidet Ausnahmen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-zum-gebet-stehen",
           "kind": "line",
@@ -18760,7 +18890,7 @@
       ]
     },
     {
-      "text": "Zum Gebet stehen. Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
+      "text": "Zum Gebet stehen. Assalāmu ʿalaikum! Qiyām bedeutet Stehen. Im Pflichtgebet stehen Menschen, die es können, zu Beginn aufrecht. Ibn Qudāmah erläutert auch Ausnahmen. Wenn jemand Schmerzen hat, helfen wir und üben ohne Zwang.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -18775,7 +18905,7 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir stellen uns ruhig hin, wenn wir das Gebet üben. Wir lesen Qurʾān 2:238. Der Vers bedeutet sinngemäß: Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. So kann das im Alltag aussehen: Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Die Aufgabe: Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson. qawmah bedeutet: das Stehen; Unterrichtswort. qunūt bedeutet: Demut im Stehen, vom Wort des Verses.",
+      "text": "Assalāmu ʿalaikum! Beim Pflichtgebet ist das Stehen für Menschen, die dazu in der Lage sind, ein wichtiges Gebetselement. Es heißt Qiyām. Qurʾān 2:238 ruft uns dazu auf, auf die Gebete zu achten und demütig vor Allah zu stehen. Ibn Qudāmah beschreibt in al-Mughnī, dass der eröffnende Takbīr im Pflichtgebet im Stehen gesprochen wird, wenn man dazu in der Lage ist. Er behandelt auch besondere Fälle. Wir erfinden daraus keine Regel, dass jedes Kind trotz Schmerzen stehen müsse. Heute üben wir, ruhig zu stehen, und achten darauf, dass niemand gedrängt wird. Vielleicht braucht ein Kind einen Stuhl: Dann helfen wir freundlich.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -18790,7 +18920,7 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Zum Gebet stehen. Wir stellen uns ruhig hin, wenn wir das Gebet üben. In Qurʾān 2:238 lernen wir sinngemäß: Dieselbe Stelle wie in der Stunde über den Gebetsplatz fordert, die Gebete zu hüten und vor Allah demütig zu stehen. qawmah bedeutet das Stehen; Unterrichtswort. qunūt bedeutet Demut im Stehen, vom Wort des Verses. Stell dir diese Situation vor: Die Kinder stehen nebeneinander, die Füße ruhig, die Hände nicht in den Taschen, und schauen nicht wild umher. Welcher nächste Schritt ist gut? Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+      "text": "Assalāmu ʿalaikum! Beim Gebet stehen wir ehrfürchtig vor Allah, soweit wir dazu in der Lage sind. Qurʾān 2:238 fordert zum Bewahren der Gebete und zum demütigen Stehen auf. Das ist jedoch keine vollständige Anleitung zu allen Gebetshaltungen. Ibn Qudāmah erklärt in al-Mughnī, Bd. 1, S. 277 (Abschnitt über den Takbīr im Stehen), dass die Eröffnung des Pflichtgebets mit dem Takbīr im Stehen geschieht, sofern die gesetzlichen Voraussetzungen erfüllt sind. Er bespricht auch Ausnahmen und andere Gebetsarten. Für uns gilt im Unterricht: Wir üben, ruhig und aufrecht zu stehen, ohne Arme, Fußabstände oder komplizierte Rechtsdetails zu erfinden. Kinder mit gesundheitlichen Einschränkungen lernen mit einer geeigneten Hilfe. Erkläre, weshalb Rücksichtnahme Teil unseres guten Umgangs ist.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -20018,7 +20148,7 @@
       ]
     },
     {
-      "text": "Fiqh · Takbīrat al-Iḥrām kennenlernen: Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
+      "text": "Fiqh · Takbīrat al-Iḥrām kennenlernen: Takbīrat al-Iḥrām ist der eröffnende Takbīr des Gebets: Wir beginnen mit Allāhu akbar.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -20033,7 +20163,7 @@
       ]
     },
     {
-      "text": "Takbīrat al-Iḥrām kennenlernen. Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
+      "text": "Takbīrat al-Iḥrām. Assalāmu ʿalaikum! Am Anfang des Gebets sagen wir Allāhu akbar. Das bedeutet: Allah ist größer. Die Worte sprechen wir mit unserer Lehrperson ruhig und deutlich.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -20044,7 +20174,17 @@
           "lessonId": "fiqh-takbirat-al-ihram",
           "kind": "audio",
           "age": "4-5"
-        },
+        }
+      ]
+    },
+    {
+      "text": "Takbīrat al-Iḥrām. Assalāmu ʿalaikum! Das Gebet wird mit Allāhu akbar eröffnet. Qurʾān 17:111 fordert das große Lob Allahs. Die konkreten Worte des Eröffnungstakbīr erläutert Ibn Qudāmah aus der Sunnah in al-Mughnī. Wir unterscheiden diese Quellen sorgfältig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-takbirat-al-ihram",
           "kind": "audio",
@@ -20053,7 +20193,7 @@
       ]
     },
     {
-      "text": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. Stell dir vor: Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Heute üben wir: Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
+      "text": "Assalāmu ʿalaikum, liebe Kinder! Heute lernen wir den Beginn des Gebets kennen. Wir sagen dabei: Allāhu akbar. Das bedeutet, Allah ist größer. Dieser erste Takbīr heißt Takbīrat al-Iḥrām. Die Lehrperson spricht die Worte ruhig vor, und wir sprechen sie gemeinsam nach, wenn wir sie schon gut können. Im Qurʾān lernen wir, Allah zu loben und groß zu preisen. Wie genau das Gebet beginnt, erklärt uns auch die Sunnah. Wir üben heute nur die Worte, ohne Eile.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -20068,7 +20208,7 @@
       ]
     },
     {
-      "text": "Am Anfang des Gebets gibt es ein erstes Allāhu akbar.",
+      "text": "Am Anfang des Gebets sagen wir Allāhu akbar.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -20084,7 +20224,7 @@
       ]
     },
     {
-      "text": "Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können.",
+      "text": "Der erste Takbīr heißt Takbīrat al-Iḥrām.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -20096,13 +20236,33 @@
           "kind": "line",
           "age": "4-5",
           "index": 2
-        },
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 17:111 fordert dazu auf, Allah groß zu preisen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-takbirat-al-ihram",
           "kind": "line",
           "age": "6-8",
           "index": 2
-        },
+        }
+      ]
+    },
+    {
+      "text": "Ibn Qudāmah erläutert Allāhu akbar als ihre Worte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "fiqh-takbirat-al-ihram",
           "kind": "line",
@@ -20112,7 +20272,7 @@
       ]
     },
     {
-      "text": "Takbīrat al-Iḥrām kennenlernen. Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter.",
+      "text": "Takbīrat al-Iḥrām. Assalāmu ʿalaikum! Mit Allāhu akbar beginnt das Gebet. Es bedeutet: Allah ist größer. Qurʾān 17:111 fordert dazu auf, Allah groß zu preisen. Die genaue Eröffnung erklären die Sunnah und klassische Fiqh-Werke. Wir lernen sie gemeinsam.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -20127,7 +20287,7 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Am Anfang des Gebets gibt es ein erstes Allāhu akbar. Wir lesen Qurʾān 17:111. Der Vers bedeutet sinngemäß: Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. So kann das im Alltag aussehen: Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Die Aufgabe: Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter. kabbīrhu bedeutet: rühme Ihn groß. takbīr bedeutet: Allāhu akbar sagen; die Gebetseinzelheit ist hier Lehrerübung.",
+      "text": "Assalāmu ʿalaikum! Jedes Gebet hat einen Anfang. Die Worte dazu lauten Allāhu akbar, Allah ist größer. Diesen eröffnenden Takbīr nennen wir Takbīrat al-Iḥrām. Qurʾān 17:111 fordert dazu auf, Allah groß zu preisen. Der Vers schreibt aber nicht allein die gesamte Gebetsabfolge vor. In al-Mughnī erklärt Ibn Qudāmah mithilfe der Sunnah, dass der eröffnende Takbīr das Gebet beginnt. Wir sprechen die Worte heute ruhig nach. Wenn ein Kind die arabische Aussprache noch lernt, helfen wir freundlich und ohne Beschämung.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -20142,7 +20302,7 @@
       ]
     },
     {
-      "text": "Qurʾān 17:111 ist die gelesene Stelle.",
+      "text": "Takbīrat al-Iḥrām ist der erste Takbīr des Gebets.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -20158,7 +20318,7 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Takbīrat al-Iḥrām kennenlernen. Am Anfang des Gebets gibt es ein erstes Allāhu akbar. In Qurʾān 17:111 lernen wir sinngemäß: Der Vers endet damit, Allah zu loben, Ihm keinen Sohn und keinen Teilhaber zuzuschreiben, und sagt: Und rühme Ihn mit einem großen Rühmen. kabbīrhu bedeutet rühme Ihn groß. takbīr bedeutet Allāhu akbar sagen; die Gebetseinzelheit ist hier Lehrerübung. Stell dir diese Situation vor: Die Lehrperson hebt die Hände so, wie sie es kennt, und sagt das erste Allāhu akbar. Die Kinder sprechen es nur mit, wenn sie es schon sicher können. Welcher nächste Schritt ist gut? Wir erkennen: Danach beginnt das Gebet. Vorher reden wir nicht weiter. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+      "text": "Assalāmu ʿalaikum! Heute geht es um den eröffneten Beginn der Ṣalāh, die Takbīrat al-Iḥrām. Wir sagen dazu Allāhu akbar. Qurʾān 17:111 fordert uns auf, Allah groß zu preisen, benennt aber nicht allein alle Einzelregeln der Gebetseröffnung. Ibn Qudāmah erläutert in al-Mughnī, Bd. 1, S. 276, die Formulierung Allāhu akbar als Beginn des Gebets und führt überlieferte Belege an. Dabei unterscheidet er auch die Auffassungen der Rechtsschulen. Im Unterricht bleiben wir bei einer einfachen, belegten Einführung: Die Worte des ersten Takbīr lernen wir sorgfältig. Die Lehrperson kann die Bewegung zeigen; eine bestimmte Handhöhe wird hier nicht aus dem Qurʾān-Vers erfunden. Kannst du erklären, warum Qurʾān und Sunnah gemeinsam für die Kenntnis des Gebets wichtig sind?",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -20173,7 +20333,7 @@
       ]
     },
     {
-      "text": "Unsere Qurʾān-Stelle ist Qurʾān 17:111.",
+      "text": "Qurʾān 17:111 fordert zum großen Lob Allahs auf.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
