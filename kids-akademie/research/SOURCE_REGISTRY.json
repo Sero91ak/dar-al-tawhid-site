@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 162,
+  "sourceCount": 163,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -25,7 +25,8 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Dorar Hadith-Sharḥ 3429 direkt abgerufen 2026-10-14 (Ṣaḥīḥ al-Buḫārī 1, ʿUmar ibn al-Ḫaṭṭāb)",
       "lessonIds": [
-        "aqidah-ikhlas"
+        "aqidah-ikhlas",
+        "aqidah-ikhlas-gutes-ohne-lob"
       ],
       "binding": "authentic Sunnah linked to early lesson 12 Ikhlāṣ; separate from Tafsīr of 39:11",
       "topic": "Absicht der Taten"
@@ -3618,7 +3619,9 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Islamweb Ibn Kaṯīr 49/1005, Verse 17:23–24 mit Erklärungen unmittelbar gelesen",
       "lessonIds": [
-        "adab-respekt"
+        "adab-respekt",
+        "adab-respekt-eltern-zuhoren",
+        "adab-respekt-hilfsbereit-sein"
       ],
       "binding": "primary tafsīr for parent respect; separate hadith check pending",
       "topic": "Respekt"
@@ -3644,7 +3647,8 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Islamweb Tafsīr aṭ-Ṭabarī 50/4233, verse 39:11 gelesen",
       "lessonIds": [
-        "aqidah-ikhlas"
+        "aqidah-ikhlas",
+        "aqidah-ikhlas-gutes-ohne-lob"
       ],
       "binding": "primary early tafsīr for Ikhlāṣ; Sunnah verification pending",
       "topic": "Ikhlāṣ"
@@ -3698,7 +3702,9 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Dorar 151125, Bericht von Abū Hurayrah, Buḫārī 5971 / Muslim 2548, Status ṣaḥīḥ, direkt gelesen",
       "lessonIds": [
-        "adab-respekt"
+        "adab-respekt",
+        "adab-respekt-eltern-zuhoren",
+        "adab-respekt-hilfsbereit-sein"
       ],
       "binding": "separately checked authentic Sunnah for V1 early respect lesson, distinct from Quran 17:23–24",
       "topic": "Gute Behandlung der Mutter und des Vaters"
@@ -4099,6 +4105,32 @@
       ],
       "binding": "classical Hanbali Fiqh chapter on head wiping; final human review of extent needed",
       "topic": "Kopf beim Wuḍūʾ streichen"
+    },
+    {
+      "sourceId": "SRC-CORE30-ZAJJAJ-1714",
+      "key": "core30-salah-remembrance-allah",
+      "author": "az-Zaǧǧāǧ (Abū Isḥāq Ibrāhīm ibn as-Sarī)",
+      "work": "Maʿānī al-Qurʾān wa-Iʿrābuh",
+      "narrator": null,
+      "arabic": "وَقَوْلُهُ وَأَقِمِ الصَّلَاةَ لِذِكْرِي هَذَا عَلَى مَعْنَيَيْنِ أَحَدُهُمَا أَقِمِ الصَّلَاةَ لِأَنْ تَذْكُرَنِي",
+      "germanTranslation": null,
+      "locus": "Qurʾān 20:14, Erklärung von وَأَقِمِ الصَّلَاةَ لِذِكْرِي",
+      "volume": "3",
+      "page": "352",
+      "chapter": "Sūrat Ṭāhā – Gebet und Erinnerung an Allah",
+      "number": null,
+      "edition": "Islamweb Maʿānī al-Qurʾān wa-Iʿrābuh, Buch 233, Text 1714",
+      "directLink": "https://islamweb.net/ar/library/content/233/1714#:~:text=%D9%88%D8%A3%D9%82%D9%85%20%D8%A7%D9%84%D8%B5%D9%84%D8%A7%D8%A9%20%D9%84%D8%B0%D9%83%D8%B1%D9%8A",
+      "authenticityNote": "Am 14.10.2026 den klassischen arabischen Originaltext bei az-Zaǧǧāǧ, Islamweb 233/1714, Bd. 3 S. 352 direkt gelesen. Er beschreibt bei Qurʾān 20:14 die Deutung, das Gebet für Allahs Gedenken zu verrichten, und die weitere Deutung im Zusammenhang des Erinnerns an ein versäumtes Gebet. Der grammatische Tafsīr ist kein vollständiges hanbalitisches Gebetsrecht; hier keine einzelnen Sunnah-Berichte neu als authentisch eingestuft.",
+      "safeApplication": "Kinder lernen den Zweck des Gebets: Allah zu gedenken. Ein frei erfundener Tagesplan, feste Pausenlänge, körperliche Haltung, Anzahl Gebetselemente oder Sanktion darf nicht als wörtlicher Inhalt von 20:14 ausgegeben werden. Lernen unter Aufsicht, behutsam und ohne Beschämung; Fiqh-Einzelfragen separat prüfen.",
+      "verificationStatus": "primary-page-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Islamweb, az-Zaǧǧāǧ 233/1714, Bd. 3 S. 352, arabischer Originalabschnitt zu Qurʾān 20:14 unmittelbar gelesen",
+      "lessonIds": [
+        "fiqh-salah-allah-gedenken"
+      ],
+      "binding": "Klassischer Qurʾān-Kommentar zur Zweckangabe des Gebets; keine Endfreigabe der praktischen Ṣalāh-Details",
+      "topic": "Im Gebet Allah gedenken"
     }
   ]
 }
