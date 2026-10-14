@@ -183,7 +183,10 @@ for(const [id,versions] of Object.entries(drafts)){
   ageText[age]={...previous,goal:d.goal,lines:d.lines,intro:d.lines.join(" "),situation:d.situation,practice:d.practice,evidence:d.evidence,summary:d.summary,audioScript:old.topic+". "+d.lines.join(" ").replaceAll("lā nufarriqu bayna aḥadin minhum","die Aussage über den Glauben an alle Gesandten").replaceAll("Fa-man yaʿmal miṯqāla ḏarratin ḫayran yarah","der Satz aus Qurʾān 99, Vers 7")};
  }
  const audit={...old.sourceAudit,scientificApproval:false,editorialScopeNote:(old.sourceAudit.editorialScopeNote||"")+" | Einzelredaktion 2026-10-14 Slots 123–126; drei individuell verfasste Altersfassungen; keine wissenschaftliche Freigabe."};
- const patch=id==="ikhlas-kleine-taten-wertvoll"?{
+ const patch=id==="tawhid-allahs-wissen"?{
+  quran:{...old.quran,arabic:old.quran.arabic.replace("وَلَا يَا بِسٍ","وَلَا يَابِسٍ")},
+  sourceAudit:{...audit,arabicOrthographyCorrection:"Qurʾān 6:59: وَلا يَابِسٍ zusammenhängend, statt der fälschlichen Worttrennung im älteren V38-Entwurf; gegen arabischen Verswortlaut geprüft.",scientificApproval:false}
+ }:id==="ikhlas-kleine-taten-wertvoll"?{
   quran:{...old.quran,arabic:"فَمَنْ يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ",meaning:"Sinngemäß: Wer auch nur das Gewicht eines winzigen Stäubchens Gutes tut, wird es sehen.",excerpt:false},
   sourceAudit:{...audit,quranTextType:"single-ayah-99-7-only",editorialScopeNote:audit.editorialScopeNote+" Korrigierte Versgrenze: der Satz über das Schlechte gehört zu Vers 99:8, nicht 99:7."}
  }:{sourceAudit:audit};
