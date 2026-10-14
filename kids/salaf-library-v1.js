@@ -60,7 +60,8 @@
     '</header>'+
     '<div class="salaf-wrap">'+
       '<div class="salaf-intro"><div class="salaf-intro-top"><span class="salaf-eyebrow">DEINE GESCHICHTENWELT</span>'+
-      '<span class="salaf-age" id="salafAge"></span></div><h3>Was möchtest du entdecken?</h3></div>'+
+      '<span class="salaf-age" id="salafAge"></span></div><h3>Was möchtest du entdecken?</h3>'+ 
+       '<span class="salaf-collection-mark">8 Themen entdecken</span></div>'+
       '<div class="salaf-switch" role="group" aria-label="Bibliotheksansicht">'+
         '<button type="button" data-salaf-tab="all" class="selected">Themen</button>'+
         '<button type="button" data-salaf-tab="people">Personen</button>'+
