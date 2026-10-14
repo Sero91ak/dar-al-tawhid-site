@@ -28,7 +28,7 @@
     "catalogQuestionsVerified": 20,
     "correctAnswersVerified": 20,
     "sourceReferencesPresent": 20,
-    "audioRenderedForAllQuestionStates": 2,
+    "audioRenderedForAllQuestionStates": 3,
     "humanAudioApproved": 0,
     "audioOriginalGenerationCount": 10,
     "audioHumanApproved": 0,
@@ -243,9 +243,9 @@
       "originalExplanation": "Der Qurʾān wurde im Monat Ramaḍān herabgesandt.",
       "source": "Qurʾān 2:185",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "generation-started-review-status",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
-      "recordingStatus": "generation-started-review-status",
+      "recordingStatus": "generated-pending-asset-import-and-human-listening",
       "recordings": [
         {
           "part": "question",
@@ -275,9 +275,10 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "flowId": "YxIsLipxIKTZthjZCKUo",
           "sessionId": "91omlUwyTQSnxBDmRCCE",
-          "status": "generating",
+          "status": "completed",
           "generationId": "ddgJqQDhBo32kbRKEMe2",
-          "credits": 62.98929515418502
+          "credits": 62.98929515418502,
+          "durationSeconds": 4.64
         },
         {
           "part": "explanation",
@@ -285,9 +286,10 @@
           "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
           "flowId": "YxIsLipxIKTZthjZCKUo",
           "sessionId": "ELoCsR1DUDRug0DcBcKn",
-          "status": "pending",
+          "status": "completed",
           "generationId": "QMPZdFK2UcLnTQzAeNmI",
-          "credits": 64.92742731277534
+          "credits": 64.92742731277534,
+          "durationSeconds": 4.48
         }
       ]
     },
