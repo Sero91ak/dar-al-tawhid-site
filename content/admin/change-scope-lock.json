@@ -7662,6 +7662,18 @@
         "scripts/test-kids-account-registration-v1.js"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "adult-daily-publish-dry-run-20261012",
+      "at": "2026-10-12T11:00:00+02:00",
+      "approvedBy": "user-explicit-test-github-and-onesignal-daily-adult-publishing-20261012",
+      "reason": "Read-only GitHub PR validation of the daily adult-post publishing workflow; OneSignal is fully mocked, without API calls, secrets, real messages or live deploys. Never alter protected push code or send to subscribers.",
+      "paths": [
+        "scripts/dar-daily-release-dry-run.cjs",
+        ".github/workflows/dar-daily-release-dry-run.yml",
+        "scripts/dar-daily-onesignal-contract.mjs"
+      ],
+      "expiresAt": "2026-10-19T23:59:00.000Z"
     }
   ],
   "enabled": true
