@@ -4461,7 +4461,15 @@ const additions=
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
       "note": "Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-      "editorialScopeNote": "Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
+      "editorialScopeNote": "Welches Gebet das mittlere ist, entscheidet diese Stunde nicht, weil die Seite dafür kein abgeschlossenes hanbalitisches Urteil der Kinderstunde liefert. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
+      "classicalFiqhCrosscheck": {
+        "status": "classical-source-crosschecked-not-approved",
+        "reviewDate": "2026-10-14",
+        "classicalWork": "Ibn Qudāmah, al-Mughnī, Kitāb aṣ-Ṣalāh, places where prayer is forbidden, Bd. 1 S. 404–405",
+        "directLink": "https://islamweb.net/ar/library/content/15/788",
+        "referenceScope": "The passage discusses place restrictions, exceptions, differing reports from Aḥmad and general permissibility of prayer on earth. Qurʾān 2:238 does NOT teach a special prayer-mat requirement.",
+        "humanFiqhApproval": false
+      }
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können.",
@@ -4475,7 +4483,7 @@ const additions=
           "Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei.",
           "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten."
         ],
-        "evidence": "Wir lernen mit Qurʾān 2:238. Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können.",
+        "evidence": "Qurʾān 2:238 erinnert uns daran, auf die Gebete zu achten. Für unsere Übung räumen wir mit Erlaubnis einen ruhigen Platz frei. Der Vers nennt keinen bestimmten Gebetsteppich.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -4501,7 +4509,7 @@ const additions=
           "Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei.",
           "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:238. Sinngemäß: Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen.",
+        "evidence": "In Qurʾān 2:238 werden wir aufgefordert, die Gebete zu bewahren und vor Allah demütig zu stehen. Das Aufräumen des Spielzeugs ist eine praktische Vorbereitung, kein wörtlicher Versinhalt. Ibn Qudāmah erklärt in al-Mughnī gesondert, welche Orte für das Gebet geeignet sind.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -4527,7 +4535,7 @@ const additions=
           "Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei.",
           "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:238. Sinngemäß: Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen.",
+        "evidence": "Beleg und Übung bleiben getrennt: Qurʾān 2:238 fordert dazu auf, auf die Gebete zu achten und demütig vor Allah zu stehen. Ibn Qudāmah behandelt in al-Mughnī (Bd. 1, S. 404–405) besondere Gebetsorte und unterschiedliche Ansichten. Daraus folgt keine Pflicht zu einem eigenen Gebetsteppich. Die Reinigung und rechtliche Bewertung eines Ortes benötigt eine gesonderte Fiqh-Prüfung.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/205. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:238. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -4549,83 +4557,79 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Einen Gebetsplatz vorbereiten?",
+          "prompt": "Was ist eine gute Vorbereitung auf unsere Gebetsübung?",
           "options": [
-            "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können.",
-            "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen."
+            "Ich räume mein Spielzeug mit Erlaubnis zur Seite.",
+            "Ich lasse Spielzeug mitten auf dem Übungsplatz liegen."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können."
+          "hint": "Wir schaffen Platz.",
+          "explain": "Ein freier, ruhiger Platz hilft beim Üben. Das ist unsere Übung, kein zusätzlicher Vers."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Woran erinnert uns Qurʾān 2:238?",
           "options": [
-            "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten.",
-            "Wir üben den Satz: Ich weiß es noch nicht. Ich frage."
+            "Auf die Gebete zu achten.",
+            "Nur auf einem Teppich mit einer bestimmten Farbe zu beten."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Es geht um unsere Gebete.",
+          "explain": "Der Vers ruft dazu auf, die Gebete zu bewahren. Er nennt keine besondere Teppichfarbe."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Einen Gebetsplatz vorbereiten?",
+          "prompt": "Was steht sinngemäß in Qurʾān 2:238?",
           "options": [
-            "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen.",
-            "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können."
-          ],
-          "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können."
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
-          "options": [
-            "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten.",
-            "Wir üben den Satz: Ich weiß es noch nicht. Ich frage."
+            "Wir sollen die Gebete bewahren und demütig vor Allah stehen.",
+            "Wir müssen einen bestimmten Gebetsteppich kaufen."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denk an das Gebet selbst.",
+          "explain": "Der Vers spricht vom Bewahren der Gebete und vom demütigen Stehen; eine Kaufpflicht nennt er nicht."
         },
         {
           "type": "text",
-          "prompt": "Was möchtest du dir aus Qurʾān 2:238 merken?",
-          "sample": "Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen.",
-          "hint": "Erkläre die Stelle in eigenen Worten.",
-          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+          "prompt": "Wie bereitest du in deinem Zimmer einen ruhigen Platz zum Üben vor?",
+          "sample": "Ich räume die Spielsachen mit Erlaubnis weg und stelle mich ruhig hin.",
+          "hint": "Erzähle von unserem Beispiel mit dem Spielzeug.",
+          "explain": "Eine ruhige Vorbereitung kann hilfreich sein. Sie ist unsere praktische Übung."
+        },
+        {
+          "type": "text",
+          "prompt": "Ist das Aufräumen des Spielzeugs ein wörtlicher Teil von Qurʾān 2:238?",
+          "sample": "Nein. Der Vers spricht von den Gebeten. Das Aufräumen ist eine Übung.",
+          "hint": "Trenne den Vers von unserem Beispiel.",
+          "explain": "Wir dürfen praktische Beispiele nutzen, müssen sie aber vom Wortlaut des Qurʾān unterscheiden."
         }
       ],
       "9-10": [
         {
-          "type": "text",
-          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 2:238 lernen.",
-          "sample": "Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen.",
-          "hint": "Denke an die Bedeutung der Stelle.",
-          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-        },
-        {
-          "type": "text",
-          "prompt": "Was wäre in dieser Situation ein guter Schritt? Im Zimmer liegt Spielzeug auf dem Teppich. Das Kind räumt mit Erlaubnis eine kleine Fläche frei.",
-          "sample": "Wir legen eine saubere Unterlage gerade hin und stellen uns ruhig daneben, ohne das Gebet schon vollständig zu verrichten.",
-          "hint": "Denke an unsere Übung.",
-          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-        },
-        {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Welche Aussage trennt die Belege richtig?",
           "options": [
-            "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können.",
-            "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen."
+            "Qurʾān 2:238 fordert das Bewahren der Gebete; eine Teppichpflicht steht dort nicht.",
+            "Qurʾān 2:238 ordnet einen bestimmten Teppich für jedes Kind an."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Vergleiche die Aussage direkt mit dem Vers.",
+          "explain": "Eine Anweisung über einen bestimmten Teppich stammt nicht aus diesem Vers."
+        },
+        {
+          "type": "text",
+          "prompt": "Warum ist Ordnung im Zimmer nicht dasselbe wie rituelle Reinheit?",
+          "sample": "Ein Platz kann unordentlich, aber ohne rituell relevante Unreinheit sein. Die genaue Reinheitsregel gehört in die Fiqh-Prüfung.",
+          "hint": "Unterscheide Spielzeug und rituell relevante Unreinheit.",
+          "explain": "Ordnung und rituelle Reinheit sind unterschiedliche Begriffe. Wir erfinden keine neue Gültigkeitsregel."
+        },
+        {
+          "type": "text",
+          "prompt": "Welche zusätzliche Quelle haben wir für die Fragen zu Gebetsorten herangezogen?",
+          "sample": "Ibn Qudāmah, al-Mughnī, Band 1, Seiten 404–405, über besondere Gebetsorte.",
+          "hint": "Es ist ein klassisches hanbalitisches Fiqh-Werk.",
+          "explain": "Diese Quelle behandelt die Rechtsfragen zum Ort. Eine vollständige Rechtsfreigabe steht noch aus."
         }
       ]
     },
@@ -7078,7 +7082,19 @@ const additions=
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
       "note": "Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-      "editorialScopeNote": "Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
+      "editorialScopeNote": "Die fünf Namen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ stehen nicht in diesem Vers. Ein Stundenplan mit Uhrzeiten wurde auf der Seite nicht gelesen. Die Rechtsfrage der genauen Grenzen bleibt ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
+      "classicalFiqhCrosscheck": {
+        "status": "classical-source-crosschecked-not-approved",
+        "reviewDate": "2026-10-14",
+        "classicalWork": "Ibn Qudāmah, al-Mughnī, Kitāb aṣ-Ṣalāh, Bāb al-Mawāqīt, Bd. 1 S. 224–227",
+        "directLink": "https://www.islamweb.net/ar/library/content/15/425",
+        "additionalLinks": [
+          "https://www.islamweb.net/ar/library/content/15/428",
+          "https://www.islamweb.net/ar/library/content/15/429"
+        ],
+        "referenceScope": "Prayer times in classic Hanbali commentary; beginning of Ẓuhr at zawāl, ʿAṣr follows Ẓuhr. Qurʾān 17:78 alone does not print a complete five-prayer timetable.",
+        "humanFiqhApproval": false
+      }
     },
     "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
     "sample": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
@@ -7092,7 +7108,7 @@ const additions=
           "Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen.",
           "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als."
         ],
-        "evidence": "Wir lernen mit Qurʾān 17:78. Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
+        "evidence": "Qurʾān 17:78 nennt Zeiten, die mit dem Gebet zusammenhängen. Wir üben, morgens und später am Tag auf den Gebetsplan zu schauen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1039. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:78. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -7118,7 +7134,7 @@ const additions=
           "Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen.",
           "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als Aufdruck dieser Seite."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:78. Sinngemäß: Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Die Lesung der Morgenfrühe ist bezeugt.",
+        "evidence": "Qurʾān 17:78 nennt das Neigen der Sonne, die Nacht und die Morgenlesung. Die genaue Einteilung der Gebetszeiten erklären Fiqh-Gelehrte gesondert. Ibn Qudāmah bespricht sie in al-Mughnī im Kapitel über die Gebetszeiten. Unser Gebetsplan ist eine Lernhilfe und kein Qurʾān-Vers.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1039. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:78. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -7144,7 +7160,7 @@ const additions=
           "Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen.",
           "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als Aufdruck dieser Seite."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:78. Sinngemäß: Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Die Lesung der Morgenfrühe ist bezeugt.",
+        "evidence": "Qurʾān 17:78 nennt wichtige Zeitabschnitte des Gebets, aber nicht die vollständige Tabelle aller fünf Gebete mit Uhrzeiten. Ibn Qudāmah beschreibt in al-Mughnī, Bd. 1, S. 224–227, im Kapitel über die Gebetszeiten unter anderem den Beginn des Ẓuhr-Gebets nach dem Sonnenhöchststand und den Übergang zu ʿAṣr. Uhrzeiten auf einem modernen Gebetsplan sind berechnete Orientierung und kein Wortlaut des Verses.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1039. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:78. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -7166,83 +7182,79 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Die Gebetszeiten kennenlernen?",
+          "prompt": "Woran erinnern uns die Gebetszeiten?",
           "options": [
-            "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
-            "Nicht jeden Wunsch erfüllen wir sofort."
+            "Wir denken zu verschiedenen Tageszeiten an unsere Gebete.",
+            "Wir beten nur, wenn wir gerade Lust auf ein Spiel haben."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat."
+          "hint": "Gebete haben Zeiten.",
+          "explain": "Wir lernen, dass Gebete mit bestimmten Tageszeiten verbunden sind."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Was hilft uns, ein Gebet zur richtigen Zeit zu erkennen?",
           "options": [
-            "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als Aufdruck dieser Seite.",
-            "Wir üben den Satz: Ich warte und frage."
+            "Ein zuverlässiger Gebetsplan mit Hilfe der Eltern.",
+            "Die Punktzahl eines Spiels."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Wir schauen auf den Plan.",
+          "explain": "Ein Gebetsplan hilft im Alltag bei der Orientierung."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Die Gebetszeiten kennenlernen?",
+          "prompt": "Was nennt Qurʾān 17:78?",
           "options": [
-            "Nicht jeden Wunsch erfüllen wir sofort.",
-            "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat."
-          ],
-          "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat."
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
-          "options": [
-            "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als Aufdruck dieser Seite.",
-            "Wir üben den Satz: Ich warte und frage."
+            "Das Neigen der Sonne, die Nacht und die Morgenlesung.",
+            "Fünf Uhrzeiten mit genauen Minutenangaben."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denk an die Tagesabschnitte.",
+          "explain": "Der Vers nennt Zeitabschnitte, keine minutengenaue Tabelle."
         },
         {
           "type": "text",
-          "prompt": "Was möchtest du dir aus Qurʾān 17:78 merken?",
-          "sample": "Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Die Lesung der Morgenfrühe ist bezeugt.",
-          "hint": "Erkläre die Stelle in eigenen Worten.",
-          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+          "prompt": "Warum können sich die Uhrzeiten unserer Gebete im Jahresverlauf verändern?",
+          "sample": "Weil sich die Sonnenzeiten und die Länge des Tages im Laufe des Jahres ändern.",
+          "hint": "Überlege, wann es im Sommer und Winter hell wird.",
+          "explain": "Gebetszeiten hängen mit dem Sonnenstand zusammen."
+        },
+        {
+          "type": "text",
+          "prompt": "Wen kannst du nach der Gebetszeit fragen, wenn du unsicher bist?",
+          "sample": "Meine Eltern, eine Lehrperson oder ich schaue mit ihrer Hilfe auf einen zuverlässigen Gebetsplan.",
+          "hint": "Hol dir eine verlässliche Auskunft.",
+          "explain": "Wir dürfen bei Fragen Unterstützung suchen."
         }
       ],
       "9-10": [
         {
-          "type": "text",
-          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 17:78 lernen.",
-          "sample": "Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Die Lesung der Morgenfrühe ist bezeugt.",
-          "hint": "Denke an die Bedeutung der Stelle.",
-          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-        },
-        {
-          "type": "text",
-          "prompt": "Was wäre in dieser Situation ein guter Schritt? Ein Kind sieht auf dem bekannten Gebetsplan der App die Namen der Tagesgebete und sucht den Morgen.",
-          "sample": "Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die fünf Namen erklären wir als bekannte Bezeichnungen der App, nicht als Aufdruck dieser Seite.",
-          "hint": "Denke an unsere Übung.",
-          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-        },
-        {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Welche Quelle erklärt die Gebetszeiten über Qurʾān 17:78 hinaus genauer?",
           "options": [
-            "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat.",
-            "Nicht jeden Wunsch erfüllen wir sofort."
+            "Ibn Qudāmah, al-Mughnī, Kapitel über die Gebetszeiten.",
+            "Eine erfundene Minutentabelle als angeblicher Vers."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Wir haben ein klassisches Fiqh-Werk gelesen.",
+          "explain": "Das Kapitel Bāb al-Mawāqīt erläutert die zeitlichen Grenzen der Gebete."
+        },
+        {
+          "type": "text",
+          "prompt": "Wann beginnt nach der besprochenen Stelle in al-Mughnī das Ẓuhr-Gebet?",
+          "sample": "Nach dem Zawāl, wenn die Sonne ihren Höchststand überschritten hat.",
+          "hint": "Das arabische Wort heißt Zawāl.",
+          "explain": "Ibn Qudāmah nennt den Sonnenhöchststand als zeitliche Grenze."
+        },
+        {
+          "type": "text",
+          "prompt": "Worin unterscheiden sich Qurʾān-Vers, Fiqh-Erklärung und Gebetsplan?",
+          "sample": "Der Vers nennt wichtige Tagesabschnitte; Fiqh-Werke erläutern die Zeitgrenzen; der Gebetsplan zeigt für unseren Ort berechnete Uhrzeiten.",
+          "hint": "Drei unterschiedliche Arten der Information.",
+          "explain": "So bleiben Quelle, rechtliche Erklärung und praktische Orientierung sauber getrennt."
         }
       ]
     },
