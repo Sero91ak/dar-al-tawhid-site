@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-13",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 106,
+  "sourceCount": 109,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -2623,6 +2623,84 @@
       ],
       "binding": "additional verse span",
       "topic": "Zakāh und Ḥaǧǧ als Säulen"
+    },
+    {
+      "sourceId": "SRC-FIQH106-MUGHNI-783",
+      "key": "fiqh-106-prayer-clothing-impurity",
+      "author": "Ibn Qudāmah (Muwaffaq ad-Dīn)",
+      "work": "al-Mughnī, Kitāb aṣ-Ṣalāh, Bāb aṣ-Ṣalāh bi-n-Naǧāsah",
+      "narrator": null,
+      "arabic": "الطهارة من النجاسة في بدن المصلي وثوبه شرط لصحة الصلاة في قول أكثر أهل العلم",
+      "germanTranslation": "Sinngemäß: Die Reinheit des Körpers und der Kleidung von Naǧāsah ist nach der Darstellung des Autors bei den meisten Gelehrten eine Voraussetzung des Gebets.",
+      "locus": "Masʾalah: Idhā lam takun thiyābuhu ṭāhirah; Abschnitt zu körperlicher und textiler Unreinheit",
+      "volume": "1",
+      "page": "401 (Islamweb-Digitalpaginierung)",
+      "chapter": "Gebet bei Unreinheit",
+      "number": "Abschnitt 951 (web page context; exact printed issue number to review)",
+      "edition": "Islamweb digitale Ausgabe, Druckedition nicht separat verifiziert",
+      "directLink": "https://www.islamweb.net/ar/library/content/15/783/",
+      "authenticityNote": "Classical fiqh statement, not a Prophetic ḥadīth. Context mentions jurisprudential disagreement and hadith reports; neither authenticated here independently.",
+      "safeApplication": "Praktische Reinigung erklären, aber keinen gewöhnlichen Schmutzfleck automatisch als rituelle Naǧāsah einordnen und Kindern keine pauschale Wiederholungspflicht beim Gebet verkünden.",
+      "verificationStatus": "classical-fiqh-primary-page-read-2026-10-14-no-final-approval",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Islamweb primary al-Mughnī page opened directly; compare exact text before a legal verdict",
+      "lessonIds": [
+        "fiqh-reinheit-der-gebetskleidung"
+      ],
+      "binding": "fiqh-review-reference-not-child-speech",
+      "topic": "Reinheit von Kleidung vor dem Gebet"
+    },
+    {
+      "sourceId": "SRC-FIQH106-MUGHNI-797",
+      "key": "fiqh-106-small-impurities-exceptions",
+      "author": "Ibn Qudāmah (Muwaffaq ad-Dīn)",
+      "work": "al-Mughnī, Kitāb aṣ-Ṣalāh, Bāb aṣ-Ṣalāh bi-n-Naǧāsah",
+      "narrator": null,
+      "arabic": null,
+      "germanTranslation": "Sinngemäß: Der Autor behandelt geringfügige Unreinheit und führt unmittelbar danach Ausnahmen und Meinungsunterschiede an.",
+      "locus": "Masʾalah: Ṣallā wa-fī thawbihi naǧāsah",
+      "volume": "1",
+      "page": "409 (Islamweb-Digitalpaginierung)",
+      "chapter": "Gebet bei Unreinheit",
+      "number": "Abschnitt 973 in der digitalen Untergliederung",
+      "edition": "Islamweb digitale Ausgabe; Druckedition nicht separat verifiziert",
+      "directLink": "https://www.islamweb.net/ar/library/content/15/797/",
+      "authenticityNote": "Original Fiqh discussion; no additional hadith authentication undertaken.",
+      "safeApplication": "Keine absolute Aussage über jeden Fleck oder jedes Gebet. Ausnahmen und Meinungsverschiedenheiten separat fachlich aufarbeiten, nicht als Quizpflicht für Vorschulkinder.",
+      "verificationStatus": "classical-fiqh-primary-page-read-2026-10-14-no-final-approval",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Islamweb primary al-Mughnī page opened; exceptions observed",
+      "lessonIds": [
+        "fiqh-reinheit-der-gebetskleidung"
+      ],
+      "binding": "fiqh-review-reference-not-child-speech",
+      "topic": "Naǧāsah und Ausnahmen"
+    },
+    {
+      "sourceId": "SRC-FIQH106-TAFSIR-1907",
+      "key": "fiqh-106-quran-74-4-interpretive-variance",
+      "author": "Ibn Kaṯīr",
+      "work": "Tafsīr al-Qurʾān al-ʿAẓīm",
+      "narrator": null,
+      "arabic": "وَثِيَابَكَ فَطَهِّرْ",
+      "germanTranslation": "Sinngemäß: Und deine Kleider, reinige sie. Der Tafsīr dokumentiert neben äußerem Waschen auch Deutungen auf inneres Handeln und Reinheit von Sünde.",
+      "locus": "Qurʾān 74:4, Tafsīr Sūrat al-Muddaṯṯir",
+      "volume": "8",
+      "page": "263–264 (Islamweb-Digitalpaginierung)",
+      "chapter": "Tafsīr zu 74:4",
+      "number": "Qurʾān 74:4",
+      "edition": "Islamweb digitale Tafsīr-Ausgabe; Druckedition nicht separat verifiziert",
+      "directLink": "https://www.islamweb.net/ar/library/content/49/1907/",
+      "authenticityNote": "Ibn Kaṯīr lists multiple statements attributed to Ibn ʿAbbās, Muǧāhid, Qatādah, Muḥammad ibn Sīrīn and others. Individual chain grading not undertaken.",
+      "safeApplication": "Im Unterricht nicht behaupten, 74:4 lasse ausschließlich eine einzige Auslegung zu. Naǧāsah-Regel zusätzlich anhand al-Mughnī begründen.",
+      "verificationStatus": "classical-tafsir-primary-page-read-2026-10-14-no-final-approval",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Islamweb Ibn Kaṯīr tafsīr page opened; variant explanations read",
+      "lessonIds": [
+        "fiqh-reinheit-der-gebetskleidung"
+      ],
+      "binding": "tafsir-review-reference-not-child-speech",
+      "topic": "Qurʾān 74:4 – äußere und innere Reinheit"
     }
   ]
 }
