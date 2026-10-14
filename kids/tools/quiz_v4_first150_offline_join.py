@@ -105,6 +105,20 @@ def main():
             part=q[kind];text=part["text"]
             if part["mode"]=="existing-paid-exact":
                 gid=part["generationId"]
+                imported=(registry.get("generationClips") or {}).get(gid)
+                if imported:
+                    genuine=source_mp3(imported)
+                    if text not in text_audio:
+                        text_audio[text]={
+                            "url":"/"+str(genuine.relative_to(ROOT)),
+                            "sha256":hashfile(genuine),
+                            "voiceId":VOICE,"modelId":MODEL,
+                            "qaApproval":"pending-human-auditory-review",
+                            "audioListeningApproved":False,
+                            "status":"PREVIEW_ONLY_PREPAID_ORIGINAL_NOT_PUBLISHED"}
+                    available[kind]=text
+                    individual_complete[kind]+=1
+                    continue
                 missing_flow_ids.add(gid)
                 missing.add(text)
                 reasons[kind]="earlier-paid-original-flow-mp3-export-missing"
@@ -150,6 +164,7 @@ def main():
       "originalMasterMP3sStored":len(original),
       "completeFourPartQuestions":complete,
       "availableFieldCounts":individual_complete,
+      "importedPreviouslyPaidGenerationIdCount":len(registry.get("generationClips") or {}),
       "missingPreviouslyPaidOriginalTextCount":len(missing),
       "missingPreviouslyPaidGenerationIdCount":len(missing_flow_ids),
       "missingPreviouslyPaidTexts":[{"text":t,"requiredByQuestionParts":missing_used[t]}
