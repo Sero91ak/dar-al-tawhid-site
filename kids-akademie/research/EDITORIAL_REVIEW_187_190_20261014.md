@@ -16,6 +16,7 @@
 - Die Kinderbeispiele unterscheiden Tatsachen von Vermutungen. Mut zur Wahrheit rechtfertigt keine Bloßstellung, ungeschützte Konfrontation oder öffentliche Verbreitung persönlicher Geschichten; sichere Hilfe ist möglich.
 
 ## 190 · Ältere respektvoll ansprechen
+- **Quellenkorrektur 17:23–24:** Der bisherige Registereintrag nannte nur 17:24; das zugehörige Quiz fragt jedoch die ehrenden Worte gegenüber Eltern aus 17:23 ab. Im Kinder-Modul sind jetzt die vollständigen Verse 17:23–24 mit korrektem arabischen Wortlaut und deutschem Sinntext ergänzt; alle drei Altersfassungen und die 76 Text-Sprechkontexte sind nachgezogen. Das historische Quellenregister wird nicht stillschweigend verändert.
 - **Qurʾān 17:24**, [Ibn Kaṯīr, Tafsīr al-Isrāʾ, Islamweb 49/1005](https://www.islamweb.net/ar/library/content/49/1005): Barmherzigkeit gegenüber **Eltern** und das Gebet für sie. Nicht als wörtlicher Vers über ausnahmslos jeden älteren Menschen darstellen.
 - Höflichkeit gegenüber anderen Älteren ist pädagogisch sinnvoll; sie gibt Erwachsenen keine Befugnis, Kinder zu gefährden. Bei bedrohlichen Forderungen darf und soll das Kind sich schützen und eine Vertrauensperson einschalten.
 
