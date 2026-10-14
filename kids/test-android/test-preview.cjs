@@ -17,7 +17,7 @@ for(const icon of ["kids/icons/icon-192.png","kids/icons/icon-512.png"])
 const handler=new vm.Script(code.replace("export default {","const WORKER = {")+"\nWORKER")
  .runInNewContext({Response,Request,Headers,URL});
 let hit=0;
-const env={ASSETS:{fetch:async req=>{hit++;return new Response("KIDS-TEST-ASSET",{status:200,headers:{"Content-Type":"text/html"}})}}};
+const env={ASSETS:{fetch:async req=>{hit++;if(new URL(req.url).pathname==="/kids/start.html")return new Response(null,{status:308,headers:{Location:"/kids/start"}});return new Response("KIDS-TEST-ASSET",{status:200,headers:{"Content-Type":"text/html"}})}}};
 async function get(path,method="GET"){
  return handler.fetch(new Request("https://kids-test.example"+path,{method}),env);
 }
@@ -29,7 +29,9 @@ async function get(path,method="GET"){
  assert.equal((await get("/kids/start.html","POST")).status,405);
  assert.equal(hit,before,"POST reached assets unexpectedly");
  assert.match((await get("/")).headers.get("location"),/\/kids\/test-install\.html$/);
- assert.match((await get("/kids/")).headers.get("location"),/\/kids\/start\.html$/);
+ assert.match((await get("/kids/")).headers.get("location"),/\/kids\/start$/);
+ const html=await get("/kids/start.html");assert.equal(html.status,200,"Pretty-URL redirect loop returned instead of content");
+ assert.equal(await html.text(),"KIDS-TEST-ASSET");
  const m=await get("/kids/manifest.webmanifest");assert.equal(m.status,200);
  const json=await m.json();assert.match(json.name,/KIDS TEST/);
  assert.equal(json.scope,"/kids/");
