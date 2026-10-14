@@ -69,6 +69,8 @@ def paid_targets(items):
 
 def read_history(key,wanted):
     found={}
+    observed={"total":0,"voiceMatches":0,"v4Matches":0,"textMatches":0,"voiceAndTextMatches":0,"modelHistogram":{}}
+    wanted_texts={norm(x['text']) for x in wanted.values()}
     cursor=""
     for page in range(20):
         params={"page_size":"100"}
@@ -79,6 +81,13 @@ def read_history(key,wanted):
             text=norm(row.get("text"))
             voice=row.get("voice_id")
             model=row.get("model_id")
+            observed['total']+=1
+            observed['voiceMatches']+=int(voice==VOICE)
+            observed['v4Matches']+=int(model=='eleven_v4')
+            observed['textMatches']+=int(text in wanted_texts)
+            observed['voiceAndTextMatches']+=int(voice==VOICE and text in wanted_texts)
+            mk=str(model or 'none')
+            observed['modelHistogram'][mk]=observed['modelHistogram'].get(mk,0)+1
             for gid,w in wanted.items():
                 if gid in found or norm(w["text"])!=text or voice!=VOICE or model!="eleven_v4":continue
                 found[gid]=row
@@ -87,6 +96,7 @@ def read_history(key,wanted):
         next_cursor=rows[-1].get("history_item_id") or ""
         if not next_cursor or next_cursor==cursor:break
         cursor=next_cursor
+    print('READ_ONLY_HISTORY_AUDIT '+json.dumps(observed,ensure_ascii=False),flush=True)
     return found
 
 def join_002(gens):
