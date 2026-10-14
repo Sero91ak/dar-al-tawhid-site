@@ -9689,21 +9689,21 @@ const additions=
     "excerpt": false
   },
   "hadith": {
-    "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 11:114 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
-    "text": "Die Stunde bleibt beim Vers. Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben."
+    "source": "Ṣaḥīḥ Muslim, Nr. 612 · ʿAbdullāh ibn ʿAmr",
+    "text": "Sinngemäß: Der Prophet ﷺ nannte bei der Erklärung der Gebetszeiten Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ. Jedes Gebet hat eine bestimmte Zeit."
   },
   "sourceAudit": {
-    "hadithUrl": "https://www.islamweb.net/ar/library/content/49/805",
-    "hadithNumber": null,
-    "narrator": null,
-    "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
+    "hadithUrl": "https://www.islamweb.net/ar/library/content/1/1036",
+    "hadithNumber": "Ṣaḥīḥ Muslim 612",
+    "narrator": "ʿAbdullāh ibn ʿAmr",
+    "authenticity": "Ṣaḥīḥ Muslim 612; Original auf Islamweb Inhalt 1/1036 am 14. Oktober 2026 gelesen. Unterrichtswiedergabe klar sinngemäß; kein vollständiges wörtliches Zitat.",
     "quranReference": "11:114",
     "quranUrl": "https://www.islamweb.net/ar/library/content/49/805",
     "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
     "hadithMeaningIsParaphrase": true,
     "verifiedDate": "2026-10-13",
     "dorarReRead": false,
-    "numberUnverified": true,
+    "numberUnverified": false,
     "fiqhHumanReviewNeeded": true,
     "scientificApproval": false,
     "note": "Klassisches hanbalitisches Werk nun eingesehen: al-Mughnī, Bd. 1, S. 224–227 (Islamweb 15/425, 15/428, 15/429). Fünf Gebetsnamen aus dem Kapitel über die Gebetszeiten, nicht als wörtliche Liste aus Qurʾān 11:114 behauptet. Keine isolierte Hadithnummer neu verifiziert. Keine Fiqh-Freigabe.",
@@ -9735,7 +9735,8 @@ const additions=
         "verificationStatus": "primary-page-directly-read-no-final-approval",
         "scope": "Names Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ printed in hadith describing times; not a verbatim list in Qurʾān 11:114."
       }
-    }
+    },
+    "verifiedHadithOn": "2026-10-14"
   },
   "hint": "Lerne die Gebetsnamen von morgens bis abends, ohne die App-Tafel als Qurʾān-Wortlaut auszugeben.",
   "sample": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
