@@ -75,3 +75,67 @@ html body #salafDetail.salaf-detail:not([hidden]) .salaf-detail-scroll > .salaf-
 }
 /* Visually seamless flat header; images remain scrollable and the dedicated
  * bottom navigation, sound, reading and offline buttons remain untouched. */
+
+/* KIDS_SALAF_GLOBAL_SURFACE_AND_SCROLL_V1413
+   Scoped surface unification across overview, topic and detail; no changes
+   to dock artwork, active tab geometry, button hit areas or child content.
+   The iOS native scrollbar indicator is hidden, scrolling stays enabled.
+*/
+html,html body,html body *{
+  scrollbar-width:none!important;
+  -ms-overflow-style:none!important;
+}
+html::-webkit-scrollbar,
+html body::-webkit-scrollbar,
+html body *::-webkit-scrollbar{
+  display:none!important;
+  width:0!important;
+  height:0!important;
+}
+/* The old gradient on .app/.shell behind Salaf's solid view was visible
+   as a sharply bounded rectangle at the padded left/right and dock area.
+   Use the exact SAME profile surface on every underlying layer instead. */
+html:has(body .app:has(> .shell > #view-salaf.view.active)),
+html body:has(.app:has(> .shell > #view-salaf.view.active)),
+html body .app:has(> .shell > #view-salaf.view.active){
+  --salaf-shell-surface:#092738;
+  background:var(--salaf-shell-surface)!important;
+  background-image:none!important;
+}
+html:has(body .app[data-gender="girl"]:has(> .shell > #view-salaf.view.active)),
+html body:has(.app[data-gender="girl"]:has(> .shell > #view-salaf.view.active)),
+html body .app[data-gender="girl"]:has(> .shell > #view-salaf.view.active){
+  --salaf-shell-surface:#2b2035;
+  background:var(--salaf-shell-surface)!important;
+  background-image:none!important;
+}
+html body .app:has(> .shell > #view-salaf.view.active) > .shell,
+html body .app > .shell > #view-salaf.view.active{
+  background:var(--salaf-shell-surface)!important;
+  background-image:none!important;
+}
+/* Retain ONE dock-safe clearance in the scrolling shell, not a second
+   140px block from Salaf. Applies to overview AND opened topics. */
+html body .app:has(> .shell > #view-salaf.view.active) > .shell{
+  padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))!important;
+}
+html body .app > .shell > #view-salaf.view.active{
+  padding-bottom:0!important;
+  min-height:0!important;
+  scroll-padding-bottom:0!important;
+}
+html body .app > .shell > #view-salaf.view.active > .salaf-wrap{
+  background:transparent!important;
+  padding-bottom:16px!important;
+}
+html body #view-salaf.view.active .salaf-pane,
+html body #view-salaf.view.active .salaf-results{
+  background:transparent!important;
+}
+/* A full-screen opened Salaf story owns its own independent scroller and
+   must not inherit the overview dock padding. */
+html body #salafDetail.salaf-detail:not([hidden]),
+html body #salafDetail.salaf-detail:not([hidden]) > .salaf-detail-scroll{
+  background:var(--sl-bg,#092736)!important;
+}
+

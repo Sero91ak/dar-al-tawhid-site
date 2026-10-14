@@ -106,8 +106,8 @@ assert.ok(sw.includes("/kids/global-detail-dock-v1247.js?v=1411"));
 assert.ok( heroSeam.includes("KIDS_GLOBAL_HEADER_HERO_SEAM_V1412"),"Global hero seam contract missing");
 assert.ok( heroSeam.includes("padding-top:0!important"),"Detail shell must start at viewport top");
 assert.ok( heroSeam.includes(".ps-modal.open")&&heroSeam.includes(".ms-modal.open"),"Hero seam must cover story reader modals");
-assert.ok( html.includes("/kids/global-hero-seam-v1412.css?v=1412"),"Hero seam CSS must load after Salaf art");
-assert.ok( sw.includes("/kids/global-hero-seam-v1412.css?v=1412"),"Hero seam offline precache missing");
+assert.ok( html.includes("/kids/global-hero-seam-v1412.css?v=1413"),"Hero seam CSS must load after Salaf art");
+assert.ok( sw.includes("/kids/global-hero-seam-v1412.css?v=1413"),"Hero seam offline precache missing");
 assert.ok(sw.includes("/kids/navigation-v1182.js?v=1410"));
 assert.ok(sw.includes("/kids/salaf-library-v1.js?v=1410"));
 assert.ok(sw.includes("/kids/salaf-open-world-v1353.css?v=1410"));
@@ -155,3 +155,11 @@ assert.ok(!js.includes("i?.texts?.[age()]"),"Age-separated full stories prohibit
 assert.ok(!js.includes("i?.audio?.[age()]"),"Age-separated audio masters prohibited");
 assert.ok(sw.includes("/kids/data/salaf-library-v1.json?v=2"),"Single-master catalog offline cache missing");
 console.log("PASS: 8 reviewed assets locked, global pinned detail navigation, category-only overview, edge-to-edge layout and V1400 release IDs.");
+
+/* V1413 regression guards: one continuous profile surface, no extra dock
+   spacer, and the CSS remains independently available offline. */
+assert.ok(heroSeam.includes("KIDS_SALAF_GLOBAL_SURFACE_AND_SCROLL_V1413"));
+assert.ok(heroSeam.includes('html body .app[data-gender="girl"]:has(> .shell > #view-salaf.view.active)'));
+assert.ok(heroSeam.includes('html body .app:has(> .shell > #view-salaf.view.active) > .shell'));
+assert.ok(heroSeam.includes('scrollbar-width:none!important'));
+assert.ok(heroSeam.includes('padding-bottom:0!important'));
