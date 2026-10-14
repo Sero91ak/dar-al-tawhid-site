@@ -19,7 +19,7 @@ concurrency:
 jobs:
   restore-originals:
     name: Recover already-paid Serhat V4 originals only
-    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' && vars.ELEVENLABS_FLOW_EXPORT_ENABLED == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 18
     env:
