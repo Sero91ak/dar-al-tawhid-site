@@ -1,3 +1,11 @@
+## KIDS_GLOBAL_NO_PUBLIC_SOURCE_LINKS_V1414 – verbindlich für alle Kinderbereiche
+
+- **Keine anklickbaren Originalquellen-/Nachweislinks in TAWḤĪD KIDS**, auch nicht in dynamischen Geschichten, Leseransichten, Quiz, Qurʾān, Duʿāʾ und Akademie.
+- Präzise Fundstellen dürfen als **reiner, nicht anklickbarer Text** angezeigt werden. Original-URLs, Werk, Band, Seite, Authentizitätsprüfung bleiben intern gespeichert und sind weiterhin redaktionell zu prüfen.
+- Quellen-Buttons oder Linkkarten („Originalquelle öffnen“, „Nachweis öffnen“ usw.) sind in sämtlichen neuen und bestehenden Kinderansichten ausgeschlossen.
+- Schutz: kids/global-detail-dock-v1247.js entfernt solche Links auch nach dynamischem Rendering; scripts/kids-design-guard.js verbietet deren Einführung beim Release.
+- Erwachsenen-Website, Quellenbibliothek und die Links in Erwachsenen-Apps sind von dieser Regel nicht betroffen.
+
 ## Verbindlicher Geschichtenmodus — `KIDS_STORY_MODES_V1` (14.10.2026)
 
 Für **alle bestehenden und künftig hinzukommenden Erzählbereiche** der

@@ -254,7 +254,7 @@ function runKidsDesignGuard() {
       }
     }
     if(Number(swVersion)>=1251){
-      if(!dockJs.includes("KIDS_NO_EXTERNAL_SOURCE_PROOF_ACTIONS_V1251") ||
+      if(!dockJs.includes("KIDS_NO_EXTERNAL_SOURCE_PROOF_ACTIONS_V1414") ||
          !dockJs.includes("removeExternalSourceProofActions();")) {
         failed+=fail("Kids externe Nachweis-/Quelle-Öffnen-Aktionen sind nicht global entfernt");
       }
@@ -286,6 +286,36 @@ function runKidsDesignGuard() {
       failed += fail("Kids: Service Worker enthält nicht die aktuelle CSS/JS-Offlineversion "+swVersion);
     }
   }
+
+  // KIDS_GLOBAL_NO_PUBLIC_SOURCE_LINKS_V1414: applies to ALL present and future Kids modules.
+  // Never delete evidence metadata; only public source-link construction is banned.
+  const scanKidsDir=(directory)=>{
+    for(const entry of fs.readdirSync(directory,{withFileTypes:true})){
+      if(entry.name.startsWith('.'))continue;
+      const full=path.join(directory,entry.name);
+      const rel=path.relative(ROOT,full).replace(/\\/g,'/');
+      if(entry.isDirectory()){
+        if(/^(?:kids\/(?:assets|tools|creator-test|test-console|data|recovery|icons))(?=\/|$)/.test(rel))continue;
+        scanKidsDir(full);continue;
+      }
+      if(!/\.(?:js|html)$/.test(entry.name))continue;
+      if(/kids\/akademie\/curriculum-v\d+\.js$/.test(rel))continue;
+      const text=fs.readFileSync(full,'utf8');
+      if(/(?:Originalquelle|Originalnachweis|Nachweis|Beleg|Quelle)\s+öffnen/i.test(text))
+        failed+=fail(rel+': Quellenlink-Aktion ist in Kids verboten');
+      if(/<a[^>]*class=["'][^"']*(?:source-link|citation-link|proof-link|nachweis-link|quellen-link)[^"']*["']/i.test(text))
+        failed+=fail(rel+': Quellenlink wird als Anchor erzeugt');
+    }
+  };
+  scanKidsDir(path.join(ROOT,'kids'));
+  for(const file of ['kids/salaf-library-v1.js','kids/mubashshirun-stories.js','kids/sahabiyyat-stories.js']){
+    if(!fs.readFileSync(path.join(ROOT,file),'utf8').includes('KIDS_SOURCE_TEXT_ONLY_V1414'))
+      failed+=fail(file+': Quellen müssen als reiner Text gerendert werden');
+  }
+  if(!dockJs.includes('el.closest(containers)') ||
+     !html.includes('/kids/global-detail-dock-v1247.js?v=1414') ||
+     !doc.includes('KIDS_GLOBAL_NO_PUBLIC_SOURCE_LINKS_V1414'))
+    failed+=fail('KIDS V1414: globale Sperre nicht vollständig aktiviert');
 
   // Keep the three aligned Duʿāʾ learning levels and 120 verified mappings
   // consistent on all Kids entry routes before publishing.
