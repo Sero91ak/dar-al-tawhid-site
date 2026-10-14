@@ -2942,13 +2942,13 @@ const additions=
     "sample": "Allah kennt auch das, was kein Mensch lobt.",
     "ageText": {
       "4-5": {
-        "goal": "Allah kennt auch das, was kein Mensch lobt.",
-        "intro": "Allah kennt auch das, was kein Mensch lobt. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Stell dir vor: Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Heute üben wir: Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen. Die arabischen Worte spricht die Lehrperson.",
+        "goal": "Ich weiß, dass Allah auch kleine gute Taten kennt.",
+        "intro": "As-salāmu ʿalaikum! Hast du schon einmal etwas Gutes getan, ohne dass jemand es gesehen hat? Vielleicht hast du einen Stift aufgehoben oder dein Spielzeug weggeräumt. In Qurʾān 67:13 lernen wir, dass Allah sogar kennt, was wir nicht laut aussprechen. Das darf dir Mut machen. Du musst nicht immer Lob bekommen, damit eine gute Tat wertvoll ist. Wir überlegen heute, wem wir leise und freundlich helfen könnten. Wenn etwas schwierig ist, darfst du natürlich trotzdem um Hilfe bitten.",
         "lines": [
-          "Allah kennt auch das, was kein Mensch lobt.",
-          "Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
-          "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
-          "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen."
+          "Allah weiß, was wir laut sagen und was wir still bei uns tragen.",
+          "Qurʾān 67:13 spricht von Allahs Wissen.",
+          "Eine gute Tat ist auch ohne Applaus gut.",
+          "Wir helfen anderen, ohne immer Lob zu erwarten."
         ],
         "evidence": "Wir lernen mit Qurʾān 67:13. Allah kennt auch das, was kein Mensch lobt.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1875. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 67:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2963,18 +2963,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
-        "practice": "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
-        "summary": "Allah kennt auch das, was kein Mensch lobt. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Allah kennt unser Handeln. Allah kennt auch das, was kein Mensch lobt. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen."
+        "practice": "Wir denken uns eine kleine gute Tat aus, die wir freiwillig tun können.",
+        "summary": "Allah kennt auch das Gute, das niemand sonst gesehen hat.",
+        "audioScript": "Allah kennt unser Handeln. Allah kennt auch das Gute, das niemand sonst gesehen hat. Allah weiß, was wir laut sagen und was wir still bei uns tragen. Qurʾān 67:13 spricht von Allahs Wissen. Eine gute Tat ist auch ohne Applaus gut."
       },
       "6-8": {
-        "goal": "Allah kennt auch das, was kein Mensch lobt.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Allah kennt auch das, was kein Mensch lobt. Wir lesen Qurʾān 67:13. Der Vers bedeutet sinngemäß: Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. So kann das im Alltag aussehen: Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Die Aufgabe: Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen. asrara bedeutet: verbergen. ṣudūr bedeutet: Brüste, hier der Ort der inneren Gedanken im Vers.",
+        "goal": "Ich kann erklären, warum gute Absichten und unsichtbare gute Taten wertvoll sind.",
+        "intro": "As-salāmu ʿalaikum! Ein Kind findet im Klassenraum einen Stift und legt ihn zurück, ohne etwas darüber zu erzählen. Niemand bedankt sich, aber die Hilfe war trotzdem gut. Qurʾān 67:13 lehrt, dass Allah weiß, was Menschen leise sagen und laut aussprechen, und dass Er das Innerste kennt. Das ist kein Grund, bei Kindern Angst vor jedem Gedanken zu erzeugen. Vielmehr lernen wir: Auch ein kleines gutes Handeln kann ehrlich sein, ohne dass wir dafür Aufmerksamkeit verlangen. Wir üben, ein freundliches Beispiel zu nennen. Wenn jemand eine Sorge hat, sollte er sie aber nicht aus Angst still behalten, sondern einer vertrauenswürdigen Person erzählen.",
         "lines": [
-          "Qurʾān 67:13 ist die gelesene Stelle.",
-          "Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
-          "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 67:13 spricht von Allahs umfassendem Wissen.",
+          "Gute Taten bleiben gut, auch wenn niemand sie bemerkt.",
+          "Wir müssen wegen einzelner Gedanken keine Angstgeschichte erfinden.",
+          "Bei Sorgen dürfen wir offen um Hilfe bitten."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 67:13. Sinngemäß: Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1875. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 67:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2989,18 +2989,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
-        "practice": "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
-        "summary": "Qurʾān 67:13 trägt diese Stunde. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
-        "audioScript": "Allah kennt unser Handeln. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen."
+        "practice": "Wir sammeln freiwillige Beispiele für gute Taten ohne Wunsch nach Applaus.",
+        "summary": "Wir handeln ehrlich, auch wenn andere uns nicht beobachten.",
+        "audioScript": "Allah kennt unser Handeln. Wir handeln ehrlich, auch wenn andere uns nicht beobachten. Qurʾān 67:13 spricht von Allahs umfassendem Wissen. Gute Taten bleiben gut, auch wenn niemand sie bemerkt. Wir müssen wegen einzelner Gedanken keine Angstgeschichte erfinden."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Allah kennt unser Handeln“ anhand von Qurʾān 67:13 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Allah kennt unser Handeln. Allah kennt auch das, was kein Mensch lobt. In Qurʾān 67:13 lernen wir sinngemäß: Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. asrara bedeutet verbergen. ṣudūr bedeutet Brüste, hier der Ort der inneren Gedanken im Vers. Stell dir diese Situation vor: Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Welcher nächste Schritt ist gut? Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich verstehe, was Qurʾān 67:13 über Allahs Wissen lehrt, und wie es uns zu Ehrlichkeit anregen kann.",
+        "intro": "As-salāmu ʿalaikum! Menschen sehen nur einen Teil dessen, was wir tun, und kennen unsere Gedanken nicht vollständig. Qurʾān 67:13 unterscheidet verborgene und laute Rede und erklärt, dass Allah das Innere kennt. Wir nehmen diese Aussage als Erinnerung an Ehrlichkeit, ohne daraus ein beängstigendes Überwachungsspiel zu machen. Stell dir vor, du findest einen verlorenen Gegenstand. Du könntest ihn unbemerkt behalten oder an eine verantwortliche Person abgeben. Was wäre die ehrlichere Entscheidung, auch wenn niemand dir zuschaut? Besprich, warum eine gute Absicht und ein verantwortliches Handeln zusammengehören. Wenn dich ein belastender Gedanke beschäftigt, darfst du ihn bei einer Vertrauensperson ansprechen. Die Alltagssituation ist unser Beispiel, kein zusätzliches Verszitat.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 67:13.",
-          "Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
-          "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
-          "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen."
+          "Der Vers 67:13 nennt verborgenes und offenes Sprechen.",
+          "Allah kennt auch das, was Menschen nicht erkennen.",
+          "Ehrlichkeit kann sich gerade in unbeobachteten Situationen zeigen.",
+          "Sorgen dürfen wir mit vertrauenswürdigen Menschen teilen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 67:13. Sinngemäß: Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1875. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 67:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3015,9 +3015,9 @@ const additions=
           }
         ],
         "situation": "Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob.",
-        "practice": "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
-        "summary": "Allah kennt auch das, was kein Mensch lobt. Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
-        "audioScript": "Allah kennt unser Handeln. Allah kennt auch das, was kein Mensch lobt. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen."
+        "practice": "Wir überlegen, was mit einem gefundenen Gegenstand ehrlich und verantwortungsvoll zu tun ist.",
+        "summary": "Allahs Wissen erinnert uns an Ehrlichkeit, nicht an Angst vor dem Lernen.",
+        "audioScript": "Allah kennt unser Handeln. Allahs Wissen erinnert uns an Ehrlichkeit, nicht an Angst vor dem Lernen. Der Vers 67:13 nennt verborgenes und offenes Sprechen. Allah kennt auch das, was Menschen nicht erkennen. Ehrlichkeit kann sich gerade in unbeobachteten Situationen zeigen."
       }
     },
     "questions": {
@@ -3116,7 +3116,7 @@ const additions=
     ],
     "practice": "Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
     "summary": "Allah kennt auch das, was kein Mensch lobt. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
-    "audioScript": "Allah kennt unser Handeln. Allah kennt auch das, was kein Mensch lobt. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist. Ein Kind räumt einen Stift weg, den niemand gesehen hat, und erwartet dafür kein Lob. Wir nennen eine kleine gute Tat, die man tun kann, ohne sie sofort zu erzählen.",
+    "audioScript": "Allah kennt unser Handeln. Allah kennt auch das Gute, das niemand sonst gesehen hat. Allah weiß, was wir laut sagen und was wir still bei uns tragen. Qurʾān 67:13 spricht von Allahs Wissen. Eine gute Tat ist auch ohne Applaus gut.",
     "voiceApproved": false
   },
   "iman-gesandte": {
@@ -3160,13 +3160,13 @@ const additions=
     "sample": "Allah hat Gesandte geschickt.",
     "ageText": {
       "4-5": {
-        "goal": "Allah hat Gesandte geschickt.",
-        "intro": "Allah hat Gesandte geschickt. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. Stell dir vor: Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Heute üben wir: Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
+        "goal": "Ich glaube an die Gesandten Allahs und spreche freundlich über sie.",
+        "intro": "As-salāmu ʿalaikum! Allah hat Gesandte zu den Menschen geschickt. Im Qurʾān 2:136 hören wir mehrere ihrer Namen, zum Beispiel Ibrāhīm, Mūsā und ʿĪsā. Wir glauben an sie alle. Wenn wir ihre Namen hören, sprechen wir respektvoll über sie. Heute lernen wir drei Namen und sagen, dass sie Allahs Gesandte waren. Wir erzählen keine erfundenen Geschichten dazu. Wenn du einen Namen schwer aussprechen kannst, üben wir ihn in Ruhe.",
         "lines": [
           "Allah hat Gesandte geschickt.",
-          "Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen.",
-          "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
-          "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte."
+          "Qurʾān 2:136 nennt mehrere Propheten und Gesandte.",
+          "Wir glauben an alle Gesandten Allahs.",
+          "Wir sprechen ihre Namen freundlich und ohne Spott."
         ],
         "evidence": "Wir lernen mit Qurʾān 2:136. Allah hat Gesandte geschickt.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3181,18 +3181,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
-        "practice": "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
-        "summary": "Allah hat Gesandte geschickt.",
-        "audioScript": "Īmān an die Gesandten. Allah hat Gesandte geschickt. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen. Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte."
+        "practice": "Wir lernen drei im Vers genannte Namen und sprechen sie ruhig nach.",
+        "summary": "Wir glauben an die Gesandten Allahs und respektieren sie.",
+        "audioScript": "Īmān an die Gesandten. Wir glauben an die Gesandten Allahs und respektieren sie. Allah hat Gesandte geschickt. Qurʾān 2:136 nennt mehrere Propheten und Gesandte. Wir glauben an alle Gesandten Allahs."
       },
       "6-8": {
-        "goal": "Allah hat Gesandte geschickt.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Allah hat Gesandte geschickt. Wir lesen Qurʾān 2:136. Der Vers bedeutet sinngemäß: Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. So kann das im Alltag aussehen: Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Die Aufgabe: Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte. rusul bedeutet: Gesandte. lā nufarriqu bedeutet: wir machen keinen Unterschied.",
+        "goal": "Ich kann drei Gesandte aus Qurʾān 2:136 nennen und unseren Glauben an alle Gesandten erklären.",
+        "intro": "As-salāmu ʿalaikum! Kennst du die Namen Ibrāhīm, Ismāʿīl, Mūsā und ʿĪsā? Sie werden zusammen mit weiteren Propheten in Qurʾān 2:136 genannt. Der Vers sagt, dass wir an das glauben, was Allah zu Seinen Gesandten herabgesandt hat, und keinen von ihnen als Gesandten zurückweisen. Damit lernen wir einen wichtigen Teil des Īmān. Ein Kind hört einen neuen Prophetennamen und fragt, wie er ausgesprochen wird. Wir helfen geduldig. Wir lesen die Namen aus der Stelle und üben ihren respektvollen Gebrauch. Aus einer Namensliste dürfen wir nicht einfach eine Geschichte über einen Propheten erfinden, die der gelesene Vers gar nicht erzählt.",
         "lines": [
-          "Qurʾān 2:136 ist die gelesene Stelle.",
-          "Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen.",
-          "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
-          "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte."
+          "Qurʾān 2:136 nennt Ibrāhīm, Ismāʿīl, Isḥāq, Yaʿqūb, Mūsā und ʿĪsā sowie weitere Propheten.",
+          "Wir glauben an die Gesandten Allahs.",
+          "Einen Gesandten zurückzuweisen wäre nicht unser Glaube.",
+          "Wir lernen Namen sorgfältig, ohne Lebensgeschichten dazuzuerfinden."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:136. Sinngemäß: Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3207,18 +3207,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
-        "practice": "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
-        "summary": "Qurʾān 2:136 trägt diese Stunde. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied.",
-        "audioScript": "Īmān an die Gesandten. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte."
+        "practice": "Wir wählen drei Prophetennamen aus dem Vers und erklären, was rasūl bedeutet.",
+        "summary": "Der Īmān an die Gesandten umfasst den Glauben an alle, die Allah gesandt hat.",
+        "audioScript": "Īmān an die Gesandten. Der Īmān an die Gesandten umfasst den Glauben an alle, die Allah gesandt hat. Qurʾān 2:136 nennt Ibrāhīm, Ismāʿīl, Isḥāq, Yaʿqūb, Mūsā und ʿĪsā sowie weitere Propheten. Wir glauben an die Gesandten Allahs. Einen Gesandten zurückzuweisen wäre nicht unser Glaube."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Īmān an die Gesandten“ anhand von Qurʾān 2:136 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Īmān an die Gesandten. Allah hat Gesandte geschickt. In Qurʾān 2:136 lernen wir sinngemäß: Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. rusul bedeutet Gesandte. lā nufarriqu bedeutet wir machen keinen Unterschied. Stell dir diese Situation vor: Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Welcher nächste Schritt ist gut? Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann den Glauben an die Gesandten anhand von Qurʾān 2:136 erläutern.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 2:136 fordert dazu auf, an Allah und an die von Ihm offenbarten Botschaften zu glauben. Genannt werden unter anderem Ibrāhīm, Ismāʿīl, Isḥāq, Yaʿqūb, Mūsā und ʿĪsā. Der Vers erklärt, dass wir zwischen ihnen nicht in dem Sinn unterscheiden, dass wir die einen als Gesandte anerkennen und die anderen zurückweisen. Diese Aussage bedeutet nicht automatisch, dass alle Propheten in jeder Hinsicht denselben Rang haben. Heute arbeiten wir allein mit dem belegten Sinn der Stelle und ergänzen keine erfundene Erzählung. Ordne mehrere Namen zu und beantworte: Warum gehört Respekt vor den Gesandten zu unserem Glauben? Wenn eine Antwort unklar ist, fragen wir nach, statt sie aus dem Gedächtnis zu behaupten.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 2:136.",
-          "Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied.",
-          "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
-          "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte."
+          "Der Vers 2:136 nennt mehrere Gesandte und die offenbarten Botschaften.",
+          "Wir glauben an alle von Allah gesandten Propheten.",
+          "Die Stelle verbietet eine selektive Zurückweisung von Gesandten.",
+          "Wir trennen den Glaubensgrundsatz von unbelegten zusätzlichen Geschichten."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:136. Sinngemäß: Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/140. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:136. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3233,9 +3233,9 @@ const additions=
           }
         ],
         "situation": "Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm.",
-        "practice": "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
-        "summary": "Allah hat Gesandte geschickt. Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
-        "audioScript": "Īmān an die Gesandten. Allah hat Gesandte geschickt. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied. Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte."
+        "practice": "Wir nennen die im Vers genannten Gesandten und erläutern den Grundsatz unseres Glaubens.",
+        "summary": "Der Īmān an die Gesandten bedeutet, keinen von Allah gesandten Propheten zurückzuweisen.",
+        "audioScript": "Īmān an die Gesandten. Der Īmān an die Gesandten bedeutet, keinen von Allah gesandten Propheten zurückzuweisen. Der Vers 2:136 nennt mehrere Gesandte und die offenbarten Botschaften. Wir glauben an alle von Allah gesandten Propheten. Die Stelle verbietet eine selektive Zurückweisung von Gesandten."
       }
     },
     "questions": {
@@ -3334,7 +3334,7 @@ const additions=
     ],
     "practice": "Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
     "summary": "Allah hat Gesandte geschickt. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied.",
-    "audioScript": "Īmān an die Gesandten. Allah hat Gesandte geschickt. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen. Ein Kind hört mehrere Prophetnamen und sagt bei jedem: Friede sei mit ihm. Wir nennen drei Namen nur so, wie sie im Vers stehen, und erfinden keine zusätzliche Geschichte.",
+    "audioScript": "Īmān an die Gesandten. Wir glauben an die Gesandten Allahs und respektieren sie. Allah hat Gesandte geschickt. Qurʾān 2:136 nennt mehrere Propheten und Gesandte. Wir glauben an alle Gesandten Allahs.",
     "voiceApproved": false
   },
   "ikhlas-gute-absicht-erneuern": {
@@ -3378,13 +3378,13 @@ const additions=
     "sample": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
     "ageText": {
       "4-5": {
-        "goal": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
-        "intro": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Stell dir vor: Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Heute üben wir: Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah. Die arabischen Worte spricht die Lehrperson.",
+        "goal": "Ich versuche, eine gute Tat für Allah zu tun.",
+        "intro": "As-salāmu ʿalaikum! Heute wollen wir eine gute Absicht kennenlernen. Stell dir vor, du hilfst zu Hause beim Aufräumen. Du machst es gern, weil es gut ist und du Allah gefallen möchtest. Das heißt Ikhlāṣ: aufrichtig sein. In Qurʾān 98:5 lernen wir, Allah aufrichtig zu dienen. Du musst nicht alles perfekt machen. Manchmal erinnern wir uns erst während einer Aufgabe daran, warum wir Gutes tun. Dann können wir ruhig weitermachen. Wir üben einen kurzen Satz: Ich möchte etwas Gutes für Allah tun.",
         "lines": [
-          "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
-          "Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben.",
-          "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
-          "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah."
+          "Ikhlāṣ heißt: eine Tat aufrichtig für Allah tun.",
+          "Qurʾān 98:5 spricht über aufrichtigen Gottesdienst.",
+          "Auch kleine Hilfen können eine gute Absicht begleiten.",
+          "Wir dürfen unseren Vorsatz freundlich erneuern."
         ],
         "evidence": "Wir lernen mit Qurʾān 98:5. Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1969. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3399,18 +3399,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
-        "practice": "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
-        "summary": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Eine gute Absicht erneuern. Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah."
+        "practice": "Wir denken vor einer kleinen freiwilligen Hilfe daran, warum wir Gutes tun möchten.",
+        "summary": "Wir üben eine aufrichtige Absicht und freuen uns an kleinen guten Taten.",
+        "audioScript": "Eine gute Absicht erneuern. Wir üben eine aufrichtige Absicht und freuen uns an kleinen guten Taten. Ikhlāṣ heißt: eine Tat aufrichtig für Allah tun. Qurʾān 98:5 spricht über aufrichtigen Gottesdienst. Auch kleine Hilfen können eine gute Absicht begleiten."
       },
       "6-8": {
-        "goal": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Wir lesen Qurʾān 98:5. Der Vers bedeutet sinngemäß: Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. So kann das im Alltag aussehen: Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Die Aufgabe: Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah. muḫliṣīn bedeutet: aufrichtig, die Tat für Allah rein machend. dīn bedeutet: die Lebensweise des Dienens Allahs.",
+        "goal": "Ich kann erklären, wie eine gute Absicht vor oder während einer Tat erneuert wird.",
+        "intro": "As-salāmu ʿalaikum! Du hilfst einem Familienmitglied und bemerkst plötzlich, dass du vor allem ein Lob hören möchtest. Das kann passieren. Anstatt dich zu beschämen, kannst du dich freundlich an eine gute Absicht erinnern: Ich möchte etwas Nützliches tun und Allah damit gefallen. Qurʾān 98:5 spricht davon, Allah aufrichtig zu dienen, und nennt auch das Gebet und die Zakāh. Daraus lernen wir die Bedeutung des Wortes muḫliṣīn: aufrichtig. Wir denken heute über den Unterschied zwischen einer guten Handlung und unserem inneren Beweggrund nach. Eine andere Person kann unsere Absicht nicht sicher sehen. Darum urteilen wir nicht über die Herzen unserer Mitschüler. Jeder darf selbst überlegen, wie eine gute Absicht erneuert werden kann.",
         "lines": [
-          "Qurʾān 98:5 ist die gelesene Stelle.",
-          "Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben.",
-          "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 98:5 spricht vom aufrichtigen Dienen Allahs.",
+          "Muḫliṣīn bedeutet aufrichtig Handelnde.",
+          "Wenn wir uns beim Lernen oder Helfen ablenken lassen, dürfen wir die Absicht erneuern.",
+          "Wir urteilen nicht über die verborgenen Absichten anderer."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 98:5. Sinngemäß: Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1969. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3425,18 +3425,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
-        "practice": "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
-        "summary": "Qurʾān 98:5 trägt diese Stunde. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben.",
-        "audioScript": "Eine gute Absicht erneuern. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah."
+        "practice": "Wir nennen eine freiwillige Hilfe und formulieren dazu eine gute Absicht.",
+        "summary": "Aufrichtigkeit beginnt bei der eigenen Absicht, nicht beim Urteil über andere.",
+        "audioScript": "Eine gute Absicht erneuern. Aufrichtigkeit beginnt bei der eigenen Absicht, nicht beim Urteil über andere. Qurʾān 98:5 spricht vom aufrichtigen Dienen Allahs. Muḫliṣīn bedeutet aufrichtig Handelnde. Wenn wir uns beim Lernen oder Helfen ablenken lassen, dürfen wir die Absicht erneuern."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Eine gute Absicht erneuern“ anhand von Qurʾān 98:5 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Eine gute Absicht erneuern. Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. In Qurʾān 98:5 lernen wir sinngemäß: Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. muḫliṣīn bedeutet aufrichtig, die Tat für Allah rein machend. dīn bedeutet die Lebensweise des Dienens Allahs. Stell dir diese Situation vor: Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Welcher nächste Schritt ist gut? Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann Ikhlāṣ anhand von Qurʾān 98:5 erklären und zwischen äußerer Tat und innerer Absicht unterscheiden.",
+        "intro": "As-salāmu ʿalaikum! Zwei Menschen können von außen dieselbe gute Sache tun, aber unterschiedliche Beweggründe haben. Qurʾān 98:5 spricht von der aufrichtigen Hingabe an Allah und nennt im selben Vers Gebet und Zakāh. Für unsere Stunde beschäftigen wir uns mit dem Begriff Ikhlāṣ. Er bedeutet, Allah in der Absicht des Gottesdienstes aufrichtig zu dienen. Stell dir vor, ein Kind hilft im Haushalt und ertappt sich dabei, dass es vor allem Aufmerksamkeit erwartet. Es kann seine gute Absicht erneuern, ohne die Hilfe abzubrechen oder sich schlechtzumachen. Überlege, wie man eine Handlung weiterführen und den eigenen Beweggrund prüfen kann. Dabei bleiben wir vorsichtig: Niemand kann sicher behaupten, die verborgene Absicht eines anderen Kindes zu kennen. Eine pädagogische Übung über Haushaltsaufgaben ist kein zusätzliches Fiqh-Urteil über das Gebet.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 98:5.",
-          "Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben.",
-          "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
-          "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah."
+          "Der Vers 98:5 verbindet Gottesdienst mit Aufrichtigkeit.",
+          "Ikhlāṣ betrifft die Absicht, mit der wir Allah dienen.",
+          "Eine Absicht kann während einer guten Tat bewusst erneuert werden.",
+          "Wir beurteilen nicht die Herzen anderer Kinder."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 98:5. Sinngemäß: Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1969. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 98:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3451,9 +3451,9 @@ const additions=
           }
         ],
         "situation": "Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück.",
-        "practice": "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
-        "summary": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
-        "audioScript": "Eine gute Absicht erneuern. Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah."
+        "practice": "Wir unterscheiden anhand eines Alltagsbeispiels eine gute Tat und mögliche Beweggründe.",
+        "summary": "Ikhlāṣ bedeutet aufrichtigen Gottesdienst für Allah; die eigenen Absichten sollen wir prüfen, nicht die Herzen anderer.",
+        "audioScript": "Eine gute Absicht erneuern. Ikhlāṣ bedeutet aufrichtigen Gottesdienst für Allah; die eigenen Absichten sollen wir prüfen, nicht die Herzen anderer. Der Vers 98:5 verbindet Gottesdienst mit Aufrichtigkeit. Ikhlāṣ betrifft die Absicht, mit der wir Allah dienen. Eine Absicht kann während einer guten Tat bewusst erneuert werden."
       }
     },
     "questions": {
@@ -3552,7 +3552,7 @@ const additions=
     ],
     "practice": "Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
     "summary": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben.",
-    "audioScript": "Eine gute Absicht erneuern. Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben. Ein Kind beginnt, der Mutter zu helfen, schaut dann weg und kehrt zur Hilfe zurück. Wir sagen leise vor einer kleinen Tat: Ich mache das für Allah.",
+    "audioScript": "Eine gute Absicht erneuern. Wir üben eine aufrichtige Absicht und freuen uns an kleinen guten Taten. Ikhlāṣ heißt: eine Tat aufrichtig für Allah tun. Qurʾān 98:5 spricht über aufrichtigen Gottesdienst. Auch kleine Hilfen können eine gute Absicht begleiten.",
     "voiceApproved": false
   },
   "akhlaq-dankbarkeit-zeigen": {
@@ -3568,7 +3568,7 @@ const additions=
       "ayah": 7,
       "label": "Qurʾān 14:7",
       "arabic": "وَإِذْ تَأَذَّنَ رَبُّكُمْ لَئِنْ شَكَرْتُمْ لِأَزِيدَنَّكُمْ وَلَئِنْ كَفَرْتُمْ إِنَّ عَذَابِي لَشَدِيدٌ",
-      "meaning": "Sinngemäß: Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet.",
+      "meaning": "Sinngemäß: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der weitere Teil des Verses enthält eine ernste Warnung vor Undank.",
       "excerpt": false
     },
     "hadith": {
@@ -3596,13 +3596,13 @@ const additions=
     "sample": "Wir sagen Danke, wenn uns jemand hilft.",
     "ageText": {
       "4-5": {
-        "goal": "Wir sagen Danke, wenn uns jemand hilft.",
-        "intro": "Wir sagen Danke, wenn uns jemand hilft. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Stell dir vor: Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Heute üben wir: Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt. Die arabischen Worte spricht die Lehrperson.",
+        "goal": "Ich kann Allah und den Menschen für Gutes danken.",
+        "intro": "As-salāmu ʿalaikum! Stell dir vor, jemand reicht dir ein Glas Wasser. Was sagst du? Danke! Dankbarkeit ist etwas Schönes. Allah erinnert uns in Qurʾān 14:7 daran, dankbar zu sein. Wir können Allah für Wasser, Essen und liebevolle Hilfe danken. Und wir bedanken uns bei Menschen, die uns helfen. Heute üben wir zwei kleine Sätze: Al-ḥamdu lillāh und Danke, dass du mir geholfen hast. Wir machen daraus kein Wettrennen, wer am meisten danken kann.",
         "lines": [
-          "Wir sagen Danke, wenn uns jemand hilft.",
-          "Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben.",
-          "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
-          "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt."
+          "Dankbarkeit heißt: Gutes erkennen und würdigen.",
+          "Qurʾān 14:7 spricht über Dankbarkeit.",
+          "Wir danken Allah für Seine Gaben.",
+          "Wir sagen auch Menschen freundlich Danke."
         ],
         "evidence": "Wir lernen mit Qurʾān 14:7. Wir sagen Danke, wenn uns jemand hilft.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 14:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3617,18 +3617,18 @@ const additions=
           }
         ],
         "situation": "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
-        "practice": "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
-        "summary": "Wir sagen Danke, wenn uns jemand hilft. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Dankbarkeit zeigen. Wir sagen Danke, wenn uns jemand hilft. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt."
+        "practice": "Wir sprechen eine kurze Danksagung und denken an eine erhaltene Hilfe.",
+        "summary": "Wir danken Allah und behandeln Menschen, die uns helfen, freundlich.",
+        "audioScript": "Dankbarkeit zeigen. Wir danken Allah und behandeln Menschen, die uns helfen, freundlich. Dankbarkeit heißt: Gutes erkennen und würdigen. Qurʾān 14:7 spricht über Dankbarkeit. Wir danken Allah für Seine Gaben."
       },
       "6-8": {
-        "goal": "Wir sagen Danke, wenn uns jemand hilft.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir sagen Danke, wenn uns jemand hilft. Wir lesen Qurʾān 14:7. Der Vers bedeutet sinngemäß: Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet. So kann das im Alltag aussehen: Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Die Aufgabe: Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt. šukr bedeutet: Dankbarkeit. zīdah bedeutet: Mehrung; der Vers spricht davon, dass Allah mehrt.",
+        "goal": "Ich kann Dankbarkeit mit Worten und Handlungen zeigen.",
+        "intro": "As-salāmu ʿalaikum! Wenn dir jemand hilft, kannst du Danke sagen. Du kannst aber auch zeigen, dass du die Hilfe wertschätzt: aufmerksam zuhören, Dinge gut behandeln oder selbst etwas Gutes tun. Qurʾān 14:7 enthält Allahs Zusage, dankbaren Menschen mehr zu geben, und im weiteren Vers eine ernste Warnung vor Undank. Wir erzählen dazu keine Angstgeschichte und versprechen auch nicht, dass jedes Danke sofort ein neues Geschenk bringt. Heute sprechen wir über Schukr, also Dankbarkeit. Stell dir vor, ein Kind bekommt ein Glas Wasser. Es sagt Danke und denkt daran, dass Wasser eine Gabe Allahs ist. Wir üben, Allah und Menschen auf passende Weise zu danken. Niemand muss ein Geschenk zurückgeben, um ein Lob zu verdienen.",
         "lines": [
-          "Qurʾān 14:7 ist die gelesene Stelle.",
-          "Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben.",
-          "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 14:7 spricht von Allahs Zusage bei Dankbarkeit und warnt vor Undank.",
+          "Schukr bedeutet Dankbarkeit.",
+          "Worte und freundliche Handlungen können Dank zeigen.",
+          "Dankbarkeit ist kein Handel um sofortige Geschenke."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 14:7. Sinngemäß: Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 14:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3643,18 +3643,18 @@ const additions=
           }
         ],
         "situation": "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
-        "practice": "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
-        "summary": "Qurʾān 14:7 trägt diese Stunde. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben.",
-        "audioScript": "Dankbarkeit zeigen. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt."
+        "practice": "Wir überlegen, wofür wir dankbar sind, und formulieren eine freundliche Danksagung.",
+        "summary": "Dankbarkeit verbindet den Dank gegenüber Allah mit dem guten Umgang mit Menschen.",
+        "audioScript": "Dankbarkeit zeigen. Dankbarkeit verbindet den Dank gegenüber Allah mit dem guten Umgang mit Menschen. Qurʾān 14:7 spricht von Allahs Zusage bei Dankbarkeit und warnt vor Undank. Schukr bedeutet Dankbarkeit. Worte und freundliche Handlungen können Dank zeigen."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Dankbarkeit zeigen“ anhand von Qurʾān 14:7 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Dankbarkeit zeigen. Wir sagen Danke, wenn uns jemand hilft. In Qurʾān 14:7 lernen wir sinngemäß: Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet. šukr bedeutet Dankbarkeit. zīdah bedeutet Mehrung; der Vers spricht davon, dass Allah mehrt. Stell dir diese Situation vor: Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Welcher nächste Schritt ist gut? Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann den Sinn von Qurʾān 14:7 erläutern und zwischen Dankbarkeit und einem Anspruch auf Belohnung unterscheiden.",
+        "intro": "As-salāmu ʿalaikum! Woran erkennst du echte Dankbarkeit? Qurʾān 14:7 enthält eine Zusage Allahs an die Dankbaren und anschließend eine Warnung vor Undank. Beide Teile gehören zum Vers; wir lassen den zweiten Teil nicht verschwinden. Für Kinder erläutern wir ihn ohne angsteinflößende Bilder. Schukr bedeutet Dankbarkeit und kann sich in Worten, einer aufrichtigen Haltung und gutem Handeln zeigen. Stell dir vor, du bekommst Hilfe bei einer schwierigen Aufgabe. Du kannst dem Menschen danken und Allah für die Möglichkeit zu lernen. Der Vers ist kein Versprechen, dass jedes Danke sofort zu einem zusätzlichen Gegenstand führt. Überlege, wie sich Dankbarkeit im Alltag zeigt, auch wenn niemand eine Belohnung ankündigt. Wir respektieren persönliche Gefühle: Wer gerade Sorgen hat, darf trotzdem um Unterstützung bitten.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 14:7.",
-          "Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet.",
-          "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
-          "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt."
+          "Qurʾān 14:7 enthält eine Zusage bei Dankbarkeit und eine Warnung bei Undank.",
+          "Schukr bezeichnet den Dank gegenüber Allah.",
+          "Dank an Menschen und Dank an Allah können zusammengehören.",
+          "Wir erwarten nicht für jedes Danke eine sofortige materielle Belohnung."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 14:7. Sinngemäß: Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 14:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3669,9 +3669,9 @@ const additions=
           }
         ],
         "situation": "Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an.",
-        "practice": "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
-        "summary": "Wir sagen Danke, wenn uns jemand hilft. Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
-        "audioScript": "Dankbarkeit zeigen. Wir sagen Danke, wenn uns jemand hilft. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Der folgende Warnsatz der Seite wird in der Kinderstunde nicht als Drohbild verwendet. Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt."
+        "practice": "Wir benennen den Verssinn und entwerfen eine Handlung, die Dankbarkeit ohne Belohnungserwartung ausdrückt.",
+        "summary": "Dankbarkeit ist mehr als Höflichkeit und kein Handel um sofortige Geschenke.",
+        "audioScript": "Dankbarkeit zeigen. Dankbarkeit ist mehr als Höflichkeit und kein Handel um sofortige Geschenke. Qurʾān 14:7 enthält eine Zusage bei Dankbarkeit und eine Warnung bei Undank. Schukr bezeichnet den Dank gegenüber Allah. Dank an Menschen und Dank an Allah können zusammengehören."
       }
     },
     "questions": {
@@ -3770,7 +3770,7 @@ const additions=
     ],
     "practice": "Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
     "summary": "Wir sagen Danke, wenn uns jemand hilft. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben.",
-    "audioScript": "Dankbarkeit zeigen. Wir sagen Danke, wenn uns jemand hilft. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben. Jemand reicht ein Glas Wasser. Das Kind sagt Danke und blickt die Person an. Wir üben Danke auf Deutsch und erinnern uns, dass Dank gegenüber Menschen den Dank gegenüber Allah nicht ersetzt.",
+    "audioScript": "Dankbarkeit zeigen. Wir danken Allah und behandeln Menschen, die uns helfen, freundlich. Dankbarkeit heißt: Gutes erkennen und würdigen. Qurʾān 14:7 spricht über Dankbarkeit. Wir danken Allah für Seine Gaben.",
     "voiceApproved": false
   },
   "adab-quran-sorgfaeltig-behandeln": {
