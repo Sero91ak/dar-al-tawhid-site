@@ -9678,8 +9678,8 @@ const additions=
     "pillar": "fiqh",
     "topic": "Die Namen der fünf Gebete",
     "title": "Fiqh · Die Namen der fünf Gebete",
-    "lead": "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
-    "goal": "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
+    "lead": "Unser Tag hat fünf Pflichtgebete. Ihre Namen lernen wir Schritt für Schritt.",
+    "goal": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
     "quran": {
       "surah": 11,
       "ayah": 114,
@@ -9706,22 +9706,38 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben. Die genaue Zuordnung der Namen zu den Tagesenden bleibt ohne gelesenes Fiqh-Buch ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-      "editorialScopeNote": "Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden nicht als Wortlaut von 11:114 ausgegeben. Die genaue Zuordnung der Namen zu den Tagesenden bleibt ohne gelesenes Fiqh-Buch ungeprüft. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
+      "note": "Klassisches hanbalitisches Werk nun eingesehen: al-Mughnī, Bd. 1, S. 224–227 (Islamweb 15/425, 15/428, 15/429). Fünf Gebetsnamen aus dem Kapitel über die Gebetszeiten, nicht als wörtliche Liste aus Qurʾān 11:114 behauptet. Keine isolierte Hadithnummer neu verifiziert. Keine Fiqh-Freigabe.",
+      "editorialScopeNote": "Fünf Gebetsnamen werden anhand des klassischen Kapitels al-Mawāqīt gelehrt. Der Qurʾān-Vers 11:114 wird nur für seine tatsächliche Aussage über Gebete an Tagesabschnitten zitiert.",
+      "classicalFiqhCrosscheck": {
+        "status": "primary-hanbali-text-read-not-approved",
+        "reviewDate": "2026-10-14",
+        "author": "Ibn Qudāmah",
+        "work": "al-Mughnī",
+        "chapter": "Kitāb aṣ-Ṣalāh, Bāb al-Mawāqīt",
+        "volume": "1",
+        "page": "224–227",
+        "directLink": "https://www.islamweb.net/ar/library/content/15/425",
+        "additionalLinks": [
+          "https://www.islamweb.net/ar/library/content/15/428",
+          "https://www.islamweb.net/ar/library/content/15/429"
+        ],
+        "scope": "Classical prayer time chapter cites narrations describing five daily prayers and their times. Qurʾān 11:114 alone does not give the five names as a direct verbatim list.",
+        "humanFiqhApproval": false
+      }
     },
-    "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
-    "sample": "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
+    "hint": "Lerne die Gebetsnamen von morgens bis abends, ohne die App-Tafel als Qurʾān-Wortlaut auszugeben.",
+    "sample": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
     "ageText": {
       "4-5": {
-        "goal": "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
-        "intro": "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt. Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Stell dir vor: Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören. Heute üben wir: Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers.",
+        "goal": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+        "intro": "Assalāmu ʿalaikum, liebe Kinder! Kennst du die Namen der fünf Gebete? Am Morgen heißt das Gebet Faǧr. Dann kommen Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ. Jedes Gebet hat seinen Platz im Tagesablauf. Wir legen heute fünf Karten hin und ordnen sie gemeinsam, von morgens bis nachts. Im Qurʾān erinnert Allah uns daran, das Gebet an den Tagesabschnitten zu verrichten. Die fünf Namen lernen wir auch aus der Sunnah und den Erklärungen der Gelehrten. Sehr gut, wenn du dir heute schon zwei Namen merken kannst!",
         "lines": [
-          "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
-          "Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht.",
-          "Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören.",
-          "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers."
+          "Am Morgen heißt das Gebet Faǧr.",
+          "Danach kommt Ẓuhr, das Mittagsgebet.",
+          "Später folgen ʿAṣr und Maġrib.",
+          "In der Nacht heißt das fünfte Gebet ʿIšāʾ."
         ],
-        "evidence": "Wir lernen mit Qurʾān 11:114. Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
+        "evidence": "Qurʾān 11:114 erinnert uns an das Gebet am Tag und in der Nacht. Die fünf Namen lernen wir mit einer Lehrperson und aus weiteren zuverlässig überlieferten Quellen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/805. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 11:114. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -9733,21 +9749,21 @@ const additions=
             "de": "Nahzeiten der Nacht"
           }
         ],
-        "situation": "Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören.",
-        "practice": "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers.",
-        "summary": "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
-        "audioScript": "Die Namen der fünf Gebete. Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt. Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören. Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers."
+        "situation": "Fünf Karten liegen durcheinander. Wir helfen der Lehrperson, die Namen der Gebete von morgens bis nachts zu sortieren.",
+        "practice": "Wir legen fünf Namenskarten in die Reihenfolge von morgens bis nachts: Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ.",
+        "summary": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
+        "audioScript": "Die Namen der fünf Gebete. Assalāmu ʿalaikum! Am Morgen beten wir Faǧr. Danach kommt Ẓuhr, dann ʿAṣr, danach Maġrib und in der Nacht ʿIšāʾ. Sprich die Namen ruhig mit und ordne die fünf Lernkarten."
       },
       "6-8": {
-        "goal": "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt. Wir lesen Qurʾān 11:114. Der Vers bedeutet sinngemäß: Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg. So kann das im Alltag aussehen: Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören. Die Aufgabe: Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers. ṭarafay an-nahār bedeutet: die beiden Enden des Tages. zulaf bedeutet: Nahzeiten der Nacht.",
+        "goal": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+        "intro": "Assalāmu ʿalaikum! Heute lernen wir die fünf täglichen Pflichtgebete kennen: Faǧr ist das Morgengebet, Ẓuhr das Mittagsgebet, ʿAṣr das Nachmittagsgebet, Maġrib folgt auf den Sonnenuntergang und ʿIšāʾ gehört zur Nacht. Qurʾān 11:114 erinnert an das Gebet an den Tagesenden und nahe der Nacht. Er druckt die fünf Namen nicht als vollständige Liste. Der klassische Gelehrte Ibn Qudāmah bespricht die fünf Gebete und ihre Zeiten in al-Mughnī. Stell dir vor, du findest morgens Faǧr in einem Gebetsplan. Welche Namen stehen danach? Mit fünf Karten ordnen wir den Tag und sprechen die Namen ruhig aus. Die Karten sind eine Gedächtnishilfe.",
         "lines": [
-          "Qurʾān 11:114 ist die gelesene Stelle.",
-          "Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht.",
-          "Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören.",
-          "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers."
+          "Unsere fünf Gebete heißen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+          "Faǧr ist am Morgen, Ẓuhr um die Mittagszeit und ʿAṣr am Nachmittag.",
+          "Maġrib folgt nach Sonnenuntergang, ʿIšāʾ gehört zur Nacht.",
+          "Qurʾān 11:114 nennt Tagesabschnitte; die vollständige Namensliste lernen wir aus weiteren Quellen."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 11:114. Sinngemäß: Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg.",
+        "evidence": "Qurʾān 11:114 nennt Gebete zu Tagesabschnitten. Ibn Qudāmah erläutert die fünf Gebete in al-Mughnī, Bd. 1, S. 224 ff. Wir unterscheiden einen Qurʾān-Vers von der erklärenden Fiqh-Quelle.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/805. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 11:114. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -9759,21 +9775,21 @@ const additions=
             "de": "Nahzeiten der Nacht"
           }
         ],
-        "situation": "Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören.",
-        "practice": "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers.",
-        "summary": "Qurʾān 11:114 trägt diese Stunde. Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht.",
-        "audioScript": "Die Namen der fünf Gebete. Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören. Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers."
+        "situation": "Ein Kind sieht morgens das erste Gebet im Gebetsplan. Es will wissen, welche vier Namen bis in die Nacht folgen.",
+        "practice": "Wir legen fünf Namenskarten in die Reihenfolge von morgens bis nachts: Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ.",
+        "summary": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
+        "audioScript": "Die Namen der fünf Gebete. Faǧr gehört zum Morgen, Ẓuhr zum Mittag, ʿAṣr zum Nachmittag, Maġrib zum Sonnenuntergang und ʿIšāʾ zur Nacht. In Qurʾān 11:114 werden Gebete an Tagesabschnitten genannt. Mit fünf Lernkarten üben wir die Namen und die Reihenfolge."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Die Namen der fünf Gebete“ anhand von Qurʾān 11:114 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Die Namen der fünf Gebete. Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt. In Qurʾān 11:114 lernen wir sinngemäß: Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg. ṭarafay an-nahār bedeutet die beiden Enden des Tages. zulaf bedeutet Nahzeiten der Nacht. Stell dir diese Situation vor: Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören. Welcher nächste Schritt ist gut? Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Wir kennen die fünf Gebetsnamen in ihrer Reihenfolge: Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+        "intro": "Assalāmu ʿalaikum! Heute verbinden wir die Namen der fünf Pflichtgebete mit ihren Tagesabschnitten. Faǧr gehört zum Morgen, Ẓuhr zur Zeit nach dem Sonnenhöchststand, ʿAṣr zum Nachmittag, Maġrib zum Sonnenuntergang und ʿIšāʾ zur Nacht. Qurʾān 11:114 fordert zu Gebeten an beiden Enden des Tages und in den Nahzeiten der Nacht auf. Diese Stelle nennt nicht alle fünf Namen in einer einzigen Aufzählung. Ibn Qudāmah behandelt in al-Mughnī, Bd. 1, S. 224 ff., das Kapitel Bāb al-Mawāqīt und führt Berichte über die Gebetszeiten an. Wir ordnen die fünf Namen als Lernkarten. Nenne die Namen und erkläre, warum du eine Liste aus der Sunnah und dem Fiqh nicht fälschlich als wörtliche Liste dieses einzelnen Verses ausgeben solltest. Für die exakten Uhrzeiten benötigen wir einen zuverlässigen Gebetsplan für unseren Ort.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 11:114.",
-          "Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg.",
-          "Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören.",
-          "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers."
+          "Die fünf Gebetsnamen sind Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+          "Qurʾān 11:114 erwähnt Gebete an Tagesabschnitten, keine Liste aller fünf Namen.",
+          "Ibn Qudāmah behandelt die Gebete und ihre Zeiten im Kapitel al-Mawāqīt.",
+          "Ein Gebetsplan übersetzt diese Regeln in praktische Uhrzeiten für den jeweiligen Ort."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 11:114. Sinngemäß: Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg.",
+        "evidence": "Qurʾān 11:114 spricht über Gebete an den Tagesenden und in der Nacht. Al-Mughnī, Kitāb aṣ-Ṣalāh, Bāb al-Mawāqīt, Bd. 1, S. 224–227, behandelt die einzelnen Gebetszeiten und die überlieferten Namen. Die minutengenaue heutige Berechnung ist keine direkte Aussage dieses Verses.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/805. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 11:114. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -9785,93 +9801,93 @@ const additions=
             "de": "Nahzeiten der Nacht"
           }
         ],
-        "situation": "Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören.",
-        "practice": "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers.",
-        "summary": "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt. Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers.",
-        "audioScript": "Die Namen der fünf Gebete. Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt. Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg. Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören. Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers."
+        "situation": "Im Jahresplan stehen fünf Gebete. Ein Kind fragt, ob ihre Namen als vollständige Liste wörtlich in Qurʾān 11:114 stehen.",
+        "practice": "Wir legen fünf Namenskarten in die Reihenfolge von morgens bis nachts: Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ.",
+        "summary": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
+        "audioScript": "Die Namen der fünf Gebete. Assalāmu ʿalaikum! Wir lernen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ. Qurʾān 11:114 nennt das Gebet an Tagesabschnitten. Die vollständige Namensliste und die Einteilung der Zeiten erschließen wir mit weiteren Überlieferungen und dem klassischen Werk al-Mughnī. Ordne die Gebete von morgens bis nachts."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Die Namen der fünf Gebete?",
+          "prompt": "Welches Gebet gehört zum Morgen?",
           "options": [
-            "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
-            "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen."
+            "Faǧr.",
+            "ʿIšāʾ."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt."
+          "hint": "Wir beginnen den Tag.",
+          "explain": "Mā schāʾ Allāh! Faǧr ist das Morgengebet."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Welches Gebet gehört zur Nacht?",
           "options": [
-            "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers.",
-            "Wir üben den Gruß und keine Frage, die den anderen vorführt."
+            "ʿIšāʾ.",
+            "Ẓuhr."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Es ist das fünfte Gebet.",
+          "explain": "Allāhumma bārik! ʿIšāʾ gehört zur Nacht."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Die Namen der fünf Gebete?",
+          "prompt": "Welche Reihenfolge ist richtig?",
           "options": [
-            "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen.",
-            "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt."
+            "Faǧr – Ẓuhr – ʿAṣr – Maġrib – ʿIšāʾ.",
+            "Ẓuhr – Faǧr – Maġrib – ʿIšāʾ – ʿAṣr."
           ],
-          "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt."
+          "correct": 0,
+          "hint": "Beginne mit dem Morgengebet.",
+          "explain": "Sehr gut! Wir ordnen die fünf Pflichtgebete von morgens bis nachts."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Welches Gebet folgt auf ʿAṣr?",
           "options": [
-            "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers.",
-            "Wir üben den Gruß und keine Frage, die den anderen vorführt."
+            "Maġrib.",
+            "Faǧr."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an den Sonnenuntergang.",
+          "explain": "Maġrib folgt auf ʿAṣr."
         },
         {
           "type": "text",
-          "prompt": "Was möchtest du dir aus Qurʾān 11:114 merken?",
-          "sample": "Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg.",
-          "hint": "Erkläre die Stelle in eigenen Worten.",
-          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+          "prompt": "Wie heißen die Gebete, die du am Morgen und in der Nacht lernst?",
+          "sample": "Faǧr am Morgen und ʿIšāʾ in der Nacht.",
+          "hint": "Das erste und das fünfte Gebet.",
+          "explain": "Mā schāʾ Allāh! Diese beiden Namen hast du dir gemerkt."
         }
       ],
       "9-10": [
         {
-          "type": "text",
-          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 11:114 lernen.",
-          "sample": "Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die guten Taten nehmen die schlechten hinweg.",
-          "hint": "Denke an die Bedeutung der Stelle.",
-          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-        },
-        {
-          "type": "text",
-          "prompt": "Was wäre in dieser Situation ein guter Schritt? Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören.",
-          "sample": "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers.",
-          "hint": "Denke an unsere Übung.",
-          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-        },
-        {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Welche Aussage über Qurʾān 11:114 ist richtig?",
           "options": [
-            "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt.",
-            "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen."
+            "Der Vers nennt Gebete an Tagesabschnitten, nicht alle fünf Namen als vollständige Liste.",
+            "Der Vers nennt alle fünf Gebete mit einer festen Uhrzeit in Minuten."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Vergleiche die genaue Bedeutung des Verses.",
+          "explain": "Eine minutengenaue Fünferliste steht nicht wörtlich in 11:114."
+        },
+        {
+          "type": "text",
+          "prompt": "Nenne die fünf Pflichtgebete in der üblichen Tagesreihenfolge.",
+          "sample": "Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ.",
+          "hint": "Vom Morgen bis zur Nacht.",
+          "explain": "Allāhumma bārik! Du kennst die fünf Namen."
+        },
+        {
+          "type": "text",
+          "prompt": "Welche klassische Quelle ergänzt unseren Vers um genauere Gebetszeiten?",
+          "sample": "Ibn Qudāmah, al-Mughnī, Bd. 1, Kapitel Bāb al-Mawāqīt über die Gebetszeiten.",
+          "hint": "Ein hanbalitisches Fiqh-Werk.",
+          "explain": "Der Qurʾān-Vers und die klassische Erläuterung sind unterschiedliche Quellengattungen."
         }
       ]
     },
@@ -9885,9 +9901,9 @@ const additions=
         "de": "Nahzeiten der Nacht"
       }
     ],
-    "practice": "Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers.",
-    "summary": "Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt. Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht.",
-    "audioScript": "Die Namen der fünf Gebete. Wir kennen die fünf Namen als Bezeichnungen der App und trennen sie von dem, was der Vers selbst sagt. Der Vers sagt: Verrichte das Gebet an den beiden Enden des Tages und in den Nahzeiten der Nacht. Die Kinder legen fünf Karten mit den bekannten Namen in die Tagesfolge, die sie aus der App schon hören. Wir sagen danach laut: Diese fünf Namen stehen so nicht in diesem einen Vers.",
+    "practice": "Wir legen fünf Namenskarten in die Reihenfolge von morgens bis nachts: Faǧr, Ẓuhr, ʿAṣr, Maġrib, ʿIšāʾ.",
+    "summary": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
+    "audioScript": "Die Namen der fünf Gebete. Wir lernen: Faǧr am Morgen, Ẓuhr um die Mittagszeit, ʿAṣr am Nachmittag, Maġrib nach Sonnenuntergang und ʿIšāʾ in der Nacht. Wir legen die Namen als Karten in die richtige Reihenfolge.",
     "voiceApproved": false
   },
   "quran-was-bedeutet-sunnah": {
