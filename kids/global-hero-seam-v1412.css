@@ -75,3 +75,44 @@ html body #salafDetail.salaf-detail:not([hidden]) .salaf-detail-scroll > .salaf-
 }
 /* Visually seamless flat header; images remain scrollable and the dedicated
  * bottom navigation, sound, reading and offline buttons remain untouched. */
+
+/* KIDS_SALAF_OVERVIEW_SPACING_AND_GLOBAL_SCROLLBARS_V1413
+ * ONLY scrollbar rendering is global. Scrolling remains fully functional.
+ * Compact ONLY the Salaf category overview, not opened topic/detail pages.
+ * Synchronize the girls/boys shell surface with the active Salaf view to
+ * eliminate the rectangular purple seam above the floating bottom dock.
+ */
+html,html body,html body *{
+  scrollbar-width:none!important;
+  -ms-overflow-style:none!important;
+}
+html::-webkit-scrollbar,
+html body::-webkit-scrollbar,
+html body *::-webkit-scrollbar{
+  display:none!important;
+  width:0!important;
+  height:0!important;
+}
+html body .app:has(> .shell > #view-salaf.view.active){
+  --salaf-shell-surface:#092738;
+  background:var(--salaf-shell-surface)!important;
+}
+html body .app[data-gender="girl"]:has(> .shell > #view-salaf.view.active){
+  --salaf-shell-surface:#2b2035;
+}
+html body .app:has(> .shell > #view-salaf.view.active) > .shell,
+html body .app > .shell > #view-salaf.view.active{
+  background:var(--salaf-shell-surface)!important;
+}
+/* Remove the redundant 140px view clearance, retain one dock-safe shell
+   clearance. Never clip the final card, and do not disable normal scrolling. */
+html body .app:has(> .shell > #view-salaf.view.active:not(.kids-detail-page)) > .shell{
+  padding-bottom:calc(112px + env(safe-area-inset-bottom,0px))!important;
+}
+html body .app > .shell > #view-salaf.view.active:not(.kids-detail-page){
+  padding-bottom:0!important;
+  min-height:0!important;
+}
+html body .app > .shell > #view-salaf.view.active:not(.kids-detail-page) > .salaf-wrap{
+  padding-bottom:16px!important;
+}
