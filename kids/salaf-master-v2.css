@@ -2,11 +2,39 @@
 .salaf-detail .salaf-player[hidden],
 .salaf-detail .salaf-actions button[hidden],
 .salaf-detail .salaf-text[hidden]{display:none!important}
-.salaf-detail .salaf-actions:has(#salafFollow[hidden]){grid-template-columns:minmax(0,1fr)!important}
-.salaf-detail .salaf-actions:has(#salafFollow[hidden]) #salafRead{
-  background:var(--sl-accent)!important;color:var(--sl-accent-ink)!important;
-  min-height:66px!important;font-size:clamp(19px,4vw,24px)!important
+/* KIDS_STORY_MODES_V1 – the same three actions as Propheten / Sahaba /
+   Sahabiyyat. No second embedded player or duplicate reading text. */
+.salaf-detail .salaf-story-modes{
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:10px!important;
+  margin:18px 0 0!important;
 }
+.salaf-detail .salaf-story-modes > button[data-salaf-mode="both"]{
+  grid-column:1/-1;
+}
+.salaf-detail .salaf-story-modes > button{
+  min-width:0;
+  min-height:60px!important;
+  font-size:clamp(15px,3.6vw,19px)!important;
+  line-height:1.24!important;
+  overflow-wrap:anywhere;
+}
+.salaf-detail .salaf-story-modes > button.active{
+  background:var(--sl-accent)!important;
+  color:var(--sl-accent-ink)!important;
+  border-color:var(--sl-accent)!important;
+}
+.salaf-detail .salaf-story-modes > button:disabled{
+  opacity:.44!important;
+  cursor:not-allowed!important;
+}
+.salaf-detail .salaf-story-modes > button:focus-visible{
+  outline:3px solid var(--sl-accent)!important;
+  outline-offset:3px!important;
+}
+.salaf-detail .salaf-story-modes .kids-offline-inline{grid-column:1/-1}
+.salaf-detail #salafAudioStatus{margin:10px 4px 2px!important}
 .salaf-detail .salaf-text:not([hidden]){
   display:block!important;max-width:780px;margin-inline:auto!important;
   padding:clamp(14px,3vw,24px) 2px 32px!important;

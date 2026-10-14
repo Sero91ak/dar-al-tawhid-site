@@ -8,7 +8,7 @@
   if(!root)return;
   if(!document.querySelector('link[data-salaf-universal-master]')){
     var masterStyle=document.createElement("link");masterStyle.rel="stylesheet";
-    masterStyle.href="/kids/salaf-master-v2.css?v=3";
+    masterStyle.href="/kids/salaf-master-v2.css?v=4";
     masterStyle.setAttribute("data-salaf-universal-master","");
     document.head.appendChild(masterStyle);
   }
@@ -75,17 +75,15 @@
       '<button class="salaf-back kids-detail-dock-back" type="button" aria-label="Zurück zur Geschichtenbibliothek"></button>'+
       '<div class="kids-detail-appbar-copy"><strong class="kids-detail-appbar-title">Schätze der Salaf</strong>'+
       '<small class="kids-detail-appbar-subtitle" id="salafStoryNavTitle">Geschichte</small></div></nav>'+
-      '<div class="salaf-detail-cover" id="salafDetailCover"><span class="salaf-eyebrow">HÖRGESCHICHTE</span><h2 id="salafDetailTitle"></h2><p id="salafDetailPerson"></p></div>'+
-      '<div class="salaf-detail-body"><div class="salaf-player"><strong>Deine Geschichte</strong>'+
-        '<div class="salaf-player-row"><button type="button" id="salafBack15" aria-label="15 Sekunden zurück">−15 s</button>'+
-        '<button type="button" id="salafPlay" class="salaf-play">▶ Hören</button>'+
-        '<button type="button" id="salafNext15" aria-label="15 Sekunden vor">+15 s</button></div>'+
-        '<input id="salafSeek" type="range" min="0" max="1000" value="0" aria-label="Hörposition">'+
-        '<div class="salaf-times"><span id="salafCurrent">0:00</span><span id="salafDuration">0:00</span></div>'+
-        '<p id="salafAudioStatus" class="salaf-audio-status" role="status"></p></div>'+
-        '<div class="salaf-actions"><button type="button" id="salafRead">Lesen</button><button type="button" id="salafFollow">Hören &amp; Mitlesen</button></div>'+
-        '<article class="salaf-text" id="salafText" hidden></article>'+
-        '<section class="salaf-refs"><h3>Unsere Quellen</h3><div id="salafRefs"></div></section></div></div>'+
+      '<div class="salaf-detail-cover" id="salafDetailCover"><span class="salaf-eyebrow" id="salafDetailKicker">GESCHICHTE</span><h2 id="salafDetailTitle"></h2><p id="salafDetailPerson"></p></div>'+
+      '<div class="salaf-detail-body">'+
+         '<div class="salaf-actions salaf-story-modes" role="group" aria-label="Geschichte lesen oder hören">'+
+         '<button type="button" data-salaf-mode="both" aria-pressed="false">Hören &amp; Mitlesen</button>'+
+         '<button type="button" data-salaf-mode="listen" aria-pressed="false">Hören</button>'+
+         '<button type="button" data-salaf-mode="read" aria-pressed="true">Lesen</button></div>'+
+         '<p id="salafAudioStatus" class="salaf-audio-status" role="status" aria-live="polite"></p>'+
+         '<article class="salaf-text" id="salafText" hidden></article>'+
+         '<section class="salaf-refs"><h3>Unsere Quellen</h3><div id="salafRefs"></div></section></div></div>'+
     '</section>';
   root.innerHTML=home;
   var q=function(s){
@@ -184,13 +182,45 @@
       });
     }
   }
-  function dur(t){var n=Math.max(0,Math.floor(Number(t)||0));return Math.floor(n/60)+":"+String(n%60).padStart(2,"0")}
-  function updatePlay(){q("#salafPlay").textContent=audio.paused?"▶ Hören":"Ⅱ Pause"}
-  function updateTime(){
-    var n=Number(audio.duration)||0;q("#salafCurrent").textContent=dur(audio.currentTime);
-    q("#salafDuration").textContent=dur(n);q("#salafSeek").value=n?String(Math.round(1000*audio.currentTime/n)):"0";
+  /* KIDS_STORY_MODES_V1: same shared three choices used by the other
+     story libraries. One canonical master text/audio regardless of profile. */
+  var MODE_KEY="kids.contentMode.v19";
+  function lastMode(){try{var v=localStorage.getItem(MODE_KEY);return ["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
+  function renderModeButtons(){
+    var hasAudio=!!soundFor(active),selected=hasAudio?lastMode():"read";
+    details.querySelectorAll("[data-salaf-mode]").forEach(function(btn){
+      var key=btn.dataset.salafMode,unavailable=key!=="read"&&!hasAudio;
+      btn.disabled=unavailable;
+      btn.classList.toggle("active",key===selected);
+      btn.setAttribute("aria-pressed",String(key===selected));
+      if(unavailable)btn.setAttribute("aria-label",btn.textContent.trim()+": noch nicht verfügbar");
+      else btn.removeAttribute("aria-label");
+    });
   }
-  function pause(){try{audio.pause()}catch(_){}playing=false;updatePlay()}
+  function pause(){try{audio.pause()}catch(_){}reader?.persist?.(true)}
+  function setStoryMode(mode){
+    if(!active||!["both","listen","read"].includes(mode))return;
+    if(mode!=="read"&&!soundFor(active))return;
+    try{localStorage.setItem(MODE_KEY,mode)}catch(_){}
+    renderModeButtons();
+    var inline=q("#salafText");
+    inline.hidden=true;
+    if(mode==="read"){
+      pause();
+      if(reader?.openReading)reader.openReading();
+      else{inline.hidden=false;inline.scrollIntoView({block:"start",behavior:"smooth"})}
+      return;
+    }
+    if(mode==="listen"){
+      if(reader?.openListening)reader.openListening();
+      else if(reader?.open)reader.open();
+    }else{
+      if(reader?.openReadAlong)reader.openReadAlong();
+      else if(reader?.open)reader.open();
+      else{inline.hidden=false;inline.scrollIntoView({block:"start",behavior:"smooth"})}
+    }
+    if(audio.paused)void toggleAudio();
+  }
   function closeStory(){
     pause();reader?.close?.();details.hidden=true;details.setAttribute("aria-hidden","true");
     document.documentElement.classList.remove("salaf-detail-open");
@@ -200,25 +230,24 @@
   function showStory(i){
     if(!i||!textFor(i))return;closeStory();active=i;
     q("#salafDetailTitle").textContent=i.title;q("#salafDetailPerson").textContent=i.person;
+    q("#salafDetailKicker").textContent=soundFor(i)?"HÖRGESCHICHTE":"GESCHICHTE ZUM LESEN";
     q("#salafStoryNavTitle").textContent=i.title;
     var art=safeAsset((gender()==="girl"&&i.heroGirl)||i.hero||i.image||"")||"/kids/assets/deen/deen-entry.jpg";
     q("#salafDetailCover").style.backgroundImage="linear-gradient(0deg,#0a202b 1%,rgba(5,22,32,.08) 85%),url('"+art+"')";
     q("#salafText").innerHTML=textFor(i).split(/\n{2,}/).filter(Boolean).map(function(s){return "<p>"+esc(s)+"</p>"}).join("");
-    q("#salafText").hidden=!soundFor(i);
+    q("#salafText").hidden=true;
     var src=i.sources||[];
     q("#salafRefs").innerHTML=src.map(function(s){var link="";try{var u=new URL(s.url);if(u.protocol==="https:"&&(u.hostname==="islamweb.net"||u.hostname.endsWith(".islamweb.net")))link=u.href}catch(_){}return '<div class="salaf-ref"><strong>'+esc(s.author)+'</strong><span>'+esc(s.work)+" · "+esc(s.reference)+'</span>'+(link?'<a class="salaf-source-link" target="_blank" rel="noopener noreferrer" href="'+esc(link)+'">Originalquelle öffnen ↗</a>':"")+"</div>"}).join("");
     var url=soundFor(i);
     if(url){audio.src=url;audio.preload="metadata";q("#salafAudioStatus").textContent="Deine Hörposition wird automatisch gespeichert."}
-    else{audio.removeAttribute("src");audio.load();q("#salafAudioStatus").textContent="Diese Geschichte kannst du schon lesen. Eine Aufnahme gibt es hier bald auch."}
-    q("#salafPlay").disabled=!url;q("#salafBack15").disabled=!url;q("#salafNext15").disabled=!url;q("#salafSeek").disabled=!url;
-    q("#salafFollow").disabled=!url;q("#salafFollow").hidden=!url;
-    q(".salaf-player").hidden=!url;
-    q("#salafRead").textContent=url?"Lesen":"Geschichte lesen";updatePlay();updateTime();
+    else{audio.removeAttribute("src");audio.load();q("#salafAudioStatus").textContent="Diese Geschichte kannst du jetzt lesen. Hören ist noch nicht verfügbar."}
+    renderModeButtons();
     var act=q(".salaf-actions");act.querySelector(".kids-offline-inline")?.remove();
     if(url)window.DARKidsItemDownloads?.storyDetail(act,{category:"salaf",item:i,sourceUrl:MANIFEST,
       artwork:i.image,hero:i.hero||i.image,audioMeta:audioFor(i),readerUrl:"/kids/salaf-library-v1.js?v=1390"});
     reader?.setContent?.({key:"salaf:"+i.id,title:i.title,subtitle:i.person,
-      album:"DĀR AL TAWḤĪD KIDS · Schätze der Salaf",text:textFor(i),artwork:art,timings:audioFor(i)?.timings||[],audioOnly:false});
+      album:"TAWḤĪD KIDS · Schätze der Salaf",text:textFor(i),artwork:art,
+      timings:audioFor(i)?.timings||[],syncPoints:audioFor(i)?.syncPoints||[],audioOnly:false});
     details.hidden=false;details.setAttribute("aria-hidden","false");document.documentElement.classList.add("salaf-detail-open");details.dataset.open="yes";
     q(".salaf-detail-scroll").scrollTop=0;q(".salaf-back").focus({preventScroll:true});
   }
@@ -226,23 +255,19 @@
     if(!active||!soundFor(active))return;
     if(!audio.paused){pause();return}
     try{window.DARKidsStoryHub?.stop?.();window.DARKidsProphetStories?.stop?.();window.DARKidsSahabiyyat?.stop?.();window.DARKidsMubashshirun?.stop?.()}catch(_){}
-    audio.play().catch(function(){q("#salafAudioStatus").textContent="Bitte tippe erneut auf Hören."});
+    audio.play().catch(function(){q("#salafAudioStatus").textContent="Die Wiedergabe konnte nicht gestartet werden. Bitte erneut versuchen."});
   }
   reader=window.DARKidsFollowReader?.create({
     id:"salaf-library",audio:audio,
     getContent:function(){var i=active;return {key:i?"salaf:"+i.id:"salaf-library",title:i?.title||"Geschichte",
       subtitle:i?.person||"Schätze der Salaf",text:textFor(i),artwork:safeAsset((gender()==="girl"&&i?.heroGirl)||i?.hero||i?.image||""),
-      timings:audioFor(i)?.timings||[],audioOnly:false}},
+      timings:audioFor(i)?.timings||[],syncPoints:audioFor(i)?.syncPoints||[],audioOnly:false}},
     toggleAudio:toggleAudio,autoOpen:false,disabled:function(){return !soundFor(active)}
   })||null;
-  audio.addEventListener("timeupdate",updateTime);audio.addEventListener("durationchange",updateTime);
-  audio.addEventListener("play",updatePlay);audio.addEventListener("pause",updatePlay);audio.addEventListener("ended",updatePlay);
-  q("#salafPlay").addEventListener("click",toggleAudio);
-  q("#salafBack15").addEventListener("click",function(){audio.currentTime=Math.max(0,audio.currentTime-15)});
-  q("#salafNext15").addEventListener("click",function(){audio.currentTime=Math.min(audio.duration||Infinity,audio.currentTime+15)});
-  q("#salafSeek").addEventListener("input",function(e){if(Number(audio.duration))audio.currentTime=Number(e.target.value)*audio.duration/1000});
-  q("#salafRead").addEventListener("click",function(){q("#salafText").hidden=false;q("#salafText").scrollIntoView({block:"start",behavior:"smooth"})});
-  q("#salafFollow").addEventListener("click",function(){reader?.openReadAlong?.()});
+  audio.addEventListener("loadedmetadata",function(){reader?.restore?.()});
+  details.querySelectorAll("[data-salaf-mode]").forEach(function(btn){
+    btn.addEventListener("click",function(){setStoryMode(btn.dataset.salafMode)});
+  });
   q(".salaf-back").addEventListener("click",closeStory);
   // Keep the original back button functional after the global dock moves
   // its DOM element to the fixed top layer outside the scrollable .shell.
