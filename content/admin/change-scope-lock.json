@@ -7662,6 +7662,21 @@
         "scripts/test-kids-account-registration-v1.js"
       ],
       "expiresAt": "2026-11-30T23:59:00.000Z"
+    },
+    {
+      "id": "links-official-channels-deploy-2026-10-14",
+      "at": "2026-10-14T18:30:00+02:00",
+      "approvedBy": "user-explicit-fix-whatsapp-channel-and-push-all-links-live",
+      "reason": "Nutzerauftrag 14.10.2026: ausschließlich öffentliche /links/-Seite mit offiziellem WhatsApp-Kanal, Android-PWA anstelle unfertiger Android-TV/APK-Karten und korrektem App-Store-Icon live veröffentlichen; zugehörige Android-Marketing-Testdatei darf nur für diese Seite angepasst werden. Keine Änderungen an iOS/Kids/TV-Runtime/Push-System.",
+      "expiresAt": "2026-10-21T23:59:00.000Z",
+      "paths": [
+        "links/index.html",
+        "links/.deploy-trigger",
+        "assets/app-store-brand.svg",
+        ".github/workflows/verify-android-marketing.yml",
+        "download/validate-release.cjs",
+        "content/admin/change-scope-lock.json"
+      ]
     }
   ],
   "enabled": true
