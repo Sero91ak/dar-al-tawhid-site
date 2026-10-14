@@ -12,15 +12,16 @@
   "pauseBetweenPartsMs": 240,
   "counts": {
     "questions": 300,
-    "fullOldQuestionAudioSets": 18,
-    "uniqueSegmentsUsed": 560,
-    "alreadyPaidReusableFragments": 2,
+    "fullOldQuestionAudioSets": 17,
+    "uniqueSegmentsUsed": 561,
+    "alreadyPaidReusableFragments": 3,
     "missingDistinctSegments": 558,
     "missingCharacters": 28749,
     "previousFullSentenceCharacters": 63215,
     "reductionPercent": 54.52,
     "estimatedCreditsAtPreviouslyObservedRate": 27860,
-    "previousEstimateCredits": 61259.51
+    "previousEstimateCredits": 61259.51,
+    "previouslyPaidThreePartQuestionSets": 1
   },
   "breakdown": {
     "intro": {
@@ -6960,10 +6961,18 @@
       "number": 2,
       "ageBand": "4-6",
       "question": {
-        "mode": "reuse-full-original",
+        "mode": "compose-three-previously-paid-v4-original-segments",
         "expectedText": "Schau, was du schon alles weißt. Ist Allah Einer? Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
-        "parts": [],
-        "existingGenerationIds": []
+        "parts": [
+          "Schau, was du schon alles weißt.",
+          "Ist Allah Einer?",
+          "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein."
+        ],
+        "existingGenerationIds": [
+          "FGX65uXKWBnjULDxg3X1",
+          "KIgCxJO3RDxhsIFJSYUB",
+          "UUmC2fDiXaV5W1IQSumA"
+        ]
       },
       "correct": {
         "text": "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Du lernst immer mehr!",
@@ -17686,6 +17695,7 @@
     "Question 002 already paid three segmented question recordings; no re-generation.",
     "Explanations use one reusable intro followed by the original explanation body, preserving the exact text contract.",
     "The playback contract must preserve spacing and 240ms natural transition. A final QA gate is required.",
-    "Further V4 generation is paused until the original MP3 retrieval/access obstacle is solved."
+    "Further V4 generation is paused until the original MP3 retrieval/access obstacle is solved.",
+    "Corrected quiz 002: three already-paid V4 original segments must be composed; no full question MP3 existed. Other 17 early quiz questions reuse their full question audio."
   ]
 }
