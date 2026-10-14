@@ -1,3 +1,11 @@
+## 14.10.2026 · Gebetsplatz-Lektion 118 nachgebessert
+
+- **Echte Kinderredaktion:** `kids/akademie/curriculum-foundation-fiqh-118-v1.js` enthält **3 eigenständige Altersfassungen** (4–5, 6–8, 9–10), je vier Unterrichtsabschnitte und klare Lernziele; die ursprüngliche Lektions-ID `fiqh-gebetsplatz-vorbereiten`, vorhandene Quizfragen, Qurʾān-/Hadith-Datensätze und Fortschritte bleiben unverändert. Als **geschütztes Overlay** genau einmal im Vorschau-Index geladen.
+- **Quellenabgrenzung:** Qurʾān 2:238 betrifft das Bewahren des Gebets, ist aber **kein spezieller Beleg für eine Teppichpflicht**. **Al-Buḫārī 335/Muslim 521** (Jābir) berichten die Erde als Gebetsort; Ibn Qudāmah, `al-Mughnī`, Islamweb 15/808 behandelt tatsächliche Boden-naǧāsah. Kein pauschales Kinderurteil »jeder Fleck ungültig« oder »jeder gefährliche Ort geeignet«. Quellenakte `kids-akademie/research/SCIENTIFIC_FOUNDATION_FIQH_118_20261014.md`.
+- **Sprechtexte:** `kids/data/academy-voice-foundation-fiqh-118-delta-v1.json` enthält **19 ungenerierte Texte**, `generateCreditsUsed=0`; 3/3 Altersfassungen gegen ihr Voice-Delta überprüft: **0 Abweichungen**.
+- **Sicherung:** `kids/tools/test-academy-foundation-fiqh-118-v1.cjs` im read-only Actions-Workflow registriert; Index- und Daten-Vorprüfung grün. **GitHub-Actions-Lauf dieser neu hinzugefügten Änderungen nicht als bestanden behaupten, bevor Steps geprüft wurden.** Keine automatische Live-Veröffentlichung.
+- **Zweite Qualitätsrunde:** Jetzt **16 frühe Fiqh-Unterrichts-IDs** individuell erneut bearbeitet (3, 7, 11, 15, 19, 23, 27, 30, 33, 46, 58, 70, 82, 94, 106, 118). Gesamtstand unverändert **208/208 Lektionsentwürfe, 624/624 Altersfassungen, 0/624 wissenschaftlich endgültig freigegeben**. Nächster Schritt: fortgesetzte Altquellen-/Kinder- und Quizzesichtung, besonders übrige Fiqh-Slots und deren reale Fiqh-Ausnahmen.
+
 ## 14.10.2026 · Weitere Fiqh-Qualitätsrunde 70, 82, 94, 106
 
 - **Realer GitHub-Entwurf erstellt:** `kids/akademie/curriculum-foundation-fiqh-070-082-094-106-v1.js` erweitert die vorhandenen Unterrichts-IDs **70, 82, 94, 106** um **12 eigenständige Kinderfassungen**, jeweils mit vier Unterrichtsabschnitten, Lernziel, sicherem Beispiel, Übung, Quellenabgrenzung und Zusammenfassung. Bestehende Quizfragen, Qurʾān/Ḥadīṯ-Originalobjekte, IDs und Fortschritte unverändert.
