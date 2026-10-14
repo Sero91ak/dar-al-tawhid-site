@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 145,
+  "sourceCount": 146,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -3637,6 +3637,32 @@
       ],
       "binding": "primary early tafsīr for Ikhlāṣ; Sunnah verification pending",
       "topic": "Ikhlāṣ"
+    },
+    {
+      "sourceId": "SRC-CORE6-BUKHARI-6018",
+      "key": "core6-bukhari6018-good-speech",
+      "author": "Muḥammad ibn Ismāʿīl al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "Abū Hurayrah",
+      "arabic": "فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
+      "germanTranslation": null,
+      "locus": "Kitāb al-Adab, Bāb man kāna yuʾminu bi-llāh wa-l-yawm al-āḫir fa-lā yuʾḏi ǧārahu",
+      "volume": null,
+      "page": null,
+      "chapter": "Kitāb al-Adab",
+      "number": "6018",
+      "edition": "Dorar Ḥadīṯ-Enzyklopädie, Sharḥ 4361; verweist auf Buḫārī 6018 und Muslim 47",
+      "directLink": "https://dorar.net/hadith/sharh/4361#:~:text=%D9%81%D9%84%D9%8A%D9%82%D9%84%20%D8%AE%D9%8A%D8%B1%D8%A7%20%D8%A3%D9%88%20%D9%84%D9%8A%D8%B5%D9%85%D8%AA",
+      "authenticityNote": "Arabischer Prophetenbericht, Überlieferer Abū Hurayrah, Buḫārī 6018, Muslim 47 und Einstufung [ṣaḥīḥ] am 14.10.2026 direkt in Dorar 4361 gelesen. Der Bericht behandelt auch den guten Umgang mit Nachbarn und Gästen; die Kinderaussage ist eine sinngemäße Kurzfassung, kein vollständiges Originalzitat.",
+      "safeApplication": "Der Ḥadīṯ ermutigt zu gutem Sprechen. Er verlangt nicht, dass ein bedrohtes oder misshandeltes Kind schweigt oder sich nicht an eine Schutzperson wenden darf. Quelle der Prophetenüberlieferung getrennt von Qurʾān 17:53 ausweisen.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar Ḥadīṯ-Enzyklopädie Sharḥ 4361, arabischer Bericht / Erzähler / Buḫārī 6018 / Muslim 47 / Authentizität direkt kontrolliert",
+      "lessonIds": [
+        "adab-worte"
+      ],
+      "binding": "authentic Sunnah for early lesson 6; classical Quran Tafsir independent",
+      "topic": "Gutes sprechen oder schweigen"
     }
   ]
 }
