@@ -1809,7 +1809,7 @@ const additions=
       "ayah": 4,
       "label": "Qurʾān 74:4",
       "arabic": "وَثِيَابَكَ فَطَهِّرْ",
-      "meaning": "Sinngemäß: Der Vers lautet: Und deine Kleider, reinige sie. Die Tafsīr-Seite erklärt ihn auch mit anderen Deutungen, darunter eine Absage an die Behauptung, der Prophet sei ein Wahrsager.",
+      "meaning": "Sinngemäß: Und deine Kleider, reinige sie.",
       "excerpt": false
     },
     "hadith": {
@@ -3786,7 +3786,7 @@ const additions=
       "ayah": 79,
       "label": "Qurʾān 56:79",
       "arabic": "لَا يَمَسُّهُ إِلَّا الْمُطَهَّرُونَ",
-      "meaning": "Sinngemäß: Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel.",
+      "meaning": "Sinngemäß: Niemand berührt es außer den Gereinigten.",
       "excerpt": false
     },
     "hadith": {
@@ -4222,7 +4222,7 @@ const additions=
       "ayah": 5,
       "label": "Qurʾān 70:5",
       "arabic": "فَاصْبِرْ صَبْرًا جَمِيلًا",
-      "meaning": "Sinngemäß: Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes.",
+      "meaning": "Sinngemäß: So übe schöne Geduld.",
       "excerpt": false
     },
     "hadith": {
@@ -4662,7 +4662,7 @@ const additions=
       "ayah": 2,
       "label": "Qurʾān 1:2",
       "arabic": "الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ",
-      "meaning": "Sinngemäß: Der gespeicherte Vers lautet: Alles Lob gehört Allah, dem Herrn der Welten. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung.",
+      "meaning": "Sinngemäß: Alles Lob gebührt Allah, dem Herrn der Welten.",
       "excerpt": false
     },
     "hadith": {
