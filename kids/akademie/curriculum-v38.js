@@ -18034,223 +18034,237 @@ const additions=
     "voiceApproved": false
   },
   "fiqh-quran-rezitation-im-gebet": {
-    "id": "fiqh-quran-rezitation-im-gebet",
-    "subject": "fiqh",
-    "pillar": "fiqh",
-    "topic": "Die Qurʾān-Rezitation im Gebet",
-    "title": "Fiqh · Die Qurʾān-Rezitation im Gebet",
-    "lead": "Im Gebet wird der Qurʾān gelesen.",
-    "goal": "Im Gebet wird der Qurʾān gelesen. Wir lernen das behutsam bei einem Menschen, nicht bei einer Computerstimme.",
-    "quran": {
-      "surah": 15,
-      "ayah": 87,
-      "label": "Qurʾān 15:87",
-      "arabic": "وَلَقَدْ آتَيْنَاكَ سَبْعًا مِنَ الْمَثَانِي وَالْقُرْآنَ الْعَظِيمَ",
-      "meaning": "Sinngemäß: Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz.",
-      "excerpt": false
-    },
-    "hadith": {
-      "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 15:87 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
-      "text": "Die Stunde bleibt beim Vers. Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz."
-    },
-    "sourceAudit": {
-      "hadithUrl": "https://www.islamweb.net/ar/library/content/49/933",
-      "hadithNumber": null,
-      "narrator": null,
-      "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
-      "quranReference": "15:87",
-      "quranUrl": "https://www.islamweb.net/ar/library/content/49/933",
-      "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
-      "hadithMeaningIsParaphrase": true,
-      "verifiedDate": "2026-10-13",
-      "dorarReRead": false,
-      "numberUnverified": true,
-      "fiqhHumanReviewNeeded": true,
-      "scientificApproval": false,
-      "note": "Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-      "editorialScopeNote": "Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
-    },
-    "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
-    "sample": "Im Gebet wird der Qurʾān gelesen.",
-    "ageText": {
-      "4-5": {
-        "goal": "Im Gebet wird der Qurʾān gelesen.",
-        "intro": "Im Gebet wird der Qurʾān gelesen. Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Stell dir vor: Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu. Heute üben wir: Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme.",
-        "lines": [
-          "Im Gebet wird der Qurʾān gelesen.",
-          "Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat.",
-          "Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu.",
-          "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme."
-        ],
-        "evidence": "Wir lernen mit Qurʾān 15:87. Im Gebet wird der Qurʾān gelesen.",
-        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/933. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 15:87. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-        "terms": [
-          {
-            "say": "maṯānī",
-            "de": "wiederholte; so das Wort des Verses"
-          },
-          {
-            "say": "qirāʾah",
-            "de": "Lesung; Unterrichtswort"
-          }
-        ],
-        "situation": "Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu.",
-        "practice": "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme.",
-        "summary": "Im Gebet wird der Qurʾān gelesen.",
-        "audioScript": "Die Qurʾān-Rezitation im Gebet. Im Gebet wird der Qurʾān gelesen. Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu. Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme."
-      },
-      "6-8": {
-        "goal": "Im Gebet wird der Qurʾān gelesen.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Im Gebet wird der Qurʾān gelesen. Wir lesen Qurʾān 15:87. Der Vers bedeutet sinngemäß: Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz. So kann das im Alltag aussehen: Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu. Die Aufgabe: Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme. maṯānī bedeutet: wiederholte; so das Wort des Verses. qirāʾah bedeutet: Lesung; Unterrichtswort.",
-        "lines": [
-          "Qurʾān 15:87 ist die gelesene Stelle.",
-          "Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat.",
-          "Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu.",
-          "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme."
-        ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 15:87. Sinngemäß: Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz.",
-        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/933. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 15:87. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-        "terms": [
-          {
-            "say": "maṯānī",
-            "de": "wiederholte; so das Wort des Verses"
-          },
-          {
-            "say": "qirāʾah",
-            "de": "Lesung; Unterrichtswort"
-          }
-        ],
-        "situation": "Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu.",
-        "practice": "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme.",
-        "summary": "Qurʾān 15:87 trägt diese Stunde. Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat.",
-        "audioScript": "Die Qurʾān-Rezitation im Gebet. Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu. Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme."
-      },
-      "9-10": {
-        "goal": "Ich kann das Thema „Die Qurʾān-Rezitation im Gebet“ anhand von Qurʾān 15:87 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Die Qurʾān-Rezitation im Gebet. Im Gebet wird der Qurʾān gelesen. In Qurʾān 15:87 lernen wir sinngemäß: Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz. maṯānī bedeutet wiederholte; so das Wort des Verses. qirāʾah bedeutet Lesung; Unterrichtswort. Stell dir diese Situation vor: Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu. Welcher nächste Schritt ist gut? Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-        "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 15:87.",
-          "Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz.",
-          "Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu.",
-          "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme."
-        ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 15:87. Sinngemäß: Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz.",
-        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/933. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 15:87. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-        "terms": [
-          {
-            "say": "maṯānī",
-            "de": "wiederholte; so das Wort des Verses"
-          },
-          {
-            "say": "qirāʾah",
-            "de": "Lesung; Unterrichtswort"
-          }
-        ],
-        "situation": "Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu.",
-        "practice": "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme.",
-        "summary": "Im Gebet wird der Qurʾān gelesen. Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme.",
-        "audioScript": "Die Qurʾān-Rezitation im Gebet. Im Gebet wird der Qurʾān gelesen. Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz. Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu. Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme."
-      }
-    },
-    "questions": {
-      "4-5": [
+  "id": "fiqh-quran-rezitation-im-gebet",
+  "subject": "fiqh",
+  "pillar": "fiqh",
+  "topic": "Die Qurʾān-Rezitation im Gebet",
+  "title": "Fiqh · Die Qurʾān-Rezitation im Gebet",
+  "lead": "Im Gebet lesen wir Qurʾān. Wir lernen die Fātiḥah Schritt für Schritt.",
+  "goal": "Ich kenne die Bedeutung der Qurʾān-Rezitation im Gebet und lerne die Fātiḥah mit geeigneter Unterstützung.",
+  "quran": {
+    "surah": 15,
+    "ayah": 87,
+    "label": "Qurʾān 15:87",
+    "arabic": "وَلَقَدْ آتَيْنَاكَ سَبْعًا مِنَ الْمَثَانِي وَالْقُرْآنَ الْعَظِيمَ",
+    "meaning": "Sinngemäß: Allah hat dem Propheten ﷺ die sieben oft wiederholten Verse und den gewaltigen Qurʾān gegeben.",
+    "excerpt": false
+  },
+  "hadith": {
+    "source": "Ṣaḥīḥ al-Buḫārī, Islamweb-Eintrag 723 · ʿUbādah ibn aṣ-Ṣāmit",
+    "text": "Sinngemäß: Der Prophet ﷺ lehrte, wie wichtig die Fātiḥah beim Gebet ist: Das Gebet erfordert ihre Rezitation."
+  },
+  "sourceAudit": {
+    "hadithUrl": "https://islamweb.net/ar/library/content/0/724",
+    "hadithNumber": "Ṣaḥīḥ al-Buḫārī – Islamweb 723",
+    "narrator": "ʿUbādah ibn aṣ-Ṣāmit",
+    "authenticity": "Ṣaḥīḥ al-Buḫārī; der arabische Originalwortlaut wurde in Islamweb-Inhalt 0/724 direkt gelesen. Zählweise der Bibliotheksansicht 723; keine unbelegte Editionsgleichsetzung.",
+    "quranReference": "15:87",
+    "quranUrl": "https://www.islamweb.net/ar/library/content/49/933",
+    "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
+    "hadithMeaningIsParaphrase": true,
+    "verifiedDate": "2026-10-13",
+    "dorarReRead": false,
+    "numberUnverified": false,
+    "fiqhHumanReviewNeeded": true,
+    "scientificApproval": false,
+    "note": "Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+    "editorialScopeNote": "Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
+    "verifiedHadithOn": "2026-10-14",
+    "classicalFiqhCrosscheck": {
+      "status": "primary-hanbali-text-read-not-approved",
+      "reviewDate": "2026-10-14",
+      "author": "Ibn Qudāmah",
+      "work": "al-Mughnī",
+      "chapter": "Kitāb aṣ-Ṣalāh, Bāb Ṣifat aṣ-Ṣalāh, Masʾalat Qirāʾat al-Fātiḥah",
+      "volume": "1",
+      "page": "284",
+      "directLink": "https://www.islamweb.net/ar/library/content/15/553",
+      "tafsirLink": "https://www.islamweb.net/ar/library/content/49/933",
+      "scope": "Fātiḥah recitation and the Hanbali discussion; the Qurʾān 15:87 alone does not specify the full prayer rule. Nuances for imam/follower and inability not settled here.",
+      "humanFiqhApproval": false
+    }
+  },
+  "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
+  "sample": "Im Gebet wird der Qurʾān gelesen.",
+  "ageText": {
+    "4-5": {
+      "goal": "Die Fātiḥah gehört zum Qurʾān, den wir im Gebet lesen.",
+      "intro": "Assalāmu ʿalaikum, liebe Kinder! Im Gebet hören und lesen wir Worte aus dem Qurʾān. Eine wichtige Sūrah heißt al-Fātiḥah. Sie steht am Anfang des Qurʾān. Du musst nicht alles auf einmal können. Eine Lehrperson oder deine Eltern helfen dir, aufmerksam zuzuhören und die Worte langsam und richtig zu lernen. Heute schauen wir uns die Fātiḥah als besondere Sūrah an und freuen uns über jeden kleinen Lernschritt.",
+      "lines": [
+        "Im Gebet lesen wir aus dem Qurʾān.",
+        "Eine wichtige Sūrah heißt al-Fātiḥah.",
+        "Wir hören einer geeigneten Qurʾān-Rezitation aufmerksam zu.",
+        "Mit einer Lehrperson lernen wir die Worte Schritt für Schritt."
+      ],
+      "evidence": "Der Qurʾān spricht in 15:87 von den sieben oft Wiederholten. In der Sunnah wird die Fātiḥah als besonders wichtig für das Gebet erklärt.",
+      "sources": "Direkte Quellen: Qurʾān 15:87, Ibn Kaṯīr (Islamweb 49/933); Ṣaḥīḥ al-Buḫārī (Islamweb 0/724); Ibn Qudāmah, al-Mughnī (Islamweb 15/553). Noch ohne menschliche Endfreigabe.",
+      "terms": [
         {
-          "type": "choice",
-          "prompt": "Was lernen wir heute über Die Qurʾān-Rezitation im Gebet?",
-          "options": [
-            "Im Gebet wird der Qurʾān gelesen.",
-            "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe."
-          ],
-          "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Im Gebet wird der Qurʾān gelesen."
+          "say": "al-Fātiḥah",
+          "de": "die eröffnende Sūrah des Qurʾān"
         },
         {
-          "type": "choice",
-          "prompt": "Was können wir heute üben?",
-          "options": [
-            "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme.",
-            "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue."
-          ],
-          "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "say": "qirāʾah",
+          "de": "Rezitation, das Lesen des Qurʾān"
         }
       ],
-      "6-8": [
+      "situation": "Eine Lehrperson liest aus der Fātiḥah vor. Das Kind hört ruhig zu und stellt Fragen, wenn es ein Wort nicht versteht.",
+      "practice": "Wir hören aufmerksam zu und üben mit einer Lehrperson einen kleinen bereits erklärten Abschnitt.",
+      "summary": "Die Fātiḥah ist eine wichtige Sūrah für das Gebet. Wir lernen ohne Druck und mit Hilfe.",
+      "audioScript": "Die Qurʾān-Rezitation im Gebet. Assalāmu ʿalaikum! Im Gebet lesen wir aus dem Qurʾān. Eine wichtige Sūrah ist al-Fātiḥah. Wir hören aufmerksam zu und lernen ihre Worte mit einer Lehrperson Schritt für Schritt."
+    },
+    "6-8": {
+      "goal": "Ich kenne die Fātiḥah als wichtige Sūrah für das Gebet und kann Vers und Sunnah unterscheiden.",
+      "intro": "Assalāmu ʿalaikum! Heute geht es um das Lesen des Qurʾān im Gebet. Wir lernen die Sūrah al-Fātiḥah kennen. Allah erwähnt im Qurʾān, in Sūrah 15, Vers 87, die sieben oft Wiederholten. Ibn Kaṯīr erklärt in seinem Tafsīr, warum Gelehrte und Überlieferungen diese Worte mit der Fātiḥah verbinden. Der Prophet ﷺ erklärte außerdem in einer authentischen Überlieferung die besondere Rolle der Fātiḥah im Gebet. Wir hören einer geeigneten Qurʾān-Rezitation aufmerksam zu. Wenn ein Wort schwierig ist, darfst du fragen. Mit einer Lehrperson lernen wir kleine Abschnitte richtig, ohne ein anderes Kind zu drängen.",
+      "lines": [
+        "Qurʾān 15:87 nennt die sieben oft Wiederholten.",
+        "Der Tafsīr erläutert den Zusammenhang mit der Fātiḥah.",
+        "Die Sunnah lehrt die besondere Bedeutung ihrer Rezitation im Gebet.",
+        "Wir lernen behutsam mit einer Lehrperson und wiederholen nur, was wir verstehen."
+      ],
+      "evidence": "Qurʾān 15:87 erwähnt die sieben oft Wiederholten; Ibn Kaṯīrs Tafsīr bespricht die Fātiḥah. Ṣaḥīḥ al-Buḫārī (Islamweb 723) nennt die Bedeutung ihrer Rezitation im Gebet. Dies sind unterschiedliche Belege, keine einzige wörtliche Versregel.",
+      "sources": "Direkte Quellen: Qurʾān 15:87, Ibn Kaṯīr (Islamweb 49/933); Ṣaḥīḥ al-Buḫārī (Islamweb 0/724); Ibn Qudāmah, al-Mughnī (Islamweb 15/553). Noch ohne menschliche Endfreigabe.",
+      "terms": [
         {
-          "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Die Qurʾān-Rezitation im Gebet?",
-          "options": [
-            "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe.",
-            "Im Gebet wird der Qurʾān gelesen."
-          ],
-          "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Im Gebet wird der Qurʾān gelesen."
+          "say": "al-Fātiḥah",
+          "de": "die eröffnende Sūrah des Qurʾān"
         },
         {
-          "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
-          "options": [
-            "Wir üben den kurzen Satz: Nein. Ich sage es einer Person, der ich vertraue.",
-            "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme."
-          ],
-          "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
-        },
-        {
-          "type": "text",
-          "prompt": "Was möchtest du dir aus Qurʾān 15:87 merken?",
-          "sample": "Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz.",
-          "hint": "Erkläre die Stelle in eigenen Worten.",
-          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+          "say": "qirāʾah",
+          "de": "Rezitation, das Lesen des Qurʾān"
         }
       ],
-      "9-10": [
-        {
-          "type": "text",
-          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 15:87 lernen.",
-          "sample": "Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Der gespeicherte Ausdruck identifiziert diese sieben nicht mit einem zusätzlichen Satz.",
-          "hint": "Denke an die Bedeutung der Stelle.",
-          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-        },
-        {
-          "type": "text",
-          "prompt": "Was wäre in dieser Situation ein guter Schritt? Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu.",
-          "sample": "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme.",
-          "hint": "Denke an unsere Übung.",
-          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
-          "options": [
-            "Im Gebet wird der Qurʾān gelesen.",
-            "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe."
-          ],
-          "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
-        }
-      ]
+      "situation": "Zwei Kinder lernen bei einer Lehrperson. Eines kennt schon mehr Verse. Beide dürfen in ihrem eigenen Tempo üben.",
+      "practice": "Wir hören eine geeignete Rezitation und erklären in eigenen Worten, warum sorgfältiges Lernen wichtig ist.",
+      "summary": "Die Fātiḥah ist wichtig für das Gebet. Der Qurʾān-Vers, der Tafsīr und der Hadith werden als unterschiedliche Quellen verstanden.",
+      "audioScript": "Die Qurʾān-Rezitation im Gebet. Heute lernen wir al-Fātiḥah kennen. Qurʾān 15:87 spricht von den sieben oft Wiederholten. Der Tafsīr erläutert die Bedeutung der Fātiḥah, und die Sunnah lehrt ihre besondere Stellung im Gebet. Wir lernen mit einer Lehrperson und ohne Leistungsdruck."
     },
-    "terms": [
+    "9-10": {
+      "goal": "Ich kann den Vers 15:87, den Hadith zur Fātiḥah und die hanbalitische Fiqh-Erläuterung unterscheiden.",
+      "intro": "Assalāmu ʿalaikum! Bei der Ṣalāh gehört das Lesen des Qurʾān zum Gottesdienst. Qurʾān 15:87 erwähnt die sieben oft Wiederholten und den gewaltigen Qurʾān. Ibn Kaṯīr erläutert im Tafsīr, dass die Fātiḥah als die sieben oft Wiederholten verstanden wird, und bespricht die dafür angeführten Berichte. In Ṣaḥīḥ al-Buḫārī wird von ʿUbādah ibn aṣ-Ṣāmit überliefert, wie wichtig die Fātiḥah für das Gebet ist. Ibn Qudāmah behandelt in al-Mughnī, Band 1, Seite 284, ihre Rezitation als Gebetsbestandteil der hanbalitischen Lehre. Der Vers selbst enthält aber nicht die ganze Einzelregel. Wir üben die Unterscheidung zwischen Offenbarung, Erklärung und Fiqh. Eine genaue Rechtsfrage, etwa die Lage eines Mitbetenden, gehört in eine gesonderte Lehrstunde. Beim Rezitieren helfen uns eine geeignete Lehrperson und authentische Rezitation, nicht erfundene Formeln.",
+      "lines": [
+        "Qurʾān 15:87 erwähnt die sieben oft Wiederholten und den Qurʾān.",
+        "Ibn Kaṯīrs Tafsīr erläutert die Verbindung zur Fātiḥah.",
+        "Ṣaḥīḥ al-Buḫārī behandelt die Bedeutung der Fātiḥah beim Gebet.",
+        "Al-Mughnī erläutert hanbalitische Fiqh-Regeln; einzelne Ausnahmen brauchen eigene Prüfung."
+      ],
+      "evidence": "Trenne Qurʾān 15:87 (Verswortlaut), Ibn Kaṯīr zu 15:87 (Tafsīr), Ṣaḥīḥ al-Buḫārī (Islamweb 0/724, nummeriert 723 auf dieser Seite) und Ibn Qudāmah, al-Mughnī, Bd. 1, S. 284 (klassische Fiqh-Erläuterung).",
+      "sources": "Direkte Quellen: Qurʾān 15:87, Ibn Kaṯīr (Islamweb 49/933); Ṣaḥīḥ al-Buḫārī (Islamweb 0/724); Ibn Qudāmah, al-Mughnī (Islamweb 15/553). Noch ohne menschliche Endfreigabe.",
+      "terms": [
+        {
+          "say": "al-Fātiḥah",
+          "de": "die eröffnende Sūrah des Qurʾān"
+        },
+        {
+          "say": "qirāʾah",
+          "de": "Rezitation, das Lesen des Qurʾān"
+        }
+      ],
+      "situation": "Ein Kind findet vier Quellennamen auf einer Lernkarte und möchte wissen, welcher Text Qurʾān, Hadith oder Fiqh-Erklärung ist.",
+      "practice": "Wir ordnen die vier Quellen richtig zu und hören einen kurzen Abschnitt der Fātiḥah mit einer geeigneten Lehrperson an.",
+      "summary": "Die Fātiḥah ist für das Gebet wichtig. Wir unterscheiden Qurʾān-Vers, Tafsīr, authentische Sunnah und Fiqh-Erläuterung.",
+      "audioScript": "Die Qurʾān-Rezitation im Gebet. Qurʾān 15:87 nennt die sieben oft Wiederholten. Ibn Kaṯīr erläutert die Verbindung zur Fātiḥah. Ṣaḥīḥ al-Buḫārī betont ihre Bedeutung im Gebet. Ibn Qudāmah erläutert dazu die hanbalitischen Fiqh-Regeln. Wir lernen die Fātiḥah aufmerksam mit einer geeigneten Lehrperson."
+    }
+  },
+  "questions": {
+    "4-5": [
       {
-        "say": "maṯānī",
-        "de": "wiederholte; so das Wort des Verses"
+        "type": "choice",
+        "prompt": "Wie heißt die Sūrah am Anfang des Qurʾān?",
+        "options": [
+          "al-Fātiḥah.",
+          "Ein erfundener Name."
+        ],
+        "correct": 0,
+        "hint": "Denke an die eröffnende Sūrah.",
+        "explain": "Mā schāʾ Allāh! Al-Fātiḥah heißt die eröffnende Sūrah."
       },
       {
-        "say": "qirāʾah",
-        "de": "Lesung; Unterrichtswort"
+        "type": "choice",
+        "prompt": "Ein Qurʾān-Wort ist schwer für dich. Was hilft?",
+        "options": [
+          "Mich dafür schämen.",
+          "Eine Lehrperson fragen und langsam üben."
+        ],
+        "correct": 1,
+        "hint": "Du darfst in deinem Tempo lernen.",
+        "explain": "Allāhumma bārik! Lernen braucht Geduld."
       }
     ],
-    "practice": "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme.",
-    "summary": "Im Gebet wird der Qurʾān gelesen. Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat.",
-    "audioScript": "Die Qurʾān-Rezitation im Gebet. Im Gebet wird der Qurʾān gelesen. Der Vers sagt, dass Allah sieben von den wiederholten und den gewaltigen Qurʾān gegeben hat. Die Lehrperson zeigt, dass im Gebet laut oder leise gelesen wird, je nach dem Gebet, das sie kennt. Die Kinder hören zu. Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme.",
-    "voiceApproved": false
+    "6-8": [
+      {
+        "type": "choice",
+        "prompt": "Welche Sūrah lernen wir besonders für das Gebet kennen?",
+        "options": [
+          "al-Fātiḥah.",
+          "Eine frei erfundene Sūrah."
+        ],
+        "correct": 0,
+        "hint": "Denke an den Beginn des Qurʾān.",
+        "explain": "Mā schāʾ Allāh! Wir lernen die Fātiḥah kennen."
+      },
+      {
+        "type": "choice",
+        "prompt": "Was macht eine gute Lernübung aus?",
+        "options": [
+          "Worte ohne Hilfe erraten.",
+          "Einer geeigneten Qurʾān-Rezitation zuhören und mit einer Lehrperson üben."
+        ],
+        "correct": 1,
+        "hint": "Denke an sorgfältiges Lernen.",
+        "explain": "Allāhumma bārik! Der Qurʾān wird achtsam gelernt."
+      },
+      {
+        "type": "text",
+        "prompt": "Was unterscheidet Qurʾān 15:87 und den Hadith über die Fātiḥah?",
+        "sample": "Der Vers spricht über die sieben oft Wiederholten. Die authentische Überlieferung erklärt die Bedeutung der Fātiḥah im Gebet.",
+        "hint": "Nenne Vers und Hadith getrennt.",
+        "explain": "Sehr gut! Du vermischst die beiden Quellen nicht."
+      }
+    ],
+    "9-10": [
+      {
+        "type": "text",
+        "prompt": "Unterscheide vier Quellen dieser Stunde: Qurʾān 15:87, Ibn Kaṯīr, Ṣaḥīḥ al-Buḫārī und al-Mughnī.",
+        "sample": "Der Qurʾān enthält den Vers; Ibn Kaṯīr erklärt ihn; al-Buḫārī überliefert den Hadith; al-Mughnī behandelt die Fiqh-Regel.",
+        "hint": "Welche Quelle ist Offenbarung, Auslegung, Überlieferung oder Rechtslehre?",
+        "explain": "Mā schāʾ Allāh! Du kannst mit verschiedenen Quellen sorgfältig umgehen."
+      },
+      {
+        "type": "choice",
+        "prompt": "Welche Aussage steht NICHT unmittelbar als vollständige Gebetsregel im Vers 15:87?",
+        "options": [
+          "Die gesamte hanbalitische Einzelregel zur Fātiḥah-Rezitation.",
+          "Die Erwähnung der sieben oft Wiederholten."
+        ],
+        "correct": 0,
+        "hint": "Achte auf den Unterschied zwischen Vers und späterer Erläuterung.",
+        "explain": "Richtig! Der Qurʾān-Vers darf nicht mit zusätzlichen Einzelregeln verwechselt werden."
+      },
+      {
+        "type": "text",
+        "prompt": "Wie hilfst du einem jüngeren Kind, das die Fātiḥah noch nicht vollständig kann?",
+        "sample": "Ich ermutige es freundlich, mit einer Lehrperson in kleinen Schritten zu lernen, statt es zu beschämen.",
+        "hint": "Wähle eine sichere, geduldige Lernhilfe.",
+        "explain": "Allāhumma bārik! Freundlichkeit unterstützt das Lernen."
+      }
+    ]
   },
+  "terms": [
+    {
+      "say": "maṯānī",
+      "de": "wiederholte; so das Wort des Verses"
+    },
+    {
+      "say": "qirāʾah",
+      "de": "Lesung; Unterrichtswort"
+    }
+  ],
+  "practice": "Mit einer geeigneten Lehrperson die Fātiḥah aufmerksam hören und langsam kennenlernen.",
+  "summary": "Fiqh · Qurʾān-Rezitation im Gebet: Die Fātiḥah ist wichtig; wir lernen sie mit einer Lehrperson.",
+  "audioScript": "Die Qurʾān-Rezitation im Gebet: Die Fātiḥah ist eine wichtige Sūrah. Wir lernen sie mit einer Lehrperson und unterscheiden Qurʾān-Vers, Tafsīr und Sunnah.",
+  "voiceApproved": false
+},
   "tawhid-keine-goettliche-macht-fuer-geschoepfe": {
     "id": "tawhid-keine-goettliche-macht-fuer-geschoepfe",
     "subject": "aqidah",
