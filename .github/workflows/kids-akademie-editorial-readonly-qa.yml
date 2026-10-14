@@ -49,6 +49,10 @@ jobs:
         run: |
           node --check kids/akademie/curriculum-foundation-fiqh-003-007-011-v1.js
           node kids/tools/test-academy-foundation-fiqh-003-007-011-v1.cjs
+      - name: Check foundation Fiqh slots 15, 19, 23, 27
+        run: |
+          node --check kids/akademie/curriculum-foundation-fiqh-015-019-023-027-v1.js
+          node kids/tools/test-academy-foundation-fiqh-015-019-023-027-v1.cjs
       - name: Run all 14 small-batch unit tests
         shell: bash
         run: |
