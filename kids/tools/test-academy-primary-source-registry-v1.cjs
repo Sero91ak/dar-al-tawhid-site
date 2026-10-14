@@ -14,6 +14,10 @@ for(const src of file.sources){
  ids.add(src.sourceId);
 }
 const required={
+"akhlaq-sabr-geduldig-warten":{"SRC-CORE5-IBNKATHIR-184":["islamweb.net","49/184"]},
+"adab-salam-salam-erwidern":{"SRC-CORE2-QURTUBI-1095":["islamweb.net","48/1095"]},
+"fiqh-taharah-saubere-kleidung":{"SRC-FIQH15-MUGHNI-783":["gcp.islamweb.net","15/783"]},
+"aqidah-tawhid-allah-ist-einer":{"SRC-V38-112-1":["islamweb.net","49/1984"]},
 "sidq":{"SRC-CORE1-IBNKATHIR-698":["islamweb.net","49/698"],"SRC-CORE1-MUSLIM-2607":["dorar.net","10209"]},
 "aqidah-iman":{"SRC-CORE8-IBNATIYYAH-21":["islamweb.net","207/21"],"SRC-CORE8-MUSLIM-8":["dorar.net","63778"]},
 "adab-worte":{"SRC-CORE6-TABARI-3021":["islamweb.net","50/3021"],"SRC-CORE6-BUKHARI-6018":["dorar.net","4361"]},
@@ -85,6 +89,13 @@ const required={
  "SRC-FIQH206-MUGHNI-729":["islamweb.net","15/729"]
 }};
 assert.equal(file.sourceCount,file.sources.length,"sourceCount metadata must match actual source IDs");
+const checkedGarmentSource=file.sources.find(s=>s.sourceId==="SRC-FIQH15-MUGHNI-783");
+assert.equal(checkedGarmentSource?.volume,"1");
+assert.equal(checkedGarmentSource?.page,"401");
+assert.ok(checkedGarmentSource.arabic.includes("الطَّهَارَةُ مِنَ النَّجَاسَةِ"));
+assert.equal(checkedGarmentSource.verificationStatus,"primary-page-direct-read-2026-10-14");
+assert.ok(checkedGarmentSource.authenticityNote.includes("Ausnahmen"),"Do not imply full Fiqh approval");
+
 const indexedOnly=["SRC-FIQH201-MUGHNI-599","SRC-FIQH201-MUGHNI-602","SRC-FIQH205-MUGHNI-621","SRC-FIQH207-MUGHNI-1713","SRC-FIQH208-MUGHNI-1386","SRC-FIQH206-MUGHNI-729","SRC-FIQH208-MUGHNI-1754","SRC-FIQH208-MUGHNI-1800","SRC-FIQH204-MUGHNI-611","SRC-FIQH204-MUGHNI-618","SRC-FIQH174-MUGHNI-533","SRC-FIQH186-MUGHNI-570","SRC-FIQH192-MUGHNI-574"];
 for(const id of indexedOnly){
  const e=file.sources.find(x=>x.sourceId===id);
