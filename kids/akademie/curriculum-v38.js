@@ -283,7 +283,7 @@ const additions=
       "ayah": 186,
       "label": "Qurʾān 2:186",
       "arabic": "وَإِذَا سَأَلَكَ عِبَادِي عَنِّي فَإِنِّي قَرِيبٌ أُجِيبُ دَعْوَةَ الدَّاعِ إِذَا دَعَانِ فَلْيَسْتَجِيبُوا لِي وَلْيُؤْمِنُوا بِي لَعَلَّهُمْ يَرْشُدُونَ",
-      "meaning": "Sinngemäß: Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen.",
+      "meaning": "Sinngemäß für den Unterricht, keine beglaubigte Übersetzung: Allah ist nahe und erhört die Bitte desjenigen, der Ihn bittet. Die Menschen sollen auf Ihn hören und an Ihn glauben.",
       "excerpt": false
     },
     "hadith": {
@@ -312,12 +312,12 @@ const additions=
     "ageText": {
       "4-5": {
         "goal": "Allah ist nah.",
-        "intro": "Allah ist nah. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. Stell dir vor: Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir. Heute üben wir: Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
+        "intro": "As-salāmu ʿalaikum! Wenn du dir Sorgen machst, kannst du leise Allah bitten: Mein Herr, hilf mir. Das nennt man Duʿāʾ. In Qurʾān 2:186 lernen wir, dass Allah nahe ist und unsere Bitten hört. Stell dir vor, vor dir liegt eine schwierige Aufgabe. Du bittest Allah um Hilfe und versuchst es in Ruhe. Wenn du Unterstützung brauchst, sprichst du auch mit Mama, Papa oder einer anderen erwachsenen Person, der du vertraust. Wir üben heute eine kleine Bitte in eigenen Worten.",
         "lines": [
-          "Allah ist nah.",
-          "Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen.",
-          "Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir.",
-          "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen."
+          "Allah ist nahe und hört die Bitten, die wir an Ihn richten.",
+          "Duʿāʾ heißt: Allah um etwas bitten.",
+          "Ein Kind darf Allah um Hilfe bitten.",
+          "Wer Unterstützung braucht, darf auch einen Erwachsenen fragen."
         ],
         "evidence": "Wir lernen mit Qurʾān 2:186. Allah ist nah.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/166. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:186. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -333,17 +333,17 @@ const additions=
         ],
         "situation": "Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir.",
         "practice": "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen.",
-        "summary": "Allah ist nah. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
-        "audioScript": "Allah hört unsere Bittgebete. Allah ist nah. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir. Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen."
+        "summary": "Du darfst Allah um Hilfe bitten und auch eine vertrauenswürdige erwachsene Person fragen.",
+        "audioScript": "Allah hört unsere Bittgebete. Du darfst Allah um Hilfe bitten und auch eine vertrauenswürdige erwachsene Person fragen. Allah ist nahe und hört die Bitten, die wir an Ihn richten. Duʿāʾ heißt: Allah um etwas bitten. Ein Kind darf Allah um Hilfe bitten."
       },
       "6-8": {
         "goal": "Allah ist nah.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Allah ist nah. Wir lesen Qurʾān 2:186. Der Vers bedeutet sinngemäß: Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. So kann das im Alltag aussehen: Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir. Die Aufgabe: Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen. duʿāʾ bedeutet: Bittgebet, Allah um etwas bitten. qarīb bedeutet: nah; der Vers nennt Allah nah.",
+        "intro": "As-salāmu ʿalaikum! Heute geht es um das Bittgebet, auf Arabisch Duʿāʾ. In Qurʾān 2:186 lehrt Allah, dass Er nahe ist und die Bitte des Bittenden erhört. Stell dir vor, ein Kind ist vor einem wichtigen Gespräch nervös. Es kann Allah um Hilfe bitten und sich zugleich gut vorbereiten. Wenn es dabei Unterstützung benötigt, darf es seine Eltern oder eine Lehrperson um Hilfe fragen. Wir überlegen gemeinsam: Welche gute Bitte kannst du in eigenen Worten sprechen, und was kannst du selbst dafür tun? Niemand muss eine persönliche Sorge vor allen erzählen. Allah um Hilfe zu bitten und Menschen um Unterstützung zu fragen, gehört beides zu einem verantwortungsvollen Alltag.",
         "lines": [
-          "Qurʾān 2:186 ist die gelesene Stelle.",
-          "Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen.",
-          "Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir.",
-          "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht."
+          "Qurʾān 2:186 lehrt uns etwas über Allahs Nähe und das Bittgebet.",
+          "Duʿāʾ bedeutet, Allah aufrichtig zu bitten.",
+          "Wir denken an ein Kind vor einem schwierigen Gespräch.",
+          "Das Bittgebet und verantwortungsvolle Hilfe gehören zusammen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:186. Sinngemäß: Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/166. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:186. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -359,17 +359,17 @@ const additions=
         ],
         "situation": "Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir.",
         "practice": "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen.",
-        "summary": "Qurʾān 2:186 trägt diese Stunde. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen.",
-        "audioScript": "Allah hört unsere Bittgebete. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir. Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen."
+        "summary": "Wir bitten Allah und übernehmen zugleich Verantwortung für unsere nächsten Schritte.",
+        "audioScript": "Allah hört unsere Bittgebete. Wir bitten Allah und übernehmen zugleich Verantwortung für unsere nächsten Schritte. Qurʾān 2:186 lehrt uns etwas über Allahs Nähe und das Bittgebet. Duʿāʾ bedeutet, Allah aufrichtig zu bitten. Wir denken an ein Kind vor einem schwierigen Gespräch."
       },
       "9-10": {
         "goal": "Ich kann das Thema „Allah hört unsere Bittgebete“ anhand von Qurʾān 2:186 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Allah hört unsere Bittgebete. Allah ist nah. In Qurʾān 2:186 lernen wir sinngemäß: Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. duʿāʾ bedeutet Bittgebet, Allah um etwas bitten. qarīb bedeutet nah; der Vers nennt Allah nah. Stell dir diese Situation vor: Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir. Welcher nächste Schritt ist gut? Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "intro": "As-salāmu ʿalaikum! Was bedeutet es, Allah aufrichtig um Hilfe zu bitten? In Qurʾān 2:186 wird beschrieben, dass Allah nahe ist und den Bittenden erhört, wenn er Ihn bittet. Der Vers spricht ebenso davon, auf Allah zu hören und an Ihn zu glauben. Das Bittgebet ist also mehr als ein Wunschzettel: Wir wenden uns bewusst an Allah. Ein Kind hat Angst vor einem schwierigen Gespräch. Es bittet Allah um Hilfe, bereitet sich vor und bittet eine vertraute erwachsene Person um Unterstützung. Diese Schritte widersprechen sich nicht. Formuliere ein mögliches Duʿāʾ in eigenen Worten und nenne einen verantwortlichen Schritt, der darauf folgen könnte. Private Sorgen muss niemand öffentlich erzählen. Unser Beispiel erklärt den Alltag; es ist kein zusätzliches Verszitat.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 2:186.",
-          "Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen.",
-          "Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir.",
-          "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen."
+          "Der Vers 2:186 spricht von Allahs Nähe und dem Erhören der Bitte.",
+          "Allah ruft die Menschen im Vers zu Glauben und Gehorsam auf.",
+          "Ein Duʿāʾ kann ein verantwortliches Handeln begleiten.",
+          "Wir unterscheiden den Verssinn von unserem Unterrichtsbeispiel."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:186. Sinngemäß: Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/166. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:186. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -385,8 +385,8 @@ const additions=
         ],
         "situation": "Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir.",
         "practice": "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen.",
-        "summary": "Allah ist nah. Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen.",
-        "audioScript": "Allah hört unsere Bittgebete. Allah ist nah. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir. Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen."
+        "summary": "Der Qurʾān lehrt das Bittgebet. Die Beispiele und Übungen erklären, wie wir damit im Alltag umgehen.",
+        "audioScript": "Allah hört unsere Bittgebete. Der Qurʾān lehrt das Bittgebet. Die Beispiele und Übungen erklären, wie wir damit im Alltag umgehen. Der Vers 2:186 spricht von Allahs Nähe und dem Erhören der Bitte. Allah ruft die Menschen im Vers zu Glauben und Gehorsam auf. Ein Duʿāʾ kann ein verantwortliches Handeln begleiten."
       }
     },
     "questions": {
@@ -485,7 +485,7 @@ const additions=
     ],
     "practice": "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen.",
     "summary": "Allah ist nah. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen.",
-    "audioScript": "Allah hört unsere Bittgebete. Allah ist nah. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen. Ein Kind hat Sorge vor einem Gespräch und spricht leise: Mein Herr, hilf mir. Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen.",
+    "audioScript": "Allah hört unsere Bittgebete. Du darfst Allah um Hilfe bitten und auch eine vertrauenswürdige erwachsene Person fragen. Allah ist nahe und hört die Bitten, die wir an Ihn richten. Duʿāʾ heißt: Allah um etwas bitten. Ein Kind darf Allah um Hilfe bitten.",
     "voiceApproved": false
   },
   "iman-quran-als-offenbarung": {
@@ -501,7 +501,7 @@ const additions=
       "ayah": 2,
       "label": "Qurʾān 2:2",
       "arabic": "ذَلِكَ الْكِتَابُ لَا رَيْبَ فِيهِ",
-      "meaning": "Sinngemäß: Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht.",
+      "meaning": "Sinngemäß für den Unterricht, keine beglaubigte Übersetzung: Dies ist das Buch, an dem kein Zweifel ist. (Anfang von Qurʾān 2:2.)",
       "excerpt": true
     },
     "hadith": {
@@ -530,12 +530,12 @@ const additions=
     "ageText": {
       "4-5": {
         "goal": "Der Qurʾān ist Allahs Buch.",
-        "intro": "Der Qurʾān ist Allahs Buch. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um. Stell dir vor: Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Heute üben wir: Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah.",
+        "intro": "As-salāmu ʿalaikum! Heute sprechen wir über den Qurʾān, Allahs offenbartes Buch. In Qurʾān 2:2 wird dieses besondere Buch beschrieben. Wenn du ein Qurʾān-Exemplar auf dem Boden siehst, darfst du Mama, Papa oder eine Lehrperson um Hilfe bitten, damit es an einen sauberen Platz kommt. Wir behandeln den Qurʾān sorgfältig. Und wenn wir ein Wort noch nicht verstehen, fragen wir freundlich nach. Schön, dass wir gemeinsam lernen dürfen!",
         "lines": [
           "Der Qurʾān ist Allahs Buch.",
-          "Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um.",
-          "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
-          "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah."
+          "Qurʾān 2:2 spricht von dem Buch, an dem kein Zweifel ist.",
+          "Wir gehen sorgfältig mit einem Qurʾān-Exemplar um.",
+          "Wenn wir etwas nicht verstehen, dürfen wir nachfragen."
         ],
         "evidence": "Wir lernen mit Qurʾān 2:2. Der Qurʾān ist Allahs Buch.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/55. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -551,17 +551,17 @@ const additions=
         ],
         "situation": "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
         "practice": "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah.",
-        "summary": "Der Qurʾān ist Allahs Buch.",
-        "audioScript": "Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Buch. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um. Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah."
+        "summary": "Der Qurʾān ist Allahs Buch. Wir behandeln ihn sorgfältig und lernen gern daraus.",
+        "audioScript": "Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Buch. Wir behandeln ihn sorgfältig und lernen gern daraus. Der Qurʾān ist Allahs Buch. Qurʾān 2:2 spricht von dem Buch, an dem kein Zweifel ist. Wir gehen sorgfältig mit einem Qurʾān-Exemplar um."
       },
       "6-8": {
         "goal": "Der Qurʾān ist Allahs Buch.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Der Qurʾān ist Allahs Buch. Wir lesen Qurʾān 2:2. Der Vers bedeutet sinngemäß: Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht. So kann das im Alltag aussehen: Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Die Aufgabe: Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Qurʾān bedeutet: Allahs offenbartes Buch. Āyah bedeutet: ein Vers im Qurʾān.",
+        "intro": "As-salāmu ʿalaikum! Viele Bücher enthalten Geschichten, die Menschen geschrieben haben. Der Qurʾān ist für uns Muslime etwas anderes: Er ist Allahs Offenbarung. Wir betrachten heute den Anfang von Qurʾān 2:2. Dort wird das Buch beschrieben, an dem kein Zweifel ist. Damit wir sauber lernen, unterscheiden wir den arabischen Verswortlaut von unserer deutschen Erklärung. Stell dir vor, ein jüngeres Kind sieht ein Qurʾān-Exemplar auf dem Boden. Du kannst ihm ruhig helfen, es an einen geeigneten Platz zu bringen. Achtung vor dem Qurʾān bedeutet auch: aufmerksam zuhören, seine Bedeutung kennenlernen und Fragen stellen. Eine Āyah ist ein Qurʾān-Vers. Welches Wort möchtest du heute besser verstehen?",
         "lines": [
-          "Qurʾān 2:2 ist die gelesene Stelle.",
-          "Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um.",
-          "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
-          "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah."
+          "Der Qurʾān ist Allahs Offenbarung.",
+          "Wir lesen heute den Anfang von Qurʾān 2:2.",
+          "Eine Āyah ist ein Vers im Qurʾān.",
+          "Wir achten auf den Qurʾān, indem wir sorgsam mit ihm umgehen und aufmerksam lernen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:2. Sinngemäß: Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/55. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -577,17 +577,17 @@ const additions=
         ],
         "situation": "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
         "practice": "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah.",
-        "summary": "Qurʾān 2:2 trägt diese Stunde. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um.",
-        "audioScript": "Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um. Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah."
+        "summary": "Der Qurʾān ist Allahs Offenbarung. Wir hören aufmerksam zu und fragen freundlich nach.",
+        "audioScript": "Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Offenbarung. Wir hören aufmerksam zu und fragen freundlich nach. Der Qurʾān ist Allahs Offenbarung. Wir lesen heute den Anfang von Qurʾān 2:2. Eine Āyah ist ein Vers im Qurʾān."
       },
       "9-10": {
         "goal": "Ich kann das Thema „Der Qurʾān als Offenbarung“ anhand von Qurʾān 2:2 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Buch. In Qurʾān 2:2 lernen wir sinngemäß: Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht. Qurʾān bedeutet Allahs offenbartes Buch. Āyah bedeutet ein Vers im Qurʾān. Stell dir diese Situation vor: Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Welcher nächste Schritt ist gut? Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "intro": "As-salāmu ʿalaikum! Was bedeutet es, dass der Qurʾān Allahs Offenbarung ist? Wir betrachten heute nur den Anfang von Qurʾān 2:2: den Teil, der das Buch beschreibt, an dem kein Zweifel ist. Der vollständige Vers enthält darüber hinaus weitere Worte; unser arabischer Auszug ist deshalb nicht der ganze Vers. Diese Unterscheidung hilft uns, genau zu arbeiten. Der Qurʾān hat für Muslime eine andere Stellung als ein von Menschen verfasstes Buch. Respekt zeigt sich nicht nur beim sorgfältigen Umgang mit einem Exemplar, sondern auch durch aufmerksames Lernen. Ein jüngeres Kind findet einen Qurʾān auf dem Boden. Du kannst helfen, ohne das Kind zu beschämen. Erkläre anschließend den Unterschied zwischen dem Qurʾān-Wortlaut, einer sinngemäßen deutschen Erklärung und unserem Alltagsbeispiel.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 2:2.",
-          "Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht.",
-          "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
-          "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah."
+          "Unser Text zeigt den Anfang von Qurʾān 2:2, nicht den ganzen Vers.",
+          "Wir unterscheiden arabischen Verswortlaut und sinngemäße Erklärung.",
+          "Wir können sorgfältig lesen und unsere Fragen stellen.",
+          "Wir helfen jüngeren Kindern respektvoll, ohne sie zu beschämen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:2. Sinngemäß: Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/55. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -603,8 +603,8 @@ const additions=
         ],
         "situation": "Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz.",
         "practice": "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah.",
-        "summary": "Der Qurʾān ist Allahs Buch. Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah.",
-        "audioScript": "Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Buch. Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht. Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah."
+        "summary": "Wir verstehen die Bedeutung von Allahs Offenbarung und unterscheiden Originalwortlaut, sinngemäße Erklärung und Unterrichtsbeispiel.",
+        "audioScript": "Der Qurʾān als Offenbarung. Wir verstehen die Bedeutung von Allahs Offenbarung und unterscheiden Originalwortlaut, sinngemäße Erklärung und Unterrichtsbeispiel. Unser Text zeigt den Anfang von Qurʾān 2:2, nicht den ganzen Vers. Wir unterscheiden arabischen Verswortlaut und sinngemäße Erklärung. Wir können sorgfältig lesen und unsere Fragen stellen."
       }
     },
     "questions": {
@@ -703,7 +703,7 @@ const additions=
     ],
     "practice": "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel.",
     "summary": "Der Qurʾān ist Allahs Buch. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um.",
-    "audioScript": "Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Buch. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um. Ein Kind sieht ein Qurʾān-Exemplar auf dem Boden liegen und hebt es mit den Eltern an einen sauberen Platz. Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah. Wir erfinden keinen zweiten Buchtitel.",
+    "audioScript": "Der Qurʾān als Offenbarung. Der Qurʾān ist Allahs Buch. Wir behandeln ihn sorgfältig und lernen gern daraus. Der Qurʾān ist Allahs Buch. Qurʾān 2:2 spricht von dem Buch, an dem kein Zweifel ist. Wir gehen sorgfältig mit einem Qurʾān-Exemplar um.",
     "voiceApproved": false
   },
   "ikhlas-nicht-mit-guten-taten-prahlen": {
@@ -18034,237 +18034,237 @@ const additions=
     "voiceApproved": false
   },
   "fiqh-quran-rezitation-im-gebet": {
-  "id": "fiqh-quran-rezitation-im-gebet",
-  "subject": "fiqh",
-  "pillar": "fiqh",
-  "topic": "Die Qurʾān-Rezitation im Gebet",
-  "title": "Fiqh · Die Qurʾān-Rezitation im Gebet",
-  "lead": "Im Gebet lesen wir Qurʾān. Wir lernen die Fātiḥah Schritt für Schritt.",
-  "goal": "Ich kenne die Bedeutung der Qurʾān-Rezitation im Gebet und lerne die Fātiḥah mit geeigneter Unterstützung.",
-  "quran": {
-    "surah": 15,
-    "ayah": 87,
-    "label": "Qurʾān 15:87",
-    "arabic": "وَلَقَدْ آتَيْنَاكَ سَبْعًا مِنَ الْمَثَانِي وَالْقُرْآنَ الْعَظِيمَ",
-    "meaning": "Sinngemäß: Allah hat dem Propheten ﷺ die sieben oft wiederholten Verse und den gewaltigen Qurʾān gegeben.",
-    "excerpt": false
-  },
-  "hadith": {
-    "source": "Ṣaḥīḥ al-Buḫārī, Islamweb-Eintrag 723 · ʿUbādah ibn aṣ-Ṣāmit",
-    "text": "Sinngemäß: Der Prophet ﷺ lehrte, wie wichtig die Fātiḥah beim Gebet ist: Das Gebet erfordert ihre Rezitation."
-  },
-  "sourceAudit": {
-    "hadithUrl": "https://islamweb.net/ar/library/content/0/724",
-    "hadithNumber": "Ṣaḥīḥ al-Buḫārī – Islamweb 723",
-    "narrator": "ʿUbādah ibn aṣ-Ṣāmit",
-    "authenticity": "Ṣaḥīḥ al-Buḫārī; der arabische Originalwortlaut wurde in Islamweb-Inhalt 0/724 direkt gelesen. Zählweise der Bibliotheksansicht 723; keine unbelegte Editionsgleichsetzung.",
-    "quranReference": "15:87",
-    "quranUrl": "https://www.islamweb.net/ar/library/content/49/933",
-    "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
-    "hadithMeaningIsParaphrase": true,
-    "verifiedDate": "2026-10-13",
-    "dorarReRead": false,
-    "numberUnverified": false,
-    "fiqhHumanReviewNeeded": true,
-    "scientificApproval": false,
-    "note": "Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-    "editorialScopeNote": "Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
-    "verifiedHadithOn": "2026-10-14",
-    "classicalFiqhCrosscheck": {
-      "status": "primary-hanbali-text-read-not-approved",
-      "reviewDate": "2026-10-14",
-      "author": "Ibn Qudāmah",
-      "work": "al-Mughnī",
-      "chapter": "Kitāb aṣ-Ṣalāh, Bāb Ṣifat aṣ-Ṣalāh, Masʾalat Qirāʾat al-Fātiḥah",
-      "volume": "1",
-      "page": "284",
-      "directLink": "https://www.islamweb.net/ar/library/content/15/553",
-      "tafsirLink": "https://www.islamweb.net/ar/library/content/49/933",
-      "scope": "Fātiḥah recitation and the Hanbali discussion; the Qurʾān 15:87 alone does not specify the full prayer rule. Nuances for imam/follower and inability not settled here.",
-      "humanFiqhApproval": false
-    }
-  },
-  "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
-  "sample": "Im Gebet wird der Qurʾān gelesen.",
-  "ageText": {
-    "4-5": {
-      "goal": "Die Fātiḥah gehört zum Qurʾān, den wir im Gebet lesen.",
-      "intro": "Assalāmu ʿalaikum, liebe Kinder! Im Gebet hören und lesen wir Worte aus dem Qurʾān. Eine wichtige Sūrah heißt al-Fātiḥah. Sie steht am Anfang des Qurʾān. Du musst nicht alles auf einmal können. Eine Lehrperson oder deine Eltern helfen dir, aufmerksam zuzuhören und die Worte langsam und richtig zu lernen. Heute schauen wir uns die Fātiḥah als besondere Sūrah an und freuen uns über jeden kleinen Lernschritt.",
-      "lines": [
-        "Im Gebet lesen wir aus dem Qurʾān.",
-        "Eine wichtige Sūrah heißt al-Fātiḥah.",
-        "Wir hören einer geeigneten Qurʾān-Rezitation aufmerksam zu.",
-        "Mit einer Lehrperson lernen wir die Worte Schritt für Schritt."
-      ],
-      "evidence": "Der Qurʾān spricht in 15:87 von den sieben oft Wiederholten. In der Sunnah wird die Fātiḥah als besonders wichtig für das Gebet erklärt.",
-      "sources": "Direkte Quellen: Qurʾān 15:87, Ibn Kaṯīr (Islamweb 49/933); Ṣaḥīḥ al-Buḫārī (Islamweb 0/724); Ibn Qudāmah, al-Mughnī (Islamweb 15/553). Noch ohne menschliche Endfreigabe.",
-      "terms": [
-        {
-          "say": "al-Fātiḥah",
-          "de": "die eröffnende Sūrah des Qurʾān"
-        },
-        {
-          "say": "qirāʾah",
-          "de": "Rezitation, das Lesen des Qurʾān"
-        }
-      ],
-      "situation": "Eine Lehrperson liest aus der Fātiḥah vor. Das Kind hört ruhig zu und stellt Fragen, wenn es ein Wort nicht versteht.",
-      "practice": "Wir hören aufmerksam zu und üben mit einer Lehrperson einen kleinen bereits erklärten Abschnitt.",
-      "summary": "Die Fātiḥah ist eine wichtige Sūrah für das Gebet. Wir lernen ohne Druck und mit Hilfe.",
-      "audioScript": "Die Qurʾān-Rezitation im Gebet. Assalāmu ʿalaikum! Im Gebet lesen wir aus dem Qurʾān. Eine wichtige Sūrah ist al-Fātiḥah. Wir hören aufmerksam zu und lernen ihre Worte mit einer Lehrperson Schritt für Schritt."
+    "id": "fiqh-quran-rezitation-im-gebet",
+    "subject": "fiqh",
+    "pillar": "fiqh",
+    "topic": "Die Qurʾān-Rezitation im Gebet",
+    "title": "Fiqh · Die Qurʾān-Rezitation im Gebet",
+    "lead": "Im Gebet lesen wir Qurʾān. Wir lernen die Fātiḥah Schritt für Schritt.",
+    "goal": "Ich kenne die Bedeutung der Qurʾān-Rezitation im Gebet und lerne die Fātiḥah mit geeigneter Unterstützung.",
+    "quran": {
+      "surah": 15,
+      "ayah": 87,
+      "label": "Qurʾān 15:87",
+      "arabic": "وَلَقَدْ آتَيْنَاكَ سَبْعًا مِنَ الْمَثَانِي وَالْقُرْآنَ الْعَظِيمَ",
+      "meaning": "Sinngemäß: Allah hat dem Propheten ﷺ die sieben oft wiederholten Verse und den gewaltigen Qurʾān gegeben.",
+      "excerpt": false
     },
-    "6-8": {
-      "goal": "Ich kenne die Fātiḥah als wichtige Sūrah für das Gebet und kann Vers und Sunnah unterscheiden.",
-      "intro": "Assalāmu ʿalaikum! Heute geht es um das Lesen des Qurʾān im Gebet. Wir lernen die Sūrah al-Fātiḥah kennen. Allah erwähnt im Qurʾān, in Sūrah 15, Vers 87, die sieben oft Wiederholten. Ibn Kaṯīr erklärt in seinem Tafsīr, warum Gelehrte und Überlieferungen diese Worte mit der Fātiḥah verbinden. Der Prophet ﷺ erklärte außerdem in einer authentischen Überlieferung die besondere Rolle der Fātiḥah im Gebet. Wir hören einer geeigneten Qurʾān-Rezitation aufmerksam zu. Wenn ein Wort schwierig ist, darfst du fragen. Mit einer Lehrperson lernen wir kleine Abschnitte richtig, ohne ein anderes Kind zu drängen.",
-      "lines": [
-        "Qurʾān 15:87 nennt die sieben oft Wiederholten.",
-        "Der Tafsīr erläutert den Zusammenhang mit der Fātiḥah.",
-        "Die Sunnah lehrt die besondere Bedeutung ihrer Rezitation im Gebet.",
-        "Wir lernen behutsam mit einer Lehrperson und wiederholen nur, was wir verstehen."
-      ],
-      "evidence": "Qurʾān 15:87 erwähnt die sieben oft Wiederholten; Ibn Kaṯīrs Tafsīr bespricht die Fātiḥah. Ṣaḥīḥ al-Buḫārī (Islamweb 723) nennt die Bedeutung ihrer Rezitation im Gebet. Dies sind unterschiedliche Belege, keine einzige wörtliche Versregel.",
-      "sources": "Direkte Quellen: Qurʾān 15:87, Ibn Kaṯīr (Islamweb 49/933); Ṣaḥīḥ al-Buḫārī (Islamweb 0/724); Ibn Qudāmah, al-Mughnī (Islamweb 15/553). Noch ohne menschliche Endfreigabe.",
-      "terms": [
-        {
-          "say": "al-Fātiḥah",
-          "de": "die eröffnende Sūrah des Qurʾān"
-        },
-        {
-          "say": "qirāʾah",
-          "de": "Rezitation, das Lesen des Qurʾān"
-        }
-      ],
-      "situation": "Zwei Kinder lernen bei einer Lehrperson. Eines kennt schon mehr Verse. Beide dürfen in ihrem eigenen Tempo üben.",
-      "practice": "Wir hören eine geeignete Rezitation und erklären in eigenen Worten, warum sorgfältiges Lernen wichtig ist.",
-      "summary": "Die Fātiḥah ist wichtig für das Gebet. Der Qurʾān-Vers, der Tafsīr und der Hadith werden als unterschiedliche Quellen verstanden.",
-      "audioScript": "Die Qurʾān-Rezitation im Gebet. Heute lernen wir al-Fātiḥah kennen. Qurʾān 15:87 spricht von den sieben oft Wiederholten. Der Tafsīr erläutert die Bedeutung der Fātiḥah, und die Sunnah lehrt ihre besondere Stellung im Gebet. Wir lernen mit einer Lehrperson und ohne Leistungsdruck."
+    "hadith": {
+      "source": "Ṣaḥīḥ al-Buḫārī, Islamweb-Eintrag 723 · ʿUbādah ibn aṣ-Ṣāmit",
+      "text": "Sinngemäß: Der Prophet ﷺ lehrte, wie wichtig die Fātiḥah beim Gebet ist: Das Gebet erfordert ihre Rezitation."
     },
-    "9-10": {
-      "goal": "Ich kann den Vers 15:87, den Hadith zur Fātiḥah und die hanbalitische Fiqh-Erläuterung unterscheiden.",
-      "intro": "Assalāmu ʿalaikum! Bei der Ṣalāh gehört das Lesen des Qurʾān zum Gottesdienst. Qurʾān 15:87 erwähnt die sieben oft Wiederholten und den gewaltigen Qurʾān. Ibn Kaṯīr erläutert im Tafsīr, dass die Fātiḥah als die sieben oft Wiederholten verstanden wird, und bespricht die dafür angeführten Berichte. In Ṣaḥīḥ al-Buḫārī wird von ʿUbādah ibn aṣ-Ṣāmit überliefert, wie wichtig die Fātiḥah für das Gebet ist. Ibn Qudāmah behandelt in al-Mughnī, Band 1, Seite 284, ihre Rezitation als Gebetsbestandteil der hanbalitischen Lehre. Der Vers selbst enthält aber nicht die ganze Einzelregel. Wir üben die Unterscheidung zwischen Offenbarung, Erklärung und Fiqh. Eine genaue Rechtsfrage, etwa die Lage eines Mitbetenden, gehört in eine gesonderte Lehrstunde. Beim Rezitieren helfen uns eine geeignete Lehrperson und authentische Rezitation, nicht erfundene Formeln.",
-      "lines": [
-        "Qurʾān 15:87 erwähnt die sieben oft Wiederholten und den Qurʾān.",
-        "Ibn Kaṯīrs Tafsīr erläutert die Verbindung zur Fātiḥah.",
-        "Ṣaḥīḥ al-Buḫārī behandelt die Bedeutung der Fātiḥah beim Gebet.",
-        "Al-Mughnī erläutert hanbalitische Fiqh-Regeln; einzelne Ausnahmen brauchen eigene Prüfung."
-      ],
-      "evidence": "Trenne Qurʾān 15:87 (Verswortlaut), Ibn Kaṯīr zu 15:87 (Tafsīr), Ṣaḥīḥ al-Buḫārī (Islamweb 0/724, nummeriert 723 auf dieser Seite) und Ibn Qudāmah, al-Mughnī, Bd. 1, S. 284 (klassische Fiqh-Erläuterung).",
-      "sources": "Direkte Quellen: Qurʾān 15:87, Ibn Kaṯīr (Islamweb 49/933); Ṣaḥīḥ al-Buḫārī (Islamweb 0/724); Ibn Qudāmah, al-Mughnī (Islamweb 15/553). Noch ohne menschliche Endfreigabe.",
-      "terms": [
-        {
-          "say": "al-Fātiḥah",
-          "de": "die eröffnende Sūrah des Qurʾān"
-        },
-        {
-          "say": "qirāʾah",
-          "de": "Rezitation, das Lesen des Qurʾān"
-        }
-      ],
-      "situation": "Ein Kind findet vier Quellennamen auf einer Lernkarte und möchte wissen, welcher Text Qurʾān, Hadith oder Fiqh-Erklärung ist.",
-      "practice": "Wir ordnen die vier Quellen richtig zu und hören einen kurzen Abschnitt der Fātiḥah mit einer geeigneten Lehrperson an.",
-      "summary": "Die Fātiḥah ist für das Gebet wichtig. Wir unterscheiden Qurʾān-Vers, Tafsīr, authentische Sunnah und Fiqh-Erläuterung.",
-      "audioScript": "Die Qurʾān-Rezitation im Gebet. Qurʾān 15:87 nennt die sieben oft Wiederholten. Ibn Kaṯīr erläutert die Verbindung zur Fātiḥah. Ṣaḥīḥ al-Buḫārī betont ihre Bedeutung im Gebet. Ibn Qudāmah erläutert dazu die hanbalitischen Fiqh-Regeln. Wir lernen die Fātiḥah aufmerksam mit einer geeigneten Lehrperson."
-    }
-  },
-  "questions": {
-    "4-5": [
-      {
-        "type": "choice",
-        "prompt": "Wie heißt die Sūrah am Anfang des Qurʾān?",
-        "options": [
-          "al-Fātiḥah.",
-          "Ein erfundener Name."
+    "sourceAudit": {
+      "hadithUrl": "https://islamweb.net/ar/library/content/0/724",
+      "hadithNumber": "Ṣaḥīḥ al-Buḫārī – Islamweb 723",
+      "narrator": "ʿUbādah ibn aṣ-Ṣāmit",
+      "authenticity": "Ṣaḥīḥ al-Buḫārī; der arabische Originalwortlaut wurde in Islamweb-Inhalt 0/724 direkt gelesen. Zählweise der Bibliotheksansicht 723; keine unbelegte Editionsgleichsetzung.",
+      "quranReference": "15:87",
+      "quranUrl": "https://www.islamweb.net/ar/library/content/49/933",
+      "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
+      "hadithMeaningIsParaphrase": true,
+      "verifiedDate": "2026-10-13",
+      "dorarReRead": false,
+      "numberUnverified": false,
+      "fiqhHumanReviewNeeded": true,
+      "scientificApproval": false,
+      "note": "Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "editorialScopeNote": "Dass die sieben die Fātiḥah sind, steht in dem gespeicherten Versauszug nicht als eigener Satz. Wir behaupten diese Gleichsetzung nicht als gelesen. Dass die Fātiḥah die einzige Säule des Gebets sei, steht hier ebenfalls nicht. al-Mughnī wurde nicht gelesen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft.",
+      "verifiedHadithOn": "2026-10-14",
+      "classicalFiqhCrosscheck": {
+        "status": "primary-hanbali-text-read-not-approved",
+        "reviewDate": "2026-10-14",
+        "author": "Ibn Qudāmah",
+        "work": "al-Mughnī",
+        "chapter": "Kitāb aṣ-Ṣalāh, Bāb Ṣifat aṣ-Ṣalāh, Masʾalat Qirāʾat al-Fātiḥah",
+        "volume": "1",
+        "page": "284",
+        "directLink": "https://www.islamweb.net/ar/library/content/15/553",
+        "tafsirLink": "https://www.islamweb.net/ar/library/content/49/933",
+        "scope": "Fātiḥah recitation and the Hanbali discussion; the Qurʾān 15:87 alone does not specify the full prayer rule. Nuances for imam/follower and inability not settled here.",
+        "humanFiqhApproval": false
+      }
+    },
+    "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
+    "sample": "Im Gebet wird der Qurʾān gelesen.",
+    "ageText": {
+      "4-5": {
+        "goal": "Die Fātiḥah gehört zum Qurʾān, den wir im Gebet lesen.",
+        "intro": "Assalāmu ʿalaikum, liebe Kinder! Im Gebet hören und lesen wir Worte aus dem Qurʾān. Eine wichtige Sūrah heißt al-Fātiḥah. Sie steht am Anfang des Qurʾān. Du musst nicht alles auf einmal können. Eine Lehrperson oder deine Eltern helfen dir, aufmerksam zuzuhören und die Worte langsam und richtig zu lernen. Heute schauen wir uns die Fātiḥah als besondere Sūrah an und freuen uns über jeden kleinen Lernschritt.",
+        "lines": [
+          "Im Gebet lesen wir aus dem Qurʾān.",
+          "Eine wichtige Sūrah heißt al-Fātiḥah.",
+          "Wir hören einer geeigneten Qurʾān-Rezitation aufmerksam zu.",
+          "Mit einer Lehrperson lernen wir die Worte Schritt für Schritt."
         ],
-        "correct": 0,
-        "hint": "Denke an die eröffnende Sūrah.",
-        "explain": "Mā schāʾ Allāh! Al-Fātiḥah heißt die eröffnende Sūrah."
+        "evidence": "Der Qurʾān spricht in 15:87 von den sieben oft Wiederholten. In der Sunnah wird die Fātiḥah als besonders wichtig für das Gebet erklärt.",
+        "sources": "Direkte Quellen: Qurʾān 15:87, Ibn Kaṯīr (Islamweb 49/933); Ṣaḥīḥ al-Buḫārī (Islamweb 0/724); Ibn Qudāmah, al-Mughnī (Islamweb 15/553). Noch ohne menschliche Endfreigabe.",
+        "terms": [
+          {
+            "say": "al-Fātiḥah",
+            "de": "die eröffnende Sūrah des Qurʾān"
+          },
+          {
+            "say": "qirāʾah",
+            "de": "Rezitation, das Lesen des Qurʾān"
+          }
+        ],
+        "situation": "Eine Lehrperson liest aus der Fātiḥah vor. Das Kind hört ruhig zu und stellt Fragen, wenn es ein Wort nicht versteht.",
+        "practice": "Wir hören aufmerksam zu und üben mit einer Lehrperson einen kleinen bereits erklärten Abschnitt.",
+        "summary": "Die Fātiḥah ist eine wichtige Sūrah für das Gebet. Wir lernen ohne Druck und mit Hilfe.",
+        "audioScript": "Die Qurʾān-Rezitation im Gebet. Assalāmu ʿalaikum! Im Gebet lesen wir aus dem Qurʾān. Eine wichtige Sūrah ist al-Fātiḥah. Wir hören aufmerksam zu und lernen ihre Worte mit einer Lehrperson Schritt für Schritt."
+      },
+      "6-8": {
+        "goal": "Ich kenne die Fātiḥah als wichtige Sūrah für das Gebet und kann Vers und Sunnah unterscheiden.",
+        "intro": "Assalāmu ʿalaikum! Heute geht es um das Lesen des Qurʾān im Gebet. Wir lernen die Sūrah al-Fātiḥah kennen. Allah erwähnt im Qurʾān, in Sūrah 15, Vers 87, die sieben oft Wiederholten. Ibn Kaṯīr erklärt in seinem Tafsīr, warum Gelehrte und Überlieferungen diese Worte mit der Fātiḥah verbinden. Der Prophet ﷺ erklärte außerdem in einer authentischen Überlieferung die besondere Rolle der Fātiḥah im Gebet. Wir hören einer geeigneten Qurʾān-Rezitation aufmerksam zu. Wenn ein Wort schwierig ist, darfst du fragen. Mit einer Lehrperson lernen wir kleine Abschnitte richtig, ohne ein anderes Kind zu drängen.",
+        "lines": [
+          "Qurʾān 15:87 nennt die sieben oft Wiederholten.",
+          "Der Tafsīr erläutert den Zusammenhang mit der Fātiḥah.",
+          "Die Sunnah lehrt die besondere Bedeutung ihrer Rezitation im Gebet.",
+          "Wir lernen behutsam mit einer Lehrperson und wiederholen nur, was wir verstehen."
+        ],
+        "evidence": "Qurʾān 15:87 erwähnt die sieben oft Wiederholten; Ibn Kaṯīrs Tafsīr bespricht die Fātiḥah. Ṣaḥīḥ al-Buḫārī (Islamweb 723) nennt die Bedeutung ihrer Rezitation im Gebet. Dies sind unterschiedliche Belege, keine einzige wörtliche Versregel.",
+        "sources": "Direkte Quellen: Qurʾān 15:87, Ibn Kaṯīr (Islamweb 49/933); Ṣaḥīḥ al-Buḫārī (Islamweb 0/724); Ibn Qudāmah, al-Mughnī (Islamweb 15/553). Noch ohne menschliche Endfreigabe.",
+        "terms": [
+          {
+            "say": "al-Fātiḥah",
+            "de": "die eröffnende Sūrah des Qurʾān"
+          },
+          {
+            "say": "qirāʾah",
+            "de": "Rezitation, das Lesen des Qurʾān"
+          }
+        ],
+        "situation": "Zwei Kinder lernen bei einer Lehrperson. Eines kennt schon mehr Verse. Beide dürfen in ihrem eigenen Tempo üben.",
+        "practice": "Wir hören eine geeignete Rezitation und erklären in eigenen Worten, warum sorgfältiges Lernen wichtig ist.",
+        "summary": "Die Fātiḥah ist wichtig für das Gebet. Der Qurʾān-Vers, der Tafsīr und der Hadith werden als unterschiedliche Quellen verstanden.",
+        "audioScript": "Die Qurʾān-Rezitation im Gebet. Heute lernen wir al-Fātiḥah kennen. Qurʾān 15:87 spricht von den sieben oft Wiederholten. Der Tafsīr erläutert die Bedeutung der Fātiḥah, und die Sunnah lehrt ihre besondere Stellung im Gebet. Wir lernen mit einer Lehrperson und ohne Leistungsdruck."
+      },
+      "9-10": {
+        "goal": "Ich kann den Vers 15:87, den Hadith zur Fātiḥah und die hanbalitische Fiqh-Erläuterung unterscheiden.",
+        "intro": "Assalāmu ʿalaikum! Bei der Ṣalāh gehört das Lesen des Qurʾān zum Gottesdienst. Qurʾān 15:87 erwähnt die sieben oft Wiederholten und den gewaltigen Qurʾān. Ibn Kaṯīr erläutert im Tafsīr, dass die Fātiḥah als die sieben oft Wiederholten verstanden wird, und bespricht die dafür angeführten Berichte. In Ṣaḥīḥ al-Buḫārī wird von ʿUbādah ibn aṣ-Ṣāmit überliefert, wie wichtig die Fātiḥah für das Gebet ist. Ibn Qudāmah behandelt in al-Mughnī, Band 1, Seite 284, ihre Rezitation als Gebetsbestandteil der hanbalitischen Lehre. Der Vers selbst enthält aber nicht die ganze Einzelregel. Wir üben die Unterscheidung zwischen Offenbarung, Erklärung und Fiqh. Eine genaue Rechtsfrage, etwa die Lage eines Mitbetenden, gehört in eine gesonderte Lehrstunde. Beim Rezitieren helfen uns eine geeignete Lehrperson und authentische Rezitation, nicht erfundene Formeln.",
+        "lines": [
+          "Qurʾān 15:87 erwähnt die sieben oft Wiederholten und den Qurʾān.",
+          "Ibn Kaṯīrs Tafsīr erläutert die Verbindung zur Fātiḥah.",
+          "Ṣaḥīḥ al-Buḫārī behandelt die Bedeutung der Fātiḥah beim Gebet.",
+          "Al-Mughnī erläutert hanbalitische Fiqh-Regeln; einzelne Ausnahmen brauchen eigene Prüfung."
+        ],
+        "evidence": "Trenne Qurʾān 15:87 (Verswortlaut), Ibn Kaṯīr zu 15:87 (Tafsīr), Ṣaḥīḥ al-Buḫārī (Islamweb 0/724, nummeriert 723 auf dieser Seite) und Ibn Qudāmah, al-Mughnī, Bd. 1, S. 284 (klassische Fiqh-Erläuterung).",
+        "sources": "Direkte Quellen: Qurʾān 15:87, Ibn Kaṯīr (Islamweb 49/933); Ṣaḥīḥ al-Buḫārī (Islamweb 0/724); Ibn Qudāmah, al-Mughnī (Islamweb 15/553). Noch ohne menschliche Endfreigabe.",
+        "terms": [
+          {
+            "say": "al-Fātiḥah",
+            "de": "die eröffnende Sūrah des Qurʾān"
+          },
+          {
+            "say": "qirāʾah",
+            "de": "Rezitation, das Lesen des Qurʾān"
+          }
+        ],
+        "situation": "Ein Kind findet vier Quellennamen auf einer Lernkarte und möchte wissen, welcher Text Qurʾān, Hadith oder Fiqh-Erklärung ist.",
+        "practice": "Wir ordnen die vier Quellen richtig zu und hören einen kurzen Abschnitt der Fātiḥah mit einer geeigneten Lehrperson an.",
+        "summary": "Die Fātiḥah ist für das Gebet wichtig. Wir unterscheiden Qurʾān-Vers, Tafsīr, authentische Sunnah und Fiqh-Erläuterung.",
+        "audioScript": "Die Qurʾān-Rezitation im Gebet. Qurʾān 15:87 nennt die sieben oft Wiederholten. Ibn Kaṯīr erläutert die Verbindung zur Fātiḥah. Ṣaḥīḥ al-Buḫārī betont ihre Bedeutung im Gebet. Ibn Qudāmah erläutert dazu die hanbalitischen Fiqh-Regeln. Wir lernen die Fātiḥah aufmerksam mit einer geeigneten Lehrperson."
+      }
+    },
+    "questions": {
+      "4-5": [
+        {
+          "type": "choice",
+          "prompt": "Wie heißt die Sūrah am Anfang des Qurʾān?",
+          "options": [
+            "al-Fātiḥah.",
+            "Ein erfundener Name."
+          ],
+          "correct": 0,
+          "hint": "Denke an die eröffnende Sūrah.",
+          "explain": "Mā schāʾ Allāh! Al-Fātiḥah heißt die eröffnende Sūrah."
+        },
+        {
+          "type": "choice",
+          "prompt": "Ein Qurʾān-Wort ist schwer für dich. Was hilft?",
+          "options": [
+            "Mich dafür schämen.",
+            "Eine Lehrperson fragen und langsam üben."
+          ],
+          "correct": 1,
+          "hint": "Du darfst in deinem Tempo lernen.",
+          "explain": "Allāhumma bārik! Lernen braucht Geduld."
+        }
+      ],
+      "6-8": [
+        {
+          "type": "choice",
+          "prompt": "Welche Sūrah lernen wir besonders für das Gebet kennen?",
+          "options": [
+            "al-Fātiḥah.",
+            "Eine frei erfundene Sūrah."
+          ],
+          "correct": 0,
+          "hint": "Denke an den Beginn des Qurʾān.",
+          "explain": "Mā schāʾ Allāh! Wir lernen die Fātiḥah kennen."
+        },
+        {
+          "type": "choice",
+          "prompt": "Was macht eine gute Lernübung aus?",
+          "options": [
+            "Worte ohne Hilfe erraten.",
+            "Einer geeigneten Qurʾān-Rezitation zuhören und mit einer Lehrperson üben."
+          ],
+          "correct": 1,
+          "hint": "Denke an sorgfältiges Lernen.",
+          "explain": "Allāhumma bārik! Der Qurʾān wird achtsam gelernt."
+        },
+        {
+          "type": "text",
+          "prompt": "Was unterscheidet Qurʾān 15:87 und den Hadith über die Fātiḥah?",
+          "sample": "Der Vers spricht über die sieben oft Wiederholten. Die authentische Überlieferung erklärt die Bedeutung der Fātiḥah im Gebet.",
+          "hint": "Nenne Vers und Hadith getrennt.",
+          "explain": "Sehr gut! Du vermischst die beiden Quellen nicht."
+        }
+      ],
+      "9-10": [
+        {
+          "type": "text",
+          "prompt": "Unterscheide vier Quellen dieser Stunde: Qurʾān 15:87, Ibn Kaṯīr, Ṣaḥīḥ al-Buḫārī und al-Mughnī.",
+          "sample": "Der Qurʾān enthält den Vers; Ibn Kaṯīr erklärt ihn; al-Buḫārī überliefert den Hadith; al-Mughnī behandelt die Fiqh-Regel.",
+          "hint": "Welche Quelle ist Offenbarung, Auslegung, Überlieferung oder Rechtslehre?",
+          "explain": "Mā schāʾ Allāh! Du kannst mit verschiedenen Quellen sorgfältig umgehen."
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche Aussage steht NICHT unmittelbar als vollständige Gebetsregel im Vers 15:87?",
+          "options": [
+            "Die gesamte hanbalitische Einzelregel zur Fātiḥah-Rezitation.",
+            "Die Erwähnung der sieben oft Wiederholten."
+          ],
+          "correct": 0,
+          "hint": "Achte auf den Unterschied zwischen Vers und späterer Erläuterung.",
+          "explain": "Richtig! Der Qurʾān-Vers darf nicht mit zusätzlichen Einzelregeln verwechselt werden."
+        },
+        {
+          "type": "text",
+          "prompt": "Wie hilfst du einem jüngeren Kind, das die Fātiḥah noch nicht vollständig kann?",
+          "sample": "Ich ermutige es freundlich, mit einer Lehrperson in kleinen Schritten zu lernen, statt es zu beschämen.",
+          "hint": "Wähle eine sichere, geduldige Lernhilfe.",
+          "explain": "Allāhumma bārik! Freundlichkeit unterstützt das Lernen."
+        }
+      ]
+    },
+    "terms": [
+      {
+        "say": "maṯānī",
+        "de": "wiederholte; so das Wort des Verses"
       },
       {
-        "type": "choice",
-        "prompt": "Ein Qurʾān-Wort ist schwer für dich. Was hilft?",
-        "options": [
-          "Mich dafür schämen.",
-          "Eine Lehrperson fragen und langsam üben."
-        ],
-        "correct": 1,
-        "hint": "Du darfst in deinem Tempo lernen.",
-        "explain": "Allāhumma bārik! Lernen braucht Geduld."
+        "say": "qirāʾah",
+        "de": "Lesung; Unterrichtswort"
       }
     ],
-    "6-8": [
-      {
-        "type": "choice",
-        "prompt": "Welche Sūrah lernen wir besonders für das Gebet kennen?",
-        "options": [
-          "al-Fātiḥah.",
-          "Eine frei erfundene Sūrah."
-        ],
-        "correct": 0,
-        "hint": "Denke an den Beginn des Qurʾān.",
-        "explain": "Mā schāʾ Allāh! Wir lernen die Fātiḥah kennen."
-      },
-      {
-        "type": "choice",
-        "prompt": "Was macht eine gute Lernübung aus?",
-        "options": [
-          "Worte ohne Hilfe erraten.",
-          "Einer geeigneten Qurʾān-Rezitation zuhören und mit einer Lehrperson üben."
-        ],
-        "correct": 1,
-        "hint": "Denke an sorgfältiges Lernen.",
-        "explain": "Allāhumma bārik! Der Qurʾān wird achtsam gelernt."
-      },
-      {
-        "type": "text",
-        "prompt": "Was unterscheidet Qurʾān 15:87 und den Hadith über die Fātiḥah?",
-        "sample": "Der Vers spricht über die sieben oft Wiederholten. Die authentische Überlieferung erklärt die Bedeutung der Fātiḥah im Gebet.",
-        "hint": "Nenne Vers und Hadith getrennt.",
-        "explain": "Sehr gut! Du vermischst die beiden Quellen nicht."
-      }
-    ],
-    "9-10": [
-      {
-        "type": "text",
-        "prompt": "Unterscheide vier Quellen dieser Stunde: Qurʾān 15:87, Ibn Kaṯīr, Ṣaḥīḥ al-Buḫārī und al-Mughnī.",
-        "sample": "Der Qurʾān enthält den Vers; Ibn Kaṯīr erklärt ihn; al-Buḫārī überliefert den Hadith; al-Mughnī behandelt die Fiqh-Regel.",
-        "hint": "Welche Quelle ist Offenbarung, Auslegung, Überlieferung oder Rechtslehre?",
-        "explain": "Mā schāʾ Allāh! Du kannst mit verschiedenen Quellen sorgfältig umgehen."
-      },
-      {
-        "type": "choice",
-        "prompt": "Welche Aussage steht NICHT unmittelbar als vollständige Gebetsregel im Vers 15:87?",
-        "options": [
-          "Die gesamte hanbalitische Einzelregel zur Fātiḥah-Rezitation.",
-          "Die Erwähnung der sieben oft Wiederholten."
-        ],
-        "correct": 0,
-        "hint": "Achte auf den Unterschied zwischen Vers und späterer Erläuterung.",
-        "explain": "Richtig! Der Qurʾān-Vers darf nicht mit zusätzlichen Einzelregeln verwechselt werden."
-      },
-      {
-        "type": "text",
-        "prompt": "Wie hilfst du einem jüngeren Kind, das die Fātiḥah noch nicht vollständig kann?",
-        "sample": "Ich ermutige es freundlich, mit einer Lehrperson in kleinen Schritten zu lernen, statt es zu beschämen.",
-        "hint": "Wähle eine sichere, geduldige Lernhilfe.",
-        "explain": "Allāhumma bārik! Freundlichkeit unterstützt das Lernen."
-      }
-    ]
+    "practice": "Mit einer geeigneten Lehrperson die Fātiḥah aufmerksam hören und langsam kennenlernen.",
+    "summary": "Fiqh · Qurʾān-Rezitation im Gebet: Die Fātiḥah ist wichtig; wir lernen sie mit einer Lehrperson.",
+    "audioScript": "Die Qurʾān-Rezitation im Gebet: Die Fātiḥah ist eine wichtige Sūrah. Wir lernen sie mit einer Lehrperson und unterscheiden Qurʾān-Vers, Tafsīr und Sunnah.",
+    "voiceApproved": false
   },
-  "terms": [
-    {
-      "say": "maṯānī",
-      "de": "wiederholte; so das Wort des Verses"
-    },
-    {
-      "say": "qirāʾah",
-      "de": "Lesung; Unterrichtswort"
-    }
-  ],
-  "practice": "Mit einer geeigneten Lehrperson die Fātiḥah aufmerksam hören und langsam kennenlernen.",
-  "summary": "Fiqh · Qurʾān-Rezitation im Gebet: Die Fātiḥah ist wichtig; wir lernen sie mit einer Lehrperson.",
-  "audioScript": "Die Qurʾān-Rezitation im Gebet: Die Fātiḥah ist eine wichtige Sūrah. Wir lernen sie mit einer Lehrperson und unterscheiden Qurʾān-Vers, Tafsīr und Sunnah.",
-  "voiceApproved": false
-},
   "tawhid-keine-goettliche-macht-fuer-geschoepfe": {
     "id": "tawhid-keine-goettliche-macht-fuer-geschoepfe",
     "subject": "aqidah",
