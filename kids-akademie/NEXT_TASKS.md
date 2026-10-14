@@ -1,3 +1,11 @@
+## 14.10.2026 · Wuḍūʾ-Lektion 58: tartīb und muwālāt gesondert klassisch geprüft
+
+- **Tatsächlich ausgeführte Korrektur:** Im Kindermodul `kids/akademie/curriculum-foundation-fiqh-030-033-046-058-v1.js` wurde Slot 58 (Alter 9–10) um die Unterscheidung **tartīb** (Reihenfolge der Glieder) und **muwālāt** (zeitlicher Zusammenhang) erweitert, ohne die ursprünglichen IDs, Qurʾān-/Ḥadīṯ-Objekte oder Quizfragen anzutasten.
+- **Klassischer Primärnachweis:** Ibn Qudāmah, `al-Mughnī`, Bd. 1 S. 93, Masʾalah 177, [Islamweb 15/151](https://islamweb.net/ar/library/content/15/151) für tartīb, **Bd. 1 S. 94, Masāʾil 180–181**, [Islamweb 15/153](https://www.islamweb.net/ar/library/content/15/153) für muwālāt. Unterschiedliche überlieferte Bewertungen, Trocknungsmaß und Ausnahmen sind in `kids-akademie/research/SCIENTIFIC_FOUNDATION_FIQH_030_033_046_058_20261014.md` erläutert. Kein erfundener Minutenwert und keine automatische Gültigkeitsentscheidung über Kinder.
+- **Synchronisiert:** `kids/data/academy-voice-foundation-fiqh-030-033-046-058-delta-v1.json` – 76 reine Textkontexte, 12/12 Altersfassungen mit zugehörigem Sprachtext abgeglichen, 0 Credits und 0 erzeugte Audios.
+- **Verifizierter früherer CI-Lauf:** [GitHub Actions 38538186634](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38538186634) hat alle 13 Schritte einschließlich Foundation-Fiqh 30/33/46/58 **erfolgreich** abgeschlossen. **Die neue Muwālāt-Textkorrektur erfolgte danach**; ein neuer Lauf darf erst nach abgeschlossener Prüfung als bestanden gelten.
+- **Nächste Arbeit:** gesonderte historische/rechtswissenschaftliche Ausnahmen sowie übrige ältere Fiqh- und Qurʾān-Quellen systematisch prüfen. Gesamtstatus unverändert: 208/208 Lektionsentwürfe, 624/624 Altersfassungen textlich vorhanden, 0/624 wissenschaftlich endgültig freigegeben; kein Live-Deploy und keine Vertonung.
+
 ## 14.10.2026 · Frühe Fiqh 30, 33, 46, 58 redaktionell bearbeitet (geschützter Entwurf)
 
 - **Vier bestehende Unterrichts-IDs:** `fiqh-salah-allah-gedenken` (30), `fiqh-salah-gebet-lernen` (33), `fiqh-reinheit-unterscheiden` (46), `fiqh-wudu-schritte-reihenfolge` (58). Neues Modul `kids/akademie/curriculum-foundation-fiqh-030-033-046-058-v1.js` mit **12 individuellen Altersfassungen** für 4–5, 6–8 und 9–10 Jahre; bestehende IDs, Quiz, Qurʾān- und Hadithquellen bleiben erhalten.
