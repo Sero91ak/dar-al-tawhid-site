@@ -563,7 +563,7 @@ const additions=
           "Eine Āyah ist ein Vers im Qurʾān.",
           "Wir achten auf den Qurʾān, indem wir sorgsam mit ihm umgehen und aufmerksam lernen."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:2. Sinngemäß: Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht.",
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:2. Sinngemäß: Qurʾān 2:2 beginnt sinngemäß: Dies ist das Buch, an dem kein Zweifel ist. Wir betrachten hier den Anfang des Verses.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/55. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -589,7 +589,7 @@ const additions=
           "Wir können sorgfältig lesen und unsere Fragen stellen.",
           "Wir helfen jüngeren Kindern respektvoll, ohne sie zu beschämen."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:2. Sinngemäß: Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht.",
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:2. Sinngemäß: Qurʾān 2:2 beginnt sinngemäß: Dies ist das Buch, an dem kein Zweifel ist. Wir betrachten hier den Anfang des Verses.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/55. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:2. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -658,7 +658,7 @@ const additions=
         {
           "type": "text",
           "prompt": "Was möchtest du dir aus Qurʾān 2:2 merken?",
-          "sample": "Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht.",
+          "sample": "Qurʾān 2:2 beginnt sinngemäß: Dies ist das Buch, an dem kein Zweifel ist. Wir betrachten hier den Anfang des Verses.",
           "hint": "Erkläre die Stelle in eigenen Worten.",
           "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
         }
@@ -667,7 +667,7 @@ const additions=
         {
           "type": "text",
           "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 2:2 lernen.",
-          "sample": "Der gespeicherte Auszug druckt: Das ist das Buch, an dem kein Zweifel ist. Die folgenden Worte des Verses stehen in diesem gespeicherten Auszug nicht.",
+          "sample": "Qurʾān 2:2 beginnt sinngemäß: Dies ist das Buch, an dem kein Zweifel ist. Wir betrachten hier den Anfang des Verses.",
           "hint": "Denke an die Bedeutung der Stelle.",
           "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
         },
@@ -2103,7 +2103,7 @@ const additions=
           "Wir lernen in kleinen Schritten und fragen nach.",
           "Niemand wird wegen eines Fehlers beim Lernen beschämt."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 75:16. Sinngemäß: Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 75:16. Sinngemäß: Qurʾān 75:16 richtet sich beim Empfang der Offenbarung an den Propheten ﷺ und spricht davon, die Zunge nicht aus Eile zu bewegen. Der folgende Vers 75:17 erklärt, dass Allah das Sammeln und die Rezitation gewährleistet.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1912. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 75:16. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -2129,7 +2129,7 @@ const additions=
           "Langsames Üben ist hier eine pädagogische Methode, kein neu erfundenes Versgebot.",
           "Wir achten auf den Zusammenhang und lernen ohne Beschämung."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 75:16. Sinngemäß: Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 75:16. Sinngemäß: Qurʾān 75:16 richtet sich beim Empfang der Offenbarung an den Propheten ﷺ und spricht davon, die Zunge nicht aus Eile zu bewegen. Der folgende Vers 75:17 erklärt, dass Allah das Sammeln und die Rezitation gewährleistet.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1912. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 75:16. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -2198,7 +2198,7 @@ const additions=
         {
           "type": "text",
           "prompt": "Was möchtest du dir aus Qurʾān 75:16 merken?",
-          "sample": "Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
+          "sample": "Qurʾān 75:16 richtet sich beim Empfang der Offenbarung an den Propheten ﷺ und spricht davon, die Zunge nicht aus Eile zu bewegen. Der folgende Vers 75:17 erklärt, dass Allah das Sammeln und die Rezitation gewährleistet.",
           "hint": "Erkläre die Stelle in eigenen Worten.",
           "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
         }
@@ -2207,7 +2207,7 @@ const additions=
         {
           "type": "text",
           "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 75:16 lernen.",
-          "sample": "Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
+          "sample": "Qurʾān 75:16 richtet sich beim Empfang der Offenbarung an den Propheten ﷺ und spricht davon, die Zunge nicht aus Eile zu bewegen. Der folgende Vers 75:17 erklärt, dass Allah das Sammeln und die Rezitation gewährleistet.",
           "hint": "Denke an die Bedeutung der Stelle.",
           "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
         },
@@ -6026,14 +6026,14 @@ const additions=
       },
       "6-8": {
         "goal": "Eine kleine Hilfe kann vor Allah Gewicht haben.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Eine kleine Hilfe kann vor Allah Gewicht haben. Wir lesen Qurʾān 99:7. Der Vers bedeutet sinngemäß: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. So kann das im Alltag aussehen: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Die Aufgabe: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. miṯqāl bedeutet: Gewicht. ḏarrah bedeutet: ein sehr kleines Stäubchen.",
+        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Eine kleine Hilfe kann vor Allah Gewicht haben. Wir lesen Qurʾān 99:7. Der Vers bedeutet sinngemäß: Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten. So kann das im Alltag aussehen: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Die Aufgabe: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. miṯqāl bedeutet: Gewicht. ḏarrah bedeutet: ein sehr kleines Stäubchen.",
         "lines": [
           "Qurʾān 99:7 ist die gelesene Stelle.",
           "Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
           "Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen.",
           "Die arabischen Worte spricht die Lehrperson."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 99:7. Sinngemäß: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 99:7. Sinngemäß: Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1971. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 99:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -6052,14 +6052,14 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann das Thema „Kleine Taten können wertvoll sein“ anhand von Qurʾān 99:7 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. In Qurʾān 99:7 lernen wir sinngemäß: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. miṯqāl bedeutet Gewicht. ḏarrah bedeutet ein sehr kleines Stäubchen. Stell dir diese Situation vor: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Welcher nächste Schritt ist gut? Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. In Qurʾān 99:7 lernen wir sinngemäß: Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten. miṯqāl bedeutet Gewicht. ḏarrah bedeutet ein sehr kleines Stäubchen. Stell dir diese Situation vor: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Welcher nächste Schritt ist gut? Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
         "lines": [
           "Unsere Qurʾān-Stelle ist Qurʾān 99:7.",
-          "Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
+          "Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten.",
           "Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen.",
           "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 99:7. Sinngemäß: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 99:7. Sinngemäß: Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1971. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 99:7. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -6074,7 +6074,7 @@ const additions=
         "situation": "Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen.",
         "practice": "Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
         "summary": "Eine kleine Hilfe kann vor Allah Gewicht haben. Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
-        "audioScript": "Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war."
+        "audioScript": "Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten. Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war."
       }
     },
     "questions": {
@@ -6128,7 +6128,7 @@ const additions=
         {
           "type": "text",
           "prompt": "Was möchtest du dir aus Qurʾān 99:7 merken?",
-          "sample": "Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
+          "sample": "Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten.",
           "hint": "Erkläre die Stelle in eigenen Worten.",
           "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
         }
@@ -6137,7 +6137,7 @@ const additions=
         {
           "type": "text",
           "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 99:7 lernen.",
-          "sample": "Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
+          "sample": "Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten.",
           "hint": "Denke an die Bedeutung der Stelle.",
           "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
         },
@@ -7560,14 +7560,14 @@ const additions=
       },
       "6-8": {
         "goal": "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Wir lesen Qurʾān 96:1. Der Vers bedeutet sinngemäß: Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. So kann das im Alltag aussehen: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Die Aufgabe: Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. iqraʾ bedeutet: lies. rabb bedeutet: Herr.",
+        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Wir lesen Qurʾān 96:1. Der Vers bedeutet sinngemäß: Qurʾān 96:1 lautet sinngemäß: Lies im Namen deines Herrn, der erschaffen hat. Dieser Vers gehört zu den ersten Worten der Offenbarung. So kann das im Alltag aussehen: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Die Aufgabe: Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. iqraʾ bedeutet: lies. rabb bedeutet: Herr.",
         "lines": [
           "Qurʾān 96:1 ist die gelesene Stelle.",
           "Die Seite bricht den Ausdruck dort ab.",
           "Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht.",
           "Die arabischen Worte spricht die Lehrperson."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 96:1. Sinngemäß: Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab.",
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 96:1. Sinngemäß: Qurʾān 96:1 lautet sinngemäß: Lies im Namen deines Herrn, der erschaffen hat. Dieser Vers gehört zu den ersten Worten der Offenbarung.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1965. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 96:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -7586,14 +7586,14 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann das Thema „Muḥammad ﷺ in Makkah“ anhand von Qurʾān 96:1 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Muḥammad ﷺ in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. In Qurʾān 96:1 lernen wir sinngemäß: Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. iqraʾ bedeutet lies. rabb bedeutet Herr. Stell dir diese Situation vor: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Welcher nächste Schritt ist gut? Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Muḥammad ﷺ in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. In Qurʾān 96:1 lernen wir sinngemäß: Qurʾān 96:1 lautet sinngemäß: Lies im Namen deines Herrn, der erschaffen hat. Dieser Vers gehört zu den ersten Worten der Offenbarung. iqraʾ bedeutet lies. rabb bedeutet Herr. Stell dir diese Situation vor: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Welcher nächste Schritt ist gut? Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
         "lines": [
           "Unsere Qurʾān-Stelle ist Qurʾān 96:1.",
-          "Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab.",
+          "Qurʾān 96:1 lautet sinngemäß: Lies im Namen deines Herrn, der erschaffen hat. Dieser Vers gehört zu den ersten Worten der Offenbarung.",
           "Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht.",
           "Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 96:1. Sinngemäß: Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab.",
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 96:1. Sinngemäß: Qurʾān 96:1 lautet sinngemäß: Lies im Namen deines Herrn, der erschaffen hat. Dieser Vers gehört zu den ersten Worten der Offenbarung.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1965. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 96:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -7608,7 +7608,7 @@ const additions=
         "situation": "Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht.",
         "practice": "Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle.",
         "summary": "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle.",
-        "audioScript": "Muḥammad ﷺ in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle."
+        "audioScript": "Muḥammad ﷺ in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Qurʾān 96:1 lautet sinngemäß: Lies im Namen deines Herrn, der erschaffen hat. Dieser Vers gehört zu den ersten Worten der Offenbarung. Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle."
       }
     },
     "questions": {
@@ -7662,7 +7662,7 @@ const additions=
         {
           "type": "text",
           "prompt": "Was möchtest du dir aus Qurʾān 96:1 merken?",
-          "sample": "Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab.",
+          "sample": "Qurʾān 96:1 lautet sinngemäß: Lies im Namen deines Herrn, der erschaffen hat. Dieser Vers gehört zu den ersten Worten der Offenbarung.",
           "hint": "Erkläre die Stelle in eigenen Worten.",
           "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
         }
@@ -7671,7 +7671,7 @@ const additions=
         {
           "type": "text",
           "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 96:1 lernen.",
-          "sample": "Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab.",
+          "sample": "Qurʾān 96:1 lautet sinngemäß: Lies im Namen deines Herrn, der erschaffen hat. Dieser Vers gehört zu den ersten Worten der Offenbarung.",
           "hint": "Denke an die Bedeutung der Stelle.",
           "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
         },
@@ -11078,14 +11078,14 @@ const additions=
       },
       "6-8": {
         "goal": "Wir glauben, dass es einen Jüngsten Tag gibt.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir glauben, dass es einen Jüngsten Tag gibt. Wir lesen Qurʾān 2:177. Der Vers bedeutet sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers. So kann das im Alltag aussehen: Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Die Aufgabe: Wir wiederholen nur die genannten Glaubensworte und keine Szene. al-yawm al-āḫir bedeutet: der Jüngste Tag. birr bedeutet: das Gute, von dem der Vers spricht.",
+        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir glauben, dass es einen Jüngsten Tag gibt. Wir lesen Qurʾān 2:177. Der Vers bedeutet sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Für die heutige Stunde betrachten wir einen Teil dieses langen Verses. So kann das im Alltag aussehen: Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Die Aufgabe: Wir wiederholen nur die genannten Glaubensworte und keine Szene. al-yawm al-āḫir bedeutet: der Jüngste Tag. birr bedeutet: das Gute, von dem der Vers spricht.",
         "lines": [
           "Qurʾān 2:177 ist die gelesene Stelle.",
           "Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten.",
           "Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht.",
           "Wir erzählen keine Gruselgeschichte."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:177. Sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers.",
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:177. Sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Für die heutige Stunde betrachten wir einen Teil dieses langen Verses.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/161. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:177. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -11104,14 +11104,14 @@ const additions=
       },
       "9-10": {
         "goal": "Ich kann das Thema „Īmān an den Jüngsten Tag“ anhand von Qurʾān 2:177 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Īmān an den Jüngsten Tag. Wir glauben, dass es einen Jüngsten Tag gibt. In Qurʾān 2:177 lernen wir sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers. al-yawm al-āḫir bedeutet der Jüngste Tag. birr bedeutet das Gute, von dem der Vers spricht. Stell dir diese Situation vor: Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Welcher nächste Schritt ist gut? Wir wiederholen nur die genannten Glaubensworte und keine Szene. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Īmān an den Jüngsten Tag. Wir glauben, dass es einen Jüngsten Tag gibt. In Qurʾān 2:177 lernen wir sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Für die heutige Stunde betrachten wir einen Teil dieses langen Verses. al-yawm al-āḫir bedeutet der Jüngste Tag. birr bedeutet das Gute, von dem der Vers spricht. Stell dir diese Situation vor: Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Welcher nächste Schritt ist gut? Wir wiederholen nur die genannten Glaubensworte und keine Szene. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
         "lines": [
           "Unsere Qurʾān-Stelle ist Qurʾān 2:177.",
-          "Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers.",
+          "Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Für die heutige Stunde betrachten wir einen Teil dieses langen Verses.",
           "Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht.",
           "Wir wiederholen nur die genannten Glaubensworte und keine Szene."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:177. Sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers.",
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:177. Sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Für die heutige Stunde betrachten wir einen Teil dieses langen Verses.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/161. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:177. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -11126,7 +11126,7 @@ const additions=
         "situation": "Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht.",
         "practice": "Wir wiederholen nur die genannten Glaubensworte und keine Szene.",
         "summary": "Wir glauben, dass es einen Jüngsten Tag gibt. Wir wiederholen nur die genannten Glaubensworte und keine Szene.",
-        "audioScript": "Īmān an den Jüngsten Tag. Wir glauben, dass es einen Jüngsten Tag gibt. Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers. Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Wir wiederholen nur die genannten Glaubensworte und keine Szene."
+        "audioScript": "Īmān an den Jüngsten Tag. Wir glauben, dass es einen Jüngsten Tag gibt. Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Für die heutige Stunde betrachten wir einen Teil dieses langen Verses. Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Wir wiederholen nur die genannten Glaubensworte und keine Szene."
       }
     },
     "questions": {
@@ -11180,7 +11180,7 @@ const additions=
         {
           "type": "text",
           "prompt": "Was möchtest du dir aus Qurʾān 2:177 merken?",
-          "sample": "Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers.",
+          "sample": "Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Für die heutige Stunde betrachten wir einen Teil dieses langen Verses.",
           "hint": "Erkläre die Stelle in eigenen Worten.",
           "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
         }
@@ -11189,7 +11189,7 @@ const additions=
         {
           "type": "text",
           "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 2:177 lernen.",
-          "sample": "Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers.",
+          "sample": "Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Für die heutige Stunde betrachten wir einen Teil dieses langen Verses.",
           "hint": "Denke an die Bedeutung der Stelle.",
           "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
         },
