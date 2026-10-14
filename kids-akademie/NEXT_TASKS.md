@@ -1,3 +1,15 @@
+## 14.10.2026 · Unterricht bis 190/208 individuell redigiert
+
+**Neue Lektionen 187–190:** Vertrauen und Bemühen (2:45); Fragen zum Īmān (21:7); Mut zur Wahrheit (33:70); Ältere respektvoll ansprechen (17:24). Vier Einzelthemen als **zwölf alterseigene Entwürfe** 4–5, 6–8 und 9–10. Datenmodul `kids/akademie/curriculum-editorial-187-190-v1.js` nach 183–186 genau einmal in `kids/akademie/index.html` eingebunden. Alte IDs, Quizfragen, Lernfortschritte unverändert.
+
+**Quellen und Grenzen:** Ibn Kaṯīr, bestehende Islamweb-Nachweise 49/85, 49/1163, 49/1508 und 49/1005. 21:7 hat einen historischen Gesandtenkontext, 17:24 spricht ausdrücklich von den Eltern, 33:70 rechtfertigt keine gefährliche öffentliche Konfrontation. Forschungsakte: `kids-akademie/research/EDITORIAL_REVIEW_187_190_20261014.md`. Keine der vier alten Islamweb-Seiten wird ohne gesonderten neuen Abruf als frisch vollständig verifiziert gekennzeichnet.
+
+**Technik:** `kids/data/academy-voice-editorial-187-190-delta-v1.json` enthält **76 vollständig abgeglichene, aber nicht generierte** Textkontexte, 0 Audio-Credits. `kids/tools/test-academy-editorial-187-190-v1.cjs` als reproduzierbarer Node-Test gespeichert. **53/53 eigenständig ausgeführte schreibgeschützte Inhalts- und Loaderkontrollen bestanden**. Vollständiger Node-/Browser-/CI-Lauf noch nicht durch diese Prüfung ersetzt.
+
+**Gesamtstand:** Individuelle Redaktion bis Slot **190 von 208**. **Noch 18 einzelne Lektionen 191–208** (darunter Fiqh 192, 198, 201, 204–208); anschließender vollständiger wissenschaftlicher Review aller 624 Altersfassungen. `scientificApproval=false` und Fiqh-Prüfsperren erhalten. Kein Merge auf main, kein Live-Deploy, keine Audioerzeugung und keine laufenden Kosten.
+
+**Wiederaufnahme:** 191–194, insbesondere Fiqh 192 nur mit gesonderter klassisch-hanbalitischer Quelle. Geschützter Draft-PR #1142.
+
 ## 14.10.2026 · Unterricht bis 186/208, geschützter Entwurf
 
 - **183–186:** Hilfsbereitschaft ohne Druck; Aufmerksamkeit beim Qurʾān-Vortrag; Schuldgefühle ohne Angstbilder; Rukūʿ kennenlernen. Vier vorhandene Lektions-IDs, **12 individuelle Altersfassungen**, je vier Unterrichtsabschnitten, Situation, Übung, Lernziel und Quellenabgrenzung: `kids/akademie/curriculum-editorial-183-186-v1.js`.
