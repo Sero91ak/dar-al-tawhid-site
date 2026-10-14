@@ -5949,7 +5949,9 @@ function fetchKidsQuiz(){
         baseItems=baseItems.filter(function(q){return !!curation.ids[q.id]});
         if(baseItems.length!==450)throw new Error("kids-quiz-curation-original-catalog-mismatch");
       }
-      kidsQuizPool=baseItems.concat(normalizeStudioQuizItems(studioData));
+      // Curated V4 launch is exactly 450 canonical questions; standalone studio
+      // content remains available in the original 900-question compatibility mode.
+      kidsQuizPool=(curation&&curation.enabled)?baseItems:baseItems.concat(normalizeStudioQuizItems(studioData));
       window.kidsQuizPool=kidsQuizPool;
       kidsQuizLoaded=true;
       try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-loaded",{detail:{count:kidsQuizPool.length}}))}catch(e){}
