@@ -75,7 +75,7 @@
       '<button class="salaf-back kids-detail-dock-back" type="button" aria-label="Zurück zur Geschichtenbibliothek"></button>'+
       '<div class="kids-detail-appbar-copy"><strong class="kids-detail-appbar-title">Schätze der Salaf</strong>'+
       '<small class="kids-detail-appbar-subtitle" id="salafStoryNavTitle">Geschichte</small></div></nav>'+
-      '<div class="salaf-detail-cover" id="salafDetailCover"><span class="salaf-eyebrow">HÖRGESCHICHTE</span><h2 id="salafDetailTitle"></h2><p id="salafDetailPerson"></p></div>'+
+      '<div class="salaf-detail-cover" id="salafDetailCover"><span class="salaf-eyebrow" id="salafDetailKicker">GESCHICHTE</span><h2 id="salafDetailTitle"></h2><p id="salafDetailPerson"></p></div>'+
       '<div class="salaf-detail-body">'+
          '<div class="salaf-actions salaf-story-modes" role="group" aria-label="Geschichte lesen oder hören">'+
          '<button type="button" data-salaf-mode="both" aria-pressed="false">Hören &amp; Mitlesen</button>'+
@@ -230,6 +230,7 @@
   function showStory(i){
     if(!i||!textFor(i))return;closeStory();active=i;
     q("#salafDetailTitle").textContent=i.title;q("#salafDetailPerson").textContent=i.person;
+    q("#salafDetailKicker").textContent=soundFor(i)?"HÖRGESCHICHTE":"GESCHICHTE ZUM LESEN";
     q("#salafStoryNavTitle").textContent=i.title;
     var art=safeAsset((gender()==="girl"&&i.heroGirl)||i.hero||i.image||"")||"/kids/assets/deen/deen-entry.jpg";
     q("#salafDetailCover").style.backgroundImage="linear-gradient(0deg,#0a202b 1%,rgba(5,22,32,.08) 85%),url('"+art+"')";
