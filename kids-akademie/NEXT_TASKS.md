@@ -1,3 +1,12 @@
+## 14.10.2026 · Fortsetzung 159–162, individuelle Kindertexte bis Slot 162
+
+- **Slots 159–162** sind zusätzlich zu 155–158 in `kids/akademie/curriculum-editorial-159-162-v1.js` mit **12 eigenständigen Altersfassungen** eingebunden: Allah danken, Īmān/gute Taten, Aufrichtigkeit, ruhig mit Niederlagen umgehen. Der Script-Loader steht einmalig direkt nach 155–158. Quizfragen, Alters-IDs, Quelle `quran` und Lernfortschritt bleiben unverändert.
+- Qurʾān-Grundlagen: **16:53** (Ibn Kaṯīr, vorhandener Islamweb-Locus 49/958; Teilkontrolle außerhalb Islamweb), **2:177** (Ibn Kaṯīr, Islamweb 49/161), **2:264** (Ibn Kaṯīr, Islamweb 49/222), **3:134** (Ibn Kaṯīr über Islamweb-Fatwa 95384, altes Primärregister 49/280 nicht unabhängig vollständig abgerufen). Einzelheiten stehen in `kids-akademie/research/EDITORIAL_REVIEW_159_162_20261014.md`.
+- Das neue Voice-Delta `kids/data/academy-voice-editorial-159-162-delta-v1.json` umfasst **76 Text-Kontexte**, nicht generiert, nicht in kanonischen Plan übernommen, `generateCreditsUsed=0`. Auch der Block 155–158 enthält 76 reine Textkontexte.
+- Neue Regression: `kids/tools/test-academy-editorial-159-162-v1.cjs`. Schreibgeschützte Kontrolle ergab **113/113 erfolgreiche strukturierte Abgleiche** bei 159–162, plus **30/30** bei 155–158. Echter Node-/Browser-/GitHub-Actions-Lauf **noch offen**; vorhandene Prüfskripte beweisen keine ausgeführte CI.
+- **Fortlaufender Redaktionsstand: bis 162 von 208 Lektionsslots**, d. h. **46 weitere Slots (163–208)** brauchen individuelle Redaktion und alle älteren Abschnitte eine fachwissenschaftliche Gesamtkontrolle. **0/624 wissenschaftlich endgültig freigegeben**.
+- **Wiederaufnahme: Lektionen 163–166**, hierbei Fiqh-Slot **166** nur mit tatsächlich geprüfter klassisch-hanbalitischer Quelle. Kein Merge auf `main`, kein Live-Deploy, keine Audioerzeugung; Branch `chatgpt/kids-akademie-155-158-20261014` mit Draft-PR #1142.
+
 ## 14.10.2026 · Unterricht 155–158 individuell erweitert (separater ChatGPT-Arbeitszweig)
 
 - **Vier Unterrichtslektionen 155–158** (`quran-woher-stammt-ein-hadith`, `sirah-sahabah-vorbild`, `dua-adhkar-ohne-zwang`, `family-gemeinschaft-gutes`) mit **zwölf unterschiedlichen Altersfassungen** für 4–5, 6–8 und 9–10 Jahre. Durchgehend vier Kinder-Lehrabschnitte je Altersfassung samt Alltag, Praxis, Lernziel, Quellenabgrenzung und Zusammenfassung.
