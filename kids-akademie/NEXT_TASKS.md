@@ -1,3 +1,11 @@
+## 14.10.2026 · Fiqh-Lektion 154 nachgearbeitet
+
+- **Niyyah (Slot 154):** Kindertext enthielt unklare Übung „Wir sagen den Namen laut“. Anhand Ibn Qudāmah, `al-Mughnī`, Bd. 1, S. 278 (Islamweb 15/542) durch drei Altersfassungen, acht Quizfragen und alle zugehörigen ungenerierten Voice-Texte ersetzt. **Die Absicht ist im Herzen; die Lernkarte ist keine Gebetsformel.**
+- Quellenbericht: `kids-akademie/research/INDEPENDENT_FIQH_REVIEW_154.md`.
+- V38-Sprachplan jetzt **1.412 einzigartige Textbausteine und 2.109 Kontexte**, `generateCreditsUsed=0`. Strukturprüfung direkt gegen GitHub-Dateien: keine Abweichung. Ein Node-/Browser-Testlauf bleibt offen.
+- Fiqh-Quellenabgleiche zu 106, 118, 130 und 154 sind **keine endgültigen wissenschaftlichen Freigaben**. Alle 17 vorgesehenen Fiqh-Lektionen behalten den menschlichen Prüfstatus.
+- **Als Nächstes:** Slot 142 „Die Namen der fünf Gebete“ anhand von `al-Mughnī` und den darin dokumentierten Sunnah-Belegen prüfen; weitere einzelne Kinderlektionen pädagogisch vertiefen.
+
 ## 14.10.2026 · Fortschritt nach der ersten V38-Korrekturrunde
 
 - **Fiqh 118 – Gebetsplatz:** `al-Mughnī`, Bd. 1, S. 404–405 (Islamweb 15/788) wurde gelesen. Kein besonderer Teppich aus Qurʾān 2:238 abzuleiten. Drei Belegerklärungen und acht Altersquizfragen korrigiert.
