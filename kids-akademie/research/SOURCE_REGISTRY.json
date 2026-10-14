@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 159,
+  "sourceCount": 161,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -3563,7 +3563,8 @@
       "checkedBy": "Islamweb Tafsīr aṭ-Ṭabarī 50/3021, arabischer Wortlaut zu 17:53 überprüft",
       "lessonIds": [
         "adab-worte",
-        "adab-worte-bei-streit-sprechen"
+        "adab-worte-bei-streit-sprechen",
+        "adab-worte-erst-nachdenken"
       ],
       "binding": "primary classical Qurʾān tafsīr; separate Sunnah check pending",
       "topic": "Freundlich sprechen"
@@ -3590,7 +3591,8 @@
       "checkedBy": "Islamweb Zād al-Masīr, 23:8 auf Seite 461 direkt gelesen",
       "lessonIds": [
         "akhlaq-amanah",
-        "akhlaq-amanah-geliehene-dinge"
+        "akhlaq-amanah-geliehene-dinge",
+        "akhlaq-amanah-mein-versprechen"
       ],
       "binding": "primary classical Qurʾān tafsīr; hadith check pending",
       "topic": "Amānah – Vertrauen"
@@ -3669,7 +3671,8 @@
       "checkedBy": "Dorar Ḥadīṯ-Enzyklopädie Sharḥ 4361, arabischer Bericht / Erzähler / Buḫārī 6018 / Muslim 47 / Authentizität direkt kontrolliert",
       "lessonIds": [
         "adab-worte",
-        "adab-worte-bei-streit-sprechen"
+        "adab-worte-bei-streit-sprechen",
+        "adab-worte-erst-nachdenken"
       ],
       "binding": "authentic Sunnah for early lesson 6; classical Quran Tafsir independent",
       "topic": "Gutes sprechen oder schweigen"
@@ -3800,7 +3803,8 @@
       "checkedBy": "Dorar Sharḥ 63778, arabischer Bericht ʿUmar, Ṣaḥīḥ Muslim 8, sechs Glaubenssäulen und ṣaḥīḥ-Status unmittelbar gelesen",
       "lessonIds": [
         "aqidah-iman",
-        "aqidah-iman-die-engel"
+        "aqidah-iman-die-engel",
+        "aqidah-iman-die-gesandten"
       ],
       "binding": "authentic Sunni Hadith Jibril for six pillars, separate from Quran 2:3",
       "topic": "Sechs Glaubenssäulen"
@@ -3908,7 +3912,8 @@
       "checkedBy": "Dorar Hadith-Sharḥ 5952, Abū Hurayrah, Buḫārī 33, Muslim 59",
       "lessonIds": [
         "akhlaq-amanah",
-        "akhlaq-amanah-geliehene-dinge"
+        "akhlaq-amanah-geliehene-dinge",
+        "akhlaq-amanah-mein-versprechen"
       ],
       "binding": "authentic Sunnah source distinct from Tafsīr of 23:8",
       "topic": "Amānah – Anvertrautes bewahren"
@@ -4016,6 +4021,58 @@
       ],
       "binding": "classical Hanbali primary Fiqh source for washing arms including elbows; final human review pending",
       "topic": "Arme bis zu den Ellenbogen im Wuḍūʾ"
+    },
+    {
+      "sourceId": "SRC-FIQH27-MUGHNI-141",
+      "key": "fiqh27-mughni-head-wiping",
+      "author": "Ibn Qudāmah",
+      "work": "al-Mughnī",
+      "narrator": null,
+      "arabic": "وَمَسْحُ الرَّأْسِ لَا خِلَافَ فِي وُجُوبِ مَسْحِ الرَّأْسِ وَقَدْ نَصَّ اللَّهُ تَعَالَى عَلَيْهِ بِقَوْلِهِ فَامْسَحُوا بِرُءُوسِكُمْ",
+      "germanTranslation": null,
+      "locus": "Kitāb aṭ-Ṭahārah, Bāb Farḍ aṭ-Ṭahārah, Masʾalah (166), Masḥ ar-Raʾs; Qurʾān 5:6",
+      "volume": "1",
+      "page": "87",
+      "chapter": "Streichen über den Kopf bei Wuḍūʾ",
+      "number": "166",
+      "edition": "Islamweb, al-Mughnī Buch 15, Text 141",
+      "directLink": "https://islamweb.net/ar/library/content/15/141#:~:text=%D9%88%D9%85%D8%B3%D8%AD%20%D8%A7%D9%84%D8%B1%D8%A3%D8%B3",
+      "authenticityNote": "Klassischer hanbalitischer Originaltext am 14.10.2026 unmittelbar über Islamweb gelesen. Ibn Qudāmah beschreibt die Pflicht des Kopfstreichens aus Qurʾān 5:6 und verzeichnet unterschiedliche Überlieferungen Imām Aḥmads dazu, wie viel vom Kopf umfasst sein muss. Keine pauschale Einstimmigkeit über das genaue Maß, keine eigenständig geprüften Hadithketten.",
+      "safeApplication": "Kinder lernen die Aussage über das Streichen des Kopfes und üben die Gebetswaschung bei einer sachkundigen Lehrperson. Der Meinungsunterschied beim genauen Maß, Ausnahmen bei Krankheit und Behinderung sowie einzelne Gültigkeitsfragen werden nicht als neue starre Vorschrift in der Kinderszene ausgegeben.",
+      "verificationStatus": "primary-page-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Direktzugriff Islamweb al-Mughnī 15/141, Bd. 1 S. 87, Masʾalah 166",
+      "lessonIds": [
+        "fiqh-wudu-kopf-und-fu-e"
+      ],
+      "binding": "Primärbeleg zur Kopfwaschungs-Abgrenzung: Masḥ des Kopfes, ohne fälschliche Pflicht zur Haarwäsche; endgültiger Fiqh-Review offen",
+      "topic": "Kopfstreichen bei der Gebetswaschung"
+    },
+    {
+      "sourceId": "SRC-FIQH27-MUGHNI-149",
+      "key": "fiqh27-mughni-feet-to-ankles",
+      "author": "Ibn Qudāmah",
+      "work": "al-Mughnī",
+      "narrator": null,
+      "arabic": "وَغَسْلُ الرِّجْلَيْنِ إِلَى الْكَعْبَيْنِ، وَهُمَا الْعَظْمَانِ النَّاتِئَانِ",
+      "germanTranslation": null,
+      "locus": "Kitāb aṭ-Ṭahārah, Bāb Farḍ aṭ-Ṭahārah, Masʾalah (175), Ġasl ar-Riǧlayn ilā al-Kaʿbayn; Qurʾān 5:6",
+      "volume": "1",
+      "page": "90–92",
+      "chapter": "Waschen der Füße bis zu den Knöcheln",
+      "number": "175",
+      "edition": "Islamweb, al-Mughnī Buch 15, Text 149",
+      "directLink": "https://www.islamweb.net/ar/library/content/15/149#:~:text=%D9%88%D8%BA%D8%B3%D9%84%20%D8%A7%D9%84%D8%B1%D8%AC%D9%84%D9%8A%D9%86%20%D8%A5%D9%84%D9%89%20%D8%A7%D9%84%D9%83%D8%B9%D8%A8%D9%8A%D9%86",
+      "authenticityNote": "Klassischer Originaltext aus Ibn Qudāmahs al-Mughnī am 14.10.2026 auf Islamweb direkt geprüft, Bd. 1 S. 90–92, Masʾalah 175. Ibn Qudāmah begründet das Waschen der Füße bis zu den Knöcheln und führt unterschiedliche Auslegungen beziehungsweise Berichte an. Spezielle Regeln zum Wischen über Fußbekleidung und Krankheitsfälle wurden nicht abschließend geprüft.",
+      "safeApplication": "Mit Kindern deutlich unterscheiden: Kopf mit feuchter Hand streichen, Füße normalerweise waschen. Füße und Knöchel nur sanft unter sachkundiger Anleitung üben; keine erzwungene Wasseranwendung oder Beschämung bei Krankheit, Verletzung oder Hilfsmitteln.",
+      "verificationStatus": "primary-page-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Direktzugriff Islamweb al-Mughnī 15/149, Bd. 1 S. 90–92, Masʾalah 175",
+      "lessonIds": [
+        "fiqh-wudu-kopf-und-fu-e"
+      ],
+      "binding": "Klassisch hanbalitischer Primärbeleg für Füßewaschen bis zu Knöcheln; separate Regeln für Fußbekleidung nicht freigegeben",
+      "topic": "Füße und Knöchel bei Wuḍūʾ"
     }
   ]
 }
