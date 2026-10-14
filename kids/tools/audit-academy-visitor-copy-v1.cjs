@@ -73,13 +73,15 @@ for (const [i, phrase] of (voice.phrases || []).entries()) {
     const lesson = lessons[ctx.lessonId];
     if (!lesson) { issue("voice[" + i + "]", "unknown lesson"); continue; }
     const ageText = lesson.ageText?.[ctx.age];
-    const expected = ctx.kind === "intro" ? ageText?.intro
+    const expected = ctx.kind === "summary" ? lesson.audioScript
+      : ctx.kind === "intro" ? ageText?.intro
       : ctx.kind === "audio" ? ageText?.audioScript
       : ctx.kind === "line" ? ageText?.lines?.[ctx.index] : null;
     if (expected !== null && expected !== phrase.text)
       issue("voice[" + i + "]", "stale text at " + ctx.lessonId + "/" + ctx.age + "/" + ctx.kind);
   }
 }
+if (contextCount !== ids.length * 19) issue("voice", "expected "+(ids.length * 19)+" contexts, found "+contextCount);
 if (voice.policy?.generateCreditsUsed !== 0) issue("voice", "nonzero generation credits");
 if (!academyHtml.includes("const hasLessonHadith=") || !academyHtml.includes("hadithBlock.hidden=!hasLessonHadith"))
   issue("academy UI", "no sourced-Hadith visibility safeguard");
