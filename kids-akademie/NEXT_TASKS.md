@@ -1,3 +1,11 @@
+## 14.10.2026 · Unterricht 119–122 einzeln redigiert
+
+- **Jetzt tatsächlich im PR-Draft umgesetzt:** vier Stunden (119–122), **zwölf altersbezogene Unterrichtsfassungen** mit eigenständigem Lernziel, vier inhaltlichen Lerneinheiten, Alltagsbeispiel, Übung, Quellenabgrenzung und Abschluss. Die neue Datei `kids/akademie/curriculum-editorial-119-122-v1.js` wird nach den V44-Fragerevisionen und vor dem Term-Coach geladen. Originale Lektions-IDs, Qurʾān-Texte, Quizfragen und Freigabeattribute bleiben erhalten.
+- **Nur gesprochene Textplanung:** 76 zugehörige deutsche Kontexte liegen als eigenes ungegeneriertes Delta in `kids/data/academy-voice-editorial-119-122-delta-v1.json`. Die kanonische V38-Voice-Datei wurde nicht stillschweigend überschrieben. **Vor jeder späteren Audioerzeugung** Textdelta gegen kanonischen Plan auflösen, Abdeckung neu testen und Qurʾān-Rezitation separat halten. 0 Audio-Aufträge/0 Credits aus diesem Paket.
+- **Quellenbericht:** `kids-akademie/research/EDITORIAL_REVIEW_119_122_20261014.md`; bei 119–122 wurden Qurʾān-Grundlagen und indexierte Tafsīr-Passagen herangezogen, jedoch keine vollständige unabhängige Prüfung aller Primärseiten und Isnād abgeschlossen.
+- **Reproduzierbare Regression hinterlegt:** `node kids/tools/test-academy-editorial-119-122-v1.cjs`. Lesen/Strukturprüfung der GitHub-Dateien erfolgreich; **ein echter Node-/Browser-Test wurde hier nicht ausgeführt** (kein ausführbarer Repository-Checkout verfügbar).
+- **Nächste Priorität:** die schematischen Kindertexte **123–129** einzeln vertiefen, danach die übrigen unredigierten Stunden in Reihenfolge; Fiqh 130 und weitere Fiqh-Lektionen gesondert wissenschaftlich abgleichen. Alle 624 Fassungen bleiben wissenschaftlich nicht freigegeben. **Kein Merge, kein Live-Deploy, keine Audioerzeugung.**
+
 ## 14.10.2026 · Fiqh 166 und 174
 
 - **Slot 166 – Qiyām:** Unterricht und Fragen aller Altersgruppen zum Stehen im Gebet präzisiert; Kinderschutz bei Schmerzen und körperlichen Einschränkungen; `al-Mughnī` Bd. 1, S. 277 (Islamweb 15/539, 15/538).
