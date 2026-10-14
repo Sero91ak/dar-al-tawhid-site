@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - kids/tools/recover_quiz_v4_batch.py
+      - kids/tools/probe_quiz_v4_flow_get.py
       - .github/workflows/recover-kids-quiz-v4-paid.yml
 
 permissions:
@@ -31,17 +32,17 @@ jobs:
           persist-credentials: true
 
       - name: Ensure read-only recovery script is syntactically valid
-        run: python3 -m py_compile kids/tools/recover_quiz_v4_batch.py
+        run: python3 -m py_compile kids/tools/recover_quiz_v4_batch.py kids/tools/probe_quiz_v4_flow_get.py
 
       - name: Check FFmpeg is available
         run: |
           ffmpeg -version | head -n 1
           ffprobe -version | head -n 1
 
-      - name: Recover previously paid originals WITHOUT ANY TTS CALL
+      - name: Probe official Flow TTS GET against one existing paid V4 take
         id: recovery
         continue-on-error: true
-        run: python3 kids/tools/recover_quiz_v4_batch.py
+        run: python3 kids/tools/probe_quiz_v4_flow_get.py
 
       - name: Retain read-only recovery progress on review branch
         if: always()
@@ -55,6 +56,9 @@ jobs:
           fi
           if [ -f kids/data/quiz-v4-batch-001-020-import-review.json ]; then
             git add kids/data/quiz-v4-batch-001-020-import-review.json
+          fi
+          if [ -f kids/data/quiz-v4-flow-get-probe.json ]; then
+            git add kids/data/quiz-v4-flow-get-probe.json
           fi
           if [ -d kids/assets/kids-quiz-audio/v4-review-001-020 ]; then
             git add kids/assets/kids-quiz-audio/v4-review-001-020/
@@ -77,10 +81,11 @@ jobs:
           path: |
             kids/data/quiz-v4-batch-001-020-recovery-report.json
             kids/data/quiz-v4-batch-001-020-import-review.json
+            kids/data/quiz-v4-flow-get-probe.json
             kids/assets/kids-quiz-audio/v4-review-001-020/*.mp3
 
       - name: Fail closed unless ALL 56 originals were recovered
         if: steps.recovery.outcome != 'success'
         run: |
-          echo "::error::Some V4 originals are unavailable to read-only history API. Do NOT synthesize again or release to children."
+          echo "::error::The official V4 Flow GET probe failed. Do NOT synthesize again or release to children."
           exit 1
