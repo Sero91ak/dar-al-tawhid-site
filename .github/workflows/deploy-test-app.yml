@@ -338,11 +338,13 @@ jobs:
           echo "KIDS TEST iPhone Safari HTML delivery verified, no visitor domain involved."
           # V2 pilot: do not confuse a green worker deploy with visible Kids changes.
           curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/start.html" > /tmp/kids-creator-v2-start.html
-          grep -Fq '/kids/design-v2-salaf-pilot.css?v=20261014-2' /tmp/kids-creator-v2-start.html || { echo "::error::Kids V2 stylesheet not referenced in served app"; exit 1; }
-          grep -Fq '/kids/salaf-library-v1.js?v=20261014-2' /tmp/kids-creator-v2-start.html || { echo "::error::Kids Salaf runtime not refreshed in served app"; exit 1; }
-          curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/design-v2-salaf-pilot.css?v=20261014-2" > /tmp/kids-creator-v2-style.css
-          grep -Fq 'V2.0 B: child-visible Salaf identity' /tmp/kids-creator-v2-style.css || { echo "::error::Kids V2 visible CSS not delivered"; exit 1; }
-          curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/salaf-library-v1.js?v=20261014-2" > /tmp/kids-creator-v2-library.js
-          grep -Fq '8 Themen entdecken' /tmp/kids-creator-v2-library.js || { echo "::error::Kids V2 visible overview not delivered"; exit 1; }
-          echo "KIDS V2 Salaf visual assets LIVE verified: updated HTML, CSS and visible overview label."
+          grep -Fq '/kids/design-v2-salaf-pilot.css?v=20261014-3' /tmp/kids-creator-v2-start.html || { echo "::error::Kids V2 stylesheet not referenced in served app"; exit 1; }
+          grep -Fq '/kids/salaf-library-v1.js?v=20261014-3' /tmp/kids-creator-v2-start.html || { echo "::error::Kids Salaf runtime not refreshed in served app"; exit 1; }
+          curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/design-v2-salaf-pilot.css?v=20261014-3" > /tmp/kids-creator-v2-style.css
+          grep -Fq 'V2.0 C: user-approved visual refinement' /tmp/kids-creator-v2-style.css || { echo "::error::Kids V2 visible CSS not delivered"; exit 1; }
+          curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/salaf-library-v1.js?v=20261014-3" > /tmp/kids-creator-v2-library.js
+          grep -Fq 'Was möchtest du entdecken?' /tmp/kids-creator-v2-library.js || { echo "::error::Kids V2 streamlined overview not delivered"; exit 1; }
+          grep -Fq "count===1?' Geschichte':' Geschichten'" /tmp/kids-creator-v2-library.js || { echo "::error::Kids V2 singular/plural counts not delivered"; exit 1; }
+          if grep -Fq 'salaf-collection-mark' /tmp/kids-creator-v2-library.js; then echo "::error::Removed duplicate topic badge still served"; exit 1; fi
+          echo "KIDS V2 Salaf refined layout LIVE verified: updated HTML, CSS, one heading and correct story counts."
           echo "KIDS-only Worker verified. Adult Test and visitor domains unchanged."
