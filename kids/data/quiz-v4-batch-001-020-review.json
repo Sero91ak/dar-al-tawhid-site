@@ -28,7 +28,7 @@
     "catalogQuestionsVerified": 20,
     "correctAnswersVerified": 20,
     "sourceReferencesPresent": 20,
-    "audioRenderedForAllQuestionStates": 12,
+    "audioRenderedForAllQuestionStates": 13,
     "humanAudioApproved": 0,
     "audioOriginalGenerationCount": 10,
     "audioHumanApproved": 0,
@@ -882,9 +882,45 @@
       "originalExplanation": "Im Ḥadīṯ über Iḥsān lehrte der Prophet ﷺ, dass Allah uns sieht.",
       "source": "Ṣaḥīḥ Muslim 8",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "flowId": "WWmJhIgAUW8GmKUaC4jZ",
+          "sessionId": "RIkSBpzqnk64cr9A7shT",
+          "modelId": "eleven_v4",
+          "status": "completed",
+          "generationId": "UmbT8oYPd2lm8zJfZMi3",
+          "credits": 124.04045814977975,
+          "durationSeconds": 8.4
+        },
+        {
+          "part": "correct",
+          "generationId": "WxoYkACzIX3S8abYxVUj",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "gDb5M7BuACNw47ZwudZ3",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "flowId": "WWmJhIgAUW8GmKUaC4jZ",
+          "sessionId": "ltH1oGuUpQWffuNdEz3S",
+          "modelId": "eleven_v4",
+          "status": "completed",
+          "generationId": "1gvYKSQC4WSufCgTGJJa",
+          "credits": 80.4324845814978,
+          "durationSeconds": 7.52
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-016",
@@ -903,9 +939,43 @@
       "originalExplanation": "Allah befiehlt, die Gebete zu bewahren.",
       "source": "Qurʾān 2:238",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generation-started-review-status",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "flowId": "WWmJhIgAUW8GmKUaC4jZ",
+          "sessionId": "YtfzQZHV3hHiASdmZXGa",
+          "modelId": "eleven_v4",
+          "status": "generating",
+          "generationId": "h3Bh3ejOIBOt4vUVlT8r",
+          "credits": 143.4217797356828
+        },
+        {
+          "part": "correct",
+          "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "DX5z8FWaCS4FDx3KrloO",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "flowId": "WWmJhIgAUW8GmKUaC4jZ",
+          "sessionId": "BAHQKLzol1nknSBtmo2u",
+          "modelId": "eleven_v4",
+          "status": "generating",
+          "generationId": "86T6VNKlu9GVu80Q0WI5",
+          "credits": 57.174898678414095
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-017",
@@ -1003,6 +1073,6 @@
     "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios.",
     "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie."
   ],
-  "actualPaidCreditsThisBatch": 3467.3184317180617,
+  "actualPaidCreditsThisBatch": 3872.388052863436,
   "previouslyPaidCreditsReusedForQuestion002": 122.102325991
 }
