@@ -22,6 +22,7 @@ Die vier Unterrichts-IDs liegen bereits im Vertiefungskatalog `kids/akademie/cur
 
 - **Neu digital direkt geprüft:** Ibn Qudāmah, `al-Mughnī`, Kitāb aṭ-Ṭahārah, Masʾalah (166), **Band 1, Seite 87**, [Islamweb 15/141](https://islamweb.net/ar/library/content/15/141#:~:text=%D9%88%D9%85%D8%B3%D8%AD%20%D8%A7%D9%84%D8%B1%D8%A3%D8%B3) – `SRC-FIQH27-MUGHNI-141`. Ibn Qudāmah hält die Pflicht des Kopfstreichens fest, verzeichnet aber verschiedene Ansichten bzw. Überlieferungen darüber, welcher Umfang als genügend gilt. Daher **keine erfundene Einstimmigkeit** über die exakt nötige benetzte Fläche.
 - **Neu digital direkt geprüft:** Ibn Qudāmah, `al-Mughnī`, Masʾalah (175), **Band 1, Seiten 90–92**, [Islamweb 15/149](https://www.islamweb.net/ar/library/content/15/149#:~:text=%D9%88%D8%BA%D8%B3%D9%84%20%D8%A7%D9%84%D8%B1%D8%AC%D9%84%D9%8A%D9%86%20%D8%A5%D9%84%D9%89%20%D8%A7%D9%84%D9%83%D8%B9%D8%A8%D9%8A%D9%86) – `SRC-FIQH27-MUGHNI-149`. Der Autor erläutert die Waschung beider Füße bis zu den Knöcheln und führt unterschiedliche Textauffassungen und Sunnah-Bezüge an.
+- **Nachgetragener zweiter Abschnitt zum Kopfwischen:** Ibn Qudāmah, *al-Mughnī*, **Bd. 1 S. 88**, [Islamweb 15/142](https://www.islamweb.net/ar/library/content/15/142#:~:text=%D9%85%D8%B3%D8%AD%20%D8%A7%D9%84%D8%B1%D8%A3%D8%B3), `SRC-FIQH27-MUGHNI-142` wurde anschließend direkt nachgelesen und als **ergänzende Diskussion zum Wischumfang**, nicht als weiterer eigenständiger Beweis für eine bereits unumstrittene Mindestfläche, zugeordnet. Der zentrale Beleg `15/141` bleibt die Hauptstelle.
 - **Kindertrennung:** Streichen des Kopfes ist nicht einfach dasselbe wie Haare mit Shampoo waschen; normale Fußwaschung ist von Sonderfällen des Wischens über Fußbekleidung abzugrenzen. Handgriffe ruhig unter fachkundiger Aufsicht, kein Zwang bei Verletzungen. Die Ausnahmen und endgültige Madhhab-Gesamtkontrolle bleiben offen.
 - **Sperre:** Kein neues Ja/Nein-Gültigkeitsurteil für Kinder, Verletzte oder Kinder mit Behinderung. Die Einbindung eines klassischen Belegs ist **keine** vollständige Rechtsfreigabe.
 
@@ -33,7 +34,7 @@ Die vier Unterrichts-IDs liegen bereits im Vertiefungskatalog `kids/akademie/cur
 
 ## Technische und wissenschaftliche Kontrolle
 
-- **2 neue Originalquellen** (al-Mughnī 15/141, 15/149), **5 Verknüpfungen** zu früher bereits überprüften Belegen, insgesamt **7 neue Verknüpfungen zu vier bestehenden Unterrichts-IDs**.
+- **3 direkt dokumentierte al-Mughnī-Abschnitte** (15/141, 15/142, 15/149; davon der dritte im späteren Zusatzschritt ergänzt), **5 Verknüpfungen** zu früher bereits überprüften Belegen, insgesamt **7 neue Verknüpfungen zu vier bestehenden Unterrichts-IDs**.
 - Register nach dieser Änderung: **161 eindeutige Source-IDs**; `sourceCount` und tatsächliche Array-Länge identisch.
 - Die Quellenvolltexte und Teilprüfgrenzen werden in `authenticityNote`, `safeApplication` und `verificationStatus` getrennt dokumentiert. **0/624** Altersfassungen endgültig wissenschaftlich freigegeben.
 - Vor einer Besucherfreigabe müssen die bereits vorhandenen Altersfassungen der Lektions-IDs 25–28, deren konkrete Quellenanzeigen sowie Quizfragen quellengetreu geprüft werden. Das Register allein aktualisiert **nicht** automatisch jede sichtbare Kinderansicht.
