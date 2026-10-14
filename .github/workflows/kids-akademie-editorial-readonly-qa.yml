@@ -8,11 +8,14 @@ on:
     paths:
       - '.github/workflows/kids-akademie-editorial-readonly-qa.yml'
       - 'kids/akademie/curriculum-editorial-*.js'
+      - 'kids/akademie/curriculum-foundation-fiqh-*.js'
       - 'kids/akademie/index.html'
       - 'kids/data/academy-voice-editorial-*-delta-v1.json'
+      - 'kids/data/academy-voice-foundation-fiqh-*-delta-v1.json'
       - 'kids-akademie/LESSON_STATUS.json'
       - 'kids/tools/audit-academy-editorial-155-208-v1.cjs'
       - 'kids/tools/test-academy-editorial-*.cjs'
+      - 'kids/tools/test-academy-foundation-fiqh-*.cjs'
 
 permissions:
   contents: read
@@ -42,6 +45,10 @@ jobs:
         run: node kids/tools/test-academy-editorial-155-208-integrity-v1.cjs
       - name: Cross-check all 208-slot ledger and 12 Fiqh holds
         run: node kids/tools/audit-academy-editorial-155-208-v1.cjs
+      - name: Check foundation Fiqh slots 3, 7, 11
+        run: |
+          node --check kids/akademie/curriculum-foundation-fiqh-003-007-011-v1.js
+          node kids/tools/test-academy-foundation-fiqh-003-007-011-v1.cjs
       - name: Run all 14 small-batch unit tests
         shell: bash
         run: |
