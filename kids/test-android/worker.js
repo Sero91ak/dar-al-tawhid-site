@@ -47,7 +47,7 @@ export default {
   // Resolve the canonical asset inside this Worker, mirroring the visitor's
   // guarded asset resolution, while retaining this staging-only hostname.
   let asset=null;
-  const pretty=path.match(/^\\/kids\\/(start|index|shell)(?:\\.html)?\\/?$/);
+  const pretty=path.match(/^\/kids\/(start|index|shell)(?:\.html)?\/?$/);
   if(pretty){
    for(const candidate of ["/kids/"+pretty[1],"/kids/"+pretty[1]+".html"]){
     const dest=new URL(request.url);dest.pathname=candidate;
