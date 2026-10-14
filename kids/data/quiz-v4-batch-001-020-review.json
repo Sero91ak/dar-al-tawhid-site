@@ -28,11 +28,12 @@
     "catalogQuestionsVerified": 20,
     "correctAnswersVerified": 20,
     "sourceReferencesPresent": 20,
-    "audioRenderedForAllQuestionStates": 1,
+    "audioRenderedForAllQuestionStates": 2,
     "humanAudioApproved": 0,
-    "audioOriginalGenerationCount": 4,
+    "audioOriginalGenerationCount": 10,
     "audioHumanApproved": 0,
-    "audioFilesImportedToGitHub": 0
+    "audioFilesImportedToGitHub": 0,
+    "playableMergedQuestions": 0
   },
   "items": [
     {
@@ -104,9 +105,59 @@
       "originalExplanation": "Sūrat al-Iḫlāṣ lehrt: Allah ist Einer.",
       "source": "Qurʾān 112:1",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "all-v4-parts-generated-pending-compose-import-human-review",
       "published": false,
-      "recordingStatus": "three-v4-clips-paid-originals-not-yet-released"
+      "recordingStatus": "six-v4-segments-available-not-merged-not-released",
+      "recordings": [
+        {
+          "part": "question-opening",
+          "generationId": "FGX65uXKWBnjULDxg3X1",
+          "modelId": "eleven_v4",
+          "creditsPreviouslyPaid": 31.010114537444938,
+          "durationSeconds": 2.24
+        },
+        {
+          "part": "question-core",
+          "generationId": "KIgCxJO3RDxhsIFJSYUB",
+          "modelId": "eleven_v4",
+          "creditsPreviouslyPaid": 15.505057268722469,
+          "durationSeconds": 1.6
+        },
+        {
+          "part": "question-guidance",
+          "generationId": "UUmC2fDiXaV5W1IQSumA",
+          "modelId": "eleven_v4",
+          "creditsPreviouslyPaid": 75.58715418502203,
+          "durationSeconds": 5.68
+        },
+        {
+          "part": "correct",
+          "generationId": "aoKJuahenrKHfUE5OD9j",
+          "modelId": "eleven_v4",
+          "credits": 65.89649339207048,
+          "durationSeconds": 5.6
+        },
+        {
+          "part": "retry",
+          "generationId": "2xy9ZLej1wPTrnvAr9p7",
+          "modelId": "eleven_v4",
+          "credits": 53.29863436123348,
+          "durationSeconds": 3.92
+        },
+        {
+          "part": "explanation",
+          "generationId": "1UAwmEQ77D4BmA9DttHZ",
+          "modelId": "eleven_v4",
+          "credits": 56.20583259911895,
+          "durationSeconds": 4.96
+        }
+      ],
+      "flowIds": [
+        "aYXuImf6EV3mWygxuUDy",
+        "SajNftKxOfwSjirT92tM",
+        "nyyQDHXF4GM0op4cBEKL",
+        "90C70kGyYRcw9TFEYJTJ"
+      ]
     },
     {
       "questionId": "kids-quiz-003",
@@ -493,7 +544,10 @@
     "Die vorhandenen kostenpflichtigen V4-Takes für #002 und #020 nicht erneut erzeugen.",
     "Status not-generated pro Vollfrage gilt auch dann, wenn separate V4-Teile im ElevenLabs-Konto existieren.",
     "Quiz 001 vier Originalaufnahmen bei ElevenLabs V4 erzeugt, aber wegen fehlendem importiertem Asset und Hörfreigabe NICHT in App/Manifest freigegeben.",
-    "Ein sanfter Retry-Satz wurde in Python- und JS-Sprachvertrag einheitlich korrigiert. CI/Hörfreigabe ausstehend."
+    "Ein sanfter Retry-Satz wurde in Python- und JS-Sprachvertrag einheitlich korrigiert. CI/Hörfreigabe ausstehend.",
+    "Quiz 002: drei vorbestehende bezahlte Fragenteile und drei heute ergänzte Original-V4-Takes, nicht zusammengesetzt. Keine neuen Credits für bereits vorbestehende Generationen.",
+    "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios."
   ],
-  "actualPaidCreditsThisBatch": 312.03927753303964
+  "actualPaidCreditsThisBatch": 487.4402378854625,
+  "previouslyPaidCreditsReusedForQuestion002": 122.102325991
 }
