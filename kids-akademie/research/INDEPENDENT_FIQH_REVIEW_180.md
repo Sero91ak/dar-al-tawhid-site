@@ -39,3 +39,12 @@ Außerdem wird mit Qurʾān 15:87 allein die Gebetsrezitation nicht ausreichend 
 ## Qualitätsgrenzen
 
 `fiqhHumanReviewNeeded=true`, `scientificApproval=false`, 0/624 Altersfassungen freigegeben. Kein neuer Live-Deploy, keine synthetische Qurʾān-Rezitation, keine neue Sprachgenerierung und keine Kosten. Das arabische Qurʾān-Feld bleibt unverändert.
+
+## Umgesetzt auf dem Arbeitszweig (14.10.2026)
+
+- Die drei Altersfassungen wurden vollständig als echte Unterrichtstexte neu geschrieben: Fātiḥah als Lerngegenstand, positives Lernen mit einer Lehrperson, konsequente Trennung von Qurʾān 15:87, Tafsīr, Ṣaḥīḥ al-Buḫārī und al-Mughnī.
+- Acht Quizfragen (2 / 3 / 3) überarbeitet. Die frühere Audio-Produktionsregel ist kein Lernziel mehr und erscheint in keinem der drei aktualisierten Unterrichtstexte.
+- `curriculum-v38.js` trägt den direkt geprüften Hadithbeleg mit **ausdrücklich sinngemäßer** deutscher Wiedergabe sowie `sourceAudit.classicalFiqhCrosscheck`. Wissenschaftliche Freigabe bleibt `false`.
+- `academy-voice-plan-v38.json` wurde zu den drei Altersfassungen und allen sprechbaren Erklärungssätzen synchronisiert. Alle Texte `not-generated`, verwendete Credits 0.
+- `research/SOURCE_REGISTRY.json` enthält die Fundstellen `SRC-FIQH180-BUKHARI-723` und `SRC-FIQH180-MUGHNI-553`.
+- Struktur und Nachträge wurden bei der GitHub-Dateibearbeitung geprüft; **ein vollständiger Node-/Browser-Regressionslauf ist hier noch nicht als bestanden nachgewiesen**. Keine Freigabe, kein Merge, kein Deploy.
