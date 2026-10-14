@@ -28,7 +28,7 @@
     "catalogQuestionsVerified": 20,
     "correctAnswersVerified": 20,
     "sourceReferencesPresent": 20,
-    "audioRenderedForAllQuestionStates": 6,
+    "audioRenderedForAllQuestionStates": 10,
     "humanAudioApproved": 0,
     "audioOriginalGenerationCount": 10,
     "audioHumanApproved": 0,
@@ -53,7 +53,7 @@
       "originalExplanation": "Wir dienen Allah allein.",
       "source": "Qurʾān 1:5",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "generated-pending-human-review-and-asset-import",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
       "recordingStatus": "four-v4-original-generations-completed-pending-human-review",
       "flowId": "3opB2L8NB0ChRtz3I28a",
@@ -105,7 +105,7 @@
       "originalExplanation": "Sūrat al-Iḫlāṣ lehrt: Allah ist Einer.",
       "source": "Qurʾān 112:1",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "all-v4-parts-generated-pending-compose-import-human-review",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
       "recordingStatus": "six-v4-segments-available-not-merged-not-released",
       "recordings": [
@@ -373,7 +373,7 @@
       "originalExplanation": "Zum Īmān gehört der Glaube an Allahs Engel.",
       "source": "Ṣaḥīḥ Muslim 8",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "generation-started-review-status",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
       "recordingStatus": "awaiting-v4-recording",
       "recordings": [
@@ -382,10 +382,10 @@
           "modelId": "eleven_v4",
           "flowId": "s6bYuuL7PBYQHFFIPvas",
           "sessionId": "KSjjFTrAck4b4qWSDdQj",
-          "status": "generating",
+          "status": "completed",
           "generationId": "cqo0lP0WnVegMrRV7v2R",
           "credits": 141.4836475770925,
-          "durationSeconds": null
+          "durationSeconds": 10.32
         },
         {
           "part": "correct",
@@ -406,10 +406,10 @@
           "modelId": "eleven_v4",
           "flowId": "s6bYuuL7PBYQHFFIPvas",
           "sessionId": "PFMVrbhCB9CHZ8HjzPJy",
-          "status": "generating",
+          "status": "completed",
           "generationId": "H5QwmSxLr7ahVkERWoN2",
           "credits": 61.051162995594716,
-          "durationSeconds": null
+          "durationSeconds": 4.4
         }
       ]
     },
@@ -430,7 +430,7 @@
       "originalExplanation": "Muḥammad ﷺ ist Allahs Gesandter und der letzte Prophet.",
       "source": "Qurʾān 33:40",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "generation-started-review-status",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
       "recordingStatus": "awaiting-v4-recording",
       "recordings": [
@@ -463,10 +463,10 @@
           "modelId": "eleven_v4",
           "flowId": "kSPIA3o52jTsdHAONnga",
           "sessionId": "gt3yprxJlPV6BvZqtiow",
-          "status": "generating",
+          "status": "completed",
           "generationId": "I8esecexVR1VUmiiStEe",
           "credits": 72.67995594713656,
-          "durationSeconds": null
+          "durationSeconds": 6.8
         }
       ]
     },
@@ -487,7 +487,7 @@
       "originalExplanation": "Allah befiehlt, dem Gesandten ﷺ zu gehorchen.",
       "source": "Qurʾān 4:59",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "generation-started-review-status",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
       "recordingStatus": "awaiting-v4-recording",
       "recordings": [
@@ -496,10 +496,10 @@
           "modelId": "eleven_v4",
           "flowId": "kSPIA3o52jTsdHAONnga",
           "sessionId": "RvNq4sTgYlWSD94dMy1Z",
-          "status": "pending",
+          "status": "completed",
           "generationId": "clyVrISrx5ErjuiG7NFe",
           "credits": 145.35991189427313,
-          "durationSeconds": null
+          "durationSeconds": 11.28
         },
         {
           "part": "correct",
@@ -520,10 +520,10 @@
           "modelId": "eleven_v4",
           "flowId": "kSPIA3o52jTsdHAONnga",
           "sessionId": "m97d2aPecKZGGr0ekaBe",
-          "status": "pending",
+          "status": "completed",
           "generationId": "dJgyn0ueCkR91dnd7cDS",
           "credits": 62.98929515418502,
-          "durationSeconds": null
+          "durationSeconds": 5.92
         }
       ]
     },
@@ -601,7 +601,7 @@
       "originalExplanation": "Allah verbietet sogar ein verächtliches Wort gegenüber den Eltern.",
       "source": "Qurʾān 17:23",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "generation-started-review-status",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
       "recordingStatus": "awaiting-v4-recording",
       "recordings": [
@@ -610,10 +610,10 @@
           "modelId": "eleven_v4",
           "flowId": "Ry0G0TTcsD3ol3EQyzYT",
           "sessionId": "48Ym51iG3udtZILNKQsy",
-          "status": "pending",
+          "status": "completed",
           "generationId": "Vy04Al9JHiGHpCxJ71Tw",
           "credits": 156.988704845815,
-          "durationSeconds": null
+          "durationSeconds": 10.56
         },
         {
           "part": "correct",
@@ -634,10 +634,10 @@
           "modelId": "eleven_v4",
           "flowId": "Ry0G0TTcsD3ol3EQyzYT",
           "sessionId": "mcpNp9vyLGxRSBbLMGF5",
-          "status": "pending",
+          "status": "completed",
           "generationId": "yMPtDThKOpR6IKPHbcj1",
           "credits": 83.33968281938324,
-          "durationSeconds": null
+          "durationSeconds": 5.36
         }
       ]
     },
