@@ -53,6 +53,39 @@ jobs:
           }
           console.log('Marketing JavaScript syntaktisch OK');
           NODE
+      - name: "Android PWA direkt beim Tippen auslösen (Regression)"
+        run: |
+          node <<'NODE'
+          const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+          const html=fs.readFileSync('links/index.html','utf8');
+          const scripts=html.split('<script>').slice(1).map(s=>s.split('</script>')[0]);
+          const head=scripts.find(s=>s.includes('__darLinksEarlyInstallPrompt')&&!s.includes('const button='));
+          const body=scripts.find(s=>s.includes('const button=document.getElementById("installAndroidPwa")'));
+          assert.ok(head&&body,'Früher Prompt-Empfang und Klickbehandlung müssen existieren');
+          const winListeners={};const buttonListeners={};const label={textContent:'Jetzt installieren'};
+          const status={textContent:'',hidden:true,appendChild(){}};
+          const button={addEventListener(k,v){buttonListeners[k]=v;}};
+          const window={addEventListener(k,v){(winListeners[k]??=[]).push(v);},matchMedia(){return {matches:false}}};
+          const document={
+            getElementById(k){return {installAndroidPwa:button,androidInstallLabel:label,androidInstallStatus:status}[k]},
+            querySelectorAll(){return []},
+            createElement(){return {href:'',textContent:''}},
+            createTextNode(t){return t}
+          };
+          const context=vm.createContext({document,window,navigator:{userAgent:'Mozilla/5.0 (Linux; Android 15) Chrome/140.0'},Promise,setTimeout});
+          vm.runInContext(head,context,{timeout:1000});vm.runInContext(body,context,{timeout:1000});
+          let inClick=false,promptCalls=0;
+          const installEvent={
+            preventDefault(){},prompt(){assert.ok(inClick,'Native prompt() muss synchron innerhalb des Klicks sein');promptCalls++},
+            userChoice:Promise.resolve({outcome:'accepted'})
+          };
+          for(const cb of winListeners.beforeinstallprompt||[])cb(installEvent);
+          inClick=true;buttonListeners.click();inClick=false;
+          assert.equal(promptCalls,1,'Ein Tippen muss genau einen Chrome-Installationsdialog auslösen');
+          assert.ok(!html.includes('id="openApp"')&&!html.includes('native-downloads'),'Keine zweite Web-App und keine iOS-Web-App');
+          assert.ok(html.includes('href="/install-manifest.json"'),'Root-scope Installationsmanifest erforderlich');
+          console.log('LINKS_ANDROID_PWA_DIRECT_INSTALL OK');
+          NODE
       - name: "Nachweis: kein Kids Public APK"
         run: |
           node <<'NODE'
@@ -61,7 +94,8 @@ jobs:
           if (manifest.apps.kids.public!==false || manifest.apps.kids.status!=='private-testing')
             process.exit(1);
           const c=f.readFileSync('links/index.html','utf8');
-          if(!c.includes('ANDROID · WEB-APP') || !c.includes('href="https://dar-al-tawhid.de/"')) throw Error('Android Web-App Link fehlt');
+          if(!c.includes('id="installAndroidPwa"') || !c.includes('href="/install-manifest.json"')) throw Error('Direkter Android Web-App Installer fehlt');
+          if(c.includes('id="openApp"') || c.includes('native-downloads')) throw Error('Doppelter oder iOS-Web-App Eintrag vorhanden');
           if(c.includes('id="direct-android-apk"') || c.includes('id="direct-android-tv-apk"')) throw Error('Alte Android APK-Karten unerwartet veröffentlicht');
           if(!c.includes('apps.apple.com/de/app/'))throw Error('Bestehender Apple App Store Link fehlt');
           console.log('Apple Store erhalten, Android-PWA öffentlich, keine APK/TV-Werbung auf Links-Seite, Kids privat');
