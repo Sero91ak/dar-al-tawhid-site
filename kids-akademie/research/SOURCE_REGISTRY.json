@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 129,
+  "sourceCount": 132,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -3220,6 +3220,84 @@
         "fiqh-zakah-und-hajj"
       ],
       "topic": "Zakāh im Vermögen Minderjähriger"
+    },
+    {
+      "author": "Ibn Qudāmah",
+      "work": "al-Mughnī",
+      "narrator": null,
+      "germanTranslation": null,
+      "edition": "Islamweb digitale Bibliothek, al-Mughnī",
+      "verificationStatus": "primary-index-excerpt-cross-checked-2026-10-14-direct-fetch-unavailable",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Öffentlich indizierter Islamweb-Originaltext per Websuche; unmittelbares Öffnen der Basis-URL nicht möglich",
+      "binding": "classical Hanbali Fiqh source for existing child lesson; scholarly final approval pending",
+      "sourceId": "SRC-FIQH206-MUGHNI-729",
+      "key": "fiqh206-mughni-sujud-sahw",
+      "arabic": "ومن ترك شيئا منه ساهيا أتى بسجدتي السهو",
+      "locus": "Kitāb aṣ-Ṣalāh, Bāb Ṣifat aṣ-Ṣalāh, Masʾalah (886)",
+      "volume": "1",
+      "page": null,
+      "chapter": "Masʾalah Suǧūd as-Sahw",
+      "number": "886",
+      "directLink": "https://www.islamweb.net/ar/library/content/15/729",
+      "authenticityNote": "Indizierter Originaltext behandelt unterschiedliche Auslassungen und Unterscheidung absichtlich/vergessen; enthält abweichende Fiqh-Ansichten. Die Kurzstelle reicht nicht für eine Regel zu jedem konkreten Kindergebet.",
+      "safeApplication": "Übungsfehler, bloßes Versehen und rechtsrelevante Auslassungen nicht pauschal gleichsetzen. Keine Angstbilder oder automatische Ungültigkeitsurteile.",
+      "lessonIds": [
+        "fiqh-fehler-beim-ueben"
+      ],
+      "topic": "Suǧūd as-Sahw und Einordnung von Gebetsfehlern"
+    },
+    {
+      "author": "Ibn Qudāmah",
+      "work": "al-Mughnī",
+      "narrator": null,
+      "germanTranslation": null,
+      "edition": "Islamweb digitale Bibliothek, al-Mughnī",
+      "verificationStatus": "primary-index-excerpt-cross-checked-2026-10-14-direct-fetch-unavailable",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Öffentlich indizierter Islamweb-Originaltext per Websuche; unmittelbares Öffnen der Basis-URL nicht möglich",
+      "binding": "classical Hanbali Fiqh source for existing child lesson; scholarly final approval pending",
+      "sourceId": "SRC-FIQH208-MUGHNI-1754",
+      "key": "fiqh208-mughni-hajj-ability",
+      "arabic": "الحج إنما يجب بخمس شرائط الإسلام والعقل والبلوغ والحرية والاستطاعة",
+      "locus": "Kitāb al-Ḥaǧǧ, Masʾalah (2197) und Faṣl (2198)",
+      "volume": "3",
+      "page": "85–86",
+      "chapter": "Erforderliche Voraussetzungen für die Ḥaǧǧ-Pflicht",
+      "number": "2197–2198",
+      "directLink": "https://www.islamweb.net/ar/library/content/15/1754",
+      "authenticityNote": "Öffentlich indizierter al-Mughnī-Originaltext zur Pilgerfahrt: Erwachsensein als Voraussetzung der Verpflichtung; Kinder-Hajj kann gültig sein und die spätere Pflicht nicht ersetzen. Sonderfälle noch offen.",
+      "safeApplication": "Eine Reise zum Ḥaǧǧ nicht pauschal von Kindern verlangen; Fähigkeit und Zuständigkeit differenzieren.",
+      "lessonIds": [
+        "fiqh-zakah-und-hajj"
+      ],
+      "topic": "Ḥaǧǧ-Pflichtvoraussetzungen und Minderjährigkeit"
+    },
+    {
+      "author": "Ibn Qudāmah",
+      "work": "al-Mughnī",
+      "narrator": null,
+      "germanTranslation": null,
+      "edition": "Islamweb digitale Bibliothek, al-Mughnī",
+      "verificationStatus": "primary-index-excerpt-cross-checked-2026-10-14-direct-fetch-unavailable",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Öffentlich indizierter Islamweb-Originaltext per Websuche; unmittelbares Öffnen der Basis-URL nicht möglich",
+      "binding": "classical Hanbali Fiqh source for existing child lesson; scholarly final approval pending",
+      "sourceId": "SRC-FIQH208-MUGHNI-1800",
+      "key": "fiqh208-mughni-hajj-child-not-fulfil-pillar",
+      "arabic": "ومن حج وهو غير بالغ فبلغ فعليه الحج",
+      "locus": "Kitāb al-Ḥaǧǧ, Masʾalah (2248)",
+      "volume": "3",
+      "page": null,
+      "chapter": "Ḥaǧǧ des Kindes nach Erreichen der religiösen Volljährigkeit",
+      "number": "2248",
+      "directLink": "https://www.islamweb.net/ar/library/content/15/1800",
+      "authenticityNote": "Indizierter Originaltext bestätigt: Die Pilgerfahrt eines Kindes ersetzt nach Erreichen der religiösen Volljährigkeit nicht automatisch die Pflicht-Ḥaǧǧ bei Fähigkeit. Keine Aussage zur individuellen Reisebereitschaft.",
+      "safeApplication": "Pilgerfahrt im Kindesalter als Lernthema ohne Aufruf zu eigenmächtiger Reise oder finanzielle Pflicht für Minderjährige.",
+      "lessonIds": [
+        "fiqh-zakah-und-hajj"
+      ],
+      "topic": "Ḥaǧǧ des Kindes und spätere Pflicht"
     }
   ]
 }
