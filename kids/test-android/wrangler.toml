@@ -1,0 +1,15 @@
+# Dedicated Android-compatible Kids TEST PWA. STAGING ONLY.
+# Publication is limited to workers.dev from kids-test-staging.
+name = "dar-al-tawhid-kids-test"
+main = "worker.js"
+compatibility_date = "2026-08-01"
+workers_dev = true
+routes = []
+
+[build]
+watch_paths = [".kids-test-staging-workflow-only/**"]
+
+[assets]
+directory = "../.."
+binding = "ASSETS"
+run_worker_first = true
