@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "postId": "akhlak-besten-mit-charakter-001",
+  "postFile": "content/posts/026-06-05-akhlak-die-besten-mit-charakter.md",
+  "reviewDate": "2026-10-14",
+  "reviewState": "research-in-progress",
+  "approved": false,
+  "qNumber": null,
+  "sourceTextArabic": "لَم يَكُنِ النَّبيُّ صلَّى اللهُ عليه وسلَّم فاحِشًا ولا مُتَفَحِّشًا، وكان يقولُ: إنَّ مِن خيارِكُم أحسَنَكُم أخلاقًا.",
+  "speaker": "Prophet Muhammad ﷺ",
+  "narrator": "ʿAbd Allāh ibn ʿAmr",
+  "translationGerman": "Der Prophet war weder unflätig noch gebrauchte er absichtlich unanständige Worte. Er sagte: Zu den Besten unter euch gehören diejenigen mit dem besten Charakter.",
+  "hadith": {
+    "source": "Ṣaḥīḥ al-Buḫārī",
+    "number": 3559,
+    "parallel": "Ṣaḥīḥ Muslim Nr. 2321",
+    "grade": "ṣaḥīḥ",
+    "verifiedVia": "https://dorar.net/hadith/sharh/15947#:~:text=%D8%A5%D9%86%D9%91%D9%8E%20%D9%85%D9%90%D9%86%20%D8%AE%D9%8A%D8%A7%D8%B1%D9%90%D9%83%D9%8F%D9%85%20%D8%A3%D8%AD%D8%B3%D9%8E%D9%86%D9%8E%D9%83%D9%8F%D9%85%20%D8%A3%D8%AE%D9%84%D8%A7%D9%82%D9%8B%D8%A7"
+  },
+  "verifiedDirectSharh": {
+    "scholar": "Abū l-ʿAbbās al-Qurṭubī (d. 656 AH)",
+    "book": "al-Mufhim limā aškala min talḫīṣ kitāb Muslim",
+    "location": "Kitāb an-Nubuwwāt, chapter on the Prophet's modesty; volume 6 (portal display)",
+    "url": "https://www.islamweb.net/ar/library/content/317/3904/",
+    "status": "direct text located in indexed source; oldest available direct commentary not yet conclusively established"
+  },
+  "currentSourceMismatch": {
+    "existingUrl": "https://dorar.net/hadith/sharh/15951",
+    "finding": "Page /15951 leads with 'إن من أحبكم إلي أحسنكم أخلاقا', a DIFFERENT formulation. It includes the Bukhari narration lower on page, but is not a precise source deep-link for this post.",
+    "replacementCandidate": "https://dorar.net/hadith/sharh/15947",
+    "requiresEditorialFix": true
+  },
+  "checks": {
+    "arabicAndAttribution": true,
+    "canonicalHadithNumber": true,
+    "exactSourcePage": true,
+    "earliestDirectSharh": false,
+    "allPageVolumeReferences": false,
+    "semanticDuplicateCheck": false,
+    "independentReview": false
+  },
+  "nextAction": "Verify earliest direct sharh (including Ibn Baṭṭāl), precise volume/page, and semantic duplicates; only then prepare a Q page. Do not alter public post or reserve Q number."
+}
