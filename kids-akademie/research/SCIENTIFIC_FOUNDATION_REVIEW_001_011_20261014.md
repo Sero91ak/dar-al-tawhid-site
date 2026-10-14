@@ -6,7 +6,7 @@
 
 Der frühe Katalog `kids/akademie/curriculum-v1.js` enthält **elf eigenständige Basisthemen**, darunter Geduld, Amānah, Salām und Tawḥīd, mit Qurʾān-Angaben und benannten Ḥadīṯ-Nummern. Das zentrale V38-Register `kids-akademie/research/SOURCE_REGISTRY.json` bildet diese Basisthemen **nicht durchgehend als einzelne Lektions-IDs ab**; daraus folgt **nicht**, dass die älteren Module ohne jegliche Quellen aufgebaut wurden. Vielmehr sind Quellennachweise im V1-Katalog bzw. späteren Ableitungen verteilt.
 
-Die folgende Kontrolle hat **vier ausgewählte Ḥadīṯ-Nachweise aus den elf V1-Basisthemen** mit aktuellen zugänglichen Seiten der vom Projekt zugelassenen Belegportale abgeglichen. Die sieben übrigen Nummern und die gesamte Kinderdidaktik benötigen zusätzliche Prüfung.
+Die folgende Kontrolle hat **alle elf Ḥadīṯ-Nachweise aus den V1-Basisthemen** mit aktuellen zugänglichen Seiten der vom Projekt zugelassenen Belegportale abgeglichen. Sämtliche elf Nummern sind nun mit Direktstellen belegt; die gesamte Kinderdidaktik und fachliche Anwendung benötigen weiterhin gesonderte Prüfung.
 
 ## 1 · Geduld — `akhlaq-sabr`
 
@@ -37,17 +37,21 @@ Die folgende Kontrolle hat **vier ausgewählte Ḥadīṯ-Nachweise aus den elf 
 - **Quelleninhalt:** Allahs Recht auf Seine Diener ist, dass sie Ihm dienen und Ihm keinen Teilhaber beigesellen. Der Bericht enthält außerdem einen Kontext zum Vermeiden falscher Sorglosigkeit; eine Verkürzung darf nicht suggerieren, ethisches Handeln sei bedeutungslos.
 - **Kinderschutz:** Tawḥīd ohne das vorschnelle religiöse Beurteilen konkreter anderer Kinder lehren. Gewöhnliche menschliche Hilfe ist von Anbetung zu unterscheiden.
 
-## Die übrigen sieben V1-Hadithverweise — noch eigenständig nachzuprüfen
+## 5–11 · Die weiteren sieben ursprünglichen V1-Ḥadīṯ-Nummern ebenfalls direkt abgeglichen
 
-| Basisthema | Im vorhandenen V1-Code angegebener Nachweis | Status dieser Kontrollrunde |
+Die nachfolgenden **sieben** Nummern konnten mit Quellenangabe, arabischem Bericht und der entsprechenden Aussage auf Dorar überprüft werden. Sie sind **Referenzprüfungen**, keine vollständigen kinderdidaktischen, juristischen oder wissenschaftlichen Endfreigaben.
+
+| Basisthema | Original-Ḥadīṯ | Direktnachweis und Grenze |
 |---|---|---|
-| Freundlich sprechen | al-Buḫārī 6018 | Nummer und Originalwortlaut noch separat prüfen |
-| Elternachtung | al-Buḫārī 5971 | Noch offen |
-| Reinheit | Muslim 223 | Noch offen |
-| Wuḍūʾ | al-Buḫārī 135 | Noch offen |
-| Gebet | al-Buḫārī 631 | Noch offen |
-| Īmān | Muslim 8a | Noch offen |
-| Ikhlāṣ | al-Buḫārī 1 | Noch offen |
+| Freundlich sprechen – `adab-worte` | al-Buḫārī **6018** | [Dorar 4363, Abū Hurayrah, Buḫārī 6018](https://dorar.net/hadith/sharh/4363#:~:text=6018). Inhalt: Gutes sprechen oder schweigen; derselbe Bericht behandelt Nachbar und Gast. **Kein** Verbot, bei Gefahr um Hilfe zu rufen oder eine Frage zu stellen. |
+| Elternachtung – `adab-respekt` | al-Buḫārī **5971** | [Dorar 151125, Abū Hurayrah, Buḫārī 5971 / Muslim 2548](https://dorar.net/hadith/sharh/151125#:~:text=5971). Gute Gesellschaft und Behandlung der Mutter, danach des Vaters. Kein unbedingter Gehorsam gegenüber Gewalt oder Grenzverletzungen. |
+| Reinheit – `fiqh-taharah` | Muslim **223** | [Dorar 139891, Abū Mālik al-Ašʿarī, Muslim 223](https://dorar.net/hadith/sharh/139891#:~:text=223). `Aṭ-ṭuhūr šaṭr al-īmān`. Reinheit und rituelle Reinigung unterscheiden; keine pauschal erfundene Einzelnorm aus der allgemeinen Aussage. |
+| Wuḍūʾ – `fiqh-wudu` | al-Buḫārī **135** | [Dorar 6251, Abū Hurayrah, Buḫārī 135](https://dorar.net/hadith/sharh/6251#:~:text=135). Bei tatsächlich eingetretenem ḥadaṯ bedarf das Gebet erneuter gültiger Reinigung. Bloße Zweifel, medizinische Sonderfälle und Unfähigkeit erfordern **eigene Fiqh-Prüfung**; Kinder nicht zu zwanghaftem Wiederholen anhalten. |
+| Gebet – `fiqh-salah` | al-Buḫārī **631** | [Dorar 12044, Mālik ibn al-Ḥuwayriṯ, Buḫārī 631](https://dorar.net/hadith/sharh/12044#:~:text=631). `Ṣallū kamā raʾaytumūnī uṣallī`: Beten entsprechend der prophetischen Anleitung. Nicht als vollständige Aufzählung aller Gebetsbedingungen, Körperwinkel und hanbalitischen Ausnahmen behandeln. |
+| Īmān – `aqidah-iman` | Muslim **8a** | [Dorar 25545, ʿUmar ibn al-Ḫaṭṭāb, Muslim 8](https://dorar.net/hadith/sharh/25545#:~:text=8). Ḥadīṯ Ǧibrīl enthält die sechs Glaubensgrundlagen. Der Zählbuchstabe `a` stammt aus einer Ausgabe-Unterteilung; Dorar verwendet `8`. Keine Verwechslung mit einem anderen Bericht und keine Belastung kleiner Kinder durch Polemik. |
+| Ikhlāṣ – `aqidah-ikhlas` | al-Buḫārī **1** | [Dorar 3429, ʿUmar ibn al-Ḫaṭṭāb, Buḫārī 1](https://dorar.net/hadith/sharh/3429#:~:text=النيات). Taten werden nach ihren Absichten beurteilt. Keine Kinder-Rangliste angeblich „reiner“ Absichten und keine pauschale Beurteilung fremder Herzen. |
+
+**Referenzstand der elf V1-Basisthemen: 11/11 Hadithnummern und Grundaussagen durch Direktnachweise abgeglichen.** Die Belegtexte sind authentisch in den benannten Sammlungen, aber die jeweilige Verwendung in allen Unterrichtsvarianten bedarf weiterhin eigenständiger Inhalts-, Fiqh- und Kinderschutzprüfung.
 
 ## Systematische nächste Quellenkontrolle
 
