@@ -140,8 +140,8 @@ console.log("ANDROID_SITE_RELEASE_GUARD OK | public=" + published + " | Kids=pri
 // Direct install UI contract
 assert.ok(router.includes("syncRouterInstallButtons"), "Direct Android PWA install readiness gate missing");
 assert.ok(router.includes("beforeinstallprompt"), "beforeinstallprompt capture missing");
-assert.ok(router.includes("btn.disabled=installed||preparing"), "Android install button must stay disabled until beforeinstallprompt is ready");
-assert.ok(router.includes('btn.setAttribute("aria-disabled",(installed||preparing)?"true":"false")'), "Android install accessibility state must match native-prompt readiness");
+assert.ok(router.includes("btn.disabled=installed;"), "Android PWA install button must remain operable before prompt readiness while disabling already-installed state");
+assert.ok(router.includes('btn.setAttribute("aria-disabled",installed?"true":"false")') && router.includes('btn.setAttribute("data-dar-pwa-install-state",installed?"installed":(ready?"ready":"preparing"))'), "Android install accessibility state and readiness indication must match the current direct-tap flow");
 assert.ok(router.includes("DAR_ANDROID_PWA_INSTALL_READY_GATE_V6_20261009"), "Android install readiness gate marker missing");
 assert.ok(router.includes("darPublicTouchRectangleHardStopV6"), "Mobile tap rectangle hard-stop missing");
 assert.ok(router.includes("darRouterTapFlashKillV9"), "Final mobile tap visual hard-stop missing");
