@@ -58,7 +58,7 @@ jobs:
           node <<'NODE'
           const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
           const html=fs.readFileSync('links/index.html','utf8');
-          const scripts=[...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/gi)].map(m=>m[1]);
+          const scripts=html.split('<script>').slice(1).map(s=>s.split('</script>')[0]);
           const head=scripts.find(s=>s.includes('__darLinksEarlyInstallPrompt')&&!s.includes('const button='));
           const body=scripts.find(s=>s.includes('const button=document.getElementById("installAndroidPwa")'));
           assert.ok(head&&body,'Früher Prompt-Empfang und Klickbehandlung müssen existieren');
