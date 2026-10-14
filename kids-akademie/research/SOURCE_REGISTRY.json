@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-13",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 109,
+  "sourceCount": 110,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -2701,6 +2701,32 @@
       ],
       "binding": "tafsir-review-reference-not-child-speech",
       "topic": "Qurʾān 74:4 – äußere und innere Reinheit"
+    },
+    {
+      "sourceId": "SRC-FIQH142-MUSLIM-612",
+      "key": "fiqh-142-five-prayers-named-in-muslim",
+      "author": "Muslim ibn al-Ḥaǧǧāǧ",
+      "work": "Ṣaḥīḥ Muslim",
+      "narrator": "ʿAbdullāh ibn ʿAmr",
+      "arabic": "إذا صليتم الفجر ... ثم إذا صليتم الظهر ... فإذا صليتم العصر ... فإذا صليتم المغرب ... فإذا صليتم العشاء",
+      "germanTranslation": "Sinngemäß: Der Prophet ﷺ beschreibt die Zeitgrenzen von Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ. Der hier notierte arabische Wortlaut ist ein durch Auslassungszeichen markierter Auszug.",
+      "locus": "Kitāb al-Masāǧid wa-Mawāḍiʿ aṣ-Ṣalāh, Bāb Awqāt aṣ-Ṣalawāt al-Ḫams",
+      "volume": "1",
+      "page": "426 (Islamweb-Bibliotheksausgabe)",
+      "chapter": "Bāb Awqāt aṣ-Ṣalawāt al-Ḫams",
+      "number": "Ṣaḥīḥ Muslim 612",
+      "edition": "Islamweb digitale Bibliotheksdarstellung; zusätzlicher Seiteneintragszähler 964 ist keine Hadithnummer",
+      "directLink": "https://www.islamweb.net/ar/library/content/1/1036",
+      "authenticityNote": "Hadith in Ṣaḥīḥ Muslim; der Seitenwortlaut nennt alle fünf Gebete. Die Laufzeitgrenzen sind nicht als für alle Orte feste Uhrzeiten zu lehren.",
+      "safeApplication": "Fünf Gebetsnamen in Tagesfolge lernen; Qurʾān 11:114 nicht als vollständige Namensliste ausgeben; keine minutiösen Gebetszeiten erfinden.",
+      "verificationStatus": "primary-hadith-page-read-2026-10-14-not-finally-approved",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Direkte Einsicht in Islamweb Ṣaḥīḥ Muslim, Inhalt 1/1036; Fünfnamen im arabischen Original verglichen.",
+      "lessonIds": [
+        "fiqh-namen-der-fuenf-gebete"
+      ],
+      "binding": "verified-source-reference-not-yet-added-to-visitor-hadith-card",
+      "topic": "Namen der fünf Gebete"
     }
   ]
 }
