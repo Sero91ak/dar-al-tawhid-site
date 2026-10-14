@@ -2039,8 +2039,8 @@ const additions=
       "surah": 75,
       "ayah": 16,
       "label": "Qurʾān 75:16",
-      "arabic": "لَا تُحَرِّكْ بِهِ لِسَانَكَ لِتَعْجَلَ بِهِ إِنَّ عَلَيْنَا جَمْعَهُ وَقُرْآنَهُ",
-      "meaning": "Sinngemäß: Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
+      "arabic": "لَا تُحَرِّكْ بِهِ لِسَانَكَ لِتَعْجَلَ بِهِ",
+      "meaning": "Sinngemäß: Bewege deine Zunge nicht damit, um dich damit zu beeilen. (Qurʾān 75:16; im Offenbarungskontext an den Propheten ﷺ gerichtet.)",
       "excerpt": false
     },
     "hadith": {
@@ -2062,7 +2062,8 @@ const additions=
       "fiqhHumanReviewNeeded": false,
       "scientificApproval": false,
       "note": "Der Vers spricht den Propheten beim Empfang der Offenbarung an. Wir machen daraus kein Verbot, Hausaufgaben zu lernen. Die anschließenden Worte gehören zum gespeicherten Ausdruck und werden nicht als zweite, eigene Prüfung ausgegeben. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-      "editorialScopeNote": "Der Vers spricht den Propheten beim Empfang der Offenbarung an. Wir machen daraus kein Verbot, Hausaufgaben zu lernen. Die anschließenden Worte gehören zum gespeicherten Ausdruck und werden nicht als zweite, eigene Prüfung ausgegeben."
+      "editorialScopeNote": "Der Vers spricht den Propheten beim Empfang der Offenbarung an. Wir machen daraus kein Verbot, Hausaufgaben zu lernen. Die anschließenden Worte gehören zum gespeicherten Ausdruck und werden nicht als zweite, eigene Prüfung ausgegeben.",
+      "verseBoundaryCorrection": "Ursprünglich enthielt das als 75:16 gekennzeichnete arabische Feld zusätzlich Worte aus Qurʾān 75:17 (إِنَّ عَلَيْنَا جَمْعَهُ وَقُرْآنَهُ). Diese wurden aus dem Feld 75:16 entfernt. Der folgende Vers bleibt Teil des Kontexts, darf aber nicht als ein Vers zitiert werden."
     },
     "hint": "Die arabischen Worte spricht die Lehrperson.",
     "sample": "Wir wiederholen einen kurzen Vers ohne Hetze.",
