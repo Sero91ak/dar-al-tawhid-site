@@ -12295,8 +12295,8 @@ const additions=
     "pillar": "fiqh",
     "topic": "Die Absicht zum Gebet",
     "title": "Fiqh · Die Absicht zum Gebet",
-    "lead": "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
-    "goal": "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
+    "lead": "Die Niyyah ist die Absicht im Herzen: Wir wissen, welches Gebet wir für Allah verrichten möchten.",
+    "goal": "Unser Gebet gilt Allah. Die Niyyah ist unsere Absicht im Herzen; wir müssen keine besondere Niyyah-Formel laut sprechen.",
     "quran": {
       "surah": 6,
       "ayah": 162,
@@ -12323,22 +12323,35 @@ const additions=
       "numberUnverified": true,
       "fiqhHumanReviewNeeded": true,
       "scientificApproval": false,
-      "note": "Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert. Der Vers sagt, wem das Gebet gehört. Er druckt nicht die fünf Namen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-      "editorialScopeNote": "Der Hadith über die Absicht mit der Buḫārī-Nummer aus der Quellenbank wurde nicht erneut gelesen und wird nicht zitiert. Der Vers sagt, wem das Gebet gehört. Er druckt nicht die fünf Namen. Ein hanbalitisches Rechtsurteil aus al-Mughnī wurde für diese Stunde nicht gelesen. Die Rechtsfrage bleibt ungeprüft."
+      "note": "Überarbeitet nach Einsicht in Ibn Qudāmah, al-Mughnī, Bd. 1, S. 278 (Islamweb 15/542). Niyyah ist Absicht im Herzen; das Sprechen eines Gebetsnamens auf einer Lernkarte ist keine Gebetsformel. Qurʾān 6:162 lehrt Hingabe an Allah. Vollständige Fiqh-Freigabe bleibt ausstehend. Hadith al-Buḫārī 1 wurde in diesem Schritt nicht unabhängig geprüft.",
+      "editorialScopeNote": "al-Mughnī Bd. 1 S. 278 persönlich geprüft. Keine erfundene Niyyah-Formel. Erwähnung unterschiedlicher Fiqh-Formulierungen zur Aussprache bleibt in der internen Quellenakte, nicht als Pflicht im Kindermaterial.",
+      "classicalFiqhCrosscheck": {
+        "status": "primary-hanbali-text-read-not-approved",
+        "reviewDate": "2026-10-14",
+        "author": "Ibn Qudāmah",
+        "work": "al-Mughnī",
+        "chapter": "Kitāb aṣ-Ṣalāh / Bāb Ṣifat aṣ-Ṣalāh / Masʾalat Wujūb an-Niyyah li-ṣ-Ṣalāh",
+        "volume": "1",
+        "page": "278",
+        "directLink": "https://www.islamweb.net/ar/library/content/15/542",
+        "preciseExcerpt": "ومعنى النية القصد ، ومحلها القلب . وإن لفظ بما نواه ، كان تأكيدا",
+        "scope": "The fundamental niyyah is intention of the heart. Ibn Qudāmah mentions uttering it as reinforcement; no spoken formula is established as an obligation for children. Qurʾān 6:162 is about dedicating worship to Allah, not the procedural niyyah of one named prayer.",
+        "humanFiqhApproval": false
+      }
     },
-    "hint": "Die genaue Rechtsregel steht hier nicht. Wir üben nur den gelesenen Vers.",
-    "sample": "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
+    "hint": "Das Wort Niyyah bedeutet Absicht. Sie ist im Herzen, nicht in einer vorgeschriebenen Lautformel.",
+    "sample": "Unser Gebet gilt Allah. Die Niyyah ist unsere Absicht im Herzen; wir müssen keine besondere Niyyah-Formel laut sprechen.",
     "ageText": {
       "4-5": {
-        "goal": "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
-        "intro": "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll. Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Stell dir vor: Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet. Heute üben wir: Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
+        "goal": "Meine Absicht ist im Herzen. Ich möchte für Allah beten.",
+        "intro": "Assalāmu ʿalaikum, liebe Kinder! Bevor wir ein Gebet üben, wissen wir in unserem Herzen: Ich möchte für Allah beten. Das heißt Niyyah, die Absicht. Qurʾān 6:162 lehrt, dass unser Gebet Allah gehört. Stell dir vor, du möchtest mit deiner Lehrperson das Mittagsgebet üben. Du weißt, welches Gebet ihr übt und für Wen du betest. Eine besondere Absichtsformel musst du nicht laut sagen. Für unsere Lernübung zeigen wir auf eine Karte mit dem Gebetsnamen. Das ist nur eine Unterrichtshilfe, kein Teil des Gebets.",
         "lines": [
-          "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
-          "Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten.",
-          "Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet.",
-          "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen."
+          "Ich möchte mit meinem Gebet Allah dienen.",
+          "Qurʾān 6:162 erinnert uns daran: Unser Gebet gehört Allah.",
+          "Die Niyyah ist unsere Absicht im Herzen.",
+          "Eine besondere Absichtsformel muss ich nicht laut sagen."
         ],
-        "evidence": "Wir lernen mit Qurʾān 6:162. Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
+        "evidence": "Qurʾān 6:162 zeigt, dass wir für Allah beten. Niyyah heißt Absicht. Die Absicht ist im Herzen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/486. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:162. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -12350,21 +12363,21 @@ const additions=
             "de": "Gebet"
           }
         ],
-        "situation": "Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet.",
-        "practice": "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
-        "summary": "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
-        "audioScript": "Die Absicht zum Gebet. Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll. Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet. Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen."
+        "situation": "Ein Kind möchte das Ẓuhr-Gebet üben und weiß in seinem Herzen, welches Gebet es für Allah verrichten möchte.",
+        "practice": "Wir wählen im Unterricht eine Karte mit einem Gebetsnamen. Das Kind weiß im Herzen, welches Gebet es üben möchte und dass es für Allah betet. Das Benennen der Karte ist nur eine Lernhilfe; keine feste Gebetsformel.",
+        "summary": "Unser Gebet ist für Allah. Die Absicht tragen wir im Herzen.",
+        "audioScript": "Die Absicht zum Gebet. Assalāmu ʿalaikum! Unser Gebet ist für Allah. Die Niyyah ist die Absicht in unserem Herzen. Du weißt, welches Gebet du beten möchtest. Eine besondere Absichtsformel musst du nicht laut sagen."
       },
       "6-8": {
-        "goal": "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll. Wir lesen Qurʾān 6:162. Der Vers bedeutet sinngemäß: Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber. So kann das im Alltag aussehen: Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet. Die Aufgabe: Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen. niyyah bedeutet: Absicht; das Wort steht nicht in diesem Vers, die Stunde benutzt es als Unterrichtswort. ṣalāh bedeutet: Gebet.",
+        "goal": "Ich erkläre, was Niyyah bedeutet und warum die Absicht im Herzen ist.",
+        "intro": "Assalāmu ʿalaikum! Schön, dass du heute dabei bist. Wenn wir beten, ist nicht nur wichtig, was unsere Hände und Füße tun. Auch unser Herz weiß, weshalb wir beten: für Allah. Diese Absicht heißt Niyyah. Qurʾān 6:162 erklärt sinngemäß, dass unser Gebet, unser Leben und unser Sterben Allah gehören. Der Vers nennt keine besondere Niyyah-Formel. Ibn Qudāmah erklärt in al-Mughnī, dass die Absicht ihren Ort im Herzen hat. Stelle dir vor, du möchtest das Ẓuhr-Gebet üben. Du weißt, welches Gebet du übst, und wendest dich Allah zu. Du musst nicht zuerst eine besondere Formel laut aufsagen. Wir können im Unterricht eine Gebetskarte zeigen und über den Namen sprechen. Das ist unsere Lernübung, nicht die Absicht selbst.",
         "lines": [
-          "Qurʾān 6:162 ist die gelesene Stelle.",
-          "Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten.",
-          "Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet.",
-          "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen."
+          "Qurʾān 6:162 erinnert uns daran, dass unser Gebet Allah gehört.",
+          "Niyyah heißt Absicht; Ibn Qudāmah nennt das Herz als ihren Ort.",
+          "Wir wissen, welches Gebet wir für Allah verrichten möchten.",
+          "Die Lehrkarte hilft beim Lernen, ist aber keine Pflichtformel vor dem Gebet."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 6:162. Sinngemäß: Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber.",
+        "evidence": "Der Qurʾān-Vers 6:162 lehrt Hingabe an Allah. Ibn Qudāmah erläutert in al-Mughnī, Bd. 1, S. 278: Niyyah ist Absicht, und ihr Ort ist das Herz.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/486. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:162. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -12376,21 +12389,21 @@ const additions=
             "de": "Gebet"
           }
         ],
-        "situation": "Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet.",
-        "practice": "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
-        "summary": "Qurʾān 6:162 trägt diese Stunde. Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten.",
-        "audioScript": "Die Absicht zum Gebet. Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet. Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen."
+        "situation": "Ein Kind möchte das Ẓuhr-Gebet lernen. Mit der Lehrperson betrachtet es eine Karte und weiß vor Beginn im Herzen, welches Gebet es übt.",
+        "practice": "Wir wählen im Unterricht eine Karte mit einem Gebetsnamen. Das Kind weiß im Herzen, welches Gebet es üben möchte und dass es für Allah betet. Das Benennen der Karte ist nur eine Lernhilfe; keine feste Gebetsformel.",
+        "summary": "Die Absicht ist im Herzen. Wir sagen keine feste Formel auf, um sie erst gültig zu machen.",
+        "audioScript": "Die Absicht zum Gebet. Assalāmu ʿalaikum! Qurʾān 6:162 erinnert uns daran, dass unser Gebet Allah gehört. Niyyah bedeutet Absicht. Ihr Ort ist das Herz. Wenn du beten möchtest, weißt du, welches Gebet du für Allah verrichten willst. Eine feste Absichtsformel musst du nicht laut sagen."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Die Absicht zum Gebet“ anhand von Qurʾān 6:162 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Die Absicht zum Gebet. Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll. In Qurʾān 6:162 lernen wir sinngemäß: Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber. niyyah bedeutet Absicht; das Wort steht nicht in diesem Vers, die Stunde benutzt es als Unterrichtswort. ṣalāh bedeutet Gebet. Stell dir diese Situation vor: Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet. Welcher nächste Schritt ist gut? Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich trenne Qurʾān 6:162, die klassische Erklärung der Niyyah und eine Unterrichtsübung.",
+        "intro": "Assalāmu ʿalaikum! Heute unterscheiden wir den Qurʾān-Vers, die Niyyah im Herzen und eine praktische Unterrichtsübung. In Qurʾān 6:162 gehört das Gebet Allah allein; der Vers schreibt keine laut zu sprechende Absichtsformel vor. Ibn Qudāmah erklärt in al-Mughnī, Buch des Gebets, Abschnitt zur Verpflichtung der Niyyah, Bd. 1, S. 278, die Niyyah als Absicht und sagt, ihr Ort sei das Herz. Beim Pflichtgebet geht es auch darum, welches Gebet gemeint ist. Er erwähnt das Aussprechen als Bekräftigung; daraus machen wir für Kinder weder eine Pflicht noch eine feste Formel. Stelle dir vor, du lernst mit einer Lehrperson das Ẓuhr-Gebet. Du weißt schon vor Beginn in deinem Herzen, was du tun willst und für Wen. Beim Lernen dürft ihr den Namen auf einer Karte nennen. Das bedeutet aber nicht, dass man beim Gebet laut eine Niyyah sprechen muss. Frage dich: Was ist die Absicht im Herzen, und was ist nur eine Lehrhilfe?",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 6:162.",
-          "Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber.",
-          "Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet.",
-          "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen."
+          "Qurʾān 6:162 lehrt, dass unser Gebet Allah gehört.",
+          "Ibn Qudāmah definiert Niyyah als Absicht und nennt das Herz als ihren Ort.",
+          "Für ein bestimmtes Gebet weiß der Betende, welches Gebet gemeint ist.",
+          "Ein laut genannter Kartenname ist eine Unterrichtshilfe, keine festgelegte Gebetsformel."
         ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 6:162. Sinngemäß: Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber.",
+        "evidence": "Unterscheidung der Belege: Qurʾān 6:162 lehrt Hingabe an Allah. Ibn Qudāmah, al-Mughnī, Bd. 1, S. 278 (Islamweb 15/542), behandelt Niyyah als Absicht im Herzen und die Bestimmung des Gebets. Er erwähnt das Aussprechen als Bekräftigung; damit ist keine Pflicht zum Aufsagen einer Formel belegt.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/486. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 6:162. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
@@ -12402,93 +12415,93 @@ const additions=
             "de": "Gebet"
           }
         ],
-        "situation": "Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet.",
-        "practice": "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
-        "summary": "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll. Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
-        "audioScript": "Die Absicht zum Gebet. Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll. Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber. Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet. Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen."
+        "situation": "Eine Lehrperson fragt vor der Übung, welches Gebet gelernt wird. Das Kind kann den Namen nennen, weiß aber, dass die eigentliche Niyyah im Herzen ist.",
+        "practice": "Wir wählen im Unterricht eine Karte mit einem Gebetsnamen. Das Kind weiß im Herzen, welches Gebet es üben möchte und dass es für Allah betet. Das Benennen der Karte ist nur eine Lernhilfe; keine feste Gebetsformel.",
+        "summary": "Niyyah ist die Absicht im Herzen. Der Qurʾān-Vers lehrt Hingabe an Allah; die genaue Gebetsabsicht wird in der Fiqh-Literatur erläutert.",
+        "audioScript": "Die Absicht zum Gebet. Assalāmu ʿalaikum! In Qurʾān 6:162 lernen wir, dass das Gebet Allah gehört. Ibn Qudāmah erläutert in al-Mughnī, dass Niyyah Absicht bedeutet und im Herzen liegt. Du weißt, welches Gebet du für Allah verrichten möchtest. Das laut gesprochene Benennen einer Übung ist keine vorgeschriebene Gebetsformel."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Die Absicht zum Gebet?",
+          "prompt": "Wo ist die Absicht für das Gebet?",
           "options": [
-            "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
-            "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist."
+            "In meinem Herzen.",
+            "Nur auf einer laut vorgelesenen Karte."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll."
+          "hint": "Denke an Niyyah.",
+          "explain": "Mā schāʾ Allāh! Niyyah heißt Absicht. Sie ist in unserem Herzen."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Muss ich eine besondere Absichtsformel laut sagen?",
           "options": [
-            "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
-            "Wir üben einen wahren Satz ohne ein lautes Vorführen."
+            "Nein, die Absicht ist im Herzen.",
+            "Ja, sonst darf ich gar nicht üben."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Eine Formel ist nicht nötig.",
+          "explain": "Allāhumma bārik! Wir beten für Allah und wissen, welches Gebet wir verrichten möchten."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Die Absicht zum Gebet?",
+          "prompt": "Was bedeutet Niyyah?",
           "options": [
-            "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist.",
-            "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll."
+            "Die Absicht im Herzen.",
+            "Ein Lied, das man vor jedem Gebet laut singt."
           ],
-          "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll."
+          "correct": 0,
+          "hint": "Niyyah beschreibt, was wir beabsichtigen.",
+          "explain": "Niyyah heißt Absicht. Der Ort der Absicht ist das Herz."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Warum darf die Lehrperson die Gebetskarte vor der Übung zeigen?",
           "options": [
-            "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
-            "Wir üben einen wahren Satz ohne ein lautes Vorführen."
+            "Damit wir den Namen des Gebets lernen.",
+            "Weil eine Karte zum Pflichtgebet gehört."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Die Karte ist eine Hilfe im Unterricht.",
+          "explain": "Eine Gebetskarte gehört zur Lernübung und ist kein verpflichtender Teil des Gebets."
         },
         {
           "type": "text",
-          "prompt": "Was möchtest du dir aus Qurʾān 6:162 merken?",
-          "sample": "Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber.",
-          "hint": "Erkläre die Stelle in eigenen Worten.",
-          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+          "prompt": "Was weißt du in deinem Herzen, wenn du ein bestimmtes Gebet verrichten möchtest?",
+          "sample": "Ich möchte für Allah beten und weiß, welches Gebet ich bete.",
+          "hint": "Denke an Absicht und Gebetsname.",
+          "explain": "Mā schāʾ Allāh! Die Absicht richtet sich auf die Handlung und auf Allah."
         }
       ],
       "9-10": [
         {
-          "type": "text",
-          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 6:162 lernen.",
-          "sample": "Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Er hat keinen Teilhaber.",
-          "hint": "Denke an die Bedeutung der Stelle.",
-          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-        },
-        {
-          "type": "text",
-          "prompt": "Was wäre in dieser Situation ein guter Schritt? Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet.",
-          "sample": "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
-          "hint": "Denke an unsere Übung.",
-          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-        },
-        {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Welche Aussage stammt aus der klassischen Erklärung von Ibn Qudāmah?",
           "options": [
-            "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll.",
-            "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist."
+            "Niyyah bedeutet Absicht, und ihr Ort ist das Herz.",
+            "Qurʾān 6:162 befiehlt eine laut auszusprechende Niyyah-Formel."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Vergleiche Qurʾān-Vers und Fiqh-Text.",
+          "explain": "Ibn Qudāmah erklärt den Ort der Absicht. Eine Formel als Pflicht steht nicht in 6:162."
+        },
+        {
+          "type": "text",
+          "prompt": "Welche zwei Quellenbereiche müssen wir in dieser Stunde unterscheiden?",
+          "sample": "Qurʾān 6:162 lehrt, dass das Gebet Allah gehört. Al-Mughnī erklärt die Niyyah als Absicht im Herzen und die Bestimmung des Gebets.",
+          "hint": "Ein Vers über Hingabe und ein Fiqh-Abschnitt über die Absicht.",
+          "explain": "Sehr gut! Eine didaktische Erklärung ist nicht identisch mit dem Qurʾān-Wortlaut."
+        },
+        {
+          "type": "text",
+          "prompt": "Warum ist das laute Benennen eines Gebets auf einer Lernkarte keine vorgeschriebene Niyyah-Formel?",
+          "sample": "Die Karte hilft beim Lernen. Die Niyyah liegt im Herzen; sie wird nicht erst durch eine laut ausgesprochene Formel zur Absicht.",
+          "hint": "Unterscheide Unterrichtshilfe und eigentliche Gebetsabsicht.",
+          "explain": "Allāhumma bārik! Das Kind versteht, wofür die Lernkarte da ist."
         }
       ]
     },
@@ -12502,9 +12515,9 @@ const additions=
         "de": "Gebet"
       }
     ],
-    "practice": "Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
-    "summary": "Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll. Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten.",
-    "audioScript": "Die Absicht zum Gebet. Bevor wir ein Gebet üben, wissen wir, welches Gebet es sein soll. Der Vers sagt: Mein Gebet, mein Opferritus, mein Leben und mein Sterben gehören Allah, dem Herrn der Welten. Die Lehrperson fragt: Welches Gebet üben wir jetzt? Die Kinder nennen den Namen, den der Plan der App schon verwendet. Wir sagen den Namen laut und beginnen nicht, während wir noch woanders hinschauen.",
+    "practice": "Wir wählen im Unterricht eine Karte mit einem Gebetsnamen. Das Kind weiß im Herzen, welches Gebet es üben möchte und dass es für Allah betet. Das Benennen der Karte ist nur eine Lernhilfe; keine feste Gebetsformel.",
+    "summary": "Qurʾān 6:162 erinnert uns an die Hingabe an Allah. Ibn Qudāmah erklärt: Die Niyyah ist die Absicht im Herzen.",
+    "audioScript": "Die Absicht zum Gebet. Unser Gebet gilt Allah. Niyyah bedeutet Absicht. Sie ist im Herzen. Du weißt, welches Gebet du für Allah verrichten möchtest. Eine besondere Niyyah-Formel muss man dafür nicht laut sagen.",
     "voiceApproved": false
   },
   "quran-woher-stammt-ein-hadith": {
