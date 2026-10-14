@@ -8,6 +8,7 @@ on:
       - 'kids/tools/quiz_v4_all900_audio_assembler.py'
       - 'kids/tools/quiz_v4_all900_release_gate.py'
       - 'kids/tools/split_quiz_v4_all900_packets.py'
+      - 'kids/tools/curate_quiz_450_audio_first.py'
       - '.github/workflows/kids-quiz-v4-all900-plan.yml'
 
 permissions:
@@ -61,6 +62,11 @@ jobs:
           python3 -m py_compile kids/tools/split_quiz_v4_all900_packets.py
           python3 kids/tools/split_quiz_v4_all900_packets.py
 
+      - name: Curate 150 questions per age and preserve remaining 450 for expansion
+        run: |
+          python3 -m py_compile kids/tools/curate_quiz_450_audio_first.py
+          python3 kids/tools/curate_quiz_450_audio_first.py
+
       - name: Ensure FFmpeg for private non-speech joining QA
         shell: bash
         run: |
@@ -100,8 +106,9 @@ jobs:
             git reset --hard FETCH_HEAD
             python3 kids/tools/prepare_quiz_v4_all900_segmented.py
             python3 kids/tools/split_quiz_v4_all900_packets.py
+            python3 kids/tools/curate_quiz_450_audio_first.py
             python3 kids/tools/quiz_v4_all900_audio_assembler.py --audit
-            git add kids/data/quiz-v4-all900-segmented-review.json kids/data/quiz-v4-all900-production-packets.json kids/data/quiz-v4-all900-production-summary.json
+            git add kids/data/quiz-v4-all900-segmented-review.json kids/data/quiz-v4-all900-production-packets.json kids/data/quiz-v4-all900-production-summary.json kids/data/quiz-kids-curated-450-review.json kids/data/quiz-kids-expansion-reserve-450.json kids/data/quiz-v4-curated-450-production-review.json
             if git diff --cached --quiet; then
               echo "All 900 review plan/packet files already present and current."
               exit 0
@@ -127,3 +134,6 @@ jobs:
             kids/data/quiz-v4-all900-segmented-review.json
             kids/data/quiz-v4-all900-production-packets.json
             kids/data/quiz-v4-all900-production-summary.json
+            kids/data/quiz-kids-curated-450-review.json
+            kids/data/quiz-kids-expansion-reserve-450.json
+            kids/data/quiz-v4-curated-450-production-review.json
