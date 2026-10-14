@@ -54,7 +54,7 @@ const drafts={
         "Assalāmu ʿalaikum, liebes Kind! Heute lernen wir etwas über unser Gebet. Sūrat al-Fātiḥah ist eine besondere Sūrah im Qurʾān.",
         "Der Prophet Muḥammad ﷺ hat die Bedeutung der Fātiḥah für das Gebet gelehrt. Wir lernen sie Schritt für Schritt mit einer Lehrperson, die den Qurʾān richtig rezitiert.",
         "Yūsuf kennt schon die ersten Worte. Ein anderes Kind lernt sie noch. Beide dürfen langsam üben. Niemand wird wegen eines Fehlers ausgelacht.",
-        "Höre aufmerksam einer richtigen Qurʾān-Rezitation zu und übe mit einer geeigneten Lehrperson. Wir erzeugen keinen künstlichen Ersatz für die Qurʾān-Rezitation. Mā schāʾ Allāh, gute Bemühung zählt! As-salāmu ʿalaikum."
+        "Höre aufmerksam einer richtigen Qurʾān-Rezitation zu und übe mit einer geeigneten Lehrperson. Mit einer guten Lehrperson kannst du die schönen Worte Schritt für Schritt lernen. Mā schāʾ Allāh, gute Bemühung zählt! As-salāmu ʿalaikum."
       ],
       "situation": "Yūsuf und ein jüngeres Kind lernen die Fātiḥah im eigenen Tempo.",
       "practice": "Sūrat al-Fātiḥah von einer authentisch rezitierenden Lehrperson hören und behutsam lernen.",
@@ -83,7 +83,7 @@ const drafts={
         "Ordne die drei Belegarten einem Quellenblatt zu. Lerne die Fātiḥah mit einer qualifizierten Lehrperson und sprich über mögliche Schwierigkeiten, statt sie zu verbergen. Mā schāʾ Allāh, sorgfältiger Fiqh braucht gute Belege! As-salāmu ʿalaikum."
       ],
       "situation": "Eine Lerngruppe trennt den Vers 15:87 von den detaillierten Fiqh-Fragen zur Fātiḥah-Rezitation.",
-      "practice": "Drei Belegarten unterscheiden; die Rezitation respektvoll und ohne synthetischen Qurʾān-Ersatz lernen.",
+      "practice": "Drei Belegarten unterscheiden; die Rezitation respektvoll von einer geeigneten Lehrperson lernen.",
       "evidence": "Qurʾān 15:87; Ibn Kaṯīr, Islamweb 49/933; Ṣaḥīḥ al-Buḫārī (ʿUbādah ibn aṣ-Ṣāmit), Islamweb 0/724; Ibn Qudāmah, al-Mughnī, Bd. 1 S. 284, Islamweb 15/553. Maʾmūm- und Ausnahmefälle sowie individuelle Schwierigkeiten benötigen ergänzende menschliche Fiqh-Prüfung.",
       "summary": "Qurʾān, Sunnah und klassischer Fiqh sind klar getrennte Belegarten für die Bedeutung der Fātiḥah im Gebet."
     }
