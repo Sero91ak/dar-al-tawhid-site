@@ -47,7 +47,15 @@ def get_question_segments(q,prepared):
         die(f"Question core not exact in spoken text: {q['id']}")
     intro=text[:idx].strip()
     rest=text[idx+len(core):].strip()
-    segments=[s for s in (intro,core,rest) if s]
+    # Extra-saving variant: answer labels and repeated response texts are
+    # separately reusable; original audible wording stays byte-identical.
+    split_core=[title]
+    if not (q["ageBand"]=="4-6" and is_yes_no(q)):
+        for i,a in enumerate(choices,1):
+            label=normal(a["label"])
+            suffix="" if label.endswith((".","!","?","؟")) else "."
+            split_core.extend([f"Antwort {i}:",label+suffix])
+    segments=[s for s in ([intro]+split_core+[rest]) if s]
     if " ".join(segments)!=text:
         die(f"Lossy sentence reconstruction: {q['id']}")
     if q["ageBand"]=="9-10" and intro:
@@ -130,7 +138,10 @@ def make():
                 die(f"Text reconstruction failed: {q['id']}:{kind}")
             for i,s in enumerate(pieces):
                 use_segment(s,kind+"-fragment-"+str(i))
-            return {"mode":"compose-from-segments","text":full,"segments":pieces,"pauseBetweenPartsMs":PAUSE_MS}
+            pauses=[70 if piece.startswith("Antwort ") and piece.endswith(":") else PAUSE_MS
+                    for piece in pieces[:-1]]
+            return {"mode":"compose-from-segments","text":full,"segments":pieces,
+                    "pauseAfterMs":pauses,"pauseBetweenPartsMs":PAUSE_MS}
         question_parts=get_question_segments(q,prepared)
         if q["id"]=="kids-quiz-002" and question_parts!=list(Q2_PARTS.values()):
             die("Original Q002 parts lost")
