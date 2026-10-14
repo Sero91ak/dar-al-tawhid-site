@@ -1,0 +1,43 @@
+#!/usr/bin/env node
+"use strict";
+const fs=require("node:fs"),path=require("node:path"),vm=require("node:vm"),assert=require("node:assert/strict");
+const root=path.resolve(__dirname,"../.."),read=x=>fs.readFileSync(path.join(root,x),"utf8");
+const id="fiqh-namen-der-fuenf-gebete",topic="Die Namen der fünf Gebete";
+const V=JSON.parse(read("kids/data/academy-voice-foundation-fiqh-142-delta-v1.json"));
+assert.deepEqual(V.supersedesContextForLessonIds,[id]);
+assert.equal(V.contexts.length,19);assert.equal(V.generateCreditsUsed,0);
+assert.equal(V.status,"text-only-not-generated-not-approved");
+assert.equal(V.requiresMergeIntoCanonicalVoicePlanBeforeGeneration,true);
+const old={id,topic,quran:{surah:11,ayah:114,arabic:"unchanged source"},hadith:{reference:"unchanged reference"},questions:{"4-5":[1],"6-8":[2],"9-10":[3]},ageText:{"4-5":{},"6-8":{},"9-10":{}},sourceAudit:{scientificApproval:false}};
+const ctx={DARKidsAcademyCurriculum:{[id]:old},DARKidsAcademyCurriculumFoundationFiqh118:{scientificApproval:false}};
+vm.runInNewContext(read("kids/akademie/curriculum-foundation-fiqh-142-v1.js"),{window:ctx},{filename:"foundation-fiqh-142"});
+const obj=ctx.DARKidsAcademyCurriculum[id],meta=ctx.DARKidsAcademyCurriculumFoundationFiqh142;
+assert.equal(meta.ageVersionCount,3);assert.equal(meta.scientificApproval,false);
+assert.equal(meta.audioGenerated,false);assert.equal(meta.liveApproved,false);
+assert.equal(obj.id,id);
+assert.equal(obj.questions,old.questions,"must preserve quiz");
+assert.equal(obj.quran,old.quran,"must preserve original verse and reference");
+assert.equal(obj.hadith,old.hadith,"must not invent/modify hadith binding");
+assert.equal(obj.sourceAudit.scientificApproval,false);
+assert.equal(obj.sourceAudit.fiqhHumanReviewNeeded,true);
+const html=read("kids/akademie/index.html");
+const prev=html.indexOf("curriculum-foundation-fiqh-118-v1.js"),now=html.indexOf("curriculum-foundation-fiqh-142-v1.js");
+assert.ok(prev>=0&&now>prev,"review modules must load in sequence");
+assert.equal(html.indexOf("curriculum-foundation-fiqh-142-v1.js",now+1),-1,"review module loaded twice");
+const vnames=["Faǧr","Ẓuhr","ʿAṣr","Maġrib","ʿIšāʾ"],seen=new Set();
+for(const age of ["4-5","6-8","9-10"]){
+ const d=obj.ageText[age],intro=d.lines.join(" ");
+ assert.equal(d.lines.length,4);
+ assert.ok(d.goal&&d.situation&&d.practice&&d.evidence&&d.summary);
+ assert.equal(d.intro,intro);assert.equal(d.audioScript,topic+". "+intro);
+ assert.ok(!seen.has(intro),"age-specific lessons are not distinct");seen.add(intro);
+ assert.doesNotMatch([d.goal,intro,d.situation,d.practice,d.evidence,d.summary].join(" "),/QA-Hinweis|Keine Freigabe für Besucher|Masterstimme|scientificApproval|fiqhHumanReviewNeeded|sourceAudit|Audiotest|synthetische Rezitation/i);
+ const get=(kind,i)=>V.contexts.find(x=>x.lessonId===id&&x.age===age&&x.kind===kind&&(i===undefined||x.index===i));
+ assert.equal(get("intro")?.text,intro);assert.equal(get("audio")?.text,d.audioScript);
+ for(let i=0;i<4;i++)assert.equal(get("line",i)?.text,d.lines[i]);
+ for(const name of vnames)assert.ok(intro.includes(name),"missing prayer "+name+" in "+age);
+ assert.ok(d.evidence.includes("Muslim 612"),"must cite source naming the prayers");
+ assert.ok(d.evidence.includes("11:114"),"must distinguish Quran verse");
+}
+assert.equal(V.contexts.find(x=>x.lessonId===id&&x.age==="all"&&x.kind==="summary")?.text,obj.ageText["4-5"].audioScript);
+process.stdout.write("PASS Fiqh 142: 3 ages; 19 ungenerated voice contexts; five named prayers; original Quran and quiz preserved; scholar review required\n");
