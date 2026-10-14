@@ -6517,13 +6517,13 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Mit Gästen freundlich umgehen?",
+          "prompt": "Wie begrüßen wir Gäste freundlich?",
           "options": [
-            "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich.",
+            "Wir schauen absichtlich in die privaten Taschen der Gäste.",
             "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein."
           ],
           "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein."
         },
         {
@@ -6531,23 +6531,23 @@ const additions=
           "prompt": "Was können wir heute üben?",
           "options": [
             "Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern.",
-            "Wir üben den Satz und legen das Spielzeug ruhig hin."
+            "Wir stören die Gäste absichtlich und hören ihnen nicht zu."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Mit Gästen freundlich umgehen?",
+          "prompt": "Wie begrüßen wir Gäste freundlich?",
           "options": [
             "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein.",
-            "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich."
+            "Wir schauen absichtlich in die privaten Taschen der Gäste."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein."
         },
         {
@@ -6555,11 +6555,11 @@ const additions=
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
             "Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern.",
-            "Wir üben den Satz und legen das Spielzeug ruhig hin."
+            "Wir stören die Gäste absichtlich und hören ihnen nicht zu."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir üben, die Gäste anzusehen, leise zu grüßen und nicht in ihren Taschen zu stöbern."
         },
         {
           "type": "text",
@@ -6586,14 +6586,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Wie achten wir die Privatsphäre unserer Gäste?",
           "options": [
-            "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich.",
+            "Wir schauen absichtlich in die privaten Taschen der Gäste.",
             "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein."
         }
       ]
     },
@@ -6735,37 +6735,37 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Lernen und Pausen ausgleichen?",
+          "prompt": "Was hilft nach einer konzentrierten Lernzeit?",
           "options": [
             "Nach einer konzentrierten Zeit machen wir eine echte Pause.",
-            "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf."
+            "Wir lernen ohne jede Pause, auch wenn wir völlig erschöpft sind."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Nach einer konzentrierten Zeit machen wir eine echte Pause."
         },
         {
           "type": "choice",
           "prompt": "Was können wir heute üben?",
           "options": [
-            "Wir üben den Dank und das ruhige Aufstehen.",
+            "Wir machen aus jeder Lernpause eine Bestrafung.",
             "Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Lernen und Pausen ausgleichen?",
+          "prompt": "Was hilft nach einer konzentrierten Lernzeit?",
           "options": [
-            "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf.",
+            "Wir lernen ohne jede Pause, auch wenn wir völlig erschöpft sind.",
             "Nach einer konzentrierten Zeit machen wir eine echte Pause."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Nach einer konzentrierten Zeit machen wir eine echte Pause."
         },
         {
@@ -6773,11 +6773,11 @@ const additions=
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
             "Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein.",
-            "Wir üben den Dank und das ruhige Aufstehen."
+            "Wir machen aus jeder Lernpause eine Bestrafung."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir legen eine kurze Lernzeit und eine kurze Pause fest und halten beide ein."
         },
         {
           "type": "text",
@@ -6804,14 +6804,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Wie können Lernzeit und Pausen zusammenpassen?",
           "options": [
             "Nach einer konzentrierten Zeit machen wir eine echte Pause.",
-            "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf."
+            "Wir lernen ohne jede Pause, auch wenn wir völlig erschöpft sind."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Nach einer konzentrierten Zeit machen wir eine echte Pause."
         }
       ]
     },
@@ -6953,13 +6953,13 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Fehler bereuen und verbessern?",
+          "prompt": "Was darfst du nach einem Fehler tun?",
           "options": [
-            "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
+            "Nach einem Fehler darf man sich niemals entschuldigen.",
             "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen."
           ],
           "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen."
         },
         {
@@ -6967,35 +6967,35 @@ const additions=
           "prompt": "Was können wir heute üben?",
           "options": [
             "Wir üben: Es tut mir leid. Ich mache das wieder gut.",
-            "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson."
+            "Ich gebe jemand anderem die Schuld, statt mich zu verbessern."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir üben: Es tut mir leid. Ich mache das wieder gut."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Fehler bereuen und verbessern?",
+          "prompt": "Was darfst du nach einem Fehler tun?",
           "options": [
             "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen.",
-            "Wir stellen uns ruhig hin, wenn wir das Gebet üben."
+            "Nach einem Fehler darf man sich niemals entschuldigen."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen."
         },
         {
           "type": "choice",
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
-            "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
+            "Ich gebe jemand anderem die Schuld, statt mich zu verbessern.",
             "Wir üben: Es tut mir leid. Ich mache das wieder gut."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir üben: Es tut mir leid. Ich mache das wieder gut."
         },
         {
           "type": "text",
@@ -7022,14 +7022,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was gehört zu Reue und Wiedergutmachung?",
           "options": [
-            "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
+            "Nach einem Fehler darf man sich niemals entschuldigen.",
             "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen."
         }
       ]
     },
@@ -7397,37 +7397,37 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Einfaches Tajwīd-Hören?",
+          "prompt": "Wie hören wir einer Qurʾān-Rezitation zu?",
           "options": [
-            "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
+            "Wir müssen beim Hören absichtlich unaufmerksam sein.",
             "Wir hören einer sorgfältigen Qurʾān-Rezitation aufmerksam zu."
           ],
           "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Wir hören einer sorgfältigen Qurʾān-Rezitation aufmerksam zu."
         },
         {
           "type": "choice",
           "prompt": "Was können wir heute üben?",
           "options": [
-            "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson.",
+            "Wir übertönen die Rezitation mit lautem Rufen.",
             "Wenn eine Lehrperson Qurʾān vorträgt, hören wir aufmerksam zu und achten auf die deutliche Aussprache."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wenn eine Lehrperson Qurʾān vorträgt, hören wir aufmerksam zu und achten auf die deutliche Aussprache."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Einfaches Tajwīd-Hören?",
+          "prompt": "Wie hören wir einer Qurʾān-Rezitation zu?",
           "options": [
             "Wir hören einer sorgfältigen Qurʾān-Rezitation aufmerksam zu.",
-            "Wir stellen uns ruhig hin, wenn wir das Gebet üben."
+            "Wir müssen beim Hören absichtlich unaufmerksam sein."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Wir hören einer sorgfältigen Qurʾān-Rezitation aufmerksam zu."
         },
         {
@@ -7435,11 +7435,11 @@ const additions=
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
             "Wenn eine Lehrperson Qurʾān vorträgt, hören wir aufmerksam zu und achten auf die deutliche Aussprache.",
-            "Wir üben nur das ruhige Stehen. Die weiteren Bewegungen kommen in den späteren Stunden mit der Lehrperson."
+            "Wir übertönen die Rezitation mit lautem Rufen."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wenn eine Lehrperson Qurʾān vorträgt, hören wir aufmerksam zu und achten auf die deutliche Aussprache."
         },
         {
           "type": "text",
@@ -7466,14 +7466,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was bedeutet sorgfältiges Hören bei einer Rezitation?",
           "options": [
-            "Wir stellen uns ruhig hin, wenn wir das Gebet üben.",
+            "Wir müssen beim Hören absichtlich unaufmerksam sein.",
             "Wir hören einer sorgfältigen Qurʾān-Rezitation aufmerksam zu."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir hören einer sorgfältigen Qurʾān-Rezitation aufmerksam zu."
         }
       ]
     },
@@ -7615,49 +7615,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Muḥammad ﷺ in Makkah?",
+          "prompt": "Womit beginnt der in dieser Stunde gelesene Vers?",
           "options": [
             "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat.",
-            "Wenn jemand etwas gut gemacht hat, freuen wir uns mit."
+            "Der gelesene Vers fordert uns auf, Allah zu vergessen."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat."
         },
         {
           "type": "choice",
           "prompt": "Was können wir heute üben?",
           "options": [
-            "Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle.",
-            "Wir üben einen Glückwunsch ohne einen Witz über das Bild."
+            "Wir sprechen langsam den deutschen Sinn: Lies im Namen deines Herrn, der erschaffen hat.",
+            "Wir sprechen die Worte mit absichtlicher Geringschätzung."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir sprechen langsam den deutschen Sinn: Lies im Namen deines Herrn, der erschaffen hat."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Muḥammad ﷺ in Makkah?",
+          "prompt": "Womit beginnt der in dieser Stunde gelesene Vers?",
           "options": [
-            "Wenn jemand etwas gut gemacht hat, freuen wir uns mit.",
+            "Der gelesene Vers fordert uns auf, Allah zu vergessen.",
             "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat."
         },
         {
           "type": "choice",
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
-            "Wir üben einen Glückwunsch ohne einen Witz über das Bild.",
-            "Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle."
+            "Wir sprechen die Worte mit absichtlicher Geringschätzung.",
+            "Wir sprechen langsam den deutschen Sinn: Lies im Namen deines Herrn, der erschaffen hat."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir sprechen langsam den deutschen Sinn: Lies im Namen deines Herrn, der erschaffen hat."
         },
         {
           "type": "text",
@@ -7684,14 +7684,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Worauf richtet der Versanfang in Qurʾān 96:1 den Blick?",
           "options": [
             "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat.",
-            "Wenn jemand etwas gut gemacht hat, freuen wir uns mit."
+            "Der gelesene Vers fordert uns auf, Allah zu vergessen."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat."
         }
       ]
     },
@@ -7833,13 +7833,13 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Nach dem Essen danken?",
+          "prompt": "Woran denken wir nach dem Essen?",
           "options": [
-            "Allah weiß und bestimmt.",
+            "Nach dem Essen dürfen wir Allah nicht danken.",
             "Nach dem Essen erinnern wir uns, Allah zu danken."
           ],
           "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Nach dem Essen erinnern wir uns, Allah zu danken."
         },
         {
@@ -7847,23 +7847,23 @@ const additions=
           "prompt": "Was können wir heute üben?",
           "options": [
             "Wir üben einen schlichten deutschen Dank nach dem Essen.",
-            "Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an."
+            "Wir machen uns über ein Bittgebet lustig."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir üben einen schlichten deutschen Dank nach dem Essen."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Nach dem Essen danken?",
+          "prompt": "Woran denken wir nach dem Essen?",
           "options": [
             "Nach dem Essen erinnern wir uns, Allah zu danken.",
-            "Allah weiß und bestimmt."
+            "Nach dem Essen dürfen wir Allah nicht danken."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Nach dem Essen erinnern wir uns, Allah zu danken."
         },
         {
@@ -7871,11 +7871,11 @@ const additions=
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
             "Wir üben einen schlichten deutschen Dank nach dem Essen.",
-            "Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an."
+            "Wir machen uns über ein Bittgebet lustig."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir üben einen schlichten deutschen Dank nach dem Essen."
         },
         {
           "type": "text",
@@ -7902,14 +7902,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was ist ein schöner Ausdruck der Dankbarkeit nach dem Essen?",
           "options": [
-            "Allah weiß und bestimmt.",
+            "Nach dem Essen dürfen wir Allah nicht danken.",
             "Nach dem Essen erinnern wir uns, Allah zu danken."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Nach dem Essen erinnern wir uns, Allah zu danken."
         }
       ]
     },
@@ -8051,37 +8051,37 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Kranken und älteren Menschen helfen?",
+          "prompt": "Wie können Kinder sicher helfen?",
           "options": [
             "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise.",
-            "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan?"
+            "Kinder müssen gefährliche Pflegeaufgaben ohne Erwachsene übernehmen."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise."
         },
         {
           "type": "choice",
           "prompt": "Was können wir heute üben?",
           "options": [
-            "Wir schreiben ein Wort auf einen Zettel oder sagen es leise.",
+            "Wir bringen gefährliche Medikamente ohne Erlaubnis zu jemandem.",
             "Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Kranken und älteren Menschen helfen?",
+          "prompt": "Wie können Kinder sicher helfen?",
           "options": [
-            "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan?",
+            "Kinder müssen gefährliche Pflegeaufgaben ohne Erwachsene übernehmen.",
             "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise."
         },
         {
@@ -8089,11 +8089,11 @@ const additions=
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
             "Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun.",
-            "Wir schreiben ein Wort auf einen Zettel oder sagen es leise."
+            "Wir bringen gefährliche Medikamente ohne Erlaubnis zu jemandem."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun."
         },
         {
           "type": "text",
@@ -8120,14 +8120,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Warum sind Erlaubnis und Sicherheit beim Helfen wichtig?",
           "options": [
             "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise.",
-            "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan?"
+            "Kinder müssen gefährliche Pflegeaufgaben ohne Erwachsene übernehmen."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise."
         }
       ]
     },
@@ -8269,13 +8269,13 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Die schönen Namen Allahs?",
+          "prompt": "Was lernen wir über Allahs schöne Namen?",
           "options": [
-            "Wenn jemand etwas gut gemacht hat, freuen wir uns mit.",
+            "Wir dürfen uns beliebige neue Namen für Allah ausdenken.",
             "Allah hat schöne Namen."
           ],
           "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Allah hat schöne Namen."
         },
         {
@@ -8283,35 +8283,35 @@ const additions=
           "prompt": "Was können wir heute üben?",
           "options": [
             "Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste.",
-            "Wir üben einen Glückwunsch ohne einen Witz über das Bild."
+            "Wir erfinden einen Namen und behaupten, er stehe im Qurʾān."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Die schönen Namen Allahs?",
+          "prompt": "Was lernen wir über Allahs schöne Namen?",
           "options": [
             "Allah hat schöne Namen.",
-            "Wenn jemand etwas gut gemacht hat, freuen wir uns mit."
+            "Wir dürfen uns beliebige neue Namen für Allah ausdenken."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Allah hat schöne Namen."
         },
         {
           "type": "choice",
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
-            "Wir üben einen Glückwunsch ohne einen Witz über das Bild.",
+            "Wir erfinden einen Namen und behaupten, er stehe im Qurʾān.",
             "Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste."
         },
         {
           "type": "text",
@@ -8338,14 +8338,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Wie sprechen wir über die Namen Allahs?",
           "options": [
-            "Wenn jemand etwas gut gemacht hat, freuen wir uns mit.",
+            "Wir dürfen uns beliebige neue Namen für Allah ausdenken.",
             "Allah hat schöne Namen."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Allah hat schöne Namen."
         }
       ]
     },
@@ -8487,13 +8487,13 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Der letzte Gesandte Muḥammad ﷺ?",
+          "prompt": "Wer ist Muḥammad ﷺ?",
           "options": [
             "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten.",
-            "Mit Essen spielen wir nicht."
+            "Muḥammad ﷺ war kein Gesandter Allahs."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten."
         },
         {
@@ -8501,23 +8501,23 @@ const additions=
           "prompt": "Was können wir heute üben?",
           "options": [
             "Wir wiederholen nur diese Bezeichnung und keine Jahreszahl.",
-            "Wir üben, das Essen auf dem Teller zu lassen und nicht damit zu werfen."
+            "Wir machen uns über seinen Namen lustig."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir wiederholen nur diese Bezeichnung und keine Jahreszahl."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Der letzte Gesandte Muḥammad ﷺ?",
+          "prompt": "Wer ist Muḥammad ﷺ?",
           "options": [
-            "Mit Essen spielen wir nicht.",
+            "Muḥammad ﷺ war kein Gesandter Allahs.",
             "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
           "explain": "Mā schāʾ Allāh! Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten."
         },
         {
@@ -8525,11 +8525,11 @@ const additions=
           "prompt": "Welche Handlung gehört zu unserer Übung?",
           "options": [
             "Wir wiederholen nur diese Bezeichnung und keine Jahreszahl.",
-            "Wir üben, das Essen auf dem Teller zu lassen und nicht damit zu werfen."
+            "Wir machen uns über seinen Namen lustig."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Wir wiederholen nur diese Bezeichnung und keine Jahreszahl."
         },
         {
           "type": "text",
@@ -8556,14 +8556,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was bedeutet die Bezeichnung Siegel der Propheten?",
           "options": [
             "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten.",
-            "Mit Essen spielen wir nicht."
+            "Muḥammad ﷺ war kein Gesandter Allahs."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Erinnere dich an den Verssinn und das Beispiel.",
+          "explain": "Mā schāʾ Allāh! Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten."
         }
       ]
     },
