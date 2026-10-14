@@ -7,6 +7,7 @@ on:
       - 'kids/tools/prepare_quiz_v4_all900_segmented.py'
       - 'kids/tools/quiz_v4_all900_audio_assembler.py'
       - 'kids/tools/quiz_v4_all900_release_gate.py'
+      - 'kids/tools/split_quiz_v4_all900_packets.py'
       - '.github/workflows/kids-quiz-v4-all900-plan.yml'
 
 permissions:
@@ -55,6 +56,11 @@ jobs:
           print('PASS: 900 questions 3 age groups, exact reconstructed speech and source, zero credits, NO live')
           PY
 
+      - name: Split full 900 into 18 non-billable 50-question age-matched packets
+        run: |
+          python3 -m py_compile kids/tools/split_quiz_v4_all900_packets.py
+          python3 kids/tools/split_quiz_v4_all900_packets.py
+
       - name: Verify zero-TTS MP3 assembly contract for all 900 age-balanced questions
         run: |
           python3 -m py_compile kids/tools/quiz_v4_all900_audio_assembler.py kids/tools/quiz_v4_all900_release_gate.py
@@ -66,7 +72,7 @@ jobs:
           set -euo pipefail
           git config user.name dar-kids-review-bot
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git add kids/data/quiz-v4-all900-segmented-review.json
+          git add kids/data/quiz-v4-all900-segmented-review.json kids/data/quiz-v4-all900-production-packets.json kids/data/quiz-v4-all900-production-summary.json
           if ! git diff --cached --quiet; then
             git commit -m 'review(kids quiz): complete 900 V4 age-banded segmented narration plans, zero credits'
             git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014
@@ -79,4 +85,7 @@ jobs:
           name: tawhid-kids-v4-900-review-plan
           if-no-files-found: warn
           retention-days: 30
-          path: kids/data/quiz-v4-all900-segmented-review.json
+          path: |
+            kids/data/quiz-v4-all900-segmented-review.json
+            kids/data/quiz-v4-all900-production-packets.json
+            kids/data/quiz-v4-all900-production-summary.json
