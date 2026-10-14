@@ -79,7 +79,7 @@ const drafts={
       "goal": "Ich beschreibe anhand von Qurʾān 96:1 und Ṣaḥīḥ al-Buḫārī Nr. 3 den Beginn der Offenbarung.",
       "lines": [
         "Assalāmu ʿalaikum! Eine verantwortliche Sīrah-Stunde unterscheidet die Offenbarung selbst von authentischen historischen Berichten über ihren Anlass.",
-        "Qurʾān 96:1 lautet: اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ. Die authentische Überlieferung von ʿĀʾishah in Ṣaḥīḥ al-Buḫārī Nr. 3 berichtet ergänzend von Ḥirāʾ in Makkah, dem Beginn der Offenbarung und Ḫadīǧahs Unterstützung.",
+        "Qurʾān 96:1 beginnt sinngemäß mit dem Auftrag: Lies im Namen deines Herrn, der erschaffen hat. Die authentische Überlieferung von ʿĀʾishah in Ṣaḥīḥ al-Buḫārī Nr. 3 berichtet ergänzend von Ḥirāʾ in Makkah, dem Beginn der Offenbarung und Ḫadīǧahs Unterstützung.",
         "Der Hadith schildert die Situation ausführlicher und erwähnt auch, dass der Prophet ﷺ nach dem Erlebnis Trost suchte. Wir wählen für Kinder eine sichere, sachliche Zusammenfassung und dramatisieren keine körperlichen Details.",
         "Vergleiche den arabischen Vers mit den Hadith-Informationen. Schreibe jeweils die genaue Quelle an die Aussage und erkläre, weshalb eine moderne ausgedachte Dialogszene keine authentische Überlieferung wäre."
       ],
