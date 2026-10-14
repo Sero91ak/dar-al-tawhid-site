@@ -33,8 +33,8 @@ export default {
    const dest=new URL("/kids/test-install.html",url);
    return Response.redirect(dest.toString(),302);
   }
-  if(path==="/kids"||path==="/kids/"||path==="/kids/start"){
-   return Response.redirect(new URL("/kids/start.html",url).toString(),302);
+  if(path==="/kids"||path==="/kids/"){
+   return Response.redirect(new URL("/kids/start",url).toString(),302);
   }
   if(path==="/kids/manifest.webmanifest"){
    return reply(JSON.stringify(manifest),200,"application/manifest+json; charset=utf-8",method);
@@ -42,7 +42,22 @@ export default {
   if(!path.startsWith("/kids/"))return reply("Nur KIDS-TEST-Dateien",404,"text/plain; charset=utf-8",method);
   if(/^\/kids\/(?:test-android|creator-test|tools)(?:\/|$)/i.test(path)
     ||/^\/kids\/api\//i.test(path))return reply("KIDS TEST: Funktion nicht freigegeben",404,"text/plain; charset=utf-8",method);
-  const asset=await env.ASSETS.fetch(request);
+  // Cloudflare's pretty-URL canonicalization redirects /kids/start.html to
+  // /kids/start. Never redirect the latter back to .html: that causes loops.
+  // Resolve the canonical asset inside this Worker, mirroring the visitor's
+  // guarded asset resolution, while retaining this staging-only hostname.
+  let asset=null;
+  const pretty=path.match(/^\\/kids\\/(start|index|shell)(?:\\.html)?\\/?$/);
+  if(pretty){
+   for(const candidate of ["/kids/"+pretty[1],"/kids/"+pretty[1]+".html"]){
+    const dest=new URL(request.url);dest.pathname=candidate;
+    const result=await env.ASSETS.fetch(new Request(dest.toString(),request));
+    if(result&&result.status===200){asset=result;break;}
+   }
+   if(!asset)return reply("Kids Test Startseite nicht erreichbar",503,"text/plain; charset=utf-8",method);
+  } else {
+   asset=await env.ASSETS.fetch(request);
+  }
   const headers=new Headers(asset.headers);
   headers.set("X-Kids-Environment","test");
   headers.set("X-Robots-Tag",ROBOTS);
