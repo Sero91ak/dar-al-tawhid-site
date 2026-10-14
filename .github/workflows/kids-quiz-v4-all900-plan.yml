@@ -61,11 +61,29 @@ jobs:
           python3 -m py_compile kids/tools/split_quiz_v4_all900_packets.py
           python3 kids/tools/split_quiz_v4_all900_packets.py
 
+      - name: Ensure FFmpeg for private non-speech joining QA
+        shell: bash
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            timeout 80s sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=12 install -y ffmpeg || true
+          fi
+          if command -v ffmpeg >/dev/null 2>&1 && command -v ffprobe >/dev/null 2>&1; then
+            echo 'KIDS_FFMPEG_QA_AVAILABLE=1' >> "$GITHUB_ENV"
+            echo "FFmpeg and ffprobe ready for offline audio QA."
+          else
+            echo 'KIDS_FFMPEG_QA_AVAILABLE=0' >> "$GITHUB_ENV"
+            echo "::warning::FFmpeg not available on this CI image; skip signal-only QA, keep original-audio release gate closed."
+          fi
+
       - name: Verify zero-TTS MP3 assembly contract for all 900 age-balanced questions
         run: |
           python3 -m py_compile kids/tools/quiz_v4_all900_audio_assembler.py kids/tools/quiz_v4_all900_release_gate.py
           python3 kids/tools/quiz_v4_all900_audio_assembler.py --audit
-          python3 kids/tools/quiz_v4_all900_audio_assembler.py --self-test
+          if [ "$KIDS_FFMPEG_QA_AVAILABLE" = "1" ]; then
+            python3 kids/tools/quiz_v4_all900_audio_assembler.py --self-test
+          else
+            echo "::warning::Dynamic FFmpeg self-test NOT completed; no approval may be inferred."
+          fi
           python3 kids/tools/quiz_v4_all900_release_gate.py
 
       - name: Save plans without losing concurrent test-branch changes
