@@ -1,3 +1,12 @@
+## 14.10.2026 · Unterricht 147–150 fachlich und pädagogisch weitergeführt
+
+- **Vier weitere Lektionen / zwölf eigenständige Altersfassungen (4–5 / 6–8 / 9–10 Jahre)** redigiert. Das Modul `kids/akademie/curriculum-editorial-147-150-v1.js` liegt auf **PR #1113** und ist nach 143–146, vor dem Term-Coach in `kids/akademie/index.html` eingebunden. Die vorhandenen Lektions-IDs, Quellen, Quizfragen und Lernfortschrittsfelder bleiben unverändert.
+- Themen: **147** ar-Raḥmān / ar-Raḥīm (Qurʾān 1:1), **148** Īmān an den Jüngsten Tag (2:177, angstfreie Vermittlung), **149** gemeinsame gute Aufgaben (5:2, keine erfundene Riyāʾ-Textstelle), **150** Streit schlichten (49:10, keine erzwungene Versöhnung bei Gewalt oder Bedrohung).
+- **Quellenakte:** `kids-akademie/research/EDITORIAL_REVIEW_147_150_20261014.md` mit den vorhandenen Islamweb-/Ibn-Kaṯīr-Belegen und ausdrücklich gesondertem pädagogischem Eigenanteil. Vollständige aktuelle Primärseitenprüfung und menschliche wissenschaftliche Freigabe nicht abgeschlossen.
+- **76 neue unvertonte, deutsche Sprechkontexte** gespeichert in `kids/data/academy-voice-editorial-147-150-delta-v1.json`; Konsistenzabgleich des Delta-Textes gegen das JS-Modul ergab **0 Abweichungen**. Auch der vorangehende Block 143–146: **0 Abweichungen** bei 76 Kontexten. Vor einer zukünftigen Audioerzeugung alle Deltas erst in den kanonischen Sprechplan integrieren. **0 generierte Audios / 0 Credits**.
+- **Regressionstest hinzugefügt:** `kids/tools/test-academy-editorial-147-150-v1.cjs`; für 143–146 zusätzlich `test-academy-editorial-143-146-v1.cjs` ergänzt und den Stundentitel der Testdaten berichtigt. Der vollständige Node-/Browser-Lauf ist **noch offen**.
+- **Fortschritt der fortlaufenden Redaktion jetzt bis 150/208; als Nächstes 151 ff.** Alle 624 Altersfassungen bleiben wissenschaftlich unfreigegeben. Kein Merge, kein Live-Deploy, keine Audioerzeugung.
+
 ## 14.10.2026 · Fortschritt bis Lektion 146 (Arbeitszweig PR #1113)
 
 - **Neu seit dem vorherigen 141er-Stand:** Lektion **142** (hanbalitische Fiqh-Stunde über die fünf Gebetsnamen) mit **3 eigenständigen Altersfassungen**, `curriculum-editorial-142-v1.js`, **19** ungegenerierten Voice-Textkontexten und `research/EDITORIAL_REVIEW_142_20261014.md`. Qurʾān **11:114** enthält keine wörtliche Fünferliste; die Namen werden durch **Ṣaḥīḥ Muslim 612** und **Ibn Qudāmah, al-Mughnī Bd. 1 S. 224–227**, erläutert. `fiqhHumanReviewNeeded=true` und `scientificApproval=false` bleiben erhalten.
