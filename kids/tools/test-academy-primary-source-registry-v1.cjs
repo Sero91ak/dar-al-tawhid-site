@@ -14,6 +14,10 @@ for(const src of file.sources){
  ids.add(src.sourceId);
 }
 const required={
+"akhlaq-amanah-mein-versprechen":{"SRC-CORE9-IBNALJAWZI-1676":["islamweb.net","ID=1676"],"SRC-CORE9-BUKHARI-33":["dorar.net","5952"]},
+"adab-worte-erst-nachdenken":{"SRC-CORE6-TABARI-3021":["islamweb.net","50/3021"],"SRC-CORE6-BUKHARI-6018":["dorar.net","4361"]},
+"fiqh-wudu-kopf-und-fu-e":{"SRC-FIQH27-MUGHNI-141":["islamweb.net","15/141"],"SRC-FIQH27-MUGHNI-149":["islamweb.net","15/149"]},
+"aqidah-iman-die-gesandten":{"SRC-CORE8-MUSLIM-8":["dorar.net","63778"]},
 "akhlaq-sabr-geduldig-warten":{"SRC-CORE5-IBNKATHIR-184":["islamweb.net","49/184"]},
 "adab-salam-salam-erwidern":{"SRC-CORE2-QURTUBI-1095":["islamweb.net","48/1095"]},
 "fiqh-taharah-saubere-kleidung":{"SRC-FIQH15-MUGHNI-783":["gcp.islamweb.net","15/783"]},
@@ -89,6 +93,32 @@ const required={
  "SRC-FIQH206-MUGHNI-729":["islamweb.net","15/729"]
 }};
 assert.equal(file.sourceCount,file.sources.length,"sourceCount metadata must match actual source IDs");
+
+// Early-curriculum source-bindings 25–28: quellentreue Hanbali Wuḍūʾ distinction.
+const headSource=file.sources.find(x=>x.sourceId==="SRC-FIQH27-MUGHNI-141");
+const feetSource=file.sources.find(x=>x.sourceId==="SRC-FIQH27-MUGHNI-149");
+assert.ok(headSource&&feetSource,"Missing classical Fiqh source for Wuḍūʾ lesson 27");
+assert.equal(headSource.page,"87");
+assert.equal(feetSource.page,"90–92");
+assert.equal(headSource.number,"166");
+assert.equal(feetSource.number,"175");
+assert.equal(headSource.verificationStatus,"primary-page-direct-read-2026-10-14");
+assert.equal(feetSource.verificationStatus,"primary-page-direct-read-2026-10-14");
+assert.match(headSource.arabic,/مَسْحُ الرَّأْسِ/);
+assert.match(feetSource.arabic,/غَسْلُ الرِّجْلَيْنِ/);
+assert.match(headSource.authenticityNote,/unterschiedliche/);
+assert.match(feetSource.safeApplication,/Kind/);
+for(const x of [headSource,feetSource]){
+ assert.equal(x.work,"al-Mughnī");
+ assert.ok(x.lessonIds.includes("fiqh-wudu-kopf-und-fu-e"));
+ assert.ok(x.authenticityNote&&x.safeApplication&&x.checkedBy);
+ assert.notEqual(x.verificationStatus,"scientifically-approved");
+}
+const coreV2=fs.readFileSync(path.join(root,"kids/akademie/curriculum-v2.js"),"utf8");
+for(const id of ["akhlaq-amanah-mein-versprechen","adab-worte-erst-nachdenken","fiqh-wudu-kopf-und-fu-e","aqidah-iman-die-gesandten"]){
+ assert.ok(coreV2.includes('"' + id + '"'),"Missing original lesson ID, should not create a duplicate: "+id);
+}
+
 const checkedGarmentSource=file.sources.find(s=>s.sourceId==="SRC-FIQH15-MUGHNI-783");
 assert.equal(checkedGarmentSource?.volume,"1");
 assert.equal(checkedGarmentSource?.page,"401");
