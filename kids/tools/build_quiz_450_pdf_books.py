@@ -295,6 +295,13 @@ def inspect(output):
     labels=re.findall(r"\bFRAGE\s+[0-9]{3}\b",texts)
     if len(labels)!=450:
         raise RuntimeError(f"PDF {output.name} contains {len(labels)} visible question cards, expected 450")
+    for page_num,page in enumerate(pdf,1):
+        page_text=page.get_text()
+        question_count=len(re.findall(r"\bFRAGE\s+[0-9]{3}\b",page_text))
+        sources_count=page_text.count("Quelle:")
+        explanations_count=page_text.count("Erklärung:")
+        if question_count!=sources_count or question_count!=explanations_count:
+            raise RuntimeError(f"Page {page_num} has split question cards: {question_count} questions, {explanations_count} explanations, {sources_count} sources")
     if len(pdf)<10 or output.stat().st_size<100000:
         raise RuntimeError("Suspiciously small PDF")
     for idx in [0,1,len(pdf)//2,len(pdf)-1]:
