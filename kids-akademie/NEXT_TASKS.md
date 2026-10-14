@@ -1,3 +1,17 @@
+## 14.10.2026 · Fortsetzung bis Slot 182/208 · geschützter Draft-PR #1142
+
+**Lektionsblock 179–182:** Wertschätzender Umgang mit sich selbst, Qurʾān-Rezitation im Gebet, Einzigkeit Allahs gegenüber Geschöpfen und gute Worte. Vier bestehende IDs; je drei Altersfassungen mit Lernziel, vier individuellen Unterrichtsabschnitten, Situation, Praxis, Quellenabgrenzung und Zusammenfassung. Unter `kids/akademie/curriculum-editorial-179-182-v1.js`; im Index korrekt einmalig nach 175–178 geladen.
+
+**Wissenschaftlicher Schwerpunkt Fiqh 180:** Qurʾān 15:87 und Tafsīr Ibn Kaṯīr (Islamweb 49/933) getrennt von dem authentischen Fātiḥah-Hadith des ʿUbādah ibn aṣ-Ṣāmit (Ṣaḥīḥ al-Buḫārī, Islamweb 0/724, lokale Zählung 723) und dem hanbalitischen **Ibn Qudāmah, al-Mughnī, Bd. 1 S. 284, Islamweb 15/553**. Der Erörterung zur Fātiḥah als Rukn liegen echte klassische Nachweise zugrunde; Maʾmūm- und Ausnahmefälle bleiben ungeprüft, `fiqhHumanReviewNeeded=true` und `scientificApproval=false`.
+
+**Qurʾān-Anzeige Slot 181:** Das Altregister führte die gesamte Sūrah al-Iḫlāṣ unter **112:1**. Die Kinderanzeige gibt nun den korrekten vollständigen Bereich **112:1–4** wieder. Altregister als Auditspur erhalten.
+
+**Texte:** `kids/data/academy-voice-editorial-179-182-delta-v1.json`: **76 ungegenerierte deutsche Textkontexte**, **0 Credits**. Technische Hinweise in den Kindertexten von Slot 180 vor der Synchronisierung entfernt. Quellenakte `kids-akademie/research/EDITORIAL_REVIEW_179_182_20261014.md`, isolierter Node-Regressionstest `kids/tools/test-academy-editorial-179-182-v1.cjs` gespeichert.
+
+**Prüfergebnis:** **131/131** direkte strukturierte Daten-, Voice-, Kindersprache-, Quellenfeld- und Script-Reihenfolge-Abgleiche bestanden. Kein echter vollständiger Node-/Browser-/CI-Lauf bestätigt.
+
+**Gesamt:** Individuell redaktionell bis **182/208**; **26 Lektionen 183–208** zur Ausarbeitung offen. **624 Altersfassungen benötigen weiterhin wissenschaftliche Vollkontrolle (0/624 freigegeben)**. Audio-Textdeltas nicht mit kanonischem Plan konsolidiert. **Kein Merge auf main, kein Live-Deploy, keine neue Audioerzeugung.** Nächster Block **183–186**, Fiqh **186** gesondert klassisch prüfen.
+
 ## 14.10.2026 · Unterricht bis Lektion 182/208, abgesicherte Fortsetzung
 
 - **179–182:** Wertschätzend mit sich selbst umgehen; die Fātiḥah-Rezitation im Gebet; keine göttliche Macht für Geschöpfe behaupten; Glaube und gute Worte. `kids/akademie/curriculum-editorial-179-182-v1.js` enthält die bestehenden vier Lektions-IDs mit **12 eigenständigen Altersfassungen** in je vier Lehrabschnitten, mit Lernziel, Situation, Übung und Quellenabgrenzung.
