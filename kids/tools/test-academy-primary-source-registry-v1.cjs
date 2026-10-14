@@ -43,10 +43,15 @@ const required={
  "SRC-FIQH207-MUGHNI-1713":["islamweb.net","15/1713"]
 },
 "fiqh-zakah-und-hajj":{
- "SRC-FIQH208-MUGHNI-1386":["islamweb.net","15/1386"]
+ "SRC-FIQH208-MUGHNI-1386":["islamweb.net","15/1386"],
+ "SRC-FIQH208-MUGHNI-1754":["islamweb.net","15/1754"],
+ "SRC-FIQH208-MUGHNI-1800":["islamweb.net","15/1800"]
+},
+"fiqh-fehler-beim-ueben":{
+ "SRC-FIQH206-MUGHNI-729":["islamweb.net","15/729"]
 }};
 assert.equal(file.sourceCount,file.sources.length,"sourceCount metadata must match actual source IDs");
-const indexedOnly=["SRC-FIQH201-MUGHNI-599","SRC-FIQH201-MUGHNI-602","SRC-FIQH205-MUGHNI-621","SRC-FIQH207-MUGHNI-1713","SRC-FIQH208-MUGHNI-1386"];
+const indexedOnly=["SRC-FIQH201-MUGHNI-599","SRC-FIQH201-MUGHNI-602","SRC-FIQH205-MUGHNI-621","SRC-FIQH207-MUGHNI-1713","SRC-FIQH208-MUGHNI-1386","SRC-FIQH206-MUGHNI-729","SRC-FIQH208-MUGHNI-1754","SRC-FIQH208-MUGHNI-1800"];
 for(const id of indexedOnly){
  const e=file.sources.find(x=>x.sourceId===id);
  assert.ok(e,"Indexed primary-source gap missing: "+id);
