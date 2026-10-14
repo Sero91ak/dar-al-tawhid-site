@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 168,
+  "sourceCount": 170,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -1283,7 +1283,8 @@
       "checkedBy": "page fetched from islamweb.net library content 49",
       "lessonIds": [
         "family-kranken-und-aelteren-helfen",
-        "akhlaq-fuersorge-fuer-kranke"
+        "akhlaq-fuersorge-fuer-kranke",
+        "adab-nachbarn-gutes"
       ],
       "binding": "verse span for kids academy draft",
       "topic": "Kranken und älteren Menschen helfen"
@@ -2020,7 +2021,8 @@
       "checkedBy": "page fetched from islamweb.net library content 49",
       "lessonIds": [
         "tawhid-bedeutung-ibadah",
-        "aqidah-tawhid-nur-allah-anbeten"
+        "aqidah-tawhid-nur-allah-anbeten",
+        "aqidah-tawhid-recht-allahs"
       ],
       "binding": "verse span for kids academy draft",
       "topic": "Die Bedeutung von ʿIbādah"
@@ -2150,7 +2152,8 @@
       "checkedOn": "2026-10-13",
       "checkedBy": "page fetched from islamweb.net library content 49",
       "lessonIds": [
-        "tawhid-im-alltag"
+        "tawhid-im-alltag",
+        "aqidah-dua-allah-bitten"
       ],
       "binding": "verse span for kids academy draft",
       "topic": "Tawḥīd im Alltag"
@@ -3539,7 +3542,8 @@
       "checkedBy": "Dorar original sharh/11568 direkt gelesen und authentisch von al-Buḫārī 2856 ausgewiesen",
       "lessonIds": [
         "aqidah-tawhid",
-        "aqidah-tawhid-nur-allah-anbeten"
+        "aqidah-tawhid-nur-allah-anbeten",
+        "aqidah-tawhid-recht-allahs"
       ],
       "binding": "authentic companion-narrated Sunnah for existing early lesson 4; final scholarly approval pending",
       "topic": "Tawḥīd – allein Allah anbeten"
@@ -3813,7 +3817,8 @@
       "lessonIds": [
         "aqidah-iman",
         "aqidah-iman-die-engel",
-        "aqidah-iman-die-gesandten"
+        "aqidah-iman-die-gesandten",
+        "aqidah-iman-sechs-grundlagen"
       ],
       "binding": "authentic Sunni Hadith Jibril for six pillars, separate from Quran 2:3",
       "topic": "Sechs Glaubenssäulen"
@@ -4266,6 +4271,58 @@
       ],
       "binding": "primary tafsir for Quran 6:38, source of verse separate from authenticated hadith",
       "topic": "Tiergemeinschaften als Zeichen Allahs"
+    },
+    {
+      "sourceId": "SRC-CORE37-BUKHARI-6014",
+      "key": "neighbors-jibril-advice",
+      "author": "al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "ʿĀʾišah, Umm al-Muʾminīn",
+      "arabic": "مَا زَالَ يُوصِينِي جِبْرِيلُ بِالْجَارِ حَتَّى ظَنَنْتُ أَنَّهُ سَيُوَرِّثُهُ",
+      "germanTranslation": null,
+      "locus": "Bericht über die wiederholte Empfehlung Ǧibrīls ﷺ? an den Propheten ﷺ betreffend die Nachbarn",
+      "volume": null,
+      "page": null,
+      "chapter": "Gute Behandlung der Nachbarn",
+      "number": "6014; auch Muslim 2624",
+      "edition": "Dorar 13223, digitale Bukhari-Wiedergabe",
+      "directLink": "https://dorar.net/hadith/sharh/13223#:~:text=%D9%85%D8%A7%20%D8%B2%D8%A7%D9%84%D9%8E%20%D9%8A%D9%8F%D9%88%D8%B5%D9%90%D9%8A%D9%86%D9%8A%20%D8%AC%D9%90%D8%A8%D8%B1%D9%8A%D9%84%D9%8F",
+      "authenticityNote": "Am 14.10.2026 auf Dorar 13223 unmittelbar im authentischen Originalbericht gelesen: Erzählerin ʿĀʾišah, al-Buḫārī 6014, Muslim 2624. Keine selbständig eingesehene Buchdruckausgabe; der Bericht bedeutet nicht, dass der Nachbar tatsächlich Erbe wird.",
+      "safeApplication": "Kinder dürfen höflich und rücksichtsvoll sein, aber bei unbekannten Nachbarn niemals ohne Erlaubnis fremde Wohnungen betreten, Türen öffnen oder allein zu Fremden gehen. Eine persönliche Pflicht zu gefährlichen Besuchen folgt nicht.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar 13223, al-Buḫārī 6014 authentischer arabischer Bericht",
+      "lessonIds": [
+        "adab-nachbarn-gutes"
+      ],
+      "binding": "authenticated hadith for neighbor rights separate from Quran 4:36",
+      "topic": "Gute Nachbarschaft"
+    },
+    {
+      "sourceId": "SRC-CORE38-BUKHARI-6340",
+      "key": "dua-patience-with-response",
+      "author": "al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "Abū Hurayrah",
+      "arabic": "يُسْتَجَابُ لِأَحَدِكُمْ مَا لَمْ يَعْجَلْ يَقُولُ دَعَوْتُ فَلَمْ يُسْتَجَبْ لِي",
+      "germanTranslation": null,
+      "locus": "Bericht über Geduld im Duʿāʾ und das Vermeiden vorschneller Unzufriedenheit",
+      "volume": null,
+      "page": null,
+      "chapter": "Adab ad-Duʿāʾ",
+      "number": "6340; auch Muslim 2735",
+      "edition": "Dorar 10635; authentische digitale Bukhari-Wiedergabe",
+      "directLink": "https://dorar.net/hadith/sharh/10635#:~:text=%D9%8A%D9%8F%D8%B3%D9%92%D8%AA%D9%8E%D8%AC%D9%8E%D8%A7%D8%A8%D9%8F%20%D9%84%D9%90%D8%A3%D9%8E%D8%AD%D9%8E%D8%AF%D9%90%D9%83%D9%8F%D9%85%D9%92",
+      "authenticityNote": "Am 14.10.2026 Dorar 10635 unmittelbar gelesen: al-Buḫārī 6340, Muslim 2735, authentischer Bericht von Abū Hurayrah. Arabischer Satz als Auszug, digitale Primärtextwiedergabe; gedruckte Edition nicht eigenständig geprüft.",
+      "safeApplication": "Ein Kind darf eigene Bitten und Gefühle formulieren und Allah um Hilfe bitten; der Bericht verspricht nicht die sofortige Erfüllung genau jedes Wunsches. Geduld niemals als Grund missbrauchen, bei Gefahr nicht um menschliche praktische Hilfe zu bitten.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar 10635 al-Buḫārī 6340 direkt geöffnet",
+      "lessonIds": [
+        "aqidah-dua-allah-bitten"
+      ],
+      "binding": "authenticated Sunnah about supplication separate from Quran 1:5",
+      "topic": "Geduld beim Duʿāʾ"
     }
   ]
 }
