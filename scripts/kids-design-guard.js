@@ -76,8 +76,15 @@ function runKidsDesignGuard() {
   if (!/KIDS_NO_PRECLICK_DURATION/.test(doc)) {
     failed += fail(`${KIDS_DOC}: Pre-Click-Dauer/Alter-Regel fehlt`);
   }
-  if (!html.includes("/kids/kids-touch-rail.css?v=16")) {
-    failed += fail(`${KIDS_HTML}: globales Karten-Interaktionssystem v16 fehlt`);
+  // Read the currently released CSS/JS URLs rather than freezing the v16 query.
+  // Still block missing assets, stale downgrades, or incomplete offline precache.
+  const touchCssRef = html.match(/\/kids\/kids-touch-rail\.css\?v=(\d+)/);
+  const touchJsRef = html.match(/\/kids\/kids-card-interaction\.js\?v=(\d+)/);
+  const kidsSw = fs.readFileSync(path.join(ROOT, "kids/sw.js"), "utf8");
+  if (!touchCssRef || Number(touchCssRef[1]) < 16 ||
+      !touchJsRef || Number(touchJsRef[1]) < 6 ||
+      !kidsSw.includes(touchCssRef[0]) || !kidsSw.includes(touchJsRef[0])) {
+    failed += fail(`${KIDS_HTML}: aktuelle Karten-Interaktionsdateien fehlen oder sind nicht im Offline-Cache`);
   }
 
   // Approved start hero reference (V1199): keep the exact static scene and
@@ -247,7 +254,7 @@ function runKidsDesignGuard() {
       }
     }
     if(Number(swVersion)>=1251){
-      if(!dockJs.includes("KIDS_NO_EXTERNAL_SOURCE_PROOF_ACTIONS_V1251") ||
+      if(!dockJs.includes("KIDS_NO_EXTERNAL_SOURCE_PROOF_ACTIONS_V1414") ||
          !dockJs.includes("removeExternalSourceProofActions();")) {
         failed+=fail("Kids externe Nachweis-/Quelle-Öffnen-Aktionen sind nicht global entfernt");
       }
@@ -280,9 +287,47 @@ function runKidsDesignGuard() {
     }
   }
 
+  // KIDS_GLOBAL_NO_PUBLIC_SOURCE_LINKS_V1414: applies to ALL present and future Kids modules.
+  // Never delete evidence metadata; only public source-link construction is banned.
+  const scanKidsDir=(directory)=>{
+    for(const entry of fs.readdirSync(directory,{withFileTypes:true})){
+      if(entry.name.startsWith('.'))continue;
+      const full=path.join(directory,entry.name);
+      const rel=path.relative(ROOT,full).replace(/\\/g,'/');
+      if(entry.isDirectory()){
+        if(/^(?:kids\/(?:assets|tools|creator-test|test-console|data|recovery|icons))(?=\/|$)/.test(rel))continue;
+        scanKidsDir(full);continue;
+      }
+      if(!/\.(?:js|html)$/.test(entry.name))continue;
+      if(/kids\/akademie\/curriculum-v\d+\.js$/.test(rel))continue;
+      const text=fs.readFileSync(full,'utf8');
+      if(/(?:Originalquelle|Originalnachweis|Nachweis|Beleg|Quelle)\s+öffnen/i.test(text))
+        failed+=fail(rel+': Quellenlink-Aktion ist in Kids verboten');
+      if(/<a[^>]*class=["'][^"']*(?:source-link|citation-link|proof-link|nachweis-link|quellen-link)[^"']*["']/i.test(text))
+        failed+=fail(rel+': Quellenlink wird als Anchor erzeugt');
+    }
+  };
+  scanKidsDir(path.join(ROOT,'kids'));
+  for(const file of ['kids/salaf-library-v1.js','kids/mubashshirun-stories.js','kids/sahabiyyat-stories.js']){
+    if(!fs.readFileSync(path.join(ROOT,file),'utf8').includes('KIDS_SOURCE_TEXT_ONLY_V1414'))
+      failed+=fail(file+': Quellen müssen als reiner Text gerendert werden');
+  }
+  const sourceLinkRuntime=fs.readFileSync(path.join(ROOT,'kids/global-detail-dock-v1247.js'),'utf8');
+  if(!sourceLinkRuntime.includes('el.closest(containers)') ||
+     !html.includes('/kids/global-detail-dock-v1247.js?v=1414') ||
+     !doc.includes('KIDS_GLOBAL_NO_PUBLIC_SOURCE_LINKS_V1414'))
+    failed+=fail('KIDS V1414: globale Sperre nicht vollständig aktiviert');
+
   // Keep the three aligned Duʿāʾ learning levels and 120 verified mappings
   // consistent on all Kids entry routes before publishing.
   failed += require("./kids-dua-trilingual-guard.js").runKidsDuaTrilingualGuard();
+  // Salaf V1380: reviewed-only static images + original detail appbar +
+  // edge-to-edge geometry, without changing the global scope lock.
+  try {
+    require("../kids/check-salaf-visual-contract-v1380.cjs");
+  } catch (e) {
+    failed += fail("Salaf Bild-/Navigationsvertrag V1380: " + e.message);
+  }
   if (!failed) ok("Kids Design (Edge-to-Edge, V1199-Referenzhero, Adobe-Cinzel-Wortmarke, Glass-Nav, Whole-Card-Tap, keine Pre-Click-Dauer, keine Emojis, PNG-Icons)");
   return failed;
 }

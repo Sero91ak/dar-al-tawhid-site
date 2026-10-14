@@ -1,3 +1,201 @@
+## KIDS_GLOBAL_NO_PUBLIC_SOURCE_LINKS_V1414 – verbindlich für alle Kinderbereiche
+
+- **Keine anklickbaren Originalquellen-/Nachweislinks in TAWḤĪD KIDS**, auch nicht in dynamischen Geschichten, Leseransichten, Quiz, Qurʾān, Duʿāʾ und Akademie.
+- Präzise Fundstellen dürfen als **reiner, nicht anklickbarer Text** angezeigt werden. Original-URLs, Werk, Band, Seite, Authentizitätsprüfung bleiben intern gespeichert und sind weiterhin redaktionell zu prüfen.
+- Quellen-Buttons oder Linkkarten („Originalquelle öffnen“, „Nachweis öffnen“ usw.) sind in sämtlichen neuen und bestehenden Kinderansichten ausgeschlossen.
+- Schutz: kids/global-detail-dock-v1247.js entfernt solche Links auch nach dynamischem Rendering; scripts/kids-design-guard.js verbietet deren Einführung beim Release.
+- Erwachsenen-Website, Quellenbibliothek und die Links in Erwachsenen-Apps sind von dieser Regel nicht betroffen.
+
+## Verbindlicher Geschichtenmodus — `KIDS_STORY_MODES_V1` (14.10.2026)
+
+Für **alle bestehenden und künftig hinzukommenden Erzählbereiche** der
+TAWḤĪD KIDS App: Propheten, Ṣaḥābah, Ṣaḥābiyyāt, **Schätze der Salaf**
+und jede neue Bibliothek / historische Geschichte.
+
+- Die Detailansicht hat **dieselben drei auswählbaren Möglichkeiten**:
+  **Hören & Mitlesen · Hören · Lesen**, in dieser Reihenfolge.
+  Ein gemeinsamer Modus-Speicherschlüssel (`kids.contentMode.v19`)
+  ermöglicht konsistente Auswahl beim Wechsel zwischen den Geschichten.
+- Alle drei Möglichkeiten bedienen `DARKidsFollowReader`, nicht
+  mehrere konkurrierende Audio-Player. `openReadAlong()` liest mit
+  Textverfolgung, `openListening()` hört bei sichtbarem Bild,
+  `openReading()` zeigt den vollständigen Text ohne Audio-Steuerung.
+  Beim Hören aus einer tief gescrollten Seite zuerst zum Hero-Bild
+  zurückkehren; die obere Navigation bleibt fest und undurchsichtig.
+- Eine Geschichte besitzt **einen vollständigen Master-Text und genau eine
+  zugehörige Masteraufnahme** für Jungen/Mädchen und 4–5, 6–8, 9–10.
+  Kein Kürzen, Austauschen oder Nachsprechen per unbekanntem TTS.
+  Altersprofile ändern nur Lernhilfen und Gestaltung.
+- **Audio noch nicht vorhanden:** Lesen muss sofort vollständig funktionieren;
+  die zwei Hörmodi bleiben sichtbar, aber deaktiviert. Keine leeren
+  Player, stummen Platzhalter oder angeblich vorhandenen Stimmen.
+  Quellen bleiben separat lesbar, nicht als Teil der Audioerzählung.
+- Touch-Flächen mindestens 56px hoch; lange Beschriftungen umbrechen;
+  Farben getrennt nach Jungen-/Mädchenprofil; oben eine einzige feste
+  Detailleiste mit korrekter iOS-Statusleiste; Bilder ohne Menschen/Tiere.
+  Bedienelemente dürfen bei langem Drücken keine Textauswahl anbieten.
+- **Beim Hinzufügen jeder weiteren Bibliothek** zuerst diesen Vertrag
+  anwenden, dann den strukturellen Design-Guard erweitern und auf
+  iPhone-PWA, Android, Tablet und Desktop testen. Tests alleine
+  ersetzen nicht die visuelle Abnahme.
+- Änderungen an diesen Modi zuerst auf dem Testzweig prüfen;
+  kein unkontrollierter Live-Push.
+
+---
+
+## Globale, undurchsichtige Detailkopfzeile inklusive iOS-Statusleiste — `KIDS_GLOBAL_STATUS_SAFE_AREA_V1410`
+
+Für **alle** gegenwärtigen und künftigen KIDS-Unterseiten verpflichtend. Die
+obere Leiste soll sich wie die vorhandene Detailnavigation der Ṣaḥābah- und
+Prophetengeschichten anfühlen: ein zusammenhängender blickdichter Kopf,
+mit Original-Zurückpfeil links, Seitentitel/Untertitel daneben und dem
+Edge-to-Edge-Hero unmittelbar **unter** dem Kopf. Beim Scrollen ist weder
+Hero-Bild noch Lesetext **über oder hinter dem sichtbaren Kopf** zu sehen.
+
+Der globale, bereits bestehende body-Portal-Mechanismus bleibt erhalten,
+jedoch muss dessen Kopf an `top:0` beginnen, **nicht** an
+`top:var(--safe-top)`. Das mit `env(safe-area-inset-top)` bemessene
+Status-/Dynamic-Island-Feld liegt **innerhalb derselben opaken Header-Fläche**,
+niemals als externes transparentes Zwischenstück. Die reale Gesamthöhe
+(mit Safe-Area) bestimmt der zentrale Controller und setzt sie als
+`.kids-detail-head-spacer` am ursprünglichen Platz, sodass Hero und Text
+darunter starten. Nach Orientation-/Viewport-Änderung Höhe neu messen.
+Keine doppelten Appbars, keine zweite Statusleiste, keine schwebende Kapsel,
+keine transparente Glasschicht oder verschobenes Hintergrundbild.
+
+**Anwendung:** Der zentrale Standard gilt für jede
+`.view.kids-detail-page > .kids-detail-appbar`; bereits korrekt
+funktionierende Fullscreen-Dialoge behalten ihre eigene feste Leiste und
+ihren Original-Zurück-Handler. Jungen-/Mädchen-Farbvariablen werden aus
+der aktiven Seite übernommen. Floating-3D-Hauptnavigation, Gebetszeiten,
+Audio und die gespeicherten Geschichten bleiben unverändert.
+
+**Abnahme:** Auf iPhone-PWA (inkl. Status-/Dynamic-Island-Bereich),
+Android, Fold/Tablet und Desktop visuell am Start einer Kategorie, nach
+schnellem Scrollen, nach Zurück und nach Geräte-Drehung prüfen. Die
+vorhandene Kids-Design-Guard-Regel muss `top:0`, Safe-Area **im** Header,
+blickdichten Farb-Hintergrund, Linksausrichtung und dynamisch gemessenen
+Platzhalter verifizieren. Automatisierte Codeprüfungen ersetzen keine
+tatsächliche Screenshot-/Scrollprüfung.
+
+---
+
+
+## Verbindliche globale feste Kopfzeile — `KIDS_GLOBAL_FIXED_DETAIL_V1400`
+
+Verbindlich für **sämtliche gegenwärtigen und künftig neu angelegten Unterseiten**
+innerhalb der Kinder-App: Propheten, Ṣaḥābah, Ṣaḥābiyyāt, Salaf, Dīn,
+Wissen, Quiz, Duʿāʾ und neue Geschichten/Unterrichtsmodule.
+Der bisherige `position:sticky`-Ansatz innerhalb animierter `.view`-
+und `.shell`-Container darf nicht als zuverlässige iPhone-PWA-
+Kopf-Fixierung betrachtet werden. Er kann mitten auf dem Bildschirm
+stehen bleiben oder mit dem Hero mitscrollen.
+
+**Standard:** Der zentrale Controller `kids/global-detail-dock-v1247.js`
+stellt die ECHTE obere Appbar eines aktiven `.view.kids-detail-page`
+an `document.body` bereit. Die UI verwendet unverändert ihren
+ursprünglichen Zurück-Button mit echten Click-Handlern, Titel und Untertitel.
+Der Controller legt am ursprünglichen Ort lediglich einen
+höhenangepassten, nicht interaktiven Platzhalter an.
+`kids/global-detail-dock-v1247.css` setzt diese Leiste als
+`position:fixed` mit korrekter iOS-Safe-Area und opakem Hintergrund.
+Die Kopfzeile bleibt sichtbar und ihre Position ist **unabhängig von jedem
+Scrollcontainer**, auch bei schnellen Scrollgesten und Kategorienwechsel.
+Beim Zurückgehen oder Tab-Wechsel wird sie ohne Klon in die Originalseite
+zurückgesetzt. Neue Detailseiten brauchen nur den bestehenden
+`.kids-detail-page > .kids-detail-appbar`-Vertrag und keinen eigenen
+Scroll-Handler.
+
+In Vollbild-Detaildialogen bleibt die Kopfzeile als eigenes Geschwister
+**vor** dem Scrollbereich. Beispiele: `#salafDetail` besitzt
+`> .salaf-story-nav` + `> .salaf-detail-scroll`, nicht einen Header
+INNERHALB von `.salaf-detail-scroll`. Andere bestehende Modalbereiche
+mit eigenen funktionierenden Dock-Layouts werden nicht überschrieben.
+
+**Einfache Unterseitenstruktur, dauerhaft verpflichtend:**
+oberer fester Dock (einzige Zurück-Funktion) →
+vollbreiter Hero `background-size:cover` ohne zweite Kapsel oder Abstand →
+lesbarer, zugänglicher Inhalt im Scrollbereich →
+unveränderte untere schwebende 3D-Tab-Leiste.
+Keine Gesichter, keine Menschen-/Tierfiguren oder unfreiwillige
+Bild-Schrift; Thema und Profilfarben beachten.
+Die Seiten müssen auf iOS PWA/WKWebView, Android, Smartphone, Fold,
+Tablet, iPad, Desktop und im Querformat gleich bedienbar sein.
+Niemals zusätzliche Testhinweise oder interne Build-Bezeichnungen
+auf öffentlich sichtbaren Oberflächen einsetzen.
+
+**Schätze der Salaf, weitere bindende Sonderregel:**
+Die acht Themenkacheln auf der Einstiegsseite sind selbst das
+Navigationsverzeichnis. **Keine doppelte „Alle Geschichten“-Gesamtliste**
+unterhalb der Themenkarten anzeigen, auch bei später gefülltem Manifest.
+Freigegebene Geschichten werden unter ihren Kategorien angezeigt;
+die gesonderten Personen-/Offline-Ansichten bleiben erreichbar.
+Der zentrale Navigationsmanager muss den Zustand beim Zurückgehen
+korrekt behandeln.
+
+**Verbindliche Freigabe:** Der bestehende
+`kids/check-salaf-visual-contract-v1380.cjs` innerhalb von
+`scripts/kids-design-guard.js` prüft Portal-JavaScript, direkte
+Appbar-/Hero-Struktur, gemessenen Platzhalter, fixierte CSS-Regeln,
+ursprüngliche Back-Listener, keine globale Doppelliste, eigene
+Story-Scrollfläche, Build-/Service-Worker-Versionen und freigegebene
+Bild-Hashes. Echte iPhone-/Android-/Tablet-Sichtprüfung bleibt
+zusätzlich erforderlich; reine CI-Green-Flags sind keine visuelle Freigabe.
+
+---
+
+## Verbindliche globale Detailseiten-Architektur — `KIDS_GLOBAL_DETAIL_PAGE_ARCHITECTURE_V1390`
+
+**Für ALLE zukünftigen KIDS-Details verpflichtend:** Propheten, Ṣaḥābah,
+Ṣaḥābiyyāt, Salaf, Geschichten, Duʿāʾ, Quiz, neue Unterrichte und spätere Module.
+
+1. Eine einzige obere Navigation mit bestehendem Chevron-Zurück-Button,
+   Seitentitel und dynamischem Untertitel. Kein doppelter Header,
+   kein improvisierter Zurück-Pill, kein separater Kapsel- oder Zwischenstreifen.
+   Den ORIGINALEN Zurück-Handler beibehalten.
+2. Bei Detailseiten innerhalb eines Haupt-Tabs steht `.kids-detail-appbar`
+   **als direktes erstes Kind** der aktiven `.view.kids-detail-page`,
+   niemals in einem dynamisch ersetzten `.pane`, verschachtelten
+   `.salaf-wrap` oder scrollenden Hero. `data-kids-detail-layout` setzen.
+   So greift global `kids/global-detail-dock-v1247.css`: ein festes/sticky
+   Appbar unabhängig von den nachfolgenden Inhalten. Die Safe Area wird
+   **einmal** berücksichtigt.
+3. Ein `.kids-detail-hero` folgt DIREKT unter diesem Kopf ohne Lücke,
+   zusätzliche Umrandung oder zweite Vollbild-Kapsel, `background-size:cover`,
+   sinnvolle Brennweite, echtes Edge-to-Edge über das Inhaltsgutter.
+   Motiv/Bildunterschrift nicht als Bild generieren: Titel bleibt echte
+   zugängliche, mehrzeilige HTML-Schrift. Responsive Höhe begrenzen;
+   nicht auf jedem Smartphone 100vh erzwingen.
+4. Der sichtbare Detailinhalt scrollt im **einen echten Scrollcontainer**
+   (gewöhnlich `.shell`). Header bleibt oben fest, die untere bestehende
+   **frei schwebende 3D-Hauptnavigation** bleibt absolut unverändert.
+   Kein zusätzliches `overflow-y:auto` für Hero/Absatz/Navigation, keine
+   transform/animation auf sticky-Eltern, keine Scroll-Listener als Ersatz
+   für CSS-sticky. Vollständig bedienbar im Hoch-/Querformat auf iPhone,
+   Android, Fold/Tablet/iPad und Desktop.
+5. Profilfarbe getrennt: Jungen Petrol/Nachtblau/Gold;
+   Mädchen Pflaume/Rosé/Champagner. Keine pauschale Farbpalette.
+   Bilder ohne Menschen, erkennbare Gesichter, Silhouetten oder Tiere;
+   keine ungewollte Schrift oder erfundene religiöse Darstellung.
+6. Vor Merge/Deploy: reale Layout-/Scrollprüfung und bestehende
+   `scripts/kids-design-guard.js`-Abnahme. V1390-CI prüft direktes
+   Header-Markup, Appbar/Stage-Semantik, globale CSS-Kontraktregeln,
+   Original-Bild-Hashes, zusammenpassende Service-Worker-/Build-IDs und
+   unveränderte drei HTML-Einstiege. Bildinhalte bleiben zusätzlich
+   **manuell** zu prüfen, die Tests sind keine Gesichtserkennung.
+7. Bei neuen Modulen direkt dasselbe globale Contract-Muster nutzen und
+   in den bestehenden Design-Guard aufnehmen. Keine projektspezifischen
+   Doppel-Header/CSS-Sonderarchitekturen und niemals die globale
+   `change-scope-lock.json` als Abkürzung lockern.
+
+**Korrekturfall Schätze der Salaf:** V1380 platzierte das Header-Element
+im per `innerHTML` erneuerten `#salafHome`. Dadurch scrollte der Kopf mit
+und das Hero wirkte vom Kopf abgesetzt. Seit V1390 ist das einzige
+`#salafTopicAppbar` ein dauerhaftes direktes Kind von `#view-salaf`,
+dessen Sichtbarkeit/Text beim Wechsel nur aktualisiert werden.
+
+---
+
 # DĀR AL TAWḤĪD Kids – Designregeln
 
 Verbindlich für `/kids/` und alle künftigen Kids-Erweiterungen.
@@ -206,3 +404,11 @@ In allen Kinderansichten bleibt der **konkrete Quellenbeleg als reiner, gut lesb
 - **Lange Duʿāʾs:** Bei mehr als 18 Wörtern oder Platzmangel werden die drei Leseebenen innerhalb des vorhandenen Raums getrennt scrollbar. Das aktive arabische Wort, die passende Lautschrift und die deutsche Bedeutung bleiben gemeinsam sichtbar. Fingerbedienung darf dabei nicht die äußere Seite scrollen.
 - **Audio bleibt authentisch:** „Ganz hören“ nutzt die durchgehende Fuṣḥā-Aufnahme, „Langsam hören“ ihre freigegebene langsamere Aufnahme und „Wort für Wort“ die einzelnen Wortdateien. Der Fokus läuft in allen drei Ebenen mit; beim ganzen Hören können Zeitmarker ohne freigegebene Wort-Timestamps nur näherungsweise synchronisiert sein.
 - **Release-Schutz:** `scripts/kids-dua-trilingual-guard.js` prüft die vollständigen Wort-/Lautschrift-/Bedeutungsindizes, den echten Asset-Verweis in allen Kids-Einstiegsseiten sowie die passende Service-Worker-Offline-Dateiliste. Es dürfen keine veralteten festgeschriebenen Abfrageversionen einen ansonsten gültigen Release verhindern.
+
+## Einheitliche dezente Kapsel-Rückmeldung — `KIDS_STORY_GLOW_PARITY_V1218`
+
+- Referenz ist die sanfte Goldkontur der **Hörbücher-Karte im Home-Bereich**: keine nachträglich stärkere Beleuchtung, kein Gold-/Türkis-Doppelhalo, keine animierte Lichtwelle.
+- Auf Themen-, Buch-, Unterrichts- und Geschichtenkarten gilt der gemeinsame Touch-/Hover-/Fokus-Effekt über `kids-touch-rail.css` und `kids-card-interaction.js`. Auch innerhalb geöffneter Themen bleibt die Rückmeldung gedämpft.
+- Das alte verzögerte `kids-story-touch-glow`-System (560 ms) ist deaktiviert; die alte CSS-Datei liefert nur einen zurückhaltenden Fallback nach denselben Variablen.
+- **Ausnahme:** Zurück- und Kopfzeilensteuerungen, globale Navigation und andere nicht als Inhaltskarte gedachte Funktionen erhalten keinen Themenkarten-Glow. Sichtbare Tastaturfokuszustände bleiben dennoch erhalten.
+- Änderungen der Kapsel-Interaktion dürfen keine Abstände, Safe-Areas, Audiofunktionen oder Seitenwechsel verändern.
