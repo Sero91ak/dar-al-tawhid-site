@@ -1,3 +1,12 @@
+## 14.10.2026 · Unterricht 130–141 · Fortsetzung
+
+- **12 weitere Unterrichtslektionen / 36 eigens verfasste Altersfassungen** in drei aufeinander aufbauenden PR-only Modulen: `curriculum-editorial-130-133-v1.js`, `curriculum-editorial-134-137-v1.js`, `curriculum-editorial-138-141-v1.js`. Alle sind nach den vorhandenen V38–V47-Modulen und nach 127–129, aber vor dem Term-Coach in `kids/akademie/index.html` geladen.
+- Vier neue Quellenberichte unter `kids-akademie/research/`: `EDITORIAL_REVIEW_130_133_20261014.md`, `EDITORIAL_REVIEW_134_137_20261014.md`, `EDITORIAL_REVIEW_138_141_20261014.md`. Beim Fiqh-Slot 130 erfolgte ein erneuter Quellen-Teilabgleich von Ibn Qudāmah, `al-Mughnī`, Bd. 1 S. 224–227 (Islamweb 15/425, 15/428, 15/429). `fiqhHumanReviewNeeded=true` und `scientificApproval=false` bleiben.
+- Wichtige Belegabgrenzungen: 131 tartīl ≠ erfundene Tajwīd-Detailregel; 132 96:1 ≠ vollständige Sīrah; 133 Dankgebot ≠ unbelegte feste Sunnah-Formel; 135 belegte Allah-Namen ≠ freie Namensliste; 136 Muḥammad ﷺ als letztes Siegel der Propheten; 137 40:14 ist nur ein zusätzlich gekennzeichneter Vers zur Aufrichtigkeit neben 40:60; 140 digitale Medienregeln sind eigene Anwendung, nicht Wortlaut 17:36; 141 Hoffnung ohne Beschämung trauriger Kinder.
+- Drei weitere ungenerierte Voice-Textdeltas `academy-voice-editorial-130-133-delta-v1.json`, `...134-137...`, `...138-141...` enthalten zusammen **228 Text-Kontexte**; diese werden **vor einer späteren Audioerzeugung** erst in den kanonischen Sprechplan integriert. **0 erzeugte Audios, 0 Credits.**
+- Spezifische Regressionstests hinterlegt: `kids/tools/test-academy-editorial-130-133-v1.cjs`, `test-academy-editorial-134-137-v1.cjs`, `test-academy-editorial-138-141-v1.cjs`. GitHub-JSON-/String-/Ladereihenfolge-Kontrolle erfolgreich; voller Node- und Browser-Lauf **noch ausstehend**.
+- **Nächste Schritte:** Slot **142** (hanbalitisch teilgeprüfte fünf Gebetsnamen) bei Bedarf noch pädagogisch eigenständig vertiefen; danach **143–208** in der Lektionsreihenfolge. Alle 208 IDs existieren als Entwürfe, bisher **0/624 endgültige wissenschaftliche Freigaben**. **Kein Merge auf main, kein Live-Deploy und keine Audioerzeugung.**
+
 ## 14.10.2026 · Unterricht 127–129 fortgeführt
 
 - **Drei weitere Lektionen / neun eigenständige Altersfassungen** in `kids/akademie/curriculum-editorial-127-129-v1.js` eingebunden. Die drei Themen sind Gastfreundschaft, Lernen mit Pausen und Reue nach eigenen Fehlern. Vorhandene IDs und Fragen bleiben bestehen.
