@@ -1,3 +1,21 @@
+## 14.10.2026 · 208/208 Unterrichtslektionen jetzt individuell redigiert · wissenschaftlich noch nicht freigegeben
+
+**Redaktioneller Jahresstand:** 52 Wochen, **208 Themen**, jeweils für 4–5, 6–8 und 9–10 Jahre; **624 Altersentwürfe vorhanden**. Das bezieht sich auf ausgearbeitete Textentwürfe, **nicht** auf die endgültige fachwissenschaftliche oder pädagogische Freigabe. Die noch individuell zu bearbeitenden Lektionsslots betragen **0**; **wissenschaftlich freigegeben sind 0/624**.
+
+**Neu 203–205:** Digitaler Adab (49:11); Tashahhud (Ibn Qudāmah, al-Mughnī 15/611/618, nicht allein 2:238); Taslīm (al-Mughnī 15/621–622, nicht allein 4:86). Je drei eigenständige Altersfassungen, insgesamt 9, getrennt gespeichert als `kids/akademie/curriculum-editorial-203-205-v1.js`.
+
+**Neu 206–208:** Fragen zu Gebetsfehlern (al-Mughnī 15/729, 15/757; Qurʾān 21:7 kein unmittelbarer Einzelbeleg); Ramaḍān/Fasten (2:185 und al-Mughnī 15/1713, ohne Zwang gegenüber Kindern); Zakāh und Ḥaǧǧ (2:43 und 3:97, eigene Bedingungen noch fachlich offen). Insgesamt 9 weitere Altersfassungen, gespeichert als `kids/akademie/curriculum-editorial-206-208-v1.js`. **Alle fünf abschließenden Fiqh-Lektionen bleiben `fiqhHumanReviewNeeded=true`** und `scientificApproval=false`.
+
+**Technik/QA:** Finale Loader-Reihenfolge `199-202` → `203-205` → `206-208`; überlappender alter `203-206`-Loader wurde aus `index.html` entfernt, die alte Quelldatei bleibt erhalten. Beide Voice-Text-Deltas umfassen **114 nicht generierte Sprechtext-Kontexte**, keine synthetische Rezitation und **0 verbrauchte TTS-Credits**. Schreibgeschützter Datenabgleich: 18/18 Altersversionen, 114 Texte, 0 sichtbare interne QA-Bezeichnungen in den neuen Kindertexten, genau einmalige Skripteinbindung und korrekte Reihenfolge. Reproduzierbarer Test `kids/tools/test-academy-editorial-203-208-v1.cjs` angelegt; **vollständiger Node-, Browser- und GitHub-CI-Test ist noch nicht tatsächlich ausgeführt**.
+
+**Wissenschaftlicher Nachweis:** `kids-akademie/research/EDITORIAL_REVIEW_203_208_20261014.md`. Frühere Teilberichte zu 155–202 und alle bestehenden Lektions-Belegverweise bleiben vorhanden. **Noch zu tun:**
+- Unabhängige Qurʾān-/Tafsīr-/Ḥadīṯ-/Fiqh-Quellenkontrolle aller 208 Lektionen, einschließlich Versbereichs-, Auszugs-, Seiten- und Authentizitätsnachweisen; Korrektur alter Registry-/Quiz-Zuordnungen statt bloßer Vertrauensübernahme.
+- Pädagogische Schlussprüfung aller 624 Fassungen; Kinderschutz, fehlende Entwickler-/Testtexte, keine Angstbilder, kein Zwang, unterschiedliche Altersansprache.
+- Vollständige Node-/Browser-/CI-Suite ausführen; erst nach technischem Review den bislang separaten Redaktionszweig korrekt in den übergeordneten Arbeits-PR integrieren.
+- Die Text-Deltas mit dem kanonischen Sprachplan abgleichen. **Keine Audioerzeugung, kein Live-Deploy, kein Merge auf `main` ohne separate bewusste Freigabe.**
+
+**Fortsetzung nach Redaktionsabschluss:** Beginne mit *Quellenaudit von Lektion 1 an*, oder mit den offenen **17 vertieften Fiqh-Fällen**, deren Verzeichnis in den Auditakten steht. Die Zahlen 208/208 und 624/624 dürfen nicht als endgültig wissenschaftlich geprüfte Freigaben kommuniziert werden.
+
 ## 14.10.2026 · Individuelle Redaktion bis 202/208, noch sechs Lektionsentwürfe
 
 - **199–202:** Fürsorge für Kranke (Qurʾān 4:36), Platzmachen (58:11), Sitzen zwischen zwei Niederwerfungen (22:77 mit separatem Fiqh), guter Charakter (68:4). Zwölf individuell ausgearbeitete Altersfassungen in `kids/akademie/curriculum-editorial-199-202-v1.js`, bestehende IDs/Quiz/Fortschritt unverändert.
