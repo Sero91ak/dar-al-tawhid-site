@@ -1,3 +1,13 @@
+## Nachtrag 14.10.2026 · Kinder-Anzeigebeleg für Lektion 206 korrigiert
+
+**Fehler:** Der historische V38-Quellenregistereintrag und die frühere Kinderanzeige verwiesen auf **Qurʾān 21:7**; dieser Vers hat einen anderen Gegenstand als die Fiqh-Regeln zum Suǧūd as-Sahw.
+
+**Behoben:** Im tatsächlich geladenen Modul `kids/akademie/curriculum-editorial-206-208-v1.js` zeigt die Kinderoberfläche jetzt **Qurʾān 2:43** mit dem korrekt begrenzten arabischen Text `وَأَقِيمُوا الصَّلَاةَ وَآتُوا الزَّكَاةَ وَارْكَعُوا مَعَ الرَّاكِعِينَ` als **allgemeinen Gebetsbeleg**. Dieser Text wird **nicht** als direkter Beweis für Suǧūd as-Sahw ausgegeben; dessen Details gehören weiterhin in Ibn Qudāmahs `al-Mughnī` 15/729 und 15/757. Alle drei Kinderfassungen haben den korrekten Quellenhinweis. Das alte Quellenregister wird nicht stillschweigend überschrieben; eine spätere zentrale Registry-Aktualisierung ist gesondert zu prüfen.
+
+**Abgleich:** `kids/data/academy-voice-editorial-206-208-delta-v1.json` nach der Kindertextkorrektur synchronisiert: **9/9 Altersfassungen**, **57/57 reine Textkontexte**, `generateCreditsUsed=0`. `kids/tools/test-academy-editorial-206-208-v1.cjs` prüft neu die genaue Qurʾān-Adresse 2:43, den arabischen Bezug und den ausgeschlossenen Ritual-Einzelbeweis. Ein tatsächlicher Node-/Browser-/CI-Lauf bleibt noch offen.
+
+**Unverändert:** `scientificApproval=false`, `fiqhHumanReviewNeeded=true`, kein Audio, keine TTS-Kosten, keine Live-Veröffentlichung.
+
 # DĀR AL TAWḤĪD KIDS AKADEMI · Fach- und Quellenakte 206–208
 
 **Datum: 14.10.2026 · Arbeitszweig `chatgpt/kids-akademie-155-158-20261014` · nur Entwurf.**
