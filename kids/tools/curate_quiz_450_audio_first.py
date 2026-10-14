@@ -129,7 +129,7 @@ def main():
     # Keep original chronological order to simplify old progress deep-links.
     active=[q for q in original if q["id"] in keys]
     reserve=[q for q in original if q["id"] not in keys]
-    if len(active)!=len(reserve)!=450:raise RuntimeError("Invalid partition")
+    if len(active)!=450 or len(reserve)!=450:raise RuntimeError("Invalid partition")
     if {q["id"] for q in reserve}&keys:raise RuntimeError("Overlap in active/reserve")
     if {q["id"] for q in active+reserve}!={q["id"] for q in original}:
         raise RuntimeError("Lost a canonical original quiz")
