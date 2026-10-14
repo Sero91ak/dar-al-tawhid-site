@@ -1,5 +1,17 @@
 # Redaktioneller Arbeitsstand – 14. Oktober 2026
 
+## Fortschreibung: Altersredaktion 119–129
+
+- Die Unterrichtsblöcke **119–122, 123–126 und 127–129** sind in `kids/akademie/index.html` auf dem Arbeitszweig eingebunden. **11 weitere Lektionen / 33 Altersfassungen** besitzen nun individuelle Unterrichtstexte; zusammen mit der hier zuvor dokumentierten Arbeit an 99–117 sind dies **29 gezielt redaktionell vertiefte Lektionen / 87 Altersfassungen** (keine unabhängige Gesamtfreigabe).
+- Versgrenze korrigiert: Slot **125**, Qurʾān **99:7** enthält im Kinder-Curriculum nur Vers 7; 99:8 bleibt separat.
+- Versgrenze korrigiert: Slot **129**, Qurʾān **39:53** beginnt mit `قُلْ` und enthält nicht länger die Verse 39:54–55. Slot **128** kennzeichnet den gespeicherten Teil von 2:286 als **Auszug**, nicht als vollständigen Vers.
+- Quellenakten: `research/EDITORIAL_REVIEW_119_122_20261014.md`, `research/EDITORIAL_REVIEW_123_126_20261014.md`, `research/EDITORIAL_REVIEW_127_129_20261014.md`. Offen gebliebene Primärquellenabrufe sind in den Einzelakten genannt, nicht als geprüft ausgegeben.
+- Deutscher, **nicht erzeugter** Sprechtextplan `kids/data/academy-voice-plan-v38.json` nach Redaktion 119–129 abgeglichen: **1.525 einzigartige Textbausteine**, unverändert **2.109 Kontexte**, `generateCreditsUsed=0`. Der zusätzliche Textplan ist keine Aufnahmegenehmigung.
+- Regressionstest `kids/tools/test-academy-editorial-123-126-v1.cjs` hinterlegt; **ein Node- oder Browser-Regressionstest wurde von dieser Sitzung nicht tatsächlich ausgeführt**. Ein schreibgeschützter Struktur- und Textkontextvergleich bei der Synchronisierung prüfte die 54 neuen Sprechkontexte für Slots 127–129.
+- `sourceAudit.scientificApproval=false` und **0/624 wissenschaftlich freigegebene Altersfassungen** unverändert. Kein Audio, kein Merge, kein Live-Deploy.
+- **Nächste Didaktik-Lektionen:** 131–133 (Slot 130 läuft gesondert unter Fiqh-Quellenprüfung), anschließend 134 ff.; Fiqh 180 ff., ältere Quellen und offener Testlauf separat.
+
+
 > **Nur Arbeitszweig**, keine Kinder-Freigabe, keine Aufnahme, kein Merge, kein Live-Deploy. Diese Datei beschreibt die tatsächlich vorgenommenen Textänderungen und ersetzt keine unabhängige Quellenprüfung.
 
 ## Umfang der hier vorgenommenen Arbeit
