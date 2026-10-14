@@ -23570,7 +23570,7 @@ const additions=
     "ageText": {
       "4-5": {
         "goal": "Am Ende des Gebets gibt es einen Gruß nach rechts und links.",
-        "intro": "Am Ende des Gebets gibt es einen Gruß nach rechts und links. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Stell dir vor: Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite nicht als. Heute üben wir: Wir üben nur den Gruß untereinander.",
+        "intro": "Am Ende des Gebets gibt es einen Gruß nach rechts und links. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Stell dir vor: Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Diesen Gebetsabschluss lernen wir mit einer Lehrperson; der Vers hier spricht über das Grüßen unter Menschen. Heute üben wir: Wir üben nur den Gruß untereinander.",
         "lines": [
           "Am Ende des Gebets gibt es einen Gruß nach rechts und links.",
           "Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn.",
@@ -23596,7 +23596,7 @@ const additions=
       },
       "6-8": {
         "goal": "Am Ende des Gebets gibt es einen Gruß nach rechts und links.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Am Ende des Gebets gibt es einen Gruß nach rechts und links. Wir lesen Qurʾān 4:86. Der Vers bedeutet sinngemäß: Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Allah ist über alles Rechnender. So kann das im Alltag aussehen: Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite nicht als. Die Aufgabe: Wir üben nur den Gruß untereinander. taḥiyyah bedeutet: Gruß. taslīm bedeutet: der Abschlussgruß des Gebets; hier nicht als Wortlaut dieses Verses.",
+        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Am Ende des Gebets gibt es einen Gruß nach rechts und links. Wir lesen Qurʾān 4:86. Der Vers bedeutet sinngemäß: Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Allah ist über alles Rechnender. So kann das im Alltag aussehen: Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Diesen Gebetsabschluss lernen wir mit einer Lehrperson; der Vers hier spricht über das Grüßen unter Menschen. Die Aufgabe: Wir üben nur den Gruß untereinander. taḥiyyah bedeutet: Gruß. taslīm bedeutet: der Abschlussgruß des Gebets; hier nicht als Wortlaut dieses Verses.",
         "lines": [
           "Qurʾān 4:86 ist die gelesene Stelle.",
           "Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn.",
@@ -23618,7 +23618,7 @@ const additions=
         "situation": "Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite nicht als Gebetsbeschreibung gelesen.",
         "practice": "Wir üben nur den Gruß untereinander.",
         "summary": "Qurʾān 4:86 trägt diese Stunde. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn.",
-        "audioScript": "Den Gebetsabschluss kennenlernen. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite nicht als. Wir üben nur den Gruß untereinander."
+        "audioScript": "Den Gebetsabschluss kennenlernen. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Diesen Gebetsabschluss lernen wir mit einer Lehrperson; der Vers hier spricht über das Grüßen unter Menschen. Wir üben nur den Gruß untereinander."
       },
       "9-10": {
         "goal": "Ich kann das Thema „Den Gebetsabschluss kennenlernen“ anhand von Qurʾān 4:86 erklären und ein Alltagsbeispiel beurteilen.",
