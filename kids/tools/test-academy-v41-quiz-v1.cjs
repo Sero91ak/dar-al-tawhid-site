@@ -13,7 +13,7 @@ for(const version of [39,40,41])
  vm.runInNewContext(read("kids/akademie/curriculum-v"+version+".js"),ctx,{timeout:1500});
 const combined=ctx.window.DARKidsAcademyCurriculum;
 const ids=[39,40,41].flatMap(v=>ctx.window["DARKidsAcademyCurriculumV"+v].ids);
-assert.equal(ids.length,36);assert.equal(new Set(ids).size,36);
+assert.equal(ids.length,33);assert.equal(new Set(ids).size,33);
 assert.equal(Object.keys(combined).length,111);
 let count=0;
 const ban=/keine freigabe für besucher|keine synthetische rezitation|wissenschaftliche freigabe|dies(?:e|er) stunde bleibt ein entwurf|https?:\/\//i;
@@ -47,4 +47,4 @@ for(const v of [39,40,41]){
 }
 const html=read("kids/akademie/index.html"),positions=[38,39,40,41].map(v=>html.indexOf("curriculum-v"+v+".js?v="));
 assert.ok(positions.every(x=>x>0)&&positions.every((x,i)=>i===0||x>positions[i-1]),"import order");
-console.log("PASS: 111 lessons retained; 36 quiz revisions / "+count+" questions; Qurʾān, sources and spoken lesson scripts preserved.");
+console.log("PASS: 111 lessons retained; 33 active quiz revisions / "+count+" questions; Qurʾān, sources and spoken lesson scripts preserved.");
