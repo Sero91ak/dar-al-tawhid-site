@@ -1,3 +1,31 @@
+## Nachtrag 14.10.2026 · direkte Prüfung von Buḫārī 1, 33 und 1469 sowie klassischem Tafsīr für Slot 5
+
+**GitHub-Quellenregister jetzt 155 eindeutige Einträge.** Vier neue Referenzen + Wiederverwendung von `SRC-BANK-001` für Slot 12. **Alle Angaben als quellengeprüfte Teilbelege, nicht als wissenschaftliche Gesamtfreigabe.** Prüftermin 14. Oktober 2026.
+
+### Slot 5 · `akhlaq-sabr` · Ṣabr
+- **Qurʾān 2:153:** `يَا أَيُّهَا الَّذِينَ آمَنُوا اسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ`.
+- **Ibn Kaṯīr**, *Tafsīr al-Qurʾān al-ʿAẓīm*, Bd. 1 S. 467, [Islamweb 49/184](https://www.islamweb.net/ar/library/content/49/184/index.php?ID=153&bk_no=49&idfrom=150&idto=150&page=bookcontents_ver3#:~:text=%D9%8A%D8%A7%D8%A3%D9%8A%D9%87%D8%A7%20%D8%A7%D9%84%D8%B0%D9%8A%D9%86%20%D8%A2%D9%85%D9%86%D9%88%D8%A7). Der Abschnitt erklärt Geduld und Gebet im Umgang mit Schwierigkeiten. **Neu `SRC-CORE5-IBNKATHIR-184`**, direkt gelesener klassischer Tafsīr.
+- **aṭ-Ṭabarī**, *Ǧāmiʿ al-Bayān*, Bd. 3 S. 213–214, [Islamweb 50/467](https://islamweb.net/ar/library/content/50/467#:~:text=%D9%8A%D8%A7%20%D8%A3%D9%8A%D9%87%D8%A7%20%D8%A7%D9%84%D8%B0%D9%8A%D9%86%20%D8%A2%D9%85%D9%86%D9%88%D8%A7). Hier werden Auslegungen von Abū al-ʿĀliyah und ar-Rabīʿ angeführt, Geduld/Gebet als Hilfe zur Gehorsamkeit. **Neu `SRC-CORE5-TABARI-467`**.
+- **Authentischer Sunnahbericht von Abū Saʿīd al-Ḫudrī**, **Ṣaḥīḥ al-Buḫārī 1469 / Muslim 1053**: `وَمَنْ يَتَصَبَّرْ يُصَبِّرْهُ اللَّهُ، وَمَا أُعْطِيَ أَحَدٌ عَطَاءً خَيْرًا وَأَوْسَعَ مِنَ الصَّبْرِ`. [Dorar 7038](https://dorar.net/hadith/sharh/7038#:~:text=%D9%88%D9%85%D9%86%20%D9%8A%D8%AA%D8%B5%D8%A8%D8%B1%20%D9%8A%D8%B5%D8%A8%D8%B1%D9%87%20%D8%A7%D9%84%D9%84%D9%87), arabischer Bericht und parallele Überlieferungsnummer direkt überprüft. **Neu `SRC-CORE5-BUKHARI-1469`**. Der originale Bericht spricht auch von der finanziellen Unterstützung der Anṣār und dem Streben nach Genügsamkeit; ein heutiges Schulbeispiel ist keine Erzählung aus dem Hadith.
+- **Grenze:** Ṣabr bedeutet nicht, dass Kinder Mobbing, Gewalt oder Not verschweigen oder weder weinen noch Unterstützung suchen dürften. Keine frei erfundene Geschichte als Prophetenwort ausgeben.
+
+### Slot 9 · `akhlaq-amanah` · Amānah
+- **Authentisch: Ṣaḥīḥ al-Buḫārī 33 / Muslim 59, Abū Hurayrah**, `آيَةُ الْمُنَافِقِ ثَلَاثٌ: إِذَا حَدَّثَ كَذَبَ، وَإِذَا وَعَدَ أَخْلَفَ، وَإِذَا اؤْتُمِنَ خَانَ`; arabischer Wortlaut und Einstufung über [Dorar 5952](https://dorar.net/hadith/sharh/5952#:~:text=%D8%A5%D8%B0%D8%A7%20%D8%A7%D8%A4%D8%AA%D9%85%D9%86%20%D8%AE%D8%A7%D9%86) unmittelbar geprüft. **Neu `SRC-CORE9-BUKHARI-33`** und getrennt von bereits vorhandener Ibn-al-Ǧawzī-Quelle zu **23:8**.
+- **Entscheidende ʿAqīdah- und Kinderschutzgrenze:** Der Bericht warnt vor missbilligten Handlungsmerkmalen, darf jedoch **nicht** als Beleg missbraucht werden, nach einem kindlichen Fehler einen bestimmten Menschen zum Munāfiq im Sinne verborgenen Unglaubens zu erklären. Vergesslichkeit nicht mit absichtlichem Verrat gleichsetzen. Im Kinderunterricht Zuverlässigkeit, Ehrlichkeit und Wiedergutmachung stärken; niemals ein Kind damit etikettieren.
+
+### Slot 12 · `aqidah-ikhlas` · Ikhlāṣ
+- **Authentisch: Ṣaḥīḥ al-Buḫārī 1, ʿUmar ibn al-Ḫaṭṭāb**, `إِنَّمَا الْأَعْمَالُ بِالنِّيَّاتِ، وَإِنَّمَا لِكُلِّ امْرِئٍ مَا نَوَى`, [Dorar 3429](https://dorar.net/hadith/sharh/3429#:~:text=%D8%A5%D9%86%D9%85%D8%A7%20%D8%A7%D9%84%D8%A3%D8%B9%D9%85%D8%A7%D9%84%20%D8%A8%D8%A7%D9%84%D9%86%D9%8A%D8%A7%D8%AA) direkt gelesen; auch Muslim **1907**. Bereits vorhandene Bankquelle **`SRC-BANK-001` mit Quellenursprung, Hadithnummer, Wortlaut, Berichtszähler und korrekter Bindung an Slot 12 aktualisiert**. Keine parallele doppelte Hadith-Quelle angelegt; nur ein gekennzeichneter **Kurzauszug**, nicht der volle längere Hadith.
+- Getrennt von **aṭ-Ṭabarī zu 39:11**, registriert unter `SRC-CORE12-TABARI-4233`.
+- Kinderschutz: Eine Lehrperson kennt nicht das verborgene Herz oder die tatsächliche innere Absicht eines anderen Kindes. Keine öffentliche Selbstoffenlegung oder Punktewertung von Ikhlāṣ.
+
+### Sicherungen, noch offen
+- `kids-akademie/research/SOURCE_REGISTRY.json`: **155 einzigartige Source-IDs**, neue Angaben mit direktem Qurʾān- bzw. Hadith-Link, genauen Nummern und ehrlich ausgewiesener Teilprüfung. Die oben genannten Dorar-Seiten sind abrufbare Hadith-Datenbank-Nachweise, **kein eigenständig geprüfter Abgleich aller gedruckten Ausgaben** der beiden Ṣaḥīḥ-Sammlungen.
+- `kids/tools/test-academy-primary-source-registry-v1.cjs` um fünf Lektionsbezüge erweitert: drei neue zu Slot 5, eine neue zu Slot 9, eine wiederverwendete Quelle bei Slot 12. **Der tatsächliche GitHub-CI-Erfolg der neuen Commits ist separat nachzuweisen**.
+- Keine Änderungen an Kindertext, UI, Lernfortschritt, Quiz, Freischaltregeln und Sprachausgabe. **0/624 Altersfassungen endgültig freigegeben**, kein Merge, kein Live-Deploy, kein Copilot, keine Audioerzeugung.
+- Weiter mit der **inhaltlichen Vollprüfung** der frühen Slots 5, 9 und 12 (konkreter Unterrichtstext, Quellenanzeige und Quiz) und danach 13–24. Quellen-Treffer sind ausdrücklich nicht gleichbedeutend mit wissenschaftlicher Gesamtfreigabe.
+
+---
+
 # DĀR AL TAWḤĪD KIDS AKADEMI · Frühe Lektionen 5–12: Quellenprüfung
 
 **14. Oktober 2026.** Geschützter Zweig `chatgpt/kids-akademie-155-158-20261014`. Vier **direkt gelesene Tafsīr-Primärtexte** sind dem bestehenden Quellenregister zugeordnet. **Keine Freigabe der Unterrichtsfassungen**, keine generierten Stimmen, keine Änderung der Lernfortschritte, keine Live-Veröffentlichung.
