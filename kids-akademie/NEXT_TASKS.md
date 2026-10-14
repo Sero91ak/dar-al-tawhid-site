@@ -1,3 +1,14 @@
+## 14.10.2026 · Quellenbindung 29–32 · Registry 163
+
+- **Neues tatsächliches GitHub-Arbeitspaket:** vier bestehende Lektions-IDs **29–32** mit **7 Quellenbindungen** – sechs wiederverwendete, zuvor geprüfte Quellen + **ein neu direkt gelesener klassischer Qurʾān-Kommentar**. Keine zusätzlichen Lektionsplätze, Quizänderungen, Änderungen am Kinder-Fortschritt oder TTS-Kosten.
+- **29 Eltern zuhören:** `SRC-CORE10-IBNKATHIR-1005` zu Qurʾān 17:23–24, `SRC-CORE10-BUKHARI-5971` zum Bericht von Abū Hurayrah. Beide bereits bei Lektion 10 geprüft; Elternachtung nicht als Gehorsamszwang bei Gefahr lehren.
+- **30 Allah gedenken:** **az-Zaǧǧāǧ**, `Maʿānī al-Qurʾān wa-Iʿrābuh`, **Band 3 Seite 352**, [Islamweb 233/1714](https://islamweb.net/ar/library/content/233/1714) zu Qurʾān 20:14. Neue ID `SRC-CORE30-ZAJJAJ-1714`. Zweck des Gebets zum Gedenken Allahs von spezifischer ṣalāh-Fiqh-Ausführung strikt trennen.
+- **31 Gutes ohne Lob:** `SRC-CORE12-TABARI-4233` zu Qurʾān 39:11 und unveränderte Bankquelle `SRC-BANK-001` (Buḫārī 1 / Muslim 1907, ʿUmar). Keine öffentliche Herzensbewertung.
+- **32 Hilfsbereit sein:** `SRC-CORE10-IBNKATHIR-1005` und `SRC-CORE10-BUKHARI-5971` für die konkrete Elternachtung; alltägliche Hilfe als eigene Kinderdidaktik markieren.
+- **Dokumentation:** `kids-akademie/research/SCIENTIFIC_CORE_029_032_SOURCE_BINDINGS_20261014.md`. **Automatisierter Test erweitert:** `kids/tools/test-academy-primary-source-registry-v1.cjs` mit vier neuen Lektions-Zuordnungen, sieben direkten URLs, arabischem Originalfragment zu 20:14, Bd. 3 S. 352, Teilprüfstatus und tatsächlichen vorhandenen Katalog-IDs.
+- **Register:** `SOURCE_REGISTRY.json` nun **163 eindeutige Source-IDs**. **0/624** wissenschaftlich abschließend freigegeben. Es wurde nichts auf `main` gemerged oder live veröffentlicht, keine Audioerzeugung, kein Copilot.
+- **Weiterarbeit:** Quellenbindung der Vertiefungen **33–36**, dann 37–40. Zusätzlich die Quellenanzeige, Altersfassungen, Quizfragen und Rechtsausnahmen aller frühen Unterrichtsstunden unabhängig prüfen. Ein neu bestandener Node-/Browser-/CI-Lauf ist für diesen Commit **nicht belegt**.
+
 ## 14.10.2026 · Quellenbindungen der Vertiefungen 17–28 geprüft · 162 eindeutige Belege
 
 - **Fortsetzung ohne Copilot:** Für alle **12 vorhandenen Vertiefungslektionen 17–28** wurden die passenden Lektions-IDs mit konkreten Primärquellen im zentralen `kids-akademie/research/SOURCE_REGISTRY.json` verknüpft, ohne neue Lektionen, neue Quiztexte oder Freigaben vorzutäuschen.
