@@ -16,7 +16,7 @@ for(const src of file.sources){
 const required={
 "adab-worte":{"SRC-CORE6-TABARI-3021":["islamweb.net","50/3021"],"SRC-CORE6-BUKHARI-6018":["dorar.net","4361"]},
 "akhlaq-amanah":{"SRC-CORE9-IBNALJAWZI-1676":["islamweb.net","ID=1676"]},
-"adab-respekt":{"SRC-CORE10-IBNKATHIR-1005":["islamweb.net","49/1005"]},
+"adab-respekt":{"SRC-CORE10-IBNKATHIR-1005":["islamweb.net","49/1005"],"SRC-CORE10-BUKHARI-5971":["dorar.net","151125"]},
 "aqidah-ikhlas":{"SRC-CORE12-TABARI-4233":["islamweb.net","50/4233"]},
 "adab-salam":{
  "SRC-CORE2-QURTUBI-1095":["islamweb.net","48/1095"],
@@ -117,6 +117,14 @@ assert.equal(goodSpeechHadith.narrator,"Abū Hurayrah");
 assert.equal(goodSpeechHadith.verificationStatus,"primary-report-direct-read-2026-10-14");
 assert.match(goodSpeechHadith.arabic,/فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ/);
 assert.match(goodSpeechHadith.safeApplication,/Kind/);
+const parentRespectHadith=file.sources.find(x=>x.sourceId==="SRC-CORE10-BUKHARI-5971");
+assert.ok(parentRespectHadith,"Missing directly checked parental-respect Sunnah source");
+assert.equal(parentRespectHadith.number,"5971");
+assert.equal(parentRespectHadith.narrator,"Abū Hurayrah");
+assert.equal(parentRespectHadith.verificationStatus,"primary-report-direct-read-2026-10-14");
+assert.ok(parentRespectHadith.arabic.includes("أُمُّكَ")&&parentRespectHadith.arabic.includes("أَبُوكَ"));
+assert.match(parentRespectHadith.authenticityNote,/Auszug|Ellipse/);
+assert.match(parentRespectHadith.safeApplication,/gefährlichen/);
 const newlyReadEarly=["SRC-CORE6-TABARI-3021","SRC-CORE9-IBNALJAWZI-1676","SRC-CORE10-IBNKATHIR-1005","SRC-CORE12-TABARI-4233"];
 for(const id of newlyReadEarly){
  const src=file.sources.find(x=>x.sourceId===id);
