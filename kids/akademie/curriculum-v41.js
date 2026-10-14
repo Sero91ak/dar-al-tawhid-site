@@ -169,8 +169,10 @@ const revisions={
 };
 const ids=Object.keys(revisions),ages=["4-5","6-8","9-10"];
 if(ids.length!==12)throw Error("V41 expected 12 revised lessons");
+const deferredFiqh=new Set(["fiqh-gebetszeiten-kennenlernen"]); 
 const next={...prior};
 for(const [id,blocks] of Object.entries(revisions)){
+ if(deferredFiqh.has(id))continue; // V38 source-checked fiqh quiz takes priority
  const old=prior[id];
  if(!old||old.sourceAudit?.scientificApproval!==false)throw Error("V41 invalid lesson "+id);
  for(const age of ages){
@@ -184,7 +186,7 @@ for(const [id,blocks] of Object.entries(revisions)){
 }
 window.DARKidsAcademyCurriculum=Object.freeze(next);
 window.DARKidsAcademyCurriculumV41=Object.freeze({
- version:"20261014-v41",revisedSlots:[123,124,125,126,127,128,129,130,131,132,133,134],
- ids,approvedAgeVersions:0,religiousSourcesVerified:false,voiceRecordingsApproved:false
+ version:"20261014-v41",revisedSlots:[123,124,125,126,127,128,129,131,132,133,134],
+ ids:ids.filter(id=>!deferredFiqh.has(id)),approvedAgeVersions:0,religiousSourcesVerified:false,voiceRecordingsApproved:false
 });
 })();
