@@ -29,8 +29,13 @@ def get(path,key):
 
 def main():
     key=os.getenv("ELEVENLABS_API_KEY","").strip()
-    planned=json.loads(PLAN.read_text(encoding="utf-8"))
-    estimate=float(planned["estimatedAdditionalCredits"])
+    if PLAN.is_file():
+        planned=json.loads(PLAN.read_text(encoding="utf-8"))
+        estimate=float(planned["estimatedAdditionalCredits"])
+    else:
+        fallback=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
+        planned=json.loads(fallback.read_text(encoding="utf-8"))
+        estimate=float(planned["creditEstimate"])
     result={
         "scope":"TAWḤĪD KIDS · 450 ORIGINAL ELEVEN V4 READ-ONLY PROBE",
         "date":"2026-10-14","modelId":MODEL,"voiceId":VOICE,
