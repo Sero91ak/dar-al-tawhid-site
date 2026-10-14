@@ -6,8 +6,8 @@
 
 - Repository: `Sero91ak/dar-al-tawhid-site`
 - Zweig: `cursor/kids-akademie-208-fa8f`, Pull Request #1113.
-- Jahresziel unverändert: 208 Lektionen / 624 Altersfassungen. Von der hier dokumentierten Redaktion wurden **11 Lektionen / 33 Altersfassungen** gezielt überarbeitet. Die übrigen Entwürfe sind **nicht deshalb geprüft**.
-- Betroffene Slots: **99–105 und 107–110**; Slot 106 wurde wegen separat laufender Fiqh-Quellenarbeit bewusst nicht durch diesen Textlauf überschrieben.
+- Jahresziel unverändert: 208 Lektionen / 624 Altersfassungen. Von der hier dokumentierten Redaktion wurden **18 Lektionen / 54 Altersfassungen** gezielt überarbeitet. Die übrigen Entwürfe sind **nicht deshalb geprüft**.
+- Betroffene Slots: **99–105 und 107–117**; Slot 106 wurde wegen separat laufender Fiqh-Quellenarbeit bewusst nicht durch diesen Textlauf überschrieben.
 - Alle `sourceAudit.scientificApproval`-Felder dieser elf Lektionen bleiben `false`. Auch der globale Freigabestatus bleibt unberührt.
 
 ## Tatsächliche Commits
@@ -24,12 +24,17 @@
 | Redaktion 107–110 (Offenbarungskontext, ʿĪsā, Elternbitte, Schutz) | `c68f0f8b6ebc12786d98c5d1afe2cee02dc61817` |
 | Versabgrenzung von Qurʾān 75:16 und 75:17 in Slot 107 korrigiert | `a05548cb31dbd31233e510e436167db9a3134a82` |
 | Geplante Sprechtexte 107–110 | `ceb94887d96687fdc908fb0bac0b397aaa88cf09` |
+| Redaktion 111–114 (Allahs Wissen, Gesandte, Ikhlāṣ, Dankbarkeit) | `6be61113eaac5c5cfa37f733c6daccd89816a7e7` |
+| Geplante Sprechtexte 111–114 | `c7f2b71bf9774224ef67f0c5eb8f649a9fa23a9b` |
+| Redaktion 115–117 (Qurʾān-Sorgfalt, Haushaltssicherheit, Geduld) | `0fe9522f2d1b94333edf5dcded8e89989ac9dca4` |
+| Geplante Sprechtexte 115–117 | `878477a50dce5c32c1ba1d36e6ae7710f7c50cf5` |
 
 ## Inhaltliche Leitplanken
 
 - Die geänderten Texte unterscheiden Qurʾān-Wortlaut, sinngemäße deutsche Erklärung und eigene Unterrichtsübung.
 - Schutzsituationen werden **nicht nachgespielt**. Ein Kind trägt keine Schuld am Übergriff, auch wenn es vor Schreck nicht handeln konnte.
 - Verzeihen darf nicht als Pflicht zum Schweigen oder zur erzwungenen Versöhnung dargestellt werden.
+- Die bearbeiteten Slots 115–117 unterscheiden Rechtsfragen zu Qurʾān 56:79, Schutzregeln im Alltag und Geduld ausdrücklich von direkten Versgeboten.
 - In Slot 107 war der als 75:16 gekennzeichnete arabische Text zuvor mit Worten aus Vers 75:17 verkettet. Das Qurʾān-Feld zeigt nun ausschließlich 75:16; der Folgevers bleibt als Kontext beschrieben.
 - Geplante deutsche Sprechtexte wurden mit den geänderten Altersfassungen abgeglichen. Keine synthetische Qurʾān-Rezitation, keine Nutzung von ElevenLabs-Credits.
 
@@ -39,7 +44,7 @@ Eine **lesende, programmatische Konsistenzkontrolle** nach diesen Änderungen er
 
 - 111/111 V38-Lektionen im Objekt `additions`, 208 Slots laut `LESSON_STATUS.json`;
 - 624 Alterszuordnungen laut `LESSON_STATUS.json`, davon zum Zeitpunkt der Kontrolle 0 freigegeben;
-- 11 redaktionell geänderte Lektionen mit vollständigen drei Altersfassungen, jeweils vier Unterrichtszeilen;
+- 18 redaktionell geänderte Lektionen mit vollständigen drei Altersfassungen, jeweils vier Unterrichtszeilen;
 - zu jedem geänderten `intro`, zu jeder `line` und zu jedem altersbezogenen `audioScript` ein passender Kontext im V38-Sprechplan;
 - in den sichtbaren Einleitungen und Alters-Audios der V38-Lektionen keine Treffer für die konkret kontrollierten internen Marker „Keine Freigabe für Besucher“, „Keine synthetische Rezitation“, „wissenschaftliche Freigabe“, „Diese Stunde bleibt ein Entwurf“ oder „Der gespeicherte Auszug druckt“;
 - `generateCreditsUsed=0`, keine unbeabsichtigte Umstellung des Freigabestatus;
@@ -49,7 +54,7 @@ Eine **lesende, programmatische Konsistenzkontrolle** nach diesen Änderungen er
 
 ## Weiterarbeit
 
-1. Ab Slot 111 die noch überwiegend schematischen V38-Unterrichtstexte einzeln pädagogisch vertiefen; Texte für alle drei Altersgruppen tatsächlich altersgerecht ausarbeiten.
+1. Ab Slot 119 (Slot 118 wird separat im Fiqh-Quellenlauf bearbeitet) die noch überwiegend schematischen V38-Unterrichtstexte einzeln pädagogisch vertiefen; Texte für alle drei Altersgruppen tatsächlich altersgerecht ausarbeiten.
 2. Den bereits separat bearbeiteten Fiqh-Slot 106 und weitere 17 markierte Fiqh-Stunden nicht ohne eigenständigen Quellenvergleich als freigegeben behandeln.
 3. Weiteres V38-Quellen- und Versgrenzen-Audit durchführen, insbesondere vollständige Verse vs. unvollständige Tafsīr-Auszüge.
 4. Geplanten Sprechtextbestand nach jeder inhaltlichen Änderung **ohne Audioerzeugung** synchronisieren.
