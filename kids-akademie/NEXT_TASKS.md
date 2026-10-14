@@ -1,3 +1,12 @@
+## 14.10.2026 · Fiqh 166 und 174
+
+- **Slot 166 – Qiyām:** Unterricht und Fragen aller Altersgruppen zum Stehen im Gebet präzisiert; Kinderschutz bei Schmerzen und körperlichen Einschränkungen; `al-Mughnī` Bd. 1, S. 277 (Islamweb 15/539, 15/538).
+- **Slot 174 – Takbīrat al-Iḥrām:** Eröffnungsformel `Allāhu akbar` als Unterrichtskern; Qurʾān 17:111 nicht fälschlich als genaue Ritualanleitung; `al-Mughnī` Bd. 1, S. 276–277 (Islamweb 15/532, 15/533, 15/539).
+- Prüfbericht: `kids-akademie/research/INDEPENDENT_FIQH_REVIEW_166_174.md`.
+- Sprechplan als **reiner Text** mit den aktualisierten Fassungen synchronisiert; **1.433 unterschiedliche Textbausteine, 2.109 Verwendungen, 0 generierte Audios und 0 Credits**.
+- 7 von 17 ausdrücklich markierten Fiqh-Slots haben damit mindestens einen unabhängigen klassischen Quellenabgleich (106, 118, 130, 142, 154, 166, 174). **Keine dieser Lektionen ist endgültig freigegeben.** Die nächsten Fiqh-Slots: 180, 186, 192, 198, 201, 204–208. Danach Altquellen und vollständige pädagogische Einzelprüfung.
+- Node-/Browser-Regression sowie Freigabeverfahren sind weiterhin offen; kein Merge auf `main` und kein Live-Deploy.
+
 ## 14.10.2026 · Quizredaktion V39–V41 und zusätzliche Quellenprüfung
 
 - **Slots 99–134:** 33 Lektionen mit **264 neu formulierten altersbezogenen Quizfragen** auf V39, V40 und V41; zusätzlich behalten Fiqh 106, 118 und 130 ihre 24 quellenbezogenen Fragen aus V38; korrekt nach V38 in `kids/akademie/index.html` eingebunden. Lernziele, Qurʾān-Originaltexte, IDs und Freigabestatus beibehalten. **Nächste offene Quizredaktion: Slots 135–208 (74 Lektionen).**
