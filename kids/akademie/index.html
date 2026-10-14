@@ -4396,11 +4396,11 @@ function applySelectedLesson(){
  $("#evidenceLead").textContent=hasLessonHadith?(age==="4-5"?"Wir hören einen Qurʾān-Vers und lernen eine Überlieferung kennen.":"Wir verstehen die Belege für "+lesson.topic+"."):"Wir entdecken, was uns der Qurʾān zu diesem Thema lehrt.";
  qBlock.querySelector(".eyebrow").textContent="Qurʾān · "+q.label;
  verse.textContent=q.arabic;verse.dataset.audioText=k;listen.dataset.arabicAudio=k;
- listen.setAttribute("aria-label","Sūrah "+q.surah+", Vers "+q.ayah+" auf Arabisch anhören");
+ listen.setAttribute("aria-label","Sūrah "+q.surah+", Vers "+q.ayah+(q.ayahEnd>q.ayah?" (erster Vers der angezeigten Stelle)":"")+" auf Arabisch anhören");
  const quranMeaningForChild=String(q.meaning).replace(/^Sinngemäß für den Unterricht, keine beglaubigte Übersetzung:\s*/,"Sinngemäß: ");
  qBlock.querySelector(".quote").textContent="„"+quranMeaningForChild+"“";
- qBlock.querySelector(".source").textContent="Quelle: Qurʾān "+q.surah+":"+q.ayah+(q.excerpt?" · arabischer Textauszug":"");
- $("#arabicAudioStatus").textContent=q.excerpt?"Textauszug · vollständiger Vers wird rezitiert":"Rezitation des vollständigen Verses";
+ qBlock.querySelector(".source").textContent="Quelle: "+q.label+(q.excerpt?" · arabischer Textauszug":"");
+ $("#arabicAudioStatus").textContent=q.ayahEnd>q.ayah?"Rezitation von Vers "+q.ayah+" · erster Vers der angezeigten Stelle":q.excerpt?"Textauszug · vollständiger Vers wird rezitiert":"Rezitation des vollständigen Verses";
  if(hasLessonHadith){hadithBlock.querySelector(".quote").textContent=lesson.hadith.text;hadithBlock.querySelector(".source").textContent="Quelle: "+lesson.hadith.source;}
  $(".teacher-explainer").textContent=hasLessonHadith?(ageTeaching?.evidence||"Qurʾān: "+q.meaning+" Sunnah: "+lesson.hadith.text):(ageTeaching?.lines||[]).slice(0,3).join(" ")||"Qurʾān: "+quranMeaningForChild;
  all(".recap-lesson p").forEach((el,i)=>el.textContent=hasLessonHadith?[lesson.goal,q.meaning+" "+lesson.hadith.text,ageTeaching?.summary||lesson.sample][i]:[ageTeaching?.goal||lesson.goal,quranMeaningForChild,ageTeaching?.practice||lesson.practice][i]);
