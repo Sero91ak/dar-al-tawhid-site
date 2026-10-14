@@ -14,6 +14,7 @@ for(const src of file.sources){
  ids.add(src.sourceId);
 }
 const required={
+"sidq":{"SRC-CORE1-IBNKATHIR-698":["islamweb.net","49/698"],"SRC-CORE1-MUSLIM-2607":["dorar.net","10209"]},
 "adab-worte":{"SRC-CORE6-TABARI-3021":["islamweb.net","50/3021"],"SRC-CORE6-BUKHARI-6018":["dorar.net","4361"]},
 "akhlaq-amanah":{"SRC-CORE9-IBNALJAWZI-1676":["islamweb.net","ID=1676"]},
 "adab-respekt":{"SRC-CORE10-IBNKATHIR-1005":["islamweb.net","49/1005"],"SRC-CORE10-BUKHARI-5971":["dorar.net","151125"]},
@@ -110,6 +111,19 @@ for(const [id,status] of earlyPrimary){const src=file.sources.find(x=>x.sourceId
  assert.ok(src.checkedBy&&src.authenticityNote&&src.safeApplication&&src.arabic,"Source evidence metadata incomplete: "+id);
  assert.notEqual(src.verificationStatus,"scientifically-approved");
 }
+const sidqTafsir=file.sources.find(x=>x.sourceId==="SRC-CORE1-IBNKATHIR-698");
+const sidqHadith=file.sources.find(x=>x.sourceId==="SRC-CORE1-MUSLIM-2607");
+assert.ok(sidqTafsir&&sidqHadith,"First lesson needs separate Quran/Tafsir and Sunnah evidence");
+assert.equal(sidqTafsir.locus,"Qurʾān 9:119");
+assert.equal(sidqTafsir.verificationStatus,"primary-page-direct-read-2026-10-14");
+assert.match(sidqTafsir.arabic,/الصَّادِقِينَ/);
+assert.equal(sidqHadith.narrator,"ʿAbdullāh ibn Masʿūd");
+assert.match(sidqHadith.number,/2607/);
+assert.match(sidqHadith.number,/6094/);
+assert.equal(sidqHadith.verificationStatus,"primary-report-direct-read-2026-10-14");
+assert.match(sidqHadith.arabic,/الصِّدْقَ/);
+assert.match(sidqHadith.safeApplication,/Kinder|Kind/);
+assert.notEqual(sidqHadith.verificationStatus,"scientifically-approved");
 const goodSpeechHadith=file.sources.find(x=>x.sourceId==="SRC-CORE6-BUKHARI-6018");
 assert.ok(goodSpeechHadith,"Directly checked Sunni hadith 6018 missing");
 assert.equal(goodSpeechHadith.number,"6018");
