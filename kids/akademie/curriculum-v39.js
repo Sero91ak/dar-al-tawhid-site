@@ -173,8 +173,10 @@ const revisions={
 const ages=["4-5","6-8","9-10"];
 const expectedKeys=Object.keys(revisions);
 if(expectedKeys.length!==12)throw Error("V39 expected 12 lesson revisions");
+const deferredFiqh=new Set(["fiqh-reinheit-der-gebetskleidung"]); 
 const changed={...prior};
 for(const [id,blocks] of Object.entries(revisions)){
+ if(deferredFiqh.has(id))continue; // V38 source-checked fiqh quiz takes priority
  const original=prior[id];
  if(!original||!original.sourceAudit||original.sourceAudit.scientificApproval!==false)
   throw Error("V39 cannot safely revise "+id);
@@ -189,8 +191,8 @@ for(const [id,blocks] of Object.entries(revisions)){
 }
 window.DARKidsAcademyCurriculum=Object.freeze(changed);
 window.DARKidsAcademyCurriculumV39=Object.freeze({
- version:"20261014-v39",revisedSlots:[99,100,101,102,103,104,105,106,107,108,109,110],
- ids:expectedKeys,approvedAgeVersions:0,religiousSourcesVerified:false,
+ version:"20261014-v39",revisedSlots:[99,100,101,102,103,104,105,107,108,109,110],
+ ids:expectedKeys.filter(id=>!deferredFiqh.has(id)),approvedAgeVersions:0,religiousSourcesVerified:false,
  voiceRecordingsApproved:false
 });
 })();
