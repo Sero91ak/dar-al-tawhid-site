@@ -1,3 +1,12 @@
+## 14.10.2026 · Frühlektion 6: authentische Sunnah nachgeprüft + KIDS-QA grün
+
+- **Direkt überprüft:** `adab-worte`, **Ṣaḥīḥ al-Buḫārī 6018** von **Abū Hurayrah**, auch Ṣaḥīḥ Muslim **47**; arabischer Wortlaut `فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ` und Bewertung authentisch über **[Dorar 4361](https://dorar.net/hadith/sharh/4361)** am 14.10.2026 gelesen. Der sunnitische Hadithbeleg ist von aṭ-Ṭabarīs Tafsīr zu **17:53** (Islamweb 50/3021) **getrennt**.
+- Neues `SRC-CORE6-BUKHARI-6018` mit Überlieferer, Nummer, arabischem Wortlaut, eigener Quellenlage und kindersicherer Abgrenzung im zentralen Register. **Jetzt 146 eindeutige Quellen-Einträge.** `kids/tools/test-academy-primary-source-registry-v1.cjs` um passende Belegbindung, Nummer, Lesestatus und Hinweis auf das Recht betroffener Kinder, Hilfe zu suchen, ergänzt.
+- **Ausgeführte read-only GitHub-Actions-KIDS-QA** [38546617919](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38546617919): **success**, Status tatsächlich nachträglich abgerufen. Auch die vorausgehende Quellenregister-QA **38546149824** war erfolgreich. **Kein wissenschaftliches Gütesiegel aus CI ableiten**.
+- **Getrenntes Problem:** Der Workflow `Voice Studio 2 Validate` scheiterte bei Run **38546149854** am bereits separaten Schritt `Strict Alif-Ba audio workflow` (u. a. `alphabet-audio.json?v=6`, `audioEvidenceComplete`, `PROGRESS_KEY`, `reviewBucket`, `reviewQueueMode`). Kein Fehler der neuen islamwissenschaftlichen Quellenregister-Bindungen; die Ursache wurde anhand des Joblogs nachgewiesen, **keine Audioänderung in diesem Auftrag**.
+- Forschungsakte `kids-akademie/research/SCIENTIFIC_CORE_EARLY_005_012_20261014.md` um den gesondert gelesenen authentischen Hadith und die CI-/Audio-Abgrenzung ergänzt. Offen bleiben Buḫārī 1, 33, 5971, Muslim 8a und Quellenprüfung des Slot 1 `sidq`.
+- 208/208 Entwurfslektionen, 624/624 Altersentwürfe, **0/624 wissenschaftliche Endfreigaben**. Kein Merge auf `main`, kein Live-Deploy, keine Audioerzeugung, kein Copilot.
+
 ## 14.10.2026 · Vier zusätzliche direkt gelesene klassische Quellen für frühe Lektionen 6/9/10/12
 
 - **GitHub-Commits:** Quellenregister `9888e18b31a735c101e10400cc9e881f43fb365c`, Regressionstest `2530f7d301ce419b09e51bbe5a191c35f63ec61b`, Original-Forschungsakte `1e118a4c8243eab7cb42303ce16d5207d01b4ffb` auf geschütztem Zweig; keine Verwendung von Copilot.
