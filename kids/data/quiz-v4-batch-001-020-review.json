@@ -233,7 +233,7 @@
       "revision": "quiz-academy-praise-v4-20261013",
       "questionAudioText": "Schau, was du schon alles weißt. Gehört der Glaube an die Engel zum Īmān? Überlege kurz. Ist das richtig? Dann tippe auf Ja. Wenn nicht, auf Nein.",
       "correctAudioText": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
-      "retryAudioText": "In schāʾ Allāh – wenn Allah will – klappt es beim nächsten Versuch. Denk in Ruhe nach!",
+      "retryAudioText": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
       "explanationAudioText": "Das merken wir uns: Zum Īmān gehört der Glaube an Allahs Engel.",
       "originalQuestion": "Gehört der Glaube an die Engel zum Īmān?",
       "originalExplanation": "Zum Īmān gehört der Glaube an Allahs Engel.",
@@ -338,7 +338,7 @@
       "revision": "quiz-academy-praise-v4-20261013",
       "questionAudioText": "Du darfst mitdenken. Wenn uns jemand mit Salām grüßt, sollen wir antworten? Überlege kurz. Ist das richtig? Dann tippe auf Ja. Wenn nicht, auf Nein.",
       "correctAudioText": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
-      "retryAudioText": "In schāʾ Allāh – wenn Allah will – klappt es beim nächsten Versuch. Denk in Ruhe nach!",
+      "retryAudioText": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
       "explanationAudioText": "Das merken wir uns: Ein Gruß wird gleich gut oder besser erwidert.",
       "originalQuestion": "Wenn uns jemand mit Salām grüßt, sollen wir antworten?",
       "originalExplanation": "Ein Gruß wird gleich gut oder besser erwidert.",
@@ -443,7 +443,7 @@
       "revision": "quiz-academy-praise-v4-20261013",
       "questionAudioText": "Komm, wir probieren eine Wissensfrage. Sollen wir auf unsere Gebete achten? Überlege kurz. Ist das richtig? Dann tippe auf Ja. Wenn nicht, auf Nein.",
       "correctAudioText": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
-      "retryAudioText": "In schāʾ Allāh – wenn Allah will – klappt es beim nächsten Versuch. Denk in Ruhe nach!",
+      "retryAudioText": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
       "explanationAudioText": "Das merken wir uns: Allah befiehlt, die Gebete zu bewahren.",
       "originalQuestion": "Sollen wir auf unsere Gebete achten?",
       "originalExplanation": "Allah befiehlt, die Gebete zu bewahren.",
@@ -546,7 +546,8 @@
     "Quiz 001 vier Originalaufnahmen bei ElevenLabs V4 erzeugt, aber wegen fehlendem importiertem Asset und Hörfreigabe NICHT in App/Manifest freigegeben.",
     "Ein sanfter Retry-Satz wurde in Python- und JS-Sprachvertrag einheitlich korrigiert. CI/Hörfreigabe ausstehend.",
     "Quiz 002: drei vorbestehende bezahlte Fragenteile und drei heute ergänzte Original-V4-Takes, nicht zusammengesetzt. Keine neuen Credits für bereits vorbestehende Generationen.",
-    "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios."
+    "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios.",
+    "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie."
   ],
   "actualPaidCreditsThisBatch": 487.4402378854625,
   "previouslyPaidCreditsReusedForQuestion002": 122.102325991
