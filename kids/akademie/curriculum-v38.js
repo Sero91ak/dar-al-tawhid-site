@@ -23858,49 +23858,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Fehler beim Üben des Gebets?",
+          "prompt": "Was hilft, wenn du beim Üben des Gebets unsicher bist?",
           "options": [
             "Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson.",
-            "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme."
+            "Ich erfinde beim Gebet allein eine neue Ausgleichsbewegung."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Denke an den Unterricht und frage bei Unsicherheit Erwachsene.",
           "explain": "Mā schāʾ Allāh! Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Welche Übung hilft dir?",
           "options": [
-            "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme.",
+            "Ich behaupte, dass ein Kind niemals nach Hilfe fragen darf.",
             "Wir üben den Fragesatz: Ich bin unsicher. Bitte zeig es mir."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denke an den Unterricht und frage bei Unsicherheit Erwachsene.",
+          "explain": "Mā schāʾ Allāh! Wir üben den Fragesatz: Ich bin unsicher. Bitte zeig es mir."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Fehler beim Üben des Gebets?",
+          "prompt": "Was hilft, wenn du beim Üben des Gebets unsicher bist?",
           "options": [
-            "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme.",
+            "Ich erfinde beim Gebet allein eine neue Ausgleichsbewegung.",
             "Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Denke an den Unterricht und frage bei Unsicherheit Erwachsene.",
           "explain": "Mā schāʾ Allāh! Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Welche Übung hilft dir?",
           "options": [
             "Wir üben den Fragesatz: Ich bin unsicher. Bitte zeig es mir.",
-            "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme."
+            "Ich behaupte, dass ein Kind niemals nach Hilfe fragen darf."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an den Unterricht und frage bei Unsicherheit Erwachsene.",
+          "explain": "Mā schāʾ Allāh! Wir üben den Fragesatz: Ich bin unsicher. Bitte zeig es mir."
         },
         {
           "type": "text",
@@ -23927,14 +23927,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Wie gehen wir mit Unsicherheit beim Gebetsüben um?",
           "options": [
             "Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson.",
-            "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme."
+            "Ich erfinde beim Gebet allein eine neue Ausgleichsbewegung."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Denke an den Unterricht und frage bei Unsicherheit Erwachsene.",
+          "explain": "Mā schāʾ Allāh! Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson."
         }
       ]
     },
@@ -23995,12 +23995,12 @@ const additions=
     "ageText": {
       "4-5": {
         "goal": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde.",
-        "intro": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Er spricht auch von Krankheit und Reise. Stell dir vor: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Heute üben wir: Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
+        "intro": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Er spricht auch von Krankheit und Reise. Stell dir vor: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Heute üben wir: Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
         "lines": [
           "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde.",
           "Er spricht auch von Krankheit und Reise.",
           "Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt.",
-          "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen."
+          "Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten."
         ],
         "evidence": "Wir lernen mit Qurʾān 2:185. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/165. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:185. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -24015,18 +24015,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt.",
-        "practice": "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
+        "practice": "Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
         "summary": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde.",
-        "audioScript": "Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen."
+        "audioScript": "Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten."
       },
       "6-8": {
         "goal": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Wir lesen Qurʾān 2:185. Der Vers bedeutet sinngemäß: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. So kann das im Alltag aussehen: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Die Aufgabe: Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen. Ramaḍān bedeutet: der genannte Monat. ṣiyām bedeutet: Fasten.",
+        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Wir lesen Qurʾān 2:185. Der Vers bedeutet sinngemäß: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. So kann das im Alltag aussehen: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Die Aufgabe: Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten. Ramaḍān bedeutet: der genannte Monat. ṣiyām bedeutet: Fasten.",
         "lines": [
           "Qurʾān 2:185 ist die gelesene Stelle.",
           "Er spricht auch von Krankheit und Reise.",
           "Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt.",
-          "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen."
+          "Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:185. Sinngemäß: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/165. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:185. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -24041,18 +24041,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt.",
-        "practice": "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
+        "practice": "Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
         "summary": "Qurʾān 2:185 trägt diese Stunde. Er spricht auch von Krankheit und Reise.",
-        "audioScript": "Ramaḍān und Fasten kennenlernen. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen."
+        "audioScript": "Ramaḍān und Fasten kennenlernen. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten."
       },
       "9-10": {
         "goal": "Ich kann das Thema „Ramaḍān und Fasten kennenlernen“ anhand von Qurʾān 2:185 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. In Qurʾān 2:185 lernen wir sinngemäß: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. Ramaḍān bedeutet der genannte Monat. ṣiyām bedeutet Fasten. Stell dir diese Situation vor: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Welcher nächste Schritt ist gut? Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. In Qurʾān 2:185 lernen wir sinngemäß: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. Ramaḍān bedeutet der genannte Monat. ṣiyām bedeutet Fasten. Stell dir diese Situation vor: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Welcher nächste Schritt ist gut? Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
         "lines": [
           "Unsere Qurʾān-Stelle ist Qurʾān 2:185.",
           "Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise.",
           "Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt.",
-          "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen."
+          "Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:185. Sinngemäß: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/165. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:185. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -24067,58 +24067,58 @@ const additions=
           }
         ],
         "situation": "Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt.",
-        "practice": "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
-        "summary": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
-        "audioScript": "Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen."
+        "practice": "Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
+        "summary": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
+        "audioScript": "Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten."
       }
     },
     "questions": {
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Ramaḍān und Fasten kennenlernen?",
+          "prompt": "Was erfahren wir über Ramaḍān?",
           "options": [
-            "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme.",
+            "Ramaḍān ist ein Monat, der mit dem Qurʾān nichts zu tun hat.",
             "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde."
           ],
           "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Denke an den Unterricht und frage bei Unsicherheit Erwachsene.",
           "explain": "Mā schāʾ Allāh! Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Welche Übung hilft dir?",
           "options": [
-            "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
-            "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme."
+            "Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
+            "Jedes Kind muss selbst eine neue Fastenpflicht festlegen."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Denke an den Unterricht und frage bei Unsicherheit Erwachsene.",
+          "explain": "Mā schāʾ Allāh! Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Ramaḍān und Fasten kennenlernen?",
+          "prompt": "Was erfahren wir über Ramaḍān?",
           "options": [
             "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde.",
-            "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme."
+            "Ramaḍān ist ein Monat, der mit dem Qurʾān nichts zu tun hat."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Denke an den Unterricht und frage bei Unsicherheit Erwachsene.",
           "explain": "Mā schāʾ Allāh! Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Welche Übung hilft dir?",
           "options": [
-            "Wir hören nur zu, wenn ein Mensch wirklich rezitiert. In diesem Paket gibt es keine Aufnahme.",
-            "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen."
+            "Jedes Kind muss selbst eine neue Fastenpflicht festlegen.",
+            "Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Denke an den Unterricht und frage bei Unsicherheit Erwachsene.",
+          "explain": "Mā schāʾ Allāh! Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten."
         },
         {
           "type": "text",
@@ -24139,20 +24139,20 @@ const additions=
         {
           "type": "text",
           "prompt": "Was wäre in dieser Situation ein guter Schritt? Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt.",
-          "sample": "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
+          "sample": "Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
           "hint": "Denke an unsere Übung.",
           "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was gehört zu unserer Ramaḍān-Lektion?",
           "options": [
-            "Wir hören einer richtigen Rezitation zu und wiederholen sie nicht mit einer Computerstimme.",
+            "Ramaḍān ist ein Monat, der mit dem Qurʾān nichts zu tun hat.",
             "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Denke an den Unterricht und frage bei Unsicherheit Erwachsene.",
+          "explain": "Mā schāʾ Allāh! Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde."
         }
       ]
     },
@@ -24166,9 +24166,9 @@ const additions=
         "de": "Fasten"
       }
     ],
-    "practice": "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
+    "practice": "Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
     "summary": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Er spricht auch von Krankheit und Reise.",
-    "audioScript": "Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
+    "audioScript": "Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
     "voiceApproved": false
   },
   "fiqh-zakah-und-hajj": {
