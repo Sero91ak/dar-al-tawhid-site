@@ -41,6 +41,9 @@ const required={
 "fiqh-ruku-kennenlernen":{
  "SRC-FIQH186-MUGHNI-570":["islamweb.net","15/570"]
 },
+"fiqh-sujud":{
+ "SRC-FIQH198-MUGHNI-592":["islamweb.net","15/592"]
+},
 "fiqh-aus-dem-ruku-aufrichten":{
  "SRC-FIQH192-MUGHNI-574":["islamweb.net","15/574"]
 },
@@ -76,6 +79,14 @@ for(const id of indexedOnly){
  assert.ok(e.safeApplication&&e.authenticityNote&&e.arabic,"record must give original fragment and child-safe scope");
  assert.notEqual(e.verificationStatus,"scientifically-approved");
 }
+const directlyReadSujud=file.sources.find(x=>x.sourceId==="SRC-FIQH198-MUGHNI-592");
+assert.ok(directlyReadSujud,"Directly read classical Sujud source must be registered");
+assert.equal(directlyReadSujud.verificationStatus,"primary-page-direct-read-2026-10-14");
+assert.match(directlyReadSujud.checkedBy,/Direkter öffentlicher Abruf/);
+assert.match(directlyReadSujud.arabic,/أمرت بالسجود على سبعة أعظم/);
+assert.match(directlyReadSujud.authenticityNote,/nicht gesondert nachgeprüft/);
+assert.match(directlyReadSujud.safeApplication,/Bei Schmerzen/);
+assert.notEqual(directlyReadSujud.verificationStatus,"scientifically-approved");
 let count=0;
 for(const [lessonId,expected] of Object.entries(required)){
  for(const [id,[host,fragment]] of Object.entries(expected)){
