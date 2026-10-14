@@ -68,13 +68,14 @@ def choose(plan,registry):
     if len(available)<LIMIT:raise RuntimeError("Remaining unrecorded fragments below batch size")
     selected=[];seen=set()
     def take(r):
+        if len(selected)>=LIMIT:return False
         if r["text"] in seen:return False
         if len(r["text"])*RATE+sum(len(x["text"])*RATE for x in selected)>MAX_COST:return False
         seen.add(r["text"]);selected.append(r)
         return True
     # Repeated fragments should be bought once: use common prefixes first.
     common=[r for r in available if len(r["usedBy"])>=20 and len(r["text"])<=75]
-    for r in sorted(common,key=lambda x:(-len(x["usedBy"]),len(x["text"]),x["text"]))[:4]:
+    for r in sorted(common,key=lambda x:(-len(x["usedBy"]),len(x["text"]),x["text"]))[:2]:
         take(r)
     # Six question-bearing fragments per age band, spread across all profiles.
     for age in ("4-6","7-8","9-10"):
