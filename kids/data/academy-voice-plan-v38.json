@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "version": "academy-voice-plan-v38-20261014-lesson-copy-synchronized",
+  "version": "academy-voice-plan-v38-20261014-copy-and-verse-corrections",
   "voiceProfileId": "serhat-owner-voice-2026",
   "voiceName": "Serhat Abu Malik – Master",
   "modelId": "eleven_v4",
@@ -127,7 +127,7 @@
     "fiqh-ramadan-fasten",
     "fiqh-zakah-und-hajj"
   ],
-  "phraseCount": 1448,
+  "phraseCount": 1551,
   "phrases": [
     {
       "text": "Adhkār ohne Zwang wiederholen. Danach folgen weitere Worte der Seite. Am Morgen sagt ein Kind einmal: Alles Lob gehört Allah. Wer nicht möchte, hört nur zu. Wir wiederholen einen kurzen deutschen Sinn und keine lange Liste.",
@@ -156,11 +156,6 @@
           "lessonId": "dua-adhkar-ohne-zwang",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "dua-adhkar-ohne-zwang",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -206,11 +201,6 @@
           "lessonId": "tawhid-allah-allein-danken",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "tawhid-allah-allein-danken",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -230,7 +220,7 @@
       ]
     },
     {
-      "text": "Wertschätzend mit sich selbst umgehen. Allah hat den Menschen gewürdigt. Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat. Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an. Wir sagen einen Satz über uns ohne das Wort besser als.",
+      "text": "Allah hat den Menschen gewürdigt. Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -241,16 +231,6 @@
           "lessonId": "nafs-wertschaetzend-mit-sich",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "nafs-wertschaetzend-mit-sich",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "nafs-wertschaetzend-mit-sich",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -271,7 +251,7 @@
       ]
     },
     {
-      "text": "Īmān an die Gesandten. Wir glauben an die Gesandten Allahs und respektieren sie. Allah hat Gesandte geschickt. Qurʾān 2:136 nennt mehrere Propheten und Gesandte. Wir glauben an alle Gesandten Allahs.",
+      "text": "Allah hat Gesandte geschickt. Der Vers fordert auf zu sagen: Wir glauben an Allah und an das, was zu uns und zu den genannten Propheten herabgesandt wurde, und wir machen zwischen keinem Seiner Gesandten einen Unterschied.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -282,16 +262,11 @@
           "lessonId": "iman-gesandte",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "iman-gesandte",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
     {
-      "text": "Die schönen Namen Allahs. Allah hat schöne Namen. Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren. Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen. Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste.",
+      "text": "Allah hat schöne Namen. Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -302,16 +277,6 @@
           "lessonId": "tawhid-schoene-namen-allahs",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "tawhid-schoene-namen-allahs",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "tawhid-schoene-namen-allahs",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -342,11 +307,6 @@
           "lessonId": "tawhid-allah-hoert-bittgebete",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "tawhid-allah-hoert-bittgebete",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -382,7 +342,7 @@
       ]
     },
     {
-      "text": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+      "text": "Allah ist einzig. Allah ist der, auf den man angewiesen ist.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -393,11 +353,21 @@
           "lessonId": "tawhid-keine-goettliche-macht-fuer-geschoepfe",
           "kind": "summary",
           "age": "all"
-        },
+        }
+      ]
+    },
+    {
+      "text": "Allah ist nah. Der Vers sagt, dass Allah nah ist und die Bitte des Bittenden erhört, wenn er Ihn bittet, und dass die Menschen Ihm antworten und an Ihn glauben sollen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
-          "lessonId": "tawhid-keine-goettliche-macht-fuer-geschoepfe",
-          "kind": "audio",
-          "age": "4-5"
+          "lessonId": "tawhid-allah-hoert-bittgebete",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -418,7 +388,7 @@
       ]
     },
     {
-      "text": "Allah kennt unser Handeln. Allah kennt auch das Gute, das niemand sonst gesehen hat. Allah weiß, was wir laut sagen und was wir still bei uns tragen. Qurʾān 67:13 spricht von Allahs Wissen. Eine gute Tat ist auch ohne Applaus gut.",
+      "text": "Allah kennt auch das, was kein Mensch lobt. Der Vers sagt: Ob ihr eure Rede verbergt oder sie laut sagt, Er weiß, was in den Brüsten ist.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -429,11 +399,6 @@
           "lessonId": "tawhid-allah-kennt-unser-handeln",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "tawhid-allah-kennt-unser-handeln",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -450,6 +415,21 @@
           "kind": "line",
           "age": "9-10",
           "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Allah kennt unser Handeln. Allah kennt auch das Gute, das niemand sonst gesehen hat. Allah weiß, was wir laut sagen und was wir still bei uns tragen. Qurʾān 67:13 spricht von Allahs Wissen. Eine gute Tat ist auch ohne Applaus gut.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allah-kennt-unser-handeln",
+          "kind": "audio",
+          "age": "4-5"
         }
       ]
     },
@@ -531,16 +511,11 @@
           "lessonId": "tawhid-vertrauen-und-bemuehen",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "tawhid-vertrauen-und-bemuehen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
     {
-      "text": "Īmān an al-Qadar. Allah weiß und bestimmt. Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen. Ein Kind fragt, warum der Ausflug ins Wasser fiel. Die Antwort bleibt: Allah weiß mehr als wir. Wir schimpfen niemanden mit diesem Vers. Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an.",
+      "text": "Allah weiß und bestimmt. Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -551,16 +526,6 @@
           "lessonId": "iman-qadar",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "iman-qadar",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "iman-qadar",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -612,11 +577,6 @@
           "lessonId": "tawhid-allahs-wissen",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "tawhid-allahs-wissen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -652,11 +612,6 @@
           "lessonId": "iman-allen-gesandten-respekt",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "iman-allen-gesandten-respekt",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -677,11 +632,6 @@
           "lessonId": "adab-als-gast",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "adab-als-gast",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -727,11 +677,6 @@
           "lessonId": "adab-aeltere-respektvoll",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "adab-aeltere-respektvoll",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -751,7 +696,7 @@
       ]
     },
     {
-      "text": "Ikhlāṣ im Wochenrückblick. Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan? Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist. Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen. Wir schreiben ein Wort auf einen Zettel oder sagen es leise.",
+      "text": "Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan? Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -762,21 +707,11 @@
           "lessonId": "ikhlas-wochenrueckblick",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "ikhlas-wochenrueckblick",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "ikhlas-wochenrueckblick",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
     {
-      "text": "Den Gebetsabschluss kennenlernen. Am Ende des Gebets gibt es einen Gruß nach rechts und links. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite. Wir üben nur den Gruß untereinander.",
+      "text": "Am Ende des Gebets gibt es einen Gruß nach rechts und links. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -787,11 +722,6 @@
           "lessonId": "fiqh-taslim",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "fiqh-taslim",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -837,9 +767,19 @@
           "lessonId": "adab-anderen-platz-machen",
           "kind": "audio",
           "age": "4-5"
-        },
+        }
+      ]
+    },
+    {
+      "text": "Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Ar-Raḥmān und ar-Raḥīm sind Namen Allahs. Wir hören sie am Anfang der Rezitation.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
-          "lessonId": "adab-anderen-platz-machen",
+          "lessonId": "tawhid-rahman-rahim",
           "kind": "summary",
           "age": "all"
         }
@@ -853,11 +793,6 @@
       "priority": 1,
       "reviewStatus": "not-generated",
       "contexts": [
-        {
-          "lessonId": "tawhid-rahman-rahim",
-          "kind": "summary",
-          "age": "all"
-        },
         {
           "lessonId": "tawhid-rahman-rahim",
           "kind": "audio",
@@ -922,11 +857,6 @@
           "lessonId": "quran-arabisch-und-uebersetzung",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "quran-arabisch-und-uebersetzung",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -1788,7 +1718,7 @@
       ]
     },
     {
-      "text": "Die Gebetszeiten kennenlernen. Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Ein Kind sieht auf dem Gebetsplan der Familie die Namen der Tagesgebete und sucht den Morgen. Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die Namen der fünf Gebete lernen wir gemeinsam. Dieser Vers nennt sie nicht alle einzeln.",
+      "text": "Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -1799,11 +1729,6 @@
           "lessonId": "fiqh-gebetszeiten-kennenlernen",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "fiqh-gebetszeiten-kennenlernen",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -1839,11 +1764,6 @@
           "lessonId": "ikhlas-aufrichtigkeit-aussenwirkung",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "ikhlas-aufrichtigkeit-aussenwirkung",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -1879,11 +1799,6 @@
           "lessonId": "fiqh-aus-dem-ruku-aufrichten",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "fiqh-aus-dem-ruku-aufrichten",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -1920,7 +1835,7 @@
       ]
     },
     {
-      "text": "Nein sagen und persönliche Sicherheit. Wenn dir etwas unangenehm ist, darfst du Nein sagen und Hilfe holen. Dein Nein ist wichtig. Du bist nicht schuld, wenn du vor Schreck nichts sagen konntest. Du darfst jederzeit eine vertrauenswürdige erwachsene Person holen.",
+      "text": "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -1931,16 +1846,11 @@
           "lessonId": "family-nein-sagen-persoenliche-sicherheit",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "family-nein-sagen-persoenliche-sicherheit",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
     {
-      "text": "Gemeinsame Aufgaben ohne Eitelkeit. Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst. Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde. Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen. Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat.",
+      "text": "Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst. Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -1951,16 +1861,6 @@
           "lessonId": "ikhlas-gemeinsame-aufgaben",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "ikhlas-gemeinsame-aufgaben",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "ikhlas-gemeinsame-aufgaben",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -2140,11 +2040,6 @@
           "lessonId": "adab-beim-unterricht-aufmerksam",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "adab-beim-unterricht-aufmerksam",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -2190,11 +2085,6 @@
           "lessonId": "iman-bemuehen-und-vertrauen",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "iman-bemuehen-und-vertrauen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -2230,16 +2120,26 @@
           "lessonId": "akhlaq-bescheiden-bleiben",
           "kind": "audio",
           "age": "9-10"
-        },
+        }
+      ]
+    },
+    {
+      "text": "Bevor wir ein Haus betreten, fragen wir und grüßen. Der Vers verbietet den Glaubenden, andere Häuser als ihre eigenen zu betreten, bis sie um Erlaubnis gebeten und die Bewohner gegrüßt haben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
-          "lessonId": "akhlaq-bescheiden-bleiben",
+          "lessonId": "adab-als-gast",
           "kind": "summary",
           "age": "all"
         }
       ]
     },
     {
-      "text": "Digitalen Adab üben. Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist. Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm. Ein Kind möchte einen ärgerlichen Satz senden. Es löscht ihn und schreibt einen ruhigen Satz oder sendet nichts. Wir prüfen drei Beispielsätze und senden nur den freundlichen.",
+      "text": "Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist. Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -2250,16 +2150,11 @@
           "lessonId": "adab-digital",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "adab-digital",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
     {
-      "text": "Eigene Gedanken prüfen. Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen. Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen. Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten. Wir üben den Satz: Ich weiß es noch nicht. Ich frage.",
+      "text": "Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen. Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -2270,21 +2165,11 @@
           "lessonId": "nafs-eigene-gedanken-pruefen",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "nafs-eigene-gedanken-pruefen",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "nafs-eigene-gedanken-pruefen",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
     {
-      "text": "Stille und Sammlung üben. Bevor wir lesen, werden wir einen Moment ruhig. Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen. Die Bücher liegen bereit. Alle sitzen einen kurzen Moment still, dann beginnt das Lesen. Wir üben die kurze Stille und das leise Öffnen des Buches.",
+      "text": "Bevor wir lesen, werden wir einen Moment ruhig. Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -2295,16 +2180,6 @@
           "lessonId": "nafs-stille-und-sammlung",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "nafs-stille-und-sammlung",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "nafs-stille-und-sammlung",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -2398,11 +2273,6 @@
           "lessonId": "akhlaq-dankbarkeit-zeigen",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "akhlaq-dankbarkeit-zeigen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -2454,11 +2324,6 @@
           "lessonId": "nafs-herz-mit-guten-taten",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "nafs-herz-mit-guten-taten",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -2506,6 +2371,21 @@
           "lessonId": "fiqh-taslim",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Den Gebetsabschluss kennenlernen. Am Ende des Gebets gibt es einen Gruß nach rechts und links. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite. Wir üben nur den Gruß untereinander.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-taslim",
+          "kind": "audio",
+          "age": "4-5"
         }
       ]
     },
@@ -2566,16 +2446,11 @@
           "lessonId": "adab-quran-sorgfaeltig-behandeln",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "adab-quran-sorgfaeltig-behandeln",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
     {
-      "text": "Muḥammad Friede sei mit ihm in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle.",
+      "text": "Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -2586,11 +2461,6 @@
           "lessonId": "sirah-muhammad-in-makkah",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "sirah-muhammad-in-makkah",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -2637,11 +2507,6 @@
           "lessonId": "iman-letzter-gesandter",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "iman-letzter-gesandter",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -2677,7 +2542,7 @@
       ]
     },
     {
-      "text": "Die Hiǧrah nach Madīnah. Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus. Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren. Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt. Wir wiederholen den Trostsatz und fügen keine Route hinzu.",
+      "text": "Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus. Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -2688,16 +2553,6 @@
           "lessonId": "sirah-hijrah-madinah",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "sirah-hijrah-madinah",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "sirah-hijrah-madinah",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -2713,11 +2568,6 @@
           "lessonId": "iman-quran-als-offenbarung",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "iman-quran-als-offenbarung",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -2764,6 +2614,21 @@
           "kind": "line",
           "age": "4-5",
           "index": 0
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān ist Allahs Buch. Der Qurʾān ist Allahs Buch. Wir gehen achtsam damit um.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-quran-als-offenbarung",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -2880,7 +2745,7 @@
       ]
     },
     {
-      "text": "Muḥammad Friede sei mit ihm als barmherziger Lehrer. Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten.",
+      "text": "Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -2891,16 +2756,11 @@
           "lessonId": "sirah-muhammad-barmherziger-lehrer",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "sirah-muhammad-barmherziger-lehrer",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
     {
-      "text": "Die sechs Glaubenssäulen wiederholen. Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt. Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht. Wir wiederholen nur die vier Worte des Verses als gelesen und nennen die Sechszahl als bekannte Unterrichtsreihe, die hier nicht neu belegt wurde.",
+      "text": "Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -2911,16 +2771,11 @@
           "lessonId": "iman-sechs-glaubenssaeulen",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "iman-sechs-glaubenssaeulen",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
     {
-      "text": "Guter Charakter im Wochenrückblick. Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist. Die Seite beginnt danach mit einer Erklärung. Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel. Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden.",
+      "text": "Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist. Die Seite beginnt danach mit einer Erklärung.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -2931,11 +2786,6 @@
           "lessonId": "akhlaq-guter-charakter-rueckblick",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "akhlaq-guter-charakter-rueckblick",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -3033,6 +2883,21 @@
       ]
     },
     {
+      "text": "Die arabischen Worte und der deutsche Sinn sind nicht dasselbe. Die deutsche Zeile erklärt den Sinn und ist keine beglaubigte Übersetzung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-arabisch-und-uebersetzung",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Die Bedeutung von ʿIbādah. Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen. Ein Kind erklärt: Beten ist Dienen. Jemanden um ein Glas Wasser bitten ist gewöhnliche Hilfe. Wir sortieren zwei Beispiele: Gebet zu Allah, und ein Mensch, der uns den Stift reicht.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -3064,16 +2929,11 @@
           "lessonId": "tawhid-bedeutung-ibadah",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "tawhid-bedeutung-ibadah",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
     {
-      "text": "Ṣaḥābah und gutes Vorbild. Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild. Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie. Ein Kind sagt: Sie haben dem Propheten, Friede sei mit ihm, geholfen. Ein bestimmtes Abenteuer nennen wir nicht. Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer.",
+      "text": "Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild. Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -3084,11 +2944,6 @@
           "lessonId": "sirah-sahabah-vorbild",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "sirah-sahabah-vorbild",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -3104,6 +2959,21 @@
           "lessonId": "fiqh-gebetszeiten-kennenlernen",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die Gebetszeiten kennenlernen. Auf einem Plan erkennen wir, dass das Gebet Zeiten am Tag hat. Der Vers sagt: Verrichte das Gebet vom Neigen der Sonne bis zur Dunkelheit der Nacht, und die Lesung der Morgenfrühe. Ein Kind sieht auf dem Gebetsplan der Familie die Namen der Tagesgebete und sucht den Morgen. Wir ordnen nur, was der Vers selbst nennt: eine Zeit ab dem Neigen der Sonne, die Nacht und den Morgen. Die Namen der fünf Gebete lernen wir gemeinsam. Dieser Vers nennt sie nicht alle einzeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-gebetszeiten-kennenlernen",
+          "kind": "audio",
+          "age": "4-5"
         }
       ]
     },
@@ -3135,6 +3005,26 @@
           "kind": "line",
           "age": "6-8",
           "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Die Hiǧrah nach Madīnah. Der Prophet, Friede sei mit ihm, zog mit einem Gefährten aus. Der Vers sagt, dass Allah ihm half, als die Ungläubigen ihn hinausdrängten, als er der zweite von zweien war und beide in der Höhle waren. Wir zeigen auf einer einfachen Karte nur zwei Worte: Makkah und Madīnah, und sagen, dass der Vers den Weg dazwischen nicht beschreibt. Wir wiederholen den Trostsatz und fügen keine Route hinzu.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-hijrah-madinah",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "sirah-hijrah-madinah",
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     },
@@ -3260,6 +3150,26 @@
       ]
     },
     {
+      "text": "Die schönen Namen Allahs. Allah hat schöne Namen. Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren. Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen. Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-schoene-namen-allahs",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "tawhid-schoene-namen-allahs",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
       "text": "Die schönen Namen Allahs. Der Vers sagt: Allah gehören die schönsten Namen, so ruft Ihn damit an, und lasst die, die bei Seinen Namen abirren. Ein Kind hört ar-Raḥmān und sagt: Damit rufen wir Allah an. Wir geben diesen Namen keinem Menschen. Wir wiederholen einen Namen nur so, wie er im Unterricht schon aus einem Vers bekannt ist, und erfinden keine neue Namensliste.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -3286,6 +3196,21 @@
           "lessonId": "iman-sechs-glaubenssaeulen",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die sechs Glaubenssäulen wiederholen. Der Vers nennt den Glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Der Vers sagt, dass der Gesandte glaubt, was zu ihm herabgesandt wurde, und die Glaubenden, und dass jeder an Allah, Seine Engel, Seine Bücher und Seine Gesandten glaubt. Wir legen vier Karten für die vier genannten Worte. Zwei weitere Karten, Jüngster Tag und Bestimmung, legen wir daneben und sagen: Die stehen in diesem Vers nicht. Wir wiederholen nur die vier Worte des Verses als gelesen und nennen die Sechszahl als bekannte Unterrichtsreihe, die hier nicht neu belegt wurde.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-sechs-glaubenssaeulen",
+          "kind": "audio",
+          "age": "4-5"
         }
       ]
     },
@@ -3321,7 +3246,7 @@
       ]
     },
     {
-      "text": "Rukūʿ kennenlernen. Die Verbeugung im Gebet üben wir mit einer Lehrperson. Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute. Die Lehrperson zeigt die Verbeugung. Die Kinder machen sie langsam mit und richten sich wieder auf, ohne ein Maß zu erfinden. Wir nennen das Wort Rukūʿ und sagen, dass der Winkel nicht aus diesem Vers stammt.",
+      "text": "Die Verbeugung im Gebet üben wir mit einer Lehrperson. Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -3332,21 +3257,11 @@
           "lessonId": "fiqh-ruku-kennenlernen",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "fiqh-ruku-kennenlernen",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "fiqh-ruku-kennenlernen",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
     {
-      "text": "Mut zur Wahrheit. Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist. Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen. Ein Kind hat den Stift genommen und sagt das, statt ein anderes Kind zu beschuldigen. Wir üben einen wahren Satz ohne ein lautes Vorführen.",
+      "text": "Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist. Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -3357,16 +3272,6 @@
           "lessonId": "akhlaq-mut-zur-wahrheit",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "akhlaq-mut-zur-wahrheit",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "akhlaq-mut-zur-wahrheit",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -3382,6 +3287,21 @@
           "lessonId": "adab-digital",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Digitalen Adab üben. Bevor wir eine Nachricht senden, lesen wir, ob sie freundlich ist. Dieselbe Stelle gegen Spott und verletzende Namen gilt auch für Worte auf einem Bildschirm. Ein Kind möchte einen ärgerlichen Satz senden. Es löscht ihn und schreibt einen ruhigen Satz oder sendet nichts. Wir prüfen drei Beispielsätze und senden nur den freundlichen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-digital",
+          "kind": "audio",
+          "age": "4-5"
         }
       ]
     },
@@ -3544,11 +3464,6 @@
           "lessonId": "dua-beim-verlassen-des-hauses",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "dua-beim-verlassen-des-hauses",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -3595,11 +3510,6 @@
           "lessonId": "ikhlas-dua-aufrichtig",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "ikhlas-dua-aufrichtig",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -3635,6 +3545,26 @@
       ]
     },
     {
+      "text": "Eigene Gedanken prüfen. Bevor wir etwas Schlechtes über jemand sagen, prüfen wir, ob wir es wissen. Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen. Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten. Wir üben den Satz: Ich weiß es noch nicht. Ich frage.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-eigene-gedanken-pruefen",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "nafs-eigene-gedanken-pruefen",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
       "text": "Eigene Gedanken prüfen. Der Vers fordert auf, viel Verdacht zu meiden, weil mancher Verdacht Sünde ist, nicht auszuspähen und nicht übereinander herzuziehen. Ein Kind denkt, ein anderes habe seinen Stift weggenommen. Es fragt, statt es laut zu behaupten. Wir üben den Satz: Ich weiß es noch nicht. Ich frage.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -3661,11 +3591,6 @@
           "lessonId": "tarbiyah-eigene-grenzen-respektieren",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "tarbiyah-eigene-grenzen-respektieren",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -3828,7 +3753,7 @@
       ]
     },
     {
-      "text": "Woher stammt ein Ḥadīṯ?. Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge. Es ist nichts als eine Offenbarung, die eingegeben wird. Wir legen ein Kärtchen Qurʾān und ein Kärtchen Hadith nebeneinander und sagen: Das zweite ist eine überlieferte Nachricht, kein Vers. Wir erklären, dass ein Hadith einen Überliefererweg braucht und dass wir keine Nummer ergänzen, die wir nicht gelesen haben.",
+      "text": "Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge. Es ist nichts als eine Offenbarung, die eingegeben wird.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -3839,11 +3764,6 @@
           "lessonId": "quran-woher-stammt-ein-hadith",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "quran-woher-stammt-ein-hadith",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -3880,7 +3800,7 @@
       ]
     },
     {
-      "text": "Selbstständigkeit Schritt für Schritt. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist. Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst. Die arabischen Worte spricht die Lehrperson.",
+      "text": "Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -3891,11 +3811,6 @@
           "lessonId": "tarbiyah-selbststaendigkeit",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "tarbiyah-selbststaendigkeit",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -3916,7 +3831,7 @@
       ]
     },
     {
-      "text": "Fragen zum Īmān stellen. Eine ehrliche Frage zum Glauben darf gestellt werden. Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden. Wir üben eine höfliche Frage und das Warten auf die Antwort.",
+      "text": "Eine ehrliche Frage zum Glauben darf gestellt werden. Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -3927,21 +3842,11 @@
           "lessonId": "iman-fragen-stellen",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "iman-fragen-stellen",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "iman-fragen-stellen",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
     {
-      "text": "Sichere Regeln zu Hause. Sichere Regeln helfen uns. Bei Gefahr holen wir einen Erwachsenen. Wir achten auf sichere Regeln zu Hause. Qurʾān 2:195 enthält eine Warnung davor, sich ins Verderben zu stürzen. Wir halten Abstand von gefährlichen Dingen.",
+      "text": "Eine Familienregel kann uns vor einer Gefahr schützen. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -3952,11 +3857,6 @@
           "lessonId": "tarbiyah-sichere-regeln-zu-hause",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "tarbiyah-sichere-regeln-zu-hause",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -4002,11 +3902,6 @@
           "lessonId": "ikhlas-gute-absicht-erneuern",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "ikhlas-gute-absicht-erneuern",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -4043,7 +3938,7 @@
       ]
     },
     {
-      "text": "Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
+      "text": "Eine kleine Hilfe kann vor Allah Gewicht haben. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -4054,11 +3949,6 @@
           "lessonId": "ikhlas-kleine-taten-wertvoll",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -4079,7 +3969,7 @@
       ]
     },
     {
-      "text": "Mit Bildschirmen bewusst umgehen. Eine vereinbarte Bildschirmzeit halten wir ein. Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht. Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein.",
+      "text": "Eine vereinbarte Bildschirmzeit halten wir ein. Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -4090,11 +3980,6 @@
           "lessonId": "tarbiyah-bildschirme-bewusst",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "tarbiyah-bildschirme-bewusst",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -4115,7 +4000,7 @@
       ]
     },
     {
-      "text": "Fürsorge für Kranke. Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind. Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn. Ein Geschwisterkind liegt und möchte ein Buch. Das Kind bringt es, nachdem es gefragt hat, und bleibt nicht lange, wenn Ruhe nötig ist. Wir unterscheiden: ein Buch bringen dürfen wir. Medizin geben wir nicht.",
+      "text": "Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind. Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -4126,16 +4011,6 @@
           "lessonId": "akhlaq-fuersorge-fuer-kranke",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "akhlaq-fuersorge-fuer-kranke",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "akhlaq-fuersorge-fuer-kranke",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -4171,11 +4046,6 @@
           "lessonId": "fiqh-gebetsplatz-vorbereiten",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "fiqh-gebetsplatz-vorbereiten",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -4222,11 +4092,6 @@
           "lessonId": "quran-tajwid-hoeren",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "quran-tajwid-hoeren",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -4341,11 +4206,6 @@
           "lessonId": "fiqh-fehler-beim-ueben",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "fiqh-fehler-beim-ueben",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -4391,16 +4251,11 @@
           "lessonId": "nafs-fehler-bereuen",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "nafs-fehler-bereuen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
     {
-      "text": "Die Qurʾān-Rezitation im Gebet: Die Fātiḥah ist eine wichtige Sūrah. Wir lernen sie mit einer Lehrperson und unterscheiden Qurʾān-Vers, Tafsīr und Sunnah.",
+      "text": "Fiqh · Qurʾān-Rezitation im Gebet: Die Fātiḥah ist wichtig; wir lernen sie mit einer Lehrperson.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -4426,6 +4281,26 @@
           "lessonId": "iman-fragen-stellen",
           "kind": "audio",
           "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Fragen zum Īmān stellen. Eine ehrliche Frage zum Glauben darf gestellt werden. Der Vers sagt, dass vor dem Propheten nur Männer gesandt wurden, denen eingegeben wird, und: Fragt die Leute der Erinnerung, wenn ihr nicht wisst. Ein Kind versteht ein Wort nicht und fragt die Lehrperson, statt eine eigene Bedeutung zu erfinden. Wir üben eine höfliche Frage und das Warten auf die Antwort.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-fragen-stellen",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "iman-fragen-stellen",
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     },
@@ -4471,11 +4346,6 @@
           "lessonId": "akhlaq-freude-fuer-andere",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "akhlaq-freude-fuer-andere",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -4527,11 +4397,6 @@
           "lessonId": "tarbiyah-verantwortung-uebernehmen",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "tarbiyah-verantwortung-uebernehmen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -4567,16 +4432,11 @@
           "lessonId": "family-gemeinschaft-gutes",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "family-gemeinschaft-gutes",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
     {
-      "text": "Verantwortung für Worte übernehmen. Für ein unfreundliches Wort übernehmen wir die Verantwortung und entschuldigen uns. Dieselbe Stelle wie in der Stunde über Mobbing verbietet Spott, Herabsetzung und verletzende Spitznamen. Ein Kind hat einen bösen Spitznamen gesagt. Es sagt der anderen Person: Das war falsch. Es tut mir leid. Wir üben die Entschuldigung und benutzen den Namen danach nicht wieder.",
+      "text": "Für ein unfreundliches Wort übernehmen wir die Verantwortung und entschuldigen uns. Dieselbe Stelle wie in der Stunde über Mobbing verbietet Spott, Herabsetzung und verletzende Spitznamen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -4587,16 +4447,6 @@
           "lessonId": "akhlaq-verantwortung-fuer-worte",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "akhlaq-verantwortung-fuer-worte",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "akhlaq-verantwortung-fuer-worte",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -4627,11 +4477,6 @@
           "lessonId": "dua-fuer-eltern-gutes-erbitten",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "dua-fuer-eltern-gutes-erbitten",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -4662,6 +4507,26 @@
           "lessonId": "akhlaq-fuersorge-fuer-kranke",
           "kind": "audio",
           "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Fürsorge für Kranke. Einem kranken Menschen bieten wir eine kleine Hilfe an, wenn die Eltern einverstanden sind. Dieselbe Stelle wie in der Stunde über Kranke und Ältere nennt das Gute zu den Eltern, den Verwandten, den Waisen, den Bedürftigen und den Nachbarn. Ein Geschwisterkind liegt und möchte ein Buch. Das Kind bringt es, nachdem es gefragt hat, und bleibt nicht lange, wenn Ruhe nötig ist. Wir unterscheiden: ein Buch bringen dürfen wir. Medizin geben wir nicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-fuersorge-fuer-kranke",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-fuersorge-fuer-kranke",
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     },
@@ -4713,11 +4578,26 @@
           "lessonId": "family-gemeinsam-in-der-moschee",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Gemeinsame Aufgaben ohne Eitelkeit. Bei einer gemeinsamen Aufgabe sehen wir die Aufgabe, nicht nur uns selbst. Dieselbe Stelle wie in der Stunde über das Abwenden von Schaden enthält den Satz, einander bei der Rechtschaffenheit zu helfen und nicht bei der Sünde. Vier Kinder bauen ein Bild auf. Eines will nur den eigenen Namen darunter setzen. Die Gruppe schreibt alle Namen oder keinen. Wir verteilen eine kleine Aufgabe so, dass jedes Kind einen Teil hat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-gemeinsame-aufgaben",
+          "kind": "audio",
+          "age": "4-5"
         },
         {
-          "lessonId": "family-gemeinsam-in-der-moschee",
-          "kind": "summary",
-          "age": "all"
+          "lessonId": "ikhlas-gemeinsame-aufgaben",
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     },
@@ -4784,16 +4664,11 @@
           "lessonId": "iman-glaube-und-gute-worte",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "iman-glaube-und-gute-worte",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
     {
-      "text": "Gute Taten und Verantwortung. Glauben und eine gute Entscheidung gehören zusammen. Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Wir wählen eine kleine Zusage und führen sie am selben Tag aus.",
+      "text": "Glauben und eine gute Entscheidung gehören zusammen. Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -4804,11 +4679,6 @@
           "lessonId": "iman-gute-taten-verantwortung",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "iman-gute-taten-verantwortung",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -4875,6 +4745,21 @@
       ]
     },
     {
+      "text": "Gute Taten und Verantwortung. Glauben und eine gute Entscheidung gehören zusammen. Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Ein Kind sagt, es werde sein Heft mit nach Hause nehmen, und legt es wirklich in die Tasche. Wir wählen eine kleine Zusage und führen sie am selben Tag aus.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-gute-taten-verantwortung",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
       "text": "Guter Charakter im Wochenrückblick. Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist. Der gespeicherte Vers lautet: Und du bist wahrlich auf einem gewaltigen Charakter. Die Seite beginnt danach mit einer Erklärung. Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel. Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -4886,6 +4771,21 @@
           "lessonId": "akhlaq-guter-charakter-rueckblick",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Guter Charakter im Wochenrückblick. Der Vers sagt dem Propheten, Friede sei mit ihm, dass er auf einem gewaltigen Charakter ist. Die Seite beginnt danach mit einer Erklärung. Ein Kind erzählt eine freundliche Entscheidung aus der Woche, zum Beispiel Nachgeben beim Spiel. Wir sagen den Satz in der Ich-Form und ohne einen Hadith zu erfinden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-guter-charakter-rueckblick",
+          "kind": "audio",
+          "age": "4-5"
         }
       ]
     },
@@ -4946,11 +4846,6 @@
           "lessonId": "akhlaq-hilfsbereitschaft-ohne-druck",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "akhlaq-hilfsbereitschaft-ohne-druck",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -4986,11 +4881,6 @@
           "lessonId": "nafs-hoffnung-barmherzigkeit",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "nafs-hoffnung-barmherzigkeit",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -5027,6 +4917,26 @@
       ]
     },
     {
+      "text": "Ikhlāṣ im Wochenrückblick. Am Ende der Woche fragen wir: Für wen habe ich diese gute Tat getan? Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist. Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen. Wir schreiben ein Wort auf einen Zettel oder sagen es leise.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-wochenrueckblick",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "ikhlas-wochenrueckblick",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
       "text": "Ikhlāṣ im Wochenrückblick. Der Vers sagt, dass Allah das Buch mit der Wahrheit herabgesandt hat, und: Diene Allah, indem du Ihm gegenüber aufrichtig im Dīn bist. Ein Kind nennt eine Tat aus der Woche und sagt, ob es sie für Allah oder für das Lob getan hat. Es muss nichts Lautes erzählen. Wir schreiben ein Wort auf einen Zettel oder sagen es leise.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -5042,7 +4952,7 @@
       ]
     },
     {
-      "text": "Tashahhud als Gebetsbestandteil. Im Gebet gibt es eine Sitzphase. Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt. Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde.",
+      "text": "Im Gebet gibt es eine Sitzphase. Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -5053,16 +4963,11 @@
           "lessonId": "fiqh-tashahhud",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "fiqh-tashahhud",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
     {
-      "text": "Tawḥīd im Alltag. Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten. Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe. Ein Kind erklärt: Um einen Stift bitte ich den Nachbarn. Um Rechtleitung bitte ich Allah. Wir sortieren drei kurze Beispiele in zwei Gruppen.",
+      "text": "Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten. Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -5073,36 +4978,56 @@
           "lessonId": "tawhid-im-alltag",
           "kind": "summary",
           "age": "all"
-        },
+        }
+      ]
+    },
+    {
+      "text": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
-          "lessonId": "tawhid-im-alltag",
+          "lessonId": "adab-ruecksicht-in-der-moschee",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Im Gemeinschaftsraum nehmen wir auf andere Kinder Rücksicht. Der Vers spricht von Häusern, die Allah erlaubt hat, dass sie erhoben werden und in denen Sein Name genannt wird, und in denen Er morgens und abends gepriesen wird.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinsam-in-der-moschee",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Īmān an al-Qadar. Allah weiß und bestimmt. Der Vers lautet: Wir haben jedes Ding in einem Maß erschaffen. Ein Kind fragt, warum der Ausflug ins Wasser fiel. Die Antwort bleibt: Allah weiß mehr als wir. Wir schimpfen niemanden mit diesem Vers. Wir wiederholen den kurzen Sinn und stellen keine Warum-Kette an.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-qadar",
           "kind": "audio",
           "age": "4-5"
         },
         {
-          "lessonId": "tawhid-im-alltag",
+          "lessonId": "iman-qadar",
           "kind": "audio",
           "age": "9-10"
-        }
-      ]
-    },
-    {
-      "text": "Rücksicht in der Moschee. In der Moschee sind wir freundlich und nehmen Rücksicht auf andere. In einer Moschee wird gebetet und Allah gedacht. Qurʾān 7:31 spricht von angemessener Kleidung beim Moscheebesuch. Wir stören andere beim Beten nicht absichtlich.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "adab-ruecksicht-in-der-moschee",
-          "kind": "summary",
-          "age": "all"
-        },
-        {
-          "lessonId": "adab-ruecksicht-in-der-moschee",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -5137,21 +5062,6 @@
       ]
     },
     {
-      "text": "Īmān an den Jüngsten Tag. Wir glauben, dass es einen Jüngsten Tag gibt. Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers. Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Wir wiederholen nur die genannten Glaubensworte und keine Szene.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 1,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "iman-juengster-tag",
-          "kind": "audio",
-          "age": "9-10"
-        }
-      ]
-    },
-    {
       "text": "Īmān an den Jüngsten Tag. Wir glauben, dass es einen Jüngsten Tag gibt. Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Wir wiederholen nur die genannten Glaubensworte und keine Szene.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -5163,11 +5073,21 @@
           "lessonId": "iman-juengster-tag",
           "kind": "audio",
           "age": "4-5"
-        },
+        }
+      ]
+    },
+    {
+      "text": "Īmān an den Jüngsten Tag. Wir glauben, dass es einen Jüngsten Tag gibt. Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Für die heutige Stunde betrachten wir einen Teil dieses langen Verses. Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Wir wiederholen nur die genannten Glaubensworte und keine Szene.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "iman-juengster-tag",
-          "kind": "summary",
-          "age": "all"
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     },
@@ -5202,7 +5122,22 @@
       ]
     },
     {
-      "text": "Suǧūd kennenlernen. In der Niederwerfung kommen Stirn und Nase auf die Unterlage. Dieselbe Stelle wie in der Verbeugungsstunde sagt: Verbeugt euch und werft euch nieder. Auf einer weichen Unterlage setzt die Lehrperson Stirn und Nase auf. Kinder mit Schmerzen machen es nicht nach. Wir achten auf genügend Platz, damit niemand anstößt.",
+      "text": "Īmān an die Gesandten. Wir glauben an die Gesandten Allahs und respektieren sie. Allah hat Gesandte geschickt. Qurʾān 2:136 nennt mehrere Propheten und Gesandte. Wir glauben an alle Gesandten Allahs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-gesandte",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "In der Niederwerfung kommen Stirn und Nase auf die Unterlage. Dieselbe Stelle wie in der Verbeugungsstunde sagt: Verbeugt euch und werft euch nieder.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -5213,16 +5148,6 @@
           "lessonId": "fiqh-sujud",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "fiqh-sujud",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "fiqh-sujud",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -5284,11 +5209,6 @@
           "lessonId": "dua-in-schwierigen-momenten",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "dua-in-schwierigen-momenten",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -5340,11 +5260,6 @@
           "lessonId": "adab-juengere-freundlich",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "adab-juengere-freundlich",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -5364,6 +5279,21 @@
       ]
     },
     {
+      "text": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-keine-goettliche-macht-fuer-geschoepfe",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
       "text": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -5379,7 +5309,37 @@
       ]
     },
     {
-      "text": "Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
+      "text": "Kleine gute Taten gehören zum Dienen Allahs. Dieselbe Stelle wie in der Stunde über die erneuerte Absicht sagt, Allah aufrichtig zu dienen, das Gebet zu verrichten und die Zakāh zu geben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-herz-mit-guten-taten",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten. Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -5440,11 +5400,6 @@
           "lessonId": "family-kranken-und-aelteren-helfen",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "family-kranken-und-aelteren-helfen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -5507,11 +5462,6 @@
           "lessonId": "tarbiyah-lernen-und-pausen",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "tarbiyah-lernen-und-pausen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -5563,7 +5513,7 @@
       ]
     },
     {
-      "text": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+      "text": "Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -5574,16 +5524,11 @@
           "lessonId": "family-unterschiedliche-herkunft",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "family-unterschiedliche-herkunft",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
     {
-      "text": "Takbīrat al-Iḥrām. Assalāmu ʿalaikum! Mit den Worten Allāhu akbar beginnen wir das Gebet. Das heißt Takbīrat al-Iḥrām. Die genauen Regeln dazu erläutern die Sunnah und die Gelehrten. Wir sprechen die Worte ruhig mit der Lehrperson.",
+      "text": "Mit Allāhu akbar beginnt die Eröffnung des Gebets. Das nennt man Takbīrat al-Iḥrām.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -5592,6 +5537,21 @@
       "contexts": [
         {
           "lessonId": "fiqh-takbirat-al-ihram",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Mit älteren Menschen sprechen wir ruhig und freundlich. Der Vers befiehlt, nur Allah zu dienen und den Eltern gut zu sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-aeltere-respektvoll",
           "kind": "summary",
           "age": "all"
         }
@@ -5613,6 +5573,21 @@
       ]
     },
     {
+      "text": "Mit Bildschirmen bewusst umgehen. Eine vereinbarte Bildschirmzeit halten wir ein. Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht. Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-bildschirme-bewusst",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
       "text": "Mit Bildschirmen bewusst umgehen. Eine vereinbarte Bildschirmzeit halten wir ein. Der Vers sagt: Folge nicht dem, wovon du kein Wissen hast. Gehör, Augenlicht und Herz werden danach gefragt. Die vereinbarte Zeit ist um. Das Kind gibt das Gerät ab, auch wenn der Film noch weitergeht. Wir nennen die vereinbarte Zeit und eine Beschäftigung danach, zum Beispiel ein Buch oder draußen sein.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -5624,6 +5599,21 @@
           "lessonId": "tarbiyah-bildschirme-bewusst",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise. Der Vers befiehlt, Allah allein zu dienen, den Eltern gut zu sein, und nennt die Verwandten, die Waisen, die Bedürftigen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-kranken-und-aelteren-helfen",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -5654,11 +5644,6 @@
           "lessonId": "adab-mit-essen-nicht-spielen",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "adab-mit-essen-nicht-spielen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -5674,6 +5659,21 @@
           "lessonId": "adab-mit-essen-nicht-spielen",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Mit Essen spielen wir nicht. Dieselbe Stelle wie in der Moscheestunde sagt auch: Esst und trinkt und seid nicht maßlos.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-mit-essen-nicht-spielen",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -5719,9 +5719,19 @@
           "lessonId": "adab-mit-gaesten-freundlich",
           "kind": "audio",
           "age": "4-5"
-        },
+        }
+      ]
+    },
+    {
+      "text": "Mit jüngeren Kindern sprechen wir freundlich und helfen behutsam. Dieselbe Stelle über die Geschwisterlichkeit der Glaubenden trägt hier das Lernziel, den Jüngeren nicht zu drängen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
-          "lessonId": "adab-mit-gaesten-freundlich",
+          "lessonId": "adab-juengere-freundlich",
           "kind": "summary",
           "age": "all"
         }
@@ -5743,6 +5753,21 @@
       ]
     },
     {
+      "text": "Muḥammad Friede sei mit ihm als barmherziger Lehrer. Der Vers beschreibt den Propheten, Friede sei mit ihm, als mild im Umgang. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-barmherziger-lehrer",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
       "text": "Muḥammad Friede sei mit ihm als barmherziger Lehrer. Der Vers sagt, dass es durch Barmherzigkeit von Allah war, dass er mild zu den Menschen war, und dass sie sich zerstreut hätten, wenn er hartherzig gewesen wäre. Im Unterricht spricht die Lehrperson leise und lässt ein Kind ausreden. Wir üben einen freundlichen Satz zu einem anderen Kind. Wir erzählen dazu keine erfundene Kinderszene aus dem Leben des Propheten.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -5754,6 +5779,21 @@
           "lessonId": "sirah-muhammad-barmherziger-lehrer",
           "kind": "audio",
           "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Muḥammad Friede sei mit ihm in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-in-makkah",
+          "kind": "audio",
+          "age": "4-5"
         }
       ]
     },
@@ -5788,7 +5828,7 @@
       ]
     },
     {
-      "text": "Muḥammad ﷺ in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle.",
+      "text": "Muḥammad ﷺ in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Qurʾān 96:1 lautet sinngemäß: Lies im Namen deines Herrn, der erschaffen hat. Dieser Vers gehört zu den ersten Worten der Offenbarung. Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -5799,6 +5839,21 @@
           "lessonId": "sirah-muhammad-in-makkah",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Muḥammad, Friede sei mit ihm, ist der Gesandte Allahs und das Siegel der Propheten. Der Vers sagt, dass Muḥammad nicht der Vater von irgendjemandem unter euren Männern ist, sondern der Gesandte Allahs und das Siegel der Propheten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-letzter-gesandter",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -5834,7 +5889,27 @@
       ]
     },
     {
-      "text": "Nach dem Essen dankbar sein. Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf. Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs. Der Tisch wird abgeräumt. Das Kind sagt einen Dank und trägt einen leichten Teller, wenn die Eltern es erlauben. Wir üben den Dank und das ruhige Aufstehen.",
+      "text": "Mut zur Wahrheit. Die Wahrheit sagen wir höflich, auch wenn sie unbequem ist. Der Vers fordert die Glaubenden auf, Allah zu fürchten und ein gerades, treffendes Wort zu sagen. Ein Kind hat den Stift genommen und sagt das, statt ein anderes Kind zu beschuldigen. Wir üben einen wahren Satz ohne ein lautes Vorführen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-mut-zur-wahrheit",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-mut-zur-wahrheit",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf. Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -5845,16 +5920,6 @@
           "lessonId": "adab-nach-dem-essen-dankbar",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "adab-nach-dem-essen-dankbar",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "adab-nach-dem-essen-dankbar",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -5870,6 +5935,26 @@
           "lessonId": "adab-nach-dem-essen-dankbar",
           "kind": "audio",
           "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Nach dem Essen dankbar sein. Nach dem Essen bleiben wir dankbar und stehen nicht sofort lärmend auf. Der Vers sagt: So esst von dem, was Allah euch gegeben hat, als etwas Erlaubtes und Gutes, und seid dankbar für die Gnade Allahs. Der Tisch wird abgeräumt. Das Kind sagt einen Dank und trägt einen leichten Teller, wenn die Eltern es erlauben. Wir üben den Dank und das ruhige Aufstehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-nach-dem-essen-dankbar",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-nach-dem-essen-dankbar",
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     },
@@ -5905,7 +5990,17 @@
           "lessonId": "dua-nach-dem-essen-danken",
           "kind": "audio",
           "age": "9-10"
-        },
+        }
+      ]
+    },
+    {
+      "text": "Nach dem Essen erinnern wir uns, Allah zu danken. Der Vers fordert die Glaubenden auf, von den guten Dingen zu essen, die Allah ihnen gegeben hat, und Allah zu danken, wenn sie Ihn allein anbeten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
           "lessonId": "dua-nach-dem-essen-danken",
           "kind": "summary",
@@ -5914,7 +6009,67 @@
       ]
     },
     {
-      "text": "Versöhnung nach Streit. Nach einem Streit können wir wieder miteinander reden. Der Vers sagt, dass die Glaubenden Geschwister sind, und fordert auf, zwischen den beiden Geschwistern Frieden zu stiften. Zwei Kinder wollen dasselbe Buch. Sie hören auf zu zerren und sagen, wer es zuerst hat und wann das andere drankommt. Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu.",
+      "text": "Nach der Verbeugung richten wir uns wieder auf. Der Vers sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-aus-dem-ruku-aufrichten",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Nach einem Fehler bleibt die Tür zur Besserung offen. Der Vers lässt Yaʿqūb zu seinen Söhnen sagen, sie sollen nach Yūsuf und seinem Bruder suchen und nicht an Allahs Erleichterung verzweifeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-hoffnung-barmherzigkeit",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Nach einem Fehler dürfen wir um Verzeihung bitten und etwas besser machen. Der Vers ruft den Dienern zu, die gegen sich selbst maßlos waren: Verzweifelt nicht an Allahs Barmherzigkeit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-fehler-bereuen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Nach einem schönen Ereignis danken wir Allah. Der Vers sagt: Was immer ihr an Gnade habt, ist von Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allah-allein-danken",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Nach einem Streit können wir wieder miteinander reden. Der Vers sagt, dass die Glaubenden Geschwister sind, und fordert auf, zwischen den beiden Geschwistern Frieden zu stiften.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -5925,16 +6080,21 @@
           "lessonId": "akhlaq-versoehnung-nach-streit",
           "kind": "summary",
           "age": "all"
-        },
+        }
+      ]
+    },
+    {
+      "text": "Nach einer konzentrierten Zeit machen wir eine echte Pause. Der Vers sagt, dass Allah keiner Seele mehr auferlegt, als sie tragen kann.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
-          "lessonId": "akhlaq-versoehnung-nach-streit",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "akhlaq-versoehnung-nach-streit",
-          "kind": "audio",
-          "age": "9-10"
+          "lessonId": "tarbiyah-lernen-und-pausen",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -5985,11 +6145,6 @@
           "lessonId": "nafs-neid-erkennen",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "nafs-neid-erkennen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -6024,6 +6179,21 @@
       ]
     },
     {
+      "text": "Neid fühlt sich eng an. Die Stunde benutzt nur diesen Versteil und keine Gruselgeschichte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-neid-erkennen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Nein sagen und persönliche Sicherheit. Du darfst deine Grenzen schützen und Hilfe holen. Verantwortung für Übergriffe trägt niemals das betroffene Kind. Ein Nein zu einer unerwünschten Umarmung darf respektiert werden. Qurʾān 4:148 spricht über das Benennen von Unrecht, nicht über eine konkrete Berührung. Wenn Hilfe nötig ist, darfst du dich an mehrere vertrauenswürdige Erwachsene wenden.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -6054,7 +6224,22 @@
       ]
     },
     {
-      "text": "Nicht jeden Wunsch sofort erfüllen. Nicht jeden Wunsch erfüllen wir sofort. Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da. Ein Kind sieht ein Spielzeug im Regal und möchte es sofort. Es wartet und fragt zu Hause. Wir üben den Satz: Ich warte und frage.",
+      "text": "Nein sagen und persönliche Sicherheit. Wenn dir etwas unangenehm ist, darfst du Nein sagen und Hilfe holen. Dein Nein ist wichtig. Du bist nicht schuld, wenn du vor Schreck nichts sagen konntest. Du darfst jederzeit eine vertrauenswürdige erwachsene Person holen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-nein-sagen-persoenliche-sicherheit",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Nicht jeden Wunsch erfüllen wir sofort. Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -6065,16 +6250,6 @@
           "lessonId": "nafs-nicht-jeden-wunsch-sofort",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "nafs-nicht-jeden-wunsch-sofort",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "nafs-nicht-jeden-wunsch-sofort",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -6090,6 +6265,26 @@
           "lessonId": "nafs-nicht-jeden-wunsch-sofort",
           "kind": "audio",
           "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Nicht jeden Wunsch sofort erfüllen. Nicht jeden Wunsch erfüllen wir sofort. Der Vers sagt, die Hand nicht an den Hals gefesselt und sie nicht völlig geöffnet zu lassen, sonst sitzt man tadelnswert und bloß da. Ein Kind sieht ein Spielzeug im Regal und möchte es sofort. Es wartet und fragt zu Hause. Wir üben den Satz: Ich warte und frage.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-nicht-jeden-wunsch-sofort",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "nafs-nicht-jeden-wunsch-sofort",
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     },
@@ -6135,11 +6330,6 @@
           "lessonId": "ikhlas-nicht-mit-guten-taten-prahlen",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "ikhlas-nicht-mit-guten-taten-prahlen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -6709,7 +6899,7 @@
       ]
     },
     {
-      "text": "Die Absicht zum Gebet. Unser Gebet gilt Allah. Niyyah bedeutet Absicht. Sie ist im Herzen. Du weißt, welches Gebet du für Allah verrichten möchtest. Eine besondere Niyyah-Formel muss man dafür nicht laut sagen.",
+      "text": "Qurʾān 6:162 erinnert uns an die Hingabe an Allah. Ibn Qudāmah erklärt: Die Niyyah ist die Absicht im Herzen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -6942,11 +7132,6 @@
           "lessonId": "quran-respektvoll-auswendig-lernen",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "quran-respektvoll-auswendig-lernen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -6966,7 +7151,7 @@
       ]
     },
     {
-      "text": "Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
+      "text": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Er spricht auch von Krankheit und Reise.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -6977,16 +7162,11 @@
           "lessonId": "fiqh-ramadan-fasten",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "fiqh-ramadan-fasten",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
     {
-      "text": "Ramaḍān und Fasten kennenlernen. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
+      "text": "Ramaḍān und Fasten kennenlernen. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -7001,7 +7181,7 @@
       ]
     },
     {
-      "text": "Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
+      "text": "Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -7012,6 +7192,21 @@
           "lessonId": "fiqh-ramadan-fasten",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Er spricht auch von Krankheit und Reise. Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-ramadan-fasten",
+          "kind": "audio",
+          "age": "4-5"
         }
       ]
     },
@@ -7058,11 +7253,6 @@
           "lessonId": "nafs-istighfar",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "nafs-istighfar",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -7121,6 +7311,21 @@
       "contexts": [
         {
           "lessonId": "fiqh-reinheit-der-gebetskleidung",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Rücksicht in der Moschee. In der Moschee sind wir freundlich und nehmen Rücksicht auf andere. In einer Moschee wird gebetet und Allah gedacht. Qurʾān 7:31 spricht von angemessener Kleidung beim Moscheebesuch. Wir stören andere beim Beten nicht absichtlich.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-ruecksicht-in-der-moschee",
           "kind": "audio",
           "age": "4-5"
         }
@@ -7188,11 +7393,6 @@
           "lessonId": "akhlaq-ruhig-beim-verlieren",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "akhlaq-ruhig-beim-verlieren",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -7208,6 +7408,26 @@
           "lessonId": "fiqh-ruku-kennenlernen",
           "kind": "audio",
           "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Rukūʿ kennenlernen. Die Verbeugung im Gebet üben wir mit einer Lehrperson. Der Vers fordert die Glaubenden auf: Verbeugt euch, werft euch nieder, dient eurem Herrn und tut das Gute. Die Lehrperson zeigt die Verbeugung. Die Kinder machen sie langsam mit und richten sich wieder auf, ohne ein Maß zu erfinden. Wir nennen das Wort Rukūʿ und sagen, dass der Winkel nicht aus diesem Vers stammt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-ruku-kennenlernen",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "fiqh-ruku-kennenlernen",
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     },
@@ -7238,6 +7458,21 @@
           "lessonId": "sirah-sahabah-vorbild",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ṣaḥābah und gutes Vorbild. Die ersten Gefährten, die ausgezogen sind und die geholfen haben, haben ein gutes Vorbild. Der Vers nennt die ersten Vorangehenden aus den Auswanderern und den Helfern und die, die ihnen auf gute Weise gefolgt sind, und sagt, dass Allah mit ihnen zufrieden ist und sie. Ein Kind sagt: Sie haben dem Propheten, Friede sei mit ihm, geholfen. Ein bestimmtes Abenteuer nennen wir nicht. Wir wiederholen die zwei Gruppennamen aus dem Vers: die Ausgewanderten und die Helfer.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-sahabah-vorbild",
+          "kind": "audio",
+          "age": "4-5"
         }
       ]
     },
@@ -7273,11 +7508,6 @@
           "lessonId": "akhlaq-schaden-abwenden",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "akhlaq-schaden-abwenden",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -7345,11 +7575,6 @@
           "lessonId": "nafs-schuldgefuehle-ohne-angstbilder",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "nafs-schuldgefuehle-ohne-angstbilder",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -7416,6 +7641,21 @@
       ]
     },
     {
+      "text": "Selbstständigkeit Schritt für Schritt. Eine Aufgabe, die zum Alter passt, führen wir Schritt für Schritt selbst aus. Ein Kind zieht die Schuhe selbst an und bittet nur, wenn der Knoten noch zu schwer ist. Wir teilen eine Aufgabe in zwei Schritte und tun den ersten selbst. Die arabischen Worte spricht die Lehrperson.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-selbststaendigkeit",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
       "text": "Sich freuen ist etwas anderes, als andere herabzusetzen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -7428,6 +7668,21 @@
           "kind": "line",
           "age": "6-8",
           "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Sichere Regeln zu Hause. Sichere Regeln helfen uns. Bei Gefahr holen wir einen Erwachsenen. Wir achten auf sichere Regeln zu Hause. Qurʾān 2:195 enthält eine Warnung davor, sich ins Verderben zu stürzen. Wir halten Abstand von gefährlichen Dingen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-sichere-regeln-zu-hause",
+          "kind": "audio",
+          "age": "4-5"
         }
       ]
     },
@@ -7510,7 +7765,7 @@
       ]
     },
     {
-      "text": "Wenn jemand immer wieder gemein ist, bist du nicht schuld. Sag es einer erwachsenen Person, der du vertraust.",
+      "text": "Spott ist verboten, Gerechtigkeit ist geboten, und das Kind holt Hilfe, ohne sich selbst die Schuld zu geben.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -7521,6 +7776,26 @@
           "lessonId": "family-mobbing-erkennen-hilfe-holen",
           "kind": "summary",
           "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Stille und Sammlung üben. Bevor wir lesen, werden wir einen Moment ruhig. Der Vers sagt: Gedenke deines Herrn in dir selbst, demütig bittend und in Ehrfurcht, ohne laute Rede, am Morgen und am Abend, und gehöre nicht zu den Achtlosen. Die Bücher liegen bereit. Alle sitzen einen kurzen Moment still, dann beginnt das Lesen. Wir üben die kurze Stille und das leise Öffnen des Buches.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-stille-und-sammlung",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "nafs-stille-und-sammlung",
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     },
@@ -7555,7 +7830,27 @@
       ]
     },
     {
-      "text": "Was bedeutet Sunnah?. Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer. Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt. Ein Kind erklärt mit eigenen Worten: Sein Verhalten ist ein Vorbild. Ein bestimmtes Beispiel nennen wir nur, wenn es auf der Seite steht. Wir schreiben den deutschen Satz: Der Vers nennt ihn ein Vorbild. Eine einzelne Handlung ergänzen wir nicht.",
+      "text": "Suǧūd kennenlernen. In der Niederwerfung kommen Stirn und Nase auf die Unterlage. Dieselbe Stelle wie in der Verbeugungsstunde sagt: Verbeugt euch und werft euch nieder. Auf einer weichen Unterlage setzt die Lehrperson Stirn und Nase auf. Kinder mit Schmerzen machen es nicht nach. Wir achten auf genügend Platz, damit niemand anstößt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-sujud",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "fiqh-sujud",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer. Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -7566,16 +7861,6 @@
           "lessonId": "quran-was-bedeutet-sunnah",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "quran-was-bedeutet-sunnah",
-          "kind": "audio",
-          "age": "4-5"
-        },
-        {
-          "lessonId": "quran-was-bedeutet-sunnah",
-          "kind": "audio",
-          "age": "9-10"
         }
       ]
     },
@@ -7640,6 +7925,21 @@
       ]
     },
     {
+      "text": "Tashahhud als Gebetsbestandteil. Im Gebet gibt es eine Sitzphase. Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt. Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-tashahhud",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
       "text": "Tashahhud als Gebetsbestandteil. Im Gebet gibt es eine Sitzphase. Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Die Sitzworte selbst fehlen auf der Seite. Die Lehrperson setzt sich so, wie sie es kennt, und sagt: Die Worte lernen wir später bei einem Menschen. Heute erkennen wir nur, dass es dieses Sitzen gibt. Wir wiederholen: Das sind keine Qurʾān-Worte aus dieser Stunde.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -7666,6 +7966,26 @@
           "lessonId": "tawhid-im-alltag",
           "kind": "audio",
           "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Tawḥīd im Alltag. Im Gebet sagen wir, dass wir Allah allein anbeten und Ihn um Hilfe bitten. Der Vers lautet: Dich allein beten wir an, und Dich allein bitten wir um Hilfe. Ein Kind erklärt: Um einen Stift bitte ich den Nachbarn. Um Rechtleitung bitte ich Allah. Wir sortieren drei kurze Beispiele in zwei Gruppen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-im-alltag",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "tawhid-im-alltag",
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     },
@@ -7711,11 +8031,6 @@
           "lessonId": "tawhid-mit-eigenen-worten",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "tawhid-mit-eigenen-worten",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -7751,9 +8066,19 @@
           "lessonId": "adab-trinken-mit-guten-sitten",
           "kind": "audio",
           "age": "9-10"
-        },
+        }
+      ]
+    },
+    {
+      "text": "Um Vergebung zu bitten heißt, Allah um Sein Vergeben zu bitten. Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
         {
-          "lessonId": "adab-trinken-mit-guten-sitten",
+          "lessonId": "nafs-istighfar",
           "kind": "summary",
           "age": "all"
         }
@@ -7771,11 +8096,6 @@
           "lessonId": "nafs-ungeduld-bemerken",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "nafs-ungeduld-bemerken",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -7968,6 +8288,21 @@
       ]
     },
     {
+      "text": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-unterschiedliche-herkunft",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
       "text": "Unterschiedliche Menschen respektieren. Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben. Ein Kind grüßt ein anderes Kind, dessen Sprache es nicht versteht, mit einem Lächeln und einem Salam oder einem freundlichen deutschen Gruß. Wir üben den Gruß und keine Frage, die den anderen vorführt.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -7999,11 +8334,6 @@
           "lessonId": "akhlaq-unterschiedliche-menschen",
           "kind": "audio",
           "age": "9-10"
-        },
-        {
-          "lessonId": "akhlaq-unterschiedliche-menschen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -8039,6 +8369,41 @@
       ]
     },
     {
+      "text": "Verantwortung für Worte übernehmen. Für ein unfreundliches Wort übernehmen wir die Verantwortung und entschuldigen uns. Dieselbe Stelle wie in der Stunde über Mobbing verbietet Spott, Herabsetzung und verletzende Spitznamen. Ein Kind hat einen bösen Spitznamen gesagt. Es sagt der anderen Person: Das war falsch. Es tut mir leid. Wir üben die Entschuldigung und benutzen den Namen danach nicht wieder.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-verantwortung-fuer-worte",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-verantwortung-fuer-worte",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Verschiedene Sprachen und Aussehen gehören zu Allahs Zeichen. Der Vers nennt als Zeichen Allahs die Erschaffung der Himmel und der Erde und den Unterschied der Sprachen und Farben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-unterschiedliche-menschen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Versöhnung darf nicht erzwungen werden.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -8066,6 +8431,26 @@
           "lessonId": "akhlaq-versoehnung-nach-streit",
           "kind": "audio",
           "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Versöhnung nach Streit. Nach einem Streit können wir wieder miteinander reden. Der Vers sagt, dass die Glaubenden Geschwister sind, und fordert auf, zwischen den beiden Geschwistern Frieden zu stiften. Zwei Kinder wollen dasselbe Buch. Sie hören auf zu zerren und sagen, wer es zuerst hat und wann das andere drankommt. Wir üben: Ich möchte wieder Frieden. Bitte hör mir zu.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-versoehnung-nach-streit",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-versoehnung-nach-streit",
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     },
@@ -8143,16 +8528,11 @@
           "lessonId": "akhlaq-verzeihen-und-grenzen",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "akhlaq-verzeihen-und-grenzen",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
     {
-      "text": "Reinheit der Gebetskleidung. Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Der Vers lautet: Und deine Kleider, reinige sie. Ein Kind sieht einen deutlichen Schmutzfleck am Ärmel und zieht vor dem Üben ein sauberes Oberteil an oder sagt Bescheid. Wir prüfen mit den Augen: Ist etwas deutlich schmutzig? Wir waschen nur, was die Eltern erlauben.",
+      "text": "Vor dem Gebet schauen wir, ob die Kleidung sauber ist. Der Vers lautet: Und deine Kleider, reinige sie.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -8198,6 +8578,26 @@
       ]
     },
     {
+      "text": "Was bedeutet Sunnah?. Sunnah meint hier zuerst das Vorbild des Propheten, Friede sei mit ihm, nicht eine erfundene Nummer. Der Vers sagt, dass im Gesandten Allahs ein schönes Vorbild liegt für den, der Allah und den Jüngsten Tag erhofft und Allahs viel gedenkt. Ein Kind erklärt mit eigenen Worten: Sein Verhalten ist ein Vorbild. Ein bestimmtes Beispiel nennen wir nur, wenn es auf der Seite steht. Wir schreiben den deutschen Satz: Der Vers nennt ihn ein Vorbild. Eine einzelne Handlung ergänzen wir nicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-was-bedeutet-sunnah",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "quran-was-bedeutet-sunnah",
+          "kind": "audio",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
       "text": "Weniger verschwenden beim Essen. Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos. Auf dem Teller liegt mehr, als das Kind essen mag. Es lässt den Rest liegen, statt damit zu spielen, und sagt Bescheid. Wir üben, einmal nachzunehmen statt den Teller zu häufen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -8224,11 +8624,6 @@
           "lessonId": "adab-weniger-verschwenden",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "adab-weniger-verschwenden",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -8244,6 +8639,21 @@
           "lessonId": "adab-weniger-verschwenden",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wenn der Qurʾān gelesen wird, hören wir zu und schweigen. Der Vers sagt: Wenn der Qurʾān vorgetragen wird, hört ihm zu und seid still, auf dass ihr Barmherzigkeit erlangt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-beim-unterricht-aufmerksam",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -8264,7 +8674,22 @@
       ]
     },
     {
-      "text": "Nach Fehlern weiterlernen. Wenn etwas schiefgeht, versuchen wir es noch einmal. Ein Kind verschreibt ein Wort, radiert es aus und schreibt es noch einmal langsam. Wir planen einen zweiten Versuch und eine kleine Hilfe, zum Beispiel leiser lesen. Wir erfinden keine zusätzliche Geschichte.",
+      "text": "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen. Der lange Vers enthält den Satz: Helft einander bei der Rechtschaffenheit und der Gottesfurcht und helft einander nicht bei Sünde und Übertretung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-schaden-abwenden",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wenn etwas schiefgeht, versuchen wir es noch einmal. Wenn etwas schiefgeht, versuchen wir es noch einmal.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -8273,6 +8698,21 @@
       "contexts": [
         {
           "lessonId": "tarbiyah-nach-fehlern-weiterlernen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wenn Gäste kommen, helfen wir den Eltern, freundlich zu sein. Der Vers fragt: Ist die Geschichte von den geehrten Gästen Ibrāhīms zu dir gekommen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-mit-gaesten-freundlich",
           "kind": "summary",
           "age": "all"
         }
@@ -8295,6 +8735,21 @@
       ]
     },
     {
+      "text": "Wenn jemand etwas gut gemacht hat, freuen wir uns mit. Dieselbe Stelle wie in der Versöhnungsstunde sagt, dass die Glaubenden Geschwister sind.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-freude-fuer-andere",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Wenn jemand immer wieder gemein ist, ist das kein Spaß. Du bist nicht schuld. Sag es Mama, Papa oder einer Lehrperson. Wir spielen nicht nach, wie jemand gemein ist.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -8306,6 +8761,96 @@
           "lessonId": "family-mobbing-erkennen-hilfe-holen",
           "kind": "audio",
           "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn jemand Platz braucht, rücken wir zusammen. Der Vers sagt: Wenn zu euch gesagt wird, macht Raum in den Sitzrunden, dann macht Raum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-anderen-platz-machen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wenn sich etwas falsch anfühlt, sagen wir Nein und holen Hilfe. Der Vers sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist, und dass Allah hörend und wissend ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-eigene-grenzen-respektieren",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wenn uns ein Fehler bedrückt, sagen wir ihn einer vertrauten Person und verzweifeln nicht an Allahs Barmherzigkeit. Dieselbe Stelle wie in der Reuestunde ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-schuldgefuehle-ohne-angstbilder",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wenn uns etwas schwer wird, bitten wir Allah und holen bei Gefahr einen Menschen. Der Vers beginnt damit, dass Allah sagt: Ruft Mich an, so erhöre Ich euch.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-in-schwierigen-momenten",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wenn wir abgelenkt waren, erinnern wir uns wieder an das gute Ziel. Der Vers sagt, dass ihnen nur befohlen wurde, Allah aufzurichtig im Dīn zu dienen, als Ḥunafāʾ, das Gebet zu verrichten und die Zakāh zu geben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-gute-absicht-erneuern",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wenn wir beim Üben des Gebets unsicher sind, fragen wir eine Lehrperson. Dieselbe Stelle wie in der Fragestunde sagt: Fragt die Leute der Erinnerung, wenn ihr nicht wisst.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-fehler-beim-ueben",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -8326,6 +8871,21 @@
       ]
     },
     {
+      "text": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-beim-verlassen-des-hauses",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Wenn wir uns beim Lernen oder Helfen ablenken lassen, dürfen wir die Absicht erneuern.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -8338,6 +8898,36 @@
           "kind": "line",
           "age": "6-8",
           "index": 2
+        }
+      ]
+    },
+    {
+      "text": "Wenn wir verlieren, bleiben wir bei unseren Worten freundlich. Der Vers nennt Menschen, die in der leichten und in der schweren Lage ausgeben, den Zorn zurückhalten und den Menschen verzeihen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-ruhig-beim-verlieren",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wenn wir warten müssen, merken wir die Eile und werden langsamer. Der Vers lautet: So sei geduldig mit einem schönen Gedulden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-ungeduld-bemerken",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -8370,6 +8960,26 @@
           "kind": "line",
           "age": "6-8",
           "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Wertschätzend mit sich selbst umgehen. Allah hat den Menschen gewürdigt. Der Vers sagt, dass Allah die Kinder Adams gewürdigt, sie an Land und Meer getragen, ihnen von den guten Dingen gegeben und sie vor vielen Seiner Geschöpfe ausgezeichnet hat. Ein Kind nennt etwas, das es kann, zum Beispiel freundlich grüßen, und fügt keinen Vergleich an. Wir sagen einen Satz über uns ohne das Wort besser als.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "nafs-wertschaetzend-mit-sich",
+          "kind": "audio",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "nafs-wertschaetzend-mit-sich",
+          "kind": "audio",
+          "age": "9-10"
         }
       ]
     },
@@ -8517,6 +9127,21 @@
       ]
     },
     {
+      "text": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-fuer-eltern-gutes-erbitten",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Wir danken Allah für Seine Gaben.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -8597,6 +9222,21 @@
       ]
     },
     {
+      "text": "Wir erinnern uns an Allah mit kurzen Worten, ohne dass jemand gedrängt wird. Danach folgen weitere Worte der Seite.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "dua-adhkar-ohne-zwang",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Wir erklären den Glauben ohne Spott oder erfundene Geschichten.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -8609,6 +9249,21 @@
           "kind": "line",
           "age": "9-10",
           "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist. Wir erklären mit eigenen einfachen Worten, dass Allah einzig ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-mit-eigenen-worten",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -8641,6 +9296,21 @@
           "kind": "line",
           "age": "9-10",
           "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-nicht-mit-guten-taten-prahlen",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -8725,6 +9395,21 @@
       ]
     },
     {
+      "text": "Wir glauben, dass es einen Jüngsten Tag gibt. Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-juengster-tag",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Wir halten Abstand von gefährlichen Dingen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -8805,6 +9490,51 @@
       ]
     },
     {
+      "text": "Wir helfen, aber nicht, wenn die Hilfe uns oder andere in Gefahr bringt. Dieselbe Stelle über die gegenseitige Hilfe bei der Rechtschaffenheit gilt auch hier.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-hilfsbereitschaft-ohne-druck",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir helfen, weil es richtig ist, nicht damit alle klatschen. Der Vers verbietet, die Gaben durch Vorhaltung und Verletzung zu verderben, und vergleicht den, der seines Ansehens wegen ausgibt und nicht an Allah glaubt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-aufrichtigkeit-aussenwirkung",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir hören einer sorgfältigen Qurʾān-Rezitation aufmerksam zu. Der Vers lautet: Oder füge hinzu, und trag den Qurʾān deutlich vor.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-tajwid-hoeren",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Wir können dieses Gefühl bemerken, ohne andere schlechtzumachen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -8817,6 +9547,21 @@
           "kind": "line",
           "age": "4-5",
           "index": 1
+        }
+      ]
+    },
+    {
+      "text": "Wir können etwas verstecken. Der Vers sagt, dass bei Ihm die Schlüssel des Verborgenen sind und niemand sie kennt außer Ihm, und dass Ihm kein Blatt fällt, ohne dass Er es weiß.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-allahs-wissen",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -8853,6 +9598,36 @@
       ]
     },
     {
+      "text": "Wir können uns über etwas Gutes freuen, ohne andere kleiner zu machen. Der Vers beschreibt die Diener des Allerbarmers als Menschen, die bescheiden auf der Erde gehen und den Unwissenden mit Frieden begegnen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-bescheiden-bleiben",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir können verzeihen. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-verzeihen-und-grenzen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Wir legen Bücher achtsam an einen sauberen Platz.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -8869,7 +9644,22 @@
       ]
     },
     {
-      "text": "Die Namen der fünf Gebete. Wir lernen: Faǧr am Morgen, Ẓuhr um die Mittagszeit, ʿAṣr am Nachmittag, Maġrib nach Sonnenuntergang und ʿIšāʾ in der Nacht. Wir legen die Namen als Karten in die richtige Reihenfolge.",
+      "text": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-quran-sorgfaeltig-behandeln",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen die fünf Gebetsnamen in ihrer Tagesfolge. Qurʾān 11:114 erinnert an Gebete am Tag und in der Nacht. Die Namen und Zeitregeln sind auch in der Sunnah und in klassischen Fiqh-Werken überliefert.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -8878,6 +9668,21 @@
       "contexts": [
         {
           "lessonId": "fiqh-namen-der-fuenf-gebete",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen für die Aufgabe und bitten Allah um Hilfe. Der Vers sagt: Sucht Hilfe in der Geduld und im Gebet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-bemuehen-und-vertrauen",
           "kind": "summary",
           "age": "all"
         }
@@ -8996,6 +9801,21 @@
       ]
     },
     {
+      "text": "Wir nehmen so viel Essen, wie wir essen können. Der Vers nennt Gärten, Palmen und Früchte und sagt: Esst von ihrer Frucht, wenn sie Frucht trägt, und seid nicht maßlos.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-weniger-verschwenden",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Wir sagen auch Menschen freundlich Danke.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -9008,6 +9828,21 @@
           "kind": "line",
           "age": "4-5",
           "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Wir sagen Danke, wenn uns jemand hilft. Der Vers enthält die Zusage: Wenn ihr dankbar seid, werde Ich euch gewiss mehr geben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-dankbarkeit-zeigen",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -9060,6 +9895,36 @@
       ]
     },
     {
+      "text": "Wir sprechen die Namen der Gesandten respektvoll aus, ohne einen gering zu machen. Dieselbe gelesene Stelle wie in der Stunde über den Glauben an die Gesandten fordert, zwischen keinem Seiner Gesandten einen Unterschied zu machen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-allen-gesandten-respekt",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir sprechen eine Bitte ruhig und meinen sie ernst. Dieselbe Stelle wie in der Stunde über schwere Momente beginnt mit: Ruft Mich an, so erhöre Ich euch.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-dua-aufrichtig",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Wir sprechen ihre Namen freundlich und ohne Spott.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -9108,6 +9973,36 @@
       ]
     },
     {
+      "text": "Wir strengen uns an und vertrauen dabei auf Allah. Dieselbe Stelle wie in der Stunde über Bemühen und Vertrauen sagt, Hilfe in Geduld und Gebet zu suchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-vertrauen-und-bemuehen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir suchen einen ruhigen Platz, an dem wir das Gebet üben können. Der Vers fordert auf, die Gebete zu hüten und das mittlere Gebet, und vor Allah demütig zu stehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-gebetsplatz-vorbereiten",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Wir trennen den Glaubensgrundsatz von unbelegten zusätzlichen Geschichten.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -9120,6 +10015,21 @@
           "kind": "line",
           "age": "9-10",
           "index": 3
+        }
+      ]
+    },
+    {
+      "text": "Wir trinken Wasser ruhig und verschütten es nicht absichtlich. Der Vers sagt, dass Allah vom Himmel Wasser herabgesandt hat, von dem die Menschen trinken und von dem die Bäume kommen, in denen sie weiden lassen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-trinken-mit-guten-sitten",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -9204,6 +10114,21 @@
       ]
     },
     {
+      "text": "Wir übernehmen eine kleine Aufgabe für jemand anderen und führen sie zu Ende. Der Vers sagt: Dann gehört er zu denen, die glauben, einander zur Geduld raten und einander zur Barmherzigkeit raten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tarbiyah-verantwortung-uebernehmen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
       "text": "Wir unterscheiden arabischen Verswortlaut und sinngemäße Erklärung.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -9284,7 +10209,7 @@
       ]
     },
     {
-      "text": "Zum Gebet stehen. Assalāmu ʿalaikum! Wer stehen kann, stellt sich zum Beginn des Pflichtgebets ruhig hin. Wer nicht stehen kann, braucht eine passende Erleichterung. Wir helfen einander und üben ohne Schmerzen.",
+      "text": "Wir wenden uns beim Gebet Allah zu. Wer stehen kann, lernt das Stehen; wer es nicht kann, wird nicht beschämt oder zum Aufstehen gedrängt.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -9293,6 +10218,21 @@
       "contexts": [
         {
           "lessonId": "fiqh-zum-gebet-stehen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir wiederholen einen kurzen Vers ohne Hetze. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-respektvoll-auswendig-lernen",
           "kind": "summary",
           "age": "all"
         }
@@ -9310,6 +10250,21 @@
           "lessonId": "quran-woher-stammt-ein-hadith",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Woher stammt ein Ḥadīṯ?. Ein Qurʾān-Vers und ein Hadith sind zwei verschiedene Dinge. Es ist nichts als eine Offenbarung, die eingegeben wird. Wir legen ein Kärtchen Qurʾān und ein Kärtchen Hadith nebeneinander und sagen: Das zweite ist eine überlieferte Nachricht, kein Vers. Wir erklären, dass ein Hadith einen Überliefererweg braucht und dass wir keine Nummer ergänzen, die wir nicht gelesen haben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "quran-woher-stammt-ein-hadith",
+          "kind": "audio",
+          "age": "4-5"
         }
       ]
     },
@@ -9345,7 +10300,7 @@
       ]
     },
     {
-      "text": "Zakāh und Ḥaǧǧ als Säulen. Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden. Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen.",
+      "text": "Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -9356,11 +10311,6 @@
           "lessonId": "fiqh-zakah-und-hajj",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "fiqh-zakah-und-hajj",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -9391,6 +10341,21 @@
           "lessonId": "fiqh-zakah-und-hajj",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Zakāh und Ḥaǧǧ als Säulen. Zakāh und die Pilgerfahrt sind große Pflichten der Erwachsenen. Der Vers 2:43 sagt: Verrichtet das Gebet, gebt die Zakāh und verbeugt euch mit den sich Verbeugenden. Wir zeigen zwei Karten: Geben und Reise zum Haus. Wir sammeln kein echtes Geld und laufen keine Runden. Wir sagen die beiden Worte und erklären, dass die genaue Rechnung und die einzelnen Wege nicht in diesen zwei Auszügen stehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-zakah-und-hajj",
+          "kind": "audio",
+          "age": "4-5"
         }
       ]
     },
@@ -9440,7 +10405,37 @@
       ]
     },
     {
-      "text": "Zwischen zwei Niederwerfungen sitzen. Zwischen zwei Niederwerfungen gibt es ein kurzes Sitzen. Dieselbe Stelle nennt Verbeugung und Niederwerfung. Die Kinder sehen das kurze Sitzen und machen es nur so weit mit, wie es ohne Eile geht. Wir sagen einen Satz: Das Sitzen zeigen wir. Die Worte dabei haben wir auf dieser Seite nicht gelesen.",
+      "text": "Zum Glauben gehört auch ein gutes Wort zu den Menschen. Der lange Vers erinnert an eine Zusage, niemandem außer Allah zu dienen, den Eltern gut zu sein und zu den Menschen Gutes zu sagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "iman-glaube-und-gute-worte",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Zusammen können wir etwas Gutes tun, das sicher ist. Der Vers sagt, dass Allah Gerechtigkeit, gutes Verhalten und das Geben an die Verwandten befiehlt und das Schändliche, das Verwerfliche und die Übertretung verbietet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "family-gemeinschaft-gutes",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Zwischen zwei Niederwerfungen gibt es ein kurzes Sitzen. Dieselbe Stelle nennt Verbeugung und Niederwerfung.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -9451,11 +10446,6 @@
           "lessonId": "fiqh-zwischen-niederwerfungen-sitzen",
           "kind": "summary",
           "age": "all"
-        },
-        {
-          "lessonId": "fiqh-zwischen-niederwerfungen-sitzen",
-          "kind": "audio",
-          "age": "4-5"
         }
       ]
     },
@@ -9486,6 +10476,36 @@
           "lessonId": "fiqh-zwischen-niederwerfungen-sitzen",
           "kind": "audio",
           "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Zwischen zwei Niederwerfungen sitzen. Zwischen zwei Niederwerfungen gibt es ein kurzes Sitzen. Dieselbe Stelle nennt Verbeugung und Niederwerfung. Die Kinder sehen das kurze Sitzen und machen es nur so weit mit, wie es ohne Eile geht. Wir sagen einen Satz: Das Sitzen zeigen wir. Die Worte dabei haben wir auf dieser Seite nicht gelesen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-zwischen-niederwerfungen-sitzen",
+          "kind": "audio",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "ʿIbādah bedeutet, Allah so zu dienen, wie Er es will. Der Vers sagt: Ich habe die Jinn und die Menschen nur erschaffen, damit sie Mir dienen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "tawhid-bedeutung-ibadah",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -9531,11 +10551,6 @@
           "lessonId": "sirah-isa-als-gesandter",
           "kind": "audio",
           "age": "4-5"
-        },
-        {
-          "lessonId": "sirah-isa-als-gesandter",
-          "kind": "summary",
-          "age": "all"
         }
       ]
     },
@@ -9552,6 +10567,21 @@
           "kind": "line",
           "age": "4-5",
           "index": 0
+        }
+      ]
+    },
+    {
+      "text": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-isa-als-gesandter",
+          "kind": "summary",
+          "age": "all"
         }
       ]
     },
@@ -10812,7 +11842,7 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Īmān an den Jüngsten Tag. Wir glauben, dass es einen Jüngsten Tag gibt. In Qurʾān 2:177 lernen wir sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers. al-yawm al-āḫir bedeutet der Jüngste Tag. birr bedeutet das Gute, von dem der Vers spricht. Stell dir diese Situation vor: Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Welcher nächste Schritt ist gut? Wir wiederholen nur die genannten Glaubensworte und keine Szene. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Īmān an den Jüngsten Tag. Wir glauben, dass es einen Jüngsten Tag gibt. In Qurʾān 2:177 lernen wir sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Für die heutige Stunde betrachten wir einen Teil dieses langen Verses. al-yawm al-āḫir bedeutet der Jüngste Tag. birr bedeutet das Gute, von dem der Vers spricht. Stell dir diese Situation vor: Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Welcher nächste Schritt ist gut? Wir wiederholen nur die genannten Glaubensworte und keine Szene. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -10872,7 +11902,7 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. In Qurʾān 99:7 lernen wir sinngemäß: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. miṯqāl bedeutet Gewicht. ḏarrah bedeutet ein sehr kleines Stäubchen. Stell dir diese Situation vor: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Welcher nächste Schritt ist gut? Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Kleine Taten können wertvoll sein. Eine kleine Hilfe kann vor Allah Gewicht haben. In Qurʾān 99:7 lernen wir sinngemäß: Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten. miṯqāl bedeutet Gewicht. ḏarrah bedeutet ein sehr kleines Stäubchen. Stell dir diese Situation vor: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Welcher nächste Schritt ist gut? Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -10977,7 +12007,7 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Muḥammad ﷺ in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. In Qurʾān 96:1 lernen wir sinngemäß: Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. iqraʾ bedeutet lies. rabb bedeutet Herr. Stell dir diese Situation vor: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Welcher nächste Schritt ist gut? Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Muḥammad ﷺ in Makkah. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. In Qurʾān 96:1 lernen wir sinngemäß: Qurʾān 96:1 lautet sinngemäß: Lies im Namen deines Herrn, der erschaffen hat. Dieser Vers gehört zu den ersten Worten der Offenbarung. iqraʾ bedeutet lies. rabb bedeutet Herr. Stell dir diese Situation vor: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Welcher nächste Schritt ist gut? Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -11067,7 +12097,7 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. In Qurʾān 2:185 lernen wir sinngemäß: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. Ramaḍān bedeutet der genannte Monat. ṣiyām bedeutet Fasten. Stell dir diese Situation vor: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Welcher nächste Schritt ist gut? Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+      "text": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Ramaḍān und Fasten kennenlernen. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. In Qurʾān 2:185 lernen wir sinngemäß: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. Ramaḍān bedeutet der genannte Monat. ṣiyām bedeutet Fasten. Stell dir diese Situation vor: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Welcher nächste Schritt ist gut? Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -11742,7 +12772,7 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Wir lesen Qurʾān 96:1. Der Vers bedeutet sinngemäß: Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab. So kann das im Alltag aussehen: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Die Aufgabe: Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. iqraʾ bedeutet: lies. rabb bedeutet: Herr.",
+      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Der erste gespeicherte Auftrag an den Propheten, Friede sei mit ihm, ist: Lies im Namen deines Herrn, der erschaffen hat. Wir lesen Qurʾān 96:1. Der Vers bedeutet sinngemäß: Qurʾān 96:1 lautet sinngemäß: Lies im Namen deines Herrn, der erschaffen hat. Dieser Vers gehört zu den ersten Worten der Offenbarung. So kann das im Alltag aussehen: Wir sagen: Dieser Vers gehört an den Anfang der Botschaft. Mehr erzählen wir heute nicht. Die Aufgabe: Wir wiederholen nur diesen deutschen Sinn und malen keine Höhle. iqraʾ bedeutet: lies. rabb bedeutet: Herr.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -11922,7 +12952,7 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Eine kleine Hilfe kann vor Allah Gewicht haben. Wir lesen Qurʾān 99:7. Der Vers bedeutet sinngemäß: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem. So kann das im Alltag aussehen: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Die Aufgabe: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. miṯqāl bedeutet: Gewicht. ḏarrah bedeutet: ein sehr kleines Stäubchen.",
+      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Eine kleine Hilfe kann vor Allah Gewicht haben. Wir lesen Qurʾān 99:7. Der Vers bedeutet sinngemäß: Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten. So kann das im Alltag aussehen: Ein Kind hebt einen heruntergefallenen Stift für ein anderes Kind auf, ohne es laut zu erzählen. Die Aufgabe: Wir tun eine kleine Hilfe im Raum und sprechen danach nicht darüber, wer der Beste war. miṯqāl bedeutet: Gewicht. ḏarrah bedeutet: ein sehr kleines Stäubchen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -12297,7 +13327,7 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Wir lesen Qurʾān 2:185. Der Vers bedeutet sinngemäß: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. So kann das im Alltag aussehen: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Die Aufgabe: Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen. Ramaḍān bedeutet: der genannte Monat. ṣiyām bedeutet: Fasten.",
+      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Wir lesen Qurʾān 2:185. Der Vers bedeutet sinngemäß: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise. So kann das im Alltag aussehen: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Die Aufgabe: Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten. Ramaḍān bedeutet: der genannte Monat. ṣiyām bedeutet: Fasten.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -12567,7 +13597,7 @@
       ]
     },
     {
-      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir glauben, dass es einen Jüngsten Tag gibt. Wir lesen Qurʾān 2:177. Der Vers bedeutet sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers. So kann das im Alltag aussehen: Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Die Aufgabe: Wir wiederholen nur die genannten Glaubensworte und keine Szene. al-yawm al-āḫir bedeutet: der Jüngste Tag. birr bedeutet: das Gute, von dem der Vers spricht.",
+      "text": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir glauben, dass es einen Jüngsten Tag gibt. Wir lesen Qurʾān 2:177. Der Vers bedeutet sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Für die heutige Stunde betrachten wir einen Teil dieses langen Verses. So kann das im Alltag aussehen: Ein Kind sagt: Allah ist gerecht. Mehr brauchen wir in dieser Stunde nicht. Die Aufgabe: Wir wiederholen nur die genannten Glaubensworte und keine Szene. al-yawm al-āḫir bedeutet: der Jüngste Tag. birr bedeutet: das Gute, von dem der Vers spricht.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -13259,38 +14289,6 @@
       ]
     },
     {
-      "text": "Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "sirah-muhammad-in-makkah",
-          "kind": "line",
-          "age": "9-10",
-          "index": 1
-        }
-      ]
-    },
-    {
-      "text": "Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
-      "lang": "de-DE",
-      "voiceProfileId": "serhat-owner-voice-2026",
-      "modelId": "eleven_v4",
-      "priority": 2,
-      "reviewStatus": "not-generated",
-      "contexts": [
-        {
-          "lessonId": "ikhlas-kleine-taten-wertvoll",
-          "kind": "line",
-          "age": "9-10",
-          "index": 1
-        }
-      ]
-    },
-    {
       "text": "Der gespeicherte Vers ist die Eröffnung: Im Namen Allahs, des Allerbarmers, des Barmherzigen.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -13433,7 +14431,7 @@
       ]
     },
     {
-      "text": "Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers.",
+      "text": "Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Für die heutige Stunde betrachten wir einen Teil dieses langen Verses.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -21488,6 +22486,22 @@
       ]
     },
     {
+      "text": "Qurʾān 96:1 lautet sinngemäß: Lies im Namen deines Herrn, der erschaffen hat. Dieser Vers gehört zu den ersten Worten der Offenbarung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "sirah-muhammad-in-makkah",
+          "kind": "line",
+          "age": "9-10",
+          "index": 1
+        }
+      ]
+    },
+    {
       "text": "Qurʾān 98:5 ist die gelesene Stelle.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -21520,6 +22534,22 @@
       ]
     },
     {
+      "text": "Qurʾān 99:7 lehrt sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der folgende Vers 99:8 spricht ebenfalls von kleinen schlechten Taten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "ikhlas-kleine-taten-wertvoll",
+          "kind": "line",
+          "age": "9-10",
+          "index": 1
+        }
+      ]
+    },
+    {
       "text": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
@@ -21536,7 +22566,7 @@
       ]
     },
     {
-      "text": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Er spricht auch von Krankheit und Reise. Stell dir vor: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Heute üben wir: Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
+      "text": "Ramaḍān ist der Monat, in dem der Qurʾān herabgesandt wurde. Er spricht auch von Krankheit und Reise. Stell dir vor: Ein Kind sieht den Mondkalender und sagt: Das ist ein Monat des Fastens für die, die dazu verpflichtet sind. Ich frage zu Hause, was für mich gilt. Heute üben wir: Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
@@ -24056,7 +25086,7 @@
       ]
     },
     {
-      "text": "Wir lernen das Wort Ramaḍān und erfinden keine Uhrzeit für das Essen.",
+      "text": "Wir lernen das Wort Ramaḍān und fragen unsere Eltern oder eine Lehrperson nach den Fastenzeiten.",
       "lang": "de-DE",
       "voiceProfileId": "serhat-owner-voice-2026",
       "modelId": "eleven_v4",
