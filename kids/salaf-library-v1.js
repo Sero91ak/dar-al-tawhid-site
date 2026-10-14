@@ -237,7 +237,8 @@
     q("#salafText").innerHTML=textFor(i).split(/\n{2,}/).filter(Boolean).map(function(s){return "<p>"+esc(s)+"</p>"}).join("");
     q("#salafText").hidden=true;
     var src=i.sources||[];
-    q("#salafRefs").innerHTML=src.map(function(s){var link="";try{var u=new URL(s.url);if(u.protocol==="https:"&&(u.hostname==="islamweb.net"||u.hostname.endsWith(".islamweb.net")))link=u.href}catch(_){}return '<div class="salaf-ref"><strong>'+esc(s.author)+'</strong><span>'+esc(s.work)+" · "+esc(s.reference)+'</span>'+(link?'<a class="salaf-source-link" target="_blank" rel="noopener noreferrer" href="'+esc(link)+'">Originalquelle öffnen ↗</a>':"")+"</div>"}).join("");
+    /* KIDS_SOURCE_TEXT_ONLY_V1414: verified sources are readable text, not links. */
+    q("#salafRefs").innerHTML=src.map(function(s){return '<div class="salaf-ref"><strong>'+esc(s.author)+'</strong><span>'+esc(s.work)+" · "+esc(s.reference)+"</span></div>"}).join("");
     var url=soundFor(i);
     if(url){audio.src=url;audio.preload="metadata";q("#salafAudioStatus").textContent="Deine Hörposition wird automatisch gespeichert."}
     else{audio.removeAttribute("src");audio.load();q("#salafAudioStatus").textContent="Diese Geschichte kannst du jetzt lesen. Hören ist noch nicht verfügbar."}

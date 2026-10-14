@@ -72,18 +72,25 @@ function initLegacy(id){
  * The original listeners, disabled state and speech engines are preserved.
  * Future buttons with equivalent German labels adopt the same affordance.
  */
-/* KIDS_NO_EXTERNAL_SOURCE_PROOF_ACTIONS_V1251
- * No external source-opening controls in the children's UI.
- * Bibliographical source text remains visible in each learning detail.
- * Exact action labels only; unrelated educational links remain available.
+/* KIDS_NO_EXTERNAL_SOURCE_PROOF_ACTIONS_V1414
+ * All current and new Kids modules: verified citations remain as plain text.
+ * The existing MutationObserver automatically rescrubs dynamic content.
+ * Education links and audio/navigation controls are unaffected.
  */
 function removeExternalSourceProofActions(){
-  for(const el of document.querySelectorAll("a,button")){
-    const label=String(el.getAttribute("aria-label")||el.textContent||"").replace(/\s+/g," ").trim();
-    if(/^(?:Nachweis öffnen|Quelle öffnen|Beleg öffnen|Originalnachweis öffnen)$/i.test(label)){
-      el.remove();
-    }
-  }
+ const containers=".salaf-refs,.ms-sources,.ps-sources,.dl-sources,#ghSources,.gh-sources,.dua-source,.duahub-source,.knowledge-source,.story-source,.quiz-source,.lesson-source-block .source,.academy-term-source";
+ for(const el of document.querySelectorAll("a,button,[role=button]")){
+  const label=String(el.getAttribute("aria-label")||el.textContent||"").replace(/\s+/g," ").trim();
+  const proofAction=/^(?:(?:original)?(?:quelle|nachweis)|beleg)(?:\s+(?:direkt|im original))?\s+öffnen(?:\s*[↗→])?$/i.test(label);
+  const linkedSource=el.matches("a")&&(el.closest(containers)||el.matches(".salaf-source-link,.ms-source-link,[data-source-link],[data-proof-link]"));
+  if(!proofAction&&!linkedSource)continue;
+  if(el.matches("a")&&!proofAction){
+   const plain=document.createElement("span");
+   plain.className="kids-source-plain-text";
+   plain.textContent=label;
+   el.replaceWith(plain);
+  }else el.remove();
+ }
 }
 
 function upgradeExplanationActions(){
