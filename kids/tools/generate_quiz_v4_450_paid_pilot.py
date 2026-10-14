@@ -93,6 +93,11 @@ def main():
                        "containsCredentials":False,"live":False,"rows":[]})
     if registry.get("live") is not False or ledger.get("live") is not False:
         raise RuntimeError("Refuse original audio upload if LIVE flag enabled")
+    if len(ledger.get("rows",[]))>=2:
+        print("KIDS_V4_PILOT_ALREADY_GENERATED: do not charge again",flush=True)
+        return
+    if len(ledger.get("rows",[]))>0:
+        raise RuntimeError("Partially paid pilot detected. Reconcile original assets before any new paid call")
     choices=select_tasks(plan,registry)
     # Check budget before making any paid call.
     required=sum(len(x["text"])*CREDIT_RATE for x in choices)
