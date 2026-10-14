@@ -35,7 +35,7 @@ V1 zeigt **Qurʾān 2:3** (Glaube an das Verborgene, Gebet, Geben) und nennt **�
 
 - **Direkt geprüfter Ibn Kaṯīr-Tafsīr**, *Tafsīr al-Qurʾān al-ʿAẓīm*, **Bd. 5, S. 65**, [Islamweb 49/1005](https://www.islamweb.net/ar/library/content/49/1005#:~:text=%D9%88%D9%82%D9%84%20%D9%84%D9%87%D9%85%D8%A7%20%D9%82%D9%88%D9%84%D8%A7%20%D9%83%D8%B1%D9%8A%D9%85%D8%A7). Der Abschnitt behandelt **17:23–24 zusammen**: Ehrende Worte im Alter in 17:23, Barmherzigkeit und Duʿāʾ in 17:24.
 - **Registrierung:** `SRC-CORE10-IBNKATHIR-1005`. Die V1-Lektion bezieht sich in ihrem konkreten Text auf 17:23; 17:24 ist benachbarte Erklärung, **keine zusätzliche feste kinderbezogene Gebetsformel**.
-- Der alte Verweis auf **Buḫārī 5971** (Mutter/Vater) ist **noch nicht anhand der Primärsammlung erneut gelesen**.
+- **Neuer unabhängiger Sunnah-Abgleich:** Der alte Verweis auf **Buḫārī 5971** ist inzwischen direkt anhand des authentischen arabischen Berichts von **Abū Hurayrah** in [Dorar 151125](https://dorar.net/hadith/sharh/151125#:~:text=%D9%85%D9%8E%D9%86%20%D8%A3%D8%AD%D9%8E%D9%82%D9%8F%D9%91%20%D8%A7%D9%84%D9%86%D9%8E%D9%91%D8%A7%D8%B3%D9%90) überprüft, auch Muslim **2548**. Mutter wird dreimal, Vater danach genannt. Als eigene Quelle \`SRC-CORE10-BUKHARI-5971\` registriert; das kurze arabische Textfeld ist **gekennzeichneter Auszug**, nicht der vollständig zitierte Hadith.
 - Kinderschutz: Elternachtung verbietet nicht, bei Gefahr Hilfe zu erbitten.
 
 ## 11 · Ṣalāh · `fiqh-salah`
@@ -50,11 +50,16 @@ Bereits vorhandene eigenständige Fiqh-Redaktion für Slot 11 mit Qurʾān 20:14
 
 ## Integrität, Prüfgrenzen und Weiterarbeit
 
-- Fünf neue Quellenregistereinträge (vier klassische Tafsīr-Texte plus Buḫārī 6018 auf Dorar) für 6/9/10/12; ursprünglicher Stand **141**, anschließend **146**. Test `kids/tools/test-academy-primary-source-registry-v1.cjs` prüft Eindeutigkeit, Lektions-ID-Bindung, zugelassene Domäne, Originaltext und ehrlichen Prüfstatus.
-- **Noch nicht vollständig geprüft:** frühe Lektion 1 (`sidq`, Zuordnung vom Lektionsstatus zu tatsächlich geladenem Unterricht separat abgleichen), Muslim 8a, Buḫārī 1/33/5971, die ursprünglichen Ṣabr-Sunnahbelege im Wortlaut, sowie Fiqh-Ausnahmen. Keine Umdeutung einer Sekundärquelle zu einer direkt gelesenen Primärquelle.
+- Sechs neue Quellenregistereinträge (vier klassische Tafsīr-Texte plus Buḫārī 6018 und 5971 auf Dorar) für 6/9/10/12; ursprünglicher Stand **141**, anschließend **147**. Test `kids/tools/test-academy-primary-source-registry-v1.cjs` prüft Eindeutigkeit, Lektions-ID-Bindung, zugelassene Domäne, Originaltext und ehrlichen Prüfstatus.
+- **Noch nicht vollständig geprüft:** frühe Lektion 1 (`sidq`, Zuordnung vom Lektionsstatus zu tatsächlich geladenem Unterricht separat abgleichen), Muslim 8a, Buḫārī 1/33, die ursprünglichen Ṣabr-Sunnahbelege im Wortlaut, sowie Fiqh-Ausnahmen. Keine Umdeutung einer Sekundärquelle zu einer direkt gelesenen Primärquelle.
 - Keine Änderung an Unterrichtstexten, Quest-Daten, Benutzerprofilen, Freischaltung, Fortschrittsdaten oder Spracheinstellungen. **0/624 wissenschaftliche Endfreigaben**; kein Merge und kein Live-Deploy.
 
 ## Technischer Nachtrag · erfolgreiche KIDS-QA
 
 - Quellenregister-Test mit fünf neuen Einträgen über `kids/tools/test-academy-primary-source-registry-v1.cjs` erweitert. [GitHub Actions, KIDS Akademie Editorial Draft QA, Run 38546617919](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38546617919): **completed / success**. Nur technische Konsistenz, **keine wissenschaftliche Freigabe**.
 - Die zusätzliche Workflow-Prüfung `Voice Studio 2 Validate` ist unabhängig; ältere Runs scheiterten am **Strict Alif-Ba audio workflow** (u. a. Marker `alphabet-audio.json?v=6`, `audioEvidenceComplete`, `PROGRESS_KEY`, `reviewBucket`, `reviewQueueMode`). **Dieser Auditauftrag verändert keine Audio- oder Native-App-Dateien.** Ein aktueller Voice-Workflow-Erfolg wird nicht behauptet.
+
+## Nachtrag: zwei authentische Sunnah-Belege getrennt von den frühen Qurʾān-Texten
+
+- Lektion 6: `SRC-CORE6-BUKHARI-6018` (Dorar 4361); Lektion 10: `SRC-CORE10-BUKHARI-5971` (Dorar 151125). Beide als **unabhängig direkt gelesene** Quellen mit authentischem Status, Überlieferer und korrekter Hadithnummer getrennt von den Tafsīr-Auslegungen registriert.
+- `kids/tools/test-academy-primary-source-registry-v1.cjs` enthält für beide nun feste Prüfungen (Nummer, Überlieferer, authentischer Status, arabische Textfragmente, Anwendungsschutz). Die **neue** GitHub-CI des letzten Commits muss eigenständig abgerufen werden und wird hier nicht vorweggenommen.
