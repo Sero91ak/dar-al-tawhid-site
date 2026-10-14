@@ -23574,7 +23574,7 @@ const additions=
         "lines": [
           "Am Ende des Gebets gibt es einen Gruß nach rechts und links.",
           "Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn.",
-          "Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite.",
+          "Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Der Abschluss des Gebets braucht eine eigene Erklärung; diesen Vers verwenden wir dafür nicht als Gebetsanleitung.",
           "Wir üben nur den Gruß untereinander."
         ],
         "evidence": "Wir lernen mit Qurʾān 4:86. Am Ende des Gebets gibt es einen Gruß nach rechts und links.",
@@ -23592,7 +23592,7 @@ const additions=
         "situation": "Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite nicht als Gebetsbeschreibung gelesen.",
         "practice": "Wir üben nur den Gruß untereinander.",
         "summary": "Am Ende des Gebets gibt es einen Gruß nach rechts und links.",
-        "audioScript": "Den Gebetsabschluss kennenlernen. Am Ende des Gebets gibt es einen Gruß nach rechts und links. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite. Wir üben nur den Gruß untereinander."
+        "audioScript": "Den Gebetsabschluss kennenlernen. Am Ende des Gebets gibt es einen Gruß nach rechts und links. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Der Abschluss des Gebets braucht eine eigene Erklärung; diesen Vers verwenden wir dafür nicht als Gebetsanleitung. Wir üben nur den Gruß untereinander."
       },
       "6-8": {
         "goal": "Am Ende des Gebets gibt es einen Gruß nach rechts und links.",
@@ -23600,7 +23600,7 @@ const additions=
         "lines": [
           "Qurʾān 4:86 ist die gelesene Stelle.",
           "Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn.",
-          "Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite.",
+          "Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Der Abschluss des Gebets braucht eine eigene Erklärung; diesen Vers verwenden wir dafür nicht als Gebetsanleitung.",
           "Wir üben nur den Gruß untereinander."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 4:86. Sinngemäß: Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Allah ist über alles Rechnender.",
@@ -23743,7 +23743,7 @@ const additions=
     ],
     "practice": "Wir üben nur den Gruß untereinander.",
     "summary": "Am Ende des Gebets gibt es einen Gruß nach rechts und links. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn.",
-    "audioScript": "Den Gebetsabschluss kennenlernen. Am Ende des Gebets gibt es einen Gruß nach rechts und links. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Wir haben ihn auf dieser Seite. Wir üben nur den Gruß untereinander.",
+    "audioScript": "Den Gebetsabschluss kennenlernen. Am Ende des Gebets gibt es einen Gruß nach rechts und links. Der Vers sagt: Wenn ihr mit einem Gruß gegrüßt werdet, dann grüßt mit einem schöneren oder erwidert ihn. Die Kinder erwidern einen Salam im Raum. Danach sagt die Lehrperson: Der Abschluss des Gebets sieht ähnlich aus und ist doch eine andere Handlung. Der Abschluss des Gebets braucht eine eigene Erklärung; diesen Vers verwenden wir dafür nicht als Gebetsanleitung. Wir üben nur den Gruß untereinander.",
     "voiceApproved": false
   },
   "fiqh-fehler-beim-ueben": {
