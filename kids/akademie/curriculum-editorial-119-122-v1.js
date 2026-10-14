@@ -179,7 +179,7 @@ for(const [id,versions] of Object.entries(drafts)){
  for(const age of ["4-5","6-8","9-10"]){
   const d=versions[age],previous=old.ageText[age];
   if(!previous||d.lines.length!==4)throw Error("Age version incomplete: "+id+"/"+age);
-  ageText[age]={...previous,goal:d.goal,lines:d.lines,intro:d.lines.join(" "),situation:d.situation,practice:d.practice,evidence:d.evidence,summary:d.summary,audioScript:old.topic+". "+d.lines.join(" ")};
+  ageText[age]={...previous,goal:d.goal,lines:d.lines,intro:d.lines.join(" "),situation:d.situation,practice:d.practice,evidence:d.evidence,summary:d.summary,audioScript:old.topic+". "+d.lines.join(" ").replaceAll("al-ḥamdu lillāhi rabbi l-ʿālamīn","die arabischen Worte aus al-Fātiḥah, Vers zwei")};
  }
  next[id]={...old,ageText,sourceAudit:{...old.sourceAudit,scientificApproval:false,editorialScopeNote:(old.sourceAudit.editorialScopeNote||"")+" Einzelredaktion 2026-10-14: eigenständige Altersfassungen; keine wissenschaftliche Freigabe."}};
 }
