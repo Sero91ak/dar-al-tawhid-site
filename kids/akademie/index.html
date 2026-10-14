@@ -4363,6 +4363,7 @@ function applySelectedLesson(){
   hadithBlock.hidden=false;hadithBlock.style.display="";$("#evidenceTitle").textContent="Was lernen wir aus den Quellen?";$('[data-lesson-step="2"] .kicker').textContent="Schritt 3 · Qurʾān und Sunnah";
   $("#lessonWelcomeBody").textContent=ui.welcomeBody;$("#welcomeTitle").textContent="Schön, dass du da bist!";
   $("#explainTitle").textContent="Wahrhaftigkeit verstehen";$("#evidenceLead").textContent=ui.evidenceLead;
+  hadithBlock.hidden=false;hadithBlock.style.display="";
   qBlock.querySelector(".eyebrow").textContent="Qurʾān · Sūrat at-Tawbah · Vers 119";
   verse.textContent="يَا أَيُّهَا الَّذِينَ آمَنُوا اتَّقُوا اللَّهَ وَكُونُوا مَعَ الصَّادِقِينَ";
   qBlock.querySelector(".quote").textContent="„O die ihr glaubt, fürchtet Allah und seid mit den Wahrhaftigen.“";
@@ -4395,12 +4396,13 @@ function applySelectedLesson(){
  qBlock.querySelector(".eyebrow").textContent="Qurʾān · "+q.label;
  verse.textContent=q.arabic;verse.dataset.audioText=k;listen.dataset.arabicAudio=k;
  listen.setAttribute("aria-label","Sūrah "+q.surah+", Vers "+q.ayah+" auf Arabisch anhören");
- qBlock.querySelector(".quote").textContent="„"+q.meaning+"“";
+ const quranMeaningForChild=String(q.meaning).replace(/^Sinngemäß für den Unterricht, keine beglaubigte Übersetzung:\s*/,"Sinngemäß: ");
+ qBlock.querySelector(".quote").textContent="„"+quranMeaningForChild+"“";
  qBlock.querySelector(".source").textContent="Quelle: Qurʾān "+q.surah+":"+q.ayah+(q.excerpt?" · arabischer Textauszug":"");
  $("#arabicAudioStatus").textContent=q.excerpt?"Textauszug · vollständiger Vers wird rezitiert":"Rezitation des vollständigen Verses";
  if(hasLessonHadith){hadithBlock.querySelector(".quote").textContent=lesson.hadith.text;hadithBlock.querySelector(".source").textContent="Quelle: "+lesson.hadith.source;}
- $(".teacher-explainer").textContent=ageTeaching?.evidence||(hasLessonHadith?"Qurʾān: "+q.meaning+" Sunnah: "+lesson.hadith.text:"Qurʾān: "+q.meaning);
- all(".recap-lesson p").forEach((el,i)=>el.textContent=[lesson.goal,hasLessonHadith?q.meaning+" "+lesson.hadith.text:q.meaning,ageTeaching?.summary||lesson.sample][i]);
+ $(".teacher-explainer").textContent=hasLessonHadith?(ageTeaching?.evidence||"Qurʾān: "+q.meaning+" Sunnah: "+lesson.hadith.text):(ageTeaching?.lines||[]).slice(0,3).join(" ")||"Qurʾān: "+quranMeaningForChild;
+ all(".recap-lesson p").forEach((el,i)=>el.textContent=hasLessonHadith?[lesson.goal,q.meaning+" "+lesson.hadith.text,ageTeaching?.summary||lesson.sample][i]:[ageTeaching?.goal||lesson.goal,quranMeaningForChild,ageTeaching?.practice||lesson.practice][i]);
  $("#practiceTitle").textContent=age==="4-5"?"Was machst du?":age==="9-10"?"Was weißt du darüber?":"Was würdest du tun?";
  $("#todayTopicName").textContent=lesson.title;$("#todayTopicIntro").textContent=lesson.lead;
  $(".lesson-heading h1").textContent=lesson.title;
