@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 156,
+  "sourceCount": 157,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -2016,7 +2016,8 @@
       "checkedOn": "2026-10-13",
       "checkedBy": "page fetched from islamweb.net library content 49",
       "lessonIds": [
-        "tawhid-bedeutung-ibadah"
+        "tawhid-bedeutung-ibadah",
+        "aqidah-tawhid-nur-allah-anbeten"
       ],
       "binding": "verse span for kids academy draft",
       "topic": "Die Bedeutung von ʿIbādah"
@@ -3507,7 +3508,8 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Islamweb Ṣaḥīḥ Muslim 1/152, Nr. 54, arabischer Originaltext direkt geöffnet; Dorar 37272 ergänzend kontrolliert",
       "lessonIds": [
-        "adab-salam"
+        "adab-salam",
+        "adab-salam-zuerst-gru-en"
       ],
       "binding": "authentic Sunnah source for greeting lesson 2; final scholarly approval pending",
       "topic": "Den Salām verbreiten"
@@ -3533,7 +3535,8 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Dorar original sharh/11568 direkt gelesen und authentisch von al-Buḫārī 2856 ausgewiesen",
       "lessonIds": [
-        "aqidah-tawhid"
+        "aqidah-tawhid",
+        "aqidah-tawhid-nur-allah-anbeten"
       ],
       "binding": "authentic companion-narrated Sunnah for existing early lesson 4; final scholarly approval pending",
       "topic": "Tawḥīd – allein Allah anbeten"
@@ -3820,7 +3823,8 @@
       "checkedBy": "Islamweb Tafsīr Ibn Kaṯīr 49/184, 2:153, Band 1 Seite 467",
       "lessonIds": [
         "akhlaq-sabr",
-        "akhlaq-sabr-geduldig-warten"
+        "akhlaq-sabr-geduldig-warten",
+        "akhlaq-sabr-nicht-aufgeben"
       ],
       "binding": "classical tafsir for early slot 5",
       "topic": "Ṣabr – Geduld"
@@ -3872,7 +3876,8 @@
       "verificationStatus": "primary-report-direct-read-2026-10-14",
       "checkedBy": "Dorar 7038, Abū Saʿīd, Muslim 1053 und Buḫārī 1469",
       "lessonIds": [
-        "akhlaq-sabr"
+        "akhlaq-sabr",
+        "akhlaq-sabr-nicht-aufgeben"
       ],
       "binding": "authentic Sunnah separately linked to classical tafsir",
       "topic": "Ṣabr – Geduld"
@@ -3928,6 +3933,32 @@
       ],
       "binding": "classical Hanbali Fiqh source for lesson 15; scientific final approval pending",
       "topic": "Saubere Kleidung"
+    },
+    {
+      "sourceId": "SRC-CORE19-BUKHARI-2989",
+      "key": "core19-prophetic-removal-of-road-harm",
+      "author": "Muḥammad ﷺ, überliefert in Ṣaḥīḥ al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "Abū Hurayrah",
+      "arabic": "وَيُمِيطُ الْأَذَى عَنِ الطَّرِيقِ صَدَقَةٌ",
+      "germanTranslation": null,
+      "locus": "Bericht über gute Taten und Entfernung schädlicher Dinge aus dem Weg, nicht über ritualrechtliche Unreinheit",
+      "volume": null,
+      "page": null,
+      "chapter": "Hilfe im Alltag und Sicherheit von Wegen",
+      "number": "2989; auch Muslim 1009",
+      "edition": "Dorar Hadith-Enzyklopädie 70324; Quellenangabe al-Buḫārī 2989",
+      "directLink": "https://dorar.net/hadith/sharh/70324#:~:text=%D9%88%D9%8A%D9%85%D9%8A%D8%B7%20%D8%A7%D9%84%D8%A3%D8%B0%D9%89%20%D8%B9%D9%86%20%D8%A7%D9%84%D8%B7%D8%B1%D9%8A%D9%82",
+      "authenticityNote": "Am 14.10.2026 auf Dorar 70324 unmittelbar gelesener arabischer Bericht von Abū Hurayrah mit Quellenhinweis al-Buḫārī 2989 und Muslim 1009. Auch eine abweichende redaktionelle Nummer 2891 wird auf derselben Dorar-Seite für eine ähnliche Fassung genannt. Gedruckte Editionsseiten nicht eigenständig kontrolliert. Der Text betrifft das Entfernen von Hindernissen vom Weg, nicht die rituelle Reinigung eines Lernplatzes.",
+      "safeApplication": "Kinder dürfen beim sicheren Aufräumen ungefährliche Dinge weglegen und Erwachsene bei gefährlichen Gegenständen holen. Die Entfernung eines schädlichen Gegenstandes von einem Weg wird nicht zur hanbalitischen Ritualpflicht erklärt, Papierabfälle nicht als Naǧāsah bezeichnet, keine direkte Hadithvorschrift für sämtliche Lernplätze erfunden.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar 70324, arabischer Text und Quellen-/Erzählerangaben unmittelbar eingesehen; digitaler Bericht, kein Druckscan",
+      "lessonIds": [
+        "fiqh-taharah-sauberer-lernplatz"
+      ],
+      "binding": "verified authentic Sunnah example for safe public-space tidying; analogical classroom application only; separate from Ṭahārah of ritual prayer",
+      "topic": "Sicher anderen helfen und unnötige Hindernisse beseitigen"
     }
   ]
 }
