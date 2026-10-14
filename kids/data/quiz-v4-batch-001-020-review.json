@@ -28,7 +28,7 @@
     "catalogQuestionsVerified": 20,
     "correctAnswersVerified": 20,
     "sourceReferencesPresent": 20,
-    "audioRenderedForAllQuestionStates": 11,
+    "audioRenderedForAllQuestionStates": 12,
     "humanAudioApproved": 0,
     "audioOriginalGenerationCount": 10,
     "audioHumanApproved": 0,
@@ -770,9 +770,45 @@
       "originalExplanation": "Allah befiehlt, anvertraute Dinge den Berechtigten zurückzugeben.",
       "source": "Qurʾān 4:58",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "flowId": "aRb3B3jCCh3bnMMqrO6e",
+          "sessionId": "9p00SoBK4nMzAa7jBV78",
+          "modelId": "eleven_v4",
+          "status": "completed",
+          "generationId": "63Jjw1si4tLeYyDKjw5V",
+          "credits": 132.76205286343614,
+          "durationSeconds": 9.76
+        },
+        {
+          "part": "correct",
+          "generationId": "oTZw9J8BXouAWeocufYC",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "zz0jZ6ybshrDKTqeYHh7",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "flowId": "aRb3B3jCCh3bnMMqrO6e",
+          "sessionId": "9bX7v6RggPuKbrLHfNlI",
+          "modelId": "eleven_v4",
+          "status": "completed",
+          "generationId": "hM2VfSWtDJtFuxhd85nm",
+          "credits": 82.37061674008811,
+          "durationSeconds": 5.52
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-014",
@@ -791,9 +827,43 @@
       "originalExplanation": "Allah lobt diejenigen, die ihren Zorn zurückhalten und verzeihen.",
       "source": "Qurʾān 3:134",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "not-generated",
+      "audioQA": "generation-started-review-status",
       "published": false,
-      "recordingStatus": "awaiting-v4-recording"
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "flowId": "aRb3B3jCCh3bnMMqrO6e",
+          "sessionId": "CFcfJFKU2YaX4ui790xN",
+          "modelId": "eleven_v4",
+          "status": "pending",
+          "generationId": "vq2nTmmLnI3nHzWDL5sC",
+          "credits": 128.88578854625553
+        },
+        {
+          "part": "correct",
+          "generationId": "fZ1VIkCQEsdIxFQ2hwjF",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "ddgJqQDhBo32kbRKEMe2",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "flowId": "aRb3B3jCCh3bnMMqrO6e",
+          "sessionId": "m3J88jgWNxHkPv3UbpO8",
+          "modelId": "eleven_v4",
+          "status": "pending",
+          "generationId": "40yTB3kLdHUrSSgwuUDJ",
+          "credits": 82.37061674008811
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-015",
@@ -933,6 +1003,6 @@
     "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios.",
     "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie."
   ],
-  "actualPaidCreditsThisBatch": 3040.9293568281937,
+  "actualPaidCreditsThisBatch": 3467.3184317180617,
   "previouslyPaidCreditsReusedForQuestion002": 122.102325991
 }
