@@ -1,0 +1,74 @@
+#!/usr/bin/env python3
+"""Zero-credit regression test: import one REAL-FORMAT dummy MP3 to temp area.
+
+Tests ZIP extraction, exact generation-id mapping, duration verification,
+sha256, deduplication, and tamper blocking. Synthetic tone is never stored
+in the product repo nor mistaken for a paid human voice recording.
+"""
+from __future__ import annotations
+import importlib.util,json,shutil,subprocess,tempfile,zipfile
+from pathlib import Path
+
+REPO=Path(__file__).resolve().parents[2]
+SRC=REPO/"kids/tools/import_quiz_v4_prepaid_flow_originals.py"
+spec=importlib.util.spec_from_file_location("prepaid_import",SRC)
+mod=importlib.util.module_from_spec(spec)
+assert spec and spec.loader
+spec.loader.exec_module(mod)
+
+def main():
+    with tempfile.TemporaryDirectory(prefix="kids-v4-prepaid-flow-import-selftest-") as base:
+        root=Path(base)
+        prior=root/"kids/data/quiz-v4-batch-001-020-review.json"
+        reg=root/"kids/data/quiz-v4-450-original-clip-registry.json"
+        summary=root/"kids/data/quiz-v4-paid-flow-import-status.json"
+        out=root/"kids/assets/kids-quiz-audio/v4-paid-flow-original-review"
+        folder=root/"downloaded"
+        folder.mkdir(parents=True)
+        prior.parent.mkdir(parents=True)
+        shutil.copy2(REPO/"kids/data/quiz-v4-batch-001-020-review.json",prior)
+        reg.write_text(json.dumps({
+            "schemaVersion":1,"scope":"KIDS_V4_450_REVIEW_ONLY",
+            "voiceId":mod.VOICE,"modelId":mod.MODEL,"live":False,
+            "textClips":{},"generationClips":{}
+        })+"\n",encoding="utf-8")
+        mod.ROOT=root;mod.PRIOR=prior;mod.REG=reg;mod.REPORT=summary;mod.OUT=out
+        takes=mod.original_metadata()
+        old=next(v for v in takes.values() if v["questionId"]=="kids-quiz-001" and v["kind"]=="question")
+        gid=old["generationId"]
+        audio=folder/(gid+".mp3")
+        subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y",
+            "-f","lavfi","-i","sine=frequency=444:sample_rate=44100",
+            "-t",str(old["durationExpected"]),
+            "-c:a","libmp3lame","-b:a","48k",str(audio)],check=True)
+        zip_path=root/"original-upload.zip"
+        with zipfile.ZipFile(zip_path,"w",compression=zipfile.ZIP_DEFLATED) as z:
+            z.write(audio,audio.name)
+        with tempfile.TemporaryDirectory(prefix="kids-v4-zip-test-") as tmp:
+            dest=Path(tmp)
+            mapping=mod.extract_safe(zip_path,dest)
+            if mapping:raise RuntimeError("Unexpected extra mapping from simple ZIP")
+            first=mod.run(dest)
+            assert first["importedPriorPaidGenerations"]==1,first
+            assert first["remainingPriorPaidGenerations"]==55,first
+            registry=json.loads(reg.read_text())
+            assert gid in registry["generationClips"],"Real MP3 was not stored"
+            assert old["text"] in registry["textClips"],"Original text key not restored"
+            assert registry["generationClips"][gid]["audioListeningApproved"] is False
+            assert registry["generationClips"][gid]["source"].startswith("prepaid-elevenlabs")
+            again=mod.run(dest)
+            assert again["importedPriorPaidGenerations"]==1
+            assert len(again["alreadyImportedIds"])==1
+            # Same generation ID, different bytes MUST NOT replace a paid original.
+            subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y",
+                "-f","lavfi","-i","sine=frequency=555:sample_rate=44100",
+                "-t",str(old["durationExpected"]),
+                "-c:a","libmp3lame","-b:a","48k",str(audio)],check=True)
+            shutil.copyfile(audio,dest/audio.name)
+            try:mod.run(dest)
+            except RuntimeError as e:
+                assert "different MP3" in str(e),str(e)
+            else:raise AssertionError("Tampered already-paid audio accepted")
+        print("PASS_V4_PREPAID_IMPORT_SELFTEST: 56 known IDs, 1 imported MP3, 55 missing, idempotent, tampering rejected, 0 TTS",flush=True)
+
+if __name__=="__main__":main()
