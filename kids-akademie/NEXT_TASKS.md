@@ -1,3 +1,12 @@
+## 14.10.2026 · Unterricht bis 178/208 individuell redigiert – prüfbarer Entwurfsstand
+
+- **175–178:** Tawḥīd im Alltag, Bemühen und Allah vertrauen, verschiedene Menschen respektieren, Trinkwasser mit guten Umgangsformen. Vier vorhandene IDs mit **12 individuellen Altersfassungen**, je vier Kinderabschnitten, Lernziel, Situation, Übung, Quellenabgrenzung und Zusammenfassung, als `kids/akademie/curriculum-editorial-175-178-v1.js`.
+- **Quellen:** Qurʾān 1:5 (Ibn Kaṯīr, Islamweb 49/46), 2:45 (49/85), 30:22 (49/1424), 16:10 (49/942). Keine pauschale Verwechslung von alltäglicher Bitte und Anbetung; keine erfundenen Trinkrituale aus dem Wasser-Vers.
+- **Technik:** `kids/data/academy-voice-editorial-175-178-delta-v1.json` enthält **76 nicht erzeugte Sprechtext-Kontexte**, `generateCreditsUsed=0`. Der Loader bindet das Modul einmal nach 171–174 ein. **16 von 16 schreibgeschützten Prüfungen bestanden:** Altersfassungen, Texte/Voice-Konsistenz, Loader und null Credits; keine technischen Kinder-Prüfvermerke gefunden. `kids/tools/test-academy-editorial-175-178-v1.cjs` liegt für den späteren vollständigen Node-Test bereit.
+- **Qualitätskorrektur in 174:** Interne Schlüssel `scientificApproval=false` und `fiqhHumanReviewNeeded=true` aus dem potenziell kinderseitig angezeigten Quellenfeld entfernt; die entsprechenden Freigabeflags bleiben ausschließlich im `sourceAudit`.
+- **Nächste Lektionsredaktion 179–182**, mit klassischer hanbalitischer Primärquellenprüfung für **Fiqh 180**. Insgesamt **30 individuelle Lektionsredaktionen 179–208** noch offen; wissenschaftlich endgültige Freigabe **0/624**. Kein Merge, keine Audioerzeugung, kein Live-Deploy. Die Voice-Deltas sind weiterhin nicht in den kanonischen Sprachplan konsolidiert.
+- **Prüfgrenze:** Der dokumentierte schreibgeschützte Datenabgleich ersetzt keinen im Repository ausgeführten Node-/Browser-/CI-Test.
+
 ## 14.10.2026 · Individuelle Kindertexte 175–178 fertig entworfen · 178/208
 
 - **Lektionsnummern 175–178:** Tawḥīd im Alltag (`tawhid-im-alltag`), Bemühen und Vertrauen (`iman-bemuehen-und-vertrauen`), Respekt gegenüber Menschen mit unterschiedlicher Sprache/Erscheinung (`akhlaq-unterschiedliche-menschen`) und achtsamer Umgang mit Trinkwasser (`adab-trinken-mit-guten-sitten`).
