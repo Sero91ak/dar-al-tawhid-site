@@ -9,7 +9,8 @@ assert(index.indexOf("curriculum-editorial-142-v1.js")<index.indexOf(editorial),
 const original={};
 const ids=["quran-was-bedeutet-sunnah","sirah-hijrah-madinah","dua-beim-verlassen-des-hauses","family-unterschiedliche-herkunft"];
 const ages=["4-5","6-8","9-10"];
-for(const id of ids){original[id]={topic:id,sourceAudit:{scientificApproval:false},ageText:Object.fromEntries(ages.map(age=>[age,{goal:"previous",intro:"previous",lines:[]}])),questions:{sentinel:true},quran:{sentinel:true}};}
+const lessonTopics={"quran-was-bedeutet-sunnah":"Was bedeutet Sunnah?","sirah-hijrah-madinah":"Die Hiǧrah nach Madīnah","dua-beim-verlassen-des-hauses":"Duʿāʾ beim Verlassen des Hauses","family-unterschiedliche-herkunft":"Unterschiedliche Herkunft respektieren"};
+for(const id of ids){original[id]={topic:lessonTopics[id],sourceAudit:{scientificApproval:false},ageText:Object.fromEntries(ages.map(age=>[age,{goal:"previous",intro:"previous",lines:[]}])),questions:{sentinel:true},quran:{sentinel:true}};}
 const window={DARKidsAcademyCurriculum:original,DARKidsAcademyCurriculumEditorial142:true};
 vm.runInNewContext(fs.readFileSync(path.join(base,"akademie",editorial),"utf8"),{window});
 const output=window.DARKidsAcademyCurriculum;
@@ -25,7 +26,7 @@ for(const id of ids){
   assert.equal(data.lines.length,4,id+"/"+age);
   assert(data.lines.every(t=>t.length>60));
   assert.equal(data.intro,data.lines.join(" "));
-  assert.equal(data.audioScript,id+". "+data.intro);
+  assert.equal(data.audioScript,lessonTopics[id]+". "+data.intro);
   assert(voice.contexts.some(x=>x.lessonId===id&&x.age===age&&x.kind==="intro"&&x.text===data.intro));
   assert(voice.contexts.some(x=>x.lessonId===id&&x.age===age&&x.kind==="audio"&&x.text===data.audioScript));
   for(const [index,text] of data.lines.entries())assert(voice.contexts.some(x=>x.lessonId===id&&x.age===age&&x.kind==="line"&&x.index===index&&x.text===text));
