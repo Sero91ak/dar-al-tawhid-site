@@ -1,0 +1,11 @@
+# Unterrichtsredaktion 127–129 · 14.10.2026
+
+**PR #1113, Arbeitszweig · keine wissenschaftliche, pädagogisch-menschliche oder Audiofreigabe.**
+
+- **127 – Gastfreundschaft:** Qurʾān **51:24** erwähnt Ibrāhīms geehrte Gäste. Wir erfinden weder die Details der Folgeverse noch eine bestimmte Begrüßungspflicht aus dem einzelnen Vers. Drei Altersgruppen üben freiwillige, respektvolle Hilfe und persönliche Grenzen. [Ibn Kaṯīr, Tafsīr aḏ-Ḏāriyāt](https://www.islamweb.net/ar/library/content/49/1768) ist der ältere Registerverweis; nicht vollständig neu verifiziert.
+- **128 – Lernen und Pausen:** Qurʾān **2:286** lehrt die Grenzen religiöser Zumutbarkeit. Keine erfundenen exakten Pausenzeiten als Gottesgebot. **Zusätzlicher Textbefund:** Der ursprüngliche `quran.arabic` umfasst nur den Anfang von 2:286, obwohl `excerpt=false` gesetzt war. Der neue Overlay-Datensatz setzt daher **`excerpt=true`**. Die drei Altersfassungen unterscheiden den allgemeinen Sinn von einem eigenen flexiblen Lernplan. [Ibn Kaṯīr, Tafsīr al-Baqarah](https://www.islamweb.net/ar/library/content/49/233) ist im Register genannt; der vollständige Primärtext wurde nicht erneut gelesen.
+- **129 – Fehler bereuen:** Qurʾān **39:53** lehrt, die Hoffnung auf Allahs Barmherzigkeit nicht aufzugeben; die Aufforderung zur Umkehr beginnt ausdrücklich in **39:54**. **Zusätzliche Versgrenzenkorrektur:** V38 speicherte unter 39:53 arabischen Text aus den Versen 53, 54 und 55 und ließ `قُلْ` am Anfang von Vers 53 aus. Der Overlay-Datensatz enthält jetzt den **vollständigen Wortlaut ausschließlich von 39:53**. Der indexierte [Originalabschnitt Ibn Kaṯīr, Tafsīr az-Zumar, Islamweb](https://islamweb.net/ar/library/content/49/1629) trennt die Verse ausdrücklich und erläutert Reue. Kein Übergriff wird dem betroffenen Kind angelastet.
+
+Alle drei Lektionen besitzen **neun eigenständige Fassungen**, je vier Unterrichteinheiten, Übung und sachliche Belegabgrenzung. **57 Sprechtext-Kontexte** wurden als text-only Delta abgelegt. Die kanonische Sprachplandatei wird nicht stillschweigend ersetzt. **0 Audio, 0 Credits, 0/624 wissenschaftliche Freigaben; kein Merge und kein Live-Deploy.** Lern-IDs, Fragen und Freigabeattribute bleiben unverändert.
+
+Nächste Unterrichtsfolge: Fiqh 130 (bereits teilgeprüft) separat vertiefen; dann Kindertexte 131 ff.
