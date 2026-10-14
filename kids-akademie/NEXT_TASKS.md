@@ -1,3 +1,11 @@
+## 14.10.2026 · Individuelle Redaktion bis 202/208, noch sechs Lektionsentwürfe
+
+- **199–202:** Fürsorge für Kranke (Qurʾān 4:36), Platzmachen (58:11), Sitzen zwischen zwei Niederwerfungen (22:77 mit separatem Fiqh), guter Charakter (68:4). Zwölf individuell ausgearbeitete Altersfassungen in `kids/akademie/curriculum-editorial-199-202-v1.js`, bestehende IDs/Quiz/Fortschritt unverändert.
+- **Fiqh 201:** Ibn Qudāmah, al-Mughnī, Bd. 1 S. 308–309, Islamweb 15/599 (Sitzhaltung), 15/601 (Bittwort) und 15/602 (zweite Niederwerfung). `fiqhHumanReviewNeeded=true` und `scientificApproval=false` bleiben erhalten. Keine neuen individuellen Gebetsgültigkeitsurteile bei Krankheit.
+- **Quellenakte:** `kids-akademie/research/EDITORIAL_REVIEW_199_202_20261014.md`. Unterrichtsbeispiele als eigene Didaktik gekennzeichnet, keine medizinische Eigenverantwortung oder Bloßstellung von Kindern.
+- **Technik:** `kids/data/academy-voice-editorial-199-202-delta-v1.json` mit 76 rein textuellen, ungenerierten Kontexten (`generateCreditsUsed=0`). **12/12 Struktur-/Textkontrollen erfolgreich**, null interne QA-Begriffe in Kindertexten; im Index einmalig nach 195–198 eingebunden. Testskript hinterlegt, aber Node-/Browser-/CI-Ausführung noch nicht bestätigt.
+- **Weiter:** 203–208, davon **Fiqh 204–208** mit besonders sorgfältigen klassischen Quellen; insgesamt **6 individuelle Redaktionen offen**, außerdem wissenschaftliche Gesamtkontrolle aller 624 Altersfassungen, bisher 0/624 final freigegeben. Kein Merge, kein Live-Deploy, keine Audioerzeugung.
+
 ## 14.10.2026 · Individuelle Redaktion bis Slot 198/208 · geschützter PR #1142
 
 - **195–198:** Verantwortung für Worte (Qurʾān 49:11), Jüngere freundlich behandeln (49:10), das Herz mit guten Taten pflegen (98:5), Suǧūd kennenlernen (22:77). `kids/akademie/curriculum-editorial-195-198-v1.js` enthält vier bestehende IDs mit **12 individuellen Altersversionen** für 4–5, 6–8 und 9–10 Jahre.
