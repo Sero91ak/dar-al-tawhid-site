@@ -91,24 +91,13 @@ function renderModeButtons(){
   const m=mode();
   document.querySelectorAll("[data-ms-mode]").forEach(b=>b.classList.toggle("active",b.dataset.msMode===m));
 }
+/* KIDS_SOURCE_TEXT_ONLY_V1414: verified citations remain text, never hyperlinks. */
 function sourceHtml(item){
-  const refs=Array.isArray(item?.sourceRefs)?item.sourceRefs:[];
-  const links=Array.isArray(item?.sourceLinks)?item.sourceLinks:[];
-  const story=refs.map(ref=>{
-    const hit=links.find(x=>String(x.label||"")===String(ref));
-    return hit?.url
-      ? '<a class="ms-source-link" href="'+esc(hit.url)+'" target="_blank" rel="noopener">'+esc(ref)+'</a>'
-      : '<span class="ms-source-ref">'+esc(ref)+'</span>';
-  }).join("");
-  const visualRefs=Array.isArray(item?.visualSourceRefs)?item.visualSourceRefs:[];
-  const clothing=Array.isArray(libraryPolicy?.visualEvidence?.clothingBasis)?libraryPolicy.visualEvidence.clothingBasis:[];
-  const visual=visualRefs.map(ref=>{
-    const hit=clothing.find(x=>String(x.ref||"")===String(ref));
-    return hit?.url
-      ? '<a class="ms-source-link visual" href="'+esc(hit.url)+'" target="_blank" rel="noopener">'+esc(ref)+' · Bildgrundlage</a>'
-      : '<span class="ms-source-ref visual">'+esc(ref)+' · Bildgrundlage</span>';
-  }).join("");
-  return story+(visual?'<div class="ms-visual-source-group"><small>ALLGEMEINE KLEIDUNGSBELEGE · KEIN INDIVIDUELLER PORTRÄTBEWEIS</small>'+visual+'</div>':'');
+ const refs=Array.isArray(item?.sourceRefs)?item.sourceRefs:[];
+ const story=refs.map(ref=>'<span class="ms-source-ref">'+esc(ref)+'</span>').join("");
+ const visualRefs=Array.isArray(item?.visualSourceRefs)?item.visualSourceRefs:[];
+ const visual=visualRefs.map(ref=>'<span class="ms-source-ref visual">'+esc(ref)+' · Bildgrundlage</span>').join("");
+ return story+(visual?'<div class="ms-visual-source-group"><small>ALLGEMEINE KLEIDUNGSBELEGE · KEIN INDIVIDUELLER PORTRÄTBEWEIS</small>'+visual+'</div>':'');
 }
 function renderCards(){
   const grid=$("#msGrid");if(!grid)return;
