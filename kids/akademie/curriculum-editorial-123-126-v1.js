@@ -79,7 +79,7 @@ const drafts={
       "goal": "Ich unterscheide die Anerkennung aller Gesandten von der Frage nach ihren unterschiedlichen Vorzügen.",
       "lines": [
         "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Nicht alles, was ähnlich klingt, bedeutet das Gleiche. Deshalb lesen wir Qurʾān 2:136 sorgfältig.",
-        "Der Vers bekräftigt den Glauben an Allahs Offenbarung und nennt mehrere Gesandte. Der Satz 'lā nufarriqu bayna aḥadin minhum' bedeutet hier: Wir glauben nicht an einige und verwerfen andere. Ibn Kaṯīr erläutert diese Glaubensregel. Daraus folgt nicht, dass alle Gesandten denselben Rang haben; das wäre eine andere Frage.",
+        "Der Vers bekräftigt den Glauben an Allahs Offenbarung und nennt mehrere Gesandte. Der Vers bedeutet hier: Wir glauben an alle Gesandten Allahs und verwerfen nicht einige von ihnen. Ibn Kaṯīr erläutert diese Glaubensregel. Daraus folgt nicht, dass alle Gesandten denselben Rang haben; das wäre eine andere Frage.",
         "Eine Lerngruppe erstellt eine Übersicht: Welche Propheten werden im Vers namentlich genannt? Welche werden zusammenfassend erwähnt? Die Kinder vermeiden erfundene Begegnungen, Aussagen und Geschichten über Gesandte.",
         "Markiere im Vers Namen und den Glaubenssatz. Formuliere anschließend: 'Wir erkennen alle Gesandten Allahs an.' Erkläre, warum dieser Satz präziser ist als 'Alle Gesandten hatten genau denselben Rang'. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum."
       ],
@@ -120,7 +120,7 @@ const drafts={
       "goal": "Ich benenne die genaue Versgrenze 99:7/99:8 und verstehe die Aussage über kleine gute Taten.",
       "lines": [
         "Assalāmu ʿalaikum, liebe Schwester, lieber Bruder! Wissenschaftlich sorgfältig zu lernen bedeutet auch, an der richtigen Versgrenze aufzuhören.",
-        "Qurʾān 99:7 lautet: 'Fa-man yaʿmal miṯqāla ḏarratin ḫayran yarah' – sinngemäß: Wer das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der Satz über Schlechtes gehört zu Qurʾān 99:8. Ibn Kaṯīr behandelt beide zusammen, aber sie bleiben zwei verschiedene Verse.",
+        "Qurʾān 99:7 bedeutet sinngemäß: Wer das Gewicht eines Stäubchens Gutes tut, wird es sehen. Der Satz über Schlechtes gehört zu Qurʾān 99:8. Ibn Kaṯīr behandelt beide zusammen, aber sie bleiben zwei verschiedene Verse.",
         "Bei einem Klassenprojekt trägt ein Kind unauffällig Stühle zurück. Ein anderes Kind bemerkt die Hilfe nicht. Im Qurʾān steht keine Regel, dass gute Taten nur dann zählen, wenn Menschen dafür applaudieren. Wir beschreiben hier eine moderne Lernszene, keine Überlieferung.",
         "Schreibe die Versnummern 99:7 und 99:8 unter zwei getrennte Zeilen. Beschreibe danach eine kleine gute Tat und kennzeichne ausdrücklich, was dein eigenes Beispiel ist. Mā schāʾ Allāh! Wa-s-salāmu ʿalaikum."
       ],
