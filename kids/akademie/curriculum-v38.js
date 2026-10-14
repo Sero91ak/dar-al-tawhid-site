@@ -3814,13 +3814,13 @@ const additions=
     "sample": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
     "ageText": {
       "4-5": {
-        "goal": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-        "intro": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Stell dir vor: Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Heute üben wir: Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. Die arabischen Worte spricht die Lehrperson.",
+        "goal": "Ich kann mit einem Qurʾān-Exemplar sorgfältig umgehen.",
+        "intro": "As-salāmu ʿalaikum! Der Qurʾān ist für Muslime etwas sehr Kostbares. Darum gehen wir sorgsam mit einem Exemplar um. Stell dir vor, du hast gerade mit Farben gemalt und deine Hände sind schmutzig. Du kannst zuerst die Hände reinigen und eine erwachsene Person um Hilfe bitten. Wir schließen das Buch vorsichtig und legen es an einen sauberen Platz. Qurʾān 56:79 enthält Worte über die Gereinigten. Heute üben wir nur einen respektvollen Umgang; wir legen keine neue Waschpflicht für Kinder fest.",
         "lines": [
-          "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-          "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
-          "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Wir behandeln ein Qurʾān-Exemplar sorgfältig.",
+          "Qurʾān 56:79 spricht von den Gereinigten.",
+          "Wir legen Bücher achtsam an einen sauberen Platz.",
+          "Bei Fragen hilft eine erwachsene Person."
         ],
         "evidence": "Wir lernen mit Qurʾān 56:79. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1811. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 56:79. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3835,18 +3835,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
-        "practice": "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
-        "summary": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. Die arabischen Worte spricht die Lehrperson."
+        "practice": "Wir üben, ein Buch sorgfältig zu schließen und an einen sauberen Platz zu legen.",
+        "summary": "Wir gehen sorgsam mit dem Qurʾān um und fragen freundlich nach, wenn wir unsicher sind.",
+        "audioScript": "Den Qurʾān sorgfältig behandeln. Wir gehen sorgsam mit dem Qurʾān um und fragen freundlich nach, wenn wir unsicher sind. Wir behandeln ein Qurʾān-Exemplar sorgfältig. Qurʾān 56:79 spricht von den Gereinigten. Wir legen Bücher achtsam an einen sauberen Platz."
       },
       "6-8": {
-        "goal": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Wir lesen Qurʾān 56:79. Der Vers bedeutet sinngemäß: Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel. So kann das im Alltag aussehen: Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Die Aufgabe: Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. muṭahharūn bedeutet: Gereinigte; so das Wort im Vers. muṣḥaf bedeutet: das gebundene Qurʾān-Exemplar; das Wort selbst steht nicht in diesem Vers.",
+        "goal": "Ich kann Respekt vor dem Qurʾān zeigen, ohne aus einer Übung eine neue Rechtsregel zu machen.",
+        "intro": "As-salāmu ʿalaikum! Respekt zeigt sich oft in kleinen Handlungen. Ein Qurʾān-Exemplar wird nicht achtlos auf den Boden geworfen oder zwischen Essen und Farbstifte gelegt. Qurʾān 56:79 spricht davon, dass es nur die Gereinigten berühren. Die genaue Auslegung und eine mögliche Rechtsregel für das Berühren eines gedruckten Exemplars prüfen wir nicht allein durch diesen Satz. Wir behaupten deshalb heute keine neue Pflicht zur rituellen Waschung. Stattdessen üben wir sicheren, sorgfältigen Umgang: das Buch schließen, einen geeigneten Platz wählen und bei Unsicherheit Eltern oder Lehrpersonen fragen. Saubere Hände können zu dieser Sorgfalt gehören, ohne dass unsere Übung ein vollständiger Fiqh-Unterricht wäre.",
         "lines": [
-          "Qurʾān 56:79 ist die gelesene Stelle.",
-          "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-          "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 56:79 spricht von den Gereinigten.",
+          "Die genaue Rechtsfrage zum Berühren eines gedruckten Qurʾān-Exemplars ist damit nicht allein entschieden.",
+          "Sorgfalt und Sauberkeit gehören zu unserer Übung.",
+          "Wir fragen nach, statt eine Pflicht ohne Beleg zu behaupten."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 56:79. Sinngemäß: Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1811. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 56:79. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3861,18 +3861,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
-        "practice": "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
-        "summary": "Qurʾān 56:79 trägt diese Stunde. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-        "audioScript": "Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen."
+        "practice": "Wir nennen drei Arten, ein Qurʾān-Exemplar sorgfältig aufzubewahren.",
+        "summary": "Respekt vor dem Qurʾān beginnt mit achtsamem Handeln; ungeprüfte Fiqh-Regeln geben wir nicht als Tatsache aus.",
+        "audioScript": "Den Qurʾān sorgfältig behandeln. Respekt vor dem Qurʾān beginnt mit achtsamem Handeln; ungeprüfte Fiqh-Regeln geben wir nicht als Tatsache aus. Qurʾān 56:79 spricht von den Gereinigten. Die genaue Rechtsfrage zum Berühren eines gedruckten Qurʾān-Exemplars ist damit nicht allein entschieden. Sorgfalt und Sauberkeit gehören zu unserer Übung."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Den Qurʾān sorgfältig behandeln“ anhand von Qurʾān 56:79 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. In Qurʾān 56:79 lernen wir sinngemäß: Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel. muṭahharūn bedeutet Gereinigte; so das Wort im Vers. muṣḥaf bedeutet das gebundene Qurʾān-Exemplar; das Wort selbst steht nicht in diesem Vers. Stell dir diese Situation vor: Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Welcher nächste Schritt ist gut? Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann die Aussage von Qurʾān 56:79 und die separate Fiqh-Frage zum gedruckten Muṣḥaf unterscheiden.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 56:79 sagt sinngemäß, dass ihn nur die Gereinigten berühren. In seinem Zusammenhang geht es um den ehrwürdigen Qurʾān und ein wohlverwahrtes Buch. Aus diesem einen gespeicherten Vers folgt für unseren Unterricht noch keine abschließend nachgewiesene hanbalitische Detailregel darüber, wer einen gedruckten Muṣḥaf berühren darf. Dafür müssen wir die klassischen Fiqh-Quellen unabhängig prüfen. Was können wir trotzdem heute üben? Ein Exemplar sorgsam schließen, an einen geeigneten Platz legen und anderen beim Lernen respektvoll helfen. Stell dir vor, ein Kind hat vom Malen schmutzige Hände und möchte den Qurʾān nehmen. Du kannst freundlich empfehlen, zunächst sauber zu werden, ohne dem Kind ein unbewiesenes religiöses Urteil entgegenzuhalten. Trenne am Ende den Qurʾān-Wortlaut, die noch offene Rechtsfrage und unsere sorgfältige Alltagshandlung.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 56:79.",
-          "Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel.",
-          "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
-          "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen."
+          "Qurʾān 56:79 nennt die Gereinigten in einem bestimmten Kontext.",
+          "Ein Rechtsurteil über den gedruckten Muṣḥaf verlangt zusätzliche Fiqh-Quellen.",
+          "Unsere Übung betrifft respektvollen und sauberen Umgang.",
+          "Wir machen aus pädagogischer Sorgfalt keine ungeprüfte Pflicht."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 56:79. Sinngemäß: Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1811. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 56:79. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -3887,9 +3887,9 @@ const additions=
           }
         ],
         "situation": "Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält.",
-        "practice": "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
-        "summary": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
-        "audioScript": "Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Der gespeicherte Versteil lautet: Es berührt ihn niemand außer den Gereinigten. Die Tafsīr-Seite bezieht diese Worte in einer Erklärung auf das Buch im Himmel. Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen."
+        "practice": "Wir erklären die Grenze zwischen dem gelesenen Vers und einer noch gesondert zu prüfenden Rechtsfrage.",
+        "summary": "Wir achten den Qurʾān und unterscheiden Offenbarungstext, Tafsīr und Fiqh sorgfältig.",
+        "audioScript": "Den Qurʾān sorgfältig behandeln. Wir achten den Qurʾān und unterscheiden Offenbarungstext, Tafsīr und Fiqh sorgfältig. Qurʾān 56:79 nennt die Gereinigten in einem bestimmten Kontext. Ein Rechtsurteil über den gedruckten Muṣḥaf verlangt zusätzliche Fiqh-Quellen. Unsere Übung betrifft respektvollen und sauberen Umgang."
       }
     },
     "questions": {
@@ -3988,7 +3988,7 @@ const additions=
     ],
     "practice": "Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen.",
     "summary": "Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig.",
-    "audioScript": "Den Qurʾān sorgfältig behandeln. Wir legen das Qurʾān-Buch sauber hin und blättern ruhig. Ein Kind hat schmutzige Hände vom Malen und wäscht sie, bevor es das Exemplar anfasst, weil die Familie das so hält. Wir üben: Buch schließen, an einen hohen sauberen Platz legen, nicht darauf setzen. Die arabischen Worte spricht die Lehrperson.",
+    "audioScript": "Den Qurʾān sorgfältig behandeln. Wir gehen sorgsam mit dem Qurʾān um und fragen freundlich nach, wenn wir unsicher sind. Wir behandeln ein Qurʾān-Exemplar sorgfältig. Qurʾān 56:79 spricht von den Gereinigten. Wir legen Bücher achtsam an einen sauberen Platz.",
     "voiceApproved": false
   },
   "tarbiyah-sichere-regeln-zu-hause": {
@@ -4032,13 +4032,13 @@ const additions=
     "sample": "Eine Familienregel kann uns vor einer Gefahr schützen.",
     "ageText": {
       "4-5": {
-        "goal": "Eine Familienregel kann uns vor einer Gefahr schützen.",
-        "intro": "Eine Familienregel kann uns vor einer Gefahr schützen. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein. Stell dir vor: Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Heute üben wir: Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt. Wir erzählen keine Gruselgeschichte.",
+        "goal": "Ich kenne eine wichtige Sicherheitsregel und hole Hilfe.",
+        "intro": "As-salāmu ʿalaikum! Zu Hause gibt es Regeln, die uns schützen. Zum Beispiel fassen wir eine heiße Herdplatte nicht an. Wenn du nicht weißt, ob etwas gefährlich ist, fragst du einen Erwachsenen. Der Qurʾān erinnert uns in 2:195 daran, uns nicht selbst in Gefahr zu bringen. Die Regel mit dem Herd ist ein Beispiel aus unserem Alltag, kein eigener Vers. Wir üben heute: stehen bleiben, Abstand halten und Hilfe holen. Du musst nicht selbst prüfen, ob etwas heiß ist.",
         "lines": [
-          "Eine Familienregel kann uns vor einer Gefahr schützen.",
-          "Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein.",
-          "Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel.",
-          "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt."
+          "Wir achten auf sichere Regeln zu Hause.",
+          "Qurʾān 2:195 enthält eine Warnung davor, sich ins Verderben zu stürzen.",
+          "Wir halten Abstand von gefährlichen Dingen.",
+          "Bei Unsicherheit holen wir einen Erwachsenen."
         ],
         "evidence": "Wir lernen mit Qurʾān 2:195. Eine Familienregel kann uns vor einer Gefahr schützen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/172. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:195. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4053,18 +4053,18 @@ const additions=
           }
         ],
         "situation": "Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel.",
-        "practice": "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
-        "summary": "Eine Familienregel kann uns vor einer Gefahr schützen. Wir erzählen keine Gruselgeschichte.",
-        "audioScript": "Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein. Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt."
+        "practice": "Wir nennen eine bekannte Sicherheitsregel und üben den Satz: Bitte hilf mir.",
+        "summary": "Sichere Regeln helfen uns. Bei Gefahr holen wir einen Erwachsenen.",
+        "audioScript": "Sichere Regeln zu Hause. Sichere Regeln helfen uns. Bei Gefahr holen wir einen Erwachsenen. Wir achten auf sichere Regeln zu Hause. Qurʾān 2:195 enthält eine Warnung davor, sich ins Verderben zu stürzen. Wir halten Abstand von gefährlichen Dingen."
       },
       "6-8": {
-        "goal": "Eine Familienregel kann uns vor einer Gefahr schützen.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Eine Familienregel kann uns vor einer Gefahr schützen. Wir lesen Qurʾān 2:195. Der Vers bedeutet sinngemäß: Der Vers befiehlt, auf Allahs Weg auszugeben, und sagt, man solle sich nicht mit eigenen Händen ins Verderben stürzen, und man solle Gutes tun. So kann das im Alltag aussehen: Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Die Aufgabe: Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt. tahluka bedeutet: Verderben, ins Unglück geraten. iḥsān bedeutet: Gutes tun.",
+        "goal": "Ich kann eine Familienregel zur Sicherheit erklären und ihren Bezug zum Unterrichtsbeispiel verstehen.",
+        "intro": "As-salāmu ʿalaikum! Warum dürfen Kinder nicht einfach mit dem Herd oder unbekannten Reinigungsmitteln experimentieren? Weil Erwachsene Gefahren besser einschätzen können und uns schützen sollen. Qurʾān 2:195 spricht im Zusammenhang auch davon, auf Allahs Weg auszugeben, und warnt davor, sich selbst in die Zerstörung zu stürzen. Der Vers enthält also keine Liste von Haushaltsgegenständen. Wir übertragen den allgemeinen Gedanken, Gefahr nicht leichtfertig zu suchen, auf eine sichere Übung. Die Regel, Abstand von einer heißen Herdplatte zu halten, kommt aus dem Familienalltag. Wenn du etwas Gefährliches entdeckst, musst du nicht mutig eingreifen. Halte Abstand und informiere eine erwachsene Vertrauensperson.",
         "lines": [
-          "Qurʾān 2:195 ist die gelesene Stelle.",
-          "Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein.",
-          "Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel.",
-          "Wir erzählen keine Gruselgeschichte."
+          "Qurʾān 2:195 spricht über Ausgeben auf Allahs Weg und das Vermeiden von Verderben.",
+          "Er zählt keine Herd- oder Haushaltsregeln auf.",
+          "Familienregeln können Kinder vor echten Gefahren schützen.",
+          "Wir üben Abstand halten und eine verantwortliche Person holen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:195. Sinngemäß: Der Vers befiehlt, auf Allahs Weg auszugeben, und sagt, man solle sich nicht mit eigenen Händen ins Verderben stürzen, und man solle Gutes tun.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/172. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:195. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4079,18 +4079,18 @@ const additions=
           }
         ],
         "situation": "Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel.",
-        "practice": "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
-        "summary": "Qurʾān 2:195 trägt diese Stunde. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein.",
-        "audioScript": "Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein. Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt."
+        "practice": "Wir unterscheiden eine Sicherheitsregel zu Hause von dem Wortlaut des Qurʾān-Verses.",
+        "summary": "Wir halten uns bei Gefahren an sichere Regeln und überlassen riskante Aufgaben den Erwachsenen.",
+        "audioScript": "Sichere Regeln zu Hause. Wir halten uns bei Gefahren an sichere Regeln und überlassen riskante Aufgaben den Erwachsenen. Qurʾān 2:195 spricht über Ausgeben auf Allahs Weg und das Vermeiden von Verderben. Er zählt keine Herd- oder Haushaltsregeln auf. Familienregeln können Kinder vor echten Gefahren schützen."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Sichere Regeln zu Hause“ anhand von Qurʾān 2:195 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. In Qurʾān 2:195 lernen wir sinngemäß: Der Vers befiehlt, auf Allahs Weg auszugeben, und sagt, man solle sich nicht mit eigenen Händen ins Verderben stürzen, und man solle Gutes tun. tahluka bedeutet Verderben, ins Unglück geraten. iḥsān bedeutet Gutes tun. Stell dir diese Situation vor: Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Welcher nächste Schritt ist gut? Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann den Qurʾān-Kontext von 2:195 erklären und eine sichere Unterrichtsanwendung begründen.",
+        "intro": "As-salāmu ʿalaikum! Eine gute Regel verstehen wir besser, wenn wir wissen, woher sie kommt. Qurʾān 2:195 nennt das Ausgeben auf Allahs Weg, warnt davor, sich selbst ins Verderben zu stürzen, und fordert zu gutem Handeln auf. Eine moderne Haushaltsregel steht dort nicht wörtlich. Wir dürfen sie dennoch als eigenes Sicherheitsbeispiel besprechen, wenn wir deutlich sagen, dass sie nicht zum Verswortlaut gehört. Stell dir vor, ein Kind sieht eine offene Flasche mit unbekannter Flüssigkeit. Was sollte es tun? Nicht probieren oder berühren, sondern Abstand halten und einen verantwortlichen Erwachsenen informieren. Wir betrachten heute auch die Verantwortung der Erwachsenen: Kinder sollen nicht gefährliche Dinge allein beseitigen müssen. Erkläre in eigenen Worten die Unterschiede zwischen Qurʾān-Sinn, einer vernünftigen Schutzregel und einer erfundenen religiösen Vorschrift.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 2:195.",
-          "Der Vers befiehlt, auf Allahs Weg auszugeben, und sagt, man solle sich nicht mit eigenen Händen ins Verderben stürzen, und man solle Gutes tun.",
-          "Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel.",
-          "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt."
+          "Qurʾān 2:195 nennt das Ausgeben auf Allahs Weg, das Meiden von Verderben und gutes Handeln.",
+          "Eine konkrete Haushaltsregel ist nicht wörtlich im Vers enthalten.",
+          "Schutzregeln helfen Kindern, Risiken nicht selbst ausprobieren zu müssen.",
+          "Verantwortliche Erwachsene sorgen für sichere Umgebungen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 2:195. Sinngemäß: Der Vers befiehlt, auf Allahs Weg auszugeben, und sagt, man solle sich nicht mit eigenen Händen ins Verderben stürzen, und man solle Gutes tun.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/172. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 2:195. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4105,9 +4105,9 @@ const additions=
           }
         ],
         "situation": "Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel.",
-        "practice": "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
-        "summary": "Eine Familienregel kann uns vor einer Gefahr schützen. Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
-        "audioScript": "Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. Der Vers befiehlt, auf Allahs Weg auszugeben, und sagt, man solle sich nicht mit eigenen Händen ins Verderben stürzen, und man solle Gutes tun. Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt."
+        "practice": "Wir ordnen Aussagen dem Qurʾān-Sinn oder einem sicheren Unterrichtsbeispiel zu.",
+        "summary": "Wir achten den Kontext des Verses und setzen sichere Regeln um, ohne neue Religionstexte zu erfinden.",
+        "audioScript": "Sichere Regeln zu Hause. Wir achten den Kontext des Verses und setzen sichere Regeln um, ohne neue Religionstexte zu erfinden. Qurʾān 2:195 nennt das Ausgeben auf Allahs Weg, das Meiden von Verderben und gutes Handeln. Eine konkrete Haushaltsregel ist nicht wörtlich im Vers enthalten. Schutzregeln helfen Kindern, Risiken nicht selbst ausprobieren zu müssen."
       }
     },
     "questions": {
@@ -4206,7 +4206,7 @@ const additions=
     ],
     "practice": "Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
     "summary": "Eine Familienregel kann uns vor einer Gefahr schützen. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein.",
-    "audioScript": "Sichere Regeln zu Hause. Eine Familienregel kann uns vor einer Gefahr schützen. Eine Familienregel kann uns vor einer Gefahr schützen. Wir halten sie ein. Die Familie sagt: Auf die heiße Herdplatte fassen wir nicht. Das Kind bleibt bei dieser Regel. Wir nennen eine echte Regel aus dem eigenen Zuhause, die vor einer Gefahr schützt.",
+    "audioScript": "Sichere Regeln zu Hause. Sichere Regeln helfen uns. Bei Gefahr holen wir einen Erwachsenen. Wir achten auf sichere Regeln zu Hause. Qurʾān 2:195 enthält eine Warnung davor, sich ins Verderben zu stürzen. Wir halten Abstand von gefährlichen Dingen.",
     "voiceApproved": false
   },
   "nafs-ungeduld-bemerken": {
@@ -4250,13 +4250,13 @@ const additions=
     "sample": "Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
     "ageText": {
       "4-5": {
-        "goal": "Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
-        "intro": "Wenn wir warten müssen, merken wir die Eile und werden langsamer. Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Stell dir vor: Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Heute üben wir: Wir atmen einmal ruhig und sagen: Ich warte. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
+        "goal": "Ich kann kurz warten, ohne andere zu schubsen.",
+        "intro": "As-salāmu ʿalaikum! Manchmal müssen wir warten, zum Beispiel vor der Tür oder beim Spielen. Das ist nicht immer leicht. Qurʾān 70:5 erinnert an schöne Geduld. Wir üben heute, die Hände bei uns zu lassen, einmal ruhig zu atmen und zu sagen: Ich warte. Wenn du unruhig wirst, bist du deshalb kein schlechtes Kind. Wir helfen einander beim Warten. Und wenn du dich in einer Gefahr befindest, sollst du nicht einfach warten, sondern sofort Hilfe holen.",
         "lines": [
-          "Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
-          "Der Vers lautet: So sei geduldig mit einem schönen Gedulden.",
-          "Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still.",
-          "Wir atmen einmal ruhig und sagen: Ich warte."
+          "Warten kann manchmal schwerfallen.",
+          "Qurʾān 70:5 spricht von schöner Geduld.",
+          "Wir schubsen niemanden, wenn es uns zu lange dauert.",
+          "Bei Gefahr holen wir sofort Hilfe."
         ],
         "evidence": "Wir lernen mit Qurʾān 70:5. Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 70:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4271,18 +4271,18 @@ const additions=
           }
         ],
         "situation": "Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still.",
-        "practice": "Wir atmen einmal ruhig und sagen: Ich warte.",
-        "summary": "Wenn wir warten müssen, merken wir die Eile und werden langsamer. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
-        "audioScript": "Ungeduld bemerken. Wenn wir warten müssen, merken wir die Eile und werden langsamer. Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Wir atmen einmal ruhig und sagen: Ich warte."
+        "practice": "Wir warten kurz gemeinsam und üben ruhiges Atmen, ohne ein anderes Kind zu drängen.",
+        "summary": "Ich darf ungeduldig sein und trotzdem freundlich handeln.",
+        "audioScript": "Ungeduld bemerken. Ich darf ungeduldig sein und trotzdem freundlich handeln. Warten kann manchmal schwerfallen. Qurʾān 70:5 spricht von schöner Geduld. Wir schubsen niemanden, wenn es uns zu lange dauert."
       },
       "6-8": {
-        "goal": "Wenn wir warten müssen, merken wir die Eile und werden langsamer.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wenn wir warten müssen, merken wir die Eile und werden langsamer. Wir lesen Qurʾān 70:5. Der Vers bedeutet sinngemäß: Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes. So kann das im Alltag aussehen: Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Die Aufgabe: Wir atmen einmal ruhig und sagen: Ich warte. ṣabr bedeutet: Geduld, bleiben können. ǧamīl bedeutet: schön; hier ein geduldiges Aushalten ohne böses Auftreten.",
+        "goal": "Ich erkenne Ungeduld und kann mit einer sicheren Pause reagieren.",
+        "intro": "As-salāmu ʿalaikum! Stell dir vor, die Klasse steht an der Tür und es dauert länger als gedacht. Ein Kind möchte sich vordrängeln. Ein anderes sagt: Ich bin ungeduldig, aber ich kann warten. Qurʾān 70:5 spricht von schöner Geduld. Der Vers wird ursprünglich an den Propheten ﷺ gerichtet; unsere Warteübung ist eine pädagogische Anwendung. Wir besprechen drei kleine Schritte: das Gefühl merken, ruhig atmen und eine freundliche Handlung wählen. Geduld heißt nicht, sich von anderen verletzen zu lassen. Wenn ein Kind bedrängt oder gefährdet wird, soll es Unterstützung holen. Heute üben wir nur eine kurze Alltagssituation ohne Streit und ohne Schubsen.",
         "lines": [
-          "Qurʾān 70:5 ist die gelesene Stelle.",
-          "Der Vers lautet: So sei geduldig mit einem schönen Gedulden.",
-          "Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still.",
-          "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht."
+          "Qurʾān 70:5 nennt schöne Geduld.",
+          "Unsere Übung über eine Warteschlange ist eine Alltagshilfe.",
+          "Wir dürfen Ungeduld fühlen, ohne andere zu verletzen.",
+          "Bei Unrecht oder Gefahr geht Schutz vor geduldigem Aushalten."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 70:5. Sinngemäß: Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 70:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4297,18 +4297,18 @@ const additions=
           }
         ],
         "situation": "Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still.",
-        "practice": "Wir atmen einmal ruhig und sagen: Ich warte.",
-        "summary": "Qurʾān 70:5 trägt diese Stunde. Der Vers lautet: So sei geduldig mit einem schönen Gedulden.",
-        "audioScript": "Ungeduld bemerken. Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Wir atmen einmal ruhig und sagen: Ich warte."
+        "practice": "Wir überlegen eine freundliche Reaktion, wenn etwas länger dauert als erwartet.",
+        "summary": "Ungeduld ist ein Gefühl. Wir können lernen, geduldig und respektvoll darauf zu reagieren.",
+        "audioScript": "Ungeduld bemerken. Ungeduld ist ein Gefühl. Wir können lernen, geduldig und respektvoll darauf zu reagieren. Qurʾān 70:5 nennt schöne Geduld. Unsere Übung über eine Warteschlange ist eine Alltagshilfe. Wir dürfen Ungeduld fühlen, ohne andere zu verletzen."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Ungeduld bemerken“ anhand von Qurʾān 70:5 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Ungeduld bemerken. Wenn wir warten müssen, merken wir die Eile und werden langsamer. In Qurʾān 70:5 lernen wir sinngemäß: Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes. ṣabr bedeutet Geduld, bleiben können. ǧamīl bedeutet schön; hier ein geduldiges Aushalten ohne böses Auftreten. Stell dir diese Situation vor: Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Welcher nächste Schritt ist gut? Wir atmen einmal ruhig und sagen: Ich warte. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann schöne Geduld als Qurʾān-Begriff erklären und auf eine harmlose Alltagssituation beziehen.",
+        "intro": "As-salāmu ʿalaikum! Was ist der Unterschied zwischen Geduld und stiller Resignation? In Qurʾān 70:5 wird zur schönen Geduld aufgerufen. Im unmittelbaren Zusammenhang richtet sich die Aufforderung an den Propheten ﷺ. Wir dürfen den Vers deshalb nicht als Befehl an Kinder verwenden, Gewalt oder wiederholtes Unrecht schweigend auszuhalten. Als Unterrichtsbeispiel betrachten wir eine harmlose Wartezeit. Du bist ungeduldig und möchtest drängeln. Wie kannst du reagieren? Benenne das Gefühl, halte kurz inne und entscheide dich für respektvolles Verhalten. Wenn jemand gefährdet wird, braucht es dagegen eine aktive Schutzentscheidung und Hilfe von Erwachsenen. Erkläre, weshalb dieselbe Haltung nicht bedeutet, jeden schwierigen Umstand passiv zu ertragen.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 70:5.",
-          "Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes.",
-          "Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still.",
-          "Wir atmen einmal ruhig und sagen: Ich warte."
+          "Qurʾān 70:5 nennt schöne Geduld und spricht im Zusammenhang den Propheten ﷺ an.",
+          "Eine Warteübung ist unser eigenes pädagogisches Beispiel.",
+          "Geduld bedeutet nicht, Unrecht und Gefahr allein zu ertragen.",
+          "Wir verbinden Selbstbeherrschung mit rechtzeitigem Hilfeholen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 70:5. Sinngemäß: Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1891. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 70:5. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -4323,9 +4323,9 @@ const additions=
           }
         ],
         "situation": "Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still.",
-        "practice": "Wir atmen einmal ruhig und sagen: Ich warte.",
-        "summary": "Wenn wir warten müssen, merken wir die Eile und werden langsamer. Wir atmen einmal ruhig und sagen: Ich warte.",
-        "audioScript": "Ungeduld bemerken. Wenn wir warten müssen, merken wir die Eile und werden langsamer. Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Erklärung auf der Seite richtet diese Geduld an den Propheten gegenüber der Ablehnung seines Volkes. Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Wir atmen einmal ruhig und sagen: Ich warte."
+        "practice": "Wir vergleichen eine gewöhnliche Wartezeit mit einer Situation, in der sofort Hilfe nötig ist.",
+        "summary": "Schöne Geduld hilft bei Herausforderungen, ohne Schutz und Gerechtigkeit zu ersetzen.",
+        "audioScript": "Ungeduld bemerken. Schöne Geduld hilft bei Herausforderungen, ohne Schutz und Gerechtigkeit zu ersetzen. Qurʾān 70:5 nennt schöne Geduld und spricht im Zusammenhang den Propheten ﷺ an. Eine Warteübung ist unser eigenes pädagogisches Beispiel. Geduld bedeutet nicht, Unrecht und Gefahr allein zu ertragen."
       }
     },
     "questions": {
@@ -4424,7 +4424,7 @@ const additions=
     ],
     "practice": "Wir atmen einmal ruhig und sagen: Ich warte.",
     "summary": "Wenn wir warten müssen, merken wir die Eile und werden langsamer. Der Vers lautet: So sei geduldig mit einem schönen Gedulden.",
-    "audioScript": "Ungeduld bemerken. Wenn wir warten müssen, merken wir die Eile und werden langsamer. Der Vers lautet: So sei geduldig mit einem schönen Gedulden. Die Reihe an der Tür dauert. Ein Kind will schubsen und hält stattdessen die Hände still. Wir atmen einmal ruhig und sagen: Ich warte.",
+    "audioScript": "Ungeduld bemerken. Ich darf ungeduldig sein und trotzdem freundlich handeln. Warten kann manchmal schwerfallen. Qurʾān 70:5 spricht von schöner Geduld. Wir schubsen niemanden, wenn es uns zu lange dauert.",
     "voiceApproved": false
   },
   "fiqh-gebetsplatz-vorbereiten": {
