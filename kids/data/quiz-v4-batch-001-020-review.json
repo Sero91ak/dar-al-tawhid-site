@@ -12,7 +12,7 @@
   "modelId": "eleven_v4",
   "questionCount": 20,
   "paidSynthesisAllowed": false,
-  "releaseStatus": "not-published",
+  "releaseStatus": "recordings-generated-needs-audio-import-and-human-auditory-review",
   "twoQuestionManualAudioGuard": true,
   "existingPaidRecordings": {
     "kids-quiz-002": [
@@ -28,9 +28,9 @@
     "catalogQuestionsVerified": 20,
     "correctAnswersVerified": 20,
     "sourceReferencesPresent": 20,
-    "audioRenderedForAllQuestionStates": 15,
+    "audioRenderedForAllQuestionStates": 20,
     "humanAudioApproved": 0,
-    "audioOriginalGenerationCount": 10,
+    "audioOriginalGenerationCount": 56,
     "audioHumanApproved": 0,
     "audioFilesImportedToGitHub": 0,
     "playableMergedQuestions": 0
@@ -715,7 +715,7 @@
       "originalExplanation": "Allah verbietet, andere Menschen zu verspotten.",
       "source": "Qurʾān 49:11",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "generation-started-review-status",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
       "recordingStatus": "awaiting-v4-recording",
       "recordings": [
@@ -724,9 +724,10 @@
           "modelId": "eleven_v4",
           "flowId": "TOmzCA1rpf6IoZlTeqVP",
           "sessionId": "slkIO4D3KJcHCCOKBhSc",
-          "status": "generating",
+          "status": "completed",
           "generationId": "kEEjOsweh2aEq9h2i4hN",
-          "credits": 162.8031013215859
+          "credits": 162.8031013215859,
+          "durationSeconds": 10.72
         },
         {
           "part": "correct",
@@ -747,9 +748,10 @@
           "modelId": "eleven_v4",
           "flowId": "TOmzCA1rpf6IoZlTeqVP",
           "sessionId": "4xFk1er3do5TpINioFfz",
-          "status": "generating",
+          "status": "completed",
           "generationId": "heZyGLFXcuaMa8GMuj2W",
-          "credits": 64.92742731277534
+          "credits": 64.92742731277534,
+          "durationSeconds": 4.4
         }
       ]
     },
@@ -827,7 +829,7 @@
       "originalExplanation": "Allah lobt diejenigen, die ihren Zorn zurückhalten und verzeihen.",
       "source": "Qurʾān 3:134",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "generation-started-review-status",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
       "recordingStatus": "awaiting-v4-recording",
       "recordings": [
@@ -836,9 +838,10 @@
           "flowId": "aRb3B3jCCh3bnMMqrO6e",
           "sessionId": "CFcfJFKU2YaX4ui790xN",
           "modelId": "eleven_v4",
-          "status": "pending",
+          "status": "completed",
           "generationId": "vq2nTmmLnI3nHzWDL5sC",
-          "credits": 128.88578854625553
+          "credits": 128.88578854625553,
+          "durationSeconds": 9.6
         },
         {
           "part": "correct",
@@ -859,9 +862,10 @@
           "flowId": "aRb3B3jCCh3bnMMqrO6e",
           "sessionId": "m3J88jgWNxHkPv3UbpO8",
           "modelId": "eleven_v4",
-          "status": "pending",
+          "status": "completed",
           "generationId": "40yTB3kLdHUrSSgwuUDJ",
-          "credits": 82.37061674008811
+          "credits": 82.37061674008811,
+          "durationSeconds": 5.52
         }
       ]
     },
@@ -939,7 +943,7 @@
       "originalExplanation": "Allah befiehlt, die Gebete zu bewahren.",
       "source": "Qurʾān 2:238",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "generation-started-review-status",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
       "recordingStatus": "awaiting-v4-recording",
       "recordings": [
@@ -948,9 +952,10 @@
           "flowId": "WWmJhIgAUW8GmKUaC4jZ",
           "sessionId": "YtfzQZHV3hHiASdmZXGa",
           "modelId": "eleven_v4",
-          "status": "generating",
+          "status": "completed",
           "generationId": "h3Bh3ejOIBOt4vUVlT8r",
-          "credits": 143.4217797356828
+          "credits": 143.4217797356828,
+          "durationSeconds": 10.08
         },
         {
           "part": "correct",
@@ -971,9 +976,10 @@
           "flowId": "WWmJhIgAUW8GmKUaC4jZ",
           "sessionId": "BAHQKLzol1nknSBtmo2u",
           "modelId": "eleven_v4",
-          "status": "generating",
+          "status": "completed",
           "generationId": "86T6VNKlu9GVu80Q0WI5",
-          "credits": 57.174898678414095
+          "credits": 57.174898678414095,
+          "durationSeconds": 4
         }
       ]
     },
@@ -1051,7 +1057,7 @@
       "originalExplanation": "Allah lehrt die Bitte: Mein Herr, mehre mich an Wissen.",
       "source": "Qurʾān 20:114",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "generation-started-review-status",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
       "recordingStatus": "awaiting-v4-recording",
       "recordings": [
@@ -1059,10 +1065,11 @@
           "part": "question",
           "flowId": "STGZWLMW9lDACqvI8OBg",
           "sessionId": "ELUSiveEWLtSxP2ltj5G",
-          "status": "generating",
+          "status": "completed",
           "modelId": "eleven_v4",
           "generationId": "qRVJETdkA6tqyNfSm65J",
-          "credits": 144.39084581497798
+          "credits": 144.39084581497798,
+          "durationSeconds": 10.32
         },
         {
           "part": "correct",
@@ -1082,10 +1089,11 @@
           "part": "explanation",
           "flowId": "STGZWLMW9lDACqvI8OBg",
           "sessionId": "4DQANff7ThzUikJ8T5uE",
-          "status": "pending",
+          "status": "completed",
           "modelId": "eleven_v4",
           "generationId": "wrJPUpiOo2YwL3y4vXqH",
-          "credits": 72.67995594713656
+          "credits": 72.67995594713656,
+          "durationSeconds": 5.52
         }
       ]
     },
@@ -1169,7 +1177,7 @@
       "originalExplanation": "Sūrat al-Iḫlāṣ lehrt Allahs Einzigkeit und dass Er weder zeugt noch gezeugt wurde.",
       "source": "Qurʾān 112:1–4",
       "pronunciationQA": "pending-human-approval",
-      "audioQA": "generation-started-review-status",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
       "published": false,
       "recordingStatus": "prior-surah-pilot-not-full-quiz",
       "recordings": [
@@ -1208,9 +1216,10 @@
           "modelId": "eleven_v4",
           "flowId": "tk2FQtwb4kogCVfE0A2a",
           "sessionId": "zSXOEDtkn8j2HC44UmLQ",
-          "status": "pending",
+          "status": "completed",
           "generationId": "Y06izGfW3lzAWMoW79EG",
-          "credits": 98.84474008810572
+          "credits": 98.84474008810572,
+          "durationSeconds": 7.12
         }
       ]
     }
@@ -1224,7 +1233,8 @@
     "Ein sanfter Retry-Satz wurde in Python- und JS-Sprachvertrag einheitlich korrigiert. CI/Hörfreigabe ausstehend.",
     "Quiz 002: drei vorbestehende bezahlte Fragenteile und drei heute ergänzte Original-V4-Takes, nicht zusammengesetzt. Keine neuen Credits für bereits vorbestehende Generationen.",
     "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios.",
-    "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie."
+    "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie.",
+    "20 Quizfragen mit V4-Sprach-Generation-IDs aufgenommen. Keine signierten URLs versionieren; keine Besucher-Freigabe ohne sichere MP3-Assets und Hörkontrolle."
   ],
   "actualPaidCreditsThisBatch": 5186.441656387665,
   "previouslyPaidCreditsReusedForQuestion002": 122.102325991
