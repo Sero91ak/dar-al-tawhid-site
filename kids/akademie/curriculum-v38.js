@@ -2068,82 +2068,82 @@ const additions=
     "sample": "Wir wiederholen einen kurzen Vers ohne Hetze.",
     "ageText": {
       "4-5": {
-        "goal": "Wir wiederholen einen kurzen Vers ohne Hetze.",
-        "intro": "Wir wiederholen einen kurzen Vers ohne Hetze. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. Stell dir vor: Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich. Heute üben wir: Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt. Die arabischen Worte spricht die Lehrperson.",
+        "goal": "Ich kann ruhig lernen und Fragen stellen.",
+        "intro": "As-salāmu ʿalaikum! Manche Wörter sind zuerst schwer. Du musst sie nicht alle auf einmal können. Wir üben heute, einen kurzen deutschen Satz langsam und deutlich zu sprechen. In Qurʾān 75:16 spricht Allah zum Propheten ﷺ darüber, beim Empfangen der Offenbarung nicht zu eilen. Das ist kein Vorwurf an Kinder. Unsere Übung hilft uns, geduldig zu lernen. Wenn du ein Wort nicht verstehst, fragst du freundlich nach. Jeder kleine Lernschritt ist wertvoll.",
         "lines": [
-          "Wir wiederholen einen kurzen Vers ohne Hetze.",
-          "Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
-          "Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich.",
-          "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt."
+          "Qurʾān 75:16 spricht zum Propheten ﷺ über das Empfangen der Offenbarung.",
+          "Wir lernen heute mit Ruhe und Geduld.",
+          "Ein kurzer Satz lässt sich langsam wiederholen.",
+          "Bei Fragen helfen uns Eltern oder Lehrpersonen."
         ],
         "evidence": "Wir lernen mit Qurʾān 75:16. Wir wiederholen einen kurzen Vers ohne Hetze.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1912. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 75:16. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
             "say": "lisān",
-            "de": "Zunge"
+            "de": "Zunge; dieses Wort kommt im Vers vor."
           },
           {
-            "say": "rattil",
-            "de": "deutlich und ruhig vortragen; das Wort steht in einer anderen Stunde"
+            "say": "Āyah",
+            "de": "Ein Qurʾān-Vers."
           }
         ],
         "situation": "Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich.",
-        "practice": "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt.",
-        "summary": "Wir wiederholen einen kurzen Vers ohne Hetze. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Qurʾān respektvoll auswendig lernen. Wir wiederholen einen kurzen Vers ohne Hetze. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich. Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt."
+        "practice": "Wir üben einen kurzen deutschen Merksatz langsam zweimal. Eine Lehrperson hilft bei arabischen Qurʾān-Worten.",
+        "summary": "Du darfst dir beim Lernen Zeit lassen und um Hilfe bitten.",
+        "audioScript": "Qurʾān respektvoll auswendig lernen. Du darfst dir beim Lernen Zeit lassen und um Hilfe bitten. Qurʾān 75:16 spricht zum Propheten ﷺ über das Empfangen der Offenbarung. Wir lernen heute mit Ruhe und Geduld. Ein kurzer Satz lässt sich langsam wiederholen."
       },
       "6-8": {
-        "goal": "Wir wiederholen einen kurzen Vers ohne Hetze.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir wiederholen einen kurzen Vers ohne Hetze. Wir lesen Qurʾān 75:16. Der Vers bedeutet sinngemäß: Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. So kann das im Alltag aussehen: Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich. Die Aufgabe: Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt. lisān bedeutet: Zunge. rattil bedeutet: deutlich und ruhig vortragen; das Wort steht in einer anderen Stunde.",
+        "goal": "Ich verstehe, warum wir Qurʾān-Worte aufmerksam und ohne Lernstress üben.",
+        "intro": "As-salāmu ʿalaikum! Ein Kind möchte einen neuen Satz sofort auswendig können. Es sagt ihn sehr schnell und verwechselt dabei die Wörter. Vielleicht hilft es, ihn in Ruhe zu lernen. In Qurʾān 75:16 spricht Allah zuerst zum Propheten ﷺ, der die Offenbarung empfing. Der Vers ist deshalb nicht einfach eine direkte Anweisung an uns, langsamer auswendig zu lernen. Unsere praktische Lernregel lautet trotzdem: aufmerksam zuhören, in kleinen Schritten üben und bei Bedarf nachfragen. Heute wiederholen wir einen kurzen deutschen Merksatz. Den arabischen Qurʾān-Wortlaut übernimmt eine geeignete menschliche Rezitation oder eine Lehrperson. Niemand wird ausgelacht, weil er mehr Zeit braucht.",
         "lines": [
-          "Qurʾān 75:16 ist die gelesene Stelle.",
-          "Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
-          "Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Der Vers 75:16 richtet sich im Offenbarungskontext an den Propheten ﷺ.",
+          "Unser langsames Wiederholen ist eine Lernübung, keine direkte Übersetzung des Verses.",
+          "Wir lernen in kleinen Schritten und fragen nach.",
+          "Niemand wird wegen eines Fehlers beim Lernen beschämt."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 75:16. Sinngemäß: Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1912. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 75:16. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
             "say": "lisān",
-            "de": "Zunge"
+            "de": "Zunge; dieses Wort kommt im Vers vor."
           },
           {
-            "say": "rattil",
-            "de": "deutlich und ruhig vortragen; das Wort steht in einer anderen Stunde"
+            "say": "Āyah",
+            "de": "Ein Qurʾān-Vers."
           }
         ],
         "situation": "Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich.",
-        "practice": "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt.",
-        "summary": "Qurʾān 75:16 trägt diese Stunde. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
-        "audioScript": "Qurʾān respektvoll auswendig lernen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich. Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt."
+        "practice": "Wir sprechen einen kurzen deutschen Merksatz ruhig nach und hören einander aufmerksam zu.",
+        "summary": "Der Qurʾān verdient aufmerksames Lernen. Geduldiges Üben hilft, ohne aus dem Vers eine neue Regel zu erfinden.",
+        "audioScript": "Qurʾān respektvoll auswendig lernen. Der Qurʾān verdient aufmerksames Lernen. Geduldiges Üben hilft, ohne aus dem Vers eine neue Regel zu erfinden. Der Vers 75:16 richtet sich im Offenbarungskontext an den Propheten ﷺ. Unser langsames Wiederholen ist eine Lernübung, keine direkte Übersetzung des Verses. Wir lernen in kleinen Schritten und fragen nach."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Qurʾān respektvoll auswendig lernen“ anhand von Qurʾān 75:16 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Qurʾān respektvoll auswendig lernen. Wir wiederholen einen kurzen Vers ohne Hetze. In Qurʾān 75:16 lernen wir sinngemäß: Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. lisān bedeutet Zunge. rattil bedeutet deutlich und ruhig vortragen; das Wort steht in einer anderen Stunde. Stell dir diese Situation vor: Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich. Welcher nächste Schritt ist gut? Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann den Offenbarungskontext von Qurʾān 75:16 und unsere heutige Lernübung unterscheiden.",
+        "intro": "As-salāmu ʿalaikum! Warum ist es wichtig, den Adressaten eines Qurʾān-Verses zu kennen? In Qurʾān 75:16 wird der Prophet ﷺ beim Empfang der Offenbarung angesprochen. Es geht um die Bewegung der Zunge und darum, sich beim Aufnehmen der Offenbarung nicht zu beeilen. Der folgende Zusammenhang spricht davon, dass Allah für das Sammeln und die Rezitation sorgt. Wir dürfen diese Stelle nicht so wiedergeben, als wäre jeder Schüler ausdrücklich mit denselben Worten angesprochen. Trotzdem lernen wir aus einer eigenen Unterrichtsübung: Wer aufmerksam zuhört und Schritt für Schritt wiederholt, muss sich nicht mit anderen vergleichen. Wir üben einen kurzen deutschen Merksatz und erklären, wie man eine Stelle richtig einordnet: Wer wird angesprochen, worum geht es, und was ist nur unsere pädagogische Anwendung?",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 75:16.",
-          "Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
-          "Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich.",
-          "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt."
+          "Qurʾān 75:16 gehört zum Zusammenhang des Offenbarungsempfangs.",
+          "Der Prophet ﷺ ist der unmittelbare Adressat des Verses.",
+          "Langsames Üben ist hier eine pädagogische Methode, kein neu erfundenes Versgebot.",
+          "Wir achten auf den Zusammenhang und lernen ohne Beschämung."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 75:16. Sinngemäß: Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1912. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 75:16. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
             "say": "lisān",
-            "de": "Zunge"
+            "de": "Zunge; dieses Wort kommt im Vers vor."
           },
           {
-            "say": "rattil",
-            "de": "deutlich und ruhig vortragen; das Wort steht in einer anderen Stunde"
+            "say": "Āyah",
+            "de": "Ein Qurʾān-Vers."
           }
         ],
         "situation": "Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich.",
-        "practice": "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt.",
-        "summary": "Wir wiederholen einen kurzen Vers ohne Hetze. Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt.",
-        "audioScript": "Qurʾān respektvoll auswendig lernen. Wir wiederholen einen kurzen Vers ohne Hetze. Der gespeicherte Text beginnt mit: Bewege deine Zunge nicht damit, um dich damit zu beeilen. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich. Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt."
+        "practice": "Wir erklären die angesprochene Person und den Anlass des Verses und üben danach einen deutschen Merksatz ruhig.",
+        "summary": "Genaues Lernen unterscheidet den Wortlaut des Verses von einer hilfreichen Unterrichtsmethode.",
+        "audioScript": "Qurʾān respektvoll auswendig lernen. Genaues Lernen unterscheidet den Wortlaut des Verses von einer hilfreichen Unterrichtsmethode. Qurʾān 75:16 gehört zum Zusammenhang des Offenbarungsempfangs. Der Prophet ﷺ ist der unmittelbare Adressat des Verses. Langsames Üben ist hier eine pädagogische Methode, kein neu erfundenes Versgebot."
       }
     },
     "questions": {
@@ -2242,7 +2242,7 @@ const additions=
     ],
     "practice": "Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt.",
     "summary": "Wir wiederholen einen kurzen Vers ohne Hetze. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns.",
-    "audioScript": "Qurʾān respektvoll auswendig lernen. Wir wiederholen einen kurzen Vers ohne Hetze. Im selben Ausdruck folgt: Das Sammeln und das Lesen liegen bei Uns. Ein Kind will einen Satz fünfmal sehr schnell hintereinander sagen und verhaspelt sich. Wir wiederholen einen kurzen deutschen Merksatz langsam zweimal. Eine arabische Rezitation wird nicht vom Computer erzeugt.",
+    "audioScript": "Qurʾān respektvoll auswendig lernen. Du darfst dir beim Lernen Zeit lassen und um Hilfe bitten. Qurʾān 75:16 spricht zum Propheten ﷺ über das Empfangen der Offenbarung. Wir lernen heute mit Ruhe und Geduld. Ein kurzer Satz lässt sich langsam wiederholen.",
     "voiceApproved": false
   },
   "sirah-isa-als-gesandter": {
@@ -2286,13 +2286,13 @@ const additions=
     "sample": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
     "ageText": {
       "4-5": {
-        "goal": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
-        "intro": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Stell dir vor: Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs. Heute üben wir: Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
+        "goal": "Ich weiß: ʿĪsā عليه السلام war ein Gesandter Allahs.",
+        "intro": "As-salāmu ʿalaikum! Heute lernen wir etwas über den Propheten ʿĪsā, den Sohn Maryams. Wir sprechen respektvoll über ihn und über seine Mutter. In Qurʾān 4:171 wird ʿĪsā ein Gesandter Allahs genannt. Allah ist Einer. ʿĪsā ist nicht Allah. Wir üben den einfachen Satz: ʿĪsā war ein Gesandter Allahs. Wenn du eine Frage hast, darfst du sie stellen. Wir brauchen dafür keine erfundene Geschichte.",
         "lines": [
-          "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
-          "Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen.",
-          "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
-          "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu."
+          "ʿĪsā عليه السلام war ein Gesandter Allahs.",
+          "Seine Mutter heißt Maryam.",
+          "Qurʾān 4:171 nennt ihn einen Gesandten.",
+          "Allah ist Einer, und wir sprechen respektvoll über Seine Gesandten."
         ],
         "evidence": "Wir lernen mit Qurʾān 4:171. ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/367. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:171. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2307,18 +2307,18 @@ const additions=
           }
         ],
         "situation": "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
-        "practice": "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
-        "summary": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
-        "audioScript": "ʿĪsā Friede sei mit ihm als Gesandter. ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs. Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu."
+        "practice": "Wir sprechen ruhig: ʿĪsā عليه السلام war ein Gesandter Allahs. Danach hören wir einander zu.",
+        "summary": "Wir glauben an Allah und achten Seine Gesandten, darunter ʿĪsā عليه السلام.",
+        "audioScript": "ʿĪsā عليه السلام als Gesandter. Wir glauben an Allah und achten Seine Gesandten, darunter ʿĪsā عليه السلام. ʿĪsā عليه السلام war ein Gesandter Allahs. Seine Mutter heißt Maryam. Qurʾān 4:171 nennt ihn einen Gesandten."
       },
       "6-8": {
-        "goal": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Wir lesen Qurʾān 4:171. Der Vers bedeutet sinngemäß: Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Er nennt den Masīḥ ʿĪsā, den Sohn Maryams, einen Gesandten Allahs und Sein Wort, das Er zu Maryam hinwarf. So kann das im Alltag aussehen: Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs. Die Aufgabe: Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu. rasūl bedeutet: Gesandter. Masīḥ bedeutet: ein Name ʿĪsās im Vers.",
+        "goal": "Ich kann erklären, wer ʿĪsā عليه السلام war und warum wir ihn achten.",
+        "intro": "As-salāmu ʿalaikum! Was weißt du über ʿĪsā, den Sohn Maryams? Muslime glauben an ihn als Propheten und Gesandten Allahs. Qurʾān 4:171 nennt ihn ausdrücklich einen Gesandten Allahs und spricht zugleich davon, dass Allah ein einziger Gott ist. Wir sprechen über ʿĪsā mit Liebe und Respekt, ohne ihn anzubeten. Das Wort rasūl bedeutet Gesandter; Masīḥ ist eine Bezeichnung ʿĪsās im Vers. Stell dir vor, ein anderes Kind fragt: Warum redet ihr über ʿĪsā? Du kannst freundlich antworten: Weil wir auch an ihn als Gesandten Allahs glauben. Wir konzentrieren uns auf diese gesicherten Aussagen aus dem gelesenen Vers und erfinden keine Ereignisse aus seinem Leben hinzu.",
         "lines": [
-          "Qurʾān 4:171 ist die gelesene Stelle.",
-          "Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen.",
-          "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
-          "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu."
+          "Der Qurʾān nennt ʿĪsā, den Sohn Maryams, einen Gesandten Allahs.",
+          "Qurʾān 4:171 betont, dass Allah Einer ist.",
+          "Rasūl bedeutet Gesandter.",
+          "Wir sprechen sachlich und respektvoll über Glaubensfragen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 4:171. Sinngemäß: Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Er nennt den Masīḥ ʿĪsā, den Sohn Maryams, einen Gesandten Allahs und Sein Wort, das Er zu Maryam hinwarf.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/367. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:171. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2333,18 +2333,18 @@ const additions=
           }
         ],
         "situation": "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
-        "practice": "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
-        "summary": "Qurʾān 4:171 trägt diese Stunde. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen.",
-        "audioScript": "ʿĪsā Friede sei mit ihm als Gesandter. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs. Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu."
+        "practice": "Wir beantworten freundlich die Frage: Wer war ʿĪsā عليه السلام? Danach erklären wir das Wort rasūl.",
+        "summary": "Wir achten ʿĪsā عليه السلام als Gesandten Allahs. Allah allein wird angebetet.",
+        "audioScript": "ʿĪsā عليه السلام als Gesandter. Wir achten ʿĪsā عليه السلام als Gesandten Allahs. Allah allein wird angebetet. Der Qurʾān nennt ʿĪsā, den Sohn Maryams, einen Gesandten Allahs. Qurʾān 4:171 betont, dass Allah Einer ist. Rasūl bedeutet Gesandter."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „ʿĪsā عليه السلام als Gesandter“ anhand von Qurʾān 4:171 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: ʿĪsā عليه السلام als Gesandter. ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. In Qurʾān 4:171 lernen wir sinngemäß: Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Er nennt den Masīḥ ʿĪsā, den Sohn Maryams, einen Gesandten Allahs und Sein Wort, das Er zu Maryam hinwarf. rasūl bedeutet Gesandter. Masīḥ bedeutet ein Name ʿĪsās im Vers. Stell dir diese Situation vor: Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs. Welcher nächste Schritt ist gut? Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann die Kernaussagen von Qurʾān 4:171 über ʿĪsā und Allahs Einheit erläutern.",
+        "intro": "As-salāmu ʿalaikum! Qurʾān 4:171 spricht von al-Masīḥ ʿĪsā, dem Sohn Maryams, und bezeichnet ihn als Gesandten Allahs. Zugleich betont der Vers Allahs Einheit und warnt davor, über Allah etwas Unwahres zu sagen. Diese Aussagen sind wichtig für unser Verständnis von Tawḥīd und Īmān an die Gesandten. Wir achten ʿĪsā عليه السلام und seine Mutter Maryam, ohne ihn zu Allah zu machen. Der Vers enthält weitere theologische Formulierungen; die erklären wir nicht durch frei erfundene Bilder oder Geschichten. Heute üben wir, eine kurze, respektvolle Antwort zu formulieren: Was glauben Muslime über ʿĪsā, und wie hängen sein Gesandtentum und Allahs Einheit zusammen? Wir können unsere Überzeugung darstellen, ohne andere Kinder wegen ihres Glaubens zu beleidigen.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 4:171.",
-          "Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Er nennt den Masīḥ ʿĪsā, den Sohn Maryams, einen Gesandten Allahs und Sein Wort, das Er zu Maryam hinwarf.",
-          "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
-          "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu."
+          "Qurʾān 4:171 nennt ʿĪsā, den Sohn Maryams, Gesandter Allahs.",
+          "Derselbe Vers betont, dass Allah Einer ist.",
+          "Wir unterscheiden den Gesandten vom Einen, der ihn gesandt hat.",
+          "Wir erklären den Glauben ohne Spott oder erfundene Geschichten."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 4:171. Sinngemäß: Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Er nennt den Masīḥ ʿĪsā, den Sohn Maryams, einen Gesandten Allahs und Sein Wort, das Er zu Maryam hinwarf.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/367. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:171. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2359,9 +2359,9 @@ const additions=
           }
         ],
         "situation": "Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs.",
-        "practice": "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
-        "summary": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
-        "audioScript": "ʿĪsā عليه السلام als Gesandter. ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Er nennt den Masīḥ ʿĪsā, den Sohn Maryams, einen Gesandten Allahs und Sein Wort, das Er zu Maryam hinwarf. Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs. Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu."
+        "practice": "Wir formulieren eine sachliche Antwort zu ʿĪsās Gesandtentum und Allahs Einheit.",
+        "summary": "Der Qurʾān verbindet den Glauben an ʿĪsā mit dem Glauben an Allahs Einheit.",
+        "audioScript": "ʿĪsā عليه السلام als Gesandter. Der Qurʾān verbindet den Glauben an ʿĪsā mit dem Glauben an Allahs Einheit. Qurʾān 4:171 nennt ʿĪsā, den Sohn Maryams, Gesandter Allahs. Derselbe Vers betont, dass Allah Einer ist. Wir unterscheiden den Gesandten vom Einen, der ihn gesandt hat."
       }
     },
     "questions": {
@@ -2460,7 +2460,7 @@ const additions=
     ],
     "practice": "Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
     "summary": "ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen.",
-    "audioScript": "ʿĪsā Friede sei mit ihm als Gesandter. ʿĪsā, Friede sei mit ihm, ist ein Gesandter Allahs. Der Vers warnt die Leute der Schrift vor Übertreibung und davor, über Allah etwas anderes als die Wahrheit zu sagen. Jemand fragt: Wer ist ʿĪsā? Das Kind antwortet: Ein Gesandter Allahs. Wir üben den respektvollen Namen und fügen keine weitere Geschichte hinzu.",
+    "audioScript": "ʿĪsā عليه السلام als Gesandter. Wir glauben an Allah und achten Seine Gesandten, darunter ʿĪsā عليه السلام. ʿĪsā عليه السلام war ein Gesandter Allahs. Seine Mutter heißt Maryam. Qurʾān 4:171 nennt ihn einen Gesandten.",
     "voiceApproved": false
   },
   "dua-fuer-eltern-gutes-erbitten": {
@@ -2504,13 +2504,13 @@ const additions=
     "sample": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken.",
     "ageText": {
       "4-5": {
-        "goal": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken.",
-        "intro": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. Stell dir vor: Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte. Heute üben wir: Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn. Die arabischen Worte spricht die Lehrperson.",
+        "goal": "Ich kann Allah um Barmherzigkeit für meine Eltern bitten.",
+        "intro": "As-salāmu ʿalaikum! Vielleicht hat dir jemand aus deiner Familie heute geholfen, etwas zu lernen oder dein Essen vorzubereiten. Wir dürfen Allah für solche Hilfe danken. Qurʾān 17:24 enthält eine schöne Bitte für die Eltern: Mein Herr, erbarme Dich ihrer, wie sie mich klein aufgezogen haben. Heute lernen wir den deutschen Sinn dieser Bitte. Du musst die arabischen Wörter noch nicht perfekt können. Wir sprechen freundlich und denken an eine gute Sache, die wir zu Hause tun können.",
         "lines": [
-          "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken.",
-          "Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben.",
-          "Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte.",
-          "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn."
+          "Qurʾān 17:24 enthält ein Bittgebet für die Eltern.",
+          "Wir bitten Allah um Barmherzigkeit für sie.",
+          "Wir sagen die Bedeutung ruhig in eigenen Worten.",
+          "Eine kleine freundliche Hilfe kann unseren Dank zeigen."
         ],
         "evidence": "Wir lernen mit Qurʾān 17:24. Wir bitten Allah, den Eltern Barmherzigkeit zu schenken.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1005. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2525,18 +2525,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte.",
-        "practice": "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn.",
-        "summary": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Für Eltern Gutes erbitten. Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte. Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn."
+        "practice": "Wir lernen den deutschen Sinn der Bittgebetsstelle und danken für eine erhaltene Hilfe.",
+        "summary": "Ich darf Allah um Barmherzigkeit für meine Eltern bitten.",
+        "audioScript": "Für Eltern Gutes erbitten. Ich darf Allah um Barmherzigkeit für meine Eltern bitten. Qurʾān 17:24 enthält ein Bittgebet für die Eltern. Wir bitten Allah um Barmherzigkeit für sie. Wir sagen die Bedeutung ruhig in eigenen Worten."
       },
       "6-8": {
-        "goal": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Wir lesen Qurʾān 17:24. Der Vers bedeutet sinngemäß: Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. So kann das im Alltag aussehen: Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte. Die Aufgabe: Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn. irḥam bedeutet: erbarme Dich. ḏull bedeutet: Demut, hier der Vers über den gesenkten Flügel der Demut.",
+        "goal": "Ich verstehe den Sinn der Bittgebetsstelle für die Eltern in Qurʾān 17:24.",
+        "intro": "As-salāmu ʿalaikum! Erinnerst du dich an eine Situation, in der dir deine Eltern beim Lernen, Essen oder bei einer Schwierigkeit geholfen haben? In Qurʾān 17:24 lernen wir, ihnen mit Barmherzigkeit zu begegnen und Allah für sie zu bitten: Mein Herr, erbarme Dich ihrer, so wie sie mich aufgezogen haben, als ich klein war. Das arabische Wort irḥam bedeutet: Erbarme Dich. Wir sprechen über den Sinn dieser Bitte und überlegen, wie Freundlichkeit im Alltag aussehen kann. Manchmal ist das, einem Elternteil zuzuhören oder bei einer kleinen Aufgabe zu helfen. Und wenn ein Kind selbst Schutz benötigt, darf es trotzdem einer vertrauenswürdigen erwachsenen Person davon erzählen. Freundlichkeit bedeutet nicht, Unrecht zu verschweigen.",
         "lines": [
-          "Qurʾān 17:24 ist die gelesene Stelle.",
-          "Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben.",
-          "Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 17:24 lehrt eine Bittgebetsstelle für die Eltern.",
+          "Irḥam bedeutet: Erbarme Dich.",
+          "Barmherzigkeit zeigt sich auch in freundlichen Handlungen.",
+          "Auch Kinder dürfen Hilfe suchen, wenn sie Schutz brauchen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:24. Sinngemäß: Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1005. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2551,18 +2551,18 @@ const additions=
           }
         ],
         "situation": "Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte.",
-        "practice": "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn.",
-        "summary": "Qurʾān 17:24 trägt diese Stunde. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben.",
-        "audioScript": "Für Eltern Gutes erbitten. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte. Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn."
+        "practice": "Wir sprechen den Sinn der Bitte aus und nennen eine kleine freiwillige Hilfe im Alltag.",
+        "summary": "Wir lernen, für die Eltern zu bitten und freundlich mit ihnen umzugehen.",
+        "audioScript": "Für Eltern Gutes erbitten. Wir lernen, für die Eltern zu bitten und freundlich mit ihnen umzugehen. Qurʾān 17:24 lehrt eine Bittgebetsstelle für die Eltern. Irḥam bedeutet: Erbarme Dich. Barmherzigkeit zeigt sich auch in freundlichen Handlungen."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Für Eltern Gutes erbitten“ anhand von Qurʾān 17:24 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Für Eltern Gutes erbitten. Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. In Qurʾān 17:24 lernen wir sinngemäß: Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. irḥam bedeutet erbarme Dich. ḏull bedeutet Demut, hier der Vers über den gesenkten Flügel der Demut. Stell dir diese Situation vor: Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte. Welcher nächste Schritt ist gut? Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann den Inhalt der Bitte in Qurʾān 17:24 erläutern und auf den Alltag beziehen.",
+        "intro": "As-salāmu ʿalaikum! Wie hängt Barmherzigkeit im Herzen mit Worten und Handlungen zusammen? Qurʾān 17:24 beschreibt einen demütigen Umgang mit den Eltern und enthält die Bitte: Mein Herr, erbarme Dich ihrer, so wie sie mich aufgezogen haben, als ich klein war. Die Metapher vom gesenkten Flügel drückt im Vers Demut und Barmherzigkeit aus. Heute erläutern wir diesen Sinn in verständlichem Deutsch; das ist keine zusätzliche überlieferte Bittgebetsformel. Stell dir vor, ein Elternteil hatte einen anstrengenden Tag. Du kannst freundlich Hilfe anbieten, ohne dich zu überfordern. Überlege dabei auch, warum Barmherzigkeit niemals heißen darf, dass ein Kind Gewalt oder Gefahr verschweigen muss. So lernen wir Dankbarkeit und Sicherheit gemeinsam.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 17:24.",
-          "Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben.",
-          "Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte.",
-          "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn."
+          "Qurʾān 17:24 verbindet Barmherzigkeit und ein Bittgebet für die Eltern.",
+          "Der gesenkte Flügel ist ein Bild für einen demütigen Umgang.",
+          "Unsere deutschen Beispiele sind pädagogische Anwendungen.",
+          "Sicherheit und das Recht auf Hilfe bleiben bestehen."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:24. Sinngemäß: Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1005. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:24. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -2577,9 +2577,9 @@ const additions=
           }
         ],
         "situation": "Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte.",
-        "practice": "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn.",
-        "summary": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn.",
-        "audioScript": "Für Eltern Gutes erbitten. Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte. Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn."
+        "practice": "Wir erklären den Sinn des Verses und planen eine freundliche, freiwillige Handlung.",
+        "summary": "Die Bitte verbindet Barmherzigkeit mit Respekt, ohne Kinder unter gefährlichen Gehorsamsdruck zu setzen.",
+        "audioScript": "Für Eltern Gutes erbitten. Die Bitte verbindet Barmherzigkeit mit Respekt, ohne Kinder unter gefährlichen Gehorsamsdruck zu setzen. Qurʾān 17:24 verbindet Barmherzigkeit und ein Bittgebet für die Eltern. Der gesenkte Flügel ist ein Bild für einen demütigen Umgang. Unsere deutschen Beispiele sind pädagogische Anwendungen."
       }
     },
     "questions": {
@@ -2678,7 +2678,7 @@ const additions=
     ],
     "practice": "Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn.",
     "summary": "Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben.",
-    "audioScript": "Für Eltern Gutes erbitten. Wir bitten Allah, den Eltern Barmherzigkeit zu schenken. Der Vers fordert, den Eltern den Flügel der Demut aus Barmherzigkeit zu senken, und sagt: Mein Herr, erbarme Dich ihrer, so wie sie mich klein aufgezogen haben. Ein Kind denkt an eine konkrete Hilfe der Eltern, zum Beispiel das Abendessen, und spricht die Bitte. Wir lernen den deutschen Sinn der Bitte und sprechen sie ruhig. Wer die arabischen Worte noch nicht sicher kann, bleibt beim deutschen Sinn.",
+    "audioScript": "Für Eltern Gutes erbitten. Ich darf Allah um Barmherzigkeit für meine Eltern bitten. Qurʾān 17:24 enthält ein Bittgebet für die Eltern. Wir bitten Allah um Barmherzigkeit für sie. Wir sagen die Bedeutung ruhig in eigenen Worten.",
     "voiceApproved": false
   },
   "family-nein-sagen-persoenliche-sicherheit": {
@@ -2723,82 +2723,82 @@ const additions=
     "sample": "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson.",
     "ageText": {
       "4-5": {
-        "goal": "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson.",
-        "intro": "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. Stell dir vor: Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson. Heute üben wir: Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach. Wir erzählen keine Gruselgeschichte.",
+        "goal": "Ich darf Nein sagen und eine vertraute erwachsene Person holen.",
+        "intro": "As-salāmu ʿalaikum! Manchmal möchte jemand dich umarmen oder zu etwas überreden, obwohl du das nicht möchtest. Du darfst sagen: Nein, bitte nicht. Dann gehst du zu einer erwachsenen Person, der du vertraust. Wenn du vor Schreck nichts sagen kannst, bist du trotzdem nicht schuld. Qurʾān 4:148 erinnert uns daran, dass Menschen über Unrecht sprechen dürfen, das ihnen geschieht. Wir üben heute nur den Satz und den Weg zur Hilfe. Wir spielen keine unangenehme Berührung nach.",
         "lines": [
-          "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson.",
-          "Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist.",
-          "Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson.",
-          "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach."
+          "Dein Nein ist wichtig.",
+          "Du bist nicht schuld, wenn du vor Schreck nichts sagen konntest.",
+          "Du darfst jederzeit eine vertrauenswürdige erwachsene Person holen.",
+          "Wir spielen keine unangenehme Situation nach."
         ],
         "evidence": "Wir lernen mit Qurʾān 4:148. Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
-            "say": "amāna",
-            "de": "Vertrauen; hier die Person, der das Kind die Sache anvertrauen darf"
+            "say": "Vertrauensperson",
+            "de": "Ein Erwachsener, der zuhört und hilft."
           },
           {
-            "say": "ḥarām",
-            "de": "nicht erlaubt; ein Wort, das der Vers selbst nicht als Definition einer Berührung druckt"
+            "say": "Grenze",
+            "de": "Du darfst ablehnen, was du nicht möchtest."
           }
         ],
         "situation": "Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson.",
-        "practice": "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach.",
-        "summary": "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Wir erzählen keine Gruselgeschichte.",
-        "audioScript": "Nein sagen und persönliche Sicherheit. Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson. Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach."
+        "practice": "Wir üben einen Hilfesatz: Nein, bitte nicht. Ich möchte mit einer vertrauten erwachsenen Person sprechen.",
+        "summary": "Wenn dir etwas unangenehm ist, darfst du Nein sagen und Hilfe holen.",
+        "audioScript": "Nein sagen und persönliche Sicherheit. Wenn dir etwas unangenehm ist, darfst du Nein sagen und Hilfe holen. Dein Nein ist wichtig. Du bist nicht schuld, wenn du vor Schreck nichts sagen konntest. Du darfst jederzeit eine vertrauenswürdige erwachsene Person holen."
       },
       "6-8": {
-        "goal": "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Wir lesen Qurʾān 4:148. Der Vers bedeutet sinngemäß: Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. So kann das im Alltag aussehen: Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson. Die Aufgabe: Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach. amāna bedeutet: Vertrauen; hier die Person, der das Kind die Sache anvertrauen darf. ḥarām bedeutet: nicht erlaubt; ein Wort, das der Vers selbst nicht als Definition einer Berührung druckt.",
+        "goal": "Ich kenne einen sicheren Hilfeweg, auch wenn mein Nein übergangen wird.",
+        "intro": "As-salāmu ʿalaikum! Ein anderes Kind möchte dich umarmen, aber du möchtest das nicht. Es ist in Ordnung, Nein zu sagen. Wenn jemand weiter drängt, darfst du weggehen und eine vertrauenswürdige erwachsene Person holen. Qurʾān 4:148 spricht über die Möglichkeit, Unrecht zu benennen. Der Vers handelt nicht ausdrücklich von Umarmungen; unsere Schutzregel ist eine pädagogische Anwendung. Du musst eine unangenehme Situation nicht allein lösen. Und selbst wenn du nicht Nein sagen konntest, bist du nicht verantwortlich für das übergriffige Verhalten der anderen Person. Wenn dir jemand nicht zuhört, darfst du eine andere erwachsene Vertrauensperson ansprechen. Wir üben einen sicheren Satz, ohne Berührungen oder Übergriffe nachzuspielen.",
         "lines": [
-          "Qurʾān 4:148 ist die gelesene Stelle.",
-          "Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist.",
-          "Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson.",
-          "Wir erzählen keine Gruselgeschichte."
+          "Ein Nein zu einer unerwünschten Umarmung darf respektiert werden.",
+          "Qurʾān 4:148 spricht über das Benennen von Unrecht, nicht über eine konkrete Berührung.",
+          "Wenn Hilfe nötig ist, darfst du dich an mehrere vertrauenswürdige Erwachsene wenden.",
+          "Wer vor Schreck nicht Nein sagen kann, trägt keine Schuld am Verhalten anderer."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 4:148. Sinngemäß: Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
-            "say": "amāna",
-            "de": "Vertrauen; hier die Person, der das Kind die Sache anvertrauen darf"
+            "say": "Vertrauensperson",
+            "de": "Ein Erwachsener, der zuhört und hilft."
           },
           {
-            "say": "ḥarām",
-            "de": "nicht erlaubt; ein Wort, das der Vers selbst nicht als Definition einer Berührung druckt"
+            "say": "Grenze",
+            "de": "Du darfst ablehnen, was du nicht möchtest."
           }
         ],
         "situation": "Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson.",
-        "practice": "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach.",
-        "summary": "Qurʾān 4:148 trägt diese Stunde. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist.",
-        "audioScript": "Nein sagen und persönliche Sicherheit. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson. Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach."
+        "practice": "Wir nennen zwei erreichbare erwachsene Vertrauenspersonen und üben einen kurzen Hilfesatz.",
+        "summary": "Du darfst deine Grenzen schützen und Hilfe holen. Verantwortung für Übergriffe trägt niemals das betroffene Kind.",
+        "audioScript": "Nein sagen und persönliche Sicherheit. Du darfst deine Grenzen schützen und Hilfe holen. Verantwortung für Übergriffe trägt niemals das betroffene Kind. Ein Nein zu einer unerwünschten Umarmung darf respektiert werden. Qurʾān 4:148 spricht über das Benennen von Unrecht, nicht über eine konkrete Berührung. Wenn Hilfe nötig ist, darfst du dich an mehrere vertrauenswürdige Erwachsene wenden."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Nein sagen und persönliche Sicherheit“ anhand von Qurʾān 4:148 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Nein sagen und persönliche Sicherheit. Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. In Qurʾān 4:148 lernen wir sinngemäß: Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. amāna bedeutet Vertrauen; hier die Person, der das Kind die Sache anvertrauen darf. ḥarām bedeutet nicht erlaubt; ein Wort, das der Vers selbst nicht als Definition einer Berührung druckt. Stell dir diese Situation vor: Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson. Welcher nächste Schritt ist gut? Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann die Schritte Nein sagen, Abstand gewinnen und Hilfe holen kinderschützend erklären.",
+        "intro": "As-salāmu ʿalaikum! Persönliche Sicherheit bedeutet, dass dein Nein ernst genommen wird. Wenn jemand dich trotz deines Neins unter Druck setzt, darfst du die Situation verlassen und Unterstützung holen. Qurʾān 4:148 betrifft das Sprechen über Unrecht; er ist kein wörtlicher Text über unerwünschte Berührungen. Unsere daraus abgeleitete Schutzregel lautet: Ein Kind darf Grenzen setzen, Unrecht melden und sich an vertrauenswürdige Erwachsene wenden. Wenn die erste Person nicht hilft, darf eine zweite gefragt werden. Wichtig: Manche Kinder erstarren vor Schreck oder können nichts sagen. Das macht sie nicht schuld. Stell dir vor, eine jüngere Person erzählt dir von einem unerwünschten Drängen. Wie kannst du ruhig zuhören und dafür sorgen, dass eine verantwortliche erwachsene Person hilft, ohne die Einzelheiten vor anderen zu verbreiten? Wir spielen keine Übergriffe nach.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 4:148.",
-          "Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist.",
-          "Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson.",
-          "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach."
+          "Das Recht auf persönliche Grenzen gilt auch dann, wenn ein Kind nicht sprechen kann.",
+          "Qurʾān 4:148 behandelt das Äußern von Unrecht.",
+          "Unsere Handlungsschritte sind zusätzliche Schutzregeln, keine wörtliche Versübersetzung.",
+          "Erwachsene tragen die Verantwortung für Schutz und Unterstützung."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 4:148. Sinngemäß: Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/357. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 4:148. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
         "terms": [
           {
-            "say": "amāna",
-            "de": "Vertrauen; hier die Person, der das Kind die Sache anvertrauen darf"
+            "say": "Vertrauensperson",
+            "de": "Ein Erwachsener, der zuhört und hilft."
           },
           {
-            "say": "ḥarām",
-            "de": "nicht erlaubt; ein Wort, das der Vers selbst nicht als Definition einer Berührung druckt"
+            "say": "Grenze",
+            "de": "Du darfst ablehnen, was du nicht möchtest."
           }
         ],
         "situation": "Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson.",
-        "practice": "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach.",
-        "summary": "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach.",
-        "audioScript": "Nein sagen und persönliche Sicherheit. Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson. Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach."
+        "practice": "Wir besprechen einen sicheren Hilfeweg, ohne private Erfahrungen abzufragen oder Übergriffe nachzuspielen.",
+        "summary": "Nein sagen, Abstand suchen und Hilfe holen sind Schutzmöglichkeiten. Ein betroffenes Kind trägt keine Schuld, wenn es nicht reagieren konnte.",
+        "audioScript": "Nein sagen und persönliche Sicherheit. Nein sagen, Abstand suchen und Hilfe holen sind Schutzmöglichkeiten. Ein betroffenes Kind trägt keine Schuld, wenn es nicht reagieren konnte. Das Recht auf persönliche Grenzen gilt auch dann, wenn ein Kind nicht sprechen kann. Qurʾān 4:148 behandelt das Äußern von Unrecht. Unsere Handlungsschritte sind zusätzliche Schutzregeln, keine wörtliche Versübersetzung."
       }
     },
     "questions": {
@@ -2897,7 +2897,7 @@ const additions=
     ],
     "practice": "Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach.",
     "summary": "Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei.",
-    "audioScript": "Nein sagen und persönliche Sicherheit. Bei einer Berührung, die sich falsch anfühlt, sagen wir Nein und holen eine Vertrauensperson. Dieselbe gelesene Stelle wie in der Stunde über die eigene Grenze sagt, dass Allah das laute Verbreiten schlechter Rede nicht liebt, außer bei dem, dem Unrecht geschehen ist. Ein Kind möchte nicht umarmt werden und sagt Nein. Es geht danach zu Mama, Papa oder einer Lehrperson. Wir üben nur den Satz und den Weg zu einer bekannten erwachsenen Person. Wir spielen keine Berührung nach.",
+    "audioScript": "Nein sagen und persönliche Sicherheit. Wenn dir etwas unangenehm ist, darfst du Nein sagen und Hilfe holen. Dein Nein ist wichtig. Du bist nicht schuld, wenn du vor Schreck nichts sagen konntest. Du darfst jederzeit eine vertrauenswürdige erwachsene Person holen.",
     "voiceApproved": false
   },
   "tawhid-allah-kennt-unser-handeln": {
