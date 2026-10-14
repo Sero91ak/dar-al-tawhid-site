@@ -19,6 +19,9 @@ const ages = ["4-5", "6-8", "9-10"];
 const banned = [
   /keine freigabe für besucher/i,
   /keine synthetische rezitation/i,
+  /erzeug(?:en|t|te|ter|ten)? keine rezitation/i,
+  /mit einer erzeugten stimme/i,
+  /(?:audio|masterstimme|hörprobe)(?:test|probe|generierung)/i,
   /wissenschaftliche freigabe/i,
   /diese stunde bleibt ein entwurf/i,
   /technische vollständigkeit ersetzt/i,
