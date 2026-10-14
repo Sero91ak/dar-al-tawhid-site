@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 155,
+  "sourceCount": 156,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -2305,7 +2305,8 @@
       "lessonIds": [
         "tawhid-keine-goettliche-macht-fuer-geschoepfe",
         "tawhid-mit-eigenen-worten",
-        "aqidah-tawhid"
+        "aqidah-tawhid",
+        "aqidah-tawhid-allah-ist-einer"
       ],
       "binding": "verse span for kids academy draft",
       "topic": "Keinen geschaffenen Dingen göttliche Macht zuschreiben"
@@ -3479,7 +3480,8 @@
       "checkedOn": "2026-10-14",
       "checkedBy": "Islamweb Primärtext 48/1095 direkt geöffnet",
       "lessonIds": [
-        "adab-salam"
+        "adab-salam",
+        "adab-salam-salam-erwidern"
       ],
       "binding": "classical primary Tafsīr linked to existing early lesson 2; final scholarly approval pending",
       "topic": "Salām erwidern"
@@ -3817,7 +3819,8 @@
       "verificationStatus": "primary-page-direct-read-2026-10-14",
       "checkedBy": "Islamweb Tafsīr Ibn Kaṯīr 49/184, 2:153, Band 1 Seite 467",
       "lessonIds": [
-        "akhlaq-sabr"
+        "akhlaq-sabr",
+        "akhlaq-sabr-geduldig-warten"
       ],
       "binding": "classical tafsir for early slot 5",
       "topic": "Ṣabr – Geduld"
@@ -3899,6 +3902,32 @@
       ],
       "binding": "authentic Sunnah source distinct from Tafsīr of 23:8",
       "topic": "Amānah – Anvertrautes bewahren"
+    },
+    {
+      "sourceId": "SRC-FIQH15-MUGHNI-783",
+      "key": "fiqh15-mughni-purity-of-clothes",
+      "author": "Ibn Qudāmah",
+      "work": "al-Mughnī",
+      "narrator": null,
+      "arabic": "الطَّهَارَةُ مِنَ النَّجَاسَةِ فِي بَدَنِ الْمُصَلِّي وَثَوْبِهِ شَرْطٌ لِصِحَّةِ الصَّلَاةِ",
+      "germanTranslation": null,
+      "locus": "Kitāb aṣ-Ṣalāh, Bāb aṣ-Ṣalāh bi-n-Naǧāsah, Masʾalah: reine Kleidung und reiner Gebetsplatz",
+      "volume": "1",
+      "page": "401",
+      "chapter": "Gebetskleidung und Reinheit von Naǧāsah",
+      "number": null,
+      "edition": "Islamweb, al-Mughnī, Buch 15, Textnummer 783",
+      "directLink": "https://gcp.islamweb.net/ar/library/content/15/783/%D8%A8%D8%A7%D8%A8-%D8%A7%D9%84%D8%B5%D9%84%D8%A7%D8%A9-%D8%A8%D8%A7%D9%84%D9%86%D8%AC%D8%A7%D8%B3%D8%A9-%D9%88%D8%BA%D9%8A%D8%B1-%D8%B0%D9%84%D9%83#:~:text=%D8%A7%D9%84%D8%B7%D9%87%D8%A7%D8%B1%D8%A9%20%D9%85%D9%86%20%D8%A7%D9%84%D9%86%D8%AC%D8%A7%D8%B3%D8%A9",
+      "authenticityNote": "Klassischer hanbalitischer Fiqh-Originaltext am 14.10.2026 direkt gelesen, Bd. 1 S. 401. Ibn Qudāmah erläutert Reinheit von Naǧāsah an Körper und Kleidung als Bedingung des Gebets nach der Mehrheitsmeinung. Er führt auch andere frühe Auffassungen und Folgefälle an. Keine vollständige Prüfung aller entschuldigenden Ausnahmen und unbemerkten Verunreinigungen.",
+      "safeApplication": "Saubere Kleidung als Gebetsetikette liebevoll lehren; Naǧāsah nicht mit jedem Fleck/Alltagsschmutz gleichsetzen. Kinder wegen Unfällen nicht beschämen, keine eigenständigen Gültigkeitsurteile über kranke oder beeinträchtigte Menschen. Sachkundiger Fiqh-Review vor Freigabe.",
+      "verificationStatus": "primary-page-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Islamweb al-Mughnī digitaler Originaltext, Buch 15/783, Bd. 1 S. 401",
+      "lessonIds": [
+        "fiqh-taharah-saubere-kleidung"
+      ],
+      "binding": "classical Hanbali Fiqh source for lesson 15; scientific final approval pending",
+      "topic": "Saubere Kleidung"
     }
   ]
 }
