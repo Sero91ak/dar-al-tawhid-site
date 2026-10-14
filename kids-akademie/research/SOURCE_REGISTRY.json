@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-14",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 170,
+  "sourceCount": 173,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -27,7 +27,8 @@
       "lessonIds": [
         "aqidah-ikhlas",
         "aqidah-ikhlas-gutes-ohne-lob",
-        "aqidah-ikhlas-gute-absichten"
+        "aqidah-ikhlas-gute-absichten",
+        "aqidah-ikhlas-warum-gutes-tun"
       ],
       "binding": "authentic Sunnah linked to early lesson 12 Ikhlāṣ; separate from Tafsīr of 39:11",
       "topic": "Absicht der Taten"
@@ -783,7 +784,8 @@
       "checkedBy": "page fetched from islamweb.net library content 49",
       "lessonIds": [
         "ikhlas-gute-absicht-erneuern",
-        "nafs-herz-mit-guten-taten"
+        "nafs-herz-mit-guten-taten",
+        "aqidah-ikhlas-warum-gutes-tun"
       ],
       "binding": "verse span for kids academy draft",
       "topic": "Eine gute Absicht erneuern"
@@ -1390,7 +1392,8 @@
       "checkedOn": "2026-10-13",
       "checkedBy": "page fetched from islamweb.net library content 49",
       "lessonIds": [
-        "adab-als-gast"
+        "adab-als-gast",
+        "adab-erlaubnis-anklopfen"
       ],
       "binding": "verse span for kids academy draft",
       "topic": "Als Gast gute Sitten zeigen"
@@ -1915,7 +1918,8 @@
       "checkedOn": "2026-10-13",
       "checkedBy": "page fetched from islamweb.net library content 49",
       "lessonIds": [
-        "akhlaq-ruhig-beim-verlieren"
+        "akhlaq-ruhig-beim-verlieren",
+        "akhlaq-wut-ruhig-bleiben"
       ],
       "binding": "verse span for kids academy draft",
       "topic": "Ruhig bleiben beim Verlieren"
@@ -4323,6 +4327,84 @@
       ],
       "binding": "authenticated Sunnah about supplication separate from Quran 1:5",
       "topic": "Geduld beim Duʿāʾ"
+    },
+    {
+      "sourceId": "SRC-CORE42-BUKHARI-6114",
+      "key": "true-strength-controls-anger",
+      "author": "al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "Abū Hurayrah",
+      "arabic": "لَيْسَ الشَّدِيدُ بِالصُّرَعَةِ إِنَّمَا الشَّدِيدُ الَّذِي يَمْلِكُ نَفْسَهُ عِنْدَ الْغَضَبِ",
+      "germanTranslation": null,
+      "locus": "Ḥadīṯ zum Beherrschen eigener Reaktionen bei Zorn, nicht zum Leugnen von Gefühlen",
+      "volume": null,
+      "page": null,
+      "chapter": "Selbstbeherrschung beim Zorn",
+      "number": "6114; auch Muslim 2609",
+      "edition": "Dorar 10211, authentischer digitaler Buḫārī-Bericht",
+      "directLink": "https://dorar.net/hadith/sharh/10211#:~:text=%D9%84%D9%8A%D8%B3%20%D8%A7%D9%84%D8%B4%D8%AF%D9%8A%D8%AF%20%D8%A8%D8%A7%D9%84%D8%B5%D8%B1%D8%B9%D8%A9",
+      "authenticityNote": "Authentischer Bericht von Abū Hurayrah, Buḫārī 6114 und Muslim 2609, am 14.10.2026 digital auf Dorar 10211 kontrolliert; nicht aus einer gesondert geprüften gedruckten Ausgabe zitiert. Eigene deutsche Erklärung ist Paraphrase.",
+      "safeApplication": "Kinder dürfen Wut als Gefühl ausdrücken, aber anderen nicht schaden. Das Erlernen von Selbstbeherrschung schließt nicht aus, Bedrohung oder Gewalt zu melden; kein Zwang zur Vergebung oder zum Verbergen von Missbrauch.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar 10211, authentischer Buḫārī 6114 Eintrag direkt geprüft",
+      "lessonIds": [
+        "akhlaq-wut-ruhig-bleiben"
+      ],
+      "binding": "authenticated Sunnah on anger, distinct from Quran 3:134",
+      "topic": "Wut und verantwortliches Handeln"
+    },
+    {
+      "sourceId": "SRC-CORE43-BUKHARI-6245",
+      "key": "knock-ask-permission-three-times",
+      "author": "al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "Abū Mūsā al-Ašʿarī und Abū Saʿīd al-Ḫudrī",
+      "arabic": "إِذَا اسْتَأْذَنَ أَحَدُكُمْ ثَلَاثًا فَلَمْ يُؤْذَنْ لَهُ فَلْيَرْجِعْ",
+      "germanTranslation": null,
+      "locus": "Überlieferung des dreimaligen Bittens um Einlass und anschließenden Zurückkehrens; auch über Abū Mūsā und Abū Saʿīd behandelt",
+      "volume": null,
+      "page": null,
+      "chapter": "Istiʾḏān, Privatsphäre und Bitte um Erlaubnis",
+      "number": "6245; auch Muslim 2153",
+      "edition": "Dorar 427, Abschnitt zu Muslim 2153 mit Buḫārī 6245 als Parallelüberlieferung",
+      "directLink": "https://dorar.net/hadith/sharh/427#:~:text=%D8%AB%D9%84%D8%A7%D8%AB%D9%8B%D8%A7",
+      "authenticityNote": "Dorar 427 zu authentischem Muslim 2153 führt Buḫārī 6245 als kürzere Parallelüberlieferung an. Der Kontext bezieht sich auf Abū Mūsā al-Ašʿarī und die bestätigende Überlieferung Abū Saʿīds; der hier enthaltene arabische Satz ist ein bekannter Kurzsinn, der Wortlaut darf erst nach gesondertem eigenständigem Buḫārī-6245-Abgleich als exaktes Buḫārī-Zitat freigegeben werden. Keine gedruckte Originalausgabe geprüft.",
+      "safeApplication": "Kinder üben, vor fremden oder geschlossenen Räumen höflich um Erlaubnis zu bitten und ein Nein zu respektieren. Keine Privatsphäre-Regel darf verhindern, dass ein Kind bei Gefahr, Verletzung oder Missbrauch schnell Hilfe sucht. Erwachsene erhalten keine ungeprüfte Pflicht zur Geheimhaltung.",
+      "verificationStatus": "parallel-report-crossreferenced-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar 427 Muslim 2153 unmittelbar gelesen, Buḫārī 6245 nur als Parallelquelle aufgeführt",
+      "lessonIds": [
+        "adab-erlaubnis-anklopfen"
+      ],
+      "binding": "authenticated Muslim report with Buḫārī parallel reference; Bukhari wording pending independent direct check",
+      "topic": "Anklopfen und respektvoll um Einlass bitten"
+    },
+    {
+      "sourceId": "SRC-CORE44-BUKHARI-69",
+      "key": "make-learning-easy-not-hard",
+      "author": "al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "Anas ibn Mālik",
+      "arabic": "يَسِّرُوا وَلَا تُعَسِّرُوا وَبَشِّرُوا وَلَا تُنَفِّرُوا",
+      "germanTranslation": null,
+      "locus": "Gebot, im Guten zu erleichtern und nicht abzuschrecken; keine Aufhebung religiöser Grundpflichten",
+      "volume": null,
+      "page": null,
+      "chapter": "Gute, freundliche Unterweisung",
+      "number": "69; auch Muslim 1734",
+      "edition": "Dorar 71, digitale authentische Buḫārī-Wiedergabe",
+      "directLink": "https://dorar.net/hadith/sharh/71#:~:text=%D9%8A%D8%B3%D8%B1%D9%88%D8%A7%20%D9%88%D9%84%D8%A7%20%D8%AA%D8%B9%D8%B3%D8%B1%D9%88%D8%A7",
+      "authenticityNote": "Am 14.10.2026 authentische digital wiedergegebene Überlieferung Anas ibn Mālik auf Dorar 71 kontrolliert: Buḫārī Nr. 69 / Muslim 1734. Gedruckter Buḫārī-Band nicht eigenständig geprüft. Qurʾān 20:132 über die Familie und Gebet ist eine andere Aussage.",
+      "safeApplication": "Kindern Wissen freundlich und mit angemessenen Lerntempi vermitteln, ohne sie zu ängstigen oder bloßzustellen. Der Bericht hebt Gebote nicht auf; altersgemäßes Lernen und Schutz vor Überforderung trennen.",
+      "verificationStatus": "primary-report-direct-read-2026-10-14",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Dorar 71, al-Buḫārī 69/Anas ibn Mālik unmittelbar geprüft",
+      "lessonIds": [
+        "akhlaq-tarbiyah-sanft-lernen"
+      ],
+      "binding": "authentic Sunnah on teaching with gentleness, separate from Quran 20:132",
+      "topic": "Lernen ohne Abschreckung"
     }
   ]
 }
