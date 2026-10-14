@@ -190,6 +190,34 @@ assert.equal(file.sources.find(s=>s.sourceId==="SRC-CORE9-BUKHARI-33").narrator,
 assert.match(file.sources.find(s=>s.sourceId==="SRC-CORE9-BUKHARI-33").arabic,/اؤْتُمِنَ/);
 assert.match(file.sources.find(s=>s.sourceId==="SRC-BANK-001").number,/1/);
 assert.equal(file.sources.filter(s=>s.sourceId==="SRC-BANK-001").length,1,"Reuse hadith bank 1 without duplication");
+// Cross-check actually loaded early lesson overlays with the primary reports.
+const vm=require("node:vm");
+const browser={window:{}};
+for(const script of ["kids/akademie/curriculum-v1.js","kids/akademie/curriculum-editorial-core-002-005-v1.js","kids/akademie/curriculum-editorial-core-006-009-v1.js","kids/akademie/curriculum-editorial-core-010-012-v1.js"]){
+ vm.runInNewContext(fs.readFileSync(path.join(root,script),"utf8"),browser,{filename:script});
+}
+const earlyLessonCheck=[
+ ["akhlaq-sabr",2,153,"1469","SRC-CORE5-BUKHARI-1469"],
+ ["akhlaq-amanah",23,8,"33","SRC-CORE9-BUKHARI-33"],
+ ["aqidah-ikhlas",39,11,"1","SRC-BANK-001"]
+];
+for(const [lessonId,surah,ayah,number,sourceId] of earlyLessonCheck){
+ const lesson=browser.window.DARKidsAcademyCurriculum[lessonId];
+ assert.ok(lesson,"Missing loaded early curriculum "+lessonId);
+ assert.equal(lesson.quran.surah,surah,"Misattributed surah on loaded early lesson "+lessonId);
+ assert.equal(lesson.quran.ayah,ayah,"Misattributed ayah on loaded early lesson "+lessonId);
+ assert.match(lesson.hadith.source,new RegExp("Nr\\.\\s*"+number+"(?:\\D|$)"),"Wrong hadith number on "+lessonId);
+ const src=file.sources.find(x=>x.sourceId===sourceId);
+ assert.ok(src?.lessonIds?.includes(lessonId),"Primary hadith source and actual early lesson are disconnected "+lessonId);
+ for(const age of ["4-5","6-8","9-10"]){
+  const version=lesson.ageText?.[age];
+  assert.ok(version?.lines?.length===4,"Incomplete actual child-age lesson "+lessonId+"/"+age);
+  assert.ok(version.evidence?.includes(number)||age==="4-5","Older child lesson should cite the verified primary hadith number "+lessonId+"/"+age);
+  const visible=[version.lines.join(" "),version.evidence,version.summary].join(" ");
+  assert.doesNotMatch(visible,/scientificApproval|fiqhHumanReviewNeeded|Masterstimme|Keine Freigabe für Besucher|QA-Hinweis/i,"Internal QA text leaked into child content");
+ }
+ assert.equal(lesson.sourceAudit?.scientificApproval,false,"Never mark early primary-source checks as final scholarly approval");
+}
 let count=0;
 for(const [lessonId,expected] of Object.entries(required)){
  for(const [id,[host,fragment]] of Object.entries(expected)){
