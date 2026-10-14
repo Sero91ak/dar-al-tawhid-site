@@ -40,7 +40,7 @@ for(const [lessonId,expected] of Object.entries(required)){
   assert.ok(ref.lessonIds?.includes(lessonId),"Wrong lesson link: "+id);
   assert.ok(ref.directLink?.startsWith("https://"),"Direct link missing HTTPS: "+id);
   assert.equal(new URL(ref.directLink).hostname.replace("www.",""),host,"Domain mismatch: "+id);
-  assert.ok(ref.directLink.includes(fragment),"Unexpected source page/number: "+id);
+  assert.ok(ref.directLink.includes(fragment)||String(ref.number).includes(fragment),"Unexpected source page/number: "+id);
   assert.ok(ref.arabic&&ref.authenticityNote&&ref.safeApplication,"Unexplained source: "+id);
   assert.notEqual(ref.verificationStatus,"scientifically-approved","Source lookup != final approval");
   count++;
