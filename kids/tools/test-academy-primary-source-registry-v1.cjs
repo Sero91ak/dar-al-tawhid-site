@@ -118,9 +118,13 @@ for(const [sourceId,narrator,number,muslim,lesson] of childrenHadith){
 }
 assert.match(file.sources.find(x=>x.sourceId==="SRC-CORE35-BUKHARI-5376").arabic,/يَا غُلَامُ/);
 assert.match(file.sources.find(x=>x.sourceId==="SRC-CORE36-BUKHARI-2363").arabic,/كَبِدٍ/);
-const v2ForLessons=fs.readFileSync(path.join(root,"kids/akademie/curriculum-v2.js"),"utf8");
+// These four original IDs span multiple curriculum packages, not only v2.
+// Use the canonical 208-slot ledger so later originals are not false negatives.
+const originalLessons=JSON.parse(fs.readFileSync(path.join(root,"kids-akademie/LESSON_STATUS.json"),"utf8")).lessons;
+const originalIds=new Set(originalLessons.map(lesson=>lesson.lessonId));
+assert.equal(originalLessons.length,208,"Source registry must resolve into all 208 original lessons");
 for(const id of ["fiqh-salah-gebet-lernen","aqidah-ikhlas-gute-absichten","adab-essen-bismillah","akhlaq-tiere-barmherzigkeit"]){
- assert.ok(v2ForLessons.includes('"'+id+'"'),"Source must refer to original curriculum ID "+id);
+ assert.ok(originalIds.has(id),"Source must refer to original 208-slot curriculum ID "+id);
 }
 
 
