@@ -26,6 +26,13 @@ jobs:
         with:
           ref: review/kids-quiz-v4-batch-001-020-20261014
 
+      - name: Ensure ffprobe for codec-verifying all staged original MP3s
+        run: |
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          command -v ffprobe
+
       - name: Check only verified V4 original MP3s and signed human approval hashes
         shell: bash
         run: |
