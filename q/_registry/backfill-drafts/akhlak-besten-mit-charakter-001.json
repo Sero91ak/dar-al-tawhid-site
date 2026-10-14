@@ -1,8 +1,8 @@
 {
   "postId": "akhlak-besten-mit-charakter-001",
   "filename": "026-06-05-akhlak-die-besten-mit-charakter.md",
-  "reviewState": "verified",
-  "approved": true,
+  "reviewState": "research-in-progress",
+  "approved": false,
   "title": "📖 Die Besten sind die mit bestem Charakter",
   "topic": "Guter Charakter",
   "speaker": "Der Prophet ﷺ – überliefert von ʿAbdullāh ibn ʿAmr ibn al-ʿĀṣ",
@@ -26,7 +26,7 @@
       "title": "Ṣaḥīḥ al-Buḫārī – Erläuterung und Parallelbeleg",
       "url": "https://dorar.net/hadith/sharh/15951#:~:text=%D9%84%D9%8E%D9%85%20%D9%8A%D9%8E%D9%83%D9%8F%D9%86%D9%90%20%D8%A7%D9%84%D9%86%D9%91%D9%8E%D8%A8%D9%8A%D9%91%D9%8F,%D9%85%D9%90%D9%86%20%D8%AE%D9%8A%D8%A7%D8%B1%D9%90%D9%83%D9%8F%D9%85%20%D8%A3%D8%AD%D8%B3%D9%8E%D9%86%D9%8E%D9%83%D9%8F%D9%85%20%D8%A3%D8%AE%D9%84%D8%A7%D9%82%D9%8B%D8%A7",
       "reference": "Dorar · überliefert von ʿAbdullāh ibn ʿAmr · Buḫārī 3559, Muslim 2321 · aus dem ursprünglichen Beitrag übernommene Textmarkierung",
-      "verified": true
+      "verified": false
     },
     {
       "title": "Die beiden Originalfassungen mit Buchseiten",
@@ -39,11 +39,17 @@
   "review": {
     "originalChecked": true,
     "translationChecked": true,
-    "bibliographyChecked": true,
+    "bibliographyChecked": false,
     "isnadChecked": true,
-    "linksChecked": true,
-    "approvedBy": "DĀR AL TAWḤĪD – Quellenabgleich al-Buḫārī/Muslim/Islamweb/Dorar 13.10.2026",
+    "linksChecked": false,
+    "approvedBy": null,
     "checkedAt": "2026-10-13"
   },
-  "editorialNotes": "Fundstellen und Arabisch am 13.10.2026 mit Buḫārī 3559 und Muslim 2321 sowie Islamweb Fatḥ al-Bārī /52/6475, Dorar /h/ToIF2N8R?osoul=1 verglichen. Die Angaben zu Band/Seite sind editionsabhängig; keine unbestätigte allgemeine Seitenzahl behaupten. Textfragment im originalen Dorar-Link unverändert beibehalten. Noch keine Q-Nummer vergeben oder Besucherseite aktualisiert."
+  "editorialNotes": "Fundstellen und Arabisch am 13.10.2026 mit Buḫārī 3559 und Muslim 2321 sowie Islamweb Fatḥ al-Bārī /52/6475, Dorar /h/ToIF2N8R?osoul=1 verglichen. Die Angaben zu Band/Seite sind editionsabhängig; keine unbestätigte allgemeine Seitenzahl behaupten. Textfragment im originalen Dorar-Link unverändert beibehalten. Noch keine Q-Nummer vergeben oder Besucherseite aktualisiert. 14.10.2026: Freigabe widerrufen wegen dokumentierter Abweichung im Direktlink und offener unabhängiger Šarḥ-/Seiten-/Dublettenprüfung. Kein Q-Link reserviert, kein öffentlicher Inhalt geändert.",
+  "reviewBlockers": [
+    "Existing Dorar /hadith/sharh/15951 begins with a different wording; /hadith/sharh/15947 is the precise Bukhari 3559 candidate, independently checked 2026-10-14.",
+    "Earliest directly verified classical sharh to the exact report not established.",
+    "Edition-specific volume/page citations and semantic duplicate check not independently completed.",
+    "Independent editorial approval required before --apply-reviewed or assigning any /q/ number."
+  ]
 }
