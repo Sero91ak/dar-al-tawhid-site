@@ -1,3 +1,13 @@
+## 14.10.2026 · Individuelle Kindertexte 175–178 fertig entworfen · 178/208
+
+- **Lektionsnummern 175–178:** Tawḥīd im Alltag (`tawhid-im-alltag`), Bemühen und Vertrauen (`iman-bemuehen-und-vertrauen`), Respekt gegenüber Menschen mit unterschiedlicher Sprache/Erscheinung (`akhlaq-unterschiedliche-menschen`) und achtsamer Umgang mit Trinkwasser (`adab-trinken-mit-guten-sitten`).
+- **Pädagogisch:** `kids/akademie/curriculum-editorial-175-178-v1.js` mit zwölf unterschiedlichen Altersfassungen (4–5, 6–8, 9–10), jeweils Lernziel, vier Unterrichtsabschnitte, kindliches Alltagsszenario, Übung, Quellenabgrenzung und Zusammenfassung. Bestehende Lektions-IDs, Quizfragen und Fortschritts- und Profildaten bleiben erhalten.
+- **Quellenakten:** `kids-akademie/research/EDITORIAL_REVIEW_175_178_20261014.md`, Qurʾān 1:5, 2:45, 30:22 und 16:10; Ibn Kaṯīr auf Islamweb 49/46, 49/85, 49/1424 und 49/942 durch Suchabruf geprüft. Keine pauschalen Verbote gewöhnlicher Hilfe, keine Notengarantien, kein Spott über Menschen, keine erfundenen Trinkrituale.
+- **Sprechplan:** `kids/data/academy-voice-editorial-175-178-delta-v1.json` enthält **76 unvertont geschriebene Text-Kontexte**, `generateCreditsUsed:0`. Kanonischer Sprechplan noch nicht konsolidiert. `kids/tools/test-academy-editorial-175-178-v1.cjs` als isolierter Node-Regressionstest eingecheckt.
+- **Datenkontrolle:** **129/129** strukturierte Text-/Voice-/Ladereihenfolge-Abgleiche erfolgreich; Node-/Browser-/CI-Lauf nicht ausgeführt, externer Checkout hier ohne DNS. Keine wissenschaftliche Endfreigabe.
+- **Fortschritt:** Individuelle redaktionelle Texte **178/208**; weitere **30 Lektionen 179–208** einzeln ausarbeiten. Alle **624/624** Altersfassungen weiterhin fachwissenschaftlich zu prüfen, davon **0 wissenschaftlich endgültig freigegeben**. Fiqh-Slots bleiben bei `fiqhHumanReviewNeeded=true`.
+- **Nächster Arbeitsschritt:** **179–182**, inklusive gesonderter hanbalitischer Quellenprüfung des Fiqh-Slots **180**. Geschützter Entwurfs-PR #1142, kein Merge auf `main`, kein Live-Deploy, keine Audioerzeugung.
+
 ## 14.10.2026 · Unterricht bis 174/208 individuell redigiert (PR #1142, kein Merge)
 
 **Neu 171–174:** Vier weitere Kinderlektionen in `kids/akademie/curriculum-editorial-171-174-v1.js` und damit **12 eigene Altersfassungen**. Themen: vorsichtiger Umgang mit Essen, Selbstständigkeit, ruhig lernen, Gebetsbeginn `Takbīrat al-Iḥrām`.
