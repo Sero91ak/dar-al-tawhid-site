@@ -183,7 +183,7 @@ def compose(paths,target):
             if i:seq.append(pause)
             seq.append(x)
         playlist=tmp/"concat.txt"
-        playlist.write_text("".join("file '"+str(x.resolve()).replace("'","'\\''")+"'\\n" for x in seq),encoding="utf-8")
+        playlist.write_text("".join("file '"+str(x.resolve()).replace("'","'\\''")+"'\n" for x in seq),encoding="utf-8")
         encoded=tmp/"joined.mp3"
         run(["ffmpeg","-hide_banner","-loglevel","error","-y","-f","concat",
              "-safe","0","-i",str(playlist),"-ac","1","-ar","48000",
@@ -208,8 +208,12 @@ def main():
     if args.audit or not(args.strict or args.assemble):return
     if not report["readyForAssembly"]:
         raise SystemExit("BLOCKED: paid originals not fully imported; no re-generation or publishing")
-    if args.strict:return
     root=(ROOT/"kids/assets/kids-quiz-audio").resolve()
+    if args.strict:
+        for key in required_sources(plan)[0]:check_clip(registry['generationClips'][key],root)
+        for key in required_sources(plan)[1]:check_clip(registry['textClips'][key],root)
+        print('STRICT_ASSET_QA_PASS: hash, codec, duration, master voice, model',flush=True)
+        return
     gens=registry["generationClips"];texts=registry["textClips"]
     clip_cache={}
     def imported(entry):
