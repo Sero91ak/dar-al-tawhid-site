@@ -1,3 +1,11 @@
+## 14.10.2026 · Unterricht 155–158 · nächster Altersblock
+
+- **Lektion 155–158 sind tatsächlich eingebaut:** `kids/akademie/curriculum-editorial-155-158-v1.js` mit vier erhaltenen IDs und **zwölf selbständigen Altersfassungen** (4–5, 6–8, 9–10) – 155 Quellenkunde Qurʾān/Ḥadīṯ, 156 Ṣaḥābah und Qurʾān 9:100, 157 Adhkār ohne erfundene Wiederholungszahlen, 158 Gerechtigkeit und Iḥsān in betreuten Gemeinschaftsprojekten.
+- **Primärbelege / Grenzen:** Qurʾān 53:3–4, 9:100, 33:41–43, 16:90; gespeicherte Ibn-Kaṯīr-/Islamweb-Fundstellen und Abgrenzungen stehen in `kids-akademie/research/EDITORIAL_REVIEW_155_158_20261014.md`. Keine erfundenen Hadithnummern, erfundenen Ṣaḥābah-Dialoge oder Pflichtformeln; eigenständige moderne Kinderszenen sind als Pädagogik bezeichnet.
+- **76 neue, rein textuelle Voice-Kontexte** in `kids/data/academy-voice-editorial-155-158-delta-v1.json`, kontrolliert **0 Abweichungen** zum gespeicherten Overlay, **0 Credits und 0 Audioerzeugung**; vor künftiger Generierung manuell kontrollierter Abgleich mit kanonischem Sprachplan erforderlich.
+- Modul in korrekter Reihenfolge **nach Fiqh 154, vor Term-Coach** in `kids/akademie/index.html` geladen. Regressionstest `kids/tools/test-academy-editorial-155-158-v1.cjs` im PR hinzugefügt. GitHub-Datei-/Kontextvergleich durchgeführt; vollständige lokale Node- und Browserdurchführung **noch ausstehend**.
+- Redaktion der fortlaufenden Blöcke nun **bis 158/208**. **50 Lektionen (159–208) bzw. 150 Altersfassungen** als nächste redaktionelle Strecke. Sämtliche **624** Altersfassungen weiterhin **nicht endgültig wissenschaftlich freigegeben**. **Kein Merge, kein Live-Deploy, keine Audioerzeugung.**
+
 ## 14.10.2026 · Slot 154 · Fiqh-Niyyah korrigiert
 
 - **Lektion 154** (`fiqh-absicht-zum-gebet`) mit **drei eigenständigen Altersfassungen** und hinreichend getrenntem Qurʾān-Beleg, klassischem Fiqh und kindlicher Übung als Overlay `kids/akademie/curriculum-editorial-154-v1.js` im PR #1113 eingebunden.
