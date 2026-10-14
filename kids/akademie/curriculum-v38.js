@@ -1591,7 +1591,7 @@ const additions=
       "ayah": 5,
       "label": "Qurʾān 113:5",
       "arabic": "وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ",
-      "meaning": "Sinngemäß: Der gespeicherte Surenteil bittet um Schutz vor dem Übel eines Neiders, wenn er neidet.",
+      "meaning": "Sinngemäß: Und vor dem Übel eines Neiders, wenn er neidet.",
       "excerpt": false
     },
     "hadith": {
@@ -5971,7 +5971,7 @@ const additions=
       "ayah": 7,
       "label": "Qurʾān 99:7",
       "arabic": "فَمَنْ يَعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَرَهُ وَمَنْ يَعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَرَهُ",
-      "meaning": "Sinngemäß: Der gespeicherte Text sagt: Wer das Gewicht eines Stäubchens an Gutem tut, wird es sehen. Im selben Ausdruck folgt der Satz über das Gewicht eines Stäubchens an Schlechtem.",
+      "meaning": "Sinngemäß: Wer auch nur das Gewicht eines Stäubchens Gutes tut, wird es sehen.",
       "excerpt": false
     },
     "hadith": {
@@ -7505,7 +7505,7 @@ const additions=
       "ayah": 1,
       "label": "Qurʾān 96:1",
       "arabic": "اقْرَأْ بِاسْمِ رَبِّكَ الَّذِي خَلَقَ",
-      "meaning": "Sinngemäß: Der gespeicherte Auszug ist der erste Vers: Lies im Namen deines Herrn, der erschaffen hat. Die Seite bricht den Ausdruck dort ab.",
+      "meaning": "Sinngemäß: Lies im Namen deines Herrn, der erschaffen hat.",
       "excerpt": false
     },
     "hadith": {
@@ -10805,7 +10805,7 @@ const additions=
       "ayah": 1,
       "label": "Qurʾān 1:1",
       "arabic": "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
-      "meaning": "Sinngemäß: Der gespeicherte Vers ist die Eröffnung: Im Namen Allahs, des Allerbarmers, des Barmherzigen.",
+      "meaning": "Sinngemäß: Im Namen Allahs, des Allerbarmers, des Barmherzigen.",
       "excerpt": false
     },
     "hadith": {
@@ -11023,7 +11023,7 @@ const additions=
       "ayah": 177,
       "label": "Qurʾān 2:177",
       "arabic": "لَيْسَ الْبِرَّ أَنْ تُوَلُّوا وُجُوهَكُمْ قِبَلَ الْمَشْرِقِ وَالْمَغْرِبِ وَلَكِنَّ الْبِرَّ مَنْ آمَنَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ وَالْمَلَائِكَةِ وَالْكِتَابِ وَالنَّبِيِّينَ وَآتَى الْمَالَ عَلَى حُبِّهِ ذَوِي الْقُرْبَى وَالْيَتَامَى وَالْمَسَاكِينَ وَابْنَ السَّبِيلِ وَالسَّائِلِينَ وَفِي الرِّقَابِ وَأَقَامَ الصَّلَاةَ وَآتَى الزَّكَاةَ وَالْمُوفُونَ بِعَهْدِهِمْ إِذَا عَاهَدُوا وَالصَّابِرِينَ فِي الْبَأْسَاءِ وَالضَّرَّاءِ وَحِينَ الْبَأْسِ أُولَئِكَ الَّذِينَ صَدَقُوا وَأُولَئِكَ هُمُ الْمُتَّقُونَ",
-      "meaning": "Sinngemäß: Der lange Vers nennt zum Guten den Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten. Der gespeicherte Text ist ein Auszug aus diesem langen Vers.",
+      "meaning": "Sinngemäß: Güte zeigt sich im Glauben an Allah, den Jüngsten Tag, die Engel, das Buch und die Propheten sowie in guten Taten.",
       "excerpt": false
     },
     "hadith": {
@@ -12562,8 +12562,9 @@ const additions=
       "surah": 53,
       "ayah": 3,
       "label": "Qurʾān 53:3–4",
+      "ayahEnd": 4,
       "arabic": "وَمَا يَنْطِقُ عَنِ الْهَوَى إِنْ هُوَ إِلَّا وَحْيٌ يُوحَى",
-      "meaning": "Sinngemäß: Die beiden gespeicherten Sätze lauten: Er spricht nicht aus Neigung. Es ist nichts als eine Offenbarung, die eingegeben wird. Das sagt die Stelle über die Rede des Propheten, Friede sei mit ihm.",
+      "meaning": "Sinngemäß: Er spricht nicht aus eigener Neigung. Es ist vielmehr eine Offenbarung, die eingegeben wird.",
       "excerpt": false
     },
     "hadith": {
@@ -12997,9 +12998,10 @@ const additions=
     "quran": {
       "surah": 33,
       "ayah": 41,
-      "label": "Qurʾān 33:41",
+      "label": "Qurʾān 33:41–43",
+      "ayahEnd": 43,
       "arabic": "يَا أَيُّهَا الَّذِينَ آمَنُوا اذْكُرُوا اللَّهَ ذِكْرًا كَثِيرًا وَسَبِّحُوهُ بُكْرَةً وَأَصِيلًا هُوَ الَّذِي يُصَلِّي عَلَيْكُمْ وَمَلَائِكَتُهُ لِيُخْرِجَكُمْ مِنَ الظُّلُمَاتِ إِلَى النُّورِ وَكَانَ بِالْمُؤْمِنِينَ رَحِيمًا",
-      "meaning": "Sinngemäß: Der gespeicherte Ausdruck fordert die Glaubenden auf, Allahs viel zu gedenken und Ihn morgens und abends zu preisen. Danach folgen weitere Worte der Seite.",
+      "meaning": "Sinngemäß: O ihr, die ihr glaubt, gedenkt Allahs häufig und preist Ihn morgens und abends.",
       "excerpt": false
     },
     "hadith": {
@@ -13653,7 +13655,7 @@ const additions=
       "ayah": 177,
       "label": "Qurʾān 2:177",
       "arabic": "لَيْسَ الْبِرَّ أَنْ تُوَلُّوا وُجُوهَكُمْ قِبَلَ الْمَشْرِقِ وَالْمَغْرِبِ وَلَكِنَّ الْبِرَّ مَنْ آمَنَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ وَالْمَلَائِكَةِ وَالْكِتَابِ وَالنَّبِيِّينَ وَآتَى الْمَالَ عَلَى حُبِّهِ ذَوِي الْقُرْبَى وَالْيَتَامَى وَالْمَسَاكِينَ وَابْنَ السَّبِيلِ وَالسَّائِلِينَ وَفِي الرِّقَابِ وَأَقَامَ الصَّلَاةَ وَآتَى الزَّكَاةَ وَالْمُوفُونَ بِعَهْدِهِمْ إِذَا عَاهَدُوا وَالصَّابِرِينَ فِي الْبَأْسَاءِ وَالضَّرَّاءِ وَحِينَ الْبَأْسِ أُولَئِكَ الَّذِينَ صَدَقُوا وَأُولَئِكَ هُمُ الْمُتَّقُونَ",
-      "meaning": "Sinngemäß: Dieselbe lange Stelle wie in der Stunde über den Jüngsten Tag nennt den Glauben und danach Handlungen. Die Stunde bleibt bei dem, was der gespeicherte Auszug wirklich trägt, und ergänzt keine fehlenden Satzteile als Arabisch.",
+      "meaning": "Sinngemäß: Güte zeigt sich im Glauben an Allah, in der Hilfe für andere, im Gebet, in der Zakāh, im Einhalten von Versprechen und in Geduld.",
       "excerpt": false
     },
     "hadith": {
@@ -14524,9 +14526,10 @@ const additions=
     "quran": {
       "surah": 94,
       "ayah": 5,
-      "label": "Qurʾān 94:5",
+      "label": "Qurʾān 94:5–6",
+      "ayahEnd": 6,
       "arabic": "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا إِنَّ مَعَ الْعُسْرِ يُسْرًا",
-      "meaning": "Sinngemäß: Der gespeicherte Ausdruck sagt zweimal: Mit der Schwierigkeit ist Erleichterung.",
+      "meaning": "Sinngemäß: Mit der Schwierigkeit kommt Erleichterung. Ja, mit der Schwierigkeit kommt Erleichterung.",
       "excerpt": false
     },
     "hadith": {
@@ -16284,9 +16287,10 @@ const additions=
     "quran": {
       "surah": 94,
       "ayah": 7,
-      "label": "Qurʾān 94:7",
+      "label": "Qurʾān 94:7–8",
+      "ayahEnd": 8,
       "arabic": "فَإِذَا فَرَغْتَ فَانْصَبْ وَإِلَى رَبِّكَ فَارْغَبْ",
-      "meaning": "Sinngemäß: Der gespeicherte Ausdruck sagt: Wenn du fertig bist, dann mühe dich, und zu deinem Herrn hin wende dich begehrend.",
+      "meaning": "Sinngemäß: Wenn du frei bist, dann strenge dich an; und richte dein Verlangen an deinen Herrn.",
       "excerpt": false
     },
     "hadith": {
@@ -18277,9 +18281,10 @@ const additions=
     "quran": {
       "surah": 112,
       "ayah": 1,
-      "label": "Qurʾān 112:1",
+      "label": "Qurʾān 112:1–4",
+      "ayahEnd": 4,
       "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
-      "meaning": "Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+      "meaning": "Sinngemäß: Sprich: Er ist Allah, Einer. Allah ist der, auf den alle angewiesen sind. Er hat nicht gezeugt und wurde nicht gezeugt, und niemand ist Ihm gleich.",
       "excerpt": false
     },
     "hadith": {
@@ -20462,7 +20467,7 @@ const additions=
       "ayah": 10,
       "label": "Qurʾān 71:10",
       "arabic": "فَقُلْتُ اسْتَغْفِرُوا رَبَّكُمْ إِنَّهُ كَانَ غَفَّارًا يُرْسِلِ السَّمَاءَ عَلَيْكُمْ مِدْرَارًا",
-      "meaning": "Sinngemäß: Der Vers sagt: So habe ich gesagt: Bittet euren Herrn um Vergebung. Er ist gewiss vergebend. Danach spricht der Ausdruck vom Regen.",
+      "meaning": "Sinngemäß: So sagte ich: Bittet euren Herrn um Vergebung, denn Er ist stets vergebend.",
       "excerpt": false
     },
     "hadith": {
@@ -20896,9 +20901,10 @@ const additions=
     "quran": {
       "surah": 112,
       "ayah": 1,
-      "label": "Qurʾān 112:1",
+      "label": "Qurʾān 112:1–4",
+      "ayahEnd": 4,
       "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
-      "meaning": "Sinngemäß: Dieselbe gespeicherte Sūrah wie in der Stunde über die Geschöpfe sagt, dass Allah Einer ist, dass Er nicht gezeugt hat und nicht gezeugt wurde und dass niemand Ihm gleich ist.",
+      "meaning": "Sinngemäß: Allah ist Einer. Auf Ihn sind alle angewiesen. Er hat nicht gezeugt und wurde nicht gezeugt, und niemand ist Ihm gleich.",
       "excerpt": false
     },
     "hadith": {
@@ -22867,7 +22873,7 @@ const additions=
       "ayah": 4,
       "label": "Qurʾān 68:4",
       "arabic": "وَإِنَّكَ لَعَلَى خُلُقٍ عَظِيمٍ",
-      "meaning": "Sinngemäß: Der gespeicherte Vers lautet: Und du bist wahrlich auf einem gewaltigen Charakter. Die Seite beginnt danach mit einer Erklärung.",
+      "meaning": "Sinngemäß: Und du besitzt wahrlich einen großartigen Charakter.",
       "excerpt": false
     },
     "hadith": {
@@ -23304,7 +23310,7 @@ const additions=
       "ayah": 238,
       "label": "Qurʾān 2:238",
       "arabic": "حَافِظُوا عَلَى الصَّلَوَاتِ وَالصَّلَاةِ الْوُسْطَى وَقُومُوا لِلَّهِ قَانِتِينَ",
-      "meaning": "Sinngemäß: Dieselbe Stelle über das Hüten der Gebete und das demütige Stehen trägt hier nur den Hinweis, dass das Gebet mehr enthält als das Stehen. Die Sitzworte selbst fehlen auf der Seite.",
+      "meaning": "Sinngemäß: Haltet die Gebete ein, besonders das mittlere Gebet, und steht ehrfürchtig vor Allah.",
       "excerpt": false
     },
     "hadith": {
@@ -23960,7 +23966,7 @@ const additions=
       "ayah": 185,
       "label": "Qurʾān 2:185",
       "arabic": "شَهْرُ رَمَضَانَ الَّذِي أُنْزِلَ فِيهِ الْقُرْآنُ هُدًى لِلنَّاسِ وَبَيِّنَاتٍ مِنَ الْهُدَى وَالْفُرْقَانِ فَمَنْ شَهِدَ مِنْكُمُ الشَّهْرَ فَلْيَصُمْهُ وَمَنْ كَانَ مَرِيضًا أَوْ عَلَى سَفَرٍ فَعِدَّةٌ مِنْ أَيَّامٍ أُخَرَ يُرِيدُ اللَّهُ بِكُمُ الْيُسْرَ وَلَا يُرِيدُ بِكُمُ الْعُسْرَ وَلِتُكْمِلُوا الْعِدَّةَ وَلِتُكَبِّرُوا اللَّهَ عَلَى مَا هَدَاكُمْ وَلَعَلَّكُمْ تَشْكُرُونَ",
-      "meaning": "Sinngemäß: Der gespeicherte Vers nennt den Monat Ramaḍān, die Herabsendung des Qurʾān darin als Rechtleitung, und dass der, der den Monat erlebt, in ihm fasten soll. Er spricht auch von Krankheit und Reise.",
+      "meaning": "Sinngemäß: Ramaḍān ist der Monat, in dem der Qurʾān als Rechtleitung herabgesandt wurde. Wer den Monat erlebt, soll darin fasten; bei Krankheit und Reise nennt der Vers Erleichterungen.",
       "excerpt": false
     },
     "hadith": {
