@@ -26,6 +26,7 @@ def main():
             "readyForLive":False,"synthesisCallsMade":0}
     problems=[]
     for spoken,info in sorted(rows.items()):
+        # Includes all post-pilot original MP3s, not only the initial two.
         check={"textSha256":hashlib.sha256(spoken.encode("utf-8")).hexdigest(),
                "technicalPassed":False,
                "listeningApproved":info.get("audioListeningApproved") is True}
