@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "generatedOn": "2026-10-13",
   "warning": "V38 verse spans were read on Islamweb Ibn Kathir pages on 2026-10-13. Hadith numbers were not added. Dorar was not re-read. Scientific approval is not claimed.",
-  "sourceCount": 110,
+  "sourceCount": 112,
   "sources": [
     {
       "sourceId": "SRC-BANK-001",
@@ -2727,6 +2727,58 @@
       ],
       "binding": "bound-to-slot-142-as-numbered-sahih-hadith-with-explicit-german-paraphrase",
       "topic": "Namen der fünf Gebete"
+    },
+    {
+      "sourceId": "SRC-FIQH180-BUKHARI-723",
+      "key": "fiqh-180-fatihah-prayer-hadith",
+      "author": "al-Buḫārī",
+      "work": "Ṣaḥīḥ al-Buḫārī",
+      "narrator": "ʿUbādah ibn aṣ-Ṣāmit",
+      "arabic": "لَا صَلَاةَ لِمَنْ لَمْ يَقْرَأْ بِفَاتِحَةِ الْكِتَابِ",
+      "germanTranslation": "Sinngemäß: Die Fātiḥah-Rezitation ist für das Gebet von grundlegender Bedeutung.",
+      "locus": "Abwāb Ṣifat aṣ-Ṣalāh, Bāb Wuǧūb al-Qirāʾah",
+      "volume": "1",
+      "page": "Buchausgabe nach Islamweb; gedruckte Paginierung auf Einzelseite nicht separat abgeglichen",
+      "chapter": "Bāb Wuǧūb al-Qirāʾah",
+      "number": "Ṣaḥīḥ al-Buḫārī, Islamweb-Eintrag 723",
+      "edition": "Islamweb-Bibliothekszählung 723; nicht mit anderer Editionszählung gleichsetzen",
+      "directLink": "https://islamweb.net/ar/library/content/0/724",
+      "authenticityNote": "Direkt gelesener arabischer Wortlaut aus Ṣaḥīḥ al-Buḫārī; eine individuelle Regel zur Imām/Maʾmūm-Rezitation wird in der Kinderstunde nicht ohne weitere Fiqh-Prüfung festgelegt.",
+      "safeApplication": "Die Fātiḥah sorgfältig mit einer geeigneten Lehrperson lernen; Kinder nicht beschämen; nicht als wörtlichen Teil von Qurʾān 15:87 darstellen.",
+      "verificationStatus": "primary-hadith-directly-read-2026-10-14-no-final-fiqh-approval",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Islamweb 0/724 geöffnet, arabischer Satz überprüft",
+      "lessonIds": [
+        "fiqh-quran-rezitation-im-gebet"
+      ],
+      "binding": "bound-to-slot-180-numbered-sahih-hadith-paraphrased-for-children",
+      "topic": "Die Fātiḥah im Gebet"
+    },
+    {
+      "sourceId": "SRC-FIQH180-MUGHNI-553",
+      "key": "fiqh-180-hanbali-fatiha-recitation",
+      "author": "Ibn Qudāmah",
+      "work": "al-Mughnī",
+      "narrator": null,
+      "arabic": "قراءة الفاتحة واجبة في الصلاة ، وركن من أركانها",
+      "germanTranslation": "Sinngemäß: Ibn Qudāmah beschreibt die Fātiḥah-Rezitation als Gebetsbestandteil in der bekannten Überlieferung von Aḥmad.",
+      "locus": "Kitāb aṣ-Ṣalāh, Bāb Ṣifat aṣ-Ṣalāh, Masʾalat Qirāʾat al-Fātiḥah",
+      "volume": "1",
+      "page": "284",
+      "chapter": "Masʾalat Qirāʾat al-Fātiḥah fī ṣ-Ṣalāh",
+      "number": null,
+      "edition": "Islamweb digitale al-Mughnī-Ausgabe, Bd. 1, S. 284",
+      "directLink": "https://www.islamweb.net/ar/library/content/15/553",
+      "authenticityNote": "Direkt gelesener klassischer hanbalitischer Fiqh-Text; Ausnahmen/Meinungsunterschiede zum Mitbetenden nicht abschließend ausgewertet.",
+      "safeApplication": "Kindgerecht das Lernen der Fātiḥah erklären; keine unbewiesenen Aussagen zu allen Einzelfällen oder Leistungsdruck auf Kinder.",
+      "verificationStatus": "primary-classical-fiqh-page-directly-read-2026-10-14-not-approved",
+      "checkedOn": "2026-10-14",
+      "checkedBy": "Islamweb al-Mughnī 15/553 geöffnet",
+      "lessonIds": [
+        "fiqh-quran-rezitation-im-gebet"
+      ],
+      "binding": "direct-classical-fiqh-reference-in-sourceAudit-no-human-approval",
+      "topic": "Hanbalitische Grundlage der Fātiḥah-Rezitation"
     }
   ]
 }
