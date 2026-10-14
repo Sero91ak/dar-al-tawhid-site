@@ -1,3 +1,14 @@
+## 14.10.2026 · Quellenbindung der Lektionen 33–36 · Register 167
+
+- **Direkt im GitHub-Entwurf committed:** vier bestehende Vertiefungs-IDs der frühen Unterrichtsreihe, fünf neue Quellenverknüpfungen und **zwei neue authentische Hadith-Belege**. Lektions-IDs, Quiz, Kindertexte, Profile, Fortschritt, Audio und bisherige Quellenanzeigen bleiben unverändert.
+- **33 Gebet lernen:** bereits geprüftes `SRC-CORE30-BUKHARI-631` (Mālik ibn al-Ḥuwayriṯ; Buḫārī 631, auch Muslim 674) verknüpft. Der allgemeine Bericht wird nicht als Nachweis jeder Gebetsbewegung ausgegeben.
+- **34 Gute Absichten:** aṭ-Ṭabarī zu Qurʾān 39:11 (`SRC-CORE12-TABARI-4233`) plus authentischer Bericht von ʿUmar über Absichten (Buḫārī 1 / Muslim 1907, **Bank-ID `SRC-BANK-001`**), beide Quellen wiederverwendet statt dupliziert.
+- **35 Essen mit Bismillāh:** **neu direkt digital geprüft**, Überlieferung von **ʿUmar ibn Abī Salamah**, Buḫārī **5376** / Muslim **2022**, [Dorar 14362](https://dorar.net/hadith/sharh/14362), `SRC-CORE35-BUKHARI-5376`. Kindgerecht ohne Essenszwang oder Beschämung, körperliche Ausnahmen separat prüfen.
+- **36 Barmherzig zu Tieren:** **neu direkt digital geprüft**, **Abū Hurayrah**, Buḫārī **2363** / Muslim **2244**, [Dorar 72367](https://dorar.net/hadith/sharh/72367), `SRC-CORE36-BUKHARI-2363`. Historische Brunnen-/Tier-Szene nicht als Selbstgefährdungsauftrag an Kinder ausgeben.
+- **Quellenregister:** **167 einzigartige Source-IDs** nach der Änderung. `kids-akademie/research/SCIENTIFIC_CORE_033_036_SOURCE_BINDINGS_20261014.md` dokumentiert den Originalausschnitt, Erzähler, Hadith-Nummern, Wiederverwendungen und offenen Prüfbedarf. Der Regressionstest `kids/tools/test-academy-primary-source-registry-v1.cjs` prüft alle fünf Links und die beiden neuen authentischen Berichte einschließlich ihrer pädagogischen Sicherungsgrenzen.
+- **Status bleibt 208/208 Textentwürfe, 624/624 Altersfassungen, 0/624 wissenschaftlich endgültig freigegeben.** Ein aktueller erfolgreicher GitHub-Workflow wurde für diese Commits **noch nicht bestätigt**. Kein Live-Deploy, kein Merge auf `main`, keine Audioerzeugung und kein Copilot.
+- **Nächster Wissenschaftsblock: 37–40**, danach 41–44; zusätzliche Kontrolle der tatsächlich auf Kinderbildschirmen angezeigten Quellen bleibt Pflicht. Die Quellenregistry allein ersetzt keine vollständige menschliche oder technische Freigabe.
+
 ## 14.10.2026 · Quellenbindung 29–32 · Registry 163
 
 - **Neues tatsächliches GitHub-Arbeitspaket:** vier bestehende Lektions-IDs **29–32** mit **7 Quellenbindungen** – sechs wiederverwendete, zuvor geprüfte Quellen + **ein neu direkt gelesener klassischer Qurʾān-Kommentar**. Keine zusätzlichen Lektionsplätze, Quizänderungen, Änderungen am Kinder-Fortschritt oder TTS-Kosten.
