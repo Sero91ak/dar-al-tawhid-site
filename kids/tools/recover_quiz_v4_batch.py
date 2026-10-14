@@ -108,7 +108,7 @@ def join_002(gens):
            "-c:a","pcm_s16le",str(pause)],check=True)
         seq=[wav[0],pause,wav[1],pause,wav[2]]
         playlist=td/"concat.txt"
-        playlist.write_text("".join("file '"+str(x.resolve()).replace("'","'\\''")+"'\\n" for x in seq),encoding="utf-8")
+        playlist.write_text("".join("file '"+str(x.resolve()).replace("'","'\\''")+"'\n" for x in seq),encoding="utf-8")
         target=td/"joined.mp3"
         subprocess.run(["ffmpeg","-hide_banner","-loglevel","error","-y","-f","concat","-safe","0",
              "-i",str(playlist),"-ar","48000","-ac","1","-c:a","libmp3lame","-b:a","128k",str(target)],check=True)
