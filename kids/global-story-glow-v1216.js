@@ -1,38 +1,14 @@
+/* KIDS_STORY_GLOW_PARITY_V1218: retire the old 560ms touch-glow timer.
+   All press/focus feedback is owned by kids-card-interaction.js and kids-touch-rail.css.
+   Keep the historical public API for compatibility with old bundles. */
 (() => {
-"use strict";
-const selector=[
-  "#view-stories #psProphetEntry",
-  "#view-stories #msEntry",
-  "#view-stories #syEntry",
-  "#view-stories #deenEntry",
-  "#view-stories .story-row",
-  ".ps-library-page [data-ps-id]",
-  ".ms-library-page [data-ms-id]",
-  ".ms-library-page [data-sy-id]",
-  ".dl-library-page [data-dl-id]",
-  "#ghWorld .gh-category",
-  "#ghWorld .gh-story",
-  "[data-ps-mode]",
-  "[data-ms-mode]",
-  "[data-sy-mode]",
-  "[data-dl-mode]"
-].join(",");
-const timers=new WeakMap();
-function glow(target){
-  if(!target||target.disabled||target.getAttribute("aria-disabled")==="true")return;
-  target.classList.remove("kids-story-touch-glow");
-  void target.offsetWidth;
-  target.classList.add("kids-story-touch-glow");
-  const old=timers.get(target);if(old)clearTimeout(old);
-  timers.set(target,setTimeout(()=>{target.classList.remove("kids-story-touch-glow");timers.delete(target)},560));
-}
-function fromEvent(e){
-  const target=e.target?.closest?.(selector);
-  if(target)glow(target);
-}
-document.addEventListener("pointerdown",fromEvent,true);
-document.addEventListener("click",e=>{if(e.detail===0)fromEvent(e)},true);
-window.DARKidsStoryGlow=Object.freeze({version:1217,glow});
+  "use strict";
+  function clearLegacyGlow(){
+    document.querySelectorAll(".kids-story-touch-glow").forEach(el=>el.classList.remove("kids-story-touch-glow"));
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",clearLegacyGlow,{once:true});
+  else clearLegacyGlow();
+  window.DARKidsStoryGlow=Object.freeze({version:1218,glow:()=>{}});
 })();
 
 /* DU'A HUB LOADER v1239 — use the direct shell includes when present; inject only as a fallback. */

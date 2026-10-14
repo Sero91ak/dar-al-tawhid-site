@@ -229,3 +229,41 @@ html.kids-follow-reader-open{overflow:hidden!important;overscroll-behavior:none!
   .kfr-read{padding:20px 28px 36px}
   .kfr-read p{max-width:720px;margin-left:auto;margin-right:auto;font-size:clamp(21px,2.2vw,25px)}
 }
+
+/* v11 · cinematic listening overlay: recognisable art & title, calm fade toward bottom sheet.
+   Audio-only applies to Hören on every shared story reader. Reading modes are unchanged. */
+.kids-follow-reader.audio-only{
+  background:linear-gradient(180deg,
+    rgba(2,13,21,.045) 0%,
+    rgba(2,13,21,.065) 27%,
+    rgba(2,13,21,.13) 45%,
+    rgba(2,13,21,.28) 64%,
+    rgba(2,13,21,.48) 82%,
+    rgba(2,13,21,.62) 100%)!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+.kids-follow-reader.audio-only::before{
+  content:"";
+  position:absolute;
+  inset:27% 0 0;
+  pointer-events:none;
+  z-index:0;
+  -webkit-backdrop-filter:blur(5px);
+  backdrop-filter:blur(5px);
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.12) 27%,rgba(0,0,0,.49) 66%,#000 100%);
+  mask-image:linear-gradient(180deg,transparent 0%,rgba(0,0,0,.12) 27%,rgba(0,0,0,.49) 66%,#000 100%);
+}
+.kids-follow-reader.audio-only .kfr-sheet{
+  position:relative;
+  z-index:1;
+}
+@media (max-height:600px){
+  .kids-follow-reader.audio-only::before{inset:16% 0 0}
+}
+@media (prefers-reduced-transparency:reduce){
+  .kids-follow-reader.audio-only::before{
+    -webkit-backdrop-filter:none;
+    backdrop-filter:none;
+  }
+}

@@ -1,0 +1,255 @@
+/* DĀR AL TAWḤĪD KIDS — girls-only surface authority v1333
+   Audited against KIDS index, Du'a Hub v1219, Qur'an V1055, Parents,
+   Offline Library, Stories, Salah and bottom navigation.
+   NO geometry, content, image sources, animations or account state changes.
+   Do not propagate any of these colors to guest/boy profiles. */
+
+html body .app[data-gender="girl"]{
+  --girls-ink:#fff4ed;
+  --girls-blush:#f5c8d8;
+  --girls-gold:#efd19b;
+  --girls-line:rgba(244,192,217,.29);
+  --girls-shadow:rgba(25,13,23,.28);
+  --girls-plum:#392637;
+  --girls-plum-2:#2c2131;
+  --girls-wine:#452e3e;
+  --girls-charcoal:#30282f;
+  --q-card:#362737;
+  --q-card-2:#493443;
+  --q-line:rgba(244,190,214,.29);
+  --q-gold-soft:#f4dab2;
+  --q-muted:rgba(255,238,243,.77);
+}
+html body .app[data-gender="girl"]::before{
+  background:linear-gradient(180deg,rgba(35,23,39,.90),rgba(35,23,39,.35) 68%,transparent)!important;
+}
+
+/* FIXED TABS — real inside fill, not just an outline recolor.
+   Opaque plum removes underlying teal glass bleed-through. */
+html body .app[data-gender="girl"] > .bottom-nav,
+html[data-kids-age] body .app[data-gender="girl"] > .bottom-nav{
+  background:#302030!important;
+  background-image:
+    radial-gradient(ellipse at 16% 0%,rgba(244,174,202,.12),transparent 62%),
+    linear-gradient(140deg,#3a2737 0%,#2e2131 56%,#281e2d 100%)!important;
+  border-color:rgba(245,196,216,.40)!important;
+  box-shadow:0 12px 32px rgba(25,13,26,.38),
+    inset 0 1px rgba(255,227,236,.12)!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html body .app[data-gender="girl"] > .bottom-nav .nav-btn.active{
+  color:#ffe8ed!important;
+  background:linear-gradient(140deg,rgba(194,122,154,.30),rgba(117,83,117,.22))!important;
+  border-color:rgba(246,201,216,.57)!important;
+  box-shadow:0 0 12px rgba(237,164,196,.13),
+    inset 0 0 0 1px rgba(254,224,236,.11)!important;
+}
+html body .app[data-gender="girl"] > .bottom-nav .nav-btn:not(.active){
+  color:rgba(248,232,239,.75)!important;
+}
+html body .app[data-gender="girl"] > .bottom-nav .nav-btn.active .lab{
+  color:#ffe1ea!important;
+}
+html body .app[data-gender="girl"] > .bottom-nav .nav-btn:not(.active) .lab{
+  color:#d7c1ce!important;
+}
+
+/* DU'A: warm, differentiated premium surfaces, not a purple flood.
+   Keep each existing icon, illustration, icon shadow, text and tap action. */
+html body .app[data-gender="girl"] #view-dua .duahub-action,
+html body .app[data-gender="girl"] #view-dua .duahub-action.select{
+  background:linear-gradient(107deg,#493242 0%,#342736 100%)!important;
+  border-color:rgba(245,202,218,.28)!important;
+  box-shadow:0 10px 25px rgba(23,14,25,.22),inset 0 1px rgba(255,225,238,.07)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-action.learn{
+  background:linear-gradient(107deg,#40303f 0%,#302634 100%)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-action.random{
+  background:linear-gradient(107deg,#48353b 0%,#322832 100%)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-resume-card{
+  background:linear-gradient(110deg,#453541 0%,#302836 100%)!important;
+  border-color:rgba(242,196,214,.24)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-mini-progress{
+  background:rgba(244,208,219,.17)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-search{
+  background:#302637!important;
+  border-color:rgba(240,182,212,.34)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-search input{
+  color:#fff0f0!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-search input::placeholder{
+  color:#c9b7c1!important;
+  opacity:1!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-chips button{
+  background:rgba(104,70,94,.35)!important;
+  border-color:rgba(247,197,214,.30)!important;
+  color:#f9dfcf!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-chips button.active,
+html body .app[data-gender="girl"] #view-dua .duahub-chips button[aria-pressed="true"]{
+  background:rgba(177,112,146,.34)!important;
+  border-color:rgba(250,213,222,.59)!important;
+  color:#fff1ed!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-card,
+html body .app[data-gender="girl"] #view-dua .duahub-card:nth-child(4n+2),
+html body .app[data-gender="girl"] #view-dua .duahub-card:nth-child(4n+3){
+  background:linear-gradient(107deg,#43303e,#302736)!important;
+  border-color:rgba(239,192,210,.26)!important;
+  box-shadow:0 10px 24px rgba(22,12,25,.18),inset 0 1px rgba(250,219,236,.05)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-card.cat-family{
+  background:linear-gradient(107deg,#443537,#322c31)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-card.cat-sleep{
+  background:linear-gradient(107deg,#373142,#292535)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-card.cat-protection{
+  background:linear-gradient(107deg,#443044,#2d2639)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-card-go,
+html body .app[data-gender="girl"] #view-dua .duahub-arrow{
+  background:rgba(236,187,205,.11)!important;
+  border-color:rgba(237,202,211,.33)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-section-title small,
+html body .app[data-gender="girl"] #view-dua .duahub-card-copy small{
+  color:#f0cf9d!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-detail-back{
+  background:rgba(48,27,44,.88)!important;
+  border-color:rgba(247,201,225,.37)!important;
+}
+html body .app[data-gender="girl"] #view-dua .duahub-textcard{
+  background:linear-gradient(145deg,#3b2a3d,#302434)!important;
+  border-color:rgba(243,195,216,.27)!important;
+}
+/* Do NOT overwrite .duahub-head/.duahub-detail-hero backgrounds:
+   they contain the actual artwork and live detail image source. */
+
+/* QUR'AN: eliminate the blue surrounding the artwork, not the artwork. */
+html body .app[data-gender="girl"] #view-quran .quran-page-head{
+  background:
+    radial-gradient(circle at 88% 18%,rgba(239,197,149,.12),transparent 27%),
+    linear-gradient(145deg,#42303e 0%,#32283a 64%,#261f2f 100%)!important;
+  border-bottom-color:rgba(244,191,212,.26)!important;
+}
+html body .app[data-gender="girl"] #view-quran .quran-page-head .kicker{
+  background:rgba(53,32,48,.58)!important;
+  border-color:rgba(245,197,214,.35)!important;
+}
+html body .app[data-gender="girl"] #view-quran .quran-hero{
+  background-color:#302435!important;
+  border-color:var(--q-line)!important;
+}
+html body .app[data-gender="girl"] #view-quran .quran-hero-copy{
+  background:linear-gradient(180deg,#463240 0%,#332737 100%)!important;
+}
+html body .app[data-gender="girl"] #view-quran .quran-hero-eyebrow,
+html body .app[data-gender="girl"] #view-quran .entry-kicker{
+  color:#f1d0af!important;
+}
+html body .app[data-gender="girl"] #view-quran .quran-actions{
+  background:#332737!important;
+}
+html body .app[data-gender="girl"] #view-quran .quran-action{
+  background:
+    radial-gradient(circle at 90% 8%,rgba(241,194,161,.08),transparent 33%),
+    linear-gradient(135deg,#513b49,#3b2c3d)!important;
+  border-color:rgba(249,204,226,.29)!important;
+  box-shadow:0 10px 25px rgba(23,13,30,.20)!important;
+}
+html body .app[data-gender="girl"] #view-quran .alphabet-entry{
+  background:linear-gradient(145deg,#443240,#302a39)!important;
+  border-color:var(--q-line)!important;
+}
+html body .app[data-gender="girl"] #view-quran .alphabet-entry .fgo{
+  background:rgba(67,39,57,.72)!important;
+  border-color:rgba(249,205,220,.34)!important;
+}
+html body .app[data-gender="girl"] #view-quran .surah-card{
+  background:#362a3b!important;
+  border-color:rgba(247,190,218,.30)!important;
+}
+html body .app[data-gender="girl"] #view-quran .surah-card::after{
+  background:linear-gradient(90deg,
+    rgba(30,19,30,.01) 0%,rgba(30,19,30,.08) 30%,
+    rgba(52,39,54,.66) 40%,rgba(54,41,56,.97) 52%,
+    #362a3b 62%,#362a3b 100%)!important;
+}
+html body .app[data-gender="girl"] #view-quran .surah-card .surah-go{
+  background:rgba(54,35,53,.85)!important;
+  border-color:rgba(248,199,220,.37)!important;
+}
+html body .app[data-gender="girl"] #view-quran .verse-card{
+  background:linear-gradient(135deg,#4b3545,#332838)!important;
+  border-color:var(--q-line)!important;
+}
+html body .app[data-gender="girl"] #view-quran .verse-card::after{
+  background:rgba(236,175,205,.13)!important;
+  border-color:rgba(243,198,211,.31)!important;
+}
+html body .app[data-gender="girl"] #view-quran .full-quran-listen{
+  background:linear-gradient(135deg,#4c3744,#302633)!important;
+  border-color:var(--q-line)!important;
+}
+
+/* PARENTS: offline management card and surrounding sections. */
+html body .app[data-gender="girl"] #view-parents .kids-offline-library{
+  background:linear-gradient(145deg,#493547,#322a3a)!important;
+  border-color:rgba(246,194,214,.32)!important;
+  box-shadow:0 13px 30px rgba(28,15,27,.22)!important;
+}
+html body .app[data-gender="girl"] #view-parents .kids-offline-note{
+  color:#e5d7df!important;
+}
+html body .app[data-gender="girl"] #view-parents .parent-card,
+html body .app[data-gender="girl"] #view-parents .info-card{
+  background:linear-gradient(145deg,#42313d,#312638)!important;
+  border-color:rgba(245,197,214,.26)!important;
+}
+html body .app[data-gender="girl"] #view-parents .parent-progress-stat{
+  background:rgba(189,127,161,.14)!important;
+  border-color:rgba(247,208,226,.19)!important;
+}
+@media(max-width:699px){
+  /* Header image remains the exact existing girls portrait. Only the
+     blue mask under the picture transitions into aubergine instead. */
+  html body .app[data-gender="girl"] #view-parents.view > .page-head.page-head::before{
+    background:linear-gradient(180deg,
+      transparent 0,
+      transparent calc(100vw * .43),
+      rgba(43,28,43,.72) calc(100vw * .63),
+      #2b2034 calc(100vw * .75),
+      #2b2034 100%)!important;
+  }
+}
+
+/* Hörbücher: retain every cover/character image and soften plain containers. */
+html body .app[data-gender="girl"] #view-stories .story-row{
+  background:linear-gradient(135deg,#483643,#30293a)!important;
+  border-color:rgba(245,195,215,.25)!important;
+}
+html body .app[data-gender="girl"] #view-stories .story-question,
+html body .app[data-gender="girl"] #view-stories .story-answer{
+  background:rgba(78,49,73,.46)!important;
+  border-color:rgba(245,192,212,.22)!important;
+}
+html body .app[data-gender="girl"] #view-stories .story-answer.correct{
+  background:rgba(70,118,87,.36)!important;
+}
+html body .app[data-gender="girl"] #view-stories .story-answer.wrong{
+  background:rgba(141,66,80,.35)!important;
+}
+
+/* Day schedule plus return to page never change image or navigation geometry. */
+html body .app[data-gender="girl"] #view-today .kids-salah-home-world .kids-salah-open-day{
+  background:linear-gradient(90deg,rgba(75,43,66,.90),rgba(67,43,66,.82))!important;
+}

@@ -1,0 +1,2540 @@
+{
+  "schemaVersion": 1,
+  "version": "academy-voice-plan-v26-20261012",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "purpose": "Five verified Qurʾān/Ṣaḥīḥ lessons with three distinct age scripts, awaiting exact owner V4 audio; no generated files.",
+  "policy": {
+    "nativeTtsFallback": false,
+    "arabicQuranRecitationIsSeparate": true,
+    "reviewRequiredBeforePublicPlayback": true,
+    "autoPublishUnreviewed": false
+  },
+  "lessonCount": 5,
+  "curriculumIds": [
+    "fiqh-reinheit-unterscheiden",
+    "aqidah-quran-allahs-wort",
+    "aqidah-sirah-adam-erschoepfung",
+    "adab-morgen-dhikr",
+    "adab-eltern-freundlich"
+  ],
+  "phraseCount": 149,
+  "phrases": [
+    {
+      "text": "Abū Hurayrah überlieferte einen authentischen Bericht zum Friedensgruß Ādams.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ādam war der erste Mensch.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ādam war der erste Mensch. Allah hat ihn erschaffen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah berichtet im Qurʾān von der Erschaffung Ādams. Der Prophet ﷺ berichtete ebenfalls über Ādam.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah erschuf Ādam und lehrte ihn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Allah erschuf Ādam.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah erschuf Ādam. Wir lernen nur, was Qurʾān und authentische Sunnah darüber berichten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Allah erschuf ihn aus Erde.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Allah lädt uns ein, oft an Ihn zu denken. Der Prophet ﷺ nannte eine schöne Lobpreisung für den Morgen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah nennt den Qurʾān eine Rechtleitung. Der Prophet ﷺ lobte das Lernen und Lehren des Qurʾān.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah nennt im Qurʾān Waschungen für das Gebet. Der Prophet ﷺ lehrte, dass Reinheit wichtig ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah ruft im Qurʾān zum häufigen Gedenken auf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Allah sagt, dass wir zu unseren Eltern gütig sein sollen. Der Prophet ﷺ sprach über die gute Behandlung von Mutter und Vater.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Alltägliche Hygiene schützt vor Schmutz und dient der Gesundheit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Am Morgen erinnern wir uns an Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Am Morgen können wir an Allah denken und Ihn loben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Auch dem Vater begegnen wir mit Respekt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Auf die Frage nach der Person, die besonders gute Behandlung verdient, nannte der Prophet ﷺ dreimal die Mutter und dann den Vater.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Bei Allah ist das Beispiel von ʿĪsā wie das von Ādam. Er erschuf ihn aus Erde, dann sagte Er zu ihm: Sei!, und er war. Der Prophet ﷺ berichtete, dass Allah Ādam erschuf und ihn lehrte, die Engel mit dem Friedensgruß zu begrüßen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Bei Fragen zu Einzelregeln lernen wir von einer fachkundigen Lehrperson.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Bei Gefahr, Gewalt oder ungerechten Forderungen darf und soll ein Kind Hilfe bei vertrauenswürdigen Erwachsenen suchen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Bei Sorgen darf ich offen sprechen und mir Hilfe holen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Beim Hören hören wir eine echte Rezitation.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der arabische Qurʾān ist Allahs Offenbarung, nicht eine deutsche Nacherzählung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Ḥadīṯ in al-Buḫārī 5971 betont besonders die Rechte der Mutter.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ berichtete auch vom Friedensgruß Ādams.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ berichtete, dass Allah Ādam erschuf und ihn lehrte, die Engel mit dem Friedensgruß zu begrüßen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ betonte besonders die gute Behandlung der Mutter.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ betonte die große Bedeutung der rituellen Reinheit für den Glauben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte Subḥāna llāhi wa-bi-ḥamdihī.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lobte diejenigen, die Qurʾān lernen und lehren.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ nannte die Lobpreisung Subḥāna llāhi wa-bi-ḥamdihī für den Morgen und Abend und erwähnte den besonderen Lohn für hundert Wiederholungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān benennt Bestandteile des Wuḍūʾ; Muslim 223 berichtet den besonderen religiösen Wert der Reinheit. Wir setzen nicht jede Hygienemaßnahme einer rituellen Waschung gleich.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān ist Allahs Wort.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān ist Allahs Wort. Wir hören ruhig zu.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān spricht allgemein von Güte gegenüber Eltern. Die authentische Sunnah erläutert die besondere Stellung von Mutter und Vater, ohne zu verlangen, dass Kinder Gefahren verschweigen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān wurde auf Arabisch offenbart.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān-Vers beschreibt das allgemeine Gedenken. Der Ḥadīṯ nennt die genaue Formel und Zahl für den erwähnten Lohn. Wir halten diese Angaben auseinander.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die genannte besondere Belohnung bezieht sich auf hundert Wiederholungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Dies ist das Buch, an dem kein Zweifel besteht: eine Rechtleitung für die Gottesfürchtigen. Der Prophet ﷺ lehrte den besonderen Wert dessen, der den Qurʾān lernt und ihn weiterlehrt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ḏikr heißt: an Allah denken und Ihn loben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ein Erwachsener zeigt mir die einzelnen Schritte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ein neuer Morgen ist da.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Eine deutsche Übersetzung erklärt seine Bedeutung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Gutes Verhalten zeigt sich in freundlichen Worten und angemessener Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ich darf ehrlich sagen, wenn ich Angst habe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich darf in meinem Tempo üben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich darf nach der Bedeutung fragen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich gedenke Allahs ohne Eile und lerne die Bedeutung von Subḥāna llāhi wa-bi-ḥamdihī.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich halte mich sauber und lerne die Gebetswaschung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich höre Qurʾān mit Respekt und lerne Schritt für Schritt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich höre zu, wenn sie mit mir sprechen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann eine kurze Lobpreisung lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann Mama und Papa freundlich grüßen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich lerne den Ausdruck und seine Bedeutung Schritt für Schritt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich lerne den Qurʾān mit Respekt und übe in Ruhe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich lerne eine authentische Lobpreisung und verstehe ihren Sinn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich lerne ohne Eile.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich spreche freundlich mit meinen Eltern und hole Hilfe, wenn ich sie brauche.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich spreche freundlich, höre zu und kann bei Schwierigkeiten um Hilfe bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich unterscheide gewöhnliche Sauberkeit von der Gebetswaschung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich weiß, dass Allah Ādam erschuf; wir erfinden keine Einzelheiten über ihn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Im Vers wird beschrieben, dass Allah Ādam aus Erde erschuf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "In Qurʾān 2:2 heißt das Buch eine Rechtleitung. Nach al-Buḫārī 5027 ist das Lernen und Weiterlehren des Qurʾān besonders wertvoll.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "In Qurʾān 5:6 werden Gesicht und Arme genannt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Mama und Papa verdienen freundliche Worte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Muslim 2692 nennt Subḥāna llāhi wa-bi-ḥamdihī am Morgen und Abend.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Nach dem Spielen wasche ich schmutzige Hände.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "O ihr, die ihr glaubt, gedenkt Allahs in häufigem Gedenken. Der Prophet ﷺ nannte die Lobpreisung Subḥāna llāhi wa-bi-ḥamdihī für den Morgen und Abend und erwähnte den besonderen Lohn für hundert Wiederholungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 17:23 fordert Güte und respektvollen Umgang mit Eltern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 17:23 nennt die Güte gegenüber Eltern. In al-Buḫārī 5971 wird die Mutter dreimal vor dem Vater als besonders anspruchsberechtigt genannt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 17:23 ruft zu Güte gegenüber Eltern auf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 2:2 beschreibt die Schrift als Rechtleitung. Al-Buḫārī 5027 nennt ʿUṯmān ibn ʿAffān als Überlieferer; wir erfinden deshalb kein eigenes Zitat von ihm.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 3:59 behandelt den Vergleich mit ʿĪsā, während al-Buḫārī 3326 in seinem eigenen Zusammenhang den Friedensgruß beschreibt. Beides darf nicht zu einem erfundenen Zitat verbunden werden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 3:59 erinnert an die Erschaffung Ādams.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 3:59 nennt die Erschaffung Ādams aus Erde. Ṣaḥīḥ al-Buḫārī 3326 erwähnt Ādam und den Friedensgruß.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 3:59 stellt die Erschaffung Ādams in einem bestimmten Vergleich dar.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 33:41 befiehlt das häufige Gedenken. Muslim 2692 nennt eine authentische Lobpreisung am Morgen und Abend.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 33:41 ruft zu viel Ḏikr auf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 5:6 beschreibt die Gebetswaschung. Ṣaḥīḥ Muslim 223 betont den hohen Wert der Reinigung, ohne gewöhnliches Aufräumen mit Wuḍūʾ gleichzusetzen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 5:6 legt Waschungen bei Wuḍūʾ dar.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Rituelle Reinheit bezieht sich auf die Voraussetzungen gottesdienstlicher Handlungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Sauberkeit und religiöse Reinheit sind miteinander verbunden, aber nicht dasselbe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Sie heißt Wuḍūʾ: Waschung vor dem Gebet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Übersetzungen geben Bedeutungen wieder und sind selbst keine originalen arabischen Verse.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Und zu den Eltern sollt ihr gütig sein. (Auszug) Auf die Frage nach der Person, die besonders gute Behandlung verdient, nannte der Prophet ﷺ dreimal die Mutter und dann den Vater.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Vor dem Gebet gibt es eine besondere Waschung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Vor dem Gebet lernen wir, rein zu sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich Hilfe brauche, frage ich eine sichere Person.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ihr zum Gebet aufsteht, wascht eure Gesichter und Hände bis zu den Ellenbogen. (Auszug) Der Prophet ﷺ betonte die große Bedeutung der rituellen Reinheit für den Glauben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wenn meine Hände schmutzig sind, wasche ich den Schmutz ab.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir begegnen unseren Eltern mit guten Worten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir betrachten Offenbarung, arabischen Originaltext und die Erklärung auf Deutsch.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir danken Allah für diesen Tag.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir erfinden weder zusätzliche Worte noch machen wir daraus eine Kinderpflicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir erzählen die Überlieferung ohne Bilder von Propheten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir halten unsere Hände sauber. Vor dem Gebet lernen wir eine besondere Waschung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir hören einen Vers aus dem Qurʾān.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir hören nur Geschichten, die gute Quellen haben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir hören und lernen Allahs Wort.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir leiten aus einer Erzählung keine unbelegten Einzelheiten oder Illustrationen ab.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen den Unterschied zwischen Qurʾān und deutscher Erklärung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen etwas aus dem Qurʾān über Ādam, ohne eine erfundene Geschichte hinzuzufügen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen mit einem geprüften Text und authentischer Rezitation.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen, warum Eltern liebevollen Umgang verdienen und wie wir offen miteinander sprechen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen, was Ḏikr bedeutet: Allah mit guten Worten gedenken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir sprechen respektvoll über ihn.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir üben die Gebetswaschung nach der Sunnah mit Anleitung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden das Gebot guter Elternbehandlung von der Pflicht, die eigene Sicherheit ernst zu nehmen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden die allgemeine Aufforderung zum Gedenken und die konkrete Überlieferung zur Lobpreisung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden die sichere Qurʾān-Aussage, den Ḥadīṯ und nicht belegte Erzählungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden Ṭahārah im Fiqh von allgemeiner Hygiene.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wuḍūʾ ist eine besondere Reinigung für das Gebet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "ʿUṯmān ibn ʿAffān überlieferte die Lehre vom Lernen und Weiterlehren des Qurʾān.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre das Thema mit einem eigenen sicheren Beispiel: Ādam عليه السلام kennenlernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre das Thema mit einem eigenen sicheren Beispiel: Der Qurʾān – Allahs Wort.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre das Thema mit einem eigenen sicheren Beispiel: Mit Eltern liebevoll umgehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre das Thema mit einem eigenen sicheren Beispiel: Morgens Allah gedenken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre das Thema mit einem eigenen sicheren Beispiel: Reinheit und Sauberkeit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Warum darf die Zahl hundert im Ḥadīṯ nicht verändert oder als Pflicht für kleine Kinder dargestellt werden?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Warum dürfen wir aus einer nicht belegten Erzählung keine neue Aussage über einen Propheten machen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Warum ersetzt gewöhnliches Händewaschen nicht automatisch die vollständige Gebetswaschung?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Warum passen gutes Verhalten zu den Eltern und das Bitten um Hilfe in gefährlichen Situationen zusammen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was ist der Unterschied zwischen arabischem Qurʾān-Vers und deutscher Bedeutungsübersetzung?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was kannst du hier Gutes tun?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Was steht in der Quelle und was ist unsere heutige Unterrichtsanwendung?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was üben wir heute?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Welche Entscheidung passt am besten zu den beiden Quellen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Welche Handlung passt zu unserem Unterricht?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Woher stammen unsere religiösen Aussagen?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Allah erschuf Ādam. Wir lernen nur, was Qurʾān und authentische Sunnah darüber berichten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Aus dem Qurʾān und der authentischen Sunnah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich darf Allah gedenken und die Lobpreisung in Ruhe lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich frage freundlich, wo das im Qurʾān oder in der Sunnah steht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich gedenke Allahs ohne Eile und lerne die Bedeutung von Subḥāna llāhi wa-bi-ḥamdihī.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich halte mich sauber und lerne die Gebetswaschung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich höre aufmerksam zu und frage nach der Bedeutung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich höre Qurʾān mit Respekt und lerne Schritt für Schritt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich spreche freundlich mit meinen Eltern und hole Hilfe, wenn ich sie brauche.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich spreche ruhig und bitte um einen passenden Moment.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich wasche meine Hände und lerne Wuḍūʾ zusätzlich.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Andere mit Absicht verletzen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Aus frei erfundenen Berichten ohne Quelle.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich sage anderen Kindern, sie müssen hundertmal aufsagen, sonst machen sie etwas Verbotenes.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-morgen-dhikr",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich sage: Händewaschen und Wuḍūʾ sind immer genau dasselbe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "fiqh-reinheit-unterscheiden",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich schreie absichtlich und verletze sie mit Worten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-eltern-freundlich",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich spiele absichtlich laut darüber.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-quran-allahs-wort",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich übernehme die Geschichte ungeprüft als Tatsache.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-sirah-adam-erschoepfung",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    }
+  ]
+}

@@ -4,6 +4,68 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c2636">
+<script id="kids-profile-first-paint-v1348">
+(function(){
+  "use strict";
+  var gender="",age="";
+  try{
+    var id=localStorage.getItem("kids.activeProfile");
+    var profiles=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
+    var p=Array.isArray(profiles)?profiles.find(function(x){return String(x&&x.id)===String(id)}):null;
+    if(p&&(p.gender==="girl"||p.gender==="boy")){
+      gender=p.gender;age=p.age||"";
+    }else if(!id&&localStorage.getItem("kids.guest.v1")==="1"){
+      var g=localStorage.getItem("kids.guest.gender.v1");
+      if(g==="girl"||g==="boy")gender=g;
+      age=localStorage.getItem("kids.age")||"";
+    }
+  }catch(e){}
+  document.documentElement.dataset.kidsBootGender=gender||"neutral";
+  document.documentElement.dataset.kidsBootAge=age;
+  if(gender==="girl"){
+    var meta=document.querySelector('meta[name="theme-color"]');
+    if(meta)meta.setAttribute("content","#241b35");
+  }
+})();
+</script>
+<style id="kids-home-first-paint-v1348">
+/* Block old temporary blue painting without hiding the entire page.
+   The same APPROVED final hero-home.png remains in both profiles. */
+html[data-kids-boot-gender="girl"],
+html[data-kids-boot-gender="girl"] body{
+  background:#241b35!important;
+}
+html[data-kids-boot-gender="girl"] body .app:not([data-gender="boy"]){
+  background:#241b35!important;
+  background-image:none!important;
+}
+html[data-kids-boot-gender="boy"],
+html[data-kids-boot-gender="boy"] body{
+  background:#0c2636!important;
+}
+/* Before prayer-stage.js wraps .hero into .kids-salah-home-world,
+   show ONLY the final mosque photograph instead of legacy warm-world art. */
+html body .app #view-today > .hero{
+  background:
+    linear-gradient(180deg,rgba(3,16,32,.10) 0%,rgba(4,22,38,.14) 39%,rgba(3,23,39,.52) 68%,#082536 100%),
+    url("/kids/assets/kids-salah-v1272/hero-home.png?v=1274") center 44%/cover no-repeat!important;
+  background-color:#082536!important;
+}
+html body .app[data-gender="girl"] #view-today > .hero{
+  background:
+    linear-gradient(180deg,rgba(31,19,42,.11) 0%,rgba(37,23,45,.17) 41%,rgba(44,26,48,.47) 69%,#2d203b 100%),
+    url("/kids/assets/kids-salah-v1272/hero-home.png?v=1274") center 44%/cover no-repeat!important;
+  background-color:#2d203b!important;
+}
+html body .app #view-today > .hero::before,
+html body .app #view-today > .hero::after{
+  content:none!important;display:none!important;
+  background:none!important;animation:none!important;
+}
+html body .app #view-today > .hero :is(.cloud,.shooting-star,.city,.arch,.dune,.lantern){
+  display:none!important;animation:none!important;
+}
+</style>
 <!-- KIDS_FIRST_PAINT_HERO_V1313: same exact URL as final homepage CSS, requested before styles/scripts -->
 <link rel="preload" as="image" href="/kids/assets/kids-salah-v1272/hero-home.png?v=1274" fetchpriority="high">
 <link rel="stylesheet" href="https://use.typekit.net/jka5jda.css">
@@ -197,7 +259,7 @@ var(--quiz-art,linear-gradient(180deg,#315c78 0%,#5a8f8a 48%,#ba8b5f 100%));back
 .quiz-answer.correct{background:rgba(82,196,132,.15);border-color:rgba(82,196,132,.36);animation:quizCorrectPop .24s ease-out}
 .quiz-answer.wrong{background:rgba(235,83,83,.15);border-color:rgba(235,83,83,.36)}
 .quiz-answer.reveal{background:rgba(226,189,114,.13);border-color:rgba(226,189,114,.28)}
-.quiz-feedback{text-align:center;min-height:48px;margin:13px 0 2px;font-size:15px;font-weight:900}
+.quiz-feedback{text-align:center;min-height:48px;margin:13px auto 2px;font-size:clamp(14px,2.5vw,17px);line-height:1.48;font-weight:850;max-width:min(100%,680px);overflow-wrap:break-word;text-wrap:pretty}
 .quiz-feedback.good{color:#caffe0}.quiz-feedback.bad{color:#ffc3c3}
 .quiz-source{min-height:18px;text-align:center;color:var(--soft);font-size:10px;line-height:1.4;margin:2px 8px 9px}
 .quiz-source strong{color:var(--sage)}
@@ -2344,6 +2406,73 @@ html[data-sky="day"] .sky-rays,html[data-sky="dawn"] .sky-rays{opacity:.7}
 .kids-join button,.kids-join-go{min-height:52px;border:0;border-radius:16px;background:#e2bd72;color:#1a2430;font-weight:800;cursor:pointer}
 .kids-join .ghost{background:rgba(255,255,255,.08);color:#fff}
 .kids-join input{width:100%;min-height:48px;border-radius:14px;border:0;margin:0 0 10px;padding:0 12px;background:rgba(255,255,255,.08);color:#fff}
+.kids-join .join-feedback{display:block;margin:10px 0 8px;padding:10px 12px;border-radius:12px;line-height:1.4;font-size:14px;font-weight:650;background:rgba(127,196,205,.12);color:#f6f0de;border:1px solid rgba(232,203,151,.35)}
+.kids-join .join-feedback[hidden],.kids-join #joinLoginExisting[hidden]{display:none!important}
+.kids-join .join-feedback[data-kind="error"]{background:rgba(174,68,71,.22);border-color:rgba(249,158,159,.65);color:#fff2ec}
+.kids-join .join-feedback[data-kind="success"]{background:rgba(73,149,111,.20);color:#e3ffed}
+.kids-join #joinSave:disabled,.kids-join #joinLoginExisting:disabled{cursor:wait;opacity:.75}
+/* KIDS ACCOUNT LOGIN V2: legible action for both profiles and all ages. */
+#view-parents #profileBring{
+ display:flex!important;align-items:center!important;justify-content:center!important;
+ width:100%!important;min-height:56px!important;padding:12px 16px!important;
+ border:2px solid #e5c47d!important;border-radius:17px!important;
+ background:#163d4b!important;color:#fff9eb!important;
+ -webkit-text-fill-color:#fff9eb!important;text-shadow:none!important;
+ opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+ font-weight:850!important;font-size:clamp(15px,4.1vw,19px)!important;
+ line-height:1.25!important;text-align:center!important;box-shadow:0 4px 14px rgba(0,0,0,.15)!important;
+ -webkit-tap-highlight-color:transparent;
+}
+.app[data-gender="girl"] #view-parents #profileBring{
+ background:#482e58!important;color:#fff6f1!important;
+ -webkit-text-fill-color:#fff6f1!important;border-color:#edc5d7!important;
+}
+#view-parents #profileBring:focus-visible,
+#kidsJoin #deviceLoginSubmit:focus-visible,
+#kidsJoin #deviceLoginCancel:focus-visible{
+ outline:3px solid #f9dc98!important;outline-offset:3px!important;
+}
+#kidsJoin .kids-join-card{
+ max-height:calc(100dvh - 32px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px));
+ overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;
+}
+#kidsJoin [data-step="login"] label{
+ display:block;margin:10px 0 5px;color:#fff4d7;font-size:15px;font-weight:750;
+}
+#kidsJoin [data-step="login"] input{
+ display:block;width:100%;font-size:16px;box-sizing:border-box;
+ border:1px solid rgba(229,196,125,.48);
+ background:#253e50;color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+#kidsJoin [data-step="login"] input::placeholder{color:#c9d3d9;opacity:1}
+#kidsJoin #deviceLoginSubmit{display:block;width:100%;background:#e5c47d;color:#112536}
+#kidsJoin #deviceLoginSubmit:disabled{opacity:.7;cursor:wait}
+#kidsJoin #deviceLoginStatus[hidden]{display:none!important}
+/* KIDS ACCOUNT SUPPORT V1 · parent-initiated help without password collection. */
+#kidsJoin .kids-support-link,#view-parents .kids-support-link{
+ display:flex;align-items:center;justify-content:center;
+ box-sizing:border-box;width:100%;min-height:48px;
+ margin-top:10px;padding:10px 13px;border-radius:14px;
+ border:1.5px solid #e5c47d;background:#163d4b;
+ color:#fff9eb!important;-webkit-text-fill-color:#fff9eb!important;
+ font-size:clamp(15px,3.8vw,18px);font-weight:800;
+ line-height:1.35;text-align:center;text-decoration:none;
+ overflow-wrap:anywhere;-webkit-tap-highlight-color:transparent;
+}
+.app[data-gender="girl"] #view-parents .kids-support-link{
+ background:#482e58;border-color:#edc5d7;color:#fff6f1!important;
+ -webkit-text-fill-color:#fff6f1!important;
+}
+#kidsJoin .kids-support-link:focus-visible,#view-parents .kids-support-link:focus-visible{
+ outline:3px solid #f9dc98;outline-offset:3px;
+}
+#kidsJoin .kids-support-privacy,#view-parents .kids-support-privacy{
+ margin:8px 0 6px;font-size:clamp(12px,3.3vw,14px);
+ line-height:1.45;color:#d6dbdc;
+ overflow-wrap:anywhere;
+}
+#view-parents .kids-support-privacy{color:#f1e8d7}
+
 .kids-join .step{display:none}
 .kids-join .step.on{display:block}
 .profile-list{display:grid;gap:8px;margin-top:8px}
@@ -2724,7 +2853,7 @@ html:not([data-view="today"]) .view.active{
 <link rel="stylesheet" href="/kids/prophet-stories.css?v=43">
 <link rel="stylesheet" href="/kids/mubashshirun-stories.css?v=29">
 <link rel="stylesheet" href="/kids/sahabiyyat-stories.css?v=7">
-<link rel="stylesheet" href="/kids/story-follow-reader.css?v=10">
+<link rel="stylesheet" href="/kids/story-follow-reader.css?v=11">
 <link rel="stylesheet" href="/kids/story-hub.css?v=12">
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1152">
@@ -2850,7 +2979,7 @@ html:not([data-view="today"]) .view.active{
 </style>
 
 <link rel="stylesheet" href="/kids/profile-stability-v1256.css?v=1258" data-kids-profile-stability="1256">
-<link rel="stylesheet" href="/kids/prayer-stage-v1261.css?v=1320" data-kids-salah-stage="1275">
+<link rel="stylesheet" href="/kids/prayer-stage-v1261.css?v=1330" data-kids-salah-stage="1275">
 <style id="kidsTapFocusSafeV821">
 /* KIDS APP TOUCH FOCUS SAFETY V8.2.1 – no grey Android rectangular tap flash */
 html body :where(a,button,summary,label,[role="button"],[role="tab"],[tabindex],
@@ -2943,8 +3072,23 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
       <input id="joinName" maxlength="24" placeholder="Name des Kindes" autocomplete="off">
       <input id="joinPass" type="password" maxlength="40" placeholder="Passwort" autocomplete="new-password">
       <button type="button" id="joinSave">Konto anlegen</button>
+      <p id="joinStatus" class="join-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p>
+      <button type="button" id="joinLoginExisting" class="ghost" style="margin-top:8px;width:100%" hidden>Vorhandenes Konto anmelden</button>
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Ohne Konto weitermachen</button>
       <button type="button" class="ghost" data-back="age" style="margin-top:8px;width:100%">Zurück</button>
+    </div>
+    <div class="step" data-step="login" role="group" aria-labelledby="kidsExistingLoginTitle">
+      <h2 id="kidsExistingLoginTitle">Vorhandenes Kind anmelden</h2>
+      <p>Mit dem bisherigen Anmeldenamen und Passwort den gespeicherten Lernstand von deinem anderen Gerät laden.</p>
+      <label for="deviceLoginName">Anmeldename des Kindes</label>
+      <input type="text" id="deviceLoginName" maxlength="24" autocomplete="username" autocapitalize="none" spellcheck="false" placeholder="Name des Kindes">
+      <label for="deviceLoginPass">Passwort</label>
+      <input type="password" id="deviceLoginPass" maxlength="40" autocomplete="current-password" placeholder="Passwort">
+      <button type="button" id="deviceLoginSubmit">Anmelden und Lernstand laden</button>
+      <p id="deviceLoginStatus" class="join-feedback" role="status" aria-live="polite" aria-atomic="true" hidden></p>
+      <a class="kids-support-link" href="mailto:dar.al.tauhid91@gmail.com?subject=DAR%20AL%20TAWHID%20KIDS%20-%20Kontohilfe&amp;body=As-salamu%20alaykum%2C%0Aich%20ben%C3%B6tige%20Hilfe%20beim%20Zugang%20zu%20einem%20Kinderkonto.%0A%0AIch%20werde%20keine%20Passw%C3%B6rter%20oder%20sensiblen%20Kinderdaten%20per%20E-Mail%20senden." aria-label="DĀR AL TAWḤĪD KIDS Support wegen eines Kinderkontos per E-Mail kontaktieren">Passwort vergessen? Support kontaktieren</a>
+      <p class="kids-support-privacy">Bitte keine Passwörter oder sensiblen Kinderdaten per E-Mail senden.</p>
+      <button type="button" id="deviceLoginCancel" class="ghost" style="margin-top:9px;width:100%">Abbrechen</button>
     </div>
       <button type="button" id="joinCancel" class="ghost" style="display:none;margin-top:10px;width:100%">Abbrechen</button>
   </div>
@@ -2952,6 +3096,13 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 
 
 <div class="app">
+  <script id="kids-profile-apply-first-paint-v1348">
+  (function(){
+    var el=document.currentScript.parentElement;
+    var g=document.documentElement.dataset.kidsBootGender;
+    if(el&&(g==="girl"||g==="boy"))el.setAttribute("data-gender",g);
+  })();
+  </script>
   <div class="ambient"></div>
   <div class="dev-ribbon" hidden>KIDS · V1.09.23</div>
 
@@ -3011,8 +3162,8 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
       <div class="big-choice-grid">
         <button class="choice story" data-go="stories">
           <span class="icon"></span>
-          <strong>Hörbücher</strong>
-          <small>Geschichten hören & mitlesen</small>
+          <strong>Hörgeschichten</strong>
+          <small>Entdecken, hören und mitlesen</small>
           
         </button>
 
@@ -3037,8 +3188,12 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
           
         </button>
       </div>
+      <button class="kids-salaf-feature kids-tap-card" type="button" data-go="salaf" aria-label="Schätze der Salaf entdecken">
+        <span class="kids-salaf-feature-art" aria-hidden="true"></span>
+        <span class="kids-salaf-feature-copy"><small>GESCHICHTEN · WERTVOLLE LEHREN</small><strong>Schätze der Salaf</strong><span>Gute Vorbilder entdecken und von ihnen lernen</span></span>
+      </button>
       <a href="/kids/akademie/index.html" class="academy-pilot-entry" aria-label="Meine Lernakademie öffnen">
-        <span class="academy-pilot-text"><small>LERNEN · MEINE AKADEMIE</small><strong>Meine Lernakademie</strong><span>Ṣidq · Wahrhaftigkeit · 5 Unterrichtsschritte</span></span>
+        <span class="academy-pilot-text"><small>LERNEN · MEINE AKADEMIE</small><strong>Meine Lernakademie</strong><span>Spannende Lektionen · Schritt für Schritt lernen</span></span>
         <span class="academy-pilot-arrow" aria-hidden="true">→</span>
       </a>
 
@@ -3058,9 +3213,9 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
     <section id="view-stories" class="view">
       <header class="stories-world-head stories-hero" aria-labelledby="storiesHeroTitle">
         <div class="stories-hero-copy">
-          <span class="stories-world-kicker">HÖRBÜCHER · WISSEN · ĪMĀN</span>
-          <h2 id="storiesHeroTitle">Hörbücher</h2>
-          <p>Wähle deine Hörwelt und entdecke ihre Inhalte – hören, lesen oder mitlesen, passend zur Altersstufe.</p>
+          <span class="stories-world-kicker">GESCHICHTEN · WISSEN · ĪMĀN</span>
+          <h2 id="storiesHeroTitle">Hören</h2>
+          <p>Propheten, Gefährtinnen, Gefährten und schöne Geschichten entdecken – zum Hören, Lesen und Mitlesen.</p>
         </div>
       </header>
 
@@ -3083,7 +3238,23 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
         </span>
       </button>
 
+      <div class="kids-listening-shortcuts" aria-label="Weitere Hörwelten">
+        <div class="kids-listening-shortcuts-title">Noch mehr zum Entdecken</div>
+        <div class="kids-listening-shortcuts-grid">
+          <button type="button" class="kids-listen-shortcut kids-tap-card" data-go="salaf" aria-label="Schätze der Salaf öffnen">
+            <span class="kids-listen-shortcut-art salaf" aria-hidden="true"></span>
+            <span class="kids-listen-shortcut-copy"><strong>Schätze der Salaf</strong><small>Schöne Geschichten und wertvolle Lehren</small></span>
+          </button>
+          <button type="button" class="kids-listen-shortcut kids-tap-card" id="kidsListenDuaEntry" aria-label="Meine Duʿāʾ öffnen">
+            <span class="kids-listen-shortcut-art dua" aria-hidden="true"></span>
+            <span class="kids-listen-shortcut-copy"><strong>Meine Duʿāʾ</strong><small>Hören, nachsprechen und verstehen</small></span>
+          </button>
+        </div>
+      </div>
+
     </section>
+
+    <section id="view-salaf" class="view" aria-label="Schätze der Salaf"></section>
 
     <section id="view-quran" class="view">
       <div class="page-head quran-page-head">
@@ -3164,7 +3335,9 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
           <button type="button" id="profileAskCancel" class="ghost">Abbrechen</button>
         </div>
         <button type="button" id="profileAdd" class="daily-start" style="margin-top:10px">Konto anlegen</button>
-        <button type="button" id="profileBring" class="ghost" style="margin-top:8px;width:100%">Vorhandenes Kind anmelden</button>
+        <button type="button" id="profileBring" aria-label="Vorhandenes Kinderkonto anmelden und Lernstand laden" class="ghost" style="margin-top:8px;width:100%">Vorhandenes Kind anmelden</button>
+        <a class="kids-support-link kids-support-link-parent" href="mailto:dar.al.tauhid91@gmail.com?subject=DAR%20AL%20TAWHID%20KIDS%20-%20Kontohilfe&amp;body=As-salamu%20alaykum%2C%0Aich%20ben%C3%B6tige%20Hilfe%20beim%20Zugang%20zu%20einem%20Kinderkonto.%0A%0AIch%20werde%20keine%20Passw%C3%B6rter%20oder%20sensiblen%20Kinderdaten%20per%20E-Mail%20senden." aria-label="DĀR AL TAWḤĪD KIDS Support für Kinderkonten per E-Mail kontaktieren">Hilfe mit einem Kinderkonto? Support kontaktieren</a>
+        <p class="kids-support-privacy">Support: dar.al.tauhid91@gmail.com · Bitte keine Passwörter verschicken.</p>
       </div>
 
     </section>
@@ -3172,7 +3345,8 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 
   <nav class="bottom-nav" aria-label="Hauptnavigation">
     <button class="nav-btn active" data-target="today"><span class="ico"></span><span class="lab">Heute</span></button>
-    <button class="nav-btn" data-target="stories"><span class="ico"></span><span class="lab">Hörbücher</span></button>
+    <button class="nav-btn" data-target="stories"><span class="ico"></span><span class="lab">Hören</span></button>
+    <button class="nav-btn" data-target="salaf" aria-label="Schätze der Salaf"><span class="ico"></span><span class="lab">Schätze</span></button>
     <button class="nav-btn" data-target="quran"><span class="ico"></span><span class="lab">Qurʾān</span></button>
     <button class="nav-btn" data-target="parents"><span class="ico"></span><span class="lab">Eltern</span></button>
   </nav>
@@ -3343,7 +3517,7 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
+const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1410";
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -3684,7 +3858,9 @@ function launchNextDailyStep(){
   var next=plan.find(function(s){return !dailyDone(s.id)});
   if(next)launchDailyStep(next.id);
 }
-/* KIDS_TAB_POSITION_STABILITY_V1318: fix iOS document/shell scroll split on tabs. */
+/* KIDS_TAB_POSITION_STABILITY_V1318: reset every possible iOS scroll layer.
+   Synchronize data-view BEFORE measuring the new page; correct WebKit's
+   post-layout scroll anchoring for two frames without affecting detail readers. */
 function kidsResetMainScroll(){
   var scroller=document.querySelector(".shell");
   if(scroller)scroller.scrollTop=0;
@@ -5504,8 +5680,20 @@ function spokenChoices(q){
 }
 function quizPrompt(q){
   if(!q)return"";
-  if(currentKidsQuizAgeBand()==="4-6"&&isYesNoAnswers(q.answers))return q.question+" Ja oder Nein?";
-  return q.question+" "+spokenChoices(q);
+  var old=currentKidsQuizAgeBand()==="4-6"&&isYesNoAnswers(q.answers)?q.question+" Ja oder Nein?":q.question+" "+spokenChoices(q);
+  return window.DARKidsQuizV4?window.DARKidsQuizV4.pick(q,"questionAudioText",old):old;
+}
+function quizV4Text(q,part,old){
+  return window.DARKidsQuizV4?window.DARKidsQuizV4.pick(q,part,old):String(old||"");
+}
+function quizAcademyPraiseText(q){
+  // The visible blessing is always Islamic. Only use newly rendered audio after the exact V4 clip exists.
+  var voice=window.DARKidsQuizV4&&window.DARKidsQuizV4.speech(q);
+  return String(voice&&voice.correctAudioText||q&&q.success||"Sehr gut!");
+}
+function quizAcademyRetryText(q){
+  var voice=window.DARKidsQuizV4&&window.DARKidsQuizV4.speech(q);
+  return String(voice&&voice.retryAudioText||q&&q.retry||"Versuch es noch einmal!");
 }
 function storyQuestionPrompt(q){
   if(!q)return"";
@@ -5857,9 +6045,9 @@ function renderQuizQuestion(){
     var quizVoice=window.DARKidsOwnerVoice;
     if(quizVoice&&typeof quizVoice.preload==="function"){
       quizVoice.preload(quizPrompt(q));
-      quizVoice.preload(q.success||"");
-      quizVoice.preload(q.retry||"");
-      quizVoice.preload(q.explanation||"");
+      quizVoice.preload(quizV4Text(q,"correctAudioText",q.success));
+      quizVoice.preload(quizV4Text(q,"retryAudioText",q.retry));
+      quizVoice.preload(quizV4Text(q,"explanationAudioText",q.explanation));
       var nextQuizVoice=currentQuiz[currentQuizIndex+1];
       if(nextQuizVoice)quizVoice.preload(quizPrompt(nextQuizVoice));
     }
@@ -5868,7 +6056,7 @@ function renderQuizQuestion(){
   quizQuestionHadError=false;
   renderQuizProgress();
   var band=currentKidsQuizAgeBand();
-  var help=band==="4-6"?"":(band==="9-10"?"Wähle die beste Antwort.":"Hör zu und tippe auf deine Antwort.");
+  var help=band==="4-6"?"Denk in Ruhe nach und wähle eine Antwort.":(band==="9-10"?"Überlege in Ruhe und wähle die beste Antwort.":"Hör gut zu und wähle die Antwort, die du für richtig hältst.");
   var kicker=band==="4-6"?String(q.category||"Quiz"):String(q.category||"Quiz")+" · "+(currentQuizIndex+1)+"/"+currentQuiz.length;
   var listenLabel=band==="4-6"?"Frage hören":"Frage noch einmal hören";
   var art=quizArtworkForBand(q)||{};
@@ -5940,7 +6128,7 @@ function chooseQuizAnswer(index,button){
     button.classList.add("correct");
     quizRewardBurst();
     document.getElementById("quizFeedback").className="quiz-feedback good";
-    document.getElementById("quizFeedback").textContent="✓ "+q.success;
+    document.getElementById("quizFeedback").textContent="✓ "+quizAcademyPraiseText(q);
     var explanation=document.getElementById("quizExplanation");
     if(explanation&&q.explanation){
       explanation.textContent=String(q.explanation);
@@ -5957,19 +6145,16 @@ function chooseQuizAnswer(index,button){
     var src=document.getElementById("quizSource");
     if(src)src.innerHTML='<strong>Quelle:</strong> '+String(q.source||"");
     document.getElementById("quizNext").classList.add("show");
-    var masteryResult=recordQuizAttempt(q.id,!quizQuestionHadError);
-    if(masteryResult.entry&&masteryResult.entry.stage==="secure"){
-      document.getElementById("quizFeedback").textContent="✓ "+q.success+" · sicher";
-    }else if(!quizQuestionHadError&&!masteryResult.counted){
-      document.getElementById("quizFeedback").textContent="✓ "+q.success+" · Wiederholung später";
-    }
+    // Save mastery internally; don't replace the child's blessing with a technical learning state.
+    recordQuizAttempt(q.id,!quizQuestionHadError);
     // Nach einer richtigen Antwort wird die kindgerechte Erklärung vollständig
     // in der Serhat-Masterstimme vorgelesen, aber nur mit echtem freigegebenem Clip.
     // Nicht auf System-TTS ausweichen und keine nächste Quizfrage übertönen.
     var answeredQuestion=q,answeredIndex=currentQuizIndex;
+    var explanationAudio=quizV4Text(q,"explanationAudioText",q.explanation);
     var canExplain=!!(q.explanation&&window.DARKidsOwnerVoice&&
       typeof window.DARKidsOwnerVoice.has==="function"&&
-      window.DARKidsOwnerVoice.has(q.explanation));
+      window.DARKidsOwnerVoice.has(explanationAudio));
     function questionStillOpen(){
       var modal=document.getElementById("quizModal");
       return !!(modal&&modal.classList.contains("open")&&
@@ -5983,12 +6168,12 @@ function chooseQuizAnswer(index,button){
         {age:currentKidsQuizAgeBand(),max:2,stillValid:questionStillOpen}
       ).catch(function(){});
     }
-    quizSpeak(q.success,{
+    quizSpeak(quizV4Text(q,"correctAudioText",q.success),{
       source:"kids-quiz-feedback",
       onended:function(){
         if(!questionStillOpen())return;
         if(canExplain){
-          quizSpeak(answeredQuestion.explanation,{
+          quizSpeak(explanationAudio,{
             source:"kids-quiz-explanation",
             onended:playQuizTermExplanation
           });
@@ -6000,12 +6185,12 @@ function chooseQuizAnswer(index,button){
     recordQuizMistake(q.id);
     button.classList.add("wrong");
     document.getElementById("quizFeedback").className="quiz-feedback bad";
-    document.getElementById("quizFeedback").textContent=q.retry;
-    quizSpeak(q.retry);
+    document.getElementById("quizFeedback").textContent=quizAcademyRetryText(q);
+    quizSpeak(quizV4Text(q,"retryAudioText",q.retry));
+    // Leave encouragement visible while the child thinks; remove only the shake marker.
     setTimeout(function(){
-      button.classList.remove("wrong");
-      document.getElementById("quizFeedback").textContent="";
-    },1300);
+      if(button&&button.isConnected)button.classList.remove("wrong");
+    },1100);
   }
 }
 function renderQuizFinish(){
@@ -6367,7 +6552,14 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     moon.style.opacity=String(mins<6*60||mins>=18*60?1:0);
   }
   fillStars();fillRain();
-  window.addEventListener("resize",function(){fillStars();fillRain()});
+  // Mobile browser chrome can resize the height without changing the width.
+  // Avoid rebuilding star/rain DOM on those toolbar-only resizes.
+  var lastSkyWidth=Math.round(window.innerWidth);
+  window.addEventListener("resize",function(){
+    var width=Math.round(window.innerWidth);
+    if(Math.abs(width-lastSkyWidth)<2)return;
+    lastSkyWidth=width;fillStars();fillRain();
+  },{passive:true});
   placeSky();
   setInterval(placeSky,30000);
   paint();
@@ -6378,16 +6570,6 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
       mo.observe(el,{attributes:true,attributeFilter:["class"]});
     });
   }
-  document.addEventListener("pointerdown",function(ev){
-    var el=ev.target.closest&&ev.target.closest(".choice,.resume,.daily-step,.daily-start,.story-feature,.story-row,.surah-card,.verse-card,.quran-action,.close-btn,.quiz-answer");
-    if(!el)return;
-    el.classList.remove("kid-pop");
-    void el.offsetWidth;
-    var fx="kid-pop";
-    if(el.classList.contains("nav-btn"))fx="kid-pop";
-    if(el.classList.contains("close-btn"))fx="kid-pop";
-    el.classList.add("kid-pop");
-  },true);
 })();
 </script>
 
@@ -6437,9 +6619,85 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     if(btn)btn.click();
     else if(app)app.setAttribute("data-age",p.age||"6–8");
   }
+
+  /* Inline feedback works even when iOS WKWebView suppresses window.alert. */
+  var joinBusy=false;
+  function joinFeedback(msg,kind){
+    var loginStep=join.querySelector('[data-step="login"]');
+    var isLogin=loginStep&&loginStep.classList.contains("on");
+    var s=document.getElementById(isLogin?"deviceLoginStatus":"joinStatus");if(!s)return;
+    s.textContent=msg||"";s.hidden=!msg;s.dataset.kind=kind||"info";
+  }
+  function joinPending(v){
+    joinBusy=!!v;
+    var save=document.getElementById("joinSave"),login=document.getElementById("joinLoginExisting");
+    save.disabled=joinBusy;save.textContent=joinBusy?"Bitte warten …":"Konto anlegen";
+    if(login)login.disabled=joinBusy;
+    var deviceLogin=document.getElementById("deviceLoginSubmit");
+    if(deviceLogin){deviceLogin.disabled=joinBusy;deviceLogin.textContent=joinBusy?"Anmeldung läuft …":"Anmelden und Lernstand laden"}
+  }
+  function joinExistingHint(msg){
+    joinFeedback(msg||"Dieser Name ist bereits vergeben. Bitte mit dem vorhandenen Passwort anmelden oder einen anderen Namen wählen.","error");
+    document.getElementById("joinLoginExisting").hidden=false;
+  }
+  function acceptExistingAccount(name,h,res){
+    if(!res||res.ok!==true){joinExistingHint("Anmeldung fehlgeschlagen. Prüfe Name und Passwort oder wähle einen anderen Namen.");return}
+    var previous=currentProfile();
+    if(previous&&(previous.name||"").toLowerCase()!==name.toLowerCase())rememberCurrent();
+    var old=load(), known=old.find(function(p){return (p.name||"").toLowerCase()===name.toLowerCase()});
+    var p={id:known?known.id:String(Date.now()),name:res.name||name,pass:h,
+      gender:res.gender||"boy",age:res.age||"6–8",data:res.data||{}};
+    save(old.filter(function(x){return x.id!==p.id&&(x.name||"").toLowerCase()!==name.toLowerCase()}).concat([p]));
+    applyBag(p.data);localStorage.setItem(ACTIVE,p.id);applyProfile(p);
+    /* Remote login explicitly wins over any stale pending local write. */
+    delete syncPending[p.id];writeSyncPending();
+    syncConfirmed[p.id]=profileSnapshot(p);
+    joinFeedback("Anmeldung erfolgreich.","success");closeJoin();renderList();
+    try{sessionStorage.setItem("kids.profile.restoreTab","view-parents")}catch(e){}
+    location.reload();
+  }
+  function submitJoin(mode){
+    if(joinBusy)return;
+    var isRestore=mode==="restore";
+    var name=(document.getElementById(isRestore?"deviceLoginName":"joinName").value||"").trim();
+    var pw=document.getElementById(isRestore?"deviceLoginPass":"joinPass").value||"";
+    if(name.length<2){joinFeedback("Bitte einen Namen mit mindestens zwei Zeichen eingeben.","error");return}
+    if(pw.length<4){joinFeedback("Bitte ein Passwort mit mindestens vier Zeichen eingeben.","error");return}
+    if(mode!=="login"&&!isRestore)document.getElementById("joinLoginExisting").hidden=true;
+    joinPending(true);
+    joinFeedback(mode==="login"||isRestore?"Anmeldung wird geprüft …":"Konto wird geprüft …","info");
+    hash(pw).then(function(h){
+      return rpc("kids_login",{p_name:name,p_hash:h}).then(function(existing){
+        if(existing&&existing.ok===true){acceptExistingAccount(name,h,existing);return}
+        if(isRestore){joinFeedback((existing&&existing.error)||"Name oder Passwort passt nicht. Bitte erneut versuchen.","error");return}
+        if(mode==="login"){joinExistingHint("Name oder Passwort passt nicht. Bitte erneut versuchen.");return}
+        if(existing&&/Keine Verbindung/i.test(existing.error||"")){joinFeedback(existing.error,"error");return}
+        return rpc("kids_register",{p_name:name,p_hash:h,p_gender:draft.gender,p_age:draft.age,p_data:bag()}).then(function(res){
+          if(!res||res.ok!==true){
+            if(/vergeben/i.test(res&&res.error||""))joinExistingHint();
+            else joinFeedback(res&&res.error||"Konto konnte nicht angelegt werden. Bitte erneut versuchen.","error");
+            return;
+          }
+          if(res.linked){return rpc("kids_login",{p_name:name,p_hash:h}).then(function(r){acceptExistingAccount(name,h,r)})}
+          rememberCurrent();
+          var app=document.querySelector(".app");
+          if(app)app.setAttribute("data-gender",draft.gender);
+          var ageBtn=document.querySelector('.age-tabs [data-age="'+draft.age+'"]');
+          if(ageBtn)ageBtn.click();
+          var p={id:String(Date.now()),name:name,pass:h,gender:draft.gender,age:draft.age,data:bag()};
+          var list=load();list.push(p);save(list);localStorage.setItem(ACTIVE,p.id);
+          syncConfirmed[p.id]=profileSnapshot(p);
+          joinFeedback("Konto erfolgreich angelegt.","success");closeJoin();renderList();
+        });
+      });
+    }).catch(function(){joinFeedback("Verbindung oder Passwortverarbeitung fehlgeschlagen. Bitte erneut versuchen.","error")})
+      .finally(function(){joinPending(false)});
+  }
   function step(name){
     if(name==="place")name="name";
+    joinFeedback("","info");document.getElementById("joinLoginExisting").hidden=true;
     join.querySelectorAll(".step").forEach(function(s){s.classList.toggle("on",s.getAttribute("data-step")===name)});
+    join.querySelectorAll(".join-feedback").forEach(function(el){el.hidden=true;el.textContent=""});
     var card=join.querySelector(".kids-join-card");
     if(card)card.scrollTop=0;
     join.scrollTop=0;
@@ -6467,6 +6725,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var has=!!localStorage.getItem(ACTIVE);
     join.querySelectorAll(".join-skip").forEach(function(b){b.style.display=has?"none":"block"});
     if(cancel)cancel.style.display=has?"block":"none";
+    joinFeedback("","info");document.getElementById("joinLoginExisting").hidden=true;
     step(from||"hello");
   }
   function closeJoin(){
@@ -6488,16 +6747,63 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var id=localStorage.getItem(ACTIVE);
     return load().find(function(x){return x.id===id})||null;
   }
+  /* KIDS ACCOUNT SYNC V3: only upload changed progress. A durable, non-
+     content pending marker survives interrupted iOS background requests. */
+  var SYNC_PENDING_KEY="dar.kids.account.pendingSync.v1";
+  var syncConfirmed={},syncBusy={};
+  function readSyncPending(){
+    try{
+      var data=JSON.parse(localStorage.getItem(SYNC_PENDING_KEY)||"{}");
+      return data&&typeof data==="object"&&!Array.isArray(data)?data:{};
+    }catch(e){return {}}
+  }
+  var syncPending=readSyncPending();
+  function writeSyncPending(){
+    try{localStorage.setItem(SYNC_PENDING_KEY,JSON.stringify(syncPending))}catch(e){}
+  }
+  function profileSnapshot(p){
+    var data=p&&p.data||{},ordered={};
+    Object.keys(data).sort().forEach(function(k){ordered[k]=data[k]});
+    return JSON.stringify([p&&p.gender||"boy",p&&p.age||"6–8",ordered]);
+  }
+  function flushProfileSync(id){
+    if(syncBusy[id]||!syncPending[id])return;
+    var p=load().find(function(x){return x.id===id});
+    if(!p||!p.pass)return;
+    var stamp=profileSnapshot(p);
+    syncBusy[id]=true;
+    rpc("kids_save",{p_name:p.name,p_hash:p.pass,p_data:p.data||{},p_gender:p.gender,p_age:p.age})
+      .then(function(res){
+        if(!res||res.ok!==true)return;
+        syncConfirmed[id]=stamp;
+        var current=load().find(function(x){return x.id===id});
+        if(current&&profileSnapshot(current)===stamp){
+          delete syncPending[id];
+          writeSyncPending();
+        }
+      }).catch(function(){}).finally(function(){
+        syncBusy[id]=false;
+        var newest=load().find(function(x){return x.id===id});
+        if(syncPending[id]&&newest&&profileSnapshot(newest)!==stamp&&syncConfirmed[id]===stamp){
+          setTimeout(function(){flushProfileSync(id)},300);
+        }
+      });
+  }
   function rememberCurrent(){
     var p=currentProfile();
     if(!p)return;
-    p.data=bag();
+    var newData=bag();
     var app=document.querySelector(".app");
-    p.gender=app&&app.getAttribute("data-gender")||p.gender;
-    p.age=localStorage.getItem("kids.age")||p.age;
-    var list=load().map(function(x){return x.id===p.id?p:x});
-    save(list);
-    if(p.pass)rpc("kids_save",{p_name:p.name,p_hash:p.pass,p_data:p.data,p_gender:p.gender,p_age:p.age});
+    var newGender=app&&app.getAttribute("data-gender")||p.gender;
+    var newAge=localStorage.getItem("kids.age")||p.age;
+    p.data=newData;p.gender=newGender;p.age=newAge;
+    var stamp=profileSnapshot(p);
+    if(syncConfirmed[p.id]===stamp&&!syncPending[p.id])return;
+    save(load().map(function(x){return x.id===p.id?p:x}));
+    if(!p.pass)return;
+    syncPending[p.id]=true;
+    writeSyncPending();
+    flushProfileSync(p.id);
   }
   function renderList(){
     var box=document.getElementById("profileList");
@@ -6536,28 +6842,9 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   function switchTo(id){
     var p=load().find(function(x){return x.id===id});
     if(!p)return;
-    var pw=window.prompt("Passwort für "+p.name);
-    if(!pw)return;
-    hash(pw).then(function(h){
-      if(p.pass&&h!==p.pass){window.alert("Das Passwort passt nicht.");return}
-      rememberCurrent();
-      rpc("kids_login",{p_name:p.name,p_hash:h}).then(function(res){
-        if(res&&res.ok){
-          applyBag(res.data||{});
-          p.pass=h;p.gender=res.gender||p.gender;p.age=res.age||p.age;p.data=res.data||{};
-          save(load().map(function(x){return x.id===p.id?p:x}));
-        }else if(p.pass&&h===p.pass){
-          applyBag(p.data||{});
-        }else{
-          window.alert((res&&res.error)||"Anmeldung nicht möglich.");
-          return;
-        }
-        localStorage.setItem(ACTIVE,p.id);
-        applyProfile(p);
-        try{sessionStorage.setItem("kids.profile.restoreTab",document.querySelector(".view.active")?.id||"view-parents")}catch(e){}
-        location.reload();
-      });
-    });
+    openJoin("login");
+    document.getElementById("deviceLoginName").value=p.name||"";
+    document.getElementById("deviceLoginPass").value="";
   }
   document.getElementById("joinNextHello").addEventListener("click",function(){step("who")});
   join.querySelectorAll("[data-back]").forEach(function(b){b.addEventListener("click",function(){step(b.getAttribute("data-back"))})});
@@ -6573,52 +6860,23 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   });
   var cancel=document.getElementById("joinCancel");
   if(cancel)cancel.addEventListener("click",function(){if(localStorage.getItem(ACTIVE))closeJoin()});
-  document.getElementById("joinSave").addEventListener("click",function(){
-    var name=(document.getElementById("joinName").value||"").trim();
-    var pw=document.getElementById("joinPass").value||"";
-    if(name.length<2||pw.length<4){window.alert("Name und ein Passwort mit mindestens 4 Zeichen.");return}
-    hash(pw).then(function(h){
-      rememberCurrent();
-      rpc("kids_register",{p_name:name,p_hash:h,p_gender:draft.gender,p_age:draft.age,p_data:bag()}).then(function(res){
-        if(!res||res.ok!==true){window.alert((res&&res.error)||"Dieser Anmeldename ist schon vergeben.");return}
-        var app=document.querySelector(".app");
-        if(app)app.setAttribute("data-gender",draft.gender);
-        var ageBtn=document.querySelector('.age-tabs [data-age="'+draft.age+'"]');
-        if(ageBtn)ageBtn.click();
-        var p={id:String(Date.now()),name:name,pass:h,gender:draft.gender,age:draft.age,data:bag()};
-        var list=load();
-        list.push(p);
-        save(list);
-        localStorage.setItem(ACTIVE,p.id);
-        closeJoin();
-        renderList();
-      });
-    });
-  });
+  document.getElementById("joinSave").addEventListener("click",function(){submitJoin("register")});
+  document.getElementById("joinLoginExisting").addEventListener("click",function(){submitJoin("login")});
   var add=document.getElementById("profileAdd");
   if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8"};openJoin(load().length?"who":"hello")});
   join.querySelectorAll(".join-skip").forEach(function(b){b.addEventListener("click",skipJoin)});
   var bring=document.getElementById("profileBring");
   if(bring)bring.addEventListener("click",function(){
-    var name=window.prompt("Anmeldename");
-    if(!name)return;
-    var pw=window.prompt("Passwort");
-    if(!pw)return;
-    hash(pw).then(function(h){
-      rpc("kids_login",{p_name:name.trim(),p_hash:h}).then(function(res){
-        if(!res||res.ok!==true){window.alert((res&&res.error)||"Anmeldung nicht möglich.");return}
-        rememberCurrent();
-        var p={id:String(Date.now()),name:res.name||name.trim(),pass:h,gender:res.gender||"boy",age:res.age||"6–8",data:res.data||{}};
-        var list=load().filter(function(x){return (x.name||"").toLowerCase()!==p.name.toLowerCase()});
-        list.push(p);
-        save(list);
-        applyBag(p.data);
-        localStorage.setItem(ACTIVE,p.id);
-        applyProfile(p);
-        try{sessionStorage.setItem("kids.profile.restoreTab",document.querySelector(".view.active")?.id||"view-parents")}catch(e){}
-        location.reload();
-      });
-    });
+    document.getElementById("deviceLoginName").value="";
+    document.getElementById("deviceLoginPass").value="";
+    openJoin("login");
+  });
+  var deviceLoginSubmit=document.getElementById("deviceLoginSubmit");
+  if(deviceLoginSubmit)deviceLoginSubmit.addEventListener("click",function(){submitJoin("restore")});
+  var deviceLoginCancel=document.getElementById("deviceLoginCancel");
+  if(deviceLoginCancel)deviceLoginCancel.addEventListener("click",closeJoin);
+  document.getElementById("deviceLoginPass").addEventListener("keydown",function(ev){
+    if(ev.key==="Enter"){ev.preventDefault();submitJoin("restore")}
   });
   var askDevice=document.getElementById("profileAskDevice");
   var askFull=document.getElementById("profileAskFull");
@@ -6650,10 +6908,12 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   var known=load().find(function(p){return p.id===active});
   if(known){
     applyProfile(known);
+    syncConfirmed[known.id]=profileSnapshot(known);
+    if(syncPending[known.id])setTimeout(function(){flushProfileSync(known.id)},1200);
     try{
       var resumeProfileTab=sessionStorage.getItem("kids.profile.restoreTab")||"";
       sessionStorage.removeItem("kids.profile.restoreTab");
-      if(/^view-(today|stories|quran|parents)$/.test(resumeProfileTab)){
+      if(/^view-(today|stories|salaf|quran|parents)$/.test(resumeProfileTab)){
         var targetTab=document.querySelector('.nav-btn[data-target="'+resumeProfileTab.slice(5)+'"]');
         if(targetTab)requestAnimationFrame(function(){targetTab.click()});
       }
@@ -6665,26 +6925,36 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   }else openJoin("hello");
   renderList();
   if(add)add.textContent=load().length?"Weiteres Kind":"Konto anlegen";
-  load().forEach(function(p){
-    if(p.name&&p.pass)rpc("kids_register",{p_name:p.name,p_hash:p.pass,p_gender:p.gender||"boy",p_age:p.age||"6–8",p_data:p.data||{}});
-  });
+  /* Never re-register local profiles at startup: this can overwrite cloud progress. */
   window.addEventListener("pagehide",rememberCurrent);
+  document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")rememberCurrent()});
+  /* Progress can change in any Kids learning module without a page change. */
+  setInterval(function(){
+    if(document.visibilityState!=="hidden")rememberCurrent();
+    var p=currentProfile();
+    if(p&&syncPending[p.id]&&!syncBusy[p.id])flushProfileSync(p.id);
+  },20000);
+  window.addEventListener("online",function(){
+    rememberCurrent();
+    var p=currentProfile();if(p)flushProfileSync(p.id);
+  });
 })();
 </script>
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio8"></script>
-<script src="/kids/owner-voice.js?v=8"></script>\n<script src="/kids/dua-word-meanings-v1.js?v=2"></script>
+<script src="/kids/owner-voice.js?v=8"></script>
+<script src="/kids/dua-word-meanings-v1.js?v=2"></script>
 <script src="/kids/dua-phonetic-alignment-v1.js?v=1"></script>
 <script src="/kids/dua-smart-learn.js?v=1312"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306";
+  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1410";
   // Stable start: do not reload a visible app when a service worker takes control.
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1324",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1410",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -6697,6 +6967,49 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
         if(live&&live!==KIDS_BUILD_ID)window.DARKidsUpdateAvailable=live;
       }).catch(function(){});
   },{once:true});
+
+  // Update only the Salaf page upon returning to a long-running iOS PWA.
+  // Never reload Today, Salah, an open story, or any other playback screen.
+  var refreshingSalaf=false;
+  function salafVisible(){
+    var view=document.getElementById("view-salaf");
+    return !!(view&&view.classList.contains("active"));
+  }
+  function refreshSalafIfStale(){
+    if(refreshingSalaf||!salafVisible()||navigator.onLine===false)return;
+    if(document.documentElement.classList.contains("salaf-detail-open"))return;
+    refreshingSalaf=true;
+    fetch("/kids/version.json?salaf-fresh="+Date.now(),{cache:"no-store"})
+      .then(function(r){return r.ok?r.json():null})
+      .then(function(v){
+        var live=String(v&&v.buildId||"");
+        if(!live||live===KIDS_BUILD_ID)return;
+        var prior=sessionStorage.getItem("kids.salaf.refreshedBuild")||"";
+        if(prior===live)return;
+        sessionStorage.setItem("kids.salaf.refreshedBuild",live);
+        sessionStorage.setItem("kids.profile.restoreTab","view-salaf");
+        location.replace("/kids/start.html?salaf-release="+encodeURIComponent(live));
+      }).catch(function(){}).finally(function(){refreshingSalaf=false});
+  }
+  document.addEventListener("click",function(event){
+    if(event.target.closest&&event.target.closest('.nav-btn[data-target="salaf"]')){
+      setTimeout(refreshSalafIfStale,80);
+    }
+  },true);
+  document.addEventListener("visibilitychange",function(){
+    if(document.visibilityState==="visible")refreshSalafIfStale();
+  });
+  window.addEventListener("pageshow",function(){refreshSalafIfStale()});
+  // Direct deep link for people who still have an earlier app loaded in memory.
+  if(new URL(location.href).searchParams.has("salaf-release")||
+     new URL(location.href).searchParams.get("open")==="salaf"){
+    window.addEventListener("load",function(){
+      setTimeout(function(){
+        if(document.getElementById("profileJoin")?.hidden===false)return;
+        document.querySelector('.nav-btn[data-target="salaf"]')?.click();
+      },220);
+    },{once:true});
+  }
 })();
 </script>
 
@@ -7667,29 +7980,33 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 
 </style>
-<link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1261" data-kids-dua-smart="1">\n<link rel="stylesheet" href="/kids/quiz-library.css?v=1237">
+<link rel="stylesheet" href="/kids/dua-smart-learn.css?v=1261" data-kids-dua-smart="1">
+<link rel="stylesheet" href="/kids/quiz-library.css?v=1237">
 <link rel="stylesheet" href="/kids/kids-age-typography.css?v=5">
 <script src="/kids/screen-awake.js?v=1"></script>
-<script src="/kids/story-follow-reader.js?v=17"></script>
+<script src="/kids/story-follow-reader.js?v=18"></script>
 <script src="/kids/story-policy.js?v=2"></script>
 <script src="/kids/prophet-stories.js?v=43"></script>
-<script src="/kids/mubashshirun-stories.js?v=32"></script>
-<script src="/kids/sahabiyyat-stories.js?v=24"></script>\n<script src="/kids/deen-lessons.js?v=6"></script>
-<script src="/kids/global-story-glow-v1216.js?v=1239"></script>
+<script src="/kids/mubashshirun-stories.js?v=33"></script>
+<script src="/kids/sahabiyyat-stories.js?v=25"></script>
+<script src="/kids/deen-lessons.js?v=8"></script>
+<script src="/kids/global-story-glow-v1216.js?v=1218-calm"></script>
 <script src="/kids/term-learning.js?v=1"></script>
 <script src="/kids/dua-hub-v1219.js?v=1318" data-kids-dua-hub="1259"></script>
-<script src="/kids/story-hub.js?v=27"></script>
+<script src="/kids/story-hub.js?v=28"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
+<script src="/kids/quiz-v4-bridge.js?v=20261013-academy1"></script>
 <script src="/kids/quiz-library.js?v=9"></script>
 <link rel="stylesheet" href="/kids/section-heroes-v1095.css?v=1256-parent-hero-full" data-kids-section-heroes-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1133.css?v=1148" data-kids-stories-home-late="1">
 <link rel="stylesheet" href="/kids/stories-home-v1138.css?v=1152" data-kids-stories-home-polish="1">
-<link rel="stylesheet" href="/kids/deen-learning-v1199.css?v=1199" data-kids-deen-learning="1">\n<link rel="stylesheet" href="/kids/deen-lessons.css?v=2" data-kids-deen-lessons="1">
-<link rel="stylesheet" href="/kids/global-story-glow-v1216.css?v=1217" data-kids-global-story-glow="1">
+<link rel="stylesheet" href="/kids/deen-learning-v1199.css?v=1199" data-kids-deen-learning="1">
+<link rel="stylesheet" href="/kids/deen-lessons.css?v=2" data-kids-deen-lessons="1">
+<link rel="stylesheet" href="/kids/global-story-glow-v1216.css?v=1218-calm" data-kids-global-story-glow="1">
 <link rel="stylesheet" href="/kids/dua-hub-v1219.css?v=1278" data-kids-dua-hub="1259">
 <link rel="stylesheet" href="/kids/story-card-system.css?v=2" data-kids-story-card-system="1">
 <link rel="stylesheet" href="/kids/story-library-cards.css?v=9" data-kids-story-card-repair="1">
-<link rel="stylesheet" href="/kids/kids-touch-rail.css?v=16" data-kids-touch-rail="1">
+<link rel="stylesheet" href="/kids/kids-touch-rail.css?v=17" data-kids-touch-rail="1">
 
 <style id="kids-home-audio-focus-v1169">
 /* Startseite: Audio-first, drei klare Kernwelten, große lesbare Markenbühne. */
@@ -9422,7 +9739,7 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-<script src="/kids/navigation-v1182.js?v=1299"></script>
+<script src="/kids/navigation-v1182.js?v=1410"></script>
 
 <style id="kids-home-cinema-v1185">
 #view-today{--home-v1185-deep:#061b26;--home-v1185-petrol:#082b37}
@@ -10170,7 +10487,7 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-  <script src="/kids/kids-card-interaction.js?v=6" defer></script>
+  <script src="/kids/kids-card-interaction.js?v=7" defer></script>
 
 <style id="kids-home-reference-exact-v1199">
 /* V1196 — approved screenshot direction.
@@ -11265,8 +11582,8 @@ html[data-view="stories"] #view-stories > :last-child{
 
 
 <!-- KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249: shared full-width header and explanation actions, original back controls, no bottom-nav changes -->
-<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1297" data-kids-global-detail-dock="1257">
-<script src="/kids/global-detail-dock-v1247.js?v=1278" data-kids-global-detail-dock="1257"></script>
+<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1411" data-kids-global-detail-dock="1257">
+<script src="/kids/global-detail-dock-v1247.js?v=1411" data-kids-global-detail-dock="1257"></script>
 
 <link rel="stylesheet" href="/kids/dua-layout-v1259.css?v=1311" data-kids-dua-layout="1259">
 <link rel="stylesheet" href="/kids/dua-learn-cinema-v1261.css?v=1261" data-kids-dua-cinema="1261">
@@ -11334,19 +11651,83 @@ html[data-kids-age]:has(#view-stories.active) body .bottom-nav .nav-btn[data-tar
    Keep the approved initial safe-area clearance for every non-home main tab.
    :has() follows the actual active view even before data-view is synchronized. */
 html[data-view="stories"] body .app .shell,
+html[data-view="salaf"] body .app .shell,
 html[data-view="dua"] body .app .shell,
 html[data-view="quran"] body .app .shell,
 html[data-view="parents"] body .app .shell,
 html body .app:has(#view-stories.view.active) .shell,
+html body .app:has(#view-salaf.view.active) .shell,
 html body .app:has(#view-dua.view.active) .shell,
 html body .app:has(#view-quran.view.active) .shell,
 html body .app:has(#view-parents.view.active) .shell{
   padding-top:calc(var(--safe-top, max(16px, env(safe-area-inset-top, 0px))) + 8px)!important;
 }
 </style>
+<link rel="stylesheet" href="/kids/girls-profile-palette-v1331.css?v=1331" data-kids-girls-palette="1331">
+<link rel="stylesheet" href="/kids/girls-profile-complete-v1333.css?v=1333" data-kids-girls-complete="1333">
+<link rel="stylesheet" href="/kids/girls-profile-hero-tints-v1334.css?v=1334" data-kids-hero-tints="1334">
+<link rel="stylesheet" href="/kids/girls-profile-hero-safe-top-v1335.css?v=1335" data-kids-hero-safe-top="1335">
+<link rel="stylesheet" href="/kids/profile-hero-alignment-v1336.css?v=1336" data-kids-profile-hero-alignment="1336">
+<link rel="stylesheet" href="/kids/salah-day-profile-v1337.css?v=1337" data-kids-salah-day-profile="1337">
+<link rel="stylesheet" href="/kids/prayer-day-profile-v1337.css?v=1337" data-kids-prayer-day-profile="1337">
+<link rel="stylesheet" href="/kids/prayer-detail-theme-v1338.css?v=1338" data-kids-prayer-theme="1338">
+<link rel="stylesheet" href="/kids/girls-profile-deep-fix-v1339.css?v=1339" data-kids-girls-deep-fix="1339">
+<link rel="stylesheet" href="/kids/girls-profile-reader-v1340.css?v=1340" data-kids-girls-reader="1340">
+
+<link rel="stylesheet" href="/kids/kids-salah-profile-chrome-v1344.css?v=1344" data-kids-salah-profile-chrome="1344">
+<link rel="stylesheet" href="/kids/kids-story-action-contrast-v1345.css?v=1346" data-kids-story-action-contrast="1345">
+<link rel="stylesheet" href="/kids/deen-library-polish-v1346.css?v=1346" data-kids-deen-library-polish="1346">
+<link rel="stylesheet" href="/kids/ipad-home-audio-grid-v1347.css?v=1347" data-kids-ipad-home-audio-grid="1347">
+<link rel="stylesheet" href="/kids/girls-home-photo-palette-v1348.css?v=1348" data-kids-girls-home-palette="1348">
+<script defer src="/kids/girls-profile-theme-v1332.js?v=1348" data-kids-girls-system-tint="1332"></script>
+<!-- KIDS_SALAF_LIBRARY_V1: fifth tab, isolated source-gated library; after other profile palettes -->
+<link rel="stylesheet" href="/kids/salaf-library-v1.css?v=1">
+<script defer src="/kids/salaf-library-v1.js?v=1410"></script>
 <!-- KIDS_OFFLINE_LIBRARY_V1: independent storage controls for the Parents tab -->
 <script defer src="/kids/offline-library-v1.js?v=1"></script>
 <!-- KIDS_SALAH_STAGE_V1261: placed after hero, before continue-listening -->
-<script defer src="/kids/prayer-stage-v1261.js?v=1320" data-kids-salah-stage="1275"></script>
-<script defer src="/kids/test-console/return-to-studio.js"></script>
+<script defer src="/kids/prayer-stage-v1261.js?v=1342" data-kids-salah-stage="1275"></script>
+<!-- KIDS_LISTENING_POLISH_V1350: sub-home & listening-only CSS; nav icons and geometry preserved -->
+<link rel="stylesheet" href="/kids/kids-listening-polish-v1350.css?v=1350">
+<script defer src="/kids/kids-listening-polish-v1350.js?v=1350"></script>
+<!-- KIDS_TOUCH_SELECTION_POLICY_V1354: UI controls never show native text-selection handles; educational text stays selectable. -->
+<style id="kids-touch-selection-policy-v1354">
+/* Scoped to actionable chrome. Do NOT apply to body, .app, reading text, Qur'an verses, Du'a or lessons. */
+html body :is(
+  .bottom-nav, .bottom-nav *,
+  nav, nav *,
+  button, button *,
+  summary, summary *,
+  label, label *,
+  [role="button"], [role="button"] *,
+  [role="tab"], [role="tab"] *,
+  [role="menuitem"], [role="menuitem"] *,
+  [role="option"], [role="option"] *,
+  [role="radio"], [role="radio"] *,
+  [role="checkbox"], [role="checkbox"] *,
+  .choice, .choice *,
+  .quiz-answer, .quiz-answer *,
+  .kids-tap-card, .kids-tap-card *,
+  .kids-touch-control, .kids-touch-control *,
+  .age-tabs, .age-tabs *,
+  [data-go], [data-go] *
+){
+  -webkit-user-select:none!important;
+  user-select:none!important;
+  -webkit-touch-callout:none!important;
+}
+html body :is(
+  .bottom-nav img, .bottom-nav svg,
+  button img, button svg,
+  [role="button"] img, [role="button"] svg,
+  .choice img, .kids-tap-card img
+){
+  -webkit-user-drag:none!important;
+}
+/* Do not change touch-action, pointer-events, scrolling, tap targets, focus or keyboard editing. */
+</style>
+<!-- KIDS_SALAF_OPEN_WORLD_V1353: Salaf-only filmic full-bleed, profile-aware. Do not touch Home or floating dock. -->
+<link rel="stylesheet" href="/kids/salaf-open-world-v1353.css?v=1410">
+<!-- KIDS_GLOBAL_HEADER_HERO_SEAM_V1412: final visual geometry across all Kids readers -->
+<link rel="stylesheet" href="/kids/global-hero-seam-v1412.css?v=1412">
 </html>

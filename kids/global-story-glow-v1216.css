@@ -1,9 +1,9 @@
-/* DĀR AL TAWḤĪD Kids · global story capsule touch glow v1217 */
-:root{
-  --kids-story-glow-gold:rgba(255,211,105,.72);
-  --kids-story-glow-gold-soft:rgba(255,218,135,.28);
-  --kids-story-glow-teal:rgba(105,218,204,.30);
-}
+/* DĀR AL TAWḤĪD KIDS — Story card parity with the calm Home audiobook card.
+   KIDS_STORY_GLOW_PARITY_V1218
+   Legacy double-halo (gold + teal) and heavy inset highlight retired.
+   This stylesheet is a no-JS fallback; kids-touch-rail.css owns the canonical
+   interaction. No delayed glow, pulsation, or persistent selected-state lighting.
+*/
 :is(
   #view-stories #psProphetEntry,
   #view-stories #msEntry,
@@ -22,68 +22,41 @@
   [data-dl-mode]
 ){
   -webkit-tap-highlight-color:transparent!important;
-  transition:
-    box-shadow .18s ease,
-    border-color .18s ease,
-    filter .18s ease!important;
-}
-:is(
-  #view-stories #psProphetEntry,
-  #view-stories #msEntry,
-  #view-stories #syEntry,
-  #view-stories #deenEntry,
-  #view-stories .story-row,
-  .ps-library-page [data-ps-id],
-  .ms-library-page [data-ms-id],
-  .ms-library-page [data-sy-id],
-  .dl-library-page [data-dl-id],
-  #ghWorld .gh-category,
-  #ghWorld .gh-story
-):is(:active,.kids-story-touch-glow,:focus-visible){
-  border-color:rgba(255,220,139,.78)!important;
-  box-shadow:
-    0 0 0 1px rgba(255,225,154,.44),
-    0 0 18px var(--kids-story-glow-gold),
-    0 0 38px var(--kids-story-glow-teal),
-    inset 0 0 28px var(--kids-story-glow-gold-soft),
-    0 16px 34px rgba(0,0,0,.24)!important;
-  filter:brightness(1.075) saturate(1.055)!important;
-  transform:none!important;
-  outline:none!important;
-}
-:is([data-ps-mode],[data-ms-mode],[data-sy-mode],[data-dl-mode]):is(:active,.kids-story-touch-glow,:focus-visible){
-  border-color:rgba(255,220,139,.72)!important;
-  box-shadow:
-    0 0 0 1px rgba(255,225,154,.32),
-    0 0 14px rgba(255,211,105,.58),
-    0 0 26px rgba(105,218,204,.22),
-    inset 0 0 18px rgba(255,218,135,.14)!important;
-  filter:brightness(1.08)!important;
-  transform:none!important;
-  outline:none!important;
+  transition:border-color .15s ease,box-shadow .15s ease,filter .15s ease!important;
 }
 @media(hover:hover) and (pointer:fine){
   :is(
-    #view-stories #psProphetEntry,
-    #view-stories #msEntry,
-    #view-stories #syEntry,
-    #view-stories #deenEntry,
-    .ps-library-page [data-ps-id],
-    .ms-library-page [data-ms-id],
-    .ms-library-page [data-sy-id],
-    .dl-library-page [data-dl-id]
+    #view-stories #psProphetEntry,#view-stories #msEntry,
+    #view-stories #syEntry,#view-stories #deenEntry,
+    #view-stories .story-row,
+    .ps-library-page [data-ps-id],.ms-library-page [data-ms-id],
+    .ms-library-page [data-sy-id],.dl-library-page [data-dl-id],
+    #ghWorld .gh-category,#ghWorld .gh-story,
+    [data-ps-mode],[data-ms-mode],[data-sy-mode],[data-dl-mode]
   ):hover{
-    border-color:rgba(255,220,139,.42)!important;
-    box-shadow:
-      0 0 12px rgba(255,211,105,.22),
-      0 0 24px rgba(105,218,204,.12),
-      inset 0 0 18px rgba(255,218,135,.06)!important;
+    border-color:var(--kids-home-glow-line-hover,rgba(244,211,128,.44))!important;
+    box-shadow:var(--kids-home-glow-hover,0 0 18px rgba(236,196,105,.075))!important;
+    filter:brightness(1.025)!important;
   }
 }
+:is(
+  #view-stories #psProphetEntry,#view-stories #msEntry,
+  #view-stories #syEntry,#view-stories #deenEntry,
+  #view-stories .story-row,
+  .ps-library-page [data-ps-id],.ms-library-page [data-ms-id],
+  .ms-library-page [data-sy-id],.dl-library-page [data-dl-id],
+  #ghWorld .gh-category,#ghWorld .gh-story,
+  [data-ps-mode],[data-ms-mode],[data-sy-mode],[data-dl-mode]
+):is(:active,:focus-visible){
+  border-color:var(--kids-home-glow-line-press,rgba(250,220,145,.68))!important;
+  box-shadow:var(--kids-home-glow-press,0 0 22px rgba(240,202,116,.12))!important;
+  filter:brightness(1.045)!important;
+  transform:none!important;
+}
 @media(prefers-reduced-motion:reduce){
-  :is(
-    #view-stories #psProphetEntry,#view-stories #msEntry,#view-stories #syEntry,#view-stories #deenEntry,
+  :is(#view-stories #psProphetEntry,#view-stories #msEntry,#view-stories #syEntry,#view-stories #deenEntry,
     .ps-library-page [data-ps-id],.ms-library-page [data-ms-id],.ms-library-page [data-sy-id],
-    .dl-library-page [data-dl-id],[data-ps-mode],[data-ms-mode],[data-sy-mode],[data-dl-mode]
-  ){transition:none!important}
+    .dl-library-page [data-dl-id],[data-ps-mode],[data-ms-mode],[data-sy-mode],[data-dl-mode]){
+    transition:none!important;
+  }
 }

@@ -1,0 +1,3572 @@
+{
+  "schemaVersion": 1,
+  "version": "academy-voice-plan-v25-20261011",
+  "voiceProfileId": "serhat-owner-voice-2026",
+  "voiceName": "Serhat Abu Malik – Master",
+  "modelId": "eleven_v4",
+  "purpose": "Seven source-reviewed German age-tier lesson scripts; zero synthesized or approved recordings.",
+  "policy": {
+    "nativeTtsFallback": false,
+    "arabicQuranRecitationIsSeparate": true,
+    "reviewRequiredBeforePublicPlayback": true,
+    "autoPublishUnreviewed": false
+  },
+  "lessonCount": 7,
+  "curriculumIds": [
+    "aqidah-tawhid-recht-allahs",
+    "aqidah-iman-sechs-grundlagen",
+    "aqidah-ikhlas-warum-gutes-tun",
+    "akhlaq-wut-ruhig-bleiben",
+    "adab-erlaubnis-anklopfen",
+    "akhlaq-tarbiyah-sanft-lernen",
+    "akhlaq-nafs-gutes-herz"
+  ],
+  "phraseCount": 211,
+  "phrases": [
+    {
+      "text": "Allah allein verdient unsere Anbetung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Allah beschreibt in Sūrat aḏ-Ḏāriyāt 51:56 die Anbetung als Zweck der Erschaffung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Allah hat die Menschen und die Ǧinn erschaffen, um Ihm zu dienen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Allah hat Engel erschaffen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah hat uns erschaffen. Wir beten Allah allein an.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah ist unser Schöpfer.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah lehrt den respektvollen Umgang mit fremden Häusern. Der Prophet ﷺ lehrte, um Erlaubnis zu bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah lehrt uns Geduld. Der Prophet ﷺ lehrte, anderen das Gute leicht zu machen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah lehrt uns, Ihm aufrichtig zu dienen. Der Prophet ﷺ erklärte, dass die Absicht wichtig ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah liebt gute Taten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah lobt Menschen, die ihren Ärger zügeln. Der Prophet ﷺ zeigte uns, dass Beherrschung eine Stärke ist.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Allah schickte Seine Botschaften durch Gesandte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten. Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Anbetung richtet sich allein an Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Andere Menschen brauchen manchmal ihren eigenen Raum.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Auch im Familienalltag achten wir auf geschlossene Türen und persönliche Grenzen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Bei fremden Erwachsenen folge ich den Sicherheitsregeln meiner Eltern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Bei Gewalt oder Angst müssen Kinder sich in Sicherheit bringen und Erwachsenen davon erzählen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Betretet keine fremden Häuser, bevor ihr um Erlaubnis gebeten und ihre Bewohner begrüßt habt. Der Prophet ﷺ lehrte, beim Eintritt um Erlaubnis zu bitten und nach höchstens drei erfolglosen Bitten wieder zu gehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Bevor ich in ein geschlossenes Zimmer gehe, frage ich.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Das nennen wir Tawḥīd: Allah allein anbeten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Das nennt man Ikhlāṣ: aufrichtig sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Anfangsḥadīṯ in Ṣaḥīḥ al-Buḫārī erklärt die Bedeutung der Niyyah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der authentische Ḥadīṯ beschreibt Selbstbeherrschung als Stärke.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ begrenzte wiederholtes Erlaubnisbitten und empfahl, sonst zurückzukehren.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte Muʿāḏ das Recht Allahs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte Muʿāḏ ibn Ǧabal, dass Allahs Recht gegenüber den Menschen darin besteht, dass sie Ihn anbeten und Ihm nichts beigesellen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte, dass Aussehen und Besitz nicht das Maß unserer inneren Qualität sind.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte, dass der Wert einer Handlung mit der Absicht zusammenhängt, mit der sie ausgeführt wird.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte, dass Īmān sechs wichtige Grundlagen hat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte, dass wahre Stärke nicht darin besteht, andere zu besiegen, sondern sich bei Wut zu beherrschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ legte Wert auf das Erleichtern und Ermutigen beim Vermitteln des Guten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, beim Eintritt um Erlaubnis zu bitten und nach höchstens drei erfolglosen Bitten wieder zu gehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, Dinge zu erleichtern statt sie unnötig schwer zu machen, und Menschen zu ermutigen statt abzuschrecken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, sich bei Wut zu beherrschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān betont aufrichtige Anbetung; al-Buḫārī 1 behandelt die Absicht. Wir fügen den Quellen keine erfundenen Gedanken oder angebliche Salaf-Zitate hinzu.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān lobt die Läuterung der eigenen Seele.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān lobt Menschen, die Wut beherrschen und vergeben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān nennt die Anbetung Allahs. In al-Buḫārī 2856 wird das Recht Allahs ausdrücklich erklärt; darüber urteilen Kinder nicht über andere Menschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān spricht davon, sich innerlich zu verbessern. Der Prophet ﷺ lehrte, dass unsere Taten wichtig sind.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān spricht vom Glauben an Allah, die Engel, Bücher und Gesandten. Der Prophet ﷺ erklärte die Glaubensgrundlagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān-Vers 20:132 betrifft die Anleitung der Familie zum Gebet. Der Ḥadīṯ al-Buḫārī 69 lehrt erleichternde Vermittlung; unsere Lernmethodik ist eine pädagogische Anwendung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Der Textauszug aus 2:285 enthält vier Glaubensgegenstände. Muslim 8 nennt alle sechs; wir geben den Qurʾān nicht fälschlich als wörtliche Sechser-Liste wieder.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Die übrigen Glaubensgrundlagen lernen wir Schritt für Schritt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Die weiteren Grundlagen sind der Jüngste Tag und der Glaube an al-Qadar.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Diejenigen, die ihren Zorn zurückhalten und den Menschen vergeben. Der Prophet ﷺ erklärte, dass wahre Stärke nicht darin besteht, andere zu besiegen, sondern sich bei Wut zu beherrschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Duʿāʾ gehört zur Anbetung; gewöhnliche Hilfe dürfen wir von Menschen erbitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ein Freund braucht Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ein guter Freund hilft anderen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ein neues Wort ist noch schwer.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Eine geschlossene Tür kann bedeuten: Jemand möchte Ruhe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Eine gute Lehrperson erklärt klar und freundlich.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erfolg hat gewiss, wer seine Seele läutert. Der Prophet ﷺ erklärte, dass nicht Aussehen und Besitz das Entscheidende sind, sondern Herzen und Taten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Es ist schön, wenn wir freundlich miteinander umgehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Fordere deine Familie zum Gebet auf und bleibe dabei geduldig und beständig. Der Prophet ﷺ lehrte, Dinge zu erleichtern statt sie unnötig schwer zu machen, und Menschen zu ermutigen statt abzuschrecken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Gute Absichten und Taten gehören zusammen, und wir können aus Fehlern lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Gute Worte und gute Taten helfen uns, an uns zu arbeiten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Gutes Lernen braucht Geduld und liebevolle Anleitung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich darf fragen: Was bedeutet das?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich darf immer wieder üben, freundlich zu sein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich darf neue Begriffe nachfragen, statt sie nur auswendig zu sagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich darf sagen: Ich bin wütend.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich denke über mein Verhalten nach und versuche eine kleine gute Tat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich frage mich, warum ich etwas Gutes tue.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich frage vor dem Eintreten und respektiere ein Nein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich habe die Ǧinn und die Menschen nur erschaffen, damit sie Mir dienen. Der Prophet ﷺ erklärte Muʿāḏ ibn Ǧabal, dass Allahs Recht gegenüber den Menschen darin besteht, dass sie Ihn anbeten und Ihm nichts beigesellen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich helfe, weil ich Gutes tun möchte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich hole Hilfe und versuche ruhig zu werden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann Abstand nehmen und mit einer vertrauten Person sprechen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann die Glaubensgrundlagen nach und nach nennen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann etwas Gutes tun, auch wenn niemand klatscht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann helfen, ohne eine Belohnung von Menschen zu erwarten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann in kleinen Schritten üben und bei Bedarf Hilfe erbitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich kann mein Verhalten betrachten und einen guten Schritt zur Besserung wählen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich klopfe an und frage, ob ich eintreten darf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich klopfe freundlich an.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich lerne die sechs Glaubensgrundlagen in meinem Tempo.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich lerne Schritt für Schritt und frage, wenn ich ein Wort nicht verstehe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich lerne, dass wir Allah allein anbeten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich lerne, wütend sein zu dürfen und trotzdem niemanden zu verletzen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich muss dafür kein Geschenk bekommen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich respektiere es, wenn jemand gerade nicht öffnen möchte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich sage, dass ich wütend bin, und bitte bei Bedarf um Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich schlage niemanden und werfe nichts nach anderen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich sehe eine geschlossene Tür.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich übe eine gute Absicht, ohne auf Lob zu warten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ich übe einen kleinen Schritt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ich übe weiter und darf zwischendurch eine Pause machen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich versuche täglich eine kleine gute Tat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Ich warte, bis jemand antwortet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Ihnen wurde aufgetragen, Allah zu dienen und Ihm gegenüber aufrichtig zu sein. Der Prophet ﷺ erklärte, dass der Wert einer Handlung mit der Absicht zusammenhängt, mit der sie ausgeführt wird.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "summary",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Ikhlāṣ bedeutet nicht, Freundlichkeit abzulehnen; auch Lob dürfen wir höflich annehmen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Ikhlāṣ bedeutet, Gutes mit einer aufrichtigen Absicht zu tun.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Im Ḥadīṯ Ǧibrīl erläuterte der Prophet ﷺ die sechs Grundlagen des Īmān: Allah, Engel, Bücher, Gesandte, Jüngster Tag und Allahs Bestimmung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Im Qurʾān steht, dass wir Allah dienen sollen. Der Prophet ﷺ lehrte Muʿāḏ, dass wir Allah allein anbeten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Im Qurʾān wird beschrieben, dass wir fremde Häuser nicht ohne Erlaubnis betreten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Im Qurʾān wird Geduld bei der Anleitung zum Gebet hervorgehoben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Īmān an Allah ist eine der sechs Grundlagen des Glaubens.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Īmān heißt Glaube. Wir lernen heute, dass Allah uns Glauben lehrt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Kinder besuchen fremde Wohnungen nicht allein, nur weil jemand die Tür öffnet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Manchmal brauche ich mehrere Versuche, um etwas zu verstehen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Manchmal werde ich wütend. Ich darf Hilfe holen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Muʿāḏ ibn Ǧabal überlieferte, wie der Prophet ﷺ Allahs Recht erklärte.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Nicht jede gute Tat muss jemand bemerken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Nicht unsere Kleidung oder unser Besitz macht unseren Charakter gut.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 2:285 nennt mehrere Glaubensgrundlagen. Der authentische Ḥadīṯ Ǧibrīl nennt sie vollständig als sechs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 20:132 spricht von Geduld und Beständigkeit. Der authentische Ḥadīṯ 69 ermutigt dazu, Menschen nicht unnötig zu überfordern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 24:27 spricht vom Fragen vor dem Eintritt. Der Ḥadīṯ 6245 erklärt ein gutes Verhalten bei der Bitte um Erlaubnis.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 24:27 und al-Buḫārī 6245 ergänzen einander: erst fragen, Antwort beachten und nicht in die Privatsphäre anderer eindringen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 3:134 lobt die Zurückhaltung von Wut. In al-Buḫārī 6114 erklärt der Prophet ﷺ eine andere Art von Stärke.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 3:134 spricht vom Zurückhalten des Zorns; al-Buḫārī 6114 lehrt Beherrschung. Vergeben bedeutet nicht, gefährliche Situationen zu dulden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 51:56 nennt den Grund für unsere Erschaffung. Der authentische Ḥadīṯ 2856 erklärt, dass Allah allein angebetet wird.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 91:9 beschreibt die Läuterung der Seele. Der authentische Ḥadīṯ 2564 lenkt den Blick auf Herz und Handeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 91:9 nennt das Läutern des Selbst. In Ṣaḥīḥ Muslim 2564 wird auf Herzen und Taten verwiesen; Kinder sollen daraus Selbstreflexion statt Bewertungen anderer ableiten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 98:5 erinnert an aufrichtige Anbetung. In al-Buḫārī 1 erklärt der Prophet ﷺ die Bedeutung der Absicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Qurʾān 98:5 fordert die Aufrichtigkeit gegenüber Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Stark sein bedeutet auch, sich bei Ärger zu beherrschen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Stärke bedeutet nicht, bei jedem Streit zu gewinnen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Tarbiyah heißt, auf gute Weise beim Wachsen und Lernen begleitet zu werden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Tarbiyah ist ein pädagogischer Begriff; wir unterscheiden unsere Übungsregeln von Originalzitaten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Tawḥīd bedeutet, die Anbetung ausschließlich Allah zuzuwenden.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Tazkiyah bedeutet, Verhalten und Gewohnheiten zu verbessern, nicht andere Menschen zu verurteilen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Tazkiyah heißt: Ich arbeite an meinen guten Gewohnheiten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Unser Īmān hat sechs wichtige Grundlagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Vor dem Eintreten bitte ich um Erlaubnis.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich einen Fehler mache, kann ich ihn ehrlich zugeben und verbessern.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich etwas Gemeines gesagt habe, kann ich mich entschuldigen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich gelobt werde, darf ich mich bedanken und bescheiden bleiben.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich Hilfe brauche, sage ich es.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn ich kein Ja höre, gehe ich nicht einfach hinein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wenn mich etwas ärgert, darf ich das freundlich sagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wenn wir Duʿāʾ machen, bitten wir Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wichtig ist, wie wir denken und handeln.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir bemühen uns, Gutes für Allah zu tun.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir dürfen Allah danken.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir dürfen Fragen stellen und uns neue Aufgaben in erreichbare Schritte aufteilen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir glauben an Allah und Seine Engel.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir glauben an Allah.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir glauben an Allahs Bestimmung und fragen bei schwierigen Fragen nach.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir glauben an Allahs Bücher und Seine Gesandten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir glauben an den Jüngsten Tag.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir können Ärger bemerken, ohne damit andere zu verletzen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen die sechs Glaubensgrundlagen mit Qurʾān 2:285 und Ṣaḥīḥ Muslim 8.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen langsam. Wir dürfen Fragen stellen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wir lernen, warum die Anbetung allein Allah gehört.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Wir prüfen, was die Quellen über Selbstbeherrschung und Vergeben sagen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir respektieren die Privatsphäre anderer.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "all"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden äußere Merkmale von innerer Haltung und konkreten Handlungen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden die äußere Handlung von der Absicht dahinter.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden die verkürzte Versstelle vom vollständigeren Ḥadīṯ Ǧibrīl.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir unterscheiden religiöse Anbetung von normaler gegenseitiger Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir untersuchen Geduld beim Lernen und freundliche religiöse Unterweisung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir verbinden die islamischen Regeln des Erlaubnisbittens mit sicherem Verhalten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wir verbinden Qurʾān 51:56 mit dem Ṣaḥīḥ-Ḥadīṯ von Muʿāḏ ibn Ǧabal.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wut ist ein Gefühl, das jeder mal kennt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Wut ist nicht automatisch falsch; entscheidend ist unser Umgang damit.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Zu ihnen zählen außerdem Engel, die Bücher und die Gesandten Allahs.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Zwei Menschen können äußerlich dasselbe tun, obwohl ihre Absichten verschieden sind.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 1,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "narration",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Beschreibe eine sichere Alltagshandlung zu Allah allein anbeten und erkläre, wie sie zu den Quellen passt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Beschreibe eine sichere Alltagshandlung zu Die sechs Glaubenssäulen und erkläre, wie sie zu den Quellen passt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Beschreibe eine sichere Alltagshandlung zu Erst um Erlaubnis bitten und erkläre, wie sie zu den Quellen passt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Beschreibe eine sichere Alltagshandlung zu Gutes mit richtiger Absicht und erkläre, wie sie zu den Quellen passt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Beschreibe eine sichere Alltagshandlung zu Stark sein bei Wut und erkläre, wie sie zu den Quellen passt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Beschreibe eine sichere Alltagshandlung zu Tarbiyah – freundlich lernen und erkläre, wie sie zu den Quellen passt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Beschreibe eine sichere Alltagshandlung zu Tazkiyah – gute innere Haltung und erkläre, wie sie zu den Quellen passt.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre an einem eigenen Beispiel: Allah allein anbeten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre an einem eigenen Beispiel: Die sechs Glaubenssäulen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre an einem eigenen Beispiel: Erst um Erlaubnis bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre an einem eigenen Beispiel: Gutes mit richtiger Absicht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre an einem eigenen Beispiel: Stark sein bei Wut.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre an einem eigenen Beispiel: Tarbiyah – freundlich lernen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Erkläre an einem eigenen Beispiel: Tazkiyah – gute innere Haltung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Warum ist die methodische Übung kein wörtlicher Ḥadīṯ?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Warum ist Selbstbeherrschung nach dem Ḥadīṯ eine Stärke?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Warum schützt das Erlaubnisbitten die Privatsphäre?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Was kannst du hier Gutes tun?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Was merken wir uns?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "question",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "question",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Welche Handlung ist durch den Unterricht begründet?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "question",
+          "age": "9-10"
+        },
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Welche Handlung passt zu dieser Lehre?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Welche zwei Grundlagen ergänzt der Ḥadīṯ Ǧibrīl zu den vier im Versauszug genannten?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wie ergänzen sich Qurʾān 51:56 und die Überlieferung von Muʿāḏ?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wie ergänzen sich Qurʾān 91:9 und Ṣaḥīḥ Muslim 2564?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Wie unterscheiden sich Niyyah und Ikhlāṣ?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "question",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Woher stammen die religiösen Belege?",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 2,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "question",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "question",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Aus dem Qurʾān und einer authentischen Überlieferung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich bitte um eine einfache Erklärung und übe langsam.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich danke Allah und mache ein Bittgebet.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich denke über mein Verhalten nach und versuche eine kleine gute Tat.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich entschuldige mich und versuche es besser zu machen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich erkläre freundlich: Īmān bedeutet Glaube.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich helfe, weil ich Gutes für Allah tun möchte, nicht nur für Applaus.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich kann die Glaubensgrundlagen nach und nach nennen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich kann mich trotzdem über die gute Tat freuen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich klopfe an und frage, ob ich eintreten darf.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich klopfe an und warte auf ihre Erlaubnis.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich lerne Schritt für Schritt und frage, wenn ich ein Wort nicht verstehe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich richte mein Bittgebet an Allah und kann Menschen um praktische Hilfe bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich sage, dass ich wütend bin, und bitte bei Bedarf um Hilfe.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 1: Ich spreche ruhig oder hole Unterstützung.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Aus einer ausgedachten Geschichte ohne Quelle.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "answer",
+          "age": "6-8"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich bete einen Gegenstand an.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich gebe auf, ohne um Hilfe zu bitten.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich haue das andere Kind.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich lache die Frage aus.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich mache ihn erneut absichtlich traurig.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich muss andere absichtlich verletzen.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-tawhid-recht-allahs",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-iman-sechs-grundlagen",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-wut-ruhig-bleiben",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-tarbiyah-sanft-lernen",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "akhlaq-nafs-gutes-herz",
+          "kind": "answer",
+          "age": "4-5"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich stürme einfach hinein.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "adab-erlaubnis-anklopfen",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    },
+    {
+      "text": "Antwort 2: Ich werde gemein, weil niemand klatscht.",
+      "lang": "de-DE",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "modelId": "eleven_v4",
+      "priority": 3,
+      "reviewStatus": "not-generated",
+      "contexts": [
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "answer",
+          "age": "4-5"
+        },
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "answer",
+          "age": "6-8"
+        },
+        {
+          "lessonId": "aqidah-ikhlas-warum-gutes-tun",
+          "kind": "answer",
+          "age": "9-10"
+        }
+      ]
+    }
+  ]
+}

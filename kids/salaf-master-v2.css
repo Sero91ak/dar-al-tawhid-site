@@ -1,0 +1,30 @@
+/* Master-story reading V2: isolated Salaf detail, no changes to Home/nav/icons. */
+.salaf-detail .salaf-player[hidden],
+.salaf-detail .salaf-actions button[hidden],
+.salaf-detail .salaf-text[hidden]{display:none!important}
+.salaf-detail .salaf-actions:has(#salafFollow[hidden]){grid-template-columns:minmax(0,1fr)!important}
+.salaf-detail .salaf-actions:has(#salafFollow[hidden]) #salafRead{
+  background:var(--sl-accent)!important;color:var(--sl-accent-ink)!important;
+  min-height:66px!important;font-size:clamp(19px,4vw,24px)!important
+}
+.salaf-detail .salaf-text:not([hidden]){
+  display:block!important;max-width:780px;margin-inline:auto!important;
+  padding:clamp(14px,3vw,24px) 2px 32px!important;
+  font-size:clamp(21px,4.4vw,27px)!important;line-height:1.76!important;
+  letter-spacing:normal;overflow-wrap:break-word;user-select:text;-webkit-user-select:text
+}
+.salaf-detail .salaf-text p{margin:0 0 1.1em!important}
+.salaf-detail .salaf-source-link{
+  display:inline-flex;align-items:center;justify-content:center;
+  margin-top:9px;padding:10px 14px;min-height:46px;
+  font-size:15px;font-weight:850;line-height:1.25;
+  border-radius:13px;border:1px solid var(--sl-line);
+  color:var(--sl-accent);text-decoration:none;
+}
+.salaf-detail .salaf-source-link:focus-visible{outline:3px solid var(--sl-accent);outline-offset:3px}
+body:has(.app[data-gender="girl"]) .salaf-detail .salaf-source-link{
+  background:rgba(255,198,229,.07)
+}
+@media(min-width:800px){
+  .salaf-detail .salaf-text:not([hidden]){font-size:26px!important;line-height:1.8!important}
+}

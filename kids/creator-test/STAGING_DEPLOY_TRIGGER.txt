@@ -1,20 +1,4 @@
-KIDS CREATOR STAGING DEPLOY TRIGGER V1
-This file is changed only on kids-creator-staging to publish a reviewed preview build.
-Never change it on main and never merge it into the visitor branch.
-Initial checkpoint: 2026-10-11; source from 8d3f3b1 / ccb293c.
-
-Checkpoint V2: 2026-10-11 fix HTML canonical redirect loop; Worker serves /kids/start without 302 back to start.html.
-
-Checkpoint V3: 2026-10-11 creator test-console 52 weeks 208 slots + independent native TEST menu, no visitor publishing.
-
-Checkpoint V4: 2026-10-11 installierbare KIDS TEST Web-App /kids/test-console/; lokale Redaktionsentwürfe; globaler Release-Lock nur auf Staging.
-
-Checkpoint V5: 2026-10-11 full-scope KIDS TEST standalone Web-App /kids/ + Safari UA and return navigation. Staging only.
-
-Checkpoint V6: 2026-10-11 simpler 3-action KIDS Test UI, all 38 existing Academy lessons accessible on staging, five protected art paths, child QA labels hidden. ONLY staging, no main.
-
-Checkpoint V7: 2026-10-11 exact Academy artwork copied into /kids/assets/academy-stage/ at deploy, all 38 lessons preview in KIDS TEST, visitor release blocked.
-
-Checkpoint V8: 2026-10-11 one-tap direct Academy lesson content preview editor; 38 existing lessons test-only, local browser data, never visitor.
-
-Checkpoint V9: 2026-10-11 test-order fix for direct Academy editor QA; isolated Creator Worker deploy only.
+KIDS Creator standalone staging parity
+Synchronized public Kids files from main f4ff94fbe42f7b5da09196894d90760e903cb13a
+Preserved KIDS TEST creator/editor-specific assets and release gates.
+Sync: 2026-10-14

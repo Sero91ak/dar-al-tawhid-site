@@ -1,0 +1,135 @@
+/* KIDS_PRAYER_DAY_PROFILE_V1337
+   The prayer-day layer is appended under document.body, outside .app.
+   Target its actual data-gender rather than relying on .app selectors.
+   Only color, borders, glow and the EXISTING hero image overlay change.
+   No scrolling, prayer calculation, asset substitution or navigation. */
+
+/* BOYS: compact warm-navy glass header rather than disconnected banner. */
+html body #kidsSalahDailyPage[data-gender="boy"] .kids-salah-day-header.kids-detail-appbar{
+ background:linear-gradient(110deg,rgba(9,33,46,.88),rgba(12,42,53,.79))!important;
+ border:1px solid rgba(245,211,155,.36)!important;
+ border-radius:19px!important;
+ box-shadow:0 8px 22px rgba(4,17,30,.23),inset 0 1px rgba(255,232,186,.10)!important;
+}
+html body #kidsSalahDailyPage[data-gender="boy"] .kids-salah-day-header .kids-detail-dock-back{
+ background:linear-gradient(145deg,rgba(30,61,72,.89),rgba(10,36,52,.88))!important;
+ border-color:rgba(243,211,148,.48)!important;
+}
+html body #kidsSalahDailyPage[data-gender="boy"] .kids-salah-day-header .kids-detail-appbar-copy{
+ border-left-color:rgba(245,217,156,.29)!important;
+}
+html body #kidsSalahDailyPage[data-gender="boy"] .kids-salah-day-header .kids-detail-appbar-subtitle{
+ color:rgba(255,236,207,.77)!important;
+}
+
+/* GIRLS: matte plum and soft rose, without the old teal/petrol layers. */
+html body #kidsSalahDailyPage[data-gender="girl"]{
+ background:#2c2035!important;
+ background-image:linear-gradient(180deg,#2e2238 0%,#382943 55%,#2a2035 100%)!important;
+ color:#fff1eb!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"]::before{
+ background-color:#30243b!important;
+ background-image:
+  linear-gradient(180deg,
+   rgba(39,23,45,.17) 0%,rgba(41,25,48,.10) 39%,
+   rgba(44,27,52,.49) 73%,#2e2238 99%),
+  url("/kids/assets/kids-salah-v1272/hero-day.png?v=1276")!important;
+ background-size:100% 100%,cover!important;
+ background-position:center,center 43%!important;
+ background-repeat:no-repeat!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-header.kids-detail-appbar{
+ background:linear-gradient(110deg,rgba(58,38,60,.90),rgba(43,31,54,.81))!important;
+ border:1px solid rgba(248,202,221,.45)!important;
+ border-radius:19px!important;
+ box-shadow:0 9px 23px rgba(29,17,35,.23),inset 0 1px rgba(255,224,235,.11)!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-header.kids-detail-appbar::after{
+ background:linear-gradient(90deg,rgba(250,203,222,.27),transparent)!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-header .kids-detail-dock-back{
+ background:linear-gradient(145deg,rgba(109,71,97,.77),rgba(65,45,76,.87))!important;
+ border-color:rgba(251,204,226,.55)!important;
+ box-shadow:0 3px 12px rgba(26,17,31,.18)!important;
+ color:#ffe3eb!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-header .kids-detail-dock-back::before{
+ border-left-color:#ffe2ea!important;
+ border-bottom-color:#ffe2ea!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-header .kids-detail-appbar-copy{
+ border-left-color:rgba(244,191,215,.38)!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-header .kids-detail-appbar-title{
+ color:#fff1e8!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-header .kids-detail-appbar-subtitle{
+ color:rgba(255,223,236,.80)!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-hero h2{
+ color:#fff0e9!important;
+ text-shadow:0 3px 12px rgba(34,18,34,.55)!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-hero h2 em{
+ color:#f9c7db!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-subtitle{
+ color:rgba(255,230,239,.88)!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-place{
+ background:linear-gradient(112deg,rgba(61,40,63,.91),rgba(43,31,55,.87))!important;
+ border-color:rgba(243,197,217,.43)!important;
+ box-shadow:inset 0 1px rgba(255,229,238,.09)!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-place button{
+ background:rgba(110,67,95,.23)!important;
+ border-color:rgba(249,204,225,.61)!important;
+ color:#ffe0bd!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-place-pin{
+ background:#f2bfd5!important;
+ box-shadow:0 0 0 3px rgba(240,186,216,.15)!important;
+}
+
+/* Different warm surfaces to avoid a monotonous all-purple page. */
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-list .kids-salah-day-item{
+ background:linear-gradient(111deg,rgba(75,53,81,.92),rgba(48,38,66,.90))!important;
+ border-color:rgba(240,194,218,.31)!important;
+ box-shadow:inset 0 1px rgba(255,225,239,.08)!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-list .kids-salah-day-item:nth-child(2n){
+ background:linear-gradient(111deg,rgba(80,57,76,.91),rgba(56,41,70,.91))!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-list .kids-salah-day-item:nth-child(3n){
+ background:linear-gradient(111deg,rgba(69,55,75,.92),rgba(49,39,67,.91))!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-list .kids-salah-day-item.is-next{
+ background:linear-gradient(111deg,rgba(101,66,100,.93),rgba(58,40,79,.93))!important;
+ border-color:rgba(251,208,229,.77)!important;
+ box-shadow:0 0 13px rgba(241,165,202,.12),inset 0 1px rgba(255,229,243,.10)!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-list .kids-salah-day-item.is-current{
+ background:linear-gradient(111deg,rgba(105,67,88,.93),rgba(61,46,76,.91))!important;
+ border-color:rgba(255,216,171,.80)!important;
+ box-shadow:0 0 13px rgba(235,184,174,.11),inset 0 1px rgba(255,233,227,.10)!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-item time{
+ color:#f6d0e2!important;
+ text-shadow:0 2px 6px rgba(24,15,30,.22)!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-item.is-next time{
+ color:#ffe7f1!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-item.is-current time{
+ color:#ffe1ae!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-item-name strong{
+ color:#fff0eb!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-item-name small{
+ color:rgba(255,227,239,.77)!important;
+}
+html body #kidsSalahDailyPage[data-gender="girl"] .kids-salah-day-item-orb{
+ background-color:#4d3550!important;
+}

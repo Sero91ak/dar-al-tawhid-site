@@ -1,0 +1,303 @@
+/* KIDS_ACADEMY_RESPONSIVE_INTEGRITY_V29
+   Repair tablet/iPad landscape card collisions caused by earlier fixed sizing.
+   CSS-only: never modify lesson access, progress, audio, profile state or navigation. */
+@media (min-width:768px) and (min-height:650px) {
+  body:not([data-embedded="true"]) #academyHome.academy-home:not([hidden]) {
+    display:grid!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-template-rows:max-content max-content max-content!important;
+    grid-auto-rows:max-content!important;
+    grid-auto-flow:row!important;
+    align-items:start!important;
+    align-content:start!important;
+    gap:clamp(16px,2vw,24px)!important;
+    min-width:0!important;
+    min-height:0!important;
+    overflow-x:hidden!important;
+    overflow-y:auto!important;
+    padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .overview-hero {
+    grid-column:1/-1!important;
+    grid-row:1!important;
+    align-self:start!important;
+    margin:0!important;
+    min-height:0!important;
+    height:clamp(282px,29vw,344px)!important;
+    max-height:none!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .today-class,
+  body:not([data-embedded="true"]) #academyHome > .journey {
+    box-sizing:border-box!important;
+    position:relative!important;
+    left:auto!important;
+    right:auto!important;
+    top:auto!important;
+    bottom:auto!important;
+    transform:none!important;
+    min-width:0!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:255px!important;
+    max-height:none!important;
+    overflow:visible!important;
+    margin:0!important;
+    align-self:stretch!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .today-class {
+    grid-column:1!important;
+    grid-row:2!important;
+    display:flex!important;
+    flex-direction:column!important;
+    flex-wrap:nowrap!important;
+    align-items:stretch!important;
+    justify-content:flex-start!important;
+    gap:12px!important;
+    padding:clamp(18px,2.3vw,25px)!important;
+    --academy-today-ink:#20404b;
+  }
+  body[data-profile="girl"]:not([data-embedded="true"]) #academyHome > .today-class{
+    --academy-today-ink:#563750;
+  }
+  body:not([data-embedded="true"]) #academyHome .today-text,
+  body:not([data-embedded="true"]) #academyHome .today-text :is(h2,p,strong,span,div),
+  body:not([data-embedded="true"]) #academyHome .today-summary,
+  body:not([data-embedded="true"]) #academyHome .academy-time {
+    position:static!important;
+    display:revert!important;
+    height:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+    opacity:1!important;
+    color:var(--academy-today-ink,#20404b)!important;
+    text-shadow:none!important;
+  }
+  body:not([data-embedded="true"]) #academyHome .today-text .kicker {
+    display:block!important;
+    color:#93601c!important;
+  }
+  body[data-profile="girl"]:not([data-embedded="true"]) #academyHome .today-text .kicker{
+    color:#8a506f!important;
+  }
+  body:not([data-embedded="true"]) #academyHome .today-text h2 {
+    display:block!important;
+    font-size:clamp(23px,2.7vw,30px)!important;
+    line-height:1.2!important;
+    margin:5px 0!important;
+  }
+  body:not([data-embedded="true"]) #academyHome .today-text p {
+    display:block!important;
+    font-size:clamp(15px,1.6vw,18px)!important;
+    line-height:1.42!important;
+    margin:7px 0!important;
+  }
+  body:not([data-embedded="true"]) #academyHome .today-summary,
+  body:not([data-embedded="true"]) #academyHome .academy-time{
+    display:block!important;
+    line-height:1.42!important;
+    margin-top:7px!important;
+    overflow-wrap:anywhere!important;
+  }
+  body:not([data-embedded="true"]) #academyHome .today-button {
+    position:static!important;
+    display:flex!important;
+    flex:0 0 auto!important;
+    align-self:stretch!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-height:54px!important;
+    height:auto!important;
+    margin:auto 0 0!important;
+    padding:12px 16px!important;
+    color:#203b46!important;
+    text-align:center!important;
+    white-space:normal!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .journey {
+    grid-column:2!important;
+    grid-row:2!important;
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    justify-content:center!important;
+    gap:10px!important;
+    padding:clamp(18px,2.3vw,25px)!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .journey > div {
+    flex:none!important;
+    min-width:0!important;
+    width:100%!important;
+    max-width:100%!important;
+    margin:0!important;
+    position:static!important;
+    overflow:visible!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .journey :is(h2,p,small,#courseStatus,#reviewNotice,#journeyDetail){
+    position:static!important;
+    height:auto!important;
+    max-height:none!important;
+    overflow:visible!important;
+    opacity:1!important;
+    overflow-wrap:break-word!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .journey h2{
+    color:#fff5df!important;
+    font-size:clamp(24px,2.7vw,32px)!important;
+    line-height:1.18!important;
+    margin:5px 0 8px!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .journey #reviewNotice,
+  body:not([data-embedded="true"]) #academyHome > .journey #journeyDetail{
+    color:#e7e9e8!important;
+    line-height:1.44!important;
+    margin:5px 0!important;
+  }
+  body[data-profile="girl"]:not([data-embedded="true"]) #academyHome > .journey #reviewNotice,
+  body[data-profile="girl"]:not([data-embedded="true"]) #academyHome > .journey #journeyDetail{
+    color:#f6dfea!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .subjects {
+    position:relative!important;
+    grid-column:1/-1!important;
+    grid-row:3!important;
+    align-self:start!important;
+    box-sizing:border-box!important;
+    width:100%!important;
+    min-width:0!important;
+    height:auto!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+    margin:0!important;
+    padding:0 0 20px!important;
+  }
+  body:not([data-embedded="true"]) #academyHome .subjects-title{
+    position:static!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    margin:0 0 16px!important;
+  }
+  body:not([data-embedded="true"]) #academyHome .subjects-title :is(h2,p){
+    height:auto!important;
+    overflow:visible!important;
+    opacity:1!important;
+  }
+  body:not([data-embedded="true"]) #academyHome .category-grid {
+    display:grid!important;
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    grid-auto-rows:max-content!important;
+    align-items:stretch!important;
+    gap:clamp(12px,1.5vw,18px)!important;
+    width:100%!important;
+    min-width:0!important;
+    margin:0!important;
+  }
+  body:not([data-embedded="true"]) #academyHome .category-card {
+    position:relative!important;
+    min-width:0!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:240px!important;
+    max-height:none!important;
+    aspect-ratio:auto!important;
+    align-self:stretch!important;
+  }
+  body:not([data-embedded="true"]) #academyHome .category-card-copy{
+    position:relative!important;
+    width:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+    max-height:none!important;
+    overflow:visible!important;
+    padding:14px!important;
+    overflow-wrap:anywhere!important;
+  }
+}
+@media (min-width:768px) and (max-width:999px) and (min-height:650px){
+  body:not([data-embedded="true"]) #academyHome .category-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  body:not([data-embedded="true"]) #academyHome .category-card{
+    min-height:225px!important;
+  }
+}
+@media (max-width:767px), (max-height:649px) {
+  body:not([data-embedded="true"]) #academyHome.academy-home:not([hidden]){
+    display:flex!important;
+    flex-direction:column!important;
+    gap:clamp(13px,3vw,18px)!important;
+    grid-template-rows:none!important;
+    align-items:stretch!important;
+    height:auto!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > :is(.today-class,.journey,.subjects){
+    box-sizing:border-box!important;
+    width:100%!important;
+    max-width:100%!important;
+    min-width:0!important;
+    min-height:0!important;
+    height:auto!important;
+    max-height:none!important;
+    position:relative!important;
+    overflow:visible!important;
+    grid-column:auto!important;
+    grid-row:auto!important;
+    margin:0!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .today-class {
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:10px!important;
+    --academy-today-ink:#20404b;
+  }
+  body[data-profile="girl"]:not([data-embedded="true"]) #academyHome > .today-class{
+    --academy-today-ink:#563750;
+  }
+  body:not([data-embedded="true"]) #academyHome .today-text :is(h2,p,strong,span,div){
+    opacity:1!important;
+    color:var(--academy-today-ink)!important;
+    overflow:visible!important;
+    max-height:none!important;
+    text-shadow:none!important;
+  }
+  body:not([data-embedded="true"]) #academyHome .today-text .kicker{color:#94651b!important}
+  body[data-profile="girl"]:not([data-embedded="true"]) #academyHome .today-text .kicker{color:#8a506f!important}
+  body:not([data-embedded="true"]) #academyHome .today-button{
+    position:static!important;
+    width:100%!important;
+    height:auto!important;
+    max-height:none!important;
+    min-height:51px!important;
+    margin:7px 0 0!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .journey{
+    display:flex!important;
+    flex-direction:column!important;
+    align-items:stretch!important;
+    gap:9px!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .journey .journey-status{
+    width:100%!important;
+    min-width:0!important;
+    height:auto!important;
+    text-align:left!important;
+  }
+  body:not([data-embedded="true"]) #academyHome > .subjects{
+    display:block!important;
+    padding-block:5px 20px!important;
+  }
+}
+/* The lesson page retains its independent scrolling, but no generated
+   text or navigation can be cut off by fixed maximum heights. */
+body[data-academy-view="lesson"] #lessonMain #stageSurface{
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  scroll-padding-bottom:16px!important;
+}
+body[data-academy-view="lesson"] #lessonMain #stageSurface > .lesson-stage:not([hidden]){
+  height:auto!important;
+  max-height:none!important;
+  overflow:visible!important;
+}

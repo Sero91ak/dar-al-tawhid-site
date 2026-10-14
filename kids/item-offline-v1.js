@@ -126,8 +126,8 @@ function story(card,{category,item,sourceUrl,artwork,hero,audioMeta,readerUrl},i
  const audio=allowed(String(audioMeta?.url||""));
  const urls=[sourceUrl,readerUrl||"/kids/story-hub.js?v=27",
   "/kids/data/story-hub.json?v=7",
-  "/kids/story-follow-reader.js?v=17",
-  "/kids/story-follow-reader.css?v=10","/kids/story-hub.css?v=12",
+  "/kids/story-follow-reader.js?v=18",
+  "/kids/story-follow-reader.css?v=11","/kids/story-hub.css?v=12",
   "/kids/story-policy.js?v=2",
   artwork,hero,audio];
  oneButton(card,{key:"story:"+category+":"+String(item.id)+":"+currentAge(),
@@ -138,7 +138,7 @@ function deen(card,{item,audioMeta,cover,hero},inline=false){
  const audio=allowed(String(audioMeta?.url||""));
  const urls=["/kids/data/deen-lessons.json?v=3","/kids/deen-lessons.js?v=6",
   "/kids/deen-lessons.css?v=2","/kids/deen-learning-v1199.css?v=1199",
-  "/kids/story-follow-reader.css?v=10","/kids/story-follow-reader.js?v=17",
+  "/kids/story-follow-reader.css?v=11","/kids/story-follow-reader.js?v=18",
   "/kids/story-policy.js?v=2",cover,hero,audio];
  oneButton(card,{key:"deen:"+String(item.id)+":"+currentAge(),
  title:item.title||item.name||"Unterricht",kind:"deen",audio:!!audio,urls},inline);
@@ -154,7 +154,13 @@ function academy(card,{id,title,subject}){
  const urls=["/kids/akademie/index.html",
   "/kids/akademie/curriculum-v1.js?v=20261010-01",
   "/kids/akademie/curriculum-v2.js?v=20261010-09",
-  "/kids/akademie/school-progress-v11.js?v=20261010-11",
+  "/kids/akademie/curriculum-v22.js?v=20261011-01",
+  "/kids/akademie/curriculum-v25.js?v=20261011-01",
+  "/kids/akademie/curriculum-v26.js?v=20261012-01",
+  "/kids/akademie/curriculum-v27.js?v=20261012-27",
+  "/kids/akademie/curriculum-v28.js?v=20261012-28",
+  "/kids/akademie/curriculum-v29.js?v=20261012-29",
+  "/kids/akademie/school-progress-v11.js?v=20261012-30",
   "/kids/owner-voice.js?v=academy-serhat-v1-20261010",
   "/kids/data/academy-audio.json?v=1",
   "/kids/data/owner-voice-audio.json?v=2",

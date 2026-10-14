@@ -1,0 +1,93 @@
+/* KIDS_GIRLS_HOME_PALETTE_FIRSTPAINT_V1348
+   Girls-only image-tint and UI surfaces. Preserve all approved photos,
+   profile data, lesson/audio systems, main navigation and boys' appearance. */
+html body .app[data-gender="girl"] #view-today .choice{
+  background-color:#332539!important;
+  border-color:rgba(243,187,217,.39)!important;
+  box-shadow:0 14px 30px rgba(24,13,30,.20),inset 0 1px rgba(250,229,240,.06)!important;
+}
+html body .app[data-gender="girl"] #view-today .choice.story::before{
+  background-image:
+    linear-gradient(90deg,rgba(35,22,35,.94) 0%,rgba(52,33,43,.75) 43%,rgba(58,32,43,.30) 100%),
+    url("/kids/assets/kids-home-v1176/world-stories.png")!important;
+}
+html body .app[data-gender="girl"] #view-today .choice.quran::before{
+  background-image:
+    linear-gradient(90deg,rgba(37,22,45,.96) 0%,rgba(53,34,57,.81) 42%,rgba(68,43,67,.43) 100%),
+    url("/kids/assets/kids-home-v1176/world-quran.png")!important;
+}
+html body .app[data-gender="girl"] #view-today .choice.dua::before{
+  background-image:
+    linear-gradient(90deg,rgba(41,25,55,.96) 0%,rgba(57,34,68,.79) 45%,rgba(64,36,75,.34) 100%),
+    url("/kids/assets/kids-home-v1176/world-dua.png")!important;
+}
+/* The Quiz card's existing warm artwork is already suitable for girls.
+   Do not substitute a missing or stale image asset. */
+/* Stop costly infinite image scales and shimmering masks without replacing
+   any photography; all four cards remain fully interactive. */
+html body .app[data-gender="girl"] #view-today .choice::before{
+  transform:none!important;
+  will-change:auto!important;
+  animation:none!important;
+  opacity:1!important;
+}
+html body .app[data-gender="girl"] #view-today .choice::after{
+  background:linear-gradient(100deg,rgba(42,25,43,.13),rgba(79,48,77,.22) 74%,rgba(45,28,50,.16))!important;
+  background-size:100% 100%!important;
+  background-position:center!important;
+  animation:none!important;
+}
+html body .app[data-gender="girl"] #view-today .choice .icon{
+  background-color:rgba(44,26,51,.76)!important;
+  border-color:rgba(241,191,221,.28)!important;
+  box-shadow:0 6px 18px rgba(23,12,34,.22),inset 0 1px rgba(255,230,244,.075)!important;
+}
+html body .app[data-gender="girl"] #view-today .choice:is(:active,:focus-visible){
+  border-color:rgba(255,221,237,.66)!important;
+}
+html body .app[data-gender="girl"] #view-today .academy-pilot-entry{
+  background:linear-gradient(115deg,#50314b 0%,#38283e 52%,#2b233a 100%)!important;
+  border-color:rgba(243,187,217,.43)!important;
+  box-shadow:0 12px 26px rgba(23,12,35,.19),inset 0 1px rgba(255,226,239,.09)!important;
+  color:#fff0ee!important;
+}
+html body .app[data-gender="girl"] #view-today .academy-pilot-text small{
+  color:#f3c8d8!important;
+}
+html body .app[data-gender="girl"] #view-today .academy-pilot-text>span{
+  color:rgba(255,230,238,.84)!important;
+}
+html body .app[data-gender="girl"] #view-today .academy-pilot-arrow{
+  background:rgba(225,160,196,.14)!important;
+  border-color:rgba(249,203,227,.43)!important;
+  color:#ffe2ec!important;
+}
+/* The photo on the approved prayer/salām stage stays exactly the same:
+   only the solid backgrounds, masks and edge fade follow the girls' palette. */
+html body .app[data-gender="girl"] #view-today .kids-salah-home-world{
+  background:
+    linear-gradient(180deg,rgba(31,19,42,.11) 0%,rgba(37,23,45,.17) 41%,rgba(44,26,48,.47) 69%,#2d203b 100%),
+    url("/kids/assets/kids-salah-v1272/hero-home.png?v=1274") center 44%/cover no-repeat!important;
+  background-color:#2d203b!important;
+}
+html body .app[data-gender="girl"] #view-today .kids-salah-home-world::after{
+  background:linear-gradient(180deg,
+    rgba(30,20,39,.06) 0%,rgba(36,24,45,.10) 24%,rgba(43,28,49,.24) 48%,
+    rgba(43,27,50,.54) 71%,rgba(42,28,52,.86) 93%,#2d203b 100%)!important;
+}
+html body .app[data-gender="girl"] #view-today .kids-salah-home-world .kids-salah-next{
+  background:rgba(50,32,65,.82)!important;
+  border-color:rgba(240,194,226,.36)!important;
+}
+html body .app[data-gender="girl"] #view-today .section-title{
+  color:#fff3f3!important;
+}
+/* The full-screen home viewport is not forced back to navy after profile restore. */
+html body .app[data-gender="girl"] #view-today{
+  background-color:transparent!important;
+}
+@media (prefers-reduced-motion:reduce){
+  html body .app[data-gender="girl"] #view-today :is(.choice,.academy-pilot-entry){
+    transition:none!important;
+  }
+}
