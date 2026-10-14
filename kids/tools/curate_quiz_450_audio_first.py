@@ -200,6 +200,38 @@ def main():
          "recipes":recipes
     }
     VOICE_PLAN.write_text(json.dumps(voice,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    # Age-by-age incremental costs reuse text snippets once across the ENTIRE academy.
+    produced={t for t,s in texts.items() if s.get("generationId")}
+    incremental={}
+    for age in AGES:
+        parts=[r for r in recipes if r["ageBand"]==age]
+        needed={t for r in parts for part in PARTS
+                  for t in (r[part].get("segments") or [])}
+        fresh=needed-produced
+        incremental[age]={"questions":150,"newUniqueClips":len(fresh),
+                          "newChars":sum(len(t) for t in fresh),
+                          "creditsEstimated":round(sum(len(t) for t in fresh)*0.969066,2)}
+        produced.update(fresh)
+    if sum(x["newChars"] for x in incremental.values())!=charsum:
+        raise RuntimeError("Incremental age-by-age budget differs from full curated total")
+    summary={"schemaVersion":1,"scope":"TAWḤĪD KIDS 450 AUDIO-FIRST",
+             "selection":{"4-6":150,"7-8":150,"9-10":150},
+             "reserve":{"4-6":150,"7-8":150,"9-10":150},
+             "savedFiles":{"active":"kids/data/quiz-kids-curated-450-review.json",
+                           "reserve":"kids/data/quiz-kids-expansion-reserve-450.json",
+                           "fullOriginal":"kids/data/quiz-kids.json",
+                           "audioPlan":"kids/data/quiz-v4-curated-450-production-review.json"},
+             "selectedIDs":[q["id"] for q in active],
+             "reservedIDs":[q["id"] for q in reserve],
+             "uniqueFullSpokenTexts":voice["uniqueFullAudioKeys"],
+             "newUniqueSegmentClips":len(missing),
+             "newV4Characters":charsum,"estimatedAdditionalCredits":voice["creditEstimate"],
+             "perAgeIncremental":incremental,
+             "previous20PaidPreserved":True,"published":False,
+             "originalMP3ExportBlocked":True,"nextCommand":"Quizfragen erweitern",
+             "futureExpansion":"Reuse saved reserve questions and existing full900 audio plan; never rewrite original questions or regenerate paid clips"}
+    (ROOT/"kids/data/quiz-v4-curated-450-summary.json").write_text(
+         json.dumps(summary,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print("KIDS_450_CURATION_QA_PASS "+json.dumps({
        "chosen":len(active),"remaining":len(reserve),
        "ageBands":voice["ageBandCounts"],"allOld20":True,
