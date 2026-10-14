@@ -393,49 +393,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Allah hört unsere Bittgebete?",
+          "prompt": "Was kannst du tun, wenn du dir Sorgen machst?",
           "options": [
-            "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise.",
-            "Allah ist nah."
+            "Allah bitten und einem vertrauten Erwachsenen davon erzählen.",
+            "Die Sorge verstecken und niemandem davon erzählen."
           ],
-          "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Allah ist nah."
+          "correct": 0,
+          "hint": "Denk an Duʿāʾ und an Hilfe im Alltag.",
+          "explain": "Mā schāʾ Allāh! Du kannst Allah bitten und dir Hilfe holen."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Was bedeutet Duʿāʾ?",
           "options": [
-            "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen.",
-            "Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun."
+            "Einen anderen Menschen auslachen.",
+            "Allah um etwas Gutes bitten."
           ],
-          "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "correct": 1,
+          "hint": "Wir wenden uns damit an Allah.",
+          "explain": "Allāhumma bārik! Duʿāʾ heißt, Allah zu bitten."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Allah hört unsere Bittgebete?",
+          "prompt": "Was erfahren wir in Qurʾān 2:186?",
           "options": [
-            "Allah ist nah.",
-            "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise."
+            "Allah ist nahe und erhört die Bitte des Bittenden.",
+            "Nur Erwachsene dürfen Allah um Hilfe bitten."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Allah ist nah."
+          "hint": "Der Vers spricht von Allahs Nähe.",
+          "explain": "Mā schāʾ Allāh! Allah hört die Bitte dessen, der Ihn bittet."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Was passt zu einer schwierigen Aufgabe?",
           "options": [
-            "Wir nennen eine Hilfe, die ein Kind sicher tun kann, und eine Hilfe, die nur Erwachsene tun.",
-            "Jedes Kind nennt eine erlaubte Bitte, die es Allah sagen kann, ohne sie vorspielen zu müssen."
+            "Nach einem Duʿāʾ muss ich nichts mehr versuchen.",
+            "Ich bitte Allah um Hilfe und tue, was ich selbst schaffen kann."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Bitten und Bemühen gehören zusammen.",
+          "explain": "Allāhumma bārik! Du kannst beten und dich bemühen."
         },
         {
           "type": "text",
@@ -462,14 +462,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Welche Aussage beschreibt unser Lernziel richtig?",
           "options": [
-            "Mit Erlaubnis der Eltern helfen wir einem kranken oder älteren Menschen auf eine kleine, sichere Weise.",
-            "Allah ist nah."
+            "Ein Bittgebet verbietet es, um Unterstützung zu bitten.",
+            "Duʿāʾ, Vorbereitung und menschliche Unterstützung können zusammengehören."
           ],
           "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Der Qurʾān-Vers wird von einem Alltagsbeispiel begleitet.",
+          "explain": "Sehr gut! Der Unterricht trennt den Verssinn von unserer praktischen Anwendung."
         }
       ]
     },
@@ -611,49 +611,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Der Qurʾān als Offenbarung?",
+          "prompt": "Von wem ist uns der Qurʾān offenbart worden?",
           "options": [
-            "Der Qurʾān ist Allahs Buch.",
-            "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen."
+            "Von Allah.",
+            "Von einer Schulklasse."
           ],
           "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
+          "hint": "Wir lernen: Der Qurʾān ist Allahs Buch.",
           "explain": "Mā schāʾ Allāh! Der Qurʾān ist Allahs Buch."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Wie behandeln wir ein Qurʾān-Exemplar?",
           "options": [
-            "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah.",
-            "Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre."
+            "Wir lassen es absichtlich achtlos liegen.",
+            "Wir behandeln es sorgfältig und legen es an einen sauberen Platz."
           ],
-          "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "correct": 1,
+          "hint": "Denke an das Beispiel aus der Stunde.",
+          "explain": "Allāhumma bārik! Wir gehen sorgsam damit um."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Der Qurʾān als Offenbarung?",
+          "prompt": "Was lernen wir in der Stunde über den Qurʾān?",
           "options": [
-            "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen.",
-            "Der Qurʾān ist Allahs Buch."
+            "Es ist ein gewöhnliches Schulheft.",
+            "Er ist Allahs Buch und eine Rechtleitung für Menschen."
           ],
           "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
+          "hint": "Erinnere dich an Qurʾān 2:2.",
           "explain": "Mā schāʾ Allāh! Der Qurʾān ist Allahs Buch."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Was ist ein respektvoller Umgang mit dem Qurʾān?",
           "options": [
-            "Wir sagen mit eigenen Worten: Dieses Buch kommt von Allah.",
-            "Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre."
+            "Wir behandeln das Exemplar sorgsam und halten es sauber.",
+            "Wir werfen das Exemplar absichtlich herum."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Beachte unser Alltagsbeispiel.",
+          "explain": "Allāhumma bārik! Achtsamkeit ist eine gute Übung."
         },
         {
           "type": "text",
@@ -680,14 +680,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Welche Aussage passt zu unserer Lektion?",
           "options": [
-            "Der Qurʾān ist Allahs Buch.",
-            "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen."
+            "Qurʾān 2:2 beschreibt das Buch als frei von Zweifel.",
+            "Die Stunde behauptet, der Qurʾān sei von Menschen erfunden."
           ],
           "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "hint": "Denke an die gelesene Qurʾān-Stelle.",
+          "explain": "Sehr gut! Wir unterscheiden den Vers von unserem Alltagsbeispiel."
         }
       ]
     },
@@ -829,49 +829,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Nicht mit guten Taten prahlen?",
+          "prompt": "Wie sprechen wir über eine gute Tat?",
           "options": [
-            "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen.",
-            "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen."
+            "Wir machen andere dabei nicht klein.",
+            "Wir sagen: Ich bin besser als alle anderen."
           ],
-          "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Wir erzählen von einer guten Tat, ohne uns wichtig zu machen."
+          "correct": 0,
+          "hint": "Freundlich sein gehört auch nach dem Helfen dazu.",
+          "explain": "Mā schāʾ Allāh! Wir müssen uns nicht über andere stellen."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Was kannst du nach dem Aufräumen sagen?",
           "options": [
-            "Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre.",
-            "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich."
+            "Alle anderen sind viel schlechter als ich.",
+            "Ich freue mich, dass ich mithelfen konnte."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Ohne Vergleich mit anderen Kindern.",
+          "explain": "Allāhumma bārik! So bleiben unsere Worte freundlich."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Nicht mit guten Taten prahlen?",
+          "prompt": "Was mahnt Qurʾān 31:18 an?",
           "options": [
-            "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
-            "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen."
+            "Hochmut und Prahlerei zu vermeiden.",
+            "Anderen unsere Überlegenheit zu beweisen."
           ],
           "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Wir erzählen von einer guten Tat, ohne uns wichtig zu machen."
+          "hint": "Denk an Luqmāns Mahnung.",
+          "explain": "Mā schāʾ Allāh! Hochmut passt nicht zu gutem Benehmen."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Wie reagierst du nach einer gelungenen Hilfe?",
           "options": [
-            "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
-            "Wir üben, auf eine Gefahr zu zeigen und sie nicht selbst wegzuräumen, wenn das unsicher wäre."
+            "Ich mache mich über langsame Kinder lustig.",
+            "Ich freue mich und bleibe anderen gegenüber freundlich."
           ],
-          "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "correct": 1,
+          "hint": "Gutes tun ist kein Wettbewerb um Überlegenheit.",
+          "explain": "Allāhumma bārik! Die Hilfe bleibt gut, wenn wir nicht prahlen."
         },
         {
           "type": "text",
@@ -898,14 +898,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Was unterscheidet Freude von Prahlerei?",
           "options": [
-            "Wenn etwas gefährlich herumliegt, sagen wir Bescheid, statt wegzusehen.",
-            "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen."
+            "Freude kann dankbar sein; Prahlerei setzt andere herab.",
+            "Eine gute Tat erlaubt immer, andere schlechtzumachen."
           ],
-          "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "correct": 0,
+          "hint": "Denke an das Verhalten nach dem Helfen.",
+          "explain": "Sehr gut! Die Art, wie wir sprechen, gehört zum guten Charakter."
         }
       ]
     },
@@ -1047,49 +1047,49 @@ const additions=
       "4-5": [
         {
           "type": "choice",
-          "prompt": "Was lernen wir heute über Verzeihen und Grenzen achten?",
+          "prompt": "Darfst du sagen, dass dich etwas stört?",
           "options": [
-            "Wir können verzeihen.",
-            "Wir sprechen eine Bitte ruhig und meinen sie ernst."
+            "Nein, ich muss immer alles aushalten.",
+            "Ja, ich darf freundlich eine Grenze nennen."
           ],
-          "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Wir können verzeihen."
+          "correct": 1,
+          "hint": "Verzeihen heißt nicht, still alles hinzunehmen.",
+          "explain": "Mā schāʾ Allāh! Du darfst freundlich Stopp sagen."
         },
         {
           "type": "choice",
-          "prompt": "Was können wir heute üben?",
+          "prompt": "Welche zwei Sätze können wir üben?",
           "options": [
-            "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf.",
-            "Wir sprechen eine kurze Bitte und sagen danach, was wir selbst dazu tun."
+            "Ich verzeihe dir. Bitte hör trotzdem damit auf.",
+            "Ich muss mich auch bei Angst immer allein versöhnen."
           ],
           "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+          "hint": "Zwei freundliche Sätze aus unserer Stunde.",
+          "explain": "Allāhumma bārik! Verzeihen und Grenzen können zusammengehen."
         }
       ],
       "6-8": [
         {
           "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Verzeihen und Grenzen achten?",
+          "prompt": "Was lehrt uns die Stunde über Verzeihen?",
           "options": [
-            "Wir sprechen eine Bitte ruhig und meinen sie ernst.",
-            "Wir können verzeihen."
+            "Verzeihen ist gut, aber niemand muss dabei eine Gefahr verschweigen.",
+            "Man muss wiederholte Gemeinheit schweigend ertragen."
           ],
-          "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Wir können verzeihen."
+          "correct": 0,
+          "hint": "Schutz geht vor erzwungener Versöhnung.",
+          "explain": "Mā schāʾ Allāh! Verzeihen macht ein Unrecht nicht erlaubt."
         },
         {
           "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "prompt": "Was ist bei wiederholten Gemeinheiten wichtig?",
           "options": [
-            "Wir sprechen eine kurze Bitte und sagen danach, was wir selbst dazu tun.",
-            "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf."
+            "Ich tue so, als sei alles in Ordnung.",
+            "Ich hole Hilfe bei einer erwachsenen Vertrauensperson."
           ],
           "correct": 1,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+          "hint": "Bei Gefahr holst du Hilfe.",
+          "explain": "Allāhumma bārik! Hilfeholen ist der richtige Schritt."
         },
         {
           "type": "text",
@@ -1116,14 +1116,14 @@ const additions=
         },
         {
           "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "prompt": "Wie hängen Verzeihen und Kinderschutz zusammen?",
           "options": [
-            "Wir können verzeihen.",
-            "Wir sprechen eine Bitte ruhig und meinen sie ernst."
+            "Verzeihen verpflichtet Betroffene, sofort wieder Kontakt zu suchen.",
+            "Verzeihen kann freiwillig sein; Grenzen und Schutz bleiben wichtig."
           ],
-          "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+          "correct": 1,
+          "hint": "Erwachsene tragen Verantwortung für den Schutz.",
+          "explain": "Richtig! Niemand muss eine Gefahr hinnehmen, um als versöhnlich zu gelten."
         }
       ]
     },
