@@ -264,6 +264,7 @@ jobs:
           node kids/tools/verify-global-release-lock.cjs
           node kids/tools/test-creator-worker-v2.cjs
           node kids/tools/test-native-creator-v2.cjs
+          node kids/tools/test-v2-salaf-pilot.cjs
           node scripts/test-app-health-check.js
           echo "Staging: no production route, no visitor commit, no App Store upload"
       - name: Publish KIDS Creator Worker only
