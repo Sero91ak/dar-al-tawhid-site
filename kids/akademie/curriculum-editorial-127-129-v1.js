@@ -120,7 +120,7 @@ const drafts={
       "goal": "Ich unterscheide Qurʾān 39:53 von den Folgeversen und erkläre Reue ohne Beschämung.",
       "lines": [
         "Assalāmu ʿalaikum! Heute lesen wir einen Vers, der trotz echter Fehler Hoffnung auf Allahs Barmherzigkeit lehrt.",
-        "Qurʾān 39:53 beginnt mit 'Qul' – 'Sag' – und ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln. Er nennt Allah als den Vergebenden und Barmherzigen. Die Anweisungen zur Umkehr im Anschluss stehen in 39:54, nicht im arabischen Originaltext von 39:53.",
+        "Qurʾān 39:53 beginnt mit dem Wort »Sag« und ruft dazu auf, nicht an Allahs Barmherzigkeit zu verzweifeln. Er nennt Allah als den Vergebenden und Barmherzigen. Die Anweisungen zur Umkehr im Anschluss stehen in 39:54, nicht im arabischen Originaltext von 39:53.",
         "Eine Schülerin bemerkt, dass sie eine unfaire Bemerkung gemacht hat. Sie erkennt ihren eigenen Anteil, entschuldigt sich ohne Druck und ändert ihr Verhalten. Niemand muss die Entschuldigung annehmen, um geschützt zu werden.",
         "Ordne drei Textkarten: Hoffnungsaussage 39:53, Aufruf zur Umkehr 39:54, eigene Wiedergutmachung. Warum dürfen wir Folgeverse und moderne Unterrichtssituationen nicht als ein einziges Qurʾān-Zitat ausgeben?"
       ],
