@@ -15,6 +15,7 @@ for(const src of file.sources){
 }
 const required={
 "sidq":{"SRC-CORE1-IBNKATHIR-698":["islamweb.net","49/698"],"SRC-CORE1-MUSLIM-2607":["dorar.net","10209"]},
+"aqidah-iman":{"SRC-CORE8-IBNATIYYAH-21":["islamweb.net","207/21"],"SRC-CORE8-MUSLIM-8":["dorar.net","63778"]},
 "adab-worte":{"SRC-CORE6-TABARI-3021":["islamweb.net","50/3021"],"SRC-CORE6-BUKHARI-6018":["dorar.net","4361"]},
 "akhlaq-amanah":{"SRC-CORE9-IBNALJAWZI-1676":["islamweb.net","ID=1676"]},
 "adab-respekt":{"SRC-CORE10-IBNKATHIR-1005":["islamweb.net","49/1005"],"SRC-CORE10-BUKHARI-5971":["dorar.net","151125"]},
@@ -111,6 +112,18 @@ for(const [id,status] of earlyPrimary){const src=file.sources.find(x=>x.sourceId
  assert.ok(src.checkedBy&&src.authenticityNote&&src.safeApplication&&src.arabic,"Source evidence metadata incomplete: "+id);
  assert.notEqual(src.verificationStatus,"scientifically-approved");
 }
+const imanTafsir=file.sources.find(x=>x.sourceId==="SRC-CORE8-IBNATIYYAH-21");
+const imanHadith=file.sources.find(x=>x.sourceId==="SRC-CORE8-MUSLIM-8");
+assert.ok(imanTafsir&&imanHadith,"Slot 8 requires separated Quran and authentic Sunnah");
+assert.equal(imanTafsir.locus,"Qurʾān 2:3");
+assert.equal(imanTafsir.verificationStatus,"primary-page-direct-read-2026-10-14");
+assert.match(imanTafsir.arabic,/بِالْغَيْبِ/);
+assert.equal(imanHadith.narrator,"ʿUmar ibn al-Ḫaṭṭāb");
+assert.match(imanHadith.number,/8/);
+assert.match(imanHadith.arabic,/بِالْقَدَرِ/);
+assert.equal(imanHadith.verificationStatus,"primary-report-direct-read-2026-10-14");
+assert.match(imanHadith.safeApplication,/Kinder|Kind/);
+assert.notEqual(imanHadith.verificationStatus,"scientifically-approved");
 const sidqTafsir=file.sources.find(x=>x.sourceId==="SRC-CORE1-IBNKATHIR-698");
 const sidqHadith=file.sources.find(x=>x.sourceId==="SRC-CORE1-MUSLIM-2607");
 assert.ok(sidqTafsir&&sidqHadith,"First lesson needs separate Quran/Tafsir and Sunnah evidence");
