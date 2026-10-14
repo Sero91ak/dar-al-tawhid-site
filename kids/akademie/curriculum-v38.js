@@ -747,13 +747,13 @@ const additions=
     "sample": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
     "ageText": {
       "4-5": {
-        "goal": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
-        "intro": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Stell dir vor: Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam. Heute üben wir: Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
+        "goal": "Ich darf mich freuen, ohne andere kleinzumachen.",
+        "intro": "As-salāmu ʿalaikum! Hast du schon einmal etwas richtig gut gemacht? Dann darfst du dich freuen. Vielleicht hast du beim Aufräumen geholfen. Es wäre aber nicht freundlich zu sagen: Ich bin besser als alle anderen. Im Qurʾān, in Vers 31:18, wird vor Hochmut gewarnt. Wir sagen stattdessen: Al-ḥamdu lillāh, ich durfte helfen. Wer neben uns steht, soll sich ebenfalls freuen dürfen. Probieren wir aus, wie man stolz auf eine gute Anstrengung sein kann, ohne andere zu verspotten.",
         "lines": [
-          "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
-          "Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen.",
-          "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
-          "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich."
+          "Du darfst dich über eine gelungene Aufgabe freuen.",
+          "Qurʾān 31:18 warnt davor, hochmütig zu sein.",
+          "Wir machen andere mit unseren Worten nicht klein.",
+          "Wir können sagen: Al-ḥamdu lillāh, ich durfte helfen."
         ],
         "evidence": "Wir lernen mit Qurʾān 31:18. Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1445. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 31:18. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -769,17 +769,17 @@ const additions=
         ],
         "situation": "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
         "practice": "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
-        "summary": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
-        "audioScript": "Nicht mit guten Taten prahlen. Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam. Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich."
+        "summary": "Eine gute Tat ist schön. Wir freuen uns darüber, ohne andere schlechtzumachen.",
+        "audioScript": "Nicht mit guten Taten prahlen. Eine gute Tat ist schön. Wir freuen uns darüber, ohne andere schlechtzumachen. Du darfst dich über eine gelungene Aufgabe freuen. Qurʾān 31:18 warnt davor, hochmütig zu sein. Wir machen andere mit unseren Worten nicht klein."
       },
       "6-8": {
-        "goal": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Wir lesen Qurʾān 31:18. Der Vers bedeutet sinngemäß: Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Allah liebt nicht jeden Eingebildeten und Prahler. So kann das im Alltag aussehen: Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam. Die Aufgabe: Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich. muḫtāl bedeutet: jemand, der eingebildet auftritt. fachūr bedeutet: jemand, der viel mit sich prahlt.",
+        "goal": "Ich erkenne Prahlerei und kann bescheiden über eine gute Tat sprechen.",
+        "intro": "As-salāmu ʿalaikum! Stell dir vor, du hast zusammen mit anderen Kindern einen Raum aufgeräumt. Du bist zufrieden und sagst: Ich habe viel geschafft. Das ist etwas anderes als: Ohne mich könnt ihr gar nichts! Qurʾān 31:18 warnt vor hochmütigem Verhalten und Prahlerei. In diesem Abschnitt lehrt Luqmān seinen Sohn gutes Benehmen. Darum achten wir nicht nur darauf, was wir tun, sondern auch darauf, wie wir mit anderen sprechen. Freude über eine Leistung ist erlaubt; abwertende Vergleiche brauchen wir nicht. Versuche heute zwei Sätze: zuerst einen prahlerischen, dann eine freundliche Formulierung, die niemanden kleinmacht. Wir machen keine Mitschüler zu Zielscheiben dieser Übung.",
         "lines": [
-          "Qurʾān 31:18 ist die gelesene Stelle.",
-          "Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen.",
-          "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
-          "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich."
+          "Qurʾān 31:18 spricht gegen Hochmut und Prahlerei.",
+          "Sich freuen ist etwas anderes, als andere herabzusetzen.",
+          "Luqmāns Worte lehren uns einen guten Umgang miteinander.",
+          "Wir ersetzen verletzende Vergleiche durch bescheidene Worte."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 31:18. Sinngemäß: Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Allah liebt nicht jeden Eingebildeten und Prahler.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1445. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 31:18. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -795,17 +795,17 @@ const additions=
         ],
         "situation": "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
         "practice": "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
-        "summary": "Qurʾān 31:18 trägt diese Stunde. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen.",
-        "audioScript": "Nicht mit guten Taten prahlen. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam. Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich."
+        "summary": "Bescheidenheit bedeutet, Gutes zu tun und dabei die Würde anderer zu achten.",
+        "audioScript": "Nicht mit guten Taten prahlen. Bescheidenheit bedeutet, Gutes zu tun und dabei die Würde anderer zu achten. Qurʾān 31:18 spricht gegen Hochmut und Prahlerei. Sich freuen ist etwas anderes, als andere herabzusetzen. Luqmāns Worte lehren uns einen guten Umgang miteinander."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Nicht mit guten Taten prahlen“ anhand von Qurʾān 31:18 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Nicht mit guten Taten prahlen. Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. In Qurʾān 31:18 lernen wir sinngemäß: Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Allah liebt nicht jeden Eingebildeten und Prahler. muḫtāl bedeutet jemand, der eingebildet auftritt. fachūr bedeutet jemand, der viel mit sich prahlt. Stell dir diese Situation vor: Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam. Welcher nächste Schritt ist gut? Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann zwischen berechtigter Freude, Hochmut und aufrichtigem Handeln unterscheiden.",
+        "intro": "As-salāmu ʿalaikum! Was ist der Unterschied zwischen Stolz auf eine Anstrengung und Hochmut gegenüber anderen? Denke an eine Gruppenarbeit: Ein Kind hat viel geholfen und sagt danach, die anderen hätten nichts geleistet. Die Hilfe war gut, aber die Abwertung verletzt. Qurʾān 31:18 enthält Luqmāns Mahnung, die Menschen nicht hochmütig zu behandeln und nicht prahlerisch aufzutreten. Der Vers spricht unmittelbar über Verhalten und Hochmut. Ob eine Tat innerlich aufrichtig war, beurteilen wir damit nicht einfach über ein anderes Kind. Unser Lernziel ist, die eigene Absicht zu überprüfen und höflich zu sprechen. Formuliere eine Antwort, die Freude zeigt, Allah dankt und die Beiträge anderer anerkennt. Begründe, warum es unpassend wäre, jemanden wegen eines einzigen Satzes als schlechten Menschen festzulegen.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 31:18.",
-          "Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Allah liebt nicht jeden Eingebildeten und Prahler.",
-          "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
-          "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich."
+          "Qurʾān 31:18 warnt vor hochmütigem Auftreten.",
+          "Freude über eine Leistung ist nicht dasselbe wie Prahlerei.",
+          "Die inneren Absichten anderer Menschen kennen wir nicht sicher.",
+          "Wir danken Allah, erkennen die Hilfe anderer an und sprechen respektvoll."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 31:18. Sinngemäß: Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Allah liebt nicht jeden Eingebildeten und Prahler.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1445. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 31:18. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -821,8 +821,8 @@ const additions=
         ],
         "situation": "Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam.",
         "practice": "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
-        "summary": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
-        "audioScript": "Nicht mit guten Taten prahlen. Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Allah liebt nicht jeden Eingebildeten und Prahler. Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam. Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich."
+        "summary": "Der Vers warnt vor Hochmut. Wir üben Bescheidenheit, ohne die Freude an einer guten Anstrengung zu verbieten.",
+        "audioScript": "Nicht mit guten Taten prahlen. Der Vers warnt vor Hochmut. Wir üben Bescheidenheit, ohne die Freude an einer guten Anstrengung zu verbieten. Qurʾān 31:18 warnt vor hochmütigem Auftreten. Freude über eine Leistung ist nicht dasselbe wie Prahlerei. Die inneren Absichten anderer Menschen kennen wir nicht sicher."
       }
     },
     "questions": {
@@ -921,7 +921,7 @@ const additions=
     ],
     "practice": "Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
     "summary": "Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen.",
-    "audioScript": "Nicht mit guten Taten prahlen. Wir erzählen von einer guten Tat, ohne uns wichtig zu machen. Der Vers verbietet, die Wange hochmütig von den Menschen wegzudrehen und eingebildet über die Erde zu gehen. Ein Kind hat beim Aufräumen geholfen und sagt danach: Ich bin der Beste, ihr seid langsam. Wir formulieren denselben Satz neu: Ich habe mitgeholfen. Ohne einen Vergleich.",
+    "audioScript": "Nicht mit guten Taten prahlen. Eine gute Tat ist schön. Wir freuen uns darüber, ohne andere schlechtzumachen. Du darfst dich über eine gelungene Aufgabe freuen. Qurʾān 31:18 warnt davor, hochmütig zu sein. Wir machen andere mit unseren Worten nicht klein.",
     "voiceApproved": false
   },
   "akhlaq-verzeihen-und-grenzen": {
@@ -965,13 +965,13 @@ const additions=
     "sample": "Wir können verzeihen.",
     "ageText": {
       "4-5": {
-        "goal": "Wir können verzeihen.",
-        "intro": "Wir können verzeihen. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. Stell dir vor: Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet. Heute üben wir: Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
+        "goal": "Ich kenne freundliches Verzeihen und darf trotzdem um Hilfe bitten.",
+        "intro": "As-salāmu ʿalaikum! Stell dir vor, jemand stößt dein Heft aus Versehen vom Tisch und entschuldigt sich. Vielleicht sagst du: Ist gut, wir heben es zusammen auf. Verzeihen kann schön sein. Qurʾān 42:40 spricht über das Verzeihen und das Wiederherstellen von Frieden. Aber wenn dich jemand immer wieder verletzt, musst du das nicht allein lösen. Sage Stopp und hole einen Erwachsenen, dem du vertraust. Wir üben heute einen freundlichen Satz und einen Hilfesatz.",
         "lines": [
-          "Wir können verzeihen.",
-          "Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt.",
-          "Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet.",
-          "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf."
+          "Verzeihen kann helfen, nach einem Fehler wieder freundlich miteinander umzugehen.",
+          "Qurʾān 42:40 spricht über Verzeihen und Friedenstiften.",
+          "Du darfst sagen: Bitte hör damit auf.",
+          "Bei wiederholter Gemeinheit holst du eine vertraute erwachsene Person."
         ],
         "evidence": "Wir lernen mit Qurʾān 42:40. Wir können verzeihen.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1686. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 42:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -987,17 +987,17 @@ const additions=
         ],
         "situation": "Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet.",
         "practice": "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf.",
-        "summary": "Wir können verzeihen. Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht.",
-        "audioScript": "Verzeihen und Grenzen achten. Wir können verzeihen. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet. Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf."
+        "summary": "Verzeihen ist gut, wenn es sicher ist. Niemand muss Gemeinheit allein aushalten.",
+        "audioScript": "Verzeihen und Grenzen achten. Verzeihen ist gut, wenn es sicher ist. Niemand muss Gemeinheit allein aushalten. Verzeihen kann helfen, nach einem Fehler wieder freundlich miteinander umzugehen. Qurʾān 42:40 spricht über Verzeihen und Friedenstiften. Du darfst sagen: Bitte hör damit auf."
       },
       "6-8": {
-        "goal": "Wir können verzeihen.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wir können verzeihen. Wir lesen Qurʾān 42:40. Der Vers bedeutet sinngemäß: Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. So kann das im Alltag aussehen: Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet. Die Aufgabe: Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf. ʿafā bedeutet: verzeihen. aṣlaḥa bedeutet: in Ordnung bringen, Frieden stiften.",
+        "goal": "Ich kann Verzeihen von dem Schutz meiner Grenzen unterscheiden.",
+        "intro": "As-salāmu ʿalaikum! Zwei Kinder geraten wegen eines Heftes in Streit. Eines entschuldigt sich. Das andere darf in Ruhe überlegen, ob es verzeihen möchte. Qurʾān 42:40 nennt das Verzeihen und das Friedenstiften als etwas Gutes. Daraus machen wir aber keine Pflicht, eine Verletzung zu verschweigen. Wenn eine Gemeinheit immer wieder passiert, braucht ein Kind Unterstützung von Erwachsenen. Wir betrachten heute zwei Sätze: Ich nehme deine Entschuldigung an. Und: Bitte hör auf, ich hole Hilfe. Beide können richtig sein, je nachdem, was passiert. Du musst weder deine eigenen Erlebnisse erzählen noch einen verletzenden Streit nachspielen. In unserer Übung besprechen wir eine sichere, erfundene Alltagssituation.",
         "lines": [
-          "Qurʾān 42:40 ist die gelesene Stelle.",
-          "Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt.",
-          "Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet.",
-          "Bei Gefahr holst du einen Menschen. Eine Bitte allein reicht dann nicht."
+          "Qurʾān 42:40 spricht von Verzeihen und dem Wiederherstellen von Frieden.",
+          "Entschuldigen und Verzeihen können nach einem Versehen helfen.",
+          "Verzeihen bedeutet nicht, eigenes Unrecht zu verstecken.",
+          "Bei Gefahr oder wiederholtem Ärgern sind Erwachsene für Schutz zuständig."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 42:40. Sinngemäß: Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1686. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 42:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1013,17 +1013,17 @@ const additions=
         ],
         "situation": "Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet.",
         "practice": "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf.",
-        "summary": "Qurʾān 42:40 trägt diese Stunde. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt.",
-        "audioScript": "Verzeihen und Grenzen achten. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet. Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf."
+        "summary": "Friedenstiften und Grenzen setzen passen zusammen. Sicherheit geht vor einer erzwungenen Versöhnung.",
+        "audioScript": "Verzeihen und Grenzen achten. Friedenstiften und Grenzen setzen passen zusammen. Sicherheit geht vor einer erzwungenen Versöhnung. Qurʾān 42:40 spricht von Verzeihen und dem Wiederherstellen von Frieden. Entschuldigen und Verzeihen können nach einem Versehen helfen. Verzeihen bedeutet nicht, eigenes Unrecht zu verstecken."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Verzeihen und Grenzen achten“ anhand von Qurʾān 42:40 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Verzeihen und Grenzen achten. Wir können verzeihen. In Qurʾān 42:40 lernen wir sinngemäß: Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. ʿafā bedeutet verzeihen. aṣlaḥa bedeutet in Ordnung bringen, Frieden stiften. Stell dir diese Situation vor: Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet. Welcher nächste Schritt ist gut? Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann den Wert des Verzeihens erklären, ohne Betroffene unter Versöhnungsdruck zu setzen.",
+        "intro": "As-salāmu ʿalaikum! Ist Verzeihen immer dasselbe wie Schweigen? Nein. In Qurʾān 42:40 wird neben der gerechten Reaktion auf Unrecht auch das Verzeihen und Friedenstiften genannt. Unsere Stunde richtet sich nicht darauf, Kinder eigene Vergeltung üben zu lassen. Wir unterscheiden einen einmaligen Streit, bei dem beide eine Lösung finden können, von wiederholtem Verletzen oder Bedrohen. Im zweiten Fall gehört der Schutz durch Erwachsene an die erste Stelle. Ein betroffenes Kind ist nicht verpflichtet, allein Frieden herzustellen. Denke über folgende Frage nach: Wie kann ein Erwachsener gerecht handeln, ohne jemanden zu beschämen oder zu einer Entschuldigung zu drängen? Formuliere eine Antwort, die die Rechte des betroffenen Kindes respektiert.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 42:40.",
-          "Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt.",
-          "Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet.",
-          "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf."
+          "Qurʾān 42:40 würdigt Verzeihen und Friedenstiften.",
+          "Gerechtigkeit bedeutet nicht, dass Kinder eigene Rache ausüben sollen.",
+          "Bei wiederholter Verletzung braucht es Schutz durch verantwortliche Erwachsene.",
+          "Versöhnung darf nicht erzwungen werden."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 42:40. Sinngemäß: Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1686. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 42:40. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1039,8 +1039,8 @@ const additions=
         ],
         "situation": "Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet.",
         "practice": "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf.",
-        "summary": "Wir können verzeihen. Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf.",
-        "audioScript": "Verzeihen und Grenzen achten. Wir können verzeihen. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet. Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf."
+        "summary": "Verzeihen ist eine Tugend. Der Schutz vor weiterem Unrecht und die Grenzen betroffener Kinder bleiben wichtig.",
+        "audioScript": "Verzeihen und Grenzen achten. Verzeihen ist eine Tugend. Der Schutz vor weiterem Unrecht und die Grenzen betroffener Kinder bleiben wichtig. Qurʾān 42:40 würdigt Verzeihen und Friedenstiften. Gerechtigkeit bedeutet nicht, dass Kinder eigene Rache ausüben sollen. Bei wiederholter Verletzung braucht es Schutz durch verantwortliche Erwachsene."
       }
     },
     "questions": {
@@ -1139,7 +1139,7 @@ const additions=
     ],
     "practice": "Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf.",
     "summary": "Wir können verzeihen. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt.",
-    "audioScript": "Verzeihen und Grenzen achten. Wir können verzeihen. Der Vers sagt, dass die Vergeltung eines Schlechten ein Gleiches sein kann, und dass der Lohn dessen, der vergibt und Frieden stiftet, bei Allah liegt. Jemand stößt aus Versehen ein Heft vom Tisch, sagt Entschuldigung, und das andere Kind entscheidet, ob es den Stoß ruhig beendet. Wir üben zwei Sätze: Ich verzeihe das. Und: Bitte hör damit auf.",
+    "audioScript": "Verzeihen und Grenzen achten. Verzeihen ist gut, wenn es sicher ist. Niemand muss Gemeinheit allein aushalten. Verzeihen kann helfen, nach einem Fehler wieder freundlich miteinander umzugehen. Qurʾān 42:40 spricht über Verzeihen und Friedenstiften. Du darfst sagen: Bitte hör damit auf.",
     "voiceApproved": false
   },
   "adab-ruecksicht-in-der-moschee": {
@@ -1183,13 +1183,13 @@ const additions=
     "sample": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
     "ageText": {
       "4-5": {
-        "goal": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
-        "intro": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. Stell dir vor: Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut. Heute üben wir: Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen. Die arabischen Worte spricht die Lehrperson.",
+        "goal": "Ich kann in der Moschee ruhig und rücksichtsvoll sein.",
+        "intro": "As-salāmu ʿalaikum! Weißt du, warum Menschen in eine Moschee gehen? Sie kommen zum Gebet und um Allah zu gedenken. Im Qurʾān 7:31 lernen wir, uns beim Moscheebesuch ordentlich zu kleiden. Wenn Menschen beten, sprechen wir leise und lassen ihnen Platz. Unsere Übung ist einfach: Wir stellen die Schuhe ordentlich hin, gehen ruhig und fragen freundlich, wenn wir etwas brauchen. Wenn du noch klein bist und etwas nicht weißt, hilft dir eine erwachsene Person.",
         "lines": [
-          "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
-          "Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein.",
-          "Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut.",
-          "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen."
+          "In einer Moschee wird gebetet und Allah gedacht.",
+          "Qurʾān 7:31 spricht von angemessener Kleidung beim Moscheebesuch.",
+          "Wir stören andere beim Beten nicht absichtlich.",
+          "Wir üben leises Gehen und ordentliches Abstellen der Schuhe."
         ],
         "evidence": "Wir lernen mit Qurʾān 7:31. Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/504. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1205,17 +1205,17 @@ const additions=
         ],
         "situation": "Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut.",
         "practice": "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
-        "summary": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Rücksicht in der Moschee. Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut. Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen."
+        "summary": "In der Moschee sind wir freundlich und nehmen Rücksicht auf andere.",
+        "audioScript": "Rücksicht in der Moschee. In der Moschee sind wir freundlich und nehmen Rücksicht auf andere. In einer Moschee wird gebetet und Allah gedacht. Qurʾān 7:31 spricht von angemessener Kleidung beim Moscheebesuch. Wir stören andere beim Beten nicht absichtlich."
       },
       "6-8": {
-        "goal": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Wir lesen Qurʾān 7:31. Der Vers bedeutet sinngemäß: Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. So kann das im Alltag aussehen: Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut. Die Aufgabe: Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen. masǧid bedeutet: Ort der Niederwerfung, Moschee. zīnah bedeutet: Zierde; der Vers nennt sie beim Moscheebesuch.",
+        "goal": "Ich verstehe den Zusammenhang zwischen angemessenem Auftreten und Rücksicht im Gebetsraum.",
+        "intro": "As-salāmu ʿalaikum! Stell dir vor, du betrittst die Moschee und siehst Menschen, die gerade beten. Du möchtest zu deiner Familie gehen. Wie kommst du dorthin, ohne andere absichtlich zu stören? Wir üben, ruhig zu gehen und Platz zu lassen. Qurʾān 7:31 spricht davon, beim Moscheebesuch die Zierde zu nehmen, und mahnt an anderer Stelle desselben Verses zu Maßhalten beim Essen und Trinken. Das Wort zīnah bedeutet Zierde oder angemessener Schmuck. Wir nutzen den Vers als Ausgangspunkt, um auch einen achtsamen Umgang miteinander zu üben. Leises Gehen und Schuhe ordentlich hinstellen sind unsere Unterrichtsübungen, keine wörtlichen Befehle aus diesem Vers. Niemand muss sich schämen, wenn er eine Regel noch lernt.",
         "lines": [
-          "Qurʾān 7:31 ist die gelesene Stelle.",
-          "Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein.",
-          "Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut.",
-          "Die arabischen Worte spricht die Lehrperson."
+          "Qurʾān 7:31 spricht vom angemessenen Auftreten beim Moscheebesuch.",
+          "Derselbe Vers erwähnt Essen, Trinken und Maßhalten.",
+          "Leises Gehen und Rücksicht sind unsere praktische Übung.",
+          "Wir helfen jüngeren Kindern freundlich, statt sie zu tadeln."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 7:31. Sinngemäß: Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/504. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1231,17 +1231,17 @@ const additions=
         ],
         "situation": "Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut.",
         "practice": "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
-        "summary": "Qurʾān 7:31 trägt diese Stunde. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein.",
-        "audioScript": "Rücksicht in der Moschee. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut. Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen."
+        "summary": "Wir achten auf den Vers und übertragen Rücksicht auf unseren Umgang im Gebetsraum, ohne zusätzliche Regeln als Versworte auszugeben.",
+        "audioScript": "Rücksicht in der Moschee. Wir achten auf den Vers und übertragen Rücksicht auf unseren Umgang im Gebetsraum, ohne zusätzliche Regeln als Versworte auszugeben. Qurʾān 7:31 spricht vom angemessenen Auftreten beim Moscheebesuch. Derselbe Vers erwähnt Essen, Trinken und Maßhalten. Leises Gehen und Rücksicht sind unsere praktische Übung."
       },
       "9-10": {
-        "goal": "Ich kann das Thema „Rücksicht in der Moschee“ anhand von Qurʾān 7:31 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Rücksicht in der Moschee. Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. In Qurʾān 7:31 lernen wir sinngemäß: Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. masǧid bedeutet Ort der Niederwerfung, Moschee. zīnah bedeutet Zierde; der Vers nennt sie beim Moscheebesuch. Stell dir diese Situation vor: Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut. Welcher nächste Schritt ist gut? Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "goal": "Ich kann Qurʾān 7:31 und ergänzende Unterrichtsregeln für den Moscheebesuch unterscheiden.",
+        "intro": "As-salāmu ʿalaikum! Manche Regeln lernen wir unmittelbar aus einem Vers, andere üben wir als gutes Benehmen. Qurʾān 7:31 spricht die Kinder Adams an und nennt die Zierde bei jeder Moschee sowie maßvolles Essen und Trinken. Daraus besprechen wir einen respektvollen Moscheebesuch. Ob man die Schuhe leise abstellt oder beim Gebet nicht herumruft, sind in dieser Stunde praktische Übungen und keine zusätzlichen Zitate aus 7:31. Stell dir vor, ein jüngeres Kind rennt zum Gebetsraum, weil es seine Familie sucht. Was könntest du tun? Hilf ruhig und ohne Beschämung. In der Übung entwerfen wir drei freundliche Hinweise, die auch kleinere Kinder verstehen. Dabei unterscheiden wir immer zwischen Qurʾān-Sinn und unseren eigenen Beispielen.",
         "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 7:31.",
-          "Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein.",
-          "Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut.",
-          "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen."
+          "Qurʾān 7:31 nennt angemessenen Schmuck beim Moscheebesuch.",
+          "Der Vers spricht auch über Maßhalten beim Essen und Trinken.",
+          "Unser Beispiel zum ruhigen Verhalten ist pädagogische Anwendung, kein direktes Verszitat.",
+          "Wir helfen jüngeren Kindern rücksichtsvoll und ohne Beschämung."
         ],
         "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 7:31. Sinngemäß: Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein.",
         "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/504. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 7:31. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
@@ -1257,8 +1257,8 @@ const additions=
         ],
         "situation": "Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut.",
         "practice": "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
-        "summary": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
-        "audioScript": "Rücksicht in der Moschee. Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut. Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen."
+        "summary": "Wir unterscheiden die gelesene Offenbarung von eigenen Regeln für ein rücksichtsvolles Miteinander.",
+        "audioScript": "Rücksicht in der Moschee. Wir unterscheiden die gelesene Offenbarung von eigenen Regeln für ein rücksichtsvolles Miteinander. Qurʾān 7:31 nennt angemessenen Schmuck beim Moscheebesuch. Der Vers spricht auch über Maßhalten beim Essen und Trinken. Unser Beispiel zum ruhigen Verhalten ist pädagogische Anwendung, kein direktes Verszitat."
       }
     },
     "questions": {
@@ -1357,7 +1357,7 @@ const additions=
     ],
     "practice": "Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
     "summary": "Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein.",
-    "audioScript": "Rücksicht in der Moschee. Im Gebetsraum bleiben wir ruhig und gehen achtsam mit den Dingen um. Der Vers fordert die Kinder Adams auf, bei jeder Moschee ihre Zierde zu nehmen, zu essen und zu trinken und nicht maßlos zu sein. Während andere beten, rennt ein Kind nicht zwischen ihnen hindurch und ruft nicht laut. Wir zeigen leises Gehen, leises Stellen der Schuhe und ein ruhiges Sitzen.",
+    "audioScript": "Rücksicht in der Moschee. In der Moschee sind wir freundlich und nehmen Rücksicht auf andere. In einer Moschee wird gebetet und Allah gedacht. Qurʾān 7:31 spricht von angemessener Kleidung beim Moscheebesuch. Wir stören andere beim Beten nicht absichtlich.",
     "voiceApproved": false
   },
   "tarbiyah-eigene-grenzen-respektieren": {
@@ -10356,441 +10356,441 @@ const additions=
     "voiceApproved": false
   },
   "dua-beim-verlassen-des-hauses": {
-  "id": "dua-beim-verlassen-des-hauses",
-  "subject": "adab",
-  "pillar": "dua",
-  "topic": "Duʿāʾ beim Verlassen des Hauses",
-  "title": "Duʿāʾ · Duʿāʾ beim Verlassen des Hauses",
-  "lead": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-  "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-  "quran": {
-    "surah": 17,
-    "ayah": 80,
-    "label": "Qurʾān 17:80",
-    "arabic": "وَقُلْ رَبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ وَاجْعَلْ لِي مِنْ لَدُنْكَ سُلْطَانًا نَصِيرًا",
-    "meaning": "Sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-    "excerpt": false
-  },
-  "hadith": {
-    "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 17:80 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
-    "text": "Die Stunde bleibt beim Vers. Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht."
-  },
-  "sourceAudit": {
-    "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1040",
-    "hadithNumber": null,
-    "narrator": null,
-    "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
-    "quranReference": "17:80",
-    "quranUrl": "https://www.islamweb.net/ar/library/content/49/1040",
-    "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
-    "hadithMeaningIsParaphrase": true,
-    "verifiedDate": "2026-10-13",
-    "dorarReRead": false,
-    "numberUnverified": true,
-    "fiqhHumanReviewNeeded": false,
-    "scientificApproval": false,
-    "note": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-    "editorialScopeNote": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus."
-  },
-  "hint": "Die arabischen Worte spricht die Lehrperson.",
-  "sample": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-  "ageText": {
-    "4-5": {
-      "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-      "intro": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. Stell dir vor: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Heute üben wir: Wir üben diesen Sinn und nicht eine andere Formel. Die arabischen Worte spricht die Lehrperson.",
-      "lines": [
-        "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-        "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-        "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-        "Wir üben diesen Sinn und nicht eine andere Formel."
-      ],
-      "evidence": "Wir lernen mit Qurʾān 17:80. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-      "terms": [
-        {
-          "say": "mudḫal",
-          "de": "Eingang"
-        },
-        {
-          "say": "muḫraǧ",
-          "de": "Ausgang"
-        }
-      ],
-      "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-      "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
-      "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Die arabischen Worte spricht die Lehrperson.",
-      "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
+    "id": "dua-beim-verlassen-des-hauses",
+    "subject": "adab",
+    "pillar": "dua",
+    "topic": "Duʿāʾ beim Verlassen des Hauses",
+    "title": "Duʿāʾ · Duʿāʾ beim Verlassen des Hauses",
+    "lead": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+    "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+    "quran": {
+      "surah": 17,
+      "ayah": 80,
+      "label": "Qurʾān 17:80",
+      "arabic": "وَقُلْ رَبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ وَاجْعَلْ لِي مِنْ لَدُنْكَ سُلْطَانًا نَصِيرًا",
+      "meaning": "Sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+      "excerpt": false
     },
-    "6-8": {
-      "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-      "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Wir lesen Qurʾān 17:80. Der Vers bedeutet sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. So kann das im Alltag aussehen: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Die Aufgabe: Wir üben diesen Sinn und nicht eine andere Formel. mudḫal bedeutet: Eingang. muḫraǧ bedeutet: Ausgang.",
-      "lines": [
-        "Qurʾān 17:80 ist die gelesene Stelle.",
-        "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-        "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-        "Die arabischen Worte spricht die Lehrperson."
-      ],
-      "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:80. Sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-      "terms": [
-        {
-          "say": "mudḫal",
-          "de": "Eingang"
-        },
-        {
-          "say": "muḫraǧ",
-          "de": "Ausgang"
-        }
-      ],
-      "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-      "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
-      "summary": "Qurʾān 17:80 trägt diese Stunde. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-      "audioScript": "Duʿāʾ beim Verlassen des Hauses. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
+    "hadith": {
+      "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 17:80 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
+      "text": "Die Stunde bleibt beim Vers. Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht."
     },
-    "9-10": {
-      "goal": "Ich kann das Thema „Duʿāʾ beim Verlassen des Hauses“ anhand von Qurʾān 17:80 erklären und ein Alltagsbeispiel beurteilen.",
-      "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. In Qurʾān 17:80 lernen wir sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. mudḫal bedeutet Eingang. muḫraǧ bedeutet Ausgang. Stell dir diese Situation vor: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Welcher nächste Schritt ist gut? Wir üben diesen Sinn und nicht eine andere Formel. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-      "lines": [
-        "Unsere Qurʾān-Stelle ist Qurʾān 17:80.",
-        "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-        "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-        "Wir üben diesen Sinn und nicht eine andere Formel."
-      ],
-      "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:80. Sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-      "terms": [
-        {
-          "say": "mudḫal",
-          "de": "Eingang"
-        },
-        {
-          "say": "muḫraǧ",
-          "de": "Ausgang"
-        }
-      ],
-      "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-      "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
-      "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Wir üben diesen Sinn und nicht eine andere Formel.",
-      "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
-    }
-  },
-  "questions": {
-    "4-5": [
-      {
-        "type": "choice",
-        "prompt": "Was lernen wir heute über Duʿāʾ beim Verlassen des Hauses?",
-        "options": [
-          "Im Gebet wird der Qurʾān gelesen.",
-          "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
-        ],
-        "correct": 1,
-        "hint": "Denke an unsere heutige Stunde.",
-        "explain": "Mā schāʾ Allāh! Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
-      },
-      {
-        "type": "choice",
-        "prompt": "Was können wir heute üben?",
-        "options": [
-          "Wir üben diesen Sinn und nicht eine andere Formel.",
-          "Wir lassen den anderen ohne freundliche Worte stehen und gehen einfach weg."
-        ],
-        "correct": 0,
-        "hint": "Erinnere dich an unsere Übung.",
-        "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
-      }
-    ],
-    "6-8": [
-      {
-        "type": "choice",
-        "prompt": "Welche Aussage passt zu unserem Thema Duʿāʾ beim Verlassen des Hauses?",
-        "options": [
+    "sourceAudit": {
+      "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1040",
+      "hadithNumber": null,
+      "narrator": null,
+      "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
+      "quranReference": "17:80",
+      "quranUrl": "https://www.islamweb.net/ar/library/content/49/1040",
+      "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
+      "hadithMeaningIsParaphrase": true,
+      "verifiedDate": "2026-10-13",
+      "dorarReRead": false,
+      "numberUnverified": true,
+      "fiqhHumanReviewNeeded": false,
+      "scientificApproval": false,
+      "note": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "editorialScopeNote": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus."
+    },
+    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "sample": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+    "ageText": {
+      "4-5": {
+        "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+        "intro": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. Stell dir vor: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Heute üben wir: Wir üben diesen Sinn und nicht eine andere Formel. Die arabischen Worte spricht die Lehrperson.",
+        "lines": [
           "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-          "Im Gebet wird der Qurʾān gelesen."
+          "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+          "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+          "Wir üben diesen Sinn und nicht eine andere Formel."
         ],
-        "correct": 0,
-        "hint": "Worum ging es in der Stunde?",
-        "explain": "Mā schāʾ Allāh! Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
+        "evidence": "Wir lernen mit Qurʾān 17:80. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+        "terms": [
+          {
+            "say": "mudḫal",
+            "de": "Eingang"
+          },
+          {
+            "say": "muḫraǧ",
+            "de": "Ausgang"
+          }
+        ],
+        "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+        "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
+        "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Die arabischen Worte spricht die Lehrperson.",
+        "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
+      },
+      "6-8": {
+        "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Wir lesen Qurʾān 17:80. Der Vers bedeutet sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. So kann das im Alltag aussehen: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Die Aufgabe: Wir üben diesen Sinn und nicht eine andere Formel. mudḫal bedeutet: Eingang. muḫraǧ bedeutet: Ausgang.",
+        "lines": [
+          "Qurʾān 17:80 ist die gelesene Stelle.",
+          "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+          "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+          "Die arabischen Worte spricht die Lehrperson."
+        ],
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:80. Sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+        "terms": [
+          {
+            "say": "mudḫal",
+            "de": "Eingang"
+          },
+          {
+            "say": "muḫraǧ",
+            "de": "Ausgang"
+          }
+        ],
+        "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+        "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
+        "summary": "Qurʾān 17:80 trägt diese Stunde. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+        "audioScript": "Duʿāʾ beim Verlassen des Hauses. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
+      },
+      "9-10": {
+        "goal": "Ich kann das Thema „Duʿāʾ beim Verlassen des Hauses“ anhand von Qurʾān 17:80 erklären und ein Alltagsbeispiel beurteilen.",
+        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. In Qurʾān 17:80 lernen wir sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. mudḫal bedeutet Eingang. muḫraǧ bedeutet Ausgang. Stell dir diese Situation vor: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Welcher nächste Schritt ist gut? Wir üben diesen Sinn und nicht eine andere Formel. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "lines": [
+          "Unsere Qurʾān-Stelle ist Qurʾān 17:80.",
+          "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+          "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+          "Wir üben diesen Sinn und nicht eine andere Formel."
+        ],
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:80. Sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+        "terms": [
+          {
+            "say": "mudḫal",
+            "de": "Eingang"
+          },
+          {
+            "say": "muḫraǧ",
+            "de": "Ausgang"
+          }
+        ],
+        "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+        "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
+        "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Wir üben diesen Sinn und nicht eine andere Formel.",
+        "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
+      }
+    },
+    "questions": {
+      "4-5": [
+        {
+          "type": "choice",
+          "prompt": "Was lernen wir heute über Duʿāʾ beim Verlassen des Hauses?",
+          "options": [
+            "Im Gebet wird der Qurʾān gelesen.",
+            "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
+          ],
+          "correct": 1,
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Mā schāʾ Allāh! Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
+        },
+        {
+          "type": "choice",
+          "prompt": "Was können wir heute üben?",
+          "options": [
+            "Wir üben diesen Sinn und nicht eine andere Formel.",
+            "Wir lassen den anderen ohne freundliche Worte stehen und gehen einfach weg."
+          ],
+          "correct": 0,
+          "hint": "Erinnere dich an unsere Übung.",
+          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+        }
+      ],
+      "6-8": [
+        {
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu unserem Thema Duʿāʾ beim Verlassen des Hauses?",
+          "options": [
+            "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+            "Im Gebet wird der Qurʾān gelesen."
+          ],
+          "correct": 0,
+          "hint": "Worum ging es in der Stunde?",
+          "explain": "Mā schāʾ Allāh! Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "options": [
+            "Wir üben diesen Sinn und nicht eine andere Formel.",
+            "Wir lassen den anderen ohne freundliche Worte stehen und gehen einfach weg."
+          ],
+          "correct": 0,
+          "hint": "Erinnere dich an das Beispiel.",
+          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+        },
+        {
+          "type": "text",
+          "prompt": "Was möchtest du dir aus Qurʾān 17:80 merken?",
+          "sample": "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+          "hint": "Erkläre die Stelle in eigenen Worten.",
+          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+        }
+      ],
+      "9-10": [
+        {
+          "type": "text",
+          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 17:80 lernen.",
+          "sample": "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+          "hint": "Denke an die Bedeutung der Stelle.",
+          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
+        },
+        {
+          "type": "text",
+          "prompt": "Was wäre in dieser Situation ein guter Schritt? An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+          "sample": "Wir üben diesen Sinn und nicht eine andere Formel.",
+          "hint": "Denke an unsere Übung.",
+          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "options": [
+            "Im Gebet wird der Qurʾān gelesen.",
+            "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
+          ],
+          "correct": 1,
+          "hint": "Was ist das Thema dieser Lektion?",
+          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+        }
+      ]
+    },
+    "terms": [
+      {
+        "say": "mudḫal",
+        "de": "Eingang"
       },
       {
-        "type": "choice",
-        "prompt": "Welche Handlung gehört zu unserer Übung?",
-        "options": [
-          "Wir üben diesen Sinn und nicht eine andere Formel.",
-          "Wir lassen den anderen ohne freundliche Worte stehen und gehen einfach weg."
-        ],
-        "correct": 0,
-        "hint": "Erinnere dich an das Beispiel.",
-        "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
-      },
-      {
-        "type": "text",
-        "prompt": "Was möchtest du dir aus Qurʾān 17:80 merken?",
-        "sample": "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-        "hint": "Erkläre die Stelle in eigenen Worten.",
-        "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+        "say": "muḫraǧ",
+        "de": "Ausgang"
       }
     ],
-    "9-10": [
-      {
-        "type": "text",
-        "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 17:80 lernen.",
-        "sample": "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-        "hint": "Denke an die Bedeutung der Stelle.",
-        "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-      },
-      {
-        "type": "text",
-        "prompt": "Was wäre in dieser Situation ein guter Schritt? An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-        "sample": "Wir üben diesen Sinn und nicht eine andere Formel.",
-        "hint": "Denke an unsere Übung.",
-        "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-      },
-      {
-        "type": "choice",
-        "prompt": "Welche Aussage gehört zu unserem Lernziel?",
-        "options": [
-          "Im Gebet wird der Qurʾān gelesen.",
-          "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
-        ],
-        "correct": 1,
-        "hint": "Was ist das Thema dieser Lektion?",
-        "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
-      }
-    ]
+    "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
+    "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende.",
+    "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel.",
+    "voiceApproved": false
   },
-  "terms": [
-    {
-      "say": "mudḫal",
-      "de": "Eingang"
-    },
-    {
-      "say": "muḫraǧ",
-      "de": "Ausgang"
-    }
-  ],
-  "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
-  "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende.",
-  "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel.",
-  "voiceApproved": false
-},
   "family-unterschiedliche-herkunft": {
-  "id": "family-unterschiedliche-herkunft",
-  "subject": "akhlaq",
-  "pillar": "family",
-  "topic": "Unterschiedliche Herkunft respektieren",
-  "title": "Familie · Unterschiedliche Herkunft respektieren",
-  "lead": "Menschen haben verschiedene Familien und Sprachen.",
-  "goal": "Menschen haben verschiedene Familien und Sprachen. Bei Allah zählt die Gottesfurcht.",
-  "quran": {
-    "surah": 49,
-    "ayah": 13,
-    "label": "Qurʾān 49:13",
-    "arabic": "يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُمْ مِنْ ذَكَرٍ وَأُنْثَى وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا إِنَّ أَكْرَمَكُمْ عِنْدَ اللَّهِ أَتْقَاكُمْ إِنَّ اللَّهَ عَلِيمٌ خَبِيرٌ",
-    "meaning": "Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
-    "excerpt": false
-  },
-  "hadith": {
-    "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 49:13 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
-    "text": "Die Stunde bleibt beim Vers. Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache."
-  },
-  "sourceAudit": {
-    "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1756",
-    "hadithNumber": null,
-    "narrator": null,
-    "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
-    "quranReference": "49:13",
-    "quranUrl": "https://www.islamweb.net/ar/library/content/49/1756",
-    "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
-    "hadithMeaningIsParaphrase": true,
-    "verifiedDate": "2026-10-13",
-    "dorarReRead": false,
-    "numberUnverified": true,
-    "fiqhHumanReviewNeeded": false,
-    "scientificApproval": false,
-    "note": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-    "editorialScopeNote": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt."
-  },
-  "hint": "Wir erfinden keine zusätzliche Geschichte.",
-  "sample": "Menschen haben verschiedene Familien und Sprachen.",
-  "ageText": {
-    "4-5": {
-      "goal": "Menschen haben verschiedene Familien und Sprachen.",
-      "intro": "Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Stell dir vor: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Heute üben wir: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-      "lines": [
-        "Menschen haben verschiedene Familien und Sprachen.",
-        "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
-        "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-        "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
-      ],
-      "evidence": "Wir lernen mit Qurʾān 49:13. Menschen haben verschiedene Familien und Sprachen.",
-      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-      "terms": [
-        {
-          "say": "šuʿūb",
-          "de": "Völker"
-        },
-        {
-          "say": "qabāʾil",
-          "de": "Stämme"
-        }
-      ],
-      "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-      "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-      "summary": "Menschen haben verschiedene Familien und Sprachen.",
-      "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
+    "id": "family-unterschiedliche-herkunft",
+    "subject": "akhlaq",
+    "pillar": "family",
+    "topic": "Unterschiedliche Herkunft respektieren",
+    "title": "Familie · Unterschiedliche Herkunft respektieren",
+    "lead": "Menschen haben verschiedene Familien und Sprachen.",
+    "goal": "Menschen haben verschiedene Familien und Sprachen. Bei Allah zählt die Gottesfurcht.",
+    "quran": {
+      "surah": 49,
+      "ayah": 13,
+      "label": "Qurʾān 49:13",
+      "arabic": "يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُمْ مِنْ ذَكَرٍ وَأُنْثَى وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا إِنَّ أَكْرَمَكُمْ عِنْدَ اللَّهِ أَتْقَاكُمْ إِنَّ اللَّهَ عَلِيمٌ خَبِيرٌ",
+      "meaning": "Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
+      "excerpt": false
     },
-    "6-8": {
-      "goal": "Menschen haben verschiedene Familien und Sprachen.",
-      "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Menschen haben verschiedene Familien und Sprachen. Wir lesen Qurʾān 49:13. Der Vers bedeutet sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. So kann das im Alltag aussehen: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Die Aufgabe: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. šuʿūb bedeutet: Völker. qabāʾil bedeutet: Stämme.",
-      "lines": [
-        "Qurʾān 49:13 ist die gelesene Stelle.",
-        "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
-        "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-        "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
-      ],
-      "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 49:13. Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
-      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-      "terms": [
-        {
-          "say": "šuʿūb",
-          "de": "Völker"
-        },
-        {
-          "say": "qabāʾil",
-          "de": "Stämme"
-        }
-      ],
-      "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-      "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-      "summary": "Qurʾān 49:13 trägt diese Stunde. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
-      "audioScript": "Unterschiedliche Herkunft respektieren. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
+    "hadith": {
+      "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 49:13 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
+      "text": "Die Stunde bleibt beim Vers. Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache."
     },
-    "9-10": {
-      "goal": "Ich kann das Thema „Unterschiedliche Herkunft respektieren“ anhand von Qurʾān 49:13 erklären und ein Alltagsbeispiel beurteilen.",
-      "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. In Qurʾān 49:13 lernen wir sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. šuʿūb bedeutet Völker. qabāʾil bedeutet Stämme. Stell dir diese Situation vor: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Welcher nächste Schritt ist gut? Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-      "lines": [
-        "Unsere Qurʾān-Stelle ist Qurʾān 49:13.",
-        "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
-        "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-        "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
-      ],
-      "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 49:13. Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
-      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-      "terms": [
-        {
-          "say": "šuʿūb",
-          "de": "Völker"
-        },
-        {
-          "say": "qabāʾil",
-          "de": "Stämme"
-        }
-      ],
-      "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-      "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-      "summary": "Menschen haben verschiedene Familien und Sprachen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-      "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
-    }
-  },
-  "questions": {
-    "4-5": [
-      {
-        "type": "choice",
-        "prompt": "Was lernen wir heute über Unterschiedliche Herkunft respektieren?",
-        "options": [
+    "sourceAudit": {
+      "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1756",
+      "hadithNumber": null,
+      "narrator": null,
+      "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
+      "quranReference": "49:13",
+      "quranUrl": "https://www.islamweb.net/ar/library/content/49/1756",
+      "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
+      "hadithMeaningIsParaphrase": true,
+      "verifiedDate": "2026-10-13",
+      "dorarReRead": false,
+      "numberUnverified": true,
+      "fiqhHumanReviewNeeded": false,
+      "scientificApproval": false,
+      "note": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "editorialScopeNote": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt."
+    },
+    "hint": "Wir erfinden keine zusätzliche Geschichte.",
+    "sample": "Menschen haben verschiedene Familien und Sprachen.",
+    "ageText": {
+      "4-5": {
+        "goal": "Menschen haben verschiedene Familien und Sprachen.",
+        "intro": "Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Stell dir vor: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Heute üben wir: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+        "lines": [
           "Menschen haben verschiedene Familien und Sprachen.",
-          "Allah ist einzig."
-        ],
-        "correct": 0,
-        "hint": "Denke an unsere heutige Stunde.",
-        "explain": "Mā schāʾ Allāh! Menschen haben verschiedene Familien und Sprachen."
-      },
-      {
-        "type": "choice",
-        "prompt": "Was können wir heute üben?",
-        "options": [
-          "Wir lachen ein neues Kind wegen seiner Sprache aus.",
+          "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
+          "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
           "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
         ],
-        "correct": 1,
-        "hint": "Erinnere dich an unsere Übung.",
-        "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
-      }
-    ],
-    "6-8": [
-      {
-        "type": "choice",
-        "prompt": "Welche Aussage passt zu unserem Thema Unterschiedliche Herkunft respektieren?",
-        "options": [
-          "Allah ist einzig.",
-          "Menschen haben verschiedene Familien und Sprachen."
+        "evidence": "Wir lernen mit Qurʾān 49:13. Menschen haben verschiedene Familien und Sprachen.",
+        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+        "terms": [
+          {
+            "say": "šuʿūb",
+            "de": "Völker"
+          },
+          {
+            "say": "qabāʾil",
+            "de": "Stämme"
+          }
         ],
-        "correct": 1,
-        "hint": "Worum ging es in der Stunde?",
-        "explain": "Mā schāʾ Allāh! Menschen haben verschiedene Familien und Sprachen."
+        "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+        "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+        "summary": "Menschen haben verschiedene Familien und Sprachen.",
+        "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
       },
-      {
-        "type": "choice",
-        "prompt": "Welche Handlung gehört zu unserer Übung?",
-        "options": [
-          "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-          "Wir lachen ein neues Kind wegen seiner Sprache aus."
+      "6-8": {
+        "goal": "Menschen haben verschiedene Familien und Sprachen.",
+        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Menschen haben verschiedene Familien und Sprachen. Wir lesen Qurʾān 49:13. Der Vers bedeutet sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. So kann das im Alltag aussehen: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Die Aufgabe: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. šuʿūb bedeutet: Völker. qabāʾil bedeutet: Stämme.",
+        "lines": [
+          "Qurʾān 49:13 ist die gelesene Stelle.",
+          "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
+          "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+          "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
         ],
-        "correct": 0,
-        "hint": "Erinnere dich an das Beispiel.",
-        "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
-      },
-      {
-        "type": "text",
-        "prompt": "Was möchtest du dir aus Qurʾān 49:13 merken?",
-        "sample": "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
-        "hint": "Erkläre die Stelle in eigenen Worten.",
-        "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
-      }
-    ],
-    "9-10": [
-      {
-        "type": "text",
-        "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 49:13 lernen.",
-        "sample": "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
-        "hint": "Denke an die Bedeutung der Stelle.",
-        "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-      },
-      {
-        "type": "text",
-        "prompt": "Was wäre in dieser Situation ein guter Schritt? Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-        "sample": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-        "hint": "Denke an unsere Übung.",
-        "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-      },
-      {
-        "type": "choice",
-        "prompt": "Welche Aussage gehört zu unserem Lernziel?",
-        "options": [
-          "Menschen haben verschiedene Familien und Sprachen.",
-          "Allah ist einzig."
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 49:13. Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
+        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+        "terms": [
+          {
+            "say": "šuʿūb",
+            "de": "Völker"
+          },
+          {
+            "say": "qabāʾil",
+            "de": "Stämme"
+          }
         ],
-        "correct": 0,
-        "hint": "Was ist das Thema dieser Lektion?",
-        "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+        "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+        "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+        "summary": "Qurʾān 49:13 trägt diese Stunde. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
+        "audioScript": "Unterschiedliche Herkunft respektieren. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
+      },
+      "9-10": {
+        "goal": "Ich kann das Thema „Unterschiedliche Herkunft respektieren“ anhand von Qurʾān 49:13 erklären und ein Alltagsbeispiel beurteilen.",
+        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. In Qurʾān 49:13 lernen wir sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. šuʿūb bedeutet Völker. qabāʾil bedeutet Stämme. Stell dir diese Situation vor: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Welcher nächste Schritt ist gut? Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "lines": [
+          "Unsere Qurʾān-Stelle ist Qurʾān 49:13.",
+          "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
+          "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+          "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
+        ],
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 49:13. Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
+        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+        "terms": [
+          {
+            "say": "šuʿūb",
+            "de": "Völker"
+          },
+          {
+            "say": "qabāʾil",
+            "de": "Stämme"
+          }
+        ],
+        "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+        "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+        "summary": "Menschen haben verschiedene Familien und Sprachen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+        "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
       }
-    ]
-  },
-  "terms": [
-    {
-      "say": "šuʿūb",
-      "de": "Völker"
     },
-    {
-      "say": "qabāʾil",
-      "de": "Stämme"
-    }
-  ],
-  "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-  "summary": "Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
-  "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-  "voiceApproved": false
-},
+    "questions": {
+      "4-5": [
+        {
+          "type": "choice",
+          "prompt": "Was lernen wir heute über Unterschiedliche Herkunft respektieren?",
+          "options": [
+            "Menschen haben verschiedene Familien und Sprachen.",
+            "Allah ist einzig."
+          ],
+          "correct": 0,
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Mā schāʾ Allāh! Menschen haben verschiedene Familien und Sprachen."
+        },
+        {
+          "type": "choice",
+          "prompt": "Was können wir heute üben?",
+          "options": [
+            "Wir lachen ein neues Kind wegen seiner Sprache aus.",
+            "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
+          ],
+          "correct": 1,
+          "hint": "Erinnere dich an unsere Übung.",
+          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+        }
+      ],
+      "6-8": [
+        {
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu unserem Thema Unterschiedliche Herkunft respektieren?",
+          "options": [
+            "Allah ist einzig.",
+            "Menschen haben verschiedene Familien und Sprachen."
+          ],
+          "correct": 1,
+          "hint": "Worum ging es in der Stunde?",
+          "explain": "Mā schāʾ Allāh! Menschen haben verschiedene Familien und Sprachen."
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "options": [
+            "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+            "Wir lachen ein neues Kind wegen seiner Sprache aus."
+          ],
+          "correct": 0,
+          "hint": "Erinnere dich an das Beispiel.",
+          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+        },
+        {
+          "type": "text",
+          "prompt": "Was möchtest du dir aus Qurʾān 49:13 merken?",
+          "sample": "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
+          "hint": "Erkläre die Stelle in eigenen Worten.",
+          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+        }
+      ],
+      "9-10": [
+        {
+          "type": "text",
+          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 49:13 lernen.",
+          "sample": "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
+          "hint": "Denke an die Bedeutung der Stelle.",
+          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
+        },
+        {
+          "type": "text",
+          "prompt": "Was wäre in dieser Situation ein guter Schritt? Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+          "sample": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+          "hint": "Denke an unsere Übung.",
+          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "options": [
+            "Menschen haben verschiedene Familien und Sprachen.",
+            "Allah ist einzig."
+          ],
+          "correct": 0,
+          "hint": "Was ist das Thema dieser Lektion?",
+          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+        }
+      ]
+    },
+    "terms": [
+      {
+        "say": "šuʿūb",
+        "de": "Völker"
+      },
+      {
+        "say": "qabāʾil",
+        "de": "Stämme"
+      }
+    ],
+    "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+    "summary": "Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
+    "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+    "voiceApproved": false
+  },
   "tawhid-rahman-rahim": {
     "id": "tawhid-rahman-rahim",
     "subject": "aqidah",
@@ -18266,223 +18266,223 @@ const additions=
     "voiceApproved": false
   },
   "tawhid-keine-goettliche-macht-fuer-geschoepfe": {
-  "id": "tawhid-keine-goettliche-macht-fuer-geschoepfe",
-  "subject": "aqidah",
-  "pillar": "tawhid",
-  "topic": "Keinen geschaffenen Dingen göttliche Macht zuschreiben",
-  "title": "Tawḥīd · Keinen geschaffenen Dingen göttliche Macht zuschreiben",
-  "lead": "Allah ist einzig.",
-  "goal": "Allah ist einzig. Kein Geschöpf ist ein zweiter Gott.",
-  "quran": {
-    "surah": 112,
-    "ayah": 1,
-    "label": "Qurʾān 112:1",
-    "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
-    "meaning": "Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
-    "excerpt": false
-  },
-  "hadith": {
-    "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 112:1 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
-    "text": "Die Stunde bleibt beim Vers. Die ganze Sūrah steht im gespeicherten Ausdruck."
-  },
-  "sourceAudit": {
-    "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1984",
-    "hadithNumber": null,
-    "narrator": null,
-    "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
-    "quranReference": "112:1",
-    "quranUrl": "https://www.islamweb.net/ar/library/content/49/1984",
-    "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
-    "hadithMeaningIsParaphrase": true,
-    "verifiedDate": "2026-10-13",
-    "dorarReRead": false,
-    "numberUnverified": true,
-    "fiqhHumanReviewNeeded": false,
-    "scientificApproval": false,
-    "note": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-    "editorialScopeNote": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt."
-  },
-  "hint": "Die arabischen Worte spricht die Lehrperson.",
-  "sample": "Allah ist einzig.",
-  "ageText": {
-    "4-5": {
-      "goal": "Allah ist einzig.",
-      "intro": "Allah ist einzig. Allah ist der, auf den man angewiesen ist. Stell dir vor: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Heute üben wir: Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich. Die arabischen Worte spricht die Lehrperson.",
-      "lines": [
-        "Allah ist einzig.",
-        "Allah ist der, auf den man angewiesen ist.",
-        "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-        "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
-      ],
-      "evidence": "Wir lernen mit Qurʾān 112:1. Allah ist einzig.",
-      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-      "terms": [
-        {
-          "say": "aḥad",
-          "de": "Einer, einzig"
-        },
-        {
-          "say": "kufuʾ",
-          "de": "gleich, ebenbürtig"
-        }
-      ],
-      "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-      "practice": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
-      "summary": "Allah ist einzig. Die arabischen Worte spricht die Lehrperson.",
-      "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
+    "id": "tawhid-keine-goettliche-macht-fuer-geschoepfe",
+    "subject": "aqidah",
+    "pillar": "tawhid",
+    "topic": "Keinen geschaffenen Dingen göttliche Macht zuschreiben",
+    "title": "Tawḥīd · Keinen geschaffenen Dingen göttliche Macht zuschreiben",
+    "lead": "Allah ist einzig.",
+    "goal": "Allah ist einzig. Kein Geschöpf ist ein zweiter Gott.",
+    "quran": {
+      "surah": 112,
+      "ayah": 1,
+      "label": "Qurʾān 112:1",
+      "arabic": "قُلْ هُوَ اللَّهُ أَحَدٌ اللَّهُ الصَّمَدُ لَمْ يَلِدْ وَلَمْ يُولَدْ وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ",
+      "meaning": "Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+      "excerpt": false
     },
-    "6-8": {
-      "goal": "Allah ist einzig.",
-      "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Allah ist einzig. Wir lesen Qurʾān 112:1. Der Vers bedeutet sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. So kann das im Alltag aussehen: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Die Aufgabe: Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich. aḥad bedeutet: Einer, einzig. kufuʾ bedeutet: gleich, ebenbürtig.",
-      "lines": [
-        "Qurʾān 112:1 ist die gelesene Stelle.",
-        "Allah ist der, auf den man angewiesen ist.",
-        "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-        "Die arabischen Worte spricht die Lehrperson."
-      ],
-      "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 112:1. Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
-      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-      "terms": [
-        {
-          "say": "aḥad",
-          "de": "Einer, einzig"
-        },
-        {
-          "say": "kufuʾ",
-          "de": "gleich, ebenbürtig"
-        }
-      ],
-      "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-      "practice": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
-      "summary": "Qurʾān 112:1 trägt diese Stunde. Allah ist der, auf den man angewiesen ist.",
-      "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
+    "hadith": {
+      "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 112:1 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
+      "text": "Die Stunde bleibt beim Vers. Die ganze Sūrah steht im gespeicherten Ausdruck."
     },
-    "9-10": {
-      "goal": "Ich kann das Thema „Keinen geschaffenen Dingen göttliche Macht zuschreiben“ anhand von Qurʾān 112:1 erklären und ein Alltagsbeispiel beurteilen.",
-      "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. In Qurʾān 112:1 lernen wir sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. aḥad bedeutet Einer, einzig. kufuʾ bedeutet gleich, ebenbürtig. Stell dir diese Situation vor: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Welcher nächste Schritt ist gut? Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-      "lines": [
-        "Unsere Qurʾān-Stelle ist Qurʾān 112:1.",
-        "Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
-        "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-        "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
-      ],
-      "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 112:1. Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
-      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-      "terms": [
-        {
-          "say": "aḥad",
-          "de": "Einer, einzig"
-        },
-        {
-          "say": "kufuʾ",
-          "de": "gleich, ebenbürtig"
-        }
-      ],
-      "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-      "practice": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
-      "summary": "Allah ist einzig. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
-      "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
-    }
-  },
-  "questions": {
-    "4-5": [
-      {
-        "type": "choice",
-        "prompt": "Was lernen wir heute über Keinen geschaffenen Dingen göttliche Macht zuschreiben?",
-        "options": [
-          "Neid fühlt sich eng an.",
-          "Allah ist einzig."
-        ],
-        "correct": 1,
-        "hint": "Denke an unsere heutige Stunde.",
-        "explain": "Mā schāʾ Allāh! Allah ist einzig."
-      },
-      {
-        "type": "choice",
-        "prompt": "Was können wir heute üben?",
-        "options": [
-          "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
-          "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
-        ],
-        "correct": 0,
-        "hint": "Erinnere dich an unsere Übung.",
-        "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
-      }
-    ],
-    "6-8": [
-      {
-        "type": "choice",
-        "prompt": "Welche Aussage passt zu unserem Thema Keinen geschaffenen Dingen göttliche Macht zuschreiben?",
-        "options": [
+    "sourceAudit": {
+      "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1984",
+      "hadithNumber": null,
+      "narrator": null,
+      "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
+      "quranReference": "112:1",
+      "quranUrl": "https://www.islamweb.net/ar/library/content/49/1984",
+      "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
+      "hadithMeaningIsParaphrase": true,
+      "verifiedDate": "2026-10-13",
+      "dorarReRead": false,
+      "numberUnverified": true,
+      "fiqhHumanReviewNeeded": false,
+      "scientificApproval": false,
+      "note": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+      "editorialScopeNote": "Die ganze Sūrah steht im gespeicherten Ausdruck. Wir fügen keine Polemik und kein Bild hinzu. Eine Hadithnummer zum Vorzug der Sūrah wird nicht ergänzt."
+    },
+    "hint": "Die arabischen Worte spricht die Lehrperson.",
+    "sample": "Allah ist einzig.",
+    "ageText": {
+      "4-5": {
+        "goal": "Allah ist einzig.",
+        "intro": "Allah ist einzig. Allah ist der, auf den man angewiesen ist. Stell dir vor: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Heute üben wir: Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich. Die arabischen Worte spricht die Lehrperson.",
+        "lines": [
           "Allah ist einzig.",
-          "Neid fühlt sich eng an."
+          "Allah ist der, auf den man angewiesen ist.",
+          "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+          "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
         ],
-        "correct": 0,
-        "hint": "Worum ging es in der Stunde?",
-        "explain": "Mā schāʾ Allāh! Allah ist einzig."
+        "evidence": "Wir lernen mit Qurʾān 112:1. Allah ist einzig.",
+        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+        "terms": [
+          {
+            "say": "aḥad",
+            "de": "Einer, einzig"
+          },
+          {
+            "say": "kufuʾ",
+            "de": "gleich, ebenbürtig"
+          }
+        ],
+        "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+        "practice": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+        "summary": "Allah ist einzig. Die arabischen Worte spricht die Lehrperson.",
+        "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
+      },
+      "6-8": {
+        "goal": "Allah ist einzig.",
+        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Allah ist einzig. Wir lesen Qurʾān 112:1. Der Vers bedeutet sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. So kann das im Alltag aussehen: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Die Aufgabe: Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich. aḥad bedeutet: Einer, einzig. kufuʾ bedeutet: gleich, ebenbürtig.",
+        "lines": [
+          "Qurʾān 112:1 ist die gelesene Stelle.",
+          "Allah ist der, auf den man angewiesen ist.",
+          "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+          "Die arabischen Worte spricht die Lehrperson."
+        ],
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 112:1. Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+        "terms": [
+          {
+            "say": "aḥad",
+            "de": "Einer, einzig"
+          },
+          {
+            "say": "kufuʾ",
+            "de": "gleich, ebenbürtig"
+          }
+        ],
+        "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+        "practice": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+        "summary": "Qurʾān 112:1 trägt diese Stunde. Allah ist der, auf den man angewiesen ist.",
+        "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
+      },
+      "9-10": {
+        "goal": "Ich kann das Thema „Keinen geschaffenen Dingen göttliche Macht zuschreiben“ anhand von Qurʾān 112:1 erklären und ein Alltagsbeispiel beurteilen.",
+        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. In Qurʾān 112:1 lernen wir sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. aḥad bedeutet Einer, einzig. kufuʾ bedeutet gleich, ebenbürtig. Stell dir diese Situation vor: Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Welcher nächste Schritt ist gut? Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+        "lines": [
+          "Unsere Qurʾān-Stelle ist Qurʾān 112:1.",
+          "Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+          "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+          "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
+        ],
+        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 112:1. Sinngemäß: Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1984. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 112:1. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+        "terms": [
+          {
+            "say": "aḥad",
+            "de": "Einer, einzig"
+          },
+          {
+            "say": "kufuʾ",
+            "de": "gleich, ebenbürtig"
+          }
+        ],
+        "situation": "Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+        "practice": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+        "summary": "Allah ist einzig. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+        "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich."
+      }
+    },
+    "questions": {
+      "4-5": [
+        {
+          "type": "choice",
+          "prompt": "Was lernen wir heute über Keinen geschaffenen Dingen göttliche Macht zuschreiben?",
+          "options": [
+            "Neid fühlt sich eng an.",
+            "Allah ist einzig."
+          ],
+          "correct": 1,
+          "hint": "Denke an unsere heutige Stunde.",
+          "explain": "Mā schāʾ Allāh! Allah ist einzig."
+        },
+        {
+          "type": "choice",
+          "prompt": "Was können wir heute üben?",
+          "options": [
+            "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+            "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
+          ],
+          "correct": 0,
+          "hint": "Erinnere dich an unsere Übung.",
+          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+        }
+      ],
+      "6-8": [
+        {
+          "type": "choice",
+          "prompt": "Welche Aussage passt zu unserem Thema Keinen geschaffenen Dingen göttliche Macht zuschreiben?",
+          "options": [
+            "Allah ist einzig.",
+            "Neid fühlt sich eng an."
+          ],
+          "correct": 0,
+          "hint": "Worum ging es in der Stunde?",
+          "explain": "Mā schāʾ Allāh! Allah ist einzig."
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche Handlung gehört zu unserer Übung?",
+          "options": [
+            "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+            "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
+          ],
+          "correct": 0,
+          "hint": "Erinnere dich an das Beispiel.",
+          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+        },
+        {
+          "type": "text",
+          "prompt": "Was möchtest du dir aus Qurʾān 112:1 merken?",
+          "sample": "Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+          "hint": "Erkläre die Stelle in eigenen Worten.",
+          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+        }
+      ],
+      "9-10": [
+        {
+          "type": "text",
+          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 112:1 lernen.",
+          "sample": "Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
+          "hint": "Denke an die Bedeutung der Stelle.",
+          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
+        },
+        {
+          "type": "text",
+          "prompt": "Was wäre in dieser Situation ein guter Schritt? Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
+          "sample": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+          "hint": "Denke an unsere Übung.",
+          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
+        },
+        {
+          "type": "choice",
+          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+          "options": [
+            "Neid fühlt sich eng an.",
+            "Allah ist einzig."
+          ],
+          "correct": 1,
+          "hint": "Was ist das Thema dieser Lektion?",
+          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+        }
+      ]
+    },
+    "terms": [
+      {
+        "say": "aḥad",
+        "de": "Einer, einzig"
       },
       {
-        "type": "choice",
-        "prompt": "Welche Handlung gehört zu unserer Übung?",
-        "options": [
-          "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
-          "Wir sagen innerlich: Ich gönne es dir. Und wir bitten Allah um Schutz."
-        ],
-        "correct": 0,
-        "hint": "Erinnere dich an das Beispiel.",
-        "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
-      },
-      {
-        "type": "text",
-        "prompt": "Was möchtest du dir aus Qurʾān 112:1 merken?",
-        "sample": "Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
-        "hint": "Erkläre die Stelle in eigenen Worten.",
-        "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+        "say": "kufuʾ",
+        "de": "gleich, ebenbürtig"
       }
     ],
-    "9-10": [
-      {
-        "type": "text",
-        "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 112:1 lernen.",
-        "sample": "Die gespeicherte Sūrah sagt: Sprich: Er ist Allah, Einer. Allah ist der, auf den man angewiesen ist. Er hat nicht gezeugt und wurde nicht gezeugt. Niemand ist Ihm gleich.",
-        "hint": "Denke an die Bedeutung der Stelle.",
-        "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-      },
-      {
-        "type": "text",
-        "prompt": "Was wäre in dieser Situation ein guter Schritt? Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah.",
-        "sample": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
-        "hint": "Denke an unsere Übung.",
-        "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-      },
-      {
-        "type": "choice",
-        "prompt": "Welche Aussage gehört zu unserem Lernziel?",
-        "options": [
-          "Neid fühlt sich eng an.",
-          "Allah ist einzig."
-        ],
-        "correct": 1,
-        "hint": "Was ist das Thema dieser Lektion?",
-        "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
-      }
-    ]
+    "practice": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+    "summary": "Allah ist einzig. Allah ist der, auf den man angewiesen ist.",
+    "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
+    "voiceApproved": false
   },
-  "terms": [
-    {
-      "say": "aḥad",
-      "de": "Einer, einzig"
-    },
-    {
-      "say": "kufuʾ",
-      "de": "gleich, ebenbürtig"
-    }
-  ],
-  "practice": "Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
-  "summary": "Allah ist einzig. Allah ist der, auf den man angewiesen ist.",
-  "audioScript": "Keinen geschaffenen Dingen göttliche Macht zuschreiben. Allah ist einzig. Allah ist der, auf den man angewiesen ist. Ein Kind zeigt auf Sonne, Bild oder Amulett und sagt: Das ist erschaffen. Anbetung gehört Allah. Wir erklären mit eigenen Worten: Allah ist Einer und nichts Erschaffenes ist Ihm gleich.",
-  "voiceApproved": false
-},
   "iman-glaube-und-gute-worte": {
     "id": "iman-glaube-und-gute-worte",
     "subject": "aqidah",
