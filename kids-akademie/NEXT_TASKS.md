@@ -1,3 +1,13 @@
+## 14.10.2026 · Einzelkorrektur Fiqh 142 mit CI-Sperre – fünf Gebetsnamen
+
+- **Tatsächlich auf GitHub gespeichert:** `kids/akademie/curriculum-foundation-fiqh-142-v1.js`, **drei individuell neue Kinderfassungen** der bestehenden Lektion 142 `fiqh-namen-der-fuenf-gebete` (4–5, 6–8, 9–10). Lernziele, vier Unterrichtsabschnitte je Alter, Situationen, Übungen und Quellenbegrenzungen.
+- **Exakte Belege:** Qurʾān **11:114** nennt **nicht alle fünf Namen**. Die Gebetsnamen Faǧr, Ẓuhr, ʿAṣr, Maġrib und ʿIšāʾ werden stattdessen mit **Ṣaḥīḥ Muslim 612 von ʿAbdullāh ibn ʿAmr** (Islamweb 1/1036) untermauert, während **Ibn Qudāmah, al-Mughnī, Islamweb 15/425**, den klassischen hanbalitischen Fiqh-Rahmen bildet. Beide Quellen waren schon im Primärquellenregister hinterlegt. Die aktuelle direkte Web-Neuabfrage war nicht zugänglich; diese neue Quellenlektüre wird nicht als neu erfolgreich abgeschlossen behauptet.
+- **Vollständige Forschungsakte:** `kids-akademie/research/SCIENTIFIC_FOUNDATION_FIQH_142_20261014.md` (Qurʾān, Muslim, al-Mughnī, klare Trennung und noch offene Grenzfälle). Die vorhandenen Quizfragen, Qurʾāntext-Felder und Fortschritts-IDs bleiben unverändert.
+- **Sprachtext:** `kids/data/academy-voice-foundation-fiqh-142-delta-v1.json` speichert **19 nur textuelle Kontexte**, `generateCreditsUsed:0`. Noch nicht im kanonischen Sprachplan; keine Audiodatei, keine synthetische Qurʾān-Rezitation.
+- **QA:** `kids/tools/test-academy-foundation-fiqh-142-v1.cjs` prüft die drei Alterstexte, den exakt einmaligen Loader, Voice-Texttreue, fünf Namen, den richtigen Ḥadīṯ-Beleg und die Freigabesperren. Dieser Node-Test wurde in den bestehenden *read-only* GitHub-Actions-Workflow `kids-akademie-editorial-readonly-qa.yml` aufgenommen; der Erfolg eines neu gestarteten Runs ist **separat** zu bestätigen.
+- **Freigabe:** `scientificApproval=false`, `fiqhHumanReviewNeeded=true`, kein Merge nach `main`, kein Live-Push oder Audioaufwand. 208/208 Lektionsentwürfe und 624/624 Altersentwürfe weiter vorhanden; **0/624 fachliche endgültige Freigaben**.
+- **Anschließend:** Fiqh 154 (Absicht im Gebet), 166 (Stehen) und ältere Originalquellen der Akademie kontinuierlich und dokumentiert aufarbeiten.
+
 ## 14.10.2026 · Quellenregister-Regressionsprüfung im GitHub-CI erfolgreich
 
 - **Echter technischer CI-Erfolg nach den neuen Quellenlinks:** [GitHub Actions 38541706825](https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38541706825), Commit `1a2b3e4170eb3b9626c43802133aac62c74c45f6`, Job `editorial-no-deploy-checks` **success**, inklusive neuer Teststufe **Check primary Fiqh source registry** und aller 14 bisherigen Altersredaktions-Tests.
