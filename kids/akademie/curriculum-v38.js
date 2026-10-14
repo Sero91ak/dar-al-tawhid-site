@@ -10356,441 +10356,441 @@ const additions=
     "voiceApproved": false
   },
   "dua-beim-verlassen-des-hauses": {
-    "id": "dua-beim-verlassen-des-hauses",
-    "subject": "adab",
-    "pillar": "dua",
-    "topic": "Duʿāʾ beim Verlassen des Hauses",
-    "title": "Duʿāʾ · Duʿāʾ beim Verlassen des Hauses",
-    "lead": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-    "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-    "quran": {
-      "surah": 17,
-      "ayah": 80,
-      "label": "Qurʾān 17:80",
-      "arabic": "وَقُلْ رَبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ وَاجْعَلْ لِي مِنْ لَدُنْكَ سُلْطَانًا نَصِيرًا",
-      "meaning": "Sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-      "excerpt": false
+  "id": "dua-beim-verlassen-des-hauses",
+  "subject": "adab",
+  "pillar": "dua",
+  "topic": "Duʿāʾ beim Verlassen des Hauses",
+  "title": "Duʿāʾ · Duʿāʾ beim Verlassen des Hauses",
+  "lead": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+  "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+  "quran": {
+    "surah": 17,
+    "ayah": 80,
+    "label": "Qurʾān 17:80",
+    "arabic": "وَقُلْ رَبِّ أَدْخِلْنِي مُدْخَلَ صِدْقٍ وَأَخْرِجْنِي مُخْرَجَ صِدْقٍ وَاجْعَلْ لِي مِنْ لَدُنْكَ سُلْطَانًا نَصِيرًا",
+    "meaning": "Sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+    "excerpt": false
+  },
+  "hadith": {
+    "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 17:80 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
+    "text": "Die Stunde bleibt beim Vers. Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht."
+  },
+  "sourceAudit": {
+    "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1040",
+    "hadithNumber": null,
+    "narrator": null,
+    "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
+    "quranReference": "17:80",
+    "quranUrl": "https://www.islamweb.net/ar/library/content/49/1040",
+    "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
+    "hadithMeaningIsParaphrase": true,
+    "verifiedDate": "2026-10-13",
+    "dorarReRead": false,
+    "numberUnverified": true,
+    "fiqhHumanReviewNeeded": false,
+    "scientificApproval": false,
+    "note": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+    "editorialScopeNote": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus."
+  },
+  "hint": "Die arabischen Worte spricht die Lehrperson.",
+  "sample": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+  "ageText": {
+    "4-5": {
+      "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+      "intro": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. Stell dir vor: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Heute üben wir: Wir üben diesen Sinn und nicht eine andere Formel. Die arabischen Worte spricht die Lehrperson.",
+      "lines": [
+        "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+        "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+        "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+        "Wir üben diesen Sinn und nicht eine andere Formel."
+      ],
+      "evidence": "Wir lernen mit Qurʾān 17:80. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+      "terms": [
+        {
+          "say": "mudḫal",
+          "de": "Eingang"
+        },
+        {
+          "say": "muḫraǧ",
+          "de": "Ausgang"
+        }
+      ],
+      "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+      "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
+      "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Die arabischen Worte spricht die Lehrperson.",
+      "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
     },
-    "hadith": {
-      "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 17:80 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
-      "text": "Die Stunde bleibt beim Vers. Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht."
+    "6-8": {
+      "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
+      "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Wir lesen Qurʾān 17:80. Der Vers bedeutet sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. So kann das im Alltag aussehen: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Die Aufgabe: Wir üben diesen Sinn und nicht eine andere Formel. mudḫal bedeutet: Eingang. muḫraǧ bedeutet: Ausgang.",
+      "lines": [
+        "Qurʾān 17:80 ist die gelesene Stelle.",
+        "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+        "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+        "Die arabischen Worte spricht die Lehrperson."
+      ],
+      "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:80. Sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+      "terms": [
+        {
+          "say": "mudḫal",
+          "de": "Eingang"
+        },
+        {
+          "say": "muḫraǧ",
+          "de": "Ausgang"
+        }
+      ],
+      "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+      "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
+      "summary": "Qurʾān 17:80 trägt diese Stunde. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+      "audioScript": "Duʿāʾ beim Verlassen des Hauses. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
     },
-    "sourceAudit": {
-      "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1040",
-      "hadithNumber": null,
-      "narrator": null,
-      "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
-      "quranReference": "17:80",
-      "quranUrl": "https://www.islamweb.net/ar/library/content/49/1040",
-      "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
-      "hadithMeaningIsParaphrase": true,
-      "verifiedDate": "2026-10-13",
-      "dorarReRead": false,
-      "numberUnverified": true,
-      "fiqhHumanReviewNeeded": false,
-      "scientificApproval": false,
-      "note": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-      "editorialScopeNote": "Die bekannte kurze Formel beim Verlassen des Hauses steht auf dieser Seite nicht. Wir geben sie nicht als gelesene Sunnah aus."
-    },
-    "hint": "Die arabischen Worte spricht die Lehrperson.",
-    "sample": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-    "ageText": {
-      "4-5": {
-        "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-        "intro": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. Stell dir vor: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Heute üben wir: Wir üben diesen Sinn und nicht eine andere Formel. Die arabischen Worte spricht die Lehrperson.",
-        "lines": [
+    "9-10": {
+      "goal": "Ich kann das Thema „Duʿāʾ beim Verlassen des Hauses“ anhand von Qurʾān 17:80 erklären und ein Alltagsbeispiel beurteilen.",
+      "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. In Qurʾān 17:80 lernen wir sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. mudḫal bedeutet Eingang. muḫraǧ bedeutet Ausgang. Stell dir diese Situation vor: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Welcher nächste Schritt ist gut? Wir üben diesen Sinn und nicht eine andere Formel. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+      "lines": [
+        "Unsere Qurʾān-Stelle ist Qurʾān 17:80.",
+        "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+        "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+        "Wir üben diesen Sinn und nicht eine andere Formel."
+      ],
+      "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:80. Sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+      "terms": [
+        {
+          "say": "mudḫal",
+          "de": "Eingang"
+        },
+        {
+          "say": "muḫraǧ",
+          "de": "Ausgang"
+        }
+      ],
+      "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+      "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
+      "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Wir üben diesen Sinn und nicht eine andere Formel.",
+      "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
+    }
+  },
+  "questions": {
+    "4-5": [
+      {
+        "type": "choice",
+        "prompt": "Was lernen wir heute über Duʿāʾ beim Verlassen des Hauses?",
+        "options": [
+          "Im Gebet wird der Qurʾān gelesen.",
+          "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
+        ],
+        "correct": 1,
+        "hint": "Denke an unsere heutige Stunde.",
+        "explain": "Mā schāʾ Allāh! Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
+      },
+      {
+        "type": "choice",
+        "prompt": "Was können wir heute üben?",
+        "options": [
+          "Wir üben diesen Sinn und nicht eine andere Formel.",
+          "Wir lassen den anderen ohne freundliche Worte stehen und gehen einfach weg."
+        ],
+        "correct": 0,
+        "hint": "Erinnere dich an unsere Übung.",
+        "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
+      }
+    ],
+    "6-8": [
+      {
+        "type": "choice",
+        "prompt": "Welche Aussage passt zu unserem Thema Duʿāʾ beim Verlassen des Hauses?",
+        "options": [
           "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-          "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-          "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-          "Wir üben diesen Sinn und nicht eine andere Formel."
+          "Im Gebet wird der Qurʾān gelesen."
         ],
-        "evidence": "Wir lernen mit Qurʾān 17:80. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-        "terms": [
-          {
-            "say": "mudḫal",
-            "de": "Eingang"
-          },
-          {
-            "say": "muḫraǧ",
-            "de": "Ausgang"
-          }
-        ],
-        "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-        "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
-        "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Die arabischen Worte spricht die Lehrperson.",
-        "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
-      },
-      "6-8": {
-        "goal": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Wir lesen Qurʾān 17:80. Der Vers bedeutet sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. So kann das im Alltag aussehen: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Die Aufgabe: Wir üben diesen Sinn und nicht eine andere Formel. mudḫal bedeutet: Eingang. muḫraǧ bedeutet: Ausgang.",
-        "lines": [
-          "Qurʾān 17:80 ist die gelesene Stelle.",
-          "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-          "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-          "Die arabischen Worte spricht die Lehrperson."
-        ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:80. Sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-        "terms": [
-          {
-            "say": "mudḫal",
-            "de": "Eingang"
-          },
-          {
-            "say": "muḫraǧ",
-            "de": "Ausgang"
-          }
-        ],
-        "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-        "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
-        "summary": "Qurʾān 17:80 trägt diese Stunde. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-        "audioScript": "Duʿāʾ beim Verlassen des Hauses. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
-      },
-      "9-10": {
-        "goal": "Ich kann das Thema „Duʿāʾ beim Verlassen des Hauses“ anhand von Qurʾān 17:80 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. In Qurʾān 17:80 lernen wir sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. mudḫal bedeutet Eingang. muḫraǧ bedeutet Ausgang. Stell dir diese Situation vor: An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Welcher nächste Schritt ist gut? Wir üben diesen Sinn und nicht eine andere Formel. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-        "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 17:80.",
-          "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-          "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-          "Wir üben diesen Sinn und nicht eine andere Formel."
-        ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 17:80. Sinngemäß: Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1040. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 17:80. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-        "terms": [
-          {
-            "say": "mudḫal",
-            "de": "Eingang"
-          },
-          {
-            "say": "muḫraǧ",
-            "de": "Ausgang"
-          }
-        ],
-        "situation": "An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-        "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
-        "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Wir üben diesen Sinn und nicht eine andere Formel.",
-        "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel."
-      }
-    },
-    "questions": {
-      "4-5": [
-        {
-          "type": "choice",
-          "prompt": "Was lernen wir heute über Duʿāʾ beim Verlassen des Hauses?",
-          "options": [
-            "Im Gebet wird der Qurʾān gelesen.",
-            "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
-          ],
-          "correct": 1,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
-        },
-        {
-          "type": "choice",
-          "prompt": "Was können wir heute üben?",
-          "options": [
-            "Wir üben diesen Sinn und nicht eine andere Formel.",
-            "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme."
-          ],
-          "correct": 0,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
-        }
-      ],
-      "6-8": [
-        {
-          "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Duʿāʾ beim Verlassen des Hauses?",
-          "options": [
-            "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten.",
-            "Im Gebet wird der Qurʾān gelesen."
-          ],
-          "correct": 0,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
-          "options": [
-            "Wir üben diesen Sinn und nicht eine andere Formel.",
-            "Wir wiederholen keine arabische Sūrah mit einer erzeugten Stimme."
-          ],
-          "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
-        },
-        {
-          "type": "text",
-          "prompt": "Was möchtest du dir aus Qurʾān 17:80 merken?",
-          "sample": "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-          "hint": "Erkläre die Stelle in eigenen Worten.",
-          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
-        }
-      ],
-      "9-10": [
-        {
-          "type": "text",
-          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 17:80 lernen.",
-          "sample": "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
-          "hint": "Denke an die Bedeutung der Stelle.",
-          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-        },
-        {
-          "type": "text",
-          "prompt": "Was wäre in dieser Situation ein guter Schritt? An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
-          "sample": "Wir üben diesen Sinn und nicht eine andere Formel.",
-          "hint": "Denke an unsere Übung.",
-          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
-          "options": [
-            "Im Gebet wird der Qurʾān gelesen.",
-            "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
-          ],
-          "correct": 1,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
-        }
-      ]
-    },
-    "terms": [
-      {
-        "say": "mudḫal",
-        "de": "Eingang"
+        "correct": 0,
+        "hint": "Worum ging es in der Stunde?",
+        "explain": "Mā schāʾ Allāh! Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
       },
       {
-        "say": "muḫraǧ",
-        "de": "Ausgang"
+        "type": "choice",
+        "prompt": "Welche Handlung gehört zu unserer Übung?",
+        "options": [
+          "Wir üben diesen Sinn und nicht eine andere Formel.",
+          "Wir lassen den anderen ohne freundliche Worte stehen und gehen einfach weg."
+        ],
+        "correct": 0,
+        "hint": "Erinnere dich an das Beispiel.",
+        "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+      },
+      {
+        "type": "text",
+        "prompt": "Was möchtest du dir aus Qurʾān 17:80 merken?",
+        "sample": "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+        "hint": "Erkläre die Stelle in eigenen Worten.",
+        "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
       }
     ],
-    "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
-    "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende.",
-    "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel.",
-    "voiceApproved": false
+    "9-10": [
+      {
+        "type": "text",
+        "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 17:80 lernen.",
+        "sample": "Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht.",
+        "hint": "Denke an die Bedeutung der Stelle.",
+        "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
+      },
+      {
+        "type": "text",
+        "prompt": "Was wäre in dieser Situation ein guter Schritt? An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn.",
+        "sample": "Wir üben diesen Sinn und nicht eine andere Formel.",
+        "hint": "Denke an unsere Übung.",
+        "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
+      },
+      {
+        "type": "choice",
+        "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+        "options": [
+          "Im Gebet wird der Qurʾān gelesen.",
+          "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten."
+        ],
+        "correct": 1,
+        "hint": "Was ist das Thema dieser Lektion?",
+        "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+      }
+    ]
   },
+  "terms": [
+    {
+      "say": "mudḫal",
+      "de": "Eingang"
+    },
+    {
+      "say": "muḫraǧ",
+      "de": "Ausgang"
+    }
+  ],
+  "practice": "Wir üben diesen Sinn und nicht eine andere Formel.",
+  "summary": "Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende.",
+  "audioScript": "Duʿāʾ beim Verlassen des Hauses. Wenn wir hinausgehen, können wir Allah um einen guten Ausgang bitten. Der Vers lautet: Mein Herr, lass mich in einen wahrhaftigen Eingang eintreten und in einen wahrhaftigen Ausgang hinausgehen und gib mir von Dir her eine helfende Vollmacht. An der Wohnungstür bleibt das Kind einen Moment stehen und spricht den deutschen Sinn. Wir üben diesen Sinn und nicht eine andere Formel.",
+  "voiceApproved": false
+},
   "family-unterschiedliche-herkunft": {
-    "id": "family-unterschiedliche-herkunft",
-    "subject": "akhlaq",
-    "pillar": "family",
-    "topic": "Unterschiedliche Herkunft respektieren",
-    "title": "Familie · Unterschiedliche Herkunft respektieren",
-    "lead": "Menschen haben verschiedene Familien und Sprachen.",
-    "goal": "Menschen haben verschiedene Familien und Sprachen. Bei Allah zählt die Gottesfurcht.",
-    "quran": {
-      "surah": 49,
-      "ayah": 13,
-      "label": "Qurʾān 49:13",
-      "arabic": "يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُمْ مِنْ ذَكَرٍ وَأُنْثَى وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا إِنَّ أَكْرَمَكُمْ عِنْدَ اللَّهِ أَتْقَاكُمْ إِنَّ اللَّهَ عَلِيمٌ خَبِيرٌ",
-      "meaning": "Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
-      "excerpt": false
+  "id": "family-unterschiedliche-herkunft",
+  "subject": "akhlaq",
+  "pillar": "family",
+  "topic": "Unterschiedliche Herkunft respektieren",
+  "title": "Familie · Unterschiedliche Herkunft respektieren",
+  "lead": "Menschen haben verschiedene Familien und Sprachen.",
+  "goal": "Menschen haben verschiedene Familien und Sprachen. Bei Allah zählt die Gottesfurcht.",
+  "quran": {
+    "surah": 49,
+    "ayah": 13,
+    "label": "Qurʾān 49:13",
+    "arabic": "يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُمْ مِنْ ذَكَرٍ وَأُنْثَى وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا إِنَّ أَكْرَمَكُمْ عِنْدَ اللَّهِ أَتْقَاكُمْ إِنَّ اللَّهَ عَلِيمٌ خَبِيرٌ",
+    "meaning": "Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
+    "excerpt": false
+  },
+  "hadith": {
+    "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 49:13 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
+    "text": "Die Stunde bleibt beim Vers. Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache."
+  },
+  "sourceAudit": {
+    "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1756",
+    "hadithNumber": null,
+    "narrator": null,
+    "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
+    "quranReference": "49:13",
+    "quranUrl": "https://www.islamweb.net/ar/library/content/49/1756",
+    "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
+    "hadithMeaningIsParaphrase": true,
+    "verifiedDate": "2026-10-13",
+    "dorarReRead": false,
+    "numberUnverified": true,
+    "fiqhHumanReviewNeeded": false,
+    "scientificApproval": false,
+    "note": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
+    "editorialScopeNote": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt."
+  },
+  "hint": "Wir erfinden keine zusätzliche Geschichte.",
+  "sample": "Menschen haben verschiedene Familien und Sprachen.",
+  "ageText": {
+    "4-5": {
+      "goal": "Menschen haben verschiedene Familien und Sprachen.",
+      "intro": "Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Stell dir vor: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Heute üben wir: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+      "lines": [
+        "Menschen haben verschiedene Familien und Sprachen.",
+        "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
+        "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+        "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
+      ],
+      "evidence": "Wir lernen mit Qurʾān 49:13. Menschen haben verschiedene Familien und Sprachen.",
+      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+      "terms": [
+        {
+          "say": "šuʿūb",
+          "de": "Völker"
+        },
+        {
+          "say": "qabāʾil",
+          "de": "Stämme"
+        }
+      ],
+      "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+      "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+      "summary": "Menschen haben verschiedene Familien und Sprachen.",
+      "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
     },
-    "hadith": {
-      "source": "Auf der gelesenen Ibn-Kaṯīr-Seite zu Qurʾān 49:13 wurde kein nummerierter Hadith als Beleg der Stunde übernommen",
-      "text": "Die Stunde bleibt beim Vers. Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache."
+    "6-8": {
+      "goal": "Menschen haben verschiedene Familien und Sprachen.",
+      "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Menschen haben verschiedene Familien und Sprachen. Wir lesen Qurʾān 49:13. Der Vers bedeutet sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. So kann das im Alltag aussehen: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Die Aufgabe: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. šuʿūb bedeutet: Völker. qabāʾil bedeutet: Stämme.",
+      "lines": [
+        "Qurʾān 49:13 ist die gelesene Stelle.",
+        "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
+        "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+        "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
+      ],
+      "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 49:13. Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
+      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+      "terms": [
+        {
+          "say": "šuʿūb",
+          "de": "Völker"
+        },
+        {
+          "say": "qabāʾil",
+          "de": "Stämme"
+        }
+      ],
+      "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+      "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+      "summary": "Qurʾān 49:13 trägt diese Stunde. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
+      "audioScript": "Unterschiedliche Herkunft respektieren. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
     },
-    "sourceAudit": {
-      "hadithUrl": "https://www.islamweb.net/ar/library/content/49/1756",
-      "hadithNumber": null,
-      "narrator": null,
-      "authenticity": "Kein nummerierter Hadith als Beleg dieser Stunde übernommen. Weitere Berichte auf der Tafsīr-Seite wurden nicht als Kinderbeleg verwendet.",
-      "quranReference": "49:13",
-      "quranUrl": "https://www.islamweb.net/ar/library/content/49/1756",
-      "quranTextType": "ayah-span-as-printed-on-ibn-kathir-islamweb",
-      "hadithMeaningIsParaphrase": true,
-      "verifiedDate": "2026-10-13",
-      "dorarReRead": false,
-      "numberUnverified": true,
-      "fiqhHumanReviewNeeded": false,
-      "scientificApproval": false,
-      "note": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt. Keine synthetische Rezitation. Keine Freigabe für Besucher.",
-      "editorialScopeNote": "Der Vers erlaubt keinen Witz über Herkunft, Kleidung oder Sprache. Wir erfinden keine Volksgruppe als Beispiel, das der Vers nicht nennt."
-    },
-    "hint": "Wir erfinden keine zusätzliche Geschichte.",
-    "sample": "Menschen haben verschiedene Familien und Sprachen.",
-    "ageText": {
-      "4-5": {
-        "goal": "Menschen haben verschiedene Familien und Sprachen.",
-        "intro": "Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Stell dir vor: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Heute üben wir: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-        "lines": [
+    "9-10": {
+      "goal": "Ich kann das Thema „Unterschiedliche Herkunft respektieren“ anhand von Qurʾān 49:13 erklären und ein Alltagsbeispiel beurteilen.",
+      "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. In Qurʾān 49:13 lernen wir sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. šuʿūb bedeutet Völker. qabāʾil bedeutet Stämme. Stell dir diese Situation vor: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Welcher nächste Schritt ist gut? Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
+      "lines": [
+        "Unsere Qurʾān-Stelle ist Qurʾān 49:13.",
+        "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
+        "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+        "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
+      ],
+      "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 49:13. Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
+      "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
+      "terms": [
+        {
+          "say": "šuʿūb",
+          "de": "Völker"
+        },
+        {
+          "say": "qabāʾil",
+          "de": "Stämme"
+        }
+      ],
+      "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+      "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+      "summary": "Menschen haben verschiedene Familien und Sprachen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+      "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
+    }
+  },
+  "questions": {
+    "4-5": [
+      {
+        "type": "choice",
+        "prompt": "Was lernen wir heute über Unterschiedliche Herkunft respektieren?",
+        "options": [
           "Menschen haben verschiedene Familien und Sprachen.",
-          "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
-          "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-          "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
+          "Allah ist einzig."
         ],
-        "evidence": "Wir lernen mit Qurʾān 49:13. Menschen haben verschiedene Familien und Sprachen.",
-        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-        "terms": [
-          {
-            "say": "šuʿūb",
-            "de": "Völker"
-          },
-          {
-            "say": "qabāʾil",
-            "de": "Stämme"
-          }
-        ],
-        "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-        "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-        "summary": "Menschen haben verschiedene Familien und Sprachen.",
-        "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
-      },
-      "6-8": {
-        "goal": "Menschen haben verschiedene Familien und Sprachen.",
-        "intro": "Assalāmu ʿalaikum! Schön, dass du heute mitlernst. Menschen haben verschiedene Familien und Sprachen. Wir lesen Qurʾān 49:13. Der Vers bedeutet sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. So kann das im Alltag aussehen: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Die Aufgabe: Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. šuʿūb bedeutet: Völker. qabāʾil bedeutet: Stämme.",
-        "lines": [
-          "Qurʾān 49:13 ist die gelesene Stelle.",
-          "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
-          "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-          "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
-        ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 49:13. Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
-        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-        "terms": [
-          {
-            "say": "šuʿūb",
-            "de": "Völker"
-          },
-          {
-            "say": "qabāʾil",
-            "de": "Stämme"
-          }
-        ],
-        "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-        "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-        "summary": "Qurʾān 49:13 trägt diese Stunde. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
-        "audioScript": "Unterschiedliche Herkunft respektieren. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
-      },
-      "9-10": {
-        "goal": "Ich kann das Thema „Unterschiedliche Herkunft respektieren“ anhand von Qurʾān 49:13 erklären und ein Alltagsbeispiel beurteilen.",
-        "intro": "Assalāmu ʿalaikum! Heute beschäftigen wir uns mit dem Thema: Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. In Qurʾān 49:13 lernen wir sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. šuʿūb bedeutet Völker. qabāʾil bedeutet Stämme. Stell dir diese Situation vor: Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Welcher nächste Schritt ist gut? Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt. Überlege auch, was der Qurʾān lehrt und was wir im Alltag einüben.",
-        "lines": [
-          "Unsere Qurʾān-Stelle ist Qurʾān 49:13.",
-          "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
-          "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-          "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
-        ],
-        "evidence": "Unsere Qurʾān-Stelle ist Qurʾān 49:13. Sinngemäß: Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
-        "sources": "Gelesen am 13. Oktober 2026 auf der Ibn-Kaṯīr-Seite https://www.islamweb.net/ar/library/content/49/1756. Gespeichert ist der dort markierte Ausdruck zu Qurʾān 49:13. Eine Hadithnummer wurde nicht ergänzt. Dorar wurde nicht erneut gelesen.",
-        "terms": [
-          {
-            "say": "šuʿūb",
-            "de": "Völker"
-          },
-          {
-            "say": "qabāʾil",
-            "de": "Stämme"
-          }
-        ],
-        "situation": "Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-        "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-        "summary": "Menschen haben verschiedene Familien und Sprachen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-        "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
-      }
-    },
-    "questions": {
-      "4-5": [
-        {
-          "type": "choice",
-          "prompt": "Was lernen wir heute über Unterschiedliche Herkunft respektieren?",
-          "options": [
-            "Menschen haben verschiedene Familien und Sprachen.",
-            "Allah ist einzig."
-          ],
-          "correct": 0,
-          "hint": "Denke an unsere heutige Stunde.",
-          "explain": "Mā schāʾ Allāh! Menschen haben verschiedene Familien und Sprachen."
-        },
-        {
-          "type": "choice",
-          "prompt": "Was können wir heute üben?",
-          "options": [
-            "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation.",
-            "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
-          ],
-          "correct": 1,
-          "hint": "Erinnere dich an unsere Übung.",
-          "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
-        }
-      ],
-      "6-8": [
-        {
-          "type": "choice",
-          "prompt": "Welche Aussage passt zu unserem Thema Unterschiedliche Herkunft respektieren?",
-          "options": [
-            "Allah ist einzig.",
-            "Menschen haben verschiedene Familien und Sprachen."
-          ],
-          "correct": 1,
-          "hint": "Worum ging es in der Stunde?",
-          "explain": "Mā schāʾ Allāh! Menschen haben verschiedene Familien und Sprachen."
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche Handlung gehört zu unserer Übung?",
-          "options": [
-            "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-            "Wir wiederholen den deutschen Sinn und erzeugen keine Rezitation."
-          ],
-          "correct": 0,
-          "hint": "Erinnere dich an das Beispiel.",
-          "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
-        },
-        {
-          "type": "text",
-          "prompt": "Was möchtest du dir aus Qurʾān 49:13 merken?",
-          "sample": "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
-          "hint": "Erkläre die Stelle in eigenen Worten.",
-          "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
-        }
-      ],
-      "9-10": [
-        {
-          "type": "text",
-          "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 49:13 lernen.",
-          "sample": "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
-          "hint": "Denke an die Bedeutung der Stelle.",
-          "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
-        },
-        {
-          "type": "text",
-          "prompt": "Was wäre in dieser Situation ein guter Schritt? Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
-          "sample": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-          "hint": "Denke an unsere Übung.",
-          "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
-        },
-        {
-          "type": "choice",
-          "prompt": "Welche Aussage gehört zu unserem Lernziel?",
-          "options": [
-            "Menschen haben verschiedene Familien und Sprachen.",
-            "Allah ist einzig."
-          ],
-          "correct": 0,
-          "hint": "Was ist das Thema dieser Lektion?",
-          "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
-        }
-      ]
-    },
-    "terms": [
-      {
-        "say": "šuʿūb",
-        "de": "Völker"
+        "correct": 0,
+        "hint": "Denke an unsere heutige Stunde.",
+        "explain": "Mā schāʾ Allāh! Menschen haben verschiedene Familien und Sprachen."
       },
       {
-        "say": "qabāʾil",
-        "de": "Stämme"
+        "type": "choice",
+        "prompt": "Was können wir heute üben?",
+        "options": [
+          "Wir lachen ein neues Kind wegen seiner Sprache aus.",
+          "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt."
+        ],
+        "correct": 1,
+        "hint": "Erinnere dich an unsere Übung.",
+        "explain": "Allāhumma bārik! Diese Übung hilft uns im Alltag."
       }
     ],
-    "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-    "summary": "Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
-    "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
-    "voiceApproved": false
+    "6-8": [
+      {
+        "type": "choice",
+        "prompt": "Welche Aussage passt zu unserem Thema Unterschiedliche Herkunft respektieren?",
+        "options": [
+          "Allah ist einzig.",
+          "Menschen haben verschiedene Familien und Sprachen."
+        ],
+        "correct": 1,
+        "hint": "Worum ging es in der Stunde?",
+        "explain": "Mā schāʾ Allāh! Menschen haben verschiedene Familien und Sprachen."
+      },
+      {
+        "type": "choice",
+        "prompt": "Welche Handlung gehört zu unserer Übung?",
+        "options": [
+          "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+          "Wir lachen ein neues Kind wegen seiner Sprache aus."
+        ],
+        "correct": 0,
+        "hint": "Erinnere dich an das Beispiel.",
+        "explain": "Allāhumma bārik! Du verbindest Lernen und Handeln."
+      },
+      {
+        "type": "text",
+        "prompt": "Was möchtest du dir aus Qurʾān 49:13 merken?",
+        "sample": "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
+        "hint": "Erkläre die Stelle in eigenen Worten.",
+        "explain": "Mā schāʾ Allāh! Wir bleiben bei dem, was wir aus dem Qurʾān lernen."
+      }
+    ],
+    "9-10": [
+      {
+        "type": "text",
+        "prompt": "Erkläre in eigenen Worten, was wir aus Qurʾān 49:13 lernen.",
+        "sample": "Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Der Edelste bei Allah ist der Gottesfürchtigste.",
+        "hint": "Denke an die Bedeutung der Stelle.",
+        "explain": "Mā schāʾ Allāh! Du hast den Vers aufmerksam erklärt."
+      },
+      {
+        "type": "text",
+        "prompt": "Was wäre in dieser Situation ein guter Schritt? Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen.",
+        "sample": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+        "hint": "Denke an unsere Übung.",
+        "explain": "Allāhumma bārik! Du hast einen passenden Schritt überlegt."
+      },
+      {
+        "type": "choice",
+        "prompt": "Welche Aussage gehört zu unserem Lernziel?",
+        "options": [
+          "Menschen haben verschiedene Familien und Sprachen.",
+          "Allah ist einzig."
+        ],
+        "correct": 0,
+        "hint": "Was ist das Thema dieser Lektion?",
+        "explain": "Sehr gut! Wissen zeigt sich auch im Handeln."
+      }
+    ]
   },
+  "terms": [
+    {
+      "say": "šuʿūb",
+      "de": "Völker"
+    },
+    {
+      "say": "qabāʾil",
+      "de": "Stämme"
+    }
+  ],
+  "practice": "Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+  "summary": "Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen.",
+  "audioScript": "Unterschiedliche Herkunft respektieren. Menschen haben verschiedene Familien und Sprachen. Der Vers sagt, dass Allah die Menschen aus einem Mann und einer Frau erschaffen und zu Völkern und Stämmen gemacht hat, damit sie einander kennen. Ein neues Kind spricht zu Hause eine andere Sprache. Wir grüßen es und fragen nach dem Namen. Wir üben einen freundlichen Gruß ohne eine Frage, die das Kind bloßstellt.",
+  "voiceApproved": false
+},
   "tawhid-rahman-rahim": {
     "id": "tawhid-rahman-rahim",
     "subject": "aqidah",
