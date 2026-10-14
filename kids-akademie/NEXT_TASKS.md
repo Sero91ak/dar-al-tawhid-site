@@ -1,3 +1,15 @@
+## 14.10.2026 · Unterricht bis 174/208 individuell redigiert (PR #1142, kein Merge)
+
+**Neu 171–174:** Vier weitere Kinderlektionen in `kids/akademie/curriculum-editorial-171-174-v1.js` und damit **12 eigene Altersfassungen**. Themen: vorsichtiger Umgang mit Essen, Selbstständigkeit, ruhig lernen, Gebetsbeginn `Takbīrat al-Iḥrām`.
+
+**Wesentliche Quellenreparatur:** Slot **172** verwendete im Altregister Qurʾān **94:5–6**, das vorhandene Quiz behandelte aber **94:7–8**. Die Kinderanzeige wurde für 172 auf den zutreffenden Versbereich **94:7–8** mit vollständigem arabischem Wortlaut und passender deutscher Sinnbeschreibung geändert. Das alte Registry-Objekt muss später separat aufgelöst werden. Quellenakte: `kids-akademie/research/EDITORIAL_REVIEW_171_174_20261014.md`.
+
+**Fiqh Slot 174:** Die konkrete Eröffnungsformel `Allāhu akbar` beruht nicht auf einem frei abgeleiteten Wortlaut aus Qurʾān 17:111, sondern auf klassischer hanbalitischer Primärstelle **Ibn Qudāmah, al-Mughnī, Bd. 1, S. 275–277, Islamweb 15/532–534**. Der Takbīr als notwendiger Bestandteil wurde nachgelesen; Details und Ausnahmen bleiben `fiqhHumanReviewNeeded=true`, `scientificApproval=false`.
+
+**Daten und Tests:** `kids/data/academy-voice-editorial-171-174-delta-v1.json` umfasst **76 Text-Kontexte**; keine Aufnahmen, **0 Credits**. `kids/tools/test-academy-editorial-171-174-v1.cjs` als reproduzierbarer Node-Test gespeichert. **131/131 direkte Daten-, Quellenfeld-, Kindertext- und Ladereihenfolge-Kontrollen bestanden**. Vollständige Node-/Browser-/CI-Ausführung noch nicht verifiziert (externer Git-Checkout hier nicht erreichbar). Keine Audio-Synchronisierung mit dem kanonischen Plan behaupten.
+
+**Fortschritt:** Individuelle Redaktion nun bis **174/208**. **34 weitere Lektionen 175–208** offen. Unabhängige wissenschaftliche Vollabnahme weiter **0/624**; keine Freigabe für Kinderplayer, kein Merge auf main, kein Live-Deploy. Nächster Block **175–178**. Der Hauptproduktionszweig aus PR #1113 wird nicht automatisch überschrieben.
+
 ## 14.10.2026 · ChatGPT-Unterricht fortgesetzt bis 170/208
 
 **Neue Inhalte 167–170:** `curriculum-editorial-167-170-v1.js`, vier Lektionen mit zwölf eigenständigen Altersfassungen. Themen: ʿIbādah, al-Qadar, Aufrichtigkeit, Freude für andere. Je Fassung vier zusammenhängende Kinder-Unterrichtsabschnitte, Lernziel, Beispiel, Übung, Quellengrenze und Zusammenfassung.
