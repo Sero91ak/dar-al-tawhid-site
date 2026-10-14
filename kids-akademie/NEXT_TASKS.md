@@ -1,3 +1,11 @@
+## 14.10.2026 · Unterricht bis 186/208, geschützter Entwurf
+
+- **183–186:** Hilfsbereitschaft ohne Druck; Aufmerksamkeit beim Qurʾān-Vortrag; Schuldgefühle ohne Angstbilder; Rukūʿ kennenlernen. Vier vorhandene Lektions-IDs, **12 individuelle Altersfassungen**, je vier Unterrichtsabschnitten, Situation, Übung, Lernziel und Quellenabgrenzung: `kids/akademie/curriculum-editorial-183-186-v1.js`.
+- **Quellen:** Qurʾān 5:2 (Ibn Kaṯīr 49/372), 7:204 (49/589), 39:53 (49/1629) und 22:77 (49/1229). Die Kinderanzeige von **39:53** enthält jetzt nur den einzelnen vollständigen Vers und nicht 39:54/55. Klassisch-hanbalitischer Fiqh für 186: Ibn Qudāmah, `al-Mughnī`, Bd. 1 S. 295–296, Islamweb 15/570; die Handhaltung auf den Knien ist als empfohlen, die Verbeugung als erforderlich voneinander getrennt. `fiqhHumanReviewNeeded=true` und `scientificApproval=false` bleiben.
+- **Technik:** `kids/data/academy-voice-editorial-183-186-delta-v1.json`: **76 Textkontexte**, `generateCreditsUsed=0`, keine Audioerzeugung; Loader einmalig nach 179–182. Alle 12 Altersfassungen stimmen beim schreibgeschützten Datenvergleich mit den Textkontexten überein, 0 interne QA-Metadaten in den Kindertexten. `kids/tools/test-academy-editorial-183-186-v1.cjs` als reproduzierbarer Node-Test hinterlegt; vollständige Node-/Browser-/CI-Ausführung ist nicht bestätigt.
+- **Stand:** 186/208 individuell redigiert; **22 Lektionen 187–208** für individuelle Redaktion offen. Ältere Quellen und alle 624 Altersfassungen erfordern eine separate wissenschaftliche Endprüfung; **0/624 freigegeben**. Kein Merge auf `main`, kein Live-Deploy.
+- **Nächster Block:** 187–190, danach Fiqh-Quellen besonders bei 192 gezielt überprüfen. Sprechtext-Deltas vor jeder künftigen Aufnahme in den kanonischen Textplan konsolidieren.
+
 ## 14.10.2026 · Fortsetzung bis Slot 182/208 · geschützter Draft-PR #1142
 
 **Lektionsblock 179–182:** Wertschätzender Umgang mit sich selbst, Qurʾān-Rezitation im Gebet, Einzigkeit Allahs gegenüber Geschöpfen und gute Worte. Vier bestehende IDs; je drei Altersfassungen mit Lernziel, vier individuellen Unterrichtsabschnitten, Situation, Praxis, Quellenabgrenzung und Zusammenfassung. Unter `kids/akademie/curriculum-editorial-179-182-v1.js`; im Index korrekt einmalig nach 175–178 geladen.
