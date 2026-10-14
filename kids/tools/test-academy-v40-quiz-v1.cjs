@@ -12,7 +12,7 @@ for(const version of [39,40])
  vm.runInNewContext(read("kids/akademie/curriculum-v"+version+".js"),ctx,{timeout:1200,filename:"curriculum-v"+version+".js"});
 const current=ctx.window.DARKidsAcademyCurriculum;
 const ids=[...ctx.window.DARKidsAcademyCurriculumV39.ids,...ctx.window.DARKidsAcademyCurriculumV40.ids];
-assert.equal(new Set(ids).size,24,"24 distinct lessons revised");
+assert.equal(new Set(ids).size,22,"22 active revisions; source-reviewed Fiqh 106 and 118 preserved");
 assert.equal(Object.keys(current).length,111,"all 111 lessons preserved");
 let checked=0;
 for(const id of ids){
@@ -49,4 +49,4 @@ for(const v of [39,40]){
 const html=read("kids/akademie/index.html");
 const positions=[38,39,40].map(v=>html.indexOf("curriculum-v"+v+".js?v="));
 assert.ok(positions.every(x=>x>0)&&positions[0]<positions[1]&&positions[1]<positions[2],"scripts load in correct order");
-console.log("PASS: 111 lessons preserved; 24 lessons and "+checked+" age-specific questions redacted and revised; sources/voices unchanged.");
+console.log("PASS: 111 lessons preserved; 22 lessons and "+checked+" age-specific questions redacted and revised; sources/voices unchanged.");
