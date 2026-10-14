@@ -36,7 +36,7 @@ def main():
     original=load(CATALOG).get("items") or []
     voice=load(PLAN)
     cfg=load(FLAG)
-    if len(selected)!=len(reserved)!=450:
+    if len(selected)!=450 or len(reserved)!=450:
         raise RuntimeError("Expected exactly 450 in both selection and archive")
     if len(original)!=900 or Counter(q["ageBand"] for q in selected)!=COUNTS:
         raise RuntimeError("Catalog or 150+150+150 selection mismatch")
