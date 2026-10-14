@@ -1,3 +1,11 @@
+## 14.10.2026 · Laufzeit-Integrationstest 155–208 bestanden (keine Endfreigabe)
+
+- **14/14 JS-Overlays tatsächlich isoliert ausgeführt** in vorgeschriebener Reihenfolge mit den 208 bestehenden Lesson-IDs als simuliertem Curriculum; **54 Lektions-IDs / 162 Altersfassungen / 1.026 unvertonten Textkontexte** erfolgreich geprüft.
+- Test 155–182: 84 Altersfassungen, 532 Texte, 0 Abweichungen. Test 183–208: 78 Altersfassungen, 494 Texte, 0 Abweichungen. **0 kinderseitig sichtbare interne Auditbegriffe** nach Korrektur der Quellenzeile von Lektion 166 (9–10 Jahre); Fiqh-Auditflag intern unverändert.
+- Permanente Regression: `node kids/tools/test-academy-editorial-fullchain-v1.cjs`; **Testskript im Repo hinterlegt, aber als Node/CI-Lauf noch nicht ausgeführt**. Voller Bericht: `kids-akademie/INTEGRATION_AUDIT_155_208_20261014.md`.
+- **Doppelte Alternativfassung:** `curriculum-editorial-203-206-v1.js` und zugehöriges Voice-Delta sind derzeit ungenutzt. Nur **203–205 → 206–208** im akademischen Testindex laden. Keine konkurrierenden Quellen zusammenfügen.
+- **Nächste wichtige Arbeit:** Primärquellen-/pädagogische Prüfung der bestehenden Lektionen 1–154, danach realer Node-/Browser-/iOS-/Android-/PWA-Test und Einzellektionen-Freigaben. **208/208 textlich redigiert, 0/624 wissenschaftlich endfreigegeben.** Kein Merge auf `main`, keine Audioerzeugung oder Live-Veröffentlichung.
+
 ## 14.10.2026 · 208/208 Unterrichtslektionen jetzt individuell redigiert · wissenschaftlich noch nicht freigegeben
 
 **Redaktioneller Jahresstand:** 52 Wochen, **208 Themen**, jeweils für 4–5, 6–8 und 9–10 Jahre; **624 Altersentwürfe vorhanden**. Das bezieht sich auf ausgearbeitete Textentwürfe, **nicht** auf die endgültige fachwissenschaftliche oder pädagogische Freigabe. Die noch individuell zu bearbeitenden Lektionsslots betragen **0**; **wissenschaftlich freigegeben sind 0/624**.
