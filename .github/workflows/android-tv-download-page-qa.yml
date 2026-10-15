@@ -1,0 +1,37 @@
+name: DĀR AL TAWḤĪD TV · Download site guard
+on:
+  pull_request:
+    paths:
+      - 'tv/index.html'
+      - 'tv/official-tv-release.js'
+      - 'tv/test-official-tv-release.cjs'
+      - '.github/workflows/android-tv-download-page-qa.yml'
+  push:
+    branches:
+      - feat/android-tv-apple-tv-layout-parity-20261009
+      - main
+    paths:
+      - 'tv/index.html'
+      - 'tv/official-tv-release.js'
+      - 'tv/test-official-tv-release.cjs'
+      - '.github/workflows/android-tv-download-page-qa.yml'
+permissions:
+  contents: read
+jobs:
+  tv-download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate isolated TV download JavaScript
+        run: |
+          node --check tv/official-tv-release.js
+          node tv/test-official-tv-release.cjs
+      - name: Ensure no general website shell or phone release script is needed
+        run: |
+          grep -Fq 'src="/tv/official-tv-release.js"' tv/index.html
+          ! grep -Fq 'src="/download/official-release-links.js"' tv/index.html
+          test -f tv/index.html
