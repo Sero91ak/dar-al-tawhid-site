@@ -14,7 +14,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--require", action="store_true",
                         help="Fail unless all original Apple TV resources are installed")
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[4],
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[3],
                         help="Root of dar-al-tawhid-site repo")
     args = parser.parse_args()
     root = args.root.resolve()
