@@ -204,50 +204,47 @@ function queue(){
  if(queued)return;queued=true;
  requestAnimationFrame(()=>{queued=false;sync()});
 }
-/* KIDS_TOP_SCROLL_BOUNDARY_V1411
- * iOS PWA/WKWebView may rubber-band the single page scroller despite
- * CSS overscroll-behavior. A portal-fixed header remains stationary while
- * the transparent in-flow head spacer and hero move DOWN, revealing a gap.
- *
- * Clamp only downward finger motion when every scrollable ancestor is
- * already at its top. Upward reading, momentum, horizontal gestures,
- * nested scrollers, audio buttons and ordinary navigation remain native.
- * Bound once in this shared controller: present and future Kids details.
+/* KIDS_TOP_SCROLL_BOUNDARY_V1411 / KIDS_GLOBAL_TOP_SCROLL_BOUNDARY_V1428
+ * One scroll boundary for EVERY in-app view, not only detail pages:
+ * Today, Hören, Duʿāʾ, Parents, Salaf, future views, and opened readers.
+ * The Academy iframe owns its own matching guard (same-origin document).
+ * Prevent ONLY a downward one-finger drag with every scroller from the
+ * touched content to its active scroll root already at the top. Keep
+ * native up-scrolling, inertia, horizontal cards, selection and navigation.
  */
 function installTopScrollBoundaryGuard(){
   const shell=document.querySelector(".shell");
   if(!shell||shell.dataset.kidsTopEdgeGuard)return;
-  shell.dataset.kidsTopEdgeGuard="v1411";
-  const detailSelector=".shell > .view.active.kids-detail-page, #salafDetail:not([hidden]), .modal.open, .duahub-detail.open, .ps-modal.open, .ms-modal.open, #ghPlayer.open";
-  let previousX=null,previousY=null,startTarget=null;
-  function scrollableAncestorAboveTop(target){
-    for(let node=target;node&&node!==document.body;node=node.parentElement){
-      if(!(node instanceof HTMLElement))continue;
+  shell.dataset.kidsTopEdgeGuard="v1428";
+  const rootSelector=".shell, .modal.open, .ps-modal.open, .ms-modal.open, #ghPlayer.open, #salafDetail:not([hidden])";
+  let previousX=null,previousY=null,startTarget=null,touchRoot=null;
+  function scrollableAncestorAboveTop(target,root){
+    for(let node=target;node instanceof HTMLElement;node=node.parentElement){
       const overflowY=getComputedStyle(node).overflowY;
-      if(!/^(auto|scroll|overlay)$/.test(overflowY))continue;
-      if(node.scrollHeight>node.clientHeight+1&&node.scrollTop>0.5)return true;
+      if(/^(auto|scroll|overlay)$/.test(overflowY)&&node.scrollTop>0.5)return true;
+      if(node===root)break;
     }
     return false;
   }
+  function reset(){startTarget=null;touchRoot=null;previousX=null;previousY=null;}
   document.addEventListener("touchstart",event=>{
-    if(event.touches.length!==1){
-      startTarget=null;previousX=null;previousY=null;return;
-    }
+    if(!event.touches||event.touches.length!==1){reset();return;}
+    startTarget=event.target instanceof Element?event.target:null;
+    touchRoot=startTarget?.closest(rootSelector)||null;
+    if(!touchRoot){reset();return;}
     const touch=event.touches[0];
     previousX=touch.clientX;previousY=touch.clientY;
-    startTarget=event.target instanceof Element&&event.target.closest(detailSelector)?event.target:null;
   },{capture:true,passive:true});
   document.addEventListener("touchmove",event=>{
-    if(event.touches.length!==1||!startTarget||previousY===null)return;
+    if(!touchRoot||!startTarget||previousY===null||!event.touches||event.touches.length!==1)return;
     const touch=event.touches[0];
     const dx=touch.clientX-previousX,dy=touch.clientY-previousY;
     previousX=touch.clientX;previousY=touch.clientY;
     if(event.defaultPrevented||!event.cancelable||dy<=0||dy<=Math.abs(dx))return;
-    if(!scrollableAncestorAboveTop(startTarget))event.preventDefault();
+    if(!scrollableAncestorAboveTop(startTarget,touchRoot))event.preventDefault();
   },{capture:true,passive:false});
-  function reset(){startTarget=null;previousX=null;previousY=null;}
-  document.addEventListener("touchend",reset,{passive:true});
-  document.addEventListener("touchcancel",reset,{passive:true});
+  document.addEventListener("touchend",reset,{capture:true,passive:true});
+  document.addEventListener("touchcancel",reset,{capture:true,passive:true});
 }
 function start(){
  installTopScrollBoundaryGuard();
