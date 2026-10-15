@@ -35,17 +35,9 @@ html body .app[data-gender="girl"] #view-stories .dl-library-page{
   background-color:#2b2035!important;
 }
 
-/* Fullscreen stories and reading overlays can be mounted on <body>,
-   beyond .app. Their backdrop must match the profile in all overscroll
-   and iOS safe-area states, without muting the original hero images. */
-html body:has(.app[data-gender="girl"]) :is(
-  .ps-modal,.ms-modal,.sy-modal,.dl-modal,
-  .gh-player,.gh-world,
-  .kids-follow-reader
-){
-  --kids-girls-canvas:#2b2035;
-  background-color:#2b2035!important;
-}
+/* Body-mounted story SCROLL surfaces remain opaque plum, but the
+   translucent modal and reader BACKDROPS must keep their original alpha
+   so a bottom sheet still looks and behaves like a bottom sheet. */
 html body:has(.app[data-gender="girl"]) :is(
   .ps-scroll,.ms-scroll,.gh-player-scroll,.gh-world-scroll
 ){
