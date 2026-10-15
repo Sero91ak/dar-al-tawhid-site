@@ -112,8 +112,8 @@ internal class TvKaabaBackdrop(
         return true
     }
 
+    @Suppress("DEPRECATION")
     private fun drawableId(name: String): Int =
-        @Suppress("DEPRECATION")
         activity.resources.getIdentifier(name, "drawable", activity.packageName)
 
     private fun shade(readabilityMode: Boolean) {
