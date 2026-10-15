@@ -248,3 +248,7 @@ assert.ok(heroSeam.includes('padding-bottom:0!important'));
 /* V1414: Salaf source proof must remain internal. */
 assert.ok(js.includes('KIDS_SOURCE_TEXT_ONLY_V1414'));
 assert.ok(!js.includes('class="salaf-source-link"'));
+
+/* All Salaf releases must also pass the strict Sunni subject + text gate. */
+require("./check-salaf-sunni-editorial-v1.cjs");
+require("./check-retired-quran-learning-v1418.cjs");

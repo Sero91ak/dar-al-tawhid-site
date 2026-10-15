@@ -19,7 +19,7 @@ const tests=[
 ["owner notification exists only in compiled test",web.includes("#if KIDS_CREATOR_TEST\n            NotificationCenter.default.addObserver(")],
 ["home tab exists in live shell",home.includes('data-target="today"')],
 ["stories tab exists",home.includes('data-target="stories"')],
-["Quran tab exists",home.includes('data-target="quran"')],
+["Quran learning tab retired from live shell",!home.includes('data-target="quran"')],
 ["parents tab exists",home.includes('data-target="parents"')],
 ["dua button exists",home.includes('id="openDuaButton"')],
 ["Academy content exists",academy.includes("akademie")||academy.includes("Akademie")],

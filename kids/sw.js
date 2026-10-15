@@ -28,7 +28,6 @@ const CORE_PRECACHE=[
   "/kids/section-heroes-v1095.css?v=1256-parent-hero-full",
   "/kids/profile-stability-v1256.css?v=1258",
   "/kids/assets/kids-art/section-stories-v1097.png?v=1097-real3",
-  "/kids/assets/kids-art/section-quran-v1090.jpg?v=1090",
   "/kids/assets/kids-art/section-parents-v1097.png?v=1097-real3",
   "/kids/assets/parents-hero/boy-profile-v1254.jpg",
   "/kids/assets/parents-hero/girl-profile-v1254.jpg",
@@ -43,7 +42,6 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-home-v1219/dar-title-reference.png?v=1229",
   "/assets/fonts/cinzel-latin-600-normal.woff2",
   "/kids/assets/kids-home-v1176/world-stories.png",
-  "/kids/assets/kids-home-v1176/world-quran.png",
   "/kids/assets/kids-home-v1176/world-dua.png",
   "/kids/assets/kids-brand/hero-warm-world.png?v=1175",
   "/kids/assets/stories-home/prophets-v1133.webp?v=1136",
@@ -205,10 +203,6 @@ const CORE_PRECACHE=[
   "/kids/assets/prophets-v2/muhammad-card.jpg?v=22"
 ];
 const PRECACHE=CORE_PRECACHE.concat([
-  "/kids/assets/kids-art/quran-reise-v11-clean.png",
-  "/kids/assets/kids-art/quran-home-v1053.jpg",
-  "/kids/assets/kids-art/quran-surahs-v1053.jpg",
-  "/kids/assets/kids-art/quran-verses-v1053.jpg",
   "/kids/assets/kids-art/surah-001-al-fatihah-v13.jpg",
   "/kids/assets/kids-art/surah-112-al-ikhlas-v13.jpg",
   "/kids/assets/kids-art/surah-113-al-falaq-v13.jpg",

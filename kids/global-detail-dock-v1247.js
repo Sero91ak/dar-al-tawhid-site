@@ -72,6 +72,7 @@ function initLegacy(id){
  * The original listeners, disabled state and speech engines are preserved.
  * Future buttons with equivalent German labels adopt the same affordance.
  */
+/* KIDS_NO_EXTERNAL_SOURCE_PROOF_ACTIONS_V1251 — legacy contract, enforced by V1414 sanitizer below. */
 /* KIDS_NO_EXTERNAL_SOURCE_PROOF_ACTIONS_V1414
  * All current and new Kids modules: verified citations remain as plain text.
  * The existing MutationObserver automatically rescrubs dynamic content.

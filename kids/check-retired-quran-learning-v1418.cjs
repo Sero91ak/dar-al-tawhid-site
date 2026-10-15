@@ -1,0 +1,40 @@
+#!/usr/bin/env node
+"use strict";
+/* TAWḤĪD KIDS — Quran/Alif-Ba learning retirement regression checks V1418.
+   Keep Quran references inside Du'a, Academy, Quiz and story sources untouched.
+   Archived child progress remains untouched, while no Quran practice launches. */
+const fs=require("node:fs"),path=require("node:path"),assert=require("node:assert/strict"),vm=require("node:vm");
+const root=path.resolve(__dirname,".."),read=p=>fs.readFileSync(path.join(root,p),"utf8");
+const html=read("kids/index.html"),sw=read("kids/sw.js"),manifest=JSON.parse(read("kids/version.json"));
+for(const page of ["kids/shell.html","kids/start.html"])assert.equal(html,read(page),"Three official KIDS shells must remain identical");
+const forbidden=[
+  /<button[^>]*data-go="quran"/,/<button[^>]*data-target="quran"/,
+  /<section[^>]*id="view-quran"/,/<div[^>]*id="quranModal"/,
+  /<div[^>]*id="fullQuranModal"/,/<audio[^>]*id="quranAudio"/,
+  /<audio[^>]*id="recitationPlaybackAudio"/,/<button[^>]*id="quickLearn112"/,
+  /<button[^>]*id="resumeQuran"/,/<div[^>]*id="parentQuranResume"/
+];
+for(const pattern of forbidden)assert.ok(!pattern.test(html),"Retired lesson UI resurrected: "+pattern);
+assert.ok(html.includes("const KIDS_QURAN_LEARNING_REMOVED=true"),"No authoritative retired feature guard");
+assert.ok(html.includes('if(name==="quran"||name==="alphabet")name="today"'),"Legacy links must route safely to Home");
+assert.ok(html.includes('if(step==="quran"){showTab("today");return}'),"Legacy daily lesson must not reopen");
+assert.ok(html.includes("if(KIDS_QURAN_LEARNING_REMOVED)return;"),"Old Quran lesson entry points must be blocked");
+assert.ok(html.includes('var q=null; // Archived Qur'),"Home resume must not reopen removed lessons");
+assert.ok(!html.includes('fetchKidsQuiz();fetchCatalog();'),"Removed Quran catalog must not fetch on launch");
+assert.ok(html.includes('data-target="stories"')&&html.includes('data-target="salaf"')&&
+  html.includes('data-target="parents"')&&html.includes('id="openQuizButton"')&&
+  html.includes('id="openDuaButton"'),"Other children modules must remain usable");
+assert.equal(manifest.quranLearningEnabled,false);
+assert.equal(manifest.quranLearningRuntimeRemoved,true);
+assert.equal(manifest.alifBaRuntimeRemoved,true);
+assert.equal(manifest.quranLearningArchivedUserProgressRetained,true);
+assert.equal(manifest.visualSystem.alphabetEnabled,false);
+assert.equal(sw.includes('dar-al-tawhid-kids-v1410'),true,"Keep original published PWA cache family while retiring obsolete markup");
+assert.ok(!sw.includes('/kids/assets/kids-art/quran-surahs-v1053.jpg'),"Do not precache retired art");
+let inline=0;
+for(const m of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)){
+ if(!m[1].trim())continue;
+ new vm.Script(m[1],{filename:"kids/index.html:inline-script-"+(++inline)});
+}
+assert.ok(inline>0,"Expected to parse inline Kids runtime");
+console.log("PASS KIDS V1418: Quran/Alif-Ba learning UI retired, legacy routes blocked, other modules preserved; parsed "+inline+" inline scripts");
