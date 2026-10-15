@@ -281,9 +281,12 @@
       learn = document.createElement("a");
       learn.className = "nav-btn kids-academy-tab";
       learn.href = "/kids/akademie/index.html";
+      learn.dataset.academyOpen = "1";
       learn.setAttribute("aria-label", "Lernakademie öffnen");
       learn.innerHTML = '<span class="ico" aria-hidden="true"></span><span class="lab">Lernen</span>';
     }
+    // Upgrade cached Kids shells in place without losing their sessions.
+    learn.dataset.academyOpen = "1";
     const oldSalaf = q('.nav-btn[data-target="salaf"]', nav);
     const oldDua = q('.nav-btn[data-target="dua"]', nav);
     let dua = oldSalaf || oldDua;
