@@ -1,3 +1,29 @@
+## Abschließender Register-Nachweis 15.10.2026 – alle 34 Altfundstellen kontrolliert
+
+Die nachstehenden Zwischennotizen dokumentieren den schrittweisen Fortschritt. **Der neueste Stand ist jetzt:**
+
+- **208/208** Unterrichtsthemen im Quellenregister mit ≥1 HTTPS-Nachweis verbunden.
+- **218** Datensätze, **218 eindeutige technische Quellenschlüssel und Source-IDs**.
+- **34 von 34** ehemals nur aus V27–V35 übernommenen Hadithreferenzen (Slots **57–90**) nun anhand einer bei **Dorar dargestellten ursprünglichen Sammlung**, **Nummer**, **Überlieferer** und einem **arabischen Kurztext** abgeglichen. **0** Einträge mehr mit `legacy-lesson-documentation-not-independently-reverified-2026-10-15`.
+- **Keine dieser Arbeiten** stellt eine vollständige Isnādanalyse, durchgehende Wort-für-Wort-Vergleichung aller Druckausgaben, hanbalitische Fiqh-Endprüfung oder **pädagogische Freigabe** der 624 Altersversionen dar. Diese bleiben **0/624 freigegeben**.
+- Bei Parallelüberlieferungen (z. B. al-Buḫārī 6312/6324, 135/Muslim 225, Muslim 8/englisch 8a) wurden unterschiedliche Sammlungs- und Versionsnummern ausdrücklich markiert; der alte Dorar-Kommentarlink für Slot 88 wurde durch den tatsächlichen Muslim-8-Nachweis **25545** ersetzt.
+- Die **read-only Regression** `kids/tools/test-academy-source-registry-complete-v1.cjs` fordert nun ausdrücklich 34/34 Quellenstatus, `checkedOn=2026-10-15`, arabische Auszüge, Originaldirektlinks und **0 verbleibende Alt-Metadaten ohne unabhängigen Nummernabgleich**.
+- GitHub Actions führt diesen Test auf dem **geschützten Entwurfszweig** aus. Nur ein vollständig erfolgreicher neuer Actions-Lauf gilt als technische Endkontrolle für diese Commit-Version. **Kein Merge, kein Audio, kein Live-Deploy.**
+
+### Neu gegengeprüfte Sammlungshinweise der Schlussrunde 73–90
+
+| Slots | Quellen (Sammlung, Nummer) | Links |
+|---|---|---|
+| 73–76 | al-Buḫārī **6312**; Muslim **2564**; at-Tirmiḏī **2344** (ḥasan ṣaḥīḥ); al-Buḫārī **555** | [73](https://dorar.net/hadith/sharh/1652) · [74](https://dorar.net/hadith/sharh/17126) · [75](https://dorar.net/hadith/sharh/35572) · [76](https://dorar.net/hadith/sharh/7560) |
+| 77–80 | al-Buḫārī **1**; Muslim **2586**, **2593**, **2664** | [77](https://dorar.net/hadith/sharh/3429) · [78](https://dorar.net/hadith/sharh/4341) · [79](https://dorar.net/hadith/sharh/26226) · [80](https://dorar.net/hadith/sharh/139097) |
+| 81–83 | Muslim **2699** (wiederverwendet aus Slot 65); al-Buḫārī **135**, **5017** | [81](https://dorar.net/hadith/sharh/123965) · [82](https://dorar.net/hadith/sharh/6252) · [83](https://dorar.net/hadith/sharh/151175) |
+| 84–87 | al-Buḫārī **3364**, **6312**, **6114**; Muslim **2754** | [84](https://dorar.net/h/RIbF20cQ?osoul=1) · [85](https://dorar.net/hadith/sharh/1652) · [86](https://dorar.net/hadith/sharh/10213) · [87](https://dorar.net/hadith/sharh/7859) |
+| 88–90 | Muslim **8**, **2588**; al-Buḫārī **6021** | [88](https://dorar.net/hadith/sharh/25545) · [89](https://dorar.net/hadith/sharh/17186) · [90](https://dorar.net/hadith/sharh/151119) |
+
+**Hinweis zur Kindersicherheit:** Soziale Themen, Schutz und Barmherzigkeit dürfen nicht als Druck zur Gefährdung, zum Schweigen bei Unrecht oder als angstmachende Strafgeschichte benutzt werden. Die Genauigkeit der Kinderfassungen bleibt eine eigenständige weitere Prüfung.
+
+---
+
 ## Ergänzung · Vier weitere Originalbelege 69–72 (15.10.2026)
 
 - **69:** Muslim 2999, Ṣuhayb ibn Sinān; [Dorar 152156](https://dorar.net/hadith/sharh/152156) – Geduld bei schwierigen Ereignissen, aber keine Pflicht zum Aushalten von Gefahr.
