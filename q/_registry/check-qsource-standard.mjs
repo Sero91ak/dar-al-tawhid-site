@@ -44,8 +44,21 @@ for (const entry of entries) {
   if (!Number.isInteger(n) || n < 1 || seen.has(n)) fail.push('Register: ungültige oder doppelte Q-Nummer ' + entry.number);
   seen.add(n);
   if (entry.status === 'active' && !files.includes(n)) fail.push('Register: aktive Q' + n + ' ohne HTML-Datei');
-  if (entry.status === 'active' && (entry.shortPath !== '/q/' + n + '/' || entry.targetPath !== '/q/' + n + '/'))
-    fail.push('Register: Q' + n + ' hat einen ungültigen kanonischen Pfad');
+  if (entry.status === 'active') {
+    const canonical = '/q/' + n + '/';
+    if (entry.shortPath !== canonical) {
+      fail.push('Register: Q' + n + ' hat einen ungültigen kanonischen Kurzpfad');
+    }
+    if (entry.targetPath !== canonical) {
+      // Q1–7 precede the new canonical /q/N/ scheme. Their existing /quelle/
+      // pages remain usable legacy navigation targets, not primary evidence.
+      const legacy = n <= 7 && /^\/quelle\/[a-z0-9-]+\/$/.test(entry.targetPath || '');
+      const local = legacy ? path.join(root, entry.targetPath.slice(1), 'index.html') : '';
+      if (!legacy || !(await fs.stat(local).catch(() => null))?.isFile()) {
+        fail.push('Register: Q' + n + ' hat einen ungültigen kanonischen Pfad');
+      }
+    }
+  }
 }
 const max = files.length ? files[files.length-1] : 0;
 if (register.nextNumber !== max+1) fail.push('Register: nextNumber ist nicht ' + (max+1));
@@ -85,7 +98,24 @@ for (const n of files) {
       fail.push(label + 'unerlaubtes Linkprotokoll'); continue;
     }
     if (url.hostname === 'dar-al-tawhid.de' || url.hostname === 'www.dar-al-tawhid.de') {
-      if (/^\/q\/[1-9]\d*\/?$/.test(url.pathname)) continue; // Self fallback, not evidence.
+      if (/^\/q\/[1-9]\d*\/?$/.test(url.pathname)) continue; // Self fallback, never original evidence.
+      // Historical source cards may also offer an OWN, separately labelled
+      // internal reader page. Verify it exists, but NEVER count it as an
+      // external scholarly original. New Q43+ remain strictly external.
+      const legacy = n < minStrict && /^\/quelle\/[a-z0-9-]+\/$/.test(url.pathname);
+      if (legacy) {
+        const file = path.join(root, url.pathname.slice(1), 'index.html');
+        if ((await fs.stat(file).catch(() => null))?.isFile()) continue;
+      }
+      // Two Q8 original manuscript scans are served as LOCAL image assets.
+      // Permit verified image files only for PDF/Scan cards; still require
+      // at least one distinct, external original source for the Q page.
+      const scan = n < minStrict && classes.some(x => ['scan', 'pdf'].includes(x)) &&
+        /^\/assets\/sources\/[a-zA-Z0-9_./%-]+\.(?:pdf|jpe?g|png|webp)$/i.test(url.pathname);
+      if (scan) {
+        const asset = path.resolve(root, '.' + url.pathname);
+        if (asset.startsWith(root + path.sep) && (await fs.stat(asset).catch(() => null))?.isFile()) continue;
+      }
       fail.push(label + 'Nachweiskarte zeigt nur auf eine interne Nicht-Beleg-Seite');
       continue;
     }
