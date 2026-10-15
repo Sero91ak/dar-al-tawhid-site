@@ -15,21 +15,21 @@ assert.equal((nav.match(/class="nav-btn/g)||[]).length,5,"Exactly five tabs");
 const marks=['data-target="today"','data-target="stories"','class="nav-btn kids-academy-tab"','data-target="dua"','data-target="parents"'];
 let pos=-1;
 for(const mark of marks){const n=nav.indexOf(mark);assert.ok(n>pos,"Wrong nav order: "+mark);pos=n;}
-assert.ok(nav.includes('data-academy-open="1"')&&html.includes("/kids/kids-academy-portal-v1421.js?v=1423"),"Lernen must open same-app Academy without a full page reload");
+assert.ok(nav.includes('data-academy-open="1"')&&html.includes("/kids/kids-academy-portal-v1421.js?v=1425"),"Lernen must open same-app Academy without a full page reload");
 assert.ok(!nav.includes('href="/kids/akademie/index.html"'),"Navigation must not trigger a full page reload");
 assert.ok(html.includes('kids-academy-girl-seam-v1421.css?v=1422'),"Account modal gender correction must load");
 const portalJs=read("kids/kids-academy-portal-v1421.js");
 const portalCss=read("kids/kids-academy-girl-seam-v1421.css");
 assert.ok(portalJs.includes('frame.src="/kids/akademie/index.html?kidsPortal=1&dockClearance="+dockClearance()'),"Academy must be embedded in the existing app");
 assert.ok(portalJs.includes('nav.parentNode.insertBefore(modal,nav)')&&!portalJs.includes('document.body.appendChild(modal)'),"Academy portal must reuse the one existing dock in the same app stacking context");
-assert.ok(portalJs.includes('viewportHeight-rect.top+GAP')&&portalJs.includes('--kids-academy-dock-clearance'),"Academy height must dynamically stop above the real dock");
+assert.ok(portalJs.includes('rect.top-GAP')&&portalJs.includes('--kids-academy-portal-height')&&portalJs.includes('"0px"'),"Academy height must dynamically stop above the real dock");
 assert.ok(portalJs.includes('selectLearn()')&&portalJs.includes('restorePrevious()'),"Lernen must become active and restore the previous tab on exit");
 assert.ok(portalJs.includes('document.addEventListener("click"')&&portalJs.includes('close(true)'),"Other global tabs must remain actionable while Academy is open");
-assert.ok(portalJs.includes('style.setProperty("height","100dvh","important")')&&portalCss.includes('z-index:25!important'),"Academy portal must sit below the one global dock");
+assert.ok(!portalJs.includes('style.setProperty("height","100dvh","important")')&&portalCss.includes('z-index:25!important'),"Academy portal must sit below the one global dock");
 assert.ok(portalCss.includes('.app > .bottom-nav')&&portalCss.includes('pointer-events:auto!important'),"Shared bottom dock must remain above the Academy");
 assert.ok(academy.includes('id="kids-academy-viewport-and-header-v1424"')&&academy.includes('height:calc(100dvh - var(--kids-academy-dock-clearance))'),"Academy lessons must finish safely above the dock");
-assert.ok(html.includes('/kids/kids-academy-portal-v1421.js?v=1423')&&html.includes('/kids/kids-academy-girl-seam-v1421.css?v=1422'),"Installed PWA must request new Academy/dock CSS and JS");
-assert.ok(sw.includes('/kids/kids-academy-portal-v1421.js?v=1423')&&sw.includes('/kids/kids-academy-girl-seam-v1421.css?v=1422'),"New Academy/dock assets must be precached");
+assert.ok(html.includes('/kids/kids-academy-portal-v1421.js?v=1425')&&html.includes('/kids/kids-academy-girl-seam-v1421.css?v=1422'),"Installed PWA must request new Academy/dock CSS and JS");
+assert.ok(sw.includes('/kids/kids-academy-portal-v1421.js?v=1425')&&sw.includes('/kids/kids-academy-girl-seam-v1421.css?v=1422'),"New Academy/dock assets must be precached");
 assert.ok(portalJs.includes('DAR_KIDS_ACADEMY_PAUSE_V1421')&&portalJs.includes('DAR_KIDS_ACADEMY_CLOSE_V1421'),"Portal must handle child app exit and pause");
 assert.ok(academy.includes("KIDS_SEAMLESS_PORTAL_V1421")&&academy.includes("returnToKids();"),"Academy back button must close portal");
 assert.ok(academy.includes('$("#academyNavHome").onclick=()=>returnToKids(true)'),"Academy house must return to Heute without page reload");
@@ -37,7 +37,7 @@ assert.ok(portalJs.includes('event.data.goHome===true')&&portalJs.includes('if(g
 assert.ok(portalJs.includes("nav.parentNode.insertBefore(modal,nav)")&&portalJs.includes("--kids-academy-dock-clearance"),"Academy must reuse the exact existing Kids bottom dock");
 assert.ok(html.includes('join.dataset.gender=')&&html.includes('name==="login"?"none"'),"Login must track gender and hide duplicate cancel");
 assert.ok(portalCss.includes('#kidsJoin[data-gender="girl"]')&&!portalCss.includes('.app[data-gender="boy"]'),"Girl login must have a separate profile-scoped palette");
-assert.ok(sw.includes('/kids/kids-academy-portal-v1421.js?v=1423')&&sw.includes('/kids/kids-academy-girl-seam-v1421.css?v=1422'),"New navigation and girls CSS must be offline cached");
+assert.ok(sw.includes('/kids/kids-academy-portal-v1421.js?v=1425')&&sw.includes('/kids/kids-academy-girl-seam-v1421.css?v=1422'),"New navigation and girls CSS must be offline cached");
 assert.ok(!nav.includes('data-target="salaf"')&&!nav.includes('data-target="quran"'),"No stale or retired tab");
 assert.ok(dua.includes('const order = [today, stories, learn, dua, parents]'),"Stale iOS nav healing must exist");
 assert.ok(dua.includes("event.stopImmediatePropagation()"),"Old tab handlers must not hijack Duʿāʾ");
@@ -46,7 +46,7 @@ assert.ok(dua.includes('!q("#view-today")')&&dua.includes('!q("#view-parents")')
 assert.ok(!dua.includes('!q("#view-quran")'),"Removed Quran UI must not block profiles");
 assert.ok(html.includes('const KIDS_QURAN_LEARNING_REMOVED=true'),"Alif-Bāʾ retirement preserved");
 assert.ok(!html.includes('<section id="view-quran"'),"Removed Quran lesson must remain retired");
-assert.ok(html.includes('/kids/kids-ui-contract-v1420.css?v=1421')&&html.includes('/kids/kids-nav-v1421.css?v=1422'),"New versioned CSS missing");
+assert.ok(html.includes('/kids/kids-ui-contract-v1420.css?v=1425')&&html.includes('/kids/kids-nav-v1421.css?v=1422'),"New versioned CSS missing");
 assert.ok(academy.includes('kids-ui-contract-v1420.css'),"Shared Academy geometry preserved");
 assert.ok(css.includes("grid-template-columns:minmax(0,1fr)!important"),"Hörwelten three wide cards missing");
 assert.ok(navCss.includes("learning-book-3d-v1422.png"),"Lernen icon missing");
@@ -65,9 +65,9 @@ assert.ok(sw.includes("dar-al-tawhid-kids-"+String(v.visualSystem.serviceWorkerC
 assert.ok(sw.includes('kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren'),"SW build ID must match");
 
 const navigation=read("kids/navigation-v1182.js"),motion=read("kids/kids-motion-v1422.css");
-assert.ok(html.includes('/kids/navigation-v1182.js?v=1422'),"Visitor must load low-jank navigation");
+assert.ok(html.includes('/kids/navigation-v1182.js?v=1425'),"Visitor must load low-jank navigation");
 assert.ok(html.includes('/kids/kids-motion-v1422.css?v=1422'),"Visitor must load light transition CSS");
-assert.ok(sw.includes('/kids/navigation-v1182.js?v=1422')&&sw.includes('/kids/kids-motion-v1422.css?v=1422'),"iOS PWA must cache smooth navigation files");
+assert.ok(sw.includes('/kids/navigation-v1182.js?v=1425')&&sw.includes('/kids/kids-motion-v1422.css?v=1422'),"iOS PWA must cache smooth navigation files");
 assert.ok(navigation.includes("if(after===before)return;"),"Do not scroll-reset a second time after a tab tap");
 assert.ok(!navigation.includes("requestAnimationFrame(restartHomeMotion);"),"Home logo must not replay on every return");
 assert.ok(!navigation.includes("if(!surfaceIds().length&&active)resetMainTop();"),"pageshow must not reset scroll for browser back");
