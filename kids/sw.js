@@ -281,7 +281,9 @@ const PRECACHE=CORE_PRECACHE.concat([
 // illustrations/audio clips. Save the EXACT image used by the final homepage CSS.
 // Larger visual and voice libraries download separately in resumable packs.
 /* KIDS_GLOBAL_TOP_SCROLL_BOUNDARY_V1428: shared scroll-stop cached for offline first paint. */
+/* V1430 GIRL ACADEMY BOOT: girls must have correct colors even offline on first load. */
 const KIDS_BOOT_PRECACHE=[
+  "/kids/akademie/girl-profile-authority-v1430.css?v=1430",
   "/kids/global-detail-dock-v1247.css?v=1428",
   "/kids/global-detail-dock-v1247.js?v=1428",
   "/kids/kids-ui-contract-v1420.css?v=1425",
