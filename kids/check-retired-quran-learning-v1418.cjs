@@ -29,7 +29,7 @@ assert.equal(manifest.quranLearningRuntimeRemoved,true);
 assert.equal(manifest.alifBaRuntimeRemoved,true);
 assert.equal(manifest.quranLearningArchivedUserProgressRetained,true);
 assert.equal(manifest.alphabetEnabled,false);
-assert.equal(sw.includes('dar-al-tawhid-kids-v1418'),true,"Bump Kids PWA cache to invalidate old lesson shell");
+assert.equal(sw.includes('dar-al-tawhid-kids-v1410'),true,"Keep original published PWA cache family while retiring obsolete markup");
 assert.ok(!sw.includes('/kids/assets/kids-art/quran-surahs-v1053.jpg'),"Do not precache retired art");
 let inline=0;
 for(const m of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)){
