@@ -157,7 +157,7 @@ internal class TvScreensaverOverlay(
                 attribution?.text = narrator
                 reference?.text = source
                 val wordCount = statement.split(Regex("""\s+""")).size
-                val hold = (16_000L + 350L * wordCount + if (record.optString("sharhText").isNotBlank()) 6_000L else 0L)
+                val hold = (16_000L + 350L * wordCount + if (record?.optString("sharhText")?.isNotBlank() == true) 6_000L else 0L)
                     .coerceIn(18_000L, 40_000L)
                 scheduleNext(hold)
             }
