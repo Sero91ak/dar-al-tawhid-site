@@ -179,6 +179,20 @@ for(const hex of girlHex){
   assert.ok(!(hue>=175&&hue<=260&&sat>.12),
     "Blue/teal hex in girls-only Salaf palette: "+hex);
 }
+/* Hex alone is insufficient: translucent gradients often carry petrol RGB. */
+for(const hit of girlCss.matchAll(/rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})/g)){
+  const [r,g,b]=[1,2,3].map(i=>Number(hit[i])/255);
+  const high=Math.max(r,g,b),low=Math.min(r,g,b),range=high-low;
+  let hue=0;
+  if(range>.001){
+    if(high===r)hue=60*(((g-b)/range+6)%6);
+    else if(high===g)hue=60*((b-r)/range+2);
+    else hue=60*((r-g)/range+4);
+  }
+  const sat=high<.001?0:range/high;
+  assert.ok(!(hue>=175&&hue<=260&&sat>.12),
+    "Blue/teal RGB in girls-only Salaf palette: "+hit[0]);
+}
 assert.ok(js.includes("KIDS_SALAF_GIRL_PALETTE_V1415"),"Girl cover inline gradient guard absent");
 assert.ok(js.includes('var coverShade=isGirl?'),"Girl cover must use gender-aware gradient");
 assert.ok(!/girl.*#0a202b/.test(js),"Girl hero must not use blue overlay");
