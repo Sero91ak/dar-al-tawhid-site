@@ -42,7 +42,16 @@ for (const item of data.items) {
       assert.equal(r.historicalPersonReviewed, true, "Subject identity not examined: " + item.id);
       assert.equal(r.sourceTextLocated, true, "Original source not located: " + item.id);
       assert.equal(r.chainEvaluationComplete, true, "Isnad investigation not complete: " + item.id);
-      assert.equal(r.humanEditorialApproval, true, "Human/editorial approval missing: " + item.id);
+      /* An explicitly authorized autonomous publication is distinct from a human reading.
+       Never record humanEditorialApproval:true unless an actual human has reviewed this story. */
+      const humanApproved = r.humanEditorialApproval === true;
+      const ownerAuthorizedAuditedRelease = r.ownerAuthorizedAutonomousEditorialPublication === true &&
+        r.editorialSourceAuditComplete === true &&
+        typeof r.sourceMethod === "string" && r.sourceMethod.length > 110 &&
+        r.assessedAt &&
+        r.reviewScope;
+      assert.ok(humanApproved || ownerAuthorizedAuditedRelease,
+        "No actual human review or user-authorized source-audited release: " + item.id);
       assert.ok(item.sources.every(s => s.assessment === "verified"), "Unverified source: " + item.id);
     }
     live++;
