@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 "use strict";
 /* KIDS_BIRTH_MONTH_AUTO_AGE_V1431: never collect day or overwrite lessons. */
-const fs=require("node:fs"),vm=require("node:vm"),assert=require("node:assert/strict");
-const read=p=>fs.readFileSync(p,"utf8");
+const fs=require("node:fs"),vm=require("node:vm"),assert=require("node:assert/strict"),path=require("node:path");
+const ROOT=path.resolve(__dirname,"../..");
+const read=p=>fs.readFileSync(path.join(ROOT,p),"utf8");
 const js=read("kids/kids-birth-month-v1431.js");
 const style=read("kids/kids-birth-month-v1431.css");
 const app=read("kids/index.html");
