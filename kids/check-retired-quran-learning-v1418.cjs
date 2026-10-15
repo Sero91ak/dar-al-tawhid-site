@@ -21,15 +21,17 @@ assert.ok(html.includes('if(step==="quran"){showTab("today");return}'),"Legacy d
 assert.ok(html.includes("if(KIDS_QURAN_LEARNING_REMOVED)return;"),"Old Quran lesson entry points must be blocked");
 assert.ok(html.includes('var q=null; // Archived Qur'),"Home resume must not reopen removed lessons");
 assert.ok(!html.includes('fetchKidsQuiz();fetchCatalog();'),"Removed Quran catalog must not fetch on launch");
-assert.ok(html.includes('data-target="stories"')&&html.includes('data-target="salaf"')&&
-  html.includes('data-target="parents"')&&html.includes('id="openQuizButton"')&&
-  html.includes('id="openDuaButton"'),"Other children modules must remain usable");
+assert.ok(html.includes('data-target="stories"')&&html.includes('data-go="salaf"')&&
+  html.includes('data-target="parents"')&&html.includes('data-target="dua"')&&
+  html.includes('data-academy-open="1"')&&
+  html.includes('id="openQuizButton"')&&html.includes('id="openDuaButton"'),
+  "Other child areas (Salaf, Du'a, Academy, Quiz and Parents) must remain accessible");
 assert.equal(manifest.quranLearningEnabled,false);
 assert.equal(manifest.quranLearningRuntimeRemoved,true);
 assert.equal(manifest.alifBaRuntimeRemoved,true);
 assert.equal(manifest.quranLearningArchivedUserProgressRetained,true);
 assert.equal(manifest.visualSystem.alphabetEnabled,false);
-assert.equal(sw.includes('dar-al-tawhid-kids-v1421'),true,"V1421 must use a new service-worker cache while retaining existing profile data");
+assert.equal(sw.includes('dar-al-tawhid-kids-v1422'),true,"V1421 must use a new service-worker cache while retaining existing profile data");
 assert.ok(!sw.includes('/kids/assets/kids-art/quran-surahs-v1053.jpg'),"Do not precache retired art");
 let inline=0;
 for(const m of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)){
