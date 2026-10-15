@@ -314,7 +314,7 @@ function runKidsDesignGuard() {
   }
   const sourceLinkRuntime=fs.readFileSync(path.join(ROOT,'kids/global-detail-dock-v1247.js'),'utf8');
   if(!sourceLinkRuntime.includes('el.closest(containers)') ||
-     !html.includes('/kids/global-detail-dock-v1247.js?v=1414') ||
+     !html.includes('/kids/global-detail-dock-v1247.js?v=1428') ||
      !doc.includes('KIDS_GLOBAL_NO_PUBLIC_SOURCE_LINKS_V1414'))
     failed+=fail('KIDS V1414: globale Sperre nicht vollständig aktiviert');
 
