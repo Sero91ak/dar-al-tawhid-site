@@ -3703,6 +3703,22 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
   },true);
 })();
 </script><link rel="stylesheet" href="/kids/kids-ui-contract-v1420.css?v=1420" data-kids-ui-contract="v1420">
+<style id="kids-academy-dock-scroll-v1422">
+/* In-app Academy: the parent iframe viewport ends ABOVE the fixed global dock.
+   Preserve existing Academy header and the three independent scroll surfaces. */
+body[data-kids-portal="true"] :is(#academyHome,#academySubject,#stageSurface){
+ scroll-padding-block-end:24px!important;
+ overscroll-behavior-y:contain!important;
+ -webkit-overflow-scrolling:touch;
+}
+body[data-kids-portal="true"] #academyHome:not([hidden]),
+body[data-kids-portal="true"] #academySubject:not([hidden]){
+ padding-bottom:max(24px,env(safe-area-inset-bottom,0px))!important;
+}
+body[data-kids-portal="true"] #stageSurface{
+ padding-bottom:max(24px,env(safe-area-inset-bottom,0px))!important;
+}
+</style>
 </head>
 <body data-profile="boy" data-preview-release="V17.0-voice-sandbox-20261011" data-preview-deploy="v11-progressive-school-lessons"><main class="wrap">
 
@@ -3823,6 +3839,7 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
 if(new URLSearchParams(location.search).get("embedded")==="1")document.body.dataset.embedded="true";
 const KIDS_SEAMLESS_PORTAL_V1421=new URLSearchParams(location.search).get("kidsPortal")==="1"&&window.parent!==window;
+if(KIDS_SEAMLESS_PORTAL_V1421)document.body.dataset.kidsPortal="true";
 const VERSION="academy-v4"; /* Bestehende Lernstände bleiben erhalten */
 const INTERVALS_BY_AGE={"4-5":[1,3,7,14,30],"6-8":[1,3,7,14,30,60],"9-10":[1,3,7,14,30,60,90]};
 const exercises={
