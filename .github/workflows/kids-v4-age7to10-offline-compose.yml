@@ -6,6 +6,10 @@ on:
     paths:
       - 'kids/tools/quiz_v4_age7to10_offline_join.py'
       - '.github/workflows/kids-v4-age7to10-offline-compose.yml'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+      - 'kids/assets/kids-quiz-audio/v4-curated450-review/**'
+      - 'kids/assets/kids-quiz-audio/v4-paid-flow-original-review/**'
 
 permissions:
   contents: write
