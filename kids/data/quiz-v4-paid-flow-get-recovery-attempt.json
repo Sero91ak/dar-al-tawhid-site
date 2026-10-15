@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "scope": "TAWḤĪD KIDS remaining already-paid Eleven V4 original GET recovery",
+  "previouslyPaidOriginals": 56,
+  "alreadyImportedOriginals": 47,
+  "missingBeforeGET": 9,
+  "originalIdsAttempted": [
+    "1UAwmEQ77D4BmA9DttHZ",
+    "2xy9ZLej1wPTrnvAr9p7",
+    "AToalNGbxiRe1zfOnDG3",
+    "DX5z8FWaCS4FDx3KrloO",
+    "FGX65uXKWBnjULDxg3X1",
+    "GvXeGQ9Kr1lVy7LEAv5T",
+    "KIgCxJO3RDxhsIFJSYUB",
+    "UUmC2fDiXaV5W1IQSumA",
+    "aoKJuahenrKHfUE5OD9j"
+  ],
+  "successfullyImportedOriginals": 0,
+  "statusPerGeneration": {
+    "1UAwmEQ77D4BmA9DttHZ": {
+      "flowGetHTTP": 402,
+      "historyAudioHTTP": 400,
+      "importableMP3": false
+    },
+    "2xy9ZLej1wPTrnvAr9p7": {
+      "flowGetHTTP": 402,
+      "historyAudioHTTP": 400,
+      "importableMP3": false
+    },
+    "AToalNGbxiRe1zfOnDG3": {
+      "flowGetHTTP": 402,
+      "historyAudioHTTP": 400,
+      "importableMP3": false
+    },
+    "DX5z8FWaCS4FDx3KrloO": {
+      "flowGetHTTP": 402,
+      "historyAudioHTTP": 400,
+      "importableMP3": false
+    },
+    "FGX65uXKWBnjULDxg3X1": {
+      "flowGetHTTP": 402,
+      "historyAudioHTTP": 400,
+      "importableMP3": false
+    },
+    "GvXeGQ9Kr1lVy7LEAv5T": {
+      "flowGetHTTP": 402,
+      "historyAudioHTTP": 400,
+      "importableMP3": false
+    },
+    "KIgCxJO3RDxhsIFJSYUB": {
+      "flowGetHTTP": 402,
+      "historyAudioHTTP": 400,
+      "importableMP3": false
+    },
+    "UUmC2fDiXaV5W1IQSumA": {
+      "flowGetHTTP": 402,
+      "historyAudioHTTP": 400,
+      "importableMP3": false
+    },
+    "aoKJuahenrKHfUE5OD9j": {
+      "flowGetHTTP": 402,
+      "historyAudioHTTP": 400,
+      "importableMP3": false
+    }
+  },
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "onlyGETRequestsUsed": true,
+  "newSpeechSyntheses": 0,
+  "elevenLabsCreditsSpent": 0,
+  "apiKeySaved": false,
+  "signedUrlsSaved": false,
+  "publicReleaseAllowed": false,
+  "missingAfterAttempt": 9,
+  "nextStep": "Recover signed original files through the connected ElevenLabs Flow account or authorized original MP3 export; do not resynthesize"
+}
