@@ -92,7 +92,7 @@ for(const p of ["kids/index.html","kids/shell.html","kids/start.html"]){
   assert.ok(html.includes("salaf-library-v1.js?v=1414"),"JS cache bust missing");
   assert.ok(html.includes("global-detail-dock-v1247.css?v=1411"),"Global style contract must be current");
   assert.ok(html.includes("global-detail-dock-v1247.js?v=1414"),"Pinned global header runtime cache-bust missing");
-  assert.ok(html.includes("navigation-v1182.js?v=1410"),"Navigation history refresh missing");
+  assert.ok(html.includes("navigation-v1182.js?v=1422"),"Navigation history refresh missing");
   assert.ok(html.includes("salaf-open-world-v1353.css?v=1410"),"CSS cache bust missing");
 }
 for(const p of ["kids/version.json","kids/manifest.webmanifest",
@@ -108,7 +108,7 @@ assert.ok( heroSeam.includes("padding-top:0!important"),"Detail shell must start
 assert.ok( heroSeam.includes(".ps-modal.open")&&heroSeam.includes(".ms-modal.open"),"Hero seam must cover story reader modals");
 assert.ok( html.includes("/kids/global-hero-seam-v1412.css?v=1413"),"Hero seam CSS must load after Salaf art");
 assert.ok( sw.includes("/kids/global-hero-seam-v1412.css?v=1413"),"Hero seam offline precache missing");
-assert.ok(sw.includes("/kids/navigation-v1182.js?v=1410"));
+assert.ok(sw.includes("/kids/navigation-v1182.js?v=1422"));
 assert.ok(sw.includes("/kids/salaf-library-v1.js?v=1414"));
 assert.ok(sw.includes("/kids/salaf-open-world-v1353.css?v=1410"));
 /* KIDS_STORY_MODES_V1: keep all three real modes for every approved
