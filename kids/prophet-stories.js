@@ -166,8 +166,19 @@ function renderMuhammadFeature(){
     if(fallback)img.src=fallback;
   };
 }
+/* KIDS TEST V2: the library and full-screen reader are appended to body,
+   so they cannot inherit the active .app profile through ancestor selectors.
+   Synchronize ONLY visual profile markers; never alter child profile state. */
+function syncProphetVisualProfile(){
+  const profile=$(".app")?.getAttribute("data-gender")==="girl"?"girl":"boy";
+  for(const id of ["psLibraryPage","psModal"]){
+    const surface=$("#"+id);
+    if(surface&&surface.dataset.profile!==profile)surface.dataset.profile=profile;
+  }
+}
 function renderCards(){
   const grid=$("#psGrid");if(!grid)return;
+  syncProphetVisualProfile();
   const libraryPage=$("#psLibraryPage");if(libraryPage)libraryPage.dataset.age=age();
   renderMuhammadFeature();
   const regularItems=items.filter(item=>item.id!=="muhammad");
@@ -237,6 +248,7 @@ function prepareStoriesHome(view){
 }
 function openLibrary(){
   const page=$("#psLibraryPage");if(!page)return;
+  syncProphetVisualProfile();
   page.classList.add("open");
   page.removeAttribute("aria-hidden");
   document.documentElement.classList.add("ps-library-open");
@@ -423,6 +435,7 @@ function unlockPage(){
 }
 function openStory(id){
   active=items.find(x=>x.id===id);if(!active)return;
+  syncProphetVisualProfile();
   stopAudio();renderActive();$("#psModal").classList.remove("scrolled");$("#psModal").classList.add("open");lockPage();$("#psScroll").scrollTop=0;$("#psClose")?.focus();
 }
 function closeStory(){followReader?.close();stopAudio();$("#psModal")?.classList.remove("open","scrolled");unlockPage();clearStoryDeepLink("prophet");active=null}
