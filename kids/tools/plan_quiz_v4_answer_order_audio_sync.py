@@ -63,6 +63,28 @@ def main():
            all(full[i] == q for i, q in leftover.items()) and
            set(recipes) == set(picked),
            "original question texts or selection have changed")
+    # Check the actual question-position bias globally, not just the
+    # 40 questions currently planned for future V4 original assembly.
+    source_position_counts = {age: Counter() for age in ("4-6", "7-8", "9-10")}
+    for question in canonical["items"]:
+        answers = question.get("answers") or []
+        demand(answers and sum(a.get("correct") is True for a in answers) == 1,
+               "all 900 questions must have exactly one correct answer")
+        age = question["ageBand"]
+        demand(age in source_position_counts, "unexpected source age band")
+        position = next(i+1 for i,a in enumerate(answers) if a.get("correct") is True)
+        source_position_counts[age][str(position)] += 1
+    demand(all(source_position_counts[age]["1"] == 300 and
+               sum(source_position_counts[age].values()) == 300
+               for age in source_position_counts),
+           "original correct-answer positions changed; re-audit existing UI behavior")
+    # Never claim that the visible UI currently randomizes answer choices.
+    # It iterates answers as stored, and the voice prompt enumerates that order.
+    renderer = (ROOT / "kids/index.html").read_text(encoding="utf-8")
+    demand('q.answers.forEach(function(a,idx)' in renderer and
+           'var a=q.answers[index];' in renderer and
+           'return "Antwort "+(i+1)+": "+label' in renderer,
+           "quiz UI choice/voice enumeration changed; inspect before reordering")
     demand(plan["voiceId"] == audio_registry["voiceId"] == "DkU7j9uO4ZEtLD2iRZSH"
            and plan["modelId"] == audio_registry["modelId"] == "eleven_v4",
            "wrong original V4 voice contract")
@@ -169,6 +191,8 @@ def main():
         "humanApprovalGranted":False,"newAudioSynthesisStarted":False,
         "newElevenLabsCreditsSpent":0,
         "currentAll900CatalogCorrectFirst":True,
+        "canonicalCorrectAnswerPositionsByAge":{
+            age:dict(source_position_counts[age]) for age in source_position_counts},
         "existingLiveRendererNeedsCoordinatedAnswerAndNarrationChange":True,
         "existingFullSentenceOriginalsMustNotBeMismatchedWithShuffledAnswers":True,
         "selectedQuestionsInPlan":40,
