@@ -3965,6 +3965,7 @@ body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-a
 <script src="/kids/akademie/curriculum-v29.js?v=20261012-29"></script>
 <script src="/kids/akademie/term-coach-v24.js?v=20261011-01"></script>
 <script src="/kids/akademie/school-progress-v11.js?v=20261012-30"></script>
+<script src="/kids/kids-birth-month-v1431.js?v=1431"></script>
 <script>
 (()=>{
 "use strict";
@@ -3990,7 +3991,7 @@ const exercises={
     {type:"text",prompt:"Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",sample:"Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",hint:"Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit."}
   ]
 };
-let id="unassigned",gender="neutral",age="6-8",profileName="",step=0,unlocked=0,qIndex=0,choice=null,answerMode="choices",answered=false,finished=false;
+let id="unassigned",gender="neutral",age="6-8",profileName="",displayedMonthAge=null,step=0,unlocked=0,qIndex=0,choice=null,answerMode="choices",answered=false,finished=false;
 let score={done:0,correct:0,choices:0,neededHelp:0},attempts=0,recognition=null,voice=null,audio=null,audioKey="",fallbackTried=false,voiceToken=0,sessionStamp="";
 let recorder=null,micStream=null,micClock=null,micSince=0,micRequest=0,voiceObjectUrl=null,voiceReady=false;
 
@@ -4095,13 +4096,15 @@ function getProfile(){
  const creatorVoiceSandbox=params.get("creatorSandbox")==="1"&&params.get("voicePilot")==="1"&&
    demoGender==="girl"&&previewAge==="4-5";
  if(creatorVoiceSandbox)child=null;
- const profileAge=child?ageKey(child.age):null;
+ const birthMonth=child?window.DARKidsBirthMonth?.get(child.id):null;
+ const monthAge=birthMonth?window.DARKidsBirthMonth.ageAt(birthMonth):null;
+ const profileAge=child?ageKey(window.DARKidsBirthMonth?.resolve(child.id,child.age)||child.age):null;
  // Real accounts ignore ordinary preview params. QA uses a separate id.
  const selectedAge=child?profileAge:(previewAge||ageKey(storedAge)||"6-8");
  const g=child?.gender==="girl"?"girl":child?.gender==="boy"?"boy":demoGender||(guest==="girl"?"girl":"boy");
  const previewId=creatorVoiceSandbox?"owner-voice-test-v17-girl-4-5":
    demoGender?"demo-"+demoGender:guest?"guest-"+g:"demo-boy";
- return {child,g,age:selectedAge,id:child?.id?String(child.id):previewId,
+ return {child,g,age:selectedAge,id:child?.id?String(child.id):previewId,monthAge,
    demo:!child,creatorVoiceSandbox,ageMissing:!!child&&!profileAge};
 }
 function stopMicTracks(){
@@ -4314,22 +4317,22 @@ function renderHome(){
 function syncProfile(force=false){
  const p=getProfile();
  const newName=typeof p.child?.name==="string"?p.child.name.trim().replace(/\s+/g," ").slice(0,72):"";
- if(!force&&p.id===id&&p.g===gender&&p.age===age&&newName===profileName)return;
+ if(!force&&p.id===id&&p.g===gender&&p.age===age&&newName===profileName&&p.monthAge===displayedMonthAge)return;
  if(p.id!==id||p.g!==gender||p.age!==age){stopAll();hideCategory();hideLesson()}
- id=p.id;gender=p.g;age=p.age;profileName=newName;
+ id=p.id;gender=p.g;age=p.age;profileName=newName;displayedMonthAge=p.monthAge;
  document.body.dataset.profile=gender;
  // Only anonymous demo profiles may hear unapproved owner-voice pilot recordings.
  document.body.dataset.academyChildMode=p.demo?"demo":"child";
  $("#profileLabel").textContent=profileName||(gender==="girl"?"Mädchenprofil":"Jungenprofil");
  $("#profileRole").textContent=gender==="girl"?"Schwester":"Bruder";
- $("#academyAgeLabel").textContent=p.ageMissing?"Altersstufe fehlt":humanAge(age)+" Jahre";
+ $("#academyAgeLabel").textContent=p.ageMissing?"Altersstufe fehlt":p.monthAge!==null?p.monthAge+" Jahre · Stufe "+humanAge(age):humanAge(age)+" Jahre";
  $("#academyProfile").classList.add("has-profile");
  $("#academyAvatar").src=gender==="girl"?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
  $("#academyHeroCharacter").src=$("#academyAvatar").src;
  $("#academyBuddyAvatar").src=$("#academyAvatar").src;
  $("#academyHeroProfileAvatar").src=$("#academyAvatar").src;
  $("#academyHeroProfileLabel").textContent=profileName||(gender==="girl"?"Mädchenprofil":"Jungenprofil");
- $("#academyHeroProfileAge").textContent=p.ageMissing?"Altersstufe wählen":humanAge(age)+" Jahre";
+ $("#academyHeroProfileAge").textContent=p.ageMissing?"Altersstufe wählen":p.monthAge!==null?p.monthAge+" Jahre · Stufe "+humanAge(age):humanAge(age)+" Jahre";
  const hero=$("#academyHeroImage");
  hero.classList.remove("is-ready");
  hero.onload=()=>hero.classList.add("is-ready");
@@ -5018,7 +5021,7 @@ $("#mic").onclick=beginVoiceRecording;$("#cancelMic").onclick=finishRecording;$(
 $("#answer").oninput=()=>{if($("#answer").value.trim())choice=null};
 all("[data-reflect]").forEach(b=>b.onclick=()=>persist(b.dataset.reflect));
 window.addEventListener("storage",e=>{
- if(["kids.activeProfile","kids.profiles.v1","kids.guest.gender.v1","kids.age"].includes(e.key))syncProfile(true);
+ if(["kids.activeProfile","kids.profiles.v1","kids.guest.gender.v1","kids.age"].includes(e.key)||e.key?.startsWith("dar.kids.birthMonth.v1."))syncProfile(true);
  else if(e.key&&e.key.startsWith("kids."+VERSION+".")){
   renderHome();
   if(!$("#academySubject").hidden)openCategory($("#academySubject").dataset.subject);
@@ -5037,6 +5040,7 @@ setInterval(()=>{
  const current=academyDay().day;
  if(__schoolLastDate!==current){
   __schoolLastDate=current;
+  syncProfile(); /* Month-year ages update while the iOS view stays open. */
   renderHome();
   if(!$("#academySubject").hidden)openCategory($("#academySubject").dataset.subject);
  }
