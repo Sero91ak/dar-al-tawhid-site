@@ -1,0 +1,37 @@
+/* TAWḤĪD KIDS ACADEMY · girl-only surface final audit · KIDS TEST.
+   The academy runs in a separate HTML document and does not inherit the
+   main Kids girl's palette. Restrict all rules to body[data-profile="girl"].
+   Keep its original full-cover photos, 208 lessons, readers, audio, layout,
+   progression, quiz correctness states, touch and scrolling unchanged. */
+html:has(body[data-profile="girl"]){
+  background-color:#2b2035!important;
+}
+html body[data-profile="girl"]{
+  --base:#2b2035;
+  --surface:#443048;
+  --accent:#f0c9de;
+  --gold:#edc9a1;
+  --text:#fff5f0;
+  --muted:#e7d5e3;
+  --border:rgba(240,196,221,.35);
+  background-color:#2b2035!important;
+}
+html body[data-profile="girl"] :is(.academy-header.kids-detail-appbar,.stage-tracker){
+  background-color:#33253e!important;
+  border-color:rgba(240,196,221,.34)!important;
+}
+html body[data-profile="girl"] :is(.panel,.lesson-stage,.lesson-main,.subject-detail,.recap-lesson){
+  background-color:#2b2035!important;
+}
+html body[data-profile="girl"] :is(.academy-home > .journey,.subject-card,.lesson-card,.teacher-explainer,.recap-card){
+  background-color:#443048!important;
+  border-color:rgba(240,196,221,.33)!important;
+}
+html body[data-profile="girl"] :is(.academy-profile,.hero-profile-chip){
+  border-color:rgba(240,196,221,.43)!important;
+}
+html body[data-profile="girl"] :is(.academy-header .academy-nav-title,.lesson-heading h1,.lesson-heading h2){
+  color:#fff5f0!important;
+}
+/* No selectors involving boys, neutral children, photos, hero backdrops,
+   quiz answer correctness, progress metrics, learning data or audio. */
