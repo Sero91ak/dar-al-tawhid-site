@@ -18,7 +18,7 @@ const navigation=read("kids/navigation-v1182.js");
 const doc=read("kids/KIDS-DESIGN.md");
 const sw=read("kids/sw.js");
 const html=read("kids/index.html");
-const id="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1410";
+const id="kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren";
 assert.equal(policy.policyVersion,"KIDS_SALAF_NO_PEOPLE_V1380");
 assert.equal(Object.keys(policy.allowlistedAssets).length,8,"Exactly eight reviewed topics");
 for(const [topic,asset] of Object.entries(policy.allowlistedAssets)){
@@ -100,7 +100,7 @@ for(const p of ["kids/version.json","kids/manifest.webmanifest",
  "cloudflare/test-app-worker.js","_headers"]){
  assert.ok(read(p).includes(id),`Build mismatch ${p}`);
 }
-assert.ok(sw.includes(id)&&sw.includes("dar-al-tawhid-kids-v1410"));
+assert.ok(sw.includes(id)&&sw.includes("dar-al-tawhid-kids-v1421"));
 assert.ok(sw.includes("/kids/global-detail-dock-v1247.css?v=1411"));
 assert.ok(sw.includes("/kids/global-detail-dock-v1247.js?v=1414"));
 assert.ok( heroSeam.includes("KIDS_GLOBAL_HEADER_HERO_SEAM_V1412"),"Global hero seam contract missing");
