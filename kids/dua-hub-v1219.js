@@ -267,22 +267,13 @@
   }
 
   function installNav() {
+    // V1420: Qur'an/Alif-Ba learning retirement must NOT create another tab.
+    // The five official bottom tabs are Heute, Hören, Lernen, Schätze, Eltern.
+    // Du'a remains accessible from the existing Hörwelten entry/card.
     const nav = q(".bottom-nav");
     if (!nav) return;
-    let btn = q('.nav-btn[data-target="dua"]', nav);
-    if (!btn) {
-      btn = document.createElement("button");
-      btn.className = "nav-btn duahub-nav";
-      btn.dataset.target = "dua";
-      btn.innerHTML = '<span class="ico duahub-nav-ico" aria-hidden="true"><img src="/kids/assets/dua-premium/nav-dua-v1222.png?v=1234" alt="" decoding="async"></span><span class="lab">Duʿāʾ</span>';
-      const stories = q('.nav-btn[data-target="stories"]', nav);
-      if (stories?.nextSibling) nav.insertBefore(btn, stories.nextSibling);
-      else nav.appendChild(btn);
-    }
-    if (!btn.dataset.duahubBound) {
-      btn.dataset.duahubBound = "1";
-      btn.addEventListener("click", activate);
-    }
+    const legacy = q('.nav-btn[data-target="dua"]', nav);
+    if (legacy) legacy.remove();
   }
 
   function activate() {
