@@ -267,6 +267,7 @@ jobs:
           node kids/tools/test-v2-salaf-pilot.cjs
           node kids/tools/test-v2-prophets-pilot.cjs
           node kids/tools/test-v2-profile-parity.cjs
+          node kids/tools/test-v2-girls-color-audit.cjs
           node --check kids/prophet-stories.js
           node scripts/test-app-health-check.js
           echo "Staging: no production route, no visitor commit, no App Store upload"
@@ -379,4 +380,11 @@ jobs:
           cmp -s kids/design-v2-profile-parity-v1.css /tmp/kids-profile-parity.css || { echo "::error::KIDS girls palette CSS differs from staging"; exit 1; }
           cmp -s kids/prophet-stories.js /tmp/kids-profile-parity-prophet.js || { echo "::error::KIDS Prophet profile runtime differs from staging"; exit 1; }
           echo "KIDS girls Salaf and Prophet palette files verified byte-for-byte."
+          # Verify that the final girls' color authority is served last and is byte-identical.
+          GIRLS_CSS_URL="$(grep -oE '/kids/girls-profile-v2-final-audit[.]css[?]v=[a-zA-Z0-9.-]+' kids/start.html | tail -n 1)"
+          test -n "$GIRLS_CSS_URL" || { echo "::error::Final girls-only CSS reference is missing"; exit 1; }
+          grep -Fq "$GIRLS_CSS_URL" /tmp/kids-creator-v2-start.html || { echo "::error::Final girls-only CSS is absent on test server"; exit 1; }
+          curl -fsSL -H 'Cache-Control: no-cache' "$BASE$GIRLS_CSS_URL" > /tmp/kids-girls-v2-final.css
+          cmp -s kids/girls-profile-v2-final-audit.css /tmp/kids-girls-v2-final.css || { echo "::error::Final girls CSS differs from GitHub staging version"; exit 1; }
+          echo "KIDS girls V2 final palette served and verified byte-for-byte."
           echo "KIDS-only Worker verified. Adult Test and visitor domains unchanged."
