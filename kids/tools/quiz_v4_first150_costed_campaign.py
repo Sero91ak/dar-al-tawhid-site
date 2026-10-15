@@ -11,6 +11,7 @@ import argparse,hashlib,json,os,re,subprocess,sys,time,urllib.error,urllib.reque
 from collections import Counter
 from datetime import datetime,timezone
 from pathlib import Path
+from quiz_v4_no_double_charge_guard import protect_paid_texts, prohibit_prepaid_selection
 
 ROOT=Path(__file__).resolve().parents[2]
 PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
@@ -65,8 +66,9 @@ def validate():
         raise RuntimeError("Refuse any public launch or external credit spending")
     clips=registry.get("textClips",{})
     lines=ledger.get("rows",[])
-    if len(lines)!=len(clips) or any(x.get("text") not in clips for x in lines):
+    if any(x.get("text") not in clips for x in lines):
         raise RuntimeError("Paid file/ledger discrepancy! Resolve before next charge")
+    protected=protect_paid_texts(ROOT,registry,ledger)
     target=[q for q in plan["recipes"] if q["ageBand"]==BAND]
     if len(target)!=150:raise RuntimeError("150 young questions are not present")
     pending_map={x["text"]:x for x in plan["pendingAudioFragments"]}
@@ -90,6 +92,8 @@ def validate():
             else:raise RuntimeError("Unknown exact V4 contract mode")
     # No old paid Flow-only takes appear in this new direct-MP3 purchase list.
     unrecorded=required-set(clips)
+    for phrase in unrecorded:
+        prohibit_prepaid_selection(phrase,protected)
     if any(not clips[x].get("sha256") for x in required&set(clips)):
         raise RuntimeError("Old MP3 output lacks a SHA digest")
     # Verify output exists for existing 4-6 clips; never pay a second time.
