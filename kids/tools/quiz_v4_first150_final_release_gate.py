@@ -158,6 +158,10 @@ def main():
         raise SystemExit("150-item ORIGINAL V4 release blocked: missing paid Flow MP3s or human hearing approvals")
     if opts.candidate:
         if not ready:
+            # Invalidate any previously staged private candidate so it cannot
+            # be mistaken for a current approval after the audit regresses.
+            # The public manifest is never touched.
+            CANDIDATE.unlink(missing_ok=True)
             raise SystemExit("Refusing to create unapproved V4 candidate manifest")
         # Does not write to kids/data/quiz-audio.json and cannot publish.
         candidate={"id":"KIDS_QUIZ_FIRST150_V4_AUDITORY_APPROVED_CANDIDATE",
