@@ -8,7 +8,7 @@ on:
       - '.github/workflows/kids-v4-first150-hearing-review.yml'
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: kids-first150-v4-human-review-artifact
@@ -46,30 +46,6 @@ jobs:
               assert "https://api.elevenlabs.io" not in html
           print("PASS: offline bundle has 252 original MP3 files + 1 hearing page; 0 TTS credits")
           PY
-      - name: Save review HTML only on PR, not the ZIP nor a public app page
-        run: |
-          set -euo pipefail
-          git config user.name dar-kids-hearing-review-bot
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          branch=review/kids-quiz-v4-batch-001-020-20261014
-          git add kids/review-only/quiz-v4-first150-hearing-review.html
-          if git diff --cached --quiet; then
-            echo "Listening review HTML already current"
-            exit 0
-          fi
-          git commit -m "review(kids): stage offline 150 V4 listening page without approving or publishing"
-          for retry in 1 2 3; do
-            if git push origin HEAD:"$branch"; then
-              echo "Committed hearing checklist to review branch only."
-              exit 0
-            fi
-            git fetch origin "$branch"
-            if ! git rebase FETCH_HEAD; then
-              echo "::error::Review-only HTML push conflict; artifact remains available."
-              exit 1
-            fi
-          done
-          exit 1
       - name: Keep standalone offline hearing package for manual export
         if: always()
         uses: actions/upload-artifact@v4
