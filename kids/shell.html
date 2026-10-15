@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c2636">
+<script src="/kids/kids-birth-month-v1431.js?v=1431"></script>
+<link rel="stylesheet" href="/kids/kids-birth-month-v1431.css?v=1431">
 <script id="kids-profile-first-paint-v1348">
 (function(){
   "use strict";
@@ -13,7 +15,7 @@
     var profiles=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
     var p=Array.isArray(profiles)?profiles.find(function(x){return String(x&&x.id)===String(id)}):null;
     if(p&&(p.gender==="girl"||p.gender==="boy")){
-      gender=p.gender;age=p.age||"";
+      gender=p.gender;age=window.DARKidsBirthMonth?.resolve(id,p.age)||p.age||"";
     }else if(!id&&localStorage.getItem("kids.guest.v1")==="1"){
       var g=localStorage.getItem("kids.guest.gender.v1");
       if(g==="girl"||g==="boy")gender=g;
@@ -3100,13 +3102,19 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
     </div>
     <div class="step" data-step="age">
-      <h2>Wie alt?</h2>
-      <p>Danach werden Schrift, Fragen und Bewegung passend.</p>
+      <h2>Geburtsmonat und Geburtsjahr</h2>
+      <p>Für das Kinderkonto bitte nur Monat und Jahr wählen. Die Lernstufe ändert sich ab dem 1. des Geburtsmonats automatisch.</p>
+      <div class="kids-birth-fields"><label>Geburtsmonat<select id="joinBirthMonth"><option value="">Monat wählen</option></select></label>
+      <label>Geburtsjahr<select id="joinBirthYear"><option value="">Jahr wählen</option></select></label></div>
+      <p class="kids-birth-notice" id="joinBirthNotice" role="status"></p>
+      <button type="button" id="joinBirthContinue">Mit automatischer Lernstufe weiter</button>
+      <p class="kids-birth-note">Kein Geburtstagstag. Nur auf diesem Gerät gespeichert.</p>
+      <div class="kids-birth-guest"><strong>Ohne Konto? Lernstufe selbst wählen:</strong>
       <div class="kids-join-row">
         <button type="button" data-join-age="4–5">4–5</button>
         <button type="button" data-join-age="6–8">6–8</button>
       </div>
-      <button type="button" data-join-age="9–10" style="margin-top:10px;width:100%">9–10</button>
+      <button type="button" data-join-age="9–10" style="margin-top:10px;width:100%">9–10</button></div>
       <button type="button" class="ghost" data-back="who" style="margin-top:8px;width:100%">Zurück</button>
       <button type="button" class="ghost join-skip" style="margin-top:8px;width:100%">Überspringen</button>
     </div>
@@ -3305,13 +3313,21 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
       </div>
 
       <div class="parent-card">
-        <div class="label-row"><strong>Altersstufe</strong><span style="color:var(--gold);font-size:12px;font-weight:850">EINFACH</span></div>
+        <div class="label-row"><strong>Altersstufe</strong><span id="kidsAgeMode" style="color:var(--gold);font-size:12px;font-weight:850">MANUELL</span></div>
         <div class="age-tabs">
           <button data-age="4–5">4–5</button>
           <button class="active" data-age="6–8">6–8</button>
           <button data-age="9–10">9–10</button>
         </div>
         <p id="ageHelp" class="age-help">hören · verstehen · mitmachen</p>
+        <div id="parentBirthPanel" class="kids-birth-details" hidden>
+          <strong>Geburtsmonat und -jahr des angemeldeten Kindes</strong>
+          <div class="kids-birth-fields"><label>Monat<select id="parentBirthMonth"><option value="">Monat wählen</option></select></label>
+          <label>Jahr<select id="parentBirthYear"><option value="">Jahr wählen</option></select></label></div>
+          <button id="parentBirthSave" type="button" class="ghost">Geburtsmonat speichern</button>
+          <p id="parentBirthNotice" class="kids-birth-notice" role="status"></p>
+          <p class="kids-birth-note">Die Angabe bleibt auf diesem Gerät. Alte Lernstände werden nicht gelöscht.</p>
+        </div>
       </div>
 
       <div class="parent-card">
@@ -6371,12 +6387,14 @@ syncActiveSurfaceFocus();
 var ageHelp={"4–5":"viel hören · sehr kurze Wege","6–8":"hören · verstehen · mitmachen","9–10":"verstehen · anwenden · vertiefen"};
 var ageButtons=[].slice.call(document.querySelectorAll("[data-age]"));
 var age=localStorage.getItem("kids.age")||"6–8";
+function birthAgeGroup(){try{var id=localStorage.getItem("kids.activeProfile"),b=window.DARKidsBirthMonth;return id&&b?b.groupAt(b.get(id)):null}catch(_){return null}}
 function setAge(a){
   age=a;localStorage.setItem("kids.age",a);
   try{localStorage.removeItem("kids.quiz.ageBand")}catch(e){}
   if(window.onKidsQuizAgeChanged)window.onKidsQuizAgeChanged();
   ageButtons.forEach(function(b){b.classList.toggle("active",b.dataset.age===a)});
-  document.getElementById("ageHelp").textContent=ageHelp[a]||"";
+  document.getElementById("ageHelp").textContent=(ageHelp[a]||"")+(birthAgeGroup()?" · automatisch":"");
+  var badge=document.getElementById("kidsAgeMode");if(badge)badge.textContent=birthAgeGroup()?"AUTOMATISCH":"MANUELL";
   var app=document.querySelector(".app");
   if(app)app.setAttribute("data-age",a);
   if(window.kidsAlphabetOnAge)window.kidsAlphabetOnAge();
@@ -6393,7 +6411,8 @@ function setAge(a){
     document.querySelectorAll(".quran-mini-note").forEach(function(el){el.textContent="Wort-für-Wort-Training mit Aufnahme: Grün = bestanden, Orange = ähnlich, Rot = Fehler. Die nächste Āyah bleibt bis zum vollständigen Bestehen gesperrt."});
   }
 }
-ageButtons.forEach(function(b){b.addEventListener("click",function(){setAge(b.dataset.age)})});
+window.DARKidsApplyAgeGroup=setAge;
+ageButtons.forEach(function(b){b.addEventListener("click",function(){setAge(birthAgeGroup()||b.dataset.age)})});
 
 var slider=document.getElementById("minuteSlider");
 slider.value=localStorage.getItem("kids.minutes")||"12";
@@ -6519,7 +6538,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   var API="https://djyfkttjbdraynuxrzno.supabase.co/rest/v1/rpc/";
   var APIKEY="sb_publishable_kR6b1SlL3uoVq4gbTFWKkQ_a2Rcfg2i";
   var join=document.getElementById("kidsJoin");
-  var draft={gender:"boy",age:"6–8"};
+  var draft={gender:"boy",age:"6–8",birthMonth:""};
   var askId="";
   var joinScrollY=0;
   var GUEST_GENDER="kids.guest.gender.v1";
@@ -6554,9 +6573,10 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   function applyProfile(p){
     var app=document.querySelector(".app");
     if(app)app.setAttribute("data-gender",p.gender||"boy");
-    var btn=document.querySelector('.age-tabs [data-age="'+p.age+'"]');
-    if(btn)btn.click();
-    else if(app)app.setAttribute("data-age",p.age||"6–8");
+    var resolved=window.DARKidsBirthMonth?.resolve(p.id,p.age)||p.age||"6–8";
+    if(window.DARKidsApplyAgeGroup)window.DARKidsApplyAgeGroup(resolved);
+    else if(app)app.setAttribute("data-age",resolved);
+    refreshBirthPanel();
   }
 
   /* Inline feedback works even when iOS WKWebView suppresses window.alert. */
@@ -6602,6 +6622,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var pw=document.getElementById(isRestore?"deviceLoginPass":"joinPass").value||"";
     if(name.length<2){joinFeedback("Bitte einen Namen mit mindestens zwei Zeichen eingeben.","error");return}
     if(pw.length<4){joinFeedback("Bitte ein Passwort mit mindestens vier Zeichen eingeben.","error");return}
+    if(mode==="register"&&!draft.birthMonth){step("age");document.getElementById("joinBirthNotice").textContent="Für das Konto bitte Monat und Jahr auswählen.";return}
     if(mode!=="login"&&!isRestore)document.getElementById("joinLoginExisting").hidden=true;
     joinPending(true);
     joinFeedback(mode==="login"||isRestore?"Anmeldung wird geprüft …":"Konto wird geprüft …","info");
@@ -6624,6 +6645,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
           var ageBtn=document.querySelector('.age-tabs [data-age="'+draft.age+'"]');
           if(ageBtn)ageBtn.click();
           var p={id:String(Date.now()),name:name,pass:h,gender:draft.gender,age:draft.age,data:bag()};
+          if(draft.birthMonth)window.DARKidsBirthMonth?.set(p.id,draft.birthMonth);
           var list=load();list.push(p);save(list);localStorage.setItem(ACTIVE,p.id);
           syncConfirmed[p.id]=profileSnapshot(p);
           joinFeedback("Konto erfolgreich angelegt.","success");closeJoin();renderList();
@@ -6749,6 +6771,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     flushProfileSync(p.id);
   }
   function renderList(){
+    refreshBirthPanel();
     var box=document.getElementById("profileList");
     if(!box)return;
     var cur=localStorage.getItem(ACTIVE);
@@ -6800,6 +6823,40 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
       step("age");
     });
   });
+  /* KIDS_ACCOUNT_BIRTH_MONTH_V1431: local per-profile month-year. */
+  var BIRTH=window.DARKidsBirthMonth;
+  function populateBirth(){
+    var months=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+    ["joinBirthMonth","parentBirthMonth"].forEach(function(id){var el=document.getElementById(id);if(el)months.forEach(function(m,i){var o=document.createElement("option");o.value=String(i+1).padStart(2,"0");o.textContent=m;el.appendChild(o)})});
+    ["joinBirthYear","parentBirthYear"].forEach(function(id){var el=document.getElementById(id);if(el)for(var y=new Date().getFullYear()-3;y>=new Date().getFullYear()-12;y--){var o=document.createElement("option");o.value=String(y);o.textContent=String(y);el.appendChild(o)}});
+  }
+  function birthValue(a,b){var m=document.getElementById(a).value,y=document.getElementById(b).value;return y.length===4&&m.length===2?y+"-"+m:""}
+  function refreshBirthPanel(){
+    var box=document.getElementById("parentBirthPanel");if(!box)return;
+    var p=currentProfile();box.hidden=!p;if(!p)return;
+    var value=BIRTH?.get(p.id)||"",parts=value.split("-");
+    document.getElementById("parentBirthYear").value=parts[0]||"";
+    document.getElementById("parentBirthMonth").value=parts[1]||"";
+    document.getElementById("parentBirthNotice").textContent=value?"Automatisch · "+BIRTH.ageAt(value)+" Jahre · Stufe "+BIRTH.groupAt(value):"Bitte Monat und Jahr ergänzen; bis dahin gilt die bisherige Altersstufe.";
+    document.getElementById("kidsAgeMode").textContent=value?"AUTOMATISCH":"MANUELL";
+  }
+  function refreshBirthday(){
+    var p=currentProfile(),desired=p&&BIRTH?BIRTH.groupAt(BIRTH.get(p.id)):null;
+    if(desired&&window.DARKidsApplyAgeGroup&&localStorage.getItem("kids.age")!==desired)window.DARKidsApplyAgeGroup(desired);
+  }
+  populateBirth();
+  document.getElementById("joinBirthContinue").addEventListener("click",function(){
+    var value=birthValue("joinBirthMonth","joinBirthYear");
+    if(!BIRTH?.isEligible(value)){document.getElementById("joinBirthNotice").textContent="Bitte gültigen Monat und Jahr für 4 bis 10 Jahre auswählen.";return}
+    draft.birthMonth=value;draft.age=BIRTH.groupAt(value);document.getElementById("joinBirthNotice").textContent="";step("name");
+  });
+  document.getElementById("parentBirthSave").addEventListener("click",function(){
+    var p=currentProfile();if(!p)return;
+    var value=birthValue("parentBirthMonth","parentBirthYear");
+    if(!BIRTH?.isEligible(value)){document.getElementById("parentBirthNotice").textContent="Bitte gültigen Monat und Jahr (4 bis 10 Jahre) wählen.";return}
+    if(!BIRTH.set(p.id,value)){document.getElementById("parentBirthNotice").textContent="Speichern nicht möglich.";return}
+    refreshBirthday();rememberCurrent();refreshBirthPanel();
+  });
   join.querySelectorAll("[data-join-age]").forEach(function(b){
     b.addEventListener("click",function(){draft.age=b.getAttribute("data-join-age");step("name")});
   });
@@ -6808,7 +6865,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   document.getElementById("joinSave").addEventListener("click",function(){submitJoin("register")});
   document.getElementById("joinLoginExisting").addEventListener("click",function(){submitJoin("login")});
   var add=document.getElementById("profileAdd");
-  if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8"};openJoin(load().length?"who":"hello")});
+  if(add)add.addEventListener("click",function(){draft={gender:"boy",age:"6–8",birthMonth:""};document.getElementById("joinBirthMonth").value="";document.getElementById("joinBirthYear").value="";openJoin(load().length?"who":"hello")});
   join.querySelectorAll(".join-skip").forEach(function(b){b.addEventListener("click",skipJoin)});
   var bring=document.getElementById("profileBring");
   if(bring)bring.addEventListener("click",function(){
@@ -6872,10 +6929,11 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   if(add)add.textContent=load().length?"Weiteres Kind":"Konto anlegen";
   /* Never re-register local profiles at startup: this can overwrite cloud progress. */
   window.addEventListener("pagehide",rememberCurrent);
-  document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")rememberCurrent()});
+  window.addEventListener("pageshow",function(){refreshBirthday();refreshBirthPanel()});
+  document.addEventListener("visibilitychange",function(){if(document.visibilityState==="hidden")rememberCurrent();else{refreshBirthday();refreshBirthPanel()}});
   /* Progress can change in any Kids learning module without a page change. */
   setInterval(function(){
-    if(document.visibilityState!=="hidden")rememberCurrent();
+    if(document.visibilityState!=="hidden"){refreshBirthday();rememberCurrent()}
     var p=currentProfile();
     if(p&&syncPending[p.id]&&!syncBusy[p.id])flushProfileSync(p.id);
   },20000);
