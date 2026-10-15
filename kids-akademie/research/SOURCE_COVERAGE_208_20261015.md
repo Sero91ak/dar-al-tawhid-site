@@ -1,3 +1,18 @@
+## Ergänzung 15.10.2026 · Sechs weitere Ṣaḥīḥ-Nachweise abgeglichen
+
+Die erste Registeraufnahme vermerkte ursprünglich 32 noch ungeprüfte historische Ḥadīṯ-Belege. **Inzwischen sind sechs weitere (59–64) mit den angegebenen Bänden/Sammlungen, Nummern und Erzählern über Dorar abgeglichen.** Stand dieser Ergänzung: **26 verbliebene Altbelege zur unabhängigen Überprüfung**. Kein wissenschaftliches Endgutachten für die Kinderlektionen.
+
+| Lektion | Primärzuordnung | Nachweis |
+|---|---|---|
+| 59 · al-Fātiḥah | al-Buḫārī **4474**, Abū Saʿīd ibn al-Muʿallā | [Dorar 138127](https://dorar.net/hadith/sharh/138127); dort getrennte Quellenangaben nicht vermischen |
+| 60 · Nūḥ | al-Buḫārī **7410**, Anas ibn Mālik; Muslim 193 parallel | [Dorar 5840](https://dorar.net/hadith/sharh/5840); ausführlicher Schafāʿah-Kontext wird nicht Kindern ausgeschmückt |
+| 61 · Abend-Dhikr | Muslim **2723**, ʿAbdullāh ibn Masʿūd, **Band 4 S. 2089** in der Dorar-Ausgabe | [Dorar mit Originalisnād](https://dorar.net/h/SUjNATlp?osoul=1); im Kinderlehrplan nur Anfang, **keine** Behauptung eines vollständig zitierten Adhkār-Textes |
+| 62 · gegenseitige Hilfe | al-Buḫārī **6026**, Abū Mūsā al-Ashʿarī, Muslim **2585** parallel | [Dorar 151122](https://dorar.net/hadith/sharh/151122), über die sich stützenden Gebäudeteile |
+| 63 · Pflanzen | al-Buḫārī **2320**, Anas ibn Mālik, Muslim **1553** parallel | [Dorar 4998](https://dorar.net/hadith/sharh/4998); die Seite enthält zusätzlich eine getrennte at-Tirmiḏī-Variante |
+| 64 · Engel/Īmān | Muslim **8**, ʿUmar ibn al-Ḫaṭṭāb, Ḥadīṯ Ǧibrīl | [Dorar 25545](https://dorar.net/hadith/sharh/25545); bisheriger Kommentarlink 1189 durch den zugeordneten Originalnachweis ersetzt |
+
+Alle acht aus dem früheren fehlenden Bereich nun gegengeprüften Lektionsnachweise **57–64** sind als `hadith-number-narrator-arabic-verified-dorar-2026-10-15-not-final-fiqh-approval` gekennzeichnet. Die arabischen Angaben sind bewusst **kurze Auszüge**, nicht der vollständige Quellentext. `kids/tools/test-academy-source-registry-complete-v1.cjs` kontrolliert diese acht Einträge sowie die weiterhin ausdrücklich ungeprüften historischen Quellen. Keine Audios, keine wissenschaftliche Endfreigabe, kein Live-Deploy.
+
 # DĀR AL TAWḤĪD KIDS AKADEMI · Quellenabdeckung aller 208 Lektionen
 
 **Prüfdatum:** 15. Oktober 2026  
