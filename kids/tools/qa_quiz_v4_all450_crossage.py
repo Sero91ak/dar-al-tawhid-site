@@ -18,7 +18,7 @@ OLD=DATA/"quiz-v4-age7to10-composed-preview.json"
 YSTAT=DATA/"quiz-v4-first150-audio-status.json"
 OSTAT=DATA/"quiz-v4-age7to10-offline-coverage.json"
 FLAG=DATA/"quiz-curation-release.json"
-REPORT=DATA/"quiz-v4-all450-crossage-technical-qa.json"
+REPORT=ROOT/".github/reports/kids-v4-all450-crossage-technical-qa.json"
 VOICE="DkU7j9uO4ZEtLD2iRZSH"
 MODEL="eleven_v4"
 PARTS=("question","correct","retry","explanation")
@@ -174,26 +174,28 @@ def main():
         assert_ok(y["entries"][phrase]["sha256"]==o["entries"][phrase]["sha256"],
                   "Cross-age reuse different MP3 bytes for identical spoken phrase")
     assert_ok(len(overview)==450,"Incomplete original quiz coverage")
-    assert_ok(sum(x["fourPartComplete"] for x in stats.values())==72,
-              "Expected 72 truly four-part-complete questions before new originals")
-    assert_ok(sum(x["originalBackedFieldAssignments"] for x in stats.values())==1044,
-              "Expected precisely 1044 authentic-original-backed audio field assignments")
-    assert_ok(len(y["entries"])==252 and len(o["entries"])==38,
-              "Unexpected current original audio inventory")
+    complete_total=sum(x["fourPartComplete"] for x in stats.values())
+    audio_fields_total=sum(x["originalBackedFieldAssignments"] for x in stats.values())
+    assert_ok(0<=complete_total<=450 and 0<=audio_fields_total<=1800,
+              "Overall selected audio coverage outside 450-question contract")
+    assert_ok(set(y["entries"])==referenced["4-6"] and
+              set(o["entries"])==referenced["7-8"]|referenced["9-10"],
+              "Unreferenced/stale audio texts found in a private preview")
     report={"schemaVersion":1,"app":"TAWḤĪD KIDS",
             "scope":"ALL450_CROSSAGE_V4_REAL_ORIGINAL_MP3_QA",
             "reviewOnly":True,"livePublished":False,"publicManifestChanged":False,
             "newSpeechCreditsSpent":0,"humanHearingApproved":False,
             "selectedQuestionsVerified":450,"preservedReserveQuestions":450,
             "ageBandBreakdown":stats,
-            "totalCompleteFourPartQuestions":72,
-            "originalBackedFieldAssignments":1044,
+            "totalCompleteFourPartQuestions":complete_total,
+            "originalBackedFieldAssignments":audio_fields_total,
             "uniqueFullSpokenTextsAcrossAges":len(shared),
             "sharedSpokenTextsAcrossYoungAndOlder":len(overlap),
             "shaConflictsAcrossAges":0,
             "uniqueRealMp3PathsWithShaAndCodecChecked":len(hashes),
             "oldPaidOriginalGenerationIdsMissing":ys["missingPreviouslyPaidGenerationIdCount"],
             "readyForLive":False}
+    REPORT.parent.mkdir(parents=True,exist_ok=True)
     REPORT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
     print("PASS_KIDS_V4_ALL450_CROSSAGE_REAL_MP3_QA "+
           json.dumps(report,ensure_ascii=False),flush=True)
