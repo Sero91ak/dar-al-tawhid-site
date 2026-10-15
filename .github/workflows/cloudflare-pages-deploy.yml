@@ -424,6 +424,7 @@ jobs:
         run: |
           node scripts/adult-content-publication-guard.js --self-test
           node q/_registry/check-qsource-standard.mjs
+          node q/_registry/check-source-navigation.mjs
           NEW="$(git diff --diff-filter=A --name-only HEAD^ HEAD -- 'content/posts/*.md')"
           CHANGED_POST_FILES="$NEW" node scripts/adult-content-publication-guard.js --validate
 
