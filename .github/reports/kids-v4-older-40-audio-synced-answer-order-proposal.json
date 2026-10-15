@@ -11,6 +11,17 @@
   "newAudioSynthesisStarted": false,
   "newElevenLabsCreditsSpent": 0,
   "currentAll900CatalogCorrectFirst": true,
+  "canonicalCorrectAnswerPositionsByAge": {
+    "4-6": {
+      "1": 300
+    },
+    "7-8": {
+      "1": 300
+    },
+    "9-10": {
+      "1": 300
+    }
+  },
   "existingLiveRendererNeedsCoordinatedAnswerAndNarrationChange": true,
   "existingFullSentenceOriginalsMustNotBeMismatchedWithShuffledAnswers": true,
   "selectedQuestionsInPlan": 40,
