@@ -494,6 +494,76 @@
     lockHomeGeometry(false);
   }
 
+  /* KIDS_HOME_IDLE_SCROLL_GUARD_V1426
+     WebKit can scroll the internal .shell AFTER the 900ms tab-transition
+     window when the prayer clock, fonts, or native viewport settle.
+     A Home screen that nobody has scrolled must remain at its original top.
+     Release on an actual user scroll; never interrupt reading lower cards.
+     No polling, no forced scroll on a restored detail/back position. */
+  function installHomeIdleScrollGuard(){
+    var today=q("#view-today");
+    if(!shell||!today)return;
+    var released=false,scheduled=false,touchStartY=null;
+    var docScroller=document.scrollingElement;
+
+    function eligible(){
+      return !document.hidden&&today.classList.contains("active")&&surfaceIds().length===0;
+    }
+    function keepApprovedTop(){
+      scheduled=false;
+      if(released||!eligible())return;
+      var shellY=Number(shell.scrollTop)||0;
+      var outerY=Math.max(Number(window.scrollY)||0,Number(docScroller&&docScroller.scrollTop)||0);
+      if(shellY>1) shell.scrollTop=0;
+      if(outerY>1){
+        if(docScroller)docScroller.scrollTop=0;
+        try{window.scrollTo(0,0)}catch(_){}
+      }
+    }
+    function queueTopCheck(){
+      if(scheduled||released||!eligible())return;
+      scheduled=true;
+      requestAnimationFrame(keepApprovedTop);
+    }
+    function releaseForManualScroll(){
+      if(eligible())released=true;
+    }
+    document.addEventListener("touchstart",function(e){
+      touchStartY=e.touches&&e.touches[0]?e.touches[0].clientY:null;
+    },{passive:true,capture:true});
+    document.addEventListener("touchmove",function(e){
+      if(touchStartY===null||!e.touches||!e.touches[0])return;
+      if(Math.abs(e.touches[0].clientY-touchStartY)>7)releaseForManualScroll();
+    },{passive:true,capture:true});
+    document.addEventListener("touchend",function(){touchStartY=null},{passive:true,capture:true});
+    document.addEventListener("touchcancel",function(){touchStartY=null},{passive:true,capture:true});
+    document.addEventListener("wheel",releaseForManualScroll,{passive:true,capture:true});
+    document.addEventListener("keydown",function(e){
+      if(["ArrowDown","ArrowUp","PageDown","PageUp","Home","End"," "].indexOf(e.key)>=0)
+        releaseForManualScroll();
+    },true);
+    shell.addEventListener("scroll",queueTopCheck,{passive:true});
+    if(docScroller&&docScroller!==shell)docScroller.addEventListener("scroll",queueTopCheck,{passive:true});
+    window.addEventListener("pageshow",queueTopCheck,{passive:true});
+    window.addEventListener("resize",queueTopCheck,{passive:true});
+    window.visualViewport?.addEventListener("resize",queueTopCheck,{passive:true});
+    document.addEventListener("visibilitychange",function(){
+      if(!document.hidden)queueTopCheck();
+    });
+    // Re-arming is explicit: tapping "Heute" resets the main tab to top.
+    // Returning from a story/Academy through Back must retain its own scroll.
+    document.addEventListener("click",function(e){
+      var tab=e.target&&e.target.closest&&e.target.closest('.bottom-nav .nav-btn[data-target="today"]');
+      if(tab){released=false;queueTopCheck()}
+    },true);
+    var world=q("#view-today .kids-salah-home-world");
+    if(world&&typeof ResizeObserver==="function"){
+      new ResizeObserver(queueTopCheck).observe(world);
+    }
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(queueTopCheck).catch(function(){});
+    queueTopCheck();
+  }
+
   function init(){
     shell=q(".shell");
     /* Capture the approved first-entry geometry BEFORE the late lock is injected. */
@@ -504,6 +574,7 @@
       try{shell.scrollTo({top:0,left:0,behavior:"auto"})}catch(_){shell.scrollTop=0}
     }
     resetLaunchViewport();
+    installHomeIdleScrollGuard();
     stack=[{desc:{type:"tab",target:activeTab()},signature:signature(),scrolls:captureScrolls()}];
     index=0;
     document.addEventListener("click",onClickCapture,true);
