@@ -93,7 +93,7 @@ assert.ok(css.includes("margin-inline:calc(50% - 50vw)!important"),"Full-bleed w
 assert.ok(css.includes("justify-content:flex-end!important"),"Stage heading must be bottom-aligned");
 for(const p of ["kids/index.html","kids/shell.html","kids/start.html"]){
   assert.equal(read(p),html,"Kids HTML entrypoints must be identical");
-  assert.ok(html.includes("salaf-library-v1.js?v=1414"),"JS cache bust missing");
+  assert.ok(html.includes("salaf-library-v1.js?v=1430"),"JS cache bust missing");
   assert.ok(html.includes("global-detail-dock-v1247.css?v=1428"),"Global style contract must be current");
   assert.ok(html.includes("global-detail-dock-v1247.js?v=1428"),"Pinned global header runtime cache-bust missing");
   assert.ok(html.includes("navigation-v1182.js?v=1425"),"Navigation history refresh missing");
@@ -116,7 +116,7 @@ assert.ok( heroSeam.includes(".ps-modal.open")&&heroSeam.includes(".ms-modal.ope
 assert.ok( html.includes("/kids/global-hero-seam-v1412.css?v=1413"),"Hero seam CSS must load after Salaf art");
 assert.ok( sw.includes("/kids/global-hero-seam-v1412.css?v=1413"),"Hero seam offline precache missing");
 assert.ok(sw.includes("/kids/navigation-v1182.js?v=1425"));
-assert.ok(sw.includes("/kids/salaf-library-v1.js?v=1414"));
+assert.ok(sw.includes("/kids/salaf-library-v1.js?v=1430"));
 assert.ok(sw.includes("/kids/salaf-open-world-v1353.css?v=1410"));
 /* KIDS_STORY_MODES_V1: keep all three real modes for every approved
  * Salaf narrative, even before its first paid master audio arrives. */
@@ -146,9 +146,9 @@ assert.ok(modesCss.includes('data-salaf-mode="both"'),"Wide primary action CSS m
 assert.ok(sharedReader.includes('#salafDetail:not([hidden]) > .salaf-detail-scroll'),"Salaf Hören must scroll to the hero first");
 assert.ok(doc.includes("KIDS_STORY_MODES_V1"),"Future story-mode contract must be documented");
 assert.ok(html.includes("/kids/story-follow-reader.js?v=18-salaf1"),"Reader cache-bust missing");
-assert.ok(html.includes("/kids/salaf-library-v1.js?v=1414"),"Salaf mode cache-bust missing");
+assert.ok(html.includes("/kids/salaf-library-v1.js?v=1430"),"Salaf mode cache-bust missing");
 assert.ok(sw.includes("/kids/story-follow-reader.js?v=18-salaf1"),"Reader offline precache missing");
-assert.ok(sw.includes("/kids/salaf-library-v1.js?v=1414"),"Salaf mode offline precache missing");
+assert.ok(sw.includes("/kids/salaf-library-v1.js?v=1430"),"Salaf mode offline precache missing");
 assert.ok(sw.includes("/kids/salaf-master-v2.css?v=4"),"Shared three-mode stylesheet must be precached");
 
 /* KIDS_SALAF_GIRL_PALETTE_V1415: all girl Salaf surfaces and art are
@@ -232,6 +232,9 @@ assert.ok(html.includes(girlCssUrl),"Girl Salaf palette not loaded");
 assert.ok(html.indexOf(girlCssUrl)>html.indexOf(heroSeamUrl),"Girl style must load after global seam");
 assert.ok(sw.includes(girlCssUrl),"Girl palette not precached for PWA");
 
+// Visitor source details must not show full isnād or web archive notes.
+assert.ok(js.includes("KIDS_VISITOR_COMPACT_CITATIONS_V1430"),"Source display must use compact citations");
+assert.ok(js.includes("compactSalafReference(s.reference)"),"Salaf reader must never dump full reference");
 const content=JSON.parse(read("kids/data/salaf-library-v1.json"));
 assert.ok(Array.isArray(content.items));
 assert.equal(content.version,2,"Salaf one-master manifest version must be 2");
