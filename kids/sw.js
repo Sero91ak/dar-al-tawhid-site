@@ -7,6 +7,7 @@ const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
   "/kids/kids-nav-v1421.css?v=1421",
+  "/kids/kids-motion-v1422.css?v=1422",
   "/kids/kids-academy-girl-seam-v1421.css?v=1421",
   "/kids/kids-academy-portal-v1421.js?v=1421",
   "/kids/assets/kids-icons/learning-book-premium-v1421.svg?v=1421",
@@ -187,7 +188,7 @@ const CORE_PRECACHE=[
   "/kids/assets/dua-3d/home.svg?v=1221",
   "/kids/assets/dua-3d/mosque.svg?v=1221",
   "/kids/assets/dua-3d/shield.svg?v=1221",
-  "/kids/navigation-v1182.js?v=1410",
+  "/kids/navigation-v1182.js?v=1422",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
   "/kids/kids-touch-rail.css?v=17",
@@ -458,6 +459,10 @@ self.addEventListener("fetch",function(event){
   // audio lookup even while its 900-question catalogue and manifest are fresh.
   // Keep the Kids Duʿāʾ V4 voice player fresh after an installed PWA update.
   /* Keep profile avatars, parent profiles and Duʿāʾ hub current after learning-system retirement. */
+  if(url.pathname==="/kids/navigation-v1182.js"||url.pathname==="/kids/kids-motion-v1422.css"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
   if(url.pathname==="/kids/kids-nav-v1421.css"||url.pathname==="/kids/assets/kids-icons/learning-book-premium-v1421.svg"){
     event.respondWith(networkFirst(request));
     return;
