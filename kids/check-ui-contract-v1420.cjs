@@ -15,7 +15,7 @@ assert.equal((nav.match(/class="nav-btn/g)||[]).length,5,"Exactly five tabs");
 const marks=['data-target="today"','data-target="stories"','class="nav-btn kids-academy-tab"','data-target="dua"','data-target="parents"'];
 let pos=-1;
 for(const mark of marks){const n=nav.indexOf(mark);assert.ok(n>pos,"Wrong nav order: "+mark);pos=n;}
-assert.ok(nav.includes('href="/kids/akademie/index.html"'),"Learn tab must open current academy");
+assert.ok(nav.includes('data-academy-open="1"')&&html.includes("/kids/kids-academy-portal-v1421.js?v=1421"),"Lernen must open same-app Academy without a full page reload");
 assert.ok(!nav.includes('data-target="salaf"')&&!nav.includes('data-target="quran"'),"No stale or retired tab");
 assert.ok(dua.includes('const order = [today, stories, learn, dua, parents]'),"Stale iOS nav healing must exist");
 assert.ok(dua.includes("event.stopImmediatePropagation()"),"Old tab handlers must not hijack Duʿāʾ");
