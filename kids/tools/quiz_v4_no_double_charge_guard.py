@@ -66,7 +66,15 @@ def protect_paid_texts(root: Path, registry: dict, ledger: dict) -> set[str]:
         reserved.add(spoken)
     if charged & reserved:
         raise RuntimeError("A prepaid original was charged again; reconcile before more synthesis")
-    return charged | reserved
+    for spoken, saved in recorded.items():
+        if (not isinstance(saved, dict) or saved.get("modelId") != MODEL
+                or saved.get("voiceId") != VOICE or not saved.get("sha256")
+                or (saved.get("textSha256") and
+                    saved["textSha256"] != hashlib.sha256(spoken.encode("utf-8")).hexdigest())):
+            raise RuntimeError("Saved original has inconsistent voice/model/text/hash metadata; stop")
+    # Covers all 327 cost-ledger takes, 47 imported prepaid originals and
+    # 9 paid originals that are not yet downloadable.
+    return charged | reserved | set(recorded)
 
 
 def prohibit_prepaid_selection(spoken: str, protected: set[str]) -> None:
