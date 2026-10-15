@@ -19,6 +19,7 @@ FILES = [REPORTS / f"kids-v4-older-age-stage{i}-exact-voice-preflight.json"
          for i in (1, 2)]
 HTML = ROOT / "kids/review-only/quiz-v4-older-40-text-content-review.html"
 ZIP = ROOT / "kids/review-only/quiz-v4-older-40-text-content-review.zip"
+AUDIT = REPORTS / "kids-v4-older40-editorial-source-findings.json"
 RELEASE = ROOT / "kids/data/quiz-curation-release.json"
 
 
@@ -93,6 +94,10 @@ input[type=search]{flex:1;min-width:170px}
 .card{background:var(--paper);border:1px solid var(--line);padding:16px;border-radius:13px;margin:12px 0}
 .card h3{font-size:17px;margin:0 0 7px}
 .metadata{font-size:12px;color:var(--gold);font-weight:650}
+.editorial-findings{border:1px solid #c79b6c;border-radius:9px;padding:11px;margin:12px 0;background:#fff8ea;font-size:14px}
+.editorial-findings p{margin:7px 0 0}
+.evidence-links{margin:9px 0;padding-left:22px;font-size:13px;overflow-wrap:anywhere}
+.evidence-links a{color:var(--accent);text-decoration:underline}
 .card p{line-height:1.5;margin:8px 0;overflow-wrap:anywhere}
 .caption{font-size:12px;color:var(--muted)}
 blockquote{border-left:3px solid #8da89a;margin:12px 0;padding:4px 10px;color:var(--ink)}
@@ -132,9 +137,12 @@ Prüfe den korrekten Inhalt, die Antworten und die Quellen. <strong>Das ist kein
 <p class="footer">Interne Offline-Qualitätssicherung. Häkchen bedeuten ausschließlich eigenhändig durchgeführte TEXTprüfung, keine Quellenauthentifizierung durch den Computer, keine Anhörung, keine synthetische Sprache und keinerlei Aufnahmeberechtigung. Es gibt keinen automatischen Upload und keine Änderung der Kinder-App.</p>
 </main>
 <script type="application/json" id="review-data">__STAGE_REVIEW_DATA__</script>
+<script type="application/json" id="editorial-data">__EDITORIAL_REVIEW_DATA__</script>
 <script>
 "use strict";
 const data=JSON.parse(document.getElementById("review-data").textContent);
+const audit=JSON.parse(document.getElementById("editorial-data").textContent);
+const editorialFindings=new Map(audit.findings.map(x=>[x.questionId,x]));
 const reviewed=new Set();
 const stageEl=document.getElementById("stage");
 const ageEl=document.getElementById("age");
@@ -161,6 +169,29 @@ function render(){
    card.append(tag("p",null,"Quelle laut Originalkatalog: "+String(q.originalSource||"Nicht angegeben")));
    const speech=tag("blockquote",null,"Fragentext: "+q.spokenQuestion);card.append(speech);
    card.append(tag("p","caption","Erklärung: "+q.explanation));
+   const editorial=editorialFindings.get(q.questionId);
+   if(!editorial)throw Error("Interner Prüfeintrag fehlt");
+   if(editorial.editorialFlags.length){
+     const note=tag("section","editorial-findings");
+     note.append(tag("strong",null,"Redaktionell vor Audioaufnahme prüfen"));
+     editorial.editorialFlags.forEach(f=>note.append(tag("p",null,f.reviewSuggestion)));
+     card.append(note);
+   }
+   const citation=tag("p","caption",
+      editorial.sourceSpotcheckEvidence.length
+       ?"Quellenstichprobe vorhanden – trotzdem keine vollständige Freigabe"
+       :"Quelle noch nicht extern einzeln abgeglichen");
+   card.append(citation);
+   if(editorial.sourceSpotcheckEvidence.length){
+     const sources=tag("ul","evidence-links");
+     editorial.sourceSpotcheckEvidence.forEach(item=>{
+       const li=tag("li",null);
+       const a=tag("a",null,item.source);
+       a.href=item.url;a.rel="noreferrer noopener";a.target="_blank";
+       li.append(a);sources.append(li);
+     });
+     card.append(sources);
+   }
    if(q.automaticTextWarnings.length)card.append(tag("p","metadata","Prüfhinweis: "+q.automaticTextWarnings.join("; ")));
    const label=tag("label","review");
    const input=document.createElement("input");input.type="checkbox";input.checked=reviewed.has(q.questionId);
@@ -205,22 +236,38 @@ render();
 def main():
     manifest = [load(path) for path in FILES]
     validate(manifest)
+    editorial = load(AUDIT)
+    if (editorial.get("allSourcesVerified") is not False or
+            editorial.get("humanSourceSignoffGranted") is not False or
+            editorial.get("paidVoiceGenerationAuthorized") is not False or
+            len(editorial.get("findings") or []) != 40):
+        raise RuntimeError("External-source editorial review is absent or falsely approved")
+    if {q["questionId"] for stage in manifest for q in stage["questions"]} != {
+            q["questionId"] for q in editorial["findings"]}:
+        raise RuntimeError("The external editorial review covers different questions")
     data = json.dumps(manifest, ensure_ascii=False, separators=(",", ":"))
     data = data.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
     if PAGE.count("__STAGE_REVIEW_DATA__") != 1:
         raise RuntimeError("Missing unique HTML data placeholder")
-    html = PAGE.replace("__STAGE_REVIEW_DATA__", data)
+    verified = json.dumps(editorial, ensure_ascii=False, separators=(",", ":"))
+    verified = verified.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+    if PAGE.count("__EDITORIAL_REVIEW_DATA__") != 1:
+        raise RuntimeError("Missing unique editorial data placeholder")
+    html = (PAGE.replace("__STAGE_REVIEW_DATA__", data)
+            .replace("__EDITORIAL_REVIEW_DATA__", verified))
     HTML.parent.mkdir(parents=True, exist_ok=True)
     HTML.write_text(html, encoding="utf-8")
     with ZipFile(ZIP, "w", compression=ZIP_DEFLATED) as z:
         z.write(HTML, str(HTML.relative_to(ROOT)))
-        for path in FILES:
+        for path in FILES + [AUDIT]:
             z.write(path, str(path.relative_to(ROOT)))
     with ZipFile(ZIP) as z:
-        if z.testzip() is not None or len(z.namelist()) != 3:
+        if z.testzip() is not None or len(z.namelist()) != 4:
             raise RuntimeError("Offline private content ZIP corrupt")
     print("PASS_KIDS_V4_40_SOURCE_TEXT_REVIEW_OFFLINE_ONLY " + json.dumps({
         "questions": 40, "originalTextsNotYetRecorded": 150,
+        "editorialFlagsShown": editorial["questionsWithEditorialFlags"],
+        "spotcheckedSourceReferences": editorial["sourceReferencesExternallySpotchecked"],
         "creditsSpent": 0, "textApprovalsGrantedByGenerator": 0,
         "voiceSynthesisAuthorized": False, "published": False,
         "file": str(ZIP.relative_to(ROOT)),
