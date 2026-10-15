@@ -9,15 +9,15 @@ Acht bestehende Salaf-Kategorien × **vier vollständige freigegebene Geschichte
 |---|---:|---:|---:|---:|
 | Barmherzigkeit & Helfen (`rahma`) | 4 | 2 | 0 | 2 |
 | Ehrlichkeit & Vertrauen (`sidq`) | 4 | 2 | 0 | 2 |
-| Geduld & Sanftmut (`sabr`) | 4 | 0 | 1 | 4 |
+| Geduld & Sanftmut (`sabr`) | 4 | 1 | 0 | 3 |
 | Wissen & Lernen (`ilm`) | 4 | 1 | 0 | 3 |
 | Freundschaft & Adab (`adab`) | 4 | 2 | 0 | 2 |
 | Familie & Eltern (`family`) | 4 | 1 | 0 | 3 |
 | Klugheit & Verantwortung (`hikma`) | 4 | 1 | 1 | 3 |
 | Dankbarkeit & Bescheidenheit (`shukr`) | 4 | 1 | 0 | 3 |
-| **Gesamt** | **32** | **10** | **2** | **22** |
+| **Gesamt** | **32** | **11** | **1** | **21** |
 
-**Einzelarbeit:** Vier neue 458–503 Wörter umfassende Master-Erzähltexte aufgenommen. Die alten drei plus Ibn Sīrīn, ar-Rabīʿ und al-Fuḍayl bleiben unverändert. Die zwei älteren Entwürfe Imām Aḥmad/ʿUmar ibn ʿAbd al-ʿAzīz bleiben unfreigegeben.
+**Einzelarbeit:** Vier neue 458–503 Wörter umfassende Master-Erzähltexte und der quellengeprüfte Altentwurf zu Imām Aḥmad freigegeben. Die alten drei plus Ibn Sīrīn, ar-Rabīʿ und al-Fuḍayl bleiben unverändert. Der ältere Entwurf zu ʿUmar ibn ʿAbd al-ʿAzīz bleibt unfreigegeben.
 
 ## Quellenkontrolle der vier Neuzugänge
 
@@ -49,3 +49,8 @@ Acht bestehende Salaf-Kategorien × **vier vollständige freigegebene Geschichte
 5. Quellenlinks nur intern, in der Kinderbesucher-App ausschließlich Kurzreferenzen als Klartext; keine Test-/Produktionssprache.
 6. GitHub-Prüfungen vor Merge und tatsächlichen Cloudflare-Deploy kontrollieren; keine Erfolgsmeldung aufgrund eines Commits allein. Bestehendes Cache-System und Profilfarben unverändert.
 7. Beim nächsten Arbeitsschritt zunächst die **beiden leeren Zielkategorien-Freigaben** `sabr` und weitere `hikma` priorisieren, ohne unbestätigte Alt-Entwürfe voreilig freizuschalten.
+
+## Quellenkontrolle Geduld: Imām Aḥmad ibn Ḥanbal
+- Abū Nuʿaym, *Ḥilyat al-Awliyāʾ*, 9/205–206: https://www.islamweb.net/ar/library/content/131/1692/
+- Der Autor nennt die Überlieferung Ṣāliḥ ibn Aḥmads (Sohn des Imāms) ausdrücklich die zuverlässigste ihm bekannte Miḥnah-Darstellung. Eine weitere Beobachterdarstellung von Aḥmad ibn al-Faraǧ berichtet die Befragung und das Festhalten an „al-Qurʾān kalām Allāh ġayr maḫlūq“; Abū Nuʿaym beanstandet dort ausdrücklich einen falsch wiedergegebenen Ḥadīṯ-Überlieferungsweg. Daher weder die fehlerhafte Ḥadīṯ-Kette noch die ungeprüften Wundermotive in den Kindertext übernehmen.
+- Der vorhandene Mastertext schildert das grundsätzlich historisch belegte Ereignis kindgerecht ohne drastische Gewaltbeschreibung. Keine menschliche redaktionelle Prüfung behauptet; die Veröffentlichung folgt der ausdrücklich beauftragten selbständigen Quellenredaktion.
