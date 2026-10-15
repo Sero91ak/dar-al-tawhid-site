@@ -4451,10 +4451,10 @@ function updateAcademyAppbar(){
  $("#academyNavSubtitle").textContent=lessonOpen?SUBJECTS[activeSubject()].title+" · Dein Unterricht":categoryOpen?"Meine Unterrichtsfächer":"DĀR AL TAWḤĪD · KIDS";
  $("#academyNavBack").setAttribute("aria-label",lessonOpen||categoryOpen?"Zur Lernakademie":"Zur Kids-App");
 }
-function returnToKids(){
+function returnToKids(goHome=false){
  stopAll();
  if(KIDS_SEAMLESS_PORTAL_V1421){
-   window.parent.postMessage({type:"DAR_KIDS_ACADEMY_CLOSE_V1421"},location.origin);
+   window.parent.postMessage({type:"DAR_KIDS_ACADEMY_CLOSE_V1421",goHome:goHome===true},location.origin);
  }else location.assign("/kids/");
 }
 function academyNavBack(){
@@ -4835,7 +4835,7 @@ all("[data-open-lesson]").forEach(b=>b.onclick=()=>begin(b.dataset.openLesson||"
 all("[data-open-category]").forEach(b=>b.onclick=()=>openCategory(b.dataset.openCategory));
 $("#subjectBack").onclick=home;$("#subjectStart").onclick=()=>begin($("#subjectStart").dataset.lessonId);
  $("#academyNavBack").onclick=academyNavBack;
- $("#academyNavHome").onclick=returnToKids;
+ $("#academyNavHome").onclick=()=>returnToKids(true);
 window.addEventListener("message",event=>{
  if(!KIDS_SEAMLESS_PORTAL_V1421||event.origin!==location.origin||event.source!==window.parent)return;
  if(event.data?.type==="DAR_KIDS_ACADEMY_PAUSE_V1421")stopAll();
