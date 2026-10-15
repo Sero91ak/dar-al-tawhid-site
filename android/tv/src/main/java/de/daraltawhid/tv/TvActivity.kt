@@ -299,24 +299,21 @@ class TvActivity : Activity() {
 
     private fun loadHome() {
         val generation = renderGeneration
-        body.addView(label("Gebetszeiten", 29f, gold, true))
-        body.addView(label(
-            "TV-Geräte haben häufig keinen GPS-Empfänger. Stadt mit OK auswählen – die Wahl bleibt gespeichert.",
-            16f, muted, false
-        ))
-        body.addView(navButton("Stadt: ${cities[cityIndex].first}  ·  nächste Stadt") {
+        val (left, right) = splitDashboard(0.43f)
+        left.addView(label("Gebetszeiten", 29f, gold, true))
+        left.addView(label("Ort mit OK auswählen · Auswahl bleibt gespeichert.", 15f, muted, false))
+        left.addView(navButton("Stadt: ${cities[cityIndex].first}  ·  nächste Stadt") {
             cityIndex = (cityIndex + 1) % cities.size
             getPreferences(MODE_PRIVATE).edit().putInt("city_index", cityIndex).apply()
             // Clear the previous home view before loading new times.
             show("home")
-            body.getChildAt(2)?.requestFocus()
+            left.getChildAt(2)?.requestFocus()
         })
-        // Five independent prayer tiles: never concatenate names/times into one
-        // wrapping TextView (the bug shown in the owner's TV screenshot).
+        // The genuine tvOS prayer screen uses five *vertical* prayer rows
+        // beside the Quran/Tadabbur column, not cramped horizontal tiles.
         val prayerRow = LinearLayout(this).apply {
-            orientation = LinearLayout.HORIZONTAL
-            weightSum = 5f
-            setPadding(0, dp(11), 0, dp(9))
+            orientation = LinearLayout.VERTICAL
+            setPadding(0, dp(10), 0, dp(9))
         }
         val prayerNames = listOf(
             "fajr" to "Faǧr",
@@ -328,30 +325,26 @@ class TvActivity : Activity() {
         val prayerValues = mutableListOf<TextView>()
         prayerNames.forEach { (_, title) ->
             val prayerCell = LinearLayout(this).apply {
-                orientation = LinearLayout.VERTICAL
-                gravity = Gravity.CENTER
-                setPadding(dp(7), dp(13), dp(7), dp(13))
+                orientation = LinearLayout.HORIZONTAL
+                gravity = Gravity.CENTER_VERTICAL
+                setPadding(dp(19), dp(5), dp(19), dp(5))
                 background = prayerCardBackground()
             }
-            prayerCell.addView(label(title, 16f, gold, true).apply {
-                gravity = Gravity.CENTER
+            prayerCell.addView(label(title, 20f, gold, true),
+                LinearLayout.LayoutParams(0, -2, 1f))
+            val value = label("--:--", 26f, cream, true).apply {
+                gravity = Gravity.END
                 maxLines = 1
-                setPadding(0, 0, 0, dp(5))
-            })
-            val value = label("--:--", 22f, cream, true).apply {
-                gravity = Gravity.CENTER
-                maxLines = 1
-                setPadding(0, 0, 0, 0)
             }
             prayerCell.addView(value)
             prayerValues.add(value)
-            prayerRow.addView(prayerCell, LinearLayout.LayoutParams(0, dp(93), 1f).apply {
-                marginEnd = dp(7)
+            prayerRow.addView(prayerCell, LinearLayout.LayoutParams(-1, dp(65)).apply {
+                bottomMargin = dp(7)
             })
         }
-        body.addView(prayerRow)
+        left.addView(prayerRow)
         val prayerStatus = label("", 13f, muted, false)
-        body.addView(prayerStatus)
+        left.addView(prayerStatus)
         val city = cities[cityIndex]
         val url = "https://dar-al-tawhid.de/api/prayer/times?lat=${city.second}&lon=${city.third}"
         fetchJson(url) { data ->
@@ -379,25 +372,25 @@ class TvActivity : Activity() {
         // Apple TV home contract: prayer times -> Qur'an verse -> verified Tadabbur
         // referring to exactly that verse. The shared Apple-TV index is updated
         // globally; do not hard-code the first entry (2:183) forever.
-        body.addView(label("Qurʾān-Vers", 25f, gold, true))
-        val arabicVerse = label("Arabischer Qurʾān-Vers wird geladen …", 19f, cream, false).apply {
+        right.addView(label("Qurʾān-Vers", 25f, gold, true))
+        val arabicVerse = label("Arabischer Qurʾān-Vers wird geladen …", 23f, cream, false).apply {
             gravity = Gravity.CENTER
             textDirection = View.TEXT_DIRECTION_RTL
             textAlignment = View.TEXT_ALIGNMENT_CENTER
         }
-        val germanVerse = label("Deutsche Übersetzung wird geladen …", 17f, cream, false)
-        body.addView(arabicVerse)
-        body.addView(germanVerse)
+        val germanVerse = label("Deutsche Übersetzung wird geladen …", 20f, cream, false)
+        right.addView(arabicVerse)
+        right.addView(germanVerse)
         // Remote ayah selection updates the reference, but not an active player.
         // A dedicated row is only added once a validated daily entry is known.
         val homeAudioContainer = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
         }
-        body.addView(homeAudioContainer)
+        right.addView(homeAudioContainer)
         val tadabburTitle = label("Tadabbur", 23f, gold, true)
-        body.addView(tadabburTitle)
-        val tadabburHome = label("Geprüfte Aussage wird geladen …", 17f, cream, false)
-        body.addView(tadabburHome)
+        right.addView(tadabburTitle)
+        val tadabburHome = label("Geprüfte Aussage wird geladen …", 20f, cream, false)
+        right.addView(tadabburHome)
 
         fun displayHomeEntry(entry: JSONObject?) {
             if (generation != renderGeneration || activeTab != "home") return
@@ -470,10 +463,7 @@ class TvActivity : Activity() {
                 displayHomeEntry(batch?.optJSONArray("entries")?.optJSONObject(entryPosition))
             }
         }
-        body.addView(label("Mehr entdecken", 22f, gold, true))
-        body.addView(navButton("Qurʾān & Tadabbur öffnen") { show("tadabbur") })
-        body.addView(label("Ḥadīṯ-Sammlung", 29f, gold, true))
-        body.addView(navButton("Überlieferungen lesen") { show("hadith") })
+        right.addView(navButton("Tadabbur-Archiv öffnen") { show("tadabbur") })
     }
 
 
