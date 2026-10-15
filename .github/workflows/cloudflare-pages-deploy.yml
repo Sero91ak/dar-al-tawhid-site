@@ -423,6 +423,7 @@ jobs:
         shell: bash
         run: |
           node scripts/adult-content-publication-guard.js --self-test
+          node q/_registry/check-qsource-standard.mjs
           NEW="$(git diff --diff-filter=A --name-only HEAD^ HEAD -- 'content/posts/*.md')"
           CHANGED_POST_FILES="$NEW" node scripts/adult-content-publication-guard.js --validate
 
@@ -590,6 +591,12 @@ jobs:
           grep -F -q 'DĀR AL TAWḤĪD' /tmp/dar-public-rollback.html || { echo "::error::Rollback-Website Branding fehlt"; exit 1; }
           grep -F -q 'desktop-overhaul' /tmp/dar-public-rollback.html || { echo "::error::Rollback-Website Shell fehlt"; exit 1; }
           echo "Notfall-Rollback live und erreichbar."
+
+      # Live Q-link QA after rollback hook: fail release, but do not roll back Kids.
+      - name: Alle Q-Quellenlinks LIVE laden und prüfen
+        if: success()
+        shell: bash
+        run: node q/_registry/verify-live-qsource.mjs
 
       - name: Letzten grünen Produktionsstand markieren
         if: success()
