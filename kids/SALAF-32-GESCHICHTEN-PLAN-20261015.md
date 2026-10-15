@@ -24,7 +24,7 @@ Ein zusätzlicher, *nicht veröffentlichter* Quellenkandidat über ʿUmar ibn ʿ
 2. **Uways al-Qaranī – Güte gegenüber seiner Mutter** (Familie): Muslim, *Ṣaḥīḥ*, Faḍāʾil aṣ-Ṣaḥābah Nr. 2542, belegt auch bei al-Bayhaqī in *Dalāʾil an-Nubuwwah*: https://www.islamweb.net/ar/library/content/1005/2368/
 3. **Muṭarrif ibn ʿAbdillāh – Dankbarkeit für Gesundheit** (Dankbarkeit): al-Bayhaqī, *Shuʿab al-Īmān*, 6/251 Nr. 4121, Ghaylān berichtet ausdrücklich eigenes Hören; unabhängige Variante Wakīʿ, *az-Zuhd*, S. 454 Nr. 201. https://www.islamweb.net/ar/library/content/1011/4040/
 4. **ʿUrwah ibn az-Zubayr – Geduld in schwerer Zeit** (Geduld): adh-Dhahabī, *Siyar*, 4/426 (Ibn Shawdhab über seine Rezitationsgewohnheit und schwierige Behandlung); 4/429–431 (zusätzlich über den Sohn Hišām zur Krankheit). **Isnād-Grenze:** Ibn Shawdhab ist nicht als direkter Augenzeuge bezeichnet; deshalb nicht als unmittelbarer Augenzeugenbericht ausgeben und keine `ṣaḥīḥ`-Bewertung daraus ableiten. https://www.islamweb.net/ar/library/content/60/618/
-5. **Muḥammad ibn al-Munkadir – Hilfe für seine Mutter** (Familie): adh-Dhahabī, *Siyar*, 5/359–360: Saʿīd ibn ʿĀmir berichtet den Ausspruch des Muḥammad über die Versorgung seiner Mutter gegenüber dem freiwilligen Nachtgebet des Bruders ʿUmar. https://www.islamweb.net/ar/library/content/63/362/
+5. **Muḥammad ibn al-Munkadir – Hilfe für seine Mutter** (Familie): adh-Dhahabī, *Siyar*, 5/359–360: Saʿīd ibn ʿĀmir berichtet den Ausspruch des Muḥammad über die Versorgung seiner Mutter gegenüber dem freiwilligen Nachtgebet des Bruders ʿUmar. https://www.islamweb.net/ar/library/content/60/872/
 
 ## Freigaberegeln
 
