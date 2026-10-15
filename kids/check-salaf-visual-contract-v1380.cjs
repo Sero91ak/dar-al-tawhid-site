@@ -165,7 +165,7 @@ for(const target of [
   assert.ok(girlCss.includes(target),"Missing girls-only Salaf tint: "+target);
 }
 assert.ok(girlCss.includes("background-blend-mode:luminosity"),"Cool category art must be recoloured");
-const girlHex=[...girlCss.matchAll(/#[a-fA-F0-9]{6}\\b/g)].map(m=>m[0]);
+const girlHex=[...girlCss.matchAll(/#[a-fA-F0-9]{6}\b/g)].map(m=>m[0]);
 for(const hex of girlHex){
   const [r,g,b]=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255);
   const high=Math.max(r,g,b),low=Math.min(r,g,b),range=high-low;
