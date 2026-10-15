@@ -51,4 +51,15 @@ assert.ok(html.includes('if(name==="dua"&&window.DARKidsDuaHub'),"Duʿāʾ tab m
 assert.equal(v.buildId,"kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren");
 assert.ok(sw.includes('dar-al-tawhid-kids-v1422')&&sw.includes('kids-nav-v1421.css?v=1421'),"PWA cache must be updated");
 assert.ok(sw.includes('kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren'),"SW build ID must match");
+
+const navigation=read("kids/navigation-v1182.js"),motion=read("kids/kids-motion-v1422.css");
+assert.ok(html.includes('/kids/navigation-v1182.js?v=1422'),"Visitor must load low-jank navigation");
+assert.ok(html.includes('/kids/kids-motion-v1422.css?v=1422'),"Visitor must load light transition CSS");
+assert.ok(sw.includes('/kids/navigation-v1182.js?v=1422')&&sw.includes('/kids/kids-motion-v1422.css?v=1422'),"iOS PWA must cache smooth navigation files");
+assert.ok(navigation.includes("if(after===before)return;"),"Do not scroll-reset a second time after a tab tap");
+assert.ok(!navigation.includes("requestAnimationFrame(restartHomeMotion);"),"Home logo must not replay on every return");
+assert.ok(!navigation.includes("if(!surfaceIds().length&&active)resetMainTop();"),"pageshow must not reset scroll for browser back");
+assert.ok(motion.includes("prefers-reduced-motion:reduce"),"Respect device reduced-motion setting");
+assert.ok(motion.includes("190ms"),"Short GPU opacity entrance duration required");
+
 console.log("PASS Kids V1421: 5 official tabs, Duʿāʾ fourth, learning center, Salaf Hören, gender heroes, restored avatars, Quran retirement");
