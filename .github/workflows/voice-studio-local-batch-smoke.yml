@@ -602,7 +602,7 @@ jobs:
           assert visual.get("fullQuestionCatalogDirectTest") is True
           assert visual.get("fullQuestionCatalogOwnerVoice") is True
           assert visual.get("shortQuizRoundsPreserved") is True
-          assert visual.get("noNewQuestionsInThisRelease") is True
+          assert visual.get("noNewQuestionsInThisRelease") is False, "current published 250-question expansion must be reflected in historical release metadata"
           assert int(visual.get("catalogAssetVersion") or 0)>=8
           assert visual.get("catalogIncrementalRender") is True
           assert int(visual.get("catalogInitialRenderCount") or 0)==40
@@ -616,7 +616,7 @@ jobs:
           assert int(visual.get("catalogVisualTopicCardsAssetVersion") or 0)==6
           assert visual.get("catalogVisualTopicCardsLabelPlacement")=="bottom-stable"
           assert visual.get("questionGenerationPaused") is True
-          assert int(visual.get("questionGenerationCap") or 0)==650
+          assert int(visual.get("questionGenerationCap") or 0)==900, "current 900-question generation cap must stay paused"
           assert (version.get("visualSystem") or {}).get("kidsQuizGenerationPaused") is True
           assert int((version.get("visualSystem") or {}).get("kidsQuizGenerationCap") or 0)==650
 
@@ -694,8 +694,8 @@ jobs:
           policy=quiz.get("policy") or {}
           assert policy.get("generationPaused") is True, "Kids quiz generation must remain paused"
           cap=int(policy.get("maxQuestionCount") or 0)
-          assert cap==650, f"unexpected frozen Kids quiz cap: {cap}"
-          assert total==cap, f"frozen Kids quiz catalog must stay at {cap}, got {total}"
+          assert cap==900, f"unexpected current Kids quiz cap: {cap}"
+          assert total==cap, f"published Kids quiz catalog must match the cap {cap}, got {total}"
           assert total>=50 and total%50==0, f"Kids quiz must grow in complete 50-question packs, got {total}"
           packs=total//50
           normalized_questions={}
@@ -708,7 +708,9 @@ jobs:
                   normalized_questions[question]=item.get("number")
           assert not duplicates, "duplicate Kids quiz questions: "+repr(duplicates)
           counts={band:sum(1 for q in items if q.get("ageBand")==band) for band in expected}
-          expected_counts={"4-6":18*packs,"7-8":16*packs,"9-10":16*packs}
+          expected_counts={"4-6":300,"7-8":300,"9-10":300}
+          assert expected_counts==visual.get("distribution"), "actual quiz age distribution must agree with the published version manifest"
+          assert total==sum(expected_counts.values())
           assert counts==expected_counts, (counts,expected_counts)
 
           print("Realistic age-adaptive Kids quiz artwork OK:",total,counts)
