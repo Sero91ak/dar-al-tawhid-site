@@ -24,7 +24,8 @@ assert.ok(portalJs.includes('frame.src="/kids/akademie/index.html?kidsPortal=1"'
 assert.ok(portalJs.includes('DAR_KIDS_ACADEMY_PAUSE_V1421')&&portalJs.includes('DAR_KIDS_ACADEMY_CLOSE_V1421'),"Portal must handle child app exit and pause");
 assert.ok(academy.includes("KIDS_SEAMLESS_PORTAL_V1421")&&academy.includes("returnToKids();"),"Academy back button must close portal");
 assert.ok(academy.includes('$("#academyNavHome").onclick=()=>returnToKids(true)'),"Academy house must return to Heute without page reload");
-assert.ok(portalJs.includes('event.data.goHome===true')&&portalJs.includes('today.click()'),"House must navigate Home tab without hard reload");
+assert.ok(portalJs.includes('event.data.goHome===true')&&portalJs.includes('if(goHome)one(')&&portalJs.includes('data-target="today"'),"House must navigate Home tab without hard reload");
+assert.ok(portalJs.includes("nav.parentNode.insertBefore(modal,nav)")&&portalCss.includes("--kids-academy-portal-height"),"Academy must reuse the exact existing Kids bottom dock");
 assert.ok(html.includes('join.dataset.gender=')&&html.includes('name==="login"?"none"'),"Login must track gender and hide duplicate cancel");
 assert.ok(portalCss.includes('#kidsJoin[data-gender="girl"]')&&!portalCss.includes('.app[data-gender="boy"]'),"Girl login must have a separate profile-scoped palette");
 assert.ok(sw.includes('/kids/kids-academy-portal-v1421.js?v=1421')&&sw.includes('/kids/kids-academy-girl-seam-v1421.css?v=1421'),"New navigation and girls CSS must be offline cached");
