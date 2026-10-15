@@ -48,6 +48,9 @@ jobs:
         run: |
           set -euo pipefail
           python3 android/tv/tools/check_original_tv_assets.py
+          bash -n android/tv/tools/push_original_tv_assets_from_mac.sh
+          python3 -m py_compile android/tv/tools/check_original_tv_assets.py
+          python3 -m py_compile android/tv/tools/import_original_apple_tv_assets.py
           if [ "${GITHUB_REF_NAME}" = "main" ]; then
             # No signed release candidate may be built on main without ALL
             # approved original scenes/logo packaged with matching SHA-256.
