@@ -32,9 +32,10 @@ def expected_generations():
             gid=take.get("generationId")
             if not isinstance(gid,str) or not re.fullmatch(r"[A-Za-z0-9]{20}",gid):
                 raise RuntimeError("Original take ID missing/invalid")
-            if gid in lookup and lookup[gid]!=q["questionId"]:
-                raise RuntimeError("Original paid generation ID assigned to two questions")
-            lookup[gid]=q["questionId"]
+            # Previously paid praise/feedback clips may LEGITIMATELY be
+            # reused across several quiz questions. One generation ID stays
+            # one original MP3, with multiple consumer question IDs.
+            lookup.setdefault(gid,set()).add(q["questionId"])
     if len(lookup)!=56:
         raise RuntimeError("Missing original prepaid Flow generation IDs: expected 56")
     return lookup
@@ -58,7 +59,7 @@ def audit(source=DEFAULT_INBOX,write=False):
     selected={q["questionId"] for q in load(
         ROOT/"kids/data/quiz-v4-curated-450-production-review.json")["recipes"]
         if q["ageBand"]=="4-6"}
-    need150={gid for gid,qid in expected.items() if qid in selected}
+    need150={gid for gid,qids in expected.items() if qids & selected}
     result={
         "scope":"TAWḤĪD KIDS 56 previously paid V4 Flow originals",
         "mode":"AUDIT_OR_DELEGATE_TO_CANONICAL_IMPORTER_NO_TTS",
