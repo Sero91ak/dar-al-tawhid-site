@@ -78,6 +78,20 @@ jobs:
           console.log('Dar Test Quran Player canonical version',version);
           NODE
 
+      - name: Test-UI Berechtigungen im HTML-Cache eindeutig versionieren
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs=require('fs');
+          const file='test/index.html';
+          let html=fs.readFileSync(file,'utf8');
+          const rx=/\/test\/assets\/dar-setup-hub\.js\?v=[^"']+/g;
+          if(!rx.test(html))throw Error('Test hub script link not found');
+          html=html.replace(rx,'/test/assets/dar-setup-hub.js?v=1031-location');
+          fs.writeFileSync(file,html);
+          console.log('Test permissions hub cache version upgraded');
+          NODE
       - name: Build + Build-IDs synchronisieren
         run: npm run build
 
