@@ -37,8 +37,8 @@ for(const s of activeLegacy){
  assert.ok(s.checkedOn===null,"legacy unverified source falsely dates itself as checked: "+s.sourceId);
  assert.match(s.authenticityNote||"",/not independently|not confirmed|not independently confirmed/i,"legacy source must disclose incomplete verification");
 }
-assert.ok(activeLegacy.length<=22,"Regression: newly verified historical sources were downgraded to unverified");
-const verified=["SRC-CORE57-LEGACY-HADITH-6116","SRC-CORE58-LEGACY-HADITH-164","SRC-CORE59-LEGACY-HADITH-4474","SRC-CORE60-LEGACY-HADITH-7410","SRC-CORE61-LEGACY-HADITH-2723","SRC-CORE62-LEGACY-HADITH-6026","SRC-CORE63-LEGACY-HADITH-2320","SRC-CORE64-LEGACY-HADITH-8","SRC-CORE65-LEGACY-HADITH-2699","SRC-CORE66-LEGACY-HADITH-6094","SRC-CORE67-LEGACY-HADITH-6018","SRC-CORE68-LEGACY-HADITH-6464"];
+assert.ok(activeLegacy.length<=18,"Regression: already checked historical sources were downgraded");
+const verified=["SRC-CORE57-LEGACY-HADITH-6116","SRC-CORE58-LEGACY-HADITH-164","SRC-CORE59-LEGACY-HADITH-4474","SRC-CORE60-LEGACY-HADITH-7410","SRC-CORE61-LEGACY-HADITH-2723","SRC-CORE62-LEGACY-HADITH-6026","SRC-CORE63-LEGACY-HADITH-2320","SRC-CORE64-LEGACY-HADITH-8","SRC-CORE65-LEGACY-HADITH-2699","SRC-CORE66-LEGACY-HADITH-6094","SRC-CORE67-LEGACY-HADITH-6018","SRC-CORE68-LEGACY-HADITH-6464","SRC-CORE69-LEGACY-HADITH-2999","SRC-CORE70-LEGACY-HADITH-201","SRC-CORE71-LEGACY-HADITH-5013","SRC-CORE72-LEGACY-HADITH-532"];
 for(const sid of verified){
  const s=registry.sources.find(x=>x.sourceId===sid);
  assert.ok(s,"missing independently cross-checked source "+sid);
