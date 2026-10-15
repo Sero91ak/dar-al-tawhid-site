@@ -40,8 +40,10 @@ const hasV27=read("kids/akademie/index.html").includes("curriculum-v27.js?v=2026
 assert.equal(Object.keys(stage.entries).length,4,"No unapproved batch production");
 assert.ok([...Object.keys(stage.entries)].every(k=>all.has(key(k))),"Every staged text must belong to the actual lesson plan");
 assert.equal(annual.goals.newLessonSlots,208);
-assert.equal(annual.goals.currentlyInCatalog,hasV27?58:hasV26?50:hasV25?45:38);
-assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,hasV27?150:hasV26?158:hasV25?163:170);
+const verifiedSlots=annual.weeks.flatMap(w=>w.days).filter(d=>d.mode==="new"&&d.lessonId).length;
+assert.ok(verifiedSlots>=58&&verifiedSlots<=208,"Verified lessons must remain within the 208-slot plan");
+assert.equal(annual.goals.currentlyInCatalog,verifiedSlots,"Catalog count must equal linked lesson slots");
+assert.equal(annual.goals.additionalAuthenticallyVerifiedLessonsNeeded,208-verifiedSlots,"Unverified slots must stay gated");
 assert.ok(html.includes("academy-voice-plan-v22.json"),"Voice review must include the upcoming four real lessons");
 console.log("KIDS ACADEMY VOICE REVIEW PASS: "+combined.size+" unique utterances, four review-only V4 files, "+
  annual.goals.currentlyInCatalog+" verified-content lessons; no paid calls or child profile writes.");
