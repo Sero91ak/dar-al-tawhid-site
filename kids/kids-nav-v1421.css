@@ -1,0 +1,133 @@
+/* V1421 visual contract — five tabs, learning in center, Dua replaces Schätze.
+ * Schätze der Salaf has an illustrated, profile-aware entry in Hören.
+ * No change to academy lesson or discontinued Qur'an/Alif-Bāʾ modules. */
+html body .bottom-nav .kids-academy-tab .ico{
+  background-image:url("/kids/assets/kids-icons/learning-book-premium-v1421.svg?v=1421")!important;
+  background-size:contain!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  width:clamp(32px,8.8vw,43px)!important;
+  height:clamp(32px,8.8vw,43px)!important;
+  filter:drop-shadow(0 5px 5px rgba(0,0,0,.19))!important;
+}
+html body .bottom-nav .nav-btn[data-target="dua"] .ico{
+  background-image:url("/kids/assets/kids-icons/dua-real-v12.png?v=1421")!important;
+  background-size:contain!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  color:transparent!important;
+  font-size:0!important;
+  filter:drop-shadow(0 4px 5px rgba(0,0,0,.22));
+}
+html body .bottom-nav .nav-btn[data-target="dua"] .lab,
+html body .bottom-nav .kids-academy-tab .lab{
+  white-space:nowrap!important;
+  word-break:keep-all!important;
+  overflow:visible!important;
+  letter-spacing:0!important;
+}
+html body .bottom-nav{grid-template-columns:repeat(5,minmax(0,1fr))!important;}
+/* The Salaf button becomes a premium Hören hero, NOT another bottom tab. */
+html body #view-stories .kids-listening-shortcuts{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+html body #view-stories .kids-listening-shortcuts-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:13px!important;
+}
+html body #view-stories .kids-listen-shortcut.kids-salaf-listening-hero{
+  box-sizing:border-box!important;
+  isolation:isolate!important;
+  display:flex!important;
+  position:relative!important;
+  align-items:flex-end!important;
+  justify-content:flex-start!important;
+  min-height:clamp(205px,46vw,278px)!important;
+  width:100%!important;
+  max-width:100%!important;
+  padding:20px clamp(15px,5vw,25px)!important;
+  margin:0!important;
+  background-color:#213D3B!important;
+  background-image:linear-gradient(0deg,rgba(10,30,35,.95),rgba(10,30,35,.17) 82%),url("/kids/assets/salaf/salaf-cinema-hero-boy-v1353.jpg")!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  border:1px solid rgba(235,200,136,.37)!important;
+  border-radius:clamp(22px,6vw,31px)!important;
+  box-shadow:0 16px 32px rgba(0,0,0,.21)!important;
+  overflow:hidden!important;
+  text-align:left!important;
+  color:#FFF9EE!important;
+}
+html body #view-stories .kids-salaf-listening-hero .kids-listen-shortcut-art{
+  position:relative!important;
+  z-index:1!important;
+  flex:0 0 57px!important;
+  align-self:flex-end!important;
+  width:57px!important;
+  height:57px!important;
+  margin-right:13px!important;
+  background-size:contain!important;
+}
+html body #view-stories .kids-salaf-listening-hero .kids-listen-shortcut-copy{
+  position:relative!important;
+  z-index:2!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+  justify-content:flex-end!important;
+  min-width:0!important;
+  gap:5px!important;
+  text-shadow:0 3px 12px rgba(0,0,0,.56)!important;
+}
+html body #view-stories .kids-salaf-listening-hero .kids-listen-shortcut-copy strong{
+  color:#FFF9F0!important;
+  font-size:clamp(24px,5.7vw,32px)!important;
+  line-height:1.08!important;
+  white-space:normal!important;
+  overflow-wrap:normal!important;
+  text-align:left!important;
+}
+html body #view-stories .kids-salaf-listening-hero .kids-listen-shortcut-copy small{
+  color:#FFE6C8!important;
+  font-size:clamp(12px,3.15vw,15px)!important;
+  line-height:1.32!important;
+  text-align:left!important;
+}
+html body .app[data-gender="girl"] #view-stories .kids-salaf-listening-hero{
+  background-color:#40273D!important;
+  background-image:linear-gradient(0deg,rgba(48,24,47,.95),rgba(48,24,47,.12) 84%),url("/kids/assets/salaf/salaf-cinema-hero-girl-v1353.jpg")!important;
+  border-color:rgba(255,191,227,.39)!important;
+}
+html body .app[data-gender="girl"] #view-stories .kids-salaf-listening-hero .kids-listen-shortcut-copy small{
+  color:#FFDFEA!important;
+}
+/* Keep the former in-Hören Duʿāʾ shortcut as an unobtrusive secondary card;
+   the complete library is now one tap away on the fourth tab. */
+html body #view-stories .kids-listen-dua-secondary{
+  box-sizing:border-box!important;
+  display:flex!important;
+  align-items:center!important;
+  width:100%!important;
+  min-height:86px!important;
+  padding:12px 16px!important;
+  border-radius:22px!important;
+}
+html body #view-stories .kids-listen-dua-secondary .kids-listen-shortcut-art{
+  flex:0 0 55px!important;
+  width:55px!important;
+  height:55px!important;
+}
+html body #view-stories .kids-listen-dua-secondary .kids-listen-shortcut-copy{
+  min-width:0!important;
+  text-align:left!important;
+}
+@media(max-width:365px){
+ html body .bottom-nav .kids-academy-tab .ico{width:32px!important;height:32px!important;}
+ html body #view-stories .kids-salaf-listening-hero .kids-listen-shortcut-art{
+   flex-basis:43px!important;width:43px!important;height:43px!important;margin-right:9px!important;
+ }
+}
