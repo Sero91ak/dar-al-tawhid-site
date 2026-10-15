@@ -1,0 +1,80 @@
+name: KIDS V4 First150 Offline Human Listening Desk (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/build_quiz_v4_first150_hearing_review.py'
+      - '.github/workflows/kids-v4-first150-hearing-review.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-first150-v4-human-review-artifact
+  cancel-in-progress: false
+
+jobs:
+  build-offline-listening-review:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Fetch KIDS review branch only, never public main
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Build private hearing checklist with every original MP3 verified
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/build_quiz_v4_first150_hearing_review.py
+          python3 kids/tools/build_quiz_v4_first150_hearing_review.py
+          python3 - <<'PY'
+          import json, pathlib, zipfile
+          root=pathlib.Path("kids/review-only")
+          bundle=root/"quiz-v4-first150-hearing-bundle.zip"
+          with zipfile.ZipFile(bundle) as z:
+              files=z.namelist()
+              assert len(files)==253, (len(files), "252 verified MP3 and one review HTML expected")
+              assert files[0]=="kids/review-only/quiz-v4-first150-hearing-review.html"
+              assert all(p.endswith(".mp3") for p in files[1:])
+              assert z.testzip() is None
+              html=z.read(files[0]).decode("utf-8")
+              assert "TAWḤĪD KIDS" in html
+              assert "approvedAudioShaByTextSha" in html
+              assert 'id="review-data"' in html
+              assert "https://api.elevenlabs.io" not in html
+          print("PASS: offline bundle has 252 original MP3 files + 1 hearing page; 0 TTS credits")
+          PY
+      - name: Save review HTML only on PR, not the ZIP nor a public app page
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-hearing-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          git add kids/review-only/quiz-v4-first150-hearing-review.html
+          if git diff --cached --quiet; then
+            echo "Listening review HTML already current"
+            exit 0
+          fi
+          git commit -m "review(kids): stage offline 150 V4 listening page without approving or publishing"
+          for retry in 1 2 3; do
+            if git push origin HEAD:"$branch"; then
+              echo "Committed hearing checklist to review branch only."
+              exit 0
+            fi
+            git fetch origin "$branch"
+            if ! git rebase FETCH_HEAD; then
+              echo "::error::Review-only HTML push conflict; artifact remains available."
+              exit 1
+            fi
+          done
+          exit 1
+      - name: Keep standalone offline hearing package for manual export
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-first150-human-hearing-offline-review
+          retention-days: 90
+          if-no-files-found: warn
+          path: kids/review-only/quiz-v4-first150-hearing-bundle.zip
