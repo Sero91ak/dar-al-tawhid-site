@@ -2,7 +2,7 @@
   "policy": "KIDS SALAF 8 TOPICS × 4 COMPLETE STORIES",
   "targetPerCategory": 4,
   "totalTarget": 32,
-  "notes": "INTERNAL EDITORIAL PROGRESS ONLY; pendingSlots are NOT children's stories, never render as visitor content.",
+  "notes": "INTERNAL EDITORIAL PROGRESS ONLY; 32 distinct full German master stories approved (exactly four in each category). No separate audio masters generated; source URLs remain internal.",
   "categories": [
     {
       "id": "rahma",
@@ -10,10 +10,12 @@
       "target": 4,
       "approvedIds": [
         "layth-das-grosse-honiggeschenk",
-        "ibrahim-ibn-adham-teilt-sein-brot"
+        "ibrahim-ibn-adham-teilt-sein-brot",
+        "abu-hanifa-unterstuetzt-abu-yusuf",
+        "ibn-al-mubarak-bewahrt-reisegeld"
       ],
       "pendingIds": [],
-      "emptySlots": 2
+      "emptySlots": 0
     },
     {
       "id": "sidq",
@@ -22,20 +24,24 @@
       "approvedIds": [
         "rabi-ibn-khuthaym-wissen-und-ehrlichkeit",
         "ibn-al-mubarak-geliehener-stift",
-        "yunus-ibn-ubayd-fairer-preis"
+        "yunus-ibn-ubayd-fairer-preis",
+        "abu-awanah-korrigiert-seinen-bericht"
       ],
       "pendingIds": [],
-      "emptySlots": 1
+      "emptySlots": 0
     },
     {
       "id": "sabr",
       "title": "Geduld & Sanftmut",
       "target": 4,
       "approvedIds": [
-        "ahmad-ibn-hanbal-standhaft-im-glauben"
+        "ahmad-ibn-hanbal-standhaft-im-glauben",
+        "urwah-ibn-al-zubayr-geduldig-und-dankbar",
+        "abdullah-ibn-awn-bleibt-ruhig",
+        "yahya-al-qattan-bleibt-ruhig-bei-beleidigung"
       ],
       "pendingIds": [],
-      "emptySlots": 3
+      "emptySlots": 0
     },
     {
       "id": "ilm",
@@ -44,10 +50,11 @@
       "approvedIds": [
         "malik-mut-zur-wahrheit",
         "said-ibn-al-musayyib-reise-fuer-hadith",
-        "hafsa-bint-sirin-quran-mit-zwoelf"
+        "hafsa-bint-sirin-quran-mit-zwoelf",
+        "mujahid-ibn-jabr-fragt-zu-jeder-ayah"
       ],
       "pendingIds": [],
-      "emptySlots": 1
+      "emptySlots": 0
     },
     {
       "id": "adab",
@@ -55,10 +62,12 @@
       "target": 4,
       "approvedIds": [
         "shafii-freundschaft-trotz-unterschied",
-        "ayyub-sakhtiyani-freundliches-laecheln"
+        "ayyub-sakhtiyani-freundliches-laecheln",
+        "abdullah-ibn-wahb-lernt-adab-bei-malik",
+        "nafi-lehrt-den-jungen-malik"
       ],
       "pendingIds": [],
-      "emptySlots": 2
+      "emptySlots": 0
     },
     {
       "id": "family",
@@ -67,10 +76,11 @@
       "approvedIds": [
         "ibn-sirin-sanfte-stimme-fuer-seine-mutter",
         "uways-al-qarani-liebe-zu-seiner-mutter",
-        "abdullah-ibn-muhammad-schulden-seines-vaters"
+        "abdullah-ibn-muhammad-schulden-seines-vaters",
+        "habib-ibn-ash-shahid-erzieht-seinen-sohn"
       ],
       "pendingIds": [],
-      "emptySlots": 1
+      "emptySlots": 0
     },
     {
       "id": "hikma",
@@ -79,10 +89,11 @@
       "approvedIds": [
         "umar-ibn-abd-al-aziz-erst-ruhe-dann-entscheiden",
         "shurayh-der-rat-aus-quran-und-sunnah",
-        "iyas-ibn-muawiya-der-richtige-rat"
+        "iyas-ibn-muawiya-der-richtige-rat",
+        "shubah-akzeptiert-ein-faires-urteil"
       ],
       "pendingIds": [],
-      "emptySlots": 1
+      "emptySlots": 0
     },
     {
       "id": "shukr",
@@ -90,10 +101,14 @@
       "target": 4,
       "approvedIds": [
         "fudayl-ibn-iyad-dankbar-fuer-die-hilfe",
-        "sufyan-ibn-uyaynah-dankbar-und-geduldig"
+        "sufyan-ibn-uyaynah-dankbar-und-geduldig",
+        "abu-hazim-geschenke-richtig-nutzen",
+        "awn-ibn-abdullah-dankbarkeit-gesundheit"
       ],
       "pendingIds": [],
-      "emptySlots": 2
+      "emptySlots": 0
     }
-  ]
+  ],
+  "completedAt": "2026-10-15",
+  "status": "four-per-category-manifest-complete-pending-production-deploy"
 }
