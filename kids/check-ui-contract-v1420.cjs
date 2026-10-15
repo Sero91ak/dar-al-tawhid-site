@@ -61,7 +61,7 @@ for(const k of ["kids-academy-hero-boys-v1.jpg","kids-academy-hero-girls-v1.jpg"
 assert.ok(salaf.includes('salaf-story-nav kids-detail-appbar'),"Shared reader header must remain");
 assert.ok(html.includes('if(name==="dua"&&window.DARKidsDuaHub'),"Duʿāʾ tab must open real hub");
 assert.equal(v.buildId,"kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren");
-assert.ok(sw.includes("dar-al-tawhid-kids-"+String(v.visualSystem.serviceWorkerCache||"").replace(/^v/,""))&&sw.includes('kids-nav-v1421.css?v=1422'),"PWA cache must be updated");
+assert.ok(sw.includes("dar-al-tawhid-kids-"+String(v.visualSystem.serviceWorkerCache||""))&&sw.includes('kids-nav-v1421.css?v=1422'),"PWA cache must be updated");
 assert.ok(sw.includes('kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren'),"SW build ID must match");
 
 const navigation=read("kids/navigation-v1182.js"),motion=read("kids/kids-motion-v1422.css");
