@@ -1,0 +1,152 @@
+/* TAWḤĪD KIDS · GIRLS PROFILE COLOR AUTHORITY V2
+   Test-only final color pass across all non-Home learning surfaces.
+   PALETTE: plum #2b2035, mauve #48334b, rose #f0c9de, warm cream.
+   Never modify pictures, layout/geometry, scroll behavior, five prayers,
+   Home mosque hero, TEST control, floating navigation or correctness states.
+   Main visitor app must never import this staging-only asset. */
+
+/* A consistent girl-colored canvas below each full-bleed hero.
+   These rules apply only with the live girl profile AND a non-Home view. */
+html:has(body .app[data-gender="girl"] > .shell > :is(#view-stories,#view-salaf,#view-quran,#view-parents,#view-dua).view.active),
+html body:has(.app[data-gender="girl"] > .shell > :is(#view-stories,#view-salaf,#view-quran,#view-parents,#view-dua).view.active),
+html body .app[data-gender="girl"]:has(> .shell > :is(#view-stories,#view-salaf,#view-quran,#view-parents,#view-dua).view.active),
+html body .app[data-gender="girl"]:has(> .shell > :is(#view-stories,#view-salaf,#view-quran,#view-parents,#view-dua).view.active) > .shell{
+  --girls-v2-surface:#2b2035;
+  --girls-v2-panel:#443048;
+  --girls-v2-border:rgba(240,196,221,.38);
+  --girls-v2-rose:#f0c9de;
+  --girls-v2-ink:#fff5f0;
+  background-color:var(--girls-v2-surface)!important;
+}
+/* For shell-only background fades, not the untouched artwork of any hero. */
+html body .app[data-gender="girl"] > .shell > :is(#view-stories,#view-salaf,#view-quran,#view-parents,#view-dua).view.active{
+  background-color:#2b2035!important;
+}
+/* SALAF: the previous girl's screenshot showed teal in the surrounding
+   shell. Harmonize root, shell, tile frame and opaque tab backdrop. */
+html body .app[data-gender="girl"] #view-salaf,
+html body #view-salaf[data-profile="girl"]{
+  --salaf-shell-surface:#2b2035!important;
+  --salaf-color:#2b2035!important;
+  --sl-bg:#2b2035!important;
+  --sl-panel:#48334b!important;
+  --kids-v2-bg:#2b2035!important;
+  --kids-v2-panel:#48334b!important;
+  --kids-v2-accent:#f0c9de!important;
+  --kids-v2-line:rgba(240,196,221,.42)!important;
+  --salaf-glow:#f0c9de!important;
+  --salaf-stroke:rgba(240,196,221,.42)!important;
+  background-color:#2b2035!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-wrap,
+html body #view-salaf[data-profile="girl"] .salaf-wrap,
+html body .app[data-gender="girl"] #view-salaf .salaf-pane,
+html body #view-salaf[data-profile="girl"] .salaf-pane,
+html body .app[data-gender="girl"] #view-salaf .salaf-results,
+html body #view-salaf[data-profile="girl"] .salaf-results{
+  background-color:transparent!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-topic,
+html body #view-salaf[data-profile="girl"] .salaf-topic{
+  border-color:rgba(240,196,221,.48)!important;
+  background-color:#48334b!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-switch,
+html body #view-salaf[data-profile="girl"] .salaf-switch{
+  background-color:#3b2943!important;
+  border-color:rgba(240,196,221,.45)!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-story,
+html body #view-salaf[data-profile="girl"] .salaf-story{
+  background-color:#48334b!important;
+  border-color:rgba(240,196,221,.38)!important;
+}
+/* PROPHETS: full-screen library + detail are body siblings of the .app.
+   Explicit data-profile is set at opening; the live app is fallback. */
+html body #psLibraryPage.ps-library-page[data-profile="girl"],
+html body:has(.app[data-gender="girl"]) #psLibraryPage.ps-library-page{
+  --ps-v2-bg:#2b2035!important;
+  --ps-v2-panel:#48334b!important;
+  --ps-v2-panel-deep:#36263f!important;
+  --ps-v2-accent:#f7d7e7!important;
+  --ps-v2-glow:#e9b3d1!important;
+  --ps-v2-muted:#e7d6e4!important;
+  --ps-v2-border:rgba(240,196,221,.45)!important;
+  background:linear-gradient(180deg,#34253e,#2b2035 55%)!important;
+}
+html body #psLibraryPage[data-profile="girl"] .ps-library-nav,
+html body:has(.app[data-gender="girl"]) #psLibraryPage .ps-library-nav{
+  background:#34253e!important;
+  border-bottom-color:rgba(240,196,221,.42)!important;
+}
+html body #psLibraryPage[data-profile="girl"] .ps-muhammad-panel,
+html body:has(.app[data-gender="girl"]) #psLibraryPage .ps-muhammad-panel{
+  background:linear-gradient(130deg,#5a4056,#392943)!important;
+  border-top-color:rgba(240,196,221,.38)!important;
+}
+html body #psLibraryPage[data-profile="girl"] .ps-story-row,
+html body:has(.app[data-gender="girl"]) #psLibraryPage .ps-story-row{
+  background:linear-gradient(120deg,#49334c,#30243d)!important;
+  border-color:rgba(240,196,221,.43)!important;
+}
+html body #psLibraryPage[data-profile="girl"] .ps-story-row::before,
+html body:has(.app[data-gender="girl"]) #psLibraryPage .ps-story-row::before{
+  background:linear-gradient(90deg,transparent 24%,rgba(49,30,57,.20) 34%,rgba(49,30,57,.80) 58%,rgba(43,29,53,.95) 100%)!important;
+}
+html body #psLibraryPage[data-profile="girl"] :is(.ps-row-rank,.ps-muhammad-kicker,.ps-row-ar,.ps-sequence-head>span),
+html body:has(.app[data-gender="girl"]) #psLibraryPage :is(.ps-row-rank,.ps-muhammad-kicker,.ps-row-ar,.ps-sequence-head>span){
+  color:#f5cfdf!important;
+}
+html body #psModal.ps-modal[data-profile="girl"] .ps-sheet,
+html body:has(.app[data-gender="girl"]) #psModal.ps-modal .ps-sheet,
+html body #psModal.ps-modal[data-profile="girl"] .ps-body,
+html body:has(.app[data-gender="girl"]) #psModal.ps-modal .ps-body{
+  background:#2b2035!important;
+}
+html body #psModal.ps-modal[data-profile="girl"] .ps-hero-copy,
+html body:has(.app[data-gender="girl"]) #psModal.ps-modal .ps-hero-copy{
+  background:linear-gradient(180deg,#49334b,#2b2035)!important;
+}
+/* Other body-mounted story libraries and reading/detail overlays.
+   Do not touch their original images or interactive geometry. */
+html body:has(.app[data-gender="girl"]) :is(#msLibraryPage,#syLibraryPage,.ms-library-page,.sy-library-page,#ghWorld.gh-world,#ghPlayer.gh-player){
+  background-color:#2b2035!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msLibraryPage,#syLibraryPage,.ms-library-page,.sy-library-page) :is(.ms-library-nav,.ms-list,.ms-library-scroll){
+  background-color:#2b2035!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msLibraryPage,#syLibraryPage,.ms-library-page,.sy-library-page) .ms-story-row{
+  background-color:#443048!important;
+  border-color:rgba(240,196,221,.38)!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal).ms-modal :is(.ms-sheet,.ms-body,.ms-scroll){
+  background-color:#2b2035!important;
+}
+html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal).ms-modal :is(.ms-profile-grid section,.ms-question,.ms-read,.ms-sources){
+  background-color:#443048!important;
+  border-color:rgba(240,196,221,.35)!important;
+}
+html body:has(.app[data-gender="girl"]) #ghWorld .gh-world-scroll,
+html body:has(.app[data-gender="girl"]) #ghWorld .gh-content,
+html body:has(.app[data-gender="girl"]) #ghPlayer .gh-player-body{
+  background-color:#2b2035!important;
+}
+html body:has(.app[data-gender="girl"]) #ghWorld :is(.gh-category,.gh-story,.gh-continue-card),
+html body:has(.app[data-gender="girl"]) #ghPlayer .gh-controls{
+  background-color:#443048!important;
+  border-color:rgba(240,196,221,.35)!important;
+}
+/* QURʾĀN, DUʿĀʾ and Eltern: neutral empty backgrounds, not photos/hero art. */
+html body .app[data-gender="girl"] #view-quran :is(.quran-actions,.quran-hero-copy,.surah-card,.verse-card){
+  background-color:#443048!important;
+  border-color:rgba(240,196,221,.33)!important;
+}
+html body .app[data-gender="girl"] #view-dua :is(.duahub-card,.duahub-action,.duahub-textcard){
+  background-color:#443048!important;
+  border-color:rgba(240,196,221,.34)!important;
+}
+html body .app[data-gender="girl"] #view-parents :is(.parent-card,.profile-row,.info-card){
+  background-color:#443048!important;
+  border-color:rgba(240,196,221,.34)!important;
+}
+/* No selectors for Home, prayers, scroll behavior, navigation or TEST. */
