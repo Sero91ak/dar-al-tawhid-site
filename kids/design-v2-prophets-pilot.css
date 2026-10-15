@@ -16,9 +16,7 @@
 /* The library and the full-screen reader are siblings of .app, not children.
    Use the live profile to support switches between girl and boy profiles. */
 html:has(.app[data-gender="girl"]) #psLibraryPage.ps-library-page,
-html:has(.app[data-gender="girl"]) #psModal.ps-modal,
-html[data-kids-boot-gender="girl"] #psLibraryPage.ps-library-page,
-html[data-kids-boot-gender="girl"] #psModal.ps-modal{
+html:has(.app[data-gender="girl"]) #psModal.ps-modal{
   --ps-v2-bg:#2c2039;
   --ps-v2-panel:#44334c;
   --ps-v2-panel-deep:#30253d;
@@ -96,8 +94,7 @@ html body #psLibraryPage .ps-story-row::before{
   /* Reuse existing image-to-text veil, tint the gradient only. */
   background:linear-gradient(90deg,transparent 26%,rgba(5,31,46,.23) 35%,rgba(5,31,46,.72) 55%,rgba(5,31,46,.90) 100%)!important;
 }
-html:has(.app[data-gender="girl"]) body #psLibraryPage .ps-story-row::before,
-html[data-kids-boot-gender="girl"] body #psLibraryPage .ps-story-row::before{
+html:has(.app[data-gender="girl"]) body #psLibraryPage .ps-story-row::before{
   background:linear-gradient(90deg,transparent 26%,rgba(49,31,55,.24) 35%,rgba(49,31,55,.75) 55%,rgba(49,31,55,.94) 100%)!important;
 }
 html body #psLibraryPage .ps-row-title{
@@ -123,8 +120,7 @@ html body #psLibraryPage .ps-row-rank{
   border-color:var(--ps-v2-border)!important;
   background:rgba(4,24,37,.79)!important;
 }
-html:has(.app[data-gender="girl"]) body #psLibraryPage .ps-row-rank,
-html[data-kids-boot-gender="girl"] body #psLibraryPage .ps-row-rank{
+html:has(.app[data-gender="girl"]) body #psLibraryPage .ps-row-rank{
   background:rgba(48,29,54,.82)!important;
 }
 html body #psLibraryPage :is(.ps-story-row,.ps-muhammad-card):focus-visible{
