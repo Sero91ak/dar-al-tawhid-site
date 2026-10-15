@@ -1,3 +1,10 @@
+## 15.10.2026 · 12 alte Überlieferungsnachweise bestätigt – 22 offen
+
+- **Bis zur aktuellen Quellenrunde** sind nun **12 ursprünglich nur historisch registrierte Ḥadīṯ-Zuordnungen** der Lektionen 57–68 anhand der angegebenen arabischen Originaltexte, Sammlungen, Nummern und Überlieferer über Dorar gegengeprüft. **22 historische Nachweise 69–90** weiterhin ohne unabhängige Prüfung, im Register als solche gekennzeichnet.
+- Abgeglichen: al-Buḫārī **6116**, **164**, **4474**, **7410**, **6026**, **2320**, **6094**, **6018**, **6464**; Muslim **2723**, **8**, **2699**. Nummern in parallelen Ausgaben oder getrennte Überlieferungsketten werden nicht vermischt. Alle betreffenden Belege und Kindergrenzen stehen in `kids-akademie/research/SOURCE_COVERAGE_208_20261015.md`.
+- Der vorhandene Entwurfs-QA-Workflow `.github/workflows/kids-akademie-editorial-readonly-qa.yml` wurde um den Test `kids/tools/test-academy-source-registry-complete-v1.cjs` samt Path-Watch ergänzt. Dieser schützt **208/208 Lektionsverknüpfungen, 218 eindeutige Source-IDs und Keys, 12 direkt geprüfte Überlieferungsreferenzen** sowie die ausdrücklich noch nicht geprüften Quellen. Der letzte nach den Quellenupdates abgeschlossene GitHub-Actions-Lauf war erfolgreich, neuere Teständerungen erneut im CI zu bestätigen.
+- **Nächste fachliche Kontrolle:** Quellen 69–72 einzeln aus den originalen Sammlungen prüfen, einschließlich möglicher hadithkritischer Unterschiede bei Parallelfassungen. Danach 73–90, pädagogische Prüfung der 624 Altersfassungen und gesonderte hanbalitische Fiqh-Kontrolle. **0/624 final freigegeben; 0 neue Audio-Credits; kein Live-Deploy; kein Merge.**
+
 ## 15.10.2026 · Alle 208 Lektions-IDs quellengebunden – 32 historische Nachweise noch zu prüfen
 
 - **Aktueller Arbeitsstand:** 208/208 Jahresplan-Lektionen im zentralen `SOURCE_REGISTRY.json` mit je mindestens einem realen HTTPS-Quellenlink verbunden; **218 Datensätze und 218 eindeutige `sourceId`/`key`-Paare**, **0 ungebundene IDs**. Alle **624 Altersfassungen** sind weiterhin **nicht wissenschaftlich freigegeben**. Details: `kids-akademie/research/SOURCE_COVERAGE_208_20261015.md`.
