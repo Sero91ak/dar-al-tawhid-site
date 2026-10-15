@@ -15,7 +15,7 @@
     var profiles=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
     var p=Array.isArray(profiles)?profiles.find(function(x){return String(x&&x.id)===String(id)}):null;
     if(p&&(p.gender==="girl"||p.gender==="boy")){
-      gender=p.gender;age=window.DARKidsBirthMonth?.resolve(id,p.age)||p.age||"";
+      gender=p.gender;age=(typeof window!=="undefined"&&window.DARKidsBirthMonth?window.DARKidsBirthMonth.resolve(id,p.age):p.age)||"";
     }else if(!id&&localStorage.getItem("kids.guest.v1")==="1"){
       var g=localStorage.getItem("kids.guest.gender.v1");
       if(g==="girl"||g==="boy")gender=g;
