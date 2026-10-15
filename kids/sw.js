@@ -6,6 +6,7 @@ const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
+  "/kids/kids-ui-contract-v1420.css?v=1420",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1272",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/akademie/index.html",
@@ -452,6 +453,10 @@ self.addEventListener("fetch",function(event){
   // audio lookup even while its 900-question catalogue and manifest are fresh.
   // Keep the Kids Duʿāʾ V4 voice player fresh after an installed PWA update.
   /* Keep profile avatars, parent profiles and Duʿāʾ hub current after learning-system retirement. */
+  if(url.pathname==="/kids/kids-ui-contract-v1420.css"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
   if(url.pathname==="/kids/dua-hub-v1219.js"){
     event.respondWith(networkFirst(request));
     return;
