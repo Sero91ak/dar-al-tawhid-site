@@ -3029,6 +3029,43 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
  },true);
 })();
 </script>
+<style id="kids-home-academy-first-frame-v1424">
+/* Stable geometry on the very first Kids frame, before late legacy styles. */
+#view-today #resumeButton[hidden]{display:none!important}
+#view-today > #kidsAcademyPriority.kids-academy-priority{
+ display:flex!important;align-items:center!important;gap:clamp(13px,3.5vw,23px)!important;
+ box-sizing:border-box!important;min-height:clamp(214px,42vw,266px)!important;
+ padding:clamp(19px,4vw,29px)!important;margin-block:14px 22px!important;
+ border:1.5px solid rgba(242,208,143,.70)!important;border-radius:clamp(24px,5vw,31px)!important;
+ color:#fff8eb!important;text-align:left!important;overflow:hidden!important;
+ background-color:#152e38!important;
+ background-image:linear-gradient(90deg,rgba(7,28,38,.95),rgba(8,31,41,.79) 48%,rgba(8,29,40,.26)),url("/desktop-preview/assets/kids-academy-hero-boys-v1.jpg")!important;
+ background-size:cover!important;background-position:center!important;
+}
+#view-today > #kidsAcademyPriority .kids-academy-priority-art{
+ display:block!important;flex:0 0 clamp(57px,14vw,82px)!important;
+ width:clamp(57px,14vw,82px)!important;height:clamp(57px,14vw,82px)!important;
+ background:rgba(11,35,44,.70) url("/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422") center/90% no-repeat!important;
+}
+#view-today > #kidsAcademyPriority .kids-academy-priority-copy{
+ display:flex!important;flex-direction:column!important;gap:clamp(5px,1.6vw,11px)!important;min-width:0!important;
+}
+#view-today > #kidsAcademyPriority .kids-academy-priority-copy > strong{
+ font-family:"Fredoka",system-ui,sans-serif!important;font-size:clamp(25px,6.6vw,39px)!important;
+}
+html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
+ background-color:#37283d!important;
+ background-image:linear-gradient(90deg,rgba(50,30,56,.96),rgba(57,33,58,.80) 48%,rgba(59,32,56,.24)),url("/desktop-preview/assets/kids-academy-hero-girls-v1.jpg")!important;
+ border-color:rgba(247,190,226,.75)!important;
+}
+@media(max-width:780px){
+ #view-today > :is(#kidsAcademyPriority,.big-choice-grid,.kids-salaf-feature,#knowledgeCard){
+  width:calc(100vw - 28px)!important;max-width:none!important;
+  margin-left:calc(50% - 50vw + 14px)!important;margin-right:0!important;
+ }
+}
+#view-today > .big-choice-grid{grid-template-columns:minmax(0,1fr)!important}
+</style>
 </head>
 <body>
 <div id="kidsUpdateLayer" class="kids-update-layer">
