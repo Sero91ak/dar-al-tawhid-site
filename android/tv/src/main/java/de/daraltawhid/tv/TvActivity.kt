@@ -75,15 +75,8 @@ class TvActivity : Activity() {
     private var quranChapterLoading = false
     private val quranChapterLengths = mutableMapOf(1 to 7, 114 to 6)
     private var quranChapterNames: Array<String> = emptyArray()
-    private val quranReciters = listOf(
-        "ar.alafasy" to "Mišārī Rāšid al-ʿAfāsī",
-        "ar.abdurrahmaansudais" to "ʿAbd ar-Raḥmān as-Sudays",
-        "ar.saoodshuraym" to "Saʿūd aš-Šuraym",
-        "ar.husary" to "Maḥmūd al-Ḥuṣarī",
-        "ar.minshawi" to "Muḥammad al-Minšāwī",
-        "ar.abdulbasitmurattal" to "ʿAbd al-Bāsiṭ",
-        "ar.mahermuaiqly" to "Māhir al-Muʿayqlī"
-    )
+    private var quranReciters = TvQuranReciters.fallback.map { it.edition to it.pickerLabel }
+    private var recitersLoaded = false
 
     private fun stopQuranAudio() {
         audioGeneration += 1
@@ -347,6 +340,7 @@ class TvActivity : Activity() {
             ?.takeIf { id -> quranReciters.any { it.first == id } } ?: "ar.alafasy"
         val initial = preferences.getString("tab", "home") ?: "home"
         show(initial)
+        loadAvailableReciters()
         nav.getChildAt(TvDashboardMode.entries.indexOf(TvDashboardMode.fromRoute(initial)))?.requestFocus()
     }
 
@@ -765,6 +759,22 @@ class TvActivity : Activity() {
         }
     }
 
+
+    private fun loadAvailableReciters() {
+        if (recitersLoaded) return
+        recitersLoaded = true
+        fetchJson("https://dar-al-tawhid.de/data/quran-reciters.json") { catalog ->
+            val latest = TvQuranReciters.fromCatalog(catalog)
+            val next = latest.map { it.edition to it.pickerLabel }
+            if (next == quranReciters) return@fetchJson
+            quranReciters = next
+            if (quranReciters.none { it.first == selectedReciter }) {
+                selectedReciter = TvQuranReciters.fallback.first().edition
+                saveQuranPosition()
+            }
+            if (activeTab == "quran" && !quranAutoPlay) show("quran")
+        }
+    }
 
     private fun saveQuranPosition() {
         getPreferences(MODE_PRIVATE).edit()
