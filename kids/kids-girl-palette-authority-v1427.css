@@ -1,0 +1,147 @@
+/* KIDS_GIRL_PALETTE_AUTHORITY_V1427
+ * GIRL PROFILE ONLY. Last authoring layer after index inline styles.
+ * Fix the cascade leak: the V1253 Dua CTA uses THREE IDs and overrides
+ * the older girl-only .kids-explain-action colour contract.
+ * Never change guest/boy, images, source text, Qur'an, success/wrong statuses,
+ * dock sizing, touch, scroll or any content / audio control.
+ */
+html body .app[data-gender="girl"]{
+  --kg1427-canvas:#2b2035;
+  --kg1427-paper:#302239;
+  --kg1427-paper-raised:#42304a;
+  --kg1427-action-a:#855271;
+  --kg1427-action-b:#593b5c;
+  --kg1427-line:rgba(246,197,219,.38);
+  --kg1427-text:#fff2f0;
+  --kg1427-subtext:#f4d4e3;
+  --kg1427-gold:#f5d08b;
+}
+/* The Dua screen is not a translucent navy window onto the boy shell.
+   All non-illustrative layers use one consistent dark-plum foundation. */
+html body .app[data-gender="girl"] #view-dua.view,
+html body .app[data-gender="girl"] #view-dua .duahub-home,
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open,
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open .duahub-detail-scroll{
+  background-color:var(--kg1427-canvas)!important;
+  background-image:none!important;
+  color:var(--kg1427-text)!important;
+}
+/* Preserve the natural edge-to-edge hero image; only replace its navy
+   lower shadow with the girl's plum. A separate ::after provides the seam. */
+html body .app[data-gender="girl"] #view-dua .duahub-head::after{
+  background-image:linear-gradient(180deg,transparent 37%,rgba(47,31,53,.23) 62%,var(--kg1427-canvas) 100%)!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open .duahub-detail-hero::after{
+  background-image:linear-gradient(180deg,transparent 32%,rgba(48,30,53,.15) 58%,var(--kg1427-canvas) 100%)!important;
+}
+/* One palette at the fixed Du'a detail appbar and the scroll surface.
+   Don't change rounded corners, safe area, layout or back control. */
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open > .kids-detail-appbar{
+  background-color:#34233d!important;
+  background-image:linear-gradient(180deg,#372540,#2e2138)!important;
+  border-bottom-color:var(--kg1427-line)!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open > .kids-detail-appbar .kids-detail-dock-back{
+  background:linear-gradient(145deg,#63435e,#443049)!important;
+  border-color:var(--kg1427-line)!important;
+  color:var(--kg1427-text)!important;
+}
+/* Main Dua library: plain panels/labels, never photographic artwork. */
+html body .app[data-gender="girl"] #view-dua :is(.duahub-action,.duahub-card,.duahub-resume-card,.duahub-textcard):not(.duahub-detail-hero){
+  border-color:var(--kg1427-line)!important;
+}
+html body .app[data-gender="girl"] #view-dua :is(.duahub-empty,.duahub-loading){
+  background-color:#382a41!important;
+  background-image:none!important;
+  border-color:var(--kg1427-line)!important;
+  color:var(--kg1427-subtext)!important;
+}
+html body .app[data-gender="girl"] #view-dua :is(.duahub-search,.duahub-chips button:not(.active):not([aria-pressed="true"])){
+  border-color:var(--kg1427-line)!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open .duahub-detail-intro{
+  border-left-color:rgba(246,200,222,.56)!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open .duahub-detail-prompt,
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open .duahub-meaning{
+  color:var(--kg1427-text)!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open .duahub-source,
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open .duahub-source b{
+  color:var(--kg1427-subtext)!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open :is(.duahub-source,.duahub-textcard){
+  border-color:rgba(242,197,216,.21)!important;
+}
+/* V1253 highly specific ID selector overrides every older girl action rule.
+   Repeat ALL THREE IDs here plus the profile gate to win the cascade. */
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open .duahub-textcard button#duaHubGerman.kids-explain-action,
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open button#duaHubGerman.duahub-german-audio{
+  background:#67445f!important;
+  background-color:#67445f!important;
+  background-image:linear-gradient(125deg,var(--kg1427-action-a),var(--kg1427-action-b))!important;
+  border-color:rgba(251,201,222,.56)!important;
+  box-shadow:0 5px 14px rgba(25,13,30,.18),inset 0 1px rgba(255,237,245,.11)!important;
+  color:var(--kg1427-text)!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open .duahub-textcard button#duaHubGerman.kids-explain-action:not(:disabled):is(:active,:hover){
+  background-image:linear-gradient(125deg,#94627e,#674465)!important;
+  border-color:#f4bfd8!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open button#duaHubGerman.kids-explain-action .kids-explain-copy strong{
+  color:var(--kg1427-text)!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open button#duaHubGerman.kids-explain-action .kids-explain-copy small{
+  color:var(--kg1427-subtext)!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open button#duaHubGerman.kids-explain-action > .kids-explain-icon{
+  color:#3b2639!important;
+  background:linear-gradient(145deg,#f8daa3,#e1b875)!important;
+  border-color:rgba(255,239,213,.32)!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open button#duaHubGerman.kids-explain-action > .kids-explain-chevron{
+  border-top-color:var(--kg1427-gold)!important;
+  border-right-color:var(--kg1427-gold)!important;
+}
+/* Shared explanation actions in stories, Du'a and lessons (excluding
+   the already higher-specificity three-ID Dua action handled above). */
+html body .app[data-gender="girl"] button.kids-explain-action{
+  background-color:#67445f!important;
+  background-image:linear-gradient(125deg,var(--kg1427-action-a),var(--kg1427-action-b))!important;
+  border-color:var(--kg1427-line)!important;
+  color:var(--kg1427-text)!important;
+}
+html body .app[data-gender="girl"] button.kids-explain-action .kids-explain-copy :is(strong,small){
+  color:var(--kg1427-text)!important;
+}
+html body .app[data-gender="girl"] button.kids-explain-action .kids-explain-copy small{
+  color:var(--kg1427-subtext)!important;
+}
+/* The book/listen action remains individually pink/gold: no teal fallback. */
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open .duahub-detail-actions .duahub-listen:not(:disabled){
+  background:linear-gradient(125deg,#aa7397,#81567f)!important;
+  border-color:rgba(255,205,228,.50)!important;
+  color:var(--kg1427-text)!important;
+}
+html body .app[data-gender="girl"] #view-dua #duaHubDetail.open .duahub-detail-actions .duahub-learn:not(:disabled){
+  background:linear-gradient(125deg,#f8dda9,#e3b971)!important;
+  color:#3c2c38!important;
+}
+/* Apply the palette to body-mounted readers too; their roots are outside .app.
+   Existing girl-only card and artwork rules in V1339–V1416 stay authoritative. */
+html body:has(.app[data-gender="girl"]) :is(.kids-follow-reader,.ps-modal,.ms-modal,.sy-modal,.dl-modal){
+  --kg1427-text:#fff2f0;
+  --kg1427-subtext:#f4d4e3;
+}
+html body:has(.app[data-gender="girl"]) .kids-follow-reader button.kids-explain-action{
+  background-image:linear-gradient(125deg,#855271,#593b5c)!important;
+  border-color:rgba(246,197,219,.38)!important;
+  color:#fff2f0!important;
+}
+/* The active floating five-tab dock is the only navigation, in girls'
+   approved plum. Do not change its position, geometry, icon assets or state. */
+html body .app[data-gender="girl"] > .bottom-nav{
+  background-color:#34243d!important;
+  background-image:linear-gradient(150deg,#402d46,#302339)!important;
+  border-color:rgba(246,196,218,.39)!important;
+}
