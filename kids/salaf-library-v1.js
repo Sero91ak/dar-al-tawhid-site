@@ -243,9 +243,39 @@
     q("#salafDetailCover").style.backgroundImage=coverShade+",url('"+art+"')";
     q("#salafText").innerHTML=textFor(i).split(/\n{2,}/).filter(Boolean).map(function(s){return "<p>"+esc(s)+"</p>"}).join("");
     q("#salafText").hidden=true;
+/* KIDS_VISITOR_COMPACT_CITATIONS_V1430
+ * Keep full source.reference, chain and verification notes in the content
+ * JSON for editors; the public reader sees only attested bibliographic
+ * metadata. Never display archive IDs, website-page numbers, isnād chains
+ * or editorial review commentary to children.
+ */
+function compactSalafReference(raw){
+  const r=String(raw||"").replace(/https?:\/\/\S+/gi,"").replace(/\s+/g," ").trim();
+  const parts=[];
+  const vol=r.match(/(?:\bBand|\bBd\.)\s*\d+(?:\s*\/\s*\d+)?/u);
+  const page=r.match(/\bS\.\s*\d+(?:\s*[-–]\s*\d+)?(?:\s*,\s*\d+(?:\s*[-–]\s*\d+)?)?(?:\s*ff\.)?/u);
+  const section=r.match(/(?:\bKitāb\s+[^,;.:]{3,80}|\bBāb\s+[^,;.:]{3,80}|\bKapitel\s+[^,;.:]{3,80}|\bal-Muqaddimah\b)/u);
+  const number=r.match(/(?:Nr\.|Ḥadīṯ|Hadith|Bericht)\s*\d+[a-z]?/u);
+  const bio=r.match(/\b(?:Biographie|Biografie)\s+(?:von\s+)?([^.;:]{3,72})/u);
+  for(const match of [vol,page,section,number]){
+    if(match)parts.push(match[0].replace(/\s+/g," ").trim());
+  }
+  if(bio){
+    let b=bio[0].split(/[,–]/)[0].trim();
+    if(b.length>70)b=b.slice(0,70).replace(/\s+\S*$/,"");
+    parts.push(b);
+  }
+  const unique=[...new Set(parts)];
+  if(unique.length)return unique.join(" · ");
+  // If a work has no page/number, show the existing chapter/first label,
+  // without inventing a missing page or misrepresenting an archive marker.
+  const first=r.split(/[;.]/)[0].trim();
+  return first.length<=95?first:first.slice(0,95).replace(/\s+\S*$/,"")+"…";
+}
+
     var src=i.sources||[];
     /* KIDS_SOURCE_TEXT_ONLY_V1414: verified sources are readable text, not links. */
-    q("#salafRefs").innerHTML=src.map(function(s){return '<div class="salaf-ref"><strong>'+esc(s.author)+'</strong><span>'+esc(s.work)+" · "+esc(s.reference)+"</span></div>"}).join("");
+    q("#salafRefs").innerHTML=src.map(function(s){return '<div class="salaf-ref"><strong>'+esc(s.author)+'</strong><span>'+esc(s.work)+" · "+esc(compactSalafReference(s.reference))+"</span></div>"}).join("");
     var url=soundFor(i);
     if(url){audio.src=url;audio.preload="metadata";q("#salafAudioStatus").textContent="Deine Hörposition wird automatisch gespeichert."}
     else{audio.removeAttribute("src");audio.load();q("#salafAudioStatus").textContent="Diese Geschichte kannst du jetzt lesen. Hören ist noch nicht verfügbar."}
