@@ -522,8 +522,11 @@ class TvActivity : Activity() {
                     is String -> raw
                     else -> ""
                 }
-                val parsed = Regex("""(?:[01]?\\d|2[0-3]):[0-5]\\d""").find(time)?.value
-                    ?.let { runCatching { LocalTime.parse(it) }.getOrNull() }
+                val parsed = Regex("""(?:[01]?[0-9]|2[0-3]):[0-5][0-9]""").find(time)?.value
+                    ?.let { raw ->
+                        val normalized = if (raw.length == 4) "0$raw" else raw
+                        runCatching { LocalTime.parse(normalized) }.getOrNull()
+                    }
                 parsed?.let {
                     val at = LocalDateTime.of(LocalDate.now(), it)
                     Triple(name, it.toString(), if (at.isAfter(now)) at else at.plusDays(1))
