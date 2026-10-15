@@ -17,31 +17,8 @@ html body .app[data-gender="girl"] > .shell{
   box-shadow:none!important;
 }
 
-/* Page roots must not reveal the previous navy/gradient behind the
-   intended content. Preserve image-bearing child heroes and all existing
-   card backgrounds, 3D icons, focus states, headers and animations. */
-html body .app[data-gender="girl"] > .shell > :is(
-  #view-today,#view-stories,#view-salaf,#view-quran,#view-dua,#view-parents
-).view.active{
-  background-color:#2b2035!important;
-}
-
-/* Secondary category scroll containers inherit the same underlying paper
-   but keep image stages, illustrations and child surfaces unchanged. */
-html body .app[data-gender="girl"] #view-stories .ps-library-page,
-html body .app[data-gender="girl"] #view-stories .ms-library-page,
-html body .app[data-gender="girl"] #view-stories .sy-library-page,
-html body .app[data-gender="girl"] #view-stories .dl-library-page{
-  background-color:#2b2035!important;
-}
-
-/* Body-mounted story SCROLL surfaces remain opaque plum, but the
-   translucent modal and reader BACKDROPS must keep their original alpha
-   so a bottom sheet still looks and behaves like a bottom sheet. */
-html body:has(.app[data-gender="girl"]) :is(
-  .ps-scroll,.ms-scroll,.gh-player-scroll,.gh-world-scroll
-){
-  background-color:#2b2035!important;
-}
+/* Only root paper is unified. All pages and body-level readers keep their
+   own approved secondary shades, gradients, rose/champagne highlights,
+   full-colour illustrations, cards and modal overlays untouched. */
 /* This file must remain profile-scoped. Never target .app, .shell or
    .ambient without the data-gender="girl" gate. */
