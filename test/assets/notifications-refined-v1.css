@@ -546,3 +546,134 @@ html body.is-notifications-route .notification-center-page :is(.notification-act
 }
 /* Der echte Tab-Bereich (#bottomNav) bleibt vollständig unter Kontrolle der App.
    Nur der Seiteninhalt reserviert am Ende den notwendigen Platz. */
+
+
+/* DAR_TEST_NOTIFICATION_LOCATION_V3 — smarter, kompakt, echte Browserfreigabe.
+   Keine Veränderungen an #bottomNav, Scrolllogik oder Safe Areas. */
+html body.is-notifications-route #darNotificationGpsQuickV3 {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:center;
+  column-gap:9px;
+  row-gap:6px;
+  margin:0 0 7px;
+  padding:10px 2px 11px;
+  min-width:0;
+  width:100%;
+  border-top:1px solid color-mix(in srgb,var(--gold2,#e5cc8f) 16%,var(--line2,transparent));
+  background:transparent;
+}
+html body.is-notifications-route .notification-gps-quick__copy{
+  display:flex;
+  flex-direction:column;
+  gap:3px;
+  min-width:0;
+  overflow-wrap:anywhere;
+}
+html body.is-notifications-route .notification-gps-quick__copy strong{
+  font-size:12px;
+  font-weight:680;
+  color:var(--text,#f5efdf);
+  line-height:1.25;
+}
+html body.is-notifications-route .notification-gps-quick__copy small{
+  display:block;
+  color:var(--muted,#b6bdcb);
+  font-size:10.5px;
+  font-weight:450;
+  line-height:1.4;
+}
+html body.is-notifications-route .notification-gps-quick__btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  flex:0 0 auto;
+  min-height:40px;
+  max-width:145px;
+  min-width:0;
+  padding:7px 11px;
+  border:1px solid color-mix(in srgb,var(--gold2,#e5cc8f) 35%,transparent);
+  border-radius:999px;
+  color:var(--text,#f5efdf);
+  background:transparent;
+  font-size:11px;
+  font-weight:680;
+  line-height:1.3;
+  text-align:center;
+  box-shadow:none;
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-user-select:none;
+  user-select:none;
+  -webkit-touch-callout:none;
+}
+html body.is-notifications-route .notification-gps-quick__btn:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+html body.is-notifications-route .notification-gps-quick__btn:focus-visible{
+  outline:2px solid var(--gold2,#e5cc8f);
+  outline-offset:3px;
+}
+html body.is-notifications-route .notification-gps-quick__feedback{
+  grid-column:1/-1;
+  font-size:11px;
+  line-height:1.5;
+  color:var(--text,#f5efdf);
+  margin:0;
+  padding:1px 0;
+}
+html body.is-notifications-route .notification-gps-quick__feedback[hidden]{
+  display:none!important;
+}
+html body.is-notifications-route #notificationDeviceTestBtn,
+html body.is-notifications-route #notificationDeviceTestBtn[hidden]{
+  display:none!important;
+  visibility:hidden!important;
+  pointer-events:none!important;
+}
+html body.is-notifications-route #notificationHealthBox{
+  margin:8px 0 2px!important;
+  padding:10px 11px!important;
+  border-radius:10px!important;
+  gap:9px!important;
+  min-height:52px!important;
+}
+html body.is-notifications-route #notificationHealthText{
+  font-size:11.5px!important;
+  font-weight:450!important;
+  line-height:1.38!important;
+}
+html body.is-notifications-route #notificationReenableBtn{
+  min-height:39px!important;
+  font-size:11px!important;
+  padding:7px 12px!important;
+  border-radius:999px!important;
+  white-space:normal!important;
+}
+html body.is-notifications-route .notification-hero__count {
+  font-size:10px!important;
+  width:52px!important;
+}
+html body.is-notifications-route .notification-note{
+  display:none!important;
+}
+html body.is-notifications-route .notification-prayer{
+  min-height:67px!important;
+  padding:6px 0!important;
+  border-color:color-mix(in srgb,var(--gold2,#e5cc8f) 9%,transparent)!important;
+}
+html body.is-notifications-route .notification-prayer.is-on{
+  border-color:color-mix(in srgb,var(--gold2,#e5cc8f) 21%,transparent)!important;
+}
+@media(max-width:350px) {
+  html body.is-notifications-route #darNotificationGpsQuickV3{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+  html body.is-notifications-route .notification-gps-quick__btn{
+    width:max-content;
+    max-width:100%;
+  }
+}
+/* Alt: die zentralen Funktionen (Gebet, tägliche Impulse, Jumuʿah) bleiben erhalten. */
