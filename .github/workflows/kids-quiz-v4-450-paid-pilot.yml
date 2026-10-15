@@ -15,7 +15,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: tawhid-kids-v4-450-paid-two-originals-once
+  group: tawhid-kids-v4-450-shared-paid-queue
   cancel-in-progress: false
 
 jobs:
