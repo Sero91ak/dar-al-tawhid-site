@@ -1,3 +1,11 @@
+## 15.10.2026 · 34/34 historische Hadithnachweise 57–90 abgeglichen · nächste Phase wissenschaftliche Redaktion
+
+- **Quelle und Nummer vollständig zugeordnet:** Alle **208** Jahreslektionsthemen haben einen direkten HTTPS-Quellennachweis (218 eindeutige Datensätze). Die **34** ehemals nur aus Altdateien V27–V35 übernommenen Ṣaḥīḥ-/Sunan-Zuordnungen sind im direkten Dorar-Nachweis nun jeweils hinsichtlich Originalsammlung, Nummer, Überlieferer und arabischem Kurztext gegengeprüft. Im Registry `verificationStatus` sind **0 alte noch nicht unabhängig kontrollierte Einträge**. Referenzakte: `kids-akademie/research/SOURCE_COVERAGE_208_20261015.md`.
+- **Qualitätsmaßstab:** Die 34 source checks ersetzen **keine vollständige inhaltliche, hadithkritische, rechtsschulspezifische und pädagogische Prüfung jeder Lektion**. Die Endfreigabe aller **624 Altersfassungen ist weiterhin 0/624**. Source-IDs und `key` eindeutig, Freigabesiegel gesperrt.
+- **Technischer Schutz:** `kids/tools/test-academy-source-registry-complete-v1.cjs` verankert **34/34** nachgewiesene Altquellen und den Ausschluss künftiger stiller Regressionszustände. Workflow `kids-akademie-editorial-readonly-qa.yml` muss auf dem jüngsten Code-Commit grün laufen; ein Erfolg eines früheren Commits genügt nicht. Keine Audioerzeugung oder Ausführung von Live-Deployer-Skripten.
+- **Nächste konkrete Arbeit ohne Copilot:** (1) wissenschaftlicher Abgleich der 624 Altersfassungen, Satz für Satz mit jeweiligem Qurʾān-/Sunnah-/Tafsīr-Beleg, (2) gründliche hanbalitische Einzelprüfung der 17 benannten anspruchsvollen Fiqh-Slots, (3) systematische Überprüfung der Quellenregister-Nummerierungen und Volltext-Fragmente für alle 218 Einträge, (4) technische und pädagogische Freigabe **erst nach menschlichem Review**.
+- **Unverändert:** kein Merge nach `main`, kein Live-Push, keine Herstellung von TTS/MP3 und **0 neue Audio-Credits**.
+
 ## 15.10.2026 · 12 alte Überlieferungsnachweise bestätigt – 22 offen
 
 - **Bis zur aktuellen Quellenrunde** sind nun **12 ursprünglich nur historisch registrierte Ḥadīṯ-Zuordnungen** der Lektionen 57–68 anhand der angegebenen arabischen Originaltexte, Sammlungen, Nummern und Überlieferer über Dorar gegengeprüft. **22 historische Nachweise 69–90** weiterhin ohne unabhängige Prüfung, im Register als solche gekennzeichnet.
