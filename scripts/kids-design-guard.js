@@ -318,6 +318,33 @@ function runKidsDesignGuard() {
      !doc.includes('KIDS_GLOBAL_NO_PUBLIC_SOURCE_LINKS_V1414'))
     failed+=fail('KIDS V1414: globale Sperre nicht vollständig aktiviert');
 
+  // KIDS_QURAN_LISTEN_ONLY_V1418: keep archived Alif-Ba and standalone Quran
+  // pronunciation lessons inaccessible; preserve the Quran recitation player.
+  const quranShells = ["kids/index.html","kids/shell.html","kids/start.html"].map(p =>
+    fs.readFileSync(path.join(ROOT,p),"utf8")
+  );
+  if (quranShells.some(x => x !== quranShells[0]))
+    failed += fail("KIDS V1418: HTML shell entry points differ");
+  if (!html.includes('id="kids-quran-listen-only-v1418"') ||
+      !html.includes("practiceRequired=false; /* KIDS_QURAN_LISTEN_ONLY_V1418") ||
+      !html.includes('id="speakAlong" class="big-speak" type="button" disabled hidden') ||
+      /openSurah\\([^\\n]*"learn"/.test(html))
+    failed += fail("KIDS V1418: Quran learner mode or recorder still reachable");
+  if (html.includes('{id:"quran",title:"Qurʾān",hint:"eine Āyah lernen"') ||
+      !html.includes('id="fullQuranButton"') ||
+      !html.includes('id="ayahPlay"') ||
+      !html.includes('id="quranAudio"'))
+    failed += fail("KIDS V1418: Daily learning not removed or recitation player missing");
+  const quranVersion = JSON.parse(fs.readFileSync(path.join(ROOT,"kids/version.json"),"utf8"));
+  if (quranVersion.quranLearningSystemEnabled !== false ||
+      quranVersion.quranStandaloneMicrophoneTrainingEnabled !== false ||
+      quranVersion.quranRecitationListeningEnabled !== true ||
+      quranVersion.alifBaLearningSystemEnabled !== false)
+    failed += fail("KIDS V1418: lesson/removal feature flags incoherent");
+  const offlineSw = fs.readFileSync(path.join(ROOT,"kids/sw.js"),"utf8");
+  if (!offlineSw.includes('dar-al-tawhid-kids-v1418-quran-listen-only'))
+    failed += fail("KIDS V1418: installed offline application may serve stale learner");
+  
   // Keep the three aligned Duʿāʾ learning levels and 120 verified mappings
   // consistent on all Kids entry routes before publishing.
   failed += require("./kids-dua-trilingual-guard.js").runKidsDuaTrilingualGuard();
