@@ -546,6 +546,37 @@
   function updateSummary(){
     var page=document.querySelector(PAGE);
     if(!page)return;
+    /* Zeiten stammen aus demselben Gebetszeiten-Rechner wie die vorhandene App.
+       Ohne gültigen Ort keine erfundenen Uhrzeiten anzeigen. */
+    try{
+      var s=prayerSettings();
+      var valid=typeof hasPrayerLocation==="function" && hasPrayerLocation(s);
+      var rows=valid&&typeof calculatePrayerTimes==="function"
+        ?calculatePrayerTimes(new Date(),s):[];
+      page.querySelectorAll(".notification-prayer[data-notification-prayer]").forEach(function(btn){
+        var key=btn.getAttribute("data-notification-prayer");
+        var match=rows.find(function(p){return p.key===key;});
+        var value=valid&&match&&match.time!=null&&typeof formatPrayerHour==="function"
+          ?formatPrayerHour(match.time):"";
+        var slot=btn.querySelector("[data-dar-prayer-clock]");
+        if(!value){
+          if(slot)slot.remove();
+          return;
+        }
+        if(!slot){
+          slot=document.createElement("span");
+          slot.className="notification-prayer-clock";
+          slot.setAttribute("data-dar-prayer-clock","");
+          slot.setAttribute("aria-hidden","true");
+          btn.appendChild(slot);
+        }
+        if(slot.textContent!==value)slot.textContent=value;
+        var title=btn.querySelector("b");
+        var base=title?title.textContent:key;
+        var label=base+" · "+value+" Uhr · "+(btn.getAttribute("aria-pressed")==="true"?"ausgewählt":"nicht ausgewählt");
+        if(btn.getAttribute("aria-label")!==label)btn.setAttribute("aria-label",label);
+      });
+    }catch(e){}
     var count=page.querySelector(".notification-hero__count > span");
     if(count){
       var num=count.querySelector("b");
