@@ -3,7 +3,7 @@
   "label": "KIDS · V1.09.22",
   "salafVisualPolicy": "V1410 · feste undurchsichtige Kopfzeile inklusive iOS-Statusleiste · Safe-Area im Header · Hero direkt darunter · Bildregeln bleiben",
   "releasedAt": "2026-10-10T11:00:00Z",
-  "note": "KIDS V1.09.21: Startbildschirm wird beim Öffnen anhand der realen Bildschirmhöhe und der festen unteren Tabnavigation ausgerichtet. Während manuellen Scrollens bleibt die berechnete Hero- und Gebetszeiten-Geometrie stabil; kein störendes Nachwachsen des Bildes. Auf iPhone, Android und iPad bleibt die bestehende flexible 1304-Geometrie, das freigegebene Moscheemotiv und alle fünf Gebetszeiten erhalten. Sehr kleine Geräte bleiben scrollbar.",
+  "note": "KIDS QURʾĀN V1418: Eigenständiges Alif-Bāʾ-/Qurʾān-Lernsystem aus der Besucheroberfläche deaktiviert; Qurʾān-Sūrah und Āyāt nur anhören, ohne Mikrofon/Worttraining. Bestehende Duʿāʾ, Geschichten, Akademie, Quiz, Hördateien und lokale Lerndaten bleiben unverändert. Die früheren Alif-Bāʾ-Artefakte bleiben archiviert und werden nicht in der App geladen.",
   "visualSystem": {
     "prophetStories": "nested-prophet-library-v22",
     "storiesHomeAsCategoryHub": true,
@@ -56,7 +56,7 @@
     "quranLessonPhoneActions": "stacked",
     "quranLessonTabletActions": "two-column",
     "quranLessonLargeArabic": true,
-    "quranLessonFunctionalityChanged": false,
+    "quranLessonFunctionalityChanged": true,
     "alphabetPolish": "spacious-v1057",
     "alphabetPhoneSteps": "wrapped-centered",
     "alphabetPhonePractice": "two-column",
@@ -1294,5 +1294,9 @@
     "fullBleedDua": true,
     "childFriendlyExplanationButtons": true,
     "sourceTextOnly": true
-  }
+  },
+  "quranLearningSystemEnabled": false,
+  "quranStandaloneMicrophoneTrainingEnabled": false,
+  "quranRecitationListeningEnabled": true,
+  "alifBaLearningSystemEnabled": false
 }
