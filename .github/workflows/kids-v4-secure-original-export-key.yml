@@ -1,0 +1,70 @@
+name: KIDS V4 Prepare Encrypted Original Export Channel
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/kids-v4-secure-original-export-key.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-secure-export-key
+  cancel-in-progress: false
+
+jobs:
+  prepare-private-key:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Create protected one-time export key, no signed URLs exposed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "${ELEVENLABS_API_KEY:-}" ]]; then
+            echo "::error::GitHub secret required to protect temporary export key"
+            exit 1
+          fi
+          base=kids/data/v4-prepaid-envelope-review
+          mkdir -p "$base"
+          if [[ -e "$base/recipient-cert.pem" || -e "$base/private-key-encrypted.pem" ]]; then
+            test -s "$base/recipient-cert.pem"
+            test -s "$base/private-key-encrypted.pem"
+            echo 'Existing export key preserved'
+            exit 0
+          fi
+          tmp="$(mktemp -d)"
+          trap 'rm -rf "$tmp"' EXIT
+          umask 077
+          openssl req -x509 -newkey rsa:3072 -nodes \
+            -keyout "$tmp/private.pem" -out "$base/recipient-cert.pem" \
+            -days 3 -subj "/CN=TAWHID-KIDS-REVIEW-EXPORT" >/dev/null 2>&1
+          openssl pkcs8 -topk8 -v2 aes-256-cbc -iter 200000 \
+            -in "$tmp/private.pem" -out "$base/private-key-encrypted.pem" \
+            -passout env:ELEVENLABS_API_KEY
+          test -s "$base/recipient-cert.pem"
+          test -s "$base/private-key-encrypted.pem"
+          openssl x509 -in "$base/recipient-cert.pem" -noout -checkend 600 >/dev/null
+          echo 'Recipient public certificate and encrypted private key ready'
+      - name: Commit only public certificate and encrypted key in review
+        run: |
+          set -euo pipefail
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          git config user.name dar-kids-original-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/v4-prepaid-envelope-review/recipient-cert.pem kids/data/v4-prepaid-envelope-review/private-key-encrypted.pem
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'security(kids): protected key for one-time original V4 paid export'
+          for a in 1 2 3; do
+            if git push origin HEAD:"$branch"; then exit 0; fi
+            git fetch origin "$branch"
+            git rebase FETCH_HEAD
+          done
+          exit 1
