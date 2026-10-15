@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="t"><title id="t">Lernen – dreidimensionales offenes Buch</title>
+<defs>
+<linearGradient id="cover" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#153B42"/><stop offset=".37" stop-color="#226A68"/><stop offset=".72" stop-color="#52998E"/><stop offset="1" stop-color="#96C0A6"/></linearGradient>
+<linearGradient id="cover2" x1="0" y1="1" x2="1" y2="0"><stop stop-color="#29304C"/><stop offset=".47" stop-color="#695070"/><stop offset="1" stop-color="#AC7D89"/></linearGradient>
+<linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF4BD"/><stop offset=".14" stop-color="#EEC964"/><stop offset=".35" stop-color="#AA762B"/><stop offset=".58" stop-color="#F6DD8B"/><stop offset=".81" stop-color="#BC7D2D"/><stop offset="1" stop-color="#FFF5CF"/></linearGradient>
+<linearGradient id="leftPages" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFFDF0"/><stop offset=".55" stop-color="#F2E1B2"/><stop offset="1" stop-color="#B79D71"/></linearGradient>
+<linearGradient id="rightPages" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FCF5D7"/><stop offset=".48" stop-color="#FFF9EA"/><stop offset="1" stop-color="#D6BC80"/></linearGradient>
+<linearGradient id="edge" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#FFF2BE"/><stop offset="1" stop-color="#967242"/></linearGradient>
+<linearGradient id="pen" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFF1A9"/><stop offset=".26" stop-color="#A66B1F"/><stop offset=".52" stop-color="#FFE390"/><stop offset="1" stop-color="#7B4F1B"/></linearGradient>
+<filter id="shadow" x="-40%" y="-50%" width="180%" height="210%"><feGaussianBlur stdDeviation="18"/></filter>
+<filter id="smallshadow" x="-40%" y="-50%" width="180%" height="210%"><feGaussianBlur stdDeviation="4"/></filter>
+</defs>
+<ellipse cx="264" cy="415" rx="161" ry="39" fill="#05040A" opacity=".36" filter="url(#shadow)"/>
+<!-- Book covers, thick richly beveled outer silhouette -->
+<path d="M53 249C106 202 174 217 248 264C275 237 347 210 436 232L454 350C364 337 302 351 250 397C171 366 110 368 59 387Z" fill="#412B37" stroke="#422934" stroke-width="13" stroke-linejoin="round"/>
+<path d="M62 236C126 201 185 221 251 259L245 376C180 341 113 343 62 375Z" fill="url(#cover)" stroke="url(#gold)" stroke-width="11" stroke-linejoin="round"/>
+<path d="M251 259C312 224 381 208 446 235L449 354C372 342 301 349 245 376Z" fill="url(#cover2)" stroke="url(#gold)" stroke-width="11" stroke-linejoin="round"/>
+<!-- paper thickness -->
+<path d="M82 244C141 209 190 239 249 275L245 361C188 326 138 315 81 349Z" fill="url(#edge)" stroke="#977040" stroke-width="5"/>
+<path d="M249 275C302 240 369 211 427 245L431 331C354 316 297 329 245 361Z" fill="url(#edge)" stroke="#977040" stroke-width="5"/>
+<!-- pages left, right split -->
+<path d="M80 226C140 189 199 214 253 254L245 350C192 310 136 299 81 335Z" fill="url(#leftPages)" stroke="#E8CF8E" stroke-width="6" stroke-linejoin="round"/>
+<path d="M253 254C308 215 378 195 432 225L427 326C359 303 299 313 245 350Z" fill="url(#rightPages)" stroke="#E8CF8E" stroke-width="6" stroke-linejoin="round"/>
+<path d="M250 255L245 350" fill="none" stroke="#AD8150" stroke-width="7"/>
+<path d="M95 239C153 211 198 239 231 256M92 254C151 227 188 248 227 268M91 269C153 246 195 269 227 288M94 287C139 268 188 289 224 307" stroke="#CBB789" stroke-width="3" fill="none" stroke-linecap="round" opacity=".76"/>
+<path d="M273 259C326 236 378 223 414 240M270 275C333 249 367 242 412 256M271 292C327 272 373 262 415 273M272 312C320 293 372 289 412 292" stroke="#D4BB85" stroke-width="3" fill="none" stroke-linecap="round" opacity=".73"/>
+<!-- Gold foil corners and star above spine -->
+<path d="M103 326L103 316L115 311M411 310L412 300L402 295" stroke="url(#gold)" stroke-width="7" fill="none" stroke-linecap="round"/>
+<path d="M258 86L271 114L301 120L276 141L280 171L254 157L226 171L231 141L207 121L237 115Z" fill="url(#gold)" stroke="#9A6629" stroke-width="5" stroke-linejoin="round"/>
+<path d="M257 98L263 120L286 123L268 138L272 158L254 148L237 159L240 139L222 123L247 121Z" fill="#FFEFB3" opacity=".78"/>
+<path d="M147 122L156 143M367 128L359 148M111 176L135 188M406 171L388 180" stroke="#EFC56A" stroke-width="8" stroke-linecap="round" opacity=".9"/>
+<!-- 3D golden pencil on right paper, gentle bevel -->
+<g transform="rotate(27 352 292)">
+<rect x="335" y="185" width="30" height="142" rx="12" fill="#65431F" opacity=".2" filter="url(#smallshadow)"/>
+<path d="M338 174Q338 166 351 166Q364 166 364 174L364 305L352 339L338 305Z" fill="url(#pen)" stroke="#825522" stroke-width="3"/>
+<path d="M338 303L352 340L365 303Z" fill="#E1B26B"/>
+<path d="M347 324L352 340L357 324Z" fill="#47312F"/>
+<path d="M341 190V298M360 191V299" stroke="#FFF7C0" stroke-width="3" opacity=".6"/>
+<path d="M339 187H364" stroke="#76541F" stroke-width="5"/>
+</g>
+</svg>
