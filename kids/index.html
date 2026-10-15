@@ -3167,13 +3167,6 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
           
         </button>
 
-        <button class="choice quran" data-go="quran">
-          <span class="icon"></span>
-          <strong>Qurʾān Player</strong>
-          <small>hören · mitsprechen · lernen</small>
-          
-        </button>
-
         <button class="choice dua" id="openDuaButton">
           <span class="icon"></span>
           <strong>Meine Duʿāʾ</strong>
@@ -3256,38 +3249,6 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 
     <section id="view-salaf" class="view" aria-label="Schätze der Salaf"></section>
 
-    <section id="view-quran" class="view">
-      <div class="page-head quran-page-head">
-        <div class="kicker">HÖREN · MITSPRECHEN · LERNEN</div>
-        <h2>Mein Qurʾān</h2>
-        <p>Kein kompliziertes Menü. Eine Sūrah antippen und loslegen.</p>
-      </div>
-      <div class="quran-hero">
-        <div class="quran-hero-stage" aria-hidden="true"></div>
-        <div class="quran-hero-copy">
-          <div class="quran-hero-eyebrow">DEINE QURʾĀN-REISE</div>
-          <h3>Deine Qurʾān-Reise</h3>
-          <p>Höre eine Āyah, sprich danach selbst mit und gehe weiter, wenn du bereit bist.</p>
-        </div>
-        <div class="quran-actions">
-          <button class="quran-action" id="quickLearn112"><div class="qa-icon"></div><strong>Mitrezitieren</strong><small>Starte mit al-Iḫlāṣ</small></button>
-          <button class="quran-action" id="resumeQuran"><div class="qa-icon"></div><strong>Weiterlernen</strong><small id="resumeQuranText">dein letzter Vers</small></button>
-        </div>
-      </div>
-      
-      <div class="quran-section-head"><div><div class="section-title">Meine kurzen Sūrah</div><p>Antippen und direkt anfangen.</p></div><span class="quran-section-chip">KURZ & LEICHT</span></div>
-      <div class="surah-banner" aria-hidden="true"></div>
-      <div class="surah-grid" id="kidsSurahGrid"></div>
-      <div class="quran-section-head"><div><div class="section-title">Verse zum Lernen</div><p>Wichtige Āyāt Schritt für Schritt.</p></div><span class="quran-section-chip">MERKEN</span></div>
-      <div class="verse-banner" aria-hidden="true"></div>
-      <div class="verse-strip">
-        <button class="verse-card" data-quran-ref="2:255"><div class="verse-badge" aria-hidden="true"></div><div><strong>Āyat al-Kursī</strong><small>al-Baqarah · 2:255</small></div></button>
-        <button class="verse-card" data-quran-ref="20:114"><div class="verse-badge"></div><div><strong>„Mein Herr, mehre mich an Wissen.“</strong><small>Ṭā-Hā · 20:114</small></div></button>
-        <button class="verse-card" data-quran-ref="17:24"><div class="verse-badge"></div><div><strong>Duʿāʾ für die Eltern</strong><small>al-Isrāʾ · 17:24</small></div></button>
-      </div>
-      <button class="full-quran full-quran-listen" id="fullQuranButton"><div class="ficon"></div><div><strong>Ganzer Qurʾān zum Hören</strong><small>Eine Sūrah auswählen und direkt starten</small></div></button>
-      <div class="gentle-note">Höre in Ruhe, sprich mit und wiederhole so oft du möchtest. Lernen darf leicht und ruhig sein.</div>
-    </section>
     <section id="view-parents" class="view">
       <div class="page-head">
         <div class="kicker">FÜR ERWACHSENE</div>
@@ -3318,7 +3279,6 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
           <div class="parent-progress-stat"><strong id="parentDuasDone">0</strong><span>Duʿāʾ sicher</span></div>
           <div class="parent-progress-stat"><strong id="parentQuizCorrect">0</strong><span>Quizfragen richtig</span></div>
           <div class="parent-progress-stat"><strong id="parentTodayDone">0/3</strong><span>Heute geschafft</span></div>
-          <div class="parent-progress-stat"><strong id="parentQuranResume">–</strong><span>Letzter Qurʾān-Stand</span></div>
         </div>
         <p class="parent-note">Der Fortschritt bleibt auf diesem Gerät. Keine Rangliste und kein Vergleich mit anderen Kindern.</p>
       </div>
@@ -3347,7 +3307,6 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
     <button class="nav-btn active" data-target="today"><span class="ico"></span><span class="lab">Heute</span></button>
     <button class="nav-btn" data-target="stories"><span class="ico"></span><span class="lab">Hören</span></button>
     <button class="nav-btn" data-target="salaf" aria-label="Schätze der Salaf"><span class="ico"></span><span class="lab">Schätze</span></button>
-    <button class="nav-btn" data-target="quran"><span class="ico"></span><span class="lab">Qurʾān</span></button>
     <button class="nav-btn" data-target="parents"><span class="ico"></span><span class="lab">Eltern</span></button>
   </nav>
 
@@ -3435,89 +3394,16 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
     </div>
   </div>
 
-  <div id="quranModal" class="modal">
-    <div class="modal-shell">
-      <div class="modal-top">
-        <button class="close-btn" data-close="quran">×</button>
-        <div class="modal-title"><strong id="quranTitle">Sūrah</strong><small id="quranSubtitle">Mitrezitieren</small></div>
-        <div class="top-spacer"></div>
-      </div>
-
-      <div class="quran-player">
-        <div id="progressDots" class="progress-dots"></div>
-        <div class="lesson-steps">
-          <div id="stepListen" class="lesson-step active">1 · HÖREN</div>
-          <div id="stepSpeak" class="lesson-step">2 · SPRECHEN</div>
-          <div id="stepDone" class="lesson-step">3 · GESCHAFFT</div>
-        </div>
-        <div class="ayah-stage">
-          <div id="ayahBox" class="ayah-box">
-            <div id="learnStatus" class="learn-status"> Erst hören</div>
-            <div id="wordCoach" class="word-coach">
-              <div id="coachKicker" class="coach-kicker">DEIN WORT</div>
-              <div id="coachWord" class="coach-word">—</div>
-              <div id="coachHelp" class="coach-help">Tippe auf „Mitsprechen“ und sprich dieses Wort.</div>
-              <div id="coachHeard" class="coach-heard" aria-live="polite"></div>
-              <div id="wordProgress" class="word-progress"></div>
-            </div>
-            <div id="ayahAr" class="ayah-ar"><span class="loader">Qurʾān wird geladen …</span></div>
-            <div id="micMonitor" class="mic-monitor">
-              <div class="mic-top">
-                <div class="mic-state"><span class="mic-dot"></span><span id="micStateText">Mikrofon bereit</span></div>
-                <span id="micClock">00:00</span>
-              </div>
-              <div class="mic-meter"><div id="micLevel" class="mic-level"></div></div>
-              <button id="recordingPlayback" class="recording-playback"> Meine Aufnahme anhören</button>
-            </div>
-            <div id="ayahTr" class="ayah-tr"></div>
-            <div id="ayahDe" class="ayah-de"></div>
-            <div id="ayahNo" class="ayah-no"></div>
-          </div>
-        </div>
-        <div class="quran-controls">
-          <div class="main-actions">
-            <button id="ayahPlay" class="big-play"> HÖREN</button>
-            <button id="speakAlong" class="big-speak"> SPRECHEN</button>
-          </div>
-          <div class="lesson-nav">
-            <button id="prevAyah">← Vorherige Āyah</button>
-            <button id="nextAyah"> Weiter</button>
-          </div>
-          <div class="quran-mini-note">Das Mikrofon erkennt jedes Wort automatisch. Grün = richtig und weiter. Orange = fast richtig, gleiches Wort wiederholen. Rot = Fehler, das Wort bleibt gesperrt.</div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="fullQuranModal" class="modal">
-    <div class="modal-shell">
-      <div class="modal-top">
-        <button class="close-btn" data-close="fullquran">×</button>
-        <div class="modal-title"><strong>Ganzer Qurʾān</strong><small>Einfach auswählen und hören</small></div>
-        <div class="top-spacer"></div>
-      </div>
-      <div class="picker-panel">
-        <div class="picker-icon"></div>
-        <h3>Welche Sūrah?</h3>
-        <p>Nur eine Auswahl. Danach öffnet sich direkt der große Hör- und Lernbildschirm.</p>
-        <select id="surahPicker" class="big-select" aria-label="Sūrah auswählen">
-          <option>Lade Sūrah …</option>
-        </select>
-        <button id="openPickedSurah" class="primary">Sūrah öffnen</button>
-      </div>
-    </div>
-  </div>
-
+  
   
 </div>
 </div>
 
-<audio id="quranAudio" preload="none" playsinline></audio>
-<audio id="recitationPlaybackAudio" preload="none" playsinline></audio>
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1410";
+const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1418";
+const KIDS_QURAN_LEARNING_REMOVED=true; // Qurʾān/Alif-Bāʾ learning UI retired; local history retained.
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
 (function(){
@@ -3798,7 +3684,6 @@ function dailyPlan(){
   return[
     {id:"story",title:"Eine Geschichte",hint:"zuhören & verstehen",icon:"headphones"},
     {id:"dua",title:"Ein Duʿāʾ",hint:"lernen & anwenden",icon:"dua"},
-    {id:"quran",title:"Qurʾān",hint:"eine Āyah lernen",icon:"book"},
     {id:"quiz",title:"Quiz",hint:"Wissen prüfen",icon:"star"}
   ];
 }
@@ -3835,23 +3720,20 @@ function updateParentProgress(){
   try{quizCount=Number(localStorage.getItem("kids.quiz.correct")||"0")}catch(e){}
   var plan=dailyPlan();
   var todayCount=plan.filter(function(s){return dailyDone(s.id)}).length;
-  var resume=readQuranResume();
   var s=document.getElementById("parentStoriesDone");
   var d=document.getElementById("parentDuasDone");
   var q=document.getElementById("parentQuizCorrect");
   var t=document.getElementById("parentTodayDone");
-  var r=document.getElementById("parentQuranResume");
   if(s)s.textContent=String(storyCount);
   if(d)d.textContent=String(duaCount);
   if(q)q.textContent=String(quizCount);
   if(t)t.textContent=todayCount+"/"+plan.length;
-  if(r)r.textContent=resume?(resume.label+" "+(Number(resume.ayah)+1)):"–";
 }
 function launchDailyStep(step){
   if(step==="story"){showTab("stories");return}
   if(step==="dua"){openDailyDua();return}
   if(step==="quiz"){openQuiz();return}
-  if(step==="quran"){showTab("quran");setTimeout(openDailyQuran,220)}
+  if(step==="quran"){showTab("today");return}
 }
 function launchNextDailyStep(){
   var plan=dailyPlan();
@@ -3925,6 +3807,7 @@ function kidsFinishMainTabSwitch(){
 }
 window.DARKidsResetMainScroll=kidsFinishMainTabSwitch;
 function showTab(name){
+  if(name==="quran"||name==="alphabet")name="today";
   var view=document.getElementById("view-"+name);
   if(!view)return;
   var current=document.querySelector(".view.active");
@@ -3955,6 +3838,7 @@ document.getElementById("dailyStart").addEventListener("click",function(){
 
 function renderKidsSurahs(){
   var grid=document.getElementById("kidsSurahGrid");
+  if(!grid)return;
   grid.innerHTML="";
   kidsSurahs.forEach(function(s){
     var card=document.createElement("button");
@@ -3983,6 +3867,7 @@ function fetchCatalog(){
 }
 function fillPicker(){
   var picker=document.getElementById("surahPicker");
+  if(!picker)return;
   picker.innerHTML="";
   var list=catalog.length?catalog:kidsSurahs.map(function(s){return{id:s.id,name:"",transliteration:s.label,total_verses:""}});
   list.forEach(function(s){
@@ -4185,6 +4070,7 @@ function nextQuranReview(){
   return items[0]||null;
 }
 function openDailyQuran(){
+  if(KIDS_QURAN_LEARNING_REMOVED)return;
   var review=nextQuranReview();
   if(review){
     openSurah(review.surah,review.ayahIndex,"learn");
@@ -4199,6 +4085,7 @@ function openDailyQuran(){
 }
 
 function openSurah(id,ayahIndex,mode){
+  if(KIDS_QURAN_LEARNING_REMOVED)return;
   stopQuran();
   practiceRequired=(mode==="learn");
   document.getElementById("quranModal").classList.add("open");
@@ -4217,6 +4104,7 @@ function openSurah(id,ayahIndex,mode){
   });
 }
 function openQuranRef(ref){
+  if(KIDS_QURAN_LEARNING_REMOVED)return;
   var parts=String(ref).split(":");
   var s=Number(parts[0]||1),a=Number(parts[1]||1);
   openSurah(s,Math.max(0,a-1),"learn");
@@ -4971,7 +4859,7 @@ function playCurrent(after){
     else updateLearnStatus(quranMode==="learn"?" Jetzt du":"✓ Geh weiter, wenn du bereit bist",quranMode==="learn");
   };
 }
-document.getElementById("recordingPlayback").addEventListener("click",function(){
+document.getElementById("recordingPlayback")?.addEventListener("click",function(){
   var audio=document.getElementById("recitationPlaybackAudio");
   if(!recordingUrl)return;
   if(audio.paused){
@@ -4984,7 +4872,7 @@ document.getElementById("recordingPlayback").addEventListener("click",function()
     this.textContent=" Meine Aufnahme anhören";
   }
 });
-document.getElementById("recitationPlaybackAudio").addEventListener("ended",function(){
+document.getElementById("recitationPlaybackAudio")?.addEventListener("ended",function(){
   document.getElementById("recordingPlayback").textContent=" Meine Aufnahme anhören";
 });
 document.getElementById("ayahPlay").addEventListener("click",function(){
@@ -4993,7 +4881,7 @@ document.getElementById("ayahPlay").addEventListener("click",function(){
   document.getElementById("speakAlong").classList.remove("active");
   playCurrent();
 });
-document.getElementById("speakAlong").addEventListener("click",function(){
+document.getElementById("speakAlong")?.addEventListener("click",function(){
   if(!currentSurah)return;
   if(practiceActive){
     stopPractice(false);
@@ -5032,13 +4920,13 @@ document.getElementById("speakAlong").addEventListener("click",function(){
     startPracticeSession();
   });
 });
-document.getElementById("prevAyah").addEventListener("click",function(){
+document.getElementById("prevAyah")?.addEventListener("click",function(){
   if(!currentSurah)return;
   stopQuran();
   currentAyahIndex=Math.max(0,currentAyahIndex-1);
   renderAyah();
 });
-document.getElementById("nextAyah").addEventListener("click",function(){
+document.getElementById("nextAyah")?.addEventListener("click",function(){
   if(!currentSurah)return;
   if(practiceRequired&&!ayahPassed){
     updateLearnStatus(" Erst alle Wörter richtig sprechen",false,"error");
@@ -5084,7 +4972,7 @@ function homeResumeFormatTime(value){
   return Math.floor(n/60)+":"+String(Math.floor(n%60)).padStart(2,"0");
 }
 function updateResume(){
-  var q=readQuranResume();
+  var q=null; // Archived Qurʾān resume is not surfaced; story playback remains.
   var s=readStoryResume();
   var qTime=Number(q&&q.updatedAt||0);
   var sTime=Number(s&&s.updatedAt||0);
@@ -5146,18 +5034,16 @@ document.getElementById("resumeButton").addEventListener("click",function(){
     },220);
     return;
   }
-  var r=readQuranResume();
-  showTab("quran");
-  if(r)setTimeout(function(){openSurah(r.surah,r.ayah,"learn")},220);
+  showTab("stories");
 });
-document.getElementById("resumeQuran").addEventListener("click",function(){
+document.getElementById("resumeQuran")?.addEventListener("click",function(){
   var r=readQuranResume();
   if(r)openSurah(r.surah,r.ayah,"learn");else openSurah(112,0,"learn");
 });
-document.getElementById("quickLearn112").addEventListener("click",function(){openSurah(112,0,"learn")});
+document.getElementById("quickLearn112")?.addEventListener("click",function(){openSurah(112,0,"learn")});
 document.querySelectorAll("[data-quran-ref]").forEach(function(b){b.addEventListener("click",function(){openQuranRef(b.dataset.quranRef)})});
-document.getElementById("fullQuranButton").addEventListener("click",function(){document.getElementById("fullQuranModal").classList.add("open")});
-document.getElementById("openPickedSurah").addEventListener("click",function(){
+document.getElementById("fullQuranButton")?.addEventListener("click",function(){document.getElementById("fullQuranModal").classList.add("open")});
+document.getElementById("openPickedSurah")?.addEventListener("click",function(){
   var id=Number(document.getElementById("surahPicker").value||1);
   document.getElementById("fullQuranModal").classList.remove("open");
   openSurah(id,0,"listen");
@@ -6464,7 +6350,7 @@ function updateMinutes(){
 }
 slider.addEventListener("input",updateMinutes);
 
-quranAudio.addEventListener("error",function(){
+quranAudio?.addEventListener("error",function(){
   updateLearnStatus("Audio lädt gerade nicht — bitte erneut tippen",false);
   document.getElementById("ayahPlay").textContent=" Āyah anhören";
 });
@@ -6477,7 +6363,7 @@ updateParentProgress();
 fetchKidsDuas();
 fetchAuthenticStories();
 fetchVerifiedKnowledge();
-var laterKids=function(){fetchKidsQuiz();fetchCatalog();};
+var laterKids=function(){fetchKidsQuiz();};
 if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000});else setTimeout(laterKids,1800);
 })();
 </script>
@@ -6913,7 +6799,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     try{
       var resumeProfileTab=sessionStorage.getItem("kids.profile.restoreTab")||"";
       sessionStorage.removeItem("kids.profile.restoreTab");
-      if(/^view-(today|stories|salaf|quran|parents)$/.test(resumeProfileTab)){
+      if(/^view-(today|stories|salaf|parents)$/.test(resumeProfileTab)){
         var targetTab=document.querySelector('.nav-btn[data-target="'+resumeProfileTab.slice(5)+'"]');
         if(targetTab)requestAnimationFrame(function(){targetTab.click()});
       }
@@ -11725,6 +11611,10 @@ html body :is(
   -webkit-user-drag:none!important;
 }
 /* Do not change touch-action, pointer-events, scrolling, tap targets, focus or keyboard editing. */
+</style>
+<style id="kids-quran-learning-retired-v1418">
+#view-today .big-choice-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+@media(max-width:620px){#view-today .big-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 </style>
 <!-- KIDS_SALAF_OPEN_WORLD_V1353: Salaf-only filmic full-bleed, profile-aware. Do not touch Home or floating dock. -->
 <link rel="stylesheet" href="/kids/salaf-open-world-v1353.css?v=1410">
