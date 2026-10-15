@@ -204,12 +204,21 @@ def main():
                    "Public manifest sentinel was unexpectedly modified")
             expect(gate.load(flag)["enabled"] is False,
                    "A passing test must not enable the release flag")
+            # Regression after a previous (synthetic) candidate must remove the
+            # obsolete file rather than leave an apparently approved artifact.
+            write(approvals, broken)
+            with patch.object(sys, "argv", ["test-release-guard", "--candidate"]):
+                expect_refused(gate.main, SystemExit, "stale candidate after failed approval")
+            expect(not candidate.exists(),
+                   "An obsolete private candidate was not invalidated on regression")
+            expect(public.read_bytes() == b"UNCHANGED PUBLIC MANIFEST SENTINEL",
+                   "Bad approval unexpectedly changed the public manifest")
 
     print("PASS_KIDS_V4_150_GATE_REGRESSION " + json.dumps({
         "fixturesAreSyntheticNotHumanApproved": True,
         "realMp3CheckedReadOnly": 1,
         "canonicalQuestions": len(rows),
-        "negativeScenarios": 9,
+        "negativeScenarios": 10,
         "positiveTemporaryFixtureOnly": 1,
         "oldAudioBytesModified": False,
         "publicAppModified": False,
