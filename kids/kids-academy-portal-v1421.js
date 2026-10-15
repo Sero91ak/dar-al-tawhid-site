@@ -1,7 +1,7 @@
 /* TAWḤĪD KIDS — V1422.
  * The Academy remains in its same-origin iframe, WITH the real Kids dock.
  * Reuse the one existing five-tab navigation; never clone tabs or reload Home.
- * Academy viewport ends above the dock's measured top edge (iOS safe areas).
+ * Academy fills the viewport; its inner scroll end clears the real measured dock.
  * Child profiles and lesson progress are never rewritten by navigation.
  */
 (function(){
@@ -18,14 +18,15 @@ function dockClearance(){
 }
 function measure(){
  if(!modal||modal.hidden)return;
- var nav=dock(),rect=nav&&nav.getBoundingClientRect();
+ // One full-viewport Academy canvas. The real floating dock stays on top;
+ // the iframe's OWN scrollports reserve the dock only at their scroll end.
+ // Never shorten the iframe itself, or the underlying Kids page leaks below it.
  var viewportHeight=window.innerHeight||document.documentElement.clientHeight||0;
- var portalHeight=rect&&rect.height>0 ? Math.floor(rect.top-GAP) : viewportHeight-128;
- modal.style.setProperty("--kids-academy-portal-height",Math.max(220,portalHeight)+"px");
- // The iframe itself now ends ABOVE the dock. Do not subtract the dock again.
+ var clearance=dockClearance();
+ modal.style.setProperty("--kids-academy-portal-height",Math.max(220,viewportHeight)+"px");
  try{
    var root=frame&&frame.contentDocument&&frame.contentDocument.documentElement;
-   if(root)root.style.setProperty("--kids-academy-dock-clearance","0px");
+   if(root)root.style.setProperty("--kids-academy-dock-clearance",clearance+"px");
  }catch(_){}
 }
 function selectLearn(){
