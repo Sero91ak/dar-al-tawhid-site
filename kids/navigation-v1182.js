@@ -317,22 +317,15 @@
   function afterClick(before,desc,back,token){
     if(token!==clickToken||replaying)return;
     var after=signature();
-    if(after===before){
-      if(desc&&desc.type==="tab"){
-        resetMainTop();
-        if(desc.target==="today")armHome();
-      }
-      return;
-    }
+    // The view's own handler already positions the page synchronously.
+    // A second delayed reset after a tap was causing a visible jump.
+    if(after===before)return;
     if(back){
       syncBackState(after);
       return;
     }
     pushState(desc,after);
-    if(desc&&desc.type==="tab"){
-      resetMainTop();
-      if(desc.target==="today")armHome();
-    }
+    // No second delayed tab reset or wordmark animation restart.
   }
 
   function onClickCapture(e){
@@ -392,8 +385,7 @@
     try{ok=replay(entry.desc)}catch(_){ok=false}
     setTimeout(function(){
       replaying=false;
-      if(entry.desc&&entry.desc.type==="tab")resetMainTop();
-      else restoreScrolls(entry.scrolls);
+      if(!(entry.desc&&entry.desc.type==="tab"))restoreScrolls(entry.scrolls);
     },140);
     return ok;
   }
@@ -475,10 +467,9 @@
   }
 
   function armHome(){
+    // V1422: preserve initialized DOM + fixed hero geometry on return.
+    // The intro animation must not restart for every home/back tap.
     lockHomeGeometry(false);
-    requestAnimationFrame(function(){
-      requestAnimationFrame(restartHomeMotion);
-    });
   }
 
   function init(){
@@ -494,12 +485,11 @@
     index=0;
     document.addEventListener("click",onClickCapture,true);
 
-    window.addEventListener("pageshow",function(){
+    window.addEventListener("pageshow",function(event){
       installLateLayout();
       lockHomeGeometry(false);
-      var active=activeTab();
-      if(!surfaceIds().length&&active)resetMainTop();
-      if(active==="today"){resetLaunchViewport();armHome();}
+      // Do not scroll or re-animate content when returning from bfcache.
+      if(!event.persisted&&activeTab()==="today")armHome();
     });
     window.addEventListener("orientationchange",function(){
       root.style.removeProperty("--kids-home-hero-height-fixed");
@@ -508,7 +498,8 @@
       setTimeout(function(){lockHomeGeometry(true);if(activeTab()==="today")armHome()},220);
     });
     document.addEventListener("visibilitychange",function(){
-      if(document.visibilityState==="visible"&&activeTab()==="today")armHome();
+      // Returning to this PWA is not a fresh entry; keep scroll and title.
+      if(document.visibilityState==="visible")lockHomeGeometry(false);
     });
     armHome();
     setTimeout(function(){if(activeTab()==="today")armHome()},320);
