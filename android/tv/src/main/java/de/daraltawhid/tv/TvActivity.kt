@@ -39,6 +39,7 @@ class TvActivity : Activity() {
     private val muted = Color.rgb(185, 171, 150)
     private val base = "https://dar-al-tawhid.de/apple-tv/"
     private val dashboardNavigation = TvDashboardNavigation()
+    private lateinit var adhanController: TvAdhanController
     private lateinit var nav: LinearLayout
     private lateinit var body: LinearLayout
     private lateinit var footer: TextView
@@ -183,6 +184,7 @@ class TvActivity : Activity() {
 
     override fun onResume() {
         super.onResume()
+        if (::adhanController.isInitialized) adhanController.start()
         if (::body.isInitialized) {
             if (System.currentTimeMillis() - lastContentRefreshAt >= contentRefreshIntervalMs
                 && activeTab == "home"
@@ -192,6 +194,7 @@ class TvActivity : Activity() {
     }
 
     override fun onPause() {
+        if (::adhanController.isInitialized) adhanController.stop()
         quranAutoPlay = false
         stopQuranAudio()
         contentRefreshHandler.removeCallbacks(contentRefreshTask)
@@ -218,6 +221,26 @@ class TvActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        adhanController = TvAdhanController(
+            activity = this,
+            fetchJson = { url, done -> fetchJson(url, done) },
+            getCity = { cities[cityIndex] },
+            pauseQuranForOverlay = {
+                val existing = quranPlayer
+                val wasPlaying = quranPlayerPrepared && existing?.isPlaying == true
+                if (wasPlaying) existing?.pause()
+                wasPlaying
+            },
+            resumeQuranAfterOverlay = {
+                if (quranPlayerPrepared && quranPlayer != null) {
+                    runCatching { quranPlayer?.start() }
+                }
+            },
+            onPresentationChanged = { presenting ->
+                if (presenting) contentRefreshHandler.removeCallbacks(contentRefreshTask)
+                else if (!isFinishing && ::body.isInitialized) scheduleContentRefresh()
+            }
+        )
         val shell = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(48), dp(25), dp(48), dp(22))
@@ -226,6 +249,14 @@ class TvActivity : Activity() {
         }
         shell.addView(label("DĀR AL TAWḤĪD", 32f, cream, true))
         shell.addView(label("WISSEN AUS QURʾĀN & SUNNAH  ·  TV", 13f, gold, false))
+        val settingsRow = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+        settingsRow.addView(navButton("Adhān · Einstellungen") {
+            adhanController.showSettings()
+        }, LinearLayout.LayoutParams(0, dp(48), 1f))
+        settingsRow.addView(navButton("Qurʾān · Rezitation") {
+            show("quran")
+        }, LinearLayout.LayoutParams(0, dp(48), 1f))
+        shell.addView(settingsRow)
 
         nav = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
@@ -308,6 +339,7 @@ class TvActivity : Activity() {
         left.addView(navButton("Stadt: ${cities[cityIndex].first}  ·  nächste Stadt") {
             cityIndex = (cityIndex + 1) % cities.size
             getPreferences(MODE_PRIVATE).edit().putInt("city_index", cityIndex).apply()
+            adhanController.locationChanged()
             // Clear the previous home view before loading new times.
             show("home")
             left.getChildAt(2)?.requestFocus()
@@ -505,6 +537,7 @@ class TvActivity : Activity() {
         target.addView(navButton("Ort ändern · ${selectedCity.first}") {
             cityIndex = (cityIndex + 1) % cities.size
             getPreferences(MODE_PRIVATE).edit().putInt("city_index", cityIndex).apply()
+            adhanController.locationChanged()
             show(activeTab)
         })
         val url = "https://dar-al-tawhid.de/api/prayer/times?lat=${selectedCity.second}&lon=${selectedCity.third}"
