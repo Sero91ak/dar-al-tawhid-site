@@ -49,6 +49,7 @@ jobs:
           set -euo pipefail
           python3 android/tv/tools/check_original_tv_assets.py
           bash -n android/tv/tools/push_original_tv_assets_from_mac.sh
+          bash -n android/tv/tools/tv_device_remote_qa.sh
           python3 -m py_compile android/tv/tools/check_original_tv_assets.py
           python3 -m py_compile android/tv/tools/import_original_apple_tv_assets.py
           if [ "${GITHUB_REF_NAME}" = "main" ]; then
