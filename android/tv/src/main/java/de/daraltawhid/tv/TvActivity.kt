@@ -1,6 +1,12 @@
 package de.daraltawhid.tv
 
 import android.app.Activity
+import android.app.AlertDialog
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.temporal.ChronoUnit
+import java.util.Locale
 import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.GradientDrawable
@@ -32,6 +38,8 @@ class TvActivity : Activity() {
     private val cream = Color.rgb(239, 226, 197)
     private val muted = Color.rgb(185, 171, 150)
     private val base = "https://dar-al-tawhid.de/apple-tv/"
+    private val dashboardNavigation = TvDashboardNavigation()
+    private lateinit var nav: LinearLayout
     private lateinit var body: LinearLayout
     private lateinit var footer: TextView
     // One native player at a time; never autoplay when loading or changing verses.
@@ -120,7 +128,7 @@ class TvActivity : Activity() {
 
     private var activeTab = "home"
     private var lastContentRefreshAt = 0L
-    private val contentRefreshIntervalMs = 6L * 60L * 60L * 1000L
+    private val contentRefreshIntervalMs = 15L * 60L * 1000L
     private val contentRefreshHandler = Handler(Looper.getMainLooper())
     private val contentRefreshTask = object : Runnable {
         override fun run() {
@@ -189,15 +197,13 @@ class TvActivity : Activity() {
         shell.addView(label("DĀR AL TAWḤĪD", 32f, cream, true))
         shell.addView(label("WISSEN AUS QURʾĀN & SUNNAH  ·  TV", 13f, gold, false))
 
-        val nav = LinearLayout(this).apply {
+        nav = LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL
             setPadding(0, dp(10), 0, dp(13))
         }
-        listOf(
-            "home" to "Startseite",
-            "hadith" to "Ḥadīṯe & Āṯār",
-            "tadabbur" to "Qurʾān & Tadabbur"
-        ).forEach { (id, title) ->
+        TvDashboardMode.entries.forEach { mode ->
+            val id = mode.route
+            val title = mode.title
             nav.addView(navButton(title) { show(id) },
                 LinearLayout.LayoutParams(0, dp(50), 1f).apply {
                     marginEnd = dp(13)
@@ -231,7 +237,7 @@ class TvActivity : Activity() {
         cityIndex = preferences.getInt("city_index", 0).coerceIn(0, cities.lastIndex)
         val initial = preferences.getString("tab", "home") ?: "home"
         show(initial)
-        nav.getChildAt(0)?.requestFocus()
+        nav.getChildAt(TvDashboardMode.entries.indexOf(TvDashboardMode.fromRoute(initial)))?.requestFocus()
     }
 
     private fun show(tab: String) {
@@ -239,9 +245,20 @@ class TvActivity : Activity() {
         renderGeneration += 1
         lastContentRefreshAt = System.currentTimeMillis()
         activeTab = tab
+        if (TvDashboardMode.entries.any { it.route == tab }) {
+            dashboardNavigation.selectMode(TvDashboardMode.fromRoute(tab))
+        }
         getPreferences(MODE_PRIVATE).edit().putString("tab", tab).apply()
         body.removeAllViews()
+        for (idx in TvDashboardMode.entries.indices) {
+            val button = nav.getChildAt(idx) as? Button ?: continue
+            button.contentDescription = button.text.toString() +
+                if (TvDashboardMode.entries[idx].route == tab) " · ausgewählt" else ""
+        }
         when (tab) {
+            "today" -> loadToday()
+            "calendar" -> loadCalendar()
+            "quran" -> loadQuranReader()
             "hadith" -> loadHadith()
             "tadabbur" -> loadTadabbur()
             else -> loadHome()
@@ -425,6 +442,165 @@ class TvActivity : Activity() {
         body.addView(navButton("Qurʾān & Tadabbur öffnen") { show("tadabbur") })
         body.addView(label("Ḥadīṯ-Sammlung", 29f, gold, true))
         body.addView(navButton("Überlieferungen lesen") { show("hadith") })
+    }
+
+
+    private fun splitDashboard(leftWeight: Float = 0.42f): Pair<LinearLayout, LinearLayout> {
+        val root = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+        val left = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(0, 0, dp(20), 0)
+        }
+        val right = LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            setPadding(dp(20), 0, 0, 0)
+        }
+        root.addView(left, LinearLayout.LayoutParams(0, -2, leftWeight))
+        root.addView(View(this).apply { setBackgroundColor(gold) },
+            LinearLayout.LayoutParams(dp(1), -1))
+        root.addView(right, LinearLayout.LayoutParams(0, -2, 1f - leftWeight))
+        body.addView(root)
+        return left to right
+    }
+
+    private fun addRule(target: LinearLayout) {
+        target.addView(View(this).apply { setBackgroundColor(Color.argb(85, 199, 160, 89)) },
+            LinearLayout.LayoutParams(-1, dp(1)).apply {
+                topMargin = dp(12)
+                bottomMargin = dp(12)
+            })
+    }
+
+    private fun addPrayerSummary(target: LinearLayout) {
+        val generation = renderGeneration
+        val selectedCity = cities[cityIndex]
+        target.addView(label("Gebetszeiten · ${selectedCity.first}", 23f, gold, true))
+        val next = label("Nächstes Gebet wird geladen …", 23f, cream, true)
+        target.addView(next)
+        target.addView(navButton("Ort ändern · ${selectedCity.first}") {
+            cityIndex = (cityIndex + 1) % cities.size
+            getPreferences(MODE_PRIVATE).edit().putInt("city_index", cityIndex).apply()
+            show(activeTab)
+        })
+        val url = "https://dar-al-tawhid.de/api/prayer/times?lat=${selectedCity.second}&lon=${selectedCity.third}"
+        fetchJson(url) { json ->
+            if (generation != renderGeneration || cities[cityIndex] != selectedCity) return@fetchJson
+            val root = json?.optJSONObject("times")
+                ?: json?.optJSONObject("prayers")
+                ?: json?.optJSONObject("data") ?: json
+            val names = listOf(
+                "fajr" to "Faǧr", "dhuhr" to "Ẓuhr", "asr" to "ʿAṣr",
+                "maghrib" to "Maġrib", "isha" to "ʿIšāʾ"
+            )
+            val now = LocalDateTime.now()
+            val upcoming = names.mapNotNull { (key, name) ->
+                val raw = root?.opt(key) ?: root?.opt(key.replaceFirstChar { it.uppercase() })
+                val time = when (raw) {
+                    is JSONObject -> raw.optString("time")
+                    is String -> raw
+                    else -> ""
+                }
+                val parsed = Regex("""(?:[01]?\\d|2[0-3]):[0-5]\\d""").find(time)?.value
+                    ?.let { runCatching { LocalTime.parse(it) }.getOrNull() }
+                parsed?.let {
+                    val at = LocalDateTime.of(LocalDate.now(), it)
+                    Triple(name, it.toString(), if (at.isAfter(now)) at else at.plusDays(1))
+                }
+            }
+            val nextPrayer = upcoming.minByOrNull { it.third }
+            if (upcoming.size != 5 || nextPrayer == null) {
+                next.text = "Gebetszeiten momentan nicht vollständig verfügbar."
+            } else {
+                val minutes = ChronoUnit.MINUTES.between(now, nextPrayer.third).coerceAtLeast(0L)
+                next.text = "Nächstes Gebet: ${nextPrayer.first} · ${nextPrayer.second}\n" +
+                    "in ${minutes / 60} Std. ${minutes % 60} Min."
+            }
+        }
+    }
+
+    private fun addVerifiedDailyVerse(
+        target: LinearLayout,
+        title: String,
+        reference: String,
+        screen: String,
+        generation: Int
+    ) {
+        target.addView(label(title, 23f, gold, true))
+        val arabic = label("Arabischer Vers wird geladen …", 24f, cream, false).apply {
+            textDirection = View.TEXT_DIRECTION_RTL
+        }
+        val german = label("Deutsche Übersetzung wird geladen …", 20f, cream, false)
+        target.addView(arabic)
+        target.addView(german)
+        fetchJson("https://api.alquran.cloud/v1/ayah/$reference/quran-uthmani") { json ->
+            if (screen == activeTab && generation == renderGeneration) {
+                arabic.text = json?.optJSONObject("data")?.optString("text")
+                    ?.takeIf { it.isNotBlank() } ?: "Arabischer Text nicht erreichbar."
+            }
+        }
+        fetchJson("https://api.alquran.cloud/v1/ayah/$reference/de.bubenheim") { json ->
+            if (screen == activeTab && generation == renderGeneration) {
+                german.text = json?.optJSONObject("data")?.optString("text")
+                    ?.takeIf { it.isNotBlank() } ?: "Deutsche Übersetzung nicht erreichbar."
+            }
+        }
+    }
+
+    // Original tvOS: Today's left prayer/weather block and right daily Duʿāʾ/Āyah.
+    private fun loadToday() {
+        val generation = renderGeneration
+        body.addView(label("Heute", 30f, gold, true))
+        val (left, right) = splitDashboard()
+        addPrayerSummary(left)
+        val city = cities[cityIndex]
+        val weather = label("Wetter wird geladen …", 18f, muted, false)
+        left.addView(weather)
+        val url = "https://api.open-meteo.com/v1/forecast?latitude=${city.second}&longitude=${city.third}&current=temperature_2m"
+        fetchJson(url) { data ->
+            if (generation != renderGeneration || activeTab != "today") return@fetchJson
+            val temperature = data?.optJSONObject("current")?.optDouble("temperature_2m", Double.NaN)
+            weather.text = if (temperature != null && temperature.isFinite()) {
+                "Wetter · ${city.first} · ${"%.0f".format(Locale.GERMANY, temperature)} °C"
+            } else "Wetter vorübergehend nicht abrufbar."
+        }
+        right.addView(label("Duʿāʾ und Āyah des Tages", 27f, gold, true))
+        addVerifiedDailyVerse(right, "Duʿāʾ · al-Kahf 18:10", "18:10", "today", generation)
+        addRule(right)
+        addVerifiedDailyVerse(right, "Āyah · ar-Raʿd 13:28", "13:28", "today", generation)
+        right.addView(navButton("Ḥadīṯ-Bibliothek öffnen") { show("hadith") })
+    }
+
+    // Original tvOS: Islamic calendar and upcoming dates left; next prayer,
+    // seven-day comparison right. The dates are Hijrah/Umm-al-Qura estimates.
+    private fun loadCalendar() {
+        body.addView(label("Islamischer Kalender", 30f, gold, true))
+        val (left, right) = splitDashboard(0.52f)
+        val today = LocalDate.now()
+        left.addView(label(TvIslamicCalendar.hijriLabel(today), 29f, cream, true))
+        left.addView(label(TvIslamicCalendar.gregorianLabel(today), 18f, muted, false))
+        addRule(left)
+        left.addView(label("Anstehende islamische Termine", 24f, gold, true))
+        TvIslamicCalendar.upcoming(today, 5).forEach { event ->
+            left.addView(label(
+                "${event.name} · ${event.hijri}\n" +
+                    "${TvIslamicCalendar.gregorianLabel(event.date)} · ${event.detail}",
+                18f, cream, false
+            ))
+            addRule(left)
+        }
+        left.addView(label("Berechnete Hijrī-Daten; örtliche Mondsichtung kann abweichen.", 14f, muted, false))
+        addPrayerSummary(right)
+        addRule(right)
+        right.addView(label("7-Tage-Vorschau", 24f, gold, true))
+        for (offset in 0L..6L) {
+            val day = today.plusDays(offset)
+            right.addView(label(
+                "${TvIslamicCalendar.gregorianLabel(day)} · ${TvIslamicCalendar.hijriLabel(day)}",
+                if (offset == 0L) 20f else 18f,
+                if (offset == 0L) gold else cream,
+                offset == 0L
+            ))
+        }
     }
 
     private fun loadHadith() {
