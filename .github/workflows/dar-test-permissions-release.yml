@@ -35,7 +35,13 @@ jobs:
           grep -Fq 'Ort ermitteln' test/assets/dar-setup-hub.js
           git diff HEAD --name-only > /tmp/dar-test-permissions-changed.txt
           cat /tmp/dar-test-permissions-changed.txt
-          if grep -Ev '^(test/assets/dar-setup-hub\.(js|css))
+          if grep -Ev '^(test/assets/dar-setup-hub\.(js|css))$' /tmp/dar-test-permissions-changed.txt | grep .; then
+            echo "::error::Ausschließlich Test-Hub-JS/CSS dürfen geändert werden."
+            exit 1
+          fi
+          git rev-parse origin/main > /tmp/dar-test-main-sha.txt
+
+      - uses: actions/setup-node@v4
         with:
           node-version: "24"
 
@@ -106,12 +112,12 @@ jobs:
           node scripts/push-system-guard.js
           node scripts/push-lanes-guard.js
 
-      - name: Prüfen, dass der Hauptzweig nicht inzwischen weitergezogen ist
+      - name: Hauptzweig auf veralteten Build prüfen
         shell: bash
         run: |
           git fetch --no-tags origin main
           test "$(git rev-parse origin/main)" = "$(cat /tmp/dar-test-main-sha.txt)" || {
-            echo "::error::Main hat sich während des Builds geändert. Alter Build wird nicht auf Dar Test ausgerollt."
+            echo "::error::Main inzwischen geändert – alten Stand nicht veröffentlichen."
             exit 1
           }
 
@@ -121,91 +127,8 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: npx wrangler deploy -c wrangler.test.toml
 
- /tmp/dar-test-permissions-changed.txt | grep .; then
-            echo "::error::Ausschließlich Test-Hub-JS/CSS dürfen geändert werden."
-            exit 1
-          fi
-          git rev-parse origin/main > /tmp/dar-test-main-sha.txt
 
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Test-App Staging aus test-library-canonical übernehmen
-        run: |
-          git fetch origin test-library-canonical
-          node scripts/overlay-test-staging-from-branch.js
-          node scripts/app-stability-repair.js
-
-      # Keep the approved adult Test Quran Player independent of other branches.
-      # This affects only /test resources, never visitor or KIDS application code.
-      - name: Dar Test Adult Quran V10.8-R canonical assets
-        run: |
-          git fetch origin test-quran-player-v108r-canonical
-          git checkout origin/test-quran-player-v108r-canonical -- test/assets/dar-quran-player.js test/assets/dar-quran-player.css
-          node - <<'NODE'
-          const fs=require('fs');
-          const script=fs.readFileSync('test/assets/dar-quran-player.js','utf8');
-          const match=script.match(/PLAYER_BUILD\s*=\s*(\d+)/);
-          if(!match)throw Error('Test Quran player build missing');
-          const version=match[1], file='test/index.html';
-          let html=fs.readFileSync(file,'utf8');
-          if(!/\/test\/assets\/dar-quran-player\.js\?v=\d+/.test(html)||!/var WANT=\d+;/.test(html))
-            throw Error('Test shell missing player script or boot version');
-          html=html.replace(/(\/test\/assets\/dar-quran-player\.js\?v=)\d+/g, '$1'+version)
-                   .replace(/var WANT=\d+;/g, 'var WANT='+version+';');
-          fs.writeFileSync(file,html);
-          console.log('Dar Test Quran Player canonical version',version);
-          NODE
-
-      - name: Build + Build-IDs synchronisieren
-        run: npm run build
-
-      - name: Originales iOS-Dar-Test-Icon für Android-Web-App erzeugen
-        shell: bash
-        run: |
-          set -euo pipefail
-          node test/tools/build-apple-icons.cjs
-          test -s test/assets/dar-test-apple-icon-192.png
-          test -s test/assets/dar-test-apple-icon-512.png
-          node - <<'NODE'
-          const fs=require('fs');
-          const m=JSON.parse(fs.readFileSync('test/manifest.json','utf8'));
-          if(m.id!=='/test/?env=staging'||m.scope!=='/test/')throw Error('Test manifest scope mismatch');
-          for(const icon of m.icons||[]){
-            const name=icon.src.split('?')[0].replace(/^\//,'');
-            const png=fs.readFileSync(name);
-            const expected=Number(icon.sizes.split('x')[0]);
-            if(!png.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))||png.readUInt32BE(16)!==expected||png.readUInt32BE(20)!==expected)throw Error('PNG icon mismatch '+name);
-          }
-          NODE
-
-      - name: Verify Android DAR TEST installation
-        run: node test/tools/check-android-install.cjs
-
-      - name: Dar Test Health Check
-        env:
-          GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
-          INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
-        run: |
-          node --check cloudflare/test-app-worker.js
-          node scripts/test-app-health-check.js
-          node scripts/library-deploy-guard.js
-          node scripts/app-stability-guard.js
-          node scripts/push-system-guard.js
-          node scripts/push-lanes-guard.js
-
-      - name: Deploy Dar Test Worker
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx wrangler deploy -c wrangler.test.toml
-
-
-      - name: Test-Worker Live-Assets nach Veröffentlichung überprüfen
+      - name: Live-Assets nur auf Test-Worker überprüfen
         shell: bash
         run: |
           set -euo pipefail
