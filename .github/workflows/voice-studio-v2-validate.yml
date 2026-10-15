@@ -811,6 +811,10 @@ jobs:
           installer=Path("voice-studio/install-mac.command").read_text(encoding="utf-8")
           engine=Path("voice-studio/local-engine.py").read_text(encoding="utf-8")
           kids=Path("kids/index.html").read_text(encoding="utf-8")
+          # Retired Kids lessons do not remove the protected studio audio workflow.
+          retired=json.loads(Path("kids/version.json").read_text(encoding="utf-8"))
+          kids_learning_retired=(retired.get("quranLearningEnabled") is False
+                                 and retired.get("alifBaRuntimeRemoved") is True)
           manifest=Path("kids/data/alphabet-audio.json").read_text(encoding="utf-8")
           worker=Path("cloudflare/worker.js").read_text(encoding="utf-8")
           media=Path("cloudflare/kids-content-media.js").read_text(encoding="utf-8")
@@ -902,7 +906,21 @@ jobs:
                   '"mixedSpeakersForbidden": true',
               ]),
           ]
+          if kids_learning_retired:
+              # Keep tests for Quiz/Stories/Duʿāʾ; do not demand removed lessons.
+              current_required=[
+                  'QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v2."',
+                  'recordQuizAttempt(q.id,!quizQuestionHadError)',
+                  'STORY_PROGRESS_PREFIX="kids.story.progress.v2."',
+                  'recordStoryAttempt(currentStoryKey,!storyQuestionHadError)',
+                  'DUA_PROGRESS_PREFIX="kids.dua.progress.v2."',
+                  'recordDuaAttempt(d.id,!duaQuestionHadError)',
+              ]
+              groups=[(label,src,current_required if label=="kids" else required)
+                      for label,src,required in groups]
           errors=[]
+          if kids_learning_retired and ('id="view-quran"' in kids or 'id="view-alphabet"' in kids):
+              errors.append("Retired Kids Qurʾān/Alif-Bāʾ lesson UI was reintroduced")
           for label,source,required in groups:
               missing=[x for x in required if x not in source]
               if missing:
@@ -927,7 +945,7 @@ jobs:
               errors.append("legacy one-shot story mastery returned")
           if 'localStorage.setItem("kids.dua."+d.id,"1")' in kids:
               errors.append("legacy one-shot Dua mastery returned")
-          if 'recordQuranAttempt(!ayahPracticeHadError)' not in kids:
+          if not kids_learning_retired and 'recordQuranAttempt(!ayahPracticeHadError)' not in kids:
               errors.append("spaced Quran ayah mastery missing")
           if 'if(!candidateHeard)' not in studio:
               errors.append("Serhat alphabet candidate full-listen gate missing")
