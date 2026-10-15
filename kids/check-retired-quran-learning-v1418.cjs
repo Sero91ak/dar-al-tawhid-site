@@ -31,7 +31,7 @@ assert.equal(manifest.quranLearningRuntimeRemoved,true);
 assert.equal(manifest.alifBaRuntimeRemoved,true);
 assert.equal(manifest.quranLearningArchivedUserProgressRetained,true);
 assert.equal(manifest.visualSystem.alphabetEnabled,false);
-const expectedCache="dar-al-tawhid-kids-"+String(manifest.visualSystem.serviceWorkerCache||"").replace(/^v/,"");
+const expectedCache="dar-al-tawhid-kids-"+String(manifest.visualSystem.serviceWorkerCache||"");
 assert.equal(sw.includes(expectedCache),true,"KIDS SW cache must match the published release version without resetting profile data");
 assert.ok(!sw.includes('/kids/assets/kids-art/quran-surahs-v1053.jpg'),"Do not precache retired art");
 let inline=0;
