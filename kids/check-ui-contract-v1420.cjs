@@ -17,7 +17,7 @@ let pos=-1;
 for(const mark of marks){const n=nav.indexOf(mark);assert.ok(n>pos,"Wrong nav order: "+mark);pos=n;}
 assert.ok(nav.includes('data-academy-open="1"')&&html.includes("/kids/kids-academy-portal-v1421.js?v=1422"),"Lernen must open same-app Academy without a full page reload");
 assert.ok(!nav.includes('href="/kids/akademie/index.html"'),"Navigation must not trigger a full page reload");
-assert.ok(html.includes('kids-academy-girl-seam-v1421.css?v=1421'),"Account modal gender correction must load");
+assert.ok(html.includes('kids-academy-girl-seam-v1421.css?v=1422'),"Account modal gender correction must load");
 const portalJs=read("kids/kids-academy-portal-v1421.js");
 const portalCss=read("kids/kids-academy-girl-seam-v1421.css");
 assert.ok(portalJs.includes('frame.src="/kids/akademie/index.html?kidsPortal=1"'),"Academy must be embedded in the existing app");
@@ -37,7 +37,7 @@ assert.ok(portalJs.includes('event.data.goHome===true')&&portalJs.includes('if(g
 assert.ok(portalJs.includes("nav.parentNode.insertBefore(modal,nav)")&&portalCss.includes("--kids-academy-portal-height"),"Academy must reuse the exact existing Kids bottom dock");
 assert.ok(html.includes('join.dataset.gender=')&&html.includes('name==="login"?"none"'),"Login must track gender and hide duplicate cancel");
 assert.ok(portalCss.includes('#kidsJoin[data-gender="girl"]')&&!portalCss.includes('.app[data-gender="boy"]'),"Girl login must have a separate profile-scoped palette");
-assert.ok(sw.includes('/kids/kids-academy-portal-v1421.js?v=1421')&&sw.includes('/kids/kids-academy-girl-seam-v1421.css?v=1421'),"New navigation and girls CSS must be offline cached");
+assert.ok(sw.includes('/kids/kids-academy-portal-v1421.js?v=1422')&&sw.includes('/kids/kids-academy-girl-seam-v1421.css?v=1422'),"New navigation and girls CSS must be offline cached");
 assert.ok(!nav.includes('data-target="salaf"')&&!nav.includes('data-target="quran"'),"No stale or retired tab");
 assert.ok(dua.includes('const order = [today, stories, learn, dua, parents]'),"Stale iOS nav healing must exist");
 assert.ok(dua.includes("event.stopImmediatePropagation()"),"Old tab handlers must not hijack Duʿāʾ");
