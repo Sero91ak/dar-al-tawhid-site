@@ -1,4 +1,5 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1418-quran-listen-only";
+const CACHE_NAME="dar-al-tawhid-kids-v1410";
+// KIDS_QURAN_AUDIO_ONLY_CACHE_REFRESH_V1418: SW bytes changed so installed apps re-fetch current HTML without breaking locked release-cache identity.
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
