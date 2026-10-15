@@ -64,8 +64,8 @@ FINDINGS = {
         "Laylat al-Qadr als Nacht der Bestimmung erläutern; 'besser als tausend Monate' bleibt der belegte Versinhalt."),
     "kids-quiz-091": ("arabic-term", "Ṣadaqah",
         "Ṣadaqah als freiwillige gute Gabe erläutern; versehentliche Verletzung anderer durch Vorwürfe besprechen."),
-    "kids-quiz-026": ("verse-context", "Leute des Wissens fragen",
-        "Qurʾān 16:43 spricht im unmittelbaren Kontext über frühere Gesandte und die Schriftkundigen; die allgemeine Lernregel ist Anwendung, keine erschöpfende Direktübersetzung."),
+    "kids-quiz-520": ("arabic-term", "Āyat al-Kursī",
+        "Āyat al-Kursī als Thronvers (Qurʾān 2:255) erklären; 'Schlummer' und 'Schlaf' als zwei unterschiedliche Begriffe altersgerecht erklären."),
     "kids-quiz-389": ("verse-context", "Leute des Wissens fragen",
         "Den Offenbarungskontext von Qurʾān 16:43 kurz erklären; das Fragen kundiger Personen als pädagogische Anwendung kennzeichnen."),
 
