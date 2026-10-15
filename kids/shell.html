@@ -3185,10 +3185,10 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
         <span class="kids-salaf-feature-art" aria-hidden="true"></span>
         <span class="kids-salaf-feature-copy"><small>GESCHICHTEN · WERTVOLLE LEHREN</small><strong>Schätze der Salaf</strong><span>Gute Vorbilder entdecken und von ihnen lernen</span></span>
       </button>
-      <a href="/kids/akademie/index.html" class="academy-pilot-entry" aria-label="Meine Lernakademie öffnen">
+      <button type="button" class="academy-pilot-entry" data-academy-open="1" aria-label="Meine Lernakademie öffnen">
         <span class="academy-pilot-text"><small>LERNEN · MEINE AKADEMIE</small><strong>Meine Lernakademie</strong><span>Spannende Lektionen · Schritt für Schritt lernen</span></span>
         <span class="academy-pilot-arrow" aria-hidden="true">→</span>
-      </a>
+      </button>
 
       <button id="knowledgeCard" class="knowledge-card" type="button">
         <span class="kicon" aria-hidden="true"></span>
@@ -3306,7 +3306,7 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
   <nav class="bottom-nav" aria-label="Hauptnavigation">
     <button class="nav-btn active" data-target="today"><span class="ico"></span><span class="lab">Heute</span></button>
     <button class="nav-btn" data-target="stories"><span class="ico"></span><span class="lab">Hören</span></button>
-    <a class="nav-btn kids-academy-tab" href="/kids/akademie/index.html" aria-label="Lernakademie öffnen"><span class="ico" aria-hidden="true"></span><span class="lab">Lernen</span></a>
+    <button type="button" class="nav-btn kids-academy-tab" data-academy-open="1" aria-label="Lernakademie öffnen"><span class="ico" aria-hidden="true"></span><span class="lab">Lernen</span></button>
     <button class="nav-btn" data-target="dua" aria-label="Meine Duʿāʾ"><span class="ico"></span><span class="lab">Duʿāʾ</span></button>
     <button class="nav-btn" data-target="parents"><span class="ico"></span><span class="lab">Eltern</span></button>
   </nav>
@@ -6588,6 +6588,8 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     if(name==="place")name="name";
     joinFeedback("","info");document.getElementById("joinLoginExisting").hidden=true;
     join.querySelectorAll(".step").forEach(function(s){s.classList.toggle("on",s.getAttribute("data-step")===name)});
+    var globalCancel=document.getElementById("joinCancel");
+    if(globalCancel)globalCancel.style.display=name==="login"?"none":localStorage.getItem(ACTIVE)?"block":"none";
     join.querySelectorAll(".join-feedback").forEach(function(el){el.hidden=true;el.textContent=""});
     var card=join.querySelector(".kids-join-card");
     if(card)card.scrollTop=0;
@@ -6612,6 +6614,8 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var shellForJoin=document.querySelector(".shell");
     joinScrollY=shellForJoin?shellForJoin.scrollTop:0;
     join.classList.add("open");
+    var activeApp=document.querySelector(".app");
+    join.dataset.gender=activeApp?.getAttribute("data-gender")==="girl"?"girl":activeApp?.getAttribute("data-gender")==="boy"?"boy":draft.gender==="girl"?"girl":"boy";
     var cancel=document.getElementById("joinCancel");
     var has=!!localStorage.getItem(ACTIVE);
     join.querySelectorAll(".join-skip").forEach(function(b){b.style.display=has?"none":"block"});
@@ -6734,6 +6738,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var p=load().find(function(x){return x.id===id});
     if(!p)return;
     openJoin("login");
+    join.dataset.gender=p.gender==="girl"?"girl":"boy";
     document.getElementById("deviceLoginName").value=p.name||"";
     document.getElementById("deviceLoginPass").value="";
   }
@@ -6742,6 +6747,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   join.querySelectorAll("[data-gender]").forEach(function(b){
     b.addEventListener("click",function(){
       draft.gender=b.getAttribute("data-gender");
+      join.dataset.gender=draft.gender==="girl"?"girl":"boy";
       try{localStorage.setItem(GUEST_GENDER,draft.gender)}catch(e){}
       step("age");
     });
@@ -11631,4 +11637,6 @@ html body :is(
 <link rel="stylesheet" href="/kids/girls-profile-global-seam-v1416.css?v=1416">
 <link rel="stylesheet" href="/kids/kids-ui-contract-v1420.css?v=1421" data-kids-ui-contract="v1420">
 <link rel="stylesheet" href="/kids/kids-nav-v1421.css?v=1421" data-kids-navigation-contract="v1421">
+<link rel="stylesheet" href="/kids/kids-academy-girl-seam-v1421.css?v=1421" data-kids-girl-account-portal="v1421">
+<script defer src="/kids/kids-academy-portal-v1421.js?v=1421"></script>
 </html>
