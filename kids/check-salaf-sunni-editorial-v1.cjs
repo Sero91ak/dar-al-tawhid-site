@@ -63,4 +63,24 @@ for (const item of data.items) {
   }
 }
 assert.ok(live >= approvedLegacy.size, "Approved legacy stories unexpectedly missing");
+
+/* KIDS_SALAF_LAUNCH_32_V1: target is an editorial milestone, not a
+ * permission to show unreviewed placeholders or reject later expansion. */
+const launch=data.launchTarget;
+assert.ok(launch && launch.approvedStoriesPerCategory===4 && launch.totalStories===32,
+  "Salaf target must be 4 × 8 = 32");
+assert.equal(new Set(launch.categoryIds).size,8,"Salaf eight category IDs must be unique");
+assert.ok(launch.categoryIds.every(id=>allowedCategories.has(id)),"Salaf target categories mismatch");
+assert.equal(launch.progressVisibility,"internal-only","Never show missing-story production numbers to children");
+assert.equal(launch.doNotShowPlaceholdersToChildren,true,"No visitor placeholders");
+const categoryTotals=Object.fromEntries([...allowedCategories].map(id=>[id,0]));
+const approvedPersons=new Set();
+for(const item of data.items.filter(x=>x.verification==="approved"&&x.editorialRelease===true)){
+  categoryTotals[item.category]++;
+  assert.ok(!approvedPersons.has(item.person),"Avoid duplicate historical protagonist in initial Salaf library: "+item.person);
+  approvedPersons.add(item.person);
+}
+const missingForTarget=[...allowedCategories].reduce((total,id)=>total+Math.max(0,launch.approvedStoriesPerCategory-categoryTotals[id]),0);
+console.log("Salaf launch: "+live+"/"+launch.totalStories+" published, "+missingForTarget+" still to verify for 4 per category");
+
 console.log("PASS Salaf early-Sunni editorial metadata gate: " + live + " approved, " + pending + " safely hidden");
