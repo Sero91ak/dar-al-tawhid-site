@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 from zipfile import ZipFile, ZIP_STORED
 
@@ -96,7 +97,7 @@ def main():
                 if slot["textSha256"] != track["textSha"]:
                     raise RuntimeError("Question audio text SHA mismatch")
                 used[mp3] = item["sha256"]
-                track.update({"src": "../" + str(mp3.relative_to(ROOT)),
+                track.update({"src": os.path.relpath(mp3, HTML.parent).replace(os.sep, "/"),
                               "audioSha": item["sha256"]})
             tracks.append(track)
         full += bool(has_four)
