@@ -45,6 +45,22 @@ class TvActivity : Activity() {
     // One native player at a time; never autoplay when loading or changing verses.
     private var quranPlayer: MediaPlayer? = null
     private var audioGeneration = 0
+    private var quranSurah = 1
+    private var quranAyah = 1
+    private var quranAutoPlay = false
+    private var selectedReciter = "ar.alafasy"
+    private var quranChapterLoading = false
+    private val quranChapterLengths = mutableMapOf(1 to 7, 114 to 6)
+    private var quranChapterNames: Array<String> = emptyArray()
+    private val quranReciters = listOf(
+        "ar.alafasy" to "Mišārī Rāšid al-ʿAfāsī",
+        "ar.abdurrahmaansudais" to "ʿAbd ar-Raḥmān as-Sudays",
+        "ar.saoodshuraym" to "Saʿūd aš-Šuraym",
+        "ar.husary" to "Maḥmūd al-Ḥuṣarī",
+        "ar.minshawi" to "Muḥammad al-Minšāwī",
+        "ar.abdulbasitmurattal" to "ʿAbd al-Bāsiṭ",
+        "ar.mahermuaiqly" to "Māhir al-Muʿayqlī"
+    )
 
     private fun stopQuranAudio() {
         audioGeneration += 1
@@ -61,9 +77,18 @@ class TvActivity : Activity() {
             surah in 1..114 && ayah in 1..286
     }
 
-    private fun playQuranVerse(reference: String, status: TextView) {
+    private fun playQuranVerse(
+        reference: String,
+        status: TextView,
+        edition: String = "ar.alafasy",
+        onComplete: (() -> Unit)? = null
+    ) {
         if (!isValidAyahReference(reference)) {
             status.text = "Ungültige Versreferenz – keine Wiedergabe."
+            return
+        }
+        if (edition !in quranReciters.map { it.first }) {
+            status.text = "Dieser Rezitator ist nicht freigegeben."
             return
         }
         stopQuranAudio()
@@ -71,7 +96,7 @@ class TvActivity : Activity() {
         status.text = "Rezitation für $reference wird geladen …"
         // Resolve the CDN file URL from the quran-ayah source instead of
         // assuming the text endpoint contains playable audio bytes.
-        fetchJson("https://api.alquran.cloud/v1/ayah/$reference/ar.alafasy") { response ->
+        fetchJson("https://api.alquran.cloud/v1/ayah/$reference/$edition") { response ->
             if (generation != audioGeneration) return@fetchJson
             val audioUrl = response?.optJSONObject("data")?.optString("audio").orEmpty()
             if (!audioUrl.startsWith("https://")) {
@@ -91,6 +116,7 @@ class TvActivity : Activity() {
                     if (generation == audioGeneration) {
                         status.text = "Rezitation beendet"
                         stopQuranAudio()
+                        onComplete?.invoke()
                     }
                 }
                 player.setOnErrorListener { _, _, _ ->
@@ -163,6 +189,7 @@ class TvActivity : Activity() {
     }
 
     override fun onPause() {
+        quranAutoPlay = false
         stopQuranAudio()
         contentRefreshHandler.removeCallbacks(contentRefreshTask)
         super.onPause()
@@ -235,6 +262,10 @@ class TvActivity : Activity() {
 
         val preferences = getPreferences(MODE_PRIVATE)
         cityIndex = preferences.getInt("city_index", 0).coerceIn(0, cities.lastIndex)
+        quranSurah = preferences.getInt("quran_surah", 1).coerceIn(1, 114)
+        quranAyah = preferences.getInt("quran_ayah", 1).coerceAtLeast(1)
+        selectedReciter = preferences.getString("quran_reciter", "ar.alafasy")
+            ?.takeIf { id -> quranReciters.any { it.first == id } } ?: "ar.alafasy"
         val initial = preferences.getString("tab", "home") ?: "home"
         show(initial)
         nav.getChildAt(TvDashboardMode.entries.indexOf(TvDashboardMode.fromRoute(initial)))?.requestFocus()
@@ -242,6 +273,7 @@ class TvActivity : Activity() {
 
     private fun show(tab: String) {
         stopQuranAudio()
+        if (tab != "quran") quranAutoPlay = false
         renderGeneration += 1
         lastContentRefreshAt = System.currentTimeMillis()
         activeTab = tab
