@@ -18,6 +18,9 @@ OLD=DATA/"quiz-v4-age7to10-composed-preview.json"
 YSTAT=DATA/"quiz-v4-first150-audio-status.json"
 OSTAT=DATA/"quiz-v4-age7to10-offline-coverage.json"
 FLAG=DATA/"quiz-curation-release.json"
+CANONICAL=DATA/"quiz-kids.json"
+SELECTED=DATA/"quiz-kids-curated-450-review.json"
+RESERVE=DATA/"quiz-kids-expansion-reserve-450.json"
 REPORT=ROOT/".github/reports/kids-v4-all450-crossage-technical-qa.json"
 VOICE="DkU7j9uO4ZEtLD2iRZSH"
 MODEL="eleven_v4"
@@ -70,6 +73,31 @@ def validate_clip(clip,hash_cache,context):
 def main():
     plan,reg,y,o=map(load,(PLAN,REG,YOUNG,OLD))
     ys,os,flag=map(load,(YSTAT,OSTAT,FLAG))
+    canonical,selected,reserved=map(load,(CANONICAL,SELECTED,RESERVE))
+    source_items=canonical.get("items") or []
+    selected_items=selected.get("items") or []
+    reserved_items=reserved.get("items") or []
+    assert_ok(len(source_items)==900 and len(selected_items)==450 and
+              len(reserved_items)==450,
+              "Canonical/selected/reserved question count must be 900/450/450")
+    original_by_id={row["id"]:row for row in source_items}
+    selected_by_id={row["id"]:row for row in selected_items}
+    reserved_by_id={row["id"]:row for row in reserved_items}
+    assert_ok(len(original_by_id)==900 and len(selected_by_id)==450 and
+              len(reserved_by_id)==450,
+              "Duplicate original, selected, or reserved quiz IDs")
+    assert_ok(set(selected_by_id).isdisjoint(reserved_by_id) and
+              set(selected_by_id)|set(reserved_by_id)==set(original_by_id),
+              "Selected 450 + reserved 450 must form complete disjoint original 900")
+    assert_ok(all(original_by_id.get(id_)==row for id_,row in selected_by_id.items())
+              and all(original_by_id.get(id_)==row for id_,row in reserved_by_id.items()),
+              "Original lesson question payloads must remain byte-equivalent as JSON")
+    assert_ok(set(q["questionId"] for q in plan["recipes"])==set(selected_by_id),
+              "The 450 V4 audio recipes do not match the exact selected 450 questions")
+    for band in BANDS:
+        assert_ok(sum(row["ageBand"]==band for row in selected_items)==150 and
+                  sum(row["ageBand"]==band for row in reserved_items)==150,
+                  "Selected/reserved age groups must have exactly 150 questions each")
     assert_ok(flag.get("enabled") is False and flag.get("curatedQuestions")==450
               and flag.get("reserveQuestions")==450,"450+450 catalog or release flag changed")
     assert_ok(len(plan.get("recipes") or [])==450,"Selected plan must contain 450 recipes")
@@ -186,6 +214,8 @@ def main():
             "reviewOnly":True,"livePublished":False,"publicManifestChanged":False,
             "newSpeechCreditsSpent":0,"humanHearingApproved":False,
             "selectedQuestionsVerified":450,"preservedReserveQuestions":450,
+            "all900QuestionIdsDisjointAndComplete":True,
+            "selectedAndReserveTextsMatchCanonicalExactly":True,
             "ageBandBreakdown":stats,
             "totalCompleteFourPartQuestions":complete_total,
             "originalBackedFieldAssignments":audio_fields_total,
