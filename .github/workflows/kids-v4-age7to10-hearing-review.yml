@@ -34,6 +34,7 @@ jobs:
           from pathlib import Path
           archive=Path("kids/review-only/quiz-v4-age7to10-hearing-bundle.zip")
           manifest=json.load(open("kids/data/quiz-v4-age7to10-composed-preview.json"))
+          summary=json.load(open("kids/data/quiz-v4-age7to10-offline-coverage.json"))
           with zipfile.ZipFile(archive) as z:
               files=z.namelist()
               assert len(files)==len(manifest["entries"])+1, "Wrong real MP3 count"
@@ -41,9 +42,13 @@ jobs:
               assert all(item.endswith(".mp3") for item in files[1:])
               assert z.testzip() is None
               html=z.read(files[0]).decode("utf-8")
-              assert '"questionCount":300' in html
-              assert '"fullQuestions":2' in html
-              assert '"uniqueAudioFiles":38' in html
+              data_match=re.search(r'<script type="application/json" id="review-data">(.*?)</script>',html,re.S)
+              assert data_match, "Missing private hearing payload"
+              data=json.loads(data_match.group(1))
+              assert data["questionCount"]==300 and len(data["parts"])==300
+              expected_full=sum(summary["byAge"][age]["completeFourPartQuestions"] for age in ("7-8","9-10"))
+              assert data["fullQuestions"]==expected_full, "Hearing desk must track current audited coverage"
+              assert data["uniqueAudioFiles"]==len(manifest["entries"]), "Every current audio must be in the offline review"
               assert "reportedIssuesByTextSha" in html
               assert "human-auditory-approvals.json" in html
               scripts=re.findall(r"<script(?![^>]*application/json)[^>]*>(.*?)</script>",html,re.S)
@@ -51,7 +56,7 @@ jobs:
               Path("/tmp/tawhid-kids-v4-older-age-hearing.js").write_text(scripts[0],encoding="utf-8")
           PY
           node --check /tmp/tawhid-kids-v4-older-age-hearing.js
-          echo "PASS: 300 questions, 38 original-only MP3 audio clips, zero synthesis, no public site changes"
+          echo "PASS: 300 questions, dynamic current original-only MP3 coverage, zero synthesis, no public site changes"
       - name: Export internal package as GitHub artifact, never a live app resource
         if: always()
         uses: actions/upload-artifact@v4
