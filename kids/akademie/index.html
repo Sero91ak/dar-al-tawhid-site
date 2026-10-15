@@ -3703,20 +3703,29 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
   },true);
 })();
 </script><link rel="stylesheet" href="/kids/kids-ui-contract-v1420.css?v=1420" data-kids-ui-contract="v1420">
-<style id="kids-academy-dock-scroll-v1422">
-/* In-app Academy: the parent iframe viewport ends ABOVE the fixed global dock.
-   Preserve existing Academy header and the three independent scroll surfaces. */
+<style id="kids-academy-edge-scroll-v1423">
+/* Edge-to-edge in the same Kids shell; content passes beneath the single dock.
+   Its last card can always scroll to a stop above that dock. */
+html{--kids-academy-dock-clearance:128px}
 body[data-kids-portal="true"] :is(#academyHome,#academySubject,#stageSurface){
- scroll-padding-block-end:24px!important;
  overscroll-behavior-y:contain!important;
  -webkit-overflow-scrolling:touch;
+ scrollbar-width:none!important;
+}
+body[data-kids-portal="true"] :is(#academyHome,#academySubject,#stageSurface)::-webkit-scrollbar{
+ display:none!important;width:0!important;height:0!important;
 }
 body[data-kids-portal="true"] #academyHome:not([hidden]),
 body[data-kids-portal="true"] #academySubject:not([hidden]){
- padding-bottom:max(24px,env(safe-area-inset-bottom,0px))!important;
+ padding-bottom:calc(var(--kids-academy-dock-clearance) + 20px)!important;
+ scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 20px)!important;
+}
+body[data-kids-portal="true"][data-academy-view="lesson"] > main.wrap > #lessonMain.lesson-main:not([hidden]){
+ padding-bottom:calc(var(--kids-academy-dock-clearance) + 8px)!important;
 }
 body[data-kids-portal="true"] #stageSurface{
- padding-bottom:max(24px,env(safe-area-inset-bottom,0px))!important;
+ scroll-padding-block-end:20px!important;
+ padding-bottom:20px!important;
 }
 </style>
 </head>
