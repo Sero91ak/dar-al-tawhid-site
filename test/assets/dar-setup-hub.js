@@ -489,3 +489,215 @@
   document.addEventListener("dar:render", schedulePolish);
   schedulePolish();
 })();
+
+
+/* DAR_TEST_NOTIFICATION_LOCATION_V3
+   Einziger Ort für Berechtigungen: die vorhandene Seite Benachrichtigungen.
+   GPS wird ausschließlich durch einen direkten Nutzertipp angefragt.
+   Nutzt getPrayerSettings, reversePrayerCity, setPrayerSettings und render
+   aus der offiziellen Test-App; keine weitere Push- oder Navigationslogik.
+ */
+(function(){
+  "use strict";
+  if(!/^\/test(?:\/|$)/.test(String(location.pathname||"")))return;
+  var PAGE="body.is-notifications-route .notification-center-page";
+  var GPS_ID="darNotificationGpsQuickV3";
+  var scheduled=false;
+  var pending=false;
+  var viewObserver=null;
+
+  function prayerSettings(){
+    try{return typeof getPrayerSettings==="function"?getPrayerSettings():{};}catch(e){return {};}
+  }
+  function setFeedback(message){
+    var node=document.querySelector("#"+GPS_ID+" [data-dar-gps-feedback]");
+    if(!node)return;
+    node.textContent=String(message||"");
+    node.hidden=!message;
+  }
+  function setGpsText(message){
+    var node=document.querySelector("#"+GPS_ID+" [data-dar-gps-summary]");
+    if(node)node.textContent=message;
+  }
+  function permissionLabel(state){
+    if(state==="granted")return "Standortzugriff erlaubt. Du kannst deinen Ort jederzeit aktualisieren.";
+    if(state==="denied")return "Standortzugriff am Gerät gesperrt. Die manuelle Ortswahl bleibt möglich.";
+    if(state==="prompt")return "Automatische Ortung erst nach deiner Zustimmung.";
+    return "Standort automatisch erkennen oder die Stadt manuell auswählen.";
+  }
+  function refreshPermission(){
+    var node=document.getElementById(GPS_ID);
+    if(!node)return;
+    setGpsText(permissionLabel(""));
+    try{
+      if(!navigator.geolocation){
+        setGpsText("Geräteortung hier nicht verfügbar. Stadt über „Ändern“ auswählen.");
+        var btn=node.querySelector("[data-dar-detect-location]");
+        if(btn)btn.disabled=true;
+        return;
+      }
+      if(navigator.permissions&&typeof navigator.permissions.query==="function"){
+        navigator.permissions.query({name:"geolocation"}).then(function(result){
+          if(node.isConnected&&!pending)setGpsText(permissionLabel(result&&result.state));
+        }).catch(function(){});
+      }
+    }catch(e){}
+  }
+  function updateSummary(){
+    var page=document.querySelector(PAGE);
+    if(!page)return;
+    var count=page.querySelector(".notification-hero__count > span");
+    if(count){
+      var num=count.querySelector("b");
+      if(num){
+        var label=Number(num.textContent||0)===1?"Erinnerungsart gewählt":"Erinnerungsarten gewählt";
+        count.setAttribute("aria-label",num.textContent+" "+label);
+        var textNode=Array.prototype.slice.call(count.childNodes).find(function(n){return n.nodeType===3;});
+        if(textNode&&textNode.textContent.trim()!=="gewählt")textNode.textContent=" gewählt";
+      }
+    }
+    var test=page.querySelector("#notificationDeviceTestBtn");
+    if(test){
+      test.hidden=true;
+      test.setAttribute("hidden","");
+      test.setAttribute("aria-hidden","true");
+      test.tabIndex=-1;
+    }
+    var note=page.querySelector(".notification-note");
+    if(note&&!note.hasAttribute("data-dar-readable-note")){
+      note.textContent="Deine Auswahl wird auf diesem Gerät gespeichert.";
+      note.setAttribute("data-dar-readable-note","1");
+    }
+    var reenable=page.querySelector("#notificationReenableBtn");
+    if(reenable){
+      reenable.textContent="Mitteilungen einrichten";
+    }
+    var status=page.querySelector("#notificationHealthText");
+    if(status){
+      var raw=String(status.textContent||"").trim();
+      var newLabel="";
+      if(/^Push nicht vollständig aktiv/.test(raw)){
+        newLabel=/Berechtigung/.test(raw)
+          ?"Mitteilungen sind auf diesem Gerät noch nicht freigegeben."
+          :"Mitteilungen sind noch nicht vollständig eingerichtet.";
+      }else if(/^(?:Safari\/Web Push|Web Push|iOS Native) aktiv/.test(raw)){
+        newLabel="Mitteilungen sind mit deinem Gerät verbunden.";
+      }else if(raw==="Push-Status wird geprüft…"){
+        newLabel="Gerätefreigabe wird geprüft …";
+      }
+      if(newLabel&&newLabel!==raw)status.textContent=newLabel;
+    }
+  }
+  async function locate(button){
+    if(pending)return;
+    if(!navigator.geolocation&&!(window.DAR_NATIVE_LOCATION)){
+      setFeedback("Standortbestimmung ist hier nicht verfügbar. Bitte „Ändern“ wählen.");
+      return;
+    }
+    if(!window.isSecureContext&&!(window.DAR_NATIVE_LOCATION)){
+      setFeedback("Standortfreigabe benötigt eine sichere HTTPS-Verbindung.");
+      return;
+    }
+    pending=true;
+    button.disabled=true;
+    button.textContent="Wird ermittelt …";
+    setFeedback("");
+    try{
+      /* Native Location oder Browser-Geolocation: synchron im Klick gestartet. */
+      var pos;
+      if(typeof requestBrowserPosition==="function"){
+        pos=await requestBrowserPosition();
+      }else{
+        pos=await new Promise(function(resolve,reject){
+          navigator.geolocation.getCurrentPosition(resolve,reject,{
+            enableHighAccuracy:true,timeout:12000,maximumAge:600000
+          });
+        });
+      }
+      var lat=Number(pos&&pos.coords&&pos.coords.latitude);
+      var lon=Number(pos&&pos.coords&&pos.coords.longitude);
+      if(!Number.isFinite(lat)||!Number.isFinite(lon)||lat<-90||lat>90||lon<-180||lon>180){
+        throw new Error("invalid_coordinates");
+      }
+      var city=typeof reversePrayerCity==="function"
+        ?await reversePrayerCity(lat,lon):"Aktueller Standort";
+      if(typeof setPrayerSettings!=="function")throw new Error("prayer_settings_unavailable");
+      setPrayerSettings({lat:lat,lon:lon,city:String(city||"Aktueller Standort"),
+        locationGranted:true});
+      setFeedback("Standort übernommen: "+city+". Die Gebetszeiten verwenden nun diesen Ort.");
+      if(typeof render==="function")render();
+      else queue();
+    }catch(err){
+      var code=Number(err&&err.code||0);
+      if(code===1){
+        setFeedback("Standortzugriff verweigert. Bitte die Freigabe in den Geräte- oder Browser-Einstellungen ändern. Die manuelle Stadtwahl bleibt möglich.");
+      }else if(code===3){
+        setFeedback("Standortbestimmung dauert zu lange. Bitte erneut versuchen oder die Stadt manuell auswählen.");
+      }else{
+        setFeedback("Ort konnte nicht ermittelt werden. Bitte erneut versuchen oder „Ändern“ nutzen.");
+      }
+    }finally{
+      pending=false;
+      if(button.isConnected){
+        button.disabled=false;
+        button.textContent="Standort erkennen";
+      }
+      refreshPermission();
+    }
+  }
+  function mount(){
+    var page=document.querySelector(PAGE);
+    if(!page)return;
+    var original=page.querySelector(".notification-location");
+    if(!original)return;
+    var row=document.getElementById(GPS_ID);
+    if(!row||!page.contains(row)){
+      row=document.createElement("div");
+      row.id=GPS_ID;
+      row.className="notification-gps-quick";
+      row.innerHTML=[
+        '<div class="notification-gps-quick__copy">',
+        ' <strong>Automatischer Standort</strong>',
+        ' <small data-dar-gps-summary>Standort nur mit deiner Zustimmung erkennen.</small>',
+        '</div>',
+        '<button type="button" class="notification-gps-quick__btn" data-dar-detect-location>Standort erkennen</button>',
+        '<p class="notification-gps-quick__feedback" data-dar-gps-feedback hidden role="status" aria-live="polite"></p>'
+      ].join("");
+      original.insertAdjacentElement("afterend",row);
+      row.addEventListener("click",function(ev){
+        var btn=ev.target&&ev.target.closest("[data-dar-detect-location]");
+        if(!btn||!row.contains(btn))return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        locate(btn);
+      });
+      refreshPermission();
+    }
+    updateSummary();
+  }
+  function queue(){
+    if(scheduled)return;
+    scheduled=true;
+    requestAnimationFrame(function(){
+      scheduled=false;
+      try{mount()}catch(e){}
+    });
+  }
+  function boot(){
+    var app=document.getElementById("appView");
+    if(app&&!viewObserver){
+      viewObserver=new MutationObserver(queue);
+      viewObserver.observe(app,{childList:true,subtree:true,characterData:false});
+    }
+    queue();
+    window.addEventListener("hashchange",queue);
+    window.addEventListener("pageshow",queue);
+    document.addEventListener("dar:render",queue);
+    document.addEventListener("dar:view-rendered",queue);
+    document.addEventListener("visibilitychange",function(){
+      if(!document.hidden){refreshPermission();queue();}
+    });
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});
+  else boot();
+})();
