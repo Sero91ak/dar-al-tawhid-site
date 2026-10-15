@@ -1,0 +1,33 @@
+name: KIDS V4 Previously Paid Original Import Security Audit (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/import_quiz_v4_prepaid_flow_originals.py'
+      - 'kids/tools/test_quiz_v4_prepaid_original_import.py'
+      - '.github/workflows/kids-v4-prepaid-import-audit.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-prepaid-import-readonly-security-audit
+  cancel-in-progress: false
+
+jobs:
+  verify-existing-paid-clips-and-import-guards:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout PR review branch, no live build
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Run read-only MP3 source and import safety checks
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/import_quiz_v4_prepaid_flow_originals.py kids/tools/test_quiz_v4_prepaid_original_import.py
+          python3 kids/tools/test_quiz_v4_prepaid_original_import.py
+          echo "PASS: all original MP3 import controls held; no ElevenLabs API invoked"
