@@ -24,6 +24,8 @@ on:
       - kids/index.html
       - kids/start.html
       - kids/shell.html
+      # Home scroll/navigation hotfixes must reach the iOS Kids visitor app.
+      - kids/navigation-v1182.js
       - kids/akademie/**
       # Any change to academy guard tests must trigger the same production CI.
       - kids/tools/test-academy-sequential-lock-v27.cjs
