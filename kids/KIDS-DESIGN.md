@@ -487,3 +487,14 @@ In allen Kinderansichten bleibt der **konkrete Quellenbeleg als reiner, gut lesb
 - Das alte verzögerte `kids-story-touch-glow`-System (560 ms) ist deaktiviert; die alte CSS-Datei liefert nur einen zurückhaltenden Fallback nach denselben Variablen.
 - **Ausnahme:** Zurück- und Kopfzeilensteuerungen, globale Navigation und andere nicht als Inhaltskarte gedachte Funktionen erhalten keinen Themenkarten-Glow. Sichtbare Tastaturfokuszustände bleiben dennoch erhalten.
 - Änderungen der Kapsel-Interaktion dürfen keine Abstände, Safe-Areas, Audiofunktionen oder Seitenwechsel verändern.
+
+
+## KIDS_NO_STANDALONE_QURAN_LEARNER_V1418 — nur Qurʾān anhören
+
+**Verbindliche Benutzerentscheidung vom 15.10.2026:** Die eigenständige Alif-Bāʾ-Lernwelt und das Qurʾān-Wort-für-Wort-/Mikrofon-Übungssystem gehören **nicht** mehr zur TAWḤĪD KIDS Besucher-App und dürfen dort nicht erneut angezeigt, gestartet oder als tägliche Pflichtaufgabe aktiviert werden.
+
+- **Erlaubt:** Qurʾān-Sūrah/Āyāt auswählen, arabischen Text betrachten, eine vorhandene Rezitation anhören, vor- und zurückblättern und zur zuletzt gehörten Āyah zurückkehren.
+- **Nicht erlaubt:** Alif-Bāʾ-Lernkarten oder Alif-Bāʾ-Übungen, Ausspracheampel, Mikrofon-/Spracherkennungstraining, freigeschaltete Āyāt nach Sprachbewertung, getrennte Übungsmodi, Wiederholungszwang oder Qurʾān-Lernpflicht in der täglichen Reise.
+- **Unverändert:** Duʿāʾ-Bereich mit eigenen freigegebenen Lehrfunktionen, islamische Lernakademie, Quiz, Salaf, Propheten-/Ṣaḥābah-Geschichten sowie unabhängige Rezitationsaufnahmen und vorhandene Nutzer-Lernstände.
+- Alte Alif-Bāʾ-Daten und bezahlte Audiobestände bleiben als interne Archive zur rechtssicheren Rückabwicklung und Datenwahrung erhalten, dürfen aber **nicht** im Besucher-Navigationsbaum, in der PWA-Precache-Liste oder als sichtbarer Lernweg eingebunden sein.
+- Release-Guard: `scripts/kids-design-guard.js` überprüft `KIDS_QURAN_LISTEN_ONLY_V1418`, alle drei gleichen HTML-Einstiege, den deaktivierten Mikrofoneinstieg, `quranLearningSystemEnabled:false` und den geänderten Service Worker. Nur nach dokumentierter neuer Nutzerfreigabe darf diese Regel wieder geändert werden.
