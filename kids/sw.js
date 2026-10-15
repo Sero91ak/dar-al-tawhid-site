@@ -9,7 +9,7 @@ const CORE_PRECACHE=[
   "/kids/kids-nav-v1421.css?v=1422",
   "/kids/kids-motion-v1422.css?v=1422",
   "/kids/kids-academy-girl-seam-v1421.css?v=1422",
-  "/kids/kids-academy-portal-v1421.js?v=1422",
+  "/kids/kids-academy-portal-v1421.js?v=1423",
   "/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422",
   "/kids/assets/kids-icons/dua-real-v12.png?v=1421",
   "/kids/kids-ui-contract-v1420.css?v=1421",
@@ -279,7 +279,8 @@ const PRECACHE=CORE_PRECACHE.concat([
 // illustrations/audio clips. Save the EXACT image used by the final homepage CSS.
 // Larger visual and voice libraries download separately in resumable packs.
 const KIDS_BOOT_PRECACHE=[
-  "/kids/kids-academy-portal-v1421.js?v=1422",
+  "/kids/kids-ui-contract-v1420.css?v=1421",
+  "/kids/kids-academy-portal-v1421.js?v=1423",
   "/kids/kids-academy-girl-seam-v1421.css?v=1422",
   "/kids/kids-nav-v1421.css?v=1422",
   "/kids/start",
