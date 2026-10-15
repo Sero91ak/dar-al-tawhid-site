@@ -119,7 +119,7 @@ function open(event){
    });
  }
  if(!frame.getAttribute("src")){
-   frame.src="/kids/akademie/index.html?kidsPortal=1&dockClearance="+dockClearance();
+   frame.src="/kids/akademie/index.html?kidsPortal=1&dockClearance="+dockClearance()+"&edgeScroll=1426";
  }else if(ready){
    try{frame.contentWindow.postMessage({type:"DAR_KIDS_ACADEMY_RESUME_V1421"},location.origin)}catch(_){}
  }
