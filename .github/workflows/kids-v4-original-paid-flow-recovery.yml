@@ -1,0 +1,59 @@
+name: KIDS V4 Previously Paid Flow MP3 Recovery Audit (0 credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/import_quiz_v4_previous_paid_originals.py'
+      - '.github/workflows/kids-v4-original-paid-flow-recovery.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-original-paid-flow-recovery
+  cancel-in-progress: false
+
+jobs:
+  original-recovery-audit:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout original paid V4 review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Verify 56 already-paid original generation mapping, no ElevenLabs API calls
+        run: |
+          python3 -m py_compile kids/tools/import_quiz_v4_previous_paid_originals.py
+          python3 kids/tools/import_quiz_v4_previous_paid_originals.py --audit --write-report
+          python3 - <<'PY'
+          import json
+          path='kids/data/quiz-v4-paid-flow-recovery-status.json'
+          d=json.load(open(path))
+          assert d['expectedPreviouslyPaidGenerationIDs']==56
+          assert d['alreadyImportedGenerationIDs']>=0
+          assert d['uniqueIDsStillMissing']>=0
+          assert d['missingForFirst150Age4to6']>=0
+          assert len(d['missingOriginalGenerationIDs'])==d['uniqueIDsStillMissing']
+          assert d['purchaseAuthorized'] is False and d['liveReleaseAllowed'] is False
+          print('PASS: 56 real previously paid original V4 generation IDs mapped, zero credits')
+          PY
+      - name: Save accurate, credential-free original Flow gap inventory in GitHub review
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          for attempt in 1 2 3; do
+            git fetch origin "$branch"
+            git reset --hard FETCH_HEAD
+            python3 kids/tools/import_quiz_v4_previous_paid_originals.py --audit --write-report
+            git add kids/data/quiz-v4-paid-flow-recovery-status.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m "audit(kids): identify all missing previously paid V4 Flow MP3s for free import"
+            if git push origin HEAD:"$branch"; then exit 0; fi
+          done
+          echo "::error::Missing-original inventory could not be saved, no paid calls were made"
+          exit 1
