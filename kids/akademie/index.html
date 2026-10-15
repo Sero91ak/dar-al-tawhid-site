@@ -5085,4 +5085,49 @@ html body :is(
 }
 /* Do not change touch-action, pointer-events, scrolling, tap targets, focus or keyboard editing. */
 </style>
+<style id="kids-academy-top-edge-guard-v1427">
+/* KIDS_ACADEMY_TOP_EDGE_GUARD_V1427: prevent elastic displacement of full-bleed hero below fixed appbar.
+   Keep the existing inner-scroll layout, live dock clearance, and vertical panning. */
+html body > main.wrap > :is(#academyHome,#academySubject):not([hidden]),
+html body #stageSurface{
+  overscroll-behavior-y:none!important;
+}
+</style>
+<script id="kids-academy-top-edge-guard-v1427">
+(function(){
+  "use strict";
+  if(window.__kidsAcademyTopEdgeGuardV1427)return;
+  window.__kidsAcademyTopEdgeGuardV1427=true;
+  var scrollSelector="#academyHome:not([hidden]),#academySubject:not([hidden]),#stageSurface";
+  var touchRoot=null,lastX=null,lastY=null;
+  function clear(){touchRoot=null;lastX=null;lastY=null;}
+  function scrolledAboveTop(target,root){
+    for(var node=target;node instanceof HTMLElement;node=node.parentElement){
+      if(node.scrollTop>0.5){
+        var overflowY=getComputedStyle(node).overflowY;
+        if(/^(auto|scroll|overlay)$/.test(overflowY))return true;
+      }
+      if(node===root)break;
+    }
+    return false;
+  }
+  document.addEventListener("touchstart",function(event){
+    if(!event.touches||event.touches.length!==1){clear();return;}
+    var target=event.target;
+    touchRoot=target instanceof Element?target.closest(scrollSelector):null;
+    if(!touchRoot){clear();return;}
+    lastX=event.touches[0].clientX;
+    lastY=event.touches[0].clientY;
+  },{capture:true,passive:true});
+  document.addEventListener("touchmove",function(event){
+    if(!touchRoot||lastY===null||!event.touches||event.touches.length!==1)return;
+    var t=event.touches[0],dx=t.clientX-lastX,dy=t.clientY-lastY;
+    lastX=t.clientX;lastY=t.clientY;
+    if(event.defaultPrevented||!event.cancelable||dy<=0||dy<=Math.abs(dx))return;
+    if(!scrolledAboveTop(event.target,touchRoot))event.preventDefault();
+  },{capture:true,passive:false});
+  document.addEventListener("touchend",clear,{capture:true,passive:true});
+  document.addEventListener("touchcancel",clear,{capture:true,passive:true});
+})();
+</script>
 </body></html>
