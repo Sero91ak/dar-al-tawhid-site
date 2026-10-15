@@ -419,3 +419,14 @@ html body.is-notifications-route .notification-center-page :is(button,select,inp
 @media (prefers-reduced-motion:reduce){
  html body.is-notifications-route .notification-center-page * {transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
+
+/* Native App: kein zweiter Einrichtungskasten auf der Einstellungsseite. */
+html.dar-ios-native-app body.is-settings-route #dar-ios-setup-assistant{
+  display:none!important;
+  pointer-events:none!important;
+}
+html.dar-ios-native-app body.is-settings-route #dar-setup-hub[data-dar-setup]{
+  display:block!important;
+}
+/* Settings-Weiterleitung statt verdoppelter Benachrichtigungsoberfläche. */
+html body.is-settings-route .settings-one-page > #dar-setup-hub + .notification-center-page{display:none!important}
