@@ -6,11 +6,11 @@ const KIDS_BUILD_ID="kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
-  "/kids/kids-nav-v1421.css?v=1421",
+  "/kids/kids-nav-v1421.css?v=1422",
   "/kids/kids-motion-v1422.css?v=1422",
   "/kids/kids-academy-girl-seam-v1421.css?v=1422",
   "/kids/kids-academy-portal-v1421.js?v=1422",
-  "/kids/assets/kids-icons/learning-book-premium-v1421.svg?v=1421",
+  "/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422",
   "/kids/assets/kids-icons/dua-real-v12.png?v=1421",
   "/kids/kids-ui-contract-v1420.css?v=1421",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1272",
@@ -281,7 +281,7 @@ const PRECACHE=CORE_PRECACHE.concat([
 const KIDS_BOOT_PRECACHE=[
   "/kids/kids-academy-portal-v1421.js?v=1422",
   "/kids/kids-academy-girl-seam-v1421.css?v=1422",
-  "/kids/kids-nav-v1421.css?v=1421",
+  "/kids/kids-nav-v1421.css?v=1422",
   "/kids/start",
   "/kids/start.html",
   "/kids/index.html",
@@ -466,7 +466,7 @@ self.addEventListener("fetch",function(event){
     event.respondWith(networkFirst(request));
     return;
   }
-  if(url.pathname==="/kids/kids-nav-v1421.css"||url.pathname==="/kids/assets/kids-icons/learning-book-premium-v1421.svg"){
+  if(url.pathname==="/kids/kids-nav-v1421.css"||url.pathname==="/kids/assets/kids-icons/learning-book-3d-v1422.png"){
     event.respondWith(networkFirst(request));
     return;
   }
