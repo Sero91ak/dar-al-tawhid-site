@@ -1,6 +1,6 @@
 {
-  "scope": "TAWḤĪD KIDS 56 previously paid V4 ORIGINALS / import only",
-  "mode": "offline-only-no-new-credits",
+  "scope": "TAWḤĪD KIDS 56 previously paid V4 Flow originals",
+  "mode": "AUDIT_OR_DELEGATE_TO_CANONICAL_IMPORTER_NO_TTS",
   "expectedPreviouslyPaidGenerationIDs": 56,
   "alreadyImportedGenerationIDs": 0,
   "MP3sAvailableInLocalInbox": 0,
@@ -64,6 +64,7 @@
     "yg3OZMyPDghXCNp1oAVe",
     "zz0jZ6ybshrDKTqeYHh7"
   ],
+  "centralImporter": "kids/tools/import_quiz_v4_prepaid_flow_originals.py",
   "purchaseAuthorized": false,
   "liveReleaseAllowed": false
 }
