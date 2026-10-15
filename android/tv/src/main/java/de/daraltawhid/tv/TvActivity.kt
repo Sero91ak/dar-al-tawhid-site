@@ -14,6 +14,8 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.os.SystemClock
+import android.view.KeyEvent
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
@@ -40,6 +42,23 @@ class TvActivity : Activity() {
     private val base = "https://dar-al-tawhid.de/apple-tv/"
     private val dashboardNavigation = TvDashboardNavigation()
     private lateinit var adhanController: TvAdhanController
+    private val screensaverClock = TvIdleScreensaverClock()
+    private lateinit var screensaver: TvScreensaverOverlay
+    private var tvWindowFocused = true
+    private val screensaverHandler = Handler(Looper.getMainLooper())
+    private val screensaverTick = object : Runnable {
+        override fun run() {
+            if (isFinishing || isDestroyed || !::screensaver.isInitialized) return
+            val now = SystemClock.elapsedRealtime()
+            val isReciting = quranPlayerPrepared && quranPlayer?.isPlaying == true
+            val suppressed = !tvWindowFocused ||
+                (::adhanController.isInitialized && adhanController.presenting) ||
+                isReciting
+            screensaverClock.updateSuppression(suppressed, now)
+            if (screensaverClock.tick(now)) screensaver.show()
+            screensaverHandler.postDelayed(this, 1000L)
+        }
+    }
     private lateinit var nav: LinearLayout
     private lateinit var body: LinearLayout
     private lateinit var footer: TextView
@@ -185,6 +204,10 @@ class TvActivity : Activity() {
     override fun onResume() {
         super.onResume()
         if (::adhanController.isInitialized) adhanController.start()
+        screensaverClock.start(SystemClock.elapsedRealtime(),
+            getPreferences(MODE_PRIVATE).getBoolean("dar.tv.screensaver.enabled", true))
+        screensaverHandler.removeCallbacks(screensaverTick)
+        screensaverHandler.postDelayed(screensaverTick, 1000L)
         if (::body.isInitialized) {
             if (System.currentTimeMillis() - lastContentRefreshAt >= contentRefreshIntervalMs
                 && activeTab == "home"
@@ -194,6 +217,9 @@ class TvActivity : Activity() {
     }
 
     override fun onPause() {
+        screensaverHandler.removeCallbacks(screensaverTick)
+        screensaverClock.stop()
+        if (::screensaver.isInitialized) screensaver.hide()
         if (::adhanController.isInitialized) adhanController.stop()
         quranAutoPlay = false
         stopQuranAudio()
@@ -221,6 +247,11 @@ class TvActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        screensaver = TvScreensaverOverlay(
+            activity = this,
+            fetchJson = { url, done -> fetchJson(url, done) },
+            onClose = { screensaverClock.onInput(SystemClock.elapsedRealtime()) }
+        )
         adhanController = TvAdhanController(
             activity = this,
             fetchJson = { url, done -> fetchJson(url, done) },
@@ -1008,6 +1039,31 @@ class TvActivity : Activity() {
             val result = value
             runOnUiThread { if (!isFinishing && !isDestroyed) done(result) }
         }
+    }
+
+
+    override fun dispatchKeyEvent(event: KeyEvent): Boolean {
+        if (::screensaver.isInitialized && screensaver.visible) {
+            if (event.action == KeyEvent.ACTION_DOWN) screensaver.hide()
+            return true  // wake-only key: never fire a button underneath
+        }
+        if (event.action == KeyEvent.ACTION_DOWN) {
+            screensaverClock.onInput(SystemClock.elapsedRealtime())
+        }
+        return super.dispatchKeyEvent(event)
+    }
+
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        tvWindowFocused = hasFocus
+        screensaverClock.updateSuppression(!hasFocus, SystemClock.elapsedRealtime())
+    }
+
+    override fun onDestroy() {
+        screensaverHandler.removeCallbacks(screensaverTick)
+        if (::screensaver.isInitialized) screensaver.hide()
+        if (::adhanController.isInitialized) adhanController.stop()
+        super.onDestroy()
     }
 
     private fun cleanMarkdown(raw: String): String =
