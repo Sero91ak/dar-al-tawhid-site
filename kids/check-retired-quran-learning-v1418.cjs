@@ -50,4 +50,5 @@ assert.ok(html.includes('class="profile-dot"') && html.includes('id="profileList
 assert.ok(html.includes('/kids/dua-hub-v1219.js?v=1419'),"New profile runtime must bust installed PWA cache");
 assert.ok(sw.includes('"/kids/dua-hub-v1219.js?v=1419"') &&
   sw.includes('url.pathname==="/kids/dua-hub-v1219.js"'),"New avatar runtime must work online/offline");
+require("./check-ui-contract-v1420.cjs");
 console.log("PASS KIDS V1418: Quran/Alif-Ba learning UI retired, legacy routes blocked, other modules preserved; parsed "+inline+" inline scripts");
