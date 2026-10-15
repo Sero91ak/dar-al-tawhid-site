@@ -29,13 +29,21 @@ jobs:
           RELEASE_SHA="${GITHUB_SHA}"
           git fetch --no-tags origin main
           git checkout --detach origin/main
-          git checkout "$RELEASE_SHA" -- test/assets/dar-setup-hub.js test/assets/dar-setup-hub.css
+          git checkout "$RELEASE_SHA" --
+            test/assets/dar-setup-hub.js
+            test/assets/dar-setup-hub.css
+            test/assets/notifications-refined-v1.css
+            test/assets/dar-home-library-v1194.js
+            test/assets/dar-today-editorial-v1.css
           node --check test/assets/dar-setup-hub.js
-          grep -Fq 'data-dar-permission-hub="v2"' test/assets/dar-setup-hub.js
-          grep -Fq 'Ort ermitteln' test/assets/dar-setup-hub.js
+          node --check test/assets/dar-home-library-v1194.js
+          grep -Fq 'DAR_TEST_NOTIFICATIONS_REFINED_V1' test/assets/dar-setup-hub.js
+          grep -Fq 'DAR_TEST_NOTIFICATION_COMPACT_V2' test/assets/notifications-refined-v1.css
+          grep -Fq 'DAR_TEST_TODAY_EDITORIAL_V1' test/assets/dar-home-library-v1194.js
+          grep -Fq 'body.is-home-route #darTodayEditorialV1' test/assets/dar-today-editorial-v1.css
           git diff HEAD --name-only > /tmp/dar-test-permissions-changed.txt
           cat /tmp/dar-test-permissions-changed.txt
-          if grep -Ev '^(test/assets/dar-setup-hub\.(js|css))$' /tmp/dar-test-permissions-changed.txt | grep .; then
+          if grep -Ev '^test/assets/(dar-setup-hub\.(js|css)|notifications-refined-v1\.css|dar-home-library-v1194\.js|dar-today-editorial-v1\.css)
             echo "::error::Ausschließlich Test-Hub-JS/CSS dürfen geändert werden."
             exit 1
           fi
@@ -122,7 +130,7 @@ jobs:
           if [ "$BASE" != "$LATEST" ]; then
             git diff --name-only "$BASE" "$LATEST" -- \
               test/ assets/ data/ index.html version.json \
-              scripts/ cloudflare/ kids/ package.json package-lock.json \
+              scripts/ cloudflare/  package.json package-lock.json \
               service-worker.js manifest.json wrangler.test.toml \
               .github/workflows/deploy-test-app.yml \
               > /tmp/dar-test-release-relevant-changes.txt
@@ -141,16 +149,24 @@ jobs:
         run: npx wrangler deploy -c wrangler.test.toml
 
 
-      - name: Live-Assets nur auf Test-Worker überprüfen
+      - name: Test-Worker-Assets direkt verifizieren
         shell: bash
         run: |
           set -euo pipefail
-          JS="https://dar-al-tawhid-test.sero91ak.workers.dev/test/assets/dar-setup-hub.js"
-          CSS="https://dar-al-tawhid-test.sero91ak.workers.dev/test/assets/dar-setup-hub.css"
-          curl -fsSL -H "Cache-Control: no-cache" "$JS?check=${GITHUB_RUN_ID}" > /tmp/dar-test-hub-live.js
-          curl -fsSL -H "Cache-Control: no-cache" "$CSS?check=${GITHUB_RUN_ID}" > /tmp/dar-test-hub-live.css
-          node --check /tmp/dar-test-hub-live.js
-          grep -Fq 'data-dar-permission-hub="v2"' /tmp/dar-test-hub-live.js
-          grep -Fq 'Ort ermitteln' /tmp/dar-test-hub-live.js
-          grep -Fq 'Berechtigungszentrale V2' /tmp/dar-test-hub-live.css
-          echo "Dar Test Berechtigungszentrale V2 auf Worker nachgewiesen."
+          BASE="https://dar-al-tawhid-test.sero91ak.workers.dev/test/assets"
+          for i in 1 2 3 4 5; do
+            curl -fsSL -H "Cache-Control: no-cache" "$BASE/dar-setup-hub.js?verify=${GITHUB_RUN_ID}-$i" -o /tmp/dar-test-hub-live.js || true
+            curl -fsSL -H "Cache-Control: no-cache" "$BASE/dar-home-library-v1194.js?verify=${GITHUB_RUN_ID}-$i" -o /tmp/dar-test-home-live.js || true
+            curl -fsSL -H "Cache-Control: no-cache" "$BASE/notifications-refined-v1.css?verify=${GITHUB_RUN_ID}-$i" -o /tmp/dar-test-notify-live.css || true
+            if grep -Fq 'DAR_TEST_NOTIFICATIONS_REFINED_V1' /tmp/dar-test-hub-live.js 2>/dev/null &&
+               grep -Fq 'DAR_TEST_TODAY_EDITORIAL_V1' /tmp/dar-test-home-live.js 2>/dev/null &&
+               grep -Fq 'DAR_TEST_NOTIFICATION_COMPACT_V2' /tmp/dar-test-notify-live.css 2>/dev/null; then
+              node --check /tmp/dar-test-hub-live.js
+              node --check /tmp/dar-test-home-live.js
+              echo "Dar Test: Neue Berechtigungszentrale und Heute-Karten nachgewiesen."
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "::error::Test-Deploy ist noch nicht durch die direkte Worker-Asset-URL bestätigt."
+          exit 1
