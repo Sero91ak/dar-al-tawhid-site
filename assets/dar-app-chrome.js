@@ -5,17 +5,50 @@
     if(!el||!el.closest)return false;
     return !!el.closest("input,textarea,select,[contenteditable='true'],[contenteditable=''],[data-copy],[data-selectable],.allow-copy");
   }
-  /* Q_SOURCE_IN_FRAME_V1: a source citation is an internal app route,
-     not a new browser/tab, on both official native shells and installed PWAs. */
+  /* Q_SOURCE_IN_FRAME_V2: No transition to a blank source screen.
+     Check the actual HTML payload before navigating inside WebView/PWA.
+     This is deliberately limited to /q/<number>/ links. */
+  var sourceNavPending=false;
+  function showSourceUnavailable(){
+    try{
+      var toast=document.getElementById("darSourceNavigationError");
+      if(!toast){
+        toast=document.createElement("div");
+        toast.id="darSourceNavigationError";
+        toast.setAttribute("role","alert");
+        toast.style.cssText="position:fixed;z-index:2147483000;left:16px;right:16px;bottom:max(24px,env(safe-area-inset-bottom,0px));margin:auto;max-width:520px;padding:16px 18px;border-radius:14px;background:#202a24;color:#fff;border:1px solid #aa915b;box-shadow:0 6px 24px rgba(0,0,0,.3);font:500 14px/1.5 system-ui,sans-serif;text-align:center;cursor:pointer";
+        toast.textContent="Der Quellenbeleg kann derzeit nicht geladen werden. Bitte versuche es erneut.";
+        toast.addEventListener("click",function(){toast.remove()});
+        (document.body||document.documentElement).appendChild(toast);
+      }
+      toast.hidden=false;
+    }catch(_){}
+  }
   document.addEventListener("click",function(ev){
     if(ev.defaultPrevented||ev.button!==0||ev.metaKey||ev.ctrlKey||ev.altKey||ev.shiftKey)return;
     var a=ev.target&&ev.target.closest?ev.target.closest("a[href]"):null;
     if(!a||a.hasAttribute("download"))return;
     var url;try{url=new URL(a.getAttribute("href"),location.href)}catch(_){return}
-    if(url.origin!==location.origin||!url.pathname.startsWith("/q/"))return;
-    if(!/^\/q\/[1-9][0-9]*\/?$/.test(url.pathname))return;
+    if(url.origin!==location.origin||!/^\/q\/[1-9][0-9]*\/?$/.test(url.pathname))return;
     ev.preventDefault();ev.stopImmediatePropagation();
-    location.assign(url.pathname.replace(/\/?$/,"/")+url.search+url.hash);
+    if(sourceNavPending)return;
+    var target=url.pathname.replace(/\/?$/,"/")+url.search+url.hash;
+    sourceNavPending=true;
+    var controller=typeof AbortController==="function"?new AbortController():null;
+    var timeout=setTimeout(function(){if(controller)controller.abort()},8000);
+    fetch(target,{cache:"no-store",credentials:"same-origin",headers:{"Accept":"text/html"},signal:controller?controller.signal:undefined})
+      .then(function(res){
+        if(!res.ok||!/(?:text\/html)/i.test(res.headers.get("content-type")||""))throw Error("Q response not HTML");
+        return res.text();
+      })
+      .then(function(html){
+        if(!/<body\b[^>]*\bqsource-body\b/i.test(html)||
+           !/class\s*=\s*["'][^"']*\bqsource-links\b/i.test(html)||
+           !/<a\b[^>]*\bqsource-link\b/i.test(html))throw Error("Q source evidence missing");
+        location.assign(target);
+      })
+      .catch(function(){sourceNavPending=false;showSourceUnavailable()})
+      .finally(function(){clearTimeout(timeout)});
   },true);
   /* DAR_TOUCH_INTENT_GUARD_V1
      Navigation in the adult shell uses pointerup for fast activation. A finger
