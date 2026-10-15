@@ -87,7 +87,13 @@ function init(){
  });
  window.addEventListener("message",function(event){
    if(event.origin!==location.origin||!frame||event.source!==frame.contentWindow)return;
-   if(event.data&&event.data.type==="DAR_KIDS_ACADEMY_CLOSE_V1421")close();
+   if(event.data&&event.data.type==="DAR_KIDS_ACADEMY_CLOSE_V1421"){
+     close();
+     if(event.data.goHome===true){
+       var today=one(".bottom-nav .nav-btn[data-target=\"today\"]");
+       if(today)today.click();
+     }
+   }
  });
  document.addEventListener("keydown",function(e){
    if(e.key==="Escape"&&modal&&!modal.hidden){e.preventDefault();close()}
