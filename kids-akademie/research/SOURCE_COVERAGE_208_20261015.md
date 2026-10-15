@@ -1,3 +1,16 @@
+## Ergänzung · Vier zusätzliche geprüfte Quellen 65–68 (15.10.2026)
+
+Nach Slots 57–64 wurden auch die Originalzuordnungen der Slots **65–68** separat bei Dorar geprüft. Damit sind **12** zuvor nicht unabhängig bestätigte Belege geprüft und **22** noch nicht neu gegengeprüft. Kinderlektionen weiterhin **nicht endgültig freigegeben**.
+
+| Lektion | Gesicherte Überlieferung | Quellenabgrenzung |
+|---|---|---|
+| 65 · ohne Gegenleistung helfen | **Muslim 2699**, Abū Hurayrah, [Dorar 123965](https://dorar.net/hadith/sharh/123965) | Die Seite zeigt auch eine eigenständige Version bei aṭ-Ṭabarānī; die Muslim-Fassung enthält ausdrücklich Allahs Hilfe für einen helfenden Diener |
+| 66 · Fehler wahrheitsgemäß zugeben | **al-Buḫārī 6094**, Ibn Masʿūd; Muslim 2607, [Dorar 3232](https://dorar.net/hadith/sharh/3232) | Die Seite zeigt auch Ibn Ḥibbān: Editionen und wörtliche Varianten auseinanderhalten |
+| 67 · gute Gesprächsführung | **al-Buḫārī 6018**, Abū Hurayrah; Muslim 47, [Dorar 4363](https://dorar.net/hadith/sharh/4363) | Dorar zeigt auf derselben Seite auch al-Buḫārī 6475, korrekt unterschiedlichen Reportwortlaut unterscheiden |
+| 68 · Aufgaben in kleinen Schritten | **al-Buḫārī 6464**, ʿĀʾishah; Muslim 2818, [Dorar 25705](https://dorar.net/hadith/sharh/25705) | Dorar enthält einen **anderen** Bericht von Abū Hurayrah 5673, deshalb Namen/Nummer nicht vertauschen |
+
+Im Register wurden authentische Sammlung, Nummer, Überlieferer und **kurze arabische Originaltext-Auszüge** eingetragen, nicht unbelegte Gesamtzitate. Beleggrenzen und die Lehrfreigabe bleiben erhalten. Die read-only Regression kontrolliert **12** geprüfte Alteinträge und verhindert das versehentliche Zurücksetzen auf ungeprüft; ein künftiger Rückgang unter **22** offene Quellen ist ausdrücklich zulässig.
+
 ## Ergänzung 15.10.2026 · Sechs weitere Ṣaḥīḥ-Nachweise abgeglichen
 
 Die erste Registeraufnahme vermerkte ursprünglich 32 noch ungeprüfte historische Ḥadīṯ-Belege. **Inzwischen sind sechs weitere (59–64) mit den angegebenen Bänden/Sammlungen, Nummern und Erzählern über Dorar abgeglichen.** Stand dieser Ergänzung: **26 verbliebene Altbelege zur unabhängigen Überprüfung**. Kein wissenschaftliches Endgutachten für die Kinderlektionen.
