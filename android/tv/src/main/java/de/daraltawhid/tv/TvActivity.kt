@@ -44,6 +44,7 @@ class TvActivity : Activity() {
     private lateinit var footer: TextView
     // One native player at a time; never autoplay when loading or changing verses.
     private var quranPlayer: MediaPlayer? = null
+    private var quranPlayerPrepared = false
     private var audioGeneration = 0
     private var quranSurah = 1
     private var quranAyah = 1
@@ -66,6 +67,7 @@ class TvActivity : Activity() {
         audioGeneration += 1
         val previous = quranPlayer
         quranPlayer = null
+        quranPlayerPrepared = false
         try { previous?.release() } catch (_: Exception) { }
     }
 
@@ -108,6 +110,7 @@ class TvActivity : Activity() {
                 quranPlayer = player
                 player.setOnPreparedListener { prepared ->
                     if (generation == audioGeneration && quranPlayer === prepared) {
+                        quranPlayerPrepared = true
                         prepared.start()
                         status.text = "▶ Qurʾān $reference · Rezitation läuft"
                     }
@@ -775,7 +778,9 @@ class TvActivity : Activity() {
             LinearLayout.LayoutParams(0, dp(64), 1f).apply { marginEnd = dp(8) })
         controls.addView(navButton("▶ Play / Pause") {
             val player = quranPlayer
-            if (player?.isPlaying == true) {
+            if (player != null && !quranPlayerPrepared) {
+                status.text = "Rezitation wird vorbereitet …"
+            } else if (player?.isPlaying == true) {
                 player.pause()
                 quranAutoPlay = false
                 status.text = "Rezitation pausiert"
