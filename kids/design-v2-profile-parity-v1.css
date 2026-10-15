@@ -1,0 +1,121 @@
+/* TAWḤĪD KIDS TEST V2 · Profile color parity – girls only.
+   Scope: Salaf's active view and background layers, Prophet library/reader.
+   Preserve all original artwork, Home, five prayers, navigation, TEST overlay,
+   scrolling, reader modes, Arabic sources, and user progress.
+   Prophet profile is explicitly marked on its body-level overlays by runtime. */
+
+/* SALAF: all edge-to-edge / shell layers must show the SAME girl surface.
+   The older global-hero-seam CSS paints .app and .shell separately, causing
+   a teal rectangle behind a pink girls' Salaf hero/card palette. */
+html:has(body .app[data-gender="girl"] #view-salaf.view.active),
+html:has(body #view-salaf.view.active[data-profile="girl"]),
+html body:has(.app[data-gender="girl"] #view-salaf.view.active),
+html body:has(#view-salaf.view.active[data-profile="girl"]),
+html body .app[data-gender="girl"]:has(> .shell > #view-salaf.view.active),
+html body .app:has(> .shell > #view-salaf.view.active[data-profile="girl"]){
+  --salaf-shell-surface:#2b2035!important;
+  background:#2b2035!important;
+  background-image:none!important;
+}
+html body .app[data-gender="girl"]:has(> .shell > #view-salaf.view.active) > .shell,
+html body .app:has(> .shell > #view-salaf.view.active[data-profile="girl"]) > .shell,
+html body .app[data-gender="girl"] #view-salaf.view.active,
+html body #view-salaf.view.active[data-profile="girl"]{
+  --salaf-shell-surface:#2b2035!important;
+  --salaf-color:#2b2035!important;
+  --kids-v2-bg:#2b2035!important;
+  --kids-v2-panel:#49334e!important;
+  --kids-v2-accent:#f0d6e5!important;
+  --kids-v2-ink:#fff4ee!important;
+  --kids-v2-muted:#ebdbe8!important;
+  --kids-v2-line:rgba(235,188,212,.43)!important;
+  --sl-bg:#2b2035!important;
+  --sl-panel:#49334e!important;
+  --sl-accent:#f0d6e5!important;
+  --salaf-glow:#f0d6e5!important;
+  --salaf-stroke:rgba(235,188,212,.43)!important;
+  background:#2b2035!important;
+  background-image:none!important;
+}
+/* Keep original girls' story-world images and their matching purple fade. */
+html body #view-salaf.view.active[data-profile="girl"] > .salaf-hero::after,
+html body .app[data-gender="girl"] #view-salaf.view.active > .salaf-hero::after{
+  background:linear-gradient(180deg,rgba(40,23,46,.05) 0%,rgba(40,23,46,.06) 28%,rgba(43,31,53,.45) 67%,#2b2035 100%)!important;
+}
+html body #view-salaf.view.active[data-profile="girl"] .salaf-topic,
+html body .app[data-gender="girl"] #view-salaf.view.active .salaf-topic{
+  border-color:rgba(235,188,212,.52)!important;
+  background-color:#49334e!important;
+}
+html body #view-salaf.view.active[data-profile="girl"] .salaf-switch,
+html body .app[data-gender="girl"] #view-salaf.view.active .salaf-switch{
+  border-color:rgba(235,188,212,.43)!important;
+  background:rgba(53,34,61,.7)!important;
+}
+html body #view-salaf.view.active[data-profile="girl"] .salaf-switch button.selected,
+html body .app[data-gender="girl"] #view-salaf.view.active .salaf-switch button.selected{
+  background:linear-gradient(135deg,#f7dbe8,#deb9d7)!important;
+  color:#422e47!important;
+}
+
+/* PROPHETS: library and reader live as body-level siblings, not descendants
+   of .app. Use their explicit data-profile marker, set on each opening. */
+html body #psLibraryPage.ps-library-page[data-profile="girl"],
+html body #psModal.ps-modal[data-profile="girl"]{
+  --ps-v2-bg:#2b2035!important;
+  --ps-v2-panel:#503951!important;
+  --ps-v2-panel-deep:#32263e!important;
+  --ps-v2-glow:#efc3d9!important;
+  --ps-v2-accent:#f6d7e6!important;
+  --ps-v2-muted:#ead9e8!important;
+  --ps-v2-border:rgba(239,191,215,.45)!important;
+  --ps-v2-shadow:rgba(26,11,31,.28)!important;
+}
+html body #psLibraryPage.ps-library-page[data-profile="girl"]{
+  background:linear-gradient(180deg,#32263e 0%,#2b2035 48%,#2b2035 100%)!important;
+}
+html body #psLibraryPage[data-profile="girl"] .ps-library-nav{
+  background:#32263e!important;
+  border-bottom-color:rgba(239,191,215,.34)!important;
+}
+html body #psLibraryPage[data-profile="girl"] .ps-library-back{
+  background:#543a56!important;
+  border-color:rgba(239,191,215,.44)!important;
+  color:#fff0f7!important;
+}
+html body #psLibraryPage[data-profile="girl"] .ps-muhammad-card{
+  background:#32263e!important;
+  border-color:rgba(239,191,215,.53)!important;
+}
+html body #psLibraryPage[data-profile="girl"] .ps-muhammad-panel{
+  background:linear-gradient(130deg,#5b4059,#3a2a46 82%)!important;
+  border-top-color:rgba(239,191,215,.40)!important;
+}
+html body #psLibraryPage[data-profile="girl"] :is(.ps-muhammad-kicker,.ps-muhammad-ar,.ps-row-ar,.ps-row-rank,.ps-sequence-head>span){
+  color:#f7d3e6!important;
+}
+html body #psLibraryPage[data-profile="girl"] .ps-story-row{
+  background:linear-gradient(115deg,#513951,#30243f)!important;
+  border-color:rgba(239,191,215,.43)!important;
+}
+html body #psLibraryPage[data-profile="girl"] .ps-story-row::before{
+  background:linear-gradient(90deg,transparent 26%,rgba(48,29,55,.22) 35%,rgba(48,29,55,.78) 57%,rgba(43,29,53,.94) 100%)!important;
+}
+html body #psLibraryPage[data-profile="girl"] .ps-row-rank{
+  background:rgba(55,31,59,.86)!important;
+  border-color:rgba(239,191,215,.48)!important;
+}
+html body #psLibraryPage[data-profile="girl"] .ps-row-summary{
+  color:#ead9e8!important;
+}
+html body #psModal.ps-modal[data-profile="girl"] .ps-sheet{
+  background:linear-gradient(180deg,#3b2a46,#2b2035)!important;
+}
+html body #psModal.ps-modal[data-profile="girl"] .ps-body{
+  background:linear-gradient(180deg,#3c2a46,#2b2035)!important;
+}
+html body #psModal.ps-modal[data-profile="girl"].scrolled .ps-top{
+  background:rgba(50,34,61,.97)!important;
+  border-bottom-color:rgba(239,191,215,.37)!important;
+}
+/* No boy-profile selector is altered. All children keep existing geometry. */
