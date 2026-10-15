@@ -133,6 +133,51 @@ def main():
         completed[band]+=1
         selected_questions.append(qid)
 
+    def evaluate_alternate_balance(penalty):
+        """Deterministic scenario only, not a new generation or provider quote."""
+        sim_chosen=set()
+        sim_completed={b:0 for b in BANDS}
+        sim_done=set(preexisting_done)
+        sim_chars=0
+        while True:
+            choices=[]
+            minimum=min(previously_complete[b]+sim_completed[b] for b in ("7-8","9-10"))
+            for b in ("7-8","9-10"):
+                for item in selected_by_age[b]:
+                    if item["questionId"] in sim_done:continue
+                    frags=[t for t in item["need"] if t not in sim_chosen]
+                    added=sum(map(len,frags))
+                    if round((sim_chars+added)*rate,4)>BUDGET_CREDITS:continue
+                    gap=previously_complete[b]+sim_completed[b]-minimum
+                    choices.append((added+penalty*max(0,gap),added,b,
+                                    item["questionId"],frags))
+            if not choices:break
+            choices.sort(key=lambda z:(z[0],z[1],z[2],z[3]))
+            _,nchars,b,qid,frags=choices[0]
+            sim_chosen.update(frags)
+            sim_done.add(qid)
+            sim_chars+=nchars
+            sim_completed[b]+=1
+        projected={b:previously_complete[b]+sim_completed[b] for b in BANDS}
+        return {
+            "projectedFourPartQuestions":projected,
+            "projectedTotalFourPartQuestions":sum(projected.values()),
+            "estimatedCredits":round(sim_chars*rate,2),
+            "additionalOriginalSegments":len(sim_chosen),
+            "newCharacters":sim_chars,
+            "heuristicNotProvenOptimal":True
+        }
+
+    alternate_budget_scenarios={
+        "maximizeQuestionCountButUnevenAges":evaluate_alternate_balance(0),
+        "nearlyEqualOlderAgeCoverage":evaluate_alternate_balance(75)
+    }
+    for option in alternate_budget_scenarios.values():
+        require(option["estimatedCredits"]<=BUDGET_CREDITS,
+                "alternative planning scenario exceeded the declared cap")
+        require(option["projectedFourPartQuestions"]["4-6"]==150,
+                "alternative scenario incorrectly charges for old paid takes")
+
     # A deterministic owner-approved FULL 450 synthesis still needs source
     # originals for every one of the remaining unique texts.
     total_missing_chars=sum(map(len,all_unpaid))
@@ -184,6 +229,7 @@ def main():
         "additionalOlderAgeQuestionsCoveredByBudgetSelection":completed,
         "totalQuestionsProjectedFullyPlayableAfterPrerequisites":
             sum(newly_covered.values()),
+        "additionalBudgetStrategyComparisons":alternate_budget_scenarios,
         "priorityQuestionIds":selected_questions,
         "prioritizedExactNewFragmentsForReview":queue,
         "warnings":[
