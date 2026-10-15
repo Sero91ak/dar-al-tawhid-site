@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-12T16:24:56.000Z",
+  "generated": "2026-10-15T15:33:16.000Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1336,6 +1336,49 @@
         ],
         "manualRelease": true,
         "notes": "Provider accepted 2 opt-in subscriptions; no unfiltered broadcast. 'received' is not a confirmed device-open count."
+      }
+    },
+    "qatadah-tarbiyyah-familie-tahrim-66-6-20261015-475": {
+      "kind": "post",
+      "postId": "qatadah-tarbiyyah-familie-tahrim-66-6-20261015-475",
+      "filename": "qatadah-tarbiyyah-familie-tahrim-66-6-20261015.md",
+      "postTitle": "📖 Wahre Tarbiyyah – Erziehung ist Verantwortung",
+      "postPath": "content/posts/qatadah-tarbiyyah-familie-tahrim-66-6-20261015.md",
+      "sourcePage": "https://dar-al-tawhid.de/q/43/",
+      "status": "sent",
+      "pushApproved": true,
+      "approvalOrigin": "User explicitly requested the adult visitor post push on 2026-10-15, same DAR Admin adult OneSignal target as Q41/Q42.",
+      "sentAt": "2026-10-15T15:33:16.000Z",
+      "updatedAt": "2026-10-15T15:33:16.000Z",
+      "lastError": "",
+      "liveCheck": {
+        "ok": null,
+        "diagnosis": "Public website fetch from current tool environment unavailable (GitHub source card, post and posts-index were confirmed)."
+      },
+      "pushResult": {
+        "provider": "OneSignal",
+        "target": "segment:DAR_PUSH",
+        "targetUrl": "https://dar-al-tawhid.de/?post=qatadah-tarbiyyah-familie-tahrim-66-6-20261015-475#post/qatadah-tarbiyyah-familie-tahrim-66-6-20261015-475",
+        "notificationId": "0df817df-bf27-4497-bc20-aa7d7f22346d",
+        "idempotencyKey": "d4b75ca1-1ab3-49f6-b3c9-e3f6d71ca043",
+        "successful": 91,
+        "failed": 4,
+        "remaining": 0,
+        "received": 0,
+        "platforms": {
+          "ios": {
+            "successful": 76,
+            "failed": 4
+          },
+          "safari_web_push": {
+            "successful": 10,
+            "failed": 0
+          },
+          "chrome_web_push": {
+            "successful": 5,
+            "failed": 0
+          }
+        }
       }
     }
   }
