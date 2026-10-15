@@ -79,6 +79,10 @@ assert.ok(v1410.includes("justify-content:flex-start!important"),"Back and title
 assert.ok(globalJs.includes('record.spacer.style.height=Math.max(68,Math.ceil(bar.getBoundingClientRect().height))'),"Content must start below measured full header");
 assert.ok(globalJs.includes('window.visualViewport?.addEventListener("resize",queue'),"Header must handle mobile viewport/safe-area changes");
 assert.ok(globalJs.includes('version:"1410"'),"Global controller version mismatch");
+assert.ok(globalJs.includes("KIDS_GLOBAL_TOP_SCROLL_BOUNDARY_V1428"),"All Kids views must share the top-edge guard");
+assert.ok(globalCss.includes("KIDS_GLOBAL_TOP_SCROLL_BOUNDARY_V1428"),"Global CSS top-edge stop missing");
+assert.ok(globalJs.includes('rootSelector=".shell,'),"Overview views must be protected, not only detail pages");
+assert.ok(html.includes("/kids/sw.js?v=1428"),"Offline shell release must load the fresh service worker");
 assert.ok(globalJs.includes("KIDS_TOP_SCROLL_BOUNDARY_V1411"),"Global touch-boundary controller missing");
 assert.ok(globalCss.includes("KIDS_TOP_SCROLL_BOUNDARY_V1411"),"Global top-edge overscroll containment missing");
 assert.ok(globalJs.includes("touchmove")&&globalJs.includes("event.preventDefault()"),"Native iOS top rubber-band must be prevented");
@@ -90,8 +94,8 @@ assert.ok(css.includes("justify-content:flex-end!important"),"Stage heading must
 for(const p of ["kids/index.html","kids/shell.html","kids/start.html"]){
   assert.equal(read(p),html,"Kids HTML entrypoints must be identical");
   assert.ok(html.includes("salaf-library-v1.js?v=1414"),"JS cache bust missing");
-  assert.ok(html.includes("global-detail-dock-v1247.css?v=1411"),"Global style contract must be current");
-  assert.ok(html.includes("global-detail-dock-v1247.js?v=1414"),"Pinned global header runtime cache-bust missing");
+  assert.ok(html.includes("global-detail-dock-v1247.css?v=1428"),"Global style contract must be current");
+  assert.ok(html.includes("global-detail-dock-v1247.js?v=1428"),"Pinned global header runtime cache-bust missing");
   assert.ok(html.includes("navigation-v1182.js?v=1425"),"Navigation history refresh missing");
   assert.ok(html.includes("salaf-open-world-v1353.css?v=1410"),"CSS cache bust missing");
 }
@@ -104,8 +108,8 @@ const kidsVersion=JSON.parse(read("kids/version.json"));
 const expectedKidsCache="dar-al-tawhid-kids-"+String(kidsVersion.visualSystem.serviceWorkerCache||"");
 assert.ok(/^dar-al-tawhid-kids-v[0-9]+$/.test(expectedKidsCache),"Kids version must define a numeric service-worker cache version");
 assert.ok(sw.includes(id)&&sw.includes(expectedKidsCache),"Kids SW buildId and release cache must match kids/version.json");
-assert.ok(sw.includes("/kids/global-detail-dock-v1247.css?v=1411"));
-assert.ok(sw.includes("/kids/global-detail-dock-v1247.js?v=1414"));
+assert.ok(sw.includes("/kids/global-detail-dock-v1247.css?v=1428"));
+assert.ok(sw.includes("/kids/global-detail-dock-v1247.js?v=1428"));
 assert.ok( heroSeam.includes("KIDS_GLOBAL_HEADER_HERO_SEAM_V1412"),"Global hero seam contract missing");
 assert.ok( heroSeam.includes("padding-top:0!important"),"Detail shell must start at viewport top");
 assert.ok( heroSeam.includes(".ps-modal.open")&&heroSeam.includes(".ms-modal.open"),"Hero seam must cover story reader modals");
