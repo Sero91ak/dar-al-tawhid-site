@@ -223,6 +223,12 @@ function syncChecks(sha){
     node.disabled = !!issues.get(sha) || (!played.has(sha) && !approved.has(sha));
     node.checked = approved.has(sha) && !issues.has(sha);
   });
+  document.querySelectorAll('select[data-report-sha="'+sha+'"]').forEach(node => {
+    node.value = issues.get(sha)?.category || "";
+  });
+  document.querySelectorAll('textarea[data-note-sha="'+sha+'"]').forEach(node => {
+    node.value = issues.get(sha)?.note || "";
+  });
 }
 function makePart(p) {
   const section = document.createElement("section"); section.className = "track";
@@ -258,6 +264,7 @@ function makePart(p) {
   feedbackLabel.textContent="Fehler gefunden? Freigabe sperren und Grund dokumentieren:";
   section.append(feedbackLabel);
   const category=document.createElement("select");
+  category.dataset.reportSha=p.textSha;
   category.setAttribute("aria-label","Fehlerkategorie für "+labels[p.part]);
   const clean=document.createElement("option");clean.value="";clean.textContent="Kein gemeldeter Fehler";
   category.append(clean);
@@ -266,6 +273,7 @@ function makePart(p) {
     category.append(option);
   }
   const note=document.createElement("textarea");
+  note.dataset.noteSha=p.textSha;
   note.maxLength=1500;note.placeholder="Konkrete Textstelle und Korrekturhinweis (optional)";
   note.setAttribute("aria-label","Fehlernotiz für "+labels[p.part]);
   const current=issues.get(p.textSha);
@@ -279,7 +287,7 @@ function makePart(p) {
   });
   note.addEventListener("input",()=>{
     const old=issues.get(p.textSha);
-    if(old)issues.set(p.textSha,{audioSha:p.audioSha,category:old.category,note:note.value});
+    if(old){issues.set(p.textSha,{audioSha:p.audioSha,category:old.category,note:note.value});syncChecks(p.textSha);}
   });
   section.append(category,note);
   return section;
