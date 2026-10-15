@@ -62,6 +62,7 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 
 | `q/41` | Vergebung und Nachsicht – an-Nūr 24:22 | `Allah` | Sie sollen vergeben und Nachsicht üben; Allahs Vergebung wird in Erinnerung gerufen. |
 | `q/42` | Gerechtigkeit gegenüber Ameisen | `Abū Hurayrah vom Propheten ﷺ` | Ein Prophet wurde dafür getadelt, wegen einer Ameise eine ganze Kolonie zu verbrennen. |
+| `q/43` | Wahre Tarbiyyah – Erziehung ist Verantwortung | `Qatādah ibn Diʿāmah` | Familie zum Gehorsam gegenüber Allah anleiten und bei den Geboten unterstützen. |
 
 ## Sonderbereiche
 
