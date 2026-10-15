@@ -51,6 +51,19 @@ FINDINGS = {
         "Qurʾān 19:3 belegt ausdrücklich den VERBORGENEN/LEISEN Ruf; Demut ist eine erläuternde Tafsīr-Deutung. Deutlich trennen."),
     "kids-quiz-147": ("tafsir-nuance", "Falsches Zeugnis",
         "Qurʾān 25:72 hat unterschiedliche Erklärungstraditionen zu az-zūr. 'Kein falsches Zeugnis' ist eine belegte Deutung, keine erschöpfende Versübersetzung."),
+
+    "kids-quiz-035": ("arabic-term", "Iḥsān",
+        "Iḥsān als aufrichtige, bewusste Anbetung Allahs erklären; die Frage verweist auf den Ḥadīṯ Jibrīl."),
+    "kids-quiz-036": ("arabic-term", "Ḥaǧǧ",
+        "Ḥaǧǧ kindgerecht als Pilgerfahrt nach Makkah erläutern, wenn die fünf Säulen erklärt werden."),
+    "kids-quiz-046": ("arabic-term", "Zakāh",
+        "Zakāh als vorgeschriebene Abgabe für Berechtigte erklären, nicht mit freiwilliger Ṣadaqah vermengen."),
+    "kids-quiz-045": ("arabic-term", "Ramaḍān",
+        "Ramaḍān als Monat des verpflichtenden Fastens für diejenigen mit religiöser Pflicht erläutern."),
+    "kids-quiz-095": ("arabic-term", "Laylat al-Qadr",
+        "Laylat al-Qadr als Nacht der Bestimmung erläutern; 'besser als tausend Monate' bleibt der belegte Versinhalt."),
+    "kids-quiz-091": ("arabic-term", "Ṣadaqah",
+        "Ṣadaqah als freiwillige gute Gabe erläutern; versehentliche Verletzung anderer durch Vorwürfe besprechen."),
 }
 # The following public research pages have actually been inspected. Other
 # citations are NOT automatically marked source-verified.
