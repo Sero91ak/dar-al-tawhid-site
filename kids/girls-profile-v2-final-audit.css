@@ -150,3 +150,34 @@ html body .app[data-gender="girl"] #view-parents :is(.parent-card,.profile-row,.
   border-color:rgba(240,196,221,.34)!important;
 }
 /* No selectors for Home, prayers, scroll behavior, navigation or TEST. */
+
+
+/* QUIZ: body-level quiz dialog and catalogue (not Home). Keep artwork,
+   selected/correct/wrong feedback colors, audio and the 900-question data. */
+html body:has(.app[data-gender="girl"]) #quizModal.modal .modal-shell{
+  --bg:#2b2035;
+  --night:#2b2035;
+  --gold:#f0c9de;
+  --aqua:#e2b4d2;
+  background:#2b2035!important;
+}
+html body:has(.app[data-gender="girl"]) #quizModal :is(.quiz-library-panel,.quiz-library-toolbar,.quiz-library-tools){
+  background-color:#2b2035!important;
+  border-color:rgba(240,196,221,.31)!important;
+}
+html body:has(.app[data-gender="girl"]) #quizModal :is(.quiz-library-row,.quiz-library-search,.quiz-library-categories button:not(.has-art)){
+  background-color:#443048!important;
+  border-color:rgba(240,196,221,.36)!important;
+}
+html body:has(.app[data-gender="girl"]) #quizModal .quiz-library-hero{
+  background-color:#443048!important;
+}
+html body:has(.app[data-gender="girl"]) #quizModal :is(.quiz-library-num,.quiz-library-cat,.quiz-scene-count){
+  color:#f0c9de!important;
+}
+html body:has(.app[data-gender="girl"]) #quizModal .quiz-answer:not(.correct):not(.wrong):not(.reveal){
+  background:rgba(89,57,87,.42)!important;
+  border-color:rgba(240,196,221,.34)!important;
+}
+/* On all visual tests, the picture-bearing .quiz-scene keeps its original
+   dynamic artwork and progress correctness colors untouched. */
