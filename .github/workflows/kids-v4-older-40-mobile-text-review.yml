@@ -67,9 +67,9 @@ jobs:
           p=Path(".github/reports/kids-v4-older40-editorial-source-findings.json")
           j=json.loads(p.read_text(encoding="utf-8"))
           assert j["quizQuestionsInspected"] == 40
-          assert j["sourceReferencesExternallySpotchecked"] == 6
-          assert j["questionsWithEditorialFlags"] == 18
-          assert j["remainingQuestionReferencesNeedingIndividualVerification"] == 34
+          assert j["sourceReferencesExternallySpotchecked"] == 11
+          assert j["questionsWithEditorialFlags"] == 20
+          assert j["remainingQuestionReferencesNeedingIndividualVerification"] == 29
           assert len(j["findings"]) == len({q["questionId"] for q in j["findings"]}) == 40
           assert all(q["reviewerApprovedNewSpeechGeneration"] is False for q in j["findings"])
           assert all(q["scientificSourceVerificationComplete"] is False for q in j["findings"])
