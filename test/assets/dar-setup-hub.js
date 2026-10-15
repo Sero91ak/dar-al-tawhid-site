@@ -84,100 +84,20 @@
     return !!(window.webkit && window.webkit.messageHandlers);
   }
 
-  /* Berechtigungsstatus ist NICHT identisch mit gespeicherten Erinnerungen. */
-  function isNativeIos() {
-    return !!(window.DAR_IOS_NATIVE_APP || window.DAR_OFFICIAL_IOS_APP);
-  }
-
-  function notificationState() {
-    if (isNativeIos()) {
-      /* WebAppView simuliert aktuell "granted"; nicht als Systemstatus darstellen. */
-      return "unknown";
-    }
-    try {
-      if (typeof Notification !== "undefined" && typeof Notification.permission === "string") {
-        return Notification.permission;
-      }
-    } catch (e) {}
-    return "unsupported";
-  }
-
-  function labelForPermission(state) {
-    if (state === "granted") return "Vom Gerät erlaubt";
-    if (state === "denied") return "Vom Gerät verweigert";
-    if (state === "prompt" || state === "default") return "Noch nicht erlaubt";
-    if (state === "unsupported") return "Auf diesem Gerät nicht verfügbar";
-    return "Systemstatus nicht überprüfbar";
-  }
-
+  /* In Einstellungen nur einen Einstieg – die einzige Zentrale ist Mehr → Alltag → Benachrichtigungen. */
   function renderHtml() {
-    var s = readSettings();
-    var saved = hasLocation(s);
-    var city = String(s.city || s.cityName || s.locationName || "").trim();
-    var savedLabel = saved ? ("Ort gespeichert" + (city ? ": " + city : "")) : "Noch kein Ort gespeichert";
     return [
-      '<section id="' + ROOT_ID + '" class="dar-setup-hub" data-dar-setup="true" data-dar-permission-hub="v2" aria-label="Standort und Mitteilungen">',
-      '  <header class="dar-setup-hub__head">',
-      '    <h2 class="dar-setup-hub__title">Standort &amp; Mitteilungen</h2>',
-      '    <p class="dar-setup-hub__sub">Berechtigungen und Erinnerungen an einem Ort verwalten.</p>',
-      '  </header>',
-      '  <div class="dar-setup-hub__list">',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Standort</strong><span data-dar-permission-location aria-live="polite">' + esc(savedLabel) + ' · Zugriff wird geprüft</span></div><div class="dar-setup-hub__actions"><button type="button" class="dar-setup-hub__btn" data-dar-setup-action="location">Ort ermitteln</button><button type="button" class="dar-setup-hub__text-btn" data-dar-setup-action="manual-location">Stadt auswählen</button></div></div>',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Mitteilungen</strong><span data-dar-permission-notifications aria-live="polite">' + esc(labelForPermission(notificationState())) + '</span></div><button type="button" class="dar-setup-hub__btn" data-dar-setup-action="notifications">Mitteilungen erlauben</button></div>',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Erinnerungen</strong><span>Gebete, Jumuʿah, Duʿāʾ und Empfehlungen separat auswählen</span></div><button type="button" class="dar-setup-hub__btn" data-dar-setup-action="reminders">Anpassen</button></div>',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Gebetszeiten</strong><span>Gespeicherten Ort und Zeiten für Widgets synchronisieren</span></div><button type="button" class="dar-setup-hub__btn" data-dar-setup-action="sync">Aktualisieren</button></div>',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Widgets</strong><span>Gebetszeiten und weitere Startbildschirm-Anzeigen</span></div><button type="button" class="dar-setup-hub__btn" data-dar-setup-action="widgets">Öffnen</button></div>',
-      '  </div>',
-      '  <p class="dar-setup-hub__help" data-dar-permission-help hidden role="status" aria-live="polite"></p>',
+      '<section id="' + ROOT_ID + '" class="dar-setup-hub" data-dar-setup="true" data-dar-refined-setup="v1" aria-label="Mitteilungen verwalten">',
+      ' <header class="dar-setup-hub__head">',
+      '  <h2 class="dar-setup-hub__title">Benachrichtigungen</h2>',
+      '  <p class="dar-setup-hub__sub">Gebete, Jumuʿah und tägliche Erinnerungen an einem Ort verwalten.</p>',
+      ' </header>',
+      ' <div class="dar-setup-hub__list"><div class="dar-setup-hub__row">',
+      '   <div class="dar-setup-hub__copy"><strong>Deine Erinnerungen</strong><span>Mitteilungen, Standort und Zeiten einstellen</span></div>',
+      '   <button type="button" class="dar-setup-hub__btn" data-dar-setup-action="notifications">Öffnen</button>',
+      ' </div></div>',
       '</section>'
     ].join("");
-  }
-
-  function help(message) {
-    var node = document.querySelector("#" + ROOT_ID + " [data-dar-permission-help]");
-    if (!node) return;
-    node.textContent = message || "";
-    node.hidden = !message;
-  }
-
-  function setButtonBusy(btn, busy) {
-    if (!btn) return;
-    btn.disabled = !!busy;
-    btn.classList.toggle("is-busy", !!busy);
-  }
-
-  async function refreshPermissions() {
-    var hub = document.getElementById(ROOT_ID);
-    if (!hub || !hub.isConnected) return;
-    var permission = notificationState();
-    var msg = hub.querySelector("[data-dar-permission-notifications]");
-    var notifyButton = hub.querySelector('[data-dar-setup-action="notifications"]');
-    if (msg) msg.textContent = labelForPermission(permission);
-    if (notifyButton) {
-      notifyButton.textContent = permission === "granted" ? "Erlaubt" :
-        permission === "denied" ? "Hilfe anzeigen" :
-        permission === "unsupported" ? "Nicht verfügbar" : "Mitteilungen erlauben";
-      notifyButton.disabled = permission === "granted" || permission === "unsupported";
-    }
-    var locLabel = hub.querySelector("[data-dar-permission-location]");
-    var savedSettings = readSettings();
-    var saved = hasLocation(savedSettings);
-    var city = String(savedSettings.city || savedSettings.cityName || savedSettings.locationName || "").trim();
-    var suffix = saved ? "Ort gespeichert" + (city ? ": " + city : "") : "Kein Ort gespeichert";
-    var geo = "unknown";
-    try {
-      if (!navigator.geolocation) geo = "unsupported";
-      else if (navigator.permissions && navigator.permissions.query) {
-        var result = await navigator.permissions.query({ name: "geolocation" });
-        geo = result.state || "unknown";
-      }
-    } catch (e) {}
-    if (!hub.isConnected) return;
-    if (locLabel) locLabel.textContent = suffix + " · " +
-      (geo === "granted" ? "Gerätezugriff erlaubt" :
-       geo === "denied" ? "Gerätezugriff verweigert" :
-       geo === "prompt" ? "Zugriff noch nicht angefragt" :
-       geo === "unsupported" ? "Geräteortung nicht verfügbar" : "Gerätefreigabe nicht überprüfbar");
   }
 
   async function syncPrayer() {
@@ -213,95 +133,25 @@
     toast("Gebetszeiten aktualisiert");
   }
 
-  function manualLocation() {
-    /* Manueller Ort bleibt ohne GPS-Zustimmung möglich. */
+  function openLocation() {
+    if (isNative() && openNativeSettings("location")) return;
+    try {
+      var btn = document.getElementById("useLocationBtn");
+      if (btn) {
+        go("prayer");
+        setTimeout(function () {
+          try {
+            document.getElementById("useLocationBtn")?.click();
+          } catch (e) {}
+        }, 280);
+        return;
+      }
+    } catch (e2) {}
     go("prayer");
-    help("");
   }
 
-  async function openLocation(btn) {
-    help("");
-    if (!navigator.geolocation) {
-      help("Dieses Gerät unterstützt keine Standortbestimmung. Bitte die Stadt manuell auswählen.");
-      return;
-    }
-    setButtonBusy(btn, true);
-    try {
-      var position = await new Promise(function (resolve, reject) {
-        navigator.geolocation.getCurrentPosition(resolve, reject, {
-          enableHighAccuracy: false, timeout: 15000, maximumAge: 300000
-        });
-      });
-      var patch = {
-        lat: position.coords.latitude,
-        lon: position.coords.longitude,
-        locationGranted: true
-      };
-      if (typeof setPrayerSettings === "function") setPrayerSettings(patch);
-      else {
-        var latest = Object.assign({}, readSettings(), patch);
-        localStorage.setItem(SETTINGS_KEY, JSON.stringify(latest));
-      }
-      help("Standort gespeichert. Die Gebetszeiten verwenden jetzt diesen Ort.");
-    } catch (e) {
-      help(e && e.code === 1
-        ? "Standort verweigert. In den Browser- oder iOS-App-Einstellungen erlauben oder die Stadt manuell auswählen."
-        : "Standort konnte nicht ermittelt werden. Bitte erneut versuchen oder die Stadt manuell auswählen.");
-    } finally {
-      setButtonBusy(btn, false);
-      refreshPermissions();
-    }
-  }
-
-  async function openNotifications(btn) {
-    help("");
-    var state = notificationState();
-    if (state === "denied") {
-      help("Mitteilungen wurden verweigert. Bitte die Berechtigung in den Browser- bzw. iOS-Einstellungen ändern.");
-      return;
-    }
-    if (state === "unsupported") {
-      help("Mitteilungen sind hier nicht verfügbar. Unter iOS müssen Web-Pushs über die installierte Home-Bildschirm-App verwendet werden.");
-      return;
-    }
-    if (state === "granted") return;
-    setButtonBusy(btn, true);
-    try {
-      if (isNativeIos()) {
-        var handlers = window.webkit && window.webkit.messageHandlers;
-        if (handlers && handlers.darPushReactivate) {
-          handlers.darPushReactivate.postMessage({});
-          help("Die iOS-Anfrage wurde geöffnet. Den tatsächlichen Zustand bitte in den iOS-Einstellungen kontrollieren.");
-        } else {
-          help("Bitte Mitteilungen in Einstellungen → DĀR AL TAWḤĪD aktivieren.");
-        }
-      } else if (typeof window.requestNotificationPermission === "function") {
-        await window.requestNotificationPermission();
-      } else if (typeof Notification !== "undefined" && Notification.requestPermission) {
-        await Notification.requestPermission();
-      } else {
-        help("Die Browserberechtigung ist nicht verfügbar.");
-      }
-    } catch (e) {
-      help("Mitteilungen konnten nicht aktiviert werden. Bitte die Browser- oder Systemeinstellungen kontrollieren.");
-    } finally {
-      setButtonBusy(btn, false);
-      refreshPermissions();
-    }
-  }
-
-  function openReminders() {
-    help("");
-    /* Bestehende Präferenz-UI wiederverwenden; keine zweite Push-Engine. */
-    var settings = document.querySelector(".settings-one-page");
-    var target = settings && settings.querySelector(
-      ".notification-settings-list, .notification-prayer-grid, .notification-section, #notificationHealthBox"
-    );
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
-    /* Ältere App-Builds bieten diese Optionen noch nur in #notifications. */
+  function openNotifications() {
+    /* Kein OS-Prompt aus der Einstellungsübersicht. Vorhandene Zentrale öffnen. */
     go("notifications");
   }
 
@@ -318,19 +168,11 @@
       if (!btn || !host.contains(btn)) return;
       var action = btn.getAttribute("data-dar-setup-action") || "";
       if (action === "location") {
-        openLocation(btn);
-        return;
-      }
-      if (action === "manual-location") {
-        manualLocation();
+        openLocation();
         return;
       }
       if (action === "notifications") {
-        openNotifications(btn);
-        return;
-      }
-      if (action === "reminders") {
-        openReminders();
+        openNotifications();
         return;
       }
       if (action === "widgets") {
@@ -364,7 +206,7 @@
     link.id = "dar-setup-hub-style-link";
     link.rel = "stylesheet";
     var base = location.pathname.indexOf("/test/") === 0 ? "/test/assets/" : "/assets/";
-    link.href = base + "dar-setup-hub.css?v=9";
+    link.href = base + "dar-setup-hub.css?v=8";
     document.head.appendChild(link);
   }
 
@@ -378,20 +220,18 @@
     for (var i = 1; i < hubs.length; i += 1) hubs[i].remove();
     var existing = hubs[0] || document.getElementById(ROOT_ID);
     if (existing) {
-      if (existing.getAttribute("data-dar-permission-hub") !== "v2") {
+      if (existing.getAttribute("data-dar-refined-setup") !== "v1") {
         existing.outerHTML = renderHtml();
         existing = document.getElementById(ROOT_ID);
       }
       bind(existing);
-      refreshPermissions();
       return existing;
     }
-    /* Ältere Builds hatten keinen Hub im Markup: einmalig hier ergänzen. */
+    /* Older rendered app builds may omit the setup hub until JS loads. */
     page.insertAdjacentHTML("afterbegin", renderHtml());
-    var hub = document.getElementById(ROOT_ID);
-    bind(hub);
-    refreshPermissions();
-    return hub;
+    existing = document.getElementById(ROOT_ID);
+    bind(existing);
+    return existing;
   }
 
   function onSettingsRoute() {
@@ -411,8 +251,7 @@
     render: renderHtml,
     bind: bind,
     mount: mountIntoSettings,
-    refresh: onSettingsRoute,
-    refreshPermissions: refreshPermissions
+    refresh: onSettingsRoute
   };
 
   function boot() {
@@ -424,8 +263,6 @@
   window.addEventListener("hashchange", function () {
     setTimeout(onSettingsRoute, 60);
   });
-  window.addEventListener("pageshow", function () { refreshPermissions(); });
-  document.addEventListener("visibilitychange", function () { if (!document.hidden) refreshPermissions(); });
   document.addEventListener("dar:render", function () {
     setTimeout(onSettingsRoute, 30);
   });
@@ -583,4 +420,72 @@
   window.addEventListener("online",function(){setTimeout(check,180);});
   document.addEventListener("visibilitychange",function(){if(!document.hidden)setTimeout(check,180);});
   setInterval(check,60*1000);
+})();
+
+
+/* DAR_TEST_NOTIFICATIONS_REFINED_V1
+ * Schaltet ausschließlich die Oberfläche um; ältere Event-IDs und Push-Callbacks bleiben erhalten.
+ */
+(function () {
+  "use strict";
+  if (!/^\/test(?:\/|$)/.test(location.pathname)) return;
+  var STYLE_ID = "dar-notifications-refined-css-v1";
+
+  function loadStyles() {
+    if (document.getElementById(STYLE_ID)) return;
+    var node = document.createElement("link");
+    node.id = STYLE_ID;
+    node.rel = "stylesheet";
+    node.href = "/test/assets/notifications-refined-v1.css?v=1";
+    document.head.appendChild(node);
+  }
+
+  function readableStatus(node) {
+    if (!node) return;
+    var raw = String(node.textContent || "").trim();
+    if (!raw) return;
+    if (raw.indexOf("Push nicht vollständig aktiv") !== -1) {
+      node.title = raw;
+      node.textContent = /Berechtigung/.test(raw)
+        ? "Mitteilungen sind auf diesem Gerät noch nicht erlaubt."
+        : "Mitteilungen sind noch nicht vollständig eingerichtet.";
+    } else if (raw.indexOf(" · Gerät erkannt") !== -1 ||
+               /^Web Push aktiv/.test(raw) || /^Safari\/Web Push aktiv/.test(raw)) {
+      node.title = raw;
+      node.textContent = "Mitteilungen sind auf diesem Gerät verbunden.";
+    }
+  }
+
+  function polish() {
+    loadStyles();
+    var page = document.querySelector("body.is-notifications-route .notification-center-page");
+    if (!page) return;
+    var reenable = page.querySelector("#notificationReenableBtn");
+    if (reenable) reenable.textContent = "Jetzt einrichten";
+    var status = page.querySelector("#notificationHealthText");
+    if (status) {
+      readableStatus(status);
+      if (!status.__darRefinedObserver) {
+        status.__darRefinedObserver = new MutationObserver(function () {
+          readableStatus(status);
+        });
+        status.__darRefinedObserver.observe(status, { childList: true, characterData: true, subtree: true });
+      }
+    }
+  }
+
+  function schedulePolish() {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", schedulePolish, {once:true});
+      return;
+    }
+    polish();
+    requestAnimationFrame(polish);
+    setTimeout(polish, 60);
+    setTimeout(polish, 400);
+  }
+  window.addEventListener("hashchange", schedulePolish);
+  window.addEventListener("pageshow", schedulePolish);
+  document.addEventListener("dar:render", schedulePolish);
+  schedulePolish();
 })();
