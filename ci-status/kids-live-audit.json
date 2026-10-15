@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-15T15:53:43Z",
+  "timestamp": "2026-10-15T16:04:16Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "38763651819",
+  "finishedDeployConclusion": "failure",
+  "finishedDeployRun": "38765461107",
   "live": {
     "buildId": "kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1410",
     "label": "KIDS · V1.09.22",
@@ -44,6 +44,24 @@
   },
   "lastDeployRuns": [
     {
+      "conclusion": null,
+      "created_at": "2026-10-15T16:03:47Z",
+      "head_sha": "8eed5865dbdbe9183bb019c7809243ebdacf9b9c",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38765784771",
+      "id": 38765784771,
+      "status": "in_progress",
+      "updated_at": "2026-10-15T16:04:01Z"
+    },
+    {
+      "conclusion": "failure",
+      "created_at": "2026-10-15T16:01:32Z",
+      "head_sha": "61cc0283d3ab3b18541143cb0e9d0ebc2dcc1d1f",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38765461107",
+      "id": 38765461107,
+      "status": "completed",
+      "updated_at": "2026-10-15T16:03:59Z"
+    },
+    {
       "conclusion": "success",
       "created_at": "2026-10-15T15:49:04Z",
       "head_sha": "b34721616e63aafb378576e6b406527e927dc4be",
@@ -78,24 +96,6 @@
       "id": 38756656304,
       "status": "completed",
       "updated_at": "2026-10-15T15:01:35Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-10-15T14:59:32Z",
-      "head_sha": "b32697aaf3616ea5ffd950ac6f9c5ebf280a1d68",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38756338666",
-      "id": 38756338666,
-      "status": "completed",
-      "updated_at": "2026-10-15T15:02:07Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-15T14:59:25Z",
-      "head_sha": "9889d8727c5361a8696a990f5c9ea63b083d3fd2",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38756323671",
-      "id": 38756323671,
-      "status": "completed",
-      "updated_at": "2026-10-15T14:59:33Z"
     }
   ]
 }
