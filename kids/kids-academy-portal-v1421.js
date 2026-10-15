@@ -18,11 +18,14 @@ function dockClearance(){
 }
 function measure(){
  if(!modal||modal.hidden)return;
- var clearance=dockClearance()+"px";
- modal.style.setProperty("--kids-academy-dock-clearance",clearance);
+ var nav=dock(),rect=nav&&nav.getBoundingClientRect();
+ var viewportHeight=window.innerHeight||document.documentElement.clientHeight||0;
+ var portalHeight=rect&&rect.height>0 ? Math.floor(rect.top-GAP) : viewportHeight-128;
+ modal.style.setProperty("--kids-academy-portal-height",Math.max(220,portalHeight)+"px");
+ // The iframe itself now ends ABOVE the dock. Do not subtract the dock again.
  try{
    var root=frame&&frame.contentDocument&&frame.contentDocument.documentElement;
-   if(root)root.style.setProperty("--kids-academy-dock-clearance",clearance);
+   if(root)root.style.setProperty("--kids-academy-dock-clearance","0px");
  }catch(_){}
 }
 function selectLearn(){
@@ -57,9 +60,7 @@ function create(){
  modal.setAttribute("role","region");
  modal.setAttribute("aria-label","Meine Lernakademie");
  modal.hidden=true;
- // The underlying dock floats above a full-height scroll canvas.
- modal.style.setProperty("height","100dvh","important");
- modal.style.setProperty("max-height","100dvh","important");
+ // The viewport height is measured from the existing dock (never force full-screen).
  modal.style.setProperty("transform","none","important");
  modal.style.setProperty("transition","opacity 220ms cubic-bezier(.22,.75,.22,1)","important");
  var exit=document.createElement("button");
