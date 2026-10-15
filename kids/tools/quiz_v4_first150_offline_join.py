@@ -88,6 +88,13 @@ def main():
     if len(chosen)!=150:raise RuntimeError("Exactly 150 first-age recipes required")
     original=registry["textClips"];paid_known={q["questionId"]:q for q in old["items"]}
     if len(old["items"])!=20:raise RuntimeError("Previously paid 20 originals disappeared")
+    all_paid_ids={take["generationId"] for q in old["items"] for take in q["recordings"]}
+    if len(all_paid_ids)!=56:
+        raise RuntimeError("Previously paid original generation ledger must contain 56 unique IDs")
+    imported_paid_ids=set(registry.get("generationClips") or {})
+    if imported_paid_ids-all_paid_ids:
+        raise RuntimeError("Registry contains an unknown previously paid generation ID")
+    missing_all_paid_ids=sorted(all_paid_ids-imported_paid_ids)
     OUT.mkdir(parents=True,exist_ok=True)
     text_audio={}
     missing=set()
@@ -166,11 +173,13 @@ def main():
       "availableFieldCounts":individual_complete,
       "importedPreviouslyPaidGenerationIdCount":len(registry.get("generationClips") or {}),
       "missingPreviouslyPaidOriginalTextCount":len(missing),
-      "missingPreviouslyPaidGenerationIdCount":len(missing_flow_ids),
+      "missingPreviouslyPaidGenerationIdCount":len(missing_all_paid_ids),
+      "missingDirectPaidPartGenerationIdCount":len(missing_flow_ids),
+      "missingDirectPaidPartGenerationIds":sorted(missing_flow_ids),
       "missingPreviouslyPaidTexts":[{"text":t,"requiredByQuestionParts":missing_used[t]}
                                     for t in sorted(missing)],
-      "missingPaidOriginalGenerationIds":sorted(missing_flow_ids),
-      "originalFlowImportNeeded":True,
+      "missingPaidOriginalGenerationIds":missing_all_paid_ids,
+      "originalFlowImportNeeded":bool(missing_all_paid_ids),
       "readyForLive":False,"audioListeningApproved":False,
       "questions":question_overview
     }
