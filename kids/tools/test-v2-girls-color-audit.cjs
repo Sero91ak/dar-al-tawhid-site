@@ -31,6 +31,17 @@ for(const [label,selectors] of categories)for(const token of selectors)
  assert.ok(css.includes(token),"Girls CSS missing "+label+" surface "+token);
 assert.ok(css.includes('data-profile="girl"'),"No explicit portal profile scope");
 assert.ok(css.includes('data-gender="girl"'),"No active app profile scope");
+assert.ok(css.includes("#quizModal"),"Quiz girl color authority missing");
+const academy=read("kids/akademie/index.html");
+const academyCss=read("kids/akademie/girls-profile-v2-audit.css").replace(/\/\*[\s\S]*?\*\//g,"");
+assert.ok(academy.includes('/kids/akademie/girls-profile-v2-audit.css?v=20261015-1'),"Academy final girl's CSS not included");
+assert.ok(academy.indexOf('girls-profile-v2-audit.css')>academy.lastIndexOf("</style>"),"Academy palette must follow inline style");
+assert.ok(academyCss.includes('body[data-profile="girl"]')&&academyCss.includes('#2b2035'),"Academy girl palette not scoped to girl");
+assert.ok(!academyCss.includes('body[data-profile="boy"]'),"Boy Academy profile must not be affected");
+assert.ok(!academyCss.includes('body[data-profile="neutral"]'),"Neutral Academy profile must not be affected");
+assert.ok(!academyCss.includes("url(")&&!academyCss.includes("touch-action")&&!academyCss.includes("scroll-padding"),"Academy artwork or interaction touched");
+assert.equal((academyCss.match(/\{/g)||[]).length,(academyCss.match(/\}/g)||[]).length,"Academy girls CSS not balanced");
+
 assert.ok(profile.includes("--salaf-shell-surface:#2b2035!important"),"Salaf shell must remain plum");
 assert.ok(prophet.includes("function syncProphetVisualProfile()")&&prophet.includes("surface.dataset.profile=profile"),"Body portals must synchronize live profile");
 assert.ok(prophet.includes('const MODE_KEY="kids.contentMode.v19"'),"Audio/story state changed");
@@ -45,4 +56,4 @@ for(const forbidden of ["#view-today","#kidsSalahDailyPage",".bottom-nav","test-
 }
 assert.equal((css.match(/\{/g)||[]).length,(css.match(/\}/g)||[]).length,"Girls palette CSS unbalanced");
 assert.ok(!/#(?:0[0-9a-f]{5}|1[0-9a-f]{5})\b/i.test(css),"Dark pure-navy fill may have leaked into girls' audited CSS");
-console.log("KIDS_GIRLS_COLOR_V2_PASS | Salaf Prophets Sahabah Sahabiyyat Storyhub Quran Dua Parents | Home, prayer, TEST, nav protected");
+console.log("KIDS_GIRLS_COLOR_V2_PASS | Salaf Prophets Sahabah Sahabiyyat Storyhub Quran Dua Parents Quiz Academy | Home, prayer, TEST, nav protected");
