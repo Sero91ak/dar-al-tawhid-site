@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'kids/data/v4-prepaid-envelope-review/sealed-downloads.b64'
+      - 'kids/data/v4-prepaid-envelope-review/sealed-oaep.json'
 
 permissions:
   contents: write
@@ -31,16 +32,54 @@ jobs:
           set -euo pipefail
           base=kids/data/v4-prepaid-envelope-review
           test -n "${ELEVENLABS_API_KEY:-}"
-          test -s "$base/sealed-downloads.b64"
+          if [[ -s "$base/sealed-oaep.json" ]];then
+            echo "Using secure RSA-OAEP multi-generation URL envelope"
+          else
+            test -s "$base/sealed-downloads.b64"
+          fi
           umask 077
           mkdir -p "$RUNNER_TEMP/kids-v4-prepaid-inbox"
           echo "inbox=$RUNNER_TEMP/kids-v4-prepaid-inbox" >> "$GITHUB_OUTPUT"
           openssl pkcs8 -in "$base/private-key-encrypted.pem" -passin env:ELEVENLABS_API_KEY -out "$RUNNER_TEMP/private.pem"
-          base64 -d "$base/sealed-downloads.b64" > "$RUNNER_TEMP/sealed.der"
-          openssl cms -decrypt -inform DER -in "$RUNNER_TEMP/sealed.der" \
-            -inkey "$RUNNER_TEMP/private.pem" -recip "$base/recipient-cert.pem" \
-            -out "$RUNNER_TEMP/generation-downloads.json.gz"
-          gzip -dc "$RUNNER_TEMP/generation-downloads.json.gz" > "$RUNNER_TEMP/generation-downloads.json"
+          if [[ -s "$base/sealed-oaep.json" ]];then
+            python3 - <<'PY'
+          import base64,json,os,pathlib,subprocess
+          base=pathlib.Path(os.environ["RUNNER_TEMP"])
+          source=pathlib.Path("kids/data/v4-prepaid-envelope-review/sealed-oaep.json")
+          entries=json.loads(source.read_text(encoding="utf-8"))
+          if not isinstance(entries,list) or not 1 <= len(entries) <= 56:
+              raise RuntimeError("Encrypted V4 batch must contain 1..56 unique known originals")
+          result=[]
+          seen=set()
+          for rec in entries:
+              gid=rec["generationId"]
+              chunks=rec["cipherChunks"]
+              if gid in seen or not isinstance(chunks,list) or not 1 <= len(chunks) <= 15:
+                  raise RuntimeError("Duplicate/invalid original encrypted chunk group")
+              seen.add(gid)
+              plaintext=[]
+              for encoded in chunks:
+                  cipher=base64.b64decode(encoded,validate=True)
+                  if len(cipher)!=384:raise RuntimeError("Invalid RSA3072 encrypted chunk length")
+                  cmd=["openssl","pkeyutl","-decrypt","-inkey",str(base/"private.pem"),
+                       "-pkeyopt","rsa_padding_mode:oaep",
+                       "-pkeyopt","rsa_oaep_md:sha256","-pkeyopt","rsa_mgf1_md:sha256"]
+                  data=subprocess.run(cmd,input=cipher,capture_output=True,check=True).stdout
+                  plaintext.append(data)
+              url=b"".join(plaintext).decode("ascii")
+              result.append({"generationId":gid,"contentUrl":url})
+          output=base/"generation-downloads.json"
+          output.write_text(json.dumps(result),encoding="utf-8")
+          output.chmod(0o600)
+          print("KIDS_SECURE_OAEP_ORIGINAL_URLS_DECRYPTED",len(result),"without printing URLs")
+          PY
+          else
+            base64 -d "$base/sealed-downloads.b64" > "$RUNNER_TEMP/sealed.der"
+            openssl cms -decrypt -inform DER -in "$RUNNER_TEMP/sealed.der" \
+              -inkey "$RUNNER_TEMP/private.pem" -recip "$base/recipient-cert.pem" \
+              -out "$RUNNER_TEMP/generation-downloads.json.gz"
+            gzip -dc "$RUNNER_TEMP/generation-downloads.json.gz" > "$RUNNER_TEMP/generation-downloads.json"
+          fi
           chmod 600 "$RUNNER_TEMP/generation-downloads.json"
           echo "Decrypted manifest privately, no URL values logged."
       - name: Download only genuine already-paid old V4 originals
@@ -110,7 +149,7 @@ jobs:
           git add kids/data/quiz-v4-first150-audio-status.json
           git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
           git add kids/data/quiz-v4-first150-composed-technical-qa.json
-          git rm -f --ignore-unmatch kids/data/v4-prepaid-envelope-review/sealed-downloads.b64
+          git rm -f --ignore-unmatch kids/data/v4-prepaid-envelope-review/sealed-downloads.b64 kids/data/v4-prepaid-envelope-review/sealed-oaep.json
           if git diff --cached --quiet;then exit 0;fi
           git commit -m 'audio(kids): recovered previously paid authentic V4 Flow MP3 original; no synthesis; review only'
           for attempt in 1 2 3;do
