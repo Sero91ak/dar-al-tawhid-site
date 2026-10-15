@@ -87,7 +87,7 @@
   /* In Einstellungen nur einen Einstieg – die einzige Zentrale ist Mehr → Alltag → Benachrichtigungen. */
   function renderHtml() {
     return [
-      '<section id="' + ROOT_ID + '" class="dar-setup-hub" data-dar-setup="true" aria-label="Mitteilungen verwalten">',
+      '<section id="' + ROOT_ID + '" class="dar-setup-hub" data-dar-setup="true" data-dar-refined-setup="v1" aria-label="Mitteilungen verwalten">',
       ' <header class="dar-setup-hub__head">',
       '  <h2 class="dar-setup-hub__title">Benachrichtigungen</h2>',
       '  <p class="dar-setup-hub__sub">Gebete, Jumuʿah und tägliche Erinnerungen an einem Ort verwalten.</p>',
@@ -220,11 +220,18 @@
     for (var i = 1; i < hubs.length; i += 1) hubs[i].remove();
     var existing = hubs[0] || document.getElementById(ROOT_ID);
     if (existing) {
+      if (existing.getAttribute("data-dar-refined-setup") !== "v1") {
+        existing.outerHTML = renderHtml();
+        existing = document.getElementById(ROOT_ID);
+      }
       bind(existing);
       return existing;
     }
-    // Hub is rendered by index.html above the page head; do not inject into #appView
-    return null;
+    /* Older rendered app builds may omit the setup hub until JS loads. */
+    page.insertAdjacentHTML("afterbegin", renderHtml());
+    existing = document.getElementById(ROOT_ID);
+    bind(existing);
+    return existing;
   }
 
   function onSettingsRoute() {
