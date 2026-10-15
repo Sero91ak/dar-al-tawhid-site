@@ -15,7 +15,7 @@ function measure(){
  if(!modal||modal.hidden)return;
  var nav=dock(),rect=nav&&nav.getBoundingClientRect();
  if(!rect||rect.height<=0)return;
- var available=Math.max(180,Math.floor(rect.top-GAP));
+ var available=Math.max(0,Math.floor(rect.top-GAP));
  modal.style.setProperty("--kids-academy-portal-height",available+"px");
 }
 function selectLearn(){
