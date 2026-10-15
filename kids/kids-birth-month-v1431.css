@@ -1,0 +1,17 @@
+/* KIDS_BIRTH_MONTH_FORM_V1431: fields inherit both kids profile palettes. */
+.kids-birth-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:11px 0}
+.kids-birth-fields label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:800;min-width:0}
+.kids-birth-fields select{box-sizing:border-box;width:100%;min-width:0;min-height:48px;padding:9px 10px;border-radius:13px;border:1px solid var(--line,rgba(231,195,218,.4));background:#243b42;color:#fff1de;font:inherit;font-size:16px}
+.kids-birth-fields select:focus-visible{outline:2px solid var(--gold,#efce96);outline-offset:2px}
+.kids-birth-details{margin:12px 0 0;border-top:1px solid var(--line,rgba(222,179,207,.3));padding-top:12px}
+.kids-birth-details[hidden]{display:none!important}
+.kids-birth-details > button{width:100%;min-height:44px}
+.kids-birth-note{font-size:12px;line-height:1.45;opacity:.85;margin:6px 0 10px}
+.kids-birth-notice{font-size:13px;line-height:1.4;color:var(--gold,#f0d29a);min-height:17px;margin:8px 0}
+.kids-birth-guest{margin:15px 0 0;border-top:1px solid var(--line,rgba(222,179,207,.3));padding-top:12px}
+.kids-birth-guest strong{display:block;margin-bottom:5px}
+.kids-birth-guest > button{margin-top:9px;width:100%}
+#joinBirthContinue{width:100%;min-height:48px}
+.app[data-gender="girl"] .kids-birth-fields select,
+html body:has(.app[data-gender="girl"]) #kidsJoin .kids-birth-fields select{background:#4d3550!important;border-color:#c691b3!important;color:#fff0ee!important}
+@media(max-width:335px){.kids-birth-fields{grid-template-columns:1fr}}
