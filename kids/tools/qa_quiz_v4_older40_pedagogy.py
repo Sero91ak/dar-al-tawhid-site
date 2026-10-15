@@ -64,10 +64,46 @@ FINDINGS = {
         "Laylat al-Qadr als Nacht der Bestimmung erläutern; 'besser als tausend Monate' bleibt der belegte Versinhalt."),
     "kids-quiz-091": ("arabic-term", "Ṣadaqah",
         "Ṣadaqah als freiwillige gute Gabe erläutern; versehentliche Verletzung anderer durch Vorwürfe besprechen."),
+    "kids-quiz-026": ("verse-context", "Leute des Wissens fragen",
+        "Qurʾān 16:43 spricht im unmittelbaren Kontext über frühere Gesandte und die Schriftkundigen; die allgemeine Lernregel ist Anwendung, keine erschöpfende Direktübersetzung."),
+    "kids-quiz-389": ("verse-context", "Leute des Wissens fragen",
+        "Den Offenbarungskontext von Qurʾān 16:43 kurz erklären; das Fragen kundiger Personen als pädagogische Anwendung kennzeichnen."),
+
 }
 # The following public research pages have actually been inspected. Other
 # citations are NOT automatically marked source-verified.
 EVIDENCE = {
+
+    "kids-quiz-026": [{
+        "source": "islamweb.net · Tafsīr aṭ-Ṭabarī, an-Naḥl 16:43",
+        "url": "https://islamweb.net/ar/library/content/50/2903/%D8%A7%D9%84%D9%82%D9%88%D9%84-%D9%81%D9%8A-%D8%AA%D8%A3%D9%88%D9%8A%D9%84-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D9%88%D9%85%D8%A7-%D8%A3%D8%B1%D8%B3%D9%84%D9%86%D8%A7-%D9%85%D9%86-%D9%82%D8%A8%D9%84%D9%83-%D8%A5%D9%84%D8%A7-%D8%B1%D8%AC%D8%A7%D9%84%D8%A7-%D9%86%D9%88%D8%AD%D9%8A-%D8%A5%D9%84%D9%8A%D9%87%D9%85-",
+        "supports": "Original historical context: earlier messengers and people of prior scripture",
+        "scope": "verse wording; wider educational application requires explicit differentiation"
+    }],
+    "kids-quiz-389": [{
+        "source": "islamweb.net · Tafsīr aṭ-Ṭabarī, an-Naḥl 16:43",
+        "url": "https://islamweb.net/ar/library/content/50/2903/%D8%A7%D9%84%D9%82%D9%88%D9%84-%D9%81%D9%8A-%D8%AA%D8%A3%D9%88%D9%8A%D9%84-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D9%88%D9%85%D8%A7-%D8%A3%D8%B1%D8%B3%D9%84%D9%86%D8%A7-%D9%85%D9%86-%D9%82%D8%A8%D9%84%D9%83-%D8%A5%D9%84%D8%A7-%D8%B1%D8%AC%D8%A7%D9%84%D8%A7-%D9%86%D9%88%D8%AD%D9%8A-%D8%A5%D9%84%D9%8A%D9%87%D9%85-",
+        "supports": "Early exegetical context; general question asks a pedagogically derived principle",
+        "scope": "verse wording not literal all-context universalization"
+    }],
+    "kids-quiz-035": [{
+        "source": "dorar.net · Ṣaḥīḥ Muslim 8, Ḥadīṯ Jibrīl",
+        "url": "https://dorar.net/hadith/sharh/63778",
+        "supports": "Iḥsān: worship Allah as though seeing Him, knowing He sees you",
+        "scope": "specific authentic hadith wording"
+    }],
+    "kids-quiz-036": [{
+        "source": "dorar.net · Ṣaḥīḥ al-Bukhārī 8; Muslim 16",
+        "url": "https://dorar.net/hadith/sharh/8211",
+        "supports": "Five pillars of Islam including prayer, charity, pilgrimage and Ramadan fasting",
+        "scope": "specific authentic hadith and traditional enumeration"
+    }],
+    "kids-quiz-044": [{
+        "source": "islamweb.net · Tafsīr aṭ-Ṭabarī, al-Māʾidah 5:6",
+        "url": "https://www.islamweb.net/ar/library/content/50/1508/%D8%A7%D9%84%D9%82%D9%88%D9%84-%D9%81%D9%8A-%D8%AA%D8%A3%D9%88%D9%8A%D9%84-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D9%88%D8%A3%D8%B1%D8%AC%D9%84%D9%83%D9%85-%D8%A5%D9%84%D9%89-%D8%A7%D9%84%D9%83%D8%B9%D8%A8%D9%8A%D9%86",
+        "supports": "Ritual washing of feet contrasted with wiping the head in the Wuḍūʾ verse",
+        "scope": "specific excerpt and relevant fiqh interpretation"
+    }],
     "kids-quiz-027": [
         {
             "source": "dorar.net · Ṣaḥīḥ al-Bukhārī 6018; Muslim 47",
