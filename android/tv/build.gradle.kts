@@ -58,3 +58,8 @@ android {
         jvmTarget = "17"
     }
 }
+
+// Offline/pure Kotlin dashboard state checks, independent of device/emulator.
+dependencies {
+    testImplementation("junit:junit:4.13.2")
+}
