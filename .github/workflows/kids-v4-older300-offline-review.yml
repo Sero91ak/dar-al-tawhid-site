@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'kids/tools/build_quiz_v4_older300_offline_review.py'
+      - 'kids/tools/qa_quiz_v4_older300_next50_priority.py'
+      - 'kids/data/quiz-v4-older300-next50-unique-fragment-review.json'
       - '.github/workflows/kids-v4-older300-offline-review.yml'
 
 permissions:
@@ -32,6 +34,11 @@ jobs:
           command -v ffprobe
           command -v ffmpeg
           python3 -m py_compile kids/tools/build_quiz_v4_older300_offline_review.py
+      - name: Verify deduplicated source-text queue for next 25 plus 25 questions
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/qa_quiz_v4_older300_next50_priority.py
+          python3 kids/tools/qa_quiz_v4_older300_next50_priority.py
       - name: Prepare exact original V4 clips for age 7-8 and 9-10
         run: |
           set -euo pipefail
