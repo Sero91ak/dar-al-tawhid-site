@@ -70,6 +70,9 @@ html body .app #view-today > .hero :is(.cloud,.shooting-star,.city,.arch,.dune,.
 <link rel="preload" as="image" href="/kids/assets/kids-salah-v1272/hero-home.png?v=1274" fetchpriority="high">
 <link rel="stylesheet" href="https://use.typekit.net/jka5jda.css">
 <link rel="manifest" href="/kids/manifest.webmanifest">
+<link rel="preload" as="style" href="/kids/kids-nav-v1421.css?v=1422">
+<link rel="preload" as="style" href="/kids/kids-motion-v1422.css?v=1422">
+<link rel="preload" as="image" href="/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422">
 <link rel="stylesheet" href="/kids/offline-library-v1.css?v=1">
 <link rel="stylesheet" href="/kids/item-offline-v1.css?v=2">
 <script src="/kids/item-offline-v1.js?v=2"></script>
@@ -3185,10 +3188,10 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
         <span class="kids-salaf-feature-art" aria-hidden="true"></span>
         <span class="kids-salaf-feature-copy"><small>GESCHICHTEN · WERTVOLLE LEHREN</small><strong>Schätze der Salaf</strong><span>Gute Vorbilder entdecken und von ihnen lernen</span></span>
       </button>
-      <a href="/kids/akademie/index.html" class="academy-pilot-entry" aria-label="Meine Lernakademie öffnen">
+      <button type="button" class="academy-pilot-entry" data-academy-open="1" aria-label="Meine Lernakademie öffnen">
         <span class="academy-pilot-text"><small>LERNEN · MEINE AKADEMIE</small><strong>Meine Lernakademie</strong><span>Spannende Lektionen · Schritt für Schritt lernen</span></span>
         <span class="academy-pilot-arrow" aria-hidden="true">→</span>
-      </a>
+      </button>
 
       <button id="knowledgeCard" class="knowledge-card" type="button">
         <span class="kicon" aria-hidden="true"></span>
@@ -3234,11 +3237,11 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
       <div class="kids-listening-shortcuts" aria-label="Weitere Hörwelten">
         <div class="kids-listening-shortcuts-title">Noch mehr zum Entdecken</div>
         <div class="kids-listening-shortcuts-grid">
-          <button type="button" class="kids-listen-shortcut kids-tap-card" data-go="salaf" aria-label="Schätze der Salaf öffnen">
+          <button type="button" class="kids-listen-shortcut kids-salaf-listening-hero kids-tap-card" data-go="salaf" aria-label="Schätze der Salaf im Hörbereich öffnen">
             <span class="kids-listen-shortcut-art salaf" aria-hidden="true"></span>
             <span class="kids-listen-shortcut-copy"><strong>Schätze der Salaf</strong><small>Schöne Geschichten und wertvolle Lehren</small></span>
           </button>
-          <button type="button" class="kids-listen-shortcut kids-tap-card" id="kidsListenDuaEntry" aria-label="Meine Duʿāʾ öffnen">
+          <button type="button" class="kids-listen-shortcut kids-listen-dua-secondary kids-tap-card" id="kidsListenDuaEntry" aria-label="Meine Duʿāʾ öffnen">
             <span class="kids-listen-shortcut-art dua" aria-hidden="true"></span>
             <span class="kids-listen-shortcut-copy"><strong>Meine Duʿāʾ</strong><small>Hören, nachsprechen und verstehen</small></span>
           </button>
@@ -3306,8 +3309,8 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
   <nav class="bottom-nav" aria-label="Hauptnavigation">
     <button class="nav-btn active" data-target="today"><span class="ico"></span><span class="lab">Heute</span></button>
     <button class="nav-btn" data-target="stories"><span class="ico"></span><span class="lab">Hören</span></button>
-    <a class="nav-btn kids-academy-tab" href="/kids/akademie/index.html" aria-label="Lernakademie öffnen"><span class="ico" aria-hidden="true"></span><span class="lab">Lernen</span></a>
-    <button class="nav-btn" data-target="salaf" aria-label="Schätze der Salaf"><span class="ico"></span><span class="lab">Schätze</span></button>
+    <button type="button" class="nav-btn kids-academy-tab" data-academy-open="1" aria-label="Lernakademie öffnen"><span class="ico" aria-hidden="true"></span><span class="lab">Lernen</span></button>
+    <button class="nav-btn" data-target="dua" aria-label="Meine Duʿāʾ"><span class="ico"></span><span class="lab">Duʿāʾ</span></button>
     <button class="nav-btn" data-target="parents"><span class="ico"></span><span class="lab">Eltern</span></button>
   </nav>
 
@@ -3403,7 +3406,7 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 
 
 <script>
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1410";
+const KIDS_BUILD_ID="kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren";
 const KIDS_QURAN_LEARNING_REMOVED=true; // Qurʾān/Alif-Bāʾ learning UI retired; local history retained.
 const KIDS_BUILD_SEEN_KEY="darKidsBuildSeenV1";
 
@@ -3809,6 +3812,10 @@ function kidsFinishMainTabSwitch(){
 window.DARKidsResetMainScroll=kidsFinishMainTabSwitch;
 function showTab(name){
   if(name==="quran"||name==="alphabet")name="today";
+  if(name==="dua"&&window.DARKidsDuaHub&&typeof window.DARKidsDuaHub.open==="function"){
+    window.DARKidsDuaHub.open();
+    return;
+  }
   var view=document.getElementById("view-"+name);
   if(!view)return;
   var current=document.querySelector(".view.active");
@@ -3820,7 +3827,7 @@ function showTab(name){
   document.documentElement.setAttribute("data-view",name);
   kidsFinishMainTabSwitch();
 }
-document.querySelectorAll(".nav-btn").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.target)})});
+document.querySelectorAll(".bottom-nav .nav-btn[data-target]").forEach(function(b){b.addEventListener("click",function(){showTab(b.dataset.target)})});
 document.querySelectorAll("[data-go]").forEach(function(b){
   b.addEventListener("click",function(){
     showTab(b.dataset.go);
@@ -6584,6 +6591,8 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     if(name==="place")name="name";
     joinFeedback("","info");document.getElementById("joinLoginExisting").hidden=true;
     join.querySelectorAll(".step").forEach(function(s){s.classList.toggle("on",s.getAttribute("data-step")===name)});
+    var globalCancel=document.getElementById("joinCancel");
+    if(globalCancel)globalCancel.style.display=name==="login"?"none":localStorage.getItem(ACTIVE)?"block":"none";
     join.querySelectorAll(".join-feedback").forEach(function(el){el.hidden=true;el.textContent=""});
     var card=join.querySelector(".kids-join-card");
     if(card)card.scrollTop=0;
@@ -6608,6 +6617,8 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var shellForJoin=document.querySelector(".shell");
     joinScrollY=shellForJoin?shellForJoin.scrollTop:0;
     join.classList.add("open");
+    var activeApp=document.querySelector(".app");
+    join.dataset.gender=activeApp?.getAttribute("data-gender")==="girl"?"girl":activeApp?.getAttribute("data-gender")==="boy"?"boy":draft.gender==="girl"?"girl":"boy";
     var cancel=document.getElementById("joinCancel");
     var has=!!localStorage.getItem(ACTIVE);
     join.querySelectorAll(".join-skip").forEach(function(b){b.style.display=has?"none":"block"});
@@ -6730,6 +6741,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     var p=load().find(function(x){return x.id===id});
     if(!p)return;
     openJoin("login");
+    join.dataset.gender=p.gender==="girl"?"girl":"boy";
     document.getElementById("deviceLoginName").value=p.name||"";
     document.getElementById("deviceLoginPass").value="";
   }
@@ -6738,6 +6750,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   join.querySelectorAll("[data-gender]").forEach(function(b){
     b.addEventListener("click",function(){
       draft.gender=b.getAttribute("data-gender");
+      join.dataset.gender=draft.gender==="girl"?"girl":"boy";
       try{localStorage.setItem(GUEST_GENDER,draft.gender)}catch(e){}
       step("age");
     });
@@ -6836,12 +6849,12 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 <script src="/kids/dua-smart-learn.js?v=1312"></script>
 <script>
 (function(){
-  var KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1410";
+  var KIDS_BUILD_ID="kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren";
   // Stable start: do not reload a visible app when a service worker takes control.
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1410",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1422",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -6879,7 +6892,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
       }).catch(function(){}).finally(function(){refreshingSalaf=false});
   }
   document.addEventListener("click",function(event){
-    if(event.target.closest&&event.target.closest('.nav-btn[data-target="salaf"]')){
+    if(event.target.closest&&event.target.closest('[data-go="salaf"],.nav-btn[data-target="salaf"]')){
       setTimeout(refreshSalafIfStale,80);
     }
   },true);
@@ -6893,7 +6906,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     window.addEventListener("load",function(){
       setTimeout(function(){
         if(document.getElementById("profileJoin")?.hidden===false)return;
-        document.querySelector('.nav-btn[data-target="salaf"]')?.click();
+        showTab("salaf");
       },220);
     },{once:true});
   }
@@ -7879,7 +7892,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/deen-lessons.js?v=8"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1218-calm"></script>
 <script src="/kids/term-learning.js?v=1"></script>
-<script src="/kids/dua-hub-v1219.js?v=1420" data-kids-dua-hub="1259"></script>
+<script src="/kids/dua-hub-v1219.js?v=1421" data-kids-dua-hub="1259"></script>
 <script src="/kids/story-hub.js?v=28"></script>
 <script src="/kids/kids-age-typography.js?v=3"></script>
 <script src="/kids/quiz-v4-bridge.js?v=20261013-academy1"></script>
@@ -9626,7 +9639,7 @@ html[data-view="stories"] #view-stories > :last-child{
 }
 </style>
 
-<script src="/kids/navigation-v1182.js?v=1410"></script>
+<script src="/kids/navigation-v1182.js?v=1422"></script>
 
 <style id="kids-home-cinema-v1185">
 #view-today{--home-v1185-deep:#061b26;--home-v1185-petrol:#082b37}
@@ -11625,5 +11638,9 @@ html body :is(
 <link rel="stylesheet" href="/kids/salaf-girl-palette-v1415.css?v=1417">
 <!-- KIDS_GIRLS_GLOBAL_CANVAS_SEAM_V1416: uniform profile root/shell/ambient canvas -->
 <link rel="stylesheet" href="/kids/girls-profile-global-seam-v1416.css?v=1416">
-<link rel="stylesheet" href="/kids/kids-ui-contract-v1420.css?v=1420" data-kids-ui-contract="v1420">
+<link rel="stylesheet" href="/kids/kids-ui-contract-v1420.css?v=1421" data-kids-ui-contract="v1420">
+<link rel="stylesheet" href="/kids/kids-nav-v1421.css?v=1422" data-kids-navigation-contract="v1421">
+<link rel="stylesheet" href="/kids/kids-academy-girl-seam-v1421.css?v=1422" data-kids-girl-account-portal="v1421">
+<link rel="stylesheet" href="/kids/kids-motion-v1422.css?v=1422" data-kids-motion="v1422">
+<script defer src="/kids/kids-academy-portal-v1421.js?v=1422"></script>
 </html>

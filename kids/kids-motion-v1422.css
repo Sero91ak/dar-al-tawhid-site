@@ -1,0 +1,38 @@
+/* KIDS_NAVIGATION_MOTION_V1422
+   Animate composited opacity only; never move, scale, or re-layout Home.
+   Every page keeps its already-measured hero/header geometry.
+*/
+@keyframes kidsViewRevealV1422{
+  0%{opacity:.90}
+  100%{opacity:1}
+}
+html body .app :is(#view-today,#view-stories,#view-salaf,#view-dua,#view-parents).view.active{
+  animation:kidsViewRevealV1422 190ms cubic-bezier(.20,.75,.25,1) both;
+}
+html body #kidsAcademyPortal.kids-academy-portal{
+  transition:opacity 200ms cubic-bezier(.22,.75,.22,1)!important;
+  transform:none!important;
+}
+html body #kidsAcademyPortal > iframe{
+  transition:opacity 180ms ease-out!important;
+}
+html body #kidsAcademyPortal.kids-academy-portal[hidden]{
+  display:none!important;
+}
+html body .bottom-nav .nav-btn{
+  transition:background-color 170ms ease,color 170ms ease,opacity 170ms ease!important;
+}
+html body .bottom-nav .nav-btn .ico{
+  transition:opacity 170ms ease,filter 170ms ease!important;
+}
+html body #view-today .kids-wordmark > .wm-kids span{
+  /* Do not replay the intro on each return to Home. */
+  animation-iteration-count:1!important;
+}
+@media(prefers-reduced-motion:reduce){
+ html body .app :is(#view-today,#view-stories,#view-salaf,#view-dua,#view-parents).view.active{animation:none!important}
+ html body #kidsAcademyPortal.kids-academy-portal,
+ html body #kidsAcademyPortal > iframe,
+ html body .bottom-nav .nav-btn,
+ html body .bottom-nav .nav-btn .ico{transition:none!important}
+}

@@ -1,0 +1,99 @@
+/* KIDS_ACADEMY_PORTAL_AND_GIRL_ACCOUNT_V1421
+ Same-app entry and exit; girl styling must cover #kidsJoin outside .app.
+ No global color overrides for boys. */
+html body #kidsAcademyPortal.kids-academy-portal{
+ position:fixed!important;left:0!important;right:0!important;top:0!important;
+ bottom:auto!important;z-index:25!important;
+ width:100%!important;
+ /* Actual measured dock top, including dynamic safe areas and iPad widths. */
+ height:var(--kids-academy-portal-height,calc(100dvh - 110px))!important;
+ display:block!important;
+ background:#102939!important;overflow:hidden!important;box-sizing:border-box!important;
+ opacity:0;transform:translate3d(0,5px,0);
+ transition:opacity .22s ease,transform .22s ease!important;
+}
+/* Use the real global Kids dock, NOT a duplicate inside the iframe.
+   The Academy iframe itself ends eight pixels before this dock begins. */
+html body.kids-academy-portal-active .app > .bottom-nav{
+ z-index:40!important;
+ visibility:visible!important;
+ pointer-events:auto!important;
+}
+html body.kids-academy-portal-active .app > .bottom-nav .kids-academy-tab.active{
+ cursor:pointer!important;
+}
+html body #kidsAcademyPortal[hidden]{display:none!important}
+html body #kidsAcademyPortal.is-open{opacity:1!important;transform:none!important}
+html body #kidsAcademyPortal[data-gender="girl"]{background:#34263c!important}
+html body #kidsAcademyPortal > iframe{
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ box-sizing:border-box!important;border:0!important;background:inherit!important;
+ opacity:0;transition:opacity .24s ease!important;
+}
+html body #kidsAcademyPortal.is-ready > iframe{opacity:1!important}
+html body #kidsAcademyPortal .kids-academy-portal-loading{
+ position:absolute;inset:0;display:grid;place-items:center;
+ font-family:"Fredoka",system-ui,sans-serif;font-weight:750;font-size:clamp(23px,6vw,35px);
+ color:#fff8ee;
+}
+html body #kidsAcademyPortal.is-ready .kids-academy-portal-loading{display:none!important}
+html body #kidsAcademyPortal .kids-academy-portal-cancel{
+ position:absolute;z-index:6;left:15px;top:calc(7px + env(safe-area-inset-top,0px));
+ width:50px;height:50px;border-radius:16px;
+ background:rgba(51,32,54,.62);border:1px solid rgba(255,224,195,.32);
+ color:#fffaf3;font-size:36px;display:grid;place-items:center;
+}
+html body #kidsAcademyPortal.is-ready .kids-academy-portal-cancel{display:none!important}
+html.kids-academy-portal-active,body.kids-academy-portal-active{
+ overscroll-behavior:none!important;overflow:hidden!important;
+}
+/* account panel is body-level (not child of gender-themed .app) */
+html body:has(.app[data-gender="girl"]) #kidsJoin:not([data-gender="boy"]),
+html body #kidsJoin[data-gender="girl"]{
+ background:rgba(30,17,34,.78)!important;
+}
+html body:has(.app[data-gender="girl"]) #kidsJoin:not([data-gender="boy"]) .kids-join-card,
+html body #kidsJoin[data-gender="girl"] .kids-join-card{
+ background:linear-gradient(160deg,#49304b,#39263f 53%,#2c2036)!important;
+ border:1px solid rgba(252,188,220,.34)!important;
+ box-shadow:0 24px 54px rgba(23,13,30,.38)!important;
+ color:#fff5fa!important;
+}
+html body:has(.app[data-gender="girl"]) #kidsJoin:not([data-gender="boy"]) :is(h2,label),
+html body #kidsJoin[data-gender="girl"] :is(h2,label){color:#ffe2f0!important}
+html body:has(.app[data-gender="girl"]) #kidsJoin:not([data-gender="boy"]) p,
+html body #kidsJoin[data-gender="girl"] p{color:#f6dfec!important}
+html body:has(.app[data-gender="girl"]) #kidsJoin:not([data-gender="boy"]) input,
+html body #kidsJoin[data-gender="girl"] input{
+ box-sizing:border-box!important;background:#53374f!important;
+ border:1px solid rgba(254,202,229,.51)!important;
+ color:#fff8fc!important;-webkit-text-fill-color:#fff8fc!important;
+ caret-color:#ffd1e9!important;
+}
+html body:has(.app[data-gender="girl"]) #kidsJoin:not([data-gender="boy"]) input::placeholder,
+html body #kidsJoin[data-gender="girl"] input::placeholder{
+ color:#ead3e2!important;opacity:1!important;
+}
+html body:has(.app[data-gender="girl"]) #kidsJoin:not([data-gender="boy"]) button:not(.ghost),
+html body #kidsJoin[data-gender="girl"] button:not(.ghost){
+ background:#f0bfd5!important;color:#39263e!important;
+ border:1px solid rgba(251,215,234,.55)!important;
+}
+html body:has(.app[data-gender="girl"]) #kidsJoin:not([data-gender="boy"]) button.ghost,
+html body #kidsJoin[data-gender="girl"] button.ghost{
+ background:#573a51!important;color:#fff4fb!important;
+ border:1px solid rgba(251,193,226,.34)!important;
+}
+html body:has(.app[data-gender="girl"]) #kidsJoin:not([data-gender="boy"]) .kids-support-link,
+html body #kidsJoin[data-gender="girl"] .kids-support-link{
+ background:#604059!important;
+ border-color:#f0bfd5!important;
+ color:#fff4fb!important;-webkit-text-fill-color:#fff4fb!important;
+}
+html body:has(.app[data-gender="girl"]) #kidsJoin:not([data-gender="boy"]) .join-feedback:not([data-kind="error"]),
+html body #kidsJoin[data-gender="girl"] .join-feedback:not([data-kind="error"]){
+ background:#55364c!important;border-color:rgba(250,191,222,.45)!important;
+}
+/* Exactly one cancel action is visible within the selected onboarding step. */
+html body #kidsJoin [data-step="login"].on ~ #joinCancel{display:none!important}
+html body #kidsJoin #joinCancel[hidden]{display:none!important}

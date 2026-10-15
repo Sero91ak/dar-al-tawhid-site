@@ -21,15 +21,17 @@ assert.ok(html.includes('if(step==="quran"){showTab("today");return}'),"Legacy d
 assert.ok(html.includes("if(KIDS_QURAN_LEARNING_REMOVED)return;"),"Old Quran lesson entry points must be blocked");
 assert.ok(html.includes('var q=null; // Archived Qur'),"Home resume must not reopen removed lessons");
 assert.ok(!html.includes('fetchKidsQuiz();fetchCatalog();'),"Removed Quran catalog must not fetch on launch");
-assert.ok(html.includes('data-target="stories"')&&html.includes('data-target="salaf"')&&
-  html.includes('data-target="parents"')&&html.includes('id="openQuizButton"')&&
-  html.includes('id="openDuaButton"'),"Other children modules must remain usable");
+assert.ok(html.includes('data-target="stories"')&&html.includes('data-go="salaf"')&&
+  html.includes('data-target="parents"')&&html.includes('data-target="dua"')&&
+  html.includes('data-academy-open="1"')&&
+  html.includes('id="openQuizButton"')&&html.includes('id="openDuaButton"'),
+  "Other child areas (Salaf, Du'a, Academy, Quiz and Parents) must remain accessible");
 assert.equal(manifest.quranLearningEnabled,false);
 assert.equal(manifest.quranLearningRuntimeRemoved,true);
 assert.equal(manifest.alifBaRuntimeRemoved,true);
 assert.equal(manifest.quranLearningArchivedUserProgressRetained,true);
 assert.equal(manifest.visualSystem.alphabetEnabled,false);
-assert.equal(sw.includes('dar-al-tawhid-kids-v1410'),true,"Keep original published PWA cache family while retiring obsolete markup");
+assert.equal(sw.includes('dar-al-tawhid-kids-v1422'),true,"V1421 must use a new service-worker cache while retaining existing profile data");
 assert.ok(!sw.includes('/kids/assets/kids-art/quran-surahs-v1053.jpg'),"Do not precache retired art");
 let inline=0;
 for(const m of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)){
@@ -47,8 +49,8 @@ assert.ok(duaHub.includes("enhanceHeaderProfile();") && duaHub.includes("enhance
   duaHub.includes("enhanceJoinChoices();"),"Boy/girl profile UI must remain initialized");
 assert.ok(duaHub.includes("boy-kufi-v1235.svg") && duaHub.includes("girl-hijab-pink-v1235.svg"),"Profile avatar sources must be preserved");
 assert.ok(html.includes('class="profile-dot"') && html.includes('id="profileList"'),"Home/parent profile mount points missing");
-assert.ok(html.includes('/kids/dua-hub-v1219.js?v=1420'),"New profile runtime must bust installed PWA cache");
-assert.ok(sw.includes('"/kids/dua-hub-v1219.js?v=1420"') &&
+assert.ok(html.includes('/kids/dua-hub-v1219.js?v=1421'),"New profile runtime must bust installed PWA cache");
+assert.ok(sw.includes('"/kids/dua-hub-v1219.js?v=1421"') &&
   sw.includes('url.pathname==="/kids/dua-hub-v1219.js"'),"New avatar runtime must work online/offline");
 require("./check-ui-contract-v1420.cjs");
 console.log("PASS KIDS V1418: Quran/Alif-Ba learning UI retired, legacy routes blocked, other modules preserved; parsed "+inline+" inline scripts");
