@@ -46,11 +46,12 @@ assert.ok(dua.includes('!q("#view-today")')&&dua.includes('!q("#view-parents")')
 assert.ok(!dua.includes('!q("#view-quran")'),"Removed Quran UI must not block profiles");
 assert.ok(html.includes('const KIDS_QURAN_LEARNING_REMOVED=true'),"Alif-Bāʾ retirement preserved");
 assert.ok(!html.includes('<section id="view-quran"'),"Removed Quran lesson must remain retired");
-assert.ok(html.includes('/kids/kids-ui-contract-v1420.css?v=1421')&&html.includes('/kids/kids-nav-v1421.css?v=1421'),"New versioned CSS missing");
+assert.ok(html.includes('/kids/kids-ui-contract-v1420.css?v=1421')&&html.includes('/kids/kids-nav-v1421.css?v=1422'),"New versioned CSS missing");
 assert.ok(academy.includes('kids-ui-contract-v1420.css'),"Shared Academy geometry preserved");
 assert.ok(css.includes("grid-template-columns:minmax(0,1fr)!important"),"Hörwelten three wide cards missing");
-assert.ok(navCss.includes("learning-book-premium-v1421.svg"),"Lernen icon missing");
-assert.ok(read("kids/assets/kids-icons/learning-book-premium-v1421.svg").includes("<svg"),"Study book SVG missing");
+assert.ok(navCss.includes("learning-book-3d-v1422.png"),"Lernen icon missing");
+assert.ok(fs.statSync(path.join(root,"kids/assets/kids-icons/learning-book-3d-v1422.png")).size>10000,"Premium 3D icon image is missing or too small");
+assert.ok(sw.includes("/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422"),"3D icon must be available offline");
 assert.ok(navCss.includes("dua-real-v12.png"),"Duʿāʾ icon missing");
 assert.ok(html.includes("kids-salaf-listening-hero")&&html.includes('data-go="salaf"'),"Salaf must be in Hören");
 for(const k of ["salaf-cinema-hero-boy-v1353.jpg","salaf-cinema-hero-girl-v1353.jpg"])
@@ -60,7 +61,7 @@ for(const k of ["kids-academy-hero-boys-v1.jpg","kids-academy-hero-girls-v1.jpg"
 assert.ok(salaf.includes('salaf-story-nav kids-detail-appbar'),"Shared reader header must remain");
 assert.ok(html.includes('if(name==="dua"&&window.DARKidsDuaHub'),"Duʿāʾ tab must open real hub");
 assert.equal(v.buildId,"kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren");
-assert.ok(sw.includes('dar-al-tawhid-kids-v1422')&&sw.includes('kids-nav-v1421.css?v=1421'),"PWA cache must be updated");
+assert.ok(sw.includes('dar-al-tawhid-kids-v1422')&&sw.includes('kids-nav-v1421.css?v=1422'),"PWA cache must be updated");
 assert.ok(sw.includes('kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren'),"SW build ID must match");
 
 const navigation=read("kids/navigation-v1182.js"),motion=read("kids/kids-motion-v1422.css");
