@@ -1,3 +1,12 @@
+## KIDS_GIRLS_PROFILE_COLOR_GATE_V2 – verbindlich vor jedem Design-Deploy (15.10.2026)
+
+- **Vor JEDEM Kinder-Design-Push die zwei Profilwelten getrennt kontrollieren.** Jungen = Nachtblau/Petrol/Gold; Mädchen = Pflaume/Rosé/Champagnergold. Mädchen erhalten auf neutralen Flächen **keinen** Petrol-, Navy- oder Cyanstandard. Fotos dürfen ihre natürlichen Farben behalten.
+- Kontrollumfang: Hauptansichten (Geschichten/Schätze/Qurʾān/Eltern), Bibliotheken (Propheten/Ṣaḥābah/Ṣaḥābiyyāt/Salaf), ausgelagerte Leser und Hörfenster, Duʿāʾ, Quiz, separate Lernakademie, Kopfzeilen, Karten und sämtliche durchscheinenden Hintergrundebenen einschließlich iOS-Overscroll.
+- Die Mädchenfarben müssen nach den allgemeinen CSS-Dateien **als letzte Autorität** geladen werden. Für `body`-portalisierte Dialoge den aktuellen `.app[data-gender]`-Wert zuverlässig übernehmen oder über den Profilzustand selektieren. Nicht vom vorherigen/gespeicherten Profilzustand ausgehen. Profilwechsel Junge→Mädchen→Junge prüfen.
+- Bei Neuaufbau: vorhandene Bildquellen, 3D-Navigation, das genehmigte Moscheibild und die **fünf Gebetszeiten** der Startseite sowie Scroll-/Safe-Area-Geometrie unangetastet lassen. Ein Testbutton oder eine Scrollleiste ist kein Farbfehler und wird nicht verändert.
+- **Test-Freigabesystem:** `node kids/tools/test-v2-girls-color-audit.cjs`, `node kids/tools/test-v2-profile-parity.cjs`, `node kids/tools/test-v2-prophets-pilot.cjs` sowie die anderen bestehenden Design-/Kids-Guards. Nach erfolgreichem KIDS-Creator-Deploy die LIVE ausgelieferten Assets bytegenau prüfen. Statische Tests sind **kein Ersatz für visuelle iPhone-/Android-Kontrolle** mit beiden Profilen.
+- Jede unbeabsichtigte Farbregression blockiert die Freigabe. Änderungen zuerst nur auf `kids-creator-staging` und `dar-al-tawhid-kids-creator.sero91ak.workers.dev`. **Kein Merge nach `main`, kein Besucher-Push**, solange Profilfarben nicht visuell abgenommen sind.
+
 ## KIDS_GLOBAL_NO_PUBLIC_SOURCE_LINKS_V1414 – verbindlich für alle Kinderbereiche
 
 - **Keine anklickbaren Originalquellen-/Nachweislinks in TAWḤĪD KIDS**, auch nicht in dynamischen Geschichten, Leseransichten, Quiz, Qurʾān, Duʿāʾ und Akademie.
