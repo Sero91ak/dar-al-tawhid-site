@@ -804,7 +804,17 @@ jobs:
         run: |
           python - <<'PY'
           import json
+          import re
           from pathlib import Path
+
+          # The Kids V1418 visitor learner is intentionally retired.
+          # Keep Voice Studio audio security and the Kids quiz/story/duʿāʾ checks.
+          kids_release=json.loads(Path("kids/version.json").read_text(encoding="utf-8"))
+          kids_training_removed=(
+              kids_release.get("quranLearningEnabled") is False and
+              kids_release.get("quranLearningRuntimeRemoved") is True and
+              kids_release.get("alifBaRuntimeRemoved") is True
+          )
 
           html=Path("voice-studio/index.html").read_text(encoding="utf-8")
           studio=Path("voice-studio/alphabet-audio-studio.js").read_text(encoding="utf-8")
@@ -902,7 +912,34 @@ jobs:
                   '"mixedSpeakersForbidden": true',
               ]),
           ]
+          if kids_training_removed:
+              kids_retained=[
+                  'QUIZ_PROGRESS_PREFIX="kids.quiz.progress.v2."',
+                  'function quizPriority(id,now)',
+                  'recordQuizAttempt(q.id,!quizQuestionHadError)',
+                  'STORY_PROGRESS_PREFIX="kids.story.progress.v2."',
+                  'recordStoryAttempt(currentStoryKey,!storyQuestionHadError)',
+                  'storyQuestionHadError=true',
+                  'DUA_PROGRESS_PREFIX="kids.dua.progress.v2."',
+                  'recordDuaAttempt(d.id,!duaQuestionHadError)',
+                  'duaQuestionHadError=true',
+              ]
+              groups=[(label,source,kids_retained if label=="kids" else required)
+                      for label,source,required in groups]
+
           errors=[]
+          if kids_training_removed:
+              # The V1418 removal must not regress in a future Kids visitor shell.
+              forbidden_ui=[
+                  (r'<section[^>]+id="view-quran"', "Qurʾān lesson page"),
+                  (r'<(?:div|section)[^>]+id="quranModal"', "Qurʾān lesson modal"),
+                  (r'<button[^>]+data-target="quran"', "Qurʾān bottom navigation"),
+                  (r'<(?:div|section)[^>]+id="alphabetModal"', "Alif-Bāʾ lesson modal"),
+              ]
+              for pattern,label in forbidden_ui:
+                  if re.search(pattern,kids,re.IGNORECASE):
+                      errors.append("retired Kids visitor UI returned: "+label)
+
           for label,source,required in groups:
               missing=[x for x in required if x not in source]
               if missing:
@@ -927,7 +964,7 @@ jobs:
               errors.append("legacy one-shot story mastery returned")
           if 'localStorage.setItem("kids.dua."+d.id,"1")' in kids:
               errors.append("legacy one-shot Dua mastery returned")
-          if 'recordQuranAttempt(!ayahPracticeHadError)' not in kids:
+          if not kids_training_removed and 'recordQuranAttempt(!ayahPracticeHadError)' not in kids:
               errors.append("spaced Quran ayah mastery missing")
           if 'if(!candidateHeard)' not in studio:
               errors.append("Serhat alphabet candidate full-listen gate missing")
@@ -987,7 +1024,8 @@ jobs:
 
           if errors:
               raise SystemExit("Strict Alif-Ba audio validation failed: "+" | ".join(errors))
-          print("Strict Alif-Ba audio workflow OK; active clips:",len(active_verified))
+          print("Strict Voice Studio Alif-Bāʾ audio safeguards OK; active clips:",
+                len(active_verified),"; Kids visitor learner retired:",kids_training_removed)
           PY
 
       - name: Compile Voice Engine
