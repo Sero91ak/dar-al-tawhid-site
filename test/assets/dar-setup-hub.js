@@ -436,7 +436,7 @@
     var node = document.createElement("link");
     node.id = STYLE_ID;
     node.rel = "stylesheet";
-    node.href = "/test/assets/notifications-refined-v1.css?v=1";
+    node.href = "/test/assets/notifications-refined-v1.css?v=3-location";
     document.head.appendChild(node);
   }
 
@@ -530,7 +530,7 @@
     if(!node)return;
     setGpsText(permissionLabel(""));
     try{
-      if(!navigator.geolocation){
+      if(!navigator.geolocation&&!window.DAR_NATIVE_LOCATION){
         setGpsText("Geräteortung hier nicht verfügbar. Stadt über „Ändern“ auswählen.");
         var btn=node.querySelector("[data-dar-detect-location]");
         if(btn)btn.disabled=true;
