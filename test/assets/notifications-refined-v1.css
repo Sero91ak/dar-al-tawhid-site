@@ -1,0 +1,421 @@
+/* DAR TEST • Benachrichtigungen • stille Royal-Oberfläche V1
+ * Optik only. Keine Push-Registrierung, keine Preferences oder iOS-Bridge ändern.
+ * Nutzt die ORIGINALEN test/index.html IDs / Klassen / Events.
+ * In Einstellungen wird stattdessen ein einziger Link zum zentralen Bereich gezeigt.
+ */
+html body.is-settings-route .settings-one-page > .notification-center-page,
+html body.is-settings-route .settings-one-page .notification-center-page {
+  display:none!important;
+}
+html body.is-settings-route #dar-setup-hub[data-dar-setup] {
+  display:block!important;
+  width:100%;
+  margin:0!important;
+  padding:17px 2px!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#dec58d) 23%,transparent)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html body.is-settings-route #dar-setup-hub .dar-setup-hub__title {
+  color:var(--text,#f1e7d4)!important;
+  font-size:clamp(20px,5vw,24px)!important;
+  line-height:1.2!important;
+  font-weight:550!important;
+}
+html body.is-settings-route #dar-setup-hub .dar-setup-hub__sub {
+  font-size:12px!important;
+  line-height:1.55!important;
+  color:var(--muted,#a9a9ac)!important;
+}
+html body.is-settings-route #dar-setup-hub .dar-setup-hub__list {
+  display:block!important;
+  margin-top:13px!important;
+}
+html body.is-settings-route #dar-setup-hub .dar-setup-hub__row {
+  display:flex!important;
+  justify-content:space-between!important;
+  flex-direction:row!important;
+  border:0!important;
+  padding:10px 2px!important;
+  min-height:48px!important;
+}
+html body.is-settings-route #dar-setup-hub .dar-setup-hub__row:first-child {
+  border-top:1px solid color-mix(in srgb,var(--gold2,#dec58d) 18%,transparent)!important;
+}
+html body.is-settings-route #dar-setup-hub .dar-setup-hub__btn {
+  min-height:44px!important;
+  background:transparent!important;
+  border:1px solid color-mix(in srgb,var(--gold2,#dec58d) 32%,transparent)!important;
+  color:var(--text,#f5ecdc)!important;
+  padding:10px 15px!important;
+  font-size:12px!important;
+  border-radius:999px!important;
+}
+html body.is-notifications-route .notification-center-page {
+  --dn-gold:var(--gold2,#dfc38b);
+  --dn-rule:color-mix(in srgb,var(--gold2,#dfc38b) 23%,var(--line2,transparent));
+  --dn-faint:color-mix(in srgb,var(--gold2,#dfc38b) 7%,transparent);
+  --dn-text:var(--text,#f6efe2);
+  --dn-muted:var(--muted,#abb1bd);
+  box-sizing:border-box!important;
+  display:block!important;
+  width:100%!important;
+  max-width:min(100%,760px)!important;
+  margin:0 auto!important;
+  padding:4px max(0px,env(safe-area-inset-right)) calc(134px + env(safe-area-inset-bottom,0px)) max(0px,env(safe-area-inset-left))!important;
+  color:var(--dn-text)!important;
+  overflow:visible!important;
+}
+html body.is-notifications-route .notification-center-page * {box-sizing:border-box}
+html body.is-notifications-route .notification-hero {
+  isolation:auto!important;
+  overflow:visible!important;
+  padding:12px 0 0!important;
+  margin:0 0 10px!important;
+  border:0!important;
+  border-radius:0!important;
+  background:none!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html body.is-notifications-route .notification-hero:after {display:none!important}
+html body.is-notifications-route .notification-hero__top {
+  display:grid!important;
+  grid-template-columns:44px minmax(0,1fr) auto!important;
+  gap:13px!important;
+  align-items:center!important;
+  padding:8px 1px 19px!important;
+  border-bottom:1px solid var(--dn-rule)!important;
+}
+html body.is-notifications-route .notification-hero__icon {
+  display:grid!important;
+  place-items:center!important;
+  width:44px!important;
+  height:44px!important;
+  border-radius:50%!important;
+  border:1px solid color-mix(in srgb,var(--dn-gold) 35%,transparent)!important;
+  color:var(--dn-gold)!important;
+  background:var(--dn-faint)!important;
+  box-shadow:none!important;
+}
+html body.is-notifications-route .notification-hero__icon svg{width:20px!important;height:20px!important}
+html body.is-notifications-route .notification-hero h2 {
+  font-family:var(--serif,Georgia,serif)!important;
+  font-size:clamp(21px,5vw,27px)!important;
+  letter-spacing:0!important;
+  line-height:1.15!important;
+  font-weight:550!important;
+  margin:0!important;
+  color:var(--dn-text)!important;
+}
+html body.is-notifications-route .notification-hero p {
+  color:var(--dn-muted)!important;
+  font-size:12px!important;
+  line-height:1.45!important;
+  margin:4px 0 0!important;
+}
+html body.is-notifications-route .notification-hero__count {
+  border:1px solid var(--dn-rule)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  border-radius:15px!important;
+  width:54px!important;height:49px!important;
+  color:var(--dn-muted)!important;
+  font-size:9px!important;
+}
+html body.is-notifications-route .notification-hero__count b {
+  color:var(--dn-gold)!important;
+  font-size:21px!important;
+}
+html body.is-notifications-route .notification-hero__status {display:none!important}
+html body.is-notifications-route #notificationHealthBox {
+  position:relative!important;
+  margin:14px 0 7px!important;
+  padding:12px 14px!important;
+  border:1px solid var(--dn-rule)!important;
+  border-left:2px solid var(--dn-gold)!important;
+  border-radius:11px!important;
+  background:color-mix(in srgb,var(--card,#10223a) 34%,transparent)!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  flex-wrap:wrap!important;
+  min-height:66px!important;
+}
+html body.is-notifications-route #notificationHealthBox[hidden] {display:none!important}
+html body.is-notifications-route #notificationHealthText {
+  flex:1 1 180px!important;
+  min-width:0!important;
+  margin:0!important;
+  color:var(--dn-muted)!important;
+  font-size:12px!important;
+  line-height:1.5!important;
+  overflow-wrap:anywhere!important;
+}
+html body.is-notifications-route #notificationReenableBtn {
+  flex:0 0 auto!important;
+  min-height:42px!important;
+  padding:8px 14px!important;
+  border:1px solid color-mix(in srgb,var(--dn-gold) 38%,transparent)!important;
+  background:transparent!important;
+  color:var(--dn-text)!important;
+  border-radius:999px!important;
+  font-size:12px!important;
+  line-height:1.15!important;
+  font-weight:700!important;
+}
+html body.is-notifications-route .notification-section {
+  margin:0!important;
+  padding:21px 0 18px!important;
+  border:0!important;
+  border-bottom:1px solid var(--dn-rule)!important;
+  border-radius:0!important;
+  background:none!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+html body.is-notifications-route .notification-section:before {display:none!important}
+html body.is-notifications-route .notification-section__head {
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  margin:0 1px 14px!important;
+}
+html body.is-notifications-route .notification-section__kicker {
+  display:block!important;
+  font-size:10px!important;
+  font-weight:800!important;
+  letter-spacing:.16em!important;
+  color:var(--dn-gold)!important;
+  line-height:1.3!important;
+  margin:0 0 5px!important;
+}
+html body.is-notifications-route .notification-section__head h3 {
+  color:var(--dn-text)!important;
+  font-family:var(--serif,Georgia,serif)!important;
+  font-size:clamp(23px,5.4vw,29px)!important;
+  font-weight:500!important;
+  line-height:1.12!important;
+}
+html body.is-notifications-route .notification-section__head p {
+  color:var(--dn-muted)!important;
+  font-size:12px!important;
+  line-height:1.5!important;
+  margin:5px 0 0!important;
+}
+html body.is-notifications-route .notification-toggle {
+  width:49px!important;min-width:49px!important;
+  height:29px!important;min-height:29px!important;
+  border-radius:999px!important;
+  border:1px solid color-mix(in srgb,var(--dn-gold) 29%,var(--line2,transparent))!important;
+  background:color-mix(in srgb,var(--card,#13233c) 70%,transparent)!important;
+  box-shadow:none!important;
+  flex-shrink:0!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+}
+html body.is-notifications-route .notification-toggle:after {
+  position:absolute!important;left:3px!important;top:3px!important;
+  width:21px!important;height:21px!important;
+  background:var(--dn-muted)!important;
+  border-radius:50%!important;box-shadow:none!important;
+}
+html body.is-notifications-route .notification-toggle.is-on {
+  border-color:color-mix(in srgb,var(--dn-gold) 50%,transparent)!important;
+  background:color-mix(in srgb,var(--dn-gold) 17%,var(--card,#14243c))!important;
+}
+html body.is-notifications-route .notification-toggle.is-on:after {
+  transform:translateX(20px)!important;
+  background:var(--dn-gold)!important;
+}
+html body.is-notifications-route .notification-location {
+  display:grid!important;
+  grid-template-columns:33px minmax(0,1fr) auto!important;
+  align-items:center!important;
+  column-gap:10px!important;
+  min-height:63px!important;
+  margin:0!important;
+  padding:10px 2px!important;
+  border:0!important;
+  border-top:1px solid var(--dn-rule)!important;
+  background:none!important;
+}
+html body.is-notifications-route .notification-location__icon {
+  width:33px!important;height:33px!important;
+  background:var(--dn-faint)!important;
+  color:var(--dn-gold)!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+html body.is-notifications-route .notification-location span{
+  color:var(--dn-muted)!important;
+  font-size:11px!important;line-height:1.45!important;
+}
+html body.is-notifications-route .notification-location b {
+  color:var(--dn-text)!important;
+  font-size:13px!important;
+  font-weight:700!important;
+}
+html body.is-notifications-route .notification-action {
+  display:inline-flex!important;
+  justify-content:center!important;align-items:center!important;
+  min-height:42px!important;
+  padding:8px 13px!important;
+  border-radius:999px!important;
+  color:var(--dn-text)!important;
+  border:1px solid color-mix(in srgb,var(--dn-gold) 30%,transparent)!important;
+  background:none!important;box-shadow:none!important;
+  font-size:12px!important;font-weight:680!important;
+  cursor:pointer!important;touch-action:manipulation!important;
+}
+html body.is-notifications-route .notification-prayer-grid{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:4px!important;
+  width:100%!important;
+  margin:14px 0 6px!important;
+  padding:0!important;
+  border:0!important;
+}
+html body.is-notifications-route .notification-prayer {
+  min-width:0!important;min-height:81px!important;
+  padding:9px 0!important;
+  gap:5px!important;
+  border:1px solid transparent!important;
+  border-radius:12px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  color:var(--dn-muted)!important;
+  touch-action:manipulation!important;
+}
+html body.is-notifications-route .notification-prayer.is-on {
+  background:var(--dn-faint)!important;
+  border-color:color-mix(in srgb,var(--dn-gold) 17%,transparent)!important;
+}
+html body.is-notifications-route .notification-prayer-index {
+  display:grid!important;place-items:center!important;
+  width:38px!important;height:38px!important;
+  font-size:20px!important;
+  color:var(--dn-muted)!important;
+  background:transparent!important;
+  border:1px solid var(--dn-rule)!important;
+  box-shadow:none!important;
+}
+html body.is-notifications-route .notification-prayer.is-on .notification-prayer-index{
+  color:var(--dn-gold)!important;
+  border-color:color-mix(in srgb,var(--dn-gold) 43%,transparent)!important;
+  background:transparent!important;box-shadow:none!important;
+}
+html body.is-notifications-route .notification-prayer b {
+  font-size:11px!important;
+  font-weight:700!important;
+  white-space:normal!important;
+  color:var(--dn-muted)!important;
+  line-height:1.2!important;
+}
+html body.is-notifications-route .notification-prayer.is-on b{color:var(--dn-text)!important}
+html body.is-notifications-route .notification-prayer:after{
+  width:5px!important;height:5px!important;top:5px!important;right:7px!important;
+  box-shadow:none!important;
+}
+html body.is-notifications-route .notification-row {
+  grid-template-columns:minmax(0,1fr) auto!important;
+  min-height:65px!important;
+  padding:12px 2px!important;
+  gap:9px!important;
+  border:0!important;border-top:1px solid var(--dn-rule)!important;
+  background:transparent!important;box-shadow:none!important;
+}
+html body.is-notifications-route .notification-row:first-child {border-top:0!important}
+html body.is-notifications-route .notification-row__copy {gap:10px!important;min-width:0!important}
+html body.is-notifications-route .notification-row__glyph {
+  display:grid!important;place-items:center!important;
+  width:34px!important;height:34px!important;
+  flex:0 0 34px!important;
+  border:1px solid var(--dn-rule)!important;
+  border-radius:50%!important;
+  background:transparent!important;color:var(--dn-gold)!important;
+  font-family:var(--serif,Georgia,serif)!important;
+  font-size:17px!important;box-shadow:none!important;
+}
+html body.is-notifications-route .notification-row strong {
+  color:var(--dn-text)!important;
+  font-size:13px!important;font-weight:700!important;
+  line-height:1.3!important;
+}
+html body.is-notifications-route .notification-row small {
+  color:var(--dn-muted)!important;
+  font-size:11px!important;line-height:1.4!important;
+  margin:3px 0 0!important;
+}
+html body.is-notifications-route .notification-time{display:flex!important;align-items:center!important;gap:9px!important;min-width:0!important}
+html body.is-notifications-route .notification-time input,
+html body.is-notifications-route .notification-time select {
+  width:83px!important;min-width:70px!important;
+  height:39px!important;min-height:39px!important;
+  margin:0!important;padding:6px 9px!important;
+  border:1px solid var(--dn-rule)!important;
+  border-radius:999px!important;
+  background:transparent!important;
+  color:var(--dn-text)!important;
+  -webkit-text-fill-color:var(--dn-text)!important;
+  font-size:12px!important;
+  font-weight:650!important;
+  font-family:var(--font-ui,system-ui,sans-serif)!important;
+  box-shadow:none!important;
+  text-align:center!important;
+}
+html body.is-notifications-route .notification-time select{width:90px!important}
+html body.is-notifications-route .notification-note {
+  color:var(--dn-muted)!important;
+  font-size:11px!important;
+  line-height:1.55!important;
+  margin:13px 2px 2px!important;
+  opacity:.82;
+}
+html body.is-notifications-route .notification-saved {
+  color:var(--dn-muted)!important;
+  font-size:11px!important;
+  margin:18px 0 0!important;
+  padding-bottom:5px!important;
+  line-height:1.5!important;
+  text-align:center!important;
+  background:none!important;box-shadow:none!important;
+}
+html body.is-notifications-route .notification-saved:before{
+  background:var(--dn-faint)!important;
+  border:1px solid var(--dn-rule)!important;
+  color:var(--dn-gold)!important;
+  box-shadow:none!important;
+}
+html body.is-notifications-route .notification-center-page :is(button,select,input):focus-visible{
+  outline:2px solid var(--dn-gold)!important;
+  outline-offset:3px!important;
+}
+@media (max-width:374px){
+ html body.is-notifications-route .notification-hero__top{grid-template-columns:40px minmax(0,1fr) auto!important;gap:9px!important}
+ html body.is-notifications-route .notification-hero__icon{width:40px!important;height:40px!important}
+ html body.is-notifications-route .notification-prayer{padding-inline:0!important}
+ html body.is-notifications-route .notification-prayer-index{width:34px!important;height:34px!important}
+ html body.is-notifications-route .notification-prayer b{font-size:10px!important}
+ html body.is-notifications-route .notification-row__glyph{width:30px!important;height:30px!important;flex-basis:30px!important}
+ html body.is-notifications-route .notification-time{gap:6px!important}
+ html body.is-notifications-route .notification-time input{width:72px!important;min-width:72px!important;padding-inline:4px!important}
+}
+@media (min-width:720px){
+ html body.is-notifications-route .notification-center-page{padding-inline:12px!important}
+ html body.is-notifications-route .notification-prayer-grid{gap:12px!important}
+}
+@media (prefers-reduced-motion:reduce){
+ html body.is-notifications-route .notification-center-page * {transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
