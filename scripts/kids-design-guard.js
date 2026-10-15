@@ -328,7 +328,7 @@ function runKidsDesignGuard() {
   if (!html.includes('id="kids-quran-listen-only-v1418"') ||
       !html.includes("practiceRequired=false; /* KIDS_QURAN_LISTEN_ONLY_V1418") ||
       !html.includes('id="speakAlong" class="big-speak" type="button" disabled hidden') ||
-      /openSurah\\([^\\n]*"learn"/.test(html))
+      /openSurah\([^\n]*"learn"/.test(html))
     failed += fail("KIDS V1418: Quran learner mode or recorder still reachable");
   if (html.includes('{id:"quran",title:"Qurʾān",hint:"eine Āyah lernen"') ||
       !html.includes('id="fullQuranButton"') ||
