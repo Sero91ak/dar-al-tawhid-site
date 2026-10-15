@@ -21,6 +21,15 @@ assert.ok(html.includes('kids-academy-girl-seam-v1421.css?v=1421'),"Account moda
 const portalJs=read("kids/kids-academy-portal-v1421.js");
 const portalCss=read("kids/kids-academy-girl-seam-v1421.css");
 assert.ok(portalJs.includes('frame.src="/kids/akademie/index.html?kidsPortal=1"'),"Academy must be embedded in the existing app");
+assert.ok(portalJs.includes('nav.parentNode.insertBefore(modal,nav)')&&!portalJs.includes('document.body.appendChild(modal)'),"Academy portal must reuse the one existing dock in the same app stacking context");
+assert.ok(portalJs.includes('rect.top-GAP')&&portalJs.includes('--kids-academy-portal-height'),"Academy height must dynamically stop above the real dock");
+assert.ok(portalJs.includes('selectLearn()')&&portalJs.includes('restorePrevious()'),"Lernen must become active and restore the previous tab on exit");
+assert.ok(portalJs.includes('document.addEventListener("click"')&&portalJs.includes('close(true)'),"Other global tabs must remain actionable while Academy is open");
+assert.ok(portalCss.includes('height:var(--kids-academy-portal-height')&&portalCss.includes('z-index:25!important'),"Academy portal must sit below the one global dock");
+assert.ok(portalCss.includes('.app > .bottom-nav')&&portalCss.includes('pointer-events:auto!important'),"Shared bottom dock must remain above the Academy");
+assert.ok(academy.includes('id="kids-academy-dock-scroll-v1422"')&&academy.includes('scroll-padding-block-end:24px'),"Academy lessons must finish safely above the dock");
+assert.ok(html.includes('/kids/kids-academy-portal-v1421.js?v=1422')&&html.includes('/kids/kids-academy-girl-seam-v1421.css?v=1422'),"Installed PWA must request new Academy/dock CSS and JS");
+assert.ok(sw.includes('/kids/kids-academy-portal-v1421.js?v=1422')&&sw.includes('/kids/kids-academy-girl-seam-v1421.css?v=1422'),"New Academy/dock assets must be precached");
 assert.ok(portalJs.includes('DAR_KIDS_ACADEMY_PAUSE_V1421')&&portalJs.includes('DAR_KIDS_ACADEMY_CLOSE_V1421'),"Portal must handle child app exit and pause");
 assert.ok(academy.includes("KIDS_SEAMLESS_PORTAL_V1421")&&academy.includes("returnToKids();"),"Academy back button must close portal");
 assert.ok(academy.includes('$("#academyNavHome").onclick=()=>returnToKids(true)'),"Academy house must return to Heute without page reload");
