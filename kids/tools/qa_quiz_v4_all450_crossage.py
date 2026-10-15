@@ -167,7 +167,7 @@ def main():
         assert_ok(set((y if band=="4-6" else o)["entries"])>=referenced[band],
                   "Required complete audio text not found: "+band)
         stats[band]={"selectedQuestions":150,"fourPartComplete":complete,
-                     "originalBackedFieldAssignments":sum(fields),"fields":fields,
+                     "originalBackedFieldAssignments":sum(fields.values()),"fields":fields,
                      "humanHearingApproved":0}
     overlap=set(y["entries"]) & set(o["entries"])
     for phrase in overlap:
