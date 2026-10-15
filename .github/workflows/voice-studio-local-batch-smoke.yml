@@ -461,7 +461,19 @@ jobs:
           assert "DARKidsOwnerVoice.play" in kids
           assert "Audio wird vorbereitet" in kids
           assert "/kids/assets/kids-owner-voice/" in sw
-          assert "/kids/assets/kids-quiz-audio/" in sw
+          # Current quiz audio is listed by its manifest and cached by the generic
+          # Kids assets handler / explicit full-offline manifest scanner.
+          # Never hardcode thousands of clip URLs into the startup precache.
+          quiz_audio_manifest=json.loads(Path("kids/data/quiz-audio.json").read_text(encoding="utf-8"))
+          quiz_audio_entries=quiz_audio_manifest.get("entries") or {}
+          assert isinstance(quiz_audio_entries,dict) and any(
+              str(row.get("url") or "").startswith("/kids/assets/kids-quiz-audio/")
+              for row in quiz_audio_entries.values() if isinstance(row,dict)
+          ), "quiz owner-voice audio URLs missing from live manifest"
+          assert 'url.pathname.indexOf("/kids/assets/")===0' in sw, "generic Kids asset cache handler missing"
+          assert 'event.respondWith(cacheFirst(request));' in sw, "Kids asset cache-first path missing"
+          assert 'for(const item of kidsAssetRefs(text))' in sw, "full-offline manifest asset scanner missing"
+          assert '"/kids/data/quiz-audio.json"' in sw, "quiz manifest must be discoverable offline"
 
           assert owner.get("voiceProfileId")=="serhat-owner-voice-2026"
           assert owner.get("systemTtsFallbackAllowed") is False
