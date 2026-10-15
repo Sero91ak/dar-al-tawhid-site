@@ -8,6 +8,7 @@ const DUA_AUDIO_RUNTIME="1244";
 const CORE_PRECACHE=[
   "/kids/kids-nav-v1421.css?v=1422",
   "/kids/kids-motion-v1422.css?v=1422",
+  "/kids/kids-girl-palette-authority-v1427.css?v=1427",
   "/kids/kids-academy-girl-seam-v1421.css?v=1422",
   "/kids/kids-academy-portal-v1421.js?v=1425",
   "/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422",
@@ -468,6 +469,11 @@ self.addEventListener("fetch",function(event){
     return;
   }
   if(url.pathname==="/kids/kids-nav-v1421.css"||url.pathname==="/kids/assets/kids-icons/learning-book-3d-v1422.png"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
+  /* Last girl-only palette is network first, with an offline cache fallback. */
+  if(url.pathname==="/kids/kids-girl-palette-authority-v1427.css"){
     event.respondWith(networkFirst(request));
     return;
   }
