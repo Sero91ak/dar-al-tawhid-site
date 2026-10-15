@@ -362,18 +362,35 @@ class TvActivity : Activity() {
         }
     }
 
+    private fun showPrayerLocationPicker() {
+        val list = cities.map { it.first }.toTypedArray()
+        AlertDialog.Builder(this)
+            .setTitle("Gebetsort auswählen")
+            .setSingleChoiceItems(list, cityIndex) { dialog, selected ->
+                val changed = selected != cityIndex
+                cityIndex = selected.coerceIn(0, cities.lastIndex)
+                getPreferences(MODE_PRIVATE).edit().putInt("city_index", cityIndex).apply()
+                dialog.dismiss()
+                if (changed) {
+                    adhanController.locationChanged()
+                    val route = activeTab
+                    show(route)
+                    val mode = TvDashboardMode.fromRoute(route)
+                    val index = TvDashboardMode.entries.indexOf(mode).coerceAtLeast(0)
+                    nav.post { nav.getChildAt(index)?.requestFocus() }
+                }
+            }
+            .setNegativeButton("Zurück", null)
+            .show()
+    }
+
     private fun loadHome() {
         val generation = renderGeneration
         val (left, right) = splitDashboard(0.43f)
         left.addView(label("Gebetszeiten", 29f, gold, true))
         left.addView(label("Ort mit OK auswählen · Auswahl bleibt gespeichert.", 15f, muted, false))
-        left.addView(navButton("Stadt: ${cities[cityIndex].first}  ·  nächste Stadt") {
-            cityIndex = (cityIndex + 1) % cities.size
-            getPreferences(MODE_PRIVATE).edit().putInt("city_index", cityIndex).apply()
-            adhanController.locationChanged()
-            // Clear the previous home view before loading new times.
-            show("home")
-            left.getChildAt(2)?.requestFocus()
+        left.addView(navButton("Gebetsort · ${cities[cityIndex].first}  ▾") {
+            showPrayerLocationPicker()
         })
         // The genuine tvOS prayer screen uses five *vertical* prayer rows
         // beside the Quran/Tadabbur column, not cramped horizontal tiles.
@@ -565,11 +582,8 @@ class TvActivity : Activity() {
         target.addView(label("Gebetszeiten · ${selectedCity.first}", 23f, gold, true))
         val next = label("Nächstes Gebet wird geladen …", 23f, cream, true)
         target.addView(next)
-        target.addView(navButton("Ort ändern · ${selectedCity.first}") {
-            cityIndex = (cityIndex + 1) % cities.size
-            getPreferences(MODE_PRIVATE).edit().putInt("city_index", cityIndex).apply()
-            adhanController.locationChanged()
-            show(activeTab)
+        target.addView(navButton("Gebetsort · ${selectedCity.first}  ▾") {
+            showPrayerLocationPicker()
         })
         val url = "https://dar-al-tawhid.de/api/prayer/times?lat=${selectedCity.second}&lon=${selectedCity.third}"
         fetchJson(url) { json ->
