@@ -6647,6 +6647,8 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
           var p={id:String(Date.now()),name:name,pass:h,gender:draft.gender,age:draft.age,data:bag()};
           if(draft.birthMonth)window.DARKidsBirthMonth?.set(p.id,draft.birthMonth);
           var list=load();list.push(p);save(list);localStorage.setItem(ACTIVE,p.id);
+          /* The old account's auto-age cannot override the new child's age. */
+          if(window.DARKidsApplyAgeGroup)window.DARKidsApplyAgeGroup(draft.age);
           syncConfirmed[p.id]=profileSnapshot(p);
           joinFeedback("Konto erfolgreich angelegt.","success");closeJoin();renderList();
         });
@@ -6858,7 +6860,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
     refreshBirthday();rememberCurrent();refreshBirthPanel();
   });
   join.querySelectorAll("[data-join-age]").forEach(function(b){
-    b.addEventListener("click",function(){draft.age=b.getAttribute("data-join-age");step("name")});
+    b.addEventListener("click",function(){draft.birthMonth="";draft.age=b.getAttribute("data-join-age");step("name")});
   });
   var cancel=document.getElementById("joinCancel");
   if(cancel)cancel.addEventListener("click",function(){if(localStorage.getItem(ACTIVE))closeJoin()});
