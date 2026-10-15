@@ -84,29 +84,19 @@
     return !!(window.webkit && window.webkit.messageHandlers);
   }
 
+  /* In Einstellungen nur einen Einstieg – die einzige Zentrale ist Mehr → Alltag → Benachrichtigungen. */
   function renderHtml() {
-    var s = readSettings();
-    var locOk = hasLocation(s);
-    var remOk = !!(s.reminder || s.remindersEnabled || s.prayerRemindersEnabled);
-    var locBtnClass = "dar-setup-hub__btn" + (locOk ? " is-active" : "");
-    var notifBtnClass = "dar-setup-hub__btn" + (remOk ? " is-active" : "");
     return [
-      '<section id="' + ROOT_ID + '" class="dar-setup-hub" data-dar-setup="true" aria-label="Einrichtung">',
-      '  <header class="dar-setup-hub__head">',
-      '    <h2 class="dar-setup-hub__title">DĀR AL TAWḤĪD Einrichtung</h2>',
-      '    <p class="dar-setup-hub__sub">Standort, Gebetszeiten, Mitteilungen und Widgets</p>',
-      "  </header>",
-      '  <div class="dar-setup-hub__list">',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Standort</strong><span>Für genaue Gebetszeiten und Widgets</span></div><button type="button" class="' +
-        locBtnClass +
-        '" data-dar-setup-action="location">Öffnen</button></div>',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Mitteilungen</strong><span>Für Gebets-Erinnerungen und Tests</span></div><button type="button" class="' +
-        notifBtnClass +
-        '" data-dar-setup-action="notifications">Öffnen</button></div>',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Gebetszeiten</strong><span>Daten für Widgets und Watch aktualisieren</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="sync">Sync</button></div>',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Widget-Ziele</strong><span>Öffnet direkt Gebetszeiten, Kalender, Qurʾān oder Duʿāʾ</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="widgets">Prüfen</button></div>',
-      "  </div>",
-      "</section>"
+      '<section id="' + ROOT_ID + '" class="dar-setup-hub" data-dar-setup="true" aria-label="Mitteilungen verwalten">',
+      ' <header class="dar-setup-hub__head">',
+      '  <h2 class="dar-setup-hub__title">Benachrichtigungen</h2>',
+      '  <p class="dar-setup-hub__sub">Gebete, Jumuʿah und tägliche Erinnerungen an einem Ort verwalten.</p>',
+      ' </header>',
+      ' <div class="dar-setup-hub__list"><div class="dar-setup-hub__row">',
+      '   <div class="dar-setup-hub__copy"><strong>Deine Erinnerungen</strong><span>Mitteilungen, Standort und Zeiten einstellen</span></div>',
+      '   <button type="button" class="dar-setup-hub__btn" data-dar-setup-action="notifications">Öffnen</button>',
+      ' </div></div>',
+      '</section>'
     ].join("");
   }
 
@@ -161,16 +151,7 @@
   }
 
   function openNotifications() {
-    if (isNative() && openNativeSettings("notifications")) return;
-    var hero = document.querySelector(".notification-hero, #notificationHealthBox");
-    if (hero) {
-      try {
-        hero.scrollIntoView({ behavior: "smooth", block: "start" });
-      } catch (e) {
-        hero.scrollIntoView();
-      }
-      return;
-    }
+    /* Kein OS-Prompt aus der Einstellungsübersicht. Vorhandene Zentrale öffnen. */
     go("notifications");
   }
 
@@ -432,4 +413,72 @@
   window.addEventListener("online",function(){setTimeout(check,180);});
   document.addEventListener("visibilitychange",function(){if(!document.hidden)setTimeout(check,180);});
   setInterval(check,60*1000);
+})();
+
+
+/* DAR_TEST_NOTIFICATIONS_REFINED_V1
+ * Schaltet ausschließlich die Oberfläche um; ältere Event-IDs und Push-Callbacks bleiben erhalten.
+ */
+(function () {
+  "use strict";
+  if (!/^\/test(?:\/|$)/.test(location.pathname)) return;
+  var STYLE_ID = "dar-notifications-refined-css-v1";
+
+  function loadStyles() {
+    if (document.getElementById(STYLE_ID)) return;
+    var node = document.createElement("link");
+    node.id = STYLE_ID;
+    node.rel = "stylesheet";
+    node.href = "/test/assets/notifications-refined-v1.css?v=1";
+    document.head.appendChild(node);
+  }
+
+  function readableStatus(node) {
+    if (!node) return;
+    var raw = String(node.textContent || "").trim();
+    if (!raw) return;
+    if (raw.indexOf("Push nicht vollständig aktiv") !== -1) {
+      node.title = raw;
+      node.textContent = /Berechtigung/.test(raw)
+        ? "Mitteilungen sind auf diesem Gerät noch nicht erlaubt."
+        : "Mitteilungen sind noch nicht vollständig eingerichtet.";
+    } else if (raw.indexOf(" · Gerät erkannt") !== -1 ||
+               /^Web Push aktiv/.test(raw) || /^Safari\/Web Push aktiv/.test(raw)) {
+      node.title = raw;
+      node.textContent = "Mitteilungen sind auf diesem Gerät verbunden.";
+    }
+  }
+
+  function polish() {
+    loadStyles();
+    var page = document.querySelector("body.is-notifications-route .notification-center-page");
+    if (!page) return;
+    var reenable = page.querySelector("#notificationReenableBtn");
+    if (reenable) reenable.textContent = "Jetzt einrichten";
+    var status = page.querySelector("#notificationHealthText");
+    if (status) {
+      readableStatus(status);
+      if (!status.__darRefinedObserver) {
+        status.__darRefinedObserver = new MutationObserver(function () {
+          readableStatus(status);
+        });
+        status.__darRefinedObserver.observe(status, { childList: true, characterData: true, subtree: true });
+      }
+    }
+  }
+
+  function schedulePolish() {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", schedulePolish, {once:true});
+      return;
+    }
+    polish();
+    requestAnimationFrame(polish);
+    setTimeout(polish, 60);
+    setTimeout(polish, 400);
+  }
+  window.addEventListener("hashchange", schedulePolish);
+  window.addEventListener("pageshow", schedulePolish);
+  document.addEventListener("dar:render", schedulePolish);
+  schedulePolish();
 })();
