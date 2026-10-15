@@ -78,11 +78,11 @@ const CORE_PRECACHE=[
   "/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-lessons.css?v=2",
   "/kids/deen-lessons.js?v=8",
-  "/kids/global-detail-dock-v1247.css?v=1411",
+  "/kids/global-detail-dock-v1247.css?v=1428",
   "/kids/global-hero-seam-v1412.css?v=1413",
   "/kids/girls-profile-deep-fix-v1339.css?v=1339",
   "/kids/girls-profile-reader-v1340.css?v=1340",
-  "/kids/global-detail-dock-v1247.js?v=1414",
+  "/kids/global-detail-dock-v1247.js?v=1428",
   "/kids/data/deen-lessons.json?v=3",
   "/kids/assets/deen/deen-entry.jpg?v=1206",
   "/kids/assets/deen/tawhid.jpg?v=1206",
@@ -279,7 +279,10 @@ const PRECACHE=CORE_PRECACHE.concat([
 // KIDS_FAST_FIRST_PAINT_V1313: do not block SW installation on 255+ heavy
 // illustrations/audio clips. Save the EXACT image used by the final homepage CSS.
 // Larger visual and voice libraries download separately in resumable packs.
+/* KIDS_GLOBAL_TOP_SCROLL_BOUNDARY_V1428: shared scroll-stop cached for offline first paint. */
 const KIDS_BOOT_PRECACHE=[
+  "/kids/global-detail-dock-v1247.css?v=1428",
+  "/kids/global-detail-dock-v1247.js?v=1428",
   "/kids/kids-ui-contract-v1420.css?v=1425",
   "/kids/kids-academy-portal-v1421.js?v=1425",
   "/kids/kids-academy-girl-seam-v1421.css?v=1422",
