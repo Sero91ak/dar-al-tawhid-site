@@ -112,14 +112,27 @@ jobs:
           node scripts/push-system-guard.js
           node scripts/push-lanes-guard.js
 
-      - name: Hauptzweig auf veralteten Build prüfen
+      - name: Nur relevante neuere Änderungen gegen veralteten Test-Build absichern
         shell: bash
         run: |
+          set -euo pipefail
+          BASE="$(cat /tmp/dar-test-main-sha.txt)"
           git fetch --no-tags origin main
-          test "$(git rev-parse origin/main)" = "$(cat /tmp/dar-test-main-sha.txt)" || {
-            echo "::error::Main inzwischen geändert – alten Stand nicht veröffentlichen."
-            exit 1
-          }
+          LATEST="$(git rev-parse origin/main)"
+          if [ "$BASE" != "$LATEST" ]; then
+            git diff --name-only "$BASE" "$LATEST" -- \
+              test/ assets/ data/ index.html version.json \
+              scripts/ cloudflare/ kids/ package.json package-lock.json \
+              service-worker.js manifest.json wrangler.test.toml \
+              .github/workflows/deploy-test-app.yml \
+              > /tmp/dar-test-release-relevant-changes.txt
+            if [ -s /tmp/dar-test-release-relevant-changes.txt ]; then
+              cat /tmp/dar-test-release-relevant-changes.txt
+              echo "::error::Relevante App-Dateien wurden während des Builds aktualisiert. Test-Release aus Sicherheitsgründen gestoppt."
+              exit 1
+            fi
+            echo "Nur irrelevante Metadaten seit dem Build geändert – Test-Release weiterhin aktuell."
+          fi
 
       - name: Deploy Dar Test Worker
         env:
