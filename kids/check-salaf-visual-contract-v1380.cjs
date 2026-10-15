@@ -251,4 +251,5 @@ assert.ok(!js.includes('class="salaf-source-link"'));
 
 /* All Salaf releases must also pass the strict Sunni subject + text gate. */
 require("./check-salaf-sunni-editorial-v1.cjs");
+require("./check-salaf-four-per-topic-v1.cjs");
 require("./check-retired-quran-learning-v1418.cjs");
