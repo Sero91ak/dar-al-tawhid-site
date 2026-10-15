@@ -2,17 +2,17 @@
   "scope": "TAWḤĪD KIDS · 150 age 4–6 V4 cost-free listening preview",
   "questionCount": 150,
   "newPaidSynthesesForAssembly": 0,
-  "originalMasterMP3sStored": 327,
+  "originalMasterMP3sStored": 328,
   "completeFourPartQuestions": 0,
   "availableFieldCounts": {
-    "question": 83,
+    "question": 84,
     "correct": 0,
     "retry": 0,
     "explanation": 131
   },
-  "importedPreviouslyPaidGenerationIdCount": 0,
-  "missingPreviouslyPaidOriginalTextCount": 48,
-  "missingPreviouslyPaidGenerationIdCount": 45,
+  "importedPreviouslyPaidGenerationIdCount": 1,
+  "missingPreviouslyPaidOriginalTextCount": 47,
+  "missingPreviouslyPaidGenerationIdCount": 44,
   "missingPreviouslyPaidTexts": [
     {
       "text": "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Das hast du gut erkannt!",
@@ -139,10 +139,6 @@
       "requiredByQuestionParts": 1
     },
     {
-      "text": "Hör einmal aufmerksam zu. Wen beten wir an? Antwort 1: Allah allein. Antwort 2: Menschen. Welche Antwort passt deiner Meinung nach?",
-      "requiredByQuestionParts": 1
-    },
-    {
       "text": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
       "requiredByQuestionParts": 35
     },
@@ -245,7 +241,6 @@
     "hM2VfSWtDJtFuxhd85nm",
     "heZyGLFXcuaMa8GMuj2W",
     "kEEjOsweh2aEq9h2i4hN",
-    "ki4e57kvaTCDQxzLio3o",
     "klBmSK0vYZFnsmjDCUzQ",
     "oTZw9J8BXouAWeocufYC",
     "qRVJETdkA6tqyNfSm65J",
@@ -260,9 +255,10 @@
   "questions": [
     {
       "questionId": "kids-quiz-001",
-      "availableAudioParts": [],
+      "availableAudioParts": [
+        "question"
+      ],
       "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-mp3-export-missing",
         "correct": "earlier-paid-original-flow-mp3-export-missing",
         "retry": "earlier-paid-original-flow-mp3-export-missing",
         "explanation": "earlier-paid-original-flow-mp3-export-missing"

@@ -4255,6 +4255,36 @@
       "source": "official-direct-v4-text-to-speech-api",
       "status": "completed-original-mp3-on-review-branch-not-live",
       "providerRequestId": "bEcF9FiREVQfpyFDRPWi"
+    },
+    "Hör einmal aufmerksam zu. Wen beten wir an? Antwort 1: Allah allein. Antwort 2: Menschen. Welche Antwort passt deiner Meinung nach?": {
+      "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/ki4e57kvaTCDQxzLio3o.mp3",
+      "sha256": "63b3086100f67c62f4b343a1c5ef21228f52a2a80be7b5078e7df14464adafa1",
+      "bytes": 184770,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "source": "prepaid-elevenlabs-flow-original-verified-against-paid-receipt",
+      "originalGenerationId": "ki4e57kvaTCDQxzLio3o",
+      "durationSeconds": 10.449,
+      "textSha256": "78c1fff54eff33941eef31792249f6e0175d121e03980f22b9daed852c918e27",
+      "audioListeningApproved": false,
+      "qaApproval": "pending-human-auditory-review",
+      "status": "prepaid-original-imported-review-only"
+    }
+  },
+  "generationClips": {
+    "ki4e57kvaTCDQxzLio3o": {
+      "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/ki4e57kvaTCDQxzLio3o.mp3",
+      "sha256": "63b3086100f67c62f4b343a1c5ef21228f52a2a80be7b5078e7df14464adafa1",
+      "bytes": 184770,
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "source": "prepaid-elevenlabs-flow-original-verified-against-paid-receipt",
+      "originalGenerationId": "ki4e57kvaTCDQxzLio3o",
+      "durationSeconds": 10.449,
+      "textSha256": "78c1fff54eff33941eef31792249f6e0175d121e03980f22b9daed852c918e27",
+      "audioListeningApproved": false,
+      "qaApproval": "pending-human-auditory-review",
+      "status": "prepaid-original-imported-review-only"
     }
   }
 }
