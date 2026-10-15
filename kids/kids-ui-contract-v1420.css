@@ -1,0 +1,269 @@
+/* TAWḤĪD KIDS V1420 — targeted restoration / 5-tab layout.
+   Scope: child Home, story header, academy header. Quran/Alif-Ba lessons remain retired.
+   Existing boys/girls source art and 3-D artwork are reused, never replaced. */
+#view-today .big-choice-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:12px!important;
+  width:100%!important;
+}
+#view-today .big-choice-grid > .choice{
+  display:grid!important;
+  grid-template-columns:clamp(52px,13vw,65px) minmax(0,1fr)!important;
+  grid-template-rows:auto auto!important;
+  align-content:center!important;
+  align-items:center!important;
+  column-gap:clamp(12px,3.5vw,19px)!important;
+  row-gap:4px!important;
+  min-height:116px!important;
+  width:100%!important;
+  padding:15px clamp(14px,4vw,24px)!important;
+  border-radius:clamp(21px,5vw,29px)!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  text-align:left!important;
+}
+#view-today .big-choice-grid > .choice .icon{
+  grid-column:1!important;
+  grid-row:1/span 2!important;
+  align-self:center!important;
+  justify-self:center!important;
+  width:clamp(50px,12vw,64px)!important;
+  height:clamp(50px,12vw,64px)!important;
+  margin:0!important;
+  padding:0!important;
+}
+#view-today .big-choice-grid > .choice strong{
+  grid-column:2!important;
+  grid-row:1!important;
+  align-self:end!important;
+  display:block!important;
+  min-width:0!important;
+  max-width:100%!important;
+  font-size:clamp(21px,5.7vw,29px)!important;
+  line-height:1.13!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:none!important;
+  padding:0!important;
+  margin:0!important;
+}
+#view-today .big-choice-grid > .choice small{
+  grid-column:2!important;
+  grid-row:2!important;
+  align-self:start!important;
+  min-width:0!important;
+  font-size:clamp(11px,3.2vw,14px)!important;
+  line-height:1.35!important;
+  max-width:100%!important;
+  padding:0!important;
+  margin:0!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+}
+/* A consistent five-cell floating 3D dock. No extra Du'a tab; Du'a stays in Hörwelten. */
+html body .bottom-nav{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  align-items:stretch!important;
+  width:min(calc(100% - 22px),560px)!important;
+  column-gap:3px!important;
+  padding:7px 6px!important;
+}
+html body .bottom-nav .nav-btn{
+  box-sizing:border-box!important;
+  min-width:0!important;
+  width:100%!important;
+  min-height:64px!important;
+  padding:6px 1px!important;
+  display:grid!important;
+  grid-template-rows:35px auto!important;
+  align-items:center!important;
+  justify-items:center!important;
+  align-content:center!important;
+  gap:4px!important;
+  text-decoration:none!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+html body .bottom-nav .nav-btn .ico{
+  width:34px!important;
+  height:34px!important;
+  margin:0!important;
+  display:block!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  background-size:contain!important;
+}
+html body .bottom-nav .nav-btn .lab{
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-size:clamp(9.4px,2.6vw,12px)!important;
+  line-height:1.06!important;
+  white-space:nowrap!important;
+  text-align:center!important;
+  letter-spacing:0!important;
+}
+html body .bottom-nav .kids-academy-tab .ico{
+  background-image:url("/kids/assets/kids-icons/library-real-v12.png?v=1420")!important;
+  filter:drop-shadow(0 4px 7px rgba(0,0,0,.24))!important;
+}
+html body .bottom-nav .kids-academy-tab:focus-visible{
+  outline:2px solid #f3d899!important;
+  outline-offset:2px!important;
+}
+@media(max-width:365px){
+  html body .bottom-nav{width:calc(100% - 12px)!important;column-gap:1px!important;padding:6px 3px!important}
+  html body .bottom-nav .nav-btn{min-height:61px!important;padding:5px 0!important}
+  html body .bottom-nav .nav-btn .ico{width:29px!important;height:29px!important}
+  html body .bottom-nav .nav-btn .lab{font-size:9.2px!important}
+}
+/* Hero image entrances are existing approved gender-specific backgrounds. */
+html body #view-today .kids-salaf-feature,
+html body #view-today .academy-pilot-entry{
+  box-sizing:border-box!important;
+  position:relative!important;
+  isolation:isolate!important;
+  display:flex!important;
+  align-items:flex-end!important;
+  justify-content:flex-start!important;
+  width:100%!important;
+  min-height:clamp(176px,42vw,230px)!important;
+  margin:15px 0 0!important;
+  padding:20px clamp(16px,5vw,28px)!important;
+  border:1px solid rgba(255,233,185,.24)!important;
+  border-radius:28px!important;
+  overflow:hidden!important;
+  color:#fff7f0!important;
+  text-align:left!important;
+  text-decoration:none!important;
+  background-color:#172b3b!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  box-shadow:0 16px 35px rgba(0,0,0,.20)!important;
+}
+html body #view-today .kids-salaf-feature{
+  background-image:linear-gradient(0deg,rgba(5,19,30,.91),rgba(5,19,30,.28) 77%),url("/kids/assets/salaf/salaf-cinema-hero-boy-v1353.jpg")!important;
+}
+html body #view-today .academy-pilot-entry{
+  background-image:linear-gradient(0deg,rgba(5,19,30,.92),rgba(5,19,30,.21) 85%),url("/desktop-preview/assets/kids-academy-hero-boys-v1.jpg")!important;
+}
+html body .app[data-gender="girl"] #view-today .kids-salaf-feature{
+  background-color:#37263c!important;
+  background-image:linear-gradient(0deg,rgba(42,25,45,.94),rgba(42,25,45,.19) 86%),url("/kids/assets/salaf/salaf-cinema-hero-girl-v1353.jpg")!important;
+  border-color:rgba(247,196,225,.35)!important;
+}
+html body .app[data-gender="girl"] #view-today .academy-pilot-entry{
+  background-color:#37263c!important;
+  background-image:linear-gradient(0deg,rgba(42,25,45,.94),rgba(42,25,45,.20) 85%),url("/desktop-preview/assets/kids-academy-hero-girls-v1.jpg")!important;
+  border-color:rgba(247,196,225,.35)!important;
+}
+html body #view-today .kids-salaf-feature .kids-salaf-feature-art{
+  position:relative!important;
+  z-index:2!important;
+  flex:0 0 54px!important;
+  width:54px!important;
+  height:54px!important;
+  margin:0 13px 0 0!important;
+}
+html body #view-today .kids-salaf-feature .kids-salaf-feature-copy,
+html body #view-today .academy-pilot-entry .academy-pilot-text{
+  position:relative!important;
+  z-index:3!important;
+  min-width:0!important;
+  max-width:100%!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:4px!important;
+  text-shadow:0 3px 13px rgba(0,0,0,.7)!important;
+}
+html body #view-today .kids-salaf-feature-copy > small,
+html body #view-today .academy-pilot-text > small{
+  font-size:clamp(9px,2.5vw,12px)!important;
+  color:#ffe1af!important;
+  letter-spacing:.055em!important;
+}
+html body #view-today .kids-salaf-feature-copy > strong,
+html body #view-today .academy-pilot-text > strong{
+  font-size:clamp(23px,6vw,31px)!important;
+  line-height:1.12!important;
+  color:#fff9f0!important;
+}
+html body #view-today .kids-salaf-feature-copy > span,
+html body #view-today .academy-pilot-text > span{
+  font-size:clamp(12px,3vw,15px)!important;
+  line-height:1.35!important;
+  color:#fff4e9!important;
+}
+html body #view-today .academy-pilot-arrow{z-index:3!important;align-self:flex-end!important;margin-left:auto!important}
+@media(max-width:380px){
+  html body #view-today .kids-salaf-feature .kids-salaf-feature-art{width:43px!important;height:43px!important;flex-basis:43px!important;margin-right:10px!important}
+  html body #view-today .academy-pilot-arrow{width:36px!important;height:36px!important;flex:0 0 36px!important}
+}
+/* One premium navigation geometry in Salaf category, Salaf story and Academy.
+   Long story names belong in the subtitle (single-line ellipsis), not in
+   an oversized header. Header remains above the independently scrolling text. */
+html body #salafDetail.salaf-detail:not([hidden]) > .salaf-story-nav.kids-detail-appbar,
+html body #view-salaf[data-topic-open="true"] > .salaf-topic-nav.kids-detail-appbar,
+html body .academy-header.kids-detail-appbar{
+  box-sizing:border-box!important;
+  width:100vw!important;
+  max-width:100vw!important;
+  height:calc(70px + env(safe-area-inset-top,0px))!important;
+  min-height:calc(70px + env(safe-area-inset-top,0px))!important;
+  max-height:calc(70px + env(safe-area-inset-top,0px))!important;
+  padding:calc(8px + env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px))!important;
+  border-radius:0!important;
+  border:0!important;
+  border-bottom:1px solid rgba(245,214,160,.22)!important;
+  box-shadow:none!important;
+  background:#0f2c3b!important;
+}
+html body:has(.app[data-gender="girl"]) #salafDetail.salaf-detail:not([hidden]) > .salaf-story-nav.kids-detail-appbar,
+html body .app[data-gender="girl"] #view-salaf[data-topic-open="true"] > .salaf-topic-nav.kids-detail-appbar,
+html body[data-profile="girl"] .academy-header.kids-detail-appbar{
+  background:#38263f!important;
+  border-bottom-color:rgba(250,196,228,.3)!important;
+}
+html body #salafDetail .salaf-story-nav .kids-detail-appbar-copy,
+html body #view-salaf .salaf-topic-nav .kids-detail-appbar-copy{
+  flex:1 1 auto!important;
+  min-width:0!important;
+  overflow:hidden!important;
+}
+html body #salafDetail .salaf-story-nav .kids-detail-appbar-title,
+html body #view-salaf .salaf-topic-nav .kids-detail-appbar-title{
+  display:block!important;
+  font-size:clamp(20px,4.8vw,24px)!important;
+  line-height:1.1!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+html body #salafDetail .salaf-story-nav .kids-detail-appbar-subtitle,
+html body #view-salaf .salaf-topic-nav .kids-detail-appbar-subtitle{
+  display:block!important;
+  font-size:clamp(10px,2.75vw,13px)!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+html body #salafDetail.salaf-detail:not([hidden]) > .salaf-detail-scroll,
+html body #salafDetail.salaf-detail:not([hidden]) .salaf-detail-scroll > .salaf-detail-cover{
+  margin-top:0!important;
+  border-top:0!important;
+}
+/* Academy already owns two curated hero images + boy/girl characters. Preserve
+   those assets and make the entire hero readable without replacing any lesson. */
+html body:not([data-embedded="true"]) #academyHome .overview-hero{
+  position:relative!important;
+  isolation:isolate!important;
+  min-height:clamp(260px,51vw,470px)!important;
+  overflow:hidden!important;
+}
+html body:not([data-embedded="true"]) #academyHome #academyHeroImage{
+  display:block!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+  object-position:center!important;
+}
