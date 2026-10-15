@@ -78,6 +78,8 @@ jobs:
         run: node kids/tools/test-academy-fiqh-166-sources-v1.cjs
       - name: Check primary Fiqh source registry
         run: node kids/tools/test-academy-primary-source-registry-v1.cjs
+      - name: Check all 208 lesson source links and verification states
+        run: node kids/tools/test-academy-source-registry-complete-v1.cjs
       - name: Run all 14 small-batch unit tests
         shell: bash
         run: |
