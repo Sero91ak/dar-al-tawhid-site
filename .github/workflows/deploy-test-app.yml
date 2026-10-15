@@ -266,6 +266,8 @@ jobs:
           node kids/tools/test-native-creator-v2.cjs
           node kids/tools/test-v2-salaf-pilot.cjs
           node kids/tools/test-v2-prophets-pilot.cjs
+          node kids/tools/test-v2-profile-parity.cjs
+          node --check kids/prophet-stories.js
           node scripts/test-app-health-check.js
           echo "Staging: no production route, no visitor commit, no App Store upload"
       - name: Publish KIDS Creator Worker only
@@ -366,4 +368,15 @@ jobs:
           curl -fsSL -H 'Cache-Control: no-cache' "$BASE$PROP_CSS_URL" > /tmp/kids-creator-v2-prophets.css
           cmp -s kids/design-v2-prophets-pilot.css /tmp/kids-creator-v2-prophets.css || { echo "::error::Prophet V2 stylesheet differs from staging"; exit 1; }
           echo "KIDS V2 Prophet library CSS verified byte-for-byte on creator Worker."
+          # Verify the Salaf/Prophet girl palette patch and runtime actually served.
+          PROFILE_CSS_URL="$(grep -oE '/kids/design-v2-profile-parity-v1[.]css[?]v=[a-zA-Z0-9.-]+' kids/start.html | tail -n 1)"
+          PROP_JS_URL="$(grep -oE '/kids/prophet-stories[.]js[?]v=[a-zA-Z0-9.-]+' kids/start.html | tail -n 1)"
+          test -n "$PROFILE_CSS_URL" && test -n "$PROP_JS_URL" || { echo "::error::KIDS girl profile patch references missing"; exit 1; }
+          grep -Fq "$PROFILE_CSS_URL" /tmp/kids-creator-v2-start.html || { echo "::error::KIDS girls palette not loaded in served HTML"; exit 1; }
+          grep -Fq "$PROP_JS_URL" /tmp/kids-creator-v2-start.html || { echo "::error::KIDS girl-aware Prophet runtime not loaded"; exit 1; }
+          curl -fsSL -H 'Cache-Control: no-cache' "$BASE$PROFILE_CSS_URL" > /tmp/kids-profile-parity.css
+          curl -fsSL -H 'Cache-Control: no-cache' "$BASE$PROP_JS_URL" > /tmp/kids-profile-parity-prophet.js
+          cmp -s kids/design-v2-profile-parity-v1.css /tmp/kids-profile-parity.css || { echo "::error::KIDS girls palette CSS differs from staging"; exit 1; }
+          cmp -s kids/prophet-stories.js /tmp/kids-profile-parity-prophet.js || { echo "::error::KIDS Prophet profile runtime differs from staging"; exit 1; }
+          echo "KIDS girls Salaf and Prophet palette files verified byte-for-byte."
           echo "KIDS-only Worker verified. Adult Test and visitor domains unchanged."
