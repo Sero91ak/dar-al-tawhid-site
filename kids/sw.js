@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1423";
+const CACHE_NAME="dar-al-tawhid-kids-v1425";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -9,10 +9,10 @@ const CORE_PRECACHE=[
   "/kids/kids-nav-v1421.css?v=1422",
   "/kids/kids-motion-v1422.css?v=1422",
   "/kids/kids-academy-girl-seam-v1421.css?v=1422",
-  "/kids/kids-academy-portal-v1421.js?v=1423",
+  "/kids/kids-academy-portal-v1421.js?v=1425",
   "/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422",
   "/kids/assets/kids-icons/dua-real-v12.png?v=1421",
-  "/kids/kids-ui-contract-v1420.css?v=1421",
+  "/kids/kids-ui-contract-v1420.css?v=1425",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1272",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/akademie/index.html",
@@ -188,7 +188,7 @@ const CORE_PRECACHE=[
   "/kids/assets/dua-3d/home.svg?v=1221",
   "/kids/assets/dua-3d/mosque.svg?v=1221",
   "/kids/assets/dua-3d/shield.svg?v=1221",
-  "/kids/navigation-v1182.js?v=1422",
+  "/kids/navigation-v1182.js?v=1425",
   "/kids/kids-age-typography.css?v=5",
   "/kids/story-library-cards.css?v=9",
   "/kids/kids-touch-rail.css?v=17",
@@ -279,8 +279,8 @@ const PRECACHE=CORE_PRECACHE.concat([
 // illustrations/audio clips. Save the EXACT image used by the final homepage CSS.
 // Larger visual and voice libraries download separately in resumable packs.
 const KIDS_BOOT_PRECACHE=[
-  "/kids/kids-ui-contract-v1420.css?v=1421",
-  "/kids/kids-academy-portal-v1421.js?v=1423",
+  "/kids/kids-ui-contract-v1420.css?v=1425",
+  "/kids/kids-academy-portal-v1421.js?v=1425",
   "/kids/kids-academy-girl-seam-v1421.css?v=1422",
   "/kids/kids-nav-v1421.css?v=1422",
   "/kids/start",
