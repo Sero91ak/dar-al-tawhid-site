@@ -148,9 +148,9 @@ h1 { font-family:Georgia,serif; color:var(--gold); margin:0 0 9px; font-size:cla
 .metric strong { display:block; font-size:25px; font-variant-numeric:tabular-nums; }
 .metric span { color:var(--muted); font-size:13px; }
 .toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-bottom:14px; }
-button,.file-label,input[type=search],select { font:inherit; color:var(--ink); border:1px solid var(--line); background:var(--panel); border-radius:10px; padding:10px 12px; }
+button,.file-label,input[type=search],input[type=text],select,textarea { font:inherit; color:var(--ink); border:1px solid var(--line); background:var(--panel); border-radius:10px; padding:10px 12px; }
 button { cursor:pointer; } button:hover,.file-label:hover { border-color:var(--gold); }
-button:focus-visible, input:focus-visible, select:focus-visible { outline:2px solid var(--gold); }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline:2px solid var(--gold); }
 input[type=search] { flex:1; min-width:170px; } .file-label { cursor:pointer; }
 .file-label input { display:none; }
 details { border:1px solid var(--line); background:var(--panel); border-radius:12px; margin:10px 0; overflow:hidden; }
@@ -163,7 +163,10 @@ summary::marker { color:var(--gold); } summary strong { font-size:15px; }
 .track p { font-size:14px; line-height:1.5; margin:0 0 10px; overflow-wrap:anywhere; }
 .track audio { display:block; width:100%; height:38px; margin-bottom:9px; }
 .track label { font-size:13px; color:var(--muted); display:flex; gap:8px; align-items:center; }
-.track input { accent-color:#89bea4; width:18px; height:18px; }
+.track input[type=checkbox] { accent-color:#89bea4; width:18px; height:18px; }
+.track select { width:100%; margin-top:9px; font-size:13px; }
+.track textarea { display:block; width:100%; margin-top:7px; resize:vertical; font-size:13px; min-height:58px; }
+.review-feedback { display:block; font-size:12px; color:var(--muted); padding-top:8px; }
 .unavailable { color:var(--muted); font-size:13px; }
 #empty { color:var(--muted); padding:10px; }
 .note { margin-top:17px; font-size:13px; color:var(--muted); }
@@ -178,16 +181,18 @@ summary::marker { color:var(--gold); } summary strong { font-size:15px; }
 <div class="metric"><strong id="questions"></strong><span>vollständige Fragensätze</span></div>
 <div class="metric"><strong id="files"></strong><span>einmalige Audioaufnahmen</span></div>
 <div class="metric"><strong id="progress">0</strong><span>persönlich freigegebene Aufnahmen</span></div>
+<div class="metric"><strong id="issues">0</strong><span>gemeldete Audiofehler</span></div>
 </section>
 <div class="toolbar">
-<input id="search" type="search" placeholder="Frage suchen, z. B. 025" aria-label="Frage suchen">
+<input id="search" type="search" placeholder="Frage oder Wort suchen" aria-label="Frage oder Audioinhalt suchen">
+<input id="reviewer" type="text" maxlength="120" placeholder="Prüfperson (für Export)" aria-label="Name der Prüfperson">
 <select id="filter" aria-label="Fragen filtern"><option value="all">Alle 150</option><option value="complete">Vollständige Fragen</option><option value="missing">Unvollständige Fragen</option></select>
 <button id="export" type="button">Hörfreigaben als JSON sichern</button>
 <label class="file-label">Freigaben wieder einlesen<input id="import" type="file" accept=".json,application/json"></label>
 </div>
 <div id="questions-list"></div>
 <p id="empty" hidden>Keine Fragen in dieser Auswahl.</p>
-<p class="note">Nur für die interne Qualitätssicherung. Eine JSON-Datei enthält ausschließlich eigenhändig gesetzte und an MP3-Prüfsummen gebundene Freigaben. Sie veröffentlicht nichts und verändert die Kinder-App nicht. Zum Abhören bitte die HTML-Datei zusammen mit den MP3-Verzeichnissen aus dem zugehörigen GitHub-Artefakt entpacken.</p>
+<p class="note">Nur interne Qualitätssicherung. Die JSON-Datei enthält manuell bestätigte Hörfreigaben und nachvollziehbare Fehlermeldungen, jeweils an die MP3-Prüfsumme gebunden. Das ist eine Selbstauskunft der Prüfperson, keine automatisch nachweisbare menschliche Prüfung. Keine Veröffentlichung. Zum Abhören das vollständige Paket mit seiner Ordnerstruktur entpacken.</p>
 </main>
 <script type="application/json" id="review-data">__EMBEDDED_REVIEW_DATA__</script>
 <script>
@@ -203,15 +208,20 @@ for (const q of data.parts) for (const p of q.parts) {
 }
 const played = new Set();
 const approved = new Map();
+const issues = new Map();
+const issueLabels = {pronunciation:"Arabische Aussprache",content:"Gesprochener Inhalt abweichend",pauses:"Pausen / Betonung",sound:"Tonqualität",other:"Anderes Problem"};
 const labels = {question:"Frage",correct:"Richtige Antwort · Lob",retry:"Erneuter Versuch",explanation:"Erklärung"};
 const list = document.getElementById("questions-list");
 document.getElementById("questions").textContent = data.fullQuestions+" / "+data.questionCount;
 document.getElementById("files").textContent = distinct.size;
-function progress(){ document.getElementById("progress").textContent = approved.size+" / "+distinct.size; }
+function progress(){
+  document.getElementById("progress").textContent = approved.size+" / "+distinct.size;
+  document.getElementById("issues").textContent = issues.size;
+}
 function syncChecks(sha){
   document.querySelectorAll('input[data-text-sha="'+sha+'"]').forEach(node => {
-    node.disabled = !played.has(sha) && !approved.has(sha);
-    node.checked = approved.has(sha);
+    node.disabled = !!issues.get(sha) || (!played.has(sha) && !approved.has(sha));
+    node.checked = approved.has(sha) && !issues.has(sha);
   });
 }
 function makePart(p) {
@@ -237,12 +247,41 @@ function makePart(p) {
     if (checkbox.checked && !played.has(p.textSha) && !approved.has(p.textSha)) {
       checkbox.checked=false; return;
     }
-    if (checkbox.checked) approved.set(p.textSha,p.audioSha);
+    if (checkbox.checked && !issues.has(p.textSha)) approved.set(p.textSha,p.audioSha);
     else approved.delete(p.textSha);
     syncChecks(p.textSha);progress();
   });
   label.append(checkbox,document.createTextNode("Vollständig angehört und fachlich geprüft"));
   section.append(label);
+  const feedbackLabel=document.createElement("span");
+  feedbackLabel.className="review-feedback";
+  feedbackLabel.textContent="Fehler gefunden? Freigabe sperren und Grund dokumentieren:";
+  section.append(feedbackLabel);
+  const category=document.createElement("select");
+  category.setAttribute("aria-label","Fehlerkategorie für "+labels[p.part]);
+  const clean=document.createElement("option");clean.value="";clean.textContent="Kein gemeldeter Fehler";
+  category.append(clean);
+  for(const [key,title] of Object.entries(issueLabels)){
+    const option=document.createElement("option");option.value=key;option.textContent=title;
+    category.append(option);
+  }
+  const note=document.createElement("textarea");
+  note.maxLength=1500;note.placeholder="Konkrete Textstelle und Korrekturhinweis (optional)";
+  note.setAttribute("aria-label","Fehlernotiz für "+labels[p.part]);
+  const current=issues.get(p.textSha);
+  if(current){category.value=current.category;note.value=current.note||"";}
+  category.addEventListener("change",()=>{
+    if(category.value){
+      issues.set(p.textSha,{audioSha:p.audioSha,category:category.value,note:note.value});
+      approved.delete(p.textSha);
+    } else issues.delete(p.textSha);
+    syncChecks(p.textSha);progress();
+  });
+  note.addEventListener("input",()=>{
+    const old=issues.get(p.textSha);
+    if(old)issues.set(p.textSha,{audioSha:p.audioSha,category:old.category,note:note.value});
+  });
+  section.append(category,note);
   return section;
 }
 function render(){
@@ -251,7 +290,7 @@ function render(){
   list.replaceChildren();
   let shown=0;
   for(const q of data.parts){
-    if (query && !q.id.toLowerCase().includes(query)) continue;
+    if (query && !q.id.toLowerCase().includes(query) && !q.parts.some(p=>p.text.toLowerCase().includes(query))) continue;
     if (filter==="complete"&&!q.complete) continue;
     if (filter==="missing"&&q.complete) continue;
     shown++;
@@ -275,8 +314,13 @@ function render(){
 document.getElementById("search").addEventListener("input",render);
 document.getElementById("filter").addEventListener("change",render);
 document.getElementById("export").addEventListener("click",()=>{
-  const output={schemaVersion:1,scope:"TAWHID_KIDS_FIRST150_AGE4_6_HUMAN_AUDIO_LISTENING",
-    approvedAudioShaByTextSha:Object.fromEntries([...approved.entries()].sort())};
+  const reviewer=document.getElementById("reviewer").value.trim();
+  if(!reviewer){alert("Bitte zuerst den Namen der tatsächlich prüfenden Person angeben.");return;}
+  const output={schemaVersion:2,scope:"TAWHID_KIDS_FIRST150_AGE4_6_HUMAN_AUDIO_LISTENING",
+    reviewerName:reviewer,exportedAt:new Date().toISOString(),
+    selfAttestedHumanHearing:true,
+    approvedAudioShaByTextSha:Object.fromEntries([...approved.entries()].filter(([sha])=>!issues.has(sha)).sort()),
+    reportedIssuesByTextSha:Object.fromEntries([...issues.entries()].sort())};
   const blob=new Blob([JSON.stringify(output,null,2)+"\n"],{type:"application/json"});
   const url=URL.createObjectURL(blob); const a=document.createElement("a");
   a.href=url;a.download="quiz-v4-first150-human-auditory-approvals.json";
@@ -288,13 +332,21 @@ document.getElementById("import").addEventListener("change",async (event)=>{
     const obj=JSON.parse(await file.text());
     const rows=obj.approvedAudioShaByTextSha;
     if(!rows||typeof rows!=="object"||Array.isArray(rows))throw Error("Ungültige Freigabedatei");
-    let restored=0;
+    let restored=0, flagged=0;
+    const reported=obj.reportedIssuesByTextSha||{};
+    if(typeof reported!=="object"||Array.isArray(reported))throw Error("Ungültige Fehlerliste");
+    if(typeof obj.reviewerName==="string")document.getElementById("reviewer").value=obj.reviewerName.slice(0,120);
     for(const [sha,mp3] of Object.entries(rows)){
       if(distinct.get(sha)===mp3){approved.set(sha,mp3);restored++;}
     }
-    for(const sha of distinct.keys())syncChecks(sha);
-    progress();
-    alert(restored+" zur aktuellen Originaldatei passende Freigaben geladen. Nicht passende Hashes ignoriert.");
+    for(const [sha,issue] of Object.entries(reported)){
+      if(distinct.get(sha)===issue?.audioSha && Object.hasOwn(issueLabels,issue.category)){
+        issues.set(sha,{audioSha:issue.audioSha,category:issue.category,note:String(issue.note||"").slice(0,1500)});
+        approved.delete(sha);flagged++;
+      }
+    }
+    render(); progress();
+    alert(restored+" passende Freigaben und "+flagged+" Fehlerberichte geladen. Originalhashes müssen übereinstimmen.");
   }catch(e){alert("Die Freigabedatei konnte nicht geprüft werden: "+e.message);}
   event.target.value="";
 });
