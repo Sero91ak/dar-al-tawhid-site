@@ -258,7 +258,10 @@ function compactSalafReference(raw){
   const number=r.match(/(?:Nr\.|Ḥadīṯ|Hadith|Bericht)\s*\d+[a-z]?/u);
   const bio=r.match(/\b(?:Biographie|Biografie)\s+(?:von\s+)?([^.;:]{3,72})/u);
   for(const match of [vol,page,section,number]){
-    if(match)parts.push(match[0].replace(/\s+/g," ").trim());
+    if(match){
+      const clean=match===section?match[0].split(/\s+[–-]\s+/)[0]:match[0];
+      parts.push(clean.replace(/\s+/g," ").trim());
+    }
   }
   if(bio){
     let b=bio[0].split(/[,–]/)[0].trim();
