@@ -49,6 +49,15 @@ jobs:
           assert all(r["synthesized"] is False for r in q["preciseUnrecordedOriginalTextQueue"])
           assert sum(r["characterCount"] for r in q["preciseUnrecordedOriginalTextQueue"])==q["newCharactersForFirst40"]
           assert sum(r["incrementalNewCharacters"] for r in q["priorityQuestionSteps"])==q["newCharactersForFirst40"]
+          assert len(q["twoIncrementalTenPerAgeReviewStages"])==2
+          stages=q["twoIncrementalTenPerAgeReviewStages"]
+          assert all(stage["newQuestionsPerAgeBand"]=={"7-8":10,"9-10":10} for stage in stages)
+          assert all(stage["creditsSpent"]==0 and stage["automaticallyExecuted"] is False for stage in stages)
+          assert all(stage["requiresManualApprovalAndHumanListening"] is True for stage in stages)
+          assert len(set(stages[0]["selectedQuestionIds"]+stages[1]["selectedQuestionIds"]))==40
+          assert sum(stage["newOriginalCharacters"] for stage in stages)==q["newCharactersForFirst40"]
+          assert sum(stage["newDistinctOriginals"] for stage in stages)==q["newDistinctTextCountForFirst40"]
+          assert set(stages[1]["projectedFullFourPartQuestionsIfAllPreviousStageFilesVerified"])=={"7-8","9-10"}
           assert json.loads(Path("kids/data/quiz-curation-release.json").read_text())["enabled"] is False
           print("PASS_KIDS_V4_OLDER_PRIORITY_FORTY_NO_CREDITS",flush=True)
           PY
