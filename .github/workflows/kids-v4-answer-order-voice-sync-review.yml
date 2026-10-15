@@ -1,0 +1,78 @@
+name: KIDS V4 Answer Order & Voice Sync Proposal (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/plan_quiz_v4_answer_order_audio_sync.py'
+      - '.github/workflows/kids-v4-answer-order-voice-sync-review.yml'
+      - '.github/reports/kids-v4-older-age-no-credit-priority.json'
+      - 'kids/data/quiz-kids-curated-450-review.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-voice-aware-answer-position-design-only
+  cancel-in-progress: false
+
+jobs:
+  zero-credit-answer-audio-consistency:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Read-only baseline checkout of private KIDS review
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Prove corrected answer positions remain synchronized with exact V4 segments
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/plan_quiz_v4_answer_order_audio_sync.py
+          python3 kids/tools/plan_quiz_v4_answer_order_audio_sync.py
+          python3 - <<'PY'
+          import json
+          from collections import Counter
+          r=json.load(open(".github/reports/kids-v4-older-40-audio-synced-answer-order-proposal.json"))
+          assert r["liveAppChanged"] is False
+          assert r["currentAudioProductionPlanModified"] is False
+          assert r["canonical900OriginalsModified"] is False
+          assert r["newElevenLabsCreditsSpent"]==0
+          assert r["addedOriginalFragmentCount"]==0 and r["projectedExtraOriginalSpeechCharacters"]==0
+          assert r["correctAnswerPositionCountsPerAge"]=={
+              "7-8":{"1":7,"2":7,"3":6},"9-10":{"1":7,"2":7,"3":6}}
+          assert len(r["proposedQuestionItems"])==40
+          assert all(item["readyToApplyToVisitorApp"] is False and
+                     item["humanApproved"] is False and
+                     item["voicePlaybackAndVisualOrderMustRemainIdentical"] is True
+                     for item in r["proposedQuestionItems"])
+          assert json.load(open("kids/data/quiz-curation-release.json"))["enabled"] is False
+          print("PASS: 40 voice/display synchronized design-only answers, zero original extra speech, no live publishing",flush=True)
+          PY
+      - name: Store proposal on review branch, never activate in public KIDS
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          git add .github/reports/kids-v4-older-40-audio-synced-answer-order-proposal.json
+          if git diff --cached --quiet; then
+            echo "Balanced answer/voice proposal already recorded"
+            exit 0
+          fi
+          git commit -m 'review(kids): stage balanced original-order-independent V4 answer voice design, not deployed'
+          for n in 1 2 3; do
+            if git push origin HEAD:"$branch"; then exit 0; fi
+            git fetch origin "$branch"
+            if ! git rebase FETCH_HEAD; then exit 1; fi
+          done
+          exit 1
+      - name: Retain internal proposal as inspection artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-40-correct-answer-voice-sync-proposal-not-live
+          retention-days: 90
+          if-no-files-found: warn
+          path: .github/reports/kids-v4-older-40-audio-synced-answer-order-proposal.json
