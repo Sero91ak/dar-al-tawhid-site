@@ -390,7 +390,7 @@ jobs:
               ("js",js,required_js),
               ("html",html,required_html),
               ("quiz-runtime",quizjs,["DARKidsQuizVoice","quiz-audio.json","originalQuizSpeak"]),
-              ("quiz-manifest",quizaudio,["KIDS_QUIZ_OWNER_VOICE_V1","serhat-owner-voice-2026"]),
+              ("quiz-manifest",quizaudio,["KIDS_QUIZ_OWNER_VOICE_HYBRID_V1","serhat-owner-voice-2026"]),
           ):
               missing=[m for m in markers if m not in src]
               if missing:
