@@ -6899,7 +6899,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1425",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1428",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -11527,8 +11527,8 @@ html[data-view="stories"] #view-stories > :last-child{
 
 
 <!-- KIDS_DUA_FULLBLEED_EXPLANATION_CTA_V1249: shared full-width header and explanation actions, original back controls, no bottom-nav changes -->
-<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1411" data-kids-global-detail-dock="1257">
-<script src="/kids/global-detail-dock-v1247.js?v=1414" data-kids-global-detail-dock="1257"></script>
+<link rel="stylesheet" href="/kids/global-detail-dock-v1247.css?v=1428" data-kids-global-detail-dock="1257">
+<script src="/kids/global-detail-dock-v1247.js?v=1428" data-kids-global-detail-dock="1257"></script>
 
 <link rel="stylesheet" href="/kids/dua-layout-v1259.css?v=1311" data-kids-dua-layout="1259">
 <link rel="stylesheet" href="/kids/dua-learn-cinema-v1261.css?v=1261" data-kids-dua-cinema="1261">
