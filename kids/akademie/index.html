@@ -3704,9 +3704,10 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
 })();
 </script><link rel="stylesheet" href="/kids/kids-ui-contract-v1420.css?v=1420" data-kids-ui-contract="v1420">
 <style id="kids-academy-viewport-and-header-v1424">
-/* V1424: one opaque full-height portal canvas, one five-tab Kids dock.
-   Only the INNER academy views scroll, ending above the measured fixed dock.
-   No fake extra content, no duplicated tabs, no viewport clipping. */
+/* V1426: immersive Academy under the real fixed five-tab dock.
+   The iframe itself spans the ENTIRE viewport. Only the inner scrollable
+   views reserve the live dock footprint at their scroll END, so new cards
+   scroll naturally behind the dock and the last card remains fully visible. */
 html{--kids-academy-dock-clearance:128px}
 body[data-kids-portal="true"]{
  min-height:100dvh!important;
@@ -3716,9 +3717,9 @@ body[data-kids-portal="true"]{
 body[data-kids-portal="true"] > main.wrap{
  box-sizing:border-box!important;
  display:flex!important;flex-direction:column!important;
- height:calc(100dvh - var(--kids-academy-dock-clearance))!important;
+ height:100dvh!important;
  min-height:0!important;
- max-height:calc(100dvh - var(--kids-academy-dock-clearance))!important;
+ max-height:100dvh!important;
  padding-block:0!important;
  overflow:hidden!important;
 }
@@ -3734,8 +3735,10 @@ body[data-kids-portal="true"] > main.wrap > :is(#academyHome,#academySubject):no
  flex:1 1 auto!important;
  min-height:0!important;height:auto!important;
  overflow-y:auto!important;overflow-x:hidden!important;
- padding-bottom:16px!important;
- scroll-padding-block-end:16px!important;
+ /* This padding is INSIDE the scrollport: only its very last items
+    stop above the real dock; every earlier card scrolls underneath. */
+ padding-bottom:calc(var(--kids-academy-dock-clearance) + 12px)!important;
+ scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 12px)!important;
 }
 body[data-kids-portal="true"] #academyHome > .subjects{
  padding-bottom:0!important;
@@ -3743,7 +3746,9 @@ body[data-kids-portal="true"] #academyHome > .subjects{
 body[data-kids-portal="true"][data-academy-view="lesson"] > main.wrap > #lessonMain.lesson-main:not([hidden]){
  flex:1 1 auto!important;
  min-height:0!important;
- padding-bottom:10px!important;
+ /* Lesson navigation must also remain reachable ABOVE the dock,
+    while long lesson text keeps its own independent scrolling. */
+ padding-bottom:calc(var(--kids-academy-dock-clearance) + 10px)!important;
 }
 body[data-kids-portal="true"] #stageSurface{
  overflow-y:auto!important;overflow-x:hidden!important;
