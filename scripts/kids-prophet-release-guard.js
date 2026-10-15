@@ -46,14 +46,14 @@ try {
 
 const build = String(version.buildId || "").trim();
 const label = String(version.label || "").trim();
-const buildMatch = build.match(/^kids-shell-v(\d+)-([a-z][a-z0-9-]*?)(\d+)$/);
+const buildMatch = build.match(/^kids-shell-v(\d+)-([a-z][a-z0-9-]*)$/);
 if (!buildMatch) {
   console.error("::error::Kids Prophet release guard: ungültige Kids buildId: " + build);
   process.exit(1);
 }
 const buildMajor = buildMatch[1];
 const buildTrack = buildMatch[2];
-const buildNumber = buildMatch[3];
+const buildNumber = (buildTrack.match(/\d+$/) || [buildMajor])[0];
 
 const visual = version.visualSystem || {};
 const prophetSystem = String(visual.prophetStories || "");
@@ -103,7 +103,7 @@ const sahabiyyatJsVersion = String(Number(visual.sahabiyyatJsVersion || 0) || ""
 
 function assertOnlyCurrentBuild(rel) {
   const text = read(rel);
-  const refs = uniqueMatches(text, /kids-shell-v\d+-[a-z][a-z0-9-]*\d+/g);
+  const refs = uniqueMatches(text, /kids-shell-v\d+-[a-z][a-z0-9-]*/g);
   if (!refs.length) {
     error(rel + " enthält keine Kids buildId");
     return;
