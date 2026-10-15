@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib,json,os,subprocess,sys,urllib.error,urllib.request
 from datetime import datetime,timezone
 from pathlib import Path
+from quiz_v4_no_double_charge_guard import protect_paid_texts, prohibit_prepaid_selection
 
 ROOT=Path(__file__).resolve().parents[2]
 PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
@@ -39,9 +40,9 @@ def get_balance(key):
         data=json.loads(resp.read().decode("utf-8"))
     return float(data["character_limit"])-float(data["character_count"])
 
-def select_tasks(plan,registry):
+def select_tasks(plan,registry,protected):
     saved=registry.get("textClips") or {}
-    available=[v for v in plan["pendingAudioFragments"] if v["text"] not in saved]
+    available=[v for v in plan["pendingAudioFragments"] if v["text"] not in saved and v["text"] not in protected]
     intro=next((x for x in available if x["text"]=="Das merken wir uns:"),None)
     # First individual, actually selected non-recorded young children's quiz question.
     young={q["questionId"] for q in plan["recipes"] if q["ageBand"]=="4-6"}
@@ -98,7 +99,8 @@ def main():
         return
     if len(ledger.get("rows",[]))>0:
         raise RuntimeError("Partially paid pilot detected. Reconcile original assets before any new paid call")
-    choices=select_tasks(plan,registry)
+    protected=protect_paid_texts(ROOT,registry,ledger)
+    choices=select_tasks(plan,registry,protected)
     # Check budget before making any paid call.
     required=sum(len(x["text"])*CREDIT_RATE for x in choices)
     balance=get_balance(key)
@@ -108,6 +110,7 @@ def main():
     OUTPUT.mkdir(parents=True,exist_ok=True)
     for entry in choices:
         text=entry["text"]
+        prohibit_prepaid_selection(text,protected)
         if text in registry["textClips"]:
             raise RuntimeError("Duplicate clip found before paid call; no synthesis")
         h=hashlib.sha256((VOICE+"\n"+MODEL+"\n"+text).encode("utf-8")).hexdigest()
