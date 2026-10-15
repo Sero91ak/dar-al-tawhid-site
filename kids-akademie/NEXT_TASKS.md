@@ -1,3 +1,13 @@
+## 15.10.2026 · Wissenschaftliche Quellenbindung bis Lektion 52 · 182 eindeutige Registereinträge
+
+- **Tatsächlich in GitHub gespeichert:** vier weitere Lektions-IDs 49–52, jeweils mit zwei eindeutigen Referenzbindungen im zentralen `kids-akademie/research/SOURCE_REGISTRY.json`. **182/182 Quellen-IDs eindeutig**, `sourceCount=182`. Zwei neue Primär-Tafsīr-Belege und Wiederverwendung bestehender, statt Mehrfachkopien.
+- **49 Morgen-Dhikr:** Qurʾān **33:41–42**, Ibn Kaṯīr, Islamweb **49/1493**, plus 7:205/49/590. Die neue Textgrenze umfasst exakt 41–42, nicht spätere Verse; keine erfundenen Pflichtzahlen. Originalseiten-Direktaufruf war zeitweilig nicht verfügbar, daher **nur Teilquellenprüfung**.
+- **50 Eltern:** Ibn Kaṯīr zu **17:23–24**, Islamweb **49/1005**, plus authentischer Bericht **Buḫārī 5971**, Muslim 2548, Dorar 151125. Beide vorhandenen IDs wiederverwendet.
+- **51 Allah erschuf Tiere:** Ibn Kaṯīr zu **24:45**, Islamweb **49/1276** (neuer unmittelbar passender Primärbeleg) plus Buḫārī **2363** über Barmherzigkeit mit Tieren. Die beiden Belege behandeln **unterschiedliche Aussagen**.
+- **52 Īmān:** Sūrat al-Ikhlāṣ **112:1–4** und der authentische **Ḥadīṯ Ǧibrīl, Muslim 8**, vorhandene IDs wiederverwendet. **Falscher Dorar-Direktlink /63778 zu Muslim 8 berichtigt auf /25545**, dort als Muslim Nr. 8 ausgewiesen. Referenznummer im Register enthält eine ergänzende englische Zählung; Regression erlaubt die vollständige Nummer statt sie auf eine Ziffer zu verkürzen.
+- **Dokumentation:** `kids-akademie/research/SCIENTIFIC_CORE_049_052_SOURCE_BINDINGS_20261015.md`. **Neuer Test** `kids/tools/test-academy-source-bindings-049-052-v1.cjs`. **36/36 schreibgeschützte Inhalts-/Registerkontrollen** nach angepasster Nummernprüfung erfüllt. Der vollständige Node-/Browser-/CI-Lauf bleibt **nicht nachgewiesen**; bloßes Anlegen des Tests ist keine ausgeführte CI.
+- **Status unverändert:** Alle **208 Unterrichtslektionen/624 Altersfassungen** liegen redaktionell als Entwurf vor. **0/624 wissenschaftlich endgültig freigegeben.** Kein Audio, keine TTS-Credits, kein Merge, kein Live-Deploy. Nächste wissenschaftliche Bindung: **53–56**, danach 57–60. Sämtliche bestehenden Kinder-IDs, Quiz-/Fortschrittsdaten und Themes wurden bei dieser Quellenbindung nicht bearbeitet.
+
 ## 14.10.2026 · Wissenschaftliche Quellenbindung bis Lektion 48 · 180 Source-IDs
 
 - **Direkt gespeichert und abgeglichen:** Alle **32 vorhandenen Vertiefungslektionen 17–48** besitzen nun mindestens eine konkrete `lessonIds`-Quellenbindung im zentralen `kids-akademie/research/SOURCE_REGISTRY.json`. Read-only-GitHub-Abgleich: **32/32 Lektionen zugeordnet, 180/180 eindeutige IDs, sourceCount=180**. Kein Node-/Browser-/CI-Lauf durch diesen Datenabgleich nachgewiesen.
