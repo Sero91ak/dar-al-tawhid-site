@@ -1,3 +1,13 @@
+## Ergänzung · Vier weitere Originalbelege 69–72 (15.10.2026)
+
+- **69:** Muslim 2999, Ṣuhayb ibn Sinān; [Dorar 152156](https://dorar.net/hadith/sharh/152156) – Geduld bei schwierigen Ereignissen, aber keine Pflicht zum Aushalten von Gefahr.
+- **70:** al-Buḫārī 201, Anas ibn Mālik, Muslim 325 parallel; [Dorar 532](https://dorar.net/hadith/sharh/532) – der Mudd beschreibt eine übliche Wassermenge, keine universelle Höchstgrenze.
+- **71:** al-Buḫārī 5013, Abū Saʿīd al-Ḫudrī; [Dorar 72699](https://dorar.net/hadith/sharh/72699) – Sūrat al-Ikhlāṣ hat großen Vorzug, ohne andere Pflichten zu ersetzen.
+- **72:** Muslim 532, Ǧundub ibn ʿAbdillāh; [Dorar 141468](https://dorar.net/hadith/sharh/141468) – Allahs besondere Freundschaft mit Ibrāhīm, kein erfundener Kinderdialog.
+
+Die arabischen Registerauszüge sind ausdrücklich verkürzt. Sammlungs- und Editionsvarianten bleiben getrennt.
+**Stand: 16 von 34 historischen Ḥadīṯ-Nachweisen überprüft, 18 noch offen.** Wissenschaftliche Endfreigabe und Audioerzeugung weiterhin 0.
+
 ## Ergänzung · Vier zusätzliche geprüfte Quellen 65–68 (15.10.2026)
 
 Nach Slots 57–64 wurden auch die Originalzuordnungen der Slots **65–68** separat bei Dorar geprüft. Damit sind **12** zuvor nicht unabhängig bestätigte Belege geprüft und **22** noch nicht neu gegengeprüft. Kinderlektionen weiterhin **nicht endgültig freigegeben**.
