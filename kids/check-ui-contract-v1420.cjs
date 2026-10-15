@@ -1,36 +1,43 @@
 #!/usr/bin/env node
 "use strict";
+// V1421 supersedes the V1420 five-tab expectation. Kept at old path for CI.
 const fs=require("node:fs"),path=require("node:path"),assert=require("node:assert/strict");
 const root=path.resolve(__dirname,"..");
 const read=p=>fs.readFileSync(path.join(root,p),"utf8");
-const html=read("kids/index.html"),css=read("kids/kids-ui-contract-v1420.css"),dua=read("kids/dua-hub-v1219.js"),academy=read("kids/akademie/index.html"),salaf=read("kids/salaf-library-v1.js");
+const html=read("kids/index.html"),css=read("kids/kids-ui-contract-v1420.css"),navCss=read("kids/kids-nav-v1421.css");
+const dua=read("kids/dua-hub-v1219.js"),academy=read("kids/akademie/index.html"),sw=read("kids/sw.js");
+const salaf=read("kids/salaf-library-v1.js"),v=JSON.parse(read("kids/version.json"));
 for(const shell of ["kids/start.html","kids/shell.html"])
-  assert.equal(html,read(shell),"All published Kids shells must stay byte-identical");
+  assert.equal(html,read(shell),"All published Kids shells must remain byte-identical");
 const nav=html.match(/<nav class="bottom-nav"[\s\S]*?<\/nav>/)?.[0];
-assert.ok(nav,"Main tab rail missing");
-assert.equal((nav.match(/class="nav-btn/g)||[]).length,5,"Exactly 5 main tabs");
-const markers=['data-target="today"','data-target="stories"','class="nav-btn kids-academy-tab"','data-target="salaf"','data-target="parents"'];
-let cursor=-1;
-for(const marker of markers){
-  const i=nav.indexOf(marker);
-  assert.ok(i>cursor,"Wrong five-tab order: "+marker);
-  cursor=i;
-}
-assert.ok(nav.includes('href="/kids/akademie/index.html"'),"Lernen must open the actual academy");
-assert.ok(!nav.includes('data-target="quran"')&&!nav.includes('data-target="dua"'),"No retired or extra tab");
-assert.ok(dua.includes("function enhanceHeaderProfile()")&&dua.includes("function enhanceProfileCard()"),"Child avatars must remain active");
-assert.ok(dua.includes('!q("#view-today")')&&dua.includes('!q("#view-parents")'),"Profile init needs surviving views only");
-assert.ok(!dua.includes('!q("#view-quran")'),"Removed Quran markup must never block profile init");
-assert.ok(dua.includes('if (legacy) legacy.remove();'),"Do not inject sixth Du'a tab");
-assert.ok(html.includes('const KIDS_QURAN_LEARNING_REMOVED=true'),"Retired Quran lesson must remain retired");
-assert.ok(!html.includes('<section id="view-quran"'),"No retired Quran lessons can return");
-assert.ok(html.includes('/kids/kids-ui-contract-v1420.css?v=1420'),"Visitor shell missing shared CSS");
-assert.ok(academy.includes('/kids/kids-ui-contract-v1420.css?v=1420'),"Academy missing shared CSS");
-assert.ok(css.includes("grid-template-columns:minmax(0,1fr)!important")&&css.includes("word-break:normal!important"),"Hörwelten cards must not force tiny columns");
-assert.ok(css.includes("grid-template-columns:repeat(5,minmax(0,1fr))!important"),"Dock must have five even-size cells");
-assert.ok(css.includes("library-real-v12.png"),"Lernen 3D icon missing");
-for(const asset of ["salaf-cinema-hero-boy-v1353.jpg","salaf-cinema-hero-girl-v1353.jpg","kids-academy-hero-boys-v1.jpg","kids-academy-hero-girls-v1.jpg"])
-  assert.ok(css.includes(asset),"Profile-specific hero missing: "+asset);
-assert.ok(salaf.includes('salaf-story-nav kids-detail-appbar'),"Shared reader header lost");
-assert.ok(css.includes('#salafDetail.salaf-detail:not([hidden]) > .salaf-story-nav.kids-detail-appbar'),"Salaf reader must use shared header geometry");
-console.log("PASS KIDS V1420: profile avatars, five centered tabs, wide cards, gender-aware heroes, consistent Salaf/Academy headers, Quran retirement");
+assert.ok(nav,"Bottom navigation missing");
+assert.equal((nav.match(/class="nav-btn/g)||[]).length,5,"Exactly five tabs");
+const marks=['data-target="today"','data-target="stories"','class="nav-btn kids-academy-tab"','data-target="dua"','data-target="parents"'];
+let pos=-1;
+for(const mark of marks){const n=nav.indexOf(mark);assert.ok(n>pos,"Wrong nav order: "+mark);pos=n;}
+assert.ok(nav.includes('href="/kids/akademie/index.html"'),"Learn tab must open current academy");
+assert.ok(!nav.includes('data-target="salaf"')&&!nav.includes('data-target="quran"'),"No stale or retired tab");
+assert.ok(dua.includes('const order = [today, stories, learn, dua, parents]'),"Stale iOS nav healing must exist");
+assert.ok(dua.includes("event.stopImmediatePropagation()"),"Old tab handlers must not hijack Duʿāʾ");
+assert.ok(dua.includes("function enhanceHeaderProfile()")&&dua.includes("function enhanceProfileCard()"),"Child avatars preserved");
+assert.ok(dua.includes('!q("#view-today")')&&dua.includes('!q("#view-parents")'),"Profile init valid");
+assert.ok(!dua.includes('!q("#view-quran")'),"Removed Quran UI must not block profiles");
+assert.ok(html.includes('const KIDS_QURAN_LEARNING_REMOVED=true'),"Alif-Bāʾ retirement preserved");
+assert.ok(!html.includes('<section id="view-quran"'),"Removed Quran lesson must remain retired");
+assert.ok(html.includes('/kids/kids-ui-contract-v1420.css?v=1421')&&html.includes('/kids/kids-nav-v1421.css?v=1421'),"New versioned CSS missing");
+assert.ok(academy.includes('kids-ui-contract-v1420.css'),"Shared Academy geometry preserved");
+assert.ok(css.includes("grid-template-columns:minmax(0,1fr)!important"),"Hörwelten three wide cards missing");
+assert.ok(navCss.includes("learning-book-premium-v1421.svg"),"Lernen icon missing");
+assert.ok(read("kids/assets/kids-icons/learning-book-premium-v1421.svg").includes("<svg"),"Study book SVG missing");
+assert.ok(navCss.includes("dua-real-v12.png"),"Duʿāʾ icon missing");
+assert.ok(html.includes("kids-salaf-listening-hero")&&html.includes('data-go="salaf"'),"Salaf must be in Hören");
+for(const k of ["salaf-cinema-hero-boy-v1353.jpg","salaf-cinema-hero-girl-v1353.jpg"])
+ assert.ok(navCss.includes(k),"Gendered Salaf hero missing "+k);
+for(const k of ["kids-academy-hero-boys-v1.jpg","kids-academy-hero-girls-v1.jpg"])
+ assert.ok(css.includes(k),"Academy hero missing "+k);
+assert.ok(salaf.includes('salaf-story-nav kids-detail-appbar'),"Shared reader header must remain");
+assert.ok(html.includes('if(name==="dua"&&window.DARKidsDuaHub'),"Duʿāʾ tab must open real hub");
+assert.equal(v.buildId,"kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren");
+assert.ok(sw.includes('dar-al-tawhid-kids-v1421')&&sw.includes('kids-nav-v1421.css?v=1421'),"PWA cache must be updated");
+assert.ok(sw.includes('kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren'),"SW build ID must match");
+console.log("PASS Kids V1421: 5 official tabs, Duʿāʾ fourth, learning center, Salaf Hören, gender heroes, restored avatars, Quran retirement");
