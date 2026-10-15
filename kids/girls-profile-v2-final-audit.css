@@ -16,11 +16,12 @@ html body .app[data-gender="girl"]:has(> .shell > :is(#view-stories,#view-salaf,
   --girls-v2-border:rgba(240,196,221,.38);
   --girls-v2-rose:#f0c9de;
   --girls-v2-ink:#fff5f0;
-  background-color:var(--girls-v2-surface)!important;
+  background:var(--girls-v2-surface)!important;
+  background-image:none!important;
 }
 /* For shell-only background fades, not the untouched artwork of any hero. */
 html body .app[data-gender="girl"] > .shell > :is(#view-stories,#view-salaf,#view-quran,#view-parents,#view-dua).view.active{
-  background-color:#2b2035!important;
+  background:#2b2035!important;
 }
 /* SALAF: the previous girl's screenshot showed teal in the surrounding
    shell. Harmonize root, shell, tile frame and opaque tab backdrop. */
@@ -110,17 +111,19 @@ html body:has(.app[data-gender="girl"]) #psModal.ps-modal .ps-hero-copy{
 /* Other body-mounted story libraries and reading/detail overlays.
    Do not touch their original images or interactive geometry. */
 html body:has(.app[data-gender="girl"]) :is(#msLibraryPage,#syLibraryPage,.ms-library-page,.sy-library-page,#ghWorld.gh-world,#ghPlayer.gh-player){
-  background-color:#2b2035!important;
+  background:#2b2035!important;
+  background-image:none!important;
 }
 html body:has(.app[data-gender="girl"]) :is(#msLibraryPage,#syLibraryPage,.ms-library-page,.sy-library-page) :is(.ms-library-nav,.ms-list,.ms-library-scroll){
-  background-color:#2b2035!important;
+  background:#2b2035!important;
+  background-image:none!important;
 }
 html body:has(.app[data-gender="girl"]) :is(#msLibraryPage,#syLibraryPage,.ms-library-page,.sy-library-page) .ms-story-row{
-  background-color:#443048!important;
+  background:#443048!important;
   border-color:rgba(240,196,221,.38)!important;
 }
 html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal).ms-modal :is(.ms-sheet,.ms-body,.ms-scroll){
-  background-color:#2b2035!important;
+  background:#2b2035!important;
 }
 html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal).ms-modal :is(.ms-profile-grid section,.ms-question,.ms-read,.ms-sources){
   background-color:#443048!important;
@@ -129,11 +132,11 @@ html body:has(.app[data-gender="girl"]) :is(#msModal,#syModal).ms-modal :is(.ms-
 html body:has(.app[data-gender="girl"]) #ghWorld .gh-world-scroll,
 html body:has(.app[data-gender="girl"]) #ghWorld .gh-content,
 html body:has(.app[data-gender="girl"]) #ghPlayer .gh-player-body{
-  background-color:#2b2035!important;
+  background:#2b2035!important;
 }
 html body:has(.app[data-gender="girl"]) #ghWorld :is(.gh-category,.gh-story,.gh-continue-card),
 html body:has(.app[data-gender="girl"]) #ghPlayer .gh-controls{
-  background-color:#443048!important;
+  background:#443048!important;
   border-color:rgba(240,196,221,.35)!important;
 }
 /* QURʾĀN, DUʿĀʾ and Eltern: neutral empty backgrounds, not photos/hero art. */
