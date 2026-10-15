@@ -5,8 +5,9 @@ html body #kidsAcademyPortal.kids-academy-portal{
  position:fixed!important;left:0!important;right:0!important;top:0!important;
  bottom:auto!important;z-index:25!important;
  width:100%!important;
- /* Actual measured dock top, including dynamic safe areas and iPad widths. */
- height:var(--kids-academy-portal-height,calc(100dvh - 110px))!important;
+ /* Edge-to-edge behind the ONE fixed dock. Scroll END (not viewport)
+    reserves its measured footprint inside the academy iframe. */
+ height:var(--kids-academy-portal-height,100dvh)!important;
  display:block!important;
  background:#102939!important;overflow:hidden!important;box-sizing:border-box!important;
  opacity:0;transform:translate3d(0,5px,0);
