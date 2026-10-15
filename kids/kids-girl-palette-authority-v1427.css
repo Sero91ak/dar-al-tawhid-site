@@ -309,3 +309,31 @@ html body:has(.app[data-gender="girl"]) #duaSmartLearn .dsl-focus{
 html body:has(.app[data-gender="girl"]) #duaSmartLearn .dsl-focus small{
   color:var(--kg-dua-soft)!important;
 }
+
+/* KIDS_GIRL_GLOBAL_OFFLINE_ACTIONS_V1430
+ * Offline buttons appear as independent siblings, often beneath body-mounted
+ * modals. Always pick the active child profile, not the host's boy defaults.
+ * Keep button state and audio/download logic unchanged.
+ */
+html body:has(.app[data-gender="girl"]) .kids-offline-entry > .kids-item-download,
+html body:has(.app[data-gender="girl"]) .kids-offline-inline > .kids-item-download{
+  background-color:#5d3d59!important;
+  background-image:linear-gradient(130deg,#805377,#543953)!important;
+  border-color:rgba(238,183,213,.54)!important;
+  color:#ffe8c2!important;
+}
+html body:has(.app[data-gender="girl"]) :is(.kids-offline-entry,.kids-offline-inline) > .kids-item-download[data-offline-state="ready"]{
+  background-color:#685071!important;
+  background-image:linear-gradient(120deg,#805f87,#674c6f)!important;
+  border-color:#cea5d1!important;
+  color:#faeaff!important;
+}
+html body:has(.app[data-gender="girl"]) :is(.kids-offline-entry,.kids-offline-inline) > .kids-item-download[data-offline-state="error"]{
+  background-color:#704558!important;
+  background-image:none!important;
+  border-color:#e5a7b9!important;
+  color:#ffe5ea!important;
+}
+html body:has(.app[data-gender="girl"]) :is(.kids-offline-entry,.kids-offline-inline) .kids-download-hint{
+  color:#ead0df!important;
+}
