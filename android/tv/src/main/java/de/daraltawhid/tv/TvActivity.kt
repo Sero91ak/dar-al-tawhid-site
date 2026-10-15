@@ -20,6 +20,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
@@ -275,8 +276,31 @@ class TvActivity : Activity() {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(48), dp(25), dp(48), dp(22))
         }
-        shell.addView(label("DĀR AL TAWḤĪD", 32f, cream, true))
-        shell.addView(label("WISSEN AUS QURʾĀN & SUNNAH  ·  TV", 13f, gold, false))
+        // Original tvOS header: independent 124pt brand mark followed by the
+        // text wordmark. Artwork is optional until the vetted source package
+        // has been integrated into this isolated TV development checkout.
+        val brandHeader = LinearLayout(this).apply {
+            orientation = LinearLayout.HORIZONTAL
+            gravity = Gravity.CENTER_VERTICAL
+        }
+        @Suppress("DEPRECATION")
+        val tvBrandId = resources.getIdentifier("tv_brand_mark", "drawable", packageName)
+        if (tvBrandId != 0) {
+            brandHeader.addView(ImageView(this).apply {
+                setImageResource(tvBrandId)
+                scaleType = ImageView.ScaleType.FIT_CENTER
+                contentDescription = "DĀR AL TAWḤĪD TV"
+                isFocusable = false
+            }, LinearLayout.LayoutParams(dp(105), dp(105)).apply {
+                marginEnd = dp(20)
+            })
+        }
+        brandHeader.addView(LinearLayout(this).apply {
+            orientation = LinearLayout.VERTICAL
+            addView(label("DĀR AL TAWḤĪD", 39f, cream, true))
+            addView(label("WISSEN AUS QURʾĀN & SUNNAH  ·  TV", 15f, gold, false))
+        })
+        shell.addView(brandHeader)
         val settingsRow = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
         settingsRow.addView(navButton("Adhān · Einstellungen") {
             adhanController.showSettings()
