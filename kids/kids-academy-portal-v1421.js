@@ -68,12 +68,13 @@ function close(){
  try{trigger?.focus({preventScroll:true})}catch(_){}
 }
 function init(){
- var btn=one(".bottom-nav .kids-academy-tab");
- if(!btn)return;
- if(btn.tagName==="A"){
-   // Old cached markup: intercept without replacing a control or a listener.
-   btn.addEventListener("click",open,true);
- }else btn.addEventListener("click",open);
+ var triggers=document.querySelectorAll("[data-academy-open]");
+ if(!triggers.length)return;
+ triggers.forEach(function(btn){
+   // Both the central tab and Home's Academy hero open the same portal.
+   // Capture on old anchors prevents browser navigation from stale markup.
+   btn.addEventListener("click",open,btn.tagName==="A");
+ });
  window.addEventListener("message",function(event){
    if(event.origin!==location.origin||!frame||event.source!==frame.contentWindow)return;
    if(event.data&&event.data.type==="DAR_KIDS_ACADEMY_CLOSE_V1421")close();
