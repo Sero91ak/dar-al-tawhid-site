@@ -72,6 +72,10 @@ html body .app #view-today > .hero :is(.cloud,.shooting-star,.city,.arch,.dune,.
 <link rel="manifest" href="/kids/manifest.webmanifest">
 <link rel="preload" as="style" href="/kids/kids-nav-v1421.css?v=1422">
 <link rel="preload" as="style" href="/kids/kids-motion-v1422.css?v=1422">
+<!-- Apply the existing FINAL five-tab geometry before the first visible frame.
+     The later copies retain their cascade order and all boy/girl theme overrides. -->
+<link rel="stylesheet" href="/kids/kids-ui-contract-v1420.css?v=1421" data-kids-first-paint="stable-five-tabs">
+<link rel="stylesheet" href="/kids/kids-nav-v1421.css?v=1422" data-kids-first-paint="stable-icons">
 <link rel="preload" as="image" href="/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422">
 <link rel="stylesheet" href="/kids/offline-library-v1.css?v=1">
 <link rel="stylesheet" href="/kids/item-offline-v1.css?v=2">
