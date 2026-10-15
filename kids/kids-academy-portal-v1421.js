@@ -1,28 +1,61 @@
-/* KIDS_ACADEMY_SEAMLESS_PORTAL_V1421
- * One visitor app, zero full-page redirects for Academy entry or exit.
- * Same-origin iframe preserves lesson storage and isolates its CSS.
- * No access to or modification of the saved child's identity or progress.
+/* TAWḤĪD KIDS — V1422.
+ * The Academy remains in its same-origin iframe, WITH the real Kids dock.
+ * Reuse the one existing five-tab navigation; never clone tabs or reload Home.
+ * Academy viewport ends above the dock's measured top edge (iOS safe areas).
+ * Child profiles and lesson progress are never rewritten by navigation.
  */
 (function(){
 "use strict";
 if(window.DARKidsAcademyPortalV1421)return;
-var modal=null,frame=null,trigger=null,ready=false,closingTimer=null;
-function one(s,r){return(r||document).querySelector(s)}
+var modal=null,frame=null,trigger=null,ready=false,closingTimer=null,previousTab=null,resizeObserver=null;
+var GAP=8;
+function one(selector,root){return(root||document).querySelector(selector)}
+function dock(){return one(".app > .bottom-nav")||one(".bottom-nav")}
+function measure(){
+ if(!modal||modal.hidden)return;
+ var nav=dock(),rect=nav&&nav.getBoundingClientRect();
+ if(!rect||rect.height<=0)return;
+ var available=Math.max(180,Math.floor(rect.top-GAP));
+ modal.style.setProperty("--kids-academy-portal-height",available+"px");
+}
+function selectLearn(){
+ var nav=dock(),learn=one(".kids-academy-tab",nav);
+ if(!learn)return;
+ previousTab=one(".nav-btn.active",nav)||null;
+ nav.querySelectorAll(".nav-btn").forEach(function(button){
+   button.classList.toggle("active",button===learn);
+ });
+ learn.setAttribute("aria-current","page");
+}
+function restorePrevious(){
+ var nav=dock(),learn=one(".kids-academy-tab",nav);
+ if(!nav)return;
+ var previous=previousTab&&previousTab.isConnected?previousTab:null;
+ if(previous){
+   nav.querySelectorAll(".nav-btn").forEach(function(button){button.classList.toggle("active",button===previous)});
+ }else if(learn){
+   learn.classList.remove("active");
+ }
+ if(learn)learn.removeAttribute("aria-current");
+ previousTab=null;
+}
 function create(){
  if(modal)return modal;
+ var nav=dock();
+ if(!nav||!nav.parentNode)return null;
  modal=document.createElement("section");
  modal.id="kidsAcademyPortal";
  modal.className="kids-academy-portal";
- modal.setAttribute("role","dialog");
+ // Navigation remains interactive and outside this region; don't use aria-modal.
+ modal.setAttribute("role","region");
  modal.setAttribute("aria-label","Meine Lernakademie");
- modal.setAttribute("aria-modal","true");
  modal.hidden=true;
  var exit=document.createElement("button");
  exit.type="button";
  exit.className="kids-academy-portal-cancel";
  exit.setAttribute("aria-label","Zur Kinderwelt");
  exit.textContent="‹";
- exit.addEventListener("click",close);
+ exit.addEventListener("click",function(){close(false)});
  var loading=document.createElement("div");
  loading.className="kids-academy-portal-loading";
  loading.setAttribute("aria-hidden","true");
@@ -38,21 +71,31 @@ function create(){
    if(!modal.hidden)frame.focus({preventScroll:true});
  });
  modal.append(frame,loading,exit);
- document.body.appendChild(modal);
+ // Critical: sibling of the SAME existing dock, in the SAME .app stacking context.
+ // In particular, never append to body: that would hide the bottom navigation.
+ nav.parentNode.insertBefore(modal,nav);
+ if(typeof ResizeObserver==="function"){
+   resizeObserver=new ResizeObserver(function(){requestAnimationFrame(measure)});
+   resizeObserver.observe(nav);
+ }
  return modal;
 }
-function open(e){
- if(e&&typeof e.preventDefault==="function")e.preventDefault();
- create();
- trigger=(e&&e.currentTarget)||one(".kids-academy-tab");
+function open(event){
+ if(event&&typeof event.preventDefault==="function")event.preventDefault();
+ if(!create())return;
+ trigger=(event&&event.currentTarget)||one(".kids-academy-tab");
  var girl=one(".app")?.getAttribute("data-gender")==="girl";
  modal.dataset.gender=girl?"girl":"boy";
  if(closingTimer){clearTimeout(closingTimer);closingTimer=null}
  modal.style.pointerEvents="";
+ var wasOpen=!modal.hidden&&modal.classList.contains("is-open");
  modal.hidden=false;
  modal.classList.add("is-open");
  document.documentElement.classList.add("kids-academy-portal-active");
  document.body.classList.add("kids-academy-portal-active");
+ if(!wasOpen)selectLearn();
+ measure();
+ requestAnimationFrame(measure);
  if(!frame.getAttribute("src")){
    frame.src="/kids/akademie/index.html?kidsPortal=1";
  }else if(ready){
@@ -60,12 +103,15 @@ function open(e){
    frame.focus({preventScroll:true});
  }
 }
-function close(){
- if(!modal||modal.hidden)return;
+function close(keepNewTab){
+ if(!modal||modal.hidden||!modal.classList.contains("is-open"))return;
  try{frame.contentWindow.postMessage({type:"DAR_KIDS_ACADEMY_PAUSE_V1421"},location.origin)}catch(_){}
  modal.classList.remove("is-open");
  modal.style.pointerEvents="none";
- // Fade out over the current Home, with no location navigation or visible reset.
+ if(keepNewTab){
+   one(".kids-academy-tab",dock())?.removeAttribute("aria-current");
+   previousTab=null;
+ }else restorePrevious();
  if(closingTimer)clearTimeout(closingTimer);
  closingTimer=setTimeout(function(){
    if(modal.classList.contains("is-open"))return;
@@ -73,32 +119,38 @@ function close(){
    modal.style.pointerEvents="";
    document.documentElement.classList.remove("kids-academy-portal-active");
    document.body.classList.remove("kids-academy-portal-active");
-   try{trigger?.focus({preventScroll:true})}catch(_){}
+   if(!keepNewTab)try{trigger?.focus({preventScroll:true})}catch(_){}
    closingTimer=null;
- },230);
+ },220);
 }
 function init(){
  var triggers=document.querySelectorAll("[data-academy-open]");
  if(!triggers.length)return;
- triggers.forEach(function(btn){
-   // Both the central tab and Home's Academy hero open the same portal.
-   // Capture on old anchors prevents browser navigation from stale markup.
-   btn.addEventListener("click",open,btn.tagName==="A");
+ triggers.forEach(function(button){
+   button.addEventListener("click",open,button.tagName==="A");
  });
+ // The underlying global tabs stay clickable while the Academy is visible.
+ // The original handlers then select Today/Hören/Du'a/Eltern normally.
+ document.addEventListener("click",function(event){
+   if(!modal||modal.hidden||!modal.classList.contains("is-open"))return;
+   var button=event.target.closest(".bottom-nav .nav-btn");
+   if(button&& !button.classList.contains("kids-academy-tab"))close(true);
+ },true);
  window.addEventListener("message",function(event){
    if(event.origin!==location.origin||!frame||event.source!==frame.contentWindow)return;
    if(event.data&&event.data.type==="DAR_KIDS_ACADEMY_CLOSE_V1421"){
-     close();
-     if(event.data.goHome===true){
-       var today=one(".bottom-nav .nav-btn[data-target=\"today\"]");
-       if(today)today.click();
-     }
+     var goHome=event.data.goHome===true;
+     close(goHome);
+     if(goHome)one('.bottom-nav .nav-btn[data-target="today"]')?.click();
    }
  });
- document.addEventListener("keydown",function(e){
-   if(e.key==="Escape"&&modal&&!modal.hidden){e.preventDefault();close()}
+ window.addEventListener("resize",measure,{passive:true});
+ window.addEventListener("orientationchange",function(){requestAnimationFrame(measure)},{passive:true});
+ window.visualViewport?.addEventListener("resize",measure,{passive:true});
+ document.addEventListener("keydown",function(event){
+   if(event.key==="Escape"&&modal&&!modal.hidden){event.preventDefault();close(false)}
  });
- window.DARKidsAcademyPortalV1421=Object.freeze({open,close});
+ window.DARKidsAcademyPortalV1421=Object.freeze({open,close,measure});
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
 else init();
