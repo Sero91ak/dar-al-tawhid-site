@@ -12,8 +12,8 @@
 - **Grundquelle:** Imām Muslim, *Ṣaḥīḥ Muslim*, Faḍāʾil aṣ-Ṣaḥābah, Nr. 2491; Ausgabe ʿAbd al-Bāqī Bd. 4 S. 1938.
 - **Isnād:** ʿAmr an-Nāqid → ʿUmar ibn Yūnus al-Yamāmī → ʿIkrimah ibn ʿAmmār → Abū Kathīr Yazīd ibn ʿAbd ar-Raḥmān → Abū Hurayrah.
 - **Arabischer Textanker:** «فادع الله أن يهدي أم أبي هريرة ... اللهم اهد أم أبي هريرة ... فأتيته وأنا أبكي من الفرح».
-- **Quellenbeleg:** https://dorar.net/h/cANRKp5i?osoul=1
-- **Erläuterung:** https://dorar.net/hadith/sharh/63105
+- **Originalbericht Ṣaḥīḥ Muslim 2491:** https://dorar.net/hadith/sharh/152397
+- **Parallelüberlieferungen Muslim / Ibn Ḥibbān / Aḥmad:** https://dorar.net/h/cANRKp5i?osoul=1
 - **Belegtyp:** Überlieferter marfūʿ-Ḥadīṯ mit Selbstschilderung des Ṣaḥābī, kein bloßer später biographischer Bericht.
 
 ## Treue des Kindertextes
