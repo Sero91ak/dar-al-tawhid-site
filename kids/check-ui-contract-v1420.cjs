@@ -81,6 +81,21 @@ assert.ok(motion.includes("190ms"),"Short GPU opacity entrance duration required
 /* KIDS_GIRL_PALETTE_REGRESSION_V1427:
    Reject unscoped selectors and a future blue, more-specific CTA. */
 const girlAuthority=read("kids/kids-girl-palette-authority-v1427.css");
+
+// V1428: the girls' Du'a learning modal is created beneath document.body, outside .app.
+// Its full color contract must be explicitly gated by the LIVE girl's profile.
+const duaGirlGuard="KIDS_GIRL_DUA_LEARN_OVERLAY_V1428";
+assert.ok(girlAuthority.includes(duaGirlGuard),"Girl Du'a learning theme layer missing");
+assert.ok(girlAuthority.includes('body:has(.app[data-gender="girl"]) #duaSmartLearn'),"Body-mounted Du'a overlay missing live profile gate");
+for(const part of [".dsl-sheet",".dsl-head.kids-detail-appbar",".dsl-backdrop",
+ ".dsl-word.active.ar",".dsl-word.active.tr",".dsl-word.active.de",
+ ".dsl-controls .dsl-play.primary",".dsl-controls .dsl-play.slow",
+ ".dsl-controls .dsl-play.follow",".dsl-stepnav button",".dsl-status.good",".dsl-status.bad"]){
+  assert.ok(girlAuthority.slice(girlAuthority.indexOf(duaGirlGuard)).includes(part),"Missing girl Du'a palette: "+part);
+}
+const duaSmartJs=read("kids/dua-smart-learn.js");
+assert.ok(duaSmartJs.includes("document.body.appendChild(root)"),"Du'a reader root changed: revisit profile gate");
+
 const girlCssNoComments=girlAuthority.replace(/\/\*[\s\S]*?\*\//g,"");
 const girlSelectors=[...girlCssNoComments.matchAll(/([^{}]+)\{/g)].map(x=>x[1].trim());
 assert.ok(girlSelectors.length>=14,"Girl palette must cover root, CTA and detail");
@@ -88,7 +103,7 @@ for(const selector of girlSelectors)
  assert.ok(selector.includes('.app[data-gender="girl"]'),"Unscoped girl selector: "+selector);
 for(const name of ["kids/index.html","kids/start.html","kids/shell.html"]){
  const s=read(name);
- assert.ok(s.includes('/kids/kids-girl-palette-authority-v1427.css?v=1427'),name+" missing girl palette");
+ assert.ok(s.includes('/kids/kids-girl-palette-authority-v1427.css?v=1428'),name+" missing girl palette");
  assert.ok(s.lastIndexOf('kids-girl-palette-authority-v1427.css')>s.lastIndexOf("</style>"),
   name+" must load girl palette after all inline CSS");
 }
@@ -98,7 +113,7 @@ assert.ok(girlAuthority.includes('background-image:linear-gradient(125deg,var(--
   "Girl explanation CTA must use rose/plum");
 assert.ok(girlAuthority.includes('#view-dua.view')&&girlAuthority.includes('.duahub-detail-hero::after'),
   "Du'a canvas and picture seam must be girl-specific");
-assert.ok(sw.includes('/kids/kids-girl-palette-authority-v1427.css?v=1427')&&
+assert.ok(sw.includes('/kids/kids-girl-palette-authority-v1427.css?v=1428')&&
  sw.includes('url.pathname==="/kids/kids-girl-palette-authority-v1427.css"'),
  "Girl palette must be precached and network-first");
 
