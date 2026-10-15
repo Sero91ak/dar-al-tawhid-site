@@ -100,7 +100,7 @@ for(const p of ["kids/version.json","kids/manifest.webmanifest",
  "cloudflare/test-app-worker.js","_headers"]){
  assert.ok(read(p).includes(id),`Build mismatch ${p}`);
 }
-assert.ok(sw.includes(id)&&sw.includes("dar-al-tawhid-kids-v1410"));
+assert.ok(sw.includes(id)&&sw.includes("dar-al-tawhid-kids-v1418"));
 assert.ok(sw.includes("/kids/global-detail-dock-v1247.css?v=1411"));
 assert.ok(sw.includes("/kids/global-detail-dock-v1247.js?v=1414"));
 assert.ok( heroSeam.includes("KIDS_GLOBAL_HEADER_HERO_SEAM_V1412"),"Global hero seam contract missing");
