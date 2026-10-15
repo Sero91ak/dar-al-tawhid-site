@@ -1,0 +1,55 @@
+/* KIDS_GIRLS_GLOBAL_CANVAS_SEAM_V1416
+ * Fix actual page-layer mismatch, not card art or UI geometry.
+ * v1331 paints .app and .shell with two DIFFERENT gradients; v1340
+ * overwrote only background-color, leaving both background-images.
+ * The sibling .ambient retained navy. The clipped boundaries therefore
+ * showed distinct rectangular colours when girl content scrolled.
+ * One opaque plum colour is used on EVERY root canvas layer.
+ */
+html:has(body .app[data-gender="girl"]),
+html body:has(.app[data-gender="girl"]),
+html body .app[data-gender="girl"],
+html body .app[data-gender="girl"] > .ambient,
+html body .app[data-gender="girl"] > .shell{
+  --kids-girls-canvas:#2b2035;
+  background-color:#2b2035!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+/* Page roots must not reveal the previous navy/gradient behind the
+   intended content. Preserve image-bearing child heroes and all existing
+   card backgrounds, 3D icons, focus states, headers and animations. */
+html body .app[data-gender="girl"] > .shell > :is(
+  #view-today,#view-stories,#view-salaf,#view-quran,#view-dua,#view-parents
+).view.active{
+  background-color:#2b2035!important;
+}
+
+/* Secondary category scroll containers inherit the same underlying paper
+   but keep image stages, illustrations and child surfaces unchanged. */
+html body .app[data-gender="girl"] #view-stories .ps-library-page,
+html body .app[data-gender="girl"] #view-stories .ms-library-page,
+html body .app[data-gender="girl"] #view-stories .sy-library-page,
+html body .app[data-gender="girl"] #view-stories .dl-library-page{
+  background-color:#2b2035!important;
+}
+
+/* Fullscreen stories and reading overlays can be mounted on <body>,
+   beyond .app. Their backdrop must match the profile in all overscroll
+   and iOS safe-area states, without muting the original hero images. */
+html body:has(.app[data-gender="girl"]) :is(
+  .ps-modal,.ms-modal,.sy-modal,.dl-modal,
+  .gh-player,.gh-world,
+  .kids-follow-reader
+){
+  --kids-girls-canvas:#2b2035;
+  background-color:#2b2035!important;
+}
+html body:has(.app[data-gender="girl"]) :is(
+  .ps-scroll,.ms-scroll,.gh-player-scroll,.gh-world-scroll
+){
+  background-color:#2b2035!important;
+}
+/* This file must remain profile-scoped. Never target .app, .shell or
+   .ambient without the data-gender="girl" gate. */
