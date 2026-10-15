@@ -55,8 +55,9 @@ def main():
             "old paid original provenance inconsistent")
     have=set(reg["textClips"])
     paid_have=set(reg["generationClips"])
-    require(not (paid_have & set(paid_missing)),
-            "already-paid original recovery count changed; recalculate the manifest")
+    still_missing_paid=set(paid_missing)-paid_have
+    # The list names the original nine paid receipts; partial recovery is
+    # welcome, and no previously purchased take is ever budgeted twice.
     # Estimate ONLY: historical per-character ratio, not a provider price.
     rows=[x for x in ledger.get("rows",[]) if isinstance(x.get("estimatedCreditsAtObservedRate"),(int,float))
           and isinstance(x.get("text"),str) and x["text"]]
@@ -103,8 +104,10 @@ def main():
     # word segment across ALL ages and questions.
     chosen=set()
     previously_complete={}
+    preexisting_done=set()
     for band in BANDS:
         previously_complete[band]=sum(not item["need"] for item in selected_by_age[band])
+        preexisting_done.update(q["questionId"] for q in selected_by_age[band] if not q["need"])
     completed={band:0 for band in BANDS}
     selected_questions=[]
     consumed_chars=0
@@ -113,7 +116,7 @@ def main():
         min_current=min(previously_complete[b]+completed[b] for b in ("7-8","9-10"))
         for band in ("7-8","9-10"):
             for q in selected_by_age[band]:
-                if q["questionId"] in selected_questions:continue
+                if q["questionId"] in selected_questions or q["questionId"] in preexisting_done:continue
                 additional=[text for text in q["need"] if text not in chosen]
                 cost_chars=sum(len(t) for t in additional)
                 if round((consumed_chars+cost_chars)*rate,4)>BUDGET_CREDITS:
@@ -166,14 +169,15 @@ def main():
         "creditCapTarget":BUDGET_CREDITS,
         "estimatedCreditsPerSourceCharacter":round(rate,6),
         "creditEstimateSource":"Historical V4 ledger estimates; not current provider billing",
-        "currentlyMissingPreviouslyPaidOriginals":9,
+        "currentlyMissingPreviouslyPaidOriginals":len(still_missing_paid),
         "missingAlreadyPaidOriginalsCostedAgain":False,
-        "firstAgeCompleteOnlyAfterRealNineOriginalImports":True,
+        "firstAgeCompleteOnlyAfterRealNineOriginalImports":bool(still_missing_paid),
         "full450CurrentlyMissingDistinctTextFragments":len(all_unpaid),
         "full450CurrentlyMissingDistinctCharacters":total_missing_chars,
         "full450EstimatedMissingTextCreditsAtHistoricalRate":round(total_missing_chars*rate,2),
-        "maximalBudgetSubsetOriginalFragments":len(chosen),
-        "maximalBudgetSubsetUniqueCharacters":consumed_chars,
+        "greedyBudgetSubsetOriginalFragments":len(chosen),
+        "greedyBudgetSubsetUniqueCharacters":consumed_chars,
+        "notProvenGlobalOptimum":True,
         "estimatedSubsetCredits":round(consumed_chars*rate,2),
         "estimatedUnusedCreditHeadroom":round(BUDGET_CREDITS-consumed_chars*rate,2),
         "questionsProjectedFullyPlayableAfterNineAndBudgetSelectionByAge":newly_covered,
