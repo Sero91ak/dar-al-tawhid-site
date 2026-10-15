@@ -93,6 +93,18 @@ for(const part of [".dsl-sheet",".dsl-head.kids-detail-appbar",".dsl-backdrop",
  ".dsl-controls .dsl-play.follow",".dsl-stepnav button",".dsl-status.good",".dsl-status.bad"]){
   assert.ok(girlAuthority.slice(girlAuthority.indexOf(duaGirlGuard)).includes(part),"Missing girl Du'a palette: "+part);
 }
+/* Every Academy category and offline button must use girl's own palette. */
+const academyGirl=read("kids/akademie/girl-profile-authority-v1430.css");
+assert.ok(academyGirl.includes("KIDS_ACADEMY_GIRL_PROFILE_AUTHORITY_V1430"),"Missing full Academy girl authority");
+for(const selector of [".subject-topic.is-locked",".subject-topic.is-current-class",
+  ".subject-topic.is-reviewed",".subject-topic.is-due",".kids-offline-entry > .kids-item-download",
+  ".subject-next",".academy-header.kids-detail-appbar",".stage-tracker"]){
+  assert.ok(academyGirl.includes(selector),"Academy girl theme does not cover "+selector);
+}
+assert.ok(academy.includes('/kids/akademie/girl-profile-authority-v1430.css?v=1430'),
+  "Academy must load girl authority after all page CSS");
+assert.ok(sw.includes('/kids/akademie/girl-profile-authority-v1430.css?v=1430'),
+  "Academy girl's theme must be saved in offline app cache");
 const duaSmartJs=read("kids/dua-smart-learn.js");
 assert.ok(duaSmartJs.includes("document.body.appendChild(root)"),"Du'a reader root changed: revisit profile gate");
 
