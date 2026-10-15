@@ -54,7 +54,8 @@ def main():
     recorded = saved["textClips"]
     missing9 = {item["generationId"]: item for item in recover["items"]}
     require(len(missing9) == 9 and recover["missingOriginalCount"] == 9,
-            "Missing already-paid ElevenLabs Flow export list changed")
+            "Known original ElevenLabs Flow generation receipt list changed")
+    pending_paid = {gid: item for gid, item in missing9.items() if gid not in paid}
 
     future = defaultdict(lambda: {"ages": set(), "usage": [], "fieldKinds": set()})
     recover_dependent = defaultdict(list)
@@ -66,7 +67,7 @@ def main():
                 gid = item["generationId"]
                 if gid in paid:
                     continue
-                require(gid in missing9, "Unknown paid generation must never be regenerated blindly")
+                require(gid in pending_paid, "Unknown paid generation must never be regenerated blindly")
                 recover_dependent[gid].append({"questionId": q["questionId"],
                                                 "ageBand": q["ageBand"], "part": part})
             elif item["mode"] == "compose-from-segments":
@@ -76,7 +77,7 @@ def main():
                 for i, segment in enumerate(segments):
                     if segment in recorded:
                         continue
-                    historic = [id for id, p in missing9.items()
+                    historic = [id for id, p in pending_paid.items()
                                 if p["originalSpokenText"] == segment]
                     if historic:
                         for gid in historic:
@@ -131,7 +132,7 @@ def main():
             "usageCount": len(recover_dependent[gid]),
             "usedBy": recover_dependent[gid],
         }
-        for gid in sorted(missing9)
+        for gid in sorted(pending_paid)
     ]
     require(len(fragments) == len({f["textSha256"] for f in fragments}),
             "Different fragments unexpectedly have the same SHA256 hash")
@@ -149,7 +150,7 @@ def main():
         "allAudioHumanApproved": False,
         "publicReleaseAllowed": False,
         "alreadyRecordedDistinctSpokenSegments": len(recorded),
-        "separatePreviouslyPaidOriginalsToRecover": 9,
+        "separatePreviouslyPaidOriginalsToRecover": len(pending_paid),
         "uniqueUnrecordedSegmentsAfterCrossAgeDedup": len(fragments),
         "unrecordedUnicodeCodepoints": sum(f["unicodeCodepoints"] for f in fragments),
         "unrecordedFragmentAssignmentsBeforeDedup": sum(f["reuseCount"] for f in fragments),
