@@ -47,7 +47,9 @@ def protect_paid_texts(root: Path, registry: dict, ledger: dict) -> set[str]:
 
     original_list = root / "kids/data/quiz-v4-missing9-prepaid-originals.json"
     data = json.loads(original_list.read_text(encoding="utf-8"))
-    if data.get("modelId") != MODEL or data.get("voiceId") != VOICE:
+    # Historical recovery manifest stores the source voice/model on EACH take.
+    # Optional root-level keys are checked if present, but never invented.
+    if (data.get("modelId", MODEL) != MODEL or data.get("voiceId", VOICE) != VOICE):
         raise RuntimeError("Previously paid ElevenLabs Flow speaker/model changed; stop")
     nine = data.get("items")
     if not isinstance(nine, list) or len(nine) != 9:
