@@ -677,3 +677,28 @@ html body.is-notifications-route .notification-prayer.is-on{
   }
 }
 /* Alt: die zentralen Funktionen (Gebet, tägliche Impulse, Jumuʿah) bleiben erhalten. */
+
+
+/* Gebetszeit pro Auswahlfeld: nur aus tatsächlicher App-Berechnung. */
+html body.is-notifications-route .notification-prayer:has(.notification-prayer-clock){
+  min-height:83px!important;
+  gap:3px!important;
+  padding:7px 1px!important;
+}
+html body.is-notifications-route .notification-prayer-clock {
+  display:block;
+  margin-top:1px;
+  font-size:11px;
+  font-weight:650;
+  font-variant-numeric:tabular-nums;
+  line-height:1.18;
+  color:var(--muted,#a6b0bf);
+  white-space:nowrap;
+  letter-spacing:.01em;
+}
+html body.is-notifications-route .notification-prayer.is-on .notification-prayer-clock {
+  color:var(--text,#f4ecda);
+}
+@media(max-width:350px){
+  html body.is-notifications-route .notification-prayer-clock{font-size:10px}
+}
