@@ -1174,3 +1174,13 @@ html body :is(#msModal,#syModal,#dlModal).ms-modal.open .ms-scroll,
 html body #ghPlayer.open .gh-player-scroll {
   overscroll-behavior-y:none!important;
 }
+
+/* KIDS_GLOBAL_TOP_SCROLL_BOUNDARY_V1428 — shared visual scroll-stop.
+ * iOS JS fallback handles native rubber-band at top of any active view;
+ * fixed header/safe-area geometry and the bottom dock remain unchanged.
+ * The Academy iframe uses its own top-edge guard. */
+html body .app > .shell,
+html body .app > .shell > .view.active,
+html body :is(.modal.open,.ps-modal.open,.ms-modal.open,#ghPlayer.open,#salafDetail:not([hidden])){
+  overscroll-behavior-y:none!important;
+}
