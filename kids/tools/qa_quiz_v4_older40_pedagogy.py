@@ -212,7 +212,7 @@ def main():
             for evidence in citations:
                 demand(evidence["url"].startswith((
                     "https://dorar.net/", "https://www.islamweb.net/",
-                    "https://gcp.islamweb.net/")),
+                    "https://islamweb.net/", "https://gcp.islamweb.net/")),
                     "Unexpected evidence provider")
             source_status = ("specific-reference-externally-spotchecked"
                              if citations else "awaiting-individual-source-verification")
