@@ -77,4 +77,29 @@ assert.ok(!navigation.includes("if(!surfaceIds().length&&active)resetMainTop();"
 assert.ok(motion.includes("prefers-reduced-motion:reduce"),"Respect device reduced-motion setting");
 assert.ok(motion.includes("190ms"),"Short GPU opacity entrance duration required");
 
+
+/* KIDS_GIRL_PALETTE_REGRESSION_V1427:
+   Reject unscoped selectors and a future blue, more-specific CTA. */
+const girlAuthority=read("kids/kids-girl-palette-authority-v1427.css");
+const girlCssNoComments=girlAuthority.replace(/\/\*[\s\S]*?\*\//g,"");
+const girlSelectors=[...girlCssNoComments.matchAll(/([^{}]+)\{/g)].map(x=>x[1].trim());
+assert.ok(girlSelectors.length>=14,"Girl palette must cover root, CTA and detail");
+for(const selector of girlSelectors)
+ assert.ok(selector.includes('.app[data-gender="girl"]'),"Unscoped girl selector: "+selector);
+for(const name of ["kids/index.html","kids/start.html","kids/shell.html"]){
+ const s=read(name);
+ assert.ok(s.includes('/kids/kids-girl-palette-authority-v1427.css?v=1427'),name+" missing girl palette");
+ assert.ok(s.lastIndexOf('kids-girl-palette-authority-v1427.css')>s.lastIndexOf("</style>"),
+  name+" must load girl palette after all inline CSS");
+}
+assert.ok(girlAuthority.includes('#view-dua #duaHubDetail.open .duahub-textcard button#duaHubGerman.kids-explain-action'),
+  "Three-ID Du'a explanation selector must defeat V1253 blue");
+assert.ok(girlAuthority.includes('background-image:linear-gradient(125deg,var(--kg1427-action-a),var(--kg1427-action-b))!important'),
+  "Girl explanation CTA must use rose/plum");
+assert.ok(girlAuthority.includes('#view-dua.view')&&girlAuthority.includes('.duahub-detail-hero::after'),
+  "Du'a canvas and picture seam must be girl-specific");
+assert.ok(sw.includes('/kids/kids-girl-palette-authority-v1427.css?v=1427')&&
+ sw.includes('url.pathname==="/kids/kids-girl-palette-authority-v1427.css"'),
+ "Girl palette must be precached and network-first");
+
 console.log("PASS Kids V1421: 5 official tabs, Duʿāʾ fourth, learning center, Salaf Hören, gender heroes, restored avatars, Quran retirement");
