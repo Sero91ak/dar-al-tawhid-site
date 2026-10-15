@@ -31,6 +31,9 @@ for(const [label,selectors] of categories)for(const token of selectors)
  assert.ok(css.includes(token),"Girls CSS missing "+label+" surface "+token);
 assert.ok(css.includes('data-profile="girl"'),"No explicit portal profile scope");
 assert.ok(css.includes('data-gender="girl"'),"No active app profile scope");
+assert.ok(css.includes('background-image:none!important'),"Girls plain shell must explicitly clear inherited navy gradient");
+assert.ok(css.includes('#ghWorld.gh-world')&&css.includes('#syLibraryPage'),"Girl Storyhub and Sahabiyyat navy gradients not audited");
+
 assert.ok(css.includes("#quizModal"),"Quiz girl color authority missing");
 const academy=read("kids/akademie/index.html");
 const academyCss=read("kids/akademie/girls-profile-v2-audit.css").replace(/\/\*[\s\S]*?\*\//g,"");
