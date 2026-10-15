@@ -36,8 +36,12 @@ function set(id,value){
   if(!id||!isEligible(value))return false;
   try{localStorage.setItem(key(id),value);return true}catch(_){return false}
 }
+function clear(id){
+  if(id===null||id===undefined||id==="")return false;
+  try{localStorage.removeItem(key(id));return true}catch(_){return false}
+}
 function resolve(id,fallback,when){
   return groupAt(get(id),when)||(["4–5","6–8","9–10"].includes(fallback)?fallback:"6–8");
 }
-root.DARKidsBirthMonth=Object.freeze({prefix:PREFIX,parse,ageAt,groupAt,isEligible,get,set,resolve});
+root.DARKidsBirthMonth=Object.freeze({prefix:PREFIX,parse,ageAt,groupAt,isEligible,get,set,clear,resolve});
 })(window);
