@@ -1,11 +1,15 @@
 name: KIDS V4 450 Paid Batch 02 (20 original MP3s)
 
 on:
-  pull_request:
-    branches: [main]
-    paths:
-      - 'kids/tools/generate_quiz_v4_450_paid_batch02.py'
-      - '.github/workflows/kids-v4-450-paid-batch02.yml'
+  workflow_dispatch:
+    inputs:
+      authorize_new_credit_spend:
+        description: "Explicit manual permission for NEW paid ElevenLabs synthesis"
+        required: true
+        type: choice
+        options:
+          - "NO"
+          - "YES"
 
 permissions:
   contents: write
@@ -16,7 +20,7 @@ concurrency:
 
 jobs:
   produce-20-originals:
-    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.authorize_new_credit_spend == 'YES' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
