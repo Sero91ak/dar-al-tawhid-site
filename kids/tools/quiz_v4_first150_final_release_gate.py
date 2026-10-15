@@ -79,10 +79,32 @@ def main():
     approvals=load(APPROVALS)
     approved=approvals.get("approvedAudioShaByTextSha") or {}
     if not isinstance(approved,dict):raise RuntimeError("Audio approvals must be a hash-pinned object")
+    issues=approvals.get("reportedIssuesByTextSha") or {}
+    if not isinstance(issues,dict):
+        raise RuntimeError("Audio defect reports must be a text hash object")
+    reviewer=approvals.get("reviewerName")
+    reviewer_recorded=isinstance(reviewer,str) and bool(reviewer.strip())
+    hearing_attested=approvals.get("selfAttestedHumanHearing") is True
+    correct_scope=approvals.get("scope")=="TAWHID_KIDS_FIRST150_AGE4_6_HUMAN_AUDIO_LISTENING"
+    # Any audio approval is strictly a reviewer attestation, never machine QA.
+    # Refuse legacy bare SHA maps without a named human reviewer and explicit
+    # hearing statement. A name is an audit trail, not cryptographic identity proof.
+    evidence_complete=reviewer_recorded and hearing_attested and correct_scope
+    allowed_categories={"pronunciation","content","pauses","sound","other"}
+    for text_sha,issue in issues.items():
+        if not (re.fullmatch(r"[0-9a-f]{64}",str(text_sha))
+                and isinstance(issue,dict)
+                and issue.get("category") in allowed_categories
+                and re.fullmatch(r"[0-9a-f]{64}",str(issue.get("audioSha") or ""))):
+            raise RuntimeError("Malformed SHA-bound auditory defect record")
     summary={"scope":"TAWḤĪD KIDS first 150 (4–6) V4 completion gate",
              "originalQuizQuestions":150,"totalAudioFieldAssignments":600,
              "sourceOriginalsRequired":True,
              "humanListeningApprovalRequired":True,
+             "humanReviewerAttributionProvided":bool(reviewer_recorded),
+             "explicitHumanHearingAttestationProvided":bool(hearing_attested),
+             "auditEvidenceComplete":bool(evidence_complete),
+             "reportedAudioDefects":len(issues),
              "published":False,"publicManifestModified":False,
              "voiceId":VOICE,"modelId":MODEL,
              "humanApprovedQuestionSets":0,
@@ -111,7 +133,8 @@ def main():
             summary["fieldAvailable"][kind]+=1
             spoken_sha=hashlib.sha256(text.encode("utf-8")).hexdigest()
             signed=approved.get(spoken_sha)
-            if not signed or signed!=entry["sha256"]:
+            if (not evidence_complete or spoken_sha in issues or not signed
+                    or signed!=entry["sha256"]):
                 human=False
                 summary["unapprovedByPart"][kind]+=1
                 continue
@@ -125,7 +148,7 @@ def main():
         summary["completeTechnicalQuestionSets"]+=int(technical)
         summary["humanApprovedQuestionSets"]+=int(human)
     summary["technicalErrorCounts"]=dict(missing)
-    ready=(summary["humanApprovedQuestionSets"]==150 and
+    ready=(evidence_complete and not issues and summary["humanApprovedQuestionSets"]==150 and
            summary["completeTechnicalQuestionSets"]==150 and
            len(all_entries)==len({q[k]["text"] for q in rows for k in PARTS}))
     summary["readyForPrivateReleaseCandidate"]=ready
