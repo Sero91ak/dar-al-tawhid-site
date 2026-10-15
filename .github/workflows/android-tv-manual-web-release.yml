@@ -49,6 +49,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Prevent publication without ten original signed-off TV assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 android/tv/tools/check_original_tv_assets.py --require
       - name: Check deliberate release approval and source provenance
         shell: bash
         run: |
