@@ -130,6 +130,7 @@ def safe_audio_url(path):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument("--source", type=Path, default=DEFAULT_INBOX)
+    p.add_argument("--write-report", action="store_true", help="Save verified missing-original inventory, never signed URLs")
     modes = p.add_mutually_exclusive_group()
     modes.add_argument("--audit", action="store_true")
     modes.add_argument("--strict", action="store_true")
@@ -169,6 +170,9 @@ def main():
         "purchaseAuthorized": False,
         "liveReleaseAllowed": False,
     }
+    if args.write_report:
+        output = ROOT / "kids/data/quiz-v4-paid-flow-recovery-status.json"
+        output.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print("KIDS_PREVIOUSLY_PAID_V4_IMPORT_AUDIT " + json.dumps(report, ensure_ascii=False), flush=True)
     if args.strict:
         if missing:
