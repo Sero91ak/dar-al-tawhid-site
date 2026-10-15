@@ -267,3 +267,41 @@ html body:not([data-embedded="true"]) #academyHome #academyHeroImage{
   object-fit:cover!important;
   object-position:center!important;
 }
+
+/* KIDS_HOME_DOCK_ALIGNED_BOUNDS_V1425
+   One horizontal frame for Academy, Hörwelten, Salaf and knowledge cards.
+   Centring relative to #view-today prevents the viewport-minus-shell offset
+   from accumulating on the three .choice buttons. Keep approved imagery. */
+html body .app #view-today > :is(#kidsAcademyPriority,.big-choice-grid,.kids-salaf-feature,#knowledgeCard){
+  box-sizing:border-box!important;
+  position:relative!important;
+  left:50%!important;
+  right:auto!important;
+  transform:translateX(-50%)!important;
+  width:min(calc(100vw - 28px),740px)!important;
+  max-width:min(calc(100vw - 28px),740px)!important;
+  margin-left:0!important;
+  margin-right:0!important;
+}
+html body .app #view-today > .big-choice-grid{
+  min-width:0!important;
+  padding:0!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  justify-items:stretch!important;
+}
+html body .app #view-today > .big-choice-grid > .choice{
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+}
+@media(min-width:781px){
+  html body .app #view-today > :is(#kidsAcademyPriority,.big-choice-grid,.kids-salaf-feature,#knowledgeCard){
+    width:min(100%,740px)!important;
+    max-width:740px!important;
+  }
+}
