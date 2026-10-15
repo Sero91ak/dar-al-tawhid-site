@@ -101,8 +101,8 @@ for(const p of ["kids/version.json","kids/manifest.webmanifest",
  assert.ok(read(p).includes(id),`Build mismatch ${p}`);
 }
 const kidsVersion=JSON.parse(read("kids/version.json"));
-const expectedKidsCache="dar-al-tawhid-kids-"+String(kidsVersion.visualSystem.serviceWorkerCache||"").replace(/^v/,"");
-assert.ok(/^dar-al-tawhid-kids-v\\d+$/.test(expectedKidsCache),"Kids version must define a numeric service-worker cache version");
+const expectedKidsCache="dar-al-tawhid-kids-"+String(kidsVersion.visualSystem.serviceWorkerCache||"");
+assert.ok(/^dar-al-tawhid-kids-v[0-9]+$/.test(expectedKidsCache),"Kids version must define a numeric service-worker cache version");
 assert.ok(sw.includes(id)&&sw.includes(expectedKidsCache),"Kids SW buildId and release cache must match kids/version.json");
 assert.ok(sw.includes("/kids/global-detail-dock-v1247.css?v=1411"));
 assert.ok(sw.includes("/kids/global-detail-dock-v1247.js?v=1414"));
