@@ -318,6 +318,8 @@ function runKidsDesignGuard() {
      !doc.includes('KIDS_GLOBAL_NO_PUBLIC_SOURCE_LINKS_V1414'))
     failed+=fail('KIDS V1414: globale Sperre nicht vollständig aktiviert');
 
+  if (!doc.includes("KIDS_NO_STANDALONE_QURAN_LEARNER_V1418"))
+    failed += fail("KIDS V1418: no-return-to-alphabet/Quran-learner policy missing");
   // KIDS_QURAN_LISTEN_ONLY_V1418: keep archived Alif-Ba and standalone Quran
   // pronunciation lessons inaccessible; preserve the Quran recitation player.
   const quranShells = ["kids/index.html","kids/shell.html","kids/start.html"].map(p =>
