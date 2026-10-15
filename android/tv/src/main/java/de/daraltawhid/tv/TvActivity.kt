@@ -1205,7 +1205,11 @@ class TvActivity : Activity() {
 
     private fun panelBackground(): GradientDrawable =
         GradientDrawable().apply {
-            setColor(panel)
+            // tvOS panels are translucent glass. Keep the old opaque native
+            // surface only while original bitmap assets are not packaged.
+            setColor(if (::kaabaBackdrop.isInitialized &&
+                kaabaBackdrop.availableCount() > 0
+            ) Color.argb(156, 13, 19, 34) else panel)
             cornerRadius = dp(26).toFloat()
             setStroke(dp(1), Color.rgb(86, 70, 43))
         }
