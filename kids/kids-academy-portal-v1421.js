@@ -6,7 +6,7 @@
 (function(){
 "use strict";
 if(window.DARKidsAcademyPortalV1421)return;
-var modal=null,frame=null,trigger=null,ready=false;
+var modal=null,frame=null,trigger=null,ready=false,closingTimer=null;
 function one(s,r){return(r||document).querySelector(s)}
 function create(){
  if(modal)return modal;
@@ -47,6 +47,8 @@ function open(e){
  trigger=(e&&e.currentTarget)||one(".kids-academy-tab");
  var girl=one(".app")?.getAttribute("data-gender")==="girl";
  modal.dataset.gender=girl?"girl":"boy";
+ if(closingTimer){clearTimeout(closingTimer);closingTimer=null}
+ modal.style.pointerEvents="";
  modal.hidden=false;
  modal.classList.add("is-open");
  document.documentElement.classList.add("kids-academy-portal-active");
@@ -62,10 +64,18 @@ function close(){
  if(!modal||modal.hidden)return;
  try{frame.contentWindow.postMessage({type:"DAR_KIDS_ACADEMY_PAUSE_V1421"},location.origin)}catch(_){}
  modal.classList.remove("is-open");
- modal.hidden=true;
- document.documentElement.classList.remove("kids-academy-portal-active");
- document.body.classList.remove("kids-academy-portal-active");
- try{trigger?.focus({preventScroll:true})}catch(_){}
+ modal.style.pointerEvents="none";
+ // Fade out over the current Home, with no location navigation or visible reset.
+ if(closingTimer)clearTimeout(closingTimer);
+ closingTimer=setTimeout(function(){
+   if(modal.classList.contains("is-open"))return;
+   modal.hidden=true;
+   modal.style.pointerEvents="";
+   document.documentElement.classList.remove("kids-academy-portal-active");
+   document.body.classList.remove("kids-academy-portal-active");
+   try{trigger?.focus({preventScroll:true})}catch(_){}
+   closingTimer=null;
+ },230);
 }
 function init(){
  var triggers=document.querySelectorAll("[data-academy-open]");
