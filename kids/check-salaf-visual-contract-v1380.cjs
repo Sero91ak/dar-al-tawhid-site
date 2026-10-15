@@ -144,6 +144,64 @@ assert.ok(sw.includes("/kids/story-follow-reader.js?v=18-salaf1"),"Reader offlin
 assert.ok(sw.includes("/kids/salaf-library-v1.js?v=1414"),"Salaf mode offline precache missing");
 assert.ok(sw.includes("/kids/salaf-master-v2.css?v=4"),"Shared three-mode stylesheet must be precached");
 
+/* KIDS_SALAF_GIRL_PALETTE_V1415: all girl Salaf surfaces and art are
+ * coloured by a final, girls-only stylesheet, not inherited boy blues. */
+const girlCss=read("kids/salaf-girl-palette-v1415.css");
+assert.ok(girlCss.includes("KIDS_SALAF_GIRL_PALETTE_V1415"),"Girl Salaf palette marker missing");
+assert.ok(girlCss.includes('.app[data-gender="girl"]'),"Girl styling must stay profile-scoped");
+for(const target of [
+  "#view-salaf > .salaf-hero::before",
+  "#view-salaf .salaf-topic::after",
+  "#view-salaf .salaf-topic-image",
+  "#view-salaf .salaf-topic-stage::before",
+  "#view-salaf .salaf-topic-stage::after",
+  "#view-salaf .salaf-story-art",
+  "#salafDetail .salaf-detail-cover",
+  "#kidsFollowReader-salaf-library .kfr-sheet",
+  "#kidsFollowReader-salaf-library .kfr-read p.active",
+  "#kidsFollowReader-salaf-library .kfr-progress > span",
+  "> .kids-detail-appbar.kids-portal-appbar"
+]){
+  assert.ok(girlCss.includes(target),"Missing girls-only Salaf tint: "+target);
+}
+assert.ok(girlCss.includes("background-blend-mode:luminosity"),"Cool category art must be recoloured");
+const girlHex=[...girlCss.matchAll(/#[a-fA-F0-9]{6}\b/g)].map(m=>m[0]);
+for(const hex of girlHex){
+  const [r,g,b]=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255);
+  const high=Math.max(r,g,b),low=Math.min(r,g,b),range=high-low;
+  let hue=0;
+  if(range>.001){
+    if(high===r)hue=60*(((g-b)/range+6)%6);
+    else if(high===g)hue=60*((b-r)/range+2);
+    else hue=60*((r-g)/range+4);
+  }
+  const sat=high<.001?0:range/high;
+  assert.ok(!(hue>=175&&hue<=260&&sat>.12),
+    "Blue/teal hex in girls-only Salaf palette: "+hex);
+}
+/* Hex alone is insufficient: translucent gradients often carry petrol RGB. */
+for(const hit of girlCss.matchAll(/rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})/g)){
+  const [r,g,b]=[1,2,3].map(i=>Number(hit[i])/255);
+  const high=Math.max(r,g,b),low=Math.min(r,g,b),range=high-low;
+  let hue=0;
+  if(range>.001){
+    if(high===r)hue=60*(((g-b)/range+6)%6);
+    else if(high===g)hue=60*((b-r)/range+2);
+    else hue=60*((r-g)/range+4);
+  }
+  const sat=high<.001?0:range/high;
+  assert.ok(!(hue>=175&&hue<=260&&sat>.12),
+    "Blue/teal RGB in girls-only Salaf palette: "+hit[0]);
+}
+assert.ok(js.includes("KIDS_SALAF_GIRL_PALETTE_V1415"),"Girl cover inline gradient guard absent");
+assert.ok(js.includes('var coverShade=isGirl?'),"Girl cover must use gender-aware gradient");
+assert.ok(!/girl.*#0a202b/.test(js),"Girl hero must not use blue overlay");
+const girlCssUrl="/kids/salaf-girl-palette-v1415.css?v=1415";
+const heroSeamUrl="/kids/global-hero-seam-v1412.css?v=1413";
+assert.ok(html.includes(girlCssUrl),"Girl Salaf palette not loaded");
+assert.ok(html.indexOf(girlCssUrl)>html.indexOf(heroSeamUrl),"Girl style must load after global seam");
+assert.ok(sw.includes(girlCssUrl),"Girl palette not precached for PWA");
+
 const content=JSON.parse(read("kids/data/salaf-library-v1.json"));
 assert.ok(Array.isArray(content.items));
 assert.equal(content.version,2,"Salaf one-master manifest version must be 2");

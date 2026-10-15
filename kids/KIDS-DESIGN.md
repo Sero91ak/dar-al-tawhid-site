@@ -1,3 +1,36 @@
+## KIDS_SALAF_GIRL_PALETTE_V1415 – verpflichtende Profilfarben
+
+In **Schätze der Salaf** sind Jungen- und Mädchenprofile durchgängig
+getrennt zu gestalten. Dies gilt nicht nur für die acht Einstiegskarten,
+sondern auch für **Themen-Unterseiten, Hero-/Hintergrundbilder,
+Kartenüberlagerungen, Personen-/Offline-Ansichten, Story-Dialog,
+Quellenanzeige, Hör-/Mitlesemodus, Fokus-Reader, feste Kopfzeile,
+Statusleistenbereich und Flächen unter der schwebenden Navigation**.
+
+- **Jungen:** unveränderte Petrol-/Nachtblau-/Goldgestaltung.
+- **Mädchen:** durchgehend Pflaume/Nachtviolett, Rosé und Champagner.
+  Bei Mädchen **keine hardcodierten petrol-, türkis-, cyan- oder
+  blaugrauen Farben**, auch nicht in `rgba()`-Verläufen,
+  Pseudoelementen oder transparent durchscheinenden Elternflächen.
+- Freigegebene Themen-/Geschichtenbilder dürfen nicht ungeprüft ersetzt
+  werden. Die Mädchenansicht tönt dieselben Bildmotive in einer
+  konsistenten Pflaume-/Rosé-Farbwelt, ohne Menschen/Silhouetten
+  hinzuzufügen oder die Motivdateien zu verändern.
+- Ein **einziger durchgängiger Seitenhintergrund** bis unter Dock und
+  Safe-Area. Keine kantigen Hintergründe, abgestuften Rechtecke oder
+  sichtbar durchschimmernden blauen `.app`-/`.shell`-Flächen.
+- Die Korrekturen bleiben auf **Salaf + Mädchenprofil** beschränkt.
+  Jungenprofil, andere Kinderbereiche, 3D-Icons, Headergeometrie,
+  Scroll- und Touch-Handler bleiben unverändert.
+- Nachfolgende Erweiterungen müssen den letzten Stylesheet-Contract
+  `kids/salaf-girl-palette-v1415.css` berücksichtigen und dessen
+  automatische Farben-/Strukturprüfung bestehen.
+  Vor einer Live-Veröffentlichung zusätzlich iPhone/WKWebView,
+  Android und Tablet **sichtprüfen**, insbesondere beim Öffnen,
+  schnellen Scrollen und Zurücknavigieren.
+
+---
+
 ## KIDS_GLOBAL_NO_PUBLIC_SOURCE_LINKS_V1414 – verbindlich für alle Kinderbereiche
 
 - **Keine anklickbaren Originalquellen-/Nachweislinks in TAWḤĪD KIDS**, auch nicht in dynamischen Geschichten, Leseransichten, Quiz, Qurʾān, Duʿāʾ und Akademie.

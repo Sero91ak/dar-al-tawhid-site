@@ -232,8 +232,15 @@
     q("#salafDetailTitle").textContent=i.title;q("#salafDetailPerson").textContent=i.person;
     q("#salafDetailKicker").textContent=soundFor(i)?"HÖRGESCHICHTE":"GESCHICHTE ZUM LESEN";
     q("#salafStoryNavTitle").textContent=i.title;
-    var art=safeAsset((gender()==="girl"&&i.heroGirl)||i.hero||i.image||"")||"/kids/assets/deen/deen-entry.jpg";
-    q("#salafDetailCover").style.backgroundImage="linear-gradient(0deg,#0a202b 1%,rgba(5,22,32,.08) 85%),url('"+art+"')";
+    /* KIDS_SALAF_GIRL_PALETTE_V1415: do not stamp blue inline gradients
+       over the girl profile's approved plum/rose story cover. */
+    var isGirl=gender()==="girl";
+    var art=safeAsset((isGirl&&i.heroGirl)||i.hero||i.image||"")||
+      (isGirl?"/kids/assets/salaf/salaf-library-hero-girls.jpg":"/kids/assets/deen/deen-entry.jpg");
+    var coverShade=isGirl?
+      "linear-gradient(0deg,#2b2035 1%,rgba(49,30,55,.10) 85%)":
+      "linear-gradient(0deg,#0a202b 1%,rgba(5,22,32,.08) 85%)";
+    q("#salafDetailCover").style.backgroundImage=coverShade+",url('"+art+"')";
     q("#salafText").innerHTML=textFor(i).split(/\n{2,}/).filter(Boolean).map(function(s){return "<p>"+esc(s)+"</p>"}).join("");
     q("#salafText").hidden=true;
     var src=i.sources||[];

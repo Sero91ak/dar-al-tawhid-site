@@ -1,0 +1,269 @@
+/* KIDS_SALAF_GIRL_PALETTE_V1415
+ * Complete girls-only Salaf palette contract.
+ * Sources of former petrol-blue bleed: base topic-card overlays, image tint,
+ * story hero's inline gradient, shared focus reader, transparent shell seams.
+ * Preserve boy styling, fixed appbars, floating 3D navigation and imagery.
+ */
+html body .app[data-gender="girl"] #view-salaf{
+  --salaf-color:#2b2035;
+  --salaf-ink:#fff4f9;
+  --salaf-muted:#f0dce8;
+  --salaf-glow:#ffd4e8;
+  --salaf-stroke:rgba(255,210,231,.29);
+  --salaf-soft:rgba(251,189,220,.085);
+  --salaf-cardshade:rgba(37,20,42,.85);
+  --sl-bg:#2b2035;
+  --sl-panel:#392842;
+  --sl-text:#fff4f9;
+  --sl-quiet:#f0dce8;
+  --sl-line:rgba(255,210,231,.29);
+  --sl-accent:#ffd4e8;
+  --sl-accent-ink:#402538;
+  color:var(--salaf-ink)!important;
+  background:#2b2035!important;
+  background-image:none!important;
+}
+
+/* One seamless surface across all layers, including under the bottom dock.
+   No second rectangular blue canvas or animated blue layer may shine through. */
+html:has(body .app[data-gender="girl"] #view-salaf.active),
+html body:has(.app[data-gender="girl"] #view-salaf.active),
+html body .app[data-gender="girl"]:has(#view-salaf.active),
+html body .app[data-gender="girl"]:has(#view-salaf.active) > .shell,
+html body .app[data-gender="girl"] > .shell > #view-salaf.active,
+html body .app[data-gender="girl"] #view-salaf.active > .salaf-wrap{
+  --salaf-shell-surface:#2b2035;
+  background-color:#2b2035!important;
+  background-image:none!important;
+  box-shadow:none;
+}
+html body .app[data-gender="girl"]:has(#view-salaf.active) > .ambient{
+  display:none!important;
+}
+html body .app[data-gender="girl"]:has(#view-salaf.active)::before,
+html body .app[data-gender="girl"]:has(#view-salaf.active)::after,
+html body .app[data-gender="girl"] #view-salaf .salaf-hero-light{
+  display:none!important;
+}
+html body .app[data-gender="girl"] #view-salaf :is(
+  .salaf-pane,.salaf-results,.salaf-topic-thought,.salaf-wrap,.salaf-intro
+){
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+/* Main image: keep approved girl photograph, preserve its luminance but
+   derive hue from aubergine rather than the original cool-blue pixels. */
+html body .app[data-gender="girl"] #view-salaf > .salaf-hero{
+  background:#2b2035!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+html body .app[data-gender="girl"] #view-salaf > .salaf-hero::before{
+  background-color:#78506b!important;
+  background-blend-mode:normal,luminosity!important;
+  filter:contrast(1.03) brightness(.99)!important;
+}
+html body .app[data-gender="girl"] #view-salaf > .salaf-hero::after{
+  background:linear-gradient(180deg,
+    rgba(43,28,49,.08) 0%,rgba(45,27,51,.06) 29%,
+    rgba(49,27,52,.43) 63%,rgba(43,32,53,.92) 86%,
+    #2b2035 100%)!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-hero :is(h2,p){
+  color:#fff4f9!important;
+}
+
+/* Category cards / all eight original images: pigment-neutral instead of
+   faint hue-rotate, which left cyan and slate-blue patches visible. */
+html body .app[data-gender="girl"] #view-salaf .salaf-topic{
+  background-color:#4a3046!important;
+  border-color:rgba(255,210,231,.30)!important;
+  box-shadow:0 9px 28px rgba(32,17,37,.15)!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-topic-image,
+html body .app[data-gender="girl"] #view-salaf .salaf-story-art{
+  background-color:#80516d!important;
+  background-blend-mode:luminosity!important;
+  filter:contrast(1.07) brightness(.97)!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-topic::after{
+  background:linear-gradient(180deg,
+    rgba(48,28,47,.045) 0%,rgba(50,28,48,.14) 38%,
+    rgba(43,24,47,.68) 72%,rgba(37,20,42,.95) 100%)!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-card-count{
+  background:rgba(58,32,55,.86)!important;
+  color:#ffe7ef!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-topic:focus-visible,
+html body .app[data-gender="girl"] #view-salaf .salaf-topic:active{
+  box-shadow:0 0 0 2px #ffd4e8,0 0 16px rgba(244,174,212,.20)!important;
+}
+
+/* Open topic: the image, pseudo-gradients and section background must meet
+   the exact same tone at their lower edge; no blue square below the hero. */
+html body .app[data-gender="girl"] #view-salaf .salaf-topic-stage{
+  background-color:#2b2035!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-topic-stage::before{
+  background-color:#80516d!important;
+  background-blend-mode:luminosity!important;
+  filter:contrast(1.04) brightness(.96)!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-topic-stage::after,
+html body .app[data-gender="girl"] #view-salaf[data-topic-open="true"] .salaf-topic-stage.kids-detail-hero::after{
+  background:linear-gradient(180deg,
+    rgba(45,26,49,.08) 0%,rgba(45,26,49,.03) 30%,
+    rgba(55,31,56,.25) 52%,rgba(46,29,53,.79) 83%,
+    #2b2035 100%)!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-topic-stage-copy :is(h3,p){
+  color:#fff4f9!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-topic-thought,
+html body .app[data-gender="girl"] #view-salaf .salaf-results{
+  border:0!important;
+  background:transparent!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-story,
+html body .app[data-gender="girl"] #view-salaf .salaf-empty,
+html body .app[data-gender="girl"] #view-salaf .salaf-offline-hero{
+  border-color:rgba(255,210,231,.27)!important;
+  background:linear-gradient(145deg,rgba(90,54,82,.38),rgba(65,39,64,.18))!important;
+  box-shadow:none!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-switch{
+  background:rgba(59,34,59,.48)!important;
+  border-color:rgba(255,210,231,.25)!important;
+  box-shadow:none!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-switch button.selected,
+html body .app[data-gender="girl"] #view-salaf #salafOpenParentsOffline{
+  color:#402538!important;
+  background:#ffd4e8!important;
+}
+
+/* Appbar portalled OUT of #view-salaf: needs explicit profile context. */
+html body:has(.app[data-gender="girl"] #view-salaf.active[data-topic-open="true"])
+ > .kids-detail-appbar.kids-portal-appbar{
+  --kids-detail-head-bg:#38253d;
+  --kids-detail-head-line:rgba(255,210,231,.29);
+  background:#38253d!important;
+  background-image:none!important;
+  border-bottom-color:rgba(255,210,231,.29)!important;
+  box-shadow:none!important;
+}
+
+/* Full-screen story is appended to <body>, so inherited #view-salaf
+   variables do not reach it. Set them explicitly, including the scroller. */
+html body:has(.app[data-gender="girl"]) #salafDetail.salaf-detail{
+  --sl-bg:#2b2035;
+  --sl-panel:#392842;
+  --sl-text:#fff4f9;
+  --sl-quiet:#f0dce8;
+  --sl-line:rgba(255,210,231,.29);
+  --sl-accent:#ffd4e8;
+  --sl-accent-ink:#402538;
+  background:#2b2035!important;
+  background-image:none!important;
+  color:#fff4f9!important;
+}
+html body:has(.app[data-gender="girl"]) #salafDetail > .salaf-story-nav.kids-detail-appbar{
+  background:#38253d!important;
+  background-image:none!important;
+  border-bottom-color:rgba(255,210,231,.29)!important;
+}
+html body:has(.app[data-gender="girl"]) #salafDetail > .salaf-detail-scroll,
+html body:has(.app[data-gender="girl"]) #salafDetail .salaf-detail-body{
+  background:#2b2035!important;
+  background-image:none!important;
+}
+html body:has(.app[data-gender="girl"]) #salafDetail .salaf-detail-cover{
+  background-color:#80516d!important;
+  background-blend-mode:normal,luminosity!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+html body:has(.app[data-gender="girl"]) #salafDetail :is(
+  .salaf-ref,.salaf-refs,.salaf-audio-status
+){
+  color:#f0dce8!important;
+  border-color:rgba(255,210,231,.25)!important;
+}
+html body:has(.app[data-gender="girl"]) #salafDetail .salaf-story-modes > button{
+  background:#49334d!important;
+  border-color:rgba(255,210,231,.31)!important;
+  color:#fff4f9!important;
+}
+html body:has(.app[data-gender="girl"]) #salafDetail .salaf-story-modes > button.active{
+  background:#ffd4e8!important;
+  border-color:#ffd4e8!important;
+  color:#402538!important;
+}
+
+/* Shared reading modal is also body-level and otherwise keeps teal defaults.
+   Restrict the tint to Salaf's own reader instance, never other stories. */
+html body:has(.app[data-gender="girl"])
+ #kidsFollowReader-salaf-library.kids-follow-reader{
+  background:rgba(31,18,34,.74)!important;
+  backdrop-filter:blur(8px)!important;
+}
+html body:has(.app[data-gender="girl"])
+ #kidsFollowReader-salaf-library .kfr-sheet{
+  background:#2b2035!important;
+  background-image:linear-gradient(180deg,#473149 0%,#2b2035 100%)!important;
+  border-color:rgba(255,210,231,.27)!important;
+  color:#fff4f9!important;
+}
+html body:has(.app[data-gender="girl"])
+ #kidsFollowReader-salaf-library :is(.kfr-head,.kfr-controls,.kfr-read){
+  background:#392842!important;
+  background-image:none!important;
+  border-color:rgba(255,210,231,.20)!important;
+  color:#fff4f9!important;
+}
+html body:has(.app[data-gender="girl"])
+ #kidsFollowReader-salaf-library .kfr-read{
+  background:#2b2035!important;
+}
+html body:has(.app[data-gender="girl"])
+ #kidsFollowReader-salaf-library .kfr-read p{
+  color:#fff1f7!important;
+}
+html body:has(.app[data-gender="girl"])
+ #kidsFollowReader-salaf-library .kfr-read p.active{
+  background:rgba(242,163,204,.14)!important;
+  border-color:rgba(255,210,231,.31)!important;
+  box-shadow:none!important;
+}
+html body:has(.app[data-gender="girl"])
+ #kidsFollowReader-salaf-library .kfr-read p.past{
+  color:#d6b9ca!important;
+}
+html body:has(.app[data-gender="girl"])
+ #kidsFollowReader-salaf-library :is(.kfr-subtitle,.kfr-help,.kfr-time){
+  color:#ead0df!important;
+}
+html body:has(.app[data-gender="girl"])
+ #kidsFollowReader-salaf-library :is(.kfr-skip,.kfr-restart,.kfr-close){
+  background:#49334d!important;
+  border-color:rgba(255,210,231,.29)!important;
+  color:#fff4f9!important;
+}
+html body:has(.app[data-gender="girl"])
+ #kidsFollowReader-salaf-library .kfr-play{
+  background:#ffd4e8!important;
+  color:#402538!important;
+}
+html body:has(.app[data-gender="girl"])
+ #kidsFollowReader-salaf-library .kfr-progress{
+  background:#4b344d!important;
+}
+html body:has(.app[data-gender="girl"])
+ #kidsFollowReader-salaf-library .kfr-progress > span{
+  background:linear-gradient(90deg,#d991b7,#ffd4e8)!important;
+}
