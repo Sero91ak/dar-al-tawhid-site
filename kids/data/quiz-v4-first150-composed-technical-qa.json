@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "scope": "TAWḤĪD KIDS first 150 4–6 MP3 technical preview QA",
+  "originalPreviewAudioFiles": 213,
+  "filesWithCorrectOriginalSHAAndAudibleWaveform": 213,
+  "failedFiles": 0,
+  "failures": [],
+  "byAge": {
+    "4-6": {
+      "questions": 150,
+      "questionMP3sPresent": 83,
+      "explanationsPresent": 131,
+      "correctMP3sPresent": 0,
+      "retryMP3sPresent": 0,
+      "allFourPresent": 0
+    }
+  },
+  "sourceOriginalsPaidAgain": false,
+  "creditsSpentByCheck": 0,
+  "allCurrentMP3sTechnicallyValid": true,
+  "humanPronunciationApproved": false,
+  "publicReleaseAllowed": false,
+  "source": "kids/data/quiz-v4-first150-composed-preview.json"
+}
