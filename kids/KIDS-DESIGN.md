@@ -1,3 +1,25 @@
+## KIDS_GLOBAL_TOP_SCROLL_BOUNDARY_V1428 — überall feste obere Bildkante
+
+Gilt **global** für die TAWḤĪD KIDS Besucher-App: Startseite/Heute,
+Hören, Eltern, Duʿāʾ, Schätze der Salaf, alle Fach- und
+Geschichten-/Unterrichtsansichten, neue Bild-Hero-Bereiche und modale Leser.
+Beim Herunterziehen am obersten Scrollanschlag darf zwischen Kopfzeile und
+Hero **niemals** eine leere Fläche entstehen (iOS-WKWebView/PWA-Bounce).
+Hochscrollen, normales Lesescrolling, horizontale Gesten und Audio bleiben
+unverändert. Bei Profil- und Themewechseln bleibt die bestehende
+Bild-/Kopfzeilen-Geometrie inklusive Safe Area erhalten. Inhalte müssen am
+Scrollende über der festen unteren Fünfer-Tab-Leiste erreichbar sein.
+
+Gemeinsamer Schutz: `kids/global-detail-dock-v1247.js` und
+`kids/global-detail-dock-v1247.css`. Die technisch eigenständige
+same-origin Akademie im iFrame benötigt ihren korrespondierenden Schutz
+`KIDS_ACADEMY_TOP_EDGE_GUARD_V1427` in `kids/akademie/index.html`.
+Die neue Version wird in allen drei HTML-Einstiegen und im Kids-SW
+(cache-busted `?v=1428`) ausgeliefert. Native iOS-Geräteprüfung bleibt
+für die endgültige Freigabe notwendig.
+
+
+
 ## KIDS_GIRLS_MULTICOLOR_PALETTE_V1417 – vollständige Mädchenfarbwelt, kein Einfarbenfilter
 
 Die Mädchenansicht ist **mehrfarbig**, keine flächige Pflaumen- oder
