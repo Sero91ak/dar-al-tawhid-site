@@ -34,3 +34,5 @@ Verification correction 2026-10-14: server check now expects the latest Salaf JS
 2026-10-15 KIDS TEST V2 GIRLS COLOR GATE: last-loaded girl-only palette for Salaf, Prophets, Sahabah, Sahabiyyat, Storyhub, Quran, Dua, Parents, Quiz, standalone Academy. Strict pre-deploy CSS guard and live-byte verification. Scope kids-creator-staging only. Home 5 prayer times/nav/audio/images protected. Await owner's visual signoff.
 
 2026-10-15 KIDS Creator GIRLS final painted-layer repair: remove old navy gradient-image from plain Sahabiyyat and Storyhub shells, maintain plum/rose girl palette throughout all tested categories including Quiz and Academy; CI static scope+byte delivery + owner visual approval remains required. Public KIDS /kids/ unchanged.
+
+2026-10-15 KIDS GIRLS V2 final verified-asset retry: only creator staging, unique CDN URL girls-profile-v2-final-audit.css?v=20261015-2 after prior live-byte cache mismatch. Keep all predeploy QA, online bytes, no visitor updates.
