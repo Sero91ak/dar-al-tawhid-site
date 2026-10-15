@@ -342,7 +342,7 @@ function runKidsDesignGuard() {
       quranVersion.alifBaLearningSystemEnabled !== false)
     failed += fail("KIDS V1418: lesson/removal feature flags incoherent");
   const offlineSw = fs.readFileSync(path.join(ROOT,"kids/sw.js"),"utf8");
-  if (!offlineSw.includes('dar-al-tawhid-kids-v1418-quran-listen-only'))
+  if (!offlineSw.includes('KIDS_QURAN_AUDIO_ONLY_CACHE_REFRESH_V1418'))
     failed += fail("KIDS V1418: installed offline application may serve stale learner");
   
   // Keep the three aligned Duʿāʾ learning levels and 120 verified mappings
