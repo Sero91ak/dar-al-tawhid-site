@@ -101,12 +101,17 @@ def probe(path,expected=None):
 
 def scan_files(folder,mapping,takes):
     found={}
+    used_sources={}
     for gid,name in mapping.items():
         if gid not in takes:raise RuntimeError("Mapping contains an unknown already-paid generation ID")
         name=Path(name).name
         path=folder/name
         if not path.is_file() or path.suffix.lower()!=".mp3":
             raise RuntimeError("Missing mapped MP3 for "+gid)
+        source=path.resolve()
+        if source in used_sources and used_sources[source]!=gid:
+            raise RuntimeError("A single MP3 cannot represent two separate paid generation IDs")
+        used_sources[source]=gid
         found[gid]=path
     for mp3 in sorted(folder.rglob("*.mp3")):
         if not mp3.is_file():continue
@@ -157,11 +162,25 @@ def run(folder,dry=False):
         if not isinstance(mapped,dict):raise RuntimeError("Flow import map invalid")
     found=scan_files(folder,mapped,takes)
     report={"scope":"KIDS_V4_PREPAID_FLOW_RECOVERY","expectedPriorPaidGenerations":len(takes),
-            "newCreditsSpent":0,"reviewOnly":True,"importedIds":[],
+            "newCreditsSpent":0,"reviewOnly":True,
+            "importedSourceIsUserExportNotProviderSignedAPIProof":True,
+            "humanOriginalSourceAndPronunciationVerificationRequired":True,
+            "importedIds":[],
             "alreadyImportedIds":[],"remainingGenerationIds":[],
             "errors":[],"previewPlaybackAllowed":False,
             "humanListeningApproved":False,"livePublicationAllowed":False}
     if not dry:OUT.mkdir(parents=True,exist_ok=True)
+    # A human-supplied filename/metadata match is NOT cryptographic proof of
+    # origin. Reject reusing identical MP3 bytes for DIFFERENT spoken texts;
+    # preserve a separate human hearing/source verification requirement.
+    sha_to_text={}
+    for gid,path in sorted(found.items()):
+        digest=sha(path)
+        speech=takes[gid]["text"]
+        previous=sha_to_text.get(digest)
+        if previous is not None and previous!=speech:
+            raise RuntimeError("One MP3 byte stream was mapped to conflicting V4 spoken texts")
+        sha_to_text[digest]=speech
     for gid,info in sorted(takes.items()):
         source=found.get(gid)
         earlier=reg["generationClips"].get(gid)
@@ -188,7 +207,9 @@ def run(folder,dry=False):
             if not dest.exists():shutil.copyfile(source,dest)
             clip={"url":"/"+str(dest.relative_to(ROOT)),"sha256":digest,
                 "bytes":dest.stat().st_size,"modelId":MODEL,"voiceId":VOICE,
-                "source":"prepaid-elevenlabs-flow-original-verified-against-paid-receipt",
+                "source":"manual-prepaid-elevenlabs-flow-export-linked-by-generation-id-and-duration",
+                "sourceOriginalityCryptographicallyConfirmed":False,
+                "requiresHumanSourceAndPronunciationVerification":True,
                 "originalGenerationId":gid,"durationSeconds":secs,
                 "textSha256":hashlib.sha256(info["text"].encode()).hexdigest(),
                 "audioListeningApproved":False,"qaApproval":"pending-human-auditory-review",
