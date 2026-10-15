@@ -386,5 +386,12 @@ jobs:
           grep -Fq "$GIRLS_CSS_URL" /tmp/kids-creator-v2-start.html || { echo "::error::Final girls-only CSS is absent on test server"; exit 1; }
           curl -fsSL -H 'Cache-Control: no-cache' "$BASE$GIRLS_CSS_URL" > /tmp/kids-girls-v2-final.css
           cmp -s kids/girls-profile-v2-final-audit.css /tmp/kids-girls-v2-final.css || { echo "::error::Final girls CSS differs from GitHub staging version"; exit 1; }
+          grep -Fq '#quizModal' /tmp/kids-girls-v2-final.css || { echo "::error::Girl Quiz audit not delivered"; exit 1; }
+          curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/akademie/index.html" > /tmp/kids-academy-girls.html
+          ACADEMY_GIRLS_CSS_URL="$(grep -oE '/kids/akademie/girls-profile-v2-audit[.]css[?]v=[a-zA-Z0-9.-]+' kids/akademie/index.html | tail -n 1)"
+          test -n "$ACADEMY_GIRLS_CSS_URL" || { echo "::error::Academy girl final palette reference missing"; exit 1; }
+          grep -Fq "$ACADEMY_GIRLS_CSS_URL" /tmp/kids-academy-girls.html || { echo "::error::Academy girl palette not referenced live"; exit 1; }
+          curl -fsSL -H 'Cache-Control: no-cache' "$BASE$ACADEMY_GIRLS_CSS_URL" > /tmp/kids-academy-girls.css
+          cmp -s kids/akademie/girls-profile-v2-audit.css /tmp/kids-academy-girls.css || { echo "::error::Academy girl's palette CSS differs from GitHub"; exit 1; }
           echo "KIDS girls V2 final palette served and verified byte-for-byte."
           echo "KIDS-only Worker verified. Adult Test and visitor domains unchanged."
