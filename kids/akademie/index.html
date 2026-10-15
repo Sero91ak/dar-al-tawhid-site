@@ -3703,10 +3703,25 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
   },true);
 })();
 </script><link rel="stylesheet" href="/kids/kids-ui-contract-v1420.css?v=1420" data-kids-ui-contract="v1420">
-<style id="kids-academy-edge-scroll-v1423">
-/* Edge-to-edge in the same Kids shell; content passes beneath the single dock.
-   Its last card can always scroll to a stop above that dock. */
+<style id="kids-academy-viewport-and-header-v1424">
+/* V1424: one opaque full-height portal canvas, one five-tab Kids dock.
+   Only the INNER academy views scroll, ending above the measured fixed dock.
+   No fake extra content, no duplicated tabs, no viewport clipping. */
 html{--kids-academy-dock-clearance:128px}
+body[data-kids-portal="true"]{
+ min-height:100dvh!important;
+ background-color:var(--base)!important;
+ overflow:hidden!important;
+}
+body[data-kids-portal="true"] > main.wrap{
+ box-sizing:border-box!important;
+ display:flex!important;flex-direction:column!important;
+ height:calc(100dvh - var(--kids-academy-dock-clearance))!important;
+ min-height:0!important;
+ max-height:calc(100dvh - var(--kids-academy-dock-clearance))!important;
+ padding-block:0!important;
+ overflow:hidden!important;
+}
 body[data-kids-portal="true"] :is(#academyHome,#academySubject,#stageSurface){
  overscroll-behavior-y:contain!important;
  -webkit-overflow-scrolling:touch;
@@ -3715,17 +3730,120 @@ body[data-kids-portal="true"] :is(#academyHome,#academySubject,#stageSurface){
 body[data-kids-portal="true"] :is(#academyHome,#academySubject,#stageSurface)::-webkit-scrollbar{
  display:none!important;width:0!important;height:0!important;
 }
-body[data-kids-portal="true"] #academyHome:not([hidden]),
-body[data-kids-portal="true"] #academySubject:not([hidden]){
- padding-bottom:calc(var(--kids-academy-dock-clearance) + 20px)!important;
- scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 20px)!important;
+body[data-kids-portal="true"] > main.wrap > :is(#academyHome,#academySubject):not([hidden]){
+ flex:1 1 auto!important;
+ min-height:0!important;height:auto!important;
+ overflow-y:auto!important;overflow-x:hidden!important;
+ padding-bottom:16px!important;
+ scroll-padding-block-end:16px!important;
+}
+body[data-kids-portal="true"] #academyHome > .subjects{
+ padding-bottom:0!important;
 }
 body[data-kids-portal="true"][data-academy-view="lesson"] > main.wrap > #lessonMain.lesson-main:not([hidden]){
- padding-bottom:calc(var(--kids-academy-dock-clearance) + 8px)!important;
+ flex:1 1 auto!important;
+ min-height:0!important;
+ padding-bottom:10px!important;
 }
 body[data-kids-portal="true"] #stageSurface{
- scroll-padding-block-end:20px!important;
- padding-bottom:20px!important;
+ overflow-y:auto!important;overflow-x:hidden!important;
+ scroll-padding-block-end:16px!important;
+ padding-bottom:16px!important;
+}
+/* Profile-led header. The main Academy screen has no redundant back/home
+   buttons: the persistent Kids tab bar owns switching between main areas.
+   The Back button remains for lessons and subjects, where it IS needed. */
+body[data-kids-portal="true"] .academy-header.kids-detail-appbar{
+ display:flex!important;
+ flex-direction:row!important;
+ flex-wrap:nowrap!important;
+ justify-content:space-between!important;
+ align-items:center!important;
+ gap:clamp(7px,1.7vw,16px)!important;
+ width:100vw!important;
+ max-width:100vw!important;
+ flex:0 0 auto!important;
+}
+body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .academy-nav-home{
+ display:none!important;
+}
+body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .academy-nav-back{
+ order:0!important;flex:0 0 43px!important;
+}
+body[data-kids-portal="true"]:has(#academyHome:not([hidden])) .academy-header.kids-detail-appbar > .academy-nav-back{
+ display:none!important;
+}
+body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .hero-profile-chip{
+ order:1!important;position:relative!important;
+ flex:0 1 auto!important;
+ margin:0!important;
+ padding:0!important;
+ min-width:0!important;
+ max-width:48vw!important;
+ align-items:center!important;
+ gap:clamp(6px,1.9vw,12px)!important;
+}
+body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .hero-profile-chip img{
+ flex:0 0 clamp(36px,9.6vw,49px)!important;
+ width:clamp(36px,9.6vw,49px)!important;
+ height:clamp(36px,9.6vw,49px)!important;
+ object-fit:contain!important;
+}
+body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy{
+ min-width:0!important;
+ overflow:hidden!important;
+}
+body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .hero-profile-chip .hero-profile-copy :is(strong,small){
+ white-space:nowrap!important;
+ overflow:hidden!important;
+ text-overflow:ellipsis!important;
+ line-height:1.25!important;
+}
+body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .academy-nav-copy{
+ order:2!important;
+ flex:1 1 auto!important;
+ display:flex!important;flex-direction:column!important;
+ align-items:flex-end!important;
+ justify-content:center!important;
+ text-align:right!important;
+ min-width:0!important;
+ padding:0!important;
+ margin:0!important;
+}
+body[data-kids-portal="true"] .academy-header.kids-detail-appbar .academy-nav-title{
+ display:block!important;
+ max-width:100%!important;
+ white-space:nowrap!important;
+ text-overflow:ellipsis!important;
+ overflow:hidden!important;
+ font-size:clamp(16px,4.2vw,22px)!important;
+ line-height:1.15!important;
+}
+body[data-kids-portal="true"] .academy-header.kids-detail-appbar .academy-nav-subtitle{
+ display:block!important;
+ max-width:100%!important;
+ white-space:nowrap!important;
+ text-overflow:ellipsis!important;
+ overflow:hidden!important;
+ font-size:clamp(9px,2.2vw,11px)!important;
+}
+body[data-kids-portal="true"][data-profile="girl"] .academy-header.kids-detail-appbar{
+ background-color:#38263f!important;
+ border-bottom-color:rgba(250,196,228,.3)!important;
+}
+@media(max-width:380px){
+ body[data-kids-portal="true"] .academy-header.kids-detail-appbar{
+  gap:6px!important;
+ }
+ body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .hero-profile-chip{
+  max-width:49vw!important;gap:5px!important;
+ }
+ body[data-kids-portal="true"] .academy-header.kids-detail-appbar > .hero-profile-chip img{
+  flex-basis:34px!important;width:34px!important;height:34px!important;
+ }
+ body[data-kids-portal="true"] .academy-header.kids-detail-appbar .academy-nav-title{
+  font-size:clamp(14px,3.9vw,18px)!important;
+ }
 }
 </style>
 </head>
