@@ -267,13 +267,59 @@
   }
 
   function installNav() {
-    // V1420: Qur'an/Alif-Ba learning retirement must NOT create another tab.
-    // The five official bottom tabs are Heute, Hören, Lernen, Schätze, Eltern.
-    // Du'a remains accessible from the existing Hörwelten entry/card.
+    // V1421 permanent order: Heute | Hören | Lernen | Duʿāʾ | Eltern.
+    // Upgrade cached V1410/V1420 DOMs in-place WITHOUT reloading a child session.
     const nav = q(".bottom-nav");
     if (!nav) return;
-    const legacy = q('.nav-btn[data-target="dua"]', nav);
-    if (legacy) legacy.remove();
+    const today = q('.nav-btn[data-target="today"]', nav);
+    const stories = q('.nav-btn[data-target="stories"]', nav);
+    const parents = q('.nav-btn[data-target="parents"]', nav);
+    if (!today || !stories || !parents) return;
+
+    let learn = q(".kids-academy-tab", nav);
+    if (!learn) {
+      learn = document.createElement("a");
+      learn.className = "nav-btn kids-academy-tab";
+      learn.href = "/kids/akademie/index.html";
+      learn.setAttribute("aria-label", "Lernakademie öffnen");
+      learn.innerHTML = '<span class="ico" aria-hidden="true"></span><span class="lab">Lernen</span>';
+    }
+    const oldSalaf = q('.nav-btn[data-target="salaf"]', nav);
+    const oldDua = q('.nav-btn[data-target="dua"]', nav);
+    let dua = oldSalaf || oldDua;
+    if (!dua) {
+      dua = document.createElement("button");
+      dua.type = "button";
+      dua.className = "nav-btn";
+      dua.innerHTML = '<span class="ico" aria-hidden="true"></span><span class="lab">Duʿāʾ</span>';
+    }
+    dua.dataset.target = "dua";
+    dua.setAttribute("aria-label", "Meine Duʿāʾ");
+    const label = q(".lab", dua);
+    if (label) label.textContent = "Duʿāʾ";
+    const order = [today, stories, learn, dua, parents];
+    [...nav.children].forEach(button => {
+      if (!order.includes(button)) button.remove();
+    });
+    order.forEach(button => nav.appendChild(button));
+    // The original shell attached click handlers before this hub loaded.
+    // Capturing prevents an old cached shell from treating Duʿāʾ as Salaf.
+    if (!dua.dataset.kidsDuaTabBound) {
+      dua.dataset.kidsDuaTabBound = "1421";
+      dua.addEventListener("click", event => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        activate();
+      }, true);
+    }
+    nav.dataset.kidsNavVersion = "1421";
+    if (!q('link[data-kids-navigation-contract="v1421"]')) {
+      const style = document.createElement("link");
+      style.rel = "stylesheet";
+      style.href = "/kids/kids-nav-v1421.css?v=1421";
+      style.dataset.kidsNavigationContract = "v1421";
+      document.head.appendChild(style);
+    }
   }
 
   function activate() {
