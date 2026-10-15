@@ -193,3 +193,21 @@ html body[data-profile="girl"] #lessonMain :is(.lesson-source-block,.lesson-stag
 html body[data-profile="girl"] #lessonMain :is(.tracker-item.is-current b,.choice-button.is-selected,.pill.active){
  border-color:#bd7cae!important;
 }
+
+/* KIDS_ACADEMY_GIRL_SUBJECT_ART_V1430: all four named subjects use
+ * girl-safe illustration overlays, never boy cyan/steel-blue fallback. */
+html body[data-profile="girl"] #academySubject.subject-detail[data-subject="akhlaq"] .subject-cover{
+ --subject-a:#8c507c;--subject-b:#d69ab9;
+}
+html body[data-profile="girl"] #academySubject.subject-detail[data-subject="adab"] .subject-cover{
+ --subject-a:#935f70;--subject-b:#e4ae9c;
+}
+html body[data-profile="girl"] #academySubject.subject-detail[data-subject="fiqh"] .subject-cover{
+ --subject-a:#815176;--subject-b:#cb97b7;
+}
+html body[data-profile="girl"] #academySubject.subject-detail[data-subject="aqidah"] .subject-cover{
+ --subject-a:#784d80;--subject-b:#c699bc;
+}
+html body[data-profile="girl"] #academySubject.subject-detail :is(.subject-back,.subject-kicker,.subject-status){
+ border-color:rgba(246,193,219,.42)!important;
+}
