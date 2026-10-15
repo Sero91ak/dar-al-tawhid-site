@@ -148,6 +148,48 @@ def main():
     batch_character_count=sum(map(len,scheduled_fragments))
     must(batch_character_count<=full_character_count,
          "Greedy planned batch cannot cost more characters than the total")
+    # Separate the first 40 selected questions into two small sequential
+    # human-review steps of exactly ten questions per age group. The second
+    # step never repays for fragments already in the first.
+    milestones=[]
+    remaining_slots=dict.fromkeys(BANDS,0)
+    first_chunk=[]
+    next_chunk=[]
+    for id_ in scheduled:
+        band=wanted[id_]["ageBand"]
+        if remaining_slots[band]<10:
+            first_chunk.append(id_)
+        else:
+            next_chunk.append(id_)
+        remaining_slots[band]+=1
+    must(len(first_chunk)==20 and len(next_chunk)==20 and
+         all(sum(wanted[id_]["ageBand"]==band for id_ in group)==10
+             for band in BANDS for group in (first_chunk,next_chunk)),
+         "Priority phases must contain ten questions per age")
+    previously_planned=set()
+    for batch_id,batch_ids in enumerate((first_chunk,next_chunk),1):
+        unique=set().union(*(wanted[id_]["missing"] for id_ in batch_ids))
+        incremental=unique-previously_planned
+        previously_planned.update(incremental)
+        must(not(incremental & present) and not(incremental & prepaid_texts),
+             "Planned phase includes existing/previously paid original")
+        expected_full={
+            band:sum(not v["blocked"] and
+                     v["missing"]<=previously_planned
+                     for v in wanted.values() if v["ageBand"]==band)
+            for band in BANDS}
+        milestones.append({
+            "stage":batch_id,"newQuestionsPerAgeBand":{band:10 for band in BANDS},
+            "selectedQuestionIds":batch_ids,
+            "newDistinctOriginals":len(incremental),
+            "newOriginalCharacters":sum(map(len,incremental)),
+            "incrementalOriginalTextSha256":[digest(t) for t in sorted(incremental)],
+            "projectedFullFourPartQuestionsIfAllPreviousStageFilesVerified":expected_full,
+            "creditsSpent":0,"automaticallyExecuted":False,
+            "requiresManualApprovalAndHumanListening":True})
+    must(previously_planned==scheduled_fragments and
+         sum(step["newOriginalCharacters"] for step in milestones)==batch_character_count,
+         "Two-phase character accounting must match the full forty-question plan")
     source_list=[
         {"spokenText":t,"sha256":digest(t),"characterCount":len(t),
          "usedInSelectedPriorityQuestions":sum(t in wanted[q]["missing"] for q in scheduled),
@@ -173,6 +215,7 @@ def main():
         "newDistinctTextCountForFirst40":len(scheduled_fragments),
         "newCharactersForFirst40":batch_character_count,
         "priorityQuestionSteps":by_question,
+        "twoIncrementalTenPerAgeReviewStages":milestones,
         "preciseUnrecordedOriginalTextQueue":source_list,
         "estimateIsCharacterCountNotElevenLabsCreditsOrBilling":True,
         "nextAction":"Manual pedagogical and cost approval required before any paid generation"
