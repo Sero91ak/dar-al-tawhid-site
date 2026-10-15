@@ -10,6 +10,7 @@ import hashlib
 import json
 import os
 import re
+from zipfile import ZipFile, ZIP_STORED
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -19,6 +20,7 @@ QA = ROOT / "kids/data/quiz-v4-first150-composed-technical-qa.json"
 STATUS = ROOT / "kids/data/quiz-v4-first150-audio-status.json"
 FLAG = ROOT / "kids/data/quiz-curation-release.json"
 OUTPUT = ROOT / "kids/review-only/quiz-v4-first150-hearing-review.html"
+ARCHIVE = ROOT / "kids/review-only/quiz-v4-first150-hearing-bundle.zip"
 PARTS = ("question", "correct", "retry", "explanation")
 VOICE = "DkU7j9uO4ZEtLD2iRZSH"
 MODEL = "eleven_v4"
@@ -108,10 +110,23 @@ def main():
     html = PAGE.replace("__EMBEDDED_REVIEW_DATA__", embedded_json)
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(html, encoding="utf-8")
+    # One portable package: HTML + ONLY the real MP3s referenced by the
+    # verified listening index. ZIP is an Actions artifact, never committed.
+    source_files = {
+        (ROOT / clip["url"].removeprefix("/")).resolve()
+        for clip in entries.values()
+    }
+    with ZipFile(ARCHIVE, "w", compression=ZIP_STORED) as bundle:
+        bundle.write(OUTPUT, arcname=str(OUTPUT.relative_to(ROOT)))
+        for audio in sorted(source_files):
+            if not audio.is_relative_to((ROOT / "kids/assets/kids-quiz-audio").resolve()):
+                raise RuntimeError("Cannot package audio outside the verified root")
+            bundle.write(audio, arcname=str(audio.relative_to(ROOT)))
     print("KIDS_V4_FIRST150_HEARING_REVIEW_CREATED " + json.dumps({
         "reviewOnly": True, "published": False, "creditsSpent": 0,
         "questions": len(rows), "fullyAvailable": full, "audioEntries": len(checked),
-        "humanApprovalsMadeByGenerator": 0, "output": str(OUTPUT.relative_to(ROOT))
+        "humanApprovalsMadeByGenerator": 0, "audioFilesInPackage": len(source_files),
+        "packageBytes": ARCHIVE.stat().st_size, "output": str(OUTPUT.relative_to(ROOT))
     }), flush=True)
 
 
