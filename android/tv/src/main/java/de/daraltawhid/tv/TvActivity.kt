@@ -635,6 +635,187 @@ class TvActivity : Activity() {
         }
     }
 
+
+    private fun saveQuranPosition() {
+        getPreferences(MODE_PRIVATE).edit()
+            .putInt("quran_surah", quranSurah)
+            .putInt("quran_ayah", quranAyah)
+            .putString("quran_reciter", selectedReciter)
+            .apply()
+    }
+
+    private fun loadQuranChaptersIfNecessary() {
+        if (quranChapterNames.size == 114 || quranChapterLoading) return
+        quranChapterLoading = true
+        fetchJson("https://api.alquran.cloud/v1/surah") { catalog ->
+            quranChapterLoading = false
+            val rows = catalog?.optJSONArray("data")
+            if (rows == null || rows.length() != 114) return@fetchJson
+            val names = Array(114) { i ->
+                val row = rows.optJSONObject(i)
+                val number = row?.optInt("number", 0) ?: 0
+                val title = row?.optString("englishName").orEmpty()
+                if (number != i + 1 || title.isBlank()) return@fetchJson
+                "${i + 1}. $title"
+            }
+            for (i in 0 until 114) {
+                val count = rows.optJSONObject(i)?.optInt("numberOfAyahs", 0) ?: 0
+                if (count !in 1..286) return@fetchJson
+                quranChapterLengths[i + 1] = count
+            }
+            quranChapterNames = names
+            val max = quranChapterLengths[quranSurah] ?: 1
+            if (quranAyah > max) quranAyah = 1
+            if (activeTab == "quran" && !quranAutoPlay) show("quran")
+        }
+    }
+
+    private fun changeQuranPosition(direction: Int, continuePlaying: Boolean = false) {
+        // Surah boundaries cannot be crossed without verified chapter lengths.
+        val count = quranChapterLengths[quranSurah] ?: return
+        if (direction > 0) {
+            if (quranAyah < count) quranAyah += 1
+            else if (quranSurah == 114) {
+                quranSurah = 1
+                quranAyah = 1
+            } else {
+                quranSurah += 1
+                quranAyah = 1
+            }
+        } else if (direction < 0) {
+            if (quranAyah > 1) quranAyah -= 1
+            else if (quranSurah > 1) {
+                val lastAyah = quranChapterLengths[quranSurah - 1] ?: return
+                quranSurah -= 1
+                quranAyah = lastAyah
+            }
+        }
+        quranAutoPlay = continuePlaying
+        saveQuranPosition()
+        show("quran")
+    }
+
+    private fun chooseQuranSurah() {
+        if (quranChapterNames.size != 114) {
+            loadQuranChaptersIfNecessary()
+            return
+        }
+        AlertDialog.Builder(this)
+            .setTitle("Sūrah auswählen")
+            .setItems(quranChapterNames) { _, index ->
+                quranSurah = index + 1
+                quranAyah = 1
+                quranAutoPlay = false
+                saveQuranPosition()
+                show("quran")
+            }
+            .setNegativeButton("Zurück", null)
+            .show()
+    }
+
+    private fun chooseQuranReciter() {
+        AlertDialog.Builder(this)
+            .setTitle("Rezitator auswählen")
+            .setSingleChoiceItems(
+                quranReciters.map { it.second }.toTypedArray(),
+                quranReciters.indexOfFirst { it.first == selectedReciter }
+            ) { dialog, index ->
+                selectedReciter = quranReciters[index].first
+                quranAutoPlay = false
+                saveQuranPosition()
+                dialog.dismiss()
+                show("quran")
+            }
+            .setNegativeButton("Zurück", null)
+            .show()
+    }
+
+    /**
+     * Native reader model ported from original tvOS QuranTabView.swift.
+     * Quran Arabic/German text comes only from the Quran provider, never
+     * from a Tadabbur or Hadith statement.
+     */
+    private fun loadQuranReader() {
+        val generation = renderGeneration
+        loadQuranChaptersIfNecessary()
+        body.addView(label("QURʾĀN · Arabisch · Deutsch · Rezitation", 29f, gold, true))
+        val surahTitle = quranChapterNames.getOrNull(quranSurah - 1) ?: "Sūrah $quranSurah"
+        val verseCount = quranChapterLengths[quranSurah]
+        val countLabel = if (verseCount != null) " von $verseCount" else " · Kapitel wird geladen"
+        body.addView(label("$surahTitle · Āyah $quranAyah$countLabel", 20f, muted, false))
+        val top = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+        top.addView(navButton("Sūrah auswählen") { chooseQuranSurah() },
+            LinearLayout.LayoutParams(0, dp(60), 1f).apply { marginEnd = dp(12) })
+        top.addView(navButton("Rezitator · " +
+            quranReciters.first { it.first == selectedReciter }.second) {
+            chooseQuranReciter()
+        }, LinearLayout.LayoutParams(0, dp(60), 1f))
+        body.addView(top)
+
+        val reference = "$quranSurah:$quranAyah"
+        val arabic = label("Arabischer Qurʾān wird geladen …", 32f, cream, false).apply {
+            gravity = Gravity.CENTER
+            textDirection = View.TEXT_DIRECTION_RTL
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
+            setPadding(dp(20), dp(20), dp(20), dp(10))
+        }
+        val german = label("Deutsche Übersetzung wird geladen …", 24f, cream, false).apply {
+            gravity = Gravity.CENTER
+            textAlignment = View.TEXT_ALIGNMENT_CENTER
+            setPadding(dp(28), dp(10), dp(28), dp(16))
+        }
+        body.addView(arabic)
+        body.addView(german)
+        body.addView(label("Deutsche Übersetzung: Bubenheim & Elyas", 14f, muted, false))
+        val status = label("Āyah $reference · bereit", 16f, muted, false)
+        body.addView(status)
+
+        fun startReaderPlayback() {
+            quranAutoPlay = true
+            playQuranVerse(reference, status, selectedReciter) {
+                if (activeTab == "quran" && quranAutoPlay) changeQuranPosition(1, true)
+            }
+        }
+
+        val controls = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL }
+        controls.addView(navButton("◀ Vorherige Āyah") { changeQuranPosition(-1) },
+            LinearLayout.LayoutParams(0, dp(64), 1f).apply { marginEnd = dp(8) })
+        controls.addView(navButton("▶ Play / Pause") {
+            val player = quranPlayer
+            if (player?.isPlaying == true) {
+                player.pause()
+                quranAutoPlay = false
+                status.text = "Rezitation pausiert"
+            } else if (player != null) {
+                player.start()
+                quranAutoPlay = true
+                status.text = "▶ Rezitation läuft"
+            } else startReaderPlayback()
+        }, LinearLayout.LayoutParams(0, dp(64), 1f).apply { marginEnd = dp(8) })
+        controls.addView(navButton("■ Stopp") {
+            quranAutoPlay = false
+            stopQuranAudio()
+            status.text = "Rezitation gestoppt"
+        }, LinearLayout.LayoutParams(0, dp(64), 1f).apply { marginEnd = dp(8) })
+        controls.addView(navButton("Nächste Āyah ▶") { changeQuranPosition(1) },
+            LinearLayout.LayoutParams(0, dp(64), 1f))
+        body.addView(controls)
+        if (quranAutoPlay && verseCount != null) startReaderPlayback()
+
+        fetchJson("https://api.alquran.cloud/v1/ayah/$reference/quran-uthmani") { json ->
+            if (generation == renderGeneration && activeTab == "quran") {
+                arabic.text = json?.optJSONObject("data")?.optString("text")
+                    ?.takeIf { it.isNotBlank() } ?: "Arabischer Qurʾān-Vers nicht erreichbar."
+            }
+        }
+        fetchJson("https://api.alquran.cloud/v1/ayah/$reference/de.bubenheim") { json ->
+            if (generation == renderGeneration && activeTab == "quran") {
+                german.text = json?.optJSONObject("data")?.optString("text")
+                    ?.takeIf { it.isNotBlank() } ?: "Deutsche Übersetzung nicht erreichbar."
+            }
+        }
+    }
+
     private fun loadHadith() {
         val generation = renderGeneration
         body.addView(label("Ḥadīṯe & Āṯār", 29f, gold, true))
