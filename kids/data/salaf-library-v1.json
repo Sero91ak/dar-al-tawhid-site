@@ -470,5 +470,21 @@
         "reviewScope": "Only the specifically quoted historical account and child-safe contemporary illustrative discussion; no invented historical dialogue."
       }
     }
-  ]
+  ],
+  "launchTarget": {
+    "approvedStoriesPerCategory": 4,
+    "totalStories": 32,
+    "categoryIds": [
+      "rahma",
+      "sidq",
+      "sabr",
+      "ilm",
+      "adab",
+      "family",
+      "hikma",
+      "shukr"
+    ],
+    "progressVisibility": "internal-only",
+    "doNotShowPlaceholdersToChildren": true
+  }
 }
