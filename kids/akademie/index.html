@@ -3822,6 +3822,7 @@ body:not([data-academy-view="lesson"]):not([data-embedded="true"]) > main.wrap >
 "use strict";
 const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
 if(new URLSearchParams(location.search).get("embedded")==="1")document.body.dataset.embedded="true";
+const KIDS_SEAMLESS_PORTAL_V1421=new URLSearchParams(location.search).get("kidsPortal")==="1"&&window.parent!==window;
 const VERSION="academy-v4"; /* Bestehende Lernstände bleiben erhalten */
 const INTERVALS_BY_AGE={"4-5":[1,3,7,14,30],"6-8":[1,3,7,14,30,60],"9-10":[1,3,7,14,30,60,90]};
 const exercises={
@@ -4450,9 +4451,15 @@ function updateAcademyAppbar(){
  $("#academyNavSubtitle").textContent=lessonOpen?SUBJECTS[activeSubject()].title+" · Dein Unterricht":categoryOpen?"Meine Unterrichtsfächer":"DĀR AL TAWḤĪD · KIDS";
  $("#academyNavBack").setAttribute("aria-label",lessonOpen||categoryOpen?"Zur Lernakademie":"Zur Kids-App");
 }
+function returnToKids(){
+ stopAll();
+ if(KIDS_SEAMLESS_PORTAL_V1421){
+   window.parent.postMessage({type:"DAR_KIDS_ACADEMY_CLOSE_V1421"},location.origin);
+ }else location.assign("/kids/");
+}
 function academyNavBack(){
  if(!$("#lessonMain").hidden||!$("#academySubject").hidden){home();return}
- location.assign("/kids/");
+ returnToKids();
 }
 function home(){stopAll();hideCategory();hideLesson();renderHome();updateAcademyAppbar();scrollAcademyViewTop()}
 function begin(requested){
@@ -4828,7 +4835,12 @@ all("[data-open-lesson]").forEach(b=>b.onclick=()=>begin(b.dataset.openLesson||"
 all("[data-open-category]").forEach(b=>b.onclick=()=>openCategory(b.dataset.openCategory));
 $("#subjectBack").onclick=home;$("#subjectStart").onclick=()=>begin($("#subjectStart").dataset.lessonId);
  $("#academyNavBack").onclick=academyNavBack;
- $("#academyNavHome").onclick=()=>location.assign("/kids/");
+ $("#academyNavHome").onclick=returnToKids;
+window.addEventListener("message",event=>{
+ if(!KIDS_SEAMLESS_PORTAL_V1421||event.origin!==location.origin||event.source!==window.parent)return;
+ if(event.data?.type==="DAR_KIDS_ACADEMY_PAUSE_V1421")stopAll();
+ if(event.data?.type==="DAR_KIDS_ACADEMY_RESUME_V1421")syncProfile(true);
+});
 $("#backToAcademy").onclick=home;$("#backAfterLesson").onclick=home;
 $("#previousStep").onclick=()=>{
  if((step===1||step===2)&&focusPages[step]>0){focusMove(step,-1);return;}
