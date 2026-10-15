@@ -17,6 +17,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1272",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/akademie/index.html",
+  "/kids/akademie/girl-profile-authority-v1430.css?v=1430",
   "/kids/assets/kids-salah-v1272/hero-day.png?v=1277",
   "/kids/assets/kids-salah-v1272/fajr.png?v=1277",
   "/kids/assets/kids-salah-v1272/dhuhr.png?v=1277",
@@ -306,7 +307,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/kids-story-action-contrast-v1345.css?v=1346",
   "/kids/offline-library-v1.js?v=1",
   "/kids/offline-library-v1.css?v=1",
-  "/kids/salaf-library-v1.js?v=1414-girl1415",
+  "/kids/salaf-library-v1.js?v=1430",
   "/kids/kids-listening-polish-v1350.css?v=1350",
   "/kids/kids-listening-polish-v1350.js?v=1350",
   "/kids/assets/kids-icons/library-real-v12.png?v=cut1",
@@ -474,6 +475,10 @@ self.addEventListener("fetch",function(event){
   if(url.pathname==="/kids/kids-nav-v1421.css"||url.pathname==="/kids/assets/kids-icons/learning-book-3d-v1422.png"){
     event.respondWith(networkFirst(request));
     return;
+  }
+  /* V1430 Girl Academy authority: online fresh, installed PWA offline fallback. */
+  if(url.pathname==="/kids/akademie/girl-profile-authority-v1430.css"){
+    event.respondWith(networkFirst(request));return;
   }
   /* Last girl-only palette is network first, with an offline cache fallback. */
   if(url.pathname==="/kids/kids-girl-palette-authority-v1427.css"){
