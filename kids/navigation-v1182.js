@@ -23,8 +23,8 @@
     style.id="kids-navigation-v1182-style";
     style.textContent=[
       "html[data-kids-age] body .shell{",
-      "  padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important;",
-      "  scroll-padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important;",
+      "  padding-bottom:var(--kids-dock-scroll-clearance,calc(92px + env(safe-area-inset-bottom,0px)))!important;",
+      "  scroll-padding-bottom:var(--kids-dock-scroll-clearance,calc(92px + env(safe-area-inset-bottom,0px)))!important;",
       "}",
       "html[data-kids-age] body .shell > .view{",
       "  min-height:0!important;",
@@ -44,7 +44,7 @@
       "  min-height:0!important;",
       "  padding-bottom:0!important;",
       "  margin-bottom:0!important;",
-      "  scroll-padding-bottom:calc(92px + env(safe-area-inset-bottom,0px))!important;",
+      "  scroll-padding-bottom:var(--kids-dock-scroll-clearance,calc(92px + env(safe-area-inset-bottom,0px)))!important;",
       "}",
       "html[data-kids-age] body .shell > .view.active > :last-child{margin-bottom:0!important;}",
       "/* CONTENT_FLOW_V1237 — one global bottom reserve only; no artificial 100dvh tails inside active Kids content. */",
@@ -79,8 +79,8 @@
       "  padding-bottom:calc(26px + env(safe-area-inset-bottom,0px))!important;",
       "  scroll-padding-bottom:calc(26px + env(safe-area-inset-bottom,0px))!important;",
       "}",
-      "@media(max-width:380px){html[data-kids-age] body .shell{padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))!important;}}",
-      "@media(min-width:700px){html[data-kids-age] body .shell{padding-bottom:calc(98px + env(safe-area-inset-bottom,0px))!important;}}",
+      "@media(max-width:380px){html[data-kids-age] body .shell{padding-bottom:var(--kids-dock-scroll-clearance,calc(88px + env(safe-area-inset-bottom,0px)))!important;}}",
+      "@media(min-width:700px){html[data-kids-age] body .shell{padding-bottom:var(--kids-dock-scroll-clearance,calc(98px + env(safe-area-inset-bottom,0px)))!important;}}",
       "/* HOME_STABILITY_V1236 — one invariant hero geometry on first load and every return. */",
       "#view-today .hero{",
       "  min-height:var(--kids-home-hero-height-fixed,clamp(485px,122vw,535px))!important;",
@@ -102,6 +102,28 @@
       "}"
     ].join("\n");
     (document.head||root).appendChild(style);
+  }
+
+  /* Shared measured end-of-scroll reserve for ALL main tabs and screen sizes.
+     Reserve the dock's actual TOP edge, not a guessed 88/92/98px constant. */
+  function measureDockScrollClearance(){
+    var nav=q(".app > .bottom-nav")||q(".bottom-nav");
+    if(!nav)return;
+    var rect=nav.getBoundingClientRect();
+    if(!rect.height)return;
+    var viewport=window.innerHeight||document.documentElement.clientHeight||0;
+    root.style.setProperty("--kids-dock-scroll-clearance",Math.max(92,Math.ceil(viewport-rect.top+12))+"px");
+  }
+  function watchDockScrollClearance(){
+    measureDockScrollClearance();
+    var nav=q(".app > .bottom-nav")||q(".bottom-nav");
+    if(nav&&typeof ResizeObserver==="function"){
+      var observer=new ResizeObserver(function(){requestAnimationFrame(measureDockScrollClearance)});
+      observer.observe(nav);
+    }
+    window.addEventListener("resize",measureDockScrollClearance,{passive:true});
+    window.addEventListener("orientationchange",function(){setTimeout(measureDockScrollClearance,250)},{passive:true});
+    if(window.visualViewport)window.visualViewport.addEventListener("resize",measureDockScrollClearance,{passive:true});
   }
 
   function activeTab(){
@@ -477,6 +499,7 @@
     /* Capture the approved first-entry geometry BEFORE the late lock is injected. */
     lockHomeGeometry(true);
     installLateLayout();
+    watchDockScrollClearance();
     if(shell){
       try{shell.scrollTo({top:0,left:0,behavior:"auto"})}catch(_){shell.scrollTop=0}
     }
