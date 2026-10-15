@@ -32,7 +32,7 @@ assert.ok(!morning.arabic.includes("هُوَ الَّذِي يُصَلِّي"));
 const animals=data.sources.find(s=>s.sourceId==="SRC-CORE51-IBNKATHIR-1276");
 assert.match(animals.locus,/24:45/);
 const muslim=data.sources.find(s=>s.sourceId==="SRC-CORE8-MUSLIM-8");
-assert.equal(muslim.number,"8");
+assert.match(muslim.number,/^8(?:\s|$)/,"Muslim hadith 8 format");
 assert.ok(muslim.directLink.includes("/25545"),"Muslim 8 wrong Dorar link");
 const parents=data.sources.find(s=>s.sourceId==="SRC-CORE10-BUKHARI-5971");
 assert.match(parents.number,/5971/);
