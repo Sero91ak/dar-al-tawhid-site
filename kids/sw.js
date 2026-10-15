@@ -1,12 +1,15 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1410";
+const CACHE_NAME="dar-al-tawhid-kids-v1421";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
-const KIDS_BUILD_ID="kids-shell-v201-dua-v4-1306-listen-scroll-v18-salaf-visible-v1410";
+const KIDS_BUILD_ID="kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
-  "/kids/kids-ui-contract-v1420.css?v=1420",
+  "/kids/kids-nav-v1421.css?v=1421",
+  "/kids/assets/kids-icons/learning-book-premium-v1421.svg?v=1421",
+  "/kids/assets/kids-icons/dua-real-v12.png?v=1421",
+  "/kids/kids-ui-contract-v1420.css?v=1421",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1272",
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/akademie/index.html",
@@ -146,7 +149,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-term-audio/shayatin-basic-61c60d5712f6.m4a",
   "/kids/assets/kids-term-audio/shayatin-deep-88325399338e.m4a",
     // KIDS_TERM_AUDIO_PRECACHE_END
-  "/kids/dua-hub-v1219.js?v=1420",
+  "/kids/dua-hub-v1219.js?v=1421",
   "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
   "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
   "/kids/assets/dua-premium/hero-v1222.jpg?v=1233",
@@ -276,7 +279,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
   "/kids/index.html",
-  "/kids/dua-hub-v1219.js?v=1420",
+  "/kids/dua-hub-v1219.js?v=1421",
   "/kids/dua-hub-v1219.css?v=1278",
   "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
   "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
@@ -453,6 +456,10 @@ self.addEventListener("fetch",function(event){
   // audio lookup even while its 900-question catalogue and manifest are fresh.
   // Keep the Kids Duʿāʾ V4 voice player fresh after an installed PWA update.
   /* Keep profile avatars, parent profiles and Duʿāʾ hub current after learning-system retirement. */
+  if(url.pathname==="/kids/kids-nav-v1421.css"||url.pathname==="/kids/assets/kids-icons/learning-book-premium-v1421.svg"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
   if(url.pathname==="/kids/kids-ui-contract-v1420.css"){
     event.respondWith(networkFirst(request));
     return;
