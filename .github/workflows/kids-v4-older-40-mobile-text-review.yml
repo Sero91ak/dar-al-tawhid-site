@@ -68,7 +68,12 @@ jobs:
           j=json.loads(p.read_text(encoding="utf-8"))
           assert j["quizQuestionsInspected"] == 40
           assert j["sourceReferencesExternallySpotchecked"] == 6
-          assert j["questionsWithEditorialFlags"] == 12
+          assert j["questionsWithEditorialFlags"] == 18
+          assert j["remainingQuestionReferencesNeedingIndividualVerification"] == 34
+          assert len(j["findings"]) == len({q["questionId"] for q in j["findings"]}) == 40
+          assert all(q["reviewerApprovedNewSpeechGeneration"] is False for q in j["findings"])
+          assert all(q["scientificSourceVerificationComplete"] is False for q in j["findings"])
+          assert all(q["oldVoiceClipsUnaffected"] is True for q in j["findings"])
           assert j["allSourcesVerified"] is False
           assert j["humanSourceSignoffGranted"] is False
           assert j["elevenLabsCreditsSpent"] == 0
