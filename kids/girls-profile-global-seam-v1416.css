@@ -1,0 +1,24 @@
+/* KIDS_GIRLS_GLOBAL_CANVAS_SEAM_V1416
+ * Fix actual page-layer mismatch, not card art or UI geometry.
+ * v1331 paints .app and .shell with two DIFFERENT gradients; v1340
+ * overwrote only background-color, leaving both background-images.
+ * The sibling .ambient retained navy. The clipped boundaries therefore
+ * showed distinct rectangular colours when girl content scrolled.
+ * One opaque plum colour is used on EVERY root canvas layer.
+ */
+html:has(body .app[data-gender="girl"]),
+html body:has(.app[data-gender="girl"]),
+html body .app[data-gender="girl"],
+html body .app[data-gender="girl"] > .ambient,
+html body .app[data-gender="girl"] > .shell{
+  --kids-girls-canvas:#2b2035;
+  background-color:#2b2035!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+
+/* Only root paper is unified. All pages and body-level readers keep their
+   own approved secondary shades, gradients, rose/champagne highlights,
+   full-colour illustrations, cards and modal overlays untouched. */
+/* This file must remain profile-scoped. Never target .app, .shell or
+   .ambient without the data-gender="girl" gate. */

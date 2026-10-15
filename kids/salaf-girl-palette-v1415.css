@@ -2,6 +2,7 @@
  * Complete girls-only Salaf palette contract.
  * Sources of former petrol-blue bleed: base topic-card overlays, image tint,
  * story hero's inline gradient, shared focus reader, transparent shell seams.
+ * Preserve all original multicoloured image detail (no luminosity-only filter).
  * Preserve boy styling, fixed appbars, floating 3D navigation and imagery.
  */
 html body .app[data-gender="girl"] #view-salaf{
@@ -53,8 +54,8 @@ html body .app[data-gender="girl"] #view-salaf :is(
   box-shadow:none!important;
 }
 
-/* Main image: keep approved girl photograph, preserve its luminance but
-   derive hue from aubergine rather than the original cool-blue pixels. */
+/* Main hero retains the approved full-colour girl scene. Plum overlays
+   cover the cold UI gradient, NOT the original colour channels. */
 html body .app[data-gender="girl"] #view-salaf > .salaf-hero{
   background:#2b2035!important;
   border:0!important;
@@ -62,8 +63,8 @@ html body .app[data-gender="girl"] #view-salaf > .salaf-hero{
 }
 html body .app[data-gender="girl"] #view-salaf > .salaf-hero::before{
   background-color:#78506b!important;
-  background-blend-mode:normal,luminosity!important;
-  filter:contrast(1.03) brightness(.99)!important;
+  background-blend-mode:normal!important;
+  filter:saturate(.94) contrast(1.02) brightness(.99)!important;
 }
 html body .app[data-gender="girl"] #view-salaf > .salaf-hero::after{
   background:linear-gradient(180deg,
@@ -75,8 +76,8 @@ html body .app[data-gender="girl"] #view-salaf .salaf-hero :is(h2,p){
   color:#fff4f9!important;
 }
 
-/* Category cards / all eight original images: pigment-neutral instead of
-   faint hue-rotate, which left cyan and slate-blue patches visible. */
+/* Category cards keep all original green, pink, gold and other image colours.
+   Only the OVERLAY and the surrounding UI carry the girl-profile tints. */
 html body .app[data-gender="girl"] #view-salaf .salaf-topic{
   background-color:#4a3046!important;
   border-color:rgba(255,210,231,.30)!important;
@@ -85,8 +86,8 @@ html body .app[data-gender="girl"] #view-salaf .salaf-topic{
 html body .app[data-gender="girl"] #view-salaf .salaf-topic-image,
 html body .app[data-gender="girl"] #view-salaf .salaf-story-art{
   background-color:#80516d!important;
-  background-blend-mode:luminosity!important;
-  filter:contrast(1.07) brightness(.97)!important;
+  background-blend-mode:normal!important;
+  filter:saturate(.93) contrast(1.04) brightness(.99)!important;
 }
 html body .app[data-gender="girl"] #view-salaf .salaf-topic::after{
   background:linear-gradient(180deg,
@@ -111,8 +112,8 @@ html body .app[data-gender="girl"] #view-salaf .salaf-topic-stage{
 }
 html body .app[data-gender="girl"] #view-salaf .salaf-topic-stage::before{
   background-color:#80516d!important;
-  background-blend-mode:luminosity!important;
-  filter:contrast(1.04) brightness(.96)!important;
+  background-blend-mode:normal!important;
+  filter:saturate(.94) contrast(1.02) brightness(.98)!important;
 }
 html body .app[data-gender="girl"] #view-salaf .salaf-topic-stage::after,
 html body .app[data-gender="girl"] #view-salaf[data-topic-open="true"] .salaf-topic-stage.kids-detail-hero::after{
@@ -184,7 +185,7 @@ html body:has(.app[data-gender="girl"]) #salafDetail .salaf-detail-body{
 }
 html body:has(.app[data-gender="girl"]) #salafDetail .salaf-detail-cover{
   background-color:#80516d!important;
-  background-blend-mode:normal,luminosity!important;
+  background-blend-mode:normal!important;
   border:0!important;
   box-shadow:none!important;
 }
@@ -266,4 +267,28 @@ html body:has(.app[data-gender="girl"])
 html body:has(.app[data-gender="girl"])
  #kidsFollowReader-salaf-library .kfr-progress > span{
   background:linear-gradient(90deg,#d991b7,#ffd4e8)!important;
+}
+
+/* KIDS_GIRLS_MULTICOLOR_PALETTE_V1417:
+   Unique approved accent roles are intentionally *not* collapsed to plum.
+   These tokens serve future Salaf cards without affecting the boy profile. */
+html body .app[data-gender="girl"] #view-salaf{
+  --sl-rose:#f5b9d1;
+  --sl-blush:#ffd4e8;
+  --sl-lavender:#b79ad9;
+  --sl-champagne:#efd19b;
+  --sl-cream:#fff4f9;
+  --sl-mauve:#92617d;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-story-copy small,
+html body .app[data-gender="girl"] #view-salaf .salaf-topic-kicker{
+  color:var(--sl-champagne)!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-topic-copy em,
+html body .app[data-gender="girl"] #view-salaf .salaf-story-copy em{
+  color:var(--sl-rose)!important;
+}
+html body .app[data-gender="girl"] #view-salaf .salaf-hero .salaf-eyebrow,
+html body .app[data-gender="girl"] #view-salaf .salaf-topic-stage-copy .salaf-eyebrow{
+  color:#ffe2e8!important;
 }

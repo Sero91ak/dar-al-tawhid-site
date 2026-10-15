@@ -164,7 +164,11 @@ for(const target of [
 ]){
   assert.ok(girlCss.includes(target),"Missing girls-only Salaf tint: "+target);
 }
-assert.ok(girlCss.includes("background-blend-mode:luminosity"),"Cool category art must be recoloured");
+assert.ok(!girlCss.includes("background-blend-mode:luminosity"),"Do not monochrome girls\u0027 original full-colour story art");
+assert.ok(girlCss.includes("KIDS_GIRLS_MULTICOLOR_PALETTE_V1417"),"Girls\u0027 full accent palette missing");
+for(const token of ["--sl-rose:","--sl-blush:","--sl-lavender:","--sl-champagne:","--sl-cream:","--sl-mauve:"]){
+  assert.ok(girlCss.includes(token),"Missing girls\u0027 profile colour: "+token);
+}
 const girlHex=[...girlCss.matchAll(/#[a-fA-F0-9]{6}\b/g)].map(m=>m[0]);
 for(const hex of girlHex){
   const [r,g,b]=[1,3,5].map(i=>parseInt(hex.slice(i,i+2),16)/255);
@@ -196,7 +200,26 @@ for(const hit of girlCss.matchAll(/rgba?\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d
 assert.ok(js.includes("KIDS_SALAF_GIRL_PALETTE_V1415"),"Girl cover inline gradient guard absent");
 assert.ok(js.includes('var coverShade=isGirl?'),"Girl cover must use gender-aware gradient");
 assert.ok(!/girl.*#0a202b/.test(js),"Girl hero must not use blue overlay");
-const girlCssUrl="/kids/salaf-girl-palette-v1415.css?v=1415";
+/* KIDS_GIRLS_GLOBAL_CANVAS_SEAM_V1416: root rectangles must not return. */
+const girlCanvas=read("kids/girls-profile-global-seam-v1416.css");
+for(const needle of [
+ "KIDS_GIRLS_GLOBAL_CANVAS_SEAM_V1416",
+ 'html body .app[data-gender="girl"]',
+ 'html body .app[data-gender="girl"] > .ambient',
+ 'html body .app[data-gender="girl"] > .shell',
+ 'background-image:none!important',
+ 'background-color:#2b2035!important'
+]){
+  assert.ok(girlCanvas.includes(needle),"Girl root canvas missing: "+needle);
+}
+assert.ok(!girlCanvas.includes('.app[data-gender="boy"]'),"Girl root seam must not touch boy mode");
+assert.ok(!girlCanvas.includes('.kids-follow-reader\n'),"Keep reader overlays translucent");
+assert.ok(html.includes("/kids/girls-profile-global-seam-v1416.css?v=1416"),"Girl root CSS must load in HTML");
+assert.ok(sw.includes("/kids/girls-profile-global-seam-v1416.css?v=1416"),"Girl root CSS must be offline-cached");
+assert.ok(html.indexOf("/kids/girls-profile-global-seam-v1416.css")>
+  html.indexOf("/kids/salaf-girl-palette-v1415.css"),"Girl root canvas override must load last");
+
+const girlCssUrl="/kids/salaf-girl-palette-v1415.css?v=1417";
 const heroSeamUrl="/kids/global-hero-seam-v1412.css?v=1413";
 assert.ok(html.includes(girlCssUrl),"Girl Salaf palette not loaded");
 assert.ok(html.indexOf(girlCssUrl)>html.indexOf(heroSeamUrl),"Girl style must load after global seam");
