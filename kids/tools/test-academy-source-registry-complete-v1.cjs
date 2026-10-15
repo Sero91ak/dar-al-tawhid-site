@@ -37,7 +37,7 @@ for(const s of activeLegacy){
  assert.ok(s.checkedOn===null,"legacy unverified source falsely dates itself as checked: "+s.sourceId);
  assert.match(s.authenticityNote||"",/not independently|not confirmed|not independently confirmed/i,"legacy source must disclose incomplete verification");
 }
-assert.equal(activeLegacy.length,26,"26 historical inherited reports still await independent verification");
+assert.ok(activeLegacy.length<=26,"Regression: already verified historical sources were downgraded to unverified");
 const verified=["SRC-CORE57-LEGACY-HADITH-6116","SRC-CORE58-LEGACY-HADITH-164","SRC-CORE59-LEGACY-HADITH-4474","SRC-CORE60-LEGACY-HADITH-7410","SRC-CORE61-LEGACY-HADITH-2723","SRC-CORE62-LEGACY-HADITH-6026","SRC-CORE63-LEGACY-HADITH-2320","SRC-CORE64-LEGACY-HADITH-8"];
 for(const sid of verified){
  const s=registry.sources.find(x=>x.sourceId===sid);
