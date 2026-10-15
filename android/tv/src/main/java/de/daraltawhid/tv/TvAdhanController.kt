@@ -120,10 +120,20 @@ internal class TvAdhanController(
         if (loadedCity != getCity().first) return
         val now = LocalDateTime.now(TvAdhanSchedule.germanZone)
         if (timesLocalDate != now.toLocalDate()) return
-        val handledKey = prefs.getString("dar.tv.adhan.last-trigger", "").orEmpty()
-        val due = TvAdhanSchedule.due(now, prayerTimes, setOf(handledKey)) ?: return
-        // Persist before starting playback to prevent a duplicate when activity restarts.
-        prefs.edit().putString("dar.tv.adhan.last-trigger", due.triggerKey).apply()
+        val stamp = now.toLocalDate().toString()
+        val oldStamp = prefs.getString("dar.tv.adhan.handled-date", null)
+        val handled = if (oldStamp == stamp) {
+            prefs.getString("dar.tv.adhan.handled-list", "").orEmpty()
+                .split(',').filter { it.isNotBlank() }.toSet()
+        } else emptySet()
+        val due = TvAdhanSchedule.due(now, prayerTimes, handled) ?: return
+        // If the catalog failed, do not consume a due prayer without playback.
+        if (chosen(due.key == "fajr") == null) return
+        // Save before playing to stop double Adhan on Activity restart.
+        prefs.edit().putString("dar.tv.adhan.handled-date", stamp)
+            .putString("dar.tv.adhan.handled-list",
+                (handled + due.triggerKey).joinToString(","))
+            .apply()
         play(due.title, due.time, due.key == "fajr")
     }
 
@@ -159,7 +169,7 @@ internal class TvAdhanController(
             if (enabled) "Adhān: EIN · Ausschalten" else "Adhān: AUS · Einschalten",
             "Adhān-Stimme auswählen",
             "Faǧr-Adhān auswählen",
-            "Adhān jetzt testen",
+            "Adhān anhören",
             "Schließen"
         )
         val dialog = AlertDialog.Builder(activity)
@@ -169,7 +179,7 @@ internal class TvAdhanController(
                     0 -> { enabled = !enabled; if (!enabled) finishPlayback(); showSettings() }
                     1 -> pickRecording(false)
                     2 -> pickRecording(true)
-                    3 -> if (enabled) play("Test-Adhān", "--:--", false) else showSettings()
+                    3 -> if (enabled) play("Adhān-Hörprobe", "--:--", false) else showSettings()
                     else -> Unit
                 }
             }.create()
