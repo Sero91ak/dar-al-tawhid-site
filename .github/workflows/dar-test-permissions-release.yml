@@ -38,7 +38,7 @@ jobs:
           grep -Fq 'body.is-home-route #darTodayEditorialV1' test/assets/dar-today-editorial-v1.css
           git diff HEAD --name-only > /tmp/dar-test-permissions-changed.txt
           cat /tmp/dar-test-permissions-changed.txt
-          if grep -Ev '^test/assets/(dar-setup-hub\.(js|css)|notifications-refined-v1\.css|dar-home-library-v1194\.js|dar-today-editorial-v1\.css)
+          if grep -Ev '^test/assets/(dar-setup-hub\.(js|css)|notifications-refined-v1\.css|dar-home-library-v1194\.js|dar-today-editorial-v1\.css)$' /tmp/dar-test-permissions-changed.txt | grep .; then
             echo "::error::Ausschließlich Test-Hub-JS/CSS dürfen geändert werden."
             exit 1
           fi
