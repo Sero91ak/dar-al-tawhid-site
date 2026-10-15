@@ -1,0 +1,90 @@
+{
+  "schemaVersion": 1,
+  "scope": "TAWḤĪD KIDS eleven_v4 nine already-paid original MP3 exports",
+  "flowId": "n2ovmGko2iTlNWTAEqHk",
+  "elevenLabsExistingAssetsUrl": "https://elevenlabs.io/app/flows/n2ovmGko2iTlNWTAEqHk?mode=switchWorkspace&oobCode=9e52ab872d7b4775b36e50d2e07d17be",
+  "requiredGenerationCount": 9,
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "sourceMetadataFile": "kids/data/quiz-v4-batch-001-020-review.json",
+  "destinationImportTool": "kids/tools/import_quiz_v4_prepaid_flow_originals.py --zip ORIGINAL_NINE_MP3.zip",
+  "fileNameContract": "Each original MP3 must be named EXACT_GENERATION_ID.mp3 inside the ZIP.",
+  "mustReusePreviouslyPaidWithoutRegeneration": true,
+  "ttsAdditionalCreditsAuthorized": 0,
+  "audioListeningApproved": false,
+  "liveReleaseAllowed": false,
+  "originals": [
+    {
+      "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+      "originalQuestionId": "kids-quiz-001",
+      "part": "correct",
+      "flowNodeId": "1Dj5Sfvlnu5hmMj3MVMB",
+      "exactOriginalSpokenText": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
+      "previouslyPaid": true
+    },
+    {
+      "generationId": "DX5z8FWaCS4FDx3KrloO",
+      "originalQuestionId": "kids-quiz-001",
+      "part": "retry",
+      "flowNodeId": "BYhxL31AuutMyClfZvv2",
+      "exactOriginalSpokenText": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
+      "previouslyPaid": true
+    },
+    {
+      "generationId": "AToalNGbxiRe1zfOnDG3",
+      "originalQuestionId": "kids-quiz-001",
+      "part": "explanation",
+      "flowNodeId": "6VMkmftaGpXjlZ1SdtdC",
+      "exactOriginalSpokenText": "Das merken wir uns: Wir dienen Allah allein.",
+      "previouslyPaid": true
+    },
+    {
+      "generationId": "FGX65uXKWBnjULDxg3X1",
+      "originalQuestionId": "kids-quiz-002",
+      "part": "question-opening",
+      "flowNodeId": "T9Ta4XeLTcYQQtxJaBQl",
+      "exactOriginalSpokenText": "Schau, was du schon alles weißt.",
+      "previouslyPaid": true
+    },
+    {
+      "generationId": "KIgCxJO3RDxhsIFJSYUB",
+      "originalQuestionId": "kids-quiz-002",
+      "part": "question-core",
+      "flowNodeId": "iWDoEZzA4MXWOa8AQKM6",
+      "exactOriginalSpokenText": "Ist Allah Einer?",
+      "previouslyPaid": true
+    },
+    {
+      "generationId": "UUmC2fDiXaV5W1IQSumA",
+      "originalQuestionId": "kids-quiz-002",
+      "part": "question-guidance",
+      "flowNodeId": "rJTBDC543aqmg11iVNn8",
+      "exactOriginalSpokenText": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+      "previouslyPaid": true
+    },
+    {
+      "generationId": "aoKJuahenrKHfUE5OD9j",
+      "originalQuestionId": "kids-quiz-002",
+      "part": "correct",
+      "flowNodeId": "onwsi8RzUiMnQdQFKVDQ",
+      "exactOriginalSpokenText": "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Du lernst immer mehr!",
+      "previouslyPaid": true
+    },
+    {
+      "generationId": "2xy9ZLej1wPTrnvAr9p7",
+      "originalQuestionId": "kids-quiz-002",
+      "part": "retry",
+      "flowNodeId": "M4657KPimouNP1UpZmlb",
+      "exactOriginalSpokenText": "Du lernst mit jedem Versuch. Hör noch einmal genau hin!",
+      "previouslyPaid": true
+    },
+    {
+      "generationId": "1UAwmEQ77D4BmA9DttHZ",
+      "originalQuestionId": "kids-quiz-002",
+      "part": "explanation",
+      "flowNodeId": "K9HbIyvEIkOAcxq6UV7q",
+      "exactOriginalSpokenText": "Das merken wir uns: Sūrat al-Iḫlāṣ lehrt: Allah ist Einer.",
+      "previouslyPaid": true
+    }
+  ]
+}
