@@ -430,3 +430,119 @@ html.dar-ios-native-app body.is-settings-route #dar-setup-hub[data-dar-setup]{
 }
 /* Settings-Weiterleitung statt verdoppelter Benachrichtigungsoberfläche. */
 html body.is-settings-route .settings-one-page > #dar-setup-hub + .notification-center-page{display:none!important}
+
+
+/* DAR_TEST_NOTIFICATION_COMPACT_V2
+   Bedienelemente bleiben original. Original #bottomNav wird nicht ersetzt. */
+html body.is-notifications-route .notification-center-page {
+  padding-top:0!important;
+  padding-bottom:calc(90px + env(safe-area-inset-bottom,0px))!important;
+}
+html body.is-notifications-route .notification-hero {
+  padding:0!important;
+  margin:0 0 5px!important;
+}
+html body.is-notifications-route .notification-hero__top {
+  padding:4px 0 12px!important;
+  grid-template-columns:36px minmax(0,1fr) auto!important;
+  gap:11px!important;
+}
+html body.is-notifications-route .notification-hero__icon {
+  width:36px!important;height:36px!important;
+}
+html body.is-notifications-route .notification-hero__icon svg{width:17px!important;height:17px!important}
+html body.is-notifications-route .notification-hero h2 {
+  font-size:clamp(18px,4.7vw,22px)!important;
+  line-height:1.22!important;
+}
+html body.is-notifications-route .notification-hero p{font-size:11px!important;margin:3px 0 0!important}
+html body.is-notifications-route .notification-hero__count{
+  width:47px!important;height:42px!important;
+  border-radius:11px!important;
+}
+html body.is-notifications-route .notification-hero__count b{font-size:18px!important}
+html body.is-notifications-route #notificationHealthBox{
+  min-height:50px!important;padding:8px 11px!important;
+  margin:10px 0 6px!important;gap:7px!important;
+  border-radius:9px!important;
+}
+html body.is-notifications-route #notificationHealthText{font-size:11px!important;line-height:1.42!important}
+html body.is-notifications-route #notificationReenableBtn{
+  min-height:38px!important;font-size:11px!important;padding:8px 12px!important;
+}
+html body.is-notifications-route .notification-section{
+  padding:14px 0 12px!important;
+}
+html body.is-notifications-route .notification-section__head {
+  margin:0 0 10px!important;
+}
+html body.is-notifications-route .notification-section__kicker{
+  font-size:9px!important;margin-bottom:3px!important;
+}
+html body.is-notifications-route .notification-section__head h3{
+  font-size:clamp(20px,4.9vw,25px)!important;
+  line-height:1.12!important;
+}
+html body.is-notifications-route .notification-section__head p{
+  font-size:11px!important;line-height:1.35!important;margin:3px 0 0!important;
+}
+html body.is-notifications-route .notification-prayer-grid {
+  gap:3px!important;margin:8px 0 6px!important;
+}
+html body.is-notifications-route .notification-prayer {
+  min-height:70px!important;gap:4px!important;
+  padding:7px 0!important;border-radius:10px!important;
+}
+html body.is-notifications-route .notification-prayer-index{
+  width:34px!important;height:34px!important;font-size:19px!important;
+}
+html body.is-notifications-route .notification-prayer b{font-size:10px!important}
+html body.is-notifications-route .notification-location{
+  min-height:53px!important;padding:6px 1px!important;
+}
+html body.is-notifications-route .notification-row{
+  min-height:55px!important;padding:8px 1px!important;
+}
+html body.is-notifications-route .notification-row__glyph{
+  width:30px!important;height:30px!important;flex-basis:30px!important;
+  font-size:16px!important;
+}
+html body.is-notifications-route .notification-row strong{
+  font-size:12px!important;
+}
+html body.is-notifications-route .notification-row small{font-size:10px!important}
+html body.is-notifications-route .notification-time input,
+html body.is-notifications-route .notification-time select{
+  min-height:37px!important;height:37px!important;
+}
+html body.is-notifications-route .notification-toggle {
+  width:45px!important;min-width:45px!important;
+  height:27px!important;min-height:27px!important;
+}
+html body.is-notifications-route .notification-toggle:after{
+  width:19px!important;height:19px!important;
+}
+html body.is-notifications-route .notification-toggle.is-on:after{
+  transform:translateX(18px)!important;
+}
+html body.is-notifications-route .notification-note{
+  font-size:10px!important;line-height:1.5!important;
+  margin:10px 0 0!important;
+}
+html body.is-notifications-route .notification-saved{margin:13px 0 0!important;font-size:10px!important}
+html body.is-notifications-route .notification-center-page .notification-action{
+  min-height:39px!important;
+}
+html body.is-notifications-route .notification-center-page :is(.notification-action,.notification-toggle,.notification-prayer){
+  -webkit-user-select:none!important;user-select:none!important;
+  -webkit-touch-callout:none!important;
+}
+@media(max-width:390px){
+  html body.is-notifications-route .notification-prayer-index{
+    width:32px!important;height:32px!important;
+  }
+  html body.is-notifications-route .notification-prayer b{font-size:9.3px!important}
+  html body.is-notifications-route .notification-time input{width:74px!important;min-width:74px!important}
+}
+/* Der echte Tab-Bereich (#bottomNav) bleibt vollständig unter Kontrolle der App.
+   Nur der Seiteninhalt reserviert am Ende den notwendigen Platz. */
