@@ -29,12 +29,7 @@ jobs:
           RELEASE_SHA="${GITHUB_SHA}"
           git fetch --no-tags origin main
           git checkout --detach origin/main
-          git checkout "$RELEASE_SHA" --
-            test/assets/dar-setup-hub.js
-            test/assets/dar-setup-hub.css
-            test/assets/notifications-refined-v1.css
-            test/assets/dar-home-library-v1194.js
-            test/assets/dar-today-editorial-v1.css
+          git checkout "$RELEASE_SHA" -- test/assets/dar-setup-hub.js test/assets/dar-setup-hub.css test/assets/notifications-refined-v1.css test/assets/dar-home-library-v1194.js test/assets/dar-today-editorial-v1.css
           node --check test/assets/dar-setup-hub.js
           node --check test/assets/dar-home-library-v1194.js
           grep -Fq 'DAR_TEST_NOTIFICATIONS_REFINED_V1' test/assets/dar-setup-hub.js
