@@ -1,0 +1,195 @@
+/* KIDS_ACADEMY_GIRL_PROFILE_AUTHORITY_V1430
+ * Last stylesheet in standalone/embedded Academy. Gender-specific:
+ * re-skin all cards, states, text and offline actions; never change layout,
+ * ages, source wording, book artwork, interaction or dock geometry.
+ * Original boy palette remains untouched.
+ */
+html body[data-profile="girl"]{
+ --base:#291d34;
+ --surface:#3d2b49;
+ --accent:#c79ac0;
+ --gold:#f3cf91;
+ --text:#fff3f2;
+ --muted:#ead0df;
+ --border:rgba(245,199,219,.35);
+ --kids-ink:#573957;
+ --kids-heading:#573957;
+ --kids-primary:#995c8b;
+ --kids-highlight:#f6d3b0;
+ background-color:#291d34!important;
+ background-image:linear-gradient(180deg,#302239 0%,#291d34 100%)!important;
+}
+html body[data-profile="girl"] > main.wrap,
+html body[data-profile="girl"] :is(#academyHome,#academySubject,#lessonMain,#stageSurface,.subject-roadmap,.subject-topic-grid){
+ --academy-girl-paper:#fff2f8;
+ --academy-girl-rose:#ad729e;
+ --academy-girl-plum:#513653;
+ --academy-girl-ink:#503650;
+ --academy-girl-muted:#e7cadd;
+ --academy-girl-stroke:rgba(210,161,194,.48);
+}
+html body[data-profile="girl"] .academy-header.kids-detail-appbar{
+ background-color:#38283f!important;
+ background-image:linear-gradient(180deg,#48334a,#34253e)!important;
+ border-bottom-color:rgba(246,199,222,.35)!important;
+ color:#fff0f1!important;
+}
+html body[data-profile="girl"] .academy-header.kids-detail-appbar .academy-nav-back{
+ background-color:#563c56!important;
+ background-image:linear-gradient(145deg,#674764,#49344d)!important;
+ border-color:rgba(244,195,224,.42)!important;
+ color:#ffe1ad!important;
+}
+html body[data-profile="girl"] .academy-header :is(.academy-nav-title,.academy-nav-subtitle,.hero-profile-copy strong,.hero-profile-copy small){
+ color:#fff1f0!important;
+}
+html body[data-profile="girl"] .academy-home > .journey{
+ background-color:#44314e!important;
+ background-image:linear-gradient(135deg,#4a3150,#3c2a46)!important;
+ border-color:rgba(243,191,218,.35)!important;
+}
+html body[data-profile="girl"] #academyHome :is(.journey-status,#reviewNotice,#courseStatus,#journeyDetail){
+ color:#f9dbea!important;
+}
+html body[data-profile="girl"] #academyHome .journey-bar{
+ background:rgba(246,195,216,.17)!important;
+}
+html body[data-profile="girl"] #academyHome .journey-bar span{
+ background:linear-gradient(90deg,#d29ac7,#f2ce99)!important;
+}
+html body[data-profile="girl"] #academyHome .category-card{
+ --subject-bg:#fff0f6;
+ --subject-stroke:#e6b9d0;
+ --subject-pill:#96547e;
+ border-color:rgba(237,187,216,.58)!important;
+}
+html body[data-profile="girl"] #academyHome .category-card:nth-child(2){
+ --subject-bg:#fff0e7;--subject-stroke:#edc6aa;--subject-pill:#ae6e73;
+}
+html body[data-profile="girl"] #academyHome .category-card:nth-child(3){
+ --subject-bg:#f8eaf5;--subject-stroke:#dab9d9;--subject-pill:#9d6099;
+}
+html body[data-profile="girl"] #academyHome .category-card:nth-child(4){
+ --subject-bg:#f2e7f0;--subject-stroke:#d7b4d7;--subject-pill:#88527d;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-cover{
+ background-color:#36263f!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-cover-copy{
+ color:#fff6ed!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-next{
+ background-color:#fff2f8!important;
+ background-image:none!important;
+ border-color:#e7bdd7!important;
+ color:#563a58!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-next :is(h2,p,.subject-small){
+ color:#624263!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-next .subject-start{
+ background-color:#efb7d0!important;
+ background-image:linear-gradient(115deg,#f9d9b1,#ecb2d1)!important;
+ color:#4c3151!important;
+ border-color:#efbfd4!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-roadmap h2{
+ color:#fff0db!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail :is(.academy-school-hint,.subject-review-note,#subjectSchoolHint){
+ color:#e5c3da!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-roadmap.subject-review{
+ border-top-color:rgba(246,197,219,.28)!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-topic-grid button.subject-topic,
+html body[data-profile="girl"] #academySubject.subject-detail .subject-topic-grid .subject-topic:is(button):disabled{
+ background-color:#f3e2ee!important;
+ background-image:none!important;
+ border:1px solid #dcb6d1!important;
+ color:#523d58!important;
+ box-shadow:0 7px 19px rgba(37,17,41,.08)!important;
+ opacity:1!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-topic-grid button.subject-topic:nth-child(3n + 2){
+ background-color:#f8ece5!important;
+ border-color:#e6c5bb!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-topic-grid button.subject-topic:nth-child(3n){
+ background-color:#f0e3ef!important;
+ border-color:#d9bcd9!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-topic-grid button.subject-topic.is-locked,
+html body[data-profile="girl"] #academySubject.subject-detail .subject-topic-grid button.subject-topic.is-locked:disabled{
+ background-color:#e7dae5!important;
+ border-color:#d4bfd1!important;
+ color:#5c4b62!important;
+ opacity:1!important;
+ box-shadow:none!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-topic-grid button.subject-topic.is-current-class{
+ background-color:#fff0f7!important;
+ background-image:none!important;
+ border:2px solid #b16e9c!important;
+ box-shadow:0 8px 19px rgba(127,72,113,.13)!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-topic-grid button.subject-topic.is-reviewed{
+ background-color:#f2e3ee!important;
+ border-color:#c18fb4!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-topic-grid button.subject-topic.is-due{
+ background-color:#fff0e5!important;
+ border-color:#ddb19b!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-topic-grid .subject-topic strong{
+ color:#4b3552!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-topic-grid .subject-topic :is(span,.topic-lock-meta,.topic-review-meta){
+ color:#765875!important;
+}
+html body[data-profile="girl"] #academySubject.subject-detail .subject-topic-grid button.subject-topic.is-current-class :is(span,.topic-review-meta){
+ color:#8b426f!important;
+}
+html body[data-profile="girl"] #academySubject .kids-offline-entry > .kids-item-download,
+html body[data-profile="girl"] #academySubject .kids-offline-inline > .kids-item-download{
+ background-color:#62425d!important;
+ background-image:linear-gradient(125deg,#79516e,#523a58)!important;
+ color:#ffe9c9!important;
+ border-color:#c999b3!important;
+}
+html body[data-profile="girl"] #academySubject .kids-item-download[data-offline-state="ready"]{
+ background-color:#634667!important;
+ background-image:linear-gradient(125deg,#806187,#634667)!important;
+ color:#f8eafa!important;
+ border-color:#d1b0d6!important;
+}
+html body[data-profile="girl"] #academySubject .kids-item-download[data-offline-state="error"]{
+ background-color:#6d475b!important;
+ background-image:none!important;
+ color:#ffe9ed!important;
+ border-color:#e5a5b9!important;
+}
+html body[data-profile="girl"] #academySubject .kids-download-hint{
+ color:#ecd1de!important;
+}
+html body[data-profile="girl"][data-academy-view="lesson"] #lessonMain .stage-tracker{
+ background-color:#442f51!important;
+ background-image:linear-gradient(120deg,#533758,#382940)!important;
+ border-color:rgba(242,196,218,.39)!important;
+}
+html body[data-profile="girl"] #lessonMain .stage-tracker .tracker-item:not(.is-current){
+ color:#f6dce9!important;
+}
+html body[data-profile="girl"] #lessonMain .stage-tracker .tracker-item:disabled :is(b,span){
+ color:#e9d0e4!important;
+ border-color:rgba(241,192,224,.43)!important;
+}
+html body[data-profile="girl"] #lessonMain :is(.academy-audio-feedback,.academy-serhat-status,.academy-term-source){
+ color:#eccfe0!important;
+}
+html body[data-profile="girl"] #lessonMain :is(.lesson-source-block,.lesson-stage,.academy-term-coach){
+ border-color:rgba(217,174,203,.46)!important;
+}
+html body[data-profile="girl"] #lessonMain :is(.tracker-item.is-current b,.choice-button.is-selected,.pill.active){
+ border-color:#bd7cae!important;
+}
