@@ -215,8 +215,8 @@
 
   function buildView() {
     if (q("#view-dua")) return q("#view-dua");
-    const quran = q("#view-quran");
-    if (!quran) return null;
+    const parents = q("#view-parents");
+    if (!parents) return null;
     const view = document.createElement("section");
     view.id = "view-dua";
     view.className = "view duahub-view";
@@ -262,7 +262,7 @@
           '</article>' +
         '</div>' +
       '</section>';
-    quran.parentNode.insertBefore(view, quran);
+    parents.parentNode.insertBefore(view, parents);
     return view;
   }
 
@@ -932,7 +932,7 @@
   }
 
   function init() {
-    if (!q(".app") || !q(".bottom-nav") || !q("#view-quran")) {
+    if (!q(".app") || !q(".bottom-nav") || !q("#view-today") || !q("#view-parents")) {
       setTimeout(init, 120);
       return;
     }

@@ -145,7 +145,7 @@ const CORE_PRECACHE=[
   "/kids/assets/kids-term-audio/shayatin-basic-61c60d5712f6.m4a",
   "/kids/assets/kids-term-audio/shayatin-deep-88325399338e.m4a",
     // KIDS_TERM_AUDIO_PRECACHE_END
-  "/kids/dua-hub-v1219.js?v=1318",
+  "/kids/dua-hub-v1219.js?v=1419",
   "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
   "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
   "/kids/assets/dua-premium/hero-v1222.jpg?v=1233",
@@ -275,6 +275,10 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/start",
   "/kids/start.html",
   "/kids/index.html",
+  "/kids/dua-hub-v1219.js?v=1419",
+  "/kids/dua-hub-v1219.css?v=1278",
+  "/kids/assets/profile-avatars/boy-kufi-v1235.svg",
+  "/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg",
   "/kids/quiz-v4-bridge.js?v=20261013-academy1",
   "/kids/akademie/index.html",
   "/kids/prayer-stage-v1261.css?v=1320",
@@ -447,6 +451,11 @@ self.addEventListener("fetch",function(event){
   // Network-first prevents an installed Kids PWA from retaining an obsolete
   // audio lookup even while its 900-question catalogue and manifest are fresh.
   // Keep the Kids Duʿāʾ V4 voice player fresh after an installed PWA update.
+  /* Keep profile avatars, parent profiles and Duʿāʾ hub current after learning-system retirement. */
+  if(url.pathname==="/kids/dua-hub-v1219.js"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
   if(url.pathname==="/kids/dua-smart-learn.js"){
     event.respondWith(networkFirst(request));
     return;

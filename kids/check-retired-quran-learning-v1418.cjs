@@ -37,4 +37,17 @@ for(const m of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)){
  new vm.Script(m[1],{filename:"kids/index.html:inline-script-"+(++inline)});
 }
 assert.ok(inline>0,"Expected to parse inline Kids runtime");
+// The Duʿāʾ hub owns the Home boy/girl avatar, account avatars and its own tab.
+// It must NEVER wait for the removed Qurʾān section to initialize.
+const duaHub=read("kids/dua-hub-v1219.js");
+assert.ok(!/q\(["\x27]#view-quran["\x27]\)/.test(duaHub),"Duʿāʾ/avatar startup still depends on retired Qurʾān view");
+assert.ok(duaHub.includes('const parents = q("#view-parents");') &&
+  duaHub.includes("parents.parentNode.insertBefore(view, parents);"),"Duʿāʾ tab not anchored before Eltern");
+assert.ok(duaHub.includes("enhanceHeaderProfile();") && duaHub.includes("enhanceProfileCard();") &&
+  duaHub.includes("enhanceJoinChoices();"),"Boy/girl profile UI must remain initialized");
+assert.ok(duaHub.includes("boy-kufi-v1235.svg") && duaHub.includes("girl-hijab-pink-v1235.svg"),"Profile avatar sources must be preserved");
+assert.ok(html.includes('class="profile-dot"') && html.includes('id="profileList"'),"Home/parent profile mount points missing");
+assert.ok(html.includes('/kids/dua-hub-v1219.js?v=1419'),"New profile runtime must bust installed PWA cache");
+assert.ok(sw.includes('"/kids/dua-hub-v1219.js?v=1419"') &&
+  sw.includes('url.pathname==="/kids/dua-hub-v1219.js"'),"New avatar runtime must work online/offline");
 console.log("PASS KIDS V1418: Quran/Alif-Ba learning UI retired, legacy routes blocked, other modules preserved; parsed "+inline+" inline scripts");
