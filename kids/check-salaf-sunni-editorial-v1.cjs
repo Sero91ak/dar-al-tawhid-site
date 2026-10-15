@@ -81,6 +81,35 @@ for(const item of data.items.filter(x=>x.verification==="approved"&&x.editorialR
   approvedPersons.add(item.person);
 }
 const missingForTarget=[...allowedCategories].reduce((total,id)=>total+Math.max(0,launch.approvedStoriesPerCategory-categoryTotals[id]),0);
+
+/* KIDS_SALAF_PUBLISHED_32_CONTRACT_V2 — all eight categories must contain at
+ * least four approved stories; additional reviewed stories remain permitted. */
+assert.equal(missingForTarget,0,
+  "TAWḤĪD KIDS: initial four stories missing in: "+
+  [...allowedCategories].filter(id=>categoryTotals[id]<4).map(id=>id+"="+categoryTotals[id]).join(", "));
+assert.ok(live>=32,"At least 32 approved Salaf stories required before launch");
+const visitorScript=fs.readFileSync(path.join(root,"kids/salaf-library-v1.js"),"utf8");
+assert.ok(visitorScript.includes('i.verification==="approved"&&i.editorialRelease===true'),
+  "Do not render pending/unapproved Salaf text in visitor app");
+assert.ok(visitorScript.includes("KIDS_SOURCE_TEXT_ONLY_V1414"),
+  "Salaf source names must be plain text; no source hyperlinks in visitor view");
+const trustedSource= /^https:\/\/(?:[a-z0-9-]+\.)*(?:islamweb\.net|shamela\.ws|dorar\.net|waqfeya\.net|archive\.org|ketabonline\.com|al-maktaba\.org|turath\.io)\/[A-Za-z0-9_\-/.%#?=&;:]+$/i;
+for(const item of data.items.filter(x=>x.editorialRelease===true && x.verification==="approved")){
+  const text=String(item.masterStoryText||"");
+  const words=text.trim().split(/\s+/).length;
+  assert.ok(words>=350&&words<=1000,"Full child-facing master text, not a short placeholder: "+item.id);
+  assert.ok(!/(?:https?:\/\/|www\.|<a\s|<script\b|\]\(https?:)/i.test(text),
+    "No external links or HTML in child master text: "+item.id);
+  assert.ok(item.sources.every(src=>trustedSource.test(String(src.url||""))),
+    "Sources must use the project's restricted, canonical library domains: "+item.id);
+  assert.equal(item.image,"/kids/assets/salaf/topics-v1380/"+item.category+".jpg",
+    "Wrong category illustration: "+item.id);
+  assert.equal(item.hero,"/kids/assets/salaf/salaf-library-hero-boys.jpg",
+    "Boy story hero mismatch: "+item.id);
+  assert.equal(item.heroGirl,"/kids/assets/salaf/salaf-library-hero-girls.jpg",
+    "Girl story hero mismatch: "+item.id);
+}
+console.log("PASS: 8 categories × ≥4 released stories, strict source domains, readable texts, distinct profile hero art.");
 console.log("Salaf launch: "+live+"/"+launch.totalStories+" published, "+missingForTarget+" still to verify for 4 per category");
 
 console.log("PASS Salaf early-Sunni editorial metadata gate: " + live + " approved, " + pending + " safely hidden");
