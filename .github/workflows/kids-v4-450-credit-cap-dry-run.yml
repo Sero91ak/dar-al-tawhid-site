@@ -1,0 +1,64 @@
+name: KIDS V4 450 Credit Cap Prioritization Dry Run (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/plan_quiz_v4_450_credit_cap.py'
+      - '.github/workflows/kids-v4-450-credit-cap-dry-run.yml'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-missing9-prepaid-originals.json'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-450-credit-cap-priority-readonly
+  cancel-in-progress: false
+
+jobs:
+  estimate-only-no-elevenlabs-requests:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - name: Fetch review branch only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Recompute exact missing V4 fragments and no-credit priority sequence
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/plan_quiz_v4_450_credit_cap.py
+          python3 kids/tools/plan_quiz_v4_450_credit_cap.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path(".github/reports/kids-v4-450-credit-cap-priority-review.json")
+          r=json.loads(p.read_text(encoding="utf-8"))
+          assert r["canonicalQuizCount"]==900
+          assert r["selectedQuestions"]==450 and r["reservedQuestionsPreserved"]==450
+          assert r["creditCapTarget"]==27860.0
+          assert r["permissionToSynthesizeGrantedByReport"] is False
+          assert r["newTTSGenerationsCreated"]==0 and r["newElevenLabsCreditsSpent"]==0
+          assert r["live"] is False and r["providerPriceQuote"] is False
+          assert r["estimatedSubsetCredits"] <= 27860.0
+          assert r["firstAgeCompleteOnlyAfterRealNineOriginalImports"] is True
+          assert r["questionsProjectedFullyPlayableAfterNineAndBudgetSelectionByAge"]["4-6"]==150
+          assert r["notProvenGlobalOptimum"] is True
+          assert r["greedyBudgetSubsetOriginalFragments"] == len(r["prioritizedExactNewFragmentsForReview"])
+          assert len({x["textSha256"] for x in r["prioritizedExactNewFragmentsForReview"]})==len(r["prioritizedExactNewFragmentsForReview"])
+          assert all(x["requiresSeparateHumanHearingApproval"] is True for x in r["prioritizedExactNewFragmentsForReview"])
+          assert r["totalQuestionsProjectedFullyPlayableAfterPrerequisites"] <= 450
+          assert json.load(open("kids/data/quiz-curation-release.json"))["enabled"] is False
+          print("PASS_KIDS_V4_CAPPED_27860_CREDIT_DRY_RUN_NO_SYNTHESIS",flush=True)
+          PY
+      - name: Save as internal, non-published artifact only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-450-credit-cap-dry-run-no-tts
+          retention-days: 90
+          if-no-files-found: warn
+          path: .github/reports/kids-v4-450-credit-cap-priority-review.json
