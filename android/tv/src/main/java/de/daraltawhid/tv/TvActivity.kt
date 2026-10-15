@@ -19,6 +19,7 @@ import android.view.KeyEvent
 import android.view.Gravity
 import android.view.View
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
@@ -42,6 +43,7 @@ class TvActivity : Activity() {
     private val base = "https://dar-al-tawhid.de/apple-tv/"
     private val dashboardNavigation = TvDashboardNavigation()
     private lateinit var adhanController: TvAdhanController
+    private lateinit var kaabaBackdrop: TvKaabaBackdrop
     private val screensaverClock = TvIdleScreensaverClock()
     private lateinit var screensaver: TvScreensaverOverlay
     private var tvWindowFocused = true
@@ -272,11 +274,13 @@ class TvActivity : Activity() {
                 else if (!isFinishing && ::body.isInitialized) scheduleContentRefresh()
             }
         )
+        // The actual tvOS still background lives behind, never inside the
+        // scrollable dashboard; artwork may be absent in a staged checkout.
+        val tvRoot = FrameLayout(this)
+        kaabaBackdrop = TvKaabaBackdrop(this, tvRoot)
         val shell = LinearLayout(this).apply {
             orientation = LinearLayout.VERTICAL
             setPadding(dp(48), dp(25), dp(48), dp(22))
-            // Branded static Royal-Night artwork; deliberately no video dependency.
-            background = resources.getDrawable(R.drawable.tv_static_backdrop, theme)
         }
         shell.addView(label("DĀR AL TAWḤĪD", 32f, cream, true))
         shell.addView(label("WISSEN AUS QURʾĀN & SUNNAH  ·  TV", 13f, gold, false))
@@ -290,6 +294,11 @@ class TvActivity : Activity() {
         settingsRow.addView(navButton("TV · Einstellungen") {
             showTvSettings()
         }, LinearLayout.LayoutParams(0, dp(48), 1f).apply { marginStart = dp(9) })
+        if (kaabaBackdrop.availableCount() > 0) {
+            settingsRow.addView(navButton("Kaaba-Szene") {
+                kaabaBackdrop.showPicker()
+            }, LinearLayout.LayoutParams(0, dp(48), 1f).apply { marginStart = dp(9) })
+        }
         shell.addView(settingsRow)
 
         nav = LinearLayout(this).apply {
@@ -326,7 +335,9 @@ class TvActivity : Activity() {
         )
         footer.setPadding(0, dp(15), 0, 0)
         shell.addView(footer)
-        setContentView(shell)
+        tvRoot.addView(shell, FrameLayout.LayoutParams(-1, -1))
+        setContentView(tvRoot)
+        kaabaBackdrop.show()
 
         val preferences = getPreferences(MODE_PRIVATE)
         cityIndex = preferences.getInt("city_index", 0).coerceIn(0, cities.lastIndex)
