@@ -254,7 +254,7 @@ function compactSalafReference(raw){
   const parts=[];
   const vol=r.match(/(?:\bBand|\bBd\.)\s*\d+(?:\s*\/\s*\d+)?/u);
   const page=r.match(/\bS\.\s*\d+(?:\s*[-–]\s*\d+)?(?:\s*,\s*\d+(?:\s*[-–]\s*\d+)?)?(?:\s*ff\.)?/u);
-  const section=r.match(/(?:\bKitāb\s+[^,;.:]{3,80}|\bBāb\s+[^,;.:]{3,80}|\bKapitel\s+[^,;.:]{3,80}|\bal-Muqaddimah\b)/u);
+  const section=r.match(/(?:\bKitāb\s+[^,;.:]{3,80}|\bBāb\s+[^,;.:]{3,80}|\bKapitel\s+[^,;.:]{3,80}|\bAbschnitt\s+[^,;.:]{3,80}|\bal-Muqaddimah\b)/u);
   const number=r.match(/(?:Nr\.|Ḥadīṯ|Hadith|Bericht)\s*\d+[a-z]?/u);
   const bio=r.match(/\b(?:Biographie|Biografie)\s+(?:von\s+)?([^.;:]{3,72})/u);
   for(const match of [vol,page,section,number]){
