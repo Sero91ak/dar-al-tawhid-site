@@ -9,11 +9,11 @@
   "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "modelId": "eleven_v4",
   "humanApprovedQuestionSets": 0,
-  "completeTechnicalQuestionSets": 0,
+  "completeTechnicalQuestionSets": 39,
   "fieldAvailable": {
     "question": 84,
-    "correct": 0,
-    "retry": 0,
+    "correct": 60,
+    "retry": 60,
     "explanation": 131
   },
   "fieldHumanApproved": {
@@ -24,18 +24,18 @@
   },
   "missingTechnicalByPart": {
     "question": 66,
-    "correct": 150,
-    "retry": 150,
+    "correct": 90,
+    "retry": 90,
     "explanation": 19
   },
   "unapprovedByPart": {
     "question": 84,
-    "correct": 0,
-    "retry": 0,
+    "correct": 60,
+    "retry": 60,
     "explanation": 131
   },
   "technicalErrorCounts": {
-    "missing": 385
+    "missing": 265
   },
   "readyForPrivateReleaseCandidate": false,
   "readyForLive": false,
