@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib,json,os,time,urllib.error,urllib.request
 from datetime import datetime,timezone
 from pathlib import Path
+from quiz_v4_no_double_charge_guard import protect_paid_texts, prohibit_prepaid_selection
 
 ROOT=Path(__file__).resolve().parents[2]
 PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
@@ -61,10 +62,10 @@ def original_mp3(key,spoken):
 def age_for(plan):
     return {r["questionId"]:r["ageBand"] for r in plan["recipes"]}
 
-def choose(plan,registry):
+def choose(plan,registry,protected):
     existing=set((registry.get("textClips") or {}).keys())
     ages=age_for(plan)
-    available=[r for r in plan["pendingAudioFragments"] if r["text"] not in existing]
+    available=[r for r in plan["pendingAudioFragments"] if r["text"] not in existing and r["text"] not in protected]
     if len(available)<LIMIT:raise RuntimeError("Remaining unrecorded fragments below batch size")
     selected=[];seen=set()
     def take(r):
@@ -116,7 +117,8 @@ def main():
         return
     if old_for_batch:
         raise RuntimeError("Partially charged batch exists. Reconcile exact saved originals first; never retry")
-    chosen,estimate=choose(plan,registry)
+    protected=protect_paid_texts(ROOT,registry,ledger)
+    chosen,estimate=choose(plan,registry,protected)
     before=subscription(key)
     if before<max(MAX_COST*1.25,estimate*1.4):
         raise RuntimeError("Subscription budget lower than estimated batch: no charges")
@@ -124,6 +126,7 @@ def main():
     OUTPUT.mkdir(parents=True,exist_ok=True)
     for n,item in enumerate(chosen,1):
         text=item["text"]
+        prohibit_prepaid_selection(text,protected)
         if text in registry["textClips"]:
             raise RuntimeError("Original already exists; do not synthesize again")
         code=hashlib.sha256((VOICE+"\n"+MODEL+"\n"+text).encode("utf-8")).hexdigest()
