@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib,json,subprocess,tempfile
 from collections import Counter
 from pathlib import Path
+from import_quiz_v4_prepaid_flow_originals import original_metadata
 
 ROOT=Path(__file__).resolve().parents[2]
 PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
@@ -95,6 +96,10 @@ def main():
     if imported_paid_ids-all_paid_ids:
         raise RuntimeError("Registry contains an unknown previously paid generation ID")
     missing_all_paid_ids=sorted(all_paid_ids-imported_paid_ids)
+    paid_receipts=original_metadata()
+    if set(paid_receipts)!=all_paid_ids:
+        raise RuntimeError("Original paid MP3 receipt IDs and production plan diverged")
+    hypothetical_original_texts=set(original)|{paid_receipts[gid]["text"] for gid in missing_all_paid_ids}
     OUT.mkdir(parents=True,exist_ok=True)
     text_audio={}
     missing=set()
@@ -104,6 +109,8 @@ def main():
     original_full_coverage=0
     individual_complete={"question":0,"correct":0,"retry":0,"explanation":0}
     complete=0
+    projected_complete_if_all_old_paid_imported=0
+    projected_still_blocked=[]
     question_overview=[]
     for q in chosen:
         available={}
@@ -161,6 +168,19 @@ def main():
             individual_complete[kind]+=1
         ready=len(available)==4
         if ready:complete+=1
+        # No generated audio is assumed here: only the nine ORIGINAL already-paid
+        # ElevenLabs takes from the immutable paid receipts are hypothetically restored.
+        eventual_parts=[]
+        for kind in PARTS:
+            part=q[kind]
+            if part["mode"]=="existing-paid-exact":
+                eventual_parts.append(part["generationId"] in all_paid_ids)
+            else:
+                eventual_parts.append(all(x in hypothetical_original_texts for x in part["segments"]))
+        if all(eventual_parts):
+            projected_complete_if_all_old_paid_imported+=1
+        else:
+            projected_still_blocked.append(q["questionId"])
         question_overview.append({"questionId":q["questionId"],"availableAudioParts":sorted(available),
                                   "missingOrBlockedAudioParts":reasons,
                                   "allFourPartsAvailable":ready})
@@ -180,6 +200,9 @@ def main():
                                     for t in sorted(missing)],
       "missingPaidOriginalGenerationIds":missing_all_paid_ids,
       "originalFlowImportNeeded":bool(missing_all_paid_ids),
+      "projectedFourPartQuestionCountAfterAuthenticOldPaidImport":projected_complete_if_all_old_paid_imported,
+      "projectedBlockedQuestionIdsAfterAuthenticOldPaidImport":projected_still_blocked,
+      "projectionIsNotAudioProofOrHumanApproval":True,
       "readyForLive":False,"audioListeningApproved":False,
       "questions":question_overview
     }
