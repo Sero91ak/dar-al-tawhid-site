@@ -2,11 +2,25 @@
  Same-app entry and exit; girl styling must cover #kidsJoin outside .app.
  No global color overrides for boys. */
 html body #kidsAcademyPortal.kids-academy-portal{
- position:fixed!important;inset:0!important;z-index:9990!important;
- width:100vw!important;height:100dvh!important;display:block!important;
+ position:fixed!important;left:0!important;right:0!important;top:0!important;
+ bottom:auto!important;z-index:25!important;
+ width:100%!important;
+ /* Actual measured dock top, including dynamic safe areas and iPad widths. */
+ height:var(--kids-academy-portal-height,calc(100dvh - 110px))!important;
+ display:block!important;
  background:#102939!important;overflow:hidden!important;box-sizing:border-box!important;
  opacity:0;transform:translate3d(0,5px,0);
  transition:opacity .22s ease,transform .22s ease!important;
+}
+/* Use the real global Kids dock, NOT a duplicate inside the iframe.
+   The Academy iframe itself ends eight pixels before this dock begins. */
+html body.kids-academy-portal-active .app > .bottom-nav{
+ z-index:40!important;
+ visibility:visible!important;
+ pointer-events:auto!important;
+}
+html body.kids-academy-portal-active .app > .bottom-nav .kids-academy-tab.active{
+ cursor:pointer!important;
 }
 html body #kidsAcademyPortal[hidden]{display:none!important}
 html body #kidsAcademyPortal.is-open{opacity:1!important;transform:none!important}
