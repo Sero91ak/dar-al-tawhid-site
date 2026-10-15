@@ -39,7 +39,8 @@ jobs:
           base64 -d "$base/sealed-downloads.b64" > "$RUNNER_TEMP/sealed.der"
           openssl cms -decrypt -inform DER -in "$RUNNER_TEMP/sealed.der" \
             -inkey "$RUNNER_TEMP/private.pem" -recip "$base/recipient-cert.pem" \
-            -out "$RUNNER_TEMP/generation-downloads.json"
+            -out "$RUNNER_TEMP/generation-downloads.json.gz"
+          gzip -dc "$RUNNER_TEMP/generation-downloads.json.gz" > "$RUNNER_TEMP/generation-downloads.json"
           chmod 600 "$RUNNER_TEMP/generation-downloads.json"
           echo "Decrypted manifest privately, no URL values logged."
       - name: Download only genuine already-paid old V4 originals
@@ -130,4 +131,4 @@ jobs:
         if: always()
         run: |
           rm -rf "$RUNNER_TEMP/kids-v4-prepaid-inbox"
-          rm -f "$RUNNER_TEMP/generation-downloads.json" "$RUNNER_TEMP/private.pem" "$RUNNER_TEMP/sealed.der"
+          rm -f "$RUNNER_TEMP/generation-downloads.json" "$RUNNER_TEMP/generation-downloads.json.gz" "$RUNNER_TEMP/private.pem" "$RUNNER_TEMP/sealed.der"
