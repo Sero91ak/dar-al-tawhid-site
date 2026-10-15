@@ -1,3 +1,26 @@
+## KIDS_GIRLS_MULTICOLOR_PALETTE_V1417 – vollständige Mädchenfarbwelt, kein Einfarbenfilter
+
+Die Mädchenansicht ist **mehrfarbig**, keine flächige Pflaumen- oder
+Rosé-Monochromdarstellung. Verbindliche Akzentrollen: dunkle
+Pflaume/Nachtviolett als nahtloser **technischer Seitenuntergrund**,
+Rosé und Blush für Auswahl/Aktionen, Lavendel/Mauve für ergänzende
+Flächen, Creme und Champagner/Gold für Beschriftung und Highlights.
+
+**Wichtig:** Die Originalbilder und ihre natürlichen, unterschiedlichen
+Motivfarben bleiben erhalten. Keine `luminosity`-Bildmischung,
+Schwarzweiß-/Einfarbenfilter oder pauschale Abdeckung sämtlicher
+Karten/Hero-Bilder. Die Mädchen-Farbsteuerung korrigiert nur
+Jungen-Petrol in UI-Verläufen, transparenten Rahmen, Hintergrundflächen,
+Steuerung und Lesefenstern. `#2b2035` ist allein der **einheitliche
+Untergrund** gegen rechteckige Nähte, niemals eine Vorgabe zur
+Einfärbung aller Bilder und Karten.
+
+Neue visuelle Salaf-Änderungen müssen die mehrfarbige Palette erhalten,
+dürfen nicht ungeprüft auf andere Bereiche oder Jungen wirken und
+müssen über die Farb-/Bildkontrakte sowie eine reale Geräte-Sichtprüfung.
+
+---
+
 ## KIDS_GIRLS_GLOBAL_CANVAS_SEAM_V1416 – Mädchenprofil ohne rechteckige Hintergrund-Nähte
 
 Die gesamte Kinder-App besitzt ein einziges Profil-Hintergrundfundament
