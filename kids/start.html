@@ -4932,8 +4932,8 @@ function startWordRecognition(){
   }
 }
 function startPracticeSession(){
-  if(!currentSurah)return;
-  practiceRequired=true;
+  /* Retained legacy helper is intentionally inaccessible in listen-only KIDS. */
+  if(!currentSurah||!practiceRequired)return;
   ayahPassed=false;
   practiceActive=true;
 
@@ -5003,45 +5003,7 @@ document.getElementById("ayahPlay").addEventListener("click",function(){
   document.getElementById("speakAlong").classList.remove("active");
   playCurrent();
 });
-document.getElementById("speakAlong").addEventListener("click",function(){
-  if(!practiceRequired||!currentSurah)return; /* Listening-only: never start recitation capture */
-  if(practiceActive){
-    stopPractice(false);
-    updateLearnStatus("Zuhören pausiert. Tippe auf SPRECHEN, wenn du weitermachen willst.",false);
-    document.getElementById("micStateText").textContent="Mikrofon pausiert";
-    renderWordCoach();
-    return;
-  }
-  quranMode="learn";
-  practiceRequired=true;
-  var btn=this;
-
-  // iOS/PWA: AudioContext muss im direkten Fingertipp entsperrt werden,
-  // bevor der asynchrone Mikrofon-Permission-Dialog zurückkehrt.
-  primeWordAudioFromGesture();
-
-  ensureMicrophonePermission().then(function(ok){
-    if(!ok){
-      btn.classList.remove("active","mic-live");
-      btn.textContent=" SPRECHEN";
-      return;
-    }
-    btn.classList.add("active");
-    btn.textContent="…";
-    if(!wordStates.length||ayahPassed){
-      currentPracticeWord=0;
-      wordStates=rawAyahWords().map(function(){return "pending"});
-      ayahPassed=false;
-      ayahPracticeHadError=false;
-      lastWordHeard="";
-      lastWordScore=0;
-      recitationTranscript="";
-      renderAyahWords(0,-1,0,"");
-    }
-    setNextLock();
-    startPracticeSession();
-  });
-});
+/* KIDS_QURAN_LISTEN_ONLY_V1418: removed microphone/pronunciation click handler. */
 document.getElementById("prevAyah").addEventListener("click",function(){
   if(!currentSurah)return;
   stopQuran();
@@ -5056,10 +5018,10 @@ document.getElementById("nextAyah").addEventListener("click",function(){
     return;
   }
   stopQuran();
-  practiceRequired=true;
+  practiceRequired=false; /* never relock verse navigation in the listening player */
   if(currentAyahIndex<currentSurah.verses.length-1){
     currentAyahIndex++;
-    quranMode="learn";
+    quranMode="listen";
     renderAyah();
   }else{
     updateLearnStatus(" Sūrah geschafft",false,"success");
