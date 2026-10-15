@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1428";
+const CACHE_NAME="dar-al-tawhid-kids-v1431";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -6,6 +6,8 @@ const KIDS_BUILD_ID="kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
+  "/kids/kids-birth-month-v1431.js?v=1431",
+  "/kids/kids-birth-month-v1431.css?v=1431",
   "/kids/kids-nav-v1421.css?v=1422",
   "/kids/kids-motion-v1422.css?v=1422",
   "/kids/kids-girl-palette-authority-v1427.css?v=1428",
@@ -283,6 +285,8 @@ const PRECACHE=CORE_PRECACHE.concat([
 /* KIDS_GLOBAL_TOP_SCROLL_BOUNDARY_V1428: shared scroll-stop cached for offline first paint. */
 /* V1430 GIRL ACADEMY BOOT: girls must have correct colors even offline on first load. */
 const KIDS_BOOT_PRECACHE=[
+  "/kids/kids-birth-month-v1431.js?v=1431",
+  "/kids/kids-birth-month-v1431.css?v=1431",
   "/kids/akademie/girl-profile-authority-v1430.css?v=1430",
   "/kids/global-detail-dock-v1247.css?v=1428",
   "/kids/global-detail-dock-v1247.js?v=1428",
@@ -477,6 +481,10 @@ self.addEventListener("fetch",function(event){
   if(url.pathname==="/kids/kids-nav-v1421.css"||url.pathname==="/kids/assets/kids-icons/learning-book-3d-v1422.png"){
     event.respondWith(networkFirst(request));
     return;
+  }
+  /* Month-year calculation stays current with offline cache fallback. */
+  if(url.pathname==="/kids/kids-birth-month-v1431.js"||url.pathname==="/kids/kids-birth-month-v1431.css"){
+    event.respondWith(networkFirst(request));return;
   }
   /* V1430 Girl Academy authority: online fresh, installed PWA offline fallback. */
   if(url.pathname==="/kids/akademie/girl-profile-authority-v1430.css"){
