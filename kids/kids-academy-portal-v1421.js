@@ -7,16 +7,23 @@
 (function(){
 "use strict";
 if(window.DARKidsAcademyPortalV1421)return;
-var modal=null,frame=null,trigger=null,ready=false,closingTimer=null,previousTab=null,resizeObserver=null;
+var modal=null,frame=null,trigger=null,ready=false,closingTimer=null,previousTab=null,resizeObserver=null,openToken=0;
 var GAP=8;
 function one(selector,root){return(root||document).querySelector(selector)}
 function dock(){return one(".app > .bottom-nav")||one(".bottom-nav")}
+function dockClearance(){
+ var nav=dock(),rect=nav&&nav.getBoundingClientRect();
+ var viewportHeight=window.innerHeight||document.documentElement.clientHeight||0;
+ return rect&&rect.height>0 ? Math.max(96,Math.ceil(viewportHeight-rect.top+GAP)) : 128;
+}
 function measure(){
  if(!modal||modal.hidden)return;
- var nav=dock(),rect=nav&&nav.getBoundingClientRect();
- if(!rect||rect.height<=0)return;
- var available=Math.max(0,Math.floor(rect.top-GAP));
- modal.style.setProperty("--kids-academy-portal-height",available+"px");
+ var clearance=dockClearance()+"px";
+ modal.style.setProperty("--kids-academy-dock-clearance",clearance);
+ try{
+   var root=frame&&frame.contentDocument&&frame.contentDocument.documentElement;
+   if(root)root.style.setProperty("--kids-academy-dock-clearance",clearance);
+ }catch(_){}
 }
 function selectLearn(){
  var nav=dock(),learn=one(".kids-academy-tab",nav);
@@ -50,6 +57,11 @@ function create(){
  modal.setAttribute("role","region");
  modal.setAttribute("aria-label","Meine Lernakademie");
  modal.hidden=true;
+ // The underlying dock floats above a full-height scroll canvas.
+ modal.style.setProperty("height","100dvh","important");
+ modal.style.setProperty("max-height","100dvh","important");
+ modal.style.setProperty("transform","none","important");
+ modal.style.setProperty("transition","opacity 220ms cubic-bezier(.22,.75,.22,1)","important");
  var exit=document.createElement("button");
  exit.type="button";
  exit.className="kids-academy-portal-cancel";
@@ -60,6 +72,7 @@ function create(){
  loading.className="kids-academy-portal-loading";
  loading.setAttribute("aria-hidden","true");
  loading.textContent="Lernakademie";
+ loading.style.fontSize="15px";
  frame=document.createElement("iframe");
  frame.id="kidsAcademyPortalFrame";
  frame.title="Lernakademie";
@@ -67,8 +80,8 @@ function create(){
  frame.setAttribute("allow","microphone; autoplay");
  frame.addEventListener("load",function(){
    ready=true;
-   modal.classList.add("is-ready");
-   if(!modal.hidden)frame.focus({preventScroll:true});
+   measure();
+   requestAnimationFrame(function(){if(modal)modal.classList.add("is-ready")});
  });
  modal.append(frame,loading,exit);
  // Critical: sibling of the SAME existing dock, in the SAME .app stacking context.
@@ -89,22 +102,29 @@ function open(event){
  if(closingTimer){clearTimeout(closingTimer);closingTimer=null}
  modal.style.pointerEvents="";
  var wasOpen=!modal.hidden&&modal.classList.contains("is-open");
+ var token=++openToken;
  modal.hidden=false;
- modal.classList.add("is-open");
  document.documentElement.classList.add("kids-academy-portal-active");
  document.body.classList.add("kids-academy-portal-active");
  if(!wasOpen)selectLearn();
  measure();
- requestAnimationFrame(measure);
+ if(!wasOpen){
+   modal.classList.remove("is-open");
+   requestAnimationFrame(function(){
+     requestAnimationFrame(function(){
+       if(token===openToken&&modal&&!modal.hidden)modal.classList.add("is-open");
+     });
+   });
+ }
  if(!frame.getAttribute("src")){
-   frame.src="/kids/akademie/index.html?kidsPortal=1";
+   frame.src="/kids/akademie/index.html?kidsPortal=1&dockClearance="+dockClearance();
  }else if(ready){
    try{frame.contentWindow.postMessage({type:"DAR_KIDS_ACADEMY_RESUME_V1421"},location.origin)}catch(_){}
-   frame.focus({preventScroll:true});
  }
 }
 function close(keepNewTab){
- if(!modal||modal.hidden||!modal.classList.contains("is-open"))return;
+ if(!modal||modal.hidden)return;
+ ++openToken;
  try{frame.contentWindow.postMessage({type:"DAR_KIDS_ACADEMY_PAUSE_V1421"},location.origin)}catch(_){}
  modal.classList.remove("is-open");
  modal.style.pointerEvents="none";
