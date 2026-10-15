@@ -286,7 +286,10 @@ class TvActivity : Activity() {
         }, LinearLayout.LayoutParams(0, dp(48), 1f))
         settingsRow.addView(navButton("Qurʾān · Rezitation") {
             show("quran")
-        }, LinearLayout.LayoutParams(0, dp(48), 1f))
+        }, LinearLayout.LayoutParams(0, dp(48), 1f).apply { marginStart = dp(9) })
+        settingsRow.addView(navButton("TV · Einstellungen") {
+            showTvSettings()
+        }, LinearLayout.LayoutParams(0, dp(48), 1f).apply { marginStart = dp(9) })
         shell.addView(settingsRow)
 
         nav = LinearLayout(this).apply {
@@ -360,6 +363,48 @@ class TvActivity : Activity() {
             "tadabbur" -> loadTadabbur()
             else -> loadHome()
         }
+    }
+
+    private fun showTvSettings() {
+        val preferences = getPreferences(MODE_PRIVATE)
+        val screensaverEnabled = preferences.getBoolean("dar.tv.screensaver.enabled", true)
+        val options = arrayOf(
+            if (screensaverEnabled) "Bildschirmschoner: EIN" else "Bildschirmschoner: AUS",
+            "Adhān-Stimme und Zeiten",
+            "Qurʾān-Rezitator",
+            "Gebetsort auswählen",
+            "Bedienung und Hinweise",
+            "Schließen"
+        )
+        AlertDialog.Builder(this)
+            .setTitle("DĀR AL TAWḤĪD TV · Einstellungen")
+            .setItems(options) { _, selected ->
+                when (selected) {
+                    0 -> {
+                        preferences.edit()
+                            .putBoolean("dar.tv.screensaver.enabled", !screensaverEnabled)
+                            .apply()
+                        screensaverClock.start(SystemClock.elapsedRealtime(), !screensaverEnabled)
+                        showTvSettings()
+                    }
+                    1 -> adhanController.showSettings()
+                    2 -> {
+                        if (activeTab != "quran") show("quran")
+                        chooseQuranReciter()
+                    }
+                    3 -> showPrayerLocationPicker()
+                    4 -> AlertDialog.Builder(this)
+                        .setTitle("TV-Fernbedienung")
+                        .setMessage(
+                            "Mit ◀ ▶ ▲ ▼ den Fokus bewegen, mit OK auswählen. " +
+                            "Mit Zurück einen Dialog schließen oder zur Startseite zurückkehren. " +
+                            "Der Bildschirmschoner erscheint nach 60 Sekunden Inaktivität. " +
+                            "Adhān und automatische Aktualisierungen funktionieren " +
+                            "während die TV-App geöffnet ist."
+                        ).setPositiveButton("OK", null).show()
+                }
+            }
+            .show()
     }
 
     private fun showPrayerLocationPicker() {
