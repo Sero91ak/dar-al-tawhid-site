@@ -1,3 +1,22 @@
+## KIDS_GIRLS_GLOBAL_CANVAS_SEAM_V1416 – Mädchenprofil ohne rechteckige Hintergrund-Nähte
+
+Die gesamte Kinder-App besitzt ein einziges Profil-Hintergrundfundament
+für Mädchen: **#2b2035** auf `html`, `body`, `.app`, `.ambient`
+und `.shell`. Andersfarbige Vollflächen/Verläufe dürfen nicht zwischen
+diesen Ebenen stehen bleiben: `background-color` allein **löscht
+keine** früheren `background-image`-Gradienten. Die Datei
+`kids/girls-profile-global-seam-v1416.css` muss daher **zuletzt**
+geladen und für die Offline-App vorgemerkt werden.
+
+Kinderbilder, Hero-Motive, Karten, Unterseiten-Styling, feste Kopfzeilen,
+Touch-/Scroll-Logik, 3D-Icons sowie die transparenten Overlays der
+Geschichten-/Lese-Reader dürfen dadurch nicht ersetzt werden. Der neue
+Style ist ausschließlich an `data-gender="girl"` gebunden; das
+Jungenprofil bleibt unverändert. Visuelle Abnahme auf iOS und Android
+bleibt trotz Code-Regressionstest erforderlich.
+
+---
+
 ## KIDS_SALAF_GIRL_PALETTE_V1415 – verpflichtende Profilfarben
 
 In **Schätze der Salaf** sind Jungen- und Mädchenprofile durchgängig
