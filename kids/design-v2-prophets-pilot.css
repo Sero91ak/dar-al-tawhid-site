@@ -1,0 +1,147 @@
+/* TAWḤĪD KIDS V2.0 · Prophet stories visual pilot · creator staging only.
+   Applies to #psLibraryPage and #psModal only, never #view-today, the
+   home mosque hero, five prayer times, floating tabs, TEST button or scroll logic.
+   Preserves all 25 original artwork files, content, interaction and audio. */
+#psLibraryPage.ps-library-page,
+#psModal.ps-modal{
+  --ps-v2-bg:#061f31;
+  --ps-v2-panel:#123549;
+  --ps-v2-panel-deep:#082639;
+  --ps-v2-glow:#eacb88;
+  --ps-v2-accent:#f4dc9c;
+  --ps-v2-muted:#d1dfe3;
+  --ps-v2-border:rgba(234,203,136,.35);
+  --ps-v2-shadow:rgba(0,10,20,.22);
+}
+/* The library and the full-screen reader are siblings of .app, not children.
+   Use the live profile to support switches between girl and boy profiles. */
+html:has(.app[data-gender="girl"]) #psLibraryPage.ps-library-page,
+html:has(.app[data-gender="girl"]) #psModal.ps-modal,
+html[data-kids-boot-gender="girl"] #psLibraryPage.ps-library-page,
+html[data-kids-boot-gender="girl"] #psModal.ps-modal{
+  --ps-v2-bg:#2c2039;
+  --ps-v2-panel:#44334c;
+  --ps-v2-panel-deep:#30253d;
+  --ps-v2-glow:#ebbed6;
+  --ps-v2-accent:#f6d8e5;
+  --ps-v2-muted:#eddae9;
+  --ps-v2-border:rgba(235,190,214,.41);
+  --ps-v2-shadow:rgba(20,10,29,.23);
+}
+/* Single coherent stage behind existing pictures. Do not touch dimensions,
+   fixed header, scrolling or original full-width story image crops. */
+html body #psLibraryPage.ps-library-page{
+  background:linear-gradient(180deg,var(--ps-v2-panel-deep) 0%,var(--ps-v2-bg) 54%,var(--ps-v2-bg) 100%)!important;
+  color:#fff9f3!important;
+}
+html body #psLibraryPage .ps-sequence-head{
+  border-left:3px solid var(--ps-v2-glow)!important;
+  padding-left:clamp(12px,3vw,18px)!important;
+  margin-top:clamp(9px,2.4vw,18px)!important;
+  margin-bottom:clamp(12px,2.8vw,20px)!important;
+}
+html body #psLibraryPage .ps-sequence-head>span{
+  color:var(--ps-v2-accent)!important;
+  font-weight:800!important;
+  letter-spacing:.11em!important;
+}
+html body #psLibraryPage .ps-sequence-head>strong{
+  color:#fff6eb!important;
+  font-size:clamp(27px,6.5vw,36px)!important;
+  line-height:1.15!important;
+  letter-spacing:-.018em!important;
+  text-wrap:balance;
+}
+html body #psLibraryPage .ps-sequence-head>small{
+  color:var(--ps-v2-muted)!important;
+  font-size:clamp(13px,3.1vw,16px)!important;
+  line-height:1.5!important;
+  max-width:42ch;
+}
+/* One elevated but calm highlight for the final Prophet.
+   No replacement artwork and no new overlay on the image. */
+html body #psLibraryPage .ps-muhammad-card{
+  border:1px solid var(--ps-v2-border)!important;
+  border-radius:clamp(22px,5.6vw,29px)!important;
+  background:var(--ps-v2-panel-deep)!important;
+  box-shadow:0 13px 32px var(--ps-v2-shadow),inset 0 1px 0 rgba(255,255,255,.075)!important;
+}
+html body #psLibraryPage .ps-muhammad-panel{
+  background:linear-gradient(135deg,var(--ps-v2-panel),var(--ps-v2-panel-deep))!important;
+  border-top:1px solid var(--ps-v2-border)!important;
+}
+html body #psLibraryPage .ps-muhammad-kicker,
+html body #psLibraryPage .ps-muhammad-ar{
+  color:var(--ps-v2-accent)!important;
+}
+html body #psLibraryPage .ps-muhammad-title{
+  color:#fff8f0!important;
+  font-weight:850!important;
+  line-height:1.16!important;
+  text-wrap:balance;
+}
+/* Same card system for the remaining 24 Prophets: consistent borders,
+   softly graded panels and readable title/Arabic/summary hierarchy.
+   Preserve the original 3-column card geometry and age-specific layouts. */
+html body #psLibraryPage .ps-library-list{
+  row-gap:clamp(10px,2.8vw,16px)!important;
+}
+html body #psLibraryPage .ps-story-row{
+  border:1px solid var(--ps-v2-border)!important;
+  border-radius:clamp(20px,5.3vw,26px)!important;
+  background:linear-gradient(120deg,var(--ps-v2-panel),var(--ps-v2-panel-deep))!important;
+  box-shadow:0 9px 24px var(--ps-v2-shadow),inset 0 1px 0 rgba(255,255,255,.045)!important;
+}
+html body #psLibraryPage .ps-story-row::before{
+  /* Reuse existing image-to-text veil, tint the gradient only. */
+  background:linear-gradient(90deg,transparent 26%,rgba(5,31,46,.23) 35%,rgba(5,31,46,.72) 55%,rgba(5,31,46,.90) 100%)!important;
+}
+html:has(.app[data-gender="girl"]) body #psLibraryPage .ps-story-row::before,
+html[data-kids-boot-gender="girl"] body #psLibraryPage .ps-story-row::before{
+  background:linear-gradient(90deg,transparent 26%,rgba(49,31,55,.24) 35%,rgba(49,31,55,.75) 55%,rgba(49,31,55,.94) 100%)!important;
+}
+html body #psLibraryPage .ps-row-title{
+  color:#fff9ef!important;
+  font-size:clamp(21px,5.6vw,28px)!important;
+  line-height:1.16!important;
+  letter-spacing:-.015em!important;
+  overflow-wrap:break-word;
+}
+html body #psLibraryPage .ps-row-ar{
+  color:var(--ps-v2-accent)!important;
+  font-size:clamp(17px,4.45vw,22px)!important;
+  line-height:1.3!important;
+}
+html body #psLibraryPage .ps-row-summary{
+  color:var(--ps-v2-muted)!important;
+  font-size:clamp(12px,2.8vw,15px)!important;
+  line-height:1.4!important;
+  overflow-wrap:anywhere;
+}
+html body #psLibraryPage .ps-row-rank{
+  color:var(--ps-v2-accent)!important;
+  border-color:var(--ps-v2-border)!important;
+  background:rgba(4,24,37,.79)!important;
+}
+html:has(.app[data-gender="girl"]) body #psLibraryPage .ps-row-rank,
+html[data-kids-boot-gender="girl"] body #psLibraryPage .ps-row-rank{
+  background:rgba(48,29,54,.82)!important;
+}
+html body #psLibraryPage :is(.ps-story-row,.ps-muhammad-card):focus-visible{
+  outline:3px solid var(--ps-v2-glow)!important;
+  outline-offset:3px!important;
+}
+html body #psModal.ps-modal .ps-read{
+  color:#fff9f2!important;
+  font-size:clamp(18px,4.2vw,22px)!important;
+  line-height:1.72!important;
+  overflow-wrap:break-word;
+}
+/* The previously approved 4–5 reading/auditory mode remains intact. */
+@media(max-width:390px){
+  html body #psLibraryPage .ps-row-title{font-size:clamp(19px,5.2vw,23px)!important}
+  html body #psLibraryPage .ps-row-ar{font-size:clamp(16px,4.4vw,20px)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  html body #psLibraryPage :is(.ps-story-row,.ps-muhammad-card){transition:none!important}
+}
