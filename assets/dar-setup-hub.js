@@ -334,3 +334,48 @@
 
   // Hook after app bindEvents without editing large call sites too deeply
 })();
+
+
+/* 2026-10-17 · Readability icon: replace the misleading A+dagger artwork
+   with a neutral Aa glyph. Navigation and its click handlers stay untouched. */
+(function(){
+  "use strict";
+  var queued=false;
+  var observer=null;
+  function patchFontRow(row){
+    if(!row)return;
+    var icon=row.querySelector(".dsh-row-icon");
+    if(!icon || icon.querySelector(".dsh-font-clean-icon"))return;
+    icon.innerHTML='<span class="dsh-font-clean-icon" aria-hidden="true">Aa</span>';
+  }
+  function patch(){
+    queued=false;
+    if(!document.body || !document.body.classList.contains("is-settings-route"))return;
+    document.querySelectorAll("#appView .dsh-row").forEach(function(row){
+      var title=row.querySelector(".dsh-row-title");
+      if(title && /Schrift\s*&\s*Lesbarkeit/i.test(title.textContent||""))patchFontRow(row);
+    });
+    var detail=document.querySelector('#appView .dsh-detail[data-settings-page="font"] .dsh-detail-intro');
+    if(detail)patchFontRow(detail);
+  }
+  function schedule(){
+    if(queued)return;
+    queued=true;
+    requestAnimationFrame(patch);
+  }
+  function boot(){
+    var host=document.getElementById("appView");
+    if(host && !observer){
+      observer=new MutationObserver(function(){
+        if(document.body && document.body.classList.contains("is-settings-route"))schedule();
+      });
+      observer.observe(host,{subtree:true,childList:true});
+    }
+    schedule();
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});
+  else boot();
+  window.addEventListener("hashchange",function(){setTimeout(boot,40);});
+  document.addEventListener("dar:render",schedule);
+  window.addEventListener("pageshow",boot);
+})();
