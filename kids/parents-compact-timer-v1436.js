@@ -16,18 +16,21 @@ var shell=document.querySelector(".app > .shell");
 var dock=document.querySelector(".app > .bottom-nav")||document.querySelector(".bottom-nav");
 var profileId="",state=null,previousMetrics="",completionHandle=null;
 var start=null,stop=null,reset=null,note=null;
-var pill=document.createElement("button");
+var pill=document.createElement("span");
 pill.id="kidsLearningTimer1436";
-pill.type="button";
+pill.className="kids-nav-timer-inline";
+pill.setAttribute("role","status");
 pill.hidden=true;
 pill.setAttribute("aria-label","Lernzeit anzeigen – Elternbereich öffnen");
 pill.innerHTML='<span class="kids-timer-symbol" aria-hidden="true">◷</span><strong class="kids-timer-digits" id="kidsTimerDigits1436">12:00</strong>';
-/* The clock is part of the ACTUAL five-tab dock, not a floating body widget. */
-if(dock)dock.append(pill);else document.body.append(pill);
+/* Read-only numeric status inside the existing Lernen button: no new roof,
+   no overlay on content, no draggable object and no nested button. */
+var learnTab=dock&&dock.querySelector(".kids-academy-tab");
+if(learnTab)learnTab.append(pill);
+else if(dock)dock.append(pill);
+else document.body.append(pill);
 var digits=document.getElementById("kidsTimerDigits1436");
-pill.addEventListener("click",function(){
- document.querySelector('.bottom-nav .nav-btn[data-target="parents"]')?.click();
-});
+
 function today(){
  var d=new Date();
  return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-");
@@ -114,7 +117,9 @@ function render(){
  if(!document.hidden)tickElapsed();
  var show=state.visible&&!state.dismissed;
  pill.hidden=!show;
- if(dock)dock.classList.toggle("kids-timer-dome-active",show);
+ if(dock)dock.classList.toggle("kids-timer-inline-active",show);
+ var lessonTab=dock&&dock.querySelector(".kids-academy-tab");
+ if(lessonTab)lessonTab.classList.toggle("kids-timer-inline-tab",show);
  pill.classList.toggle("is-complete",!!state.complete);
  pill.classList.toggle("is-paused",!state.running&&!state.complete);
  document.body.classList.toggle("kids-timer-visible1437",show);
@@ -183,51 +188,27 @@ function refreshProfile(){
  if(document.hidden){pauseActive();return}
  render();
 }
-/* KIDS_UNIFIED_TIMER_DOME_V1439
- * No separate floating capsule. Parent navigation paints ONE continuous
- * dome contour, with a transparent clock child centered over Lernen.
- * Geometry is relative to nav and never to document scroll position. */
+/* KIDS_INLINE_LEARN_STATUS_V1440.
+ * The clock is displayed INSIDE the existing Lernen tab, never floating
+ * above learning cards; icon artwork and other tabs remain unchanged.
+ */
 function syncDock(){
  if(!dock||!dock.isConnected){
   dock=document.querySelector(".app > .bottom-nav")||document.querySelector(".bottom-nav");
-  if(dock&&pill.parentNode!==dock)dock.append(pill);
  }
  if(!dock||!state)return;
+ var learn=dock.querySelector(".kids-academy-tab");
+ if(learn&&pill.parentNode!==learn)learn.append(pill);
  var rect=dock.getBoundingClientRect();
  if(!rect.width||!rect.height)return;
- var learn=dock.querySelector(".kids-academy-tab");
- var lr=learn&&learn.getBoundingClientRect();
- var center=lr&&lr.width?lr.left+lr.width/2:rect.left+rect.width/2;
- var relativeCenter=Math.round(center-rect.left);
- var width=Math.min(114,Math.max(94,Math.round(rect.width*.25)));
- var left=Math.round(relativeCenter-width/2);
- var metrics=[left,width,relativeCenter].join("/");
- if(metrics!==previousMetrics){
-  pill.style.left=left+"px";
-  pill.style.width=width+"px";
-  dock.style.setProperty("--kids-timer-dome-center",relativeCenter+"px");
-  previousMetrics=metrics;
- }
- // Match the already approved boy/girl dock material, not another theme.
- // Update on profile switch while the navbar is still the same element.
- if(!pill.hidden){
-  var colors=getComputedStyle(dock);
-  var surface=colors.backgroundColor||"rgba(3,24,40,.92)";
-  var edge=colors.borderTopColor||"rgba(255,255,255,.25)";
-  if(dock.style.getPropertyValue("--kids-timer-dome-surface")!==surface)
-   dock.style.setProperty("--kids-timer-dome-surface",surface);
-  if(dock.style.getPropertyValue("--kids-timer-dome-edge")!==edge)
-   dock.style.setProperty("--kids-timer-dome-edge",edge);
- }
- var viewportHeight=window.innerHeight||document.documentElement.clientHeight||0;
- var extra=!pill.hidden?53:0;
- var clearance=Math.max(92,Math.ceil(viewportHeight-rect.top+12)+extra);
+ var viewport=window.innerHeight||document.documentElement.clientHeight||0;
+ var clearance=Math.max(92,Math.ceil(viewport-rect.top+12));
  document.documentElement.style.setProperty("--kids-timer-scroll-clearance1437",clearance+"px");
  var frame=document.getElementById("kidsAcademyPortalFrame");
  if(frame&&frame.contentDocument)try{
-  var academyRoot=frame.contentDocument.documentElement;
-  if(academyRoot.style.getPropertyValue("--kids-academy-dock-clearance")!==clearance+"px")
-   academyRoot.style.setProperty("--kids-academy-dock-clearance",clearance+"px");
+  var root=frame.contentDocument.documentElement;
+  if(root.style.getPropertyValue("--kids-academy-dock-clearance")!==clearance+"px")
+   root.style.setProperty("--kids-academy-dock-clearance",clearance+"px");
  }catch(_){}
 }
 /* WebKit scroll-anchor regression: guard only an untouched main-tab top.
