@@ -15,10 +15,10 @@ const birth=read("kids/kids-birth-month-v1431.js");
 assert.doesNotThrow(()=>new Function(js),"parent JS syntax");
 assert.doesNotThrow(()=>new Function(sw),"SW syntax");
 assert.equal((css.match(/\{/g)||[]).length,(css.match(/\}/g)||[]).length,"parent CSS valid brace structure");
-for(const asset of ["parents-dashboard-v1432.js?v=1434","parents-dashboard-v1432.css?v=1433"])
+for(const asset of ["parents-dashboard-v1432.js?v=1435","parents-dashboard-v1432.css?v=1435"])
   assert(html.includes(asset)&&sw.includes(asset),"parent dashboard assets published and precached: "+asset);
-assert(html.includes('navigator.serviceWorker.register("/kids/sw.js?v=1434"'),"main app must register newest offline cache");
-assert(sw.includes('dar-al-tawhid-kids-v1434'),"SW cache version");
+assert(html.includes('navigator.serviceWorker.register("/kids/sw.js?v=1435"'),"main app must register newest offline cache");
+assert(sw.includes('dar-al-tawhid-kids-v1435'),"SW cache version");
 assert(html.lastIndexOf("parents-dashboard-v1432.css")>html.lastIndexOf("kids-girl-palette-authority-v1427.css"),"dashboard style must be last");
 for(const id of ["parentBirthSave","parentBirthPanel","minuteSlider","parentStoriesDone",
  "parentDuasDone","parentQuizCorrect","parentTodayDone","profileList","profileAdd","profileBring","profileAsk"]){
@@ -49,4 +49,23 @@ assert(offline.includes('id="kidsOfflineLibrary"')||offline.includes('panel.id="
  "offline downloader still available");
 assert(offline.includes('KIDS_OFFLINE_START'),"offline download flow unchanged");
 assert(birth.includes('dar.kids.birthMonth.v1.'),"local-only birth month source preserved");
+/* V1435: the reference mock's visual design is NEVER imported into the visitor app.
+   All real interactions delegate to the existing parents/auth/story controls. */
+for(const marker of ["KIDS_FAMILY_STRUCTURE_V1435","kidsParentFamilyGrid","kidsParentFamilyCount",
+  "kidsParentResume","kidsParentResumeOpen","profilesOnDevice()",
+  "renderFamily()","renderLastStory()","target.click()","data-target=\"stories\""]){
+ assert(js.includes(marker),"family structure missing "+marker);
+}
+assert(js.includes('$("#profileAdd")?.click()'),"add-child entry must reuse existing flow");
+assert(js.includes('$("#kidsParentManage")?.click()'),"all-children action must open existing controls");
+assert(js.includes("item.completed!==true"),"finished recordings cannot advertise resume");
+assert(!js.includes("familienkonto-vorschau"),"mockup must never load inside production");
+assert(!js.includes("resetPasswordForEmail"),"password reset must not be displayed before an authenticated backend exists");
+for(const token of ["KIDS_FAMILY_STRUCTURE_V1435","var(--kp-card)","var(--kp-raised)",
+  "var(--kp-accent)","#view-parents .kids-parent-family-grid",
+  "#view-parents .kids-parent-resume[hidden]"]){
+ assert(css.includes(token),"existing theme family CSS missing "+token);
+}
+assert(!css.includes("TAWHID-KIDS-Elternkonto-Vorschau"),
+ "standalone preview style must not enter main app");
 console.log("KIDS_PARENTS_DASHBOARD_V1432_OK: 3 shells, color contrast, folds, profiles, existing actions, offline");
