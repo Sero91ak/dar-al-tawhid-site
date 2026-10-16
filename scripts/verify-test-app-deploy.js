@@ -164,7 +164,7 @@ async function fetchVersionBuild(base) {
         const location = res.headers.get("location") || "";
         const html = res.status === 200 ? await res.text() : "";
         const ok = res.status === 200 && !location &&
-          html.includes(TEST_EXPECT_BUILD) && /<html[\\s>]/i.test(html);
+          html.includes(TEST_EXPECT_BUILD) && /<html\b/i.test(html);
         console.log(`${label} PWA boot: status=${res.status} redirect=${location || "none"} build=${TEST_EXPECT_BUILD} ok=${ok} attempt=${attempt}/${ATTEMPTS}`);
         if (ok) return true;
       } catch (err) {
