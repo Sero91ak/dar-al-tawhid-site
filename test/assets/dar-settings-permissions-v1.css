@@ -394,3 +394,247 @@ html body.is-settings-route .settings-one-page #dar-setup-hub {
   display:none!important;
   visibility:hidden!important;
 }
+
+/* DAR TEST · SETTINGS COMPACT / THEME-AWARE PRAYER PHOTOGRAPHS V2 (16.10.2026) */
+/* Nur bestehende Dar-Test-Einstellungen. Original-Icons, originale Tab-Leiste,
+   Original-Buttons und reale Schalterzustände bleiben erhalten. */
+html body.is-settings-route #darNavPositionSettingsV1325,
+html body.is-settings-route .dar-nav-position-settings{
+  display:none!important;
+}
+/* Weniger Leerraum, keine verschachtelten Kartenflächen. */
+html body.is-settings-route .settings-one-page.settings-flat-live-v1,
+html body.is-settings-route .settings-one-page.settings-cards-hub-v1{
+  gap:0!important;
+}
+html body.is-settings-route .settings-one-page .notification-section{
+  padding-block:11px!important;
+}
+html body.is-settings-route .settings-one-page .notification-hero{
+  padding-block:8px 10px!important;
+}
+html body.is-settings-route .dar-permission-location{
+  padding-block:9px!important;
+}
+html body.is-settings-route .dar-permission-location__main{
+  padding-bottom:7px;
+}
+html body.is-settings-route .notification-row{
+  min-height:52px!important;
+  padding-block:8px!important;
+}
+html body.is-settings-route .notification-section__head{margin-bottom:7px!important}
+html body.is-settings-route .settings-one-page :is(.theme-switch-panel,.app-icon-panel,.app-font-panel,.settings-live-row){
+  padding-block:13px!important;
+}
+html body.is-settings-route .settings-one-page .settings-section-label{
+  margin-top:11px!important;
+}
+/* Jede App-Farbwelt steuert ihre eigene Text-/Linienhierarchie. Die Variablen
+   sind absichtlich nur auf die Test-Einstellungsoberfläche beschränkt. */
+html[data-theme="light"] body.is-settings-route .notification-center-page{
+  --dar-perm-gold:#73572B;--dar-perm-text:#211D18;--dar-perm-muted:#564C40;
+  --dar-perm-line:rgba(104,77,38,.26);
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-settings-route .notification-center-page,
+html[data-theme="salbei"] body.is-settings-route .notification-center-page{
+  --dar-perm-gold:#3F5D4B;--dar-perm-text:#1C2D23;--dar-perm-muted:#4B5D4F;
+  --dar-perm-line:rgba(63,93,75,.27);
+}
+html[data-theme="soft"] body.is-settings-route .notification-center-page{
+  --dar-perm-gold:#714A5D;--dar-perm-text:#292027;--dar-perm-muted:#5E4E55;
+  --dar-perm-line:rgba(113,74,93,.24);
+}
+html[data-theme="eisgold"] body.is-settings-route .notification-center-page{
+  --dar-perm-gold:#735B24;--dar-perm-text:#1B2738;--dar-perm-muted:#4C5C6E;
+  --dar-perm-line:rgba(120,101,47,.28);
+}
+html[data-theme="dark"] body.is-settings-route .notification-center-page{
+  --dar-perm-gold:#E4CD8B;--dar-perm-text:#F5EFE3;--dar-perm-muted:#D1C6B2;
+  --dar-perm-line:rgba(228,205,139,.23);
+}
+html[data-theme="royal"] body.is-settings-route .notification-center-page{
+  --dar-perm-gold:#E6CF8B;--dar-perm-text:#F7EEDA;--dar-perm-muted:#CEC3AB;
+  --dar-perm-line:rgba(230,207,139,.25);
+}
+html[data-theme="bordeaux"] body.is-settings-route .notification-center-page{
+  --dar-perm-gold:#D8C08B;--dar-perm-text:#F7EDDF;--dar-perm-muted:#D4C1B4;
+  --dar-perm-line:rgba(216,192,139,.27);
+}
+html[data-theme="dar-al-layl"] body.is-settings-route .notification-center-page{
+  --dar-perm-gold:#D8C18B;--dar-perm-text:#F1EDE3;--dar-perm-muted:#C7C9C1;
+  --dar-perm-line:rgba(216,193,139,.24);
+}
+html[data-theme="aurora"] body.is-settings-route .notification-center-page{
+  --dar-perm-gold:#DEC98F;--dar-perm-text:#F2EEE2;--dar-perm-muted:#CAD0C8;
+  --dar-perm-line:rgba(222,201,143,.22);
+}
+/* Fünf bereits im Projekt vorhandene echte Naturfotografien. Werden später
+   durch geprüfte eigens generierte Gebetsmotive aus lokalen Assets ersetzt.
+   Kein externer Bild-Hotlink und keinerlei Datentracking. */
+html body.is-settings-route .notification-prayer-grid>.notification-prayer{
+  --dar-prayer-image:none;
+  --dar-prayer-top:rgba(7,19,37,.33);
+  --dar-prayer-bottom:rgba(7,19,37,.90);
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  min-height:99px!important;
+  gap:3px!important;
+  padding:10px 2px 8px!important;
+  border-radius:12px!important;
+  background-color:var(--card,#10233A)!important;
+  background-image:
+    linear-gradient(180deg,var(--dar-prayer-top),var(--dar-prayer-bottom)),
+    var(--dar-prayer-image)!important;
+  background-position:center center!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  color:#F9F3E6!important;
+  transition:border-color .2s ease,transform .2s ease!important;
+}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(1){
+  --dar-prayer-image:url("/assets/feed-backgrounds/auto/nature/bg-stock-nature-pexels-01-thumb.webp");
+}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(2){
+  --dar-prayer-image:url("/assets/feed-backgrounds/auto/nature/bg-stock-nature-pexels-02-thumb.webp");
+}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(3){
+  --dar-prayer-image:url("/assets/feed-backgrounds/auto/nature/bg-stock-nature-pexels-03-thumb.webp");
+}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(4){
+  --dar-prayer-image:url("/assets/feed-backgrounds/auto/nature/bg-stock-nature-pexels-04-thumb.webp");
+}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(5){
+  --dar-prayer-image:url("/assets/feed-backgrounds/auto/nature/bg-stock-nature-pexels-05-thumb.webp");
+}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer.is-on{
+  border-color:var(--dar-perm-gold)!important;
+}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer:not(.is-on){
+  filter:saturate(.75);
+}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer:focus-visible{
+  outline:2px solid var(--dar-perm-gold)!important;
+  outline-offset:2px!important;
+}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer .notification-prayer-index{
+  flex-shrink:0!important;
+  width:29px!important;height:29px!important;
+  border-color:rgba(255,238,200,.55)!important;
+  background:rgba(5,14,29,.23)!important;
+  color:#FAE7AF!important;
+}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer b,
+html body.is-settings-route .notification-prayer-grid>.notification-prayer .dar-prayer-clock{
+  position:relative!important;
+  z-index:1!important;
+  color:#FFF7E5!important;
+  -webkit-text-fill-color:#FFF7E5!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.95)!important;
+  font-variant-numeric:tabular-nums!important;
+}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer b{
+  font-size:clamp(10px,2.6vw,12px)!important;
+}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer .dar-prayer-clock{
+  font-size:clamp(10px,2.55vw,11px)!important;
+}
+/* Die Fotografien bleiben als Naturfotografien erkennbar; der transparente
+   Schleier übernimmt die Helligkeit des jeweils gewählten Erscheinungsbilds. */
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="salbei"],[data-theme="eisgold"])
+ body.is-settings-route .notification-prayer-grid>.notification-prayer{
+  --dar-prayer-top:rgba(24,27,27,.14);
+  --dar-prayer-bottom:rgba(12,19,23,.80);
+}
+html:is([data-theme="royal"],[data-theme="dark"],[data-theme="dar-al-layl"],[data-theme="bordeaux"],[data-theme="aurora"])
+ body.is-settings-route .notification-prayer-grid>.notification-prayer{
+  --dar-prayer-top:rgba(4,10,25,.34);
+  --dar-prayer-bottom:rgba(4,10,25,.88);
+}
+html[data-theme="bordeaux"] body.is-settings-route .notification-prayer-grid>.notification-prayer{
+  --dar-prayer-top:rgba(30,5,18,.31);
+  --dar-prayer-bottom:rgba(30,5,18,.90);
+}
+html[data-theme="dar-al-layl"] body.is-settings-route .notification-prayer-grid>.notification-prayer{
+  --dar-prayer-top:rgba(4,15,14,.31);
+  --dar-prayer-bottom:rgba(4,15,14,.90);
+}
+html:is([data-theme="salbei"],[data-theme="light"][data-theme-variant="salbei"])
+ body.is-settings-route .notification-prayer-grid>.notification-prayer{
+  --dar-prayer-top:rgba(18,37,25,.21);
+  --dar-prayer-bottom:rgba(18,37,25,.84);
+}
+/* Theme-Kacheln zeigen die EIGENE Vorschaupalette, unabhängig davon, welches
+   andere Erscheinungsbild aktuell auf der Seite eingeschaltet ist. */
+html[data-theme] body.is-settings-route .theme-switch-btn[data-theme-select]{
+  border-color:var(--theme-card-border,rgba(150,132,96,.4))!important;
+  background:var(--theme-card-bg,var(--card))!important;
+  color:var(--theme-card-text,var(--text))!important;
+  -webkit-text-fill-color:var(--theme-card-text,var(--text))!important;
+}
+html[data-theme] body.is-settings-route .theme-switch-btn[data-theme-select] :is(strong,small,span,b){
+  color:var(--theme-card-text,var(--text))!important;
+  -webkit-text-fill-color:var(--theme-card-text,var(--text))!important;
+}
+html body.is-settings-route .theme-switch-btn[data-theme-select="light"]{
+  --theme-card-bg:linear-gradient(145deg,#FFF9ED,#F1E8D7);
+  --theme-card-text:#3A2D1D;
+  --theme-card-border:rgba(97,75,37,.31);
+}
+html body.is-settings-route .theme-switch-btn[data-theme-select="eisgold"]{
+  --theme-card-bg:linear-gradient(145deg,#F5FBFF,#DCEAF4);
+  --theme-card-text:#20354B;
+  --theme-card-border:rgba(54,86,110,.30);
+}
+html body.is-settings-route .theme-switch-btn[data-theme-select="salbei"]{
+  --theme-card-bg:linear-gradient(145deg,#F6F8F0,#E2EBE0);
+  --theme-card-text:#253E30;
+  --theme-card-border:rgba(68,103,81,.28);
+}
+html body.is-settings-route .theme-switch-btn[data-theme-select="dark"]{
+  --theme-card-bg:linear-gradient(145deg,#171C24,#050B15);
+  --theme-card-text:#F0D899;
+  --theme-card-border:rgba(219,189,117,.38);
+}
+html body.is-settings-route .theme-switch-btn[data-theme-select="soft"]{
+  --theme-card-bg:linear-gradient(145deg,#FFF1F0,#F1DFE2);
+  --theme-card-text:#683E50;
+  --theme-card-border:rgba(132,86,107,.31);
+}
+html body.is-settings-route .theme-switch-btn[data-theme-select="royal"]{
+  --theme-card-bg:linear-gradient(145deg,#193251,#08172D);
+  --theme-card-text:#EBD29B;
+  --theme-card-border:rgba(219,189,117,.40);
+}
+html body.is-settings-route .theme-switch-btn[data-theme-select="bordeaux"]{
+  --theme-card-bg:linear-gradient(145deg,#633042,#250E1E);
+  --theme-card-text:#F4DFB8;
+  --theme-card-border:rgba(228,189,134,.4);
+}
+html body.is-settings-route .theme-switch-btn[data-theme-select="dar-al-layl"]{
+  --theme-card-bg:linear-gradient(145deg,#21312B,#0C1616);
+  --theme-card-text:#E9D5AA;
+  --theme-card-border:rgba(205,184,124,.39);
+}
+html body.is-settings-route .theme-switch-btn[data-theme-select="aurora"]{
+  --theme-card-bg:linear-gradient(145deg,#284945,#142B3D);
+  --theme-card-text:#EEE0B3;
+  --theme-card-border:rgba(204,190,127,.35);
+}
+@media(max-width:365px){
+  html body.is-settings-route .notification-prayer-grid>.notification-prayer{
+    min-height:92px!important;padding-inline:1px!important;
+  }
+  html body.is-settings-route .notification-prayer-grid>.notification-prayer .notification-prayer-index{
+    width:25px!important;height:25px!important;
+  }
+  html body.is-settings-route .notification-prayer-grid>.notification-prayer b{
+    font-size:10px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+ html body.is-settings-route .notification-prayer-grid>.notification-prayer{
+   transition:none!important;
+ }
+}
