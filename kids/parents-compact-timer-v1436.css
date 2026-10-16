@@ -1,0 +1,133 @@
+/* KIDS_PARENT_COMPACT_TIMER_V1436
+ * Structure and spacing only: keeps original hero photos, fonts, avatar assets,
+ * 3D dock icons, existing boy/girl palettes and navigation intact. */
+#view-parents .kids-parent-overview.parent-card{
+  margin-top:0!important;margin-bottom:9px!important;padding:14px!important;
+}
+#view-parents .kids-parent-overview-top{margin-bottom:9px}
+#view-parents .kids-parent-identity{gap:10px}
+#view-parents .kids-parent-identity > img{
+  width:55px;height:55px;flex-basis:55px;border-radius:16px;
+}
+#view-parents #kidsParentName{font-size:clamp(19px,5vw,23px)}
+#view-parents button.kids-parent-manage{
+  min-height:43px;margin-top:10px;padding:8px 12px;font-size:13px;
+}
+#view-parents .kids-parent-family{margin-top:10px;padding-top:10px}
+#view-parents .kids-parent-family-grid{margin-top:7px;gap:7px}
+#view-parents .kids-parent-family-grid button{min-height:47px;padding:6px 8px}
+#view-parents .kids-parent-resume{margin-top:8px;padding:8px 10px}
+#view-parents .kids-parent-progress-card,
+#view-parents .kids-parent-time-card,
+#view-parents .kids-parent-age-card{
+  padding:13px!important;margin-bottom:9px!important;
+}
+#view-parents .kids-parent-progress-card .parent-progress-grid{gap:6px}
+#view-parents .kids-parent-progress-card .parent-progress-stat{
+  min-height:62px;padding:9px 11px;border-radius:14px!important;
+}
+#view-parents .kids-parent-progress-card .parent-progress-stat strong{font-size:22px!important;line-height:1.1}
+#view-parents .kids-parent-progress-card .parent-progress-stat span{font-size:11px!important}
+#view-parents .kids-parent-progress-card .parent-note{margin-top:7px!important}
+#view-parents .kids-parent-fold{margin-bottom:9px}
+#view-parents .kids-parent-fold-summary{min-height:59px;padding:12px 13px;border-radius:17px}
+#view-parents .kids-parent-fold-copy{gap:3px}
+#view-parents .kids-parent-birth-fold{margin-top:7px;padding-top:8px}
+#view-parents .kids-parent-age-card .age-tabs{gap:4px}
+#view-parents .kids-parent-age-card .age-tabs button{
+  position:relative;border:2px solid transparent!important;
+  min-height:53px;font-weight:900!important;
+  transition:none!important;
+}
+#view-parents .kids-parent-age-card .age-tabs button.active{
+  background:var(--kp-accent)!important;
+  color:var(--kp-action-ink)!important;
+  -webkit-text-fill-color:var(--kp-action-ink)!important;
+  border-color:var(--kp-ink)!important;
+  box-shadow:inset 0 0 0 1px var(--kp-accent),0 0 0 2px var(--kp-stroke)!important;
+}
+#view-parents .kids-parent-age-card .age-tabs button.active::after{
+  content:"✓";display:inline-block;margin-left:5px;font-size:13px;
+}
+#view-parents .kids-parent-age-card .age-tabs button:focus-visible{
+  outline:3px solid var(--kp-accent);outline-offset:2px;
+}
+/* Only the parents hero geometry is changed. The approved boy/girl
+ * background-image, layer tint, positioning and 3D art remain untouched. */
+@media(max-width:699px){
+ html body .app #view-parents.view > .page-head.page-head{
+   height:clamp(345px,46dvh,420px)!important;
+   min-height:0!important;
+   margin-bottom:9px!important;
+   padding-bottom:24px!important;
+ }
+}
+@media(min-width:700px){
+ html body .app #view-parents.view > .page-head.page-head{
+   height:clamp(380px,37dvh,460px)!important;
+   min-height:0!important;
+   margin-bottom:14px!important;
+ }
+}
+#view-parents .kids-parent-time-actions{display:flex;gap:8px;margin:8px 0 1px}
+#view-parents .kids-parent-time-actions button{
+  flex:1;min-width:0;min-height:44px;border:1px solid var(--kp-stroke)!important;
+  background:var(--kp-raised)!important;color:var(--kp-ink)!important;
+  -webkit-text-fill-color:var(--kp-ink)!important;
+  box-shadow:none!important;border-radius:12px!important;
+  font-weight:850;touch-action:manipulation;
+}
+#view-parents .kids-parent-time-actions button:first-child{
+  background:var(--kp-accent)!important;color:var(--kp-action-ink)!important;
+  -webkit-text-fill-color:var(--kp-action-ink)!important;
+}
+#view-parents .kids-parent-time-status{color:var(--kp-muted);font-size:12px;line-height:1.35;margin:8px 0 0}
+/* Floating timer: only present when actively configured, never alters dock,
+ * safe-area logic, hero assets or other section layouts. */
+#kidsLearningTimer1436{
+  position:fixed;top:calc(env(safe-area-inset-top,0px) + 63px);
+  left:max(12px,env(safe-area-inset-left,0px));right:auto;
+  z-index:80;display:flex;align-items:center;gap:8px;
+  max-width:calc(100vw - 24px);padding:5px 7px 5px 12px;
+  border:1px solid var(--kp-stroke,rgba(237,200,150,.48));
+  border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.20);
+  background:var(--kp-card,#193944);color:var(--kp-ink,#fff5e5);
+  font:800 12px/1.2 inherit;font-family:inherit;
+  font-variant-numeric:tabular-nums;-webkit-user-select:none;user-select:none;
+}
+#kidsLearningTimer1436[hidden]{display:none!important}
+#kidsLearningTimer1436 .kids-timer-digits{
+  font-weight:900;letter-spacing:.02em;font-size:14px;min-width:44px;
+  color:var(--kp-accent,#eed09a);-webkit-text-fill-color:var(--kp-accent,#eed09a);
+}
+#kidsLearningTimer1436 button{
+  display:grid;place-items:center;min-width:34px;min-height:34px;
+  padding:5px;border-radius:50%;border:1px solid var(--kp-stroke,rgba(237,200,150,.48));
+  background:var(--kp-raised,#224655);
+  color:var(--kp-ink,#fff5e5);font-size:15px;font-weight:900;
+  -webkit-text-fill-color:var(--kp-ink,#fff5e5);
+  -webkit-user-select:none;user-select:none;touch-action:manipulation;
+}
+#kidsLearningTimer1436 button:focus-visible{outline:3px solid var(--kp-accent,#eed09a);outline-offset:2px}
+body:has(.app[data-gender="girl"]) #kidsLearningTimer1436{
+  --kp-card:#3b2a44;--kp-raised:#4c3550;--kp-ink:#fff0f3;
+  --kp-stroke:rgba(239,181,210,.55);--kp-accent:#efbdd2;
+}
+body:has(.app[data-gender="boy"]) #kidsLearningTimer1436{
+  --kp-card:#193944;--kp-raised:#224655;--kp-ink:#fff5e5;
+  --kp-stroke:rgba(224,193,132,.45);--kp-accent:#eed09a;
+}
+body.kids-timer-academy1436 #kidsLearningTimer1436{
+  top:calc(env(safe-area-inset-top,0px) + 87px);
+  left:auto;right:max(12px,env(safe-area-inset-right,0px));
+  --kp-card:#193944;--kp-raised:#224655;--kp-ink:#fff5e5;
+  --kp-stroke:rgba(224,193,132,.45);--kp-accent:#eed09a;
+}
+body.kids-timer-academy1436[data-profile="girl"] #kidsLearningTimer1436{
+  --kp-card:#3b2a44;--kp-raised:#4c3550;--kp-ink:#fff0f3;
+  --kp-stroke:rgba(239,181,210,.55);--kp-accent:#efbdd2;
+}
+@media(max-width:380px){
+ #kidsLearningTimer1436{top:calc(env(safe-area-inset-top,0px) + 55px)}
+ #view-parents .kids-parent-time-actions{gap:6px}
+}
