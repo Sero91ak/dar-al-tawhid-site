@@ -7,6 +7,7 @@ Tests do not write to source, staging or public quiz.
 from __future__ import annotations
 import copy
 import json
+import tempfile
 from pathlib import Path
 
 import import_quiz_v4_human_hearing_reviews as imp
@@ -84,6 +85,27 @@ def main():
         "audioSha":young_sha,"category":"pronunciation","note":"a"*1501
     }}
     invalid(bad,"oversized note")
+
+    # A reviewer note can contain names or sensitive details. No free-form
+    # text must ever be copied into a versioned GitHub review result.
+    private_note="CONTACT DETAILS MUST STAY LOCAL ONLY"
+    issue_submission=submission("4-6",{}, {young_text:{
+        "audioSha":young_sha,"category":"pronunciation",
+        "note":private_note
+    }})
+    checked_issue=imp.review_one(issue_submission,"4-6",eligible["4-6"])
+    assert checked_issue["reportedIssues"][young_text]["hasPrivateNote"] is True
+    assert checked_issue["reportedIssues"][young_text]["noteLength"]==len(private_note)
+    assert private_note not in json.dumps(checked_issue)
+    assert "reviewerName" not in json.dumps(checked_issue)
+    # A hostile JSON document with duplicate keys may silently overwrite a
+    # good review decision in normal json.loads; fail before importing.
+    with tempfile.TemporaryDirectory() as tmp:
+        bad_json=Path(tmp)/"duplicate.json"
+        bad_json.write_text('{"schemaVersion":2,"schemaVersion":1}',encoding="utf-8")
+        try: imp.load(bad_json)
+        except ValueError: pass
+        else: raise AssertionError("Duplicate JSON keys were accepted")
 
     # Even a locally simulated 'yes' is never considered verified human QA.
     old_load=imp.load
