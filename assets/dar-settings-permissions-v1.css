@@ -1,0 +1,655 @@
+/* DĀR AL TAWḤĪD Besucher-App: freigegebene Einstellungsoberfläche 16.10.2026. 
+   Keine Änderung an Push-Engine, Navigation, Service Worker oder Berechnung. */
+html body:has(.settings-one-page) .settings-one-page > .notification-center-page{
+  --dar-perm-gold:var(--gold2,var(--theme-accent,#dec38b));
+  --dar-perm-line:color-mix(in srgb,var(--dar-perm-gold) 22%,transparent);
+  --dar-perm-text:var(--text,#f1ecdf);
+  --dar-perm-muted:var(--muted,#aab4c3);
+  box-sizing:border-box!important;
+  display:block!important;
+  max-width:100%!important;
+  min-width:0!important;
+  width:100%!important;
+  margin:0!important;
+  padding:0 0 14px!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+html body:has(.settings-one-page) .settings-one-page .notification-hero{
+  position:relative!important;
+  margin:0!important;
+  padding:12px 2px 10px!important;
+  border:0!important;
+  border-bottom:1px solid var(--dar-perm-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html body:has(.settings-one-page) .notification-hero::after{display:none!important}
+html body:has(.settings-one-page) .notification-hero__top{
+  display:grid!important;
+  grid-template-columns:38px minmax(0,1fr) auto!important;
+  align-items:center!important;
+  gap:10px!important;
+  padding:0!important;
+}
+html body:has(.settings-one-page) .notification-hero__icon{
+  width:38px!important;height:38px!important;
+  display:grid!important;place-items:center!important;
+  border:1px solid var(--dar-perm-line)!important;
+  border-radius:50%!important;
+  color:var(--dar-perm-gold)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html body:has(.settings-one-page) .notification-hero__top h2{
+  margin:0!important;
+  font-family:var(--serif,Georgia,serif)!important;
+  font-size:clamp(19px,4.8vw,24px)!important;
+  font-weight:550!important;
+  line-height:1.16!important;
+  color:var(--dar-perm-text)!important;
+}
+html body:has(.settings-one-page) .notification-hero__top p{
+  margin:3px 0 0!important;
+  font-size:11px!important;
+  line-height:1.4!important;
+  color:var(--dar-perm-muted)!important;
+}
+html body:has(.settings-one-page) .notification-hero__count{
+  min-width:61px!important;
+  width:auto!important;
+  max-width:80px!important;
+  height:42px!important;
+  padding:2px 9px!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;
+  border:1px solid var(--dar-perm-line)!important;
+  border-radius:12px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:var(--dar-perm-muted)!important;
+  font-size:10px!important;
+  text-align:center!important;
+}
+html body:has(.settings-one-page) .notification-hero__count b{
+  font-size:19px!important;
+  color:var(--dar-perm-gold)!important;
+}
+html body:has(.settings-one-page) .notification-hero__status{display:none!important}
+html body:has(.settings-one-page) #notificationHealthBox[hidden]{display:none!important}
+html body:has(.settings-one-page) #notificationHealthBox:not([hidden]){
+  display:flex!important;
+  flex-wrap:wrap!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:9px!important;
+  margin:9px 0 0!important;
+  padding:9px 0 0!important;
+  min-height:42px!important;
+  border:0!important;
+  border-top:1px solid var(--dar-perm-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html body:has(.settings-one-page) #notificationHealthText{
+  flex:1 1 160px!important;
+  min-width:0!important;
+  margin:0!important;
+  color:var(--dar-perm-muted)!important;
+  font-size:11px!important;
+  line-height:1.4!important;
+  overflow-wrap:anywhere!important;
+}
+html body:has(.settings-one-page) #notificationReenableBtn{
+  min-height:43px!important;
+  border-radius:999px!important;
+  font-size:11px!important;
+  padding:7px 12px!important;
+  border:1px solid var(--dar-perm-line)!important;
+  background:transparent!important;
+  color:var(--dar-perm-text)!important;
+  white-space:normal!important;
+  box-shadow:none!important;
+}
+html body:has(.settings-one-page) #notificationDeviceTestBtn{display:none!important}
+/* Standort wird unmittelbar unter Benachrichtigungen eingestellt. */
+html body:has(.settings-one-page) .dar-permission-location{
+  margin:0!important;
+  padding:12px 2px!important;
+  border-bottom:1px solid var(--dar-perm-line)!important;
+  background:transparent!important;
+}
+html body:has(.settings-one-page) .dar-permission-location__main{
+  display:grid;
+  grid-template-columns:32px minmax(0,1fr);
+  align-items:center;
+  gap:10px;
+  padding-bottom:10px;
+}
+html body:has(.settings-one-page) .dar-permission-location__icon{
+  display:grid;place-items:center;
+  width:32px;height:32px;
+  border:1px solid var(--dar-perm-line);
+  border-radius:50%;
+  color:var(--dar-perm-gold);
+  font-size:18px;
+}
+html body:has(.settings-one-page) .dar-permission-location__main strong,
+html body:has(.settings-one-page) .dar-permission-city-label{
+  display:block;
+  color:var(--dar-perm-text);
+  font-weight:700;
+  font-size:13px;
+  line-height:1.3;
+}
+html body:has(.settings-one-page) .dar-permission-location__main small{
+  display:block;
+  margin-top:2px;
+  color:var(--dar-perm-muted);
+  font-size:11px;
+  line-height:1.4;
+}
+html body:has(.settings-one-page) .dar-permission-location__actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  width:100%;
+}
+html body:has(.settings-one-page) .dar-permission-location button,
+html body:has(.settings-one-page) #darManualCityInput{
+  box-sizing:border-box;
+  min-height:44px;
+  min-width:0;
+  border:1px solid var(--dar-perm-line);
+  border-radius:999px;
+  padding:9px 13px;
+  background:transparent;
+  color:var(--dar-perm-text);
+  box-shadow:none;
+  font-family:inherit;
+  font-size:12px;
+  line-height:1.3;
+  font-weight:650;
+}
+html body:has(.settings-one-page) .dar-permission-location button{
+  cursor:pointer;
+  touch-action:manipulation;
+  -webkit-user-select:none;user-select:none;
+  -webkit-touch-callout:none;
+}
+html body:has(.settings-one-page) .dar-permission-location button:disabled{opacity:.6;cursor:wait}
+html body:has(.settings-one-page) .dar-permission-location button:focus-visible,
+html body:has(.settings-one-page) #darManualCityInput:focus-visible{
+  outline:2px solid var(--dar-perm-gold);
+  outline-offset:2px;
+}
+html body:has(.settings-one-page) #darManualCityPanel:not([hidden]){
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+html body:has(.settings-one-page) #darManualCityPanel[hidden]{display:none!important}
+html body:has(.settings-one-page) #darManualCityInput{
+  flex:1 1 130px;
+  max-width:100%;
+  min-width:125px;
+  border-radius:12px;
+}
+html body:has(.settings-one-page) .dar-permission-feedback{
+  padding:5px 0 0;
+  font-size:11px;
+  line-height:1.45;
+  color:var(--dar-perm-text);
+}
+html body:has(.settings-one-page) .dar-permission-feedback[hidden]{display:none!important}
+/* Fünf Gebete: echte Tasten & Echtzeiten, keine Zierkacheln. */
+html body:has(.settings-one-page) .settings-one-page .notification-section{
+  margin:0!important;
+  padding:15px 2px 12px!important;
+  border:0!important;
+  border-bottom:1px solid var(--dar-perm-line)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+html body:has(.settings-one-page) .notification-section__head{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  gap:8px!important;
+  margin:0 0 9px!important;
+}
+html body:has(.settings-one-page) .notification-section__kicker{
+  font-size:10px!important;
+  letter-spacing:.14em!important;
+  color:var(--dar-perm-gold)!important;
+  margin:0 0 3px!important;
+}
+html body:has(.settings-one-page) .notification-section__head h3{
+  font-family:var(--serif,Georgia,serif)!important;
+  font-size:clamp(20px,5vw,25px)!important;
+  font-weight:530!important;
+  line-height:1.15!important;
+  color:var(--dar-perm-text)!important;
+}
+html body:has(.settings-one-page) .notification-section__head p{
+  margin:3px 0 0!important;
+  color:var(--dar-perm-muted)!important;
+  font-size:11px!important;
+  line-height:1.4!important;
+}
+html body:has(.settings-one-page) .notification-prayer-grid{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:4px!important;
+  width:100%!important;
+  min-width:0!important;
+  padding:0!important;
+  margin:8px 0 0!important;
+}
+html body:has(.settings-one-page) .notification-prayer{
+  box-sizing:border-box!important;
+  min-width:0!important;
+  min-height:78px!important;
+  padding:8px 1px!important;
+  border-radius:11px!important;
+  border:1px solid var(--dar-perm-line)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:center!important;
+  align-items:center!important;
+  gap:3px!important;
+  background:transparent!important;
+  color:var(--dar-perm-muted)!important;
+  box-shadow:none!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+}
+html body:has(.settings-one-page) .notification-prayer.is-on{
+  border-color:color-mix(in srgb,var(--dar-perm-gold) 48%,transparent)!important;
+  background:color-mix(in srgb,var(--dar-perm-gold) 7%,transparent)!important;
+}
+html body:has(.settings-one-page) .notification-prayer-index{
+  width:30px!important;height:30px!important;
+  border-radius:50%!important;
+  border:1px solid var(--dar-perm-line)!important;
+  display:grid!important;place-items:center!important;
+  background:transparent!important;
+  font-size:17px!important;
+  color:var(--dar-perm-gold)!important;
+  box-shadow:none!important;
+}
+html body:has(.settings-one-page) .notification-prayer b{
+  font-size:clamp(9.5px,2.5vw,12px)!important;
+  line-height:1.2!important;
+  color:var(--dar-perm-text)!important;
+  white-space:normal!important;
+  font-weight:680!important;
+}
+html body:has(.settings-one-page) .notification-prayer small{display:none!important}
+html body:has(.settings-one-page) .dar-prayer-clock{
+  font-size:10px;
+  line-height:1.15;
+  font-variant-numeric:tabular-nums;
+  color:var(--dar-perm-muted);
+}
+html body:has(.settings-one-page) .notification-prayer.is-on .dar-prayer-clock{
+  color:var(--dar-perm-gold);
+}
+html body:has(.settings-one-page) .notification-toggle{
+  width:47px!important;min-width:47px!important;
+  height:29px!important;min-height:29px!important;
+  border-radius:999px!important;
+  box-shadow:none!important;
+  touch-action:manipulation!important;
+}
+html body:has(.settings-one-page) .notification-settings-list{
+  width:100%!important;
+}
+html body:has(.settings-one-page) .notification-row{
+  min-height:59px!important;
+  padding:10px 1px!important;
+  border:0!important;
+  border-top:1px solid var(--dar-perm-line)!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html body:has(.settings-one-page) .notification-row__glyph{
+  width:32px!important;height:32px!important;
+  flex:0 0 32px!important;
+  display:grid!important;place-items:center!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  border:1px solid var(--dar-perm-line)!important;
+  color:var(--dar-perm-gold)!important;
+  font-size:15px!important;
+}
+html body:has(.settings-one-page) .notification-row strong{
+  color:var(--dar-perm-text)!important;
+  font-size:12px!important;
+  line-height:1.3!important;
+}
+html body:has(.settings-one-page) .notification-row small{
+  color:var(--dar-perm-muted)!important;
+  font-size:10.5px!important;
+  line-height:1.3!important;
+}
+html body:has(.settings-one-page) .notification-time input,
+html body:has(.settings-one-page) .notification-time select{
+  box-sizing:border-box!important;
+  min-height:39px!important;
+  max-width:94px!important;
+  border-radius:999px!important;
+  padding:6px 9px!important;
+  background:transparent!important;
+  color:var(--dar-perm-text)!important;
+  box-shadow:none!important;
+}
+html body:has(.settings-one-page) .notification-time{
+  min-width:0!important;
+  gap:7px!important;
+}
+html body:has(.settings-one-page) .notification-note,
+html body:has(.settings-one-page) .notification-hero__status,
+html body:has(.settings-one-page) .notification-location{
+  display:none!important;
+}
+html body:has(.settings-one-page) .notification-saved{
+  text-align:center!important;
+  color:var(--dar-perm-muted)!important;
+  font-size:11px!important;
+  margin:13px 0 0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+}
+html body:has(.settings-one-page) .settings-section-label{
+  margin-top:15px!important;
+}
+/* Der bisherige Mehr-Eintrag entfällt; App → Einstellungen bleibt erhalten. */
+html body:has(.dm15-shell) .dm-card[data-dm-item="notifications"],
+html body:has(.dm15-shell) .more-feature-row[data-nav="notifications"]{
+  display:none!important;
+}
+@media(max-width:365px){
+ html body:has(.settings-one-page) .notification-prayer{min-height:76px!important}
+ html body:has(.settings-one-page) .notification-prayer-index{width:26px!important;height:26px!important}
+ html body:has(.settings-one-page) .dar-prayer-clock{font-size:9px}
+ html body:has(.settings-one-page) .notification-time{gap:4px!important}
+ html body:has(.settings-one-page) .notification-time input{max-width:81px!important}
+}
+
+
+/* APP HEALTH CHECK COMPAT: the legacy setup hub remains in DOM after the
+   real settings center, but it must NEVER appear as a second UI surface. */
+html body:has(.settings-one-page) .settings-one-page #dar-setup-hub[data-dar-setup="true"],
+html body:has(.settings-one-page) .settings-one-page #dar-setup-hub {
+  display:none!important;
+  visibility:hidden!important;
+}
+
+/* DAR TEST · SETTINGS COMPACT / THEME-AWARE PRAYER PHOTOGRAPHS V2 (16.10.2026) */
+/* Nur bestehende Dar-Test-Einstellungen. Original-Icons, originale Tab-Leiste,
+   Original-Buttons und reale Schalterzustände bleiben erhalten. */
+html body:has(.settings-one-page) #darNavPositionSettingsV1325,
+html body:has(.settings-one-page) .dar-nav-position-settings{
+  display:none!important;
+}
+/* Weniger Leerraum, keine verschachtelten Kartenflächen. */
+html body:has(.settings-one-page) .settings-one-page.settings-flat-live-v1,
+html body:has(.settings-one-page) .settings-one-page.settings-cards-hub-v1{
+  gap:0!important;
+}
+html body:has(.settings-one-page) .settings-one-page .notification-section{
+  padding-block:11px!important;
+}
+html body:has(.settings-one-page) .settings-one-page .notification-hero{
+  padding-block:8px 10px!important;
+}
+html body:has(.settings-one-page) .dar-permission-location{
+  padding-block:9px!important;
+}
+html body:has(.settings-one-page) .dar-permission-location__main{
+  padding-bottom:7px;
+}
+html body:has(.settings-one-page) .notification-row{
+  min-height:52px!important;
+  padding-block:8px!important;
+}
+html body:has(.settings-one-page) .notification-section__head{margin-bottom:7px!important}
+html body:has(.settings-one-page) .settings-one-page :is(.theme-switch-panel,.app-icon-panel,.app-font-panel,.settings-live-row){
+  padding-block:13px!important;
+}
+html body:has(.settings-one-page) .settings-one-page .settings-section-label{
+  margin-top:11px!important;
+}
+/* Jede App-Farbwelt steuert ihre eigene Text-/Linienhierarchie. Die Variablen
+   sind absichtlich nur auf die Test-Einstellungsoberfläche beschränkt. */
+html[data-theme="light"] body:has(.settings-one-page) .notification-center-page{
+  --dar-perm-gold:#73572B;--dar-perm-text:#211D18;--dar-perm-muted:#564C40;
+  --dar-perm-line:rgba(104,77,38,.26);
+}
+html[data-theme="light"][data-theme-variant="salbei"] body:has(.settings-one-page) .notification-center-page,
+html[data-theme="salbei"] body:has(.settings-one-page) .notification-center-page{
+  --dar-perm-gold:#3F5D4B;--dar-perm-text:#1C2D23;--dar-perm-muted:#4B5D4F;
+  --dar-perm-line:rgba(63,93,75,.27);
+}
+html[data-theme="soft"] body:has(.settings-one-page) .notification-center-page{
+  --dar-perm-gold:#714A5D;--dar-perm-text:#292027;--dar-perm-muted:#5E4E55;
+  --dar-perm-line:rgba(113,74,93,.24);
+}
+html[data-theme="eisgold"] body:has(.settings-one-page) .notification-center-page{
+  --dar-perm-gold:#735B24;--dar-perm-text:#1B2738;--dar-perm-muted:#4C5C6E;
+  --dar-perm-line:rgba(120,101,47,.28);
+}
+html[data-theme="dark"] body:has(.settings-one-page) .notification-center-page{
+  --dar-perm-gold:#E4CD8B;--dar-perm-text:#F5EFE3;--dar-perm-muted:#D1C6B2;
+  --dar-perm-line:rgba(228,205,139,.23);
+}
+html[data-theme="royal"] body:has(.settings-one-page) .notification-center-page{
+  --dar-perm-gold:#E6CF8B;--dar-perm-text:#F7EEDA;--dar-perm-muted:#CEC3AB;
+  --dar-perm-line:rgba(230,207,139,.25);
+}
+html[data-theme="bordeaux"] body:has(.settings-one-page) .notification-center-page{
+  --dar-perm-gold:#D8C08B;--dar-perm-text:#F7EDDF;--dar-perm-muted:#D4C1B4;
+  --dar-perm-line:rgba(216,192,139,.27);
+}
+html[data-theme="dar-al-layl"] body:has(.settings-one-page) .notification-center-page{
+  --dar-perm-gold:#D8C18B;--dar-perm-text:#F1EDE3;--dar-perm-muted:#C7C9C1;
+  --dar-perm-line:rgba(216,193,139,.24);
+}
+html[data-theme="aurora"] body:has(.settings-one-page) .notification-center-page{
+  --dar-perm-gold:#DEC98F;--dar-perm-text:#F2EEE2;--dar-perm-muted:#CAD0C8;
+  --dar-perm-line:rgba(222,201,143,.22);
+}
+/* Fünf bereits im Projekt vorhandene echte Naturfotografien. Werden später
+   durch geprüfte eigens generierte Gebetsmotive aus lokalen Assets ersetzt.
+   Kein externer Bild-Hotlink und keinerlei Datentracking. */
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer{
+  --dar-prayer-image:none;
+  --dar-prayer-top:rgba(7,19,37,.33);
+  --dar-prayer-bottom:rgba(7,19,37,.90);
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  min-height:99px!important;
+  gap:3px!important;
+  padding:10px 2px 8px!important;
+  border-radius:12px!important;
+  background-color:var(--card,#10233A)!important;
+  background-image:
+    linear-gradient(180deg,var(--dar-prayer-top),var(--dar-prayer-bottom)),
+    var(--dar-prayer-image)!important;
+  background-position:center center!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  color:#F9F3E6!important;
+  transition:border-color .2s ease,transform .2s ease!important;
+}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer:nth-child(1){
+  --dar-prayer-image:url("/assets/feed-backgrounds/auto/nature/bg-auto-nature-pexels-10079268-thumb.jpg");
+}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer:nth-child(2){
+  --dar-prayer-image:url("/assets/feed-backgrounds/auto/nature/bg-auto-nature-pexels-32040386-thumb.jpg");
+}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer:nth-child(3){
+  --dar-prayer-image:url("/assets/feed-backgrounds/auto/nature/bg-auto-nature-pexels-28428819-thumb.jpg");
+}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer:nth-child(4){
+  --dar-prayer-image:url("/assets/feed-backgrounds/auto/nature/bg-auto-nature-pexels-19779646-thumb.jpg");
+}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer:nth-child(5){
+  --dar-prayer-image:url("/assets/feed-backgrounds/auto/nature/bg-auto-nature-pexels-38423934-thumb.jpg");
+}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer.is-on{
+  border-color:var(--dar-perm-gold)!important;
+}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer:not(.is-on){
+  filter:saturate(.75);
+}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer:focus-visible{
+  outline:2px solid var(--dar-perm-gold)!important;
+  outline-offset:2px!important;
+}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer .notification-prayer-index{
+  flex-shrink:0!important;
+  width:29px!important;height:29px!important;
+  border-color:rgba(255,238,200,.55)!important;
+  background:rgba(5,14,29,.23)!important;
+  color:#FAE7AF!important;
+}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer b,
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer .dar-prayer-clock{
+  position:relative!important;
+  z-index:1!important;
+  color:#FFF7E5!important;
+  -webkit-text-fill-color:#FFF7E5!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.95)!important;
+  font-variant-numeric:tabular-nums!important;
+}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer b{
+  font-size:clamp(10px,2.6vw,12px)!important;
+}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer .dar-prayer-clock{
+  font-size:clamp(10px,2.55vw,11px)!important;
+}
+/* Die Fotografien bleiben als Naturfotografien erkennbar; der transparente
+   Schleier übernimmt die Helligkeit des jeweils gewählten Erscheinungsbilds. */
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="salbei"],[data-theme="eisgold"])
+ body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer{
+  --dar-prayer-top:rgba(24,27,27,.14);
+  --dar-prayer-bottom:rgba(12,19,23,.80);
+}
+html:is([data-theme="royal"],[data-theme="dark"],[data-theme="dar-al-layl"],[data-theme="bordeaux"],[data-theme="aurora"])
+ body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer{
+  --dar-prayer-top:rgba(4,10,25,.34);
+  --dar-prayer-bottom:rgba(4,10,25,.88);
+}
+html[data-theme="bordeaux"] body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer{
+  --dar-prayer-top:rgba(30,5,18,.31);
+  --dar-prayer-bottom:rgba(30,5,18,.90);
+}
+html[data-theme="dar-al-layl"] body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer{
+  --dar-prayer-top:rgba(4,15,14,.31);
+  --dar-prayer-bottom:rgba(4,15,14,.90);
+}
+html:is([data-theme="salbei"],[data-theme="light"][data-theme-variant="salbei"])
+ body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer{
+  --dar-prayer-top:rgba(18,37,25,.21);
+  --dar-prayer-bottom:rgba(18,37,25,.84);
+}
+/* Theme-Kacheln zeigen die EIGENE Vorschaupalette, unabhängig davon, welches
+   andere Erscheinungsbild aktuell auf der Seite eingeschaltet ist. */
+html[data-theme] body:has(.settings-one-page) .theme-switch-btn[data-theme-select]{
+  border-color:var(--theme-card-border,rgba(150,132,96,.4))!important;
+  background:var(--theme-card-bg,var(--card))!important;
+  color:var(--theme-card-text,var(--text))!important;
+  -webkit-text-fill-color:var(--theme-card-text,var(--text))!important;
+}
+html[data-theme] body:has(.settings-one-page) .theme-switch-btn[data-theme-select] :is(strong,small,span,b){
+  color:var(--theme-card-text,var(--text))!important;
+  -webkit-text-fill-color:var(--theme-card-text,var(--text))!important;
+}
+html body:has(.settings-one-page) .theme-switch-btn[data-theme-select="light"]{
+  --theme-card-bg:linear-gradient(145deg,#FFF9ED,#F1E8D7);
+  --theme-card-text:#3A2D1D;
+  --theme-card-border:rgba(97,75,37,.31);
+}
+html body:has(.settings-one-page) .theme-switch-btn[data-theme-select="eisgold"]{
+  --theme-card-bg:linear-gradient(145deg,#F5FBFF,#DCEAF4);
+  --theme-card-text:#20354B;
+  --theme-card-border:rgba(54,86,110,.30);
+}
+html body:has(.settings-one-page) .theme-switch-btn[data-theme-select="salbei"]{
+  --theme-card-bg:linear-gradient(145deg,#F6F8F0,#E2EBE0);
+  --theme-card-text:#253E30;
+  --theme-card-border:rgba(68,103,81,.28);
+}
+html body:has(.settings-one-page) .theme-switch-btn[data-theme-select="dark"]{
+  --theme-card-bg:linear-gradient(145deg,#171C24,#050B15);
+  --theme-card-text:#F0D899;
+  --theme-card-border:rgba(219,189,117,.38);
+}
+html body:has(.settings-one-page) .theme-switch-btn[data-theme-select="soft"]{
+  --theme-card-bg:linear-gradient(145deg,#FFF1F0,#F1DFE2);
+  --theme-card-text:#683E50;
+  --theme-card-border:rgba(132,86,107,.31);
+}
+html body:has(.settings-one-page) .theme-switch-btn[data-theme-select="royal"]{
+  --theme-card-bg:linear-gradient(145deg,#193251,#08172D);
+  --theme-card-text:#EBD29B;
+  --theme-card-border:rgba(219,189,117,.40);
+}
+html body:has(.settings-one-page) .theme-switch-btn[data-theme-select="bordeaux"]{
+  --theme-card-bg:linear-gradient(145deg,#633042,#250E1E);
+  --theme-card-text:#F4DFB8;
+  --theme-card-border:rgba(228,189,134,.4);
+}
+html body:has(.settings-one-page) .theme-switch-btn[data-theme-select="dar-al-layl"]{
+  --theme-card-bg:linear-gradient(145deg,#21312B,#0C1616);
+  --theme-card-text:#E9D5AA;
+  --theme-card-border:rgba(205,184,124,.39);
+}
+html body:has(.settings-one-page) .theme-switch-btn[data-theme-select="aurora"]{
+  --theme-card-bg:linear-gradient(145deg,#284945,#142B3D);
+  --theme-card-text:#EEE0B3;
+  --theme-card-border:rgba(204,190,127,.35);
+}
+@media(max-width:365px){
+  html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer{
+    min-height:92px!important;padding-inline:1px!important;
+  }
+  html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer .notification-prayer-index{
+    width:25px!important;height:25px!important;
+  }
+  html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer b{
+    font-size:10px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+ html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer{
+   transition:none!important;
+ }
+}
+
+/* Besucher-Freigabe 16.10.2026: themeabhängige Darstellung. */
+
+/* Lokal gespeicherte Gebetsmotive aus bereits bereitgestellten Test-Assets. */
+/* Bereits vorhandene lokale Motive, keine externen Bilder.
+   Alte Gebetsauswahl und alle Original-Icons sowie Aktivierungsmechanik bleiben. */
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer:nth-child(1){--dar-prayer-image:url("/test/assets/prayer-motifs/fajr.webp?v=20261016-motifs-v5")}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer:nth-child(2){--dar-prayer-image:url("/test/assets/prayer-motifs/dhuhr.webp?v=20261016-motifs-v5")}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer:nth-child(3){--dar-prayer-image:url("/test/assets/prayer-motifs/asr.webp?v=20261016-motifs-v5")}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer:nth-child(4){--dar-prayer-image:url("/test/assets/prayer-motifs/maghrib.webp?v=20261016-motifs-v5")}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer:nth-child(5){--dar-prayer-image:url("/test/assets/prayer-motifs/isha.webp?v=20261016-motifs-v5")}
+html body:has(.settings-one-page) .notification-prayer-grid>.notification-prayer{
+  background-size:cover!important;
+  background-position:50% 44%!important;
+  background-repeat:no-repeat!important;
+}

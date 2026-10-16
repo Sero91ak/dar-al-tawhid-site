@@ -7813,6 +7813,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-24T23:59:00.000Z"
+    },
+    {
+      "id": "dar-visitor-settings-center-global-20261016",
+      "at": "2026-10-16T16:21:00+02:00",
+      "approvedBy": "user-explicit-push-overhauled-settings-from-test-global-into-adult-visitor-app-20261016",
+      "reason": "Exclusively approved adult visitor settings surface: reuse existing test settings presentation, location selection and computed prayer clocks and locally hosted prayer motifs. Preserve native iOS OneSignal core, browser push handlers, original 3D tab navigation, all kids and Apple TV files.",
+      "paths": [
+        "index.html",
+        "assets/dar-settings-permissions-v1.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-24T23:59:00.000Z"
     }
   ],
   "enabled": true
