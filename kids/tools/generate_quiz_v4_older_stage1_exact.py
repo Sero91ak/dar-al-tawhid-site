@@ -90,7 +90,8 @@ def prepare():
     paid={row["text"] for row in ledger["rows"]}
     check(len(paid)==len(ledger["rows"]),"paid text has duplicate receipt")
     check(paid<=set(reg["textClips"]),"charged original missing from registry")
-    check(not(texts&protected),"older first-stage queue contains protected old-paid V4 audio")
+    check(not((texts-set(reg["textClips"]))&protected),
+          "new first-stage queue attempts to rebuy an earlier paid V4 original")
     outstanding=[]
     for x in rows:
         text=x["spokenText"]
@@ -178,8 +179,8 @@ def main():
         # A failed/ambiguous POST is NEVER retried. Runner artifacts retain
         # real MP3s already written before the error.
         audio,request_id=original_mp3(key,text)
-        check(request_id and isinstance(request_id,str),
-              "paid MP3 was returned without a provider receipt; recovery required, NO RETRY")
+        # Persist the charged MP3 bytes EVEN when the provider omitted a
+        # request ID: a lost receipt must NEVER trigger a second purchase.
         path.write_bytes(audio)
         audiosha=hashlib.sha256(audio).hexdigest()
         reg["textClips"][text]={
@@ -197,6 +198,8 @@ def main():
             "providerRequestId":request_id,"createdAt":datetime.now(timezone.utc).isoformat(),
             "note":"Original V4; audit exact provider billing; no blind retries"})
         write(REG,reg);write(LEDGER,ledger)
+        if not request_id:
+            raise RuntimeError("Paid MP3 bytes were saved without a provider request ID. Preserve runner artifact, reconcile manually; NEVER RETRY this text.")
         completed+=1
         print("PAID_V4_STAGE1_ORIGINAL_SAVED "+
               json.dumps({"count":completed,"sha256":audiosha,
