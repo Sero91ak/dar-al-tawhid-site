@@ -148,15 +148,34 @@ function renderFamily(){
  }
  grid.replaceChildren(fragment);
 }
+/* The shared MV4 reader is the source for modern listening; the former
+   Story Hub key is read-only migration fallback, never a navigation target. */
 function readLastStory(){
+ try{
+  const last=JSON.parse(localStorage.getItem("kids.storyNowPlaying.v2")||"null");
+  if(last&&typeof last==="object"&&typeof last.title==="string"&&last.title.trim()){
+   const deep=String(last.deepLink||"").match(/^#stories\/(prophet|sahabi|sahabiyyah|deen)\/([^/?#]+)/i);
+   const key=String(last.key||"");
+   const parts=key.match(/^(prophet|sahabi|sahabiyyah|deen|salaf):(.+?)(?::(?:4-5|6-8|9-10))?$/i);
+   const kind=deep?.[1]||parts?.[1]||"";
+   const id=deep?decodeURIComponent(deep[2]):parts?.[2]||"";
+   const categories={prophet:"prophets",sahabi:"sahaba",sahabiyyah:"sahabiyyat",deen:"deen",salaf:"salaf"};
+   if(categories[kind]&&id&&key){
+    const saved=JSON.parse(localStorage.getItem("kids.storyAudioProgress.v2."+key)||"null");
+    const time=Number(saved?.time)||0,duration=Number(saved?.duration)||0;
+    return {title:last.title,id,category:categories[kind],time:Math.max(0,time),
+     duration:Math.max(0,duration),artwork:last.artwork||"",completed:false,replay:time<1};
+   }
+  }
+ }catch(_){}
  let item=null;
  try{item=JSON.parse(localStorage.getItem("kids.storyHub.last.v1")||"null")}catch(_){}
  if(!item||typeof item!=="object"||typeof item.title!=="string"||!item.title.trim()||
-  typeof item.category!=="string"||item.id==null||!String(item.id)||
-  !Number.isFinite(Number(item.time))||Number(item.time)<0)return null;
+  !["prophets","sahaba","sahabiyyat","deen"].includes(item.category)||
+  item.id==null||!String(item.id)||!Number.isFinite(Number(item.time))||Number(item.time)<0)return null;
  return item;
 }
-const storyCategory={prophets:"Propheten",sahaba:"Ṣaḥābah",sahabiyyat:"Ṣaḥābiyyāt",deen:"Lern-Erzählungen"};
+const storyCategory={prophets:"Propheten",sahaba:"Ṣaḥābah",sahabiyyat:"Ṣaḥābiyyāt",deen:"Lern-Erzählungen",salaf:"Schätze der Salaf"};
 function listenTime(seconds){
  const n=Math.max(0,Math.floor(Number(seconds)||0));
  return Math.floor(n/60)+":"+String(n%60).padStart(2,"0");
@@ -181,10 +200,14 @@ function renderLastStory(){
  info.textContent=item.completed===true?"Abgeschlossen · erneut anhören":
   (storyCategory[item.category]||"Hörgeschichte")+" · ab "+listenTime(item.time)+
   (Number(item.duration)>0?" von "+listenTime(item.duration):"");
- button.textContent=item.completed===true?"↺ Erneut hören":"▶ Weiterhören";
- const safeArt=typeof item.artwork==="string"&&item.artwork.startsWith("/kids/assets/")&&!item.artwork.includes("..");
+ button.textContent=item.completed===true?"↺ Erneut hören":item.replay?"▶ Anhören":"▶ Weiterhören";
+ let safeArt="";
+ try{
+  const u=new URL(String(item.artwork||""),location.origin);
+  if(u.origin===location.origin&&u.pathname.startsWith("/kids/assets/")&&!u.pathname.includes(".."))safeArt=u.href;
+ }catch(_){}
  art.onerror=function(){this.onerror=null;this.src="/kids/assets/kids-icons/headphones-real-v12.png"};
- art.src=safeArt?item.artwork:"/kids/assets/kids-icons/headphones-real-v12.png";
+ art.src=safeArt||"/kids/assets/kids-icons/headphones-real-v12.png";
  const duration=Number(item.duration)||0;
  const pct=item.completed===true?100:duration>0?Math.min(100,Math.max(0,Number(item.time)/duration*100)):0;
  track.hidden=!(duration>0||item.completed===true);bar.style.width=pct.toFixed(1)+"%";
@@ -233,15 +256,33 @@ function paint(){
 $("#kidsParentResumeOpen")?.addEventListener("click",function(){
  const item=readLastStory();
  if(!item)return;
+ // Never revive the retired central "Geschichten des Īmān" world/player.
+ // The existing FollowReader restores the saved second for each modern story.
+ if(item.category==="salaf"){
+  window.DARKidsSalafLibrary?.openStory?.(String(item.id));
+  return;
+ }
  document.querySelector('.bottom-nav [data-target="stories"]')?.click();
- // Open the original Story Hub resume API at the saved second, no mock player.
- setTimeout(function(){
-  if(window.DARKidsStoryHub&&typeof window.DARKidsStoryHub.openResume==="function"){
-   window.DARKidsStoryHub.openResume(item.category,item.id,item.completed===true?0:Number(item.time)||0);
-  }else if(window.DARKidsStoryHub&&typeof window.DARKidsStoryHub.openStory==="function"){
-   window.DARKidsStoryHub.openStory(item.category,item.id);
+ const api={
+  prophets:window.DARKidsProphetStories,
+  sahaba:window.DARKidsMubashshirun,
+  sahabiyyat:window.DARKidsSahabiyyat,
+  deen:window.DARKidsDeenLessons
+ }[item.category];
+ if(!api||typeof api.openLibrary!=="function"||typeof api.open!=="function")return;
+ api.openLibrary();
+ // Open only a current-library item. If retired, leave the library visible.
+ const selector={prophets:"data-ps-id",sahaba:"data-ms-id",sahabiyyat:"data-sy-id",deen:"data-dl-id"}[item.category];
+ let tries=0;
+ const openWhenReady=function(){
+  if(document.querySelector("["+selector+"]")){
+   const cards=Array.from(document.querySelectorAll("["+selector+"]"));
+   if(cards.some(card=>card.getAttribute(selector)===String(item.id)))api.open(String(item.id));
+   return;
   }
- },180);
+  if(tries++<30)setTimeout(openWhenReady,100);
+ };
+ openWhenReady();
 });
 $("#kidsParentManage")?.addEventListener("click",function(){
  accountDetails.open=true;
