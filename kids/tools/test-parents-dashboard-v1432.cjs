@@ -15,7 +15,7 @@ const birth=read("kids/kids-birth-month-v1431.js");
 assert.doesNotThrow(()=>new Function(js),"parent JS syntax");
 assert.doesNotThrow(()=>new Function(sw),"SW syntax");
 assert.equal((css.match(/\{/g)||[]).length,(css.match(/\}/g)||[]).length,"parent CSS valid brace structure");
-for(const asset of ["parents-dashboard-v1432.js?v=1440","parents-dashboard-v1432.css?v=1435"])
+for(const asset of ["parents-dashboard-v1432.js?v=1441","parents-dashboard-v1432.css?v=1435"])
   assert(html.includes(asset)&&sw.includes(asset),"parent dashboard assets published and precached: "+asset);
 const releaseCache=String(JSON.parse(read("kids/version.json")).visualSystem.serviceWorkerCache||"").replace(/^v/,"");
 assert(html.includes('navigator.serviceWorker.register("/kids/sw.js?v='+releaseCache+'"'),"main app must register newest offline cache");
@@ -59,12 +59,27 @@ for(const marker of ["KIDS_FAMILY_STRUCTURE_V1435","kidsParentFamilyGrid","kidsP
 }
 assert(js.includes('$("#profileAdd")?.click()'),"add-child entry must reuse existing flow");
 assert(js.includes('$("#kidsParentManage")?.click()'),"all-children action must open existing controls");
-assert(js.includes('item.completed===true?"↺ Erneut hören":"▶ Weiterhören"'),
- "completed recordings are explicitly labeled for replay, not continue");
-assert(js.includes("window.DARKidsStoryHub.openResume(item.category,item.id,"),
- "recent story must reuse real Story Hub resume API, not only open Hörbereich");
+assert(js.includes('item.completed===true?"↺ Erneut hören":item.replay?"▶ Anhören":"▶ Weiterhören"'),
+ "completed recordings must be labeled separately from fresh/current playback");
+for(const marker of ["kids.storyNowPlaying.v2","kids.storyAudioProgress.v2.",
+  "window.DARKidsProphetStories","window.DARKidsMubashshirun",
+  "window.DARKidsSahabiyyat","window.DARKidsDeenLessons",
+  "window.DARKidsSalafLibrary","api.openLibrary();","openWhenReady()"]){
+ assert(js.includes(marker),"parent recent playback must use modern story modules: "+marker);
+}
+assert(!js.includes("window.DARKidsStoryHub.openResume")&&!js.includes("window.DARKidsStoryHub.openStory"),
+ "retired central Story Hub must never open from parent recent activity");
 assert(js.includes("window.addEventListener(\"dar-kids-story-resume\",renderLastStory)"),
  "parent recent playback must update while the app is open");
+const reader=read("kids/story-follow-reader.js");
+assert(reader.includes("kids.storyNowPlaying.v2")&&reader.includes("kids.storyAudioProgress.v2."),
+ "current reader state is available to the parent activity card");
+assert(reader.includes('window.dispatchEvent(new CustomEvent("dar-kids-story-resume"))'),
+ "play/seek/pause should refresh parent activity");
+const salaf=read("kids/salaf-library-v1.js");
+assert(salaf.includes("openStory:function(id)")&&salaf.includes("showStory(item)"),
+ "Salaf recent item must open in its modern detail view");
+assert(!js.includes("localStorage.setItem("),"parent must never overwrite stored audio/profiles");
 assert(js.includes("progressPanel.after(resume)")&&js.includes("resume.after(timePanel)"),
  "app activity must be its own card, separate from family administration");
 for(const id of ["kidsParentResumeArt","kidsParentResumePosition","kidsParentResumeProgress",
