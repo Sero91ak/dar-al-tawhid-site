@@ -259,11 +259,9 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // DAR_MORE_V1253
 
-  // DAR_TEST_PRAYER_ASSETS_VISIBLE_V5_20261016: bust both CSS cache keys in test HTML.
-  html = html.split("dar-settings-permissions-v1.css?v=20261016-1")
-    .join("dar-settings-permissions-v1.css?v=20261016-motifs-v5");
-  html = html.split("prayer-v1254.css?v=area-authority-v1300")
-    .join("prayer-v1254.css?v=20261016-motifs-v5");
+  // DAR_TEST_PRAYER_ASSETS_VISIBLE_V5_20261016: only the settings CSS's old cache key changes.
+  // The separate area authority contains the sole prayer CSS reference.
+  html = html.replace("20261016-1", "20261016-motifs-v5");
     // DAR_PRAYER_V1254
 
 // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
