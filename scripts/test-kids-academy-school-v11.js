@@ -76,6 +76,8 @@ assert.ok(html.includes('academySchoolState().access(chosen)'));
 assert.ok(html.includes('card.disabled=locked'));
 assert.ok(html.includes('firstCompletedAt:Number(prev?.firstCompletedAt||prev?.completedAt||Date.now())'));
 assert.ok(!html.includes("elapsed>7*86400000"),"Unfinished lessons never expire");
-const inline=html.slice(html.lastIndexOf("<script>")+8,html.lastIndexOf("</script>"));
+const inline=[...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)]
+ .map(match=>match[1]).find(code=>code.includes("academySchoolState().access(chosen)"));
+assert.ok(inline,"Academy primary inline script must exist");
 new vm.Script(inline);
 console.log("KIDS SCHOOL V11 PASSED: 58 lessons, one active at a time, next-day gate, Wed/Sat review, indefinite resume, locked deep links.");
