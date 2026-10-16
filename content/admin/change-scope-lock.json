@@ -155,6 +155,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "visitor-design-safe-port-stage-20261016",
+      "at": "2026-10-16T22:13:00+02:00",
+      "approvedBy": "user-request-visitor-app-missing-hero-and-prayer-imagery-20261016",
+      "reason": "Nur vorbereiteter PR für Erwachsenen-Besucher-App: Hero-Motive, Themenansicht, Gebetskarten. Kein Live-Merge ohne separate Veröffentlichungsgenehmigung. Weder Kids noch Push-Code/OneSignal/Timer/Zeitberechnung oder bestehende Post-Daten.",
+      "paths": [
+        "index.html",
+        "assets/visitor-cinematic-areas-v1.css",
+        "assets/visitor-topics-library-v1.js",
+        "assets/area-heroes-v1290/",
+        "assets/prayer-motifs/"
+      ],
+      "expiresAt": "2026-11-16T23:59:00.000Z"
+    },
+    {
       "id": "kids-owner-unterrichtsarchiv-v27-20261012",
       "at": "2026-10-12T11:30:00+02:00",
       "approvedBy": "user-explicit-create-dedicated-owner-only-all-lessons-reference-age-sorted-page-20261012",
