@@ -7789,6 +7789,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-21T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-global-edge-width-v1372-20261016",
+      "at": "2026-10-16T15:09:00+02:00",
+      "approvedBy": "user-explicit-all-adult-test-app-sections-edge-to-edge-width-like-bottom-tabs-20261016",
+      "reason": "Strictly adult /test SPA geometry: remove nested horizontal gutters/max widths in Mehr, Quiz, Quran overview, Topics and other Test routes. Align mobile content to bottom navigation width, preserve safe areas, all themes, controls, scrolling and original Visitor/KIDS.",
+      "paths": [
+        "test/assets/test-global-edge-width-v1372.css",
+        "cloudflare/test-app-worker.js",
+        "scripts/verify-test-app-deploy.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-26T23:59:00.000Z"
     }
   ],
   "enabled": true
