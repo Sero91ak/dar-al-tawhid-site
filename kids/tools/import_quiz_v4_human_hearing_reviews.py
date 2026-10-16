@@ -65,6 +65,8 @@ def index_real_audio(stage):
     ensure(isinstance(rows,dict) and len(rows)==450,"expected 450 question IDs")
     indexed={}
     allowed={age:{} for age in SCOPES}
+    checked_mp3={}
+    allowed_audio_root=(ROOT/"kids/assets/kids-quiz-audio").resolve()
     for qid,row in rows.items():
         band=row.get("ageBand")
         ensure(band in {"4-6","7-8","9-10"},"invalid age group")
@@ -77,7 +79,22 @@ def index_real_audio(stage):
             ensure(is_sha(textsha) and is_sha(audiosha)
                    and p.get("modelId")==MODEL and p.get("voiceId")==VOICE,
                    "real MP3 digest or V4 voice absent")
-            assertable=(audiosha,p.get("url"))
+            audio_url=p.get("url")
+            ensure(isinstance(audio_url,str)
+                   and audio_url.startswith("/kids/assets/kids-quiz-audio/")
+                   and audio_url.endswith(".mp3") and ".." not in audio_url
+                   and "?" not in audio_url and "#" not in audio_url,
+                   "invalid or unsafe staged V4 MP3 path")
+            audio_file=(ROOT/audio_url.lstrip("/")).resolve()
+            ensure(audio_file.is_relative_to(allowed_audio_root)
+                   and audio_file.is_file() and 1500<audio_file.stat().st_size<6_000_000,
+                   "original V4 MP3 missing, unsafe or invalid size")
+            if audio_url not in checked_mp3:
+                with audio_file.open("rb") as source:
+                    checked_mp3[audio_url]=hashlib.file_digest(source,"sha256").hexdigest()
+            ensure(checked_mp3[audio_url]==audiosha,
+                   "saved actual V4 MP3 bytes differ from supplied SHA256")
+            assertable=(audiosha,audio_url)
             if textsha in indexed:
                 ensure(indexed[textsha]==assertable,"same text maps to different MP3s")
             else:indexed[textsha]=assertable
