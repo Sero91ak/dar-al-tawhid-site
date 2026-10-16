@@ -27550,6 +27550,50 @@ function renderNotificationCenter({embedded=false}={}){
     <div class="notification-saved">Änderungen werden automatisch gespeichert</div>
   </main>`;
 }
+/* DAR TEST ONLY · V4 reliable per-prayer selection. Capture the actual
+   button click (including Safari's synthesized touch/keyboard click) before
+   unrelated page navigation delegates can consume it. Reuse the original
+   save/sync handler; a guarded fallback handles a temporarily unbound SPA row. */
+(function installDarTestPrayerClickV4(){
+  if(window.__darTestPrayerClickV4)return;
+  window.__darTestPrayerClickV4=true;
+  document.addEventListener("click",function(event){
+    const t=event.target;
+    const btn=t&&typeof t.closest==="function"?
+      t.closest(".dsh-detail[data-settings-page='notifications'] .notification-prayer-grid > button.notification-prayer[data-notification-prayer]"):null;
+    if(!btn||!document.body.classList.contains("is-settings-route"))return;
+    const key=btn.getAttribute("data-notification-prayer");
+    if(!NOTIFICATION_PRAYER_KEYS.includes(key))return;
+    event.preventDefault();
+    event.stopImmediatePropagation();
+    const before=notificationPrayerEnabled(getPrayerSettings(),key);
+    if(typeof btn.onclick==="function"){
+      try{btn.onclick.call(btn,event)}catch(error){
+        console.warn("Gebetsauswahl: gespeicherte Steuerung wird repariert",error);
+      }
+    }
+    if(notificationPrayerEnabled(getPrayerSettings(),key)!==before)return;
+    /* Fallback only if the original handler did not actually change state. */
+    const selected=!before;
+    persistNotificationSettings({[notificationPrayerSettingKey(key)]:selected});
+    btn.classList.toggle("is-on",selected);
+    btn.setAttribute("aria-pressed",String(selected));
+    btn.setAttribute("aria-label",(btn.getAttribute("aria-label")||key)
+      .replace(/ (?:nicht )?gewählt$/,"")+(selected?" gewählt":" nicht gewählt"));
+    const count=notificationEnabledPrayerCount(getPrayerSettings());
+    const summary=document.querySelector(".dsh-detail[data-settings-page='notifications'] .notification-hero__count b");
+    if(summary)summary.textContent=count+"/5";
+    const sub=document.querySelector(".dsh-detail[data-settings-page='notifications'] #notificationPrayerTitle + p");
+    if(sub)sub.textContent=count+" von 5 ausgewählt · "+
+      prayerPushAdvanceMinutes(getPrayerSettings())+" Minuten vorher";
+    try{
+      const settings=getPrayerSettings();
+      if(!isDarNativeApp()&&settings.reminder&&hasPrayerLocation(settings))
+        Promise.resolve(syncPrayerPushTags(settings,{retries:2})).catch(()=>{});
+      Promise.resolve(scheduleLocalPrayerRemindersIfNeeded({silent:true})).catch(()=>{});
+    }catch(error){console.warn("Gebetserinnerungen werden später synchronisiert",error)}
+  },true);
+})();
 function bindNotificationCenter(){
   const rerender=()=>{if(["notifications","settings"].includes(readRoute().view))render()};
   const syncPrayer=()=>{const s=getPrayerSettings();if(!isDarNativeApp()&&s.reminder&&hasPrayerLocation(s))syncPrayerPushTags(s,{retries:2}).catch(()=>{});scheduleLocalPrayerRemindersIfNeeded({silent:true}).catch(()=>{})};
@@ -38479,5 +38523,5 @@ html[data-theme] body:not(.is-home-route) > .app > footer.footer {
 </style>
 <link rel="stylesheet" id="darPrayerMotifsLiveV5" href="/test/assets/prayer-v1254.css?v=20261016-motifs-v5">
 <link rel="stylesheet" id="darSettingsPermissionsV1" href="/test/assets/dar-settings-permissions-v1.css?v=20261016-motifs-v5">
-<link rel="stylesheet" id="darSettingsNavigationV1" href="/test/assets/dar-settings-navigation-v1.css?v=20261016-nav-v3">
+<link rel="stylesheet" id="darSettingsNavigationV1" href="/test/assets/dar-settings-navigation-v1.css?v=20261016-nav-v4">
 </html>
