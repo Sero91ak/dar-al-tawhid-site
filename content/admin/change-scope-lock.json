@@ -7862,6 +7862,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-20T23:59:00.000Z"
+    },
+    {
+      "id": "dar-visitor-settings-subpages-full-width-prayer-20261016",
+      "at": "2026-10-16T21:32:00+02:00",
+      "approvedBy": "user-explicit-push-full-settings-redesign-from-test-to-public-visitor-app-now-20261016",
+      "reason": "User explicitly requested release of the complete adult-test settings redesign to the public adult visitor app. Settings overview, five settings subpages, full mobile width, independent accessible prayer cards and theme-aware visual design, without touching protected push delivery, native iOS Swift, worker, kids or TV.",
+      "paths": [
+        "index.html",
+        "assets/dar-settings-navigation-v1.css",
+        "assets/dar-more-final-v15.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-24T23:59:00.000Z"
     }
   ],
   "enabled": true
