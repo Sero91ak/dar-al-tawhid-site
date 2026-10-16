@@ -45,6 +45,7 @@ jobs:
           python3 kids/tools/qa_quiz_v4_saved_mp3.py
           python3 kids/tools/quiz_v4_first150_offline_join.py
           python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
           python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
           python3 kids/tools/write_quiz_v4_handover.py
           python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
@@ -65,7 +66,7 @@ jobs:
           git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ || true
           git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
           git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
-          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json kids/data/quiz-v4-450-production-status.json
           git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
           git add kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-handover-latest.json
           if git diff --cached --quiet; then
@@ -95,6 +96,7 @@ jobs:
             kids/assets/kids-quiz-audio/v4-curated450-review/
             kids/data/quiz-v4-450-original-clip-registry.json
             kids/data/quiz-v4-450-paid-generation-ledger.json
+            kids/data/quiz-v4-450-production-status.json
             kids/data/quiz-v4-first150-composed-preview.json
             kids/data/quiz-v4-first150-audio-status.json
             kids/data/quiz-v4-age7to10-composed-preview.json
