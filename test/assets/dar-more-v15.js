@@ -16,7 +16,7 @@ const svg=(type)=>{
 };
 const moreTheme=()=>document.documentElement.getAttribute("data-theme")||"dark";
 function render(items,header){
- const data=Array.isArray(items)?items.filter(x=>x&&x.id!=="account"):[];
+ const data=Array.isArray(items)?items.filter(x=>x&&x.id!=="account"&&x.id!=="about"):[];
  if(!categories.some(c=>c[0]===chosen))chosen="wissen";
  const cats=categories.map(c=>'<button class="dm-cat" type="button" data-dm-category="'+c[0]+'" aria-pressed="'+(c[0]===chosen)+'">'+icon(c[3])+'<span>'+safe(c[1])+'</span></button>').join("");
  const groups=categories.map(c=>{
