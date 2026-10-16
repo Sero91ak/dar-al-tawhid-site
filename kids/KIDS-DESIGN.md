@@ -2,7 +2,7 @@
 
 - **Nur Struktur aus der externen HTML-Vorschau übernehmen; niemals deren Farbwelt, Schrift, Navigation oder Mock-Daten importieren.** Die Kinder-Besucher-App besitzt eine bereits freigegebene eigenständige Jungen- und Mädchenoberfläche, inklusive sämtlicher Themes; bestehende CSS-Variablen von `#view-parents`, Original-Avatare und der originale `#profileCard` sind verbindlich.
 - In **Eltern** zeigt die bestehende Übersicht bis zu vier verfügbare lokale Kinderprofile kompakt, weitere Profile unter der vorhandenen Profilverwaltung. Neue Knöpfe delegieren an **bestehende** Funktionen `#profileList [data-profile]` und `#profileAdd`. Beim fremden Kinderprofil bleibt die vorhandene Passwortprüfung aktiv; aktive Kinderprofile werden als „Aktiv“ gekennzeichnet.
-- Eine lokal vorhandene unvollständige Hörgeschichte darf zusätzlich als **„Zuletzt gehört“** mit Titel und Sekundenposition angezeigt werden. Der Button öffnet den unveränderten Tab **Hören**, der bereits seinen eigenen Fortsetzen-Einstieg besitzt. Nicht behaupten, die neue Elternansicht selbst starte eine Audio-Datei.
+- **„Zuletzt gehört“ ist eine eigenständige App-Aktivitätskarte** außerhalb der Kinderprofil-Verwaltung: echtes Cover, Titel, Kategorie, gespeicherte Hörsekunde, Fortschritt bei vorhandener Gesamtdauer, sowie „Weiterhören“/„Erneut hören“. Die Karte liest ausschließlich `kids.storyHub.last.v1`, kennzeichnet den Verlauf wahrheitsgemäß als **gerätebezogen** und nutzt den vorhandenen `DARKidsStoryHub.openResume(category,id,time)` nach dem Wechsel zu Hören. Keine neue Audiologik oder Speicherung im Elternbereich.
 - **Keinerlei Änderungen** an `kids.profiles.v1`, `kids.activeProfile`, `kids.storyHub.last.v1`, Passwort-/RPC-Funktionen oder Lernständen. Kein eigener `localStorage.setItem` in der Elternpräsentation.
 - **Kein produktives Eltern-E-Mail-Konto oder Passwort-Reset** in diesem Schritt: diese Funktionen erfordern separate verifizierte serverseitige Authentifizierung und migrationssichere Tests gemäß GitHub-Issue #1188; sie dürfen den Besucherinnen und Besuchern nicht als bereits aktiviert gezeigt werden.
 - Endgeräte: Smartphone, iPhone-WKWebView, PWA, Android, Tablet; Profile in einem kompakten responsiven Zweispaltenraster, semantische Buttons mindestens 44px, kein Textauswahl-Menü auf Bedienelementen, keine neue Kopf-/Tab-Leiste, keine Safe-Area-/Scroll-Manipulation. Junge/Mädchen verwenden ausschließlich die bestehenden `--kp-*` Farbvariablen. Screenreader und Tastaturfokus berücksichtigen.
@@ -536,3 +536,11 @@ In allen Kinderansichten bleibt der **konkrete Quellenbeleg als reiner, gut lesb
 - Das alte verzögerte `kids-story-touch-glow`-System (560 ms) ist deaktiviert; die alte CSS-Datei liefert nur einen zurückhaltenden Fallback nach denselben Variablen.
 - **Ausnahme:** Zurück- und Kopfzeilensteuerungen, globale Navigation und andere nicht als Inhaltskarte gedachte Funktionen erhalten keinen Themenkarten-Glow. Sichtbare Tastaturfokuszustände bleiben dennoch erhalten.
 - Änderungen der Kapsel-Interaktion dürfen keine Abstände, Safe-Areas, Audiofunktionen oder Seitenwechsel verändern.
+
+
+## Timer & Eltern-Aktivität (V1440)
+
+- Kein Timer-Halbkreis, keine zusätzliche Kapsel, keine frei verschiebbare Overlay-Uhr: Der kompakte Sekundenzähler erscheint als schlichte dritte Textzeile **innerhalb des vorhandenen Lernen-Tabs**, unveränderte 3D-Icons und fünf Navigationseinträge.
+- Start/Pause/Fortsetzen, Stopp, Zurücksetzen sowie die minutenabhängige große Zahl verbleiben ausschließlich in der Eltern-Lernzeitkarte. Verlassen/Hintergrund pausiert immer; Kinderprofile bleiben getrennt.
+- Die Elternseite gliedert sich klar in Verwaltung, Lernstand/Lernzeit und echte App-Aktivität. App-Aktivität kommt vom vorhandenen Hörverlauf und wird nicht als profilbezogen behauptet.
+- Jungen- und Mädchenprofil übernehmen weiter ihre vorhandenen `--kp-*`-Farbwerte. Keine Übernahme fremder Demo-Designfarben, Änderungen an Bildern, PDF-/Quiz-/Audio-Katalogen oder Erwachsenen-App.
