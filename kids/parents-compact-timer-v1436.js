@@ -1,155 +1,214 @@
-/* KIDS_PARENT_COMPACT_TIMER_V1436
- * Independent, per-profile daily countdown. Does not rewrite account,
- * learning progress, age selection, pictures, dock or original slider handler.
+/* KIDS_MINI_TIMER_PARENT_CONTROLS_V1438
+ * Existing five-tab bar, original boy/girl themes, ages, lesson progress and
+ * child account system are preserved. Time advances only while foregrounded.
  */
 (function(){
 "use strict";
 if(window.DARKidsDailyTimer1436)return;
-/* The academy portal is an iframe: the parent owns the ONE global timer. */
 if(new URLSearchParams(location.search).get("kidsPortal")==="1")return;
 window.DARKidsDailyTimer1436=true;
-var KEY="kids.dailyTimer.v1436.",MAX=24*60*60*1000;
-var root=document.querySelector("#view-parents");
-var academy=!root;
+var KEY="kids.dailyTimer.v1436.";
+var parent=document.querySelector("#view-parents");
 var slider=document.getElementById("minuteSlider");
 var minuteValue=document.getElementById("minuteValue");
 var panel=slider&&slider.closest(".parent-card");
-var profileId="",state=null,rendered=false;
 var shell=document.querySelector(".app > .shell");
 var dock=document.querySelector(".app > .bottom-nav")||document.querySelector(".bottom-nav");
-var previousDockMetrics="";
-var screen=document.createElement("div");
-screen.id="kidsLearningTimer1436";
-screen.setAttribute("role","group");
-screen.setAttribute("aria-label","Lernzeit-Countdown");
-screen.hidden=true;
-screen.innerHTML='<span class="kids-timer-label">◷ Lernzeit</span><strong class="kids-timer-digits" id="kidsTimerDigits1436">12:00</strong><span class="kids-timer-finished" id="kidsTimerFinished1437" role="status">Mā schāʾ Allāh! Deine Lernzeit ist beendet. Möge Allah dir nützliches Wissen schenken.</span><button type="button" id="kidsTimerToggle1436" aria-label="Lernzeit pausieren">Ⅱ</button>';
-document.body.append(screen);
-if(academy)document.body.classList.add("kids-timer-academy1436");
+var profileId="",state=null,previousMetrics="",completionHandle=null;
+var start=null,stop=null,reset=null,note=null;
+var pill=document.createElement("button");
+pill.id="kidsLearningTimer1436";
+pill.type="button";
+pill.hidden=true;
+pill.setAttribute("aria-label","Lernzeit anzeigen – Elternbereich öffnen");
+pill.innerHTML='<span class="kids-timer-symbol" aria-hidden="true">◷</span><strong class="kids-timer-digits" id="kidsTimerDigits1436">12:00</strong>';
+document.body.append(pill);
 var digits=document.getElementById("kidsTimerDigits1436");
-var toggle=document.getElementById("kidsTimerToggle1436");
-var start=null,reset=null,note=null;
+pill.addEventListener("click",function(){
+ document.querySelector('.bottom-nav .nav-btn[data-target="parents"]')?.click();
+});
 function today(){
  var d=new Date();
- return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+ return [d.getFullYear(),String(d.getMonth()+1).padStart(2,"0"),String(d.getDate()).padStart(2,"0")].join("-");
 }
 function activeProfile(){
- try{return localStorage.getItem("kids.activeProfile")||"guest:"+(document.querySelector(".app")?.dataset.gender||document.body.dataset.profile||localStorage.getItem("kids.guest.gender.v1")||"boy")}
+ try{return localStorage.getItem("kids.activeProfile")||"guest:"+
+ (document.querySelector(".app")?.dataset.gender||document.body.dataset.profile||
+ localStorage.getItem("kids.guest.gender.v1")||"boy")}
  catch(_){return "guest"}
 }
-function duration(){
- var n=Number(slider?.value||localStorage.getItem("kids.minutes")||12);
- return Number.isFinite(n)?Math.max(5,Math.min(30,Math.round(n))):12;
+function limits(){
+ return {min:Number(slider?.min)||5,max:Number(slider?.max)||20};
 }
-function fresh(){var d=duration();return {day:today(),duration:d,remaining:d*60,running:false,until:0,visible:false,complete:false,dismissed:false}}
-function store(){if(!state)return;try{localStorage.setItem(KEY+profileId,JSON.stringify(state))}catch(_){}}
+function clamp(n){
+ var b=limits();return Math.min(b.max,Math.max(b.min,Math.round(Number(n)||12)));
+}
+function currentSelection(){
+ var n=null;
+ try{n=localStorage.getItem("kids.minutes")}catch(_){}
+ return clamp(slider?.value||n||12);
+}
+function fresh(){
+ var n=currentSelection();
+ return {day:today(),duration:n,remaining:n*60,running:false,lastTick:0,
+ visible:false,complete:false,dismissed:false,stopped:false};
+}
+function save(){
+ try{if(state)localStorage.setItem(KEY+profileId,JSON.stringify(state))}catch(_){}
+}
+function pauseActive(){
+ if(!state||!state.running)return;
+ tickElapsed();
+ state.running=false;state.lastTick=0;
+ save();
+ render();
+}
 function load(){
- profileId=activeProfile();var candidate=null;
- try{candidate=JSON.parse(localStorage.getItem(KEY+profileId)||"null")}catch(_){}
- if(!candidate||candidate.day!==today()||!Number.isFinite(candidate.remaining)||!Number.isFinite(candidate.duration)||
-  candidate.duration<5||candidate.duration>30){state=fresh();return}
- state={day:candidate.day,duration:candidate.duration,remaining:Math.max(0,Math.min(candidate.duration*60,candidate.remaining)),
- running:!!candidate.running,until:Number(candidate.until)||0,visible:!!candidate.visible,complete:!!candidate.complete,dismissed:!!candidate.dismissed};
- if(state.running&&(!state.until||state.until-Date.now()>MAX)){state.running=false;state.until=0}
- if(state.running)remaining();
+ profileId=activeProfile();
+ var old=null;
+ try{old=JSON.parse(localStorage.getItem(KEY+profileId)||"null")}catch(_){}
+ if(!old||old.day!==today()||!Number.isFinite(old.remaining)||!Number.isFinite(old.duration)){state=fresh();return}
+ var n=clamp(old.duration);
+ state={day:today(),duration:n,remaining:Math.min(n*60,Math.max(0,Math.ceil(old.remaining))),
+ running:false,lastTick:0,visible:!!old.visible,complete:!!old.complete,
+ dismissed:!!old.dismissed,stopped:!!old.stopped};
+ // A page reload/crash/restart must NEVER charge time spent outside the app.
+ // Explicitly discard persisted "running" and old "until" wall-clock values.
+ if(old.running)save();
 }
-function remaining(){
- if(!state)return 0;
- if(state.running){
-  state.remaining=Math.max(0,Math.ceil((state.until-Date.now())/1000));
-  if(state.remaining<=0){
-   state.remaining=0;state.running=false;state.until=0;state.complete=true;store();
-  }
- }
- return state.remaining;
+function fmt(s){
+ s=Math.max(0,Math.ceil(s));
+ return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
 }
-function fmt(t){t=Math.max(0,Math.ceil(t));return String(Math.floor(t/60)).padStart(2,"0")+":"+String(t%60).padStart(2,"0")}
+function complete(){
+ state.running=false;state.remaining=0;state.lastTick=0;
+ state.complete=true;state.visible=true;state.dismissed=false;
+ save();
+ if(completionHandle)clearTimeout(completionHandle);
+ completionHandle=setTimeout(function(){
+  completionHandle=null;
+  if(!state||!state.complete||document.hidden)return;
+  state.visible=false;state.dismissed=true;save();render();
+ },4200);
+}
+function tickElapsed(){
+ if(!state||!state.running||document.hidden)return;
+ var now=Date.now(),seconds=Math.floor((now-state.lastTick)/1000);
+ if(seconds<1)return;
+ state.lastTick+=seconds*1000;
+ state.remaining=Math.max(0,state.remaining-seconds);
+ if(state.remaining===0)complete();
+ else save();
+}
+function reflectMinutes(){
+ if(!slider||!state)return;
+ if(slider.value!==String(state.duration))slider.value=String(state.duration);
+ if(minuteValue)minuteValue.textContent=state.duration+" Min.";
+ var b=limits(),pct=(state.duration-b.min)/Math.max(1,b.max-b.min)*100;
+ slider.style.setProperty("--kids-time-fill",pct+"%");
+ slider.setAttribute("aria-valuetext",state.duration+" Minuten");
+}
 function render(){
  if(!state)return;
- remaining();
- screen.hidden=!state.visible||state.dismissed;
- screen.classList.toggle("is-complete",!!state.complete);
- document.body.classList.toggle("kids-timer-visible1437",!screen.hidden);
- if(!screen.hidden){
-  digits.textContent=fmt(state.remaining);
-  toggle.textContent=state.complete?"×":state.running?"Ⅱ":"▶";
-  toggle.setAttribute("aria-label",state.complete?"Abschlussmeldung schließen":state.running?"Lernzeit pausieren":"Lernzeit fortsetzen");
-  toggle.disabled=false;
- }
- syncDock();
+ if(!document.hidden)tickElapsed();
+ var show=state.visible&&!state.dismissed;
+ pill.hidden=!show;
+ pill.classList.toggle("is-complete",!!state.complete);
+ pill.classList.toggle("is-paused",!state.running&&!state.complete);
+ document.body.classList.toggle("kids-timer-visible1437",show);
+ digits.textContent=fmt(state.remaining);
+ pill.setAttribute("aria-label",(state.complete?"Lernzeit beendet":state.running?"Lernzeit läuft":"Lernzeit pausiert")+" – Elternbereich öffnen");
  if(start){
-  start.textContent=state.complete?"Tagesziel erreicht":state.running?"Ⅱ Pausieren":state.visible?"▶ Fortsetzen":"▶ Timer starten";
+  start.textContent=state.complete?"✓ Tagesziel erreicht":state.running?"Ⅱ Pausieren":show?"▶ Fortsetzen":"▶ Starten";
   start.disabled=state.complete;
  }
- if(reset)reset.disabled=!state.visible&&!state.complete;
- if(note)note.textContent=state.complete?"Die heutige Lernzeit ist erreicht. Morgen beginnt ein neuer Tag.":
+ if(stop)stop.disabled=!(show&&!state.complete);
+ if(reset)reset.disabled=!state.visible&&!state.stopped&&!state.complete&&state.remaining===state.duration*60;
+ if(note)note.textContent=state.complete?"Mā schāʾ Allāh! Deine Lernzeit ist beendet. Möge Allah dir nützliches Wissen schenken.":
+  state.stopped?"Der Timer wurde gestoppt. Du kannst eine neue Lernzeit starten.":
   state.running?"Lernzeit läuft · "+fmt(state.remaining):
-  state.visible?"Pausiert · "+fmt(state.remaining):
-  "Die gewählte Lernzeit wird beim Start heruntergezählt.";
+  show?"Pausiert · "+fmt(state.remaining):
+  "Minuten wählen und mit Start beginnen.";
+ reflectMinutes();
+ syncDock();
 }
-function changeDuration(next){
- var n=Number(next);
- if(!Number.isFinite(n))return;
- n=Math.max(5,Math.min(30,Math.round(n)));
- remaining();
- var used=Math.max(0,state.duration*60-state.remaining);
- state.duration=n;state.remaining=Math.max(0,n*60-used);
- state.complete=state.remaining===0;state.dismissed=false;
- if(state.running){state.running=!state.complete;state.until=state.running?Date.now()+state.remaining*1000:0}
- state.visible=true;
- if(!state.complete&&!state.running){state.running=true;state.until=Date.now()+state.remaining*1000}
- store();render();
-}
-function toggleTimer(){
+function changeDuration(raw){
+ var n=clamp(raw);
  if(!state)return;
- remaining();
- if(state.complete){state.dismissed=true;state.visible=false;store();render();return;}
- if(state.running){state.running=false;state.until=0}
- else{if(!state.visible&&state.remaining===0)state.remaining=state.duration*60;
-  state.visible=true;state.running=true;state.until=Date.now()+state.remaining*1000}
- store();render();
+ tickElapsed();
+ if(state.complete){
+  state=fresh();state.duration=n;state.remaining=n*60;
+ }else{
+  var used=state.visible?Math.max(0,state.duration*60-state.remaining):0;
+  state.duration=n;state.remaining=Math.max(0,n*60-used);
+  if(state.remaining===0&&state.visible)complete();
+ }
+ if(state.running)state.lastTick=Date.now();
+ state.stopped=false;save();render();
+}
+function playPause(){
+ if(!state||state.complete)return;
+ if(state.running){
+  pauseActive();return;
+ }
+ if(state.remaining===0)state.remaining=state.duration*60;
+ state.running=true;state.visible=true;state.dismissed=false;state.stopped=false;
+ state.lastTick=Date.now();
+ save();render();
+}
+function stopTimer(){
+ if(!state)return;
+ if(completionHandle){clearTimeout(completionHandle);completionHandle=null}
+ // Stop ENDS the session; unlike Pause no remaining countdown survives.
+ var n=state.duration;
+ state=fresh();state.duration=n;state.remaining=n*60;state.stopped=true;
+ save();render();
 }
 function resetTimer(){
  if(!state)return;
- state=fresh();store();render();
+ if(completionHandle){clearTimeout(completionHandle);completionHandle=null}
+ var n=state.duration;
+ state=fresh();state.duration=n;state.remaining=n*60;
+ save();render();
 }
 function refreshProfile(){
  var id=activeProfile();
- if(id!==profileId||!state||today()!==state.day){
+ if(id!==profileId||!state||state.day!==today()){
+  pauseActive();
   load();
-  if(slider&&state&&!state.visible&&state.duration!==duration()){state.duration=duration();state.remaining=state.duration*60}
+  if(slider)slider.value=String(state.duration);
  }
+ if(document.hidden){pauseActive();return}
  render();
 }
-
-/* Keep bar geometrically attached to actual 5-tab bar, also above Academy.
-   No extra navigation or scrollbar; only ONE displayed widget. */
+/* Anchor to the ACTUAL Learn tab, not the viewport or full bar width.
+   Capsule is only as wide as the clock, with no Pause/Stop buttons inside. */
 function syncDock(){
  if(!dock||!dock.isConnected)dock=document.querySelector(".app > .bottom-nav")||document.querySelector(".bottom-nav");
  if(!dock||!state)return;
  var rect=dock.getBoundingClientRect();
- if(!rect.height||!rect.width)return;
+ if(!rect.width||!rect.height)return;
+ var learn=dock.querySelector(".kids-academy-tab");
+ var lr=learn&&learn.getBoundingClientRect();
  var viewportHeight=window.innerHeight||document.documentElement.clientHeight||0;
- var visible=state.visible&&!state.dismissed;
- var height=visible?Math.max(42,Math.ceil(screen.getBoundingClientRect().height||46)):0;
- var left=Math.max(4,Math.round(rect.left));
- var width=Math.max(220,Math.min(Math.floor(rect.width),Math.floor(window.innerWidth)-2*left));
- var bottom=Math.max(0,Math.round(viewportHeight-rect.top+7));
- var metrics=[left,width,bottom].join("/");
- if(metrics!==previousDockMetrics){
-  screen.style.left=left+"px";screen.style.width=width+"px";screen.style.bottom=bottom+"px";
-  previousDockMetrics=metrics;
+ var pw=Math.min(126,Math.max(106,Math.round(rect.width*.285)));
+ var center=lr&&lr.width?lr.left+lr.width/2:rect.left+rect.width/2;
+ var left=Math.max(5,Math.min(window.innerWidth-pw-5,Math.round(center-pw/2)));
+ var bottom=Math.max(0,Math.round(viewportHeight-rect.top-3));
+ var metrics=[left,pw,bottom].join("/");
+ if(metrics!==previousMetrics){
+  pill.style.left=left+"px";pill.style.width=pw+"px";pill.style.bottom=bottom+"px";
+  previousMetrics=metrics;
  }
- var clearance=Math.max(92,Math.ceil(viewportHeight-rect.top+12)+(visible?height+9:0));
+ var extra=!pill.hidden?Math.max(43,Math.ceil(pill.getBoundingClientRect().height||44))+7:0;
+ var clearance=Math.max(92,Math.ceil(viewportHeight-rect.top+12)+extra);
  document.documentElement.style.setProperty("--kids-timer-scroll-clearance1437",clearance+"px");
  var frame=document.getElementById("kidsAcademyPortalFrame");
- if(frame&&frame.contentDocument){
-  try{
-   var academyRoot=frame.contentDocument.documentElement;
-   if(academyRoot.style.getPropertyValue("--kids-academy-dock-clearance")!==clearance+"px")
-    academyRoot.style.setProperty("--kids-academy-dock-clearance",clearance+"px");
-  }catch(_){}
- }
+ if(frame&&frame.contentDocument)try{
+  var a=frame.contentDocument.documentElement;
+  if(a.style.getPropertyValue("--kids-academy-dock-clearance")!==clearance+"px")
+   a.style.setProperty("--kids-academy-dock-clearance",clearance+"px");
+ }catch(_){}
 }
 /* WebKit scroll-anchor regression: guard only an untouched main-tab top.
    Any real gesture, form interaction or inner reader releases the guard. */
@@ -201,30 +260,38 @@ function protectIdleTabs(){
  queue();
 }
 
-toggle.addEventListener("click",toggleTimer);
+
 if(panel){
- var actions=document.createElement("div");
- actions.className="kids-parent-time-actions";
- start=document.createElement("button");start.type="button";start.textContent="▶ Timer starten";
- reset=document.createElement("button");reset.type="button";reset.textContent="Zurücksetzen";
- actions.append(start,reset);
- note=document.createElement("p");note.className="kids-parent-time-status";note.setAttribute("role","status");
+ var actions=document.createElement("div");actions.className="kids-parent-time-actions";
+ start=document.createElement("button");start.type="button";start.textContent="▶ Starten";
+ stop=document.createElement("button");stop.type="button";stop.textContent="■ Stopp";
+ reset=document.createElement("button");reset.type="button";reset.textContent="↺ Zurücksetzen";
+ actions.append(start,stop,reset);
+ note=document.createElement("p");note.className="kids-parent-time-status";
+ note.setAttribute("role","status");
  panel.querySelector(".parent-note")?.before(actions,note);
  if(!note.parentNode)panel.append(actions,note);
- start.addEventListener("click",toggleTimer);
+ start.addEventListener("click",playPause);
+ stop.addEventListener("click",stopTimer);
  reset.addEventListener("click",resetTimer);
- // Original slider handler continues to own kids.minutes, we only subscribe.
  slider.addEventListener("input",function(){changeDuration(slider.value)});
 }
-load();render();rendered=true;
+load();render();
 protectIdleTabs();
-window.addEventListener("resize",syncDock,{passive:true});
-window.addEventListener("orientationchange",function(){previousDockMetrics="";requestAnimationFrame(syncDock)},{passive:true});
+window.addEventListener("pagehide",pauseActive,{passive:true});
+window.addEventListener("blur",pauseActive,{passive:true});
+document.addEventListener("visibilitychange",function(){
+ if(document.hidden)pauseActive();
+ else refreshProfile();
+});
+window.addEventListener("pageshow",function(){refreshProfile()},{passive:true});
+window.addEventListener("resize",function(){previousMetrics="";syncDock()},{passive:true});
+window.addEventListener("orientationchange",function(){previousMetrics="";requestAnimationFrame(syncDock)},{passive:true});
 window.visualViewport?.addEventListener("resize",syncDock,{passive:true});
 if(dock&&typeof ResizeObserver==="function")new ResizeObserver(function(){requestAnimationFrame(syncDock)}).observe(dock);
-if(document.getElementById("kidsAcademyPortal")&&typeof MutationObserver==="function")new MutationObserver(syncDock).observe(document.getElementById("kidsAcademyPortal"),{attributes:true,attributeFilter:["class","hidden"]});
-window.addEventListener("storage",function(e){if(!e.key||e.key.indexOf(KEY)===0||e.key==="kids.activeProfile"||e.key==="kids.minutes")refreshProfile()});
-document.addEventListener("visibilitychange",function(){if(!document.hidden)refreshProfile()});
-window.addEventListener("pageshow",refreshProfile);
-setInterval(refreshProfile,1000);
+window.addEventListener("storage",function(e){
+ if(e.key==="kids.activeProfile"){refreshProfile();return}
+ if(e.key&&e.key.indexOf(KEY)===0&&!state?.running){load();render()}
+});
+setInterval(function(){if(!document.hidden)refreshProfile()},350);
 })();
