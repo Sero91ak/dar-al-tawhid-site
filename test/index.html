@@ -22796,7 +22796,7 @@ function rememberPostBrowseFromRoute(fromRoute){
 function getPostBrowseIds(){
   try{const raw=sessionStorage.getItem(POST_BROWSE_KEY);const ctx=raw?JSON.parse(raw):null;return Array.isArray(ctx?.ids)?ctx.ids.map(String):[]}catch(e){return[]}
 }
-function navigate(view,value="",opts={}){if(view==="appstore"){markLiveAppStoreUpdatesSeen();openAppStore(value);return}if(isVisitorTestOnlyView(view)){view="more";value=""}const from=currentRoute&&currentRoute.view?{...currentRoute}:readRoute();const to={view,value};const skipPush=!!opts.skipPush;if(!routeEqual(from,to))saveNavScroll(from);if(from.view==="feed"&&!routeEqual(from,to)&&window.DAR_PREMIUM_FEED?.saveState)window.DAR_PREMIUM_FEED.saveState();if(view==="post"&&value&&from.view!=="post")rememberPostBrowseFromRoute(from);if(!skipPush&&!routeEqual(from,to)){const keepReturn=isDetailRoute(from)&&isDetailRoute(to)&&from.view===to.view;if(!keepReturn)pushNavState(from);if(view==="home"){clearStickyPushLaunchParams();clearNavStack()}}if(view==="home")clearStickyPushLaunchParams();if(view==="quran-surah"&&from.view==="quran")saveQuranListScroll();if(view==="home"||(view==="quran"&&from.view==="home"))clearQuranReturnState();if(!routeEqual(from,to)&&!skipPush&&!opts.noAnim)window.__pageNavDir="forward";window.__smoothNav=!isDetailRoute(to)||routeEqual(from,to);location.hash=routeToHash(view,value)}
+function navigate(view,value="",opts={}){if(view==="notifications")view="settings";if(view==="appstore"{markLiveAppStoreUpdatesSeen();openAppStore(value);return}if(isVisitorTestOnlyView(view)){view="more";value=""}const from=currentRoute&&currentRoute.view?{...currentRoute}:readRoute();const to={view,value};const skipPush=!!opts.skipPush;if(!routeEqual(from,to))saveNavScroll(from);if(from.view==="feed"&&!routeEqual(from,to)&&window.DAR_PREMIUM_FEED?.saveState)window.DAR_PREMIUM_FEED.saveState();if(view==="post"&&value&&from.view!=="post")rememberPostBrowseFromRoute(from);if(!skipPush&&!routeEqual(from,to)){const keepReturn=isDetailRoute(from)&&isDetailRoute(to)&&from.view===to.view;if(!keepReturn)pushNavState(from);if(view==="home"){clearStickyPushLaunchParams();clearNavStack()}}if(view==="home")clearStickyPushLaunchParams();if(view==="quran-surah"&&from.view==="quran")saveQuranListScroll();if(view==="home"||(view==="quran"&&from.view==="home"))clearQuranReturnState();if(!routeEqual(from,to)&&!skipPush&&!opts.noAnim)window.__pageNavDir="forward";window.__smoothNav=!isDetailRoute(to)||routeEqual(from,to);location.hash=routeToHash(view,value)}
 function goBack(){if(currentRoute.view==="home")return;window.__pageNavDir="back";const stack=getNavStack();if(stack.length){const prev=stack.pop();setNavStack(stack);window.__restoreScrollY=Number(prev?.scroll!=null?prev.scroll:getNavScroll(prev))||0;navigate(prev.view,prev.value||"",{skipPush:true,noAnim:true});return}const parent=parentRoute(currentRoute);window.__restoreScrollY=getNavScroll(parent);navigate(parent.view,parent.value||"",{skipPush:true,noAnim:true})}
 function readRoute(){try{
   migrateLegacyTopicsRoute();
@@ -22805,6 +22805,7 @@ function readRoute(){try{
   const head=bare.split("/")[0]||"";
   if((!head||head==="home"||head==="start")&&!bare.includes("/")){const fromQuery=parsePushPostIdFromUrl(location.href);if(fromQuery)return{view:"post",value:fromQuery}}
   const route=parseRouteFromHash(rawHash);
+  if(route.view==="notifications")route.view="settings";
   const slug=normalizeRouteSlug(head);
   if(slug&&slug!==normalizeRouteSlug(route.view)&&ROUTE_ALIASES[slug])canonicalizeRouteHash(route);
   else if(head==="feed")canonicalizeRouteHash(route);
@@ -27153,7 +27154,7 @@ function renderDarSetupHubHtml(){
   return '<section id="dar-setup-hub" class="dar-setup-hub" data-dar-setup="true" aria-label="Einrichtung"><header class="dar-setup-hub__head"><h2 class="dar-setup-hub__title">DĀR AL TAWḤĪD Einrichtung</h2><p class="dar-setup-hub__sub">Standort, Gebetszeiten, Mitteilungen und Widgets</p></header><div class="dar-setup-hub__list"><div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Standort</strong><span>Für genaue Gebetszeiten und Widgets</span></div><button type="button" class="dar-setup-hub__btn" data-dar-setup-action="location">Öffnen</button></div><div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Mitteilungen</strong><span>Für Gebets-Erinnerungen und Tests</span></div><button type="button" class="dar-setup-hub__btn" data-dar-setup-action="notifications">Öffnen</button></div><div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Gebetszeiten</strong><span>Daten für Widgets und Watch aktualisieren</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="sync">Sync</button></div><div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Widget-Ziele</strong><span>Öffnet direkt Gebetszeiten, Kalender, Qurʾān oder Duʿāʾ</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="widgets">Prüfen</button></div></div></section>';
 }
 function renderSettings(){
-  return `${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}<div class="settings-one-page settings-flat-live-v1">${renderDarSetupHubHtml()}${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAdaptiveNavPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
+  return `${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}<div class="settings-one-page settings-flat-live-v1">${renderNotificationCenter({embedded:true})}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAdaptiveNavPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
 }
 function renderJummah(){const s=getPrayerSettings();const manual=jummahPref(s,"jummahUseManualTime");const manualTime=normalizeTimeHHMM(s.jummahManualTime,"13:30");const advance=normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes);const on=jummahPref(s,"jummahNotifications");const timeLabel=manual?manualTime:(hasPrayerLocation(s)?jummahAutoDhuhrLabel(s):"Standort");return `${setPageHeader("Jumuʿah","Freitagsgebet und Erinnerung.","Jumuʿah")}<section class="prayer-panel prayer-page-noble jummah-hub-page">${renderJummahPushPanel()}<div class="qibla-data-grid jummah-hub-meta"><div class="qibla-data-item"><b>Erinnerung</b><span>${on?"Aktiv":"Aus"}</span></div><div class="qibla-data-item"><b>Vorlauf</b><span>${advance} Min</span></div><div class="qibla-data-item"><b>Zeit</b><span>${esc(timeLabel)}</span></div><div class="qibla-data-item"><b>Ort</b><span>${esc(s.city||"—")}</span></div></div><div class="prayer-action-row jummah-hub-nav"><button class="prayer-action-btn" type="button" data-nav="prayer">Gebetszeiten</button></div></section>`}
 function renderQiblaPage(){const settings=getPrayerSettings();return `${setPageHeader("Qibla","","Qibla")}<section class="prayer-panel prayer-page-noble qibla-hub-page">${renderQiblaProPanel(settings)}<div class="prayer-controls-compact qibla-hub-tools"><div class="prayer-settings-grid"><input id="prayerCityInput" class="filter-select" value="${esc(settings.city||"")}" placeholder="Ort" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button><button id="useLocationBtn" class="prayer-action-btn" type="button">Standort</button></div></div></section>`}
@@ -27368,7 +27369,6 @@ function featureCatalog(){
     {id:"books",title:"Quellenbibliothek",icon:"📘",desc:(()=>{const api=window.DARCanonicalSourceLibrary;const n=api&&typeof api.getReadyBookCount==="function"?api.getReadyBookCount():(api&&api.isReady&&api.isReady()?api.getBookCount():null);return n==null?"Geprüfte historische Werke und zitierte Gelehrte.":`${n} geprüfte Werke und zitierte Gelehrte.`})(),button:"Ansehen",nav:"books",group:"Lernen & Wissen",badge:"Geprüft"},
     {id:"hadith",title:"Hadith-Bibliothek",icon:"📜",desc:"Hadith-Werke mit Büchern, Kapiteln und Filterung.",button:"Öffnen",nav:"hadith",group:"Lernen & Wissen",badge:"Hadith"},
     {id:"prayer",title:"Gebetszeiten",icon:"🕌",desc:"Zeiten, Standort, Qibla und Erinnerungen.",button:"Öffnen",nav:"prayer",group:"Alltag & Gebet",badge:"Praktisch"},
-    {id:"notifications",title:"Benachrichtigungen",icon:"🔔",desc:"Gebete, Duʿāʾ und Empfehlungen einzeln einstellen.",button:"Einstellen",nav:"notifications",group:"Alltag & Gebet",badge:"Test"},
     {id:"jummah",title:"Jumuʿah",icon:"🕌",desc:"Freitagsgebet und Erinnerung.",button:"Öffnen",nav:"jummah",group:"Alltag & Gebet"},
     {id:"qibla",title:"Qibla",icon:"🕋",desc:"Live-Richtung zur Kaʿbah.",button:"Öffnen",nav:"qibla",group:"Alltag & Gebet"},
     {id:"calendar",title:"Islamischer Kalender",icon:"🗓️",desc:"Hijrī-Termine und wichtige Tage.",button:"Öffnen",nav:"calendar",group:"Alltag & Gebet"},
@@ -27427,22 +27427,41 @@ function renderNotificationCenter({embedded=false}={}){
   const native=isDarNativeApp();
   const locationReady=hasPrayerLocation(s);
   const prayerLabels={fajr:["Fajr","Morgengebet","☼"],dhuhr:["Dhuhr","Mittagsgebet","●"],asr:["ʿAṣr","Nachmittagsgebet","◐"],maghrib:["Maghrib","Sonnenuntergang","◒"],isha:["ʿIshāʾ","Nachtgebet","☾"]};
-  const prayerRows=NOTIFICATION_PRAYER_KEYS.map(key=>{const on=notificationPrayerEnabled(s,key);const item=prayerLabels[key];return `<button type="button" class="notification-prayer ${on?"is-on":""}" data-notification-prayer="${key}" aria-pressed="${on?"true":"false"}" aria-label="${item[0]} ${on?"aktiv":"aus"}"><span class="notification-prayer-index" aria-hidden="true">${item[2]}</span><b>${item[0]}</b><small>${item[1]}</small></button>`}).join("");
+  const currentPrayerTimes=locationReady?calculatePrayerTimes(new Date(),s):[];
+  const prayerRows=NOTIFICATION_PRAYER_KEYS.map(key=>{
+    const on=notificationPrayerEnabled(s,key),item=prayerLabels[key];
+    const calculated=currentPrayerTimes.find(p=>p.key===key);
+    const clock=calculated&&calculated.time!=null?formatPrayerHour(calculated.time):"";
+    return `<button type="button" class="notification-prayer ${on?"is-on":""}" data-notification-prayer="${key}" aria-pressed="${on?"true":"false"}" aria-label="${item[0]}${clock?" "+clock+" Uhr":""} ${on?"gewählt":"nicht gewählt"}"><span class="notification-prayer-index" aria-hidden="true">${item[2]}</span><b>${item[0]}</b>${clock?`<span class="dar-prayer-clock">${clock}</span>`:""}<small>${item[1]}</small></button>`;
+  }).join("");
   const activeCount=(prayerOn?1:0)+(duaOn?1:0)+(recommendationOn?1:0)+(jummahOn?1:0);
   return `${embedded?"":setPageHeader("Benachrichtigungen","Ruhig, übersichtlich und für dich einstellbar.","Mehr")}
   <main class="notification-center-page">
     <section class="notification-hero">
-      <div class="notification-hero__top"><span class="notification-hero__icon" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><div><h2>Deine Erinnerungen</h2><p>Nur das, was für dich wichtig ist.</p></div><span class="notification-hero__count"><span><b>${activeCount}</b>aktiv</span></span></div>
-      <div id="notificationHealthBox" class="notification-health" hidden><p id="notificationHealthText">Push-Status wird geprüft…</p><button type="button" class="notification-action" id="notificationReenableBtn">Benachrichtigungen erneut aktivieren</button><button type="button" class="notification-action" id="notificationDeviceTestBtn" hidden>Testpush senden</button></div>
+      <div class="notification-hero__top"><span class="notification-hero__icon" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><div><h2>Deine Erinnerungen</h2><p>Gebete, Duʿāʾ und Jumuʿah direkt verwalten.</p></div><span class="notification-hero__count"><span><b>${activeCount}</b> gewählt</span></span></div>
+      <div id="notificationHealthBox" class="notification-health" hidden><p id="notificationHealthText">Push-Status wird geprüft…</p><button type="button" class="notification-action" id="notificationReenableBtn">Mitteilungen einrichten</button><button type="button" class="notification-action" id="notificationDeviceTestBtn" hidden>Testpush senden</button></div>
       <div class="notification-hero__status">
         <span class="notification-status-chip ${activeCount?"is-on":""}">${activeCount} Bereiche aktiv</span>
         <span class="notification-status-chip ${native||permission==="granted"?"is-on":""}">${native?"iOS-App":permission==="granted"?"Mitteilungen erlaubt":"Erlaubnis ausstehend"}</span>
         <span class="notification-status-chip ${locationReady?"is-on":""}">${locationReady?esc(s.city||"Standort aktiv"):"Standort fehlt"}</span>
       </div>
     </section>
+    <section class="dar-permission-location" aria-label="Standort für Gebetszeiten">
+      <div class="dar-permission-location__main"><span class="dar-permission-location__icon" aria-hidden="true">⌖</span>
+        <span><strong>Standort für Gebetszeiten</strong><small>${locationReady?esc(s.city||"Ort gespeichert")+" · für deine Gebetszeiten":"Kein Standort festgelegt · automatisch erkennen oder Stadt wählen"}</small></span></div>
+      <div class="dar-permission-location__actions">
+        <button id="notificationDetectLocationBtn" type="button">Standort erkennen</button>
+        <button id="notificationManualCityToggle" type="button" aria-expanded="false" aria-controls="darManualCityPanel">Stadt auswählen</button>
+      </div>
+      <form id="darManualCityPanel" hidden autocomplete="off">
+        <label class="dar-permission-city-label" for="darManualCityInput">Ort oder Postleitzahl</label>
+        <input id="darManualCityInput" type="text" maxlength="100" value="${locationReady?esc(s.city||""):""}" placeholder="Stadt eingeben" />
+        <button type="submit" id="darManualCitySaveBtn">Übernehmen</button>
+      </form>
+      <p class="dar-permission-feedback" id="darLocationFeedback" role="status" aria-live="polite" hidden></p>
+    </section>
     <section class="notification-section" aria-labelledby="notificationPrayerTitle">
       <header class="notification-section__head"><div><span class="notification-section__kicker">Gebet</span><h3 id="notificationPrayerTitle">Gebetszeiten</h3><p>${prayerCount} von 5 ausgewählt · ${prayerPushAdvanceMinutes(s)} Minuten vorher</p></div>${notificationToggleButton("notificationPrayerMaster",prayerOn,"Gebetsbenachrichtigungen")}</header>
-      <div class="notification-location"><span class="notification-location__icon" aria-hidden="true">${prayerOverviewLocationIconSvg()}</span><span><b>${locationReady?esc(s.city||"Standort aktiv"):"Standort erforderlich"}</b>${locationReady?"Zeiten werden für deinen Ort berechnet.":"Für genaue Zeiten Standort festlegen."}</span><button type="button" class="notification-action" data-nav="prayer">${locationReady?"Ändern":"Festlegen"}</button></div>
       <div class="notification-prayer-grid">${prayerRows}</div>
       <div class="notification-settings-list"><div class="notification-row"><div class="notification-row__copy"><span class="notification-row__glyph" aria-hidden="true">◷</span><span><strong>Vorlauf</strong><small>Erinnerung vor dem Gebet</small></span></div><label class="notification-time"><select id="notificationPrayerAdvance" class="filter-select" aria-label="Vorlauf Gebetsbenachrichtigung"><option value="5" ${prayerPushAdvanceMinutes(s)===5?"selected":""}>5 Min</option><option value="10" ${prayerPushAdvanceMinutes(s)===10?"selected":""}>10 Min</option><option value="15" ${prayerPushAdvanceMinutes(s)===15?"selected":""}>15 Min</option></select></label></div></div>
     </section>
@@ -27456,7 +27475,7 @@ function renderNotificationCenter({embedded=false}={}){
     <section class="notification-section" aria-labelledby="notificationJummahTitle">
       <header class="notification-section__head"><div><span class="notification-section__kicker">Freitag</span><h3 id="notificationJummahTitle">Jumuʿah</h3><p>Die Freitagserinnerung separat verwalten.</p></div>${notificationToggleButton("notificationJummahToggle",jummahOn,"Jumuʿah-Erinnerung")}</header>
       <div class="notification-settings-list"><div class="notification-row"><div class="notification-row__copy"><span class="notification-row__glyph" aria-hidden="true">◈</span><span><strong>${s.jummahUseManualTime?"Manuelle Moschee-Zeit":"Automatisch nach Dhuhr"}</strong><small>${s.jummahUseManualTime?normalizeTimeHHMM(s.jummahManualTime,"13:30"):"Standortabhängige Zeit"} · ${normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes)} Min vorher</small></span></div><button type="button" class="notification-action" data-nav="jummah">Details</button></div></div>
-      <p class="notification-note">Test-App: Auswahl und Wunschzeiten werden auf diesem Gerät gespeichert. Der öffentliche Versand bleibt unverändert, bis dieser Bereich ausdrücklich für Live freigegeben wird.</p>
+
     </section>
     <div class="notification-saved">Änderungen werden automatisch gespeichert</div>
   </main>`;
@@ -27464,6 +27483,45 @@ function renderNotificationCenter({embedded=false}={}){
 function bindNotificationCenter(){
   const rerender=()=>{if(["notifications","settings"].includes(readRoute().view))render()};
   const syncPrayer=()=>{const s=getPrayerSettings();if(!isDarNativeApp()&&s.reminder&&hasPrayerLocation(s))syncPrayerPushTags(s,{retries:2}).catch(()=>{});scheduleLocalPrayerRemindersIfNeeded({silent:true}).catch(()=>{})};
+  /* GPS und Stadtwahl: nur vorhandenen Gebetszeitenrechner nutzen. */
+  const gps=$("notificationDetectLocationBtn");
+  const cityToggle=$("notificationManualCityToggle"),cityPanel=$("darManualCityPanel");
+  const status=$("darLocationFeedback");
+  const feedback=(msg)=>{if(status){status.textContent=String(msg||"");status.hidden=!msg}};
+  if(gps)gps.onclick=async()=>{
+    if(gps.disabled)return;
+    gps.disabled=true;gps.textContent="Ort wird erkannt …";feedback("");
+    try{
+      const pos=await requestBrowserPosition();
+      const lat=Number(pos?.coords?.latitude),lon=Number(pos?.coords?.longitude);
+      if(!Number.isFinite(lat)||!Number.isFinite(lon)||lat<-90||lat>90||lon<-180||lon>180)throw new Error("invalid_gps");
+      const city=await reversePrayerCity(lat,lon);
+      setPrayerSettings({lat,lon,city,locationGranted:true});
+      rerender();
+    }catch(e){const code=Number(e?.code||0);
+      feedback(code===1?"Standortzugriff gesperrt. Bitte die Berechtigung im Gerät ändern oder die Stadt manuell auswählen.":code===3?"Standortbestimmung dauert zu lange. Bitte erneut versuchen oder die Stadt wählen.":"Standort nicht verfügbar. Bitte eine Stadt manuell auswählen.");
+    }finally{gps.disabled=false;gps.textContent="Standort erkennen"}
+  };
+  if(cityToggle&&cityPanel)cityToggle.onclick=()=>{
+    const open=cityPanel.hidden;
+    cityPanel.hidden=!open;
+    cityToggle.setAttribute("aria-expanded",String(open));
+    if(open)$("darManualCityInput")?.focus();
+  };
+  if(cityPanel)cityPanel.onsubmit=async(ev)=>{
+    ev.preventDefault();
+    const field=$("darManualCityInput"),save=$("darManualCitySaveBtn");
+    const value=String(field?.value||"").trim();
+    if(value.length<2){feedback("Bitte einen gültigen Ort eingeben.");return}
+    if(save){save.disabled=true;save.textContent="Wird gesucht …"}
+    feedback("");
+    try{const place=await geocodePrayerCity(value);
+      if(!Number.isFinite(place.lat)||!Number.isFinite(place.lon))throw new Error("invalid_city");
+      setPrayerSettings(place);rerender();
+    }catch(e){feedback("Ort nicht gefunden. Bitte Stadt oder Postleitzahl prüfen.");
+      if(save){save.disabled=false;save.textContent="Übernehmen"}
+    }
+  };
   const prayerMaster=$("notificationPrayerMaster");
   if(prayerMaster)prayerMaster.onclick=async()=>{
     const s=getPrayerSettings();
@@ -27474,7 +27532,7 @@ function bindNotificationCenter(){
       rerender();
       return;
     }
-    if(!hasPrayerLocation(s)){alert("Bitte zuerst den Standort für genaue Gebetszeiten festlegen.");navigate("prayer");return}
+    if(!hasPrayerLocation(s)){feedback("Bitte zuerst den Standort erkennen oder eine Stadt auswählen.");gps?.focus();return}
     if(isDarNativeApp()){
       persistNotificationSettings({reminder:true});
       rerender();
@@ -27532,8 +27590,8 @@ function bindNotificationCenter(){
       if(!opted)missing.push("Aktivierung");
       const incomplete=missing.length>0;
       healthText.textContent=incomplete
-        ?("Push nicht vollständig aktiv · "+kind+" · fehlt: "+missing.join(", "))
-        :(kind+" aktiv"+(sub?" · Gerät erkannt":"")+(token?"":""));
+        ?(perm==="denied"?"Mitteilungen am Gerät gesperrt. Bitte die Gerätefreigabe ändern.":"Mitteilungen noch nicht vollständig eingerichtet.")
+        :"Mitteilungen mit diesem Gerät verbunden.";
       healthBox.hidden=false;
     })().catch(()=>{healthText.textContent="Push nicht vollständig aktiv";});
     if(reenable)reenable.onclick=async()=>{try{await requestNotificationPermission();const OS=await waitForOneSignalReady(8000);if(OS){await ensurePushUserLogin(OS);await waitForPushOptIn(OS);await syncDailyPushTags(getPrayerSettings(),{ensureOptIn:true});await savePushRegistration(getPrayerSettings(),OS)}rerender()}catch(e){if(healthText)healthText.textContent="Push nicht vollständig aktiv"}};
@@ -38339,4 +38397,5 @@ html[data-theme] body:not(.is-home-route) > .app > footer.footer {
   border:0!important;
 }
 </style>
+<link rel="stylesheet" id="darSettingsPermissionsV1" href="/test/assets/dar-settings-permissions-v1.css?v=20261016-1">
 </html>
