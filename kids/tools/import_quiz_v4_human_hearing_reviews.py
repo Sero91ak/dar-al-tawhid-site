@@ -138,8 +138,8 @@ def build_report(stage, files):
             approved[sha]=mp3
         for sha,issue in row["reportedIssues"].items():
             if sha in problems:
-                ensure(problems[sha]["mp3Sha256"]==issue["mp3Sha256"],
-                       "two reviewers disagreed on original MP3 bytes")
+                ensure(problems[sha]==issue,
+                       "contradictory issue reports require human resolution")
             problems[sha]=issue
     conflicting=sorted(set(approved)&set(problems))
     for sha in conflicting:approved.pop(sha,None)
@@ -194,6 +194,9 @@ def main():
     opts=parser.parse_args()
     ensure(json.loads(RELEASE.read_text(encoding="utf-8")).get("enabled") is False,
            "cannot import hearing claims with production flag enabled")
+    for flag,path in (("--young",opts.young),("--older",opts.older)):
+        if flag in __import__("sys").argv[1:] and not path.is_file():
+            fail("explicitly supplied review JSON does not exist: "+flag)
     files={"4-6":opts.young if opts.young.is_file() else None,
            "7-10":opts.older if opts.older.is_file() else None}
     stage=load(STAGED,10_000_000)
