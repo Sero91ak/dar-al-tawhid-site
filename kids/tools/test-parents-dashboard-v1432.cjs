@@ -69,6 +69,15 @@ for(const marker of ["kids.storyNowPlaying.v2","kids.storyAudioProgress.v2.",
 }
 assert(!js.includes("window.DARKidsStoryHub.openResume")&&!js.includes("window.DARKidsStoryHub.openStory"),
  "retired central Story Hub must never open from parent recent activity");
+const retiredHub=read("kids/story-hub.js");
+assert(retiredHub.includes("The central Hörwelten route is retired")&&
+ retiredHub.includes('if(m)openExternalStory(m[1],decodeURIComponent(m[2]),0)')&&
+ !retiredHub.includes("ensureEntry();ensureUi();"),
+ "legacy deep links must redirect to current libraries without mounting old player");
+for(const asset of ["story-hub.js?v=29","story-follow-reader.js?v=19-salaf1",
+ "salaf-library-v1.js?v=1441","parents-dashboard-v1432.js?v=1441"]){
+ assert(html.includes(asset)&&sw.includes(asset),"Kids app must ship a consistent fresh story route: "+asset);
+}
 assert(js.includes("window.addEventListener(\"dar-kids-story-resume\",renderLastStory)"),
  "parent recent playback must update while the app is open");
 const reader=read("kids/story-follow-reader.js");
