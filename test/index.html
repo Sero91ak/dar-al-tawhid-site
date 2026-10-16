@@ -27586,12 +27586,8 @@ function renderNotificationCenter({embedded=false}={}){
     const sub=document.querySelector(".dsh-detail[data-settings-page='notifications'] #notificationPrayerTitle + p");
     if(sub)sub.textContent=count+" von 5 ausgewählt · "+
       prayerPushAdvanceMinutes(getPrayerSettings())+" Minuten vorher";
-    try{
-      const settings=getPrayerSettings();
-      if(!isDarNativeApp()&&settings.reminder&&hasPrayerLocation(settings))
-        Promise.resolve(syncPrayerPushTags(settings,{retries:2})).catch(()=>{});
-      Promise.resolve(scheduleLocalPrayerRemindersIfNeeded({silent:true})).catch(()=>{});
-    }catch(error){console.warn("Gebetserinnerungen werden später synchronisiert",error)}
+    /* Existing bound button handler owns all reminder scheduling. This
+       fallback only persists the UI selection; no Push engine is modified. */
   },true);
 })();
 function bindNotificationCenter(){
