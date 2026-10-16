@@ -78,9 +78,6 @@ for(const token of ["KIDS_FAMILY_STRUCTURE_V1435","var(--kp-card)","var(--kp-rai
   "#view-parents .kids-parent-resume[hidden]"]){
  assert(css.includes(token),"existing theme family CSS missing "+token);
 }
-assert(miniStyle.includes("KIDS_PARENT_APP_ACTIVITY_V1440")&&
- miniStyle.includes("#view-parents #kidsParentResume.kids-parent-resume"),
- "prominent app activity styling must inherit boy/girl parent palette");
 assert(!css.includes("TAWHID-KIDS-Elternkonto-Vorschau"),
  "standalone preview style must not enter main app");
 
@@ -88,6 +85,9 @@ assert(!css.includes("TAWHID-KIDS-Elternkonto-Vorschau"),
  * can Start, Pause, Stop or Reset. Foreground time never leaks into background. */
 const miniTimer=read("kids/parents-compact-timer-v1436.js");
 const miniStyle=read("kids/parents-compact-timer-v1436.css");
+assert(miniStyle.includes("KIDS_PARENT_APP_ACTIVITY_V1440")&&
+ miniStyle.includes("#view-parents #kidsParentResume.kids-parent-resume"),
+ "prominent app activity styling must inherit boy/girl parent palette");
 assert.doesNotThrow(()=>new Function(miniTimer),"Mini timer JavaScript syntax");
 assert.ok(html.includes("/kids/parents-compact-timer-v1436.js?v=1440")&&
   html.includes("/kids/parents-compact-timer-v1436.css?v=1440"),"Mini timer scripts published");
