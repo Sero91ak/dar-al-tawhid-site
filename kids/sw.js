@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1439";
+const CACHE_NAME="dar-al-tawhid-kids-v1440";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -286,9 +286,9 @@ const PRECACHE=CORE_PRECACHE.concat([
 /* V1430 GIRL ACADEMY BOOT: girls must have correct colors even offline on first load. */
 const KIDS_BOOT_PRECACHE=[
   "/kids/parents-dashboard-v1432.css?v=1435",
-  "/kids/parents-dashboard-v1432.js?v=1435",
-  "/kids/parents-compact-timer-v1436.css?v=1439",
-  "/kids/parents-compact-timer-v1436.js?v=1439",
+  "/kids/parents-dashboard-v1432.js?v=1440",
+  "/kids/parents-compact-timer-v1436.css?v=1440",
+  "/kids/parents-compact-timer-v1436.js?v=1440",
   "/kids/kids-birth-month-v1431.js?v=1431",
   "/kids/kids-birth-month-v1431.css?v=1431",
   "/kids/akademie/girl-profile-authority-v1430.css?v=1430",
