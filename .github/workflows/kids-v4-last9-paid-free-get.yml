@@ -44,8 +44,13 @@ jobs:
           if report.get('successfullyImportedOriginals',0):
               print('Real prepaid original MP3s imported; now recomposing KIDS V4 for review.')
               subprocess.run(['python3','kids/tools/quiz_v4_first150_offline_join.py'],check=True)
+              subprocess.run(['python3','kids/tools/quiz_v4_age7to10_offline_join.py'],check=True)
+              subprocess.run(['python3','kids/tools/qa_quiz_v4_saved_mp3.py'],check=True)
               subprocess.run(['python3','kids/tools/qa_quiz_v4_first150_composed.py'],check=True)
               subprocess.run(['python3','kids/tools/report_quiz_v4_450_progress.py'],check=True)
+              subprocess.run(['python3','kids/tools/stage_quiz_v4_existing_mp3_import.py'],check=True)
+              subprocess.run(['python3','kids/tools/write_quiz_v4_handover.py'],check=True)
+              subprocess.run(['python3','kids/tools/quiz_v4_selected450_release_gate.py','--ignore-flag'],check=True)
           else:
               print('Paid API GET did not return an original MP3; no TTS requested or charged.')
           PY
@@ -63,6 +68,11 @@ jobs:
           git add kids/data/quiz-v4-first150-composed-preview.json
           git add kids/data/quiz-v4-first150-composed-technical-qa.json
           git add kids/data/quiz-v4-450-production-status.json
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-handover-latest.json
           git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
           if git diff --cached --quiet; then
             echo "No new original files to save; no paid TTS was called."
