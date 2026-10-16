@@ -27172,6 +27172,7 @@ function darSettingsRow(view,label,desc,glyph,meta=""){
  return `<button class="dsh-row" type="button" ${val} aria-label="${label} öffnen"><span class="dsh-row-icon" aria-hidden="true">${darSettingsGlyph(glyph)}</span><span class="dsh-row-main"><span class="dsh-row-title">${label}</span><span class="dsh-row-sub">${desc}</span></span><span class="dsh-row-end">${meta?`<span class="dsh-row-meta">${esc(String(meta))}</span>`:""}<span class="dsh-row-chevron">${darSettingsGlyph("arrow")}</span></span></button>`;
 }
 function renderSettings(){
+ const overviewHeader=()=>setHeader("Einstellungen","Deine App, ganz nach deinen Wünschen.","","settings-page-head");
  const page=String(currentRoute?.value||"").trim();
  const pages={
   notifications:["Benachrichtigungen","Wähle deine Gebete und täglichen Erinnerungen.","bell"],
@@ -27206,7 +27207,7 @@ function renderSettings(){
  const themeName=(typeof THEME_META!=="undefined"&&THEME_META[theme]?.label)||"Ausgewählt";
  const place=hasPrayerLocation(settings)?(settings.city||"Gespeichert"):"Noch nicht festgelegt";
  const chosen=notificationEnabledPrayerCount(settings)+" von 5 Gebeten";
- return `${setHeader("Einstellungen","Deine App, ganz nach deinen Wünschen.","","settings-page-head")}
+ return `${overviewHeader()}
  <section class="dsh-shell dsh-home" aria-label="App-Einstellungen">
  <div class="dsh-welcome"><div><span class="dsh-eyebrow">DĀR AL TAWḤĪD</span><h2>Dein App-Erlebnis</h2><p>Alles Wichtige an einem Ort. Ruhig, klar und persönlich.</p></div><span class="dsh-emblem">${darSettingsGlyph("gear")}</span></div>
  <div class="dsh-group"><div class="dsh-group-head"><span>Mitteilungen & Zugriff</span></div><div class="dsh-list">
