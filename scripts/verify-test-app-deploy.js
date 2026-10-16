@@ -149,6 +149,37 @@ async function fetchVersionBuild(base) {
     throw new Error(`workers.dev Test-App liefert noch nicht ${TEST_EXPECT_BUILD}: ${workersBase}/`);
   }
 
+  // DAR_TEST_PWA_BOOT_NO_REDIRECT_GUARD_20261016: Installed iOS/Android test PWA must boot without a 302.
+  // The ordinary fetchText() intentionally follows redirects for other routes;
+  // that would hide a broken /test/?env=staging&source=pwa&v=1371 start_url.
+  async function waitForPwaBootWithoutRedirect(label, base) {
+    const bootUrl = `${base}/?env=staging&source=pwa&v=1371`;
+    for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
+      try {
+        const res = await fetch(bootUrl, {
+          redirect: "manual",
+          cache: "no-store",
+          headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
+        });
+        const location = res.headers.get("location") || "";
+        const html = res.status === 200 ? await res.text() : "";
+        const ok = res.status === 200 && !location &&
+          html.includes(TEST_EXPECT_BUILD) && /<html[\\s>]/i.test(html);
+        console.log(`${label} PWA boot: status=${res.status} redirect=${location || "none"} build=${TEST_EXPECT_BUILD} ok=${ok} attempt=${attempt}/${ATTEMPTS}`);
+        if (ok) return true;
+      } catch (err) {
+        console.log(`${label} PWA boot: ${err.message || err} (attempt ${attempt}/${ATTEMPTS})`);
+      }
+      if (attempt < ATTEMPTS) await sleep(DELAY_MS);
+    }
+    return false;
+  }
+  const publicPwaBootOk = await waitForPwaBootWithoutRedirect("public", publicBase);
+  const workerPwaBootOk = await waitForPwaBootWithoutRedirect("workers.dev", workersBase);
+  if (!publicPwaBootOk || !workerPwaBootOk) {
+    throw new Error("Dar Test PWA startup rejected: HTML shell must respond HTTP 200 directly; redirect/invalid HTML detected");
+  }
+
   async function waitForMatchingVersion(label, base) {
     for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
       const v = await fetchVersionBuild(base);
