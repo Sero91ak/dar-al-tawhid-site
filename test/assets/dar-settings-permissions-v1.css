@@ -385,3 +385,12 @@ html body.is-more-route .more-feature-row[data-nav="notifications"]{
  html body.is-settings-route .notification-time{gap:4px!important}
  html body.is-settings-route .notification-time input{max-width:81px!important}
 }
+
+
+/* APP HEALTH CHECK COMPAT: the legacy setup hub remains in DOM after the
+   real settings center, but it must NEVER appear as a second UI surface. */
+html body.is-settings-route .settings-one-page #dar-setup-hub[data-dar-setup="true"],
+html body.is-settings-route .settings-one-page #dar-setup-hub {
+  display:none!important;
+  visibility:hidden!important;
+}
