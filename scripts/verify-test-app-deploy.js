@@ -58,7 +58,12 @@ function currentCommitTouchesKids() {
           ["diff", "HEAD^", "HEAD", "--", "cloudflare/test-app-worker.js"],
           { cwd: ROOT_DIR, encoding: "utf8" }
         );
-        return /(?:\/test\/kids|kidsPath|dar-al-tawhid-kids|kids\/)/i.test(workerDiff);
+        // An isolated adult Test repair page is embedded as an HTML string.
+        // Its safety code mentions /test/kids/ solely to protect KIDS caches;
+        // that string must not misclassify an adult-only release as a KIDS change.
+        // Keep detecting real edits to Worker KIDS routes and handlers.
+        const actualWorkerDiff = workerDiff.replace(/^\\+\\s*const repairHtml = .*$/gm, "");
+        return /(?:\\/test\\/kids|kidsPath|dar-al-tawhid-kids|kids\\/)/i.test(actualWorkerDiff);
       } catch (error) {
         console.log("Kids worker diff detection failed; generic Test-Worker change does not force Kids verification:", error.message || error);
       }
