@@ -729,3 +729,149 @@ function observe(){
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",observe,{once:true});
 else observe();
 })();
+
+/* DAR_TEST_TODAY_EDITORIAL_V1
+ * Motive sind bereits im offiziellen Test-App-Assetbestand vorhanden.
+ * Verwendet bestehende Gebetszeiten- und Beitragsdaten; erzeugt keine Pushs.
+ * Die originale, schwebende App-Tab-Leiste bleibt komplett unberührt.
+ */
+(function(){
+  "use strict";
+  if(!/^\/test(?:\/|$)/.test(String(location.pathname||"")))return;
+  var ID="darTodayEditorialV1";
+  var STYLE_ID="dar-today-editorial-v1-style";
+  var ART="/test/assets/home-v1194/";
+  var queued=false;
+
+  function esc(v){
+    return String(v==null?"":v).replace(/[&<>"']/g,function(ch){
+      return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch];
+    });
+  }
+  function isHome(){
+    return !!(document.body&&document.body.classList.contains("is-home-route"));
+  }
+  function getDayInfo(){
+    var now=new Date();
+    var hour=now.getHours();
+    var weekday=now.getDay();
+    try {
+      hour=Number(new Intl.DateTimeFormat("en-GB",{
+        timeZone:"Europe/Berlin",hour:"2-digit",hourCycle:"h23"
+      }).format(now));
+      weekday=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].indexOf(
+        new Intl.DateTimeFormat("en-US",{timeZone:"Europe/Berlin",weekday:"short"}).format(now)
+      );
+    }catch(e){}
+    return {now:now,hour:hour,friday:weekday===5};
+  }
+  function nextPrayer(){
+    try{
+      if(typeof nextPrayerInfo!=="function")return {name:"Gebetszeiten",time:"Zeiten für deinen Ort"};
+      var p=nextPrayerInfo();
+      if(!p||p.key==="none")return {name:"Standort festlegen",time:"Gebetszeiten für deinen Ort"};
+      var dt=p.date instanceof Date?p.date:new Date(p.date);
+      var label=String(p.name||p.label||"Nächstes Gebet");
+      var time=Number.isNaN(dt.getTime())?"Gebetszeiten öffnen":new Intl.DateTimeFormat("de-DE",{
+        hour:"2-digit",minute:"2-digit",timeZone:"Europe/Berlin"
+      }).format(dt)+" Uhr";
+      return {name:label,time:time+(p.tomorrow?" · morgen":"")};
+    }catch(e){
+      return {name:"Gebetszeiten",time:"Gebetszeiten öffnen"};
+    }
+  }
+  function recommendation(){
+    try{
+      if(typeof recommendedPost!=="function")return null;
+      var p=recommendedPost();
+      if(!p||!p.id)return null;
+      return {id:String(p.id),title:String(p.title||"Heute empfohlen").slice(0,64)};
+    }catch(e){return null}
+  }
+  function photo(src){
+    return '<img class="dtc-art" src="'+esc(ART+src)+'" alt="" loading="lazy" decoding="async">';
+  }
+  function card(cls,route,value,img,kicker,title,desc){
+    return '<button type="button" class="dtc-card '+cls+'" data-dtc-view="'+esc(route)+'"'+
+      (value?' data-dtc-value="'+esc(value)+'"':'')+
+      ' aria-label="'+esc(kicker+": "+title+", "+desc)+'">'+
+      photo(img)+
+      '<span class="dtc-kicker">'+esc(kicker)+'</span>'+
+      '<strong class="dtc-title">'+esc(title)+'</strong>'+
+      '<span class="dtc-desc">'+esc(desc)+'</span>'+
+      '</button>';
+  }
+  function buildMarkup(){
+    var d=getDayInfo(),p=nextPrayer(),rec=recommendation();
+    var phase=d.hour<11?"Guten Morgen":d.hour<17?"Für deinen Tag":"Für deinen Abend";
+    var hero=d.hour<11?"hero-mobile-adobe.jpg":d.hour<17?"hero-wide-adobe.jpg":"study-runway.jpg";
+    return '<div class="dtc-head"><h2 id="darTodayEditorialV1Title">Heute</h2><span>'+esc(phase)+'</span></div>'+
+      '<div class="dtc-grid">'+
+      card("dtc-card--prayer","prayer","",""+hero,"Nächstes Gebet",p.name,p.time)+
+      card("dtc-card--dua","duas","","study-runway.jpg","Für dein Herz","Duʿāʾ lesen","Qurʾān & Sunnah")+
+      (d.friday?
+        card("dtc-card--jummah","jummah","","hero-wide-adobe.jpg","Freitag","Jumuʿah","Zeit und Erinnerung") :
+        card("dtc-card--post",rec?"post":"topics",rec?rec.id:"","hero-wide-adobe.jpg",
+             "Heute empfohlen",rec?rec.title:"Wissen entdecken","Beitrag mit Quelle öffnen"))+
+      '</div>';
+  }
+  function ensureStyles(){
+    if(document.getElementById(STYLE_ID))return;
+    var link=document.createElement("link");
+    link.id=STYLE_ID;link.rel="stylesheet";
+    link.href="/test/assets/dar-today-editorial-v1.css?v=1";
+    document.head.appendChild(link);
+  }
+  function go(route,value){
+    try{
+      if(typeof navigate==="function"){
+        navigate(route,value||"");return;
+      }
+    }catch(e){}
+    location.hash="#"+route+(value?"/"+encodeURIComponent(value):"");
+  }
+  function mount(){
+    if(!isHome())return;
+    var shell=document.querySelector("#appView .home-v380-shell");
+    if(!shell)return;
+    ensureStyles();
+    var el=document.getElementById(ID);
+    if(!el||!shell.contains(el)){
+      el=document.createElement("section");
+      el.id=ID;
+      el.setAttribute("aria-labelledby","darTodayEditorialV1Title");
+      el.addEventListener("click",function(ev){
+        var btn=ev.target&&ev.target.closest&&ev.target.closest("[data-dtc-view]");
+        if(!btn||!el.contains(btn))return;
+        go(btn.getAttribute("data-dtc-view"),btn.getAttribute("data-dtc-value")||"");
+      });
+      /* Nie die vorhandene Tabbar, die Qurʾān-Karte oder den Footer verändern. */
+      var core=shell.querySelector(".home-line-tawhid");
+      if(core)core.insertAdjacentElement("beforebegin",el);
+      else shell.insertBefore(el,shell.firstChild);
+    }
+    var markup=buildMarkup();
+    if(el.__darTodaySignature!==markup){
+      el.__darTodaySignature=markup;
+      el.innerHTML=markup;
+    }
+  }
+  function schedule(){
+    if(queued)return;
+    queued=true;
+    requestAnimationFrame(function(){
+      queued=false;
+      try{mount()}catch(e){}
+    });
+  }
+  function boot(){
+    schedule();
+    window.addEventListener("hashchange",schedule);
+    window.addEventListener("pageshow",schedule);
+    document.addEventListener("dar:view-rendered",schedule);
+    document.addEventListener("dar:render",schedule);
+    document.addEventListener("visibilitychange",function(){if(!document.hidden)schedule()});
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});
+  else boot();
+})();

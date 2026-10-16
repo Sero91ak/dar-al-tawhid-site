@@ -84,29 +84,19 @@
     return !!(window.webkit && window.webkit.messageHandlers);
   }
 
+  /* In Einstellungen nur einen Einstieg – die einzige Zentrale ist Mehr → Alltag → Benachrichtigungen. */
   function renderHtml() {
-    var s = readSettings();
-    var locOk = hasLocation(s);
-    var remOk = !!(s.reminder || s.remindersEnabled || s.prayerRemindersEnabled);
-    var locBtnClass = "dar-setup-hub__btn" + (locOk ? " is-active" : "");
-    var notifBtnClass = "dar-setup-hub__btn" + (remOk ? " is-active" : "");
     return [
-      '<section id="' + ROOT_ID + '" class="dar-setup-hub" data-dar-setup="true" aria-label="Einrichtung">',
-      '  <header class="dar-setup-hub__head">',
-      '    <h2 class="dar-setup-hub__title">DĀR AL TAWḤĪD Einrichtung</h2>',
-      '    <p class="dar-setup-hub__sub">Standort, Gebetszeiten, Mitteilungen und Widgets</p>',
-      "  </header>",
-      '  <div class="dar-setup-hub__list">',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Standort</strong><span>Für genaue Gebetszeiten und Widgets</span></div><button type="button" class="' +
-        locBtnClass +
-        '" data-dar-setup-action="location">Öffnen</button></div>',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Mitteilungen</strong><span>Für Gebets-Erinnerungen und Tests</span></div><button type="button" class="' +
-        notifBtnClass +
-        '" data-dar-setup-action="notifications">Öffnen</button></div>',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Gebetszeiten</strong><span>Daten für Widgets und Watch aktualisieren</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="sync">Sync</button></div>',
-      '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Widget-Ziele</strong><span>Öffnet direkt Gebetszeiten, Kalender, Qurʾān oder Duʿāʾ</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="widgets">Prüfen</button></div>',
-      "  </div>",
-      "</section>"
+      '<section id="' + ROOT_ID + '" class="dar-setup-hub" data-dar-setup="true" data-dar-refined-setup="v1" aria-label="Mitteilungen verwalten">',
+      ' <header class="dar-setup-hub__head">',
+      '  <h2 class="dar-setup-hub__title">Benachrichtigungen</h2>',
+      '  <p class="dar-setup-hub__sub">Gebete, Jumuʿah und tägliche Erinnerungen an einem Ort verwalten.</p>',
+      ' </header>',
+      ' <div class="dar-setup-hub__list"><div class="dar-setup-hub__row">',
+      '   <div class="dar-setup-hub__copy"><strong>Deine Erinnerungen</strong><span>Mitteilungen, Standort und Zeiten einstellen</span></div>',
+      '   <button type="button" class="dar-setup-hub__btn" data-dar-setup-action="notifications">Öffnen</button>',
+      ' </div></div>',
+      '</section>'
     ].join("");
   }
 
@@ -161,16 +151,7 @@
   }
 
   function openNotifications() {
-    if (isNative() && openNativeSettings("notifications")) return;
-    var hero = document.querySelector(".notification-hero, #notificationHealthBox");
-    if (hero) {
-      try {
-        hero.scrollIntoView({ behavior: "smooth", block: "start" });
-      } catch (e) {
-        hero.scrollIntoView();
-      }
-      return;
-    }
+    /* Kein OS-Prompt aus der Einstellungsübersicht. Vorhandene Zentrale öffnen. */
     go("notifications");
   }
 
@@ -239,11 +220,18 @@
     for (var i = 1; i < hubs.length; i += 1) hubs[i].remove();
     var existing = hubs[0] || document.getElementById(ROOT_ID);
     if (existing) {
+      if (existing.getAttribute("data-dar-refined-setup") !== "v1") {
+        existing.outerHTML = renderHtml();
+        existing = document.getElementById(ROOT_ID);
+      }
       bind(existing);
       return existing;
     }
-    // Hub is rendered by index.html above the page head; do not inject into #appView
-    return null;
+    /* Older rendered app builds may omit the setup hub until JS loads. */
+    page.insertAdjacentHTML("afterbegin", renderHtml());
+    existing = document.getElementById(ROOT_ID);
+    bind(existing);
+    return existing;
   }
 
   function onSettingsRoute() {
@@ -432,4 +420,315 @@
   window.addEventListener("online",function(){setTimeout(check,180);});
   document.addEventListener("visibilitychange",function(){if(!document.hidden)setTimeout(check,180);});
   setInterval(check,60*1000);
+})();
+
+
+/* DAR_TEST_NOTIFICATIONS_REFINED_V1
+ * Schaltet ausschließlich die Oberfläche um; ältere Event-IDs und Push-Callbacks bleiben erhalten.
+ */
+(function () {
+  "use strict";
+  if (!/^\/test(?:\/|$)/.test(location.pathname)) return;
+  var STYLE_ID = "dar-notifications-refined-css-v1";
+
+  function loadStyles() {
+    if (document.getElementById(STYLE_ID)) return;
+    var node = document.createElement("link");
+    node.id = STYLE_ID;
+    node.rel = "stylesheet";
+    node.href = "/test/assets/notifications-refined-v1.css?v=3-location";
+    document.head.appendChild(node);
+  }
+
+  function readableStatus(node) {
+    if (!node) return;
+    var raw = String(node.textContent || "").trim();
+    if (!raw) return;
+    if (raw.indexOf("Push nicht vollständig aktiv") !== -1) {
+      node.title = raw;
+      node.textContent = /Berechtigung/.test(raw)
+        ? "Mitteilungen sind auf diesem Gerät noch nicht erlaubt."
+        : "Mitteilungen sind noch nicht vollständig eingerichtet.";
+    } else if (raw.indexOf(" · Gerät erkannt") !== -1 ||
+               /^Web Push aktiv/.test(raw) || /^Safari\/Web Push aktiv/.test(raw)) {
+      node.title = raw;
+      node.textContent = "Mitteilungen sind auf diesem Gerät verbunden.";
+    }
+  }
+
+  function polish() {
+    loadStyles();
+    var page = document.querySelector("body.is-notifications-route .notification-center-page");
+    if (!page) return;
+    var reenable = page.querySelector("#notificationReenableBtn");
+    if (reenable) reenable.textContent = "Jetzt einrichten";
+    var status = page.querySelector("#notificationHealthText");
+    if (status) {
+      readableStatus(status);
+      if (!status.__darRefinedObserver) {
+        status.__darRefinedObserver = new MutationObserver(function () {
+          readableStatus(status);
+        });
+        status.__darRefinedObserver.observe(status, { childList: true, characterData: true, subtree: true });
+      }
+    }
+  }
+
+  function schedulePolish() {
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", schedulePolish, {once:true});
+      return;
+    }
+    polish();
+    requestAnimationFrame(polish);
+    setTimeout(polish, 60);
+    setTimeout(polish, 400);
+  }
+  window.addEventListener("hashchange", schedulePolish);
+  window.addEventListener("pageshow", schedulePolish);
+  document.addEventListener("dar:render", schedulePolish);
+  schedulePolish();
+})();
+
+
+/* DAR_TEST_NOTIFICATION_LOCATION_V3
+   Einziger Ort für Berechtigungen: die vorhandene Seite Benachrichtigungen.
+   GPS wird ausschließlich durch einen direkten Nutzertipp angefragt.
+   Nutzt getPrayerSettings, reversePrayerCity, setPrayerSettings und render
+   aus der offiziellen Test-App; keine weitere Push- oder Navigationslogik.
+ */
+(function(){
+  "use strict";
+  if(!/^\/test(?:\/|$)/.test(String(location.pathname||"")))return;
+  var PAGE="body.is-notifications-route .notification-center-page";
+  var GPS_ID="darNotificationGpsQuickV3";
+  var scheduled=false;
+  var pending=false;
+  var viewObserver=null;
+
+  function prayerSettings(){
+    try{return typeof getPrayerSettings==="function"?getPrayerSettings():{};}catch(e){return {};}
+  }
+  function setFeedback(message){
+    var node=document.querySelector("#"+GPS_ID+" [data-dar-gps-feedback]");
+    if(!node)return;
+    node.textContent=String(message||"");
+    node.hidden=!message;
+  }
+  function setGpsText(message){
+    var node=document.querySelector("#"+GPS_ID+" [data-dar-gps-summary]");
+    if(node)node.textContent=message;
+  }
+  function permissionLabel(state){
+    if(state==="granted")return "Standortzugriff erlaubt. Du kannst deinen Ort jederzeit aktualisieren.";
+    if(state==="denied")return "Standortzugriff am Gerät gesperrt. Die manuelle Ortswahl bleibt möglich.";
+    if(state==="prompt")return "Automatische Ortung erst nach deiner Zustimmung.";
+    return "Standort automatisch erkennen oder die Stadt manuell auswählen.";
+  }
+  function refreshPermission(){
+    var node=document.getElementById(GPS_ID);
+    if(!node)return;
+    setGpsText(permissionLabel(""));
+    try{
+      if(!navigator.geolocation&&!window.DAR_NATIVE_LOCATION){
+        setGpsText("Geräteortung hier nicht verfügbar. Stadt über „Ändern“ auswählen.");
+        var btn=node.querySelector("[data-dar-detect-location]");
+        if(btn)btn.disabled=true;
+        return;
+      }
+      if(navigator.permissions&&typeof navigator.permissions.query==="function"){
+        navigator.permissions.query({name:"geolocation"}).then(function(result){
+          if(node.isConnected&&!pending)setGpsText(permissionLabel(result&&result.state));
+        }).catch(function(){});
+      }
+    }catch(e){}
+  }
+  function updateSummary(){
+    var page=document.querySelector(PAGE);
+    if(!page)return;
+    /* Zeiten stammen aus demselben Gebetszeiten-Rechner wie die vorhandene App.
+       Ohne gültigen Ort keine erfundenen Uhrzeiten anzeigen. */
+    try{
+      var s=prayerSettings();
+      var valid=typeof hasPrayerLocation==="function" && hasPrayerLocation(s);
+      var rows=valid&&typeof calculatePrayerTimes==="function"
+        ?calculatePrayerTimes(new Date(),s):[];
+      page.querySelectorAll(".notification-prayer[data-notification-prayer]").forEach(function(btn){
+        var key=btn.getAttribute("data-notification-prayer");
+        var match=rows.find(function(p){return p.key===key;});
+        var value=valid&&match&&match.time!=null&&typeof formatPrayerHour==="function"
+          ?formatPrayerHour(match.time):"";
+        var slot=btn.querySelector("[data-dar-prayer-clock]");
+        if(!value){
+          if(slot)slot.remove();
+          return;
+        }
+        if(!slot){
+          slot=document.createElement("span");
+          slot.className="notification-prayer-clock";
+          slot.setAttribute("data-dar-prayer-clock","");
+          slot.setAttribute("aria-hidden","true");
+          btn.appendChild(slot);
+        }
+        if(slot.textContent!==value)slot.textContent=value;
+        var title=btn.querySelector("b");
+        var base=title?title.textContent:key;
+        var label=base+" · "+value+" Uhr · "+(btn.getAttribute("aria-pressed")==="true"?"ausgewählt":"nicht ausgewählt");
+        if(btn.getAttribute("aria-label")!==label)btn.setAttribute("aria-label",label);
+      });
+    }catch(e){}
+    var count=page.querySelector(".notification-hero__count > span");
+    if(count){
+      var num=count.querySelector("b");
+      if(num){
+        var label=Number(num.textContent||0)===1?"Erinnerungsart gewählt":"Erinnerungsarten gewählt";
+        count.setAttribute("aria-label",num.textContent+" "+label);
+        var textNode=Array.prototype.slice.call(count.childNodes).find(function(n){return n.nodeType===3;});
+        if(textNode&&textNode.textContent.trim()!=="gewählt")textNode.textContent=" gewählt";
+      }
+    }
+    var test=page.querySelector("#notificationDeviceTestBtn");
+    if(test){
+      test.hidden=true;
+      test.setAttribute("hidden","");
+      test.setAttribute("aria-hidden","true");
+      test.tabIndex=-1;
+    }
+    var note=page.querySelector(".notification-note");
+    if(note&&!note.hasAttribute("data-dar-readable-note")){
+      note.textContent="Deine Auswahl wird auf diesem Gerät gespeichert.";
+      note.setAttribute("data-dar-readable-note","1");
+    }
+    var reenable=page.querySelector("#notificationReenableBtn");
+    if(reenable){
+      reenable.textContent="Mitteilungen einrichten";
+    }
+    var status=page.querySelector("#notificationHealthText");
+    if(status){
+      var raw=String(status.textContent||"").trim();
+      var newLabel="";
+      if(/^Push nicht vollständig aktiv/.test(raw)){
+        newLabel=/Berechtigung/.test(raw)
+          ?"Mitteilungen sind auf diesem Gerät noch nicht freigegeben."
+          :"Mitteilungen sind noch nicht vollständig eingerichtet.";
+      }else if(/^(?:Safari\/Web Push|Web Push|iOS Native) aktiv/.test(raw)){
+        newLabel="Mitteilungen sind mit deinem Gerät verbunden.";
+      }else if(raw==="Push-Status wird geprüft…"){
+        newLabel="Gerätefreigabe wird geprüft …";
+      }
+      if(newLabel&&newLabel!==raw)status.textContent=newLabel;
+    }
+  }
+  async function locate(button){
+    if(pending)return;
+    if(!navigator.geolocation&&!(window.DAR_NATIVE_LOCATION)){
+      setFeedback("Standortbestimmung ist hier nicht verfügbar. Bitte „Ändern“ wählen.");
+      return;
+    }
+    if(!window.isSecureContext&&!(window.DAR_NATIVE_LOCATION)){
+      setFeedback("Standortfreigabe benötigt eine sichere HTTPS-Verbindung.");
+      return;
+    }
+    pending=true;
+    button.disabled=true;
+    button.textContent="Wird ermittelt …";
+    setFeedback("");
+    try{
+      /* Native Location oder Browser-Geolocation: synchron im Klick gestartet. */
+      var pos;
+      if(typeof requestBrowserPosition==="function"){
+        pos=await requestBrowserPosition();
+      }else{
+        pos=await new Promise(function(resolve,reject){
+          navigator.geolocation.getCurrentPosition(resolve,reject,{
+            enableHighAccuracy:true,timeout:12000,maximumAge:600000
+          });
+        });
+      }
+      var lat=Number(pos&&pos.coords&&pos.coords.latitude);
+      var lon=Number(pos&&pos.coords&&pos.coords.longitude);
+      if(!Number.isFinite(lat)||!Number.isFinite(lon)||lat<-90||lat>90||lon<-180||lon>180){
+        throw new Error("invalid_coordinates");
+      }
+      var city=typeof reversePrayerCity==="function"
+        ?await reversePrayerCity(lat,lon):"Aktueller Standort";
+      if(typeof setPrayerSettings!=="function")throw new Error("prayer_settings_unavailable");
+      setPrayerSettings({lat:lat,lon:lon,city:String(city||"Aktueller Standort"),
+        locationGranted:true});
+      setFeedback("Standort übernommen: "+city+". Die Gebetszeiten verwenden nun diesen Ort.");
+      if(typeof render==="function")render();
+      else queue();
+    }catch(err){
+      var code=Number(err&&err.code||0);
+      if(code===1){
+        setFeedback("Standortzugriff verweigert. Bitte die Freigabe in den Geräte- oder Browser-Einstellungen ändern. Die manuelle Stadtwahl bleibt möglich.");
+      }else if(code===3){
+        setFeedback("Standortbestimmung dauert zu lange. Bitte erneut versuchen oder die Stadt manuell auswählen.");
+      }else{
+        setFeedback("Ort konnte nicht ermittelt werden. Bitte erneut versuchen oder „Ändern“ nutzen.");
+      }
+    }finally{
+      pending=false;
+      if(button.isConnected){
+        button.disabled=false;
+        button.textContent="Standort erkennen";
+      }
+      refreshPermission();
+    }
+  }
+  function mount(){
+    var page=document.querySelector(PAGE);
+    if(!page)return;
+    var original=page.querySelector(".notification-location");
+    if(!original)return;
+    var row=document.getElementById(GPS_ID);
+    if(!row||!page.contains(row)){
+      row=document.createElement("div");
+      row.id=GPS_ID;
+      row.className="notification-gps-quick";
+      row.innerHTML=[
+        '<div class="notification-gps-quick__copy">',
+        ' <strong>Automatischer Standort</strong>',
+        ' <small data-dar-gps-summary>Standort nur mit deiner Zustimmung erkennen.</small>',
+        '</div>',
+        '<button type="button" class="notification-gps-quick__btn" data-dar-detect-location>Standort erkennen</button>',
+        '<p class="notification-gps-quick__feedback" data-dar-gps-feedback hidden role="status" aria-live="polite"></p>'
+      ].join("");
+      original.insertAdjacentElement("afterend",row);
+      row.addEventListener("click",function(ev){
+        var btn=ev.target&&ev.target.closest("[data-dar-detect-location]");
+        if(!btn||!row.contains(btn))return;
+        ev.preventDefault();
+        ev.stopPropagation();
+        locate(btn);
+      });
+      refreshPermission();
+    }
+    updateSummary();
+  }
+  function queue(){
+    if(scheduled)return;
+    scheduled=true;
+    requestAnimationFrame(function(){
+      scheduled=false;
+      try{mount()}catch(e){}
+    });
+  }
+  function boot(){
+    var app=document.getElementById("appView");
+    if(app&&!viewObserver){
+      viewObserver=new MutationObserver(queue);
+      viewObserver.observe(app,{childList:true,subtree:true,characterData:false});
+    }
+    queue();
+    window.addEventListener("hashchange",queue);
+    window.addEventListener("pageshow",queue);
+    document.addEventListener("dar:render",queue);
+    document.addEventListener("dar:view-rendered",queue);
+    document.addEventListener("visibilitychange",function(){
+      if(!document.hidden){refreshPermission();queue();}
+    });
+  }
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});
+  else boot();
 })();
