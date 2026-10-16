@@ -213,7 +213,7 @@ def main():
            "Es ist **keine** Authentifizierung, keine finale Audiofreigabe und",
            "**kein** öffentlich sichtbarer Quiz-Status. Kein ElevenLabs-Credit-Verbrauch.",
            "",
-           "Zugelassene Eingänge im PR-Reviewzweig:",
+           "Zugelassene Eingänge: ausschließlich lokal/temporär; Rohdateien niemals committen:",
            "- `kids/review-only/hearing-submissions/4-6.json`",
            "- `kids/review-only/hearing-submissions/7-10.json`",
            "",
