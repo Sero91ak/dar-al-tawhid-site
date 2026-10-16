@@ -7677,6 +7677,18 @@
         "download/validate-release.cjs",
         "content/admin/change-scope-lock.json"
       ]
+    },
+    {
+      "id": "dar-test-settings-compact-photo-theme-only-20261016",
+      "at": "2026-10-16T08:45:00+02:00",
+      "approvedBy": "user-explicit-github-access-test-app-push-settings-20261016",
+      "reason": "Nur Erwachsenen-Dar-Test: obsolete Links/Unten/Rechts-Positionssteuerung aus dem Einstellungsrenderer entfernen, bestehende bottomNav-3D-Icons erhalten, fünf foto-basierte Gebetsauswahlkarten aus bereits vorhandenen lokalen Natur-Assets und theme-spezifischen Kontrast-/Abstandskorrekturen. Keine Besucher-/Kids-Icons, keine Push-/Standortlogik, keine Produktions-App-Quellen oder Worker-Secrets verändern.",
+      "paths": [
+        "test/assets/dar-settings-permissions-v1.css",
+        "test/assets/fold-thumb-nav.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-19T23:59:00.000Z"
     }
   ],
   "enabled": true
