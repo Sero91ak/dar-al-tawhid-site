@@ -53,6 +53,7 @@ jobs:
             python3 kids/tools/quiz_v4_first150_offline_join.py
             python3 kids/tools/qa_quiz_v4_saved_mp3.py
             python3 kids/tools/report_quiz_v4_450_progress.py
+            python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
             python3 kids/tools/quiz_v4_selected450_release_gate.py
           else
             echo "No previously-paid MP3 export ZIP supplied yet. All existing recordings kept unchanged."
@@ -73,6 +74,7 @@ jobs:
           git add kids/data/quiz-v4-paid-flow-import-status.json
           git add kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
           git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
           git add kids/data/quiz-v4-first150-composed-preview.json
           git add kids/data/quiz-v4-first150-audio-status.json
           git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
