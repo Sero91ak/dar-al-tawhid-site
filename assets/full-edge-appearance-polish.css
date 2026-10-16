@@ -827,7 +827,7 @@ html[data-theme] body {
     env(safe-area-inset-right,0px),
     2.2vw
   );
-  --dar-adult-live-content-width: calc(100% - (2 * var(--dar-adult-live-edge-gutter)));
+  --dar-adult-live-content-width: calc(100% - var(--dar-adult-live-edge-gutter) - var(--dar-adult-live-edge-gutter));
 }
 
 /* Stage spans the whole screen. Inset only the actual content region.
