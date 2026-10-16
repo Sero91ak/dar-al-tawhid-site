@@ -188,7 +188,7 @@ def main():
         "Importer: `python3 kids/tools/import_quiz_v4_human_hearing_reviews.py`.",
         "Internes Ledger: `kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json`.",
         "CI: https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/kids-v4-hearing-results-secure-import.yml",
-        "Selbstauskünfte bleiben von unabhängigen Audiofreigaben und der öffentlichen Quiz-Freigabe strikt getrennt. Prüfernamen niemals in den GitHub-Bericht kopieren.",
+        "Selbstauskünfte bleiben von unabhängigen Audiofreigaben und der öffentlichen Quiz-Freigabe strikt getrennt. Der Importer validiert jedes Mal die REALEN MP3-Bytes gegen SHA-256, weist doppelte JSON-Schlüssel zurück und speichert weder Prüfernamen noch freie Notiztexte im GitHub-Bericht.",
         "",
         "## Nächste verbindliche Schritte",
         "",
