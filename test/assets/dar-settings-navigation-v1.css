@@ -531,3 +531,11 @@ html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail[da
     padding-inline:1px!important;
   }
 }
+
+/* Keep the independent appearance/icon/font cards' interior padding after
+   removing redundant OUTER gutters. */
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail .dsh-detail-content :is(
+ .theme-switch-panel,.app-icon-panel,.app-font-panel,.dsh-extra-font
+) {
+  padding:clamp(12px,3.8vw,18px)!important;
+}
