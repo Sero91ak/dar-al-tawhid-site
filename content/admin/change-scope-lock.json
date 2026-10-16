@@ -7775,6 +7775,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-19T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-pwa-repair-direct-200-20261016",
+      "at": "2026-10-16T14:41:00+02:00",
+      "approvedBy": "user-explicit-continue-repair-test-app-does-not-open-20261016",
+      "reason": "Only adult Dar Test repair entrypoint: eliminate Cloudflare 307 static HTML canonicalization by serving /test/repair.html and /test/repair directly from the isolated Worker, plus enforce a 200 no-redirect release smoke check. No visitor/KIDS assets or accounts touched.",
+      "paths": [
+        "cloudflare/test-app-worker.js",
+        "wrangler.test.toml",
+        "scripts/verify-test-app-deploy.js",
+        "test/repair.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-21T23:59:00.000Z"
     }
   ],
   "enabled": true
