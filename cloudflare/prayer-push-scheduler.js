@@ -32,6 +32,7 @@ const ENTRY_LATE_IDEMPOTENCY_MS = 90 * 1000;
 const REFERENCE = { lat: 50.6256, lon: 6.9491, city: "Rheinbach", timeZone: "Europe/Berlin" };
 
 let lastStatusReport = null;
+let alreadyTargetedSet = new Set();
 
 function oneSignalApiKey(env) {
   return String(env.ONESIGNAL_API_KEY_NEW || env.ONESIGNAL_API_KEY || "")
@@ -529,8 +530,83 @@ async function disableInvalidRegistrations(invalidIds) {
   return disabled;
 }
 
+function prayerDeliveryName(prayer, sendAfter, mode, timeZone, advanceMinutes) {
+  const dateKey = dayKey(sendAfter, timeZone || "Europe/Berlin");
+  const offsetLabel = mode === "advance" ? `minus${normAdvance(advanceMinutes)}` : "time";
+  return `prayer-${dateKey}-${String(prayer.key || "prayer").toLowerCase()}-${offsetLabel}-v1`.slice(0, 128);
+}
+
+function deliveryClaim(subscriptionId, name, sendAfterMs) {
+  const minute = Math.floor(Number(sendAfterMs || 0) / 60000);
+  return `${subscriptionId}|${name}|${minute}`;
+}
+
+async function loadTargetedDeliveries(env) {
+  const claimed = new Set();
+  const queued = [];
+  const key = oneSignalApiKey(env);
+  const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
+  if (!key || !appId) return { claimed, queued };
+  for (const offset of [0, 50, 100]) {
+    const res = await fetch(
+      `https://api.onesignal.com/notifications?app_id=${encodeURIComponent(appId)}&limit=50&offset=${offset}&kind=1`,
+      { headers: { Authorization: `Key ${key}` } }
+    );
+    const data = await res.json().catch(() => ({}));
+    const list = Array.isArray(data.notifications) ? data.notifications : [];
+    for (const item of list) {
+      if (item?.canceled) continue;
+      const name = String(item.name || "");
+      if (!name.startsWith("prayer-")) continue;
+      const ids = (item.include_player_ids || item.include_subscription_ids || [])
+        .map((id) => String(id || "").trim())
+        .filter(Boolean);
+      const sendMs = Number(item.send_after || item.queued_at || 0) * 1000;
+      for (const id of ids) claimed.add(deliveryClaim(id, name, sendMs));
+      if (isUnsentOneSignalNotification(item) && ids.length) {
+        queued.push({ id: String(item.id || ""), name, sendMs, ids });
+      }
+    }
+    if (list.length < 50) break;
+  }
+  return { claimed, queued };
+}
+
+async function cancelDuplicateQueuedPushes(env, queued, stats) {
+  const key = oneSignalApiKey(env);
+  const appId = String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim();
+  if (!key || !appId) return;
+  const groups = new Map();
+  for (const item of queued) {
+    const minute = Math.floor(item.sendMs / 60000);
+    const bucket = `${item.name}|${minute}`;
+    if (!groups.has(bucket)) groups.set(bucket, []);
+    groups.get(bucket).push(item);
+  }
+  for (const items of groups.values()) {
+    items.sort((a, b) => b.ids.length - a.ids.length);
+    const covered = new Set(items[0].ids);
+    for (const extra of items.slice(1)) {
+      if (!extra.id || !extra.ids.every((id) => covered.has(id))) continue;
+      const cancelRes = await fetch(
+        `https://api.onesignal.com/notifications/${encodeURIComponent(extra.id)}?app_id=${encodeURIComponent(appId)}`,
+        { method: "DELETE", headers: { Authorization: `Key ${key}` } }
+      );
+      if (cancelRes.ok) stats.cancelledDuplicateQueued = (stats.cancelledDuplicateQueued || 0) + 1;
+    }
+  }
+}
+
 async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
-  const ids = uniqueSubscriptionIds(group).slice(0, 2000);
+  const deliveryName = prayerDeliveryName(prayer, sendAfter, mode, group.timeZone, group.advanceMinutes);
+  const ids = uniqueSubscriptionIds(group).filter((id) => {
+    const claim = deliveryClaim(id, deliveryName, sendAfter.getTime());
+    if (alreadyTargetedSet && alreadyTargetedSet.has(claim)) {
+      stats.duplicates += 1;
+      return false;
+    }
+    return true;
+  }).slice(0, 2000);
   if (!ids.length) return;
   const late = group.lateEntry === true;
   const idKey = schedId(group, prayer, sendAfter, mode);
@@ -548,8 +624,6 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
   const collapseId = prayerCollapseId(prayer, mode, sendAfter, group.timeZone);
   const site = String(env.SITE_URL || DEFAULT_SITE_URL).replace(/#.*$/, "").replace(/\/$/, "") || "https://dar-al-tawhid.de";
   const prayerUrl = `${site.replace(/#.*$/, "")}/#prayer`;
-  const dateKey = dayKey(sendAfter, group.timeZone || "Europe/Berlin");
-  const offsetLabel = mode === "advance" ? `minus${normAdvance(group.advanceMinutes)}` : "time";
   const body = withIcons({
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
     target_channel: "push",
@@ -573,7 +647,7 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
       url: prayerUrl
     }
   }, env);
-  body.name = `prayer-${dateKey}-${String(prayer.key || "prayer").toLowerCase()}-${offsetLabel}-v1`.slice(0, 128);
+  body.name = deliveryName;
 
   if (sendAfter.getTime() - Date.now() > 30 * 1000) {
     const iso = sendAfter.toISOString();
@@ -608,6 +682,9 @@ async function sendPush(env, group, prayer, sendAfter, mode, stats, sentInRun) {
     late,
     response: String(result.text || "").slice(0, 200)
   });
+  if (alreadyTargetedSet) {
+    for (const id of ids) alreadyTargetedSet.add(deliveryClaim(id, deliveryName, sendAfter.getTime()));
+  }
 }
 
 function buildOverview(planned, skippedPast, ref = REFERENCE) {
@@ -709,8 +786,16 @@ export async function runPrayerPushScheduler(env, options = {}, deps = {}) {
     cancelledBadAdvance: 0
   };
   const sentInRun = new Set();
+  alreadyTargetedSet = new Set();
 
   await cancelQueuedBadAdvancePushes(env, stats);
+  try {
+    const targeted = await loadTargetedDeliveries(env);
+    alreadyTargetedSet = targeted.claimed;
+    await cancelDuplicateQueuedPushes(env, targeted.queued, stats);
+  } catch (err) {
+    stats.duplicateScanError = err.message || String(err);
+  }
 
   let rows = [];
   let supabaseError = null;
