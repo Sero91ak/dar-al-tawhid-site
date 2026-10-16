@@ -6961,7 +6961,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1433",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1434",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -11871,5 +11871,5 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority .kids-acad
 <link rel="stylesheet" href="/kids/kids-girl-palette-authority-v1427.css?v=1428" data-kids-girl-palette="1427">
 <!-- KIDS_PARENTS_DASHBOARD_V1432: isolated parent administration, FINAL color layer -->
 <link rel="stylesheet" href="/kids/parents-dashboard-v1432.css?v=1433" data-kids-parents="1432">
-<script src="/kids/parents-dashboard-v1432.js?v=1433" defer></script>
+<script src="/kids/parents-dashboard-v1432.js?v=1434" defer></script>
 </html>
