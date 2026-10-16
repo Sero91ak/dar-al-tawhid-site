@@ -402,3 +402,13 @@ html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page=
     font-size:clamp(9px,2.65vw,11px)!important;
   }
 }
+
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] .dsh-prayer-instruction {
+  width:100%!important;
+  max-width:none!important;
+  margin:1px 0 12px!important;
+  padding:0 2px!important;
+  font:500 11px/1.45 system-ui,sans-serif!important;
+  color:var(--dsh-muted,var(--muted))!important;
+  text-align:left!important;
+}
