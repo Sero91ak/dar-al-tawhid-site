@@ -51,6 +51,14 @@ def main():
     release=read("kids/data/quiz-curation-release.json")
     recovery_priority=read("kids/review-only/quiz-v4-450-next-completion-priority.json")["summary"]
     cost=read("kids/review-only/quiz-v4-remaining-unique-audio-credit-breakdown.json")
+    draft_file=ROOT/"kids/review-only/quiz-v4-older300-compact-spoken-proposals.json"
+    speech_draft=read("kids/review-only/quiz-v4-older300-compact-spoken-proposals.json") if draft_file.is_file() else None
+    if speech_draft is not None:
+        require(speech_draft["modelId"]==MODEL and speech_draft["voiceId"]==VOICE
+                and len(speech_draft["proposals"])==300
+                and speech_draft["audioProductionAuthorized"] is False
+                and speech_draft["publicReleaseAllowed"] is False,
+                "older300 spoken edit proposals must remain a safe review only")
     require(cost["modelId"]==MODEL and cost["voiceId"]==VOICE
             and cost["selectedQuestions"]==450
             and cost["creditsSpentByThisAudit"]==0
@@ -123,6 +131,8 @@ def main():
         "missingPartsQuestions":import_status["notCompleteFourPartQuestions"],
         "remainingNewV4UniqueSegmentsByCostAudit":cost["uniqueTrulyNewTextFragments"],
         "remainingNewV4TextCodepoints":cost["trulyNewTextCodepoints"],
+        "older300CompactSpokenDraftCount":len(speech_draft["proposals"]) if speech_draft else 0,
+        "older300RawFullTextReductionPercent":speech_draft["summary"]["rawFullFieldReductionPercent"] if speech_draft else None,
         "creditBudgetAspirationalTarget":cost["earlierAspirationalBudgetCredits"],
         "estimatedAudioTextReductionForTargetPercent":cost["approxTextReductionPercentageNeededAtSameRate"],
         "recoveryFirstPriorityPlanFresh":priority_current,
@@ -208,6 +218,12 @@ def main():
         "Lesen: `kids/review-only/QUIZ-V4-AUDIO-KOSTENCHECK.md`.",
         "Die aktuelle, nicht vom Provider bestätigte 79.075,79-Credit-Prognose und das bisherige Budgetziel 27.860 Credits weichen erheblich ab. Eine reine Kürzung wiederholter Anmoderationen erzielt nach dem ersten nicht-destruktiven Vergleich nur einen Teil der nötigen Reduktion; die 450 Originalfragen und Lerninhalte unverändert erhalten.",
         "Bezahlte V4-Neugenerierungen niemals automatisch anstoßen. Exakte Text-SHA gegen bezahlte Originale und Provider-Abrechnung prüfen.",
+        "",
+        "## Kürzere Originalsprache für 7–10 Jahre – nur redaktioneller Entwurf",
+        "",
+        "Neuer kostenfreier Textentwurf: `kids/review-only/QUIZ-V4-SPRECHTEXT-OPTIMIERUNG-ENTWURF.md` und `kids/review-only/quiz-v4-older300-compact-spoken-proposals.json`.",
+        "Er umfasst 300 Originalfragen mit identischen Antwortmöglichkeiten und ursprünglichen Erklärungen. Nur redundante Anmoderationen und Schlussfloskeln werden herausgenommen. Es wurden noch KEINE MP3s regeneriert und KEINE Quellen geändert.",
+        "Eine prozentuale Einsparung bei der rohen Feldtextlänge ist noch keine gleich hohe bestätigte Credit-Ersparnis; vorhandene V4-Sprachsegmente müssen in jedem Fall wiederverwendet werden.",
         "",
         "## Nächste verbindliche Schritte",
         "",
