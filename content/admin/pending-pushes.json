@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-16T18:27:27.994Z",
+  "generated": "2026-10-16T18:30:07.267Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1389,10 +1389,10 @@
       "postPath": "content/posts/nafs-akhlaq-birr-ithm-nawwas-20261016-slides.md",
       "sourcePage": "https://dar-al-tawhid.de/q/44/",
       "createdAt": "2026-10-16T16:22:00Z",
-      "updatedAt": "2026-10-16T18:27:27.994Z",
+      "updatedAt": "2026-10-16T18:30:07.267Z",
       "status": "sent",
       "pushApproved": true,
-      "approvalOrigin": "Explicit user requests on 2026-10-16 to publish and push Q44; OneSignal independently verified.",
+      "approvalOrigin": "User explicitly ordered Q44 live push and clarified 2026-10-16 that DAR Admin must use standard all-audience DAR_PUSH segment. Verified OneSignal provider accepted 91.",
       "lastError": "",
       "liveCheck": {
         "ok": true,
@@ -1402,30 +1402,44 @@
       },
       "pushResult": {
         "provider": "OneSignal",
-        "notificationId": "55de0a2c-e94b-4984-91f7-5644460400d9",
-        "target": "opt-in-tags:dar_push=true AND post_notifications=true",
+        "notificationId": "33e36078-b27f-4ef0-b018-8a12370802cd",
+        "target": "segment:DAR_PUSH",
         "targetUrl": "https://dar-al-tawhid.de/?post=nafs-akhlaq-birr-ithm-nawwas-20261016-slides-476#post/nafs-akhlaq-birr-ithm-nawwas-20261016-slides-476",
         "sourcePage": "https://dar-al-tawhid.de/q/44/",
-        "successful": 2,
+        "successful": 91,
         "failed": 0,
         "errored": 0,
         "confirmedReceived": 0,
         "channelResults": [
           {
-            "channel": "chrome_web_push",
-            "successful": 1,
+            "channel": "ios",
+            "successful": 76,
             "failed": 0
           },
           {
             "channel": "safari_web_push",
-            "successful": 1,
+            "successful": 10,
+            "failed": 0
+          },
+          {
+            "channel": "chrome_web_push",
+            "successful": 5,
             "failed": 0
           }
         ],
-        "note": "Existing provider send verified; do not resend. Native iOS delivery not evidenced."
+        "note": "Correction: used standard DAR Admin segment DAR_PUSH after initial narrow tag-filter push (2 accepted). Both sends audited. Device opens not confirmed.",
+        "originalRestrictedPush": {
+          "notificationId": "55de0a2c-e94b-4984-91f7-5644460400d9",
+          "target": "opt-in-tags:dar_push=true AND post_notifications=true",
+          "successful": 2,
+          "failed": 0,
+          "sentAt": "2026-10-16T16:44:22.000Z"
+        },
+        "idempotencyKey": "3bf9c494-c77d-4efa-a8bc-c82784345b44"
       },
       "pushApprovedAt": "2026-10-16T16:44:22.000Z",
-      "sentAt": "2026-10-16T16:44:22.000Z"
+      "sentAt": "2026-10-16T18:29:26.000Z",
+      "correctedAt": "2026-10-16T18:29:26.000Z"
     }
   }
 }
