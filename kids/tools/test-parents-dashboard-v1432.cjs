@@ -70,16 +70,16 @@ for(const token of ["KIDS_FAMILY_STRUCTURE_V1435","var(--kp-card)","var(--kp-rai
 assert(!css.includes("TAWHID-KIDS-Elternkonto-Vorschau"),
  "standalone preview style must not enter main app");
 
-/* V1438: mini timer is a ONE-piece Learn tab extension and only parents
+/* V1439: dome timer is a ONE-piece Learn tab extension and only parents
  * can Start, Pause, Stop or Reset. Foreground time never leaks into background. */
 const miniTimer=read("kids/parents-compact-timer-v1436.js");
 const miniStyle=read("kids/parents-compact-timer-v1436.css");
 assert.doesNotThrow(()=>new Function(miniTimer),"Mini timer JavaScript syntax");
-assert.ok(html.includes("/kids/parents-compact-timer-v1436.js?v=1438")&&
-  html.includes("/kids/parents-compact-timer-v1436.css?v=1438"),"Mini timer scripts published");
-assert.ok(sw.includes("/kids/parents-compact-timer-v1436.js?v=1438")&&
-  sw.includes("/kids/parents-compact-timer-v1436.css?v=1438"),"Mini timer offline cache");
-for(const marker of ['.kids-academy-tab','pill.style.left=left+"px"','pill.style.bottom=bottom+"px"',
+assert.ok(html.includes("/kids/parents-compact-timer-v1436.js?v=1439")&&
+  html.includes("/kids/parents-compact-timer-v1436.css?v=1439"),"Mini timer scripts published");
+assert.ok(sw.includes("/kids/parents-compact-timer-v1436.js?v=1439")&&
+  sw.includes("/kids/parents-compact-timer-v1436.css?v=1439"),"Mini timer offline cache");
+for(const marker of ['.kids-academy-tab','pill.style.left=left+"px"','dock.style.setProperty("--kids-timer-dome-center",relativeCenter+"px")',
  'document.hidden','window.addEventListener("pagehide",pauseActive',
  'window.addEventListener("blur",pauseActive',
  'function stopTimer()','function resetTimer()','function playPause()',
@@ -88,7 +88,7 @@ for(const marker of ['.kids-academy-tab','pill.style.left=left+"px"','pill.style
  assert.ok(miniTimer.includes(marker),"Mini timer contract missing "+marker);
 }
 assert.ok(!miniTimer.includes('id="kidsTimerToggle1436"'),"Mini dock must not contain Pause/Stop controls");
-assert.ok(miniStyle.includes("KIDS_MINI_TAB_CAPSULE_V1438")&&
+assert.ok(miniStyle.includes("KIDS_UNIFIED_TIMER_DOME_V1439")&&
  miniStyle.includes("#view-parents .kids-parent-time-card #minuteValue")&&
  miniStyle.includes('body:has(.app[data-gender="girl"]) #kidsLearningTimer1436'),
  "Mini timer profile styling or parent slider presentation missing");
