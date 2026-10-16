@@ -183,14 +183,17 @@ async function fetchVersionBuild(base) {
   console.log(
     `Dar Test live OK — public und workers.dev liefern identisch ${TEST_EXPECT_BUILD}.`
   );
-  // The page must reference the fresh CSS, not a cached old layout layer.
+  // DAR_PRAYER_MOTIFS_DELIVERY_V6_20261016: assert that the actual HTML includes the inline route-specific
+  // theme authority, not a stale cached CSS link. Both routes must be covered.
   for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
-    const { status, text: html } = await fetchText(`${base}/index.html?motif-check=v5`);
-    const settingsOk = html.includes("dar-settings-permissions-v1.css?v=20261016-motifs-v5");
-    const prayerOk = html.includes("prayer-v1254.css?v=20261016-motifs-v5");
-    console.log(`motif-css ${label}: status=${status} settings=${settingsOk} prayer=${prayerOk}`);
-    if (status !== 200 || !settingsOk || !prayerOk) {
-      throw new Error(`Test CSS ist nicht frisch auf ${label}; Bilder könnten unsichtbar bleiben`);
+    const { status, text: html } = await fetchText(`${base}/index.html?motif-check=v6`);
+    const marker = 'id="darTestPrayerMotifAuthorityV6"';
+    const settingsOk = html.includes(marker) && html.includes("body.is-settings-route .settings-one-page .notification-prayer-grid");
+    const prayerOk = html.includes(marker) && html.includes("prayer-time-grid--top") && html.includes("dar-time-photo");
+    const imageUrlOk = ["fajr","dhuhr","asr","maghrib","isha"].every(name=>html.includes("/test/assets/prayer-motifs/"+name+".webp?v=20261016-visual-v6"));
+    console.log(`motif-html ${label}: status=${status} settings=${settingsOk} prayer=${prayerOk} images=${imageUrlOk}`);
+    if(status!==200 || !settingsOk || !prayerOk || !imageUrlOk) {
+      throw new Error(`Test Gebetsmotive fehlen im HTML auf ${label}; Worker/Cache pruefen`);
     }
   }
 

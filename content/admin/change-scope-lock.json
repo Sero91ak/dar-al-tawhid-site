@@ -7716,6 +7716,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-prayer-motifs-worker-cache-fix-v6-20261016",
+      "at": "2026-10-16T12:42:00+02:00",
+      "approvedBy": "user-explicit-continue-fix-live-test-prayer-motifs",
+      "reason": "Correct only /test HTML injection and verification: earlier deployments had a duplicate CSS-authority build gate and public old CSS. Ensure five existing assets render on both adult test routes with theme-aware overlays; no original app icons or visitor-app source files touched.",
+      "paths": [
+        "cloudflare/test-app-worker.js",
+        "scripts/verify-test-app-deploy.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-19T23:59:00.000Z"
     }
   ],
   "enabled": true

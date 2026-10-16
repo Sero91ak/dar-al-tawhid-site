@@ -168,7 +168,7 @@ const DAR_TEST_HOME_V1193_JS = "/test/assets/dar-home-library-v1193.js?v=1193";
 
 async function finalizeDarTestHomeV1193(asset) {
   const type = String(asset && asset.headers && asset.headers.get("content-type") || "");
-  if (!asset || !asset.ok || !type.includes("text/html")) return asset;
+  if (!asset || !asset.ok) return asset; // /test is HTML; proxy content-type may be stale
   let html = await asset.text();
 
   // Test v1200: exactly one Home authority. Remove the obsolete v1193 runtime
@@ -419,6 +419,33 @@ async function finalizeDarTestHomeV1193(asset) {
     if (html.includes("</html>")) html = html.replace("</html>", block + "</html>");
     else html += block;
   }
+
+  // DAR_PRAYER_MOTIFS_DELIVERY_V6_20261016: integrate into the final Test HTML, independently of stale static-CSS caches.
+  // Only adult /test/ markup; all existing buttons/icons and notification logic remain unchanged.
+  if (!html.includes('id="darTestPrayerMotifAuthorityV6"')) {
+    const motifNames = ["fajr", "dhuhr", "asr", "maghrib", "isha"];
+    const motifDir = "/test/assets/prayer-motifs/";
+    const motifCacheKey = "?v=20261016-visual-v6";
+    const settingsCard = "html[data-theme] body.is-settings-route .settings-one-page .notification-prayer-grid > .notification-prayer";
+    const prayerCard = "html[data-theme] body #appView.view:has(.prayer-page-noble) .prayer-page-noble .prayer-time-grid--top > :is(.prayer-time-card,.prayer-time-card--slim)";
+    const css = [
+      settingsCard + "{position:relative!important;isolation:isolate!important;overflow:hidden!important;min-height:102px!important;--dar-motif-top:rgba(4,12,28,.23);--dar-motif-bottom:rgba(4,12,28,.88);background-image:linear-gradient(180deg,var(--dar-motif-top),var(--dar-motif-bottom)),var(--dar-prayer-image)!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;border:1px solid color-mix(in srgb,var(--gold2) 30%,transparent)!important;border-radius:12px!important;}",
+      prayerCard + "{position:relative!important;isolation:isolate!important;overflow:hidden!important;min-width:0!important;min-height:108px!important;--dar-motif-top:rgba(4,12,28,.23);--dar-motif-bottom:rgba(4,12,28,.88);background-image:linear-gradient(180deg,var(--dar-motif-top),var(--dar-motif-bottom)),var(--dar-time-photo)!important;background-size:cover!important;background-position:center!important;background-repeat:no-repeat!important;border:1px solid color-mix(in srgb,var(--gold2) 30%,transparent)!important;border-radius:12px!important;}",
+      ...motifNames.map((name,index)=>settingsCard + ":nth-child("+(index+1)+"){--dar-prayer-image:url(\""+motifDir+name+".webp"+motifCacheKey+"\")!important;}"),
+      ...["fajr","fajr","dhuhr","asr","maghrib","isha"].map((name,index)=>prayerCard + ":nth-child("+(index+1)+"){--dar-time-photo:url(\""+motifDir+name+".webp"+motifCacheKey+"\")!important;}"),
+      "html:is([data-theme=light],[data-theme=soft],[data-theme=eisgold],[data-theme=salbei]) body.is-settings-route .settings-one-page .notification-prayer-grid > .notification-prayer,html:is([data-theme=light],[data-theme=soft],[data-theme=eisgold],[data-theme=salbei]) body #appView.view:has(.prayer-page-noble) .prayer-page-noble .prayer-time-grid--top > :is(.prayer-time-card,.prayer-time-card--slim){--dar-motif-top:rgba(16,23,29,.10);--dar-motif-bottom:rgba(13,23,31,.80);}",
+      "html[data-theme=bordeaux] body.is-settings-route .settings-one-page .notification-prayer-grid > .notification-prayer,html[data-theme=bordeaux] body #appView.view:has(.prayer-page-noble) .prayer-page-noble .prayer-time-grid--top > :is(.prayer-time-card,.prayer-time-card--slim){--dar-motif-top:rgba(40,6,22,.25);--dar-motif-bottom:rgba(40,6,22,.9);}",
+      "html[data-theme=dar-al-layl] body.is-settings-route .settings-one-page .notification-prayer-grid > .notification-prayer,html[data-theme=dar-al-layl] body #appView.view:has(.prayer-page-noble) .prayer-page-noble .prayer-time-grid--top > :is(.prayer-time-card,.prayer-time-card--slim){--dar-motif-top:rgba(10,28,23,.22);--dar-motif-bottom:rgba(10,28,23,.90);}",
+      settingsCard + " :is(b,small,.dar-prayer-clock),"+prayerCard+" :is(b,small,span){color:#fff8ea!important;-webkit-text-fill-color:#fff8ea!important;text-shadow:0 1px 4px rgba(0,0,0,.95)!important;}",
+      settingsCard + ":is(.is-on,[aria-pressed=true]),"+prayerCard+":is(.active,.is-current){border-color:var(--gold2)!important;}",
+      "@media(max-width:400px){"+settingsCard+"{min-height:90px!important;padding:6px 1px!important;}"+prayerCard+"{min-height:93px!important;padding:7px 1px!important;}}"
+    ].join("\n");
+    const motifStyle = '<style id="darTestPrayerMotifAuthorityV6">'+css+'</style>';
+    // Place AFTER legacy theme sheets, so the existing app hierarchy remains
+    // while generated photographs are demonstrably visible on both routes.
+    html += motifStyle;
+  }
+
 
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
