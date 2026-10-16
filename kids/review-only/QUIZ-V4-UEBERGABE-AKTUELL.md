@@ -1,0 +1,44 @@
+# TAWḤĪD KIDS – QUIZ V4 · KOPIERBARE ÜBERGABE (aktueller GitHub-Stand)
+
+**Geltungsbereich:** interner Quiz-Reviewzweig, **nicht** öffentliche App.
+**Pflichtmodell:** `eleven_v4`, **Masterstimme:** Serhat Abu Malik, Voice-ID `DkU7j9uO4ZEtLD2iRZSH`.
+**Untersagt:** Flash/ältere TTS, wiederholte kostenpflichtige Generierung bereits bezahlter Aufnahmen, fingierte MP3s, Freigabe ohne menschliche Hörkontrolle.
+
+- GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
+- Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
+- Commit beim Erstellen dieses Berichts: `0240346db06a8bbb925b3e8af235afe40a0ba960`
+- Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
+- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **276 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1044 Frage-/Lob-/Retry-/Erklärungsteile**.
+- Technisch vierteilig vollständig: **72/450**, noch unvollständig: **378/450**.
+- Alter 4-6: **70/150** komplett; vorhandene Hörteile question=100, correct=85, retry=85, explanation=148.
+- Alter 7-8: **2/150** komplett; vorhandene Hörteile question=2, correct=150, retry=150, explanation=14.
+- Alter 9-10: **0/150** komplett; vorhandene Hörteile question=0, correct=150, retry=150, explanation=10.
+- Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **47 importiert**, **9 noch ohne heruntergeladene Original-MP3-Datei**.
+- Zusätzlich im Originalregister: **374 Textschlüssel**, davon **327 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
+- Kosten für den bisherigen Import und diese Berichterstellung: **0 neue ElevenLabs-Sprachcredits**.
+- Noch geschätzter Bedarf für alle 450 nach gegenwärtigem Plan: **79075.79 Credits**; **keine bestätigte Rechnungsabbuchung** (Ledger enthält Schätzwerte).
+- Menschliche Aussprache-/Hörfreigabe: **0**. Freigabeschalter: **aus**. Kein Live-Push und kein Merge.
+
+## Noch fehlende, **bereits bezahlte** Originalaufnahmen
+
+Die neun historischen `eleven_v4`-Originale existieren als ElevenLabs-Flow-Assets; der bisherige direkte API-GET ist mit `HTTP 402 paid_plan_required` blockiert. **Nicht neu synthetisieren.**
+
+Generation-IDs: `1UAwmEQ77D4BmA9DttHZ, 2xy9ZLej1wPTrnvAr9p7, AToalNGbxiRe1zfOnDG3, DX5z8FWaCS4FDx3KrloO, FGX65uXKWBnjULDxg3X1, GvXeGQ9Kr1lVy7LEAv5T, KIgCxJO3RDxhsIFJSYUB, UUmC2fDiXaV5W1IQSumA, aoKJuahenrKHfUE5OD9j`.
+
+Original-Flow: https://elevenlabs.io/app/flows/n2ovmGko2iTlNWTAEqHk
+
+## Nächste verbindliche Schritte
+
+1. Original-MP3-Dateien für die fehlenden Generation-IDs aus der bereits bezahlten ElevenLabs-Erzeugung exportieren; exakt `<generationId>.mp3` benennen. Für fehlende Dateien niemals Ersatz-V4 kostenpflichtig bestellen.
+2. Im Reviewzweig über `kids/tools/import_quiz_v4_prepaid_flow_originals.py --zip ORIGINAL_NINE_MP3.zip` oder den vorhandenen GitHub-Workflow `.github/workflows/kids-v4-prepaid-flow-restore.yml` importieren; dabei echte MP3-Daten, Original-ID, Laufzeit, SHA256 und Codec prüfen.
+3. Automatisch `kids/tools/quiz_v4_first150_offline_join.py` und `kids/tools/stage_quiz_v4_existing_mp3_import.py` erneut ausführen; neue Zuordnungen in `kids/review-only/quiz-v4-450-actual-mp3-import.json` speichern.
+4. Vor jeder weiteren kostenpflichtigen Produktion alle existierenden V4-Texte, 56 alten paid Flow IDs und exakt 327+ direkten kostenpflichtigen Belege mit `kids/tools/test_quiz_v4_no_double_charge_guard.py` abgleichen; Kosten und Textlängen neu optimieren.
+5. Alle vier Audiofelder pro Frage erst technisch, dann per menschlicher Hörprobe prüfen (arabische Aussprache und korrekte deutsche Inhalte); bis dahin Freigabe strikt aus.
+6. Die 450 ausgewählten Quizfragen in der Kinder-Test-App mit altersabhängiger Darstellung, Offlinebetrieb und stabiler Fortschrittsspeicherung testen. Konflikte mit aktuellem `main` vor jedem Merge beheben; keine Salaf-/Mädchen-Farbänderungen überschreiben.
+7. Erst nach erfolgreichem `python3 kids/tools/quiz_v4_selected450_release_gate.py --strict`, Qualitätsprüfung und ausdrücklicher Freigabe live veröffentlichen.
+
+## Für den nächsten Chat
+
+„Arbeite selbstständig weiter im GitHub-Repository `Sero91ak/dar-al-tawhid-site`, PR #1143 / Branch `review/kids-quiz-v4-batch-001-020-20261014`. Lies `kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md` sowie `kids/review-only/quiz-v4-handover-latest.json` und die aktuellen QA-Dateien, bevor du Änderungen machst. Nur Serhat Master `eleven_v4`. Keine doppelt bezahlten MP3s regenerieren, keine neuen Sprachcredits ohne klaren Kostenabgleich. Importiere echte bereits bezahlte MP3s in den Quiz-Reviewbestand; prüfe alle Änderungen; aktualisiere anschließend diese Übergabedateien. Berichte immer den tatsächlichen GitHub-Commit, belegte Tests, Restblocker und Live-Status.“
+
+_Stand ausschließlich aus JSON-Ledger und V4-Importdaten berechnet. GitHub-CI-Ergebnis und Mergefähigkeit müssen beim nächsten Arbeitsbeginn frisch gelesen werden._
