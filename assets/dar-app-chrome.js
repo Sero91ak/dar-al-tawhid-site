@@ -176,6 +176,7 @@
    Loads independently of the protected push/runtime sources. */
 (function(){
  "use strict";
+ if(typeof window==="undefined" || typeof document==="undefined" || typeof location==="undefined")return;
  if(/^\/(?:test|kids|admin)(?:\/|$)/i.test(location.pathname))return;
  if(window.__DAR_VISITOR_VISUAL_BOOT_V1__)return;
  window.__DAR_VISITOR_VISUAL_BOOT_V1__=true;
