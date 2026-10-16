@@ -152,8 +152,8 @@ function readLastStory(){
  let item=null;
  try{item=JSON.parse(localStorage.getItem("kids.storyHub.last.v1")||"null")}catch(_){}
  if(!item||typeof item!=="object"||typeof item.title!=="string"||!item.title.trim()||
-  typeof item.category!=="string"||typeof item.id!=="string"||
-  !Number.isFinite(Number(item.time))||Number(item.time)<=2||item.completed===true)return null;
+  typeof item.category!=="string"||item.id==null||!String(item.id)||
+  !Number.isFinite(Number(item.time))||Number(item.time)<0)return null;
  return item;
 }
 const storyCategory={prophets:"Propheten",sahaba:"Ṣaḥābah",sahabiyyat:"Ṣaḥābiyyāt",deen:"Lern-Erzählungen"};
@@ -178,13 +178,15 @@ function renderLastStory(){
   return;
  }
  label.textContent=item.title.trim();
- info.textContent=(storyCategory[item.category]||"Hörgeschichte")+" · ab "+listenTime(item.time)+
+ info.textContent=item.completed===true?"Abgeschlossen · erneut anhören":
+  (storyCategory[item.category]||"Hörgeschichte")+" · ab "+listenTime(item.time)+
   (Number(item.duration)>0?" von "+listenTime(item.duration):"");
+ button.textContent=item.completed===true?"↺ Erneut hören":"▶ Weiterhören";
  const safeArt=typeof item.artwork==="string"&&item.artwork.startsWith("/kids/assets/")&&!item.artwork.includes("..");
  art.src=safeArt?item.artwork:"/kids/assets/kids-icons/headphones-real-v12.png";
  const duration=Number(item.duration)||0;
- const pct=duration>0?Math.min(100,Math.max(0,Number(item.time)/duration*100)):0;
- track.hidden=!(duration>0);bar.style.width=pct.toFixed(1)+"%";
+ const pct=item.completed===true?100:duration>0?Math.min(100,Math.max(0,Number(item.time)/duration*100)):0;
+ track.hidden=!(duration>0||item.completed===true);bar.style.width=pct.toFixed(1)+"%";
  track.setAttribute("role","progressbar");
  track.setAttribute("aria-label","Fortschritt der Hörgeschichte");
  track.setAttribute("aria-valuenow",String(Math.round(pct)));
@@ -234,7 +236,7 @@ $("#kidsParentResumeOpen")?.addEventListener("click",function(){
  // Open the original Story Hub resume API at the saved second, no mock player.
  setTimeout(function(){
   if(window.DARKidsStoryHub&&typeof window.DARKidsStoryHub.openResume==="function"){
-   window.DARKidsStoryHub.openResume(item.category,item.id,Number(item.time)||0);
+   window.DARKidsStoryHub.openResume(item.category,item.id,item.completed===true?0:Number(item.time)||0);
   }else if(window.DARKidsStoryHub&&typeof window.DARKidsStoryHub.openStory==="function"){
    window.DARKidsStoryHub.openStory(item.category,item.id);
   }
