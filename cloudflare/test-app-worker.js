@@ -607,12 +607,11 @@ export default {
       return Response.redirect(`${url.origin}/test/${url.search || ""}`, 302);
     }
 
-    if (url.pathname === "/test" || url.pathname === "/test/") {
-      if (url.searchParams.get("dqp") !== "915") {
-        url.searchParams.set("dqp", "915");
-        return Response.redirect(url.toString(), 302);
-      }
-    }
+    // DAR_TEST_PWA_BOOT_RECOVERY_20261016
+    // /test and /test/ must retain their original PWA start URL/query.
+    // In particular, never inject ?dqp=915 after enabling run_worker_first
+    // for the HTML shell: it can conflict with the installed PWA launch URL.
+    // Serve the real HTML below, preserving its existing imagery/icons.
 
     if (url.pathname === "/version.json") {
       const testVersionUrl = new URL("/test/version.json", url.origin);
