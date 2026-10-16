@@ -167,6 +167,10 @@ body.kids-timer-academy1436:not([data-kids-portal="true"]).kids-timer-visible143
 }
 /* Avoid WebKit scroll anchoring when an asynchronous lesson, audio or prayer
  * card updates. Real touch/keyboard scrolling stays enabled. */
+html[data-kids-age] body.kids-timer-visible1437 .app > .shell{
+  padding-bottom:var(--kids-timer-scroll-clearance1437,165px)!important;
+  scroll-padding-bottom:var(--kids-timer-scroll-clearance1437,165px)!important;
+}
 html[data-kids-age] body .app > .shell{
   overflow-anchor:none!important;
   scroll-behavior:auto!important;
