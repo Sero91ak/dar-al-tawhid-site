@@ -20,7 +20,7 @@ def must(ok,msg):
 
 def main():
     registry,ledger,source,missing,protected=stage1.prepare()
-    batch,estimate=stage1.candidate_batch(missing)
+    batch,estimate,complete_qids=stage1.candidate_batch(missing,source)
     qids={q["questionId"] for q in source["questions"]}
     must(len(qids)==20,"20 original question IDs must remain unchanged")
     must(len(source["originalTextRecordingQueue"])==65,"first stage must contain 65 exact V4 original texts")
@@ -31,6 +31,13 @@ def main():
          "model/voice drift")
     must(0<=len(batch)<=10 and estimate<=850,
          "unapproved unexpected spend")
+    assert len(complete_qids)==len(set(complete_qids))
+    if len(missing)==65:
+        must(len(complete_qids)>=2,
+             "first ten original MP3s should finish real questions rather than arbitrary A-Z fragments")
+        age_by_id={q["questionId"]:q["ageBand"] for q in source["questions"]}
+        must({age_by_id[q] for q in complete_qids}=={"7-8","9-10"},
+             "first ten MP3s should advance both older age profiles")
     must(all(item["spokenText"] not in protected
              and item["spokenText"] not in registry["textClips"] for item in batch),
          "an original MP3 would be purchased twice")
