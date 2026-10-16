@@ -131,5 +131,6 @@ assert.ok(sw.includes('/kids/kids-girl-palette-authority-v1427.css?v=1428')&&
 
 /* Run the month-year roll-over and privacy regression in the standard Kids UI CI suite. */
 require("./tools/test-birth-month-auto-v1431.cjs");
+require("./tools/test-parents-dashboard-v1432.cjs");
 
 console.log("PASS Kids V1421: 5 official tabs, Duʿāʾ fourth, learning center, Salaf Hören, gender heroes, restored avatars, Quran retirement");
