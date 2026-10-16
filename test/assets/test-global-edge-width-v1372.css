@@ -749,3 +749,194 @@ html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-
     animation:none!important;
   }
 }
+
+
+/* DAR_TEST_LAYL_MIDNIGHT_PALETTE_V1376 · 2026-10-16
+   DĀR AL TAWḤĪD adult TEST only. Dar al-Layl is a night-blue / charcoal
+   appearance with restrained warm gold, never sage, mint, green or olive.
+   Appearance-scoped; preserve every other theme, the existing hero artwork,
+   search/filter events, native <details>, route changes and floating nav geometry.
+   The original global --bg/--card values are untouched. */
+html[data-theme="dar-al-layl"] body:is(.is-topics-route,.is-topic-route) {
+  --tp-accent:#d7bd89;
+  --tp-ink:#f4eee5;
+  --tp-muted:#c1b9ad;
+  --tp-placeholder:#b8b3ac;
+  --tp-rule:rgba(211,183,127,.30);
+  --tp-panel:#121923;
+  --tp-hover:#202a36;
+  --topic-detail-line:rgba(211,183,127,.27);
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub {
+  --tl-accent:#d7bd89;
+  --tl-ink:#f4eee5;
+  --tl-muted:#c1b9ad;
+  --tl-rule:rgba(211,183,127,.30);
+  --tl-surface:#121923;
+  --tl-hover:#202a36;
+  --tl-luxe-surface:#141b25;
+  --tl-luxe-ink:#f4eee5;
+  --tl-luxe-muted:#c1b9ad;
+  --tl-luxe-accent:#d7bd89;
+  --tl-luxe-line:rgba(211,183,127,.27);
+  --tl-luxe-edge:rgba(211,183,127,.40);
+  --tl-luxe-halo:rgba(211,183,127,.095);
+  --tl-luxe-shadow:0 13px 29px rgba(0,0,0,.31),inset 0 1px 0 rgba(244,224,182,.075);
+  color:#f4eee5!important;
+}
+/* Search and filter: no green-tinted translucent glass or inherited olive. */
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub :is(
+  .search-input-shell input#homeSearchInput,
+  .search-panel input,
+  #advancedFilterBtn,
+  .search-line .search-input-shell,
+  .dar-tl-chip,
+  .filter-chip,
+  .filter-select
+) {
+  background-color:#111923!important;
+  border-color:rgba(211,183,127,.30)!important;
+  color:#f4eee5!important;
+  -webkit-text-fill-color:#f4eee5!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub :is(
+  .search-input-shell input#homeSearchInput,
+  .search-panel input
+)::placeholder {
+  color:#b8b3ac!important;
+  -webkit-text-fill-color:#b8b3ac!important;
+  opacity:1!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub :is(
+  #advancedFilterBtn,
+  .dar-tl-chip,
+  .filter-chip,
+  .filter-select
+):is(:active,:hover,:focus-visible,.active,.is-active,[aria-pressed="true"]) {
+  background:#202a36!important;
+  border-color:rgba(215,189,137,.64)!important;
+  color:#f6e7c8!important;
+  -webkit-text-fill-color:#f6e7c8!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub :is(
+  .search-input-shell input#homeSearchInput,
+  #advancedFilterBtn,
+  .dar-tl-chip,
+  .filter-chip
+):focus-visible {
+  outline:2px solid #d7bd89!important;
+  outline-offset:2px!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub :is(
+  .search-input-icon,.topics-hub__label b,.dar-tl-arrow
+) {
+  color:#d7bd89!important;
+}
+/* Topic groups: blue-black chamber with only a delicate warm highlight. */
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion {
+  background:#141b25!important;
+  border-color:rgba(211,183,127,.39)!important;
+  box-shadow:0 13px 29px rgba(0,0,0,.31),inset 0 1px 0 rgba(244,224,182,.07)!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary {
+  color:#f4eee5!important;
+  background:
+    radial-gradient(ellipse 75% 120% at 95% 0%,rgba(211,183,127,.075),transparent 78%),
+    linear-gradient(108deg,#19212d 0%,#121923 72%)!important;
+  border-color:rgba(211,183,127,.26)!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion[open] summary {
+  background:
+    radial-gradient(ellipse 75% 125% at 95% 0%,rgba(211,183,127,.105),transparent 74%),
+    linear-gradient(108deg,#1b2430 0%,#121923 78%)!important;
+  border-bottom-color:rgba(211,183,127,.37)!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid {
+  background:
+    radial-gradient(ellipse 85% 55% at 0 0,rgba(211,183,127,.035),transparent 95%),
+    linear-gradient(180deg,#151d28,#111822)!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupno,
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupcount {
+  background:rgba(211,183,127,.055)!important;
+  border-color:rgba(211,183,127,.37)!important;
+  color:#dac394!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card {
+  background:linear-gradient(110deg,#18212c,#121923)!important;
+  border-color:rgba(211,183,127,.34)!important;
+  box-shadow:inset 0 1px 0 rgba(244,224,182,.06)!important;
+  color:#f4eee5!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:is(:hover,:active,:focus-visible) {
+  background:linear-gradient(110deg,#212b38,#141b25)!important;
+  border-color:rgba(215,189,137,.65)!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__icon {
+  background:radial-gradient(circle at 30% 20%,rgba(211,183,127,.12),#121923 83%)!important;
+  border-color:rgba(211,183,127,.34)!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion :is(
+  .dar-tl-groupname,.topics-theme-card__body h3
+) {
+  color:#f4eee5!important;
+  -webkit-text-fill-color:#f4eee5!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion :is(
+  .topics-theme-card__count
+) {
+  color:#c1b9ad!important;
+  -webkit-text-fill-color:#c1b9ad!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion :is(
+  .dar-tl-arrow,.topics-theme-card__chev
+) {
+  color:#d7bd89!important;
+}
+/* The topic subpage receives the same night palette, without changing its
+   hero photograph, its source links or the global article reading engine. */
+html[data-theme="dar-al-layl"] body.is-topic-route #appView .topic-collection-page :is(
+  .post-row,.topics-theme-card
+) {
+  border-color:rgba(211,183,127,.28)!important;
+  color:#f4eee5!important;
+}
+html[data-theme="dar-al-layl"] body.is-topic-route #appView .topic-collection-page :is(
+  .post-row,.topics-theme-card
+):is(:hover,:active,:focus-visible) {
+  background:linear-gradient(90deg,rgba(211,183,127,.055),transparent 80%)!important;
+}
+/* Floating navigation: only Dar al-Layl's PALETTE is replaced, never size,
+   layout, pointer handlers, backdrop positioning or the active-route logic. */
+html[data-theme="dar-al-layl"] body #bottomNav.bottom-nav {
+  --bottom-nav-fill:rgba(11,16,24,.97)!important;
+  background:rgba(11,16,24,.97)!important;
+  background-color:rgba(11,16,24,.97)!important;
+  background-image:none!important;
+  border-color:rgba(211,183,127,.24)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.43),inset 0 1px 0 rgba(243,225,186,.055)!important;
+}
+html[data-theme="dar-al-layl"] body #bottomNav :is(
+  .bottom-nav-core,.bottom-nav-pill
+) {
+  background:rgba(17,24,34,.96)!important;
+  background-image:none!important;
+  border-color:rgba(211,183,127,.19)!important;
+  box-shadow:inset 0 1px 0 rgba(243,225,186,.055)!important;
+}
+html[data-theme="dar-al-layl"] body #bottomNav .bottom-nav-btn {
+  color:#c6bda9!important;
+}
+html[data-theme="dar-al-layl"] body #bottomNav .bottom-nav-btn:is(
+  .active,.is-active,.is-pressed,[aria-current="page"],:active
+) {
+  color:#f1dcae!important;
+}
+html[data-theme="dar-al-layl"] body #bottomNav .bottom-nav-btn:is(
+  .active,.is-active,[aria-current="page"]
+)::before {
+  background:rgba(211,183,127,.08)!important;
+}
