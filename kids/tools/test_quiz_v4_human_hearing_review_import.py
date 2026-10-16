@@ -1,0 +1,106 @@
+#!/usr/bin/env python3
+"""Fail-closed, completely offline tests of the V4 human hearing import.
+
+Synthetic test decisions MUST NEVER be committed as real human approvals.
+Tests do not write to source, staging or public quiz.
+"""
+from __future__ import annotations
+import copy
+import json
+from pathlib import Path
+
+import import_quiz_v4_human_hearing_reviews as imp
+
+def expect_reject(stage,files,label):
+    try: imp.build_report(stage,files)
+    except (RuntimeError,ValueError):return
+    raise AssertionError("Unsafe fake hearing claim was accepted: "+label)
+
+def main():
+    stage=json.loads(imp.STAGED.read_text(encoding="utf-8"))
+    index,eligible=imp.index_real_audio(stage)
+    assert len(stage["questions"])==450
+    assert len(index)>=275
+    assert len(eligible["4-6"])>0 and len(eligible["7-10"])>0
+    young_text,young_sha=next(iter(eligible["4-6"].items()))
+    older_text,older_sha=next(iter(eligible["7-10"].items()))
+    def submission(group, approvals, issues=None):
+        return {"schemaVersion":2,"scope":imp.SCOPES[group],
+                "reviewerName":"Synthetic QA fixture; not human",
+                "exportedAt":"2026-10-16T08:00:00+00:00",
+                "selfAttestedHumanHearing":True,
+                "approvedAudioShaByTextSha":approvals,
+                "reportedIssuesByTextSha":issues or {}}
+    demo_young=submission("4-6",{young_text:young_sha})
+    demo_older=submission("7-10",{older_text:older_sha})
+    assert imp.review_one(demo_young,"4-6",eligible["4-6"])["approvedClaims"]=={young_text:young_sha}
+    assert imp.review_one(demo_older,"7-10",eligible["7-10"])["approvedClaims"]=={older_text:older_sha}
+    assert imp.build_report(stage,{})["claimedApprovalClipCount"]==0
+    assert imp.build_report(stage,{})["publicReleaseAllowed"] is False
+    assert imp.build_report(stage,{})["humanApprovalVerifiedByImporter"] is False
+
+    def invalid(payload,label):
+        try:imp.review_one(payload,"4-6",eligible["4-6"])
+        except ValueError:return
+        raise AssertionError("Wrong reviewer JSON passed: "+label)
+    bad=copy.deepcopy(demo_young)
+    bad["approvedAudioShaByTextSha"][young_text]="0"*64
+    invalid(bad,"tampered MP3 SHA")
+    bad=copy.deepcopy(demo_young)
+    bad["approvedAudioShaByTextSha"]={"a"*64:young_sha}
+    invalid(bad,"unknown text")
+    bad=copy.deepcopy(demo_young)
+    bad["approvedAudioShaByTextSha"]={older_text:older_sha}
+    if older_text not in eligible["4-6"]: invalid(bad,"wrong-age clip")
+    bad=copy.deepcopy(demo_young)
+    bad["scope"]=imp.SCOPES["7-10"]
+    invalid(bad,"wrong age scope")
+    bad=copy.deepcopy(demo_young)
+    bad["schemaVersion"]=1
+    invalid(bad,"wrong schema")
+    bad=copy.deepcopy(demo_young)
+    bad["reviewerName"]=""
+    invalid(bad,"missing human reviewer label")
+    bad=copy.deepcopy(demo_young)
+    bad["selfAttestedHumanHearing"]=False
+    invalid(bad,"no human claim")
+    bad=copy.deepcopy(demo_young)
+    bad["exportedAt"]="2099-01-01T00:00:00Z"
+    invalid(bad,"future timestamp")
+    bad=copy.deepcopy(demo_young)
+    bad["reportedIssuesByTextSha"]={young_text:{
+        "audioSha":young_sha,"category":"pronunciation","note":"test"
+    }}
+    invalid(bad,"same SHA both approval and issue")
+    bad=copy.deepcopy(demo_young)
+    bad["approvedAudioShaByTextSha"]={}
+    bad["reportedIssuesByTextSha"]={young_text:{
+        "audioSha":young_sha,"category":"unrecognized","note":"test"
+    }}
+    invalid(bad,"invalid category")
+    bad=copy.deepcopy(demo_young)
+    bad["approvedAudioShaByTextSha"]={}
+    bad["reportedIssuesByTextSha"]={young_text:{
+        "audioSha":young_sha,"category":"pronunciation","note":"a"*1501
+    }}
+    invalid(bad,"oversized note")
+
+    # Even a locally simulated 'yes' is never considered verified human QA.
+    old_load=imp.load
+    try:
+        def synthetic_loader(path,max_size=imp.MAX_BYTES):
+            return demo_young
+        imp.load=synthetic_loader
+        report=imp.build_report(stage,{"4-6":Path("synthetic-test-only.json")})
+        assert report["claimedApprovalClipCount"]==1
+        assert report["humanApprovalVerifiedByImporter"] is False
+        assert report["publicPlaybackApprovedCount"]==0
+        assert report["publicReleaseAllowed"] is False
+        assert report["newElevenLabsCreditsSpent"]==0
+        assert "Synthetic QA fixture" not in json.dumps(report)
+    finally:
+        imp.load=old_load
+    print("PASS: review-only claims validated against 450 real V4 entries; "
+          "12+ negative safety controls; no synthetic approval persisted; 0 credits")
+
+if __name__=="__main__":main()
