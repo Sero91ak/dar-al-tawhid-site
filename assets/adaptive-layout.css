@@ -924,6 +924,7 @@ body.is-post-route .post-reader-main .post-source{
   background-repeat:no-repeat;
   background-position:var(--dar-hero-focus,center center);
   border-radius:0 0 26px 26px;
+  margin-bottom:0;
 }
 :where(.dar-hero-stage) > [data-dar-hero] > img[data-dar-hero-image]{
   display:block;
@@ -992,6 +993,13 @@ html[data-theme] body.is-frauen-route[data-frauen-view] #appView .frauen-library
   background-position:center center!important;
   /* Restore the visual edge-to-edge masthead while maintaining a whole motif. */
   margin-bottom:18px!important;
+}
+
+/* Search starts precisely on the hero edge; do not allow an initial gap. */
+html[data-theme] body.is-frauen-route[data-frauen-view] #appView :is(
+  .frauen-library-hub,.frauen-library-list
+) > .frauen-library-hero{
+  margin-bottom:0!important;
 }
 /* Reduce only interior spacing, not font contrast or existing content. */
 html[data-theme] body.is-frauen-route[data-frauen-view] #appView .frauen-library-hero__content{
