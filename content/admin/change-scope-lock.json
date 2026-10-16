@@ -7742,6 +7742,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-20T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-html-worker-first-prayer-motifs-20261016",
+      "at": "2026-10-16T12:42:00+02:00",
+      "approvedBy": "user-explicit-continue-correct-live-test-app",
+      "reason": "Test-App static-asset routing bypasses Worker HTML injection. Allow Worker first ONLY for /test /test/ /test/index.html, preserving Academy auth routes and asset-first delivery for images/icons/css/kids. Needed for 5 generated prayer images to render.",
+      "paths": [
+        "wrangler.test.toml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-21T23:59:00.000Z"
     }
   ],
   "enabled": true
