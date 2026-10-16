@@ -70,7 +70,7 @@ for(const token of ["KIDS_FAMILY_STRUCTURE_V1435","var(--kp-card)","var(--kp-rai
 assert(!css.includes("TAWHID-KIDS-Elternkonto-Vorschau"),
  "standalone preview style must not enter main app");
 
-/* V1438: mini timer is a ONE-piece Learn tab extension and only parents
+/* V1439: dome timer is a ONE-piece Learn tab extension and only parents
  * can Start, Pause, Stop or Reset. Foreground time never leaks into background. */
 const miniTimer=read("kids/parents-compact-timer-v1436.js");
 const miniStyle=read("kids/parents-compact-timer-v1436.css");
@@ -79,7 +79,7 @@ assert.ok(html.includes("/kids/parents-compact-timer-v1436.js?v=1439")&&
   html.includes("/kids/parents-compact-timer-v1436.css?v=1439"),"Mini timer scripts published");
 assert.ok(sw.includes("/kids/parents-compact-timer-v1436.js?v=1439")&&
   sw.includes("/kids/parents-compact-timer-v1436.css?v=1439"),"Mini timer offline cache");
-for(const marker of [' .kids-academy-tab','pill.style.left=left+"px"','dock.style.setProperty("--kids-timer-dome-center",relativeCenter+"px")',
+for(const marker of ['.kids-academy-tab','pill.style.left=left+"px"','dock.style.setProperty("--kids-timer-dome-center",relativeCenter+"px")',
  'document.hidden','window.addEventListener("pagehide",pauseActive',
  'window.addEventListener("blur",pauseActive',
  'function stopTimer()','function resetTimer()','function playPause()',
