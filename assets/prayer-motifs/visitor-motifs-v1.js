@@ -65,11 +65,11 @@
     requestAnimationFrame(enhance);
   }
   function start(){
-    var style=document.querySelector('link[data-dar-visitor-prayer-motifs]');
+    var style=document.getElementById("darVisitorPrayerMotifsV1") || document.querySelector('link[data-dar-visitor-prayer-motifs]');
     if(!style){
       style=document.createElement("link");
       style.rel="stylesheet";
-      style.href=BASE+"live-photo-v6.css"+VERSION;
+      style.href=BASE+"visitor-motifs-v1.css"+VERSION;
       style.setAttribute("data-dar-visitor-prayer-motifs","");
       document.head.appendChild(style);
     }
