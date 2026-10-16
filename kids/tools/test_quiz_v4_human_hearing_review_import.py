@@ -23,6 +23,20 @@ def main():
     assert len(stage["questions"])==450
     assert len(index)>=275
     assert len(eligible["4-6"])>0 and len(eligible["7-10"])>0
+    # A staged MP3 JSON digest is NOT trusted until actual original bytes are
+    # verified. Reject changes to its hash or to its permitted file location.
+    sample_id=next(qid for qid,q in stage["questions"].items() if q["parts"])
+    sample_kind=next(iter(stage["questions"][sample_id]["parts"]))
+    tampered=copy.deepcopy(stage)
+    tampered["questions"][sample_id]["parts"][sample_kind]["sha256"]="0"*64
+    try: imp.index_real_audio(tampered)
+    except ValueError: pass
+    else: raise AssertionError("Edited MP3 SHA was not caught by on-disk byte audit")
+    tampered=copy.deepcopy(stage)
+    tampered["questions"][sample_id]["parts"][sample_kind]["url"]="/etc/passwd"
+    try: imp.index_real_audio(tampered)
+    except ValueError: pass
+    else: raise AssertionError("Unsafe MP3 path was accepted")
     young_text,young_sha=next(iter(eligible["4-6"].items()))
     older_text,older_sha=next(iter(eligible["7-10"].items()))
     def submission(group, approvals, issues=None):
