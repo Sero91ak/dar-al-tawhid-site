@@ -64,6 +64,15 @@ def main():
             and cost["creditsSpentByThisAudit"]==0
             and cost["paidSynthesisAuthorized"] is False,
             "new audio cost review must remain V4 master and no-credit")
+    stage1_report_file=ROOT/"kids/review-only/quiz-v4-older-stage1-next-recording-batch.json"
+    stage1_report=read("kids/review-only/quiz-v4-older-stage1-next-recording-batch.json") if stage1_report_file.is_file() else None
+    if stage1_report is not None:
+        require(stage1_report["modelId"]==MODEL and stage1_report["voiceId"]==VOICE
+                and stage1_report["questionCount"]==20
+                and stage1_report["stageExpectedNewOriginals"]==65
+                and stage1_report["paidSynthesisAuthorizedByAudit"] is False
+                and stage1_report["publicReleaseAllowed"] is False,
+                "first older V4 stage must remain an unpaid exact-original queue")
     hearing_file=ROOT/"kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json"
     hearing=read("kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json") if hearing_file.is_file() else None
     if hearing is not None:
@@ -151,6 +160,10 @@ def main():
         "selfAttestedHearingClaimCount":hearing["claimedApprovalClipCount"] if hearing else 0,
         "reportedHearingIssuesCount":hearing["submittedIssueClipCount"] if hearing else 0,
         "hearingReviewVerifiedByImporter":False,
+        "olderStage1OriginalsStillMissing":stage1_report["remainingFirstStageOriginals"] if stage1_report else None,
+        "olderStage1NextExactOriginalCount":len(stage1_report["nextExactTextSha256"]) if stage1_report else None,
+        "olderStage1NextEstimatedCredits":stage1_report["nextEstimatedCreditsNotProviderBill"] if stage1_report else None,
+        "olderStage1CostForecastUnconfirmed":True,
         "humanAudioApprovals":0,"publicEnabled":False,
         "newElevenLabsCreditsConsumedByThisReport":0,
         "recoveryFlowUrl":FLOW,
@@ -237,6 +250,14 @@ def main():
         "Drei bestehende Importwege sind für die vollständige automatische Quiz-Weiterverarbeitung abgesichert: ZIP-Import über `.github/workflows/kids-v4-prepaid-flow-restore.yml`, verschlüsselter Original-Link-Import über `.github/workflows/kids-v4-secure-original-import.yml` und reiner GET-Import über `.github/workflows/kids-v4-last9-paid-free-get.yml`.",
         "Nach einem ECHTEN Originalimport werden SHA-/Codecprüfung, Quiz-MP3-Zusammenbau für beide Altersbereiche, Fortschrittsdateien für 450 Fragen, Frage-ID-Staging und diese Übergabe automatisch aktualisiert. Sind alle 56 Originale vorhanden, muss die technische 4–6-Abdeckung auf exakt 150/150 steigen. Das ist noch keine menschliche Hörfreigabe.",
         "Null-Credit-Regressionsprüfung: `kids/tools/test_quiz_v4_prepaid_end_to_end_wiring.py` via `.github/workflows/kids-v4-prepaid-endtoend-qa.yml`. Bei bisheriger Provider-Antwort HTTP 402 sind die Originalbytes weiterhin NICHT heruntergeladen; kein erneuter Kauf.",
+        "",
+        "## Erster exakt gebundener V4-Auftrag für 7–10 Jahre",
+        "",
+        "Aus den 450 ausgewählten Fragen sind **20 ältere Quizfragen (10 × 7–8 und 10 × 9–10)** als erste Produktionsstufe festgelegt. Dafür sind **65 eindeutig neue Original-V4-Sprachbausteine (1.842 Zeichen)** vorbereitet. Neue Abrechnung erst nach Prüfung der Originalquellen und einer getrennten ausdrücklichen Zustimmung zu Sprachcredits.",
+        "",
+        "Der ausführbare, fortsetzbare Kostengenerator `kids/tools/generate_quiz_v4_older_stage1_exact.py` benutzt ausschließlich die 65 unveränderlichen Sprachtext-Prüfsummen dieser Stufe. `--audit` kostet 0 Credits; `--produce` erfordert zwei bestätigte Freigaben und begrenzt jede Ausführung auf höchstens zehn Original-MP3s und höchstens 850 prognostizierte Credits. Quelle der unveränderten Texte: `.github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json`.",
+        "Manuelle Produktions-Pipeline: `.github/workflows/kids-v4-older-stage1-exact-paid.yml`. Kostenfreier CI-Vortest: `.github/workflows/kids-v4-older-stage1-exact-audit.yml`. Sie speichert Originale mit Ledger/Backups sowie die danach neu zusammengesetzten privaten Quiz-Hördateien. Kein Live-Deploy.",
+        "Letzte gespeicherte 65er-Restzahl: **"+(str(details["olderStage1OriginalsStillMissing"]) if stage1_report else "noch nicht als Bericht erzeugt")+"**; nächste wartende Originale: **"+(str(details["olderStage1NextExactOriginalCount"]) if stage1_report else "nach kostenfreiem Audit")+"**; reine Kostenschätzung dafür: **"+(str(details["olderStage1NextEstimatedCredits"]) if stage1_report else "offen")+"** Credits. Keine neue MP3 als erzeugt behaupten, bevor das Ledger/MP3-Hash dies beweist.",
         "",
         "## Nächste verbindliche Schritte",
         "",
