@@ -1,0 +1,541 @@
+/* DĀR AL TAWḤĪD · BESUCHER-APP · SETTINGS NAVIGATION V1
+   Erwachsenen-Besucheroberfläche; keine Änderung an Push-Berechnung, Themes oder App-Shell. */
+html body.is-settings-route .dsh-shell,
+html body.is-settings-route .dsh-shell *{box-sizing:border-box}
+html body.is-settings-route .dsh-shell{
+  --dsh-accent:var(--gold2,var(--theme-accent,#d7bd85));
+  --dsh-ink:var(--text,#f6f0e7);
+  --dsh-muted:var(--muted,#aab4c3);
+  --dsh-line:color-mix(in srgb,var(--dsh-accent) 20%,transparent);
+  --dsh-surface:color-mix(in srgb,var(--card,#10233a) 91%,transparent);
+  width:100%;max-width:none;min-width:0;
+  padding:0 0 calc(32px + env(safe-area-inset-bottom,0px));
+  color:var(--dsh-ink);
+}
+html body.is-settings-route .dsh-welcome{
+ position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;
+ justify-content:space-between;gap:12px;
+ margin:1px 0 23px;padding:22px clamp(15px,4.8vw,26px);
+ border:1px solid var(--dsh-line);border-radius:23px;
+ background:
+  radial-gradient(ellipse at 96% 0%,color-mix(in srgb,var(--dsh-accent) 16%,transparent),transparent 60%),
+  linear-gradient(125deg,color-mix(in srgb,var(--card,#172538) 95%,transparent),color-mix(in srgb,var(--card,#172538) 80%,transparent));
+ box-shadow:0 12px 32px rgba(0,0,0,.065);
+}
+html body.is-settings-route .dsh-welcome:after{
+ content:"";position:absolute;right:-18px;top:-44px;
+ width:153px;height:153px;border:1px solid var(--dsh-line);border-radius:50%;opacity:.75;pointer-events:none;
+}
+html body.is-settings-route .dsh-welcome:before{
+ content:"";position:absolute;right:7px;top:-20px;width:106px;height:106px;border:1px solid var(--dsh-line);border-radius:50%;pointer-events:none;
+}
+html body.is-settings-route .dsh-eyebrow{display:block;font-size:10px;font-weight:730;letter-spacing:.16em;text-transform:uppercase;color:var(--dsh-accent);margin-bottom:8px}
+html body.is-settings-route .dsh-welcome h2{font-family:var(--serif,Georgia,serif);font-size:clamp(23px,5vw,30px);font-weight:650;line-height:1.14;color:var(--dsh-ink);margin:0 0 6px}
+html body.is-settings-route .dsh-welcome p{margin:0;color:var(--dsh-muted);font-size:13px;line-height:1.5;max-width:31ch}
+html body.is-settings-route .dsh-emblem{position:relative;z-index:1;flex:0 0 58px;height:58px;border-radius:19px;border:1px solid var(--dsh-line);display:grid;place-items:center;background:color-mix(in srgb,var(--dsh-accent) 7%,transparent);color:var(--dsh-accent)}
+html body.is-settings-route .dsh-emblem svg{width:30px;height:30px}
+html body.is-settings-route .dsh-group{margin-bottom:22px;min-width:0}
+html body.is-settings-route .dsh-group-head{display:flex;align-items:center;gap:10px;margin:0 1px 10px;padding:0 3px}
+html body.is-settings-route .dsh-group-head span{font-size:10px;letter-spacing:.14em;font-weight:800;text-transform:uppercase;color:var(--dsh-accent);white-space:nowrap}
+html body.is-settings-route .dsh-group-head:after{content:"";height:1px;flex:1;background:var(--dsh-line)}
+html body.is-settings-route .dsh-list{border:1px solid var(--dsh-line);border-radius:20px;background:var(--dsh-surface);overflow:hidden}
+html body.is-settings-route .dsh-row{appearance:none;display:flex;align-items:center;width:100%;min-width:0;min-height:76px;padding:14px clamp(11px,3.5vw,18px);gap:13px;position:relative;border:0;border-radius:0;background:transparent;text-align:left;color:var(--dsh-ink);font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+html body.is-settings-route .dsh-row+.dsh-row:before{content:"";position:absolute;left:64px;right:15px;top:0;height:1px;background:var(--dsh-line)}
+html body.is-settings-route .dsh-row:active{background:color-mix(in srgb,var(--dsh-accent) 10%,transparent)}
+html body.is-settings-route .dsh-row:focus-visible,
+html body.is-settings-route .dsh-back:focus-visible{outline:2px solid var(--dsh-accent);outline-offset:-3px}
+html body.is-settings-route .dsh-row-icon{flex:0 0 41px;width:41px;height:41px;display:grid;place-items:center;border-radius:13px;border:1px solid color-mix(in srgb,var(--dsh-accent) 22%,transparent);background:color-mix(in srgb,var(--dsh-accent) 8%,transparent);color:var(--dsh-accent)}
+html body.is-settings-route .dsh-row-icon svg{display:block;width:21px;height:21px}
+html body.is-settings-route .dsh-row-main{min-width:0;flex:1;display:flex;flex-direction:column;gap:4px}
+html body.is-settings-route .dsh-row-title{font-weight:720;font-size:clamp(13px,3.5vw,15px);line-height:1.2;color:var(--dsh-ink)}
+html body.is-settings-route .dsh-row-sub{color:var(--dsh-muted);font-size:11.5px;line-height:1.37}
+html body.is-settings-route .dsh-row-end{display:flex;flex:0 0 auto;align-items:center;gap:8px;color:var(--dsh-muted)}
+html body.is-settings-route .dsh-row-meta{font-size:11px;max-width:84px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html body.is-settings-route .dsh-row-chevron{width:16px;height:16px;opacity:.64}
+html body.is-settings-route .dsh-note{text-align:center;margin:22px 8px 0;color:var(--dsh-muted);font-size:11px;line-height:1.5}
+html body.is-settings-route .dsh-detail{min-width:0}
+html body.is-settings-route .dsh-back{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--dsh-line);border-radius:99px;padding:10px 14px;min-height:44px;margin:0 0 15px;background:color-mix(in srgb,var(--dsh-accent) 5%,transparent);font:650 12px/1.25 inherit;color:var(--dsh-ink);cursor:pointer}
+html body.is-settings-route .dsh-back svg{width:16px;height:16px}
+html body.is-settings-route .dsh-detail-intro{display:flex;align-items:center;gap:12px;margin:0 0 15px;padding:3px 1px 12px;border-bottom:1px solid var(--dsh-line)}
+html body.is-settings-route .dsh-detail-intro .dsh-row-icon{flex-basis:46px;width:46px;height:46px;border-radius:16px}
+html body.is-settings-route .dsh-detail-intro h2{font-family:var(--serif,Georgia,serif);font-size:clamp(20px,5.4vw,27px);font-weight:620;color:var(--dsh-ink);margin:0 0 4px;line-height:1.12}
+html body.is-settings-route .dsh-detail-intro p{font-size:12px;line-height:1.4;color:var(--dsh-muted);margin:0}
+html body.is-settings-route .dsh-detail-content{min-width:0}
+html body.is-settings-route .dsh-detail .settings-one-page{padding:0!important}
+html body.is-settings-route .dsh-detail .settings-one-page>.notification-center-page{width:100%;max-width:none}
+html body.is-settings-route .dsh-detail .settings-one-page>#dar-setup-hub{display:none!important}
+/* Zwei eigene Ansichten, eine bestehende funktionale Benachrichtigungs-/Standort-Engine */
+html body.is-settings-route .dsh-detail[data-settings-page="notifications"] .dar-permission-location{display:none!important}
+html body.is-settings-route .dsh-detail[data-settings-page="location"] .notification-center-page>.notification-hero,
+html body.is-settings-route .dsh-detail[data-settings-page="location"] .notification-center-page>.notification-section,
+html body.is-settings-route .dsh-detail[data-settings-page="location"] .notification-center-page>.notification-saved{display:none!important}
+html body.is-settings-route .dsh-detail[data-settings-page="location"] .notification-center-page>.dar-permission-location{display:block!important;border:1px solid var(--dsh-line)!important;border-radius:19px!important;padding:18px!important;background:var(--dsh-surface)!important}
+html body.is-settings-route .dsh-detail[data-settings-page="appearance"] .theme-switch-panel,
+html body.is-settings-route .dsh-detail[data-settings-page="icon"] .app-icon-panel,
+html body.is-settings-route .dsh-detail[data-settings-page="font"] .app-font-panel{
+ width:100%!important;max-width:none!important;margin:0!important;padding:16px!important;
+ border:1px solid var(--dsh-line)!important;border-radius:18px!important;background:var(--dsh-surface)!important;
+ box-shadow:none!important;
+}
+html body.is-settings-route .dsh-detail .theme-switch-row{width:100%;min-width:0;gap:10px}
+html body.is-settings-route .dsh-detail .theme-switch-btn{min-width:0}
+html body.is-settings-route .dsh-extra-font{border:1px solid var(--dsh-line);border-radius:18px;background:var(--dsh-surface);padding:16px;margin-top:13px}
+html body.is-settings-route .dsh-extra-font h3{margin:0 0 5px;font-family:var(--serif,Georgia,serif);font-weight:600;font-size:19px;color:var(--dsh-ink)}
+html body.is-settings-route .dsh-extra-font p{font-size:11.5px;color:var(--dsh-muted);margin:0 0 12px}
+html body.is-settings-route .dsh-extra-font .font-slider-section+.font-slider-section{margin-top:14px}
+html body.is-settings-route .dsh-detail-content .app-icon-rail{width:100%;max-width:none}
+html body.is-settings-route .dsh-detail[data-settings-page="notifications"] .notification-hero{padding-top:6px!important}
+html body.is-settings-route .dsh-detail[data-settings-page="notifications"] .notification-section{scroll-margin-top:110px}
+@media(max-width:390px){
+ html body.is-settings-route .dsh-row{min-height:72px;gap:10px;padding-inline:10px}
+ html body.is-settings-route .dsh-row-icon{flex-basis:38px;width:38px;height:38px}
+ html body.is-settings-route .dsh-row+.dsh-row:before{left:57px}
+ html body.is-settings-route .dsh-row-meta{max-width:65px}
+ html body.is-settings-route .dsh-welcome{padding:18px 16px}
+ html body.is-settings-route .dsh-emblem{flex-basis:44px;height:44px}
+}
+@media(prefers-reduced-motion:no-preference){
+ html body.is-settings-route .dsh-row{transition:background-color .18s ease}
+ html body.is-settings-route .dsh-row-icon{transition:transform .18s ease}
+ html body.is-settings-route .dsh-row:active .dsh-row-icon{transform:scale(.95)}
+}
+
+/* DĀR AL TAWḤĪD · ADULT VISITOR · SETTINGS POLISH V2 · 16.10.2026
+   Scope strikt nur Einstellungsübersicht und deren Unterseiten.
+   Stabiler Hintergrund pro Gruppe statt ineinander gerundeter Zeilen,
+   kein abgeschnittener Status, kompakter Hero und sichere Tabbar-Freifläche. */
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head{
+  min-height:clamp(176px,32vw,216px)!important;
+  height:auto!important;
+  margin-bottom:14px!important;
+  padding:
+    max(72px,calc(env(safe-area-inset-top,0px) + 51px))
+    max(18px,calc((100vw - 1080px)/2 + 24px))
+    17px!important;
+  border-radius:0 0 23px 23px!important;
+}
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head h2{
+  font-size:clamp(27px,6vw,39px)!important;
+  line-height:1.08!important;
+}
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head .view-desc{
+  font-size:clamp(12.5px,3.1vw,15px)!important;
+  line-height:1.35!important;
+  margin-top:6px!important;
+}
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head:has(+ .dsh-detail){
+  min-height:clamp(145px,26vw,184px)!important;
+  margin-bottom:11px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-shell{
+  padding-bottom:calc(172px + env(safe-area-inset-bottom,0px))!important;
+  min-height:0;
+}
+html[data-theme] body.is-settings-route #appView .dsh-home .dsh-welcome{
+  min-height:0!important;
+  margin:0 0 16px!important;
+  padding:15px clamp(15px,4vw,21px)!important;
+  border-radius:19px!important;
+  gap:13px!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.04)!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-welcome h2{
+  font-size:clamp(22px,5vw,28px)!important;
+  margin:0 0 4px!important;
+  line-height:1.16!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-welcome p{
+  font-size:12px!important;
+  line-height:1.38!important;
+  max-width:39ch!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-eyebrow{
+  margin-bottom:5px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-emblem{
+  flex:0 0 46px!important;
+  width:46px!important;
+  height:46px!important;
+  border-radius:14px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-emblem svg{
+  width:25px!important;height:25px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-welcome::before{
+  width:87px!important;height:87px!important;
+  top:-18px!important;right:9px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-welcome::after{
+  width:121px!important;height:121px!important;
+  top:-33px!important;right:-12px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-group{
+  margin:0 0 18px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-group-head{
+  margin:0 1px 8px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-list{
+  display:block!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  border:1px solid var(--dsh-line)!important;
+  border-radius:18px!important;
+  background:var(--dsh-surface)!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-list > .dsh-row{
+  position:relative!important;
+  isolation:isolate!important;
+  display:flex!important;
+  align-items:center!important;
+  min-height:74px!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:12px clamp(11px,3.3vw,17px)!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  transform:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-list > .dsh-row + .dsh-row::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  left:clamp(62px,16vw,71px)!important;
+  right:14px!important;
+  top:0!important;
+  height:1px!important;
+  background:var(--dsh-line)!important;
+  pointer-events:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-list > .dsh-row:active{
+  background:color-mix(in srgb,var(--dsh-accent) 9%,transparent)!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-row-main{
+  flex:1 1 auto!important;min-width:0!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-row-end{
+  flex:0 1 auto!important;
+  max-width:42%!important;
+  min-width:16px!important;
+  gap:7px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-row-meta{
+  font-size:11px!important;
+  line-height:1.25!important;
+  display:block!important;
+  min-width:0!important;
+  max-width:clamp(69px,23vw,132px)!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-row-chevron{
+  flex:0 0 16px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail-content,
+html[data-theme] body.is-settings-route #appView .dsh-detail .settings-one-page{
+  max-width:100%!important;
+  min-width:0!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-note{
+  position:relative!important;
+  margin-top:17px!important;
+  padding-inline:9px!important;
+}
+@media(max-width:370px){
+ html[data-theme] body.is-settings-route #appView .dsh-list > .dsh-row{
+   gap:9px!important;min-height:73px!important;
+ }
+ html[data-theme] body.is-settings-route #appView .dsh-row-meta{
+   max-width:70px!important;font-size:10px!important;
+ }
+ html[data-theme] body.is-settings-route #appView .dsh-welcome{
+   padding:14px!important;
+ }
+ html[data-theme] body.is-settings-route #appView .dsh-welcome p{
+   font-size:11.5px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-theme] body.is-settings-route #appView .dsh-row{transition:none!important}
+}
+
+
+/* SETTINGS EDGE AND PRAYER TOUCH V3 · ADULT VISITOR · 2026-10-16
+   Entire detail content uses one viewport gutter, matching the floating bottom
+   navigation. Override legacy 720px and nested double-gutter restrictions. */
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail {
+  box-sizing:border-box!important;
+  width:var(--dar-test-edge-stage,calc(100vw - 20px))!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail-content,
+html[data-theme] body.is-settings-route #appView .dsh-detail-content > .settings-one-page,
+html[data-theme] body.is-settings-route #appView .dsh-detail-content > .settings-one-page > .notification-center-page {
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  transform:none!important;
+  float:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail .notification-hero,
+html[data-theme] body.is-settings-route #appView .dsh-detail .notification-section,
+html[data-theme] body.is-settings-route #appView .dsh-detail .notification-settings-list,
+html[data-theme] body.is-settings-route #appView .dsh-detail .notification-prayer-grid {
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  left:auto!important;
+  right:auto!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid {
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:clamp(4px,1.2vw,7px)!important;
+  padding:0!important;
+  margin-block:10px 12px!important;
+  overflow:visible!important;
+}
+/* Five independent accessible click targets. Decoration never captures touch. */
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer[data-notification-prayer] {
+  appearance:none!important;
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  min-width:0!important;
+  width:100%!important;
+  min-height:116px!important;
+  padding:9px 1px 12px!important;
+  box-sizing:border-box!important;
+  isolation:isolate!important;
+  z-index:0!important;
+  pointer-events:auto!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+  border:2px solid rgba(255,255,255,.24)!important;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)!important;
+  transition:border-color .17s ease,box-shadow .17s ease,filter .17s ease!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer :is(img,span,b,small) {
+  pointer-events:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer[aria-pressed="true"] {
+  border-color:var(--gold2,#dbbf81)!important;
+  box-shadow:inset 0 0 0 2px rgba(255,247,225,.45),0 0 0 1px color-mix(in srgb,var(--gold2) 35%,transparent)!important;
+  filter:brightness(1.12) saturate(1.08)!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer[aria-pressed="false"] {
+  border-color:rgba(183,184,188,.34)!important;
+  filter:grayscale(.33) brightness(.78)!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer::before {
+  content:""!important;
+  position:absolute!important;
+  display:block!important;
+  top:6px!important;
+  right:6px!important;
+  width:15px!important;
+  height:15px!important;
+  z-index:6!important;
+  border-radius:50%!important;
+  background:rgba(9,17,26,.4)!important;
+  border:1px solid rgba(255,248,227,.4)!important;
+  box-sizing:border-box!important;
+  pointer-events:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer[aria-pressed="true"]::before {
+  content:"✓"!important;
+  display:grid!important;
+  place-items:center!important;
+  font:900 10px/1 system-ui,sans-serif!important;
+  color:#172119!important;
+  background:#f5e5b2!important;
+  border-color:#f5e5b2!important;
+  text-shadow:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer:focus-visible {
+  outline:3px solid var(--gold2,#d4b57c)!important;
+  outline-offset:3px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer .notification-prayer-index {
+  flex-shrink:0!important;
+  pointer-events:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer .dar-prayer-clock,
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer b {
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:clip!important;
+  white-space:nowrap!important;
+}
+@media(max-width:385px){
+  html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer{
+    min-height:106px!important;
+  }
+  html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid{
+    gap:4px!important;
+  }
+  html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer b{
+    font-size:clamp(9px,2.65vw,11px)!important;
+  }
+}
+
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] .dsh-prayer-instruction {
+  width:100%!important;
+  max-width:none!important;
+  margin:1px 0 12px!important;
+  padding:0 2px!important;
+  font:500 11px/1.45 system-ui,sans-serif!important;
+  color:var(--dsh-muted,var(--muted))!important;
+  text-align:left!important;
+}
+
+
+/* DAR TEST SETTINGS WIDTH + INDIVIDUAL PRAYER CONTROL V4 · 2026-10-16 */
+/* Match the outside edges of the floating bottom navigation across all five
+   settings subpages. The nested settings page must not re-apply the gutter.
+   Themes, native controls and the original notification computation are intact. */
+html[data-theme] body.is-settings-route #appView.view {
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin-inline:0!important;
+  padding-inline:0!important;
+  overflow-x:clip!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell:is(.dsh-detail,.dsh-home) {
+  box-sizing:border-box!important;
+  width:calc(100% - 2 * var(--dar-test-edge-gutter,10px))!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+  left:auto!important;
+  right:auto!important;
+  transform:none!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell .dsh-detail-content,
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell .dsh-detail-content > .settings-one-page,
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell .dsh-detail-content > .settings-one-page > .notification-center-page,
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell .dsh-detail-content .notification-section,
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell .dsh-detail-content .notification-prayer-grid,
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell .dsh-detail-content .notification-settings-list,
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell .dsh-detail-content .notification-hero,
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell .dsh-detail-content :is(.theme-switch-panel,.app-icon-panel,.app-font-panel,.dsh-extra-font) {
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  float:none!important;
+  transform:none!important;
+}
+/* Five separate accessible buttons, not a horizontally scrollable slider. */
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail[data-settings-page="notifications"] .notification-prayer-grid {
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:clamp(4px,1vw,8px)!important;
+  width:100%!important;
+  padding:0!important;
+  overflow:visible!important;
+  position:relative!important;
+  z-index:1!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer[data-notification-prayer] {
+  position:relative!important;
+  isolation:isolate!important;
+  display:flex!important;
+  width:100%!important;
+  min-width:0!important;
+  min-height:118px!important;
+  padding:12px 2px 10px!important;
+  z-index:1!important;
+  cursor:pointer!important;
+  pointer-events:auto!important;
+  touch-action:manipulation!important;
+  -webkit-touch-callout:none!important;
+  user-select:none!important;
+  -webkit-user-select:none!important;
+  border:2px solid rgba(245,233,211,.4)!important;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.17)!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer[data-notification-prayer] > * {
+  pointer-events:none!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer[data-notification-prayer].is-on,
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer[data-notification-prayer][aria-pressed="true"] {
+  border-color:var(--gold2,#d6b97a)!important;
+  box-shadow:inset 0 0 0 2px rgba(255,248,228,.56),0 0 0 1px rgba(80,60,30,.22)!important;
+  filter:brightness(1.09) saturate(1.04)!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer[data-notification-prayer]:not(.is-on)[aria-pressed="false"] {
+  filter:saturate(.65) brightness(.79)!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer[data-notification-prayer]::before {
+  content:""!important;
+  display:grid!important;
+  place-items:center!important;
+  position:absolute!important;
+  inset:6px 6px auto auto!important;
+  height:17px!important;
+  width:17px!important;
+  border:1px solid rgba(255,250,232,.55)!important;
+  border-radius:50%!important;
+  background:rgba(12,21,32,.55)!important;
+  z-index:8!important;
+  pointer-events:none!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer[data-notification-prayer].is-on::before,
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer[data-notification-prayer][aria-pressed="true"]::before {
+  content:"✓"!important;
+  font:900 11px/1 system-ui,sans-serif!important;
+  background:#f3deb0!important;
+  border-color:#f3deb0!important;
+  color:#12231c!important;
+  text-shadow:none!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer[data-notification-prayer]:focus-visible {
+  outline:3px solid var(--gold2,#d6b97a)!important;
+  outline-offset:2px!important;
+}
+@media(max-width:390px){
+  html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer[data-notification-prayer] {
+    min-height:108px!important;
+    padding-inline:1px!important;
+  }
+}
+
+/* Keep the independent appearance/icon/font cards' interior padding after
+   removing redundant OUTER gutters. */
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail .dsh-detail-content :is(
+ .theme-switch-panel,.app-icon-panel,.app-font-panel,.dsh-extra-font
+) {
+  padding:clamp(12px,3.8vw,18px)!important;
+}
