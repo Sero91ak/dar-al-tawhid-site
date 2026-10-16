@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `c24c3fe8277e4b35a6bd514032b1c2c1ba62d731`
+- Commit beim Erstellen dieses Berichts: `6e20fadbb6ec46c08e15ba16606394e45f4b6aa4`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **276 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1044 Frage-/Lob-/Retry-/Erklärungsteile**.
 - Technisch vierteilig vollständig: **72/450**, noch unvollständig: **378/450**.
@@ -72,6 +72,14 @@ Für die 150 jüngsten Fragen wurde die kostenpflichtige Kampagne repariert: Feh
 Drei bestehende Importwege sind für die vollständige automatische Quiz-Weiterverarbeitung abgesichert: ZIP-Import über `.github/workflows/kids-v4-prepaid-flow-restore.yml`, verschlüsselter Original-Link-Import über `.github/workflows/kids-v4-secure-original-import.yml` und reiner GET-Import über `.github/workflows/kids-v4-last9-paid-free-get.yml`.
 Nach einem ECHTEN Originalimport werden SHA-/Codecprüfung, Quiz-MP3-Zusammenbau für beide Altersbereiche, Fortschrittsdateien für 450 Fragen, Frage-ID-Staging und diese Übergabe automatisch aktualisiert. Sind alle 56 Originale vorhanden, muss die technische 4–6-Abdeckung auf exakt 150/150 steigen. Das ist noch keine menschliche Hörfreigabe.
 Null-Credit-Regressionsprüfung: `kids/tools/test_quiz_v4_prepaid_end_to_end_wiring.py` via `.github/workflows/kids-v4-prepaid-endtoend-qa.yml`. Bei bisheriger Provider-Antwort HTTP 402 sind die Originalbytes weiterhin NICHT heruntergeladen; kein erneuter Kauf.
+
+## Erster exakt gebundener V4-Auftrag für 7–10 Jahre
+
+Aus den 450 ausgewählten Fragen sind **20 ältere Quizfragen (10 × 7–8 und 10 × 9–10)** als erste Produktionsstufe festgelegt. Dafür sind **65 eindeutig neue Original-V4-Sprachbausteine (1.842 Zeichen)** vorbereitet. Neue Abrechnung erst nach Prüfung der Originalquellen und einer getrennten ausdrücklichen Zustimmung zu Sprachcredits.
+
+Der ausführbare, fortsetzbare Kostengenerator `kids/tools/generate_quiz_v4_older_stage1_exact.py` benutzt ausschließlich die 65 unveränderlichen Sprachtext-Prüfsummen dieser Stufe. `--audit` kostet 0 Credits; `--produce` erfordert zwei bestätigte Freigaben und begrenzt jede Ausführung auf höchstens zehn Original-MP3s und höchstens 850 prognostizierte Credits. Quelle der unveränderten Texte: `.github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json`.
+Manuelle Produktions-Pipeline: `.github/workflows/kids-v4-older-stage1-exact-paid.yml`. Kostenfreier CI-Vortest: `.github/workflows/kids-v4-older-stage1-exact-audit.yml`. Sie speichert Originale mit Ledger/Backups sowie die danach neu zusammengesetzten privaten Quiz-Hördateien. Kein Live-Deploy.
+Letzte gespeicherte 65er-Restzahl: **noch nicht als Bericht erzeugt**; nächste wartende Originale: **nach kostenfreiem Audit**; reine Kostenschätzung dafür: **offen** Credits. Keine neue MP3 als erzeugt behaupten, bevor das Ledger/MP3-Hash dies beweist.
 
 ## Nächste verbindliche Schritte
 
