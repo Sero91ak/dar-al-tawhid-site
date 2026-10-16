@@ -85,11 +85,6 @@
 /* KIDS_INLINE_LEARN_STATUS_V1440
  * No independent capsule/dome/pseudoelement. Status occupies row 3
  * of the REAL Lernen nav button. Original 3D icon and other tabs untouched. */
-html body .app > .bottom-nav::before,
-html body .app > .bottom-nav::after{
-  /* Do not author a new timer roof on the existing navigation. */
-  content:none!important;
-}
 html body .app > .bottom-nav .kids-academy-tab.kids-timer-inline-tab{
   grid-template-rows:35px auto 14px!important;
   row-gap:0!important;
@@ -220,4 +215,107 @@ html[data-kids-age] body .app > .shell > .view.active{
  #kidsLearningTimer1436{gap:6px;padding:5px 7px;min-height:42px}
  #kidsLearningTimer1436 .kids-timer-label{font-size:11px}
  #view-parents .kids-parent-time-actions{gap:6px}
+}
+
+/* KIDS_PARENT_APP_ACTIVITY_V1440
+ * Clearly distinguish real app activity from profile administration.
+ * The card inherits original boy/girl palette variables without a new theme. */
+#view-parents #kidsParentResume.kids-parent-resume{
+  box-sizing:border-box!important;
+  display:block!important;width:100%;min-width:0;
+  padding:15px!important;margin:8px 0 10px!important;
+  border:1px solid var(--kp-stroke)!important;
+  border-radius:20px!important;
+  color:var(--kp-ink)!important;
+  background:linear-gradient(135deg,var(--kp-raised),var(--kp-card))!important;
+  box-shadow:inset 3px 0 0 var(--kp-accent),0 8px 20px rgba(0,0,0,.09)!important;
+}
+#view-parents #kidsParentResume[hidden]{display:none!important}
+#view-parents .kids-parent-activity-heading{
+  display:flex;align-items:center;justify-content:space-between;gap:9px;
+  margin-bottom:12px;
+}
+#view-parents .kids-parent-activity-heading > div{
+  display:flex;flex-direction:column;min-width:0;gap:3px;
+}
+#view-parents .kids-parent-activity-eyebrow,
+#view-parents .kids-parent-time-eyebrow{
+  display:block;color:var(--kp-accent);font-size:10px;line-height:1.2;
+  font-weight:900;letter-spacing:.085em;
+}
+#view-parents .kids-parent-activity-heading strong{
+  color:var(--kp-ink);font-size:clamp(16px,4.3vw,20px);font-weight:900;
+  line-height:1.15;
+}
+#view-parents .kids-parent-activity-tag{
+  display:inline-flex;align-items:center;justify-content:center;
+  padding:6px 9px;flex:0 0 auto;border-radius:99px;
+  border:1px solid var(--kp-stroke);background:var(--kp-card);
+  color:var(--kp-accent);font-size:10px;font-weight:850;
+}
+#view-parents .kids-parent-activity-content{
+  display:flex;align-items:center;gap:12px;min-width:0;
+}
+#view-parents #kidsParentResumeArt{
+  display:block;width:64px;height:64px;flex:0 0 64px;
+  border-radius:14px;object-fit:cover;object-position:center;
+  padding:3px;border:1px solid var(--kp-stroke);
+  background:var(--kp-card);
+}
+#view-parents .kids-parent-activity-text{
+  display:flex;flex:1;min-width:0;flex-direction:column;gap:5px;
+}
+#view-parents #kidsParentResumeText{
+  color:var(--kp-ink);font-size:clamp(13px,3.6vw,15px);
+  font-weight:900;line-height:1.3;overflow-wrap:anywhere;
+}
+#view-parents #kidsParentResumePosition{
+  display:block;color:var(--kp-muted);font-size:11px;
+  line-height:1.3;font-weight:650;overflow-wrap:anywhere;
+}
+#view-parents .kids-parent-activity-progress{
+  height:5px;min-width:0;width:100%;
+  margin-top:4px;overflow:hidden;border-radius:999px;
+  background:var(--kp-stroke);
+}
+#view-parents .kids-parent-activity-progress[hidden]{display:none!important}
+#view-parents .kids-parent-activity-progress span{
+  display:block;height:100%;width:0;border-radius:inherit;
+  background:var(--kp-accent);transition:width 180ms ease;
+}
+#view-parents .kids-parent-activity-actions{
+  display:flex;align-items:center;justify-content:space-between;gap:9px;
+  margin-top:12px;padding-top:10px;
+  border-top:1px solid var(--kp-stroke);
+}
+#view-parents .kids-parent-activity-actions small{
+  color:var(--kp-muted);font-size:10px;line-height:1.3;
+}
+#view-parents #kidsParentResumeOpen{
+  box-sizing:border-box;flex:0 0 auto;max-width:none!important;
+  width:auto!important;min-height:44px!important;
+  padding:9px 15px!important;
+  border-radius:12px!important;
+  border:1px solid var(--kp-stroke)!important;
+  background:var(--kp-accent)!important;
+  color:var(--kp-action-ink)!important;
+  -webkit-text-fill-color:var(--kp-action-ink)!important;
+  font-size:12px!important;font-weight:900!important;
+  touch-action:manipulation;
+  box-shadow:none!important;
+}
+#view-parents #kidsParentResumeOpen:disabled{opacity:.5!important}
+#view-parents #kidsParentResumeOpen:focus-visible{
+  outline:3px solid var(--kp-accent)!important;outline-offset:2px!important;
+}
+#view-parents .kids-parent-time-eyebrow{margin:0 0 6px}
+@media(max-width:355px){
+  #view-parents #kidsParentResume.kids-parent-resume{padding:12px!important}
+  #view-parents #kidsParentResumeArt{width:54px;height:54px;flex-basis:54px}
+  #view-parents .kids-parent-activity-content{gap:8px}
+  #view-parents #kidsParentResumeOpen{padding:8px 10px!important;font-size:11px!important}
+  #view-parents .kids-parent-activity-actions small{max-width:120px}
+}
+@media(prefers-reduced-motion:reduce){
+  #view-parents .kids-parent-activity-progress span{transition:none}
 }
