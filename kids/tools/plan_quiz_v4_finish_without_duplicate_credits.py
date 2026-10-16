@@ -1,0 +1,215 @@
+#!/usr/bin/env python3
+"""Zero-credit exact finishing plan for 450 TAWḤĪD KIDS V4 quiz items.
+
+Determine per question WHY it is incomplete: missing historic already-paid
+originals versus genuinely new speech segments. The historic 9 are never
+returned in the chargeable queue. Reuse exact speech across all ages. Output
+a feasible cost-minimizing production order, not a synthesis authorization.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+from collections import Counter, defaultdict
+from pathlib import Path
+
+ROOT=Path(__file__).resolve().parents[2]
+MODEL="eleven_v4"
+VOICE="DkU7j9uO4ZEtLD2iRZSH"
+PARTS=("question","correct","retry","explanation")
+AGES=("4-6","7-8","9-10")
+REG=ROOT/"kids/data/quiz-v4-450-original-clip-registry.json"
+LEDGER=ROOT/"kids/data/quiz-v4-450-paid-generation-ledger.json"
+PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
+NINE=ROOT/"kids/data/quiz-v4-missing9-prepaid-originals.json"
+STAGE=ROOT/"kids/review-only/quiz-v4-450-actual-mp3-import.json"
+RELEASE=ROOT/"kids/data/quiz-curation-release.json"
+OUT=ROOT/"kids/review-only/quiz-v4-450-next-completion-priority.json"
+TEXT=ROOT/"kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md"
+
+def load(f):return json.loads(f.read_text(encoding="utf-8"))
+def need(test,message):
+    if not test:raise RuntimeError("V4 priority aborted: "+message)
+def txt_hash(s):return hashlib.sha256(s.encode("utf-8")).hexdigest()
+
+def main():
+    reg,ledger,plan,nine,stage,release=map(load,(REG,LEDGER,PLAN,NINE,STAGE,RELEASE))
+    need(release.get("enabled") is False,"quiz must remain review-only")
+    need(reg.get("modelId")==MODEL and reg.get("voiceId")==VOICE and reg.get("live") is False,
+         "original MP3 registry wrong model or voice")
+    need(plan.get("modelId")==MODEL and plan.get("voiceId")==VOICE,"wrong original V4 plan")
+    need(stage.get("modelId")==MODEL and stage.get("voiceId")==VOICE
+         and stage.get("reviewOnly") is True and stage.get("publicReleaseEnabled") is False,
+         "quiz staging wrong model, voice or visibility")
+    need(len(plan.get("recipes",[]))==450 and len(stage.get("questions",{}))==450,
+         "must examine exactly 450 questions")
+    paid=reg.get("generationClips",{})
+    stored=reg.get("textClips",{})
+    original={r["generationId"]:r for r in nine["items"]}
+    need(len(original)==9 and all(r["modelId"]==MODEL and r["voiceId"]==VOICE
+         and r["existingPaid"] is True and r["newSynthesisAllowed"] is False
+         for r in original.values()),"missing9 prepaid original contract changed")
+    missing9={g:r for g,r in original.items() if g not in paid}
+    by_text=defaultdict(list)
+    for gid,row in missing9.items():by_text[row["originalSpokenText"]].append(gid)
+    need(len(by_text)==len(missing9),"ambiguous prepaid text/GID mapping")
+    charged={row["text"] for row in ledger["rows"]}
+    need(len(charged)==len(ledger["rows"]),"duplicate paid speech in ledger")
+    need(charged<=set(stored),"paid ledger entry missing from MP3 registry")
+    need(not (charged&set(by_text)),"paid missing Flow text also charged by direct TTS")
+    recorded=set(stored)
+
+    pending=defaultdict(set)
+    records=[]
+    every_new=set()
+    prepaid_uses=Counter()
+    by_age=defaultdict(lambda:Counter())
+    for recipe in plan["recipes"]:
+        qid,age=recipe["questionId"],recipe["ageBand"]
+        need(age in AGES and qid in stage["questions"],"unknown quiz ID/age")
+        question_new=set();question_paid=set();blocked_parts={}
+        for part in PARTS:
+            entry=recipe[part]
+            missing_new=set();missing_old=set()
+            if entry["mode"]=="existing-paid-exact":
+                gid=entry["generationId"]
+                if gid not in paid:
+                    need(gid in missing9,"unidentified old paid original: "+str(gid))
+                    missing_old.add(gid)
+            elif entry["mode"]=="compose-from-segments":
+                segments=entry.get("segments")
+                need(isinstance(segments,list) and bool(segments) and
+                     " ".join(segments)==entry["text"],"wrong exact text/segment join")
+                for segment in segments:
+                    if segment in recorded:continue
+                    if segment in by_text:
+                        missing_old.update(by_text[segment])
+                    else:
+                        need(segment not in charged,"already charged original would be billed again")
+                        missing_new.add(segment)
+                        pending[segment].add((qid,age,part))
+            else:
+                raise RuntimeError("Unknown V4 recipe mode; refusing paid queue")
+            if missing_old or missing_new:
+                blocked_parts[part]={"alreadyPaidNotYetImported":sorted(missing_old),
+                                     "newOriginalTextSha256":sorted(txt_hash(x) for x in missing_new)}
+            question_new.update(missing_new)
+            question_paid.update(missing_old)
+        for gid in question_paid:prepaid_uses[gid]+=1
+        q_stage=stage["questions"][qid]
+        need(q_stage["ageBand"]==age,"wrong stage age group")
+        need(set(q_stage["missing"])==set(blocked_parts),
+             "Stage MP3 missing parts do not match real originals: "+qid)
+        actual_complete=q_stage["fourPartTechnicallyReady"]
+        need(actual_complete==(not blocked_parts),"Staged full-MP3 claim conflicts with originals: "+qid)
+        if not blocked_parts:group="complete-v4-review"
+        elif question_paid and not question_new:group="restore-prepaid-originals-only"
+        elif question_paid and question_new:group="both-prepaid-recovery-and-new-v4"
+        else:group="new-original-v4-needed"
+        by_age[age][group]+=1
+        every_new.update(question_new)
+        records.append({
+            "questionId":qid,"ageBand":age,"status":group,
+            "missingPreviouslyPaidGenerationIds":sorted(question_paid),
+            "missingNewTextSha256":sorted(txt_hash(s) for s in question_new),
+            "newUniqueSegmentCount":len(question_new),
+            "incrementalTextCodepointsIfAlone":sum(len(s) for s in question_new),
+            "incompleteParts":blocked_parts,
+        })
+    need(len({r["questionId"] for r in records})==450,"duplicate question IDs")
+    need(sum(by_age[a]["complete-v4-review"] for a in AGES)==
+         sum(int(q["fourPartTechnicallyReady"]) for q in stage["questions"].values()),
+         "Current full-part stage count inconsistent")
+    need(not set(by_text)&every_new,"Prepaid originals incorrectly in chargeable list")
+    # A potential new-TTS priority order: finish the most questions with
+    # the fewest unique new text characters, reusing selections already made.
+    # First age 4–6, then 7–8, then 9–10. Prepaid-only items remain blocked
+    # until their genuine 9 original MP3s are recovered; never pay for them.
+    by_id={x["questionId"]:x for x in records}
+    rec_lookup={r["questionId"]:r for r in plan["recipes"]}
+    chosen=set()
+    queue=[]
+    for age in AGES:
+        available=[r for r in records if r["ageBand"]==age
+                   and r["status"] in ("new-original-v4-needed","both-prepaid-recovery-and-new-v4")]
+        while available:
+            def fragments(row):
+                return {s for part in PARTS for s in rec_lookup[row["questionId"]][part].get("segments",[])
+                        if s in every_new}
+            ranked=[]
+            for row in available:
+                unique=fragments(row)-chosen
+                ranked.append((sum(len(s) for s in unique),len(unique),
+                               row["questionId"],row,unique))
+            ranked.sort(key=lambda x:(x[0],x[1],x[2]))
+            codepoints,n_new,qid,row,incremental=ranked[0]
+            chosen.update(incremental)
+            queue.append({
+                "priority":len(queue)+1,"questionId":qid,"ageBand":age,
+                "requiresPrepaidRecovery":bool(row["missingPreviouslyPaidGenerationIds"]),
+                "incrementalUnrecordedSegmentCount":n_new,
+                "incrementalUnicodeCodepoints":codepoints,
+                "cumulativeNewUniqueSegments":len(chosen),
+                "cumulativeUnicodeCodepoints":sum(len(x) for x in chosen),
+                "newTextSha256":sorted(txt_hash(x) for x in incremental),
+                "speechGenerationAuthorized":False
+            })
+            available.remove(row)
+    need(chosen==every_new,"Not all genuinely new segments scheduled exactly once")
+    summary={
+        "modelId":MODEL,"voiceId":VOICE,"selectedQuestions":450,
+        "ageCounts":{a:dict(by_age[a]) for a in AGES},
+        "alreadyTechnicallyComplete":sum(by_age[a]["complete-v4-review"] for a in AGES),
+        "questionsBlockedOnlyOnAlreadyPaidNine":sum(by_age[a]["restore-prepaid-originals-only"] for a in AGES),
+        "questionsNeedingAtLeastOneGenuinelyNewOriginal":sum(
+            by_age[a]["new-original-v4-needed"]+by_age[a]["both-prepaid-recovery-and-new-v4"] for a in AGES),
+        "previouslyPaidMissingGenerationCount":len(missing9),
+        "previouslyPaidMissingGenerationIds":sorted(missing9),
+        "missingGenuineNewExactSegments":len(every_new),
+        "missingGenuineNewTextCodepoints":sum(len(x) for x in every_new),
+        "distinctPreviouslySavedOriginalTextKeys":len(recorded),
+        "directPaidOriginalsWithUniqueReceipts":len(charged),
+        "newElevenLabsCreditsSpent":0,"paidSynthesisAuthorized":False,
+        "humanListeningApproved":False,"publicReleaseAllowed":False
+    }
+    report={"schemaVersion":1,"scope":"KIDS_V4_450_RECOVERY_FIRST_COMPLETION_PRIORITY",
+            "summary":summary,"historicalAlreadyPaidOriginalRecoveryOrder":[
+                {"generationId":g,"originalFilename":original[g]["originalFileName"],
+                 "questionsDependingOnIt":prepaid_uses[g],
+                 "mustUseOriginalMP3":True,"newSynthesisAllowed":False}
+                for g in sorted(missing9,key=lambda g:(-prepaid_uses[g],g))],
+            "questions":sorted(records,key=lambda r:(AGES.index(r["ageBand"]),r["questionId"])),
+            "possibleNewSpeechPriorityAfterOriginalRecovery":queue,
+            "queueCostUnit":"Exact new Unicode codepoints only; not billed provider credits",
+            "queueIsReviewOnly":True,"noCreditSpendConfirmed":True}
+    OUT.parent.mkdir(parents=True,exist_ok=True)
+    OUT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    lines=["# KIDS-Quiz – V4-Rettung zuerst, danach neue Aufnahmen (Review)",
+           "","**Verbindlich:** Serhat-Masterstimme `"+VOICE+"`, Modell `eleven_v4`.",
+           "Kein bestehendes bezahltes Original darf erneut synthetisiert werden. Keine Audiofreigabe und kein Live-Push.",
+           "",
+           "| Alter | Technisch komplett | Nur alte Originale nachladen | Neue V4-Originale erforderlich |",
+           "|---|---:|---:|---:|"]
+    for age in AGES:
+        b=by_age[age]
+        lines.append("| "+age+" | "+str(b["complete-v4-review"])+" | "+
+                     str(b["restore-prepaid-originals-only"])+" | "+
+                     str(b["new-original-v4-needed"]+b["both-prepaid-recovery-and-new-v4"])+" |")
+    lines+=["","**Schon bezahlte Originale noch zu retten:** "+str(len(missing9))+".",
+           "**Neue einzigartige Texte nach echtem Deduplizieren:** "+str(len(every_new))+
+           " (nur Berechnungsbasis; keine Credits bestellt).",
+           "","## Nächste technische Aktion",
+           "1. Die historischen neun `eleven_v4`-MP3s mit echten Generation-IDs importieren, nicht regenerieren.",
+           "2. Den vorhandenen kostenfreien Offline-Zusammenbau und die Quiz-MP3-Zuordnung erneut ausführen.",
+           "3. Danach diese Priorisierung mit `python3 kids/tools/plan_quiz_v4_finish_without_duplicate_credits.py` erneut aufbauen.",
+           "4. Noch offene neue V4-Originaltexte erneut mit dem Ledger deduplizieren und nur nach Kostenfreigabe produzieren.",
+           "5. Menschliche Ausspracheprüfung, Offline-/Gerätetest, Freigabeschalter weiterhin aus.",
+           "","## Priorität der historischen Originale", ""]
+    for item in report["historicalAlreadyPaidOriginalRecoveryOrder"]:
+        lines.append("- `"+item["generationId"]+"`: "+str(item["questionsDependingOnIt"])+" Quizfragen hängen direkt davon ab.")
+    lines+=["","_Die technische Priorisierung ist keine Inhalts-, Aussprache- oder Rechnungsprüfung._",""]
+    TEXT.write_text("\n".join(lines),encoding="utf-8")
+    print("KIDS_V4_RECOVERY_FIRST_PRIORITY "+json.dumps(summary,ensure_ascii=False),flush=True)
+
+if __name__=="__main__":
+    main()
