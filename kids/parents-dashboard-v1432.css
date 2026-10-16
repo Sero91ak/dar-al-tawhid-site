@@ -206,3 +206,28 @@
 @media(prefers-reduced-motion:reduce){
  #view-parents .kids-parent-fold-arrow{transition:none}
 }
+
+
+/* KIDS_PARENTS_STORY_SETTINGS_PALETTE_V1432 — body-created settings folded. */
+#view-parents #kidsParentStorySettings > .studio-content-mode-settings{
+ box-sizing:border-box!important;width:100%!important;margin:7px 0 0!important;
+ background-color:var(--kp-card)!important;background-image:none!important;
+ border:1px solid var(--kp-stroke)!important;border-radius:20px!important;color:var(--kp-ink)!important;
+}
+#view-parents #kidsParentStorySettings .studio-content-mode-settings :is(h3,p){
+ color:var(--kp-ink)!important;
+}
+#view-parents #kidsParentStorySettings .studio-pref-buttons button{
+ min-height:44px!important;background-color:var(--kp-raised)!important;background-image:none!important;
+ color:var(--kp-ink)!important;-webkit-text-fill-color:var(--kp-ink)!important;
+ border:1px solid var(--kp-stroke)!important;box-shadow:none!important;
+}
+#view-parents #kidsParentStorySettings .studio-pref-buttons button.active{
+ background-color:var(--kp-accent)!important;color:var(--kp-action-ink)!important;
+ -webkit-text-fill-color:var(--kp-action-ink)!important;border-color:var(--kp-accent)!important;
+}
+#view-parents .kids-parent-fold > #profileCard #profileAdd{
+ background-color:var(--kp-accent)!important;background-image:none!important;
+ color:var(--kp-action-ink)!important;-webkit-text-fill-color:var(--kp-action-ink)!important;
+ border:1px solid var(--kp-accent)!important;box-shadow:none!important;
+}
