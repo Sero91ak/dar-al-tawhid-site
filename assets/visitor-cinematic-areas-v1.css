@@ -1,0 +1,887 @@
+
+/* DAR_VISITOR_CINEMATIC_AREAS_V1 — staging for adult visitor app.
+   Original themed accents, all native handlers, push, prayer data, posts remain intact.
+   Images cover the HERO SURFACE; never rendered as floating image cards. */
+html[data-theme] body.is-topics-route,
+html[data-theme] body.is-topic-route,
+html[data-theme] body.is-post-route{
+ --dar-test-edge-gutter:max(10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px),2.2vw);
+ --dar-test-edge-stage:calc(100% - 2 * var(--dar-test-edge-gutter));
+}
+html[data-theme] body.is-topics-route {
+ --topics-hero-art:var(--visitor-hero-art);
+ --topics-hero-left:color-mix(in srgb,var(--bg) 94%,transparent);
+ --topics-hero-mid:color-mix(in srgb,var(--bg) 72%,transparent);
+ --topics-hero-right:color-mix(in srgb,var(--bg) 10%,transparent);
+}
+html[data-theme] body.is-topic-route {
+ --topd-art:var(--visitor-hero-art);
+ --topd-left:color-mix(in srgb,var(--bg) 94%,transparent);
+ --topd-mid:color-mix(in srgb,var(--bg) 72%,transparent);
+ --topd-right:color-mix(in srgb,var(--bg) 10%,transparent);
+}
+html[data-theme] body.is-post-route {
+ --px-art:var(--visitor-hero-art);
+ --px-l:color-mix(in srgb,var(--bg) 94%,transparent);
+ --px-m:color-mix(in srgb,var(--bg) 72%,transparent);
+ --px-r:color-mix(in srgb,var(--bg) 10%,transparent);
+}
+html[data-theme] body.is-topics-route .topics-hub{
+ --tp-accent:var(--gold2);
+ --tp-ink:var(--text);
+ --tp-muted:var(--muted);
+ --tp-panel:var(--card);
+ --tp-hover:var(--card);
+ --tp-rule:var(--line2);
+ --tl-accent:var(--tp-accent);
+ --tl-ink:var(--tp-ink);
+ --tl-muted:var(--tp-muted);
+ --tl-surface:var(--tp-panel);
+ --tl-hover:var(--tp-hover);
+ --tl-rule:var(--tp-rule);
+ width:100%!important;max-width:none!important;min-width:0!important;
+}
+html[data-theme] body.is-topics-route #appView.view,
+html[data-theme] body.is-topic-route #appView.view,
+html[data-theme] body.is-post-route #appView.view{
+ max-width:100%!important;width:100%!important;padding-inline:0!important;box-sizing:border-box!important;overflow-x:clip!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub,
+html[data-theme] body.is-topic-route #appView .topic-collection-page,
+html[data-theme] body.is-post-route #appView .post-reader{
+ width:100%!important;max-width:none!important;min-width:0!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > :is(.search-pro-panel,.search-panel,.topics-hub__label,.dar-tl-groups),
+html[data-theme] body.is-topics-route #appView .topics-hub #homeSearchBlock{
+ width:var(--dar-test-edge-stage)!important;max-width:none!important;margin-inline:auto!important;min-width:0!important;box-sizing:border-box!important;
+}
+
+html[data-theme="dark"] body.is-topics-route{--tp-accent:#e0c682;--tp-ink:#f5efe3;--tp-muted:#c6beac;--tp-panel:#12140f;--tp-hover:#272516;--tp-rule:color-mix(in srgb,#e0c682 30%,transparent);}
+html[data-theme="light"] body.is-topics-route{--tp-accent:#80602b;--tp-ink:#292216;--tp-muted:#635741;--tp-panel:#fffcf3;--tp-hover:#f4eada;--tp-rule:color-mix(in srgb,#80602b 30%,transparent);}
+html[data-theme="soft"] body.is-topics-route{--tp-accent:#85576c;--tp-ink:#32252b;--tp-muted:#6b5561;--tp-panel:#fff5f8;--tp-hover:#f5e4ec;--tp-rule:color-mix(in srgb,#85576c 30%,transparent);}
+html[data-theme="salbei"] body.is-topics-route,html[data-theme="light"][data-theme-variant="salbei"] body.is-topics-route{--tp-accent:#496950;--tp-ink:#203126;--tp-muted:#506354;--tp-panel:#f5f8ef;--tp-hover:#e8efe4;--tp-rule:color-mix(in srgb,#496950 30%,transparent);}
+html[data-theme="eisgold"] body.is-topics-route{--tp-accent:#92702e;--tp-ink:#142338;--tp-muted:#536276;--tp-panel:#f7fbff;--tp-hover:#edf3fa;--tp-rule:color-mix(in srgb,#92702e 30%,transparent);}
+html[data-theme="royal"] body.is-topics-route{--tp-accent:#e1c88e;--tp-ink:#f7eedb;--tp-muted:#d3c7b5;--tp-panel:#0a1b2e;--tp-hover:#192f47;--tp-rule:color-mix(in srgb,#e1c88e 30%,transparent);}
+html[data-theme="bordeaux"] body.is-topics-route{--tp-accent:#ecc999;--tp-ink:#faeee5;--tp-muted:#d9c3b9;--tp-panel:#2c101c;--tp-hover:#451a2b;--tp-rule:color-mix(in srgb,#ecc999 30%,transparent);}
+html[data-theme="dar-al-layl"] body.is-topics-route{--tp-accent:#d4c295;--tp-ink:#f2eee4;--tp-muted:#c2c7ba;--tp-panel:#171e1b;--tp-hover:#28302a;--tp-rule:color-mix(in srgb,#d4c295 30%,transparent);}
+html[data-theme="aurora"] body.is-topics-route{--tp-accent:#a7d6bd;--tp-ink:#f2f6ed;--tp-muted:#c2d2c7;--tp-panel:#112522;--tp-hover:#22403a;--tp-rule:color-mix(in srgb,#a7d6bd 30%,transparent);}
+html[data-theme] body.is-topics-route{--visitor-hero-art:url("/assets/area-heroes-v1290/topics.webp");}
+html[data-theme] body.is-topic-route{--visitor-hero-art:url("/assets/area-heroes-v1290/topic-detail.webp");}
+html[data-theme] body.is-post-route{--visitor-hero-art:url("/assets/area-heroes-v1290/post-reader.webp");}
+html[data-theme] body.is-quran-overview{--visitor-hero-art:url("/assets/area-heroes-v1290/quran-overview.webp");}
+html[data-theme] body.is-quiz-route{--visitor-hero-art:url("/assets/area-heroes-v1290/quiz.webp");}
+html[data-theme] body.is-more-route{--visitor-hero-art:url("/assets/area-heroes-v1290/more-hub.webp");}
+html[data-theme] body.is-settings-route{--visitor-hero-art:url("/assets/area-heroes-v1290/more-hub.webp");}
+html[data-theme] body.is-notifications-route{--visitor-hero-art:url("/assets/area-heroes-v1290/prayer.webp");}
+html[data-theme] body.is-prayer-route{--visitor-hero-art:url("/assets/area-heroes-v1290/prayer.webp");}
+html[data-theme] body.is-hadith-route{--visitor-hero-art:url("/assets/area-heroes-v1290/library.webp");}
+html[data-theme] body.is-dua-route{--visitor-hero-art:url("/assets/area-heroes-v1290/dua.webp");}
+html[data-theme] body.is-scholars-route{--visitor-hero-art:url("/assets/area-heroes-v1290/scholars.webp");}
+html[data-theme] body.is-scholar-route{--visitor-hero-art:url("/assets/area-heroes-v1290/scholar-detail.webp");}
+html[data-theme] body.is-book-route{--visitor-hero-art:url("/assets/area-heroes-v1290/book-detail.webp");}
+html[data-theme] body.is-library-route{--visitor-hero-art:url("/assets/area-heroes-v1290/library.webp");}
+html[data-theme] body.is-ramadan-route{--visitor-hero-art:url("/assets/area-heroes-v1290/jummah.webp");}
+html[data-theme] body.is-jummah-route{--visitor-hero-art:url("/assets/area-heroes-v1290/jummah.webp");}
+html[data-theme] body.is-qibla-route{--visitor-hero-art:url("/assets/area-heroes-v1290/qibla.webp");}
+html[data-theme] body.is-calendar-route{--visitor-hero-art:url("/assets/area-heroes-v1290/qibla.webp");}
+html[data-theme] body.is-account-route{--visitor-hero-art:url("/assets/area-heroes-v1290/library.webp");}
+html[data-theme] body.is-about-route{--visitor-hero-art:url("/assets/area-heroes-v1290/library.webp");}
+html[data-theme] body.is-news-route{--visitor-hero-art:url("/assets/area-heroes-v1290/topics.webp");}
+html[data-theme] body.is-news-detail-route{--visitor-hero-art:url("/assets/area-heroes-v1290/post-reader.webp");}
+html[data-theme] body.is-zakat-route{--visitor-hero-art:url("/assets/area-heroes-v1290/book-detail.webp");}
+html[data-theme] body.is-source-library-route{--visitor-hero-art:url("/assets/area-heroes-v1290/library.webp");}
+html[data-theme] body.is-quran-topic-route{--visitor-hero-art:url("/assets/area-heroes-v1290/quran-overview.webp");}
+html[data-theme] body.is-quran-learn-route{--visitor-hero-art:url("/assets/area-heroes-v1290/quran-learn.webp");}
+/* DAR_ADULT_VISITOR_POST_LIBRARY_V1 — 2026-10-16
+   Scope: adult Dar Test posts library, category detail, reader only.
+   Keep search/filter events, accordion state, post IDs, source links and
+   the existing themes intact.  A hero is a background, not an inset image.
+   This authority follows the injected Dar Test area styles. */
+html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView.view{
+  padding-inline:0!important;
+  overflow-x:clip!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title{
+  position:relative!important;
+  inset:auto!important;
+  transform:none!important;
+  translate:none!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0 0 14px!important;
+  padding:28px max(18px,var(--dar-test-edge-gutter)) 25px!important;
+  min-height:clamp(242px,43vw,340px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  box-sizing:border-box!important;
+  background-color:var(--bg)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head{
+  background-image:
+    linear-gradient(90deg,var(--topics-hero-left) 0%,var(--topics-hero-mid) 46%,var(--topics-hero-right) 82%,transparent 100%),
+    linear-gradient(0deg,color-mix(in srgb,var(--bg) 24%,transparent),transparent 58%),
+    var(--topics-hero-art)!important;
+  background-position:center,center,70% 48%!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+}
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head{
+  background-image:
+    linear-gradient(90deg,var(--topd-left) 0%,var(--topd-mid) 46%,var(--topd-right) 82%,transparent 100%),
+    linear-gradient(0deg,color-mix(in srgb,var(--bg) 24%,transparent),transparent 58%),
+    var(--topd-art)!important;
+  background-position:center,center,70% 48%!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title{
+  background-image:
+    linear-gradient(90deg,var(--px-l) 0%,var(--px-m) 46%,var(--px-r) 82%,transparent 100%),
+    linear-gradient(0deg,color-mix(in srgb,var(--bg) 24%,transparent),transparent 58%),
+    var(--px-art)!important;
+  background-position:center,center,72% 48%!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head > *,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head > *,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title > *{
+  position:relative!important;
+  z-index:1!important;
+  width:min(680px,91%)!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head h2,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head h2,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title h2{
+  line-height:1.06!important;
+  overflow-wrap:break-word!important;
+  hyphens:auto!important;
+  text-wrap:balance!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head::before,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head::before,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title::before{
+  background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 12%,transparent),transparent 75%)!important;
+  pointer-events:none!important;
+}
+/* A single introduction is enough: the same explanation already lives in the hero. */
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-intro{
+  display:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label{
+  margin:12px auto 7px!important;
+  padding-bottom:9px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label b{
+  font-size:clamp(1.13rem,3.6vw,1.5rem)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-filterbar{
+  display:flex!important;
+  flex-flow:row nowrap!important;
+  align-items:center!important;
+  width:var(--dar-test-edge-stage)!important;
+  max-width:none!important;
+  gap:8px!important;
+  padding:2px 1px 9px!important;
+  margin:0 auto 9px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  overscroll-behavior-inline:contain!important;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  scroll-snap-type:x proximity;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-filterbar::-webkit-scrollbar{
+  display:none;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-filterbar .dar-tl-chip{
+  flex:0 0 auto!important;
+  white-space:nowrap!important;
+  min-height:42px!important;
+  border-radius:999px!important;
+  scroll-snap-align:start;
+  touch-action:manipulation;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groups{
+  gap:8px!important;
+  padding-bottom:28px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion{
+  border-radius:14px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary{
+  min-height:62px!important;
+  padding:12px 13px!important;
+  background:color-mix(in srgb,var(--tl-accent) 4%,var(--tl-surface))!important;
+  touch-action:manipulation;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid{
+  gap:0!important;
+  padding:1px 11px 7px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card,
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:is(:hover,:active,:focus-visible){
+  grid-template-columns:36px minmax(0,1fr) 18px!important;
+  gap:11px!important;
+  min-height:68px!important;
+  padding:10px 2px!important;
+  border:0!important;
+  border-bottom:1px solid var(--tl-rule)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__idx{
+  display:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__icon{
+  width:36px!important;
+  height:36px!important;
+  max-width:36px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:is(:hover,:active){
+  background:color-mix(in srgb,var(--tl-accent) 5%,transparent)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:focus-visible{
+  outline:2px solid var(--tl-accent)!important;
+  outline-offset:-2px!important;
+}
+html[data-theme] body.is-topic-route #appView .topic-collection-page > :is(.post-grid,.topic-collection){
+  width:var(--dar-test-edge-stage)!important;
+  max-width:none!important;
+  margin-inline:auto!important;
+}
+/* Reader frame stretches to device width; prose retains a comfortable line length. */
+html[data-theme] body.is-post-route #appView .post-reader-main,
+html[data-theme] body.is-post-route #appView .post-reader > :is([data-post-after-panel],.post-after-panel,.related-compact,.related-compact-list){
+  width:var(--dar-test-edge-stage)!important;
+  max-width:none!important;
+  margin-inline:auto!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader .statement,
+html[data-theme] body.is-post-route #appView .post-reader-main .post-slide-quote{
+  font-size:clamp(1.08rem,3.65vw,1.35rem)!important;
+  line-height:1.65!important;
+  overflow-wrap:anywhere!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader :is(.post-aussage-text,.post-source-main,.post-fazit-body,.post-key-message p){
+  max-width:78ch;
+  overflow-wrap:break-word;
+}
+html[data-theme] body.is-post-route #appView .post-reader :is(.post-source,.post-key-message){
+  padding-block:15px 17px!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader :is(.post-source-details,.post-source-full-text,.post-reader-cite,[data-post-after-source]){
+  font-size:clamp(.84rem,2.8vw,.98rem)!important;
+  line-height:1.55!important;
+  overflow-wrap:anywhere!important;
+}
+html[data-theme] body.is-post-route #appView{
+  padding-bottom:calc(164px + env(safe-area-inset-bottom,0px))!important;
+}
+@media(min-width:760px){
+  html[data-theme] body.is-topics-route #appView .topics-hub > .view-head,
+  html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head,
+  html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title{
+    padding:48px max(28px,4vw) 38px!important;
+    min-height:315px!important;
+  }
+  html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title > *{
+    width:min(740px,76%)!important;
+  }
+}
+@media(max-width:599px){
+  html[data-theme] body.is-topics-route #appView .topics-hub > .view-head,
+  html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head,
+  html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title{
+    min-height:254px!important;
+    padding:25px max(16px,var(--dar-test-edge-gutter)) 23px!important;
+  }
+  html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head{
+    min-height:233px!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub > .view-head h2,
+  html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head h2,
+  html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title h2{
+    font-size:clamp(1.88rem,8vw,2.85rem)!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] body.is-topics-route #appView .dar-tl-filterbar{
+    scroll-behavior:auto!important;
+  }
+}
+
+
+/* DAR_VISITOR_TOPICS_NO_SWIPE_V1 — 2026-10-16
+   The 5 topic groups already exist as native <details> accordions.
+   They are the single category navigation. Remove the duplicated, horizontally
+   scrolling chips entirely. Preserve search, theme colors, category events,
+   source data and existing hash routes. Test app only. */
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-filterbar{
+  display:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label{
+  display:flex!important;
+  align-items:baseline!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  margin:13px auto 10px!important;
+  padding:0 0 12px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label b{
+  font-size:clamp(1.18rem,3.8vw,1.54rem)!important;
+  letter-spacing:.01em!important;
+  line-height:1.2!important;
+  text-transform:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label span{
+  font-size:clamp(.67rem,2.6vw,.79rem)!important;
+  line-height:1.25!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  font-weight:600!important;
+  white-space:normal!important;
+  text-align:right!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groups{
+  display:grid!important;
+  width:var(--dar-test-edge-stage)!important;
+  max-width:none!important;
+  margin:0 auto 22px!important;
+  padding:0!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:9px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion{
+  width:100%!important;
+  min-width:0!important;
+  border:1px solid var(--tl-rule)!important;
+  border-radius:17px!important;
+  background:var(--tl-surface)!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto 20px!important;
+  align-items:center!important;
+  gap:10px!important;
+  min-height:73px!important;
+  padding:15px 17px!important;
+  background:linear-gradient(105deg,color-mix(in srgb,var(--tl-accent) 6%,var(--tl-surface)),var(--tl-surface))!important;
+  cursor:pointer!important;
+  list-style:none!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary::-webkit-details-marker{
+  display:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groupno{
+  display:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groupname{
+  min-width:0!important;
+  margin:0!important;
+  font-size:clamp(1rem,3.7vw,1.21rem)!important;
+  line-height:1.33!important;
+  letter-spacing:0!important;
+  overflow-wrap:break-word!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groupcount{
+  font-size:clamp(.72rem,2.6vw,.82rem)!important;
+  line-height:1.25!important;
+  font-weight:600!important;
+  white-space:nowrap!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-arrow{
+  font-size:1.45rem!important;
+  line-height:1!important;
+  text-align:center!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion[open] summary{
+  border-bottom:1px solid var(--tl-rule)!important;
+  background:color-mix(in srgb,var(--tl-accent) 8%,var(--tl-surface))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary:focus-visible{
+  outline:2px solid var(--tl-accent)!important;
+  outline-offset:-3px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid{
+  padding:3px 13px 7px!important;
+}
+@media(max-width:430px){
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary{
+    grid-template-columns:minmax(0,1fr) auto 16px!important;
+    gap:8px!important;
+    min-height:68px!important;
+    padding:13px 12px!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groupname{
+    font-size:clamp(.96rem,3.8vw,1.1rem)!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groupcount{
+    font-size:.72rem!important;
+  }
+}
+
+
+/* DAR_VISITOR_TOPIC_LUXURY_V1 — 2026-10-16
+   Adult test topics only. Each appearance supplies its own --tp-accent, --tp-panel,
+   --tp-ink, --tp-muted and --tp-rule via the existing Test theme authority.
+   Keep the functional native details, no duplicate chips, no visitor/Kids changes. */
+html[data-theme] body.is-topics-route #appView .topics-hub {
+  --tl-luxe-surface:var(--tl-surface,var(--tp-panel,var(--card)));
+  --tl-luxe-ink:var(--tl-ink,var(--tp-ink,var(--text)));
+  --tl-luxe-muted:var(--tl-muted,var(--tp-muted,var(--muted)));
+  --tl-luxe-accent:var(--tl-accent,var(--tp-accent,var(--gold2)));
+  --tl-luxe-line:var(--tl-rule,var(--tp-rule,var(--line2)));
+  --tl-luxe-halo:color-mix(in srgb,var(--tl-luxe-accent) 13%,transparent);
+  --tl-luxe-edge:color-mix(in srgb,var(--tl-luxe-accent) 46%,var(--tl-luxe-line));
+  --tl-luxe-shadow:0 10px 24px color-mix(in srgb,var(--bg) 42%,transparent),inset 0 1px 0 color-mix(in srgb,var(--tl-luxe-accent) 12%,transparent);
+}
+/* Themes remain separate: light appearances use delicate low-contrast shadowing. */
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) body.is-topics-route #appView .topics-hub,
+html[data-theme="light"][data-theme-variant="salbei"] body.is-topics-route #appView .topics-hub {
+  --tl-luxe-halo:color-mix(in srgb,var(--tl-luxe-accent) 9%,transparent);
+  --tl-luxe-shadow:0 8px 23px color-mix(in srgb,var(--tl-luxe-ink) 8%,transparent),inset 0 1px 0 color-mix(in srgb,#fff 65%,transparent);
+}
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"]) body.is-topics-route #appView .topics-hub {
+  --tl-luxe-halo:color-mix(in srgb,var(--tl-luxe-accent) 15%,transparent);
+  --tl-luxe-shadow:0 13px 29px rgba(0,0,0,.24),inset 0 1px 0 color-mix(in srgb,var(--tl-luxe-accent) 15%,transparent);
+}
+/* Full theme compatibility: derive highlights from the existing theme authority. */
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groups {
+  gap:12px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion {
+  position:relative!important;
+  isolation:isolate!important;
+  border:1px solid var(--tl-luxe-edge)!important;
+  border-radius:19px!important;
+  background:var(--tl-luxe-surface)!important;
+  box-shadow:var(--tl-luxe-shadow)!important;
+  overflow:hidden!important;
+  transition:border-color .2s ease,box-shadow .2s ease!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion:nth-child(even) {
+  border-color:color-mix(in srgb,var(--tl-luxe-accent) 35%,var(--tl-luxe-line))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion[open] {
+  border-color:color-mix(in srgb,var(--tl-luxe-accent) 68%,var(--tl-luxe-line))!important;
+  box-shadow:0 13px 32px color-mix(in srgb,var(--bg) 41%,transparent),inset 0 1px 0 color-mix(in srgb,var(--tl-luxe-accent) 20%,transparent)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary {
+  position:relative!important;
+  isolation:isolate!important;
+  display:grid!important;
+  grid-template-columns:40px minmax(0,1fr) auto 18px!important;
+  gap:11px!important;
+  align-items:center!important;
+  min-height:84px!important;
+  padding:13px 16px!important;
+  background:
+    radial-gradient(ellipse 65% 130% at 92% -15%,var(--tl-luxe-halo),transparent 76%),
+    linear-gradient(108deg,color-mix(in srgb,var(--tl-luxe-accent) 6%,var(--tl-luxe-surface)),var(--tl-luxe-surface) 64%)!important;
+  color:var(--tl-luxe-ink)!important;
+  transition:background .2s ease!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary::before {
+  content:""!important;
+  position:absolute!important;
+  top:0!important;
+  left:15px!important;
+  width:clamp(64px,22%,124px)!important;
+  height:2px!important;
+  border-radius:999px!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--tl-luxe-accent) 78%,transparent),transparent)!important;
+  opacity:.7!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion[open] summary {
+  background:
+    radial-gradient(ellipse 75% 130% at 94% 0%,color-mix(in srgb,var(--tl-luxe-accent) 14%,transparent),transparent 74%),
+    linear-gradient(110deg,color-mix(in srgb,var(--tl-luxe-accent) 11%,var(--tl-luxe-surface)),var(--tl-luxe-surface) 78%)!important;
+  border-bottom:1px solid color-mix(in srgb,var(--tl-luxe-accent) 38%,var(--tl-luxe-line))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupno {
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:38px!important;
+  height:38px!important;
+  border:1px solid color-mix(in srgb,var(--tl-luxe-accent) 46%,transparent)!important;
+  border-radius:14px!important;
+  background:radial-gradient(circle at 25% 18%,color-mix(in srgb,var(--tl-luxe-accent) 19%,transparent),transparent 90%)!important;
+  color:var(--tl-luxe-accent)!important;
+  font:600 .87rem/1 var(--font-display,var(--serif,Georgia,serif))!important;
+  letter-spacing:.04em!important;
+  opacity:1!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupname {
+  color:var(--tl-luxe-ink)!important;
+  font:650 clamp(1.02rem,3.65vw,1.25rem)/1.35 var(--font-display,var(--serif,Georgia,serif))!important;
+  letter-spacing:.002em!important;
+  text-wrap:pretty!important;
+  overflow-wrap:break-word!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupcount {
+  padding:5px 8px!important;
+  border:1px solid color-mix(in srgb,var(--tl-luxe-accent) 25%,var(--tl-luxe-line))!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--tl-luxe-accent) 6%,transparent)!important;
+  color:var(--tl-luxe-muted)!important;
+  font:650 .7rem/1.25 var(--sans,system-ui,sans-serif)!important;
+  white-space:nowrap!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-arrow {
+  color:var(--tl-luxe-accent)!important;
+  font-size:1.42rem!important;
+  opacity:.95!important;
+  transition:transform .22s ease!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion[open] .dar-tl-arrow {
+  transform:rotate(90deg)!important;
+}
+/* Open group is a separate reading chamber, not a stack of plain separators. */
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid {
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:9px!important;
+  padding:13px!important;
+  border-top:0!important;
+  background:
+    radial-gradient(ellipse 75% 45% at 0% 0%,color-mix(in srgb,var(--tl-luxe-accent) 8%,transparent),transparent 94%),
+    linear-gradient(180deg,color-mix(in srgb,var(--tl-luxe-accent) 4%,var(--tl-luxe-surface)),var(--tl-luxe-surface))!important;
+  animation:darTopicLuxeReveal .23s ease both;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card,
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:is(:hover,:focus-visible,:active) {
+  display:grid!important;
+  grid-template-columns:40px minmax(0,1fr) 18px!important;
+  align-items:center!important;
+  gap:11px!important;
+  min-height:76px!important;
+  padding:11px 12px!important;
+  border:1px solid color-mix(in srgb,var(--tl-luxe-accent) 25%,var(--tl-luxe-line))!important;
+  border-radius:13px!important;
+  background:linear-gradient(115deg,color-mix(in srgb,var(--tl-luxe-accent) 6%,var(--tl-luxe-surface)),var(--tl-luxe-surface))!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--tl-luxe-accent) 8%,transparent)!important;
+  transform:none!important;
+  color:var(--tl-luxe-ink)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:is(:hover,:active) {
+  border-color:color-mix(in srgb,var(--tl-luxe-accent) 55%,var(--tl-luxe-line))!important;
+  background:linear-gradient(115deg,color-mix(in srgb,var(--tl-luxe-accent) 12%,var(--tl-luxe-surface)),var(--tl-luxe-surface))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:focus-visible {
+  outline:2px solid var(--tl-luxe-accent)!important;
+  outline-offset:-2px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__icon {
+  display:flex!important;
+  width:39px!important;
+  height:39px!important;
+  max-width:39px!important;
+  border:1px solid color-mix(in srgb,var(--tl-luxe-accent) 33%,var(--tl-luxe-line))!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle at 30% 20%,color-mix(in srgb,var(--tl-luxe-accent) 13%,var(--tl-luxe-surface)),var(--tl-luxe-surface))!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--tl-luxe-accent) 10%,transparent)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__body h3 {
+  color:var(--tl-luxe-ink)!important;
+  font:650 clamp(.99rem,3.4vw,1.16rem)/1.28 var(--font-display,var(--serif,Georgia,serif))!important;
+  letter-spacing:0!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__count {
+  color:var(--tl-luxe-muted)!important;
+  font:600 .76rem/1.35 var(--sans,system-ui,sans-serif)!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  margin-top:4px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__chev {
+  color:var(--tl-luxe-accent)!important;
+  opacity:.86!important;
+}
+@keyframes darTopicLuxeReveal {
+  from { opacity:.45;transform:translateY(-5px); }
+  to { opacity:1;transform:translateY(0); }
+}
+@media(max-width:430px) {
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary {
+    grid-template-columns:34px minmax(0,1fr) auto 16px!important;
+    gap:8px!important;
+    min-height:83px!important;
+    padding:12px 11px!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupno {
+    width:32px!important;height:32px!important;border-radius:11px!important;font-size:.77rem!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupname {
+    font-size:clamp(.95rem,3.65vw,1.12rem)!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupcount {
+    font-size:.66rem!important;padding:4px 6px!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid {
+    padding:10px!important;gap:8px!important;
+  }
+}
+@media(min-width:760px) {
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary {
+    min-height:88px!important;padding:16px 23px!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion,
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary,
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-arrow {
+    transition:none!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid {
+    animation:none!important;
+  }
+}
+
+
+/* DAR_TEST_LAYL_MIDNIGHT_PALETTE_V1376 · 2026-10-16
+   DĀR AL TAWḤĪD adult TEST only. Dar al-Layl is a night-blue / charcoal
+   appearance with restrained warm gold, never sage, mint, green or olive.
+   Appearance-scoped; preserve every other theme, the existing hero artwork,
+   search/filter events, native <details>, route changes and floating nav geometry.
+   The original global --bg/--card values are untouched. */
+html[data-theme="dar-al-layl"] body:is(.is-topics-route,.is-topic-route) {
+  --tp-accent:#d7bd89;
+  --tp-ink:#f4eee5;
+  --tp-muted:#c1b9ad;
+  --tp-placeholder:#b8b3ac;
+  --tp-rule:rgba(211,183,127,.30);
+  --tp-panel:#121923;
+  --tp-hover:#202a36;
+  --topic-detail-line:rgba(211,183,127,.27);
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub {
+  --tl-accent:#d7bd89;
+  --tl-ink:#f4eee5;
+  --tl-muted:#c1b9ad;
+  --tl-rule:rgba(211,183,127,.30);
+  --tl-surface:#121923;
+  --tl-hover:#202a36;
+  --tl-luxe-surface:#141b25;
+  --tl-luxe-ink:#f4eee5;
+  --tl-luxe-muted:#c1b9ad;
+  --tl-luxe-accent:#d7bd89;
+  --tl-luxe-line:rgba(211,183,127,.27);
+  --tl-luxe-edge:rgba(211,183,127,.40);
+  --tl-luxe-halo:rgba(211,183,127,.095);
+  --tl-luxe-shadow:0 13px 29px rgba(0,0,0,.31),inset 0 1px 0 rgba(244,224,182,.075);
+  color:#f4eee5!important;
+}
+/* Search and filter: no green-tinted translucent glass or inherited olive. */
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub :is(
+  .search-input-shell input#homeSearchInput,
+  .search-panel input,
+  #advancedFilterBtn,
+  .search-line .search-input-shell,
+  .dar-tl-chip,
+  .filter-chip,
+  .filter-select
+) {
+  background-color:#111923!important;
+  border-color:rgba(211,183,127,.30)!important;
+  color:#f4eee5!important;
+  -webkit-text-fill-color:#f4eee5!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub :is(
+  .search-input-shell input#homeSearchInput,
+  .search-panel input
+)::placeholder {
+  color:#b8b3ac!important;
+  -webkit-text-fill-color:#b8b3ac!important;
+  opacity:1!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub :is(
+  #advancedFilterBtn,
+  .dar-tl-chip,
+  .filter-chip,
+  .filter-select
+):is(:active,:hover,:focus-visible,.active,.is-active,[aria-pressed="true"]) {
+  background:#202a36!important;
+  border-color:rgba(215,189,137,.64)!important;
+  color:#f6e7c8!important;
+  -webkit-text-fill-color:#f6e7c8!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub :is(
+  .search-input-shell input#homeSearchInput,
+  #advancedFilterBtn,
+  .dar-tl-chip,
+  .filter-chip
+):focus-visible {
+  outline:2px solid #d7bd89!important;
+  outline-offset:2px!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub :is(
+  .search-input-icon,.topics-hub__label b,.dar-tl-arrow
+) {
+  color:#d7bd89!important;
+}
+/* Topic groups: blue-black chamber with only a delicate warm highlight. */
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion {
+  background:#141b25!important;
+  border-color:rgba(211,183,127,.39)!important;
+  box-shadow:0 13px 29px rgba(0,0,0,.31),inset 0 1px 0 rgba(244,224,182,.07)!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary {
+  color:#f4eee5!important;
+  background:
+    radial-gradient(ellipse 75% 120% at 95% 0%,rgba(211,183,127,.075),transparent 78%),
+    linear-gradient(108deg,#19212d 0%,#121923 72%)!important;
+  border-color:rgba(211,183,127,.26)!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion[open] summary {
+  background:
+    radial-gradient(ellipse 75% 125% at 95% 0%,rgba(211,183,127,.105),transparent 74%),
+    linear-gradient(108deg,#1b2430 0%,#121923 78%)!important;
+  border-bottom-color:rgba(211,183,127,.37)!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid {
+  background:
+    radial-gradient(ellipse 85% 55% at 0 0,rgba(211,183,127,.035),transparent 95%),
+    linear-gradient(180deg,#151d28,#111822)!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupno,
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupcount {
+  background:rgba(211,183,127,.055)!important;
+  border-color:rgba(211,183,127,.37)!important;
+  color:#dac394!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card {
+  background:linear-gradient(110deg,#18212c,#121923)!important;
+  border-color:rgba(211,183,127,.34)!important;
+  box-shadow:inset 0 1px 0 rgba(244,224,182,.06)!important;
+  color:#f4eee5!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:is(:hover,:active,:focus-visible) {
+  background:linear-gradient(110deg,#212b38,#141b25)!important;
+  border-color:rgba(215,189,137,.65)!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__icon {
+  background:radial-gradient(circle at 30% 20%,rgba(211,183,127,.12),#121923 83%)!important;
+  border-color:rgba(211,183,127,.34)!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion :is(
+  .dar-tl-groupname,.topics-theme-card__body h3
+) {
+  color:#f4eee5!important;
+  -webkit-text-fill-color:#f4eee5!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion :is(
+  .topics-theme-card__count
+) {
+  color:#c1b9ad!important;
+  -webkit-text-fill-color:#c1b9ad!important;
+}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub .dar-tl-accordion :is(
+  .dar-tl-arrow,.topics-theme-card__chev
+) {
+  color:#d7bd89!important;
+}
+/* The topic subpage receives the same night palette, without changing its
+   hero photograph, its source links or the global article reading engine. */
+html[data-theme="dar-al-layl"] body.is-topic-route #appView .topic-collection-page :is(
+  .post-row,.topics-theme-card
+) {
+  border-color:rgba(211,183,127,.28)!important;
+  color:#f4eee5!important;
+}
+html[data-theme="dar-al-layl"] body.is-topic-route #appView .topic-collection-page :is(
+  .post-row,.topics-theme-card
+):is(:hover,:active,:focus-visible) {
+  background:linear-gradient(90deg,rgba(211,183,127,.055),transparent 80%)!important;
+}
+/* Floating navigation: only Dar al-Layl's PALETTE is replaced, never size,
+   layout, pointer handlers, backdrop positioning or the active-route logic. */
+html[data-theme="dar-al-layl"] body #bottomNav.bottom-nav {
+  --bottom-nav-fill:rgba(11,16,24,.97)!important;
+  background:rgba(11,16,24,.97)!important;
+  background-color:rgba(11,16,24,.97)!important;
+  background-image:none!important;
+  border-color:rgba(211,183,127,.24)!important;
+  box-shadow:0 10px 28px rgba(0,0,0,.43),inset 0 1px 0 rgba(243,225,186,.055)!important;
+}
+html[data-theme="dar-al-layl"] body #bottomNav :is(
+  .bottom-nav-core,.bottom-nav-pill
+) {
+  background:rgba(17,24,34,.96)!important;
+  background-image:none!important;
+  border-color:rgba(211,183,127,.19)!important;
+  box-shadow:inset 0 1px 0 rgba(243,225,186,.055)!important;
+}
+html[data-theme="dar-al-layl"] body #bottomNav .bottom-nav-btn {
+  color:#c6bda9!important;
+}
+html[data-theme="dar-al-layl"] body #bottomNav .bottom-nav-btn:is(
+  .active,.is-active,.is-pressed,[aria-current="page"],:active
+) {
+  color:#f1dcae!important;
+}
+html[data-theme="dar-al-layl"] body #bottomNav .bottom-nav-btn:is(
+  .active,.is-active,[aria-current="page"]
+)::before {
+  background:rgba(211,183,127,.08)!important;
+}
+
+
+/* Additional existing adult route headings; do not change component structure. */
+html[data-theme] body:is(.is-prayer-route,.is-dua-route,.is-scholars-route,.is-library-route,.is-book-route,.is-hadith-route,.is-qibla-route,.is-jummah-route,.is-ramadan-route,.is-notifications-route,.is-settings-route,.is-account-route,.is-about-route,.is-news-route,.is-news-detail-route,.is-zakat-route,.is-source-library-route,.is-quran-topic-route,.is-quran-learn-route,.is-more-route,.is-quiz-route) #appView > .view-head,
+html[data-theme] body.is-quran-overview #appView .qov-header,
+html[data-theme] body.is-calendar-route #appView .cal-tl-head,
+html[data-theme] body.is-scholar-route #appView .topic-collection-page > .view-head {
+  position:relative!important;isolation:isolate!important;overflow:hidden!important;
+  width:100%!important;max-width:none!important;min-width:0!important;
+  min-height:clamp(230px,44vw,328px)!important;
+  margin:0 0 18px!important;
+  padding:clamp(32px,6vw,56px) max(18px,2.4vw) 25px!important;
+  box-sizing:border-box!important;
+  border:0!important;border-radius:0!important;
+  background-image:
+    linear-gradient(90deg,color-mix(in srgb,var(--bg) 95%,transparent),color-mix(in srgb,var(--bg) 71%,transparent) 45%,color-mix(in srgb,var(--bg) 8%,transparent)),
+    linear-gradient(0deg,color-mix(in srgb,var(--bg) 17%,transparent),transparent 61%),
+    var(--visitor-hero-art)!important;
+  background-position:center,center,72% 48%!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+  box-shadow:none!important;
+}
+html[data-theme] body:is(.is-prayer-route,.is-dua-route,.is-scholars-route,.is-library-route,.is-book-route,.is-hadith-route,.is-qibla-route,.is-jummah-route,.is-ramadan-route,.is-notifications-route,.is-settings-route,.is-account-route,.is-about-route,.is-news-route,.is-news-detail-route,.is-zakat-route,.is-source-library-route,.is-quran-topic-route,.is-quran-learn-route,.is-more-route,.is-quiz-route) #appView > .view-head > *,
+html[data-theme] body.is-quran-overview #appView .qov-header > *{
+ position:relative!important;z-index:1!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion[hidden]{
+ display:none!important;
+}
+@media(min-width:700px){
+ html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route){
+ --dar-test-edge-gutter:max(16px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px),2vw);
+ }
+}
