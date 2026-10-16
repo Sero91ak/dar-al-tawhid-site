@@ -539,3 +539,58 @@ html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail .d
 ) {
   padding:clamp(12px,3.8vw,18px)!important;
 }
+
+
+/* SETTINGS HERO + LEGACY SETUP CLEANUP · 17.10.2026
+   Photo is the actual hero background, never a floating / framed illustration.
+   All settings and notification engines remain reachable via new subpages. */
+html body.is-settings-route #dar-setup-hub,
+html body.is-settings-route .dar-setup-hub,
+html body.is-settings-route #dar-ios-setup-assistant{
+  display:none!important;
+  visibility:hidden!important;
+  height:0!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head,
+html[data-theme] body.is-settings-route #appView.view > .view-head.settings-page-head{
+  position:relative!important;
+  box-sizing:border-box!important;
+  isolation:isolate!important;
+  min-height:clamp(195px,34vw,250px)!important;
+  background-color:var(--bg,#080d0c)!important;
+  background-image:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg,#080d0c) 95%,transparent) 0%,
+      color-mix(in srgb,var(--bg,#080d0c) 78%,transparent) 55%,
+      color-mix(in srgb,var(--bg,#080d0c) 44%,transparent) 100%),
+    url("/assets/feed-backgrounds/auto/mosque/bg-pro-mosque-60.webp")!important;
+  background-position:center,center 46%!important;
+  background-size:cover,cover!important;
+  background-repeat:no-repeat,no-repeat!important;
+  color:var(--text,#f5f0e6)!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head h2,
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head .view-desc {
+  position:relative!important;
+  z-index:1!important;
+  color:var(--text,#f5f0e6)!important;
+  text-shadow:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-row-meta {
+  max-width:min(34vw,142px)!important;
+  white-space:normal!important;
+  overflow-wrap:normal!important;
+  line-height:1.25!important;
+  text-align:right!important;
+  text-overflow:clip!important;
+}
+@media(max-width:390px){
+  html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head{
+    min-height:195px!important;
+  }
+}
