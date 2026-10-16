@@ -44,8 +44,6 @@ def validate_workflow(path,source):
     must(source in raw,"missing original recovery source in "+path)
     must("permissions:\n  contents: write" in raw,
          "recovery cannot safely persist imported originals: "+path)
-    must("pull_request:" in raw and "pr_number" not in raw,
-         "unexpected recovery event/permissions: "+path) if False else None
     must("github.event.pull_request.number == 1143" in raw,
          "must never run for other PRs: "+path)
     must("review/kids-quiz-v4-batch-001-020-20261014" in raw,
