@@ -127,8 +127,11 @@ def main():
         "humanPronunciationApproved":False,
         "publicReleaseAllowed":False
     }
-    ensure(report["uniqueTrulyNewTextFragments"]==1392,
-           "Old estimated 1,392 count changed: investigate instead of buying audio")
+    current_expected={x["text"] for x in plan["pendingAudioFragments"]}
+    current_expected-=existing
+    current_expected-=historic
+    ensure(all_text==current_expected,
+           "Remaining new original list no longer matches the exact selected V4 plan")
     ensure(not report["newSpeechNeededForAge4to6"],
            "Unexpected new speech required in 4-6 group; audit old paid first")
     ensure(sum(counts[age]["question"]["uniqueNewSegments"]+
