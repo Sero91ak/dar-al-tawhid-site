@@ -1,0 +1,208 @@
+/* KIDS_PARENTS_DASHBOARD_V1432
+ * Parent presentation only. Scoped to active child gender, never touch the
+ * Home/Duʿāʾ/Academy layouts or bottom dock/safe areas.
+ */
+#view-parents{
+ --kp-card:#193944;--kp-raised:#224655;--kp-ink:#fff5e5;
+ --kp-muted:#d3e0dc;--kp-stroke:rgba(224,193,132,.34);
+ --kp-accent:#eed09a;--kp-action-ink:#243744;
+}
+.app[data-gender="girl"] #view-parents{
+ --kp-card:#3b2a44;--kp-raised:#4c3550;--kp-ink:#fff0f3;
+ --kp-muted:#ecd1df;--kp-stroke:rgba(239,181,210,.43);
+ --kp-accent:#efbdd2;--kp-action-ink:#422d49;
+}
+#view-parents .kids-parent-overview.parent-card,
+#view-parents .kids-parent-fold > .parent-card,
+#view-parents .kids-parent-progress-card,
+#view-parents .kids-parent-time-card,
+#view-parents .kids-parent-age-card{
+ box-sizing:border-box;width:100%;min-width:0;max-width:100%;
+ border:1px solid var(--kp-stroke)!important;
+ border-radius:23px!important;
+ color:var(--kp-ink)!important;
+ background-color:var(--kp-card)!important;
+ background-image:linear-gradient(145deg,rgba(255,255,255,.035),transparent 82%)!important;
+ box-shadow:0 10px 28px rgba(9,14,26,.10)!important;
+ padding:16px!important;
+ margin:0 0 12px!important;
+}
+#view-parents .kids-parent-overview.parent-card{
+ background-image:radial-gradient(circle at 100% 0%,rgba(235,195,137,.10),transparent 62%),linear-gradient(135deg,var(--kp-raised),var(--kp-card))!important;
+ margin-top:12px!important;
+ padding:17px!important;
+}
+.app[data-gender="girl"] #view-parents .kids-parent-overview.parent-card{
+ background-image:radial-gradient(circle at 100% 0%,rgba(249,193,222,.14),transparent 65%),linear-gradient(140deg,#513953,#352740)!important;
+}
+#view-parents .kids-parent-overview-top,
+#view-parents .kids-parent-identity{display:flex;align-items:center;gap:12px;min-width:0}
+#view-parents .kids-parent-overview-top{justify-content:space-between;margin-bottom:13px}
+#view-parents .kids-parent-eyebrow{
+ font-size:10px;font-weight:900;letter-spacing:.11em;color:var(--kp-accent)
+}
+#view-parents .kids-parent-account-state{
+ display:inline-flex;align-items:center;justify-content:center;padding:5px 8px;
+ border:1px solid var(--kp-stroke);border-radius:99px;font-size:10px;
+ font-weight:800;color:var(--kp-muted);background:rgba(255,255,255,.04)
+}
+#view-parents .kids-parent-identity > img{
+ flex:0 0 68px;width:68px;height:68px;object-fit:contain;
+ border-radius:22px;background:rgba(255,255,255,.06);
+ border:1px solid var(--kp-stroke);padding:5px;box-sizing:border-box
+}
+#view-parents .kids-parent-identity-copy{display:flex;flex-direction:column;gap:5px;min-width:0;flex:1}
+#view-parents #kidsParentName{
+ font-size:clamp(22px,5.5vw,27px);line-height:1.14;font-weight:900;
+ color:var(--kp-ink);overflow-wrap:anywhere
+}
+#view-parents #kidsParentIdentityMeta{font-size:13px;line-height:1.3;color:var(--kp-accent);font-weight:800}
+#view-parents #kidsParentAgeNote{font-size:11px;line-height:1.35;color:var(--kp-muted)}
+#view-parents button.kids-parent-manage{
+ display:flex;align-items:center;justify-content:space-between;gap:12px;
+ width:100%;min-height:46px;margin-top:16px;padding:10px 14px;
+ background-color:rgba(255,255,255,.06)!important;background-image:none!important;
+ color:var(--kp-ink)!important;-webkit-text-fill-color:var(--kp-ink)!important;
+ border:1px solid var(--kp-stroke)!important;border-radius:14px!important;
+ box-shadow:none!important;text-shadow:none!important;font-size:14px;font-weight:850;text-align:left
+}
+#view-parents .kids-parent-manage > span{font-size:23px;color:var(--kp-accent);line-height:1}
+#view-parents :is(.kids-parent-progress-card,.kids-parent-time-card,.kids-parent-age-card) .label-row strong{
+ color:var(--kp-ink)!important;font-size:17px;font-weight:850
+}
+#view-parents :is(.kids-parent-progress-card,.kids-parent-time-card,.kids-parent-age-card) .label-row{
+ gap:12px;align-items:center;margin-bottom:10px
+}
+#view-parents .kids-parent-progress-card .parent-progress-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+#view-parents .kids-parent-progress-card .parent-progress-stat{
+ min-width:0;min-height:86px;border:1px solid var(--kp-stroke)!important;
+ background-color:var(--kp-raised)!important;
+ background-image:linear-gradient(145deg,rgba(255,255,255,.03),transparent)!important;
+ padding:12px;border-radius:17px!important
+}
+#view-parents .kids-parent-progress-card .parent-progress-stat strong{
+ color:var(--kp-accent)!important;font-size:24px!important
+}
+#view-parents .kids-parent-progress-card .parent-progress-stat span{
+ color:var(--kp-muted)!important;font-size:11px!important
+}
+#view-parents .kids-parent-progress-card .parent-note,
+#view-parents .kids-parent-time-card .parent-note{
+ color:var(--kp-muted)!important;font-size:11px;line-height:1.45;margin-top:8px!important
+}
+#view-parents .kids-parent-time-card #minuteValue{color:var(--kp-accent)!important;white-space:nowrap}
+#view-parents .kids-parent-time-card #minuteSlider{accent-color:var(--kp-accent);min-height:30px;margin:0}
+#view-parents .kids-parent-age-card #kidsAgeMode{color:var(--kp-accent)!important}
+#view-parents #kidsParentCurrentAge{font-size:13px;font-weight:750;line-height:1.5;color:var(--kp-muted);margin:0 0 8px}
+#view-parents .kids-parent-age-card .age-tabs{
+ background-color:rgba(16,37,48,.38)!important;background-image:none!important;
+ border:1px solid var(--kp-stroke)!important
+}
+.app[data-gender="girl"] #view-parents .kids-parent-age-card .age-tabs{
+ background-color:rgba(76,49,78,.83)!important
+}
+#view-parents .kids-parent-age-card .age-tabs[hidden]{display:none!important}
+#view-parents .kids-parent-age-card .age-tabs button{color:var(--kp-ink)!important;-webkit-text-fill-color:var(--kp-ink)!important}
+#view-parents .kids-parent-age-card .age-tabs button.active{
+ background-color:var(--kp-raised)!important;background-image:none!important;
+ color:var(--kp-accent)!important;-webkit-text-fill-color:var(--kp-accent)!important
+}
+#view-parents .kids-parent-fold,
+#view-parents .kids-parent-birth-fold{min-width:0}
+#view-parents .kids-parent-fold{margin:0 0 12px}
+#view-parents .kids-parent-fold-summary{
+ display:flex;justify-content:space-between;align-items:center;gap:12px;
+ padding:16px;border:1px solid var(--kp-stroke);border-radius:21px;
+ background-color:var(--kp-card);color:var(--kp-ink);
+ list-style:none;cursor:pointer;min-height:72px;
+}
+#view-parents .kids-parent-fold-summary::-webkit-details-marker,
+#view-parents .kids-parent-birth-fold > summary::-webkit-details-marker{display:none}
+#view-parents .kids-parent-fold-copy{display:flex;flex-direction:column;gap:5px;min-width:0}
+#view-parents .kids-parent-fold-copy strong{font-size:16px;color:var(--kp-ink);font-weight:900}
+#view-parents .kids-parent-fold-copy small{font-size:12px;color:var(--kp-muted);line-height:1.3}
+#view-parents .kids-parent-fold-arrow{font-size:24px;line-height:1;color:var(--kp-accent);transition:transform 150ms ease}
+#view-parents .kids-parent-fold[open] .kids-parent-fold-arrow{transform:rotate(180deg)}
+#view-parents .kids-parent-fold[open] > .kids-parent-fold-summary{border-radius:21px 21px 12px 12px}
+#view-parents .kids-parent-fold > .parent-card{margin:7px 0 0!important}
+#view-parents .kids-parent-fold > #profileCard .kids-parent-old-label{display:none!important}
+#view-parents .kids-parent-fold > #profileCard .profile-row{
+ min-width:0;gap:8px;grid-template-columns:minmax(0,1fr) auto
+}
+#view-parents .kids-parent-fold > #profileCard .profile-row button{min-width:0;overflow-wrap:anywhere}
+#view-parents .kids-parent-birth-fold{margin-top:10px;border-top:1px solid var(--kp-stroke);padding-top:10px}
+#view-parents .kids-parent-birth-fold[hidden]{display:none!important}
+#view-parents .kids-parent-birth-fold > summary{
+ display:flex;align-items:center;justify-content:space-between;min-height:46px;
+ padding:10px 13px;border-radius:13px;list-style:none;cursor:pointer;
+ border:1px solid var(--kp-stroke);background-color:var(--kp-raised);
+ color:var(--kp-ink);font-size:13px;font-weight:800
+}
+#view-parents .kids-parent-birth-fold > summary::after{content:"⌄";font-size:20px;color:var(--kp-accent)}
+#view-parents .kids-parent-birth-fold[open] > summary::after{transform:rotate(180deg)}
+#view-parents .kids-parent-birth-fold > #parentBirthPanel{border:0;margin:0;padding:11px 0 0}
+#view-parents .kids-parent-birth-fold .kids-birth-fields select{
+ background-color:var(--kp-raised)!important;background-image:none!important;
+ color:var(--kp-ink)!important;-webkit-text-fill-color:var(--kp-ink)!important;
+ border:1px solid var(--kp-stroke)!important
+}
+#view-parents .kids-parent-birth-fold #parentBirthSave{
+ display:flex!important;align-items:center;justify-content:center;
+ width:100%!important;min-height:52px!important;margin-top:8px!important;
+ border-radius:15px!important;border:1px solid #deb779!important;
+ background-color:#eed09a!important;background-image:linear-gradient(125deg,#f5dfb5,#e8c17e)!important;
+ color:#243744!important;-webkit-text-fill-color:#243744!important;
+ opacity:1!important;text-shadow:none!important;
+ font-size:16px!important;font-weight:900!important;box-shadow:none!important
+}
+.app[data-gender="girl"] #view-parents .kids-parent-birth-fold #parentBirthSave{
+ background-color:#efbdd2!important;background-image:linear-gradient(120deg,#f5cfdd,#e9a9c6)!important;
+ border-color:#f5d4e1!important;color:#432d48!important;
+ -webkit-text-fill-color:#432d48!important
+}
+#view-parents .kids-parent-birth-fold #parentBirthSave:disabled{
+ opacity:.55!important;cursor:not-allowed!important;filter:saturate(.65)
+}
+#view-parents .kids-parent-birth-fold #parentBirthSave:focus-visible,
+#view-parents .kids-parent-fold-summary:focus-visible,
+#view-parents .kids-parent-birth-fold > summary:focus-visible,
+#view-parents button.kids-parent-manage:focus-visible{
+ outline:3px solid var(--kp-accent)!important;outline-offset:3px!important
+}
+#view-parents .kids-parent-birth-fold #parentBirthNotice{
+ color:var(--kp-ink)!important;font-size:12px!important;line-height:1.45
+}
+#view-parents .kids-parent-birth-fold .kids-birth-note{color:var(--kp-muted)!important}
+#view-parents .kids-parent-fold #kidsOfflineLibrary .kids-offline-lead{color:var(--kp-muted)!important}
+#view-parents .kids-parent-fold #kidsOfflineLibrary.kids-offline-library{
+ background-color:var(--kp-card)!important;background-image:none!important;
+ color:var(--kp-ink)!important;border-color:var(--kp-stroke)!important
+}
+#view-parents .kids-parent-fold #kidsOfflineLibrary .kids-offline-note{color:var(--kp-muted)!important}
+#view-parents .kids-parent-fold #kidsOfflineLibrary #kidsOfflineState{color:var(--kp-ink)!important}
+.app[data-gender="girl"] #view-parents .kids-parent-fold #kidsOfflineLibrary :is(#kidsOfflineDownload,#kidsOfflinePause){
+ background:#eebdd3!important;color:#442e48!important;-webkit-text-fill-color:#442e48!important;
+ border-color:#efcde0!important;box-shadow:none!important
+}
+.app[data-gender="girl"] #view-parents .kids-parent-fold > #profileCard #profileBring{
+ background:#5c405d!important;color:#fff1f5!important;-webkit-text-fill-color:#fff1f5!important;
+ border-color:#eab9d4!important
+}
+#view-parents .kids-parent-fold .kids-support-privacy,
+#view-parents .kids-parent-fold .parent-note{color:var(--kp-muted)!important}
+@media(min-width:680px){
+ #view-parents .kids-parent-overview.parent-card,
+ #view-parents .kids-parent-progress-card,
+ #view-parents .kids-parent-time-card,
+ #view-parents .kids-parent-age-card,
+ #view-parents .kids-parent-fold{max-width:740px;margin-left:auto!important;margin-right:auto!important}
+}
+@media(max-width:380px){
+ #view-parents .kids-parent-identity > img{flex-basis:58px;width:58px;height:58px}
+ #view-parents .kids-parent-overview.parent-card{padding:14px!important}
+ #view-parents #kidsParentName{font-size:21px}
+ #view-parents .kids-parent-progress-card .parent-progress-stat{padding:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ #view-parents .kids-parent-fold-arrow{transition:none}
+}
