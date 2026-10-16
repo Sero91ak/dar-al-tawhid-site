@@ -27613,11 +27613,21 @@ function bindNotificationCenter(){
   };
   document.querySelectorAll("[data-notification-prayer]").forEach(btn=>{btn.onclick=()=>{
     const key=btn.getAttribute("data-notification-prayer")||"";
+    if(!NOTIFICATION_PRAYER_KEYS.includes(key))return;
     const prop=notificationPrayerSettingKey(key);
-    const s=getPrayerSettings();
-    persistNotificationSettings({[prop]:!notificationPrayerEnabled(s,key)});
-    syncPrayer();
-    rerender();
+    const selected=!notificationPrayerEnabled(getPrayerSettings(),key);
+    persistNotificationSettings({[prop]:selected});
+    /* Nur die betroffene Gebetskarte aktualisieren: kein Seiten-Neuaufbau,
+       kein Scrollsprung. Die vorhandene Erinnerungs-Synchronisierung bleibt. */
+    btn.classList.toggle("is-on",selected);
+    btn.setAttribute("aria-pressed",String(selected));
+    btn.setAttribute("aria-label",(btn.getAttribute("aria-label")||key).replace(/ (?:nicht )?gewählt$/,"")+(selected?" gewählt":" nicht gewählt"));
+    const count=notificationEnabledPrayerCount(getPrayerSettings());
+    const summary=document.querySelector(".dsh-detail[data-settings-page='notifications'] .notification-hero__count b");
+    if(summary)summary.textContent=count+"/5";
+    const sub=document.querySelector(".dsh-detail[data-settings-page='notifications'] #notificationPrayerTitle + p");
+    if(sub)sub.textContent=count+" von 5 ausgewählt · "+prayerPushAdvanceMinutes(getPrayerSettings())+" Minuten vorher";
+    try{syncPrayer()}catch(e){console.warn("Gebetsauswahl: Erinnerungssynchronisierung wird später wiederholt",e)}
   }});
   const advance=$("notificationPrayerAdvance");
   if(advance)advance.onchange=()=>{persistNotificationSettings({advanceMinutes:normalizeAdvanceMinutes(advance.value)});syncPrayer();rerender()};
