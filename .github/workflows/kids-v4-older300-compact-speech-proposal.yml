@@ -1,0 +1,79 @@
+name: KIDS V4 Older300 Compact Narration Draft (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/propose_quiz_v4_older300_compact_spoken_review.py'
+      - 'kids/data/quiz-kids-curated-450-review.json'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+      - '.github/workflows/kids-v4-older300-compact-speech-proposal.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-older300-original-content-preserving-short-speech
+  cancel-in-progress: false
+
+jobs:
+  review-canonical-preserving-speech-proposal:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout private V4 quiz review
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Derive concise alternative preserving 300 complete canonical questions
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/propose_quiz_v4_older300_compact_spoken_review.py
+          python3 kids/tools/propose_quiz_v4_older300_compact_spoken_review.py
+          python3 - <<'PY'
+          import json
+          p=json.load(open('kids/review-only/quiz-v4-older300-compact-spoken-proposals.json'))
+          c={q['id']:q for q in json.load(open('kids/data/quiz-kids-curated-450-review.json'))['items']}
+          assert p['modelId']=='eleven_v4' and p['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert len(p['proposals'])==300
+          assert not p['audioProductionAuthorized'] and not p['publicReleaseAllowed']
+          assert not p['canonicalQuestionTextsModified'] and not p['voicePlanModified']
+          assert p['creditsSpent']==0 and p['newV4GenerationsRequested']==0
+          for q in p['proposals']:
+              original=c[q['questionId']]
+              assert original['question']==q['originalCanonicalQuestion']
+              assert original['explanation']==q['originalCanonicalExplanation']
+              assert original['question'] in q['proposedSpokenQuestion']
+              assert original['explanation']==q['proposedSpokenExplanation']
+              assert [a['label'] for a in original['answers']]==q['originalCanonicalAnswerLabels']
+              for i,a in enumerate(original['answers'],1):
+                  assert 'Antwort '+str(i)+': '+a['label'] in q['proposedSpokenQuestion']
+              assert q['audioRevisionAuthorized'] is False
+          print('PASS: 300 original educational questions/answers/explanations unchanged, 0 paid V4.')
+          PY
+      - name: Save non-destructive text comparison, not paid production
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-speech-copy-audit
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/quiz-v4-older300-compact-spoken-proposals.json
+          git add kids/review-only/QUIZ-V4-SPRECHTEXT-OPTIMIERUNG-ENTWURF.md
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "review(kids V4): 300 shorter unapproved script drafts, original questions preserved"
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then exit 0; fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          exit 1
+      - name: Save all draft spoken comparisons for manual editorial evaluation
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-older300-compact-spoken-review-no-new-credits
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/review-only/quiz-v4-older300-compact-spoken-proposals.json
+            kids/review-only/QUIZ-V4-SPRECHTEXT-OPTIMIERUNG-ENTWURF.md
