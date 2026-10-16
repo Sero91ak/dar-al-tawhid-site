@@ -7838,6 +7838,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-24T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-settings-polish-v2-20261016",
+      "at": "2026-10-16T20:04:00+02:00",
+      "approvedBy": "user-explicit-implement-four-visual-corrections-after-settings-screenshots-20261016",
+      "reason": "Strictly adult DAR Test Settings navigation visual polish. Compact hero and welcome, shorten 3/5 status, unified list rows, safe bottom padding under floating tab bar, maintain the existing functional settings subpages. No visitor app, kids, native Swift, OneSignal, worker or route-engine modifications.",
+      "paths": [
+        "test/index.html",
+        "test/assets/dar-settings-navigation-v1.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-24T23:59:00.000Z"
     }
   ],
   "enabled": true
