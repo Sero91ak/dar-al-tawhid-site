@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-16T16:22:00Z",
+  "generated": "2026-10-16T18:27:27.994Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1389,17 +1389,43 @@
       "postPath": "content/posts/nafs-akhlaq-birr-ithm-nawwas-20261016-slides.md",
       "sourcePage": "https://dar-al-tawhid.de/q/44/",
       "createdAt": "2026-10-16T16:22:00Z",
-      "updatedAt": "2026-10-16T16:22:00Z",
-      "status": "awaiting-live-check",
-      "pushApproved": false,
-      "approvalOrigin": "User explicitly requested global adult DAR Admin live publication and push, 2026-10-16. Operator execution gated pending independent production verification and adult audience safety.",
-      "lastError": "Cannot independently fetch public /q/44/ or feed from current web/browser environment; current DAR_PUSH segment filters=[] (adult opt-in not independently verified). Do not use broad default fallback.",
+      "updatedAt": "2026-10-16T18:27:27.994Z",
+      "status": "sent",
+      "pushApproved": true,
+      "approvalOrigin": "Explicit user requests on 2026-10-16 to publish and push Q44; OneSignal independently verified.",
+      "lastError": "",
       "liveCheck": {
-        "ok": false,
-        "checkedAt": "2026-10-16T16:22:00Z",
-        "diagnosis": "GitHub post and source registered; direct public HTTP live check inconclusive due DNS/site access unavailable in current tools."
+        "ok": true,
+        "checkedAt": "2026-10-16T16:39:12.176Z",
+        "diagnosis": "Cloudflare visitor deploy job 38933229124 succeeded; Q44 live HTTP verification succeeded (11563 Bytes); app index parity passed.",
+        "source": "GitHub Actions job 117082831548"
       },
-      "pushResult": null
+      "pushResult": {
+        "provider": "OneSignal",
+        "notificationId": "55de0a2c-e94b-4984-91f7-5644460400d9",
+        "target": "opt-in-tags:dar_push=true AND post_notifications=true",
+        "targetUrl": "https://dar-al-tawhid.de/?post=nafs-akhlaq-birr-ithm-nawwas-20261016-slides-476#post/nafs-akhlaq-birr-ithm-nawwas-20261016-slides-476",
+        "sourcePage": "https://dar-al-tawhid.de/q/44/",
+        "successful": 2,
+        "failed": 0,
+        "errored": 0,
+        "confirmedReceived": 0,
+        "channelResults": [
+          {
+            "channel": "chrome_web_push",
+            "successful": 1,
+            "failed": 0
+          },
+          {
+            "channel": "safari_web_push",
+            "successful": 1,
+            "failed": 0
+          }
+        ],
+        "note": "Existing provider send verified; do not resend. Native iOS delivery not evidenced."
+      },
+      "pushApprovedAt": "2026-10-16T16:44:22.000Z",
+      "sentAt": "2026-10-16T16:44:22.000Z"
     }
   }
 }
