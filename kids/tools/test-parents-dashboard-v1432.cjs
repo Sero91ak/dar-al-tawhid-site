@@ -15,10 +15,10 @@ const birth=read("kids/kids-birth-month-v1431.js");
 assert.doesNotThrow(()=>new Function(js),"parent JS syntax");
 assert.doesNotThrow(()=>new Function(sw),"SW syntax");
 assert.equal((css.match(/\{/g)||[]).length,(css.match(/\}/g)||[]).length,"parent CSS valid brace structure");
-for(const asset of ["parents-dashboard-v1432.js?v=1433","parents-dashboard-v1432.css?v=1433"])
+for(const asset of ["parents-dashboard-v1432.js?v=1434","parents-dashboard-v1432.css?v=1433"])
   assert(html.includes(asset)&&sw.includes(asset),"parent dashboard assets published and precached: "+asset);
-assert(html.includes('navigator.serviceWorker.register("/kids/sw.js?v=1433"'),"main app must register newest offline cache");
-assert(sw.includes('dar-al-tawhid-kids-v1433'),"SW cache version");
+assert(html.includes('navigator.serviceWorker.register("/kids/sw.js?v=1434"'),"main app must register newest offline cache");
+assert(sw.includes('dar-al-tawhid-kids-v1434'),"SW cache version");
 assert(html.lastIndexOf("parents-dashboard-v1432.css")>html.lastIndexOf("kids-girl-palette-authority-v1427.css"),"dashboard style must be last");
 for(const id of ["parentBirthSave","parentBirthPanel","minuteSlider","parentStoriesDone",
  "parentDuasDone","parentQuizCorrect","parentTodayDone","profileList","profileAdd","profileBring","profileAsk"]){
