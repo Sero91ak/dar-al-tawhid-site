@@ -181,6 +181,12 @@ def main():
       "newPaidCallsMadeInAudit":0}
     print("KIDS_150_4_6_V4_AUDIT "+json.dumps(result,ensure_ascii=False),flush=True)
     if not args.produce:return
+    # The current 150 young questions have ZERO new V4 originals to buy.
+    # Exit before reading credentials, querying the balance or attempting
+    # any paid API request. Nine already-paid Flow MP3s must be restored.
+    if not ordered:
+        print("KIDS_150_4_6_ALREADY_PAID_ONLY: restore old V4 originals; NO new TTS or subscription request",flush=True)
+        return
     key=os.environ.get("ELEVENLABS_API_KEY","").strip()
     if not key:raise RuntimeError("API key absent, no synthesis")
     if not 1<=args.limit<=40:raise RuntimeError("Maximum paid chunks per single GitHub wave: 40")
@@ -189,9 +195,6 @@ def main():
     balance=subscription(key)
     if balance<min(MAX_CREDITS_WAVE,estimate)*1.35:
         raise RuntimeError("No available ElevenLabs budget for safe new batch")
-    if not ordered:
-        print("KIDS_150_4_6_ALL_NEW_ORIGINAL_SEGMENTS_SAVED: no further purchases",flush=True)
-        return
     count=0;spent=0
     OUT.mkdir(parents=True,exist_ok=True)
     for phrase in ordered:
