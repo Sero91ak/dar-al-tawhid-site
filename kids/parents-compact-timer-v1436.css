@@ -82,52 +82,104 @@
   -webkit-text-fill-color:var(--kp-action-ink)!important;
 }
 #view-parents .kids-parent-time-status{color:var(--kp-muted);font-size:12px;line-height:1.35;margin:8px 0 0}
-/* Floating timer: only present when actively configured, never alters dock,
- * safe-area logic, hero assets or other section layouts. */
+/* KIDS_TIMER_DOCKED_V1437
+ * The single timer is positioned by the REAL dock bounding rectangle.
+ * No modification to icons, background photographs, profile colors or fonts.
+ * Fixed bar does not participate in scrolling document layout. */
 #kidsLearningTimer1436{
-  position:fixed;top:calc(env(safe-area-inset-top,0px) + 63px);
-  left:max(12px,env(safe-area-inset-left,0px));right:auto;
-  z-index:80;display:flex;align-items:center;gap:8px;
-  max-width:calc(100vw - 24px);padding:5px 7px 5px 12px;
-  border:1px solid var(--kp-stroke,rgba(237,200,150,.48));
-  border-radius:999px;box-shadow:0 6px 20px rgba(0,0,0,.20);
-  background:var(--kp-card,#193944);color:var(--kp-ink,#fff5e5);
-  font:800 12px/1.2 inherit;font-family:inherit;
-  font-variant-numeric:tabular-nums;-webkit-user-select:none;user-select:none;
+  box-sizing:border-box!important;
+  position:fixed!important;
+  top:auto!important;
+  bottom:calc(106px + env(safe-area-inset-bottom,0px));
+  left:max(12px,env(safe-area-inset-left,0px));
+  right:auto!important;
+  z-index:40!important;
+  display:flex;align-items:center;justify-content:center;gap:clamp(6px,2vw,13px);
+  width:min(calc(100% - 22px),560px);
+  max-width:calc(100vw - 16px);
+  min-height:45px;padding:6px 12px;
+  background:var(--kp-card,#193944)!important;
+  color:var(--kp-ink,#fff5e5)!important;
+  border:1px solid var(--kp-stroke,rgba(237,200,150,.48))!important;
+  border-radius:16px!important;
+  box-shadow:0 9px 22px rgba(0,0,0,.22)!important;
+  font-family:"Fredoka",system-ui,sans-serif!important;
+  font-variant-numeric:tabular-nums;
+  -webkit-user-select:none;user-select:none;
+  -webkit-touch-callout:none;
+  isolation:isolate;
 }
 #kidsLearningTimer1436[hidden]{display:none!important}
+#kidsLearningTimer1436 .kids-timer-label{
+  color:var(--kp-muted,#d3e0dc);
+  font-weight:800;font-size:clamp(11px,3vw,13px);
+  white-space:nowrap;
+}
 #kidsLearningTimer1436 .kids-timer-digits{
-  font-weight:900;letter-spacing:.02em;font-size:14px;min-width:44px;
-  color:var(--kp-accent,#eed09a);-webkit-text-fill-color:var(--kp-accent,#eed09a);
+  color:var(--kp-accent,#eed09a)!important;
+  -webkit-text-fill-color:var(--kp-accent,#eed09a)!important;
+  font-size:clamp(17px,4vw,21px);line-height:1.1;
+  font-weight:900;letter-spacing:.025em;white-space:nowrap;
 }
 #kidsLearningTimer1436 button{
-  display:grid;place-items:center;min-width:34px;min-height:34px;
-  padding:5px;border-radius:50%;border:1px solid var(--kp-stroke,rgba(237,200,150,.48));
-  background:var(--kp-raised,#224655);
-  color:var(--kp-ink,#fff5e5);font-size:15px;font-weight:900;
-  -webkit-text-fill-color:var(--kp-ink,#fff5e5);
-  -webkit-user-select:none;user-select:none;touch-action:manipulation;
+  flex:0 0 auto;display:grid;place-items:center;
+  min-width:33px;min-height:33px;
+  padding:5px;border-radius:11px;
+  border:1px solid var(--kp-stroke,rgba(237,200,150,.48))!important;
+  background:var(--kp-raised,#224655)!important;
+  color:var(--kp-ink,#fff5e5)!important;
+  -webkit-text-fill-color:var(--kp-ink,#fff5e5)!important;
+  font-size:16px;font-weight:900;
+  -webkit-user-select:none;user-select:none;
+  touch-action:manipulation;
 }
-#kidsLearningTimer1436 button:focus-visible{outline:3px solid var(--kp-accent,#eed09a);outline-offset:2px}
+#kidsLearningTimer1436 button:focus-visible{
+ outline:3px solid var(--kp-accent,#eed09a);outline-offset:2px
+}
+#kidsLearningTimer1436 .kids-timer-finished{
+  display:none;text-align:center;font-size:clamp(11px,2.7vw,13px);
+  font-weight:850;line-height:1.25;color:var(--kp-ink,#fff5e5);
+  -webkit-text-fill-color:var(--kp-ink,#fff5e5);
+}
+#kidsLearningTimer1436.is-complete{min-height:54px;gap:9px}
+#kidsLearningTimer1436.is-complete .kids-timer-label,
+#kidsLearningTimer1436.is-complete .kids-timer-digits{display:none}
+#kidsLearningTimer1436.is-complete .kids-timer-finished{display:block;flex:1}
 body:has(.app[data-gender="girl"]) #kidsLearningTimer1436{
   --kp-card:#3b2a44;--kp-raised:#4c3550;--kp-ink:#fff0f3;
-  --kp-stroke:rgba(239,181,210,.55);--kp-accent:#efbdd2;
+  --kp-muted:#ecd1df;--kp-stroke:rgba(239,181,210,.55);--kp-accent:#efbdd2;
 }
 body:has(.app[data-gender="boy"]) #kidsLearningTimer1436{
   --kp-card:#193944;--kp-raised:#224655;--kp-ink:#fff5e5;
-  --kp-stroke:rgba(224,193,132,.45);--kp-accent:#eed09a;
+  --kp-muted:#d3e0dc;--kp-stroke:rgba(224,193,132,.45);--kp-accent:#eed09a;
 }
-body.kids-timer-academy1436 #kidsLearningTimer1436{
-  top:calc(env(safe-area-inset-top,0px) + 87px);
-  left:auto;right:max(12px,env(safe-area-inset-right,0px));
+body.kids-timer-academy1436:not([data-kids-portal="true"]) #kidsLearningTimer1436{
   --kp-card:#193944;--kp-raised:#224655;--kp-ink:#fff5e5;
-  --kp-stroke:rgba(224,193,132,.45);--kp-accent:#eed09a;
+  --kp-muted:#d3e0dc;--kp-stroke:rgba(224,193,132,.45);--kp-accent:#eed09a;
+  bottom:max(12px,env(safe-area-inset-bottom,0px));
 }
 body.kids-timer-academy1436[data-profile="girl"] #kidsLearningTimer1436{
   --kp-card:#3b2a44;--kp-raised:#4c3550;--kp-ink:#fff0f3;
-  --kp-stroke:rgba(239,181,210,.55);--kp-accent:#efbdd2;
+  --kp-muted:#ecd1df;--kp-stroke:rgba(239,181,210,.55);--kp-accent:#efbdd2;
 }
-@media(max-width:380px){
- #kidsLearningTimer1436{top:calc(env(safe-area-inset-top,0px) + 55px)}
+body.kids-timer-academy1436:not([data-kids-portal="true"]).kids-timer-visible1437 > main.wrap{
+  padding-bottom:100px!important;
+}
+/* Avoid WebKit scroll anchoring when an asynchronous lesson, audio or prayer
+ * card updates. Real touch/keyboard scrolling stays enabled. */
+html[data-kids-age] body.kids-timer-visible1437 .app > .shell{
+  padding-bottom:var(--kids-timer-scroll-clearance1437,165px)!important;
+  scroll-padding-bottom:var(--kids-timer-scroll-clearance1437,165px)!important;
+}
+html[data-kids-age] body .app > .shell{
+  overflow-anchor:none!important;
+  scroll-behavior:auto!important;
+}
+html[data-kids-age] body .app > .shell > .view.active{
+  overflow-anchor:none!important;
+}
+@media(max-width:370px){
+ #kidsLearningTimer1436{gap:6px;padding:5px 7px;min-height:42px}
+ #kidsLearningTimer1436 .kids-timer-label{font-size:11px}
  #view-parents .kids-parent-time-actions{gap:6px}
 }

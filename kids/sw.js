@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1436";
+const CACHE_NAME="dar-al-tawhid-kids-v1437";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -287,8 +287,8 @@ const PRECACHE=CORE_PRECACHE.concat([
 const KIDS_BOOT_PRECACHE=[
   "/kids/parents-dashboard-v1432.css?v=1435",
   "/kids/parents-dashboard-v1432.js?v=1435",
-  "/kids/parents-compact-timer-v1436.css?v=1436",
-  "/kids/parents-compact-timer-v1436.js?v=1436",
+  "/kids/parents-compact-timer-v1436.css?v=1437",
+  "/kids/parents-compact-timer-v1436.js?v=1437",
   "/kids/kids-birth-month-v1431.js?v=1431",
   "/kids/kids-birth-month-v1431.css?v=1431",
   "/kids/akademie/girl-profile-authority-v1430.css?v=1430",
