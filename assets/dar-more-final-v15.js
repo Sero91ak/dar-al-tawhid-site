@@ -56,7 +56,7 @@ function themeButtons(){
 }
 var tastaturCard="<a class=\"dm15-tastatur-feature\" href=\"/tastatur/\" aria-label=\"Kostenlose arabische Textersetzungen – 565 Kürzel, Arabisch und Lautschrift\"><span class=\"dm15-tastatur-medallion\" aria-hidden=\"true\">﷽</span><span class=\"dm15-tastatur-copy\"><span class=\"dm15-tastatur-eyebrow\">NEU · KOSTENLOSE BIBLIOTHEK</span><strong>Arabische Textersetzungen</strong><small>565 Kürzel · Arabisch &amp; Lautschrift · Apple &amp; Android</small></span><span class=\"dm15-tastatur-cta\">Entdecken ↗</span></a>";
 function render(items,api){
- state.items=Array.isArray(items)?items.slice():[];
+ state.items=Array.isArray(items)?items.filter(function(item){return item&&item.id!=="notifications"&&item.id!=="about"}):[];
  state.api=api||{};
  var savedGroup=state.group;
  if(!categories.some(function(c){return c[0]===savedGroup}))state.group=categories[0][0];
@@ -82,6 +82,7 @@ function handleClick(e){
   closeTheme();closeAccount();var s=byId("dm15SearchPanel");if(s){var open=s.hidden;s.hidden=!open;t.setAttribute("aria-expanded",String(open));if(open){var input=byId("moreFeatureSearch");if(input)input.focus()}}return;
  }
  if(id==="dm15ThemeButton"){
+  closeOverlays();if(state.api&&typeof state.api.navigate==="function")state.api.navigate("settings","appearance");return;
   closeAccount();if(!byId("dm15SearchPanel")?.hidden)closeSearch();
   var sheet=byId("dm15ThemeSheet");if(sheet){var open=sheet.hidden;sheet.hidden=!open;t.setAttribute("aria-expanded",String(open));document.body.classList.toggle("dm15-theme-open",open)}return;
  }
