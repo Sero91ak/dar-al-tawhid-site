@@ -447,6 +447,18 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
 
+  // DAR_PRAYER_MOTIF_DOM_V7_20261016: after every SPA route redraw, add decorative image elements.
+  // Static CSS background selectors alone were not reliable on this test shell.
+  // Existing buttons/icons, handlers and calculation code remain unmodified.
+  if (!html.includes('id="darPrayerMotifsDomV7"')) {
+    const motifRuntime = '<script id="darPrayerMotifsDomV7" src="/test/assets/prayer-motifs/live-photo-v6.js?v=20261016-visible-v7" defer><\/script>';
+    if (html.includes("</body>")) html = html.replace("</body>", motifRuntime + "</body>");
+    else html += motifRuntime;
+  }
+  // The old settings positions must not be rendered by the inline SPA.
+  html = html.split("${renderAdaptiveNavPanel()}").join("");
+  html = html.split('${typeof renderAdaptiveNavPanel==="function"?renderAdaptiveNavPanel():""}').join("");
+
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");
