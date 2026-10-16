@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-16T06:18:30Z",
-  "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "38860244922",
+  "timestamp": "2026-10-16T06:31:56Z",
+  "trigger": "push",
+  "finishedDeployConclusion": null,
+  "finishedDeployRun": null,
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -23,6 +23,25 @@
     "allSevenArtworkFilesReachable": true,
     "versionJsonReadable": true,
     "trilingualWordLearningReady": true,
+    "parentsDashboard": {
+      "htmlReferencesNewDashboard": true,
+      "htmlReferencesNewStyles": true,
+      "htmlRegistersNewSW": true,
+      "htmlHasProfileAndBirthFields": true,
+      "dashboardJs": {
+        "ref": "/kids/parents-dashboard-v1432.js?v=1434",
+        "bytes": 9551
+      },
+      "dashboardCss": {
+        "ref": "/kids/parents-dashboard-v1432.css?v=1433",
+        "bytes": 15214
+      },
+      "dashboardContainsProfileSummary": true,
+      "dashboardContainsSaveValidation": true,
+      "girlsSaveButtonContrast": true,
+      "stylesAreProfileScoped": true,
+      "ready": true
+    },
     "trilingualAssets": {
       "learning": {
         "ref": "/kids/dua-smart-learn.js?v=1312",
