@@ -27508,7 +27508,7 @@ function renderNotificationCenter({embedded=false}={}){
   return `${embedded?"":setPageHeader("Benachrichtigungen","Ruhig, übersichtlich und für dich einstellbar.","Mehr")}
   <main class="notification-center-page">
     <section class="notification-hero">
-      <div class="notification-hero__top"><span class="notification-hero__icon" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><div><h2>Deine Erinnerungen</h2><p>Gebete, Duʿāʾ und Jumuʿah direkt verwalten.</p></div><span class="notification-hero__count"><span><b>${activeCount}</b> gewählt</span></span></div>
+      <div class="notification-hero__top"><span class="notification-hero__icon" aria-hidden="true">${prayerOverviewBellIconSvg()}</span><div><h2>Deine Erinnerungen</h2><p>Gebete, Duʿāʾ und Jumuʿah direkt verwalten.</p></div><span class="notification-hero__count"><span><b>${prayerCount}/5</b> Gebete</span></span></div>
       <div id="notificationHealthBox" class="notification-health" hidden><p id="notificationHealthText">Push-Status wird geprüft…</p><button type="button" class="notification-action" id="notificationReenableBtn">Mitteilungen einrichten</button><button type="button" class="notification-action" id="notificationDeviceTestBtn" hidden>Testpush senden</button></div>
       <div class="notification-hero__status">
         <span class="notification-status-chip ${activeCount?"is-on":""}">${activeCount} Bereiche aktiv</span>
@@ -27532,7 +27532,7 @@ function renderNotificationCenter({embedded=false}={}){
     </section>
     <section class="notification-section" aria-labelledby="notificationPrayerTitle">
       <header class="notification-section__head"><div><span class="notification-section__kicker">Gebet</span><h3 id="notificationPrayerTitle">Gebetszeiten</h3><p>${prayerCount} von 5 ausgewählt · ${prayerPushAdvanceMinutes(s)} Minuten vorher</p></div>${notificationToggleButton("notificationPrayerMaster",prayerOn,"Gebetsbenachrichtigungen")}</header>
-      <div class="notification-prayer-grid">${prayerRows}</div>
+      <div class="notification-prayer-grid" role="group" aria-label="Gebete einzeln auswählen">${prayerRows}</div><p class="dsh-prayer-instruction">Jedes Gebet einzeln antippen. Ein goldener Haken bedeutet: ausgewählt.</p>
       <div class="notification-settings-list"><div class="notification-row"><div class="notification-row__copy"><span class="notification-row__glyph" aria-hidden="true">◷</span><span><strong>Vorlauf</strong><small>Erinnerung vor dem Gebet</small></span></div><label class="notification-time"><select id="notificationPrayerAdvance" class="filter-select" aria-label="Vorlauf Gebetsbenachrichtigung"><option value="5" ${prayerPushAdvanceMinutes(s)===5?"selected":""}>5 Min</option><option value="10" ${prayerPushAdvanceMinutes(s)===10?"selected":""}>10 Min</option><option value="15" ${prayerPushAdvanceMinutes(s)===15?"selected":""}>15 Min</option></select></label></div></div>
     </section>
     <section class="notification-section" aria-labelledby="notificationDailyTitle">
@@ -27613,11 +27613,21 @@ function bindNotificationCenter(){
   };
   document.querySelectorAll("[data-notification-prayer]").forEach(btn=>{btn.onclick=()=>{
     const key=btn.getAttribute("data-notification-prayer")||"";
+    if(!NOTIFICATION_PRAYER_KEYS.includes(key))return;
     const prop=notificationPrayerSettingKey(key);
-    const s=getPrayerSettings();
-    persistNotificationSettings({[prop]:!notificationPrayerEnabled(s,key)});
-    syncPrayer();
-    rerender();
+    const selected=!notificationPrayerEnabled(getPrayerSettings(),key);
+    persistNotificationSettings({[prop]:selected});
+    /* Nur die betroffene Gebetskarte aktualisieren: kein Seiten-Neuaufbau,
+       kein Scrollsprung. Die vorhandene Erinnerungs-Synchronisierung bleibt. */
+    btn.classList.toggle("is-on",selected);
+    btn.setAttribute("aria-pressed",String(selected));
+    btn.setAttribute("aria-label",(btn.getAttribute("aria-label")||key).replace(/ (?:nicht )?gewählt$/,"")+(selected?" gewählt":" nicht gewählt"));
+    const count=notificationEnabledPrayerCount(getPrayerSettings());
+    const summary=document.querySelector(".dsh-detail[data-settings-page='notifications'] .notification-hero__count b");
+    if(summary)summary.textContent=count+"/5";
+    const sub=document.querySelector(".dsh-detail[data-settings-page='notifications'] #notificationPrayerTitle + p");
+    if(sub)sub.textContent=count+" von 5 ausgewählt · "+prayerPushAdvanceMinutes(getPrayerSettings())+" Minuten vorher";
+    try{syncPrayer()}catch(e){console.warn("Gebetsauswahl: Erinnerungssynchronisierung wird später wiederholt",e)}
   }});
   const advance=$("notificationPrayerAdvance");
   if(advance)advance.onchange=()=>{persistNotificationSettings({advanceMinutes:normalizeAdvanceMinutes(advance.value)});syncPrayer();rerender()};
@@ -38469,5 +38479,5 @@ html[data-theme] body:not(.is-home-route) > .app > footer.footer {
 </style>
 <link rel="stylesheet" id="darPrayerMotifsLiveV5" href="/test/assets/prayer-v1254.css?v=20261016-motifs-v5">
 <link rel="stylesheet" id="darSettingsPermissionsV1" href="/test/assets/dar-settings-permissions-v1.css?v=20261016-motifs-v5">
-<link rel="stylesheet" id="darSettingsNavigationV1" href="/test/assets/dar-settings-navigation-v1.css?v=20261016-nav-v2">
+<link rel="stylesheet" id="darSettingsNavigationV1" href="/test/assets/dar-settings-navigation-v1.css?v=20261016-nav-v3">
 </html>
