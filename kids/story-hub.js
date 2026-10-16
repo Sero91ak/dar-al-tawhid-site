@@ -353,32 +353,57 @@ async function toggleAudio(){
   try{busy=true;renderPlay();if(!audio.src)audio.src=meta.url;if(audio.ended)audio.currentTime=0;reader?.restore();await audio.play()}catch(_){$("#ghAudioNote").textContent="Audio konnte gerade nicht gestartet werden."}finally{busy=false;renderPlay()}
 }
 function stopAudio(clear=true){reader?.persist(true);try{audio.pause()}catch(_){}playing=false;busy=false;if(clear){try{audio.removeAttribute("src");audio.load()}catch(_){}}renderPlay();renderMini()}
-async function load(){
-  await loadRegistry();
-  if(!SOURCES.some(s=>s.id===activeCategory))activeCategory=SOURCES[0]?.id||"prophets";
-  ensureEntry();ensureUi();
-  const results=await Promise.all(SOURCES.map(async s=>{try{const r=await fetch(s.url,{cache:"no-store"});if(!r.ok)throw Error(String(r.status));const d=await r.json();return[s.id,(d.items||[]).slice().sort((a,b)=>Number(a.displayOrder||999)-Number(b.displayOrder||999))]}catch(e){console.warn("[DĀR Kids Hörwelten]",s.id,e);return[s.id,[]]}}));
-  results.forEach(([id,items])=>catalog[id]=items);renderContinue();renderCategories();renderList();
-  try{const m=String(location.hash||"").match(/^#stories\/listen\/([^/]+)\/([^/?#]+)/i);if(m&&SOURCES.some(s=>s.id===m[1])){activeCategory=m[1];openWorld();setTimeout(()=>selectStory(decodeURIComponent(m[2])),0)}}catch(_){}
-  const app=$(".app");if(app&&"MutationObserver" in window)new MutationObserver(()=>{renderCategories();renderList();if(active)renderPlayer()}).observe(app,{attributes:true,attributeFilter:["data-age"]});
+/* The central Hörwelten route is retired. Keep only its public compatibility
+   facade so old bookmarks and notification actions open the released libraries.
+   Never create or display ghWorld/ghPlayer. The MV4 FollowReader owns resume. */
+function load(){
+  ensureEntry();
+  try{
+    const m=String(location.hash||"").match(/^#stories\/listen\/([^/]+)\/([^/?#]+)/i);
+    if(m)openExternalStory(m[1],decodeURIComponent(m[2]),0);
+  }catch(_){}
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(load,0),{once:true});else setTimeout(load,0);
-function openCategory(cat){if(!SOURCES.some(s=>s.id===cat))return;activeCategory=cat;openWorld();renderCategories();renderList();}
-function openExternalStory(cat,id,time=0){
+function modernApi(cat){
+  return {
+    prophets:{api:window.DARKidsProphetStories,card:"data-ps-id",kind:"prophet"},
+    sahaba:{api:window.DARKidsMubashshirun,card:"data-ms-id",kind:"sahabi"},
+    sahabiyyat:{api:window.DARKidsSahabiyyat,card:"data-sy-id",kind:"sahabiyyah"},
+    deen:{api:window.DARKidsDeenLessons,card:"data-dl-id",kind:"deen"},
+    salaf:{api:window.DARKidsSalafLibrary,card:"data-story-id",kind:"salaf"}
+  }[cat]||null;
+}
+function openCategory(cat){
+  if(cat==="salaf"){document.querySelector('.nav-btn[data-target="salaf"]')?.click();return;}
+  document.querySelector('.nav-btn[data-target="stories"]')?.click();
+  modernApi(cat)?.api?.openLibrary?.();
+}
+function openExternalStory(cat,id,_legacyTime=0){
+  const key=String(cat||""),target=String(id||"");if(!target)return openCategory(key);
+  if(!modernApi(key))return openCategory("prophets");
+  openCategory(key);
   let tries=0;
   const attempt=()=>{
-    if(!$("#ghWorld")||!(catalog[cat]||[]).length){
-      if(tries++<24)setTimeout(attempt,120);
-      return;
+    const cfg=modernApi(key),api=cfg?.api;
+    if(key==="salaf"){
+      if(api?.openStory?.(target)===true)return;
+    }else if(api&&typeof api.open==="function"){
+      api.openLibrary?.();
+      const cards=Array.from(document.querySelectorAll("["+cfg.card+"]"));
+      if(cards.length){
+        if(cards.some(node=>node.getAttribute(cfg.card)===target)){
+          try{history.replaceState(history.state||{},"",location.pathname+(location.search||"")+"#stories/"+cfg.kind+"/"+encodeURIComponent(target))}catch(_){}
+          api.open(target);
+        }
+        return; // Retired content: show the current library, never old player.
+      }
     }
-    activeCategory=cat;
-    openWorld();
-    selectStory(id,{resume:Math.max(0,Number(time)||0)});
+    if(tries++<30)setTimeout(attempt,100);
   };
   attempt();
 }
 window.DARKidsStoryHub={
-  open:openWorld,
+  open:()=>openCategory("prophets"),
   openCategory,
   openStory:(cat,id)=>openExternalStory(cat,id,0),
   openResume:(cat,id,time)=>openExternalStory(cat,id,time),
