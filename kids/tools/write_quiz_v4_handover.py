@@ -50,6 +50,12 @@ def main():
     plan=read("kids/data/quiz-v4-450-production-status.json")
     release=read("kids/data/quiz-curation-release.json")
     recovery_priority=read("kids/review-only/quiz-v4-450-next-completion-priority.json")["summary"]
+    cost=read("kids/review-only/quiz-v4-remaining-unique-audio-credit-breakdown.json")
+    require(cost["modelId"]==MODEL and cost["voiceId"]==VOICE
+            and cost["selectedQuestions"]==450
+            and cost["creditsSpentByThisAudit"]==0
+            and cost["paidSynthesisAuthorized"] is False,
+            "new audio cost review must remain V4 master and no-credit")
     hearing_file=ROOT/"kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json"
     hearing=read("kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json") if hearing_file.is_file() else None
     if hearing is not None:
@@ -115,6 +121,10 @@ def main():
         "reusedSpeechPartAssignments":sum(sum(row["availableParts"].values()) for row in ages.values()),
         "fourPartAudioQuestions":import_status["completeFourPartQuestions"],
         "missingPartsQuestions":import_status["notCompleteFourPartQuestions"],
+        "remainingNewV4UniqueSegmentsByCostAudit":cost["uniqueTrulyNewTextFragments"],
+        "remainingNewV4TextCodepoints":cost["trulyNewTextCodepoints"],
+        "creditBudgetAspirationalTarget":cost["earlierAspirationalBudgetCredits"],
+        "estimatedAudioTextReductionForTargetPercent":cost["approxTextReductionPercentageNeededAtSameRate"],
         "recoveryFirstPriorityPlanFresh":priority_current,
         "onlyAlreadyPaidMP3RecoveryBlockedQuestions":recovery_priority["questionsBlockedOnlyOnAlreadyPaidNine"] if priority_current else None,
         "questionsNeedingNewV4Originals":recovery_priority["questionsNeedingAtLeastOneGenuinelyNewOriginal"] if priority_current else None,
@@ -151,6 +161,9 @@ def main():
         "- Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.",
         "- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **"+str(details["uniqueVerifiedQuizMP3s"])+" unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **"+str(details["reusedSpeechPartAssignments"])+" Frage-/Lob-/Retry-/Erklärungsteile**.",
         "- Technisch vierteilig vollständig: **"+str(details["fourPartAudioQuestions"])+"/450**, noch unvollständig: **"+str(details["missingPartsQuestions"])+"/450**.",
+        "- Letzter V4-Kostenaudit: **"+str(cost["uniqueTrulyNewTextFragments"])+
+          " neue Sprachfragmente** = **"+str(cost["trulyNewTextCodepoints"])+
+          " Unicode-Zeichen**; **0 neue Lob-/Retry-Fragmente**, **0 neue V4-Texte für 4–6 Jahre**.",
         "- Nach Originalkosten getrennt: **"+str(details["onlyAlreadyPaidMP3RecoveryBlockedQuestions"])+ " Fragen nur durch bereits bezahlte MP3s blockiert**, **"+str(details["questionsNeedingNewV4Originals"])+" Fragen benötigen neue V4-Originaltexte**." if priority_current else "- Prioritätsliste nach letztem MP3-Import neu berechnen; ursprüngliche V4-Quellen bleiben geschützt.",
     ]
     for age in ("4-6","7-8","9-10"):
@@ -189,6 +202,12 @@ def main():
         "Internes Ledger: `kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json`.",
         "CI: https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/kids-v4-hearing-results-secure-import.yml",
         "Selbstauskünfte bleiben von unabhängigen Audiofreigaben und der öffentlichen Quiz-Freigabe strikt getrennt. Der Importer validiert jedes Mal die REALEN MP3-Bytes gegen SHA-256, weist doppelte JSON-Schlüssel zurück und speichert weder Prüfernamen noch freie Notiztexte im GitHub-Bericht.",
+        "",
+        "## Kostenplan für fehlende V4-Originale",
+        "",
+        "Lesen: `kids/review-only/QUIZ-V4-AUDIO-KOSTENCHECK.md`.",
+        "Die aktuelle, nicht vom Provider bestätigte 79.075,79-Credit-Prognose und das bisherige Budgetziel 27.860 Credits weichen erheblich ab. Eine reine Kürzung wiederholter Anmoderationen erzielt nach dem ersten nicht-destruktiven Vergleich nur einen Teil der nötigen Reduktion; die 450 Originalfragen und Lerninhalte unverändert erhalten.",
+        "Bezahlte V4-Neugenerierungen niemals automatisch anstoßen. Exakte Text-SHA gegen bezahlte Originale und Provider-Abrechnung prüfen.",
         "",
         "## Nächste verbindliche Schritte",
         "",
