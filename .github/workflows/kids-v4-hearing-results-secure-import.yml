@@ -49,6 +49,9 @@ jobs:
           assert d['publicPlaybackApprovedCount']==0
           assert d['publicReleaseAllowed'] is False
           assert d['newElevenLabsCreditsSpent']==0
+          assert d['rawReviewerNamesOrNotesCommitted'] is False
+          assert all('note' not in issue for issue in d['reportedIssuesByTextSha'].values())
+          assert 'reviewerName' not in d
           if not d['ageSubmitted']:
               assert d['claimedApprovalClipCount']==0
               assert d['submittedIssueClipCount']==0
