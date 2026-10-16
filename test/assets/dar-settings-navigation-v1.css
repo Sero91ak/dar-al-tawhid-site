@@ -99,3 +99,172 @@ html body.is-settings-route .dsh-detail[data-settings-page="notifications"] .not
  html body.is-settings-route .dsh-row-icon{transition:transform .18s ease}
  html body.is-settings-route .dsh-row:active .dsh-row-icon{transform:scale(.95)}
 }
+
+/* DĀR AL TAWḤĪD · DAR TEST · SETTINGS POLISH V2 · 16.10.2026
+   Scope strikt nur Einstellungsübersicht und deren Unterseiten.
+   Stabiler Hintergrund pro Gruppe statt ineinander gerundeter Zeilen,
+   kein abgeschnittener Status, kompakter Hero und sichere Tabbar-Freifläche. */
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head{
+  min-height:clamp(176px,32vw,216px)!important;
+  height:auto!important;
+  margin-bottom:14px!important;
+  padding:
+    max(72px,calc(env(safe-area-inset-top,0px) + 51px))
+    max(18px,calc((100vw - 1080px)/2 + 24px))
+    17px!important;
+  border-radius:0 0 23px 23px!important;
+}
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head h2{
+  font-size:clamp(27px,6vw,39px)!important;
+  line-height:1.08!important;
+}
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head .view-desc{
+  font-size:clamp(12.5px,3.1vw,15px)!important;
+  line-height:1.35!important;
+  margin-top:6px!important;
+}
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head:has(+ .dsh-detail){
+  min-height:clamp(145px,26vw,184px)!important;
+  margin-bottom:11px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-shell{
+  padding-bottom:calc(172px + env(safe-area-inset-bottom,0px))!important;
+  min-height:0;
+}
+html[data-theme] body.is-settings-route #appView .dsh-home .dsh-welcome{
+  min-height:0!important;
+  margin:0 0 16px!important;
+  padding:15px clamp(15px,4vw,21px)!important;
+  border-radius:19px!important;
+  gap:13px!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.04)!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-welcome h2{
+  font-size:clamp(22px,5vw,28px)!important;
+  margin:0 0 4px!important;
+  line-height:1.16!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-welcome p{
+  font-size:12px!important;
+  line-height:1.38!important;
+  max-width:39ch!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-eyebrow{
+  margin-bottom:5px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-emblem{
+  flex:0 0 46px!important;
+  width:46px!important;
+  height:46px!important;
+  border-radius:14px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-emblem svg{
+  width:25px!important;height:25px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-welcome::before{
+  width:87px!important;height:87px!important;
+  top:-18px!important;right:9px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-welcome::after{
+  width:121px!important;height:121px!important;
+  top:-33px!important;right:-12px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-group{
+  margin:0 0 18px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-group-head{
+  margin:0 1px 8px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-list{
+  display:block!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  border:1px solid var(--dsh-line)!important;
+  border-radius:18px!important;
+  background:var(--dsh-surface)!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-list > .dsh-row{
+  position:relative!important;
+  isolation:isolate!important;
+  display:flex!important;
+  align-items:center!important;
+  min-height:74px!important;
+  width:100%!important;
+  max-width:100%!important;
+  margin:0!important;
+  padding:12px clamp(11px,3.3vw,17px)!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  filter:none!important;
+  transform:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-list > .dsh-row + .dsh-row::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  left:clamp(62px,16vw,71px)!important;
+  right:14px!important;
+  top:0!important;
+  height:1px!important;
+  background:var(--dsh-line)!important;
+  pointer-events:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-list > .dsh-row:active{
+  background:color-mix(in srgb,var(--dsh-accent) 9%,transparent)!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-row-main{
+  flex:1 1 auto!important;min-width:0!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-row-end{
+  flex:0 1 auto!important;
+  max-width:42%!important;
+  min-width:16px!important;
+  gap:7px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-row-meta{
+  font-size:11px!important;
+  line-height:1.25!important;
+  display:block!important;
+  min-width:0!important;
+  max-width:clamp(69px,23vw,132px)!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+  white-space:nowrap!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-row-chevron{
+  flex:0 0 16px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail-content,
+html[data-theme] body.is-settings-route #appView .dsh-detail .settings-one-page{
+  max-width:100%!important;
+  min-width:0!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-note{
+  position:relative!important;
+  margin-top:17px!important;
+  padding-inline:9px!important;
+}
+@media(max-width:370px){
+ html[data-theme] body.is-settings-route #appView .dsh-list > .dsh-row{
+   gap:9px!important;min-height:73px!important;
+ }
+ html[data-theme] body.is-settings-route #appView .dsh-row-meta{
+   max-width:70px!important;font-size:10px!important;
+ }
+ html[data-theme] body.is-settings-route #appView .dsh-welcome{
+   padding:14px!important;
+ }
+ html[data-theme] body.is-settings-route #appView .dsh-welcome p{
+   font-size:11.5px!important;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-theme] body.is-settings-route #appView .dsh-row{transition:none!important}
+}
