@@ -18,6 +18,8 @@ PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
 YOUNG=ROOT/"kids/data/quiz-v4-first150-composed-preview.json"
 OLDER=ROOT/"kids/data/quiz-v4-age7to10-composed-preview.json"
 RELEASE=ROOT/"kids/data/quiz-curation-release.json"
+YOUNG_STATUS=ROOT/"kids/data/quiz-v4-first150-audio-status.json"
+OLDER_STATUS=ROOT/"kids/data/quiz-v4-age7to10-offline-coverage.json"
 STAGED=ROOT/"kids/review-only/quiz-v4-450-actual-mp3-import.json"
 SUMMARY=ROOT/"kids/review-only/quiz-v4-450-actual-mp3-import-summary.json"
 ROOT_AUDIO=(ROOT/"kids/assets/kids-quiz-audio").resolve()
@@ -122,12 +124,24 @@ def main():
        for age,x in by_age.items()}
     require(all(x["questions"]==150 for x in by_age.values()),
             "Staged import did not cover 150 IDs per age")
-    # Baseline gate prevents falsely claiming more than the already verified
-    # and recorded 70 + 2 + 0 completed question recipes.
-    require([by_age[a]["completeFourPartQuestions"] for a in AGES]==[70,2,0],
-            "Coverage no longer matches the approved offline V4 preview baseline")
-    require(sum(x["completeFourPartQuestions"] for x in by_age.values())==72,
-            "Unexpected claims about 450 MP3 completion")
+    # Never pin historical counts: importing the last nine prepaid originals
+    # must be able to increase 4–6 automatically without changing this tool.
+    # Cross-check the current independent offline reports, not guessed totals.
+    young_status=load(YOUNG_STATUS)
+    older_status=load(OLDER_STATUS)
+    recorded_counts={"4-6":young_status["completeFourPartQuestions"],
+        "7-8":older_status["byAge"]["7-8"]["completeFourPartQuestions"],
+        "9-10":older_status["byAge"]["9-10"]["completeFourPartQuestions"]}
+    for age in AGES:
+        require(by_age[age]["completeFourPartQuestions"]==recorded_counts[age],
+                "Real MP3 full-question count disagrees with offline QA for "+age)
+        expected_fields=(young_status["availableFieldCounts"] if age=="4-6" else
+            older_status["byAge"][age]["availableFieldCounts"])
+        for kind in KINDS:
+            require(by_age[age]["availableParts"].get(kind,0)==expected_fields[kind],
+                    "Real MP3 part count disagrees with offline QA: "+age+"/"+kind)
+    require(sum(x["completeFourPartQuestions"] for x in by_age.values())<=450,
+            "Impossible V4 question audio coverage")
     staged={"schemaVersion":1,"scope":"KIDS_QUIZ_450_V4_INTERNAL_AUDIO_IMPORT",
             "modelId":MODEL,"voiceId":VOICE,"reviewOnly":True,
             "source":"already-paid original V4 MP3s and exact offline composed files",
