@@ -1,0 +1,182 @@
+/* DĀR AL TAWḤĪD · DAR TEST ADULT ONLY · GLOBAL EDGE WIDTH V1372
+   2026-10-16. Geometry authority loaded LAST by isolated /test Worker.
+   Single horizontal gutter aligned with the existing floating bottom tab bar.
+   Does not alter colors/themes, tab position, event handlers, prayer timings,
+   scroll engine, KIDS pages, visitor apps, or reader line lengths. */
+
+html[data-theme] body {
+  --dar-test-edge-gutter: max(
+    10px,
+    env(safe-area-inset-left, 0px),
+    env(safe-area-inset-right, 0px),
+    2.2vw
+  );
+  --dar-test-edge-stage: calc(100% - 2 * var(--dar-test-edge-gutter));
+}
+
+/* Full-viewport app canvas; do not inherit the generic 12/14px inset and
+   then subtract another 24/28px in the child. Keep bottom padding unchanged. */
+html[data-theme] body:is(
+ .is-more-route,.is-quiz-route,.is-topics-route,.is-topic-route,
+ .is-quran-overview,.is-settings-route,.is-notifications-route,
+ .is-account-route,.is-about-route,.is-news-route,.is-news-detail-route,
+ .is-zakat-route,.is-ramadan-route,.is-calendar-route,
+ .is-source-library-route,.is-quran-topic-route
+) #appView.view {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-inline: 0 !important;
+  padding-inline: 0 !important;
+  box-sizing: border-box !important;
+  overflow-x: clip !important;
+}
+
+/* Existing scene hosts stretch to the viewport. Their content, not the
+   scene background, receives the single safe-area inset. */
+html[data-theme] body.is-more-route #appView .more-page,
+html[data-theme] body.is-quran-overview #appView .qov-page,
+html[data-theme] body.is-topics-route #appView .topics-hub,
+html[data-theme] body.is-topic-route #appView .topic-collection-page,
+html[data-theme] body.is-quiz-route #appView .quiz-home {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-inline: 0 !important;
+  padding-inline: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Hero boundaries align with the floating navigation; keep original
+   per-section artwork, typography and internal breathing room. */
+html[data-theme] body:is(
+ .is-more-route,.is-quiz-route,.is-topics-route,.is-topic-route,
+ .is-account-route,.is-about-route,.is-news-route,.is-news-detail-route,
+ .is-zakat-route,.is-ramadan-route,.is-notifications-route,
+ .is-source-library-route,.is-quran-topic-route
+) #appView > .view-head,
+html[data-theme] body.is-quran-overview #appView .qov-header,
+html[data-theme] body.is-topics-route .topics-hub > .view-head,
+html[data-theme] body.is-topic-route .topic-collection-page > .view-head,
+html[data-theme] body.is-calendar-route .cal-tl-head {
+  width: var(--dar-test-edge-stage) !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* MEHR: two-column cards and section rail previously lost 28px inside a
+   separately padded #appView; use one gutter, same as bottom navigation. */
+html[data-theme] body.is-more-route #appView :is(
+ .more-quick-access,.feature-section,.more-group,.zakat-home-teaser,
+ #adaptiveNavPanel
+),
+html[data-theme] body.is-quiz-route #appView :is(
+ .quiz-shell.quiz-shell-home,.quiz-shell.quiz-shell-pro,
+ .quiz-shell.quiz-shell-session
+),
+html[data-theme] body.is-quran-overview #appView .qov-main,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .topic-collection,
+html[data-theme] body.is-topics-route #appView .topics-hub > :is(
+ .search-panel,.search-pro-panel,#homeSearchBlock,.topics-hub__label,
+ .dua-theme-grid,.dar-tl-intro,.dar-tl-filterbar,.dar-tl-groups
+) {
+  width: var(--dar-test-edge-stage) !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* A quiz configuration card must fill its parent instead of retaining the
+   old second internal gutter. Controls remain at their authored tap sizes. */
+html[data-theme] body.is-quiz-route #appView .quiz-shell :is(
+ .quiz-home-panel,.quiz-home-head,.quiz-home-metrics,
+ .quiz-home-quick-nav,.quiz-home-resume
+) {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+html[data-theme] body.is-quiz-route #appView .quiz-shell :is(
+ select,input,button
+) {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* OTHER AREAS: same content axis, with reading and layout mechanisms intact.
+   These are the existing top-level content roots, not nested cards. */
+html[data-theme] body.is-settings-route #appView .settings-one-page,
+html[data-theme] body.is-account-route #appView .account-panel,
+html[data-theme] body.is-about-route #appView :is(.about-page,.about-page--smart),
+html[data-theme] body.is-news-route #appView .current-focus,
+html[data-theme] body.is-news-detail-route #appView .news-detail-article,
+html[data-theme] body.is-zakat-route #appView .zakat-view,
+html[data-theme] body.is-quran-topic-route #appView :is(.quran-topic-page,.quran-topic-detail),
+html[data-theme] body.is-ramadan-route #appView :is(
+ .ramadan-panel,.calendar-panel,.section-block
+),
+html[data-theme] body.is-calendar-route #appView .calendar-premium-page > :is(
+ .cal-tl-timeline,.cal-tl-main,.cal-tl-content
+),
+html[data-theme] body.is-source-library-route #appView :is(
+ .source-library-page,.sources-library-page
+),
+html[data-theme] body.is-notifications-route #appView .notification-center-page {
+  width: var(--dar-test-edge-stage) !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Nested notification center is already inside the Settings stage. */
+html[data-theme] body.is-settings-route .settings-one-page > .notification-center-page,
+html[data-theme] body.is-settings-route .settings-one-page #dar-setup-hub {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-inline: 0 !important;
+}
+
+/* Home already uses full canvas; align only its editorial inset. Never
+   override full-bleed Feed, Qurʾān reading, audio/player, or dialog surfaces. */
+html[data-theme] body.is-home-route #appView.view {
+  padding-left: var(--dar-test-edge-gutter) !important;
+  padding-right: var(--dar-test-edge-gutter) !important;
+}
+
+/* Prevent child content and grids from imposing a wider min-content size. */
+html[data-theme] body.is-more-route #appView :is(
+ .more-group-grid,.more-feature-row,.more-quick-access__list,
+ .feature-section
+),
+html[data-theme] body.is-quiz-route #appView :is(
+ .quiz-shell,.quiz-home-panel,.quiz-home-metrics,.quiz-home-quick-nav
+) {
+  min-width: 0 !important;
+  max-width: 100% !important;
+}
+
+/* Tablets and foldables: exploit the available screen without a 780/900/980px
+   ancestor cap; limit typography within existing original text elements. */
+@media (min-width:700px) {
+  html[data-theme] body {
+    --dar-test-edge-gutter: max(
+      16px,env(safe-area-inset-left,0px),
+      env(safe-area-inset-right,0px),2vw
+    );
+  }
+}
+@media (max-width:390px) {
+  html[data-theme] body {
+    --dar-test-edge-gutter: max(
+      10px,env(safe-area-inset-left,0px),
+      env(safe-area-inset-right,0px)
+    );
+  }
+}
