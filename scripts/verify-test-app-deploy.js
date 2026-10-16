@@ -180,6 +180,28 @@ async function fetchVersionBuild(base) {
     throw new Error("Dar Test PWA startup rejected: HTML shell must respond HTTP 200 directly; redirect/invalid HTML detected");
   }
 
+  // DAR_TEST_REPAIR_ENTRY_VERIFY_20261016: If an installed Test PWA is stuck,
+  // Safari must be able to open this independent, non-destructive recovery page.
+  // Verify the actual deployed response on BOTH Test origins, not only the repo file.
+  // Do not change or inspect the visitor/KIDS application routes.
+  for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
+    const repairUrl = `${base}/repair.html?repair-check=${Date.now()}`;
+    const res = await fetch(repairUrl, {
+      redirect: "manual",
+      cache: "no-store",
+      headers: { "Cache-Control": "no-cache", Pragma: "no-cache" }
+    });
+    const page = res.status === 200 ? await res.text() : "";
+    const safeRepair =
+      page.includes('id="repair"') &&
+      page.includes("navigator.serviceWorker.getRegistrations()") &&
+      page.includes('url.pathname.indexOf("/test/")===0') &&
+      page.includes('location.replace("/test/index.html?env=staging');
+    const ok = res.status === 200 && !res.headers.get("location") && safeRepair;
+    console.log(`Test repair route ${label}: status=${res.status} safe=${safeRepair} ok=${ok}`);
+    if (!ok) throw new Error(`Test repair page unavailable or unsafe: ${label} ${repairUrl}`);
+  }
+
   async function waitForMatchingVersion(label, base) {
     for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
       const v = await fetchVersionBuild(base);
