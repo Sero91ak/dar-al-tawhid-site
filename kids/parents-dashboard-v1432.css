@@ -243,3 +243,36 @@
 #view-parents .kids-parent-fold{
  scroll-margin-top:calc(max(16px,env(safe-area-inset-top,0px)) + 16px);
 }
+
+
+/* KIDS_PARENTS_PROFILE_ACTIONS_V1432: eliminate boy blue and pale-on-pale states throughout
+ * the girls' profile manager, not only the birth-month save action. */
+.app[data-gender="girl"] #view-parents #kidsParentAccounts :is(
+ .profile-row button[data-profile],
+ #profileAskDevice,
+ #profileAskCancel
+){
+ background:#5b3e5e!important;background-image:none!important;
+ color:#fff0f6!important;-webkit-text-fill-color:#fff0f6!important;
+ border:1px solid #d3a0c2!important;
+ box-shadow:none!important;text-shadow:none!important;
+}
+.app[data-gender="girl"] #view-parents #kidsParentAccounts :is(
+ .profile-row button[data-del],
+ #profileAskFull
+){
+ background:#714759!important;background-image:none!important;
+ color:#ffe6ed!important;-webkit-text-fill-color:#ffe6ed!important;
+ border:1px solid #e2a7bf!important;
+ box-shadow:none!important;text-shadow:none!important;
+}
+.app[data-gender="girl"] #view-parents #kidsParentAccounts .kids-support-link-parent{
+ background:#5a3f60!important;color:#fff2f5!important;
+ -webkit-text-fill-color:#fff2f5!important;border-color:#dcaac9!important;
+}
+.app[data-gender="girl"] #view-parents #kidsParentOffline .kids-offline-library h3{
+ color:#f6d2e2!important;
+}
+#view-parents #kidsParentAccounts :is(button,.kids-support-link-parent):focus-visible{
+ outline:3px solid var(--kp-accent)!important;outline-offset:2px!important;
+}
