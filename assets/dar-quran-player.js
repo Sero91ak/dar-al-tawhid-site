@@ -2315,6 +2315,9 @@
       }
     } catch (ePos) {}
   }
+  var lastMediaMetaKey = "";
+  var lastNowPlayingKey = "";
+  var lastNowPlayingAt = 0;
   function syncMediaSession() {
     if (!state.playing && !state.sessionActive) {
       lastMediaMetaKey = "";
