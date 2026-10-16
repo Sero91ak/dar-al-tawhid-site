@@ -413,3 +413,117 @@ html[data-theme] body.is-post-route #appView{
     scroll-behavior:auto!important;
   }
 }
+
+
+/* DAR_TEST_TOPICS_NO_SWIPE_V1374 — 2026-10-16
+   The 5 topic groups already exist as native <details> accordions.
+   They are the single category navigation. Remove the duplicated, horizontally
+   scrolling chips entirely. Preserve search, theme colors, category events,
+   source data and existing hash routes. Test app only. */
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-filterbar{
+  display:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label{
+  display:flex!important;
+  align-items:baseline!important;
+  justify-content:space-between!important;
+  gap:12px!important;
+  margin:13px auto 10px!important;
+  padding:0 0 12px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label b{
+  font-size:clamp(1.18rem,3.8vw,1.54rem)!important;
+  letter-spacing:.01em!important;
+  line-height:1.2!important;
+  text-transform:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label span{
+  font-size:clamp(.67rem,2.6vw,.79rem)!important;
+  line-height:1.25!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  font-weight:600!important;
+  white-space:normal!important;
+  text-align:right!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groups{
+  display:grid!important;
+  width:var(--dar-test-edge-stage)!important;
+  max-width:none!important;
+  margin:0 auto 22px!important;
+  padding:0!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:9px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion{
+  width:100%!important;
+  min-width:0!important;
+  border:1px solid var(--tl-rule)!important;
+  border-radius:17px!important;
+  background:var(--tl-surface)!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto 20px!important;
+  align-items:center!important;
+  gap:10px!important;
+  min-height:73px!important;
+  padding:15px 17px!important;
+  background:linear-gradient(105deg,color-mix(in srgb,var(--tl-accent) 6%,var(--tl-surface)),var(--tl-surface))!important;
+  cursor:pointer!important;
+  list-style:none!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary::-webkit-details-marker{
+  display:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groupno{
+  display:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groupname{
+  min-width:0!important;
+  margin:0!important;
+  font-size:clamp(1rem,3.7vw,1.21rem)!important;
+  line-height:1.33!important;
+  letter-spacing:0!important;
+  overflow-wrap:break-word!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groupcount{
+  font-size:clamp(.72rem,2.6vw,.82rem)!important;
+  line-height:1.25!important;
+  font-weight:600!important;
+  white-space:nowrap!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-arrow{
+  font-size:1.45rem!important;
+  line-height:1!important;
+  text-align:center!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion[open] summary{
+  border-bottom:1px solid var(--tl-rule)!important;
+  background:color-mix(in srgb,var(--tl-accent) 8%,var(--tl-surface))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary:focus-visible{
+  outline:2px solid var(--tl-accent)!important;
+  outline-offset:-3px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid{
+  padding:3px 13px 7px!important;
+}
+@media(max-width:430px){
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary{
+    grid-template-columns:minmax(0,1fr) auto 16px!important;
+    gap:8px!important;
+    min-height:68px!important;
+    padding:13px 12px!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groupname{
+    font-size:clamp(.96rem,3.8vw,1.1rem)!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groupcount{
+    font-size:.72rem!important;
+  }
+}
