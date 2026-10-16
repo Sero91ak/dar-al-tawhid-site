@@ -268,3 +268,137 @@ html[data-theme] body.is-settings-route #appView .dsh-note{
 @media(prefers-reduced-motion:reduce){
  html[data-theme] body.is-settings-route #appView .dsh-row{transition:none!important}
 }
+
+
+/* SETTINGS EDGE AND PRAYER TOUCH V3 · DAR TEST ONLY · 2026-10-16
+   Entire detail content uses one viewport gutter, matching the floating bottom
+   navigation. Override legacy 720px and nested double-gutter restrictions. */
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell.dsh-detail {
+  box-sizing:border-box!important;
+  width:var(--dar-test-edge-stage,calc(100vw - 20px))!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-inline:auto!important;
+  padding-inline:0!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail-content,
+html[data-theme] body.is-settings-route #appView .dsh-detail-content > .settings-one-page,
+html[data-theme] body.is-settings-route #appView .dsh-detail-content > .settings-one-page > .notification-center-page {
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  transform:none!important;
+  float:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail .notification-hero,
+html[data-theme] body.is-settings-route #appView .dsh-detail .notification-section,
+html[data-theme] body.is-settings-route #appView .dsh-detail .notification-settings-list,
+html[data-theme] body.is-settings-route #appView .dsh-detail .notification-prayer-grid {
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  left:auto!important;
+  right:auto!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid {
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:clamp(4px,1.2vw,7px)!important;
+  padding:0!important;
+  margin-block:10px 12px!important;
+  overflow:visible!important;
+}
+/* Five independent accessible click targets. Decoration never captures touch. */
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer[data-notification-prayer] {
+  appearance:none!important;
+  position:relative!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  min-width:0!important;
+  width:100%!important;
+  min-height:116px!important;
+  padding:9px 1px 12px!important;
+  box-sizing:border-box!important;
+  isolation:isolate!important;
+  z-index:0!important;
+  pointer-events:auto!important;
+  cursor:pointer!important;
+  touch-action:manipulation!important;
+  -webkit-tap-highlight-color:transparent!important;
+  border:2px solid rgba(255,255,255,.24)!important;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)!important;
+  transition:border-color .17s ease,box-shadow .17s ease,filter .17s ease!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer :is(img,span,b,small) {
+  pointer-events:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer[aria-pressed="true"] {
+  border-color:var(--gold2,#dbbf81)!important;
+  box-shadow:inset 0 0 0 2px rgba(255,247,225,.45),0 0 0 1px color-mix(in srgb,var(--gold2) 35%,transparent)!important;
+  filter:brightness(1.12) saturate(1.08)!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer[aria-pressed="false"] {
+  border-color:rgba(183,184,188,.34)!important;
+  filter:grayscale(.33) brightness(.78)!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer::before {
+  content:""!important;
+  position:absolute!important;
+  display:block!important;
+  top:6px!important;
+  right:6px!important;
+  width:15px!important;
+  height:15px!important;
+  z-index:6!important;
+  border-radius:50%!important;
+  background:rgba(9,17,26,.4)!important;
+  border:1px solid rgba(255,248,227,.4)!important;
+  box-sizing:border-box!important;
+  pointer-events:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer[aria-pressed="true"]::before {
+  content:"✓"!important;
+  display:grid!important;
+  place-items:center!important;
+  font:900 10px/1 system-ui,sans-serif!important;
+  color:#172119!important;
+  background:#f5e5b2!important;
+  border-color:#f5e5b2!important;
+  text-shadow:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer:focus-visible {
+  outline:3px solid var(--gold2,#d4b57c)!important;
+  outline-offset:3px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer .notification-prayer-index {
+  flex-shrink:0!important;
+  pointer-events:none!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer .dar-prayer-clock,
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer b {
+  max-width:100%!important;
+  overflow:hidden!important;
+  text-overflow:clip!important;
+  white-space:nowrap!important;
+}
+@media(max-width:385px){
+  html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer{
+    min-height:106px!important;
+  }
+  html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid{
+    gap:4px!important;
+  }
+  html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] button.notification-prayer b{
+    font-size:clamp(9px,2.65vw,11px)!important;
+  }
+}
