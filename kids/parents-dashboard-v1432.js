@@ -42,11 +42,15 @@ resume.id="kidsParentResume";
 resume.className="kids-parent-resume";
 resume.hidden=true;
 resume.innerHTML=
- '<span class="kids-parent-resume-copy"><strong>Zuletzt gehört</strong><small id="kidsParentResumeText"></small></span>'+
- '<button type="button" id="kidsParentResumeOpen">Zum Hörbereich</button>';
-summary.querySelector("#kidsParentManage").before(family,resume);
+ '<div class="kids-parent-activity-heading"><div><span class="kids-parent-activity-eyebrow">DEINE APP-AKTIVITÄT</span><strong>Zuletzt gehört</strong></div><span class="kids-parent-activity-tag">Hörbereich</span></div>'+
+ '<div class="kids-parent-activity-content"><img id="kidsParentResumeArt" src="/kids/assets/kids-icons/headphones-real-v12.png" alt="" width="62" height="62" loading="lazy">'+
+ '<div class="kids-parent-activity-text"><strong id="kidsParentResumeText">Noch keine Hörgeschichte</strong><small id="kidsParentResumePosition">Dein zuletzt gehörtes Hörbuch erscheint hier.</small>'+
+ '<div id="kidsParentResumeProgress" class="kids-parent-activity-progress" hidden><span id="kidsParentResumeProgressBar"></span></div></div></div>'+
+ '<div class="kids-parent-activity-actions"><small>Zuletzt auf diesem Gerät gehört</small><button type="button" id="kidsParentResumeOpen" disabled>▶ Weiterhören</button></div>';
+summary.querySelector("#kidsParentManage").before(family);
 summary.after(progressPanel);
-progressPanel.after(timePanel);
+progressPanel.after(resume);
+resume.after(timePanel);
 timePanel.after(agePanel);
 
 function detailsWrap(panel,id,title,subtext){
@@ -68,6 +72,10 @@ const intro=head.querySelector("p");
 if(intro)intro.textContent="Kinderprofil, Lernfortschritt und Einstellungen auf einen Blick.";
 const progressCopy=progressPanel.querySelector(".parent-note");
 if(progressCopy)progressCopy.textContent="Die Zahlen zeigen deinen aktuellen Lernstand – ohne Ranglisten oder Vergleiche.";
+const timeTag=document.createElement("small");
+timeTag.className="kids-parent-time-eyebrow";
+timeTag.textContent="ELTERNSTEUERUNG · LERNZEIT";
+timePanel.prepend(timeTag);
 const timeCopy=timePanel.querySelector(".parent-note");
 if(timeCopy)timeCopy.textContent="Ein ruhiges Tagesziel statt endlosem Lernen. Du kannst es jederzeit anpassen.";
 const accountsCopy=profilePanel.querySelector(".parent-note");
@@ -140,18 +148,48 @@ function renderFamily(){
  }
  grid.replaceChildren(fragment);
 }
-function renderLastStory(){
- const wrap=$("#kidsParentResume"),label=$("#kidsParentResumeText");
- if(!wrap||!label)return;
+function readLastStory(){
  let item=null;
  try{item=JSON.parse(localStorage.getItem("kids.storyHub.last.v1")||"null")}catch(_){}
- const valid=item&&typeof item==="object"&&typeof item.title==="string"&&item.title.trim()&&
-   Number.isFinite(Number(item.time))&&Number(item.time)>2&&item.completed!==true;
- wrap.hidden=!valid;
- if(!valid)return;
- const seconds=Math.floor(Number(item.time));
- const when=Math.floor(seconds/60)+":"+String(seconds%60).padStart(2,"0");
- label.textContent=item.title+" · ab "+when;
+ if(!item||typeof item!=="object"||typeof item.title!=="string"||!item.title.trim()||
+  typeof item.category!=="string"||typeof item.id!=="string"||
+  !Number.isFinite(Number(item.time))||Number(item.time)<=2||item.completed===true)return null;
+ return item;
+}
+const storyCategory={prophets:"Propheten",sahaba:"Ṣaḥābah",sahabiyyat:"Ṣaḥābiyyāt",deen:"Lern-Erzählungen"};
+function listenTime(seconds){
+ const n=Math.max(0,Math.floor(Number(seconds)||0));
+ return Math.floor(n/60)+":"+String(n%60).padStart(2,"0");
+}
+function renderLastStory(){
+ const wrap=$("#kidsParentResume"),label=$("#kidsParentResumeText");
+ const info=$("#kidsParentResumePosition"),art=$("#kidsParentResumeArt");
+ const track=$("#kidsParentResumeProgress"),bar=$("#kidsParentResumeProgressBar");
+ const button=$("#kidsParentResumeOpen");
+ if(!wrap||!label||!info||!art||!track||!bar||!button)return;
+ const item=readLastStory();
+ wrap.hidden=false;
+ button.disabled=!item;
+ if(!item){
+  label.textContent="Noch keine Hörgeschichte";
+  info.textContent="Deine zuletzt gehörte Geschichte erscheint hier.";
+  art.src="/kids/assets/kids-icons/headphones-real-v12.png";
+  track.hidden=true;bar.style.width="0%";
+  return;
+ }
+ label.textContent=item.title.trim();
+ info.textContent=(storyCategory[item.category]||"Hörgeschichte")+" · ab "+listenTime(item.time)+
+  (Number(item.duration)>0?" von "+listenTime(item.duration):"");
+ const safeArt=typeof item.artwork==="string"&&item.artwork.startsWith("/kids/assets/")&&!item.artwork.includes("..");
+ art.src=safeArt?item.artwork:"/kids/assets/kids-icons/headphones-real-v12.png";
+ const duration=Number(item.duration)||0;
+ const pct=duration>0?Math.min(100,Math.max(0,Number(item.time)/duration*100)):0;
+ track.hidden=!(duration>0);bar.style.width=pct.toFixed(1)+"%";
+ track.setAttribute("role","progressbar");
+ track.setAttribute("aria-label","Fortschritt der Hörgeschichte");
+ track.setAttribute("aria-valuenow",String(Math.round(pct)));
+ track.setAttribute("aria-valuemin","0");
+ track.setAttribute("aria-valuemax","100");
 }
 function profileInfo(){
  try{
@@ -190,7 +228,17 @@ function paint(){
  checkBirthFields();
 }
 $("#kidsParentResumeOpen")?.addEventListener("click",function(){
+ const item=readLastStory();
+ if(!item)return;
  document.querySelector('.bottom-nav [data-target="stories"]')?.click();
+ // Open the original Story Hub resume API at the saved second, no mock player.
+ setTimeout(function(){
+  if(window.DARKidsStoryHub&&typeof window.DARKidsStoryHub.openResume==="function"){
+   window.DARKidsStoryHub.openResume(item.category,item.id,Number(item.time)||0);
+  }else if(window.DARKidsStoryHub&&typeof window.DARKidsStoryHub.openStory==="function"){
+   window.DARKidsStoryHub.openStory(item.category,item.id);
+  }
+ },180);
 });
 $("#kidsParentManage")?.addEventListener("click",function(){
  accountDetails.open=true;
@@ -229,8 +277,10 @@ birthSave?.addEventListener("click",function(){
  },50);
 });
 window.addEventListener("pageshow",paint);
+window.addEventListener("dar-kids-story-resume",renderLastStory);
 window.addEventListener("storage",event=>{
  if(!event.key||["kids.activeProfile","kids.profiles.v1","kids.age"].includes(event.key)||event.key.startsWith("dar.kids.birthMonth.v1."))paint();
+ if(!event.key||event.key==="kids.storyHub.last.v1")renderLastStory();
 });
 document.addEventListener("visibilitychange",()=>{if(!document.hidden)paint()});
 // The offline card is dynamically inserted by its existing module. Reposition
@@ -250,7 +300,7 @@ if("MutationObserver" in window){
 function arrangeStorySettings(){
  const panel=$("#studioContentPreferences");
  if(!panel||$("#kidsParentStorySettings"))return;
- const details=detailsWrap(panel,"kidsParentStorySettings","Geschichten","Lesen, hören und Einstellungen");
+ const details=detailsWrap(panel,"kidsParentStorySettings","Geschichten-Einstellungen","Darstellung und Wiedergabe anpassen");
  accountDetails.after(details);
 }
 arrangeStorySettings();
