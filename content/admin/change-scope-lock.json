@@ -7764,6 +7764,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-20T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-pwa-start-recovery-remove-forced-dqp-20261016",
+      "at": "2026-10-16T13:39:00+02:00",
+      "approvedBy": "user-explicit-fix-test-app-will-not-open-20261016",
+      "reason": "Emergency restore reliable PWA Test shell boot. After new run_worker_first, /test and /test/ are processed by Worker and formerly dormant forced ?dqp=915 302 can change PWA start URL. Remove only that redirect; leave app icons, prayer motifs, visitor app and all other services unchanged.",
+      "paths": [
+        "cloudflare/test-app-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-19T23:59:00.000Z"
     }
   ],
   "enabled": true
