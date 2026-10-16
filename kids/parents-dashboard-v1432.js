@@ -99,6 +99,7 @@ function paint(){
  if(modeCard)modeCard.textContent=birth?"AUTOMATISCH":"MANUELL";
  const stat=progressPanel.querySelector(".label-row span");
  if(stat)stat.textContent=child?"PROFILBEZOGEN":"DIESES GERÄT";
+ checkBirthFields();
 }
 $("#kidsParentManage")?.addEventListener("click",function(){
  accountDetails.open=true;
@@ -129,7 +130,11 @@ birthSave?.addEventListener("click",function(){
  setTimeout(function(){
    paint();checkBirthFields();
    const p=profileInfo();
-   if(p&&window.DARKidsBirthMonth?.get(p.id)===entered&&birthFold)birthFold.open=false;
+   if(p&&window.DARKidsBirthMonth?.get(p.id)===entered){
+     if(birthFold)birthFold.open=false;
+     const note=$("#kidsParentCurrentAge");
+     if(note)note.textContent="✓ Gespeichert · automatische Lernstufe "+window.DARKidsBirthMonth.groupAt(entered);
+   }
  },50);
 });
 window.addEventListener("pageshow",paint);
