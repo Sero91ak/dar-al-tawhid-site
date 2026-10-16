@@ -106,19 +106,71 @@ def prepare():
             outstanding.append(x)
     return reg,ledger,stage,outstanding,protected
 
-def candidate_batch(outstanding):
-    selected=[];estimated=0.0
-    for item in outstanding:
-        if len(selected)>=COUNT_PER_RUN:break
-        cost=len(item["spokenText"])*RATE_FOR_ESTIMATE_ONLY
-        check(cost<=MAX_ESTIMATED_CREDITS_PER_RUN,
-              "one original exceeds whole run credit limit")
-        if estimated+cost>MAX_ESTIMATED_CREDITS_PER_RUN:break
+def candidate_batch(outstanding, stage):
+    """Prefer COMPLETE older questions, balanced between age bands, not A–Z speech.
+
+    Each slot is a real exact V4 text hash from the first-stage 65. This
+    greedy order can finish 3–4 questions with the first 10 clips; alphabetical
+    text ordering would often leave all questions incomplete.
+    """
+    allowed={x["spokenTextSHA256"]:x for x in stage["originalTextRecordingQueue"]}
+    pending={x["spokenTextSHA256"]:x for x in outstanding}
+    check(len(allowed)==STAGE_SIZE and len(pending)==len(outstanding),
+          "duplicate or lost source SHA")
+    need={}
+    age_by_question={}
+    for q in stage["questions"]:
+        qid=q["questionId"];age=q["ageBand"]
+        hashes=set()
+        for part in q["audioParts"].values():
+            hashes.update(part.get("missingOriginalTextSHA256",[]))
+        check(hashes<=set(allowed),"quiz part references unrecognized stage1 speech")
+        need[qid]=hashes&set(pending)
+        age_by_question[qid]=age
+    check(set(pending)==set().union(*need.values()),
+          "paid stage1 text is not needed by any approved quiz question")
+    selected=[];chosen=set();estimated=0.0
+    finished_by_age={"7-8":0,"9-10":0}
+    while len(selected)<COUNT_PER_RUN:
+        possible=[]
+        for qid,required in need.items():
+            new=required-chosen
+            if not new:continue
+            parts=[pending[h] for h in sorted(new)]
+            cost=sum(len(p["spokenText"])*RATE_FOR_ESTIMATE_ONLY for p in parts)
+            if len(selected)+len(parts)>COUNT_PER_RUN or estimated+cost>MAX_ESTIMATED_CREDITS_PER_RUN:
+                continue
+            # Balance new completions between both older age profiles.
+            possible.append((finished_by_age[age_by_question[qid]],len(parts),
+                             cost,qid,parts))
+        if not possible:break
+        _,_,cost,qid,parts=min(possible,key=lambda x:x[:4])
+        for part in parts:
+            digest=part["spokenTextSHA256"]
+            check(digest not in chosen,"same V4 source would be purchased twice")
+            chosen.add(digest);selected.append(part)
         estimated+=cost
-        selected.append(item)
+        finished_by_age[age_by_question[qid]]+=1
+    # Use any leftover slots on speech needed for the next nearest-to-complete
+    # question, never on an unassociated alphabetical filler.
+    while len(selected)<COUNT_PER_RUN:
+        candidates=[]
+        for qid,required in need.items():
+            missing=required-chosen
+            if not missing:continue
+            possible=sorted(missing,key=lambda h:(len(pending[h]["spokenText"]),h))
+            part=pending[possible[0]]
+            cost=len(part["spokenText"])*RATE_FOR_ESTIMATE_ONLY
+            if estimated+cost<=MAX_ESTIMATED_CREDITS_PER_RUN:
+                candidates.append((len(missing),cost,qid,part))
+        if not candidates:break
+        _,cost,_,part=min(candidates,key=lambda x:x[:3])
+        chosen.add(part["spokenTextSHA256"]);selected.append(part)
+        estimated+=cost
     check(bool(selected) or not outstanding,
-          "first new V4 original cannot fit within manually capped budget")
-    return selected,round(estimated,2)
+          "first-stage V4 originals do not fit within manual credit cap")
+    complete=sorted(qid for qid,req in need.items() if req and req<=chosen)
+    return selected,round(estimated,2),complete
 
 def main():
     parser=argparse.ArgumentParser()
@@ -129,7 +181,7 @@ def main():
                         help="Requires explicit manual workflow approval and API key")
     args=parser.parse_args()
     reg,ledger,stage,missing,protected=prepare()
-    selected,estimate=candidate_batch(missing)
+    selected,estimate,completion_candidates=candidate_batch(missing,stage)
     report={
         "scope":"KIDS_V4_OLDER_STAGE1_20_QUESTIONS_65_EXACT_ORIGINALS",
         "modelId":MODEL,"voiceId":VOICE,"reviewOnly":True,
@@ -139,6 +191,9 @@ def main():
         "remainingFirstStageOriginals":len(missing),
         "nextPaidRunOriginalLimit":COUNT_PER_RUN,
         "nextExactTextSha256":[x["spokenTextSHA256"] for x in selected],
+        "questionsThatCouldGainCompleteV4AudioAfterNextRun":completion_candidates,
+        "newlyCompleteQuestionCountProjectedFromActualSourceGaps":len(completion_candidates),
+        "audioQualityStillRequiresHumanApproval":True,
         "nextEstimatedCreditsNotProviderBill":estimate,
         "estimatedPerRunCreditsMaximum":MAX_ESTIMATED_CREDITS_PER_RUN,
         "previouslyPaidHistoricalFlowTextsInQueue":0,
