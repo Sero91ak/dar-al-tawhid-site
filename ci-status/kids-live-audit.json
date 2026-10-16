@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-16T05:45:19Z",
+  "timestamp": "2026-10-16T05:48:14Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "failure",
-  "finishedDeployRun": "38857260604",
+  "finishedDeployConclusion": "cancelled",
+  "finishedDeployRun": "38857657697",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -44,6 +44,51 @@
   },
   "lastDeployRuns": [
     {
+      "conclusion": null,
+      "created_at": "2026-10-16T05:48:00Z",
+      "head_sha": "dc9c3fcbafd4b95cf88028be3ddbfdb4e8ee59df",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38857661507",
+      "id": 38857661507,
+      "status": "pending",
+      "updated_at": "2026-10-16T05:48:01Z"
+    },
+    {
+      "conclusion": "cancelled",
+      "created_at": "2026-10-16T05:47:58Z",
+      "head_sha": "78a913c7183e26a57092d957f45c87ccb55c93c2",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38857657697",
+      "id": 38857657697,
+      "status": "completed",
+      "updated_at": "2026-10-16T05:48:01Z"
+    },
+    {
+      "conclusion": "cancelled",
+      "created_at": "2026-10-16T05:47:55Z",
+      "head_sha": "0d68e43e7bae6bd9b31cec5e2b2c024b7712ff47",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38857653862",
+      "id": 38857653862,
+      "status": "completed",
+      "updated_at": "2026-10-16T05:47:59Z"
+    },
+    {
+      "conclusion": "cancelled",
+      "created_at": "2026-10-16T05:47:48Z",
+      "head_sha": "6b6a3690ea8c23afb0cb5fc9bb93cc0ced455530",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38857644080",
+      "id": 38857644080,
+      "status": "completed",
+      "updated_at": "2026-10-16T05:47:56Z"
+    },
+    {
+      "conclusion": null,
+      "created_at": "2026-10-16T05:47:42Z",
+      "head_sha": "d2ab0bb4862313bb87c7a8c8829f33d1584f6413",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38857634938",
+      "id": 38857634938,
+      "status": "queued",
+      "updated_at": "2026-10-16T05:48:09Z"
+    },
+    {
       "conclusion": "failure",
       "created_at": "2026-10-16T05:43:29Z",
       "head_sha": "6edbf6dcb6c8b27ac05990b5e9fabfa011b237eb",
@@ -51,51 +96,6 @@
       "id": 38857260604,
       "status": "completed",
       "updated_at": "2026-10-16T05:45:11Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-10-16T05:17:58Z",
-      "head_sha": "69c1162d75199223952b22c94921d377e2107533",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38855042510",
-      "id": 38855042510,
-      "status": "completed",
-      "updated_at": "2026-10-16T05:21:38Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-16T05:17:54Z",
-      "head_sha": "5e0cde77e255cda4cb95226c01672fcc8470dadc",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38855037031",
-      "id": 38855037031,
-      "status": "completed",
-      "updated_at": "2026-10-16T05:17:59Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-10-16T05:17:49Z",
-      "head_sha": "9be1288b6c7ff84045a53492bdcaee6026c6123c",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38855029309",
-      "id": 38855029309,
-      "status": "completed",
-      "updated_at": "2026-10-16T05:19:57Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-10-16T05:14:57Z",
-      "head_sha": "7d242ba6234f9c1eadfce9d3b8edf8dbbd61ebf5",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38854778991",
-      "id": 38854778991,
-      "status": "completed",
-      "updated_at": "2026-10-16T05:17:11Z"
-    },
-    {
-      "conclusion": "cancelled",
-      "created_at": "2026-10-16T05:14:38Z",
-      "head_sha": "3ec064e3d8296c4d6f1d5fd619c97f30afde961b",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/38854752228",
-      "id": 38854752228,
-      "status": "completed",
-      "updated_at": "2026-10-16T05:14:58Z"
     }
   ]
 }
