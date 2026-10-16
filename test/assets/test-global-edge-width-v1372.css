@@ -180,3 +180,236 @@ html[data-theme] body.is-quiz-route #appView :is(
     );
   }
 }
+
+
+/* DAR_ADULT_TEST_POST_LIBRARY_V1373 — 2026-10-16
+   Scope: adult Dar Test posts library, category detail, reader only.
+   Keep search/filter events, accordion state, post IDs, source links and
+   the existing themes intact.  A hero is a background, not an inset image.
+   This authority follows the injected Dar Test area styles. */
+html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView.view{
+  padding-inline:0!important;
+  overflow-x:clip!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title{
+  position:relative!important;
+  inset:auto!important;
+  transform:none!important;
+  translate:none!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0 0 14px!important;
+  padding:28px max(18px,var(--dar-test-edge-gutter)) 25px!important;
+  min-height:clamp(242px,43vw,340px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  overflow:hidden!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  box-sizing:border-box!important;
+  background-color:var(--bg)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head{
+  background-image:
+    linear-gradient(90deg,var(--topics-hero-left) 0%,var(--topics-hero-mid) 46%,var(--topics-hero-right) 82%,transparent 100%),
+    linear-gradient(0deg,color-mix(in srgb,var(--bg) 24%,transparent),transparent 58%),
+    var(--topics-hero-art)!important;
+  background-position:center,center,70% 48%!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+}
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head{
+  background-image:
+    linear-gradient(90deg,var(--topd-left) 0%,var(--topd-mid) 46%,var(--topd-right) 82%,transparent 100%),
+    linear-gradient(0deg,color-mix(in srgb,var(--bg) 24%,transparent),transparent 58%),
+    var(--topd-art)!important;
+  background-position:center,center,70% 48%!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title{
+  background-image:
+    linear-gradient(90deg,var(--px-l) 0%,var(--px-m) 46%,var(--px-r) 82%,transparent 100%),
+    linear-gradient(0deg,color-mix(in srgb,var(--bg) 24%,transparent),transparent 58%),
+    var(--px-art)!important;
+  background-position:center,center,72% 48%!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head > *,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head > *,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title > *{
+  position:relative!important;
+  z-index:1!important;
+  width:min(680px,91%)!important;
+  max-width:100%!important;
+  min-width:0!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head h2,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head h2,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title h2{
+  line-height:1.06!important;
+  overflow-wrap:break-word!important;
+  hyphens:auto!important;
+  text-wrap:balance!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head::before,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head::before,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title::before{
+  background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 12%,transparent),transparent 75%)!important;
+  pointer-events:none!important;
+}
+/* A single introduction is enough: the same explanation already lives in the hero. */
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-intro{
+  display:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label{
+  margin:12px auto 7px!important;
+  padding-bottom:9px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label b{
+  font-size:clamp(1.13rem,3.6vw,1.5rem)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-filterbar{
+  display:flex!important;
+  flex-flow:row nowrap!important;
+  align-items:center!important;
+  width:var(--dar-test-edge-stage)!important;
+  max-width:none!important;
+  gap:8px!important;
+  padding:2px 1px 9px!important;
+  margin:0 auto 9px!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  overscroll-behavior-inline:contain!important;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+  scroll-snap-type:x proximity;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-filterbar::-webkit-scrollbar{
+  display:none;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-filterbar .dar-tl-chip{
+  flex:0 0 auto!important;
+  white-space:nowrap!important;
+  min-height:42px!important;
+  border-radius:999px!important;
+  scroll-snap-align:start;
+  touch-action:manipulation;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groups{
+  gap:8px!important;
+  padding-bottom:28px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion{
+  border-radius:14px!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary{
+  min-height:62px!important;
+  padding:12px 13px!important;
+  background:color-mix(in srgb,var(--tl-accent) 4%,var(--tl-surface))!important;
+  touch-action:manipulation;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid{
+  gap:0!important;
+  padding:1px 11px 7px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card,
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:is(:hover,:active,:focus-visible){
+  grid-template-columns:36px minmax(0,1fr) 18px!important;
+  gap:11px!important;
+  min-height:68px!important;
+  padding:10px 2px!important;
+  border:0!important;
+  border-bottom:1px solid var(--tl-rule)!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__idx{
+  display:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__icon{
+  width:36px!important;
+  height:36px!important;
+  max-width:36px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:is(:hover,:active){
+  background:color-mix(in srgb,var(--tl-accent) 5%,transparent)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:focus-visible{
+  outline:2px solid var(--tl-accent)!important;
+  outline-offset:-2px!important;
+}
+html[data-theme] body.is-topic-route #appView .topic-collection-page > :is(.post-grid,.topic-collection){
+  width:var(--dar-test-edge-stage)!important;
+  max-width:none!important;
+  margin-inline:auto!important;
+}
+/* Reader frame stretches to device width; prose retains a comfortable line length. */
+html[data-theme] body.is-post-route #appView .post-reader-main,
+html[data-theme] body.is-post-route #appView .post-reader > :is([data-post-after-panel],.post-after-panel,.related-compact,.related-compact-list){
+  width:var(--dar-test-edge-stage)!important;
+  max-width:none!important;
+  margin-inline:auto!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader .statement,
+html[data-theme] body.is-post-route #appView .post-reader-main .post-slide-quote{
+  font-size:clamp(1.08rem,3.65vw,1.35rem)!important;
+  line-height:1.65!important;
+  overflow-wrap:anywhere!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader :is(.post-aussage-text,.post-source-main,.post-fazit-body,.post-key-message p){
+  max-width:78ch;
+  overflow-wrap:break-word;
+}
+html[data-theme] body.is-post-route #appView .post-reader :is(.post-source,.post-key-message){
+  padding-block:15px 17px!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader :is(.post-source-details,.post-source-full-text,.post-reader-cite,[data-post-after-source]){
+  font-size:clamp(.84rem,2.8vw,.98rem)!important;
+  line-height:1.55!important;
+  overflow-wrap:anywhere!important;
+}
+html[data-theme] body.is-post-route #appView{
+  padding-bottom:calc(164px + env(safe-area-inset-bottom,0px))!important;
+}
+@media(min-width:760px){
+  html[data-theme] body.is-topics-route #appView .topics-hub > .view-head,
+  html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head,
+  html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title{
+    padding:48px max(28px,4vw) 38px!important;
+    min-height:315px!important;
+  }
+  html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title > *{
+    width:min(740px,76%)!important;
+  }
+}
+@media(max-width:599px){
+  html[data-theme] body.is-topics-route #appView .topics-hub > .view-head,
+  html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head,
+  html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title{
+    min-height:254px!important;
+    padding:25px max(16px,var(--dar-test-edge-gutter)) 23px!important;
+  }
+  html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head{
+    min-height:233px!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub > .view-head h2,
+  html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head h2,
+  html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title h2{
+    font-size:clamp(1.88rem,8vw,2.85rem)!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] body.is-topics-route #appView .dar-tl-filterbar{
+    scroll-behavior:auto!important;
+  }
+}
