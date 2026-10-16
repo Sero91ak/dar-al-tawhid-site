@@ -191,9 +191,26 @@ async function fetchVersionBuild(base) {
     const settingsOk = html.includes(marker) && html.includes("body.is-settings-route .settings-one-page .notification-prayer-grid");
     const prayerOk = html.includes(marker) && html.includes("prayer-time-grid--top") && html.includes("dar-time-photo");
     const imageUrlOk = ["fajr","dhuhr","asr","maghrib","isha"].every(name=>html.includes("/test/assets/prayer-motifs/"+name+".webp?v=20261016-visual-v6"));
-    console.log(`motif-html ${label}: status=${status} settings=${settingsOk} prayer=${prayerOk} images=${imageUrlOk}`);
-    if(status!==200 || !settingsOk || !prayerOk || !imageUrlOk) {
+    const domRuntimeOk=html.includes('id="darPrayerMotifsDomV7"')
+      && html.includes("live-photo-v6.js?v=20261016-visible-v7");
+    const oldNavPanelGone=!html.includes('${renderAdaptiveNavPanel()}');
+    console.log(`motif-html ${label}: status=${status} settings=${settingsOk} prayer=${prayerOk} images=${imageUrlOk} domRuntime=${domRuntimeOk} oldNavGone=${oldNavPanelGone}`);
+    if(status!==200 || !settingsOk || !prayerOk || !imageUrlOk || !domRuntimeOk || !oldNavPanelGone) {
       throw new Error(`Test Gebetsmotive fehlen im HTML auf ${label}; Worker/Cache pruefen`);
+    }
+  }
+
+  // Check the exact browser script and its card-image selectors are deployable.
+  for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
+    for (const [file, marker] of [
+      ["live-photo-v6.js", "data-notification-prayer"],
+      ["live-photo-v6.css", "dar-prayer-motif-image"]
+    ]) {
+      const url=base+"/assets/prayer-motifs/"+file+"?v=20261016-visible-v7";
+      const result=await fetchText(url);
+      const ok=result.status===200 && result.text.includes(marker);
+      console.log("motif-runtime "+label+"/"+file+": status="+result.status+" valid="+ok);
+      if(!ok)throw new Error("Test Motiv-Anzeige nicht ladbar: "+url);
     }
   }
 
