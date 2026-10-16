@@ -16,4 +16,5 @@ Zugelassene Eingänge: ausschließlich lokal/temporär; Rohdateien niemals commi
 Die Inhalte müssen aus dem interaktiven Offline-Hörpaket exportiert
 und mit echten MP3-Prüfsummen erstellt worden sein. Externe/unbekannte
 Dateien werden abgelehnt. Vorhandene Originale werden nie überschrieben.
-Keine Rohdaten oder Prüfernamen in der normalisierten Ergebnisdatei.
+Keine Rohdaten, Prüfernamen oder freien Fehlernotizen im GitHub-Ergebnis.
+Notiztexte verbleiben ausschließlich in der lokalen, nicht versionierten Originaldatei.
