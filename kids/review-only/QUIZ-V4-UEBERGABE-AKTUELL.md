@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `8736c83047b99fc8235fe08beda8ab9177ae49d5`
+- Commit beim Erstellen dieses Berichts: `9cfcd41291b6ffd452de828b5e125dbe999c9dc1`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **276 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1044 Frage-/Lob-/Retry-/Erklärungsteile**.
 - Technisch vierteilig vollständig: **72/450**, noch unvollständig: **378/450**.
@@ -45,7 +45,7 @@ Prüfdateien aus dem Offline-Hörpaket werden ausschließlich anhand echter V4-M
 Importer: `python3 kids/tools/import_quiz_v4_human_hearing_reviews.py`.
 Internes Ledger: `kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json`.
 CI: https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/kids-v4-hearing-results-secure-import.yml
-Selbstauskünfte bleiben von unabhängigen Audiofreigaben und der öffentlichen Quiz-Freigabe strikt getrennt. Prüfernamen niemals in den GitHub-Bericht kopieren.
+Selbstauskünfte bleiben von unabhängigen Audiofreigaben und der öffentlichen Quiz-Freigabe strikt getrennt. Der Importer validiert jedes Mal die REALEN MP3-Bytes gegen SHA-256, weist doppelte JSON-Schlüssel zurück und speichert weder Prüfernamen noch freie Notiztexte im GitHub-Bericht.
 
 ## Nächste verbindliche Schritte
 
