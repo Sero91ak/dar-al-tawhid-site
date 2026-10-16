@@ -808,3 +808,158 @@ html.is-standalone-pwa :is(.qpt-sheet-backdrop,.story-viewer-backdrop,.modal-bac
   }
 }
 
+
+
+/* DAR_ADULT_LIVE_EDGE_WIDTH_V1373_20261016
+ * LIVE adult DĀR AL TAWḤĪD SPA, including iOS WebView and Android PWA.
+ * Promote the proven Test content axis without touching Kids, Reader,
+ * Feed, dialogs, player overlays, tab bar geometry or app state.
+ *
+ * Origin of screenshot mismatch: #appView has 12px side padding, while
+ * Mehr's .dm15-shell adds 12px more and has an 850px width cap.
+ * Quiz and other SPA content have similar nested width constraints.
+ * Keep only ONE responsive safe-area gutter for the outer content.
+ */
+html[data-theme] body {
+  --dar-adult-live-edge-gutter: max(
+    10px,
+    env(safe-area-inset-left,0px),
+    env(safe-area-inset-right,0px),
+    2.2vw
+  );
+  --dar-adult-live-content-width: calc(100% - (2 * var(--dar-adult-live-edge-gutter)));
+}
+
+/* Stage spans the whole screen. Inset only the actual content region.
+   Strict SPA route scope: excludes feed fullscreen / Qurʾān reader / KIDS. */
+html[data-theme] body:is(
+  .is-more-route,.is-quiz-route,.is-topics-route,.is-topic-route,
+  .is-quran-overview,.is-settings-route,.is-notifications-route,
+  .is-account-route,.is-about-route,.is-news-route,.is-news-detail-route,
+  .is-zakat-route,.is-ramadan-route,.is-calendar-route,
+  .is-source-library-route,.is-quran-topic-route
+) #appView.view {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  margin-inline: 0 !important;
+  padding-inline: 0 !important;
+  box-sizing: border-box !important;
+  overflow-x: clip !important;
+}
+
+/* Production Mehr v15: eliminate 850px cap and the second card inset.
+   Leave the existing five-category rail, 3-D images and card padding. */
+html[data-theme] body.is-more-route #appView .dm15-shell,
+html[data-theme] body.is-more-route #appView .dar-more-v15,
+html[data-theme] body.is-more-route #appView .more-page {
+  width: var(--dar-adult-live-content-width) !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
+html[data-theme] body.is-more-route #appView :is(
+  .dm15-grid,.dm15-categories,.dm15-results-head,.dm15-head,
+  .dm15-panel,.dm15-feature
+) {
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Quiz: the home / live session panels take the same single inset.
+   Original question/answer interactions, progress, select menus remain. */
+html[data-theme] body.is-quiz-route #appView .quiz-shell,
+html[data-theme] body.is-quiz-route #appView .quiz-shell.quiz-shell-home,
+html[data-theme] body.is-quiz-route #appView .quiz-shell.quiz-shell-pro,
+html[data-theme] body.is-quiz-route #appView > .quiz-home {
+  width: var(--dar-adult-live-content-width) !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  box-sizing: border-box !important;
+}
+html[data-theme] body.is-quiz-route #appView .quiz-shell :is(
+  .quiz-home,.quiz-home-panel,.quiz-home-head,.quiz-home-metrics,
+  .quiz-home-quick-nav,.quiz-home-resume
+) {
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* Common adult area headings, including screens opened via Mehr.
+   Stage width matches the bottom tab edge, while heading typography remains
+   authored by each section and never flush against iPhone curved corners. */
+html[data-theme] body:is(
+  .is-more-route,.is-quiz-route,.is-topics-route,.is-topic-route,
+  .is-account-route,.is-about-route,.is-news-route,.is-news-detail-route,
+  .is-zakat-route,.is-ramadan-route,.is-notifications-route,
+  .is-source-library-route,.is-quran-topic-route
+) #appView > .view-head {
+  width: var(--dar-adult-live-content-width) !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Global, but *top-level* only: no change to individual ʾĀyah text margins,
+   player dialogs, full-screen feed tiles or nested settings controls. */
+html[data-theme] body.is-quran-overview #appView > .qov-page,
+html[data-theme] body.is-topics-route #appView > .topics-hub,
+html[data-theme] body.is-topic-route #appView > .topic-collection-page,
+html[data-theme] body.is-settings-route #appView > .settings-one-page,
+html[data-theme] body.is-account-route #appView > .account-panel,
+html[data-theme] body.is-about-route #appView > :is(.about-page,.about-page--smart),
+html[data-theme] body.is-news-route #appView > .current-focus,
+html[data-theme] body.is-news-detail-route #appView > .news-detail-article,
+html[data-theme] body.is-zakat-route #appView > .zakat-view,
+html[data-theme] body.is-calendar-route #appView > .calendar-premium-page,
+html[data-theme] body.is-ramadan-route #appView > :is(.ramadan-panel,.calendar-panel),
+html[data-theme] body.is-source-library-route #appView > .source-library-page,
+html[data-theme] body.is-notifications-route #appView > .notification-center-page {
+  width: var(--dar-adult-live-content-width) !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  box-sizing: border-box !important;
+}
+
+/* Supporting blocks with their own fixed 780–980px caps. */
+html[data-theme] body.is-quran-overview #appView .qov-main,
+html[data-theme] body.is-topics-route #appView .topics-hub > :is(
+  .search-panel,.search-pro-panel,.topics-hub__label,
+  .dar-tl-intro,.dar-tl-filterbar,.dar-tl-groups
+),
+html[data-theme] body.is-settings-route #appView .settings-one-page,
+html[data-theme] body.is-account-route #appView .account-panel {
+  max-width: none !important;
+}
+
+/* Narrow iPhones and tablet landscape keep their native safe areas. */
+@media (max-width:390px) {
+  html[data-theme] body {
+    --dar-adult-live-edge-gutter: max(
+      10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px)
+    );
+  }
+}
+@media (min-width:700px) {
+  html[data-theme] body {
+    --dar-adult-live-edge-gutter: max(
+      16px,env(safe-area-inset-left,0px),
+      env(safe-area-inset-right,0px),2vw
+    );
+  }
+}
