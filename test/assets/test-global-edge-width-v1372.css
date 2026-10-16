@@ -527,3 +527,225 @@ html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .da
     font-size:.72rem!important;
   }
 }
+
+
+/* DAR_TEST_TOPIC_LUXURY_THEME_V1375 — 2026-10-16
+   Adult test topics only. Each appearance supplies its own --tp-accent, --tp-panel,
+   --tp-ink, --tp-muted and --tp-rule via the existing Test theme authority.
+   Keep the functional native details, no duplicate chips, no visitor/Kids changes. */
+html[data-theme] body.is-topics-route #appView .topics-hub {
+  --tl-luxe-surface:var(--tl-surface,var(--tp-panel,var(--card)));
+  --tl-luxe-ink:var(--tl-ink,var(--tp-ink,var(--text)));
+  --tl-luxe-muted:var(--tl-muted,var(--tp-muted,var(--muted)));
+  --tl-luxe-accent:var(--tl-accent,var(--tp-accent,var(--gold2)));
+  --tl-luxe-line:var(--tl-rule,var(--tp-rule,var(--line2)));
+  --tl-luxe-halo:color-mix(in srgb,var(--tl-luxe-accent) 13%,transparent);
+  --tl-luxe-edge:color-mix(in srgb,var(--tl-luxe-accent) 46%,var(--tl-luxe-line));
+  --tl-luxe-shadow:0 10px 24px color-mix(in srgb,var(--bg) 42%,transparent),inset 0 1px 0 color-mix(in srgb,var(--tl-luxe-accent) 12%,transparent);
+}
+/* Themes remain separate: light appearances use delicate low-contrast shadowing. */
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) body.is-topics-route #appView .topics-hub,
+html[data-theme="light"][data-theme-variant="salbei"] body.is-topics-route #appView .topics-hub {
+  --tl-luxe-halo:color-mix(in srgb,var(--tl-luxe-accent) 9%,transparent);
+  --tl-luxe-shadow:0 8px 23px color-mix(in srgb,var(--tl-luxe-ink) 8%,transparent),inset 0 1px 0 color-mix(in srgb,#fff 65%,transparent);
+}
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"],[data-theme="aurora"]) body.is-topics-route #appView .topics-hub {
+  --tl-luxe-halo:color-mix(in srgb,var(--tl-luxe-accent) 15%,transparent);
+  --tl-luxe-shadow:0 13px 29px rgba(0,0,0,.24),inset 0 1px 0 color-mix(in srgb,var(--tl-luxe-accent) 15%,transparent);
+}
+/* Full theme compatibility: derive highlights from the existing theme authority. */
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-groups {
+  gap:12px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion {
+  position:relative!important;
+  isolation:isolate!important;
+  border:1px solid var(--tl-luxe-edge)!important;
+  border-radius:19px!important;
+  background:var(--tl-luxe-surface)!important;
+  box-shadow:var(--tl-luxe-shadow)!important;
+  overflow:hidden!important;
+  transition:border-color .2s ease,box-shadow .2s ease!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion:nth-child(even) {
+  border-color:color-mix(in srgb,var(--tl-luxe-accent) 35%,var(--tl-luxe-line))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion[open] {
+  border-color:color-mix(in srgb,var(--tl-luxe-accent) 68%,var(--tl-luxe-line))!important;
+  box-shadow:0 13px 32px color-mix(in srgb,var(--bg) 41%,transparent),inset 0 1px 0 color-mix(in srgb,var(--tl-luxe-accent) 20%,transparent)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary {
+  position:relative!important;
+  isolation:isolate!important;
+  display:grid!important;
+  grid-template-columns:40px minmax(0,1fr) auto 18px!important;
+  gap:11px!important;
+  align-items:center!important;
+  min-height:84px!important;
+  padding:13px 16px!important;
+  background:
+    radial-gradient(ellipse 65% 130% at 92% -15%,var(--tl-luxe-halo),transparent 76%),
+    linear-gradient(108deg,color-mix(in srgb,var(--tl-luxe-accent) 6%,var(--tl-luxe-surface)),var(--tl-luxe-surface) 64%)!important;
+  color:var(--tl-luxe-ink)!important;
+  transition:background .2s ease!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary::before {
+  content:""!important;
+  position:absolute!important;
+  top:0!important;
+  left:15px!important;
+  width:clamp(64px,22%,124px)!important;
+  height:2px!important;
+  border-radius:999px!important;
+  pointer-events:none!important;
+  background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--tl-luxe-accent) 78%,transparent),transparent)!important;
+  opacity:.7!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion[open] summary {
+  background:
+    radial-gradient(ellipse 75% 130% at 94% 0%,color-mix(in srgb,var(--tl-luxe-accent) 14%,transparent),transparent 74%),
+    linear-gradient(110deg,color-mix(in srgb,var(--tl-luxe-accent) 11%,var(--tl-luxe-surface)),var(--tl-luxe-surface) 78%)!important;
+  border-bottom:1px solid color-mix(in srgb,var(--tl-luxe-accent) 38%,var(--tl-luxe-line))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupno {
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:38px!important;
+  height:38px!important;
+  border:1px solid color-mix(in srgb,var(--tl-luxe-accent) 46%,transparent)!important;
+  border-radius:14px!important;
+  background:radial-gradient(circle at 25% 18%,color-mix(in srgb,var(--tl-luxe-accent) 19%,transparent),transparent 90%)!important;
+  color:var(--tl-luxe-accent)!important;
+  font:600 .87rem/1 var(--font-display,var(--serif,Georgia,serif))!important;
+  letter-spacing:.04em!important;
+  opacity:1!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupname {
+  color:var(--tl-luxe-ink)!important;
+  font:650 clamp(1.02rem,3.65vw,1.25rem)/1.35 var(--font-display,var(--serif,Georgia,serif))!important;
+  letter-spacing:.002em!important;
+  text-wrap:pretty!important;
+  overflow-wrap:break-word!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupcount {
+  padding:5px 8px!important;
+  border:1px solid color-mix(in srgb,var(--tl-luxe-accent) 25%,var(--tl-luxe-line))!important;
+  border-radius:999px!important;
+  background:color-mix(in srgb,var(--tl-luxe-accent) 6%,transparent)!important;
+  color:var(--tl-luxe-muted)!important;
+  font:650 .7rem/1.25 var(--sans,system-ui,sans-serif)!important;
+  white-space:nowrap!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-arrow {
+  color:var(--tl-luxe-accent)!important;
+  font-size:1.42rem!important;
+  opacity:.95!important;
+  transition:transform .22s ease!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion[open] .dar-tl-arrow {
+  transform:rotate(90deg)!important;
+}
+/* Open group is a separate reading chamber, not a stack of plain separators. */
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid {
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:9px!important;
+  padding:13px!important;
+  border-top:0!important;
+  background:
+    radial-gradient(ellipse 75% 45% at 0% 0%,color-mix(in srgb,var(--tl-luxe-accent) 8%,transparent),transparent 94%),
+    linear-gradient(180deg,color-mix(in srgb,var(--tl-luxe-accent) 4%,var(--tl-luxe-surface)),var(--tl-luxe-surface))!important;
+  animation:darTopicLuxeReveal .23s ease both;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card,
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:is(:hover,:focus-visible,:active) {
+  display:grid!important;
+  grid-template-columns:40px minmax(0,1fr) 18px!important;
+  align-items:center!important;
+  gap:11px!important;
+  min-height:76px!important;
+  padding:11px 12px!important;
+  border:1px solid color-mix(in srgb,var(--tl-luxe-accent) 25%,var(--tl-luxe-line))!important;
+  border-radius:13px!important;
+  background:linear-gradient(115deg,color-mix(in srgb,var(--tl-luxe-accent) 6%,var(--tl-luxe-surface)),var(--tl-luxe-surface))!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--tl-luxe-accent) 8%,transparent)!important;
+  transform:none!important;
+  color:var(--tl-luxe-ink)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:is(:hover,:active) {
+  border-color:color-mix(in srgb,var(--tl-luxe-accent) 55%,var(--tl-luxe-line))!important;
+  background:linear-gradient(115deg,color-mix(in srgb,var(--tl-luxe-accent) 12%,var(--tl-luxe-surface)),var(--tl-luxe-surface))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card:focus-visible {
+  outline:2px solid var(--tl-luxe-accent)!important;
+  outline-offset:-2px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__icon {
+  display:flex!important;
+  width:39px!important;
+  height:39px!important;
+  max-width:39px!important;
+  border:1px solid color-mix(in srgb,var(--tl-luxe-accent) 33%,var(--tl-luxe-line))!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle at 30% 20%,color-mix(in srgb,var(--tl-luxe-accent) 13%,var(--tl-luxe-surface)),var(--tl-luxe-surface))!important;
+  box-shadow:inset 0 1px 0 color-mix(in srgb,var(--tl-luxe-accent) 10%,transparent)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__body h3 {
+  color:var(--tl-luxe-ink)!important;
+  font:650 clamp(.99rem,3.4vw,1.16rem)/1.28 var(--font-display,var(--serif,Georgia,serif))!important;
+  letter-spacing:0!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__count {
+  color:var(--tl-luxe-muted)!important;
+  font:600 .76rem/1.35 var(--sans,system-ui,sans-serif)!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  margin-top:4px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-grid .topics-theme-card__chev {
+  color:var(--tl-luxe-accent)!important;
+  opacity:.86!important;
+}
+@keyframes darTopicLuxeReveal {
+  from { opacity:.45;transform:translateY(-5px); }
+  to { opacity:1;transform:translateY(0); }
+}
+@media(max-width:430px) {
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary {
+    grid-template-columns:34px minmax(0,1fr) auto 16px!important;
+    gap:8px!important;
+    min-height:83px!important;
+    padding:12px 11px!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupno {
+    width:32px!important;height:32px!important;border-radius:11px!important;font-size:.77rem!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupname {
+    font-size:clamp(.95rem,3.65vw,1.12rem)!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-groupcount {
+    font-size:.66rem!important;padding:4px 6px!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid {
+    padding:10px!important;gap:8px!important;
+  }
+}
+@media(min-width:760px) {
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary {
+    min-height:88px!important;padding:16px 23px!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid {
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion,
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion summary,
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-arrow {
+    transition:none!important;
+  }
+  html[data-theme] body.is-topics-route #appView .topics-hub .dar-tl-accordion .dar-tl-grid {
+    animation:none!important;
+  }
+}
