@@ -212,14 +212,14 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
   // Keep only the existing v1194 home authority and refresh its assets.
-  html = html.replace(/dar-home-library-v1194\.css\?v=[^"']+/g, "dar-home-library-v1194.css?v=1324-single-canvas");
-  html = html.replace(/dar-home-library-v1194\.js\?v=[^"']+/g, "dar-home-library-v1194.js?v=1324-single-canvas");
-  html = html.replace(/dar-library-redesign-v1168\.css\?v=[^"']+/g, "dar-library-redesign-v1168.css?v=1213-quran-native");
-  html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"']+/g, "dar-library-redesign-v1168.js?v=1213-quran-native");
+  html = html.replace(/dar-home-library-v1194\.css\?v=[^"'`\s]+/g, "dar-home-library-v1194.css?v=1324-single-canvas");
+  html = html.replace(/dar-home-library-v1194\.js\?v=[^"'`\s]+/g, "dar-home-library-v1194.js?v=1324-single-canvas");
+  html = html.replace(/dar-library-redesign-v1168\.css\?v=[^"'`\s]+/g, "dar-library-redesign-v1168.css?v=1213-quran-native");
+  html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"'`\s]+/g, "dar-library-redesign-v1168.js?v=1213-quran-native");
 
   // v1227 library hero depth: force the current Test library presentation assets.
-  html = html.replace(/library-app\.css(?:\?v=[^"']*)?/g, "library-app.css?v=1227-hero-depth");
-  html = html.replace(/library-app\.js(?:\?v=[^"']*)?/g, "library-app.js?v=1227-library");
+  html = html.replace(/library-app\.css(?:\?v=[^"'`\s]*)?/g, "library-app.css?v=1227-hero-depth");
+  html = html.replace(/library-app\.js(?:\?v=[^"'`\s]*)?/g, "library-app.js?v=1227-library");
         // DAR_QURAN_PLAYER_V1252
 
 // DAR_QURAN_READER_V1251
@@ -227,8 +227,8 @@ async function finalizeDarTestHomeV1193(asset) {
 // DAR_QURAN_OVERVIEW_V1250
 
 // DAR_ILM_START_PHASE1_CACHE
-  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"']*)?/g, "ilm-research-chat.css?v=ilm-dialog-v1342");
-  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"']*)?/g, "ilm-research-chat.js?v=ilm-dialog-v1356");
+  html = html.replace(/ilm-research-chat\.css(?:\?v=[^"'`\s]*)?/g, "ilm-research-chat.css?v=ilm-dialog-v1342");
+  html = html.replace(/ilm-research-chat\.js(?:\?v=[^"'`\s]*)?/g, "ilm-research-chat.js?v=ilm-dialog-v1356");
 
     // DAR_ILM_SCHOLARS_V1240
 
@@ -265,7 +265,7 @@ async function finalizeDarTestHomeV1193(asset) {
     // DAR_PRAYER_V1254
 
 // Preserve the original DĀR tab implementation; only cache-bust the no-op shim.
-  html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"']+/g, "dar-tab-restore-v1197.css?v=1200-original");
+  html = html.replace(/dar-tab-restore-v1197\.css\?v=[^"'`\s]+/g, "dar-tab-restore-v1197.css?v=1200-original");
 
   // Build IDs are produced by scripts/sync-app-build-ids.js during the deploy build.
   // Do not overwrite them in the Worker; doing so creates a permanent
@@ -332,10 +332,10 @@ async function finalizeDarTestHomeV1193(asset) {
   // DAR_ADAPTIVE_FOLD_V1326
   // Force every pre-existing adaptive/fold reference to the same v1326 bytes.
   // This prevents an older service-worker-cached controller from running first.
-  html = html.replace(/adaptive-layout\.css(?:\?v=[^"']*)?/g, "adaptive-layout.css?v=1331-reader-safe");
-  html = html.replace(/adaptive-layout\.js(?:\?v=[^"']*)?/g, "adaptive-layout.js?v=1331-reader-safe");
-  html = html.replace(/fold-split\.css(?:\?v=[^"']*)?/g, "fold-split.css?v=1331-reader-safe");
-  html = html.replace(/fold-split\.js(?:\?v=[^"']*)?/g, "fold-split.js?v=1331-reader-safe");
+  html = html.replace(/adaptive-layout\.css(?:\?v=[^"'`\s]*)?/g, "adaptive-layout.css?v=1331-reader-safe");
+  html = html.replace(/adaptive-layout\.js(?:\?v=[^"'`\s]*)?/g, "adaptive-layout.js?v=1331-reader-safe");
+  html = html.replace(/fold-split\.css(?:\?v=[^"'`\s]*)?/g, "fold-split.css?v=1331-reader-safe");
+  html = html.replace(/fold-split\.js(?:\?v=[^"'`\s]*)?/g, "fold-split.js?v=1331-reader-safe");
   // Final test authority: real capacity-based Fold/iPad shell. These imports are
   // layout-only and load after legacy route styles so fixed 1400px rules cannot win.
   if (!html.includes('id="darAdaptiveFoldAuthorityV1326"')) {
@@ -358,8 +358,8 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
   // DAR_ADAPTIVE_NAV_V1325
-  html = html.replace(/fold-thumb-nav\.css(?:\?v=[^"']*)?/g, "fold-thumb-nav.css?v=1331-reader-safe");
-  html = html.replace(/fold-thumb-nav\.js(?:\?v=[^"']*)?/g, "fold-thumb-nav.js?v=1331-reader-safe");
+  html = html.replace(/fold-thumb-nav\.css(?:\?v=[^"'`\s]*)?/g, "fold-thumb-nav.css?v=1331-reader-safe");
+  html = html.replace(/fold-thumb-nav\.js(?:\?v=[^"'`\s]*)?/g, "fold-thumb-nav.js?v=1331-reader-safe");
   // Test-only foundation for user-selectable bottom/left/right navigation.
   // Loaded as a final authority so legacy bottom-nav CSS cannot override side placement.
   if (!html.includes("fold-thumb-nav.css?v=1331-reader-safe")) {
