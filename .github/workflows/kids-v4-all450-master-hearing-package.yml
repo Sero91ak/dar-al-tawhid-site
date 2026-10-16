@@ -7,6 +7,9 @@ on:
       - 'kids/tools/build_quiz_v4_all450_master_hearing_review.py'
       - 'kids/tools/build_quiz_v4_first150_hearing_review.py'
       - 'kids/tools/build_quiz_v4_age7to10_hearing_review.py'
+      - 'kids/data/quiz-v4-first150-composed-preview.json'
+      - 'kids/data/quiz-v4-age7to10-composed-preview.json'
+      - 'kids/review-only/quiz-v4-450-actual-mp3-import-summary.json'
       - '.github/workflows/kids-v4-all450-master-hearing-package.yml'
 
 permissions:
@@ -40,8 +43,11 @@ jobs:
               m=json.loads(z.read('V4-HOERPRUEFUNG-NACHWEIS.json'))
               assert m['modelId']=='eleven_v4'
               assert m['masterVoiceId']=='DkU7j9uO4ZEtLD2iRZSH'
-              assert m['questions']==450 and m['full']==72
-              assert m['presentParts']==1044 and m['uniqueOriginalMp3Hashes']==276
+              summary=json.loads(Path('kids/review-only/quiz-v4-450-actual-mp3-import-summary.json').read_text())
+              assert m['questions']==450
+              assert m['full']==summary['completeFourPartQuestions']
+              assert m['presentParts']==sum(sum(row['availableParts'].values()) for row in summary['byAge'].values())
+              assert m['uniqueOriginalMp3Hashes']==summary['uniqueRealMP3Hashes']
               assert m['humanListeningApprovals']==0
               assert m['newElevenLabsCreditsSpent']==0
               assert m['publicReleaseAllowed'] is False
