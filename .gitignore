@@ -29,3 +29,9 @@ ios/**/AuthKey_*.p8
 /kids/review-only/quiz-v4-450-deduplicated-unrecorded-originals.json
 /kids/review-only/quiz-v4-older-40-text-content-review.html
 /kids/review-only/quiz-v4-older-40-text-content-review.zip
+
+# KIDS V4: raw human hearing exports may contain reviewer names and must
+# only be processed in a private local environment, NEVER committed as inputs.
+# Only the validated, name-free hearing submission ledger may enter GitHub.
+/kids/review-only/hearing-submissions/
+/kids/review-only/quiz-v4-450-master-hearing-bundle.zip
