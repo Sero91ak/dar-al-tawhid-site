@@ -537,3 +537,41 @@ html[data-theme] body:is(
     padding:36px 32px 32px!important;
   }
 }
+
+/* SETTINGS_EDGE_EMBED_V1314
+   Nur Einstellungen: Bild gehört zur Erscheinung, Kante zu Kante, volle Breite.
+   Kein schwebendes Kartenbild. */
+html[data-theme] body.is-settings-route{
+  --area1312-gutter:0px;
+}
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head{
+  width:100vw!important;
+  max-width:none!important;
+  max-inline-size:none!important;
+  min-height:clamp(248px,52vw,360px)!important;
+  margin:0 calc(50% - 50vw) 0!important;
+  padding:max(92px,calc(env(safe-area-inset-top,0px) + 64px)) max(18px,env(safe-area-inset-right,0px)) 42px max(18px,env(safe-area-inset-left,0px))!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  background:
+    linear-gradient(180deg,transparent 0%,transparent 46%,color-mix(in srgb,var(--bg) 55%,transparent) 78%,var(--bg) 100%),
+    linear-gradient(90deg,color-mix(in srgb,var(--bg) 62%,transparent) 0%,color-mix(in srgb,var(--bg) 18%,transparent) 48%,transparent 100%),
+    var(--area1294-art) center 42%/cover no-repeat!important;
+}
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head::before{
+  display:none!important;
+  content:none!important;
+}
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head > *{
+  width:min(920px,100%)!important;
+}
+html[data-theme] body.is-settings-route :is(.settings-one-page,.notification-center-page){
+  width:100%!important;
+  max-width:none!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:max(14px,env(safe-area-inset-left,0px))!important;
+  padding-right:max(14px,env(safe-area-inset-right,0px))!important;
+  box-sizing:border-box!important;
+}
