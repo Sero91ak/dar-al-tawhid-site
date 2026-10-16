@@ -50,6 +50,13 @@ def main():
     plan=read("kids/data/quiz-v4-450-production-status.json")
     release=read("kids/data/quiz-curation-release.json")
     recovery_priority=read("kids/review-only/quiz-v4-450-next-completion-priority.json")["summary"]
+    hearing_file=ROOT/"kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json"
+    hearing=read("kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json") if hearing_file.is_file() else None
+    if hearing is not None:
+        require(hearing.get("masterVoiceId")==VOICE and hearing.get("modelId")==MODEL
+                and hearing.get("publicReleaseAllowed") is False
+                and hearing.get("humanApprovalVerifiedByImporter") is False,
+                "hearing submissions must never silently become public approval")
     if release.get("enabled") is not False:raise RuntimeError("Never publish unapproved V4 quiz")
     require(saved["modelId"]==MODEL and saved["voiceId"]==VOICE and saved["live"] is False,
             "wrong original audio model or voice")
@@ -121,6 +128,9 @@ def main():
         "preciseBillingReconciled":not plan["exactProviderChargesNotFullyReconciled"],
         "masterOfflineHearingPackageBuilder":"kids/tools/build_quiz_v4_all450_master_hearing_review.py",
         "masterOfflineHearingGitHubActions":"https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/kids-v4-all450-master-hearing-package.yml",
+        "selfAttestedHearingClaimCount":hearing["claimedApprovalClipCount"] if hearing else 0,
+        "reportedHearingIssuesCount":hearing["submittedIssueClipCount"] if hearing else 0,
+        "hearingReviewVerifiedByImporter":False,
         "humanAudioApprovals":0,"publicEnabled":False,
         "newElevenLabsCreditsConsumedByThisReport":0,
         "recoveryFlowUrl":FLOW,
@@ -152,6 +162,7 @@ def main():
         "- Kosten für den bisherigen Import und diese Berichterstellung: **0 neue ElevenLabs-Sprachcredits**.",
         "- Noch geschätzter Bedarf für alle 450 nach gegenwärtigem Plan: **"+str(plan["estimatedAdditionalCreditsForFullSelected450"])+" Credits**; **keine bestätigte Rechnungsabbuchung** (Ledger enthält Schätzwerte).",
         "- Menschliche Aussprache-/Hörfreigabe: **0**. Freigabeschalter: **aus**. Kein Live-Push und kein Merge.",
+        "- Rückimportierte Selbstauskünfte zur Hörprüfung: **"+str(details["selfAttestedHearingClaimCount"])+"**; gemeldete Audiofehler: **"+str(details["reportedHearingIssuesCount"])+"**. Diese Einträge sind noch KEINE unabhängig bestätigte Freigabe.",
         "",
         "Genauer kostenfreier Restplan: `kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md` und `kids/review-only/quiz-v4-450-next-completion-priority.json`.",
         "",
@@ -170,6 +181,14 @@ def main():
         "Neuer Build: `python3 kids/tools/build_quiz_v4_all450_master_hearing_review.py`.",
         "GitHub-Workflow: https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/kids-v4-all450-master-hearing-package.yml",
         "Privates Actions-Artefakt: `tawhid-kids-v4-all450-human-hearing-offline-bundle`. Niemals ins öffentliche KIDS-Frontend einbauen.",
+        "",
+        "## Prüfentscheidungen sicher rückimportieren",
+        "",
+        "Prüfdateien aus dem Offline-Hörpaket werden ausschließlich anhand echter V4-MP3-Prüfsummen, genauer Textzuordnung und korrekter Altersgruppe akzeptiert.",
+        "Importer: `python3 kids/tools/import_quiz_v4_human_hearing_reviews.py`.",
+        "Internes Ledger: `kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json`.",
+        "CI: https://github.com/Sero91ak/dar-al-tawhid-site/actions/workflows/kids-v4-hearing-results-secure-import.yml",
+        "Selbstauskünfte bleiben von unabhängigen Audiofreigaben und der öffentlichen Quiz-Freigabe strikt getrennt. Prüfernamen niemals in den GitHub-Bericht kopieren.",
         "",
         "## Nächste verbindliche Schritte",
         "",
