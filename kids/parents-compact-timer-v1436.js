@@ -89,7 +89,8 @@ function changeDuration(next){
  state.duration=n;state.remaining=Math.max(0,n*60-used);
  state.complete=state.remaining===0;
  if(state.running){state.running=!state.complete;state.until=state.running?Date.now()+state.remaining*1000:0}
- if(state.complete)state.visible=true;
+ state.visible=true;
+ if(!state.complete&&!state.running){state.running=true;state.until=Date.now()+state.remaining*1000}
  store();render();
 }
 function toggleTimer(){
