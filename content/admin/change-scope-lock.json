@@ -7728,6 +7728,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-19T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-prayer-motif-visible-dom-v6-20261016",
+      "at": "2026-10-16T12:42:00+02:00",
+      "approvedBy": "user-explicit-continue-fix-images-not-visible-test-app",
+      "reason": "Nur Erwachsenen-Test-App: Gebetsmotive tatsächlich als DOM-Bilder in den bereits bestehenden Settings-Gebets-Schaltflächen und Gebetszeiten-Karten darstellen, alte Positionsauswahl unter Einstellungen nicht mehr rendern, Original-Icons und Gebetslogik unverändert lassen, Test-Deploy mit Bilddatei-Prüfung absichern.",
+      "paths": [
+        "test/assets/prayer-motifs/live-photo-v6.js",
+        "test/assets/prayer-motifs/live-photo-v6.css",
+        "cloudflare/test-app-worker.js",
+        "scripts/test-app-health-check.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-20T23:59:00.000Z"
     }
   ],
   "enabled": true
