@@ -183,6 +183,7 @@ function renderLastStory(){
   (Number(item.duration)>0?" von "+listenTime(item.duration):"");
  button.textContent=item.completed===true?"↺ Erneut hören":"▶ Weiterhören";
  const safeArt=typeof item.artwork==="string"&&item.artwork.startsWith("/kids/assets/")&&!item.artwork.includes("..");
+ art.onerror=function(){this.onerror=null;this.src="/kids/assets/kids-icons/headphones-real-v12.png"};
  art.src=safeArt?item.artwork:"/kids/assets/kids-icons/headphones-real-v12.png";
  const duration=Number(item.duration)||0;
  const pct=item.completed===true?100:duration>0?Math.min(100,Math.max(0,Number(item.time)/duration*100)):0;
