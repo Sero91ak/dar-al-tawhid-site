@@ -76,6 +76,34 @@ jobs:
           trilingual=live_asset('dua-learn-trilingual-v1282.css')
           german=live_asset('dua-word-meanings-v1.js')
           phonetic=live_asset('dua-phonetic-alignment-v1.js')
+          parentJS=live_asset('parents-dashboard-v1432.js')
+          parentCSS=live_asset('parents-dashboard-v1432.css')
+          parentLive={
+            'htmlReferencesNewDashboard':bool(re.search(r'/kids/parents-dashboard-v1432\.js\?v=1434',home)),
+            'htmlReferencesNewStyles':bool(re.search(r'/kids/parents-dashboard-v1432\.css\?v=1433',home)),
+            'htmlRegistersNewSW':'/kids/sw.js?v=1434' in home,
+            'htmlHasProfileAndBirthFields':all(x in home for x in ['id="profileCard"','id="parentBirthPanel"','id="parentBirthSave"']),
+            'dashboardJs':{'ref':parentJS['ref'],'bytes':parentJS['bytes']},
+            'dashboardCss':{'ref':parentCSS['ref'],'bytes':parentCSS['bytes']},
+            'dashboardContainsProfileSummary':'KIDS_PARENTS_DASHBOARD_V1432' in parentJS['text']
+              and 'kidsParentName' in parentJS['text'],
+            'dashboardContainsSaveValidation':'checkBirthFields' in parentJS['text'],
+            'girlsSaveButtonContrast':'.app[data-gender="girl"] #view-parents .kids-parent-birth-fold #parentBirthSave' in parentCSS['text']
+              and '-webkit-text-fill-color:#432d48' in parentCSS['text'],
+            'stylesAreProfileScoped':'--kp-card:#3b2a44' in parentCSS['text'] and '--kp-card:#193944' in parentCSS['text']
+          }
+          parentLive['ready']=all([
+            parentLive['htmlReferencesNewDashboard'],
+            parentLive['htmlReferencesNewStyles'],
+            parentLive['htmlRegistersNewSW'],
+            parentLive['htmlHasProfileAndBirthFields'],
+            parentLive['dashboardContainsProfileSummary'],
+            parentLive['dashboardContainsSaveValidation'],
+            parentLive['girlsSaveButtonContrast'],
+            parentLive['stylesAreProfileScoped'],
+            parentJS['bytes']>3000,
+            parentCSS['bytes']>7000
+          ])
           wordLearningReady=bool(obj.get('buildId') and obj['buildId'] in home)
           wordLearningReady=wordLearningReady and all(x['bytes']>1000 for x in [learning,trilingual,german,phonetic])
           wordLearningReady=wordLearningReady and (
@@ -99,6 +127,7 @@ jobs:
                allSevenArtworkFilesReachable=(img.exists() and img.stat().st_size>30000 and all(n>30000 for n in art.values())),
                versionJsonReadable=bool(obj),
                trilingualWordLearningReady=wordLearningReady,
+               parentsDashboard=parentLive,
                trilingualAssets={name:{'ref':value['ref'],'bytes':value['bytes']} for name,value in [('learning',learning),('trilingualCss',trilingual),('germanMeanings',german),('phonetic',phonetic)]}),
              lastDeployRuns=runs)
           (p/'report.json').write_text(json.dumps(doc,indent=2,ensure_ascii=False)+'\n')
