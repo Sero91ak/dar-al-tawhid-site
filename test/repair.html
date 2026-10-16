@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#081b1b">
+  <meta http-equiv="Cache-Control" content="no-store">
+  <title>DĀR AL TAWḤĪD · Test-App wieder öffnen</title>
+  <style>
+    :root{color-scheme:dark;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#081b1b;color:#f7f1e2}
+    body{min-height:100svh;display:grid;place-items:center;padding:calc(24px + env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom))}
+    main{width:min(100%,430px);padding:30px 24px;border:1px solid #a3915a75;border-radius:20px;background:linear-gradient(145deg,#112c2b,#071414);box-shadow:0 22px 80px #0005;text-align:center}
+    .mark{font-size:12px;letter-spacing:.17em;color:#d7c48d;font-weight:700}
+    h1{font-size:23px;line-height:1.28;margin:18px 0 12px}
+    p{font-size:15px;line-height:1.65;color:#e0e1d6;margin:0 0 20px}
+    button,a.action{appearance:none;border:1px solid #e8d69e;background:#d5bd7e;color:#14241e;font-size:16px;font-weight:700;padding:15px 18px;border-radius:12px;display:block;text-align:center;width:100%;text-decoration:none;cursor:pointer;min-height:52px}
+    button:disabled{opacity:.55;cursor:wait}
+    a.action{background:transparent;color:#e8d69e;margin-top:12px}
+    #status{min-height:44px;font-size:14px;color:#ddd6b9;margin:18px 0 0;overflow-wrap:anywhere}
+    small{display:block;margin-top:10px;color:#afb9ac;line-height:1.5}
+  </style>
+</head>
+<body>
+<main>
+  <div class="mark">DĀR AL TAWḤĪD · TEST</div>
+  <h1>Test-App wieder öffnen</h1>
+  <p>Wenn die Test-App nach einer Aktualisierung nicht startet, können veraltete Test-Dateien zurückgesetzt werden. Gespeicherte Einstellungen und Lernstände bleiben erhalten.</p>
+  <button type="button" id="repair">Test-App reparieren</button>
+  <a class="action" href="/test/index.html?env=staging&amp;source=repair#home">Ohne Reparatur öffnen</a>
+  <div id="status" role="status" aria-live="polite">Nur Test-App-Dateien werden bereinigt. Die öffentliche App und KIDS bleiben unverändert.</div>
+  <small>Die Reparatur löscht weder Anmeldedaten noch localStorage, IndexedDB oder sonstige Nutzerdaten.</small>
+</main>
+<script>
+(function(){
+ "use strict";
+ var button=document.getElementById("repair");
+ var status=document.getElementById("status");
+ function say(s){status.textContent=s;}
+ async function repair(){
+   button.disabled=true;
+   say("Test-App-Cache wird bereinigt …");
+   var deleted=0, removed=0, errors=0;
+   try{
+     if("serviceWorker" in navigator){
+       var registrations=await navigator.serviceWorker.getRegistrations();
+       for(var i=0;i<registrations.length;i++){
+         var registration=registrations[i];
+         try{
+           var scope=new URL(registration.scope);
+           // Never unregister the shared / service worker or any /kids registration.
+           if(scope.origin===location.origin && scope.pathname.indexOf("/test/")===0 && scope.pathname.indexOf("/test/kids/")!==0){
+             if(await registration.unregister())removed++;
+           }
+         }catch(_e){errors++;}
+       }
+     }
+   }catch(_e){errors++;}
+   try{
+     if("caches" in window){
+       var names=await caches.keys();
+       for(var j=0;j<names.length;j++){
+         var name=names[j];
+         try{
+           if(/^dar-test(?:-|$)/i.test(name)){
+             if(await caches.delete(name))deleted++;
+             continue;
+           }
+           // Mixed caches may also contain public visitor entries: preserve them.
+           var cache=await caches.open(name);
+           var requests=await cache.keys();
+           for(var k=0;k<requests.length;k++){
+             try{
+               var url=new URL(requests[k].url);
+               if(url.origin===location.origin && (url.pathname==="/test" || (url.pathname.indexOf("/test/")===0 && url.pathname.indexOf("/test/kids/")!==0))){
+                 if(await cache.delete(requests[k]))deleted++;
+               }
+             }catch(_e){errors++;}
+           }
+         }catch(_e){errors++;}
+       }
+     }
+   }catch(_e){errors++;}
+   say("Bereinigt: "+deleted+" Test-Dateien, "+removed+" Test-Service-Worker. Die App wird neu geöffnet …");
+   // Bypass the old manifest query without changing the user's installation or data.
+   location.replace("/test/index.html?env=staging&source=repair&recovery="+Date.now()+"#home");
+ }
+ button.addEventListener("click",function(){repair().catch(function(e){
+   say("Automatische Bereinigung nicht möglich. Bitte direkt öffnen oder Safari verwenden.");
+   button.disabled=false;
+ });});
+})();
+</script>
+</body>
+</html>
