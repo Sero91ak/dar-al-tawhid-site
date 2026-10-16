@@ -258,6 +258,8 @@ function create(options){
       artwork:absoluteUrl(c.artwork||""),
       deepLink:String(c.deepLink||"")
     });
+    // Keep the parent activity card in sync without writing legacy Story Hub data.
+    try{window.dispatchEvent(new CustomEvent("dar-kids-story-resume"))}catch(_){}
   }
   function restore(){
     const key=storyKey();
@@ -395,6 +397,7 @@ function create(options){
       deepLink:String(c.deepLink||""),
       updatedAt:Date.now()
     });
+    try{window.dispatchEvent(new CustomEvent("dar-kids-story-resume"))}catch(_){}
     try{navigator.mediaSession.playbackState="playing"}catch(_){}
     postNativeNowPlaying(nativePayload(false),true);
     updatePositionState();
