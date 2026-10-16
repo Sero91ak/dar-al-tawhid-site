@@ -227,3 +227,96 @@ html[data-theme="aurora"] #appView.view:has(.prayer-page-noble){
 @media(prefers-reduced-motion:reduce){
   #appView.view:has(.prayer-page-noble) *{scroll-behavior:auto!important}
 }
+
+/* DAR-TEST-ONLY PHOTOREAL PRAYER MOTIFS V3 · 2026-10-16 */
+/* Fotorealistische Tagesmotive nur fuer den bestehenden Gebetszeiten-Bereich
+   der erwachsenen Dar-Test-App. Keine Aenderung an Icon-/Zeit-/Event-Logik. */
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:5px!important;
+  border:0!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim){
+  --dar-time-photo:none;
+  --dar-time-veil-top:rgba(5,18,32,.28);
+  --dar-time-veil-bottom:rgba(4,11,23,.90);
+  position:relative!important;
+  isolation:isolate!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  align-items:center!important;
+  gap:3px!important;
+  overflow:hidden!important;
+  min-width:0!important;
+  min-height:108px!important;
+  padding:10px 3px!important;
+  border:1px solid color-mix(in srgb,var(--gold2) 30%,transparent)!important;
+  border-radius:13px!important;
+  background-image:linear-gradient(180deg,var(--dar-time-veil-top),var(--dar-time-veil-bottom)),var(--dar-time-photo)!important;
+  background-size:cover!important;
+  background-position:center center!important;
+  background-repeat:no-repeat!important;
+  box-shadow:none!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(1){--dar-time-photo:url("/test/assets/prayer-motifs/fajr.webp")}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(2){--dar-time-photo:url("/test/assets/prayer-motifs/dhuhr.webp")}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(3){--dar-time-photo:url("/test/assets/prayer-motifs/asr.webp")}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(4){--dar-time-photo:url("/test/assets/prayer-motifs/maghrib.webp")}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(5){--dar-time-photo:url("/test/assets/prayer-motifs/isha.webp")}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):is(.active,.is-current){
+  border-color:var(--gold2)!important;
+  box-shadow:inset 0 -2px 0 var(--gold2)!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top .prayer-time-card :is(b,span,small),
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top .prayer-time-card--slim :is(b,span,small){
+  position:relative!important;
+  z-index:1!important;
+  max-width:100%!important;
+  color:#FFF9EF!important;
+  -webkit-text-fill-color:#FFF9EF!important;
+  text-align:center!important;
+  text-shadow:0 1px 4px rgba(0,0,0,.95)!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim) b{
+  font-size:clamp(.62rem,2.25vw,.77rem)!important;
+  letter-spacing:0!important;
+}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim) span{
+  font-size:clamp(.72rem,2.6vw,1rem)!important;
+  font-variant-numeric:tabular-nums!important;
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) #appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim){
+  --dar-time-veil-top:rgba(22,27,33,.12);
+  --dar-time-veil-bottom:rgba(17,27,38,.78);
+}
+html:is([data-theme="dark"],[data-theme="royal"],[data-theme="aurora"]) #appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim){
+  --dar-time-veil-top:rgba(7,17,40,.30);
+  --dar-time-veil-bottom:rgba(7,17,40,.88);
+}
+html[data-theme="bordeaux"] #appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim){
+  --dar-time-veil-top:rgba(35,8,25,.27);
+  --dar-time-veil-bottom:rgba(35,8,25,.90);
+}
+html[data-theme="dar-al-layl"] #appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim){
+  --dar-time-veil-top:rgba(8,24,20,.30);
+  --dar-time-veil-bottom:rgba(8,24,20,.92);
+}
+html:is([data-theme="salbei"],[data-theme="light"][data-theme-variant="salbei"]) #appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim){
+  --dar-time-veil-top:rgba(17,35,26,.12);
+  --dar-time-veil-bottom:rgba(17,35,26,.83);
+}
+@media(max-width:599px){
+  #appView.view:has(.prayer-page-noble) .prayer-time-grid--top{
+    gap:4px!important;
+  }
+  #appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim){
+    padding:8px 1px!important;min-height:94px!important;border-radius:10px!important;
+  }
+}
+@media(max-width:360px){
+  #appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim){
+    min-height:86px!important;
+  }
+}

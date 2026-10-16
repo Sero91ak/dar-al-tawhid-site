@@ -7689,6 +7689,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-19T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-generated-prayer-motifs-v3-20261016",
+      "at": "2026-10-16T11:04:00+02:00",
+      "approvedBy": "user-explicit-embed-generated-prayer-images-directly-into-existing-dar-test-app-20261016",
+      "reason": "Erwachsenen-Dar-Test-only: 5 vom Nutzer beauftragte KI-generierte fotorealistische Tagesmotive als lokal gebundene WebP-Dateien; bestehende Gebetszeiten- und Einstellungs-Kacheln erhalten Motive und themegebundene Overlayfarben. Original-3D-Icons, Navigation, Push, Gebetsberechnung und Besucher/Kids bleiben unveraendert.",
+      "paths": [
+        "test/assets/dar-settings-permissions-v1.css",
+        "test/assets/prayer-v1254.css",
+        "test/assets/prayer-motifs/",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
     }
   ],
   "enabled": true
