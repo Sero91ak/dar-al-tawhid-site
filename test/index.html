@@ -27206,7 +27206,7 @@ function renderSettings(){
  const theme=typeof getTheme==="function"?getTheme():"dark";
  const themeName=(typeof THEME_META!=="undefined"&&THEME_META[theme]?.label)||"Ausgewählt";
  const place=hasPrayerLocation(settings)?(settings.city||"Gespeichert"):"Noch nicht festgelegt";
- const chosen=notificationEnabledPrayerCount(settings)+" von 5 Gebeten";
+ const chosen=notificationEnabledPrayerCount(settings)+"/5 gewählt";
  return `${overviewHeader()}
  <section class="dsh-shell dsh-home" aria-label="App-Einstellungen">
  <div class="dsh-welcome"><div><span class="dsh-eyebrow">DĀR AL TAWḤĪD</span><h2>Dein App-Erlebnis</h2><p>Alles Wichtige an einem Ort. Ruhig, klar und persönlich.</p></div><span class="dsh-emblem">${darSettingsGlyph("gear")}</span></div>
@@ -38469,5 +38469,5 @@ html[data-theme] body:not(.is-home-route) > .app > footer.footer {
 </style>
 <link rel="stylesheet" id="darPrayerMotifsLiveV5" href="/test/assets/prayer-v1254.css?v=20261016-motifs-v5">
 <link rel="stylesheet" id="darSettingsPermissionsV1" href="/test/assets/dar-settings-permissions-v1.css?v=20261016-motifs-v5">
-<link rel="stylesheet" id="darSettingsNavigationV1" href="/test/assets/dar-settings-navigation-v1.css?v=20261016-nav-v1">
+<link rel="stylesheet" id="darSettingsNavigationV1" href="/test/assets/dar-settings-navigation-v1.css?v=20261016-nav-v2">
 </html>
