@@ -116,8 +116,21 @@ if("MutationObserver" in window&&$(".app")){
 }
 // Validation remains in the original handler; do not show success before save.
 // Refresh only after its synchronous handler has run.
-$("#parentBirthSave")?.addEventListener("click",function(){
- setTimeout(paint,40);
+const birthSave=$("#parentBirthSave");
+function checkBirthFields(){
+ const month=$("#parentBirthMonth")?.value||"",year=$("#parentBirthYear")?.value||"";
+ if(birthSave)birthSave.disabled=!window.DARKidsBirthMonth?.isEligible(year+"-"+month);
+}
+for(const id of ["parentBirthMonth","parentBirthYear"]){
+ $("#"+id)?.addEventListener("change",checkBirthFields);
+}
+birthSave?.addEventListener("click",function(){
+ const entered=($("#parentBirthYear")?.value||"")+"-"+($("#parentBirthMonth")?.value||"");
+ setTimeout(function(){
+   paint();checkBirthFields();
+   const p=profileInfo();
+   if(p&&window.DARKidsBirthMonth?.get(p.id)===entered&&birthFold)birthFold.open=false;
+ },50);
 });
 window.addEventListener("pageshow",paint);
 window.addEventListener("storage",event=>{
@@ -138,5 +151,18 @@ if("MutationObserver" in window){
  const observer=new MutationObserver(()=>{if($("#kidsOfflineLibrary")&&!$("#kidsParentOffline"))arrangeOffline()});
  observer.observe(page,{childList:true});
 }
+function arrangeStorySettings(){
+ const panel=$("#studioContentPreferences");
+ if(!panel||$("#kidsParentStorySettings"))return;
+ const details=detailsWrap(panel,"kidsParentStorySettings","Geschichten","Lesen, hören und Einstellungen");
+ accountDetails.after(details);
+}
+arrangeStorySettings();
+if("MutationObserver" in window){
+ new MutationObserver(function(){
+  if($("#studioContentPreferences")&&!$("#kidsParentStorySettings"))arrangeStorySettings();
+ }).observe(page,{childList:true});
+}
 paint();
+checkBirthFields();
 })();
