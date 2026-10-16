@@ -207,6 +207,29 @@ async function fetchVersionBuild(base) {
     if (!ok) throw new Error(`Test repair page unavailable or unsafe: ${label} ${repairUrl}`);
   }
 
+  // DAR_TEST_GLOBAL_EDGE_WIDTH_LIVE_VERIFY_V1372: validate both externally served Test origin assets.
+  // HTTP success of a deployment alone does not prove the last CSS
+  // authority is actually present in the app shell.
+  for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
+    const { status: shellStatus, text: shellHtml } =
+      await fetchText(`${base}/index.html?edge-width-check=v1372`);
+    const edgeLinkOk = shellHtml.includes('id="darTestEdgeWidthV1372"') &&
+      shellHtml.includes('/test/assets/test-global-edge-width-v1372.css?v=20261016-full-width-v1372');
+    const { status: edgeStatus, text: edgeCss } =
+      await fetchText(`${base}/assets/test-global-edge-width-v1372.css?v=20261016-full-width-v1372`);
+    const cssOk = edgeCss.includes("DAR TEST ADULT ONLY") &&
+      edgeCss.includes("--dar-test-edge-stage") &&
+      edgeCss.includes(".is-more-route") &&
+      edgeCss.includes(".is-quiz-route") &&
+      edgeCss.includes(".is-settings-route") &&
+      edgeCss.includes(".is-quran-overview") &&
+      edgeCss.includes(".is-topics-route");
+    const ok = shellStatus === 200 && edgeLinkOk &&
+      edgeStatus === 200 && cssOk;
+    console.log(`edge-width ${label}: shell=${shellStatus} linked=${edgeLinkOk} CSS=${edgeStatus} rules=${cssOk} ok=${ok}`);
+    if (!ok) throw new Error(`Dar Test full-width stylesheet not live: ${label}`);
+  }
+
   async function waitForMatchingVersion(label, base) {
     for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
       const v = await fetchVersionBuild(base);
