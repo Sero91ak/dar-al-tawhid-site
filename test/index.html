@@ -22817,7 +22817,7 @@ function parentRoute(route){if(route&&route.view==="frauen"){const parts=String(
   if(route.view==="news")return{view:"home"};
   if(route.view==="ilm")return{view:"home"};
   if(route.view==="tawhid-guide")return{view:"home"};
-  if(route.view==="settings")return{view:"more"};
+  if(route.view==="settings")return route.value?{view:"settings",value:""}:{view:"more"};
   if(route.view==="jummah")return{view:"more"};
   if(route.view==="qibla")return{view:"more"};
   if(route.view==="topic")return{view:"topics"};
@@ -27153,9 +27153,78 @@ function renderDarSetupHubHtml(){
   try{if(window.DARSetupHub&&typeof window.DARSetupHub.render==="function")return window.DARSetupHub.render()}catch(e){}
   return '<section id="dar-setup-hub" class="dar-setup-hub" data-dar-setup="true" aria-label="Einrichtung"><header class="dar-setup-hub__head"><h2 class="dar-setup-hub__title">DĀR AL TAWḤĪD Einrichtung</h2><p class="dar-setup-hub__sub">Standort, Gebetszeiten, Mitteilungen und Widgets</p></header><div class="dar-setup-hub__list"><div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Standort</strong><span>Für genaue Gebetszeiten und Widgets</span></div><button type="button" class="dar-setup-hub__btn" data-dar-setup-action="location">Öffnen</button></div><div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Mitteilungen</strong><span>Für Gebets-Erinnerungen und Tests</span></div><button type="button" class="dar-setup-hub__btn" data-dar-setup-action="notifications">Öffnen</button></div><div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Gebetszeiten</strong><span>Daten für Widgets und Watch aktualisieren</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="sync">Sync</button></div><div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Widget-Ziele</strong><span>Öffnet direkt Gebetszeiten, Kalender, Qurʾān oder Duʿāʾ</span></div><button type="button" class="dar-setup-hub__btn is-active" data-dar-setup-action="widgets">Prüfen</button></div></div></section>';
 }
-function renderSettings(){
-  return `${setHeader("Einstellungen","Mitteilungen, Darstellung und Lesbarkeit.","","settings-page-head")}<div class="settings-one-page settings-flat-live-v1">${renderNotificationCenter({embedded:true})}${renderDarSetupHubHtml()}<div class="settings-section-label"><b>Darstellung</b><span>Farben, Icon und Schrift</span></div>${renderThemeSwitchPanel()}${renderAdaptiveNavPanel()}${renderAppIconPanel()}${renderFontSettingsPanel()}<p class="settings-save-note">Änderungen werden automatisch auf diesem Gerät gespeichert.</p></div>`
+function darSettingsGlyph(name){
+ const p={
+ bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9Z"/><path d="M10 21h4"/>',
+ pin:'<path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.7"/>',
+ palette:'<path d="M12 3a9 9 0 1 0 0 18h1.3c1.7 0 2.5-1.9 1.3-3.1-.7-.8-.1-1.9 1-1.9h2.3a4.8 4.8 0 0 0 4.1-4.7C22 6.7 17.6 3 12 3Z"/><circle cx="7" cy="11" r=".8"/><circle cx="10" cy="7.5" r=".8"/><circle cx="15" cy="7.5" r=".8"/><circle cx="17.7" cy="11" r=".8"/>',
+ type:'<path d="m4 19 6-14 6 14M6 14h8"/><path d="M16 12h6M19 9v11"/>',
+ icon:'<rect x="3" y="3" width="18" height="18" rx="5"/><path d="M8 15c1-4 7-4 8 0M12 8v4"/>',
+ info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
+ gear:'<path d="M12 3 13.7 4.8l2.5-.3.7 2.4 2.4 1 .1 2.6L21 12l-1.6 1.5-.1 2.6-2.4 1-.7 2.4-2.5-.3L12 21l-1.7-1.8-2.5.3-.7-2.4-2.4-1-.1-2.6L3 12l1.6-1.5.1-2.6 2.4-1 .7-2.4 2.5.3Z"/><circle cx="12" cy="12" r="3"/>',
+ arrow:'<path d="m9 5 7 7-7 7"/>',
+ back:'<path d="m15 5-7 7 7 7"/>'
+ };
+ return `<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${p[name]||p.gear}</svg>`;
 }
+function darSettingsRow(view,label,desc,glyph,meta=""){
+ const val=view==="about"?'data-nav="about"':`data-nav="settings" data-value="${view}"`;
+ return `<button class="dsh-row" type="button" ${val} aria-label="${label} öffnen"><span class="dsh-row-icon" aria-hidden="true">${darSettingsGlyph(glyph)}</span><span class="dsh-row-main"><span class="dsh-row-title">${label}</span><span class="dsh-row-sub">${desc}</span></span><span class="dsh-row-end">${meta?`<span class="dsh-row-meta">${esc(String(meta))}</span>`:""}<span class="dsh-row-chevron">${darSettingsGlyph("arrow")}</span></span></button>`;
+}
+function renderSettings(){
+ const page=String(currentRoute?.value||"").trim();
+ const pages={
+  notifications:["Benachrichtigungen","Wähle deine Gebete und täglichen Erinnerungen.","bell"],
+  location:["Standort","Dein Ort für die Gebetszeiten.","pin"],
+  appearance:["Erscheinungsbild","Eine Farbwelt, die zu dir passt.","palette"],
+  font:["Schrift & Lesbarkeit","Textgrößen für eine angenehme Lektüre.","type"],
+  icon:["App-Icon","Wähle dein Symbol für den Startbildschirm.","icon"]
+ };
+ if(pages[page]){
+  let body="";
+  if(page==="notifications"||page==="location"){
+   body=`<div class="settings-one-page settings-flat-live-v1">${renderNotificationCenter({embedded:true})}${renderDarSetupHubHtml()}</div>`;
+  }else if(page==="appearance"){
+   body=renderThemeSwitchPanel();
+  }else if(page==="icon"){
+   body=renderAppIconPanel();
+  }else if(page==="font"){
+   body=`${renderFontSettingsPanel()}
+    <section class="dsh-extra-font"><h3>Qurʾān</h3><p>Arabisch, Lautschrift und Übersetzung individuell einstellen.</p>${fontSlider("quranArabicScale","Arabisch","Arabischer Qurʾān-Text")}${fontSlider("quranTransliterationScale","Lautschrift","Aussprache und Umschrift")}${fontSlider("quranGermanScale","Deutsch","Deutsche Übersetzung")}</section>
+    <section class="dsh-extra-font"><h3>Duʿāʾ</h3><p>Die drei Textebenen getrennt anpassen.</p>${fontSlider("duaArabicScale","Arabisch","Arabische Bittgebete")}${fontSlider("duaTransliterationScale","Lautschrift","Aussprachehilfe")}${fontSlider("duaGermanScale","Deutsch","Deutsche Bedeutung")}</section>
+    <section class="dsh-extra-font"><h3>Beiträge</h3><p>Text und Quellen im gewünschten Verhältnis lesen.</p>${fontSlider("postTextScale","Beitragstext","Haupttext")}${fontSlider("postSourceScale","Quellen","Quellenangaben")}</section>`;
+  }
+  return `${setHeader(pages[page][0],pages[page][1],"","settings-page-head")}<section class="dsh-shell dsh-detail" data-settings-page="${page}">
+     <button type="button" class="dsh-back" data-nav="settings" aria-label="Zurück zur Einstellungsübersicht">${darSettingsGlyph("back")} Alle Einstellungen</button>
+     <div class="dsh-detail-intro"><span class="dsh-row-icon">${darSettingsGlyph(pages[page][2])}</span><div><h2>${pages[page][0]}</h2><p>${pages[page][1]}</p></div></div>
+     <div class="dsh-detail-content">${body}</div>
+     <p class="dsh-note">Deine Änderungen werden automatisch auf diesem Gerät gespeichert.</p>
+   </section>`;
+ }
+ const settings=getPrayerSettings();
+ const theme=typeof getTheme==="function"?getTheme():"dark";
+ const themeName=(typeof THEME_META!=="undefined"&&THEME_META[theme]?.label)||"Ausgewählt";
+ const place=hasPrayerLocation(settings)?(settings.city||"Gespeichert"):"Noch nicht festgelegt";
+ const chosen=notificationEnabledPrayerCount(settings)+" von 5 Gebeten";
+ return `${setHeader("Einstellungen","Deine App, ganz nach deinen Wünschen.","","settings-page-head")}
+ <section class="dsh-shell dsh-home" aria-label="App-Einstellungen">
+ <div class="dsh-welcome"><div><span class="dsh-eyebrow">DĀR AL TAWḤĪD</span><h2>Dein App-Erlebnis</h2><p>Alles Wichtige an einem Ort. Ruhig, klar und persönlich.</p></div><span class="dsh-emblem">${darSettingsGlyph("gear")}</span></div>
+ <div class="dsh-group"><div class="dsh-group-head"><span>Mitteilungen & Zugriff</span></div><div class="dsh-list">
+ ${darSettingsRow("notifications","Benachrichtigungen","Gebete, Duʿāʾ, Empfehlungen und Jumuʿah","bell",chosen)}
+ ${darSettingsRow("location","Standort","GPS oder Stadt für Gebetszeiten","pin",place)}
+ </div></div>
+ <div class="dsh-group"><div class="dsh-group-head"><span>Darstellung & Lesbarkeit</span></div><div class="dsh-list">
+ ${darSettingsRow("appearance","Erscheinungsbild","Alle Farbwelten und Themes","palette",themeName)}
+ ${darSettingsRow("font","Schrift & Lesbarkeit","App, Qurʾān, Duʿāʾ und Beiträge","type")}
+ ${darSettingsRow("icon","App-Icon","Symbol für den Startbildschirm","icon")}
+ </div></div>
+ <div class="dsh-group"><div class="dsh-group-head"><span>Informationen</span></div><div class="dsh-list">
+ ${darSettingsRow("about","Über diese App","Version, Inhalte und Informationen","info")}
+ </div></div>
+ <p class="dsh-note">Einstellungen bleiben auf diesem Gerät erhalten.</p>
+ </section>`;
+}
+
 function renderJummah(){const s=getPrayerSettings();const manual=jummahPref(s,"jummahUseManualTime");const manualTime=normalizeTimeHHMM(s.jummahManualTime,"13:30");const advance=normalizeJummahAdvanceMinutes(s.jummahAdvanceMinutes);const on=jummahPref(s,"jummahNotifications");const timeLabel=manual?manualTime:(hasPrayerLocation(s)?jummahAutoDhuhrLabel(s):"Standort");return `${setPageHeader("Jumuʿah","Freitagsgebet und Erinnerung.","Jumuʿah")}<section class="prayer-panel prayer-page-noble jummah-hub-page">${renderJummahPushPanel()}<div class="qibla-data-grid jummah-hub-meta"><div class="qibla-data-item"><b>Erinnerung</b><span>${on?"Aktiv":"Aus"}</span></div><div class="qibla-data-item"><b>Vorlauf</b><span>${advance} Min</span></div><div class="qibla-data-item"><b>Zeit</b><span>${esc(timeLabel)}</span></div><div class="qibla-data-item"><b>Ort</b><span>${esc(s.city||"—")}</span></div></div><div class="prayer-action-row jummah-hub-nav"><button class="prayer-action-btn" type="button" data-nav="prayer">Gebetszeiten</button></div></section>`}
 function renderQiblaPage(){const settings=getPrayerSettings();return `${setPageHeader("Qibla","","Qibla")}<section class="prayer-panel prayer-page-noble qibla-hub-page">${renderQiblaProPanel(settings)}<div class="prayer-controls-compact qibla-hub-tools"><div class="prayer-settings-grid"><input id="prayerCityInput" class="filter-select" value="${esc(settings.city||"")}" placeholder="Ort" aria-label="Ort"><button id="savePrayerCityBtn" class="prayer-action-btn" type="button">Ort suchen</button><button id="useLocationBtn" class="prayer-action-btn" type="button">Standort</button></div></div></section>`}
 function normalizeHadithSearch(text){return String(text||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[ʿʾ'`´]/g,"").replace(/ḥ/g,"h").replace(/ṣ/g,"s").replace(/ā/g,"a").replace(/ī/g,"i").replace(/ū/g,"u").replace(/[^a-z0-9\u0600-\u06ffäöüß]+/g," ").trim()}
@@ -27390,7 +27459,7 @@ function featureCatalog(){
   }
   if(!testOnly)items=items.filter(item=>item.id!=="ilm"&&item.id!=="quran-player");
   const seen=new Set();
-  return items.filter(item=>{const id=String(item.id||item.nav||"");if(!id||seen.has(id))return false;seen.add(id);return true});
+  return items.filter(item=>{const id=String(item.id||item.nav||"");if(!id||seen.has(id)||id==="about")return false;seen.add(id);return true});
 }
 function featureById(id){return featureCatalog().find(item=>item.id===id)}
 function featurePins(){try{return JSON.parse(localStorage.getItem(FEATURE_PIN_KEY)||"[]").filter(id=>featureById(id)).slice(0,6)}catch(e){return[]}}
@@ -38399,4 +38468,5 @@ html[data-theme] body:not(.is-home-route) > .app > footer.footer {
 </style>
 <link rel="stylesheet" id="darPrayerMotifsLiveV5" href="/test/assets/prayer-v1254.css?v=20261016-motifs-v5">
 <link rel="stylesheet" id="darSettingsPermissionsV1" href="/test/assets/dar-settings-permissions-v1.css?v=20261016-motifs-v5">
+<link rel="stylesheet" id="darSettingsNavigationV1" href="/test/assets/dar-settings-navigation-v1.css?v=20261016-nav-v1">
 </html>
