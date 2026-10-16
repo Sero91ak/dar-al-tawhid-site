@@ -7850,6 +7850,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-24T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-settings-edge-prayer-taps-20261016",
+      "at": "2026-10-16T21:00:00+02:00",
+      "approvedBy": "user-explicit-fix-dar-test-settings-wide-screen-and-individual-prayer-taps-20261016",
+      "reason": "Nur Erwachsenen-Dar-Test: alle Einstellungs-Unterseiten horizontal bis zum Tab-Leisten-Raster ausnutzen, fünf einzeln bedienbare Gebetskacheln mit klaren gedrueckt-Zuständen und lokaler Anzeigeaktualisierung statt Seiten-Neuaufbau. Kein Eingriff in bestehende Push-Engine, OneSignal, Worker, Kids, TV oder Besucher-App.",
+      "paths": [
+        "test/index.html",
+        "test/assets/dar-settings-navigation-v1.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-20T23:59:00.000Z"
     }
   ],
   "enabled": true
