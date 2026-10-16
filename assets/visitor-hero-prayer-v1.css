@@ -26,21 +26,21 @@ html[data-theme="aurora"] body{
   --dv-hero-mid:color-mix(in srgb,var(--bg) 52%,transparent);
   --dv-hero-right:color-mix(in srgb,var(--bg) 8%,transparent);
 }
-body.is-topics-route{--dv-hero-image:url("/assets/area-heroes-v1290/topics.webp")}
-body.is-topic-route{--dv-hero-image:url("/assets/area-heroes-v1290/topic-detail.webp")}
-body.is-post-route{--dv-hero-image:url("/assets/area-heroes-v1290/post-reader.webp")}
-body.is-prayer-route{--dv-hero-image:url("/assets/area-heroes-v1290/prayer.webp")}
-body.is-qibla-route{--dv-hero-image:url("/assets/area-heroes-v1290/qibla.webp")}
-body.is-jummah-route{--dv-hero-image:url("/assets/area-heroes-v1290/jummah.webp")}
-body.is-dua-route,body.is-duas-route{--dv-hero-image:url("/assets/area-heroes-v1290/dua.webp")}
-body.is-more-route,body.is-settings-route{--dv-hero-image:url("/assets/area-heroes-v1290/more-hub.webp")}
-body.is-library-route,body.is-source-library-route,body.is-account-route,body.is-about-route{--dv-hero-image:url("/assets/area-heroes-v1290/library.webp")}
-body.is-quiz-route{--dv-hero-image:url("/assets/area-heroes-v1290/quiz.webp")}
-body.is-quran-overview,body.is-quran-topic-route{--dv-hero-image:url("/assets/area-heroes-v1290/quran-overview.webp")}
-body.is-quran-learn-route{--dv-hero-image:url("/assets/area-heroes-v1290/quran-learn.webp")}
-body.is-scholar-route{--dv-hero-image:url("/assets/area-heroes-v1290/scholar-detail.webp")}
-body.is-book-route{--dv-hero-image:url("/assets/area-heroes-v1290/book-detail.webp")}
-body.is-news-route{--dv-hero-image:url("/assets/area-heroes-v1290/topics.webp")}
+html[data-theme] body.is-topics-route{--dv-hero-image:url("/assets/area-heroes-v1290/topics.webp")}
+html[data-theme] body.is-topic-route{--dv-hero-image:url("/assets/area-heroes-v1290/topic-detail.webp")}
+html[data-theme] body.is-post-route{--dv-hero-image:url("/assets/area-heroes-v1290/post-reader.webp")}
+html[data-theme] body.is-prayer-route{--dv-hero-image:url("/assets/area-heroes-v1290/prayer.webp")}
+html[data-theme] body.is-qibla-route{--dv-hero-image:url("/assets/area-heroes-v1290/qibla.webp")}
+html[data-theme] body.is-jummah-route{--dv-hero-image:url("/assets/area-heroes-v1290/jummah.webp")}
+html[data-theme] body.is-dua-route,body.is-duas-route{--dv-hero-image:url("/assets/area-heroes-v1290/dua.webp")}
+html[data-theme] body.is-more-route,body.is-settings-route{--dv-hero-image:url("/assets/area-heroes-v1290/more-hub.webp")}
+html[data-theme] body.is-library-route,body.is-source-library-route,body.is-account-route,body.is-about-route{--dv-hero-image:url("/assets/area-heroes-v1290/library.webp")}
+html[data-theme] body.is-quiz-route{--dv-hero-image:url("/assets/area-heroes-v1290/quiz.webp")}
+html[data-theme] body.is-quran-overview,body.is-quran-topic-route{--dv-hero-image:url("/assets/area-heroes-v1290/quran-overview.webp")}
+html[data-theme] body.is-quran-learn-route{--dv-hero-image:url("/assets/area-heroes-v1290/quran-learn.webp")}
+html[data-theme] body.is-scholar-route{--dv-hero-image:url("/assets/area-heroes-v1290/scholar-detail.webp")}
+html[data-theme] body.is-book-route{--dv-hero-image:url("/assets/area-heroes-v1290/book-detail.webp")}
+html[data-theme] body.is-news-route{--dv-hero-image:url("/assets/area-heroes-v1290/topics.webp")}
 /* Full-background hero rather than a floating image, with readable theme-dependent copy. */
 html[data-theme] body:is(
  .is-topics-route,.is-topic-route,.is-post-route,.is-prayer-route,.is-qibla-route,
@@ -56,10 +56,10 @@ html[data-theme] body.is-quran-overview #appView .qov-header{
   position:relative!important;
   isolation:isolate!important;
   box-sizing:border-box!important;
-  width:calc(100% + (var(--dv-gutter) * 2))!important;
+  width:calc(100% + var(--dv-gutter) + var(--dv-gutter))!important;
   max-width:none!important;
   min-height:clamp(248px,40vw,345px)!important;
-  margin:0 0 18px calc(-1 * var(--dv-gutter))!important;
+  margin:0 0 18px calc(0px - var(--dv-gutter))!important;
   padding:36px max(20px,var(--dv-gutter)) 28px!important;
   display:flex!important;
   flex-direction:column!important;
@@ -138,7 +138,7 @@ html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub{
 html[data-theme="aurora"] body.is-topics-route #appView .topics-hub{
  --vtop-ink:#f2f6ed;--vtop-accent:#a7d6bd;--vtop-muted:#c2d2c7;--vtop-surface:#112522;--vtop-line:rgba(167,214,189,.31)}
 html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups{
-  width:calc(100% - (var(--dv-gutter) * 2))!important;
+  width:calc(100% - var(--dv-gutter) - var(--dv-gutter))!important;
   max-width:none!important;
   min-width:0!important;
   margin:0 auto 32px!important;
@@ -147,7 +147,7 @@ html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-gr
   gap:12px!important;
 }
 html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label{
-  width:calc(100% - (var(--dv-gutter) * 2))!important;
+  width:calc(100% - var(--dv-gutter) - var(--dv-gutter))!important;
   max-width:none!important;
   min-width:0!important;
   margin:16px auto 13px!important;
@@ -268,11 +268,11 @@ html[data-theme] body.is-topics-route #appView .topics-hub .dv-items .topics-the
  color:var(--vtop-accent)!important;opacity:1!important;
 }
 html[data-theme] body.is-topic-route #appView .topic-collection-page>.topic-collection{
- width:calc(100% - (var(--dv-gutter) * 2))!important;max-width:none!important;
+ width:calc(100% - var(--dv-gutter) - var(--dv-gutter))!important;max-width:none!important;
  margin-inline:auto!important;
 }
 html[data-theme] body.is-post-route #appView .post-reader-main{
- width:calc(100% - (var(--dv-gutter) * 2))!important;
+ width:calc(100% - var(--dv-gutter) - var(--dv-gutter))!important;
  max-width:min(100%,900px)!important;margin:20px auto 0!important;
 }
 html[data-theme] body.is-post-route #appView{padding-bottom:calc(155px + env(safe-area-inset-bottom,0px))!important}
