@@ -276,3 +276,92 @@
 #view-parents #kidsParentAccounts :is(button,.kids-support-link-parent):focus-visible{
  outline:3px solid var(--kp-accent)!important;outline-offset:2px!important;
 }
+
+/* KIDS_FAMILY_STRUCTURE_V1435
+ * Structural extension ONLY: inherit each existing parent palette (boy and
+ * girl), parent-card width/rhythm and the unchanged floating 5-tab dock.
+ * No new visual theme, gradients, fonts, global scroll rules or selectors. */
+#view-parents .kids-parent-family{
+ min-width:0;margin-top:14px;padding-top:13px;
+ border-top:1px solid var(--kp-stroke);
+}
+#view-parents .kids-parent-family-heading{
+ display:flex;align-items:center;justify-content:space-between;gap:8px;min-width:0;
+}
+#view-parents .kids-parent-family-heading strong{
+ color:var(--kp-ink);font-size:14px;font-weight:850;
+}
+#view-parents .kids-parent-family-heading small{
+ color:var(--kp-muted);font-size:11px;text-align:right;line-height:1.4;
+}
+#view-parents .kids-parent-family-grid{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:9px;
+}
+#view-parents .kids-parent-family-grid button{
+ box-sizing:border-box;display:flex;align-items:center;justify-content:flex-start;
+ width:100%;min-width:0;min-height:52px;gap:8px;padding:8px;
+ border-radius:13px!important;border:1px solid var(--kp-stroke)!important;
+ background-color:var(--kp-raised)!important;background-image:none!important;
+ box-shadow:none!important;text-shadow:none!important;
+ color:var(--kp-ink)!important;-webkit-text-fill-color:var(--kp-ink)!important;
+ text-align:left;line-height:1.25;touch-action:manipulation;
+ user-select:none;-webkit-user-select:none;
+}
+#view-parents .kids-parent-family-grid button.is-active{
+ border-color:var(--kp-accent)!important;opacity:1!important;
+}
+#view-parents .kids-parent-family-child img{
+ display:block;flex:none;width:32px;height:32px;object-fit:contain;
+ border-radius:10px;background:rgba(255,255,255,.06);
+}
+#view-parents .kids-parent-family-child-copy{
+ min-width:0;display:flex;flex-direction:column;gap:3px;
+}
+#view-parents .kids-parent-family-child-copy strong{
+ display:block;min-width:0;font-size:12px;font-weight:850;
+ color:var(--kp-ink)!important;overflow-wrap:anywhere;
+}
+#view-parents .kids-parent-family-child-copy small{
+ display:block;font-size:10px;color:var(--kp-muted)!important;
+}
+#view-parents .kids-parent-family-grid button.kids-parent-family-more{
+ justify-content:center;font-weight:800;font-size:12px;
+ color:var(--kp-accent)!important;-webkit-text-fill-color:var(--kp-accent)!important;
+}
+#view-parents .kids-parent-family-grid button:focus-visible,
+#view-parents #kidsParentResumeOpen:focus-visible{
+ outline:3px solid var(--kp-accent)!important;outline-offset:2px!important;
+}
+#view-parents .kids-parent-resume{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:8px;min-width:0;margin-top:12px;padding:10px;
+ border:1px solid var(--kp-stroke);border-radius:13px;
+ background:var(--kp-raised);color:var(--kp-ink);
+}
+#view-parents .kids-parent-resume[hidden]{display:none!important}
+#view-parents .kids-parent-resume-copy{
+ min-width:0;flex:1;display:flex;flex-direction:column;gap:3px;
+}
+#view-parents .kids-parent-resume-copy strong{
+ font-size:12px;font-weight:850;color:var(--kp-ink);
+}
+#view-parents .kids-parent-resume-copy small{
+ display:block;min-width:0;font-size:11px;line-height:1.35;
+ color:var(--kp-muted);overflow-wrap:anywhere;
+}
+#view-parents button#kidsParentResumeOpen{
+ width:auto;flex:none;min-height:44px;max-width:43%;
+ padding:8px 10px;border-radius:12px!important;
+ border:1px solid var(--kp-accent)!important;
+ background:var(--kp-card)!important;background-image:none!important;
+ color:var(--kp-accent)!important;-webkit-text-fill-color:var(--kp-accent)!important;
+ box-shadow:none!important;font-size:12px;font-weight:800;text-align:center;
+ user-select:none;-webkit-user-select:none;touch-action:manipulation;
+}
+@media(max-width:350px){
+ #view-parents .kids-parent-family-grid{gap:6px}
+ #view-parents .kids-parent-family-grid button{padding:7px;gap:6px}
+ #view-parents .kids-parent-family-child img{width:28px;height:28px}
+ #view-parents .kids-parent-resume{flex-wrap:wrap}
+ #view-parents button#kidsParentResumeOpen{max-width:none;width:100%}
+}
