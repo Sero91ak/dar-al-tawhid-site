@@ -7702,6 +7702,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-prayer-motifs-visibility-correction-v5-20261016",
+      "at": "2026-10-16T12:42:00+02:00",
+      "approvedBy": "user-explicit-repair-generated-prayer-motifs-not-visible-in-test-app",
+      "reason": "Nur Erwachsenen-Dar-Test: Browser-CSS-Bust, sechste Gebetszeitkarte Sonnenaufgang zuordnen; HTTP-Check von 5 lokalen Motiven auf zwei Test-Origins. Bestehende 3D-Icons, Navigation, Push, Gebetsberechnung sowie Besucher/Kids-Assets unveraendert.",
+      "paths": [
+        "cloudflare/test-app-worker.js",
+        "test/assets/dar-settings-permissions-v1.css",
+        "test/assets/prayer-v1254.css",
+        "scripts/verify-test-app-deploy.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
     }
   ],
   "enabled": true

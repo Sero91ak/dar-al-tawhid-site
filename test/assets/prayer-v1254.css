@@ -260,11 +260,12 @@ html[data-theme="aurora"] #appView.view:has(.prayer-page-noble){
   background-repeat:no-repeat!important;
   box-shadow:none!important;
 }
-#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(1){--dar-time-photo:url("/test/assets/prayer-motifs/fajr.webp")}
-#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(2){--dar-time-photo:url("/test/assets/prayer-motifs/dhuhr.webp")}
-#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(3){--dar-time-photo:url("/test/assets/prayer-motifs/asr.webp")}
-#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(4){--dar-time-photo:url("/test/assets/prayer-motifs/maghrib.webp")}
-#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(5){--dar-time-photo:url("/test/assets/prayer-motifs/isha.webp")}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(1){--dar-time-photo:url("/test/assets/prayer-motifs/fajr.webp?v=20261016-motifs-v5")}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(2){--dar-time-photo:url("/test/assets/prayer-motifs/fajr.webp?v=20261016-motifs-v5")}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(3){--dar-time-photo:url("/test/assets/prayer-motifs/dhuhr.webp?v=20261016-motifs-v5")}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(4){--dar-time-photo:url("/test/assets/prayer-motifs/asr.webp?v=20261016-motifs-v5")}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(5){--dar-time-photo:url("/test/assets/prayer-motifs/maghrib.webp?v=20261016-motifs-v5")}
+#appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):nth-child(6){--dar-time-photo:url("/test/assets/prayer-motifs/isha.webp?v=20261016-motifs-v5")}
 #appView.view:has(.prayer-page-noble) .prayer-time-grid--top :is(.prayer-time-card,.prayer-time-card--slim):is(.active,.is-current){
   border-color:var(--gold2)!important;
   box-shadow:inset 0 -2px 0 var(--gold2)!important;
@@ -320,3 +321,5 @@ html:is([data-theme="salbei"],[data-theme="light"][data-theme-variant="salbei"])
     min-height:86px!important;
   }
 }
+
+/* SIX_CARDS_SUNRISE_CORRECTED_V5: Fajr, Sonnenaufgang, Dhuhr, Asr, Maghrib, Isha. */

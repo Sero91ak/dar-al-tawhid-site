@@ -644,11 +644,11 @@ html body.is-settings-route .theme-switch-btn[data-theme-select="aurora"]{
 /* DAR-TEST-ONLY PHOTOREAL PRAYER MOTIFS V3 · 2026-10-16 */
 /* Eigene lokal eingebundene KI-Motive, niemals wechselnde Stock-/Hotlinkbilder.
    Alte Gebetsauswahl und alle Original-Icons sowie Aktivierungsmechanik bleiben. */
-html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(1){--dar-prayer-image:url("/test/assets/prayer-motifs/fajr.webp")}
-html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(2){--dar-prayer-image:url("/test/assets/prayer-motifs/dhuhr.webp")}
-html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(3){--dar-prayer-image:url("/test/assets/prayer-motifs/asr.webp")}
-html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(4){--dar-prayer-image:url("/test/assets/prayer-motifs/maghrib.webp")}
-html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(5){--dar-prayer-image:url("/test/assets/prayer-motifs/isha.webp")}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(1){--dar-prayer-image:url("/test/assets/prayer-motifs/fajr.webp?v=20261016-motifs-v5")}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(2){--dar-prayer-image:url("/test/assets/prayer-motifs/dhuhr.webp?v=20261016-motifs-v5")}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(3){--dar-prayer-image:url("/test/assets/prayer-motifs/asr.webp?v=20261016-motifs-v5")}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(4){--dar-prayer-image:url("/test/assets/prayer-motifs/maghrib.webp?v=20261016-motifs-v5")}
+html body.is-settings-route .notification-prayer-grid>.notification-prayer:nth-child(5){--dar-prayer-image:url("/test/assets/prayer-motifs/isha.webp?v=20261016-motifs-v5")}
 html body.is-settings-route .notification-prayer-grid>.notification-prayer{
   background-size:cover!important;
   background-position:50% 44%!important;

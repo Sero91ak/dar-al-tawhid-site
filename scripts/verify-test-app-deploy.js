@@ -183,6 +183,27 @@ async function fetchVersionBuild(base) {
   console.log(
     `Dar Test live OK — public und workers.dev liefern identisch ${TEST_EXPECT_BUILD}.`
   );
+  // MOTIF_IMAGE_DELIVERY_V5: ensure real assets reach both public and workers.dev.
+  for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
+    for (const name of ["fajr", "dhuhr", "asr", "maghrib", "isha"]) {
+      const url = `${base}/assets/prayer-motifs/${name}.webp?v=20261016-motifs-v5`;
+      let checked = false;
+      for (let attempt = 1; attempt <= 4 && !checked; attempt++) {
+        try {
+          const res = await fetch(url, { cache: "no-store", headers: { "Cache-Control": "no-cache" } });
+          const bytes = new Uint8Array(await res.arrayBuffer());
+          const webp = bytes.length > 500
+            && String.fromCharCode(...bytes.slice(0,4)) === "RIFF"
+            && String.fromCharCode(...bytes.slice(8,12)) === "WEBP";
+          checked = res.status === 200 && webp;
+          console.log(`prayer-photo ${label}/${name}: status=${res.status} bytes=${bytes.length} valid-webp=${webp} ok=${checked}`);
+        } catch (error) { console.log(`prayer-photo ${label}/${name}: ${error.message || error}`); }
+        if (!checked && attempt < 4) await sleep(DELAY_MS);
+      }
+      if (!checked) throw new Error(`Motiv ${name} auf ${label} nicht ausgeliefert: ${url}`);
+    }
+  }
+
 
   const kidsPath = path.join(ROOT_DIR, "kids/version.json");
   const verifyKids = currentCommitTouchesKids();
