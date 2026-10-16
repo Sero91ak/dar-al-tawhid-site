@@ -1,3 +1,13 @@
+## KIDS_FAMILY_STRUCTURE_V1435 — Familienübersicht im vorhandenen Eltern-Design
+
+- **Nur Struktur aus der externen HTML-Vorschau übernehmen; niemals deren Farbwelt, Schrift, Navigation oder Mock-Daten importieren.** Die Kinder-Besucher-App besitzt eine bereits freigegebene eigenständige Jungen- und Mädchenoberfläche, inklusive sämtlicher Themes; bestehende CSS-Variablen von `#view-parents`, Original-Avatare und der originale `#profileCard` sind verbindlich.
+- In **Eltern** zeigt die bestehende Übersicht bis zu vier verfügbare lokale Kinderprofile kompakt, weitere Profile unter der vorhandenen Profilverwaltung. Neue Knöpfe delegieren an **bestehende** Funktionen `#profileList [data-profile]` und `#profileAdd`. Beim fremden Kinderprofil bleibt die vorhandene Passwortprüfung aktiv; aktive Kinderprofile werden als „Aktiv“ gekennzeichnet.
+- Eine lokal vorhandene unvollständige Hörgeschichte darf zusätzlich als **„Zuletzt gehört“** mit Titel und Sekundenposition angezeigt werden. Der Button öffnet den unveränderten Tab **Hören**, der bereits seinen eigenen Fortsetzen-Einstieg besitzt. Nicht behaupten, die neue Elternansicht selbst starte eine Audio-Datei.
+- **Keinerlei Änderungen** an `kids.profiles.v1`, `kids.activeProfile`, `kids.storyHub.last.v1`, Passwort-/RPC-Funktionen oder Lernständen. Kein eigener `localStorage.setItem` in der Elternpräsentation.
+- **Kein produktives Eltern-E-Mail-Konto oder Passwort-Reset** in diesem Schritt: diese Funktionen erfordern separate verifizierte serverseitige Authentifizierung und migrationssichere Tests gemäß GitHub-Issue #1188; sie dürfen den Besucherinnen und Besuchern nicht als bereits aktiviert gezeigt werden.
+- Endgeräte: Smartphone, iPhone-WKWebView, PWA, Android, Tablet; Profile in einem kompakten responsiven Zweispaltenraster, semantische Buttons mindestens 44px, kein Textauswahl-Menü auf Bedienelementen, keine neue Kopf-/Tab-Leiste, keine Safe-Area-/Scroll-Manipulation. Junge/Mädchen verwenden ausschließlich die bestehenden `--kp-*` Farbvariablen. Screenreader und Tastaturfokus berücksichtigen.
+- Umsetzung: `kids/parents-dashboard-v1432.js`, `kids/parents-dashboard-v1432.css`; identische 3 HTML-Einstiege, `kids/sw.js` Cache v1435; Regression `kids/tools/test-parents-dashboard-v1432.cjs`.
+
 ## KIDS_BIRTH_MONTH_AUTO_AGE_V1431 — automatische Altersstufe für angemeldete Kinder
 
 - Beim Anlegen eines Kinderkontos geben die Eltern **nur Geburtsmonat und Geburtsjahr** ein; niemals einen exakten Geburtstag. Bestehende Konten können die Angabe unter **Eltern → Altersstufe** nachtragen. Gastkonten behalten eine manuelle Altersauswahl.
