@@ -231,3 +231,15 @@
  color:var(--kp-action-ink)!important;-webkit-text-fill-color:var(--kp-action-ink)!important;
  border:1px solid var(--kp-accent)!important;box-shadow:none!important;
 }
+
+/* KIDS_PARENTS_AGE_SAFE_HIDDEN_V1432: do not expose manually forced ages for
+   registered children with a locally supplied birth month. */
+#view-parents #kidsParentStorySettings .studio-pref-buttons[hidden],
+#view-parents .kids-parent-age-card .age-tabs[hidden],
+#view-parents .kids-parent-birth-fold[hidden],
+#view-parents .kids-parent-fold [hidden]{
+ display:none!important;
+}
+#view-parents .kids-parent-fold{
+ scroll-margin-top:calc(max(16px,env(safe-area-inset-top,0px)) + 16px);
+}
