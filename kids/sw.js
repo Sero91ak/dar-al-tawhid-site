@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1440";
+const CACHE_NAME="dar-al-tawhid-kids-v1441";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -108,7 +108,7 @@ const CORE_PRECACHE=[
   "/kids/sahabiyyat-stories.js?v=1414",
   "/kids/story-follow-reader.css?v=11",
   "/kids/screen-awake.js?v=1",
-  "/kids/story-follow-reader.js?v=18-salaf1",
+  "/kids/story-follow-reader.js?v=19-salaf1",
   "/kids/story-hub.css?v=12",
   "/kids/stories-home-v1133.css?v=1152",
   "/kids/stories-home-v1138.css?v=1152",
@@ -286,7 +286,7 @@ const PRECACHE=CORE_PRECACHE.concat([
 /* V1430 GIRL ACADEMY BOOT: girls must have correct colors even offline on first load. */
 const KIDS_BOOT_PRECACHE=[
   "/kids/parents-dashboard-v1432.css?v=1435",
-  "/kids/parents-dashboard-v1432.js?v=1440",
+  "/kids/parents-dashboard-v1432.js?v=1441",
   "/kids/parents-compact-timer-v1436.css?v=1440",
   "/kids/parents-compact-timer-v1436.js?v=1440",
   "/kids/kids-birth-month-v1431.js?v=1431",
@@ -317,7 +317,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/kids-story-action-contrast-v1345.css?v=1346",
   "/kids/offline-library-v1.js?v=1",
   "/kids/offline-library-v1.css?v=1",
-  "/kids/salaf-library-v1.js?v=1430",
+  "/kids/salaf-library-v1.js?v=1441",
   "/kids/kids-listening-polish-v1350.css?v=1350",
   "/kids/kids-listening-polish-v1350.js?v=1350",
   "/kids/assets/kids-icons/library-real-v12.png?v=cut1",
