@@ -579,3 +579,141 @@ html body.is-settings-route .dsh-font-clean-icon {
   padding-right:3px;
   color:var(--dsh-accent,var(--gold2,#d7bd85));
 }
+
+
+/* SETTINGS HERO VISIBILITY & SCROLL V1285 — 17.10.2026
+   Photographic, route-specific, full-bleed hero. Original test art reused as
+   static local site assets; no tracking/external URL. Header stays pinned
+   while its content scrolls under it. Buttons and notification state untouched. */
+html[data-theme] body.is-settings-route #appView.view > .view-head.settings-page-head {
+  --dar-settings-scene:url("/test/assets/area-heroes-v1290/more-hub.webp");
+  --dar-settings-shade:rgba(5,10,10,.70);
+  box-sizing:border-box!important;
+  position:sticky!important;
+  top:0!important;
+  z-index:35!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  transform:none!important;
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+  width:100vw!important;
+  max-width:none!important;
+  margin:0 calc(50% - 50vw) 14px!important;
+  min-height:clamp(220px,31svh,300px)!important;
+  height:auto!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  align-items:flex-start!important;
+  padding:clamp(86px,10svh,128px) max(18px,env(safe-area-inset-right,0px)) 22px max(18px,env(safe-area-inset-left,0px))!important;
+  background-color:var(--bg,#080d0c)!important;
+  background-image:
+    linear-gradient(90deg,var(--dar-settings-shade) 0%,rgba(6,12,13,.37) 52%,rgba(7,13,14,.08) 100%),
+    linear-gradient(0deg,rgba(4,9,10,.56) 0%,transparent 63%),
+    var(--dar-settings-scene)!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+  background-position:center,center,center 49%!important;
+  border:0!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2,#d4b780) 39%,transparent)!important;
+  border-radius:0 0 22px 22px!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .view-head.settings-page-head:has(+ .dsh-detail) {
+  min-height:clamp(205px,27svh,265px)!important;
+  margin-bottom:12px!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .view-head.settings-page-head:has(+ .dsh-detail[data-settings-page="notifications"]) {
+  --dar-settings-scene:url("/test/assets/area-heroes-v1290/prayer.webp");
+}
+html[data-theme] body.is-settings-route #appView.view > .view-head.settings-page-head:has(+ .dsh-detail[data-settings-page="location"]) {
+  --dar-settings-scene:url("/test/assets/area-heroes-v1290/qibla.webp");
+}
+html[data-theme] body.is-settings-route #appView.view > .view-head.settings-page-head:has(+ .dsh-detail[data-settings-page="font"]) {
+  --dar-settings-scene:url("/test/assets/area-heroes-v1290/library.webp");
+}
+html[data-theme="dar-al-layl"] body.is-settings-route #appView.view > .view-head.settings-page-head {
+  --dar-settings-shade:rgba(8,14,12,.73);
+}
+html[data-theme="bordeaux"] body.is-settings-route #appView.view > .view-head.settings-page-head {
+  --dar-settings-shade:rgba(27,8,18,.72);
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="salbei"],[data-theme="eisgold"]) body.is-settings-route #appView.view > .view-head.settings-page-head {
+  --dar-settings-shade:rgba(20,27,24,.71);
+}
+html[data-theme] body.is-settings-route #appView.view > .view-head.settings-page-head > * {
+  position:relative!important;
+  z-index:1!important;
+  max-width:min(100%,930px)!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .view-head.settings-page-head h2 {
+  color:#ead29e!important;
+  -webkit-text-fill-color:#ead29e!important;
+  text-shadow:0 1px 6px rgba(0,0,0,.55)!important;
+}
+html[data-theme] body.is-settings-route #appView.view > .view-head.settings-page-head .view-desc {
+  color:#f3eee3!important;
+  -webkit-text-fill-color:#f3eee3!important;
+  text-shadow:0 1px 6px rgba(0,0,0,.75)!important;
+}
+/* One viewport-based safe area, not the old 172px blank trailing scroll area. */
+html[data-theme] body.is-settings-route #appView.view > .dsh-shell,
+html[data-theme] body.is-settings-route #appView .dsh-shell {
+  min-height:0!important;
+  padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;
+  scroll-margin-top:0!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-note {
+  margin-top:12px!important;
+}
+html[data-theme] body.is-settings-route #appView .dsh-detail[data-settings-page="notifications"] .dsh-detail-intro {
+  display:none!important; /* primary title already in pinned hero */
+}
+/* Full photographic prayer buttons; explicit layers outrank legacy solid cards.
+   Native state badges and independent touch targets are not changed. */
+html[data-theme] body.is-settings-route #appView.view .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer {
+  --dar-photo:none;
+  background-color:#14201a!important;
+  background-image:
+    linear-gradient(180deg,rgba(8,14,13,.07) 0%,rgba(8,14,13,.28) 44%,rgba(8,14,13,.63) 100%),
+    var(--dar-photo)!important;
+  background-size:cover,cover!important;
+  background-position:center,center 52%!important;
+  background-repeat:no-repeat!important;
+  min-height:122px!important;
+  box-shadow:inset 0 0 0 1px rgba(0,0,0,.25)!important;
+}
+html[data-theme] body.is-settings-route #appView.view .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer:nth-child(1) {
+  --dar-photo:url("/test/assets/prayer-motifs/fajr.webp?v=motifs-visible-v1");
+}
+html[data-theme] body.is-settings-route #appView.view .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer:nth-child(2) {
+  --dar-photo:url("/test/assets/prayer-motifs/dhuhr.webp?v=motifs-visible-v1");
+}
+html[data-theme] body.is-settings-route #appView.view .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer:nth-child(3) {
+  --dar-photo:url("/test/assets/prayer-motifs/asr.webp?v=motifs-visible-v1");
+}
+html[data-theme] body.is-settings-route #appView.view .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer:nth-child(4) {
+  --dar-photo:url("/test/assets/prayer-motifs/maghrib.webp?v=motifs-visible-v1");
+}
+html[data-theme] body.is-settings-route #appView.view .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer:nth-child(5) {
+  --dar-photo:url("/test/assets/prayer-motifs/isha.webp?v=motifs-visible-v1");
+}
+html[data-theme="dar-al-layl"] body.is-settings-route #appView.view .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer {
+  background-image:
+    linear-gradient(180deg,rgba(8,14,12,.09),rgba(8,14,12,.25) 44%,rgba(8,14,12,.67)),
+    var(--dar-photo)!important;
+}
+html[data-theme] body.is-settings-route #appView.view .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer > * {
+  position:relative!important;
+  z-index:1!important;
+  pointer-events:none!important;
+}
+@media (max-width:390px) {
+  html[data-theme] body.is-settings-route #appView.view > .view-head.settings-page-head {
+    min-height:220px!important;
+  }
+  html[data-theme] body.is-settings-route #appView.view .dsh-detail[data-settings-page="notifications"] .notification-prayer-grid > button.notification-prayer {
+    min-height:111px!important;
+  }
+}
