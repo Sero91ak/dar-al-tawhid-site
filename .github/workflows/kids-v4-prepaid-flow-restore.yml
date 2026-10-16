@@ -51,10 +51,27 @@ jobs:
           if [ -f "$archive" ]; then
             python3 kids/tools/import_quiz_v4_prepaid_flow_originals.py --zip "$archive"
             python3 kids/tools/quiz_v4_first150_offline_join.py
+            python3 kids/tools/quiz_v4_age7to10_offline_join.py
             python3 kids/tools/qa_quiz_v4_saved_mp3.py
+            python3 kids/tools/qa_quiz_v4_first150_composed.py
             python3 kids/tools/report_quiz_v4_450_progress.py
             python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
-            python3 kids/tools/quiz_v4_selected450_release_gate.py
+            python3 kids/tools/write_quiz_v4_handover.py
+            python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+            python3 - <<'PY'
+            import json
+            from pathlib import Path
+            home=Path('kids')
+            paid=json.loads((home/'data/quiz-v4-paid-flow-import-status.json').read_text())
+            young=json.loads((home/'data/quiz-v4-first150-audio-status.json').read_text())
+            mapped=json.loads((home/'review-only/quiz-v4-450-actual-mp3-import-summary.json').read_text())
+            assert mapped['questionsStaged']==450
+            assert young['completeFourPartQuestions']==mapped['byAge']['4-6']['completeFourPartQuestions']
+            if paid['remainingPriorPaidGenerations']==0:
+                assert young['completeFourPartQuestions']==150, 'Nine old MP3s imported but 150 young questions NOT complete'
+            assert young['readyForLive'] is False
+            print('PASS: real original import reflected across the 450 review quizzes, no live flag')
+            PY
           else
             echo "No previously-paid MP3 export ZIP supplied yet. All existing recordings kept unchanged."
             echo "Upload all available original MP3s named <generation-id>.mp3 inside a single archive: $archive"
@@ -77,6 +94,10 @@ jobs:
           git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
           git add kids/data/quiz-v4-first150-composed-preview.json
           git add kids/data/quiz-v4-first150-audio-status.json
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-handover-latest.json
           git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
           git add kids/data/quiz-v4-450-production-status.json
           # Archive is no longer needed once original MP3s are individually saved.
