@@ -6961,7 +6961,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1436",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1437",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -11873,6 +11873,6 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority .kids-acad
 <link rel="stylesheet" href="/kids/parents-dashboard-v1432.css?v=1435" data-kids-parents="1432">
 <script src="/kids/parents-dashboard-v1432.js?v=1435" defer></script>
 <!-- KIDS_PARENT_COMPACT_TIMER_V1436: inherits existing art, theme and five-tab navigation -->
-<link rel="stylesheet" href="/kids/parents-compact-timer-v1436.css?v=1436">
-<script src="/kids/parents-compact-timer-v1436.js?v=1436" defer></script>
+<link rel="stylesheet" href="/kids/parents-compact-timer-v1436.css?v=1437">
+<script src="/kids/parents-compact-timer-v1436.js?v=1437" defer></script>
 </html>
