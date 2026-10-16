@@ -82,7 +82,7 @@ assert.ok(globalJs.includes('version:"1410"'),"Global controller version mismatc
 assert.ok(globalJs.includes("KIDS_GLOBAL_TOP_SCROLL_BOUNDARY_V1428"),"All Kids views must share the top-edge guard");
 assert.ok(globalCss.includes("KIDS_GLOBAL_TOP_SCROLL_BOUNDARY_V1428"),"Global CSS top-edge stop missing");
 assert.ok(globalJs.includes('rootSelector=".shell,'),"Overview views must be protected, not only detail pages");
-assert.ok(html.includes("/kids/sw.js?v=1428"),"Offline shell release must load the fresh service worker");
+assert.ok(html.includes("/kids/sw.js?v=1433"),"Offline shell release must load the fresh service worker");
 assert.ok(globalJs.includes("KIDS_TOP_SCROLL_BOUNDARY_V1411"),"Global touch-boundary controller missing");
 assert.ok(globalCss.includes("KIDS_TOP_SCROLL_BOUNDARY_V1411"),"Global top-edge overscroll containment missing");
 assert.ok(globalJs.includes("touchmove")&&globalJs.includes("event.preventDefault()"),"Native iOS top rubber-band must be prevented");
