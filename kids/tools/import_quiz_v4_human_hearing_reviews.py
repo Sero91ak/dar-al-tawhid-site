@@ -37,10 +37,19 @@ CATEGORIES = {"pronunciation","content","pauses","sound","other"}
 def fail(reason):
     raise ValueError("KIDS V4 hearing import rejected: "+reason)
 
+def reject_duplicate_keys(pairs):
+    obj={}
+    for key,value in pairs:
+        if key in obj:
+            fail("duplicate JSON key: ambiguous review decisions are unsafe")
+        obj[key]=value
+    return obj
+
 def load(path, max_size=MAX_BYTES):
     if not path.is_file() or not 0<path.stat().st_size<=max_size:
         fail("missing/oversized JSON submission or ledger")
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(path.read_text(encoding="utf-8"),
+                      object_pairs_hook=reject_duplicate_keys)
 
 def ensure(condition, message):
     if not condition:fail(message)
@@ -115,8 +124,12 @@ def review_one(source, group, allowed):
                "unknown, wrong-age or changed MP3 hash in issue")
         ensure(category in CATEGORIES and isinstance(note,str) and len(note)<=1500,
                "unsupported issue classification or note length")
-        issues[textsha]={"mp3Sha256":mp3sha,"category":category,"note":note}
-    # Do NOT store reporter's personal name, arbitrary raw JSON, timestamp, or PII.
+        # Notes may include children's names or contact details. Only keep
+        # metadata needed to route a private review. Human follow-up reads
+        # the original, gitignored submission stored outside GitHub.
+        issues[textsha]={"mp3Sha256":mp3sha,"category":category,
+                         "hasPrivateNote":bool(note.strip()),"noteLength":len(note)}
+    # Do NOT store reporter names, arbitrary raw JSON, note content, or PII.
     # These are self-attested claims, not production audio approvals.
     return {"scope":SCOPES[group],"ageGroup":group,"approvedClaims":approved,
             "reportedIssues":issues,"selfAttested":True,
@@ -177,6 +190,7 @@ def build_report(stage, files):
             "humanApprovalVerifiedByImporter":False,
             "publicPlaybackApprovedCount":0,"publicReleaseAllowed":False,
             "newElevenLabsCreditsSpent":0,
+            "rawReviewerNamesOrNotesCommitted":False,
             "byAge":{age:dict(count_age[age]) for age in ("4-6","7-8","9-10")},
             "selfAttestedAudioClaimsByTextSha":approved,
             "reportedIssuesByTextSha":problems,
@@ -220,7 +234,8 @@ def main():
            "Die Inhalte müssen aus dem interaktiven Offline-Hörpaket exportiert",
            "und mit echten MP3-Prüfsummen erstellt worden sein. Externe/unbekannte",
            "Dateien werden abgelehnt. Vorhandene Originale werden nie überschrieben.",
-           "Keine Rohdaten oder Prüfernamen in der normalisierten Ergebnisdatei.",
+           "Keine Rohdaten, Prüfernamen oder freien Fehlernotizen im GitHub-Ergebnis.",
+           "Notiztexte verbleiben ausschließlich in der lokalen, nicht versionierten Originaldatei.",
            ""]
     markdown="\n".join(lines)
     if opts.check:
