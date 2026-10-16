@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1435";
+const CACHE_NAME="dar-al-tawhid-kids-v1436";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -287,6 +287,8 @@ const PRECACHE=CORE_PRECACHE.concat([
 const KIDS_BOOT_PRECACHE=[
   "/kids/parents-dashboard-v1432.css?v=1435",
   "/kids/parents-dashboard-v1432.js?v=1435",
+  "/kids/parents-compact-timer-v1436.css?v=1436",
+  "/kids/parents-compact-timer-v1436.js?v=1436",
   "/kids/kids-birth-month-v1431.js?v=1431",
   "/kids/kids-birth-month-v1431.css?v=1431",
   "/kids/akademie/girl-profile-authority-v1430.css?v=1430",
@@ -485,7 +487,7 @@ self.addEventListener("fetch",function(event){
     return;
   }
   /* Parent dashboard CSS and JS: fetch current online with offline fallback. */
-  if(url.pathname==="/kids/parents-dashboard-v1432.css"||url.pathname==="/kids/parents-dashboard-v1432.js"){
+  if(url.pathname==="/kids/parents-dashboard-v1432.css"||url.pathname==="/kids/parents-dashboard-v1432.js"||url.pathname==="/kids/parents-compact-timer-v1436.css"||url.pathname==="/kids/parents-compact-timer-v1436.js"){
     event.respondWith(networkFirst(request));return;
   }
   /* Month-year calculation stays current with offline cache fallback. */
