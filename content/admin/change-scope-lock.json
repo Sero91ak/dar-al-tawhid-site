@@ -7825,6 +7825,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-24T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-settings-hub-subpages-20261016",
+      "at": "2026-10-16T19:34:00+02:00",
+      "approvedBy": "user-explicit-build-and-push-now-only-into-dar-test-app-20261016",
+      "reason": "Nur Erwachsenen-Dar-Test: sichtbare Einstellungszentrale mit sauberen Unterseiten fuer Benachrichtigungen, Standort, Themes, Schrift und App-Icon; eigene ruhige UI und Mehr-Theme-Schnellzugriff auf Settings statt Inline-Sheet. Keine Besucher-Produktion, Kids, Native Swift oder OneSignal/Push-Engine aendern.",
+      "paths": [
+        "test/index.html",
+        "test/assets/dar-settings-navigation-v1.css",
+        "test/assets/dar-more-v15.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-24T23:59:00.000Z"
     }
   ],
   "enabled": true

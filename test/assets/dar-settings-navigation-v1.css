@@ -1,0 +1,101 @@
+/* DĀR AL TAWḤĪD · DAR TEST · SETTINGS NAVIGATION V1
+   Nur Erwachsenen-Test, keine Veränderung an Push-Berechnung, Themes oder App-Shell. */
+html body.is-settings-route .dsh-shell,
+html body.is-settings-route .dsh-shell *{box-sizing:border-box}
+html body.is-settings-route .dsh-shell{
+  --dsh-accent:var(--gold2,var(--theme-accent,#d7bd85));
+  --dsh-ink:var(--text,#f6f0e7);
+  --dsh-muted:var(--muted,#aab4c3);
+  --dsh-line:color-mix(in srgb,var(--dsh-accent) 20%,transparent);
+  --dsh-surface:color-mix(in srgb,var(--card,#10233a) 91%,transparent);
+  width:100%;max-width:none;min-width:0;
+  padding:0 0 calc(32px + env(safe-area-inset-bottom,0px));
+  color:var(--dsh-ink);
+}
+html body.is-settings-route .dsh-welcome{
+ position:relative;isolation:isolate;overflow:hidden;display:flex;align-items:center;
+ justify-content:space-between;gap:12px;
+ margin:1px 0 23px;padding:22px clamp(15px,4.8vw,26px);
+ border:1px solid var(--dsh-line);border-radius:23px;
+ background:
+  radial-gradient(ellipse at 96% 0%,color-mix(in srgb,var(--dsh-accent) 16%,transparent),transparent 60%),
+  linear-gradient(125deg,color-mix(in srgb,var(--card,#172538) 95%,transparent),color-mix(in srgb,var(--card,#172538) 80%,transparent));
+ box-shadow:0 12px 32px rgba(0,0,0,.065);
+}
+html body.is-settings-route .dsh-welcome:after{
+ content:"";position:absolute;right:-18px;top:-44px;
+ width:153px;height:153px;border:1px solid var(--dsh-line);border-radius:50%;opacity:.75;pointer-events:none;
+}
+html body.is-settings-route .dsh-welcome:before{
+ content:"";position:absolute;right:7px;top:-20px;width:106px;height:106px;border:1px solid var(--dsh-line);border-radius:50%;pointer-events:none;
+}
+html body.is-settings-route .dsh-eyebrow{display:block;font-size:10px;font-weight:730;letter-spacing:.16em;text-transform:uppercase;color:var(--dsh-accent);margin-bottom:8px}
+html body.is-settings-route .dsh-welcome h2{font-family:var(--serif,Georgia,serif);font-size:clamp(23px,5vw,30px);font-weight:650;line-height:1.14;color:var(--dsh-ink);margin:0 0 6px}
+html body.is-settings-route .dsh-welcome p{margin:0;color:var(--dsh-muted);font-size:13px;line-height:1.5;max-width:31ch}
+html body.is-settings-route .dsh-emblem{position:relative;z-index:1;flex:0 0 58px;height:58px;border-radius:19px;border:1px solid var(--dsh-line);display:grid;place-items:center;background:color-mix(in srgb,var(--dsh-accent) 7%,transparent);color:var(--dsh-accent)}
+html body.is-settings-route .dsh-emblem svg{width:30px;height:30px}
+html body.is-settings-route .dsh-group{margin-bottom:22px;min-width:0}
+html body.is-settings-route .dsh-group-head{display:flex;align-items:center;gap:10px;margin:0 1px 10px;padding:0 3px}
+html body.is-settings-route .dsh-group-head span{font-size:10px;letter-spacing:.14em;font-weight:800;text-transform:uppercase;color:var(--dsh-accent);white-space:nowrap}
+html body.is-settings-route .dsh-group-head:after{content:"";height:1px;flex:1;background:var(--dsh-line)}
+html body.is-settings-route .dsh-list{border:1px solid var(--dsh-line);border-radius:20px;background:var(--dsh-surface);overflow:hidden}
+html body.is-settings-route .dsh-row{appearance:none;display:flex;align-items:center;width:100%;min-width:0;min-height:76px;padding:14px clamp(11px,3.5vw,18px);gap:13px;position:relative;border:0;border-radius:0;background:transparent;text-align:left;color:var(--dsh-ink);font:inherit;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+html body.is-settings-route .dsh-row+.dsh-row:before{content:"";position:absolute;left:64px;right:15px;top:0;height:1px;background:var(--dsh-line)}
+html body.is-settings-route .dsh-row:active{background:color-mix(in srgb,var(--dsh-accent) 10%,transparent)}
+html body.is-settings-route .dsh-row:focus-visible,
+html body.is-settings-route .dsh-back:focus-visible{outline:2px solid var(--dsh-accent);outline-offset:-3px}
+html body.is-settings-route .dsh-row-icon{flex:0 0 41px;width:41px;height:41px;display:grid;place-items:center;border-radius:13px;border:1px solid color-mix(in srgb,var(--dsh-accent) 22%,transparent);background:color-mix(in srgb,var(--dsh-accent) 8%,transparent);color:var(--dsh-accent)}
+html body.is-settings-route .dsh-row-icon svg{display:block;width:21px;height:21px}
+html body.is-settings-route .dsh-row-main{min-width:0;flex:1;display:flex;flex-direction:column;gap:4px}
+html body.is-settings-route .dsh-row-title{font-weight:720;font-size:clamp(13px,3.5vw,15px);line-height:1.2;color:var(--dsh-ink)}
+html body.is-settings-route .dsh-row-sub{color:var(--dsh-muted);font-size:11.5px;line-height:1.37}
+html body.is-settings-route .dsh-row-end{display:flex;flex:0 0 auto;align-items:center;gap:8px;color:var(--dsh-muted)}
+html body.is-settings-route .dsh-row-meta{font-size:11px;max-width:84px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+html body.is-settings-route .dsh-row-chevron{width:16px;height:16px;opacity:.64}
+html body.is-settings-route .dsh-note{text-align:center;margin:22px 8px 0;color:var(--dsh-muted);font-size:11px;line-height:1.5}
+html body.is-settings-route .dsh-detail{min-width:0}
+html body.is-settings-route .dsh-back{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--dsh-line);border-radius:99px;padding:10px 14px;min-height:44px;margin:0 0 15px;background:color-mix(in srgb,var(--dsh-accent) 5%,transparent);font:650 12px/1.25 inherit;color:var(--dsh-ink);cursor:pointer}
+html body.is-settings-route .dsh-back svg{width:16px;height:16px}
+html body.is-settings-route .dsh-detail-intro{display:flex;align-items:center;gap:12px;margin:0 0 15px;padding:3px 1px 12px;border-bottom:1px solid var(--dsh-line)}
+html body.is-settings-route .dsh-detail-intro .dsh-row-icon{flex-basis:46px;width:46px;height:46px;border-radius:16px}
+html body.is-settings-route .dsh-detail-intro h2{font-family:var(--serif,Georgia,serif);font-size:clamp(20px,5.4vw,27px);font-weight:620;color:var(--dsh-ink);margin:0 0 4px;line-height:1.12}
+html body.is-settings-route .dsh-detail-intro p{font-size:12px;line-height:1.4;color:var(--dsh-muted);margin:0}
+html body.is-settings-route .dsh-detail-content{min-width:0}
+html body.is-settings-route .dsh-detail .settings-one-page{padding:0!important}
+html body.is-settings-route .dsh-detail .settings-one-page>.notification-center-page{width:100%;max-width:none}
+html body.is-settings-route .dsh-detail .settings-one-page>#dar-setup-hub{display:none!important}
+/* Zwei eigene Ansichten, eine bestehende funktionale Benachrichtigungs-/Standort-Engine */
+html body.is-settings-route .dsh-detail[data-settings-page="notifications"] .dar-permission-location{display:none!important}
+html body.is-settings-route .dsh-detail[data-settings-page="location"] .notification-center-page>.notification-hero,
+html body.is-settings-route .dsh-detail[data-settings-page="location"] .notification-center-page>.notification-section,
+html body.is-settings-route .dsh-detail[data-settings-page="location"] .notification-center-page>.notification-saved{display:none!important}
+html body.is-settings-route .dsh-detail[data-settings-page="location"] .notification-center-page>.dar-permission-location{display:block!important;border:1px solid var(--dsh-line)!important;border-radius:19px!important;padding:18px!important;background:var(--dsh-surface)!important}
+html body.is-settings-route .dsh-detail[data-settings-page="appearance"] .theme-switch-panel,
+html body.is-settings-route .dsh-detail[data-settings-page="icon"] .app-icon-panel,
+html body.is-settings-route .dsh-detail[data-settings-page="font"] .app-font-panel{
+ width:100%!important;max-width:none!important;margin:0!important;padding:16px!important;
+ border:1px solid var(--dsh-line)!important;border-radius:18px!important;background:var(--dsh-surface)!important;
+ box-shadow:none!important;
+}
+html body.is-settings-route .dsh-detail .theme-switch-row{width:100%;min-width:0;gap:10px}
+html body.is-settings-route .dsh-detail .theme-switch-btn{min-width:0}
+html body.is-settings-route .dsh-extra-font{border:1px solid var(--dsh-line);border-radius:18px;background:var(--dsh-surface);padding:16px;margin-top:13px}
+html body.is-settings-route .dsh-extra-font h3{margin:0 0 5px;font-family:var(--serif,Georgia,serif);font-weight:600;font-size:19px;color:var(--dsh-ink)}
+html body.is-settings-route .dsh-extra-font p{font-size:11.5px;color:var(--dsh-muted);margin:0 0 12px}
+html body.is-settings-route .dsh-extra-font .font-slider-section+.font-slider-section{margin-top:14px}
+html body.is-settings-route .dsh-detail-content .app-icon-rail{width:100%;max-width:none}
+html body.is-settings-route .dsh-detail[data-settings-page="notifications"] .notification-hero{padding-top:6px!important}
+html body.is-settings-route .dsh-detail[data-settings-page="notifications"] .notification-section{scroll-margin-top:110px}
+@media(max-width:390px){
+ html body.is-settings-route .dsh-row{min-height:72px;gap:10px;padding-inline:10px}
+ html body.is-settings-route .dsh-row-icon{flex-basis:38px;width:38px;height:38px}
+ html body.is-settings-route .dsh-row+.dsh-row:before{left:57px}
+ html body.is-settings-route .dsh-row-meta{max-width:65px}
+ html body.is-settings-route .dsh-welcome{padding:18px 16px}
+ html body.is-settings-route .dsh-emblem{flex-basis:44px;height:44px}
+}
+@media(prefers-reduced-motion:no-preference){
+ html body.is-settings-route .dsh-row{transition:background-color .18s ease}
+ html body.is-settings-route .dsh-row-icon{transition:transform .18s ease}
+ html body.is-settings-route .dsh-row:active .dsh-row-icon{transform:scale(.95)}
+}
