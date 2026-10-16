@@ -29,6 +29,22 @@ summary.innerHTML=
   '<small id="kidsParentAgeNote">Lernstand und Altersstufe</small></div></div>'+
   '<button type="button" id="kidsParentManage" class="kids-parent-manage">Kinderkonten verwalten <span aria-hidden="true">›</span></button>';
 head.after(summary);
+/* KIDS_FAMILY_STRUCTURE_V1435 — same existing parent card, gender-scoped
+ * design variables, profile ownership and login handlers. No new credentials. */
+const family=document.createElement("div");
+family.className="kids-parent-family";
+family.setAttribute("aria-label","Kinderprofile auf diesem Gerät");
+family.innerHTML=
+ '<div class="kids-parent-family-heading"><strong>Kinderprofile</strong><small id="kidsParentFamilyCount"></small></div>'+
+ '<div id="kidsParentFamilyGrid" class="kids-parent-family-grid"></div>';
+const resume=document.createElement("div");
+resume.id="kidsParentResume";
+resume.className="kids-parent-resume";
+resume.hidden=true;
+resume.innerHTML=
+ '<span class="kids-parent-resume-copy"><strong>Zuletzt gehört</strong><small id="kidsParentResumeText"></small></span>'+
+ '<button type="button" id="kidsParentResumeOpen">Zum Hörbereich</button>';
+summary.querySelector("#kidsParentManage").before(family,resume);
 summary.after(progressPanel);
 progressPanel.after(timePanel);
 timePanel.after(agePanel);
@@ -75,6 +91,68 @@ if(birthPanel){
 }
 // Keep account form valid if parents reopen the age details: the original
 // refreshBirthPanel() remains the single source of form values and validation.
+function profilesOnDevice(){
+ try{
+  const rows=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
+  return Array.isArray(rows)?rows.filter(row=>row&&typeof row.id==="string"&&typeof row.name==="string"):[];
+ }catch(_){return []}
+}
+function renderFamily(){
+ const grid=$("#kidsParentFamilyGrid"),counter=$("#kidsParentFamilyCount");
+ if(!grid||!counter)return;
+ const rows=profilesOnDevice(),active=localStorage.getItem("kids.activeProfile");
+ counter.textContent=rows.length===1?"1 Kind auf diesem Gerät":rows.length+" Kinder auf diesem Gerät";
+ const fragment=document.createDocumentFragment();
+ rows.slice(0,4).forEach(function(child){
+  const isActive=String(child.id)===String(active);
+  const button=document.createElement("button");
+  button.type="button";button.className="kids-parent-family-child";
+  if(isActive){button.classList.add("is-active");button.disabled=true;button.setAttribute("aria-current","true")}
+  const img=document.createElement("img");
+  img.alt="";img.width=32;img.height=32;
+  img.src=child.gender==="girl"?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
+  const copy=document.createElement("span");copy.className="kids-parent-family-child-copy";
+  const name=document.createElement("strong");name.textContent=child.name;
+  const hint=document.createElement("small");hint.textContent=isActive?"Aktiv":"Anmelden";
+  copy.append(name,hint);button.append(img,copy);
+  if(!isActive)button.addEventListener("click",function(){
+   /* Delegate to the existing authenticated profile selector.
+      Never bypass the current per-child password prompt. */
+   const target=Array.from(document.querySelectorAll("#profileList [data-profile]"))
+    .find(el=>el.getAttribute("data-profile")===String(child.id));
+   if(target)target.click();
+   else $("#kidsParentManage")?.click();
+  });
+  fragment.appendChild(button);
+ });
+ if(rows.length>4){
+  const more=document.createElement("button");
+  more.type="button";more.className="kids-parent-family-more";
+  more.textContent="Alle "+rows.length+" Kinder ansehen";
+  more.addEventListener("click",function(){$("#kidsParentManage")?.click()});
+  fragment.appendChild(more);
+ }else{
+  const add=document.createElement("button");
+  add.type="button";add.className="kids-parent-family-more";
+  add.textContent=rows.length?"Weiteres Kind":"Kinderkonto anlegen";
+  add.addEventListener("click",function(){$("#profileAdd")?.click()});
+  fragment.appendChild(add);
+ }
+ grid.replaceChildren(fragment);
+}
+function renderLastStory(){
+ const wrap=$("#kidsParentResume"),label=$("#kidsParentResumeText");
+ if(!wrap||!label)return;
+ let item=null;
+ try{item=JSON.parse(localStorage.getItem("kids.storyHub.last.v1")||"null")}catch(_){}
+ const valid=item&&typeof item==="object"&&typeof item.title==="string"&&item.title.trim()&&
+   Number.isFinite(Number(item.time))&&Number(item.time)>2&&item.completed!==true;
+ wrap.hidden=!valid;
+ if(!valid)return;
+ const seconds=Math.floor(Number(item.time));
+ const when=Math.floor(seconds/60)+":"+String(seconds%60).padStart(2,"0");
+ label.textContent=item.title+" · ab "+when;
+}
 function profileInfo(){
  try{
   const id=localStorage.getItem("kids.activeProfile");
@@ -90,6 +168,7 @@ function paint(){
  const birth=child&&window.DARKidsBirthMonth?.get(child.id)||"";
  const actual=birth?window.DARKidsBirthMonth.ageAt(birth):null;
  const group=birth?window.DARKidsBirthMonth.groupAt(birth):safeAge(app?.dataset.age||child?.age);
+ renderFamily();renderLastStory();
  const display=child?.name||"Gastprofil";
  $("#kidsParentAvatar").src=girl?"/kids/assets/profile-avatars/girl-hijab-pink-v1235.svg":"/kids/assets/profile-avatars/boy-kufi-v1235.svg";
  $("#kidsParentName").textContent=display;
@@ -110,6 +189,9 @@ function paint(){
  if(stat)stat.textContent=child?"PROFILBEZOGEN":"DIESES GERÄT";
  checkBirthFields();
 }
+$("#kidsParentResumeOpen")?.addEventListener("click",function(){
+ document.querySelector('.bottom-nav [data-target="stories"]')?.click();
+});
 $("#kidsParentManage")?.addEventListener("click",function(){
  accountDetails.open=true;
  accountDetails.scrollIntoView({block:"nearest",behavior:"smooth"});
