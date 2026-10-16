@@ -7802,6 +7802,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-26T23:59:00.000Z"
+    },
+    {
+      "id": "dar-visitor-app-global-edge-width-20261016",
+      "at": "2026-10-16T15:25:00+02:00",
+      "approvedBy": "user-directly-push-live-app-all-sections-edge-to-edge-followup-20261016",
+      "reason": "Promote the approved mobile full-width alignment from adult /test to public adult visitor app. Production uses dm15-shell, not test .more-page. Fix double inline gutters for Mehr and Quiz and wider main SPA routes via adult-only CSS. Do not change any Kids assets, native Swift, router, navigation, calculation, push, theme palettes or visitor data.",
+      "paths": [
+        "assets/full-edge-appearance-polish.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-24T23:59:00.000Z"
     }
   ],
   "enabled": true
