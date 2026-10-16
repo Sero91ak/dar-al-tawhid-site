@@ -23,7 +23,7 @@ assert(academy.includes('/kids/kids-birth-month-v1431.js?v=1431')&&
 assert(academy.includes('syncProfile(); /* Month-year ages update'),"Open Academy must check age on day transition");
 assert(sw.includes("/kids/kids-birth-month-v1431.js?v=1431")&&
        sw.includes("/kids/kids-birth-month-v1431.css?v=1431")&&
-       sw.includes('dar-al-tawhid-kids-v1431'),"Birth module must be offline precached with a new SW cache");
+       sw.includes('dar-al-tawhid-kids-'+JSON.parse(read("kids/version.json")).visualSystem.serviceWorkerCache),"Birth module must be offline precached with the current SW cache");
 assert(!js.includes("kids.profiles.v1"),"Birth details must not be placed into account sync bag");
 assert(js.includes('dar.kids.birthMonth.v1.'),"Birth details must be stored separately");
 assert(style.includes('.app[data-gender="girl"]'),"Girl input styling must respect girl's palette");
