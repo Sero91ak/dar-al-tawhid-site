@@ -464,7 +464,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // motif layer. Route-based CSS: no modification of navigation JS or assets.
   // The 10px mobile content gutter follows the existing floating bottom nav.
   if (!html.includes('id="darTestEdgeWidthV1372"')) {
-    html += '<link rel="stylesheet" id="darTestEdgeWidthV1372" href="/test/assets/test-global-edge-width-v1372.css?v=20261016-full-width-v1372">';
+    html += '<link rel="stylesheet" id="darTestEdgeWidthV1372" href="/test/assets/test-global-edge-width-v1372.css?v=20261016-layl-muted-v1377">';
   }
 
   const headers = new Headers(asset.headers);

@@ -214,9 +214,9 @@ async function fetchVersionBuild(base) {
     const { status: shellStatus, text: shellHtml } =
       await fetchText(`${base}/index.html?edge-width-check=v1372`);
     const edgeLinkOk = shellHtml.includes('id="darTestEdgeWidthV1372"') &&
-      shellHtml.includes('/test/assets/test-global-edge-width-v1372.css?v=20261016-full-width-v1372');
+      shellHtml.includes('/test/assets/test-global-edge-width-v1372.css?v=20261016-layl-muted-v1377');
     const { status: edgeStatus, text: edgeCss } =
-      await fetchText(`${base}/assets/test-global-edge-width-v1372.css?v=20261016-full-width-v1372`);
+      await fetchText(`${base}/assets/test-global-edge-width-v1372.css?v=20261016-layl-muted-v1377`);
     const cssOk = edgeCss.includes("DAR TEST ADULT ONLY") &&
       edgeCss.includes("--dar-test-edge-stage") &&
       edgeCss.includes(".is-more-route") &&
