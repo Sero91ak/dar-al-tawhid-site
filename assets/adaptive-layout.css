@@ -895,199 +895,30 @@ body.is-post-route .post-reader-main .post-source{
 @media(prefers-reduced-motion:reduce){
   body.is-post-route .post-reader-main .post-slides .post-slide-window{transition:none!important}
 }
-/* ==========================================================================
-   DAR_PINNED_HERO_V1 — Global adult-app contract (2026-10-16)
-   A fixed visual masthead + its fixed search dock form ONE visual unit.
-   All following cards scroll BEHIND this opaque unit, never over its image.
-   Future pages: use .dar-hero-stage with direct children [data-dar-hero]
-   and optional [data-dar-hero-search]; put the cards after those children.
-   Preserve complete motifs: contain by default, NOT cover. Do not add a
-   translucent fade/glass curtain below the search dock. No scroll handlers.
-   ========================================================================== */
-:where(.dar-hero-stage){
-  --dar-hero-height:clamp(232px,28vw,306px);
-  --dar-hero-overlap:28px;
-  --dar-hero-matte:var(--bg,#182821);
-}
-:where(.dar-hero-stage) > [data-dar-hero]{
+/* DAR_PINNED_HERO_SCROLL_ONLY_V2 · 2026-10-16
+   Approved correction: original hero image, sizing, text and search styles
+   remain untouched. Only the hero+search group stays pinned while following
+   content scrolls underneath. New hero pages can reuse .dar-hero-stage. */
+.dar-hero-stage{
   position:sticky;
   top:0;
   z-index:80;
-  height:var(--dar-hero-height);
-  min-height:var(--dar-hero-height);
-  max-height:var(--dar-hero-height);
-  overflow:hidden;
   isolation:isolate;
-  background-color:var(--dar-hero-matte);
-  background-image:var(--dar-hero-image,none);
-  background-size:contain;
-  background-repeat:no-repeat;
-  background-position:var(--dar-hero-focus,center center);
-  border-radius:0 0 26px 26px;
-  margin-bottom:0;
+  background:var(--bg,#f4efec);
 }
-:where(.dar-hero-stage) > [data-dar-hero] > img[data-dar-hero-image]{
-  display:block;
+/* Opaque full-width underlay. No gradients, glass strip or blur. */
+.dar-hero-stage::before{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:calc(50% - 50vw);
+  width:100vw;
+  z-index:-1;
+  pointer-events:none;
+  background:var(--bg,#f4efec);
+}
+body.is-frauen-route .frauen-library-pinned-header{
   width:100%;
-  height:100%;
-  object-fit:contain;
-  object-position:var(--dar-hero-focus,center center);
-}
-:where(.dar-hero-stage) > [data-dar-hero-search]{
-  position:sticky;
-  top:calc(var(--dar-hero-height) - var(--dar-hero-overlap));
-  z-index:81;
-  margin-top:calc(-1 * var(--dar-hero-overlap));
-  isolation:isolate;
-}
-/* Solid, theme-colored backing: hides scrolling cards beneath the dock
-   without the unwanted translucent/glassy strip in the original preview. */
-:where(.dar-hero-stage) > [data-dar-hero-search]::before{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  pointer-events:none;
-  top:var(--dar-hero-overlap);
-  bottom:0;
-  width:100vw;
-  left:calc(50% - 50vw);
-  background:var(--bg,#f4efec);
-}
-:where(.dar-hero-stage) > [data-dar-hero-search] :is(input,[role="searchbox"]){
-  scroll-margin-top:calc(var(--dar-hero-height) + 110px);
-}
-@media(max-width:600px){
-  :where(.dar-hero-stage){--dar-hero-height:232px;--dar-hero-overlap:28px}
-}
-@media(max-width:360px){
-  :where(.dar-hero-stage){--dar-hero-height:246px}
-}
-@media(orientation:landscape) and (max-height:500px){
-  :where(.dar-hero-stage){--dar-hero-height:clamp(174px,47vh,232px)}
-}
-
-/* Legacy Frauen library now implements the SAME shared contract without
-   changing its renderer, search filtering or bottom-tab navigation. */
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView :is(
-  .frauen-library-hub,.frauen-library-group,.frauen-library-list
-){
-  --dar-hero-height:clamp(236px,28vw,304px);
-  --dar-hero-overlap:29px;
-  --dar-hero-matte:color-mix(in srgb,var(--bg,#182821) 72%,#182821);
-}
-html[data-theme] body.is-frauen-route[data-frauen-view="group"] #appView .frauen-library-group,
-html[data-theme] body.is-frauen-route[data-frauen-view="list"] #appView .frauen-library-list{
-  --dar-hero-height:clamp(260px,28vw,312px);
-}
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView .frauen-library-hero{
-  position:sticky!important;
-  top:0!important;
-  z-index:80!important;
-  height:var(--dar-hero-height)!important;
-  min-height:var(--dar-hero-height)!important;
-  max-height:var(--dar-hero-height)!important;
-  overflow:hidden!important;
-  background-color:var(--dar-hero-matte)!important;
-  background-size:contain!important;
-  background-repeat:no-repeat!important;
-  background-position:center center!important;
-  /* Restore the visual edge-to-edge masthead while maintaining a whole motif. */
-  margin-bottom:18px!important;
-}
-
-/* Search starts precisely on the hero edge; do not allow an initial gap. */
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView :is(
-  .frauen-library-hub,.frauen-library-list
-) > .frauen-library-hero{
-  margin-bottom:0!important;
-}
-/* Reduce only interior spacing, not font contrast or existing content. */
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView .frauen-library-hero__content{
-  height:100%!important;
-  min-height:0!important;
-  padding:15px 20px 16px!important;
-}
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView .frauen-library-hero h2{
-  font-size:clamp(30px,7.8vw,43px)!important;
-  line-height:1.04!important;
-}
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView .frauen-library-hero__eyebrow{
-  margin-bottom:6px!important;
-}
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView .frauen-library-hero__subtitle{
-  margin-top:7px!important;
-  font-size:clamp(12px,3.2vw,15px)!important;
-  line-height:1.37!important;
-}
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView .frauen-library-hero__stats{
-  margin-top:8px!important;
-  gap:6px!important;
-}
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView .frauen-library-hero__stats span{
-  min-height:24px!important;
-  padding:4px 9px!important;
-  font-size:10px!important;
-}
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView :is(
-  .frauen-library-search-wrap,.frauen-library-list-controls
-){
-  position:sticky!important;
-  top:calc(var(--dar-hero-height) - var(--dar-hero-overlap))!important;
-  z-index:81!important;
-  margin-top:calc(-1 * var(--dar-hero-overlap))!important;
-  margin-bottom:22px!important;
-  isolation:isolate!important;
-}
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView :is(
-  .frauen-library-search-wrap,.frauen-library-list-controls
-)::before{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  pointer-events:none;
-  top:var(--dar-hero-overlap);
-  bottom:0;
-  left:calc(50% - 50vw);
-  width:100vw;
-  background:var(--bg,#f4efec);
-}
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView .frauen-search-pro{
-  background:var(--card,var(--bg,#f4efec))!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-}
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView :is(
-  .frauen-library-search-wrap,.frauen-library-list-controls
-) .search-input-shell{
-  background:var(--bg,#f4efec)!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-}
-html[data-theme] body.is-frauen-route[data-frauen-view] #appView :is(
-  .frauen-library-search-wrap,.frauen-library-list-controls
-) .search-input-field{
-  scroll-margin-top:calc(var(--dar-hero-height) + 90px);
-}
-@media(max-width:600px){
-  html[data-theme] body.is-frauen-route[data-frauen-view="hub"] #appView .frauen-library-hub{
-    --dar-hero-height:232px;
-  }
-  html[data-theme] body.is-frauen-route[data-frauen-view="group"] #appView .frauen-library-group,
-  html[data-theme] body.is-frauen-route[data-frauen-view="list"] #appView .frauen-library-list{
-    --dar-hero-height:264px;
-  }
-}
-@media(max-width:360px){
-  html[data-theme] body.is-frauen-route[data-frauen-view="hub"] #appView .frauen-library-hub{
-    --dar-hero-height:250px;
-  }
-  html[data-theme] body.is-frauen-route[data-frauen-view="group"] #appView .frauen-library-group,
-  html[data-theme] body.is-frauen-route[data-frauen-view="list"] #appView .frauen-library-list{
-    --dar-hero-height:284px;
-  }
-}
-@media(orientation:landscape) and (max-height:500px){
-  html[data-theme] body.is-frauen-route[data-frauen-view] #appView :is(
-    .frauen-library-hub,.frauen-library-group,.frauen-library-list
-  ){--dar-hero-height:clamp(190px,45vh,240px)}
+  max-width:100%;
 }
