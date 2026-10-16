@@ -302,7 +302,7 @@ async function finalizeDarTestHomeV1193(asset) {
       '@import url("/test/assets/more-v1253.css?v=area-authority-v1300");' +
       '@import url("/test/assets/jummah-v1258.css?v=area-authority-v1300");' +
       '@import url("/test/assets/qibla-v1259.css?v=area-authority-v1300");' +
-      '@import url("/test/assets/prayer-v1254.css?v=area-authority-v1300");' +
+      '@import url("/test/assets/prayer-v1254.css?v=20261016-motifs-v5");' +
       '@import url("/test/assets/frauen/frauen-authority-v1292.css?v=frauen-authority-v1292");' +
       '@import url("/test/assets/library/library-app.css?v=library-base-v1293");' +
       '@import url("/test/assets/library/library-authority-v1293.css?v=library-authority-v1293");' +

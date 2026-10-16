@@ -183,6 +183,17 @@ async function fetchVersionBuild(base) {
   console.log(
     `Dar Test live OK — public und workers.dev liefern identisch ${TEST_EXPECT_BUILD}.`
   );
+  // The page must reference the fresh CSS, not a cached old layout layer.
+  for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
+    const { status, text: html } = await fetchText(`${base}/index.html?motif-check=v5`);
+    const settingsOk = html.includes("dar-settings-permissions-v1.css?v=20261016-motifs-v5");
+    const prayerOk = html.includes("prayer-v1254.css?v=20261016-motifs-v5");
+    console.log(`motif-css ${label}: status=${status} settings=${settingsOk} prayer=${prayerOk}`);
+    if (status !== 200 || !settingsOk || !prayerOk) {
+      throw new Error(`Test CSS ist nicht frisch auf ${label}; Bilder könnten unsichtbar bleiben`);
+    }
+  }
+
   // MOTIF_IMAGE_DELIVERY_V5: ensure real assets reach both public and workers.dev.
   for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
     for (const name of ["fajr", "dhuhr", "asr", "maghrib", "isha"]) {
