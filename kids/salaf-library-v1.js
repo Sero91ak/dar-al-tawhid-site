@@ -327,7 +327,16 @@ function compactSalafReference(raw){
   document.addEventListener("keydown",function(e){if(e.key==="Escape"&&active)closeStory()});
   var app=document.querySelector(".app");
   if(app&&"MutationObserver" in window){new MutationObserver(function(){if(active)closeStory();render()}).observe(app,{attributes:true,attributeFilter:["data-gender","data-age"]})}
-  window.DARKidsSalafLibrary=Object.freeze({version:1,open:function(){document.querySelector('.nav-btn[data-target="salaf"]')?.click()},refresh:render});
+  window.DARKidsSalafLibrary=Object.freeze({version:1,
+    open:function(){document.querySelector('.nav-btn[data-target="salaf"]')?.click()},
+    openStory:function(id){
+      var item=items.find(function(i){return i.id===id});
+      if(!item||!textFor(item))return false;
+      document.querySelector('.nav-btn[data-target="salaf"]')?.click();
+      showStory(item);
+      return true;
+    },
+    refresh:render});
   render();
   fetch(MANIFEST,{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("Manifest nicht erreichbar");return r.json()})
     .then(function(data){items=(Array.isArray(data.items)?data.items:[]).filter(valid);render()})
