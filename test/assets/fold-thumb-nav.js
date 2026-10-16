@@ -69,20 +69,11 @@
   ];
 
   function readPreference() {
-    try {
-      // Emergency recovery for a broken side rail or stale stored position.
-      // Explicit navigation to /test/?navSafe=1 restores the original bottom bar.
-      // No automatic changes for regular users; affects only this Test URL.
-      var qs = new URLSearchParams((global.location && global.location.search) || "");
-      if (qs.get("navSafe") === "1") {
-        global.localStorage.setItem(STORAGE_KEY, "bottom");
-        return "bottom";
-      }
-      var value = String(global.localStorage.getItem(STORAGE_KEY) || "bottom");
-      return VALID[value] ? value : "bottom";
-    } catch (error) {
-      return "bottom";
-    }
+    /* SETTINGS_NAVI_REMOVED_TEST_ONLY_20261016 */
+    /* Position der Tab-Leiste nicht mehr konfigurierbar.
+       Auch ältere gespeicherte Rechts-/Links-Werte lösen keine Side-Rail aus.
+       Das ursprüngliche #bottomNav mit allen 3D-Icons bleibt unverändert. */
+    return "bottom";
   }
 
   function writePreference(value) {
@@ -95,27 +86,8 @@
 
 
   function renderAdaptiveNavPanelMarkup() {
-    var preference = readPreference();
-    function button(value,label,small,mark) {
-      var selected = preference === value;
-      return '<button type="button" class="' + (selected ? 'is-selected' : '') +
-        '" data-dar-nav-choice="' + value + '" aria-pressed="' + (selected ? 'true' : 'false') + '">' +
-        '<span class="dar-nav-choice-mark dar-nav-choice-mark--' + mark + '" aria-hidden="true"></span>' +
-        '<strong>' + label + '</strong><small>' + small + '</small></button>';
-    }
-    return '<section class="settings-section dar-nav-position-settings" id="darNavPositionSettingsV1325" aria-labelledby="darNavPositionTitleV1325">' +
-      '<div class="dar-nav-position-kicker">NAVIGATION</div>' +
-      '<div class="dar-nav-position-head"><div>' +
-        '<h3 id="darNavPositionTitleV1325">Position der Tab-Leiste</h3>' +
-        '<p>Unten wie bisher oder seitlich als schmale 3D-Icon-Leiste. Auf schmalen Displays bleibt sie automatisch unten.</p>' +
-      '</div></div>' +
-      '<div class="dar-nav-position-options" role="group" aria-label="Position der Tab-Leiste">' +
-        button("left","Links","Linkshänder","left") +
-        button("bottom","Unten","Standard","bottom") +
-        button("right","Rechts","Rechtshänder","right") +
-      '</div>' +
-      '<p class="dar-nav-position-status" id="darNavPositionStatusV1325"></p>' +
-    '</section>';
+    /* Die entfernte Auswahl darf auch nicht über den SPA-Renderer erscheinen. */
+    return "";
   }
 
   function installSettingsRenderer() {
@@ -314,47 +286,11 @@
   }
 
   function ensureSettingsControl() {
-    if (!document.body || !document.body.classList.contains("is-settings-route")) return null;
-    var host = settingsHost();
-    if (!host) return null;
-
-    var panel = document.getElementById("darNavPositionSettingsV1325");
-    if (!panel) {
-      panel = document.createElement("section");
-      panel.id = "darNavPositionSettingsV1325";
-      panel.className = "settings-section dar-nav-position-settings";
-      panel.setAttribute("aria-labelledby", "darNavPositionTitleV1325");
-      panel.innerHTML =
-        '<div class="dar-nav-position-kicker">NAVIGATION</div>' +
-        '<div class="dar-nav-position-head">' +
-          '<div><h3 id="darNavPositionTitleV1325">Position der Tab-Leiste</h3>' +
-          '<p>Unten mit Beschriftung oder seitlich als schmale 3D-Icon-Leiste.</p></div>' +
-        '</div>' +
-        '<div class="dar-nav-position-options" role="group" aria-label="Position der Tab-Leiste">' +
-          '<button type="button" data-dar-nav-choice="left" aria-pressed="false"><span class="dar-nav-choice-mark dar-nav-choice-mark--left" aria-hidden="true"></span><strong>Links</strong><small>für Linkshänder</small></button>' +
-          '<button type="button" data-dar-nav-choice="bottom" aria-pressed="false"><span class="dar-nav-choice-mark dar-nav-choice-mark--bottom" aria-hidden="true"></span><strong>Unten</strong><small>Standard</small></button>' +
-          '<button type="button" data-dar-nav-choice="right" aria-pressed="false"><span class="dar-nav-choice-mark dar-nav-choice-mark--right" aria-hidden="true"></span><strong>Rechts</strong><small>für Rechtshänder</small></button>' +
-        '</div>' +
-        '<p class="dar-nav-position-status" id="darNavPositionStatusV1325"></p>';
-
-      panel.addEventListener("click", function (event) {
-        var button = event.target && event.target.closest && event.target.closest("[data-dar-nav-choice]");
-        if (!button) return;
-        event.preventDefault();
-        setPreference(button.getAttribute("data-dar-nav-choice"));
-      });
-
-      var setup = document.getElementById("dar-setup-hub");
-      var heading = host.querySelector(".settings-page-head");
-      if (setup && setup.parentNode) {
-        setup.insertAdjacentElement("afterend", panel);
-      } else if (heading && heading.parentNode) {
-        heading.insertAdjacentElement("afterend", panel);
-      } else {
-        host.insertBefore(panel, host.firstChild || null);
-      }
-    }
-    return panel;
+    /* Bestehende ältere Einstellungs-Knoten beim SPA-Wechsel entfernen.
+       Keine neuen Schalter erzeugen; Eingriffe in die Navigation unterbleiben. */
+    var obsolete = document.getElementById("darNavPositionSettingsV1325");
+    if (obsolete && obsolete.parentNode) obsolete.parentNode.removeChild(obsolete);
+    return null;
   }
 
   function updateSettingsControl(preference, effective) {
