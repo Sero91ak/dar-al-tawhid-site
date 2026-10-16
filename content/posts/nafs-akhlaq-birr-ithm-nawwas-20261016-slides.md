@@ -29,7 +29,7 @@ slides:
       "**Rechtschaffenheit ist guter Charakter.** Und Sünde ist das, was in deiner **Nafs Unruhe auslöst** und von dem du nicht möchtest, dass die Menschen davon erfahren."
 
       Überliefert von an-Nawwās ibn Samʿān رضي الله عنه.
-    source: "📝 Ṣaḥīḥ Muslim 2553; Ǧāmiʿ at-Tirmiḏī 2389 (Wortlaut mit "nafs")."
+    source: "📝 Ṣaḥīḥ Muslim 2553; Ǧāmiʿ at-Tirmiḏī 2389 (Wortlaut mit Nafs)."
     links:
       - label: "→ Originalquellen · Q44"
         url: "/q/44/"
