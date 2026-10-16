@@ -1,0 +1,86 @@
+name: KIDS V4 First20 Older Questions Exact Recording Audit (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/generate_quiz_v4_older_stage1_exact.py'
+      - 'kids/tools/test_quiz_v4_older_stage1_exact.py'
+      - '.github/workflows/kids-v4-older-stage1-exact-paid.yml'
+      - '.github/workflows/kids-v4-older-stage1-exact-audit.yml'
+      - '.github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-450-paid-generation-ledger.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-first20-exact-stage1-audit-zero-credits
+  cancel-in-progress: false
+
+jobs:
+  source-hash-and-no-double-buy:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout review-only V4 project
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+
+      - name: Audit exact Stage 1 recording candidates without ElevenLabs calls
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/generate_quiz_v4_older_stage1_exact.py
+          python3 -m py_compile kids/tools/test_quiz_v4_older_stage1_exact.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/test_quiz_v4_older_stage1_exact.py
+          python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --audit
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('kids/review-only/quiz-v4-older-stage1-next-recording-batch.json')
+          v=json.loads(p.read_text(encoding='utf-8'))
+          assert v['modelId']=='eleven_v4' and v['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert v['questionCount']==20 and v['stageExpectedNewOriginals']==65
+          assert v['nextPaidRunOriginalLimit']==10
+          assert 0<=v['nextEstimatedCreditsNotProviderBill']<=850
+          assert len(v['nextExactTextSha256'])<=10
+          assert v['paidSynthesisAuthorizedByAudit'] is False
+          assert v['newElevenLabsCreditsSpentByAudit']==0
+          assert v['publicReleaseAllowed'] is False
+          assert json.loads(Path('kids/data/quiz-curation-release.json').read_text())['enabled'] is False
+          print('PASS: only exact 65 first-stage V4 originals, manual spend/content review required.')
+          PY
+
+      - name: Commit deterministic next batch manifest to private PR only
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-first20-preflight-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/quiz-v4-older-stage1-next-recording-batch.json
+          if git diff --cached --quiet; then
+            echo "Same SHA-safe first ten; no commit or new credits."
+            exit 0
+          fi
+          git commit -m 'review(kids V4): record exact next older first20 V4 original MP3 queue, unpaid'
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+              echo 'First ten exact source text hashes saved, no synthesis.'
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          exit 1
+
+      - name: Preserve original text hashes and batch preflight as a recoverable artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-older-stage1-exact-first-ten-no-spend-audit
+          retention-days: 90
+          if-no-files-found: warn
+          path: kids/review-only/quiz-v4-older-stage1-next-recording-batch.json
