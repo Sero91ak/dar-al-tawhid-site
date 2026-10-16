@@ -459,6 +459,14 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.split("${renderAdaptiveNavPanel()}").join("");
   html = html.split('${typeof renderAdaptiveNavPanel==="function"?renderAdaptiveNavPanel():""}').join("");
 
+  // DAR_TEST_GLOBAL_EDGE_WIDTH_V1372_20261016: adult /test only.
+  // Load after every legacy style authority, including the embedded prayer
+  // motif layer. Route-based CSS: no modification of navigation JS or assets.
+  // The 10px mobile content gutter follows the existing floating bottom nav.
+  if (!html.includes('id="darTestEdgeWidthV1372"')) {
+    html += '<link rel="stylesheet" id="darTestEdgeWidthV1372" href="/test/assets/test-global-edge-width-v1372.css?v=20261016-full-width-v1372">';
+  }
+
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");
