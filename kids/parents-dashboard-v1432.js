@@ -47,6 +47,15 @@ function detailsWrap(panel,id,title,subtext){
 }
 const accountDetails=detailsWrap(profilePanel,"kidsParentAccounts","Kinderkonten","Profil wechseln, anmelden oder hinzufügen");
 profilePanel.querySelector(".label-row")?.classList.add("kids-parent-old-label");
+// KIDS_PARENTS_PLAIN_LANGUAGE_V1434: reduce technical wording for parents.
+const intro=head.querySelector("p");
+if(intro)intro.textContent="Kinderprofil, Lernfortschritt und Einstellungen auf einen Blick.";
+const progressCopy=progressPanel.querySelector(".parent-note");
+if(progressCopy)progressCopy.textContent="Die Zahlen zeigen deinen aktuellen Lernstand – ohne Ranglisten oder Vergleiche.";
+const timeCopy=timePanel.querySelector(".parent-note");
+if(timeCopy)timeCopy.textContent="Ein ruhiges Tagesziel statt endlosem Lernen. Du kannst es jederzeit anpassen.";
+const accountsCopy=profilePanel.querySelector(".parent-note");
+if(accountsCopy)accountsCopy.textContent="Kinderkonto hinzufügen, wechseln oder auf einem anderen Gerät anmelden. Ohne Konto ist die App weiterhin nutzbar.";
 const modeCard=$("#kidsAgeMode");
 agePanel.querySelector(".label-row")?.querySelector("strong")?.replaceChildren(document.createTextNode("Alter & Lernstufe"));
 const ageTabs=agePanel.querySelector(".age-tabs");
@@ -103,7 +112,7 @@ function paint(){
 }
 $("#kidsParentManage")?.addEventListener("click",function(){
  accountDetails.open=true;
- accountDetails.scrollIntoView({block:"start",behavior:"smooth"});
+ accountDetails.scrollIntoView({block:"nearest",behavior:"smooth"});
 });
 function expandForDelete(){
  if($("#profileAsk")&&!$("#profileAsk").hidden)accountDetails.open=true;
