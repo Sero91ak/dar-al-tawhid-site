@@ -70,6 +70,78 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   }
   await tapTest(qidx,"quran");
   await tapTest(pidx,"posts");
+  // DAR_TEST_NATIVE_ANDROID_SWIPE_V1390: exercise real touch gestures BEFORE
+  // unrelated image/hero QA can abort the run. Programmatic scrollTop alone
+  // does not prove that Chrome accepts a physical finger swipe.
+  findings.nativeSwipe=[];
+  const cdp=await context.newCDPSession(page);
+  async function testNativeSwipe(routeName,navIndex){
+    if(routeName!=="posts"){
+      await nav.nth(navIndex).tap({timeout:10000});
+      await page.waitForTimeout(950);
+    }
+    const before=await page.evaluate(()=>{
+      const els=[
+        document.scrollingElement,document.querySelector("#appView"),
+        document.querySelector(".dar-fold__rail"),
+        document.querySelector(".dar-fold__pane")
+      ].filter(Boolean);
+      return {
+        diagnosis:typeof window.__darTestScrollDiagnostic==="function"?
+          window.__darTestScrollDiagnostic():null,
+        surfaces:els.map(el=>({name:el===document.scrollingElement?"document":
+          (el.id||el.className?.toString().slice(0,65)||el.tagName),
+          top:el.scrollTop,extent:el.scrollHeight-el.clientHeight,
+          touch:getComputedStyle(el).touchAction}))
+      };
+    });
+    const {width,height}=page.viewportSize();
+    const x=Math.round(width*.49),startY=Math.round(height*.74),
+      endY=Math.round(height*.33);
+    await cdp.send("Input.dispatchTouchEvent",{
+      type:"touchStart",touchPoints:[{x,y:startY}]
+    });
+    for(let i=1;i<=12;i++){
+      await cdp.send("Input.dispatchTouchEvent",{
+        type:"touchMove",
+        touchPoints:[{x,y:Math.round(startY+(endY-startY)*i/12)}]
+      });
+      await page.waitForTimeout(26);
+    }
+    await cdp.send("Input.dispatchTouchEvent",{type:"touchEnd",touchPoints:[]});
+    await page.waitForTimeout(340);
+    const after=await page.evaluate(()=>{
+      const els=[
+        document.scrollingElement,document.querySelector("#appView"),
+        document.querySelector(".dar-fold__rail"),
+        document.querySelector(".dar-fold__pane")
+      ].filter(Boolean);
+      return {
+        diagnosis:typeof window.__darTestScrollDiagnostic==="function"?
+          window.__darTestScrollDiagnostic():null,
+        surfaces:els.map(el=>({name:el===document.scrollingElement?"document":
+          (el.id||el.className?.toString().slice(0,65)||el.tagName),
+          top:el.scrollTop,extent:el.scrollHeight-el.clientHeight}))
+      };
+    });
+    const progressed=after.surfaces.some((v,i)=>
+      v.top>(before.surfaces[i]?.top||0)+8);
+    const hasContent=before.surfaces.some(v=>v.extent>50);
+    const record={routeName,viewport:{width,height},hasContent,progressed,before,after};
+    findings.nativeSwipe.push(record);
+    await page.screenshot({path:path.join(out,"real-swipe-"+routeName+".png"),fullPage:false});
+    console.log("Android finger swipe "+routeName+": "+(progressed?"PASS":"FAIL")+
+      " "+JSON.stringify({hasContent,
+        before:before.surfaces,after:after.surfaces}));
+    if(!hasContent)throw Error("Android "+routeName+": no vertically scrollable content");
+    if(!progressed)throw Error("Android "+routeName+": taps work, physical touch scroll blocked "+
+      JSON.stringify(after.diagnosis||after.surfaces));
+  }
+  await testNativeSwipe("posts",pidx);
+  await testNativeSwipe("quran",qidx);
+  await nav.nth(pidx).tap({timeout:10000});
+  await page.waitForTimeout(650);
+
   // DAR_HADITH_DEPTH_LAYOUT_BROWSER_QA_V1386
   // Exercise real navigation through Work > Kitab > Bab > individual Hadith,
   // not just URL or CSS success. Never touches Kids or the visitor app.
