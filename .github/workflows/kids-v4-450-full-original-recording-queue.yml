@@ -6,6 +6,9 @@ on:
     paths:
       - 'kids/tools/plan_quiz_v4_all450_exact_paid_original_waves.py'
       - 'kids/tools/produce_quiz_v4_450_exact_manual_wave.py'
+      - 'kids/tools/import_quiz_v4_connected_flow_originals.py'
+      - 'kids/tools/quiz_v4_no_double_charge_guard.py'
+      - 'kids/data/quiz-v4-connected-flow-originals-ledger.json'
       - 'kids/data/quiz-v4-curated-450-production-review.json'
       - 'kids/data/quiz-v4-450-original-clip-registry.json'
       - 'kids/data/quiz-v4-450-paid-generation-ledger.json'
@@ -33,8 +36,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m py_compile kids/tools/plan_quiz_v4_all450_exact_paid_original_waves.py kids/tools/produce_quiz_v4_450_exact_manual_wave.py
-          python3 kids/tools/produce_quiz_v4_450_exact_manual_wave.py --audit
+          python3 -m py_compile kids/tools/plan_quiz_v4_all450_exact_paid_original_waves.py kids/tools/produce_quiz_v4_450_exact_manual_wave.py kids/tools/import_quiz_v4_connected_flow_originals.py
+          python3 kids/tools/import_quiz_v4_connected_flow_originals.py --audit
           python3 kids/tools/plan_quiz_v4_all450_exact_paid_original_waves.py --out "$RUNNER_TEMP/v4-all450-next-recording-waves.json"
           python3 - <<'PY'
           import json,os,hashlib
