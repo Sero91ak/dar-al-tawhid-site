@@ -354,8 +354,21 @@ jobs:
           echo "KIDS TEST iPhone Safari HTML delivery verified, no visitor domain involved."
           # DĪN 6×5: verify exact published bytes, not just a generic HTTP 200.
           for RESOURCE in kids/deen-lessons.js kids/item-offline-v1.js kids/deen-curriculum-v1.css kids/data/deen-curriculum-v1.json kids/assets/deen/lesson-rububiyyah-firefly-v1.jpg kids/assets/deen/lesson-adab-firefly-v1.jpg kids/assets/deen/lesson-friendly-courtyard-runway-v1.jpg kids/assets/deen/lesson-iman-foundations-firefly-v1.jpg kids/assets/deen/lesson-iman-growth-runway-v1.jpg; do
-            curl -fsSL -H 'Cache-Control: no-cache' "$BASE/$RESOURCE" > /tmp/kids-deen-resource
-            cmp -s "$RESOURCE" /tmp/kids-deen-resource || { echo "::error::KIDS Dīn served bytes differ: $RESOURCE"; exit 1; }
+            ASSET_URL="$BASE/$RESOURCE"
+            if [ "$RESOURCE" = "kids/data/deen-curriculum-v1.json" ]; then ASSET_URL="$ASSET_URL?v=2"; fi
+            VERIFIED=0
+            for ATTEMPT in $(seq 1 12); do
+              if curl -fsSL -H 'Cache-Control: no-cache' "$ASSET_URL" > /tmp/kids-deen-resource &&
+                 cmp -s "$RESOURCE" /tmp/kids-deen-resource; then VERIFIED=1; break; fi
+              echo "KIDS Dīn asset not yet identical: $RESOURCE (attempt $ATTEMPT/12)"
+              if [ "$ATTEMPT" -lt 12 ]; then sleep 2; fi
+            done
+            if [ "$VERIFIED" -ne 1 ]; then
+              echo "::error::KIDS Dīn served bytes differ: $RESOURCE"
+              sha256sum "$RESOURCE" /tmp/kids-deen-resource || true
+              head -c 140 /tmp/kids-deen-resource || true
+              exit 1
+            fi
             echo "KIDS Dīn verified: $RESOURCE"
           done
           curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/start.html" > /tmp/kids-deen-start.html
