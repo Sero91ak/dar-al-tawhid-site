@@ -6,18 +6,18 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `a0ea7cc9f70956aba5f24f232f9fd5c885f8f093`
+- Commit beim Erstellen dieses Berichts: `3bb32c96d8730bf3a59050a285ea6cfe42410fe5`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
-- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **283 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1051 Frage-/Lob-/Retry-/Erklärungsteile**.
-- Technisch vierteilig vollständig: **76/450**, noch unvollständig: **374/450**.
+- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **287 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1055 Frage-/Lob-/Retry-/Erklärungsteile**.
+- Technisch vierteilig vollständig: **80/450**, noch unvollständig: **370/450**.
 - Letzter V4-Kostenaudit: **1381 neue Sprachfragmente** = **64777 Unicode-Zeichen**; **0 neue Lob-/Retry-Fragmente**, **0 neue V4-Texte für 4–6 Jahre**.
-- Nach Originalkosten getrennt: **80 Fragen nur durch bereits bezahlte MP3s blockiert**, **294 Fragen benötigen neue V4-Originaltexte**.
+- Nach Originalkosten getrennt: **80 Fragen nur durch bereits bezahlte MP3s blockiert**, **290 Fragen benötigen neue V4-Originaltexte**.
 - Alter 4-6: **70/150** komplett; vorhandene Hörteile question=100, correct=85, retry=85, explanation=148.
-- Alter 7-8: **4/150** komplett; vorhandene Hörteile question=5, correct=150, retry=150, explanation=15.
-- Alter 9-10: **2/150** komplett; vorhandene Hörteile question=2, correct=150, retry=150, explanation=11.
+- Alter 7-8: **6/150** komplett; vorhandene Hörteile question=6, correct=150, retry=150, explanation=16.
+- Alter 9-10: **4/150** komplett; vorhandene Hörteile question=4, correct=150, retry=150, explanation=11.
 - Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **47 importiert**, **9 noch ohne heruntergeladene Original-MP3-Datei**.
-- Zusätzlich im Originalregister: **385 Textschlüssel**, davon **338 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
+- Zusätzlich im Originalregister: **395 Textschlüssel**, davon **348 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
 - Kosten für den bisherigen Import und diese Berichterstellung: **0 neue ElevenLabs-Sprachcredits**.
 - Noch geschätzter Bedarf für alle 450 nach gegenwärtigem Plan: **79075.79 Credits**; **keine bestätigte Rechnungsabbuchung** (Ledger enthält Schätzwerte).
 - Menschliche Aussprache-/Hörfreigabe: **0**. Freigabeschalter: **aus**. Kein Live-Push und kein Merge.
