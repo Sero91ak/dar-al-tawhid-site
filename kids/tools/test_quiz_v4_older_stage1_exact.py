@@ -7,6 +7,7 @@ cannot accidentally rebuy earlier paid speech or change the master voice.
 """
 from __future__ import annotations
 import json
+import os
 import sys
 import tempfile
 from pathlib import Path
@@ -64,6 +65,51 @@ def main():
             except RuntimeError:pass
             else:raise AssertionError("Tampered V4 original text was accepted")
         finally:stage1.PREP=original
+    # Recalculate after an imagined first ten genuine MP3s. This only
+    # mutates in-memory lists; it NEVER invents or commits actual MP3s.
+    completed_first={part["spokenTextSHA256"] for part in batch}
+    remaining_after_first=[
+        item for item in missing
+        if item["spokenTextSHA256"] not in completed_first
+    ]
+    second,cost_second,second_finished=stage1.candidate_batch(remaining_after_first,source)
+    must(not ({p["spokenTextSHA256"] for p in second}&completed_first),
+         "next ten would pay for a text from an earlier batch again")
+    must(len(second)<=10 and cost_second<=850,
+         "second batch ignores fixed original count or estimated cost ceiling")
+    must(all(qid in qids for qid in second_finished),
+         "projected completions refer to a nonselected question")
+    # Even with both manual YES inputs, a wrong exact-batch fingerprint must
+    # stop the producer BEFORE obtaining provider balance or sending paid TTS.
+    def should_never_call_provider(*_args,**_kwargs):
+        raise AssertionError("Provider accessed for a stale V4 recording batch!")
+    saved_environ=dict(os.environ)
+    saved_argv=sys.argv[:]
+    old_subscription=stage1.subscription
+    old_tts=stage1.original_mp3
+    try:
+        os.environ["KIDS_V4_STAGE1_HUMAN_CONTENT_CHECK"]="YES"
+        os.environ["KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL"]="YES"
+        os.environ["KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256"]="0"*64
+        os.environ["ELEVENLABS_API_KEY"]="DO-NOT-USE-TEST-CREDENTIAL"
+        sys.argv=[saved_argv[0],"--produce"]
+        stage1.subscription=should_never_call_provider
+        stage1.original_mp3=should_never_call_provider
+        try:
+            stage1.main()
+        except RuntimeError as exc:
+            must("batch SHA" in str(exc),
+                 "wrong batch was refused for a reason other than its stale fingerprint")
+        else:
+            raise AssertionError("Bad batch fingerprint was incorrectly accepted")
+    finally:
+        stage1.subscription=old_subscription
+        stage1.original_mp3=old_tts
+        sys.argv=saved_argv
+        os.environ.clear()
+        os.environ.update(saved_environ)
+    print("PASS: stale batch approval rejected before provider access, "
+          "safe second 10-take source selection, 0 credits")
     print("PASS: exact first-20 older quiz V4 stage; 65 original texts, "
           "first ten SHA matched, no prepaid duplicate, 0 new ElevenLabs credits")
 
