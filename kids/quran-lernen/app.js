@@ -1,5 +1,5 @@
 (()=>{"use strict";
-const $=id=>document.getElementById(id), audio=$("ql-audio"), state={catalog:null,item:null,index:0,repeats:0,urls:[],fallback:0,profile:"",gender:"boy",progress:{version:1,items:{}}};
+const $=id=>document.getElementById(id), audio=$("ql-audio"), state={catalog:null,masterDrafts:null,item:null,index:0,repeats:0,urls:[],fallback:0,profile:"",gender:"boy",progress:{version:1,items:{}}};
 const pad=n=>String(n).padStart(3,"0");
 const txt=(id,value)=>{$(id).textContent=String(value??"")};
 const message=value=>txt("ql-audio-message",value);
@@ -54,9 +54,22 @@ function renderProgress(){if(!state.item)return;const s=stats(state.item),r=s.r,
  $("ql-secure").disabled=!eligible||!!r.secure;$("ql-secure").textContent=r.secure?"✓ Sicher gelernt":"Als sicher gelernt bestätigen";
  txt("ql-status",r.heard[v.id]?"Schon gehört":"Bereit");$("ql-repeat-done").textContent=r.spoken[v.id]?"✓ Nachgesprochen":"Ich habe nachgesprochen";$("ql-understood").textContent=r.understood[v.id]?"✓ Verstanden":"Bedeutung verstanden";
 }
+function renderMasterDraft(item,v){
+ const note=$("ql-meaning-note");
+ let text=item.overview,shortRef="Qurʾān "+item.surah+":"+v.id+" · Vertiefte Erklärung noch in redaktioneller Prüfung";
+ const entry=state.masterDrafts&&state.masterDrafts.find(x=>Number(x.surah)===Number(item.surah));
+ const selected=entry&&entry.verses.find(x=>Number(x.ayah)===Number(v.id));
+ if(selected&&selected.masterText){
+  const age=String(state.age||"").replace(/–/g,"-");
+  const tier=age==="4-5"?"4-5":age==="9-10"?"9-10":"6-8";
+  text=selected.masterText[tier]||selected.masterText["6-8"]||item.overview;
+  shortRef="Qurʾān "+item.surah+":"+v.id+" · altersgerechter Mastertext-Entwurf · noch nicht freigegeben";
+ }
+ txt("ql-meaning",text);if(note)note.textContent=shortRef;
+}
 function renderVerse(){clearAudio();const item=state.item,v=verse();txt("ql-ayah-index","Qurʾān "+item.surah+":"+v.id+" · "+(state.index+1)+" / "+item.verses.length);
  txt("ql-arabic",v.ar);txt("ql-transliteration",v.tr);txt("ql-german",v.de);txt("ql-source","Qurʾān "+item.surah+":"+v.id);
- txt("ql-meaning",item.overview);$("ql-prev").disabled=state.index===0;$("ql-next").disabled=state.index===item.verses.length-1;
+ renderMasterDraft(item,v);$("ql-prev").disabled=state.index===0;$("ql-next").disabled=state.index===item.verses.length-1;
  renderWords(v);renderProgress();message("Menschliche Rezitation über das Internet. Exakte Wort-Audios sind noch in Prüfung.");}
 const QURAN_AUDIO_OFFSETS={"1":0,"2":7,"3":293,"4":493,"5":669,"6":789,"7":954,"8":1160,"9":1235,"10":1364,"11":1473,"12":1596,"13":1707,"14":1750,"15":1802,"16":1901,"17":2029,"18":2140,"19":2250,"20":2348,"21":2483,"22":2595,"23":2673,"24":2791,"25":2855,"26":2932,"27":3159,"28":3252,"29":3340,"30":3409,"31":3469,"32":3503,"33":3533,"34":3606,"35":3660,"36":3705,"37":3788,"38":3970,"39":4058,"40":4133,"41":4218,"42":4272,"43":4325,"44":4414,"45":4473,"46":4510,"47":4545,"48":4583,"49":4612,"50":4630,"51":4675,"52":4735,"53":4784,"54":4846,"55":4901,"56":4979,"57":5075,"58":5104,"59":5126,"60":5150,"61":5163,"62":5177,"63":5188,"64":5199,"65":5217,"66":5229,"67":5241,"68":5271,"69":5323,"70":5375,"71":5419,"72":5447,"73":5475,"74":5495,"75":5551,"76":5591,"77":5622,"78":5672,"79":5712,"80":5758,"81":5800,"82":5829,"83":5848,"84":5884,"85":5909,"86":5931,"87":5948,"88":5967,"89":5993,"90":6023,"91":6043,"92":6058,"93":6079,"94":6090,"95":6098,"96":6106,"97":6125,"98":6130,"99":6138,"100":6146,"101":6157,"102":6168,"103":6176,"104":6179,"105":6188,"106":6193,"107":6197,"108":6204,"109":6207,"110":6213,"111":6216,"112":6221,"113":6225,"114":6230};
 function audioUrls(){const v=verse(),s=pad(state.item.surah),a=pad(v.id),g=QURAN_AUDIO_OFFSETS[state.item.surah]+v.id;return ["https://everyayah.com/data/Husary_128kbps/"+s+a+".mp3","https://dar-al-tawhid.de/quran-audio/ar.husary/"+g+".mp3"]}
@@ -80,7 +93,16 @@ window.addEventListener("pagehide",()=>{audio.pause()});
  try{const response=await fetch("/kids/quran-lernen/catalog.json?v=1",{cache:"no-store"});if(!response.ok)throw Error("HTTP "+response.status);const data=await response.json();
  if(!data||!Array.isArray(data.items)||!data.items.length)throw Error("Katalog leer");
  for(const item of data.items){if(!item.verses||!item.verses.length||item.verses.some(v=>!v.ar||!v.de||!Array.isArray(v.words)))throw Error("Sūra-Daten fehlen")}
- state.catalog=data;renderList();const hash=decodeURIComponent(location.hash||"");if(hash.startsWith("#quran-")){const id=hash.slice(7);if(data.items.some(x=>x.id===id))open(id)}
+ state.catalog=data;
+ try{
+  const scriptResponse=await fetch("/kids/quran-lernen/mastertext-drafts-v1.json?v=2",{cache:"no-store"});
+  if(scriptResponse.ok){
+   const scriptData=await scriptResponse.json();
+   if(scriptData&&scriptData.environment==="kids-creator-staging"&&scriptData.notChildPublished===true&&scriptData.audioGenerated===false&&Array.isArray(scriptData.lessons))
+    state.masterDrafts=scriptData.lessons;
+  }
+ }catch(_){state.masterDrafts=null}
+ renderList();const hash=decodeURIComponent(location.hash||"");if(hash.startsWith("#quran-")){const id=hash.slice(7);if(data.items.some(x=>x.id===id))open(id)}
  }catch(err){$("ql-surahs").textContent="Der Qurʾān-Katalog konnte nicht geladen werden. Bitte Verbindung prüfen und erneut öffnen.";console.error("Qurʾān learning",err)}
 })();
 })();
