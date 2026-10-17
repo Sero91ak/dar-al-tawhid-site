@@ -55,7 +55,15 @@ def main():
             assert gid in registry["generationClips"],"Real MP3 was not stored"
             assert old["text"] in registry["textClips"],"Original text key not restored"
             assert registry["generationClips"][gid]["audioListeningApproved"] is False
-            assert registry["generationClips"][gid]["source"].startswith("prepaid-elevenlabs")
+            clip=registry["generationClips"][gid]
+            assert clip["source"]=="manual-prepaid-elevenlabs-flow-export-linked-by-generation-id-and-duration"
+            assert clip["sourceOriginalityCryptographicallyConfirmed"] is False
+            assert clip["requiresHumanSourceAndPronunciationVerification"] is True
+            assert clip["audioListeningApproved"] is False
+            assert clip["originalGenerationId"]==gid
+            assert clip["textSha256"]==mod.hashlib.sha256(old["text"].encode()).hexdigest()
+            assert clip["url"].startswith("/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/")
+            assert "sine" not in str(clip) # synthetic test MP3 must never be described as a genuine voice
             again=mod.run(dest)
             assert again["importedPriorPaidGenerations"]==1
             assert len(again["alreadyImportedIds"])==1
