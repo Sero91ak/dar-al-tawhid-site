@@ -1355,3 +1355,34 @@ html[data-theme] body.is-topics-route #appView .dar-fold__rail
     overflow-y:visible!important;
   }
 }
+
+/* DAR_TEST_ANDROID_NATIVE_SCROLL_CHAIN_V1392 · 2026-10-17
+ * Confirmed by Android Chrome CDP: `#appView` and `.app` had computed
+ * overflow-y:auto (0px scrollable extent) and overscroll-behavior-y:none,
+ * swallowing real finger swipes before document.scrollingElement could move.
+ * Under CSS overflow computation, overflow-x:hidden coerces visible Y to auto.
+ * The structural page wrappers MUST NOT be intermediate vertical scrollers.
+ * Only adult Dar Test; leave real dual Fold rails, sheets and feed untouched.
+ */
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-ilm-chat-route) > .app,
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-ilm-chat-route) #appView.view{
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+  overscroll-behavior-y:auto!important;
+  touch-action:manipulation!important;
+  min-height:0!important;
+}
+/* Keep legitimate inner Fold rail/detail scrollers independent. Do NOT
+ * set their overflow to visible: they own their own vertical scrolling. */
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-ilm-chat-route)
+  #appView.view .dar-fold[data-fold-mode="dual"] > :is(.dar-fold__rail,.dar-fold__pane){
+  overscroll-behavior-y:auto!important;
+}
+/* Native touch scrolling continues to the document on phone + tablet; ensure
+ * no horizontal scrollbar is introduced by the structural wrappers. */
+@supports (overflow:clip){
+  html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-ilm-chat-route) > .app,
+  html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-ilm-chat-route) #appView.view{
+    overflow-x:clip!important;
+  }
+}
