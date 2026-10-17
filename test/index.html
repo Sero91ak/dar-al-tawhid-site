@@ -72,7 +72,7 @@
 <script src="/test/assets/dar-more-v15.js?v=20261016-settings-nav" defer></script>
 
 <script src="/test/assets/dar-noble-3d-icons.js?v=1165"></script><!-- DAR_NOBLE_3D_HEAD -->
-<script>window.__DAR_EXPECTED_BUILD="app-shell-v1361";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
+<script>window.__DAR_EXPECTED_BUILD="app-shell-v1362";window.DAR_BRAND_NAME="DĀR AL TAWḤĪD";</script>
 <script>/* BOOT_RECOVERY_UNSTICK */(function(){try{var k="dar_repair_loops_v1060";var n=Number(sessionStorage.getItem(k)||0)||0;setTimeout(function(){try{var el=document.getElementById("appView");var t=el?(el.textContent||""):"";if(t.indexOf("App wird repariert")<0){try{sessionStorage.removeItem(k)}catch(e0){}return}if(n>=3)return;sessionStorage.setItem(k,String(n+1));var h=location.hash||"#home";location.replace((location.pathname||"/")+"?repair="+Date.now()+h)}catch(e){}},1800)}catch(e){}})();</script>
 
 <script>
@@ -28374,7 +28374,7 @@ function hardRefreshApp(){
   })();
 }
 const BRAND_NAME="DĀR AL TAWḤĪD";
-const APP_BUILD_ID="app-shell-v1361";
+const APP_BUILD_ID="app-shell-v1362";
 initAppCrashGuard();
 function renderStagingBanner(){return IS_STAGING_APP?`<div class="staging-app-banner"><b>DAR Test-App</b> · Private Vorschau. Inhalte hier sind nicht automatisch live.</div>`:""}
 function renderFeed(){return `${renderStagingBanner()}<div id="premiumFeedMount" class="pf-mount-root"></div>`}
@@ -28825,19 +28825,15 @@ function renderQuellenFoldRoute(view,value){
   return DarFold.shell(rail,DarFold.emptyPane("Links ein Werk oder einen Gelehrten wählen"),{family:"quellen",emptyMsg:"Links ein Werk oder einen Gelehrten wählen",compactMode:"rail"});
 }
 function renderTopicsFoldRoute(view,value){
-  if(!darUseMasterDetail()){
-    if(view==="topics")return renderTopics();
-    if(view==="topic")return renderFiltered("category",value);
-    if(view==="recent")return renderRecent();
-    if(view==="saved")return renderSaved();
-    if(view==="series")return renderSeries(value);
-    return renderTopics();
-  }
-  if(view==="topics")return DarFold.shell(renderTopics(),DarFold.emptyPane("Links ein Thema öffnen"),{family:"posts",compactMode:"rail"});
-  if(view==="topic")return DarFold.shell(renderTopics(),renderFiltered("category",value),{family:"posts",compactMode:"pane"});
-  if(view==="recent")return DarFold.shell(renderTopics(),renderRecent(),{family:"posts",compactMode:"pane"});
-  if(view==="saved")return DarFold.shell(renderTopics(),renderSaved(),{family:"posts",compactMode:"pane"});
-  if(view==="series")return DarFold.shell(renderTopics(),renderSeries(value),{family:"posts",compactMode:"pane"});
+  // DAR_ADULT_POSTS_FULL_AXIS_V1384: Topics, category, recent, saved and
+  // reader routes use the same full responsive canvas at every width.
+  // Empty master-detail panes at iPad/desktop break hero and search layout.
+  // Other DarFold families (Qur'an, Du'a, libraries) are unchanged.
+  if(view==="topics")return renderTopics();
+  if(view==="topic")return renderFiltered("category",value);
+  if(view==="recent")return renderRecent();
+  if(view==="saved")return renderSaved();
+  if(view==="series")return renderSeries(value);
   return renderTopics();
 }
 
