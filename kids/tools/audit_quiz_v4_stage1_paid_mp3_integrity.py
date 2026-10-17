@@ -58,7 +58,7 @@ def verify():
     for textsha,spoken in expected.items():
         require(digest(spoken.encode("utf-8"))==textsha,
                 "stage1 original source speech hash changed")
-    rows=[r for r in ledger["rows"] if r["batchId"]==BATCH]
+    rows=[r for r in ledger["rows"] if r.get("batchId")==BATCH]
     charged={r["textSha256"]:r for r in rows}
     require(len(charged)==len(rows),"same stage1 source text charged twice")
     attempts=journal.get("entries") or []
