@@ -22,12 +22,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: review/kids-quiz-v4-batch-001-020-20261014
-      - name: Check exact source and claim SHA in GitHub BEFORE any paid POST
+      - name: Adopt only unchanged no-charge claim and persist new runner ID BEFORE paid POST
         shell: bash
         run: |
           set -euo pipefail
           python3 -m py_compile kids/tools/one_time_v4_direct_to_quiz.py
-          python3 kids/tools/one_time_v4_direct_to_quiz.py --claim
+          python3 kids/tools/one_time_v4_direct_to_quiz.py --adopt-unspent-reservation
           git config user.name tawhid-kids-direct-original-v4
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add kids/data/quiz-v4-direct-one-time-run-claim.json
