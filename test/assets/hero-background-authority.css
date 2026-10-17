@@ -12,6 +12,8 @@ html[data-theme] body:is(
   max-inline-size:100%!important;
   min-inline-size:0!important;
   margin-inline:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
   padding-inline:0!important;
   box-sizing:border-box!important;
   overflow-x:clip!important;
@@ -33,8 +35,8 @@ html[data-theme] body.is-dua-route #appView .dua-hub > .view-head,
 html[data-theme] body.is-dua-route #appView .dua-collection-page > .view-head,
 html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head,
 html[data-theme] body.is-scholars-route #appView .scholars-index__header,
-html[data-theme] body.is-more-route #appView > .view-head,
-html[data-theme] body.is-quiz-route #appView > .view-head,
+html[data-theme] body.is-more-route #appView .view-head,
+html[data-theme] body.is-quiz-route #appView .view-head,
 html[data-theme] body.is-quran-overview #appView .qov-header,
 html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head,
 html[data-theme] body.is-calendar-route #appView .cal-tl-head,

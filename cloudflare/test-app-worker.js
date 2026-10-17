@@ -309,7 +309,7 @@ async function finalizeDarTestHomeV1193(asset) {
       '@import url("/test/assets/primary-area-embedded-v1313.css?v=primary-area-v1313");' +
       '@import url("/test/assets/tawhid-guide-v1295.css?v=tawhid-guide-v1295");' +
       '@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-final-v1303");' +
-      '@import url("/test/assets/hero-background-authority.css?v=hero-bg-v1");' +
+      '@import url("/test/assets/hero-background-authority.css?v=hero-bg-v2");' +
       '</style>';
     if (html.includes("</html>")) html = html.replace("</html>", areaAuthority + "</html>");
     else html += areaAuthority;
