@@ -187,6 +187,15 @@ try {
   fail("canonical-content validation");
 }
 
+function checkAdultCopyInk(file) {
+  const html = read(file);
+  const forced = html.includes("post-aussage-text{\n  padding-left:0!important;\n  color:#fff8e6!important;");
+  const token = html.includes("post-aussage-text{\n  padding-left:0!important;\n  color:var(--text)!important;");
+  if (forced || !token) fail(`${file}: Aussage erzwingt noch Cremeweiß statt var(--text)`);
+  else ok(`${file}: Aussagen folgen der Theme-Schrift`);
+}
+checkAdultCopyInk("test/index.html");
+
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
   process.exit(1);
