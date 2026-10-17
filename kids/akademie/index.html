@@ -5010,7 +5010,16 @@ all("[data-speak-stage]").forEach(b=>b.onclick=()=>{
  speak(num);
  });
 all("[data-arabic-audio]").forEach(b=>b.onclick=()=>playRecitation(b.dataset.arabicAudio));
-$("#openWrite").onclick=()=>mode("text");$("#openVoice").onclick=()=>mode("voice");
+$("#openWrite").onclick=()=>{
+ mode("text");
+ // Reveal the field without opening the keyboard before the child taps it.
+ requestAnimationFrame(function(){
+  var pane=$("#stageSurface"),field=$("#answer");
+  if(!pane||!field)return;
+  var p=pane.getBoundingClientRect(),f=field.getBoundingClientRect();
+  if(f.bottom>p.bottom-20)pane.scrollTop+=f.bottom-(p.bottom-20);
+ });
+};$("#openVoice").onclick=()=>mode("voice");
 $("#check").onclick=check;
  $("#retryChoice").onclick=()=>{
    if(answered||step!==3)return;
@@ -5122,6 +5131,10 @@ html body #stageSurface{
   document.addEventListener("touchstart",function(event){
     if(!event.touches||event.touches.length!==1){clear();return;}
     var target=event.target;
+    // Preserve native caret dragging and selection inside editing fields.
+    if(target instanceof Element&&target.closest("textarea,input,[contenteditable=true]")){
+      clear();return;
+    }
     touchRoot=target instanceof Element?target.closest(scrollSelector):null;
     if(!touchRoot){clear();return;}
     lastX=event.touches[0].clientX;
@@ -5155,7 +5168,7 @@ html body #lessonMain #answer{
  -webkit-user-select:text!important;
  user-select:text!important;
  touch-action:auto!important;
- font-size:max(16px,1rem)!important;
+ font-size:max(17px,1rem)!important;
 }
 </style>
 <script id="kids-academy-writing-keyboard-v1438">
