@@ -39,12 +39,14 @@ for(const p of ["/kids/deen-lessons.js?v=13","/kids/data/deen-curriculum-v1.json
  assert.ok(off.includes(p),"Dīn offline pack incomplete: "+p);
 }
 const shells=["kids/index.html","kids/start.html","kids/shell.html"].map(read);
+const v=JSON.parse(read("kids/version.json"));
+const swVersion=String(v.visualSystem.serviceWorkerCache||"").replace(/^v/,"");
+assert.match(swVersion,/^\d+$/,"Invalid Kids SW cache version");
 assert.ok(shells.every(s=>s===shells[0]),"KIDS shells differ");
-for(const p of ["/kids/deen-lessons.js?v=13","/kids/item-offline-v1.js?v=6","/kids/sw.js?v=1443"]){
+for(const p of ["/kids/deen-lessons.js?v=13","/kids/item-offline-v1.js?v=6","/kids/sw.js?v="+swVersion]){
  assert.ok(shells[0].includes(p),"Outdated KIDS shell reference: "+p);
 }
-assert.ok(sw.includes('dar-al-tawhid-kids-v1443'),"Missing new SW cache");
+assert.ok(sw.includes('dar-al-tawhid-kids-v'+swVersion),"Missing new SW cache");
 assert.ok(sw.includes('/kids/data/deen-curriculum-v1.json?v=3'),"Curriculum not cached");
-const v=JSON.parse(read("kids/version.json"));
-assert.equal(v.visualSystem.serviceWorkerCache,"v1443","SW version metadata mismatch");
+assert.equal(v.visualSystem.serviceWorkerCache,"v"+swVersion,"SW version metadata mismatch");
 console.log("Dīn visitor QA passed: 6 original masters + 24 published and sourced readings, profiles, 3 shells, offline and service worker");
