@@ -7881,7 +7881,12 @@
       "at": "2026-10-17T07:10:00+02:00",
       "approvedBy": "user-explicit-port-complete-tested-posts-area-and-background-heroes-to-native-visitor-global-20261017",
       "reason": "Only adult visitor Beiträge/Topics category list, individual category and post reader: port the previously designed Test styling and historical background heroes into public visitor web/iOS WebView. Preserve source links, search filters, theme palettes and hash routing; no change to Kids, push subsystem, worker, manifest or native Swift.",
-      "paths": ["index.html", "assets/dar-visitor-posts-v1375.css", "assets/post-heroes/", "content/admin/change-scope-lock.json"],
+      "paths": [
+        "index.html",
+        "assets/dar-visitor-posts-v1375.css",
+        "assets/post-heroes/",
+        "content/admin/change-scope-lock.json"
+      ],
       "expiresAt": "2026-10-24T23:59:00.000Z"
     },
     {
@@ -7945,6 +7950,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-25T23:59:00.000Z"
+    },
+    {
+      "id": "dar-social-post-hashtags-title-no-social-footer-20261017",
+      "at": "2026-10-17T10:20:00+02:00",
+      "approvedBy": "user-explicit-save-permanent-chat-contribution-format-no-social-links-hashtags-under-title-20261017",
+      "reason": "Strictly scope the durable adult DAR AL TAWḤĪD chat/social-text contribution drafting format in AGENTS.md: hashtags immediately beneath title, max five; omit Telegram/Instagram/Website links and social footers; app publications still have no visible hashtags. User explicitly asked to save the rule centrally. No app source, push, deployment, or published posts affected.",
+      "paths": [
+        "AGENTS.md",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-19T23:59:00.000Z"
     }
   ],
   "enabled": true
