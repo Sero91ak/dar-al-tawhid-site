@@ -30,7 +30,7 @@ for(const l of lessons) for(const key of ["cover","hero"]){
   assert.ok(fs.statSync(path.join(root,u.slice(1))).size>1000,"Missing permanent artwork: "+u);
 }
 assert.ok(css.includes('.app[data-gender="girl"]')&&css.includes(".dl-lessons-grid"),"Girl and responsive layout must remain");
-assert.ok(code.includes('lesson.status!=="planned"'),"Planned content must remain blocked");
+assert.ok(code.includes('(lesson.status==="existing"||lesson.status==="published")'),"Visitor runtime must allow only explicitly released master texts");
 assert.ok(code.includes("function openCategory(")&&code.includes("function libraryBack("),"Category navigation absent");
 assert.ok(!code.includes("installSwipeBack("),"Swipe navigation forbidden");
 new vm.Script(code,{filename:"kids/deen-lessons.js"});
