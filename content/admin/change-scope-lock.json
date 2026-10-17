@@ -8098,6 +8098,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "adult-test-post-read-full-width-no-fold-v1387-20261017",
+      "at": "2026-10-17T10:18:56.693Z",
+      "approvedBy": "user-video-observed-navigation-changes-size-on-every-category-click-20261017",
+      "reason": "Scope is only adult Test post detail render function to return full-width reader instead of a 290px tablet Fold rail. Preserve navigation, category, images, data, widgets and push.",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
