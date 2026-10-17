@@ -67,6 +67,14 @@ def build():
     guards = protect_paid_texts(ROOT, reg, ledger)
     original_nine = {r["originalSpokenText"] for r in nine["items"]}
     guard(len(original_nine) == 9, "historical prepaid originals missing or altered")
+    connected = ROOT / "kids/data/quiz-v4-connected-flow-originals-ledger.json"
+    # Verified separately by protect_paid_texts: these are NOT already
+    # playable. They remain outstanding for MP3 import but may not be bought.
+    flow_pending = set()
+    if connected.is_file():
+        flow = load(connected)
+        flow_pending = {x["sourceText"] for x in flow["entries"]
+                        if x["status"] != "IMPORTED_ORIGINAL_MP3_VERIFIED"}
     by_id = {r["questionId"]: r for r in recipes}
     age = {qid: row["ageBand"] for qid, row in by_id.items()}
     guard(Counter(age.values()) == {"4-6":150, "7-8":150, "9-10":150},
@@ -94,7 +102,7 @@ def build():
                   " ".join(fragments) == full,
                   "exact fragment composition contract mismatch")
             for s in fragments:
-                if s in reg["textClips"] or s in original_nine:
+                if s in reg["textClips"] or s in original_nine or s in flow_pending:
                     continue
                 h = digest(s)
                 guard(s not in guards, "unreconciled old paid text: " + h)
@@ -193,6 +201,8 @@ def build():
         "ageCounts":{"4-6":150,"7-8":150,"9-10":150},
         "savedOriginalDirectTextCount":len(reg["textClips"]),
         "previouslyPaidUnrecoveredOriginals":len(original_nine),
+        "connectedFlowOriginalsUnimportedNoRepurchase":len(flow_pending),
+        "connectedFlowOriginalTextsAwaitingImport":sorted(flow_pending),
         "trulyUnrecordedDistinctTextCount":len(requested),
         "trulyUnrecordedCodepoints":sum(len(x) for x in requested.values()),
         "recordingWaveCount":len(waves),
