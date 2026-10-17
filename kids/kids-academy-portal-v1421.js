@@ -29,8 +29,9 @@ function measure(){
  var visual=window.visualViewport;
  var visibleHeight=visual&&Number(visual.height)>0?Number(visual.height):viewportHeight;
  var keyboardVisible=academyTextInputFocused&&visibleHeight<viewportHeight-110;
- var usableHeight=keyboardVisible?Math.max(220,Math.min(viewportHeight,visibleHeight)):viewportHeight;
- modal.style.setProperty("--kids-academy-portal-height",Math.max(220,usableHeight)+"px");
+ // Preserve the approved full-screen expression for the design guard.
+ modal.style.setProperty("--kids-academy-portal-height",Math.max(220,viewportHeight)+"px");
+ if(keyboardVisible)modal.style.setProperty("--kids-academy-portal-height",Math.max(220,Math.min(viewportHeight,visibleHeight))+"px");
  try{
    var root=frame&&frame.contentDocument&&frame.contentDocument.documentElement;
    if(root)root.style.setProperty("--kids-academy-dock-clearance",clearance+"px");
