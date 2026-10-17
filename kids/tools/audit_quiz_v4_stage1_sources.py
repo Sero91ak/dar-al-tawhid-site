@@ -86,6 +86,12 @@ def read(p):return json.loads(p.read_text(encoding="utf-8"))
 
 def main():
     stage=read(STAGE);next_run=read(NEXT)
+    selected_catalog=read(ROOT/"kids/data/quiz-kids-curated-450-review.json")
+    spoken_plan=read(ROOT/"kids/data/quiz-v4-curated-450-production-review.json")
+    canonical={q["id"]:q for q in selected_catalog["items"]}
+    recipes={q["questionId"]:q for q in spoken_plan["recipes"]}
+    must(len(canonical)==len(recipes)==450 and set(canonical)==set(recipes),
+         "450 selected original content and voice recipes diverged")
     must(stage["stage"]==1 and stage["reviewOnly"] is True and
          stage["published"] is False,"not private stage1")
     must(next_run["modelId"]==MODEL and next_run["voiceId"]==VOICE
@@ -114,6 +120,19 @@ def main():
         qid=q["questionId"]
         must(qid in SOURCES and q["originalSource"]==SOURCES[qid],
              "changed question ID or original source")
+        must(qid in canonical and qid in recipes,"source quiz no longer selected")
+        original=canonical[qid];recipe=recipes[qid]
+        must(q["originalQuestion"]==original["question"]
+             and q["originalSource"]==original["source"]
+             and q["ageBand"]==original["ageBand"],
+             "question, source or age changed compared with canonical catalog")
+        must(q["answers"]==[a["label"] for a in original["answers"]]
+             and sum(a["correct"] is True for a in original["answers"])==1
+             and q["correctAnswer"]==next(a["label"] for a in original["answers"] if a["correct"]),
+             "spoken answer key does not match exact canonical choice labels")
+        must(q["spokenQuestion"]==recipe["question"]["text"]
+             and q["explanation"]==recipe["explanation"]["text"],
+             "spoken text or explanation edited without approved source recipe")
         must(q["ageBand"] in ("7-8","9-10"),"wrong older question age band")
         must(q["originalReviewStatus"]=="approved" and
              q["originalVerification"]=="approved",
@@ -170,6 +189,7 @@ def main():
         "age7to8":sum(x["ageBand"]=="7-8" for x in records),
         "age9to10":sum(x["ageBand"]=="9-10" for x in records),
         "sourceMappingConsistentWithPreviouslyApprovedCatalog":True,
+        "allTwentyExactCanonicalQuestionAnswerAndSpokenRecipeMatches":True,
         "independentExternalEvidenceLocatedFor":len(EVIDENCE),
         "externalEvidenceDoesNotEstablishCompleteSourceApproval":True,
         "sourceContextsNeedingExtraCare":sorted(CAVEATS),
