@@ -59,6 +59,10 @@ function themeButtons(){
 }
 var tastaturCard="<a class=\"dm15-tastatur-feature\" href=\"/tastatur/\" aria-label=\"Kostenlose arabische Textersetzungen – 565 Kürzel, Arabisch und Lautschrift\"><span class=\"dm15-tastatur-medallion\" aria-hidden=\"true\">﷽</span><span class=\"dm15-tastatur-copy\"><span class=\"dm15-tastatur-eyebrow\">NEU · KOSTENLOSE BIBLIOTHEK</span><strong>Arabische Textersetzungen</strong><small>565 Kürzel · Arabisch &amp; Lautschrift · Apple &amp; Android</small></span><span class=\"dm15-tastatur-cta\">Entdecken ↗</span></a>";
 function renderOurApps(){
+ const appleUA=String(navigator.userAgent||"");
+ const appleMobile=/(?:iPhone|iPad|iPod|DarAlTawhid-iOS|DarAlTawhidOfficialIOS)/i.test(appleUA)||(/Macintosh/i.test(appleUA)&&Number(navigator.maxTouchPoints||0)>1);
+ // Same App Store product ID for iOS and tvOS: the direct product link may launch the installed iOS app.
+ const tvStoreHref=appleMobile?"https://apps.apple.com/de/developer/serhat-akter/id6805988755":"https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753?platform=tv";
  const asset="/assets/promo/mehr-apps-reference-20261017.jpg";
  return `<section id="dm15AppsPromo" class="dm-app-showcase dm-exact-promo" data-dm-app-promo data-dm-search="apps apple tv fernseher kids tawhid kinder iphone ipad familie verfügbar bald entdecken" aria-label="Weitere DĀR AL TAWḤĪD Apps">
  <header class="dm-showcase-head"><span class="dm-showcase-kicker">DĀR AL TAWḤĪD · UNSERE APPS</span><h4>Wissen auf jedem Bildschirm.</h4><p>Entdecke unsere Angebote für das Wohnzimmer und die ganze Familie.</p></header>
@@ -66,7 +70,7 @@ function renderOurApps(){
  <article class="dm-exact-card dm-exact-apple" aria-label="DĀR AL TAWḤĪD für Apple TV – jetzt verfügbar">
   <img src="${asset}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="864" height="1536">
   <p class="dm-exact-sr">DĀR AL TAWḤĪD für Apple TV – jetzt verfügbar. Qurʾān, Sunnah und Āṯār am großen Bildschirm.</p>
-  <a href="https://apps.apple.com/de/app/id6805988753" class="dm-exact-action dm-exact-apple-action" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD auf Apple TV im App Store ansehen"><span class="dm-exact-sr">Im App Store ansehen</span></a>
+  <a href="${tvStoreHref}" class="dm-exact-action dm-exact-apple-action" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD auf Apple TV im App Store ansehen"><span class="dm-exact-sr">Im App Store ansehen</span></a>
  </article>
  <article class="dm-exact-card dm-exact-kids" aria-label="TAWḤĪD KIDS – iPhone-App in Vorbereitung">
   <img src="${asset}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="864" height="1536">
