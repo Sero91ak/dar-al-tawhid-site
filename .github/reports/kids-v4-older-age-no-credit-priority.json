@@ -25,23 +25,21 @@
     "7-8": 26,
     "9-10": 24
   },
-  "allRemainingUnrecordedOlderAgeDistinctTextCount": 1371,
-  "allRemainingUnrecordedOlderAgeCharacters": 64474,
-  "newDistinctTextCountForFirst40": 168,
-  "newCharactersForFirst40": 5746,
+  "allRemainingUnrecordedOlderAgeDistinctTextCount": 1369,
+  "allRemainingUnrecordedOlderAgeCharacters": 64451,
+  "newDistinctTextCountForFirst40": 166,
+  "newCharactersForFirst40": 5723,
   "priorityQuestionSteps": [
     {
       "order": 1,
       "questionId": "kids-quiz-045",
       "ageBand": "9-10",
       "category": "Ṣawm",
-      "missingOriginalTextCountForQuestion": 3,
-      "incrementalDistinctNewOriginals": 3,
-      "incrementalNewCharacters": 41,
+      "missingOriginalTextCountForQuestion": 1,
+      "incrementalDistinctNewOriginals": 1,
+      "incrementalNewCharacters": 18,
       "newOriginalTextSHA256": [
-        "96e107378d38f95c0157ea11b937536f7d3cf9f7216adc19a557bc1a642b0ec8",
-        "4c7da6824790eb5523bd9917b508c0e12339443228b8d5ce840445946724d32e",
-        "a29a7d6064fd3d6c240fd2aede591446afb47d619b7057007baffb45b2812dbf"
+        "4c7da6824790eb5523bd9917b508c0e12339443228b8d5ce840445946724d32e"
       ],
       "originalQuestionTextChanged": false,
       "maySynthesizeAutomatically": false
@@ -748,8 +746,8 @@
         "kids-quiz-094",
         "kids-quiz-147"
       ],
-      "newDistinctOriginals": 77,
-      "newOriginalCharacters": 2426,
+      "newDistinctOriginals": 75,
+      "newOriginalCharacters": 2403,
       "incrementalOriginalTextSha256": [
         "69e960d76c59a506808b0908ef47bc739cf012086feba91e5b271210ebc225c5",
         "3b43d4566de6a39db5785d2c137ecefd989a1a683ed9d85eec94b243f6024a88",
@@ -799,9 +797,7 @@
         "adb15315afdd67c46f243d9d7f426faa558f92abffc120ee182bd34944ecc43c",
         "363060dac698830e182d307bb6e30d52d5a9015e890e60d3195d97edc3848f05",
         "26c5c88b086fd686bbd8019e40b5af7c0fbf099839ff30a826ea760e7b75494c",
-        "96e107378d38f95c0157ea11b937536f7d3cf9f7216adc19a557bc1a642b0ec8",
         "4c7da6824790eb5523bd9917b508c0e12339443228b8d5ce840445946724d32e",
-        "a29a7d6064fd3d6c240fd2aede591446afb47d619b7057007baffb45b2812dbf",
         "ac9ca77763320cd61790b2f97bc0d09358c03462e47c83999277e877b86ef7d9",
         "b0a36ae51b05350c8206670b70ac770fcdf5b0beebfdfb479d520313a0cc1834",
         "0025ccf2f7451b10d993fb078c9fabdb6340113329baefee6d3865ab5e5c8210",
@@ -1707,25 +1703,9 @@
       "synthesized": false
     },
     {
-      "spokenText": "Im Muḥarram.",
-      "sha256": "96e107378d38f95c0157ea11b937536f7d3cf9f7216adc19a557bc1a642b0ec8",
-      "characterCount": 12,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
       "spokenText": "Im Rabīʿ al-Awwal.",
       "sha256": "4c7da6824790eb5523bd9917b508c0e12339443228b8d5ce840445946724d32e",
       "characterCount": 18,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Im Ramaḍān.",
-      "sha256": "a29a7d6064fd3d6c240fd2aede591446afb47d619b7057007baffb45b2812dbf",
-      "characterCount": 11,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
