@@ -1,0 +1,28 @@
+name: Frauen Hero Contract
+on:
+  pull_request:
+    paths:
+      - 'assets/frauen/**'
+      - 'test/assets/frauen/**'
+      - 'cloudflare/site-router.js'
+      - 'cloudflare/test-app-worker.js'
+      - 'scripts/verify-frauen-hero-contract.cjs'
+      - '.github/workflows/check-frauen-hero-contract.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'assets/frauen/**'
+      - 'test/assets/frauen/**'
+      - 'cloudflare/site-router.js'
+      - 'cloudflare/test-app-worker.js'
+      - 'scripts/verify-frauen-hero-contract.cjs'
+      - '.github/workflows/check-frauen-hero-contract.yml'
+jobs:
+  verify-frauen-heros:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node scripts/verify-frauen-hero-contract.cjs
