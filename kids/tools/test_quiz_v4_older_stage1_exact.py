@@ -15,12 +15,27 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"kids/tools"))
 import generate_quiz_v4_older_stage1_exact as stage1
+import audit_quiz_v4_stage1_paid_audio_integrity as actual_paid_audio
 
 def must(ok,msg):
     if not ok:raise AssertionError("V4_STAGE1_DRYRUN_FAILED: "+msg)
 
 def main():
     registry,ledger,source,missing,protected=stage1.prepare()
+    # Real bytes, not just registry metadata: this makes the long-standing,
+    # successfully exercised no-credit regression check any new charged MP3s
+    # even when a newly introduced workflow requires GitHub owner approval.
+    real=actual_paid_audio.validate()
+    expected_stage1=sum(x.get("batchId")==stage1.BATCH for x in ledger["rows"])
+    must(real["realMP3BytesChecked"]==expected_stage1 and
+         real["totalNewOriginals"]==expected_stage1,
+         "actual paid original MP3 bytes are missing, forged or out of sync")
+    must(real["sourceRemaining"]==len(missing),
+         "source-remaining queue differs from real paid originals")
+    must(real["requestJournalReconciled"] is True and
+         real["newCreditsSpentByThisAudit"]==0 and
+         real["publicReleaseAllowed"] is False,
+         "paid journal failed verification or audit allowed a public release")
     batch,estimate,complete_qids=stage1.candidate_batch(missing,source)
     qids={q["questionId"] for q in source["questions"]}
     must(len(qids)==20,"20 original question IDs must remain unchanged")
