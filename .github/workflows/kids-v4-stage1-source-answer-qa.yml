@@ -39,6 +39,9 @@ jobs:
           f=Path('.github/reports/kids-v4-older-stage1-source-and-answer-audit.json')
           data=json.loads(f.read_text(encoding='utf-8'))
           assert data['totalQuestions']==20
+          assert data['independentExternalEvidenceLocatedFor']==20
+          assert data['allTwentyEvidenceUrlsOnApprovedDomains'] is True
+          assert all(r['externalEvidenceLocated'] for r in data['records'])
           assert data['age7to8']==10 and data['age9to10']==10
           assert data['exactNewSourceTexts']==65
           next_batch=json.loads(Path('kids/review-only/quiz-v4-older-stage1-next-recording-batch.json').read_text())
