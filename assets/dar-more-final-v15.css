@@ -83,3 +83,30 @@ body.is-more-route #appView .dm15-tastatur-feature:hover{border-color:#f0d399;tr
 @media(max-width:430px){body.is-more-route #appView .dm15-tastatur-feature{gap:10px;padding:12px;margin-bottom:13px}body.is-more-route #appView .dm15-tastatur-medallion{width:48px;height:48px;flex-basis:48px;font-size:26px}body.is-more-route #appView .dm15-tastatur-copy strong{font-size:18px}body.is-more-route #appView .dm15-tastatur-copy small{font-size:11px}body.is-more-route #appView .dm15-tastatur-cta{padding:7px;font-size:11px}}
 @media(max-width:350px){body.is-more-route #appView .dm15-tastatur-feature{flex-wrap:wrap}body.is-more-route #appView .dm15-tastatur-cta{margin-left:58px}}
 @media(prefers-reduced-motion:reduce){body.is-more-route #appView .dm15-tastatur-feature{transition:none;transform:none!important}}
+
+
+/* DAR visitor App tab, consistent with approved Dar Test promo reference. */
+body.is-more-route #appView .dm15-shell .dm-app-showcase[hidden]{display:none!important}
+body.is-more-route #appView .dm15-shell .dm-app-showcase{width:100%;min-width:0;max-width:100%;margin:22px 0 7px;padding-top:18px;border-top:1px solid var(--dm15-rule);color:var(--dm15-text);overflow:visible}
+body.is-more-route #appView .dm15-shell .dm-showcase-head{margin:0 1px 14px}
+body.is-more-route .dm15-shell .dm-showcase-kicker{display:block;font-size:10px;font-weight:800;letter-spacing:.17em;color:var(--dm15-accent);margin-bottom:6px}
+body.is-more-route #appView .dm15-shell .dm-showcase-head h4{margin:0 0 5px;font:400 clamp(23px,4.5vw,32px)/1.14 Georgia,serif;letter-spacing:-.018em;color:var(--dm15-text)}
+body.is-more-route #appView .dm15-shell .dm-showcase-head p{margin:0;font-size:12.5px;line-height:1.5;color:var(--dm15-muted)}
+body.is-more-route #appView .dm15-shell .dm-showcase-footnote{font-size:10px;line-height:1.45;color:var(--dm15-muted);margin:11px 3px 0}
+
+/* DAR exact supplied artwork composition; real accessible store CTA / locked Kids. */
+body.is-more-route .dm15-shell .dm-exact-promo{min-width:0;overflow:visible}
+body.is-more-route .dm15-shell .dm-exact-stack{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(9px,1.6vw,16px);width:100%;min-width:0}
+body.is-more-route .dm15-shell .dm-exact-card{position:relative;display:block;isolation:isolate;min-width:0;width:100%;overflow:hidden;border:0!important;border-radius:clamp(14px,3.2vw,35px);padding:0!important;margin:0;box-shadow:0 8px 26px rgba(0,0,0,.14);background:#1b1210}
+body.is-more-route .dm15-shell .dm-exact-apple{aspect-ratio:808/376}
+body.is-more-route .dm15-shell .dm-exact-kids{aspect-ratio:808/393;background:#101827}
+body.is-more-route .dm15-shell .dm-exact-card>img{position:absolute!important;z-index:1;display:block!important;left:-3.465347%!important;top:-128.191489%!important;width:106.930693%!important;height:auto!important;max-width:none!important;max-height:none!important;object-fit:unset!important;object-position:unset!important;min-width:0!important;border:0!important;border-radius:0!important;pointer-events:none!important;user-select:none;-webkit-user-drag:none}
+body.is-more-route .dm15-shell .dm-exact-kids>img{top:-222.137405%!important}
+body.is-more-route .dm15-shell .dm-exact-action{position:absolute;display:block;z-index:2;left:57.8%;width:40.4%;border:0;background:transparent;color:transparent;text-decoration:none;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(249,224,178,.23);border-radius:clamp(8px,1.6vw,28px)}
+body.is-more-route .dm15-shell .dm-exact-apple-action{top:73.8%;height:19.0%}
+body.is-more-route .dm15-shell .dm-exact-kids-locked{top:68.6%;height:19.3%;pointer-events:none!important;cursor:not-allowed!important;opacity:0}
+body.is-more-route .dm15-shell .dm-exact-apple-action:focus-visible{outline:3px solid #ffe6a7;outline-offset:-1px;box-shadow:0 0 0 4px #24160d;opacity:1}
+body.is-more-route .dm15-shell .dm-exact-sr{position:absolute!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important;white-space:nowrap!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;border:0!important}
+body.is-more-route .dm15-shell .dm-exact-promo .dm-showcase-footnote{margin:11px 4px 0;max-width:100%;font-size:clamp(10px,1.6vw,12px);line-height:1.5}
+@media(min-width:700px){body.is-more-route .dm15-shell .dm-exact-stack{gap:15px}body.is-more-route .dm15-shell .dm-exact-card{border-radius:32px}}
+@media(prefers-reduced-motion:reduce){body.is-more-route .dm15-shell .dm-exact-action{transition:none}}
