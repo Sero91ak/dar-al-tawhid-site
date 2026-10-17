@@ -17,6 +17,10 @@ on:
         options:
           - "NO"
           - "YES"
+      approve_exact_batch_fingerprint_sha256:
+        description: "Paste SHA256 from the latest zero-credit next-batch audit; stale approvals refused"
+        required: true
+        type: string
 
 permissions:
   contents: write
@@ -40,6 +44,7 @@ jobs:
         run: |
           set -euo pipefail
           python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/audit_quiz_v4_stage1_sources.py
           python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --audit
           python3 - <<'PY'
           import json
@@ -51,6 +56,9 @@ jobs:
           assert a['questionCount']==20 and a['stageExpectedNewOriginals']==65
           assert a['nextPaidRunOriginalLimit']==10
           assert a['nextEstimatedCreditsNotProviderBill']<=850
+          assert isinstance(a['manualApprovalMustMatchExactBatchFingerprintSHA256'],str)
+          assert len(a['manualApprovalMustMatchExactBatchFingerprintSHA256'])==64
+          assert a['manualApprovalMustMatchExactBatchFingerprintSHA256']=="${{ github.event.inputs.approve_exact_batch_fingerprint_sha256 }}", 'Stale or incorrect manual batch fingerprint; STOP before TTS'
           assert a['paidSynthesisAuthorizedByAudit'] is False
           assert a['newElevenLabsCreditsSpentByAudit']==0
           assert a['publicReleaseAllowed'] is False
@@ -62,6 +70,7 @@ jobs:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           KIDS_V4_STAGE1_HUMAN_CONTENT_CHECK: ${{ github.event.inputs.confirm_manual_source_review }}
           KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL: ${{ github.event.inputs.authorize_new_credit_spend }}
+          KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256: ${{ github.event.inputs.approve_exact_batch_fingerprint_sha256 }}
         run: |
           set -euo pipefail
           python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --produce
