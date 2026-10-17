@@ -294,7 +294,7 @@ async function init(){
             sourceRefs:lesson.sourceRefs||original?.sourceRefs||[],
             sourceLinks:lesson.sourceLinks||[],
             audio:audioInfo,
-            voiceProduction:master?{status:"text-ready",singleMasterAudio:true,masterAgeRange:"4-10",ttsSource:"masterStoryText"}:{status:"planned"},
+            voiceProduction:master?{status:lesson.status==="existing"?"text-ready":"awaiting-editorial-release",singleMasterAudio:true,masterAgeRange:"4-10",ttsSource:"masterStoryText"}:{status:"planned"},
             categoryId:g.id};
         }));
       }
