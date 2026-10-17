@@ -18,14 +18,16 @@ assert.equal(new Set(all.map(x=>x.id)).size,30,"Lesson ids must be globally uniq
 const existing=all.filter(x=>x.status==="existing"),review=all.filter(x=>x.status==="review"),planned=all.filter(x=>x.status==="planned");
 assert.equal(existing.length,6,"Original six canonical lessons must remain first in each category");
 assert.ok(cur.categories.every(g=>g.lessons[0].id===g.id&&g.lessons[0].status==="existing"),"First lesson must be the existing canonical master");
-assert.equal(review.length,4,"Four Tawḥīd master drafts expected");
-assert.equal(planned.length,20,"Twenty additional titles must remain unapproved metadata only");
+assert.equal(review.length,8,"Four Tawḥīd and four Īmān master drafts expected");
+assert.equal(planned.length,16,"Remaining sixteen titles must stay unapproved metadata only");
 for(const lesson of review){
  assert.ok(lesson.masterStoryText?.length>1600,"Master text is incomplete: "+lesson.id);
  assert.ok(lesson.sourceRefs?.length>=3,"Missing primary evidence: "+lesson.id);
  assert.ok(lesson.masterStoryText.startsWith("As-Salāmu"),"Missing intro: "+lesson.id);
  assert.ok(lesson.masterStoryText.endsWith("Barakātuh."),"Missing outro: "+lesson.id);
  assert.ok(lesson.audio==null||!lesson.audio.url,"No synthetic audio can be published from an unapproved draft");
+ assert.equal(lesson.sourceLinks?.length,lesson.sourceRefs.length,"Every draft reference needs a matching primary-source URL: "+lesson.id);
+ assert.ok(lesson.sourceLinks.every(url=>/^https:\/\/(?:quran\.com|sunnah\.com)\//.test(url)),"Invalid or untrusted source URL: "+lesson.id);
 }
 for(const lesson of planned){
  assert.ok(!lesson.masterStoryText&&!lesson.audio,"Never publish unapproved lesson text or audio: "+lesson.id);
@@ -40,9 +42,16 @@ for(const lesson of all){
 }
 assert.ok(css.includes('.app[data-gender="girl"]')&&css.includes('.dl-lessons-grid'),"Girl-theme or lesson layout CSS missing");
 assert.ok(js.includes("function openCategory(")&&js.includes("function libraryBack("),"Navigation missing");
+assert.ok(js.includes('scripts:master?{"4-5":master,"6-8":master,"9-10":master}'),"Canonical narration-text parity across ages missing");
+assert.ok(js.includes("lesson.status!==\"planned\""),"Unapproved metadata must never be opened as a full lesson");
+const offline=read("kids/item-offline-v1.js");
+for(const route of ["/kids/data/deen-curriculum-v1.json?v=1","/kids/deen-curriculum-v1.css?v=1","/kids/deen-lessons.js?v=10"]){
+ assert.ok(offline.includes(route),"Per-lesson offline archive missing: "+route);
+}
 assert.ok(!js.includes("installSwipeBack("),"Do not introduce swipe-back gesture");
 new vm.Script(js,{filename:"kids/deen-lessons.js"});
 const shells=["kids/index.html","kids/start.html","kids/shell.html"].map(read);
 assert.ok(shells.every(x=>x===shells[0]),"Three KIDS HTML shells must match exactly");
-assert.ok(shells[0].includes("/kids/deen-lessons.js?v=9"),"Dīn JS cache bust missing");
-console.log("Dīn Creator gate PASS: 6 preserved categories, 30 topics, 10 existing/draft texts, 20 locked topics, permanent artworks, boy/girl style, synchronized shells");
+assert.ok(shells[0].includes("/kids/deen-lessons.js?v=10"),"Dīn JS cache bust missing");
+assert.ok(shells[0].includes("/kids/item-offline-v1.js?v=3"),"Offline runtime cache bust missing");
+console.log("Dīn Creator gate PASS: 6 categories, 30 topics, 6 original masters, 8 research drafts, 16 locked; URLs, exact master parity, offline, gender themes and stable art");
