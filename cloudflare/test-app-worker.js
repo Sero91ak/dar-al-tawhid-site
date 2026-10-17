@@ -493,7 +493,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // DAR_FRAUEN_HERO_DOM_RUNTIME_V1392: refresh the EXISTING women renderer
   // in the actual adult test app shell; no duplicate script/route handlers.
-  html = html.replace(/(\\/test\\/assets\\/frauen\\/frauen-fiqh\\.js)(?:\\?v=[^"'<\\s]*)?/g,
+  html = html.replace(/(\/test\/assets\/frauen\/frauen-fiqh\.js)(?:\?v=[^"'<\s]*)?/g,
     "$1?v=frauen-hero-dom-v1392");
 
   const headers = new Headers(asset.headers);
