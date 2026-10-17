@@ -1,0 +1,119 @@
+/* DĀR AL TAWḤĪD · adult visitor adaptive viewport v1381 · 2026-10-17
+   One viewport axis for Safari, iOS WebView, installed PWA, Android and iPad.
+   Corrects 100vw-width heroes placed inside inset/1180px reading stages.
+   No theme palette, click handlers, push, player, nav or Kids changes. */
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-ilm-chat-route){
+  --dar-responsive-safe-gutter:max(
+    12px,2.2vw,
+    env(safe-area-inset-left,0px),env(safe-area-inset-right,0px)
+  );
+  --dar-responsive-stage-width:calc(
+    100% - var(--dar-responsive-safe-gutter) - var(--dar-responsive-safe-gutter)
+  );
+}
+/* Top-level app must not be capped at 1180px when content renders full-width. */
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-ilm-chat-route) > .app{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  box-sizing:border-box!important;
+  overflow-x:clip!important;
+}
+/* Use percentages of the actual layout parent rather than 100vw (which can
+   include scrollbars, stage insets or an iOS visual-viewport mismatch). */
+html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route){
+  --dar-post-edge:var(--dar-responsive-safe-gutter);
+  --dar-test-edge-gutter:var(--dar-responsive-safe-gutter);
+  --dar-test-edge-stage:var(--dar-responsive-stage-width);
+}
+html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView.view{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  box-sizing:border-box!important;
+  overflow-x:clip!important;
+}
+html[data-theme] body.is-topics-route #appView.view > .topics-hub,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page,
+html[data-theme] body.is-post-route #appView.view > .post-reader{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  box-sizing:border-box!important;
+}
+/* The hero fills precisely its stage, never screen-width PLUS the old inset. */
+html[data-theme] body.is-topics-route #appView.view > .topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page > .view-head,
+html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-title{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  translate:none!important;
+  transform:none!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  box-sizing:border-box!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  overflow:hidden!important;
+}
+/* Exactly one symmetric, safe-area-aware gutter for search, article text and lists. */
+html[data-theme] body.is-topics-route #appView .topics-hub > :is(
+  .search-panel,.search-pro-panel,#homeSearchBlock,.topics-hub__label,
+  .dar-tl-intro,.dar-tl-filterbar,.dar-tl-groups,.dua-theme-grid
+),
+html[data-theme] body.is-topic-route #appView .topic-collection-page > :is(
+  .post-grid,.topic-collection
+),
+html[data-theme] body.is-post-route #appView .post-reader > :is(
+  .post-reader-main,.post-after-panel,.related-compact,.related-compact-list,[data-post-after-panel]
+){
+  width:var(--dar-responsive-stage-width)!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  box-sizing:border-box!important;
+}
+@media(min-width:768px){
+  html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-ilm-chat-route){
+    --dar-responsive-safe-gutter:max(
+      18px,2vw,
+      env(safe-area-inset-left,0px),env(safe-area-inset-right,0px)
+    );
+  }
+}
+/* New adult sections may opt in without inheriting obsolete 100vw breakouts. */
+html[data-theme] body.has-bottom-nav #appView.view > .dar-responsive-page{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:auto!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.has-bottom-nav #appView.view > .dar-responsive-page > .dar-responsive-hero{
+  width:100%!important;
+  max-width:100%!important;
+  margin-inline:0!important;
+  box-sizing:border-box!important;
+  background-size:cover!important;
+}
