@@ -80,6 +80,9 @@ jobs:
           parentCSS=live_asset('parents-dashboard-v1432.css')
           liveCacheVersion=str((obj.get('visualSystem') or {}).get('serviceWorkerCache') or '').removeprefix('v')
           parentLive={
+            'expectedSWRef':('/kids/sw.js?v='+liveCacheVersion) if liveCacheVersion else None,
+            'observedSWRefs':sorted(set(re.findall(r'/kids/sw\.js\?v=[a-zA-Z0-9_-]+',home))),
+            'hasServiceWorkerRegisterCall':'navigator.serviceWorker.register' in home,
             'htmlReferencesNewDashboard':bool(parentJS['ref'] and parentJS['bytes']>3000),
             'htmlReferencesNewStyles':bool(parentCSS['ref'] and parentCSS['bytes']>7000),
             'htmlRegistersNewSW':bool(liveCacheVersion and f'navigator.serviceWorker.register("/kids/sw.js?v={liveCacheVersion}"' in home),
