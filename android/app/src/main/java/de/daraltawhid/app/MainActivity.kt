@@ -1,8 +1,10 @@
 package de.daraltawhid.app
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.ComponentName
@@ -28,6 +30,7 @@ import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -38,6 +41,26 @@ class MainActivity : AppCompatActivity() {
     private lateinit var errorOverlay: LinearLayout
     private var filePathCallback: ValueCallback<Array<Uri>>? = null
     private var pendingUrl: String = DarShell.LIVE_URL
+    private var pendingGeoOrigin: String? = null
+    private var pendingGeoCallback: GeolocationPermissions.Callback? = null
+
+    private val locationPermission = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { grants ->
+        val granted = grants[Manifest.permission.ACCESS_FINE_LOCATION] == true ||
+            grants[Manifest.permission.ACCESS_COARSE_LOCATION] == true ||
+            hasLocationPermission()
+        pendingGeoCallback?.invoke(pendingGeoOrigin, granted, false)
+        pendingGeoCallback = null
+        pendingGeoOrigin = null
+    }
+
+    private fun hasLocationPermission(): Boolean =
+        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED ||
+        ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) ==
+            PackageManager.PERMISSION_GRANTED
+
 
     private val fileChooser = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -360,7 +383,19 @@ class MainActivity : AppCompatActivity() {
             origin: String?,
             callback: GeolocationPermissions.Callback?
         ) {
-            callback?.invoke(origin, true, false)
+            if (origin.isNullOrBlank() || callback == null) return
+            if (hasLocationPermission()) {
+                callback.invoke(origin, true, false)
+            } else {
+                // A WebView permission does not grant Android's runtime location permission.
+                pendingGeoCallback?.invoke(pendingGeoOrigin, false, false)
+                pendingGeoOrigin = origin
+                pendingGeoCallback = callback
+                locationPermission.launch(arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ))
+            }
         }
 
         override fun onPermissionRequest(request: PermissionRequest?) {
