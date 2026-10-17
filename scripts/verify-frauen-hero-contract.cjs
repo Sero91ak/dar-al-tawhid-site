@@ -27,6 +27,8 @@ for(const variant of ["", "test/"]){
   assert.ok(js.includes("function libraryHero("),"Shared hero renderer missing: "+jsPath);
   assert.match(js,/data-hero-readable=/,"Semantic hero flag missing: "+jsPath);
   assert.ok(js.includes("function pinnedLibraryHead("),"Shared pinned header missing: "+jsPath);
+  assert.ok(js.includes("DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392"),"DOM repair guard absent: "+jsPath);
+  assert.ok(js.includes("new MutationObserver("),"SPAs require DOM observer: "+jsPath);
   for(const view of ["renderHub", "renderLibraryGroup", "renderSectionHero"]){
     assert.ok(js.includes("function "+view+"("),"Missing "+view+": "+jsPath);
   }
