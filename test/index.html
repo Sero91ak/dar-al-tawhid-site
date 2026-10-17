@@ -25420,7 +25420,6 @@ function darGpsStartWatch(){
 }
 async function darGpsAutoResume(force=false){
   if(!darGpsIsAuto()||document.hidden){darGpsStopWatch();return}
-  darGpsStartWatch();
   if(!force&&Date.now()-darGpsLastRequestAt<30000)return;
   if(darGpsRequestPromise)return darGpsRequestPromise;
   darGpsLastRequestAt=Date.now();
@@ -25428,11 +25427,12 @@ async function darGpsAutoResume(force=false){
     try{
       if(navigator.permissions&&navigator.permissions.query){
         const perm=await navigator.permissions.query({name:"geolocation"}).catch(()=>null);
-        if(perm&&perm.state!=="granted")return;
+        if(perm&&perm.state==="denied"){darGpsStopWatch();return}
       }
+      darGpsStartWatch();
       const pos=await requestBrowserPosition();
       darGpsCommitFix(pos);
-    }catch(e){}
+    }catch(e){if(Number(e&&e.code)===1)darGpsStopWatch()}
   })();
   try{await darGpsRequestPromise}finally{darGpsRequestPromise=null}
 }
