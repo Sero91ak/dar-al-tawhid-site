@@ -155,6 +155,21 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-post-topic-hero-compact-fullbleed-20261017",
+      "at": "2026-10-17T21:51:00+02:00",
+      "approvedBy": "user-explicit-global-post-hero-too-tall-and-category-hero-full-bleed-all-formats-live-20261017",
+      "reason": "Adult-only: set compact post reader hero and edge-to-edge true image-surface for category/topic/post heroes on iPhone/iPad/tablet/web with existing pictures. No Frauen, Kids, push, prayer, navigation, reader text, audio or SW changes.",
+      "paths": [
+        "assets/adult-responsive-viewport-v1381.css",
+        "test/assets/test-global-edge-width-v1372.css",
+        "assets/dar-adult-visual-continuity-v1391.css",
+        "cloudflare/site-router.js",
+        "cloudflare/test-app-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-02T23:59:00.000Z"
+    },
+    {
       "id": "women-noon-exact-rollback-20261017",
       "at": "2026-10-17T21:24:00+02:00",
       "approvedBy": "user-explicit-restore-women-only-from-noon-no-repair-20261017",
