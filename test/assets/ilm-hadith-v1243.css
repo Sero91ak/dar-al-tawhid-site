@@ -2067,3 +2067,140 @@ html[data-theme] body.is-hadith-route .hadith-hub > .hadith-works-toggle{
     --hadith-page-gutter:20px;
   }
 }
+
+/* DAR_HADITH_SHARH_READER_DISTINCTION_20261017
+   Scoped to the individual Hadith detail in adult /test.
+   Keep the hadith itself editorial and prominent. Clearly identify the
+   classical explanation as a secondary, separately attributed reading panel.
+   Theme tokens are inherited; avoid theme-independent gold/green fills. */
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .statement.post-aussage{
+  margin:6px 0 10px!important;
+  padding:25px 0 28px!important;
+  border-left:0!important;
+  border-right:0!important;
+  border-bottom:1px solid var(--hadx-line)!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .statement.post-aussage::before,
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .statement.post-aussage::after{
+  content:none!important;
+  display:none!important;
+  width:0!important;
+  border:0!important;
+  background:none!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .post-aussage-kicker{
+  margin:0 0 21px!important;
+  padding:0 2px!important;
+  line-height:1.35!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .post-aussage-text{
+  margin:0!important;
+  padding:2px 3px 3px!important;
+  border:0!important;
+  border-left:0!important;
+  line-height:1.62!important;
+  overflow-wrap:break-word!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .hadith-source-line{
+  margin:0!important;
+  padding:17px 2px 19px!important;
+  color:var(--muted2)!important;
+  font-size:clamp(.81rem,2.6vw,.94rem)!important;
+  line-height:1.6!important;
+  overflow-wrap:break-word!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .hadith-sharh{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  margin:clamp(32px,5vw,48px) 0 28px!important;
+  padding:clamp(21px,4.2vw,34px)!important;
+  border:1px solid color-mix(in srgb,var(--gold2) 19%,var(--line2))!important;
+  border-top:2px solid color-mix(in srgb,var(--gold2) 48%,var(--line2))!important;
+  border-radius:17px!important;
+  background:color-mix(in srgb,var(--card) 76%,var(--bg) 24%)!important;
+  box-shadow:none!important;
+  color:var(--text)!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .hadith-sharh-head{
+  margin:0 0 19px!important;
+  padding:0 0 18px!important;
+  border-bottom:1px solid color-mix(in srgb,var(--gold2) 16%,var(--line2))!important;
+  background:none!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .hadith-sharh-eyebrow{
+  margin:0 0 10px!important;
+  padding:0!important;
+  color:var(--muted2)!important;
+  font:800 .66rem/1.4 var(--font-sans,system-ui)!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .hadith-sharh-heading{
+  margin:0!important;
+  padding:0!important;
+  color:var(--text)!important;
+  font-family:var(--font-display,var(--serif))!important;
+  font-size:clamp(1.5rem,5.2vw,1.95rem)!important;
+  font-weight:650!important;
+  line-height:1.22!important;
+  letter-spacing:0!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .hadith-sharh-heading span{
+  color:var(--muted2)!important;
+  font-family:var(--font-sans,system-ui)!important;
+  font-size:clamp(.85rem,2.8vw,1.03rem)!important;
+  font-weight:550!important;
+  letter-spacing:0!important;
+  vertical-align:baseline!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .hadith-sharh-label{
+  margin:0 0 16px!important;
+  padding:0!important;
+  border:0!important;
+  color:color-mix(in srgb,var(--gold2) 48%,var(--text))!important;
+  font:750 clamp(.82rem,2.8vw,.98rem)/1.55 var(--font-sans,system-ui)!important;
+  letter-spacing:.015em!important;
+  text-transform:none!important;
+  overflow-wrap:anywhere!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .hadith-sharh-text{
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  color:var(--text)!important;
+  font-family:var(--font-sans,system-ui)!important;
+  font-size:clamp(.99rem,3.25vw,1.1rem)!important;
+  font-weight:420!important;
+  line-height:1.75!important;
+  letter-spacing:0!important;
+  white-space:pre-line!important;
+  overflow-wrap:break-word!important;
+}
+html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .hadith-sharh-reference{
+  margin:22px 0 0!important;
+  padding:15px 0 0!important;
+  border:0!important;
+  border-top:1px solid color-mix(in srgb,var(--gold2) 15%,var(--line2))!important;
+  color:var(--muted2)!important;
+  font:550 .79rem/1.55 var(--font-sans,system-ui)!important;
+  overflow-wrap:anywhere!important;
+}
+@media(max-width:699px){
+  html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .hadith-sharh{
+    margin-top:30px!important;
+    padding:22px 19px 24px!important;
+    border-radius:16px!important;
+  }
+  html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .post-aussage-kicker{
+    margin-bottom:19px!important;
+  }
+  html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .hadith-sharh-text{
+    line-height:1.72!important;
+  }
+}

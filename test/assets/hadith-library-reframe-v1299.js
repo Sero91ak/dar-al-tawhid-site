@@ -51,13 +51,22 @@
     const speaker=h.speakerLabel?`<div class="post-reader-speaker"><span class="post-reader-speaker__label">Sprecher</span><span class="post-reader-speaker__rule" aria-hidden="true"></span><span class="post-reader-speaker__name">${esc(h.speakerLabel)}</span></div>`:"";
     const german=showGerman&&(h.germanHtml||h.german)?`<section class="statement post-aussage"><div class="post-aussage-kicker">Aussage</div><div class="post-aussage-text">${h.germanHtml||esc(h.german)}</div></section>`:"";
     const arabic=showArabic&&h.arabic?`<div class="hadith-arabic" dir="rtl" lang="ar">${esc(h.arabic)}</div>`:"";
-    const sharh=h.sharhText?`<div class="hadith-sharh"><p class="hadith-sharh-label">Šarḥ${h.sharhScholar?` · ${esc(h.sharhScholar)}`:""}${h.sharhBook?` · ${esc(h.sharhBook)}`:""}</p><p class="hadith-sharh-text">${esc(h.sharhText)}</p></div>`:"";
+    const sharh=h.sharhText?`<section class="hadith-sharh" aria-label="Šarḥ – Erklärung zum Ḥadīṯ">
+      <header class="hadith-sharh-head">
+        <p class="hadith-sharh-eyebrow">Zum Verständnis des Ḥadīṯ</p>
+        <h3 class="hadith-sharh-heading">Šarḥ <span>– Erklärung</span></h3>
+      </header>
+      ${(h.sharhScholar||h.sharhBook)?`<p class="hadith-sharh-label">${h.sharhScholar?esc(h.sharhScholar):""}${h.sharhScholar&&h.sharhBook?" · ":""}${h.sharhBook?esc(h.sharhBook):""}</p>`:""}
+      <div class="hadith-sharh-text">${esc(h.sharhText)}</div>
+      ${h.sharhReference?`<p class="hadith-sharh-reference">${esc(h.sharhReference)}</p>`:""}
+    </section>`:"";
     const cite=h.source?`<p class="hadith-source-line">${esc(h.source)}</p>`:"";
     const share=sharePanel("Ḥadīṯ weitergeben",h.chapterTitle||h.bookTitle||"Ḥadīṯ",hadithShareText(h),location.href,"Ḥadīṯ kopieren","","");
     const actions=`${share}<div class="hadith-actions"><button type="button" class="share-btn link ${fav?"is-active":""}" data-hadith-favorite="${esc(h.id)}"><span>${fav?"Gemerkt":"Merken"}</span></button></div>`;
     const detailTitle=cleanTitle("Bāb",(h.babTitle&&h.babTitle!==h.chapterTitle)?h.babTitle:(h.chapterTitle||h.bookTitle||"Ḥadīṯ"));
     const detailKicker=`${esc(h.bookTitle||"Ḥadīṯ-Werk")}${h.hadithNumber?` · ḤADĪṮ NR. ${esc(h.hadithNumber)}`:""}`;
-    const detailPath=renderHadithBreadcrumb(crumbBook,crumbChapter,crumbSection,h.hadithNumber?("Ḥadīṯ "+h.hadithNumber):"Ḥadīṯ");\n    return`<article class="article post-reader hadith-detail hadith-detail--v1303"><header class="post-reader-title"><div class="kicker">${detailKicker}</div><h2>${esc(detailTitle)}</h2></header>${detailPath}<section class="post-reader-main">${narrator}${speaker}${german}${arabic}${h.grade?`<p class="hadith-card-grade">${esc(h.grade)}</p>`:""}${h.babTitle?`<p class="hadith-meta-line">${esc(h.babTitle)}</p>`:""}${sharh}${cite}${actions}${renderHadithSiblingNav(h)}</section></article>`;
+    const detailPath=renderHadithBreadcrumb(crumbBook,crumbChapter,crumbSection,h.hadithNumber?("Ḥadīṯ "+h.hadithNumber):"Ḥadīṯ");
+    return`<article class="article post-reader hadith-detail hadith-detail--v1303"><header class="post-reader-title"><div class="kicker">${detailKicker}</div><h2>${esc(detailTitle)}</h2></header>${detailPath}<section class="post-reader-main">${narrator}${speaker}${german}${arabic}${h.grade?`<p class="hadith-card-grade">${esc(h.grade)}</p>`:""}${h.babTitle?`<p class="hadith-meta-line">${esc(h.babTitle)}</p>`:""}${cite}${sharh}${actions}${renderHadithSiblingNav(h)}</section></article>`;
   }
   function newBookPanel(book,route){
     if(!book)return"";

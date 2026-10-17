@@ -7883,6 +7883,18 @@
       "reason": "Only adult visitor Beiträge/Topics category list, individual category and post reader: port the previously designed Test styling and historical background heroes into public visitor web/iOS WebView. Preserve source links, search filters, theme palettes and hash routing; no change to Kids, push subsystem, worker, manifest or native Swift.",
       "paths": ["index.html", "assets/dar-visitor-posts-v1375.css", "assets/post-heroes/", "content/admin/change-scope-lock.json"],
       "expiresAt": "2026-10-24T23:59:00.000Z"
+    },
+    {
+      "id": "test-hadith-sharh-detail-distinction-20261017",
+      "at": "2026-10-17T08:00:00+02:00",
+      "approvedBy": "user-direct-hadith-detail-and-sharh-visual-separation-20261017",
+      "reason": "Only adult Dar Test Hadith detail view: present the Hadith statement as primary content with generous spacing and no text-touching rail; move the Hadith source ahead of a thematically distinct Šarḥ explanation section with scholar/work/source attribution. Match the existing adult Beiträge typography and theme tokens; preserve catalog, routing, canonical data, native apps, all visitor/production assets and all push lanes.",
+      "paths": [
+        "test/assets/hadith-library-reframe-v1299.js",
+        "test/assets/ilm-hadith-v1243.css",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-24T23:59:00.000Z"
     }
   ],
   "enabled": true
