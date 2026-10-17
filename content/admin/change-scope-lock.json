@@ -7919,6 +7919,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-24T23:59:00.000Z"
+    },
+    {
+      "id": "adult-test-global-responsive-centering-iphone-ipad-browser-20261017",
+      "at": "2026-10-17T10:07:00+02:00",
+      "approvedBy": "user-explicit-global-format-fix-and-push-live-20261017",
+      "reason": "User supplied three adult DĀR AL TAWḤĪD screenshots proving one-sided clipping/shift of public post/topic hero and asked for fluid, symmetric viewport layout on every iPhone/iPad/browser size and live publication. Adult Test step first: remove 100vw overflow from normal app stage and target only editorials, keep theme colors, bottom tab, overlays, kids, push and native Swift untouched. Verify actual test shell and stylesheet on both origins.",
+      "paths": [
+        "test/assets/test-global-edge-width-v1372.css",
+        "test/index.html",
+        "test/version.json",
+        "scripts/verify-test-app-deploy.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-25T23:59:00.000Z"
     }
   ],
   "enabled": true
