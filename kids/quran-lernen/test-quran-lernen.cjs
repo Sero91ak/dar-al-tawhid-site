@@ -71,4 +71,20 @@ for(const shell of shells){
 }
 assert.ok(html.includes("Die deutsche Tafsīr-Aufnahme wird nach Quellenprüfung ergänzt"),"No honest master-audio pending label");
 assert.ok(html.includes("Offenbarungsanlass:"),"No sabab-an-nuzul caution");
+const draft=JSON.parse(read("kids/quran-lernen/mastertext-drafts-v1.json"));
+assert.equal(draft.environment,"kids-creator-staging","Mastertext must remain in creator staging");
+assert.equal(draft.notChildPublished,true,"Draft must not claim child publication");
+assert.equal(draft.audioGenerated,false,"No unapproved master audio");
+assert.equal(draft.lessons.length,2);
+assert.equal(draft.lessons.reduce((n,x)=>n+x.verses.length,0),11,"Missing Al-Fātiḥah or Al-Ikhlāṣ āyāt");
+for(const l of draft.lessons){
+ assert.ok([1,112].includes(l.surah),"Only approved source-facing pilot scripts");
+ for(const verse of l.verses){
+  assert.ok(byId.get(String(l.surah)).verses.some(v=>v.id===verse.ayah),"Script without canonical āyah");
+  for(const tier of ["4-5","6-8","9-10"])assert.ok(verse.masterText[tier].length>20,"Age-tiered voice script missing: "+tier);
+ }
+}
+assert.ok(js.includes("renderMasterDraft(item,v)"),"Master preview integration missing");
+assert.ok(js.includes('mastertext-drafts-v1.json?v=2'),"Master file not loaded in preview");
+assert.ok(html.includes('id="ql-meaning-note"'),"Draft review marker missing");
 console.log("PASS KIDS CREATOR QURAN V1: "+catalog.items.length+" units, "+verses+" ayat, "+mapped+"/"+words+" reviewed word positions; profile palette, navigation and canonical Quran fidelity protected.");
