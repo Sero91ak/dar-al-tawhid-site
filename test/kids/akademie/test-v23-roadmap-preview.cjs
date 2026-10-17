@@ -26,10 +26,11 @@ const previewCatalogCount=catalog.entries.filter(e=>e.type==="catalog").length;
 const previewPlannedCount=catalog.entries.filter(e=>e.type==="planned").length;
 const liveCatalogCount=roadmap.existingLessonSlots.length;
 const remainingPlanned=roadmap.plannedUnits.length;
-// Dar Test and Kids are independently deployed, never report seven future
-// lesson slots as playable until the canonical Kids lane has been verified.
+// Dar Test and Kids are independently deployed. The signed Test editor still
+// exposes a historical 38-lesson snapshot, while canonical Kids has 66 verified
+// lessons. Lagging Test items stay strictly editorial-only and cannot unlock.
 const transitionalGap=previewPlannedCount-remainingPlanned;
-assert.ok([0,7,12,20].includes(transitionalGap),"Only V25 seven and V26 five authenticated topic releases may lag behind signed Test editor");
+assert.ok([0,7,12,20,24,28].includes(transitionalGap),"Signed Test editor may lag through Kids V29; no lag may unlock an unreviewed lesson");
 assert.equal(previewCatalogCount+previewPlannedCount,208);
 assert.equal(liveCatalogCount+remainingPlanned,208);
 assert.equal(previewCatalogCount+transitionalGap,liveCatalogCount);
@@ -39,8 +40,8 @@ const titles=new Set();
 for(const item of catalog.entries.filter(e=>e.type==="planned")){
  const matching=roadmap.plannedUnits.find(u=>u.editorialSlot===item.slot);
  if(!matching){
-  assert.ok([7,12,20].includes(transitionalGap),"No unapproved editorial topic may disappear from the protected editor");
-  assert.ok(item.slot>=39&&item.slot<=58,"Only source-reviewed topics 39–58 may differ");
+  assert.ok([7,12,20,24,28].includes(transitionalGap),"No unapproved editorial topic may disappear from the protected editor");
+  assert.ok(item.slot>=39&&item.slot<=66,"Only canonical source-reviewed topics 39–66 may differ");
   assert.ok(roadmap.existingLessonSlots.some(x=>x.editorialSlot===item.slot),
    "The editorial item must correspond to a source-reviewed Kids catalog lesson");
   assert.equal(item.visitorReleaseVerified,false,"Lagging Test UI must NEVER claim a lesson is live");
