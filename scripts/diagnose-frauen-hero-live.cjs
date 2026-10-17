@@ -40,6 +40,11 @@ function snapshot(){
     docScroll:doc?.scrollTop,windowY:scrollY,viewport:{w:innerWidth,h:innerHeight},
     hero:pick(hero),stage:pick(stage),heading:pick(heading),
     body:pick(document.body),html:pick(document.documentElement),
+    safeGuardLoaded:!!window.__darFrauenHeroSafeEventsV1395,
+    modalDiagnostics:[...document.querySelectorAll('dialog[open],[role="dialog"][aria-modal="true"]')].slice(0,8).map(e=>({
+      html:e.outerHTML.slice(0,260),rects:e.getClientRects().length,visible:getComputedStyle(e).visibility,
+      display:getComputedStyle(e).display,pointer:getComputedStyle(e).pointerEvents
+    })),
     inlineStyles:{body:document.body?.getAttribute("style"),html:document.documentElement?.getAttribute("style")},
     app:pick(app),shell:pick(shell),ancestors,
     heroHtml:hero?.outerHTML.slice(0,400),
@@ -98,7 +103,7 @@ function snapshot(){
    all.push({key:route.key,status:response.status(),before,repaired,after,errors});
    console.log(JSON.stringify({route:route.key,status:response.status(),
     before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles,shellChildren:before.shellChildren,renderer:before.renderer},
-    repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer,body:repaired.body,html:repaired.html,inline:repaired.inlineStyles,ancestors:repaired.ancestors.map(x=>({cls:x.classes,overflowX:x.overflowX,overflowY:x.overflowY}))},after:{scroll:after.docScroll,body:after.body,hero:after.hero,stage:after.stage,heading:after.heading,ancestors:after.ancestors.map(x=>({cls:x.classes,overflowY:x.overflowY}))},errors}));
+    repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer,body:repaired.body,html:repaired.html,inline:repaired.inlineStyles,guard:repaired.safeGuardLoaded,modals:repaired.modalDiagnostics,ancestors:repaired.ancestors.map(x=>({cls:x.classes,overflowX:x.overflowX,overflowY:x.overflowY}))},after:{scroll:after.docScroll,body:after.body,hero:after.hero,stage:after.stage,heading:after.heading,ancestors:after.ancestors.map(x=>({cls:x.classes,overflowY:x.overflowY}))},errors}));
    if(before.app&&(!repaired.hero||repaired.hero.height<180||repaired.hero.bottom<100)){
      issues.push(route.key+" upper hero missing from first viewport");
    }
