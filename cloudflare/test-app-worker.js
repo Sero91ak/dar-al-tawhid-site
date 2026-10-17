@@ -322,12 +322,18 @@ async function finalizeDarTestHomeV1193(asset) {
     else html += hadithStructure;
   }
 
-  // DAR_HADITH_REFRAME_FINAL_V1299
-  if (!html.includes('id="darHadithReframeFinalV1299"')) {
-    const hadithFinal = '<style id="darHadithReframeFinalV1299">@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-reader-fix-v1303");</style>' +
-      '<script id="darHadithReframeScriptV1299" src="/test/assets/hadith-library-reframe-v1299.js?v=1303"><\/script>';
-    if (html.includes("</html>")) html = html.replace("</html>", hadithFinal + "</html>");
-    else html += hadithFinal;
+  // DAR_HADITH_REFRAME_FINAL_V1307 — Adult Dar Test only.
+  // Unlike the legacy trailing injection, this must produce a valid closing
+  // </script> and load AFTER the inline Hadith renderer inside the HTML body.
+  // The stylesheet belongs to <head>, not after </html>.
+  if (!html.includes('id="darHadithReframeScriptV1307"')) {
+    const hadithCss = '<link rel="stylesheet" id="darHadithReframeFinalV1307" href="/test/assets/ilm-hadith-v1243.css?v=hadith-sharh-v1307">\\n';
+    const hadithJs = '<script id="darHadithReframeScriptV1307" src="/test/assets/hadith-library-reframe-v1299.js?v=hadith-sharh-v1307"></script>\\n';
+    if (html.includes("</head>")) html = html.replace("</head>", hadithCss + "</head>");
+    else html = hadithCss + html;
+    if (html.includes("</body>")) html = html.replace("</body>", hadithJs + "</body>");
+    else if (html.includes("</html>")) html = html.replace("</html>", hadithJs + "</html>");
+    else html += hadithJs;
   }
   // DAR_ADAPTIVE_FOLD_V1326
   // Force every pre-existing adaptive/fold reference to the same v1326 bytes.
