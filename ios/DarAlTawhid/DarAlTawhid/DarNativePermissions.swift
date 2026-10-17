@@ -118,9 +118,10 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let loc = locations.last else { return }
         let js = """
-        window.__darNativeLocation={lat:\(loc.coordinate.latitude),lng:\(loc.coordinate.longitude),acc:\(loc.horizontalAccuracy)};
+        window.__darNativeLocation={lat:\(loc.coordinate.latitude),lon:\(loc.coordinate.longitude),lng:\(loc.coordinate.longitude),latitude:\(loc.coordinate.latitude),longitude:\(loc.coordinate.longitude),acc:\(loc.horizontalAccuracy),accuracy:\(loc.horizontalAccuracy),timestamp:\(Int(loc.timestamp.timeIntervalSince1970 * 1000))};
         window.DAR_NATIVE_LOCATION=window.__darNativeLocation;
         window.dispatchEvent(new CustomEvent('dar-native-location',{detail:window.__darNativeLocation}));
+        window.dispatchEvent(new CustomEvent('darNativeLocationUpdated',{detail:window.__darNativeLocation}));
         """
         webView?.evaluateJavaScript(js, completionHandler: nil)
     }
