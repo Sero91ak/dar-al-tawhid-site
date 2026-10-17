@@ -4755,6 +4755,22 @@
   document.addEventListener("dar:render",function(){attach();schedule()});
   window.addEventListener("hashchange",function(){attach();schedule()});
   document.addEventListener("dar:frauen-render",function(){attach();schedule()});
-  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",attach,{once:true});
-  else attach();
+  // Some Test shells REPLACE #appView itself after SPA paints. Watching only
+  // its old children then misses the removal, so observe the stable document
+  // root and periodically recover the currently active Frauen page.
+  var rootObserver=null;
+  function observeRoot(){
+    if(rootObserver||!document.body)return;
+    rootObserver=new MutationObserver(function(){
+      if(currentValue()!==null){attach();schedule()}
+    });
+    rootObserver.observe(document.body,{childList:true,subtree:true});
+  }
+  function bootIntegrity(){attach();observeRoot();schedule()}
+  if(document.readyState==="loading")
+    document.addEventListener("DOMContentLoaded",bootIntegrity,{once:true});
+  else bootIntegrity();
+  setInterval(function(){
+    if(currentValue()!==null){attach();schedule()}
+  },800);
 })();
