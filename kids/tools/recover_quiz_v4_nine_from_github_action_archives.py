@@ -125,6 +125,21 @@ def mp3_candidates(raw,missing):
             results[gid]=data
     return results
 
+def sample_historical_archives(eligible,limit=MAX_SAMPLES_PER_NAME):
+    """Deterministically include newest, middle and oldest known backups.
+
+    Pure helper; no GitHub requests, no MP3 synthesis and no file changes.
+    """
+    strict(isinstance(eligible,list) and isinstance(limit,int) and limit>0,
+           "invalid archival sampling request")
+    count=min(len(eligible),limit)
+    if not count:
+        return []
+    indices=sorted({round(i*(len(eligible)-1)/max(count-1,1))
+                    for i in range(count)})
+    return [eligible[i] for i in indices]
+
+
 def main():
     state=load(STATE)
     expected=load(ORIGINALS)
@@ -183,10 +198,7 @@ def main():
             continue
         # Use a reproducible mix of recent, middle and old snapshots, never
         # just the six newest. This is NOT a claim of exhaustive inspection.
-        n=min(MAX_SAMPLES_PER_NAME,len(all_eligible))
-        indices=sorted({round(i*(len(all_eligible)-1)/max(n-1,1))
-                        for i in range(n)})
-        sample=[all_eligible[i] for i in indices]
+        sample=sample_historical_archives(all_eligible)
         scanned_this_name=0
         for row in sample:
             if not missing or stats["eligibleArchivesExamined"]>=MAX_ARTIFACTS_DOWNLOADED:
