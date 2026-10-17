@@ -35,16 +35,11 @@ function stopOtherPlayers(){
  * No swipe navigation and no offline action on category rows:
  * navigation uses Back button; offline belongs inside the detail player.
  */
+/* KIDS_SOURCE_TEXT_ONLY_V1414: references visible, never external links. */
 function sourceHtml(item){
-  const links=Array.isArray(item?.sourceLinks)?item.sourceLinks:[];
   return (Array.isArray(item?.sourceRefs)?item.sourceRefs:[])
-    .map((ref,i)=>{
-      if(typeof ref!=="string"||!ref.trim())return "";
-      const url=String(links[i]||"");
-      if(/^https:\/\/(?:quran\.com|sunnah\.com)\//.test(url))
-        return '<a class="ms-source-ref dl-verified-source" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" aria-label="Originalquelle öffnen: '+esc(ref)+'">'+esc(ref)+'</a>';
-      return '<span class="ms-source-ref">'+esc(ref)+'</span>';
-    }).join("");
+    .filter(ref=>typeof ref==="string"&&ref.trim())
+    .map(ref=>'<span class="ms-source-ref">'+esc(ref)+'</span>').join("");
 }
 function groupFor(id){return groups.find(x=>x.id===id)||null}
 function groupLessons(id){const g=groupFor(id);return g?g.lessons.map(x=>allLessons.find(i=>i.id===x.id)||x):[]}
