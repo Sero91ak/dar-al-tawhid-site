@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `3a447730c0344c3d59aa0999a843ff5a47055b8f`
+- Commit beim Erstellen dieses Berichts: `531738c038adebeeba1333ffd2654880c79fd002`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **276 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1044 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -113,6 +113,14 @@ Beim nächsten *ausdrücklich bezahlten* 7–10-Jahre-Originalbatch wird vor jed
 Die aktuelle Sicherung verwendet `kids/data/quiz-v4-older-stage1-request-journal.json` und eine **identische Kopie** unter `requestJournal` in `kids/data/quiz-v4-older-stage1-usage.json`. Die bestehende GitHub-Actions-Backup-Regel erfasst bereits die Usage-Datei auch bei Fehlern. Wird die lokale Journaldatei vermisst, kann die Backup-Kopie vor jedem weiteren POST eine unklare Vorbelastung nachweisen.
 Der Null-Credit-Regressionscode `kids/tools/test_quiz_v4_older_stage1_exact.py` testet genau den Fall einer simulierten unklaren früheren Anfrage ohne synthetische MP3 und erwartet einen Stop mit `NEVER REBUY`. Sicherung im GitHub-Artefakt ist nicht dasselbe wie ein erfolgreich auf GitHub veröffentlichter Original-MP3-Commit: Bei Runner-Abbruch Recovery-Artefakt zuerst inspizieren und in den Reviewzweig zurückimportieren.
 Letzter offener Gratis-GET-Versuch bestätigt neun verbliebene, vorher bezahlte V4-IDs mit `flowGetHTTP=402` und `historyAudioHTTP=400`, **0 authentische neue MP3s importiert**. Der API-GET verlangt zuerst die Freigabe des Originalexports; die bisherigen Sprachcredits dürfen nicht noch einmal ausgegeben werden.
+
+## Originale aus fehlgeschlagenen bezahlten GitHub-Actions-Läufen retten
+
+GitHub-Actions lädt bei der exakt begrenzten 7–10-Jahre-V4-10er-Aufnahmerunde unter `tawhid-kids-v4-older-stage1-exact-prepaid-safekeeping` einen ZIP-Backupstand hoch – auch wenn der nachgelagerte MP3-Zusammenbau oder GitHub-Push scheitert. Echte zuvor abgebuchte Originale und die Sperrvermerke NIEMALS neu kaufen.
+Neuer **rein lokaler, kostenfreier und ausschließlich privater** Original-Recovery-Importer: `python3 kids/tools/restore_quiz_v4_stage1_paid_run_backup.py --zip ARTIFACT.zip` (Prüfung ohne Änderungen); nach bestandenem SHA-/Originalledger-/Audio-Prüfbericht `python3 kids/tools/restore_quiz_v4_stage1_paid_run_backup.py --zip ARTIFACT.zip --import` (nur in diesem Reviewcheckout).
+Der Import akzeptiert sowohl von GitHub Actions verkürzte ZIP-Pfade als auch vollständige Projektpfade und verweigert manipulierte Alte-Aufnahmen, fehlende echte MP3-Bytes, abweichende Kostenbelege und Pfadmanipulation. Nur nach bestandenem Import Audio-Neuzusammenbau und Statusaktualisierung ausführen; niemals automatisch Live veröffentlichen.
+Besonders wichtig: Ein abgebrochener Provider-Aufruf mit unklarem Abrechnungsergebnis bleibt als `REQUEST_STARTED_UNCONFIRMED` erhalten, selbst wenn die MP3-Datei fehlt. Vor jeder weiteren bezahlten V4-Anfrage zwingend zuerst Ledger und Originalexport abgleichen.
+Kostenloser Negativtest: `kids/tools/test_quiz_v4_stage1_paid_backup_restore.py` und `.github/workflows/kids-v4-stage1-paid-backup-restore-qa.yml`; der Test erzeugt selbst KEINE Audioaufnahme und kann keine Credits abbuchen.
 
 ## Nächste verbindliche Schritte
 
