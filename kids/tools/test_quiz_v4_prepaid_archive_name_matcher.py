@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+"""Pure filename contract for historical already-paid V4 MP3 backup archives.
+
+No network access, no generated or dummy MP3, no ElevenLabs calls. Validates
+only the source identifier naming convention: original-id.mp3 and the already
+supported original-id_description.mp3 / original-id-description.mp3.
+"""
+from __future__ import annotations
+import json
+from pathlib import Path
+from recover_quiz_v4_nine_from_github_action_archives import original_id_from_export_name, ROOT
+
+def main():
+    state=json.loads((ROOT/"kids/data/quiz-v4-paid-flow-import-status.json").read_text(encoding="utf-8"))
+    paid=set(state["remainingGenerationIds"])
+    assert len(paid)==state["remainingPriorPaidGenerations"]<=9
+    for gid in paid:
+        assert len(gid)==20 and gid.isalnum()
+        for example in (gid+".mp3",gid+"-original.mp3",
+                        gid+"_flow-paid-eleven-v4.mp3",
+                        "audio/"+gid+".mp3",
+                        "audio/"+gid+"_historic-original.mp3"):
+            assert original_id_from_export_name(example,paid)==gid,example
+        for refused in (gid+".mp3.txt",gid+"-edit.wav",
+                        gid+".wav",gid+"-not-original.mp4",
+                        gid+"-trailing-over-70-characters-"+("A"*80)+".mp3",
+                        "other-generation.mp3"):
+            assert original_id_from_export_name(refused,paid) is None,refused
+    assert original_id_from_export_name("aaaaaaaaaaaaaaaaaaaa.mp3",set()) is None
+    assert original_id_from_export_name("aaaaaaaaaaaaaaaaaaaa.mp3",paid) is None
+    print("PASS: all historical generation IDs recognize only allowed original MP3 export names; "
+          "zero synthesized audio, no provider calls, no credits")
+
+if __name__=="__main__":
+    main()
