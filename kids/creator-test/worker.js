@@ -58,8 +58,8 @@ export default {
     if (isBootPage && asset.ok && request.method === "GET") {
       const original = await asset.clone().text();
       const head = '<link rel="preload" as="image" href="/kids/assets/kids-splash-20261017-v1.jpg" fetchpriority="high">'
-        + '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-5">'
-        + '<script src="/kids/splash-boot-v1.js?v=20261017-5"></script>';
+        + '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-6">'
+        + '<script src="/kids/splash-boot-v1.js?v=20261017-6"></script>';
       // Approved illustration already contains greeting and wordmark. Live progress only.
       const boot = '<div id="kids-test-boot" role="region" aria-label="TAWḤĪD KIDS lädt">'
         + '<div class="ktb-poster"><div class="ktb-loading">'
