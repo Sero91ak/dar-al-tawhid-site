@@ -28,6 +28,15 @@ for(const lesson of review){
  assert.ok(lesson.audio==null||!lesson.audio.url,"No synthetic audio can be published from an unapproved draft");
  assert.equal(lesson.sourceLinks?.length,lesson.sourceRefs.length,"Every draft reference needs a matching primary-source URL: "+lesson.id);
  assert.ok(lesson.sourceLinks.every(url=>/^https:\/\/(?:quran\.com|sunnah\.com)\//.test(url)),"Invalid or untrusted source URL: "+lesson.id);
+ for(let i=0;i<lesson.sourceRefs.length;i++){
+  const ref=lesson.sourceRefs[i],url=lesson.sourceLinks[i];
+  const q=ref.match(/^Qurʾān (\d+):(\d+)(?:[–-](\d+))?/);
+  const h=ref.match(/Ṣaḥīḥ al-Buḫārī (\d+[a-z]?)|Ṣaḥīḥ Muslim (\d+[a-z]?)/);
+  assert.ok(q||h,"Every new religious evidence label must be a Qurʾān verse or Ṣaḥīḥ hadith: "+lesson.id+" "+ref);
+  const wanted=q?"https://quran.com/"+q[1]+"/"+q[2]+(q[3]?"-"+q[3]:""):
+   "https://sunnah.com/"+(h[1]?"bukhari:"+h[1]:"muslim:"+h[2]);
+  assert.equal(url,wanted,"Religious evidence URL mismatches its printed source: "+lesson.id+" "+ref);
+ }
 }
 for(const lesson of planned){
  assert.ok(!lesson.masterStoryText&&!lesson.audio,"Never publish unapproved lesson text or audio: "+lesson.id);
