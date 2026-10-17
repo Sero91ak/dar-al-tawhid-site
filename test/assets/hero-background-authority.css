@@ -1,111 +1,34 @@
-/* GLOBAL HERO BACKGROUND AUTHORITY · adult test app
-   A hero is the background of its area and uses that area's width.
-   Side gutters stay on the text that follows the hero.
-   No 100vw breakout and no negative margin. */
-html[data-theme] body.is-area-route:is(
-  .is-post-route,.is-topics-route,.is-topic-route,.is-dua-route,.is-hadith-route,
-  .is-scholars-route,.is-scholar-route,.is-more-route,.is-quiz-route,.is-quran-overview,
-  .is-settings-route,.is-calendar-route,.is-library-route,.is-frauen-route,.is-tawhid-guide-route,
-  .is-account-route,.is-about-route,.is-news-route,.is-news-detail-route,.is-zakat-route,
-  .is-source-library-route,.is-quran-topic-route
-):not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView.view{
-  inline-size:100%!important;
-  max-inline-size:100%!important;
-  min-inline-size:0!important;
-  margin-inline:0!important;
+/* POST HERO ONLY · adult test app
+   The post picture is the background of the post head and uses the
+   width of #appView. Other area heroes stay on their own rules. */
+html[data-theme] body.is-post-route #appView.view{
   padding-left:0!important;
   padding-right:0!important;
-  box-sizing:border-box!important;
-  overflow-x:clip!important;
+  overflow-x:visible!important;
 }
-html[data-theme] body.is-post-route #appView .post-reader,
-html[data-theme] body.is-hadith-route #appView .hadith-detail,
-html[data-theme] body.is-quran-overview #appView .qov-page,
-html[data-theme] body.is-topics-route #appView .topics-hub,
-html[data-theme] body.is-topic-route #appView .topic-collection-page,
-html[data-theme] body.is-more-route #appView .more-page,
-html[data-theme] body.is-quiz-route #appView .quiz-home{
-  inline-size:100%!important;
-  max-inline-size:none!important;
-  margin-inline:0!important;
-  padding-left:0!important;
-  padding-right:0!important;
-  box-sizing:border-box!important;
-}
-html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title,
-html[data-theme] body.is-hadith-route #appView .hadith-detail > .post-reader-title,
-html[data-theme] body.is-topics-route #appView .topics-hub > .view-head,
-html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head,
-html[data-theme] body.is-scholar-route #appView .topic-collection-page > .view-head,
-html[data-theme] body.is-dua-route #appView .dua-hub > .view-head,
-html[data-theme] body.is-dua-route #appView .dua-collection-page > .view-head,
-html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head,
-html[data-theme] body.is-scholars-route #appView .scholars-index__header,
-html[data-theme] body.is-more-route #appView .view-head,
-html[data-theme] body.is-quiz-route #appView .view-head,
-html[data-theme] body.is-quran-overview #appView .qov-header,
-html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head,
-html[data-theme] body.is-calendar-route #appView .cal-tl-head,
-html[data-theme] body.is-library-route #appView .lib-hero,
-html[data-theme] body.is-frauen-route #appView .frauen-library-hero,
-html[data-theme] body.is-tawhid-guide-route #appView > .view-head,
-html[data-theme] body.is-account-route #appView > .view-head,
-html[data-theme] body.is-about-route #appView > .view-head,
-html[data-theme] body.is-news-route #appView > .view-head,
-html[data-theme] body.is-news-detail-route #appView > .view-head,
-html[data-theme] body.is-zakat-route #appView > .view-head,
-html[data-theme] body.is-source-library-route #appView > .view-head,
-html[data-theme] body.is-quran-topic-route #appView > .view-head,
-html[data-theme] #appView.view:has(.qibla-hub-page) > .view-head,
-html[data-theme] #appView.view:has(.jummah-hub-page) > .view-head,
-html[data-theme] #appView.view:has(.prayer-page-noble) > .view-head{
-  position:relative!important;
-  inline-size:100%!important;
+html[data-theme] body.is-post-route #appView .post-reader{
   width:100%!important;
-  max-inline-size:none!important;
   max-width:none!important;
-  min-inline-size:0!important;
   margin:0!important;
-  margin-inline:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  border-radius:0!important;
+  overflow:visible!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader-title{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
   left:auto!important;
   right:auto!important;
-  translate:none!important;
   transform:none!important;
   border-radius:0!important;
   box-shadow:none!important;
   box-sizing:border-box!important;
-  overflow:hidden!important;
-  background-size:cover!important;
-  background-position:center!important;
-  background-repeat:no-repeat!important;
 }
-html[data-theme] body.is-quran-overview #appView .qov-main,
-html[data-theme] body.is-more-route #appView .dar-more-v15{
-  inline-size:100%!important;
-  width:100%!important;
-  max-inline-size:none!important;
-  max-width:none!important;
-  margin:0!important;
-  padding-left:0!important;
-  padding-right:0!important;
-  box-sizing:border-box!important;
-}
-html[data-theme] body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-overview):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView.view:has(> .view-head){
-  padding-left:0!important;
-  padding-right:0!important;
-}
-html[data-theme] body.is-area-route #appView.view:has(> .view-head) > :not(.view-head):not(.topics-hub):not(.qov-page):not(.dar-more-v15):not(.post-reader):not(.quiz-home):not(.topic-collection-page):not(.dua-hub):not(.hadith-hub){
-  padding-left:var(--dar-edge-gutter,12px)!important;
-  padding-right:var(--dar-edge-gutter-right,12px)!important;
-  box-sizing:border-box!important;
-}
-html[data-theme] body.is-topic-route #appView .topic-collection-page > :not(.view-head),
-html[data-theme] body.is-post-route #appView .post-reader > :not(.post-reader-title),
-html[data-theme] body.is-quran-overview #appView .qov-main > :not(.qov-header),
-html[data-theme] body.is-more-route #appView .dar-more-v15 > :not(.view-head),
-html[data-theme] body.is-quiz-route #appView > :not(.view-head),
-html[data-theme] body.is-settings-route #appView > :not(.settings-page-head){
-  padding-left:var(--dar-edge-gutter,12px)!important;
-  padding-right:var(--dar-edge-gutter-right,12px)!important;
+html[data-theme] body.is-post-route #appView .post-reader > :not(.post-reader-title){
+  padding-left:max(16px,env(safe-area-inset-left,0px))!important;
+  padding-right:max(16px,env(safe-area-inset-right,0px))!important;
   box-sizing:border-box!important;
 }
