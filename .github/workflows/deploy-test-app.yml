@@ -359,8 +359,8 @@ jobs:
             echo "KIDS Dīn verified: $RESOURCE"
           done
           curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/start.html" > /tmp/kids-deen-start.html
-          grep -Fq '/kids/deen-lessons.js?v=10' /tmp/kids-deen-start.html || { echo "::error::New Dīn runtime reference not delivered"; exit 1; }
-          grep -Fq '/kids/item-offline-v1.js?v=3' /tmp/kids-deen-start.html || { echo "::error::New offline runtime not delivered"; exit 1; }
+          grep -Fq '/kids/deen-lessons.js?v=11' /tmp/kids-deen-start.html || { echo "::error::New Dīn runtime reference not delivered"; exit 1; }
+          grep -Fq '/kids/item-offline-v1.js?v=4' /tmp/kids-deen-start.html || { echo "::error::New offline runtime not delivered"; exit 1; }
           echo "KIDS Dīn 6×5 staging release matches GitHub commit exactly."
           # KIDS-only V2: verify the versioned files that the staging shell actually imports.
           # No hardcoded v3/v4 marker, so asset updates cannot make a correct deploy appear broken.
