@@ -4603,8 +4603,59 @@
       return "";
     return null;
   }
+  var priorScrollStyle=null;
+  function restoreTestScrollport(){
+    if(!priorScrollStyle||!document.body)return;
+    var st=document.body.style;
+    if(st.getPropertyValue("overflow-x").trim()==="clip"&&st.getPropertyPriority("overflow-x")==="important"){
+      if(priorScrollStyle.x)st.setProperty("overflow-x",priorScrollStyle.x,priorScrollStyle.xp);
+      else st.removeProperty("overflow-x");
+    }
+    if(st.getPropertyValue("overflow-y").trim()==="visible"&&st.getPropertyPriority("overflow-y")==="important"){
+      if(priorScrollStyle.y)st.setProperty("overflow-y",priorScrollStyle.y,priorScrollStyle.yp);
+      else st.removeProperty("overflow-y");
+    }
+    priorScrollStyle=null;
+  }
+  function syncTestScrollport(value){
+    var root=document.documentElement,body=document.body;
+    if(!root||!body)return;
+    var isTest=(location.pathname.indexOf("/test")===0)
+      ||root.classList.contains("dar-test-performance-v1");
+    var modal=false;
+    if(value!==null&&isTest){
+      var dialogs=document.querySelectorAll('dialog[open],[role="dialog"][aria-modal="true"]');
+      for(var i=0;i<dialogs.length;i++){
+        if(dialogs[i].getClientRects().length&&getComputedStyle(dialogs[i]).visibility!=="hidden"){
+          modal=true;break;
+        }
+      }
+    }
+    if(value===null||!isTest||!body.classList.contains("is-frauen-route")||modal){
+      restoreTestScrollport();
+      return;
+    }
+    if(!priorScrollStyle){
+      priorScrollStyle={
+        x:body.style.getPropertyValue("overflow-x"),
+        xp:body.style.getPropertyPriority("overflow-x"),
+        y:body.style.getPropertyValue("overflow-y"),
+        yp:body.style.getPropertyPriority("overflow-y")
+      };
+    }
+    // Test SPA has a persistent body overflow-x:hidden guard, creating an
+    // inert vertical scroll container. Inline important restoration is required
+    // so the Frauen hero follows the actual HTML page scroller.
+    if(body.style.getPropertyValue("overflow-x").trim()!=="clip"
+      ||body.style.getPropertyPriority("overflow-x")!=="important")
+      body.style.setProperty("overflow-x","clip","important");
+    if(body.style.getPropertyValue("overflow-y").trim()!=="visible"
+      ||body.style.getPropertyPriority("overflow-y")!=="important")
+      body.style.setProperty("overflow-y","visible","important");
+  }
   function repair(){
     var value=currentValue();
+    syncTestScrollport(value);
     if(value===null||repairing)return;
     var app=document.getElementById("appView");
     if(!app)return;
@@ -4648,7 +4699,7 @@
     schedule();
   }
   document.addEventListener("dar:render",function(){attach();schedule()});
-  window.addEventListener("hashchange",function(){attach();schedule()});
+  window.addEventListener("hashchange",function(){syncTestScrollport(currentValue());attach();schedule()});
   document.addEventListener("dar:frauen-render",function(){attach();schedule()});
   // Some Test shells REPLACE #appView itself after SPA paints. Watching only
   // its old children then misses the removal, so observe the stable document
@@ -4667,5 +4718,6 @@
   else bootIntegrity();
   setInterval(function(){
     if(currentValue()!==null){attach();schedule()}
+    else restoreTestScrollport();
   },800);
 })();
