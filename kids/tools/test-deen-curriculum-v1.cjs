@@ -18,8 +18,8 @@ assert.equal(new Set(all.map(x=>x.id)).size,30,"Lesson ids must be globally uniq
 const existing=all.filter(x=>x.status==="existing"),review=all.filter(x=>x.status==="review"),planned=all.filter(x=>x.status==="planned");
 assert.equal(existing.length,6,"Original six canonical lessons must remain first in each category");
 assert.ok(cur.categories.every(g=>g.lessons[0].id===g.id&&g.lessons[0].status==="existing"),"First lesson must be the existing canonical master");
-assert.equal(review.length,16,"Sixteen new sourced teaching drafts expected across four categories");
-assert.equal(planned.length,8,"Eight remaining titles must stay unapproved metadata only");
+assert.equal(review.length,24,"All twenty-four new sourced lesson manuscripts expected");
+assert.equal(planned.length,0,"Every learning topic must have a manuscript");
 for(const lesson of review){
  assert.ok(lesson.masterStoryText?.length>1600,"Master text is incomplete: "+lesson.id);
  assert.ok(lesson.sourceRefs?.length>=3,"Missing primary evidence: "+lesson.id);
@@ -44,6 +44,7 @@ assert.ok(css.includes('.app[data-gender="girl"]')&&css.includes('.dl-lessons-gr
 assert.ok(js.includes("function openCategory(")&&js.includes("function libraryBack("),"Navigation missing");
 assert.ok(js.includes('scripts:master?{"4-5":master,"6-8":master,"9-10":master}'),"Canonical narration-text parity across ages missing");
 assert.ok(js.includes("lesson.status!==\"planned\""),"Unapproved metadata must never be opened as a full lesson");
+assert.ok(js.includes('"awaiting-editorial-release"'),"Review drafts must never be auto-approved for Master-Audio production");
 const offline=read("kids/item-offline-v1.js");
 for(const route of ["/kids/data/deen-curriculum-v1.json?v=2","/kids/deen-curriculum-v1.css?v=1","/kids/deen-lessons.js?v=11"]){
  assert.ok(offline.includes(route),"Per-lesson offline archive missing: "+route);
