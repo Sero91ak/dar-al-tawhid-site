@@ -30,7 +30,10 @@ function draw(){
  if(nav)nav.innerHTML=categories.map(function(c){return '<button type="button" data-dm15-category="'+escapeHtml(c[0])+'" class="dm15-category'+(state.group===c[0]&&!searched?" is-current":"")+'" aria-pressed="'+(state.group===c[0]&&!searched)+'">'+icon(c[2])+'<span>'+escapeHtml(c[1])+'</span></button>'}).join("");
  var title=byId("dm15GroupName");if(title)title.textContent=searched?"Suchergebnisse":group[0];
  var count=byId("dm15Count");if(count)count.textContent=shown.length+" Funktionen";
- var grid=byId("dm15Grid");if(grid)grid.innerHTML=shown.length?shown.map(featureCard).join(""):'<p class="dm15-empty">Keine Funktion gefunden.</p>';
+ var promo=byId("dm15AppsPromo");
+ var promoVisible=!!(searched?"apple tv fernseher kids tawhid kinder iphone ipad familie apps bildschirm".includes(searched):state.group==="App");
+ if(promo)promo.hidden=!promoVisible;
+ var grid=byId("dm15Grid");if(grid)grid.innerHTML=shown.length?shown.map(featureCard).join(""):(promoVisible?"":'<p class="dm15-empty">Keine Funktion gefunden.</p>');
 }
 function closeTheme(){
  var o=byId("dm15ThemeSheet");if(o)o.hidden=true;
@@ -55,6 +58,27 @@ function themeButtons(){
  }).join("");
 }
 var tastaturCard="<a class=\"dm15-tastatur-feature\" href=\"/tastatur/\" aria-label=\"Kostenlose arabische Textersetzungen – 565 Kürzel, Arabisch und Lautschrift\"><span class=\"dm15-tastatur-medallion\" aria-hidden=\"true\">﷽</span><span class=\"dm15-tastatur-copy\"><span class=\"dm15-tastatur-eyebrow\">NEU · KOSTENLOSE BIBLIOTHEK</span><strong>Arabische Textersetzungen</strong><small>565 Kürzel · Arabisch &amp; Lautschrift · Apple &amp; Android</small></span><span class=\"dm15-tastatur-cta\">Entdecken ↗</span></a>";
+function renderOurApps(){
+ const asset="/assets/promo/mehr-apps-reference-20261017.jpg";
+ return `<section id="dm15AppsPromo" class="dm-app-showcase dm-exact-promo" data-dm-app-promo data-dm-search="apps apple tv fernseher kids tawhid kinder iphone ipad familie verfügbar bald entdecken" aria-label="Weitere DĀR AL TAWḤĪD Apps">
+ <header class="dm-showcase-head"><span class="dm-showcase-kicker">DĀR AL TAWḤĪD · UNSERE APPS</span><h4>Wissen auf jedem Bildschirm.</h4><p>Entdecke unsere Angebote für das Wohnzimmer und die ganze Familie.</p></header>
+ <div class="dm-exact-stack">
+ <article class="dm-exact-card dm-exact-apple" aria-label="DĀR AL TAWḤĪD für Apple TV – jetzt verfügbar">
+  <img src="${asset}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="864" height="1536">
+  <p class="dm-exact-sr">DĀR AL TAWḤĪD für Apple TV – jetzt verfügbar. Qurʾān, Sunnah und Āṯār am großen Bildschirm.</p>
+  <a href="https://apps.apple.com/de/app/id6805988753" class="dm-exact-action dm-exact-apple-action" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD auf Apple TV im App Store ansehen"><span class="dm-exact-sr">Im App Store ansehen</span></a>
+ </article>
+ <article class="dm-exact-card dm-exact-kids" aria-label="TAWḤĪD KIDS – iPhone-App in Vorbereitung">
+  <img src="${asset}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="864" height="1536">
+  <p class="dm-exact-sr">TAWḤĪD KIDS. Die iPhone-App ist noch nicht veröffentlicht. Demnächst verfügbar. Keine Verlinkung oder Installation.</p>
+  <button type="button" class="dm-exact-action dm-exact-kids-locked" disabled aria-label="TAWḤĪD KIDS ist noch nicht verfügbar"><span class="dm-exact-sr">Demnächst verfügbar</span></button>
+ </article>
+ </div>
+ <p class="dm-showcase-footnote">Gerätedarstellungen mit Werbemotiven aus unserer Vorschau. Keine App-Store-Screenshots.</p>
+ </section>`;
+}
+
+var darCrossPromo = renderOurApps();
 function render(items,api){
  state.items=Array.isArray(items)?items.filter(function(item){return item&&item.id!=="notifications"&&item.id!=="about"}):[];
  state.api=api||{};
@@ -72,6 +96,7 @@ function render(items,api){
  tastaturCard+
  '<nav id="dm15Categories" class="dm15-categories" aria-label="Funktionsbereiche"></nav>'+
  '<div class="dm15-results"><div class="dm15-results-head"><h2 id="dm15GroupName"></h2><span id="dm15Count"></span></div><div class="dm15-grid" id="dm15Grid"></div></div>'+
+ darCrossPromo+
  '<div class="dm15-scrim" id="dm15ThemeSheet" hidden><section class="dm15-sheet" role="dialog" aria-modal="true" aria-label="Erscheinungsbild wählen"><div class="dm15-handle"></div><div class="dm15-sheethead"><div><small>DĀR AL TAWḤĪD · DESIGN</small><h2>Erscheinungsbild</h2><p>Farbe und Darstellung wählen.</p></div><button type="button" data-dm15-close-theme aria-label="Schließen">×</button></div><div class="dm15-theme-list" id="dm15Themes">'+themeButtons()+'</div><h3>Darstellung</h3><div class="dm15-density"><button type="button" data-dm15-density="compact" aria-pressed="'+(state.density==="compact")+'">Kompakt</button><button type="button" data-dm15-density="comfort" aria-pressed="'+(state.density==="comfort")+'">Komfort</button></div></section></div></section>';
 }
 function handleClick(e){
