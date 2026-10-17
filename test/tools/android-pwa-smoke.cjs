@@ -76,8 +76,67 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   await page.setViewportSize({width:412,height:915});
   await page.waitForTimeout(1400);
   await snapshot("portrait-return");
+  // DAR_ADULT_GEOMETRY_SIX_VIEWPORTS_V1: computed boxes, not just CSS markers.
+  // Real Chromium layout on the deployed adult /test/ surface; KIDS excluded.
+  findings.responsive=[];
+  const sizes=[
+   [375,812,"iphone-small"],[390,844,"iphone"],[430,932,"iphone-large"],
+   [768,1024,"ipad"],[1024,768,"ipad-landscape"],[1440,900,"desktop"],
+   [812,375,"iphone-landscape"]
+  ];
+  async function geometry(label){
+   const result=await page.evaluate(()=>{
+    const width=document.documentElement.clientWidth;
+    const keys=[
+     ".topics-hub > .view-head",
+     ".topic-collection-page > .view-head",
+     ".post-reader > .post-reader-title"
+    ];
+    const hero=keys.map(q=>document.querySelector(q)).find(Boolean);
+    const content=document.querySelector(".topics-hub__label,.topic-collection-page .topic-collection,.post-reader .post-reader-main");
+    function box(el){if(!el)return null;const r=el.getBoundingClientRect();return {left:r.left,right:r.right,width:r.width,height:r.height};}
+    return {width,scrollWidth:document.documentElement.scrollWidth,bodyClass:document.body.className,
+      hero:box(hero),content:box(content),hasCover:!!(hero&&getComputedStyle(hero).backgroundImage!=="none"),
+      horizontalRail:!!document.querySelector(".dar-tl-filterbar")};
+   });
+   const fail=(why)=>{throw Error("Responsive "+label+": "+why+" "+JSON.stringify(result));};
+   if(!result.hero||result.hero.width<120)fail("missing visible route hero");
+   if(result.scrollWidth>result.width+3)fail("horizontal document overflow");
+   if(result.hero.left< -3||result.hero.right>result.width+3)fail("hero cropped");
+   if(Math.abs(result.hero.left-(result.width-result.hero.right))>4)fail("asymmetric hero margins");
+   if(result.hero.left>24||result.width-result.hero.right>24)fail("hero not edge-filling");
+   if(!result.hasCover)fail("hero background missing");
+   if(result.content&&(result.content.left< -3||result.content.right>result.width+3))fail("content cropped");
+   findings.responsive.push({label,...result});
+   await page.screenshot({path:path.join(out,"responsive-"+label+".png"),fullPage:false});
+  }
+  for(const [width,height,label] of sizes){
+   await page.setViewportSize({width,height});
+   await nav.nth(pidx).click({timeout:15000});
+   await page.waitForTimeout(950);
+   await geometry(label+"-topics");
+   const group=page.locator(".topics-hub .dar-tl-accordion").first();
+   if(await group.count()){
+    if(!(await group.evaluate(el=>el.hasAttribute("open")))){
+     const summary=group.locator("summary");
+     if(await summary.count())await summary.click();
+    }
+    const topic=page.locator(".topics-hub .topics-theme-card").first();
+    if(await topic.count()){
+     await topic.click({timeout:13000});
+     await page.waitForTimeout(850);
+     await geometry(label+"-category");
+     const post=page.locator(".topic-collection-page .post-row").first();
+     if(await post.count()){
+      await post.click({timeout:13000});
+      await page.waitForTimeout(850);
+      await geometry(label+"-post");
+     }else throw Error("Responsive "+label+": category has no clickable post row");
+    }else throw Error("Responsive "+label+": no clickable topic card");
+   }else throw Error("Responsive "+label+": no topic accordion");
+  }
   findings.passed=true;
-  console.log("Dar Test Android Chrome: HOME + QURAN + POSTS + ROTATION PASS");
+  console.log("Dar Test Android Chrome: HOME + QURAN + POSTS + ROTATION + SIX WIDTHS PASS");
  }catch(e){findings.passed=false;findings.failure=String(e.stack||e);console.error(findings.failure);process.exitCode=1}
  finally{fs.writeFileSync(path.join(out,"report.json"),JSON.stringify(findings,null,2));if(browser)await browser.close()}
 })();
