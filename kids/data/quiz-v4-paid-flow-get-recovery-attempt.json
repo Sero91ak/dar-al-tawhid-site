@@ -71,6 +71,68 @@
   "apiKeySaved": false,
   "signedUrlsSaved": false,
   "publicReleaseAllowed": false,
+  "historyFlowSearch": {
+    "usedOnlyReadOnlyGET": true,
+    "pagesInspected": 4,
+    "httpCodes": [
+      200,
+      200,
+      200,
+      200
+    ],
+    "historyRowsInspected": 325,
+    "candidateExactTextMatches": 0,
+    "strongOriginalIdLinks": 0,
+    "unlinkedOriginals": 9,
+    "noUnverifiedAudioAutolabelledAsOriginal": true,
+    "perGeneration": {
+      "1UAwmEQ77D4BmA9DttHZ": {
+        "exactTextAndVoiceHistoryMatches": 0,
+        "directProviderIdCrosslink": false,
+        "needsOriginalMp3Export": true
+      },
+      "2xy9ZLej1wPTrnvAr9p7": {
+        "exactTextAndVoiceHistoryMatches": 0,
+        "directProviderIdCrosslink": false,
+        "needsOriginalMp3Export": true
+      },
+      "AToalNGbxiRe1zfOnDG3": {
+        "exactTextAndVoiceHistoryMatches": 0,
+        "directProviderIdCrosslink": false,
+        "needsOriginalMp3Export": true
+      },
+      "DX5z8FWaCS4FDx3KrloO": {
+        "exactTextAndVoiceHistoryMatches": 0,
+        "directProviderIdCrosslink": false,
+        "needsOriginalMp3Export": true
+      },
+      "FGX65uXKWBnjULDxg3X1": {
+        "exactTextAndVoiceHistoryMatches": 0,
+        "directProviderIdCrosslink": false,
+        "needsOriginalMp3Export": true
+      },
+      "GvXeGQ9Kr1lVy7LEAv5T": {
+        "exactTextAndVoiceHistoryMatches": 0,
+        "directProviderIdCrosslink": false,
+        "needsOriginalMp3Export": true
+      },
+      "KIgCxJO3RDxhsIFJSYUB": {
+        "exactTextAndVoiceHistoryMatches": 0,
+        "directProviderIdCrosslink": false,
+        "needsOriginalMp3Export": true
+      },
+      "UUmC2fDiXaV5W1IQSumA": {
+        "exactTextAndVoiceHistoryMatches": 0,
+        "directProviderIdCrosslink": false,
+        "needsOriginalMp3Export": true
+      },
+      "aoKJuahenrKHfUE5OD9j": {
+        "exactTextAndVoiceHistoryMatches": 0,
+        "directProviderIdCrosslink": false,
+        "needsOriginalMp3Export": true
+      }
+    }
+  },
   "missingAfterAttempt": 9,
   "nextStep": "Recover signed original files through the connected ElevenLabs Flow account or authorized original MP3 export; do not resynthesize"
 }
