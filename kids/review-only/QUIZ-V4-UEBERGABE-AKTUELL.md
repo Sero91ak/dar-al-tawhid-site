@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `54f403864bc414f706597d0d6edfd6640b0ff3a8`
+- Commit beim Erstellen dieses Berichts: `57cfe9bbceb0db17f8cb9b5ac968bc99eb6aaa0d`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **276 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1044 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -105,6 +105,13 @@ Nur nach wirklicher inhaltlicher und finanzieller Freigabe neue V4-Stimmenaufnah
 Aktuelle zusätzliche Schutzregel: Der V4-Quellenprüfer muss auch nach bereits gespeicherten Teil-Batches mit 55, 45 usw. fehlenden Originalen erneut bestehen. Die kostenpflichtige Stufe berechnet dafür jedes Mal einen SHA-256-Fingerabdruck aus Originalquelle, gespeicherten MP3-Zuordnungen, vorherigen Kostenbelegen und den nächsten genauen Sprechtext-SHAs.
 Nur wenn der ausdrücklich bestätigte Batch-Fingerabdruck exakt zur neu geprüften Quelle und zum aktuellen Ledger passt, darf der Produktionscode überhaupt eine Anfrage an ElevenLabs senden. Bei Abweichung: STOP vor Provider-GET oder TTS-POST; keine stillschweigende Kreditfreigabe.
 Aktuell im Reviewprotokoll vorhandener Fingerabdruck: `94513cda9d2fe65bcf94dc7e79cbb7cfee13bd4a8f3d4af247e38b332e3a7e38`. Nach jeder MP3-Ergänzung erneut berechnen.
+
+## Sicherer echter V4-Originalabruf und Kostenschutz bei Unterbrechung
+
+Beim nächsten *ausdrücklich bezahlten* 7–10-Jahre-Originalbatch wird vor jedem ElevenLabs-POST der SHA256 des genauen gesprochenen Textes in ein Write-Ahead-Protokoll geschrieben. Ein HTTP-Fehler, Zeitablauf oder Abbruch nach einer möglicherweise abgerechneten Anfrage führt nicht zu einem automatischen zweiten Kauf. Stattdessen zuerst über Provider-Beleg bzw. echte Original-MP3-Datei abgleichen.
+Die aktuelle Sicherung verwendet `kids/data/quiz-v4-older-stage1-request-journal.json` und eine **identische Kopie** unter `requestJournal` in `kids/data/quiz-v4-older-stage1-usage.json`. Die bestehende GitHub-Actions-Backup-Regel erfasst bereits die Usage-Datei auch bei Fehlern. Wird die lokale Journaldatei vermisst, kann die Backup-Kopie vor jedem weiteren POST eine unklare Vorbelastung nachweisen.
+Der Null-Credit-Regressionscode `kids/tools/test_quiz_v4_older_stage1_exact.py` testet genau den Fall einer simulierten unklaren früheren Anfrage ohne synthetische MP3 und erwartet einen Stop mit `NEVER REBUY`. Sicherung im GitHub-Artefakt ist nicht dasselbe wie ein erfolgreich auf GitHub veröffentlichter Original-MP3-Commit: Bei Runner-Abbruch Recovery-Artefakt zuerst inspizieren und in den Reviewzweig zurückimportieren.
+Letzter offener Gratis-GET-Versuch bestätigt neun verbliebene, vorher bezahlte V4-IDs mit `flowGetHTTP=402` und `historyAudioHTTP=400`, **0 authentische neue MP3s importiert**. Der API-GET verlangt zuerst die Freigabe des Originalexports; die bisherigen Sprachcredits dürfen nicht noch einmal ausgegeben werden.
 
 ## Nächste verbindliche Schritte
 
