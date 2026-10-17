@@ -12,10 +12,17 @@ assert.equal(all.length,30,"30 Dīn cards required");
 assert.equal(new Set(all.map(x=>x.id)).size,30,"Unique IDs required");
 for(const g of cur.categories){assert.equal(g.lessons.length,5);assert.equal(g.lessons[0].id,g.id);}
 assert.equal(all.filter(l=>l.status==="existing").length,6,"Only 6 original lessons published");
-assert.equal(all.filter(l=>l.status==="planned").length,24,"24 lessons await review");
+assert.equal(all.filter(l=>l.status==="published").length,24,"24 newly sourced lessons must be published");
+assert.equal(all.filter(l=>l.status==="planned").length,0,"No Dīn lesson may remain locked");
 for(const l of all){
- for(const k of ["masterStoryText","scripts","audio","sourceRefs","sourceLinks","reviewNotes","voiceProduction"]){
-  assert.ok(!l[k],"Unapproved text or metadata in public JSON: "+l.id);
+ if(l.status==="existing"){
+  assert.ok(!l.masterStoryText&&!l.audio,"Keep original lesson references inside canonical master JSON: "+l.id);
+ }else{
+  assert.equal(l.status,"published","No unreleased Dīn lesson: "+l.id);
+  assert.ok(typeof l.masterStoryText==="string"&&l.masterStoryText.length>1600,"Missing independent master text: "+l.id);
+  assert.ok(Array.isArray(l.sourceRefs)&&l.sourceRefs.length>=3&&Array.isArray(l.sourceLinks)&&l.sourceLinks.length===l.sourceRefs.length,"Incorrect source refs: "+l.id);
+  assert.ok(l.sourceLinks.every(u=>/^https:\/\/(quran\.com|sunnah\.com)\//.test(u)),"Source outside primary collections: "+l.id);
+  assert.ok(!Object.values(l.audio||{}).some(Boolean),"No unverified master audio may be published: "+l.id);
  }
  for(const k of ["cover","hero"]){
   const url=String(l[k]||"").split("?")[0];if(!url)continue;
@@ -28,16 +35,16 @@ new vm.Script(js);new vm.Script(off);
 assert.ok(js.includes('(lesson.status==="existing"||lesson.status==="published")'),"Drafts must be inaccessible");
 assert.ok(js.includes("function openCategory(")&&js.includes("function libraryBack("),"Two-level Dīn navigation missing");
 assert.ok(css.includes('.app[data-gender="girl"]')&&css.includes(".dl-lessons-grid"),"Child palettes or cards missing");
-for(const p of ["/kids/deen-lessons.js?v=12","/kids/data/deen-curriculum-v1.json?v=2","/kids/deen-curriculum-v1.css?v=1"]){
+for(const p of ["/kids/deen-lessons.js?v=13","/kids/data/deen-curriculum-v1.json?v=3","/kids/deen-curriculum-v1.css?v=1"]){
  assert.ok(off.includes(p),"Dīn offline pack incomplete: "+p);
 }
 const shells=["kids/index.html","kids/start.html","kids/shell.html"].map(read);
 assert.ok(shells.every(s=>s===shells[0]),"KIDS shells differ");
-for(const p of ["/kids/deen-lessons.js?v=12","/kids/item-offline-v1.js?v=5","/kids/sw.js?v=1442"]){
+for(const p of ["/kids/deen-lessons.js?v=13","/kids/item-offline-v1.js?v=6","/kids/sw.js?v=1443"]){
  assert.ok(shells[0].includes(p),"Outdated KIDS shell reference: "+p);
 }
-assert.ok(sw.includes('dar-al-tawhid-kids-v1442'),"Missing new SW cache");
-assert.ok(sw.includes('/kids/data/deen-curriculum-v1.json?v=2'),"Curriculum not cached");
+assert.ok(sw.includes('dar-al-tawhid-kids-v1443'),"Missing new SW cache");
+assert.ok(sw.includes('/kids/data/deen-curriculum-v1.json?v=3'),"Curriculum not cached");
 const v=JSON.parse(read("kids/version.json"));
-assert.equal(v.visualSystem.serviceWorkerCache,"v1442","SW version metadata mismatch");
-console.log("Dīn visitor QA passed: 6 masters + 24 protected previews, profiles, 3 shells, offline and service worker");
+assert.equal(v.visualSystem.serviceWorkerCache,"v1443","SW version metadata mismatch");
+console.log("Dīn visitor QA passed: 6 original masters + 24 published and sourced readings, profiles, 3 shells, offline and service worker");
