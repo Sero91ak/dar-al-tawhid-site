@@ -81,14 +81,23 @@
    ready=true;
    if(frame)cancelAnimationFrame(frame);
    if(!manual){display=100;paint()}
-   // Underlying layout becomes visible before the covering illustration fades.
-   // Hold 100% briefly to give the child a completed loading moment.
-   document.documentElement.classList.remove("kids-test-booting");
    revealNativePoster();
-   requestAnimationFrame(function(){requestAnimationFrame(function(){
-     setTimeout(function(){if(root)root.classList.add("kids-test-boot-fade")},manual?0:250);
-   })});
-   setTimeout(function(){if(root){root.remove();root=null}},1350);
+   // The illustrated poster is not mixed with the home screen. Transition
+   // poster -> opaque branded stage -> visible already-laid-out home.
+   // This prevents two overlapping logos/wordmarks from showing together.
+   var hold=manual?0:210;
+   setTimeout(function(){
+     if(!root)return;
+     root.classList.add("kids-test-boot-bridge");
+     setTimeout(function(){
+       if(!root)return;
+       document.documentElement.classList.remove("kids-test-booting");
+       requestAnimationFrame(function(){requestAnimationFrame(function(){
+         if(root)root.classList.add("kids-test-boot-fade");
+       })});
+       setTimeout(function(){if(root){root.remove();root=null}},760);
+     },350);
+   },hold);
  }
  async function main(){
    await domReady();
