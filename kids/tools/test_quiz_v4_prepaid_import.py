@@ -31,7 +31,7 @@ def verify_real_zip_workflow_shell_syntax():
         if line.strip() and not line.startswith("          "):
             raise AssertionError("bad YAML indentation for paid ZIP restoration step")
         script.append(line[10:] if len(line)>=10 else "")
-    bash=subprocess.run(["bash","-n"],input="\\n".join(script)+"\\n",
+    bash=subprocess.run(["bash","-n"],input="\n".join(script)+"\n",
                          capture_output=True,text=True)
     assert bash.returncode==0,(
         "Broken ZIP import workflow shell syntax; paid audio restore could fail: "+
