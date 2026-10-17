@@ -212,7 +212,7 @@ async function fetchVersionBuild(base) {
   // authority is actually present in the app shell.
   for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
     const { status: shellStatus, text: shellHtml } =
-      await fetchText(`${base}/index.html?edge-width-check=v1381-${Date.now()}`);
+      await fetchText(`${base}/index.html?edge-width-check=v1383-${Date.now()}`);
     const edgeLinkOk = shellHtml.includes('id="darTestEdgeWidthV1372"') &&
       shellHtml.includes('/test/assets/test-global-edge-width-v1372.css?v=viewport-v1383');
     const { status: edgeStatus, text: edgeCss } =
