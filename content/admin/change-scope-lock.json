@@ -8251,6 +8251,19 @@
         "test/assets/frauen/frauen-authority-v1292.css"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "adult-global-visual-continuity-v1391-20261017",
+      "at": "2026-10-17T16:10:00.000Z",
+      "approvedBy": "user-explicit-adult-visual-continuity-v1391",
+      "reason": "Adult visual continuity: flat structural shells, full-bleed post and topic heroes, dark kickers on light themes.",
+      "paths": [
+        "assets/dar-adult-visual-continuity-v1391.css",
+        "index.html",
+        "test/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
     }
   ],
   "enabled": true
