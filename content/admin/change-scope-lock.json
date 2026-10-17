@@ -8062,6 +8062,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "adult-android-browser-qa-stable-concurrency-20261017",
+      "at": "2026-10-17T10:05:14.093Z",
+      "approvedBy": "user-explicit-no-stop-browser-viewport-qa-after-deploy-20261017",
+      "reason": "A concurrent deployment caused browser visual QA to be canceled mid-flight. Keep the running Android+six-size QA alive during other workflow_run events; do not change tested app behavior.",
+      "paths": [
+        ".github/workflows/dar-test-android-pwa-qa.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
