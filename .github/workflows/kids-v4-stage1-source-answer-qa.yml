@@ -41,8 +41,12 @@ jobs:
           assert data['totalQuestions']==20
           assert data['age7to8']==10 and data['age9to10']==10
           assert data['exactNewSourceTexts']==65
-          assert data['firstProposedNewV4Texts']==10
-          assert len(data['fourPossibleQuestionCompletionsAfterActualAudioAndQA'])==4
+          next_batch=json.loads(Path('kids/review-only/quiz-v4-older-stage1-next-recording-batch.json').read_text())
+          assert data['previouslyRecordedFirstStageOriginals']+data['remainingNewSourceTexts']==65
+          assert data['remainingNewSourceTexts']==next_batch['remainingFirstStageOriginals']
+          assert data['firstProposedNewV4Texts']==len(next_batch['nextExactTextSha256'])<=10
+          assert data['nextProposedV4OriginalCount']==len(next_batch['nextExactTextSha256'])
+          assert data['fourPossibleQuestionCompletionsAfterActualAudioAndQA']==sorted(next_batch['questionsThatCouldGainCompleteV4AudioAfterNextRun'])
           assert not data['humanSourceApprovalGranted']
           assert not data['humanPronunciationApprovalGranted']
           assert not data['publicReleaseAllowed']
