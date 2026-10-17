@@ -1,0 +1,80 @@
+name: KIDS V4 First 150 Offline MP3 Assembly (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/quiz_v4_first150_offline_join.py'
+      - '.github/workflows/kids-v4-first150-offline-compose.yml'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+      - 'kids/assets/kids-quiz-audio/v4-curated450-review/**'
+      - 'kids/assets/kids-quiz-audio/v4-paid-flow-original-review/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-first150-composition-once
+  cancel-in-progress: false
+
+jobs:
+  review-composition:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - name: Checkout KIDS V4 review branch only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Install local offline MP3 validation and audio join tools
+        run: |
+          if ! command -v ffmpeg || ! command -v ffprobe; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          command -v ffmpeg
+          command -v ffprobe
+      - name: Build safe listening previews for all eligible first 150 questions
+        run: |
+          python3 -m py_compile kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py
+      - name: Commit review-only MP3 compositions and paid Flow missing report
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-review-audio-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/data/quiz-v4-first150-composed-preview.json
+          git add kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          if git diff --cached --quiet; then
+            echo "Offline review preview already current"
+            exit 0
+          fi
+          git commit -m "audio(kids): review-only first150 original V4 composed previews and missing paid Flow report"
+          for n in 1 2 3; do
+            if git push origin HEAD:"$branch"; then
+              echo "KIDS first150 composited audio saved in GitHub review."
+              exit 0
+            fi
+            git fetch origin "$branch"
+            if ! git rebase FETCH_HEAD; then
+              echo "::error::Original review assets saved as workflow artifact; do not re-generate paid audio."
+              exit 1
+            fi
+          done
+          exit 1
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-first150-composited-listening-previews-originals
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-first150-composed-review/
+            kids/data/quiz-v4-first150-composed-preview.json
+            kids/data/quiz-v4-first150-audio-status.json

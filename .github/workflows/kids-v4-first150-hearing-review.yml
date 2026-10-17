@@ -1,0 +1,74 @@
+name: KIDS V4 First150 Offline Human Listening Desk (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/build_quiz_v4_first150_hearing_review.py'
+      - '.github/workflows/kids-v4-first150-hearing-review.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-first150-v4-human-review-artifact
+  cancel-in-progress: false
+
+jobs:
+  build-offline-listening-review:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Fetch KIDS review branch only, never public main
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Build private hearing checklist with every original MP3 verified
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/build_quiz_v4_first150_hearing_review.py
+          python3 kids/tools/build_quiz_v4_first150_hearing_review.py
+          python3 - <<'PY'
+          import json, pathlib, zipfile
+          root=pathlib.Path("kids/review-only")
+          bundle=root/"quiz-v4-first150-hearing-bundle.zip"
+          with zipfile.ZipFile(bundle) as z:
+              files=z.namelist()
+              actual=json.load(open("kids/data/quiz-v4-first150-composed-preview.json"))["entries"]
+              assert len(files)==len(actual)+1, (len(files), len(actual))
+              assert files[0]=="kids/review-only/quiz-v4-first150-hearing-review.html"
+              assert all(p.endswith(".mp3") for p in files[1:])
+              assert z.testzip() is None
+              html=z.read(files[0]).decode("utf-8")
+              assert "TAWḤĪD KIDS" in html
+              assert "approvedAudioShaByTextSha" in html
+              assert "reportedIssuesByTextSha" in html
+              assert 'id="reviewer"' in html
+              assert "selfAttestedHumanHearing" in html
+              assert 'id="review-data"' in html
+              assert "https://api.elevenlabs.io" not in html
+          print("PASS: offline bundle matches all current original MP3 files + one hearing page; 0 TTS credits")
+          PY
+      - name: Validate actual browser JavaScript syntax of private hearing desk
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib, re, zipfile
+          archive=pathlib.Path("kids/review-only/quiz-v4-first150-hearing-bundle.zip")
+          with zipfile.ZipFile(archive) as z:
+              html=z.read("kids/review-only/quiz-v4-first150-hearing-review.html").decode("utf-8")
+          scripts=re.findall(r"<script(?![^>]*application/json)[^>]*>(.*?)</script>",html,re.S)
+          assert len(scripts)==1, f"Expected one private page controller, found {len(scripts)}"
+          pathlib.Path("/tmp/tawhid-kids-v4-hearing-review-check.js").write_text(scripts[0],encoding="utf-8")
+          PY
+          node --check /tmp/tawhid-kids-v4-hearing-review-check.js
+          echo "PASS: browser controller JavaScript parses; no runtime or paid synthesis called"
+      - name: Keep standalone offline hearing package for manual export
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-first150-human-hearing-offline-review
+          retention-days: 90
+          if-no-files-found: warn
+          path: kids/review-only/quiz-v4-first150-hearing-bundle.zip

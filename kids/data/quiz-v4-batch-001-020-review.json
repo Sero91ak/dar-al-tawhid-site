@@ -1,0 +1,1241 @@
+{
+  "schemaVersion": 1,
+  "batchId": "KIDS_V4_001_020",
+  "createdAt": "2026-10-14",
+  "purpose": "REVIEW_ONLY_NO_TTS_SPEND",
+  "sourceFile": "kids/data/quiz-kids.json",
+  "sourceBlobSha": "cbadbb96f9a4b9295be8ac8fb66e1b056d2aaf40",
+  "totalCatalog": 900,
+  "firstQuestionId": "kids-quiz-001",
+  "lastQuestionId": "kids-quiz-020",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "questionCount": 20,
+  "paidSynthesisAllowed": false,
+  "releaseStatus": "recordings-generated-needs-audio-import-and-human-auditory-review",
+  "twoQuestionManualAudioGuard": true,
+  "existingPaidRecordings": {
+    "kids-quiz-002": [
+      "FGX65uXKWBnjULDxg3X1",
+      "KIgCxJO3RDxhsIFJSYUB",
+      "UUmC2fDiXaV5W1IQSumA"
+    ],
+    "kids-quiz-020": [
+      "Taap2v21QgXOjoDENjEv"
+    ]
+  },
+  "qaSummary": {
+    "catalogQuestionsVerified": 20,
+    "correctAnswersVerified": 20,
+    "sourceReferencesPresent": 20,
+    "audioRenderedForAllQuestionStates": 20,
+    "humanAudioApproved": 0,
+    "audioOriginalGenerationCount": 56,
+    "audioHumanApproved": 0,
+    "audioFilesImportedToGitHub": 0,
+    "playableMergedQuestions": 0
+  },
+  "items": [
+    {
+      "questionId": "kids-quiz-001",
+      "number": 1,
+      "ageBand": "4-6",
+      "category": "Tawḥīd",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Hör einmal aufmerksam zu. Wen beten wir an? Antwort 1: Allah allein. Antwort 2: Menschen. Welche Antwort passt deiner Meinung nach?",
+      "correctAudioText": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
+      "retryAudioText": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
+      "explanationAudioText": "Das merken wir uns: Wir dienen Allah allein.",
+      "originalQuestion": "Wen beten wir an?",
+      "originalExplanation": "Wir dienen Allah allein.",
+      "source": "Qurʾān 1:5",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "four-v4-original-generations-completed-pending-human-review",
+      "flowId": "3opB2L8NB0ChRtz3I28a",
+      "recordings": [
+        {
+          "part": "question",
+          "generationId": "ki4e57kvaTCDQxzLio3o",
+          "modelId": "eleven_v4",
+          "credits": 126.9476563876652,
+          "durationSeconds": 10.4
+        },
+        {
+          "part": "correct",
+          "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+          "modelId": "eleven_v4",
+          "credits": 66.86555947136564,
+          "durationSeconds": 5.68
+        },
+        {
+          "part": "retry",
+          "generationId": "DX5z8FWaCS4FDx3KrloO",
+          "modelId": "eleven_v4",
+          "credits": 75.58715418502203,
+          "durationSeconds": 5.44
+        },
+        {
+          "part": "explanation",
+          "generationId": "AToalNGbxiRe1zfOnDG3",
+          "modelId": "eleven_v4",
+          "credits": 42.63890748898678,
+          "durationSeconds": 3.44
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-002",
+      "number": 2,
+      "ageBand": "4-6",
+      "category": "Tawḥīd",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Schau, was du schon alles weißt. Ist Allah Einer? Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+      "correctAudioText": "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Du lernst immer mehr!",
+      "retryAudioText": "Du lernst mit jedem Versuch. Hör noch einmal genau hin!",
+      "explanationAudioText": "Das merken wir uns: Sūrat al-Iḫlāṣ lehrt: Allah ist Einer.",
+      "originalQuestion": "Ist Allah Einer?",
+      "originalExplanation": "Sūrat al-Iḫlāṣ lehrt: Allah ist Einer.",
+      "source": "Qurʾān 112:1",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "six-v4-segments-available-not-merged-not-released",
+      "recordings": [
+        {
+          "part": "question-opening",
+          "generationId": "FGX65uXKWBnjULDxg3X1",
+          "modelId": "eleven_v4",
+          "creditsPreviouslyPaid": 31.010114537444938,
+          "durationSeconds": 2.24
+        },
+        {
+          "part": "question-core",
+          "generationId": "KIgCxJO3RDxhsIFJSYUB",
+          "modelId": "eleven_v4",
+          "creditsPreviouslyPaid": 15.505057268722469,
+          "durationSeconds": 1.6
+        },
+        {
+          "part": "question-guidance",
+          "generationId": "UUmC2fDiXaV5W1IQSumA",
+          "modelId": "eleven_v4",
+          "creditsPreviouslyPaid": 75.58715418502203,
+          "durationSeconds": 5.68
+        },
+        {
+          "part": "correct",
+          "generationId": "aoKJuahenrKHfUE5OD9j",
+          "modelId": "eleven_v4",
+          "credits": 65.89649339207048,
+          "durationSeconds": 5.6
+        },
+        {
+          "part": "retry",
+          "generationId": "2xy9ZLej1wPTrnvAr9p7",
+          "modelId": "eleven_v4",
+          "credits": 53.29863436123348,
+          "durationSeconds": 3.92
+        },
+        {
+          "part": "explanation",
+          "generationId": "1UAwmEQ77D4BmA9DttHZ",
+          "modelId": "eleven_v4",
+          "credits": 56.20583259911895,
+          "durationSeconds": 4.96
+        }
+      ],
+      "flowIds": [
+        "aYXuImf6EV3mWygxuUDy",
+        "SajNftKxOfwSjirT92tM",
+        "nyyQDHXF4GM0op4cBEKL",
+        "90C70kGyYRcw9TFEYJTJ"
+      ]
+    },
+    {
+      "questionId": "kids-quiz-003",
+      "number": 3,
+      "ageBand": "4-6",
+      "category": "Qurʾān",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Du darfst mitdenken. Bewahrt Allah den Qurʾān? Hör gut zu. Was denkst du? Wähle Ja für richtig oder Nein für nicht richtig.",
+      "correctAudioText": "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Das hast du gut erkannt!",
+      "retryAudioText": "Das war noch nicht richtig. Nimm dir Zeit und versuche es wieder!",
+      "explanationAudioText": "Das merken wir uns: Allah hat die Bewahrung des Qurʾān versprochen.",
+      "originalQuestion": "Bewahrt Allah den Qurʾān?",
+      "originalExplanation": "Allah hat die Bewahrung des Qurʾān versprochen.",
+      "source": "Qurʾān 15:9",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "generated-pending-asset-import-and-human-listening",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "L8D7LLsDUvHmN7RGPBsF",
+          "status": "completed",
+          "generationId": "QdjkO1mvizCsjpZ4GVZH",
+          "credits": 119.19512775330395,
+          "durationSeconds": 8.88
+        },
+        {
+          "part": "correct",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "1Ox6R4ev0Ne7tkLx1kEZ",
+          "status": "completed",
+          "generationId": "oTZw9J8BXouAWeocufYC",
+          "credits": 63.95836123348018,
+          "durationSeconds": 4.8
+        },
+        {
+          "part": "retry",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "zUmVnKL6l53qYYcOtPrC",
+          "status": "completed",
+          "generationId": "zz0jZ6ybshrDKTqeYHh7",
+          "credits": 62.98929515418502,
+          "durationSeconds": 4.08
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "4CoAv0D6Qvvv3sdJQH4g",
+          "status": "completed",
+          "generationId": "dUcKqsLbtPgtK0Oebtjx",
+          "credits": 64.92742731277534,
+          "durationSeconds": 4.08
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-004",
+      "number": 4,
+      "ageBand": "4-6",
+      "category": "Qurʾān",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Komm, wir probieren eine Wissensfrage. In welchem Monat wurde der Qurʾān herabgesandt? Antwort 1: Ramaḍān. Antwort 2: Muḥarram. Welche Antwort passt deiner Meinung nach?",
+      "correctAudioText": "Mā schāʾ Allāh! Deine Antwort ist richtig. Schön, wie du dazulernst!",
+      "retryAudioText": "Noch einmal versuchen, in schāʾ Allāh. Du darfst dir Zeit lassen!",
+      "explanationAudioText": "Das merken wir uns: Der Qurʾān wurde im Monat Ramaḍān herabgesandt.",
+      "originalQuestion": "In welchem Monat wurde der Qurʾān herabgesandt?",
+      "originalExplanation": "Der Qurʾān wurde im Monat Ramaḍān herabgesandt.",
+      "source": "Qurʾān 2:185",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "generated-pending-asset-import-and-human-listening",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "6KX9YWZujhQZgLeU7kQh",
+          "status": "completed",
+          "generationId": "TWV0NVT7wCnPytDAd1DZ",
+          "credits": 163.77216740088107,
+          "durationSeconds": 12
+        },
+        {
+          "part": "correct",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "XkiESKsvH4z92IKJLzIO",
+          "status": "completed",
+          "generationId": "fZ1VIkCQEsdIxFQ2hwjF",
+          "credits": 65.89649339207048,
+          "durationSeconds": 5.12
+        },
+        {
+          "part": "retry",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "91omlUwyTQSnxBDmRCCE",
+          "status": "completed",
+          "generationId": "ddgJqQDhBo32kbRKEMe2",
+          "credits": 62.98929515418502,
+          "durationSeconds": 4.64
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "flowId": "YxIsLipxIKTZthjZCKUo",
+          "sessionId": "ELoCsR1DUDRug0DcBcKn",
+          "status": "completed",
+          "generationId": "QMPZdFK2UcLnTQzAeNmI",
+          "credits": 64.92742731277534,
+          "durationSeconds": 4.48
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-005",
+      "number": 5,
+      "ageBand": "4-6",
+      "category": "Qurʾān",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Hör einmal aufmerksam zu. Vor dem Qurʾān-Lesen suchen wir Schutz bei wem? Antwort 1: Bei Allah. Antwort 2: Bei Shayṭān. Welche Antwort passt deiner Meinung nach?",
+      "correctAudioText": "Mā schāʾ Allāh! Das heißt: Was Allah gewollt hat. Sehr gut gemacht!",
+      "retryAudioText": "Noch nicht ganz. Bismi-llāh bedeutet: Im Namen Allahs. Versuch es noch einmal!",
+      "explanationAudioText": "Das merken wir uns: Vor der Rezitation suchen wir bei Allah Zuflucht vor dem verfluchten Shayṭān.",
+      "originalQuestion": "Vor dem Qurʾān-Lesen suchen wir Schutz bei wem?",
+      "originalExplanation": "Vor der Rezitation suchen wir bei Allah Zuflucht vor dem verfluchten Shayṭān.",
+      "source": "Qurʾān 16:98",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "s6bYuuL7PBYQHFFIPvas",
+          "sessionId": "ifCRUXRIx832RwvvuiDo",
+          "status": "completed",
+          "generationId": "gvvqrpjWHAaExFgBVxn8",
+          "credits": 156.01963876651982,
+          "durationSeconds": 11.84
+        },
+        {
+          "part": "correct",
+          "modelId": "eleven_v4",
+          "flowId": "s6bYuuL7PBYQHFFIPvas",
+          "sessionId": "TCQuui6c69TSDhf45rbn",
+          "status": "completed",
+          "generationId": "WxoYkACzIX3S8abYxVUj",
+          "credits": 64.92742731277534,
+          "durationSeconds": 5.6
+        },
+        {
+          "part": "retry",
+          "modelId": "eleven_v4",
+          "flowId": "s6bYuuL7PBYQHFFIPvas",
+          "sessionId": "EzEt9TkdVFyPPuNxqsvp",
+          "status": "completed",
+          "generationId": "gDb5M7BuACNw47ZwudZ3",
+          "credits": 75.58715418502203,
+          "durationSeconds": 5.84
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "s6bYuuL7PBYQHFFIPvas",
+          "sessionId": "hb6lZgMk8If0Q67Kmvvp",
+          "status": "completed",
+          "generationId": "9ueos9DiBfnV0vn9lRNg",
+          "credits": 93.99940969162996,
+          "durationSeconds": 6.48
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-006",
+      "number": 6,
+      "ageBand": "4-6",
+      "category": "Īmān",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Schau, was du schon alles weißt. Gehört der Glaube an die Engel zum Īmān? Überlege kurz. Ist das richtig? Dann tippe auf Ja. Wenn nicht, auf Nein.",
+      "correctAudioText": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
+      "retryAudioText": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
+      "explanationAudioText": "Das merken wir uns: Zum Īmān gehört der Glaube an Allahs Engel.",
+      "originalQuestion": "Gehört der Glaube an die Engel zum Īmān?",
+      "originalExplanation": "Zum Īmān gehört der Glaube an Allahs Engel.",
+      "source": "Ṣaḥīḥ Muslim 8",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "s6bYuuL7PBYQHFFIPvas",
+          "sessionId": "KSjjFTrAck4b4qWSDdQj",
+          "status": "completed",
+          "generationId": "cqo0lP0WnVegMrRV7v2R",
+          "credits": 141.4836475770925,
+          "durationSeconds": 10.32
+        },
+        {
+          "part": "correct",
+          "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "DX5z8FWaCS4FDx3KrloO",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "s6bYuuL7PBYQHFFIPvas",
+          "sessionId": "PFMVrbhCB9CHZ8HjzPJy",
+          "status": "completed",
+          "generationId": "H5QwmSxLr7ahVkERWoN2",
+          "credits": 61.051162995594716,
+          "durationSeconds": 4.4
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-007",
+      "number": 7,
+      "ageBand": "4-6",
+      "category": "Sunnah",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Du darfst mitdenken. Wie heißt unser Prophet? Antwort 1: Muḥammad ﷺ. Antwort 2: Mūsā عليه السلام. Welche Antwort passt deiner Meinung nach?",
+      "correctAudioText": "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Du lernst immer mehr!",
+      "retryAudioText": "Du lernst mit jedem Versuch. Hör noch einmal genau hin!",
+      "explanationAudioText": "Das merken wir uns: Muḥammad ﷺ ist Allahs Gesandter und der letzte Prophet.",
+      "originalQuestion": "Wie heißt unser Prophet?",
+      "originalExplanation": "Muḥammad ﷺ ist Allahs Gesandter und der letzte Prophet.",
+      "source": "Qurʾān 33:40",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "kSPIA3o52jTsdHAONnga",
+          "sessionId": "he15KuPBs5Qp9H1foH8Z",
+          "status": "completed",
+          "generationId": "YAslUEbjd77bp027Uo1o",
+          "credits": 134.70018502202646,
+          "durationSeconds": 12.24
+        },
+        {
+          "part": "correct",
+          "generationId": "aoKJuahenrKHfUE5OD9j",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "2xy9ZLej1wPTrnvAr9p7",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "kSPIA3o52jTsdHAONnga",
+          "sessionId": "gt3yprxJlPV6BvZqtiow",
+          "status": "completed",
+          "generationId": "I8esecexVR1VUmiiStEe",
+          "credits": 72.67995594713656,
+          "durationSeconds": 6.8
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-008",
+      "number": 8,
+      "ageBand": "4-6",
+      "category": "Sunnah",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Komm, wir probieren eine Wissensfrage. Sollen wir dem Gesandten ﷺ folgen? Hör gut zu. Was denkst du? Wähle Ja für richtig oder Nein für nicht richtig.",
+      "correctAudioText": "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Das hast du gut erkannt!",
+      "retryAudioText": "Das war noch nicht richtig. Nimm dir Zeit und versuche es wieder!",
+      "explanationAudioText": "Das merken wir uns: Allah befiehlt, dem Gesandten ﷺ zu gehorchen.",
+      "originalQuestion": "Sollen wir dem Gesandten ﷺ folgen?",
+      "originalExplanation": "Allah befiehlt, dem Gesandten ﷺ zu gehorchen.",
+      "source": "Qurʾān 4:59",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "kSPIA3o52jTsdHAONnga",
+          "sessionId": "RvNq4sTgYlWSD94dMy1Z",
+          "status": "completed",
+          "generationId": "clyVrISrx5ErjuiG7NFe",
+          "credits": 145.35991189427313,
+          "durationSeconds": 11.28
+        },
+        {
+          "part": "correct",
+          "generationId": "oTZw9J8BXouAWeocufYC",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "zz0jZ6ybshrDKTqeYHh7",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "kSPIA3o52jTsdHAONnga",
+          "sessionId": "m97d2aPecKZGGr0ekaBe",
+          "status": "completed",
+          "generationId": "dJgyn0ueCkR91dnd7cDS",
+          "credits": 62.98929515418502,
+          "durationSeconds": 5.92
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-009",
+      "number": 9,
+      "ageBand": "4-6",
+      "category": "Adab",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Hör einmal aufmerksam zu. Sollen wir gute Worte sprechen? Jetzt bist du dran. Wenn es stimmt, wähle Ja. Wenn es nicht stimmt, Nein.",
+      "correctAudioText": "Mā schāʾ Allāh! Deine Antwort ist richtig. Schön, wie du dazulernst!",
+      "retryAudioText": "Noch einmal versuchen, in schāʾ Allāh. Du darfst dir Zeit lassen!",
+      "explanationAudioText": "Das merken wir uns: Allah lehrt uns, zu den Menschen gute Worte zu sprechen.",
+      "originalQuestion": "Sollen wir gute Worte sprechen?",
+      "originalExplanation": "Allah lehrt uns, zu den Menschen gute Worte zu sprechen.",
+      "source": "Qurʾān 2:83",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "Ry0G0TTcsD3ol3EQyzYT",
+          "sessionId": "4sck2m7FR12tgKQjU05W",
+          "status": "completed",
+          "generationId": "J10ZSClRpcQ6InUW8BY3",
+          "credits": 126.9476563876652,
+          "durationSeconds": 9.36
+        },
+        {
+          "part": "correct",
+          "generationId": "fZ1VIkCQEsdIxFQ2hwjF",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "ddgJqQDhBo32kbRKEMe2",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "Ry0G0TTcsD3ol3EQyzYT",
+          "sessionId": "KTRvdAdLgZzZPp5whHoH",
+          "status": "completed",
+          "generationId": "aLorgiuSCXCfhUqt5dNf",
+          "credits": 73.64902202643172,
+          "durationSeconds": 5.04
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-010",
+      "number": 10,
+      "ageBand": "4-6",
+      "category": "Adab",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Schau, was du schon alles weißt. Dürfen wir zu unseren Eltern unfreundlich sein? Was meinst du? Wenn du glaubst, dass es stimmt, wähle Ja. Wenn nicht, wähle Nein.",
+      "correctAudioText": "Mā schāʾ Allāh! Das heißt: Was Allah gewollt hat. Sehr gut gemacht!",
+      "retryAudioText": "Noch nicht ganz. Bismi-llāh bedeutet: Im Namen Allahs. Versuch es noch einmal!",
+      "explanationAudioText": "Das merken wir uns: Allah verbietet sogar ein verächtliches Wort gegenüber den Eltern.",
+      "originalQuestion": "Dürfen wir zu unseren Eltern unfreundlich sein?",
+      "originalExplanation": "Allah verbietet sogar ein verächtliches Wort gegenüber den Eltern.",
+      "source": "Qurʾān 17:23",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "Ry0G0TTcsD3ol3EQyzYT",
+          "sessionId": "48Ym51iG3udtZILNKQsy",
+          "status": "completed",
+          "generationId": "Vy04Al9JHiGHpCxJ71Tw",
+          "credits": 156.988704845815,
+          "durationSeconds": 10.56
+        },
+        {
+          "part": "correct",
+          "generationId": "WxoYkACzIX3S8abYxVUj",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "gDb5M7BuACNw47ZwudZ3",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "Ry0G0TTcsD3ol3EQyzYT",
+          "sessionId": "mcpNp9vyLGxRSBbLMGF5",
+          "status": "completed",
+          "generationId": "yMPtDThKOpR6IKPHbcj1",
+          "credits": 83.33968281938324,
+          "durationSeconds": 5.36
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-011",
+      "number": 11,
+      "ageBand": "4-6",
+      "category": "Adab",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Du darfst mitdenken. Wenn uns jemand mit Salām grüßt, sollen wir antworten? Überlege kurz. Ist das richtig? Dann tippe auf Ja. Wenn nicht, auf Nein.",
+      "correctAudioText": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
+      "retryAudioText": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
+      "explanationAudioText": "Das merken wir uns: Ein Gruß wird gleich gut oder besser erwidert.",
+      "originalQuestion": "Wenn uns jemand mit Salām grüßt, sollen wir antworten?",
+      "originalExplanation": "Ein Gruß wird gleich gut oder besser erwidert.",
+      "source": "Qurʾān 4:86",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "TOmzCA1rpf6IoZlTeqVP",
+          "sessionId": "13UoSI47n8ZSQPnuvtAm",
+          "status": "completed",
+          "generationId": "e7lTv7dMahCs1GtCpCI5",
+          "credits": 143.4217797356828,
+          "durationSeconds": 10.48
+        },
+        {
+          "part": "correct",
+          "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "DX5z8FWaCS4FDx3KrloO",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "TOmzCA1rpf6IoZlTeqVP",
+          "sessionId": "gVYjCW8lFVIB4fQ5uXLN",
+          "status": "completed",
+          "generationId": "1UyvifNP12RBOeZ0NWnN",
+          "credits": 63.95836123348018,
+          "durationSeconds": 4.48
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-012",
+      "number": 12,
+      "ageBand": "4-6",
+      "category": "Aḫlāq",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Komm, wir probieren eine Wissensfrage. Dürfen wir andere Kinder auslachen und verspotten? Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+      "correctAudioText": "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Du lernst immer mehr!",
+      "retryAudioText": "Du lernst mit jedem Versuch. Hör noch einmal genau hin!",
+      "explanationAudioText": "Das merken wir uns: Allah verbietet, andere Menschen zu verspotten.",
+      "originalQuestion": "Dürfen wir andere Kinder auslachen und verspotten?",
+      "originalExplanation": "Allah verbietet, andere Menschen zu verspotten.",
+      "source": "Qurʾān 49:11",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "TOmzCA1rpf6IoZlTeqVP",
+          "sessionId": "slkIO4D3KJcHCCOKBhSc",
+          "status": "completed",
+          "generationId": "kEEjOsweh2aEq9h2i4hN",
+          "credits": 162.8031013215859,
+          "durationSeconds": 10.72
+        },
+        {
+          "part": "correct",
+          "generationId": "aoKJuahenrKHfUE5OD9j",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "2xy9ZLej1wPTrnvAr9p7",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "TOmzCA1rpf6IoZlTeqVP",
+          "sessionId": "4xFk1er3do5TpINioFfz",
+          "status": "completed",
+          "generationId": "heZyGLFXcuaMa8GMuj2W",
+          "credits": 64.92742731277534,
+          "durationSeconds": 4.4
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-013",
+      "number": 13,
+      "ageBand": "4-6",
+      "category": "Adab",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Hör einmal aufmerksam zu. Geben wir geliehene Sachen zurück? Hör gut zu. Was denkst du? Wähle Ja für richtig oder Nein für nicht richtig.",
+      "correctAudioText": "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Das hast du gut erkannt!",
+      "retryAudioText": "Das war noch nicht richtig. Nimm dir Zeit und versuche es wieder!",
+      "explanationAudioText": "Das merken wir uns: Allah befiehlt, anvertraute Dinge den Berechtigten zurückzugeben.",
+      "originalQuestion": "Geben wir geliehene Sachen zurück?",
+      "originalExplanation": "Allah befiehlt, anvertraute Dinge den Berechtigten zurückzugeben.",
+      "source": "Qurʾān 4:58",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "flowId": "aRb3B3jCCh3bnMMqrO6e",
+          "sessionId": "9p00SoBK4nMzAa7jBV78",
+          "modelId": "eleven_v4",
+          "status": "completed",
+          "generationId": "63Jjw1si4tLeYyDKjw5V",
+          "credits": 132.76205286343614,
+          "durationSeconds": 9.76
+        },
+        {
+          "part": "correct",
+          "generationId": "oTZw9J8BXouAWeocufYC",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "zz0jZ6ybshrDKTqeYHh7",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "flowId": "aRb3B3jCCh3bnMMqrO6e",
+          "sessionId": "9bX7v6RggPuKbrLHfNlI",
+          "modelId": "eleven_v4",
+          "status": "completed",
+          "generationId": "hM2VfSWtDJtFuxhd85nm",
+          "credits": 82.37061674008811,
+          "durationSeconds": 5.52
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-014",
+      "number": 14,
+      "ageBand": "4-6",
+      "category": "Aḫlāq",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Schau, was du schon alles weißt. Ist Verzeihen etwas Gutes? Jetzt bist du dran. Wenn es stimmt, wähle Ja. Wenn es nicht stimmt, Nein.",
+      "correctAudioText": "Mā schāʾ Allāh! Deine Antwort ist richtig. Schön, wie du dazulernst!",
+      "retryAudioText": "Noch einmal versuchen, in schāʾ Allāh. Du darfst dir Zeit lassen!",
+      "explanationAudioText": "Das merken wir uns: Allah lobt diejenigen, die ihren Zorn zurückhalten und verzeihen.",
+      "originalQuestion": "Ist Verzeihen etwas Gutes?",
+      "originalExplanation": "Allah lobt diejenigen, die ihren Zorn zurückhalten und verzeihen.",
+      "source": "Qurʾān 3:134",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "flowId": "aRb3B3jCCh3bnMMqrO6e",
+          "sessionId": "CFcfJFKU2YaX4ui790xN",
+          "modelId": "eleven_v4",
+          "status": "completed",
+          "generationId": "vq2nTmmLnI3nHzWDL5sC",
+          "credits": 128.88578854625553,
+          "durationSeconds": 9.6
+        },
+        {
+          "part": "correct",
+          "generationId": "fZ1VIkCQEsdIxFQ2hwjF",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "ddgJqQDhBo32kbRKEMe2",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "flowId": "aRb3B3jCCh3bnMMqrO6e",
+          "sessionId": "m3J88jgWNxHkPv3UbpO8",
+          "modelId": "eleven_v4",
+          "status": "completed",
+          "generationId": "40yTB3kLdHUrSSgwuUDJ",
+          "credits": 82.37061674008811,
+          "durationSeconds": 5.52
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-015",
+      "number": 15,
+      "ageBand": "4-6",
+      "category": "Iḥsān",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Du darfst mitdenken. Sieht Allah, was wir tun? Was meinst du? Wenn du glaubst, dass es stimmt, wähle Ja. Wenn nicht, wähle Nein.",
+      "correctAudioText": "Mā schāʾ Allāh! Das heißt: Was Allah gewollt hat. Sehr gut gemacht!",
+      "retryAudioText": "Noch nicht ganz. Bismi-llāh bedeutet: Im Namen Allahs. Versuch es noch einmal!",
+      "explanationAudioText": "Das merken wir uns: Im Ḥadīṯ über Iḥsān lehrte der Prophet ﷺ, dass Allah uns sieht.",
+      "originalQuestion": "Sieht Allah, was wir tun?",
+      "originalExplanation": "Im Ḥadīṯ über Iḥsān lehrte der Prophet ﷺ, dass Allah uns sieht.",
+      "source": "Ṣaḥīḥ Muslim 8",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "flowId": "WWmJhIgAUW8GmKUaC4jZ",
+          "sessionId": "RIkSBpzqnk64cr9A7shT",
+          "modelId": "eleven_v4",
+          "status": "completed",
+          "generationId": "UmbT8oYPd2lm8zJfZMi3",
+          "credits": 124.04045814977975,
+          "durationSeconds": 8.4
+        },
+        {
+          "part": "correct",
+          "generationId": "WxoYkACzIX3S8abYxVUj",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "gDb5M7BuACNw47ZwudZ3",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "flowId": "WWmJhIgAUW8GmKUaC4jZ",
+          "sessionId": "ltH1oGuUpQWffuNdEz3S",
+          "modelId": "eleven_v4",
+          "status": "completed",
+          "generationId": "1gvYKSQC4WSufCgTGJJa",
+          "credits": 80.4324845814978,
+          "durationSeconds": 7.52
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-016",
+      "number": 16,
+      "ageBand": "4-6",
+      "category": "Ṣalāh",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Komm, wir probieren eine Wissensfrage. Sollen wir auf unsere Gebete achten? Überlege kurz. Ist das richtig? Dann tippe auf Ja. Wenn nicht, auf Nein.",
+      "correctAudioText": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
+      "retryAudioText": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
+      "explanationAudioText": "Das merken wir uns: Allah befiehlt, die Gebete zu bewahren.",
+      "originalQuestion": "Sollen wir auf unsere Gebete achten?",
+      "originalExplanation": "Allah befiehlt, die Gebete zu bewahren.",
+      "source": "Qurʾān 2:238",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "flowId": "WWmJhIgAUW8GmKUaC4jZ",
+          "sessionId": "YtfzQZHV3hHiASdmZXGa",
+          "modelId": "eleven_v4",
+          "status": "completed",
+          "generationId": "h3Bh3ejOIBOt4vUVlT8r",
+          "credits": 143.4217797356828,
+          "durationSeconds": 10.08
+        },
+        {
+          "part": "correct",
+          "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "DX5z8FWaCS4FDx3KrloO",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "flowId": "WWmJhIgAUW8GmKUaC4jZ",
+          "sessionId": "BAHQKLzol1nknSBtmo2u",
+          "modelId": "eleven_v4",
+          "status": "completed",
+          "generationId": "86T6VNKlu9GVu80Q0WI5",
+          "credits": 57.174898678414095,
+          "durationSeconds": 4
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-017",
+      "number": 17,
+      "ageBand": "4-6",
+      "category": "Adab",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Hör einmal aufmerksam zu. Sollen wir beim Essen verschwenderisch sein? Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+      "correctAudioText": "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Du lernst immer mehr!",
+      "retryAudioText": "Du lernst mit jedem Versuch. Hör noch einmal genau hin!",
+      "explanationAudioText": "Das merken wir uns: Allah erlaubt Essen und Trinken, aber keine Maßlosigkeit.",
+      "originalQuestion": "Sollen wir beim Essen verschwenderisch sein?",
+      "originalExplanation": "Allah erlaubt Essen und Trinken, aber keine Maßlosigkeit.",
+      "source": "Qurʾān 7:31",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "flowId": "STGZWLMW9lDACqvI8OBg",
+          "sessionId": "fzOFKB9WILMoNzF1NIZ0",
+          "status": "completed",
+          "modelId": "eleven_v4",
+          "generationId": "LMzdpuJ5eW3SkiL9FK54",
+          "credits": 144.39084581497798,
+          "durationSeconds": 10.08
+        },
+        {
+          "part": "correct",
+          "generationId": "aoKJuahenrKHfUE5OD9j",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "2xy9ZLej1wPTrnvAr9p7",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "flowId": "STGZWLMW9lDACqvI8OBg",
+          "sessionId": "mmIVK6WRfdPT6xnbeAG6",
+          "status": "completed",
+          "modelId": "eleven_v4",
+          "generationId": "klBmSK0vYZFnsmjDCUzQ",
+          "credits": 74.61808810572687,
+          "durationSeconds": 5.44
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-018",
+      "number": 18,
+      "ageBand": "4-6",
+      "category": "Wissen",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Schau, was du schon alles weißt. Dürfen wir Allah um mehr Wissen bitten? Hör gut zu. Was denkst du? Wähle Ja für richtig oder Nein für nicht richtig.",
+      "correctAudioText": "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Das hast du gut erkannt!",
+      "retryAudioText": "Das war noch nicht richtig. Nimm dir Zeit und versuche es wieder!",
+      "explanationAudioText": "Das merken wir uns: Allah lehrt die Bitte: Mein Herr, mehre mich an Wissen.",
+      "originalQuestion": "Dürfen wir Allah um mehr Wissen bitten?",
+      "originalExplanation": "Allah lehrt die Bitte: Mein Herr, mehre mich an Wissen.",
+      "source": "Qurʾān 20:114",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "flowId": "STGZWLMW9lDACqvI8OBg",
+          "sessionId": "ELUSiveEWLtSxP2ltj5G",
+          "status": "completed",
+          "modelId": "eleven_v4",
+          "generationId": "qRVJETdkA6tqyNfSm65J",
+          "credits": 144.39084581497798,
+          "durationSeconds": 10.32
+        },
+        {
+          "part": "correct",
+          "generationId": "oTZw9J8BXouAWeocufYC",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "retry",
+          "generationId": "zz0jZ6ybshrDKTqeYHh7",
+          "reused": true,
+          "credits": 0,
+          "modelId": "eleven_v4"
+        },
+        {
+          "part": "explanation",
+          "flowId": "STGZWLMW9lDACqvI8OBg",
+          "sessionId": "4DQANff7ThzUikJ8T5uE",
+          "status": "completed",
+          "modelId": "eleven_v4",
+          "generationId": "wrJPUpiOo2YwL3y4vXqH",
+          "credits": 72.67995594713656,
+          "durationSeconds": 5.52
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-019",
+      "number": 19,
+      "ageBand": "7-8",
+      "category": "Tawḥīd",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Nimm dir Zeit für deine Antwort. Warum wurden Menschen und Jinn erschaffen? Antwort 1: Um Allah zu dienen. Antwort 2: Nur zum Spielen. Antwort 3: Nur um reich zu werden. Wähle die Antwort, die du für richtig hältst.",
+      "correctAudioText": "Mā schāʾ Allāh! Du hast aufmerksam überlegt. Mach weiter so!",
+      "retryAudioText": "In schāʾ Allāh – wenn Allah will. Geh die Antworten noch einmal durch.",
+      "explanationAudioText": "Das merken wir uns: Allah nennt Seine Anbetung als Zweck der Erschaffung von Jinn und Menschen.",
+      "originalQuestion": "Warum wurden Menschen und Jinn erschaffen?",
+      "originalExplanation": "Allah nennt Seine Anbetung als Zweck der Erschaffung von Jinn und Menschen.",
+      "source": "Qurʾān 51:56",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "awaiting-v4-recording",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "str48DQCsqlZwwmVueo9",
+          "status": "completed",
+          "generationId": "yg3OZMyPDghXCNp1oAVe",
+          "credits": 208.34920704845817,
+          "durationSeconds": 15.36
+        },
+        {
+          "part": "correct",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "5Mlwu2SNJbuYcq9BOg9t",
+          "status": "completed",
+          "generationId": "MXJIQELO8kt4unfk2wy2",
+          "credits": 58.14396475770925,
+          "durationSeconds": 4.56
+        },
+        {
+          "part": "retry",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "FkuKzr9ARiMbcEwXNFVg",
+          "status": "completed",
+          "generationId": "53nlCj9DCu1JkXZFBEZI",
+          "credits": 67.8346255506608,
+          "durationSeconds": 5.28
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "GnsO2gSNJ4qt89xe90lT",
+          "status": "completed",
+          "generationId": "Q9bbw0iwMakXG90uNolq",
+          "credits": 92.06127753303966,
+          "durationSeconds": 6.08
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-020",
+      "number": 20,
+      "ageBand": "7-8",
+      "category": "Tawḥīd",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "voiceProfileId": "serhat-owner-voice-2026",
+      "revision": "quiz-academy-praise-v4-20261013",
+      "questionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Was lehrt Sūrat al-Iḫlāṣ über Allah? Antwort 1: Allah ist Einer. Antwort 2: Allah hat ein Kind. Antwort 3: Allah braucht Hilfe. Wähle die Antwort, die du für richtig hältst.",
+      "correctAudioText": "Mā schāʾ Allāh! Das bedeutet: Was Allah gewollt hat. Dein Wissen wächst!",
+      "retryAudioText": "Kein Problem. Bismi-llāh! Schau dir die Antworten noch einmal genau an.",
+      "explanationAudioText": "Das merken wir uns: Sūrat al-Iḫlāṣ lehrt Allahs Einzigkeit und dass Er weder zeugt noch gezeugt wurde.",
+      "originalQuestion": "Was lehrt Sūrat al-Iḫlāṣ über Allah?",
+      "originalExplanation": "Sūrat al-Iḫlāṣ lehrt Allahs Einzigkeit und dass Er weder zeugt noch gezeugt wurde.",
+      "source": "Qurʾān 112:1–4",
+      "pronunciationQA": "pending-human-approval",
+      "audioQA": "generated-pending-asset-import-and-human-listening",
+      "published": false,
+      "recordingStatus": "prior-surah-pilot-not-full-quiz",
+      "recordings": [
+        {
+          "part": "question",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "Hk91GaxJWgT7BM0UD36K",
+          "status": "completed",
+          "generationId": "jdsRsYyahoMQrcQ6xEYV",
+          "credits": 214.16360352422907,
+          "durationSeconds": 17.6
+        },
+        {
+          "part": "correct",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "saMsakJf36tYx1xZ0ZKy",
+          "status": "completed",
+          "generationId": "N6KUNJZuktlS1uTmRNPI",
+          "credits": 69.7727577092511,
+          "durationSeconds": 6
+        },
+        {
+          "part": "retry",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "7wSwD5haHnl1dqo7RUjg",
+          "status": "completed",
+          "generationId": "vTRh2ZkXhF0R0jOplwKS",
+          "credits": 68.80369162995594,
+          "durationSeconds": 4.8
+        },
+        {
+          "part": "explanation",
+          "modelId": "eleven_v4",
+          "flowId": "tk2FQtwb4kogCVfE0A2a",
+          "sessionId": "zSXOEDtkn8j2HC44UmLQ",
+          "status": "completed",
+          "generationId": "Y06izGfW3lzAWMoW79EG",
+          "credits": 98.84474008810572,
+          "durationSeconds": 7.12
+        }
+      ]
+    }
+  ],
+  "notes": [
+    "Quelltext und Sprachausgabe entsprechen genau der aktuellen quiz_joy_v4_script.py-Logik.",
+    "Keine neu generierten Audios oder Testbezeichnungen in der Besucher-App freigeben.",
+    "Die vorhandenen kostenpflichtigen V4-Takes für #002 und #020 nicht erneut erzeugen.",
+    "Status not-generated pro Vollfrage gilt auch dann, wenn separate V4-Teile im ElevenLabs-Konto existieren.",
+    "Quiz 001 vier Originalaufnahmen bei ElevenLabs V4 erzeugt, aber wegen fehlendem importiertem Asset und Hörfreigabe NICHT in App/Manifest freigegeben.",
+    "Ein sanfter Retry-Satz wurde in Python- und JS-Sprachvertrag einheitlich korrigiert. CI/Hörfreigabe ausstehend.",
+    "Quiz 002: drei vorbestehende bezahlte Fragenteile und drei heute ergänzte Original-V4-Takes, nicht zusammengesetzt. Keine neuen Credits für bereits vorbestehende Generationen.",
+    "Nach genau 2 Fragen ist der kostenpflichtige Mini-Durchlauf gestoppt. Weitere 18 sind Textplanung, noch keine neuen Audios.",
+    "Fehlversuchssatz #006/#011/#016 an synchronisierten JS/Python Vertrag angeglichen; keine Erfolgsgarantie.",
+    "20 Quizfragen mit V4-Sprach-Generation-IDs aufgenommen. Keine signierten URLs versionieren; keine Besucher-Freigabe ohne sichere MP3-Assets und Hörkontrolle."
+  ],
+  "actualPaidCreditsThisBatch": 5186.441656387665,
+  "previouslyPaidCreditsReusedForQuestion002": 122.102325991
+}

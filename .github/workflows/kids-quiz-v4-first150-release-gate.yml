@@ -1,0 +1,77 @@
+name: KIDS Quiz V4 First150 Release Candidate Safety Gate (no TTS)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/quiz_v4_first150_final_release_gate.py'
+      - 'kids/tools/test_quiz_v4_first150_release_gate.py'
+      - '.github/workflows/kids-quiz-v4-first150-release-gate.yml'
+      - 'kids/data/quiz-v4-first150-human-auditory-approvals.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tawhid-kids-first150-v4-release-gate-only
+  cancel-in-progress: false
+
+jobs:
+  audit-private-audio-manifest:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 22
+    steps:
+      - name: Checkout review branch without touching live
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+
+      - name: Ensure ffprobe for codec-verifying all staged original MP3s
+        run: |
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          command -v ffprobe
+
+      - name: Test fail-closed release gate against synthetic isolated fixtures
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/test_quiz_v4_first150_release_gate.py
+          python3 kids/tools/test_quiz_v4_first150_release_gate.py
+
+      - name: Check only verified V4 original MP3s and signed human approval hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/quiz_v4_first150_final_release_gate.py
+          python3 kids/tools/quiz_v4_first150_final_release_gate.py
+          python3 - <<'PY'
+          import json
+          p=json.load(open("kids/data/quiz-v4-first150-release-readiness.json"))
+          assert p["originalQuizQuestions"]==150
+          assert p["totalAudioFieldAssignments"]==600
+          assert p["published"] is False
+          assert p["publicManifestModified"] is False
+          assert p["voiceId"]=="DkU7j9uO4ZEtLD2iRZSH"
+          assert p["modelId"]=="eleven_v4"
+          assert p["readyForLive"] is False
+          print("PASS_KIDS_150_RELEASE_GUARD: no fabricated QA and no live publish",flush=True)
+          PY
+
+      - name: Store count-based readiness without public quiz manifest updates
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-review-guard-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          for n in 1 2 3; do
+            git fetch origin "$branch"
+            git reset --hard FETCH_HEAD
+            python3 kids/tools/quiz_v4_first150_final_release_gate.py
+            git add kids/data/quiz-v4-first150-release-readiness.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m "qa(kids): auditable first150 V4 original audio and human hearing gate, no live"
+            if git push origin HEAD:"$branch"; then exit 0; fi
+          done
+          exit 1

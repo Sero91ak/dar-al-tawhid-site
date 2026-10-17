@@ -1,0 +1,177 @@
+name: KIDS Quiz V4 Full 900 Production Plan (no paid synthesis)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/prepare_quiz_v4_all900_segmented.py'
+      - 'kids/tools/quiz_v4_all900_audio_assembler.py'
+      - 'kids/tools/quiz_v4_all900_release_gate.py'
+      - 'kids/tools/split_quiz_v4_all900_packets.py'
+      - 'kids/tools/build_quiz_450_pdf_books.py'
+      - 'kids/data/quiz-v4-selected-450.json'
+      - 'kids/tools/curate_quiz_450_audio_first.py'
+      - 'kids/tools/quiz_v4_selected450_release_gate.py'
+      - 'kids/data/quiz-curation-release.json'
+      - '.github/workflows/kids-quiz-v4-all900-plan.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tawhid-kids-v4-all900-plan
+  cancel-in-progress: false
+
+jobs:
+  verify-900:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout review branch (never main)
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          persist-credentials: true
+
+      - name: Syntax and model/voice guard
+        run: |
+          python3 -m py_compile kids/tools/prepare_quiz_v4_all900_segmented.py
+          python3 kids/tools/prepare_quiz_v4_all900_segmented.py --check
+
+      - name: Build full 900-question V4 segment plan with ZERO credits
+        run: python3 kids/tools/prepare_quiz_v4_all900_segmented.py
+
+      - name: Enforce exact counts and no premature publication
+        run: |
+          python3 - <<'PY'
+          import json
+          from collections import Counter
+          p=json.load(open('kids/data/quiz-v4-all900-segmented-review.json'))
+          assert p['questionCount']==900 and p['totalSpokenFieldAssignments']==3600
+          assert p['ageBandCounts']=={'4-6':300,'7-8':300,'9-10':300}
+          assert len(p['recipes'])==900
+          assert len({x['questionId'] for x in p['recipes']})==900
+          assert Counter(x['ageBand'] for x in p['recipes'])=={'4-6':300,'7-8':300,'9-10':300}
+          assert p['modelId']=='eleven_v4' and p['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert len(p['segments'])==p['uniqueSegmentTexts']
+          assert p['costControl']['paidSynthesisEnabled'] is False
+          assert p['costControl']['liveReleaseAllowed'] is False
+          assert p['statusQuestionsPublishedWithNewV4']==0
+          print('PASS: 900 questions 3 age groups, exact reconstructed speech and source, zero credits, NO live')
+          PY
+
+      - name: Split full 900 into 18 non-billable 50-question age-matched packets
+        run: |
+          python3 -m py_compile kids/tools/split_quiz_v4_all900_packets.py
+          python3 kids/tools/split_quiz_v4_all900_packets.py
+
+      - name: Curate 150 questions per age and preserve remaining 450 for expansion
+        run: |
+          python3 -m py_compile kids/tools/curate_quiz_450_audio_first.py
+          python3 kids/tools/curate_quiz_450_audio_first.py
+
+      - name: Check 450/450 source partition and strict original V4 launch lock
+        run: |
+          python3 -m py_compile kids/tools/quiz_v4_selected450_release_gate.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py
+          python3 - <<'PY'
+          import json,subprocess
+          flag=json.load(open('kids/data/quiz-curation-release.json'))
+          assert flag['fullCatalogQuestions']==900
+          assert flag['curatedQuestions']==450
+          assert flag['reserveQuestions']==450
+          if flag['enabled']:
+              subprocess.run(['python3','kids/tools/quiz_v4_selected450_release_gate.py','--strict'],check=True)
+          else:
+              print('PUBLIC AUDIO RELEASE OFF: original 900 quiz corpus remains available')
+          PY
+
+      - name: Ensure FFmpeg for private non-speech joining QA
+        shell: bash
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            timeout 80s sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=12 install -y ffmpeg || true
+          fi
+          if command -v ffmpeg >/dev/null 2>&1 && command -v ffprobe >/dev/null 2>&1; then
+            echo 'KIDS_FFMPEG_QA_AVAILABLE=1' >> "$GITHUB_ENV"
+            echo "FFmpeg and ffprobe ready for offline audio QA."
+          else
+            echo 'KIDS_FFMPEG_QA_AVAILABLE=0' >> "$GITHUB_ENV"
+            echo "::warning::FFmpeg not available on this CI image; skip signal-only QA, keep original-audio release gate closed."
+          fi
+
+      - name: Verify zero-TTS MP3 assembly contract for all 900 age-balanced questions
+        run: |
+          python3 -m py_compile kids/tools/quiz_v4_all900_audio_assembler.py kids/tools/quiz_v4_all900_release_gate.py
+          python3 kids/tools/quiz_v4_all900_audio_assembler.py --audit
+          if [ "$KIDS_FFMPEG_QA_AVAILABLE" = "1" ]; then
+            python3 kids/tools/quiz_v4_all900_audio_assembler.py --self-test
+          else
+            echo "::warning::Dynamic FFmpeg self-test NOT completed; no approval may be inferred."
+          fi
+          python3 kids/tools/quiz_v4_all900_release_gate.py
+
+      - name: Produce both 450-question PDF books
+        run: |
+          python3 -m pip install --disable-pip-version-check --quiet reportlab pymupdf
+          python3 -m py_compile kids/tools/build_quiz_450_pdf_books.py
+          python3 kids/tools/build_quiz_450_pdf_books.py
+
+      - name: Save plans without losing concurrent test-branch changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          # Runners may start from stale PR snapshots. Rebase-by-regeneration
+          # keeps all other branch commits intact, never force-pushes main.
+          for attempt in 1 2 3 4; do
+            git fetch origin "$branch"
+            git reset --hard FETCH_HEAD
+            python3 kids/tools/prepare_quiz_v4_all900_segmented.py
+            python3 kids/tools/split_quiz_v4_all900_packets.py
+            python3 kids/tools/curate_quiz_450_audio_first.py
+            python3 kids/tools/quiz_v4_all900_audio_assembler.py --audit
+            git add kids/data/quiz-v4-all900-segmented-review.json kids/data/quiz-v4-all900-production-packets.json kids/data/quiz-v4-all900-production-summary.json kids/downloads/TAWHID_KIDS_450_Startfragen.pdf kids/downloads/TAWHID_KIDS_450_Erweiterungsfragen.pdf kids/data/quiz-kids-curated-450-review.json kids/data/quiz-kids-expansion-reserve-450.json kids/data/quiz-v4-curated-450-production-review.json kids/data/quiz-v4-curated-450-summary.json
+            if git diff --cached --quiet; then
+              echo "All 900 review plan/packet files already present and current."
+              exit 0
+            fi
+            git commit -m "review(kids quiz): 900 verified V4 speech recipes and 18 age-aligned packets (no credits)"
+            if git push origin HEAD:"$branch"; then
+              echo "Review branch safely updated with all 900 plans."
+              exit 0
+            fi
+            echo "Concurrent branch change on attempt $attempt; regenerating on newest revision."
+          done
+          echo "::error::Could not save reviewed 900-plan files after four safe retries."
+          exit 1
+
+      - name: Archive both complete 450-question searchable PDFs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-quiz-pdf-450-selected-and-450-reserve
+          path: |
+            kids/downloads/TAWHID_KIDS_450_Startfragen.pdf
+            kids/downloads/TAWHID_KIDS_450_Erweiterungsfragen.pdf
+          retention-days: 90
+          if-no-files-found: warn
+
+      - name: Archive full 900-question narration plan
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-900-review-plan
+          if-no-files-found: warn
+          retention-days: 30
+          path: |
+            kids/data/quiz-v4-all900-segmented-review.json
+            kids/data/quiz-v4-all900-production-packets.json
+            kids/data/quiz-v4-all900-production-summary.json
+            kids/data/quiz-kids-curated-450-review.json
+            kids/data/quiz-kids-expansion-reserve-450.json
+            kids/data/quiz-v4-curated-450-production-review.json
+            kids/data/quiz-v4-curated-450-summary.json

@@ -1,0 +1,121 @@
+name: KIDS Quiz V4 Recover Previously Paid Flow MP3s (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/import_quiz_v4_prepaid_flow_originals.py'
+      - 'kids/tools/test_quiz_v4_prepaid_import.py'
+      - 'kids/tools/assert_quiz_v4_prepaid_postimport.py'
+      - 'kids/tools/quiz_v4_first150_offline_join.py'
+      - 'kids/assets/kids-quiz-audio/v4-paid-flow-inbox/**'
+      - '.github/workflows/kids-v4-prepaid-flow-restore.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-first150-prepaid-flow-recovery
+  cancel-in-progress: false
+
+jobs:
+  recover-old-originals:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout review branch, never production
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+
+      - name: Ensure offline MP3 decoder
+        run: |
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          command -v ffmpeg
+          command -v ffprobe
+
+      - name: Validate real paid ID mapping; simulate ZIP import without using human voices
+        run: |
+          python3 -m py_compile kids/tools/import_quiz_v4_prepaid_flow_originals.py
+          python3 -m py_compile kids/tools/test_quiz_v4_prepaid_import.py
+          python3 -m py_compile kids/tools/assert_quiz_v4_prepaid_postimport.py
+          python3 -m py_compile kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/test_quiz_v4_prepaid_import.py
+          python3 kids/tools/import_quiz_v4_prepaid_flow_originals.py --audit
+          python3 kids/tools/assert_quiz_v4_prepaid_postimport.py
+
+      - name: Import uploaded ZIP originals if present and update free MP3 preview
+        run: |
+          set -euo pipefail
+          archive=kids/assets/kids-quiz-audio/v4-paid-flow-inbox/paid-flow-originals.zip
+          if [ -f "$archive" ]; then
+            python3 kids/tools/import_quiz_v4_prepaid_flow_originals.py --zip "$archive"
+            python3 kids/tools/quiz_v4_first150_offline_join.py
+            python3 kids/tools/quiz_v4_age7to10_offline_join.py
+            python3 kids/tools/qa_quiz_v4_saved_mp3.py
+            python3 kids/tools/qa_quiz_v4_first150_composed.py
+            python3 kids/tools/report_quiz_v4_450_progress.py
+            python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+            python3 kids/tools/write_quiz_v4_handover.py
+            python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+            python3 kids/tools/assert_quiz_v4_prepaid_postimport.py
+          else
+            echo "No previously-paid MP3 export ZIP supplied yet. All existing recordings kept unchanged."
+            echo "Upload all available original MP3s named <generation-id>.mp3 inside a single archive: $archive"
+          fi
+
+      - name: Commit ONLY recovered paid MP3s, SHA registry and new preview, no live change
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-voice-recovery-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          archive=kids/assets/kids-quiz-audio/v4-paid-flow-inbox/paid-flow-originals.zip
+          if [ ! -f "$archive" ]; then
+            echo "No uploaded file; completed no-cost restore capability validation."
+            exit 0
+          fi
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/data/quiz-v4-paid-flow-import-status.json
+          git add kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/data/quiz-v4-first150-composed-preview.json
+          git add kids/data/quiz-v4-first150-audio-status.json
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-handover-latest.json
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-450-production-status.json
+          # Archive is no longer needed once original MP3s are individually saved.
+          git rm -f -- "$archive"
+          git commit -m "audio(kids): securely import already-paid V4 Flow MP3s without new synthesis, review only"
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          for n in 1 2 3; do
+            if git push origin HEAD:"$branch"; then
+              echo "Paid original MP3s recovered without extra credits, preview regenerated."
+              exit 0
+            fi
+            git fetch origin "$branch"
+            if ! git rebase FETCH_HEAD; then
+              echo "::error::Already-paid originals are in the recovery artifact; DO NOT re-synthesize."
+              exit 1
+            fi
+          done
+          exit 1
+
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-recovered-previously-paid-v4-originals-review
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
+            kids/assets/kids-quiz-audio/v4-first150-composed-review/
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-paid-flow-import-status.json
+            kids/data/quiz-v4-first150-audio-status.json

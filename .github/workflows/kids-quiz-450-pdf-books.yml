@@ -1,0 +1,92 @@
+name: KIDS Two Quiz PDF Books (450 + 450)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/build_quiz_450_pdf_books.py'
+      - 'kids/data/quiz-v4-selected-450.json'
+      - '.github/workflows/kids-quiz-450-pdf-books.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-quiz-450-450-pdf-review-books
+  cancel-in-progress: false
+
+jobs:
+  produce-searchable-pdfs:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - name: Checkout review only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          persist-credentials: true
+      - name: Prepare PDF authoring
+        run: |
+          python3 -m pip install --disable-pip-version-check --quiet reportlab pymupdf
+          python3 -m py_compile kids/tools/build_quiz_450_pdf_books.py
+      - name: Generate and verify BOTH full 450-question PDF books
+        run: python3 kids/tools/build_quiz_450_pdf_books.py
+      - name: Validate PDF pages, texts and originals
+        run: |
+          python3 - <<'PY'
+          import fitz,json
+          from pathlib import Path
+          s=json.loads(Path('kids/data/quiz-v4-selected-450.json').read_text())
+          files=(
+            Path('kids/downloads/TAWHID_KIDS_450_Startfragen.pdf'),
+            Path('kids/downloads/TAWHID_KIDS_450_Erweiterungsfragen.pdf')
+          )
+          for f in files:
+            assert f.exists() and f.stat().st_size>=100000, f
+            with fitz.open(f) as pdf:
+              assert len(pdf)>10
+              alltext=' '.join(p.get_text() for p in pdf)
+              assert alltext.count('Erklärung:')>=450, (f,alltext.count('Erklärung:'))
+              assert alltext.count('Quelle:')>=450, (f,alltext.count('Quelle:'))
+              print(f.name, 'pages=',len(pdf),'bytes=',f.stat().st_size,
+                    'explanations=',alltext.count('Erklärung:'),
+                    'sources=',alltext.count('Quelle:'))
+          assert all(len(s['bands'][a]['ids'])==150 for a in ('4-6','7-8','9-10'))
+          assert all(len(s['reservedIds'][a])==150 for a in ('4-6','7-8','9-10'))
+          print('PASS: two PDF books contain all 900 answers, explanations and source citations')
+          PY
+      - name: Archive downloadable PDFs independently of repository pushes
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-quiz-450-start-and-450-reserve-pdfs
+          path: |
+            kids/downloads/TAWHID_KIDS_450_Startfragen.pdf
+            kids/downloads/TAWHID_KIDS_450_Erweiterungsfragen.pdf
+          if-no-files-found: warn
+          retention-days: 90
+      - name: Save both PDFs on the review branch for permanent access
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-pdf-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          for attempt in 1 2 3; do
+            git fetch origin "$branch"
+            git reset --hard FETCH_HEAD
+            python3 kids/tools/build_quiz_450_pdf_books.py
+            git add kids/downloads/TAWHID_KIDS_450_Startfragen.pdf kids/downloads/TAWHID_KIDS_450_Erweiterungsfragen.pdf
+            if git diff --cached --quiet; then
+              echo "Two permanent 450-question PDF books already stored."
+              exit 0
+            fi
+            git commit -m "docs(kids): publish two review PDFs with 450 fully sourced questions each"
+            if git push origin HEAD:"$branch"; then
+              echo "Both searchable PDFs saved to review branch."
+              exit 0
+            fi
+            echo "Concurrent update detected; rebuild on newest branch ($attempt)."
+          done
+          echo "::error::PDFs generated as downloadable workflow artifact, branch save failed."
+          exit 1

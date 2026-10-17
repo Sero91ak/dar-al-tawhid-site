@@ -230,8 +230,31 @@
         }));
     }):Promise.resolve(null);
   var academyReady=Promise.allSettled([academyPublic,pilotReady]);
+  // Direct KIDS quiz listening lane: real locally stored V4 master MP3s only.
+  // Explicit preview opt-in so unreviewed pronunciation is never passed off
+  // as human-approved or unintentionally released to all children.
+  var v4QuizPreview=false;
+  try{v4QuizPreview=new URLSearchParams(location.search).get("quizV4Preview")==="1"}catch(e){}
+  function validQuizOriginals(data){
+    return !!(data&&data.published===false&&data.humanListeningApproved===false&&
+      data.modelId==="eleven_v4"&&data.voiceId==="DkU7j9uO4ZEtLD2iRZSH"&&
+      data.entries&&Object.keys(data.entries).every(function(key){
+        var e=data.entries[key];
+        var u=String(e&&e.url||"");
+        return !!(e&&e.modelId==="eleven_v4"&&e.voiceId===data.voiceId&&
+          e.audioListeningApproved===false&&
+          u.indexOf("/kids/assets/kids-quiz-audio/")===0&&
+          u.endsWith(".mp3")&&u.indexOf("..")<0&&
+          u.indexOf("?")<0&&u.indexOf("#")<0);
+      }));
+  }
+  var v4QuizReady=v4QuizPreview?Promise.allSettled([
+    loadManifest("/kids/data/quiz-v4-first150-composed-preview.json?v=20261017-a",8,validQuizOriginals),
+    loadManifest("/kids/data/quiz-v4-age7to10-composed-preview.json?v=20261017-a",8,validQuizOriginals)
+  ]):Promise.resolve(null);
   var loadCompletion=Promise.allSettled([
     academyReady,
+    v4QuizReady,
     loadManifest("/kids/data/owner-voice-audio.json?v=2",1),
     loadManifest("/kids/data/quiz-audio.json?v=2",2),
     loadManifest("/kids/data/dua-audio.json?v=8",3),

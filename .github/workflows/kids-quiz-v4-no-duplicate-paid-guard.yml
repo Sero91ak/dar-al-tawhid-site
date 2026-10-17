@@ -1,0 +1,47 @@
+name: KIDS Quiz V4 No Duplicate Paid Generations (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/quiz_v4_no_double_charge_guard.py'
+      - 'kids/tools/test_quiz_v4_no_double_charge_guard.py'
+      - 'kids/tools/generate_quiz_v4_450_paid_pilot.py'
+      - 'kids/tools/generate_quiz_v4_450_paid_batch02.py'
+      - 'kids/tools/generate_quiz_v4_450_paid_batch03.py'
+      - 'kids/tools/quiz_v4_first150_costed_campaign.py'
+      - '.github/workflows/kids-quiz-v4-450-paid-pilot.yml'
+      - '.github/workflows/kids-v4-450-paid-batch02.yml'
+      - '.github/workflows/kids-v4-450-paid-batch03.yml'
+      - '.github/workflows/kids-v4-first150-campaign.yml'
+      - '.github/workflows/kids-quiz-v4-no-duplicate-paid-guard.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-paid-receipts-readonly-guard
+  cancel-in-progress: false
+
+jobs:
+  verify-no-paid-duplicate:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check only private review branch; NEVER generate speech
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Check Python syntax and the nine prepaid originals
+        run: |
+          set -euo pipefail
+          python3 -m py_compile \
+            kids/tools/quiz_v4_no_double_charge_guard.py \
+            kids/tools/test_quiz_v4_no_double_charge_guard.py \
+            kids/tools/generate_quiz_v4_450_paid_pilot.py \
+            kids/tools/generate_quiz_v4_450_paid_batch02.py \
+            kids/tools/generate_quiz_v4_450_paid_batch03.py \
+            kids/tools/quiz_v4_first150_costed_campaign.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          echo "PASS: protected existing V4 audio receipts; no API/credits, no live publication."

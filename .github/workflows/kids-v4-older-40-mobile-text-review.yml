@@ -1,0 +1,134 @@
+name: KIDS V4 40 Older-Age Questions Mobile Source Review (no credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/build_quiz_v4_older_content_review.py'
+      - 'kids/tools/qa_quiz_v4_older40_pedagogy.py'
+      - 'kids/tools/test_quiz_v4_older40_pedagogy_registry.py'
+      - 'kids/tools/build_quiz_v4_older40_editorial_candidates.py'
+      - '.github/workflows/kids-v4-older-40-mobile-text-review.yml'
+      - '.github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json'
+      - '.github/reports/kids-v4-older-age-stage2-exact-voice-preflight.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-older-40-mobile-source-review
+  cancel-in-progress: false
+
+jobs:
+  private-source-and-voice-text-checklist:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout private draft branch only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Build self-contained 40-question content review on already verified texts
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/qa_quiz_v4_older40_pedagogy.py kids/tools/test_quiz_v4_older40_pedagogy_registry.py
+          python3 kids/tools/test_quiz_v4_older40_pedagogy_registry.py
+          python3 -m py_compile kids/tools/build_quiz_v4_older_content_review.py
+          python3 kids/tools/build_quiz_v4_older_content_review.py
+          python3 - <<'PY'
+          import json, re, zipfile
+          from pathlib import Path
+          archive=Path("kids/review-only/quiz-v4-older-40-text-content-review.zip")
+          with zipfile.ZipFile(archive) as z:
+              assert z.testzip() is None and len(z.namelist())==4
+              name="kids/review-only/quiz-v4-older-40-text-content-review.html"
+              html=z.read(name).decode("utf-8")
+              assert "40 ausgewählte Fragen" in html
+              assert "Quelle laut Originalkatalog" in html
+              assert "Redaktionell vor Audioaufnahme prüfen" in html
+              assert 'id="editorial-data"' in html
+              assert "kids-v4-older40-editorial-source-findings.json" in z.namelist()[-1]
+              assert "notAuthorizedPaidSynthesis:true" in html
+              assert "humanHearingApproved" in html
+              scripts=re.findall(r"<script(?![^>]*application/json)[^>]*>(.*?)</script>",html,re.S)
+              assert len(scripts)==1
+              Path("/tmp/tawhid-kids-v4-40-content-review-check.js").write_text(scripts[0],encoding="utf-8")
+              assert "https://api.elevenlabs.io" not in html
+          PY
+          node --check /tmp/tawhid-kids-v4-40-content-review-check.js
+          echo "PASS: 40 exact source question cards and 150 text scripts; zero voice credits"
+      - name: Independently review source evidence and flag instructional terminology
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/qa_quiz_v4_older40_pedagogy.py
+          python3 kids/tools/qa_quiz_v4_older40_pedagogy.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path(".github/reports/kids-v4-older40-editorial-source-findings.json")
+          j=json.loads(p.read_text(encoding="utf-8"))
+          assert j["quizQuestionsInspected"] == 40
+          assert j["sourceReferencesExternallySpotchecked"] == 11
+          assert j["questionsWithEditorialFlags"] == 20
+          assert j["remainingQuestionReferencesNeedingIndividualVerification"] == 29
+          assert len(j["findings"]) == len({q["questionId"] for q in j["findings"]}) == 40
+          assert all(q["reviewerApprovedNewSpeechGeneration"] is False for q in j["findings"])
+          assert all(q["scientificSourceVerificationComplete"] is False for q in j["findings"])
+          assert all(q["oldVoiceClipsUnaffected"] is True for q in j["findings"])
+          assert j["allSourcesVerified"] is False
+          assert j["humanSourceSignoffGranted"] is False
+          assert j["elevenLabsCreditsSpent"] == 0
+          assert j["paidVoiceGenerationAuthorized"] is False
+          assert all(x["pedagogicalContentApproved"] is False for x in j["findings"])
+          print("PASS: 40 questions editorial screen with unresolved items openly marked")
+          PY
+      - name: Generate non-executable source-correction drafts, never changing original 900
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/build_quiz_v4_older40_editorial_candidates.py
+          python3 kids/tools/build_quiz_v4_older40_editorial_candidates.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path(".github/reports/kids-v4-older40-nuanced-wording-proposals-review-only.json")
+          x=json.loads(p.read_text(encoding="utf-8"))
+          assert x["original900Selected450Reserve450Preserved"] is True
+          assert x["publicQuizModified"] is False
+          assert x["noOriginalVoiceReplacement"] is True
+          assert x["newTTSsCreated"]==x["voiceCreditsSpent"]==x["humanApprovalsGranted"]==0
+          assert len(x["candidates"])==5
+          assert all(c["canonicalTextModified"] is False and
+                     c["voiceRebaselineAuthorized"] is False and
+                     c["editorialApprovalGranted"] is False and
+                     c["mayGeneratePaidSpeech"] is False
+                     for c in x["candidates"])
+          assert json.load(open("kids/data/quiz-curation-release.json"))["enabled"] is False
+          print("PASS: 5 correction drafts ONLY; zero credits, originals unchanged")
+          PY
+      - name: Archive separate 5 wording proposals for human discussion, not app output
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-40-human-editorial-correction-proposals
+          retention-days: 90
+          if-no-files-found: warn
+          path: .github/reports/kids-v4-older40-nuanced-wording-proposals-review-only.json
+
+      - name: Keep internal source/text page downloadable but not publicly deployed
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-40-older-questions-mobile-source-text-review
+          retention-days: 90
+          if-no-files-found: warn
+          path: kids/review-only/quiz-v4-older-40-text-content-review.zip
+
+      - name: Retain separate editorial and partial source evidence report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-40-editorial-source-screen
+          retention-days: 90
+          if-no-files-found: warn
+          path: .github/reports/kids-v4-older40-editorial-source-findings.json

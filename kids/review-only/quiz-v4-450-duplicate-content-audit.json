@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "scope": "TAWHID_KIDS_CURATED_450_DUPLICATE_LANGUAGE_REVIEW",
+  "auditedSource": "kids/data/quiz-kids-curated-450-review.json",
+  "selectedQuestions": 450,
+  "ageCounts": {
+    "4-6": 150,
+    "7-8": 150,
+    "9-10": 150
+  },
+  "duplicateCanonicalQuestionIds": 0,
+  "exactRepeatedQuestionStemsWithinAge": 0,
+  "exactRepeatedQuestionStemsAcrossAges": 0,
+  "identicalExplanationsWithinAge": [
+    {
+      "ids": [
+        "kids-quiz-010",
+        "kids-quiz-306"
+      ],
+      "ageBand": "4-6",
+      "text": "Allah verbietet sogar ein verächtliches Wort gegenüber den Eltern."
+    },
+    {
+      "ids": [
+        "kids-quiz-059",
+        "kids-quiz-307"
+      ],
+      "ageBand": "4-6",
+      "text": "Allah lehrt eine Duʿāʾ um Barmherzigkeit für die Eltern."
+    }
+  ],
+  "verySimilarSameAgeStems": [
+    {
+      "ids": [
+        "kids-quiz-018",
+        "kids-quiz-696"
+      ],
+      "ageBand": "4-6",
+      "questions": [
+        "Dürfen wir Allah um mehr Wissen bitten?",
+        "Dürfen wir Allah um mehr nützliches Wissen bitten?"
+      ],
+      "wordSetJaccard": 0.88
+    },
+    {
+      "ids": [
+        "kids-quiz-064",
+        "kids-quiz-308"
+      ],
+      "ageBand": "4-6",
+      "questions": [
+        "Sollen wir Versprechen halten?",
+        "Sollen wir unser Versprechen halten?"
+      ],
+      "wordSetJaccard": 0.8
+    },
+    {
+      "ids": [
+        "kids-quiz-214",
+        "kids-quiz-306"
+      ],
+      "ageBand": "4-6",
+      "questions": [
+        "Dürfen wir zu unseren Eltern „Uff“ sagen?",
+        "Dürfen wir zu unseren Eltern verächtlich „Uff“ sagen?"
+      ],
+      "wordSetJaccard": 0.88
+    }
+  ],
+  "method": "NFKC Unicode, German case-fold, punctuation-to-space, whitespace normalization; lexical word-set Jaccard >=0.78. Similarity findings are candidates for human review, not proof of semantically identical religious questions.",
+  "sourceQuestionTextAltered": false,
+  "productionVoiceTextAltered": false,
+  "paidAudioRegenerated": false,
+  "needToRecurateBeforeFuturePublicExpansion": true,
+  "livePublished": false
+}

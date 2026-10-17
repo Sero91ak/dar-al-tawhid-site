@@ -1,0 +1,196 @@
+name: KIDS V4 Securely Recover Prepaid Flow Originals (no synthesis)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/data/v4-prepaid-envelope-review/sealed-downloads.b64'
+      - 'kids/data/v4-prepaid-envelope-review/sealed-oaep.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-sealed-mp3-original-import
+  cancel-in-progress: false
+
+jobs:
+  recover-paid-original-mp3:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Only decrypt signed URLs inside the GitHub runner, not into logs
+        id: decrypt
+        shell: bash
+        run: |
+          set -euo pipefail
+          base=kids/data/v4-prepaid-envelope-review
+          test -n "${ELEVENLABS_API_KEY:-}"
+          if [[ -s "$base/sealed-oaep.json" ]];then
+            echo "Using secure RSA-OAEP multi-generation URL envelope"
+          else
+            test -s "$base/sealed-downloads.b64"
+          fi
+          umask 077
+          mkdir -p "$RUNNER_TEMP/kids-v4-prepaid-inbox"
+          echo "inbox=$RUNNER_TEMP/kids-v4-prepaid-inbox" >> "$GITHUB_OUTPUT"
+          openssl pkcs8 -in "$base/private-key-encrypted.pem" -passin env:ELEVENLABS_API_KEY -out "$RUNNER_TEMP/private.pem"
+          if [[ -s "$base/sealed-oaep.json" ]];then
+            python3 - <<'PY'
+          import base64,json,os,pathlib,subprocess
+          base=pathlib.Path(os.environ["RUNNER_TEMP"])
+          source=pathlib.Path("kids/data/v4-prepaid-envelope-review/sealed-oaep.json")
+          entries=json.loads(source.read_text(encoding="utf-8"))
+          if not isinstance(entries,list) or not 1 <= len(entries) <= 56:
+              raise RuntimeError("Encrypted V4 batch must contain 1..56 unique known originals")
+          result=[]
+          seen=set()
+          for rec in entries:
+              gid=rec["generationId"]
+              chunks=rec["cipherChunks"]
+              if gid in seen or not isinstance(chunks,list) or not 1 <= len(chunks) <= 15:
+                  raise RuntimeError("Duplicate/invalid original encrypted chunk group")
+              seen.add(gid)
+              plaintext=[]
+              for encoded in chunks:
+                  cipher=base64.b64decode(encoded,validate=True)
+                  if len(cipher)!=384:raise RuntimeError("Invalid RSA3072 encrypted chunk length")
+                  cmd=["openssl","pkeyutl","-decrypt","-inkey",str(base/"private.pem"),
+                       "-pkeyopt","rsa_padding_mode:oaep",
+                       "-pkeyopt","rsa_oaep_md:sha256","-pkeyopt","rsa_mgf1_md:sha256"]
+                  data=subprocess.run(cmd,input=cipher,capture_output=True,check=True).stdout
+                  plaintext.append(data)
+              url=b"".join(plaintext).decode("ascii")
+              result.append({"generationId":gid,"contentUrl":url})
+          output=base/"generation-downloads.json"
+          output.write_text(json.dumps(result),encoding="utf-8")
+          output.chmod(0o600)
+          print("KIDS_SECURE_OAEP_ORIGINAL_URLS_DECRYPTED",len(result),"without printing URLs")
+          PY
+          else
+            base64 -d "$base/sealed-downloads.b64" > "$RUNNER_TEMP/sealed.der"
+            openssl cms -decrypt -inform DER -in "$RUNNER_TEMP/sealed.der" \
+              -inkey "$RUNNER_TEMP/private.pem" -recip "$base/recipient-cert.pem" \
+              -out "$RUNNER_TEMP/generation-downloads.json.gz"
+            gzip -dc "$RUNNER_TEMP/generation-downloads.json.gz" > "$RUNNER_TEMP/generation-downloads.json"
+          fi
+          chmod 600 "$RUNNER_TEMP/generation-downloads.json"
+          echo "Decrypted manifest privately, no URL values logged."
+      - name: Download only genuine already-paid old V4 originals
+        env:
+          MP3_INBOX: ${{ steps.decrypt.outputs.inbox }}
+        run: |
+          python3 - <<'PY'
+          import json,os,pathlib,re,urllib.parse,urllib.request
+          base=pathlib.Path(os.environ["RUNNER_TEMP"])
+          inbox=pathlib.Path(os.environ["MP3_INBOX"])
+          records=json.loads((base/"generation-downloads.json").read_text())
+          assert 1 <= len(records) <= 56 and isinstance(records,list)
+          ledger=json.load(open("kids/data/quiz-v4-batch-001-020-review.json"))
+          existing={x["generationId"] for q in ledger["items"] for x in q["recordings"]}
+          imported=0
+          for row in records:
+              gid=row["generationId"]
+              url=row["contentUrl"]
+              if gid not in existing or not re.fullmatch(r"[A-Za-z0-9]{20}",gid):
+                  raise RuntimeError("Non-ledger original ID blocked")
+              u=urllib.parse.urlsplit(url)
+              if u.scheme!="https" or u.hostname!="storage.googleapis.com" or not u.path.startswith("/xi-backend/database/workspace/"):
+                  raise RuntimeError("Unexpected original audio server")
+              if "/"+gid+"/content.mp3" not in u.path or "X-Goog-Signature" not in url:
+                  raise RuntimeError("Original audio source mismatch")
+              dest=inbox/(gid+".mp3")
+              if dest.exists():continue
+              req=urllib.request.Request(url,headers={"User-Agent":"TAWHID-KIDS-ORIGINAL-EXPORT/1.0"})
+              with urllib.request.urlopen(req,timeout=50) as resp:
+                  if resp.status!=200:raise RuntimeError("Original export HTTPS response not OK")
+                  with dest.open("wb") as out:
+                      total=0
+                      while True:
+                          chunk=resp.read(256*1024)
+                          if not chunk:break
+                          total+=len(chunk)
+                          if total>10*1024*1024:raise RuntimeError("Unexpectedly large single quiz original")
+                          out.write(chunk)
+              if dest.stat().st_size<2000:raise RuntimeError("Downloaded original too small")
+              imported+=1
+          print("KIDS_ORIGINAL_PREPAID_DOWNLOADED",imported,"files; new synthesis credits 0")
+          PY
+      - name: Ensure offline MP3 verifier binaries exist
+        run: |
+          sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 update -qq
+          sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          ffprobe -version | head -1
+      - name: Verify and import old originals then reassemble first150 without credits
+        run: |
+          set -euo pipefail
+          python3 kids/tools/import_quiz_v4_prepaid_flow_originals.py --directory "$RUNNER_TEMP/kids-v4-prepaid-inbox"
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/qa_quiz_v4_first150_composed.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          home=Path('kids')
+          paid=json.loads((home/'data/quiz-v4-paid-flow-import-status.json').read_text())
+          young=json.loads((home/'data/quiz-v4-first150-audio-status.json').read_text())
+          mapped=json.loads((home/'review-only/quiz-v4-450-actual-mp3-import-summary.json').read_text())
+          assert mapped['questionsStaged']==450
+          assert young['completeFourPartQuestions']==mapped['byAge']['4-6']['completeFourPartQuestions']
+          if paid['remainingPriorPaidGenerations']==0:
+              assert young['completeFourPartQuestions']==150, 'Missing real original MP3 audio despite full recovery'
+          assert young['readyForLive'] is False
+          print('PASS: encrypted authentic V4 originals reach the private quiz, no public release')
+          PY
+      - name: Save genuine MP3s only to review and delete encrypted expiring links
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-review-recovery-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/data/quiz-v4-paid-flow-import-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/data/quiz-v4-first150-composed-preview.json
+          git add kids/data/quiz-v4-first150-audio-status.json
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-handover-latest.json
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-first150-composed-technical-qa.json
+          git rm -f --ignore-unmatch kids/data/v4-prepaid-envelope-review/sealed-downloads.b64 kids/data/v4-prepaid-envelope-review/sealed-oaep.json
+          if git diff --cached --quiet;then exit 0;fi
+          git commit -m 'audio(kids): recovered previously paid authentic V4 Flow MP3 original; no synthesis; review only'
+          for attempt in 1 2 3;do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014;then exit 0;fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          exit 1
+      - name: Preserve purchased originals if downstream QA or commit fails
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-prepaid-originals-safekeeping-on-qa-error
+          retention-days: 90
+          if-no-files-found: warn
+          path: ${{ runner.temp }}/kids-v4-prepaid-inbox/*.mp3
+      - name: Destroy local decrypted signed URLs and private key
+        if: always()
+        run: |
+          rm -rf "$RUNNER_TEMP/kids-v4-prepaid-inbox"
+          rm -f "$RUNNER_TEMP/generation-downloads.json" "$RUNNER_TEMP/generation-downloads.json.gz" "$RUNNER_TEMP/private.pem" "$RUNNER_TEMP/sealed.der"

@@ -1,0 +1,52 @@
+name: KIDS V4 450 Safe Direct MP3 Readiness (GET only)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/probe_quiz_v4_direct_api.py'
+      - '.github/workflows/kids-quiz-v4-450-direct-api-readiness.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-450-direct-api-read-only
+  cancel-in-progress: false
+
+jobs:
+  read-only-voice-probe:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+
+      - name: Cost-free voice / model / subscription check, no speech synthesis
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          python3 -m py_compile kids/tools/probe_quiz_v4_direct_api.py
+          python3 kids/tools/probe_quiz_v4_direct_api.py
+
+      - name: Persist sanitized readiness flags without loss from concurrent pushes
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          for n in 1 2 3; do
+            git fetch origin "$branch"
+            git reset --hard FETCH_HEAD
+            python3 kids/tools/probe_quiz_v4_direct_api.py
+            git add kids/data/quiz-v4-450-api-readiness.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m 'review(kids): record cost-free sanitized V4 direct-MP3 API capability flags'
+            if git push origin HEAD:"$branch"; then exit 0; fi
+          done
+          echo "::error::Probe flags were not persisted due to concurrent review updates."
+          exit 1

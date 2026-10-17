@@ -1,0 +1,17 @@
+{
+  "scope": "KIDS_V4_STAGE1_TEN_REAL_MP3S_OFFLINE_IMPORT",
+  "createdAt": "2026-10-17",
+  "requiresPresentAlreadyPaidOriginals": 10,
+  "expectedCompletedQuestionsMinimum": 76,
+  "expectedGroups": {
+    "4-6": 70,
+    "7-8": 4,
+    "9-10": 2
+  },
+  "newSpeechCreditsAuthorized": 0,
+  "elevenLabsRequestsAllowed": false,
+  "live": false,
+  "sourceProductionRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39030363743",
+  "repairReason": "First offline import runner independently verified 76/450 and six MP3 composites, but rebase conflicted in auto-written handover files. Omit handover from commit; dedicated handover bot updates after import.",
+  "attempt": 2
+}

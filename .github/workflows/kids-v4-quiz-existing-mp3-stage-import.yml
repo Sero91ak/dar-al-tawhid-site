@@ -1,0 +1,89 @@
+name: KIDS V4 Stage Existing MP3s Into Quiz Review (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/stage_quiz_v4_existing_mp3_import.py'
+      - '.github/workflows/kids-v4-quiz-existing-mp3-stage-import.yml'
+      - 'kids/data/quiz-v4-first150-composed-preview.json'
+      - 'kids/data/quiz-v4-age7to10-composed-preview.json'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-450-staged-audio-import-review-only
+  cancel-in-progress: false
+
+jobs:
+  import-original-mp3s-into-quiz-review:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Read the actual review-only quiz MP3s, not live app
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          persist-credentials: true
+      - name: Install MP3 metadata validator if necessary
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/stage_quiz_v4_existing_mp3_import.py
+          if ! command -v ffprobe >/dev/null; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          command -v ffprobe
+      - name: Import existing verified audio bytes into internal 450-question map
+        run: |
+          set -euo pipefail
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          base=Path('kids/review-only')
+          d=json.loads((base/'quiz-v4-450-actual-mp3-import.json').read_text())
+          s=json.loads((base/'quiz-v4-450-actual-mp3-import-summary.json').read_text())
+          assert d['reviewOnly'] is True and d['publicReleaseEnabled'] is False
+          assert d['humanListeningApproved'] is False and d['elevenLabsCreditsSpentByImport']==0
+          assert len(d['questions'])==450 and s['completeFourPartQuestions']>=0
+          assert s['notCompleteFourPartQuestions']==450-s['completeFourPartQuestions']
+          assert s['completeFourPartQuestions']==sum(d['byAge'][age]['completeFourPartQuestions'] for age in ('4-6','7-8','9-10'))
+          assert not any(q['publicPlaybackAuthorized'] for q in d['questions'].values())
+          print('PASS: all 450 IDs mapped; actual fully recorded V4 questions =',s['completeFourPartQuestions'],'; ZERO paid generation.')
+          PY
+      - name: Save staged quiz MP3 map into GitHub review branch only
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-original-v4-import-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          if git diff --cached --quiet; then
+            echo "Already staged; no further changes, no MP3 regenerated."
+            exit 0
+          fi
+          git commit -m "audio(kids): link 450 quiz IDs to existing hash-verified V4 MP3s, review only"
+          for try in 1 2 3 4; do
+            if git push origin HEAD:"$branch"; then
+              echo "STAGED: existing V4 MP3s linked to quiz question IDs in review only."
+              exit 0
+            fi
+            git fetch origin "$branch"
+            git rebase FETCH_HEAD
+          done
+          echo "::error::Staged report was preserved as artifact; no paid re-render permitted."
+          exit 1
+      - name: Preserve mapped originals and review report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-450-actual-mp3-quiz-import-map
+          if-no-files-found: warn
+          retention-days: 90
+          path: |
+            kids/review-only/quiz-v4-450-actual-mp3-import.json
+            kids/review-only/quiz-v4-450-actual-mp3-import-summary.json

@@ -1,0 +1,90 @@
+name: KIDS V4 Older Age 2-Stage Recording Preflight (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/build_quiz_v4_older_stage_preflight.py'
+      - '.github/reports/kids-v4-older-age-no-credit-priority.json'
+      - '.github/workflows/kids-v4-older-age-stage-preflight.yml'
+      - 'kids/data/quiz-kids-curated-450-review.json'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-older-age-stage-preflight-only
+  cancel-in-progress: false
+
+jobs:
+  verify-exact-original-text-stages:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out private KIDS review branch only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Validate selected original lessons and build exact stage recording preflight
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/build_quiz_v4_older_stage_preflight.py
+          python3 kids/tools/build_quiz_v4_older_stage_preflight.py
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          folder=Path(".github/reports")
+          stages=[
+            json.loads((folder/f"kids-v4-older-age-stage{i}-exact-voice-preflight.json").read_text(encoding="utf-8"))
+            for i in (1,2)
+          ]
+          assert [s["stage"] for s in stages]==[1,2]
+          assert [s["numberOfQuestions"] for s in stages]==[20,20]
+          assert [s["numberOfNewOriginalTexts"] for s in stages]==[65,85]
+          assert [s["numberOfNewCharacters"] for s in stages]==[1842,3089]
+          assert all(s["newCreditsSpent"]==0 and s["published"] is False for s in stages)
+          assert all(s["voiceGenerationAuthorized"] is False and
+                     s["automatedElevenLabsRequest"] is False and
+                     s["humanHearingApproved"] is False for s in stages)
+          assert all(len(q["answers"])==3 and
+                     q["humanSourceApproval"] is False and
+                     q["manualRecordingAuthorization"] is False
+                     for s in stages for q in s["questions"])
+          all_sha=[q["spokenTextSHA256"] for s in stages for q in s["originalTextRecordingQueue"]]
+          assert len(all_sha)==len(set(all_sha))==150
+          assert all(hashlib.sha256(q["spokenText"].encode("utf-8")).hexdigest()==q["spokenTextSHA256"]
+                     for s in stages for q in s["originalTextRecordingQueue"])
+          assert json.load(open("kids/data/quiz-curation-release.json"))["enabled"] is False
+          print("PASS_KIDS_V4_2_STAGES_65_AND_85_EXACT_VOICE_SCRIPTS_NO_CREDITS", flush=True)
+          PY
+      - name: Commit only private human review documents to draft PR
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          git add .github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json
+          git add .github/reports/kids-v4-older-age-stage2-exact-voice-preflight.json
+          if git diff --cached --quiet; then
+            echo "Exact voice preflight files already current"
+            exit 0
+          fi
+          git commit -m 'review(kids): record only missing exact 65+85 originals for two older-age stages'
+          for n in 1 2 3; do
+            if git push origin HEAD:"$branch"; then exit 0; fi
+            git fetch origin "$branch"
+            if ! git rebase FETCH_HEAD; then exit 1; fi
+          done
+          exit 1
+      - name: Keep private manifests for review without live deployment
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-older-age-two-stage-exact-recording-scripts-not-approved
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            .github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json
+            .github/reports/kids-v4-older-age-stage2-exact-voice-preflight.json

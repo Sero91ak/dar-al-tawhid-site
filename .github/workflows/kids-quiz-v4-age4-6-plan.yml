@@ -1,0 +1,67 @@
+name: KIDS Quiz V4 First 300 (age 4-6) Review QA
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/prepare_quiz_v4_age_4_6_300.py'
+      - 'kids/tools/quiz_v4_first300_release_gate.py'
+      - 'kids/tools/quiz_v4_segmented_300.py'
+      - 'kids/data/quiz-v4-age4-6-300-segmented-plan.json'
+      - '.github/workflows/kids-quiz-v4-age4-6-plan.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-quiz-v4-age4-6-plan-001
+  cancel-in-progress: false
+
+jobs:
+  plan-300:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout the test branch only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Syntax check
+        run: python3 -m py_compile kids/tools/prepare_quiz_v4_age_4_6_300.py
+      - name: Generate all 300 verified V4 speech plans (zero credits)
+        run: python3 kids/tools/prepare_quiz_v4_age_4_6_300.py
+      - name: Check 300/300, with no implicit publishing
+        run: |
+          python3 - <<'PY'
+          import json
+          p=json.load(open('kids/data/quiz-v4-age4-6-300-review.json'))
+          assert p['totalQuestions']==300
+          assert p['totalSpeechContracts']==1200
+          assert p['modelId']=='eleven_v4'
+          assert len({q['questionId'] for q in p['items']})==300
+          assert all(q['ageBand']=='4-6' for q in p['items'])
+          assert all(q['published'] is False and q['readyForLive'] is False for q in p['items'])
+          assert p['publishedWithNewV4Audio']==0
+          print('PASS 300 age 4–6 script plans; not live; no paid synthesis')
+          PY
+      - name: Verify segmented V4 plan, exact text reconstruction and zero-credit assembly readiness
+        run: |
+          python3 -m py_compile kids/tools/quiz_v4_segmented_300.py
+          python3 kids/tools/quiz_v4_segmented_300.py --audit
+
+      - name: Preview exact audio readiness and enforce no-early-live release
+        run: |
+          python3 -m py_compile kids/tools/quiz_v4_first300_release_gate.py
+          python3 kids/tools/quiz_v4_first300_release_gate.py
+
+      - name: Save reviewed plan to test branch, never main
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-age4-6-300-review.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'review(kids quiz): 300 4-6 V4 speech plans verified, not live'
+            git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014
+          fi

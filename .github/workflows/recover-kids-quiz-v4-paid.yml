@@ -1,0 +1,91 @@
+name: KIDS Quiz V4 001–020 recover paid audio (review only)
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - kids/tools/recover_quiz_v4_batch.py
+      - kids/tools/probe_quiz_v4_flow_get.py
+      - .github/workflows/recover-kids-quiz-v4-paid.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-quiz-v4-paid-recovery-001-020
+  cancel-in-progress: false
+
+jobs:
+  restore-originals:
+    name: Recover already-paid Serhat V4 originals only
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' && vars.ELEVENLABS_FLOW_EXPORT_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    steps:
+      - name: Checkout only this review branch, never production
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          persist-credentials: true
+
+      - name: Ensure read-only recovery script is syntactically valid
+        run: python3 -m py_compile kids/tools/recover_quiz_v4_batch.py kids/tools/probe_quiz_v4_flow_get.py
+
+      - name: Check FFmpeg is available
+        run: |
+          ffmpeg -version | head -n 1
+          ffprobe -version | head -n 1
+
+      - name: Probe official Flow TTS GET against one existing paid V4 take
+        id: recovery
+        continue-on-error: true
+        run: python3 kids/tools/probe_quiz_v4_flow_get.py
+
+      - name: Retain read-only recovery progress on review branch
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "dar-kids-review-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ -f kids/data/quiz-v4-batch-001-020-recovery-report.json ]; then
+            git add kids/data/quiz-v4-batch-001-020-recovery-report.json
+          fi
+          if [ -f kids/data/quiz-v4-batch-001-020-import-review.json ]; then
+            git add kids/data/quiz-v4-batch-001-020-import-review.json
+          fi
+          if [ -f kids/data/quiz-v4-flow-get-probe.json ]; then
+            git add kids/data/quiz-v4-flow-get-probe.json
+          fi
+          if [ -d kids/assets/kids-quiz-audio/v4-review-001-020 ]; then
+            git add kids/assets/kids-quiz-audio/v4-review-001-020/
+          fi
+          if [ -f kids/data/quiz-v4-batch-001-020-import-review.json ]; then
+            git add kids/data/quiz-v4-batch-001-020-review.json
+          fi
+          if ! git diff --cached --quiet; then
+            git commit -m "assets(kids-v4-review): recover already paid originals (never public)"
+            git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014
+          fi
+
+      - name: Save review MP3s and recovery report as CI artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-quiz-v4-001-020-recovery-review
+          if-no-files-found: ignore
+          retention-days: 14
+          path: |
+            kids/data/quiz-v4-batch-001-020-recovery-report.json
+            kids/data/quiz-v4-batch-001-020-import-review.json
+            kids/data/quiz-v4-flow-get-probe.json
+            kids/assets/kids-quiz-audio/v4-review-001-020/*.mp3
+
+      - name: Fail closed unless ALL 56 originals were recovered
+        if: steps.recovery.outcome != 'success'
+        run: |
+          echo "::error::The official V4 Flow GET probe failed. Do NOT synthesize again or release to children."
+          exit 1

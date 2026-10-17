@@ -1,0 +1,78 @@
+name: KIDS Quiz V4 Latest Handover Snapshot (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/write_quiz_v4_handover.py'
+      - 'kids/review-only/quiz-v4-nine-originals-github-archive-recovery.json'
+      - 'kids/review-only/QUIZ-V4-LETZTE9-ORIGINALE-EXPORT.md'
+      - '.github/reports/kids-v4-older-stage1-source-and-answer-audit.json'
+      - 'kids/review-only/quiz-v4-450-actual-mp3-import-summary.json'
+      - 'kids/review-only/quiz-v4-450-next-completion-priority.json'
+      - 'kids/review-only/quiz-v4-remaining-unique-audio-credit-breakdown.json'
+      - 'kids/review-only/quiz-v4-older300-compact-spoken-proposals.json'
+      - 'kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json'
+      - 'kids/tools/import_quiz_v4_human_hearing_reviews.py'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-450-paid-generation-ledger.json'
+      - 'kids/data/quiz-v4-paid-flow-import-status.json'
+      - 'kids/data/quiz-v4-450-production-status.json'
+      - 'kids/data/quiz-curation-release.json'
+      - '.github/workflows/kids-v4-quiz-latest-handover.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-latest-copyable-handover
+  cancel-in-progress: false
+
+jobs:
+  maintain-copyable-project-state:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout only the private quiz V4 review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Read all 450 current quiz imports, paid V4 originals and safety switches
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/write_quiz_v4_handover.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 kids/tools/write_quiz_v4_handover.py --check
+          echo "PASS: all quiz handover facts are derived from GitHub JSON state; new ElevenLabs credits = 0."
+      - name: Keep project handover current on review branch only
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-handover-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          git add kids/review-only/quiz-v4-handover-latest.json
+          if git diff --cached --quiet; then
+            echo "Handover already current. Zero new cost."
+            exit 0
+          fi
+          git commit -m "docs(kids v4): save up-to-date copyable quiz progress and next steps"
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+              echo "Saved current quiz V4 handover to GitHub review branch."
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          exit 1
+      - name: Backup copyable quiz project handover
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-quiz-v4-copyable-latest-handover
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+            kids/review-only/quiz-v4-handover-latest.json

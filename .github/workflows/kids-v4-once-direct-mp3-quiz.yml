@@ -1,0 +1,100 @@
+name: KIDS V4 One-Time Direct MP3 Into Quiz (approved)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - '.github/workflows/kids-v4-once-direct-mp3-quiz.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-approved-one-time-direct-source-prepaid-claim
+  cancel-in-progress: false
+
+jobs:
+  save-one-real-v4-mp3-for-kids-quiz:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Adopt only unchanged no-charge claim and persist new runner ID BEFORE paid POST
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/one_time_v4_direct_to_quiz.py
+          python3 kids/tools/one_time_v4_direct_to_quiz.py --adopt-unspent-reservation
+          git config user.name tawhid-kids-direct-original-v4
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-direct-one-time-run-claim.json
+          git commit -m 'reserve(kids): never pay twice for the approved V4 quiz original'
+          for n in 1 2 3; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then exit 0; fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Produce exactly one original DIRECT MP3, already approved
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          KIDS_V4_EXPLICIT_SPEND_APPROVAL: "YES"
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null 2>&1 || ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=25 update -qq
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=25 install -y ffmpeg
+          fi
+          command -v ffprobe
+          command -v ffmpeg
+          python3 kids/tools/one_time_v4_direct_to_quiz.py --produce
+      - name: Immediately compose and map this actual MP3 into KIDS quiz preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+      - name: Persist real original bytes and exact KIDS quiz mapping (private only)
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add kids/data/quiz-v4-direct-one-time-run-claim.json
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/data/quiz-v4-450-paid-generation-ledger.json
+          git add kids/assets/kids-quiz-audio/v4-curated450-review/
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-first150-composed-preview.json
+          git add kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json
+          git add kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git commit -m 'audio(kids): import genuine direct V4 original into matching quiz question'
+          for n in 1 2 3; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then exit 0; fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Always retain paid original and claim even if later steps fail
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-direct-quiz-one-time-paid-original-mp3-no-repurchase
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/data/quiz-v4-direct-one-time-run-claim.json
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json

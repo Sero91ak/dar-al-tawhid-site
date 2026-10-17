@@ -1,0 +1,117 @@
+name: KIDS V4 Finish First Ten REAL Original MP3 Import - Zero Credits
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/review-only/quiz-v4-first-ten-free-finalize-trigger.json'
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-first-ten-free-finalize-20261017
+  cancel-in-progress: false
+jobs:
+  publish-only-private-review-composition:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' && github.event.pull_request.head.ref == 'review/kids-quiz-v4-batch-001-020-20261014'
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Verify ten paid MP3s are already genuinely saved - NEVER GENERATE SPEECH HERE
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          home=Path('kids')
+          expected=json.loads((home/'review-only/quiz-v4-first-ten-one-time-authorization.json').read_text())
+          usage=json.loads((home/'data/quiz-v4-older-stage1-usage.json').read_text())
+          reg=json.loads((home/'data/quiz-v4-450-original-clip-registry.json').read_text())
+          ledger=json.loads((home/'data/quiz-v4-450-paid-generation-ledger.json').read_text())
+          sha_set=set(expected['allowedTextSha256'])
+          assert len(sha_set)==10
+          by_text={hashlib.sha256(text.encode()).hexdigest():(text,clip) for text,clip in reg['textClips'].items()}
+          assert sha_set<=set(by_text)
+          entries=[x for x in usage['requestJournal']['entries'] if x['textSHA256'] in sha_set]
+          assert len(entries)==10 and all(x['status']=='ORIGINAL_MP3_SAVED' for x in entries)
+          paid={x['textSha256']:x for x in ledger['rows']}
+          for sid in sha_set:
+              txt,clip=by_text[sid]
+              assert clip['modelId']=='eleven_v4' and clip['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+              assert sid in paid and paid[sid]['mp3Sha256']==clip['sha256']
+              path=Path(clip['url'].lstrip('/'))
+              assert path.is_file(),f'Actual paid MP3 bytes missing for {sid}'
+              assert hashlib.sha256(path.read_bytes()).hexdigest()==clip['sha256']
+          assert json.loads((home/'data/quiz-curation-release.json').read_text())['enabled'] is False
+          print('PASS: ten real NEW V4 MP3s physically present, hashes and billing ledger exact, no new TTS')
+          PY
+      - name: Recompose and stage original audio against 450 question IDs entirely OFFLINE
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then sudo apt-get install -y ffmpeg; fi
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --audit
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          q=json.loads(Path('kids/review-only/quiz-v4-450-actual-mp3-import-summary.json').read_text())
+          assert q['completeFourPartQuestions']>=76, 'New real V4 MP3s not reflected in 450 quiz audio'
+          assert q['byAge']['7-8']['completeFourPartQuestions']>=4
+          assert q['byAge']['9-10']['completeFourPartQuestions']>=2
+          assert json.loads(Path('kids/data/quiz-curation-release.json').read_text())['enabled'] is False
+          print('PASS: real original audio imported privately, currently',q['completeFourPartQuestions'],'of 450 complete, no credits and no live deploy')
+          PY
+      - name: Commit genuine six new composite MP3s and regenerated status with conflict-safe retry
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-offline-import
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-450-production-status.json kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-older-stage1-next-recording-batch.json
+          if git diff --cached --quiet;then
+            echo 'Review audio already synchronized; no new MP3 purchase.'
+            exit 0
+          fi
+          git commit -m 'audio(kids V4): finish offline import of ten real paid speech originals into 76 quizzes'
+          # The shared review branch has multiple independent CI writers.
+          # Stash any ONLY-local uncommitted ffmpeg scratch before rebasing.
+          git stash push --include-untracked -m kids-v4-offline-extra-temp || true
+          for attempt in 1 2 3 4 5 6 7 8;do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014;then
+              echo 'CONFIRMED 76+ private quiz audios safely committed. No live merge.'
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            if ! git rebase -X theirs FETCH_HEAD;then
+              echo 'Rebase conflict; stop rather than corrupt original MP3 sources.'
+              git rebase --abort || true
+              exit 1
+            fi
+          done
+          echo 'Push contention: genuine original MP3s remain saved; all composite MP3s preserved in artifact.'
+          exit 1
+      - name: Preserve OFFLINE recomposed MP3s and preview on any failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-new-first-ten-six-quiz-composites-no-tts
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+            kids/data/quiz-v4-age7to10-composed-preview.json
+            kids/data/quiz-v4-age7to10-offline-coverage.json
+            kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+            kids/review-only/quiz-v4-handover-latest.json

@@ -1,0 +1,75 @@
+name: KIDS V4 Remaining Audio Cost & Reuse Audit (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/audit_quiz_v4_remaining_audio_credit_budget.py'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-missing9-prepaid-originals.json'
+      - '.github/workflows/kids-v4-remaining-audio-credit-audit.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-remaining-unpaid-speech-forecast
+  cancel-in-progress: false
+
+jobs:
+  check-remaining-v4-original-credits:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Fetch only the KIDS V4 review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Audit actual remaining originals against registered MP3s and protected prepaid takes
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/audit_quiz_v4_remaining_audio_credit_budget.py
+          python3 kids/tools/audit_quiz_v4_remaining_audio_credit_budget.py
+          python3 - <<'PY'
+          import json
+          d=json.load(open("kids/review-only/quiz-v4-remaining-unique-audio-credit-breakdown.json"))
+          assert d["modelId"]=="eleven_v4" and d["voiceId"]=="DkU7j9uO4ZEtLD2iRZSH"
+          assert d["selectedQuestions"]==450 and not d["newSpeechNeededForAge4to6"]
+          assert d["candidateTextEditsAuthorized"] is False
+          assert d["paidSynthesisAuthorized"] is False
+          assert d["creditsSpentByThisAudit"]==0 and d["publicReleaseAllowed"] is False
+          assert d["uniqueTrulyNewTextFragments"]>0
+          assert all(d["byAge"][age][part]["uniqueNewSegments"]==0 for age in ("4-6","7-8","9-10")
+                     for part in ("correct","retry"))
+          print("PASS: real unpaid audio text and budget by age; no double purchases or synthesis.")
+          PY
+      - name: Save accurate reviewed cost breakdown to GitHub review only
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-audio-budget-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/quiz-v4-remaining-unique-audio-credit-breakdown.json
+          git add kids/review-only/QUIZ-V4-AUDIO-KOSTENCHECK.md
+          if git diff --cached --quiet; then
+            echo "No new cost breakdown changes."
+            exit 0
+          fi
+          git commit -m "review(kids V4): save accurate no-credit missing original audio budget by age"
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then exit 0; fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          exit 1
+      - name: Archive V4 cost and saved original audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-unpaid-audio-budget-and-dedupe-report
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/review-only/quiz-v4-remaining-unique-audio-credit-breakdown.json
+            kids/review-only/QUIZ-V4-AUDIO-KOSTENCHECK.md

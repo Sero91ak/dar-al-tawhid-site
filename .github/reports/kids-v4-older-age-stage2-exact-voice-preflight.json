@@ -1,0 +1,4009 @@
+{
+  "schemaVersion": 1,
+  "app": "TAWḤĪD KIDS",
+  "scope": "V4_OLDER_AGE_PRIVATE_STAGE_PREFLIGHT",
+  "stage": 2,
+  "ageBands": [
+    "7-8",
+    "9-10"
+  ],
+  "reviewOnly": true,
+  "published": false,
+  "voiceGenerationAuthorized": false,
+  "automatedElevenLabsRequest": false,
+  "newCreditsSpent": 0,
+  "humanHearingApproved": false,
+  "questions": [
+    {
+      "questionId": "kids-quiz-028",
+      "ageBand": "7-8",
+      "originalQuestion": "Wie behandeln wir unseren Nachbarn?",
+      "correctAnswer": "Wir schaden ihm nicht",
+      "answers": [
+        "Wir schaden ihm nicht",
+        "Wir ärgern ihn absichtlich",
+        "Wir ignorieren jedes Recht"
+      ],
+      "originalSource": "Ṣaḥīḥ al-Bukhārī 6018; Ṣaḥīḥ Muslim 47",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Hör dir die Frage und die Antworten in Ruhe an. Wie behandeln wir unseren Nachbarn? Antwort 1: Wir schaden ihm nicht. Antwort 2: Wir ärgern ihn absichtlich. Antwort 3: Wir ignorieren jedes Recht. Wähle die Antwort, die du für richtig hältst.",
+      "explanation": "Das merken wir uns: Der Prophet ﷺ verbot, dem Nachbarn Schaden zuzufügen.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "9fc600a4a5804dca653144e0929a2b73e49f0bcbf6953f6c52702bb584d5e7bd",
+          "segments": [
+            {
+              "textSHA256": "01feb19e02ab4813aa9c8796632b2cb75ca042b8aa1ac95c11448c26087045bc",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "87ba8b1293b253b72c56379db416c306946fad2b71f7282af219c2df45d1cf42",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "7b60c8badf8b3f5d29293f91425f62ee2bc03ad2b2c26b4ff9a747bd6bf6607b",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "3760c9455930fa987546d5a6d2ff37de6990a91aeefe51a1adc9fb74bb56d00b",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "d956e6103cfb5513a61f2ebb2d5b493670cfd90f6f0fc92d8e48d7fbaf186e79",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "9df45870108859efd01bef2332145fecc00307de78ca967efe550cdbe8765076",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "7b60c8badf8b3f5d29293f91425f62ee2bc03ad2b2c26b4ff9a747bd6bf6607b",
+            "3760c9455930fa987546d5a6d2ff37de6990a91aeefe51a1adc9fb74bb56d00b",
+            "d956e6103cfb5513a61f2ebb2d5b493670cfd90f6f0fc92d8e48d7fbaf186e79"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "c46aa1520af01daf2f55c6c1e8bf07cc30f198c53c736d5290a570951ba5ee4d",
+          "segments": [
+            {
+              "textSHA256": "c46aa1520af01daf2f55c6c1e8bf07cc30f198c53c736d5290a570951ba5ee4d",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "a71b077a76ab2a13d6567f5cfae8020a1f8247ddb17d03d51a77ebe77802ebbc",
+          "segments": [
+            {
+              "textSHA256": "a71b077a76ab2a13d6567f5cfae8020a1f8247ddb17d03d51a77ebe77802ebbc",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "2e4ce7e0a57944fbc5c89777411f1d15f763222aa30d45be99971a2b8abad12f",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "1710756b4df6fa78fc2680d8a4177d89bd2aa1142f410ce97d77712f4de78339",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "1710756b4df6fa78fc2680d8a4177d89bd2aa1142f410ce97d77712f4de78339"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-030",
+      "ageBand": "7-8",
+      "originalQuestion": "Wie sprechen wir mit unseren Eltern?",
+      "correctAnswer": "Respektvoll und freundlich",
+      "answers": [
+        "Respektvoll und freundlich",
+        "Spöttisch",
+        "Absichtlich verletzend"
+      ],
+      "originalSource": "Qurʾān 17:23–24",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Mal sehen, was du zu diesem Thema weißt. Wie sprechen wir mit unseren Eltern? Antwort 1: Respektvoll und freundlich. Antwort 2: Spöttisch. Antwort 3: Absichtlich verletzend. Wähle die Antwort, die du für richtig hältst.",
+      "explanation": "Das merken wir uns: Allah befiehlt gutes und respektvolles Verhalten gegenüber den Eltern.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "c05931c71cebd3bf9b884fdf496d4284a5c2c9c3d5aad51e0b596dcfb069a105",
+          "segments": [
+            {
+              "textSHA256": "8d3287f92308acaf8a8aa0ff939e8377328fc76a35be7fc02191e40455929975",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "35e11500c905cd8dc2ec390f9abee483b9f9241efd6fa9b33a1a2dd5a6a69a0e",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "d7bf29f7f574a53494f14365f7fde0176e14895378f8c1eef14ff4b86b5f8550",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "0488b02f1dd311ca9dfc7fc92d2efc7dbace41a18469a1d5d13e363b9ddc27d5",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "69e960d76c59a506808b0908ef47bc739cf012086feba91e5b271210ebc225c5",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "9df45870108859efd01bef2332145fecc00307de78ca967efe550cdbe8765076",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "d7bf29f7f574a53494f14365f7fde0176e14895378f8c1eef14ff4b86b5f8550",
+            "0488b02f1dd311ca9dfc7fc92d2efc7dbace41a18469a1d5d13e363b9ddc27d5",
+            "69e960d76c59a506808b0908ef47bc739cf012086feba91e5b271210ebc225c5"
+          ]
+        },
+        "correct": {
+          "mode": "original-paid-exact",
+          "spokenTextSHA256": "361184168361ae774368033336fb7d63cc30b8addddbf1e6c022b7d9a30ea1e2",
+          "paidOriginalGenerationId": "N6KUNJZuktlS1uTmRNPI",
+          "alreadyRecorded": true
+        },
+        "retry": {
+          "mode": "original-paid-exact",
+          "spokenTextSHA256": "ca72dd49fc4be3a3826c7f03d437f025a3321664897a916bb9777d8799ecffb6",
+          "paidOriginalGenerationId": "vTRh2ZkXhF0R0jOplwKS",
+          "alreadyRecorded": true
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "da59908049b7dac08a95ef18c534f60e51313e871dc8a533f4a4f421664ff015",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "c0f09765841cd6fa9d2f212ad55c07b8aada32bf782fd70e83aa9b8fba6aedd0",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "c0f09765841cd6fa9d2f212ad55c07b8aada32bf782fd70e83aa9b8fba6aedd0"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-276",
+      "ageBand": "7-8",
+      "originalQuestion": "Wie rief Zakariyyā seinen Herrn an?",
+      "correctAnswer": "Leise und demütig",
+      "answers": [
+        "Leise und demütig",
+        "Spöttisch",
+        "Hochmütig"
+      ],
+      "originalSource": "Qurʾān 19:3",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Hör dir die Frage und die Antworten in Ruhe an. Wie rief Zakariyyā seinen Herrn an? Antwort 1: Leise und demütig. Antwort 2: Spöttisch. Antwort 3: Hochmütig. Wähle die Antwort, die du für richtig hältst.",
+      "explanation": "Das merken wir uns: Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "d612a30d69070ab8fb46024d49d963b9d18f92f5e86e503c7326da5eeccbab57",
+          "segments": [
+            {
+              "textSHA256": "01feb19e02ab4813aa9c8796632b2cb75ca042b8aa1ac95c11448c26087045bc",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "14f756da31e8f804465b0e5f750e44bdf04d1036ce4efb42e30f6bd8265b90fb",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "ac9ca77763320cd61790b2f97bc0d09358c03462e47c83999277e877b86ef7d9",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "0488b02f1dd311ca9dfc7fc92d2efc7dbace41a18469a1d5d13e363b9ddc27d5",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "363060dac698830e182d307bb6e30d52d5a9015e890e60d3195d97edc3848f05",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "9df45870108859efd01bef2332145fecc00307de78ca967efe550cdbe8765076",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "14f756da31e8f804465b0e5f750e44bdf04d1036ce4efb42e30f6bd8265b90fb",
+            "ac9ca77763320cd61790b2f97bc0d09358c03462e47c83999277e877b86ef7d9",
+            "0488b02f1dd311ca9dfc7fc92d2efc7dbace41a18469a1d5d13e363b9ddc27d5",
+            "363060dac698830e182d307bb6e30d52d5a9015e890e60d3195d97edc3848f05"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "15da69a5d5c336569d7b61da875d3c63e53a9d49ccda248b65293fe15761d098",
+          "segments": [
+            {
+              "textSHA256": "15da69a5d5c336569d7b61da875d3c63e53a9d49ccda248b65293fe15761d098",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "9794bce7934cdf3ce1133bbe82d135d98dc14d7f256a08c1c2ae8f2cf6651798",
+          "segments": [
+            {
+              "textSHA256": "9794bce7934cdf3ce1133bbe82d135d98dc14d7f256a08c1c2ae8f2cf6651798",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "5aff88c998c1f2a8dc3442b72e7fb351c498f6c70224852484886458edb0b9b9",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "a07bbdc08379567eaab7aa1dc68a8bffe40fd35bd9bde110a7c9c5ca24ba4c15",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "a07bbdc08379567eaab7aa1dc68a8bffe40fd35bd9bde110a7c9c5ca24ba4c15"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-027",
+      "ageBand": "7-8",
+      "originalQuestion": "Was lehrte der Prophet ﷺ über unsere Worte?",
+      "correctAnswer": "Gutes sprechen oder schweigen",
+      "answers": [
+        "Gutes sprechen oder schweigen",
+        "Alles weitererzählen",
+        "Andere beleidigen"
+      ],
+      "originalSource": "Ṣaḥīḥ al-Bukhārī 6018; Ṣaḥīḥ Muslim 47",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Nimm dir Zeit für deine Antwort. Was lehrte der Prophet ﷺ über unsere Worte? Antwort 1: Gutes sprechen oder schweigen. Antwort 2: Alles weitererzählen. Antwort 3: Andere beleidigen. Wähle die Antwort, die du für richtig hältst.",
+      "explanation": "Das merken wir uns: Der Prophet ﷺ verband den Īmān mit gutem Reden oder Schweigen.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "3f2778f601f79da845c3f068bba7eca64c29f665e86f9c57363ec10841045731",
+          "segments": [
+            {
+              "textSHA256": "254ff1009aa48b3771f9fb1bce5f00b961159acf8d2ae91246b9182186395077",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "1c5c438e4274c5d70ee5885ce3c1e73569d60aa049ea3c4ab4858e8f60618567",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "821e0226956e087a1ffdb579e8b79f732ebc9c534bdea3357225e656cae29a16",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "93978d66f5247399d41f1f8ddb22b546917a068b4e68d6fe58f5a80234bc4e83",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "26a07db8c5cf6421dec9a401126840f468ddb82f0e9849b4d3b4e1c8f745a268",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "9df45870108859efd01bef2332145fecc00307de78ca967efe550cdbe8765076",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "821e0226956e087a1ffdb579e8b79f732ebc9c534bdea3357225e656cae29a16",
+            "93978d66f5247399d41f1f8ddb22b546917a068b4e68d6fe58f5a80234bc4e83",
+            "26a07db8c5cf6421dec9a401126840f468ddb82f0e9849b4d3b4e1c8f745a268"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "1e8fbf5109837ad85899962f1f0bbeb2fdd2eda0e6115e7b49c48b1ff5879a49",
+          "segments": [
+            {
+              "textSHA256": "1e8fbf5109837ad85899962f1f0bbeb2fdd2eda0e6115e7b49c48b1ff5879a49",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "b9a92bb66b247e51512344b5987207dd4ce5d750b0805869fdab0db72dd7e3cb",
+          "segments": [
+            {
+              "textSHA256": "b9a92bb66b247e51512344b5987207dd4ce5d750b0805869fdab0db72dd7e3cb",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "90c47a733487173ca9a35dc0204de70083d1b1e2385c31e21d7990ab0247171d",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "9df2dcf27c84e5c79234bac8e2398b23f45b95064579fe1879b1571f7474cfbd",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "9df2dcf27c84e5c79234bac8e2398b23f45b95064579fe1879b1571f7474cfbd"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-070",
+      "ageBand": "7-8",
+      "originalQuestion": "Wovor warnte Luqmān seinen Sohn besonders?",
+      "correctAnswer": "Vor Shirk",
+      "answers": [
+        "Vor Shirk",
+        "Vor Lernen",
+        "Vor Hilfsbereitschaft"
+      ],
+      "originalSource": "Qurʾān 31:13",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Mal sehen, was du zu diesem Thema weißt. Wovor warnte Luqmān seinen Sohn besonders? Antwort 1: Vor Shirk. Antwort 2: Vor Lernen. Antwort 3: Vor Hilfsbereitschaft. Wähle die Antwort, die du für richtig hältst.",
+      "explanation": "Das merken wir uns: Luqmān erklärte, dass Shirk großes Unrecht ist.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "bd5eff76cdf1292b5be0f836d3026980b22100be40eb25cd16ea7e1b15464b38",
+          "segments": [
+            {
+              "textSHA256": "8d3287f92308acaf8a8aa0ff939e8377328fc76a35be7fc02191e40455929975",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "5929ba45ede080ea0aa75020030b99af5e6014843dfaaec3cdb0aeb42456fe49",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "2c6348fa0583345250f2de838ce99a44721723742b7a892bdd98586009a11bfe",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "657361ee11caa674d97ed0b64cde7eb5f0ebef28929cd99c73a1dfe2c781fe52",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "a502797ba5e767ef5603b59f8051eb5019d6c4c42f6e046b6b2a1cf7cb8f29cb",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "9df45870108859efd01bef2332145fecc00307de78ca967efe550cdbe8765076",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "5929ba45ede080ea0aa75020030b99af5e6014843dfaaec3cdb0aeb42456fe49",
+            "2c6348fa0583345250f2de838ce99a44721723742b7a892bdd98586009a11bfe",
+            "657361ee11caa674d97ed0b64cde7eb5f0ebef28929cd99c73a1dfe2c781fe52",
+            "a502797ba5e767ef5603b59f8051eb5019d6c4c42f6e046b6b2a1cf7cb8f29cb"
+          ]
+        },
+        "correct": {
+          "mode": "original-paid-exact",
+          "spokenTextSHA256": "361184168361ae774368033336fb7d63cc30b8addddbf1e6c022b7d9a30ea1e2",
+          "paidOriginalGenerationId": "N6KUNJZuktlS1uTmRNPI",
+          "alreadyRecorded": true
+        },
+        "retry": {
+          "mode": "original-paid-exact",
+          "spokenTextSHA256": "ca72dd49fc4be3a3826c7f03d437f025a3321664897a916bb9777d8799ecffb6",
+          "paidOriginalGenerationId": "vTRh2ZkXhF0R0jOplwKS",
+          "alreadyRecorded": true
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "11e7c01e76a8c922d4aa4e0c601ad6e59ebf63e36b4c34b31b350bfa4d7054d4",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "543d6b55083c2eedc734412ab8532e44f3cb8fe8e45074c1211b3b1feff4080d",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "543d6b55083c2eedc734412ab8532e44f3cb8fe8e45074c1211b3b1feff4080d"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-120",
+      "ageBand": "7-8",
+      "originalQuestion": "Was geschah mit dem Feuer, in das Ibrāhīm geworfen wurde?",
+      "correctAnswer": "Allah machte es kühl und sicher",
+      "answers": [
+        "Allah machte es kühl und sicher",
+        "Es verbrannte ihn",
+        "Es wurde von Menschen gelöscht"
+      ],
+      "originalSource": "Qurʾān 21:68–69",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Hör dir die Frage und die Antworten in Ruhe an. Was geschah mit dem Feuer, in das Ibrāhīm geworfen wurde? Antwort 1: Allah machte es kühl und sicher. Antwort 2: Es verbrannte ihn. Antwort 3: Es wurde von Menschen gelöscht. Wähle die Antwort, die du für richtig hältst.",
+      "explanation": "Das merken wir uns: Allah befahl dem Feuer, kühl und sicher für Ibrāhīm zu sein.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "50c019696eb97ac9f7c645bb1d6b00e35b6352d903eecd5fa67550f217fb1cc3",
+          "segments": [
+            {
+              "textSHA256": "01feb19e02ab4813aa9c8796632b2cb75ca042b8aa1ac95c11448c26087045bc",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "81c44d58b87c3b7f902a02b56dd0347a8e92677568b9deadc7df943ede1cc930",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "1af67f0fd56f3bd2d59171b6fe1b40eb1ed75b4a6d2a767e5712e408563946c0",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "74fdd336954a2f5b366de5763f4e140d184a4d318ab40f2c46b5e678d70358ff",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "20b11786878131d132a6035858f84038c5f6c22bfe089593e8ad39595a793d99",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "9df45870108859efd01bef2332145fecc00307de78ca967efe550cdbe8765076",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "81c44d58b87c3b7f902a02b56dd0347a8e92677568b9deadc7df943ede1cc930",
+            "1af67f0fd56f3bd2d59171b6fe1b40eb1ed75b4a6d2a767e5712e408563946c0",
+            "74fdd336954a2f5b366de5763f4e140d184a4d318ab40f2c46b5e678d70358ff",
+            "20b11786878131d132a6035858f84038c5f6c22bfe089593e8ad39595a793d99"
+          ]
+        },
+        "correct": {
+          "mode": "original-paid-exact",
+          "spokenTextSHA256": "361184168361ae774368033336fb7d63cc30b8addddbf1e6c022b7d9a30ea1e2",
+          "paidOriginalGenerationId": "N6KUNJZuktlS1uTmRNPI",
+          "alreadyRecorded": true
+        },
+        "retry": {
+          "mode": "original-paid-exact",
+          "spokenTextSHA256": "ca72dd49fc4be3a3826c7f03d437f025a3321664897a916bb9777d8799ecffb6",
+          "paidOriginalGenerationId": "vTRh2ZkXhF0R0jOplwKS",
+          "alreadyRecorded": true
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "04974cf308270b1e4f09911a76860177dce2530b583e05e58c676b610be7ffa5",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "a0aa0b9734aee649825470905d59fc54e060325767be21466c67df6cf2849758",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": []
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-531",
+      "ageBand": "7-8",
+      "originalQuestion": "Sind Wissende und Nichtwissende gleich?",
+      "correctAnswer": "Nein",
+      "answers": [
+        "Nein",
+        "Ja, immer",
+        "Nur nachts"
+      ],
+      "originalSource": "Qurʾān 39:9",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Nimm dir Zeit für deine Antwort. Sind Wissende und Nichtwissende gleich? Antwort 1: Nein. Antwort 2: Ja, immer. Antwort 3: Nur nachts. Wähle die Antwort, die du für richtig hältst.",
+      "explanation": "Das merken wir uns: Allah fragt, ob Wissende und Nichtwissende gleich sind; sie sind nicht gleich.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "95dd9bf7861206b21aa4b4f5da117cf8ebaf71768edb3ece69b03bbdbd2c4db8",
+          "segments": [
+            {
+              "textSHA256": "254ff1009aa48b3771f9fb1bce5f00b961159acf8d2ae91246b9182186395077",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "29b4c3d0188771fd73774147bd7ca4efb795371d6d4abc81667dbe0671fda8bf",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "ddca7a753c625a28630381d107632271e4b29f054f863ecd328d94932e27dbbf",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "a812bad7a9270ea6f41c9ee3f933be209e2ee14cddf05325eaf2eb9031828b32",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "4476bf602d24ff771ae252477453769e9254bd4f106b52f06881b7d957d9a402",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "9df45870108859efd01bef2332145fecc00307de78ca967efe550cdbe8765076",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "29b4c3d0188771fd73774147bd7ca4efb795371d6d4abc81667dbe0671fda8bf",
+            "a812bad7a9270ea6f41c9ee3f933be209e2ee14cddf05325eaf2eb9031828b32",
+            "4476bf602d24ff771ae252477453769e9254bd4f106b52f06881b7d957d9a402"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "15da69a5d5c336569d7b61da875d3c63e53a9d49ccda248b65293fe15761d098",
+          "segments": [
+            {
+              "textSHA256": "15da69a5d5c336569d7b61da875d3c63e53a9d49ccda248b65293fe15761d098",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "9794bce7934cdf3ce1133bbe82d135d98dc14d7f256a08c1c2ae8f2cf6651798",
+          "segments": [
+            {
+              "textSHA256": "9794bce7934cdf3ce1133bbe82d135d98dc14d7f256a08c1c2ae8f2cf6651798",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "473c74022666e93deef2df76210d8c8f5449bfbc2d37533351ae85d386acea59",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "ac51ed15f1ba95bfadfeefd0e126f92cfe5a54a6f7895ac533e64803032d030b",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "ac51ed15f1ba95bfadfeefd0e126f92cfe5a54a6f7895ac533e64803032d030b"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-231",
+      "ageBand": "7-8",
+      "originalQuestion": "Wodurch finden Herzen Ruhe?",
+      "correctAnswer": "Durch das Gedenken Allahs",
+      "answers": [
+        "Durch das Gedenken Allahs",
+        "Durch Hochmut",
+        "Durch Streit"
+      ],
+      "originalSource": "Qurʾān 13:28",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Nimm dir Zeit für deine Antwort. Wodurch finden Herzen Ruhe? Antwort 1: Durch das Gedenken Allahs. Antwort 2: Durch Hochmut. Antwort 3: Durch Streit. Wähle die Antwort, die du für richtig hältst.",
+      "explanation": "Das merken wir uns: Allah sagt, dass die Herzen im Gedenken Allahs Ruhe finden.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "d18f9e8f515b62e9cc66439433e50f350bb47e53b36c29135c27dbe9daff6773",
+          "segments": [
+            {
+              "textSHA256": "254ff1009aa48b3771f9fb1bce5f00b961159acf8d2ae91246b9182186395077",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "895bf182a8746f0e53ced618983026e3b5a642d24e4c82fca4ba83ce25a54919",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "937f2bd3c4e3926c4f8fc249f5aa64545af472abb3e923f51dcb654871d3bc4a",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "c07ad33e403115a505dae3ef19bea97b555442d6ea6262a0b6062304f265c600",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "93f58c3bf707d157de78485ebeda57cfa3fca14e3dd1908c3ff4629ab2985687",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "9df45870108859efd01bef2332145fecc00307de78ca967efe550cdbe8765076",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "895bf182a8746f0e53ced618983026e3b5a642d24e4c82fca4ba83ce25a54919",
+            "937f2bd3c4e3926c4f8fc249f5aa64545af472abb3e923f51dcb654871d3bc4a",
+            "c07ad33e403115a505dae3ef19bea97b555442d6ea6262a0b6062304f265c600",
+            "93f58c3bf707d157de78485ebeda57cfa3fca14e3dd1908c3ff4629ab2985687"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "15da69a5d5c336569d7b61da875d3c63e53a9d49ccda248b65293fe15761d098",
+          "segments": [
+            {
+              "textSHA256": "15da69a5d5c336569d7b61da875d3c63e53a9d49ccda248b65293fe15761d098",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "9794bce7934cdf3ce1133bbe82d135d98dc14d7f256a08c1c2ae8f2cf6651798",
+          "segments": [
+            {
+              "textSHA256": "9794bce7934cdf3ce1133bbe82d135d98dc14d7f256a08c1c2ae8f2cf6651798",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "7a7158af71768e5c2d8c2b1324970b89ea5efe1fb285bd545438385f65d604ac",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "7d2a26089e416f4dfdb826448f4645c5883af7c682f09fe74887cbd545062a6f",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "7d2a26089e416f4dfdb826448f4645c5883af7c682f09fe74887cbd545062a6f"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-024",
+      "ageBand": "7-8",
+      "originalQuestion": "Wem gehorchen wir im Dīn?",
+      "correctAnswer": "Allah und Seinem Gesandten ﷺ",
+      "answers": [
+        "Allah und Seinem Gesandten ﷺ",
+        "Nur der eigenen Meinung",
+        "Jeder Idee im Internet"
+      ],
+      "originalSource": "Qurʾān 4:59",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Hör dir die Frage und die Antworten in Ruhe an. Wem gehorchen wir im Dīn? Antwort 1: Allah und Seinem Gesandten ﷺ. Antwort 2: Nur der eigenen Meinung. Antwort 3: Jeder Idee im Internet. Wähle die Antwort, die du für richtig hältst.",
+      "explanation": "Das merken wir uns: Allah befiehlt den Gehorsam gegenüber Ihm und Seinem Gesandten ﷺ.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "78ccae84d77d8a2a71fb038428adcedc16381262d4ad7ff2fd485a3c0e5df6fa",
+          "segments": [
+            {
+              "textSHA256": "01feb19e02ab4813aa9c8796632b2cb75ca042b8aa1ac95c11448c26087045bc",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "893701f66782304c4f6afb7839c5779082d08cd29f35934c7da3cfc1cf0c312d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "32ab60196f7698286e68efbc0ec4c50d978242e4f7bf10dccad9cbb31df9be6e",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "c948638ca44c08fdb66834b43ad1239476cd8d7d10ddef3216adbb5d0970183b",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "ac874925ee83511cdb5fc091ca549d9d1222d17d4d150ad52bfb769a5ad2f40f",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "9df45870108859efd01bef2332145fecc00307de78ca967efe550cdbe8765076",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "32ab60196f7698286e68efbc0ec4c50d978242e4f7bf10dccad9cbb31df9be6e",
+            "c948638ca44c08fdb66834b43ad1239476cd8d7d10ddef3216adbb5d0970183b",
+            "ac874925ee83511cdb5fc091ca549d9d1222d17d4d150ad52bfb769a5ad2f40f"
+          ]
+        },
+        "correct": {
+          "mode": "original-paid-exact",
+          "spokenTextSHA256": "4fd493a9d3b3fc1143c449df2d8f219890a039d40c33db38d79e825847a9fc7c",
+          "paidOriginalGenerationId": "MXJIQELO8kt4unfk2wy2",
+          "alreadyRecorded": true
+        },
+        "retry": {
+          "mode": "original-paid-exact",
+          "spokenTextSHA256": "02b0d87cf35cb9473b55041aa698e108897e5089853395f2dd5547b5c8f218b6",
+          "paidOriginalGenerationId": "53nlCj9DCu1JkXZFBEZI",
+          "alreadyRecorded": true
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "ee7fe6ec8a7397d8635310552f498e7cec2abc3453d46fe1feff5d08e47ac80a",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "44c57b99c900d0699752ef7d5e462c402a779fb9e9dd6394a3622ac4a41abb3b",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "44c57b99c900d0699752ef7d5e462c402a779fb9e9dd6394a3622ac4a41abb3b"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-047",
+      "ageBand": "9-10",
+      "originalQuestion": "Welche Haltung lehrt Qurʾān 17:23–24 gegenüber den Eltern?",
+      "correctAnswer": "Güte, Respekt und Barmherzigkeit",
+      "answers": [
+        "Güte, Respekt und Barmherzigkeit",
+        "Spott und Härte",
+        "Gleichgültigkeit"
+      ],
+      "originalSource": "Qurʾān 17:23–24",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Welche Haltung lehrt Qurʾān 17:23–24 gegenüber den Eltern? Antwort 1: Güte, Respekt und Barmherzigkeit. Antwort 2: Spott und Härte. Antwort 3: Gleichgültigkeit. Überlege und wähle die beste Antwort.",
+      "explanation": "Das merken wir uns: Allah befiehlt Güte zu den Eltern und lehrt eine Duʿāʾ um Barmherzigkeit für sie.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "8ae6c6716c8156dbff2f34d3141816bdd5c5b8f0534ebd9db9a60ad64a4b8895",
+          "segments": [
+            {
+              "textSHA256": "4d3c41ddf69b4ab132155cce3b2a6b168a7ec6553d98cf6aa8d9639b09d49200",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "1af5365d9734f535d1948cae8b5ec286f88727576fd4bb615a0be14053e6b03b",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "628e12be9dee7233d89a5647dc5e53e5ee57ee9563ab9b1595a131d93812e44c",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "4cfa66c966f228c8ca4062cc59a24ce26ddc05b9f2169c2aa237826181c23605",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "6c0b3c0dab9038bceaf51d667188fa661cc3b86fe1df469feb0ecb38c993294f",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "1af5365d9734f535d1948cae8b5ec286f88727576fd4bb615a0be14053e6b03b",
+            "628e12be9dee7233d89a5647dc5e53e5ee57ee9563ab9b1595a131d93812e44c",
+            "4cfa66c966f228c8ca4062cc59a24ce26ddc05b9f2169c2aa237826181c23605"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "48c872cd4f784450e8af59bc60079477ab3a0ad415da09a845a169bf68ca3b88",
+          "segments": [
+            {
+              "textSHA256": "48c872cd4f784450e8af59bc60079477ab3a0ad415da09a845a169bf68ca3b88",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "112d77b79d6628322d0ed8ce4d1077f03de5ad00c4248db1ff96955d36d36bf8",
+          "segments": [
+            {
+              "textSHA256": "112d77b79d6628322d0ed8ce4d1077f03de5ad00c4248db1ff96955d36d36bf8",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "35790efb5e008fa15ea91af19094fd711f88488cc4d08c89bcda279c42a46e02",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "3b43d4566de6a39db5785d2c137ecefd989a1a683ed9d85eec94b243f6024a88",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "3b43d4566de6a39db5785d2c137ecefd989a1a683ed9d85eec94b243f6024a88"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-129",
+      "ageBand": "7-8",
+      "originalQuestion": "Darf Abneigung gegen Menschen uns ungerecht machen?",
+      "correctAnswer": "Nein",
+      "answers": [
+        "Nein",
+        "Ja",
+        "Nur manchmal"
+      ],
+      "originalSource": "Qurʾān 5:8",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Überlege kurz, bevor du dich entscheidest. Darf Abneigung gegen Menschen uns ungerecht machen? Antwort 1: Nein. Antwort 2: Ja. Antwort 3: Nur manchmal. Wähle die Antwort, die du für richtig hältst.",
+      "explanation": "Das merken wir uns: Allah befiehlt Gerechtigkeit und warnt davor, dass Abneigung zu Ungerechtigkeit führt.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "a6f7e4a92890326fe7bd1ae1b1c4527129cc4aa5e42eb485b24381df6ca63b69",
+          "segments": [
+            {
+              "textSHA256": "1451cb9bd9192a9d21c858bb97671085a07ba587a0258d98db6be71021af551c",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "0963ced07d1cb153ff917d6775b3b27950d4e2ada715510f7f2f5c7171b79293",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "ddca7a753c625a28630381d107632271e4b29f054f863ecd328d94932e27dbbf",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "918c02e9102ce389bd321a9e96e6b253c6b877e7a967d3a4e2c3b076a62a414b",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "5ab6893a2486f8847c153f4705754ae2937439ceffbcd6879235bcf21003592a",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "9df45870108859efd01bef2332145fecc00307de78ca967efe550cdbe8765076",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "0963ced07d1cb153ff917d6775b3b27950d4e2ada715510f7f2f5c7171b79293",
+            "5ab6893a2486f8847c153f4705754ae2937439ceffbcd6879235bcf21003592a"
+          ]
+        },
+        "correct": {
+          "mode": "original-paid-exact",
+          "spokenTextSHA256": "4fd493a9d3b3fc1143c449df2d8f219890a039d40c33db38d79e825847a9fc7c",
+          "paidOriginalGenerationId": "MXJIQELO8kt4unfk2wy2",
+          "alreadyRecorded": true
+        },
+        "retry": {
+          "mode": "original-paid-exact",
+          "spokenTextSHA256": "02b0d87cf35cb9473b55041aa698e108897e5089853395f2dd5547b5c8f218b6",
+          "paidOriginalGenerationId": "53nlCj9DCu1JkXZFBEZI",
+          "alreadyRecorded": true
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "82c7789634bda22d1ee4a342e9c75752c055df582cf37c24afa6880477dc2383",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "2ae43b668f0c76f68ceb97709d63bfe365eb713bf4768bd40a937dbef63ee731",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "2ae43b668f0c76f68ceb97709d63bfe365eb713bf4768bd40a937dbef63ee731"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-037",
+      "ageBand": "9-10",
+      "originalQuestion": "Welche Sache gehört zu den Grundlagen des Īmān?",
+      "correctAnswer": "Der Glaube an Allahs Bestimmung",
+      "answers": [
+        "Der Glaube an Allahs Bestimmung",
+        "Der Glaube an Horoskope",
+        "Der Glaube an Glückszahlen"
+      ],
+      "originalSource": "Ṣaḥīḥ Muslim 8",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Welche Sache gehört zu den Grundlagen des Īmān? Antwort 1: Der Glaube an Allahs Bestimmung. Antwort 2: Der Glaube an Horoskope. Antwort 3: Der Glaube an Glückszahlen. Überlege und wähle die beste Antwort.",
+      "explanation": "Das merken wir uns: Der Ḥadīṯ Jibrīl nennt den Glauben an die göttliche Bestimmung als Teil des Īmān.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "4cd682f63c45e2f9dcf840df1b8e4d276bc1149f69bb622ced5f1bfb9219d5fd",
+          "segments": [
+            {
+              "textSHA256": "054b0454a5d4b90b9207a8eafdff2edfd54cb45a87d31bbfe483eecfd1d965d9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "2743acd226fcdf3cc9567738239a870973141a7e4e9786ff29e8312c81cf6258",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "e0928ea3ff0820299e759a5f398cd30fbecc92662cb03c7f501cc1c2e69d90f4",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "570f4970e971d57e0c4bb84c50b9cdcbeceba4650f64e3cba0e8b5aec42dcfbf",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "6c0b3c0dab9038bceaf51d667188fa661cc3b86fe1df469feb0ecb38c993294f",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "2743acd226fcdf3cc9567738239a870973141a7e4e9786ff29e8312c81cf6258",
+            "e0928ea3ff0820299e759a5f398cd30fbecc92662cb03c7f501cc1c2e69d90f4",
+            "570f4970e971d57e0c4bb84c50b9cdcbeceba4650f64e3cba0e8b5aec42dcfbf"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "48c872cd4f784450e8af59bc60079477ab3a0ad415da09a845a169bf68ca3b88",
+          "segments": [
+            {
+              "textSHA256": "48c872cd4f784450e8af59bc60079477ab3a0ad415da09a845a169bf68ca3b88",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "112d77b79d6628322d0ed8ce4d1077f03de5ad00c4248db1ff96955d36d36bf8",
+          "segments": [
+            {
+              "textSHA256": "112d77b79d6628322d0ed8ce4d1077f03de5ad00c4248db1ff96955d36d36bf8",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "af7039f845f4c3dc5b747a1b45508a8b7e49ab184e676f4ba0dfa3a6a9450d06",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "df70f184d1f8dc008acdc06cd43b33804731b9d58aa7c166edd84434ba5679b9",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "df70f184d1f8dc008acdc06cd43b33804731b9d58aa7c166edd84434ba5679b9"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-094",
+      "ageBand": "9-10",
+      "originalQuestion": "Welches Ziel nennt Qurʾān 2:183 für das Fasten?",
+      "correctAnswer": "Taqwā",
+      "answers": [
+        "Taqwā",
+        "Berühmtheit",
+        "Wettbewerb im Essen"
+      ],
+      "originalSource": "Qurʾān 2:183",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Welches Ziel nennt Qurʾān 2:183 für das Fasten? Antwort 1: Taqwā. Antwort 2: Berühmtheit. Antwort 3: Wettbewerb im Essen. Überlege und wähle die beste Antwort.",
+      "explanation": "Das merken wir uns: Allah erklärt, dass das Fasten vorgeschrieben wurde, damit die Gläubigen Taqwā entwickeln.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "6548cc7d3c9a976077ff62109755fdd4921b303caef62aa7129a999af9db90c5",
+          "segments": [
+            {
+              "textSHA256": "de736235d672cf7841d988f955a5e105effa1fbda3bf87fac4913d8ecfe82174",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "28e0b40b0a26df80db84d1b821cba380eb080de6ed8e48d35be91429d67f3a2a",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "ad27185ac81379c6cb34748d9af15e68a5a8f52d4422a19d0b7dc7ee9435e199",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "19bfa98affb9028bdd7d6513b20a1a19afe448d3c63868aaa1ea9fa23d841a73",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "6c0b3c0dab9038bceaf51d667188fa661cc3b86fe1df469feb0ecb38c993294f",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "de736235d672cf7841d988f955a5e105effa1fbda3bf87fac4913d8ecfe82174",
+            "28e0b40b0a26df80db84d1b821cba380eb080de6ed8e48d35be91429d67f3a2a",
+            "ad27185ac81379c6cb34748d9af15e68a5a8f52d4422a19d0b7dc7ee9435e199",
+            "19bfa98affb9028bdd7d6513b20a1a19afe448d3c63868aaa1ea9fa23d841a73"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "0a7c240cf8165a3f4aa060dd508dc187100adb0865bb639d6804d4d306dc3fb2",
+          "segments": [
+            {
+              "textSHA256": "0a7c240cf8165a3f4aa060dd508dc187100adb0865bb639d6804d4d306dc3fb2",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "48863f5e5e06c73f14d82e40a2f94a165775f793a184c60ea451be586a66466d",
+          "segments": [
+            {
+              "textSHA256": "48863f5e5e06c73f14d82e40a2f94a165775f793a184c60ea451be586a66466d",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "465862f8bcbe6c5ea2fe2394fd412bfdb37938ec05ae40c1d2cfde99f9082509",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "51779e04ba72573f36f30414336c73993bd6d6fe41c295843914c59cd446c48a",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "51779e04ba72573f36f30414336c73993bd6d6fe41c295843914c59cd446c48a"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-147",
+      "ageBand": "9-10",
+      "originalQuestion": "Was meiden die Diener des Allerbarmers nach Qurʾān 25:72?",
+      "correctAnswer": "Falsches Zeugnis",
+      "answers": [
+        "Falsches Zeugnis",
+        "Gutes Reden",
+        "Hilfsbereitschaft"
+      ],
+      "originalSource": "Qurʾān 25:72",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Was meiden die Diener des Allerbarmers nach Qurʾān 25:72? Antwort 1: Falsches Zeugnis. Antwort 2: Gutes Reden. Antwort 3: Hilfsbereitschaft. Überlege und wähle die beste Antwort.",
+      "explanation": "Das merken wir uns: Allah beschreibt sie als Menschen, die kein falsches Zeugnis ablegen.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "66c8429be8223fe10b7c41921fcb6028b2a5af721879445543b595391ff83050",
+          "segments": [
+            {
+              "textSHA256": "0d621a71d46bc4b9e12dbd53fe94306c398b1a9c9b9befaeb093340584956d7e",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "5f9499af19ffa677d03ca93d63b0269463ea7dbb5297366b63acbc47df09a8f1",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "9f4bcc4790f18bc4b877ba10907888374400f44b8d4c6aa3674e22a6acc8a16a",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "adb15315afdd67c46f243d9d7f426faa558f92abffc120ee182bd34944ecc43c",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "6c0b3c0dab9038bceaf51d667188fa661cc3b86fe1df469feb0ecb38c993294f",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "0d621a71d46bc4b9e12dbd53fe94306c398b1a9c9b9befaeb093340584956d7e",
+            "5f9499af19ffa677d03ca93d63b0269463ea7dbb5297366b63acbc47df09a8f1",
+            "9f4bcc4790f18bc4b877ba10907888374400f44b8d4c6aa3674e22a6acc8a16a",
+            "adb15315afdd67c46f243d9d7f426faa558f92abffc120ee182bd34944ecc43c"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "48c872cd4f784450e8af59bc60079477ab3a0ad415da09a845a169bf68ca3b88",
+          "segments": [
+            {
+              "textSHA256": "48c872cd4f784450e8af59bc60079477ab3a0ad415da09a845a169bf68ca3b88",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "112d77b79d6628322d0ed8ce4d1077f03de5ad00c4248db1ff96955d36d36bf8",
+          "segments": [
+            {
+              "textSHA256": "112d77b79d6628322d0ed8ce4d1077f03de5ad00c4248db1ff96955d36d36bf8",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "6634955e6bdc110586dfc1d6d7a804c695bbdc7221cde92080eaac1f87f80629",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "7aca137cc6ea5ab48afab29c0adfaa504d00c202873fa6c4a89f75a85b3cb6a8",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "7aca137cc6ea5ab48afab29c0adfaa504d00c202873fa6c4a89f75a85b3cb6a8"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-095",
+      "ageBand": "9-10",
+      "originalQuestion": "Wie beschreibt der Qurʾān Laylat al-Qadr?",
+      "correctAnswer": "Besser als tausend Monate",
+      "answers": [
+        "Besser als tausend Monate",
+        "Wie jeden anderen Abend",
+        "Nur als historischen Tag"
+      ],
+      "originalSource": "Qurʾān 97:3",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Wie beschreibt der Qurʾān Laylat al-Qadr? Antwort 1: Besser als tausend Monate. Antwort 2: Wie jeden anderen Abend. Antwort 3: Nur als historischen Tag. Überlege und wähle die beste Antwort.",
+      "explanation": "Das merken wir uns: Allah sagt, dass Laylat al-Qadr besser als tausend Monate ist.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "3d4a72f2805b530409806a0bf1e176359e1aa681656fa2963b37beba83b07e3f",
+          "segments": [
+            {
+              "textSHA256": "61e82e4837d1c936c7670ac2d514fb416a631b560bb804644d60dbd4b77d60df",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "49f1f8aec14a26d134fdc37c659ad2f619c8eb1b0ea971976f419d3158d9831f",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "91dff8827adcafe5b9f50cfca60b48c3f13d3f5a2f700822576aaed811dd82ce",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "b3d403e13cff06746b9f5ae20d0f6fb2dc2bc204527362cc8d1fc373781527e9",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "6c0b3c0dab9038bceaf51d667188fa661cc3b86fe1df469feb0ecb38c993294f",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "61e82e4837d1c936c7670ac2d514fb416a631b560bb804644d60dbd4b77d60df",
+            "49f1f8aec14a26d134fdc37c659ad2f619c8eb1b0ea971976f419d3158d9831f",
+            "91dff8827adcafe5b9f50cfca60b48c3f13d3f5a2f700822576aaed811dd82ce",
+            "b3d403e13cff06746b9f5ae20d0f6fb2dc2bc204527362cc8d1fc373781527e9"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "ab20049d044920228b8566181cdb0fb8e1a47e1b626b31668f2502f9db5d7a86",
+          "segments": [
+            {
+              "textSHA256": "ab20049d044920228b8566181cdb0fb8e1a47e1b626b31668f2502f9db5d7a86",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "a40568cf134e4605947fb8813775936c44e9835151becf13d999fa918276e32b",
+          "segments": [
+            {
+              "textSHA256": "a40568cf134e4605947fb8813775936c44e9835151becf13d999fa918276e32b",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "3f389566589bdb505c27f8d96715ee91208ddc672718aeb8a2c1020c7a14656c",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "8563eeaa19f48883ab658b584cbe1e63bf7ecbe2b7853b5e97c44bd789fa277b",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "8563eeaa19f48883ab658b584cbe1e63bf7ecbe2b7853b5e97c44bd789fa277b"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-344",
+      "ageBand": "9-10",
+      "originalQuestion": "Welche zwei Schritte nennt Qurʾān 24:27 vor dem Betreten fremder Häuser?",
+      "correctAnswer": "Erlaubnis einholen und grüßen",
+      "answers": [
+        "Erlaubnis einholen und grüßen",
+        "Anklopfen und sofort eintreten",
+        "Nur den Namen rufen"
+      ],
+      "originalSource": "Qurʾān 24:27",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Welche zwei Schritte nennt Qurʾān 24:27 vor dem Betreten fremder Häuser? Antwort 1: Erlaubnis einholen und grüßen. Antwort 2: Anklopfen und sofort eintreten. Antwort 3: Nur den Namen rufen. Überlege und wähle die beste Antwort.",
+      "explanation": "Das merken wir uns: Der Qurʾān verbindet Privatsphäre mit Erlaubnis und Salām.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "e152081d8a042a50cb84794d455c333562e2be6f21e15ff8eec11976d63cd79d",
+          "segments": [
+            {
+              "textSHA256": "6ce6fa008dfcbaddc21e6f7995f9f16cac31265c70b5ad296c14eb02a7025de6",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "f69c61259bac50ef30e491bc54c639ad7dc656075906c36f21eedc044fac2896",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "a8a225a0ba32659594a4f6fde9f4bc52d04da6b1a812dae49fc749d016f8fd0b",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "f4ebace883d08d4bfa336874b4aaace39af47a8aee7efd44e9dee49b643e75f8",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "6c0b3c0dab9038bceaf51d667188fa661cc3b86fe1df469feb0ecb38c993294f",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "6ce6fa008dfcbaddc21e6f7995f9f16cac31265c70b5ad296c14eb02a7025de6",
+            "f69c61259bac50ef30e491bc54c639ad7dc656075906c36f21eedc044fac2896",
+            "a8a225a0ba32659594a4f6fde9f4bc52d04da6b1a812dae49fc749d016f8fd0b",
+            "f4ebace883d08d4bfa336874b4aaace39af47a8aee7efd44e9dee49b643e75f8"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "0a7c240cf8165a3f4aa060dd508dc187100adb0865bb639d6804d4d306dc3fb2",
+          "segments": [
+            {
+              "textSHA256": "0a7c240cf8165a3f4aa060dd508dc187100adb0865bb639d6804d4d306dc3fb2",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "48863f5e5e06c73f14d82e40a2f94a165775f793a184c60ea451be586a66466d",
+          "segments": [
+            {
+              "textSHA256": "48863f5e5e06c73f14d82e40a2f94a165775f793a184c60ea451be586a66466d",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "749814c22a9467a8a3eb2fc567b8685bbbbe455372c46b17a17fab8d8edaf154",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "e10c5e96a7f0357603868a43d1a9599a74cdfcce7be9acb9677275a02c7a84ff",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "e10c5e96a7f0357603868a43d1a9599a74cdfcce7be9acb9677275a02c7a84ff"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-035",
+      "ageBand": "9-10",
+      "originalQuestion": "Welche Antwort beschreibt Iḥsān am besten?",
+      "correctAnswer": "Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht",
+      "answers": [
+        "Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht",
+        "Nur freundlich zu wirken",
+        "Nur viel zu besitzen"
+      ],
+      "originalSource": "Ṣaḥīḥ Muslim 8",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Welche Antwort beschreibt Iḥsān am besten? Antwort 1: Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht. Antwort 2: Nur freundlich zu wirken. Antwort 3: Nur viel zu besitzen. Überlege und wähle die beste Antwort.",
+      "explanation": "Das merken wir uns: Der Prophet ﷺ erklärte Iḥsān im Ḥadīṯ Jibrīl.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "49fd92082b387e2d1763eb0325ab562dd1e4424dcbefb5790a151ddcb3f05b88",
+          "segments": [
+            {
+              "textSHA256": "5c0fcda88e21e9e94d23518bfc3d208878c59bc49a09b784937dd44153e7aba7",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "d890edab3916d6f9704433d1d6e2d39c7e43d40009e0c195fc16fc545891c5a2",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "0271e33fde09414e42be129d390a39a66f1f852da2045dd0aa4f8ff9d798b6e1",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "36e74d75cf6234793f049cef042bc35e02f55100b2e2c0b3c4e1ad3d23bf4a48",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "6c0b3c0dab9038bceaf51d667188fa661cc3b86fe1df469feb0ecb38c993294f",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "d890edab3916d6f9704433d1d6e2d39c7e43d40009e0c195fc16fc545891c5a2",
+            "0271e33fde09414e42be129d390a39a66f1f852da2045dd0aa4f8ff9d798b6e1",
+            "36e74d75cf6234793f049cef042bc35e02f55100b2e2c0b3c4e1ad3d23bf4a48"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "ab20049d044920228b8566181cdb0fb8e1a47e1b626b31668f2502f9db5d7a86",
+          "segments": [
+            {
+              "textSHA256": "ab20049d044920228b8566181cdb0fb8e1a47e1b626b31668f2502f9db5d7a86",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "a40568cf134e4605947fb8813775936c44e9835151becf13d999fa918276e32b",
+          "segments": [
+            {
+              "textSHA256": "a40568cf134e4605947fb8813775936c44e9835151becf13d999fa918276e32b",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "d61c7ca96da91b8fcadbc4eadf33a367dc6ef0085df85b9e80da4446c0d47b90",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "0244c25574da36076ec177d092f4f695ddf0deac31ed4fa5f6db892595556f68",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "0244c25574da36076ec177d092f4f695ddf0deac31ed4fa5f6db892595556f68"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-386",
+      "ageBand": "9-10",
+      "originalQuestion": "Wen erhöht Allah nach Qurʾān 58:11 in Rangstufen?",
+      "correctAnswer": "Die Gläubigen und diejenigen mit Wissen",
+      "answers": [
+        "Die Gläubigen und diejenigen mit Wissen",
+        "Nur Reiche",
+        "Nur Berühmte"
+      ],
+      "originalSource": "Qurʾān 58:11",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Wen erhöht Allah nach Qurʾān 58:11 in Rangstufen? Antwort 1: Die Gläubigen und diejenigen mit Wissen. Antwort 2: Nur Reiche. Antwort 3: Nur Berühmte. Überlege und wähle die beste Antwort.",
+      "explanation": "Das merken wir uns: Allah hebt Īmān und Wissen als Ursachen besonderer Rangstufen hervor.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "dd4c9a36c1f81bbee416db4def1d2b03187fac07dceef284172824877b0dd558",
+          "segments": [
+            {
+              "textSHA256": "dd001569108fb828add436f20473f20d2c631ce8bb73be318ee3cbb76f3636a0",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "e4b80bffd922656eef9144a67e4932d6dc9da0e6419e83590ebe8dee252c451d",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "139c62408d1f94f5565e5ff6baf7a3aa052693b3d733efc782d5c6b6d8035af1",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "5f215fd9c627458ea61bc483cafa90a3aeef9e41d8429f7150fbb992be09c685",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "6c0b3c0dab9038bceaf51d667188fa661cc3b86fe1df469feb0ecb38c993294f",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "dd001569108fb828add436f20473f20d2c631ce8bb73be318ee3cbb76f3636a0",
+            "e4b80bffd922656eef9144a67e4932d6dc9da0e6419e83590ebe8dee252c451d",
+            "139c62408d1f94f5565e5ff6baf7a3aa052693b3d733efc782d5c6b6d8035af1",
+            "5f215fd9c627458ea61bc483cafa90a3aeef9e41d8429f7150fbb992be09c685"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "b42843800733238cc7908203dcaf9829c8e1724fdc8fcf133e2bdcfee55e4260",
+          "segments": [
+            {
+              "textSHA256": "b42843800733238cc7908203dcaf9829c8e1724fdc8fcf133e2bdcfee55e4260",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "10abc209bd8392a065162c92c64c7e89034b2a9147ccda507932b8909c035ac9",
+          "segments": [
+            {
+              "textSHA256": "10abc209bd8392a065162c92c64c7e89034b2a9147ccda507932b8909c035ac9",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "fc2889c7449c81056b34175c9cc426d191301779bc198b24f01ba1487fd76ac4",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "a7d466dd71b21328bc832b04b0710780ad02721df6c6c7efa3a2f983ec3f46a3",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "a7d466dd71b21328bc832b04b0710780ad02721df6c6c7efa3a2f983ec3f46a3"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-338",
+      "ageBand": "9-10",
+      "originalQuestion": "Welche Gruppen nennt Qurʾān 17:26 beim Geben ihrer Rechte?",
+      "correctAnswer": "Verwandte, Bedürftige und Reisende",
+      "answers": [
+        "Verwandte, Bedürftige und Reisende",
+        "Nur Reiche",
+        "Nur Händler"
+      ],
+      "originalSource": "Qurʾān 17:26",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Welche Gruppen nennt Qurʾān 17:26 beim Geben ihrer Rechte? Antwort 1: Verwandte, Bedürftige und Reisende. Antwort 2: Nur Reiche. Antwort 3: Nur Händler. Überlege und wähle die beste Antwort.",
+      "explanation": "Das merken wir uns: Allah befiehlt, Verwandten, Bedürftigen und Reisenden ihr Recht zu geben.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "03955c0c488d228132906570a85b1b2900dbab857019427916fd3bca855aeedd",
+          "segments": [
+            {
+              "textSHA256": "26cd78210197fb7a23f1529da2003867f9b81de05ab41464bc08ff3fbb1f7532",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "e91a2d5676bc379a926b2e472c65fa1917263fe62065b5f45ddc3c757b075528",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "139c62408d1f94f5565e5ff6baf7a3aa052693b3d733efc782d5c6b6d8035af1",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "eeb9ea5325331a3e9ccfe86aacd8d5e360518e49aef8e9e7d93ad3b8ee4ec808",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "6c0b3c0dab9038bceaf51d667188fa661cc3b86fe1df469feb0ecb38c993294f",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "26cd78210197fb7a23f1529da2003867f9b81de05ab41464bc08ff3fbb1f7532",
+            "e91a2d5676bc379a926b2e472c65fa1917263fe62065b5f45ddc3c757b075528",
+            "139c62408d1f94f5565e5ff6baf7a3aa052693b3d733efc782d5c6b6d8035af1",
+            "eeb9ea5325331a3e9ccfe86aacd8d5e360518e49aef8e9e7d93ad3b8ee4ec808"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "7d401de35745d9593aa5afa5560f2ce8e06035907087348eb0c5308ce0a6a0e4",
+          "segments": [
+            {
+              "textSHA256": "7d401de35745d9593aa5afa5560f2ce8e06035907087348eb0c5308ce0a6a0e4",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "0dc486da82c38a09d46f9802a3699e8e202f30e695376069f949be5debe3cf08",
+          "segments": [
+            {
+              "textSHA256": "0dc486da82c38a09d46f9802a3699e8e202f30e695376069f949be5debe3cf08",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "3e8a5db970e0f0d58e6d23af2e21fa46d0919c64cebc891c3e5c05dd44925d94",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "8fe47281b5907f92720e54209e0c70a061a22516b5d2e883f6183613c6720bcf",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "8fe47281b5907f92720e54209e0c70a061a22516b5d2e883f6183613c6720bcf"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    },
+    {
+      "questionId": "kids-quiz-091",
+      "ageBand": "9-10",
+      "originalQuestion": "Was ist besser als eine Gabe, der Verletzung folgt?",
+      "correctAnswer": "Ein gutes Wort und Vergebung",
+      "answers": [
+        "Ein gutes Wort und Vergebung",
+        "Spott",
+        "Vorwürfe"
+      ],
+      "originalSource": "Qurʾān 2:263",
+      "originalVerification": "approved",
+      "originalReviewStatus": "approved",
+      "spokenQuestion": "Was ist besser als eine Gabe, der Verletzung folgt? Antwort 1: Ein gutes Wort und Vergebung. Antwort 2: Spott. Antwort 3: Vorwürfe. Überlege und wähle die beste Antwort.",
+      "explanation": "Das merken wir uns: Allah sagt, ein gutes Wort und Vergebung seien besser als Ṣadaqah, der Verletzung folgt.",
+      "audioParts": {
+        "question": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "69f9f113a3d2b4370dfed7e704ca461d4982d3f21d2d0ffc1a38eea046df945b",
+          "segments": [
+            {
+              "textSHA256": "683f015c1ecaec931aa30211fb2a9a5a9d559c414736ce4c4d0b9411f98b2287",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "f909d92ce76a2b3f080ff6c91ed20202d3aa5c6f362e573309a9041c74edc108",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "7f5741cbff0bed6933e47d91f0951b44ccfebf3c6bc1f1b19a4145a84bcd7d42",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "75ab7589215d3c21ba744aaa9d6bc32d052d57e128b296d0768c7363d1ed350d",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "9dfe71548316ded5d0e60065fbeffbe7ce908891239adc141decb0a22763bc8b",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "b2e1bc6e2b36e90aa4b50af75eed8b24554beab227c2310db9f11998dd74b432",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "e3a4e6a5bc94e6d1ffbb749f6f3d77a13f83da0a1614330be3064827fbf3d2d9",
+              "alreadyRecorded": false
+            },
+            {
+              "textSHA256": "6c0b3c0dab9038bceaf51d667188fa661cc3b86fe1df469feb0ecb38c993294f",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [
+            240,
+            70,
+            240,
+            70,
+            240,
+            70,
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "683f015c1ecaec931aa30211fb2a9a5a9d559c414736ce4c4d0b9411f98b2287",
+            "7f5741cbff0bed6933e47d91f0951b44ccfebf3c6bc1f1b19a4145a84bcd7d42",
+            "9dfe71548316ded5d0e60065fbeffbe7ce908891239adc141decb0a22763bc8b",
+            "e3a4e6a5bc94e6d1ffbb749f6f3d77a13f83da0a1614330be3064827fbf3d2d9"
+          ]
+        },
+        "correct": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "b42843800733238cc7908203dcaf9829c8e1724fdc8fcf133e2bdcfee55e4260",
+          "segments": [
+            {
+              "textSHA256": "b42843800733238cc7908203dcaf9829c8e1724fdc8fcf133e2bdcfee55e4260",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "retry": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "10abc209bd8392a065162c92c64c7e89034b2a9147ccda507932b8909c035ac9",
+          "segments": [
+            {
+              "textSHA256": "10abc209bd8392a065162c92c64c7e89034b2a9147ccda507932b8909c035ac9",
+              "alreadyRecorded": true
+            }
+          ],
+          "pauseAfterMs": [],
+          "missingOriginalTextSHA256": []
+        },
+        "explanation": {
+          "mode": "compose-from-verified-originals",
+          "spokenTextSHA256": "b8f465a0331687df88d0f6285aa92691cec46233ee789d4333aa35c9e3be84bf",
+          "segments": [
+            {
+              "textSHA256": "e758421bd88758bfb489b0027e227e2e01b795791606c4cd4755957496aa4cb9",
+              "alreadyRecorded": true
+            },
+            {
+              "textSHA256": "324a1a5a938bc16f8573639f30c093606bdfac74c793b0613b26250a733814a8",
+              "alreadyRecorded": false
+            }
+          ],
+          "pauseAfterMs": [
+            240
+          ],
+          "missingOriginalTextSHA256": [
+            "324a1a5a938bc16f8573639f30c093606bdfac74c793b0613b26250a733814a8"
+          ]
+        }
+      },
+      "automaticTextWarnings": [],
+      "humanSourceApproval": false,
+      "humanPronunciationApproval": false,
+      "manualRecordingAuthorization": false
+    }
+  ],
+  "originalTextRecordingQueue": [
+    {
+      "spokenText": "Absichtlich verletzend.",
+      "spokenTextSHA256": "69e960d76c59a506808b0908ef47bc739cf012086feba91e5b271210ebc225c5",
+      "characters": 23,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-030",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah befiehlt Gerechtigkeit und warnt davor, dass Abneigung zu Ungerechtigkeit führt.",
+      "spokenTextSHA256": "2ae43b668f0c76f68ceb97709d63bfe365eb713bf4768bd40a937dbef63ee731",
+      "characters": 86,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-129",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah befiehlt Güte zu den Eltern und lehrt eine Duʿāʾ um Barmherzigkeit für sie.",
+      "spokenTextSHA256": "3b43d4566de6a39db5785d2c137ecefd989a1a683ed9d85eec94b243f6024a88",
+      "characters": 81,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-047",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah befiehlt den Gehorsam gegenüber Ihm und Seinem Gesandten ﷺ.",
+      "spokenTextSHA256": "44c57b99c900d0699752ef7d5e462c402a779fb9e9dd6394a3622ac4a41abb3b",
+      "characters": 65,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-024",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah befiehlt gutes und respektvolles Verhalten gegenüber den Eltern.",
+      "spokenTextSHA256": "c0f09765841cd6fa9d2f212ad55c07b8aada32bf782fd70e83aa9b8fba6aedd0",
+      "characters": 70,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-030",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah befiehlt, Verwandten, Bedürftigen und Reisenden ihr Recht zu geben.",
+      "spokenTextSHA256": "8fe47281b5907f92720e54209e0c70a061a22516b5d2e883f6183613c6720bcf",
+      "characters": 73,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-338",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah beschreibt sie als Menschen, die kein falsches Zeugnis ablegen.",
+      "spokenTextSHA256": "7aca137cc6ea5ab48afab29c0adfaa504d00c202873fa6c4a89f75a85b3cb6a8",
+      "characters": 69,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-147",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah erklärt, dass das Fasten vorgeschrieben wurde, damit die Gläubigen Taqwā entwickeln.",
+      "spokenTextSHA256": "51779e04ba72573f36f30414336c73993bd6d6fe41c295843914c59cd446c48a",
+      "characters": 90,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-094",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah fragt, ob Wissende und Nichtwissende gleich sind; sie sind nicht gleich.",
+      "spokenTextSHA256": "ac51ed15f1ba95bfadfeefd0e126f92cfe5a54a6f7895ac533e64803032d030b",
+      "characters": 78,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-531",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah hebt Īmān und Wissen als Ursachen besonderer Rangstufen hervor.",
+      "spokenTextSHA256": "a7d466dd71b21328bc832b04b0710780ad02721df6c6c7efa3a2f983ec3f46a3",
+      "characters": 69,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-386",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah machte es kühl und sicher.",
+      "spokenTextSHA256": "1af67f0fd56f3bd2d59171b6fe1b40eb1ed75b4a6d2a767e5712e408563946c0",
+      "characters": 32,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-120",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah sagt, dass Laylat al-Qadr besser als tausend Monate ist.",
+      "spokenTextSHA256": "8563eeaa19f48883ab658b584cbe1e63bf7ecbe2b7853b5e97c44bd789fa277b",
+      "characters": 62,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-095",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah sagt, dass die Herzen im Gedenken Allahs Ruhe finden.",
+      "spokenTextSHA256": "7d2a26089e416f4dfdb826448f4645c5883af7c682f09fe74887cbd545062a6f",
+      "characters": 59,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-231",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah sagt, ein gutes Wort und Vergebung seien besser als Ṣadaqah, der Verletzung folgt.",
+      "spokenTextSHA256": "324a1a5a938bc16f8573639f30c093606bdfac74c793b0613b26250a733814a8",
+      "characters": 88,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-091",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht.",
+      "spokenTextSHA256": "d890edab3916d6f9704433d1d6e2d39c7e43d40009e0c195fc16fc545891c5a2",
+      "characters": 91,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-035",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Allah und Seinem Gesandten ﷺ.",
+      "spokenTextSHA256": "32ab60196f7698286e68efbc0ec4c50d978242e4f7bf10dccad9cbb31df9be6e",
+      "characters": 29,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-024",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Alles weitererzählen.",
+      "spokenTextSHA256": "93978d66f5247399d41f1f8ddb22b546917a068b4e68d6fe58f5a80234bc4e83",
+      "characters": 21,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-027",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Andere beleidigen.",
+      "spokenTextSHA256": "26a07db8c5cf6421dec9a401126840f468ddb82f0e9849b4d3b4e1c8f745a268",
+      "characters": 18,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-027",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Anklopfen und sofort eintreten.",
+      "spokenTextSHA256": "a8a225a0ba32659594a4f6fde9f4bc52d04da6b1a812dae49fc749d016f8fd0b",
+      "characters": 31,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-344",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Berühmtheit.",
+      "spokenTextSHA256": "ad27185ac81379c6cb34748d9af15e68a5a8f52d4422a19d0b7dc7ee9435e199",
+      "characters": 12,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-094",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Besser als tausend Monate.",
+      "spokenTextSHA256": "49f1f8aec14a26d134fdc37c659ad2f619c8eb1b0ea971976f419d3158d9831f",
+      "characters": 26,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-095",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Darf Abneigung gegen Menschen uns ungerecht machen?",
+      "spokenTextSHA256": "0963ced07d1cb153ff917d6775b3b27950d4e2ada715510f7f2f5c7171b79293",
+      "characters": 51,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-129",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Der Glaube an Allahs Bestimmung.",
+      "spokenTextSHA256": "2743acd226fcdf3cc9567738239a870973141a7e4e9786ff29e8312c81cf6258",
+      "characters": 32,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-037",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Der Glaube an Glückszahlen.",
+      "spokenTextSHA256": "570f4970e971d57e0c4bb84c50b9cdcbeceba4650f64e3cba0e8b5aec42dcfbf",
+      "characters": 27,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-037",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Der Glaube an Horoskope.",
+      "spokenTextSHA256": "e0928ea3ff0820299e759a5f398cd30fbecc92662cb03c7f501cc1c2e69d90f4",
+      "characters": 24,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-037",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Der Prophet ﷺ erklärte Iḥsān im Ḥadīṯ Jibrīl.",
+      "spokenTextSHA256": "0244c25574da36076ec177d092f4f695ddf0deac31ed4fa5f6db892595556f68",
+      "characters": 45,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-035",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Der Prophet ﷺ verband den Īmān mit gutem Reden oder Schweigen.",
+      "spokenTextSHA256": "9df2dcf27c84e5c79234bac8e2398b23f45b95064579fe1879b1571f7474cfbd",
+      "characters": 62,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-027",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Der Prophet ﷺ verbot, dem Nachbarn Schaden zuzufügen.",
+      "spokenTextSHA256": "1710756b4df6fa78fc2680d8a4177d89bd2aa1142f410ce97d77712f4de78339",
+      "characters": 53,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-028",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
+      "spokenTextSHA256": "a07bbdc08379567eaab7aa1dc68a8bffe40fd35bd9bde110a7c9c5ca24ba4c15",
+      "characters": 61,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-276",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Der Qurʾān verbindet Privatsphäre mit Erlaubnis und Salām.",
+      "spokenTextSHA256": "e10c5e96a7f0357603868a43d1a9599a74cdfcce7be9acb9677275a02c7a84ff",
+      "characters": 58,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-344",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Der Ḥadīṯ Jibrīl nennt den Glauben an die göttliche Bestimmung als Teil des Īmān.",
+      "spokenTextSHA256": "df70f184d1f8dc008acdc06cd43b33804731b9d58aa7c166edd84434ba5679b9",
+      "characters": 81,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-037",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Die Gläubigen und diejenigen mit Wissen.",
+      "spokenTextSHA256": "e4b80bffd922656eef9144a67e4932d6dc9da0e6419e83590ebe8dee252c451d",
+      "characters": 40,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-386",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Durch Hochmut.",
+      "spokenTextSHA256": "c07ad33e403115a505dae3ef19bea97b555442d6ea6262a0b6062304f265c600",
+      "characters": 14,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-231",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Durch Streit.",
+      "spokenTextSHA256": "93f58c3bf707d157de78485ebeda57cfa3fca14e3dd1908c3ff4629ab2985687",
+      "characters": 13,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-231",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Durch das Gedenken Allahs.",
+      "spokenTextSHA256": "937f2bd3c4e3926c4f8fc249f5aa64545af472abb3e923f51dcb654871d3bc4a",
+      "characters": 26,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-231",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Ein gutes Wort und Vergebung.",
+      "spokenTextSHA256": "7f5741cbff0bed6933e47d91f0951b44ccfebf3c6bc1f1b19a4145a84bcd7d42",
+      "characters": 29,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-091",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Es verbrannte ihn.",
+      "spokenTextSHA256": "74fdd336954a2f5b366de5763f4e140d184a4d318ab40f2c46b5e678d70358ff",
+      "characters": 18,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-120",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Es wurde von Menschen gelöscht.",
+      "spokenTextSHA256": "20b11786878131d132a6035858f84038c5f6c22bfe089593e8ad39595a793d99",
+      "characters": 31,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-120",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Falsches Zeugnis.",
+      "spokenTextSHA256": "5f9499af19ffa677d03ca93d63b0269463ea7dbb5297366b63acbc47df09a8f1",
+      "characters": 17,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-147",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Gleichgültigkeit.",
+      "spokenTextSHA256": "4cfa66c966f228c8ca4062cc59a24ce26ddc05b9f2169c2aa237826181c23605",
+      "characters": 17,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-047",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Gutes Reden.",
+      "spokenTextSHA256": "9f4bcc4790f18bc4b877ba10907888374400f44b8d4c6aa3674e22a6acc8a16a",
+      "characters": 12,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-147",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Gutes sprechen oder schweigen.",
+      "spokenTextSHA256": "821e0226956e087a1ffdb579e8b79f732ebc9c534bdea3357225e656cae29a16",
+      "characters": 30,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-027",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Güte, Respekt und Barmherzigkeit.",
+      "spokenTextSHA256": "1af5365d9734f535d1948cae8b5ec286f88727576fd4bb615a0be14053e6b03b",
+      "characters": 33,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-047",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Hilfsbereitschaft.",
+      "spokenTextSHA256": "adb15315afdd67c46f243d9d7f426faa558f92abffc120ee182bd34944ecc43c",
+      "characters": 18,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-147",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Hochmütig.",
+      "spokenTextSHA256": "363060dac698830e182d307bb6e30d52d5a9015e890e60d3195d97edc3848f05",
+      "characters": 10,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-276",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Ja, immer.",
+      "spokenTextSHA256": "a812bad7a9270ea6f41c9ee3f933be209e2ee14cddf05325eaf2eb9031828b32",
+      "characters": 10,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-531",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Jeder Idee im Internet.",
+      "spokenTextSHA256": "ac874925ee83511cdb5fc091ca549d9d1222d17d4d150ad52bfb769a5ad2f40f",
+      "characters": 23,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-024",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Leise und demütig.",
+      "spokenTextSHA256": "ac9ca77763320cd61790b2f97bc0d09358c03462e47c83999277e877b86ef7d9",
+      "characters": 18,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-276",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Luqmān erklärte, dass Shirk großes Unrecht ist.",
+      "spokenTextSHA256": "543d6b55083c2eedc734412ab8532e44f3cb8fe8e45074c1211b3b1feff4080d",
+      "characters": 47,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-070",
+          "audioPart": "explanation"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Nur Berühmte.",
+      "spokenTextSHA256": "5f215fd9c627458ea61bc483cafa90a3aeef9e41d8429f7150fbb992be09c685",
+      "characters": 13,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-386",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Nur Händler.",
+      "spokenTextSHA256": "eeb9ea5325331a3e9ccfe86aacd8d5e360518e49aef8e9e7d93ad3b8ee4ec808",
+      "characters": 12,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-338",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Nur Reiche.",
+      "spokenTextSHA256": "139c62408d1f94f5565e5ff6baf7a3aa052693b3d733efc782d5c6b6d8035af1",
+      "characters": 11,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-386",
+          "audioPart": "question"
+        },
+        {
+          "questionId": "kids-quiz-338",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Nur als historischen Tag.",
+      "spokenTextSHA256": "b3d403e13cff06746b9f5ae20d0f6fb2dc2bc204527362cc8d1fc373781527e9",
+      "characters": 25,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-095",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Nur den Namen rufen.",
+      "spokenTextSHA256": "f4ebace883d08d4bfa336874b4aaace39af47a8aee7efd44e9dee49b643e75f8",
+      "characters": 20,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-344",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Nur der eigenen Meinung.",
+      "spokenTextSHA256": "c948638ca44c08fdb66834b43ad1239476cd8d7d10ddef3216adbb5d0970183b",
+      "characters": 24,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-024",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Nur freundlich zu wirken.",
+      "spokenTextSHA256": "0271e33fde09414e42be129d390a39a66f1f852da2045dd0aa4f8ff9d798b6e1",
+      "characters": 25,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-035",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Nur manchmal.",
+      "spokenTextSHA256": "5ab6893a2486f8847c153f4705754ae2937439ceffbcd6879235bcf21003592a",
+      "characters": 13,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-129",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Nur nachts.",
+      "spokenTextSHA256": "4476bf602d24ff771ae252477453769e9254bd4f106b52f06881b7d957d9a402",
+      "characters": 11,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-531",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Nur viel zu besitzen.",
+      "spokenTextSHA256": "36e74d75cf6234793f049cef042bc35e02f55100b2e2c0b3c4e1ad3d23bf4a48",
+      "characters": 21,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-035",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Respektvoll und freundlich.",
+      "spokenTextSHA256": "d7bf29f7f574a53494f14365f7fde0176e14895378f8c1eef14ff4b86b5f8550",
+      "characters": 27,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-030",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Sind Wissende und Nichtwissende gleich?",
+      "spokenTextSHA256": "29b4c3d0188771fd73774147bd7ca4efb795371d6d4abc81667dbe0671fda8bf",
+      "characters": 39,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-531",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Spott und Härte.",
+      "spokenTextSHA256": "628e12be9dee7233d89a5647dc5e53e5ee57ee9563ab9b1595a131d93812e44c",
+      "characters": 16,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-047",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Spott.",
+      "spokenTextSHA256": "9dfe71548316ded5d0e60065fbeffbe7ce908891239adc141decb0a22763bc8b",
+      "characters": 6,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-091",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Spöttisch.",
+      "spokenTextSHA256": "0488b02f1dd311ca9dfc7fc92d2efc7dbace41a18469a1d5d13e363b9ddc27d5",
+      "characters": 10,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-030",
+          "audioPart": "question"
+        },
+        {
+          "questionId": "kids-quiz-276",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Verwandte, Bedürftige und Reisende.",
+      "spokenTextSHA256": "e91a2d5676bc379a926b2e472c65fa1917263fe62065b5f45ddc3c757b075528",
+      "characters": 35,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-338",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Vor Hilfsbereitschaft.",
+      "spokenTextSHA256": "a502797ba5e767ef5603b59f8051eb5019d6c4c42f6e046b6b2a1cf7cb8f29cb",
+      "characters": 22,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-070",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Vor Lernen.",
+      "spokenTextSHA256": "657361ee11caa674d97ed0b64cde7eb5f0ebef28929cd99c73a1dfe2c781fe52",
+      "characters": 11,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-070",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Vor Shirk.",
+      "spokenTextSHA256": "2c6348fa0583345250f2de838ce99a44721723742b7a892bdd98586009a11bfe",
+      "characters": 10,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-070",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Vorwürfe.",
+      "spokenTextSHA256": "e3a4e6a5bc94e6d1ffbb749f6f3d77a13f83da0a1614330be3064827fbf3d2d9",
+      "characters": 9,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-091",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Was geschah mit dem Feuer, in das Ibrāhīm geworfen wurde?",
+      "spokenTextSHA256": "81c44d58b87c3b7f902a02b56dd0347a8e92677568b9deadc7df943ede1cc930",
+      "characters": 57,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-120",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Was ist besser als eine Gabe, der Verletzung folgt?",
+      "spokenTextSHA256": "683f015c1ecaec931aa30211fb2a9a5a9d559c414736ce4c4d0b9411f98b2287",
+      "characters": 51,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-091",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Was meiden die Diener des Allerbarmers nach Qurʾān 25:72?",
+      "spokenTextSHA256": "0d621a71d46bc4b9e12dbd53fe94306c398b1a9c9b9befaeb093340584956d7e",
+      "characters": 57,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-147",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Welche Gruppen nennt Qurʾān 17:26 beim Geben ihrer Rechte?",
+      "spokenTextSHA256": "26cd78210197fb7a23f1529da2003867f9b81de05ab41464bc08ff3fbb1f7532",
+      "characters": 58,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-338",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Welche zwei Schritte nennt Qurʾān 24:27 vor dem Betreten fremder Häuser?",
+      "spokenTextSHA256": "6ce6fa008dfcbaddc21e6f7995f9f16cac31265c70b5ad296c14eb02a7025de6",
+      "characters": 72,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-344",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Welches Ziel nennt Qurʾān 2:183 für das Fasten?",
+      "spokenTextSHA256": "de736235d672cf7841d988f955a5e105effa1fbda3bf87fac4913d8ecfe82174",
+      "characters": 47,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-094",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Wen erhöht Allah nach Qurʾān 58:11 in Rangstufen?",
+      "spokenTextSHA256": "dd001569108fb828add436f20473f20d2c631ce8bb73be318ee3cbb76f3636a0",
+      "characters": 49,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-386",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Wettbewerb im Essen.",
+      "spokenTextSHA256": "19bfa98affb9028bdd7d6513b20a1a19afe448d3c63868aaa1ea9fa23d841a73",
+      "characters": 20,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-094",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Wie beschreibt der Qurʾān Laylat al-Qadr?",
+      "spokenTextSHA256": "61e82e4837d1c936c7670ac2d514fb416a631b560bb804644d60dbd4b77d60df",
+      "characters": 41,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-095",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Wie jeden anderen Abend.",
+      "spokenTextSHA256": "91dff8827adcafe5b9f50cfca60b48c3f13d3f5a2f700822576aaed811dd82ce",
+      "characters": 24,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-095",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Wie rief Zakariyyā seinen Herrn an?",
+      "spokenTextSHA256": "14f756da31e8f804465b0e5f750e44bdf04d1036ce4efb42e30f6bd8265b90fb",
+      "characters": 35,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-276",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Wir ignorieren jedes Recht.",
+      "spokenTextSHA256": "d956e6103cfb5513a61f2ebb2d5b493670cfd90f6f0fc92d8e48d7fbaf186e79",
+      "characters": 27,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-028",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Wir schaden ihm nicht.",
+      "spokenTextSHA256": "7b60c8badf8b3f5d29293f91425f62ee2bc03ad2b2c26b4ff9a747bd6bf6607b",
+      "characters": 22,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-028",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Wir ärgern ihn absichtlich.",
+      "spokenTextSHA256": "3760c9455930fa987546d5a6d2ff37de6990a91aeefe51a1adc9fb74bb56d00b",
+      "characters": 27,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-028",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Wodurch finden Herzen Ruhe?",
+      "spokenTextSHA256": "895bf182a8746f0e53ced618983026e3b5a642d24e4c82fca4ba83ce25a54919",
+      "characters": 27,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-231",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    },
+    {
+      "spokenText": "Wovor warnte Luqmān seinen Sohn besonders?",
+      "spokenTextSHA256": "5929ba45ede080ea0aa75020030b99af5e6014843dfaaec3cdb0aeb42456fe49",
+      "characters": 42,
+      "expectedVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "expectedModelId": "eleven_v4",
+      "neededBy": [
+        {
+          "questionId": "kids-quiz-070",
+          "audioPart": "question"
+        }
+      ],
+      "existingOriginalMP3": false,
+      "newRecordingStarted": false,
+      "paidCreditsSpent": 0,
+      "reviewerApprovedSourceText": false,
+      "reviewerApprovedPronunciation": false,
+      "explicitRecordingAuthorization": false
+    }
+  ],
+  "numberOfQuestions": 20,
+  "numberOfNewOriginalTexts": 85,
+  "numberOfNewCharacters": 3089,
+  "dependsOnPreviousStage": true,
+  "priorStageRecordedAudioPresumed": false,
+  "requiresHumanContentAndReferenceAudit": true,
+  "requiresSeparateExplicitCostAuthorization": true,
+  "requiresManualListeningBeforePublication": true
+}

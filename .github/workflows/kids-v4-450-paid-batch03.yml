@@ -1,0 +1,108 @@
+name: KIDS V4 450 Paid Batch 03 (50 original MP3s)
+
+on:
+  workflow_dispatch:
+    inputs:
+      authorize_new_credit_spend:
+        description: "Explicit manual permission for NEW paid ElevenLabs synthesis"
+        required: true
+        type: choice
+        options:
+          - "NO"
+          - "YES"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+
+jobs:
+  produce-50-originals:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.authorize_new_credit_spend == 'YES' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout review only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+
+      - name: Generate 50 V4 originals direct to MP3, budget-capped and no repeats
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          python3 -m py_compile kids/tools/generate_quiz_v4_450_paid_batch03.py
+          python3 kids/tools/generate_quiz_v4_450_paid_batch03.py
+
+      - name: Immediately assemble, verify and stage newly recorded V4 originals into all 450 quiz IDs
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+
+      - name: Store original bytes and immutable expense ledger safely
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-voice-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          git add -A kids/data/quiz-v4-450-original-clip-registry.json kids/data/quiz-v4-450-paid-generation-ledger.json kids/assets/kids-quiz-audio/v4-curated450-review/
+          if [ -f kids/data/quiz-v4-450-batch03-usage.json ]; then
+            git add kids/data/quiz-v4-450-batch03-usage.json
+          fi
+          # Commit SHA-verified listening MP3s and question ID assignments
+          # alongside original MP3 bytes. Public playback stays disabled.
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/ || true
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ || true
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-handover-latest.json
+          if git diff --cached --quiet; then
+            echo "Batch already saved, no further paid requests."
+            exit 0
+          fi
+          git commit -m "audio(kids v4): save 50 more original paid MP3 files and SHA/usage ledger for review"
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:"$branch"; then
+              echo "ALL 50 originals persisted, review-only, no public deployment."
+              exit 0
+            fi
+            git fetch origin "$branch"
+            git rebase FETCH_HEAD
+          done
+          echo "::error::Paid bytes saved in artifact but Git push conflicted; do NOT regenerate these originals."
+          exit 1
+
+      - name: Preserve paid originals even if GitHub push fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-450-batch03-paid-originals-backup
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json
+            kids/data/quiz-v4-450-production-status.json
+            kids/data/quiz-v4-first150-composed-preview.json
+            kids/data/quiz-v4-first150-audio-status.json
+            kids/data/quiz-v4-age7to10-composed-preview.json
+            kids/data/quiz-v4-age7to10-offline-coverage.json
+            kids/review-only/quiz-v4-450-actual-mp3-import.json
+            kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+            kids/assets/kids-quiz-audio/v4-first150-composed-review/
+            kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+            kids/data/quiz-v4-450-batch03-usage.json

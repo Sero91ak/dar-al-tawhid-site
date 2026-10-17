@@ -1,0 +1,100 @@
+name: KIDS V4 Import Already-Paid Flow MP3s Directly Into Quiz Review
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/fetch_quiz_v4_paid_flow_mp3s_official_get.py'
+      - '.github/workflows/kids-v4-connected-paid-originals-free-get-import.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-connected-flow-originals-get-only-20261017
+  cancel-in-progress: false
+
+jobs:
+  import-original-mp3s-into-existing-quiz:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' && github.event.pull_request.head.ref == 'review/kids-quiz-v4-batch-001-020-20261014'
+    runs-on: ubuntu-latest
+    timeout-minutes: 24
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Verify exactly ten already paid V4 master generations - GET ONLY
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/fetch_quiz_v4_paid_flow_mp3s_official_get.py
+          python3 kids/tools/fetch_quiz_v4_paid_flow_mp3s_official_get.py
+          python3 kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py
+          test "$(python3 - <<'PY'
+          import json
+          a=json.load(open('kids/data/quiz-v4-connected-flow-originals-ledger.json'))
+          print(sum(x['status']=='GENERATED_AWAITING_ORIGINAL_MP3_IMPORT' for x in a['entries']))
+          PY
+          )" -eq 10
+      - name: Download previously paid MP3 source bytes only - never synthesize
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/fetch_quiz_v4_paid_flow_mp3s_official_get.py --get-and-import
+      - name: Assemble real already paid quiz audio and map to actual question IDs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+      - name: Commit real MP3 assets and existing quiz bindings to private review
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-audio-import
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/assets/kids-quiz-audio/v4-connected-flow-original-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/data/quiz-v4-connected-flow-originals-ledger.json
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/data/quiz-v4-450-paid-generation-ledger.json
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json
+          git add kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-first150-composed-preview.json
+          git add kids/data/quiz-v4-first150-audio-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-connected-flow-original-import-status.json
+          git commit -m 'audio(kids): import ten already-paid v4 clips and assemble quiz audio'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+              echo 'Imported original MP3s now saved in quiz review branch; live flag remains OFF'
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Preserve all paid originals even when GitHub push is blocked
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-ten-existing-v4-originals-review-backup
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-connected-flow-original-review/
+            kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+            kids/data/quiz-v4-connected-flow-originals-ledger.json
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json

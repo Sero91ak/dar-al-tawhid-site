@@ -1,0 +1,105 @@
+name: KIDS V4 Ages 7–10 Offline MP3 Assembly (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/quiz_v4_age7to10_offline_join.py'
+      - '.github/workflows/kids-v4-age7to10-offline-compose.yml'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+      - 'kids/assets/kids-quiz-audio/v4-curated450-review/**'
+      - 'kids/assets/kids-quiz-audio/v4-paid-flow-original-review/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-age7to10-offline-assembly-single-review
+  cancel-in-progress: false
+
+jobs:
+  age7to10-original-only-composition:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - name: Check out private KIDS audio review, never the public manifest
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Ensure local audio tools for existing original MP3s
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          command -v ffmpeg
+          command -v ffprobe
+      - name: Assemble and verify only already stored MP3 original segments
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.load(open("kids/data/quiz-v4-age7to10-offline-coverage.json"))
+          p=json.load(open("kids/data/quiz-v4-age7to10-composed-preview.json"))
+          assert r["reviewOnly"] is True and r["livePublished"] is False
+          assert r["elevenLabsCreditsSpent"]==0
+          assert r["humanListeningApprovalsCreated"]==0
+          assert p["published"] is False and p["humanListeningApproved"] is False
+          assert r["byAge"]["7-8"]["questions"]==150
+          assert r["byAge"]["9-10"]["questions"]==150
+          assert len(p["questions"])==300
+          assert r["byAge"]["7-8"]["completeFourPartQuestions"]==2
+          assert r["byAge"]["9-10"]["completeFourPartQuestions"]==0
+          assert r["byAge"]["7-8"]["availableFieldCounts"]=={
+              "question":2,"correct":150,"retry":150,"explanation":14}
+          assert r["byAge"]["9-10"]["availableFieldCounts"]=={
+              "question":0,"correct":150,"retry":150,"explanation":10}
+          assert all(not x["audioListeningApproved"] for x in p["entries"].values())
+          assert all(not x["approvedForPlayback"] for x in p["entries"].values())
+          assert all(x["url"].startswith("/kids/assets/kids-quiz-audio/") for x in p["entries"].values())
+          for x in p["entries"].values():
+              assert (Path.cwd()/x["url"].lstrip("/")).is_file()
+          assert json.load(open("kids/data/quiz-curation-release.json"))["enabled"] is False
+          print("PASS_KIDS_V4_AGE7TO10_300_QUESTIONS_EXISTING_ORIGINALS_ONLY",flush=True)
+          PY
+      - name: Preserve original-only listening results in review branch
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-review-audio-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-age7to10-composed-preview.json
+          git add kids/data/quiz-v4-age7to10-offline-coverage.json
+          if git diff --cached --quiet; then
+            echo "Older-age offline original-only previews already saved."
+            exit 0
+          fi
+          git commit -m "audio(kids): save authentic existing V4 audio previews for age 7-8 and 9-10, still not live"
+          for n in 1 2 3; do
+            if git push origin HEAD:"$branch"; then
+              echo "Committed only review audio and factual progress; no public quiz manifest."
+              exit 0
+            fi
+            git fetch origin "$branch"
+            if ! git rebase FETCH_HEAD; then
+              echo "::error::Cannot safely reconcile offline-only review originals."
+              exit 1
+            fi
+          done
+          exit 1
+      - name: Retain all offline age 7 to 10 results as an artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-age7to10-authentic-originals-offline-assembly
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+            kids/data/quiz-v4-age7to10-composed-preview.json
+            kids/data/quiz-v4-age7to10-offline-coverage.json

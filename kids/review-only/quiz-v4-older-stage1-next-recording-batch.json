@@ -1,0 +1,42 @@
+{
+  "scope": "KIDS_V4_OLDER_STAGE1_20_QUESTIONS_65_EXACT_ORIGINALS",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "reviewOnly": true,
+  "questionCount": 20,
+  "questions7to8": 10,
+  "questions9to10": 10,
+  "stageExpectedNewOriginals": 65,
+  "previouslyRecordedFirstStageOriginals": 10,
+  "remainingFirstStageOriginals": 55,
+  "nextPaidRunOriginalLimit": 10,
+  "manualApprovalMustMatchExactBatchFingerprintSHA256": "e7c460aa4f3be569e7ba2cd0eb5c9e5c093c572b871740a65a572f5eee4c954d",
+  "nextExactTextSha256": [
+    "b14c5cc2e575f9cc125b1d8ed587929f0ce43e59d4d320f2d4289c3dc5f4e99f",
+    "083eaada4c52e5acbc18f112c0e470218bf6f4c3a246cc9363fe348e9ed0080c",
+    "95688dbe65bc50a75971246f70531e31bca59afdc4b49ac82653a9ad1ebb614c",
+    "ac744834a00cdef369454ee1623f932a2ec472500300b4f2f63f05191aa9b7ee",
+    "2822ebc6a280345f6da60c0327d1a1c8db7308e8028011f97c0d38d21ea6cde0",
+    "c68b17bed3a6ded196e41dfc848ebc07807905667d38b3ef97097a8fb189e152",
+    "d5bfa8ae7e95d046ed74b87ac9408cee5d4537685ea6c3c04a47f9cb01df8975",
+    "3d380e59035df0c494ab6ea5ee85c3aabbf601cace95eb5dcb69b9782f4f596c",
+    "575c1d64cb209b95db157cc049badb120321f0f9240c2cb3ed0b91828ad83912",
+    "72dc53f6f2788efe124e90f9edc092013267cfee3f07a12fb14ab221cd60f8aa"
+  ],
+  "questionsThatCouldGainCompleteV4AudioAfterNextRun": [
+    "kids-quiz-022",
+    "kids-quiz-026",
+    "kids-quiz-043",
+    "kids-quiz-389"
+  ],
+  "newlyCompleteQuestionCountProjectedFromActualSourceGaps": 4,
+  "audioQualityStillRequiresHumanApproval": true,
+  "nextEstimatedCreditsNotProviderBill": 293.63,
+  "estimatedPerRunCreditsMaximum": 850.0,
+  "previouslyPaidHistoricalFlowTextsInQueue": 0,
+  "paidSynthesisAuthorizedByAudit": false,
+  "newElevenLabsCreditsSpentByAudit": 0,
+  "humanSourceApprovalInPreflight": false,
+  "noBlindRetryAfterProviderError": true,
+  "publicReleaseAllowed": false
+}
