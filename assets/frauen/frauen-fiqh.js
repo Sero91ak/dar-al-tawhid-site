@@ -4708,7 +4708,7 @@
     return null;
   }
   var priorScrollStyle=null;
-  function restoreTestScrollport(){
+  function restoreFrauenScrollport(){
     if(!priorScrollStyle||!document.body)return;
     var st=document.body.style;
     if(st.getPropertyValue("overflow-x").trim()==="clip"&&st.getPropertyPriority("overflow-x")==="important"){
@@ -4721,13 +4721,14 @@
     }
     priorScrollStyle=null;
   }
-  function syncTestScrollport(value){
+  /* DAR_FRAUEN_VISITOR_SCROLL_FIX_V1395
+   * Visitor/official iOS/Android and Test share one root scrollport.
+   * Respect active modal scroll locks; no changes outside Frauen routes. */
+  function syncFrauenScrollport(value){
     var root=document.documentElement,body=document.body;
     if(!root||!body)return;
-    var isTest=(location.pathname.indexOf("/test")===0)
-      ||root.classList.contains("dar-test-performance-v1");
     var modal=false;
-    if(value!==null&&isTest){
+    if(value!==null){
       var dialogs=document.querySelectorAll('dialog[open],[role="dialog"][aria-modal="true"]');
       for(var i=0;i<dialogs.length;i++){
         if(dialogs[i].getClientRects().length&&getComputedStyle(dialogs[i]).visibility!=="hidden"){
@@ -4735,8 +4736,9 @@
         }
       }
     }
-    if(value===null||!isTest||!body.classList.contains("is-frauen-route")||modal){
-      restoreTestScrollport();
+    if(value===null||!body.classList.contains("is-frauen-route")||modal
+      ||root.classList.contains("ios-visitor-blocked")){
+      restoreFrauenScrollport();
       return;
     }
     if(!priorScrollStyle){
@@ -4747,9 +4749,8 @@
         yp:body.style.getPropertyPriority("overflow-y")
       };
     }
-    // Test SPA has a persistent body overflow-x:hidden guard, creating an
-    // inert vertical scroll container. Inline important restoration is required
-    // so the Frauen hero follows the actual HTML page scroller.
+    // A legacy body overflow-x:hidden turns the body into a scroll container
+    // on mobile. Restore a single document scrollport for Frauen routes.
     if(body.style.getPropertyValue("overflow-x").trim()!=="clip"
       ||body.style.getPropertyPriority("overflow-x")!=="important")
       body.style.setProperty("overflow-x","clip","important");
@@ -4759,7 +4760,7 @@
   }
   function repair(){
     var value=currentValue();
-    syncTestScrollport(value);
+    syncFrauenScrollport(value);
     if(value===null||repairing)return;
     var app=document.getElementById("appView");
     if(!app)return;
@@ -4803,7 +4804,7 @@
     schedule();
   }
   document.addEventListener("dar:render",function(){attach();schedule()});
-  window.addEventListener("hashchange",function(){syncTestScrollport(currentValue());attach();schedule()});
+  window.addEventListener("hashchange",function(){syncFrauenScrollport(currentValue());attach();schedule()});
   document.addEventListener("dar:frauen-render",function(){attach();schedule()});
   // Some Test shells REPLACE #appView itself after SPA paints. Watching only
   // its old children then misses the removal, so observe the stable document
@@ -4822,6 +4823,6 @@
   else bootIntegrity();
   setInterval(function(){
     if(currentValue()!==null){attach();schedule()}
-    else restoreTestScrollport();
+    else restoreFrauenScrollport();
   },800);
 })();
