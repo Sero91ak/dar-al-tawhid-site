@@ -1638,6 +1638,15 @@ export default {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
       let html = await assetResponse.text();
+      // VISITOR_FRAUEN_SINGLE_RENDERER_V1396: the native iOS HTML already
+      // contains the old Test women bundle and CSS. Loading another copy
+      // registered duplicate route/DOM listeners and stale global observers.
+      // Remove ONLY those legacy Test Frauen tags in the iOS native response.
+      // The canonical visitor-owned bundle/styles are appended just below.
+      if (assetResponse.ok && !androidNativeApp) {
+        html = html.replace(/<script\b[^>]*\bsrc=["']\/test\/assets\/frauen\/frauen-fiqh\.js[^"']*["'][^>]*>\s*<\/script\s*>/gi, "");
+        html = html.replace(/<link\b[^>]*\bhref=["']\/test\/assets\/frauen\/frauen-(?:fiqh|authority-v1292)\.css[^"']*["'][^>]*>/gi, "");
+      }
       if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
         const frauenAddon = liveFrauenNativeAddon();
         html = html.includes("</body>") ? html.replace("</body>", frauenAddon + "</body>") : html + frauenAddon;
