@@ -67,10 +67,19 @@ def members(z):
         listed[name]=info
     return listed
 
+def archive_name(found,name):
+    # GitHub Actions upload-artifact strips the least common parent:
+    # multiple 'kids/...' artifact paths may appear as 'data/...' and
+    # 'assets/...' within the ZIP rather than their checkout paths.
+    matches=[x for x in (name,name.removeprefix("kids/")) if x in found]
+    if len(set(matches))!=1:
+        fail("required Actions backup file absent or ambiguously duplicated: "+name)
+    return matches[0]
+
 def get_zip_json(z,found,name):
-    if name not in found:fail("required Actions backup JSON absent: "+name)
-    if found[name].file_size>3_000_000:fail("unexpectedly large JSON metadata")
-    try:return json.loads(z.read(name).decode("utf-8"))
+    key=archive_name(found,name)
+    if found[key].file_size>3_000_000:fail("unexpectedly large JSON metadata")
+    try:return json.loads(z.read(key).decode("utf-8"))
     except (ValueError,UnicodeError) as exc:fail("malformed Actions metadata: "+str(exc)[:100])
 
 def verify_mp3(payload):
@@ -145,8 +154,8 @@ def import_backup(zip_path,root=ROOT,apply=False):
                 re.fullmatch(r"[a-f0-9]{32}\.mp3",url[len(BASE)+1:])):
                 fail("non-private MP3 destination in historical backup")
             name=url.lstrip("/")
-            if name not in contents:fail("original MP3 bytes missing from charged backup: "+name)
-            payload=z.read(name)
+            key=archive_name(contents,name)
+            payload=z.read(key)
             if len(payload)!=clip.get("bytes") or digest(payload)!=clip["sha256"]:
                 fail("actual already-billed MP3 bytes fail SHA-256 and size verification")
             verify_mp3(payload)
