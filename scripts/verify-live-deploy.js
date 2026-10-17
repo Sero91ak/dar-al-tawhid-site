@@ -143,7 +143,7 @@ async function main() {
     // Confirm iOS/visitor HTML links the final geometry authority AND the
     // independently served CSS actually contains its viewport correction.
     // A successful GitHub merge or unchanged app-shell build ID is not enough.
-    const responsiveHref = "/assets/adult-responsive-viewport-v1381.css?v=20261017-responsive-v1382";
+    const responsiveHref = "/assets/adult-responsive-viewport-v1381.css?v=20261017-hadith-continuous-v1386";
     const responsiveHtmlOk = await waitForHtmlIncludes(
       `${SITE_URL}/index.html?responsive-check=${Date.now()}`,
       ['id="darAdultResponsiveViewportV1381"', responsiveHref],
@@ -154,6 +154,7 @@ async function main() {
       [
         "adult visitor adaptive viewport v1381",
         "DAR_ADULT_RESPONSIVE_AXIS_V1382",
+        "DAR_HADITH_CONTINUOUS_FULLBLEED_V1386",
         "--dar-axis-stage:calc(100% - var(--dar-axis-gutter) - var(--dar-axis-gutter))",
         "--dar-responsive-safe-gutter",
         "--dar-responsive-stage-width",
