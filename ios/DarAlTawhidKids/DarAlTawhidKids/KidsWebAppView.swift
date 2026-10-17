@@ -17,6 +17,9 @@ struct KidsWebAppView: UIViewRepresentable {
         configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         configuration.userContentController.add(context.coordinator, name: "darKidsNowPlaying")
         configuration.userContentController.add(context.coordinator, name: "darKidsScreenAwake")
+#if KIDS_CREATOR_TEST
+        configuration.userContentController.add(context.coordinator, name: "darKidsCreatorSplashReady")
+#endif
 
 #if KIDS_CREATOR_TEST
         let officialMarker = ""
@@ -122,6 +125,9 @@ struct KidsWebAppView: UIViewRepresentable {
             }
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsNowPlaying")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsScreenAwake")
+#if KIDS_CREATOR_TEST
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsCreatorSplashReady")
+#endif
         }
 
         func loadKidsHome(in webView: WKWebView) {
@@ -327,6 +333,13 @@ struct KidsWebAppView: UIViewRepresentable {
                 applyKidsNowPlaying(body)
             case "darKidsScreenAwake":
                 applyKidsScreenAwake(body)
+#if KIDS_CREATOR_TEST
+            case "darKidsCreatorSplashReady":
+                // Fired only after the first illustrated web splash frame is ready.
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: Notification.Name("DarKidsCreatorSplashReady"), object: nil)
+                }
+#endif
             default:
                 break
             }
