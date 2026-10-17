@@ -7906,6 +7906,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-24T23:59:00.000Z"
+    },
+    {
+      "id": "test-hadith-sharh-inline-runtime-and-deploy-verification-20261017",
+      "at": "2026-10-17T08:48:00+02:00",
+      "approvedBy": "user-verified-not-visible-in-test-app-20261017",
+      "reason": "User explicitly reports prior adult Dar Test hadith detail Sharh changes not visible. Update the actual active inline renderHadithDetail in test/index.html, bump test-only build ID, and assert after deployment that both actual test origins deliver the new inline code and theme CSS. No adult Visitor, Kids, native Swift, TV, push, SW or unrelated functionality changes.",
+      "paths": [
+        "test/index.html",
+        "test/version.json",
+        "scripts/verify-test-app-deploy.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-24T23:59:00.000Z"
     }
   ],
   "enabled": true
