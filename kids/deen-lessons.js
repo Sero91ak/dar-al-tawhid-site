@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 const DATA_URL="/kids/data/deen-lessons.json?v=3";
-const CURRICULUM_URL="/kids/data/deen-curriculum-v1.json?v=1";
+const CURRICULUM_URL="/kids/data/deen-curriculum-v1.json?v=2";
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.deenLesson.done.";
 const $=(s,r=document)=>r.querySelector(s);
