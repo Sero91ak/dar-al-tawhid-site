@@ -155,6 +155,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-v15-legacy-visitor-crosspromo-20261017",
+      "at": "2026-10-17T14:10:00+02:00",
+      "approvedBy": "user-explicit-website-and-webapps-missing-crosspromo-fix-20261017",
+      "reason": "Bring already tested exact Apple TV/Kids marketing section to the legacy adult visitor More v15 adapter; Kids unavailable button remains disabled and no push/route/native changes.",
+      "paths": [
+        "assets/dar-more-v15.js",
+        "assets/dar-more-v15.css"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
       "id": "dar-public-web-mehr-apple-tv-kids-crosspromo-20261017",
       "at": "2026-10-17T14:00:00+02:00",
       "approvedBy": "user-explicit-fix-missing-visitor-website-and-webapp-apps-crosspromo-20261017",

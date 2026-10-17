@@ -14,6 +14,26 @@ const svg=(type)=>{
  if(type==="palette")return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0 0 18h1.6a2.4 2.4 0 0 0 1.8-4 2 2 0 0 1 1.4-3.4H18a3 3 0 0 0 3-3A9 9 0 0 0 12 3Z"/><circle cx="7.5" cy="11.5" r=".9" fill="currentColor" stroke="none"/><circle cx="10" cy="7.5" r=".9" fill="currentColor" stroke="none"/><circle cx="15" cy="7.5" r=".9" fill="currentColor" stroke="none"/></svg>';
  return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M4.8 20c.1-4.1 2.9-6.2 7.2-6.2s7.1 2.1 7.2 6.2"/></svg>';
 };
+function renderOurApps(){
+ const asset="/assets/promo/mehr-apps-reference-20261017.jpg";
+ return `<section class="dm-app-showcase dm-exact-promo" data-dm-app-promo data-dm-search="apps apple tv fernseher kids tawhid kinder iphone ipad familie verfügbar bald entdecken" aria-label="Weitere DĀR AL TAWḤĪD Apps">
+ <header class="dm-showcase-head"><span class="dm-showcase-kicker">DĀR AL TAWḤĪD · UNSERE APPS</span><h4>Wissen auf jedem Bildschirm.</h4><p>Entdecke unsere Angebote für das Wohnzimmer und die ganze Familie.</p></header>
+ <div class="dm-exact-stack">
+ <article class="dm-exact-card dm-exact-apple" aria-label="DĀR AL TAWḤĪD für Apple TV – jetzt verfügbar">
+  <img src="${asset}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="864" height="1536">
+  <p class="dm-exact-sr">DĀR AL TAWḤĪD für Apple TV – jetzt verfügbar. Qurʾān, Sunnah und Āṯār am großen Bildschirm.</p>
+  <a href="https://apps.apple.com/de/app/id6805988753" class="dm-exact-action dm-exact-apple-action" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD auf Apple TV im App Store ansehen"><span class="dm-exact-sr">Im App Store ansehen</span></a>
+ </article>
+ <article class="dm-exact-card dm-exact-kids" aria-label="TAWḤĪD KIDS – iPhone-App in Vorbereitung">
+  <img src="${asset}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="864" height="1536">
+  <p class="dm-exact-sr">TAWḤĪD KIDS. Die iPhone-App ist noch nicht veröffentlicht. Demnächst verfügbar. Keine Verlinkung oder Installation.</p>
+  <button type="button" class="dm-exact-action dm-exact-kids-locked" disabled aria-label="TAWḤĪD KIDS ist noch nicht verfügbar"><span class="dm-exact-sr">Demnächst verfügbar</span></button>
+ </article>
+ </div>
+ <p class="dm-showcase-footnote">Gerätedarstellungen mit Werbemotiven aus unserer Vorschau. Keine App-Store-Screenshots.</p>
+ </section>`;
+}
+
 const moreTheme=()=>document.documentElement.getAttribute("data-theme")||"dark";
 function render(items,header){
  const data=Array.isArray(items)?items.filter(x=>x&&x.id!=="account"):[];
@@ -27,7 +47,7 @@ function render(items,header){
   const search=[i.title,i.desc,i.group,i.badge].filter(Boolean).join(" ").toLocaleLowerCase("de");
   return '<button class="dm-card" type="button" data-dm-item="'+safe(i.id)+'" data-nav="'+safe(i.nav)+'"'+val+' data-dm-search="'+safe(search)+'"><span class="dm-cardhead"><span class="dm-cardicon">'+icon(icons[i.id]||"library")+'</span><span class="dm-cardtitle"><strong>'+safe(i.title)+'</strong>'+tag+'</span></span><span class="dm-desc">'+safe(i.desc||"")+'</span></button>';
  }).join("");
- return '<section class="dm-group" data-dm-group="'+c[0]+'"><header class="dm-group-head"><h3>'+safe(c[2])+'</h3><span data-dm-count="'+c[0]+'">'+matches.length+' Funktionen</span></header><div class="dm-grid">'+cards+'</div></section>';
+ return '<section class="dm-group" data-dm-group="'+c[0]+'"><header class="dm-group-head"><h3>'+safe(c[2])+'</h3><span data-dm-count="'+c[0]+'">'+matches.length+' Funktionen</span></header><div class="dm-grid">'+cards+'</div>'+(c[0]==="app"?renderOurApps():"")+'</section>';
  }).join("");
  const options=themes.map(t=>'<button type="button" class="dm-theme-choice" data-dm-theme="'+t[0]+'" aria-pressed="'+(moreTheme()===t[0])+'"><i style="background:'+t[2]+'"></i><span>'+safe(t[1])+'</span></button>').join("");
  const head=typeof header==="function"?header("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr"):"";
@@ -47,6 +67,12 @@ function sync(){
    const match=!query||String(card.getAttribute("data-dm-search")||"").includes(query.toLocaleLowerCase("de"));
    card.hidden=!match||(!query&&!isCategory);if(match)visible++;
   });
+  const promo=group.querySelector("[data-dm-app-promo]");
+  if(promo){
+   const match=!query||String(promo.getAttribute("data-dm-search")||"").includes(query.toLocaleLowerCase("de"));
+   promo.hidden=!!query&&!match;
+   if(match&&query)visible++;
+  }
   group.hidden=query?visible===0:!isCategory;
   const cnt=group.querySelector("[data-dm-count]");if(cnt)cnt.textContent=visible+" Funktionen";
   if(query)total+=visible;
