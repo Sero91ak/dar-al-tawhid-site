@@ -7961,6 +7961,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-19T23:59:00.000Z"
+    },
+    {
+      "id": "visitor-responsive-live-asset-verification-20261017",
+      "at": "2026-10-17T10:20:00+02:00",
+      "approvedBy": "user-explicit-global-responsive-push-live-20261017",
+      "reason": "User confirmed adult DĀR AL TAWḤĪD cross-device viewport centering and requested push live. Only strengthen read-only visitor deployment verification for the already merged responsive stylesheet: check native app HTML references actual asset and Cloudflare serves matching CSS. No content, Kids, native Swift, TV or push changes.",
+      "paths": [
+        "scripts/verify-live-deploy.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true

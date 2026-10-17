@@ -139,6 +139,26 @@ async function main() {
       "https://apps.apple.com/de/app/id6805988753"
     ]);
 
+    // DAR_ADULT_RESPONSIVE_VIEWPORT_V1381_LIVE_GATE
+    // Confirm iOS/visitor HTML links the final geometry authority AND the
+    // independently served CSS actually contains its viewport correction.
+    // A successful GitHub merge or unchanged app-shell build ID is not enough.
+    const responsiveHref = "/assets/adult-responsive-viewport-v1381.css?v=20261017-responsive-v1381";
+    const responsiveHtmlOk = await waitForHtmlIncludes(
+      `${SITE_URL}/index.html?responsive-check=${Date.now()}`,
+      ['id="darAdultResponsiveViewportV1381"', responsiveHref],
+      nativeHeaders
+    );
+    const responsiveCssOk = await waitForHtmlIncludes(
+      `${SITE_URL}${responsiveHref}`,
+      [
+        "adult visitor adaptive viewport v1381",
+        "--dar-responsive-safe-gutter",
+        "--dar-responsive-stage-width",
+        ".post-reader > .post-reader-title"
+      ]
+    );
+
     const { text } = await fetchStatus(`${SITE_URL}/`, nativeHeaders);
     const zakatMatch = text.match(/zakat-app\.js\?v=(\d+)/);
     const zakatVer = zakatMatch ? Number(zakatMatch[1]) : 0;
@@ -155,9 +175,9 @@ async function main() {
       200
     );
 
-    if (!publicWebsiteOk || !publicIsolationSwOk || !publicInstallManifestOk || !publicInstallWorkerOk || !visitorOk || !pwaOk || !pwaInstallerOk || !downloadButtonsOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
+    if (!responsiveHtmlOk || !responsiveCssOk || !publicWebsiteOk || !publicIsolationSwOk || !publicInstallManifestOk || !publicInstallWorkerOk || !visitorOk || !pwaOk || !pwaInstallerOk || !downloadButtonsOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
       console.error(
-        `verify: Besucher-App fehlgeschlagen (public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, public-install-manifest=${publicInstallManifestOk ? "ok" : "fail"}, public-install-sw=${publicInstallWorkerOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, pwa-install=${pwaInstallerOk ? "ok" : "fail"}, downloads=${downloadButtonsOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
+        `verify: Besucher-App fehlgeschlagen (responsive-html=${responsiveHtmlOk ? "ok" : "fail"}, responsive-css=${responsiveCssOk ? "ok" : "fail"}, public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, public-install-manifest=${publicInstallManifestOk ? "ok" : "fail"}, public-install-sw=${publicInstallWorkerOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, pwa-install=${pwaInstallerOk ? "ok" : "fail"}, downloads=${downloadButtonsOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
       );
       failed += 1;
     } else {
