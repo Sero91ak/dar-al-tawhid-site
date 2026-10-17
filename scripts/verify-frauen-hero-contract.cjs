@@ -39,6 +39,6 @@ for(const variant of ["", "test/"]){
     assert.ok(css.includes(prefix+image),"Hero theme lacks local picture "+variant+image);
   }
 }
-assert.ok(read("cloudflare/test-app-worker.js").includes("frauen-authority-v1292.css?v=frauen-hero-v1390"),"Test shell must bust Frauen CSS cache");
-assert.ok(read("cloudflare/site-router.js").includes("frauen-authority-v1292.css?v=frauen-hero-v1390"),"Visitor/iOS shell must bust Frauen CSS cache");
+assert.ok(read("cloudflare/test-app-worker.js").includes("frauen-authority-v1292.css?v=frauen-scroll-v1395"),"Test shell must bust Frauen CSS cache");
+assert.ok(read("cloudflare/site-router.js").includes("frauen-authority-v1292.css?v=frauen-scroll-v1395"),"Visitor/iOS shell must bust Frauen CSS cache");
 console.log("OK Frauen: hub/group/list heroes and all seven image assets in Test + Besucher.");
