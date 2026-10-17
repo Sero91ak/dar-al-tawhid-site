@@ -19,19 +19,22 @@ const svg=(type)=>{
    The pictures below are real project artwork shown inside device illustrations;
    do not label them as captured App Store screenshots. */
 function renderOurApps(){
- return `<section class="dm-app-showcase" data-dm-app-promo data-dm-search="apps apple tv fernseher kids tawhid kinder iphone familien verfügbar bald entdecken" aria-label="Weitere DĀR AL TAWḤĪD Apps">
+ const asset="/assets/promo/mehr-apps-reference-20261017.jpg";
+ return `<section class="dm-app-showcase dm-exact-promo" data-dm-app-promo data-dm-search="apps apple tv fernseher kids tawhid kinder iphone ipad familie verfügbar bald entdecken" aria-label="Weitere DĀR AL TAWḤĪD Apps">
  <header class="dm-showcase-head"><span class="dm-showcase-kicker">DĀR AL TAWḤĪD · UNSERE APPS</span><h4>Wissen auf jedem Bildschirm.</h4><p>Entdecke unsere Angebote für das Wohnzimmer und die ganze Familie.</p></header>
- <div class="dm-showcase-grid">
-  <article class="dm-showcase-card dm-showcase-tv">
-   <div class="dm-showcase-visual" aria-hidden="true"><div class="dm-tv-device"><div class="dm-tv-screen"><span class="dm-tv-brand">DĀR AL TAWḤĪD</span><span class="dm-tv-orbit"></span><img src="/app-logo-original.png" alt="" loading="lazy" decoding="async"><strong>Qurʾān · Sunnah · Āṯār</strong><small>Wissen auf Apple TV</small></div></div><span class="dm-tv-stand"></span></div>
-   <div class="dm-showcase-body"><span class="dm-showcase-status dm-showcase-status-available"><span aria-hidden="true" class="dm-showcase-dot"></span>Jetzt auf Apple TV</span><h5>DĀR AL TAWḤĪD für Apple TV</h5><p>Qurʾān, ausgewählte Überlieferungen und islamisches Wissen bequem auf dem großen Bildschirm entdecken.</p><a class="dm-showcase-link" href="https://apps.apple.com/de/app/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store ansehen">Im App Store ansehen <span aria-hidden="true">↗</span></a></div>
-  </article>
-  <article class="dm-showcase-card dm-showcase-kids">
-   <div class="dm-showcase-visual dm-kids-device-scene" aria-hidden="true"><div class="dm-phone dm-phone-back"><div class="dm-phone-island"></div><div class="dm-phone-screen dm-phone-girls"><span>TAWḤĪD KIDS</span><img src="/kids/assets/kids-home-girls-v1330/mosque-rose-night.webp" alt="" loading="lazy" decoding="async"><strong>Entdecken &amp; lernen</strong></div></div><div class="dm-phone dm-phone-front"><div class="dm-phone-island"></div><div class="dm-phone-screen dm-phone-boys"><span>TAWḤĪD KIDS</span><img src="/kids/assets/kids-salah-v1272/hero-home.png" alt="" loading="lazy" decoding="async"><strong>Lernen mit Freude</strong></div></div></div>
-   <div class="dm-showcase-body"><span class="dm-showcase-status dm-showcase-status-soon">iPhone-App in Vorbereitung</span><h5>TAWḤĪD KIDS</h5><p>Ein eigener Lernbereich für Kinder mit Qurʾān, Geschichten, Hören und Entdecken. Die iPhone-App ist noch nicht im App Store erhältlich.</p><a class="dm-showcase-link" href="/kids/" aria-label="Den bereits vorhandenen TAWḤĪD KIDS Webbereich entdecken">Kids-Webbereich entdecken <span aria-hidden="true">↗</span></a></div>
-  </article>
+ <div class="dm-exact-stack">
+ <article class="dm-exact-card dm-exact-apple" aria-label="DĀR AL TAWḤĪD für Apple TV – jetzt verfügbar">
+  <img src="${asset}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="864" height="1536">
+  <p class="dm-exact-sr">DĀR AL TAWḤĪD für Apple TV – jetzt verfügbar. Qurʾān, Sunnah und Āṯār am großen Bildschirm.</p>
+  <a href="https://apps.apple.com/de/app/id6805988753" class="dm-exact-action dm-exact-apple-action" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD auf Apple TV im App Store ansehen"><span class="dm-exact-sr">Im App Store ansehen</span></a>
+ </article>
+ <article class="dm-exact-card dm-exact-kids" aria-label="TAWḤĪD KIDS – iPhone-App in Vorbereitung">
+  <img src="${asset}" alt="" aria-hidden="true" loading="lazy" decoding="async" width="864" height="1536">
+  <p class="dm-exact-sr">TAWḤĪD KIDS. Die iPhone-App ist noch nicht veröffentlicht. Demnächst verfügbar. Keine Verlinkung oder Installation.</p>
+  <button type="button" class="dm-exact-action dm-exact-kids-locked" disabled aria-label="TAWḤĪD KIDS ist noch nicht verfügbar"><span class="dm-exact-sr">Demnächst verfügbar</span></button>
+ </article>
  </div>
- <p class="dm-showcase-footnote">Gerätedarstellungen mit Originalmotiven aus dem Projekt. Keine App-Store-Screenshots.</p>
+ <p class="dm-showcase-footnote">Gerätedarstellungen mit Werbemotiven aus unserer Vorschau. Keine App-Store-Screenshots.</p>
  </section>`;
 }
 
