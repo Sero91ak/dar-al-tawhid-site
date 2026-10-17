@@ -1,7 +1,7 @@
 /* POST HERO ONLY · adult test app
    The post picture is the background of the post head and uses the
    width of #appView. Other area heroes stay on their own rules. */
-html[data-theme] body.is-post-route #appView.view{
+html[data-theme] body.is-area-route.is-post-route:not(.is-feed-fullscreen):not(.is-quran-overview):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView.view{
   padding-left:0!important;
   padding-right:0!important;
   overflow-x:visible!important;
