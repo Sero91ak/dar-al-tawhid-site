@@ -1067,3 +1067,35 @@ html[data-theme] body.has-bottom-nav #appView.view > .dar-responsive-page > .dar
   background-size:cover!important;
   background-repeat:no-repeat!important;
 }
+
+/* DAR_ADULT_TOPICS_EMPTY_FOLD_V1384 · 2026-10-17
+ * An empty master/detail preview is not a useful overview: do not squeeze
+ * the complete topics library into a 280–320px sticky navigation rail.
+ * As soon as a detail is selected, the empty marker disappears and the
+ * existing two-column Fold system remains fully functional.
+ * Other Fold routes (Qurʾān, readers, library, Hadith) are untouched.
+ */
+html[data-theme] body.is-topics-route #appView .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty){
+  display:block!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:0!important;
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+}
+html[data-theme] body.is-topics-route #appView .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty) > .dar-fold__rail{
+  position:relative!important;
+  top:auto!important;
+  inset-inline:auto!important;
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  max-height:none!important;
+  overflow-y:visible!important;
+  overflow-x:clip!important;
+  padding:0!important;
+  background:none!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-topics-route #appView .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty) > .dar-fold__pane{
+  display:none!important;
+}
