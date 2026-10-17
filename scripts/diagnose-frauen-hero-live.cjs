@@ -72,6 +72,10 @@ function snapshot(){
    const tag="/* DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392";
    if(!localScript.includes(tag))throw Error("Repair snippet not in checkout");
    await page.addScriptTag({content:localScript.slice(localScript.indexOf(tag))});
+   const localCss=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-authority-v1292.css":"assets/frauen/frauen-authority-v1292.css"),"utf8");
+   const cssTag="/* DAR_FRAUEN_HERO_SCROLL_ANCESTOR_V1392";
+   if(!localCss.includes(cssTag))throw Error("Scroll CSS absent in checkout");
+   await page.addStyleTag({content:localCss.slice(localCss.indexOf(cssTag))});
    await page.waitForTimeout(1100);
    let repaired=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
@@ -84,7 +88,7 @@ function snapshot(){
    all.push({key:route.key,status:response.status(),before,repaired,after,errors});
    console.log(JSON.stringify({route:route.key,status:response.status(),
     before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles,shellChildren:before.shellChildren,renderer:before.renderer},
-    repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer},after:{scroll:after.docScroll,hero:after.hero,stage:after.stage,heading:after.heading},errors}));
+    repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer,ancestors:repaired.ancestors.map(x=>({cls:x.classes,overflowX:x.overflowX,overflowY:x.overflowY}))},after:{scroll:after.docScroll,hero:after.hero,stage:after.stage,heading:after.heading,ancestors:after.ancestors.map(x=>({cls:x.classes,overflowY:x.overflowY}))},errors}));
    if(before.app&&(!repaired.hero||repaired.hero.height<180||repaired.hero.bottom<100)){
      issues.push(route.key+" upper hero missing from first viewport");
    }
