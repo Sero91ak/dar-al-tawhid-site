@@ -98,18 +98,25 @@ function snapshot(){
    }
    await cdp.send("Input.dispatchTouchEvent",{type:"touchEnd",touchPoints:[]});
    await page.waitForTimeout(650);
+   let afterTouch=await page.evaluate(snapshot);
+   // Cross-check whether the browser actually exposes a scrolling root:
+   // CDP touch synthesis may not scroll under a spoofed WebKit user-agent.
+   await page.mouse.wheel(0,560);
+   await page.waitForTimeout(300);
    let after=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-after-scroll.png")});
-   all.push({key:route.key,status:response.status(),before,repaired,after,errors});
+   all.push({key:route.key,status:response.status(),before,repaired,afterTouch,after,errors});
    console.log(JSON.stringify({route:route.key,status:response.status(),
     before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles,shellChildren:before.shellChildren,renderer:before.renderer},
-    repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer,body:repaired.body,html:repaired.html,inline:repaired.inlineStyles,guard:repaired.safeGuardLoaded,modals:repaired.modalDiagnostics,ancestors:repaired.ancestors.map(x=>({cls:x.classes,overflowX:x.overflowX,overflowY:x.overflowY}))},after:{scroll:after.docScroll,body:after.body,hero:after.hero,stage:after.stage,heading:after.heading,ancestors:after.ancestors.map(x=>({cls:x.classes,overflowY:x.overflowY}))},errors}));
+    repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer,body:repaired.body,html:repaired.html,inline:repaired.inlineStyles,guard:repaired.safeGuardLoaded,modals:repaired.modalDiagnostics,ancestors:repaired.ancestors.map(x=>({cls:x.classes,overflowX:x.overflowX,overflowY:x.overflowY}))},after:{scroll:after.docScroll,touchScroll:afterTouch.docScroll,body:after.body,hero:after.hero,stage:after.stage,heading:after.heading,ancestors:after.ancestors.map(x=>({cls:x.classes,overflowY:x.overflowY}))},errors}));
    if(before.app&&(!repaired.hero||repaired.hero.height<180||repaired.hero.bottom<100)){
      issues.push(route.key+" upper hero missing from first viewport");
    }
    if(before.app&&after.stage&&after.stage.bottom<100)issues.push(route.key+" stage scrolls off-screen");
    if(before.app && after.docScroll<70)
-     issues.push(route.key+" real finger swipe cannot scroll the document, scroll="+after.docScroll);
+     issues.push(route.key+" document cannot scroll after touch + wheel, scroll="+after.docScroll);
+   if(before.app && afterTouch.docScroll<70)
+     console.warn("TOUCH_DRIVER_WARNING",route.key,"CDP touch scroll was zero; wheel cross-check",after.docScroll);
    if(before.app && repaired.body && (repaired.body.overflowX!=="clip"||repaired.body.overflowY!=="visible"))
      issues.push(route.key+" body creates inactive scrollport: "+repaired.body.overflowX+"/"+repaired.body.overflowY);
    if(before.app && (!after.stage || after.stage.bottom<100))
