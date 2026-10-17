@@ -73,12 +73,29 @@ def build():
           "not 150 questions in each age band")
     requested = {}
     use = defaultdict(set)
+    # Most utterances are *composed* from many separately paid original
+    # fragments. Never synthesize the full question text in addition to its
+    # segments: that would double-charge and break the exact composition map.
     for q in recipes:
-        for part in KINDS:
-            s = q[part]["text"]
-            guard(isinstance(s, str) and s, "missing exact spoken source")
-            h = digest(s)
-            if s not in reg["textClips"] and s not in original_nine:
+        for kind in KINDS:
+            part = q[kind]
+            full = part["text"]
+            guard(isinstance(full, str) and full, "missing exact spoken source")
+            if part["mode"] == "existing-paid-exact":
+                guard(bool(part.get("generationId")),
+                      "older prepaid take missing its immutable generation ID")
+                continue
+            guard(part["mode"] == "compose-from-segments",
+                  "unknown original recording mode")
+            fragments = part["segments"]
+            guard(isinstance(fragments, list) and fragments and
+                  all(isinstance(x,str) and x for x in fragments) and
+                  " ".join(fragments) == full,
+                  "exact fragment composition contract mismatch")
+            for s in fragments:
+                if s in reg["textClips"] or s in original_nine:
+                    continue
+                h = digest(s)
                 guard(s not in guards, "unreconciled old paid text: " + h)
                 requested[h] = s
                 use[h].add(q["questionId"])
