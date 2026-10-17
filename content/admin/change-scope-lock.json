@@ -7933,6 +7933,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-25T23:59:00.000Z"
+    },
+    {
+      "id": "adult-test-global-viewport-centering-v1382-20261017",
+      "at": "2026-10-17T10:19:00+02:00",
+      "approvedBy": "user-explicit-every-appearance-every-device-iphone-ipad-browser-push-live-20261017",
+      "reason": "Strict adult Dar Test responsive geometry: correct 100vw-inside-inset horizontal drift on post/topic/reading hero and enforce equal iPhone, iPad, desktop safe-area axes; preserve all themes, imagery, sticky scroll, tabs, buttons, Kids, push, native Swift and Canonical Hadith data. User requested global layout fix and push live.",
+      "paths": [
+        "test/assets/dar-responsive-axis-v1382.css",
+        "test/index.html",
+        "test/version.json",
+        "scripts/verify-test-app-deploy.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-26T23:59:00.000Z"
     }
   ],
   "enabled": true
