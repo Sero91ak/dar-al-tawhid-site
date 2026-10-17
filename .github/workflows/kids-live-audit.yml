@@ -78,14 +78,23 @@ jobs:
           phonetic=live_asset('dua-phonetic-alignment-v1.js')
           parentJS=live_asset('parents-dashboard-v1432.js')
           parentCSS=live_asset('parents-dashboard-v1432.css')
+          liveSW=live_asset('sw.js')
+          actualSWMatch=re.search(r'dar-al-tawhid-kids-v([0-9]+)',liveSW['text'])
+          actualSWCacheVersion=actualSWMatch.group(1) if actualSWMatch else ''
+          swRegistration=('navigator.serviceWorker.register("'+liveSW['ref']+'"') if liveSW['ref'] else ''
           liveCacheVersion=str((obj.get('visualSystem') or {}).get('serviceWorkerCache') or '').removeprefix('v')
           parentLive={
-            'expectedSWRef':('/kids/sw.js?v='+liveCacheVersion) if liveCacheVersion else None,
+            'expectedSWRef':('/kids/sw.js?v='+(liveCacheVersion or actualSWCacheVersion)) if (liveCacheVersion or actualSWCacheVersion) else None,
+            'manifestSWCacheVersion':liveCacheVersion or None,
+            'actualSWCacheVersion':actualSWCacheVersion or None,
+            'workerBytes':liveSW['bytes'],
             'observedSWRefs':sorted(set(re.findall(r'/kids/sw\.js\?v=[a-zA-Z0-9_-]+',home))),
             'hasServiceWorkerRegisterCall':'navigator.serviceWorker.register' in home,
             'htmlReferencesNewDashboard':bool(parentJS['ref'] and parentJS['bytes']>3000),
             'htmlReferencesNewStyles':bool(parentCSS['ref'] and parentCSS['bytes']>7000),
-            'htmlRegistersNewSW':bool(liveCacheVersion and f'navigator.serviceWorker.register("/kids/sw.js?v={liveCacheVersion}"' in home),
+            'htmlRegistersNewSW':bool(swRegistration and swRegistration in home
+              and actualSWCacheVersion and liveSW['ref']==f'/kids/sw.js?v={actualSWCacheVersion}'
+              and liveSW['bytes']>1000 and (not liveCacheVersion or liveCacheVersion==actualSWCacheVersion)),
             'htmlHasProfileAndBirthFields':all(x in home for x in ['id="profileCard"','id="parentBirthPanel"','id="parentBirthSave"']),
             'dashboardJs':{'ref':parentJS['ref'],'bytes':parentJS['bytes']},
             'dashboardCss':{'ref':parentCSS['ref'],'bytes':parentCSS['bytes']},
