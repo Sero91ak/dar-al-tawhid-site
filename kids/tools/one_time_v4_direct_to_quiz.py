@@ -57,6 +57,35 @@ def claim():
                 "state":"PREPOST_RESERVED_DO_NOT_RETRY",
                 "audioExists":False,"userApprovedSpend":True,"livePublished":False})
     print("CLAIM_SAVED_BEFORE_ANY_TTS "+SHA,flush=True)
+def adopt_failed_before_post():
+    # GitHub Actions run 39066003170 failed at command -v ffprobe BEFORE
+    # invoking --produce (verified from this run's actual job log).
+    # Retain the previously committed reservation, but let exactly ONE
+    # newly identified runner take over, safely serializing the paid POST.
+    row=read(CLAIM)
+    check(row.get("ownerRunId")=="39066003170"
+          and row.get("state")=="PREPOST_RESERVED_DO_NOT_RETRY"
+          and row.get("spokenTextSHA256")==SHA
+          and row.get("audioExists") is False
+          and not row.get("providerRequestId")
+          and row.get("modelId")==MODEL and row.get("voiceId")==VOICE,
+          "previous no-charge reservation state changed; no paid recovery")
+    reg,ledger=read(REG),read(LED)
+    check(TEXT not in reg["textClips"] and
+          all(x.get("text")!=TEXT for x in ledger["rows"]),
+          "the reserved original was already purchased")
+    target=OUT/(hashlib.sha256((VOICE+"\\n"+MODEL+"\\n"+TEXT).encode()).hexdigest()[:32]+".mp3")
+    check(not target.exists(),"MP3 already exists; no purchase")
+    run=os.environ.get("GITHUB_RUN_ID","").strip()
+    check(run.isdigit() and run!="39066003170","new runner ID required")
+    row["previousPrepostRunnerId"]="39066003170"
+    row["previousRunnerNeverReachedElevenLabs"]=True
+    row["ownerRunId"]=run
+    row["recoveryOfCommittedReservationOnly"]=True
+    save(CLAIM,row)
+    print("SAFE_PREPOST_CLAIM_ADOPTED "+SHA,flush=True)
+
+
 def produce():
     row=read(CLAIM)
     check(row.get("ownerRunId")==os.environ.get("GITHUB_RUN_ID")
@@ -117,6 +146,8 @@ if __name__=="__main__":
     q=pa.add_mutually_exclusive_group(required=True)
     q.add_argument("--claim",action="store_true")
     q.add_argument("--produce",action="store_true")
+    q.add_argument("--adopt-unspent-reservation",action="store_true")
     args=pa.parse_args()
     if args.claim:claim()
+    elif args.adopt_unspent_reservation:adopt_failed_before_post()
     else:produce()
