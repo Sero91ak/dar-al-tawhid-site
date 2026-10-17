@@ -36,25 +36,15 @@ let busy=false;
 let inventoryFilter="";
 
 function q(id){return document.getElementById(id)}
-const KIDS_STORY_STANDARD_VERSION="kids-story-greeting-closing-v2";
-const KIDS_STORY_SALAM="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh";
-const KIDS_STORY_INTRO=KIDS_STORY_SALAM+", liebe Kinder.";
-const KIDS_STORY_OUTRO="Und Allah, subḥānahu wa taʿālā, weiß es am besten.\n\nMöge Allah, subḥānahu wa taʿālā, uns nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
+const KIDS_STORY_STANDARD_VERSION="kids-story-greeting-closing-v1";
+const KIDS_STORY_INTRO="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.";
+const KIDS_STORY_OUTRO="Und الله weiß es am besten.\n\nMöge الله euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
 function normalizeKidsStoryText(value){
   let text=String(value||"").trim();
   if(!text)return "";
-  // Begrüßung darf individuell sein; nur der vollständige Salām ist verbindlich.
-  if(!text.startsWith(KIDS_STORY_SALAM))text=KIDS_STORY_INTRO+"\n\n"+text;
-  if(text.endsWith(KIDS_STORY_OUTRO))return text;
-  // Nur für NEUE Mastertexte; bestehende freigegebene Audio-Paare werden nicht geändert.
-  const legacy=[...text.matchAll(/(?:^|\n\n)Und (?:Allah|الله)(?:, subḥānahu wa taʿālā,)? weiß es am besten\./g)];
-  let cut=legacy.length?legacy[legacy.length-1].index:-1;
-  if(cut<0&&/(?:Wa-s-Salāmu|As-Salāmu) ʿalaykum wa Raḥmatullāhi wa Barakātuh\.?\s*$/.test(text)){
-    const duas=[...text.matchAll(/\n\nMöge Allah(?:, subḥānahu wa taʿālā,)? /g)];
-    if(duas.length)cut=duas[duas.length-1].index;
-  }
-  if(cut>=text.length-1100&&cut>=0)text=text.slice(0,cut).trim();
-  return text+"\n\n"+KIDS_STORY_OUTRO;
+  if(!text.startsWith(KIDS_STORY_INTRO))text=KIDS_STORY_INTRO+"\n\n"+text;
+  if(!text.endsWith(KIDS_STORY_OUTRO))text=text+"\n\n"+KIDS_STORY_OUTRO;
+  return text;
 }
 function syncKidsStoryStandard(){
   const ta=q("text");
