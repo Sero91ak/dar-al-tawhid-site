@@ -327,8 +327,8 @@ async function finalizeDarTestHomeV1193(asset) {
   // </script> and load AFTER the inline Hadith renderer inside the HTML body.
   // The stylesheet belongs to <head>, not after </html>.
   if (!html.includes('id="darHadithReframeScriptV1307"')) {
-    const hadithCss = '<link rel="stylesheet" id="darHadithReframeFinalV1307" href="/test/assets/ilm-hadith-v1243.css?v=hadith-sharh-v1307">\\n';
-    const hadithJs = '<script id="darHadithReframeScriptV1307" src="/test/assets/hadith-library-reframe-v1299.js?v=hadith-sharh-v1307"></script>\\n';
+    const hadithCss = '<link rel="stylesheet" id="darHadithReframeFinalV1307" href="/test/assets/ilm-hadith-v1243.css?v=hadith-sharh-v1307">';
+    const hadithJs = '<script id="darHadithReframeScriptV1307" src="/test/assets/hadith-library-reframe-v1299.js?v=hadith-sharh-v1307"></script>';
     if (html.includes("</head>")) html = html.replace("</head>", hadithCss + "</head>");
     else html = hadithCss + html;
     if (html.includes("</body>")) html = html.replace("</body>", hadithJs + "</body>");
