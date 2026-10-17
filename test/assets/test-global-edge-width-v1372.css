@@ -1237,3 +1237,24 @@ html[data-theme] body.is-hadith-route #appView.view > .hadith-detail > :is(nav.h
     scroll-behavior:auto!important;
   }
 }
+
+
+/* DAR_HADITH_OUTER_GUTTER_RESET_V1389
+   Browser QA: 390px viewport rendered 12px gap on each side of the
+   Hadith hero. Only this adult route loses the redundant body/app inset. */
+html[data-theme] body.has-bottom-nav.is-hadith-route{
+  padding-left:0!important;
+  padding-right:0!important;
+}
+html[data-theme] body.has-bottom-nav.is-hadith-route > .app{
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  margin-inline:0!important;
+  padding-inline:0!important;
+  border-left:0!important;
+  border-right:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  box-sizing:border-box!important;
+}

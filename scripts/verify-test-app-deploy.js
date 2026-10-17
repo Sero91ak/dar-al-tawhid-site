@@ -214,12 +214,13 @@ async function fetchVersionBuild(base) {
     const { status: shellStatus, text: shellHtml } =
       await fetchText(`${base}/index.html?edge-width-check=v1383-${Date.now()}`);
     const edgeLinkOk = shellHtml.includes('id="darTestEdgeWidthV1372"') &&
-      shellHtml.includes('/test/assets/test-global-edge-width-v1372.css?v=viewport-v1387');
+      shellHtml.includes('/test/assets/test-global-edge-width-v1372.css?v=viewport-v1389');
     const { status: edgeStatus, text: edgeCss } =
-      await fetchText(`${base}/assets/test-global-edge-width-v1372.css?v=viewport-v1387`);
+      await fetchText(`${base}/assets/test-global-edge-width-v1372.css?v=viewport-v1389`);
     const cssOk = edgeCss.includes("DAR TEST ADULT ONLY") &&
       edgeCss.includes("DAR_ADULT_RESPONSIVE_AXIS_V1383") &&
       edgeCss.includes("DAR_HADITH_CONTINUOUS_FULLBLEED_V1386") &&
+      edgeCss.includes("DAR_HADITH_OUTER_GUTTER_RESET_V1389") &&
       edgeCss.includes("DAR_ADULT_TOPICS_EMPTY_FOLD_V1384") &&
       edgeCss.includes("DAR_ADULT_EMPTY_FOLD_GLOBAL_V1387") &&
       edgeCss.includes("--dar-axis-gutter") &&
