@@ -12,5 +12,6 @@
   "elevenLabsRequestsAllowed": false,
   "live": false,
   "sourceProductionRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39030363743",
-  "repairReason": "Original MP3s and ledger were committed; six recomposed MP3s assembled successfully but final push conflicted with concurrent review commits."
+  "repairReason": "First offline import runner independently verified 76/450 and six MP3 composites, but rebase conflicted in auto-written handover files. Omit handover from commit; dedicated handover bot updates after import.",
+  "attempt": 2
 }
