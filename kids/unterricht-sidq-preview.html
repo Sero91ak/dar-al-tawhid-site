@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#071d30">
+<title>Ṣidq · Kids-Unterricht · Vorschau</title>
+<style>
+:root{color-scheme:dark;--gold:#e6c886;--base:#071d30;--text:#fff4dd;--muted:#c5d7d7;--border:rgba(229,203,149,.26);--accent:#75b7c1}
+*{box-sizing:border-box}html{min-height:100%;background:var(--base)}body{margin:0;color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Avenir Next",sans-serif;background:radial-gradient(circle at 50% -12%,#16445c,transparent 57%),#071d30;line-height:1.55}
+body[data-profile="girl"]{--accent:#bc9fce;--base:#211d39;background:radial-gradient(circle at 50% -12%,#4a3457,transparent 58%),#211d39}
+button,input,textarea,select{font:inherit}button{cursor:pointer;color:inherit}button:focus-visible,textarea:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.wrap{min-height:100dvh;padding:calc(env(safe-area-inset-top) + 20px) max(14px,env(safe-area-inset-left)) calc(env(safe-area-inset-bottom) + 30px) max(14px,env(safe-area-inset-right));width:100%}
+header{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:1px solid var(--border);padding:0 3px 18px}
+.brand{color:var(--gold);letter-spacing:.09em;font-weight:800;font-family:Georgia,serif;font-size:clamp(15px,3.8vw,22px)}
+.stage{font-size:11px;color:#ebd69c}.controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+.pill{border-radius:999px;border:1px solid var(--border);background:rgba(243,230,189,.07);padding:10px 14px;min-height:44px;font-weight:750}
+.pill.active{border-color:var(--accent);box-shadow:0 0 12px rgba(197,212,209,.12)}
+.hero{padding:36px 2px 23px;border-bottom:1px solid var(--border);position:relative}
+.kicker{font-size:12px;letter-spacing:.14em;color:var(--gold);font-weight:850;text-transform:uppercase}
+h1{font-family:Georgia,serif;font-weight:750;font-size:clamp(35px,7.5vw,62px);line-height:1.12;margin:8px 0;color:#fff1cc}h2{font-size:22px;margin:0 0 12px}p{margin:8px 0}
+.intro{max-width:70ch;color:var(--muted);font-size:clamp(16px,2.8vw,20px)}
+.grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:26px}
+.lesson{padding:0 2px}.source{border-top:1px solid var(--border);padding:11px 0;margin:15px 0;font-size:12px;color:#ead6a9}
+.arabic{font-family:"Geeza Pro","Noto Naskh Arabic",serif;direction:rtl;font-size:clamp(28px,5vw,44px);line-height:1.9;text-align:center;margin:13px 0;color:#fff1ce}
+.quote{font-size:clamp(18px,3.6vw,26px);font-weight:750;line-height:1.5}
+.explain{font-size:clamp(17px,2.6vw,20px);color:#e8e9e3}
+.eyebrow{color:var(--gold);font-weight:800;font-size:13px;margin-top:20px}
+.panel{border:1px solid var(--border);border-radius:23px;padding:19px;background:rgba(6,30,46,.57)}
+body[data-profile="girl"] .panel{background:rgba(54,33,67,.42)}
+.answers{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}.primary{background:linear-gradient(145deg,#dcbb7a,#b69659);color:#13232b;border:0}.accent{border-color:var(--accent)}
+textarea{width:100%;min-height:86px;border-radius:15px;background:rgba(255,255,255,.08);border:1px solid var(--border);padding:13px;color:#fff;font-size:16px}
+.small{font-size:13px;color:var(--muted)}.response{min-height:62px;border-left:2px solid var(--accent);padding:8px 12px;margin-top:15px;color:#f5efd9}
+.progress{height:8px;background:rgba(255,255,255,.11);border-radius:99px;overflow:hidden;margin:12px 0}.progress span{display:block;background:var(--accent);height:100%;width:0;transition:width .2s}
+[hidden]{display:none!important}@media(min-width:850px){.grid{grid-template-columns:minmax(0,1.35fr) minmax(310px,.85fr);align-items:start}.panel{position:sticky;top:16px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}}
+
+/* KIDS-ACADEMY-OVERVIEW V2 · Bilder nur in Hero und Kategorien, niemals in Lektionen/Fragen */
+.overview-hero{min-height:clamp(320px,44vw,480px);position:relative;overflow:hidden;isolation:isolate;display:flex;align-items:end;border-bottom:1px solid var(--border);margin:20px -14px 28px;background:#0c3043}
+.overview-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:65% center;z-index:-2}
+.overview-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,23,36,.91),rgba(5,23,36,.33) 66%,rgba(3,20,35,.12)),linear-gradient(0deg,rgba(6,26,40,.95),transparent 68%);z-index:-1}
+.overview-copy{padding:32px clamp(20px,5vw,68px);max-width:750px;text-shadow:0 2px 14px #061b2b}
+.overview-copy h1{margin:5px 0;font-size:clamp(39px,7.1vw,68px)}
+.overview-copy p{max-width:43ch;font-size:clamp(16px,2.8vw,21px);line-height:1.5;color:#fff4df}
+.overview-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:end;margin:10px 0 16px;padding:0 2px}
+.overview-head h2{font-family:Georgia,serif;font-size:clamp(27px,5vw,34px);margin:0}
+.overview-head p{font-size:14px;color:var(--muted);margin:2px 0}
+.category-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.category-card{min-height:210px;width:100%;border:1px solid var(--border);border-radius:22px;overflow:hidden;position:relative;text-align:left;padding:0;background:#143748;color:#fff;display:flex;align-items:end}
+.category-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;transition:none}
+.category-card:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,23,36,.96) 0%,rgba(6,26,40,.35) 68%,transparent)}
+.category-card-copy{position:relative;z-index:1;display:grid;gap:1px;padding:18px 17px}
+.category-name{font-family:Georgia,serif;font-size:clamp(22px,4.7vw,30px);font-weight:800;color:#fff1cc;line-height:1.2}
+.category-detail{font-size:12px;color:#d9e8e7;line-height:1.42}
+.category-state{color:#f6da98;font-size:10px;letter-spacing:.04em;font-weight:800}
+.category-card:not(:disabled):hover,.category-card:not(:disabled):focus-visible,.category-card:not(:disabled):active{border-color:#d7bf83;box-shadow:0 0 14px rgba(230,201,134,.15)}
+.category-card:disabled{cursor:default;opacity:.84}
+.overview-note{font-size:12px;color:var(--muted);padding:14px 2px 0}
+.lesson-topline{padding:24px 0 4px}
+.lesson-topline .pill{min-height:46px}
+.lesson-main .hero{padding:24px 2px 21px}
+.lesson-main .hero h1{font-size:clamp(31px,6.5vw,47px)}
+.lesson-main .grid{margin-top:22px}
+.lesson-main .panel{box-shadow:0 10px 34px rgba(0,0,0,.15)}
+.lesson-main .source{font-size:13px;overflow-wrap:anywhere}
+.lesson-main .eyebrow:before{content:"";display:inline-block;width:19px;height:1px;background:var(--gold);margin:0 9px 4px 0}
+.lesson-main .quote{font-family:Georgia,serif}
+.lesson-main .arabic{padding:13px 0;border-bottom:1px solid var(--border)}
+.lesson-main .panel button{transition:box-shadow .15s ease}
+.lesson-main .panel button:active{box-shadow:0 0 12px rgba(231,194,129,.15)}
+@media(min-width:850px){.category-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.category-card{min-height:265px}}
+@media(max-width:390px){.category-card{min-height:182px}.category-card-copy{padding:15px 12px}.category-name{font-size:21px}}
+
+/* KIDS ACADEMY V3 – source-first practice; imagery restricted to overview and category cards */
+.course-guide{padding:19px 2px 12px;border-bottom:1px solid var(--border);margin-bottom:20px}
+.guide-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.guide-heading h2{font-size:clamp(20px,3.6vw,29px);font-family:Georgia,serif;margin:5px 0}
+.guide-state{color:var(--gold);font-size:12px;border:1px solid var(--border);border-radius:99px;padding:7px 10px;background:rgba(218,194,140,.04)}
+.guide-timeline{display:flex;align-items:center;gap:0;max-width:500px;padding:16px 8px 6px}
+.timeline-dot{width:15px;height:15px;border:2px solid rgba(240,217,169,.6);border-radius:100%;background:#092536}
+.timeline-dot.active{background:var(--gold);box-shadow:0 0 0 5px rgba(223,190,128,.08)}
+.timeline-rail{height:1px;flex:1;background:rgba(240,217,169,.32)}
+.guide-sub,.guide-foot,.guide-privacy{font-size:13px;line-height:1.5;color:var(--muted)}
+.guide-foot{display:flex;gap:15px;align-items:center;flex-wrap:wrap}.guide-privacy{font-size:11px;opacity:.83;margin-bottom:0}
+.age-demo{display:flex;flex-wrap:wrap;align-items:center;gap:8px 11px;margin:7px 0 23px;padding:12px 0;border-bottom:1px solid var(--border)}
+.age-demo label{font-size:13px;color:var(--gold);font-weight:800}.age-demo select{color:var(--text);background:#163a4f;border:1px solid var(--border);border-radius:10px;padding:10px;min-height:44px;font-size:15px}
+.age-demo span{font-size:11px;color:var(--muted)}
+.question-top{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.question-index{font-size:12px;color:var(--muted)}
+.panel h2{font-family:Georgia,serif;font-size:clamp(21px,3vw,28px)}
+.panel #question{font-size:clamp(18px,2.6vw,23px);font-weight:720;margin:15px 0}
+.choices{display:grid;gap:9px;margin:13px 0 18px}
+.choice-button{min-height:52px;padding:12px 15px;text-align:left;border:1px solid rgba(236,206,152,.24);border-radius:15px;background:rgba(255,255,255,.035);font-size:16px;line-height:1.4}
+.choice-button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 12px rgba(120,190,190,.13);background:rgba(128,191,191,.12)}
+.mic-actions{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0 6px}
+.next-row{display:flex;gap:10px;margin-top:12px}
+.summary-tile{border-top:1px solid var(--border);padding-top:13px}
+.summary-tile>span{font-weight:780}
+.policy-note{border-top:1px solid var(--border);padding-top:15px}
+.lesson-main .grid{grid-template-columns:1fr}
+@media(min-width:850px){.lesson-main .grid{grid-template-columns:minmax(0,1.24fr) minmax(310px,.85fr)}}
+</style></head>
+<body data-profile="boy"><main class="wrap">
+<header><div><div class="brand">DĀR AL TAWḤĪD · KIDS</div><div class="stage">Interaktiver Unterricht · HTML-Vorschau · nicht veröffentlicht</div></div>
+<div class="controls"><button class="pill active" type="button" data-profile="boy">Junge</button><button class="pill" type="button" data-profile="girl">Mädchen</button></div></header>
+
+<section class="academy-home" id="academyHome">
+  <section class="overview-hero" aria-label="Unterrichtsakademie">
+    <img src="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/5a5e223975d96d6f630d573cf0fea1a4a8046117/kids/assets/academy/academy-hero-v1.jpg" onerror="this.onerror=null;this.src='https://dar-al-tawhid.de/kids/assets/kids-art/knowledge-courtyard-v11.jpg'" alt="" decoding="async" fetchpriority="high">
+    <div class="overview-copy"><div class="kicker">Deine islamische Lernakademie</div><h1>Den Dīn lernen</h1><p id="overviewGreeting">As-salāmu ʿalaykum, mein lieber Bruder. Gemeinsam lernen wir Wissen aus Qurʾān und Sunnah.</p></div>
+  </section>
+  <section class="overview-head"><div><h2>Wähle dein Unterrichtsfach</h2><p>Entdecke ein Thema – Schritt für Schritt, in deinem Tempo.</p></div><span class="stage">Unterrichts-Vorschau</span></section>
+  
+<section class="course-guide" aria-label="Dein Lernplan">
+  <div class="guide-heading"><div><span class="kicker">Dein Lernweg</span><h2>Heute lernen · später wiederholen</h2></div><span class="guide-state" id="courseStatus">Noch nicht begonnen</span></div>
+  <div class="guide-timeline" aria-hidden="true"><span class="timeline-dot active"></span><span class="timeline-rail"></span><span class="timeline-dot"></span><span class="timeline-rail"></span><span class="timeline-dot"></span><span class="timeline-rail"></span><span class="timeline-dot"></span></div>
+  <p class="guide-sub">Verstehen → mitdenken → mit eigenen Worten erklären → nach einigen Tagen erinnern.</p>
+  <div class="guide-foot"><p id="reviewNotice">Deine erste Unterrichtsstunde ist bereit.</p><button class="pill" id="repeatReview" type="button" hidden>Jetzt wiederholen</button></div>
+  <p class="guide-privacy">Demonstration: Lernstände werden nur lokal in diesem Browser gespeichert. Keine Bewertung des Īmān.</p>
+</section>
+<div class="age-demo"><label for="ageGroup">Altersstufe für diese Vorschau</label><select id="ageGroup"><option value="4-5">4–5 Jahre</option><option value="6-8" selected>6–8 Jahre</option><option value="9-10">9–10 Jahre</option></select><span>Im späteren App-Bereich übernimmt das vorhandene Kinderprofil diese Einstellung automatisch.</span></div>
+<div class="category-grid" aria-label="Unterrichtskategorien">
+    <button type="button" class="category-card" data-open-lesson="sidq"><img src="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/5a5e223975d96d6f630d573cf0fea1a4a8046117/kids/assets/academy/academy-akhlaq-v1.jpg" onerror="this.onerror=null;this.src='https://dar-al-tawhid.de/kids/assets/deen/adab-akhlaq.jpg?v=1205'" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">1 Musterlektion verfügbar</span><strong class="category-name">Akhlāq</strong><span class="category-detail">Wahrhaftigkeit · Guter Charakter</span></span></button>
+    <button type="button" class="category-card" disabled aria-label="Adab, Unterricht noch in Vorbereitung"><img src="https://raw.githubusercontent.com/Sero91ak/dar-al-tawhid-site/5a5e223975d96d6f630d573cf0fea1a4a8046117/kids/assets/academy/academy-adab-v1.jpg" onerror="this.onerror=null;this.src='https://dar-al-tawhid.de/kids/assets/deen/adab-akhlaq.jpg?v=1205'" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">In Vorbereitung</span><strong class="category-name">Adab</strong><span class="category-detail">Benehmen · Guter Umgang</span></span></button>
+    <button type="button" class="category-card" disabled aria-label="Fiqh, Unterricht noch in Vorbereitung"><img src="https://dar-al-tawhid.de/kids/assets/deen/ibadah.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">In Vorbereitung</span><strong class="category-name">Fiqh</strong><span class="category-detail">Gebet · Reinheit · Praxis</span></span></button>
+    <button type="button" class="category-card" disabled aria-label="Aqida, Unterricht noch in Vorbereitung"><img src="https://dar-al-tawhid.de/kids/assets/deen/tawhid.jpg?v=1205" alt="" loading="lazy" decoding="async"><span class="category-card-copy"><span class="category-state">In Vorbereitung</span><strong class="category-name">ʿAqīdah</strong><span class="category-detail">Tawḥīd · Ikhlāṣ · Īmān</span></span></button>
+  </div>
+  <p class="overview-note">In dieser Vorschau gibt es eine erste interaktive Musterlektion zu Akhlāq. Weitere Fachlektionen werden ausschließlich mit geprüften Quellen ergänzt. Die eigentlichen Unterrichts- und Frageseiten bleiben vollständig bildfrei.</p>
+</section>
+<div class="lesson-main" id="lessonMain" hidden><div class="lesson-topline"><button class="pill" id="backToAcademy" type="button">← Unterrichtsübersicht</button></div>
+<section class="hero"><div class="kicker">Akhlāq · Einheit 01</div><h1>Ṣidq · Wahrhaftigkeit</h1>
+<p id="greeting" class="intro">As-salāmu ʿalaykum, mein lieber Bruder. Heute lernen wir, weshalb Wahrheit so wichtig ist.</p>
+<div class="controls" aria-label="Lernmodus"><button class="pill active" data-mode="both">Hören & Lesen</button><button class="pill" data-mode="read">Nur lesen</button></div></section>
+<div class="grid"><article class="lesson" id="lessonText">
+<h2>Qurʾān und Sunnah</h2><div class="eyebrow">Qurʾān · at-Tawbah 9:119 (Versauszug)</div>
+<div class="arabic" lang="ar">وَكُونُوا مَعَ ٱلصَّـٰدِقِينَ</div>
+<p class="quote">„Und seid mit den Wahrhaftigen.“</p>
+<div class="source">Quelle: Qurʾān 9:119 · Deutsch sinngemäß · https://quran.com/9/119</div>
+<div class="eyebrow">Sunnah · Ṣaḥīḥ Muslim 2607</div>
+<p class="quote">Wahrhaftigkeit führt zur Rechtschaffenheit, und Rechtschaffenheit führt zum Paradies.</p>
+<div class="source">Quelle: Ṣaḥīḥ Muslim, Nr. 2607a · sinngemäßer Auszug aus der Überlieferung von ʿAbdullāh ibn Masʿūd · https://sunnah.com/muslim:2607a</div>
+<div class="eyebrow">Erklärung</div>
+<p id="explanation" class="explain">Wer einen Fehler macht und die Wahrheit sagt, kann Verantwortung übernehmen und den Fehler wiedergutmachen. Eine Lüge kann andere verletzen und Vertrauen zerstören. Deshalb sagen wir die Wahrheit, auch wenn es uns schwerfällt.</p>
+<div class="eyebrow">Alltagsbeispiel</div><p class="explain">Du hast versehentlich ein Glas zerbrochen. Du darfst sagen: „Ich war das. Es tut mir leid. Ich helfe beim Aufräumen.“</p>
+<div class="source">Die Erklärung und das Beispiel sind pädagogische Formulierungen, keine wörtlichen Zitate.</div>
+<div class="controls"><button class="pill primary" id="play">Unterricht anhören</button><button class="pill" id="stop">Stopp</button></div>
+<p class="small" id="audioInfo">Vorschau: deutsche Systemstimme zum technischen Testen. Die Serhat-Masterstimme und geprüfte Qurʾān-Rezitation sind noch nicht angeschlossen.</p>
+</article>
+
+<aside class="panel" id="learningPanel">
+<div class="question-top"><span class="kicker" id="questionStage">Unterricht · Mitdenken</span><span class="question-index" id="questionIndex">Frage 1 von 3</span></div>
+<h2 id="questionTitle">Was hast du verstanden?</h2>
+<div class="progress" aria-label="Lernfortschritt"><span id="bar"></span></div>
+<p id="question">Was solltest du sagen, wenn du aus Versehen etwas kaputt gemacht hast?</p>
+<div class="choices" id="choices" role="group" aria-label="Antwortmöglichkeiten"></div>
+<div class="mic-actions"><button class="pill accent" id="mic" type="button">Antwort sprechen</button><button class="pill" id="cancelMic" type="button" hidden>Aufnahme beenden</button></div>
+<p class="small" id="micInfo">Das Mikrofon wird erst nach dem Antippen eingeschaltet. Die Vorschau speichert keine Sprachdatei.</p>
+<label for="answer" class="small">Oder antworte mit eigenen Worten</label><textarea id="answer" spellcheck="true" placeholder="Ich würde …" maxlength="550"></textarea>
+<div class="answers"><button id="check" class="pill primary" type="button">Antwort prüfen</button><button id="hint" class="pill" type="button">Kleiner Hinweis</button><button id="repeat" class="pill" type="button">Frage anhören</button></div>
+<div class="response" aria-live="polite" id="feedback">Du kannst in Ruhe nachdenken. Eine kurze Antwort reicht.</div>
+<div class="next-row"><button class="pill primary" type="button" id="nextQuestion" hidden>Nächste Frage</button><button class="pill" type="button" id="finishLesson" hidden>Unterricht abschließen</button></div>
+<div id="summaryPanel" hidden>
+  <h2>Gut mitgedacht!</h2><p id="summaryText">Du hast dich mit dem Thema beschäftigt. Du kannst später noch einmal üben.</p>
+  <div class="summary-tile"><span>Was hilft dir jetzt?</span><div class="answers"><button class="pill" type="button" data-reflect="ready">Ich habe es verstanden</button><button class="pill" type="button" data-reflect="help">Ich möchte mehr üben</button></div></div>
+  <p class="small" id="nextDue">Nächste Erinnerung wird nach deinem Lernstand vorgeschlagen.</p>
+  <button class="pill primary" type="button" id="backAfterLesson">Zur Unterrichtsübersicht</button>
+</div>
+<p class="small policy-note">Die Auswertung ist eine unverbindliche Lernhilfe, keine religiöse Bewertung. Unsichere oder ungewöhnliche Antworten prüft später ein Erwachsener.</p>
+</aside></div></div></main>
+<script>
+(()=>{
+"use strict";
+const $=s=>document.querySelector(s);
+const allEls=s=>Array.from(document.querySelectorAll(s));
+const DATA_VERSION="2026-10-09";
+const intervals=[1,3,7,14,30,60,90];
+const exercises={
+  "4-5":[
+    {type:"choice",prompt:"Du hast etwas kaputt gemacht. Was sagst du?",options:["Ich sage ehrlich: Ich war das.","Ich sage: Jemand anders war es."],correct:0,hint:"Überlege: Was bedeutet ehrlich sein?",explain:"Wahrhaftigkeit bedeutet: Ich sage, was wirklich passiert ist."},
+    {type:"choice",prompt:"Was kannst du danach Gutes tun?",options:["Ich entschuldige mich und helfe.","Ich verstecke den Fehler."],correct:0,hint:"Wenn jemand Hilfe braucht, kannst du mithelfen.",explain:"Nach einem Fehler können wir um Entschuldigung bitten und ihn wiedergutmachen."}
+  ],
+  "6-8":[
+    {type:"choice",prompt:"Du hast versehentlich ein Glas zerbrochen. Was ist eine ehrliche Antwort?",options:["Ich war das. Es tut mir leid.","Das war bestimmt jemand anders.","Ich tue so, als hätte ich nichts gesehen."],correct:0,hint:"Was ist wirklich passiert? Sprich es freundlich aus.",explain:"Die Wahrheit zu sagen ist besser, als jemand anderem die Schuld zuzuschieben."},
+    {type:"text",prompt:"Was kannst du tun, nachdem du einen Fehler ehrlich zugegeben hast?",sample:"Ich kann mich entschuldigen und helfen, den Fehler wiedergutzumachen.",hint:"Denke an Entschuldigung und Hilfe."},
+    {type:"choice",prompt:"Was lehrt uns der Vers aus Sūrat at-Tawbah 9:119?",options:["Wir sollen mit den Wahrhaftigen sein.","Wir dürfen lügen, wenn wir Angst haben.","Man soll eigene Fehler immer verstecken."],correct:0,hint:"Lies dir die kurze deutsche Bedeutung des Qurʾān-Verses noch einmal durch.",explain:"Allah befiehlt den Gläubigen, mit den Wahrhaftigen zu sein."}
+  ],
+  "9-10":[
+    {type:"choice",prompt:"Welche Aussage entspricht dem Ḥadīṯ über Wahrhaftigkeit?",options:["Wahrhaftigkeit führt zur Rechtschaffenheit.","Wahrheit spielt beim guten Charakter keine Rolle.","Eine Lüge ist immer die leichtere und richtige Lösung."],correct:0,hint:"Was führt laut der authentischen Sunnah zur Rechtschaffenheit?",explain:"Der Prophet ﷺ lehrte, dass Wahrhaftigkeit zur Rechtschaffenheit führt und diese zum Paradies."},
+    {type:"text",prompt:"Erkläre in eigenen Worten: Warum gehört Wahrhaftigkeit zu einem guten Charakter?",sample:"Wahrhaftigkeit führt zu rechtschaffenem Verhalten. Sie bewahrt das Vertrauen und hilft uns, Verantwortung zu übernehmen.",hint:"Denke an Vertrauen und das Wort des Propheten ﷺ."},
+    {type:"text",prompt:"Worin liegt der Unterschied zwischen einem versehentlichen Fehler und einer bewussten Lüge?",sample:"Einen Fehler kann man unbeabsichtigt machen. Eine bewusste Lüge bedeutet, absichtlich etwas Unwahres zu sagen. Nach einem Fehler sollte man ehrlich bleiben und ihn wiedergutmachen.",hint:"Denk an den Unterschied zwischen Versehen und absichtlicher Unwahrheit."}
+  ]
+};
+let profile="boy",age="6-8",mode="both",questionIndex=0,choice=null,recognized=null,answered=false;
+let session={checked:0,answeredChoices:0,correctChoices:0,usedHelp:false};
+const greeting=()=>profile==="boy"?"mein lieber Bruder":"meine liebe Schwester";
+const currentQuestions=()=>exercises[age];
+const storageKey=()=>["kids","unterricht","preview",DATA_VERSION,"sidq",profile,age].join(".");
+const withDate=(days)=>{
+  const d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+days);
+  return d.toLocaleDateString("de-DE",{day:"2-digit",month:"long",year:"numeric"});
+};
+const safeRead=()=>{try{return JSON.parse(localStorage.getItem(storageKey())||"null")}catch(_){return null}};
+function applyProfile(){
+  document.body.dataset.profile=profile;
+  $("#academyHome [data-open-lesson]").forEach(b=>b.setAttribute("aria-label",b.getAttribute("aria-label")||"Unterricht öffnen"));
+  allEls("[data-profile]").forEach(b=>{const a=b.dataset.profile===profile;b.classList.toggle("active",a);b.setAttribute("aria-pressed",String(a))});
+  const intro="As-salāmu ʿalaykum, "+greeting()+". ";
+  $("#overviewGreeting").textContent=intro+"Gemeinsam lernen wir Wissen aus Qurʾān und Sunnah.";
+  $("#greeting").textContent=intro+"Heute lernen wir, weshalb Wahrheit so wichtig ist.";
+  renderStatus();
+}
+function renderStatus(){
+  const record=safeRead(),status=$("#courseStatus"),note=$("#reviewNotice"),b=$("#repeatReview");
+  if(!record){status.textContent="Noch nicht begonnen";note.textContent="Deine erste Unterrichtsstunde ist bereit.";b.hidden=true;return}
+  const due=Number(record.nextDue||0),ready=due<=Date.now();
+  status.textContent=ready?"Wiederholung bereit":"Bereits gelernt";
+  note.textContent=ready?"Eine kurze Erinnerung hilft, das Gelernte zu behalten.":"Nächste empfohlene Erinnerung: "+new Date(due).toLocaleDateString("de-DE")+".";
+  b.hidden=false;b.textContent=ready?"Jetzt wiederholen":"Freiwillig wiederholen";
+}
+const showLesson=()=>{
+  $("#academyHome").hidden=true;$("#lessonMain").hidden=false;
+  stopSpeech();resetQuestions();
+  window.scrollTo(0,0);
+};
+const showHome=()=>{
+  $("#academyHome").hidden=false;$("#lessonMain").hidden=true;
+  stopSpeech();stopRecognition();renderStatus();
+  window.scrollTo(0,0);
+};
+let utterance=null;
+function stopSpeech(){
+  try{window.speechSynthesis?.cancel()}catch(_){}
+  utterance=null;$("#play").textContent="Unterricht anhören";
+}
+function germanLessonText(){
+  return "As-salāmu ʿalaykum, "+greeting()+". "+
+  "Heute lernen wir die Wahrhaftigkeit. Im Qurʾān, Sūrat at-Tawbah, Vers 119, steht sinngemäß: Und seid mit den Wahrhaftigen. "+
+  "Von ʿAbdullāh ibn Masʿūd ist in Ṣaḥīḥ Muslim 2607 a überliefert, dass der Prophet, Allahs Segen und Frieden auf ihm, lehrte: Wahrhaftigkeit führt zur Rechtschaffenheit und Rechtschaffenheit führt zum Paradies. "+
+  $("#explanation").textContent+" "+
+  "Wir üben jetzt gemeinsam. Du kannst sprechen, schreiben oder eine Antwort auswählen.";
+}
+function speak(t){
+  if(mode==="read"){ $("#audioInfo").textContent="Du befindest dich im Lesemodus. Wechsel zu Hören & Lesen, um die deutsche Demo-Stimme zu testen.";return }
+  if(!("speechSynthesis" in window)){$("#audioInfo").textContent="Die Sprachwiedergabe ist in diesem Browser nicht verfügbar.";return}
+  stopSpeech();
+  utterance=new SpeechSynthesisUtterance(t);utterance.lang="de-DE";utterance.rate=.88;utterance.pitch=1;
+  utterance.onend=()=>$("#play").textContent="Unterricht anhören";
+  utterance.onerror=()=>$("#audioInfo").textContent="Audio ist momentan nicht verfügbar. Der Lesemodus bleibt verwendbar.";
+  window.speechSynthesis.speak(utterance);
+  $("#play").textContent="Erneut anhören";
+  $("#audioInfo").textContent="Dies ist nur eine deutsche Systemstimmen-Demo. Die geprüfte Serhat-Masterstimme und Qurʾān-Rezitation werden separat angeschlossen.";
+}
+let recognition=null;
+function stopRecognition(){
+  try{recognition?.abort()}catch(_){}
+  recognition=null;$("#mic").disabled=false;$("#cancelMic").hidden=true;
+}
+function resetQuestions(){
+  session={checked:0,answeredChoices:0,correctChoices:0,usedHelp:false};
+  questionIndex=0;renderQuestion();
+}
+function renderQuestion(){
+  restoreControls();stopSpeech();stopRecognition();
+  const ex=currentQuestions()[questionIndex];
+  if(!ex){showSummary();return}
+  choice=null;recognized=null;answered=false;
+  $("#summaryPanel").hidden=true;$("#questionStage").textContent="Mitdenken · Ṣidq";
+  $("#questionIndex").textContent="Frage "+(questionIndex+1)+" von "+currentQuestions().length;
+  $("#questionTitle").textContent="Denke selbst nach";
+  $("#question").textContent=ex.prompt;
+  $("#choices").innerHTML="";
+  if(ex.type==="choice"){
+    ex.options.forEach((label,index)=>{
+      const b=document.createElement("button");b.type="button";b.className="choice-button";b.textContent=label;b.setAttribute("aria-pressed","false");
+      b.addEventListener("click",()=>{choice=index;allEls(".choice-button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));$("#answer").value="";});
+      $("#choices").appendChild(b);
+    });
+  }
+  $("#choices").hidden=ex.type!=="choice";
+  $("#answer").value="";
+  $("#answer").placeholder=ex.type==="choice"?"Alternativ mit eigenen Worten antworten …":"Deine Erklärung in eigenen Worten …";
+  $("#check").disabled=false;$("#check").hidden=false;
+  $("#hint").hidden=false;$("#repeat").hidden=false;
+  $("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;
+  $("#feedback").textContent=age==="4-5"?"Nimm dir Zeit. Du kannst eine Antwort auswählen.":"Erkläre es in deinem Tempo. Du darfst sprechen oder schreiben.";
+  $("#micInfo").textContent="Erst antippen, dann sprechen. Eine Erkennung kann Fehler enthalten; prüfe ihren Text.";
+  $("#bar").style.width=(questionIndex/currentQuestions().length*100)+"%";
+}
+function check(){
+  if(answered)return;
+  const ex=currentQuestions()[questionIndex],written=$("#answer").value.trim();
+  if(choice===null && !written){$("#feedback").textContent="Wähle eine Antwort oder sage/schreibe deine eigenen Worte.";return}
+  answered=true;session.checked++;
+  let feedback="";
+  if(choice!==null && !written && ex.type==="choice"){
+    session.answeredChoices++;
+    if(choice===ex.correct){session.correctChoices++;feedback="Das passt zu unserem Beleg. "+ex.explain}
+    else{session.usedHelp=true;feedback="Wir wiederholen es gemeinsam: "+ex.explain+" Es ist in Ordnung, noch einmal nachzudenken."}
+  }else{
+    feedback="Danke, dass du dir Gedanken gemacht hast. Eine mögliche Erklärung ist: "+(ex.sample||ex.explain)+
+      " Vergleiche diese Erklärung mit deinen eigenen Worten. Ein Computer kann offene Antworten hier noch nicht zuverlässig als richtig oder falsch bewerten.";
+  }
+  $("#feedback").textContent=feedback;
+  $("#nextQuestion").hidden=questionIndex===currentQuestions().length-1;
+  $("#finishLesson").hidden=questionIndex!==currentQuestions().length-1;
+  $("#check").hidden=true;
+  $("#bar").style.width=((questionIndex+1)/currentQuestions().length*100)+"%";
+}
+function showSummary(){
+  $("#questionStage").textContent="Unterricht abgeschlossen";
+  $("#questionIndex").textContent="Wiederholen ist erlaubt";
+  $("#questionTitle").textContent="Das hast du geübt";
+  $("#question").textContent="Wahrhaftigkeit bedeutet, die Wahrheit zu sagen und für Fehler Verantwortung zu übernehmen.";
+  $("#choices").hidden=true;$("#mic").hidden=true;$("#cancelMic").hidden=true;$("#micInfo").hidden=true;
+  $("#answer").hidden=true;document.querySelector('label[for="answer"]').hidden=true;
+  $("#check").hidden=true;$("#hint").hidden=true;$("#repeat").hidden=true;$("#nextQuestion").hidden=true;$("#finishLesson").hidden=true;
+  $("#summaryPanel").hidden=false;
+  $("#feedback").textContent="Du hast die Fragen bearbeitet. Entscheide selbst, ob du bald noch einmal üben möchtest.";
+  $("#summaryText").textContent="Du hast "+session.checked+" von "+currentQuestions().length+" Aufgaben bearbeitet. Bei offenen Antworten zählt deine eigene Erklärung und das gemeinsame Nachdenken – nicht eine automatische Schulnote.";
+  $("#bar").style.width="100%";
+}
+function restoreControls(){
+  $("#mic").hidden=false;$("#micInfo").hidden=false;$("#answer").hidden=false;document.querySelector('label[for="answer"]').hidden=false;
+}
+function reflect(level){
+  const previous=safeRead(),prior=Number(previous?.intervalIndex??-1);
+  const nextIndex=level==="help"?0:Math.min(prior+1,intervals.length-1);
+  const days=intervals[nextIndex],d=new Date();d.setHours(12,0,0,0);d.setDate(d.getDate()+days);
+  const record={version:DATA_VERSION,lessonId:"sidq",profile,age,completedAt:Date.now(),reviewCount:(Number(previous?.reviewCount)||0)+1,intervalIndex:nextIndex,nextDue:d.getTime(),selfReport:level,choiceExercises:session.answeredChoices,choiceCorrect:session.correctChoices};
+  try{localStorage.setItem(storageKey(),JSON.stringify(record));$("#nextDue").textContent=level==="help"?
+    "Gut, dass du weiter üben möchtest. Kurze Wiederholung empfohlen: "+withDate(days)+".":
+    "Nächste kurze Erinnerung vorgeschlagen: "+withDate(days)+"."}
+  catch(_){$("#nextDue").textContent="Lokal speichern ist in diesem Browser blockiert. Du kannst den Unterricht trotzdem bearbeiten."}
+  allEls("[data-reflect]").forEach(b=>{b.classList.toggle("active",b.dataset.reflect===level);b.setAttribute("aria-pressed",String(b.dataset.reflect===level))});
+  renderStatus();
+}
+allEls("[data-profile]").forEach(b=>b.addEventListener("click",()=>{profile=b.dataset.profile;applyProfile();showHome()}));
+$("#ageGroup").addEventListener("change",e=>{age=e.target.value;applyProfile();showHome()});
+allEls("[data-mode]").forEach(b=>b.addEventListener("click",()=>{mode=b.dataset.mode;allEls("[data-mode]").forEach(x=>{x.classList.toggle("active",x===b);x.setAttribute("aria-pressed",String(x===b))});if(mode==="read")stopSpeech()}));
+allEls("[data-open-lesson]").forEach(b=>b.addEventListener("click",showLesson));
+$("#backToAcademy").addEventListener("click",showHome);
+$("#backAfterLesson").addEventListener("click",showHome);
+$("#repeatReview").addEventListener("click",showLesson);
+$("#play").addEventListener("click",()=>speak(germanLessonText()));
+$("#stop").addEventListener("click",stopSpeech);
+$("#hint").addEventListener("click",()=>{session.usedHelp=true;$("#feedback").textContent=currentQuestions()[questionIndex]?.hint||"Lies den Beleg noch einmal."});
+$("#repeat").addEventListener("click",()=>speak(currentQuestions()[questionIndex]?.prompt||""));
+$("#check").addEventListener("click",check);
+$("#nextQuestion").addEventListener("click",()=>{questionIndex++;renderQuestion()});
+$("#finishLesson").addEventListener("click",showSummary);
+allEls("[data-reflect]").forEach(b=>b.addEventListener("click",()=>reflect(b.dataset.reflect)));
+$("#answer").addEventListener("input",()=>{if($("#answer").value.trim()){choice=null;allEls(".choice-button").forEach(x=>x.setAttribute("aria-pressed","false"))}});
+$("#mic").addEventListener("click",()=>{
+  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+  if(!SR){$("#micInfo").textContent="Spracherkennung ist hier nicht verfügbar. Du kannst per Tastatur oder Auswahl antworten.";return}
+  stopSpeech();stopRecognition();
+  try{
+    recognition=new SR();recognition.lang="de-DE";recognition.interimResults=false;recognition.continuous=false;recognition.maxAlternatives=1;
+    recognition.onresult=e=>{const value=e.results?.[0]?.[0]?.transcript||"";$("#answer").value=value;choice=null;allEls(".choice-button").forEach(x=>x.setAttribute("aria-pressed","false"));$("#micInfo").textContent="Bitte prüfe den erkannten Text und tippe anschließend auf „Antwort prüfen“.";};
+    recognition.onerror=e=>{$("#micInfo").textContent="Die Spracherkennung konnte nicht abgeschlossen werden ("+(e.error||"unbekannt")+"). Bitte schreibe oder wähle eine Antwort.";};
+    recognition.onend=()=>{$("#mic").disabled=false;$("#cancelMic").hidden=true;recognition=null};
+    $("#mic").disabled=true;$("#cancelMic").hidden=false;$("#micInfo").textContent="Du kannst jetzt sprechen. Hinweis: Je nach Browser kann die Spracherkennung online erfolgen.";
+    recognition.start();
+  }catch(e){stopRecognition();$("#micInfo").textContent="Mikrofon derzeit nicht verfügbar. Bitte schreibe oder wähle eine Antwort."}
+});
+$("#cancelMic").addEventListener("click",()=>{try{recognition?.stop()}catch(_){}});
+document.addEventListener("visibilitychange",()=>{if(document.hidden){stopSpeech();stopRecognition()}});
+window.addEventListener("pagehide",()=>{stopSpeech();stopRecognition()});
+restoreControls();applyProfile();renderStatus();
+})();
+</script></body></html>
