@@ -8013,6 +8013,19 @@
         "service-worker.js"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "correct-ikhlas-477-single-statement-source-only-20261017",
+      "at": "2026-10-17T11:00:00+02:00",
+      "approvedBy": "user-explicit-correct-published-ikhlas-to-previously-approved-statement-and-fazit-20261017",
+      "reason": "User explicitly rejects mistakenly published six-slide free training promotion. Replace existing adult post 477 body with previously approved al-Fudayl quote and concise Fazit as a single post, retaining stable deep link, approved Q6 source card and no body explanations. Link optional standalone free training only on Q6 source page, not in adult feed. Update post index SHA. No new push notification, kids, native iOS or protected push code changes.",
+      "paths": [
+        "content/posts/ikhlas-freies-training-absicht-sunnah-20261017-slides.md",
+        "content/posts/posts-index.json",
+        "q/6/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-25T23:59:00.000Z"
     }
   ],
   "enabled": true
