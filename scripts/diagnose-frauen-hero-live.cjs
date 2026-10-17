@@ -72,14 +72,14 @@ function snapshot(){
    // Test the real release load path: serve changed JS/CSS as stylesheet/script
    // responses before the page begins loading. No CSP-blocked inline styles
    // or duplicate hero runtime injection after boot.
-   await page.route(/\\/(?:test\\/)?assets\\/frauen\\/frauen-fiqh\\.js(?:\\?|$)/,
+   await page.route("**/assets/frauen/frauen-fiqh.js*",
      async interception=>{
        const u=new URL(interception.request().url());
        const file=(u.pathname.startsWith("/test/")?"test/":"")+"assets/frauen/frauen-fiqh.js";
        await interception.fulfill({status:200,contentType:"application/javascript; charset=utf-8",
          body:fs.readFileSync(path.join(process.cwd(),file))});
      });
-   await page.route(/\\/(?:test\\/)?assets\\/frauen\\/frauen-authority-v1292\\.css(?:\\?|$)/,
+   await page.route("**/assets/frauen/frauen-authority-v1292.css*",
      async interception=>{
        const u=new URL(interception.request().url());
        const file=(u.pathname.startsWith("/test/")?"test/":"")+"assets/frauen/frauen-authority-v1292.css";
