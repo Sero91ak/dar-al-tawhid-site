@@ -74,6 +74,11 @@ def locate_history_flow_items(key,needed):
     if set(needed)-set(originals):
         raise RuntimeError("Unrecognized paid original in history matching")
     matches={gid:[] for gid in needed}
+    diagnostic={"correctVoiceAndModelRows":0,"sourceFlowsRows":0,
+                "rowsWithSpokenText":0,"rowsWithDialogue":0,
+                "textMatchesIgnoringSourceFilter":0,
+                "historyIdMatchesOldGeneration":0,
+                "requestIdMatchesOldGeneration":0}
     statuses=[]
     inspected=0
     cursor=None
@@ -94,6 +99,17 @@ def locate_history_flow_items(key,needed):
         inspected+=len(rows)
         for row in rows:
             if not isinstance(row,dict):continue
+            if row.get("model_id")==EXPECTED and row.get("voice_id")==manifest["items"][0]["voiceId"]:
+                diagnostic["correctVoiceAndModelRows"]+=1
+            if row.get("source")=="Flows":diagnostic["sourceFlowsRows"]+=1
+            if isinstance(row.get("text"),str) and row["text"]:diagnostic["rowsWithSpokenText"]+=1
+            if isinstance(row.get("dialogue"),list) and row["dialogue"]:diagnostic["rowsWithDialogue"]+=1
+            if row.get("history_item_id") in needed:
+                diagnostic["historyIdMatchesOldGeneration"]+=1
+            if row.get("request_id") in needed:
+                diagnostic["requestIdMatchesOldGeneration"]+=1
+            if any(row.get("text")==originals[gid]["originalSpokenText"] for gid in needed):
+                diagnostic["textMatchesIgnoringSourceFilter"]+=1
             if (row.get("model_id")!=EXPECTED
                     or row.get("voice_id")!=manifest["items"][0]["voiceId"]
                     or row.get("source")!="Flows"):
@@ -131,6 +147,7 @@ def locate_history_flow_items(key,needed):
         "pagesInspected":len(statuses),
         "httpCodes":statuses,
         "historyRowsInspected":inspected,
+        "historyPrivacySafeAggregateDiagnostics":diagnostic,
         "candidateExactTextMatches":sum(x["exactTextAndVoiceHistoryMatches"] for x in result.values()),
         "strongOriginalIdLinks":len(linked),
         "unlinkedOriginals":sum(v["needsOriginalMp3Export"] for v in result.values()),
