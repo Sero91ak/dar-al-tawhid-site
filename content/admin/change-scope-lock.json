@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-visitor-post-text-contrast-20261017",
+      "at": "2026-10-17T13:18:00+02:00",
+      "approvedBy": "user-explicit-immediate-fix-all-adult-posts-appearance-contrast-20261017",
+      "reason": "Fix only unreadable new adult post quote text on light themes, preserving dark-mode readable emphasis. Visitor post CSS only. No Kids, push, content, hero geometry, SW or app settings change.",
+      "paths": [
+        "assets/dar-visitor-posts-v1375.css"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-tv-kids-visual-crosspromo-20261017",
       "at": "2026-10-17T13:00:00+02:00",
       "approvedBy": "user-explicit-test-then-visitor-live-exact-promo-screenshot-20261017",
