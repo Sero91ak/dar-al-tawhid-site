@@ -4,7 +4,7 @@
  if(window.__KIDS_CREATOR_SPLASH_2__)return;
  window.__KIDS_CREATOR_SPLASH_2__=true;
  document.documentElement.classList.add("kids-test-booting");
- var start=performance.now(), minDisplayMs=2600, maxWaitMs=9000;
+ var start=performance.now(), minDisplayMs=3500, maxWaitMs=9000;
  var display=0,target=1,root=null,fill=null,number=null,meter=null,status=null,retry=null;
  var ready=false,error=false,firstPaintReady=false,frame=null;
  var posterURL="/kids/assets/kids-splash-20261017-v1.jpg";
