@@ -60,25 +60,34 @@ function snapshot(){
  try{
   browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
   for(const route of routes){
-   const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
+   const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:route.key==="visitor"?"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS":"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
    const page=await context.newPage();const errors=[];
    page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
    const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
    await page.waitForTimeout(6000);
    let before=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-initial.png")});
+   // Simulate the proposed code on the currently deployed app, before merging.
+   const localScript=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-fiqh.js":"assets/frauen/frauen-fiqh.js"),"utf8");
+   const tag="/* DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392";
+   if(!localScript.includes(tag))throw Error("Repair snippet not in checkout");
+   await page.addScriptTag({content:localScript.slice(localScript.indexOf(tag))});
+   await page.waitForTimeout(1100);
+   let repaired=await page.evaluate(snapshot);
+   await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
+
    await page.evaluate(()=>{scrollTo(0,350);let el=document.querySelector("#appView");if(el)el.scrollTop=350});
    await page.waitForTimeout(450);
    let after=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-after-scroll.png")});
-   all.push({key:route.key,status:response.status(),before,after,errors});
+   all.push({key:route.key,status:response.status(),before,repaired,after,errors});
    console.log(JSON.stringify({route:route.key,status:response.status(),
     before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles,shellChildren:before.shellChildren,renderer:before.renderer},
-    after:{scroll:after.docScroll,hero:after.hero,stage:after.stage,heading:after.heading},errors}));
-   if(!before.hero||before.hero.height<180||before.hero.bottom<100){
+    repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer},after:{scroll:after.docScroll,hero:after.hero,stage:after.stage,heading:after.heading},errors}));
+   if(before.app&&(!repaired.hero||repaired.hero.height<180||repaired.hero.bottom<100)){
      issues.push(route.key+" upper hero missing from first viewport");
    }
-   if(after.stage&&after.stage.bottom<100)issues.push(route.key+" stage scrolls off-screen");
+   if(before.app&&after.stage&&after.stage.bottom<100)issues.push(route.key+" stage scrolls off-screen");
    await context.close();
   }
  }catch(e){issues.push(String(e.stack||e));console.error(e);}
