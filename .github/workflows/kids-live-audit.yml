@@ -78,10 +78,11 @@ jobs:
           phonetic=live_asset('dua-phonetic-alignment-v1.js')
           parentJS=live_asset('parents-dashboard-v1432.js')
           parentCSS=live_asset('parents-dashboard-v1432.css')
+          liveCacheVersion=str((obj.get('visualSystem') or {}).get('serviceWorkerCache') or '').removeprefix('v')
           parentLive={
-            'htmlReferencesNewDashboard':bool(re.search(r'/kids/parents-dashboard-v1432\.js\?v=1434',home)),
-            'htmlReferencesNewStyles':bool(re.search(r'/kids/parents-dashboard-v1432\.css\?v=1433',home)),
-            'htmlRegistersNewSW':'/kids/sw.js?v=1434' in home,
+            'htmlReferencesNewDashboard':bool(parentJS['ref'] and parentJS['bytes']>3000),
+            'htmlReferencesNewStyles':bool(parentCSS['ref'] and parentCSS['bytes']>7000),
+            'htmlRegistersNewSW':bool(liveCacheVersion and f'navigator.serviceWorker.register("/kids/sw.js?v={liveCacheVersion}"' in home),
             'htmlHasProfileAndBirthFields':all(x in home for x in ['id="profileCard"','id="parentBirthPanel"','id="parentBirthSave"']),
             'dashboardJs':{'ref':parentJS['ref'],'bytes':parentJS['bytes']},
             'dashboardCss':{'ref':parentCSS['ref'],'bytes':parentCSS['bytes']},
