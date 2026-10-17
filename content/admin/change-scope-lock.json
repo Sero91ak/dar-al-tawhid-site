@@ -155,6 +155,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "apple-tv-tvstore-target-fix-20261017",
+      "at": "2026-10-17T13:55:00+02:00",
+      "approvedBy": "user-explicit-fix-apple-tv-store-button-not-open-ios-visitor-app-20261017",
+      "reason": "Only adjust the Apple TV promotion outbound App Store destination: Apple's single universal product ID wrongly opens the iPhone visitor app. iPhone/iPad opens verified official Apple developer page with Apple TV category; non-iOS links to official TV-platform product URL. Keep Kids promotion disabled, preserve layout and all other routes.",
+      "paths": [
+        "test/assets/dar-more-v15.js",
+        "assets/dar-more-final-v15.js",
+        "desktop-preview/dar-public-app-promo-v1.js"
+      ],
+      "expiresAt": "2026-10-25T23:59:00.000Z"
+    },
+    {
       "id": "adult-v15-legacy-visitor-crosspromo-20261017",
       "at": "2026-10-17T14:10:00+02:00",
       "approvedBy": "user-explicit-website-and-webapps-missing-crosspromo-fix-20261017",
