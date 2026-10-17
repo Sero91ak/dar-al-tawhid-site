@@ -1386,3 +1386,105 @@ html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-ilm-chat-r
     overflow-x:clip!important;
   }
 }
+
+/* DAR_ADULT_HERO_COMPACT_EDGE_V1396 · 2026-10-17
+ * Verified screenshot regression: reader cover too tall, topic cover inset.
+ * Structural adult routes only. The photograph remains the actual Hero
+ * background; slides/reading width, bottom nav, Frauen, Kids, audio and
+ * interaction layers are not restyled.
+ * Use the real containing block, never 100vw + centering transforms.
+ */
+html[data-theme] body:is(.is-post-route,.is-topics-route,.is-topic-route) > .app,
+html[data-theme] body:is(.is-post-route,.is-topics-route,.is-topic-route) #appView.view {
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  padding-inline:0!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body:is(.is-post-route,.is-topics-route,.is-topic-route) #appView.view {
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+}
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page.topic-collection-page,
+html[data-theme] body.is-topics-route #appView.view > .topics-hub.topics-hub,
+html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader {
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  padding-inline:0!important;
+  transform:none!important;
+  translate:none!important;
+  box-sizing:border-box!important;
+}
+/* The hero IS the picture-bearing section, flush to the real page edge. */
+html[data-theme] body.is-topics-route #appView.view > .topics-hub.topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page.topic-collection-page > .view-head,
+html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title {
+  position:relative!important;
+  inset-inline:auto!important;
+  left:auto!important;
+  right:auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  padding-inline:max(18px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))!important;
+  box-sizing:border-box!important;
+  transform:none!important;
+  translate:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+  background-origin:border-box!important;
+  background-clip:border-box!important;
+}
+/* Post/slide-reader cover no longer consumes most of the iPhone screen.
+ * No fixed/max height: a very long heading can still expand instead of clip. */
+html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title {
+  min-height:clamp(210px,24svh,300px)!important;
+  height:auto!important;
+  max-height:none!important;
+  padding-block:clamp(18px,3.2svh,30px) clamp(20px,3svh,32px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  background-position:center,center,70% 49%!important;
+}
+/* Category and topic covers fill their section, not a 20px inset card.
+ * On iPad / Fold landscape they retain a coherent editorial image height. */
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page.topic-collection-page > .view-head,
+html[data-theme] body.is-topics-route #appView.view > .topics-hub.topics-hub > .view-head {
+  min-height:clamp(218px,27svh,320px)!important;
+  height:auto!important;
+  max-height:none!important;
+  padding-block:clamp(19px,3svh,32px)!important;
+  background-position:center,center,74% 44%!important;
+}
+/* Future adult hero sections can reuse the same edge contract by opt-in. */
+html[data-theme] body.has-bottom-nav #appView.view > .dar-responsive-page > .dar-responsive-hero {
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  background-size:cover!important;
+  box-sizing:border-box!important;
+}
+@media(max-height:540px) and (orientation:landscape){
+  html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title,
+  html[data-theme] body.is-topic-route #appView.view > .topic-collection-page.topic-collection-page > .view-head,
+  html[data-theme] body.is-topics-route #appView.view > .topics-hub.topics-hub > .view-head {
+    min-height:clamp(148px,38svh,225px)!important;
+    height:auto!important;
+    max-height:none!important;
+    padding-block:14px!important;
+  }
+}
