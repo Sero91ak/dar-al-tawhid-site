@@ -41,12 +41,15 @@ jobs:
           ref: review/kids-quiz-v4-batch-001-020-20261014
 
       - name: Zero-credit preflight of exact 65 texts, original receipts, and 10-part spend cap
+        env:
+          EXPECTED_V4_BATCH_SHA256: ${{ github.event.inputs.approve_exact_batch_fingerprint_sha256 }}
         run: |
           set -euo pipefail
           python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
           python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --audit
           python3 - <<'PY'
           import json
+          import os
           from pathlib import Path
           p=Path('kids/review-only/quiz-v4-older-stage1-next-recording-batch.json')
           a=json.loads(p.read_text(encoding='utf-8'))
@@ -57,7 +60,7 @@ jobs:
           assert a['nextEstimatedCreditsNotProviderBill']<=850
           assert isinstance(a['manualApprovalMustMatchExactBatchFingerprintSHA256'],str)
           assert len(a['manualApprovalMustMatchExactBatchFingerprintSHA256'])==64
-          assert a['manualApprovalMustMatchExactBatchFingerprintSHA256']=="${{ github.event.inputs.approve_exact_batch_fingerprint_sha256 }}", 'Stale or incorrect manual batch fingerprint; STOP before TTS'
+          assert a['manualApprovalMustMatchExactBatchFingerprintSHA256']==os.environ.get('EXPECTED_V4_BATCH_SHA256'), 'Stale or incorrect batch fingerprint; STOP before TTS'
           assert a['paidSynthesisAuthorizedByAudit'] is False
           assert a['newElevenLabsCreditsSpentByAudit']==0
           assert a['publicReleaseAllowed'] is False
