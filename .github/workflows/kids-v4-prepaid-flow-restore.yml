@@ -6,6 +6,7 @@ on:
     paths:
       - 'kids/tools/import_quiz_v4_prepaid_flow_originals.py'
       - 'kids/tools/test_quiz_v4_prepaid_import.py'
+      - 'kids/tools/assert_quiz_v4_prepaid_postimport.py'
       - 'kids/tools/quiz_v4_first150_offline_join.py'
       - 'kids/assets/kids-quiz-audio/v4-paid-flow-inbox/**'
       - '.github/workflows/kids-v4-prepaid-flow-restore.yml'
@@ -40,6 +41,7 @@ jobs:
         run: |
           python3 -m py_compile kids/tools/import_quiz_v4_prepaid_flow_originals.py
           python3 -m py_compile kids/tools/test_quiz_v4_prepaid_import.py
+          python3 -m py_compile kids/tools/assert_quiz_v4_prepaid_postimport.py
           python3 -m py_compile kids/tools/quiz_v4_first150_offline_join.py
           python3 kids/tools/test_quiz_v4_prepaid_import.py
           python3 kids/tools/import_quiz_v4_prepaid_flow_originals.py --audit
@@ -58,20 +60,7 @@ jobs:
             python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
             python3 kids/tools/write_quiz_v4_handover.py
             python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
-            python3 - <<'PY'
-            import json
-            from pathlib import Path
-            home=Path('kids')
-            paid=json.loads((home/'data/quiz-v4-paid-flow-import-status.json').read_text())
-            young=json.loads((home/'data/quiz-v4-first150-audio-status.json').read_text())
-            mapped=json.loads((home/'review-only/quiz-v4-450-actual-mp3-import-summary.json').read_text())
-            assert mapped['questionsStaged']==450
-            assert young['completeFourPartQuestions']==mapped['byAge']['4-6']['completeFourPartQuestions']
-            if paid['remainingPriorPaidGenerations']==0:
-                assert young['completeFourPartQuestions']==150, 'Nine old MP3s imported but 150 young questions NOT complete'
-            assert young['readyForLive'] is False
-            print('PASS: real original import reflected across the 450 review quizzes, no live flag')
-            PY
+            python3 kids/tools/assert_quiz_v4_prepaid_postimport.py
           else
             echo "No previously-paid MP3 export ZIP supplied yet. All existing recordings kept unchanged."
             echo "Upload all available original MP3s named <generation-id>.mp3 inside a single archive: $archive"
