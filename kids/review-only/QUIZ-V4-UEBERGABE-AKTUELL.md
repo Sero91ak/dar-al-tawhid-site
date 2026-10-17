@@ -6,16 +6,17 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `720e65e8ec6d7ea2e6d63bf56623ff46cd0d21d8`
+- Commit der überprüften Quiz-Audio-Zuordnung: `1dc5ca3e6ef486213384a37952c4ea9f7f754bf8`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
-- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **276 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1044 Frage-/Lob-/Retry-/Erklärungsteile**.
-- Technisch vierteilig vollständig: **72/450**, noch unvollständig: **378/450**.
+- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **282 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1050 Frage-/Lob-/Retry-/Erklärungsteile**.
+- Technisch vierteilig vollständig: **76/450**, noch unvollständig: **374/450**.
+- **Aktueller Audioimport:** Zehn echte, direkt bezahlte `eleven_v4`-Originale mit SHA und Providerbelegen sind gespeichert. Die Quizzes `kids-quiz-033`, `034`, `048` und `050` sind dadurch jetzt technisch vierteilig vollständig. Die tatsächliche Providerabrechnung ist weiterhin nicht verifiziert. Keine menschliche Aussprachefreigabe und kein Live-Push.
 - Letzter V4-Kostenaudit: **1382 neue Sprachfragmente** = **64816 Unicode-Zeichen**; **0 neue Lob-/Retry-Fragmente**, **0 neue V4-Texte für 4–6 Jahre**.
 - Nach Originalkosten getrennt: **80 Fragen nur durch bereits bezahlte MP3s blockiert**, **298 Fragen benötigen neue V4-Originaltexte**.
 - Alter 4-6: **70/150** komplett; vorhandene Hörteile question=100, correct=85, retry=85, explanation=148.
-- Alter 7-8: **2/150** komplett; vorhandene Hörteile question=2, correct=150, retry=150, explanation=14.
-- Alter 9-10: **0/150** komplett; vorhandene Hörteile question=0, correct=150, retry=150, explanation=10.
+- Alter 7-8: **4/150** komplett; vorhandene Hörteile question=5, correct=150, retry=150, explanation=15.
+- Alter 9-10: **2/150** komplett; vorhandene Hörteile question=2, correct=150, retry=150, explanation=10.
 - Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **47 importiert**, **9 noch ohne heruntergeladene Original-MP3-Datei**.
 - Zusätzlich im Originalregister: **384 Textschlüssel**, davon **337 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
 - Kosten für den bisherigen Import und diese Berichterstellung: **0 neue ElevenLabs-Sprachcredits**.
