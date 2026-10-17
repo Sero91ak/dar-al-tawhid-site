@@ -13,6 +13,7 @@
 		A10000000000000000000007 /* KidsNativeIntro.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000019 /* KidsNativeIntro.swift */; };
 		A10000000000000000000004 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000014 /* Assets.xcassets */; };
 		A10000000000000000000005 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000015 /* PrivacyInfo.xcprivacy */; };
+		A10000000000000000000008 /* KidsCreatorLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000001A /* KidsCreatorLaunchScreen.storyboard */; };
 		A10000000000000000000006 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A10000000000000000000016 /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,7 @@
 		A10000000000000000000014 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A10000000000000000000015 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		A10000000000000000000016 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+		A1000000000000000000001A /* KidsCreatorLaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = KidsCreatorLaunchScreen.storyboard; sourceTree = "<group>"; };
 		A10000000000000000000017 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A10000000000000000000018 /* DarAlTawhidKids.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DarAlTawhidKids.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -58,6 +60,7 @@
 				A10000000000000000000013 /* KidsAppShell.swift */,
 				A10000000000000000000019 /* KidsNativeIntro.swift */,
 				A10000000000000000000014 /* Assets.xcassets */,
+				A1000000000000000000001A /* KidsCreatorLaunchScreen.storyboard */,
 				A10000000000000000000015 /* PrivacyInfo.xcprivacy */,
 				A10000000000000000000017 /* Info.plist */,
 				A10000000000000000000018 /* DarAlTawhidKids.entitlements */,
@@ -142,6 +145,7 @@
 			files = (
 				A10000000000000000000004 /* Assets.xcassets in Resources */,
 				A10000000000000000000005 /* PrivacyInfo.xcprivacy in Resources */,
+				A10000000000000000000008 /* KidsCreatorLaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
