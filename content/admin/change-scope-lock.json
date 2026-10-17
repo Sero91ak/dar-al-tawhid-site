@@ -8193,6 +8193,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "frauen-hero-restore-both-apps-contract-v1390-20261017",
+      "at": "2026-10-17T15:34:00.000Z",
+      "approvedBy": "user-explicit-restore-frauen-hero-test-and-visitor-and-global-future-pages-20261017",
+      "reason": "Expressly requested immediate restoration of original Frauen hero backgrounds throughout visitor and test apps, and an automatic future-page regression rule. Authorizes only the two newly added static hero-contract verification files; all other global restrictions remain enabled.",
+      "paths": [
+        ".github/workflows/check-frauen-hero-contract.yml",
+        "scripts/verify-frauen-hero-contract.cjs"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
