@@ -78,7 +78,7 @@ def flow_generation_original(e, key):
         raise RuntimeError("Provider signed original download HTTP "+
                            str(exc.code)+"; NO TTS RETRY") from None
     if (not 1400<len(audio)<=AUDIO_LIMIT_BYTES
-            or not(audio.startswith(b"ID3") or audio[:1]==b"\\xff")):
+            or not(audio.startswith(b"ID3") or audio[:1]==b"\xff")):
         raise RuntimeError("Original signed Flow audio not a valid bounded MP3")
     return audio
 
