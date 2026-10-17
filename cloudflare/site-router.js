@@ -269,9 +269,9 @@ function browserManifestResponse(request, androidBrowser = false) {
 }
 function liveFrauenNativeAddon() {
   return [
-    '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-live-v8">',
+    '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-scroll-v1395">',
     '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-hero-v1390">',
-    '<script defer src="/assets/frauen/frauen-fiqh.js?v=frauen-hero-dom-v1392"><\\/script>',
+    '<script defer src="/assets/frauen/frauen-fiqh.js?v=frauen-scroll-v1395"><\\/script>',
     '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-live-v8"><\\/script>'
   ].join("");
 }
