@@ -51,7 +51,7 @@ assert.match(nativeWeb,/configuration\.userContentController\.add\(context\.coor
 const launchStoryboard=read("ios/DarAlTawhidKids/DarAlTawhidKids/KidsCreatorLaunchScreen.storyboard");
 assert.match(launchStoryboard,/image="KidsTestLaunchPoster"/,"native first frame uses bundled KIDS artwork");
 assert.match(launchStoryboard,/contentMode="scaleAspectFill"/,"edge-to-edge native launch");
-assert.match(creatorInfo,/<key>UILaunchStoryboardName<\/key>\\s*<string>KidsCreatorLaunchScreen<\/string>/,"creator must start with native poster, not a white window");
+assert.match(creatorInfo,/<key>UILaunchStoryboardName<\/key>\s*<string>KidsCreatorLaunchScreen<\/string>/,"creator must start with native poster, not a white window");
 assert.doesNotMatch(creatorInfo,/<key>UILaunchScreen<\/key>/,"no competing launch configuration");
 assert.ok(pbx.includes("KidsCreatorLaunchScreen.storyboard in Resources"),"native storyboard compiled");
 assert.doesNotMatch(visitorInfo,/KidsTestLaunchPoster/,"visitor iOS launch remains unchanged");
