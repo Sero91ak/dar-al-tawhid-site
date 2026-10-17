@@ -7972,6 +7972,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "test-global-viewport-axis-v1382-20261017",
+      "at": "2026-10-17T10:30:00+02:00",
+      "approvedBy": "user-explicit-global-responsive-fix-and-push-live-20261017",
+      "reason": "User specifically identifies horizontal layout drift in adult post detail, topic and posts pages, requests uniform iPhone/iPad/browser responsive layout and live publication. Test lane first. Global geometry-only fix in actually loaded test CSS, cache-busted index and shell bump; preserve visitor/Kids/native assets, feeds, themes, navigation and content.",
+      "paths": [
+        "test/assets/test-global-edge-width-v1372.css",
+        "test/index.html",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
