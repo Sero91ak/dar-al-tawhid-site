@@ -133,7 +133,9 @@ def main():
            "modelId":"eleven_v4","masterVoiceId":"DkU7j9uO4ZEtLD2iRZSH",
            "repo":REPO,"beforeMissingCount":len(missing),
            "queriedArtifactNames":list(NAMES),"artifactListingsChecked":0,
-           "eligibleArchivesExamined":0,"archiveBytesExamined":0,
+           "eligibleArchivesExamined":0,"archiveDownloadAttempts":0,
+           "archiveDownloadFailuresByStatus":{},"archiveCandidatesSeen":0,
+           "archiveBytesExamined":0,
            "matchingOriginalGenerationIds":[],"matchedArtifactIds":[],
            "newElevenLabsCreditsSpent":0,"elevenLabsSpeechSynthesisCalls":0,
            "publicReleaseAllowed":False,"humanListeningApproved":False,
@@ -157,14 +159,28 @@ def main():
                 seen.add(aid)
                 size=row.get("size_in_bytes") or 0
                 if size<500 or size>MAX_ARCHIVE_BYTES:continue
+                stats["archiveCandidatesSeen"]+=1
                 if stats["archiveBytesExamined"]+size>MAX_BYTES_DOWNLOADED:break
+                stats["archiveDownloadAttempts"]+=1
                 try:
                     archive=artifact_zip(aid,token)
                     matches=mp3_candidates(archive,missing)
                 except (urllib.error.HTTPError,urllib.error.URLError,TimeoutError,zipfile.BadZipFile,
-                        json.JSONDecodeError,RuntimeError):
-                    # Historical expired/permanently inaccessible archive:
-                    # leave original identity missing. No guessing, no TTS.
+                        json.JSONDecodeError,RuntimeError) as exc:
+                    # Distinguish an unreadable ZIP from a verified search
+                    # with 0 matches. Do not log signed URLs or credentials.
+                    if isinstance(exc,urllib.error.HTTPError):
+                        reason="http-"+str(exc.code)
+                    elif isinstance(exc,urllib.error.URLError):
+                        reason="connection-error"
+                    elif isinstance(exc,TimeoutError):
+                        reason="timeout"
+                    elif isinstance(exc,zipfile.BadZipFile):
+                        reason="invalid-archive"
+                    else:
+                        reason="invalid-payload"
+                    errs=stats["archiveDownloadFailuresByStatus"]
+                    errs[reason]=errs.get(reason,0)+1
                     continue
                 stats["archiveBytesExamined"]+=len(archive)
                 stats["eligibleArchivesExamined"]+=1
@@ -175,6 +191,8 @@ def main():
                     missing.remove(gid)
             if not records or len(records)<100 or not missing:break
     stats["matchingOriginalGenerationIds"]=sorted(found)
+    stats["archiveAuditWasAbleToReadAtLeastOneBackup"]=bool(stats["eligibleArchivesExamined"])
+    stats["zeroMatchesProveAllHistoricBackupsWereChecked"]=False
     if found:
         with tempfile.TemporaryDirectory(prefix="kids-existing-paid-archive-") as folder:
             inbox=Path(folder)
@@ -195,7 +213,11 @@ def main():
                       ("matchedArtifactIds","matchingOriginalGenerationIds")},
                      ensure_ascii=False),flush=True)
     if not found:
-        print("NO_OLDER_PAID_ORIGINAL_IN_ELIGIBLE_ARCHIVES; "
-              "still requires original MP3 export, NEVER re-synthesize",flush=True)
+        if not stats["eligibleArchivesExamined"]:
+            print("GITHUB_ARTIFACTS_NOT_ACTUALLY_READ; "
+                  "no claim of missing source bytes can be made; manual original export still required",flush=True)
+        else:
+            print("NO_MISSING_PAID_ORIGINAL_IN_SAMPLED_READABLE_ARCHIVES; "
+                  "not an exhaustive search; never re-synthesize",flush=True)
 
 if __name__=="__main__":main()
