@@ -64,6 +64,44 @@ def main():
     linked,report=run_case(bad_voice,[gid1])
     check(not linked,"voice mismatch must never import an old historical take")
 
+    # ElevenLabs Flows returns text/voice inside a single dialogue part,
+    # with top-level text and voice_id null. This exact provider-linked
+    # variant is allowed; identical text without a provider ID is NOT.
+    def dialogue_provider_match(path,key,accept="application/json"):
+        items=[
+            {"history_item_id":"flow-history-linked","request_id":gid1,
+             "source":"Flows","model_id":None,"voice_id":None,"text":None,
+             "dialogue":[{"text":ids[gid1],"voice_id":VOICE}]},
+            {"history_item_id":"flow-history-not-linked","request_id":"some-other-request",
+             "source":"Flows","model_id":None,"voice_id":None,"text":None,
+             "dialogue":[{"text":ids[gid2],"voice_id":VOICE}]}
+        ]
+        return 200,json.dumps({"history":items,"has_more":False}).encode("utf-8"),"application/json"
+    linked,report=run_case(dialogue_provider_match,[gid1,gid2])
+    check(set(linked)=={gid1} and report["perGeneration"][gid2]["exactTextAndVoiceHistoryMatches"]==1,
+          "Flow dialogue text should be matched but NEVER auto-labeled without an original provider ID")
+    check(report["historyPrivacySafeAggregateDiagnostics"]["dialogueItemsWithExactOriginalText"]==2,
+          "Flow metadata diagnosis ignored single-voice historical dialogue")
+
+    def dialogue_wrong_voice(path,key,accept="application/json"):
+        data={"history":[{"history_item_id":gid1,"request_id":gid1,
+            "source":"Flows","model_id":None,"voice_id":None,"text":None,
+            "dialogue":[{"text":ids[gid1],"voice_id":"WRONG_PERSON"}]}],
+            "has_more":False}
+        return 200,json.dumps(data).encode("utf-8"),"application/json"
+    linked,report=run_case(dialogue_wrong_voice,[gid1])
+    check(not linked,"same words with a different Flow dialogue speaker cannot be imported")
+
+    def multi_speaker_invalid(path,key,accept="application/json"):
+        data={"history":[{"history_item_id":gid1,"request_id":gid1,
+            "source":"Flows","model_id":None,"voice_id":None,"text":None,
+            "dialogue":[{"text":ids[gid1],"voice_id":VOICE},
+                        {"text":"Different unapproved recording","voice_id":VOICE}]}],
+            "has_more":False}
+        return 200,json.dumps(data).encode("utf-8"),"application/json"
+    linked,report=run_case(multi_speaker_invalid,[gid1])
+    check(not linked,"multispeaker/multitext Flow history cannot impersonate a single original MP3")
+
     def gated(path,key,accept="application/json"):
         return 402,b"",""
     linked,report=run_case(gated,[gid1])
