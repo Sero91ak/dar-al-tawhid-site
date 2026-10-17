@@ -1,0 +1,160 @@
+/* DĀR AL TAWḤĪD · Adult visual continuity v1391 · 2026-10-17
+   Shared by public visitor, Dar Test adult and desktop web.
+   Only semantic text labels, non-interactive structural surfaces and
+   photographic post/topic hero frames. No navigation, JS, Kids, audio,
+   push, image source or reader progression changes. */
+
+/* Distinct, legible ink for LIGHT APPEARANCES ONLY. Dark themes retain
+   their authored luminous labels and hero-on-photograph lettering. */
+html[data-theme="light"]{--dar-v1391-label-ink:#211d18}
+html[data-theme="light"][data-theme-variant="salbei"],
+html[data-theme="salbei"]{--dar-v1391-label-ink:#17211b}
+html[data-theme="soft"]{--dar-v1391-label-ink:#2b2025}
+html[data-theme="eisgold"]{--dar-v1391-label-ink:#142033}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) body .top-shell.theme-hero-shell :is(.brand-kicker-row small,.isnad-label,.isnad-speaker,.isnad-words,.isnad-source),
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) body.is-home-route #appView :is(.home-v380-kicker,.home-v380-section-title,.home-start-title,.home-v380-open-row__title,.home-v380-post-title),
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) body.is-post-route #appView :is(.post-slide-kicker,.post-slide-count,.post-slide h3,.post-slide-explanation,.post-slide-quote),
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) body.is-post-route #appView .post-slide :is(p,small,strong,b){
+  color:var(--dar-v1391-label-ink)!important;
+  -webkit-text-fill-color:var(--dar-v1391-label-ink)!important;
+  text-shadow:none!important;
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) body.is-home-route .top-shell.theme-hero-shell .brand-kicker-row small,
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) body.is-home-route .top-shell.theme-hero-shell .isnad-label{
+  opacity:1!important;
+  filter:none!important;
+  text-shadow:none!important;
+}
+/* The header kicker must never become a pale gold watermark on ivory. */
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) body .top-shell.theme-hero-shell .brand-kicker-row small{
+  font-weight:850!important;
+}
+
+/* Structural BACKGROUNDS are not content cards. Removing the enclosing
+   white/gray rectangle must NOT erase interactive slider navigation or
+   inner artwork. Applies equally to all adult appearance families. */
+html[data-theme] body.is-post-route #appView .post-slides,
+html[data-theme] body.is-post-route #appView .post-slide-window,
+html[data-theme] body.is-post-route #appView .post-slide,
+html[data-theme] body.is-post-route #appView .post-slide-footer,
+html[data-theme] body.is-post-route #appView .post-after-panel{
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+html[data-theme] body.is-post-route #appView .post-slide-quote{
+  background:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-left:2px solid color-mix(in srgb,var(--theme-accent,var(--gold2,#bda16b)) 50%,transparent)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  padding:12px 0 12px clamp(14px,3.2vw,22px)!important;
+}
+html[data-theme] body.is-post-route #appView .post-slides{
+  margin-block:clamp(12px,3vw,22px)!important;
+  overflow:hidden!important; /* slide track still clips horizontally */
+}
+html[data-theme] body.is-post-route #appView .post-slide{
+  padding:clamp(14px,3.2vw,26px) clamp(12px,3vw,26px)!important;
+}
+html[data-theme] body.is-post-route #appView .post-slide-footer{
+  border-top:1px solid color-mix(in srgb,var(--theme-text,var(--text)) 14%,transparent)!important;
+  padding-block:14px max(10px,env(safe-area-inset-bottom,0px))!important;
+}
+html[data-theme] body.is-post-route #appView :is(.post-slide-nav,.post-slide-links a,.post-slide-pdf-link){
+  /* Actual controls deliberately retain their background and hit targets. */
+  min-height:42px;
+}
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell > .isnad,
+html[data-theme] body.is-home-route .top-shell.theme-hero-shell .isnad{
+  background:transparent!important;
+  background-image:none!important;
+  border-left:0!important;
+  border-right:0!important;
+  border-bottom:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+/* Prevent a flat rectangular sheet around the entire editorial section,
+   while account/signup, Qurʾān resume and other actionable cards remain. */
+html[data-theme] body.is-home-route #appView :is(.home-v380-shell,.home-v380-section,.view-head-home-row--v380),
+html[data-theme] body.is-post-route #appView :is(.post-reader-main,.post-reader){
+  background:transparent!important;
+  background-image:none!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+
+/* Global ADULT HERO CONTRACT: photographs are the cover of the entire
+   hero surface, never free-standing image rectangles. Keep aspect-preserving
+   cover rather than stretching the image or reintroducing 100vw drift. */
+html[data-theme] body.is-topics-route #appView.view > .topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page > .view-head,
+html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-title{
+  position:relative!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  min-height:clamp(430px,68svh,780px)!important;
+  height:auto!important;
+  box-sizing:border-box!important;
+  left:auto!important;
+  right:auto!important;
+  inset-inline:auto!important;
+  transform:none!important;
+  translate:none!important;
+  margin-inline:0!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+  background-origin:border-box!important;
+  background-clip:border-box!important;
+  isolation:isolate!important;
+}
+/* The source image is on the third background layer. Keep the book/study
+   subject on the right, with the heading in the darker left half. */
+html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-title{
+  background-position:center,center,72% 48%!important;
+  padding:clamp(28px,5vw,50px) max(20px,env(safe-area-inset-left,0px)) clamp(42px,7vw,68px)!important;
+}
+html[data-theme] body.is-topics-route #appView.view > .topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page > .view-head{
+  background-position:center,center,73% 48%!important;
+  padding-bottom:clamp(42px,6vw,64px)!important;
+}
+/* Remove the 90px bright rectangular fade that cuts off the photograph;
+   blend only its last 20–32px into the surrounding page. */
+html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView.view > :is(.topics-hub,.topic-collection-page,.post-reader) > :is(.view-head,.post-reader-title)::after{
+  height:clamp(18px,3svh,32px)!important;
+  border-radius:0!important;
+}
+@media(max-height:540px) and (orientation:landscape){
+  html[data-theme] body.is-topics-route #appView.view > .topics-hub > .view-head,
+  html[data-theme] body.is-topic-route #appView.view > .topic-collection-page > .view-head,
+  html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-title{
+    min-height:clamp(260px,70svh,420px)!important;
+  }
+}
+/* Reusable future-adult hero contracts; no image is invented or replaced. */
+html[data-theme] body #appView.view > .dar-responsive-page > .dar-responsive-hero{
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  background-position:center!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+/* Desktop editorial header: the independent desktop light shell has no
+   data-theme attribute; apply ink only to its concrete source label. */
+html:not([data-theme]) body :is(.isnad-label,.brand-kicker-row small){
+  color:#28241e!important;
+  -webkit-text-fill-color:#28241e!important;
+  text-shadow:none!important;
+}
