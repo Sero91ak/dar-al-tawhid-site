@@ -28,6 +28,7 @@ RELEASE=ROOT/"kids/data/quiz-curation-release.json"
 OUTPUT=ROOT/"kids/assets/kids-quiz-audio/v4-curated450-review"
 REPORT=ROOT/"kids/review-only/quiz-v4-older-stage1-next-recording-batch.json"
 USAGE=ROOT/"kids/data/quiz-v4-older-stage1-usage.json"
+ATTEMPTS=ROOT/"kids/data/quiz-v4-older-stage1-request-journal.json"
 MODEL="eleven_v4"
 VOICE="DkU7j9uO4ZEtLD2iRZSH"
 BATCH="KIDS_V4_OLDER_STAGE1_EXACT_65"
@@ -87,6 +88,30 @@ def prepare():
     check(sum(len(x["spokenText"]) for x in rows)==STAGE_CHARACTERS,
           "v4 spoken text became longer or shorter")
     protected=protect_paid_texts(ROOT,reg,ledger)
+    # Each paid POST gets a durable write-ahead marker. A timed-out,
+    # disconnected or ambiguous provider response must NOT be re-purchased.
+    journal=read(ATTEMPTS) if ATTEMPTS.is_file() else {
+        "schemaVersion":1,"modelId":MODEL,"voiceId":VOICE,
+        "purpose":"DO_NOT_REGENERATE_UNCERTAIN_PAID_REQUESTS","entries":[]}
+    check(journal.get("modelId")==MODEL and journal.get("voiceId")==VOICE
+          and isinstance(journal.get("entries"),list),"invalid write-ahead paid audit journal")
+    attempted=set()
+    for entry in journal["entries"]:
+        digest=entry.get("textSHA256")
+        check(isinstance(digest,str) and len(digest)==64 and digest not in attempted,
+              "ambiguous duplicate original request journal entry")
+        attempted.add(digest)
+        text=next((x["spokenText"] for x in rows if x["spokenTextSHA256"]==digest),None)
+        check(text is not None,"paid request log references an unapproved spoken text")
+        if entry.get("status")=="REQUEST_STARTED_UNCONFIRMED":
+            check(text in reg["textClips"],
+                  "previous paid POST has unconfirmed result; reconcile provider and MP3 artifact manually, NEVER REBUY")
+        elif entry.get("status")=="ORIGINAL_MP3_SAVED":
+            check(text in reg["textClips"] and
+                  reg["textClips"][text]["sha256"]==entry.get("mp3SHA256"),
+                  "saved MP3 lost since paid request; do not regenerate")
+        else:
+            check(False,"unknown original request status; fail closed")
     paid={row["text"] for row in ledger["rows"]}
     check(len(paid)==len(ledger["rows"]),"paid text has duplicate receipt")
     check(paid<=set(reg["textClips"]),"charged original missing from registry")
@@ -248,8 +273,21 @@ def main():
         digest=hashlib.sha256((VOICE+"\n"+MODEL+"\n"+text).encode("utf-8")).hexdigest()
         path=OUTPUT/(digest[:32]+".mp3")
         check(not path.exists(),"original audio exists without ledger; DO NOT REGENERATE")
-        # A failed/ambiguous POST is NEVER retried. Runner artifacts retain
-        # real MP3s already written before the error.
+        # Mark uncertainty BEFORE the request: a failed or timed-out paid
+        # POST might have consumed credits without returning an MP3.
+        journal=read(ATTEMPTS) if ATTEMPTS.is_file() else {
+            "schemaVersion":1,"modelId":MODEL,"voiceId":VOICE,
+            "purpose":"DO_NOT_REGENERATE_UNCERTAIN_PAID_REQUESTS","entries":[]}
+        attempt={"textSHA256":sha(text),
+                 "status":"REQUEST_STARTED_UNCONFIRMED",
+                 "startedAt":datetime.now(timezone.utc).isoformat(),
+                 "batchId":BATCH}
+        check(not any(z["textSHA256"]==sha(text) for z in journal["entries"]),
+              "prior paid request logged for this text, no new POST allowed")
+        journal["entries"].append(attempt)
+        write(ATTEMPTS,journal)
+        # On any ambiguous provider/network exception, keep the marker.
+        # Recovery occurs through actual historical/provider bytes, never TTS.
         audio,request_id=original_mp3(key,text)
         # Persist the charged MP3 bytes EVEN when the provider omitted a
         # request ID: a lost receipt must NEVER trigger a second purchase.
@@ -270,6 +308,10 @@ def main():
             "providerRequestId":request_id,"createdAt":datetime.now(timezone.utc).isoformat(),
             "note":"Original V4; audit exact provider billing; no blind retries"})
         write(REG,reg);write(LEDGER,ledger)
+        attempt["status"]="ORIGINAL_MP3_SAVED"
+        attempt["mp3SHA256"]=audiosha
+        attempt["providerRequestId"]=request_id
+        write(ATTEMPTS,journal)
         if not request_id:
             raise RuntimeError("Paid MP3 bytes were saved without a provider request ID. Preserve runner artifact, reconcile manually; NEVER RETRY this text.")
         completed+=1
