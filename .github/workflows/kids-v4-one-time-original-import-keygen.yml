@@ -1,0 +1,50 @@
+name: KIDS V4 One-Time Encrypted Original MP3 Transfer Key
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/kids_v4_secure_existing_audio_bridge.py'
+      - '.github/workflows/kids-v4-one-time-original-import-keygen.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  generate-encrypted-key-only:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Create one-time protected audio import key
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 -m pip install --quiet 'cryptography>=42,<48'
+          python3 kids/tools/kids_v4_secure_existing_audio_bridge.py --keygen --run-id "$GITHUB_RUN_ID" --out "$RUNNER_TEMP/sealed-bridge-key"
+      - name: Backup sealed private key as access-controlled artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-sealed-mp3-import-private-${{ github.run_id }}
+          retention-days: 1
+          if-no-files-found: error
+          path: ${{ runner.temp }}/sealed-bridge-key/sealed-private-key.bin
+      - name: Save PUBLIC key only for private original MP3 import
+        run: |
+          set -euo pipefail
+          git config user.name tawhid-kids-verified-audio
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/v4-secure-audio-import-public.pem kids/review-only/v4-secure-audio-import-key-origin.json
+          git commit -m 'key(kids): publish one-time RSA public key for encrypted V4 source transfer'
+          for retry in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014;then
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          exit 1
