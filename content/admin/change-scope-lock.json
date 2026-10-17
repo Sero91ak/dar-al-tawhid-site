@@ -8098,6 +8098,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "adult-test-hadith-outer-12px-fullbleed-20261017",
+      "at": "2026-10-17T10:24:04.225Z",
+      "approvedBy": "user-video-demand-true-fullbleed-hadith-images-20261017",
+      "reason": "Real browser QA showed 12px left/right outside Hadith hero. Remove only route's outer body/.app padding, keeping safe content insets; adjust Test build, cache and live verification. No Kids, Push, TV, visitor mutation.",
+      "paths": [
+        "test/assets/test-global-edge-width-v1372.css",
+        "test/index.html",
+        "test/version.json",
+        "scripts/verify-test-app-deploy.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
