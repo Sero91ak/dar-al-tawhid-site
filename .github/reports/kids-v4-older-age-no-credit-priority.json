@@ -13,8 +13,8 @@
   "olderAgeQuestionCount": 300,
   "selectedPriorityQuestionCount": 40,
   "priorityQuestionsPerAgeBand": {
-    "7-8": 20,
-    "9-10": 20
+    "9-10": 20,
+    "7-8": 20
   },
   "remainingOlderAgeSelectedQuestions": 260,
   "baselineFullFourPartQuestions": {
@@ -25,13 +25,29 @@
     "7-8": 24,
     "9-10": 22
   },
-  "allRemainingUnrecordedOlderAgeDistinctTextCount": 1382,
-  "allRemainingUnrecordedOlderAgeCharacters": 64816,
-  "newDistinctTextCountForFirst40": 160,
-  "newCharactersForFirst40": 5378,
+  "allRemainingUnrecordedOlderAgeDistinctTextCount": 1381,
+  "allRemainingUnrecordedOlderAgeCharacters": 64777,
+  "newDistinctTextCountForFirst40": 159,
+  "newCharactersForFirst40": 5339,
   "priorityQuestionSteps": [
     {
       "order": 1,
+      "questionId": "kids-quiz-045",
+      "ageBand": "9-10",
+      "category": "Ṣawm",
+      "missingOriginalTextCountForQuestion": 3,
+      "incrementalDistinctNewOriginals": 3,
+      "incrementalNewCharacters": 41,
+      "newOriginalTextSHA256": [
+        "96e107378d38f95c0157ea11b937536f7d3cf9f7216adc19a557bc1a642b0ec8",
+        "4c7da6824790eb5523bd9917b508c0e12339443228b8d5ce840445946724d32e",
+        "a29a7d6064fd3d6c240fd2aede591446afb47d619b7057007baffb45b2812dbf"
+      ],
+      "originalQuestionTextChanged": false,
+      "maySynthesizeAutomatically": false
+    },
+    {
+      "order": 2,
       "questionId": "kids-quiz-026",
       "ageBand": "7-8",
       "category": "Wissen",
@@ -47,7 +63,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 2,
+      "order": 3,
       "questionId": "kids-quiz-022",
       "ageBand": "7-8",
       "category": "Īmān",
@@ -61,7 +77,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 3,
+      "order": 4,
       "questionId": "kids-quiz-031",
       "ageBand": "7-8",
       "category": "Aḫlāq",
@@ -72,23 +88,6 @@
         "f61315c7fd09b325a685b9682917d124c9c132ae2e8b6965d66613d21d6db91e",
         "3a6cb0a42b1c41a9f1439cde7ae0b5ac8a7d836c2852e128b1fd076d4965fd86",
         "0ea5f9ee190759019ce3cdd2322d756a8062ed00c1925f5f759ccfa4a158bea4"
-      ],
-      "originalQuestionTextChanged": false,
-      "maySynthesizeAutomatically": false
-    },
-    {
-      "order": 4,
-      "questionId": "kids-quiz-045",
-      "ageBand": "9-10",
-      "category": "Ṣawm",
-      "missingOriginalTextCountForQuestion": 4,
-      "incrementalDistinctNewOriginals": 4,
-      "incrementalNewCharacters": 80,
-      "newOriginalTextSHA256": [
-        "4c3305438e0a4fdfa7ae8544aae48e6323a9ddb0248a61d04494ef312b21f826",
-        "96e107378d38f95c0157ea11b937536f7d3cf9f7216adc19a557bc1a642b0ec8",
-        "4c7da6824790eb5523bd9917b508c0e12339443228b8d5ce840445946724d32e",
-        "a29a7d6064fd3d6c240fd2aede591446afb47d619b7057007baffb45b2812dbf"
       ],
       "originalQuestionTextChanged": false,
       "maySynthesizeAutomatically": false
@@ -719,10 +718,10 @@
         "9-10": 10
       },
       "selectedQuestionIds": [
+        "kids-quiz-045",
         "kids-quiz-026",
         "kids-quiz-022",
         "kids-quiz-031",
-        "kids-quiz-045",
         "kids-quiz-389",
         "kids-quiz-043",
         "kids-quiz-041",
@@ -740,8 +739,8 @@
         "kids-quiz-047",
         "kids-quiz-037"
       ],
-      "newDistinctOriginals": 71,
-      "newOriginalCharacters": 2171,
+      "newDistinctOriginals": 70,
+      "newOriginalCharacters": 2132,
       "incrementalOriginalTextSha256": [
         "69e960d76c59a506808b0908ef47bc739cf012086feba91e5b271210ebc225c5",
         "3b43d4566de6a39db5785d2c137ecefd989a1a683ed9d85eec94b243f6024a88",
@@ -751,7 +750,6 @@
         "becd22c0112b03fa2cce2b4bee0b0c9c140833304a6551eb4a010ccac14ea6b1",
         "7d942f6f744f02d59b837f6ad98f204a1c75ccb8d97ce5ca0c5849fe953bb1fd",
         "831da8d97e3a9c7dd96e1e94f62d4488f50351b5a080f4b9608806f4168a28cd",
-        "4c3305438e0a4fdfa7ae8544aae48e6323a9ddb0248a61d04494ef312b21f826",
         "1297120edbe3afc43d40257bc1e38f86ee9ab09cbc9dec632df3f82964def014",
         "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
         "708b9bca04007bc28b4548bdf8f1e9c295c352cff409f728ec219416a4c7117e",
@@ -1102,14 +1100,6 @@
       "spokenText": "Allah nennt die belebte Erde als Zeichen.",
       "sha256": "a26e113786f92f981c5d0d7deb7cecc57c0df58dbede3b09c4cae51f83001a65",
       "characterCount": 41,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Allah ordnet das Fasten des Ramaḍān an.",
-      "sha256": "4c3305438e0a4fdfa7ae8544aae48e6323a9ddb0248a61d04494ef312b21f826",
-      "characterCount": 39,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
