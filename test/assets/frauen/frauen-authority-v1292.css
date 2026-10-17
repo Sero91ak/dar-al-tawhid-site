@@ -720,3 +720,16 @@ html[data-theme] body.is-frauen-route{
   overflow-x:clip!important;
   overflow-y:visible!important;
 }
+
+/* DAR_FRAUEN_IOS_SCROLLPORT_SAFE_V1395 · no data-theme dependency.
+   In iOS WKWebView the root receives dar-ios-native-app before data-theme.
+   body overflow-x:hidden computes overflow-y:auto, consuming finger swipes.
+   The Frauen page must scroll on the root, not on its non-overflowing body. */
+html body.is-frauen-route,
+html.dar-ios-native-app body.is-frauen-route,
+html.dar-test-performance-v1 body.is-frauen-route{
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+  touch-action:pan-y!important;
+  overscroll-behavior-y:auto!important;
+}

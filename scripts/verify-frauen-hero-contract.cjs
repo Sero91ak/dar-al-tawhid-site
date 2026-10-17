@@ -27,8 +27,10 @@ for(const variant of ["", "test/"]){
   assert.ok(js.includes("function libraryHero("),"Shared hero renderer missing: "+jsPath);
   assert.match(js,/data-hero-readable=/,"Semantic hero flag missing: "+jsPath);
   assert.ok(js.includes("function pinnedLibraryHead("),"Shared pinned header missing: "+jsPath);
-  assert.ok(js.includes("DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392"),"DOM repair guard absent: "+jsPath);
-  assert.ok(js.includes("new MutationObserver("),"SPAs require DOM observer: "+jsPath);
+  const guard = js.slice(js.indexOf("/* DAR_FRAUEN_HERO_SAFE_EVENTS_V1395"));
+  assert.ok(guard.startsWith("/* DAR_FRAUEN_HERO_SAFE_EVENTS_V1395"),"Safe hero guard missing: "+jsPath);
+  assert.ok(!guard.includes("new MutationObserver(") && !guard.includes("setInterval("),"Unbounded DOM/polling watcher prohibited: "+jsPath);
+  assert.ok(guard.includes("syncScroll(value)") && guard.includes('setProperty("overflow-y","visible","important")'),"Native visitor scrollport must be restored: "+jsPath);
   for(const view of ["renderHub", "renderLibraryGroup", "renderSectionHero"]){
     assert.ok(js.includes("function "+view+"("),"Missing "+view+": "+jsPath);
   }
@@ -37,6 +39,6 @@ for(const variant of ["", "test/"]){
     assert.ok(css.includes(prefix+image),"Hero theme lacks local picture "+variant+image);
   }
 }
-assert.ok(read("cloudflare/test-app-worker.js").includes("frauen-authority-v1292.css?v=frauen-hero-v1390"),"Test shell must bust Frauen CSS cache");
-assert.ok(read("cloudflare/site-router.js").includes("frauen-authority-v1292.css?v=frauen-hero-v1390"),"Visitor/iOS shell must bust Frauen CSS cache");
+assert.ok(read("cloudflare/test-app-worker.js").includes("frauen-authority-v1292.css?v=frauen-scroll-v1395"),"Test shell must bust Frauen CSS cache");
+assert.ok(read("cloudflare/site-router.js").includes("frauen-authority-v1292.css?v=frauen-scroll-v1395"),"Visitor/iOS shell must bust Frauen CSS cache");
 console.log("OK Frauen: hub/group/list heroes and all seven image assets in Test + Besucher.");

@@ -40,6 +40,11 @@ function snapshot(){
     docScroll:doc?.scrollTop,windowY:scrollY,viewport:{w:innerWidth,h:innerHeight},
     hero:pick(hero),stage:pick(stage),heading:pick(heading),
     body:pick(document.body),html:pick(document.documentElement),
+    safeGuardLoaded:!!window.__darFrauenHeroSafeEventsV1395,
+    modalDiagnostics:[...document.querySelectorAll('dialog[open],[role="dialog"][aria-modal="true"]')].slice(0,8).map(e=>({
+      html:e.outerHTML.slice(0,260),rects:e.getClientRects().length,visible:getComputedStyle(e).visibility,
+      display:getComputedStyle(e).display,pointer:getComputedStyle(e).pointerEvents
+    })),
     inlineStyles:{body:document.body?.getAttribute("style"),html:document.documentElement?.getAttribute("style")},
     app:pick(app),shell:pick(shell),ancestors,
     heroHtml:hero?.outerHTML.slice(0,400),
@@ -64,38 +69,80 @@ function snapshot(){
   for(const route of routes){
    const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:route.key==="visitor"?"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS":"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
    const page=await context.newPage();const errors=[];
+   // Test the real release load path: serve changed JS/CSS as stylesheet/script
+   // responses before the page begins loading. No CSP-blocked inline styles
+   // or duplicate hero runtime injection after boot.
+   await page.route("**/assets/frauen/frauen-fiqh.js*",
+     async interception=>{
+       const u=new URL(interception.request().url());
+       const file=(u.pathname.startsWith("/test/")?"test/":"")+"assets/frauen/frauen-fiqh.js";
+       await interception.fulfill({status:200,contentType:"application/javascript; charset=utf-8",
+         body:fs.readFileSync(path.join(process.cwd(),file))});
+     });
+   await page.route("**/assets/frauen/frauen-authority-v1292.css*",
+     async interception=>{
+       const u=new URL(interception.request().url());
+       const file=(u.pathname.startsWith("/test/")?"test/":"")+"assets/frauen/frauen-authority-v1292.css";
+       await interception.fulfill({status:200,contentType:"text/css; charset=utf-8",
+         body:fs.readFileSync(path.join(process.cwd(),file))});
+     });
    page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
    const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
    await page.waitForTimeout(6000);
    let before=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-initial.png")});
-   // Simulate the proposed code on the currently deployed app, before merging.
-   const localScript=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-fiqh.js":"assets/frauen/frauen-fiqh.js"),"utf8");
-   const tag="/* DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392";
-   if(!localScript.includes(tag))throw Error("Repair snippet not in checkout");
-   await page.addScriptTag({content:localScript.slice(localScript.indexOf(tag))});
-   const localCss=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-authority-v1292.css":"assets/frauen/frauen-authority-v1292.css"),"utf8");
-   const cssTag="/* DAR_FRAUEN_HERO_SCROLL_ANCESTOR_V1392";
-   if(!localCss.includes(cssTag))throw Error("Scroll CSS absent in checkout");
-   await page.addStyleTag({content:localCss.slice(localCss.indexOf(cssTag))});
+   // Modified resources were intercepted on initial load, not injected later.
    await page.waitForTimeout(1100);
    let repaired=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
 
+   // Real finger gesture, not a programmatic scrollTop assignment.
+   const cdp=await context.newCDPSession(page);
+   const startX=165,fromY=686,toY=297;
+   await cdp.send("Input.dispatchTouchEvent",{type:"touchStart",touchPoints:[{x:startX,y:fromY}]});
+   for(let step=1;step<=14;step++){
+     await cdp.send("Input.dispatchTouchEvent",{type:"touchMove",touchPoints:[{
+       x:startX,y:Math.round(fromY+(toY-fromY)*step/14)}]});
+     await page.waitForTimeout(21);
+   }
+   await cdp.send("Input.dispatchTouchEvent",{type:"touchEnd",touchPoints:[]});
+   await page.waitForTimeout(650);
+   let afterTouch=await page.evaluate(snapshot);
+   // Cross-check whether the browser actually exposes a scrolling root:
+   // CDP touch synthesis may not scroll under a spoofed WebKit user-agent.
    await page.mouse.wheel(0,560);
-   await page.waitForTimeout(330);
-   await page.waitForTimeout(450);
+   await page.waitForTimeout(300);
    let after=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-after-scroll.png")});
-   all.push({key:route.key,status:response.status(),before,repaired,after,errors});
+   all.push({key:route.key,status:response.status(),before,repaired,afterTouch,after,errors});
    console.log(JSON.stringify({route:route.key,status:response.status(),
     before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles,shellChildren:before.shellChildren,renderer:before.renderer},
-    repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer,body:repaired.body,html:repaired.html,inline:repaired.inlineStyles,ancestors:repaired.ancestors.map(x=>({cls:x.classes,overflowX:x.overflowX,overflowY:x.overflowY}))},after:{scroll:after.docScroll,body:after.body,hero:after.hero,stage:after.stage,heading:after.heading,ancestors:after.ancestors.map(x=>({cls:x.classes,overflowY:x.overflowY}))},errors}));
+    repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer,body:repaired.body,html:repaired.html,inline:repaired.inlineStyles,guard:repaired.safeGuardLoaded,modals:repaired.modalDiagnostics,ancestors:repaired.ancestors.map(x=>({cls:x.classes,overflowX:x.overflowX,overflowY:x.overflowY}))},after:{scroll:after.docScroll,touchScroll:afterTouch.docScroll,body:after.body,hero:after.hero,stage:after.stage,heading:after.heading,ancestors:after.ancestors.map(x=>({cls:x.classes,overflowY:x.overflowY}))},errors}));
    if(before.app&&(!repaired.hero||repaired.hero.height<180||repaired.hero.bottom<100)){
      issues.push(route.key+" upper hero missing from first viewport");
    }
    if(before.app&&after.stage&&after.stage.bottom<100)issues.push(route.key+" stage scrolls off-screen");
-   if(before.app&&before.app.scrollHeight>before.app.clientHeight+200&&after.docScroll<100)issues.push(route.key+" content cannot scroll normally");
+   if(before.app && after.docScroll<70)
+     issues.push(route.key+" document cannot scroll after touch + wheel, scroll="+after.docScroll);
+   if(before.app && afterTouch.docScroll<70)
+     console.warn("TOUCH_DRIVER_WARNING",route.key,"CDP touch scroll was zero; wheel cross-check",after.docScroll);
+   if(before.app && repaired.body && (repaired.body.overflowX!=="clip"||repaired.body.overflowY!=="visible"))
+     issues.push(route.key+" body creates inactive scrollport: "+repaired.body.overflowX+"/"+repaired.body.overflowY);
+   if(before.app && (!after.stage || after.stage.bottom<100))
+     issues.push(route.key+" sticky hero disappears after touch swipe");
+   // Leaving the Frauen route must preserve functional navigation.
+   if(route.key==="visitor"){
+     const nav=page.locator("#bottomNav .bottom-nav-btn").first();
+     if(await nav.count()){
+       await nav.click({timeout:7000});
+       await page.waitForTimeout(500);
+       const next=await page.evaluate(()=>({hash:location.hash,body:document.body.className,
+          overflowX:document.body.style.getPropertyValue("overflow-x"),
+          overflowY:document.body.style.getPropertyValue("overflow-y")}));
+       console.log("NAVIGATION_RECOVERY",JSON.stringify(next));
+       if(next.body.includes("is-frauen-route")&&next.hash!=="#frauen")issues.push("visitor Frauen route still active after bottom navigation");
+     }
+   }
    await context.close();
   }
  }catch(e){issues.push(String(e.stack||e));console.error(e);}

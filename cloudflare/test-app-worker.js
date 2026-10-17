@@ -301,7 +301,7 @@ async function finalizeDarTestHomeV1193(asset) {
       '@import url("/test/assets/jummah-v1258.css?v=area-authority-v1300");' +
       '@import url("/test/assets/qibla-v1259.css?v=area-authority-v1300");' +
       '@import url("/test/assets/prayer-v1254.css?v=20261016-motifs-v5");' +
-      '@import url("/test/assets/frauen/frauen-authority-v1292.css?v=frauen-hero-v1390");' +
+      '@import url("/test/assets/frauen/frauen-authority-v1292.css?v=frauen-scroll-v1395");' +
       '@import url("/test/assets/library/library-app.css?v=library-base-v1293");' +
       '@import url("/test/assets/library/library-authority-v1293.css?v=library-authority-v1293");' +
       '@import url("/test/assets/area-shell-v1294.css?v=area-shell-v1314-settings-edge");' +
@@ -494,7 +494,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // DAR_FRAUEN_HERO_DOM_RUNTIME_V1394: repair cache-key only.
   // The script already exists in the Test shell; never duplicate it.
   html = html.replace(/(\/test\/assets\/frauen\/frauen-fiqh\.js)(?:\?v=[^"'<\s]*)?/g,
-    "$1?v=frauen-hero-dom-v1392");
+    "$1?v=frauen-scroll-v1395");
 
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
