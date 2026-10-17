@@ -31,6 +31,9 @@ STATE=ROOT/"kids/data/quiz-v4-paid-flow-import-status.json"
 ORIGINALS=ROOT/"kids/data/quiz-v4-missing9-prepaid-originals.json"
 REPORT=ROOT/"kids/review-only/quiz-v4-nine-originals-github-archive-recovery.json"
 NAMES=(
+    # Prioritize unique original-asset backups ahead of repetitive GET reports.
+    "tawhid-kids-recovered-previously-paid-v4-originals-review",
+    "kids-v4-prepaid-nine-github-archives-safe-restore",
     "kids-nine-paid-v4-original-free-get-recovery",
     "paid-v4-flow-originals-free-recovery-backup",
     "tawhid-kids-v4-prepaid-flow-original-restoration",
@@ -39,8 +42,8 @@ NAMES=(
     "tawhid-kids-v4-older-stage1-exact-prepaid-safekeeping",
 )
 MAX_PAGES_PER_NAME=3
-MAX_ARTIFACTS_DOWNLOADED=40
-MAX_BYTES_DOWNLOADED=220_000_000
+MAX_ARTIFACTS_DOWNLOADED=48
+MAX_BYTES_DOWNLOADED=300_000_000
 MAX_ARCHIVE_BYTES=16_000_000
 MAX_INDIVIDUAL_MP3_BYTES=6_000_000
 
@@ -106,7 +109,7 @@ def mp3_candidates(raw,missing):
                    not entry.filename.startswith("\\"),
                    "unsafe ZIP member name")
             stem=Path(entry.filename).name
-            match=re.fullmatch(r"([A-Za-z0-9]{20})\.mp3",stem,re.I)
+            match=re.fullmatch(r"([A-Za-z0-9]{20})(?:[-_][A-Za-z0-9_-]{1,70})?\.mp3",stem,re.I)
             if not match or match.group(1) not in missing:continue
             gid=match.group(1)
             strict(1800<=entry.file_size<=MAX_INDIVIDUAL_MP3_BYTES,
