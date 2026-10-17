@@ -5,10 +5,10 @@
   "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "selectedQuestions": 450,
   "previouslyPaidMissingFlowOriginals": 9,
-  "alreadySavedDistinctV4TextClips": 374,
-  "uniqueTrulyNewTextFragments": 1392,
-  "trulyNewTextCodepoints": 65057,
-  "newTextCodepointsBeforeCrossAgeDedup": 66594,
+  "alreadySavedDistinctV4TextClips": 384,
+  "uniqueTrulyNewTextFragments": 1382,
+  "trulyNewTextCodepoints": 64816,
+  "newTextCodepointsBeforeCrossAgeDedup": 66353,
   "codepointsSavedByCrossAgeReuse": 1537,
   "crossAgeSharedNewTextFragments": 30,
   "byAge": {
@@ -38,9 +38,9 @@
     },
     "7-8": {
       "question": {
-        "uniqueNewSegments": 563,
-        "newTextCodepoints": 19824,
-        "newTextAssignments": 569
+        "uniqueNewSegments": 560,
+        "newTextCodepoints": 19767,
+        "newTextAssignments": 566
       },
       "correct": {
         "uniqueNewSegments": 0,
@@ -53,18 +53,18 @@
         "newTextAssignments": 0
       },
       "explanation": {
-        "uniqueNewSegments": 136,
-        "newTextCodepoints": 9457,
-        "newTextAssignments": 136
+        "uniqueNewSegments": 135,
+        "newTextCodepoints": 9427,
+        "newTextAssignments": 135
       },
-      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 699,
-      "newCodepointsWithoutCrossAgeDedupe": 29281
+      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 695,
+      "newCodepointsWithoutCrossAgeDedupe": 29194
     },
     "9-10": {
       "question": {
-        "uniqueNewSegments": 583,
-        "newTextCodepoints": 25834,
-        "newTextAssignments": 587
+        "uniqueNewSegments": 577,
+        "newTextCodepoints": 25680,
+        "newTextAssignments": 580
       },
       "correct": {
         "uniqueNewSegments": 0,
@@ -81,8 +81,8 @@
         "newTextCodepoints": 11479,
         "newTextAssignments": 140
       },
-      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 723,
-      "newCodepointsWithoutCrossAgeDedupe": 37313
+      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 717,
+      "newCodepointsWithoutCrossAgeDedupe": 37159
     }
   },
   "newSpeechNeededForAge4to6": false,
@@ -90,8 +90,8 @@
   "originalForecastNotAnInvoice": true,
   "earlierAspirationalBudgetCredits": 27860.0,
   "currentEstimateOverTargetCredits": 51215.79,
-  "derivedForecastCreditsPerNewCodepoint": 1.215485,
-  "approxCodepointCeilingToHitBudgetAtUnchangedForecastRate": 22920,
+  "derivedForecastCreditsPerNewCodepoint": 1.220004,
+  "approxCodepointCeilingToHitBudgetAtUnchangedForecastRate": 22835,
   "approxTextReductionPercentageNeededAtSameRate": 64.8,
   "creditForecastMustBeRecheckedAgainstProviderBilling": true,
   "candidateTextEditsAuthorized": false,
