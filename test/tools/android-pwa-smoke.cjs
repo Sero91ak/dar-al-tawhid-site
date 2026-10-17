@@ -70,6 +70,58 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   }
   await tapTest(qidx,"quran");
   await tapTest(pidx,"posts");
+  // DAR_ADULT_RESPONSIVE_SIX_WIDTH_VISUAL_QA_V1383: real rendered DOM
+  // in Android/touch Chromium. Keep this isolated to adult Dar Test.
+  findings.responsive=[];
+  const widths=[375,390,430,768,1024,1440];
+  const matrix=widths.map(width=>({width,height:width<600?844:width<1100?1024:900}));
+  matrix.push({width:844,height:390},{width:1024,height:768});
+  for(const {width,height} of matrix){
+    await page.setViewportSize({width,height});
+    await page.waitForTimeout(460);
+    const geometry=await page.evaluate(()=>{
+      const doc=document.documentElement;
+      const vw=window.innerWidth;
+      const measure=(element)=>{
+        if(!element)return null;
+        const rect=element.getBoundingClientRect();
+        return {left:Math.round(rect.left*10)/10,right:Math.round(rect.right*10)/10,
+          width:Math.round(rect.width*10)/10,top:Math.round(rect.top*10)/10,
+          height:Math.round(rect.height*10)/10};
+      };
+      const app=document.querySelector("body.has-bottom-nav > .app");
+      const stage=document.querySelector("#appView.view");
+      const hero=document.querySelector("body.is-topics-route #appView .topics-hub > .view-head");
+      const search=document.querySelector("body.is-topics-route #appView .topics-hub > :is(.search-pro-panel,.search-panel,#homeSearchBlock)");
+      const label=document.querySelector("body.is-topics-route #appView .topics-hub > .topics-hub__label");
+      const heroBg=hero?getComputedStyle(hero):null;
+      const appRect=measure(app),heroRect=measure(hero),searchRect=measure(search),labelRect=measure(label);
+      const centerDelta=(rect)=>rect?Math.round((rect.left-(vw-rect.right))*10)/10:null;
+      return {vw,scrollWidth:doc.scrollWidth,bodyScrollWidth:document.body.scrollWidth,
+        app:appRect,stage:measure(stage),hero:heroRect,search:searchRect,label:labelRect,
+        heroCenterDelta:centerDelta(heroRect),searchCenterDelta:centerDelta(searchRect),
+        labelCenterDelta:centerDelta(labelRect),
+        heroBackgroundImage:heroBg?.backgroundImage.slice(0,120)||"",
+        heroBackgroundSize:heroBg?.backgroundSize||"",
+        route:document.body.className};
+    });
+    const errors=[];
+    if(Math.abs(geometry.vw-width)>2)errors.push("unexpected viewport "+geometry.vw+" vs "+width);
+    if(!geometry.hero)errors.push("missing topics CSS hero");
+    if(geometry.hero && Math.abs(geometry.heroCenterDelta)>3)errors.push("hero asymmetric "+geometry.heroCenterDelta+"px");
+    if(geometry.hero && geometry.hero.width>geometry.vw+2)errors.push("hero wider than viewport");
+    if(!/cover/.test(geometry.heroBackgroundSize))errors.push("hero background not cover");
+    if(geometry.search&&Math.abs(geometry.searchCenterDelta)>3)errors.push("search asymmetric "+geometry.searchCenterDelta+"px");
+    if(geometry.label&&Math.abs(geometry.labelCenterDelta)>3)errors.push("topics label asymmetric "+geometry.labelCenterDelta+"px");
+    if(geometry.scrollWidth>geometry.vw+2)errors.push("document horizontal overflow "+geometry.scrollWidth+"px");
+    if(geometry.bodyScrollWidth>geometry.vw+2)errors.push("body horizontal overflow "+geometry.bodyScrollWidth+"px");
+    const entry={viewport:{width,height},geometry,errors};
+    findings.responsive.push(entry);
+    const capture="responsive-"+width+"x"+height;
+    await page.screenshot({path:path.join(out,capture+".png"),fullPage:false});
+    console.log("Responsive "+capture+": "+(errors.length?"FAIL "+errors.join("; "):"PASS"));
+    if(errors.length)throw Error("Responsive geometry "+capture+": "+errors.join("; "));
+  }
   await page.setViewportSize({width:915,height:412});
   await page.waitForTimeout(1400);
   await snapshot("landscape");

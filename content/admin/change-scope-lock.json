@@ -8041,6 +8041,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "adult-test-six-breakpoint-rendered-qa-v1383-20261017",
+      "at": "2026-10-17T09:51:36.039Z",
+      "approvedBy": "user-explicit-375-390-430-768-1024-1440-orientation-safe-area-qa-20261017",
+      "reason": "Add real Playwright geometry and screenshot evidence to existing isolated adult Test Android/PWA browser QA; no Kids/visitor/Push change.",
+      "paths": [
+        "test/tools/android-pwa-smoke.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
