@@ -8364,6 +8364,25 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-24T23:59:00.000Z"
+    },
+    {
+      "id": "hero-scroll-standard-v1-20261017",
+      "at": "2026-10-17T20:45:00.000Z",
+      "approvedBy": "user-explicit-global-hero-scroll-master-standard-v1",
+      "reason": "Adult hero and scroll contract for new areas. Does not restyle the restored Frauen hero.",
+      "paths": [
+        "assets/dar-hero-scroll-standard-v1.css",
+        "index.html",
+        "test/index.html",
+        "version.json",
+        "service-worker.js",
+        "AGENTS.md",
+        "scripts/hero-scroll-standard-guard.js",
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/app-health-check.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
     }
   ],
   "enabled": true

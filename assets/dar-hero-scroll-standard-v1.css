@@ -1,0 +1,90 @@
+/* DĀR AL TAWḤĪD · GLOBAL HERO & SCROLL MASTER STANDARD V1.0
+   Applies only to blocks that opt in with data-hero-kind.
+   The restored Frauen hero and every older page keep their own rules.
+   Exceptions, not this contract: Qurʾān reader, video fullscreen, modals, learn views. */
+[data-hero-kind]{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  box-sizing:border-box;
+}
+[data-hero-kind] .dar-hero-stage{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  margin:0;
+  background:var(--bg);
+}
+[data-hero-kind][data-hero-scroll="normal"] .dar-hero-stage{
+  position:relative;
+}
+[data-hero-kind][data-hero-scroll="sticky"] .dar-hero-stage{
+  position:sticky;
+  top:0;
+  z-index:40;
+  background:var(--bg);
+}
+[data-hero-kind] .dar-hero{
+  position:relative;
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  margin:0;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  overflow:clip;
+  box-sizing:border-box;
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:var(--dar-hero-focus,center center);
+  isolation:isolate;
+}
+[data-hero-kind="landing"] .dar-hero{
+  min-height:clamp(280px,52svh,640px);
+}
+[data-hero-kind="category"] .dar-hero{
+  min-height:clamp(220px,32svh,330px);
+}
+[data-hero-kind="post"] .dar-hero{
+  min-height:clamp(200px,28svh,300px);
+  height:auto;
+}
+[data-hero-kind] .dar-hero::before,
+[data-hero-kind] .dar-hero::after{
+  pointer-events:none;
+}
+[data-hero-kind] .dar-hero-content,
+[data-hero-kind] .dar-hero-search{
+  position:relative;
+  z-index:1;
+  box-sizing:border-box;
+  width:min(920px,100%);
+  margin-inline:auto;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+[data-hero-kind] .dar-hero-search{
+  padding-bottom:12px;
+}
+[data-hero-kind] .dar-page-content{
+  box-sizing:border-box;
+  width:100%;
+  min-width:0;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-bottom:calc(96px + env(safe-area-inset-bottom,0px));
+}
+@media(max-width:440px){
+  [data-hero-kind="category"] .dar-hero{min-height:clamp(220px,34svh,330px)}
+  [data-hero-kind="post"] .dar-hero{min-height:clamp(200px,30svh,300px)}
+}
+@media(min-width:768px){
+  [data-hero-kind="category"] .dar-hero{min-height:clamp(260px,28svh,380px)}
+  [data-hero-kind="post"] .dar-hero{min-height:clamp(220px,24svh,320px)}
+}
+@media(max-height:540px) and (orientation:landscape){
+  [data-hero-kind="landing"] .dar-hero{min-height:clamp(180px,58svh,320px)}
+  [data-hero-kind="category"] .dar-hero,
+  [data-hero-kind="post"] .dar-hero{min-height:clamp(160px,46svh,240px)}
+}

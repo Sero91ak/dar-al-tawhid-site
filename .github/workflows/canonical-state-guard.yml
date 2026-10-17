@@ -101,6 +101,9 @@ jobs:
           INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
         run: node scripts/repo-integrity-guard.js
 
+      - name: Hero scroll standard (drei Typen, Frauen unangetastet)
+        run: node scripts/hero-scroll-standard-guard.js
+
       - name: Push system guard (Worker Cron + API + App-Sync)
         run: node scripts/push-system-guard.js
 

@@ -194,3 +194,15 @@ Diese Regel ersetzt alle früheren Regeln zu sichtbaren Quellenlinks in veröffe
 ## GLOBAL HERO BACKGROUND AUTHORITY
 
 Hero-Bilder der Erwachsenen-App sind der vollflächige Hintergrund ihres Bereichs. Sie nutzen die Breite von `#appView`, mit `background-size:cover` und ohne seitlichen Leerstreifen. Kein `width:100vw` und kein negativer Ausgleichsrand in verschachtelten Containern. Der Bildbereich bleibt ohne Kartenrand und ohne Schatten; Überschrift und nachfolgender Lesetext behalten ihren eigenen Innenabstand. Jedes neue Hero-Motiv übernimmt diese Einbettung. Motiv, Höhe, Typografie und Farbwelt des Bereichs bleiben eigen.
+
+## GLOBAL HERO & SCROLL MASTER STANDARD V1.0
+
+Neue Hero-Bereiche der Erwachsenen-App verwenden nur diesen Vertrag und keine eigene Breiten- oder Scroll-Architektur:
+
+* `dar-hero-stage`, `dar-hero`, `dar-hero-content`, `dar-hero-search`, `dar-page-content`
+* `data-hero-kind="landing|category|post"`
+* `data-hero-scroll="normal|sticky"`
+
+Typ A (`landing`) ist die große Fläche, etwa die Hälfte der nutzbaren Höhe. Typ B (`category`) liegt auf dem Smartphone etwa bei 220–330 px. Typ C (`post`) bleibt kompakt, etwa 200–300 px, und wächst mit der Überschrift, statt Text abzuschneiden. Das Motiv ist eine CSS-Hintergrundfläche mit `background-size:cover`. Der Text hält die Safe Area. Sticky gilt nur, wenn Suche am Hero bleibt; der Seiten-Scroll bleibt einer. `overflow` auf einem Vorfahren darf diesen Sticky-Hero nicht in einen zweiten Scroll-Container sperren.
+
+Der wiederhergestellte Frauen-Hero wird von diesem Vertrag nicht überschrieben. Ältere Seiten werden einzeln umgestellt. Ausnahmen ohne diesen Vertrag: Qurʾān-Leseseite, Video-Vollbild, Modals und spezielle Lernansichten. Prüfung: `node scripts/hero-scroll-standard-guard.js`.
