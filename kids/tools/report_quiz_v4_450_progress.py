@@ -5,6 +5,7 @@ Separately reports selected QUESTIONS versus real ORIGINAL MP3 clips, and
 does not mistake a generated audio fragment for a fully playable question.
 """
 import json
+import hashlib
 from collections import Counter
 from pathlib import Path
 
@@ -22,16 +23,61 @@ def load(path):
     if not path.exists():return {}
     return json.loads(path.read_text(encoding="utf-8"))
 
+def validated_audio_registry(registry):
+    """Fail closed before crediting any original MP3 as available.
+
+    Registry metadata alone is insufficient: the on-disk bytes, SHA-256,
+    location, ownership and exact spoken-text identity must still agree.
+    This function never calls ElevenLabs, changes audio, or grants hearing approval.
+    """
+    audio_root=(ROOT/"kids/assets/kids-quiz-audio").resolve()
+    validated={}
+    for collection in ("textClips","generationClips"):
+        original=registry.get(collection) or {}
+        checked={}
+        for identity,row in original.items():
+            if row.get("voiceId")!="DkU7j9uO4ZEtLD2iRZSH" or row.get("modelId")!="eleven_v4":
+                raise RuntimeError(f"Unapproved voice/model for {collection} {identity}")
+            url=row.get("url")
+            if not isinstance(url,str) or not url.startswith("/kids/assets/kids-quiz-audio/") or not url.endswith(".mp3") or "?" in url:
+                raise RuntimeError(f"Invalid private original URL in {collection} {identity}")
+            target=(ROOT/url.lstrip("/")).resolve()
+            if not target.is_relative_to(audio_root) or not target.is_file():
+                raise RuntimeError(f"Missing/unsafe original MP3 for {collection} {identity}")
+            sha=hashlib.sha256()
+            size=0
+            header=b""
+            with target.open("rb") as mp3:
+                for chunk in iter(lambda:mp3.read(1024*1024),b""):
+                    if not header:header=chunk[:3]
+                    size+=len(chunk)
+                    sha.update(chunk)
+            if (size<1500 or size!=row.get("bytes") or
+                    sha.hexdigest()!=row.get("sha256") or
+                    not (header.startswith(b"ID3") or header[:1]==b"\\xff")):
+                raise RuntimeError(f"Corrupt or unverified original MP3 for {collection} {identity}")
+            if collection=="textClips":
+                if hashlib.sha256(identity.encode("utf-8")).hexdigest()!=row.get("textSha256"):
+                    raise RuntimeError(f"Spoken-text SHA changed for {identity}")
+            elif row.get("originalGenerationId")!=identity:
+                raise RuntimeError(f"Paid Flow generation identity changed for {identity}")
+            checked[identity]=row
+        validated[collection]=checked
+    return validated
+
+
 def main():
     planned=load(PLANNED);sel=load(SELECTED).get("items") or []
     res=load(RESERVED).get("items") or []
     reg=load(REGISTRY);led=load(LEDGER);qa=load(QA)
     if len(sel)!=450 or len(res)!=450 or len(planned.get("recipes") or [])!=450:
         raise RuntimeError("Curated 450+450 locked catalog is missing")
-    clips=reg.get("textClips") or {}
+    # Verify every physical original, not just a registry entry or a previous QA flag.
+    verified=validated_audio_registry(reg)
+    clips=verified["textClips"]
     good={t for t,v in clips.items() if v.get("audioListeningApproved") is True}
     available=set(clips)
-    paid_gen=reg.get("generationClips") or {}
+    paid_gen=verified["generationClips"]
     def available_slot(row,kind,human=False):
         x=row[kind]
         if x["mode"]=="existing-paid-exact":
