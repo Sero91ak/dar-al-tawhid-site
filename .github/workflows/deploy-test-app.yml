@@ -269,6 +269,7 @@ jobs:
           node kids/tools/test-creator-worker-v2.cjs
           node kids/tools/test-creator-splash-v1.cjs
           node kids/tools/test-native-creator-v2.cjs
+          node kids/quran-lernen/check-learning-v1.cjs
           node kids/tools/test-v2-salaf-pilot.cjs
           node kids/tools/test-v2-prophets-pilot.cjs
           node kids/tools/test-v2-profile-parity.cjs
