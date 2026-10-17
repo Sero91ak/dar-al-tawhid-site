@@ -15,6 +15,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 STAGE=ROOT/".github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json"
 NEXT=ROOT/"kids/review-only/quiz-v4-older-stage1-next-recording-batch.json"
+REGISTRY=ROOT/"kids/data/quiz-v4-450-original-clip-registry.json"
 OUT=ROOT/".github/reports/kids-v4-older-stage1-source-and-answer-audit.json"
 MD=ROOT/".github/reports/KIDS-V4-STAGE1-QUELLEN-UND-ANTWORTCHECK.md"
 MODEL="eleven_v4"
@@ -112,9 +113,28 @@ def main():
              and item["explicitRecordingAuthorization"] is False,
              "unapproved stage1 speech/voice")
         by_sha[digest]=item
+    registry=read(REGISTRY)
+    must(registry.get("modelId")==MODEL and registry.get("voiceId")==VOICE
+         and registry.get("live") is False, "not a private correct-V4 original registry")
+    saved=registry.get("textClips")
+    must(isinstance(saved,dict),"original MP3 mapping missing")
+    completed_text_sha=set()
+    for digest,item in by_sha.items():
+        already=saved.get(item["spokenText"])
+        if already is not None:
+            must(already.get("textSha256")==digest and
+                 already.get("modelId")==MODEL and already.get("voiceId")==VOICE
+                 and bool(already.get("sha256")),
+                 "already paid stage1 MP3 has a different SHA, voice or text")
+            completed_text_sha.add(digest)
+    pending_source=set(by_sha)-completed_text_sha
     next_hashes=next_run["nextExactTextSha256"]
-    must(len(next_hashes)==len(set(next_hashes))==10 and
-         set(next_hashes)<=set(by_sha),"next ten are not exactly source-authentic")
+    must(0<=len(next_hashes)<=10 and len(set(next_hashes))==len(next_hashes)
+         and set(next_hashes)<=pending_source,
+         "next proposed V4 originals are duplicated, recorded or wrong source")
+    must(next_run.get("remainingFirstStageOriginals")==len(pending_source)
+         and next_run.get("previouslyRecordedFirstStageOriginals")==len(completed_text_sha),
+         "stage1 batch plan is stale relative to actual saved V4 originals")
     records=[]
     for q in stage["questions"]:
         qid=q["questionId"]
@@ -167,7 +187,8 @@ def main():
             "answers":answers,
             "spokenTextAnswerOrderMatches":True,"questionAndExplanationUnchanged":True,
             "missingNewOriginalTextSHA256":sorted(q_shas),
-            "firstRunNeedsNewTextSHA256":sorted(q_shas&set(next_hashes)),
+            "remainingNewOriginalTextSHA256":sorted(q_shas&pending_source),
+            "nextRunNeedsNewTextSHA256":sorted(q_shas&set(next_hashes)),
             "externalEvidenceLocated":qid in EVIDENCE,
             "externalEvidencePrivateReference":EVIDENCE[qid]["url"] if qid in EVIDENCE else None,
             "externalReferenceMatchNote":EVIDENCE[qid]["assessment"] if qid in EVIDENCE else None,
@@ -180,7 +201,8 @@ def main():
     missing_used=set().union(*(set(x["missingNewOriginalTextSHA256"]) for x in records))
     must(missing_used==set(by_sha),"not all 65 proposed sources used by stage1 questions")
     may_complete=sorted(x["questionId"] for x in records
-                        if set(x["missingNewOriginalTextSHA256"])<=set(next_hashes))
+                        if set(x["remainingNewOriginalTextSHA256"]) and
+                        set(x["remainingNewOriginalTextSHA256"])<=set(next_hashes))
     must(may_complete==sorted(next_run["questionsThatCouldGainCompleteV4AudioAfterNextRun"]),
          "first-ten proposed question completions inconsistent")
     report={
@@ -193,7 +215,10 @@ def main():
         "independentExternalEvidenceLocatedFor":len(EVIDENCE),
         "externalEvidenceDoesNotEstablishCompleteSourceApproval":True,
         "sourceContextsNeedingExtraCare":sorted(CAVEATS),
-        "exactNewSourceTexts":65,"firstProposedNewV4Texts":10,
+        "exactNewSourceTexts":65,"previouslyRecordedFirstStageOriginals":len(completed_text_sha),
+        "remainingNewSourceTexts":len(pending_source),
+        "nextProposedV4OriginalCount":len(next_hashes),
+        "firstProposedNewV4Texts":len(next_hashes),
         "fourPossibleQuestionCompletionsAfterActualAudioAndQA":may_complete,
         "humanSourceApprovalGranted":False,
         "humanPronunciationApprovalGranted":False,
@@ -209,7 +234,8 @@ def main():
         "",
         "- 20 unveränderte Quizfragen, 10 für 7–8 Jahre und 10 für 9–10 Jahre.",
         "- 65 überprüfte exakte Text-SHA-256-Verweise der originalen Produktionsliste.",
-        "- 10 priorisierte V4-Takes könnten bei echter Erzeugung und technischer Prüfung 4 Quizfragen schließen: "+", ".join(may_complete)+".",
+        "- "+str(len(completed_text_sha))+" V4-Originale aus der ersten Stufe sind im Registry registriert; "+str(len(pending_source))+" fehlen noch.",
+        "- "+str(len(next_hashes))+" priorisierte V4-Takes könnten nach echter Erzeugung und technischer Prüfung "+str(len(may_complete))+" weitere Quizfragen schließen: "+(", ".join(may_complete) if may_complete else "keine")+".",
         "- Für "+str(len(EVIDENCE))+" Fragen wurden zusätzliche passende Online-Belegstellen lokalisiert; **nicht** als vollständige wissenschaftliche Freigabe zu behandeln.",
         "- Originale Quellen stehen nur im internen Review. **Keine Webseiten-Links in der Kinder-App anzeigen.**",
         "",
