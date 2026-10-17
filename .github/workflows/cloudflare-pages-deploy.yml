@@ -477,6 +477,7 @@ jobs:
             node scripts/kids-prophet-release-guard.js
             node scripts/kids-dua-trilingual-guard.js
             node kids/tools/test-deen-lessons-regression.cjs
+            node kids/tools/test-deen-visitor-rollout.cjs
             node kids/tools/test-girls-firstpaint-v1348.cjs
             node kids/tools/test-academy-sequential-lock-v27.cjs
           else
