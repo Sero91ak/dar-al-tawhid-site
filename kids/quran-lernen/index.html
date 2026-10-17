@@ -4,6 +4,15 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0a2837"><meta name="robots" content="noindex,nofollow">
 <title>Qurʾān lernen · DĀR AL TAWḤĪD KIDS TEST</title>
+<script id="ql-profile-first-paint">(function(){
+ try{
+  var active=localStorage.getItem("kids.activeProfile");
+  var profiles=JSON.parse(localStorage.getItem("kids.profiles.v1")||"[]");
+  var p=Array.isArray(profiles)?profiles.find(function(x){return x&&String(x.id)===String(active)}):null;
+  var gender=p?p.gender:localStorage.getItem("kids.guest.gender.v1");
+  document.documentElement.dataset.gender=gender==="girl"?"girl":"boy";
+ }catch(e){document.documentElement.dataset.gender="boy"}
+})();</script>
 <link rel="stylesheet" href="/kids/quran-lernen/styles.css?v=3">
 <script src="/kids/quran-lernen/app.js?v=3" defer></script>
 </head>
@@ -90,7 +99,7 @@
         <div class="ql-stage-callout"><span class="ql-big-icon" aria-hidden="true">✧</span><div><h2>Was bedeutet die Āyah?</h2><p>Wir schauen uns die deutsche Bedeutung zusammen an.</p></div></div>
         <p id="ql-german" class="ql-german"></p>
         <div class="ql-meaning-group"><p id="ql-meaning"></p><small id="ql-meaning-note" class="ql-source">Die Verserklärung wird geprüft.</small></div>
-        <div class="ql-narration"><span class="ql-narration-mark">MASTER</span><div><strong>Erklärung mit deiner Masterstimme</strong><small>Die deutsche Tafsīr-Aufnahme wird nach Quellenprüfung ergänzt.</small></div><button type="button" disabled>Audio folgt</button></div>
+        <div class="ql-narration"><span class="ql-narration-mark">MASTER</span><div><strong>Erklärung mit Serhats Masterstimme</strong><small>Die deutsche Tafsīr-Aufnahme wird nach Quellenprüfung ergänzt.</small></div><button type="button" disabled>Audio folgt</button></div>
         <details class="ql-sabab"><summary>Warum wurde die Āyah herabgesandt?</summary><p>Offenbarungsanlass: Ein besonderer Anlass wird nur gezeigt, wenn er zuverlässig belegt ist. Ansonsten erklären wir die Bedeutung und Lehre der Āyah.</p></details>
         <button type="button" id="ql-understood" class="ql-primary-action">✓ Bedeutung verstanden</button>
       </section>
@@ -105,7 +114,7 @@
     <span class="ql-divider-point" aria-hidden="true">◆</span>
     <button type="button" id="ql-next">Nächste Āyah ›</button>
   </div>
-  <div class="ql-completion" id="ql-completion"><span id="ql-days-progress">Übungstage: 0 von 3</span><p id="ql-checklist">Höre, sprich nach und verstehe jeden Vers.</p><button type="button" id="ql-secure" disabled>Sūra als sicher gelernt bestätigen</button></div>
+  <div class="ql-completion" id="ql-completion" hidden><span id="ql-days-progress">Übungstage: 0 von 3</span><p id="ql-checklist">Höre, sprich nach und verstehe jeden Vers.</p><button type="button" id="ql-secure" disabled>Sūra als sicher gelernt bestätigen</button></div>
 </section>
 </main>
 <footer class="ql-footer">DĀR AL TAWḤĪD KIDS · Nur KIDS TEST · Lernakademie und Arbeitsheft bleiben getrennt.</footer>
