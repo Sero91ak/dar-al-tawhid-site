@@ -312,6 +312,8 @@ def main():
         "Nur nach wirklicher inhaltlicher und finanzieller Freigabe neue V4-Stimmenaufnahmen erzeugen, nie die Original-MP3s überschreiben.",
         "Aktuelle zusätzliche Schutzregel: Der V4-Quellenprüfer muss auch nach bereits gespeicherten Teil-Batches mit 55, 45 usw. fehlenden Originalen erneut bestehen. Die kostenpflichtige Stufe berechnet dafür jedes Mal einen SHA-256-Fingerabdruck aus Originalquelle, gespeicherten MP3-Zuordnungen, vorherigen Kostenbelegen und den nächsten genauen Sprechtext-SHAs.",
         "Nur wenn der ausdrücklich bestätigte Batch-Fingerabdruck exakt zur neu geprüften Quelle und zum aktuellen Ledger passt, darf der Produktionscode überhaupt eine Anfrage an ElevenLabs senden. Bei Abweichung: STOP vor Provider-GET oder TTS-POST; keine stillschweigende Kreditfreigabe.",
+        "Zusätzliche Absicherung: unmittelbar VOR jedem potenziell kostenpflichtigen POST schreibt der Generator einen als UNBESTÄTIGT markierten SHA-/Batch-Eintrag in `kids/data/quiz-v4-older-stage1-request-journal.json` und spiegelt ihn in `kids/data/quiz-v4-older-stage1-usage.json`. Die Usage-Datei ist bereits Teil des GitHub-Actions-Backups mit `if: always()`. Nach erhaltenen originalen MP3-Bytes werden Ledger und Originalregister atomar gespeichert; eine unsichere frühere Abrechnung oder unterbrochene Anfrage verbietet jede erneute Generierung derselben Sprachaufnahme, bis die Originaldatei/Provider-Abbuchung geklärt wurde.",
+
         "Aktuell im Reviewprotokoll vorhandener Fingerabdruck: `"+(str(details["olderStage1NextExactBatchFingerprintSHA256"]) if stage1_report else "nach letztem Null-Credit-Audit erzeugen")+"`. Nach jeder MP3-Ergänzung erneut berechnen.",
 
         "",
