@@ -5217,4 +5217,65 @@ html body #lessonMain #answer{
 </script>
 <link rel="stylesheet" href="/kids/akademie/girl-profile-authority-v1430.css?v=1430" data-kids-academy-girl-authority="1430">
 
+<style id="kids-academy-edge-scroll-v1445">
+/* KIDS_ACADEMY_EDGE_SCROLL_V1445
+   The academy and every lesson occupy the full device width. Inside the
+   lesson, ONLY #stageSurface owns reading scroll; it now extends BEHIND the
+   original fixed five-tab dock. Its actual scroll end clears that dock.
+   Existing buttons, focus tracker, audio, text/voice editor, keyboard
+   postMessage flow and DOM order are deliberately untouched. */
+html body[data-kids-portal="true"] > main.wrap{
+ width:100%!important;max-width:none!important;margin-inline:0!important;
+ padding-inline:0!important;min-width:0!important;
+}
+html body[data-kids-portal="true"] > main.wrap > :is(#academyHome,#academySubject):not([hidden]){
+ width:100%!important;max-width:none!important;margin-inline:0!important;
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"] > main.wrap > #lessonMain.lesson-main:not([hidden]){
+ width:100%!important;max-width:none!important;min-width:0!important;
+ margin-inline:0!important;
+ /* Old 128px outer padding clipped the reader BEFORE the tab dock.
+    The clearance belongs only to the END of the reading scrollport. */
+ padding-bottom:0!important;
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain .stage-tracker{
+ box-sizing:border-box!important;
+ width:calc(100% - clamp(16px,3.4vw,40px))!important;
+ max-width:none!important;margin-inline:clamp(8px,1.7vw,20px)!important;
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #stageSurface{
+ box-sizing:border-box!important;width:100%!important;max-width:none!important;
+ min-width:0!important;min-height:0!important;
+ flex:1 1 auto!important;
+ overflow-y:auto!important;overflow-x:hidden!important;
+ -webkit-overflow-scrolling:touch;
+ padding:2px 0 calc(var(--kids-academy-dock-clearance) + 20px)!important;
+ scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 20px)!important;
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-step="0"] #lessonMain #stageSurface{
+ /* Original intro step has separate action buttons outside the reader.
+    Keep those buttons accessible WITHOUT shortening the scrollport. */
+ padding-bottom:calc(var(--kids-academy-dock-clearance) + 98px)!important;
+ scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 98px)!important;
+}
+html body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #lessonNavigation:not([hidden]){
+ position:absolute!important;
+ left:clamp(8px,1.7vw,20px)!important;right:clamp(8px,1.7vw,20px)!important;
+ bottom:calc(var(--kids-academy-dock-clearance) + 8px)!important;
+ width:auto!important;z-index:5!important;margin:0!important;
+}
+/* When the iOS/Android keyboard is genuinely open, V1438's reduced
+   dock clearance remains authoritative; do not obstruct the caret. */
+html body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-typing="true"] #lessonMain #stageSurface{
+ padding-bottom:24px!important;scroll-padding-block-end:24px!important;
+}
+@media(max-width:700px){
+ html body[data-kids-portal="true"][data-academy-view="lesson"] #stageSurface > .lesson-stage:not([hidden]){
+  border-radius:0!important;border-inline-width:0!important;
+  box-shadow:none!important;
+ }
+}
+</style>
+
+
 </body></html>
