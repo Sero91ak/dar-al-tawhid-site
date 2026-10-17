@@ -323,7 +323,7 @@ def main():
         "",
         "Null-Credit-Prüfskript: `python3 kids/tools/audit_quiz_v4_stage1_paid_audio_integrity.py --report` und Workflow `.github/workflows/kids-v4-stage1-paid-original-integrity.yml`. Prüft jede im ersten älteren Batch bereits bezahlte V4-Original-MP3 **byteweise gegen SHA-256**, Text-/Modell-/Voice-ID sowie die beiden Kopien des Request-Journals und das Zahlungsledger. Erzeugt keine Stimme, bewirkt keine menschliche Audiofreigabe und keinen Live-Deploy.",
         "Zusätzlich ruft der etablierte Null-Credit-Regressionstest `kids/tools/test_quiz_v4_older_stage1_exact.py` dieselbe echte Byteprüfung auf. Ein automatischer CI-Bericht ist nur dann als bestanden zu betrachten, wenn GitHub den Job tatsächlich ausgeführt und mit `success` beendet hat; `action_required` gilt NICHT als bestandener Test.",
-        "Nach der ersten realen 10er-Aufnahme sind zehn kostenpflichtige Anbieter-Request-IDs im Originalledger dokumentiert; zusätzlich mindestens ein Dutzend wiederverwendeter Frage-Audiosegmente, aber vor endgültiger Hörkontrolle weiterhin keine Live-Freigabe. Der Vergleich mit der tatsächlichen ElevenLabs-Credit-Abrechnung bleibt offen.",
+        "Nach der ersten realen 10er-Aufnahme sind zehn kostenpflichtige Anbieter-Request-IDs im Originalledger dokumentiert; dadurch wurden vier weitere Quizfragen technisch vollständig vertont. Vor endgültiger Hörkontrolle besteht weiterhin keine Live-Freigabe. Der Vergleich mit der tatsächlichen ElevenLabs-Credit-Abrechnung bleibt offen.",
         "",
         "## Interne Quellen-/Antwortprüfung vor kostenpflichtiger V4-Aufnahme",
         "",
