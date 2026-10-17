@@ -1,0 +1,2016 @@
+{
+  "schemaVersion": 1,
+  "environment": "kids-creator-staging",
+  "translation": "Frank Bubenheim & Nadeem Elyas (repository canonical data)",
+  "humanReciter": "Maḥmūd Ḫalīl al-Ḥuṣarī",
+  "humanAudioSource": "https://everyayah.com/data/Husary_128kbps/",
+  "reviewPolicy": "Word meanings present only where editorially mapped; no word audio/timecode asserted",
+  "items": [
+    {
+      "id": "1",
+      "surah": 1,
+      "title": "Al-Fatihah",
+      "arabic": "الفاتحة",
+      "subtitle": "Gebet & Rechtleitung",
+      "overview": "Wir loben Allah und bitten um den geraden Weg.",
+      "category": "surah",
+      "image": "/kids/assets/kids-art/surah-001-al-fatihah-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+          "tr": "bis'mi l-lahi l-raḥmāni l-raḥīmi",
+          "de": "Im Namen Allahs, des Allerbarmers, des Barmherzigen.",
+          "words": [
+            {
+              "ar": "بِسۡمِ",
+              "meaning": "im Namen"
+            },
+            {
+              "ar": "ٱللَّهِ",
+              "meaning": "Allahs"
+            },
+            {
+              "ar": "ٱلرَّحۡمَٰنِ",
+              "meaning": "des Allerbarmers"
+            },
+            {
+              "ar": "ٱلرَّحِيمِ",
+              "meaning": "des Barmherzigen"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ",
+          "tr": "al-ḥamdu lillahi rabbi l-ʿālamīna",
+          "de": "(Alles) Lob gehört Allah, dem Herrn der Welten,",
+          "words": [
+            {
+              "ar": "ٱلۡحَمۡدُ",
+              "meaning": "Lob"
+            },
+            {
+              "ar": "لِلَّهِ",
+              "meaning": "gehört Allah"
+            },
+            {
+              "ar": "رَبِّ",
+              "meaning": "Herrn"
+            },
+            {
+              "ar": "ٱلۡعَٰلَمِينَ",
+              "meaning": "der Welten"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+          "tr": "al-raḥmāni l-raḥīmi",
+          "de": "dem Allerbarmer, dem Barmherzigen,",
+          "words": [
+            {
+              "ar": "ٱلرَّحۡمَٰنِ",
+              "meaning": "dem Allerbarmer"
+            },
+            {
+              "ar": "ٱلرَّحِيمِ",
+              "meaning": "dem Barmherzigen"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "مَٰلِكِ يَوۡمِ ٱلدِّينِ",
+          "tr": "māliki yawmi l-dīni",
+          "de": "dem Herrscher am Tag des Gerichts.",
+          "words": [
+            {
+              "ar": "مَٰلِكِ",
+              "meaning": "Herrscher"
+            },
+            {
+              "ar": "يَوۡمِ",
+              "meaning": "des Tages"
+            },
+            {
+              "ar": "ٱلدِّينِ",
+              "meaning": "des Gerichts"
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "ar": "إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ",
+          "tr": "iyyāka naʿbudu wa-iyyāka nastaʿīnu",
+          "de": "Dir allein dienen wir, und zu Dir allein flehen wir um Hilfe.",
+          "words": [
+            {
+              "ar": "إِيَّاكَ",
+              "meaning": "Dir allein"
+            },
+            {
+              "ar": "نَعۡبُدُ",
+              "meaning": "dienen wir"
+            },
+            {
+              "ar": "وَإِيَّاكَ",
+              "meaning": "und Dir allein"
+            },
+            {
+              "ar": "نَسۡتَعِينُ",
+              "meaning": "bitten wir um Hilfe"
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "ar": "ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ",
+          "tr": "ih'dinā l-ṣirāṭa l-mus'taqīma",
+          "de": "Leite uns den geraden Weg,",
+          "words": [
+            {
+              "ar": "ٱهۡدِنَا",
+              "meaning": "Leite uns"
+            },
+            {
+              "ar": "ٱلصِّرَٰطَ",
+              "meaning": "den Weg"
+            },
+            {
+              "ar": "ٱلۡمُسۡتَقِيمَ",
+              "meaning": "den geraden"
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "ar": "صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ",
+          "tr": "ṣirāṭa alladhīna anʿamta ʿalayhim ghayri l-maghḍūbi ʿalayhim walā l-ḍālīna",
+          "de": "den Weg derjenigen, denen Du Gunst erwiesen hast, nicht derjenigen, die (Deinen) Zorn erregt haben, und nicht der Irregehenden!",
+          "words": [
+            {
+              "ar": "صِرَٰطَ",
+              "meaning": "den Weg"
+            },
+            {
+              "ar": "ٱلَّذِينَ",
+              "meaning": "derjenigen"
+            },
+            {
+              "ar": "أَنۡعَمۡتَ",
+              "meaning": "denen Du Gunst erwiesen hast"
+            },
+            {
+              "ar": "عَلَيۡهِمۡ",
+              "meaning": "ihnen"
+            },
+            {
+              "ar": "غَيۡرِ",
+              "meaning": "nicht"
+            },
+            {
+              "ar": "ٱلۡمَغۡضُوبِ",
+              "meaning": "derer, die Zorn erregten"
+            },
+            {
+              "ar": "عَلَيۡهِمۡ",
+              "meaning": "ihnen"
+            },
+            {
+              "ar": "وَلَا",
+              "meaning": "und nicht"
+            },
+            {
+              "ar": "ٱلضَّآلِّينَ",
+              "meaning": "der Irregehenden"
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 1",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "103",
+      "surah": 103,
+      "title": "Al-'Asr",
+      "arabic": "العصر",
+      "subtitle": "Glaube und Geduld",
+      "overview": "Īmān, gute Taten, Wahrheit und Geduld.",
+      "category": "surah",
+      "image": "/kids/assets/kids-art/surah-103-al-asr-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "وَٱلۡعَصۡرِ",
+          "tr": "wal-ʿaṣri",
+          "de": "Beim Zeitalter!",
+          "words": [
+            {
+              "ar": "وَٱلۡعَصۡرِ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "إِنَّ ٱلۡإِنسَٰنَ لَفِي خُسۡرٍ",
+          "tr": "inna l-insāna lafī khus'rin",
+          "de": "Der Mensch befindet sich wahrlich in Verlust,",
+          "words": [
+            {
+              "ar": "إِنَّ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡإِنسَٰنَ",
+              "meaning": null
+            },
+            {
+              "ar": "لَفِي",
+              "meaning": null
+            },
+            {
+              "ar": "خُسۡرٍ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "إِلَّا ٱلَّذِينَ ءَامَنُواْ وَعَمِلُواْ ٱلصَّـٰلِحَٰتِ وَتَوَاصَوۡاْ بِٱلۡحَقِّ وَتَوَاصَوۡاْ بِٱلصَّبۡرِ",
+          "tr": "illā alladhīna āmanū waʿamilū l-ṣāliḥāti watawāṣaw bil-ḥaqi watawāṣaw bil-ṣabri",
+          "de": "außer denjenigen, die glauben und rechtschaffene Werke tun und einander die Wahrheit eindringlich empfehlen und einander die Standhaftigkeit eindringlich empfehlen.",
+          "words": [
+            {
+              "ar": "إِلَّا",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلَّذِينَ",
+              "meaning": null
+            },
+            {
+              "ar": "ءَامَنُواْ",
+              "meaning": null
+            },
+            {
+              "ar": "وَعَمِلُواْ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلصَّـٰلِحَٰتِ",
+              "meaning": null
+            },
+            {
+              "ar": "وَتَوَاصَوۡاْ",
+              "meaning": null
+            },
+            {
+              "ar": "بِٱلۡحَقِّ",
+              "meaning": null
+            },
+            {
+              "ar": "وَتَوَاصَوۡاْ",
+              "meaning": null
+            },
+            {
+              "ar": "بِٱلصَّبۡرِ",
+              "meaning": null
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 103",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "105",
+      "surah": 105,
+      "title": "Al-Fil",
+      "arabic": "الفيل",
+      "subtitle": "Die Leute des Elefanten",
+      "overview": "Ein Bericht darüber, wie Allah die Leute des Elefanten abwehrte.",
+      "category": "surah",
+      "image": "/kids/assets/kids-art/surah-105-al-fil-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "أَلَمۡ تَرَ كَيۡفَ فَعَلَ رَبُّكَ بِأَصۡحَٰبِ ٱلۡفِيلِ",
+          "tr": "alam tara kayfa faʿala rabbuka bi-aṣḥābi l-fīli",
+          "de": "Siehst du nicht, wie dein Herr mit den Leuten des Elefanten verfuhr?",
+          "words": [
+            {
+              "ar": "أَلَمۡ",
+              "meaning": null
+            },
+            {
+              "ar": "تَرَ",
+              "meaning": null
+            },
+            {
+              "ar": "كَيۡفَ",
+              "meaning": null
+            },
+            {
+              "ar": "فَعَلَ",
+              "meaning": null
+            },
+            {
+              "ar": "رَبُّكَ",
+              "meaning": null
+            },
+            {
+              "ar": "بِأَصۡحَٰبِ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡفِيلِ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "أَلَمۡ يَجۡعَلۡ كَيۡدَهُمۡ فِي تَضۡلِيلٖ",
+          "tr": "alam yajʿal kaydahum fī taḍlīlin",
+          "de": "Ließ Er nicht ihre List verlorengehen",
+          "words": [
+            {
+              "ar": "أَلَمۡ",
+              "meaning": null
+            },
+            {
+              "ar": "يَجۡعَلۡ",
+              "meaning": null
+            },
+            {
+              "ar": "كَيۡدَهُمۡ",
+              "meaning": null
+            },
+            {
+              "ar": "فِي",
+              "meaning": null
+            },
+            {
+              "ar": "تَضۡلِيلٖ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "وَأَرۡسَلَ عَلَيۡهِمۡ طَيۡرًا أَبَابِيلَ",
+          "tr": "wa-arsala ʿalayhim ṭayran bAbyl#(105:3:4)\">abābīla",
+          "de": "und sandte gegen sie Vögel in aufeinanderfolgenden Schwärmen,",
+          "words": [
+            {
+              "ar": "وَأَرۡسَلَ",
+              "meaning": null
+            },
+            {
+              "ar": "عَلَيۡهِمۡ",
+              "meaning": null
+            },
+            {
+              "ar": "طَيۡرًا",
+              "meaning": null
+            },
+            {
+              "ar": "أَبَابِيلَ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "تَرۡمِيهِم بِحِجَارَةٖ مِّن سِجِّيلٖ",
+          "tr": "tarmīhim biḥijāratin min sijjīlin",
+          "de": "die sie mit Steinen aus gebranntem Lehm bewarfen,",
+          "words": [
+            {
+              "ar": "تَرۡمِيهِم",
+              "meaning": null
+            },
+            {
+              "ar": "بِحِجَارَةٖ",
+              "meaning": null
+            },
+            {
+              "ar": "مِّن",
+              "meaning": null
+            },
+            {
+              "ar": "سِجِّيلٖ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "ar": "فَجَعَلَهُمۡ كَعَصۡفٖ مَّأۡكُولِۭ",
+          "tr": "fajaʿalahum kaʿaṣfin makūlin",
+          "de": "und sie so wie abgefressene Halme machte?",
+          "words": [
+            {
+              "ar": "فَجَعَلَهُمۡ",
+              "meaning": null
+            },
+            {
+              "ar": "كَعَصۡفٖ",
+              "meaning": null
+            },
+            {
+              "ar": "مَّأۡكُولِۭ",
+              "meaning": null
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 105",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "106",
+      "surah": 106,
+      "title": "Quraysh",
+      "arabic": "قريش",
+      "subtitle": "Dankbarkeit",
+      "overview": "Allah schenkt Versorgung und Sicherheit.",
+      "category": "surah",
+      "image": "/kids/assets/kids-art/surah-106-quraysh-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "لِإِيلَٰفِ قُرَيۡشٍ",
+          "tr": "liīlāfi qurayshin",
+          "de": "Für die Vereinigung der Qurais",
+          "words": [
+            {
+              "ar": "لِإِيلَٰفِ",
+              "meaning": null
+            },
+            {
+              "ar": "قُرَيۡشٍ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "إِۦلَٰفِهِمۡ رِحۡلَةَ ٱلشِّتَآءِ وَٱلصَّيۡفِ",
+          "tr": "īlāfihim riḥ'lata l-shitāi wal-ṣayfi",
+          "de": "ihre Vereinigung während der Reise des Winters und des Sommers.",
+          "words": [
+            {
+              "ar": "إِۦلَٰفِهِمۡ",
+              "meaning": null
+            },
+            {
+              "ar": "رِحۡلَةَ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلشِّتَآءِ",
+              "meaning": null
+            },
+            {
+              "ar": "وَٱلصَّيۡفِ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "فَلۡيَعۡبُدُواْ رَبَّ هَٰذَا ٱلۡبَيۡتِ",
+          "tr": "falyaʿbudū rabba hādhā l-bayti",
+          "de": "So sollen sie dem Herrn dieses Hauses dienen,",
+          "words": [
+            {
+              "ar": "فَلۡيَعۡبُدُواْ",
+              "meaning": null
+            },
+            {
+              "ar": "رَبَّ",
+              "meaning": null
+            },
+            {
+              "ar": "هَٰذَا",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡبَيۡتِ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "ٱلَّذِيٓ أَطۡعَمَهُم مِّن جُوعٖ وَءَامَنَهُم مِّنۡ خَوۡفِۭ",
+          "tr": "alladhī aṭʿamahum min jūʿin waāmanahum min khawfin",
+          "de": "Der ihnen Speise nach ihrem Hunger gegeben und ihnen Sicherheit nach ihrer Furcht gewährt hat.",
+          "words": [
+            {
+              "ar": "ٱلَّذِيٓ",
+              "meaning": null
+            },
+            {
+              "ar": "أَطۡعَمَهُم",
+              "meaning": null
+            },
+            {
+              "ar": "مِّن",
+              "meaning": null
+            },
+            {
+              "ar": "جُوعٖ",
+              "meaning": null
+            },
+            {
+              "ar": "وَءَامَنَهُم",
+              "meaning": null
+            },
+            {
+              "ar": "مِّنۡ",
+              "meaning": null
+            },
+            {
+              "ar": "خَوۡفِۭ",
+              "meaning": null
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 106",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "108",
+      "surah": 108,
+      "title": "Al-Kawthar",
+      "arabic": "الكوثر",
+      "subtitle": "Güte und Gebet",
+      "overview": "Allah schenkt viel Gutes. Unser Gebet gehört Ihm.",
+      "category": "surah",
+      "image": "/kids/assets/kids-art/surah-108-al-kawthar-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "إِنَّآ أَعۡطَيۡنَٰكَ ٱلۡكَوۡثَرَ",
+          "tr": "innā aʿṭaynāka l-kawthara",
+          "de": "Wir haben dir ja al-Kautar gegeben.",
+          "words": [
+            {
+              "ar": "إِنَّآ",
+              "meaning": null
+            },
+            {
+              "ar": "أَعۡطَيۡنَٰكَ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡكَوۡثَرَ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "فَصَلِّ لِرَبِّكَ وَٱنۡحَرۡ",
+          "tr": "faṣalli lirabbika wa-in'ḥar",
+          "de": "So bete zu deinem Herrn und opfere.",
+          "words": [
+            {
+              "ar": "فَصَلِّ",
+              "meaning": null
+            },
+            {
+              "ar": "لِرَبِّكَ",
+              "meaning": null
+            },
+            {
+              "ar": "وَٱنۡحَرۡ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "إِنَّ شَانِئَكَ هُوَ ٱلۡأَبۡتَرُ",
+          "tr": "inna shāni-aka huwa l-abtaru",
+          "de": "Gewiß, derjenige, der dich haßt, - er ist vom Guten abgetrennt .",
+          "words": [
+            {
+              "ar": "إِنَّ",
+              "meaning": null
+            },
+            {
+              "ar": "شَانِئَكَ",
+              "meaning": null
+            },
+            {
+              "ar": "هُوَ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡأَبۡتَرُ",
+              "meaning": null
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 108",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "109",
+      "surah": 109,
+      "title": "Al-Kafirun",
+      "arabic": "الكافرون",
+      "subtitle": "Anbetung",
+      "overview": "Die Anbetung Allahs bleibt eindeutig.",
+      "category": "surah",
+      "image": "/kids/assets/kids-art/surah-109-al-kafirun-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "قُلۡ يَـٰٓأَيُّهَا ٱلۡكَٰفِرُونَ",
+          "tr": "qul yāayyuhā l-kāfirūna",
+          "de": "Sag: O ihr Ungläubigen,",
+          "words": [
+            {
+              "ar": "قُلۡ",
+              "meaning": null
+            },
+            {
+              "ar": "يَـٰٓأَيُّهَا",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡكَٰفِرُونَ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "لَآ أَعۡبُدُ مَا تَعۡبُدُونَ",
+          "tr": "lā aʿbudu mā taʿbudūna",
+          "de": "ich diene nicht dem, dem ihr dient,",
+          "words": [
+            {
+              "ar": "لَآ",
+              "meaning": null
+            },
+            {
+              "ar": "أَعۡبُدُ",
+              "meaning": null
+            },
+            {
+              "ar": "مَا",
+              "meaning": null
+            },
+            {
+              "ar": "تَعۡبُدُونَ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "وَلَآ أَنتُمۡ عَٰبِدُونَ مَآ أَعۡبُدُ",
+          "tr": "walā antum ʿābidūna mā aʿbudu",
+          "de": "und ihr dient nicht Dem, Dem ich diene.",
+          "words": [
+            {
+              "ar": "وَلَآ",
+              "meaning": null
+            },
+            {
+              "ar": "أَنتُمۡ",
+              "meaning": null
+            },
+            {
+              "ar": "عَٰبِدُونَ",
+              "meaning": null
+            },
+            {
+              "ar": "مَآ",
+              "meaning": null
+            },
+            {
+              "ar": "أَعۡبُدُ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "وَلَآ أَنَا۠ عَابِدٞ مَّا عَبَدتُّمۡ",
+          "tr": "walā anā ʿābidun mā ʿabadttum",
+          "de": "Und ich werde (auch) nicht dem dienen, dem ihr gedient habt,",
+          "words": [
+            {
+              "ar": "وَلَآ",
+              "meaning": null
+            },
+            {
+              "ar": "أَنَا۠",
+              "meaning": null
+            },
+            {
+              "ar": "عَابِدٞ",
+              "meaning": null
+            },
+            {
+              "ar": "مَّا",
+              "meaning": null
+            },
+            {
+              "ar": "عَبَدتُّمۡ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "ar": "وَلَآ أَنتُمۡ عَٰبِدُونَ مَآ أَعۡبُدُ",
+          "tr": "walā antum ʿābidūna mā aʿbudu",
+          "de": "Und ihr werdet nicht Dem dienen, Dem ich diene.",
+          "words": [
+            {
+              "ar": "وَلَآ",
+              "meaning": null
+            },
+            {
+              "ar": "أَنتُمۡ",
+              "meaning": null
+            },
+            {
+              "ar": "عَٰبِدُونَ",
+              "meaning": null
+            },
+            {
+              "ar": "مَآ",
+              "meaning": null
+            },
+            {
+              "ar": "أَعۡبُدُ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "ar": "لَكُمۡ دِينُكُمۡ وَلِيَ دِينِ",
+          "tr": "lakum dīnukum waliya dīni",
+          "de": "Euch eure Religion und mir meine Religion.",
+          "words": [
+            {
+              "ar": "لَكُمۡ",
+              "meaning": null
+            },
+            {
+              "ar": "دِينُكُمۡ",
+              "meaning": null
+            },
+            {
+              "ar": "وَلِيَ",
+              "meaning": null
+            },
+            {
+              "ar": "دِينِ",
+              "meaning": null
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 109",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "110",
+      "surah": 110,
+      "title": "An-Nasr",
+      "arabic": "النصر",
+      "subtitle": "Lob und Vergebung",
+      "overview": "Allah loben und Ihn um Vergebung bitten.",
+      "category": "surah",
+      "image": "/kids/assets/kids-art/surah-110-an-nasr-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "إِذَا جَآءَ نَصۡرُ ٱللَّهِ وَٱلۡفَتۡحُ",
+          "tr": "idhā jāa naṣru l-lahi wal-fatḥu",
+          "de": "Wenn Allahs Hilfe kommt und der Sieg",
+          "words": [
+            {
+              "ar": "إِذَا",
+              "meaning": null
+            },
+            {
+              "ar": "جَآءَ",
+              "meaning": null
+            },
+            {
+              "ar": "نَصۡرُ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱللَّهِ",
+              "meaning": null
+            },
+            {
+              "ar": "وَٱلۡفَتۡحُ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "وَرَأَيۡتَ ٱلنَّاسَ يَدۡخُلُونَ فِي دِينِ ٱللَّهِ أَفۡوَاجٗا",
+          "tr": "wara-ayta l-nāsa yadkhulūna fī dīni l-lahi afwājan",
+          "de": "und du die Menschen in Allahs Religion in Scharen eintreten siehst,",
+          "words": [
+            {
+              "ar": "وَرَأَيۡتَ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلنَّاسَ",
+              "meaning": null
+            },
+            {
+              "ar": "يَدۡخُلُونَ",
+              "meaning": null
+            },
+            {
+              "ar": "فِي",
+              "meaning": null
+            },
+            {
+              "ar": "دِينِ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱللَّهِ",
+              "meaning": null
+            },
+            {
+              "ar": "أَفۡوَاجٗا",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "فَسَبِّحۡ بِحَمۡدِ رَبِّكَ وَٱسۡتَغۡفِرۡهُۚ إِنَّهُۥ كَانَ تَوَّابَۢا",
+          "tr": "fasabbiḥ biḥamdi rabbika wa-is'taghfir'hu innahu kāna tawwāban",
+          "de": "dann lobpreise deinen Herrn und bitte Ihn um Vergebung; gewiß, Er ist Reueannehmend.",
+          "words": [
+            {
+              "ar": "فَسَبِّحۡ",
+              "meaning": null
+            },
+            {
+              "ar": "بِحَمۡدِ",
+              "meaning": null
+            },
+            {
+              "ar": "رَبِّكَ",
+              "meaning": null
+            },
+            {
+              "ar": "وَٱسۡتَغۡفِرۡهُۚ",
+              "meaning": null
+            },
+            {
+              "ar": "إِنَّهُۥ",
+              "meaning": null
+            },
+            {
+              "ar": "كَانَ",
+              "meaning": null
+            },
+            {
+              "ar": "تَوَّابَۢا",
+              "meaning": null
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 110",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "112",
+      "surah": 112,
+      "title": "Al-Ikhlas",
+      "arabic": "الإخلاص",
+      "subtitle": "Tawḥīd",
+      "overview": "Allah ist einzig und niemand ist Ihm gleich.",
+      "category": "surah",
+      "image": "/kids/assets/kids-art/surah-112-al-ikhlas-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "قُلۡ هُوَ ٱللَّهُ أَحَدٌ",
+          "tr": "qul huwa l-lahu aḥadun",
+          "de": "Sag: Er ist Allah, ein Einer,",
+          "words": [
+            {
+              "ar": "قُلۡ",
+              "meaning": "Sag"
+            },
+            {
+              "ar": "هُوَ",
+              "meaning": "Er"
+            },
+            {
+              "ar": "ٱللَّهُ",
+              "meaning": "Allah"
+            },
+            {
+              "ar": "أَحَدٌ",
+              "meaning": "ein Einziger"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "ٱللَّهُ ٱلصَّمَدُ",
+          "tr": "al-lahu l-ṣamadu",
+          "de": "Allah, der Überlegene.",
+          "words": [
+            {
+              "ar": "ٱللَّهُ",
+              "meaning": "Allah"
+            },
+            {
+              "ar": "ٱلصَّمَدُ",
+              "meaning": "der, auf den alle angewiesen sind"
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ",
+          "tr": "lam yalid walam yūlad",
+          "de": "Er hat nicht gezeugt und ist nicht gezeugt worden,",
+          "words": [
+            {
+              "ar": "لَمۡ",
+              "meaning": "nicht"
+            },
+            {
+              "ar": "يَلِدۡ",
+              "meaning": "zeugte Er"
+            },
+            {
+              "ar": "وَلَمۡ",
+              "meaning": "und nicht"
+            },
+            {
+              "ar": "يُولَدۡ",
+              "meaning": "wurde Er gezeugt"
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ",
+          "tr": "walam yakun lahu kufuwan aḥadun",
+          "de": "und niemand ist Ihm jemals gleich.",
+          "words": [
+            {
+              "ar": "وَلَمۡ",
+              "meaning": "und nicht"
+            },
+            {
+              "ar": "يَكُن",
+              "meaning": "ist"
+            },
+            {
+              "ar": "لَّهُۥ",
+              "meaning": "Ihm"
+            },
+            {
+              "ar": "كُفُوًا",
+              "meaning": "gleich"
+            },
+            {
+              "ar": "أَحَدُۢ",
+              "meaning": "jemand"
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 112",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "113",
+      "surah": 113,
+      "title": "Al-Falaq",
+      "arabic": "الفلق",
+      "subtitle": "Schutz suchen",
+      "overview": "Wir suchen bei Allah Zuflucht vor Übel.",
+      "category": "surah",
+      "image": "/kids/assets/kids-art/surah-113-al-falaq-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "قُلۡ أَعُوذُ بِرَبِّ ٱلۡفَلَقِ",
+          "tr": "qul aʿūdhu birabbi l-falaqi",
+          "de": "Sag: Ich nehme Zuflucht beim Herrn des Tagesanbruchs",
+          "words": [
+            {
+              "ar": "قُلۡ",
+              "meaning": null
+            },
+            {
+              "ar": "أَعُوذُ",
+              "meaning": null
+            },
+            {
+              "ar": "بِرَبِّ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡفَلَقِ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "مِن شَرِّ مَا خَلَقَ",
+          "tr": "min sharri mā khalaqa",
+          "de": "vor dem Übel dessen, was Er erschaffen hat,",
+          "words": [
+            {
+              "ar": "مِن",
+              "meaning": null
+            },
+            {
+              "ar": "شَرِّ",
+              "meaning": null
+            },
+            {
+              "ar": "مَا",
+              "meaning": null
+            },
+            {
+              "ar": "خَلَقَ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ",
+          "tr": "wamin sharri ghāsiqin idhā waqaba",
+          "de": "und vor dem Übel der Dunkelheit, wenn sie zunimmt,",
+          "words": [
+            {
+              "ar": "وَمِن",
+              "meaning": null
+            },
+            {
+              "ar": "شَرِّ",
+              "meaning": null
+            },
+            {
+              "ar": "غَاسِقٍ",
+              "meaning": null
+            },
+            {
+              "ar": "إِذَا",
+              "meaning": null
+            },
+            {
+              "ar": "وَقَبَ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "وَمِن شَرِّ ٱلنَّفَّـٰثَٰتِ فِي ٱلۡعُقَدِ",
+          "tr": "wamin sharri l-nafāthāti fī l-ʿuqadi",
+          "de": "und vor dem Übel der Knotenanbläserinnen",
+          "words": [
+            {
+              "ar": "وَمِن",
+              "meaning": null
+            },
+            {
+              "ar": "شَرِّ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلنَّفَّـٰثَٰتِ",
+              "meaning": null
+            },
+            {
+              "ar": "فِي",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡعُقَدِ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "ar": "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+          "tr": "wamin sharri ḥāsidin idhā ḥasada",
+          "de": "und vor dem Übel eines (jeden) Neidenden, wenn er neidet.",
+          "words": [
+            {
+              "ar": "وَمِن",
+              "meaning": null
+            },
+            {
+              "ar": "شَرِّ",
+              "meaning": null
+            },
+            {
+              "ar": "حَاسِدٍ",
+              "meaning": null
+            },
+            {
+              "ar": "إِذَا",
+              "meaning": null
+            },
+            {
+              "ar": "حَسَدَ",
+              "meaning": null
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 113",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "114",
+      "surah": 114,
+      "title": "An-Nas",
+      "arabic": "الناس",
+      "subtitle": "Zuflucht bei Allah",
+      "overview": "Wir suchen bei Allah Schutz vor Einflüsterungen.",
+      "category": "surah",
+      "image": "/kids/assets/kids-art/surah-114-an-nas-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "قُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ",
+          "tr": "qul aʿūdhu birabbi l-nāsi",
+          "de": "Sag: Ich nehme Zuflucht beim Herrn der Menschen,",
+          "words": [
+            {
+              "ar": "قُلۡ",
+              "meaning": null
+            },
+            {
+              "ar": "أَعُوذُ",
+              "meaning": null
+            },
+            {
+              "ar": "بِرَبِّ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلنَّاسِ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "مَلِكِ ٱلنَّاسِ",
+          "tr": "maliki l-nāsi",
+          "de": "dem König der Menschen,",
+          "words": [
+            {
+              "ar": "مَلِكِ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلنَّاسِ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "إِلَٰهِ ٱلنَّاسِ",
+          "tr": "ilāhi l-nāsi",
+          "de": "dem Gott der Menschen,",
+          "words": [
+            {
+              "ar": "إِلَٰهِ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلنَّاسِ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ",
+          "tr": "min sharri l-waswāsi l-khanāsi",
+          "de": "vor dem Übel des Einflüsterers, des Davonschleichers,",
+          "words": [
+            {
+              "ar": "مِن",
+              "meaning": null
+            },
+            {
+              "ar": "شَرِّ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡوَسۡوَاسِ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡخَنَّاسِ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "ar": "ٱلَّذِي يُوَسۡوِسُ فِي صُدُورِ ٱلنَّاسِ",
+          "tr": "alladhī yuwaswisu fī ṣudūri l-nāsi",
+          "de": "der in die Brüste der Menschen einflüstert,",
+          "words": [
+            {
+              "ar": "ٱلَّذِي",
+              "meaning": null
+            },
+            {
+              "ar": "يُوَسۡوِسُ",
+              "meaning": null
+            },
+            {
+              "ar": "فِي",
+              "meaning": null
+            },
+            {
+              "ar": "صُدُورِ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلنَّاسِ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "ar": "مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ",
+          "tr": "mina l-jinati wal-nāsi",
+          "de": "von den Ginn und den Menschen.",
+          "words": [
+            {
+              "ar": "مِنَ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡجِنَّةِ",
+              "meaning": null
+            },
+            {
+              "ar": "وَٱلنَّاسِ",
+              "meaning": null
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 114",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "2-255",
+      "surah": 2,
+      "title": "Āyat al-Kursī",
+      "arabic": "البقرة",
+      "subtitle": "Allahs Macht und Wissen",
+      "overview": "Allahs Macht und Wissen",
+      "category": "ayah",
+      "image": "/kids/assets/kids-art/quran-verses-v1053.jpg",
+      "verses": [
+        {
+          "id": 255,
+          "ar": "ٱللَّهُ لَآ إِلَٰهَ إِلَّا هُوَ ٱلۡحَيُّ ٱلۡقَيُّومُۚ لَا تَأۡخُذُهُۥ سِنَةٞ وَلَا نَوۡمٞۚ لَّهُۥ مَا فِي ٱلسَّمَٰوَٰتِ وَمَا فِي ٱلۡأَرۡضِۗ مَن ذَا ٱلَّذِي يَشۡفَعُ عِندَهُۥٓ إِلَّا بِإِذۡنِهِۦۚ يَعۡلَمُ مَا بَيۡنَ أَيۡدِيهِمۡ وَمَا خَلۡفَهُمۡۖ وَلَا يُحِيطُونَ بِشَيۡءٖ مِّنۡ عِلۡمِهِۦٓ إِلَّا بِمَا شَآءَۚ وَسِعَ كُرۡسِيُّهُ ٱلسَّمَٰوَٰتِ وَٱلۡأَرۡضَۖ وَلَا يَـُٔودُهُۥ حِفۡظُهُمَاۚ وَهُوَ ٱلۡعَلِيُّ ٱلۡعَظِيمُ",
+          "tr": "al-lahu lā ilāha illā huwa l-ḥayu l-qayūmu lā takhudhuhu sinatun walā nawmun lahu mā fī l-samāwāti wamā fī l-arḍi man dhā alladhī yashfaʿu ʿindahu illā bi-idh'nihi yaʿlamu mā bayna aydīhim wamā khalfahum walā yuḥīṭūna bishayin min ʿil'mihi illā bimā shāa wasiʿa kur'siyyuhu l-samāwāti wal-arḍa walā yaūduhu ḥif'ẓuhumā wahuwa l-ʿaliyu l-ʿaẓīmu",
+          "de": "Allah - es gibt keinen Gott außer Ihm, dem Lebendigen und Beständigen. Ihn überkommt weder Schlummer noch Schlaf. Ihm gehört (alles), was in den Himmeln und was auf der Erde ist. Wer ist es denn, der bei Ihm Fürsprache einlegen könnte - außer mit Seiner Erlaubnis? Er weiß, was vor ihnen und was hinter ihnen liegt, sie aber umfassen nichts von Seinem Wissen - außer, was Er will. Sein Thronschemel umfaßt die Himmel und die Erde, und ihre Behütung beschwert Ihn nicht. Er ist der Erhabene und Allgewaltige.",
+          "words": [
+            {
+              "ar": "ٱللَّهُ",
+              "meaning": null
+            },
+            {
+              "ar": "لَآ",
+              "meaning": null
+            },
+            {
+              "ar": "إِلَٰهَ",
+              "meaning": null
+            },
+            {
+              "ar": "إِلَّا",
+              "meaning": null
+            },
+            {
+              "ar": "هُوَ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡحَيُّ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡقَيُّومُۚ",
+              "meaning": null
+            },
+            {
+              "ar": "لَا",
+              "meaning": null
+            },
+            {
+              "ar": "تَأۡخُذُهُۥ",
+              "meaning": null
+            },
+            {
+              "ar": "سِنَةٞ",
+              "meaning": null
+            },
+            {
+              "ar": "وَلَا",
+              "meaning": null
+            },
+            {
+              "ar": "نَوۡمٞۚ",
+              "meaning": null
+            },
+            {
+              "ar": "لَّهُۥ",
+              "meaning": null
+            },
+            {
+              "ar": "مَا",
+              "meaning": null
+            },
+            {
+              "ar": "فِي",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلسَّمَٰوَٰتِ",
+              "meaning": null
+            },
+            {
+              "ar": "وَمَا",
+              "meaning": null
+            },
+            {
+              "ar": "فِي",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡأَرۡضِۗ",
+              "meaning": null
+            },
+            {
+              "ar": "مَن",
+              "meaning": null
+            },
+            {
+              "ar": "ذَا",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلَّذِي",
+              "meaning": null
+            },
+            {
+              "ar": "يَشۡفَعُ",
+              "meaning": null
+            },
+            {
+              "ar": "عِندَهُۥٓ",
+              "meaning": null
+            },
+            {
+              "ar": "إِلَّا",
+              "meaning": null
+            },
+            {
+              "ar": "بِإِذۡنِهِۦۚ",
+              "meaning": null
+            },
+            {
+              "ar": "يَعۡلَمُ",
+              "meaning": null
+            },
+            {
+              "ar": "مَا",
+              "meaning": null
+            },
+            {
+              "ar": "بَيۡنَ",
+              "meaning": null
+            },
+            {
+              "ar": "أَيۡدِيهِمۡ",
+              "meaning": null
+            },
+            {
+              "ar": "وَمَا",
+              "meaning": null
+            },
+            {
+              "ar": "خَلۡفَهُمۡۖ",
+              "meaning": null
+            },
+            {
+              "ar": "وَلَا",
+              "meaning": null
+            },
+            {
+              "ar": "يُحِيطُونَ",
+              "meaning": null
+            },
+            {
+              "ar": "بِشَيۡءٖ",
+              "meaning": null
+            },
+            {
+              "ar": "مِّنۡ",
+              "meaning": null
+            },
+            {
+              "ar": "عِلۡمِهِۦٓ",
+              "meaning": null
+            },
+            {
+              "ar": "إِلَّا",
+              "meaning": null
+            },
+            {
+              "ar": "بِمَا",
+              "meaning": null
+            },
+            {
+              "ar": "شَآءَۚ",
+              "meaning": null
+            },
+            {
+              "ar": "وَسِعَ",
+              "meaning": null
+            },
+            {
+              "ar": "كُرۡسِيُّهُ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلسَّمَٰوَٰتِ",
+              "meaning": null
+            },
+            {
+              "ar": "وَٱلۡأَرۡضَۖ",
+              "meaning": null
+            },
+            {
+              "ar": "وَلَا",
+              "meaning": null
+            },
+            {
+              "ar": "يَـُٔودُهُۥ",
+              "meaning": null
+            },
+            {
+              "ar": "حِفۡظُهُمَاۚ",
+              "meaning": null
+            },
+            {
+              "ar": "وَهُوَ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡعَلِيُّ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡعَظِيمُ",
+              "meaning": null
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 2:255",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "2-285-286",
+      "surah": 2,
+      "title": "Die letzten Āyāt von al-Baqarah",
+      "arabic": "البقرة",
+      "subtitle": "Īmān und Bittgebet",
+      "overview": "Īmān und Bittgebet",
+      "category": "ayah",
+      "image": "/kids/assets/kids-art/quran-verses-v1053.jpg",
+      "verses": [
+        {
+          "id": 285,
+          "ar": "ءَامَنَ ٱلرَّسُولُ بِمَآ أُنزِلَ إِلَيۡهِ مِن رَّبِّهِۦ وَٱلۡمُؤۡمِنُونَۚ كُلٌّ ءَامَنَ بِٱللَّهِ وَمَلَـٰٓئِكَتِهِۦ وَكُتُبِهِۦ وَرُسُلِهِۦ لَا نُفَرِّقُ بَيۡنَ أَحَدٖ مِّن رُّسُلِهِۦۚ وَقَالُواْ سَمِعۡنَا وَأَطَعۡنَاۖ غُفۡرَانَكَ رَبَّنَا وَإِلَيۡكَ ٱلۡمَصِيرُ",
+          "tr": "āmana l-rasūlu bimā unzila ilayhi min rabbihi wal-mu'minūna kullun āmana bil-lahi wamalāikatihi wakutubihi warusulihi lā nufarriqu bayna aḥadin min rusulihi waqālū samiʿ'nā wa-aṭaʿnā ghuf'rānaka rabbanā wa-ilayka l-maṣīru",
+          "de": "Der Gesandte (Allahs) glaubt an das, was zu ihm von seinem Herrn (als Offenbarung) herabgesandt worden ist, und ebenso die Gläubigen; alle glauben an Allah, Seine Engel, Seine Bücher und Seine Gesandten - Wir machen keinen Unterschied bei jemandem von Seinen Gesandten. Und sie sagen: \"Wir hören und gehorchen. (Gewähre uns) Deine Vergebung, unser Herr! Und zu Dir ist der Ausgang.\"",
+          "words": [
+            {
+              "ar": "ءَامَنَ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلرَّسُولُ",
+              "meaning": null
+            },
+            {
+              "ar": "بِمَآ",
+              "meaning": null
+            },
+            {
+              "ar": "أُنزِلَ",
+              "meaning": null
+            },
+            {
+              "ar": "إِلَيۡهِ",
+              "meaning": null
+            },
+            {
+              "ar": "مِن",
+              "meaning": null
+            },
+            {
+              "ar": "رَّبِّهِۦ",
+              "meaning": null
+            },
+            {
+              "ar": "وَٱلۡمُؤۡمِنُونَۚ",
+              "meaning": null
+            },
+            {
+              "ar": "كُلٌّ",
+              "meaning": null
+            },
+            {
+              "ar": "ءَامَنَ",
+              "meaning": null
+            },
+            {
+              "ar": "بِٱللَّهِ",
+              "meaning": null
+            },
+            {
+              "ar": "وَمَلَـٰٓئِكَتِهِۦ",
+              "meaning": null
+            },
+            {
+              "ar": "وَكُتُبِهِۦ",
+              "meaning": null
+            },
+            {
+              "ar": "وَرُسُلِهِۦ",
+              "meaning": null
+            },
+            {
+              "ar": "لَا",
+              "meaning": null
+            },
+            {
+              "ar": "نُفَرِّقُ",
+              "meaning": null
+            },
+            {
+              "ar": "بَيۡنَ",
+              "meaning": null
+            },
+            {
+              "ar": "أَحَدٖ",
+              "meaning": null
+            },
+            {
+              "ar": "مِّن",
+              "meaning": null
+            },
+            {
+              "ar": "رُّسُلِهِۦۚ",
+              "meaning": null
+            },
+            {
+              "ar": "وَقَالُواْ",
+              "meaning": null
+            },
+            {
+              "ar": "سَمِعۡنَا",
+              "meaning": null
+            },
+            {
+              "ar": "وَأَطَعۡنَاۖ",
+              "meaning": null
+            },
+            {
+              "ar": "غُفۡرَانَكَ",
+              "meaning": null
+            },
+            {
+              "ar": "رَبَّنَا",
+              "meaning": null
+            },
+            {
+              "ar": "وَإِلَيۡكَ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡمَصِيرُ",
+              "meaning": null
+            }
+          ]
+        },
+        {
+          "id": 286,
+          "ar": "لَا يُكَلِّفُ ٱللَّهُ نَفۡسًا إِلَّا وُسۡعَهَاۚ لَهَا مَا كَسَبَتۡ وَعَلَيۡهَا مَا ٱكۡتَسَبَتۡۗ رَبَّنَا لَا تُؤَاخِذۡنَآ إِن نَّسِينَآ أَوۡ أَخۡطَأۡنَاۚ رَبَّنَا وَلَا تَحۡمِلۡ عَلَيۡنَآ إِصۡرٗا كَمَا حَمَلۡتَهُۥ عَلَى ٱلَّذِينَ مِن قَبۡلِنَاۚ رَبَّنَا وَلَا تُحَمِّلۡنَا مَا لَا طَاقَةَ لَنَا بِهِۦۖ وَٱعۡفُ عَنَّا وَٱغۡفِرۡ لَنَا وَٱرۡحَمۡنَآۚ أَنتَ مَوۡلَىٰنَا فَٱنصُرۡنَا عَلَى ٱلۡقَوۡمِ ٱلۡكَٰفِرِينَ",
+          "tr": "lā yukallifu l-lahu nafsan illā wus'ʿahā lahā mā kasabat waʿalayhā mā ik'tasabat rabbanā lā tuākhidh'nā in nasīnā aw akhṭanā rabbanā walā taḥmil ʿalaynā iṣ'ran kamā ḥamaltahu ʿalā alladhīna min qablinā rabbanā walā tuḥammil'nā mā lā ṭāqata lanā bihi wa-uʿ'fu ʿannā wa-igh'fir lanā wa-ir'ḥamnā anta mawlānā fa-unṣur'nā ʿalā l-qawmi l-kāfirīna",
+          "de": "Allah erlegt keiner Seele mehr auf, als sie zu leisten vermag. Ihr kommt (nur) zu, was sie verdient hat, und angelastet wird ihr (nur), was sie verdient hat. \"Unser Herr, belange uns nicht, wenn wir (etwas) vergessen oder einen Fehler begehen. Unser Herr, lege uns keine Bürde auf, wie Du sie denjenigen vor uns auferlegt hast. Unser Herr, bürde uns nichts auf, wozu wir keine Kraft haben. Verzeihe uns, vergib uns und erbarme Dich unser! Du bist unser Schutzherr. So verhilf uns zum Sieg über das ungläubige Volk!",
+          "words": [
+            {
+              "ar": "لَا",
+              "meaning": null
+            },
+            {
+              "ar": "يُكَلِّفُ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱللَّهُ",
+              "meaning": null
+            },
+            {
+              "ar": "نَفۡسًا",
+              "meaning": null
+            },
+            {
+              "ar": "إِلَّا",
+              "meaning": null
+            },
+            {
+              "ar": "وُسۡعَهَاۚ",
+              "meaning": null
+            },
+            {
+              "ar": "لَهَا",
+              "meaning": null
+            },
+            {
+              "ar": "مَا",
+              "meaning": null
+            },
+            {
+              "ar": "كَسَبَتۡ",
+              "meaning": null
+            },
+            {
+              "ar": "وَعَلَيۡهَا",
+              "meaning": null
+            },
+            {
+              "ar": "مَا",
+              "meaning": null
+            },
+            {
+              "ar": "ٱكۡتَسَبَتۡۗ",
+              "meaning": null
+            },
+            {
+              "ar": "رَبَّنَا",
+              "meaning": null
+            },
+            {
+              "ar": "لَا",
+              "meaning": null
+            },
+            {
+              "ar": "تُؤَاخِذۡنَآ",
+              "meaning": null
+            },
+            {
+              "ar": "إِن",
+              "meaning": null
+            },
+            {
+              "ar": "نَّسِينَآ",
+              "meaning": null
+            },
+            {
+              "ar": "أَوۡ",
+              "meaning": null
+            },
+            {
+              "ar": "أَخۡطَأۡنَاۚ",
+              "meaning": null
+            },
+            {
+              "ar": "رَبَّنَا",
+              "meaning": null
+            },
+            {
+              "ar": "وَلَا",
+              "meaning": null
+            },
+            {
+              "ar": "تَحۡمِلۡ",
+              "meaning": null
+            },
+            {
+              "ar": "عَلَيۡنَآ",
+              "meaning": null
+            },
+            {
+              "ar": "إِصۡرٗا",
+              "meaning": null
+            },
+            {
+              "ar": "كَمَا",
+              "meaning": null
+            },
+            {
+              "ar": "حَمَلۡتَهُۥ",
+              "meaning": null
+            },
+            {
+              "ar": "عَلَى",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلَّذِينَ",
+              "meaning": null
+            },
+            {
+              "ar": "مِن",
+              "meaning": null
+            },
+            {
+              "ar": "قَبۡلِنَاۚ",
+              "meaning": null
+            },
+            {
+              "ar": "رَبَّنَا",
+              "meaning": null
+            },
+            {
+              "ar": "وَلَا",
+              "meaning": null
+            },
+            {
+              "ar": "تُحَمِّلۡنَا",
+              "meaning": null
+            },
+            {
+              "ar": "مَا",
+              "meaning": null
+            },
+            {
+              "ar": "لَا",
+              "meaning": null
+            },
+            {
+              "ar": "طَاقَةَ",
+              "meaning": null
+            },
+            {
+              "ar": "لَنَا",
+              "meaning": null
+            },
+            {
+              "ar": "بِهِۦۖ",
+              "meaning": null
+            },
+            {
+              "ar": "وَٱعۡفُ",
+              "meaning": null
+            },
+            {
+              "ar": "عَنَّا",
+              "meaning": null
+            },
+            {
+              "ar": "وَٱغۡفِرۡ",
+              "meaning": null
+            },
+            {
+              "ar": "لَنَا",
+              "meaning": null
+            },
+            {
+              "ar": "وَٱرۡحَمۡنَآۚ",
+              "meaning": null
+            },
+            {
+              "ar": "أَنتَ",
+              "meaning": null
+            },
+            {
+              "ar": "مَوۡلَىٰنَا",
+              "meaning": null
+            },
+            {
+              "ar": "فَٱنصُرۡنَا",
+              "meaning": null
+            },
+            {
+              "ar": "عَلَى",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡقَوۡمِ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡكَٰفِرِينَ",
+              "meaning": null
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 2:285–286",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "20-114",
+      "surah": 20,
+      "title": "Rabbi zidnī ʿilmā",
+      "arabic": "طه",
+      "subtitle": "Um mehr Wissen bitten",
+      "overview": "Um mehr Wissen bitten",
+      "category": "ayah",
+      "image": "/kids/assets/kids-art/quran-verses-v1053.jpg",
+      "verses": [
+        {
+          "id": 114,
+          "ar": "فَتَعَٰلَى ٱللَّهُ ٱلۡمَلِكُ ٱلۡحَقُّۗ وَلَا تَعۡجَلۡ بِٱلۡقُرۡءَانِ مِن قَبۡلِ أَن يُقۡضَىٰٓ إِلَيۡكَ وَحۡيُهُۥۖ وَقُل رَّبِّ زِدۡنِي عِلۡمٗا",
+          "tr": "fataʿālā l-lahu l-maliku l-ḥaqu walā taʿjal bil-qur'āni min qabli an yuq'ḍā ilayka waḥyuhu waqul rabbi zid'nī ʿil'man",
+          "de": "Erhaben ist Allah, der König, der Wahre! Und übereile dich nicht mit dem Qur'an, bevor dir seine Offenbarung vollständig eingegeben worden ist. Und sag: Mein Herr, lasse mich an Wissen zunehmen.",
+          "words": [
+            {
+              "ar": "فَتَعَٰلَى",
+              "meaning": null
+            },
+            {
+              "ar": "ٱللَّهُ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡمَلِكُ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡحَقُّۗ",
+              "meaning": null
+            },
+            {
+              "ar": "وَلَا",
+              "meaning": null
+            },
+            {
+              "ar": "تَعۡجَلۡ",
+              "meaning": null
+            },
+            {
+              "ar": "بِٱلۡقُرۡءَانِ",
+              "meaning": null
+            },
+            {
+              "ar": "مِن",
+              "meaning": null
+            },
+            {
+              "ar": "قَبۡلِ",
+              "meaning": null
+            },
+            {
+              "ar": "أَن",
+              "meaning": null
+            },
+            {
+              "ar": "يُقۡضَىٰٓ",
+              "meaning": null
+            },
+            {
+              "ar": "إِلَيۡكَ",
+              "meaning": null
+            },
+            {
+              "ar": "وَحۡيُهُۥۖ",
+              "meaning": null
+            },
+            {
+              "ar": "وَقُل",
+              "meaning": null
+            },
+            {
+              "ar": "رَّبِّ",
+              "meaning": null
+            },
+            {
+              "ar": "زِدۡنِي",
+              "meaning": null
+            },
+            {
+              "ar": "عِلۡمٗا",
+              "meaning": null
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 20:114",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    },
+    {
+      "id": "14-41",
+      "surah": 14,
+      "title": "Duʿāʾ für die Eltern",
+      "arabic": "ابراهيم",
+      "subtitle": "Für Eltern und Gläubige bitten",
+      "overview": "Für Eltern und Gläubige bitten",
+      "category": "ayah",
+      "image": "/kids/assets/kids-art/quran-verses-v1053.jpg",
+      "verses": [
+        {
+          "id": 41,
+          "ar": "رَبَّنَا ٱغۡفِرۡ لِي وَلِوَٰلِدَيَّ وَلِلۡمُؤۡمِنِينَ يَوۡمَ يَقُومُ ٱلۡحِسَابُ",
+          "tr": "rabbanā igh'fir lī waliwālidayya walil'mu'minīna yawma yaqūmu l-ḥisābu",
+          "de": "Unser Herr, vergib mir und meinen Eltern und den Gläubigen an dem Tag, da die Abrechnung stattfinden wird.\"",
+          "words": [
+            {
+              "ar": "رَبَّنَا",
+              "meaning": null
+            },
+            {
+              "ar": "ٱغۡفِرۡ",
+              "meaning": null
+            },
+            {
+              "ar": "لِي",
+              "meaning": null
+            },
+            {
+              "ar": "وَلِوَٰلِدَيَّ",
+              "meaning": null
+            },
+            {
+              "ar": "وَلِلۡمُؤۡمِنِينَ",
+              "meaning": null
+            },
+            {
+              "ar": "يَوۡمَ",
+              "meaning": null
+            },
+            {
+              "ar": "يَقُومُ",
+              "meaning": null
+            },
+            {
+              "ar": "ٱلۡحِسَابُ",
+              "meaning": null
+            }
+          ]
+        }
+      ],
+      "source": "Qurʾān 14:41",
+      "explanationAudioVerified": false,
+      "sababAnNuzulVerified": false
+    }
+  ]
+}
