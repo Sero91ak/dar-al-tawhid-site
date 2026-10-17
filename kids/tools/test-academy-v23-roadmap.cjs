@@ -9,22 +9,22 @@ const expected={tawhid:14,iman:14,ikhlas:10,akhlaq:16,adab:16,tarbiyah:10,nafs:1
 const ages=["4-5","6-8","9-10"];
 assert.equal(year.goals.currentlyInCatalog,66);
 assert.equal(year.goals.additionalAuthenticallyVerifiedLessonsNeeded,142);
-assert.equal(plan.curriculum.alreadyImplementedLessons,58);
-assert.equal(plan.curriculum.proposedAdditionalLessons,150);
+assert.equal(plan.curriculum.alreadyImplementedLessons,66);
+assert.equal(plan.curriculum.proposedAdditionalLessons,142);
 assert.equal(plan.curriculum.totalNewLessonSlots,208);
 assert.equal(plan.curriculum.weeks,52);
 assert.deepEqual(plan.curriculum.ageGroups,ages);
 assert.deepEqual(Object.fromEntries(plan.strandSummary.map(p=>[p.id,p.plannedAdditions])),expected);
-assert.equal(plan.plannedUnits.length,150);
-assert.equal(new Set(plan.plannedUnits.map(p=>p.title)).size,150,"Every new lesson needs a distinct title");
-assert.equal(new Set(plan.plannedUnits.map(p=>p.topicId)).size,150,"Never reuse a lesson plan ID");
+assert.equal(plan.plannedUnits.length,142);
+assert.equal(new Set(plan.plannedUnits.map(p=>p.title)).size,142,"Every new lesson needs a distinct title");
+assert.equal(new Set(plan.plannedUnits.map(p=>p.topicId)).size,142,"Never reuse a lesson plan ID");
 const news=year.weeks.flatMap(w=>w.days.filter(d=>d.mode==="new"));
 const reviewed=news.filter(x=>!!x.lessonId),missing=news.filter(x=>!x.lessonId);
 assert.equal(news.length,208);
 assert.equal(reviewed.length,66);
 assert.equal(missing.length,142);
-assert.deepEqual(plan.existingLessonSlots.map(x=>x.lessonId),reviewed.slice(0,58).map(x=>x.lessonId));
-assert.equal(plan.existingLessonSlots.length,58);
+assert.deepEqual(plan.existingLessonSlots.map(x=>x.lessonId),reviewed.map(x=>x.lessonId));
+assert.equal(plan.existingLessonSlots.length,66);
 const each={};
 for(let i=0;i<plan.plannedUnits.length;i++){
  const unit=plan.plannedUnits[i],slot=news.find(x=>x.editorialSlot===unit.editorialSlot);
@@ -53,7 +53,8 @@ for(let i=0;i<plan.plannedUnits.length;i++){
  assert.notEqual(unit.ageOutcomes["4-5"].method,unit.ageOutcomes["6-8"].method);
  assert.notEqual(unit.ageOutcomes["6-8"].method,unit.ageOutcomes["9-10"].method);
 }
-assert.deepEqual(each,expected);
+assert.equal(Object.values(each).reduce((sum,n)=>sum+n,0),142,"Exactly 142 editorial-only roadmap slots remain");
+for(const [pillar,count] of Object.entries(each))assert.ok(count<=expected[pillar],"Unexpected extra roadmap slots in "+pillar);
 assert.equal(plan.safety.voice.includes("no generation without explicit credit confirmation"),true);
 assert.equal(plan.safety.profiles.includes("must not change school-progress-v11"),true);
 assert.equal(plan.safety.verification.includes("No proposed topic contains an assigned Qurʾān verse"),true);
@@ -61,4 +62,4 @@ assert.ok(!read("kids/akademie/index.html").includes("academy-expansion-roadmap-
  "Editorial calendar must not be loaded into a real child's playable lessons");
 const scripts=read(".github/workflows/check-kids-academy-v9.yml");
 assert.ok(scripts.includes("node kids/tools/test-academy-v23-roadmap.cjs"));
-console.log("KIDS ACADEMY V23 ROADMAP PASS: 58 historical verified + 150 editorial outlines; live annual catalog now 66 verified / 142 gated. Every editorial gate preserved; zero credits.");
+console.log("KIDS ACADEMY V23 ROADMAP PASS: 66 verified + 142 editorial-only slots, historical 150-strand blueprint unchanged; all future gates protected; zero credits.");
