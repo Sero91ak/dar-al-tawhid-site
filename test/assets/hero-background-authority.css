@@ -1,0 +1,72 @@
+/* GLOBAL HERO BACKGROUND AUTHORITY · adult test app
+   A hero is the background of its own area and uses that area's width.
+   It does not break out with 100vw, and it does not keep a side gutter. */
+html[data-theme] body:is(
+  .is-post-route,.is-topics-route,.is-topic-route,.is-dua-route,.is-hadith-route,
+  .is-scholars-route,.is-scholar-route,.is-more-route,.is-quiz-route,.is-quran-overview,
+  .is-settings-route,.is-calendar-route,.is-library-route,.is-frauen-route,.is-tawhid-guide-route,
+  .is-account-route,.is-about-route,.is-news-route,.is-news-detail-route,.is-zakat-route,
+  .is-source-library-route,.is-quran-topic-route
+) #appView.view{
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  margin-inline:0!important;
+  padding-inline:0!important;
+  box-sizing:border-box!important;
+  overflow-x:clip!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader,
+html[data-theme] body.is-hadith-route #appView .hadith-detail{
+  inline-size:100%!important;
+  max-inline-size:none!important;
+  margin-inline:0!important;
+  padding-inline:0!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title,
+html[data-theme] body.is-hadith-route #appView .hadith-detail > .post-reader-title,
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head,
+html[data-theme] body.is-scholar-route #appView .topic-collection-page > .view-head,
+html[data-theme] body.is-dua-route #appView .dua-hub > .view-head,
+html[data-theme] body.is-dua-route #appView .dua-collection-page > .view-head,
+html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head,
+html[data-theme] body.is-scholars-route #appView .scholars-index__header,
+html[data-theme] body.is-more-route #appView > .view-head,
+html[data-theme] body.is-quiz-route #appView > .view-head,
+html[data-theme] body.is-quran-overview #appView .qov-header,
+html[data-theme] body.is-settings-route #appView > .view-head.settings-page-head,
+html[data-theme] body.is-calendar-route #appView .cal-tl-head,
+html[data-theme] body.is-library-route #appView .lib-hero,
+html[data-theme] body.is-frauen-route #appView .frauen-library-hero,
+html[data-theme] body.is-tawhid-guide-route #appView > .view-head,
+html[data-theme] body.is-account-route #appView > .view-head,
+html[data-theme] body.is-about-route #appView > .view-head,
+html[data-theme] body.is-news-route #appView > .view-head,
+html[data-theme] body.is-news-detail-route #appView > .view-head,
+html[data-theme] body.is-zakat-route #appView > .view-head,
+html[data-theme] body.is-source-library-route #appView > .view-head,
+html[data-theme] body.is-quran-topic-route #appView > .view-head,
+html[data-theme] #appView.view:has(.qibla-hub-page) > .view-head,
+html[data-theme] #appView.view:has(.jummah-hub-page) > .view-head,
+html[data-theme] #appView.view:has(.prayer-page-noble) > .view-head{
+  position:relative!important;
+  inline-size:100%!important;
+  width:100%!important;
+  max-inline-size:none!important;
+  min-inline-size:0!important;
+  margin-inline:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  left:auto!important;
+  right:auto!important;
+  translate:none!important;
+  transform:none!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+}
