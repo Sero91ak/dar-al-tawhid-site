@@ -1,6 +1,11 @@
 name: Dar Test Android PWA · Touch QA
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
+    paths:
+      - "test/tools/android-pwa-smoke.cjs"
+      - ".github/workflows/dar-test-android-pwa-qa.yml"
   workflow_run:
     workflows: ["Deploy Dar Test App"]
     types: [completed]
@@ -9,16 +14,22 @@ permissions:
   contents: read
 
 concurrency:
-  group: dar-test-android-pwa-qa
+  group: dar-test-android-pwa-qa-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   android-chrome:
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event_name == 'pull_request' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
       - uses: actions/checkout@v4
+        with:
+          sparse-checkout: |
+            test/tools/
+            test/index.html
+            test-apple-touch-icon.png
+          sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
           node-version: "22"
