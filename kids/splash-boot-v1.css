@@ -5,7 +5,7 @@ html.kids-test-booting body > :not(#kids-test-boot):not(script){visibility:hidde
 #kids-test-boot{position:fixed!important;inset:0!important;z-index:2147483645!important;visibility:visible!important;
  display:flex;align-items:center;justify-content:center;background:#07152f;color:#fff5d8;
  font-family:"SF Pro Rounded","Arial Rounded MT Bold",Nunito,system-ui,sans-serif;
- opacity:1;transition:opacity .82s cubic-bezier(.22,1,.36,1);overflow:hidden;text-align:center;isolation:isolate;will-change:opacity}
+ opacity:1;transition:opacity .62s cubic-bezier(.22,1,.36,1);overflow:hidden;text-align:center;isolation:isolate;will-change:opacity}
 #kids-test-boot::before{content:"";position:absolute;inset:-3%;z-index:-1;
  background:linear-gradient(180deg,rgba(3,9,28,.32),rgba(4,14,34,.76)),
  url("/kids/assets/kids-splash-20261017-v1.jpg") center /cover no-repeat;
@@ -38,6 +38,12 @@ html.kids-test-booting body > :not(#kids-test-boot):not(script){visibility:hidde
  border:1px solid #ffe5aa;border-radius:999px;color:#07213b;background:#f8d581;
  padding:10px 15px;font:800 14px system-ui,sans-serif;white-space:nowrap;cursor:pointer}
 #kids-test-boot[data-boot-error="1"] .ktb-recover{display:block}
+/* Staged bridge: let the illustration fade to the opaque brand background
+   BEFORE the home screen is revealed. No double lettering through transparency. */
+#kids-test-boot::before{transition:opacity .32s ease-in-out}
+#kids-test-boot .ktb-poster{transition:opacity .32s ease-in-out}
+#kids-test-boot.kids-test-boot-bridge::before,
+#kids-test-boot.kids-test-boot-bridge .ktb-poster{opacity:0}
 #kids-test-boot.kids-test-boot-fade{opacity:0;pointer-events:none}
 @media (max-width:700px) and (orientation:portrait){
  #kids-test-boot .ktb-poster{width:100vw;height:100dvh;max-width:none;background-size:cover;
