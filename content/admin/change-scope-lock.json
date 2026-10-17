@@ -155,6 +155,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-frauen-scroll-tap-repair-20261017",
+      "at": "2026-10-17T20:49:00+02:00",
+      "approvedBy": "user-explicit-video-investigate-frauen-scroll-tap-fix-visitor-live-20261017",
+      "reason": "Fix adult Frauen visitor and test scroll/tap regression shown in 2026-10-17 video. Only Frauen SPA adapter rerender/scroll boundaries, scoped body overflow repair, asset cache key and narrow regression script; no Kids, themes, hero art, native code, push or prayer.",
+      "paths": [
+        "assets/frauen/frauen-fiqh.js",
+        "test/assets/frauen/frauen-fiqh.js",
+        "assets/frauen/frauen-live-adapter.js",
+        "cloudflare/site-router.js",
+        "cloudflare/test-app-worker.js",
+        "scripts/verify-frauen-scroll-tap-contract.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
       "id": "dar-test-hero-contain-20261017",
       "at": "2026-10-17T19:20:00+02:00",
       "approvedBy": "user-explicit-global-hero-contain-frauen-scroll-20261017",
