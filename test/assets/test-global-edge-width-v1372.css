@@ -1068,14 +1068,15 @@ html[data-theme] body.has-bottom-nav #appView.view > .dar-responsive-page > .dar
   background-repeat:no-repeat!important;
 }
 
-/* DAR_ADULT_TOPICS_EMPTY_FOLD_V1384 · 2026-10-17
+/* DAR_ADULT_TOPICS_EMPTY_FOLD_V1384 · DAR_ADULT_EMPTY_FOLD_GLOBAL_V1387 · 2026-10-17
  * An empty master/detail preview is not a useful overview: do not squeeze
  * the complete topics library into a 280–320px sticky navigation rail.
  * As soon as a detail is selected, the empty marker disappears and the
  * existing two-column Fold system remains fully functional.
- * Other Fold routes (Qurʾān, readers, library, Hadith) are untouched.
+ * Any route with only an EMPTY detail pane gets the full-width rail;
+ * populated master/detail panes and their interaction remain untouched.
  */
-html[data-theme] body.is-topics-route #appView .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty){
+html[data-theme] body.has-bottom-nav #appView .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty){
   display:block!important;
   grid-template-columns:minmax(0,1fr)!important;
   gap:0!important;
@@ -1083,7 +1084,7 @@ html[data-theme] body.is-topics-route #appView .dar-fold[data-fold-mode="dual"]:
   max-inline-size:100%!important;
   min-inline-size:0!important;
 }
-html[data-theme] body.is-topics-route #appView .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty) > .dar-fold__rail{
+html[data-theme] body.has-bottom-nav #appView .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty) > .dar-fold__rail{
   position:relative!important;
   top:auto!important;
   inset-inline:auto!important;
@@ -1096,7 +1097,7 @@ html[data-theme] body.is-topics-route #appView .dar-fold[data-fold-mode="dual"]:
   background:none!important;
   box-sizing:border-box!important;
 }
-html[data-theme] body.is-topics-route #appView .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty) > .dar-fold__pane{
+html[data-theme] body.has-bottom-nav #appView .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty) > .dar-fold__pane{
   display:none!important;
 }
 
