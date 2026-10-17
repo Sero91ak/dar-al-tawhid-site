@@ -155,6 +155,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-visitor-salbei-elfenbein-20261017",
+      "at": "2026-10-17T17:18:00+02:00",
+      "approvedBy": "user-explicit-push-salbei-elfenbein-to-visitor-after-colour-and-square-background-check-20261017",
+      "reason": "Release existing independently tested Salbei Elfenbein appearance to adult visitor: theme selection/boot recognition, scoped contrast colours and removal of visually noisy square section backgrounds only. No Kids, prayer calculation, navigation, push, audio, native, manifest, Worker or unrelated appearance changes.",
+      "paths": [
+        "index.html",
+        "assets/theme-salbei-elfenbein.css"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
       "id": "kids-live-dashboard-audit-dynamic-version-20261017",
       "at": "2026-10-17T16:50:00+02:00",
       "approvedBy": "user-continue-existing-kids-live-audit-work-20261017",
