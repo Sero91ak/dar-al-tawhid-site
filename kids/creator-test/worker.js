@@ -54,11 +54,11 @@ export default {
     }
     // KIDS TEST only: decorate the web entry document; no modifications to the
     // 530 KB visitor HTML or public routes. The script runs before app parsing.
-    const isBootPage = /^\\/kids\\/(?:start(?:\\.html)?|index\\.html|shell\\.html)$/.test(path);
+    const isBootPage = ["/kids/start", "/kids/start.html", "/kids/index.html", "/kids/shell.html"].includes(path);
     if (isBootPage && asset.ok && request.method === "GET") {
       const original = await asset.text();
-      const head = '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-1">\\n'
-        + '<script src="/kids/splash-boot-v1.js?v=20261017-1"></script>\\n';
+      const head = '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-1">'
+        + '<script src="/kids/splash-boot-v1.js?v=20261017-1"></script>';
       const boot = '<div id="kids-test-boot" role="region" aria-label="TAWḤĪD KIDS wird vorbereitet">'
         + '<div class="ktb-arch" aria-hidden="true"></div>'
         + '<div class="ktb-stage"><div class="ktb-brand">'
@@ -69,9 +69,8 @@ export default {
         + '<span class="ktb-edge">0%</span><div class="ktb-track" role="progressbar" aria-label="App wird geladen" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="ktb-fill"></div></div><span class="ktb-edge">100%</span></div>'
         + '<p class="ktb-percent">0%</p><p class="ktb-status" aria-live="polite">Deine Lernwelt wird vorbereitet</p>'
         + '<button type="button" class="ktb-recover">Erneut versuchen</button></div></div></div>';
-      if (original.includes("<head>") && /<body\\b[^>]*>/i.test(original)) {
-        const decorated = original.replace("<head>", "<head>\\n" + head)
-          .replace(/<body\\b[^>]*>/i, (match) => match + "\\n" + boot + "\\n");
+      if (original.includes("<head>") && original.includes("<body>")) {
+        const decorated = original.replace("<head>", "<head>" + head).replace("<body>", "<body>" + boot);
         headers.delete("Content-Length");
         headers.delete("ETag");
         headers.set("Content-Type", "text/html; charset=utf-8");
