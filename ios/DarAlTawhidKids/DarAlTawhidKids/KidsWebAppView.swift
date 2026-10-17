@@ -5,8 +5,10 @@ import AVFoundation
 import MediaPlayer
 
 struct KidsWebAppView: UIViewRepresentable {
+    var onHomeReady: () -> Void = {}
+
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        Coordinator(onHomeReady: onHomeReady)
     }
 
     func makeUIView(context: Context) -> WKWebView {
@@ -17,6 +19,7 @@ struct KidsWebAppView: UIViewRepresentable {
         configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         configuration.userContentController.add(context.coordinator, name: "darKidsNowPlaying")
         configuration.userContentController.add(context.coordinator, name: "darKidsScreenAwake")
+        configuration.userContentController.add(context.coordinator, name: "darKidsStartupReady")
 
 #if KIDS_CREATOR_TEST
         let officialMarker = ""
@@ -40,6 +43,53 @@ struct KidsWebAppView: UIViewRepresentable {
         configuration.userContentController.addUserScript(
             WKUserScript(source: bridge, injectionTime: .atDocumentStart, forMainFrameOnly: true)
         )
+        // Only the native iOS container receives this paint-readiness handshake.
+        // The public Kids web/PWA implementation remains untouched.
+        let readinessScript = """
+        (function(){
+          if(window.__darKidsNativeStartupProbe)return;
+          window.__darKidsNativeStartupProbe=true;
+          function begin(){
+            var tries=0;
+            function awaitHomeShell(){
+              var home=document.getElementById("view-today");
+              var nav=document.querySelector(".bottom-nav");
+              if(!home||!nav){
+                if(++tries<120)setTimeout(awaitHomeShell,75);
+                return;
+              }
+              var hero=new Promise(function(resolve){
+                var image=new Image(),done=false;
+                function finish(){if(!done){done=true;resolve();}}
+                image.onload=finish;
+                image.onerror=finish;
+                image.src="/kids/assets/kids-salah-v1272/hero-home.png?v=1274";
+                if(image.complete&&image.naturalWidth>0)finish();
+                setTimeout(finish,3500);
+              });
+              var fonts=document.fonts
+                ? Promise.race([
+                    document.fonts.ready.catch(function(){}),
+                    new Promise(function(resolve){setTimeout(resolve,1800);})
+                  ])
+                : Promise.resolve();
+              Promise.all([hero,fonts]).then(function(){
+                requestAnimationFrame(function(){requestAnimationFrame(function(){
+                  try{window.webkit.messageHandlers.darKidsStartupReady.postMessage("ready");}catch(e){}
+                });});
+              });
+            }
+            awaitHomeShell();
+          }
+          if(document.readyState==="loading"){
+            document.addEventListener("DOMContentLoaded",begin,{once:true});
+          }else{begin();}
+        })();
+        """
+        configuration.userContentController.addUserScript(
+            WKUserScript(source: readinessScript, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        )
+
         // Keep playback/user-agent compatibility, but never use this marker
         // as proof of owner authorization on the website.
 #if KIDS_CREATOR_TEST
@@ -71,9 +121,19 @@ struct KidsWebAppView: UIViewRepresentable {
         return webView
     }
 
-    func updateUIView(_ uiView: WKWebView, context: Context) {}
+    func updateUIView(_ uiView: WKWebView, context: Context) {
+        context.coordinator.onHomeReady = onHomeReady
+    }
 
     final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler {
+        var onHomeReady: () -> Void
+        private var initialHomeReadinessDelivered = false
+
+        init(onHomeReady: @escaping () -> Void) {
+            self.onHomeReady = onHomeReady
+            super.init()
+        }
+
         private weak var webView: WKWebView?
         private var hasPresentedInitialPage = false
         private var remoteCommandsReady = false
@@ -117,6 +177,7 @@ struct KidsWebAppView: UIViewRepresentable {
             }
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsNowPlaying")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsScreenAwake")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsStartupReady")
         }
 
         func loadKidsHome(in webView: WKWebView) {
@@ -125,7 +186,7 @@ struct KidsWebAppView: UIViewRepresentable {
             webView.load(
                 URLRequest(
                     url: KidsAppShell.launchURL,
-                    cachePolicy: .reloadIgnoringLocalCacheData,
+                    cachePolicy: .useProtocolCachePolicy,
                     timeoutInterval: 30
                 )
             )
@@ -322,6 +383,11 @@ struct KidsWebAppView: UIViewRepresentable {
                 applyKidsNowPlaying(body)
             case "darKidsScreenAwake":
                 applyKidsScreenAwake(body)
+            case "darKidsStartupReady":
+                if !initialHomeReadinessDelivered, message.body as? String == "ready" {
+                    initialHomeReadinessDelivered = true
+                    DispatchQueue.main.async { [weak self] in self?.onHomeReady() }
+                }
             default:
                 break
             }
