@@ -56,11 +56,29 @@ export default {
     // 530 KB visitor HTML or public routes. The script runs before app parsing.
     const isBootPage = ["/kids/start", "/kids/start.html", "/kids/index.html", "/kids/shell.html"].includes(path);
     if (isBootPage && asset.ok && request.method === "GET") {
-      const original = await asset.clone().text();
-      const head = '<link rel="preload" as="image" href="/kids/assets/kids-splash-20261017-v1.jpg" fetchpriority="high">'
-        + '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-6">'
-        + '<script src="/kids/splash-boot-v1.js?v=20261017-6"></script>';
-      // Approved illustration already contains greeting and wordmark. Live progress only.
+      // The first KIDS TEST frame has critical CSS inline in the HEAD.
+      // This prevents an unstyled/white document while the optional CSS bundle arrives.
+      const posterURL = "/kids/assets/kids-splash-20261017-v1.jpg";
+      const critical = '<script id="kids-test-first-frame">document.documentElement.classList.add("kids-test-booting");</script>'
+        + '<meta name="theme-color" content="#07152f">'
+        + '<meta name="color-scheme" content="dark">'
+        + '<style id="kids-test-first-frame-css">'
+        + 'html.kids-test-booting,html.kids-test-booting body{margin:0;background:#07152f!important;color-scheme:dark;overflow:hidden!important}'
+        + 'html.kids-test-booting body>:not(#kids-test-boot):not(script){visibility:hidden!important}'
+        + '#kids-test-boot{position:fixed!important;inset:0!important;z-index:2147483645!important;display:flex!important;align-items:center;justify-content:center;overflow:hidden;background:#07152f!important;visibility:visible!important;color:#fff4dd;text-align:center;font-family:system-ui,sans-serif}'
+        + '#kids-test-boot .ktb-poster{position:relative;width:min(100vw,56.25dvh);height:100dvh;overflow:hidden;background:#07152f url("' + posterURL + '") center/cover no-repeat}'
+        + '#kids-test-boot .ktb-loading{position:absolute;left:7%;top:81%;width:86%;z-index:2}'
+        + '#kids-test-boot .ktb-progress-labels{display:grid;grid-template-columns:28px 1fr 44px;gap:7px;align-items:center}'
+        + '#kids-test-boot .ktb-track{height:30px;border-radius:99px;border:2px solid #f3b83d;background:#002654;overflow:hidden;padding:3px}'
+        + '#kids-test-boot .ktb-fill{height:100%;width:0%;border-radius:99px;background:linear-gradient(#ffeda1,#e9a30c)}'
+        + '#kids-test-boot .ktb-percent{margin:7px 0 0;font-weight:900;font-size:29px;color:#ffd16a}'
+        + '#kids-test-boot .ktb-status{font-size:12px}'
+        + '#kids-test-boot .ktb-recover{display:none}'
+        + '</style>'
+        + '<link rel="preload" as="image" href="' + posterURL + '" fetchpriority="high">'
+        // Styles are non-blocking; critical visual styles are already inline.
+        + '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-7" media="print" onload="this.media=' + "'all'" + '">'
+        + '<script defer src="/kids/splash-boot-v1.js?v=20261017-7"></script>';
       const boot = '<div id="kids-test-boot" role="region" aria-label="TAWḤĪD KIDS lädt">'
         + '<div class="ktb-poster"><div class="ktb-loading">'
         + '<div class="ktb-progress-labels"><span class="ktb-edge">0%</span>'
@@ -69,13 +87,59 @@ export default {
         + '<p class="ktb-percent" aria-live="off">0%</p>'
         + '<p class="ktb-status" aria-live="polite"></p>'
         + '<button type="button" class="ktb-recover">App trotzdem öffnen</button>'
-        + '</div></div></div>';
+        + '</div></div><div class="ktb-reveal-glow" aria-hidden="true"></div></div>';
+      headers.delete("Content-Length");
+      headers.delete("ETag");
+      headers.set("Content-Type", "text/html; charset=utf-8");
+      headers.set("Cache-Control", "private, no-store, max-age=0");
+      // Stream the 534KB HTML rather than waiting for asset.text() before the
+      // first response byte. Chunk edges retain 32 chars for tag matching.
+      // Fallback remains for environments without Web Streams (including CI).
+      if (asset.body && typeof TextDecoderStream !== "undefined"
+          && typeof TextEncoderStream !== "undefined"
+          && typeof TransformStream !== "undefined") {
+        let pending = "", headDone = false, bodyDone = false;
+        const decorate = new TransformStream({
+          transform(chunk, controller) {
+            pending += chunk;
+            if (!headDone) {
+              const n = pending.indexOf("<head>");
+              if (n < 0) {
+                if (pending.length > 32) {
+                  controller.enqueue(pending.slice(0, -32));
+                  pending = pending.slice(-32);
+                }
+                return;
+              }
+              pending = pending.slice(0, n) + "<head>" + critical + pending.slice(n + 6);
+              headDone = true;
+            }
+            if (!bodyDone) {
+              const n = pending.indexOf("<body>");
+              if (n < 0) {
+                if (pending.length > 32) {
+                  controller.enqueue(pending.slice(0, -32));
+                  pending = pending.slice(-32);
+                }
+                return;
+              }
+              pending = pending.slice(0, n) + "<body>" + boot + pending.slice(n + 6);
+              bodyDone = true;
+            }
+            controller.enqueue(pending);
+            pending = "";
+          },
+          flush(controller) { if (pending) controller.enqueue(pending); }
+        });
+        const html = asset.body
+          .pipeThrough(new TextDecoderStream())
+          .pipeThrough(decorate)
+          .pipeThrough(new TextEncoderStream());
+        return new Response(html, { status: asset.status, headers });
+      }
+      const original = await asset.clone().text();
       if (original.includes("<head>") && original.includes("<body>")) {
-        const decorated = original.replace("<head>", "<head>" + head).replace("<body>", "<body>" + boot);
-        headers.delete("Content-Length");
-        headers.delete("ETag");
-        headers.set("Content-Type", "text/html; charset=utf-8");
-        headers.set("Cache-Control", "private, no-store, max-age=0");
+        const decorated = original.replace("<head>", "<head>" + critical).replace("<body>", "<body>" + boot);
         return new Response(decorated, { status: asset.status, headers });
       }
     }
