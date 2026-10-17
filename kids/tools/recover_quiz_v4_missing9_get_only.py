@@ -214,7 +214,7 @@ def main():
                 if hcode==200:
                     try:
                         if not 1800<len(hbin)<MAX_AUDIO or not(
-                             hbin[:3]==b"ID3" or hbin[:1]==b"\\xff"):
+                             hbin[:3]==b"ID3" or hbin[:1]==bytes([255])):
                             raise ValueError("Unexpected MP3 for confirmed old generation")
                         path=folder/(gid+".mp3")
                         path.write_bytes(hbin)
