@@ -4,7 +4,8 @@
 
 - 20 unveränderte Quizfragen, 10 für 7–8 Jahre und 10 für 9–10 Jahre.
 - 65 überprüfte exakte Text-SHA-256-Verweise der originalen Produktionsliste.
-- 10 priorisierte V4-Takes könnten bei echter Erzeugung und technischer Prüfung 4 Quizfragen schließen: kids-quiz-033, kids-quiz-034, kids-quiz-048, kids-quiz-050.
+- 0 V4-Originale aus der ersten Stufe sind im Registry registriert; 65 fehlen noch.
+- 10 priorisierte V4-Takes könnten nach echter Erzeugung und technischer Prüfung 4 weitere Quizfragen schließen: kids-quiz-033, kids-quiz-034, kids-quiz-048, kids-quiz-050.
 - Für 8 Fragen wurden zusätzliche passende Online-Belegstellen lokalisiert; **nicht** als vollständige wissenschaftliche Freigabe zu behandeln.
 - Originale Quellen stehen nur im internen Review. **Keine Webseiten-Links in der Kinder-App anzeigen.**
 
