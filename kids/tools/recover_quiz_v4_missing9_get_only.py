@@ -78,7 +78,11 @@ def locate_history_flow_items(key,needed):
                 "rowsWithSpokenText":0,"rowsWithDialogue":0,
                 "textMatchesIgnoringSourceFilter":0,
                 "historyIdMatchesOldGeneration":0,
-                "requestIdMatchesOldGeneration":0}
+                "requestIdMatchesOldGeneration":0,
+                "dialogueItemsWithText":0,"dialogueItemsWithExpectedVoice":0,
+                "dialogueItemsWithExactOriginalText":0,
+                "singleSpeakerDialogueOriginalMatches":0,
+                "dialogueFieldNames":[]}
     statuses=[]
     inspected=0
     cursor=None
@@ -99,6 +103,22 @@ def locate_history_flow_items(key,needed):
         inspected+=len(rows)
         for row in rows:
             if not isinstance(row,dict):continue
+            dialogue=row.get("dialogue")
+            dialogue=dialogue if isinstance(dialogue,list) else []
+            single=dialogue[0] if len(dialogue)==1 and isinstance(dialogue[0],dict) else None
+            for voicepart in dialogue:
+                if not isinstance(voicepart,dict):continue
+                if isinstance(voicepart.get("text"),str) and voicepart["text"]:
+                    diagnostic["dialogueItemsWithText"]+=1
+                if voicepart.get("voice_id")==manifest["items"][0]["voiceId"]:
+                    diagnostic["dialogueItemsWithExpectedVoice"]+=1
+                if any(voicepart.get("text")==originals[g]["originalSpokenText"] for g in needed):
+                    diagnostic["dialogueItemsWithExactOriginalText"]+=1
+                diagnostic["dialogueFieldNames"]=sorted(
+                    set(diagnostic["dialogueFieldNames"])|set(voicepart.keys()))
+            if single and single.get("voice_id")==manifest["items"][0]["voiceId"] and any(
+                single.get("text")==originals[g]["originalSpokenText"] for g in needed):
+                diagnostic["singleSpeakerDialogueOriginalMatches"]+=1
             if row.get("model_id")==EXPECTED and row.get("voice_id")==manifest["items"][0]["voiceId"]:
                 diagnostic["correctVoiceAndModelRows"]+=1
             if row.get("source")=="Flows":diagnostic["sourceFlowsRows"]+=1
@@ -110,17 +130,23 @@ def locate_history_flow_items(key,needed):
                 diagnostic["requestIdMatchesOldGeneration"]+=1
             if any(row.get("text")==originals[gid]["originalSpokenText"] for gid in needed):
                 diagnostic["textMatchesIgnoringSourceFilter"]+=1
-            if (row.get("model_id")!=EXPECTED
-                    or row.get("voice_id")!=manifest["items"][0]["voiceId"]
-                    or row.get("source")!="Flows"):
+            # In the Flows history API, top-level text/voice_id are often
+            # null when 'dialogue' is populated. A single exact voice/text
+            # pair is a candidate; an unrelated dialogue is NOT.
+            flat_ok=(row.get("model_id")==EXPECTED and
+                     row.get("voice_id")==manifest["items"][0]["voiceId"])
+            dialogue_ok=(single is not None and
+                         single.get("voice_id")==manifest["items"][0]["voiceId"] and
+                         row.get("model_id") in (None,EXPECTED))
+            if row.get("source")!="Flows" or not (flat_ok or dialogue_ok):
                 continue
             h_id=row.get("history_item_id")
             request=row.get("request_id")
-            text=row.get("text")
             if not isinstance(h_id,str) or not h_id or h_id in seen:continue
             seen.add(h_id)
             for gid in needed:
-                if text==originals[gid]["originalSpokenText"]:
+                if (flat_ok and row.get("text")==originals[gid]["originalSpokenText"]) or (
+                    dialogue_ok and single.get("text")==originals[gid]["originalSpokenText"]):
                     matches[gid].append({
                         "historyItemId":h_id,
                         "providerIdCrosslinked":h_id==gid or request==gid,
