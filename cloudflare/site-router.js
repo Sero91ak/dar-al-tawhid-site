@@ -267,6 +267,9 @@ function browserManifestResponse(request, androidBrowser = false) {
   });
   return new Response(request.method === "HEAD" ? null : JSON.stringify(manifest, null, 2), { status: 200, headers });
 }
+function adultCompactHeroAddon() {
+  return '<link rel="stylesheet" id="darAdultHeroCompactEdgeV1396" href="/assets/adult-responsive-viewport-v1381.css?v=hero-compact-edge-v1396">';
+}
 function liveFrauenNativeAddon() {
   return [
     '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-rollback-20261016-1500">',
@@ -1637,6 +1640,10 @@ export default {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
       let html = await assetResponse.text();
+      if (assetResponse.ok && !html.includes("darAdultHeroCompactEdgeV1396")) {
+        const heroCss = adultCompactHeroAddon();
+        html = html.includes("</body>") ? html.replace("</body>", heroCss + "</body>") : html + heroCss;
+      }
       if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
         const frauenAddon = liveFrauenNativeAddon();
         html = html.includes("</body>") ? html.replace("</body>", frauenAddon + "</body>") : html + frauenAddon;
@@ -1673,6 +1680,7 @@ export default {
         if (!html.includes("desktop-overhaul.css")) html = html.replace("</head>", styleTag + "</head>");
         if (!html.includes("desktop-overhaul.js")) html = html.replace("</body>", scriptTag + "</body>");
         if (!html.includes("darPublicWebsiteGuardV1")) html = html.replace("</body>", publicWebsiteAddon() + "</body>");
+        if (!html.includes("darAdultHeroCompactEdgeV1396")) html = html.replace("</body>", adultCompactHeroAddon() + "</body>");
       }
       headers.set("Content-Type", "text/html; charset=utf-8");
       return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
