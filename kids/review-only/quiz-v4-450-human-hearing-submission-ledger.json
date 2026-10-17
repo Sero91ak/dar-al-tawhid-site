@@ -3,7 +3,7 @@
   "scope": "TAWHID_KIDS_450_PRIVATE_SELF_ATTESTED_HEARING_SUBMISSIONS",
   "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "modelId": "eleven_v4",
-  "knownRealV4TextClips": 276,
+  "knownRealV4TextClips": 282,
   "ageSubmitted": [],
   "claimedApprovalClipCount": 0,
   "submittedIssueClipCount": 0,
@@ -24,13 +24,13 @@
     },
     "7-8": {
       "questions": 150,
-      "fourPartTechnical": 2,
+      "fourPartTechnical": 4,
       "allFourSelfAttestedUnverified": 0,
       "questionsWithReportedIssue": 0
     },
     "9-10": {
       "questions": 150,
-      "fourPartTechnical": 0,
+      "fourPartTechnical": 2,
       "allFourSelfAttestedUnverified": 0,
       "questionsWithReportedIssue": 0
     }
@@ -230,8 +230,7 @@
       "selfAttestedParts": [],
       "reportedIssueParts": [],
       "missingOriginalParts": [
-        "explanation",
-        "question"
+        "explanation"
       ],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
@@ -337,10 +336,7 @@
       "ageBand": "7-8",
       "selfAttestedParts": [],
       "reportedIssueParts": [],
-      "missingOriginalParts": [
-        "explanation",
-        "question"
-      ],
+      "missingOriginalParts": [],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
     },
@@ -348,9 +344,7 @@
       "ageBand": "7-8",
       "selfAttestedParts": [],
       "reportedIssueParts": [],
-      "missingOriginalParts": [
-        "question"
-      ],
+      "missingOriginalParts": [],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
     },
@@ -467,9 +461,7 @@
       "ageBand": "9-10",
       "selfAttestedParts": [],
       "reportedIssueParts": [],
-      "missingOriginalParts": [
-        "question"
-      ],
+      "missingOriginalParts": [],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
     },
@@ -477,9 +469,7 @@
       "ageBand": "9-10",
       "selfAttestedParts": [],
       "reportedIssueParts": [],
-      "missingOriginalParts": [
-        "question"
-      ],
+      "missingOriginalParts": [],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
     },
