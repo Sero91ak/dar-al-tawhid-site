@@ -232,6 +232,17 @@ async function fetchVersionBuild(base) {
       edgeCss.includes(".is-settings-route") &&
       edgeCss.includes(".is-quran-overview") &&
       edgeCss.includes(".is-topics-route");
+    const scrollLinkOk =
+      shellHtml.includes('id="darTestAndroidScrollRecoveryV1390"') &&
+      shellHtml.includes('/test/assets/android-scroll-recovery-v1390.js?v=android-touch-v1390');
+    const {status: scrollStatus, text: scrollJs} =
+      await fetchText(`${base}/assets/android-scroll-recovery-v1390.js?v=android-touch-v1390`);
+    const scrollJsOk = scrollStatus === 200 &&
+      scrollJs.includes("DAR_TEST_ANDROID_TOUCH_SCROLL_RECOVERY_V1390") &&
+      scrollJs.includes("forceResetQrcOverlayLocks") &&
+      scrollJs.includes("__darTestScrollDiagnostic");
+    if (!scrollLinkOk || !scrollJsOk)
+      throw new Error(`Dar Test Android scroll runtime missing: ${label} link=${scrollLinkOk} status=${scrollStatus} asset=${scrollJsOk}`);
     const ok = shellStatus === 200 && edgeLinkOk &&
       edgeStatus === 200 && cssOk;
     console.log(`edge-width ${label}: shell=${shellStatus} linked=${edgeLinkOk} CSS=${edgeStatus} rules=${cssOk} ok=${ok}`);
