@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-test-viewport-browser-geometry-qa-20261017",
+      "at": "2026-10-17T11:51:00+02:00",
+      "approvedBy": "user-explicit-global-adult-responsive-layout-qa-iphone-ipad-desktop-20261017",
+      "reason": "Add regression measurements on existing Android Chromium Dar Test smoke after responsive V1383 release. Only QA code: no visitor, Kids, Push or content change.",
+      "paths": [
+        "test/tools/android-pwa-smoke.cjs"
+      ],
+      "expiresAt": "2026-10-26T23:59:00.000Z"
+    },
+    {
       "id": "kids-owner-unterrichtsarchiv-v27-20261012",
       "at": "2026-10-12T11:30:00+02:00",
       "approvedBy": "user-explicit-create-dedicated-owner-only-all-lessons-reference-age-sorted-page-20261012",
