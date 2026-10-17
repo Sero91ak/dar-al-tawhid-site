@@ -13,6 +13,7 @@ assert.ok(page.includes('KIDS_ACADEMY_WRITING_KEYBOARD_V1438'),"Typing-only CSS 
 assert.ok(page.includes('textarea,input,[contenteditable=true]'),"Text caret touch gestures must remain native");
 assert.ok(page.includes('document.activeElement===answer'),"Keyboard resize must never jump a non-editing lesson");
 assert.ok(page.includes('mode("text")'),"Keep existing text-answer mode");
+assert.ok(page.includes('// Reveal the field without opening the keyboard before the child taps it.'),"Do not auto-focus or surprise-open the mobile keyboard");
 assert.ok(page.includes('mode("voice")'),"Keep existing microphone mode");
 assert.ok(page.includes('var pane=$("#stageSurface"),field=$("#answer")'),"Reveal original answer field, do not duplicate it");
 assert.ok(!page.includes('lessonScrollport.appendChild(lessonActions)'),"Reverted lesson-navigation reparenting must stay absent");
