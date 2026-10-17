@@ -83,6 +83,15 @@ def main():
                 and stage_source["humanPronunciationApprovalGranted"] is False
                 and stage_source["publicReleaseAllowed"] is False,
                 "source/answer audit cannot authorize recording or audio release")
+    archived=ROOT/"kids/review-only/quiz-v4-nine-originals-github-archive-recovery.json"
+    archive=read("kids/review-only/quiz-v4-nine-originals-github-archive-recovery.json") if archived.is_file() else None
+    if archive is not None:
+        require(archive["modelId"]==MODEL
+                and archive["masterVoiceId"]==VOICE
+                and archive["newElevenLabsCreditsSpent"]==0
+                and archive["elevenLabsSpeechSynthesisCalls"]==0
+                and archive["publicReleaseAllowed"] is False,
+                "historical backup search must never generate or publish V4 speech")
     hearing_file=ROOT/"kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json"
     hearing=read("kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json") if hearing_file.is_file() else None
     if hearing is not None:
@@ -180,6 +189,10 @@ def main():
         "olderStage1InternalSourceAnswerAuditItems":stage_source["totalQuestions"] if stage_source else 0,
         "olderStage1IndependentSourceEvidenceLocated":stage_source["independentExternalEvidenceLocatedFor"] if stage_source else 0,
         "olderStage1HumanScholarlySourceApproval":False,
+        "historicalOriginalBackupArchivesExamined":archive["eligibleArchivesExamined"] if archive else 0,
+        "historicalOriginalBackupMatchesRestored":archive["newOriginalsImported"] if archive else 0,
+        "historicalOriginalArchiveSearchExhaustive":False,
+        "historicalOriginalFlowExportChecklist":"kids/review-only/QUIZ-V4-LETZTE9-ORIGINALE-EXPORT.md",
         "humanAudioApprovals":0,"publicEnabled":False,
         "newElevenLabsCreditsConsumedByThisReport":0,
         "recoveryFlowUrl":FLOW,
@@ -226,6 +239,9 @@ def main():
         "Generation-IDs: `"+", ".join(sorted(paid_import["remainingGenerationIds"]))+"`.",
         "",
         "Original-Flow: "+FLOW,
+        "Alle neun vorhandenen Audioelemente sind im Original-Flow eindeutigen Generation-IDs zugeordnet. Exakte Originaldateinamen und sichere Wiederherstellung: `kids/review-only/QUIZ-V4-LETZTE9-ORIGINALE-EXPORT.md`.",
+        "Frühere GitHub-Backup-Archive bereits gescannt: **"+str(details["historicalOriginalBackupArchivesExamined"])+"** echte ZIP-Archive, darunter **"+str(details["historicalOriginalBackupMatchesRestored"])+"** neu wiederhergestellte Generationen. Das ist eine begrenzte, NICHT vollständige Bestandsprüfung. Die erweiterte Suche berücksichtigt zusätzliche Archive/Dateinamen und braucht einen neuen belegten Actions-Lauf.",
+
         "",
         "## Zusätzliche kostenfreie Suche in historischen GitHub-Audioarchiven",
         "",
