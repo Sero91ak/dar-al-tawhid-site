@@ -1,0 +1,45 @@
+#!/usr/bin/env node
+"use strict";
+const fs=require("node:fs");
+const path=require("node:path");
+const assert=require("node:assert/strict");
+const vm=require("node:vm");
+const ROOT=path.resolve(__dirname,"../..");
+const read=(p)=>fs.readFileSync(path.join(ROOT,p),"utf8");
+const worker=read("kids/creator-test/worker.js");
+const css=read("kids/splash-boot-v1.css");
+const js=read("kids/splash-boot-v1.js");
+const img=fs.readFileSync(path.join(ROOT,"kids/assets/kids-splash-20261017-v1.jpg"));
+assert.ok(img.length>100000&&img[0]===0xff&&img[1]===0xd8,"full-size edited splash JPEG is present");
+new vm.Script(js,{filename:"splash-boot-v1.js"});
+new vm.Script(worker.replace("export default {","const worker = {")+"\nworker;",{filename:"kids-creator-worker.js"});
+assert.match(worker,/asset\.clone\(\)\.text\(\)/,"mock response stream must remain readable");
+assert.match(worker,/\bkids-splash-20261017-v1\.jpg\b/);
+assert.match(worker,/kids-test-boot/);
+assert.match(worker,/ktb-track/);
+assert.match(css,/kids-splash-20261017-v1\.jpg/);
+assert.match(css,/background-size:cover/);
+assert.match(js,/target=100/);
+assert.match(js,/document\.readyState/);
+assert.match(js,/maxWaitMs=9000/);
+assert.match(js,/document\.documentElement\.classList\.remove\("kids-test-booting"\)/);
+assert.doesNotMatch(worker,/78%|intro-v74\.mp4/);
+assert.doesNotMatch(css,/hero-home\.png/);
+assert.doesNotMatch(js,/intro-v74\.mp4/);
+const dispatch=new vm.Script(worker.replace("export default {","const worker = {")+"\nworker;");
+const handler=dispatch.runInNewContext({URL,Headers,Response});
+const html="<!doctype html><html><head></head><body><main id=\"view-today\">STARTSEITE</main></body></html>";
+const env={ASSETS:{fetch:async()=>new Response(html,{status:200,headers:{"Content-Type":"text/html"}})}};
+async function get(url){return handler.fetch(new Request("https://kids-preview.example"+url),env)}
+(async()=>{
+  const page=await get("/kids/start.html");
+  const text=await page.text();
+  assert.match(text,/kids-test-boot/);
+  assert.match(text,/kids-splash-20261017-v1\.jpg/);
+  assert.match(text,/kids\/splash-boot-v1\.js/);
+  assert.match(text,/STARTSEITE/,"existing home DOM must remain intact");
+  assert.equal(page.status,200);
+  assert.doesNotMatch(await (await get("/kids/akademie/index.html")).text(),/kids-test-boot/,"non-start modules unaffected");
+  assert.equal((await get("/test")).status,404,"adult/public hosts not routed");
+  console.log("KIDS CREATOR SPLASH PASS: exact edited art, staged meter, HTML injection, visitor isolation.");
+})().catch(e=>{console.error(e);process.exitCode=1});
