@@ -24,6 +24,13 @@ on:
       - kids/index.html
       - kids/start.html
       - kids/shell.html
+      # DĪN: future source-checked lessons and master-text changes must auto-deploy via the sole production Worker.
+      - kids/deen-lessons.js
+      - kids/deen-curriculum-v1.css
+      - kids/item-offline-v1.js
+      - kids/data/deen-curriculum-v1.json
+      - kids/assets/deen/**
+      - kids/tools/test-deen-curriculum-live.cjs
       # Home scroll/navigation hotfixes must reach the iOS Kids visitor app.
       - kids/navigation-v1182.js
       - kids/akademie/**
