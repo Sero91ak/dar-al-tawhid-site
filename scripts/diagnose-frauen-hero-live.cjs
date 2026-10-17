@@ -79,9 +79,9 @@ styles:[...document.querySelectorAll('link[rel="stylesheet"]')].filter(x=>/fraue
      if(request.resourceType()==="document"&&pathname==="/"&&url.hostname==="dar-al-tawhid.de"){
        const response=await requestRoute.fetch();
        let html=await response.text();
-       const legacy=/<script\b[^>]*\bsrc=["']\/test\/assets\/frauen\/frauen-fiqh\.js[^"']*["'][^>]*>\s*<\/script\s*>/gi;
+       const legacy=/<script\b[^>]*\bsrc=["']\/test\/assets\/frauen\/frauen-fiqh\.js[^"']*["'][^>]*>/gi;
        intercepted.removedLegacy=(html.match(legacy)||[]).length;
-       html=html.replace(legacy,"");
+       html=html.replace(legacy,'<script type="application/x-dar-legacy" data-dar-frauen-disabled="1">');
        html=html.replace(/<link\b[^>]*\bhref=["']\/test\/assets\/frauen\/frauen-(?:fiqh|authority-v1292)\.css[^"']*["'][^>]*>/gi,"");
        html=html.replace(/<script\b[^>]*\bsrc=["']\/assets\/frauen\/frauen-fiqh\.js[^"']*["'][^>]*>\s*<\/script\s*>/gi,"");
        const newScript='<script defer src="/assets/frauen/frauen-fiqh.js?v=visitor-frauen-scroll-v1396"></script>';
