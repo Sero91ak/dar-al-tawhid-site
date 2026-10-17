@@ -6,7 +6,16 @@
  document.documentElement.classList.add("kids-test-booting");
  var start=performance.now(), minDisplayMs=3500, maxWaitMs=9000;
  var display=0,target=1,root=null,fill=null,number=null,meter=null,status=null,retry=null;
- var ready=false,error=false,firstPaintReady=false,frame=null;
+ var ready=false,error=false,firstPaintReady=false,frame=null,nativeRevealed=false;
+ function revealNativePoster(){
+   if(nativeRevealed)return;
+   nativeRevealed=true;
+   try{
+     if(window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darKidsCreatorSplashReady){
+       window.webkit.messageHandlers.darKidsCreatorSplashReady.postMessage("poster-rendered");
+     }
+   }catch(e){}
+ }
  var posterURL="/kids/assets/kids-splash-20261017-v1.jpg";
  var homeURL="/kids/assets/kids-salah-v1272/hero-home.png?v=1274";
  function bind(){
@@ -61,7 +70,7 @@
  function sleep(n){return new Promise(function(resolve){setTimeout(resolve,n)})}
  function fail(message){
    if(ready||error||!root)return;
-   error=true;target=Math.min(target,99);
+   error=true;target=Math.min(target,99);revealNativePoster();
    if(frame)cancelAnimationFrame(frame);
    root.setAttribute("data-boot-error","1");
    status.textContent=message||"Das Laden dauert länger als erwartet.";
@@ -72,9 +81,14 @@
    ready=true;
    if(frame)cancelAnimationFrame(frame);
    if(!manual){display=100;paint()}
-   root.classList.add("kids-test-boot-fade");
+   // Underlying layout becomes visible before the covering illustration fades.
+   // Hold 100% briefly to give the child a completed loading moment.
    document.documentElement.classList.remove("kids-test-booting");
-   setTimeout(function(){root.remove()},430);
+   revealNativePoster();
+   requestAnimationFrame(function(){requestAnimationFrame(function(){
+     setTimeout(function(){if(root)root.classList.add("kids-test-boot-fade")},manual?0:250);
+   })});
+   setTimeout(function(){if(root){root.remove();root=null}},1350);
  }
  async function main(){
    await domReady();
@@ -87,6 +101,8 @@
      setTarget(23);
      var art=await imageReady(posterURL);
      if(!art)throw Error("Startbild nicht geladen");
+     await nextPaint();
+     revealNativePoster();
      setTarget(39);
      var hero=await imageReady(homeURL);
      if(!hero)throw Error("Startseitenbild nicht geladen");
@@ -105,7 +121,7 @@
      if(!home||!heroNode||!home.getBoundingClientRect().width||!heroNode.getBoundingClientRect().height)
        throw Error("Startansicht nicht darstellbar");
      firstPaintReady=true;
-     setTarget(97);
+     setTarget(92);
      var remain=minDisplayMs-(performance.now()-start);
      if(remain>0)await sleep(remain);
      if(error)return;
