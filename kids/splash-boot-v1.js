@@ -87,7 +87,10 @@
    // Only 45-54 lightweight fragments. The browser reuses one decoded JPEG.
    var portrait=height>=width,columns=portrait?6:9,rows=portrait?9:5;
    var scale=Math.max(width/posterNatural.width,height/posterNatural.height);
-   var imageW=posterNatural.width*scale,imageH=posterNatural.height*scale;
+   var computedSize=window.getComputedStyle?window.getComputedStyle(poster).backgroundSize:"cover";
+   var stretch=computedSize.indexOf("100%")>=0;
+   var imageW=stretch?width:posterNatural.width*scale;
+   var imageH=stretch?height:posterNatural.height*scale;
    var imageX=(width-imageW)*.5,imageY=(height-imageH)*.5;
    var layer=document.createElement("div");
    layer.className="ktb-shards";
