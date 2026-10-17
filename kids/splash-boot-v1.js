@@ -88,17 +88,15 @@
    setTimeout(function(){
      if(!root)return;
      var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-     var turnSupported=!reduce && !!(window.CSS&&window.CSS.supports&&
-       window.CSS.supports("transform","perspective(1100px) rotateY(-85deg)"));
-     // The whole opaque illustrated cover opens as one 3D book page. Unlike a
-     // vertical mask, no logo is double-exposed through a translucent overlay.
-     // Home DOM is already laid out behind the cover.
+     var feathered=!reduce && !!(window.CSS&&window.CSS.supports&&
+       (window.CSS.supports("-webkit-mask-image","linear-gradient(black,transparent)")||
+        window.CSS.supports("mask-image","linear-gradient(black,transparent)")));
      document.documentElement.classList.remove("kids-test-booting");
-     root.classList.add(turnSupported?"ktb-book-open":"ktb-book-fallback");
+     root.classList.add(feathered?"ktb-storybook":"ktb-soft-fallback");
      requestAnimationFrame(function(){requestAnimationFrame(function(){
        if(root)root.classList.add("ktb-transition-go");
      })});
-     setTimeout(function(){if(root){root.remove();root=null}},turnSupported?1280:reduce?250:840);
+     setTimeout(function(){if(root){root.remove();root=null}},feathered?1360:reduce?290:1000);
    },manual?0:190);
  }
  async function main(){
