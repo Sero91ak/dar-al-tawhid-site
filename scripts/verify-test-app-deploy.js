@@ -257,6 +257,31 @@ async function fetchVersionBuild(base) {
     if (!verified) throw new Error(`Ḥadīṯ-Šarḥ-Detailansicht V1308 nicht ausgeliefert: ${label} ${base}`);
   }
 
+  // DAR_RESPONSIVE_AXIS_V1382: remote content verification, not only build ID.
+  // Both public /test and workers.dev must serve the new adult-only stylesheet
+  // and the identical active app-shell link before a release is called live.
+  for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
+    let ok = false;
+    for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
+      try {
+        const page = await fetchText(`${base}/index.html?responsive-axis-check=v1382-${Date.now()}`);
+        const css = await fetchText(`${base}/assets/dar-responsive-axis-v1382.css?v=1382-test-20261017`);
+        const shellOk = page.status === 200 &&
+          page.text.includes('id="darAdultResponsiveAxisV1382"') &&
+          page.text.includes('app-shell-v1360');
+        const assetOk = css.status === 200 &&
+          css.text.includes("DAR_ADULT_RESPONSIVE_AXIS_V1382") &&
+          css.text.includes("width:100%!important;") &&
+          css.text.includes("--dar-axis-gutter:");
+        ok = shellOk && assetOk;
+        console.log(`responsive-axis ${label} shell=${shellOk} CSS=${assetOk} result=${ok} attempt=${attempt}/${ATTEMPTS}`);
+      } catch(e) { console.log(`responsive-axis ${label}: ${e.message||e}`); }
+      if(ok)break;
+      if(attempt<ATTEMPTS) await sleep(DELAY_MS);
+    }
+    if(!ok) throw new Error(`Responsive axis V1382 nicht auf ${label} ausgeliefert`);
+  }
+
   async function waitForMatchingVersion(label, base) {
     for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
       const v = await fetchVersionBuild(base);
