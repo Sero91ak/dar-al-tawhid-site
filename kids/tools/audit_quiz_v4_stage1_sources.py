@@ -49,19 +49,19 @@ EVIDENCE={
         "url":"https://www.islamweb.net/ar/article/220252/",
         "assessment":"5:6 explicitly includes washing the face in ablution"},
     "kids-quiz-044":{
-        "url":"https://www.islamweb.net/ar/library/index.php?ID=42&page=listing",
+        "url":"https://www.islamweb.net/ar/library/content/202/310/",
         "assessment":"5:6 mentions face, arms, head and feet; washing versus wiping must not be conflated"},
     "kids-quiz-026":{
-        "url":"https://islamweb.net/ar/fatwa/24123/",
-        "assessment":"16:43 invokes asking knowledgeable people; verse context concerns earlier messengers"},
+        "url":"https://www.islamweb.net/ar/library/content/50/2903/",
+        "assessment":"Al-Tabari on Quran 16:43: original context is asking about previous human messengers, not every later legal question"},
     "kids-quiz-389":{
-        "url":"https://islamweb.net/ar/fatwa/24123/",
-        "assessment":"16:43 is applied to questions of religious knowledge, not a blanket proof for any claim"},
+        "url":"https://www.islamweb.net/ar/library/content/50/2903/",
+        "assessment":"Al-Tabari on Quran 16:43: the child-friendly scholarly consultation lesson is an application beyond the immediate original context"},
     "kids-quiz-050":{
         "url":"https://www.islamweb.net/amp/ar/library/content/50/4581/",
         "assessment":"49:9–10 commands reconciliation, including justice where conflicts occur"},
     "kids-quiz-048":{
-        "url":"https://islamweb.net/ar/article/234721/",
+        "url":"https://www.islamweb.net/ar/library/content/50/3532/",
         "assessment":"24:27 requires permission and greeting before entering others' homes"},
     "kids-quiz-036":{
         "url":"https://islamweb.net/ar/library/content/0/7/",
