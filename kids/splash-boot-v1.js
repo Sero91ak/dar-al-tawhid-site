@@ -19,7 +19,7 @@
   render();return true;
  }
  function render(){if(!fill)return;fill.style.width=progress+"%";num.textContent=progress+"%";
-  root.setAttribute("aria-valuenow",String(progress));
+  var meter=root.querySelector(".ktb-track");if(meter)meter.setAttribute("aria-valuenow",String(progress));
  }
  function stage(n,message){
   if(ready||failed)return;
@@ -82,9 +82,7 @@
   if(!home||!heroNode||!home.getBoundingClientRect().width||!heroNode.getBoundingClientRect().height){
     fail("Die Startseite ist noch nicht darstellbar.");return;
   }
-  if(document.readyState!=="complete"&&!loaded){
-   await withTimeout(new Promise(function(resolve){window.addEventListener("load",resolve,{once:true})}),4500);
-  }
+  // Only startup-critical resources gate 100%; optional sections load on demand.
   stage(95,"Fast fertig");
   await nextPaint();
   if(!document.getElementById("view-today")){fail("Die Startseite ist nicht bereit.");return}
