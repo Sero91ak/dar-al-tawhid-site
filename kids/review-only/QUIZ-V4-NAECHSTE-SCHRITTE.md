@@ -10,7 +10,7 @@ Kein bestehendes bezahltes Original darf erneut synthetisiert werden. Keine Audi
 | 9-10 | 2 | 0 | 148 |
 
 **Schon bezahlte Originale noch zu retten:** 9.
-**Neue einzigartige Texte nach echtem Deduplizieren:** 1382 (nur Berechnungsbasis; keine Credits bestellt).
+**Neue einzigartige Texte nach echtem Deduplizieren:** 1381 (nur Berechnungsbasis; keine Credits bestellt).
 
 ## Nächste technische Aktion
 1. Die historischen neun `eleven_v4`-MP3s mit echten Generation-IDs importieren, nicht regenerieren.
