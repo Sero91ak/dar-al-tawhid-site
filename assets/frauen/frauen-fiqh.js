@@ -4701,9 +4701,51 @@
        app&&app.querySelector(".frauen-library-shell.frauen-library-hub"))return "";
     return null;
   }
+
+  // On iOS/native visitor, body overflow-x:hidden creates an inert body
+  // overflow-y:auto scrollport. Its height equals the content height: touch
+  // gestures never reach the scrolling HTML element. Fix only Frauen routes.
+  var previousScroll=null;
+  function restoreScroll(){
+    if(!previousScroll||!document.body)return;
+    var st=document.body.style;
+    for(var i=0;i<2;i++){
+      var prop=i===0?"overflow-x":"overflow-y";
+      var prev=i===0?previousScroll.x:previousScroll.y;
+      var priority=i===0?previousScroll.xp:previousScroll.yp;
+      var ours=i===0?"clip":"visible";
+      if(st.getPropertyValue(prop).trim()===ours&&st.getPropertyPriority(prop)==="important"){
+        if(prev)st.setProperty(prop,prev,priority);
+        else st.removeProperty(prop);
+      }
+    }
+    previousScroll=null;
+  }
+  function syncScroll(value){
+    var body=document.body;
+    if(!body)return;
+    var modal=document.querySelector('dialog[open],[role="dialog"][aria-modal="true"]');
+    var locked=!!(modal&&modal.getClientRects().length&&getComputedStyle(modal).visibility!=="hidden");
+    if(value===null||!body.classList.contains("is-frauen-route")||locked){
+      restoreScroll();return;
+    }
+    if(!previousScroll){
+      var st=body.style;
+      previousScroll={x:st.getPropertyValue("overflow-x"),xp:st.getPropertyPriority("overflow-x"),
+                      y:st.getPropertyValue("overflow-y"),yp:st.getPropertyPriority("overflow-y")};
+    }
+    if(body.style.getPropertyValue("overflow-x").trim()!=="clip"||
+       body.style.getPropertyPriority("overflow-x")!=="important")
+      body.style.setProperty("overflow-x","clip","important");
+    if(body.style.getPropertyValue("overflow-y").trim()!=="visible"||
+       body.style.getPropertyPriority("overflow-y")!=="important")
+      body.style.setProperty("overflow-y","visible","important");
+  }
+
   function repair(){
     if(repairing)return;
     var value=routeValue();
+    syncScroll(value);
     if(value===null)return;
     var app=document.getElementById("appView");
     if(!app)return;
