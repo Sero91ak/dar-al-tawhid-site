@@ -155,6 +155,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-app-crosspromo-20261017",
+      "at": "2026-10-17T12:50:00+02:00",
+      "approvedBy": "user-explicit-apple-tv-and-tawhid-kids-crosspromotion-all-adult-web-apps-20261017",
+      "reason": "Only the adult Mehr > App editorial cross-promotion: released Apple TV and unreleased Kids preview. No Kids app, push, app routing, native builds, or service workers changed; require visitor release approval after test.",
+      "paths": [
+        "assets/dar-more-final-v15.js",
+        "assets/dar-more-final-v15.css"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-test-viewport-browser-geometry-qa-20261017",
       "at": "2026-10-17T11:51:00+02:00",
       "approvedBy": "user-explicit-global-adult-responsive-layout-qa-iphone-ipad-desktop-20261017",
