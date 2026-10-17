@@ -265,6 +265,7 @@ jobs:
           node kids/tools/test-deen-curriculum-v1.cjs
           node kids/tools/verify-global-release-lock.cjs
           node kids/tools/test-creator-worker-v2.cjs
+          node kids/tools/test-creator-splash-v1.cjs
           node kids/tools/test-native-creator-v2.cjs
           node kids/tools/test-v2-salaf-pilot.cjs
           node kids/tools/test-v2-prophets-pilot.cjs
@@ -307,6 +308,15 @@ jobs:
             fi
             echo "KIDS Creator test route OK: $PAGE"
           done
+          # Require the real full-size poster and the decorated entry, not only HTTP 200.
+          curl -fsSL -A 'DarAlTawhidKids-iOS CreatorTest' "$BASE/kids/start.html" > /tmp/kids-creator-boot.html
+          grep -Fq 'id="kids-test-boot"' /tmp/kids-creator-boot.html || { echo "::error::Kids boot overlay missing from deployed HTML"; exit 1; }
+          grep -Fq '/kids/assets/kids-splash-20261017-v1.jpg' /tmp/kids-creator-boot.html || { echo "::error::Approved splash image reference missing"; exit 1; }
+          curl -fsSL "$BASE/kids/assets/kids-splash-20261017-v1.jpg" -o /tmp/kids-creator-splash.jpg
+          test "$(wc -c < /tmp/kids-creator-splash.jpg)" -gt 100000 || { echo "::error::Kids splash JPEG missing or too small"; exit 1; }
+          curl -fsSL "$BASE/kids/splash-boot-v1.js?v=20261017-2" > /tmp/kids-creator-splash.js
+          grep -Fq 'maxWaitMs=9000' /tmp/kids-creator-splash.js || { echo "::error::Kids boot JS version missing"; exit 1; }
+          echo "KIDS TEST approved splash assets and HTML injection: VERIFIED"
           # KIDS Academy original art is copied from desktop-preview only into this isolated build.
           for IMAGE in kids-academy-hero-boys-v1.jpg kids-academy-hero-girls-v1.jpg kids-academy-hero-v1.jpg kids-academy-akhlaq-v1.jpg kids-academy-adab-v1.jpg; do
             CODE="$(curl -fsSL -o /tmp/kids-creator-art -w '%{http_code}' "$BASE/kids/assets/academy-stage/$IMAGE" || true)"
