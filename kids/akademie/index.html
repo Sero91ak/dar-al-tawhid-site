@@ -5138,6 +5138,70 @@ html body #stageSurface{
   document.addEventListener("touchcancel",clear,{capture:true,passive:true});
 })();
 </script>
+<style id="kids-academy-writing-keyboard-v1438">
+/* KIDS_ACADEMY_WRITING_KEYBOARD_V1438
+   Preserve the OLD five-tab / focus-lesson scroll layout. Only while a child
+   actively types, reclaim the dock's now keyboard-covered bottom reserve. */
+body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-typing="true"]
+ > main.wrap > #lessonMain.lesson-main:not([hidden]){
+ padding-bottom:max(9px,env(safe-area-inset-bottom,0px))!important;
+}
+body[data-kids-portal="true"][data-academy-view="lesson"][data-academy-typing="true"]
+ #lessonMain #stageSurface{
+ scroll-padding-block-end:24px!important;
+ padding-bottom:24px!important;
+}
+html body #lessonMain #answer{
+ -webkit-user-select:text!important;
+ user-select:text!important;
+ touch-action:auto!important;
+ font-size:max(16px,1rem)!important;
+}
+</style>
+<script id="kids-academy-writing-keyboard-v1438">
+(function(){
+ "use strict";
+ if(document.body.dataset.kidsPortal!=="true")return;
+ var answer=document.getElementById("answer");
+ var pane=document.getElementById("stageSurface");
+ if(!answer||!pane)return;
+ var revealTimer=null;
+ function revealInput(){
+  if(document.activeElement!==answer||document.getElementById("lessonMain").hidden)return;
+  var r=pane.getBoundingClientRect(),f=answer.getBoundingClientRect();
+  var below=f.bottom-(r.bottom-18),above=(r.top+12)-f.top;
+  if(below>0)pane.scrollTop+=below;
+  else if(above>0)pane.scrollTop-=above;
+ }
+ function ping(active){
+  try{window.parent.postMessage({type:"DAR_KIDS_ACADEMY_INPUT_V1438",focused:active},location.origin)}catch(_){}
+ }
+ function typingState(active){
+  if(active)document.body.dataset.academyTyping="true";
+  else delete document.body.dataset.academyTyping;
+  ping(active);
+ }
+ answer.addEventListener("focus",function(){
+  typingState(true);
+  requestAnimationFrame(revealInput);
+  clearTimeout(revealTimer);
+  revealTimer=setTimeout(revealInput,260);
+ });
+ answer.addEventListener("blur",function(){
+  clearTimeout(revealTimer);
+  setTimeout(function(){
+   if(document.activeElement!==answer)typingState(false);
+  },30);
+ });
+ window.addEventListener("resize",function(){
+  if(document.activeElement===answer)requestAnimationFrame(revealInput);
+ },{passive:true});
+ window.visualViewport?.addEventListener("resize",function(){
+  if(document.activeElement===answer)requestAnimationFrame(revealInput);
+ },{passive:true});
+ window.addEventListener("pagehide",function(){clearTimeout(revealTimer);ping(false)});
+})();
+</script>
 <link rel="stylesheet" href="/kids/akademie/girl-profile-authority-v1430.css?v=1430" data-kids-academy-girl-authority="1430">
 
 </body></html>
