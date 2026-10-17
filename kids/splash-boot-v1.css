@@ -12,7 +12,7 @@ html.kids-test-booting body > :not(#kids-test-boot):not(script){visibility:hidde
  filter:blur(14px);transform:scale(1.055)}
 #kids-test-boot .ktb-poster{position:relative;flex:none;height:100dvh;width:calc(100dvh * .5625);max-width:100vw;
  background:#061a3b url("/kids/assets/kids-splash-20261017-v1.jpg") center/100% 100% no-repeat;
- box-shadow:0 0 60px rgba(0,3,17,.28);overflow:hidden;transform:translate3d(0,clamp(7px,1.35dvh,18px),0)}
+ box-shadow:0 0 60px rgba(0,3,17,.28);overflow:hidden;transform:none}
 #kids-test-boot .ktb-loading{position:absolute;left:7%;width:86%;top:81.05%;height:14%;padding:0;z-index:1;
  text-align:center}
 #kids-test-boot .ktb-progress-labels{display:grid;grid-template-columns:minmax(21px,.11fr) minmax(0,1fr) minmax(34px,.13fr);
