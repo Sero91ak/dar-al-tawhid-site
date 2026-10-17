@@ -700,3 +700,23 @@ html[data-theme] body.is-frauen-route .frauen-library-hero--tone-lebensphasen{
     min-height:286px!important;
   }
 }
+/* DAR_FRAUEN_HERO_SCROLL_ANCESTOR_V1392 · Keep sticky relative to page scroll.
+ * overflow-x:hidden on an ancestor silently creates overflow-y:auto and
+ * prevents position:sticky from following the document scroll on mobile.
+ * On Frauen routes use clip (no scroll container), preserving horizontal crop. */
+html[data-theme] body.is-frauen-route .app,
+html[data-theme] body.is-frauen-route .app > #appView,
+html[data-theme] body.is-frauen-route #appView > .dar-frauen-production-root,
+html[data-theme] body.is-frauen-route #appView .frauen-library-shell,
+html[data-theme] body.is-frauen-route #appView .frauen-library-list{
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+}
+
+/* Sticky must use the root scroller: body overflow-x:hidden computes
+ * overflow-y:auto and steals the sticky containing scrollport even though
+ * scrollingElement is HTML. Preserve deliberate inline modal scroll locks. */
+html[data-theme] body.is-frauen-route{
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+}

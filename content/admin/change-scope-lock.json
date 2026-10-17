@@ -8264,6 +8264,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
+      "id": "frauen-hero-visual-qa-v1393-20261017",
+      "at": "2026-10-17T16:20:00.000Z",
+      "approvedBy": "user-explicit-frauen-hero-restoration-test-visitor-continue-20261017",
+      "reason": "Restore original top hero for all Frauen pages in Test and visitor apps; preserve route-scoped scroll and add independent mobile browser QA. Restrict new-file authorization to exactly the two visual-qa files.",
+      "paths": [
+        "scripts/diagnose-frauen-hero-live.cjs",
+        ".github/workflows/diagnose-frauen-hero-live.yml"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
