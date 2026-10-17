@@ -1363,3 +1363,63 @@ html[data-theme] body.is-quran-overview.has-bottom-nav{
   }
 }
 
+
+
+/* DAR TEST ONLY · V10.8-R · iPhone 17 learning player collision repair.
+   The existing .is-on:not(.player-collapsed) top:0 overrides the older
+   .is-learn rule. Reserve physical space below qrcChrome, never overlap it. */
+html.player-learn body.is-quran-reader-route #darQuranMiniPlayer.is-on.is-learn,
+html.player-reader-dock body.is-quran-reader-route #darQuranMiniPlayer.is-on.is-reader-dock,
+html.player-learn #darQuranMiniPlayer.is-on.is-learn,
+html.player-reader-dock #darQuranMiniPlayer.is-on.is-reader-dock{
+  top:var(--qrc-chrome-h,calc(env(safe-area-inset-top,0px) + 92px))!important;
+  bottom:auto!important;
+  height:124px!important;
+  min-height:124px!important;
+  max-height:124px!important;
+  padding:8px 12px 9px!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  justify-content:space-between!important;
+  gap:2px!important;
+  z-index:555!important;
+  transform:translate3d(0,0,0)!important;
+}
+html.player-learn #qrcChromeSpacer{
+  height:calc(var(--qrc-chrome-h,92px) + 132px)!important;
+  min-height:calc(var(--qrc-chrome-h,92px) + 132px)!important;
+}
+html.player-reader-dock #qrcChromeSpacer{
+  height:calc(var(--qrc-chrome-h,92px) + 86px)!important;
+  min-height:calc(var(--qrc-chrome-h,92px) + 86px)!important;
+}
+html.player-learn #darQuranMiniPlayer.is-on .dqp-top-main,
+html.player-reader-dock #darQuranMiniPlayer.is-on .dqp-top-main{
+  min-height:36px;max-height:38px;
+}
+html.player-learn #darQuranMiniPlayer.is-on .dqp-top-seek,
+html.player-reader-dock #darQuranMiniPlayer.is-on .dqp-top-seek{
+  min-height:18px;max-height:24px;padding:0 0!important;
+}
+html.player-learn #darQuranMiniPlayer.is-on .dqp-learn{
+  min-height:34px;grid-template-columns:repeat(4,minmax(0,1fr));
+}
+html.player-learn #darQuranMiniPlayer.is-on .dqp-learn-btn{
+  min-width:0!important;padding:0 3px!important;
+  overflow:hidden;text-overflow:ellipsis;
+}
+@media (max-width:380px){
+  html.player-learn #darQuranMiniPlayer.is-on .dqp-top-actions{gap:4px}
+  html.player-learn #darQuranMiniPlayer.is-on .dqp-top-ctrl{
+    min-width:34px!important;width:34px!important;height:34px!important;min-height:34px!important;
+  }
+  html.player-learn #darQuranMiniPlayer.is-on .dqp-top-text b{font-size:12px}
+  html.player-learn #darQuranMiniPlayer.is-on .dqp-learn-btn{font-size:9px!important}
+}
+
+
+/* Reader dock without learning controls occupies only one compact line. */
+html.player-reader-dock:not(.player-learn) #darQuranMiniPlayer.is-on.is-reader-dock {
+  height:78px!important;min-height:78px!important;max-height:78px!important;
+  padding:6px 12px 7px!important;
+}
