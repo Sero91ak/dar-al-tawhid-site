@@ -76,11 +76,21 @@ def archive_name(found,name):
         fail("required Actions backup file absent or ambiguously duplicated: "+name)
     return matches[0]
 
+def reject_duplicate_keys(pairs):
+    value={}
+    for key,item in pairs:
+        if key in value:fail("duplicate key in paid original backup JSON: "+key[:90])
+        value[key]=item
+    return value
+
 def get_zip_json(z,found,name):
     key=archive_name(found,name)
     if found[key].file_size>3_000_000:fail("unexpectedly large JSON metadata")
-    try:return json.loads(z.read(key).decode("utf-8"))
-    except (ValueError,UnicodeError) as exc:fail("malformed Actions metadata: "+str(exc)[:100])
+    try:
+        return json.loads(z.read(key).decode("utf-8"),
+                          object_pairs_hook=reject_duplicate_keys)
+    except (ValueError,UnicodeError) as exc:
+        fail("malformed Actions metadata: "+str(exc)[:100])
 
 def verify_mp3(payload):
     if not 1800<len(payload)<6_000_000 or not (
@@ -147,12 +157,18 @@ def import_backup(zip_path,root=ROOT,apply=False):
                 paid.get("mp3Sha256")!=clip.get("sha256")):
                 fail("recovered original voice, source text hash or MP3 receipt differs")
             request=paid.get("providerRequestId")
+            if (request!=clip.get("providerRequestId") or
+                clip.get("status")!="completed-original-mp3-on-review-branch-not-live" or
+                clip.get("qaApproval")!="pending-human-auditory-review"):
+                fail("billed request and original MP3 receipt or human-QA state inconsistent")
+            expected_name=digest((VOICE+"\\n"+MODEL+"\\n"+text).encode("utf-8"))[:32]+".mp3"
             if request and request in known_requests:fail("provider request ID was already charged")
             if request:known_requests.add(request)
             url=clip.get("url") or ""
-            if (not url.startswith("/"+BASE) or not
+            if (not url.startswith("/"+BASE) or
+                url[len(BASE)+1:]!=expected_name or not
                 re.fullmatch(r"[a-f0-9]{32}\.mp3",url[len(BASE)+1:])):
-                fail("non-private MP3 destination in historical backup")
+                fail("non-private or source-mismatched MP3 filename in historical backup")
             name=url.lstrip("/")
             key=archive_name(contents,name)
             payload=z.read(key)
