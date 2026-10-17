@@ -1,0 +1,32 @@
+name: Frauen Live Hero Visual QA
+on:
+  pull_request:
+    paths:
+      - 'scripts/diagnose-frauen-hero-live.cjs'
+      - '.github/workflows/diagnose-frauen-hero-live.yml'
+      - 'assets/frauen/**'
+      - 'test/assets/frauen/**'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  live-hero-visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: |
+          npm install --no-save --ignore-scripts playwright
+          npx playwright install --with-deps chromium
+      - name: Inspect visible hero and scroll on deployed Test and visitor apps
+        run: node scripts/diagnose-frauen-hero-live.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: frauen-hero-live-visual-evidence
+          path: frauen-hero-live-evidence/
+          retention-days: 5
+          if-no-files-found: warn
