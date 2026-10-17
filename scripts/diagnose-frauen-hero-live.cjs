@@ -69,20 +69,29 @@ function snapshot(){
   for(const route of routes){
    const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:route.key==="visitor"?"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS":"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
    const page=await context.newPage();const errors=[];
+   // Test the real release load path: serve changed JS/CSS as stylesheet/script
+   // responses before the page begins loading. No CSP-blocked inline styles
+   // or duplicate hero runtime injection after boot.
+   await page.route(/\\/(?:test\\/)?assets\\/frauen\\/frauen-fiqh\\.js(?:\\?|$)/,
+     async interception=>{
+       const u=new URL(interception.request().url());
+       const file=(u.pathname.startsWith("/test/")?"test/":"")+"assets/frauen/frauen-fiqh.js";
+       await interception.fulfill({status:200,contentType:"application/javascript; charset=utf-8",
+         body:fs.readFileSync(path.join(process.cwd(),file))});
+     });
+   await page.route(/\\/(?:test\\/)?assets\\/frauen\\/frauen-authority-v1292\\.css(?:\\?|$)/,
+     async interception=>{
+       const u=new URL(interception.request().url());
+       const file=(u.pathname.startsWith("/test/")?"test/":"")+"assets/frauen/frauen-authority-v1292.css";
+       await interception.fulfill({status:200,contentType:"text/css; charset=utf-8",
+         body:fs.readFileSync(path.join(process.cwd(),file))});
+     });
    page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
    const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
    await page.waitForTimeout(6000);
    let before=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-initial.png")});
-   // Simulate the proposed code on the currently deployed app, before merging.
-   const localScript=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-fiqh.js":"assets/frauen/frauen-fiqh.js"),"utf8");
-   const tag="/* DAR_FRAUEN_HERO_SAFE_EVENTS_V1395";
-   if(!localScript.includes(tag))throw Error("Repair snippet not in checkout");
-   await page.addScriptTag({content:localScript.slice(localScript.indexOf(tag))});
-   const localCss=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-authority-v1292.css":"assets/frauen/frauen-authority-v1292.css"),"utf8");
-   const cssTag="/* DAR_FRAUEN_HERO_SCROLL_ANCESTOR_V1392";
-   if(!localCss.includes(cssTag))throw Error("Scroll CSS absent in checkout");
-   await page.addStyleTag({content:localCss.slice(localCss.indexOf(cssTag))});
+   // Modified resources were intercepted on initial load, not injected later.
    await page.waitForTimeout(1100);
    let repaired=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
