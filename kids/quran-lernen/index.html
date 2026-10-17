@@ -2,57 +2,110 @@
 <html lang="de">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#092838"><meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#0a2837"><meta name="robots" content="noindex,nofollow">
 <title>Qurʾān lernen · DĀR AL TAWḤĪD KIDS TEST</title>
-<link rel="stylesheet" href="/kids/quran-lernen/styles.css?v=1">
-<script src="/kids/quran-lernen/app.js?v=2" defer></script>
+<link rel="stylesheet" href="/kids/quran-lernen/styles.css?v=3">
+<script src="/kids/quran-lernen/app.js?v=3" defer></script>
 </head>
 <body>
 <div class="ql-app">
 <header class="ql-header">
-<a href="/kids/start.html" class="ql-back" aria-label="Zurück zur Kinder-Startseite">‹ <span>Zurück</span></a>
-<div class="ql-brand">DĀR AL TAWḤĪD <span>KIDS</span></div><span class="ql-preview">TEST</span>
+  <a href="/kids/start.html" class="ql-back" aria-label="Zurück zur Kinder-Startseite"><span aria-hidden="true">‹</span><small>Zurück</small></a>
+  <div class="ql-brand">DĀR AL TAWḤĪD <span>KIDS</span></div>
+  <span class="ql-preview" title="Ausschließlich Test-App">TEST</span>
 </header>
-<main>
-<section class="ql-hero" aria-labelledby="ql-hero-title">
-<div class="ql-hero-text"><p class="ql-eyebrow">DEINE QURʾĀN-REISE</p><h1 id="ql-hero-title">Qurʾān lernen</h1>
-<p>Hören. Wort für Wort entdecken. Verstehen. Wiederholen.</p>
-<span class="ql-hero-note">Ein Schritt nach dem anderen – in deinem Tempo.</span></div></section>
-<section class="ql-summary" aria-label="Dein Fortschritt"><div><small id="ql-profile">Dein Lernplatz</small><strong id="ql-summary-text">Lernstand wird geladen</strong></div>
-<div id="ql-progress-track" class="ql-progress-track" role="progressbar" aria-label="Sicher gelernte Einheiten" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="ql-progress-fill"></span></div></section>
-<section id="ql-catalog" class="ql-catalog" aria-label="Sūren und Āyāt">
-<div class="ql-headline"><p class="ql-eyebrow">STARTE MIT DEN GRUNDLAGEN</p><h2>Kurze Sūren</h2><p>Wähle die Sūra, die du lernen möchtest.</p></div>
-<div id="ql-surahs" class="ql-grid"><p>Die Sūren werden geladen …</p></div>
-<div class="ql-headline"><p class="ql-eyebrow">WEITERE WICHTIGE VERSE</p><h2>Ausgewählte Āyāt</h2><p>Wertvolle Verse zum Lernen und Verstehen.</p></div>
-<div id="ql-extras" class="ql-grid"></div></section>
-<section id="ql-lesson" class="ql-lesson" hidden aria-label="Qurʾān-Lektion">
-<button type="button" id="ql-library" class="ql-inline-back">‹ Alle Sūren anzeigen</button>
-<div id="ql-lesson-heading" class="ql-lesson-heading"></div>
-<div class="ql-lesson-top"><div><small id="ql-ayah-index">Āyah 1</small><strong>Hören · Lesen · Verstehen · Wiederholen</strong></div><span id="ql-status" class="ql-state" role="status" aria-live="polite">Bereit</span></div>
-<article class="ql-verse"><p id="ql-arabic" class="ql-arabic" lang="ar" dir="rtl"></p><p id="ql-transliteration" class="ql-translit"></p>
-<p id="ql-german" class="ql-german"></p><small id="ql-source" class="ql-source"></small></article>
-<section class="ql-play-panel"><div class="ql-play-title"><strong>1. Dem Rezitator zuhören</strong><small>al-Ḥuṣarī · menschliche Qurʾān-Rezitation</small></div>
-<audio id="ql-audio" preload="none" playsinline></audio><div class="ql-actions">
-<button type="button" id="ql-play" class="ql-primary">▶ Āyah anhören</button>
-<button type="button" id="ql-stop">■ Stopp</button>
-<label class="ql-repeat-control">Wiederholen <select id="ql-repeat"><option value="1">1×</option><option value="3">3×</option><option value="5">5×</option></select></label></div>
-<small id="ql-audio-message" class="ql-audio-message" role="status" aria-live="polite">Tippe zum Anhören. Internet für die Rezitation erforderlich.</small></section>
-<section class="ql-words"><h3>2. Wort für Wort entdecken</h3><p>Tippe ein arabisches Wort an. Seine Buchstaben werden einzeln sichtbar.</p>
-<div id="ql-word-tiles" class="ql-word-tiles" lang="ar" dir="rtl"></div>
-<div id="ql-word-detail" class="ql-word-detail" aria-live="polite">Wähle ein Wort aus.</div>
-<p class="ql-trust-note">Wort-Audio wird erst nach exakter Ton- und Ausspracheprüfung freigeschaltet. Keine ungeprüften Audioschnitte.</p></section>
-<section class="ql-explain"><h3>3. Bedeutung verstehen</h3><p id="ql-meaning"></p><small id="ql-meaning-note" class="ql-source">Die Verserklärung wird geprüft.</small>
-<div class="ql-narration"><span class="ql-narration-mark">MASTER</span><div><strong>Erklärung mit Serhats Masterstimme</strong><small>Die deutsche Tafsīr-Aufnahme wird nach Quellenprüfung ergänzt.</small></div><button type="button" disabled>Audio folgt</button></div>
-<p class="ql-sabab">Offenbarungsanlass: Hier wird nur ein konkret belegter, geprüfter Anlass ergänzt – niemals eine Vermutung.</p></section>
-<section class="ql-practice"><h3>4. Wiederholen und merken</h3><p>Sprich die Āyah selbst nach. Es wird kein Mikrofon verwendet und deine Aussprache nicht automatisch bewertet.</p>
-<div class="ql-actions"><button type="button" id="ql-repeat-done">Ich habe nachgesprochen</button><button type="button" id="ql-understood">Bedeutung verstanden</button></div>
-<div class="ql-lesson-progress"><span id="ql-verse-progress">Noch nicht begonnen</span><span id="ql-days-progress"></span></div></section>
-<div class="ql-ayah-nav"><button type="button" id="ql-prev">← Vorherige Āyah</button><button type="button" id="ql-next">Nächste Āyah →</button></div>
-<section class="ql-completion"><h3>Dein Lernweg</h3><p id="ql-checklist">Hören, nachsprechen und verstehen.</p>
-<button type="button" id="ql-secure" disabled>Sūra als sicher gelernt bestätigen</button>
-<p>Erst nach allen Lernschritten und drei unterschiedlichen Übungstagen lässt sich der Abschluss bestätigen.</p></section>
+<main id="ql-main">
+<section id="ql-catalog" class="ql-catalog" aria-label="Dein Qurʾān-Lernplatz">
+  <div class="ql-hero">
+    <div class="ql-hero-text">
+      <div class="ql-eyebrow">DEINE KLEINE QURʾĀN-REISE</div>
+      <h1 id="ql-hero-title">Hören. Lernen.<br>Verstehen.</h1>
+      <p>Entdecke die Sūren Schritt für Schritt.</p>
+    </div>
+  </div>
+  <section class="ql-summary" aria-label="Dein Lernfortschritt">
+    <div class="ql-summary-top">
+      <div class="ql-summary-icon" aria-hidden="true">✦</div>
+      <div><small id="ql-profile">Dein Lernplatz</small><strong id="ql-summary-text">Wir laden deinen Lernstand …</strong></div>
+      <span class="ql-summary-star" aria-hidden="true">☆</span>
+    </div>
+    <div class="ql-progress-track" id="ql-progress-track" role="progressbar" aria-label="Sicher gelernte Einheiten" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="ql-progress-fill"></span></div>
+  </section>
+  <section class="ql-choose" aria-label="Wähle deinen Lernweg">
+    <div class="ql-section-title"><span class="ql-eyebrow">DEIN LERNABENTEUER</span><h2>Was möchtest du lernen?</h2></div>
+    <div class="ql-switch" role="group" aria-label="Qurʾān-Lerninhalte wählen">
+      <button id="ql-show-surahs" class="ql-switch-active" type="button" aria-pressed="true"><span aria-hidden="true">❖</span> Kurze Sūren</button>
+      <button id="ql-show-extras" type="button" aria-pressed="false"><span aria-hidden="true">✧</span> Wichtige Āyāt</button>
+    </div>
+    <div id="ql-surahs" class="ql-grid" aria-label="Sūren"><p class="ql-loading">Die Sūren werden geladen …</p></div>
+    <div id="ql-extras" class="ql-grid" aria-label="Wichtige Āyāt" hidden></div>
+  </section>
+</section>
+
+<section id="ql-lesson" class="ql-lesson" hidden aria-label="Interaktiver Qurʾān-Lernmodus">
+  <div class="ql-lesson-nav">
+    <button type="button" id="ql-library" class="ql-inline-back" aria-label="Zurück zur Sūrenauswahl"><span aria-hidden="true">‹</span> Sūren</button>
+    <span class="ql-lesson-pill" id="ql-lesson-pill">Mein Lernweg</span>
+    <span class="ql-trophy" aria-hidden="true">✦</span>
+  </div>
+  <div id="ql-lesson-heading" class="ql-lesson-heading"></div>
+  <div class="ql-lesson-progress-wrap">
+    <div class="ql-track-label"><strong id="ql-ayah-index">Āyah 1 von 4</strong><span id="ql-verse-progress">Dein Fortschritt</span></div>
+    <div class="ql-lesson-track"><span id="ql-lesson-fill"></span></div>
+  </div>
+  <nav class="ql-stepper" aria-label="Lernschritte">
+    <button type="button" class="ql-step active" data-step="0" aria-current="step"><span class="ql-step-symbol" aria-hidden="true">♫</span><small>Hören</small></button>
+    <button type="button" class="ql-step" data-step="1"><span class="ql-step-symbol" aria-hidden="true">◉</span><small>Sprechen</small></button>
+    <button type="button" class="ql-step" data-step="2"><span class="ql-step-symbol" aria-hidden="true">أ</span><small>Wörter</small></button>
+    <button type="button" class="ql-step" data-step="3"><span class="ql-step-symbol" aria-hidden="true">✧</span><small>Verstehen</small></button>
+  </nav>
+  <div class="ql-studio">
+    <div class="ql-studio-top"><span class="ql-eyebrow" id="ql-studio-kicker">JETZT ZUHÖREN</span><span id="ql-status" class="ql-state" role="status" aria-live="polite">Bereit</span></div>
+    <article class="ql-verse" aria-label="Der ausgewählte Qurʾānvers">
+      <p id="ql-arabic" class="ql-arabic" lang="ar" dir="rtl"></p>
+      <p id="ql-transliteration" class="ql-translit"></p>
+      <small id="ql-source" class="ql-source"></small>
+    </article>
+    <audio id="ql-audio" preload="none" playsinline></audio>
+    <div class="ql-stage-panels">
+      <section class="ql-stage-pane" id="ql-panel-listen" data-pane="0" aria-label="Hören">
+        <div class="ql-stage-callout"><span class="ql-big-icon" aria-hidden="true">♫</span><div><h2>Hör dem Rezitator zu</h2><p>Höre die Āyah in Ruhe. Danach kannst du sie selbst nachsprechen.</p></div></div>
+        <div class="ql-player-line"><button type="button" id="ql-play" class="ql-audio-play"><span aria-hidden="true">▶</span><span class="ql-play-copy">Āyah anhören</span></button><div class="ql-player-info"><strong>Maḥmūd al-Ḥuṣarī</strong><span>Originalrezitation · Āyah für Āyah</span><div class="ql-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><button type="button" id="ql-stop" class="ql-player-stop" aria-label="Rezitation stoppen">■</button></div>
+        <div class="ql-audio-meter" aria-hidden="true"><span id="ql-audio-fill"></span></div>
+        <div class="ql-audio-footer"><label class="ql-repeat-control" for="ql-repeat">Wiederholen <select id="ql-repeat"><option value="1">1×</option><option value="3">3×</option><option value="5">5×</option></select></label><small id="ql-audio-message" role="status" aria-live="polite">Einmal tippen, um zu hören.</small></div>
+      </section>
+      <section class="ql-stage-pane" id="ql-panel-speak" data-pane="1" aria-label="Nachsprechen" hidden>
+        <div class="ql-stage-callout"><span class="ql-big-icon" aria-hidden="true">◉</span><div><h2>Jetzt bist du dran!</h2><p>Höre noch einmal zu und sprich die Āyah langsam nach.</p></div></div>
+        <div class="ql-centered-actions"><button type="button" id="ql-speak-play" class="ql-secondary-action">♫ Noch einmal anhören</button><button type="button" id="ql-repeat-done" class="ql-primary-action">✓ Ich habe nachgesprochen</button></div>
+        <small class="ql-stage-disclaimer">Du entscheidest selbst, ob du geübt hast. Es wird keine Sprachaufnahme gemacht.</small>
+      </section>
+      <section class="ql-stage-pane" id="ql-panel-words" data-pane="2" aria-label="Wörter und Buchstaben" hidden>
+        <div class="ql-stage-callout"><span class="ql-big-icon ql-big-ar" lang="ar" aria-hidden="true">ب</span><div><h2>Wörter entdecken</h2><p>Tippe ein Wort an. Entdecke seine einzelnen Buchstaben und seine Bedeutung.</p></div></div>
+        <div id="ql-word-tiles" class="ql-word-tiles" lang="ar" dir="rtl"></div>
+        <div id="ql-word-detail" class="ql-word-detail" aria-live="polite">Wähle ein Wort aus.</div>
+        <p class="ql-trust-note">Wort-Audio wird erst nach exakter Aussprache- und Zeitprüfung freigeschaltet. Kein ungenauer Zusammenschnitt.</p>
+      </section>
+      <section class="ql-stage-pane" id="ql-panel-understand" data-pane="3" aria-label="Bedeutung verstehen" hidden>
+        <div class="ql-stage-callout"><span class="ql-big-icon" aria-hidden="true">✧</span><div><h2>Was bedeutet die Āyah?</h2><p>Wir schauen uns die deutsche Bedeutung zusammen an.</p></div></div>
+        <p id="ql-german" class="ql-german"></p>
+        <div class="ql-meaning-group"><p id="ql-meaning"></p><small id="ql-meaning-note" class="ql-source">Die Verserklärung wird geprüft.</small></div>
+        <div class="ql-narration"><span class="ql-narration-mark">MASTER</span><div><strong>Erklärung mit deiner Masterstimme</strong><small>Die deutsche Tafsīr-Aufnahme wird nach Quellenprüfung ergänzt.</small></div><button type="button" disabled>Audio folgt</button></div>
+        <details class="ql-sabab"><summary>Warum wurde die Āyah herabgesandt?</summary><p>Offenbarungsanlass: Ein besonderer Anlass wird nur gezeigt, wenn er zuverlässig belegt ist. Ansonsten erklären wir die Bedeutung und Lehre der Āyah.</p></details>
+        <button type="button" id="ql-understood" class="ql-primary-action">✓ Bedeutung verstanden</button>
+      </section>
+    </div>
+  </div>
+  <div class="ql-stage-dock">
+    <button type="button" id="ql-step-prev" class="ql-step-prev" aria-label="Vorheriger Lernschritt">‹</button>
+    <button type="button" id="ql-step-next" class="ql-step-next">Weiter zum nächsten Schritt <span aria-hidden="true">→</span></button>
+  </div>
+  <div class="ql-ayah-nav" aria-label="Zwischen den Āyāt wechseln">
+    <button type="button" id="ql-prev">‹ Vorherige Āyah</button>
+    <span class="ql-divider-point" aria-hidden="true">◆</span>
+    <button type="button" id="ql-next">Nächste Āyah ›</button>
+  </div>
+  <div class="ql-completion"><span id="ql-days-progress">Übungstage: 0 von 3</span><p id="ql-checklist">Höre, sprich nach und verstehe jeden Vers.</p><button type="button" id="ql-secure" disabled>Sūra als sicher gelernt bestätigen</button></div>
 </section>
 </main>
-<footer class="ql-footer">DĀR AL TAWḤĪD KIDS · Eigenständiger Qurʾān-Lernbereich in der Test-App. Arbeitsheft und Lernakademie bleiben getrennt.</footer>
-</div>
-</body></html>
+<footer class="ql-footer">DĀR AL TAWḤĪD KIDS · Nur KIDS TEST · Lernakademie und Arbeitsheft bleiben getrennt.</footer>
+</div></body></html>
