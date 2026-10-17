@@ -68,7 +68,28 @@ EVIDENCE={
         "assessment":"Sahih al-Bukhari hadith 8 states five pillars. Muslim 16 cross-referenced in Ibn al-Mulaqqin's commentary."},
     "kids-quiz-022":{
         "url":"https://dorar.net/h/qhgIL7pG?osoul=1",
-        "assessment":"Sahih Muslim 8 in the hadith of Jibril includes belief in the Last Day as a pillar of iman."}
+        "assessment":"Sahih Muslim 8 in the hadith of Jibril includes belief in the Last Day as a pillar of iman."},
+    "kids-quiz-033":{
+        "url":"https://www.islamweb.net/ar/fatwa/52279/",
+        "assessment":"Quran 49:12 expressly forbids backbiting; keep the children's answer focused on harmful talk behind others."},
+    "kids-quiz-031":{
+        "url":"https://www.islamweb.net/ar/fatwa/95384/",
+        "assessment":"Quran 3:134 expressly praises those who control anger and pardon others."},
+    "kids-quiz-043":{
+        "url":"https://www.islamweb.net/ar/fatwa/50212/",
+        "assessment":"Quran 2:238 commands preserving the prayers, with special mention of the middle prayer."},
+    "kids-quiz-520":{
+        "url":"https://islamweb.net/ar/fatwa/62487/",
+        "assessment":"Quran 2:255 negates slumber and sleep of Allah; not a denial of His knowledge or power."},
+    "kids-quiz-087":{
+        "url":"https://www.islamweb.net/ar/fatwa/130695/",
+        "assessment":"Quran 72:18 forbids invoking anyone with Allah in the context of worship."},
+    "kids-quiz-025":{
+        "url":"https://islamweb.net/ar/fatwa/119900/",
+        "assessment":"Quran 33:21 makes the Messenger an excellent example for believers."},
+    "kids-quiz-080":{
+        "url":"https://www.islamweb.net/ar/library/content/50/4583/",
+        "assessment":"Tabari on Quran 49:11 condemns nicknames that the person dislikes and insulting labels."}
 }
 CAVEATS={
     "kids-quiz-026":"Interpretive application of 16:43: original context is asking about earlier messengers.",
