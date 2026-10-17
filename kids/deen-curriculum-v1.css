@@ -1,0 +1,128 @@
+/* DĀR AL TAWḤĪD · TAWḤĪD KIDS Creator preview
+   Dīn curriculum: additive style, original six overview cards untouched.
+   Boy and girl palettes remain independent in body-mounted overlays. */
+html body #dlLibraryPage{
+  --dl-lesson-ink:#fff8ed;
+  --dl-lesson-line:rgba(226,194,134,.30);
+  --dl-lesson-tint:rgba(222,186,114,.12);
+  --dl-lesson-glow:rgba(200,161,104,.12);
+}
+html body #dlLibraryPage .dl-library-nav{
+  box-shadow:0 9px 23px rgba(0,0,0,.15)!important;
+}
+html body #dlLibraryPage #dlNavTitle{
+  overflow-wrap:anywhere;
+  font-size:clamp(17px,4.6vw,22px)!important;
+  line-height:1.18!important;
+}
+html body #dlLibraryPage #dlNavSub{
+  display:block;
+  margin-top:4px;
+  white-space:normal;
+  line-height:1.35;
+}
+html body #dlLibraryPage #dlGrid.dl-lessons-grid{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:13px!important;
+  padding-bottom:calc(12px + env(safe-area-inset-bottom,0px))!important;
+}
+html body #dlLibraryPage .dl-lesson-row{
+  min-height:152px!important;
+  border:1px solid var(--dl-lesson-line)!important;
+  background:
+    radial-gradient(ellipse at 100% 0%,var(--dl-lesson-glow),transparent 62%),
+    linear-gradient(138deg,var(--dl-card-a,#092937),var(--dl-card-b,#071e2d))!important;
+  box-shadow:inset 0 1px rgba(255,255,255,.052),0 10px 27px rgba(0,11,20,.15)!important;
+}
+html body #dlLibraryPage .dl-lesson-row .ms-row-visual{
+  min-height:152px!important;
+  position:relative!important;
+}
+html body #dlLibraryPage .dl-lesson-row .ms-row-visual img{
+  object-fit:cover!important;
+  object-position:center!important;
+  transition:filter .18s ease;
+}
+html body #dlLibraryPage .dl-lesson-row .ms-row-visual::after{
+  background:
+    linear-gradient(90deg,transparent 24%,rgba(6,25,38,.13) 47%,var(--dl-image-edge) 100%),
+    linear-gradient(0deg,rgba(3,14,25,.20),transparent 58%)!important;
+}
+html body #dlLibraryPage .dl-lesson-row .ms-row-copy{
+  align-content:center!important;
+  padding:18px clamp(13px,3vw,22px)!important;
+}
+html body #dlLibraryPage .dl-lesson-row .ms-row-title{
+  font-size:clamp(20px,5.4vw,28px)!important;
+  line-height:1.13!important;
+  letter-spacing:-.018em!important;
+}
+html body #dlLibraryPage .dl-lesson-row .dl-row-lesson{
+  color:var(--dl-label,#efd18d)!important;
+  margin-top:9px!important;
+  font-size:clamp(11px,2.9vw,13px)!important;
+}
+html body #dlLibraryPage .dl-lesson-row .ms-row-summary{
+  margin-top:8px!important;
+  color:var(--dl-secondary,rgba(247,249,246,.83))!important;
+  line-height:1.46!important;
+  font-size:clamp(11px,3.1vw,13px)!important;
+  -webkit-line-clamp:unset!important;
+  max-height:none!important;
+}
+html body #dlLibraryPage .dl-lesson-row .ms-rank{
+  border-color:var(--dl-lesson-line)!important;
+  background:rgba(9,22,33,.8)!important;
+}
+html body #dlLibraryPage .dl-lesson-row:focus-visible{
+  outline:2px solid var(--dl-label)!important;
+  outline-offset:3px!important;
+}
+html body #dlLibraryPage .dl-lesson-row.dl-pending{
+  opacity:.69;
+  cursor:default!important;
+  filter:grayscale(.16);
+}
+html body #dlLibraryPage .dl-lesson-row.dl-pending .ms-row-title{opacity:.93}
+html body:has(.app[data-gender="girl"]) #dlLibraryPage{
+  --dl-lesson-ink:#fff3f3;
+  --dl-lesson-line:rgba(233,174,197,.34);
+  --dl-lesson-tint:rgba(246,191,206,.10);
+  --dl-lesson-glow:rgba(231,165,202,.105);
+}
+html body:has(.app[data-gender="girl"]) #dlLibraryPage .dl-lesson-row .ms-row-visual::after{
+  background:
+    linear-gradient(90deg,transparent 24%,rgba(49,35,58,.12) 47%,var(--dl-image-edge) 100%),
+    linear-gradient(0deg,rgba(31,17,37,.2),transparent 58%)!important;
+}
+html body:has(.app[data-gender="girl"]) #dlLibraryPage .dl-lesson-row .ms-rank{
+  background:rgba(47,29,49,.86)!important;
+}
+@media(min-width:740px){
+  html body #dlLibraryPage #dlGrid.dl-lessons-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    column-gap:17px!important;
+    row-gap:16px!important;
+  }
+  html body #dlLibraryPage .dl-lesson-row{
+    grid-template-columns:minmax(132px,42%) minmax(0,1fr)!important;
+    min-height:218px!important;
+  }
+  html body #dlLibraryPage .dl-lesson-row .ms-row-visual{min-height:218px!important}
+  html body #dlLibraryPage .dl-lesson-row .ms-row-copy{padding:17px 17px!important}
+  html body #dlLibraryPage .dl-lesson-row .ms-row-title{font-size:clamp(20px,2.2vw,27px)!important}
+}
+@media(max-width:390px){
+  html body #dlLibraryPage .dl-lesson-row{
+    grid-template-columns:minmax(106px,36%) minmax(0,1fr)!important;
+    min-height:164px!important;
+  }
+  html body #dlLibraryPage .dl-lesson-row .ms-row-visual{min-height:164px!important}
+  html body #dlLibraryPage .dl-lesson-row .ms-row-copy{padding:13px 11px!important}
+  html body #dlLibraryPage .dl-lesson-row .ms-row-title{font-size:19px!important}
+  html body #dlLibraryPage .dl-lesson-row .ms-row-summary{font-size:11px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html body #dlLibraryPage .dl-lesson-row *{transition:none!important}
+}
