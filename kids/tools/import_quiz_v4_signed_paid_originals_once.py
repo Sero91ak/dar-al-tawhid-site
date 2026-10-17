@@ -70,8 +70,11 @@ def main():
     source=req.get("originals")
     require(isinstance(source,list) and 0<len(source)<=10,
             "exactly one bounded already-paid originals batch expected")
-    byid={x["generationId"]:x for x in escrow["entries"]}
-    require(len(byid)==len(escrow["entries"]),"duplicated source provider generation")
+    # Only actually generated originals have a generation ID. Future
+    # source texts are reserved with null IDs to prohibit double charges.
+    finished_ids=[x["generationId"] for x in escrow["entries"] if x.get("generationId")]
+    byid={x["generationId"]:x for x in escrow["entries"] if x.get("generationId")}
+    require(len(byid)==len(finished_ids),"duplicated non-empty provider generation ID")
     require(len(source)==len({x["generationId"] for x in source}),
             "signed original generation repeated")
     protect_paid_texts(ROOT,reg,paid)
