@@ -14,6 +14,10 @@ assert.ok(img.length>100000&&img[0]===0xff&&img[1]===0xd8,"full-size edited spla
 new vm.Script(js,{filename:"splash-boot-v1.js"});
 new vm.Script(worker.replace("export default {","const worker = {")+"\nworker;",{filename:"kids-creator-worker.js"});
 assert.match(worker,/asset\.clone\(\)\.text\(\)/,"mock response stream must remain readable");
+assert.match(worker,/TextDecoderStream/,"production streams markup without buffering all 534KB");
+assert.match(worker,/kids-test-first-frame-css/,"early inline boot prevents white browser canvas");
+assert.match(worker,/apple-touch-startup-image/,"PWA startup image hint is present");
+assert.match(worker,/media="print"/,"external splash styling must not block first paint");
 assert.match(worker,/\bkids-splash-20261017-v1\.jpg\b/);
 assert.match(worker,/kids-test-boot/);
 assert.match(worker,/ktb-track/);
@@ -75,5 +79,33 @@ async function get(url){return handler.fetch(new Request("https://kids-preview.e
   assert.equal(page.status,200);
   assert.doesNotMatch(await (await get("/kids/akademie/index.html")).text(),/kids-test-boot/,"non-start modules unaffected");
   assert.equal((await get("/test")).status,404,"adult/public hosts not routed");
+  const streamHandler=dispatch.runInNewContext({
+    URL,Headers,Response,TextDecoderStream,TextEncoderStream,TransformStream
+  });
+  const encoder=new TextEncoder();
+  const stream=new ReadableStream({
+    start(controller){
+      controller.enqueue(encoder.encode('<!doctype html><html><head><meta charset="utf-8">'));
+      setTimeout(()=>{
+        controller.enqueue(encoder.encode('<title>KIDS</title></head><body><main id="view-today">STREAMED HOME</main></body></html>'));
+        controller.close();
+      },45);
+    }
+  });
+  const streamingEnv={ASSETS:{fetch:async()=>new Response(stream,{status:200,headers:{"Content-Type":"text/html","Content-Length":"999","Content-Encoding":"gzip"}})}};
+  const streaming=await streamHandler.fetch(new Request("https://kids-preview.example/kids/start.html"),streamingEnv);
+  assert.equal(streaming.status,200);
+  assert.equal(streaming.headers.get("Content-Length"),null,"rewritten HTML has no stale length");
+  assert.equal(streaming.headers.get("Content-Encoding"),null,"rewritten HTML is not gzip encoded");
+  const reader=streaming.body.getReader();
+  const first=await reader.read();
+  const firstText=new TextDecoder().decode(first.value);
+  assert.match(firstText,/kids-test-first-frame/,"stream must deliver dark CSS before full 534KB HTML");
+  let complete=firstText;
+  for(;;){const chunk=await reader.read();if(chunk.done)break;complete+=new TextDecoder().decode(chunk.value)}
+  assert.match(complete,/<body><div id="kids-test-boot"/);
+  assert.match(complete,/STREAMED HOME/);
+  assert.equal((complete.match(/id="kids-test-boot"/g)||[]).length,1,"exactly one splash overlay");
+  assert.match(complete,/apple-touch-startup-image/);
   console.log("KIDS CREATOR SPLASH PASS: exact edited art, staged meter, HTML injection, visitor isolation.");
 })().catch(e=>{console.error(e);process.exitCode=1});
