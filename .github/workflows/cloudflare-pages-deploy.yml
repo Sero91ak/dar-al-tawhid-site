@@ -80,6 +80,8 @@ on:
       - quellen/**
       - links/**
       - download/**
+      # Offizielle klickbare E-Mail-Signatur: HTML und Markenbilder live veröffentlichen.
+      - signatur/**
       - data/scholar-index-meta.json
       - data/scholar-history-curated.json
       - wrangler.toml
