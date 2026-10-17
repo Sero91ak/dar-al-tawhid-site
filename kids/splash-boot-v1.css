@@ -5,7 +5,7 @@ html.kids-test-booting body > :not(#kids-test-boot):not(script){visibility:hidde
 #kids-test-boot{position:fixed!important;inset:0!important;z-index:2147483645!important;visibility:visible!important;
  display:flex;align-items:center;justify-content:center;background:#07152f;color:#fff5d8;
  font-family:"SF Pro Rounded","Arial Rounded MT Bold",Nunito,system-ui,sans-serif;
- opacity:1;transition:opacity .62s cubic-bezier(.22,1,.36,1);overflow:hidden;text-align:center;isolation:isolate;will-change:opacity}
+ opacity:1;overflow:hidden;text-align:center;isolation:isolate}
 #kids-test-boot::before{content:"";position:absolute;inset:-3%;z-index:-1;
  background:linear-gradient(180deg,rgba(3,9,28,.32),rgba(4,14,34,.76)),
  url("/kids/assets/kids-splash-20261017-v1.jpg") center /cover no-repeat;
@@ -38,33 +38,38 @@ html.kids-test-booting body > :not(#kids-test-boot):not(script){visibility:hidde
  border:1px solid #ffe5aa;border-radius:999px;color:#07213b;background:#f8d581;
  padding:10px 15px;font:800 14px system-ui,sans-serif;white-space:nowrap;cursor:pointer}
 #kids-test-boot[data-boot-error="1"] .ktb-recover{display:block}
-/* KIDS TEST shatter (one shared cached poster JPEG, GPU-only transforms).
-   No blue intermediate stage and no text layers crossfading over one another. */
-#kids-test-boot .ktb-shards{display:none;position:absolute;inset:0;z-index:4;pointer-events:none;overflow:visible}
-#kids-test-boot .ktb-shard{display:block;position:absolute;margin:0;padding:0;border:0;
- background-repeat:no-repeat;opacity:1;transform:translate3d(0,0,0);
- backface-visibility:hidden;contain:paint;pointer-events:none}
-#kids-test-boot.ktb-shatter{background:transparent!important;pointer-events:none!important}
-#kids-test-boot.ktb-shatter::before{display:none!important}
-#kids-test-boot.ktb-shatter .ktb-poster{background:none!important;box-shadow:none!important}
-#kids-test-boot.ktb-shatter .ktb-loading{visibility:hidden!important}
-#kids-test-boot.ktb-shatter .ktb-shards{display:block}
-#kids-test-boot .ktb-shards.ktb-shards-go .ktb-shard{
- animation:ktb-gentle-fall .96s cubic-bezier(.22,.58,.33,1) var(--ktb-delay,0ms) both;
- will-change:transform,opacity
+/* KIDS TEST V6 · Storybook Reveal.
+ * A single continuous feathered edge uncovers the fully painted home.
+ * No shard-grid, particle renderer, video decoder, intermediate color, or DOM clone.
+ * On iOS Safari, -webkit-mask is the primary route. */
+#kids-test-boot.ktb-storybook{pointer-events:none!important;
+ -webkit-mask-image:linear-gradient(to bottom,
+   #000 0%,#000 47%,rgba(0,0,0,.97) 48%,rgba(0,0,0,.82) 50%,
+   rgba(0,0,0,.44) 52%,rgba(0,0,0,.12) 54%,transparent 57%,transparent 100%);
+ mask-image:linear-gradient(to bottom,
+   #000 0%,#000 47%,rgba(0,0,0,.97) 48%,rgba(0,0,0,.82) 50%,
+   rgba(0,0,0,.44) 52%,rgba(0,0,0,.12) 54%,transparent 57%,transparent 100%);
+ -webkit-mask-size:100% 250%;mask-size:100% 250%;
+ -webkit-mask-position:0 0;mask-position:0 0;
+ -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
 }
-@keyframes ktb-gentle-fall{
- 0%{transform:translate3d(0,0,0) rotate(0deg) scale(1);opacity:1}
- 38%{opacity:1}
- 68%{opacity:.96}
- 100%{transform:translate3d(var(--ktb-x,0px),var(--ktb-y,125px),0) rotate(var(--ktb-r,6deg)) scale(.83);opacity:0}
+#kids-test-boot.ktb-storybook.ktb-transition-go{
+ animation:ktb-storybook-open .96s cubic-bezier(.65,.06,.24,1) both
 }
-/* Reduced-motion / low-memory fallback: a directional clip reveals home,
-   never an intermediate colored screen. */
-#kids-test-boot.ktb-wipe{pointer-events:none!important;animation:ktb-clean-wipe .68s ease-in-out both}
-@keyframes ktb-clean-wipe{
- from{clip-path:inset(0 0 0 0)}
- to{clip-path:inset(100% 0 0 0)}
+@keyframes ktb-storybook-open{
+ 0%{-webkit-mask-position:0 0;mask-position:0 0;opacity:1}
+ 85%{opacity:1}
+ 100%{-webkit-mask-position:0 100%;mask-position:0 100%;opacity:1}
+}
+/* Motion-reduction or unsupported masks: one direct fast opacity reveal.
+ * The homepage is behind the loader, never behind a blue bridge. */
+#kids-test-boot.ktb-soft-fallback{pointer-events:none!important}
+#kids-test-boot.ktb-soft-fallback.ktb-transition-go{
+ animation:ktb-storybook-fallback .64s cubic-bezier(.2,.75,.3,1) both
+}
+@keyframes ktb-storybook-fallback{
+ from{opacity:1}
+ to{opacity:0}
 }
 @media (max-width:700px) and (orientation:portrait){
  #kids-test-boot .ktb-poster{width:100vw;height:100dvh;max-width:none;background-size:cover;
@@ -76,4 +81,4 @@ html.kids-test-booting body > :not(#kids-test-boot):not(script){visibility:hidde
  #kids-test-boot .ktb-track{height:clamp(14px,3dvh,24px)}
  #kids-test-boot .ktb-percent{font-size:15px;margin-top:3px}
 }
-@media (prefers-reduced-motion:reduce){#kids-test-boot .ktb-fill{transition:none}#kids-test-boot.ktb-wipe{animation-duration:.18s}}
+@media (prefers-reduced-motion:reduce){#kids-test-boot .ktb-fill{transition:none}#kids-test-boot.ktb-soft-fallback.ktb-transition-go{animation-duration:.16s}}
