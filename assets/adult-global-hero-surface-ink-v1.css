@@ -1,0 +1,206 @@
+/* DĀR AL TAWḤĪD · adult visual authority · 2026-10-17
+   Shared by visitor and Dar Test, all existing appearance themes.
+   Three narrowly-scoped repairs: background-Hero, structural card-in-card frames,
+   legible labels on genuinely LIGHT (not photographic) surfaces.
+   Geometry and functionality of interactive cards, modal dialogs, scroll/nav,
+   Kids, audio, prayers and push are deliberately unchanged. */
+
+/* A page/reading section is not a card. Preserve child interactive surfaces. */
+html[data-theme] body.has-bottom-nav.is-home-route #appView :is(
+  .home-v380-shell,.home-v380-section,.view-head-home-row--v380
+),
+html[data-theme] body.has-bottom-nav.is-post-route #appView :is(
+  .post-reader,.post-reader-main
+),
+html[data-theme] body.has-bottom-nav.is-topics-route #appView .topics-hub,
+html[data-theme] body.has-bottom-nav.is-topic-route #appView .topic-collection-page {
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+}
+
+/* The eight-slide reader is a full-width editorial area, not a white rectangle.
+   Its horizontal track, overflow masking and navigation controls MUST remain. */
+html[data-theme] body.has-bottom-nav.is-post-route #appView .post-slides {
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  margin-block:clamp(12px,3vw,22px)!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.has-bottom-nav.is-post-route #appView .post-slides :is(
+  .post-slide-window,.post-slide-track,.post-slide,.post-slide-footer
+){
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border-radius:0!important;
+}
+html[data-theme] body.has-bottom-nav.is-post-route #appView .post-slide {
+  border:0!important;
+  padding-inline:clamp(12px,3.8vw,26px)!important;
+}
+html[data-theme] body.has-bottom-nav.is-post-route #appView .post-slide-quote{
+  background:transparent!important;
+  background-color:transparent!important;
+  background-image:none!important;
+  border:0!important;
+  border-inline-start:2px solid color-mix(in srgb,var(--theme-accent,var(--gold2)) 60%,transparent)!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  padding:clamp(12px,3vw,19px) clamp(12px,3vw,22px)!important;
+}
+html[data-theme] body.has-bottom-nav.is-post-route #appView .post-slide-footer{
+  border-top:1px solid color-mix(in srgb,var(--theme-accent,var(--gold2)) 25%,transparent)!important;
+  padding-inline:clamp(12px,3.8vw,26px)!important;
+}
+/* Sources and related sections are part of the document, not nested slabs. */
+html[data-theme] body.has-bottom-nav.is-post-route #appView .post-reader > :is(.post-after-panel,.source-strong,.related-compact-card){
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border-inline:0!important;
+  border-radius:0!important;
+}
+/* Remove decorative dark translucent rectangle from home introduction. */
+html[data-theme] body.has-bottom-nav.is-home-route .top-shell.theme-hero-shell > .isnad{
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+  border-inline:0!important;
+}
+
+/* All adult post/category Hero artworks use the HERO area as the actual image surface.
+   No floating <img>, no width:100vw breakout inside inset parents.
+   Preserve actual photographic backgrounds with cover, never substitute flat fill. */
+html[data-theme] body.has-bottom-nav:is(.is-post-route,.is-topics-route,.is-topic-route) #appView.view{
+  padding-inline:0!important;
+  max-width:100%!important;
+}
+html[data-theme] body.has-bottom-nav.is-post-route #appView.view > .post-reader > .post-reader-title,
+html[data-theme] body.has-bottom-nav.is-topics-route #appView.view > .topics-hub > .view-head,
+html[data-theme] body.has-bottom-nav.is-topic-route #appView.view > .topic-collection-page > .view-head {
+  position:relative!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  box-sizing:border-box!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+  overflow:hidden!important;
+}
+/* Specifically post reader: quiet dark veil, full photograph visible beneath,
+   true independent editorial Hero, title readable against every appearance. */
+html[data-theme] body.has-bottom-nav.is-post-route #appView.view > .post-reader > .post-reader-title {
+  min-height:clamp(350px,56svh,660px)!important;
+  margin-block:0!important;
+  padding:
+    clamp(34px,5svh,70px)
+    max(20px,env(safe-area-inset-right,0px),env(safe-area-inset-left,0px))
+    clamp(28px,5svh,58px)!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  background-image:
+    linear-gradient(90deg,rgba(8,14,12,.63),rgba(8,14,12,.28) 60%,rgba(8,14,12,.08)),
+    linear-gradient(0deg,rgba(8,14,12,.64) 0%,transparent 58%),
+    var(--px-art)!important;
+  background-position:center,center,70% 42%!important;
+}
+html[data-theme] body.has-bottom-nav.is-post-route #appView.view > .post-reader > .post-reader-title::before {
+  display:none!important;
+  content:none!important;
+}
+html[data-theme] body.has-bottom-nav.is-post-route #appView.view > .post-reader > .post-reader-title :is(h2,.kicker) {
+  color:#FFF5E6!important;
+  -webkit-text-fill-color:#FFF5E6!important;
+  text-shadow:0 2px 12px rgba(0,0,0,.5)!important;
+}
+@media(min-width:800px) {
+  html[data-theme] body.has-bottom-nav.is-post-route #appView.view > .post-reader > .post-reader-title {
+    min-height:clamp(370px,42vw,650px)!important;
+    padding-inline:max(30px,calc((100% - 1120px)/2))!important;
+  }
+}
+@media(max-width:430px){
+  html[data-theme] body.has-bottom-nav.is-post-route #appView.view > .post-reader > .post-reader-title{
+    background-position:center,center,73% 42%!important;
+  }
+}
+/* Gentle blend into the page without a harsh separate horizontal slab. */
+html[data-theme] body.has-bottom-nav.is-post-route #appView .post-reader > .post-reader-title{
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+}
+
+/* Dark text where the material is light. Do NOT touch photographic hero labels,
+   dark appearance labels, or white text inside deliberate coloured buttons. */
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+body.has-bottom-nav {
+  --dar-light-plain-ink:#181B19;
+  --dar-light-plain-muted:#3E4540;
+}
+html[data-theme="soft"] body.has-bottom-nav{
+  --dar-light-plain-ink:#241E21;
+  --dar-light-plain-muted:#4B4046;
+}
+html[data-theme="eisgold"] body.has-bottom-nav{
+  --dar-light-plain-ink:#182435;
+  --dar-light-plain-muted:#3D4A58;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.has-bottom-nav,
+html[data-theme="salbei"] body.has-bottom-nav{
+  --dar-light-plain-ink:#17211B;
+  --dar-light-plain-muted:#354B3E;
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+body.has-bottom-nav .top-shell.theme-hero-shell .brand-kicker-row small,
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+body.has-bottom-nav .top-shell.theme-hero-shell :is(.isnad-label,.isnad-speaker,.isnad-words,.isnad-quote),
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+body.has-bottom-nav.is-home-route #appView :is(.home-v380-kicker,.home-v380-section-title) {
+  color:var(--dar-light-plain-ink)!important;
+  -webkit-text-fill-color:var(--dar-light-plain-ink)!important;
+  text-shadow:none!important;
+  filter:none!important;
+  opacity:1!important;
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+body.has-bottom-nav .top-shell.theme-hero-shell .isnad-source,
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+body.has-bottom-nav.is-home-route #appView :is(.home-v380-open-row__excerpt,.home-v380-post-excerpt,.home-v380-post-meta) {
+  color:var(--dar-light-plain-muted)!important;
+  -webkit-text-fill-color:var(--dar-light-plain-muted)!important;
+  text-shadow:none!important;
+  opacity:1!important;
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+body.has-bottom-nav.is-post-route #appView .post-slide :is(
+ .post-slide-kicker,h3,.post-slide-quote,.post-slide-explanation,.post-slide-source,.post-slide-count
+){
+  color:var(--dar-light-plain-ink)!important;
+  -webkit-text-fill-color:var(--dar-light-plain-ink)!important;
+  text-shadow:none!important;
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+body.has-bottom-nav.is-post-route #appView .post-slide :is(.post-slide-quote,.post-slide-explanation) :is(p,span,strong,b,em,i){
+  color:var(--dar-light-plain-ink)!important;
+  -webkit-text-fill-color:var(--dar-light-plain-ink)!important;
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"])
+body.has-bottom-nav.is-post-route #appView .post-slide-source{
+  color:var(--dar-light-plain-muted)!important;
+  -webkit-text-fill-color:var(--dar-light-plain-muted)!important;
+}
+/* Desktop/phone reduced motion: slider already respects it; no new animation. */
