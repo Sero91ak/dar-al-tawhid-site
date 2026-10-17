@@ -36,7 +36,8 @@ jobs:
 
       - name: Check MP3 hashes, playable codec, levels, voice and unresolved listening approvals
         run: |
-          python3 -m py_compile kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 -m py_compile kids/tools/qa_quiz_v4_saved_mp3.py kids/tools/report_quiz_v4_450_progress.py kids/tools/test_report_quiz_v4_450_progress.py
+          python3 kids/tools/test_report_quiz_v4_450_progress.py -v
           python3 kids/tools/qa_quiz_v4_saved_mp3.py
           python3 kids/tools/report_quiz_v4_450_progress.py
 
