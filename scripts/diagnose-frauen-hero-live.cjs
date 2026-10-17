@@ -59,7 +59,8 @@ function snapshot(){
       }catch(e){return {error:String(e)}}
     })(),
     images:[...document.querySelectorAll(".frauen-library-card.has-visual")].slice(0,2).map(pick),
-    styles:[...document.querySelectorAll('link[rel="stylesheet"]')].filter(x=>/frauen/.test(x.href)).map(x=>x.href)};
+    scripts:[...document.querySelectorAll('script[src*="frauen-fiqh.js"]')].map(x=>x.src),
+styles:[...document.querySelectorAll('link[rel="stylesheet"]')].filter(x=>/frauen/.test(x.href)).map(x=>x.href)};
 }
 (async()=>{
  let browser;let issues=[];
@@ -68,6 +69,15 @@ function snapshot(){
   for(const route of routes){
    const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:route.key==="visitor"?"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS":"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
    const page=await context.newPage();const errors=[];
+   // Emulate precisely the visitor-only HTML cleanup from site-router V1396
+   // before the initial HTML parse. No Test app resources are loaded.
+   await page.route("**/?frauen-scroll-probe=1396",async interception=>{
+     const response=await interception.fetch();
+     let html=await response.text();
+     html=html.replace(/<script\b[^>]*\bsrc=["']\/test\/assets\/frauen\/frauen-fiqh\.js[^"']*["'][^>]*>\s*<\/script\s*>/gi,"");
+     html=html.replace(/<link\b[^>]*\bhref=["']\/test\/assets\/frauen\/frauen-(?:fiqh|authority-v1292)\.css[^"']*["'][^>]*>/gi,"");
+     await interception.fulfill({response,body:html});
+   });
    // Test the real release load path: serve changed JS/CSS as stylesheet/script
    // responses before the page begins loading. No CSP-blocked inline styles
    // or duplicate hero runtime injection after boot.
@@ -115,12 +125,14 @@ function snapshot(){
    await page.screenshot({path:path.join(out,route.key+"-after-scroll.png")});
    all.push({key:route.key,status:response.status(),before,repaired,afterTouch,after,errors});
    console.log(JSON.stringify({route:route.key,status:response.status(),
-    before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles,shellChildren:before.shellChildren,renderer:before.renderer},
+    before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles,scripts:before.scripts,shellChildren:before.shellChildren,renderer:before.renderer},
     repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer,body:repaired.body,html:repaired.html,inline:repaired.inlineStyles,guard:repaired.safeGuardLoaded,modals:repaired.modalDiagnostics,ancestors:repaired.ancestors.map(x=>({cls:x.classes,overflowX:x.overflowX,overflowY:x.overflowY}))},after:{scroll:after.docScroll,touchScroll:afterTouch.docScroll,body:after.body,hero:after.hero,stage:after.stage,heading:after.heading,ancestors:after.ancestors.map(x=>({cls:x.classes,overflowY:x.overflowY}))},errors}));
    if(before.app&&(!repaired.hero||repaired.hero.height<180||repaired.hero.bottom<100)){
      issues.push(route.key+" upper hero missing from first viewport");
    }
    if(before.app&&after.stage&&after.stage.bottom<100)issues.push(route.key+" stage scrolls off-screen");
+   if(before.app && (before.scripts.length!==1||before.scripts[0].includes("/test/")))
+     issues.push("visitor loaded duplicate/wrong Frauen script: "+JSON.stringify(before.scripts));
    if(before.app && after.docScroll<70)
      issues.push(route.key+" document cannot scroll after touch + wheel, scroll="+after.docScroll);
    if(before.app && afterTouch.docScroll<70)
