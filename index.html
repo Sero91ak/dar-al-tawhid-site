@@ -25127,7 +25127,7 @@ function requestBrowserPosition(){
     },{enableHighAccuracy:true,timeout:18000,maximumAge:0});
   });
 }
-function darGpsIsAuto(){return getPrayerSettings().locationMode==="auto"}
+function darGpsIsAuto(){const auto=getPrayerSettings().locationMode==="auto";if(!auto&&darGpsWatchId!==null)darGpsStopWatch();return auto}
 function darGpsDistanceMeters(a,b,c,d){
   const toR=Math.PI/180,dy=(c-a)*toR,dx=(d-b)*toR;
   const h=Math.sin(dy/2)**2+Math.cos(a*toR)*Math.cos(c*toR)*Math.sin(dx/2)**2;
