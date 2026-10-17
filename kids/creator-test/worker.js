@@ -56,7 +56,7 @@ export default {
     // 530 KB visitor HTML or public routes. The script runs before app parsing.
     const isBootPage = ["/kids/start", "/kids/start.html", "/kids/index.html", "/kids/shell.html"].includes(path);
     if (isBootPage && asset.ok && request.method === "GET") {
-      const original = await asset.text();
+      const original = await asset.clone().text();
       const head = '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-1">'
         + '<script src="/kids/splash-boot-v1.js?v=20261017-1"></script>';
       const boot = '<div id="kids-test-boot" role="region" aria-label="TAWḤĪD KIDS wird vorbereitet">'
