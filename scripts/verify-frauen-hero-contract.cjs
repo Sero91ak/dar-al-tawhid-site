@@ -10,7 +10,7 @@ const frozen={
   "assets/frauen/frauen-fiqh.js": "2eeb486a100ad3e433860a9bb1c09e225edd5a4c",
   "assets/frauen/frauen-live-adapter.js": "43022758d8a0e02b2e32a541ce0cf1c8c927418e",
   "test/assets/frauen/frauen-authority-v1292.css": "07b9fa32585de8fcb57aad13b13ab2c67167ee4b",
-  "test/assets/frauen/frauen-fiqh.js": "fb1e8e84e277344f2fea22ce6ae82c54a2e6c165"
+  "test/assets/frauen/frauen-fiqh.js": "d2abb88d444de8879046e4edc58ca659b1eb94e8"
 };
 function gitBlobSha(content){
   const data=Buffer.from(content,"utf8");
