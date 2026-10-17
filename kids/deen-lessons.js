@@ -43,7 +43,7 @@ function sourceHtml(item){
 }
 function groupFor(id){return groups.find(x=>x.id===id)||null}
 function groupLessons(id){const g=groupFor(id);return g?g.lessons.map(x=>allLessons.find(i=>i.id===x.id)||x):[]}
-function isReady(lesson){return !!(lesson&&lesson.status!=="planned"&&String(lesson.masterStoryText||"").trim()&&Array.isArray(lesson.sourceRefs)&&lesson.sourceRefs.length)}
+function isReady(lesson){return !!(lesson&&(lesson.status==="existing"||lesson.status==="published")&&String(lesson.masterStoryText||"").trim()&&Array.isArray(lesson.sourceRefs)&&lesson.sourceRefs.length)}
 function groupDone(id){const all=groupLessons(id),ready=all.filter(isReady);return all.length===5&&ready.length===all.length&&ready.every(x=>done(x.id))}
 function updateHeading(){
   const g=groupFor(selectedCategory);

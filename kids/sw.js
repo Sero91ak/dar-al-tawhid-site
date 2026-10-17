@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1441";
+const CACHE_NAME="dar-al-tawhid-kids-v1442";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -80,7 +80,9 @@ const CORE_PRECACHE=[
   "/kids/data/story-hub.json?v=7",
   "/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-lessons.css?v=2",
-  "/kids/deen-lessons.js?v=8",
+  "/kids/deen-curriculum-v1.css?v=1",
+  "/kids/data/deen-curriculum-v1.json?v=2",
+  "/kids/deen-lessons.js?v=12",
   "/kids/global-detail-dock-v1247.css?v=1428",
   "/kids/global-hero-seam-v1412.css?v=1413",
   "/kids/girls-profile-deep-fix-v1339.css?v=1339",
@@ -312,7 +314,7 @@ const KIDS_BOOT_PRECACHE=[
   "/kids/assets/kids-salah-v1272/hero-home.png?v=1274",
   "/kids/assets/kids-home-v1222/dar-title-reference-clean.svg?v=1229",
   "/kids/manifest.webmanifest",
-  "/kids/item-offline-v1.js?v=2",
+  "/kids/item-offline-v1.js?v=5",
   "/kids/item-offline-v1.css?v=2",
   "/kids/kids-story-action-contrast-v1345.css?v=1346",
   "/kids/offline-library-v1.js?v=1",
@@ -543,12 +545,12 @@ self.addEventListener("fetch",function(event){
     return;
   }
   /* DĪN category catalog: refresh exact six lessons online; keep offline fallback. */
-  if(url.pathname==="/kids/data/deen-lessons.json"){
+  if(url.pathname==="/kids/data/deen-lessons.json"||url.pathname==="/kids/data/deen-curriculum-v1.json"){
     event.respondWith(networkFirst(request));
     return;
   }
   /* DĪN DETAIL RUNTIME: network-first so reading/mode repairs are immediate. */
-  if(url.pathname==="/kids/deen-lessons.js"){
+  if(url.pathname==="/kids/deen-lessons.js"||url.pathname==="/kids/deen-curriculum-v1.css"||url.pathname==="/kids/item-offline-v1.js"){
     event.respondWith(networkFirst(request));
     return;
   }
