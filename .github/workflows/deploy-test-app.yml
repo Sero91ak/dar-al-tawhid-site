@@ -288,7 +288,7 @@ jobs:
           set -euo pipefail
           BASE="https://dar-al-tawhid-kids-creator.sero91ak.workers.dev"
           # A newly created workers.dev hostname can take time to propagate.
-          for PAGE in /kids/start.html /kids/akademie/index.html /kids/version.json /kids/test-console/ /kids/test-console/index.html /kids/test-console/catalogue-v1.json /kids/test-console/manifest.webmanifest /kids/test-console/studio-v1.js /kids/test-console/studio-v1.css /kids/test-console/sw.js /kids/test-console/return-to-studio.js; do
+          for PAGE in /kids/start.html /kids/akademie/index.html /kids/version.json /kids/test-console/ /kids/test-console/index.html /kids/test-console/catalogue-v1.json /kids/test-console/manifest.webmanifest /kids/test-console/studio-v1.js /kids/test-console/studio-v1.css /kids/test-console/sw.js /kids/test-console/return-to-studio.js /kids/quran-lernen/index.html /kids/quran-lernen/catalog.json /kids/quran-lernen/suren.json /kids/quran-lernen/app.js /kids/quran-lernen/styles.css /kids/quran-lernen/home-card.css; do
             URL="$BASE$PAGE"
             OK=0
             for ATTEMPT in $(seq 1 18); do
