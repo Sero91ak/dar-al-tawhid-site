@@ -73,6 +73,7 @@ def build():
           "not 150 questions in each age band")
     requested = {}
     use = defaultdict(set)
+    question_fragments = defaultdict(set)
     # Most utterances are *composed* from many separately paid original
     # fragments. Never synthesize the full question text in addition to its
     # segments: that would double-charge and break the exact composition map.
@@ -99,6 +100,7 @@ def build():
                 guard(s not in guards, "unreconciled old paid text: " + h)
                 requested[h] = s
                 use[h].add(q["questionId"])
+                question_fragments[q["questionId"]].add(h)
     # Respect ambiguous sent-but-not-confirmed POSTs. They are NEVER retried.
     if STAGE_ATTEMPTS.is_file():
         journal = load(STAGE_ATTEMPTS)
@@ -124,7 +126,7 @@ def build():
         while True:
             options = []
             for qid, q in by_id.items():
-                needed = {digest(q[k]["text"]) for k in KINDS if digest(q[k]["text"]) in pending}
+                needed = question_fragments[qid] & pending
                 unseen = needed - chosen_set
                 if not unseen:
                     continue
