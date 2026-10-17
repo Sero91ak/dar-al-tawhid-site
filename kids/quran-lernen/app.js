@@ -72,11 +72,15 @@ function showStage(step){
  if(!state.item)return;
  state.step=Math.max(0,Math.min(3,Number(step)||0));
  if(state.step!==0&&state.step!==1&&!audio.paused)audio.pause();
+ const r=record(state.item),v=verse(),seen=(r.wordSeen||{})[v.id]||[];
  for(const el of document.querySelectorAll(".ql-step")){
-  const active=Number(el.dataset.step)===state.step;el.classList.toggle("active",active);
+  const n=Number(el.dataset.step),active=n===state.step;
+  const completed=n===0?!!r.heard[v.id]:n===1?!!r.spoken[v.id]:n===2?seen.length>=v.words.length:!!r.understood[v.id];
+  el.classList.toggle("active",active);el.classList.toggle("complete",completed);
   if(active)el.setAttribute("aria-current","step");else el.removeAttribute("aria-current");
  }
  for(const el of document.querySelectorAll(".ql-stage-pane"))el.hidden=Number(el.dataset.pane)!==state.step;
+ $("ql-completion").hidden=!(state.step===3&&state.index===state.item.verses.length-1);
  txt("ql-studio-kicker",stepNames[state.step]);
  $("ql-step-prev").disabled=state.step===0;
  const atLastAyah=state.index===state.item.verses.length-1;
@@ -100,19 +104,29 @@ $("ql-step-next").addEventListener("click",()=>{
 });
 $("ql-speak-play").addEventListener("click",()=>{if(!audio.paused&&audio.src){audio.pause()}start()});
 function renderWords(v){const holder=$("ql-word-tiles"),detail=$("ql-word-detail");holder.replaceChildren();detail.textContent="Wähle ein Wort aus.";
- for(const word of v.words){const b=document.createElement("button");b.type="button";b.className="ql-word-tile";b.setAttribute("aria-pressed","false");b.textContent=word.ar;
+ const r=record(state.item),seen=r.wordSeen&&Array.isArray(r.wordSeen[v.id])?r.wordSeen[v.id]:[];
+ v.words.forEach((word,index)=>{const b=document.createElement("button");b.type="button";b.className="ql-word-tile";b.setAttribute("aria-pressed","false");b.textContent=word.ar;
+ if(seen.includes(index))b.classList.add("ql-word-visited");
  b.addEventListener("click",()=>{holder.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");detail.replaceChildren();
+ if(!r.wordSeen)r.wordSeen={};
+ if(!Array.isArray(r.wordSeen[v.id]))r.wordSeen[v.id]=[];
+ if(!r.wordSeen[v.id].includes(index))r.wordSeen[v.id].push(index);
+ b.classList.add("ql-word-visited");save();
+ document.querySelector('.ql-step[data-step="2"]').classList.toggle("complete",r.wordSeen[v.id].length>=v.words.length);
  const t=document.createElement("strong");t.textContent=word.meaning?"Bedeutung: "+word.meaning:"Einzelübersetzung noch in Prüfung.";detail.append(t);
  const letters=document.createElement("div");letters.className="ql-letters";letters.dir="rtl";
  const chars=(typeof Intl.Segmenter==="function")?Array.from(new Intl.Segmenter("ar",{granularity:"grapheme"}).segment(word.ar),x=>x.segment):Array.from(word.ar);
- for(const ch of chars){const span=document.createElement("span");span.textContent=ch;letters.append(span)}detail.append(letters)});
- holder.append(b)}
+ for(const ch of chars){const span=document.createElement("span");span.textContent=ch;letters.append(span)}detail.append(letters);
+ const counter=document.createElement("small");counter.className="ql-word-counter";counter.textContent="  ·  "+r.wordSeen[v.id].length+"/"+v.words.length+" Wörter entdeckt";detail.append(counter)});
+ holder.append(b)}) 
 }
 function renderProgress(){if(!state.item)return;const s=stats(state.item),r=s.r,v=verse();txt("ql-verse-progress",s.completed+" von "+state.item.verses.length+" Āyāt mit allen Lernschritten");txt("ql-days-progress",(r.days||[]).length+" von 3 Übungstagen");$("ql-lesson-fill").style.width=s.pct+"%";
  const eligible=done(state.item,r)&&(r.days||[]).length>=3;
  txt("ql-checklist",r.secure?"Sicher gelernt – von dir bestätigt.":eligible?"Alle Schritte sind erfüllt. Du kannst deinen Lernerfolg bestätigen.":"Höre, sprich nach und verstehe jede Āyah. Übe an drei verschiedenen Tagen.");
  $("ql-secure").disabled=!eligible||!!r.secure;$("ql-secure").textContent=r.secure?"✓ Sicher gelernt":"Als sicher gelernt bestätigen";
  txt("ql-status",r.heard[v.id]?"Schon gehört":"Bereit");$("ql-repeat-done").textContent=r.spoken[v.id]?"✓ Nachgesprochen":"Ich habe nachgesprochen";$("ql-understood").textContent=r.understood[v.id]?"✓ Verstanden":"Bedeutung verstanden";
+ const vsteps=[!!r.heard[v.id],!!r.spoken[v.id],((r.wordSeen||{})[v.id]||[]).length>=v.words.length,!!r.understood[v.id]];
+ document.querySelectorAll(".ql-step").forEach((el,i)=>el.classList.toggle("complete",vsteps[i]));
 }
 function renderMasterDraft(item,v){
  const note=$("ql-meaning-note");
