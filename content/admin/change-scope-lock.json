@@ -7998,6 +7998,21 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-24T23:59:00.000Z"
+    },
+    {
+      "id": "visitor-global-viewport-axis-v1382-20261017",
+      "at": "2026-10-17T10:41:00+02:00",
+      "approvedBy": "user-explicit-adult-responsive-global-push-live-20261017",
+      "reason": "User explicitly authorizes fixing horizontal viewport drift and publishing globally across adult DĀR AL TAWḤĪD iPhone, iPad and browser. Applies already tested axis geometry to current visitor stylesheet, cache-busts visitor shell and increments build ID, and ensures the production release verifier checks actual deployed v1382 CSS. No native Swift, Kids, Apple TV, Push, Quran media data or unrelated app logic changed.",
+      "paths": [
+        "assets/adult-responsive-viewport-v1381.css",
+        "index.html",
+        "version.json",
+        "scripts/verify-live-deploy.js",
+        "content/admin/change-scope-lock.json",
+        "service-worker.js"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
