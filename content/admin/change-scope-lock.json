@@ -8216,6 +8216,17 @@
         "scripts/verify-frauen-hero-contract.cjs"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "frauen-missing-hero-real-browser-fix-v1392-20261017",
+      "at": "2026-10-17T15:47:00.000Z",
+      "approvedBy": "user-explicit-restore-missing-women-page-hero-in-visitor-test-20261017",
+      "reason": "Narrowly authorize browser proof and regression guard for the user-requested women-area upper hero restoration; no modification to Kids, Q sources, audio, media assets or global lock.",
+      "paths": [
+        "scripts/diagnose-frauen-hero-live.cjs",
+        ".github/workflows/diagnose-frauen-hero-live.yml"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
