@@ -234,7 +234,7 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
       const railWidth=rail?.getBoundingClientRect().width||0;
       const gridCss=grid?getComputedStyle(grid):null;
       const columnCount=gridCss?.display==="grid"
-        ?gridCss.gridTemplateColumns.trim().split(/\\s+/).filter(Boolean).length:0;
+        ?gridCss.gridTemplateColumns.trim().split(/\s+/).filter(Boolean).length:0;
       const seen=new Set(),candidates=[];
       for(const el of [document.scrollingElement,document.body,
         document.querySelector("#appView"),rail,fold?.querySelector(".dar-fold__pane")]){
