@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'kids/tools/recover_quiz_v4_nine_from_github_action_archives.py'
+      - 'kids/tools/test_quiz_v4_prepaid_archive_name_matcher.py'
       - '.github/workflows/kids-v4-scan-previous-paid-audio-backups.yml'
 
 permissions:
@@ -40,6 +41,8 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m py_compile kids/tools/recover_quiz_v4_nine_from_github_action_archives.py
+          python3 -m py_compile kids/tools/test_quiz_v4_prepaid_archive_name_matcher.py
+          python3 kids/tools/test_quiz_v4_prepaid_archive_name_matcher.py
           python3 kids/tools/recover_quiz_v4_nine_from_github_action_archives.py
           python3 - <<'PY'
           import json
