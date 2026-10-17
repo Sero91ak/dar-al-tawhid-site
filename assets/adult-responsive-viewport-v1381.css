@@ -117,3 +117,129 @@ html[data-theme] body.has-bottom-nav #appView.view > .dar-responsive-page > .dar
   box-sizing:border-box!important;
   background-size:cover!important;
 }
+
+/* DAR_ADULT_RESPONSIVE_AXIS_V1382 · 2026-10-17
+   Geometry authority for adult DĀR AL TAWḤĪD web, iOS WKWebView,
+   Android/PWA and tablets. 100vw inside a padded ancestor causes lateral
+   drift; use the real containing block (100%) for structural heroes.
+   Keep appearance palettes, cover imagery, nav, search and scrolling intact. */
+html[data-theme] body.has-bottom-nav{
+  --dar-axis-gutter:max(12px,2.2vw,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  --dar-axis-stage:calc(100% - var(--dar-axis-gutter) - var(--dar-axis-gutter));
+  max-width:100%!important;
+  min-width:0!important;
+  overflow-x:clip!important;
+}
+@media(min-width:700px){
+  html[data-theme] body.has-bottom-nav{
+    --dar-axis-gutter:max(18px,2vw,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  }
+}
+@media(max-width:390px){
+  html[data-theme] body.has-bottom-nav{
+    --dar-axis-gutter:max(10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  }
+}
+/* A single viewport coordinate system, not multiple nested 100vw widths. */
+html[data-theme] body.has-bottom-nav > .app,
+html[data-theme] body.has-bottom-nav > .app #appView.view{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView.view{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  padding-inline:0!important;
+  box-sizing:border-box!important;
+  overflow-x:clip!important;
+}
+html[data-theme] body.is-topics-route #appView.view > .topics-hub,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page,
+html[data-theme] body.is-post-route #appView.view > .post-reader{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  padding-inline:0!important;
+  box-sizing:border-box!important;
+}
+/* Photo hero remains a true covering background; never offset by 50vw. */
+html[data-theme] body.is-topics-route #appView.view > .topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page > .view-head,
+html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-title{
+  position:relative!important;
+  left:auto!important;
+  right:auto!important;
+  inset-inline:auto!important;
+  translate:none!important;
+  transform:none!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:0!important;
+  margin-right:0!important;
+  box-sizing:border-box!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+  overflow:hidden!important;
+}
+/* Content has equal left/right safe-area gutters at any browser width. */
+html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route){
+  --dar-post-edge:var(--dar-axis-gutter);
+  --dar-test-edge-gutter:var(--dar-axis-gutter);
+  --dar-test-edge-stage:var(--dar-axis-stage);
+}
+html[data-theme] body.is-topics-route #appView.view > .topics-hub > :is(
+ .search-pro-panel,.search-panel,#homeSearchBlock,.topics-hub__label,
+ .dar-tl-intro,.dar-tl-filterbar,.dar-tl-groups,.dua-theme-grid,
+ .topics-theme-grid,.topics-collection
+),
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page > :is(
+ .post-grid,.topic-collection,.topic-collection-list
+),
+html[data-theme] body.is-post-route #appView.view > .post-reader > :is(
+ .post-reader-main,.post-after-panel,.related-compact,.related-compact-list,[data-post-after-panel]
+){
+  width:var(--dar-axis-stage)!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-main{
+  width:min(920px,var(--dar-axis-stage))!important;
+}
+html[data-theme] body.is-topics-route #appView :is(.dar-tl-groups,.dar-tl-accordion,.dar-tl-grid),
+html[data-theme] body.is-topic-route #appView :is(.topic-collection,.post-row),
+html[data-theme] body.is-post-route #appView .post-reader-main{
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+/* Reusable contract for future adult screens: opt in, no hard-coded 100vw. */
+html[data-theme] body.has-bottom-nav #appView.view > .dar-responsive-page{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.has-bottom-nav #appView.view > .dar-responsive-page > .dar-responsive-hero{
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  box-sizing:border-box!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+}
