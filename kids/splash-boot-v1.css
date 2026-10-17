@@ -38,53 +38,65 @@ html.kids-test-booting body > :not(#kids-test-boot):not(script){visibility:hidde
  border:1px solid #ffe5aa;border-radius:999px;color:#07213b;background:#f8d581;
  padding:10px 15px;font:800 14px system-ui,sans-serif;white-space:nowrap;cursor:pointer}
 #kids-test-boot[data-boot-error="1"] .ktb-recover{display:block}
-/* KIDS TEST V8: TRUE 3-D PAGE TURN, not another top-to-bottom mask.
- * The complete picture (with 100% progress meter) is a SINGLE opaque page.
- * It folds around its LEFT spine, revealing the already-laid-out homepage.
- * No screenshots of the homepage, no additional video, no rectangular pieces. */
-#kids-test-boot.ktb-book-open{
-  pointer-events:none!important;
-  transform-origin:0% 50%;
-  -webkit-transform-origin:0% 50%;
-  -webkit-backface-visibility:hidden;
-  backface-visibility:hidden;
-  transform-style:preserve-3d;
-  -webkit-transform-style:preserve-3d;
-  will-change:transform;
+/* KIDS TEST V6 · Storybook Reveal.
+ * A single continuous feathered edge uncovers the fully painted home.
+ * No shard-grid, particle renderer, video decoder, intermediate color, or DOM clone.
+ * On iOS Safari, -webkit-mask is the primary route. */
+#kids-test-boot.ktb-storybook{pointer-events:none!important;
+ -webkit-mask-image:linear-gradient(to bottom,
+   #000 0%,#000 48.8%,rgba(0,0,0,.98) 49.25%,rgba(0,0,0,.80) 49.62%,
+   rgba(0,0,0,.38) 50.35%,rgba(0,0,0,.10) 50.76%,transparent 51.2%,transparent 100%);
+ mask-image:linear-gradient(to bottom,
+   #000 0%,#000 48.8%,rgba(0,0,0,.98) 49.25%,rgba(0,0,0,.80) 49.62%,
+   rgba(0,0,0,.38) 50.35%,rgba(0,0,0,.10) 50.76%,transparent 51.2%,transparent 100%);
+ -webkit-mask-size:100% 250%;mask-size:100% 250%;
+ -webkit-mask-position:0 0;mask-position:0 0;
+ -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
 }
-#kids-test-boot.ktb-book-open::after{
-  content:"";position:absolute;top:0;bottom:0;left:0;width:clamp(3px,.9vw,10px);z-index:12;
-  background:linear-gradient(90deg,#a9782b 0%,#fff1b8 48%,rgba(236,178,66,.44) 85%,transparent);
-  box-shadow:4px 0 18px rgba(247,192,85,.25);
-  opacity:0;pointer-events:none;
+#kids-test-boot.ktb-storybook.ktb-transition-go{
+ animation:ktb-storybook-open 1.02s cubic-bezier(.62,.02,.24,1) both
 }
-#kids-test-boot.ktb-book-open.ktb-transition-go{
-  animation:ktb-page-turn 1.06s cubic-bezier(.42,.04,.22,1) both!important;
+/* The golden seam follows the same 150% viewport mask travel. The original
+   poster stays intact until its feathered lower edge passes each pixel. */
+#kids-test-boot .ktb-reveal-glow{display:none;position:absolute;top:0;left:0;width:100%;height:32px;
+ z-index:8;pointer-events:none;transform:translate3d(0,125dvh,0);opacity:0}
+#kids-test-boot.ktb-storybook .ktb-reveal-glow{display:block}
+#kids-test-boot.ktb-storybook.ktb-transition-go .ktb-reveal-glow{
+ animation:ktb-reveal-gold 1.02s cubic-bezier(.62,.02,.24,1) both
 }
-#kids-test-boot.ktb-book-open.ktb-transition-go::after{
-  animation:ktb-book-edge-light .9s ease-out both;
+#kids-test-boot .ktb-reveal-glow::before{
+ content:"";display:block;position:absolute;top:10px;left:-2%;width:104%;height:4px;
+ border-radius:50%;background:linear-gradient(90deg,transparent 0%,rgba(255,224,153,.15) 9%,#fbe6aa 35%,#fff4c8 49%,#f2cc6c 64%,rgba(255,204,114,.22) 91%,transparent 100%);
+ box-shadow:0 0 8px 2px rgba(255,205,115,.32),0 0 22px 7px rgba(248,185,80,.20);
+ filter:blur(1.4px)
 }
-@keyframes ktb-page-turn{
-  0%{transform:perspective(1250px) rotateY(0deg);opacity:1}
-  12%{transform:perspective(1250px) rotateY(-4deg);opacity:1}
-  38%{transform:perspective(1250px) rotateY(-24deg);opacity:1}
-  73%{transform:perspective(1250px) rotateY(-68deg);opacity:1}
-  94%{transform:perspective(1250px) rotateY(-88deg);opacity:.92}
-  100%{transform:perspective(1250px) rotateY(-92deg);opacity:0}
+#kids-test-boot .ktb-reveal-glow::after{
+ content:"";display:block;position:absolute;left:10%;width:80%;height:30px;top:-2px;
+ background:radial-gradient(ellipse at center,rgba(255,218,129,.17),transparent 70%);
+ filter:blur(7px)
 }
-@keyframes ktb-book-edge-light{
-  0%{opacity:0}
-  21%{opacity:.68}
-  60%{opacity:.85}
-  100%{opacity:0}
+@keyframes ktb-reveal-gold{
+ 0%{transform:translate3d(0,125dvh,0);opacity:0}
+ 12%{opacity:.48}
+ 36%{opacity:.85}
+ 76%{opacity:.62}
+ 100%{transform:translate3d(0,-25dvh,0);opacity:0}
 }
-/* Failure/reduced motion: no intermediate background and no second screen. */
-#kids-test-boot.ktb-book-fallback{pointer-events:none!important}
-#kids-test-boot.ktb-book-fallback.ktb-transition-go{
-  animation:ktb-book-short-fade .32s ease-out both!important;
+@keyframes ktb-storybook-open{
+ 0%{-webkit-mask-position:0 0;mask-position:0 0;opacity:1}
+ 88%{opacity:1}
+ 100%{-webkit-mask-position:0 100%;mask-position:0 100%;opacity:1}
 }
-@keyframes ktb-book-short-fade{from{opacity:1}to{opacity:0}}
-#kids-test-boot .ktb-reveal-glow{display:none!important}
+/* Motion-reduction or unsupported masks: one direct directional wipe.
+ * The homepage is behind the loader, never behind a blue bridge. */
+#kids-test-boot.ktb-soft-fallback{pointer-events:none!important}
+#kids-test-boot.ktb-soft-fallback.ktb-transition-go{
+ animation:ktb-storybook-fallback .48s cubic-bezier(.23,.72,.35,1) both
+}
+@keyframes ktb-storybook-fallback{
+ from{clip-path:inset(0 0 0 0)}
+ to{clip-path:inset(0 0 100% 0)}
+}
 @media (max-width:700px) and (orientation:portrait){
  #kids-test-boot .ktb-poster{width:100vw;height:100dvh;max-width:none;background-size:cover;
  background-position:center center}
@@ -95,4 +107,4 @@ html.kids-test-booting body > :not(#kids-test-boot):not(script){visibility:hidde
  #kids-test-boot .ktb-track{height:clamp(14px,3dvh,24px)}
  #kids-test-boot .ktb-percent{font-size:15px;margin-top:3px}
 }
-@media (prefers-reduced-motion:reduce){#kids-test-boot .ktb-fill{transition:none}#kids-test-boot.ktb-book-fallback.ktb-transition-go{animation-duration:.12s}}
+@media (prefers-reduced-motion:reduce){#kids-test-boot .ktb-fill{transition:none}#kids-test-boot.ktb-soft-fallback.ktb-transition-go{animation-duration:.16s}}
