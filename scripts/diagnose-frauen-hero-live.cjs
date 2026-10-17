@@ -71,7 +71,7 @@ function snapshot(){
    await page.screenshot({path:path.join(out,route.key+"-initial.png")});
    // Simulate the proposed code on the currently deployed app, before merging.
    const localScript=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-fiqh.js":"assets/frauen/frauen-fiqh.js"),"utf8");
-   const tag="/* DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392";
+   const tag="/* DAR_FRAUEN_HERO_SAFE_EVENTS_V1395";
    if(!localScript.includes(tag))throw Error("Repair snippet not in checkout");
    await page.addScriptTag({content:localScript.slice(localScript.indexOf(tag))});
    const localCss=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-authority-v1292.css":"assets/frauen/frauen-authority-v1292.css"),"utf8");
@@ -82,9 +82,17 @@ function snapshot(){
    let repaired=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
 
-   await page.mouse.wheel(0,560);
-   await page.waitForTimeout(330);
-   await page.waitForTimeout(450);
+   // Real finger gesture, not a programmatic scrollTop assignment.
+   const cdp=await context.newCDPSession(page);
+   const startX=165,fromY=686,toY=297;
+   await cdp.send("Input.dispatchTouchEvent",{type:"touchStart",touchPoints:[{x:startX,y:fromY}]});
+   for(let step=1;step<=14;step++){
+     await cdp.send("Input.dispatchTouchEvent",{type:"touchMove",touchPoints:[{
+       x:startX,y:Math.round(fromY+(toY-fromY)*step/14)}]});
+     await page.waitForTimeout(21);
+   }
+   await cdp.send("Input.dispatchTouchEvent",{type:"touchEnd",touchPoints:[]});
+   await page.waitForTimeout(650);
    let after=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-after-scroll.png")});
    all.push({key:route.key,status:response.status(),before,repaired,after,errors});
@@ -95,7 +103,25 @@ function snapshot(){
      issues.push(route.key+" upper hero missing from first viewport");
    }
    if(before.app&&after.stage&&after.stage.bottom<100)issues.push(route.key+" stage scrolls off-screen");
-   if(before.app&&before.app.scrollHeight>before.app.clientHeight+200&&after.docScroll<100)issues.push(route.key+" content cannot scroll normally");
+   if(before.app && after.docScroll<70)
+     issues.push(route.key+" real finger swipe cannot scroll the document, scroll="+after.docScroll);
+   if(before.app && repaired.body && (repaired.body.overflowX!=="clip"||repaired.body.overflowY!=="visible"))
+     issues.push(route.key+" body creates inactive scrollport: "+repaired.body.overflowX+"/"+repaired.body.overflowY);
+   if(before.app && (!after.stage || after.stage.bottom<100))
+     issues.push(route.key+" sticky hero disappears after touch swipe");
+   // Leaving the Frauen route must preserve functional navigation.
+   if(route.key==="visitor"){
+     const nav=page.locator("#bottomNav .bottom-nav-btn").first();
+     if(await nav.count()){
+       await nav.click({timeout:7000});
+       await page.waitForTimeout(500);
+       const next=await page.evaluate(()=>({hash:location.hash,body:document.body.className,
+          overflowX:document.body.style.getPropertyValue("overflow-x"),
+          overflowY:document.body.style.getPropertyValue("overflow-y")}));
+       console.log("NAVIGATION_RECOVERY",JSON.stringify(next));
+       if(next.body.includes("is-frauen-route")&&next.hash!=="#frauen")issues.push("visitor Frauen route still active after bottom navigation");
+     }
+   }
    await context.close();
   }
  }catch(e){issues.push(String(e.stack||e));console.error(e);}
