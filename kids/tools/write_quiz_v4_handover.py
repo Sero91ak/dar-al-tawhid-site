@@ -278,6 +278,7 @@ def main():
         "## Interne Quellen-/Antwortprüfung vor kostenpflichtiger V4-Aufnahme",
         "",
         "Interne Quelle-Antwort-Prüfung: `.github/reports/KIDS-V4-STAGE1-QUELLEN-UND-ANTWORTCHECK.md` und `.github/reports/kids-v4-older-stage1-source-and-answer-audit.json`. Nur im privaten GitHub-Review; keine Internet-Quellenlinks in der Kinder-App.",
+        "Neu: 20-Fragen-Direktquellenliste mit zugehörigen Originalfragen, exakt richtiger Antwort und fachlichen Kontext-Hinweisen: `kids/review-only/QUIZ-V4-ERST20-QUELLEN-DIREKTNACHWEISE.md` (nur internes Review). Sie dokumentiert 20 passende Islamweb-/Dorar-Nachweise, bedeutet aber KEINE unabhängige menschliche Quellenfreigabe.",
         "Automatisch überprüfte ursprüngliche 20 Frage-Antwort-Quellen-Zuordnungen: **"+str(details["olderStage1InternalSourceAnswerAuditItems"])+"**. Zusätzlich öffentlich lokalisierte passende Belegstellen für **"+str(details["olderStage1IndependentSourceEvidenceLocated"])+"** Fragen; übrige benötigen eine zusätzliche unabhängige Quellenkontrolle. Nicht mit menschlicher theologischer/fachlicher Abnahme verwechseln.",
         "Präzisionshinweise besonders zu Qurʾān 16:43 (Kontext vs. pädagogische Anwendung), Qurʾān 5:6 (Waschen vs. Wischen) und Hadithnummern verschiedener Ausgaben beachten.",
         "Nur nach wirklicher inhaltlicher und finanzieller Freigabe neue V4-Stimmenaufnahmen erzeugen, nie die Original-MP3s überschreiben.",
