@@ -40,18 +40,15 @@ html[data-theme] body.is-frauen-route .frauen-library-shell{
 
 /* Historical edge-to-edge hero. */
 html[data-theme] body.is-frauen-route .frauen-library-hero{
-  aspect-ratio:auto!important;
-  min-height:0!important;
-  height:clamp(176px,44vw,248px)!important;
-  max-height:248px!important;
-  width:100%!important;
-  max-width:100%!important;
-  margin:0 0 20px 0!important;
+  min-height:clamp(300px,44vw,410px)!important;
+  width:100vw!important;
+  max-width:none!important;
+  margin:0 0 20px calc(50% - 50vw)!important;
   border:0!important;
   border-radius:0 0 30px 30px!important;
   box-shadow:0 18px 42px rgba(4,15,14,.13)!important;
   background-size:cover!important;
-  background-position:center 40%!important;
+  background-position:center 46%!important;
 }
 html[data-theme] body.is-frauen-route[data-frauen-view="hub"] .frauen-library-hero{
   --frauen-hero-img:url("/assets/frauen/library-v1224/03-erste-generationen.jpg")!important;
@@ -89,7 +86,7 @@ html[data-theme] body.is-frauen-route .frauen-library-hero__eyebrow{
 html[data-theme] body.is-frauen-route .frauen-library-hero h2{
   max-width:690px!important;
   margin:0!important;
-  font-size:clamp(26px,6vw,36px)!important;
+  font-size:clamp(36px,8.7vw,56px)!important;
   line-height:.98!important;
   letter-spacing:-.025em!important;
   color:#fff9ec!important;
@@ -97,7 +94,7 @@ html[data-theme] body.is-frauen-route .frauen-library-hero h2{
 }
 html[data-theme] body.is-frauen-route .frauen-library-hero--group h2,
 html[data-theme] body.is-frauen-route .frauen-library-hero--section h2{
-  font-size:clamp(22px,5.2vw,30px)!important;
+  font-size:clamp(31px,7.5vw,47px)!important;
 }
 html[data-theme] body.is-frauen-route .frauen-library-hero__subtitle{
   max-width:620px!important;
@@ -605,150 +602,3 @@ html[data-theme] body.is-frauen-route[data-frauen-view="hub"] .frauen-library-gr
   margin-bottom:var(--dar-content-end-gap,24px)!important;
 }
 
-/* DAR_FRAUEN_HERO_RESTORE_V1390 · 2026-10-17
-   Verbindlicher Vertrag: Hub, Wissenswelt und Kapitelansicht behalten einen
-   sichtbaren, vollflächig eingebetteten Hero mit zugehöriger Suche.
-   Inhalt scrollt unter den Hero; keine Änderungen am Detail/Reader, Audio,
-   an Navigations-Events oder am Bottom-Tab. Gilt auch für neue Gruppen. */
-html[data-theme] body.is-frauen-route:is(
-  [data-frauen-view="hub"],[data-frauen-view="group"],[data-frauen-view="list"]
-) #appView.view{
-  overflow-x:clip!important;
-  overflow-y:visible!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-shell{
-  overflow:visible!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-pinned-header.dar-hero-stage{
-  display:block!important;
-  visibility:visible!important;
-  opacity:1!important;
-  position:sticky!important;
-  top:0!important;
-  z-index:80!important;
-  isolation:isolate!important;
-  overflow:visible!important;
-  width:100%!important;
-  max-width:100%!important;
-  transform:none!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-pinned-header > .frauen-library-hero[data-hero-readable="true"]{
-  display:block!important;
-  visibility:visible!important;
-  opacity:1!important;
-  position:relative!important;
-  aspect-ratio:auto!important;
-  min-height:0!important;
-  height:clamp(176px,44vw,248px)!important;
-  max-height:248px!important;
-  width:100%!important;
-  max-width:100%!important;
-  margin-left:0!important;
-  margin-right:0!important;
-  box-sizing:border-box!important;
-  overflow:hidden!important;
-  background-color:#112621!important;
-  background-image:var(--frauen-hero-img)!important;
-  background-repeat:no-repeat!important;
-  background-size:cover!important;
-  background-position:center 40%!important;
-  border-radius:0 0 26px 26px!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-pinned-header.dar-hero-stage::before{
-  left:0!important;
-  width:100%!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-pinned-header > .frauen-library-hero__content,
-html[data-theme] body.is-frauen-route .frauen-library-pinned-header .frauen-library-hero__content{
-  display:flex!important;
-  visibility:visible!important;
-  opacity:1!important;
-  position:relative!important;
-  z-index:3!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-pinned-header > :is(
-  .frauen-library-search-wrap,.frauen-library-list-controls
-){
-  position:relative!important;
-  z-index:3!important;
-  visibility:visible!important;
-  opacity:1!important;
-}
-/* Jede Wissenswelt erhält ihr eigenes bestehendes Motiv – statt alter
-   generischer Home-Motive. Die 7 Bilddateien sind in beiden Apps vorhanden. */
-html[data-theme] body.is-frauen-route .frauen-library-hero--hub{
-  --frauen-hero-img:url("/assets/frauen/library-v1224/03-erste-generationen.jpg")!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-hero--tone-din{
-  --frauen-hero-img:url("/assets/frauen/library-v1224/01-grundlagen-din.jpg")!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-hero--tone-fiqh{
-  --frauen-hero-img:url("/assets/frauen/library-v1224/02-fiqh-frauen.jpg")!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-hero--tone-generationen{
-  --frauen-hero-img:url("/assets/frauen/library-v1224/03-erste-generationen.jpg")!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-hero--tone-familie{
-  --frauen-hero-img:url("/assets/frauen/library-v1224/04-familie-erziehung.jpg")!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-hero--tone-wissen{
-  --frauen-hero-img:url("/assets/frauen/library-v1224/05-wissen-adab-dawah.jpg")!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-hero--tone-alltag{
-  --frauen-hero-img:url("/assets/frauen/library-v1224/06-alltag-schutz.jpg")!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-hero--tone-lebensphasen{
-  --frauen-hero-img:url("/assets/frauen/library-v1224/07-lebensphasen.jpg")!important;
-}
-@media(max-width:600px){
-  html[data-theme] body.is-frauen-route .frauen-library-pinned-header > .frauen-library-hero[data-hero-readable="true"]{
-    height:clamp(168px,46vw,220px)!important;
-    max-height:220px!important;
-    background-position:center 40%!important;
-    background-size:cover!important;
-  }
-}
-html:has(body.is-frauen-route){
-  overflow-x:hidden!important;
-  overflow-y:scroll!important;
-  height:auto!important;
-  min-height:100%!important;
-}
-/* DAR_FRAUEN_HERO_SCROLL_ANCESTOR_V1392 · Keep sticky relative to page scroll.
- * overflow-x:hidden on an ancestor silently creates overflow-y:auto and
- * prevents position:sticky from following the document scroll on mobile.
- * On Frauen routes use clip (no scroll container), preserving horizontal crop. */
-html[data-theme] body.is-frauen-route .app,
-html[data-theme] body.is-frauen-route .app > #appView,
-html[data-theme] body.is-frauen-route #appView > .dar-frauen-production-root,
-html[data-theme] body.is-frauen-route #appView .frauen-library-shell,
-html[data-theme] body.is-frauen-route #appView .frauen-library-list{
-  overflow-x:clip!important;
-  overflow-y:visible!important;
-  overflow:visible!important;
-  height:auto!important;
-  max-height:none!important;
-  position:static!important;
-}
-
-/* Sticky must use the root scroller: body overflow-x:hidden computes
- * overflow-y:auto and steals the sticky containing scrollport even though
- * scrollingElement is HTML. Preserve deliberate inline modal scroll locks. */
-html[data-theme] body.is-frauen-route{
-  overflow-x:visible!important;
-  overflow-y:visible!important;
-  overflow:visible!important;
-  height:auto!important;
-  max-height:none!important;
-  position:relative!important;
-}
-html[data-theme] body.is-frauen-route .frauen-library-pinned-header.dar-hero-stage{
-  position:relative!important;
-}
-html[data-theme] body.is-frauen-route:is(
-  [data-frauen-view="hub"],[data-frauen-view="group"],[data-frauen-view="list"]
-) #appView.view{
-  overflow:visible!important;
-  height:auto!important;
-  max-height:none!important;
-}

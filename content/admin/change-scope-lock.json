@@ -155,6 +155,24 @@
   ],
   "unlockedScopes": [
     {
+      "id": "women-noon-exact-rollback-20261017",
+      "at": "2026-10-17T21:24:00+02:00",
+      "approvedBy": "user-explicit-restore-women-only-from-noon-no-repair-20261017",
+      "reason": "Restore only adult visitor/Test Frauenbereich JS and CSS snapshots from last commit before 12:00 Berlin, narrow route-specific women addon cache and historical Frauen regression guard. Do not revert global apps/index/Kids/prayer/push.",
+      "paths": [
+        "assets/frauen/frauen-authority-v1292.css",
+        "assets/frauen/frauen-fiqh.js",
+        "assets/frauen/frauen-live-adapter.js",
+        "test/assets/frauen/frauen-authority-v1292.css",
+        "test/assets/frauen/frauen-fiqh.js",
+        "cloudflare/site-router.js",
+        "cloudflare/test-app-worker.js",
+        "scripts/verify-frauen-hero-contract.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-frauen-scroll-tap-repair-20261017",
       "at": "2026-10-17T20:49:00+02:00",
       "approvedBy": "user-explicit-video-investigate-frauen-scroll-tap-fix-visitor-live-20261017",

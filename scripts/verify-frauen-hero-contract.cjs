@@ -1,42 +1,35 @@
 "use strict";
-/* DAR_FRAUEN_HERO_CONTRACT_V1390
- * Regression guard for new adult women routes and both visitor/test apps.
- * No image re-creation, no audio/nav/card changes. */
-const fs = require("node:fs");
-const assert = require("node:assert/strict");
-const read = p => fs.readFileSync(p,"utf8");
-const imageNames = [
-  "01-grundlagen-din.jpg",
-  "02-fiqh-frauen.jpg",
-  "03-erste-generationen.jpg",
-  "04-familie-erziehung.jpg",
-  "05-wissen-adab-dawah.jpg",
-  "06-alltag-schutz.jpg",
-  "07-lebensphasen.jpg"
-];
-for(const variant of ["", "test/"]){
-  const cssPath = variant + "assets/frauen/frauen-authority-v1292.css";
-  const jsPath = variant + "assets/frauen/frauen-fiqh.js";
-  const css = read(cssPath), js = read(jsPath);
-  const prefix = "/" + variant + "assets/frauen/library-v1224/";
-  assert.match(css,/DAR_FRAUEN_HERO_RESTORE_V1390/,"Missing Frauen hero authority: "+cssPath);
-  assert.ok(css.includes(".frauen-library-pinned-header.dar-hero-stage{") && css.includes("position:sticky!important;"),"Header must stay pinned: "+cssPath);
-  assert.ok(css.includes(".frauen-library-pinned-header > .frauen-library-hero[data-hero-readable=\"true\"]{") && css.includes("display:block!important;"),"Hero must remain visible: "+cssPath);
-  assert.ok(css.includes("background-image:var(--frauen-hero-img)!important;"),"Background image must be embedded: "+cssPath);
-  assert.match(css,/overflow-x:clip!important/,"Prevent sideways clipping without creating scrolling ancestor");
-  assert.ok(js.includes("function libraryHero("),"Shared hero renderer missing: "+jsPath);
-  assert.match(js,/data-hero-readable=/,"Semantic hero flag missing: "+jsPath);
-  assert.ok(js.includes("function pinnedLibraryHead("),"Shared pinned header missing: "+jsPath);
-  assert.ok(js.includes("DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392"),"DOM repair guard absent: "+jsPath);
-  assert.ok(js.includes("new MutationObserver("),"SPAs require DOM observer: "+jsPath);
-  for(const view of ["renderHub", "renderLibraryGroup", "renderSectionHero"]){
-    assert.ok(js.includes("function "+view+"("),"Missing "+view+": "+jsPath);
-  }
-  for(const image of imageNames){
-    assert.ok(fs.existsSync(variant+"assets/frauen/library-v1224/"+image),"Missing local image "+variant+image);
-    assert.ok(css.includes(prefix+image),"Hero theme lacks local picture "+variant+image);
+/* DAR_FRAUEN_NOON_ROLLBACK_CONTRACT_20261017
+ * Exact restored working files from 2026-10-17 11:54:50 Europe/Berlin.
+ * Only the Frauen area may be rolled back; all other app lanes are untouched. */
+const fs=require("node:fs");
+const assert=require("node:assert/strict");
+const crypto=require("node:crypto");
+const frozen={
+  "assets/frauen/frauen-authority-v1292.css": "6bb786de1ecb1b0d3ed5d01ec511cc10c9b3da86",
+  "assets/frauen/frauen-fiqh.js": "833762af92ea86282d25a6987835a1858c6d4c3e",
+  "assets/frauen/frauen-live-adapter.js": "43022758d8a0e02b2e32a541ce0cf1c8c927418e",
+  "test/assets/frauen/frauen-authority-v1292.css": "07b9fa32585de8fcb57aad13b13ab2c67167ee4b",
+  "test/assets/frauen/frauen-fiqh.js": "fb1e8e84e277344f2fea22ce6ae82c54a2e6c165"
+};
+function gitBlobSha(content){
+  const data=Buffer.from(content,"utf8");
+  return crypto.createHash("sha1").update("blob "+data.length+"\0").update(data).digest("hex");
+}
+for(const [path,sha] of Object.entries(frozen)){
+  const got=gitBlobSha(fs.readFileSync(path,"utf8"));
+  assert.equal(got,sha,"Frauen 12-Uhr-Snapshot verändert: "+path);
+}
+const adapter=fs.readFileSync("assets/frauen/frauen-live-adapter.js","utf8");
+assert.ok(adapter.includes("function paint()"),"Original live Frauen adapter fehlt");
+const native=fs.readFileSync("cloudflare/site-router.js","utf8");
+assert.ok(native.includes("/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-12h-20261017"),"Alten iOS Frauen renderer wiederherstellen");
+assert.ok(native.includes("/assets/frauen/frauen-live-adapter.js?v=frauen-rollback-12h-20261017"),"Alten Frauen adapter ausliefern");
+const testWorker=fs.readFileSync("cloudflare/test-app-worker.js","utf8");
+assert.ok(testWorker.includes("frauen-authority-v1292.css?v=frauen-rollback-12h-20261017"),"Test CSS cache key fehlt");
+for(const prefix of ["assets/frauen/library-v1224/","test/assets/frauen/library-v1224/"]){
+  for(const image of ["01-grundlagen-din.jpg","02-fiqh-frauen.jpg","03-erste-generationen.jpg","04-familie-erziehung.jpg","05-wissen-adab-dawah.jpg","06-alltag-schutz.jpg","07-lebensphasen.jpg"]){
+    assert.ok(fs.existsSync(prefix+image),"Original Frauen-Hero-Motiv fehlt: "+prefix+image);
   }
 }
-assert.ok(read("cloudflare/test-app-worker.js").includes("frauen-authority-v1292.css?v=frauen-hero-v1390"),"Test shell must bust Frauen CSS cache");
-assert.ok(read("cloudflare/site-router.js").includes("frauen-authority-v1292.css?v=frauen-hero-v1390"),"Visitor/iOS shell must bust Frauen CSS cache");
-console.log("OK Frauen: hub/group/list heroes and all seven image assets in Test + Besucher.");
+console.log("OK: ausschließlich Frauenbereich auf Stand 17.10.2026 11:54:50 CET/CEST zurückgesetzt.");

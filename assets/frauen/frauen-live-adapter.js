@@ -40,7 +40,7 @@
       ".dar-frauen-live-entry__body h4{margin:0 0 3px;font:700 14px/1.25 inherit}",
       ".dar-frauen-live-entry__body p{margin:0;font:500 11px/1.35 inherit;opacity:.72}",
       ".dar-frauen-live-entry .feature-icon img{width:100%;height:100%;object-fit:contain}",
-      "body.is-frauen-route #appView{overflow-x:clip;overflow-y:visible}",
+      "body.is-frauen-route #appView{overflow-x:hidden}",
       "body.is-frauen-route #appView>.view-head{display:none!important}"
     ].join("");
     document.head.appendChild(s);
@@ -51,34 +51,20 @@
     }
     return global.DARFrauenFiqh.render(value||"");
   }
-  /* DAR_FRAUEN_NAV_SCROLL_IDEMPOTENT_V1395
-   * Do not replace the entire page and scroll to 0 on every SPA render event.
-   * Route changes still start at the top; same-route data reloads retain Y. */
-  function paint(force){
+  function paint(){
     var r=route();
     if(!r||painting)return false;
     var app=document.getElementById("appView");
     if(!app)return false;
-    var previous=app.querySelector('.dar-frauen-production-root[data-frauen-production="1"]');
-    var value=String(r.value||"");
-    var sameRoute=!!(previous&&previous.dataset.frauenValue===value);
-    if(!force&&sameRoute&&previous.firstElementChild
-      &&!previous.querySelector(".frauen-empty"))return true;
-    var preservedY=sameRoute?window.scrollY:null;
     painting=true;
     try{
       ensureBridgeStyle();
       document.documentElement.classList.add("dar-frauen-live");
       if(document.body)document.body.classList.add("is-frauen-route");
       app.innerHTML='<div class="dar-frauen-production-root" data-frauen-production="1">'+womenHtml(r.value)+'</div>';
-      var updated=app.querySelector('.dar-frauen-production-root[data-frauen-production="1"]');
-      if(updated)updated.dataset.frauenValue=value;
       if(global.DARFrauenFiqh&&typeof global.DARFrauenFiqh.bind==="function")global.DARFrauenFiqh.bind();
-      // Same-route live updates must not tear the user out of an open chapter.
-      try{
-        if(preservedY!==null)global.scrollTo(0,preservedY);
-        else{app.scrollTop=0;global.scrollTo(0,0)}
-      }catch(e){}
+      try{app.scrollTop=0}catch(e){}
+      try{global.scrollTo(0,0)}catch(e){}
       try{document.dispatchEvent(new CustomEvent("dar:frauen-render",{detail:{value:r.value||""}}))}catch(e){}
       return true;
     }finally{painting=false}
@@ -187,11 +173,11 @@
     if(!isFrauen())return;
     try{
       if(global.DARFrauenFiqh&&typeof global.DARFrauenFiqh.reload==="function"){
-        global.DARFrauenFiqh.reload().then(function(){paint(true)}).catch(function(){paint(true)});
+        global.DARFrauenFiqh.reload().then(function(){paint()}).catch(function(){paint()});
         return;
       }
     }catch(e){}
-    paint(true);
+    paint();
   });
   document.addEventListener("dar:render",function(){hookRender();if(isFrauen())paint();else scheduleEntry()});
   if(document.documentElement){
