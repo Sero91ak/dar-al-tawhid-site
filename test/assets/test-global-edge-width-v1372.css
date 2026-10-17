@@ -1099,3 +1099,140 @@ html[data-theme] body.is-topics-route #appView .dar-fold[data-fold-mode="dual"]:
 html[data-theme] body.is-topics-route #appView .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty) > .dar-fold__pane{
   display:none!important;
 }
+
+/* DAR_HADITH_CONTINUOUS_FULLBLEED_V1386
+   Adult Hadith route only. ONE unchanging page coordinate system through
+   overview > work > Kitab > Bab > Hadith reader. Artwork is always a CSS
+   background attached to the actual full-width hero, never a card. */
+html[data-theme] body.is-hadith-route{
+  --dar-hadith-inset:max(12px,2.2vw,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  --dar-hadith-hero-art:url("/test/assets/ilm/hadith-library-overview-v1267.webp");
+  --dar-hadith-hero-height:clamp(300px,42vw,360px);
+}
+html[data-theme] body.is-hadith-route:has(.hadith-hub--nested){
+  --dar-hadith-hero-art:url("/test/assets/ilm/hadith-library-study-v1267.webp");
+}
+html[data-theme] body.is-hadith-route:has(.hadith-detail){
+  --dar-hadith-hero-art:url("/test/assets/ilm/ilm-historical-majlis-v1234.jpg");
+}
+/* Stop inherited transitions that appear as a zoom/slide of the whole page. */
+html[data-theme] body.is-hadith-route #appView.view,
+html[data-theme] body.is-hadith-route #appView.view.page-enter-forward,
+html[data-theme] body.is-hadith-route #appView.view.page-enter-back{
+  animation:none!important;
+  transition:none!important;
+  transform:none!important;
+  translate:none!important;
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  margin-inline:0!important;
+  padding-inline:0!important;
+  box-sizing:border-box!important;
+  overflow-x:clip!important;
+}
+html[data-theme] body.is-hadith-route #appView.view > .hadith-hub,
+html[data-theme] body.is-hadith-route #appView.view > .hadith-detail{
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  margin-inline:0!important;
+  padding-inline:0!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-hadith-route #appView.view > .hadith-hub > .view-head,
+html[data-theme] body.is-hadith-route #appView.view > .hadith-detail > .post-reader-title{
+  position:relative!important;
+  inset-inline:auto!important;
+  left:auto!important;
+  right:auto!important;
+  translate:none!important;
+  transform:none!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  align-items:flex-start!important;
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  block-size:var(--dar-hadith-hero-height)!important;
+  min-block-size:var(--dar-hadith-hero-height)!important;
+  max-block-size:var(--dar-hadith-hero-height)!important;
+  margin:0 0 14px!important;
+  padding:32px max(20px,var(--dar-hadith-inset)) 32px!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  isolation:isolate!important;
+  background-color:var(--bg)!important;
+  background-image:
+    linear-gradient(90deg,color-mix(in srgb,var(--bg) 76%,transparent),color-mix(in srgb,var(--bg) 46%,transparent) 44%,color-mix(in srgb,var(--bg) 12%,transparent) 82%,transparent),
+    linear-gradient(0deg,var(--bg) 0%,color-mix(in srgb,var(--bg) 56%,transparent) 13%,transparent 52%),
+    var(--dar-hadith-hero-art)!important;
+  background-position:center,center,74% 49%!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+  transition:none!important;
+  animation:none!important;
+}
+html[data-theme] body.is-hadith-route #appView.view > .hadith-hub > .view-head::before,
+html[data-theme] body.is-hadith-route #appView.view > .hadith-hub > .view-head::after,
+html[data-theme] body.is-hadith-route #appView.view > .hadith-detail > .post-reader-title::before,
+html[data-theme] body.is-hadith-route #appView.view > .hadith-detail > .post-reader-title::after{
+  content:none!important;
+  display:none!important;
+}
+html[data-theme] body.is-hadith-route #appView.view > .hadith-hub > .view-head > *,
+html[data-theme] body.is-hadith-route #appView.view > .hadith-detail > .post-reader-title > *{
+  position:relative!important;
+  z-index:1!important;
+  max-inline-size:min(700px,100%)!important;
+  min-inline-size:0!important;
+  width:auto!important;
+  overflow-wrap:break-word!important;
+}
+html[data-theme] body.is-hadith-route #appView.view > .hadith-hub > .view-head h2,
+html[data-theme] body.is-hadith-route #appView.view > .hadith-detail > .post-reader-title h2{
+  margin:0!important;
+  font-size:clamp(2rem,6.4vw,3.25rem)!important;
+  line-height:1.07!important;
+  text-wrap:balance!important;
+  overflow-wrap:break-word!important;
+}
+html[data-theme] body.is-hadith-route #appView.view > .hadith-hub > .view-head .view-desc{
+  max-inline-size:700px!important;
+}
+html[data-theme] body.is-hadith-route #appView.view > .hadith-hub > :is(
+  .main-search,.dua-hub__label,.dua-theme-grid,.hadith-leaf-list,
+  .hadith-work-toggle,.hadith-works-toggle,#hadithSearchBlock
+),
+html[data-theme] body.is-hadith-route #appView.view > #hadithSearchBlock{
+  inline-size:calc(100% - 2 * var(--dar-hadith-inset))!important;
+  max-inline-size:1240px!important;
+  min-inline-size:0!important;
+  margin-inline:auto!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-hadith-route #appView.view > .hadith-detail > :is(nav.hadith-crumbs,.post-reader-main){
+  inline-size:min(900px,calc(100% - 2 * var(--dar-hadith-inset)))!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  margin-inline:auto!important;
+  box-sizing:border-box!important;
+}
+@media(max-width:599px){
+  html[data-theme] body.is-hadith-route{
+    --dar-hadith-hero-height:300px;
+  }
+  html[data-theme] body.is-hadith-route #appView.view > .hadith-hub > .view-head,
+  html[data-theme] body.is-hadith-route #appView.view > .hadith-detail > .post-reader-title{
+    padding:25px max(18px,var(--dar-hadith-inset)) 29px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] body.is-hadith-route #appView *{
+    scroll-behavior:auto!important;
+  }
+}

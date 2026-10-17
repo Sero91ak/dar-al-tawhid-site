@@ -8073,6 +8073,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "adult-hadith-fullbleed-navigation-consistency-20261017",
+      "at": "2026-10-17T10:07:43.485Z",
+      "approvedBy": "user-direct-video-fix-hadith-hero-background-continuous-all-themes-and-global-visitor-release-20261017",
+      "reason": "Adult Test isolated Hadith route geometry and continuity; backgrounds cover, fixed hero height, reading-width and navigation transitions. Visitor promotion only after QA. No Kids, TV, Push or data edits.",
+      "paths": [
+        "test/assets/test-global-edge-width-v1372.css",
+        "test/index.html",
+        "scripts/verify-test-app-deploy.js",
+        "test/version.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
