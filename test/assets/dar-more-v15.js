@@ -14,6 +14,27 @@ const svg=(type)=>{
  if(type==="palette")return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3a9 9 0 0 0 0 18h1.6a2.4 2.4 0 0 0 1.8-4 2 2 0 0 1 1.4-3.4H18a3 3 0 0 0 3-3A9 9 0 0 0 12 3Z"/><circle cx="7.5" cy="11.5" r=".9" fill="currentColor" stroke="none"/><circle cx="10" cy="7.5" r=".9" fill="currentColor" stroke="none"/><circle cx="15" cy="7.5" r=".9" fill="currentColor" stroke="none"/></svg>';
  return '<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M4.8 20c.1-4.1 2.9-6.2 7.2-6.2s7.1 2.1 7.2 6.2"/></svg>';
 };
+
+/* Cross-promotion is an editorial section of the App tab, not a navigation feature.
+   The pictures below are real project artwork shown inside device illustrations;
+   do not label them as captured App Store screenshots. */
+function renderOurApps(){
+ return `<section class="dm-app-showcase" data-dm-app-promo data-dm-search="apps apple tv fernseher kids tawhid kinder iphone familien verfügbar bald entdecken" aria-label="Weitere DĀR AL TAWḤĪD Apps">
+ <header class="dm-showcase-head"><span class="dm-showcase-kicker">DĀR AL TAWḤĪD · UNSERE APPS</span><h4>Wissen auf jedem Bildschirm.</h4><p>Entdecke unsere Angebote für das Wohnzimmer und die ganze Familie.</p></header>
+ <div class="dm-showcase-grid">
+  <article class="dm-showcase-card dm-showcase-tv">
+   <div class="dm-showcase-visual" aria-hidden="true"><div class="dm-tv-device"><div class="dm-tv-screen"><span class="dm-tv-brand">DĀR AL TAWḤĪD</span><span class="dm-tv-orbit"></span><img src="/app-logo-original.png" alt="" loading="lazy" decoding="async"><strong>Qurʾān · Sunnah · Āṯār</strong><small>Wissen auf Apple TV</small></div></div><span class="dm-tv-stand"></span></div>
+   <div class="dm-showcase-body"><span class="dm-showcase-status dm-showcase-status-available"><span aria-hidden="true" class="dm-showcase-dot"></span>Jetzt auf Apple TV</span><h5>DĀR AL TAWḤĪD für Apple TV</h5><p>Qurʾān, ausgewählte Überlieferungen und islamisches Wissen bequem auf dem großen Bildschirm entdecken.</p><a class="dm-showcase-link" href="https://apps.apple.com/de/app/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD im Apple App Store ansehen">Im App Store ansehen <span aria-hidden="true">↗</span></a></div>
+  </article>
+  <article class="dm-showcase-card dm-showcase-kids">
+   <div class="dm-showcase-visual dm-kids-device-scene" aria-hidden="true"><div class="dm-phone dm-phone-back"><div class="dm-phone-island"></div><div class="dm-phone-screen dm-phone-girls"><span>TAWḤĪD KIDS</span><img src="/kids/assets/kids-home-girls-v1330/mosque-rose-night.webp" alt="" loading="lazy" decoding="async"><strong>Entdecken &amp; lernen</strong></div></div><div class="dm-phone dm-phone-front"><div class="dm-phone-island"></div><div class="dm-phone-screen dm-phone-boys"><span>TAWḤĪD KIDS</span><img src="/kids/assets/kids-salah-v1272/hero-home.png" alt="" loading="lazy" decoding="async"><strong>Lernen mit Freude</strong></div></div></div>
+   <div class="dm-showcase-body"><span class="dm-showcase-status dm-showcase-status-soon">iPhone-App in Vorbereitung</span><h5>TAWḤĪD KIDS</h5><p>Ein eigener Lernbereich für Kinder mit Qurʾān, Geschichten, Hören und Entdecken. Die iPhone-App ist noch nicht im App Store erhältlich.</p><a class="dm-showcase-link" href="/kids/" aria-label="Den bereits vorhandenen TAWḤĪD KIDS Webbereich entdecken">Kids-Webbereich entdecken <span aria-hidden="true">↗</span></a></div>
+  </article>
+ </div>
+ <p class="dm-showcase-footnote">Gerätedarstellungen mit Originalmotiven aus dem Projekt. Keine App-Store-Screenshots.</p>
+ </section>`;
+}
+
 const moreTheme=()=>document.documentElement.getAttribute("data-theme")||"dark";
 function render(items,header){
  const data=Array.isArray(items)?items.filter(x=>x&&x.id!=="account"&&x.id!=="about"):[];
@@ -27,7 +48,7 @@ function render(items,header){
   const search=[i.title,i.desc,i.group,i.badge].filter(Boolean).join(" ").toLocaleLowerCase("de");
   return '<button class="dm-card" type="button" data-dm-item="'+safe(i.id)+'" data-nav="'+safe(i.nav)+'"'+val+' data-dm-search="'+safe(search)+'"><span class="dm-cardhead"><span class="dm-cardicon">'+icon(icons[i.id]||"library")+'</span><span class="dm-cardtitle"><strong>'+safe(i.title)+'</strong>'+tag+'</span></span><span class="dm-desc">'+safe(i.desc||"")+'</span></button>';
  }).join("");
- return '<section class="dm-group" data-dm-group="'+c[0]+'"><header class="dm-group-head"><h3>'+safe(c[2])+'</h3><span data-dm-count="'+c[0]+'">'+matches.length+' Funktionen</span></header><div class="dm-grid">'+cards+'</div></section>';
+ return '<section class="dm-group" data-dm-group="'+c[0]+'"><header class="dm-group-head"><h3>'+safe(c[2])+'</h3><span data-dm-count="'+c[0]+'">'+matches.length+' Funktionen</span></header><div class="dm-grid">'+cards+'</div>'+(c[0]==="app"?renderOurApps():"")+'</section>';
  }).join("");
  const options=themes.map(t=>'<button type="button" class="dm-theme-choice" data-dm-theme="'+t[0]+'" aria-pressed="'+(moreTheme()===t[0])+'"><i style="background:'+t[2]+'"></i><span>'+safe(t[1])+'</span></button>').join("");
  const head=typeof header==="function"?header("Mehr","Funktionen geordnet nach Lernen, Alltag, Werkzeugen und Einstellungen","Mehr"):"";
@@ -47,6 +68,12 @@ function sync(){
    const match=!query||String(card.getAttribute("data-dm-search")||"").includes(query.toLocaleLowerCase("de"));
    card.hidden=!match||(!query&&!isCategory);if(match)visible++;
   });
+  const promo=group.querySelector("[data-dm-app-promo]");
+  if(promo){
+   const match=!query||String(promo.getAttribute("data-dm-search")||"").includes(query.toLocaleLowerCase("de"));
+   promo.hidden=!!query&&!match;
+   if(match&&query)visible++;
+  }
   group.hidden=query?visible===0:!isCategory;
   const cnt=group.querySelector("[data-dm-count]");if(cnt)cnt.textContent=visible+" Funktionen";
   if(query)total+=visible;
