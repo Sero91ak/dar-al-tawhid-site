@@ -323,17 +323,15 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
   // DAR_HADITH_REFRAME_FINAL_V1307 — Adult Dar Test only.
-  // Unlike the legacy trailing injection, this must produce a valid closing
-  // </script> and load AFTER the inline Hadith renderer inside the HTML body.
-  // The stylesheet belongs to <head>, not after </html>.
+  // test/index.html has an early closing </body> followed by many more inline
+  // scripts and styles. The override must load after ALL of them, immediately
+  // before the final </html>, and its closing </script> must be valid HTML.
   if (!html.includes('id="darHadithReframeScriptV1307"')) {
     const hadithCss = '<link rel="stylesheet" id="darHadithReframeFinalV1307" href="/test/assets/ilm-hadith-v1243.css?v=hadith-sharh-v1307">';
     const hadithJs = '<script id="darHadithReframeScriptV1307" src="/test/assets/hadith-library-reframe-v1299.js?v=hadith-sharh-v1307"></script>';
-    if (html.includes("</head>")) html = html.replace("</head>", hadithCss + "</head>");
-    else html = hadithCss + html;
-    if (html.includes("</body>")) html = html.replace("</body>", hadithJs + "</body>");
-    else if (html.includes("</html>")) html = html.replace("</html>", hadithJs + "</html>");
-    else html += hadithJs;
+    const hadithAssets = hadithCss + hadithJs;
+    if (html.includes("</html>")) html = html.replace("</html>", hadithAssets + "</html>");
+    else html += hadithAssets;
   }
   // DAR_ADAPTIVE_FOLD_V1326
   // Force every pre-existing adaptive/fold reference to the same v1326 bytes.
