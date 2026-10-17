@@ -315,6 +315,13 @@ def main():
         "Aktuell im Reviewprotokoll vorhandener Fingerabdruck: `"+(str(details["olderStage1NextExactBatchFingerprintSHA256"]) if stage1_report else "nach letztem Null-Credit-Audit erzeugen")+"`. Nach jeder MP3-Ergänzung erneut berechnen.",
 
         "",
+        "## Sicherer echter V4-Originalabruf und Kostenschutz bei Unterbrechung",
+        "",
+        "Beim nächsten *ausdrücklich bezahlten* 7–10-Jahre-Originalbatch wird vor jedem ElevenLabs-POST der SHA256 des genauen gesprochenen Textes in ein Write-Ahead-Protokoll geschrieben. Ein HTTP-Fehler, Zeitablauf oder Abbruch nach einer möglicherweise abgerechneten Anfrage führt nicht zu einem automatischen zweiten Kauf. Stattdessen zuerst über Provider-Beleg bzw. echte Original-MP3-Datei abgleichen.",
+        "Die aktuelle Sicherung verwendet `kids/data/quiz-v4-older-stage1-request-journal.json` und eine **identische Kopie** unter `requestJournal` in `kids/data/quiz-v4-older-stage1-usage.json`. Die bestehende GitHub-Actions-Backup-Regel erfasst bereits die Usage-Datei auch bei Fehlern. Wird die lokale Journaldatei vermisst, kann die Backup-Kopie vor jedem weiteren POST eine unklare Vorbelastung nachweisen.",
+        "Der Null-Credit-Regressionscode `kids/tools/test_quiz_v4_older_stage1_exact.py` testet genau den Fall einer simulierten unklaren früheren Anfrage ohne synthetische MP3 und erwartet einen Stop mit `NEVER REBUY`. Sicherung im GitHub-Artefakt ist nicht dasselbe wie ein erfolgreich auf GitHub veröffentlichter Original-MP3-Commit: Bei Runner-Abbruch Recovery-Artefakt zuerst inspizieren und in den Reviewzweig zurückimportieren.",
+        "Letzter offener Gratis-GET-Versuch bestätigt neun verbliebene, vorher bezahlte V4-IDs mit `flowGetHTTP=402` und `historyAudioHTTP=400`, **0 authentische neue MP3s importiert**. Der API-GET verlangt zuerst die Freigabe des Originalexports; die bisherigen Sprachcredits dürfen nicht noch einmal ausgegeben werden.",
+        "",
         "## Nächste verbindliche Schritte",
         "",
         "1. Original-MP3-Dateien für die fehlenden Generation-IDs aus der bereits bezahlten ElevenLabs-Erzeugung exportieren; exakt `<generationId>.mp3` benennen. Für fehlende Dateien niemals Ersatz-V4 kostenpflichtig bestellen.",
