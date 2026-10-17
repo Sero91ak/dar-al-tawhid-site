@@ -91,10 +91,20 @@ for (const marker of [
 const settingsFnStart = testHtml.indexOf("function renderSettings(){");
 const settingsFnEnd = settingsFnStart >= 0 ? testHtml.indexOf("function renderJummah(){", settingsFnStart) : -1;
 const settingsFn = settingsFnStart >= 0 && settingsFnEnd > settingsFnStart ? testHtml.slice(settingsFnStart, settingsFnEnd) : "";
-if (!settingsFn || settingsFn.indexOf('setHeader("Einstellungen"') < 0 || settingsFn.indexOf("renderDarSetupHubHtml()") < 0 || settingsFn.indexOf('setHeader("Einstellungen"') > settingsFn.indexOf("renderDarSetupHubHtml()")) {
-  fail("test/index.html: Settings-Hero muss vor Setup-Hub stehen");
+// The modern settings hub has dedicated overview and detail pages, not the
+// retired Setup-Hub. Assert that each new page renders its own header before
+// its content; keep the legacy expectation for older compatible layouts.
+const legacySettingsHero = settingsFn.includes('setHeader("Einstellungen"') &&
+  settingsFn.includes("renderDarSetupHubHtml()") &&
+  settingsFn.indexOf('setHeader("Einstellungen"') < settingsFn.indexOf("renderDarSetupHubHtml()");
+const modernSettingsHero = settingsFn.includes('const overviewHeader=()=>setHeader("Einstellungen"') &&
+  settingsFn.includes('return \`\${overviewHeader()}') &&
+  settingsFn.includes('<section class="dsh-shell dsh-home"') &&
+  settingsFn.includes('return \`\${setHeader(pages[page][0],pages[page][1],"","settings-page-head")}<section class="dsh-shell dsh-detail"');
+if (!settingsFn || !(legacySettingsHero || modernSettingsHero)) {
+  fail("test/index.html: Settings-Hero fehlt vor dem Einstellungsinhalt");
 } else {
-  ok("test/index.html: Settings-Hero steht vor Setup-Hub");
+  ok("test/index.html: Settings-Hero für Übersicht und Unterseiten geprüft");
 }
 
 if (testHtml.includes('location.href="/widgets/?from=test"')) {
