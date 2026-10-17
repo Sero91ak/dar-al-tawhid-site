@@ -1,5 +1,5 @@
 (()=>{"use strict";
-const $=id=>document.getElementById(id), audio=$("ql-audio"), state={catalog:null,masterDrafts:null,item:null,index:0,step:0,collection:"surah",repeats:0,urls:[],fallback:0,profile:"",gender:"boy",progress:{version:1,items:{}}};
+const $=id=>document.getElementById(id), audio=$("ql-audio"), state={catalog:null,masterDrafts:null,item:null,index:0,step:0,collection:"surah",expanded:false,repeats:0,urls:[],fallback:0,profile:"",gender:"boy",progress:{version:1,items:{}}};
 const pad=n=>String(n).padStart(3,"0");
 const txt=(id,value)=>{$(id).textContent=String(value??"")};
 const message=value=>txt("ql-audio-message",value);
@@ -26,17 +26,24 @@ function card(item){
  const bar=document.createElement("span");bar.className="ql-card-bar";const fill=document.createElement("span");fill.style.width=st.pct+"%";bar.append(fill);body.append(bar);b.append(body);b.addEventListener("click",()=>open(item.id));return b;
 }
 function renderList(){const a=$("ql-surahs"),b=$("ql-extras");a.replaceChildren();b.replaceChildren();let secure=0;
- for(const item of state.catalog.items){(item.category==="surah"?a:b).append(card(item));if(stats(item).r.secure)secure++}
+ const ranked=[1,112,113,114,103,108,109,110,105,106,97,107,111];
+ const surahs=state.catalog.items.filter(i=>i.category==="surah").sort((x,y)=>ranked.indexOf(x.surah)-ranked.indexOf(y.surah));
+ for(const item of (state.expanded?surahs:surahs.slice(0,6)))a.append(card(item));
+ for(const item of state.catalog.items.filter(i=>i.category!=="surah"))b.append(card(item));
+ for(const item of state.catalog.items)if(stats(item).r.secure)secure++;
+ $("ql-more-surahs").setAttribute("aria-expanded",state.expanded?"true":"false");
+ $("ql-more-surahs").textContent=state.expanded?"Weniger Sūren anzeigen  ⌃":"Weitere Sūren entdecken  ⌄";
  const pct=Math.round(100*secure/state.catalog.items.length);txt("ql-summary-text",secure+" von "+state.catalog.items.length+" Einheiten sicher gelernt");$("ql-progress-fill").style.width=pct+"%";$("ql-progress-track").setAttribute("aria-valuenow",String(pct));
  chooseCollection(state.collection);
 }
 function chooseCollection(which){
  state.collection=which==="ayah"?"ayah":"surah";
- const surah=state.collection==="surah";$("ql-surahs").hidden=!surah;$("ql-extras").hidden=surah;
+ const surah=state.collection==="surah";$("ql-surahs").hidden=!surah;$("ql-extras").hidden=surah;$("ql-more-surahs").hidden=!surah||state.catalog.items.filter(i=>i.category==="surah").length<=6;
  for(const [id,active] of [["ql-show-surahs",surah],["ql-show-extras",!surah]]){
   $(id).classList.toggle("ql-switch-active",active);$(id).setAttribute("aria-pressed",active?"true":"false");
  }
 }
+$("ql-more-surahs").addEventListener("click",()=>{state.expanded=!state.expanded;renderList()});
 $("ql-show-surahs").addEventListener("click",()=>chooseCollection("surah"));
 $("ql-show-extras").addEventListener("click",()=>chooseCollection("ayah"));
 function labelPlay(glyph,label){
