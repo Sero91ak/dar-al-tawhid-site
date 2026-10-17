@@ -15,19 +15,23 @@
         "kids-quiz-022"
       ],
       "sourceAudioPart": "explanation",
-      "status": "GENERATION_SUBMITTED_DO_NOT_RETRY",
+      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "flowId": "1q8pGIR0nRKIekoSCt0j",
-      "generationId": null,
+      "generationId": "UW1YgOL7E8RpT6kIq9y5",
       "estimatedCreditsNotInvoice": 62.98929515418502,
-      "actualProviderCredits": null,
+      "actualProviderCredits": 62.98929515418502,
       "humanListeningApproved": false,
       "publicReleaseAllowed": false,
       "nodeId": "iddiWJxustltj8k0zw46",
       "sessionId": "FWWvm4zxIAbfF0Mxivx4",
-      "providerGenerationId": null
+      "providerGenerationId": null,
+      "providerGenerationDurationSeconds": 3.92,
+      "providerStatus": "completed",
+      "providerMediaStoredInElevenLabs": true,
+      "originalMP3ImportedIntoGithub": false
     }
   ]
 }
