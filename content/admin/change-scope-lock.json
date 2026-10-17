@@ -8204,6 +8204,17 @@
         "scripts/verify-frauen-hero-contract.cjs"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "frauen-dom-hero-live-visual-v1392-20261017",
+      "at": "2026-10-17T16:00:00.000Z",
+      "approvedBy": "user-explicit-frauen-hero-restore-test-besucher-full-function-continue-20261017",
+      "reason": "Restore real missing Frauen hero DOM on Test and visitor apps and add visual browser evidence/automated regression check. Narrow permission for exactly the two new QA files; all global change restrictions remain active.",
+      "paths": [
+        "scripts/diagnose-frauen-hero-live.cjs",
+        ".github/workflows/diagnose-frauen-hero-live.yml"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
