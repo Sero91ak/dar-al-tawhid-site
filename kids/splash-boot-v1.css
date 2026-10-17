@@ -48,7 +48,7 @@ html.kids-test-booting body > :not(#kids-test-boot):not(script){visibility:hidde
 #kids-test-boot .ktb-status{font-size:clamp(12px,2.7vw,18px);font-weight:800;line-height:1.35;margin:0;color:#fff;
  text-shadow:0 2px 9px #02162f}
 #kids-test-boot .ktb-recover{display:none;margin:12px auto 0;color:#081c30;background:#f7d27b;
- border:1px solid #ffebc2;border-radius:999px;padding:10px 16px;font:800 14px inherit;cursor:pointer}
+ border:1px solid #ffebc2;border-radius:999px;padding:10px 16px;font-size:14px;font-weight:800;font-family:inherit;cursor:pointer}
 #kids-test-boot[data-boot-error="1"] .ktb-recover{display:inline-block}
 #kids-test-boot.kids-test-boot-fade{opacity:0;pointer-events:none}
 @media(min-width:760px) and (orientation:landscape){
