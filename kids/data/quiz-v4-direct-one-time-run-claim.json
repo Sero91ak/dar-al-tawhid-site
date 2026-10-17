@@ -2,11 +2,14 @@
   "schemaVersion": 1,
   "spokenText": "Allah ordnet das Fasten des Ramaḍān an.",
   "spokenTextSHA256": "4c3305438e0a4fdfa7ae8544aae48e6323a9ddb0248a61d04494ef312b21f826",
-  "ownerRunId": "39066003170",
+  "ownerRunId": "39066486734",
   "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "modelId": "eleven_v4",
   "state": "PREPOST_RESERVED_DO_NOT_RETRY",
   "audioExists": false,
   "userApprovedSpend": true,
-  "livePublished": false
+  "livePublished": false,
+  "previousPrepostRunnerId": "39066003170",
+  "previousRunnerNeverReachedElevenLabs": true,
+  "recoveryOfCommittedReservationOnly": true
 }
