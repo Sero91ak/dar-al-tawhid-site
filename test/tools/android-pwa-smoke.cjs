@@ -224,6 +224,45 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
      const summary=group.locator("summary");
      if(await summary.count())await summary.click();
     }
+    // DAR_TEST_ANDROID_SCROLL_QA_V1388: validate actual split scroll ownership
+    // and container-based card columns on the deployed Android /test page.
+    const scrollProof=await page.evaluate(()=>{
+      const fold=document.querySelector("#appView .dar-fold[data-fold-mode='dual']");
+      const empty=!!fold?.querySelector(":scope > .dar-fold__pane > .dar-fold__empty");
+      const rail=fold?.querySelector(":scope > .dar-fold__rail");
+      const grid=rail?.querySelector(".dar-tl-accordion[open] .dar-tl-grid");
+      const railWidth=rail?.getBoundingClientRect().width||0;
+      const gridCss=grid?getComputedStyle(grid):null;
+      const columnCount=gridCss?.display==="grid"
+        ?gridCss.gridTemplateColumns.trim().split(/\\s+/).filter(Boolean).length:0;
+      const seen=new Set(),candidates=[];
+      for(const el of [document.scrollingElement,document.body,
+        document.querySelector("#appView"),rail,fold?.querySelector(".dar-fold__pane")]){
+        if(!el||seen.has(el))continue;seen.add(el);
+        const css=getComputedStyle(el),rect=el.getBoundingClientRect();
+        if(css.display==="none"||css.visibility==="hidden"||rect.width<1)continue;
+        const delta=el.scrollHeight-el.clientHeight;
+        if(delta<36)continue;
+        const start=el.scrollTop;
+        el.scrollTop=Math.min(start+100,el.scrollHeight-el.clientHeight);
+        const moved=el.scrollTop>start+3;
+        el.scrollTop=start;
+        candidates.push({name:el===document.scrollingElement?"document":
+          el.id||el.className?.toString().slice(0,70)||el.tagName,
+          delta,overflowY:css.overflowY,moved});
+      }
+      return {empty,railWidth,columnCount,
+        foldOverflow:fold?getComputedStyle(fold).overflowY:null,
+        candidates};
+    });
+    findings.screens.push({label:label+"-scroll-rail",scrollProof});
+    if(scrollProof.empty&&scrollProof.foldOverflow==="hidden")
+      throw Error("Android "+label+": empty Fold preview clips vertical scroll");
+    if(scrollProof.railWidth>0&&scrollProof.railWidth<620&&scrollProof.columnCount>1)
+      throw Error("Android "+label+": "+scrollProof.columnCount+
+        " topic columns squeezed into "+scrollProof.railWidth+"px rail");
+    if(scrollProof.candidates.length&&!scrollProof.candidates.some(x=>x.moved))
+      throw Error("Android "+label+": visible content has no functional vertical scroller");
     const topic=page.locator(".topics-hub .topics-theme-card").first();
     if(await topic.count()){
      await topic.click({timeout:13000});
