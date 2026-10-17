@@ -16,6 +16,7 @@ from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
 MISSING=ROOT/"kids/data/quiz-v4-paid-flow-import-status.json"
+PREPAID_NINE=ROOT/"kids/data/quiz-v4-missing9-prepaid-originals.json"
 PRIOR=ROOT/"kids/data/quiz-v4-batch-001-020-review.json"
 REGISTRY=ROOT/"kids/data/quiz-v4-450-original-clip-registry.json"
 REPORT=ROOT/"kids/data/quiz-v4-paid-flow-get-recovery-attempt.json"
@@ -59,6 +60,84 @@ def must_be_mp3(path):
         raise RuntimeError("Invalid original MP3 duration or codec")
     return round(dur,3)
 
+
+def locate_history_flow_items(key,needed):
+    """Read-only bounded Flows history. Exact text is not identity proof.
+
+    ElevenLabs Flow generation IDs are NOT necessarily history_item_ids.
+    Only a provider history row whose own history_item_id or request_id
+    explicitly equals the historical generation ID can authorize importing
+    an MP3 under that original ID. Others are discovery hints only.
+    """
+    manifest=load(PREPAID_NINE)
+    originals={x["generationId"]:x for x in manifest["items"]}
+    if set(needed)-set(originals):
+        raise RuntimeError("Unrecognized paid original in history matching")
+    matches={gid:[] for gid in needed}
+    statuses=[]
+    inspected=0
+    cursor=None
+    seen=set()
+    max_pages=5
+    for page in range(max_pages):
+        opts={"page_size":100,"source":"Flows","voice_id":manifest["items"][0]["voiceId"],
+              "model_id":EXPECTED,"sort_direction":"desc"}
+        if cursor:opts["start_after_history_item_id"]=cursor
+        path="/v1/history?"+urllib.parse.urlencode(opts)
+        code,data,ct=api_get(path,key)
+        statuses.append(code)
+        if code!=200:break
+        try: response=json.loads(data.decode("utf-8"))
+        except (ValueError,UnicodeError):break
+        rows=response.get("history",[])
+        if not isinstance(rows,list):break
+        inspected+=len(rows)
+        for row in rows:
+            if not isinstance(row,dict):continue
+            if (row.get("model_id")!=EXPECTED
+                    or row.get("voice_id")!=manifest["items"][0]["voiceId"]
+                    or row.get("source")!="Flows"):
+                continue
+            h_id=row.get("history_item_id")
+            request=row.get("request_id")
+            text=row.get("text")
+            if not isinstance(h_id,str) or not h_id or h_id in seen:continue
+            seen.add(h_id)
+            for gid in needed:
+                if text==originals[gid]["originalSpokenText"]:
+                    matches[gid].append({
+                        "historyItemId":h_id,
+                        "providerIdCrosslinked":h_id==gid or request==gid,
+                        "generationId":gid})
+        if not response.get("has_more"):break
+        new_cursor=response.get("last_history_item_id")
+        if not isinstance(new_cursor,str) or not new_cursor or new_cursor==cursor:break
+        cursor=new_cursor
+    # No auto-import just because a generated recording sounds plausible.
+    # We require EXACT unique text, original voice/model AND provider-ID link.
+    linked={}
+    result={}
+    for gid,items in matches.items():
+        direct=[x for x in items if x["providerIdCrosslinked"]]
+        if len(items)==1 and len(direct)==1:
+            linked[gid]=direct[0]["historyItemId"]
+        result[gid]={
+            "exactTextAndVoiceHistoryMatches":len(items),
+            "directProviderIdCrosslink":gid in linked,
+            "needsOriginalMp3Export":gid not in linked
+        }
+    summary={
+        "usedOnlyReadOnlyGET":True,
+        "pagesInspected":len(statuses),
+        "httpCodes":statuses,
+        "historyRowsInspected":inspected,
+        "candidateExactTextMatches":sum(x["exactTextAndVoiceHistoryMatches"] for x in result.values()),
+        "strongOriginalIdLinks":len(linked),
+        "unlinkedOriginals":sum(v["needsOriginalMp3Export"] for v in result.values()),
+        "noUnverifiedAudioAutolabelledAsOriginal":True,
+        "perGeneration":result}
+    return linked,summary
+
 def main():
     state=load(MISSING)
     paid=load(PRIOR)
@@ -101,6 +180,11 @@ def main():
         save(REPORT,result)
         print("KIDS_PREPAID_RECOVERY "+json.dumps(result,ensure_ascii=False),flush=True)
         return
+    # Unlike a Flow generationId, an ElevenLabs history_item_id identifies
+    # an actual History audio resource. Search the official GET-only Flows
+    # history first, and use it ONLY if provider IDs prove the crosslink.
+    links,history_summary=locate_history_flow_items(key,needed)
+    result["historyFlowSearch"]=history_summary
     with tempfile.TemporaryDirectory(prefix="kids-paid-v4-nine-") as folder:
         folder=Path(folder)
         for gid in needed:
@@ -119,6 +203,26 @@ def main():
                         stat["importableMP3"]=True
                 except (OSError,ValueError,RuntimeError,KeyError):
                     stat["flowAudioDownload"]="failed-keep-paid-original-untouched"
+            if not stat["importableMP3"] and gid in links:
+                # History entry is explicitly crosslinked by the provider's
+                # request_id or its original generation ID, never text alone.
+                hid=links[gid]
+                hcode,hbin,hct=api_get(
+                    "/v1/history/"+urllib.parse.quote(hid,safe="")+"/audio",
+                    key,accept="audio/mpeg")
+                stat["verifiedHistoryAudioHTTP"]=hcode
+                if hcode==200:
+                    try:
+                        if not 1800<len(hbin)<MAX_AUDIO or not(
+                             hbin[:3]==b"ID3" or hbin[:1]==b"\\xff"):
+                            raise ValueError("Unexpected MP3 for confirmed old generation")
+                        path=folder/(gid+".mp3")
+                        path.write_bytes(hbin)
+                        stat["mp3DurationSec"]=must_be_mp3(path)
+                        stat["importableMP3"]=True
+                        stat["recoveredVia"]="linked-official-flows-history-GET"
+                    except (ValueError,RuntimeError):
+                        stat["linkedHistoryDownload"]="invalid-old-audio"
             if not stat["importableMP3"]:
                 # GET on the documented ElevenLabs History audio route is
                 # read-only. Flow generation IDs may not be history_item_ids;
