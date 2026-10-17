@@ -81,7 +81,7 @@ html body .app #view-today > .hero :is(.cloud,.shooting-star,.city,.arch,.dune,.
 <link rel="preload" as="image" href="/kids/assets/kids-icons/learning-book-3d-v1422.png?v=1422">
 <link rel="stylesheet" href="/kids/offline-library-v1.css?v=1">
 <link rel="stylesheet" href="/kids/item-offline-v1.css?v=2">
-<script src="/kids/item-offline-v1.js?v=2"></script>
+<script src="/kids/item-offline-v1.js?v=5"></script>
 <link rel="apple-touch-icon" sizes="180x180" href="/kids/icons/apple-touch-icon.png?v=logo28">
 <link rel="icon" type="image/png" sizes="32x32" href="/kids/icons/favicon-32.png?v=logo28">
 <link rel="icon" type="image/png" sizes="48x48" href="/kids/icons/favicon-48.png?v=logo28">
@@ -6961,7 +6961,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1441",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1442",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -7996,7 +7996,7 @@ html[data-view="stories"] #view-stories > :last-child{
 <script src="/kids/prophet-stories.js?v=43"></script>
 <script src="/kids/mubashshirun-stories.js?v=1414"></script>
 <script src="/kids/sahabiyyat-stories.js?v=1414"></script>
-<script src="/kids/deen-lessons.js?v=8"></script>
+<script src="/kids/deen-lessons.js?v=12"></script>
 <script src="/kids/global-story-glow-v1216.js?v=1218-calm"></script>
 <script src="/kids/term-learning.js?v=1"></script>
 <script src="/kids/dua-hub-v1219.js?v=1421" data-kids-dua-hub="1259"></script>
