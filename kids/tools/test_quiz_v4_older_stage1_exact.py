@@ -79,6 +79,41 @@ def main():
          "second batch ignores fixed original count or estimated cost ceiling")
     must(all(qid in qids for qid in second_finished),
          "projected completions refer to a nonselected question")
+    # Simulate a paid request with an uncertain provider result. Its SHA is
+    # metadata ONLY: no mock MP3 and no provider network activity.
+    with tempfile.TemporaryDirectory() as temp:
+        saved_usage=stage1.USAGE
+        saved_attempts=stage1.ATTEMPTS
+        try:
+            stage1.USAGE=Path(temp)/"usage-already-backed-up.json"
+            stage1.ATTEMPTS=Path(temp)/"requests-local.json"
+            test_attempt={
+                "textSHA256":source["originalTextRecordingQueue"][0]["spokenTextSHA256"],
+                "batchId":stage1.BATCH,"status":"REQUEST_STARTED_UNCONFIRMED",
+                "startedAt":"2026-10-17T00:00:00+00:00"}
+            journal={"schemaVersion":1,"modelId":stage1.MODEL,
+                     "voiceId":stage1.VOICE,
+                     "purpose":"DO_NOT_REGENERATE_UNCERTAIN_PAID_REQUESTS",
+                     "entries":[test_attempt]}
+            stage1.durable_attempts(journal)
+            backup=json.loads(stage1.USAGE.read_text(encoding="utf-8"))
+            must(backup["requestJournal"]==journal and
+                 json.loads(stage1.ATTEMPTS.read_text(encoding="utf-8"))==journal,
+                 "uncertain paid POST journal not present in existing always-uploaded usage backup")
+            # Demonstrate that the backup alone blocks a retry even if the
+            # local journal is missing on the next runner.
+            stage1.ATTEMPTS.unlink()
+            try:
+                stage1.prepare()
+            except RuntimeError as exc:
+                must("NEVER REBUY" in str(exc),
+                     "unconfirmed billed V4 request was not blocked as previously attempted")
+            else:
+                raise AssertionError("An uncertain original V4 POST was allowed to be bought twice")
+        finally:
+            stage1.USAGE=saved_usage
+            stage1.ATTEMPTS=saved_attempts
+
     # Even with both manual YES inputs, a wrong exact-batch fingerprint must
     # stop the producer BEFORE obtaining provider balance or sending paid TTS.
     def should_never_call_provider(*_args,**_kwargs):
