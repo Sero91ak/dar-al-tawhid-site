@@ -16,5 +16,23 @@
     "title": "Bitte um Erleichterung einer schwierigen Angelegenheit",
     "snippet": "O Allah, nichts ist leicht außer dem, was Du leicht gemacht hast. Und Du machst das Schwierige, wenn Du willst, leicht.",
     "category": "Erleichterung & schwierige Angelegenheiten"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 476,
+      "remaining": 440
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 62,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
