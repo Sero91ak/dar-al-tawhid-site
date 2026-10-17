@@ -6,12 +6,31 @@ import UIKit
 struct KidsRootView: View {
 #if KIDS_CREATOR_TEST
     @State private var showCreatorPanel = false
+    @State private var showNativeStartPoster = true
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
             KidsWebAppView()
                 .ignoresSafeArea()
                 .background(Color(red: 12.0 / 255, green: 38.0 / 255, blue: 54.0 / 255))
+
+            // KIDS TEST only: bridge the iOS native launch frame to the web splash.
+            // The same poster image is bundled locally, so there is no network
+            // or WKWebView white frame between the system launch and first paint.
+            if showNativeStartPoster {
+                GeometryReader { geometry in
+                    Image("KidsTestLaunchPoster")
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+                        .clipped()
+                }
+                .ignoresSafeArea()
+                .transition(.opacity.animation(.easeInOut(duration: 0.68)))
+                .accessibilityHidden(true)
+                .allowsHitTesting(false)
+                .zIndex(2)
+            }
 
             Button {
                 showCreatorPanel = true
@@ -29,6 +48,9 @@ struct KidsRootView: View {
             .accessibilityLabel("KIDS Ersteller-Übersicht öffnen")
             .padding(.trailing, 13)
             .padding(.bottom, 102)
+            .opacity(showNativeStartPoster ? 0 : 1)
+            .allowsHitTesting(!showNativeStartPoster)
+            .zIndex(3)
         }
         .sheet(isPresented: $showCreatorPanel) {
             KidsCreatorPanel { destination in
@@ -42,6 +64,20 @@ struct KidsRootView: View {
             }
             .presentationDetents([.medium, .large])
             .presentationDragIndicator(.visible)
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DarKidsCreatorSplashReady"))) { _ in
+            withAnimation(.easeInOut(duration: 0.68)) {
+                showNativeStartPoster = false
+            }
+        }
+        .task {
+            // A failed web load must never trap the user beneath the native cover.
+            try? await Task.sleep(nanoseconds: 9_800_000_000)
+            if !Task.isCancelled && showNativeStartPoster {
+                withAnimation(.easeInOut(duration: 0.68)) {
+                    showNativeStartPoster = false
+                }
+            }
         }
     }
 #else
