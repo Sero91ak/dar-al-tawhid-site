@@ -1,7 +1,7 @@
 (() => {
 "use strict";
 const DATA_URL="/kids/data/deen-lessons.json?v=3";
-const CURRICULUM_URL="/kids/data/deen-curriculum-v1.json?v=2";
+const CURRICULUM_URL="/kids/data/deen-curriculum-v1.json?v=3";
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.deenLesson.done.";
 const $=(s,r=document)=>r.querySelector(s);
@@ -289,7 +289,7 @@ async function init(){
             sourceRefs:lesson.sourceRefs||original?.sourceRefs||[],
             sourceLinks:lesson.sourceLinks||[],
             audio:audioInfo,
-            voiceProduction:master?{status:lesson.status==="existing"?"text-ready":"awaiting-editorial-release",singleMasterAudio:true,masterAgeRange:"4-10",ttsSource:"masterStoryText"}:{status:"planned"},
+            voiceProduction:master?{status:"text-ready",singleMasterAudio:true,masterAgeRange:"4-10",ttsSource:"masterStoryText",audioStatus:"pending"}:{status:"planned"},
             categoryId:g.id};
         }));
       }
