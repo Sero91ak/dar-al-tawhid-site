@@ -1,0 +1,210 @@
+#!/usr/bin/env python3
+"""Strict zero-credit editorial/source preflight for first 20 older quiz items.
+
+This is NOT a scholarly or human signoff. Preserve all canonical questions,
+answer keys, citations and already charged voice originals unchanged.
+Cite only independently located source references in this PRIVATE audit;
+never inject external source links into the children's public application.
+"""
+from __future__ import annotations
+
+import hashlib
+import json
+from pathlib import Path
+
+ROOT=Path(__file__).resolve().parents[2]
+STAGE=ROOT/".github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json"
+NEXT=ROOT/"kids/review-only/quiz-v4-older-stage1-next-recording-batch.json"
+OUT=ROOT/".github/reports/kids-v4-older-stage1-source-and-answer-audit.json"
+MD=ROOT/".github/reports/KIDS-V4-STAGE1-QUELLEN-UND-ANTWORTCHECK.md"
+MODEL="eleven_v4"
+VOICE="DkU7j9uO4ZEtLD2iRZSH"
+PARTS=("question","correct","retry","explanation")
+SOURCES={
+    "kids-quiz-034":"Qurʾān 5:6",
+    "kids-quiz-026":"Qurʾān 16:43",
+    "kids-quiz-033":"Qurʾān 49:12",
+    "kids-quiz-031":"Qurʾān 3:134",
+    "kids-quiz-050":"Qurʾān 49:9–10",
+    "kids-quiz-048":"Qurʾān 24:27",
+    "kids-quiz-045":"Qurʾān 2:183–185",
+    "kids-quiz-389":"Qurʾān 16:43",
+    "kids-quiz-022":"Ṣaḥīḥ Muslim 8",
+    "kids-quiz-043":"Qurʾān 2:238",
+    "kids-quiz-041":"Qurʾān 49:13",
+    "kids-quiz-046":"Qurʾān 2:43",
+    "kids-quiz-520":"Qurʾān 2:255",
+    "kids-quiz-044":"Qurʾān 5:6",
+    "kids-quiz-025":"Qurʾān 33:21",
+    "kids-quiz-023":"Qurʾān 2:2",
+    "kids-quiz-032":"Qurʾān 49:10",
+    "kids-quiz-080":"Qurʾān 49:11",
+    "kids-quiz-087":"Qurʾān 72:18",
+    "kids-quiz-036":"Ṣaḥīḥ al-Bukhārī 8; Ṣaḥīḥ Muslim 16",
+}
+# Independently located references (not a certification of EVERY source).
+EVIDENCE={
+    "kids-quiz-034":{
+        "url":"https://www.islamweb.net/ar/article/220252/",
+        "assessment":"5:6 explicitly includes washing the face in ablution"},
+    "kids-quiz-044":{
+        "url":"https://www.islamweb.net/ar/library/index.php?ID=42&page=listing",
+        "assessment":"5:6 mentions face, arms, head and feet; washing versus wiping must not be conflated"},
+    "kids-quiz-026":{
+        "url":"https://islamweb.net/ar/fatwa/24123/",
+        "assessment":"16:43 invokes asking knowledgeable people; verse context concerns earlier messengers"},
+    "kids-quiz-389":{
+        "url":"https://islamweb.net/ar/fatwa/24123/",
+        "assessment":"16:43 is applied to questions of religious knowledge, not a blanket proof for any claim"},
+    "kids-quiz-050":{
+        "url":"https://www.islamweb.net/amp/ar/library/content/50/4581/",
+        "assessment":"49:9–10 commands reconciliation, including justice where conflicts occur"},
+    "kids-quiz-048":{
+        "url":"https://islamweb.net/ar/article/234721/",
+        "assessment":"24:27 requires permission and greeting before entering others' homes"},
+    "kids-quiz-036":{
+        "url":"https://www.islamweb.net/ar/article/59048/",
+        "assessment":"Hadith of Ibn Umar lists prayer, testimony, zakat, hajj and Ramadan fasting as pillars"}
+}
+CAVEATS={
+    "kids-quiz-026":"Interpretive application of 16:43: original context is asking about earlier messengers.",
+    "kids-quiz-389":"Interpretive application of 16:43: original context is asking about earlier messengers.",
+    "kids-quiz-044":"Do not imply washing every named part; verse distinguishes wiping of the head.",
+    "kids-quiz-050":"Child-friendly summary omits the fuller conditions of 49:9–10; never present it as exhaustive fiqh.",
+    "kids-quiz-022":"Verify Sahih Muslim numbering against the edition before final citation publication.",
+    "kids-quiz-036":"Verify Bukhari/Muslim hadith numbering against the edition before final citation publication."
+}
+
+def must(value,message):
+    if not value:raise RuntimeError("TAWHID_KIDS_STAGE1_QA_BLOCKED: "+message)
+
+def sha(x):return hashlib.sha256(x.encode("utf-8")).hexdigest()
+def read(p):return json.loads(p.read_text(encoding="utf-8"))
+
+def main():
+    stage=read(STAGE);next_run=read(NEXT)
+    must(stage["stage"]==1 and stage["reviewOnly"] is True and
+         stage["published"] is False,"not private stage1")
+    must(next_run["modelId"]==MODEL and next_run["voiceId"]==VOICE
+         and next_run["paidSynthesisAuthorizedByAudit"] is False,
+         "wrong voice / unexpectedly authorized spending")
+    must(stage["numberOfQuestions"]==20 and stage["numberOfNewOriginalTexts"]==65,
+         "first20 / 65 source contract changed")
+    must(len(stage["questions"])==20 and len(SOURCES)==20,"question count or reviewed key map changed")
+    originals=stage["originalTextRecordingQueue"]
+    must(len(originals)==65 and sum(len(x["spokenText"]) for x in originals)==1842,
+         "spoken text 65 originals/1842 characters changed")
+    by_sha={}
+    for item in originals:
+        digest=item["spokenTextSHA256"];spoken=item["spokenText"]
+        must(sha(spoken)==digest and digest not in by_sha,
+             "duplicate or changed source V4 speech SHA")
+        must(item["expectedModelId"]==MODEL and item["expectedVoiceId"]==VOICE
+             and item["explicitRecordingAuthorization"] is False,
+             "unapproved stage1 speech/voice")
+        by_sha[digest]=item
+    next_hashes=next_run["nextExactTextSha256"]
+    must(len(next_hashes)==len(set(next_hashes))==10 and
+         set(next_hashes)<=set(by_sha),"next ten are not exactly source-authentic")
+    records=[]
+    for q in stage["questions"]:
+        qid=q["questionId"]
+        must(qid in SOURCES and q["originalSource"]==SOURCES[qid],
+             "changed question ID or original source")
+        must(q["ageBand"] in ("7-8","9-10"),"wrong older question age band")
+        must(q["originalReviewStatus"]=="approved" and
+             q["originalVerification"]=="approved",
+             "original content not earlier approved in catalog")
+        answers=q["answers"]
+        must(len(answers)==3 and len(set(answers))==3 and q["correctAnswer"] in answers,
+             "ambiguous three-choice answer key")
+        must(all("Antwort "+str(i)+": "+a in q["spokenQuestion"]
+                 for i,a in enumerate(answers,1)),
+             "spoken version changed or failed to include exact answer label")
+        must(q["spokenQuestion"].count("Antwort ")==3,"number of oral answer slots changed")
+        must("Das merken wir uns:" in q["explanation"],"lost original explanation")
+        must(not q["automaticTextWarnings"],"original text already flagged for review")
+        must(q["humanSourceApproval"] is False and
+             q["humanPronunciationApproval"] is False and
+             q["manualRecordingAuthorization"] is False,
+             "source QA is not human approval")
+        q_shas=set()
+        for part in PARTS:
+            must(part in q["audioParts"],"missing audio field")
+            audio=q["audioParts"][part]
+            if audio["mode"]=="compose-from-verified-originals":
+                for digest in audio["missingOriginalTextSHA256"]:
+                    must(digest in by_sha,"unregistered speech text in question")
+                    q_shas.add(digest)
+            elif audio["mode"]=="original-paid-exact":
+                must(audio["alreadyRecorded"] is True,"missing old, paid generation cannot be re-bought")
+            else:raise RuntimeError("Unexpected speech recipe type")
+        row={
+            "questionId":qid,"ageBand":q["ageBand"],"originalSource":q["originalSource"],
+            "originalQuestion":q["originalQuestion"],"correctAnswer":q["correctAnswer"],
+            "answers":answers,
+            "spokenTextAnswerOrderMatches":True,"questionAndExplanationUnchanged":True,
+            "missingNewOriginalTextSHA256":sorted(q_shas),
+            "firstRunNeedsNewTextSHA256":sorted(q_shas&set(next_hashes)),
+            "externalEvidenceLocated":qid in EVIDENCE,
+            "externalEvidencePrivateReference":EVIDENCE[qid]["url"] if qid in EVIDENCE else None,
+            "externalReferenceMatchNote":EVIDENCE[qid]["assessment"] if qid in EVIDENCE else None,
+            "interpretiveOrCitationCaveat":CAVEATS.get(qid),
+            "scholarlySourceReviewCompletedByHuman":False,
+            "humanSpeechTextApproved":False,"humanAudioListeningApproved":False
+        }
+        records.append(row)
+    must(set(x["questionId"] for x in records)==set(SOURCES),"missing referenced quiz questions")
+    missing_used=set().union(*(set(x["missingNewOriginalTextSHA256"]) for x in records))
+    must(missing_used==set(by_sha),"not all 65 proposed sources used by stage1 questions")
+    may_complete=sorted(x["questionId"] for x in records
+                        if set(x["missingNewOriginalTextSHA256"])<=set(next_hashes))
+    must(may_complete==sorted(next_run["questionsThatCouldGainCompleteV4AudioAfterNextRun"]),
+         "first-ten proposed question completions inconsistent")
+    report={
+        "schemaVersion":1,"scope":"PRIVATE_KIDS_V4_FIRST20_EDITORIAL_AND_SOURCE_MAPPING_AUDIT",
+        "modelId":MODEL,"voiceId":VOICE,"totalQuestions":20,
+        "age7to8":sum(x["ageBand"]=="7-8" for x in records),
+        "age9to10":sum(x["ageBand"]=="9-10" for x in records),
+        "sourceMappingConsistentWithPreviouslyApprovedCatalog":True,
+        "independentExternalEvidenceLocatedFor":len(EVIDENCE),
+        "externalEvidenceDoesNotEstablishCompleteSourceApproval":True,
+        "sourceContextsNeedingExtraCare":sorted(CAVEATS),
+        "exactNewSourceTexts":65,"firstProposedNewV4Texts":10,
+        "fourPossibleQuestionCompletionsAfterActualAudioAndQA":may_complete,
+        "humanSourceApprovalGranted":False,
+        "humanPronunciationApprovalGranted":False,
+        "newOriginalMP3BytesCreated":0,"creditsSpent":0,
+        "publicReleaseAllowed":False,"records":records
+    }
+    OUT.parent.mkdir(parents=True,exist_ok=True)
+    OUT.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    md=[
+        "# TAWḤĪD KIDS – V4 Erststufe: interne Quellen- und Antwortprüfung",
+        "",
+        "**Kein Live-Inhalt. Keine neue Sprachsynthese. Keine menschliche Quellen-/Hörfreigabe.**",
+        "",
+        "- 20 unveränderte Quizfragen, 10 für 7–8 Jahre und 10 für 9–10 Jahre.",
+        "- 65 überprüfte exakte Text-SHA-256-Verweise der originalen Produktionsliste.",
+        "- 10 priorisierte V4-Takes könnten bei echter Erzeugung und technischer Prüfung 4 Quizfragen schließen: "+", ".join(may_complete)+".",
+        "- Für "+str(len(EVIDENCE))+" Fragen wurden zusätzliche passende Online-Belegstellen lokalisiert; **nicht** als vollständige wissenschaftliche Freigabe zu behandeln.",
+        "- Originale Quellen stehen nur im internen Review. **Keine Webseiten-Links in der Kinder-App anzeigen.**",
+        "",
+        "## Genauigkeitshinweise",
+        ""
+    ]
+    for qid,note in CAVEATS.items():
+        md.append("- `"+qid+"`: "+note)
+    md+=["","## Nächster sicherer Schritt","",
+         "1. Die 20 Quellen/Antworten unter Einschluss dieser Hinweise fachlich und altersdidaktisch abnehmen.",
+         "2. Nur den unmittelbar danach ausdrücklich freigegebenen originalen `eleven_v4`-Batch bestellen.",
+         "3. Gespeicherte V4-MP3-Bytes mit SHA, Audiocodec, gesprochenem Wort und Kostenledger abgleichen.",
+         "4. Öffentliche Quizfreigabe auslassen, bis Audio-Hörprüfung, Quiz-Offline-Test und finaler Release-Gate bestanden sind.",
+         ""]
+    MD.write_text("\n".join(md),encoding="utf-8")
+    print("PASS_STAGE1_SOURCE_AND_ANSWER_AUDIT "+
+          json.dumps({"questions":20,"externalEvidence":len(EVIDENCE),
+                      "newOriginalTexts":65,"possibleComplete":len(may_complete),
+                      "humanApproval":False,"credits":0},ensure_ascii=False))
+
+if __name__=="__main__":main()
