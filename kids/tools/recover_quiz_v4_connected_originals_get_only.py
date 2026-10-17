@@ -134,7 +134,8 @@ def main():
             "textSha256":sha(text),"bytes":len(data),"voiceId":VOICE,"modelId":MODEL,
             "audioListeningApproved":False,"qaApproval":"pending-human-auditory-review",
             "source":"confirmed-original-elevenlabs-creative-history-read-only",
-            "providerGenerationId":gid,"status":"REVIEW_ONLY_ORIGINAL_MP3_NOT_PUBLISHED"}
+            "providerGenerationId":gid,"originalGenerationId":gid,
+            "status":"REVIEW_ONLY_ORIGINAL_MP3_NOT_PUBLISHED"}
         paid["rows"].append({
             "batchId":"KIDS_CONNECTED_CREATIVE_ALREADY_PAID_V4",
             "text":text,"textSha256":sha(text),"mp3Sha256":digest,
@@ -145,6 +146,7 @@ def main():
         row["originalMP3ImportedIntoGithub"]=True
         row["originalMP3URL"]="/"+str(target.relative_to(ROOT))
         row["originalMP3SHA256"]=digest
+        row["importedMP3SHA256"]=digest
         write(REGISTRY,reg);write(PAID,paid);write(CONNECTED,connected)
         imported.append({"sourceTextSHA256":sha(text),"generationId":gid,
                          "sha256":digest,"bytes":len(data)})
