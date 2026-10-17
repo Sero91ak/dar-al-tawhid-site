@@ -89,7 +89,22 @@ EVIDENCE={
         "assessment":"Quran 33:21 makes the Messenger an excellent example for believers."},
     "kids-quiz-080":{
         "url":"https://www.islamweb.net/ar/library/content/50/4583/",
-        "assessment":"Tabari on Quran 49:11 condemns nicknames that the person dislikes and insulting labels."}
+        "assessment":"Tabari on Quran 49:11 condemns nicknames that the person dislikes and insulting labels."},
+    "kids-quiz-045":{
+        "url":"https://www.islamweb.net/ar/library/content/51/95/",
+        "assessment":"Al-Baghawi comments on Quran 2:185: Ramadan is the prescribed fasting month, with Quranic exemptions for sickness and travel."},
+    "kids-quiz-041":{
+        "url":"https://www.islamweb.net/ar/library/content/305/5587/",
+        "assessment":"Quran 49:13 expressly makes taqwa, not wealth or lineage, the criterion of honor with Allah."},
+    "kids-quiz-046":{
+        "url":"https://www.islamweb.net/ar/library/content/48/397/",
+        "assessment":"Al-Qurtubi on Quran 2:43: establishing prayer is coupled with giving zakah."},
+    "kids-quiz-023":{
+        "url":"https://www.islamweb.net/ar/library/content/48/140/",
+        "assessment":"Al-Qurtubi on Quran 2:2: the Quran is described as guidance for the God-fearing."},
+    "kids-quiz-032":{
+        "url":"https://www.islamweb.net/ar/library/content/50/4582/",
+        "assessment":"Al-Tabari on Quran 49:10: believers are brothers and are commanded to reconcile disputes according to justice."}
 }
 CAVEATS={
     "kids-quiz-026":"Interpretive application of 16:43: original context is asking about earlier messengers.",
