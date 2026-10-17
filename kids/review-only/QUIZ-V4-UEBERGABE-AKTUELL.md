@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `266a466e45349e08c1a9336ae4a30d3de8050436`
+- Commit beim Erstellen dieses Berichts: `0aa7706efaac536815a4ce121127f138f94e060a`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **276 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1044 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -86,6 +86,9 @@ Es wurden durch den Test KEINE neuen Original-MP3s importiert; die fehlenden 9 h
 Drei bestehende Importwege sind für die vollständige automatische Quiz-Weiterverarbeitung abgesichert: ZIP-Import über `.github/workflows/kids-v4-prepaid-flow-restore.yml`, verschlüsselter Original-Link-Import über `.github/workflows/kids-v4-secure-original-import.yml` und reiner GET-Import über `.github/workflows/kids-v4-last9-paid-free-get.yml`.
 Nach einem ECHTEN Originalimport werden SHA-/Codecprüfung, Quiz-MP3-Zusammenbau für beide Altersbereiche, Fortschrittsdateien für 450 Fragen, Frage-ID-Staging und diese Übergabe automatisch aktualisiert. Sind alle 56 Originale vorhanden, muss die technische 4–6-Abdeckung auf exakt 150/150 steigen. Das ist noch keine menschliche Hörfreigabe.
 Null-Credit-Regressionsprüfung: `kids/tools/test_quiz_v4_prepaid_end_to_end_wiring.py` via `.github/workflows/kids-v4-prepaid-endtoend-qa.yml`. Bei bisheriger Provider-Antwort HTTP 402 sind die Originalbytes weiterhin NICHT heruntergeladen; kein erneuter Kauf.
+Zusätzlicher offizieller Null-Credit-Wiederherstellungsversuch seit 17.10.2026: `kids/tools/recover_quiz_v4_missing9_get_only.py` durchsucht nun GET `/v1/history` mit Filter `source=Flows`, `voice_id` und `model_id=eleven_v4` nach den **genau neun historisch bezahlten Texten**. Das berücksichtigt, dass ElevenLabs-Flow-generation_id NICHT zwangsläufig history_item_id ist. Die Suche bleibt auf 5 × 100 Verlaufseinträge begrenzt; keine erneute Sprachgenerierung.
+WICHTIG: Gleicher Text allein ist KEIN Beweis derselben alten Aufnahme. Ein Original darf nur importiert werden, wenn ein eindeutiger Treffer zusätzlich per History-ID oder Request-ID nachweislich mit der ursprünglichen Generation-ID verknüpft ist. Doppelte oder unverbundene Treffer bleiben ungeklärt und dürfen NICHT als alte Originale etikettiert werden.
+Offline-Sicherheitstest: `kids/tools/test_quiz_v4_flow_history_discovery.py` (richtige ID, Mehrdeutigkeit, falsche Stimme, 402, Pagination). Der ausführende GET-only-Workflow `.github/workflows/kids-v4-last9-paid-free-get.yml` startet nach GitHub-Actions-Freigabe. Erst danach aus dem importierten MP3-SHA und dem Statusbericht ablesen, ob tatsächlich eine Datei zurückkam.
 
 ## Erster exakt gebundener V4-Auftrag für 7–10 Jahre
 
