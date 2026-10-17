@@ -261,6 +261,8 @@ jobs:
           set -euo pipefail
           test "$(git branch --show-current)" = "kids-creator-staging"
           node --check kids/creator-test/worker.js
+          node kids/tools/test-deen-lessons-regression.cjs
+          node kids/tools/test-deen-curriculum-v1.cjs
           node kids/tools/verify-global-release-lock.cjs
           node kids/tools/test-creator-worker-v2.cjs
           node kids/tools/test-native-creator-v2.cjs
