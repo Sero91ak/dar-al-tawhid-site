@@ -17,10 +17,10 @@ assert.ok(!/nav-btn[^>]*data-target="quran-lernen"/.test(shells[0]),"Do not crea
 const page=read("kids/quran-lernen/index.html"),css=read("kids/quran-lernen/styles.css"),js=read("kids/quran-lernen/app.js"),catalog=JSON.parse(read("kids/quran-lernen/catalog.json"));
 new vm.Script(js,{filename:"quran-lernen/app.js"});
 assert.equal(catalog.environment,"kids-creator-staging");
-assert.equal(catalog.items.length,14);
-assert.equal(catalog.items.filter(x=>x.category==="surah").length,10);
+assert.equal(catalog.items.length,17);
+assert.equal(catalog.items.filter(x=>x.category==="surah").length,13);
 assert.equal(catalog.items.filter(x=>x.category==="ayah").length,4);
-assert.equal(catalog.items.reduce((n,x)=>n+x.verses.length,0),51);
+assert.equal(catalog.items.reduce((n,x)=>n+x.verses.length,0),68);
 assert.ok(css.includes('html[data-gender="girl"]')&&css.includes("quran-home-v1053.jpg"),"Gender design missing");
 assert.ok(page.includes('id="ql-audio"')&&page.includes('id="ql-word-tiles"')&&page.includes('id="ql-progress-track"'),"Learning parts missing");
 assert.ok(page.includes("disabled>Audio folgt"),"Unverified master narration must remain disabled");
@@ -46,6 +46,6 @@ for(const item of catalog.items){
   words+=verse.words.length;approvedWordMeanings+=verse.words.filter(w=>w.meaning!==null).length;
  }
 }
-assert.equal(words,347);
-assert.equal(approvedWordMeanings,44,"Unreviewed words must remain pending");
-console.log("PASS: isolated Quran creator preview; 3 shells; 14 entries, 51 ayat, 347 original tokens, 44 tentative meanings; no visitor write");
+assert.equal(words,425);
+assert.equal(approvedWordMeanings,111,"Unreviewed words must remain pending");
+console.log("PASS: isolated Quran creator preview; 3 shells; 17 entries, 68 ayat, 425 original tokens, 111 tentative meanings; no visitor write");
