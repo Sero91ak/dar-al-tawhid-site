@@ -90,7 +90,15 @@ html[data-theme] body.is-more-route #appView .dar-more-v15{
   padding-right:0!important;
   box-sizing:border-box!important;
 }
-html[data-theme] body.is-topics-route #appView .topics-hub > :not(.view-head),
+html[data-theme] body.is-area-route:not(.is-feed-fullscreen):not(.is-quran-overview):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView.view:has(> .view-head){
+  padding-left:0!important;
+  padding-right:0!important;
+}
+html[data-theme] body.is-area-route #appView.view:has(> .view-head) > :not(.view-head):not(.topics-hub):not(.qov-page):not(.dar-more-v15):not(.post-reader):not(.quiz-home):not(.topic-collection-page):not(.dua-hub):not(.hadith-hub){
+  padding-left:var(--dar-edge-gutter,12px)!important;
+  padding-right:var(--dar-edge-gutter-right,12px)!important;
+  box-sizing:border-box!important;
+}
 html[data-theme] body.is-topic-route #appView .topic-collection-page > :not(.view-head),
 html[data-theme] body.is-post-route #appView .post-reader > :not(.post-reader-title),
 html[data-theme] body.is-quran-overview #appView .qov-main > :not(.qov-header),
