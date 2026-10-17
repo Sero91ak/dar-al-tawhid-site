@@ -1,10 +1,10 @@
 {
   "version": 1,
   "updatedAt": "2026-10-17",
-  "status": "public-layout-only",
-  "releasePolicy": "Public layout-first release: 6 existing original masters remain available; 24 additional lessons are explicitly locked as planned until source and text review, with no draft content or audio distributed.",
+  "status": "public-texts-ready",
+  "releasePolicy": "All 30 Dīn lessons have canonical reading scripts with primary Quran/Sahih reference links. Six historical canonical master texts remain in kids/data/deen-lessons.json. Twenty-four additional lessons have their own masterStoryText, no audio is published until exact-text alignment and voice QA.",
   "sourcePolicy": "Qurʾān, authentic Sunnah, verified Athār; no unattributed sayings or invented unseen narratives.",
-  "masterAudioPolicy": "One canonical master text per lesson; audio is published only after exact-text QA.",
+  "masterAudioPolicy": "One canonical script per lesson, audio generated only after narrator/voice source and exact text verified.",
   "categories": [
     {
       "id": "was-ist-tawhid",
@@ -21,7 +21,24 @@
           "summary": "Allah allein erschafft, versorgt und bestimmt.",
           "cover": "/kids/assets/deen/lesson-rububiyyah-firefly-v1.jpg",
           "hero": "/kids/assets/deen/lesson-rububiyyah-firefly-v1.jpg",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute sprechen wir über Tawḥīd ar-Rubūbiyyah. Das ist ein arabischer Ausdruck. Rubūbiyyah kommt von Rabb. Allah, subḥānahu wa taʿālā, ist unser Rabb: unser Schöpfer, unser Versorger und der Herr über alles. In dieser Lektion lernen wir, was diese Worte bedeuten und wie die Offenbarung davon berichtet.\n\nStellt euch den Himmel vor, die Berge, die Pflanzen und das Wasser, das wir trinken. Wir sehen so vieles, das Allah, subḥānahu wa taʿālā, erschaffen hat. Im Qurʾān sagt Allah sinngemäß, dass Er der Schöpfer aller Dinge ist. Das steht in Sūrah az-Zumar, Vers 62. Das bedeutet nicht, dass die Dinge sich selbst erschaffen haben. Allah hat sie erschaffen, und alles ist auf Ihn angewiesen.\n\nIn Sūrah al-Aʿrāf, Vers 54, erfahren wir, dass Allah die Schöpfung und der Befehl gehören. Er hat die vollkommene Herrschaft. Kein Geschöpf kann diese Herrschaft mit Ihm teilen. Auch die Menschen besitzen nur das, was Allah ihnen gibt. Wenn wir etwas bauen oder etwas pflanzen, benutzen wir Dinge und Fähigkeiten, die Allah erschaffen hat. Das ist nicht dasselbe wie die Schöpfung und Herrschaft Allahs.\n\nEin anderer Qurʾānvers stellt wichtige Fragen: Wer versorgt uns vom Himmel und von der Erde? Wer verfügt über das Hören und das Sehen? Wer ordnet die Angelegenheiten? Diese Fragen stehen in Sūrah Yūnus, Vers 31. Sie zeigen uns, wie wir über unseren Schöpfer nachdenken können, ohne uns eine Gestalt von Allah vorzustellen.\n\nWas bedeutet das für unser Leben? Wenn wir unser Essen bekommen, danken wir Allah. Wenn wir die Natur sehen, erinnern wir uns an Seine Schöpfung. Wenn uns etwas gelingt, werden wir nicht hochmütig. Denn unsere Kraft und unser Wissen sind Gaben Allahs, subḥānahu wa taʿālā.\n\nDoch denkt daran: Zu wissen, dass Allah unser Schöpfer ist, gehört zum Tawḥīd, aber wir müssen auch Ihn allein anbeten. Genau darum geht es in unserer nächsten Lektion. Rubūbiyyah bedeutet also: Allah allein ist unser Rabb, der Schöpfer, der Versorger und der Herr über Seine Schöpfung.\n\nMerkt euch: Wir halten uns bei unseren Aussagen über Allah, subḥānahu wa taʿālā, an das, was Er offenbart und was Sein Gesandter ﷺ authentisch erklärt hat. Wir erfinden nichts dazu.\n\nMöge Allah, subḥānahu wa taʿālā, uns nützliches Wissen schenken. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 39:62",
+            "Qurʾān 7:54",
+            "Qurʾān 10:31"
+          ],
+          "sourceLinks": [
+            "https://quran.com/39/62",
+            "https://quran.com/7/54",
+            "https://quran.com/10/31"
+          ],
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "tawhid-al-uluhiyyah",
@@ -29,7 +46,26 @@
           "summary": "Warum unsere Anbetung nur Allah gehört.",
           "cover": "/kids/assets/deen/lesson-friendly-courtyard-runway-v1.jpg",
           "hero": "/kids/assets/deen/lesson-friendly-courtyard-runway-v1.jpg",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir Tawḥīd al-Ulūhiyyah. Dieses Wort erklärt, wem unsere Anbetung gehört. Wir glauben, dass Allah, subḥānahu wa taʿālā, allein angebetet werden darf. Niemand hat das Recht, neben Ihm angebetet zu werden.\n\nWas ist Anbetung? Dazu gehören das Gebet, das Bittgebet, das Fasten und viele andere Handlungen, wenn wir sie so verrichten, wie Allah es uns vorgeschrieben hat. Auch die Aufrichtigkeit unseres Herzens gehört dazu. Wir verrichten die Anbetung für Allah, nicht um Lob von anderen Menschen zu bekommen.\n\nAllah, subḥānahu wa taʿālā, sagt in Sūrah aḏ-Ḏāriyāt, Vers 56, dass Er die Ǧinn und die Menschen erschaffen hat, damit sie Ihm dienen. Dieser Vers erklärt uns, warum die Anbetung in unserem Leben so wichtig ist.\n\nIn Sūrah an-Naḥl, Vers 36, lehrt uns Allah, dass Er zu jeder Gemeinschaft einen Gesandten sandte mit der Aufforderung, Allah anzubeten und falsche Gottheiten zu meiden. Und in Sūrah al-Anbiyāʾ, Vers 25, erfahren wir, dass die Gesandten dieselbe grundlegende Botschaft brachten: Es gibt keinen zu Recht Angebeteten außer Allah.\n\nDer Gefährte Muʿāḏ ibn Ǧabal, raḍiya Allahu ʿanhu, berichtet von einer Unterweisung des Propheten ﷺ. Der Prophet erklärte ihm, dass Allahs Recht über den Dienern darin besteht, dass sie Ihn anbeten und Ihm nichts beigesellen. Diese Überlieferung steht in Ṣaḥīḥ al-Buḫārī, Nummer 2856.\n\nFür unseren Alltag bedeutet das: Wir beten unsere Pflichtgebete für Allah. Wir bitten Allah um das, was nur Er geben kann, und machen unsere guten Taten nicht zu einer Show für andere. Wir behandeln Menschen freundlich; Freundlichkeit gegenüber Menschen ist aber etwas anderes, als sie anzubeten.\n\nEs ist wichtig, hier genau zu unterscheiden. Wir dürfen Eltern, Lehrern und anderen Menschen helfen und ihnen danken. Wir dürfen sie respektieren, ohne sie anzubeten. Tawḥīd bedeutet nicht, dass wir Menschen schlecht behandeln. Vielmehr lehrt der Dīn uns aufrichtige Anbetung und einen guten Charakter.\n\nUnser Merksatz heute lautet: Allah allein hat das Recht auf unsere Anbetung. Wir beten nur Ihn an und gesellen Ihm nichts bei.\n\nMerkt euch: Wir halten uns bei unseren Aussagen über Allah, subḥānahu wa taʿālā, an das, was Er offenbart und was Sein Gesandter ﷺ authentisch erklärt hat. Wir erfinden nichts dazu.\n\nMöge Allah, subḥānahu wa taʿālā, uns nützliches Wissen schenken. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 51:56",
+            "Qurʾān 16:36",
+            "Qurʾān 21:25",
+            "Ṣaḥīḥ al-Buḫārī 2856"
+          ],
+          "sourceLinks": [
+            "https://quran.com/51/56",
+            "https://quran.com/16/36",
+            "https://quran.com/21/25",
+            "https://sunnah.com/bukhari:2856"
+          ],
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "tawhid-al-asma-was-sifat",
@@ -37,7 +73,26 @@
           "summary": "Allahs vollkommene Namen und Eigenschaften.",
           "cover": "/kids/assets/deen/asma-sifat.jpg?v=1205",
           "hero": "/kids/assets/deen/asma-sifat.jpg?v=1205",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir den Tawḥīd al-Asmāʾ wa-ṣ-Ṣifāt kennen. Dieser Ausdruck bedeutet, dass wir an Allahs vollkommene Namen und Eigenschaften glauben. Wir kennen sie aus dem Qurʾān und der authentischen Sunnah und sprechen nur mit Wissen darüber.\n\nAsmāʾ bedeutet Namen. Ṣifāt bedeutet Eigenschaften. Allah, subḥānahu wa taʿālā, besitzt die schönsten Namen. In Sūrah al-Aʿrāf, Vers 180, lehrt Er uns, dass Ihm die schönsten Namen gehören und dass wir Ihn mit diesen Namen anrufen sollen. Deshalb lernen wir sie nicht wie eine gewöhnliche Wortliste. Wir lernen, was sie bedeuten, und denken über ihre Bedeutung nach.\n\nAllah hört und sieht. Im Qurʾān, in Sūrah aš-Šūrā, Vers 11, steht, dass nichts Ihm gleicht und dass Er der Allhörende und Allsehende ist. Beide Aussagen gehören zusammen: Wir bestätigen, was Allah über Sich offenbart, und wir vergleichen Ihn nicht mit einem Geschöpf.\n\nVielleicht fragt ihr: Hört Allah so wie wir hören? Nein. Wir hören mit den Ohren, die Allah uns erschaffen hat. Allah ist nicht wie wir. Wir kennen die wirkliche Beschaffenheit Seiner Eigenschaften nicht, weil Allah uns darüber keine Einzelheiten gegeben hat. Darum erfinden wir kein Wie. Wir leugnen aber auch nicht, was Er über Sich offenbart hat.\n\nSūrah Ṭā Hā, Vers 8, erinnert uns daran, dass Allah allein Gott ist und Ihm die schönsten Namen gehören. Und Sūrah al-Iḫlāṣ, Verse 1 bis 4, beschreibt Seine Einzigkeit und lehrt uns, dass niemand Ihm gleich ist.\n\nWas lernen wir daraus für unseren Alltag? Wenn wir Allah im Duʿāʾ bitten, dürfen wir Seine schönen Namen verwenden. Wenn wir lesen, dass Allah alles hört, erinnern wir uns daran, aufrichtig und wahrhaftig zu sprechen. Wenn wir Seine Barmherzigkeit kennenlernen, hoffen wir auf Seine Gnade und bemühen uns um gute Taten.\n\nWir zeigen weder Allah selbst noch Seine Eigenschaften in Bildern. Wir halten uns an die Worte der Offenbarung. Unser Merksatz ist: Allah hat die schönsten Namen und vollkommenen Eigenschaften; nichts ist Ihm gleich.\n\nMerkt euch: Wir halten uns bei unseren Aussagen über Allah, subḥānahu wa taʿālā, an das, was Er offenbart und was Sein Gesandter ﷺ authentisch erklärt hat. Wir erfinden nichts dazu.\n\nMöge Allah, subḥānahu wa taʿālā, uns nützliches Wissen schenken. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 7:180",
+            "Qurʾān 42:11",
+            "Qurʾān 20:8",
+            "Qurʾān 112:1–4"
+          ],
+          "sourceLinks": [
+            "https://quran.com/7/180",
+            "https://quran.com/42/11",
+            "https://quran.com/20/8",
+            "https://quran.com/112/1-4"
+          ],
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "was-ist-shirk",
@@ -45,7 +100,26 @@
           "summary": "Den Unterschied zwischen Tawḥīd und Širk verstehen.",
           "cover": "/kids/assets/deen/tawhid.jpg?v=1205",
           "hero": "/kids/assets/deen/tawhid.jpg?v=1205",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute sprechen wir behutsam über einen ernsten Begriff: Širk. Um Širk zu verstehen, erinnern wir uns zuerst an Tawḥīd. Tawḥīd bedeutet, Allah, subḥānahu wa taʿālā, allein anzubeten. Širk bedeutet, Allah in der Anbetung etwas oder jemanden beizugesellen.\n\nDer Qurʾān lehrt uns, dass Širk eine schwere Verfehlung ist. In Sūrah Luqmān, Vers 13, ermahnt Luqmān seinen Sohn, Allah nichts beizugesellen, und erklärt, dass das großes Unrecht ist. Wir lesen diese Worte, damit wir den Tawḥīd lieben und die Anbetung allein Allah widmen.\n\nIn Sūrah an-Nisāʾ, Vers 48, warnt Allah vor dem Beigesellen in der Anbetung. Diese ernste Warnung soll uns zeigen, wie wichtig der Tawḥīd ist. Wir beschäftigen uns dabei nicht mit Mutmaßungen über andere Menschen. Allah kennt, was Menschen wissen, beabsichtigen und in ihren Herzen tragen. Das Urteil über eine bestimmte Person ist keine Aufgabe für Kinder.\n\nWas gehört zur Anbetung? Beispiele sind das Gebet und das Bittgebet an Allah, subḥānahu wa taʿālā. Wenn wir unsere Eltern um Wasser bitten oder einen Lehrer nach einer Erklärung fragen, dann ist das keine Anbetung. Wir bitten einen Menschen um etwas, das er gewöhnlich leisten kann. Es ist wichtig, solche Dinge nicht zu verwechseln.\n\nDer Prophet Muḥammad ﷺ erklärte dem Gefährten Muʿāḏ ibn Ǧabal, raḍiya Allahu ʿanhu, dass Allah das Recht hat, allein angebetet zu werden und dass wir Ihm nichts beigesellen. Dies wird in Ṣaḥīḥ al-Buḫārī, Nummer 2856, überliefert.\n\nDie Gesandten lehrten den Menschen, Allah anzubeten und falsche Gottheiten zu meiden. In Sūrah an-Naḥl, Vers 36, wird diese Botschaft erwähnt. Darum lernen wir Tawḥīd zuerst gründlich: Wir wollen verstehen, wie wir Allah richtig dienen und wie wir unsere Anbetung rein halten.\n\nWas können wir heute tun? Wir sprechen die Šahādah mit Verständnis, lernen unser Gebet und wenden unsere Duʿāʾ an Allah. Wir bemühen uns, die Wahrheit zu lernen und freundlich zu bleiben. Wir verspotten niemanden und sprechen keine Urteile über einzelne Menschen aus.\n\nUnser Merksatz: Širk ist das Beigesellen in der Anbetung; Tawḥīd bedeutet, Allah allein anzubeten.\n\nMerkt euch: Wir halten uns bei unseren Aussagen über Allah, subḥānahu wa taʿālā, an das, was Er offenbart und was Sein Gesandter ﷺ authentisch erklärt hat. Wir erfinden nichts dazu.\n\nMöge Allah, subḥānahu wa taʿālā, uns nützliches Wissen schenken. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 31:13",
+            "Qurʾān 4:48",
+            "Qurʾān 16:36",
+            "Ṣaḥīḥ al-Buḫārī 2856"
+          ],
+          "sourceLinks": [
+            "https://quran.com/31/13",
+            "https://quran.com/4/48",
+            "https://quran.com/16/36",
+            "https://sunnah.com/bukhari:2856"
+          ],
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         }
       ]
     },
@@ -64,13 +138,49 @@
           "summary": "Was wir aus dem Ḥadīṯ Ǧibrīl lernen.",
           "cover": "/kids/assets/deen/lesson-iman-foundations-firefly-v1.jpg",
           "hero": "/kids/assets/deen/lesson-iman-foundations-firefly-v1.jpg",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute gehen wir die sechs Säulen des Īmān gemeinsam durch. Säulen sind wichtige Grundlagen. Wenn wir ein Haus bauen, braucht es ein festes Fundament. Auch unser Wissen über den Glauben soll auf sicheren Grundlagen stehen. Deshalb lernen wir nicht aus erfundenen Erzählungen, sondern aus dem Qurʾān und der authentischen Sunnah.\n\nEines Tages saß der Gesandte Allahs ﷺ mit seinen Gefährten zusammen. Ein Mann kam und fragte ihn nach dem Islam, nach Īmān und nach Iḥsān. Später erklärte der Prophet ﷺ, dass dieser Besucher Ǧibrīl war, der gekommen war, um die Menschen ihren Dīn zu lehren. Diese Überlieferung berichtet ʿUmar ibn al-Ḫaṭṭāb, raḍiya Allahu ʿanhu. Sie steht in Ṣaḥīḥ Muslim, Nummer 8a.\n\nAls der Prophet ﷺ nach Īmān gefragt wurde, erklärte er sechs Grundlagen. Die erste ist der Glaube an Allah, subḥānahu wa taʿālā. Wir glauben, dass Er allein unser Rabb ist und allein angebetet wird. Wir glauben an das, was Er über Sich in der Offenbarung mitteilt.\n\nDie zweite Grundlage ist der Glaube an die Engel. Engel sind Geschöpfe Allahs. Wir glauben an das, was der Qurʾān und die authentische Sunnah über sie berichten. Wir erfinden keine Bilder oder Geschichten über ihr verborgenes Wesen.\n\nDie dritte Grundlage ist der Glaube an die Bücher Allahs. Allah hat Seinen Gesandten Offenbarung gegeben. Der Qurʾān ist die Offenbarung an Muḥammad ﷺ. Darum hören und lesen wir den Qurʾān mit Respekt und lernen seine Bedeutung.\n\nDie vierte Grundlage ist der Glaube an die Gesandten Allahs. Sie riefen die Menschen dazu auf, Allah allein anzubeten. Wir glauben an alle Gesandten, von denen die Offenbarung berichtet. Muḥammad ﷺ ist der letzte Prophet.\n\nDie fünfte Grundlage ist der Glaube an den Jüngsten Tag. Wir wissen aus der Offenbarung, dass Allah die Menschen auferwecken und über ihre Taten urteilen wird. Deshalb bemühen wir uns um gute Taten und vertrauen auf Seine Gerechtigkeit.\n\nDie sechste Grundlage ist der Glaube an al-Qadar, die Vorherbestimmung, mit ihrem Guten und ihrem Schweren. Allahs Wissen umfasst alles. Auch wenn wir nicht alles verstehen, wissen wir, dass Ihm nichts verborgen ist. Das bedeutet nicht, dass wir nichts tun sollen. Wir sollen uns bemühen, das Gute zu wählen und Allah um Hilfe bitten.\n\nIn Sūrah an-Nisāʾ, Vers 136, wird der Glaube an Allah, die Engel, die Bücher, die Gesandten und den Jüngsten Tag genannt. Und der Ḥadīṯ Ǧibrīl nennt auch al-Qadar ausdrücklich.\n\nLasst uns die sechs Grundlagen gemeinsam wiederholen: Allah, Engel, Bücher, Gesandte, Jüngster Tag und al-Qadar. Wir lernen diese Grundlagen, damit wir Allah, subḥānahu wa taʿālā, mit Wissen dienen.\n\nMöge Allah, subḥānahu wa taʿālā, uns richtiges und nützliches Wissen schenken, unseren Īmān stärken und uns helfen, nach dem Gelernten zu handeln. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Ṣaḥīḥ Muslim 8a · Ḥadīṯ Ǧibrīl",
+            "Qurʾān 4:136",
+            "Qurʾān 2:285"
+          ],
+          "sourceLinks": [
+            "https://sunnah.com/muslim:8a",
+            "https://quran.com/4/136",
+            "https://quran.com/2/285"
+          ],
+          "reviewNotes": "Textentwurf: Quellenverknüpfungen geprüft, Endfreigabe und Audio-Exaktvergleich ausstehend.",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "iman-herz-wort-tat",
           "title": "Īmān in Herz, Wort und Tat",
           "summary": "Wie der Glaube unser Leben prägt.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir, dass Īmān unser Herz, unsere Worte und unsere Taten betrifft. Der Glaube ist nicht bloß ein schönes Wort, das wir sagen, und er ist auch nicht nur eine äußere Bewegung. Er gehört zu dem, was wir im Herzen glauben, was wir wahrhaftig aussprechen und wie wir Allah gehorchen.\n\nBeginnen wir mit dem Herzen. Wir können ein Herz nicht mit den Augen sehen, so wie wir einen Stein oder einen Baum sehen. Aber Allah, subḥānahu wa taʿālā, kennt unsere Herzen. Zum Īmān gehört, dass wir an Allah glauben, Ihn lieben und auf Ihn vertrauen. In Sūrah al-Anfāl, Vers 2, werden Gläubige beschrieben, deren Herzen ehrfürchtig werden, wenn Allah erwähnt wird, und deren Īmān zunimmt, wenn Seine Verse vorgetragen werden.\n\nNun zu unseren Worten. Wenn wir die Wahrheit des Glaubens bekennen, dürfen unsere Worte nicht absichtlich falsch sein. Wir sollen aufrichtig sprechen und uns bemühen, die Wahrheit zu sagen. Es ist gut, mit unserer Zunge Allah zu gedenken, den Qurʾān zu lesen und anderen Menschen freundlich zu begegnen.\n\nUnd was ist mit unseren Taten? Allah, subḥānahu wa taʿālā, erwähnt nach den Herzen auch das Gebet und das Geben von dem, was Er uns an Versorgung geschenkt hat. Das steht in Sūrah al-Anfāl, Verse 3 und 4. Darum ist der Īmān nicht vom Gehorsam gegenüber Allah getrennt. Wir lernen, dass das Gebet, die Hilfe für Bedürftige und andere gute Taten zu unserem gelebten Glauben gehören.\n\nDer Gesandte Allahs ﷺ lehrte, dass der Īmān viele Zweige besitzt und dass Ḥayāʾ, also Schamhaftigkeit und sittsame Zurückhaltung, zu ihnen gehört. Das ist in Ṣaḥīḥ al-Buḫārī, Nummer 9, überliefert. Wir merken daran: Der Dīn lehrt nicht nur einzelne Aussagen, sondern auch einen guten Charakter.\n\nDenkt an ein einfaches Beispiel. Ein Kind weiß, dass es die Wahrheit sagen soll. Es glaubt im Herzen, dass Allah die Wahrhaftigkeit liebt. Dann sagt es die Wahrheit, auch wenn das nicht leicht ist. So können Glaube, Worte und Handlungen zusammenwirken.\n\nEs gibt auch Zeiten, in denen wir Fehler machen. Dann sollen wir nicht aufgeben, sondern zu Allah umkehren, um Vergebung bitten und uns verbessern. Wir behaupten nicht, einen Menschen allein nach einem einzelnen sichtbaren Verhalten vollständig beurteilen zu können: Allah kennt das Verborgene.\n\nMerkt euch: Īmān betrifft das Herz, die Worte und die Taten. Wir lernen die Belege und bemühen uns, den Glauben im täglichen Leben aufrichtig zu zeigen.\n\nMöge Allah, subḥānahu wa taʿālā, uns richtiges und nützliches Wissen schenken, unseren Īmān stärken und uns helfen, nach dem Gelernten zu handeln. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 8:2–4",
+            "Qurʾān 2:177",
+            "Ṣaḥīḥ al-Buḫārī 9"
+          ],
+          "sourceLinks": [
+            "https://quran.com/8/2-4",
+            "https://quran.com/2/177",
+            "https://sunnah.com/bukhari:9"
+          ],
+          "reviewNotes": "Textentwurf: Quellenverknüpfungen geprüft, Endfreigabe und Audio-Exaktvergleich ausstehend.",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "iman-wachstum",
@@ -78,13 +188,51 @@
           "summary": "Der Glaube wird durch Gehorsam gestärkt.",
           "cover": "/kids/assets/deen/lesson-iman-growth-runway-v1.jpg",
           "hero": "/kids/assets/deen/lesson-iman-growth-runway-v1.jpg",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute geht es um eine wichtige Frage: Kann der Īmān stärker werden? Der Qurʾān sagt uns ausdrücklich, dass der Īmān zunehmen kann. Das ist eine schöne Nachricht, weil wir lernen dürfen, in unserem Glauben zu wachsen.\n\nIn Sūrah al-Anfāl, Vers 2, beschreibt Allah, subḥānahu wa taʿālā, die Gläubigen. Wenn ihnen Seine Verse vorgetragen werden, nimmt ihr Īmān zu. Sie vertrauen auf ihren Rabb. Denkt darüber nach: Der Qurʾān ist nicht nur ein Buch, dessen Worte wir hören. Wir versuchen auch, seine Bedeutung zu verstehen und nach seiner Rechtleitung zu leben.\n\nIn Sūrah al-Fatḥ, Vers 4, steht, dass Allah Ruhe in die Herzen der Gläubigen herabsandte, damit sie im Īmān zunahmen. Daran erkennen wir, dass Allah die Herzen festigt und dass der Glaube nicht immer gleich stark erlebt wird.\n\nIn Sūrah Muḥammad, Vers 17, berichtet Allah, dass Er den Rechtgeleiteten ihre Rechtleitung vermehrt und ihnen ihre Gottesfurcht gibt. Wir bitten Allah deshalb um Rechtleitung und versuchen, das zu lernen, was Er liebt.\n\nWie bemühen wir uns nun um einen stärkeren Īmān? Eine Möglichkeit ist das Lernen des Qurʾān. Wenn wir einen Vers hören, können wir uns fragen: Was lehrt mich Allah hier? Eine zweite Möglichkeit ist das Gebet. Wir lernen, regelmäßig und mit Aufmerksamkeit zu beten. Außerdem versuchen wir, die Wahrheit zu sagen und gut zu anderen Menschen zu sein.\n\nUnser Īmān kann auch schwächer werden. In der Lehre der Ahl as-Sunnah wird erklärt, dass Gehorsam den Īmān stärkt und Sünden ihn schwächen. Deshalb nehmen wir unsere Fehler ernst, ohne die Hoffnung auf Allahs Barmherzigkeit zu verlieren. Wir bitten um Vergebung und versuchen es besser.\n\nVielleicht denkt ein Kind: Ich habe heute nicht alles richtig gemacht. Kann ich trotzdem lernen und mich verbessern? Ja. Wir sollen lernen, bereuen, um Vergebung bitten und wieder das Gute tun. Es gehört nicht zu unserer Aufgabe, über den verborgenen Zustand des Herzens eines anderen Kindes zu urteilen.\n\nManche Dinge benötigen Zeit. Wer gerade das Gebet lernt, wird nicht an einem einzigen Tag alle Einzelheiten beherrschen. Wir lernen Schritt für Schritt, stellen Fragen und üben geduldig. Wir freuen uns über richtiges Wissen und gute Taten, aber wir werden nicht hochmütig.\n\nUnser Merksatz: Allah, subḥānahu wa taʿālā, berichtet im Qurʾān, dass Īmān zunimmt. Darum wenden wir uns Seinem Wort und der Sunnah Seines Gesandten ﷺ zu und bemühen uns, täglich das Gute zu lernen.\n\nMöge Allah, subḥānahu wa taʿālā, uns richtiges und nützliches Wissen schenken, unseren Īmān stärken und uns helfen, nach dem Gelernten zu handeln. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 8:2",
+            "Qurʾān 48:4",
+            "Qurʾān 47:17"
+          ],
+          "sourceLinks": [
+            "https://quran.com/8/2",
+            "https://quran.com/48/4",
+            "https://quran.com/47/17"
+          ],
+          "reviewNotes": "Textentwurf: Quellenverknüpfungen geprüft, Endfreigabe und Audio-Exaktvergleich ausstehend.",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "iman-staerken",
           "title": "Was stärkt unseren Īmān?",
           "summary": "Qurʾān, Gebet und gute Taten.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute wollen wir lernen, wie wir uns um einen stärkeren Īmān bemühen. Der Qurʾān zeigt uns, dass der Glaube wachsen kann. Deshalb lernen wir gute Gewohnheiten, die zu unserem Dīn gehören. Dabei achten wir darauf, nichts als feste religiöse Regel auszugeben, was Allah und Sein Gesandter ﷺ nicht festgelegt haben.\n\nAls Erstes lernen wir den Qurʾān. In Sūrah al-Anfāl, Vers 2, steht, dass die Verse Allahs den Īmān der Gläubigen vermehren. Deshalb lohnt es sich, regelmäßig einen kleinen Abschnitt zu lesen oder ihm zuzuhören. Wir dürfen Fragen stellen und die Bedeutung mit einer vertrauenswürdigen Person besprechen. Es geht nicht nur darum, viel Text schnell zu schaffen, sondern darum, aufrichtig zu lernen.\n\nAls Zweites achten wir auf unser Gebet. In Sūrah al-ʿAnkabūt, Vers 45, erfahren wir, dass das Gebet von Schändlichem und Verwerflichem abhält. Wir lernen die Gebetszeiten und die Worte des Gebets, und wir bemühen uns, die Bewegungen richtig zu verrichten. Wenn ein Kind noch am Lernen ist, darf es geduldig üben.\n\nAls Drittes lernen wir den Gehorsam gegenüber Allah im Alltag. In Sūrah al-Anfāl, Verse 3 und 4, werden das Gebet und das Geben von der Versorgung erwähnt. Das erinnert uns daran, dass der Glaube mit Taten verbunden ist. Wir können helfen, gute Worte sagen und die Wahrheit sprechen. Wir tun das für Allah und nicht bloß, damit andere uns loben.\n\nAls Viertes achten wir auf einen guten Charakter. Der Gesandte Allahs ﷺ erklärte, dass der Īmān verschiedene Zweige besitzt und dass Ḥayāʾ ein Zweig des Īmān ist. Diese authentische Überlieferung steht in Ṣaḥīḥ al-Buḫārī, Nummer 9. Darum gehört zu unserem Lernen auch, uns respektvoll und bescheiden zu verhalten.\n\nAls Fünftes bitten wir Allah um Rechtleitung. Allah kennt unsere Bedürfnisse und unser Herz. In Sūrah Muḥammad, Vers 17, steht, dass Er den Rechtgeleiteten mehr Rechtleitung gibt. Wenn wir aufrichtig lernen, bitten wir Allah darum, unser Wissen nützlich zu machen.\n\nIhr könnt euch dafür kleine Lernziele setzen: heute einen Vers verstehen, das nächste Gebet bewusst vorbereiten oder jemandem helfen. Diese Beispiele sind Lernhilfen und keine neu erfundenen vorgeschriebenen Gottesdienste. Es gibt keinen Grund, sich mit anderen Kindern zu vergleichen oder sich über sie zu stellen.\n\nWenn wir einen Fehler gemacht haben, sollen wir die Hoffnung nicht verlieren. Wir bitten Allah um Vergebung und bemühen uns um Besserung. Allah, subḥānahu wa taʿālā, kennt unsere Absichten.\n\nUnser Merksatz: Wir stärken unseren Īmān, indem wir das Wort Allahs lernen, aufrichtig beten, Gutes tun, die Sunnah lernen und Allah um Rechtleitung bitten.\n\nMöge Allah, subḥānahu wa taʿālā, uns richtiges und nützliches Wissen schenken, unseren Īmān stärken und uns helfen, nach dem Gelernten zu handeln. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 8:2–4",
+            "Qurʾān 29:45",
+            "Qurʾān 47:17",
+            "Ṣaḥīḥ al-Buḫārī 9"
+          ],
+          "sourceLinks": [
+            "https://quran.com/8/2-4",
+            "https://quran.com/29/45",
+            "https://quran.com/47/17",
+            "https://sunnah.com/bukhari:9"
+          ],
+          "reviewNotes": "Textentwurf: Quellenverknüpfungen geprüft, Endfreigabe und Audio-Exaktvergleich ausstehend.",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         }
       ]
     },
@@ -103,7 +251,25 @@
           "summary": "Allahs Barmherzigkeit kennenlernen.",
           "cover": "/kids/assets/deen/lesson-asma-mercy-firefly-v1.jpg",
           "hero": "/kids/assets/deen/lesson-asma-mercy-firefly-v1.jpg",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir zwei der schönsten Namen Allahs, subḥānahu wa taʿālā: Ar-Raḥmān und Ar-Raḥīm. Beide Namen begegnen uns im Qurʾān und erinnern uns an Allahs Barmherzigkeit. Wir wollen ihre Bedeutung kennenlernen, ohne etwas über Allah zu behaupten, was uns nicht offenbart wurde.\n\nIn Sūrah al-Fātiḥah, Vers 3, lesen wir die Worte Ar-Raḥmān und Ar-Raḥīm. Vielleicht habt ihr sie schon oft im Gebet gehört. Dass Allah Sich mit diesen Namen vorstellt, ist wichtig. Wir lernen Seine Namen aus der Offenbarung und nicht aus unserer Fantasie.\n\nAr-Raḥmān weist auf Allahs umfassende, gewaltige Barmherzigkeit hin. Ar-Raḥīm ist ebenfalls ein Name der Barmherzigkeit. Die Gelehrten erläutern die Bedeutungen dieser Namen anhand der arabischen Sprache und der Offenbarung. Für unsere erste Lektion genügt die sichere Grundlage: Allah ist wahrhaftig barmherzig, und Seine Barmherzigkeit ist vollkommen. Wir dürfen sie nicht mit der Barmherzigkeit eines Geschöpfes gleichsetzen.\n\nIn Sūrah al-Aʿrāf, Vers 156, erfahren wir, dass Allahs Barmherzigkeit alle Dinge umfasst. Das ist eine gewaltige Aussage des Qurʾān. Sie zeigt uns, dass wir nicht verzweifeln sollen und dass wir Allah um Seine Barmherzigkeit bitten dürfen. Zugleich lesen wir im Vers, dass Allah besondere Barmherzigkeit denen bestimmt, die Ihn fürchten und Seinen Anweisungen folgen. Wir hören daher stets auf den ganzen Vers und nicht nur auf einen einzelnen Teil.\n\nIn Sūrah al-Ḥašr, Vers 22, begegnen uns diese beiden Namen ebenfalls. Dort erinnert uns Allah daran, dass Er der Eine ist, der das Verborgene und das Sichtbare kennt. Wir wissen nicht aus uns selbst, wie Allah ist. Wir glauben, was Er über Sich mitteilt.\n\nWie können wir dieses Wissen in unserem Alltag nutzen? Wenn wir etwas falsch gemacht haben, bitten wir Allah um Vergebung und bemühen uns um Besserung. Wenn es uns gut geht, danken wir Ihm. Wenn wir jemanden sehen, der Hilfe benötigt, sind wir freundlich und hilfsbereit. Unsere Freundlichkeit ist eine gute Tat, aber sie ist niemals so wie die vollkommene Barmherzigkeit Allahs.\n\nKinder dürfen Fragen stellen. Wenn ihr nicht versteht, weshalb ein schweres Ereignis geschieht, müsst ihr keine erfundene Erklärung dafür ausdenken. Wir wissen, dass Allah vollkommen weise und barmherzig ist, auch wenn wir nicht jedes Ereignis verstehen.\n\nUnser Merksatz lautet: Ar-Raḥmān und Ar-Raḥīm sind zwei schöne Namen Allahs. Wir glauben an Seine Barmherzigkeit und rufen Ihn mit Seinen schönen Namen an.\n\nMöge Allah, subḥānahu wa taʿālā, uns richtiges Wissen geben und uns helfen, danach zu handeln. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 1:3",
+            "Qurʾān 7:156",
+            "Qurʾān 59:22"
+          ],
+          "sourceLinks": [
+            "https://quran.com/1/3",
+            "https://quran.com/7/156",
+            "https://quran.com/59/22"
+          ],
+          "reviewNotes": "Qurʾān-Belege und URLs abgeglichen; abschließende theologische und sprachliche Freigabe vor Master-Audio noch offen.",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "al-alim-as-sami",
@@ -111,7 +277,25 @@
           "summary": "Allah weiß alles und hört alles.",
           "cover": "/kids/assets/deen/asma-sifat.jpg?v=1205",
           "hero": "/kids/assets/deen/asma-sifat.jpg?v=1205",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute geht es um zwei schöne Namen Allahs, subḥānahu wa taʿālā: Al-ʿAlīm und As-Samīʿ. Al-ʿAlīm bedeutet der Allwissende. As-Samīʿ bedeutet der Allhörende. Wir begegnen diesen Namen in den Versen des Qurʾān. Wir lernen, was uns die Offenbarung darüber sagt.\n\nHören wir auf ein Bittgebet, das der Qurʾān berichtet. Als Ibrāhīm und Ismāʿīl, ʿalayhimā as-salām, die Fundamente des Hauses errichteten, baten sie Allah, ihr Werk anzunehmen. Ihr Bittgebet endet mit den Worten, dass Allah der Allhörende und Allwissende ist. Das steht in Sūrah al-Baqarah, Vers 127. Diese Geschichte stammt aus dem Qurʾān. Wir fügen keine erfundenen Gespräche oder Einzelheiten hinzu.\n\nWas bedeutet Al-ʿAlīm? Allah weiß alles. Nichts ist Seinem Wissen verborgen. In Sūrah al-Ḥuǧurāt, Vers 18, erfahren wir, dass Allah das Verborgene der Himmel und der Erde kennt und sieht, was die Menschen tun. Wir Menschen wissen nur wenig. Wir können uns irren und Dinge vergessen. Allahs Wissen ist vollkommen. Darum ist Sein Wissen nicht wie unser Wissen.\n\nWas bedeutet As-Samīʿ? Allah hört wahrhaftig. In Sūrah aš-Šūrā, Vers 11, steht, dass nichts Ihm gleicht und dass Er der Allhörende und Allsehende ist. Beide Aussagen gehören zusammen. Allah hört, aber Sein Hören ist nicht wie das Hören der Menschen oder der Tiere. Wir erfinden keine Vorstellung davon, wie Allah hört.\n\nDenkt an die Worte unseres täglichen Bittgebets. Wenn wir Allah aufrichtig um Hilfe bitten, dürfen wir wissen, dass Ihm unser Duʿāʾ nicht verborgen bleibt. Aber wir behaupten nicht, dass jedes Bittgebet genau so erfüllt wird, wie wir es uns ausgedacht haben. Allah weiß, was wir nicht wissen.\n\nDiese beiden Namen helfen uns auch, wahrhaftig zu sein. Wenn niemand aus unserer Familie hört, was wir sagen, kennt Allah uns trotzdem. Wenn wir eine gute Tat heimlich tun, braucht sie keine Zuschauer, damit Allah von ihr weiß. Darum sollen wir aufrichtig bleiben und die Wahrheit sagen.\n\nWir dürfen diese Namen jedoch nicht dafür verwenden, andere Kinder zu erschrecken oder ihre Herzen zu beurteilen. Wir erklären zuerst, was die Offenbarung lehrt, und behandeln andere Menschen freundlich.\n\nUnser Merksatz lautet: Allah ist Al-ʿAlīm, der Allwissende, und As-Samīʿ, der Allhörende. Sein Wissen und Sein Hören sind vollkommen, und nichts ist Ihm gleich.\n\nMöge Allah, subḥānahu wa taʿālā, uns richtiges Wissen geben und uns helfen, danach zu handeln. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 2:127",
+            "Qurʾān 49:18",
+            "Qurʾān 42:11"
+          ],
+          "sourceLinks": [
+            "https://quran.com/2/127",
+            "https://quran.com/49/18",
+            "https://quran.com/42/11"
+          ],
+          "reviewNotes": "Qurʾān-Belege und URLs abgeglichen; abschließende theologische und sprachliche Freigabe vor Master-Audio noch offen.",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "al-basir-al-hakim",
@@ -119,7 +303,25 @@
           "summary": "Allah sieht alles und ist vollkommen weise.",
           "cover": "/kids/assets/deen/lesson-asma-wisdom-runway-v1.jpg",
           "hero": "/kids/assets/deen/lesson-asma-wisdom-runway-v1.jpg",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir die Namen Al-Baṣīr und Al-Ḥakīm kennen. Al-Baṣīr bedeutet der Allsehende. Al-Ḥakīm bedeutet der vollkommen Weise. Diese Namen sind nicht von uns erfunden. Wir lernen sie aus dem Qurʾān und behalten dabei im Herzen, dass Allah, subḥānahu wa taʿālā, keinem Geschöpf gleicht.\n\nIn Sūrah aš-Šūrā, Vers 11, sagt Allah sinngemäß, dass nichts Ihm gleicht und Er der Allhörende und Allsehende ist. Der Name Al-Baṣīr wird hier ausdrücklich genannt. Allah sieht alles, was Er sieht, mit vollkommenem Sehen. Unser Sehen ist begrenzt. Wenn es dunkel ist, sehen wir wenig. Manchmal sind Dinge weit weg oder verborgen. Allahs Sehen ist nicht wie unser Sehen.\n\nWir stellen uns Allah nicht als menschliche Gestalt vor. Auch Seine Eigenschaften dürfen wir nicht in Bildern darstellen. Wenn wir ein schönes Bild von einem Garten betrachten, sehen wir Seine Schöpfung, nicht Allah selbst.\n\nWas bedeutet Al-Ḥakīm? In Sūrah al-Baqarah, Vers 32, antworten die Engel, dass sie nur das wissen, was Allah sie gelehrt hat. Sie nennen Allah dabei Al-ʿAlīm und Al-Ḥakīm: den Allwissenden und den vollkommen Weisen. Die Engel erkannten, dass ihr Wissen begrenzt ist und Allahs Wissen und Weisheit vollkommen sind.\n\nManchmal versteht ein Kind nicht sofort, warum eine Sache schwer ist. Wir dürfen Fragen stellen und um Erklärung bitten. Zugleich lernen wir aus diesen Namen, dass wir nicht alles wissen und Allahs Weisheit nicht vollständig umfassen können. Es wäre falsch, eine bestimmte verborgene Absicht Allahs für ein Ereignis zu behaupten, ohne einen Beleg zu haben.\n\nIn Sūrah an-Nisāʾ, Vers 58, werden die Menschen angewiesen, anvertraute Dinge ihren Berechtigten zu geben und gerecht zu urteilen. Am Ende des Verses wird Allah als Allhörender und Allsehender beschrieben. Das erinnert uns daran, dass unser Verhalten ehrlich und gerecht sein soll. Aber der Vers sagt uns nicht, dass wir selbst alles über andere Menschen wissen.\n\nWenn euch jemand etwas anvertraut, passt gut darauf auf. Wenn ihr einen Streit beobachtet, erzählt wahrhaftig, was ihr wirklich gesehen habt, und erfindet nichts. So können wir aus dem Gelernten gute Handlungen ableiten.\n\nUnser Merksatz: Allah ist Al-Baṣīr, der Allsehende, und Al-Ḥakīm, der vollkommen Weise. Nichts ist Ihm gleich.\n\nMöge Allah, subḥānahu wa taʿālā, uns richtiges Wissen geben und uns helfen, danach zu handeln. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 42:11",
+            "Qurʾān 2:32",
+            "Qurʾān 4:58"
+          ],
+          "sourceLinks": [
+            "https://quran.com/42/11",
+            "https://quran.com/2/32",
+            "https://quran.com/4/58"
+          ],
+          "reviewNotes": "Qurʾān-Belege und URLs abgeglichen; abschließende theologische und sprachliche Freigabe vor Master-Audio noch offen.",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "eigenschaften-ohne-vergleich",
@@ -127,7 +329,27 @@
           "summary": "Ehrfürchtig bei den Offenbarungstexten bleiben.",
           "cover": "/kids/assets/deen/asma-sifat.jpg?v=1205",
           "hero": "/kids/assets/deen/asma-sifat.jpg?v=1205",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir eine wichtige Regel für alle Lektionen über Allahs Namen und Eigenschaften: Wir glauben, was Allah über Sich im Qurʾān mitteilt und was der Gesandte Allahs ﷺ authentisch über Ihn gelehrt hat. Wir verändern die Offenbarungsworte nicht nach unserer Fantasie, leugnen nicht, was Allah bestätigt hat, und vergleichen Allah nicht mit Seinen Geschöpfen.\n\nAllah sagt in Sūrah aš-Šūrā, Vers 11, dass nichts Ihm gleicht. Im selben Vers berichtet Er, dass Er der Allhörende und Allsehende ist. Diese beiden Aussagen zeigen uns die Grundlage unserer Lektion: Wir glauben an Seine Eigenschaften, ohne sie mit den Eigenschaften der Geschöpfe gleichzusetzen.\n\nVielleicht fragt ein Kind: Wenn Allah hört, wie hört Er dann? Die wahre Beschaffenheit Seines Hörens kennen wir nicht. Wir wissen durch die Offenbarung, dass Er hört, aber wir dürfen kein erfundenes Wie festlegen. Darum zeigen unsere Unterrichtsbilder weder Allah noch ein angebliches Bild Seiner Eigenschaften.\n\nSūrah al-Iḫlāṣ besteht aus vier kurzen Versen. Sie lehrt uns, dass Allah einzig ist, auf den alle angewiesen sind, dass Er weder zeugt noch gezeugt wurde und dass niemand Ihm gleich ist. Diese Sūrah hilft uns, über Allah so zu sprechen, wie Er Sich offenbart hat.\n\nIn Sūrah al-Aʿrāf, Vers 180, erfahren wir, dass Allah die schönsten Namen gehören und wir Ihn mit ihnen anrufen sollen. Deshalb lernen wir Namen wie Ar-Raḥmān, As-Samīʿ und Al-Baṣīr aus den Offenbarungstexten. Wir machen daraus keine Namen, die Allah nicht für Sich genannt hat.\n\nIn Sūrah an-Naḥl, Vers 74, warnt Allah davor, Gleichnisse über Ihn zu erfinden. Wir können uns dieses Gebot merken, wenn wir über Allah sprechen. Allah ist nicht wie ein Mensch, ein Tier oder irgendein anderes Geschöpf. Alles, was wir um uns sehen, ist geschaffen.\n\nWie gehen wir mit Fragen um, auf die uns kein authentischer Text eine Antwort gibt? Wir sagen: Das wissen wir nicht. Dieses Eingeständnis ist kein Mangel an Glauben. Es ist Ehrlichkeit. Wir unterscheiden zwischen dem, was wir wirklich aus der Offenbarung wissen, und dem, was Menschen sich nur ausdenken könnten.\n\nWenn wir in der Schule oder zu Hause über den Qurʾān sprechen, dürfen wir die Belege nachschlagen und Erwachsene um eine verständliche Erklärung bitten. Wir behandeln andere Kinder dabei geduldig. Das Lernen soll uns demütiger und nicht hochmütiger machen.\n\nUnser Merksatz lautet: Wir bestätigen Allahs schöne Namen und vollkommenen Eigenschaften so, wie sie in Qurʾān und authentischer Sunnah überliefert sind – ohne Vergleich und ohne erfundenes Wie.\n\nMöge Allah, subḥānahu wa taʿālā, uns richtiges Wissen geben und uns helfen, danach zu handeln. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 42:11",
+            "Qurʾān 112:1–4",
+            "Qurʾān 7:180",
+            "Qurʾān 16:74"
+          ],
+          "sourceLinks": [
+            "https://quran.com/42/11",
+            "https://quran.com/112/1-4",
+            "https://quran.com/7/180",
+            "https://quran.com/16/74"
+          ],
+          "reviewNotes": "Qurʾān-Belege und URLs abgeglichen; abschließende theologische und sprachliche Freigabe vor Master-Audio noch offen.",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         }
       ]
     },
@@ -144,25 +366,103 @@
           "id": "was-ist-ikhlas",
           "title": "Ikhlāṣ – aufrichtig für Allah",
           "summary": "Für wen verrichten wir unsere guten Taten?",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir das Wort Ikhlāṣ. Es bedeutet, dass wir unsere Anbetung aufrichtig für Allah, subḥānahu wa taʿālā, verrichten. Vielleicht kennt ihr eine Situation: Ein Kind hilft jemandem, weil es gerne helfen möchte. Ein anderes möchte vor allem, dass die anderen es dafür bewundern. Von außen kann die Handlung ähnlich aussehen, aber die Absicht ist nicht immer gleich.\n\nBei der Anbetung kommt es auf die Absicht an. In Sūrah al-Bayyinah, Vers 5, wird erklärt, dass die Menschen angewiesen wurden, Allah allein in aufrichtiger Hingabe zu dienen und das Gebet zu verrichten. Das ist ein deutlicher Beleg für Ikhlāṣ.\n\nIn Sūrah az-Zumar, Vers 2, wird die aufrichtige Anbetung Allahs ebenfalls betont. Wir richten unser Gebet, unser Fasten und unsere anderen vorgeschriebenen Gottesdienste an Allah. Wir verrichten sie nicht für eine andere Gottheit und machen sie nicht bloß zu einer Vorführung für die Menschen.\n\nDer Gesandte Allahs ﷺ lehrte, dass Taten nach den Absichten beurteilt werden. Diese bekannte authentische Überlieferung wird von ʿUmar ibn al-Ḫaṭṭāb, raḍiya Allahu ʿanhu, berichtet. Ihr findet sie gleich am Anfang von Ṣaḥīḥ al-Buḫārī, Nummer 1. Sie erinnert uns daran, dass wir über unsere Absichten nachdenken sollen.\n\nWie können wir Ikhlāṣ lernen? Bevor wir eine gute Tat beginnen, erinnern wir uns daran, für wen wir sie tun. Wenn wir beten, wollen wir Allah gehorchen. Wenn wir den Qurʾān lernen, suchen wir nützliches Wissen. Und wenn wir jemandem helfen, bemühen wir uns, das Gute zu tun, ohne ständig Lob dafür zu erwarten.\n\nDas bedeutet nicht, dass es schlimm ist, wenn uns jemand freundlich lobt. Wir sollen nur nicht die Anbetung zu einem Schauspiel machen. Ein Mensch kann sich über freundliche Worte freuen, ohne dass seine gute Tat dadurch automatisch wertlos wird. Über die wirklichen Absichten der Menschen urteilt Allah.\n\nManchmal merkt ein Kind, dass es sich doch etwas Lob wünscht. Dann kann es seine Absicht neu ausrichten, Allah um Aufrichtigkeit bitten und weiter Gutes tun. Wir werden nicht dazu aufgefordert, aus Angst vor Gedanken alle guten Taten aufzugeben.\n\nEin weiterer wichtiger Punkt: Ikhlāṣ gehört zur Anbetung Allahs, doch aufrichtig zu sein allein genügt nicht, wenn wir eine Gottesdiensthandlung erfinden. Wir lernen deshalb auch, dem Propheten ﷺ zu folgen. Die Aufrichtigkeit und die Übereinstimmung mit der authentischen Sunnah gehören zusammen.\n\nUnser Merksatz: Ikhlāṣ bedeutet, Allah allein aufrichtig zu dienen. Wir prüfen unsere Absicht, ohne uns über andere Menschen zu stellen.\n\nMöge Allah, subḥānahu wa taʿālā, uns helfen, Ihm aufrichtig und gemäß der authentischen Sunnah zu dienen. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 98:5",
+            "Qurʾān 39:2",
+            "Ṣaḥīḥ al-Buḫārī 1"
+          ],
+          "sourceLinks": [
+            "https://quran.com/98/5",
+            "https://quran.com/39/2",
+            "https://sunnah.com/bukhari:1"
+          ],
+          "reviewNotes": "Beleggestützter Unterrichtsentwurf. Formelle fachliche Endfreigabe und Master-Audio-QA fehlen.",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "gebet-ibadah",
           "title": "Das Gebet gehört Allah",
           "summary": "Warum wir unser Gebet für Allah verrichten.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute sprechen wir über aṣ-Ṣalāh, das Gebet. Es ist eine besonders wichtige Anbetung im Islam. Wir beten nicht, weil uns andere Menschen dabei beobachten, und auch nicht für ein Gebäude oder einen Gebetsteppich. Wir beten für Allah, subḥānahu wa taʿālā.\n\nIn Sūrah al-Baqarah, Vers 43, befiehlt Allah, das Gebet zu verrichten. Das Gebet gehört zu den grundlegenden Pflichten des Islam. In Ṣaḥīḥ al-Buḫārī, Nummer 8, wird überliefert, dass der Islam auf fünf Grundlagen aufgebaut ist. Zu diesen Grundlagen gehört die Verrichtung des Gebets.\n\nWas tun wir im Gebet? Wir stehen, verbeugen uns und werfen uns nieder, so wie es uns die authentische Sunnah lehrt. Dabei sprechen wir die erlaubten und überlieferten Worte. Das Gebet ist eine Anbetung, bei der Herz, Sprache und Bewegungen zusammenkommen.\n\nAllah, subḥānahu wa taʿālā, sagt in Sūrah al-ʿAnkabūt, Vers 45, dass das Gebet von schändlichen und verwerflichen Handlungen abhält. Wir lernen daraus, dass das Gebet nicht nur aus Bewegungen besteht. Es erinnert uns an Allah und soll uns auch im Alltag helfen, besser zu handeln.\n\nIn Sūrah an-Nisāʾ, Vers 103, wird gesagt, dass das Gebet den Gläubigen zu festgelegten Zeiten vorgeschrieben ist. Deshalb lernen wir die Gebetszeiten. Für Kinder geschieht das schrittweise, gemeinsam mit den Eltern oder einer vertrauenswürdigen Lehrperson.\n\nWenn wir noch nicht alle Worte auswendig können, fragen wir und üben geduldig. Der Unterricht soll helfen, das Gebet richtig zu lernen, nicht Kinder beschämen. Es ist gut, Fehler zu korrigieren, aber wir müssen dabei freundlich bleiben.\n\nWarum brauchen wir die authentische Sunnah? Der Qurʾān befiehlt das Gebet. Die Sunnah zeigt uns wichtige Einzelheiten, wie der Gesandte Allahs ﷺ gebetet hat. Deshalb können wir die Gebetsform nicht einfach nach eigener Fantasie gestalten. Wir achten darauf, nur zu lehren, was ausreichend belegt ist.\n\nManchmal sehen wir Menschen, die verschieden schnell lernen oder kleine Fehler machen. Wir sollen ihnen nicht spöttisch begegnen. Wir helfen, wenn wir können, und bitten um Hilfe, wenn wir selbst etwas nicht wissen.\n\nUnser Merksatz: Das Gebet ist eine vorgeschriebene Anbetung Allahs. Wir lernen es nach Qurʾān und authentischer Sunnah und bemühen uns, zu seinen Zeiten aufrichtig zu beten.\n\nMöge Allah, subḥānahu wa taʿālā, uns helfen, Ihm aufrichtig und gemäß der authentischen Sunnah zu dienen. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 2:43",
+            "Qurʾān 29:45",
+            "Qurʾān 4:103",
+            "Ṣaḥīḥ al-Buḫārī 8"
+          ],
+          "sourceLinks": [
+            "https://quran.com/2/43",
+            "https://quran.com/29/45",
+            "https://quran.com/4/103",
+            "https://sunnah.com/bukhari:8"
+          ],
+          "reviewNotes": "Beleggestützter Unterrichtsentwurf. Formelle fachliche Endfreigabe und Master-Audio-QA fehlen.",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "dua-und-tawakkul",
           "title": "Duʿāʾ und Tawakkul",
           "summary": "Bittgebet und Vertrauen auf Allah.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir zwei wichtige Wörter: Duʿāʾ und Tawakkul. Duʿāʾ bedeutet Bittgebet. Tawakkul bedeutet, dass wir auf Allah, subḥānahu wa taʿālā, vertrauen. Beides gehört zu unserem Dīn und ist für den Alltag wichtig.\n\nWenn wir Allah bitten, wenden wir uns direkt an Ihn. In Sūrah Ġāfir, Vers 60, fordert Allah die Menschen auf, Ihn anzurufen, und sagt, dass Er antworten wird. In Sūrah al-Baqarah, Vers 186, erklärt Er, dass Er nahe ist und auf den Ruf des Bittenden antwortet, wenn dieser Ihn anruft.\n\nDuʿāʾ ist keine Zauberformel und kein Trick, mit dem Menschen bestimmen können, was genau geschieht. Allah besitzt die vollkommene Weisheit. Wir dürfen Ihn um Gutes bitten und vertrauen darauf, dass Er alles weiß. Wir behaupten nicht, jede Antwort auf ein Bittgebet im Voraus zu kennen.\n\nNun lernen wir Tawakkul. In Sūrah aṭ-Ṭalāq, Vers 3, wird gelehrt, dass Allah dem genügt, der auf Ihn vertraut. Das bedeutet nicht, dass wir faul sein und nichts tun sollen. Wir bemühen uns um erlaubte Mittel und vertrauen zugleich auf Allah.\n\nStellt euch ein Kind vor, das für eine Prüfung lernt. Es hört im Unterricht zu, übt seine Aufgaben und bittet Allah um Hilfe. Das ist ein Beispiel für die Verbindung von Anstrengung und Vertrauen. Wir lernen nicht, dass Tawakkul bedeutet, Hausaufgaben einfach liegen zu lassen.\n\nIn Sūrah Āl ʿImrān, Vers 159, wird erwähnt, dass man nach einer Entscheidung auf Allah vertrauen soll. Wir dürfen also über gute Entscheidungen nachdenken, Menschen mit Wissen um Rat bitten und dann auf Allah vertrauen.\n\nWas ist der Unterschied zwischen Duʿāʾ an Allah und einer Bitte an einen Menschen? Wenn wir die Eltern um Wasser oder die Lehrerin um Hilfe bei einer Aufgabe bitten, ist das eine gewöhnliche Bitte um etwas, das Menschen leisten können. Das ist nicht dieselbe Handlung wie das Bittgebet als Gottesdienst. Wir sollten diese Dinge nicht durcheinanderbringen.\n\nManchmal sind wir traurig oder haben Angst. Dann dürfen wir Allah um Hilfe und Schutz bitten. Gleichzeitig können wir mit den Eltern oder anderen vertrauenswürdigen Erwachsenen sprechen, wenn wir praktische Hilfe brauchen. Beides schließt sich nicht aus.\n\nWir sollen beim Duʿāʾ aufrichtig sein, erlaubte Bitten sprechen und keine unbelegten Versprechen über bestimmte Zeiten oder Zahlen erfinden. Wir lernen die Bittgebete, die aus Qurʾān und authentischer Sunnah überliefert sind.\n\nUnser Merksatz: Duʿāʾ ist das Bittgebet an Allah. Tawakkul ist Vertrauen auf Allah, verbunden mit dem Bemühen um das Gute.\n\nMöge Allah, subḥānahu wa taʿālā, uns helfen, Ihm aufrichtig und gemäß der authentischen Sunnah zu dienen. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 2:186",
+            "Qurʾān 40:60",
+            "Qurʾān 65:3",
+            "Qurʾān 3:159"
+          ],
+          "sourceLinks": [
+            "https://quran.com/2/186",
+            "https://quran.com/40/60",
+            "https://quran.com/65/3",
+            "https://quran.com/3/159"
+          ],
+          "reviewNotes": "Beleggestützter Unterrichtsentwurf. Formelle fachliche Endfreigabe und Master-Audio-QA fehlen.",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "sunnah-folgen",
           "title": "Der Sunnah folgen",
           "summary": "Den Propheten ﷺ zum Vorbild nehmen.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir, warum wir der authentischen Sunnah folgen. Sunnah ist ein arabisches Wort. In unserem Unterricht meinen wir damit die überlieferte Rechtleitung des Gesandten Allahs ﷺ. Wir brauchen den Qurʾān und die authentische Sunnah, um unseren Dīn richtig zu lernen.\n\nIn Sūrah Āl ʿImrān, Vers 31, wird der Gesandte angewiesen, den Menschen zu sagen: Wenn ihr Allah liebt, dann folgt mir. Das ist eine wichtige Botschaft. Die Liebe zu Allah ist nicht nur ein Gefühl, sondern wir bemühen uns, dem Propheten ﷺ in der Religion zu folgen.\n\nIn Sūrah al-Aḥzāb, Vers 21, erfahren wir, dass wir im Gesandten Allahs ein gutes Vorbild haben. Wir lernen von ihm, wie wir Allah anbeten und wie wir uns gegenüber anderen Menschen verhalten sollen.\n\nIn Sūrah an-Nisāʾ, Vers 59, wird den Gläubigen befohlen, Allah und dem Gesandten zu gehorchen. Darum gehören Qurʾān und Sunnah zusammen. Wenn wir das Gebet lernen, brauchen wir die authentisch überlieferte Erklärung seiner Durchführung. Wir können nicht selbst bestimmen, dass wir eine neue vorgeschriebene Gebetsform erfinden.\n\nDer Prophet ﷺ warnte davor, etwas als verbindlichen Teil der Religion einzuführen, was nicht zu ihr gehört. Diese authentische Überlieferung steht in Ṣaḥīḥ Muslim, Nummer 1718a. Das lehrt uns, vorsichtig und wahrhaftig zu sein: Nicht jedes schöne klingende Versprechen oder jede beliebige Erzählung ist eine Sunnah.\n\nWie können Kinder das praktisch lernen? Sie fragen nach Belegen, lernen zuverlässige Bittgebete und versuchen, das Gebet richtig zu üben. Sie hören aufmerksam zu und merken sich, was authentisch überliefert wurde. Wenn sie etwas nicht verstanden haben, dürfen sie nachfragen.\n\nEs gibt auch gewöhnliche Dinge des Alltags, bei denen Menschen auswählen dürfen: Kleidung in erlaubten Formen, Essen, Lernspiele oder die Farbe eines Schulhefts. Wir dürfen nicht ohne Beleg jede Gewohnheit zu einer vorgeschriebenen Gottesdiensthandlung erklären.\n\nWir sollen dabei auch einen guten Charakter zeigen. Wenn wir einen anderen Menschen korrigieren, brauchen wir Wissen und Höflichkeit. Kinder sollen nicht anfangen, über den Glauben anderer Menschen zu richten oder sie zu beschimpfen. Sie sollen zuerst lernen, was die Offenbarung tatsächlich lehrt.\n\nWenn ihr euch fragt, ob eine Aussage wirklich vom Propheten ﷺ stammt, schaut in zuverlässige Quellen oder bittet einen kundigen Erwachsenen, den Wortlaut und die Überlieferung zu prüfen. Wir übernehmen keine erfundenen Geschichten.\n\nUnser Merksatz: Wir lieben Allah und folgen dem Gesandten ﷺ, indem wir die Religion aus Qurʾān und authentischer Sunnah lernen und nach ihr handeln.\n\nMöge Allah, subḥānahu wa taʿālā, uns helfen, Ihm aufrichtig und gemäß der authentischen Sunnah zu dienen. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 3:31",
+            "Qurʾān 33:21",
+            "Qurʾān 4:59",
+            "Ṣaḥīḥ Muslim 1718a"
+          ],
+          "sourceLinks": [
+            "https://quran.com/3/31",
+            "https://quran.com/33/21",
+            "https://quran.com/4/59",
+            "https://sunnah.com/muslim:1718a"
+          ],
+          "reviewNotes": "Beleggestützter Unterrichtsentwurf. Formelle fachliche Endfreigabe und Master-Audio-QA fehlen.",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         }
       ]
     },
@@ -181,25 +481,109 @@
           "id": "wahrhaftigkeit",
           "title": "Wahrhaftigkeit",
           "summary": "Warum wir immer die Wahrheit sagen.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir über aṣ-Ṣidq, die Wahrhaftigkeit. Wahrhaftig sein bedeutet, die Wahrheit zu sagen und nicht absichtlich eine Lüge zu erzählen. Wir brauchen Wahrhaftigkeit in der Familie, in der Schule und im Umgang mit unseren Freunden.\n\nIn Sūrah at-Tawbah, Vers 119, fordert Allah, subḥānahu wa taʿālā, die Gläubigen auf, Ihn zu fürchten und mit den Wahrhaftigen zu sein. Diese Āyah zeigt uns, dass die Wahrheit nicht nur eine gute Gewohnheit ist. Sie gehört zu den Eigenschaften, die wir als Gläubige lernen sollen.\n\nIn Sūrah al-Aḥzāb, Vers 70, wird den Gläubigen befohlen, Allah zu fürchten und richtige Worte zu sprechen. Wir versuchen also nicht nur, keine Lügen zu erzählen. Wir sollen auch sorgfältig überlegen, ob eine Behauptung wirklich stimmt, bevor wir sie weitergeben.\n\nDer Gesandte Allahs ﷺ erklärte, dass Wahrhaftigkeit zu rechtschaffenem Verhalten führt und dieses zum Paradies. Er warnte auch vor der Lüge. Der Gefährte ʿAbdullāh ibn Masʿūd, raḍiya Allahu ʿanhu, überlieferte diese Worte; sie stehen in Ṣaḥīḥ al-Buḫārī, Nummer 6094.\n\nStellt euch vor, ein Kind hat aus Versehen ein Glas umgestoßen. Vielleicht hat es Angst, dass die Eltern ärgerlich werden. Es könnte behaupten, jemand anderes sei es gewesen. Doch besser ist es, ruhig zu erklären, was passiert ist, und beim Aufräumen zu helfen. So üben wir die Wahrheit und übernehmen Verantwortung.\n\nWahrhaftig zu sein bedeutet auch, über unser Wissen ehrlich zu sprechen. Wenn wir etwas über Qurʾān oder Sunnah nicht sicher wissen, dürfen wir sagen: Ich weiß es nicht. Das ist besser, als eine Geschichte zu erfinden und sie Allah oder dem Propheten ﷺ zuzuschreiben.\n\nAber müssen wir alles aussprechen, was uns einfällt? Nein. Unsere Worte sollen nicht absichtlich verletzen. Wir können freundlich und wahrhaftig sein. Manchmal schweigen wir besser, statt ein schlechtes Gerücht zu verbreiten.\n\nWas machen wir, wenn wir gelogen haben? Dann sollen wir die Lüge nicht mit einer zweiten Lüge verstecken. Wir bitten Allah um Vergebung, korrigieren unsere Aussage und bemühen uns, beim nächsten Mal die Wahrheit zu sagen. Wir sollen aus Fehlern lernen.\n\nAuch im Spielen ist Ehrlichkeit wichtig. Wer bei einem Spiel schummelt oder absichtlich eine falsche Zahl nennt, übt keine Wahrhaftigkeit. Wir möchten faire und vertrauenswürdige Freunde sein.\n\nUnser Merksatz: Allah liebt Wahrhaftigkeit. Wir sagen die Wahrheit, sprechen mit Wissen und verbessern unsere Fehler.\n\nMöge Allah, subḥānahu wa taʿālā, uns helfen, ein gutes Verhalten zu lernen und anderen Menschen freundlich und gerecht zu begegnen. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 9:119",
+            "Qurʾān 33:70",
+            "Ṣaḥīḥ al-Buḫārī 6094"
+          ],
+          "sourceLinks": [
+            "https://quran.com/9/119",
+            "https://quran.com/33/70",
+            "https://sunnah.com/bukhari:6094"
+          ],
+          "reviewNotes": "Kindgerechter beleggestützter Unterrichtsentwurf. Fachliche Endfreigabe und Master-Audio-Prüfung ausstehend.",
+          "cover": "/kids/assets/deen/lesson-adab-truth-firefly-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-adab-truth-firefly-v1.jpg",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "eltern-ehren",
           "title": "Eltern und Familie ehren",
           "summary": "Respekt und Hilfsbereitschaft zu Hause.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir, wie wir unsere Eltern und unsere Familie gut behandeln. Allah, subḥānahu wa taʿālā, befiehlt im Qurʾān, Ihn allein anzubeten und zu den Eltern gut zu sein. Das steht in Sūrah al-Isrāʾ, Vers 23. Die Verbindung dieser beiden Aufforderungen zeigt uns, wie wichtig der gute Umgang mit den Eltern ist.\n\nIn Sūrah al-Isrāʾ, Verse 23 und 24, wird besonders daran erinnert, Eltern im Alter nicht unfreundlich zu behandeln, sondern respektvoll mit ihnen zu sprechen. Wir sollen uns bemühen, geduldig und hilfsbereit zu sein.\n\nAuch in Sūrah Luqmān, Vers 14, erinnert Allah an die Mühen der Mutter und befiehlt Dankbarkeit gegenüber Ihm und gegenüber den Eltern. Es ist gut, sich daran zu erinnern, dass Eltern viele Aufgaben und Sorgen für ihre Kinder tragen können.\n\nDer Prophet Muḥammad ﷺ wurde gefragt, wem ein Mensch besonders gute Gesellschaft und Behandlung schuldet. Er nannte dreimal die Mutter und danach den Vater. Diese Überlieferung berichtet Abū Hurayrah, raḍiya Allahu ʿanhu, in Ṣaḥīḥ al-Buḫārī, Nummer 5971.\n\nWie können Kinder dies praktisch üben? Wir können freundlich grüßen, beim Tischdecken helfen, aufräumen und aufmerksam zuhören. Wenn wir um etwas gebeten werden, das gut und erlaubt ist, bemühen wir uns, darauf einzugehen. Wir sollten nicht grundlos schreien oder beleidigen.\n\nZur guten Behandlung der Familie gehört auch, die Geschwister nicht zu verspotten. Wenn ein kleineres Kind etwas noch nicht schafft, können wir geduldig helfen. Und wenn wir jemanden gekränkt haben, können wir uns entschuldigen.\n\nManchmal gibt es Meinungsverschiedenheiten in einer Familie. Respekt bedeutet nicht, dass Kinder niemals Fragen stellen dürfen. Man darf ruhig und höflich sagen, was man nicht verstanden hat. Ein Kind darf um Hilfe bitten, wenn es traurig ist oder sich unsicher fühlt.\n\nEs ist wichtig, diese Lehre nicht falsch zu verwenden: Niemand darf einem Kind Gewalt oder Schaden zufügen und dann verlangen, es müsse aus religiösen Gründen schweigen. Wenn ein Kind Angst hat oder verletzt wird, soll es sich an eine vertrauenswürdige erwachsene Person wenden. Guter Charakter und Schutz gehören zusammen.\n\nIm Qurʾān lernen wir auch, dass die Anbetung Allahs allein bleibt. Wir verehren die Eltern nicht wie Allah, sondern behandeln sie mit Güte und Achtung. Allah hat jedem sein Recht gegeben.\n\nUnser Merksatz: Wir dienen Allah allein und begegnen unseren Eltern und unserer Familie mit Respekt, Dankbarkeit und Hilfsbereitschaft.\n\nMöge Allah, subḥānahu wa taʿālā, uns helfen, ein gutes Verhalten zu lernen und anderen Menschen freundlich und gerecht zu begegnen. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 17:23–24",
+            "Qurʾān 31:14",
+            "Ṣaḥīḥ al-Buḫārī 5971"
+          ],
+          "sourceLinks": [
+            "https://quran.com/17/23-24",
+            "https://quran.com/31/14",
+            "https://sunnah.com/bukhari:5971"
+          ],
+          "reviewNotes": "Kindgerechter beleggestützter Unterrichtsentwurf. Fachliche Endfreigabe und Master-Audio-Prüfung ausstehend.",
+          "cover": "/kids/assets/deen/lesson-adab-family-runway-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-adab-family-runway-v1.jpg",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "geduld-dankbarkeit",
           "title": "Geduld und Dankbarkeit",
           "summary": "Ṣabr und Šukr im Alltag üben.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir zwei wichtige Wörter: Ṣabr und Šukr. Ṣabr bedeutet Geduld. Šukr bedeutet Dankbarkeit. Beide gehören zu einem guten Verhalten gegenüber Allah, subḥānahu wa taʿālā, und zu unserem täglichen Leben.\n\nWas bedeutet Geduld? Manchmal müssen wir auf etwas warten. Manchmal ist eine Aufgabe schwer. Geduld bedeutet nicht, dass wir niemals traurig sein dürfen. Wir können traurig sein und trotzdem versuchen, richtig zu handeln und um Hilfe zu bitten.\n\nIn Sūrah al-Baqarah, Vers 153, ruft Allah die Gläubigen dazu auf, Hilfe durch Geduld und Gebet zu suchen. Diese Āyah erinnert uns daran, dass wir uns bei Schwierigkeiten an Allah wenden dürfen. Wir lernen, ruhig zu bleiben, zu beten und erlaubte Hilfe anzunehmen.\n\nStellt euch vor, ein Kind versucht zum ersten Mal, eine schwierige Sūrah auswendig zu lernen. Es macht Fehler und muss einige Worte mehrfach üben. Das bedeutet nicht, dass es versagt hat. Es kann eine Pause machen, eine Lehrperson um Hilfe bitten und geduldig weiterlernen.\n\nNun sprechen wir über Dankbarkeit. In Sūrah Ibrāhīm, Vers 7, wird erwähnt, dass Allah mehr gibt, wenn die Menschen dankbar sind. Wir sollen Seine Gaben erkennen und Ihm dafür danken. Dazu gehören unser Essen, unser Wissen, unsere Zeit und die Hilfe anderer Menschen.\n\nIn Sūrah Luqmān, Vers 12, wird die Dankbarkeit gegenüber Allah ebenfalls betont. Wer dankbar ist, soll nicht gleichzeitig andere Menschen herabsetzen. Wir können Allah danken und auch den Menschen freundlich danken, die uns geholfen haben.\n\nDer Gesandte Allahs ﷺ erklärte, dass die Angelegenheiten eines Gläubigen Gutes enthalten können: Bei etwas Erfreulichem zeigt er Dankbarkeit, bei Schwierigkeiten Geduld. Diese Überlieferung berichtet Ṣuhayb, raḍiya Allahu ʿanhu, und steht in Ṣaḥīḥ Muslim, Nummer 2999.\n\nDiese Überlieferung bedeutet nicht, dass jedes schwere Erlebnis angenehm sein muss. Leid und Traurigkeit sind wirklich schwer. Wir dürfen darüber sprechen und brauchen manchmal Unterstützung. Geduld bedeutet, in Schwierigkeiten nicht absichtlich Unrecht zu tun und uns weiterhin um das Gute zu bemühen.\n\nWas können wir heute üben? Wir bedanken uns, wenn uns jemand hilft. Wir versuchen, bei einer schwierigen Aufgabe freundlich zu bleiben. Und wenn wir etwas Schönes bekommen, erinnern wir uns daran, Allah zu danken.\n\nUnser Merksatz: Ṣabr ist Geduld und Šukr ist Dankbarkeit. Bei Schwierigkeiten suchen wir Hilfe bei Allah, und bei guten Dingen danken wir Ihm.\n\nMöge Allah, subḥānahu wa taʿālā, uns helfen, ein gutes Verhalten zu lernen und anderen Menschen freundlich und gerecht zu begegnen. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 2:153",
+            "Qurʾān 14:7",
+            "Qurʾān 31:12",
+            "Ṣaḥīḥ Muslim 2999"
+          ],
+          "sourceLinks": [
+            "https://quran.com/2/153",
+            "https://quran.com/14/7",
+            "https://quran.com/31/12",
+            "https://sunnah.com/muslim:2999"
+          ],
+          "reviewNotes": "Kindgerechter beleggestützter Unterrichtsentwurf. Fachliche Endfreigabe und Master-Audio-Prüfung ausstehend.",
+          "cover": "/kids/assets/deen/lesson-adab-firefly-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-adab-firefly-v1.jpg",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "freundlichkeit",
           "title": "Freundlichkeit",
           "summary": "Ein schönes Wort und gute Manieren.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir über Freundlichkeit und gutes Benehmen. Im Arabischen sprechen wir dabei von Adab und Aḫlāq. Gute Manieren gehören nicht nur zu besonderen Festen. Wir brauchen sie beim Sprechen, Spielen, Lernen und Zusammenleben.\n\nAllah, subḥānahu wa taʿālā, lehrt uns im Qurʾān, auf eine schlechte Handlung möglichst mit einer besseren zu antworten. Das steht in Sūrah Fuṣṣilat, Vers 34. Wir sollen uns darum bemühen, nicht aus jeder Kleinigkeit einen Streit zu machen.\n\nVielleicht hat ein anderes Kind ein unfreundliches Wort gesagt. Wir müssen das Wort nicht zurückgeben. Wir dürfen ruhig bleiben, erklären, dass es uns verletzt hat, und bei Bedarf eine Lehrperson um Hilfe bitten. Freundlich zu sein bedeutet nicht, dass wir uns wehrlos verletzen lassen müssen.\n\nIn Sūrah al-Ḥuǧurāt, Vers 11, wird davor gewarnt, andere Menschen zu verspotten und ihnen schlechte Spitznamen zu geben. Das ist besonders für Kinder wichtig. Niemand soll wegen seines Namens, seines Aussehens oder eines Fehlers beschimpft werden. Auch beim Spaß müssen wir auf die Gefühle anderer achten.\n\nSūrah an-Naḥl, Vers 90, erwähnt Gerechtigkeit und gutes Handeln. Wir sollen versuchen, fair zu sein und anderen zu helfen. Wenn wir etwas gemeinsam teilen, dürfen wir nicht einfach alles für uns beanspruchen.\n\nDer Prophet Muḥammad ﷺ lehrte, dass jemand, der an Allah und den Jüngsten Tag glaubt, Gutes sprechen oder schweigen soll. Diese Worte stehen unter anderem in Ṣaḥīḥ al-Buḫārī, Nummer 6018. Bevor wir etwas sagen, können wir kurz überlegen: Ist es wahr? Ist es nützlich? Sage ich es auf eine freundliche Art?\n\nFreundlichkeit kann sehr einfach sein. Wir grüßen, hören aufmerksam zu, helfen bei einer Aufgabe und entschuldigen uns, wenn wir einen Fehler gemacht haben. Wir lassen andere ausreden und nehmen Rücksicht auf die, die noch etwas lernen.\n\nWenn sich zwei Kinder gestritten haben, ist es gut, nicht noch weitere Kinder hineinzuziehen, um jemanden auszulachen. Besser ist es, ruhig zu reden, zuzuhören und bei einem ernsten Streit eine erwachsene Person um Hilfe zu bitten.\n\nWir müssen nicht behaupten, dass jeder Mensch immer freundlich auf uns reagieren wird. Wir selbst sollen uns um den guten Charakter bemühen. Andere Menschen können Fehler machen, und wir auch. Deshalb lernen wir jeden Tag weiter.\n\nUnser Merksatz: Gute Worte, Gerechtigkeit und ein freundlicher Umgang gehören zu unserem Dīn. Wir sprechen respektvoll und verspotten niemanden.\n\nMöge Allah, subḥānahu wa taʿālā, uns helfen, ein gutes Verhalten zu lernen und anderen Menschen freundlich und gerecht zu begegnen. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 41:34",
+            "Qurʾān 49:11",
+            "Qurʾān 16:90",
+            "Ṣaḥīḥ al-Buḫārī 6018"
+          ],
+          "sourceLinks": [
+            "https://quran.com/41/34",
+            "https://quran.com/49/11",
+            "https://quran.com/16/90",
+            "https://sunnah.com/bukhari:6018"
+          ],
+          "reviewNotes": "Kindgerechter beleggestützter Unterrichtsentwurf. Fachliche Endfreigabe und Master-Audio-Prüfung ausstehend.",
+          "cover": "/kids/assets/deen/adab-akhlaq.jpg?v=1205",
+          "hero": "/kids/assets/deen/adab-akhlaq.jpg?v=1205",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         }
       ]
     },
@@ -216,25 +600,111 @@
           "id": "tod-und-auferstehung",
           "title": "Tod und Auferstehung",
           "summary": "Wir kehren eines Tages zu Allah zurück.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute sprechen wir über ein ernstes Thema: den Tod und die Auferstehung. Wir lernen darüber behutsam, weil die Aussagen über das Verborgene aus dem Qurʾān und der authentischen Sunnah stammen müssen. Wir werden keine erschreckenden Geschichten erfinden.\n\nAllah, subḥānahu wa taʿālā, sagt in Sūrah Āl ʿImrān, Vers 185, dass jede Seele den Tod kosten wird. Das erinnert uns daran, dass unser Leben auf dieser Erde nicht für immer dauert. Unser Dīn lehrt uns, das Leben zu schätzen und die Zeit für gute Taten zu nutzen.\n\nVielleicht hat ein Kind schon einmal einen geliebten Menschen verloren. Es ist normal, darüber traurig zu sein und Fragen zu stellen. Wir dürfen weinen, mit den Eltern oder anderen vertrauenswürdigen Menschen sprechen und Allah um Trost bitten. Wir müssen unsere Trauer nicht verstecken.\n\nWas bedeutet Auferstehung? Der Qurʾān berichtet, dass Allah, subḥānahu wa taʿālā, die Menschen am Jüngsten Tag auferwecken wird. In Sūrah al-Ḥaǧǧ, Vers 7, steht, dass die Stunde kommen wird und Allah diejenigen auferwecken wird, die in den Gräbern sind. Wir glauben daran, weil Allah es offenbart hat.\n\nSūrah ar-Rūm, Vers 27, erinnert uns daran, dass Allah die Schöpfung beginnt und sie wiederholt. Die Auferstehung ist für Allah nicht unmöglich. Menschen besitzen nicht die Macht Allahs und können nicht alles verstehen, was zum Verborgenen gehört.\n\nIn Sūrah Yā Sīn, Verse 78 und 79, wird die Frage nach der Auferweckung behandelt. Die Antwort erinnert uns daran, dass derjenige, der die Schöpfung zum ersten Mal hervorgebracht hat, sie auch wieder erwecken kann. Wir können diese Aussage verstehen, ohne die Auferstehung mit Bildern oder erfundenen Einzelheiten auszugestalten.\n\nWas lernen wir daraus? Das Leben ist eine Gabe und unsere Zeit ist wertvoll. Wir versuchen, gute Worte zu sprechen, unsere Pflichten zu lernen, den Eltern und anderen Menschen freundlich zu begegnen und Allah um Rechtleitung zu bitten.\n\nWir brauchen vor dem Tod nicht ständig Angst zu haben. Der Unterricht soll uns nicht erschrecken, sondern dazu führen, auf Allah zu vertrauen und gute Taten zu üben. Wenn ihr dazu Fragen habt, stellt sie offen. Erwachsene sollen euch mit Wahrheit und Einfühlungsvermögen antworten.\n\nUnser Merksatz: Dieses Leben endet, und Allah wird die Menschen auferwecken. Wir glauben, was offenbart wurde, und erfinden keine Einzelheiten über das Verborgene.\n\nMöge Allah, subḥānahu wa taʿālā, uns im Dīn festigen, uns gute Taten erleichtern und uns Seine Barmherzigkeit schenken. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 3:185",
+            "Qurʾān 22:7",
+            "Qurʾān 30:27",
+            "Qurʾān 36:78–79"
+          ],
+          "sourceLinks": [
+            "https://quran.com/3/185",
+            "https://quran.com/22/7",
+            "https://quran.com/30/27",
+            "https://quran.com/36/78-79"
+          ],
+          "reviewNotes": "Behutsamer kindgerechter Quellen-Entwurf; Endfreigabe und Audio-Exaktprüfung ausstehend.",
+          "cover": "/kids/assets/deen/lesson-akhirah-dawn-firefly-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-akhirah-dawn-firefly-v1.jpg",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "die-abrechnung",
           "title": "Die Abrechnung",
           "summary": "Allah ist vollkommen gerecht.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir über die Abrechnung am Jüngsten Tag. Es ist ein wichtiges Thema der Āḫirah. Allah, subḥānahu wa taʿālā, ist vollkommen gerecht. Deshalb glauben wir an die Abrechnung so, wie sie im Qurʾān beschrieben wird, ohne uns unbekannte Einzelheiten auszudenken.\n\nIn Sūrah az-Zalzalah, Verse 7 und 8, wird erklärt, dass jeder Mensch seine Taten sehen wird, selbst wenn sie sehr klein sind. Diese Verse erinnern uns daran, dass gute Taten wertvoll sind und dass wir schlechte Handlungen nicht einfach für unwichtig halten sollen.\n\nVielleicht denkt ihr an eine kleine gute Tat: jemandem ein freundliches Wort sagen, helfen, etwas zurückzugeben, das man gefunden hat, oder die Wahrheit aussprechen. Auch wenn die Menschen nicht jede gute Tat bemerken, kennt Allah unsere Handlungen.\n\nIn Sūrah al-Anbiyāʾ, Vers 47, berichtet Allah, dass Er am Tag der Auferstehung gerechte Waagen aufstellen wird und niemandem Unrecht getan wird. Wir müssen keine besondere Gestalt dieser Waagen erfinden. Wir glauben an die Offenbarung, ohne etwas hinzuzufügen, worüber wir kein Wissen haben.\n\nSūrah al-Kahf, Vers 49, erwähnt das Buch der Taten und dass die Menschen sehen werden, was darin verzeichnet ist. Auch das lehrt uns: Allahs Gerechtigkeit ist vollkommen. Er wird niemanden wegen einer Tat ungerecht behandeln.\n\nWas bedeutet das für uns heute? Wir sollen Verantwortung übernehmen. Wenn wir einen Fehler gemacht haben, sollten wir ihn nicht verbergen und weiter Unrecht tun. Wir bitten Allah um Vergebung, versuchen einen Schaden wiedergutzumachen und bemühen uns, es besser zu machen.\n\nWichtig ist: Wir Kinder sind nicht dazu da, andere Menschen zu verurteilen. Wir wissen nicht alles über die Taten, Absichten und Umstände eines anderen Menschen. Allah allein besitzt das vollkommene Wissen und die vollkommene Gerechtigkeit.\n\nWir lernen auch Hoffnung. Wenn jemand Gutes tut, ist das nicht bedeutungslos. Allah kennt die guten Taten, auch wenn andere Menschen sie übersehen. Wir sollen ihnen nicht mit Hochmut begegnen, sondern Allah danken, dass Er uns gute Handlungen ermöglicht.\n\nWenn ein Kind über seine Fehler traurig ist, erinnern wir daran, dass es sich verbessern und Allah um Vergebung bitten darf. Dieser Unterricht soll zu Verantwortungsbewusstsein und Hoffnung führen, nicht zu Verzweiflung.\n\nUnser Merksatz: Allah wird gerecht abrechnen. Keine gute Tat ist vor Ihm verborgen. Wir lernen, das Gute zu tun und unsere Fehler zu korrigieren.\n\nMöge Allah, subḥānahu wa taʿālā, uns im Dīn festigen, uns gute Taten erleichtern und uns Seine Barmherzigkeit schenken. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 99:7–8",
+            "Qurʾān 21:47",
+            "Qurʾān 18:49"
+          ],
+          "sourceLinks": [
+            "https://quran.com/99/7-8",
+            "https://quran.com/21/47",
+            "https://quran.com/18/49"
+          ],
+          "reviewNotes": "Behutsamer kindgerechter Quellen-Entwurf; Endfreigabe und Audio-Exaktprüfung ausstehend.",
+          "cover": "/kids/assets/deen/lesson-akhirah-path-runway-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-akhirah-path-runway-v1.jpg",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "paradies-und-hoellenfeuer",
           "title": "Paradies und Höllenfeuer",
           "summary": "Was uns die Offenbarung darüber lehrt.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute sprechen wir behutsam über das Paradies, al-Ǧannah, und das Höllenfeuer, an-Nār. Beides gehört zu den Dingen, über die Allah, subḥānahu wa taʿālā, im Qurʾān berichtet. Wir dürfen deshalb darüber lernen. Aber wir dürfen nicht behaupten, wir könnten das Verborgene selbst sehen oder in Bildern vollständig darstellen.\n\nIn Sūrah Āl ʿImrān, Vers 185, wird erklärt, dass am Jüngsten Tag die vollständige Belohnung gegeben wird und dass derjenige erfolgreich ist, der vom Feuer ferngehalten und ins Paradies eingelassen wird. Diese Āyah zeigt, dass der wirkliche Erfolg mit der Āḫirah verbunden ist.\n\nAllah, subḥānahu wa taʿālā, berichtet in Sūrah al-Baqarah, Vers 25, von einer guten Botschaft für diejenigen, die glauben und rechtschaffene Werke tun. Der Vers erwähnt Gärten mit Flüssen. Wir glauben an das Paradies, weil Allah davon berichtet hat. Wir dürfen aber nicht behaupten, ein Foto eines Gartens auf der Erde zeige das wirkliche Paradies.\n\nAuch in Sūrah al-Bayyinah, Verse 7 und 8, erfahren wir von der Belohnung der Gläubigen, die rechtschaffene Werke verrichten. Diese Verse verbinden Glauben, gute Taten und Allahs Wohlgefallen. Wir lernen also nicht nur, über Belohnung zu sprechen, sondern uns um einen aufrichtigen Glauben und gute Taten zu bemühen.\n\nDer Qurʾān warnt auch vor dem Höllenfeuer. Wir nehmen diese Warnungen ernst, ohne Kindern absichtlich Angst zu machen. Unser Ziel ist, Qurʾān und Sunnah wahrheitsgemäß zu lernen. Wir erfinden keine beängstigenden Einzelheiten und stellen die Bestrafung nicht in Bildern nach.\n\nGleichzeitig erinnert uns Allah in Sūrah az-Zumar, Vers 53, daran, die Hoffnung auf Seine Barmherzigkeit nicht aufzugeben. Wenn wir Fehler gemacht haben, sollen wir um Vergebung bitten und uns verbessern. Hoffnung und Ehrfurcht gehören zum Glauben.\n\nNiemand von uns darf leichtfertig behaupten, eine bestimmte lebende Person werde sicher im Paradies oder im Höllenfeuer sein. Solche Urteile benötigen Offenbarung als Beleg. Allah kennt die Menschen und ihr Ende. Wir sprechen deshalb verantwortungsvoll und überlassen Ihm das vollkommene Urteil.\n\nWas können wir heute üben? Wir lernen das Gebet, bemühen uns um gutes Verhalten und behandeln andere Menschen freundlich. Wir bitten Allah um Seine Barmherzigkeit. Die Hoffnung auf das Paradies soll uns motivieren, aufrichtig Gutes zu tun.\n\nUnser Merksatz: Paradies und Höllenfeuer sind wahr, weil Allah darüber berichtet. Wir glauben daran, ohne das Verborgene zu erfinden, und hoffen auf Allahs Barmherzigkeit.\n\nMöge Allah, subḥānahu wa taʿālā, uns im Dīn festigen, uns gute Taten erleichtern und uns Seine Barmherzigkeit schenken. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 3:185",
+            "Qurʾān 2:25",
+            "Qurʾān 98:7–8",
+            "Qurʾān 39:53"
+          ],
+          "sourceLinks": [
+            "https://quran.com/3/185",
+            "https://quran.com/2/25",
+            "https://quran.com/98/7-8",
+            "https://quran.com/39/53"
+          ],
+          "reviewNotes": "Behutsamer kindgerechter Quellen-Entwurf; Endfreigabe und Audio-Exaktprüfung ausstehend.",
+          "cover": "/kids/assets/deen/akhirah.jpg?v=1205",
+          "hero": "/kids/assets/deen/akhirah.jpg?v=1205",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         },
         {
           "id": "vorbereitung-akhirah",
           "title": "Vorbereitung auf die Āḫirah",
           "summary": "Heute gute Taten lernen und üben.",
-          "status": "planned"
+          "status": "text-ready",
+          "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.\n\nHeute lernen wir, wie wir uns im Leben auf die Āḫirah vorbereiten. Das Wort Āḫirah bedeutet das jenseitige Leben. Im Qurʾān erfahren wir, dass unser Leben auf der Erde endet und dass Allah, subḥānahu wa taʿālā, uns für unsere Taten zur Rechenschaft ziehen wird.\n\nWarum lernen wir darüber? Nicht um jeden Tag ängstlich zu sein, sondern um unsere Zeit sinnvoll zu nutzen und Allah aufrichtig zu dienen. Das Leben ist eine Gabe. Wir lernen, mit dieser Gabe verantwortungsvoll umzugehen.\n\nIn Sūrah al-Mulk, Vers 2, erfahren wir, dass Allah den Tod und das Leben erschaffen hat, um die Menschen zu prüfen, wer von ihnen die besten Taten verrichtet. Der Vers sagt nicht, dass wir möglichst viele erfundene Gottesdiensthandlungen sammeln sollen. Wir bemühen uns vielmehr darum, das Richtige zu tun und die authentische Rechtleitung zu befolgen.\n\nIn Sūrah az-Zalzalah, Verse 7 und 8, wird erklärt, dass auch kleine gute und schlechte Taten sichtbar werden. Deshalb unterschätzen wir eine freundliche Hilfe nicht und nehmen unsere Fehler ernst. Ein gutes Wort, Aufrichtigkeit und Hilfe gehören zu den Dingen, die wir üben können.\n\nDie kurze Sūrah al-ʿAṣr, Verse 1 bis 3, erinnert uns daran, wie wichtig Īmān, rechtschaffene Taten, das gegenseitige Empfehlen der Wahrheit und der Geduld sind. Diese vier Themen passen gut zu unserem Unterricht: Wir lernen den Glauben, handeln gut, sprechen die Wahrheit und versuchen geduldig zu bleiben.\n\nWie sieht ein Tag mit guten Zielen aus? Ein Kind steht auf und dankt Allah für den neuen Tag. Es lernt nach und nach sein Gebet. Es hilft zu Hause, erzählt keine absichtlichen Lügen und behandelt andere Kinder freundlich. Solche Beispiele zeigen, dass gute Taten zum Alltag gehören.\n\nWir dürfen auch spielen, lachen, lernen und uns ausruhen. Der Islam verlangt nicht, dass Kinder den ganzen Tag mit traurigen Gedanken verbringen. Wir sollen lernen, was vorgeschrieben ist, und mit Freude und Verantwortung leben.\n\nWas machen wir, wenn uns etwas misslingt? Wir geben nicht auf. Wir bitten Allah um Vergebung, machen einen Fehler möglichst wieder gut und fassen einen neuen guten Entschluss. Allah kennt unsere Bemühungen.\n\nIn Sūrah Āl ʿImrān, Vers 185, steht, dass jede Seele den Tod kosten wird. Diese Erinnerung hilft uns, das Leben nicht für selbstverständlich zu halten. Wir wissen nicht alles über die Zukunft, deshalb richten wir unsere Aufmerksamkeit auf das Gute, das wir heute tun können.\n\nUnser Merksatz: Wir bereiten uns auf die Āḫirah vor, indem wir Allah allein dienen, Qurʾān und authentische Sunnah lernen und uns täglich um gute Taten bemühen.\n\nMöge Allah, subḥānahu wa taʿālā, uns im Dīn festigen, uns gute Taten erleichtern und uns Seine Barmherzigkeit schenken. Āmīn.\n\nWa-s-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+          "sourceRefs": [
+            "Qurʾān 67:2",
+            "Qurʾān 99:7–8",
+            "Qurʾān 103:1–3",
+            "Qurʾān 3:185"
+          ],
+          "sourceLinks": [
+            "https://quran.com/67/2",
+            "https://quran.com/99/7-8",
+            "https://quran.com/103/1-3",
+            "https://quran.com/3/185"
+          ],
+          "reviewNotes": "Behutsamer kindgerechter Quellen-Entwurf; Endfreigabe und Audio-Exaktprüfung ausstehend.",
+          "cover": "/kids/assets/deen/lesson-akhirah-path-runway-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-akhirah-path-runway-v1.jpg",
+          "audio": {},
+          "masterAudio": {
+            "status": "pending",
+            "source": "masterStoryText",
+            "requiresExactTextMatch": true
+          }
         }
       ]
     }
