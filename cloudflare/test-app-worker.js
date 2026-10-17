@@ -491,6 +491,14 @@ async function finalizeDarTestHomeV1193(asset) {
     html += '<link rel="stylesheet" id="darHeroBackgroundAuthorityV3" href="/test/assets/hero-background-authority.css?v=hero-bg-v7">';
   }
 
+  // DAR_FRAUEN_HERO_DOM_RUNTIME_V1392: refresh the EXISTING women renderer
+  // Use the existing script only; do not duplicate DOM event listeners.
+  html = html.replace(/(\\/test\\/assets\\/frauen\\/frauen-fiqh\\.js)(?:\\?v=[^"\'<\\s]*)?/g,
+    "  if (!html.includes('id="darHeroBackgroundAuthorityV3"')) {
+    html += '<link rel="stylesheet" id="darHeroBackgroundAuthorityV3" href="/test/assets/hero-background-authority.css?v=hero-bg-v7">';
+  }
+?v=frauen-hero-dom-v1392");
+
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");
