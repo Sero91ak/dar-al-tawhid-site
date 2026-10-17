@@ -461,6 +461,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Das merken wir uns: Allah ordnet das Fasten des Ramaḍān an.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/15a0ac820f22d6c2ba9d5f44fcc8923a4e9077b8.mp3",
+      "sha256": "8d1a61c4af01b73a4a06daca3e9c5293d4e3cae577af1bba3b40f097e1302c5a",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Was tun wir, bevor wir ein fremdes Haus betreten? Antwort 1: Erlaubnis einholen und grüßen. Antwort 2: Einfach hineingehen. Antwort 3: Nur laut rufen und eintreten. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ba139108b202a0f2915d91cd820a8d4e91569871.mp3",
       "sha256": "0e75395c53ca312d8e8d4df29b723d02eef1a6687e0a423d75fb90d14bbc18fa",
@@ -5665,10 +5676,10 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/86012459c4bcd62787770eaeafe89964.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah ordnet das Fasten des Ramaḍān an."
-          ]
+          "available": true,
+          "textSha256": "cfbd28a2db72f778261775591501a5053785367fb47279da66869f1b751421b2",
+          "mp3Sha256": "8d1a61c4af01b73a4a06daca3e9c5293d4e3cae577af1bba3b40f097e1302c5a",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/15a0ac820f22d6c2ba9d5f44fcc8923a4e9077b8.mp3"
         }
       },
       "allFourPartsAvailable": false

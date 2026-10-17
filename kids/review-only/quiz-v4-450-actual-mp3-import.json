@@ -48,12 +48,12 @@
       "availableParts": {
         "correct": 150,
         "retry": 150,
-        "explanation": 10,
+        "explanation": 11,
         "question": 2
       },
       "missingParts": {
         "question": 148,
-        "explanation": 140
+        "explanation": 139
       }
     }
   },
@@ -1792,11 +1792,22 @@
           "audioListeningApproved": false,
           "qaApproval": "pending-human-auditory-review",
           "reviewOnly": true
+        },
+        "explanation": {
+          "spokenTextSha256": "cfbd28a2db72f778261775591501a5053785367fb47279da66869f1b751421b2",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/15a0ac820f22d6c2ba9d5f44fcc8923a4e9077b8.mp3",
+          "sha256": "8d1a61c4af01b73a4a06daca3e9c5293d4e3cae577af1bba3b40f097e1302c5a",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 53613,
+          "durationSeconds": 4.44,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
         }
       },
       "missing": {
-        "question": "unavailable-original-v4-mp3",
-        "explanation": "unavailable-original-v4-mp3"
+        "question": "unavailable-original-v4-mp3"
       },
       "fourPartTechnicallyReady": false,
       "humanListeningApproved": false,
