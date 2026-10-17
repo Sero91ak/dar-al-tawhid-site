@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-17T14:56:11Z",
+  "timestamp": "2026-10-17T14:59:09Z",
   "trigger": "push",
   "finishedDeployConclusion": null,
   "finishedDeployRun": null,
@@ -24,6 +24,11 @@
     "versionJsonReadable": true,
     "trilingualWordLearningReady": true,
     "parentsDashboard": {
+      "expectedSWRef": null,
+      "observedSWRefs": [
+        "/kids/sw.js?v=1444"
+      ],
+      "hasServiceWorkerRegisterCall": true,
       "htmlReferencesNewDashboard": true,
       "htmlReferencesNewStyles": true,
       "htmlRegistersNewSW": false,
