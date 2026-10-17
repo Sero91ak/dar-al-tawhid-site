@@ -6,8 +6,9 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `af656c3d13a043cd4286c0e1d0c18ef90f8de1bc`
+- Commit beim Erstellen dieses Berichts: `dde26b2652ef894455841a80e6c9c2b48f07982b`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
+- WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **276 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1044 Frage-/Lob-/Retry-/Erklärungsteile**.
 - Technisch vierteilig vollständig: **72/450**, noch unvollständig: **378/450**.
 - Letzter V4-Kostenaudit: **1392 neue Sprachfragmente** = **65057 Unicode-Zeichen**; **0 neue Lob-/Retry-Fragmente**, **0 neue V4-Texte für 4–6 Jahre**.
@@ -31,6 +32,8 @@ Die neun historischen `eleven_v4`-Originale existieren als ElevenLabs-Flow-Asset
 Generation-IDs: `1UAwmEQ77D4BmA9DttHZ, 2xy9ZLej1wPTrnvAr9p7, AToalNGbxiRe1zfOnDG3, DX5z8FWaCS4FDx3KrloO, FGX65uXKWBnjULDxg3X1, GvXeGQ9Kr1lVy7LEAv5T, KIgCxJO3RDxhsIFJSYUB, UUmC2fDiXaV5W1IQSumA, aoKJuahenrKHfUE5OD9j`.
 
 Original-Flow: https://elevenlabs.io/app/flows/n2ovmGko2iTlNWTAEqHk
+Alle neun vorhandenen Audioelemente sind im Original-Flow eindeutigen Generation-IDs zugeordnet. Exakte Originaldateinamen und sichere Wiederherstellung: `kids/review-only/QUIZ-V4-LETZTE9-ORIGINALE-EXPORT.md`.
+Frühere GitHub-Backup-Archive bereits gescannt: **48** echte ZIP-Archive, darunter **0** neu wiederhergestellte Generationen. Das ist eine begrenzte, NICHT vollständige Bestandsprüfung. Die erweiterte Suche berücksichtigt zusätzliche Archive/Dateinamen und braucht einen neuen belegten Actions-Lauf.
 
 ## Zusätzliche kostenfreie Suche in historischen GitHub-Audioarchiven
 
@@ -72,6 +75,11 @@ Die beiden bestehenden, ausdrücklich manuell freizugebenden V4-Produktionsablä
 
 Zero-Credit-Sicherheitstest: `kids/tools/test_quiz_v4_paid_postimport_workflows.py`; CI: `.github/workflows/kids-v4-paid-postimport-regression.yml`.
 Für die 150 jüngsten Fragen wurde die kostenpflichtige Kampagne repariert: Fehlen keine neuen Texte, beendet sie sich vor Guthabenprüfung und vor jedem ElevenLabs-POST. Stattdessen sind die neun zuvor bezahlten Originale wiederherzustellen.
+
+## ZIP-Importblocker behoben – echter Quellbestand weiterhin unverändert
+
+Im GitHub-Workflow `.github/workflows/kids-v4-prepaid-flow-restore.yml` sind zwei konkrete Fehler beseitigt: Der synthetische MP3-Regressions-Test gleicht die tatsächliche Kennzeichnung importierter Originale ab, ohne die Testdatei als echte bezahlte Sprachaufnahme zu bezeichnen; ein fehlerhaft eingerücktes Shell-Heredoc wurde durch das Prüfskript `kids/tools/assert_quiz_v4_prepaid_postimport.py` ersetzt. Zusätzlich prüft der Test die Shell-Syntax über `bash -n`. GitHub-Actions-Importtest #39017154136: erfolgreich.
+Es wurden durch den Test KEINE neuen Original-MP3s importiert; die fehlenden 9 historischen Dateien sind über bestehende GET-Routen bislang mit HTTP 402 (`paid_plan_required`) bzw. HTTP 400 blockiert. Der Flow enthält ihre Generation-IDs, jedoch keine herunterladbare MP3-URL. Nur echten MP3-Export importieren, niemals synthetische Testaufnahmen übernehmen.
 
 ## Kostenfreie Wiederherstellung der neun historischen V4-Originale – drei Wege
 
