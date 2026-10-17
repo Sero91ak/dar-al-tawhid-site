@@ -1,0 +1,30 @@
+name: Kids Master Text v2 Guard
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "kids/data/deen-lessons.json"
+      - "kids/data/deen-curriculum-v1.json"
+      - "kids/data/salaf-library-v1.json"
+      - "kids/data/stories-authentic.json"
+      - "scripts/kids-master-text-standard-v2-check.js"
+  push:
+    branches: [main]
+    paths:
+      - "kids/data/deen-lessons.json"
+      - "kids/data/deen-curriculum-v1.json"
+      - "kids/data/salaf-library-v1.json"
+      - "kids/data/stories-authentic.json"
+      - "scripts/kids-master-text-standard-v2-check.js"
+permissions:
+  contents: read
+jobs:
+  master-text-v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Master greeting, closing and age-parity check
+        run: node scripts/kids-master-text-standard-v2-check.js
