@@ -657,11 +657,12 @@ html[data-theme] body.is-settings-route #appView.view > .view-head.settings-page
   -webkit-text-fill-color:#f3eee3!important;
   text-shadow:0 1px 6px rgba(0,0,0,.75)!important;
 }
-/* One viewport-based safe area, not the old 172px blank trailing scroll area. */
+/* Bottom navigation reserves its own height and safe area at body level.
+   Keep only a small visual end gap; do not stack another 104px + safe-area. */
 html[data-theme] body.is-settings-route #appView.view > .dsh-shell,
 html[data-theme] body.is-settings-route #appView .dsh-shell {
   min-height:0!important;
-  padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;
+  padding-bottom:16px!important;
   scroll-margin-top:0!important;
 }
 html[data-theme] body.is-settings-route #appView .dsh-note {
