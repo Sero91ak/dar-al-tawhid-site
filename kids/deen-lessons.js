@@ -42,7 +42,7 @@ function sourceHtml(item){
 }
 function groupFor(id){return groups.find(x=>x.id===id)||null}
 function groupLessons(id){const g=groupFor(id);return g?g.lessons.map(x=>allLessons.find(i=>i.id===x.id)||x):[]}
-function isReady(lesson){return !!(lesson&&String(lesson.masterStoryText||"").trim()&&Array.isArray(lesson.sourceRefs)&&lesson.sourceRefs.length)}
+function isReady(lesson){return !!(lesson&&lesson.status!=="planned"&&String(lesson.masterStoryText||"").trim()&&Array.isArray(lesson.sourceRefs)&&lesson.sourceRefs.length)}
 function groupDone(id){const all=groupLessons(id),ready=all.filter(isReady);return all.length===5&&ready.length===all.length&&ready.every(x=>done(x.id))}
 function updateHeading(){
   const g=groupFor(selectedCategory);
@@ -223,7 +223,7 @@ function openStory(id){
 }
 function closeStory(){
   const id=active?.id;followReader?.close?.();stopAudio();$("#dlModal")?.classList.remove("open");unlockLibrary();active=null;
-  if(id)setTimeout(()=>document.querySelector("[data-dl-lesson=\""+CSS.escape(id)+"\"]")?.focus(),0);
+  if(id)setTimeout(()=>Array.from(document.querySelectorAll("[data-dl-lesson]")).find(x=>x.dataset.dlLesson===id)?.focus(),0);
 }
 function renderActive(){
   if(!active)return;
@@ -274,11 +274,20 @@ async function init(){
         }));
         allLessons=groups.flatMap(g=>g.lessons.map((lesson,index)=>{
           const original=lookup.get(lesson.id),parent=lookup.get(g.id)||{};
+          // Never inherit a different lesson's master script, timings or progress metadata.
+          const master=String(lesson.masterStoryText||original?.masterStoryText||"").trim();
+          const audioInfo=(original&&original.audio)||lesson.audio||{};
           return {...parent,...original,...lesson,displayOrder:index+1,
-            cover:lesson.cover||parent.cover,hero:lesson.hero||parent.hero,
-            masterStoryText:lesson.masterStoryText||original?.masterStoryText||"",
+            cover:lesson.cover||original?.cover||parent.cover,
+            hero:lesson.hero||original?.hero||parent.hero,
+            masterStoryText:master,
+            scripts:master?{"4-5":master,"6-8":master,"9-10":master}:{},
+            wordCount:master?(master.match(/\\S+/g)||[]).length:0,
+            estimatedNarrationSec:master?Math.round((master.match(/\\S+/g)||[]).length/2.3):0,
             sourceRefs:lesson.sourceRefs||original?.sourceRefs||[],
-            audio:lesson.audio||original?.audio||{},
+            sourceLinks:lesson.sourceLinks||[],
+            audio:audioInfo,
+            voiceProduction:master?{status:"text-ready",singleMasterAudio:true,masterAgeRange:"4-10",ttsSource:"masterStoryText"}:{status:"planned"},
             categoryId:g.id};
         }));
       }
