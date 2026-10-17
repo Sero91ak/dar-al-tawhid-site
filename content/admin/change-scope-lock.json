@@ -7895,6 +7895,17 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-24T23:59:00.000Z"
+    },
+    {
+      "id": "test-hadith-sharh-worker-asset-loader-20261017",
+      "at": "2026-10-17T08:15:00+02:00",
+      "approvedBy": "user-reported-test-sharh-change-not-visible-20261017",
+      "reason": "Only adult /test route Cloudflare worker HTML asset injection: fix invalid escaped closing script and trailing-after-html loading of the explicitly requested Hadith detail/Sharh reader; inject valid versioned CSS into head and final Hadith renderer JS inside body. No visitor app, Kids, push, OneSignal, native Swift or canonical hadith content edits.",
+      "paths": [
+        "cloudflare/test-app-worker.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-24T23:59:00.000Z"
     }
   ],
   "enabled": true

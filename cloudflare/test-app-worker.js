@@ -322,12 +322,16 @@ async function finalizeDarTestHomeV1193(asset) {
     else html += hadithStructure;
   }
 
-  // DAR_HADITH_REFRAME_FINAL_V1299
-  if (!html.includes('id="darHadithReframeFinalV1299"')) {
-    const hadithFinal = '<style id="darHadithReframeFinalV1299">@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-reader-fix-v1303");</style>' +
-      '<script id="darHadithReframeScriptV1299" src="/test/assets/hadith-library-reframe-v1299.js?v=1303"><\/script>';
-    if (html.includes("</html>")) html = html.replace("</html>", hadithFinal + "</html>");
-    else html += hadithFinal;
+  // DAR_HADITH_REFRAME_FINAL_V1307 — Adult Dar Test only.
+  // test/index.html has an early closing </body> followed by many more inline
+  // scripts and styles. The override must load after ALL of them, immediately
+  // before the final </html>, and its closing </script> must be valid HTML.
+  if (!html.includes('id="darHadithReframeScriptV1307"')) {
+    const hadithCss = '<link rel="stylesheet" id="darHadithReframeFinalV1307" href="/test/assets/ilm-hadith-v1243.css?v=hadith-sharh-v1307">';
+    const hadithJs = '<script id="darHadithReframeScriptV1307" src="/test/assets/hadith-library-reframe-v1299.js?v=hadith-sharh-v1307"></script>';
+    const hadithAssets = hadithCss + hadithJs;
+    if (html.includes("</html>")) html = html.replace("</html>", hadithAssets + "</html>");
+    else html += hadithAssets;
   }
   // DAR_ADAPTIVE_FOLD_V1326
   // Force every pre-existing adaptive/fold reference to the same v1326 bytes.
