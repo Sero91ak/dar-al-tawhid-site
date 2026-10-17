@@ -186,18 +186,22 @@
         "kids-quiz-389"
       ],
       "sourceAudioPart": "question",
-      "status": "GENERATION_SUBMITTED_DO_NOT_RETRY",
+      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "flowId": "1q8pGIR0nRKIekoSCt0j",
-      "generationId": null,
+      "generationId": "WbVlLuSlX7OapRxAZ3H6",
       "estimatedCreditsNotInvoice": 29.071982378854624,
-      "actualProviderCredits": null,
+      "actualProviderCredits": 29.071982378854624,
       "humanListeningApproved": false,
       "publicReleaseAllowed": false,
       "nodeId": "eXypUvXtVaeGdmrOxGB0",
-      "sessionId": "gyUaL7tiDO0cqzvgdEZG"
+      "sessionId": "gyUaL7tiDO0cqzvgdEZG",
+      "providerGenerationDurationSeconds": 2.32,
+      "providerStatus": "completed",
+      "providerMediaStoredInElevenLabs": true,
+      "originalMP3ImportedIntoGithub": false
     },
     {
       "sourceText": "Was sollen Menschen tun, wenn sie etwas nicht wissen?",
@@ -206,18 +210,22 @@
         "kids-quiz-389"
       ],
       "sourceAudioPart": "question",
-      "status": "GENERATION_SUBMITTED_DO_NOT_RETRY",
+      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "flowId": "1q8pGIR0nRKIekoSCt0j",
-      "generationId": null,
+      "generationId": "JlulX3gxfopy5QY3D0yp",
       "estimatedCreditsNotInvoice": 51.36050220264317,
-      "actualProviderCredits": null,
+      "actualProviderCredits": 51.36050220264317,
       "humanListeningApproved": false,
       "publicReleaseAllowed": false,
       "nodeId": "5aajaSm1xzTRlojk0OK4",
-      "sessionId": "0L5Q3iFXNfqISyeUNgbd"
+      "sessionId": "0L5Q3iFXNfqISyeUNgbd",
+      "providerGenerationDurationSeconds": 3.04,
+      "providerStatus": "completed",
+      "providerMediaStoredInElevenLabs": true,
+      "originalMP3ImportedIntoGithub": false
     },
     {
       "sourceText": "Nur vor Freunden.",
@@ -226,18 +234,22 @@
         "kids-quiz-080"
       ],
       "sourceAudioPart": "question",
-      "status": "GENERATION_SUBMITTED_DO_NOT_RETRY",
+      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "flowId": "1q8pGIR0nRKIekoSCt0j",
-      "generationId": null,
+      "generationId": "XLIMpsjTtv0Fp1dnDwGk",
       "estimatedCreditsNotInvoice": 16.47412334801762,
-      "actualProviderCredits": null,
+      "actualProviderCredits": 16.47412334801762,
       "humanListeningApproved": false,
       "publicReleaseAllowed": false,
       "nodeId": "nTqIz8HQNqsGj4gzeXVX",
-      "sessionId": "KODUeKUKPNSV1386cqEv"
+      "sessionId": "KODUeKUKPNSV1386cqEv",
+      "providerGenerationDurationSeconds": 1.28,
+      "providerStatus": "completed",
+      "providerMediaStoredInElevenLabs": true,
+      "originalMP3ImportedIntoGithub": false
     }
   ]
 }
