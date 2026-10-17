@@ -1,0 +1,42 @@
+/* KIDS CREATOR STAGING ONLY — home shortcut to independent Quran learning.
+   No Academy, workbook, footer navigation or existing lesson runtime is changed. */
+.kids-quran-learning-entry{
+  display:grid;grid-template-columns:minmax(100px,38%) minmax(0,1fr) 34px;align-items:stretch;
+  isolation:isolate;position:relative;overflow:hidden;min-height:146px;
+  margin:14px 0 22px;border:1px solid rgba(236,207,146,.35);border-radius:23px;
+  background:#0e3446;box-shadow:0 10px 30px rgba(3,17,30,.18);
+  color:#fff2d6;text-decoration:none;transition:transform .16s ease,border-color .16s ease;
+}
+.kids-quran-learning-entry:active{transform:scale(.989)}
+.kids-quran-learning-entry:focus-visible{outline:3px solid #f0c98d;outline-offset:3px}
+.kids-quran-learning-art{min-width:0;min-height:100%;background:
+  linear-gradient(90deg,rgba(7,26,43,.03),rgba(7,26,43,.55)),
+  url("/kids/assets/kids-art/quran-surah-banner-v11-clean.png") center/cover no-repeat}
+.kids-quran-learning-copy{align-self:center;display:flex;flex-direction:column;gap:7px;padding:17px 7px 17px 14px;min-width:0}
+.kids-quran-learning-copy small{font-size:11px;letter-spacing:.075em;color:#e7c889;font-weight:850}
+.kids-quran-learning-copy strong{font-family:Georgia,serif;font-size:clamp(20px,3vw,30px);line-height:1.15}
+.kids-quran-learning-copy>span{font-size:clamp(12px,1.6vw,15px);line-height:1.55;color:#e1e9e6}
+.kids-quran-learning-arrow{align-self:center;justify-self:center;font-size:24px;color:#e7c889}
+.app[data-gender="girl"] .kids-quran-learning-entry,
+html[data-kids-boot-gender="girl"] .kids-quran-learning-entry{
+  background:#513749;border-color:rgba(249,197,203,.47);color:#fff0ec;
+}
+.app[data-gender="girl"] .kids-quran-learning-art,
+html[data-kids-boot-gender="girl"] .kids-quran-learning-art{
+  background:linear-gradient(90deg,rgba(61,27,55,.06),rgba(61,27,55,.63)),
+  url("/kids/assets/kids-home-girls-v1330/mosque-rose-night.webp") center/cover no-repeat
+}
+.app[data-gender="girl"] .kids-quran-learning-copy small,
+.app[data-gender="girl"] .kids-quran-learning-arrow,
+html[data-kids-boot-gender="girl"] .kids-quran-learning-copy small,
+html[data-kids-boot-gender="girl"] .kids-quran-learning-arrow{color:#f1c7ae}
+.app[data-gender="girl"] .kids-quran-learning-copy>span,
+html[data-kids-boot-gender="girl"] .kids-quran-learning-copy>span{color:#f8e3ee}
+@media(max-width:430px){
+  .kids-quran-learning-entry{grid-template-columns:34% minmax(0,1fr) 27px;min-height:135px}
+  .kids-quran-learning-copy{padding:13px 4px 13px 11px;gap:5px}
+  .kids-quran-learning-copy strong{font-size:21px}
+  .kids-quran-learning-copy small{font-size:10px;letter-spacing:.04em}
+  .kids-quran-learning-arrow{font-size:20px}
+}
+@media(prefers-reduced-motion:reduce){.kids-quran-learning-entry{transition:none}}
