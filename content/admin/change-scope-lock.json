@@ -7972,6 +7972,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "ikhlas-free-training-explicit-live-20261017",
+      "at": "2026-10-17T10:43:00+02:00",
+      "approvedBy": "user-explicit-create-free-ikhlas-training-and-push-live-20261017",
+      "reason": "User explicitly requested a free adult Ikhlas training about previously reviewed al-Fudayl statement and a global live publication including device push. Create standalone responsive interactive self-study, six new adult feed slides, and index; reuse original Q6 without duplicates. No Kids, admin UI, protected OneSignal implementation, prayer, native Swift, Apple TV or site shell modifications.",
+      "paths": [
+        "lernen/ikhlas/index.html",
+        "content/posts/ikhlas-freies-training-absicht-sunnah-20261017-slides.md",
+        "content/posts/posts-index.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-24T23:59:00.000Z"
     }
   ],
   "enabled": true
