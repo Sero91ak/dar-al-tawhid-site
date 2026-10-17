@@ -85,9 +85,13 @@ styles:[...document.querySelectorAll('link[rel="stylesheet"]')].filter(x=>/fraue
        html=html.replace(/<link\b[^>]*\bhref=["']\/test\/assets\/frauen\/frauen-(?:fiqh|authority-v1292)\.css[^"']*["'][^>]*>/gi,"");
        html=html.replace(/<script\b[^>]*\bsrc=["']\/assets\/frauen\/frauen-fiqh\.js[^"']*["'][^>]*>\s*<\/script\s*>/gi,"");
        const newScript='<script defer src="/assets/frauen/frauen-fiqh.js?v=visitor-frauen-scroll-v1396"></script>';
-       const adapter=/(<script\b[^>]*\bsrc=["']\/assets\/frauen\/frauen-live-adapter\.js[^"']*["'][^>]*>\s*<\/script\s*>)/i;
-       if(!adapter.test(html))throw Error("Visitor production adapter script tag missing");
-       html=html.replace(adapter,newScript+"$1");
+       const adapterAt=html.indexOf("/assets/frauen/frauen-live-adapter.js");
+       const scriptAt=adapterAt>=0?html.lastIndexOf("<script",adapterAt):-1;
+       console.log("VISITOR_ADAPTER_HTML",JSON.stringify({
+         present:adapterAt>=0,scriptAt,legacyRemoved:intercepted.removedLegacy
+       }));
+       if(scriptAt<0)throw Error("Native visitor Frauen adapter tag not detectable; cannot verify one-renderer fix");
+       html=html.slice(0,scriptAt)+newScript+html.slice(scriptAt);
        html=html.replace("/assets/frauen/frauen-authority-v1292.css?v=frauen-hero-v1390",
                          "/assets/frauen/frauen-authority-v1292.css?v=visitor-frauen-scroll-v1396");
        intercepted.document++;
