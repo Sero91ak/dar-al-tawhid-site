@@ -79,8 +79,8 @@ export default {
         // Best-effort iOS Add-to-Home-Screen static launch image (browser-controlled).
         + '<link rel="apple-touch-startup-image" href="' + posterURL + '" media="(orientation: portrait)">'
         // Styles are non-blocking; critical visual styles are already inline.
-        + '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-7" media="print" onload="this.media=' + "'all'" + '">'
-        + '<script defer src="/kids/splash-boot-v1.js?v=20261017-7"></script>';
+        + '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-8" media="print" onload="this.media=' + "'all'" + '">'
+        + '<script defer src="/kids/splash-boot-v1.js?v=20261017-8"></script>';
       const boot = '<div id="kids-test-boot" role="region" aria-label="TAWḤĪD KIDS lädt">'
         + '<div class="ktb-poster"><div class="ktb-loading">'
         + '<div class="ktb-progress-labels"><span class="ktb-edge">0%</span>'
