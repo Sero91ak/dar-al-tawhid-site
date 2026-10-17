@@ -91,10 +91,22 @@ for (const marker of [
 const settingsFnStart = testHtml.indexOf("function renderSettings(){");
 const settingsFnEnd = settingsFnStart >= 0 ? testHtml.indexOf("function renderJummah(){", settingsFnStart) : -1;
 const settingsFn = settingsFnStart >= 0 && settingsFnEnd > settingsFnStart ? testHtml.slice(settingsFnStart, settingsFnEnd) : "";
-if (!settingsFn || settingsFn.indexOf('setHeader("Einstellungen"') < 0 || settingsFn.indexOf("renderDarSetupHubHtml()") < 0 || settingsFn.indexOf('setHeader("Einstellungen"') > settingsFn.indexOf("renderDarSetupHubHtml()")) {
-  fail("test/index.html: Settings-Hero muss vor Setup-Hub stehen");
+// V1383: Settings was intentionally rebuilt as a routed overview/detail hub.
+// Guard both real headers and their corresponding sections. The old setup
+// renderDarSetupHubHtml() is no longer called in renderSettings().
+const settingsOverviewHeader = settingsFn.indexOf('const overviewHeader=()=>setHeader("Einstellungen"');
+const settingsOverviewReturn = settingsFn.indexOf('return `${overviewHeader()}');
+const settingsOverviewPage = settingsFn.indexOf('class="dsh-shell dsh-home"');
+const settingsDetailHeader = settingsFn.indexOf('return `${setHeader(pages[page][0]');
+const settingsDetailPage = settingsFn.indexOf('class="dsh-shell dsh-detail"');
+if (!settingsFn || settingsOverviewHeader < 0 || settingsOverviewReturn < 0 ||
+    settingsOverviewPage < 0 || settingsOverviewReturn > settingsOverviewPage ||
+    settingsDetailHeader < 0 || settingsDetailPage < 0 ||
+    settingsDetailHeader > settingsDetailPage ||
+    !settingsFn.includes('renderNotificationCenter({embedded:true})')) {
+  fail("test/index.html: Settings-Übersicht/Detail-Hero muss vor den jeweiligen Inhalten stehen");
 } else {
-  ok("test/index.html: Settings-Hero steht vor Setup-Hub");
+  ok("test/index.html: Settings-Übersicht und Detailseiten haben zuerst ihren Hero");
 }
 
 if (testHtml.includes('location.href="/widgets/?from=test"')) {
