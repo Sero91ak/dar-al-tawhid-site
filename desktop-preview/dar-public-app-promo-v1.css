@@ -1,0 +1,20 @@
+/* DAR PUBLIC CROSSPROMO V1 - exact approved artwork, public website only. */
+#pageRoot .dar-public-apps-promo{box-sizing:border-box;display:block;min-width:0;width:min(100%,950px);max-width:100%;margin:clamp(28px,4vw,52px) auto clamp(28px,5vw,50px);padding:clamp(16px,2.2vw,24px) 0 0;border-top:1px solid var(--line,rgba(154,131,87,.3));color:var(--text,#25251f);overflow:visible}
+#pageRoot .dar-public-apps-promo *{box-sizing:border-box}
+#pageRoot .dar-public-apps-promo .dar-promo-head{margin:0 0 clamp(14px,2.1vw,22px);max-width:100%}
+#pageRoot .dar-public-apps-promo .dar-promo-kicker{display:block;color:var(--gold,#a37b43);font-family:inherit;font-size:clamp(10px,1.7vw,12px);font-weight:800;line-height:1.4;letter-spacing:.17em;margin-bottom:7px}
+#pageRoot .dar-public-apps-promo .dar-promo-head h2{font:400 clamp(26px,5.6vw,43px)/1.15 Georgia,"Times New Roman",serif;letter-spacing:-.025em;margin:0 0 7px;color:inherit}
+#pageRoot .dar-public-apps-promo .dar-promo-head p{font-size:clamp(13px,2.2vw,16px);line-height:1.55;margin:0;color:var(--muted,#696760)}
+#pageRoot .dar-public-apps-promo .dar-promo-cards{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(9px,2vw,16px);width:100%;min-width:0}
+#pageRoot .dar-public-apps-promo .dar-promo-card{position:relative;isolation:isolate;min-width:0;width:100%;padding:0;margin:0;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.13);border:1px solid rgba(192,152,94,.25);border-radius:clamp(16px,3.3vw,34px);background:#20130f}
+#pageRoot .dar-public-apps-promo .dar-promo-tv{aspect-ratio:808/376}
+#pageRoot .dar-public-apps-promo .dar-promo-kids{aspect-ratio:808/393;background:#15192b}
+#pageRoot .dar-public-apps-promo .dar-promo-card>img{position:absolute!important;z-index:1;left:-3.465347%!important;top:-128.191489%!important;width:106.930693%!important;height:auto!important;max-width:none!important;max-height:none!important;min-width:0!important;object-fit:fill!important;object-position:center!important;border:0!important;border-radius:0!important;pointer-events:none!important;user-select:none!important;-webkit-user-drag:none!important}
+#pageRoot .dar-public-apps-promo .dar-promo-kids>img{top:-222.137405%!important}
+#pageRoot .dar-public-apps-promo .dar-promo-overlay-link{display:block;position:absolute;z-index:2;left:57.8%;top:73.8%;width:40.4%;height:19%;border:0;border-radius:clamp(7px,1.6vw,24px);background:transparent;text-decoration:none;-webkit-tap-highlight-color:rgba(248,219,162,.2);touch-action:manipulation}
+#pageRoot .dar-public-apps-promo .dar-promo-overlay-link:focus-visible{outline:3px solid #ffe6a7;outline-offset:1px;background:rgba(255,234,183,.09)}
+#pageRoot .dar-public-apps-promo .dar-promo-locked{position:absolute;z-index:2;left:57.8%;top:68.6%;width:40.4%;height:19.3%;pointer-events:none;cursor:not-allowed;opacity:0}
+#pageRoot .dar-public-apps-promo .dar-promo-screenreader{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;border:0!important;white-space:nowrap!important;clip:rect(0 0 0 0)!important;clip-path:inset(50%)!important}
+#pageRoot .dar-public-apps-promo .dar-promo-disclaimer{margin:11px 3px 0;color:var(--muted,#696760);font-size:clamp(10px,1.6vw,12px);line-height:1.45}
+@media(max-width:600px){#pageRoot .dar-public-apps-promo{width:100%;margin-top:30px}#pageRoot .dar-public-apps-promo .dar-promo-card{border-radius:17px}}
+@media(prefers-reduced-motion:reduce){#pageRoot .dar-public-apps-promo .dar-promo-card,#pageRoot .dar-public-apps-promo .dar-promo-overlay-link{transition:none!important}}

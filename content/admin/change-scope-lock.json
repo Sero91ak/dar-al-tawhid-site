@@ -155,6 +155,18 @@
   ],
   "unlockedScopes": [
     {
+      "id": "dar-public-web-mehr-apple-tv-kids-crosspromo-20261017",
+      "at": "2026-10-17T14:00:00+02:00",
+      "approvedBy": "user-explicit-fix-missing-visitor-website-and-webapp-apps-crosspromo-20261017",
+      "reason": "Expose the already released Apple TV/Kids cross-promotion on the PUBLIC WEBSITE separate Mehr route, including Android browser and iOS Safari. No app core, account, navigation, push, native shell, Kids runtime or service workers changed.",
+      "paths": [
+        "desktop-preview/index.html",
+        "desktop-preview/dar-public-app-promo-v1.js",
+        "desktop-preview/dar-public-app-promo-v1.css"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-visitor-post-text-contrast-20261017",
       "at": "2026-10-17T13:18:00+02:00",
       "approvedBy": "user-explicit-immediate-fix-all-adult-posts-appearance-contrast-20261017",
