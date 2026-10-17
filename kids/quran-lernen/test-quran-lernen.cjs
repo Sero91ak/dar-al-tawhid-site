@@ -36,7 +36,9 @@ for(const item of catalog.items){
   assert.ok(!seen.has(v.id),"Duplicate ayah "+item.surah+":"+v.id);seen.add(v.id);
   assert.equal(v.ar,original.ar,"Quran Arabic text changed "+item.surah+":"+v.id);
   assert.equal(v.de,original.de,"Canonical German translation changed "+item.surah+":"+v.id);
-  assert.equal(v.tr,original.tr_academic||original.tr_readable,"Transliteration changed "+item.surah+":"+v.id);
+  if(item.surah===105&&v.id===3)assert.equal(v.tr,"wa-arsala ʿalayhim ṭayran abābīla","Corrected al-Fīl transliteration must not regress to corrupted source markup");
+  else assert.equal(v.tr,original.tr_academic||original.tr_readable,"Transliteration changed "+item.surah+":"+v.id);
+  assert.ok(!/[<>]/.test(v.tr),"Markup in display transliteration "+item.surah+":"+v.id);
   assert.ok(Array.isArray(v.words)&&v.words.length,"No word tiles "+item.surah+":"+v.id);
   assert.equal(v.words.map(w=>w.ar).join(" "),v.ar.trim(),"Arabic words changed "+item.surah+":"+v.id);
   for(const w of v.words){
