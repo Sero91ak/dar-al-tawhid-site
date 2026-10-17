@@ -26,6 +26,27 @@ assert.match(js,/document\.documentElement\.classList\.remove\("kids-test-bootin
 assert.doesNotMatch(worker,/78%|intro-v74\.mp4/);
 assert.doesNotMatch(css,/hero-home\.png/);
 assert.doesNotMatch(js,/intro-v74\.mp4/);
+const nativeView=read("ios/DarAlTawhidKids/DarAlTawhidKids/KidsNativeIntro.swift");
+const nativeWeb=read("ios/DarAlTawhidKids/DarAlTawhidKids/KidsWebAppView.swift");
+const creatorInfo=read("ios/DarAlTawhidKids/DarAlTawhidKids/Info-Creator.plist");
+const visitorInfo=read("ios/DarAlTawhidKids/DarAlTawhidKids/Info.plist");
+const pbx=read("ios/DarAlTawhidKids/DarAlTawhidKids.xcodeproj/project.pbxproj");
+const imageSet=JSON.parse(read("ios/DarAlTawhidKids/DarAlTawhidKids/Assets.xcassets/KidsTestLaunchPoster.imageset/Contents.json"));
+assert.match(css,/opacity \.82s/,"smooth fade remains enabled");
+assert.match(css,/translate3d\(0,clamp\(7px/,"poster avoids high visual alignment");
+assert.match(js,/revealNativePoster/,"native must reveal only after illustrated first paint");
+assert.match(js,/darKidsCreatorSplashReady/);
+assert.match(js,/setTimeout\(function\(\)\{if\(root\)root\.classList\.add\("kids-test-boot-fade"\)/);
+assert.match(nativeView,/Image\("KidsTestLaunchPoster"\)/);
+assert.match(nativeView,/\.onReceive\(NotificationCenter\.default\.publisher\(for: Notification\.Name\("DarKidsCreatorSplashReady"\)\)\)/);
+assert.match(nativeWeb,/configuration\.userContentController\.add\(context\.coordinator, name: "darKidsCreatorSplashReady"\)/);
+assert.match(creatorInfo,/<string>KidsTestLaunchPoster<\/string>/);
+assert.doesNotMatch(visitorInfo,/KidsTestLaunchPoster/,"visitor iOS launch remains unchanged");
+assert.equal(pbx.split("INFOPLIST_FILE = DarAlTawhidKids/Info-Creator.plist;").length-1,2,"only two creator build configs use new plist");
+assert.equal(pbx.split("INFOPLIST_FILE = DarAlTawhidKids/Info.plist;").length-1,2,"visitor configs unchanged");
+assert.equal(imageSet.images[0].filename,"kids-test-launch.jpg");
+assert.ok(fs.statSync(path.join(ROOT,"ios/DarAlTawhidKids/DarAlTawhidKids/Assets.xcassets/KidsTestLaunchPoster.imageset/kids-test-launch.jpg")).size>100000);
+
 const dispatch=new vm.Script(worker.replace("export default {","const worker = {")+"\nworker;");
 const handler=dispatch.runInNewContext({URL,Headers,Response});
 const html="<!doctype html><html><head></head><body><main id=\"view-today\">STARTSEITE</main></body></html>";
