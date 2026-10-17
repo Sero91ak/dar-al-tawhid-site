@@ -73,6 +73,16 @@ def main():
                 and stage1_report["paidSynthesisAuthorizedByAudit"] is False
                 and stage1_report["publicReleaseAllowed"] is False,
                 "first older V4 stage must remain an unpaid exact-original queue")
+    stage_source_path=ROOT/".github/reports/kids-v4-older-stage1-source-and-answer-audit.json"
+    stage_source=read(".github/reports/kids-v4-older-stage1-source-and-answer-audit.json") if stage_source_path.is_file() else None
+    if stage_source is not None:
+        require(stage_source["modelId"]==MODEL and stage_source["voiceId"]==VOICE
+                and stage_source["totalQuestions"]==20
+                and stage_source["exactNewSourceTexts"]==65
+                and stage_source["humanSourceApprovalGranted"] is False
+                and stage_source["humanPronunciationApprovalGranted"] is False
+                and stage_source["publicReleaseAllowed"] is False,
+                "source/answer audit cannot authorize recording or audio release")
     hearing_file=ROOT/"kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json"
     hearing=read("kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json") if hearing_file.is_file() else None
     if hearing is not None:
@@ -164,6 +174,9 @@ def main():
         "olderStage1NextExactOriginalCount":len(stage1_report["nextExactTextSha256"]) if stage1_report else None,
         "olderStage1NextEstimatedCredits":stage1_report["nextEstimatedCreditsNotProviderBill"] if stage1_report else None,
         "olderStage1CostForecastUnconfirmed":True,
+        "olderStage1InternalSourceAnswerAuditItems":stage_source["totalQuestions"] if stage_source else 0,
+        "olderStage1IndependentSourceEvidenceLocated":stage_source["independentExternalEvidenceLocatedFor"] if stage_source else 0,
+        "olderStage1HumanScholarlySourceApproval":False,
         "humanAudioApprovals":0,"publicEnabled":False,
         "newElevenLabsCreditsConsumedByThisReport":0,
         "recoveryFlowUrl":FLOW,
@@ -258,6 +271,13 @@ def main():
         "Der ausführbare, fortsetzbare Kostengenerator `kids/tools/generate_quiz_v4_older_stage1_exact.py` benutzt ausschließlich die 65 unveränderlichen Sprachtext-Prüfsummen dieser Stufe. `--audit` kostet 0 Credits; `--produce` erfordert zwei bestätigte Freigaben und begrenzt jede Ausführung auf höchstens zehn Original-MP3s und höchstens 850 prognostizierte Credits. Quelle der unveränderten Texte: `.github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json`.",
         "Manuelle Produktions-Pipeline: `.github/workflows/kids-v4-older-stage1-exact-paid.yml`. Kostenfreier CI-Vortest: `.github/workflows/kids-v4-older-stage1-exact-audit.yml`. Sie speichert Originale mit Ledger/Backups sowie die danach neu zusammengesetzten privaten Quiz-Hördateien. Kein Live-Deploy.",
         "Letzte gespeicherte 65er-Restzahl: **"+(str(details["olderStage1OriginalsStillMissing"]) if stage1_report else "noch nicht als Bericht erzeugt")+"**; nächste wartende Originale: **"+(str(details["olderStage1NextExactOriginalCount"]) if stage1_report else "nach kostenfreiem Audit")+"**; reine Kostenschätzung dafür: **"+(str(details["olderStage1NextEstimatedCredits"]) if stage1_report else "offen")+"** Credits. Keine neue MP3 als erzeugt behaupten, bevor das Ledger/MP3-Hash dies beweist.",
+        "",
+        "## Interne Quellen-/Antwortprüfung vor kostenpflichtiger V4-Aufnahme",
+        "",
+        "Interne Quelle-Antwort-Prüfung: `.github/reports/KIDS-V4-STAGE1-QUELLEN-UND-ANTWORTCHECK.md` und `.github/reports/kids-v4-older-stage1-source-and-answer-audit.json`. Nur im privaten GitHub-Review; keine Internet-Quellenlinks in der Kinder-App.",
+        "Automatisch überprüfte ursprüngliche 20 Frage-Antwort-Quellen-Zuordnungen: **"+str(details["olderStage1InternalSourceAnswerAuditItems"])+"**. Zusätzlich öffentlich lokalisierte passende Belegstellen für **"+str(details["olderStage1IndependentSourceEvidenceLocated"])+"** Fragen; übrige benötigen eine zusätzliche unabhängige Quellenkontrolle. Nicht mit menschlicher theologischer/fachlicher Abnahme verwechseln.",
+        "Präzisionshinweise besonders zu Qurʾān 16:43 (Kontext vs. pädagogische Anwendung), Qurʾān 5:6 (Waschen vs. Wischen) und Hadithnummern verschiedener Ausgaben beachten.",
+        "Nur nach wirklicher inhaltlicher und finanzieller Freigabe neue V4-Stimmenaufnahmen erzeugen, nie die Original-MP3s überschreiben.",
         "",
         "## Nächste verbindliche Schritte",
         "",
