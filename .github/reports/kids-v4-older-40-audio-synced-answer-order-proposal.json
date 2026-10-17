@@ -42,6 +42,49 @@
   "projectedExtraOriginalSpeechCharacters": 0,
   "proposedQuestionItems": [
     {
+      "questionId": "kids-quiz-045",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 1,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Im Ramaḍān",
+        "Im Muḥarram",
+        "Im Rabīʿ al-Awwal"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "86e704520fba5e3b85a2a4a0dd61e96ece477215cbe65d608f21e63002aed0f9",
+      "proposedQuestionAudioText": "In welchem Monat ist das verpflichtende Fasten? Antwort 1: Im Ramaḍān. Antwort 2: Im Muḥarram. Antwort 3: Im Rabīʿ al-Awwal. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "86e704520fba5e3b85a2a4a0dd61e96ece477215cbe65d608f21e63002aed0f9",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "In welchem Monat ist das verpflichtende Fasten?",
+        "Antwort 1:",
+        "Im Ramaḍān.",
+        "Antwort 2:",
+        "Im Muḥarram.",
+        "Antwort 3:",
+        "Im Rabīʿ al-Awwal.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 2:183–185",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
       "questionId": "kids-quiz-026",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
@@ -172,49 +215,6 @@
         240
       ],
       "originalSource": "Qurʾān 3:134",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-045",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Im Ramaḍān",
-        "Im Muḥarram",
-        "Im Rabīʿ al-Awwal"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
-        "a2",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "86e704520fba5e3b85a2a4a0dd61e96ece477215cbe65d608f21e63002aed0f9",
-      "proposedQuestionAudioText": "In welchem Monat ist das verpflichtende Fasten? Antwort 1: Im Ramaḍān. Antwort 2: Im Muḥarram. Antwort 3: Im Rabīʿ al-Awwal. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "86e704520fba5e3b85a2a4a0dd61e96ece477215cbe65d608f21e63002aed0f9",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "In welchem Monat ist das verpflichtende Fasten?",
-        "Antwort 1:",
-        "Im Ramaḍān.",
-        "Antwort 2:",
-        "Im Muḥarram.",
-        "Antwort 3:",
-        "Im Rabīʿ al-Awwal.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 2:183–185",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
