@@ -129,6 +129,9 @@ assert.ok(sw.includes('/kids/kids-girl-palette-authority-v1427.css?v=1428')&&
  sw.includes('url.pathname==="/kids/kids-girl-palette-authority-v1427.css"'),
  "Girl palette must be precached and network-first");
 
+/* Protect original lesson scroll structure and on-screen typing accessibility. */
+require("./tools/test-academy-writing-keyboard-v1438.cjs");
+
 /* Run the month-year roll-over and privacy regression in the standard Kids UI CI suite. */
 require("./tools/test-birth-month-auto-v1431.cjs");
 require("./tools/test-parents-dashboard-v1432.cjs");

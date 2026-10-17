@@ -9,6 +9,9 @@
 if(window.DARKidsAcademyPortalV1421)return;
 var modal=null,frame=null,trigger=null,ready=false,closingTimer=null,previousTab=null,resizeObserver=null,openToken=0;
 var GAP=8;
+// V1438: the previously approved full-height Academy remains unchanged
+// except while a child is explicitly typing with an on-screen keyboard.
+var academyTextInputFocused=false;
 function one(selector,root){return(root||document).querySelector(selector)}
 function dock(){return one(".app > .bottom-nav")||one(".bottom-nav")}
 function dockClearance(){
@@ -23,7 +26,12 @@ function measure(){
  // Never shorten the iframe itself, or the underlying Kids page leaks below it.
  var viewportHeight=window.innerHeight||document.documentElement.clientHeight||0;
  var clearance=dockClearance();
+ var visual=window.visualViewport;
+ var visibleHeight=visual&&Number(visual.height)>0?Number(visual.height):viewportHeight;
+ var keyboardVisible=academyTextInputFocused&&visibleHeight<viewportHeight-110;
+ // Preserve the approved full-screen expression for the design guard.
  modal.style.setProperty("--kids-academy-portal-height",Math.max(220,viewportHeight)+"px");
+ if(keyboardVisible)modal.style.setProperty("--kids-academy-portal-height",Math.max(220,Math.min(viewportHeight,visibleHeight))+"px");
  try{
    var root=frame&&frame.contentDocument&&frame.contentDocument.documentElement;
    if(root)root.style.setProperty("--kids-academy-dock-clearance",clearance+"px");
@@ -127,6 +135,7 @@ function open(event){
 function close(keepNewTab){
  if(!modal||modal.hidden)return;
  ++openToken;
+ academyTextInputFocused=false;
  try{frame.contentWindow.postMessage({type:"DAR_KIDS_ACADEMY_PAUSE_V1421"},location.origin)}catch(_){}
  modal.classList.remove("is-open");
  modal.style.pointerEvents="none";
@@ -160,6 +169,12 @@ function init(){
  },true);
  window.addEventListener("message",function(event){
    if(event.origin!==location.origin||!frame||event.source!==frame.contentWindow)return;
+   // Trust only our already origin-checked Academy iframe.
+   if(event.data&&event.data.type==="DAR_KIDS_ACADEMY_INPUT_V1438"){
+     academyTextInputFocused=event.data.focused===true;
+     measure();
+     return;
+   }
    if(event.data&&event.data.type==="DAR_KIDS_ACADEMY_CLOSE_V1421"){
      var goHome=event.data.goHome===true;
      close(goHome);
@@ -169,6 +184,7 @@ function init(){
  window.addEventListener("resize",measure,{passive:true});
  window.addEventListener("orientationchange",function(){requestAnimationFrame(measure)},{passive:true});
  window.visualViewport?.addEventListener("resize",measure,{passive:true});
+ window.visualViewport?.addEventListener("scroll",measure,{passive:true});
  document.addEventListener("keydown",function(event){
    if(event.key==="Escape"&&modal&&!modal.hidden){event.preventDefault();close(false)}
  });
