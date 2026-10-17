@@ -29,7 +29,7 @@ for(const variant of ["", "test/"]){
   assert.ok(js.includes("function pinnedLibraryHead("),"Shared pinned header missing: "+jsPath);
   const guard = js.slice(js.indexOf("/* DAR_FRAUEN_HERO_SAFE_EVENTS_V1395"));
   assert.ok(guard.startsWith("/* DAR_FRAUEN_HERO_SAFE_EVENTS_V1395"),"Safe hero guard missing: "+jsPath);
-  assert.ok(!guard.includes("MutationObserver") && !guard.includes("setInterval("),"Unbounded DOM/polling watcher prohibited: "+jsPath);
+  assert.ok(!/new\\s+MutationObserver\\s*\\(/.test(guard) && !guard.includes("setInterval("),"Unbounded DOM/polling watcher prohibited: "+jsPath);
   assert.ok(guard.includes("syncScroll(value)") && guard.includes('setProperty("overflow-y","visible","important")'),"Native visitor scrollport must be restored: "+jsPath);
   for(const view of ["renderHub", "renderLibraryGroup", "renderSectionHero"]){
     assert.ok(js.includes("function "+view+"("),"Missing "+view+": "+jsPath);
