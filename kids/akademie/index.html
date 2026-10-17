@@ -3624,6 +3624,20 @@ body .lesson-source-block .source{font-size:12px}
 </style>
 <!-- KIDS TEST · standalone Academy girl-only palette after all inline CSS -->
 <link rel="stylesheet" href="/kids/akademie/girls-profile-v2-audit.css?v=20261015-1">
+
+<style id="kids-quran-academy-link-stage-v1">
+/* Profile-aware standalone Quran practice entry; no curriculum or workbook changes. */
+.kids-quran-academy-link{display:grid;grid-template-columns:minmax(116px,34%) 1fr;margin:0 0 19px;border-radius:20px;overflow:hidden;text-decoration:none;color:var(--text);border:1px solid var(--border);background:linear-gradient(120deg,rgba(18,63,77,.98),rgba(9,39,55,.98));min-height:156px;box-shadow:0 8px 24px #0002}
+.kids-quran-academy-image{min-height:156px;background:linear-gradient(90deg,transparent,rgba(9,39,55,.18)),url("/kids/assets/kids-art/section-quran-v1090.jpg") center/cover no-repeat}
+.kids-quran-academy-copy{padding:clamp(14px,3vw,24px);display:flex;flex-direction:column;justify-content:center;gap:7px;min-width:0}
+.kids-quran-academy-copy small{color:var(--gold);font-size:11px;letter-spacing:.09em;font-weight:800}
+.kids-quran-academy-copy strong{font-size:clamp(23px,4vw,31px);font-family:Georgia,serif;line-height:1.15}
+.kids-quran-academy-copy>span{font-size:clamp(12px,1.6vw,15px);line-height:1.45}
+.kids-quran-academy-copy em{font-style:normal;font-weight:750;color:var(--gold);font-size:13px}
+body[data-profile="girl"] .kids-quran-academy-link{background:linear-gradient(115deg,#61435c,#352640);border-color:rgba(248,204,214,.37)}
+body[data-profile="girl"] .kids-quran-academy-image{background-image:linear-gradient(90deg,transparent,rgba(73,36,68,.24)),url("/kids/assets/kids-home-girls-v1330/mosque-rose-night.webp")}
+@media(max-width:550px){.kids-quran-academy-link{grid-template-columns:34% minmax(0,1fr);min-height:153px}.kids-quran-academy-copy{padding:12px 14px}.kids-quran-academy-copy strong{font-size:22px}}
+</style>
 </head>
 <body data-profile="boy" data-preview-release="V17.0-voice-sandbox-20261011" data-preview-deploy="v11-progressive-school-lessons"><main class="wrap">
 
@@ -3659,6 +3673,10 @@ body .lesson-source-block .source{font-size:12px}
   
   <img class="academy-hero-character" id="academyHeroCharacter" src="/kids/assets/profile-avatars/boy-kufi-v1235.svg" alt="" aria-hidden="true" decoding="async"><div class="overview-copy"><div class="kicker" id="overviewKicker">Deine islamische Lernakademie</div><h1><span class="hero-title-line">Wissen</span> <span class="hero-title-line">entdecken</span></h1><p id="overviewGreeting" class="overview-greeting"><span id="overviewSalam" class="greeting-salam">As-salāmu ʿalaykum, lieber Bruder.</span><span id="overviewFollowup" class="greeting-followup">Heute lernen wir etwas Neues!</span></p><div class="hero-learning-pill">✦ Qurʾān &amp; Sunnah · Gemeinsam lernen</div></div>
  </section>
+<a class="kids-quran-academy-link" href="/kids/quran-lernen/index.html" aria-label="Qurʾān lernen mit Rezitation und Lernfortschritt öffnen">
+ <span class="kids-quran-academy-image" aria-hidden="true"></span>
+ <span class="kids-quran-academy-copy"><small>DEIN EIGENER LERNPLATZ</small><strong>Qurʾān lernen</strong><span>Wichtige Sūren und Āyāt · Hören · Wort für Wort · Wiederholen</span><em>Meine Qurʾān-Reise öffnen →</em></span>
+</a>
  <section class="today-class" aria-labelledby="todayTitle">
   <div class="today-text"><span class="kicker" id="todayKicker">Für dich vorbereitet</span><h2 id="todayTitle">Dein Unterricht heute</h2><p><strong id="todayTopicName">Ṣidq – Wahrhaftigkeit</strong><br><span id="todayTopicIntro">Warum ist es gut, die Wahrheit zu sagen?</span></p><div class="today-summary" id="todaySummary">Deine erste Lektion wartet auf dich.</div><div class="academy-time" id="academyTime">Lernzeit: 8–12 Minuten · Pausen jederzeit</div></div>
   <button type="button" class="pill primary today-button" data-open-lesson="sidq">Unterricht beginnen <span aria-hidden="true">→</span></button>

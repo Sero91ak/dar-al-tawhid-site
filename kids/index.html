@@ -3023,6 +3023,11 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
 })();
 </script>
 <link rel="stylesheet" href="/kids/quran-lernen/home-card.css?v=1">
+
+<style id="kids-quran-learn-entry-stage-v1">
+/* KIDS TEST only. All other shell/learning UI untouched. */
+body .nav-btn.kids-academy-nav .ico{background-image:url("/kids/assets/kids-icons/quran-real-v12.png?v=cut1")!important;background-repeat:no-repeat!important;background-size:contain!important;background-position:center!important}
+</style>
 </head>
 <body>
 <div id="kidsUpdateLayer" class="kids-update-layer">
@@ -3168,9 +3173,9 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
           
         </button>
 
-        <button class="choice quran" data-go="quran">
+        <button class="choice quran" type="button" onclick="window.location.assign('/kids/quran-lernen/index.html')" aria-label="Qurʾān lernen öffnen">
           <span class="icon"></span>
-          <strong>Qurʾān Player</strong>
+          <strong>Qurʾān lernen</strong>
           <small>hören · mitsprechen · lernen</small>
           
         </button>
@@ -3358,7 +3363,7 @@ html[data-kids-pointer-input="touch"] body :where(a,button,summary,[role="button
     <button class="nav-btn active" data-target="today"><span class="ico"></span><span class="lab">Heute</span></button>
     <button class="nav-btn" data-target="stories"><span class="ico"></span><span class="lab">Hören</span></button>
     <button class="nav-btn" data-target="salaf" aria-label="Schätze der Salaf"><span class="ico"></span><span class="lab">Schätze</span></button>
-    <button class="nav-btn" data-target="quran"><span class="ico"></span><span class="lab">Qurʾān</span></button>
+    <button type="button" class="nav-btn kids-academy-nav" aria-label="Meine Lernakademie öffnen" onclick="window.location.assign('/kids/akademie/index.html')"><span class="ico"></span><span class="lab">Lernen</span></button>
     <button class="nav-btn" data-target="parents"><span class="ico"></span><span class="lab">Eltern</span></button>
   </nav>
 
