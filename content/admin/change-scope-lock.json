@@ -155,6 +155,20 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-tv-kids-visual-crosspromo-20261017",
+      "at": "2026-10-17T13:00:00+02:00",
+      "approvedBy": "user-explicit-test-then-visitor-live-exact-promo-screenshot-20261017",
+      "reason": "Publish only user-supplied visual asset and adult Mehr App cross-promotion on test and visitor. Real Apple TV Store CTA; Kids upcoming CTA disabled. Do not change Kids runtime, push, account, navigation, service workers or native builds.",
+      "paths": [
+        "assets/promo/mehr-apps-reference-20261017.jpg",
+        "test/assets/dar-more-v15.js",
+        "test/assets/dar-more-v15.css",
+        "assets/dar-more-final-v15.js",
+        "assets/dar-more-final-v15.css"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-test-viewport-browser-geometry-qa-20261017",
       "at": "2026-10-17T11:51:00+02:00",
       "approvedBy": "user-explicit-global-adult-responsive-layout-qa-iphone-ipad-desktop-20261017",
