@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `4703064772e1a0e0379287cccb77d93ab08b5747`
+- Commit beim Erstellen dieses Berichts: `2af286394e8bed353d527c85dc914d4bf8208423`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **282 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1050 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -39,6 +39,7 @@ Frühere GitHub-Backup-Archive bereits gescannt: **18** echte ZIP-Archive, darun
 
 Die ursprünglichen neun bereits bezahlten MP3-Dateien waren über ElevenLabs-GET wiederholt blockiert (Flow-GET 402, alternativ History-GET 400). Der erfolgreiche GitHub-Wiederherstellungslauf https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39007730585 speicherte nur die 47 bereits vorhandenen Originalaufnahmen und meldete ausdrücklich 0 neue Originale. Dies NICHT als 9/9-Wiederherstellung ausgeben.
 Zusätzliche read-only/ohne ElevenLabs-TTS implementierte Archivsuche: `kids/tools/recover_quiz_v4_nine_from_github_action_archives.py`; CI `.github/workflows/kids-v4-scan-previous-paid-audio-backups.yml`. Sie untersucht streng begrenzte historische GitHub-Audio-Backup-Artefakte auf die exakten neun Generation-IDs und importiert nur wirklich gefundene MP3-Originalbytes unter der bereits geltenden MP3/ID/Laufzeit-/SHA-Kontrolle.
+Wichtigster Scanner-Fix: Die alte Suchrunde verbrauchte 297 MB für 48 ZIP-Archive, ohne auf alle benannten alten Backupfamilien zuzugreifen. Die neue Stichprobe verteilt höchstens sechs Archive je Backup-Namen über junge, mittlere und alte Zeitpunkte. Nur tatsächliche MP3-Originalbytes ändern den Wiederherstellungsstatus; vor einem neuen grünen CI-Lauf keine neun Originale als gefunden ausgeben.
 Wichtig: Erst den fertigen Laufbericht `kids/review-only/quiz-v4-nine-originals-github-archive-recovery.json` und den echten Audio-Status lesen. Ein laufender oder erfolgreich beendeter GitHub-Workflow beweist allein noch keine neue Originaldatei. Ist nichts gefunden, keine Sprachcredits erneut kaufen: ausschließlich echten Originalexport aus dem ElevenLabs-Flow besorgen.
 
 ## Gesamte Hörprüfung für 450 Fragen (kostenfrei)
