@@ -98,6 +98,29 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
     const {width,height}=page.viewportSize();
     const x=Math.round(width*.49),startY=Math.round(height*.74),
       endY=Math.round(height*.33);
+    // DAR_TEST_TOUCH_PROBE_V1391: inspect the actual touched element and
+    // whether Chrome delivers touch events; isolate synthetic driver failures.
+    const touchHit=await page.evaluate(({x,y})=>{
+      const node=document.elementFromPoint(x,y),chain=[];
+      for(let el=node;el&&chain.length<14;el=el.parentElement){
+        const cs=getComputedStyle(el);
+        chain.push({tag:el.tagName,id:el.id||"",
+          className:typeof el.className==="string"?el.className.slice(0,90):"",
+          touch:cs.touchAction,overflowY:cs.overflowY,
+          overscrollY:cs.overscrollBehaviorY,pointer:cs.pointerEvents});
+      }
+      return chain;
+    },{x,y:startY});
+    await page.evaluate(()=>{
+      window.__darTestTouchTrace=[];
+      for(const type of ["touchstart","touchmove","touchend","pointerdown","pointermove","pointerup"]){
+        document.addEventListener(type,e=>{
+          if(window.__darTestTouchTrace.length<80)
+            window.__darTestTouchTrace.push({type,prevented:e.defaultPrevented,
+              cancelable:e.cancelable,origin:e.target?.tagName||""});
+        },{capture:true,passive:true,once:false});
+      }
+    });
     await cdp.send("Input.dispatchTouchEvent",{
       type:"touchStart",touchPoints:[{x,y:startY}]
     });
@@ -124,18 +147,41 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
           top:el.scrollTop,extent:el.scrollHeight-el.clientHeight}))
       };
     });
+    const touchTrace=await page.evaluate(()=>window.__darTestTouchTrace||[]);
+    const touchProbe={hit:touchHit,trace:touchTrace};
     const progressed=after.surfaces.some((v,i)=>
       v.top>(before.surfaces[i]?.top||0)+8);
     const hasContent=before.surfaces.some(v=>v.extent>50);
-    const record={routeName,viewport:{width,height},hasContent,progressed,before,after};
+    const record={routeName,viewport:{width,height},hasContent,progressed,before,after,touchProbe};
     findings.nativeSwipe.push(record);
     await page.screenshot({path:path.join(out,"real-swipe-"+routeName+".png"),fullPage:false});
     console.log("Android finger swipe "+routeName+": "+(progressed?"PASS":"FAIL")+
       " "+JSON.stringify({hasContent,
         before:before.surfaces,after:after.surfaces}));
     if(!hasContent)throw Error("Android "+routeName+": no vertically scrollable content");
-    if(!progressed)throw Error("Android "+routeName+": taps work, physical touch scroll blocked "+
-      JSON.stringify(after.diagnosis||after.surfaces));
+    if(!progressed){
+      // A minimal independent scrolling document verifies the CDP gesture
+      // itself. A failed control makes the diagnosis inconclusive, not app-only.
+      const control=await context.newPage();
+      await control.setContent('<meta name="viewport" content="width=device-width, initial-scale=1"><div style="height:3000px;background:linear-gradient(#fff,#333)">Scroll control</div>');
+      await control.bringToFront();
+      const controlCdp=await context.newCDPSession(control);
+      await controlCdp.send("Input.dispatchTouchEvent",{type:"touchStart",touchPoints:[{x,y:startY,id:1}]});
+      for(let i=1;i<=12;i++){
+        await controlCdp.send("Input.dispatchTouchEvent",{type:"touchMove",
+          touchPoints:[{x,y:Math.round(startY+(endY-startY)*i/12),id:1}]});
+        await control.waitForTimeout(26);
+      }
+      await controlCdp.send("Input.dispatchTouchEvent",{type:"touchEnd",touchPoints:[]});
+      await control.waitForTimeout(340);
+      const controlY=await control.evaluate(()=>scrollY);
+      await control.close();
+      await page.bringToFront();
+      findings.nativeSwipeControl={controlY,passed:controlY>8};
+      console.log("Touch driver control: "+JSON.stringify(findings.nativeSwipeControl));
+      throw Error("Android "+routeName+": "+(controlY>8?"physical swipe blocked in app":"CDP touch simulator failed baseline")+
+        " "+JSON.stringify({diagnosis:after.diagnosis,hit:touchHit,trace:touchTrace}));
+    }
   }
   await testNativeSwipe("posts",pidx);
   await testNativeSwipe("quran",qidx);
