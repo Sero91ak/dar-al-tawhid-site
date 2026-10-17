@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-17T14:29:02Z",
-  "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "39040775845",
+  "timestamp": "2026-10-17T14:56:11Z",
+  "trigger": "push",
+  "finishedDeployConclusion": null,
+  "finishedDeployRun": null,
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -24,8 +24,8 @@
     "versionJsonReadable": true,
     "trilingualWordLearningReady": true,
     "parentsDashboard": {
-      "htmlReferencesNewDashboard": false,
-      "htmlReferencesNewStyles": false,
+      "htmlReferencesNewDashboard": true,
+      "htmlReferencesNewStyles": true,
       "htmlRegistersNewSW": false,
       "htmlHasProfileAndBirthFields": true,
       "dashboardJs": {
