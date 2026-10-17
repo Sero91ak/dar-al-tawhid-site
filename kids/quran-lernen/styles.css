@@ -108,6 +108,12 @@ html[data-gender="girl"] .ql-lesson-heading{background:linear-gradient(90deg,rgb
 .ql-stepper{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:10px 0}
 .ql-step{min-height:65px;border-radius:14px;border:1px solid var(--line);background:var(--panel);color:var(--muted);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;padding:6px 0}
 .ql-step.active{background:var(--accent);color:var(--ink);border-color:var(--accent);box-shadow:0 6px 19px rgba(0,0,0,.15)}
+.ql-step{position:relative}
+.ql-step.complete:after{content:"✓";position:absolute;right:5px;top:3px;color:var(--accent);font-size:10px;font-weight:900}
+.ql-step.complete.active:after{color:var(--ink)}
+.ql-word-tile.ql-word-visited{box-shadow:inset 0 -3px var(--accent);border-color:var(--accent)}
+.ql-word-counter{display:inline-block;margin-left:5px;font-size:10px;color:var(--muted)}
+
 .ql-step small{font-size:11px;font-weight:820;white-space:nowrap}
 .ql-step-symbol{font-family:Georgia,serif;font-size:23px;line-height:1}
 .ql-studio{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:clamp(13px,2.5vw,26px);box-shadow:0 12px 29px rgba(0,0,0,.13);min-width:0}
