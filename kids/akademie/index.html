@@ -3743,17 +3743,27 @@ body[data-kids-portal="true"] > main.wrap > :is(#academyHome,#academySubject):no
 body[data-kids-portal="true"] #academyHome > .subjects{
  padding-bottom:0!important;
 }
+/* KIDS_ACADEMY_LESSON_UNDER_DOCK_SCROLL_V1428:
+   The lesson scrollport reaches the dock like Home/subject views.
+   Reserve the measured floating dock only INSIDE the scrollport, at its end. */
 body[data-kids-portal="true"][data-academy-view="lesson"] > main.wrap > #lessonMain.lesson-main:not([hidden]){
  flex:1 1 auto!important;
  min-height:0!important;
- /* Lesson navigation must also remain reachable ABOVE the dock,
-    while long lesson text keeps its own independent scrolling. */
- padding-bottom:calc(var(--kids-academy-dock-clearance) + 10px)!important;
+ padding-bottom:0!important;
 }
-body[data-kids-portal="true"] #stageSurface{
+body[data-kids-portal="true"][data-academy-view="lesson"] #lessonMain #stageSurface{
  overflow-y:auto!important;overflow-x:hidden!important;
- scroll-padding-block-end:16px!important;
- padding-bottom:16px!important;
+ min-height:0!important;
+ -webkit-overflow-scrolling:touch;
+ /* Lesson text passes under the fixed dock; the final card and action buttons
+    can be scrolled fully above it without a permanently empty bottom panel. */
+ padding-bottom:calc(var(--kids-academy-dock-clearance,128px) + 12px)!important;
+ scroll-padding-block-end:calc(var(--kids-academy-dock-clearance,128px) + 12px)!important;
+}
+body[data-kids-portal="true"][data-academy-view="lesson"] #stageSurface > #lessonNavigation{
+ width:100%!important;
+ flex:0 0 auto!important;
+ margin:12px 0 0!important;
 }
 /* Profile-led header. The main Academy screen has no redundant back/home
    buttons: the persistent Kids tab bar owns switching between main areas.
@@ -3977,6 +3987,15 @@ const $=s=>document.querySelector(s),all=s=>[...document.querySelectorAll(s)];
 if(new URLSearchParams(location.search).get("embedded")==="1")document.body.dataset.embedded="true";
 const KIDS_SEAMLESS_PORTAL_V1421=new URLSearchParams(location.search).get("kidsPortal")==="1"&&window.parent!==window;
 if(KIDS_SEAMLESS_PORTAL_V1421)document.body.dataset.kidsPortal="true";
+/* V1428: include genuine Back/Weiter controls in the single lesson scrollport.
+   The existing click handlers, progress, audio and standalone mode stay intact. */
+if(KIDS_SEAMLESS_PORTAL_V1421){
+ const lessonScrollport=document.getElementById("stageSurface");
+ const lessonActions=document.getElementById("lessonNavigation");
+ if(lessonScrollport&&lessonActions&&lessonActions.parentElement!==lessonScrollport){
+  lessonScrollport.appendChild(lessonActions);
+ }
+}
 const VERSION="academy-v4"; /* Bestehende Lernstände bleiben erhalten */
 const INTERVALS_BY_AGE={"4-5":[1,3,7,14,30],"6-8":[1,3,7,14,30,60],"9-10":[1,3,7,14,30,60,90]};
 const exercises={
