@@ -4,7 +4,7 @@
  if(window.__KIDS_CREATOR_SPLASH_2__)return;
  window.__KIDS_CREATOR_SPLASH_2__=true;
  document.documentElement.classList.add("kids-test-booting");
- var start=performance.now(), minDisplayMs=3500, maxWaitMs=9000;
+ var start=performance.now(), minDisplayMs=1500, maxWaitMs=9000;
  var display=0,target=1,root=null,fill=null,number=null,meter=null,status=null,retry=null;
  var ready=false,error=false,firstPaintReady=false,frame=null,nativeRevealed=false;
  function revealNativePoster(){
@@ -17,7 +17,6 @@
    }catch(e){}
  }
  var posterURL="/kids/assets/kids-splash-20261017-v1.jpg";
- var posterNatural=null;
  var homeURL="/kids/assets/kids-salah-v1272/hero-home.png?v=1274";
  function bind(){
    root=document.getElementById("kids-test-boot");
@@ -52,7 +51,6 @@
    return new Promise(function(resolve){
      var img=new Image(),done=false;
      function finish(ok){if(done)return;done=true;clearTimeout(timer);img.onload=img.onerror=null;
-       if(ok&&src===posterURL)posterNatural={width:img.naturalWidth,height:img.naturalHeight};
        resolve(ok)}
      var timer=setTimeout(function(){finish(false)},7200);
      img.onload=function(){finish(img.naturalWidth>0)};
@@ -79,79 +77,27 @@
    status.textContent=message||"Das Laden dauert länger als erwartet.";
    retry.textContent=document.querySelector("#view-today .hero")?"App trotzdem öffnen":"Neu laden";
  }
- function makeShards(){
-   var poster=root&&root.querySelector(".ktb-poster");
-   if(!poster||!posterNatural||!posterNatural.width||!posterNatural.height)return null;
-   var width=poster.clientWidth,height=poster.clientHeight;
-   if(width<100||height<160)return null;
-   // Only 45-54 lightweight fragments. The browser reuses one decoded JPEG.
-   var portrait=height>=width,columns=portrait?6:9,rows=portrait?9:5;
-   var scale=Math.max(width/posterNatural.width,height/posterNatural.height);
-   var computedSize=window.getComputedStyle?window.getComputedStyle(poster).backgroundSize:"cover";
-   var stretch=computedSize.indexOf("100%")>=0;
-   var imageW=stretch?width:posterNatural.width*scale;
-   var imageH=stretch?height:posterNatural.height*scale;
-   var imageX=(width-imageW)*.5,imageY=(height-imageH)*.5;
-   var layer=document.createElement("div");
-   layer.className="ktb-shards";
-   layer.setAttribute("aria-hidden","true");
-   var batch=document.createDocumentFragment();
-   for(var r=0;r<rows;r++){
-     for(var col=0;col<columns;col++){
-       var left=width*col/columns,top=height*r/rows;
-       var tileW=width/columns+.7,tileH=height/rows+.7;
-       var seed=Math.sin((r+1)*17.3+(col+1)*8.9);
-       var dx=Math.round(seed*Math.min(62,width*.11));
-       var dy=Math.round(Math.min(172,height*.19)+r*4.7+(col%3)*11);
-       var rz=(seed*14).toFixed(1);
-       var shard=document.createElement("i");
-       shard.className="ktb-shard";
-       shard.style.left=left+"px";
-       shard.style.top=top+"px";
-       shard.style.width=tileW+"px";
-       shard.style.height=tileH+"px";
-       shard.style.backgroundImage='url("'+posterURL+'")';
-       shard.style.backgroundSize=imageW+"px "+imageH+"px";
-       shard.style.backgroundPosition=(imageX-left)+"px "+(imageY-top)+"px";
-       shard.style.setProperty("--ktb-x",dx+"px");
-       shard.style.setProperty("--ktb-y",dy+"px");
-       shard.style.setProperty("--ktb-r",rz+"deg");
-       shard.style.setProperty("--ktb-delay",Math.round((r%4)*23+(col%3)*26)+"ms");
-       batch.appendChild(shard);
-     }
-   }
-   layer.appendChild(batch);
-   poster.appendChild(layer);
-   return layer;
- }
  function finish(manual){
    if(ready||!root)return;
    ready=true;
    if(frame)cancelAnimationFrame(frame);
    if(!manual){display=100;paint()}
    revealNativePoster();
-   var hold=manual?0:220;
+   // Keep a truthful, complete meter visible, then reveal the already-painted
+   // homepage behind a single feathered mask. No image tiles, canvas or video.
    setTimeout(function(){
      if(!root)return;
      var reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-     var layers=null;
-     try{if(!reduce)layers=makeShards()}catch(e){layers=null}
-     // Make the already-constructed home visible immediately behind the cover.
-     // Opaque shards physically move away; no blue intermediary, crossfade or double text.
-     if(layers){
-       root.classList.add("ktb-shatter");
-       document.documentElement.classList.remove("kids-test-booting");
-       requestAnimationFrame(function(){requestAnimationFrame(function(){
-         if(layers&&root)layers.classList.add("ktb-shards-go");
-       })});
-       setTimeout(function(){if(root){root.remove();root=null}},1320);
-     }else{
-       // Accessible, cheap fallback: a directional wipe that reveals the home.
-       document.documentElement.classList.remove("kids-test-booting");
-       root.classList.add("ktb-wipe");
-       setTimeout(function(){if(root){root.remove();root=null}},740);
-     }
-   },hold);
+     var feathered=!reduce && !!(window.CSS&&window.CSS.supports&&
+       (window.CSS.supports("-webkit-mask-image","linear-gradient(black,transparent)")||
+        window.CSS.supports("mask-image","linear-gradient(black,transparent)")));
+     document.documentElement.classList.remove("kids-test-booting");
+     root.classList.add(feathered?"ktb-storybook":"ktb-soft-fallback");
+     requestAnimationFrame(function(){requestAnimationFrame(function(){
+       if(root)root.classList.add("ktb-transition-go");
+     })});
+     setTimeout(function(){if(root){root.remove();root=null}},feathered?1360:reduce?290:1000);
+   },manual?0:190);
  }
  async function main(){
    await domReady();
