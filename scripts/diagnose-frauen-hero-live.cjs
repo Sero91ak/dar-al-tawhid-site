@@ -78,13 +78,6 @@ function snapshot(){
    const cssTag="/* DAR_FRAUEN_HERO_SCROLL_ANCESTOR_V1392";
    if(!localCss.includes(cssTag))throw Error("Scroll CSS absent in checkout");
    await page.addStyleTag({content:localCss.slice(localCss.indexOf(cssTag))});
-   // Diagnose: the existing performance-scroll guards may use inline !important
-   // values which beat any regular route stylesheet.
-   await page.evaluate(()=>{
-     const b=document.body;
-     b.style.setProperty("overflow-x","clip","important");
-     b.style.setProperty("overflow-y","visible","important");
-   });
    await page.waitForTimeout(1100);
    let repaired=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
