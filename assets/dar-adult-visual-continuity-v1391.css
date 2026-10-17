@@ -28,6 +28,14 @@ html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-th
 /* The header kicker must never become a pale gold watermark on ivory. */
 html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) body .top-shell.theme-hero-shell .brand-kicker-row small{
   font-weight:850!important;
+  font-size:clamp(10.5px,2.5vw,13px)!important;
+  letter-spacing:.11em!important;
+  line-height:1.4!important;
+}
+html:is([data-theme="light"],[data-theme="soft"],[data-theme="eisgold"],[data-theme="salbei"]) body .top-shell.theme-hero-shell .isnad-label{
+  font-size:clamp(10.5px,2.4vw,12px)!important;
+  letter-spacing:.09em!important;
+  line-height:1.35!important;
 }
 
 /* Structural BACKGROUNDS are not content cards. Removing the enclosing
