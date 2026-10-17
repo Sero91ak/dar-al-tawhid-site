@@ -79,11 +79,22 @@ html[data-theme] #appView.view:has(.prayer-page-noble) > .view-head{
   background-position:center!important;
   background-repeat:no-repeat!important;
 }
+html[data-theme] body.is-quran-overview #appView .qov-main,
+html[data-theme] body.is-more-route #appView .dar-more-v15{
+  inline-size:100%!important;
+  width:100%!important;
+  max-inline-size:none!important;
+  max-width:none!important;
+  margin:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
+  box-sizing:border-box!important;
+}
 html[data-theme] body.is-topics-route #appView .topics-hub > :not(.view-head),
 html[data-theme] body.is-topic-route #appView .topic-collection-page > :not(.view-head),
 html[data-theme] body.is-post-route #appView .post-reader > :not(.post-reader-title),
-html[data-theme] body.is-quran-overview #appView .qov-page > :not(.qov-header),
-html[data-theme] body.is-more-route #appView > :not(.view-head),
+html[data-theme] body.is-quran-overview #appView .qov-main > :not(.qov-header),
+html[data-theme] body.is-more-route #appView .dar-more-v15 > :not(.view-head),
 html[data-theme] body.is-quiz-route #appView > :not(.view-head),
 html[data-theme] body.is-settings-route #appView > :not(.settings-page-head){
   padding-left:var(--dar-edge-gutter,12px)!important;
