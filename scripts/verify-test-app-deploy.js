@@ -214,15 +214,16 @@ async function fetchVersionBuild(base) {
     const { status: shellStatus, text: shellHtml } =
       await fetchText(`${base}/index.html?edge-width-check=v1383-${Date.now()}`);
     const edgeLinkOk = shellHtml.includes('id="darTestEdgeWidthV1372"') &&
-      shellHtml.includes('/test/assets/test-global-edge-width-v1372.css?v=android-scroll-v1389');
+      shellHtml.includes('/test/assets/test-global-edge-width-v1372.css?v=native-scroll-v1392');
     const { status: edgeStatus, text: edgeCss } =
-      await fetchText(`${base}/assets/test-global-edge-width-v1372.css?v=android-scroll-v1389`);
+      await fetchText(`${base}/assets/test-global-edge-width-v1372.css?v=native-scroll-v1392`);
     const cssOk = edgeCss.includes("DAR TEST ADULT ONLY") &&
       edgeCss.includes("DAR_ADULT_RESPONSIVE_AXIS_V1383") &&
       edgeCss.includes("DAR_HADITH_CONTINUOUS_FULLBLEED_V1386") &&
       edgeCss.includes("DAR_ADULT_TOPICS_EMPTY_FOLD_V1384") &&
       edgeCss.includes("DAR_ADULT_EMPTY_FOLD_GLOBAL_V1387") &&
       edgeCss.includes("DAR_TEST_ANDROID_SCROLL_RESPONSIVE_V1388") &&
+      edgeCss.includes("DAR_TEST_ANDROID_NATIVE_SCROLL_CHAIN_V1392") &&
       edgeCss.includes("--dar-axis-gutter") &&
       edgeCss.includes("background-size:cover") &&
       edgeCss.includes("--dar-responsive-safe-gutter") &&
