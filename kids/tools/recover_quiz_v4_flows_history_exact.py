@@ -66,8 +66,15 @@ def flow_generation_original(e, key):
     if parts.scheme!="https" or parts.hostname not in (
             "storage.googleapis.com","storage.cloud.google.com"):
         raise RuntimeError("Unexpected signed Flow audio origin")
-    if parts.username or parts.password or not parts.path.endswith(".mp3"):
-        raise RuntimeError("Unsafe/non-MP3 provider generation audio URL")
+    # The official Flows endpoint may return extensionless
+    # /generations/<id> URLs with content_mime_type=audio/mpeg.
+    # Validate the actual MP3 bytes below, not the file extension alone.
+    mime=completed.get("content_mime_type")
+    if parts.username or parts.password or not (
+            parts.path.endswith(".mp3")
+            or (parts.path.startswith("/generations/") and mime in
+                ("audio/mpeg","audio/mp3","audio/x-mpeg"))):
+        raise RuntimeError("Unsafe or non-audio provider generation asset")
     # Do not print or persist any signed URL or credential. This URL may expire,
     # so fetch on demand from the immutable generation ID each time.
     req=urllib.request.Request(url,headers={"Accept":"audio/mpeg"},method="GET")
