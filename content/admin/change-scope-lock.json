@@ -8275,6 +8275,17 @@
         ".github/workflows/diagnose-frauen-hero-live.yml"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "mandatory-new-contribution-dedup-check-before-chat-draft-20261017",
+      "at": "2026-10-17T19:10:00+02:00",
+      "approvedBy": "user-explicit-must-check-existing-contributions-before-answering-gib-mir-einen-beitrag-20261017",
+      "reason": "User explicitly requires verifying whether the proposed exact or substantially equivalent statement is already in any DAR AL TAWḤĪD adult and relevant test/Ramadan/archive/Kids/AppleTV collection BEFORE suggesting or producing a new post in chat. Update only central editorial AGENTS.md and scope audit. No content publishing, automation, notification, or app code changes.",
+      "paths": [
+        "AGENTS.md",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-24T23:59:00.000Z"
     }
   ],
   "enabled": true
