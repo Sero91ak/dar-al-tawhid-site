@@ -59,7 +59,12 @@ struct KidsWebAppView: UIViewRepresentable {
         webView.scrollView.contentInsetAdjustmentBehavior = .never
         webView.scrollView.bounces = false
         webView.allowsBackForwardNavigationGestures = false
+#if KIDS_CREATOR_TEST
+        // Prevent the bright WKWebView first frame while the image-led test boot loads.
+        webView.isOpaque = false
+#else
         webView.isOpaque = true
+#endif
         webView.backgroundColor = UIColor(red: 12 / 255, green: 38 / 255, blue: 54 / 255, alpha: 1)
         webView.scrollView.backgroundColor = webView.backgroundColor
         webView.navigationDelegate = context.coordinator
