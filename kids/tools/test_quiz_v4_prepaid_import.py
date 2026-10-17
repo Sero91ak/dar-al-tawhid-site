@@ -16,7 +16,32 @@ mod=importlib.util.module_from_spec(spec)
 assert spec and spec.loader
 spec.loader.exec_module(mod)
 
+def verify_real_zip_workflow_shell_syntax():
+    """Reject the nested heredoc defect even when no paid ZIP is uploaded."""
+    file=REPO/".github/workflows/kids-v4-prepaid-flow-restore.yml"
+    lines=file.read_text(encoding="utf-8").splitlines()
+    target="      - name: Import uploaded ZIP originals if present and update free MP3 preview"
+    assert lines.count(target)==1,"real imported ZIP workflow step missing"
+    index=lines.index(target)
+    assert lines[index+1].strip()=="run: |","restoration step missing bash script"
+    script=[]
+    for line in lines[index+2:]:
+        if line.startswith("      - ") or line.startswith("    - "):
+            break
+        if line.strip() and not line.startswith("          "):
+            raise AssertionError("bad YAML indentation for paid ZIP restoration step")
+        script.append(line[10:] if len(line)>=10 else "")
+    bash=subprocess.run(["bash","-n"],input="\\n".join(script)+"\\n",
+                         capture_output=True,text=True)
+    assert bash.returncode==0,(
+        "Broken ZIP import workflow shell syntax; paid audio restore could fail: "+
+        bash.stderr)
+    assert any("assert_quiz_v4_prepaid_postimport.py" in x for x in script),(
+        "importer must validate full 450 private question mapping after real original ZIP")
+    print("PASS: GitHub Action ZIP restore shell syntax accepted even with no uploaded MP3; 0 credits")
+
 def main():
+    verify_real_zip_workflow_shell_syntax()
     with tempfile.TemporaryDirectory(prefix="kids-v4-prepaid-flow-import-selftest-") as base:
         root=Path(base)
         prior=root/"kids/data/quiz-v4-batch-001-020-review.json"
