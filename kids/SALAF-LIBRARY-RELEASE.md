@@ -14,13 +14,13 @@ Der warme Kindertext beginnt mit dem vollständigen Salām und einer persönlich
 
 Nach der authentisch belegten Begebenheit folgt eine verständliche, nicht überladene Lehre für das Kind. Der Schluss übernimmt den vertrauten Stil der bestehenden Propheten-/Ṣaḥābah-/Ṣaḥābiyyāt-Hörgeschichten:
 
-> Und Allah weiß es am besten.
+> Und Allah, subḥānahu wa taʿālā, weiß es am besten.
 >
-> Möge Allah euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.
+> Möge Allah, subḥānahu wa taʿālā, uns nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses schenken.
 >
 > As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.
 
-Der wortgetreue Satzbau kann bei einer Persönlichkeit natürlich zum Inhalt passen; der Master muss **immer** mit Salām beginnen und mit dem Salām enden. Keine wörtlichen Dialoge, Handlungen oder historischen Einzelheiten dazuerfinden. Begriffe kindgerecht innerhalb derselben Erzählung erklären. Quellenlisten liegen getrennt unter der Geschichte und werden **nicht als trockene Quellenaufzählung vorgelesen**.
+Die Begrüßung und der Erzählteil können bei einer Persönlichkeit zum Inhalt passen; der wortgetreue Abschluss ist in `kids/MASTER-TEXT-STANDARD-V2.md` festgelegt. Der Master muss **immer** mit Salām beginnen und mit dem Salām enden. Keine wörtlichen Dialoge, Handlungen oder historischen Einzelheiten dazuerfinden. Begriffe kindgerecht innerhalb derselben Erzählung erklären. Quellenlisten liegen getrennt unter der Geschichte und werden **nicht als trockene Quellenaufzählung vorgelesen**.
 
 ## Datenvertrag für eine veröffentlichte Geschichte
 
@@ -44,7 +44,7 @@ Jede freigegebene Geschichte hat **genau einen** `masterStoryText` und **einen**
       "assessment": "verified"
     }
   ],
-  "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, mein lieber Bruder, meine liebe Schwester.\n\n[Hier steht die VOLLSTÄNDIGE belegte und liebevolle Erzählung.]\n\nUnd Allah weiß es am besten. Möge Allah euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
+  "masterStoryText": "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, mein lieber Bruder, meine liebe Schwester.\n\n[Hier steht die VOLLSTÄNDIGE belegte und liebevolle Erzählung.]\n\nUnd Allah, subḥānahu wa taʿālā, weiß es am besten.\n\nMöge Allah, subḥānahu wa taʿālā, uns nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.",
   "audioMaster": {
     "url": "/kids/audio/salaf/historisch-gepruefter-eindeutiger-slug.mp3",
     "timings": []
@@ -62,3 +62,5 @@ Jede freigegebene Geschichte hat **genau einen** `masterStoryText` und **einen**
 - Genau eine Aufnahme derselben Wörter in der vorgesehenen Masterstimme; synchrones Mitlesen ist textgleich. Aufnahme erst nach inhaltlicher und sprachlicher Freigabe.
 - Kein System-TTS als unbemerkter Ersatz. Offline-Download speichert **denselben** Text und dieselbe Aufnahme für alle Profile.
 - Die vorhandenen Propheten-, Ṣaḥābah- und Ṣaḥābiyyāt-Archive nicht ändern. Bis die ersten Belege vorliegen, bleiben die Salaf-Geschichten unveröffentlicht.
+
+**Audio-Schutz (17.10.2026):** Die schriftliche v2-Umstellung gilt für noch nicht vertonte Salaf-Geschichten. Bereits veröffentlichte Audio-Text-Paare aus anderen Kategorien werden nur zusammen mit einer dazu passenden Aufnahme geändert. Details: `kids/MASTER-TEXT-STANDARD-V2.md`.
