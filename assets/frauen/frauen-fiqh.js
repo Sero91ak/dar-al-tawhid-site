@@ -4675,3 +4675,69 @@
     reload: reloadLiveData
   };
 })();
+
+/* DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392 — shared Test/Visitor renderer guard.
+ * Real-browser QA 2026-10-17: renderer returns the original hero stage but
+ * the final SPA DOM drops it. Recover ONLY the absent stage after SPA updates;
+ * never touch cards, player/audio, reader, route state or bottom navigation. */
+(function(){
+  "use strict";
+  if(window.__darFrauenHeroIntegrityV1392) return;
+  window.__darFrauenHeroIntegrityV1392=true;
+  var pending=false,observer=null,observed=null,repairing=false;
+  function currentValue(){
+    var h=String(location.hash||"").replace(/^#\\/?/,"");
+    if(!/^frauen(?:\\/|$)/.test(h))return null;
+    var parts=h.split("/").slice(1);
+    return parts.map(function(x){try{return decodeURIComponent(x)}catch(e){return x}}).join("/");
+  }
+  function repair(){
+    var value=currentValue();
+    if(value===null||repairing)return;
+    var app=document.getElementById("appView");
+    if(!app)return;
+    var shell=app.querySelector(".frauen-library-shell.frauen-library-hub,.frauen-library-shell.frauen-library-group,.frauen-library-list");
+    if(!shell||shell.querySelector(".frauen-library-pinned-header"))return;
+    if(!shell.querySelector(".frauen-library-section-head,.frauen-post-list,.frauen-library-area-grid"))return;
+    var provider=window.DARFrauenFiqh;
+    if(!provider||typeof provider.render!=="function")return;
+    repairing=true;
+    try{
+      var html=provider.render(value);
+      if(typeof html!=="string"||html.indexOf("frauen-library-pinned-header")<0)return;
+      var template=document.createElement("template");
+      template.innerHTML=html;
+      var stage=template.content.querySelector(".frauen-library-pinned-header");
+      if(!stage||shell.querySelector(".frauen-library-pinned-header"))return;
+      shell.insertBefore(stage,shell.firstChild);
+      if(typeof provider.bind==="function")provider.bind();
+      try{document.dispatchEvent(new CustomEvent("dar:frauen-hero-restored",{detail:{route:value}}))}catch(e){}
+    }catch(e){
+      if(window.console&&console.warn)console.warn("Frauen hero DOM repair:",e);
+    }finally{repairing=false}
+  }
+  function schedule(){
+    if(pending)return;
+    pending=true;
+    requestAnimationFrame(function(){pending=false;repair()});
+  }
+  function attach(){
+    var app=document.getElementById("appView");
+    if(!app||app===observed)return;
+    if(observer)observer.disconnect();
+    observed=app;
+    observer=new MutationObserver(function(records){
+      if(currentValue()===null)return;
+      for(var i=0;i<records.length;i++){
+        if(records[i].type==="childList"){schedule();break}
+      }
+    });
+    observer.observe(app,{childList:true,subtree:true});
+    schedule();
+  }
+  document.addEventListener("dar:render",function(){attach();schedule()});
+  window.addEventListener("hashchange",function(){attach();schedule()});
+  document.addEventListener("dar:frauen-render",function(){attach();schedule()});
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",attach,{once:true});
+  else attach();
+})();
