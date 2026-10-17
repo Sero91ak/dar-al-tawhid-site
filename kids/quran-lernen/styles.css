@@ -181,13 +181,21 @@ html[data-gender="girl"] .ql-lesson-heading{background:linear-gradient(90deg,rgb
 .ql-completion button{background:var(--accent);color:var(--ink);border:0;border-radius:10px;min-height:40px;padding:8px 14px;font-size:12px;font-weight:800}
 @keyframes ql-arrive{from{opacity:.6;transform:translateY(6px)}to{opacity:1;transform:none}}
 @keyframes ql-eq{from{transform:scaleY(.65)}to{transform:scaleY(1.5)}}
+.ql-more-surahs{display:block;width:100%;margin:13px 0 7px;min-height:46px;border-radius:13px;border:1px solid var(--line);background:var(--panel);color:var(--accent);font-weight:800;font-size:12px}
+.ql-more-surahs:active{transform:scale(.99)}
+.ql-verse{max-height:min(35vh,275px);overflow-y:auto;overscroll-behavior:contain}
+html[data-gender="girl"] .ql-card-art:after{background:linear-gradient(90deg,rgba(77,46,71,.06),var(--panel) 98%)}
 @media(max-width:600px){
  .ql-hero{min-height:196px;background-position:center 45%}
  .ql-hero h1{font-size:32px}
- .ql-grid{grid-template-columns:1fr;gap:9px}
- .ql-card{min-height:102px;grid-template-columns:31% 1fr}
- .ql-card-art{min-height:102px}
- .ql-card-content{padding:10px 12px}
+ .ql-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .ql-card{min-height:0;display:flex;flex-direction:column}
+ .ql-card-art{height:105px;min-height:105px}
+ .ql-card-art:after{background:linear-gradient(0deg,var(--panel),transparent 85%)}
+ .ql-card-content{min-height:78px;gap:4px;padding:8px 11px}
+ .ql-card-title{font-size:17px}
+ .ql-card-meta{font-size:10px}
+ .ql-card-tag{font-size:9px}
  .ql-lesson{padding:7px 11px 18px}
  .ql-lesson-nav{height:34px;margin-bottom:6px}
  .ql-lesson-heading{min-height:76px;padding:9px 17px}
