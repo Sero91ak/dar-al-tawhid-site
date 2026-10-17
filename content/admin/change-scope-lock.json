@@ -155,6 +155,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-hero-scroll-hadith-contain-20261017",
+      "at": "2026-10-17T19:10:00+02:00",
+      "approvedBy": "user-explicit-frauen-scroll-hero-contain-hadith-from-test-push-live-20261017",
+      "reason": "Adult visitor: Frauen page must scroll, post/topic/hadith/frauen heroes show the full 16:9 artwork on phone iPad and tablet, and the tested Hadith library surface is linked on the visitor app. No Kids, push lanes, prayer or native code.",
+      "paths": [
+        "assets/dar-adult-visual-continuity-v1391.css",
+        "assets/frauen/frauen-authority-v1292.css",
+        "assets/ilm-hadith-v1308.css",
+        "assets/ilm/hadith-library-overview-v1267.webp",
+        "assets/ilm/hadith-library-study-v1267.webp",
+        "index.html",
+        "cloudflare/site-router.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
       "id": "adult-public-visual-surfaces-hero-contrast-v1391-20261017",
       "at": "2026-10-17T18:00:00+02:00",
       "approvedBy": "user-explicit-live-global-adult-clean-rectangular-surfaces-hero-cover-black-light-theme-labels-20261017",

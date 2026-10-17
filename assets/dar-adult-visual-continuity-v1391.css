@@ -84,8 +84,10 @@ html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-
   width:100%!important;
   max-width:100%!important;
   min-width:0!important;
-  min-height:clamp(430px,68svh,780px)!important;
+  aspect-ratio:16/9!important;
+  min-height:0!important;
   height:auto!important;
+  max-height:min(40svh,420px)!important;
   box-sizing:border-box!important;
   left:auto!important;
   right:auto!important;
@@ -97,20 +99,21 @@ html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-
   border-radius:0!important;
   box-shadow:none!important;
   overflow:hidden!important;
-  background-size:cover,cover,cover!important;
+  background-size:cover,cover,contain!important;
+  background-position:center,center,center center!important;
   background-repeat:no-repeat!important;
   background-origin:border-box!important;
   background-clip:border-box!important;
   isolation:isolate!important;
 }
 html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-title{
-  background-position:center,center,72% 48%!important;
-  padding:clamp(28px,5vw,50px) max(20px,env(safe-area-inset-left,0px)) clamp(42px,7vw,68px)!important;
+  background-position:center,center,center center!important;
+  padding:clamp(16px,3vw,28px) max(16px,env(safe-area-inset-left,0px)) clamp(18px,3.2vw,32px)!important;
 }
 html[data-theme] body.is-topics-route #appView.view > .topics-hub > .view-head,
 html[data-theme] body.is-topic-route #appView.view > .topic-collection-page > .view-head{
-  background-position:center,center,73% 48%!important;
-  padding-bottom:clamp(42px,6vw,64px)!important;
+  background-position:center,center,center center!important;
+  padding-bottom:clamp(18px,3.2vw,32px)!important;
 }
 /* Unterer harter heller Balken am Hero stark reduzieren */
 html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView.view > :is(.topics-hub,.topic-collection-page,.post-reader) > :is(.view-head,.post-reader-title)::after{
@@ -121,7 +124,9 @@ html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appVi
   html[data-theme] body.is-topics-route #appView.view > .topics-hub > .view-head,
   html[data-theme] body.is-topic-route #appView.view > .topic-collection-page > .view-head,
   html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-title{
-    min-height:clamp(260px,70svh,420px)!important;
+    aspect-ratio:16/9!important;
+    min-height:0!important;
+    max-height:min(46svh,280px)!important;
   }
 }
 /* Desktop light shell ohne data-theme ebenfalls lesbar */
