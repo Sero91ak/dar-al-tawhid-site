@@ -29,8 +29,12 @@ assert.ok(!portalJs.includes('style.setProperty("height","100dvh","important")')
 assert.ok(portalCss.includes('.app > .bottom-nav')&&portalCss.includes('pointer-events:auto!important'),"Shared bottom dock must remain above the Academy");
 assert.ok(academy.includes('id="kids-academy-viewport-and-header-v1424"')&&academy.includes('height:100dvh!important;')&&!academy.includes('height:calc(100dvh - var(--kids-academy-dock-clearance))'),"Academy page must not be truncated at the dock");
 assert.ok(academy.includes('padding-bottom:calc(var(--kids-academy-dock-clearance) + 12px)!important')&&academy.includes('scroll-padding-block-end:calc(var(--kids-academy-dock-clearance) + 12px)!important'),"Academy last cards must scroll behind but finish above the measured tab dock");
-assert.ok(academy.includes('padding-bottom:calc(var(--kids-academy-dock-clearance) + 10px)!important'),"Lesson navigation must remain above the real tab dock");
-assert.ok(portalJs.includes('edgeScroll=1426')&&portalCss.includes('height:var(--kids-academy-portal-height,100dvh)!important'),"Academy iframe must fill the viewport and bypass outdated HTML cache");
+assert.ok(academy.includes('KIDS_ACADEMY_LESSON_UNDER_DOCK_SCROLL_V1428'),"Academy lesson dock-safe scrollport fix missing");
+assert.ok(academy.includes('padding-bottom:calc(var(--kids-academy-dock-clearance,128px) + 12px)!important'),"Lesson must reserve the measured dock INSIDE the scrolling area");
+assert.ok(academy.includes('scroll-padding-block-end:calc(var(--kids-academy-dock-clearance,128px) + 12px)!important'),"Lesson must scroll its final answer above the dock");
+assert.ok(academy.includes('lessonScrollport.appendChild(lessonActions)'),"Real Back/Weiter controls must scroll with the lesson, not sit underneath the dock");
+assert.ok(academy.includes('body[data-kids-portal="true"][data-academy-view="lesson"] > main.wrap > #lessonMain.lesson-main:not([hidden]){\n flex:1 1 auto!important;\n min-height:0!important;\n padding-bottom:0!important;'),"Lesson shell must not lose usable height to an external dock spacer");
+assert.ok(portalJs.includes('edgeScroll=1428')&&portalCss.includes('height:var(--kids-academy-portal-height,100dvh)!important'),"Academy iframe must fill the viewport and bypass outdated HTML cache");
 assert.ok(html.includes('/kids/kids-academy-portal-v1421.js?v=1425')&&html.includes('/kids/kids-academy-girl-seam-v1421.css?v=1422'),"Installed PWA must request new Academy/dock CSS and JS");
 assert.ok(sw.includes('/kids/kids-academy-portal-v1421.js?v=1425')&&sw.includes('/kids/kids-academy-girl-seam-v1421.css?v=1422'),"New Academy/dock assets must be precached");
 assert.ok(portalJs.includes('DAR_KIDS_ACADEMY_PAUSE_V1421')&&portalJs.includes('DAR_KIDS_ACADEMY_CLOSE_V1421'),"Portal must handle child app exit and pause");
