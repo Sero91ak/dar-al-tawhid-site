@@ -28,7 +28,9 @@ on:
       - kids/deen-lessons.js
       - kids/deen-curriculum-v1.css
       - kids/item-offline-v1.js
+      - kids/data/deen-lessons.json
       - kids/data/deen-curriculum-v1.json
+      - kids/data/stories-authentic.json
       - kids/assets/deen/**
       - kids/tools/test-deen-curriculum-live.cjs
       - kids/tools/test-deen-visitor-rollout.cjs
