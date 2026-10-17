@@ -230,6 +230,31 @@ async function fetchVersionBuild(base) {
     if (!ok) throw new Error(`Dar Test full-width stylesheet not live: ${label}`);
   }
 
+  // DAR_TEST_HADITH_SHARH_INLINE_V1308: prove the actual served Test shell
+  // contains the inline canonical reader, not only a version.json bump or
+  // an unused dynamically injected script. Never check visitor or Kids routes.
+  for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
+    let verified = false;
+    for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
+      try {
+        const html = await fetchText(`${base}/index.html?hadith-sharh-inline-check=v1308-${Date.now()}`);
+        const css = await fetchText(`${base}/assets/ilm-hadith-v1243.css?v=hadith-sharh-inline-v1308`);
+        verified = html.status === 200 &&
+          html.text.includes("DAR_HADITH_SHARH_INLINE_V1308") &&
+          html.text.includes("/test/assets/ilm-hadith-v1243.css?v=hadith-sharh-inline-v1308") &&
+          html.text.includes("app-shell-v1358") &&
+          css.status === 200 &&
+          css.text.includes("DAR_HADITH_SHARH_READER_DISTINCTION_20261017");
+        console.log(`hadith-sharh-inline ${label}: html=${html.status} css=${css.status} canonical=${html.text.includes("DAR_HADITH_SHARH_INLINE_V1308")} v1358=${html.text.includes("app-shell-v1358")} result=${verified} attempt=${attempt}/${ATTEMPTS}`);
+      } catch (error) {
+        console.log(`hadith-sharh-inline ${label}: ${error.message || error} attempt=${attempt}/${ATTEMPTS}`);
+      }
+      if (verified) break;
+      if (attempt < ATTEMPTS) await sleep(DELAY_MS);
+    }
+    if (!verified) throw new Error(`Ḥadīṯ-Šarḥ-Detailansicht V1308 nicht ausgeliefert: ${label} ${base}`);
+  }
+
   async function waitForMatchingVersion(label, base) {
     for (let attempt = 1; attempt <= ATTEMPTS; attempt++) {
       const v = await fetchVersionBuild(base);
