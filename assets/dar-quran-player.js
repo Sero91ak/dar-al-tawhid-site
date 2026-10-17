@@ -7337,8 +7337,30 @@
       }
     });
   }
+  /* ADULT_QURAN_V107_BRIDGE — replace full-screen legacy player only.
+     Keep Apple TV/learn-reader/native now-playing code intact for testing and rollback. */
+  function routeToPlayerV107() {
+    if (isAppleTvApp()) return false;
+    if (window.__DAR_V107_NAVIGATING) return true;
+    window.__DAR_V107_NAVIGATING = true;
+    var editions = {
+      alafasy:"ar.alafasy", husary:"ar.husary",
+      minshawi:"ar.minshawi", sudais:"ar.abdurrahmaansudais",
+      maher:"ar.mahermuaiqly", shuraim:"ar.saoodshuraym"
+    };
+    var q = new URLSearchParams();
+    q.set("surah", String(Math.max(1,Math.min(114,Number(state.surah)||1))));
+    q.set("ayah", String(Math.max(1,Number(state.ayah)||1)));
+    q.set("reciter", editions[state.reciter] || "ar.alafasy");
+    try { var a=audioEl();if(a)a.pause(); } catch(e){}
+    try { persistCurrent("v10.7-route-transition"); } catch(e){}
+    location.assign("/quran-player/v10-7/?" + q.toString());
+    return true;
+  }
+
   function restoreGlobalPlayer(opts) {
     opts = opts || {};
+    if (!isAppleTvApp()) { routeToPlayerV107(); return; }
     if (LEARN_PLAYER_ONLY) {
       restoreLearning({ play: !!opts.play, from: "global-blocked-learn-only" });
       return;
@@ -8311,6 +8333,12 @@
   window.DARQuranPlayer = {
     __build: PLAYER_BUILD,
     render: function (value) {
+      if (!isAppleTvApp()) {
+        loadState({ keepLiveSession: true });
+        if (value) parseRoute(value);
+        routeToPlayerV107();
+        return '<section class="dqp-v107-transition" role="status" aria-live="polite">Qurʾān-Player wird geöffnet …</section>';
+      }
       if (LEARN_PLAYER_ONLY) return "";
       if (Date.now() < dismissUntil) return "";
       wantFullPlayer();

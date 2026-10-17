@@ -611,3 +611,36 @@
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});
   else init();
 })();
+/* KIDS_QURAN_V107_BRIDGE — replace legacy Qurʾān player entry points only.
+   Keep the Qurʾān hub, alphabet, daily lessons and all other tabs intact. */
+(function(){
+  "use strict";
+  var BASE="/kids/quran-player-v10-7/";
+  function qs(sel,root){return (root||document).querySelector(sel)}
+  function openPlayer(surah,ayah,library){
+    var app=qs(".app"), gender=(app&&app.getAttribute("data-gender"))||localStorage.getItem("kids.guest.gender.v1")||"boy";
+    var age=(app&&app.getAttribute("data-age"))||localStorage.getItem("kids.age")||"6–8";
+    var older=age==="9–10"||age==="9-10";
+    var profile=(older?"teen-":"")+(gender==="girl"?"girl":"boy");
+    var args=new URLSearchParams({profile:profile});
+    if(surah>=1&&surah<=114){args.set("surah",String(surah));if(ayah>=1)args.set("ayah",String(ayah));}
+    if(library)args.set("library","1");
+    location.assign(BASE+"?"+args.toString());
+  }
+  window.DAROpenKidsQuranV107=openPlayer;
+  document.addEventListener("click",function(e){
+    var t=e.target instanceof Element?e.target.closest("#view-quran .surah-card[data-surah],#view-quran [data-quran-ref],#quickLearn112,#resumeQuran,#fullQuranButton,#openPickedSurah"):null;
+    if(!t)return;
+    var surah=0,ayah=0,library=false;
+    if(t.hasAttribute("data-surah"))surah=Number(t.getAttribute("data-surah"));
+    else if(t.hasAttribute("data-quran-ref")){var parts=t.getAttribute("data-quran-ref").split(":");surah=Number(parts[0]);ayah=Number(parts[1]);}
+    else if(t.id==="quickLearn112"){surah=112;ayah=1;}
+    else if(t.id==="resumeQuran"){try{var saved=JSON.parse(localStorage.getItem("kids.quran.resume")||"{}");surah=Number(saved.surah)||112;ayah=Number(saved.ayah||0)+1;}catch(_e){surah=112;ayah=1;}}
+    else if(t.id==="fullQuranButton"){library=true;}
+    else if(t.id==="openPickedSurah"){surah=Number(qs("#surahPicker")&&qs("#surahPicker").value)||1;ayah=1;}
+    else return;
+    e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+    try{if(typeof window.stopQuran==="function")window.stopQuran();}catch(_e){}
+    openPlayer(surah,ayah,library);
+  },true);
+})();
