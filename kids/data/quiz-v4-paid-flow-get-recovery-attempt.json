@@ -81,6 +81,15 @@
       200
     ],
     "historyRowsInspected": 325,
+    "historyPrivacySafeAggregateDiagnostics": {
+      "correctVoiceAndModelRows": 0,
+      "sourceFlowsRows": 325,
+      "rowsWithSpokenText": 0,
+      "rowsWithDialogue": 325,
+      "textMatchesIgnoringSourceFilter": 0,
+      "historyIdMatchesOldGeneration": 0,
+      "requestIdMatchesOldGeneration": 0
+    },
     "candidateExactTextMatches": 0,
     "strongOriginalIdLinks": 0,
     "unlinkedOriginals": 9,
