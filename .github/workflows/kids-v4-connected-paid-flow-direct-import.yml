@@ -1,8 +1,8 @@
 name: KIDS V4 Import Already Paid ElevenCreative MP3s (GET only, zero credits)
 
 on:
-  pull_request:
-    branches: [main]
+  push:
+    branches: [review/kids-quiz-v4-batch-001-020-20261014]
     paths:
       - 'kids/tools/recover_quiz_v4_connected_flow_originals_get.py'
       - '.github/workflows/kids-v4-connected-paid-flow-direct-import.yml'
@@ -17,7 +17,7 @@ concurrency:
 
 jobs:
   fetch-import-compose-original-audio:
-    if: (github.event_name == 'pull_request' && github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' && github.event.pull_request.head.ref == 'review/kids-quiz-v4-batch-001-020-20261014') || (github.event_name == 'workflow_dispatch' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014')
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
     timeout-minutes: 40
     steps:
