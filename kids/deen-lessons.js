@@ -55,7 +55,7 @@ function renderCards(){
   const grid=$("#dlGrid");if(!grid)return;
   if(selectedCategory&&groupFor(selectedCategory)){
     const lessons=groupLessons(selectedCategory);
-    grid.classList.add("dl-lessons-grid");
+    grid.classList?.add("dl-lessons-grid");
     grid.innerHTML=lessons.map((item,index)=>{
       const ready=isReady(item),src=art(item),tag=ready?"button":"div";
       return '<'+tag+' class="ms-story-row dl-story-row dl-lesson-row'+(ready?"":" dl-pending")+'"'+
@@ -71,7 +71,7 @@ function renderCards(){
     grid.querySelectorAll("[data-dl-lesson]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.dlLesson)));
     return;
   }
-  grid.classList.remove("dl-lessons-grid");
+  grid.classList?.remove("dl-lessons-grid");
   grid.innerHTML=items.map((item,index)=>{
     const src=art(item),g=groupFor(item.id),n=g?g.lessons.length:1;
     return '<button class="ms-story-row dl-story-row" type="button" data-dl-id="'+esc(item.id)+'">'+
