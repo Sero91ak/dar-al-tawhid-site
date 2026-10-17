@@ -195,6 +195,7 @@ function checkAdultCopyInk(file) {
   else ok(`${file}: Aussagen folgen der Theme-Schrift`);
 }
 checkAdultCopyInk("test/index.html");
+checkAdultCopyInk("index.html");
 
 if (failed) {
   console.error(`\n${failed} check(s) failed – Deploy stoppen.`);
