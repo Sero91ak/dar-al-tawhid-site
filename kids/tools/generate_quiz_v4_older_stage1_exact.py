@@ -46,6 +46,18 @@ def check(ok,msg):
     if not ok:raise RuntimeError("KIDS_V4_STAGE1_PAYMENT_BLOCKED: "+msg)
 def sha(text):return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
+def durable_attempts(journal):
+    # Always put the same anti-repurchase evidence in the existing
+    # GitHub Actions *always-uploaded* usage backup, even if MP3 QA fails.
+    # A separate detailed journal remains available for local recovery.
+    usage=read(USAGE) if USAGE.is_file() else {"batchId":BATCH,"runs":[]}
+    check(usage.get("batchId")==BATCH and isinstance(usage.get("runs"),list),
+          "paid backup usage contract changed")
+    usage["requestJournal"]=journal
+    write(USAGE,usage)
+    write(ATTEMPTS,journal)
+
+
 def prepare():
     stage=read(PREP);reg=read(REG);ledger=read(LEDGER)
     check(read(RELEASE)["enabled"] is False,"public 450-quiz switch must remain OFF")
@@ -90,9 +102,13 @@ def prepare():
     protected=protect_paid_texts(ROOT,reg,ledger)
     # Each paid POST gets a durable write-ahead marker. A timed-out,
     # disconnected or ambiguous provider response must NOT be re-purchased.
-    journal=read(ATTEMPTS) if ATTEMPTS.is_file() else {
+    previous_usage=read(USAGE) if USAGE.is_file() else {}
+    journal=read(ATTEMPTS) if ATTEMPTS.is_file() else previous_usage.get("requestJournal") or {
         "schemaVersion":1,"modelId":MODEL,"voiceId":VOICE,
         "purpose":"DO_NOT_REGENERATE_UNCERTAIN_PAID_REQUESTS","entries":[]}
+    if ATTEMPTS.is_file() and previous_usage.get("requestJournal"):
+        check(journal==previous_usage["requestJournal"],
+              "paid request journal differs from protected action backup; never retry")
     check(journal.get("modelId")==MODEL and journal.get("voiceId")==VOICE
           and isinstance(journal.get("entries"),list),"invalid write-ahead paid audit journal")
     attempted=set()
@@ -275,7 +291,8 @@ def main():
         check(not path.exists(),"original audio exists without ledger; DO NOT REGENERATE")
         # Mark uncertainty BEFORE the request: a failed or timed-out paid
         # POST might have consumed credits without returning an MP3.
-        journal=read(ATTEMPTS) if ATTEMPTS.is_file() else {
+        previous_usage=read(USAGE) if USAGE.is_file() else {}
+        journal=read(ATTEMPTS) if ATTEMPTS.is_file() else previous_usage.get("requestJournal") or {
             "schemaVersion":1,"modelId":MODEL,"voiceId":VOICE,
             "purpose":"DO_NOT_REGENERATE_UNCERTAIN_PAID_REQUESTS","entries":[]}
         attempt={"textSHA256":sha(text),
@@ -285,7 +302,7 @@ def main():
         check(not any(z["textSHA256"]==sha(text) for z in journal["entries"]),
               "prior paid request logged for this text, no new POST allowed")
         journal["entries"].append(attempt)
-        write(ATTEMPTS,journal)
+        durable_attempts(journal)
         # On any ambiguous provider/network exception, keep the marker.
         # Recovery occurs through actual historical/provider bytes, never TTS.
         audio,request_id=original_mp3(key,text)
@@ -311,7 +328,7 @@ def main():
         attempt["status"]="ORIGINAL_MP3_SAVED"
         attempt["mp3SHA256"]=audiosha
         attempt["providerRequestId"]=request_id
-        write(ATTEMPTS,journal)
+        durable_attempts(journal)
         if not request_id:
             raise RuntimeError("Paid MP3 bytes were saved without a provider request ID. Preserve runner artifact, reconcile manually; NEVER RETRY this text.")
         completed+=1
