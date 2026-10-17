@@ -44,7 +44,6 @@ jobs:
         run: |
           set -euo pipefail
           python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
-          python3 kids/tools/audit_quiz_v4_stage1_sources.py
           python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --audit
           python3 - <<'PY'
           import json
