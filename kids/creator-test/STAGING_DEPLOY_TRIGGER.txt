@@ -40,3 +40,6 @@ Verification correction 2026-10-14: server check now expects the latest Salaf JS
 KIDS TEST SPLASH BOOT v1 · requested 2026-10-17 · isolated creator worker only
 Purpose: original icon-logo + greeting + blue/gold real-readiness 0–100 loader on web entry, preserve existing home/navigation and visitor release.
 Smoke checks: worker startup routes, forbidden routes, resource injection and JS syntax PASS. No App Store publish.
+
+2026-10-17 · KIDS TEST REDEPLOY REQUEST #2 · explicit owner authorization to publish staging-only boot loader.
+Scope: KIDS Creator Worker on workers.dev only; UI assets splash-boot-v1.css/js and Worker injection; public Kids visitor untouched. Deployment via GitHub Actions deploy-test-app.yml on push to kids-creator-staging.
