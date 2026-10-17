@@ -47,6 +47,42 @@ def fetch(url, key, audio=False):
             raise RuntimeError("History metadata GET did not yield JSON")
     return data
 
+def flow_generation_original(e, key):
+    """Retrieve a fresh signed MP3 URL from official Flows GET – no TTS."""
+    gid=e["generationId"]
+    # The Flow *generation* ID differs from the regular TTS history_item_id.
+    # This is the correct read-only endpoint for Creative Studio recordings:
+    # GET /v1/flows/text-to-speech/{generation_id}
+    response=json.loads(fetch(API+"/flows/text-to-speech/"+
+                              urllib.parse.quote(gid,safe=""),key))
+    completed=response.get("completed") if isinstance(response.get("completed"),dict) else response
+    if (completed.get("status")!="completed" or
+            completed.get("id")!=gid):
+        raise RuntimeError("Original Flow generation is not confirmed completed by provider")
+    url=completed.get("content_url")
+    if not isinstance(url,str) or not url:
+        raise RuntimeError("Completed Flow original has no signed audio URL")
+    parts=urllib.parse.urlsplit(url)
+    if parts.scheme!="https" or parts.hostname not in (
+            "storage.googleapis.com","storage.cloud.google.com"):
+        raise RuntimeError("Unexpected signed Flow audio origin")
+    if parts.username or parts.password or not parts.path.endswith(".mp3"):
+        raise RuntimeError("Unsafe/non-MP3 provider generation audio URL")
+    # Do not print or persist any signed URL or credential. This URL may expire,
+    # so fetch on demand from the immutable generation ID each time.
+    req=urllib.request.Request(url,headers={"Accept":"audio/mpeg"},method="GET")
+    try:
+        with urllib.request.urlopen(req,timeout=50) as r:
+            audio=r.read(AUDIO_LIMIT_BYTES+1)
+    except urllib.error.HTTPError as exc:
+        raise RuntimeError("Provider signed original download HTTP "+
+                           str(exc.code)+"; NO TTS RETRY") from None
+    if (not 1400<len(audio)<=AUDIO_LIMIT_BYTES
+            or not(audio.startswith(b"ID3") or audio[:1]==b"\\xff")):
+        raise RuntimeError("Original signed Flow audio not a valid bounded MP3")
+    return audio
+
+
 def main():
     p=argparse.ArgumentParser()
     p.add_argument("--audit",action="store_true",help="No API calls at all")
@@ -103,22 +139,31 @@ def main():
         d=Path(temp)
         recoveries=[]
         for e in todo:
-            spoken=e["sourceText"]
-            history_ids=list(dict.fromkeys(by_phrase.get(spoken,[])))
-            # Prefer zero potentially incorrect imports over a guessed source.
-            if len(history_ids)!=1:
-                recoveries.append({"generationId":e["generationId"],
-                    "status":"NO_UNAMBIGUOUS_PROVIDER_HISTORY_ITEM",
-                    "candidateCount":len(history_ids)})
-                continue
-            hid=history_ids[0]
-            audio=fetch(API+"/history/"+urllib.parse.quote(hid,safe="")+"/audio",key,audio=True)
+            # Prefer the immutable provider generation GET; Flows need not
+            # appear in the older text-to-speech History list at all.
+            try:
+                audio=flow_generation_original(e,key)
+                pathway="ORIGINAL_FLOWS_GENERATION_GET"
+            except RuntimeError as flow_error:
+                spoken=e["sourceText"]
+                history_ids=list(dict.fromkeys(by_phrase.get(spoken,[])))
+                if len(history_ids)!=1:
+                    recoveries.append({
+                        "generationId":e["generationId"],
+                        "status":"ORIGINAL_NOT_RECOVERABLE_BY_READ_ONLY_GET",
+                        "historyCandidateCount":len(history_ids),
+                        "flowGETError":str(flow_error)[:180]})
+                    continue
+                hid=history_ids[0]
+                audio=fetch(API+"/history/"+urllib.parse.quote(hid,safe="")+"/audio",
+                            key,audio=True)
+                pathway="EXACT_HISTORY_ITEM_GET"
             target=d/(e["generationId"]+".mp3")
             target.write_bytes(audio)
-            # Existing importer verifies ffprobe actual length and expected
-            # duration against the exact provider-confirmed generation record.
+            # The existing importer independently verifies format, duration,
+            # source SHA, generation IDs and immutable paid receipts.
             recoveries.append({"generationId":e["generationId"],
-                "status":"EXACT_HISTORY_AUDIO_SAVED_FOR_IMPORT","bytes":len(audio)})
+                "status":pathway,"bytes":len(audio)})
         print("HISTORY_GET_RESULTS "+json.dumps(recoveries,ensure_ascii=False),flush=True)
         if not list(d.glob("*.mp3")):
             raise RuntimeError("No unique paid historical flow originals downloadable: all generation IDs remain protected from resynthesis")
