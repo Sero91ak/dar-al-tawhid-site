@@ -57,18 +57,19 @@ export default {
     const isBootPage = ["/kids/start", "/kids/start.html", "/kids/index.html", "/kids/shell.html"].includes(path);
     if (isBootPage && asset.ok && request.method === "GET") {
       const original = await asset.clone().text();
-      const head = '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-1">'
-        + '<script src="/kids/splash-boot-v1.js?v=20261017-1"></script>';
-      const boot = '<div id="kids-test-boot" role="region" aria-label="TAWḤĪD KIDS wird vorbereitet">'
-        + '<div class="ktb-arch" aria-hidden="true"></div>'
-        + '<div class="ktb-stage"><div class="ktb-brand">'
-        + '<img class="ktb-logo" src="/kids/icons/icon-512.png?v=logo28" alt="DĀR AL TAWḤĪD Kids" width="512" height="512" fetchpriority="high">'
-        + '<p class="ktb-greeting">Assalāmu ʿalaikum wa raḥmatullāhi wa barakātuh</p>'
-        + '<p class="ktb-tag">Entdecken · Lernen · Verstehen</p>'
-        + '</div><div class="ktb-loading"><div class="ktb-progress-labels">'
-        + '<span class="ktb-edge">0%</span><div class="ktb-track" role="progressbar" aria-label="App wird geladen" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="ktb-fill"></div></div><span class="ktb-edge">100%</span></div>'
-        + '<p class="ktb-percent">0%</p><p class="ktb-status" aria-live="polite">Deine Lernwelt wird vorbereitet</p>'
-        + '<button type="button" class="ktb-recover">Erneut versuchen</button></div></div></div>';
+      const head = '<link rel="preload" as="image" href="/kids/assets/kids-splash-20261017-v1.jpg" fetchpriority="high">'
+        + '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-2">'
+        + '<script src="/kids/splash-boot-v1.js?v=20261017-2"></script>';
+      // Approved illustration already contains greeting and wordmark. Live progress only.
+      const boot = '<div id="kids-test-boot" role="region" aria-label="TAWḤĪD KIDS lädt">'
+        + '<div class="ktb-poster"><div class="ktb-loading">'
+        + '<div class="ktb-progress-labels"><span class="ktb-edge">0%</span>'
+        + '<div class="ktb-track" role="progressbar" aria-label="Startvorbereitung" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="ktb-fill"></div></div>'
+        + '<span class="ktb-edge">100%</span></div>'
+        + '<p class="ktb-percent" aria-live="off">0%</p>'
+        + '<p class="ktb-status" aria-live="polite"></p>'
+        + '<button type="button" class="ktb-recover">App trotzdem öffnen</button>'
+        + '</div></div></div>';
       if (original.includes("<head>") && original.includes("<body>")) {
         const decorated = original.replace("<head>", "<head>" + head).replace("<body>", "<body>" + boot);
         headers.delete("Content-Length");
