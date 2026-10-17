@@ -46,4 +46,5 @@ for(const variant of ["", "test/"]){
 assert.ok(read("cloudflare/test-app-worker.js").includes("frauen-authority-v1292.css?v=frauen-hero-v1390"),"Test shell must bust Frauen CSS cache");
 assert.ok(read("cloudflare/site-router.js").includes("frauen-authority-v1292.css?v=visitor-frauen-scroll-v1396"),"Visitor/iOS shell must bust Frauen CSS cache");
 assert.ok(read("cloudflare/site-router.js").includes('/assets/frauen/frauen-fiqh.js?v=visitor-frauen-scroll-v1396'),"Visitor native must use its own Frauen renderer");
+assert.ok(read("cloudflare/site-router.js").includes("VISITOR_FRAUEN_SINGLE_RENDERER_V1396"),"iOS visitor must remove legacy Test Frauen tags");
 console.log("OK Frauen: hub/group/list heroes and all seven image assets in Test + Besucher.");
