@@ -1,0 +1,1454 @@
+{
+  "schema": "kids-quran-creator-preview-v1",
+  "status": "staging-only",
+  "textSource": "content/quran/NNN.json: identischer arabischer Quelltext und deutsche Übersetzung",
+  "reciter": {
+    "name": "Maḥmūd Ḫalīl al-Ḥuṣarī",
+    "edition": "ar.husary",
+    "fallbackFolder": "Husary_128kbps",
+    "licenseStatus": "vor Besucherfreigabe zu prüfen"
+  },
+  "wordAudio": "pending authenticated isolated human clips",
+  "masterVoice": "pending reviewed German recordings",
+  "glossary": "Vorschau; vor Veröffentlichung fachlich prüfen",
+  "surahs": [
+    {
+      "id": 1,
+      "name": "Al-Fātiḥah",
+      "arabicName": "الفاتحة",
+      "topic": "Lob, Bittgebet und der gerade Weg",
+      "image": "/kids/assets/kids-art/surah-001-al-fatihah-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+          "de": "Im Namen Allahs, des Allerbarmers, des Barmherzigen.",
+          "transliteration": "bis'mi l-lahi l-raḥmāni l-raḥīmi",
+          "words": [
+            {
+              "ar": "بِسۡمِ",
+              "meaning": "Im Namen",
+              "audio": null
+            },
+            {
+              "ar": "ٱللَّهِ",
+              "meaning": "Allahs",
+              "audio": null
+            },
+            {
+              "ar": "ٱلرَّحۡمَٰنِ",
+              "meaning": "des Allerbarmers",
+              "audio": null
+            },
+            {
+              "ar": "ٱلرَّحِيمِ",
+              "meaning": "des Barmherzigen",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "ٱلۡحَمۡدُ لِلَّهِ رَبِّ ٱلۡعَٰلَمِينَ",
+          "de": "(Alles) Lob gehört Allah, dem Herrn der Welten,",
+          "transliteration": "al-ḥamdu lillahi rabbi l-ʿālamīna",
+          "words": [
+            {
+              "ar": "ٱلۡحَمۡدُ",
+              "meaning": "Alles Lob",
+              "audio": null
+            },
+            {
+              "ar": "لِلَّهِ",
+              "meaning": "gehört Allah",
+              "audio": null
+            },
+            {
+              "ar": "رَبِّ",
+              "meaning": "dem Herrn",
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡعَٰلَمِينَ",
+              "meaning": "der Welten",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ",
+          "de": "dem Allerbarmer, dem Barmherzigen,",
+          "transliteration": "al-raḥmāni l-raḥīmi",
+          "words": [
+            {
+              "ar": "ٱلرَّحۡمَٰنِ",
+              "meaning": "dem Allerbarmer",
+              "audio": null
+            },
+            {
+              "ar": "ٱلرَّحِيمِ",
+              "meaning": "dem Barmherzigen",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "مَٰلِكِ يَوۡمِ ٱلدِّينِ",
+          "de": "dem Herrscher am Tag des Gerichts.",
+          "transliteration": "māliki yawmi l-dīni",
+          "words": [
+            {
+              "ar": "مَٰلِكِ",
+              "meaning": "Herrscher",
+              "audio": null
+            },
+            {
+              "ar": "يَوۡمِ",
+              "meaning": "des Tages",
+              "audio": null
+            },
+            {
+              "ar": "ٱلدِّينِ",
+              "meaning": "des Gerichts",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "ar": "إِيَّاكَ نَعۡبُدُ وَإِيَّاكَ نَسۡتَعِينُ",
+          "de": "Dir allein dienen wir, und zu Dir allein flehen wir um Hilfe.",
+          "transliteration": "iyyāka naʿbudu wa-iyyāka nastaʿīnu",
+          "words": [
+            {
+              "ar": "إِيَّاكَ",
+              "meaning": "Dir allein",
+              "audio": null
+            },
+            {
+              "ar": "نَعۡبُدُ",
+              "meaning": "dienen wir",
+              "audio": null
+            },
+            {
+              "ar": "وَإِيَّاكَ",
+              "meaning": "und Dich allein",
+              "audio": null
+            },
+            {
+              "ar": "نَسۡتَعِينُ",
+              "meaning": "bitten wir um Hilfe",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "ar": "ٱهۡدِنَا ٱلصِّرَٰطَ ٱلۡمُسۡتَقِيمَ",
+          "de": "Leite uns den geraden Weg,",
+          "transliteration": "ih'dinā l-ṣirāṭa l-mus'taqīma",
+          "words": [
+            {
+              "ar": "ٱهۡدِنَا",
+              "meaning": "Leite uns",
+              "audio": null
+            },
+            {
+              "ar": "ٱلصِّرَٰطَ",
+              "meaning": "den Weg",
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡمُسۡتَقِيمَ",
+              "meaning": "den geraden",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "ar": "صِرَٰطَ ٱلَّذِينَ أَنۡعَمۡتَ عَلَيۡهِمۡ غَيۡرِ ٱلۡمَغۡضُوبِ عَلَيۡهِمۡ وَلَا ٱلضَّآلِّينَ",
+          "de": "den Weg derjenigen, denen Du Gunst erwiesen hast, nicht derjenigen, die (Deinen) Zorn erregt haben, und nicht der Irregehenden!",
+          "transliteration": "ṣirāṭa alladhīna anʿamta ʿalayhim ghayri l-maghḍūbi ʿalayhim walā l-ḍālīna",
+          "words": [
+            {
+              "ar": "صِرَٰطَ",
+              "meaning": "den Weg",
+              "audio": null
+            },
+            {
+              "ar": "ٱلَّذِينَ",
+              "meaning": "derjenigen",
+              "audio": null
+            },
+            {
+              "ar": "أَنۡعَمۡتَ",
+              "meaning": "Du hast Gunst erwiesen",
+              "audio": null
+            },
+            {
+              "ar": "عَلَيۡهِمۡ",
+              "meaning": "ihnen",
+              "audio": null
+            },
+            {
+              "ar": "غَيۡرِ",
+              "meaning": "nicht",
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡمَغۡضُوبِ",
+              "meaning": "derer, die Zorn auf sich gezogen haben",
+              "audio": null
+            },
+            {
+              "ar": "عَلَيۡهِمۡ",
+              "meaning": "auf ihnen",
+              "audio": null
+            },
+            {
+              "ar": "وَلَا",
+              "meaning": "und nicht",
+              "audio": null
+            },
+            {
+              "ar": "ٱلضَّآلِّينَ",
+              "meaning": "der Irregehenden",
+              "audio": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 103,
+      "name": "Al-ʿAṣr",
+      "arabicName": "العصر",
+      "topic": "Glaube, gute Taten und Geduld",
+      "image": "/kids/assets/kids-art/surah-103-al-asr-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "وَٱلۡعَصۡرِ",
+          "de": "Beim Zeitalter!",
+          "transliteration": "wal-ʿaṣri",
+          "words": [
+            {
+              "ar": "وَٱلۡعَصۡرِ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "إِنَّ ٱلۡإِنسَٰنَ لَفِي خُسۡرٍ",
+          "de": "Der Mensch befindet sich wahrlich in Verlust,",
+          "transliteration": "inna l-insāna lafī khus'rin",
+          "words": [
+            {
+              "ar": "إِنَّ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡإِنسَٰنَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "لَفِي",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "خُسۡرٍ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "إِلَّا ٱلَّذِينَ ءَامَنُواْ وَعَمِلُواْ ٱلصَّـٰلِحَٰتِ وَتَوَاصَوۡاْ بِٱلۡحَقِّ وَتَوَاصَوۡاْ بِٱلصَّبۡرِ",
+          "de": "außer denjenigen, die glauben und rechtschaffene Werke tun und einander die Wahrheit eindringlich empfehlen und einander die Standhaftigkeit eindringlich empfehlen.",
+          "transliteration": "illā alladhīna āmanū waʿamilū l-ṣāliḥāti watawāṣaw bil-ḥaqi watawāṣaw bil-ṣabri",
+          "words": [
+            {
+              "ar": "إِلَّا",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ٱلَّذِينَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ءَامَنُواْ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "وَعَمِلُواْ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ٱلصَّـٰلِحَٰتِ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "وَتَوَاصَوۡاْ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "بِٱلۡحَقِّ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "وَتَوَاصَوۡاْ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "بِٱلصَّبۡرِ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 105,
+      "name": "Al-Fīl",
+      "arabicName": "الفيل",
+      "topic": "Allahs Schutz und Macht",
+      "image": "/kids/assets/kids-art/surah-105-al-fil-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "أَلَمۡ تَرَ كَيۡفَ فَعَلَ رَبُّكَ بِأَصۡحَٰبِ ٱلۡفِيلِ",
+          "de": "Siehst du nicht, wie dein Herr mit den Leuten des Elefanten verfuhr?",
+          "transliteration": "alam tara kayfa faʿala rabbuka bi-aṣḥābi l-fīli",
+          "words": [
+            {
+              "ar": "أَلَمۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "تَرَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "كَيۡفَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "فَعَلَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "رَبُّكَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "بِأَصۡحَٰبِ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡفِيلِ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "أَلَمۡ يَجۡعَلۡ كَيۡدَهُمۡ فِي تَضۡلِيلٖ",
+          "de": "Ließ Er nicht ihre List verlorengehen",
+          "transliteration": "alam yajʿal kaydahum fī taḍlīlin",
+          "words": [
+            {
+              "ar": "أَلَمۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "يَجۡعَلۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "كَيۡدَهُمۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "فِي",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "تَضۡلِيلٖ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "وَأَرۡسَلَ عَلَيۡهِمۡ طَيۡرًا أَبَابِيلَ",
+          "de": "und sandte gegen sie Vögel in aufeinanderfolgenden Schwärmen,",
+          "transliteration": "wa-arsala ʿalayhim ṭayran bAbyl#(105:3:4)\">abābīla",
+          "words": [
+            {
+              "ar": "وَأَرۡسَلَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "عَلَيۡهِمۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "طَيۡرًا",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "أَبَابِيلَ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "تَرۡمِيهِم بِحِجَارَةٖ مِّن سِجِّيلٖ",
+          "de": "die sie mit Steinen aus gebranntem Lehm bewarfen,",
+          "transliteration": "tarmīhim biḥijāratin min sijjīlin",
+          "words": [
+            {
+              "ar": "تَرۡمِيهِم",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "بِحِجَارَةٖ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "مِّن",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "سِجِّيلٖ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "ar": "فَجَعَلَهُمۡ كَعَصۡفٖ مَّأۡكُولِۭ",
+          "de": "und sie so wie abgefressene Halme machte?",
+          "transliteration": "fajaʿalahum kaʿaṣfin makūlin",
+          "words": [
+            {
+              "ar": "فَجَعَلَهُمۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "كَعَصۡفٖ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "مَّأۡكُولِۭ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 106,
+      "name": "Qurayš",
+      "arabicName": "قريش",
+      "topic": "Dankbarkeit und Gottesdienst",
+      "image": "/kids/assets/kids-art/surah-106-quraysh-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "لِإِيلَٰفِ قُرَيۡشٍ",
+          "de": "Für die Vereinigung der Qurais",
+          "transliteration": "liīlāfi qurayshin",
+          "words": [
+            {
+              "ar": "لِإِيلَٰفِ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "قُرَيۡشٍ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "إِۦلَٰفِهِمۡ رِحۡلَةَ ٱلشِّتَآءِ وَٱلصَّيۡفِ",
+          "de": "ihre Vereinigung während der Reise des Winters und des Sommers.",
+          "transliteration": "īlāfihim riḥ'lata l-shitāi wal-ṣayfi",
+          "words": [
+            {
+              "ar": "إِۦلَٰفِهِمۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "رِحۡلَةَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ٱلشِّتَآءِ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "وَٱلصَّيۡفِ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "فَلۡيَعۡبُدُواْ رَبَّ هَٰذَا ٱلۡبَيۡتِ",
+          "de": "So sollen sie dem Herrn dieses Hauses dienen,",
+          "transliteration": "falyaʿbudū rabba hādhā l-bayti",
+          "words": [
+            {
+              "ar": "فَلۡيَعۡبُدُواْ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "رَبَّ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "هَٰذَا",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡبَيۡتِ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "ٱلَّذِيٓ أَطۡعَمَهُم مِّن جُوعٖ وَءَامَنَهُم مِّنۡ خَوۡفِۭ",
+          "de": "Der ihnen Speise nach ihrem Hunger gegeben und ihnen Sicherheit nach ihrer Furcht gewährt hat.",
+          "transliteration": "alladhī aṭʿamahum min jūʿin waāmanahum min khawfin",
+          "words": [
+            {
+              "ar": "ٱلَّذِيٓ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "أَطۡعَمَهُم",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "مِّن",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "جُوعٖ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "وَءَامَنَهُم",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "مِّنۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "خَوۡفِۭ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 108,
+      "name": "Al-Kawṯar",
+      "arabicName": "الكوثر",
+      "topic": "Allahs Gabe, Gebet und Dank",
+      "image": "/kids/assets/kids-art/surah-108-al-kawthar-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "إِنَّآ أَعۡطَيۡنَٰكَ ٱلۡكَوۡثَرَ",
+          "de": "Wir haben dir ja al-Kautar gegeben.",
+          "transliteration": "innā aʿṭaynāka l-kawthara",
+          "words": [
+            {
+              "ar": "إِنَّآ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "أَعۡطَيۡنَٰكَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡكَوۡثَرَ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "فَصَلِّ لِرَبِّكَ وَٱنۡحَرۡ",
+          "de": "So bete zu deinem Herrn und opfere.",
+          "transliteration": "faṣalli lirabbika wa-in'ḥar",
+          "words": [
+            {
+              "ar": "فَصَلِّ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "لِرَبِّكَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "وَٱنۡحَرۡ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "إِنَّ شَانِئَكَ هُوَ ٱلۡأَبۡتَرُ",
+          "de": "Gewiß, derjenige, der dich haßt, - er ist vom Guten abgetrennt .",
+          "transliteration": "inna shāni-aka huwa l-abtaru",
+          "words": [
+            {
+              "ar": "إِنَّ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "شَانِئَكَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "هُوَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡأَبۡتَرُ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 109,
+      "name": "Al-Kāfirūn",
+      "arabicName": "الكافرون",
+      "topic": "Anbetung allein für Allah",
+      "image": "/kids/assets/kids-art/surah-109-al-kafirun-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "قُلۡ يَـٰٓأَيُّهَا ٱلۡكَٰفِرُونَ",
+          "de": "Sag: O ihr Ungläubigen,",
+          "transliteration": "qul yāayyuhā l-kāfirūna",
+          "words": [
+            {
+              "ar": "قُلۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "يَـٰٓأَيُّهَا",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡكَٰفِرُونَ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "لَآ أَعۡبُدُ مَا تَعۡبُدُونَ",
+          "de": "ich diene nicht dem, dem ihr dient,",
+          "transliteration": "lā aʿbudu mā taʿbudūna",
+          "words": [
+            {
+              "ar": "لَآ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "أَعۡبُدُ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "مَا",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "تَعۡبُدُونَ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "وَلَآ أَنتُمۡ عَٰبِدُونَ مَآ أَعۡبُدُ",
+          "de": "und ihr dient nicht Dem, Dem ich diene.",
+          "transliteration": "walā antum ʿābidūna mā aʿbudu",
+          "words": [
+            {
+              "ar": "وَلَآ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "أَنتُمۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "عَٰبِدُونَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "مَآ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "أَعۡبُدُ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "وَلَآ أَنَا۠ عَابِدٞ مَّا عَبَدتُّمۡ",
+          "de": "Und ich werde (auch) nicht dem dienen, dem ihr gedient habt,",
+          "transliteration": "walā anā ʿābidun mā ʿabadttum",
+          "words": [
+            {
+              "ar": "وَلَآ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "أَنَا۠",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "عَابِدٞ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "مَّا",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "عَبَدتُّمۡ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "ar": "وَلَآ أَنتُمۡ عَٰبِدُونَ مَآ أَعۡبُدُ",
+          "de": "Und ihr werdet nicht Dem dienen, Dem ich diene.",
+          "transliteration": "walā antum ʿābidūna mā aʿbudu",
+          "words": [
+            {
+              "ar": "وَلَآ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "أَنتُمۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "عَٰبِدُونَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "مَآ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "أَعۡبُدُ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "ar": "لَكُمۡ دِينُكُمۡ وَلِيَ دِينِ",
+          "de": "Euch eure Religion und mir meine Religion.",
+          "transliteration": "lakum dīnukum waliya dīni",
+          "words": [
+            {
+              "ar": "لَكُمۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "دِينُكُمۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "وَلِيَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "دِينِ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 110,
+      "name": "An-Naṣr",
+      "arabicName": "النصر",
+      "topic": "Allah loben und um Vergebung bitten",
+      "image": "/kids/assets/kids-art/surah-110-an-nasr-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "إِذَا جَآءَ نَصۡرُ ٱللَّهِ وَٱلۡفَتۡحُ",
+          "de": "Wenn Allahs Hilfe kommt und der Sieg",
+          "transliteration": "idhā jāa naṣru l-lahi wal-fatḥu",
+          "words": [
+            {
+              "ar": "إِذَا",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "جَآءَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "نَصۡرُ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ٱللَّهِ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "وَٱلۡفَتۡحُ",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "وَرَأَيۡتَ ٱلنَّاسَ يَدۡخُلُونَ فِي دِينِ ٱللَّهِ أَفۡوَاجٗا",
+          "de": "und du die Menschen in Allahs Religion in Scharen eintreten siehst,",
+          "transliteration": "wara-ayta l-nāsa yadkhulūna fī dīni l-lahi afwājan",
+          "words": [
+            {
+              "ar": "وَرَأَيۡتَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ٱلنَّاسَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "يَدۡخُلُونَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "فِي",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "دِينِ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "ٱللَّهِ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "أَفۡوَاجٗا",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "فَسَبِّحۡ بِحَمۡدِ رَبِّكَ وَٱسۡتَغۡفِرۡهُۚ إِنَّهُۥ كَانَ تَوَّابَۢا",
+          "de": "dann lobpreise deinen Herrn und bitte Ihn um Vergebung; gewiß, Er ist Reueannehmend.",
+          "transliteration": "fasabbiḥ biḥamdi rabbika wa-is'taghfir'hu innahu kāna tawwāban",
+          "words": [
+            {
+              "ar": "فَسَبِّحۡ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "بِحَمۡدِ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "رَبِّكَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "وَٱسۡتَغۡفِرۡهُۚ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "إِنَّهُۥ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "كَانَ",
+              "meaning": null,
+              "audio": null
+            },
+            {
+              "ar": "تَوَّابَۢا",
+              "meaning": null,
+              "audio": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 112,
+      "name": "Al-Ikhlāṣ",
+      "arabicName": "الإخلاص",
+      "topic": "Die Einzigkeit Allahs",
+      "image": "/kids/assets/kids-art/surah-112-al-ikhlas-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "قُلۡ هُوَ ٱللَّهُ أَحَدٌ",
+          "de": "Sag: Er ist Allah, ein Einer,",
+          "transliteration": "qul huwa l-lahu aḥadun",
+          "words": [
+            {
+              "ar": "قُلۡ",
+              "meaning": "Sag",
+              "audio": null
+            },
+            {
+              "ar": "هُوَ",
+              "meaning": "Er",
+              "audio": null
+            },
+            {
+              "ar": "ٱللَّهُ",
+              "meaning": "Allah",
+              "audio": null
+            },
+            {
+              "ar": "أَحَدٌ",
+              "meaning": "ein Einziger",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "ٱللَّهُ ٱلصَّمَدُ",
+          "de": "Allah, der Überlegene.",
+          "transliteration": "al-lahu l-ṣamadu",
+          "words": [
+            {
+              "ar": "ٱللَّهُ",
+              "meaning": "Allah",
+              "audio": null
+            },
+            {
+              "ar": "ٱلصَّمَدُ",
+              "meaning": "der auf niemanden Angewiesene, auf den alle angewiesen sind",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "لَمۡ يَلِدۡ وَلَمۡ يُولَدۡ",
+          "de": "Er hat nicht gezeugt und ist nicht gezeugt worden,",
+          "transliteration": "lam yalid walam yūlad",
+          "words": [
+            {
+              "ar": "لَمۡ",
+              "meaning": "nicht",
+              "audio": null
+            },
+            {
+              "ar": "يَلِدۡ",
+              "meaning": "hat Er gezeugt",
+              "audio": null
+            },
+            {
+              "ar": "وَلَمۡ",
+              "meaning": "und nicht",
+              "audio": null
+            },
+            {
+              "ar": "يُولَدۡ",
+              "meaning": "wurde Er gezeugt",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "وَلَمۡ يَكُن لَّهُۥ كُفُوًا أَحَدُۢ",
+          "de": "und niemand ist Ihm jemals gleich.",
+          "transliteration": "walam yakun lahu kufuwan aḥadun",
+          "words": [
+            {
+              "ar": "وَلَمۡ",
+              "meaning": "und nicht",
+              "audio": null
+            },
+            {
+              "ar": "يَكُن",
+              "meaning": "ist",
+              "audio": null
+            },
+            {
+              "ar": "لَّهُۥ",
+              "meaning": "Ihm",
+              "audio": null
+            },
+            {
+              "ar": "كُفُوًا",
+              "meaning": "gleich",
+              "audio": null
+            },
+            {
+              "ar": "أَحَدُۢ",
+              "meaning": "irgendjemand",
+              "audio": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 113,
+      "name": "Al-Falaq",
+      "arabicName": "الفلق",
+      "topic": "Bei Allah Schutz suchen",
+      "image": "/kids/assets/kids-art/surah-113-al-falaq-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "قُلۡ أَعُوذُ بِرَبِّ ٱلۡفَلَقِ",
+          "de": "Sag: Ich nehme Zuflucht beim Herrn des Tagesanbruchs",
+          "transliteration": "qul aʿūdhu birabbi l-falaqi",
+          "words": [
+            {
+              "ar": "قُلۡ",
+              "meaning": "Sag",
+              "audio": null
+            },
+            {
+              "ar": "أَعُوذُ",
+              "meaning": "ich suche Schutz",
+              "audio": null
+            },
+            {
+              "ar": "بِرَبِّ",
+              "meaning": "beim Herrn",
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡفَلَقِ",
+              "meaning": "des Tagesanbruchs",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "مِن شَرِّ مَا خَلَقَ",
+          "de": "vor dem Übel dessen, was Er erschaffen hat,",
+          "transliteration": "min sharri mā khalaqa",
+          "words": [
+            {
+              "ar": "مِن",
+              "meaning": "vor",
+              "audio": null
+            },
+            {
+              "ar": "شَرِّ",
+              "meaning": "dem Übel",
+              "audio": null
+            },
+            {
+              "ar": "مَا",
+              "meaning": "dessen, was",
+              "audio": null
+            },
+            {
+              "ar": "خَلَقَ",
+              "meaning": "Er erschaffen hat",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ",
+          "de": "und vor dem Übel der Dunkelheit, wenn sie zunimmt,",
+          "transliteration": "wamin sharri ghāsiqin idhā waqaba",
+          "words": [
+            {
+              "ar": "وَمِن",
+              "meaning": "und vor",
+              "audio": null
+            },
+            {
+              "ar": "شَرِّ",
+              "meaning": "dem Übel",
+              "audio": null
+            },
+            {
+              "ar": "غَاسِقٍ",
+              "meaning": "einer Dunkelheit",
+              "audio": null
+            },
+            {
+              "ar": "إِذَا",
+              "meaning": "wenn",
+              "audio": null
+            },
+            {
+              "ar": "وَقَبَ",
+              "meaning": "sie hereinbricht",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "وَمِن شَرِّ ٱلنَّفَّـٰثَٰتِ فِي ٱلۡعُقَدِ",
+          "de": "und vor dem Übel der Knotenanbläserinnen",
+          "transliteration": "wamin sharri l-nafāthāti fī l-ʿuqadi",
+          "words": [
+            {
+              "ar": "وَمِن",
+              "meaning": "und vor",
+              "audio": null
+            },
+            {
+              "ar": "شَرِّ",
+              "meaning": "dem Übel",
+              "audio": null
+            },
+            {
+              "ar": "ٱلنَّفَّـٰثَٰتِ",
+              "meaning": "der auf Knoten Blasenden",
+              "audio": null
+            },
+            {
+              "ar": "فِي",
+              "meaning": "in",
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡعُقَدِ",
+              "meaning": "die Knoten",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "ar": "وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ",
+          "de": "und vor dem Übel eines (jeden) Neidenden, wenn er neidet.",
+          "transliteration": "wamin sharri ḥāsidin idhā ḥasada",
+          "words": [
+            {
+              "ar": "وَمِن",
+              "meaning": "und vor",
+              "audio": null
+            },
+            {
+              "ar": "شَرِّ",
+              "meaning": "dem Übel",
+              "audio": null
+            },
+            {
+              "ar": "حَاسِدٍ",
+              "meaning": "eines Neiders",
+              "audio": null
+            },
+            {
+              "ar": "إِذَا",
+              "meaning": "wenn",
+              "audio": null
+            },
+            {
+              "ar": "حَسَدَ",
+              "meaning": "er neidet",
+              "audio": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 114,
+      "name": "An-Nās",
+      "arabicName": "الناس",
+      "topic": "Schutz vor Einflüsterungen",
+      "image": "/kids/assets/kids-art/surah-114-an-nas-v13.jpg",
+      "verses": [
+        {
+          "id": 1,
+          "ar": "قُلۡ أَعُوذُ بِرَبِّ ٱلنَّاسِ",
+          "de": "Sag: Ich nehme Zuflucht beim Herrn der Menschen,",
+          "transliteration": "qul aʿūdhu birabbi l-nāsi",
+          "words": [
+            {
+              "ar": "قُلۡ",
+              "meaning": "Sag",
+              "audio": null
+            },
+            {
+              "ar": "أَعُوذُ",
+              "meaning": "ich suche Schutz",
+              "audio": null
+            },
+            {
+              "ar": "بِرَبِّ",
+              "meaning": "beim Herrn",
+              "audio": null
+            },
+            {
+              "ar": "ٱلنَّاسِ",
+              "meaning": "der Menschen",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "ar": "مَلِكِ ٱلنَّاسِ",
+          "de": "dem König der Menschen,",
+          "transliteration": "maliki l-nāsi",
+          "words": [
+            {
+              "ar": "مَلِكِ",
+              "meaning": "dem König",
+              "audio": null
+            },
+            {
+              "ar": "ٱلنَّاسِ",
+              "meaning": "der Menschen",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "ar": "إِلَٰهِ ٱلنَّاسِ",
+          "de": "dem Gott der Menschen,",
+          "transliteration": "ilāhi l-nāsi",
+          "words": [
+            {
+              "ar": "إِلَٰهِ",
+              "meaning": "dem Gott",
+              "audio": null
+            },
+            {
+              "ar": "ٱلنَّاسِ",
+              "meaning": "der Menschen",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "ar": "مِن شَرِّ ٱلۡوَسۡوَاسِ ٱلۡخَنَّاسِ",
+          "de": "vor dem Übel des Einflüsterers, des Davonschleichers,",
+          "transliteration": "min sharri l-waswāsi l-khanāsi",
+          "words": [
+            {
+              "ar": "مِن",
+              "meaning": "vor",
+              "audio": null
+            },
+            {
+              "ar": "شَرِّ",
+              "meaning": "dem Übel",
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡوَسۡوَاسِ",
+              "meaning": "des Einflüsterers",
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡخَنَّاسِ",
+              "meaning": "der sich zurückzieht",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 5,
+          "ar": "ٱلَّذِي يُوَسۡوِسُ فِي صُدُورِ ٱلنَّاسِ",
+          "de": "der in die Brüste der Menschen einflüstert,",
+          "transliteration": "alladhī yuwaswisu fī ṣudūri l-nāsi",
+          "words": [
+            {
+              "ar": "ٱلَّذِي",
+              "meaning": "derjenige",
+              "audio": null
+            },
+            {
+              "ar": "يُوَسۡوِسُ",
+              "meaning": "flüstert ein",
+              "audio": null
+            },
+            {
+              "ar": "فِي",
+              "meaning": "in",
+              "audio": null
+            },
+            {
+              "ar": "صُدُورِ",
+              "meaning": "die Herzen",
+              "audio": null
+            },
+            {
+              "ar": "ٱلنَّاسِ",
+              "meaning": "der Menschen",
+              "audio": null
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "ar": "مِنَ ٱلۡجِنَّةِ وَٱلنَّاسِ",
+          "de": "von den Ginn und den Menschen.",
+          "transliteration": "mina l-jinati wal-nāsi",
+          "words": [
+            {
+              "ar": "مِنَ",
+              "meaning": "von",
+              "audio": null
+            },
+            {
+              "ar": "ٱلۡجِنَّةِ",
+              "meaning": "den Ginn",
+              "audio": null
+            },
+            {
+              "ar": "وَٱلنَّاسِ",
+              "meaning": "und den Menschen",
+              "audio": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
