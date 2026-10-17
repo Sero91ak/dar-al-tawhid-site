@@ -32,11 +32,14 @@ const creatorInfo=read("ios/DarAlTawhidKids/DarAlTawhidKids/Info-Creator.plist")
 const visitorInfo=read("ios/DarAlTawhidKids/DarAlTawhidKids/Info.plist");
 const pbx=read("ios/DarAlTawhidKids/DarAlTawhidKids.xcodeproj/project.pbxproj");
 const imageSet=JSON.parse(read("ios/DarAlTawhidKids/DarAlTawhidKids/Assets.xcassets/KidsTestLaunchPoster.imageset/Contents.json"));
-assert.match(css,/opacity \.82s/,"smooth fade remains enabled");
+assert.match(css,/opacity \.62s/,"smooth fade remains enabled");
+assert.match(css,/kids-test-boot-bridge/,"opaque transitional cover prevents double text");
 assert.match(css,/translate3d\(0,clamp\(7px/,"poster avoids high visual alignment");
 assert.match(js,/revealNativePoster/,"native must reveal only after illustrated first paint");
 assert.match(js,/darKidsCreatorSplashReady/);
-assert.match(js,/setTimeout\(function\(\)\{if\(root\)root\.classList\.add\("kids-test-boot-fade"\)/);
+assert.match(js,/root\.classList\.add\("kids-test-boot-bridge"\)/,"illustration fades before home");
+assert.match(js,/root\.classList\.add\("kids-test-boot-fade"\)/,"the root fades last");
+assert.ok(js.indexOf('root.classList.add("kids-test-boot-bridge")')<js.indexOf('document.documentElement.classList.remove("kids-test-booting")',js.indexOf(" function finish(manual){")),"home is revealed only after artwork begins disappearing");
 assert.match(nativeView,/Image\("KidsTestLaunchPoster"\)/);
 assert.match(nativeView,/\.onReceive\(NotificationCenter\.default\.publisher\(for: Notification\.Name\("DarKidsCreatorSplashReady"\)\)\)/);
 assert.match(nativeWeb,/configuration\.userContentController\.add\(context\.coordinator, name: "darKidsCreatorSplashReady"\)/);
