@@ -98,9 +98,9 @@ const legacySettingsHero = settingsFn.includes('setHeader("Einstellungen"') &&
   settingsFn.includes("renderDarSetupHubHtml()") &&
   settingsFn.indexOf('setHeader("Einstellungen"') < settingsFn.indexOf("renderDarSetupHubHtml()");
 const modernSettingsHero = settingsFn.includes('const overviewHeader=()=>setHeader("Einstellungen"') &&
-  settingsFn.includes('return \`\${overviewHeader()}') &&
+  settingsFn.includes('return `${overviewHeader()}') &&
   settingsFn.includes('<section class="dsh-shell dsh-home"') &&
-  settingsFn.includes('return \`\${setHeader(pages[page][0],pages[page][1],"","settings-page-head")}<section class="dsh-shell dsh-detail"');
+  settingsFn.includes('return `${setHeader(pages[page][0],pages[page][1],"","settings-page-head")}<section class="dsh-shell dsh-detail"');
 if (!settingsFn || !(legacySettingsHero || modernSettingsHero)) {
   fail("test/index.html: Settings-Hero fehlt vor dem Einstellungsinhalt");
 } else {
