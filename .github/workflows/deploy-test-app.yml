@@ -266,6 +266,7 @@ jobs:
           node kids/tools/verify-global-release-lock.cjs
           node --check kids/quran-lernen/app.js
           node kids/quran-lernen/test-quran-lernen.cjs
+          node kids/quran-lernen/check-studio-v3.cjs
           node kids/tools/test-creator-worker-v2.cjs
           node kids/tools/test-creator-splash-v1.cjs
           node kids/tools/test-native-creator-v2.cjs
