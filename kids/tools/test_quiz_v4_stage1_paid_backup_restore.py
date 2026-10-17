@@ -1,0 +1,116 @@
+#!/usr/bin/env python3
+"""No-credits tests for recovering ORIGINAL older V4 MP3s after CI failure.
+
+Uses existing genuine metadata and an unconfirmed request in a temporary ZIP;
+does not invent a playable MP3, generate speech, or change the real repository.
+"""
+from __future__ import annotations
+
+import copy
+import json
+import sys
+import tempfile
+import zipfile
+from pathlib import Path
+
+ROOT=Path(__file__).resolve().parents[2]
+sys.path.insert(0,str(ROOT/"kids/tools"))
+import restore_quiz_v4_stage1_paid_run_backup as recover
+
+def must(ok,message):
+    if not ok:raise AssertionError("KIDS_V4_SALVAGE_TEST_FAIL: "+message)
+
+def write(path,obj):
+    path.parent.mkdir(parents=True,exist_ok=True)
+    path.write_text(json.dumps(obj,ensure_ascii=False),encoding="utf-8")
+
+def zip_fixture(path,reg,ledger,usage,strip_kids=True):
+    with zipfile.ZipFile(path,"w",compression=zipfile.ZIP_DEFLATED) as z:
+        for name,obj in [(recover.REG,reg),(recover.LEDGER,ledger),(recover.USAGE,usage)]:
+            z.writestr(name.removeprefix("kids/") if strip_kids else name,
+                       json.dumps(obj,ensure_ascii=False))
+
+def expected_blocked(action,label):
+    try:action()
+    except (RuntimeError,ValueError,zipfile.BadZipFile):
+        return
+    raise AssertionError("Unsafe Actions MP3 backup accepted: "+label)
+
+def main():
+    stage=recover.read(ROOT/recover.STAGE)
+    registry=recover.read(ROOT/recover.REG)
+    ledger=recover.read(ROOT/recover.LEDGER)
+    first=stage["originalTextRecordingQueue"][0]
+    uncertain={"batchId":recover.BATCH,"textSHA256":first["spokenTextSHA256"],
+               "startedAt":"2026-10-17T12:00:00+02:00",
+               "status":"REQUEST_STARTED_UNCONFIRMED"}
+    journal={"schemaVersion":1,"modelId":recover.MODEL,"voiceId":recover.VOICE,
+             "purpose":"DO_NOT_REGENERATE_UNCERTAIN_PAID_REQUESTS",
+             "entries":[uncertain]}
+    usage={"batchId":recover.BATCH,"runs":[],"requestJournal":journal}
+    with tempfile.TemporaryDirectory() as temp:
+        work=Path(temp)/"work"
+        for name,obj in [(recover.REG,registry),(recover.LEDGER,ledger),
+                         (recover.STAGE,stage),
+                         ("kids/data/quiz-curation-release.json",{"enabled":False})]:
+            write(work/name,obj)
+        path=Path(temp)/"github-artifact-root-stripped.zip"
+        zip_fixture(path,registry,ledger,usage)
+        original_registry_bytes=(work/recover.REG).read_bytes()
+        read_only=recover.import_backup(path,work,apply=False)
+        must(read_only["newlyRecoveredRealOriginalMP3s"]==0 and
+             len(read_only["unconfirmedPriorPaidRequests"])==1,
+             "failed provider POST uncertainty was lost")
+        must(not (work/recover.USAGE).exists() and
+             (work/recover.REG).read_bytes()==original_registry_bytes,
+             "dry run modified audio files or saved a false original")
+        recovered=recover.import_backup(path,work,apply=True)
+        must(recovered["creditsConsumedByThisRestoration"]==0
+             and not recovered["publicReleaseAllowed"]
+             and not recovered["humanListeningApproved"],
+             "failed-run recovery claimed approval or new synthesis")
+        must(recover.read(work/recover.ATTEMPTS)==journal and
+             recover.read(work/recover.USAGE)["requestJournal"]==journal,
+             "uncertain paid POST was not retained in both local journal and durable ledger")
+        must((work/recover.REG).read_bytes()!=b"",
+             "recoverer erased genuine old paid MP3 metadata")
+        # A malicious backup may never replace any existing paid audio SHA.
+        damaged=copy.deepcopy(registry)
+        first_old=next(iter(damaged["textClips"]))
+        damaged["textClips"][first_old]["sha256"]="0"*64
+        altered=Path(temp)/"changed-old-original.zip"
+        zip_fixture(altered,damaged,ledger,usage)
+        expected_blocked(lambda:recover.import_backup(altered,work,apply=True),
+                         "modified already-paid MP3")
+        # A newly billed row with missing original audio bytes cannot be faked.
+        extra=copy.deepcopy(registry)
+        new_ledger=copy.deepcopy(ledger)
+        speech=first["spokenText"]
+        extra["textClips"][speech]={
+            "url":"/"+recover.BASE+("a"*32)+".mp3",
+            "textSha256":first["spokenTextSHA256"],
+            "sha256":"0"*64,"bytes":3000,
+            "voiceId":recover.VOICE,"modelId":recover.MODEL,
+            "audioListeningApproved":False}
+        new_ledger["rows"].append({
+            "text":speech,"batchId":recover.BATCH,
+            "textSha256":first["spokenTextSHA256"],"mp3Sha256":"0"*64})
+        forged=Path(temp)/"fake-paid-audio.zip"
+        zip_fixture(forged,extra,new_ledger,usage)
+        expected_blocked(lambda:recover.import_backup(forged,work,apply=True),
+                         "new billed MP3 without actual recorded bytes")
+        # Strictly forbid path traversal in an Actions archive.
+        traversal=Path(temp)/"unsafe-paths.zip"
+        with zipfile.ZipFile(traversal,"w") as z:
+            z.writestr("../foo.json","{}")
+        expected_blocked(lambda:recover.import_backup(traversal,work,apply=False),
+                         "unsafe archive path")
+        # Both GitHub ZIP layouts must be supported.
+        exact=Path(temp)/"github-artifact-full-paths.zip"
+        zip_fixture(exact,registry,ledger,usage,strip_kids=False)
+        must(recover.import_backup(exact,work,apply=False)["newlyRecoveredRealOriginalMP3s"]==0,
+             "full-path GitHub Actions ZIP backup not supported")
+    print("PASS: original-billed V4 audio restored only from actual bytes; "+
+          "no synthetic MP3, uncertain charges retained, no double generation, 0 credits")
+
+if __name__=="__main__":main()
