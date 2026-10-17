@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "updatedAt": "2026-10-17",
+  "status": "public-layout-only",
+  "releasePolicy": "Public layout-first release: 6 existing original masters remain available; 24 additional lessons are explicitly locked as planned until source and text review, with no draft content or audio distributed.",
+  "sourcePolicy": "Qurʾān, authentic Sunnah, verified Athār; no unattributed sayings or invented unseen narratives.",
+  "masterAudioPolicy": "One canonical master text per lesson; audio is published only after exact-text QA.",
+  "categories": [
+    {
+      "id": "was-ist-tawhid",
+      "lessons": [
+        {
+          "id": "was-ist-tawhid",
+          "title": "Was ist Tawḥīd?",
+          "summary": "Allah allein gehört unsere Anbetung.",
+          "status": "existing"
+        },
+        {
+          "id": "tawhid-ar-rububiyyah",
+          "title": "Tawḥīd ar-Rubūbiyyah",
+          "summary": "Allah allein erschafft, versorgt und bestimmt.",
+          "cover": "/kids/assets/deen/lesson-rububiyyah-firefly-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-rububiyyah-firefly-v1.jpg",
+          "status": "planned"
+        },
+        {
+          "id": "tawhid-al-uluhiyyah",
+          "title": "Tawḥīd al-Ulūhiyyah",
+          "summary": "Warum unsere Anbetung nur Allah gehört.",
+          "cover": "/kids/assets/deen/lesson-friendly-courtyard-runway-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-friendly-courtyard-runway-v1.jpg",
+          "status": "planned"
+        },
+        {
+          "id": "tawhid-al-asma-was-sifat",
+          "title": "Tawḥīd al-Asmāʾ wa-ṣ-Ṣifāt",
+          "summary": "Allahs vollkommene Namen und Eigenschaften.",
+          "cover": "/kids/assets/deen/asma-sifat.jpg?v=1205",
+          "hero": "/kids/assets/deen/asma-sifat.jpg?v=1205",
+          "status": "planned"
+        },
+        {
+          "id": "was-ist-shirk",
+          "title": "Was bedeutet Širk?",
+          "summary": "Den Unterschied zwischen Tawḥīd und Širk verstehen.",
+          "cover": "/kids/assets/deen/tawhid.jpg?v=1205",
+          "hero": "/kids/assets/deen/tawhid.jpg?v=1205",
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "was-ist-iman",
+      "lessons": [
+        {
+          "id": "was-ist-iman",
+          "title": "Was ist Īmān?",
+          "summary": "Die Grundlage des Glaubens.",
+          "status": "existing"
+        },
+        {
+          "id": "sechs-saeulen-iman",
+          "title": "Die sechs Säulen des Īmān",
+          "summary": "Was wir aus dem Ḥadīṯ Ǧibrīl lernen.",
+          "cover": "/kids/assets/deen/lesson-iman-foundations-firefly-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-iman-foundations-firefly-v1.jpg",
+          "status": "planned"
+        },
+        {
+          "id": "iman-herz-wort-tat",
+          "title": "Īmān in Herz, Wort und Tat",
+          "summary": "Wie der Glaube unser Leben prägt.",
+          "status": "planned"
+        },
+        {
+          "id": "iman-wachstum",
+          "title": "Īmān kann zunehmen",
+          "summary": "Der Glaube wird durch Gehorsam gestärkt.",
+          "cover": "/kids/assets/deen/lesson-iman-growth-runway-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-iman-growth-runway-v1.jpg",
+          "status": "planned"
+        },
+        {
+          "id": "iman-staerken",
+          "title": "Was stärkt unseren Īmān?",
+          "summary": "Qurʾān, Gebet und gute Taten.",
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "asma-wa-sifat",
+      "lessons": [
+        {
+          "id": "asma-wa-sifat",
+          "title": "Allahs Namen und Eigenschaften",
+          "summary": "Was Qurʾān und Sunnah darüber lehren.",
+          "status": "existing"
+        },
+        {
+          "id": "ar-rahman-ar-rahim",
+          "title": "Ar-Raḥmān und Ar-Raḥīm",
+          "summary": "Allahs Barmherzigkeit kennenlernen.",
+          "cover": "/kids/assets/deen/lesson-asma-mercy-firefly-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-asma-mercy-firefly-v1.jpg",
+          "status": "planned"
+        },
+        {
+          "id": "al-alim-as-sami",
+          "title": "Al-ʿAlīm und As-Samīʿ",
+          "summary": "Allah weiß alles und hört alles.",
+          "cover": "/kids/assets/deen/asma-sifat.jpg?v=1205",
+          "hero": "/kids/assets/deen/asma-sifat.jpg?v=1205",
+          "status": "planned"
+        },
+        {
+          "id": "al-basir-al-hakim",
+          "title": "Al-Baṣīr und Al-Ḥakīm",
+          "summary": "Allah sieht alles und ist vollkommen weise.",
+          "cover": "/kids/assets/deen/lesson-asma-wisdom-runway-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-asma-wisdom-runway-v1.jpg",
+          "status": "planned"
+        },
+        {
+          "id": "eigenschaften-ohne-vergleich",
+          "title": "Ohne Vergleich und erfundenes Wie",
+          "summary": "Ehrfürchtig bei den Offenbarungstexten bleiben.",
+          "cover": "/kids/assets/deen/asma-sifat.jpg?v=1205",
+          "hero": "/kids/assets/deen/asma-sifat.jpg?v=1205",
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "was-ist-ibadah",
+      "lessons": [
+        {
+          "id": "was-ist-ibadah",
+          "title": "Was ist ʿIbādah?",
+          "summary": "Allah mit Herz, Wort und Tat dienen.",
+          "status": "existing"
+        },
+        {
+          "id": "was-ist-ikhlas",
+          "title": "Ikhlāṣ – aufrichtig für Allah",
+          "summary": "Für wen verrichten wir unsere guten Taten?",
+          "status": "planned"
+        },
+        {
+          "id": "gebet-ibadah",
+          "title": "Das Gebet gehört Allah",
+          "summary": "Warum wir unser Gebet für Allah verrichten.",
+          "status": "planned"
+        },
+        {
+          "id": "dua-und-tawakkul",
+          "title": "Duʿāʾ und Tawakkul",
+          "summary": "Bittgebet und Vertrauen auf Allah.",
+          "status": "planned"
+        },
+        {
+          "id": "sunnah-folgen",
+          "title": "Der Sunnah folgen",
+          "summary": "Den Propheten ﷺ zum Vorbild nehmen.",
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "adab-und-akhlaq",
+      "lessons": [
+        {
+          "id": "adab-und-akhlaq",
+          "title": "Guter Charakter",
+          "summary": "Wie wir uns im Alltag gut verhalten.",
+          "status": "existing",
+          "cover": "/kids/assets/deen/lesson-adab-firefly-v1.jpg",
+          "hero": "/kids/assets/deen/lesson-adab-firefly-v1.jpg"
+        },
+        {
+          "id": "wahrhaftigkeit",
+          "title": "Wahrhaftigkeit",
+          "summary": "Warum wir immer die Wahrheit sagen.",
+          "status": "planned"
+        },
+        {
+          "id": "eltern-ehren",
+          "title": "Eltern und Familie ehren",
+          "summary": "Respekt und Hilfsbereitschaft zu Hause.",
+          "status": "planned"
+        },
+        {
+          "id": "geduld-dankbarkeit",
+          "title": "Geduld und Dankbarkeit",
+          "summary": "Ṣabr und Šukr im Alltag üben.",
+          "status": "planned"
+        },
+        {
+          "id": "freundlichkeit",
+          "title": "Freundlichkeit",
+          "summary": "Ein schönes Wort und gute Manieren.",
+          "status": "planned"
+        }
+      ]
+    },
+    {
+      "id": "al-akhirah",
+      "lessons": [
+        {
+          "id": "al-akhirah",
+          "title": "Der Jüngste Tag",
+          "summary": "Allah berichtet uns von der Āḫirah.",
+          "status": "existing"
+        },
+        {
+          "id": "tod-und-auferstehung",
+          "title": "Tod und Auferstehung",
+          "summary": "Wir kehren eines Tages zu Allah zurück.",
+          "status": "planned"
+        },
+        {
+          "id": "die-abrechnung",
+          "title": "Die Abrechnung",
+          "summary": "Allah ist vollkommen gerecht.",
+          "status": "planned"
+        },
+        {
+          "id": "paradies-und-hoellenfeuer",
+          "title": "Paradies und Höllenfeuer",
+          "summary": "Was uns die Offenbarung darüber lehrt.",
+          "status": "planned"
+        },
+        {
+          "id": "vorbereitung-akhirah",
+          "title": "Vorbereitung auf die Āḫirah",
+          "summary": "Heute gute Taten lernen und üben.",
+          "status": "planned"
+        }
+      ]
+    }
+  ]
+}
