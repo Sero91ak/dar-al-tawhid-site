@@ -52,6 +52,33 @@ export default {
       headers.set("Cache-Control", "private, no-store, max-age=0");
       headers.set("CDN-Cache-Control", "no-store");
     }
+    // KIDS TEST only: decorate the web entry document; no modifications to the
+    // 530 KB visitor HTML or public routes. The script runs before app parsing.
+    const isBootPage = /^\\/kids\\/(?:start(?:\\.html)?|index\\.html|shell\\.html)$/.test(path);
+    if (isBootPage && asset.ok && request.method === "GET") {
+      const original = await asset.text();
+      const head = '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-1">\\n'
+        + '<script src="/kids/splash-boot-v1.js?v=20261017-1"></script>\\n';
+      const boot = '<div id="kids-test-boot" role="region" aria-label="TAWḤĪD KIDS wird vorbereitet">'
+        + '<div class="ktb-arch" aria-hidden="true"></div>'
+        + '<div class="ktb-stage"><div class="ktb-brand">'
+        + '<img class="ktb-logo" src="/kids/icons/icon-512.png?v=logo28" alt="DĀR AL TAWḤĪD Kids" width="512" height="512" fetchpriority="high">'
+        + '<p class="ktb-greeting">Assalāmu ʿalaikum wa raḥmatullāhi wa barakātuh</p>'
+        + '<p class="ktb-tag">Entdecken · Lernen · Verstehen</p>'
+        + '</div><div class="ktb-loading"><div class="ktb-progress-labels">'
+        + '<span class="ktb-edge">0%</span><div class="ktb-track" role="progressbar" aria-label="App wird geladen" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="ktb-fill"></div></div><span class="ktb-edge">100%</span></div>'
+        + '<p class="ktb-percent">0%</p><p class="ktb-status" aria-live="polite">Deine Lernwelt wird vorbereitet</p>'
+        + '<button type="button" class="ktb-recover">Erneut versuchen</button></div></div></div>';
+      if (original.includes("<head>") && /<body\\b[^>]*>/i.test(original)) {
+        const decorated = original.replace("<head>", "<head>\\n" + head)
+          .replace(/<body\\b[^>]*>/i, (match) => match + "\\n" + boot + "\\n");
+        headers.delete("Content-Length");
+        headers.delete("ETag");
+        headers.set("Content-Type", "text/html; charset=utf-8");
+        headers.set("Cache-Control", "private, no-store, max-age=0");
+        return new Response(decorated, { status: asset.status, headers });
+      }
+    }
     return new Response(request.method === "HEAD" ? null : asset.body, {
       status: asset.status,
       statusText: asset.statusText,
