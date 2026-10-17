@@ -16,6 +16,8 @@ new vm.Script(worker.replace("export default {","const worker = {")+"\nworker;",
 assert.match(worker,/asset\.clone\(\)\.text\(\)/,"mock response stream must remain readable");
 assert.match(worker,/TextDecoderStream/,"production streams markup without buffering all 534KB");
 assert.match(worker,/kids-test-first-frame-css/,"early inline boot prevents white browser canvas");
+assert.match(worker,/background:#07152f!important/,"first paint stays dark before external assets");
+assert.match(worker,/setTimeout\(function\(\)\{if\(!window\.__KIDS_CREATOR_SPLASH_2__/,"missing JS must not trap the page");
 assert.match(worker,/apple-touch-startup-image/,"PWA startup image hint is present");
 assert.match(worker,/media="print"/,"external splash styling must not block first paint");
 assert.match(worker,/\bkids-splash-20261017-v1\.jpg\b/);
@@ -37,6 +39,9 @@ const visitorInfo=read("ios/DarAlTawhidKids/DarAlTawhidKids/Info.plist");
 const pbx=read("ios/DarAlTawhidKids/DarAlTawhidKids.xcodeproj/project.pbxproj");
 const imageSet=JSON.parse(read("ios/DarAlTawhidKids/DarAlTawhidKids/Assets.xcassets/KidsTestLaunchPoster.imageset/Contents.json"));
 assert.match(css,/ktb-storybook-open/,"continuous feathered motion installed");
+assert.match(css,/ktb-reveal-gold/,"synchronized gold seam is part of actual transition");
+assert.match(css,/rgba\(0,0,0,\.10\) 50\.76%/,"mask feather stays narrow to avoid doubled lettering");
+assert.match(css,/clip-path:inset\(0 0 100% 0\)/,"no opacity-only fallback ghosting");
 assert.match(css,/-webkit-mask-image:linear-gradient/,"Safari iOS feathered mask");
 assert.match(css,/mask-position:0 100%/,"soft reveal goes all the way to transparent");
 assert.match(css,/ktb-storybook-fallback/,"direct reduced-motion fallback");
