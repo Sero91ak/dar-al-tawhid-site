@@ -41,7 +41,7 @@ for(const p of ["/kids/deen-lessons.js?v=13","/kids/data/deen-curriculum-v1.json
 const shells=["kids/index.html","kids/start.html","kids/shell.html"].map(read);
 const v=JSON.parse(read("kids/version.json"));
 const swVersion=String(v.visualSystem.serviceWorkerCache||"").replace(/^v/,"");
-assert.match(swVersion,/^\\d+$/,"Invalid Kids SW cache version");
+assert.match(swVersion,/^\d+$/,"Invalid Kids SW cache version");
 assert.ok(shells.every(s=>s===shells[0]),"KIDS shells differ");
 for(const p of ["/kids/deen-lessons.js?v=13","/kids/item-offline-v1.js?v=6","/kids/sw.js?v="+swVersion]){
  assert.ok(shells[0].includes(p),"Outdated KIDS shell reference: "+p);
