@@ -10,6 +10,7 @@ assert.ok(script,"Keyboard-focus guard missing");
 new vm.Script(script[1],{filename:"kids-academy-writing-keyboard-v1438.js"});
 new vm.Script(portal,{filename:"kids-academy-portal-v1421.js"});
 assert.ok(page.includes('KIDS_ACADEMY_WRITING_KEYBOARD_V1438'),"Typing-only CSS missing");
+assert.ok(page.includes('data-academy-typing="true"'),"Keyboard layout may change only on genuine text-input focus");
 assert.ok(page.includes('textarea,input,[contenteditable=true]'),"Text caret touch gestures must remain native");
 assert.ok(page.includes('document.activeElement===answer'),"Keyboard resize must never jump a non-editing lesson");
 assert.ok(page.includes('mode("text")'),"Keep existing text-answer mode");
