@@ -8,7 +8,9 @@ supported original-id_description.mp3 / original-id-description.mp3.
 from __future__ import annotations
 import json
 from pathlib import Path
-from recover_quiz_v4_nine_from_github_action_archives import original_id_from_export_name, ROOT
+from recover_quiz_v4_nine_from_github_action_archives import (
+    original_id_from_export_name, sample_historical_archives,
+    MAX_SAMPLES_PER_NAME, ROOT)
 
 def main():
     state=json.loads((ROOT/"kids/data/quiz-v4-paid-flow-import-status.json").read_text(encoding="utf-8"))
@@ -28,6 +30,24 @@ def main():
             assert original_id_from_export_name(refused,paid) is None,refused
     assert original_id_from_export_name("aaaaaaaaaaaaaaaaaaaa.mp3",set()) is None
     assert original_id_from_export_name("aaaaaaaaaaaaaaaaaaaa.mp3",paid) is None
+    # Stop the old regression: scanning only the newest 48 backups could
+    # consume the full 300 MB budget without inspecting historic originals.
+    hundred=[{"id":i,"created_at":"historical-simulated-index"}
+             for i in range(100)]
+    spread=sample_historical_archives(hundred)
+    assert len(spread)==MAX_SAMPLES_PER_NAME==6
+    assert spread[0]["id"]==0 and spread[-1]["id"]==99
+    assert len({x["id"] for x in spread})==6
+    assert len([x for x in spread if 20<=x["id"]<=80])>=3
+    assert sample_historical_archives([])==[]
+    assert [x["id"] for x in sample_historical_archives(hundred[:3])]==[0,1,2]
+    # Each named source family gets a bounded representative group, never
+    # an entire 48-item quota solely from its newest snapshots.
+    three_lanes={"legacy-A":hundred,"legacy-B":hundred,
+                 "legacy-C":hundred}
+    sampled={name:sample_historical_archives(rows)
+             for name,rows in three_lanes.items()}
+    assert all(len(rows)==6 for rows in sampled.values())
     print("PASS: all historical generation IDs recognize only allowed original MP3 export names; "
           "zero synthesized audio, no provider calls, no credits")
 
