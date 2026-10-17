@@ -17,11 +17,11 @@ assert.ok(paths.length>=5);
 const ctx=vm.createContext({window:{}});
 for(const p of paths)new vm.Script(read(p.slice(1)),{filename:p}).runInContext(ctx,{timeout:1900});
 const topics=ctx.window.DARKidsAcademyCurriculum||{};
-assert.equal(Object.keys(topics).length+1,58,"57 curriculum modules + Ṣidq");
+assert.equal(Object.keys(topics).length+1,year.goals.currentlyInCatalog,"57 curriculum modules + Ṣidq");
 const slots=year.weeks.flatMap(w=>w.days.filter(d=>d.mode==="new"));
 assert.equal(slots.length,208);
-assert.equal(slots.filter(d=>d.lessonId).length,58);
-assert.equal(roadmap.plannedUnits.length,150);
+assert.equal(slots.filter(d=>d.lessonId).length,year.goals.currentlyInCatalog);
+assert.equal(roadmap.plannedUnits.length,year.goals.additionalAuthenticallyVerifiedLessonsNeeded);
 assert.ok(slots.filter(d=>d.lessonId&&d.lessonId!=="sidq").every(d=>topics[d.lessonId]));
 for(const l of Object.values(topics)){
  assert.ok(l.quran?.surah&&l.hadith?.source,l.id);
