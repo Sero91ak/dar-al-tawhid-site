@@ -36,9 +36,15 @@ function stopOtherPlayers(){
  * navigation uses Back button; offline belongs inside the detail player.
  */
 function sourceHtml(item){
+  const links=Array.isArray(item?.sourceLinks)?item.sourceLinks:[];
   return (Array.isArray(item?.sourceRefs)?item.sourceRefs:[])
-    .filter(ref=>typeof ref==="string"&&ref.trim())
-    .map(ref=>'<span class="ms-source-ref">'+esc(ref)+'</span>').join("");
+    .map((ref,i)=>{
+      if(typeof ref!=="string"||!ref.trim())return "";
+      const url=String(links[i]||"");
+      if(/^https:\/\/(?:quran\.com|sunnah\.com)\//.test(url))
+        return '<a class="ms-source-ref dl-verified-source" href="'+esc(url)+'" target="_blank" rel="noopener noreferrer" aria-label="Originalquelle öffnen: '+esc(ref)+'">'+esc(ref)+'</a>';
+      return '<span class="ms-source-ref">'+esc(ref)+'</span>';
+    }).join("");
 }
 function groupFor(id){return groups.find(x=>x.id===id)||null}
 function groupLessons(id){const g=groupFor(id);return g?g.lessons.map(x=>allLessons.find(i=>i.id===x.id)||x):[]}
@@ -63,7 +69,7 @@ function renderCards(){
         '<span class="ms-row-visual" aria-hidden="true">'+(src?'<img src="'+esc(src)+'" alt="" decoding="async" loading="'+(index<2?"eager":"lazy")+'">':"")+
         '<span class="ms-rank">'+String(index+1).padStart(2,"0")+'</span></span>'+
         '<span class="ms-row-copy"><strong class="ms-row-title">'+esc(item.title)+'</strong>'+
-        '<span class="dl-row-lesson">'+(ready?"LEKTION "+String(index+1).padStart(2,"0"):"Weitere Lektion in Vorbereitung")+'</span>'+
+        '<span class="dl-row-lesson">'+(ready?"LEKTION "+String(index+1).padStart(2,"0")+(item.status==="review"?" · TEXTENTWURF":""):"Weitere Lektion in Vorbereitung")+'</span>'+
         '<span class="ms-row-summary">'+esc(item.summary||"")+'</span></span>'+
         (ready&&done(item.id)?'<span class="ms-done" aria-label="Abgeschlossen">✓</span>':"")+
       '</'+tag+'>';
@@ -239,8 +245,9 @@ function renderActive(){
     cover:active.cover||art(active),hero:active.hero||art(active)
   });
   const has=!!audioMeta(active)?.url,note=$("#dlAudioNote");
-  if(note)note.textContent=has
-    ?"Hören, Hören & Mitlesen und Lesen sind bereit."
+  if(note)note.textContent=active.status==="review"
+    ?"Textentwurf in der Quellen- und Endprüfung. Master-Audio erst nach inhaltlicher Freigabe."
+    :has?"Hören, Hören & Mitlesen und Lesen sind bereit."
     :"Der vollständige Lesetext ist bereit. Hören und intelligentes Mitlesen werden aktiv, sobald die freigegebene Aufnahme hinterlegt ist.";
   resetAudio();applyMode(false);
 }
