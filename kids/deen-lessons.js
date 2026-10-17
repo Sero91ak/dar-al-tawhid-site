@@ -1,6 +1,7 @@
 (() => {
 "use strict";
 const DATA_URL="/kids/data/deen-lessons.json?v=3";
+const CURRICULUM_URL="/kids/data/deen-curriculum-v1.json?v=1";
 const MODE_KEY="kids.contentMode.v19";
 const DONE_PREFIX="kids.deenLesson.done.";
 const $=(s,r=document)=>r.querySelector(s);
@@ -9,7 +10,7 @@ const age=()=>String($(".app")?.getAttribute("data-age")||"6–8");
 const ageKey=()=>age().replace("–","-");
 const isAudioOnlyAge=()=>age()==="4–5";
 const audio=new Audio();
-let items=[],active=null,activeText="",playing=false,busy=false,followReader=null;
+let items=[],groups=[],allLessons=[],selectedCategory=null,active=null,activeText="",playing=false,busy=false,followReader=null;
 
 function mode(){try{const v=localStorage.getItem(MODE_KEY);return["both","listen","read"].includes(v)?v:"read"}catch(_){return"read"}}
 function audioMeta(item){
@@ -39,23 +40,60 @@ function sourceHtml(item){
     .filter(ref=>typeof ref==="string"&&ref.trim())
     .map(ref=>'<span class="ms-source-ref">'+esc(ref)+'</span>').join("");
 }
+function groupFor(id){return groups.find(x=>x.id===id)||null}
+function groupLessons(id){const g=groupFor(id);return g?g.lessons.map(x=>allLessons.find(i=>i.id===x.id)||x):[]}
+function isReady(lesson){return !!(lesson&&String(lesson.masterStoryText||"").trim()&&Array.isArray(lesson.sourceRefs)&&lesson.sourceRefs.length)}
+function groupDone(id){const ready=groupLessons(id).filter(isReady);return ready.length>0&&ready.every(x=>done(x.id))}
+function updateHeading(){
+  const g=groupFor(selectedCategory);
+  const t=$("#dlNavTitle"),sub=$("#dlNavSub"),back=$("#dlBack");
+  if(t)t.textContent=g?.categoryTitle||"Den Dīn lernen";
+  if(sub)sub.textContent=g?"Wähle eine Lektion · Qurʾān & authentische Sunnah":"6 Lernbereiche · Qurʾān & authentische Sunnah";
+  if(back)back.setAttribute("aria-label",g?"Zurück zu den Lernbereichen":"Zurück zu Geschichten");
+}
 function renderCards(){
   const grid=$("#dlGrid");if(!grid)return;
+  if(selectedCategory&&groupFor(selectedCategory)){
+    const lessons=groupLessons(selectedCategory);
+    grid.classList.add("dl-lessons-grid");
+    grid.innerHTML=lessons.map((item,index)=>{
+      const ready=isReady(item),src=art(item),tag=ready?"button":"div";
+      return '<'+tag+' class="ms-story-row dl-story-row dl-lesson-row'+(ready?"":" dl-pending")+'"'+
+        (ready?' type="button" data-dl-lesson="'+esc(item.id)+'"':' aria-label="'+esc(item.title)+'"')+'>'+
+        '<span class="ms-row-visual" aria-hidden="true">'+(src?'<img src="'+esc(src)+'" alt="" decoding="async" loading="'+(index<2?"eager":"lazy")+'">':"")+
+        '<span class="ms-rank">'+String(index+1).padStart(2,"0")+'</span></span>'+
+        '<span class="ms-row-copy"><strong class="ms-row-title">'+esc(item.title)+'</strong>'+
+        '<span class="dl-row-lesson">'+(ready?"LEKTION "+String(index+1).padStart(2,"0"):"Weitere Lektion in Vorbereitung")+'</span>'+
+        '<span class="ms-row-summary">'+esc(item.summary||"")+'</span></span>'+
+        (ready&&done(item.id)?'<span class="ms-done" aria-label="Abgeschlossen">✓</span>':"")+
+      '</'+tag+'>';
+    }).join("");
+    grid.querySelectorAll("[data-dl-lesson]").forEach(b=>b.addEventListener("click",()=>openStory(b.dataset.dlLesson)));
+    return;
+  }
+  grid.classList.remove("dl-lessons-grid");
   grid.innerHTML=items.map((item,index)=>{
-    const src=art(item);
+    const src=art(item),g=groupFor(item.id),n=g?g.lessons.length:1;
     return '<button class="ms-story-row dl-story-row" type="button" data-dl-id="'+esc(item.id)+'">'+
-      '<span class="ms-row-visual" aria-hidden="true">'+(src?'<img src="'+esc(src)+'" alt="" decoding="async" loading="'+(index<3?"eager":"lazy")+'">':'')+
+      '<span class="ms-row-visual" aria-hidden="true">'+(src?'<img src="'+esc(src)+'" alt="" decoding="async" loading="'+(index<3?"eager":"lazy")+'">':"")+
       '<span class="ms-rank">'+String(index+1).padStart(2,"0")+'</span></span>'+
       '<span class="ms-row-copy"><span class="ms-row-kicker">LERNBEREICH '+String(index+1).padStart(2,"0")+'</span>'+
       '<strong class="ms-row-title">'+esc(item.categoryTitle||item.series||item.title||"")+'</strong>'+
-      '<span class="dl-row-lesson">'+esc(item.categoryLessonLabel||item.title||"")+'</span>'+
+      '<span class="dl-row-lesson">'+(g?String(n)+" Lernlektionen":esc(item.categoryLessonLabel||item.title||""))+'</span>'+
       '<span class="ms-row-summary">'+esc(item.categorySummary||item.summary||"")+'</span></span>'+
-      (done(item.id)?'<span class="ms-done" aria-label="Abgeschlossen">✓</span>':'')+
+      (groupDone(item.id)?'<span class="ms-done" aria-label="Abgeschlossen">✓</span>':"")+
     '</button>';
   }).join("");
-  grid.querySelectorAll("[data-dl-id]").forEach(b=>{
-    b.addEventListener("click",()=>openStory(b.dataset.dlId));
-  });
+  grid.querySelectorAll("[data-dl-id]").forEach(b=>b.addEventListener("click",()=>openCategory(b.dataset.dlId)));
+}
+function openCategory(id){
+  if(!groupFor(id)){openStory(id);return}
+  selectedCategory=id;updateHeading();renderCards();$("#dlLibraryScroll").scrollTop=0;
+  setTimeout(()=>$("#dlBack")?.focus(),0);
+}
+function libraryBack(){
+  if(selectedCategory){selectedCategory=null;updateHeading();renderCards();$("#dlLibraryScroll").scrollTop=0;return}
+  closeLibrary();
 }
 function effectiveMode(){
   const m=mode(),has=!!audioMeta(active)?.url;
@@ -98,15 +136,16 @@ function setMode(v){
 function ensureUi(){
   const entry=$("#deenEntry");
   if(entry&&!entry.dataset.dlBound){entry.dataset.dlBound="1";entry.addEventListener("click",openLibrary)}
+  if(!$("#dlCurriculumCss")){const link=document.createElement("link");link.id="dlCurriculumCss";link.rel="stylesheet";link.href="/kids/deen-curriculum-v1.css?v=1";document.head.appendChild(link)}
   if($("#dlLibraryPage"))return true;
   const page=document.createElement("section");
   page.id="dlLibraryPage";page.className="ms-library-page dl-library-page";page.setAttribute("aria-hidden","true");
   page.innerHTML=
     '<div class="ms-library-nav dl-library-nav"><button id="dlBack" class="ms-back" type="button" aria-label="Zurück zu Geschichten">‹</button>'+
-    '<div><strong>Den Dīn lernen</strong><span>6 Lernbereiche · Qurʾān &amp; authentische Sunnah</span></div></div>'+
+    '<div><strong id="dlNavTitle">Den Dīn lernen</strong><span id="dlNavSub">6 Lernbereiche · Qurʾān &amp; authentische Sunnah</span></div></div>'+
     '<div class="ms-library-scroll" id="dlLibraryScroll"><div id="dlGrid" class="ms-list dl-list"></div></div>';
   document.body.appendChild(page);
-  $("#dlBack").addEventListener("click",closeLibrary);
+  $("#dlBack").addEventListener("click",libraryBack);
 
   const modal=document.createElement("div");
   modal.id="dlModal";modal.className="ms-modal dl-modal";
@@ -157,7 +196,7 @@ function ensureUi(){
 }
 function openLibrary(){
   if(!$("#dlLibraryPage"))return;
-  stopOtherPlayers();
+  stopOtherPlayers();selectedCategory=null;updateHeading();
   $("#dlLibraryPage").classList.add("open");$("#dlLibraryPage").removeAttribute("aria-hidden");
   document.documentElement.classList.add("ms-library-open");
   const app=$(".app");if(app){app.setAttribute("inert","");app.setAttribute("aria-hidden","true")}
@@ -166,7 +205,7 @@ function openLibrary(){
 function closeLibrary(){
   if($("#dlModal")?.classList.contains("open"))return;
   const p=$("#dlLibraryPage");if(!p)return;
-  p.classList.remove("open");p.setAttribute("aria-hidden","true");document.documentElement.classList.remove("ms-library-open");
+  p.classList.remove("open");p.setAttribute("aria-hidden","true");document.documentElement.classList.remove("ms-library-open");selectedCategory=null;
   const app=$(".app");if(app){app.removeAttribute("inert");app.removeAttribute("aria-hidden")}
   setTimeout(()=>$("#deenEntry")?.focus(),0);
 }
@@ -179,11 +218,12 @@ function unlockLibrary(){
   document.documentElement.classList.remove("ms-modal-open");
 }
 function openStory(id){
-  active=items.find(x=>x.id===id)||null;if(!active)return;
+  active=allLessons.find(x=>x.id===id)||items.find(x=>x.id===id)||null;if(!active||!isReady(active))return;
   stopAudio();renderActive();$("#dlModal").classList.add("open");lockLibrary();$("#dlScroll").scrollTop=0;$("#dlClose").focus();
 }
 function closeStory(){
-  followReader?.close?.();stopAudio();$("#dlModal")?.classList.remove("open");unlockLibrary();active=null;
+  const id=active?.id;followReader?.close?.();stopAudio();$("#dlModal")?.classList.remove("open");unlockLibrary();active=null;
+  if(id)setTimeout(()=>document.querySelector("[data-dl-lesson=\""+CSS.escape(id)+"\"]")?.focus(),0);
 }
 function renderActive(){
   if(!active)return;
@@ -222,10 +262,32 @@ async function init(){
   try{
     const r=await fetch(DATA_URL,{cache:"no-store"});if(!r.ok)throw Error(String(r.status));
     const data=await r.json();items=(data.items||[]).slice().sort((a,b)=>Number(a.displayOrder||99)-Number(b.displayOrder||99));
-    renderCards();
+    const baseItems=items.slice();
+    try{
+      const cr=await fetch(CURRICULUM_URL,{cache:"no-store"});
+      if(cr.ok){
+        const curriculum=await cr.json();
+        const lookup=new Map(baseItems.map(x=>[x.id,x]));
+        groups=(Array.isArray(curriculum.categories)?curriculum.categories:[]).map(group=>({
+          ...group,categoryTitle:lookup.get(group.id)?.categoryTitle||group.id,
+          lessons:(group.lessons||[]).slice(0,5)
+        }));
+        allLessons=groups.flatMap(g=>g.lessons.map((lesson,index)=>{
+          const original=lookup.get(lesson.id),parent=lookup.get(g.id)||{};
+          return {...parent,...original,...lesson,displayOrder:index+1,
+            cover:lesson.cover||parent.cover,hero:lesson.hero||parent.hero,
+            masterStoryText:lesson.masterStoryText||original?.masterStoryText||"",
+            sourceRefs:lesson.sourceRefs||original?.sourceRefs||[],
+            audio:lesson.audio||original?.audio||{},
+            categoryId:g.id};
+        }));
+      }
+    }catch(err){console.warn("[DĀR Kids Dīn curriculum]",err)}
+    if(!allLessons.length)allLessons=baseItems;
+    renderCards();updateHeading();
     try{
       const m=String(location.hash||"").match(/^#stories\/deen\/([^/?#]+)/i),id=m?decodeURIComponent(m[1]||""):"";
-      if(id&&items.some(x=>x.id===id)){document.querySelector('.nav-btn[data-target="stories"]')?.click();openLibrary();setTimeout(()=>openStory(id),0)}
+      if(id&&allLessons.some(x=>x.id===id&&isReady(x))){document.querySelector('.nav-btn[data-target="stories"]')?.click();openLibrary();const item=allLessons.find(x=>x.id===id);if(item?.categoryId)openCategory(item.categoryId);setTimeout(()=>openStory(id),0)}
     }catch(_){}
     const app=$(".app");if(app&&"MutationObserver" in window)new MutationObserver(()=>{renderCards();if(active)renderActive()}).observe(app,{attributes:true,attributeFilter:["data-age"]});
   }catch(err){
