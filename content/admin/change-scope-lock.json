@@ -8240,6 +8240,17 @@
         ".github/workflows/diagnose-frauen-hero-live.yml"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "frauen-hero-sticky-scroll-ancestor-v1392-20261017",
+      "at": "2026-10-17T16:01:00.000Z",
+      "approvedBy": "user-explicit-all-frauen-hero-return-test-visitor-fix-20261017",
+      "reason": "Narrow adult Frauen-route CSS fixes only. Restore persistent original hero and normal scrolling beneath hero without touching other app areas, assets, nav, audio or global lock.",
+      "paths": [
+        "assets/frauen/frauen-authority-v1292.css",
+        "test/assets/frauen/frauen-authority-v1292.css"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
