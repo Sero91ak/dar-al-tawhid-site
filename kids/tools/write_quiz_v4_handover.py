@@ -110,6 +110,16 @@ def main():
             "invalid staged quiz coverage")
     require(plan["selectedTotal"]==450 and plan["reservedTotal"]==450
             and plan["originalQuizCatalogCount"]==900,"canonical 900 question partition lost")
+    # Fail closed on an outdated staged audio map: after a paid original import,
+    # the technical production report may already have 76 while this JSON
+    # still has 72. Handover must not overwrite real progress with old counts.
+    require(plan["completedQuestionsWithAllFourAudioParts"]==
+            import_status["completeFourPartQuestions"],
+            "stale MP3 stage import: production coverage disagrees with 450-question map; regenerate offline staging first")
+    for age in ("4-6","7-8","9-10"):
+        require(plan["ageBreakdown"][age]["completeAllFourOriginalAudios"]==
+                import_status["byAge"][age]["completeFourPartQuestions"],
+                "outdated audio import map for "+age+"; do not publish a stale handover")
     require(len(charged["rows"])<=len(saved["textClips"]),
             "ledger exceeds registry")
     require(len({row["text"] for row in charged["rows"]})==len(charged["rows"]),
