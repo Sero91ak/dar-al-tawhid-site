@@ -21,6 +21,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
+from urllib.parse import urlsplit
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -50,6 +51,24 @@ def save(path,obj):
     path.parent.mkdir(parents=True,exist_ok=True)
     path.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
 
+class ArtifactSafeRedirect(urllib.request.HTTPRedirectHandler):
+    """Follow GitHub-authorized ZIP links without forwarding bearer credentials."""
+    def redirect_request(self,req,fp,code,msg,headers,newurl):
+        parsed=urlsplit(newurl)
+        host=(parsed.hostname or "").lower()
+        valid=(host in {"api.github.com","github.com","objects.githubusercontent.com"}
+               or host.endswith(".githubusercontent.com")
+               or host.endswith(".blob.core.windows.net")
+               or host.endswith(".amazonaws.com"))
+        strict(parsed.scheme=="https" and valid,
+               "unexpected artifact redirect host blocked")
+        redirected=super().redirect_request(req,fp,code,msg,headers,newurl)
+        if redirected is not None and host!="api.github.com":
+            redirected.remove_header("Authorization")
+        return redirected
+
+SAFE_OPENER=urllib.request.build_opener(ArtifactSafeRedirect)
+
 def api(url,token,max_bytes,expected_json=False):
     strict(url.startswith(BASE+"/") and "@" not in url and "#" not in url,
            "only same-repository GitHub Actions API endpoints permitted")
@@ -58,7 +77,7 @@ def api(url,token,max_bytes,expected_json=False):
         "Authorization":"Bearer "+token,
         "X-GitHub-Api-Version":"2022-11-28",
         "User-Agent":"tawhid-kids-v4-already-paid-archive-search/1.0"},method="GET")
-    with urllib.request.urlopen(req,timeout=40) as response:
+    with SAFE_OPENER.open(req,timeout=40) as response:
         data=response.read(max_bytes+1)
         strict(len(data)<=max_bytes,"response larger than maximum allowed")
         if expected_json:
