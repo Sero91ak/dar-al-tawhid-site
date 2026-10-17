@@ -1644,7 +1644,7 @@ export default {
       // Remove ONLY those legacy Test Frauen tags in the iOS native response.
       // The canonical visitor-owned bundle/styles are appended just below.
       if (assetResponse.ok && !androidNativeApp) {
-        html = html.replace(/<script\b[^>]*\bsrc=["']\/test\/assets\/frauen\/frauen-fiqh\.js[^"']*["'][^>]*>\s*<\/script\s*>/gi, "");
+        html = html.replace(/<script\b[^>]*\bsrc=["']\/test\/assets\/frauen\/frauen-fiqh\.js[^"']*["'][^>]*>/gi, '<script type="application/x-dar-legacy" data-dar-frauen-disabled="1">');
         html = html.replace(/<link\b[^>]*\bhref=["']\/test\/assets\/frauen\/frauen-(?:fiqh|authority-v1292)\.css[^"']*["'][^>]*>/gi, "");
       }
       if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
