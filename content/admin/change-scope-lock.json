@@ -8026,6 +8026,21 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-25T23:59:00.000Z"
+    },
+    {
+      "id": "adult-test-canonical-responsive-v1383-and-deploy-health-20261017",
+      "at": "2026-10-17T09:41:24.805Z",
+      "approvedBy": "user-explicit-adult-responsive-global-test-fix-deploy-live-verify-20261017",
+      "reason": "Test-only responsive geometry, replace conflicting old axes; fix outdated Settings check to validate new overview/detail structure; align real stylesheet/build deployment verification. Visitor/Kids/Push remain untouched.",
+      "paths": [
+        "test/assets/test-global-edge-width-v1372.css",
+        "test/index.html",
+        "test/version.json",
+        "scripts/test-app-health-check.js",
+        "scripts/verify-test-app-deploy.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
