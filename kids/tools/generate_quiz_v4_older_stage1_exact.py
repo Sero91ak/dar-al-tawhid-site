@@ -182,6 +182,16 @@ def main():
     args=parser.parse_args()
     reg,ledger,stage,missing,protected=prepare()
     selected,estimate,completion_candidates=candidate_batch(missing,stage)
+    # Bind manual cost approval to the *exact* source file, current stored
+    # V4 MP3 registry, immutable paid ledger and selected SHA sequence.
+    # A later commit, newly recorded MP3 or ledger change invalidates the
+    # old fingerprint and requires a new deliberate approval.
+    paid_snapshot=hashlib.sha256(
+        PREP.read_bytes()+b"\\x00"+REG.read_bytes()+b"\\x00"+
+        LEDGER.read_bytes()+b"\\x00"+
+        json.dumps([x["spokenTextSHA256"] for x in selected],
+                   ensure_ascii=False,separators=(",",":")).encode("utf-8")
+    ).hexdigest()
     report={
         "scope":"KIDS_V4_OLDER_STAGE1_20_QUESTIONS_65_EXACT_ORIGINALS",
         "modelId":MODEL,"voiceId":VOICE,"reviewOnly":True,
@@ -190,6 +200,7 @@ def main():
         "previouslyRecordedFirstStageOriginals":STAGE_SIZE-len(missing),
         "remainingFirstStageOriginals":len(missing),
         "nextPaidRunOriginalLimit":COUNT_PER_RUN,
+        "manualApprovalMustMatchExactBatchFingerprintSHA256":paid_snapshot,
         "nextExactTextSha256":[x["spokenTextSHA256"] for x in selected],
         "questionsThatCouldGainCompleteV4AudioAfterNextRun":completion_candidates,
         "newlyCompleteQuestionCountProjectedFromActualSourceGaps":len(completion_candidates),
@@ -203,8 +214,12 @@ def main():
         "noBlindRetryAfterProviderError":True,
         "publicReleaseAllowed":False
     }
+    # A source review must succeed freshly against all 450 canonical items
+    # *before* any paid POST is permitted, even if workflow approval says YES.
+    write(REPORT,report)
+    from audit_quiz_v4_stage1_sources import main as audit_stage1_sources
+    audit_stage1_sources()
     if args.audit:
-        write(REPORT,report)
         print("PASS_KIDS_V4_OLDER_STAGE1_NO_CREDIT_PREFLIGHT "+
               json.dumps(report,ensure_ascii=False),flush=True)
         return
@@ -214,6 +229,8 @@ def main():
           "requires explicit completed human source/text review")
     check(os.getenv("KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL")=="YES",
           "requires explicit paid-credit authorization for this run")
+    check(os.getenv("KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256","").strip()==paid_snapshot,
+          "batch SHA does not match actual voice, current source texts, paid ledger and next ten originals; re-audit and re-authorize, NO credits spent")
     check(bool(selected),"first 65 already recorded; no further purchases")
     key=os.getenv("ELEVENLABS_API_KEY","").strip()
     check(bool(key),"provider credential absent")
