@@ -269,10 +269,10 @@ function browserManifestResponse(request, androidBrowser = false) {
 }
 function liveFrauenNativeAddon() {
   return [
-    '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-rollback-12h-20261017">',
-    '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-rollback-12h-20261017">',
-    '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-12h-20261017"><\/script>',
-    '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-rollback-12h-20261017"><\/script>'
+    '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-rollback-20261016-1500">',
+    '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-rollback-20261016-1500">',
+    '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=frauen-rollback-20261016-1500"><\/script>',
+    '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-rollback-20261016-1500"><\/script>'
   ].join("");
 }
 function androidNativeToolsAddon() {

@@ -2675,12 +2675,6 @@
     );
   }
 
-  function pinnedLibraryHead(heroHtml, searchHtml, searchClass) {
-    return '<div class="dar-hero-stage frauen-library-pinned-header">' + heroHtml +
-      (searchHtml ? '<div class="' + searchClass + '">' + searchHtml + '</div>' : '') +
-      '</div>';
-  }
-
   function renderLibraryGroup(groupId) {
     var group = libraryGroupById(groupId);
     if (!group) return '<p class="frauen-empty">Dieser Bereich ist nicht verfügbar.</p>';
@@ -2688,7 +2682,7 @@
     var total = libraryVisibleCount(group);
     return (
       '<div class="frauen-library-shell frauen-library-group">' +
-        pinnedLibraryHead(libraryHero(
+        libraryHero(
           group.title,
           group.desc,
           "group frauen-library-hero--tone-" + group.id,
@@ -2696,7 +2690,7 @@
           group.kicker,
           group.areas.length + " Kapitel",
           total ? total + " geprüfte Inhalte" : "Quellen werden geprüft"
-        ), "", "") +
+        ) +
         '<div class="frauen-library-section-head"><div><span>Kapitel</span><h3>Wähle deinen Bereich</h3></div><p>Erst im nächsten Schritt erscheinen die einzelnen Aussagen.</p></div>' +
         '<section class="frauen-library-area-grid" aria-label="' + esc(group.title) + '">' +
           areas.map(function (a, idx) { return libraryAreaCard(a, idx); }).join("") +
@@ -2903,7 +2897,8 @@
     if (q || pickSprecher || pickBuch) {
       return (
         '<div class="frauen-library-shell frauen-library-hub is-searching">' +
-          pinnedLibraryHead(hero, search, "frauen-library-search-wrap") +
+          hero +
+          '<div class="frauen-library-search-wrap">' + search + '</div>' +
           '<div class="frauen-library-section-head"><div><span>Suche</span><h3>' + treffer.length + ' Treffer</h3></div><p>Geprüfte Aussagen aus allen Frauenbereichen.</p></div>' +
           (treffer.length
             ? '<section class="post-grid topic-collection frauen-post-list">' +
@@ -2915,7 +2910,8 @@
     }
     return (
       '<div class="frauen-library-shell frauen-library-hub">' +
-        pinnedLibraryHead(hero, search, "frauen-library-search-wrap") +
+        hero +
+        '<div class="frauen-library-search-wrap">' + search + '</div>' +
         '<div class="frauen-library-section-head"><div><span>Bibliothek</span><h3>Wissen geordnet nach Lebensbereichen</h3></div><p>Die bisherigen Einzelbereiche bleiben erhalten, sind aber klarer zusammengefasst.</p></div>' +
         '<section class="frauen-library-grid" aria-label="Wissenswelten für Frauen">' +
           FRAUEN_LIBRARY_GROUPS.map(libraryGroupCard).join("") +
@@ -3443,9 +3439,9 @@
     var sectionHero = renderSectionHero(abschnitt);
     return (
       '<div class="topic-collection-page frauen-list-page frauen-library-list">' +
-      pinnedLibraryHead(sectionHero, filterBlock(abschnitt, themen, q, thema), "frauen-library-list-controls") +
+      sectionHero +
       hint +
-      
+      '<div class="frauen-library-list-controls">' + filterBlock(abschnitt, themen, q, thema) + '</div>' +
       (items.length
         ? '<section class="post-grid topic-collection frauen-post-list" aria-label="Aussagen">' +
           items.map(function (e) {
