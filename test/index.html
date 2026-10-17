@@ -27815,7 +27815,7 @@ function bindNotificationCenter(){
     }finally{gps.disabled=false;gps.textContent="Standort erkennen"}
   };
   const cityInput=$("darManualCityInput"),cityResults=$("darCityResults"),citySave=$("darManualCitySaveBtn");
-  let searchTimer=null,citySearchSequence=0;
+  let citySearchSequence=0;
   const selectCity=(place)=>{
     if(!Number.isFinite(place.lat)||!Number.isFinite(place.lon))return;
     ++citySearchSequence;
@@ -27869,13 +27869,11 @@ function bindNotificationCenter(){
     }
   };
   if(cityInput)cityInput.addEventListener("input",()=>{
-    clearTimeout(searchTimer);++citySearchSequence;
+    ++citySearchSequence;
     if(cityResults){cityResults.hidden=true;cityResults.replaceChildren()}
-    searchTimer=setTimeout(runCitySearch,450);
   });
   if(cityPanel)cityPanel.onsubmit=async(ev)=>{
     ev.preventDefault();ev.stopPropagation();
-    clearTimeout(searchTimer);
     await runCitySearch();
   };
   const prayerMaster=$("notificationPrayerMaster");
