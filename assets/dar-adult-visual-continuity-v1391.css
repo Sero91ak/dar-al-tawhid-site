@@ -84,10 +84,10 @@ html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-
   width:100%!important;
   max-width:100%!important;
   min-width:0!important;
-  aspect-ratio:16/9!important;
+  aspect-ratio:auto!important;
   min-height:0!important;
-  height:auto!important;
-  max-height:min(40svh,420px)!important;
+  height:clamp(168px,42vw,236px)!important;
+  max-height:236px!important;
   box-sizing:border-box!important;
   left:auto!important;
   right:auto!important;
@@ -99,21 +99,31 @@ html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-
   border-radius:0!important;
   box-shadow:none!important;
   overflow:hidden!important;
-  background-size:cover,cover,contain!important;
-  background-position:center,center,center center!important;
+  background-size:cover,cover,cover!important;
+  background-position:center,center,center 36%!important;
   background-repeat:no-repeat!important;
   background-origin:border-box!important;
   background-clip:border-box!important;
   isolation:isolate!important;
 }
 html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-title{
-  background-position:center,center,center center!important;
-  padding:clamp(16px,3vw,28px) max(16px,env(safe-area-inset-left,0px)) clamp(18px,3.2vw,32px)!important;
+  background-position:center,center,center 36%!important;
+  padding:14px max(16px,env(safe-area-inset-left,0px)) 16px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
 }
 html[data-theme] body.is-topics-route #appView.view > .topics-hub > .view-head,
 html[data-theme] body.is-topic-route #appView.view > .topic-collection-page > .view-head{
-  background-position:center,center,center center!important;
-  padding-bottom:clamp(18px,3.2vw,32px)!important;
+  background-position:center,center,center 36%!important;
+  padding-bottom:16px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head h2,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head h2,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title h2{
+  font-size:clamp(1.28rem,4.8vw,1.72rem)!important;
+  line-height:1.16!important;
+  font-weight:650!important;
 }
 /* Unterer harter heller Balken am Hero stark reduzieren */
 html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView.view > :is(.topics-hub,.topic-collection-page,.post-reader) > :is(.view-head,.post-reader-title)::after{
