@@ -1,98 +1,127 @@
-/* KIDS creator staging only. Percentages are readiness checkpoints, NOT byte-download percentages. */
+/* KIDS TEST only. Actual readiness checkpoints; no synthetic 100% or blocking all lessons. */
 (function(){
  "use strict";
- if(window.__kidsCreatorBootV1)return;
- window.__kidsCreatorBootV1=true;
+ if(window.__KIDS_CREATOR_SPLASH_2__)return;
+ window.__KIDS_CREATOR_SPLASH_2__=true;
  document.documentElement.classList.add("kids-test-booting");
- var root=null,fill=null,num=null,status=null,recover=null;
- var progress=0,ready=false,dom=false,loaded=false,failed=false,settling=false;
- var hero="/kids/assets/kids-salah-v1272/hero-home.png?v=1274";
+ var start=performance.now(), minDisplayMs=2600, maxWaitMs=9000;
+ var display=0,target=1,root=null,fill=null,number=null,meter=null,status=null,retry=null;
+ var ready=false,error=false,firstPaintReady=false,frame=null;
+ var posterURL="/kids/assets/kids-splash-20261017-v1.jpg";
+ var homeURL="/kids/assets/kids-salah-v1272/hero-home.png?v=1274";
  function bind(){
-  root=document.getElementById("kids-test-boot");if(!root)return false;
-  fill=root.querySelector(".ktb-fill");num=root.querySelector(".ktb-percent");
-  status=root.querySelector(".ktb-status");recover=root.querySelector(".ktb-recover");
-  recover.addEventListener("click",function(){
-   if(document.getElementById("view-today")&&document.querySelector("#view-today .hero")){
-    open(true);
-   } else {location.reload()}
-  });
-  render();return true;
+   root=document.getElementById("kids-test-boot");
+   if(!root)return false;
+   fill=root.querySelector(".ktb-fill");number=root.querySelector(".ktb-percent");
+   meter=root.querySelector(".ktb-track");status=root.querySelector(".ktb-status");
+   retry=root.querySelector(".ktb-recover");
+   retry.addEventListener("click",function(){
+     if(document.getElementById("view-today")&&document.querySelector("#view-today .hero"))finish(true);
+     else location.reload();
+   });
+   return true;
  }
- function render(){if(!fill)return;fill.style.width=progress+"%";num.textContent=progress+"%";
-  var meter=root.querySelector(".ktb-track");if(meter)meter.setAttribute("aria-valuenow",String(progress));
+ function pct(v){return Math.max(0,Math.min(100,Math.round(v)))}
+ function paint(){
+   if(fill)fill.style.width=display.toFixed(2)+"%";
+   if(number)number.textContent=pct(display)+"%";
+   if(meter)meter.setAttribute("aria-valuenow",String(pct(display)));
  }
- function stage(n,message){
-  if(ready||failed)return;
-  progress=Math.max(progress,Math.min(n,99));render();
-  if(status&&message)status.textContent=message;
+ function setTarget(v){if(!ready&&!error)target=Math.max(target,Math.min(99,v))}
+ function animate(){
+   if(ready)return;
+   var remaining=target-display;
+   if(remaining>.04){
+     display=Math.min(target,display+Math.max(.06,remaining*.11));
+   }else display=target;
+   paint();
+   if(target===100&&display>=99.5){display=100;paint();finish(false);return}
+   frame=requestAnimationFrame(animate);
  }
- function waitImage(src,element){
-  return new Promise(function(resolve){
-   var image=element||new Image(),finished=false;
-   function done(ok){if(finished)return;finished=true;image.removeEventListener("load",onload);
-    image.removeEventListener("error",onerror);clearTimeout(watch);resolve(ok)}
-   function onload(){done(true)}
-   function onerror(){done(false)}
-   var watch=setTimeout(function(){done(false)},7000);
-   if(image.complete&&image.naturalWidth>0)return done(true);
-   image.addEventListener("load",onload);image.addEventListener("error",onerror);
-   if(!element)image.src=src;
-  });
+ function imageReady(src){
+   return new Promise(function(resolve){
+     var img=new Image(),done=false;
+     function finish(ok){if(done)return;done=true;clearTimeout(timer);img.onload=img.onerror=null;resolve(ok)}
+     var timer=setTimeout(function(){finish(false)},7200);
+     img.onload=function(){finish(img.naturalWidth>0)};
+     img.onerror=function(){finish(false)};
+     img.src=src;
+     if(img.complete&&img.naturalWidth>0)finish(true);
+   });
  }
- function withTimeout(promise,ms){
-  return Promise.race([Promise.resolve(promise),new Promise(function(resolve){setTimeout(function(){resolve(false)},ms)})]);
- }
- function nextPaint(){
-  return new Promise(function(resolve){requestAnimationFrame(function(){requestAnimationFrame(resolve)})});
- }
- function open(manual){
-  if(ready)return;
-  ready=true;
-  if(!manual){progress=100;render();status.textContent="Fertig! Deine Lernwelt ist bereit."}
-  root.classList.add("kids-test-boot-fade");
-  document.documentElement.classList.remove("kids-test-booting");
-  setTimeout(function(){root.remove()},380);
- }
+ function domReady(){return new Promise(function(resolve){
+   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",resolve,{once:true});
+   else resolve();
+ })}
+ function loadReady(){return new Promise(function(resolve){
+   if(document.readyState==="complete")resolve(true);
+   else window.addEventListener("load",function(){resolve(true)},{once:true});
+ })}
+ function nextPaint(){return new Promise(function(resolve){requestAnimationFrame(function(){requestAnimationFrame(resolve)})})}
+ function sleep(n){return new Promise(function(resolve){setTimeout(resolve,n)})}
  function fail(message){
-  if(ready)return;
-  failed=true;
-  root.setAttribute("data-boot-error","1");
-  status.textContent=message||"Die Lernwelt braucht noch einen Moment.";
-  recover.textContent="Erneut versuchen";
-  if(document.getElementById("view-today")&&document.querySelector("#view-today .hero")){
-   recover.textContent="App trotzdem öffnen";
-  }
+   if(ready||error||!root)return;
+   error=true;target=Math.min(target,99);
+   if(frame)cancelAnimationFrame(frame);
+   root.setAttribute("data-boot-error","1");
+   status.textContent=message||"Das Laden dauert länger als erwartet.";
+   retry.textContent=document.querySelector("#view-today .hero")?"App trotzdem öffnen":"Neu laden";
  }
- async function boot(){
-  if(settling)return;settling=true;
-  if(!root&&!bind())return;
-  if(!dom){stage(5,"Die Lernwelt wird vorbereitet");return}
-  stage(30,"Startseite wird vorbereitet");
-  if(!document.querySelector("#view-today .hero")){fail("Startseite konnte nicht geladen werden.");return}
-  var icon=root.querySelector(".ktb-logo");
-  var images=await Promise.all([waitImage("",icon),waitImage(hero,null)]);
-  if(!images[0]){fail("Das KIDS-Logo konnte nicht geladen werden.");return}
-  stage(60,"Bilder werden vorbereitet");
-  if(!images[1]){fail("Das Startbild konnte nicht geladen werden.");return}
-  // Fonts are cosmetic: wait briefly, but never block the app indefinitely on remote font hosts.
-  if(document.fonts&&document.fonts.ready)await withTimeout(document.fonts.ready,1700);
-  stage(82,"Darstellung wird geprüft");
-  await nextPaint();
-  var home=document.getElementById("view-today"),heroNode=home&&home.querySelector(".hero");
-  if(!home||!heroNode||!home.getBoundingClientRect().width||!heroNode.getBoundingClientRect().height){
-    fail("Die Startseite ist noch nicht darstellbar.");return;
-  }
-  // Only startup-critical resources gate 100%; optional sections load on demand.
-  stage(95,"Fast fertig");
-  await nextPaint();
-  if(!document.getElementById("view-today")){fail("Die Startseite ist nicht bereit.");return}
-  open(false);
+ function finish(manual){
+   if(ready||!root)return;
+   ready=true;
+   if(frame)cancelAnimationFrame(frame);
+   if(!manual){display=100;paint()}
+   root.classList.add("kids-test-boot-fade");
+   document.documentElement.classList.remove("kids-test-booting");
+   setTimeout(function(){root.remove()},430);
  }
- function onDom(){dom=true;if(bind())boot()}
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",onDom,{once:true});
- else onDom();
- window.addEventListener("load",function(){loaded=true});
+ async function main(){
+   await domReady();
+   if(!bind()){document.documentElement.classList.remove("kids-test-booting");return}
+   animate();setTarget(12);
+   var expired=setTimeout(function(){fail("Der Start braucht länger. Du kannst es erneut versuchen.")},maxWaitMs);
+   try{
+     var home=document.getElementById("view-today");
+     if(!home||!home.querySelector(".hero"))throw Error("Startseite nicht aufgebaut");
+     setTarget(23);
+     var art=await imageReady(posterURL);
+     if(!art)throw Error("Startbild nicht geladen");
+     setTarget(39);
+     var hero=await imageReady(homeURL);
+     if(!hero)throw Error("Startseitenbild nicht geladen");
+     setTarget(58);
+     await loadReady();
+     setTarget(82);
+     // CSS and first-viewport images that are not lazy-loaded complete before window.load.
+     // Loading every audio/story/image library before the start would be unbounded.
+     if(document.fonts&&document.fonts.ready){
+       await Promise.race([document.fonts.ready.catch(function(){}),sleep(750)]);
+     }
+     setTarget(91);
+     await nextPaint();
+     home=document.getElementById("view-today");
+     var heroNode=home&&home.querySelector(".hero");
+     if(!home||!heroNode||!home.getBoundingClientRect().width||!heroNode.getBoundingClientRect().height)
+       throw Error("Startansicht nicht darstellbar");
+     firstPaintReady=true;
+     setTarget(97);
+     var remain=minDisplayMs-(performance.now()-start);
+     if(remain>0)await sleep(remain);
+     if(error)return;
+     clearTimeout(expired);
+     target=100;
+   }catch(e){
+     clearTimeout(expired);
+     fail("Die Startseite ist noch nicht bereit. Bitte erneut versuchen.");
+     if(window.console&&console.warn)console.warn("KIDS TEST boot readiness:",e);
+   }
+ }
+ // A static splash with no JS must never trap the page indefinitely.
  setTimeout(function(){
-  if(!ready&&!failed){if(!root)bind();if(root)fail("Der Start dauert zu lange. Bitte erneut versuchen.")}
- },15000);
+   if(!ready&&!error&&!root&&document.readyState!=="loading"){
+     document.documentElement.classList.remove("kids-test-booting");
+   }
+ },9000);
+ main();
 })();
