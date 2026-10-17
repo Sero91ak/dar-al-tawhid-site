@@ -161,7 +161,7 @@ def import_backup(zip_path,root=ROOT,apply=False):
                 clip.get("status")!="completed-original-mp3-on-review-branch-not-live" or
                 clip.get("qaApproval")!="pending-human-auditory-review"):
                 fail("billed request and original MP3 receipt or human-QA state inconsistent")
-            expected_name=digest((VOICE+"\\n"+MODEL+"\\n"+text).encode("utf-8"))[:32]+".mp3"
+            expected_name=digest((VOICE+"\n"+MODEL+"\n"+text).encode("utf-8"))[:32]+".mp3"
             if request and request in known_requests:fail("provider request ID was already charged")
             if request:known_requests.add(request)
             url=clip.get("url") or ""
