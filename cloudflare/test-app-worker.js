@@ -472,11 +472,11 @@ async function finalizeDarTestHomeV1193(asset) {
   // stylesheet even if the static shell already contains an old link.
   // Keep it late in the document for consistent theme/layout precedence.
   const edgeLinkV1389 = '<link rel="stylesheet" id="darTestEdgeWidthV1372" href="/test/assets/test-global-edge-width-v1372.css?v=android-scroll-v1389">';
-  const existingEdgeLinkV1389 = /<link\\b[^>]*\\bid=["']darTestEdgeWidthV1372["'][^>]*>/i;
+  const existingEdgeLinkV1389 = /<link\b[^>]*\bid=["']darTestEdgeWidthV1372["'][^>]*>/i;
   if (existingEdgeLinkV1389.test(html)) {
     html = html.replace(existingEdgeLinkV1389, edgeLinkV1389);
   } else if (html.includes("</body>")) {
-    html = html.replace("</body>", edgeLinkV1389 + "\\n</body>");
+    html = html.replace("</body>", edgeLinkV1389 + "\n</body>");
   } else {
     html += edgeLinkV1389;
   }
