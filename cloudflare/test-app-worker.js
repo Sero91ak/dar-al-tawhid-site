@@ -468,8 +468,17 @@ async function finalizeDarTestHomeV1193(asset) {
   // Load after every legacy style authority, including the embedded prayer
   // motif layer. Route-based CSS: no modification of navigation JS or assets.
   // The 10px mobile content gutter follows the existing floating bottom nav.
-  if (!html.includes('id="darTestEdgeWidthV1372"')) {
-    html += '<link rel="stylesheet" id="darTestEdgeWidthV1372" href="/test/assets/test-global-edge-width-v1372.css?v=20261016-layl-muted-v1377">';
+  // DAR_TEST_ANDROID_CSS_DELIVERY_V1389: guarantee the exact latest Test
+  // stylesheet even if the static shell already contains an old link.
+  // Keep it late in the document for consistent theme/layout precedence.
+  const edgeLinkV1389 = '<link rel="stylesheet" id="darTestEdgeWidthV1372" href="/test/assets/test-global-edge-width-v1372.css?v=android-scroll-v1389">';
+  const existingEdgeLinkV1389 = /<link\\b[^>]*\\bid=["']darTestEdgeWidthV1372["'][^>]*>/i;
+  if (existingEdgeLinkV1389.test(html)) {
+    html = html.replace(existingEdgeLinkV1389, edgeLinkV1389);
+  } else if (html.includes("</body>")) {
+    html = html.replace("</body>", edgeLinkV1389 + "\\n</body>");
+  } else {
+    html += edgeLinkV1389;
   }
   if (!html.includes('id="darHeroBackgroundAuthorityV3"')) {
     html += '<link rel="stylesheet" id="darHeroBackgroundAuthorityV3" href="/test/assets/hero-background-authority.css?v=hero-bg-v7">';
