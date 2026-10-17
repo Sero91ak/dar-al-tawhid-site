@@ -1237,3 +1237,121 @@ html[data-theme] body.is-hadith-route #appView.view > .hadith-detail > :is(nav.h
     scroll-behavior:auto!important;
   }
 }
+
+/* DAR_TEST_ANDROID_SCROLL_RESPONSIVE_V1388 · 2026-10-17
+ * Scope: ADULT DAR TEST only. Do not alter visitors, Kids, Push or SW.
+ * Restore the natural Android document scroll when a Fold's empty detail pane
+ * would otherwise leave the 100dvh-clamped split with overflow:hidden.
+ * Real populated master/detail remains independently scrollable as designed.
+ */
+html[data-theme] body.has-bottom-nav #appView
+  .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty){
+  display:block!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  block-size:auto!important;
+  min-block-size:0!important;
+  max-block-size:none!important;
+  overflow:visible!important;
+  overscroll-behavior: auto!important;
+  align-items:normal!important;
+  margin-inline:0!important;
+  padding-bottom:calc(108px + env(safe-area-inset-bottom,0px))!important;
+}
+html[data-theme] body.has-bottom-nav #appView
+  .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty) > .dar-fold__rail{
+  position:relative!important;
+  top:auto!important;
+  block-size:auto!important;
+  min-block-size:0!important;
+  max-block-size:none!important;
+  overflow-y:visible!important;
+  overflow-x:clip!important;
+  overscroll-behavior-y:auto!important;
+  padding-inline:0!important;
+  padding-bottom:0!important;
+  touch-action:auto!important;
+}
+html[data-theme] body.has-bottom-nav #appView
+  .dar-fold[data-fold-mode="dual"]:has(> .dar-fold__pane > .dar-fold__empty) > .dar-fold__pane{
+  display:none!important;
+}
+/* Container-based cards: a 320px rail is NEVER a 2-card grid just because
+ * the unfolded device has >760px viewport width. */
+html[data-theme] body.is-topics-route #appView .dar-fold__rail{
+  container-type:inline-size;
+  container-name:dar-test-topic-rail;
+  min-inline-size:0!important;
+}
+html[data-theme] body.is-topics-route #appView .dar-fold__rail .dar-tl-groups,
+html[data-theme] body.is-topics-route #appView .dar-fold__rail .dar-tl-accordion{
+  inline-size:100%!important;
+  max-inline-size:100%!important;
+  min-inline-size:0!important;
+  box-sizing:border-box!important;
+}
+@container dar-test-topic-rail (max-width: 620px){
+  html[data-theme] body.is-topics-route #appView .dar-fold__rail .dar-tl-accordion .dar-tl-grid,
+  html[data-theme] body.is-topics-route #appView .dar-fold__rail :is(.topics-theme-grid,.dua-theme-grid){
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+}
+/* Fallback for Chromium versions with no named container query support. */
+html[data-fold-dual="1"][data-theme] body.is-topics-route #appView
+  .dar-fold[data-fold-mode="dual"]:not(:has(> .dar-fold__pane > .dar-fold__empty))
+  > .dar-fold__rail .dar-tl-accordion .dar-tl-grid,
+html[data-fold-dual="1"][data-theme] body.is-topics-route #appView
+  .dar-fold[data-fold-mode="dual"]:not(:has(> .dar-fold__pane > .dar-fold__empty))
+  > .dar-fold__rail .topics-theme-grid{
+  grid-template-columns:minmax(0,1fr)!important;
+}
+/* In a narrow category rail, keep complete German/Arabic words readable. */
+html[data-theme] body.is-topics-route #appView .dar-fold__rail
+  .dar-tl-accordion summary{
+  display:grid!important;
+  grid-template-columns:34px minmax(0,1fr) auto 18px!important;
+  align-items:center!important;
+  gap:8px!important;
+  min-width:0!important;
+}
+html[data-theme] body.is-topics-route #appView .dar-fold__rail
+  :is(.dar-tl-groupname,.topics-theme-card__body,.topics-theme-card__body h3){
+  min-inline-size:0!important;
+  max-inline-size:100%!important;
+  overflow-wrap:normal!important;
+  word-break:normal!important;
+  hyphens:auto!important;
+  white-space:normal!important;
+}
+html[data-theme] body.is-topics-route #appView .dar-fold__rail
+  .dar-tl-groupcount{
+  white-space:nowrap!important;
+  min-inline-size:max-content!important;
+}
+/* On touchscreen layouts preserve one natural outer page scroll. Do not touch
+ * full-screen feed/chat, dialogs, horizontal slide tracks or the fixed nav. */
+@media (hover:none) and (pointer:coarse){
+  html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-ilm-chat-route) > .app,
+  html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-ilm-chat-route) #appView.view{
+    block-size:auto!important;
+    max-block-size:none!important;
+    overflow-y:visible!important;
+    min-block-size:0!important;
+  }
+  html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-ilm-chat-route) #appView.view{
+    padding-bottom:max(110px,calc(var(--dar-nav-height,76px) + 30px + env(safe-area-inset-bottom,0px)))!important;
+  }
+}
+/* Phone landscape: always one master/detail screen at a time. */
+@media (orientation:landscape) and (max-height:559.98px){
+  html[data-theme] body.has-bottom-nav #appView .dar-fold[data-fold-mode="dual"]{
+    block-size:auto!important;
+    max-block-size:none!important;
+    overflow:visible!important;
+  }
+  html[data-theme] body.has-bottom-nav #appView .dar-fold[data-fold-mode="dual"]
+    > :is(.dar-fold__rail,.dar-fold__pane){
+    block-size:auto!important;
+    max-block-size:none!important;
+    overflow-y:visible!important;
+  }
+}
