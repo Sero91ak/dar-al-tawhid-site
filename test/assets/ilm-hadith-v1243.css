@@ -2206,39 +2206,45 @@ html[data-theme] body.is-hadith-route .hadith-detail.hadith-detail--v1303 .hadit
 }
 
 
-/* DAR_HADITH_HERO_CONTAIN_V1393 · whole 16:9 artwork on phone, iPad and tablet */
+/* DAR_HADITH_HERO_FIT_V1394 · filled frame, readable title, phone iPad tablet */
 body.is-hadith-route .hadith-hub > .view-head{
-  aspect-ratio:16/9!important;
+  aspect-ratio:auto!important;
   min-height:0!important;
-  height:auto!important;
-  max-height:min(40svh,420px)!important;
+  height:clamp(168px,42vw,236px)!important;
+  max-height:236px!important;
   width:100%!important;
   max-width:100%!important;
   margin-left:0!important;
   margin-right:0!important;
-  background-size:auto,auto,contain!important;
-  background-position:center,center,center center!important;
+  background-size:auto,auto,cover!important;
+  background-position:center,center,center 36%!important;
   background-repeat:no-repeat,no-repeat,no-repeat!important;
 }
+body.is-hadith-route .hadith-hub > .view-head h2{
+  font-size:clamp(1.28rem,4.8vw,1.72rem)!important;
+  line-height:1.16!important;
+}
 body.is-hadith-route .hadith-hub--nested > .view-head{
-  background-size:auto,auto,contain,contain!important;
-  background-position:center,center,center center,center center!important;
+  background-size:auto,auto,cover,cover!important;
+  background-position:center,center,center 36%,center 36%!important;
+  height:clamp(168px,42vw,236px)!important;
+  max-height:236px!important;
 }
 @media(max-width:599px){
   body.is-hadith-route .hadith-hub > .view-head{
-    aspect-ratio:16/9!important;
-    min-height:0!important;
-    max-height:min(34svh,280px)!important;
-    background-size:auto,auto,contain!important;
-    background-position:center,center,center center!important;
+    aspect-ratio:auto!important;
+    height:clamp(160px,44vw,210px)!important;
+    max-height:210px!important;
+    background-size:auto,auto,cover!important;
+    background-position:center,center,center 36%!important;
   }
 }
 @media(min-width:760px){
   body.is-hadith-route .hadith-hub > .view-head{
-    aspect-ratio:16/9!important;
-    min-height:0!important;
-    max-height:min(42svh,440px)!important;
-    background-size:auto,auto,contain!important;
-    background-position:center,center,center center!important;
+    aspect-ratio:auto!important;
+    height:clamp(200px,28vw,260px)!important;
+    max-height:260px!important;
+    background-size:auto,auto,cover!important;
+    background-position:center,center,center 36%!important;
   }
 }

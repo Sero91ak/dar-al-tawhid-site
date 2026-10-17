@@ -40,17 +40,18 @@ html[data-theme] body.is-frauen-route .frauen-library-shell{
 
 /* Historical edge-to-edge hero. */
 html[data-theme] body.is-frauen-route .frauen-library-hero{
-  aspect-ratio:16/9!important;
+  aspect-ratio:auto!important;
   min-height:0!important;
-  max-height:min(38svh,360px)!important;
+  height:clamp(176px,44vw,248px)!important;
+  max-height:248px!important;
   width:100%!important;
   max-width:100%!important;
   margin:0 0 20px 0!important;
   border:0!important;
   border-radius:0 0 30px 30px!important;
   box-shadow:0 18px 42px rgba(4,15,14,.13)!important;
-  background-size:contain!important;
-  background-position:center center!important;
+  background-size:cover!important;
+  background-position:center 40%!important;
 }
 html[data-theme] body.is-frauen-route[data-frauen-view="hub"] .frauen-library-hero{
   --frauen-hero-img:url("/test/assets/frauen/library-v1224/03-erste-generationen.jpg")!important;
@@ -88,7 +89,7 @@ html[data-theme] body.is-frauen-route .frauen-library-hero__eyebrow{
 html[data-theme] body.is-frauen-route .frauen-library-hero h2{
   max-width:690px!important;
   margin:0!important;
-  font-size:clamp(36px,8.7vw,56px)!important;
+  font-size:clamp(26px,6vw,36px)!important;
   line-height:.98!important;
   letter-spacing:-.025em!important;
   color:#fff9ec!important;
@@ -96,7 +97,7 @@ html[data-theme] body.is-frauen-route .frauen-library-hero h2{
 }
 html[data-theme] body.is-frauen-route .frauen-library-hero--group h2,
 html[data-theme] body.is-frauen-route .frauen-library-hero--section h2{
-  font-size:clamp(31px,7.5vw,47px)!important;
+  font-size:clamp(22px,5.2vw,30px)!important;
 }
 html[data-theme] body.is-frauen-route .frauen-library-hero__subtitle{
   max-width:620px!important;
@@ -636,10 +637,10 @@ html[data-theme] body.is-frauen-route .frauen-library-pinned-header > .frauen-li
   visibility:visible!important;
   opacity:1!important;
   position:relative!important;
-  aspect-ratio:16/9!important;
+  aspect-ratio:auto!important;
   min-height:0!important;
-  height:auto!important;
-  max-height:min(38svh,360px)!important;
+  height:clamp(176px,44vw,248px)!important;
+  max-height:248px!important;
   width:100%!important;
   max-width:100%!important;
   margin-left:0!important;
@@ -649,8 +650,8 @@ html[data-theme] body.is-frauen-route .frauen-library-pinned-header > .frauen-li
   background-color:#112621!important;
   background-image:var(--frauen-hero-img)!important;
   background-repeat:no-repeat!important;
-  background-size:contain!important;
-  background-position:center center!important;
+  background-size:cover!important;
+  background-position:center 40%!important;
   border-radius:0 0 26px 26px!important;
 }
 html[data-theme] body.is-frauen-route .frauen-library-pinned-header.dar-hero-stage::before{
@@ -701,17 +702,17 @@ html[data-theme] body.is-frauen-route .frauen-library-hero--tone-lebensphasen{
 }
 @media(max-width:600px){
   html[data-theme] body.is-frauen-route .frauen-library-pinned-header > .frauen-library-hero[data-hero-readable="true"]{
-    aspect-ratio:16/9!important;
-    min-height:0!important;
-    max-height:min(34svh,280px)!important;
-    background-position:center center!important;
-    background-size:contain!important;
+    height:clamp(168px,46vw,220px)!important;
+    max-height:220px!important;
+    background-position:center 40%!important;
+    background-size:cover!important;
   }
 }
 html:has(body.is-frauen-route){
-  overflow-x:clip!important;
-  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overflow-y:scroll!important;
   height:auto!important;
+  min-height:100%!important;
 }
 /* DAR_FRAUEN_HERO_SCROLL_ANCESTOR_V1392 · Keep sticky relative to page scroll.
  * overflow-x:hidden on an ancestor silently creates overflow-y:auto and
@@ -724,12 +725,30 @@ html[data-theme] body.is-frauen-route #appView .frauen-library-shell,
 html[data-theme] body.is-frauen-route #appView .frauen-library-list{
   overflow-x:clip!important;
   overflow-y:visible!important;
+  overflow:visible!important;
+  height:auto!important;
+  max-height:none!important;
+  position:static!important;
 }
 
 /* Sticky must use the root scroller: body overflow-x:hidden computes
  * overflow-y:auto and steals the sticky containing scrollport even though
  * scrollingElement is HTML. Preserve deliberate inline modal scroll locks. */
 html[data-theme] body.is-frauen-route{
-  overflow-x:clip!important;
+  overflow-x:visible!important;
   overflow-y:visible!important;
+  overflow:visible!important;
+  height:auto!important;
+  max-height:none!important;
+  position:relative!important;
+}
+html[data-theme] body.is-frauen-route .frauen-library-pinned-header.dar-hero-stage{
+  position:relative!important;
+}
+html[data-theme] body.is-frauen-route:is(
+  [data-frauen-view="hub"],[data-frauen-view="group"],[data-frauen-view="list"]
+) #appView.view{
+  overflow:visible!important;
+  height:auto!important;
+  max-height:none!important;
 }
