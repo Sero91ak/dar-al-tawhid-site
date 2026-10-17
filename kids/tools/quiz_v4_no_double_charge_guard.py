@@ -102,12 +102,16 @@ def protect_paid_texts(root: Path, registry: dict, ledger: dict) -> set[str]:
                     or item.get("modelId") != MODEL or item.get("voiceId") != VOICE
                     or status not in statuses or spoken in pending_flow):
                 raise RuntimeError("Connected paid text identity/status mismatch")
-            if spoken in charged or spoken in reserved:
-                raise RuntimeError("Connected V4 generation already paid elsewhere")
+            if spoken in reserved or (spoken in charged and status != "IMPORTED_ORIGINAL_MP3_VERIFIED"):
+                raise RuntimeError("Connected V4 speech already paid through another source")
             if spoken in recorded and status != "IMPORTED_ORIGINAL_MP3_VERIFIED":
                 raise RuntimeError("Connected pending MP3 conflicts with saved registry")
-            if status == "IMPORTED_ORIGINAL_MP3_VERIFIED" and spoken not in recorded:
-                raise RuntimeError("Connected MP3 claimed imported but no saved source")
+            if status == "IMPORTED_ORIGINAL_MP3_VERIFIED":
+                original = recorded.get(spoken)
+                if (not original or spoken not in charged
+                        or original.get("sha256") != item.get("importedMP3SHA256")
+                        or original.get("originalGenerationId") != item.get("generationId")):
+                    raise RuntimeError("Connected audio claimed imported without verified MP3 and paid receipt")
             if status != "IMPORTED_ORIGINAL_MP3_VERIFIED":
                 pending_flow.add(spoken)
     # Record both already-paid, currently queued and unimported flow originals
