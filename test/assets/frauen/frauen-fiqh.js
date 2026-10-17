@@ -4581,11 +4581,27 @@
   window.__darFrauenHeroIntegrityV1392=true;
   var pending=false,observer=null,observed=null,repairing=false;
   function currentValue(){
+    try{
+      var route=typeof window.readRoute==="function"?window.readRoute():null;
+      if(route&&route.view==="frauen")return String(route.value||"");
+    }catch(e){}
+    try{
+      if(window.currentRoute&&window.currentRoute.view==="frauen")
+        return String(window.currentRoute.value||"");
+    }catch(e){}
     var h=String(location.hash||"").slice(1);
     if(h.charAt(0)==="/")h=h.slice(1);
-    if(h!=="frauen"&&h.indexOf("frauen/")!==0)return null;
-    var parts=h.split("/").slice(1);
-    return parts.map(function(x){try{return decodeURIComponent(x)}catch(e){return x}}).join("/");
+    if(h==="frauen"||h.indexOf("frauen/")===0){
+      return h.split("/").slice(1).map(function(x){
+        try{return decodeURIComponent(x)}catch(e){return x}
+      }).join("/");
+    }
+    // Some Test shells keep a catalog hash while rendering Frauen as a nested
+    // route. Only restore the known hub when the rendered DOM confirms it.
+    if(document.body&&document.body.classList.contains("is-frauen-route")
+      &&document.querySelector("#appView .frauen-library-shell.frauen-library-hub"))
+      return "";
+    return null;
   }
   function repair(){
     var value=currentValue();
