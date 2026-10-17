@@ -137,8 +137,8 @@ function deen(card,{item,audioMeta,cover,hero},inline=false){
  if(!item?.id)return;
  const audio=allowed(String(audioMeta?.url||""));
  const urls=["/kids/data/deen-lessons.json?v=3",
-  "/kids/data/deen-curriculum-v1.json?v=1",
-  "/kids/deen-lessons.js?v=10","/kids/deen-curriculum-v1.css?v=1",
+  "/kids/data/deen-curriculum-v1.json?v=2",
+  "/kids/deen-lessons.js?v=11","/kids/deen-curriculum-v1.css?v=1",
   "/kids/deen-lessons.css?v=2","/kids/deen-learning-v1199.css?v=1199",
   "/kids/deen-library-polish-v1346.css?v=1346",
   "/kids/story-follow-reader.css?v=11","/kids/story-follow-reader.js?v=18",
