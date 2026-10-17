@@ -1,0 +1,62 @@
+/* TAWḤĪD KIDS TEST — dedicated start-only boot screen. Never loaded on public kids site. */
+html.kids-test-booting{background:#07182f!important}
+html.kids-test-booting body{background:#07182f!important;overflow:hidden!important}
+html.kids-test-booting body > :not(#kids-test-boot):not(script){visibility:hidden!important}
+#kids-test-boot,#kids-test-boot *{box-sizing:border-box}
+#kids-test-boot{
+ position:fixed!important;inset:0!important;z-index:2147483645!important;display:flex!important;
+ align-items:center;justify-content:center;overflow:hidden;isolation:isolate;
+ background:#071a38;color:#fff8de;font-family:"SF Pro Rounded","Arial Rounded MT Bold",Nunito,system-ui,sans-serif;
+ text-align:center;visibility:visible!important;opacity:1;transition:opacity .28s ease;
+ padding:calc(16px + env(safe-area-inset-top,0px)) clamp(12px,4vw,35px) calc(22px + env(safe-area-inset-bottom,0px));
+}
+#kids-test-boot::before{content:"";position:absolute;inset:-2%;z-index:-3;
+ background:linear-gradient(180deg,rgba(3,11,44,.52),rgba(4,13,42,.21) 43%,rgba(2,10,36,.59) 77%,rgba(3,11,33,.97)),
+ url("/kids/assets/kids-salah-v1272/hero-home.png?v=1274") center 48% / cover no-repeat;
+ filter:saturate(1.3) contrast(1.05)}
+#kids-test-boot::after{content:"";pointer-events:none;position:absolute;inset:0;z-index:-2;
+ background:radial-gradient(circle at 52% 17%,rgba(30,106,203,.52),transparent 46%),
+ radial-gradient(circle at 15% 67%,rgba(254,175,69,.17),transparent 27%),
+ radial-gradient(circle at 90% 70%,rgba(239,175,78,.15),transparent 29%);
+}
+#kids-test-boot .ktb-arch{position:absolute;inset:0 1.3%;z-index:-1;pointer-events:none;
+ border:clamp(2px,.38vw,5px) solid rgba(235,185,79,.59);border-radius:47% 47% 0 0 / 17% 17% 0 0;
+ box-shadow:inset 0 0 18px rgba(255,199,73,.10);border-bottom:none}
+#kids-test-boot .ktb-stage{position:relative;display:flex;align-items:center;justify-content:space-between;flex-direction:column;
+ min-height:0;height:100%;width:100%;max-width:min(92vw,980px);gap:8px}
+#kids-test-boot .ktb-brand{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(8px,1.8vh,22px);width:100%}
+#kids-test-boot .ktb-logo{display:block;object-fit:contain;width:min(64vw,clamp(220px,39vh,440px));height:auto;max-height:min(44dvh,430px);border-radius:23%;filter:drop-shadow(0 9px 26px rgba(0,8,40,.6))}
+#kids-test-boot .ktb-greeting{margin:0;max-width:840px;color:#fff4d8;font-size:clamp(17px,3.6vw,30px);
+ font-weight:850;line-height:1.3;letter-spacing:-.025em;text-shadow:0 3px 12px #031025,0 1px 4px #031025}
+#kids-test-boot .ktb-tag{margin:0;font-size:clamp(12px,2.6vw,19px);font-weight:750;color:#fff5da;
+ text-shadow:0 2px 8px #00152c}
+#kids-test-boot .ktb-loading{flex:0 0 auto;width:min(90%,670px);margin:0 auto max(2vh,10px);
+ padding:18px clamp(5px,2vw,20px) 10px;background:linear-gradient(180deg,rgba(0,17,53,.06),rgba(0,13,43,.52));
+ border-radius:20px}
+#kids-test-boot .ktb-progress-labels{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;width:100%}
+#kids-test-boot .ktb-edge{font-size:clamp(12px,2.3vw,17px);font-weight:900;text-shadow:0 2px 7px #001331}
+#kids-test-boot .ktb-track{height:clamp(20px,4.4vh,35px);border-radius:999px;padding:4px;position:relative;
+ overflow:hidden;background:linear-gradient(180deg,#031b4f,#064d91);border:2px solid #f1b741;
+ box-shadow:0 0 0 2px rgba(0,17,49,.66),0 0 14px rgba(255,194,72,.40),inset 0 3px 8px rgba(0,5,32,.65)}
+#kids-test-boot .ktb-fill{height:100%;width:0%;position:relative;border-radius:999px;
+ background:linear-gradient(180deg,#fff2a3 0%,#ffdd49 36%,#f8a50b 90%);box-shadow:inset 0 1px 0 #fff6b7,0 0 10px #ffcd44;
+ transition:width .26s ease-out}
+#kids-test-boot .ktb-fill:after{content:"";position:absolute;inset:0;border-radius:999px;
+ background:repeating-linear-gradient(108deg,transparent 0 25px,rgba(255,255,255,.34) 27px 29px,transparent 32px 58px);opacity:.57}
+#kids-test-boot .ktb-percent{font-size:clamp(24px,4.3vw,35px);font-weight:1000;color:#ffdf80;
+ line-height:1.15;margin:10px 0 4px;text-shadow:0 2px 9px #031b36}
+#kids-test-boot .ktb-status{font-size:clamp(12px,2.7vw,18px);font-weight:800;line-height:1.35;margin:0;color:#fff;
+ text-shadow:0 2px 9px #02162f}
+#kids-test-boot .ktb-recover{display:none;margin:12px auto 0;color:#081c30;background:#f7d27b;
+ border:1px solid #ffebc2;border-radius:999px;padding:10px 16px;font:800 14px inherit;cursor:pointer}
+#kids-test-boot[data-boot-error="1"] .ktb-recover{display:inline-block}
+#kids-test-boot.kids-test-boot-fade{opacity:0;pointer-events:none}
+@media(min-width:760px) and (orientation:landscape){
+ #kids-test-boot .ktb-stage{max-width:min(94vw,1250px);display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,5vw,100px)}
+ #kids-test-boot .ktb-brand{height:100%;justify-content:center}
+ #kids-test-boot .ktb-logo{width:min(32vw,42vh,440px);max-height:55dvh}
+ #kids-test-boot .ktb-loading{width:100%;align-self:center;margin:0}
+ #kids-test-boot .ktb-greeting{font-size:clamp(17px,2.4vw,26px)}
+}
+@media(max-height:570px){#kids-test-boot .ktb-logo{max-height:28dvh;width:min(40vw,230px)}#kids-test-boot .ktb-greeting{font-size:15px}}
+@media(prefers-reduced-motion:reduce){#kids-test-boot,#kids-test-boot .ktb-fill{transition:none}}
