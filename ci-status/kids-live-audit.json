@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-17T09:03:59Z",
+  "timestamp": "2026-10-17T09:45:32Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "success",
-  "finishedDeployRun": "39019496168",
+  "finishedDeployRun": "39022215662",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -64,6 +64,24 @@
   "lastDeployRuns": [
     {
       "conclusion": "success",
+      "created_at": "2026-10-17T09:43:33Z",
+      "head_sha": "26064d103247467b70771489d8522ef11839ae5f",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39022215662",
+      "id": 39022215662,
+      "status": "completed",
+      "updated_at": "2026-10-17T09:45:26Z"
+    },
+    {
+      "conclusion": "success",
+      "created_at": "2026-10-17T09:33:00Z",
+      "head_sha": "7c4f09568976498c24a6bbf7315d69f18a1dc3df",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39021558038",
+      "id": 39021558038,
+      "status": "completed",
+      "updated_at": "2026-10-17T09:35:23Z"
+    },
+    {
+      "conclusion": "success",
       "created_at": "2026-10-17T09:00:42Z",
       "head_sha": "7a301060fe2d450a20d49be62642103f39008d9e",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39019496168",
@@ -97,24 +115,6 @@
       "id": 39018526946,
       "status": "completed",
       "updated_at": "2026-10-17T08:47:00Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-10-17T08:43:08Z",
-      "head_sha": "4d724f10307c005e55f768deb3084ac36f1a900d",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39018414158",
-      "id": 39018414158,
-      "status": "completed",
-      "updated_at": "2026-10-17T08:43:33Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-10-17T08:40:37Z",
-      "head_sha": "e926c83d785342a336f784858e7d0d873e0b1704",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39018254807",
-      "id": 39018254807,
-      "status": "completed",
-      "updated_at": "2026-10-17T08:42:25Z"
     }
   ]
 }
