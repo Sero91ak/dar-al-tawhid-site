@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'kids/tools/write_quiz_v4_handover.py'
+      - '.github/reports/kids-v4-older-stage1-source-and-answer-audit.json'
       - 'kids/review-only/quiz-v4-450-actual-mp3-import-summary.json'
       - 'kids/review-only/quiz-v4-450-next-completion-priority.json'
       - 'kids/review-only/quiz-v4-remaining-unique-audio-credit-breakdown.json'
