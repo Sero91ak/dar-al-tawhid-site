@@ -309,7 +309,7 @@ async function finalizeDarTestHomeV1193(asset) {
       '@import url("/test/assets/primary-area-embedded-v1313.css?v=primary-area-v1313");' +
       '@import url("/test/assets/tawhid-guide-v1295.css?v=tawhid-guide-v1295");' +
       '@import url("/test/assets/ilm-hadith-v1243.css?v=hadith-final-v1303");' +
-      '@import url("/test/assets/hero-background-authority.css?v=hero-bg-v2");' +
+      '@import url("/test/assets/hero-background-authority.css?v=hero-bg-v3");' +
       '</style>';
     if (html.includes("</html>")) html = html.replace("</html>", areaAuthority + "</html>");
     else html += areaAuthority;
@@ -470,6 +470,9 @@ async function finalizeDarTestHomeV1193(asset) {
   // The 10px mobile content gutter follows the existing floating bottom nav.
   if (!html.includes('id="darTestEdgeWidthV1372"')) {
     html += '<link rel="stylesheet" id="darTestEdgeWidthV1372" href="/test/assets/test-global-edge-width-v1372.css?v=20261016-layl-muted-v1377">';
+  }
+  if (!html.includes('id="darHeroBackgroundAuthorityV3"')) {
+    html += '<link rel="stylesheet" id="darHeroBackgroundAuthorityV3" href="/test/assets/hero-background-authority.css?v=hero-bg-v3">';
   }
 
   const headers = new Headers(asset.headers);

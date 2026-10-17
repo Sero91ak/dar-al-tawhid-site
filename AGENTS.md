@@ -187,3 +187,7 @@ Diese Regel ersetzt alle früheren Regeln zu sichtbaren Quellenlinks in veröffe
 - Textbeiträge für Erwachsene **ohne Hashtag-Zeilen und ohne Social-Media-Textfußzeilen**. Bei Quellenlink ist exakt **eine** passende `/q/<nummer>/`-Karte für den Einzelbeitrag maßgebend.
 - **Keine Änderungen an Kids und keine OneSignal-/Besucher-Benachrichtigungen** durch diesen Inhalts-Sync. Veröffentlichung auf einer Seite und Versand eines Pushs sind getrennte Aktionen.
 - Geschützte App-Spuren gemäß `scripts/app-lane-guard.js` getrennt committen; der kanonische Live-Workflow führt Inhaltssync und Live-Build aus. Bei blockierter Live-Auslieferung konkrete Workflow-Fehler melden statt Erfolg zu behaupten.
+
+## GLOBAL HERO BACKGROUND AUTHORITY
+
+Hero-Bilder der Erwachsenen-App sind der vollflächige Hintergrund ihres Bereichs. Sie nutzen die Breite von `#appView`, mit `background-size:cover` und ohne seitlichen Leerstreifen. Kein `width:100vw` und kein negativer Ausgleichsrand in verschachtelten Containern. Der Bildbereich bleibt ohne Kartenrand und ohne Schatten; Überschrift und nachfolgender Lesetext behalten ihren eigenen Innenabstand. Jedes neue Hero-Motiv übernimmt diese Einbettung. Motiv, Höhe, Typografie und Farbwelt des Bereichs bleiben eigen.

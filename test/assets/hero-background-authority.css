@@ -1,29 +1,35 @@
 /* GLOBAL HERO BACKGROUND AUTHORITY · adult test app
-   A hero is the background of its own area and uses that area's width.
-   It does not break out with 100vw, and it does not keep a side gutter. */
-html[data-theme] body:is(
+   A hero is the background of its area and uses that area's width.
+   Side gutters stay on the text that follows the hero.
+   No 100vw breakout and no negative margin. */
+html[data-theme] body.is-area-route:is(
   .is-post-route,.is-topics-route,.is-topic-route,.is-dua-route,.is-hadith-route,
   .is-scholars-route,.is-scholar-route,.is-more-route,.is-quiz-route,.is-quran-overview,
   .is-settings-route,.is-calendar-route,.is-library-route,.is-frauen-route,.is-tawhid-guide-route,
   .is-account-route,.is-about-route,.is-news-route,.is-news-detail-route,.is-zakat-route,
   .is-source-library-route,.is-quran-topic-route
-) #appView.view{
+):not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView.view{
   inline-size:100%!important;
   max-inline-size:100%!important;
   min-inline-size:0!important;
   margin-inline:0!important;
   padding-left:0!important;
   padding-right:0!important;
-  padding-inline:0!important;
   box-sizing:border-box!important;
   overflow-x:clip!important;
 }
 html[data-theme] body.is-post-route #appView .post-reader,
-html[data-theme] body.is-hadith-route #appView .hadith-detail{
+html[data-theme] body.is-hadith-route #appView .hadith-detail,
+html[data-theme] body.is-quran-overview #appView .qov-page,
+html[data-theme] body.is-topics-route #appView .topics-hub,
+html[data-theme] body.is-topic-route #appView .topic-collection-page,
+html[data-theme] body.is-more-route #appView .more-page,
+html[data-theme] body.is-quiz-route #appView .quiz-home{
   inline-size:100%!important;
   max-inline-size:none!important;
   margin-inline:0!important;
-  padding-inline:0!important;
+  padding-left:0!important;
+  padding-right:0!important;
   box-sizing:border-box!important;
 }
 html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title,
@@ -57,10 +63,10 @@ html[data-theme] #appView.view:has(.prayer-page-noble) > .view-head{
   inline-size:100%!important;
   width:100%!important;
   max-inline-size:none!important;
+  max-width:none!important;
   min-inline-size:0!important;
+  margin:0!important;
   margin-inline:0!important;
-  margin-left:0!important;
-  margin-right:0!important;
   left:auto!important;
   right:auto!important;
   translate:none!important;
@@ -70,5 +76,17 @@ html[data-theme] #appView.view:has(.prayer-page-noble) > .view-head{
   box-sizing:border-box!important;
   overflow:hidden!important;
   background-size:cover!important;
+  background-position:center!important;
   background-repeat:no-repeat!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > :not(.view-head),
+html[data-theme] body.is-topic-route #appView .topic-collection-page > :not(.view-head),
+html[data-theme] body.is-post-route #appView .post-reader > :not(.post-reader-title),
+html[data-theme] body.is-quran-overview #appView .qov-page > :not(.qov-header),
+html[data-theme] body.is-more-route #appView > :not(.view-head),
+html[data-theme] body.is-quiz-route #appView > :not(.view-head),
+html[data-theme] body.is-settings-route #appView > :not(.settings-page-head){
+  padding-left:var(--dar-edge-gutter,12px)!important;
+  padding-right:var(--dar-edge-gutter-right,12px)!important;
+  box-sizing:border-box!important;
 }
