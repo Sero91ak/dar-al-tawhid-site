@@ -131,6 +131,7 @@ assert.ok(sw.includes('/kids/kids-girl-palette-authority-v1427.css?v=1428')&&
 
 /* Protect original lesson scroll structure and on-screen typing accessibility. */
 require("./tools/test-academy-writing-keyboard-v1438.cjs");
+require("./tools/test-academy-edge-scroll-v1445.cjs");
 
 /* Run the month-year roll-over and privacy regression in the standard Kids UI CI suite. */
 require("./tools/test-birth-month-auto-v1431.cjs");
