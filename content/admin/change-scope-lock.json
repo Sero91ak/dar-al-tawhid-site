@@ -8098,6 +8098,22 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-17T23:59:00.000Z"
+    },
+    {
+      "id": "adult-visitor-hadith-hero-fullbleed-v1386-20261017",
+      "at": "2026-10-17T10:16:15.699Z",
+      "approvedBy": "user-direct-after-video-fix-push-visitor-app-hadith-fullbleed-navigation-20261017",
+      "reason": "Adult visitor only: copy verified Test Hadith responsive geometry and own artwork to visitor. Theme-adaptive true background cover, consistent hero height, no zoom/slide through Hadith route. No Kids, TV, Push or content changes.",
+      "paths": [
+        "assets/adult-responsive-viewport-v1381.css",
+        "assets/ilm/hadith-library-overview-v1267.webp",
+        "assets/ilm/hadith-library-study-v1267.webp",
+        "index.html",
+        "version.json",
+        "scripts/verify-live-deploy.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-17T23:59:00.000Z"
     }
   ],
   "enabled": true
