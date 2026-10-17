@@ -8,6 +8,7 @@ on:
       - 'kids/tools/produce_quiz_v4_450_exact_manual_wave.py'
       - 'kids/tools/import_quiz_v4_connected_flow_originals.py'
       - 'kids/tools/recover_quiz_v4_flows_history_exact.py'
+      - 'kids/tools/recover_quiz_v4_prepaid9_via_flows_get.py'
       - 'kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py'
       - 'kids/tools/quiz_v4_no_double_charge_guard.py'
       - 'kids/data/quiz-v4-connected-flow-originals-ledger.json'
@@ -97,6 +98,8 @@ jobs:
           set -euo pipefail
           python3 -m py_compile kids/tools/recover_quiz_v4_flows_history_exact.py
           python3 kids/tools/recover_quiz_v4_flows_history_exact.py --audit
+          python3 kids/tools/recover_quiz_v4_prepaid9_via_flows_get.py
+          python3 kids/tools/recover_quiz_v4_prepaid9_via_flows_get.py --restore
           python3 kids/tools/recover_quiz_v4_flows_history_exact.py --restore --limit 10
       - name: Build real clips in original 450 questions (still review only)
         run: |
@@ -113,9 +116,11 @@ jobs:
           git config user.name "tawhid-kids-v4-original-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add kids/assets/kids-quiz-audio/v4-connected-flow-original-review/
+          git add kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
           git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
           git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
           git add kids/data/quiz-v4-connected-flow-originals-ledger.json
+          git add kids/data/quiz-v4-paid-flow-import-status.json
           git add kids/data/quiz-v4-450-original-clip-registry.json
           git add kids/data/quiz-v4-450-paid-generation-ledger.json
           git add kids/data/quiz-v4-first150-composed-preview.json
@@ -143,6 +148,7 @@ jobs:
           if-no-files-found: warn
           path: |
             kids/assets/kids-quiz-audio/v4-connected-flow-original-review/
+            kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
             kids/data/quiz-v4-connected-flow-originals-ledger.json
             kids/data/quiz-v4-450-original-clip-registry.json
             kids/data/quiz-v4-450-paid-generation-ledger.json
