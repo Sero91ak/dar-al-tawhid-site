@@ -242,7 +242,7 @@ async function fetchVersionBuild(base) {
         verified = html.status === 200 &&
           html.text.includes("DAR_HADITH_SHARH_INLINE_V1308") &&
           html.text.includes("/test/assets/ilm-hadith-v1243.css?v=hadith-sharh-inline-v1308") &&
-          html.text.includes("app-shell-v1358") &&
+          html.text.includes(TEST_EXPECT_BUILD) &&
           css.status === 200 &&
           css.text.includes("DAR_HADITH_SHARH_READER_DISTINCTION_20261017");
         console.log(`hadith-sharh-inline ${label}: html=${html.status} css=${css.status} canonical=${html.text.includes("DAR_HADITH_SHARH_INLINE_V1308")} v1358=${html.text.includes("app-shell-v1358")} result=${verified} attempt=${attempt}/${ATTEMPTS}`);
