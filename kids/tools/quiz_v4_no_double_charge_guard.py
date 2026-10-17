@@ -74,9 +74,45 @@ def protect_paid_texts(root: Path, registry: dict, ledger: dict) -> set[str]:
                 or (saved.get("textSha256") and
                     saved["textSha256"] != hashlib.sha256(spoken.encode("utf-8")).hexdigest())):
             raise RuntimeError("Saved original has inconsistent voice/model/text/hash metadata; stop")
-    # Covers all 327 cost-ledger takes, 47 imported prepaid originals and
-    # 9 paid originals that are not yet downloadable.
-    return charged | reserved | set(recorded)
+    # The connected Creative Studio may finish a paid speech generation before
+    # its ORIGINAL MP3 bytes are imported into the GitHub registry.  Reserve
+    # the exact UTF-8 text immediately: neither older GitHub Actions batches
+    # nor newer full-450 batch planners may ever purchase it again.
+    flow_ledger = root / "kids/data/quiz-v4-connected-flow-originals-ledger.json"
+    pending_flow = set()
+    if flow_ledger.is_file():
+        flow = json.loads(flow_ledger.read_text(encoding="utf-8"))
+        if (flow.get("modelId") != MODEL or flow.get("voiceId") != VOICE
+                or flow.get("live") is not False
+                or not isinstance(flow.get("entries"), list)):
+            raise RuntimeError("Connected ElevenLabs paid-flow ledger invalid")
+        statuses = {
+            "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+            "GENERATION_SUBMITTED_DO_NOT_RETRY",
+            "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
+            "PROVIDER_REJECTED_NO_CHARGE_VERIFY",
+            "IMPORTED_ORIGINAL_MP3_VERIFIED",
+        }
+        for item in flow["entries"]:
+            spoken = item.get("sourceText")
+            status = item.get("status")
+            if (not isinstance(spoken, str) or not spoken
+                    or item.get("sourceTextSHA256") != hashlib.sha256(
+                        spoken.encode("utf-8")).hexdigest()
+                    or item.get("modelId") != MODEL or item.get("voiceId") != VOICE
+                    or status not in statuses or spoken in pending_flow):
+                raise RuntimeError("Connected paid text identity/status mismatch")
+            if spoken in charged or spoken in reserved:
+                raise RuntimeError("Connected V4 generation already paid elsewhere")
+            if spoken in recorded and status != "IMPORTED_ORIGINAL_MP3_VERIFIED":
+                raise RuntimeError("Connected pending MP3 conflicts with saved registry")
+            if status == "IMPORTED_ORIGINAL_MP3_VERIFIED" and spoken not in recorded:
+                raise RuntimeError("Connected MP3 claimed imported but no saved source")
+            if status != "IMPORTED_ORIGINAL_MP3_VERIFIED":
+                pending_flow.add(spoken)
+    # Record both already-paid, currently queued and unimported flow originals
+    # before allowing ANY new provider request.
+    return charged | reserved | set(recorded) | pending_flow
 
 
 def prohibit_prepaid_selection(spoken: str, protected: set[str]) -> None:
