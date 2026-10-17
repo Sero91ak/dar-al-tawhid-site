@@ -59,7 +59,7 @@ export default {
       // The first KIDS TEST frame has critical CSS inline in the HEAD.
       // This prevents an unstyled/white document while the optional CSS bundle arrives.
       const posterURL = "/kids/assets/kids-splash-20261017-v1.jpg";
-      const critical = '<script id="kids-test-first-frame">document.documentElement.classList.add("kids-test-booting");</script>'
+      const critical = '<script id="kids-test-first-frame">document.documentElement.classList.add("kids-test-booting");setTimeout(function(){if(!window.__KIDS_CREATOR_SPLASH_2__){document.documentElement.classList.remove("kids-test-booting");var s=document.getElementById("kids-test-boot");if(s)s.remove();}},10000);</script>'
         + '<meta name="theme-color" content="#07152f">'
         + '<meta name="color-scheme" content="dark">'
         + '<style id="kids-test-first-frame-css">'
