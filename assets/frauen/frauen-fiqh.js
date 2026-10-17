@@ -4686,8 +4686,9 @@
   window.__darFrauenHeroIntegrityV1392=true;
   var pending=false,observer=null,observed=null,repairing=false;
   function currentValue(){
-    var h=String(location.hash||"").replace(/^#\\/?/,"");
-    if(!/^frauen(?:\\/|$)/.test(h))return null;
+    var h=String(location.hash||"").slice(1);
+    if(h.charAt(0)==="/")h=h.slice(1);
+    if(h!=="frauen"&&h.indexOf("frauen/")!==0)return null;
     var parts=h.split("/").slice(1);
     return parts.map(function(x){try{return decodeURIComponent(x)}catch(e){return x}}).join("/");
   }
