@@ -25,7 +25,7 @@ html[data-theme="light"][data-theme-variant="salbei"]{
   --cream:#17211B!important;
   --text:#17211B!important;
   --muted:#536057!important;
-  --muted2:#718077!important;
+  --muted2:#586A60!important;
   --danger:#9A4742!important;
 
   --line:rgba(176,141,79,.26)!important;
@@ -223,7 +223,7 @@ html[data-theme="light"][data-theme-variant="salbei"] :is(.search,.direct-pick,.
   color:#17211B!important;
   -webkit-text-fill-color:#17211B!important;
 }
-html[data-theme="light"][data-theme-variant="salbei"] :is(.search,input,textarea)::placeholder{color:#718077!important}
+html[data-theme="light"][data-theme-variant="salbei"] :is(.search,input,textarea)::placeholder{color:#586A60!important}
 
 html[data-theme="light"][data-theme-variant="salbei"] :is(
   .social-link,.action-btn,.advanced-toggle,.collapse-toggle,.back-btn,.home-btn,.hijri-header-pill,
@@ -292,8 +292,8 @@ html[data-theme="light"][data-theme-variant="salbei"] .bottom-nav{
   -webkit-backdrop-filter:blur(18px) saturate(1.05)!important;
   backdrop-filter:blur(18px) saturate(1.05)!important;
 }
-html[data-theme="light"][data-theme-variant="salbei"] .bottom-nav-btn{color:#718077!important}
-html[data-theme="light"][data-theme-variant="salbei"] .bottom-nav-btn :is(svg,.nav-icon){color:#718077!important}
+html[data-theme="light"][data-theme-variant="salbei"] .bottom-nav-btn{color:#586A60!important}
+html[data-theme="light"][data-theme-variant="salbei"] .bottom-nav-btn :is(svg,.nav-icon){color:#586A60!important}
 html[data-theme="light"][data-theme-variant="salbei"] .bottom-nav-btn.is-active,
 html[data-theme="light"][data-theme-variant="salbei"] .bottom-nav-btn[aria-current="page"],
 html[data-theme="light"][data-theme-variant="salbei"] .bottom-nav-btn.is-active :is(svg,.nav-icon),
@@ -496,7 +496,7 @@ html[data-theme="light"][data-theme-variant="salbei"] :is(
   box-shadow:inset 0 1px 0 rgba(255,255,255,.9)!important;
 }
 html[data-theme="light"][data-theme-variant="salbei"] :is(input,textarea)::placeholder{
-  color:#718077!important;
+  color:#586A60!important;
   opacity:1!important;
 }
 html[data-theme="light"][data-theme-variant="salbei"] option{
