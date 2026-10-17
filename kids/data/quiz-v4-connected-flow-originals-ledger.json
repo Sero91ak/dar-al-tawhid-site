@@ -288,7 +288,7 @@
         "kids-quiz-045"
       ],
       "sourceAudioPart": "question",
-      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
+      "status": "IMPORTED_ORIGINAL_MP3_VERIFIED",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -302,7 +302,10 @@
       "sessionId": "jMakzPzXa6Cqcw5orUON",
       "providerStatus": "completed",
       "providerMediaStoredInElevenLabs": true,
-      "originalMP3ImportedIntoGithub": false
+      "originalMP3ImportedIntoGithub": true,
+      "importedMP3SHA256": "a94e54d28cba8be90daa5490934313dc446402fd66a4025188b96cb496abecb8",
+      "originalMP3SHA256": "a94e54d28cba8be90daa5490934313dc446402fd66a4025188b96cb496abecb8",
+      "originalMP3URL": "/kids/assets/kids-quiz-audio/v4-curated450-review/7a1821eae81ff2d3b1587f78b82e9dd3.mp3"
     },
     {
       "sourceText": "Im Muḥarram.",
@@ -311,7 +314,7 @@
         "kids-quiz-045"
       ],
       "sourceAudioPart": "question",
-      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
+      "status": "IMPORTED_ORIGINAL_MP3_VERIFIED",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -325,7 +328,10 @@
       "sessionId": "xSYVeDkVnH775t5cjdkt",
       "providerStatus": "completed",
       "providerMediaStoredInElevenLabs": true,
-      "originalMP3ImportedIntoGithub": false
+      "originalMP3ImportedIntoGithub": true,
+      "importedMP3SHA256": "b3993056c9d2fb6dd1c9a1558a4a29e027d521cfd12975bbe3a1486ce3905ba9",
+      "originalMP3SHA256": "b3993056c9d2fb6dd1c9a1558a4a29e027d521cfd12975bbe3a1486ce3905ba9",
+      "originalMP3URL": "/kids/assets/kids-quiz-audio/v4-curated450-review/1bc0a5e9e64dc6b120c5887ed4ec51f4.mp3"
     },
     {
       "sourceText": "Im Rabīʿ al-Awwal.",
