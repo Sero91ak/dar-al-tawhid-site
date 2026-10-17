@@ -40,8 +40,11 @@ STAGE_CHARACTERS=1842
 
 def read(path):return json.loads(path.read_text(encoding="utf-8"))
 def write(path,data):
+    """Replace each paid-audio ledger/checkpoint atomically on the same disk."""
     path.parent.mkdir(parents=True,exist_ok=True)
-    path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    staged=path.with_name(path.name+".pending")
+    staged.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    staged.replace(path)
 def check(ok,msg):
     if not ok:raise RuntimeError("KIDS_V4_STAGE1_PAYMENT_BLOCKED: "+msg)
 def sha(text):return hashlib.sha256(text.encode("utf-8")).hexdigest()
@@ -308,7 +311,9 @@ def main():
         audio,request_id=original_mp3(key,text)
         # Persist the charged MP3 bytes EVEN when the provider omitted a
         # request ID: a lost receipt must NEVER trigger a second purchase.
-        path.write_bytes(audio)
+        temporary=path.with_name(path.name+".pending")
+        temporary.write_bytes(audio)
+        temporary.replace(path)
         audiosha=hashlib.sha256(audio).hexdigest()
         reg["textClips"][text]={
             "url":"/"+str(path.relative_to(ROOT)),"sha256":audiosha,
