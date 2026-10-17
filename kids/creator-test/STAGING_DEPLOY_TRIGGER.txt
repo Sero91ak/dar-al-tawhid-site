@@ -43,3 +43,5 @@ Smoke checks: worker startup routes, forbidden routes, resource injection and JS
 
 2026-10-17 · KIDS TEST REDEPLOY REQUEST #2 · explicit owner authorization to publish staging-only boot loader.
 Scope: KIDS Creator Worker on workers.dev only; UI assets splash-boot-v1.css/js and Worker injection; public Kids visitor untouched. Deployment via GitHub Actions deploy-test-app.yml on push to kids-creator-staging.
+
+2026-10-17 · KIDS TEST SPLASH DEPLOY RETRY · fixed Node24/Workers consumed response stream in Worker by asset.clone().text(); isolated Creator only.\n
