@@ -286,4 +286,6 @@ if (sahabiyyatJs.includes("syHeroName")) error("Ṣaḥābiyyāt Detailansicht d
 if (storyHubJs.includes("gh-story-art-name")) error("Story-Hub Kartenname darf nicht doppelt im Bild stehen");
 if (storyHubJs.includes("ghPlayerImageName")) error("Universal-Player darf den Namen nicht doppelt im Hero zeigen");
 if (failed) process.exit(1);
+// Verify all 49 approved audio-bound stories are displayed verbatim, with no injected second ending.
+require("./kids-recorded-story-text-parity-check.js");
 console.log("Kids release guard OK:", build, label, exactV106Snapshot ? "exact-v106-legacy-snapshot" : ("assets v" + assetVersion), "25 Propheten-Karten + 10 Ṣaḥābah + 14 Ṣaḥābiyyāt");

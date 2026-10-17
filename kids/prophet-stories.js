@@ -2,14 +2,10 @@
 "use strict";
 
 const DATA_URL="/kids/data/prophet-stories.json";
-const KIDS_STORY_INTRO="As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh, liebe Kinder.";
-const KIDS_STORY_OUTRO="Und الله weiß es am besten.\n\nMöge الله euch nützliches Wissen schenken, euren Īmān stärken und euch al-Firdaws al-Aʿlā, die höchste Stufe des Paradieses, schenken.\n\nAs-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh.";
+// Die freigegebenen Original-Mastertexte enthalten Begrüßung und Abschluss bereits.
+// NIE Text an bereits vertonte Geschichten anhängen: sonst stimmen Audio und Mitlesen nicht überein.
 function normalizeKidsStoryText(value){
-  let text=String(value||"").trim();
-  if(!text)return"";
-  if(!text.startsWith(KIDS_STORY_INTRO))text=KIDS_STORY_INTRO+"\n\n"+text;
-  if(!text.endsWith(KIDS_STORY_OUTRO))text=text+"\n\n"+KIDS_STORY_OUTRO;
-  return text;
+  return String(value||"").trim();
 }
 const STORIES_FINAL_CSS="/kids/stories-final-v1088.css?v=1148";
 (function installStoriesFinalCss(){
