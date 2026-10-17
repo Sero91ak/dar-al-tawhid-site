@@ -63,16 +63,19 @@ EVIDENCE={
         "url":"https://islamweb.net/ar/article/234721/",
         "assessment":"24:27 requires permission and greeting before entering others' homes"},
     "kids-quiz-036":{
-        "url":"https://www.islamweb.net/ar/article/59048/",
-        "assessment":"Hadith of Ibn Umar lists prayer, testimony, zakat, hajj and Ramadan fasting as pillars"}
+        "url":"https://islamweb.net/ar/library/content/0/7/",
+        "assessment":"Sahih al-Bukhari hadith 8 states five pillars. Muslim 16 cross-referenced in Ibn al-Mulaqqin's commentary."},
+    "kids-quiz-022":{
+        "url":"https://dorar.net/h/qhgIL7pG?osoul=1",
+        "assessment":"Sahih Muslim 8 in the hadith of Jibril includes belief in the Last Day as a pillar of iman."}
 }
 CAVEATS={
     "kids-quiz-026":"Interpretive application of 16:43: original context is asking about earlier messengers.",
     "kids-quiz-389":"Interpretive application of 16:43: original context is asking about earlier messengers.",
     "kids-quiz-044":"Do not imply washing every named part; verse distinguishes wiping of the head.",
     "kids-quiz-050":"Child-friendly summary omits the fuller conditions of 49:9–10; never present it as exhaustive fiqh.",
-    "kids-quiz-022":"Verify Sahih Muslim numbering against the edition before final citation publication.",
-    "kids-quiz-036":"Verify Bukhari/Muslim hadith numbering against the edition before final citation publication."
+    "kids-quiz-022":"Hadith identifier Muslim (8) checked; pronunciation and teaching context still need separate review.",
+    "kids-quiz-036":"Hadith numbering Bukhari (8) / Muslim (16) checked; variant word order across narrations is not a contradiction."
 }
 
 def must(value,message):
