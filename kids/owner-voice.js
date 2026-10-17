@@ -240,9 +240,12 @@
       data.modelId==="eleven_v4"&&data.voiceId==="DkU7j9uO4ZEtLD2iRZSH"&&
       data.entries&&Object.keys(data.entries).every(function(key){
         var e=data.entries[key];
+        var u=String(e&&e.url||"");
         return !!(e&&e.modelId==="eleven_v4"&&e.voiceId===data.voiceId&&
           e.audioListeningApproved===false&&
-          /^\\/kids\\/assets\\/kids-quiz-audio\\/[a-zA-Z0-9/_-]+\\.mp3$/.test(String(e.url||"")));
+          u.indexOf("/kids/assets/kids-quiz-audio/")===0&&
+          u.endsWith(".mp3")&&u.indexOf("..")<0&&
+          u.indexOf("?")<0&&u.indexOf("#")<0);
       }));
   }
   var v4QuizReady=v4QuizPreview?Promise.allSettled([
