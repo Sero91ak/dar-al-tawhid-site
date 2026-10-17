@@ -74,7 +74,7 @@ def adopt_failed_before_post():
     check(TEXT not in reg["textClips"] and
           all(x.get("text")!=TEXT for x in ledger["rows"]),
           "the reserved original was already purchased")
-    target=OUT/(hashlib.sha256((VOICE+"\\n"+MODEL+"\\n"+TEXT).encode()).hexdigest()[:32]+".mp3")
+    target=OUT/(hashlib.sha256((VOICE+"\n"+MODEL+"\n"+TEXT).encode()).hexdigest()[:32]+".mp3")
     check(not target.exists(),"MP3 already exists; no purchase")
     run=os.environ.get("GITHUB_RUN_ID","").strip()
     check(run.isdigit() and run!="39066003170","new runner ID required")
