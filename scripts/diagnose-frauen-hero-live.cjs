@@ -76,7 +76,8 @@ function snapshot(){
    let repaired=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
 
-   await page.evaluate(()=>{scrollTo(0,350);let el=document.querySelector("#appView");if(el)el.scrollTop=350});
+   await page.mouse.wheel(0,560);
+   await page.waitForTimeout(330);
    await page.waitForTimeout(450);
    let after=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-after-scroll.png")});
@@ -88,6 +89,7 @@ function snapshot(){
      issues.push(route.key+" upper hero missing from first viewport");
    }
    if(before.app&&after.stage&&after.stage.bottom<100)issues.push(route.key+" stage scrolls off-screen");
+   if(before.app&&before.app.scrollHeight>before.app.clientHeight+200&&after.docScroll<100)issues.push(route.key+" content cannot scroll normally");
    await context.close();
   }
  }catch(e){issues.push(String(e.stack||e));console.error(e);}
