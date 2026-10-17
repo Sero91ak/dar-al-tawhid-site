@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `85c1faf35f8a42528ea75bcc69174672a96520da`
+- Commit beim Erstellen dieses Berichts: `b9d2e50223bfdc7594130e48a72f096659b85396`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **276 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1044 Frage-/Lob-/Retry-/Erklärungsteile**.
 - Technisch vierteilig vollständig: **72/450**, noch unvollständig: **378/450**.
@@ -31,6 +31,12 @@ Die neun historischen `eleven_v4`-Originale existieren als ElevenLabs-Flow-Asset
 Generation-IDs: `1UAwmEQ77D4BmA9DttHZ, 2xy9ZLej1wPTrnvAr9p7, AToalNGbxiRe1zfOnDG3, DX5z8FWaCS4FDx3KrloO, FGX65uXKWBnjULDxg3X1, GvXeGQ9Kr1lVy7LEAv5T, KIgCxJO3RDxhsIFJSYUB, UUmC2fDiXaV5W1IQSumA, aoKJuahenrKHfUE5OD9j`.
 
 Original-Flow: https://elevenlabs.io/app/flows/n2ovmGko2iTlNWTAEqHk
+
+## Zusätzliche kostenfreie Suche in historischen GitHub-Audioarchiven
+
+Die ursprünglichen neun bereits bezahlten MP3-Dateien waren über ElevenLabs-GET wiederholt blockiert (Flow-GET 402, alternativ History-GET 400). Der erfolgreiche GitHub-Wiederherstellungslauf https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39007730585 speicherte nur die 47 bereits vorhandenen Originalaufnahmen und meldete ausdrücklich 0 neue Originale. Dies NICHT als 9/9-Wiederherstellung ausgeben.
+Zusätzliche read-only/ohne ElevenLabs-TTS implementierte Archivsuche: `kids/tools/recover_quiz_v4_nine_from_github_action_archives.py`; CI `.github/workflows/kids-v4-scan-previous-paid-audio-backups.yml`. Sie untersucht streng begrenzte historische GitHub-Audio-Backup-Artefakte auf die exakten neun Generation-IDs und importiert nur wirklich gefundene MP3-Originalbytes unter der bereits geltenden MP3/ID/Laufzeit-/SHA-Kontrolle.
+Wichtig: Erst den fertigen Laufbericht `kids/review-only/quiz-v4-nine-originals-github-archive-recovery.json` und den echten Audio-Status lesen. Ein laufender oder erfolgreich beendeter GitHub-Workflow beweist allein noch keine neue Originaldatei. Ist nichts gefunden, keine Sprachcredits erneut kaufen: ausschließlich echten Originalexport aus dem ElevenLabs-Flow besorgen.
 
 ## Gesamte Hörprüfung für 450 Fragen (kostenfrei)
 
