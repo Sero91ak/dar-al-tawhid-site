@@ -270,8 +270,8 @@ function browserManifestResponse(request, androidBrowser = false) {
 function liveFrauenNativeAddon() {
   return [
     '<link rel="stylesheet" href="/assets/frauen/frauen-fiqh.css?v=frauen-live-v8">',
-    '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=frauen-hero-v1390">',
-    '<script defer src="/test/assets/frauen/frauen-fiqh.js?v=frauen-hero-dom-v1392"><\\/script>',
+    '<link rel="stylesheet" href="/assets/frauen/frauen-authority-v1292.css?v=visitor-frauen-scroll-v1396">',
+    '<script defer src="/assets/frauen/frauen-fiqh.js?v=visitor-frauen-scroll-v1396"><\\/script>',
     '<script defer src="/assets/frauen/frauen-live-adapter.js?v=frauen-live-v8"><\\/script>'
   ].join("");
 }
@@ -1638,6 +1638,15 @@ export default {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
       let html = await assetResponse.text();
+      // VISITOR_FRAUEN_SINGLE_RENDERER_V1396: the native iOS HTML already
+      // contains the old Test women bundle and CSS. Loading another copy
+      // registered duplicate route/DOM listeners and stale global observers.
+      // Remove ONLY those legacy Test Frauen tags in the iOS native response.
+      // The canonical visitor-owned bundle/styles are appended just below.
+      if (assetResponse.ok && !androidNativeApp) {
+        html = html.replace(/<script\b[^>]*\bsrc=["']\/test\/assets\/frauen\/frauen-fiqh\.js[^"']*["'][^>]*>/gi, '<script type="application/x-dar-legacy" data-dar-frauen-disabled="1">');
+        html = html.replace(/<link\b[^>]*\bhref=["']\/test\/assets\/frauen\/frauen-(?:fiqh|authority-v1292)\.css[^"']*["'][^>]*>/gi, "");
+      }
       if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
         const frauenAddon = liveFrauenNativeAddon();
         html = html.includes("</body>") ? html.replace("</body>", frauenAddon + "</body>") : html + frauenAddon;

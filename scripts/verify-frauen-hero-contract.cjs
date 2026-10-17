@@ -27,8 +27,14 @@ for(const variant of ["", "test/"]){
   assert.ok(js.includes("function libraryHero("),"Shared hero renderer missing: "+jsPath);
   assert.match(js,/data-hero-readable=/,"Semantic hero flag missing: "+jsPath);
   assert.ok(js.includes("function pinnedLibraryHead("),"Shared pinned header missing: "+jsPath);
-  assert.ok(js.includes("DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392"),"DOM repair guard absent: "+jsPath);
-  assert.ok(js.includes("new MutationObserver("),"SPAs require DOM observer: "+jsPath);
+  if(variant===""){
+    const safe=js.slice(js.indexOf("/* DAR_FRAUEN_HERO_SAFE_EVENTS_V1395"));
+    assert.ok(safe.startsWith("/* DAR_FRAUEN_HERO_SAFE_EVENTS_V1395"),"Visitor safe hero runtime missing");
+    assert.ok(!safe.includes("new MutationObserver(")&&!safe.includes("setInterval("),"Visitor must not poll DOM forever");
+    assert.ok(safe.includes("syncScroll(value)")&&safe.includes('setProperty("overflow-y","visible","important")'),"Visitor iOS scrollport recovery missing");
+  }else{
+    assert.ok(js.includes("DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392"),"Test hero guard must remain unchanged");
+  }
   for(const view of ["renderHub", "renderLibraryGroup", "renderSectionHero"]){
     assert.ok(js.includes("function "+view+"("),"Missing "+view+": "+jsPath);
   }
@@ -38,5 +44,7 @@ for(const variant of ["", "test/"]){
   }
 }
 assert.ok(read("cloudflare/test-app-worker.js").includes("frauen-authority-v1292.css?v=frauen-hero-v1390"),"Test shell must bust Frauen CSS cache");
-assert.ok(read("cloudflare/site-router.js").includes("frauen-authority-v1292.css?v=frauen-hero-v1390"),"Visitor/iOS shell must bust Frauen CSS cache");
+assert.ok(read("cloudflare/site-router.js").includes("frauen-authority-v1292.css?v=visitor-frauen-scroll-v1396"),"Visitor/iOS shell must bust Frauen CSS cache");
+assert.ok(read("cloudflare/site-router.js").includes('/assets/frauen/frauen-fiqh.js?v=visitor-frauen-scroll-v1396'),"Visitor native must use its own Frauen renderer");
+assert.ok(read("cloudflare/site-router.js").includes("VISITOR_FRAUEN_SINGLE_RENDERER_V1396"),"iOS visitor must remove legacy Test Frauen tags");
 console.log("OK Frauen: hub/group/list heroes and all seven image assets in Test + Besucher.");
