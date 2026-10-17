@@ -65,6 +65,22 @@ def main():
             except RuntimeError:pass
             else:raise AssertionError("Tampered V4 original text was accepted")
         finally:stage1.PREP=original
+    # Every paid billing/checkpoint write must atomically replace its own
+    # complete file, leaving no partial sidecar after a successful update.
+    with tempfile.TemporaryDirectory() as folder:
+        dst=Path(folder)/"test-ledger.json"
+        stage1.write(dst,{"revision":1,"notes":"unmodified original"})
+        stage1.write(dst,{"revision":2,"notes":"still intact"})
+        must(json.loads(dst.read_text(encoding="utf-8"))==
+             {"revision":2,"notes":"still intact"},
+             "paid ledger was not replaced by the complete new JSON")
+        must(not dst.with_name(dst.name+".pending").exists(),
+             "atomic write left a partial ledger/checkpoint next to its final file")
+    source_code=Path(stage1.__file__).read_text(encoding="utf-8")
+    must('temporary.replace(path)' in source_code and
+         'staged.replace(path)' in source_code,
+         "paid original MP3 and charge ledger must both use atomic replacement")
+
     # Recalculate after an imagined first ten genuine MP3s. This only
     # mutates in-memory lists; it NEVER invents or commits actual MP3s.
     completed_first={part["spokenTextSHA256"] for part in batch}
