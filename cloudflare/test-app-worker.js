@@ -480,6 +480,13 @@ async function finalizeDarTestHomeV1193(asset) {
   } else {
     html += edgeLinkV1389;
   }
+  // DAR_TEST_ANDROID_TOUCH_SCROLL_RECOVERY_V1390: only in adult /test HTML.
+  // Preserve active Qurʾān sheets; repair orphaned global lock after navigation.
+  const scrollRecoveryV1390 = '<script defer id="darTestAndroidScrollRecoveryV1390" src="/test/assets/android-scroll-recovery-v1390.js?v=android-touch-v1390"><\/script>';
+  if (!html.includes('id="darTestAndroidScrollRecoveryV1390"')) {
+    if (html.includes("</body>")) html = html.replace("</body>", scrollRecoveryV1390 + "\n</body>");
+    else html += scrollRecoveryV1390;
+  }
   if (!html.includes('id="darHeroBackgroundAuthorityV3"')) {
     html += '<link rel="stylesheet" id="darHeroBackgroundAuthorityV3" href="/test/assets/hero-background-authority.css?v=hero-bg-v7">';
   }
