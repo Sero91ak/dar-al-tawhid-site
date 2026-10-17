@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-test-redesigned-settings-deploy-health-20261017",
+      "at": "2026-10-17T11:32:00+02:00",
+      "approvedBy": "user-explicit-adult-responsive-layout-fix-and-live-deploy-20261017",
+      "reason": "Fix outdated Dar Test deployment health assertion for redesigned Settings header. No UI, Kids, Push or content changes.",
+      "paths": [
+        "scripts/test-app-health-check.js"
+      ],
+      "expiresAt": "2026-10-25T23:59:00.000Z"
+    },
+    {
       "id": "kids-owner-unterrichtsarchiv-v27-20261012",
       "at": "2026-10-12T11:30:00+02:00",
       "approvedBy": "user-explicit-create-dedicated-owner-only-all-lessons-reference-age-sorted-page-20261012",
