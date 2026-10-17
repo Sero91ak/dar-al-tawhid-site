@@ -3,6 +3,11 @@
   "use strict";
   if(window.__DAR_PUBLIC_CROSSPROMO_V1)return;
   window.__DAR_PUBLIC_CROSSPROMO_V1=true;
+  var appleUA=String(navigator.userAgent||"");
+  var appleMobile=/(?:iPhone|iPad|iPod|DarAlTawhid-iOS|DarAlTawhidOfficialIOS)/i.test(appleUA)||(/Macintosh/i.test(appleUA)&&Number(navigator.maxTouchPoints||0)>1);
+  // iPhone/iPad: show the official developer storefront with its Apple TV section.
+  // Desktop/TV: request the tvOS variant of the verified shared App Store product.
+  var tvStoreHref=appleMobile?"https://apps.apple.com/de/developer/serhat-akter/id6805988755":"https://apps.apple.com/de/app/d%C4%81r-al-taw%E1%B8%A5%C4%ABd/id6805988753?platform=tv";
   var photo="/assets/promo/mehr-apps-reference-20261017.jpg?v=20261017-promo";
   function isMore(){try{return (new URLSearchParams(location.search).get("page")||"start").toLowerCase()==="mehr"}catch(_){return false}}
   function mount(){
@@ -21,7 +26,7 @@
         '<article class="dar-promo-card dar-promo-tv" aria-label="DĀR AL TAWḤĪD auf Apple TV, jetzt verfügbar">'+
           '<img src="'+photo+'" alt="" aria-hidden="true" width="864" height="1536" loading="lazy" decoding="async">'+
           '<span class="dar-promo-screenreader">Die DĀR AL TAWḤĪD App ist jetzt auf Apple TV verfügbar. Qurʾān, Sunnah und Āṯār auf dem großen Bildschirm.</span>'+
-          '<a class="dar-promo-overlay-link" href="https://apps.apple.com/de/app/id6805988753" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD für Apple TV im App Store ansehen"><span class="dar-promo-screenreader">Im App Store ansehen</span></a>'+
+          '<a class="dar-promo-overlay-link" href="'+tvStoreHref+'" target="_blank" rel="noopener noreferrer" aria-label="DĀR AL TAWḤĪD für Apple TV im App Store ansehen"><span class="dar-promo-screenreader">Im App Store ansehen</span></a>'+
         '</article>'+
         '<article class="dar-promo-card dar-promo-kids" aria-label="TAWḤĪD KIDS, iPhone-App in Vorbereitung">'+
           '<img src="'+photo+'" alt="" aria-hidden="true" width="864" height="1536" loading="lazy" decoding="async">'+
