@@ -4675,3 +4675,153 @@
     reload: reloadLiveData
   };
 })();
+/* DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392 — shared Test/Visitor renderer guard.
+ * Real-browser QA 2026-10-17: renderer returns the original hero stage but
+ * the final SPA DOM drops it. Recover ONLY the absent stage after SPA updates;
+ * never touch cards, player/audio, reader, route state or bottom navigation. */
+(function(){
+  "use strict";
+  if(window.__darFrauenHeroIntegrityV1392) return;
+  window.__darFrauenHeroIntegrityV1392=true;
+  var pending=false,observer=null,observed=null,repairing=false;
+  function currentValue(){
+    try{
+      var route=typeof window.readRoute==="function"?window.readRoute():null;
+      if(route&&route.view==="frauen")return String(route.value||"");
+    }catch(e){}
+    try{
+      if(window.currentRoute&&window.currentRoute.view==="frauen")
+        return String(window.currentRoute.value||"");
+    }catch(e){}
+    var h=String(location.hash||"").slice(1);
+    if(h.charAt(0)==="/")h=h.slice(1);
+    if(h==="frauen"||h.indexOf("frauen/")===0){
+      return h.split("/").slice(1).map(function(x){
+        try{return decodeURIComponent(x)}catch(e){return x}
+      }).join("/");
+    }
+    // Some Test shells keep a catalog hash while rendering Frauen as a nested
+    // route. Only restore the known hub when the rendered DOM confirms it.
+    if(document.body&&document.body.classList.contains("is-frauen-route")
+      &&document.querySelector("#appView .frauen-library-shell.frauen-library-hub"))
+      return "";
+    return null;
+  }
+  var priorScrollStyle=null;
+  function restoreTestScrollport(){
+    if(!priorScrollStyle||!document.body)return;
+    var st=document.body.style;
+    if(st.getPropertyValue("overflow-x").trim()==="clip"&&st.getPropertyPriority("overflow-x")==="important"){
+      if(priorScrollStyle.x)st.setProperty("overflow-x",priorScrollStyle.x,priorScrollStyle.xp);
+      else st.removeProperty("overflow-x");
+    }
+    if(st.getPropertyValue("overflow-y").trim()==="visible"&&st.getPropertyPriority("overflow-y")==="important"){
+      if(priorScrollStyle.y)st.setProperty("overflow-y",priorScrollStyle.y,priorScrollStyle.yp);
+      else st.removeProperty("overflow-y");
+    }
+    priorScrollStyle=null;
+  }
+  function syncTestScrollport(value){
+    var root=document.documentElement,body=document.body;
+    if(!root||!body)return;
+    var isTest=(location.pathname.indexOf("/test")===0)
+      ||root.classList.contains("dar-test-performance-v1");
+    var modal=false;
+    if(value!==null&&isTest){
+      var dialogs=document.querySelectorAll('dialog[open],[role="dialog"][aria-modal="true"]');
+      for(var i=0;i<dialogs.length;i++){
+        if(dialogs[i].getClientRects().length&&getComputedStyle(dialogs[i]).visibility!=="hidden"){
+          modal=true;break;
+        }
+      }
+    }
+    if(value===null||!isTest||!body.classList.contains("is-frauen-route")||modal){
+      restoreTestScrollport();
+      return;
+    }
+    if(!priorScrollStyle){
+      priorScrollStyle={
+        x:body.style.getPropertyValue("overflow-x"),
+        xp:body.style.getPropertyPriority("overflow-x"),
+        y:body.style.getPropertyValue("overflow-y"),
+        yp:body.style.getPropertyPriority("overflow-y")
+      };
+    }
+    // Test SPA has a persistent body overflow-x:hidden guard, creating an
+    // inert vertical scroll container. Inline important restoration is required
+    // so the Frauen hero follows the actual HTML page scroller.
+    if(body.style.getPropertyValue("overflow-x").trim()!=="clip"
+      ||body.style.getPropertyPriority("overflow-x")!=="important")
+      body.style.setProperty("overflow-x","clip","important");
+    if(body.style.getPropertyValue("overflow-y").trim()!=="visible"
+      ||body.style.getPropertyPriority("overflow-y")!=="important")
+      body.style.setProperty("overflow-y","visible","important");
+  }
+  function repair(){
+    var value=currentValue();
+    syncTestScrollport(value);
+    if(value===null||repairing)return;
+    var app=document.getElementById("appView");
+    if(!app)return;
+    var shell=app.querySelector(".frauen-library-shell.frauen-library-hub,.frauen-library-shell.frauen-library-group,.frauen-library-list");
+    if(!shell||shell.querySelector(".frauen-library-pinned-header"))return;
+    if(!shell.querySelector(".frauen-library-section-head,.frauen-post-list,.frauen-library-area-grid"))return;
+    var provider=window.DARFrauenFiqh;
+    if(!provider||typeof provider.render!=="function")return;
+    repairing=true;
+    try{
+      var html=provider.render(value);
+      if(typeof html!=="string"||html.indexOf("frauen-library-pinned-header")<0)return;
+      var template=document.createElement("template");
+      template.innerHTML=html;
+      var stage=template.content.querySelector(".frauen-library-pinned-header");
+      if(!stage||shell.querySelector(".frauen-library-pinned-header"))return;
+      shell.insertBefore(stage,shell.firstChild);
+      if(typeof provider.bind==="function")provider.bind();
+      try{document.dispatchEvent(new CustomEvent("dar:frauen-hero-restored",{detail:{route:value}}))}catch(e){}
+    }catch(e){
+      if(window.console&&console.warn)console.warn("Frauen hero DOM repair:",e);
+    }finally{repairing=false}
+  }
+  function schedule(){
+    if(pending)return;
+    pending=true;
+    requestAnimationFrame(function(){pending=false;repair()});
+  }
+  function attach(){
+    var app=document.getElementById("appView");
+    if(!app||app===observed)return;
+    if(observer)observer.disconnect();
+    observed=app;
+    observer=new MutationObserver(function(records){
+      if(currentValue()===null)return;
+      for(var i=0;i<records.length;i++){
+        if(records[i].type==="childList"){schedule();break}
+      }
+    });
+    observer.observe(app,{childList:true,subtree:true});
+    schedule();
+  }
+  document.addEventListener("dar:render",function(){attach();schedule()});
+  window.addEventListener("hashchange",function(){syncTestScrollport(currentValue());attach();schedule()});
+  document.addEventListener("dar:frauen-render",function(){attach();schedule()});
+  // Some Test shells REPLACE #appView itself after SPA paints. Watching only
+  // its old children then misses the removal, so observe the stable document
+  // root and periodically recover the currently active Frauen page.
+  var rootObserver=null;
+  function observeRoot(){
+    if(rootObserver||!document.body)return;
+    rootObserver=new MutationObserver(function(){
+      if(currentValue()!==null){attach();schedule()}
+    });
+    rootObserver.observe(document.body,{childList:true,subtree:true});
+  }
+  function bootIntegrity(){attach();observeRoot();schedule()}
+  if(document.readyState==="loading")
+    document.addEventListener("DOMContentLoaded",bootIntegrity,{once:true});
+  else bootIntegrity();
+  setInterval(function(){
+    if(currentValue()!==null){attach();schedule()}
+    else restoreTestScrollport();
+  },800);
+})();
