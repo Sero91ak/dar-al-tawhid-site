@@ -54,7 +54,7 @@ def validated_audio_registry(registry):
                     sha.update(chunk)
             if (size<1500 or size!=row.get("bytes") or
                     sha.hexdigest()!=row.get("sha256") or
-                    not (header.startswith(b"ID3") or header[:1]==b"\\xff")):
+                    not (header.startswith(b"ID3") or header[:1]==bytes([255]))):
                 raise RuntimeError(f"Corrupt or unverified original MP3 for {collection} {identity}")
             if collection=="textClips":
                 if hashlib.sha256(identity.encode("utf-8")).hexdigest()!=row.get("textSha256"):
