@@ -69,34 +69,52 @@ styles:[...document.querySelectorAll('link[rel="stylesheet"]')].filter(x=>/fraue
   for(const route of routes){
    const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:route.key==="visitor"?"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS":"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
    const page=await context.newPage();const errors=[];
-   // Emulate precisely the visitor-only HTML cleanup from site-router V1396
-   // before the initial HTML parse. No Test app resources are loaded.
-   await page.route("**/?frauen-scroll-probe=1396",async interception=>{
-     const response=await interception.fetch();
-     let html=await response.text();
-     html=html.replace(/<script\b[^>]*\bsrc=["']\/test\/assets\/frauen\/frauen-fiqh\.js[^"']*["'][^>]*>\s*<\/script\s*>/gi,"");
-     html=html.replace(/<link\b[^>]*\bhref=["']\/test\/assets\/frauen\/frauen-(?:fiqh|authority-v1292)\.css[^"']*["'][^>]*>/gi,"");
-     await interception.fulfill({response,body:html});
+   const intercepted={document:0,visitorJs:0,visitorCss:0,removedLegacy:0};
+   // Single navigation-aware interceptor: verify the same native iOS HTML
+   // transformation as site-router and serve exact branch JS/CSS assets.
+   await page.route("**/*",async requestRoute=>{
+     const request=requestRoute.request();
+     const url=new URL(request.url());
+     const pathname=url.pathname;
+     if(request.resourceType()==="document"&&pathname==="/"&&url.hostname==="dar-al-tawhid.de"){
+       const response=await requestRoute.fetch();
+       let html=await response.text();
+       const legacy=/<script\b[^>]*\bsrc=["']\/test\/assets\/frauen\/frauen-fiqh\.js[^"']*["'][^>]*>\s*<\/script\s*>/gi;
+       intercepted.removedLegacy=(html.match(legacy)||[]).length;
+       html=html.replace(legacy,"");
+       html=html.replace(/<link\b[^>]*\bhref=["']\/test\/assets\/frauen\/frauen-(?:fiqh|authority-v1292)\.css[^"']*["'][^>]*>/gi,"");
+       html=html.replace(/<script\b[^>]*\bsrc=["']\/assets\/frauen\/frauen-fiqh\.js[^"']*["'][^>]*>\s*<\/script\s*>/gi,"");
+       const newScript='<script defer src="/assets/frauen/frauen-fiqh.js?v=visitor-frauen-scroll-v1396"></script>';
+       const adapter=/(<script\b[^>]*\bsrc=["']\/assets\/frauen\/frauen-live-adapter\.js[^"']*["'][^>]*>\s*<\/script\s*>)/i;
+       if(!adapter.test(html))throw Error("Visitor production adapter script tag missing");
+       html=html.replace(adapter,newScript+"$1");
+       html=html.replace("/assets/frauen/frauen-authority-v1292.css?v=frauen-hero-v1390",
+                         "/assets/frauen/frauen-authority-v1292.css?v=visitor-frauen-scroll-v1396");
+       intercepted.document++;
+       await requestRoute.fulfill({response,body:html});
+       return;
+     }
+     if(pathname==="/assets/frauen/frauen-fiqh.js"){
+       intercepted.visitorJs++;
+       await requestRoute.fulfill({status:200,contentType:"application/javascript; charset=utf-8",
+         body:fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-fiqh.js"))});
+       return;
+     }
+     if(pathname==="/assets/frauen/frauen-authority-v1292.css"){
+       intercepted.visitorCss++;
+       await requestRoute.fulfill({status:200,contentType:"text/css; charset=utf-8",
+         body:fs.readFileSync(path.join(process.cwd(),"assets/frauen/frauen-authority-v1292.css"))});
+       return;
+     }
+     if(pathname.startsWith("/test/assets/frauen/")&&
+       /frauen-(?:fiqh|authority-v1292)\.(?:js|css)$/.test(pathname))
+       throw Error("Native visitor still attempts to load a Test Frauen asset: "+pathname);
+     await requestRoute.continue();
    });
-   // Test the real release load path: serve changed JS/CSS as stylesheet/script
-   // responses before the page begins loading. No CSP-blocked inline styles
-   // or duplicate hero runtime injection after boot.
-   await page.route("**/assets/frauen/frauen-fiqh.js*",
-     async interception=>{
-       const u=new URL(interception.request().url());
-       const file=(u.pathname.startsWith("/test/")?"test/":"")+"assets/frauen/frauen-fiqh.js";
-       await interception.fulfill({status:200,contentType:"application/javascript; charset=utf-8",
-         body:fs.readFileSync(path.join(process.cwd(),file))});
-     });
-   await page.route("**/assets/frauen/frauen-authority-v1292.css*",
-     async interception=>{
-       const u=new URL(interception.request().url());
-       const file=(u.pathname.startsWith("/test/")?"test/":"")+"assets/frauen/frauen-authority-v1292.css";
-       await interception.fulfill({status:200,contentType:"text/css; charset=utf-8",
-         body:fs.readFileSync(path.join(process.cwd(),file))});
-     });
    page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
    const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
+   console.log("VISITOR_LOAD_INTERCEPTED",JSON.stringify(intercepted));
+   if(intercepted.document!==1||intercepted.visitorJs!==1||intercepted.visitorCss<1||intercepted.removedLegacy<1)throw Error("Visitor runtime load paths did not match expected native HTML: "+JSON.stringify(intercepted));
    await page.waitForTimeout(6000);
    let before=await page.evaluate(snapshot);
    await page.screenshot({path:path.join(out,route.key+"-initial.png")});
