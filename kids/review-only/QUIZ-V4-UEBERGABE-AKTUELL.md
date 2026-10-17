@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `634630274b719c74fa5170c3476e6e0c84220bee`
+- Commit beim Erstellen dieses Berichts: `319038f9a6f4467d1c795e38806f596705c8704d`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **282 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1050 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -97,6 +97,12 @@ Aus den 450 ausgewählten Fragen sind **20 ältere Quizfragen (10 × 7–8 und 1
 Der ausführbare, fortsetzbare Kostengenerator `kids/tools/generate_quiz_v4_older_stage1_exact.py` benutzt ausschließlich die 65 unveränderlichen Sprachtext-Prüfsummen dieser Stufe. `--audit` kostet 0 Credits; `--produce` erfordert zwei bestätigte Freigaben und begrenzt jede Ausführung auf höchstens zehn Original-MP3s und höchstens 850 prognostizierte Credits. Quelle der unveränderten Texte: `.github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json`.
 Manuelle Produktions-Pipeline: `.github/workflows/kids-v4-older-stage1-exact-paid.yml`. Kostenfreier CI-Vortest: `.github/workflows/kids-v4-older-stage1-exact-audit.yml`. Sie speichert Originale mit Ledger/Backups sowie die danach neu zusammengesetzten privaten Quiz-Hördateien. Kein Live-Deploy.
 Letzte gespeicherte 65er-Restzahl: **55**; nächste wartende Originale: **10**; reine Kostenschätzung dafür: **293.63** Credits. Keine neue MP3 als erzeugt behaupten, bevor das Ledger/MP3-Hash dies beweist.
+
+## Nachweis der tatsächlich gespeicherten bezahlten V4-Original-MP3s
+
+Null-Credit-Prüfskript: `python3 kids/tools/audit_quiz_v4_stage1_paid_audio_integrity.py --report` und Workflow `.github/workflows/kids-v4-stage1-paid-original-integrity.yml`. Prüft jede im ersten älteren Batch bereits bezahlte V4-Original-MP3 **byteweise gegen SHA-256**, Text-/Modell-/Voice-ID sowie die beiden Kopien des Request-Journals und das Zahlungsledger. Erzeugt keine Stimme, bewirkt keine menschliche Audiofreigabe und keinen Live-Deploy.
+Zusätzlich ruft der etablierte Null-Credit-Regressionstest `kids/tools/test_quiz_v4_older_stage1_exact.py` dieselbe echte Byteprüfung auf. Ein automatischer CI-Bericht ist nur dann als bestanden zu betrachten, wenn GitHub den Job tatsächlich ausgeführt und mit `success` beendet hat; `action_required` gilt NICHT als bestandener Test.
+Nach der ersten realen 10er-Aufnahme sind zehn kostenpflichtige Anbieter-Request-IDs im Originalledger dokumentiert; dadurch wurden vier weitere Quizfragen technisch vollständig vertont. Vor endgültiger Hörkontrolle besteht weiterhin keine Live-Freigabe. Der Vergleich mit der tatsächlichen ElevenLabs-Credit-Abrechnung bleibt offen.
 
 ## Interne Quellen-/Antwortprüfung vor kostenpflichtiger V4-Aufnahme
 
