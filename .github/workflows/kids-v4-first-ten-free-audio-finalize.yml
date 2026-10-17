@@ -80,7 +80,6 @@ jobs:
           git add kids/data/quiz-v4-450-production-status.json kids/data/quiz-v4-450-saved-mp3-technical-qa.json
           git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
           git add kids/review-only/quiz-v4-older-stage1-next-recording-batch.json
-          git add kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-handover-latest.json
           if git diff --cached --quiet;then
             echo 'Review audio already synchronized; no new MP3 purchase.'
             exit 0
