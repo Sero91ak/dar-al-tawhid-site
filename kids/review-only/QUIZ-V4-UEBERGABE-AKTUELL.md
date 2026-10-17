@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `12dec70f33d74d2c02be66328ad85318e5e23eb5`
+- Commit beim Erstellen dieses Berichts: `6f780fa97e18b43926427e5a954a152cfa51aaf1`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **283 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1051 Frage-/Lob-/Retry-/Erklärungsteile**.
