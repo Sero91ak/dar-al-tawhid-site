@@ -25,6 +25,7 @@ for(const item of catalog.items){
   assert.ok(canonical,"Missing canonical Arabic "+item.id+":"+ayah.id);
   assert.equal(ayah.ar,canonical.ar,"Arabic text changed "+item.id+":"+ayah.id);
   assert.ok(ayah.de&&ayah.tr,"Translation/transliteration missing");
+  assert.equal(ayah.de,canonical.de,"German Quran translation changed "+item.id+":"+ayah.id);
   assert.ok(!/[<>#\\]/.test(ayah.tr),"Invalid transliteration markup "+item.id+":"+ayah.id);
   const tokens=ayah.ar.trim().split(/\s+/u);
   assert.deepEqual(ayah.words.map(w=>w.ar),tokens,"Word segmentation mismatch "+item.id+":"+ayah.id);
@@ -46,4 +47,7 @@ for(const id of ["ql-audio","ql-word-tiles","ql-progress-fill","ql-secure","ql-p
 for(const fragment of ["Intl.Segmenter","localStorage.setItem(key()","function fallback()"])assert.ok(js.includes(fragment),"Missing learner implementation "+fragment);
 assert.ok(css.includes('html[data-gender="girl"]'),"Girl design palette missing");
 assert.ok(js.includes("meaning?\"Bedeutung: \""),"Reviewed word meanings must be displayed");
+assert.ok(js.includes("Husary_128kbps")&&js.includes("/quran-audio/ar.husary/"),"Same-reciter human audio fallback required");
+assert.ok(!js.includes("Alafasy_128kbps"),"Fallback must not silently switch the reciter");
+assert.ok(!js.includes("speechSynthesis"),"No synthetic Qurʾān recitation");
 console.log("PASS KIDS TEST Quran V1:",surahs.length,"Sūren,",selected.length,"extra groups,",verses,"canonical Āyāt,",mapped,"word meanings; shells and scripts valid");
