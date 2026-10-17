@@ -1,0 +1,99 @@
+name: KIDS V4 Free GET Old Nine Already Paid Flow MP3s Into First 150
+
+on:
+  push:
+    branches: [review/kids-quiz-v4-batch-001-020-20261014]
+    paths:
+      - 'kids/tools/recover_quiz_v4_prepaid9_official_flows_get.py'
+      - '.github/workflows/kids-v4-prepaid9-official-flows-get-import.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-historical-nine-paid-original-only-free-get
+  cancel-in-progress: false
+
+jobs:
+  recover-nine-originals-free:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Confirm nine already-paid exact source IDs only; no TTS
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/recover_quiz_v4_prepaid9_official_flows_get.py
+          python3 kids/tools/recover_quiz_v4_prepaid9_official_flows_get.py --output "$RUNNER_TEMP/kids-original9" --audit
+      - name: Use only read-only official GET to recover actual old paid MP3
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/recover_quiz_v4_prepaid9_official_flows_get.py --output "$RUNNER_TEMP/kids-original9"
+      - name: Import recovered original MP3 and recompute first-150 real audio
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null;then sudo apt-get -o Acquire::Retries=0 install -y ffmpeg;fi
+          python3 kids/tools/import_quiz_v4_prepaid_flow_originals.py --directory "$RUNNER_TEMP/kids-original9"
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          cfg=json.loads(Path('kids/data/quiz-curation-release.json').read_text())
+          status=json.loads(Path('kids/data/quiz-v4-first150-audio-status.json').read_text())
+          assert cfg['enabled'] is False
+          assert status['completeFourPartQuestions']>=70
+          print('PASS:',status['completeFourPartQuestions'],'first-age questions have genuine V4 audio, never synthesized again')
+          PY
+      - name: Commit original voice MP3 and first-age quiz composites exclusively to review branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name kids-v4-prepaid-nine-free-recovery
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-450-original-clip-registry.json kids/data/quiz-v4-paid-flow-import-status.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          if git diff --cached --quiet;then echo 'Prepaid originals already recovered; no changes';exit 0;fi
+          git commit -m 'audio(kids V4): free recovery of original already-paid first-age quiz speech MP3s'
+          for attempt in 1 2 3 4 5 6;do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014;then
+              echo 'Already-paid original MP3s placed in private 450 quiz review, no new credits.'
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase -X theirs FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Keep genuine provider original bytes on any error for safe recovery
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-historical-nine-paid-flow-originals-read-only-get
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/kids-original9/
+            kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
+            kids/data/quiz-v4-paid-flow-import-status.json
+            kids/data/quiz-v4-450-original-clip-registry.json
