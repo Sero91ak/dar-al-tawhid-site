@@ -717,7 +717,7 @@ html[data-theme] body.is-frauen-route #appView .frauen-library-list{
 /* Sticky must use the root scroller: body overflow-x:hidden computes
  * overflow-y:auto and steals the sticky containing scrollport even though
  * scrollingElement is HTML. Preserve deliberate inline modal scroll locks. */
-html[data-theme] body.is-frauen-route:not([style*="overflow"]){
+html[data-theme] body.is-frauen-route{
   overflow-x:clip!important;
   overflow-y:visible!important;
 }
