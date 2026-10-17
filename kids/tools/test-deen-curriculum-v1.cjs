@@ -54,4 +54,4 @@ const shells=["kids/index.html","kids/start.html","kids/shell.html"].map(read);
 assert.ok(shells.every(x=>x===shells[0]),"Three KIDS HTML shells must match exactly");
 assert.ok(shells[0].includes("/kids/deen-lessons.js?v=11"),"Dīn JS cache bust missing");
 assert.ok(shells[0].includes("/kids/item-offline-v1.js?v=4"),"Offline runtime cache bust missing");
-console.log("Dīn Creator gate PASS: 6 categories, 30 topics, 6 original masters, 16 research drafts, 8 locked; URLs, exact master parity, offline, gender themes and stable art");
+console.log("Dīn Creator gate PASS: 6 categories, 30 topics, 6 preserved masters, "+review.length+" research drafts, "+planned.length+" locked; evidence, offline, ages and profile styles verified");
