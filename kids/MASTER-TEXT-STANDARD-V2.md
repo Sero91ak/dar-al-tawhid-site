@@ -24,7 +24,7 @@ Die anschließende Ansprache darf inhaltlich passen: „liebe Kinder“, „mein
 - Ein vollständiger Mastertext je Lektion/Geschichte für 4–5, 6–8 und 9–10 Jahre sowie Mädchen- und Jungenprofil. Altersabhängige Oberfläche und Lernhilfen dürfen variieren; der Master-Wortlaut nicht.
 - Unterrichtsinhalte, Originalbelege, Quellen sowie Quellen- und Authentizitätsstatus bleiben durch die Rahmenänderung unberührt.
 - Master-Audio nur aus dem exakt freigegebenen Mastertext erzeugen bzw. zuordnen. Synchrones Mitlesen und Offline-Fassung müssen exakt dazu passen.
-- Ein bereits genehmigtes, aufgenommenes Originalaudio wird **nicht** durch den Text-Fix ersetzt, stummgeschaltet oder stillschweigend abweichend untertitelt. Dieses Paar bleibt vorerst unangetastet und wird erst nach einer neuen passenden Aufnahme und Synchronisierung gemeinsam auf v2 umgestellt.
+- **Dauerhafter Bestandsschutz:** Bereits freigegebene, aufgenommene Master-Audios und die exakt dazugehörigen Master-Texte sind richtig und bleiben unverändert. Keine Neuaufnahme, keine Neugenerierung, keine Nachvertonung, keine Text- oder Timing-Anpassung, keine automatische v2-Migration dieser Paare. Bestehende Hören-/Mitlesen-/Offline-Daten bleiben synchron. Nur bei einem **neuen ausdrücklichen Einzelauftrag des Eigentümers** darf ein vorhandenes Paar überhaupt zur Bearbeitung freigegeben werden.
 
 ## 4. Migration am 17.10.2026
 
@@ -34,7 +34,7 @@ Die anschließende Ansprache darf inhaltlich passen: „liebe Kinder“, „mein
 - `kids/data/stories-authentic.json`: 4 weitere geprüfte Textgeschichten sowie das eingebettete Story-Standard-Feld.
 - `voice-studio/content-studio.js`: Abschlussregel für **neue** Kinder-Mastertexte. Bereits existierende Story-Ziele sind absichtlich ausgenommen.
 
-Bereits vertonte Propheten-, Ṣaḥābah- und Ṣaḥābiyyāt-Archive bleiben aufgrund der Master-Audio-Text-Parität unverändert, bis passende Originalaufnahmen vorliegen.
+**Endgültige Festlegung des Eigentümers (17.10.2026):** Die bereits vertonten Propheten-, Ṣaḥābah- und Ṣaḥābiyyāt-Archive bleiben **dauerhaft unverändert**. Die vorhandenen Texte sind richtig; die Original-Audios werden nicht mehr geändert oder neu produziert. Die v2-Regel wird nicht rückwirkend darauf angewandt. Bestehende Paare sind von künftigen globalen Text-Normalisierungen ausdrücklich ausgenommen.
 
 ## 5. Qualitätsgates
 
