@@ -41,6 +41,17 @@ function snapshot(){
     hero:pick(hero),stage:pick(stage),heading:pick(heading),
     app:pick(app),shell:pick(shell),ancestors,
     heroHtml:hero?.outerHTML.slice(0,400),
+    shellChildren:shell?[...shell.children].slice(0,7).map(x=>({tag:x.tagName,cls:String(x.className).slice(0,150),head:x.outerHTML.slice(0,260)})):[],
+    renderer:(()=>{
+      try{
+        const p=window.DARFrauenFiqh;
+        const html=typeof p?.render==="function"?String(p.render("")):"";
+        return {exists:!!p,render:typeof p?.render,
+          generatedLength:html.length,generatedHero:html.includes("frauen-library-hero"),
+          generatedStage:html.includes("frauen-library-pinned-header"),
+          generatedHeader:html.slice(0,330)};
+      }catch(e){return {error:String(e)}}
+    })(),
     images:[...document.querySelectorAll(".frauen-library-card.has-visual")].slice(0,2).map(pick),
     styles:[...document.querySelectorAll('link[rel="stylesheet"]')].filter(x=>/frauen/.test(x.href)).map(x=>x.href)};
 }
@@ -49,7 +60,7 @@ function snapshot(){
  try{
   browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
   for(const route of routes){
-   const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE"});
+   const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
    const page=await context.newPage();const errors=[];
    page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
    const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
@@ -62,7 +73,7 @@ function snapshot(){
    await page.screenshot({path:path.join(out,route.key+"-after-scroll.png")});
    all.push({key:route.key,status:response.status(),before,after,errors});
    console.log(JSON.stringify({route:route.key,status:response.status(),
-    before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles},
+    before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles,shellChildren:before.shellChildren,renderer:before.renderer},
     after:{scroll:after.docScroll,hero:after.hero,stage:after.stage,heading:after.heading},errors}));
    if(!before.hero||before.hero.height<180||before.hero.bottom<100){
      issues.push(route.key+" upper hero missing from first viewport");
