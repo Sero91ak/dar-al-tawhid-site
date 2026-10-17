@@ -5,7 +5,7 @@
 - 20 unveränderte Quizfragen, 10 für 7–8 Jahre und 10 für 9–10 Jahre.
 - 65 überprüfte exakte Text-SHA-256-Verweise der originalen Produktionsliste.
 - 10 priorisierte V4-Takes könnten bei echter Erzeugung und technischer Prüfung 4 Quizfragen schließen: kids-quiz-033, kids-quiz-034, kids-quiz-048, kids-quiz-050.
-- Für 7 Fragen wurden zusätzliche passende Online-Belegstellen lokalisiert; **nicht** als vollständige wissenschaftliche Freigabe zu behandeln.
+- Für 8 Fragen wurden zusätzliche passende Online-Belegstellen lokalisiert; **nicht** als vollständige wissenschaftliche Freigabe zu behandeln.
 - Originale Quellen stehen nur im internen Review. **Keine Webseiten-Links in der Kinder-App anzeigen.**
 
 ## Genauigkeitshinweise
@@ -14,8 +14,8 @@
 - `kids-quiz-389`: Interpretive application of 16:43: original context is asking about earlier messengers.
 - `kids-quiz-044`: Do not imply washing every named part; verse distinguishes wiping of the head.
 - `kids-quiz-050`: Child-friendly summary omits the fuller conditions of 49:9–10; never present it as exhaustive fiqh.
-- `kids-quiz-022`: Verify Sahih Muslim numbering against the edition before final citation publication.
-- `kids-quiz-036`: Verify Bukhari/Muslim hadith numbering against the edition before final citation publication.
+- `kids-quiz-022`: Hadith identifier Muslim (8) checked; pronunciation and teaching context still need separate review.
+- `kids-quiz-036`: Hadith numbering Bukhari (8) / Muslim (16) checked; variant word order across narrations is not a contradiction.
 
 ## Nächster sicherer Schritt
 

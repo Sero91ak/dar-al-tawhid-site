@@ -7,7 +7,8 @@
   "age7to8": 10,
   "age9to10": 10,
   "sourceMappingConsistentWithPreviouslyApprovedCatalog": true,
-  "independentExternalEvidenceLocatedFor": 7,
+  "allTwentyExactCanonicalQuestionAnswerAndSpokenRecipeMatches": true,
+  "independentExternalEvidenceLocatedFor": 8,
   "externalEvidenceDoesNotEstablishCompleteSourceApproval": true,
   "sourceContextsNeedingExtraCare": [
     "kids-quiz-022",
@@ -279,10 +280,10 @@
       "firstRunNeedsNewTextSHA256": [
         "a753eff9b01032ee332baf2d32effd6a979d23689ff5b23773aaed23f73b7c7a"
       ],
-      "externalEvidenceLocated": false,
-      "externalEvidencePrivateReference": null,
-      "externalReferenceMatchNote": null,
-      "interpretiveOrCitationCaveat": "Verify Sahih Muslim numbering against the edition before final citation publication.",
+      "externalEvidenceLocated": true,
+      "externalEvidencePrivateReference": "https://dorar.net/h/qhgIL7pG?osoul=1",
+      "externalReferenceMatchNote": "Sahih Muslim 8 in the hadith of Jibril includes belief in the Last Day as a pillar of iman.",
+      "interpretiveOrCitationCaveat": "Hadith identifier Muslim (8) checked; pronunciation and teaching context still need separate review.",
       "scholarlySourceReviewCompletedByHuman": false,
       "humanSpeechTextApproved": false,
       "humanAudioListeningApproved": false
@@ -586,9 +587,9 @@
       ],
       "firstRunNeedsNewTextSHA256": [],
       "externalEvidenceLocated": true,
-      "externalEvidencePrivateReference": "https://www.islamweb.net/ar/article/59048/",
-      "externalReferenceMatchNote": "Hadith of Ibn Umar lists prayer, testimony, zakat, hajj and Ramadan fasting as pillars",
-      "interpretiveOrCitationCaveat": "Verify Bukhari/Muslim hadith numbering against the edition before final citation publication.",
+      "externalEvidencePrivateReference": "https://islamweb.net/ar/library/content/0/7/",
+      "externalReferenceMatchNote": "Sahih al-Bukhari hadith 8 states five pillars. Muslim 16 cross-referenced in Ibn al-Mulaqqin's commentary.",
+      "interpretiveOrCitationCaveat": "Hadith numbering Bukhari (8) / Muslim (16) checked; variant word order across narrations is not a contradiction.",
       "scholarlySourceReviewCompletedByHuman": false,
       "humanSpeechTextApproved": false,
       "humanAudioListeningApproved": false
