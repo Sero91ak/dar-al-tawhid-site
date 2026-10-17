@@ -43,6 +43,7 @@ NAMES=(
 )
 MAX_PAGES_PER_NAME=3
 MAX_ARTIFACTS_DOWNLOADED=48
+MAX_SAMPLES_PER_NAME=6  # do not let repetitive newest backups exhaust entire budget
 MAX_BYTES_DOWNLOADED=300_000_000
 MAX_ARCHIVE_BYTES=16_000_000
 MAX_INDIVIDUAL_MP3_BYTES=6_000_000
@@ -140,6 +141,8 @@ def main():
            "modelId":"eleven_v4","masterVoiceId":"DkU7j9uO4ZEtLD2iRZSH",
            "repo":REPO,"beforeMissingCount":len(missing),
            "queriedArtifactNames":list(NAMES),"artifactListingsChecked":0,
+           "samplingMethod":"six evenly spread old-to-new archives per backup name",
+           "perNameEligibleCount":{},"perNameArchivesExamined":{},
            "eligibleArchivesExamined":0,"archiveDownloadAttempts":0,
            "archiveDownloadFailuresByStatus":{},"archiveCandidatesSeen":0,
            "archiveBytesExamined":0,
@@ -152,51 +155,78 @@ def main():
     # Search *named* originals-backup artifacts. Never download private audio
     # hearing bundles, arbitrary files, or other repository archives.
     for name in NAMES:
-        if not missing or stats["eligibleArchivesExamined"]>=MAX_ARTIFACTS_DOWNLOADED:break
+        if not missing or stats["eligibleArchivesExamined"]>=MAX_ARTIFACTS_DOWNLOADED:
+            break
+        # Collect up to 300 newest-to-oldest items for EACH named backup lane,
+        # then sample across time. Older snapshots are more likely to contain
+        # the nine historical Flow assets than 48 repetitive recent snapshots.
+        all_eligible=[]
         for page in range(1,MAX_PAGES_PER_NAME+1):
             query=urllib.parse.urlencode({"name":name,"per_page":100,"page":page})
             data=api(BASE+"/artifacts?"+query,token,2_000_000,expected_json=True)
             records=data.get("artifacts") or []
-            if not isinstance(records,list):break
+            strict(isinstance(records,list),"invalid GitHub original archive listing")
             stats["artifactListingsChecked"]+=1
             for row in records:
-                if not missing or stats["eligibleArchivesExamined"]>=MAX_ARTIFACTS_DOWNLOADED:break
                 aid=row.get("id")
-                if not isinstance(aid,int) or aid in seen or row.get("name")!=name or row.get("expired"):continue
-                seen.add(aid)
                 size=row.get("size_in_bytes") or 0
-                if size<500 or size>MAX_ARCHIVE_BYTES:continue
-                stats["archiveCandidatesSeen"]+=1
-                if stats["archiveBytesExamined"]+size>MAX_BYTES_DOWNLOADED:break
-                stats["archiveDownloadAttempts"]+=1
-                try:
-                    archive=artifact_zip(aid,token)
-                    matches=mp3_candidates(archive,missing)
-                except (urllib.error.HTTPError,urllib.error.URLError,TimeoutError,zipfile.BadZipFile,
-                        json.JSONDecodeError,RuntimeError) as exc:
-                    # Distinguish an unreadable ZIP from a verified search
-                    # with 0 matches. Do not log signed URLs or credentials.
-                    if isinstance(exc,urllib.error.HTTPError):
-                        reason="http-"+str(exc.code)
-                    elif isinstance(exc,urllib.error.URLError):
-                        reason="connection-error"
-                    elif isinstance(exc,TimeoutError):
-                        reason="timeout"
-                    elif isinstance(exc,zipfile.BadZipFile):
-                        reason="invalid-archive"
-                    else:
-                        reason="invalid-payload"
-                    errs=stats["archiveDownloadFailuresByStatus"]
-                    errs[reason]=errs.get(reason,0)+1
-                    continue
-                stats["archiveBytesExamined"]+=len(archive)
-                stats["eligibleArchivesExamined"]+=1
-                for gid,bytes_mp3 in matches.items():
-                    strict(gid not in found,"same original ID located in multiple archives; reconcile manually")
-                    found[gid]=bytes_mp3
-                    stats["matchedArtifactIds"].append(aid)
-                    missing.remove(gid)
-            if not records or len(records)<100 or not missing:break
+                if (isinstance(aid,int) and aid not in seen
+                        and row.get("name")==name and not row.get("expired")
+                        and 500<=size<=MAX_ARCHIVE_BYTES):
+                    seen.add(aid)
+                    all_eligible.append(row)
+            if len(records)<100:
+                break
+        stats["perNameEligibleCount"][name]=len(all_eligible)
+        if not all_eligible:
+            stats["perNameArchivesExamined"][name]=0
+            continue
+        # Use a reproducible mix of recent, middle and old snapshots, never
+        # just the six newest. This is NOT a claim of exhaustive inspection.
+        n=min(MAX_SAMPLES_PER_NAME,len(all_eligible))
+        indices=sorted({round(i*(len(all_eligible)-1)/max(n-1,1))
+                        for i in range(n)})
+        sample=[all_eligible[i] for i in indices]
+        scanned_this_name=0
+        for row in sample:
+            if not missing or stats["eligibleArchivesExamined"]>=MAX_ARTIFACTS_DOWNLOADED:
+                break
+            aid=row["id"]
+            size=row["size_in_bytes"]
+            stats["archiveCandidatesSeen"]+=1
+            if stats["archiveBytesExamined"]+size>MAX_BYTES_DOWNLOADED:
+                # Try a different, smaller archive/name before exhausting the
+                # finite search budget. Never exceed the bytes cap.
+                continue
+            stats["archiveDownloadAttempts"]+=1
+            try:
+                archive=artifact_zip(aid,token)
+                matches=mp3_candidates(archive,missing)
+            except (urllib.error.HTTPError,urllib.error.URLError,TimeoutError,
+                    zipfile.BadZipFile,json.JSONDecodeError,RuntimeError) as exc:
+                if isinstance(exc,urllib.error.HTTPError):
+                    reason="http-"+str(exc.code)
+                elif isinstance(exc,urllib.error.URLError):
+                    reason="connection-error"
+                elif isinstance(exc,TimeoutError):
+                    reason="timeout"
+                elif isinstance(exc,zipfile.BadZipFile):
+                    reason="invalid-archive"
+                else:
+                    reason="invalid-payload"
+                errs=stats["archiveDownloadFailuresByStatus"]
+                errs[reason]=errs.get(reason,0)+1
+                continue
+            stats["archiveBytesExamined"]+=len(archive)
+            stats["eligibleArchivesExamined"]+=1
+            scanned_this_name+=1
+            for gid,bytes_mp3 in matches.items():
+                strict(gid not in found,
+                       "same paid original found in two archives; reconcile")
+                found[gid]=bytes_mp3
+                stats["matchedArtifactIds"].append(aid)
+                missing.remove(gid)
+        stats["perNameArchivesExamined"][name]=scanned_this_name
     stats["matchingOriginalGenerationIds"]=sorted(found)
     stats["archiveAuditWasAbleToReadAtLeastOneBackup"]=bool(stats["eligibleArchivesExamined"])
     stats["zeroMatchesProveAllHistoricBackupsWereChecked"]=False
