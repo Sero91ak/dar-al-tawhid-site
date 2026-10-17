@@ -25324,8 +25324,63 @@ function formatCountdownShort(ms){if(ms<0)ms=0;const total=Math.floor(ms/1000);c
 const KAABA_LAT=21.4225241,KAABA_LON=39.8261818;
 function qiblaBearing(lat,lon){if(!Number.isFinite(Number(lat))||!Number.isFinite(Number(lon)))return 0;const φ1=toRad(lat),φ2=toRad(KAABA_LAT),λ1=toRad(lon),λ2=toRad(KAABA_LON);const dλ=λ2-λ1;const y=Math.sin(dλ)*Math.cos(φ2);const x=Math.cos(φ1)*Math.sin(φ2)-Math.sin(φ1)*Math.cos(φ2)*Math.cos(dλ);return fixAngle(toDeg(Math.atan2(y,x)))}
 function formatQiblaDegrees(bearing){const b=fixAngle(Number(bearing)||0);return Math.min(359,Math.max(0,Math.floor(b+1e-6)))}
-async function reversePrayerCity(lat,lon){try{const url=`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${encodeURIComponent(lat)}&longitude=${encodeURIComponent(lon)}&localityLanguage=de`;const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error("reverse failed");const j=await r.json();return j.city||j.locality||j.principalSubdivision||j.countryName||"Aktueller Standort"}catch(e){return`Aktueller Standort (${Number(lat).toFixed(3)}, ${Number(lon).toFixed(3)})`}}
-async function geocodePrayerCity(city){const q=String(city||"").trim();if(!q)throw new Error("Ort fehlt");const url=`https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&accept-language=de&q=${encodeURIComponent(q)}`;const r=await fetch(url,{cache:"no-store"});if(!r.ok)throw new Error("Ort konnte nicht gesucht werden");const data=await r.json();if(!Array.isArray(data)||!data[0])throw new Error("Ort nicht gefunden");const item=data[0];const name=item.name||String(item.display_name||q).split(",")[0]||q;return{city:name,lat:Number(item.lat),lon:Number(item.lon),locationGranted:true,locationMode:"manual",locationUpdatedAt:Date.now()}}
+async function reversePrayerCity(lat,lon){
+  const latitude=Number(lat),longitude=Number(lon);
+  if(!Number.isFinite(latitude)||!Number.isFinite(longitude))return "";
+  const controller=new AbortController();
+  const timer=setTimeout(()=>controller.abort(),8500);
+  try{
+    const url="https://api.bigdatacloud.net/data/reverse-geocode-client?latitude="+encodeURIComponent(latitude)+"&longitude="+encodeURIComponent(longitude)+"&localityLanguage=de";
+    const r=await fetch(url,{cache:"no-store",signal:controller.signal});
+    if(r.ok){
+      const j=await r.json();
+      const name=String(j.locality||j.city||"").trim();
+      if(name&&name.length<110)return name;
+    }
+  }catch(e){}finally{clearTimeout(timer)}
+  const ctl=new AbortController();
+  const timeout=setTimeout(()=>ctl.abort(),8500);
+  try{
+    const url="https://nominatim.openstreetmap.org/reverse?format=jsonv2&addressdetails=1&zoom=14&accept-language=de&lat="+encodeURIComponent(latitude)+"&lon="+encodeURIComponent(longitude);
+    const r=await fetch(url,{cache:"no-store",signal:ctl.signal});
+    if(!r.ok)throw new Error("reverse unavailable");
+    const j=await r.json(),a=j.address||{};
+    const name=String(a.city||a.town||a.village||a.municipality||a.hamlet||a.city_district||a.suburb||"").trim();
+    return name&&name.length<110?name:"";
+  }catch(e){return ""}finally{clearTimeout(timeout)}
+}
+async function searchPrayerCities(query){
+  const q=String(query||"").trim();
+  if(q.length<2)return[];
+  const ctl=new AbortController(),t=setTimeout(()=>ctl.abort(),10000);
+  try{
+    const url="https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=7&accept-language=de&q="+encodeURIComponent(q);
+    const r=await fetch(url,{cache:"no-store",signal:ctl.signal});
+    if(!r.ok)throw new Error("city_service_unavailable");
+    const data=await r.json();
+    if(!Array.isArray(data))return[];
+    const found=[],seen=new Set();
+    for(const item of data){
+      const a=item.address||{},lat=Number(item.lat),lon=Number(item.lon);
+      if(!Number.isFinite(lat)||!Number.isFinite(lon))continue;
+      const city=String(a.city||a.town||a.village||a.municipality||a.hamlet||item.name||String(item.display_name||q).split(",")[0]).trim();
+      if(!city)continue;
+      const postcode=String(a.postcode||"").trim();
+      const region=String(a.state||a.county||a.country||"").trim();
+      const label=[city,postcode,region].filter(Boolean).join(" · ");
+      const key=city.toLowerCase()+":"+lat.toFixed(3)+":"+lon.toFixed(3);
+      if(seen.has(key))continue;
+      seen.add(key);
+      found.push({city,lat,lon,postcode,region,label,locationGranted:true,locationMode:"manual",locationUpdatedAt:Date.now()});
+    }
+    return found;
+  }finally{clearTimeout(t)}
+}
+async function geocodePrayerCity(city){
+  const results=await searchPrayerCities(city);
+  if(!results.length)throw new Error("Ort nicht gefunden");
+  return results[0];
+}
 /* GPS AUTO V1: Frische Geräteposition; manuelle Städte niemals vom Native-Cache überschreiben.
    Nur im Vordergrund beobachten. Bei Sichtbarkeit/Neustart erneut prüfen. */
 let darGpsWatchId=null;
@@ -25333,6 +25388,8 @@ let darGpsLastRequestAt=0;
 let darGpsLastAcceptAt=0;
 let darGpsRequestPromise=null;
 let darGpsReverseSequence=0;
+let darGpsReversePromise=null;
+let darGpsRetryNameTimer=null;
 function darGpsCoords(v){
   const c=v&&v.coords?v.coords:v||{};
   const lat=Number(c.latitude??c.lat),lon=Number(c.longitude??c.lon??c.lng);
@@ -25364,7 +25421,11 @@ function darGpsDistanceMeters(a,b,c,d){
 function darGpsUpdateDisplay(){
   const view=typeof readRoute==="function"?readRoute().view:"";
   if(view==="settings"||view==="prayer"||view==="qibla"||view==="jummah"||view==="notifications"){
-    if(typeof render==="function")render();
+    const panel=document.getElementById("darManualCityPanel");
+    if(panel&&!panel.hidden){
+      const name=document.getElementById("darPermissionCityText"),state=getPrayerSettings();
+      if(name)name.textContent=(state.city||"Ort wird ermittelt …")+(state.locationMode==="auto"?" · GPS automatisch":" · Stadt manuell");
+    }else if(typeof render==="function")render();
   }else{
     try{if(typeof updateHeaderPrayerStatus==="function")updateHeaderPrayerStatus()}catch(e){}
     try{if(typeof updatePrayerCountdowns==="function")updatePrayerCountdowns()}catch(e){}
@@ -25388,25 +25449,37 @@ function darGpsCommitFix(pos,{activate=false}={}){
   const age=Date.now()-Number(s.locationUpdatedAt||0);
   if(!activate&&prev&&distance<350&&age<5*60*1000)return true;
   const time=Date.now();
-  const shouldName=!prev||distance>=1000||!s.city||s.city==="Standort freigeben"||s.city.startsWith("Aktueller Standort");
-  const city=shouldName?"Aktueller Standort":s.city;
+  const shouldName=!prev||distance>=1000||!s.city||s.city==="Standort freigeben"||/^(Aktueller Standort|Ort wird ermittelt|Ortsname derzeit)/.test(s.city);
+  const city=shouldName?"Ort wird ermittelt …":s.city;
   setPrayerSettings({lat:c.lat,lon:c.lon,city,locationMode:"auto",locationUpdatedAt:time,locationGranted:true});
   darGpsLastAcceptAt=time;
   darGpsUpdateDisplay();
   if(shouldName){
+    clearTimeout(darGpsRetryNameTimer);
     const seq=++darGpsReverseSequence;
-    reversePrayerCity(c.lat,c.lon).then(name=>{
+    darGpsReversePromise=reversePrayerCity(c.lat,c.lon).then(name=>{
       if(seq!==darGpsReverseSequence||!darGpsIsAuto())return;
-      const current=getPrayerSettings();
-      const coords=darGpsCoords(current);
+      const current=getPrayerSettings(),coords=darGpsCoords(current);
       if(!coords||darGpsDistanceMeters(coords.lat,coords.lon,c.lat,c.lon)>300)return;
-      if(name&&name!==current.city){
-        setPrayerSettings({city:name});
-        darGpsUpdateDisplay();
-      }
+      const cityName=name||"Ortsname derzeit nicht verfügbar";
+      if(cityName!==current.city){setPrayerSettings({city:cityName});darGpsUpdateDisplay()}
+      if(!name){darGpsRetryNameTimer=setTimeout(()=>{
+        if(darGpsIsAuto()&&!document.hidden)darGpsRetryCity();
+      },60000)}
     }).catch(()=>{});
   }
   return true;
+}
+function darGpsRetryCity(){
+  const s=getPrayerSettings(),c=darGpsCoords(s);
+  if(!darGpsIsAuto()||!c||document.hidden)return;
+  const seq=++darGpsReverseSequence;
+  darGpsReversePromise=reversePrayerCity(c.lat,c.lon).then(name=>{
+    if(seq!==darGpsReverseSequence||!darGpsIsAuto()||!name)return;
+    const now=getPrayerSettings(),current=darGpsCoords(now);
+    if(!current||darGpsDistanceMeters(c.lat,c.lon,current.lat,current.lon)>300)return;
+    if(name!==now.city){setPrayerSettings({city:name});darGpsUpdateDisplay()}
+  }).catch(()=>{});
 }
 function darGpsStartWatch(){
   if(!darGpsIsAuto()||document.hidden||darGpsWatchId!==null||!navigator.geolocation)return;
@@ -25440,6 +25513,7 @@ async function darGpsActivate(){
   const pos=await requestBrowserPosition();
   if(!darGpsCommitFix(pos,{activate:true}))throw new Error("invalid_or_outdated_gps");
   darGpsStartWatch();
+  if(darGpsReversePromise)await darGpsReversePromise;
   return getPrayerSettings();
 }
 function darGpsNativeLocationEvent(event){
@@ -25454,7 +25528,7 @@ function darGpsNativeLocationEvent(event){
 window.addEventListener("darNativeLocationUpdated",darGpsNativeLocationEvent);
 window.addEventListener("dar-native-location",darGpsNativeLocationEvent);
 document.addEventListener("visibilitychange",()=>{if(document.hidden)darGpsStopWatch();else void darGpsAutoResume(true)});
-window.addEventListener("pageshow",()=>{void darGpsAutoResume(true)});
+window.addEventListener("pageshow",()=>{void darGpsAutoResume(true);if(darGpsIsAuto()&&/^(Ort wird ermittelt|Ortsname derzeit)/.test(getPrayerSettings().city||""))darGpsRetryCity()});
 window.addEventListener("focus",()=>{void darGpsAutoResume()});
 setTimeout(()=>{void darGpsAutoResume(true)},1100);
 
@@ -27648,15 +27722,16 @@ function renderNotificationCenter({embedded=false}={}){
     </section>
     <section class="dar-permission-location" aria-label="Standort für Gebetszeiten">
       <div class="dar-permission-location__main"><span class="dar-permission-location__icon" aria-hidden="true">⌖</span>
-        <span><strong>Standort für Gebetszeiten</strong><small>${locationReady?esc(s.city||"Ort gespeichert")+(s.locationMode==="auto"?" · GPS automatisch":" · Stadt manuell"):"Kein Standort festgelegt · GPS aktivieren oder Stadt wählen"}</small></span></div>
+        <span><strong>Standort für Gebetszeiten</strong><small id="darPermissionCityText">${locationReady?esc(s.city||"Ort gespeichert")+(s.locationMode==="auto"?" · GPS automatisch":" · Stadt manuell"):"Kein Standort festgelegt · GPS aktivieren oder Stadt wählen"}</small></span></div>
       <div class="dar-permission-location__actions">
         <button id="notificationDetectLocationBtn" type="button">Standort erkennen</button>
         <button id="notificationManualCityToggle" type="button" aria-expanded="false" aria-controls="darManualCityPanel">Stadt auswählen</button>
       </div>
-      <form id="darManualCityPanel" hidden autocomplete="off">
+      <form id="darManualCityPanel" hidden autocomplete="off" role="search" aria-label="Stadt nach Name oder Postleitzahl suchen">
         <label class="dar-permission-city-label" for="darManualCityInput">Ort oder Postleitzahl</label>
-        <input id="darManualCityInput" type="text" maxlength="100" value="${locationReady?esc(s.city||""):""}" placeholder="Stadt eingeben" />
-        <button type="submit" id="darManualCitySaveBtn">Übernehmen</button>
+        <input id="darManualCityInput" type="search" enterkeyhint="search" inputmode="search" autocapitalize="words" spellcheck="false" maxlength="100" value="" placeholder="Stadt oder PLZ eingeben" aria-controls="darCityResults" autocomplete="off" />
+        <button type="submit" id="darManualCitySaveBtn">Suchen</button>
+        <div id="darCityResults" class="dar-city-search-results" role="group" aria-label="Gefundene Städte" aria-live="polite" hidden></div>
       </form>
       <p class="dar-permission-feedback" id="darLocationFeedback" role="status" aria-live="polite" hidden></p>
     </section>
@@ -27739,25 +27814,69 @@ function bindNotificationCenter(){
       feedback(code===1?"Standortzugriff gesperrt. Bitte in den Geräteeinstellungen freigeben oder eine Stadt auswählen.":code===3?"Standortbestimmung dauert zu lange. Bitte erneut versuchen.":"GPS konnte nicht ermittelt werden. Bitte Standortfreigabe prüfen oder Stadt auswählen.");
     }finally{gps.disabled=false;gps.textContent="Standort erkennen"}
   };
-  if(cityToggle&&cityPanel)cityToggle.onclick=()=>{
+  const cityInput=$("darManualCityInput"),cityResults=$("darCityResults"),citySave=$("darManualCitySaveBtn");
+  let searchTimer=null,citySearchSequence=0;
+  const selectCity=(place)=>{
+    if(!Number.isFinite(place.lat)||!Number.isFinite(place.lon))return;
+    ++citySearchSequence;
+    darGpsStopWatch();
+    clearTimeout(darGpsRetryNameTimer);
+    setPrayerSettings({city:place.city,lat:place.lat,lon:place.lon,locationMode:"manual",locationGranted:true,locationUpdatedAt:Date.now()});
+    rerender();
+  };
+  const listCities=(places)=>{
+    if(!cityResults)return;
+    cityResults.replaceChildren();
+    cityResults.hidden=false;
+    if(!places.length){cityResults.textContent="Keinen passenden Ort gefunden. Bitte genauer suchen.";return}
+    for(const place of places){
+      const item=document.createElement("button");
+      item.type="button";
+      item.className="dar-city-search-result";
+      item.textContent=place.label;
+      item.setAttribute("aria-label",place.label+" auswählen");
+      item.addEventListener("click",event=>{event.preventDefault();event.stopPropagation();selectCity(place)});
+      cityResults.appendChild(item);
+    }
+  };
+  const runCitySearch=async()=>{
+    if(!cityInput)return;
+    const q=String(cityInput.value||"").trim(),seq=++citySearchSequence;
+    if(q.length<2){if(cityResults){cityResults.hidden=true;cityResults.replaceChildren()}return}
+    if(citySave){citySave.disabled=true;citySave.textContent="Suche …"}
+    feedback("");
+    try{
+      const places=await searchPrayerCities(q);
+      if(seq!==citySearchSequence||!cityInput.isConnected)return;
+      listCities(places);
+      if(places.length)feedback("Bitte die passende Stadt aus den Ergebnissen wählen.");
+    }catch(e){
+      if(seq===citySearchSequence)feedback("Stadtsuche vorübergehend nicht verfügbar. Bitte erneut versuchen.");
+    }finally{
+      if(seq===citySearchSequence&&citySave){citySave.disabled=false;citySave.textContent="Suchen"}
+    }
+  };
+  if(cityToggle&&cityPanel)cityToggle.onclick=(event)=>{
+    event.preventDefault();event.stopPropagation();
     const open=cityPanel.hidden;
     cityPanel.hidden=!open;
     cityToggle.setAttribute("aria-expanded",String(open));
-    if(open)$("darManualCityInput")?.focus();
-  };
-  if(cityPanel)cityPanel.onsubmit=async(ev)=>{
-    ev.preventDefault();
-    const field=$("darManualCityInput"),save=$("darManualCitySaveBtn");
-    const value=String(field?.value||"").trim();
-    if(value.length<2){feedback("Bitte einen gültigen Ort eingeben.");return}
-    if(save){save.disabled=true;save.textContent="Wird gesucht …"}
-    feedback("");
-    try{const place=await geocodePrayerCity(value);
-      if(!Number.isFinite(place.lat)||!Number.isFinite(place.lon))throw new Error("invalid_city");
-      setPrayerSettings(place);rerender();
-    }catch(e){feedback("Ort nicht gefunden. Bitte Stadt oder Postleitzahl prüfen.");
-      if(save){save.disabled=false;save.textContent="Übernehmen"}
+    if(open&&cityInput){
+      // iOS Safari only opens the keyboard when focus happens synchronously on tap.
+      cityInput.removeAttribute("readonly");
+      cityInput.focus({preventScroll:true});
+      try{cityInput.setSelectionRange(cityInput.value.length,cityInput.value.length)}catch(e){}
     }
+  };
+  if(cityInput)cityInput.addEventListener("input",()=>{
+    clearTimeout(searchTimer);++citySearchSequence;
+    if(cityResults){cityResults.hidden=true;cityResults.replaceChildren()}
+    searchTimer=setTimeout(runCitySearch,450);
+  });
+  if(cityPanel)cityPanel.onsubmit=async(ev)=>{
+    ev.preventDefault();ev.stopPropagation();
+    clearTimeout(searchTimer);
+    await runCitySearch();
   };
   const prayerMaster=$("notificationPrayerMaster");
   if(prayerMaster)prayerMaster.onclick=async()=>{
