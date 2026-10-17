@@ -95,6 +95,12 @@ def artifact_zip(artifact_id,token):
     strict(data.startswith(b"PK"),"not an original GitHub Actions ZIP")
     return data
 
+def original_id_from_export_name(filename,missing):
+    """Accept only known paid generation IDs, with optional descriptive suffixes."""
+    matched=re.fullmatch(r"([A-Za-z0-9]{20})(?:[-_][A-Za-z0-9_-]{1,70})?\.mp3",Path(filename).name,re.I)
+    return matched.group(1) if matched and matched.group(1) in missing else None
+
+
 def mp3_candidates(raw,missing):
     results={}
     with zipfile.ZipFile(io.BytesIO(raw)) as archive:
@@ -108,10 +114,8 @@ def mp3_candidates(raw,missing):
                    ".." not in Path(entry.filename).parts and
                    not entry.filename.startswith("\\"),
                    "unsafe ZIP member name")
-            stem=Path(entry.filename).name
-            match=re.fullmatch(r"([A-Za-z0-9]{20})(?:[-_][A-Za-z0-9_-]{1,70})?\.mp3",stem,re.I)
-            if not match or match.group(1) not in missing:continue
-            gid=match.group(1)
+            gid=original_id_from_export_name(entry.filename,missing)
+            if gid is None:continue
             strict(1800<=entry.file_size<=MAX_INDIVIDUAL_MP3_BYTES,
                    "unusual original MP3 size")
             strict(gid not in results,"duplicate original MP3 within same artifact")
