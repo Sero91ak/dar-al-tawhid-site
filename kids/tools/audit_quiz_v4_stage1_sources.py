@@ -11,6 +11,7 @@ from __future__ import annotations
 import hashlib
 import json
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROOT=Path(__file__).resolve().parents[2]
 STAGE=ROOT/".github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json"
@@ -134,6 +135,14 @@ def main():
     must(next_run["modelId"]==MODEL and next_run["voiceId"]==VOICE
          and next_run["paidSynthesisAuthorizedByAudit"] is False,
          "wrong voice / unexpectedly authorized spending")
+    must(set(EVIDENCE)==set(SOURCES),
+         "not all 20 questions have independently located source references")
+    for qid,row in EVIDENCE.items():
+        loc=urlsplit(row["url"])
+        must(loc.scheme=="https" and loc.hostname in {"www.islamweb.net","islamweb.net","dorar.net"}
+             and loc.path and not loc.username and not loc.password
+             and isinstance(row["assessment"],str) and len(row["assessment"])>=25,
+             "external source proof is unverified or not on the approved domains for "+qid)
     must(stage["numberOfQuestions"]==20 and stage["numberOfNewOriginalTexts"]==65,
          "first20 / 65 source contract changed")
     must(len(stage["questions"])==20 and len(SOURCES)==20,"question count or reviewed key map changed")
@@ -250,6 +259,7 @@ def main():
         "allTwentyExactCanonicalQuestionAnswerAndSpokenRecipeMatches":True,
         "independentExternalEvidenceLocatedFor":len(EVIDENCE),
         "externalEvidenceDoesNotEstablishCompleteSourceApproval":True,
+        "allTwentyEvidenceUrlsOnApprovedDomains":True,
         "sourceContextsNeedingExtraCare":sorted(CAVEATS),
         "exactNewSourceTexts":65,"previouslyRecordedFirstStageOriginals":len(completed_text_sha),
         "remainingNewSourceTexts":len(pending_source),
