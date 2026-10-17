@@ -315,10 +315,12 @@ jobs:
           # Require the real full-size poster and the decorated entry, not only HTTP 200.
           curl -fsSL -A 'DarAlTawhidKids-iOS CreatorTest' "$BASE/kids/start.html" > /tmp/kids-creator-boot.html
           grep -Fq 'id="kids-test-boot"' /tmp/kids-creator-boot.html || { echo "::error::Kids boot overlay missing from deployed HTML"; exit 1; }
+          grep -Fq 'kids-test-first-frame-css' /tmp/kids-creator-boot.html || { echo "::error::Early dark KIDS splash CSS missing"; exit 1; }
+          grep -Fq 'apple-touch-startup-image' /tmp/kids-creator-boot.html || { echo "::error::iOS PWA startup image hint missing"; exit 1; }
           grep -Fq '/kids/assets/kids-splash-20261017-v1.jpg' /tmp/kids-creator-boot.html || { echo "::error::Approved splash image reference missing"; exit 1; }
           curl -fsSL "$BASE/kids/assets/kids-splash-20261017-v1.jpg" -o /tmp/kids-creator-splash.jpg
           test "$(wc -c < /tmp/kids-creator-splash.jpg)" -gt 100000 || { echo "::error::Kids splash JPEG missing or too small"; exit 1; }
-          curl -fsSL "$BASE/kids/splash-boot-v1.js?v=20261017-6" > /tmp/kids-creator-splash.js
+          curl -fsSL "$BASE/kids/splash-boot-v1.js?v=20261017-7" > /tmp/kids-creator-splash.js
           grep -Fq 'maxWaitMs=9000' /tmp/kids-creator-splash.js || { echo "::error::Kids boot JS version missing"; exit 1; }
           echo "KIDS TEST approved splash assets and HTML injection: VERIFIED"
           # KIDS Academy original art is copied from desktop-preview only into this isolated build.
