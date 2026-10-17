@@ -18,8 +18,8 @@ assert.equal(new Set(all.map(x=>x.id)).size,30,"Lesson ids must be globally uniq
 const existing=all.filter(x=>x.status==="existing"),review=all.filter(x=>x.status==="review"),planned=all.filter(x=>x.status==="planned");
 assert.equal(existing.length,6,"Original six canonical lessons must remain first in each category");
 assert.ok(cur.categories.every(g=>g.lessons[0].id===g.id&&g.lessons[0].status==="existing"),"First lesson must be the existing canonical master");
-assert.equal(review.length,8,"Four Tawḥīd and four Īmān master drafts expected");
-assert.equal(planned.length,16,"Remaining sixteen titles must stay unapproved metadata only");
+assert.equal(review.length,12,"Four drafts each for Tawḥīd, Īmān and Asmāʾ wa-Ṣifāt expected");
+assert.equal(planned.length,12,"Remaining twelve titles must stay unapproved metadata only");
 for(const lesson of review){
  assert.ok(lesson.masterStoryText?.length>1600,"Master text is incomplete: "+lesson.id);
  assert.ok(lesson.sourceRefs?.length>=3,"Missing primary evidence: "+lesson.id);
@@ -54,4 +54,4 @@ const shells=["kids/index.html","kids/start.html","kids/shell.html"].map(read);
 assert.ok(shells.every(x=>x===shells[0]),"Three KIDS HTML shells must match exactly");
 assert.ok(shells[0].includes("/kids/deen-lessons.js?v=10"),"Dīn JS cache bust missing");
 assert.ok(shells[0].includes("/kids/item-offline-v1.js?v=3"),"Offline runtime cache bust missing");
-console.log("Dīn Creator gate PASS: 6 categories, 30 topics, 6 original masters, 8 research drafts, 16 locked; URLs, exact master parity, offline, gender themes and stable art");
+console.log("Dīn Creator gate PASS: 6 categories, 30 topics, 6 original masters, 12 research drafts, 12 locked; URLs, exact master parity, offline, gender themes and stable art");
