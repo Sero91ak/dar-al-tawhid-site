@@ -76,6 +76,8 @@ export default {
         + '#kids-test-boot .ktb-recover{display:none}'
         + '</style>'
         + '<link rel="preload" as="image" href="' + posterURL + '" fetchpriority="high">'
+        // Best-effort iOS Add-to-Home-Screen static launch image (browser-controlled).
+        + '<link rel="apple-touch-startup-image" href="' + posterURL + '" media="(orientation: portrait)">'
         // Styles are non-blocking; critical visual styles are already inline.
         + '<link rel="stylesheet" href="/kids/splash-boot-v1.css?v=20261017-7" media="print" onload="this.media=' + "'all'" + '">'
         + '<script defer src="/kids/splash-boot-v1.js?v=20261017-7"></script>';
@@ -89,6 +91,7 @@ export default {
         + '<button type="button" class="ktb-recover">App trotzdem öffnen</button>'
         + '</div></div><div class="ktb-reveal-glow" aria-hidden="true"></div></div>';
       headers.delete("Content-Length");
+      headers.delete("Content-Encoding");
       headers.delete("ETag");
       headers.set("Content-Type", "text/html; charset=utf-8");
       headers.set("Cache-Control", "private, no-store, max-age=0");
