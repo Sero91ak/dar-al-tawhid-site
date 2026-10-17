@@ -927,3 +927,118 @@ html[data-theme="dar-al-layl"] body #bottomNav .bottom-nav-btn:is(
 )::before {
   background:rgba(122,99,57,.075)!important;
 }
+
+/* DAR_RESPONSIVE_VIEWPORT_CENTERING_V1381
+   Adult Test SPA only; 2026-10-17.
+   One centered fluid viewport axis for iPhone, iPad, landscape and browser.
+   The previous 100vw hero inside an inset/1180px app shifted right and clipped
+   the opposite edge. Do not touch bottom tabs, scroll, themes or carousels. */
+html[data-theme] body.has-bottom-nav:is(
+ .is-home-route,.is-more-route,.is-quiz-route,.is-topics-route,.is-topic-route,
+ .is-post-route,.is-hadith-route,.is-quran-overview,.is-settings-route,
+ .is-account-route,.is-about-route,.is-news-route,.is-news-detail-route,
+ .is-zakat-route,.is-calendar-route,.is-ramadan-route,.is-notifications-route,
+ .is-source-library-route,.is-quran-topic-route
+){
+ --dar-responsive-safe-gutter:max(12px,2.2vw,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+ --dar-responsive-stage-width:calc(100% - var(--dar-responsive-safe-gutter) - var(--dar-responsive-safe-gutter));
+}
+html[data-theme] body.has-bottom-nav:is(
+ .is-home-route,.is-more-route,.is-quiz-route,.is-topics-route,.is-topic-route,
+ .is-post-route,.is-hadith-route,.is-quran-overview,.is-settings-route,
+ .is-account-route,.is-about-route,.is-news-route,.is-news-detail-route,
+ .is-zakat-route,.is-calendar-route,.is-ramadan-route,.is-notifications-route,
+ .is-source-library-route,.is-quran-topic-route
+) > .app{
+ width:100%!important;
+ max-width:100%!important;
+ min-width:0!important;
+ margin-inline:auto!important;
+ box-sizing:border-box!important;
+ overflow-x:clip!important;
+}
+html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route){
+ --dar-test-edge-gutter:var(--dar-responsive-safe-gutter);
+ --dar-test-edge-stage:var(--dar-responsive-stage-width);
+ --dar-post-edge:var(--dar-responsive-safe-gutter);
+}
+html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView.view{
+ position:relative!important;
+ left:auto!important;
+ right:auto!important;
+ width:100%!important;
+ max-width:100%!important;
+ min-width:0!important;
+ margin-inline:0!important;
+ padding-inline:0!important;
+ box-sizing:border-box!important;
+ overflow-x:clip!important;
+}
+html[data-theme] body.is-topics-route #appView.view > .topics-hub,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page,
+html[data-theme] body.is-post-route #appView.view > .post-reader{
+ position:relative!important;
+ left:auto!important;
+ right:auto!important;
+ width:100%!important;
+ max-width:100%!important;
+ min-width:0!important;
+ margin-inline:0!important;
+ padding-inline:0!important;
+ box-sizing:border-box!important;
+}
+html[data-theme] body.is-topics-route #appView.view > .topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page > .view-head,
+html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-title{
+ position:relative!important;
+ left:auto!important;
+ right:auto!important;
+ translate:none!important;
+ transform:none!important;
+ width:100%!important;
+ max-width:100%!important;
+ min-width:0!important;
+ margin-left:0!important;
+ margin-right:0!important;
+ box-sizing:border-box!important;
+ background-size:cover!important;
+ background-repeat:no-repeat!important;
+ overflow:hidden!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > :is(
+ .search-pro-panel,.search-panel,#homeSearchBlock,.topics-hub__label,
+ .dar-tl-intro,.dar-tl-filterbar,.dar-tl-groups,.dua-theme-grid
+),
+html[data-theme] body.is-topic-route #appView .topic-collection-page > :is(
+ .post-grid,.topic-collection
+),
+html[data-theme] body.is-post-route #appView .post-reader > :is(
+ .post-reader-main,.post-after-panel,.related-compact,.related-compact-list,[data-post-after-panel]
+){
+ width:var(--dar-responsive-stage-width)!important;
+ max-width:100%!important;
+ min-width:0!important;
+ margin-left:auto!important;
+ margin-right:auto!important;
+ box-sizing:border-box!important;
+}
+@media(min-width:768px){
+ html[data-theme] body.has-bottom-nav:is(.is-topics-route,.is-topic-route,.is-post-route){
+   --dar-responsive-safe-gutter:max(18px,2vw,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+ }
+}
+/* Future normal SPA pages can opt into the same centered geometry. */
+html[data-theme] body.has-bottom-nav #appView.view > .dar-responsive-page{
+ width:100%!important;
+ max-width:100%!important;
+ min-width:0!important;
+ margin-inline:auto!important;
+ box-sizing:border-box!important;
+}
+html[data-theme] body.has-bottom-nav #appView.view > .dar-responsive-page > .dar-responsive-hero{
+ width:100%!important;
+ max-width:100%!important;
+ margin-inline:0!important;
+ box-sizing:border-box!important;
+ background-size:cover!important;
+}

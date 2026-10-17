@@ -212,12 +212,14 @@ async function fetchVersionBuild(base) {
   // authority is actually present in the app shell.
   for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
     const { status: shellStatus, text: shellHtml } =
-      await fetchText(`${base}/index.html?edge-width-check=v1377-${Date.now()}`);
+      await fetchText(`${base}/index.html?edge-width-check=v1381-${Date.now()}`);
     const edgeLinkOk = shellHtml.includes('id="darTestEdgeWidthV1372"') &&
-      shellHtml.includes('/test/assets/test-global-edge-width-v1372.css?v=20261016-layl-muted-v1377');
+      shellHtml.includes('/test/assets/test-global-edge-width-v1372.css?v=viewport-v1381');
     const { status: edgeStatus, text: edgeCss } =
-      await fetchText(`${base}/assets/test-global-edge-width-v1372.css?v=20261016-layl-muted-v1377`);
+      await fetchText(`${base}/assets/test-global-edge-width-v1372.css?v=viewport-v1381`);
     const cssOk = edgeCss.includes("DAR TEST ADULT ONLY") &&
+      edgeCss.includes("DAR_RESPONSIVE_VIEWPORT_CENTERING_V1381") &&
+      edgeCss.includes("--dar-responsive-safe-gutter") &&
       edgeCss.includes("--dar-test-edge-stage") &&
       edgeCss.includes(".is-more-route") &&
       edgeCss.includes(".is-quiz-route") &&
