@@ -70,6 +70,57 @@ const findings={url:"https://dar-al-tawhid.de/test/?env=staging&source=pwa&v=137
   }
   await tapTest(qidx,"quran");
   await tapTest(pidx,"posts");
+  // DAR_HADITH_DEPTH_LAYOUT_BROWSER_QA_V1386
+  // Exercise real navigation through Work > Kitab > Bab > individual Hadith,
+  // not just URL or CSS success. Never touches Kids or the visitor app.
+  findings.hadithContinuity=[];
+  for(const width of [390,1024]){
+    const height=width===390?844:768;
+    await page.setViewportSize({width,height});
+    await page.evaluate(()=>{location.hash="#hadith";});
+    await page.waitForFunction(()=>document.body.classList.contains("is-hadith-route") &&
+      !!document.querySelector(".hadith-hub > .view-head"),null,{timeout:20000});
+    await page.waitForFunction(()=>!!document.querySelector(
+      ".hadith-hub .dua-theme-card[data-nav='hadith'][data-value]"
+    ),null,{timeout:20000});
+    let rootHeight=0;
+    for(let depth=0;depth<=4;depth++){
+      await page.waitForTimeout(500);
+      const g=await page.evaluate(()=>{
+        const hero=document.querySelector(".hadith-hub > .view-head,.hadith-detail > .post-reader-title");
+        const rect=hero?.getBoundingClientRect();
+        const c=hero&&getComputedStyle(hero);
+        return {hash:location.hash,route:document.body.className,
+          viewport:document.documentElement.clientWidth,scrollWidth:document.documentElement.scrollWidth,
+          rect:rect&&{x:rect.x,right:rect.right,width:rect.width,height:rect.height},
+          radius:c?.borderRadius,border:c?.borderLeftWidth,shadow:c?.boxShadow,
+          background:c?.backgroundImage,backgroundSize:c?.backgroundSize};
+      });
+      let error="";
+      if(!g.rect)error="missing Hadith hero";
+      else if(g.rect.x< -3||g.rect.right>g.viewport+3||Math.abs(g.rect.x-(g.viewport-g.rect.right))>4)error="cropped or asymmetric hero";
+      else if(g.rect.width<g.viewport-8)error="hero not full viewport width";
+      else if(g.scrollWidth>g.viewport+3)error="horizontal overflow";
+      else if(!/cover/.test(g.backgroundSize||""))error="not CSS background cover";
+      else if(g.radius!=="0px"||g.border!=="0px"||g.shadow!=="none")error="floating image card border/shadow";
+      if(depth===0)rootHeight=g.rect?.height||0;
+      else if(g.rect&&Math.abs(rootHeight-g.rect.height)>3)error="height jump "+rootHeight+"→"+g.rect.height;
+      findings.hadithContinuity.push({width,depth,...g,error});
+      await page.screenshot({path:path.join(out,"hadith-"+width+"-depth-"+depth+".png"),fullPage:false});
+      console.log("Hadith depth "+depth+" width "+width+" "+(error?"FAIL "+error:"PASS"));
+      if(error)throw Error("Hadith "+width+" depth "+depth+": "+error+" "+JSON.stringify(g));
+      if(depth===4)break;
+      const next=page.locator("body.is-hadith-route .hadith-hub .dua-theme-card[data-nav='hadith'][data-value],body.is-hadith-route .hadith-hub .hadith-leaf-row[data-nav='hadith'][data-value]").first();
+      await next.waitFor({state:"visible",timeout:20000});
+      await next.click({timeout:12000});
+      await page.waitForFunction((oldHash)=>location.hash!==oldHash,g.hash,{timeout:20000});
+      await page.waitForFunction(()=>!!document.querySelector(
+        ".hadith-hub > .view-head,.hadith-detail > .post-reader-title"),null,{timeout:20000});
+    }
+  }
+  await page.setViewportSize({width:412,height:915});
+  await nav.nth(pidx).click({timeout:12000});
+  await page.waitForTimeout(600);
   // DAR_ADULT_RESPONSIVE_SIX_WIDTH_VISUAL_QA_V1383: real rendered DOM
   // in Android/touch Chromium. Keep this isolated to adult Dar Test.
   findings.responsive=[];
