@@ -353,13 +353,14 @@ jobs:
           grep -Fq "KIDS TEST · Ersteller-Web-App" /tmp/kids-creator-safari.html || { echo "::error::Safari cannot receive standalone KIDS TEST web app"; exit 1; }
           echo "KIDS TEST iPhone Safari HTML delivery verified, no visitor domain involved."
           # DĪN 6×5: verify exact published bytes, not just a generic HTTP 200.
-          for RESOURCE in kids/deen-lessons.js kids/deen-curriculum-v1.css kids/data/deen-curriculum-v1.json kids/assets/deen/lesson-rububiyyah-firefly-v1.jpg kids/assets/deen/lesson-adab-firefly-v1.jpg kids/assets/deen/lesson-friendly-courtyard-runway-v1.jpg; do
+          for RESOURCE in kids/deen-lessons.js kids/item-offline-v1.js kids/deen-curriculum-v1.css kids/data/deen-curriculum-v1.json kids/assets/deen/lesson-rububiyyah-firefly-v1.jpg kids/assets/deen/lesson-adab-firefly-v1.jpg kids/assets/deen/lesson-friendly-courtyard-runway-v1.jpg kids/assets/deen/lesson-iman-foundations-firefly-v1.jpg kids/assets/deen/lesson-iman-growth-runway-v1.jpg; do
             curl -fsSL -H 'Cache-Control: no-cache' "$BASE/$RESOURCE" > /tmp/kids-deen-resource
             cmp -s "$RESOURCE" /tmp/kids-deen-resource || { echo "::error::KIDS Dīn served bytes differ: $RESOURCE"; exit 1; }
             echo "KIDS Dīn verified: $RESOURCE"
           done
           curl -fsSL -H 'Cache-Control: no-cache' "$BASE/kids/start.html" > /tmp/kids-deen-start.html
-          grep -Fq '/kids/deen-lessons.js?v=9' /tmp/kids-deen-start.html || { echo "::error::New Dīn runtime reference not delivered"; exit 1; }
+          grep -Fq '/kids/deen-lessons.js?v=10' /tmp/kids-deen-start.html || { echo "::error::New Dīn runtime reference not delivered"; exit 1; }
+          grep -Fq '/kids/item-offline-v1.js?v=3' /tmp/kids-deen-start.html || { echo "::error::New offline runtime not delivered"; exit 1; }
           echo "KIDS Dīn 6×5 staging release matches GitHub commit exactly."
           # KIDS-only V2: verify the versioned files that the staging shell actually imports.
           # No hardcoded v3/v4 marker, so asset updates cannot make a correct deploy appear broken.
