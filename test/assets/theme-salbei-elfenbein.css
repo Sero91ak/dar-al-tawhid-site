@@ -1026,3 +1026,60 @@ html:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-t
   --theme-feed-panel-text:var(--dar-readable-ink)!important;
   --theme-feed-shade-text:var(--dar-readable-muted)!important;
 }
+
+/* DAR_POST_COPY_CONTRAST_V1384 — adults / post reader only.
+   Fix legacy fixed #fff8e6 copy on pale themes; covers future normal posts.
+   Hero, slides, layout, sources, push and content remain unchanged. */
+html[data-theme] body.is-post-route{
+  --dar-post-copy-ink:var(--dar-readable-ink,var(--text,#f5efe3));
+  --dar-post-copy-emphasis:var(--dar-readable-accent,var(--gold2,#d8c18b));
+}
+html[data-theme="light"] body.is-post-route{
+  --dar-post-copy-ink:#211d18;
+  --dar-post-copy-emphasis:#73572b;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-post-route,
+html[data-theme="salbei"] body.is-post-route{
+  --dar-post-copy-ink:#17211b;
+  --dar-post-copy-emphasis:#3f5d4b;
+}
+html[data-theme="soft"] body.is-post-route{
+  --dar-post-copy-ink:#2b2025;
+  --dar-post-copy-emphasis:#714a5d;
+}
+html[data-theme="eisgold"] body.is-post-route{
+  --dar-post-copy-ink:#142033;
+  --dar-post-copy-emphasis:#7b6429;
+}
+html[data-theme="dark"] body.is-post-route{
+  --dar-post-copy-ink:#f5efe3;
+  --dar-post-copy-emphasis:#e4cd8b;
+}
+html[data-theme="royal"] body.is-post-route{
+  --dar-post-copy-ink:#f7eeda;
+  --dar-post-copy-emphasis:#e6cf8b;
+}
+html[data-theme="bordeaux"] body.is-post-route{
+  --dar-post-copy-ink:#f7eddf;
+  --dar-post-copy-emphasis:#d8c08b;
+}
+html[data-theme="dar-al-layl"] body.is-post-route{
+  --dar-post-copy-ink:#f1ede3;
+  --dar-post-copy-emphasis:#d8c18b;
+}
+html[data-theme="aurora"] body.is-post-route{
+  --dar-post-copy-ink:#f2eee2;
+  --dar-post-copy-emphasis:#dec98f;
+}
+html[data-theme] body.is-post-route #appView .post-reader-main .statement.post-aussage,
+html[data-theme] body.is-post-route #appView .post-reader-main .statement.post-aussage .post-aussage-text,
+html[data-theme] body.is-post-route #appView .post-reader-main .statement.post-aussage .post-aussage-text :is(p,div,span,li,q,blockquote){
+  color:var(--dar-post-copy-ink)!important;
+  -webkit-text-fill-color:var(--dar-post-copy-ink)!important;
+  text-shadow:none!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader-main .statement.post-aussage .post-aussage-text :is(strong,b,em,i){
+  color:var(--dar-post-copy-emphasis)!important;
+  -webkit-text-fill-color:var(--dar-post-copy-emphasis)!important;
+  text-shadow:none!important;
+}
