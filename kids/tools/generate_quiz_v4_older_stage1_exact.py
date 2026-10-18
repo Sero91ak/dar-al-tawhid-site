@@ -167,9 +167,8 @@ def prepare():
     paid={row["text"] for row in ledger["rows"]}
     check(len(paid)==len(ledger["rows"]),"paid text has duplicate receipt")
     check(paid<=set(reg["textClips"]),"charged original missing from registry")
-    check(not((texts-set(reg["textClips"]))&protected),
-          "new first-stage queue attempts to rebuy an earlier paid V4 original")
     outstanding=[]
+    reserved_pending=[]
     for x in rows:
         text=x["spokenText"]
         if text in reg["textClips"]:
@@ -180,7 +179,18 @@ def prepare():
                   "recorded original differs from exact first-stage source")
         else:
             check(text not in paid,"previously charged exact text is missing MP3, DO NOT buy again")
-            outstanding.append(x)
+            if text in protected:
+                # A connected ElevenLabs Flow has already reserved or
+                # submitted this exact original. Never POST it again.
+                reserved_pending.append(x)
+            else:
+                outstanding.append(x)
+    # Private in-memory queue metadata; NEVER change the canonical 65 texts.
+    stage["_reservedUnimportedTextSHA256"]=[
+        x["spokenTextSHA256"] for x in reserved_pending]
+    check(len(outstanding)+len(reserved_pending)+
+          sum(x["spokenText"] in reg["textClips"] for x in rows)==STAGE_SIZE,
+          "missing or doubly counted stage1 V4 originals")
     return reg,ledger,stage,outstanding,protected
 
 def candidate_batch(outstanding, stage):
@@ -192,9 +202,13 @@ def candidate_batch(outstanding, stage):
     """
     allowed={x["spokenTextSHA256"]:x for x in stage["originalTextRecordingQueue"]}
     pending={x["spokenTextSHA256"]:x for x in outstanding}
-    check(len(allowed)==STAGE_SIZE and len(pending)==len(outstanding),
-          "duplicate or lost source SHA")
+    blocked=set(stage.get("_reservedUnimportedTextSHA256",[]))
+    check(len(allowed)==STAGE_SIZE and len(pending)==len(outstanding)
+          and not blocked.intersection(pending)
+          and blocked<=set(allowed),
+          "duplicate, reserved or lost source SHA")
     need={}
+    fully_missing={}
     age_by_question={}
     for q in stage["questions"]:
         qid=q["questionId"];age=q["ageBand"]
@@ -203,6 +217,7 @@ def candidate_batch(outstanding, stage):
             hashes.update(part.get("missingOriginalTextSHA256",[]))
         check(hashes<=set(allowed),"quiz part references unrecognized stage1 speech")
         need[qid]=hashes&set(pending)
+        fully_missing[qid]=hashes&(set(pending)|blocked)
         age_by_question[qid]=age
     check(set(pending)==set().union(*need.values()),
           "paid stage1 text is not needed by any approved quiz question")
@@ -212,7 +227,10 @@ def candidate_batch(outstanding, stage):
         possible=[]
         for qid,required in need.items():
             new=required-chosen
-            if not new:continue
+            if not new or (fully_missing[qid] & blocked):
+                # This question cannot finish until the other provider's
+                # genuine MP3 originals arrive, so do not count it as done.
+                continue
             parts=[pending[h] for h in sorted(new)]
             cost=sum(len(p["spokenText"])*RATE_FOR_ESTIMATE_ONLY for p in parts)
             if len(selected)+len(parts)>COUNT_PER_RUN or estimated+cost>MAX_ESTIMATED_CREDITS_PER_RUN:
@@ -246,7 +264,8 @@ def candidate_batch(outstanding, stage):
         estimated+=cost
     check(bool(selected) or not outstanding,
           "first-stage V4 originals do not fit within manual credit cap")
-    complete=sorted(qid for qid,req in need.items() if req and req<=chosen)
+    complete=sorted(qid for qid,req in fully_missing.items()
+                    if req and req<=chosen)
     return selected,round(estimated,2),complete
 
 def main():
@@ -274,8 +293,10 @@ def main():
         "modelId":MODEL,"voiceId":VOICE,"reviewOnly":True,
         "questionCount":20,"questions7to8":10,"questions9to10":10,
         "stageExpectedNewOriginals":STAGE_SIZE,
-        "previouslyRecordedFirstStageOriginals":STAGE_SIZE-len(missing),
-        "remainingFirstStageOriginals":len(missing),
+        "previouslyRecordedFirstStageOriginals":STAGE_SIZE-len(missing)-len(stage["_reservedUnimportedTextSHA256"]),
+        "remainingFirstStageOriginals":len(missing)+len(stage["_reservedUnimportedTextSHA256"]),
+        "reservedOrSubmittedInConnectedFlowNotToRebuy":len(stage["_reservedUnimportedTextSHA256"]),
+        "genuinelyUnreservedTextsEligibleForNewV4":len(missing),
         "nextPaidRunOriginalLimit":COUNT_PER_RUN,
         "manualApprovalMustMatchExactBatchFingerprintSHA256":paid_snapshot,
         "nextExactTextSha256":[x["spokenTextSHA256"] for x in selected],
