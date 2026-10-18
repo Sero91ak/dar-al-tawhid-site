@@ -8,6 +8,8 @@ on:
       - 'kids/review-only/quiz-v4-450-actual-mp3-import.json'
       - 'kids/data/quiz-v4-450-original-clip-registry.json'
       - 'kids/data/quiz-v4-missing9-prepaid-originals.json'
+      - 'kids/data/quiz-v4-connected-flow-originals-ledger.json'
+      - 'kids/tools/quiz_v4_no_double_charge_guard.py'
       - 'kids/data/quiz-v4-curated-450-production-review.json'
       - '.github/workflows/kids-v4-450-recovery-first-finish-plan.yml'
 
@@ -40,13 +42,16 @@ jobs:
           s=obj['summary']
           assert s['selectedQuestions']==450 and s['modelId']=='eleven_v4'
           assert s['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
-          assert s['alreadyTechnicallyComplete']+s['questionsBlockedOnlyOnAlreadyPaidNine']+s['questionsNeedingAtLeastOneGenuinelyNewOriginal']==450
+          assert s['alreadyTechnicallyComplete']+s['questionsBlockedOnlyOnAlreadyPaidNine']+s['questionsWaitingOnlyForConnectedFlowOriginals']+s['questionsNeedingAtLeastOneGenuinelyNewOriginal']==450
+          assert s['connectedFlowOriginalTextsPendingOrReserved']==len(obj['connectedFlowOriginalsToRecoverWithoutSecondPurchase'])
+          assert s['reservedFlowOriginalsExcludedFromNewChargeQueue']==len(obj['connectedFlowOriginalsToRecoverWithoutSecondPurchase'])
+          assert all(r['newSynthesisAllowed'] is False for r in obj['connectedFlowOriginalsToRecoverWithoutSecondPurchase'])
           assert s['missingGenuineNewExactSegments']==len({
             h for row in obj['possibleNewSpeechPriorityAfterOriginalRecovery'] for h in row['newTextSha256']})
           assert s['previouslyPaidMissingGenerationCount']==len(obj['historicalAlreadyPaidOriginalRecoveryOrder'])
           assert all(q['speechGenerationAuthorized'] is False for q in obj['possibleNewSpeechPriorityAfterOriginalRecovery'])
           assert s['newElevenLabsCreditsSpent']==0 and not s['publicReleaseAllowed']
-          print('PASS: real V4 missing originals sorted; nine old takes never in paid queue.')
+          print('PASS: real V4 originals, nine old Flow takes and eight connected Flow reservations excluded from new paid queue.')
           PY
       - name: Save no-credit production-priority review to GitHub
         run: |
