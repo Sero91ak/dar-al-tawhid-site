@@ -69,7 +69,6 @@ html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head{
   top:0!important;
   z-index:64!important;
   background-repeat:no-repeat!important;
-  background-size:cover,cover,cover!important;
 }
 /* Search remains attached only when the corresponding hero has an adjacent
    search block; the height comes from ResizeObserver, never a scroll event. */
