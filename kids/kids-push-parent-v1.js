@@ -85,7 +85,7 @@
         try {
           await oneSignal.init({
             appId: APP_ID,
-            serviceWorkerPath: "kids/push/onesignal/OneSignalSDKWorker.js",
+            serviceWorkerPath: "/kids/push/onesignal/OneSignalSDKWorker.js",
             serviceWorkerParam: { scope: "/kids/push/onesignal/" }
           });
           os = oneSignal;
