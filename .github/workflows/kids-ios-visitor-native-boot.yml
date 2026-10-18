@@ -1,0 +1,61 @@
+name: KIDS iOS Visitor Native Boot
+on:
+  pull_request:
+    paths:
+      - 'ios/DarAlTawhidKids/**'
+      - '.github/workflows/kids-ios-visitor-native-boot.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'ios/DarAlTawhidKids/**'
+      - '.github/workflows/kids-ios-visitor-native-boot.yml'
+
+jobs:
+  source-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify visitor and creator remain isolated
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path("ios/DarAlTawhidKids")
+          root=(p/"DarAlTawhidKids/KidsNativeIntro.swift").read_text()
+          web=(p/"DarAlTawhidKids/KidsWebAppView.swift").read_text()
+          pbx=(p/"DarAlTawhidKids.xcodeproj/project.pbxproj").read_text()
+          visitor=(p/"DarAlTawhidKids/Info-Visitor.plist").read_text()
+          creator=(p/"DarAlTawhidKids/Info.plist").read_text()
+          storyboard=(p/"DarAlTawhidKids/KidsVisitorLaunchScreen.storyboard").read_text()
+          assert 'Image("KidsVisitorLaunchPoster")' in root
+          assert 'DarKidsVisitorPageLoaded' in root and 'DarKidsVisitorLoadFailed' in root
+          assert 'Int(value * 100)' in root and 'min(95,' in root
+          assert 'webView.observe(\\.estimatedProgress' in web
+          assert 'document.getElementById(\'view-today\')' in web
+          assert 'window.DAR_KIDS_NATIVE_START=true' in web
+          assert pbx.count('INFOPLIST_FILE = DarAlTawhidKids/Info-Visitor.plist;') == 2
+          assert pbx.count('INFOPLIST_FILE = DarAlTawhidKids/Info.plist;') == 2
+          assert pbx.count('PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.kids;') == 2
+          assert pbx.count('PRODUCT_BUNDLE_IDENTIFIER = de.daraltawhid.kids.creator;') == 2
+          assert pbx.count('CURRENT_PROJECT_VERSION = 3;') == 2
+          assert 'KidsVisitorLaunchScreen' in visitor
+          assert 'KidsVisitorLaunchScreen' not in creator
+          assert 'KidsVisitorLaunchPoster' in storyboard
+          assert (p/"DarAlTawhidKids/Assets.xcassets/KidsVisitorLaunchPoster.imageset/kids-visitor-launch.jpg").stat().st_size > 100_000
+          print("PASS: Visitor native 0-100 loading, Creator isolation, original poster.")
+          PY
+  simulator-build:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build actual visitor app for iOS Simulator (no signing)
+        run: |
+          xcodebuild -project ios/DarAlTawhidKids/DarAlTawhidKids.xcodeproj \
+            -scheme DarAlTawhidKids -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build
+      - name: Build Creator configuration separately to guard isolation
+        run: |
+          xcodebuild -project ios/DarAlTawhidKids/DarAlTawhidKids.xcodeproj \
+            -scheme DarAlTawhidKidsCreator -configuration Debug \
+            -destination 'generic/platform=iOS Simulator' \
+            CODE_SIGNING_ALLOWED=NO build
