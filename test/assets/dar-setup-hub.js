@@ -490,6 +490,36 @@
   var requestId = 0;
   var gpsBusy = false;
   var choices = [];
+  var inputAlignmentTimer = null;
+  var keyboardFocusDeadline = 0;
+
+  /* The iOS keyboard shrinks visualViewport, not always the layout viewport.
+     Never move the app navigation to the keyboard edge. Hide it only while
+     this one location input is active; restore it after focus has ended. */
+  function keyboardSession(on) {
+    document.documentElement.classList.toggle("dar-location-keyboard-session", !!on);
+    if (!on) {
+      clearTimeout(inputAlignmentTimer);
+      keyboardFocusDeadline = 0;
+    }
+  }
+  function alignFocusedCityInput() {
+    if (!onLocationPage()) return;
+    var input = element("darManualCityInput");
+    if (!input || document.activeElement !== input) return;
+    var vv = window.visualViewport;
+    var top = (vv ? vv.offsetTop : 0) + 22;
+    var bottom = (vv ? vv.offsetTop + vv.height : window.innerHeight) - 48;
+    var bounds = input.getBoundingClientRect();
+    if (!(bottom > top + 90)) return;
+    var delta = bounds.bottom > bottom ? bounds.bottom - bottom + 6 :
+      bounds.top < top ? bounds.top - top - 6 : 0;
+    if (Math.abs(delta) > 5) window.scrollBy(0, Math.round(delta));
+  }
+  function scheduleInputAlignment(delay) {
+    clearTimeout(inputAlignmentTimer);
+    inputAlignmentTimer = setTimeout(alignFocusedCityInput, delay);
+  }
 
   function element(id) { return document.getElementById(id); }
   function onLocationPage() {
@@ -580,8 +610,17 @@
     button.setAttribute("aria-expanded", String(open));
     if (open) {
       var input = element("darManualCityInput");
-      if (input) { input.removeAttribute("readonly"); input.focus({preventScroll:true}); }
-    } else { ++requestId; clearTimeout(locationSearchTimer); }
+      if (input) {
+        input.removeAttribute("readonly");
+        input.focus({preventScroll:true});
+        scheduleInputAlignment(250);
+      }
+    } else {
+      ++requestId; clearTimeout(locationSearchTimer);
+      var field = element("darManualCityInput");
+      if (field && document.activeElement === field) field.blur();
+      keyboardSession(false);
+    }
   }
   function showChoices(items) {
     var root = element("darCityResults");
@@ -624,6 +663,10 @@
   }
   function dedupeAndRank(places,q) {
     var numeric=/^\d{5}$/.test(q), seen=new Set();
+    /* Prefer German city names over same-name towns on other continents.
+       Keep worldwide fallback where no German city matches the query. */
+    var local = places.filter(function(p){return p && p.country==="DE";});
+    if(local.length && !/\b(?:usa|united states|france|frankreich|italien|schweiz|austria|österreich)\b/i.test(q)) places=local;
     return places.filter(Boolean).sort(function(a,b){
       var score=function(p) {
         return (p.country==="DE"?50:0)+(numeric&&p.postcode===q?90:0)+
@@ -714,8 +757,11 @@
       paint(updated);
       feedback("Standort gespeichert: " + item.city);
       var panel = element("darManualCityPanel"), toggle = element("notificationManualCityToggle");
+      var field = element("darManualCityInput");
+      if (field && document.activeElement === field) field.blur();
       if (panel) panel.hidden = true;
       if (toggle) toggle.setAttribute("aria-expanded", "false");
+      keyboardSession(false);
       choices = [];
     } catch (e) { feedback("Stadt konnte nicht gespeichert werden. Bitte erneut versuchen."); }
   }
@@ -758,10 +804,36 @@
     ++requestId;
     clearTimeout(locationSearchTimer);
     var list = element("darCityResults");
-    if (list) { list.hidden = true; list.replaceChildren(); }
     var q = String(event.target.value||"").trim();
-    if (q.length>=3 && (!/^\d+$/.test(q) || q.length>=5)) {
+    var enough = q.length>=3 && (!/^\d+$/.test(q) || q.length>=5);
+    /* Keep the results region at a constant height while typing. Repeated
+       hide/show was changing document height and moving the iOS keyboard. */
+    if (list) {
+      list.replaceChildren();
+      list.hidden = !enough;
+      if (enough) list.textContent = "Orte werden gesucht …";
+    }
+    if (enough) {
       locationSearchTimer=setTimeout(function(){void searchCities(false)},420);
     }
+
+  document.addEventListener("focusin", function(event) {
+    if (!onLocationPage() || !event.target || event.target.id !== "darManualCityInput") return;
+    keyboardSession(true);
+    keyboardFocusDeadline = Date.now() + 1100;
+    scheduleInputAlignment(250);
+  }, true);
+  document.addEventListener("focusout", function(event) {
+    if (!event.target || event.target.id !== "darManualCityInput") return;
+    setTimeout(function() {
+      var input = element("darManualCityInput");
+      if (!input || document.activeElement !== input) keyboardSession(false);
+    }, 220);
+  }, true);
+  if (window.visualViewport) window.visualViewport.addEventListener("resize", function() {
+    if (document.documentElement.classList.contains("dar-location-keyboard-session")
+        && Date.now() < keyboardFocusDeadline) scheduleInputAlignment(160);
+  }, {passive:true});
+  window.addEventListener("hashchange", function() { keyboardSession(false); }, {passive:true});
   }, true);
 })();
