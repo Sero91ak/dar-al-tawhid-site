@@ -132,7 +132,7 @@ struct KidsWebAppView: UIViewRepresentable {
             hasPresentedInitialPage = false
             webView.load(
                 URLRequest(
-                    url: KidsAppShell.launchURL,
+                    url: KidsPushNotifications.takePendingNotificationURL().map { KidsAppShell.inAppURL(from: $0) } ?? KidsAppShell.launchURL,
                     cachePolicy: .reloadIgnoringLocalCacheData,
                     timeoutInterval: 30
                 )
@@ -206,6 +206,7 @@ struct KidsWebAppView: UIViewRepresentable {
             guard let url = notification.object as? URL,
                   KidsAppShell.isKidsURL(url),
                   let page = webView else { return }
+            _ = KidsPushNotifications.takePendingNotificationURL()
             page.load(URLRequest(
                 url: KidsAppShell.inAppURL(from: url),
                 cachePolicy: .reloadIgnoringLocalCacheData,
