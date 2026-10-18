@@ -81,7 +81,7 @@ const server=http.createServer((request,response)=>{
   if(!full.startsWith(root+path.sep)||!fs.existsSync(full)||!fs.statSync(full).isFile()){
     response.writeHead(404);response.end("Missing");return;
   }
-  response.writeHead(200,{"Content-Type":/\.js$/.test(full)?"text/javascript":/\.jpe?g$/.test(full)?"image/jpeg":"application/octet-stream"});
+  response.writeHead(200,{"Content-Type":/\.js$/.test(full)?"text/javascript":/\.css$/.test(full)?"text/css; charset=utf-8":/\.jpe?g$/.test(full)?"image/jpeg":"application/octet-stream"});
   fs.createReadStream(full).pipe(response);
 });
 const scenarios=[
