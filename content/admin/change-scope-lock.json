@@ -8499,6 +8499,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2027-10-18T23:59:00.000Z"
+    },
+    {
+      "id": "visitor-hero-live-asset-activation-cache-measure-v1403-20261018",
+      "at": "2026-10-18T20:05:00+02:00",
+      "approvedBy": "user-explicit-fix-unapplied-visitor-hero-top-search-scroll-20261018",
+      "reason": "User reports earlier compact hero change still not visible in visitor app. Confirmed app HTML neither imports adult immersive height JS nor CSS, CSS linked with stale v1396 despite current V1402. Activate refreshed visitor scoped CSS/JS in Cloudflare root, public website and dedicated Android PWA; use standalone read-only height measurement, keep original Frauen DOM and images untouched, no Kids/test/native code changes.",
+      "paths": [
+        "cloudflare/site-router.js",
+        "assets/adult-responsive-viewport-v1381.css",
+        "assets/adult-hero-height-runtime-v1403.js",
+        "scripts/hero-scroll-standard-guard.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-01T23:59:00.000Z"
     }
   ],
   "enabled": true

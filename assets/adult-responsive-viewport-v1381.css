@@ -558,3 +558,79 @@ html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
   min-height:clamp(145px,33svh,205px)!important;
  }
 }
+
+
+/* DAR_VISITOR_HERO_RAIL_CONNECTED_V1403 · 2026-10-18
+ * The restored Frauen original hero is never moved or hidden. Its existing
+ * background custom property, title and heading are left intact. The photo
+ * and search become independent sticky siblings aligned by measured height.
+ * Other route height values are measured by adult-hero-height-runtime-v1403.
+ */
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-shell,.frauen-library-list) > .frauen-library-hero{
+  position:sticky!important;
+  top:0!important;
+  z-index:64!important;
+  isolation:isolate!important;
+  width:100vw!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-left:calc(50% - 50vw)!important;
+  margin-right:0!important;
+  margin-bottom:0!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-shell,.frauen-library-list) > :is(
+   .frauen-library-search-wrap,.frauen-library-list-controls
+ ){
+  position:sticky!important;
+  top:max(0px,calc(var(--dar-immersive-hero-height,220px) - 22px))!important;
+  z-index:65!important;
+  width:calc(100% - 8px)!important;
+  max-width:920px!important;
+  margin:-22px auto 0!important;
+  padding:5px 0 9px!important;
+  background:var(--bg,#f4efec)!important;
+  border-radius:18px 18px 0 0!important;
+  box-shadow:none!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-shell,.frauen-library-list) > :is(
+ .frauen-library-search-wrap,.frauen-library-list-controls
+ )::before{
+  display:none!important;
+}
+/* Compact the typography/content, not the historical image or its
+ * categorical --frauen-hero-img mapping. Long headings grow naturally. */
+@media(max-width:699px){
+ html[data-theme] body.is-frauen-route #appView .frauen-library-hero__content{
+  padding:clamp(12px,2.1svh,20px) 17px clamp(14px,2.8svh,23px)!important;
+ }
+ html[data-theme] body.is-frauen-route #appView .frauen-library-hero h2{
+  font-size:clamp(27px,6.3vw,41px)!important;
+  line-height:1.06!important;
+ }
+ html[data-theme] body.is-frauen-route #appView .frauen-library-hero__subtitle{
+  font-size:13px!important;
+  margin-top:8px!important;
+  line-height:1.38!important;
+ }
+ html[data-theme] body.is-frauen-route #appView .frauen-library-hero__stats{
+  margin-top:8px!important;
+ }
+ html[data-theme] body.is-frauen-route #appView
+  :is(.frauen-library-shell,.frauen-library-list):focus-within >
+  :is(.frauen-library-search-wrap,.frauen-library-list-controls){
+   position:relative!important;top:auto!important;
+  }
+}
+@media(max-height:540px) and (orientation:landscape){
+ html[data-theme] body.is-frauen-route #appView
+  :is(.frauen-library-shell,.frauen-library-list) > :is(
+  .frauen-library-search-wrap,.frauen-library-list-controls
+  ){top:max(0px,calc(var(--dar-immersive-hero-height,170px) - 15px))!important;}
+}
