@@ -11,7 +11,7 @@ const PRAYERS=[["fajr","Fajr"],["dhuhr","Ẓuhr"],["asr","ʿAṣr"],["maghrib","
 const $=id=>document.getElementById(id);
 const get=k=>{try{return localStorage.getItem(k)}catch(_){return null}};
 const set=(k,v)=>{try{localStorage.setItem(k,v)}catch(_){}};
-const nativeAvailable=()=>Boolean(window.DAR_KIDS_TEST_CONTAINER && window.webkit?.messageHandlers?.darKidsVisitorNotifications);
+const nativeAvailable=()=>Boolean(window.DAR_KIDS_IOS_APP && !window.DAR_KIDS_TEST_CONTAINER && window.webkit?.messageHandlers?.darKidsVisitorNotifications);
 let nativePermission="unknown", opened=false, focused=null, selectedCity=null, heading=null, compassListener=null, seq=0, inputTimer=null;
 function defaults(){return{channels:{prayer:false,learning:false,quiz:false,content:false},prayers:{fajr:true,dhuhr:true,asr:true,maghrib:true,isha:true},advance:0}}
 function load(){
