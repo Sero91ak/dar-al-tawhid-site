@@ -21,6 +21,17 @@ enum KidsPushNotifications {
     private static let ageGroupKey = "dar.kids.push.parent.age.v1"
     private static var didBootstrap = false
     private static let clickListener = KidsPushClickListener()
+    private static var pendingNotificationURL: URL?
+
+    static func takePendingNotificationURL() -> URL? {
+        defer { pendingNotificationURL = nil }
+        return pendingNotificationURL
+    }
+
+    static func recordNotificationOpen(_ url: URL) {
+        pendingNotificationURL = url
+        NotificationCenter.default.post(name: .kidsOpenPush, object: url)
+    }
 
     static var parentEnabled: Bool {
         UserDefaults.standard.bool(forKey: parentOptInKey)
@@ -143,10 +154,7 @@ final class KidsPushClickListener: NSObject, OSNotificationClickListener {
               let url = URL(string: urlString),
               KidsAppShell.isKidsURL(url) else { return }
         DispatchQueue.main.async {
-            NotificationCenter.default.post(
-                name: .kidsOpenPush,
-                object: url
-            )
+            KidsPushNotifications.recordNotificationOpen(url)
         }
     }
 }
