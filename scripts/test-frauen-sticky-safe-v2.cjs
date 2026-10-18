@@ -55,7 +55,8 @@ function measured(){
    await page.screenshot({path:path.join(output,cfg.name+"-before.png")});
    await page.addStyleTag({content:css});
    await page.addScriptTag({content:script});
-   await page.waitForTimeout(220);
+   await page.waitForFunction(()=>!!document.querySelector("#appView [data-dar-frauen-sticky-safe='1']"),null,{timeout:4500});
+   await page.waitForTimeout(170);
    const ready=await page.evaluate(measured);
    assert.equal(ready.shellOptIn,"1",cfg.name+": no opt-in measured "+JSON.stringify(ready).slice(0,1400));
    assert.equal(ready.hero.position,"sticky",cfg.name+": background not sticky");
