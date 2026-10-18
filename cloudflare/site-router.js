@@ -271,7 +271,7 @@ function browserManifestResponse(request, androidBrowser = false) {
  * Do not append the historical DOM-reparenting Frauen immersive adapter. */
 function adultCompactHeroAddon() {
   return '<link rel="stylesheet" id="darAdultHeroCompactEdgeV1403" href="/assets/adult-responsive-viewport-v1381.css?v=visitor-hero-v1403-20261018">' +
-    '<script defer id="darAdultHeroHeightRuntimeV1403" src="/assets/adult-hero-height-runtime-v1403.js?v=visitor-hero-v1403-20261018"><\\/script>';
+    '<script defer id="darAdultHeroHeightRuntimeV1403" src="/assets/adult-hero-height-runtime-v1403.js?v=visitor-hero-v1403-20261018"></' + 'script>';
 }
 function activateAdultCompactHero(html) {
   if (typeof html !== "string") return html;
