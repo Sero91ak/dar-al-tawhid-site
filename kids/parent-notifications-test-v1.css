@@ -66,3 +66,6 @@ html[data-kids-boot-gender="girl"] #kidsTestSettingsSheet .kn-panel{background:l
 @media (min-width:750px){#kidsTestSettingsSheet{align-items:center}#kidsTestSettingsSheet .kn-panel{border-radius:27px;height:min(84dvh,900px)}}
 @media (max-width:380px){#kidsTestSettingsSheet .kn-qibla-dial{width:98px;height:98px}#kidsTestSettingsSheet .kn-qibla-arrow{font-size:48px}#kidsTestSettingsSheet .kn-prayer{gap:6px}}
 @media (prefers-reduced-motion:reduce){#kidsTestSettingsSheet .kn-qibla-arrow{transition:none!important}}
+
+/* In live-sensor mode the dial is relative to the handset: north is no longer fixed at the top. */
+#kidsTestSettingsSheet .kn-qibla-dial.is-live:before{display:none}
