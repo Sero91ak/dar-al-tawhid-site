@@ -8,11 +8,11 @@ if(window.__DAR_TEST_HOME_V3)return;
 window.__DAR_TEST_HOME_V3=true;
 const THEMES=[["light","Hell"],["soft","Sanft Elegant"],["eisgold","Eisgold"],["salbei","Salbei Elfenbein"],["dark","Klassisch Dunkel"],["royal","Royal Nachtblau"],["bordeaux","Bordeaux Royal"],["dar-al-layl","Dār al-Layl"]];
 const LINKS=[
- ["bibliothek","Bibliothek","Eigene PDFs und Schriften","▥"],
- ["books","Quellenbibliothek","Klassische Werke","▤"],
- ["scholars","Gelehrte","Salaf und Imāme","♙"],
+ ["quran","Qurʾān","Lesen & suchen","▤"],
+ ["books","Quellenbibliothek","Originalwerke","▥"],
+ ["bibliothek","DĀR AL TAWḤĪD","PDF-Bibliothek","▤"],
+ ["scholars","Gelehrte","Imāme & Salaf","♙"],
  ["duas","Duʿāʾ","Authentische Bittgebete","✧"],
- ["quran","Qurʾān","Lesen und Tafsīr","۞"],
  ["hadith","Ḥadīṯ","Sunnah und Überlieferungen","◈"],
  ["frauen","Frauenbereich","Wissen und Fiqh","❀"],
  ["propheten","Propheten","Geschichten und Lehren","✦"],
@@ -28,16 +28,16 @@ const nativeNav=(name,val)=>{
 };
 function isHome(){return !!(document.body&&document.body.classList.contains("is-home-route"))}
 function make(){
-const quick=LINKS.slice(0,4).map((x,i)=>'<button type="button" class="dv3-quick" data-dv3-nav="'+x[0]+'"><span class="dv3-quick-icon">'+icon(["library","library","scholars","dua"][i])+'</span><span><b>'+esc(x[1])+'</b><small>'+esc(x[2])+'</small></span></button>').join("");
-const more=LINKS.slice(4).map((x,i)=>'<button class="dv3-more-link" type="button" data-dv3-nav="'+esc(x[0])+'"><span class="dv3-mini-ico">'+icon(["quran","hadith","frauen","prophets","quiz","prayer"][i])+'</span><span>'+esc(x[1])+'</span><b aria-hidden="true">→</b></button>').join("");
+const quick=LINKS.slice(0,4).map((x,i)=>'<button type="button" class="dv3-quick" data-dv3-nav="'+x[0]+'"><span class="dv3-quick-icon">'+icon(["quran","library","library","scholars"][i])+'</span><span><b>'+esc(x[1])+'</b><small>'+esc(x[2])+'</small></span></button>').join("");
+const more=LINKS.slice(4).map((x,i)=>'<button class="dv3-more-link" type="button" data-dv3-nav="'+esc(x[0])+'"><span class="dv3-mini-ico">'+icon(["dua","hadith","frauen","prophets","quiz","prayer"][i])+'</span><span>'+esc(x[1])+'</span><b aria-hidden="true">→</b></button>').join("");
 const swatches=THEMES.map(([k,v])=>'<button type="button" data-dv3-theme="'+k+'" aria-pressed="false"><span class="dv3-color dv3-color--'+k+'"></span>'+esc(v)+'</button>').join("");
 return '<div id="dv3Home" class="dv3-home" data-v3-version="3.1">'+
   '<div class="dv3-hometitle"><div><small>WILLKOMMEN IM DĀR</small><h2>Startseite</h2></div><button class="dv3-accountlink" type="button" data-dv3-nav="account" aria-label="Konto öffnen oder registrieren">'+icon("lock")+'<span>Konto / Registrieren</span><b>→</b></button></div>'+
   '<div id="dv3Weather" class="dv3-weather" role="status" aria-live="polite">Wetterdaten werden geladen …</div>'+
-  '<div class="dv3-search-box"><label class="dv3-search-label" for="homeSearchInput"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7"/><path d="m16 16 5 5"/></svg></label><input id="homeSearchInput" type="search" autocomplete="off" enterkeyhint="search" placeholder="Beiträge, Gelehrte, Bücher durchsuchen …" aria-label="Beiträge, Gelehrte und Bücher suchen"><button type="button" id="dv3SearchClear" aria-label="Suche löschen" hidden>×</button></div>'+
-  '<button type="button" class="dv3-tawhid" data-dv3-nav="tawhid-guide"><span class="dv3-ornament" aria-hidden="true"></span><span class="dv3-kicker">GRUNDLAGEN DES GLAUBENS</span><strong>Tawḥīd &amp; ʿAqīdah</strong><span class="dv3-description">Den Glauben verstehen – mit Qurʾān, Sunnah und Aussagen der frühen Gelehrten.</span><span class="dv3-tawhid-footer">Zum Wissensbereich <b>→</b></span></button>'+
+  '<div class="dv3-search-box"><label class="dv3-search-label" for="homeSearchInput"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7"/><path d="m16 16 5 5"/></svg></label><input id="homeSearchInput" type="search" autocomplete="off" enterkeyhint="search" placeholder="Suche Wissen, Beiträge, Bücher, Gelehrte …" aria-label="Beiträge, Gelehrte und Bücher suchen"><button type="button" id="dv3SearchClear" aria-label="Suche löschen" hidden>×</button></div>'+
+  '<button type="button" class="dv3-tawhid" data-dv3-nav="tawhid-guide"><span class="dv3-ornament" aria-hidden="true"></span><span class="dv3-kicker">GRUNDLAGEN DES GLAUBENS</span><strong>Tawḥīd &amp; ʿAqīdah</strong><span class="dv3-description">Allah allein anbeten. Die Glaubensgrundlagen nach Qurʾān, Sunnah und dem Verständnis der Salaf.</span><span class="dv3-tawhid-footer">Bedeutung, Belege &amp; Quellen entdecken <b>→</b></span></button>'+
   '<section class="dv3-section" aria-labelledby="dv3LatestTitle"><div class="dv3-section-title"><h3 id="dv3LatestTitle">Neueste Beiträge</h3><button type="button" data-dv3-nav="recent">Alle lesen →</button></div><div id="dv3Latest" class="dv3-posts" aria-live="polite"><span>Beiträge werden geladen …</span></div></section>'+
-  '<section class="dv3-section" aria-labelledby="dv3QuickTitle"><div class="dv3-section-title"><h3 id="dv3QuickTitle">Schnellzugriff</h3><button type="button" data-dv3-nav="more">Alle Bereiche →</button></div><div class="dv3-quick-grid">'+quick+'</div><details class="dv3-more"><summary>Weitere Wissens- und App-Bereiche <span aria-hidden="true">⌄</span></summary><div class="dv3-more-grid">'+more+'</div></details></section>'+
+  '<section class="dv3-section" aria-labelledby="dv3QuickTitle"><div class="dv3-section-title"><h3 id="dv3QuickTitle">Schnellzugriff</h3><button type="button" data-dv3-nav="more">Alle Bereiche →</button></div><div class="dv3-quick-grid">'+quick+'</div><details class="dv3-more"><summary>Weitere Bereiche direkt öffnen <span aria-hidden="true">＋</span></summary><div class="dv3-more-grid">'+more+'</div></details></section>'+
   '<section class="dv3-bottom"><div id="dv3QuranSlot"></div><div class="dv3-bottom-row"><button data-dv3-nav="calendar" type="button">Kalender &amp; Hijrī-Datum →</button><button data-dv3-nav="settings" type="button">Einstellungen →</button></div></section>'+
   '<div id="dv3ThemePanel" class="dv3-theme-panel" hidden role="dialog" aria-label="Erscheinungsbild wählen"><div><strong>Erscheinungsbild</strong><button type="button" data-dv3-close aria-label="Schließen">×</button></div><div class="dv3-theme-grid">'+swatches+'</div></div>'+
 '</div>';
@@ -85,6 +85,13 @@ function rearrangeHeader(){
  }
  weatherNodes.forEach(n=>{if(n!==weather)n.remove()});
  if(weather&&prayer&&weather.previousElementSibling!==prayer)prayer.after(weather);
+ // Old home scripts wrote hardcoded images as inline background properties.
+ // Clear only the image properties; let the selected appearance theme own all colors.
+ [document.documentElement,document.body,document.querySelector(".top-shell"),h,document.getElementById("appView")].forEach(function(node){
+   if(!node||!node.style)return;
+   const pic=node.style.getPropertyValue("background-image")||"";
+   if(/url\s*\(/i.test(pic))node.style.removeProperty("background-image");
+ });
  const root=document.documentElement;
  root.classList.add("dar-home-v3");
 }
