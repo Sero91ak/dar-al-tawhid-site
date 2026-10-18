@@ -36,7 +36,7 @@ export default {
           !Number.isFinite(lon) || Math.abs(lon) > 180 ||
           !Number.isFinite(angle) || angle < 1 || angle > 30 ||
           ![1, 2].includes(asr) || !tz || tz.length > 80 ||
-          !/^\\d{4}-\\d{2}-\\d{2}$/.test(date)) {
+          !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
         return textResponse("Invalid prayer time query", 400);
       }
       const upstream = new URL("https://dar-admin-publisher.sero91ak.workers.dev/api/prayer/times");
