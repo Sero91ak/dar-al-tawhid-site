@@ -4,13 +4,14 @@
   // or replacement of the protected historical Frauen renderer.
   if(global.__DAR_FRAUEN_STICKY_SAFE_V2_ACTIVE)return;
   global.__DAR_FRAUEN_STICKY_SAFE_V2_ACTIVE=true;
-  var observing=null,lastHero=null,frame=0;
+  var observing=null,lastHero=null,frame=0,domObserver=null;
   function unwatch(){
     if(observing){observing.disconnect();observing=null;}
     lastHero=null;
   }
   function apply(){
     frame=0;
+    watchApp();
     var app=document.getElementById("appView");
     var active=document.body&&document.body.classList.contains("is-frauen-route");
     if(!app||!active){unwatch();return;}
@@ -39,6 +40,14 @@
     }
   }
   function queue(){if(frame)return;frame=(global.requestAnimationFrame||setTimeout)(apply);}
+  function watchApp(){
+    var app=document.getElementById("appView");
+    if(!app||domObserver)return;
+    domObserver=new MutationObserver(queue);
+    // Reconcile after route rerenders that rebuild #appView children.
+    // Our own style/attribute writes do not create childList mutations.
+    domObserver.observe(app,{childList:true});
+  }
   document.addEventListener("dar:frauen-render",queue);
   global.addEventListener("hashchange",queue);
   global.addEventListener("resize",queue,{passive:true});
