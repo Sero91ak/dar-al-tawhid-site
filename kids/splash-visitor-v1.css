@@ -113,4 +113,4 @@ html.kids-visitor-booting body > :not(#kids-visitor-boot):not(script){visibility
 @media (prefers-reduced-motion:reduce){#kids-visitor-boot .ktb-fill{transition:none}#kids-visitor-boot.ktb-soft-fallback.ktb-transition-go{animation-duration:.16s}}
 
 /* The Visitor boot must stay completely absent in ordinary website/PWA and updated native shells. */
-html:not(.kids-visitor-booting) #kids-visitor-boot{display:none!important;visibility:hidden!important}
+html:not(.kids-visitor-booting) #kids-visitor-boot:not(.ktb-storybook):not(.ktb-soft-fallback){display:none!important;visibility:hidden!important}
