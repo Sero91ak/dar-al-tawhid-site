@@ -379,3 +379,184 @@
   document.addEventListener("dar:render",schedule);
   window.addEventListener("pageshow",boot);
 })();
+
+/* DAR LOCATION IN-PLACE V1 (2026-10-18): adult settings location detail only.
+   Capture existing controls before full-render handlers. Never reload, navigate,
+   replace #appView, or change Push, service worker, prayer calculation or other pages. */
+(function () {
+  "use strict";
+  if (window.__darLocationInPlaceV1) return;
+  window.__darLocationInPlaceV1 = true;
+  var requestId = 0;
+  var gpsBusy = false;
+  var choices = [];
+
+  function element(id) { return document.getElementById(id); }
+  function onLocationPage() {
+    return !!document.querySelector('#appView .dsh-detail[data-settings-page="location"] .dar-permission-location');
+  }
+  function current() {
+    try { return typeof getPrayerSettings === "function" ? getPrayerSettings() || {} : {}; }
+    catch (e) { return {}; }
+  }
+  function save(value) {
+    if (typeof setPrayerSettings !== "function") throw new Error("prayer_settings_unavailable");
+    setPrayerSettings(value);
+    return current();
+  }
+  function feedback(text) {
+    var el = element("darLocationFeedback");
+    if (!el) return;
+    el.textContent = text || "";
+    el.hidden = !text;
+  }
+  function paint(s) {
+    s = s || current();
+    var city = element("darPermissionCityText");
+    if (city) city.textContent = (s.city || "Ort wird ermittelt …") + (s.locationMode === "auto" ? " · GPS automatisch" : " · Stadt manuell");
+    try { if (typeof updateHeaderPrayerStatus === "function") updateHeaderPrayerStatus(); } catch (e) {}
+    try { if (typeof updatePrayerCountdowns === "function") updatePrayerCountdowns(); } catch (e) {}
+    try { window.dispatchEvent(new CustomEvent("dar:location-updated", {detail:{mode:s.locationMode,city:s.city}})); } catch (e) {}
+  }
+  function validCoords(lat, lon) {
+    return Number.isFinite(lat) && Number.isFinite(lon) && lat >= -90 && lat <= 90 && lon >= -180 && lon <= 180;
+  }
+  function stopNativeEvent(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    event.stopImmediatePropagation();
+  }
+  async function detectLocation() {
+    if (gpsBusy) return;
+    var button = element("notificationDetectLocationBtn");
+    gpsBusy = true;
+    var serial = ++requestId;
+    if (button) { button.disabled = true; button.textContent = "Standort wird ermittelt …"; }
+    feedback("");
+    try {
+      if (typeof requestBrowserPosition !== "function") throw new Error("geo_unavailable");
+      var pos = await requestBrowserPosition();
+      var lat = Number(pos && pos.coords && pos.coords.latitude);
+      var lon = Number(pos && pos.coords && pos.coords.longitude);
+      if (!validCoords(lat, lon)) throw new Error("invalid_gps");
+      var old = current();
+      var closeToOld = validCoords(Number(old.lat), Number(old.lon)) &&
+        Math.abs(Number(old.lat)-lat) < .003 && Math.abs(Number(old.lon)-lon) < .003;
+      var city = old.locationMode === "auto" && closeToOld && old.city && !/^(Ort wird|Ortsname|Aktueller Standort)/.test(old.city)
+        ? old.city : "Ort wird ermittelt …";
+      save({lat:lat,lon:lon,city:city,locationMode:"auto",locationGranted:true,locationUpdatedAt:Date.now()});
+      paint();
+      try { if (typeof darGpsStartWatch === "function") darGpsStartWatch(); } catch (e) {}
+      var name = "";
+      try { if (typeof reversePrayerCity === "function") name = await reversePrayerCity(lat, lon); } catch (e) {}
+      if (serial !== requestId || current().locationMode !== "auto") return;
+      var now = current();
+      if (!validCoords(Number(now.lat),Number(now.lon)) || Math.abs(Number(now.lat)-lat) > .003 || Math.abs(Number(now.lon)-lon) > .003) return;
+      if (name && typeof name === "string" && name.trim()) {
+        if (now.city !== name.trim()) save({city:name.trim()});
+        paint();
+      } else if (now.city === "Ort wird ermittelt …") {
+        save({city:"Ortsname derzeit nicht verfügbar"});
+        paint();
+        feedback("GPS erkannt. Ortsname derzeit nicht verfügbar – bitte später erneut versuchen.");
+      }
+    } catch (err) {
+      var code = Number(err && err.code);
+      feedback(code === 1 ? "Standortzugriff nicht erlaubt. Bitte Standortfreigabe prüfen oder eine Stadt wählen." :
+        code === 3 ? "Standortbestimmung dauert zu lange. Bitte erneut versuchen." :
+        "Standort konnte nicht ermittelt werden. Bitte GPS prüfen oder eine Stadt wählen.");
+    } finally {
+      gpsBusy = false;
+      var latest = element("notificationDetectLocationBtn");
+      if (latest) { latest.disabled = false; latest.textContent = "Standort erkennen"; }
+    }
+  }
+  function toggleManual() {
+    var panel = element("darManualCityPanel"), button = element("notificationManualCityToggle");
+    if (!panel || !button) return;
+    var open = panel.hidden;
+    panel.hidden = !open;
+    button.setAttribute("aria-expanded", String(open));
+    if (open) {
+      var input = element("darManualCityInput");
+      if (input) { input.removeAttribute("readonly"); input.focus({preventScroll:true}); }
+    } else { ++requestId; }
+  }
+  function showChoices(items) {
+    var root = element("darCityResults");
+    if (!root) return;
+    choices = items;
+    root.replaceChildren();
+    root.hidden = false;
+    if (!items.length) { root.textContent = "Kein passender Ort gefunden. Bitte Stadt oder PLZ genauer eingeben."; return; }
+    items.forEach(function (item, i) {
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "dar-city-search-result";
+      button.dataset.darCityIndex = String(i);
+      button.textContent = item.label || [item.city,item.postcode,item.region].filter(Boolean).join(" · ");
+      root.appendChild(button);
+    });
+  }
+  async function searchCities() {
+    var input = element("darManualCityInput"), button = element("darManualCitySaveBtn");
+    if (!input) return;
+    var query = String(input.value || "").trim();
+    if (query.length < 2) { feedback("Bitte mindestens zwei Zeichen oder eine gültige PLZ eingeben."); return; }
+    var serial = ++requestId;
+    feedback("");
+    if (button) { button.disabled = true; button.textContent = "Suche …"; }
+    try {
+      if (typeof searchPrayerCities !== "function") throw new Error("city_lookup_unavailable");
+      var items = await searchPrayerCities(query);
+      if (serial !== requestId || !input.isConnected || !element("darManualCityPanel") || element("darManualCityPanel").hidden) return;
+      showChoices(Array.isArray(items) ? items.filter(function (x) {return validCoords(Number(x.lat), Number(x.lon));}) : []);
+      if (items && items.length) feedback("Bitte die passende Stadt aus der Liste auswählen.");
+    } catch (e) {
+      if (serial === requestId) feedback("Stadtsuche momentan nicht erreichbar. Bitte erneut suchen.");
+    } finally {
+      var latest = element("darManualCitySaveBtn");
+      if (latest) { latest.disabled = false; latest.textContent = "Suchen"; }
+    }
+  }
+  function chooseCity(index) {
+    var item = choices[index];
+    if (!item || !validCoords(Number(item.lat),Number(item.lon))) return;
+    ++requestId;
+    try {
+      if (typeof darGpsStopWatch === "function") darGpsStopWatch();
+      var updated = save({city:String(item.city),lat:Number(item.lat),lon:Number(item.lon),locationMode:"manual",locationGranted:true,locationUpdatedAt:Date.now()});
+      paint(updated);
+      feedback("Standort gespeichert: " + item.city);
+      var panel = element("darManualCityPanel"), toggle = element("notificationManualCityToggle");
+      if (panel) panel.hidden = true;
+      if (toggle) toggle.setAttribute("aria-expanded", "false");
+      choices = [];
+    } catch (e) { feedback("Stadt konnte nicht gespeichert werden. Bitte erneut versuchen."); }
+  }
+  document.addEventListener("click", function (event) {
+    if (!onLocationPage() || !event.target || !event.target.closest) return;
+    var opt = event.target.closest("#darCityResults [data-dar-city-index]");
+    if (opt) { stopNativeEvent(event); chooseCity(Number(opt.dataset.darCityIndex)); return; }
+    var gps = event.target.closest("#notificationDetectLocationBtn");
+    if (gps) { stopNativeEvent(event); void detectLocation(); return; }
+    var manual = event.target.closest("#notificationManualCityToggle");
+    if (manual) { stopNativeEvent(event); toggleManual(); }
+  }, true);
+  document.addEventListener("submit", function (event) {
+    if (!onLocationPage() || !event.target || event.target.id !== "darManualCityPanel") return;
+    stopNativeEvent(event);
+    void searchCities();
+  }, true);
+  document.addEventListener("keydown", function (event) {
+    if (!onLocationPage() || event.key !== "Enter" || event.isComposing || !event.target || event.target.id !== "darManualCityInput") return;
+    stopNativeEvent(event);
+    void searchCities();
+  }, true);
+  document.addEventListener("input", function (event) {
+    if (!onLocationPage() || !event.target || event.target.id !== "darManualCityInput") return;
+    ++requestId;
+    var list = element("darCityResults");
+    if (list) { list.hidden = true; list.replaceChildren(); }
+  }, true);
+})();
