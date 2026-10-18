@@ -1,9 +1,9 @@
-/* KIDS_VISITOR_PARENT_SETTINGS_V1: creator staging only. No live OneSignal sends. */
+/* KIDS_VISITOR_PARENT_SETTINGS_V1: visitor web UI; local reminders need signed native build. No OneSignal send until parent enrollment. */
 (function(){
 "use strict";
 const VISITOR_HOSTS=new Set(["dar-al-tawhid.de","www.dar-al-tawhid.de"]);
 if(!VISITOR_HOSTS.has(location.hostname)||!location.pathname.startsWith("/kids/")||window.DAR_KIDS_TEST_CONTAINER===true)return;
-if(window.DARKidsTestNotificationSettings)return;
+if(window.DARKidsVisitorNotificationSettings)return;
 const PREF="kids.visitor.notify.preferences.v1",SEEN="kids.visitor.notify.welcome.v1",QIBLA="kids.visitor.qibla.place.v1";
 const PRAYER_PLACE="darkids_kids_prayer_place_v1",PRAYER_CACHE="darkids_kids_prayer_days_v1";
 const CHANNELS=[["prayer","Fünf Gebete","Gebetszeiten individuell auswählen"],["learning","Lernen fortsetzen","An begonnene Lerneinheiten erinnern"],["quiz","Quiz fortsetzen","Unterbrochene Quizrunden"],["content","Neue Inhalte","Geschichten und Lernangebote"]];
@@ -22,7 +22,7 @@ function load(){
  }catch(_){}
  return d;
 }
-function save(s){set(PREF,JSON.stringify(s));window.dispatchEvent(new Event("kids-test-notification-preferences-changed"));nativeSchedule()}
+function save(s){set(PREF,JSON.stringify(s));window.dispatchEvent(new Event("kids-visitor-notification-preferences-changed"));nativeSchedule()}
 function element(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e}
 function message(txt){if($("knStatus"))$("knStatus").textContent=txt}
 function deviceMessage(action){
@@ -31,7 +31,7 @@ function deviceMessage(action){
 }
 function permissionStatus(){
  if(!nativeAvailable())return "Browser-Vorschau: Die Systemfreigabe benötigt eine aktualisierte native iOS-App.";
- if(nativePermission==="granted")return "iOS: Lokale Testmitteilungen sind auf diesem Gerät erlaubt.";
+ if(nativePermission==="granted")return "iOS: Lokale Mitteilungen sind auf diesem Gerät erlaubt.";
  if(nativePermission==="denied")return "iOS: Benachrichtigungen sind in den Systemeinstellungen gesperrt.";
  if(nativePermission==="notDetermined")return "iOS: Die Benachrichtigungsfreigabe wurde noch nicht angefragt.";
  return "iOS-Berechtigungsstatus wird geprüft …";
@@ -222,7 +222,7 @@ function init(){
  '<div class="kn-top"><div><small>TAWḤĪD KIDS · ELTERNBEREICH</small><h2 id="knTitle">Mitteilungen &amp; Qibla</h2></div><button id="knClose" class="kn-close" type="button" aria-label="Schließen">×</button></div>',
  '<div class="kn-body"><div class="kn-hero"><strong>Ein ruhiger Rhythmus für dein Kind</strong><p>Eltern entscheiden, an welche Gebete, Lernschritte und Inhalte erinnert werden soll. Alles ist freiwillig.</p></div>',
  '<p id="knPermissionState" class="kn-status" role="status">iOS-Berechtigung wird geprüft …</p>',
- '<div class="kn-controls"><button id="knPermissionRequest" class="kn-btn kn-btn-primary" type="button">Benachrichtigungen erlauben</button><button id="knSendTest" class="kn-btn" type="button">Testmitteilung</button><button id="knOpenSettings" class="kn-btn" type="button" hidden>iOS-Einstellungen</button></div>',
+ '<div class="kn-controls"><button id="knPermissionRequest" class="kn-btn kn-btn-primary" type="button">Benachrichtigungen erlauben</button><button id="knSendTest" class="kn-btn" type="button">Prüfmitteilung</button><button id="knOpenSettings" class="kn-btn" type="button" hidden>iOS-Einstellungen</button></div>',
  '<p id="knStatus" class="kn-status" role="status">Einstellungen sind gespeichert. Der Empfang auf iOS wird nach einer nativen App-Aktualisierung verfügbar.</p>',
  '<div class="kn-section"><h3>Welche Erinnerungen?</h3><p>Alle Kategorien sind einzeln wählbar.</p><div id="knChannels"></div></div>',
  '<div class="kn-section" id="knPrayerSettings"><h3>Gebetszeiten · fünf Gebete</h3><p id="knPrayerPlace">Gebetsort wählen</p>',
@@ -273,8 +273,8 @@ function init(){
   else message("iOS-Berechtigungen können nur in der nativen KIDS-Besucher-App angefordert werden.");
  });
  $("knSendTest").addEventListener("click",()=>{
-  if(deviceMessage("test"))message("Lokale Testmitteilung angefordert.");
-  else message("Für die Testmitteilung den aktualisierten nativen App öffnen.");
+  if(deviceMessage("test"))message("Lokale Prüfmitteilung angefordert.");
+  else message("Für die Prüfmitteilung den aktualisierten nativen App öffnen.");
  });
  $("knOpenSettings").addEventListener("click",()=>deviceMessage("openSettings"));
  $("knPrayerLocation").addEventListener("click",()=>{
@@ -305,7 +305,7 @@ function init(){
  });
  refreshSummary();refreshPrayers();refreshQibla();refreshPermission();setupWelcome();
  window.addEventListener("pageshow",()=>{if(nativeAvailable()){deviceMessage("status");nativeSchedule()}});
- window.DARKidsTestNotificationSettings={open,close,getPreferences:load,qiblaBearing:(lat,lon)=>qiblaBearing({lat,lon})};
+ window.DARKidsVisitorNotificationSettings={open,close,getPreferences:load,qiblaBearing:(lat,lon)=>qiblaBearing({lat,lon})};
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
 })();
