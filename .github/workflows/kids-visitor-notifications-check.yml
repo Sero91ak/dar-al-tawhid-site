@@ -1,0 +1,35 @@
+name: Kids Visitor Notification UI Safety
+
+on:
+  pull_request:
+    paths:
+      - 'kids/index.html'
+      - 'kids/start.html'
+      - 'kids/shell.html'
+      - 'kids/parent-notifications-visitor-v1.js'
+      - 'kids/parent-notifications-visitor-v1.css'
+      - 'kids/tools/test-kids-visitor-notifications-v1.cjs'
+      - 'ios/DarAlTawhidKids/DarAlTawhidKids/KidsWebAppView.swift'
+      - '.github/workflows/kids-visitor-notifications-check.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verified-visitor-interface:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate JavaScript and visitor-only integration
+        run: |
+          node --check kids/parent-notifications-visitor-v1.js
+          node --check kids/tools/test-kids-visitor-notifications-v1.cjs
+          node kids/tools/test-kids-visitor-notifications-v1.cjs
+      - name: Confirm no automatic adult or test release
+        run: |
+          test -s kids/parent-notifications-visitor-v1.css
+          ! grep -q 'OneSignal.initialize' kids/parent-notifications-visitor-v1.js
+          ! grep -q 'api.onesignal.com' kids/parent-notifications-visitor-v1.js
+          echo "Visitor settings verified; no native build or production deployment performed."
