@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "mode": "ONE_TIME_V4_ONLY_NEVER_REPEAT",
+  "app": "TAWḤĪD KIDS",
+  "scope": "ONLY_FIRST20_OLDER_EXACT_NEW_ORIGINALS_REVIEW_NOT_LIVE",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "approvedExactBatchSha256": "f9c2fc30cb48292c3b9bcf7eadae9bcdefcea2673a2005321c3937a11fb2329a",
+  "maxNewOriginals": 10,
+  "maxEstimatedCredits": 300,
+  "reuseExistingOriginalsFirst": true,
+  "publicRelease": false,
+  "approvalContext": "User instructed to accelerate V4-only MP3 creation using existing ElevenLabs credits; one bounded 10-take test batch, without resynthesizing paid originals.",
+  "onProviderUncertainty": "STOP_AND_RECONCILE_NO_REBUY",
+  "onQaError": "Preserve original MP3, SHA and expense ledger before rerunning any free assembly."
+}
