@@ -111,6 +111,46 @@ def main():
         zip_fixture(forged,extra,new_ledger,usage)
         expected_blocked(lambda:recover.import_backup(forged,work,apply=True),
                          "new billed MP3 without actual recorded bytes")
+        # Crash after remote pre-POST receipt but after the provider has
+        # actually supplied original MP3 bytes: a recovered authentic saved
+        # receipt MUST be accepted without buying the voice again.
+        stage_paid=[x for x in ledger["rows"] if x.get("batchId")==recover.BATCH]
+        must(bool(stage_paid),"missing actual previously billed stage1 originals")
+        receipt=stage_paid[0]
+        original_recorded=next(x for x in registry["textClips"].values()
+                               if x.get("textSha256")==receipt["textSha256"])
+        pending_before={"textSHA256":receipt["textSha256"],
+                        "batchId":recover.BATCH,
+                        "startedAt":"2026-10-17T00:00:00+00:00",
+                        "status":"REQUEST_STARTED_UNCONFIRMED"}
+        recovered_now=dict(pending_before)
+        recovered_now.update({"status":"ORIGINAL_MP3_SAVED",
+                              "mp3SHA256":receipt["mp3Sha256"],
+                              "providerRequestId":receipt["providerRequestId"]})
+        local_pending=copy.deepcopy(usage)
+        local_pending["requestJournal"]["entries"]=[pending_before]
+        write(work/recover.USAGE,local_pending)
+        recovered_usage=copy.deepcopy(usage)
+        recovered_usage["requestJournal"]["entries"]=[recovered_now]
+        successful=Path(temp)/"old-paid-post-finished-in-provider.zip"
+        zip_fixture(successful,registry,ledger,recovered_usage)
+        restored_after_crash=recover.import_backup(successful,work,apply=True)
+        must(restored_after_crash["newlyRecoveredRealOriginalMP3s"]==0
+             and not restored_after_crash["unconfirmedPriorPaidRequests"],
+             "provider-paid original cannot complete checkpoint upgrade")
+        must(recover.read(work/recover.USAGE)["requestJournal"]["entries"]==
+             [recovered_now] and
+             original_recorded["sha256"]==receipt["mp3Sha256"],
+             "remote pending original request was not reconciled with exact saved MP3")
+        changed_receipt=copy.deepcopy(recovered_usage)
+        changed_receipt["requestJournal"]["entries"][0]["providerRequestId"]="WRONG-PAID-RECEIPT"
+        tampered_provider=Path(temp)/"fake-provider-receipt.zip"
+        zip_fixture(tampered_provider,registry,ledger,changed_receipt)
+        expected_blocked(lambda:recover.import_backup(tampered_provider,work,apply=True),
+                         "tampered provider request ID must never upgrade a paid original")
+        # Reset the isolated sandbox usage for older negative fixture tests.
+        write(work/recover.USAGE,usage)
+
         # Strictly forbid path traversal in an Actions archive.
         traversal=Path(temp)/"unsafe-paths.zip"
         with zipfile.ZipFile(traversal,"w") as z:
