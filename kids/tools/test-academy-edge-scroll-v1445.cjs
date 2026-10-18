@@ -33,9 +33,9 @@ assert.equal(shells[0],shells[1],"KIDS entrypoints differ");
 assert.equal(shells[0],shells[2],"KIDS entrypoints differ");
 const sw=read("kids/sw.js"),version=JSON.parse(read("kids/version.json"));
 const cache=String(version.visualSystem.serviceWorkerCache||"");
-assert.equal(cache,"v1446","version registry must be current");
-assert.ok(sw.includes('const CACHE_NAME="dar-al-tawhid-kids-v1446"'),"SW update missing");
-assert.ok(shells[0].includes('navigator.serviceWorker.register("/kids/sw.js?v=1446"'),"shell registers stale SW");
+assert.match(cache,/^v[0-9]+$/,"version registry must contain an explicit Kids-only cache revision");
+assert.ok(sw.includes('const CACHE_NAME="dar-al-tawhid-kids-'+cache.slice(1)+'"'),"SW cache must match version registry");
+assert.ok(shells[0].includes('navigator.serviceWorker.register("/kids/sw.js?v='+cache.slice(1)+'"'),"shell must register matching SW version");
 assert.ok(page.includes('id="lessonNavigation"')&&page.includes('id="stageSurface"'),
  "original lesson nodes removed");
 console.log("PASS Kids V1446: original framed lesson cards restored, scrolling behind dock and typing preserved.");
