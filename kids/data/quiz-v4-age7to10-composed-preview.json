@@ -263,6 +263,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Das merken wir uns: Allah verbietet verletzende Spitznamen und Herabsetzung.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/c8d864eab67d651dc8b6541e45f84766f8a6fca5.mp3",
+      "sha256": "67eae2919f9f3a7a9bef5c5b2b30b7860a666c6b11c4dfd552b4654ad4df5dc2",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Das merken wir uns: Allah befahl dem Feuer, kühl und sicher für Ibrāhīm zu sein.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a11d1b23755248071b57d5a60f7d193e219fae8a.mp3",
       "sha256": "c61f2aa3ee6289f039deb2d6ebdc77ee9bab0c44fdbbdbbb370886176ce55c91",
@@ -1207,10 +1218,10 @@
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/vTRh2ZkXhF0R0jOplwKS.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah verbietet verletzende Spitznamen und Herabsetzung."
-          ]
+          "available": true,
+          "textSha256": "079c8c35ffabfddef679d78779cc558595a4205facd61ffc81c57b82f0e57d0e",
+          "mp3Sha256": "67eae2919f9f3a7a9bef5c5b2b30b7860a666c6b11c4dfd552b4654ad4df5dc2",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/c8d864eab67d651dc8b6541e45f84766f8a6fca5.mp3"
         }
       },
       "allFourPartsAvailable": false
