@@ -1,6 +1,24 @@
 <!doctype html>
 <html lang="de">
 <head>
+<!-- KIDS VISITOR iOS only · illustrated boot, same approved TEST artwork -->
+<script id="kids-visitor-boot-guard">(function(){var active=window.DAR_KIDS_IOS_APP===true&&!window.DAR_KIDS_NATIVE_START;window.__DAR_KIDS_VISITOR_SPLASH_ACTIVE__=active;if(active){document.documentElement.classList.add("kids-visitor-booting");setTimeout(function(){if(!window.__KIDS_VISITOR_SPLASH_1__){document.documentElement.classList.remove("kids-visitor-booting");var e=document.getElementById("kids-visitor-boot");if(e)e.remove();}},10000);}})();</script>
+<style id="kids-visitor-first-frame">
+html.kids-visitor-booting,html.kids-visitor-booting body{margin:0;background:#07152f!important;overflow:hidden!important;color-scheme:dark}
+html.kids-visitor-booting body>:not(#kids-visitor-boot):not(script){visibility:hidden!important}
+#kids-visitor-boot{display:none!important}
+html.kids-visitor-booting #kids-visitor-boot{position:fixed!important;inset:0!important;z-index:2147483645!important;display:flex!important;align-items:center;justify-content:center;overflow:hidden;background:#07152f!important;visibility:visible!important;color:#fff5d8;text-align:center;font-family:system-ui,sans-serif}
+#kids-visitor-boot .ktb-poster{position:relative;width:min(100vw,56.25dvh);height:100dvh;overflow:hidden;background:#07152f url("/kids/assets/kids-splash-20261017-v1.jpg") center/cover no-repeat}
+#kids-visitor-boot .ktb-loading{position:absolute;top:81%;left:7%;width:86%;z-index:2}
+#kids-visitor-boot .ktb-progress-labels{display:grid;grid-template-columns:28px 1fr 44px;gap:7px;align-items:center}
+#kids-visitor-boot .ktb-track{height:30px;border-radius:99px;border:2px solid #f3b83d;background:#002654;overflow:hidden;padding:3px}
+#kids-visitor-boot .ktb-fill{height:100%;width:0%;border-radius:99px;background:linear-gradient(#ffeda1,#e9a30c)}
+#kids-visitor-boot .ktb-percent{margin:7px 0 0;font-weight:900;font-size:29px;color:#ffd16a}
+#kids-visitor-boot .ktb-recover{display:none}
+</style>
+<link rel="preload" as="image" href="/kids/assets/kids-splash-20261017-v1.jpg">
+<link rel="stylesheet" href="/kids/splash-visitor-v1.css?v=20261018-1" media="print" onload="this.media='all'">
+<script defer src="/kids/splash-visitor-v1.js?v=20261018-1"></script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0c2636">
@@ -3070,6 +3088,12 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority{
 </style>
 </head>
 <body>
+<div id="kids-visitor-boot" role="region" aria-label="TAWḤĪD KIDS lädt">
+  <div class="ktb-poster"><div class="ktb-loading">
+    <div class="ktb-progress-labels"><span class="ktb-edge">0%</span><div class="ktb-track" role="progressbar" aria-label="Startvorbereitung" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="ktb-fill"></div></div><span class="ktb-edge">100%</span></div>
+    <p class="ktb-percent" aria-live="off">0%</p><p class="ktb-status" aria-live="polite"></p><button type="button" class="ktb-recover">App trotzdem öffnen</button>
+  </div></div><div class="ktb-reveal-glow" aria-hidden="true"></div>
+</div>
 <div id="kidsUpdateLayer" class="kids-update-layer">
   <div class="kids-update-card" role="dialog" aria-labelledby="kidsUpdateTitle" aria-describedby="kidsUpdateText">
     <div class="kids-update-scene"></div>
