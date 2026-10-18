@@ -3838,6 +3838,17 @@
       "providerRequestId": null,
       "exactBilledCredits": 11.62879295154185,
       "note": "Original generation already paid; GET-only recovery; NEVER charge a second TTS"
+    },
+    {
+      "batchId": "KIDS_V4_EXACT_EXISTING_FLOW_ORIGINAL",
+      "text": "Allah verbietet verletzende Spitznamen und Herabsetzung.",
+      "textSha256": "1297120edbe3afc43d40257bc1e38f86ee9ab09cbc9dec632df3f82964def014",
+      "estimatedCreditsAtObservedRate": 54.26770044052864,
+      "exactBilledCredits": null,
+      "mp3Sha256": "19b616c7824416448c5f78e074fc83a9f5c3b343e9150b295b2ebafbe8777a00",
+      "providerRequestId": "wjTEzoz7Sh4umDOSmKsZ",
+      "providerSessionId": "rGSa8au4ppceTWj2gRt4",
+      "note": "Existing completed eleven_v4 Flow original; NO NEW TTS POST"
     }
   ]
 }
