@@ -3,6 +3,7 @@ import UIKit
 import WebKit
 import AVFoundation
 import MediaPlayer
+import UserNotifications
 
 struct KidsWebAppView: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
@@ -17,6 +18,9 @@ struct KidsWebAppView: UIViewRepresentable {
         configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         configuration.userContentController.add(context.coordinator, name: "darKidsNowPlaying")
         configuration.userContentController.add(context.coordinator, name: "darKidsScreenAwake")
+#if !KIDS_CREATOR_TEST
+        configuration.userContentController.add(context.coordinator, name: "darKidsVisitorNotifications")
+#endif
 
 #if KIDS_CREATOR_TEST
         let officialMarker = ""
@@ -66,6 +70,9 @@ struct KidsWebAppView: UIViewRepresentable {
         webView.uiDelegate = context.coordinator
         webView.alpha = 1
 
+#if !KIDS_CREATOR_TEST
+        UNUserNotificationCenter.current().delegate = context.coordinator
+#endif
         context.coordinator.attach(webView)
         context.coordinator.loadKidsHome(in: webView)
         return webView
@@ -73,7 +80,7 @@ struct KidsWebAppView: UIViewRepresentable {
 
     func updateUIView(_ uiView: WKWebView, context: Context) {}
 
-    final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler {
+    final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler, UNUserNotificationCenterDelegate {
         private weak var webView: WKWebView?
         private var hasPresentedInitialPage = false
         private var remoteCommandsReady = false
@@ -82,6 +89,9 @@ struct KidsWebAppView: UIViewRepresentable {
         private var hasKidsNowPlaying = false
         private var currentDeepLink = ""
         private var readingKeepsScreenAwake = false
+#if !KIDS_CREATOR_TEST
+        private var kidsPrayerScheduleRevision = 0
+#endif
 #if KIDS_CREATOR_TEST
         private var pendingCreatorTab: String?
 #endif
@@ -117,6 +127,9 @@ struct KidsWebAppView: UIViewRepresentable {
             }
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsNowPlaying")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsScreenAwake")
+#if !KIDS_CREATOR_TEST
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsVisitorNotifications")
+#endif
         }
 
         func loadKidsHome(in webView: WKWebView) {
@@ -174,6 +187,9 @@ struct KidsWebAppView: UIViewRepresentable {
 #endif
 
         @objc private func appDidBecomeActive() {
+#if !KIDS_CREATOR_TEST
+            kidsVisitorNotifyStatus()
+#endif
             UIApplication.shared.isIdleTimerDisabled = readingKeepsScreenAwake
             guard hasKidsNowPlaying else { return }
             webView?.evaluateJavaScript(
@@ -193,6 +209,145 @@ struct KidsWebAppView: UIViewRepresentable {
                 UIApplication.shared.isIdleTimerDisabled = enabled
             }
         }
+
+#if !KIDS_CREATOR_TEST
+        private func kidsVisitorNotifyResponse(_ status: String, message: String? = nil) {
+            let detail: [String: String] = ["status": status, "message": message ?? ""]
+            guard let data = try? JSONSerialization.data(withJSONObject: detail),
+                  let json = String(data: data, encoding: .utf8) else { return }
+            DispatchQueue.main.async { [weak self] in
+                self?.webView?.evaluateJavaScript(
+                    "window.dispatchEvent(new CustomEvent('dar-kids-visitor-native-notifications',{detail:\(json)}))",
+                    completionHandler: nil
+                )
+            }
+        }
+
+        private func kidsVisitorNotifyStatus(_ message: String? = nil) {
+            UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
+                let name: String
+                switch settings.authorizationStatus {
+                case .authorized, .provisional, .ephemeral: name = "granted"
+                case .denied: name = "denied"
+                default: name = "notDetermined"
+                }
+                self?.kidsVisitorNotifyResponse(name, message: message)
+            }
+        }
+
+        private func handleKidsVisitorNotify(_ message: WKScriptMessage, body: [String: Any]) {
+            guard message.frameInfo.isMainFrame,
+                  ["dar-al-tawhid.de", "www.dar-al-tawhid.de"].contains(webView?.url?.host?.lowercased() ?? ""),
+                  webView?.url?.path.hasPrefix("/kids/") == true,
+                  let action = body["action"] as? String else { return }
+            let center = UNUserNotificationCenter.current()
+            switch action {
+            case "status":
+                kidsVisitorNotifyStatus()
+            case "request":
+                // The system prompt is only triggered by a parent's explicit button tap.
+                center.requestAuthorization(options: [.alert, .badge, .sound]) { [weak self] _, _ in
+                    self?.kidsVisitorNotifyStatus()
+                }
+            case "test":
+                center.getNotificationSettings { [weak self] settings in
+                    guard settings.authorizationStatus == .authorized ||
+                          settings.authorizationStatus == .provisional else {
+                        self?.kidsVisitorNotifyStatus("Zuerst iOS-Benachrichtigungen erlauben.")
+                        return
+                    }
+                    let content = UNMutableNotificationContent()
+                    content.title = "TAWḤĪD KIDS · Test"
+                    content.body = "Die lokale iOS-Benachrichtigung funktioniert."
+                    content.sound = .default
+                    let request = UNNotificationRequest(
+                        identifier: "kids.visitor.parent.test." + UUID().uuidString,
+                        content: content,
+                        trigger: UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                    )
+                    center.add(request) { [weak self] error in
+                        self?.kidsVisitorNotifyStatus(error == nil
+                            ? "Eine lokale Testmitteilung ist für fünf Sekunden später geplant."
+                            : "Die Testmitteilung konnte nicht eingerichtet werden.")
+                    }
+                }
+            case "syncSchedule":
+                // Creator-only local reminders, never APNs or OneSignal.
+                // Restrict notifications to real calculated timestamps, at most 48h.
+                let rows = body["schedule"] as? [[String: Any]] ?? []
+                guard rows.count <= 14 else { return }
+                var planned: [(id: String, request: UNNotificationRequest)] = []
+                let now = Date()
+                var calendar = Calendar(identifier: .gregorian)
+                calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+                let allowedKeys: Set<String> = ["fajr", "dhuhr", "asr", "maghrib", "isha"]
+                for row in rows {
+                    guard let key = row["key"] as? String,
+                          allowedKeys.contains(key),
+                          let day = row["day"] as? String,
+                          day.range(of: #"^\d{4}-\d{2}-\d{2}$"#, options: .regularExpression) != nil,
+                          let label = row["label"] as? String,
+                          let epoch = (row["epoch"] as? NSNumber)?.doubleValue,
+                          epoch.isFinite,
+                          let advance = (row["advance"] as? NSNumber)?.intValue,
+                          [0, 5, 10, 15, 30].contains(advance) else { continue }
+                    let time = Date(timeIntervalSince1970: epoch / 1000)
+                    guard time.timeIntervalSince(now) >= 60,
+                          time.timeIntervalSince(now) <= 48 * 3600 else { continue }
+                    let content = UNMutableNotificationContent()
+                    content.title = "TAWḤĪD KIDS · " + label
+                    content.body = advance == 0
+                        ? "Es ist Zeit für dein Gebet."
+                        : "In " + String(advance) + " Minuten beginnt dein Gebet."
+                    content.sound = .default
+                    var components = calendar.dateComponents(
+                        [.year, .month, .day, .hour, .minute], from: time)
+                    components.timeZone = TimeZone(secondsFromGMT: 0)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+                    let id = "kids.visitor.salah." + key + "." + day
+                    planned.append((
+                        id: id,
+                        request: UNNotificationRequest(
+                            identifier: id, content: content, trigger: trigger)
+                    ))
+                }
+                kidsPrayerScheduleRevision += 1
+                let revision = kidsPrayerScheduleRevision
+                center.getPendingNotificationRequests { [weak self] requests in
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self,
+                              self.kidsPrayerScheduleRevision == revision else { return }
+                        let old = requests.map(\.identifier).filter {
+                            $0.hasPrefix("kids.visitor.salah.")
+                        }
+                        center.removePendingNotificationRequests(withIdentifiers: old)
+                        for item in planned {
+                            center.add(item.request) { _ in }
+                        }
+                        self.kidsVisitorNotifyStatus(
+                            String(planned.count) +
+                            " lokale Gebetserinnerungen für die nächsten 48 Stunden geplant.")
+                    }
+                }
+            case "openSettings":
+                DispatchQueue.main.async {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+            default:
+                break
+            }
+        }
+
+        func userNotificationCenter(
+            _ center: UNUserNotificationCenter,
+            willPresent notification: UNNotification,
+            withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+        ) {
+            completionHandler([.banner, .list, .sound])
+        }
+#endif
 
         private func configurePlaybackSession() {
             let session = AVAudioSession.sharedInstance()
@@ -322,6 +477,10 @@ struct KidsWebAppView: UIViewRepresentable {
                 applyKidsNowPlaying(body)
             case "darKidsScreenAwake":
                 applyKidsScreenAwake(body)
+#if !KIDS_CREATOR_TEST
+            case "darKidsVisitorNotifications":
+                handleKidsVisitorNotify(message, body: body)
+#endif
             default:
                 break
             }
