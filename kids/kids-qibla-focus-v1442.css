@@ -1,30 +1,41 @@
-/* KIDS_QIBLA_FOCUS_V1442 — isolated home shortcuts, modal and profile palette. */
+/* KIDS_QIBLA_CAPSULE_PARITY_V1448
+   BOTH home CTAs are .kids-salah-open-day: same border, background, rounding,
+   media-queries and girl/boy palette. Never style Qibla as a separate pill.
+   Grid stretch guarantees identical rendered heights at all viewport widths. */
 #view-today .kids-salah-shortcuts{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:10px;width:100%;min-width:0;margin:9px auto 0;align-items:stretch;
+  box-sizing:border-box;display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  align-items:stretch;gap:clamp(6px,1.6vw,12px);
+  width:100%;min-width:0;margin:9px auto 0;
 }
-#view-today .kids-salah-shortcuts > button{
-  width:100%!important;min-width:0!important;min-height:48px!important;margin:0!important;
-  display:flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;
-  padding:8px 9px!important;border-radius:17px!important;line-height:1.15!important;
-  font:700 clamp(12px,3.5vw,16px)/1.15 "Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
-  box-sizing:border-box!important;white-space:nowrap;cursor:pointer;touch-action:manipulation;
+html body #view-today.view .kids-salah-home-world .kids-salah-shortcuts > .kids-salah-open-day{
+  box-sizing:border-box!important;display:flex!important;
+  align-items:center!important;justify-content:center!important;
+  align-self:stretch!important;width:100%!important;max-width:100%!important;
+  height:100%!important;min-width:0!important;
+  margin:0!important;gap:clamp(3px,1.1vw,8px)!important;
+  padding:8px clamp(5px,1.35vw,12px)!important;
+  border-radius:999px!important;
+  font:780 clamp(12px,3.45vw,17px)/1.15 "Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  white-space:nowrap!important;cursor:pointer;touch-action:manipulation;
+  overflow:hidden;text-overflow:clip;
 }
-#view-today .kids-salah-shortcuts .kids-shortcut-emoji{font-size:clamp(17px,4.3vw,21px)!important;line-height:1!important}
-#view-today .kids-salah-shortcuts .kids-shortcut-tail{font-size:19px!important;line-height:1!important}
-#view-today .kids-salah-shortcuts .kids-qibla-shortcut{
-  border:1px solid rgba(247,219,153,.32)!important;
-  background:linear-gradient(125deg,rgba(241,199,126,.16),rgba(50,92,93,.22))!important;
-  color:#ffebbb!important;
+#view-today .kids-salah-shortcuts .kids-shortcut-emoji{
+  font-size:clamp(16px,3.6vw,20px)!important;line-height:1!important;flex:none;
 }
-.app[data-gender="girl"] #view-today .kids-salah-shortcuts .kids-qibla-shortcut{
-  border-color:rgba(249,203,224,.43)!important;
-  background:linear-gradient(125deg,rgba(191,104,149,.25),rgba(105,64,119,.24))!important;
-  color:#ffe1f0!important;
+#view-today .kids-salah-shortcuts .kids-shortcut-label{
+  display:inline-block;min-width:0;white-space:nowrap;
+  font-size:inherit!important;line-height:inherit!important;
+}
+#view-today .kids-salah-shortcuts .kids-shortcut-tail{
+  font-size:clamp(17px,4vw,22px)!important;line-height:1!important;flex:none;
 }
 @media(max-width:350px){
-  #view-today .kids-salah-shortcuts{gap:6px}
-  #view-today .kids-salah-shortcuts > button{font-size:12px!important;gap:3px!important;padding:7px 5px!important}
+  #view-today .kids-salah-shortcuts{gap:5px}
+  html body #view-today.view .kids-salah-home-world .kids-salah-shortcuts > .kids-salah-open-day{
+    font-size:11.5px!important;gap:3px!important;padding-inline:4px!important;
+  }
+  #view-today .kids-salah-shortcuts .kids-shortcut-emoji{font-size:15px!important}
 }
 .kids-qibla-focus[hidden]{display:none!important}
 .kids-qibla-focus{
@@ -139,3 +150,46 @@ body.kids-qibla-focus-open .app{pointer-events:none}
 #kidsVisitorSettingsSheet [data-kids-qibla-replaced="true"] .kn-card{display:none!important}
 #kidsVisitorSettingsSheet .kq-parent-entry{width:100%;margin:5px 0 0;text-align:center}
 @media(prefers-reduced-motion:reduce){.kids-qibla-focus .kq-needle{transition:none}}
+
+
+/* KIDS_QIBLA_SENSOR_ALIGNED_V1448 — light only after real, stable sensor heading.
+   Inherits the selected child's own --q-accent; never show success on a
+   geographic bearing alone, bad calibration, permission denial or pause. */
+.kids-qibla-focus .kq-compass{
+  transition:border-color 200ms ease,box-shadow 260ms ease,background 260ms ease;
+}
+.kids-qibla-focus .kq-compass::after{
+  content:"";position:absolute;inset:-9px;border-radius:50%;
+  border:2px solid transparent;box-shadow:none;opacity:0;
+  pointer-events:none;transition:opacity 180ms ease;
+}
+.kids-qibla-focus.is-aligned .kq-compass{
+  border-color:var(--q-accent)!important;
+  background:radial-gradient(circle at 50% 42%,var(--q-surface2),var(--q-bg) 70%);
+  box-shadow:
+    inset 0 0 0 9px var(--q-soft),
+    0 0 0 5px var(--q-soft),
+    0 0 25px 5px var(--q-accent),
+    0 0 58px 8px var(--q-soft)!important;
+}
+.kids-qibla-focus.is-aligned .kq-compass::after{
+  border-color:var(--q-accent);opacity:.78;
+  animation:kq-found-halo-v1448 1250ms ease-out 1 both;
+}
+.kids-qibla-focus.is-aligned .kq-needle{
+  color:var(--q-accent);
+  filter:drop-shadow(0 0 13px var(--q-accent));
+}
+.kids-qibla-focus.is-aligned .kq-bearing,
+.kids-qibla-focus.is-aligned .kq-live{
+  color:var(--q-accent)!important;
+}
+@keyframes kq-found-halo-v1448{
+  0%{transform:scale(.92);opacity:0}
+  40%{transform:scale(1.04);opacity:.95}
+  100%{transform:scale(1.13);opacity:.48}
+}
+@media(prefers-reduced-motion:reduce){
+  .kids-qibla-focus.is-aligned .kq-compass::after{animation:none;transform:none;opacity:.72}
+  .kids-qibla-focus .kq-compass{transition:none}
+}
