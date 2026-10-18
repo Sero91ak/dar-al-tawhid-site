@@ -1,0 +1,45 @@
+/* DAR_FRAUEN_STICKY_SAFE_V2 — OPT-IN ONLY.
+ * The historical Frauen image, pseudo layers, typographic rules and HTML
+ * are not touched. Do not deploy without live Chromium + WebKit QA.
+ * Restore normal viewport scrolling: #appView/.app currently compute
+ * overflow-y:auto as a side effect of overflow-x:hidden and trap sticky.
+ */
+html[data-theme] body.is-frauen-route #appView.view,
+html[data-theme] body.is-frauen-route > .app{
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-shell[data-dar-frauen-sticky-safe="1"] > .frauen-library-hero,
+html[data-theme] body.is-frauen-route #appView .frauen-library-list[data-dar-frauen-sticky-safe="1"] > .frauen-library-hero{
+  position:sticky!important;
+  top:0!important;
+  z-index:65!important;
+  /* Preserve its actual background-image and background-size:cover. */
+}
+html[data-theme] body.is-frauen-route #appView .frauen-library-shell[data-dar-frauen-sticky-safe="1"] > .frauen-library-search-wrap,
+html[data-theme] body.is-frauen-route #appView .frauen-library-list[data-dar-frauen-sticky-safe="1"] > .frauen-library-list-controls{
+  position:sticky!important;
+  top:calc(var(--dar-frauen-sticky-hero-height,330px) - 31px)!important;
+  z-index:66!important;
+}
+/* The search extension beneath the hero must mask content passing behind it,
+   using the page's existing theme colour, without glass strips or new cards. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-shell[data-dar-frauen-sticky-safe="1"] > .frauen-library-search-wrap::before,
+html[data-theme] body.is-frauen-route #appView .frauen-library-list[data-dar-frauen-sticky-safe="1"] > .frauen-library-list-controls::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  pointer-events:none;
+  top:31px;
+  bottom:-15px;
+  left:50%;
+  transform:translateX(-50%);
+  width:100vw;
+  background:var(--bg,#f4efec);
+}
+@media(max-height:570px) and (orientation:landscape){
+  html[data-theme] body.is-frauen-route #appView .frauen-library-shell[data-dar-frauen-sticky-safe="1"] > .frauen-library-search-wrap,
+  html[data-theme] body.is-frauen-route #appView .frauen-library-list[data-dar-frauen-sticky-safe="1"] > .frauen-library-list-controls{
+    top:calc(var(--dar-frauen-sticky-hero-height,250px) - 20px)!important;
+  }
+}
