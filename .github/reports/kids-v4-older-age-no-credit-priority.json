@@ -25,10 +25,10 @@
     "7-8": 26,
     "9-10": 24
   },
-  "allRemainingUnrecordedOlderAgeDistinctTextCount": 1369,
-  "allRemainingUnrecordedOlderAgeCharacters": 64451,
-  "newDistinctTextCountForFirst40": 166,
-  "newCharactersForFirst40": 5723,
+  "allRemainingUnrecordedOlderAgeDistinctTextCount": 1368,
+  "allRemainingUnrecordedOlderAgeCharacters": 64395,
+  "newDistinctTextCountForFirst40": 165,
+  "newCharactersForFirst40": 5667,
   "priorityQuestionSteps": [
     {
       "order": 1,
@@ -46,6 +46,20 @@
     },
     {
       "order": 2,
+      "questionId": "kids-quiz-080",
+      "ageBand": "7-8",
+      "category": "Adab",
+      "missingOriginalTextCountForQuestion": 1,
+      "incrementalDistinctNewOriginals": 1,
+      "incrementalNewCharacters": 53,
+      "newOriginalTextSHA256": [
+        "fc4f586cf59297c43335f3aae64428bdf00fb10ec362ffb33c9620ff9a851f70"
+      ],
+      "originalQuestionTextChanged": false,
+      "maySynthesizeAutomatically": false
+    },
+    {
+      "order": 3,
       "questionId": "kids-quiz-031",
       "ageBand": "7-8",
       "category": "Aḫlāq",
@@ -61,7 +75,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 3,
+      "order": 4,
       "questionId": "kids-quiz-041",
       "ageBand": "9-10",
       "category": "Taqwā",
@@ -78,7 +92,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 4,
+      "order": 5,
       "questionId": "kids-quiz-046",
       "ageBand": "9-10",
       "category": "Zakāh",
@@ -95,7 +109,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 5,
+      "order": 6,
       "questionId": "kids-quiz-520",
       "ageBand": "7-8",
       "category": "Īmān",
@@ -107,21 +121,6 @@
         "c84dc49dbd4b99ce6ce415deae19420367435839225e54a4ca2499dbce19c144",
         "084389eb9e1a1835b65ced759ed2061ab1205a1c4d04c94e50fd3123ddfa2ab0",
         "dc6ecad04fc7acbebed8fa7d3143de39cc72d685360a327bb92c7509de6a34c1"
-      ],
-      "originalQuestionTextChanged": false,
-      "maySynthesizeAutomatically": false
-    },
-    {
-      "order": 6,
-      "questionId": "kids-quiz-080",
-      "ageBand": "7-8",
-      "category": "Adab",
-      "missingOriginalTextCountForQuestion": 2,
-      "incrementalDistinctNewOriginals": 2,
-      "incrementalNewCharacters": 109,
-      "newOriginalTextSHA256": [
-        "1297120edbe3afc43d40257bc1e38f86ee9ab09cbc9dec632df3f82964def014",
-        "fc4f586cf59297c43335f3aae64428bdf00fb10ec362ffb33c9620ff9a851f70"
       ],
       "originalQuestionTextChanged": false,
       "maySynthesizeAutomatically": false
@@ -726,11 +725,11 @@
       },
       "selectedQuestionIds": [
         "kids-quiz-045",
+        "kids-quiz-080",
         "kids-quiz-031",
         "kids-quiz-041",
         "kids-quiz-046",
         "kids-quiz-520",
-        "kids-quiz-080",
         "kids-quiz-044",
         "kids-quiz-025",
         "kids-quiz-023",
@@ -746,8 +745,8 @@
         "kids-quiz-094",
         "kids-quiz-147"
       ],
-      "newDistinctOriginals": 75,
-      "newOriginalCharacters": 2403,
+      "newDistinctOriginals": 74,
+      "newOriginalCharacters": 2347,
       "incrementalOriginalTextSha256": [
         "69e960d76c59a506808b0908ef47bc739cf012086feba91e5b271210ebc225c5",
         "3b43d4566de6a39db5785d2c137ecefd989a1a683ed9d85eec94b243f6024a88",
@@ -759,7 +758,6 @@
         "becd22c0112b03fa2cce2b4bee0b0c9c140833304a6551eb4a010ccac14ea6b1",
         "7d942f6f744f02d59b837f6ad98f204a1c75ccb8d97ce5ca0c5849fe953bb1fd",
         "831da8d97e3a9c7dd96e1e94f62d4488f50351b5a080f4b9608806f4168a28cd",
-        "1297120edbe3afc43d40257bc1e38f86ee9ab09cbc9dec632df3f82964def014",
         "93978d66f5247399d41f1f8ddb22b546917a068b4e68d6fe58f5a80234bc4e83",
         "26a07db8c5cf6421dec9a401126840f468ddb82f0e9849b4d3b4e1c8f745a268",
         "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
@@ -1178,14 +1176,6 @@
       "spokenText": "Allah verbietet Verschwendung und tadelt die Verschwender.",
       "sha256": "c5604922cb64bc623830706ca2a69b63a8121f896133417a857ffb53cb3a3fe6",
       "characterCount": 58,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Allah verbietet verletzende Spitznamen und Herabsetzung.",
-      "sha256": "1297120edbe3afc43d40257bc1e38f86ee9ab09cbc9dec632df3f82964def014",
-      "characterCount": 56,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
