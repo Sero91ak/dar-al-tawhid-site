@@ -39,7 +39,10 @@ Date: 2026-10-18. Branch: `feature/tawhid-kids-push-isolation-20261018`.
 - Kids Cloudflare app-scoped API secret has not yet been configured or verified.
 - Dedicated Kids Web origin is not provisioned and the OneSignal Web Site URL still targets the main domain.
 - Native iOS project has not been built or run on a signed Apple device in this environment.
-- Real Supabase parental authorization/enrollment and daily cron scheduler are not yet connected.
+- Supabase `kids-push-enroll` Edge Function v2 is **deployed**, but no real parent OTP/device enrollment has been verified, and no device subscriptions exist yet.
+- Standalone Kids Cloudflare prayer worker is prepared under `cloudflare/kids-prayer-worker.js` and `cloudflare/wrangler.kids-push.toml`; **not deployed and disabled by default** (`KIDS_PRAYER_PUSH_ENABLED=false`).
+- Learning and quiz reminder dispatch are not yet live. Do not claim all notification types are ready.
+- Existing draft PR: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1317. The Kids Push Safety CI previously passed; other global CI workflows may fail for separate image budget issues; do not modify historical media in this push task.
 - No live message delivery has been verified.
 
 No changes in this branch are to be merged to the default branch without passing the above gates.
