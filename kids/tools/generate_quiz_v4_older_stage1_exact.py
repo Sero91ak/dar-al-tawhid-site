@@ -14,6 +14,7 @@ import argparse
 import hashlib
 import json
 import os
+import subprocess
 from datetime import datetime,timezone
 from pathlib import Path
 
@@ -59,6 +60,38 @@ def durable_attempts(journal):
     usage["requestJournal"]=journal
     write(USAGE,usage)
     write(ATTEMPTS,journal)
+
+
+def persist_remote_paid_checkpoint(*paths, purpose):
+    """Fail closed unless the real GitHub review branch saved this paid state.
+
+    No TTS may start before the pre-POST receipt is remotely committed.
+    After any successful paid POST, persist the real MP3, SHA and billing
+    receipt before the next paid text. A remote conflict stops production.
+    """
+    expected="review/kids-quiz-v4-batch-001-020-20261014"
+    check(os.getenv("GITHUB_ACTIONS")=="true"
+          and os.getenv("GITHUB_REF_NAME")==expected,
+          "paid original requires checkpoint-capable GitHub review runner")
+    check(paths and all(Path(p).is_file() for p in paths),
+          "missing real request journal, original receipt or MP3 checkpoint")
+    def git(*args):
+        result=subprocess.run(["git",*args],cwd=ROOT,check=False,
+                              capture_output=True,text=True,timeout=40)
+        check(result.returncode==0,"GitHub paid original checkpoint failed ("+
+              purpose+"); provider credits MUST NOT be spent again until recovery")
+        return result
+    git("config","user.name","dar-kids-v4-paid-original-checkpoint")
+    git("config","user.email","41898282+github-actions[bot]@users.noreply.github.com")
+    for p in paths:
+        check(p.resolve().is_relative_to(ROOT.resolve()),
+              "checkpoint outside GitHub review root")
+    git("add","--",*(str(p.relative_to(ROOT)) for p in paths))
+    staged=git("diff","--cached","--name-only").stdout.strip()
+    check(bool(staged),"paid original already checkpointed or missing; STOP before proceeding")
+    git("commit","-m","audio(kids V4): protect paid original "+purpose)
+    git("push","origin","HEAD:"+expected)
+    print("KIDS_V4_ORIGINAL_CHECKPOINT_SAVED "+purpose,flush=True)
 
 
 def prepare():
@@ -306,6 +339,8 @@ def main():
               "prior paid request logged for this text, no new POST allowed")
         journal["entries"].append(attempt)
         durable_attempts(journal)
+        persist_remote_paid_checkpoint(USAGE,ATTEMPTS,
+                                       purpose="request-"+sha(text)[:12])
         # On any ambiguous provider/network exception, keep the marker.
         # Recovery occurs through actual historical/provider bytes, never TTS.
         audio,request_id=original_mp3(key,text)
@@ -334,6 +369,8 @@ def main():
         attempt["mp3SHA256"]=audiosha
         attempt["providerRequestId"]=request_id
         durable_attempts(journal)
+        persist_remote_paid_checkpoint(REG,LEDGER,USAGE,ATTEMPTS,path,
+                                       purpose="original-"+sha(text)[:12])
         if not request_id:
             raise RuntimeError("Paid MP3 bytes were saved without a provider request ID. Preserve runner artifact, reconcile manually; NEVER RETRY this text.")
         completed+=1
