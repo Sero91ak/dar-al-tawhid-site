@@ -8461,6 +8461,18 @@
         ".github/workflows/check-qsource-standard.yml"
       ],
       "expiresAt": "2026-11-01T23:59:00.000Z"
+    },
+    {
+      "id": "test-only-compact-hero-sticky-20261018",
+      "at": "2026-10-18T18:06:00+02:00",
+      "approvedBy": "user-global-hero-request-but-must-stage-Test-before-Visitor-20261018",
+      "reason": "Stage 1 Dar Test only: image-preserving compact hero ratios for adult topics/post/hadith/dua/Frauen; sticky hero and search at measured heights. Do not modify original Frauen asset/hero controller, media, Kids, native, or Visitor content. Follow with separate Visitor PR only after guard confirms healthy.",
+      "paths": [
+        "test/assets/test-global-edge-width-v1372.css",
+        "test/assets/adult-immersive-hero-v1.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-01T23:59:00.000Z"
     }
   ],
   "enabled": true
