@@ -5,6 +5,10 @@
   const PREF_KEY = "dar.kids.push.preferences.v1";
   const CONSENT_KEY = "dar.kids.push.parent.consent.v1";
   const IS_NATIVE = Boolean(window.DAR_KIDS_IOS_APP || window.DAR_IOS_NATIVE_APP);
+  // Browsers share push permissions and storage across / and /kids/ on one
+  // origin. Never register a second OneSignal Web App on the adult host.
+  const DEDICATED_WEB_HOST = "kids.dar-al-tawhid.de";
+  const WEB_HOST_SAFE = location.hostname === DEDICATED_WEB_HOST;
   const IS_TEST = Boolean(window.DAR_KIDS_TEST_CONTAINER);
   const $ = (id) => document.getElementById(id);
   const TYPES = [
@@ -73,6 +77,7 @@
   }
   async function ensureWebSDK() {
     if (IS_NATIVE) return null; // WKWebView uses native APNs, never web push.
+    if (!WEB_HOST_SAFE) throw new Error("Kids web push needs a separate origin.");
     if (initPromise) return initPromise;
     initPromise = new Promise((resolve, reject) => {
       window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -104,6 +109,10 @@
     if (IS_NATIVE) {
       status("Bitte die Geräte-Authentifizierung bestätigen.");
       nativeMessage("enable");
+      return;
+    }
+    if (!WEB_HOST_SAFE) {
+      status("Web-Push wird erst auf der eigenen Kids-Adresse aktiviert, damit die Erwachsenen-App geschützt bleibt.");
       return;
     }
     if (!("Notification" in window) || !("serviceWorker" in navigator)) {
@@ -216,7 +225,7 @@
   function init() {
     makePanel();
     // Only initialize Web SDK on existing explicit consent. Never auto-prompt.
-    if (!IS_NATIVE && read(CONSENT_KEY) === "yes") {
+    if (!IS_NATIVE && WEB_HOST_SAFE && read(CONSENT_KEY) === "yes") {
       ensureWebSDK().then(syncTags).catch(() => status("Push derzeit nicht erreichbar."));
     }
   }
