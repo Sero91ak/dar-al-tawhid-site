@@ -27,7 +27,7 @@
   }
   function updateHeights(){
     if(!document.body)return;
-    var els=document.querySelectorAll("#appView .hadith-hub,#appView .topics-hub,#appView .topic-collection-page");
+    var els=document.querySelectorAll("#appView .hadith-hub,#appView .topics-hub,#appView .topic-collection-page,#appView .dua-hub");
     els.forEach(function(section){
       var hero=section.querySelector(":scope > .view-head");
       if(!hero)return;
