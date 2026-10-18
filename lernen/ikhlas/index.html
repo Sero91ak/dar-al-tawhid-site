@@ -144,6 +144,38 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #ead4
 }
 @media(prefers-reduced-motion:reduce){.progress>div,.panel,.choice{transition:none!important}}
 
+
+/* MADRASA_LEARNING_COMPACT_V2 — scoped to standalone lesson; light/dark accessible */
+:root{--madrasa-arch:rgba(198,163,100,.35)}
+body{background-image:radial-gradient(ellipse 70% 20% at 50% 0%,rgba(181,148,88,.15),transparent),repeating-linear-gradient(45deg,transparent 0 56px,rgba(187,151,89,.025) 56px 57px),linear-gradient(180deg,#14261f,#0f1b18)}
+main{max-width:780px}
+.learning-masthead{padding:12px 8px 0}
+.learning-masthead::before{inset:0 13%;border-radius:45% 45% 6px 6px/42% 42% 6px 6px;opacity:.85}
+.learning-mark{width:78px;height:78px}
+.learning-mark img{max-width:100%;max-height:100%}
+.learning-overview{margin:10px auto 8px}
+.intro{padding:5px 6px 10px}
+.intro h1{font-size:clamp(1.55rem,5.6vw,2.45rem);line-height:1.17;margin:8px 0}
+.intro .lede{font-size:.91rem;line-height:1.48;margin:6px auto 10px}
+.learning-overview{max-width:680px}
+.learning-overview>div{padding:9px 4px}
+.learning-overview strong{font-size:1.18rem}
+.meta{margin:12px 0 0}
+.progress{margin:7px 0 12px}
+.panel{padding:clamp(16px,3.5vw,26px);margin:10px 0 8px;border-radius:20px;position:relative;overflow:hidden}
+.panel::before{content:"";position:absolute;right:-90px;top:-120px;width:250px;height:250px;border:1px solid var(--madrasa-arch);border-radius:50%;pointer-events:none;opacity:.35}
+.panel h2{font-size:clamp(1.38rem,4.7vw,2rem);line-height:1.2;margin:8px 0}
+.panel p{margin:8px 0}
+.choices{gap:8px;margin:13px 0 9px}
+.choice{padding:12px 14px;min-height:48px;line-height:1.35}
+.question-count{font-size:.73rem}
+.help{font-size:.85rem;line-height:1.4}
+.feedback{margin:9px 0;padding:9px 12px}
+.actions{margin-top:11px}
+.footer{margin:13px 0 22px;font-size:.74rem}
+@media(max-width:430px){main{width:calc(100% - 22px)}.learning-masthead{padding-top:3px}.learning-mark{width:70px;height:70px}.learning-ornament{margin:3px auto}.intro .lede{max-width:34ch}.panel{padding:18px 17px}.choice{font-size:.92rem}.learning-overview>div{padding:7px 3px}}
+@media(prefers-color-scheme:light){body{background-image:radial-gradient(ellipse 80% 25% at 50% 0%,rgba(201,162,91,.22),transparent),repeating-linear-gradient(45deg,transparent 0 56px,rgba(143,108,58,.035) 56px 57px),linear-gradient(180deg,#f9f5e9,#f0e9dc)}.panel{background:#fffaf0}.choice{background:#fffdf8;color:#26392f}}
+
 </style>
 </head>
 <body>
