@@ -129,6 +129,9 @@ function sync(){
  ensureTopControls();rearrangeHeader();
  let root=document.getElementById("dv3Home");
  if(!root){shell.insertAdjacentHTML("afterbegin",make());root=document.getElementById("dv3Home");lastPosts="";}
+ const searchBlock=shell.querySelector("#homeSearchBlock");
+ const searchField=root.querySelector(".dv3-search-box");
+ if(searchBlock&&searchField&&searchField.nextElementSibling!==searchBlock)searchField.insertAdjacentElement("afterend",searchBlock);
  const q=shell.querySelector(".home-v380-quran-hero");
  const slot=root.querySelector("#dv3QuranSlot");
  if(q&&slot&&q.parentElement!==slot)slot.appendChild(q);
