@@ -267,8 +267,23 @@ function browserManifestResponse(request, androidBrowser = false) {
   });
   return new Response(request.method === "HEAD" ? null : JSON.stringify(manifest, null, 2), { status: 200, headers });
 }
+/* Visitor-only hero activation: versioned CSS and read-only measured offset.
+ * Do not append the historical DOM-reparenting Frauen immersive adapter. */
 function adultCompactHeroAddon() {
-  return '<link rel="stylesheet" id="darAdultHeroCompactEdgeV1396" href="/assets/adult-responsive-viewport-v1381.css?v=hero-compact-edge-v1396">';
+  return '<link rel="stylesheet" id="darAdultHeroCompactEdgeV1403" href="/assets/adult-responsive-viewport-v1381.css?v=visitor-hero-v1403-20261018">' +
+    '<script defer id="darAdultHeroHeightRuntimeV1403" src="/assets/adult-hero-height-runtime-v1403.js?v=visitor-hero-v1403-20261018"><\\/script>';
+}
+function activateAdultCompactHero(html) {
+  if (typeof html !== "string") return html;
+  // Remove only the old injected marker, never the normal app stylesheet or
+  // any historic Frauen, search, navigation, service worker or base link.
+  html = html.replace(/<link\b[^>]*\bid=["']darAdultHeroCompactEdgeV1396["'][^>]*>/gi, "");
+  if (!html.includes('id="darAdultHeroCompactEdgeV1403"') ||
+      !html.includes('id="darAdultHeroHeightRuntimeV1403"')) {
+    const injection = adultCompactHeroAddon();
+    html = html.includes("</body>") ? html.replace("</body>", injection + "</body>") : html + injection;
+  }
+  return html;
 }
 function liveFrauenNativeAddon() {
   return [
@@ -1428,6 +1443,7 @@ export default {
         }
       }
       headers.set("Content-Type", "text/html; charset=utf-8");
+      html = assetResponse.ok ? activateAdultCompactHero(html) : html;
       return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
     }
 
@@ -1640,10 +1656,7 @@ export default {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
       let html = await assetResponse.text();
-      if (assetResponse.ok && !html.includes("darAdultHeroCompactEdgeV1396")) {
-        const heroCss = adultCompactHeroAddon();
-        html = html.includes("</body>") ? html.replace("</body>", heroCss + "</body>") : html + heroCss;
-      }
+      if (assetResponse.ok) html = activateAdultCompactHero(html);
       if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
         const frauenAddon = liveFrauenNativeAddon();
         html = html.includes("</body>") ? html.replace("</body>", frauenAddon + "</body>") : html + frauenAddon;
@@ -1680,7 +1693,7 @@ export default {
         if (!html.includes("desktop-overhaul.css")) html = html.replace("</head>", styleTag + "</head>");
         if (!html.includes("desktop-overhaul.js")) html = html.replace("</body>", scriptTag + "</body>");
         if (!html.includes("darPublicWebsiteGuardV1")) html = html.replace("</body>", publicWebsiteAddon() + "</body>");
-        if (!html.includes("darAdultHeroCompactEdgeV1396")) html = html.replace("</body>", adultCompactHeroAddon() + "</body>");
+        html = activateAdultCompactHero(html);
       }
       headers.set("Content-Type", "text/html; charset=utf-8");
       return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
