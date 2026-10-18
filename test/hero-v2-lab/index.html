@@ -79,11 +79,9 @@
       .hero-v2-searchrow{margin-top:-13px;padding-bottom:8px}
       .hero-v2-search{min-height:48px}
     }
-    /* Keep text entry usable on phones when the virtual keyboard opens.
-       The temporary focus exception never intercepts touch or scroll. */
-    @media(max-width:650px) and (pointer:coarse){
-      .hero-v2-rail:focus-within{position:relative}
-    }
+    /* No focus-triggered position change: switching sticky→relative while
+       the pointer leaves an input invalidated taps on 320px screens.
+       Keep the rail stable and let the browser manage visualViewport. */
     @media(prefers-reduced-motion:reduce){.v2-card{transition:none}}
   </style>
 </head>
