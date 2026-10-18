@@ -19,6 +19,11 @@ const scenarios=[
 function measured(){
  const app=document.getElementById("appView"),hero=app?.querySelector(".frauen-library-hero"),shell=app?.querySelector(".frauen-library-shell,.frauen-library-list");
  const search=app?.querySelector(".frauen-library-search-wrap,.frauen-library-list-controls");
+ const chain=[];for(let e=hero,n=0;e&&n<12;e=e.parentElement,n++){
+   const c=getComputedStyle(e);chain.push({el:e.tagName+"."+String(e.className).slice(0,66),
+     overflowX:c.overflowX,overflowY:c.overflowY,position:c.position,
+     transform:c.transform,inline:e.getAttribute("style")?.slice(0,180)});
+ }
  const sty=e=>{if(!e)return null;const c=getComputedStyle(e),r=e.getBoundingClientRect();return {
   top:Math.round(r.top),bottom:Math.round(r.bottom),height:Math.round(r.height),width:Math.round(r.width),
   position:c.position,backgroundImage:c.backgroundImage.slice(0,280),z:c.zIndex};};
@@ -27,7 +32,7 @@ function measured(){
   bodyOverflow:getComputedStyle(document.body).overflowY,bodyClass:document.body.className,
   heroParent:hero?.parentElement?.className,searchParent:search?.parentElement?.className,
   shellKids:shell?[...shell.children].slice(0,6).map(x=>String(x.className).slice(0,120)):[],
-  stickyJS:!!window.DARFrauenStickySafeV2,
+  stickyJS:!!window.DARFrauenStickySafeV2,scrollChain:chain,
   shellOptIn:shell?.getAttribute("data-dar-frauen-sticky-safe")||"",hvar:shell?.style.getPropertyValue("--dar-frauen-sticky-hero-height")||"",
   stageCount:document.querySelectorAll(".dar-immersive-hero-stage").length,
   photoCount:document.querySelectorAll("#appView .frauen-library-hero").length,
@@ -74,7 +79,22 @@ function measured(){
        searchSame:beforeSearch===document.querySelector("#appView .frauen-library-search-wrap,#appView .frauen-library-list-controls")};
    });
    assert.ok(transition.y>120,cfg.name+": scroll not working");
-   assert.ok(Math.abs(transition.heroTop)<=8,cfg.name+": hero scrolls away "+JSON.stringify({transition,ready}).slice(0,1900));
+   let overflowProof=null;
+   if(Math.abs(transition.heroTop)>8){
+     overflowProof=await page.evaluate(async()=>{
+       const targets=[document.body,document.querySelector("body > .app"),document.getElementById("appView")].filter(Boolean);
+       targets.forEach(x=>x.style.setProperty("overflow","visible","important"));
+       window.scrollTo(0,390);
+       await new Promise(r=>setTimeout(r,120));
+       const h=document.querySelector("#appView .frauen-library-hero");
+       const q=document.querySelector("#appView .frauen-library-search-wrap");
+       return {scroll:scrollY,heroTop:h?.getBoundingClientRect().top,
+         searchTop:q?.getBoundingClientRect().top,
+         computed:targets.map(x=>({tag:x.tagName,cls:String(x.className).slice(0,70),x:getComputedStyle(x).overflowX,y:getComputedStyle(x).overflowY}))};
+     });
+     console.log("FRAUEN_STICKY_OVERFLOW_PROOF "+JSON.stringify({name:cfg.name,overflowProof}));
+   }
+   assert.ok(Math.abs(transition.heroTop)<=8,cfg.name+": hero scrolls away "+JSON.stringify({transition,ready,overflowProof}).slice(0,3900));
    assert.ok(Math.abs(transition.searchDelta+31)<=18,cfg.name+": search detached from hero "+JSON.stringify(transition));
    assert.ok(transition.heroSame&&transition.searchSame,cfg.name+": DOM children replaced during sticky scroll");
    await page.screenshot({path:path.join(output,cfg.name+"-scroll.png")});
