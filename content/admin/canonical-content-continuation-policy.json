@@ -90,7 +90,54 @@
     "hadithAndAtharCatalogCount": 3357,
     "hadith": 2408,
     "athar": 949,
-    "latestProcessedTen": [
+    "verifiedMeaning": "10 source/grade audits completed; NOT 10 newly authenticated transmissions. User's target of 10/20 means work units, not forced success.",
+    "evidence": [
+      "apple-tv/hadith/audit/2026-10-18-sharh-athar-continuation.json",
+      "apple-tv/hadith/audit/0371-0392-20261018-two-batches.json"
+    ],
+    "nextRequestedBatch": "Inspect genuine open Sharḥ and Athar attribution candidates HAD-0393–HAD-0412, but skip any already settled in prior audits. Add new unique Hadith with Šarḥ / independently graded Athar from HAD-3358 onward.",
+    "completedBatches": [
+      {
+        "date": "2026-10-18",
+        "kind": "athar-isnad-backfill",
+        "number": 1,
+        "candidates": 10,
+        "ids": [
+          "HAD-0371",
+          "HAD-0372",
+          "HAD-0375",
+          "HAD-0376",
+          "HAD-0377",
+          "HAD-0378",
+          "HAD-0379",
+          "HAD-0380",
+          "HAD-0381",
+          "HAD-0382"
+        ],
+        "verifiedDirect": 1
+      },
+      {
+        "date": "2026-10-18",
+        "kind": "athar-isnad-backfill",
+        "number": 2,
+        "candidates": 10,
+        "ids": [
+          "HAD-0383",
+          "HAD-0384",
+          "HAD-0385",
+          "HAD-0386",
+          "HAD-0387",
+          "HAD-0388",
+          "HAD-0389",
+          "HAD-0390",
+          "HAD-0391",
+          "HAD-0392"
+        ],
+        "verifiedDirect": 1
+      }
+    ],
+    "lastAuditedLegacyId": "HAD-0392",
+    "latestProcessedTwenty": [
       "HAD-0371",
       "HAD-0372",
       "HAD-0375",
@@ -100,12 +147,18 @@
       "HAD-0379",
       "HAD-0380",
       "HAD-0381",
-      "HAD-0382"
+      "HAD-0382",
+      "HAD-0383",
+      "HAD-0384",
+      "HAD-0385",
+      "HAD-0386",
+      "HAD-0387",
+      "HAD-0388",
+      "HAD-0389",
+      "HAD-0390",
+      "HAD-0391",
+      "HAD-0392"
     ],
-    "verifiedMeaning": "10 source/grade audits completed; NOT 10 newly authenticated transmissions. User's target of 10/20 means work units, not forced success.",
-    "evidence": [
-      "apple-tv/hadith/audit/2026-10-18-sharh-athar-continuation.json"
-    ],
-    "nextRequestedBatch": "10–20 IDs from first actual open, starting HAD-0383–0392; run semantic duplicates and early Sharḥ gaps in parallel"
+    "warning": "20 audited/updated ≠ 20 newly authenticated; exactly two HAD-0380 and HAD-0391 identified as securely transmitted in this new 20-item audit; other statuses preserved as pending/weak."
   }
 }
