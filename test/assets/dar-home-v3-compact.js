@@ -63,6 +63,11 @@ function ensureTopControls(){
  }
  const k=row.querySelector(".brand-kicker-row small");
  if(k&&k.textContent!=="BEITRÄGE NACH QURʾĀN · SUNNAH · AṮĀR")k.textContent="BEITRÄGE NACH QURʾĀN · SUNNAH · AṮĀR";
+ const main=row.querySelector(".brand-main"),title=main?.querySelector(".brand-title-refined");
+ if(main&&title&&k&&!main.querySelector(".dv3-brand-copy")){
+  const copy=document.createElement("span");copy.className="dv3-brand-copy";
+  main.appendChild(copy);copy.appendChild(k);copy.appendChild(title);
+ }
 }
 function rearrangeHeader(){
  const h=document.querySelector(".top-shell .header");
