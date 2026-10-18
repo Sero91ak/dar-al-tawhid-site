@@ -8461,6 +8461,22 @@
         ".github/workflows/check-qsource-standard.yml"
       ],
       "expiresAt": "2026-11-01T23:59:00.000Z"
+    },
+    {
+      "id": "unified-adult-compact-hero-sticky-search-edge-20261018",
+      "at": "2026-10-18T18:06:00+02:00",
+      "approvedBy": "user-explicit-hero-compact-unified-edge-sticky-scroll-across-adult-visitor-test-20261018",
+      "reason": "User demonstrated large image and detached upper pale safe area in screen capture, and requested responsive compact all-adult hero, content scrolling beneath persistent image with pinned search. Tighten opt-in hero standards, route-scoped visitor+test styles and height observer without touching protected original Frauen hero files, image assets, route data, bottom nav, kids, native binaries or push. Prove original Frauen CSS unchanged, safe hero image preservation and under-scroll CSS contract.",
+      "paths": [
+        "assets/adult-responsive-viewport-v1381.css",
+        "test/assets/test-global-edge-width-v1372.css",
+        "assets/dar-hero-scroll-standard-v1.css",
+        "assets/adult-immersive-hero-v1.js",
+        "test/assets/adult-immersive-hero-v1.js",
+        "scripts/hero-scroll-standard-guard.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-01T23:59:00.000Z"
     }
   ],
   "enabled": true
