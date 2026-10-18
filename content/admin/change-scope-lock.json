@@ -8446,6 +8446,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-26T23:59:00.000Z"
+    },
+    {
+      "id": "inapp-source-shell-and-content-full-axis-20261018",
+      "at": "2026-10-18T16:31:00+02:00",
+      "approvedBy": "user-explicit-avoid-loading-in-internal-app-navigation-and-expand-adult-content-20261018",
+      "reason": "Fix verified route reload cause (location.assign for /q/N/) with same-page source drawer; preserve old reader state, bottom nav, and direct original source links. Prevent Android BFCache reload. Expand adult article content to navigation-aligned viewport stage while keeping hero backgrounds and Frauen sticky hero intact. Add regression guard. Adult visitor + shared test only, no Kids/native-binary/push/service worker or protected shells.",
+      "paths": [
+        "assets/dar-app-chrome.js",
+        "assets/adult-responsive-viewport-v1381.css",
+        "assets/app-soft-boot.js",
+        "q/_registry/check-source-navigation.mjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-01T23:59:00.000Z"
     }
   ],
   "enabled": true
