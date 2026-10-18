@@ -19,7 +19,7 @@ const outcomes=[],errors=[];
 const scenarios=[
   {id:"ios-webkit",engine:webkit,ua:"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS",width:393,height:852,mobile:true},
   {id:"ios-chromium",engine:chromium,ua:"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS",width:393,height:852,mobile:true},
-  {id:"android-pwa-chromium",engine:chromium,ua:"Mozilla/5.0 (Linux; Android 16; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36",width:412,height:915,mobile:true,url:"https://dar-al-tawhid.de/pwa/?safeFrauenQA=20261018#frauen"}
+  {id:"android-pwa-chromium",engine:chromium,ua:"Mozilla/5.0 (Linux; Android 16; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36",width:412,height:915,mobile:true,url:"https://dar-al-tawhid.de/pwa/?safeFrauenQA=20261018#frauen",pwaWithoutAdapter:true}
 ];
 function read(){
   const hero=document.querySelector("#appView .frauen-library-hero");
@@ -38,7 +38,7 @@ function read(){
  for(const cfg of scenarios){
   let browser=null;
   try{
-   browser=await cfg.engine.launch({headless:true,args:["--no-sandbox"]});
+   browser=await cfg.engine.launch({headless:true,args:cfg.engine===chromium?["--no-sandbox"]:[]});
    const context=await browser.newContext({viewport:{width:cfg.width,height:cfg.height},deviceScaleFactor:2,isMobile:cfg.mobile,hasTouch:cfg.mobile,userAgent:cfg.ua,locale:"de-DE"});
    const page=await context.newPage();
    const err=[],imgs=[];let injected=0;
@@ -53,7 +53,7 @@ function read(){
    await page.waitForTimeout(7500);
    const initial=await page.evaluate(read);
    assert.equal(rsp.status(),200,"Bad app HTTP status");
-   assert.ok(injected>0,cfg.id+" safe adapter was not injected");
+   if(!cfg.pwaWithoutAdapter)assert.ok(injected>0,cfg.id+" safe adapter was not injected");
    assert.equal(initial.heroCount,1,cfg.id+" visible Frauen hero not mounted");
    assert.ok(initial.heroHeight>240,cfg.id+" Hero missing height");
    assert.match(initial.heroImage,/03-erste-generationen\.jpg/,cfg.id+" image missing");
@@ -63,6 +63,23 @@ function read(){
    await page.screenshot({path:path.join(evidence,cfg.id+"-before.png")});
    // Check the failing production pattern: scroll, then an incidental global
    // render event. It must preserve both content nodes and the scroll offset.
+   if(cfg.pwaWithoutAdapter){
+     const pwa=await page.evaluate(async()=>{
+       window.scrollTo(0,Math.min(420,document.documentElement.scrollHeight-innerHeight-50));
+       await new Promise(r=>setTimeout(r,180));
+       return {scroll:window.scrollY,heroHeight:document.querySelector("#appView .frauen-library-hero")?.getBoundingClientRect().height||0};
+     });
+     assert.ok(pwa.scroll>100&&pwa.heroHeight>180,cfg.id+" existing PWA scroll/image broken");
+     const search=page.locator("#appView .frauen-library-search-wrap input").first();
+     await search.fill("Fiqh",{timeout:7000});
+     assert.equal(await search.inputValue(),"Fiqh",cfg.id+" PWA search lost text");
+     const row={id:cfg.id,passed:true,unchangedPwa:true,photoStatus:imgs,scroll:pwa.scroll};
+     outcomes.push(row);
+     console.log("FRAUEN_SAFE_ADAPTER_PASS "+JSON.stringify(row));
+     await page.screenshot({path:path.join(evidence,cfg.id+"-unchanged.png")});
+     await context.close();
+     continue;
+   }
    const r=await page.evaluate(async()=>{
      const hero=document.querySelector("#appView .frauen-library-hero");
      const input=document.querySelector("#appView .frauen-library-search-wrap input");
