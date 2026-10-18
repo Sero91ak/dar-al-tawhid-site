@@ -6,11 +6,11 @@
   "counts": {
     "inspected": 20,
     "fileUpdates": 20,
-    "verifiedStrongMawqufOrMaqtu": 2,
-    "chainsOrOriginalLocatedButStillOpen": 5,
-    "remainingAsWeakOrUnverified": 13,
-    "brandNewPublishedHadith": 0,
-    "brandNewPublishedAthar": 0
+    "verifiedAsDirectEarlyReports": 2,
+    "primaryLocatedButIndividualGradingIncompleteOrWeak": 8,
+    "exactOriginalOrEarlyChainMissingOrMismatched": 10,
+    "newHadithRecords": 0,
+    "newAtharRecords": 0
   },
   "previousAuditsRetained": [
     "apple-tv/hadith/audit/0343-0392-earliest-sharh-audit.json",
@@ -135,5 +135,33 @@
   },
   "nextAction": "Proceed to first open genuine older Sharḥ/athar gaps from next audit block HAD-0393–0442 and earlier HAD-0039; new Hadith with Šarḥ and new authentic Athar use HAD-3358 onward after distinctness checks. Separate verified entries from inspected counts.",
   "globalPublication": "GitHub main commits completed; CI/Cloudflare HTTP live endpoint and native iOS/tvOS runtime delivery NOT independently verified by this audit; do not mark delivered.",
-  "safety": "No independent OneSignal notification, no Kids changes, no native code changes. Current UI library may still show old records with explicit 'not verified' grading; actual runtime filtering requires separate verified testing."
+  "safety": "No independent OneSignal notification, no Kids changes, no native code changes. Current UI library may still show old records with explicit 'not verified' grading; actual runtime filtering requires separate verified testing.",
+  "categoryIds": {
+    "verified": [
+      "HAD-0380",
+      "HAD-0391"
+    ],
+    "primaryLocatedGradingOpenOrWeak": [
+      "HAD-0371",
+      "HAD-0372",
+      "HAD-0375",
+      "HAD-0377",
+      "HAD-0378",
+      "HAD-0379",
+      "HAD-0381",
+      "HAD-0383"
+    ],
+    "exactTextOrChainMissing": [
+      "HAD-0376",
+      "HAD-0382",
+      "HAD-0384",
+      "HAD-0385",
+      "HAD-0386",
+      "HAD-0387",
+      "HAD-0388",
+      "HAD-0389",
+      "HAD-0390",
+      "HAD-0392"
+    ]
+  }
 }
