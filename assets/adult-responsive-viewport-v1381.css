@@ -383,6 +383,8 @@ html[data-theme] body.is-post-route #appView .post-reader-main :is(
  * not the Frauen or Library section roots. */
 html[data-theme] body.has-bottom-nav #appView.view :is(
   .books-library-list,.library-list,.lib-content,.lib-main-content,
+  .hadith-leaf-list,.hadith-list,.hadith-catalog-list,
+  .frauen-library-area-grid,.frauen-library-grid,.frauen-library-list,.frauen-post-list,
   .dua-theme-grid,.dua-collection-list,.dua-list,
   .topic-collection,.topic-collection-list,.post-grid
 ){
