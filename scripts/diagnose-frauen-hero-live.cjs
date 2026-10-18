@@ -144,7 +144,27 @@ function measure(){
      await page.screenshot({path:path.join(out,"webkit-ios-native-before.png")});
      // Mobile WebKit does not support Playwright mouse.wheel; native scroll
      // geometry is probed through the browsing context scroll API.
-     await page.evaluate(()=>window.scrollTo({top:620,behavior:"instant"}));
+     const movementProbe=await page.evaluate(async()=>{
+       const read=()=>({window:window.scrollY,html:document.documentElement.scrollTop,
+         document:document.scrollingElement?.scrollTop,body:document.body.scrollTop});
+       const styles=(el)=>{const c=getComputedStyle(el);return{
+         overflowX:c.overflowX,overflowY:c.overflowY,position:c.position,
+         height:c.height,minHeight:c.minHeight,scrollBehavior:c.scrollBehavior,
+         touchAction:c.touchAction,scrollSnapType:c.scrollSnapType,
+         overscrollBehaviorY:c.overscrollBehaviorY};};
+       const before=read();
+       window.scrollTo(0,620);
+       const sync=read();
+       await new Promise(r=>requestAnimationFrame(r));
+       const nextFrame=read();
+       await new Promise(r=>setTimeout(r,180));
+       const delayed=read();
+       document.scrollingElement.scrollTop=620;
+       const direct=read();
+       return {before,sync,nextFrame,delayed,direct,
+         windowScrollToType:String(window.scrollTo).slice(0,160),
+         docStyles:styles(document.documentElement),bodyStyles:styles(document.body)};
+     });
      await page.waitForTimeout(650);
      const after=await page.evaluate(measure);
      await page.screenshot({path:path.join(out,"webkit-ios-native-scroll.png")});
@@ -152,7 +172,7 @@ function measure(){
      const info={id:"webkit-ios-native-scroll",status:res.status(),
        before:{hero:before.hero,scrollNodes:before.scrollNodes,gate:before.gateVisible},
        after:{hero:after.hero,scrollNodes:after.scrollNodes},
-       scrolled:scrollNodes.map(n=>n.name),errors};
+       scrolled:scrollNodes.map(n=>n.name),movementProbe,errors};
      console.log("HERO_WEBKIT_DIFFERENTIAL "+JSON.stringify(info).slice(0,13500));
      results.push(info);
      if(before.documentScrollMax>200&&!scrollNodes.length)
