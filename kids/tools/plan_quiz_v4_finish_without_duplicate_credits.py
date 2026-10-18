@@ -172,6 +172,7 @@ def main():
             queue.append({
                 "priority":len(queue)+1,"questionId":qid,"ageBand":age,
                 "requiresPrepaidRecovery":bool(row["missingPreviouslyPaidGenerationIds"]),
+                "requiresConnectedFlowResolution":bool(row["missingConnectedFlowOriginalTextSha256"]),
                 "incrementalUnrecordedSegmentCount":n_new,
                 "incrementalUnicodeCodepoints":codepoints,
                 "cumulativeNewUniqueSegments":len(chosen),
@@ -186,9 +187,13 @@ def main():
         "ageCounts":{a:dict(by_age[a]) for a in AGES},
         "alreadyTechnicallyComplete":sum(by_age[a]["complete-v4-review"] for a in AGES),
         "questionsBlockedOnlyOnAlreadyPaidNine":sum(by_age[a]["restore-prepaid-originals-only"] for a in AGES),
+        "questionsWaitingOnlyForConnectedFlowOriginals":sum(by_age[a]["await-connected-flow-only"] for a in AGES),
+        "connectedFlowOriginalTextsPendingOrReserved":len(pending_flow),
+        "connectedFlowUnsettledStatuses":dict(Counter(x["status"] for x in pending_flow.values())),
         "questionsNeedingAtLeastOneGenuinelyNewOriginal":sum(
             by_age[a]["new-original-v4-needed"]+by_age[a]["both-prepaid-recovery-and-new-v4"] for a in AGES),
         "previouslyPaidMissingGenerationCount":len(missing9),
+        "reservedFlowOriginalsExcludedFromNewChargeQueue":len(pending_flow),
         "previouslyPaidMissingGenerationIds":sorted(missing9),
         "missingGenuineNewExactSegments":len(every_new),
         "missingGenuineNewTextCodepoints":sum(len(x) for x in every_new),
@@ -205,6 +210,10 @@ def main():
                 for g in sorted(missing9,key=lambda g:(-prepaid_uses[g],g))],
             "questions":sorted(records,key=lambda r:(AGES.index(r["ageBand"]),r["questionId"])),
             "possibleNewSpeechPriorityAfterOriginalRecovery":queue,
+            "connectedFlowOriginalsToRecoverWithoutSecondPurchase":[
+                {"sourceTextSha256":txt_hash(txt),"status":row["status"],
+                 "newSynthesisAllowed":False}
+                for txt,row in sorted(pending_flow.items())],
             "queueCostUnit":"Exact new Unicode codepoints only; not billed provider credits",
             "queueIsReviewOnly":True,"noCreditSpendConfirmed":True}
     OUT.parent.mkdir(parents=True,exist_ok=True)
