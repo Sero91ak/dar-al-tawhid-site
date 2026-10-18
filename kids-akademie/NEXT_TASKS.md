@@ -1,3 +1,11 @@
+## 18.10.2026 · Wissenschaftliche Prüfrunde 005–008 · Muslim 8 konsistent
+
+- **Neue Quellenakte:** `kids-akademie/research/SCIENTIFIC_REVIEW_WEEK02_005_008_20261018.md` – individuelle Quellenabgrenzung zu Ṣabr (005), guter Rede (006), Wuḍūʾ (007) und Īmān (008). Mehrere authentische Sunnah- und klassische Qurʾān-Tafsīr-Nachweise in der Akte. Weiter **keine endgültige wissenschaftliche Freigabe**.
+- **Fix Lektion 008:** Kindersichtbare arabische Sammlungsziffer der Überlieferung vom Ḥadīṯ Ǧibrīl von `Muslim 8a` auf **Ṣaḥīḥ Muslim 8** gemäß Dorar 25545 / `SRC-CORE8-MUSLIM-8` vereinheitlicht. `kids/akademie/curriculum-editorial-core-006-009-v1.js`: alle Altersfassungen, Original-Quiz bleibt. `kids/data/academy-voice-editorial-core-006-009-delta-v1.json`: **76/76 unvertonten Sprechtext-Kontexte synchronisiert, 0 Credits**.
+- **Neue Regression `kids/tools/test-academy-editorial-core-006-009-v1.cjs`:** prüft Sammlungsnummer 8, Quellennachweis, 12 Kinderfassungen, 76 Voice-Kontexte, und interne Textsperren. Workflow `.github/workflows/kids-akademie-editorial-readonly-qa.yml` führt diesen Test künftig im geschützten Draft aus. **Grünen CI-Lauf zum letzten quellrelevanten Commit gesondert prüfen** – älteren Erfolg nicht als neuer Nachweis ausgeben.
+- **Lektion 007:** Qurʾān 5:6 nur als deklarierter Versauszug; keine automatische Schlussfolgerung aus einem medizinischen Einzelfall. Ibn Qudāmah, al-Mughnī 15/128/15/202 im vorhandenen Entwurf; weiterhin `fiqhHumanReviewNeeded=true`.
+- **Wiederaufnahme:** wissenschaftlicher Viererblock **009–012** (Amānah, Respekt, Ṣalāh, Ikhlāṣ), Quellen-/Kinderdidaktik und Quellen-Nummern systematisch abgleichen. **208/208 Entwürfe**, **624/624 Altersversionen angelegt**, **0/624 wissenschaftlich freigegeben**. Kein Merge auf main, kein Live-Deploy, keine Audiogenerierung.
+
 ## 18.10.2026 · Wissenschaftliche Prüfrunde 001–004 gestartet · ein Quellenfehler korrigiert
 
 - **Neu:** `kids-akademie/research/SCIENTIFIC_REVIEW_WEEK01_001_004_20261018.md` – Einzelakte mit Originalquellen, Hadithnummern, präzisen Deutungsgrenzen und verbleibenden Prüffragen zu Ṣidq (001), Salām (002), Ṭahārah (003) und Tawḥīd (004). Das ist ein **inhaltlicher Teilabgleich**, keine Freigabe.
