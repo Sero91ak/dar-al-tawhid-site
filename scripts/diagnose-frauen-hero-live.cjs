@@ -152,6 +152,21 @@ function measure(){
          height:c.height,minHeight:c.minHeight,scrollBehavior:c.scrollBehavior,
          touchAction:c.touchAction,scrollSnapType:c.scrollSnapType,
          overscrollBehaviorY:c.overscrollBehaviorY};};
+       const resetTrace=[],nativeScrollTo=window.scrollTo;
+       const record=(type,value)=>{if(resetTrace.length<22)resetTrace.push({
+         type,value,top:document.scrollingElement?.scrollTop||0,
+         stack: type==="scrollTo"?String(new Error().stack).slice(0,660):""});};
+       window.scrollTo=function(...args){
+         record("scrollTo",JSON.stringify(args).slice(0,90));
+         return nativeScrollTo.apply(this,args);
+       };
+       const onRender=()=>record("dar:render","event");
+       const onFrauenRender=()=>record("dar:frauen-render","event");
+       document.addEventListener("dar:render",onRender);
+       document.addEventListener("dar:frauen-render",onFrauenRender);
+       const appView=document.getElementById("appView");
+       const domObserver=appView?new MutationObserver(()=>record("appViewMutation","childList")):null;
+       if(domObserver)domObserver.observe(appView,{childList:true});
        const before=read();
        window.scrollTo(0,620);
        const sync=read();
@@ -161,7 +176,11 @@ function measure(){
        const delayed=read();
        document.scrollingElement.scrollTop=620;
        const direct=read();
-       return {before,sync,nextFrame,delayed,direct,
+       window.scrollTo=nativeScrollTo;
+       document.removeEventListener("dar:render",onRender);
+       document.removeEventListener("dar:frauen-render",onFrauenRender);
+       if(domObserver)domObserver.disconnect();
+       return {before,sync,nextFrame,delayed,direct,resetTrace,
          windowScrollToType:String(window.scrollTo).slice(0,160),
          docStyles:styles(document.documentElement),bodyStyles:styles(document.body)};
      });
