@@ -108,6 +108,22 @@
   }
   async function locationIfNeeded(prefs) {
     if (prefs.prayer !== true) return null;
+    // Match the existing Kids Salah location/calculation settings.
+    // Never silently replace a manually chosen location with raw GPS.
+    const selected = (() => {
+      try { return JSON.parse(get("darkids_kids_prayer_place_v1") || "null"); }
+      catch (_) { return null; }
+    })();
+    if (selected && Number.isFinite(Number(selected.lat)) &&
+        Number.isFinite(Number(selected.lon)) && selected.tz) {
+      return {
+        lat: Number(selected.lat), lon: Number(selected.lon),
+        timezone: String(selected.tz),
+        city: String(selected.city || ""),
+        angle: Number(selected.angle || 12),
+        asr: Number(selected.asr || 1)
+      };
+    }
     if (!navigator.geolocation) throw new Error("location_missing");
     const coords = await new Promise((resolve, reject) => {
       navigator.geolocation.getCurrentPosition(
@@ -116,7 +132,11 @@
         { enableHighAccuracy: false, maximumAge: 60000, timeout: 12000 }
       );
     });
-    return { ...coords, timezone: Intl.DateTimeFormat().resolvedOptions().timeZone };
+    return {
+      ...coords,
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      angle: 12, asr: 1
+    };
   }
   async function callEnrollment(body) {
     const token = sessionGet()?.access_token;
