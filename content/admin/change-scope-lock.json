@@ -161,7 +161,8 @@
       "reason": "Read-only Playwright diagnostic for the adult Frauen Hero and scroll/keyboard behavior after production rollback, no CSS, app content, native, Kids, push or service worker edits.",
       "paths": [
         "scripts/diagnose-frauen-hero-live.cjs",
-        "content/admin/change-scope-lock.json"
+        "content/admin/change-scope-lock.json",
+        ".github/workflows/diagnose-frauen-hero-live.yml"
       ],
       "expiresAt": "2026-10-21T23:59:00.000Z"
     },
