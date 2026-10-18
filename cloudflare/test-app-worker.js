@@ -496,16 +496,6 @@ async function finalizeDarTestHomeV1193(asset) {
   html = html.replace(/(\/test\/assets\/frauen\/frauen-fiqh\.js)(?:\?v=[^"'<\s]*)?/g,
     "$1?v=frauen-rollback-20261016-1500");
 
-  // GLOBAL_HERO_IMMERSIVE_SCROLL_V1: late-stage adult Test-only hero/search rail.
-  // No rewrite of frozen Frauen source files, push, SW or page-wide scrolling.
-  if (!html.includes('id="darAdultImmersiveHeroTestV1"')) {
-    const immersiveHeroTest =
-      '<link rel="stylesheet" id="darAdultImmersiveHeroTestV1" href="/test/assets/adult-immersive-hero-v1.css?v=20261018-1">' +
-      '<script defer id="darAdultImmersiveHeroTestScriptV1" src="/test/assets/adult-immersive-hero-v1.js?v=20261018-1"></script>';
-    if (html.includes("</html>")) html = html.replace("</html>", immersiveHeroTest + "</html>");
-    else html += immersiveHeroTest;
-  }
-
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");
