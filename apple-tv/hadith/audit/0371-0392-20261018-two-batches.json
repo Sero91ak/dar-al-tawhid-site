@@ -1,0 +1,139 @@
+{
+  "project": "DĀR AL TAWḤĪD",
+  "date": "2026-10-18",
+  "kind": "legacy-athar-audit-20",
+  "sourceOfTruth": "apple-tv/hadith/series/",
+  "counts": {
+    "inspected": 20,
+    "fileUpdates": 20,
+    "verifiedStrongMawqufOrMaqtu": 2,
+    "chainsOrOriginalLocatedButStillOpen": 5,
+    "remainingAsWeakOrUnverified": 13,
+    "brandNewPublishedHadith": 0,
+    "brandNewPublishedAthar": 0
+  },
+  "previousAuditsRetained": [
+    "apple-tv/hadith/audit/0343-0392-earliest-sharh-audit.json",
+    "apple-tv/hadith/audit/2026-10-18-sharh-athar-continuation.json"
+  ],
+  "batches": [
+    {
+      "batch": 1,
+      "size": 10,
+      "ids": [
+        {
+          "id": "HAD-0371",
+          "result": "primary-chain-found; final grading pending"
+        },
+        {
+          "id": "HAD-0372",
+          "result": "primary-chain-found; individual grading pending"
+        },
+        {
+          "id": "HAD-0375",
+          "result": "parallel early chains found; final grading pending"
+        },
+        {
+          "id": "HAD-0376",
+          "result": "popular wording not established in cited early work; attribution open"
+        },
+        {
+          "id": "HAD-0377",
+          "result": "primary found with interrupted link to Umar; not sahih"
+        },
+        {
+          "id": "HAD-0378",
+          "result": "early source has unnamed intermediary shuyukh; attribution open"
+        },
+        {
+          "id": "HAD-0379",
+          "result": "primary source found; broken mawquf chain and weak marfu version"
+        },
+        {
+          "id": "HAD-0380",
+          "result": "verified sahih mawquf Abu Bakr; early collection Bukhari 3092–3093"
+        },
+        {
+          "id": "HAD-0381",
+          "result": "primary found but criticised chain (Muhammad ibn Bashir al-Kindi)"
+        },
+        {
+          "id": "HAD-0382",
+          "result": "exact source and chain missing"
+        }
+      ]
+    },
+    {
+      "batch": 2,
+      "size": 10,
+      "ids": [
+        {
+          "id": "HAD-0383",
+          "result": "early primary report chain found in Hilyat al-Awliya 1:253, grading still open"
+        },
+        {
+          "id": "HAD-0384",
+          "result": "exact source/chain missing"
+        },
+        {
+          "id": "HAD-0385",
+          "result": "exact source/chain missing"
+        },
+        {
+          "id": "HAD-0386",
+          "result": "exact source/chain missing"
+        },
+        {
+          "id": "HAD-0387",
+          "result": "exact source/chain missing"
+        },
+        {
+          "id": "HAD-0388",
+          "result": "generic collection not a quote-level source"
+        },
+        {
+          "id": "HAD-0389",
+          "result": "exact Darimi report not found"
+        },
+        {
+          "id": "HAD-0390",
+          "result": "confusion between Aishah narration of marfu hadith and unsupported standalone mawquf quote"
+        },
+        {
+          "id": "HAD-0391",
+          "result": "verified reliable Ibn Sirin maqtūʿ through Muslim Muqaddimah; semantic duplicate HAD-0245"
+        },
+        {
+          "id": "HAD-0392",
+          "result": "late attribution Hasan al-Basri cited but exact early Darimi chain not verified"
+        }
+      ]
+    }
+  ],
+  "verifiedPreviouslyToday": [
+    "HAD-0373",
+    "HAD-0374"
+  ],
+  "knownHighConfidence": [
+    "HAD-0373",
+    "HAD-0374",
+    "HAD-0380",
+    "HAD-0391"
+  ],
+  "sourceEvidence": {
+    "HAD-0371": "https://islamweb.net/ar/library/content/8/208/",
+    "HAD-0372": "https://www.islamweb.net/ar/library/content/110/24/",
+    "HAD-0375": "https://www.islamweb.net/ar/library/content/10/5575/",
+    "HAD-0377": "https://www.islamweb.net/ar/library/content/1013/632/",
+    "HAD-0378": "https://islamweb.net/ar/library/content/110/120/",
+    "HAD-0379": "https://www.islamweb.net/ar/library/content/131/243/",
+    "HAD-0380": "https://islamweb.net/ar/library/content/71/12387/",
+    "HAD-0381": "https://www.islamweb.net/ar/library/content/84/10288/",
+    "HAD-0383": "https://www.islamweb.net/ar/library/content/131/255/",
+    "HAD-0391": "https://www.islamweb.net/ar/library/content/1/28/",
+    "HAD-0392": "https://www.islamweb.net/ar/library/content/413/1342/"
+  },
+  "nextAction": "Proceed to first open genuine older Sharḥ/athar gaps from next audit block HAD-0393–0442 and earlier HAD-0039; new Hadith with Šarḥ and new authentic Athar use HAD-3358 onward after distinctness checks. Separate verified entries from inspected counts.",
+  "globalPublication": "GitHub main commits completed; CI/Cloudflare HTTP live endpoint and native iOS/tvOS runtime delivery NOT independently verified by this audit; do not mark delivered.",
+  "safety": "No independent OneSignal notification, no Kids changes, no native code changes. Current UI library may still show old records with explicit 'not verified' grading; actual runtime filtering requires separate verified testing."
+}
