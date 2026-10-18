@@ -21,7 +21,7 @@ struct KidsWebAppView: UIViewRepresentable {
 #if KIDS_CREATOR_TEST
         let officialMarker = ""
 #else
-        let officialMarker = "window.DAR_OFFICIAL_IOS_APP=true;"
+        let officialMarker = "window.DAR_OFFICIAL_IOS_APP=true;window.DAR_KIDS_NATIVE_START=true;"
 #endif
         let bridge = """
         (function(){
@@ -82,6 +82,9 @@ struct KidsWebAppView: UIViewRepresentable {
         private var hasKidsNowPlaying = false
         private var currentDeepLink = ""
         private var readingKeepsScreenAwake = false
+#if !KIDS_CREATOR_TEST
+        private var visitorProgressObservation: NSKeyValueObservation?
+#endif
 #if KIDS_CREATOR_TEST
         private var pendingCreatorTab: String?
 #endif
@@ -107,10 +110,31 @@ struct KidsWebAppView: UIViewRepresentable {
                 name: Notification.Name("DarKidsCreatorNavigate"),
                 object: nil
             )
+#else
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(retryVisitorInitialLoad(_:)),
+                name: Notification.Name("DarKidsVisitorRetryInitialLoad"),
+                object: nil
+            )
+            // WebKit's real load estimate never reaches 100 before the page is verified.
+            visitorProgressObservation = webView.observe(\.estimatedProgress, options: [.new]) { [weak self] page, _ in
+                guard let self = self, !self.hasPresentedInitialPage else { return }
+                let fraction = min(0.95, max(0.0, page.estimatedProgress))
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(
+                        name: Notification.Name("DarKidsVisitorLoadProgress"),
+                        object: fraction
+                    )
+                }
+            }
 #endif
         }
 
         deinit {
+#if !KIDS_CREATOR_TEST
+            visitorProgressObservation?.invalidate()
+#endif
             NotificationCenter.default.removeObserver(self)
             DispatchQueue.main.async {
                 UIApplication.shared.isIdleTimerDisabled = false
@@ -130,6 +154,13 @@ struct KidsWebAppView: UIViewRepresentable {
                 )
             )
         }
+
+#if !KIDS_CREATOR_TEST
+        @objc private func retryVisitorInitialLoad(_ notice: Notification) {
+            guard let page = webView else { return }
+            loadKidsHome(in: page)
+        }
+#endif
 
 #if KIDS_CREATOR_TEST
         // The native menu never grants creator permissions. Only navigation
@@ -336,6 +367,20 @@ struct KidsWebAppView: UIViewRepresentable {
 #endif
             guard !hasPresentedInitialPage else { return }
             hasPresentedInitialPage = true
+#if !KIDS_CREATOR_TEST
+            // Do not claim success for a blank/error page or an intermediate redirect.
+            webView.evaluateJavaScript(
+                "Boolean(document.getElementById('view-today') && document.querySelector('#view-today .hero'))"
+            ) { value, _ in
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(
+                        name: Notification.Name((value as? Bool == true)
+                            ? "DarKidsVisitorPageLoaded" : "DarKidsVisitorLoadFailed"),
+                        object: nil
+                    )
+                }
+            }
+#endif
             UIView.animate(
                 withDuration: 0.28,
                 delay: 0,
@@ -346,10 +391,20 @@ struct KidsWebAppView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+#if !KIDS_CREATOR_TEST
+            if (error as NSError).code != NSURLErrorCancelled && !hasPresentedInitialPage {
+                NotificationCenter.default.post(name: Notification.Name("DarKidsVisitorLoadFailed"), object: nil)
+            }
+#endif
             presentWebView(webView)
         }
 
         func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+#if !KIDS_CREATOR_TEST
+            if (error as NSError).code != NSURLErrorCancelled && !hasPresentedInitialPage {
+                NotificationCenter.default.post(name: Notification.Name("DarKidsVisitorLoadFailed"), object: nil)
+            }
+#endif
             presentWebView(webView)
         }
 

@@ -45,10 +45,82 @@ struct KidsRootView: View {
         }
     }
 #else
+    // PUBLIC APP 1.0.2: native loading covers the complete first WebView navigation.
+    // A separate visitor-only JS bridge disables the web splash to avoid a double opener.
+    @State private var visitorStartVisible = true
+    @State private var visitorLoadProgress = 0
+    @State private var visitorLoadFailed = false
+    @State private var visitorLoadSlow = false
+
     var body: some View {
-        KidsWebAppView()
-            .ignoresSafeArea()
-            .background(Color(red: 12.0 / 255, green: 38.0 / 255, blue: 54.0 / 255))
+        ZStack {
+            KidsWebAppView()
+                .ignoresSafeArea()
+                .background(Color(red: 12.0 / 255, green: 38.0 / 255, blue: 54.0 / 255))
+
+            if visitorStartVisible {
+                GeometryReader { geometry in
+                    ZStack(alignment: .bottom) {
+                        Image("KidsVisitorLaunchPoster")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .clipped()
+
+                        KidsVisitorLaunchProgress(
+                            percent: visitorLoadProgress,
+                            failed: visitorLoadFailed,
+                            slow: visitorLoadSlow,
+                            retry: {
+                                visitorLoadProgress = 0
+                                visitorLoadFailed = false
+                                visitorLoadSlow = false
+                                NotificationCenter.default.post(
+                                    name: Notification.Name("DarKidsVisitorRetryInitialLoad"),
+                                    object: nil
+                                )
+                            }
+                        )
+                        .padding(.horizontal, 22)
+                        .padding(.bottom, max(geometry.safeAreaInsets.bottom, 16) + 32)
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height)
+                }
+                .ignoresSafeArea()
+                .transition(.opacity)
+                .zIndex(2)
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DarKidsVisitorLoadProgress"))) { notice in
+            guard visitorStartVisible, !visitorLoadFailed, visitorLoadProgress < 100,
+                  let value = notice.object as? Double else { return }
+            withAnimation(.easeOut(duration: 0.22)) {
+                visitorLoadProgress = min(95, max(visitorLoadProgress, Int(value * 100)))
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DarKidsVisitorPageLoaded"))) { _ in
+            guard visitorStartVisible, !visitorLoadFailed else { return }
+            visitorLoadSlow = false
+            withAnimation(.easeOut(duration: 0.2)) {
+                visitorLoadProgress = 100
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                guard visitorStartVisible else { return }
+                withAnimation(.easeInOut(duration: 0.45)) {
+                    visitorStartVisible = false
+                }
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DarKidsVisitorLoadFailed"))) { _ in
+            guard visitorStartVisible else { return }
+            visitorLoadFailed = true
+        }
+        .task {
+            try? await Task.sleep(nanoseconds: 15_000_000_000)
+            if !Task.isCancelled && visitorStartVisible && visitorLoadProgress < 100 {
+                visitorLoadSlow = true
+            }
+        }
     }
 #endif
 }
@@ -120,6 +192,62 @@ private struct KidsCreatorPanel: View {
             .overlay(RoundedRectangle(cornerRadius: 13).stroke(gold.opacity(0.35)))
         }
         .buttonStyle(.plain)
+    }
+}
+#endif
+
+
+#if !KIDS_CREATOR_TEST
+/// The illustrated first frame is native: actual WebKit progress, completed page at 100%.
+private struct KidsVisitorLaunchProgress: View {
+    let percent: Int
+    let failed: Bool
+    let slow: Bool
+    let retry: () -> Void
+
+    private let gold = Color(red: 0.93, green: 0.81, blue: 0.59)
+
+    var body: some View {
+        VStack(spacing: 12) {
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
+                Text(failed ? "Verbindung fehlgeschlagen" :
+                     slow ? "Laden dauert länger" : "Kinderwelt wird vorbereitet")
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white)
+                    .lineLimit(2)
+                Spacer(minLength: 4)
+                Text("\(percent) %")
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .monospacedDigit()
+                    .foregroundStyle(gold)
+            }
+            ProgressView(value: Double(percent), total: 100)
+                .progressViewStyle(.linear)
+                .tint(gold)
+                .accessibilityLabel("Ladefortschritt")
+                .accessibilityValue("\(percent) Prozent")
+            if failed || slow {
+                Button(action: retry) {
+                    Label("Erneut laden", systemImage: "arrow.clockwise")
+                        .font(.system(size: 13, weight: .bold, design: .rounded))
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(gold)
+                .foregroundStyle(Color(red: 0.06, green: 0.15, blue: 0.20))
+            }
+        }
+        .padding(.horizontal, 19)
+        .padding(.vertical, 17)
+        .frame(maxWidth: 420)
+        .background(
+            RoundedRectangle(cornerRadius: 21, style: .continuous)
+                .fill(Color(red: 0.04, green: 0.12, blue: 0.19).opacity(0.91))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 21, style: .continuous)
+                .stroke(gold.opacity(0.35), lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.24), radius: 16, y: 7)
     }
 }
 #endif
