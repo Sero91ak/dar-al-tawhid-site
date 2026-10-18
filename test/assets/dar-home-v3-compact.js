@@ -169,7 +169,7 @@ document.addEventListener("click",function(e){
 document.addEventListener("input",function(e){
  if(e.target?.id!=="homeSearchInput"||!document.getElementById("dv3Home"))return;
  const clear=document.getElementById("dv3SearchClear");if(clear)clear.hidden=!e.target.value;
- try{if(typeof applyHomeFilters==="function")applyHomeFilters()}catch(err){}
+ // Existing bindHomeV380Events already performs one native search; do not fire a second.
 });
 document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;const p=document.getElementById("dv3ThemePanel");if(p&&!p.hidden){p.hidden=true;e.preventDefault();}});
 document.addEventListener("dar:view-rendered",queue);
