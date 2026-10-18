@@ -1,0 +1,18 @@
+# Separate Kids prayer-notification Worker. Never merge its app ID into adult Worker.
+# Deployment does not activate pushes until a verified enrollment exists AND
+# KIDS_PRAYER_PUSH_ENABLED is explicitly changed to "true".
+name = "dar-tawhid-kids-prayer"
+main = "kids-prayer-worker.js"
+compatibility_date = "2026-10-18"
+
+[vars]
+ONESIGNAL_KIDS_APP_ID = "f8d837a0-406a-4a8a-8c6a-e0c2f8bc2766"
+KIDS_PRAYER_PUSH_ENABLED = "false"
+
+[triggers]
+crons = ["*/5 * * * *"]
+
+# Create secrets ONLY in this Kids Worker:
+# wrangler secret put ONESIGNAL_KIDS_API_KEY --config wrangler.kids-push.toml
+# wrangler secret put SUPABASE_KIDS_SERVICE_ROLE_KEY --config wrangler.kids-push.toml
+# Never store API keys in GitHub or point this worker to an adult app.
