@@ -331,8 +331,9 @@ struct KidsWebAppView: UIViewRepresentable {
                         ? "Es ist Zeit für dein Gebet."
                         : "In " + String(advance) + " Minuten beginnt dein Gebet."
                     content.sound = .default
-                    let components = calendar.dateComponents(
+                    var components = calendar.dateComponents(
                         [.year, .month, .day, .hour, .minute], from: time)
+                    components.timeZone = TimeZone(secondsFromGMT: 0)
                     let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
                     let id = "kids.creator.salah." + key + "." + day
                     planned.append((
