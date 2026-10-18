@@ -72,12 +72,13 @@ function audienceFilters(item) {
   ];
   if (!groups.length) return filters;
 
-  // OneSignal: AND zwischen Kids-Tag und geklammerter Alters-OR-Gruppe.
-  filters.push({ operator: "AND" });
-  groups.forEach((label, index) => {
-    if (index) filters.push({ operator: "OR" });
-    filters.push({ field: "tag", key: "kids_age", relation: "=", value: label });
-  });
+  // Do not combine an OR expression with parent-consent filters: OneSignal
+  // filters are flat and an OR branch may escape mandatory opt-in conditions.
+  // in_array keeps age targeting inside a single AND condition.
+  filters.push(
+    { operator: "AND" },
+    { field: "tag", key: "kids_age", relation: "in_array", value: groups.join(",") }
+  );
   return filters;
 }
 
