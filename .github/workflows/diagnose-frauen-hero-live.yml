@@ -20,7 +20,7 @@ jobs:
           node-version: "22"
       - run: |
           npm install --no-save --ignore-scripts playwright
-          npx playwright install --with-deps chromium
+          npx playwright install --with-deps chromium webkit
       - name: Inspect visible hero and scroll on deployed Test and visitor apps
         run: node scripts/diagnose-frauen-hero-live.cjs
       - uses: actions/upload-artifact@v4
