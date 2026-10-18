@@ -158,12 +158,14 @@
       "id": "frauen-scroll-reset-versioned-candidate-20261018",
       "at": "2026-10-18T11:35:00+02:00",
       "approvedBy": "user-explicit-continue-fixing-hero-scroll-issues-in-verified-staging-20261018",
-      "reason": "Versioned read-only-in-production Frauen live adapter V2 candidate and isolated Playwright contract. Frozen Frauen original source, existing router, Test and visitor HTML/CSS, Kids, push, prayer, Service Worker remain untouched pending QA.",
+      "reason": "Versioned read-only-in-production Frauen live adapter V2 candidate and isolated Playwright contract. Frozen Frauen original source, existing router, Test and visitor HTML/CSS, Kids, push, prayer, Service Worker remain untouched pending QA. Add separately opt-in sticky layout CSS + resize-only geometry helper and synthetic browser tests; never inject into actual visitor or Test.",
       "paths": [
         "assets/frauen/frauen-live-adapter-scroll-safe-v2.js",
         "scripts/verify-frauen-scroll-safe-v2.cjs",
         ".github/workflows/check-frauen-scroll-safe-v2.yml",
-        "content/admin/change-scope-lock.json"
+        "content/admin/change-scope-lock.json",
+        "assets/frauen/frauen-sticky-scroll-safe-v2.css",
+        "assets/frauen/frauen-sticky-scroll-safe-v2.js"
       ],
       "expiresAt": "2026-11-02T23:59:00.000Z"
     },
