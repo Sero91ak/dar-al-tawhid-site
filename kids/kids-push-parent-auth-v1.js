@@ -9,6 +9,7 @@
   const STORAGE_SESSION = "dar.kids.push.guardian.session.v1";
   const STORAGE_CONSENT = "dar.kids.push.parent.consent.v1";
   const STORAGE_PREFS = "dar.kids.push.preferences.v1";
+  const STORAGE_DEVICE = "dar.kids.push.subscription.id.v1";
   const NATIVE = Boolean(window.DAR_KIDS_IOS_APP || window.DAR_IOS_NATIVE_APP);
   const WEB_HOST_OK = location.hostname === "kids.dar-al-tawhid.de";
   const $ = id => document.getElementById(id);
@@ -178,6 +179,7 @@
         ageBand: age, preferences: normalized, location: loc
       });
       lastRegistered = fingerprint;
+      try { localStorage.setItem(STORAGE_DEVICE, id); } catch (_) {}
       say("Elternkonto und Gerät sind für die ausgewählten Push-Arten freigegeben.");
     } catch (e) {
       if (String(e.message).includes("location")) say("Für Gebets-Push bitte den Standort erlauben oder Gebets-Push abwählen.");
@@ -190,10 +192,11 @@
   async function disableServerEnrollment() {
     if (!sessionGet()) return;
     try {
-      const id = await subscriptionId();
+      const id = get(STORAGE_DEVICE) || await subscriptionId();
       if (/^[0-9a-f-]{36}$/i.test(id)) {
         await callEnrollment({ action: "disable", subscriptionId: id });
         lastRegistered = "";
+        try { localStorage.removeItem(STORAGE_DEVICE); } catch (_) {}
       }
     } catch (_) {
       say("Auf dem Gerät deaktiviert. Zur serverseitigen Abmeldung bitte die Eltern-E-Mail erneut bestätigen.");
