@@ -51,6 +51,8 @@ jobs:
         run: node kids/tools/audit-academy-editorial-155-208-v1.cjs
       - name: Check all 54 child-facing editorial lessons and text voice contexts
         run: node kids/tools/audit-academy-visitor-copy-155-208-v1.cjs
+      - name: Check foundational Īmān citation and narration 006–009
+        run: node kids/tools/test-academy-editorial-core-006-009-v1.cjs
       - name: Check foundation Fiqh slots 3, 7, 11
         run: |
           node --check kids/akademie/curriculum-foundation-fiqh-003-007-011-v1.js
