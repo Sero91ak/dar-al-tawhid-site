@@ -1,0 +1,92 @@
+/* GLOBAL_HERO_IMMERSIVE_SCROLL_V1 · adult Dar Test only.
+ * Keep existing imagery, content and theme palettes. No scroll interception.
+ * A single sticky rail owns women Hero + optional search; reader content moves beneath it.
+ */
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
+  position:sticky!important;
+  top:0!important;
+  z-index:65!important;
+  isolation:isolate;
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0 0 clamp(16px,2.5vw,27px)!important;
+  background:var(--bg,#f4efec)!important;
+  overflow:visible!important;
+  transform:none!important;
+  contain:none!important;
+}
+/* In a viewport-fit=cover WebView, extend the same hero photo into the exposed
+   upper safe area. A native system bar outside the WebView remains OS-owned. */
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage::before{
+  content:"";
+  position:absolute;
+  inset-inline-start:calc(50% - 50vw);
+  top:calc(-1 * env(safe-area-inset-top,0px));
+  width:100vw;
+  height:env(safe-area-inset-top,0px);
+  background-image:linear-gradient(90deg,rgba(2,13,13,.82),rgba(2,13,13,.32)),var(--dar-immersive-top-image,none);
+  background-size:cover;
+  background-position:center top;
+  pointer-events:none;
+  z-index:0;
+}
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > .frauen-library-hero{
+  position:relative!important;
+  z-index:1!important;
+  width:100vw!important;
+  max-width:none!important;
+  margin:0 0 0 calc(50% - 50vw)!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  border-top:0!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
+  position:relative!important;
+  z-index:2!important;
+  width:min(920px,calc(100% - 8px))!important;
+  margin:-30px auto 0!important;
+  padding-bottom:8px!important;
+  box-sizing:border-box!important;
+}
+/* Preserve the existing input and search card. Under-scrolling pages must not
+   show through the rail; do not add blurred or translucent strips below it. */
+html[data-theme] body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list){
+  overflow:visible!important;
+}
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage[data-has-search="0"]{
+  background:transparent!important;
+}
+/* Existing adult hero headings: preserve their direct-child CSS selectors.
+   They stick inside their own page, instead of affecting dialogs/readers. */
+html[data-theme] body.is-post-route #appView.view > .post-reader > .post-reader-title,
+html[data-theme] body.is-topics-route #appView.view > .topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page > .view-head,
+html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head{
+  position:sticky!important;
+  top:0!important;
+  z-index:64!important;
+  background-repeat:no-repeat!important;
+  background-size:cover,cover,cover!important;
+}
+/* Search remains attached only when the corresponding hero has an adjacent
+   search block; the height comes from ResizeObserver, never a scroll event. */
+html[data-theme] body.is-hadith-route #appView .hadith-hub > :is(.main-search,#hadithSearchBlock),
+html[data-theme] body.is-topics-route #appView .topics-hub > .main-search,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .main-search{
+  position:sticky!important;
+  top:var(--dar-immersive-hero-height,0px)!important;
+  z-index:65!important;
+}
+@media(max-height:540px) and (orientation:landscape){
+  html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
+    margin-top:-18px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
+    scroll-behavior:auto!important;
+  }
+}
