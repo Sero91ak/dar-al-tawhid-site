@@ -5,7 +5,7 @@
  * visitor/native-web, Android PWA and desktop surfaces after a rollback.
  * Never send pushes, submit forms or mutate user data.
  */
-const { chromium }=require("playwright");
+const { chromium, webkit }=require("playwright");
 const fs=require("node:fs");
 const path=require("node:path");
 const out=path.join(process.cwd(),"frauen-hero-live-evidence");
@@ -126,6 +126,39 @@ function measure(){
      }
      await context.close();
    }
+   // Native-engine differential: Chromium with an iOS UA is not iOS WebKit.
+   // This is read-only: record whether Safari/WebKit can scroll its real
+   // document despite Chromium's wheel probe not moving. No UI writes.
+   const nativeSafari=await webkit.launch({headless:true});
+   try{
+     const cfg=routes.find(x=>x.id==="visitor-ios-webview");
+     const context=await nativeSafari.newContext({
+       viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,
+       userAgent:cfg.ua,locale:"de-DE",javaScriptEnabled:true
+     });
+     const page=await context.newPage();const errors=[];
+     page.on("pageerror",e=>errors.push(e.message.slice(0,280)));
+     const res=await page.goto(cfg.url,{waitUntil:"domcontentloaded",timeout:55000});
+     await page.waitForTimeout(6500);
+     const before=await page.evaluate(measure);
+     await page.screenshot({path:path.join(out,"webkit-ios-native-before.png")});
+     // Mobile WebKit does not support Playwright mouse.wheel; native scroll
+     // geometry is probed through the browsing context scroll API.
+     await page.evaluate(()=>window.scrollTo({top:620,behavior:"instant"}));
+     await page.waitForTimeout(650);
+     const after=await page.evaluate(measure);
+     await page.screenshot({path:path.join(out,"webkit-ios-native-scroll.png")});
+     const scrollNodes=(after.scrollNodes||[]).filter(n=>n.top>60);
+     const info={id:"webkit-ios-native-scroll",status:res.status(),
+       before:{hero:before.hero,scrollNodes:before.scrollNodes,gate:before.gateVisible},
+       after:{hero:after.hero,scrollNodes:after.scrollNodes},
+       scrolled:scrollNodes.map(n=>n.name),errors};
+     console.log("HERO_WEBKIT_DIFFERENTIAL "+JSON.stringify(info).slice(0,13500));
+     results.push(info);
+     if(before.documentScrollMax>200&&!scrollNodes.length)
+       issues.push("Native WebKit iOS route cannot scroll programmatically either");
+     await context.close();
+   }finally{await nativeSafari.close();}
  }catch(err){issues.push("audit runner: "+String(err.stack||err).slice(0,600));}
  finally{
    if(browser)await browser.close();
