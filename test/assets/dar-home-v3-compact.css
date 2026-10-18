@@ -168,3 +168,10 @@ html.dar-home-v3 body.is-home-route .brand-main .dv3-brand-copy{display:flex!imp
 html.dar-home-v3 body.is-home-route .brand-main .brand-kicker-row{display:block!important;order:0!important}
 html.dar-home-v3 body.is-home-route .brand-main .brand-title-refined{display:block!important;order:1!important}
 html.dar-home-v3 body.is-home-route .header-row--brand-only>.brand{flex:1 1 auto!important;min-width:0!important}
+
+html.dar-home-v3 body.is-home-route .dv3-tool img{width:19px;height:19px;object-fit:contain}
+html.dar-home-v3 body.is-home-route .dv3-accountlink img{width:19px;height:19px}
+@media(max-width:420px){
+html.dar-home-v3 body.is-home-route .dv3-accountlink span{display:block!important;white-space:nowrap;font-size:10px}
+html.dar-home-v3 body.is-home-route .dv3-accountlink{min-width:0;max-width:55%;padding:8px}
+}
