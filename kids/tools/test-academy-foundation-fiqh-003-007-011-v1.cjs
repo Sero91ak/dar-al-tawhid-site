@@ -37,4 +37,14 @@ for(const id of ids){
  assert.equal(V.contexts.find(x=>x.lessonId===id&&x.age==="all"&&x.kind==="summary")?.text,l.ageText["4-5"].audioScript);
 }
 assert.equal(originals["fiqh-wudu"].quran.excerpt,true,"Quran 5:6 must remain visibly excerpted");
+const taharah=after["fiqh-taharah"].ageText;
+assert.match(taharah["4-5"].evidence,/Islamweb 49\/1907/,"early interpretation must have direct Tafsir locus");
+assert.match(taharah["6-8"].lines[1],/Ibn Kaṯīr.*mehrere frühe Erklärungen/,"child text must not claim 74:4 has only one interpretation");
+assert.match(taharah["9-10"].lines[1],/Waschen der Kleidung.*Reinheit des Handelns.*Herz und Absicht/,"older pupils must learn classical plurality of 74:4");
+for(const age of ["4-5","6-8","9-10"]){
+ assert.match(taharah[age].evidence,/Islamweb 49\/1907/,"source boundary missing in age "+age);
+ const contexts=V.contexts.filter(x=>x.lessonId==="fiqh-taharah"&&x.age===age);
+ assert.equal(contexts.find(x=>x.kind==="audio")?.text,taharah[age].audioScript,"narration must match source correction "+age);
+}
+
 process.stdout.write("PASS foundation Fiqh: "+ids.length+" lessons, "+checks+" independent age texts, "+V.contexts.length+" ungenerated contexts, source bindings and original quizzes preserved. No approval/deploy.\n");
