@@ -210,7 +210,7 @@ def import_backup(zip_path,root=ROOT,apply=False):
             if (new is not None
                 and old.get("status")=="REQUEST_STARTED_UNCONFIRMED"
                 and new.get("status")=="ORIGINAL_MP3_SAVED"
-                and all(new.get(k)==v for k,v in old.items())):
+                and all(new.get(k)==v for k,v in old.items() if k!="status")):
                 digest_text=old["textSHA256"]
                 spoken=next((t for t in originals
                              if source_digest(t)==digest_text),None)
