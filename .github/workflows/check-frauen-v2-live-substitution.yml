@@ -1,0 +1,35 @@
+name: Frauen V2 Live HTML Substitution QA
+on:
+  pull_request:
+    paths:
+      - 'assets/frauen/frauen-live-adapter-scroll-safe-v2.js'
+      - 'assets/frauen/frauen-sticky-scroll-safe-v2.css'
+      - 'assets/frauen/frauen-sticky-scroll-safe-v2.js'
+      - 'scripts/verify-frauen-v2-live-substitution.cjs'
+      - '.github/workflows/check-frauen-v2-live-substitution.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  production-readonly-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install browser engines
+        run: |
+          npm install --no-save --ignore-scripts playwright
+          npx playwright install --with-deps chromium webkit
+      - name: Inspect real adult visitor HTML with V2 replacement in browser memory only
+        run: node scripts/verify-frauen-v2-live-substitution.cjs
+      - name: Preserve screenshot evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frauen-v2-live-html-substitution-evidence
+          path: frauen-v2-real-site-evidence/
+          retention-days: 7
+          if-no-files-found: warn
