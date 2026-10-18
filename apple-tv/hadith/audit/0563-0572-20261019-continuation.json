@@ -1,0 +1,106 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-19",
+  "track": "I-hadith-athar",
+  "branch": "audit/had-0563-0572-20261019",
+  "baseMainSha": "61a46c3c4e527d7363457e73c6a0558c62081bb8",
+  "range": "HAD-0563–HAD-0572",
+  "inspected": 10,
+  "hadith": 8,
+  "athar": 2,
+  "previouslyFlaggedSemanticDuplicates": 2,
+  "earlierSharhCandidatesFound": 2,
+  "newIndependentlyAuthenticated": 0,
+  "newCanonicalIds": 0,
+  "newPublished": 0,
+  "liveStatus": "not-published-audit-only",
+  "verificationStandard": "Metadata inspection of all 10 current main records; two independently located earlier commentary witnesses, not the original earlier works; other status remains open. No unsupported authenticity claims.",
+  "sourcesPolicy": "Islamweb witnesses are supporting source locations, not final verified primary originals.",
+  "entries": [
+    {
+      "id": "HAD-0563",
+      "type": "hadith",
+      "status": "semantic-duplicate",
+      "existingDuplicateOf": "HAD-0514",
+      "independentAuthentication": "not-new",
+      "next": "Keep duplicate flag; do not republish."
+    },
+    {
+      "id": "HAD-0564",
+      "type": "hadith",
+      "status": "earliest-direct-sharh-open",
+      "currentSharh": "Abū al-ʿAbbās al-Qurṭubī, al-Mufhim",
+      "next": "Confirm earlier direct commentary before asserting earliest; current classical direct sharh documented."
+    },
+    {
+      "id": "HAD-0565",
+      "type": "hadith",
+      "status": "semantic-duplicate",
+      "existingDuplicateOf": "HAD-0528",
+      "independentAuthentication": "not-new",
+      "next": "Keep duplicate flag; do not republish."
+    },
+    {
+      "id": "HAD-0566",
+      "type": "hadith",
+      "status": "earliest-direct-sharh-open",
+      "currentSharh": "Abū al-ʿAbbās al-Qurṭubī, al-Mufhim",
+      "next": "Verify earlier direct explanation of īmān branches; preserve variant wording 60/70."
+    },
+    {
+      "id": "HAD-0567",
+      "type": "hadith",
+      "status": "earliest-direct-sharh-open",
+      "currentSharh": "Ibn Ḥaǧar, Fatḥ al-Bārī",
+      "next": "Check earlier direct commentary to exact ʿUṯmān narration (e.g. Ibn Baṭṭāl), not mere chapter mention."
+    },
+    {
+      "id": "HAD-0568",
+      "type": "hadith",
+      "status": "earlier-commentary-candidate-found",
+      "currentSharh": "al-ʿAẓīmābādī, ʿAwn al-Maʿbūd (late)",
+      "earlierCandidate": "al-Ḫaṭṭābī (d. 388 AH), commentary quoted in later Islamic literature",
+      "primaryOriginalStatus": "not independently located",
+      "sourceWitness": "https://www.islamweb.net/ar/library/content/308/6382",
+      "next": "Locate al-Ḫaṭṭābī's own direct original and exact work/section; confirm original isnād and grade, then replace late sharh only if proven."
+    },
+    {
+      "id": "HAD-0569",
+      "type": "hadith",
+      "status": "earlier-direct-commentary-candidate-found",
+      "currentSharh": "an-Nawawī, Šarḥ Muslim",
+      "earlierCandidate": "Ibn Baṭṭāl (d. 449 AH), direct explanation of 'kullu maʿrūf ṣadaqah' quoted by Ibn Ḥaǧar",
+      "primaryOriginalStatus": "original Ibn Baṭṭāl volume/page not yet independently verified",
+      "sourceWitness": "https://www.islamweb.net/ar/library/content/52/11002",
+      "next": "Check Ibn Baṭṭāl's own Šarḥ al-Buḫārī and exact original location; only then promote earlier Šarḥ."
+    },
+    {
+      "id": "HAD-0570",
+      "type": "hadith",
+      "status": "earliest-direct-sharh-open",
+      "currentSharh": "ʿAlī al-Qārī, Mirqāt al-Mafātīḥ",
+      "sourceGradeNote": "Catalog grade 'Ṣaḥīḥ' vs record note 'ḥasan ġarīb' requires narrator-path-specific clarification.",
+      "next": "Find earlier direct commentary and confirm at-Tirmiḏī grading in original."
+    },
+    {
+      "id": "HAD-0571",
+      "type": "athar",
+      "status": "attribution-isnad-open",
+      "attributedTo": "Abū Bakr aṣ-Ṣiddīq",
+      "issue": "Ibn Saʿd / Ibn Hišām named without exact chain, chapter or page",
+      "next": "Read original Arabic sermon with full chain and classify transmission before authenticating."
+    },
+    {
+      "id": "HAD-0572",
+      "type": "athar",
+      "status": "attribution-isnad-open",
+      "attributedTo": "ʿUmar ibn al-Ḫaṭṭāb",
+      "issue": "Ibn Abī ad-Dunyā named without exact report number, chain or grading; later sources say 'yurwā ʿan ʿUmar'.",
+      "sourceWitness": "https://www.islamweb.net/ar/fatwa/46837",
+      "next": "Locate full original chain and assess ittisāl and narrators; do not call ṣaḥīḥ based on quotation."
+    }
+  ],
+  "remaining": "8 entries need earlier-direct-sharh or individual chain verification; 2 known duplicates stay suppressed. Counts overlap only by explicit category, not as completed authenticity.",
+  "nextRange": "HAD-0573–HAD-0592 after finishing earlier-sharh and isnād gaps",
+  "protected": "No Kids, push, worker, production or native changes; no main merge."
+}
