@@ -155,6 +155,17 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-hero-visual-diagnosis-20261018",
+      "at": "2026-10-18T09:05:00+02:00",
+      "approvedBy": "user-explicit-investigate-test-and-frauen-global-hero-regression-20261018",
+      "reason": "Read-only Playwright diagnostic for the adult Frauen Hero and scroll/keyboard behavior after production rollback, no CSS, app content, native, Kids, push or service worker edits.",
+      "paths": [
+        "scripts/diagnose-frauen-hero-live.cjs",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-21T23:59:00.000Z"
+    },
+    {
       "id": "adult-immersive-hero-test-20261018",
       "at": "2026-10-18T07:25:00+02:00",
       "approvedBy": "user-explicit-global-immersive-hero-scroll-under-test-visitor-desktop-20261018",
