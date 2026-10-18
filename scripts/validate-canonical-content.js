@@ -111,6 +111,24 @@ function validateTadabbur() {
   ok("tadabbur entries=" + loaded);
 }
 
+function validateScreensaverMetadata() {
+  // The screensaver's published card counts must follow the canonical
+  // hadith/athar source. Tadabbur has its own separate verified catalog.
+  const hadith = readJson("apple-tv/hadith/catalog.json");
+  const screensaver = readJson("apple-tv/screensaver/catalog.json");
+  const index = readJson("apple-tv/screensaver/entries-index.json");
+  const sync = readJson("apple-tv/hadith/sync-status.json");
+  if (!hadith || !screensaver || !index || !sync) return;
+  const count = Number(hadith.totalCount);
+  if (Number(screensaver.contentVersion) !== count) fail("screensaver contentVersion is stale");
+  if (Number(screensaver.entriesCount) !== count) fail("screensaver entriesCount is stale");
+  if (Number(index.totalVerifiedEntries) !== count) fail("screensaver entries-index is stale");
+  if (Number(sync.hadithCount) !== count) fail("apple-tv/hadith sync-status hadithCount is stale");
+  if (String(sync.hadithLatestId) !== String(hadith.latestId)) fail("apple-tv/hadith sync-status latest ID is stale");
+  if (Number(sync.atharCount) !== Number(hadith.atharCount)) fail("apple-tv/hadith sync-status atharCount is stale");
+  ok("screensaver metadata follows hadith catalog count=" + count);
+}
+
 function validateAthar() {
   const dir = path.join(ROOT, "content/quran-athar/de");
   if (!fs.existsSync(dir)) {
@@ -127,6 +145,7 @@ function validateAthar() {
 }
 
 validateHadith();
+validateScreensaverMetadata();
 validateTadabbur();
 validateAthar();
 
