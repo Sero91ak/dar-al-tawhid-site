@@ -222,8 +222,34 @@
     if (enabled) nativeMessage("configure");
     status(enabled ? "Benachrichtigungen aktiviert." : "Berechtigung nicht erteilt.");
   });
+  function openNotificationDestination() {
+    const requested = new URL(location.href).searchParams.get("view");
+    if (!["quiz", "learning", "stories", "parents"].includes(requested)) return;
+    let attempts = 0;
+    const waitForKidsUI = () => {
+      if (document.getElementById("profileJoin")?.hidden === false) return;
+      const selector = {
+        quiz: "#openQuizButton",
+        learning: "[data-academy-open=\"1\"]",
+        stories: ".bottom-nav .nav-btn[data-target=\"stories\"]",
+        parents: ".bottom-nav .nav-btn[data-target=\"parents\"]"
+      }[requested];
+      const button = document.querySelector(selector);
+      if (!button) {
+        if (++attempts < 10) setTimeout(waitForKidsUI, 300);
+        return;
+      }
+      // Open the existing library/lesson-resume controls, never restart progress.
+      button.click();
+      const url = new URL(location.href);
+      url.searchParams.delete("view");
+      history.replaceState(history.state, "", url.pathname + url.search + url.hash);
+    };
+    setTimeout(waitForKidsUI, 180);
+  }
   function init() {
     makePanel();
+    openNotificationDestination();
     // Only initialize Web SDK on existing explicit consent. Never auto-prompt.
     if (!IS_NATIVE && WEB_HOST_SAFE && read(CONSENT_KEY) === "yes") {
       ensureWebSDK().then(syncTags).catch(() => status("Push derzeit nicht erreichbar."));
