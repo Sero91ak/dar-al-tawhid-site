@@ -115,7 +115,12 @@ Deno.serve(async (request) => {
   );
   // Never infer coordinates from a child's profile or IP address.
   let lat = null, lon = null, city = null, timezone = null;
+  let angle = 12, asrFactor = 1;
   if (prefs.prayer) {
+    angle = Number(body.location?.angle ?? 12);
+    asrFactor = Number(body.location?.asr ?? 1);
+    if (!Number.isFinite(angle) || angle < 1 || angle > 30 ||
+        ![1, 2].includes(asrFactor)) return reply(400, { error: "invalid_prayer_method" });
     lat = Number(body.location?.lat);
     lon = Number(body.location?.lon);
     timezone = String(body.location?.timezone || "");
@@ -159,7 +164,7 @@ Deno.serve(async (request) => {
     content_enabled: prefs.content,
     kids_age_band: age,
     prayer_lat: lat, prayer_lon: lon, prayer_city: city,
-    prayer_timezone: timezone,
+    prayer_timezone: timezone, prayer_angle: angle, prayer_asr_factor: asrFactor,
     last_seen_at: at, updated_at: at
   };
   // Never re-assign a device to another guardian on conflict.
