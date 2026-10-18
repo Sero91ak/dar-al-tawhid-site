@@ -45,7 +45,7 @@ jobs:
           node kids/tools/test-kids-prayer-scheduler.cjs
           node --check cloudflare/kids-prayer-worker.js
           node --check kids/kids-push-parent-auth-v1.js
-          node --check supabase/functions/kids-push-enroll/index.ts
+          node --input-type=module --check < supabase/functions/kids-push-enroll/index.ts
           node --check kids/kids-push-parent-v1.js
           node --check cloudflare/kids-content-push.js
           node --check kids/tools/test-kids-push-isolation.cjs
