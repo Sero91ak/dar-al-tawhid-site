@@ -159,6 +159,9 @@ function stopCompass(){
  window.removeEventListener("deviceorientationabsolute",onOrientation,true);
  clearTimeout(liveTimer);liveTimer=null;heading=null;lastLiveMessage="";
  clearAlignment();
+ // Also clear the accessible success phrase immediately, not just the halo.
+ // Re-open, app background and missing permissions may yield no new events.
+ render();
 }
 function onOrientation(event){
  let value=null,accuracy=null;
