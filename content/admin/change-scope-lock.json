@@ -8487,6 +8487,18 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-01T23:59:00.000Z"
+    },
+    {
+      "id": "adult-canonical-content-center-direct-sync-20261018",
+      "at": "2026-10-18T19:15:00+02:00",
+      "approvedBy": "user-explicit-canonical-10-20-batches-global-content-sync-center-20261018",
+      "reason": "Only persistent adult hadith/athar/sharh/quran-tadabbur continuation policy, corresponding project-level instructions and content audit documentation. Live content uses existing canonical workflow and verified gates. No Kids, UI, native code, push workflows, OneSignal or other lock modifications.",
+      "paths": [
+        "AGENTS.md",
+        "content/admin/canonical-content-continuation-policy.json",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2027-10-18T23:59:00.000Z"
     }
   ],
   "enabled": true
