@@ -103,7 +103,27 @@ async function fetchWeather(){
 }
 function sync(){
  if(!document.body)return;
- if(!isHome()){document.documentElement.classList.remove("dar-home-v3");lastPosts="";return;}
+ if(!isHome()){
+  document.documentElement.classList.remove("dar-home-v3");
+  const row=document.querySelector(".top-shell .header-row--brand-only");
+  const main=row?.querySelector(".brand-main");
+  const copy=main?.querySelector(".dv3-brand-copy");
+  const originalBrand=row?.querySelector(".brand");
+  if(copy&&originalBrand){
+   const kicker=copy.querySelector(".brand-kicker-row");
+   const title=copy.querySelector(".brand-title-refined");
+   if(kicker)originalBrand.insertBefore(kicker,originalBrand.firstChild);
+   if(title)main.appendChild(title);
+   copy.remove();
+  }
+  document.getElementById("dv3HeaderActions")?.remove();
+  const h=document.querySelector(".top-shell .header");
+  const pr=h?.querySelector("#headerPrayerStatus");
+  const greeting=h?.querySelector(".hero-text");
+  if(pr&&greeting&&pr.nextElementSibling!==greeting)h.insertBefore(pr,greeting);
+  lastPosts="";lastCity="";
+  return;
+ }
  const shell=document.querySelector("#appView .home-v380-shell");
  if(!shell)return;
  ensureTopControls();rearrangeHeader();
