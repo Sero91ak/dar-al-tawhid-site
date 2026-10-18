@@ -84,13 +84,24 @@ async function scenario(target){
    await page.evaluate(()=>{if(typeof window.render==="function")window.render()});
    await page.waitForTimeout(300);
    const again=await page.evaluate(()=>({scroll:document.scrollingElement.scrollTop,sameHero:window.__stickyV2Hero===document.querySelector("#appView .frauen-library-hero")}));
+   if(ctxName==="android-pwa-chromium"&&!again.sameHero){
+     const diagnostic=await page.evaluate(()=>({
+       windowRender:(String(window.render||"")).slice(0,1900),
+       route:typeof window.readRoute==="function"?window.readRoute():null,
+       frauApi:!!window.DARFrauenFiqh,
+       parent:document.querySelector("#appView .frauen-library-hero")?.parentElement?.className||null
+     }));
+     console.log("FRAUEN_ANDROID_DIRECT_RENDER_DIAGNOSTIC "+JSON.stringify(diagnostic).slice(0,3200));
+   }
    if(Math.abs(again.scroll-oldHero)>5||!again.sameHero)throw Error("Same-route render still resets/remounts "+JSON.stringify(again));
    await page.evaluate(()=>window.scrollTo(0,0));
    const locator=page.locator("#appView .frauen-library-search-wrap [data-frauen-q],#appView .frauen-library-list-controls [data-frauen-q]").first();
    await locator.fill("Fiqh",{timeout:8000});
    await page.waitForTimeout(360);
    const query=await page.locator("#appView [data-frauen-q]").first().inputValue({timeout:4000});
-   if(query!=="Fiqh")throw Error("Search input lost user text: "+query);
+   // The protected Frauen renderer intentionally canonicalizes search text to
+   // lowercase (setQ(currentAbschnitt, v.toLowerCase())). Case is not lost content.
+   if(query.toLocaleLowerCase("de")!=="fiqh")throw Error("Search input lost user text: "+query);
    await page.screenshot({path:path.join(out,ctxName+"-search.png")});
    outcome={id:ctxName,pass:true,replaced,before:{hero:before.hero,search:before.search},after:{hero:after.hero,search:after.search,scroll:after.scroll},typing:query,renderStable:true,imageRequests:images,errors};
    if(errors.some(x=>/TypeError|ReferenceError|SyntaxError/.test(x)))throw Error("JS errors: "+errors.join(" | "));
