@@ -271,10 +271,6 @@ function adultImmersiveHeroVisitorAddon() {
   return '<link rel="stylesheet" id="darAdultImmersiveHeroVisitorV1" href="/assets/adult-immersive-hero-v1.css?v=20261018-1">' +
     '<script defer id="darAdultImmersiveHeroVisitorScriptV1" src="/assets/adult-immersive-hero-v1.js?v=20261018-1"></script>';
 }
-function adultImmersiveHeroTestAddon() {
-  return '<link rel="stylesheet" id="darAdultImmersiveHeroTestV1" href="/test/assets/adult-immersive-hero-v1.css?v=20261018-1">' +
-    '<script defer id="darAdultImmersiveHeroTestScriptV1" src="/test/assets/adult-immersive-hero-v1.js?v=20261018-1"></script>';
-}
 function adultCompactHeroAddon() {
   return '<link rel="stylesheet" id="darAdultHeroCompactEdgeV1396" href="/assets/adult-responsive-viewport-v1381.css?v=hero-compact-edge-v1396">';
 }
@@ -1723,19 +1719,6 @@ export default {
       headers.delete("ETag");
       if (request.method === "HEAD") {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
-      }
-      // Same isolated Test styling when /test/ is delivered by the site router,
-      // rather than by the independent Test worker.
-      if (assetResponse.ok && request.method === "GET" &&
-          (url.pathname === "/test" || url.pathname === "/test/" || url.pathname === "/test/index.html")) {
-        let html = await assetResponse.text();
-        if (!html.includes('id="darAdultImmersiveHeroTestV1"')) {
-          const addon = adultImmersiveHeroTestAddon();
-          html = html.includes("</html>") ? html.replace("</html>", addon + "</html>") : html + addon;
-        }
-        headers.set("Content-Type", "text/html; charset=utf-8");
-        headers.delete("Content-Length");
-        return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
       return new Response(assetResponse.body, {
         status: assetResponse.status,
