@@ -34,7 +34,7 @@ assert.equal(shells[0],shells[2],"KIDS entrypoints differ");
 const sw=read("kids/sw.js"),version=JSON.parse(read("kids/version.json"));
 const cache=String(version.visualSystem.serviceWorkerCache||"");
 assert.match(cache,/^v[0-9]+$/,"version registry must contain an explicit Kids-only cache revision");
-assert.ok(sw.includes('const CACHE_NAME="dar-al-tawhid-kids-'+cache.slice(1)+'"'),"SW cache must match version registry");
+assert.ok(sw.includes('const CACHE_NAME="dar-al-tawhid-kids-'+cache+'"'),"SW cache must match version registry");
 assert.ok(shells[0].includes('navigator.serviceWorker.register("/kids/sw.js?v='+cache.slice(1)+'"'),"shell must register matching SW version");
 assert.ok(page.includes('id="lessonNavigation"')&&page.includes('id="stageSurface"'),
  "original lesson nodes removed");
