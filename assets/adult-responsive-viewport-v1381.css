@@ -401,3 +401,160 @@ html[data-theme] body.has-bottom-nav #appView.view :is(
 @media(max-width:390px){
   html[data-theme] body.has-bottom-nav{--dar-content-axis-gutter:max(11px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));}
 }
+
+
+/* DAR_ADULT_HERO_COMPACT_STICKY_AXIS_V1402 · 2026-10-18
+ * Same non-destructive responsive contract for adult visitor + test:
+ * existing photographic background images survive; sticky media underneath
+ * solid pinned search; no extra shadows/blur stripes at the join.
+ * Original Frauen files and actual Tab Navigation remain untouched. */
+html[data-theme] body.has-bottom-nav:is(
+ .is-topics-route,.is-topic-route,.is-post-route,.is-hadith-route,.is-dua-route
+){
+ --dar-hero-v1402-section:minmax(0,1fr);
+ --dar-hero-v1402-gutter:max(12px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+}
+html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route,.is-hadith-route,.is-dua-route)
+ #appView.view{
+ padding-top:0!important;
+ overflow-x:clip!important;
+ overflow-y:visible!important;
+}
+html[data-theme] body.is-topics-route #appView.view > .topics-hub,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page,
+html[data-theme] body.is-post-route #appView.view > .post-reader,
+html[data-theme] body.is-hadith-route #appView .hadith-hub,
+html[data-theme] body.is-dua-route #appView .dua-hub{
+ overflow:visible!important;
+ min-width:0!important;
+}
+html[data-theme] body.is-topics-route #appView.view > .topics-hub.topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page.topic-collection-page > .view-head,
+html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head,
+html[data-theme] body.is-dua-route #appView .dua-hub > .view-head{
+ position:sticky!important;
+ top:0!important;
+ z-index:64!important;
+ align-self:start!important;
+ width:100%!important;
+ max-width:none!important;
+ min-width:0!important;
+ min-height:clamp(170px,21svh,235px)!important;
+ height:auto!important;
+ max-height:none!important;
+ margin:0!important;
+ padding-block:clamp(14px,2.3svh,23px)!important;
+ padding-inline:clamp(15px,3vw,28px)!important;
+ overflow:hidden!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+ background-size:cover,cover,cover!important;
+ background-repeat:no-repeat!important;
+ box-sizing:border-box!important;
+}
+/* Reader title has a smaller hero so the actual quotation becomes visible
+ * sooner; retain enough space for 3+ line German titles. */
+html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
+ position:sticky!important;
+ top:0!important;
+ z-index:64!important;
+ align-self:start!important;
+ width:100%!important;
+ max-width:none!important;
+ min-width:0!important;
+ min-height:clamp(148px,18svh,210px)!important;
+ height:auto!important;
+ max-height:none!important;
+ margin:0!important;
+ padding-block:clamp(12px,2svh,22px)!important;
+ padding-inline:clamp(15px,3vw,28px)!important;
+ overflow:hidden!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+ background-size:cover,cover,cover!important;
+ background-repeat:no-repeat!important;
+ box-sizing:border-box!important;
+}
+/* The search layer is sticky immediately under the measured photograph, not
+ * separately fixed at the viewport top. Retain real inputs and autocomplete. */
+html[data-theme] body.is-topics-route #appView .topics-hub > :is(
+ .search-panel,.search-pro-panel,.main-search,#homeSearchBlock
+),
+html[data-theme] body.is-topic-route #appView .topic-collection-page > :is(
+ .search-panel,.search-pro-panel,.main-search
+),
+html[data-theme] body.is-hadith-route #appView .hadith-hub > .main-search,
+html[data-theme] body.is-dua-route #appView .dua-hub > :is(
+ .main-search,.search-panel,.search-pro-panel
+){
+ position:sticky!important;
+ top:var(--dar-immersive-hero-height,190px)!important;
+ z-index:65!important;
+ width:calc(100% - 2 * var(--dar-hero-v1402-gutter,12px))!important;
+ min-width:0!important;
+ max-width:none!important;
+ margin:0 auto!important;
+ padding:6px 0 9px!important;
+ background:var(--bg,#f4efec)!important;
+ background-image:none!important;
+ border:0!important;
+ border-radius:0!important;
+ box-shadow:none!important;
+ backdrop-filter:none!important;
+ -webkit-backdrop-filter:none!important;
+ box-sizing:border-box!important;
+ overflow:visible!important;
+ isolation:isolate;
+}
+/* The historical Frauen image and its background variable are sacred:
+ * only its minimum responsive height changes; the pinned rail/search and
+ * its photo itself stay owned by the previously approved adapter. */
+html[data-theme] body.is-frauen-route #appView .frauen-library-hero{
+ min-height:clamp(200px,24svh,285px)!important;
+ height:auto!important;
+ max-height:none!important;
+ background-size:cover!important;
+ background-repeat:no-repeat!important;
+}
+html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
+ top:0!important;
+ z-index:65!important;
+}
+/* Layout changes with a virtual keyboard must not pin the search over inputs.
+ * Existing Frauen focus-within behavior is preserved. */
+@media(max-width:699px) and (pointer:coarse){
+ html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-hadith-route,.is-dua-route)
+ #appView :is(.topics-hub,.topic-collection-page,.hadith-hub,.dua-hub):focus-within > :is(
+ .search-panel,.search-pro-panel,.main-search,#homeSearchBlock
+ ){position:relative!important;top:auto!important;}
+}
+@media(min-width:768px){
+ html[data-theme] body.is-topics-route #appView.view > .topics-hub.topics-hub > .view-head,
+ html[data-theme] body.is-topic-route #appView.view > .topic-collection-page.topic-collection-page > .view-head,
+ html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head,
+ html[data-theme] body.is-dua-route #appView .dua-hub > .view-head{
+   min-height:clamp(218px,22svh,290px)!important;
+ }
+ html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
+   min-height:clamp(200px,20svh,258px)!important;
+ }
+ html[data-theme] body.is-frauen-route #appView .frauen-library-hero{
+   min-height:clamp(236px,24svh,318px)!important;
+ }
+}
+@media(max-height:540px) and (orientation:landscape){
+ html[data-theme] body.is-topics-route #appView.view > .topics-hub.topics-hub > .view-head,
+ html[data-theme] body.is-topic-route #appView.view > .topic-collection-page.topic-collection-page > .view-head,
+ html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head,
+ html[data-theme] body.is-dua-route #appView .dua-hub > .view-head{
+  min-height:clamp(128px,30svh,185px)!important;
+ }
+ html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
+  min-height:clamp(120px,29svh,172px)!important;
+ }
+ html[data-theme] body.is-frauen-route #appView .frauen-library-hero{
+  min-height:clamp(145px,33svh,205px)!important;
+ }
+}
