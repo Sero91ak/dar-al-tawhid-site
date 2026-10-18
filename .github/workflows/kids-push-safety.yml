@@ -6,8 +6,12 @@ on:
       - feature/tawhid-kids-push-isolation-*
     paths:
       - 'kids/kids-push-parent-v1.js'
+      - 'kids/kids-push-parent-auth-v1.js'
       - 'kids/push/onesignal/**'
       - 'kids/tools/test-kids-push-isolation.cjs'
+      - 'kids/tools/test-kids-prayer-scheduler.cjs'
+      - 'cloudflare/kids-prayer-worker.js'
+      - 'cloudflare/wrangler.kids-push.toml'
       - 'kids/index.html'
       - 'kids/start.html'
       - 'cloudflare/kids-content-push.js'
@@ -38,6 +42,10 @@ jobs:
         run: |
           node --version
           node kids/tools/test-kids-push-isolation.cjs
+          node kids/tools/test-kids-prayer-scheduler.cjs
+          node --check cloudflare/kids-prayer-worker.js
+          node --check kids/kids-push-parent-auth-v1.js
+          node --check supabase/functions/kids-push-enroll/index.ts
           node --check kids/kids-push-parent-v1.js
           node --check cloudflare/kids-content-push.js
           node --check kids/tools/test-kids-push-isolation.cjs
