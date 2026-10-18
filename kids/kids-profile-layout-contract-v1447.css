@@ -1,0 +1,122 @@
+/* KIDS_PROFILE_LAYOUT_CONTRACT_V1447
+   Shared parent content geometry and semantic colours for every future Kids component.
+   No changes to images, hero geometry, five-tab dock or child data. */
+html body .app,
+html body:has(.app){
+  --kids-ui-surface:#193944;
+  --kids-ui-raised:#224655;
+  --kids-ui-ink:#fff5e5;
+  --kids-ui-muted:#d3e0dc;
+  --kids-ui-outline:rgba(224,193,132,.34);
+  --kids-ui-accent:#eed09a;
+  --kids-ui-action-ink:#243744;
+  --kids-parent-content-max:860px;
+}
+html body .app[data-gender="girl"],
+html body:has(.app[data-gender="girl"]),
+html[data-kids-boot-gender="girl"] body{
+  --kids-ui-surface:#3b2a44;
+  --kids-ui-raised:#4c3550;
+  --kids-ui-ink:#fff0f3;
+  --kids-ui-muted:#ecd1df;
+  --kids-ui-outline:rgba(239,181,210,.43);
+  --kids-ui-accent:#efbdd2;
+  --kids-ui-action-ink:#422d49;
+}
+/* One rule for present AND future direct parent cards. The parent's full-bleed
+   photo header is intentionally exempt. Previously unrelated cards filled all
+   1366px while the profile was fixed at 740px. */
+html body .app #view-parents.view > :not(.page-head):not(.bottom-nav){
+  box-sizing:border-box!important;
+  width:100%!important;
+  max-width:min(100%,var(--kids-parent-content-max,860px))!important;
+  min-width:0!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+/* All parent cards — including later dynamically inserted ones — inherit the
+   active child's existing palette; never introduce a second petrol theme. */
+html body .app #view-parents.view{
+  --kp-card:var(--kids-ui-surface);
+  --kp-raised:var(--kids-ui-raised);
+  --kp-ink:var(--kids-ui-ink);
+  --kp-muted:var(--kids-ui-muted);
+  --kp-stroke:var(--kids-ui-outline);
+  --kp-accent:var(--kids-ui-accent);
+  --kp-action-ink:var(--kids-ui-action-ink);
+}
+html body .app #view-parents.view > #kidsVisitorSettingsEntry.parent-card{
+  margin-top:12px!important;
+  margin-bottom:12px!important;
+  border-color:var(--kp-stroke)!important;
+  color:var(--kp-ink)!important;
+  background:linear-gradient(135deg,var(--kp-raised),var(--kp-card))!important;
+}
+html body .app #view-parents.view > #kidsVisitorSettingsEntry .kn-entry{
+  min-height:76px;
+  color:var(--kp-ink)!important;
+  -webkit-text-fill-color:var(--kp-ink)!important;
+}
+html body .app #view-parents.view > #kidsVisitorSettingsEntry .kn-bell{
+  color:var(--kp-accent)!important;
+  background:color-mix(in srgb,var(--kp-accent) 15%,transparent)!important;
+}
+html body .app #view-parents.view > #kidsVisitorSettingsEntry .kn-entry-copy small,
+html body .app #view-parents.view > #kidsVisitorSettingsEntry .kn-chevron{color:var(--kp-accent)!important;-webkit-text-fill-color:var(--kp-accent)!important}
+/* The last-listened item is a first-class parent card, not a landscape-wide
+   bar; match the family cards' corners, type and space between items. */
+html body .app #view-parents.view > #kidsParentResume.kids-parent-resume{
+  max-width:min(100%,var(--kids-parent-content-max,860px))!important;
+  margin-top:10px!important;
+  margin-bottom:12px!important;
+  background:linear-gradient(135deg,var(--kp-raised),var(--kp-card))!important;
+  border-color:var(--kp-stroke)!important;
+}
+html body .app #view-parents.view > :is(.kids-parent-progress-card,.kids-parent-time-card,.kids-parent-age-card,.kids-parent-overview){
+  max-width:min(100%,var(--kids-parent-content-max,860px))!important;
+}
+@media(min-width:960px){
+ html body .app #view-parents.view{
+   --kids-parent-content-max:min(900px,calc(100% - 48px));
+ }
+}
+@media(max-width:699px){
+ html body .app #view-parents.view{--kids-parent-content-max:100%}
+ html body .app #view-parents.view > :not(.page-head):not(.bottom-nav){
+  margin-left:auto!important;margin-right:auto!important;
+ }
+}
+@media(max-width:370px){
+ html body .app #view-parents.view > #kidsVisitorSettingsEntry .kn-entry{padding:14px 12px}
+ html body .app #view-parents.view > #kidsVisitorSettingsEntry .kn-entry-copy strong{font-size:16px;overflow-wrap:anywhere}
+}
+/* Girl book shelves: only CHROME (card frame, text fade, labels) changes.
+   Scene artwork, crop, book thumbnails and illustrations keep their true colours.
+   Body-mounted library pages must follow the active girl account as well. */
+html body .app[data-gender="girl"] :is(.ps-library-page,.ms-library-page),
+html body:has(.app[data-gender="girl"]) > :is(.ps-library-page,.ms-library-page),
+html body:has(.app[data-gender="girl"]) :is(.ps-modal,.ms-modal) :is(.ps-library-page,.ms-library-page){
+  --story-card-bg:var(--kids-ui-surface,#3b2a44);
+  --story-card-bg-2:var(--kids-ui-raised,#4c3550);
+  --story-card-line:var(--kids-ui-outline,rgba(239,181,210,.43));
+  --story-card-gold:var(--kids-ui-accent,#efbdd2);
+  --story-card-cream:var(--kids-ui-ink,#fff0f3);
+  --story-card-muted:var(--kids-ui-muted,#ecd1df);
+}
+html body .app[data-gender="girl"] .ps-library-page .ps-story-row,
+html body:has(.app[data-gender="girl"]) > .ps-library-page .ps-story-row{
+  background-color:var(--kids-ui-surface,#3b2a44)!important;
+  border-color:var(--kids-ui-outline,rgba(239,181,210,.43))!important;
+}
+html body .app[data-gender="girl"] .ps-library-page .ps-story-row::before,
+html body:has(.app[data-gender="girl"]) > .ps-library-page .ps-story-row::before{
+  background:linear-gradient(90deg,rgba(41,25,48,.01) 0%,rgba(45,24,49,.05) 34%,rgba(47,26,53,.29) 47%,rgba(46,27,53,.71) 64%,rgba(42,26,49,.95) 83%,rgba(42,26,49,.98) 100%)!important;
+}
+html body .app[data-gender="girl"] .ps-library-page .ps-story-row::after,
+html body:has(.app[data-gender="girl"]) > .ps-library-page .ps-story-row::after{
+  background:linear-gradient(90deg,rgba(245,193,218,.42),rgba(183,135,198,.20),transparent 92%)!important;
+}
+html body .app[data-gender="girl"] .ps-library-page .ps-row-meta,
+html body:has(.app[data-gender="girl"]) > .ps-library-page .ps-row-meta{
+  color:#f0cbdc!important;
+}
