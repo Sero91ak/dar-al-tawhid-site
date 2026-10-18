@@ -64,6 +64,35 @@ def main():
             and cost["creditsSpentByThisAudit"]==0
             and cost["paidSynthesisAuthorized"] is False,
             "new audio cost review must remain V4 master and no-credit")
+    # Preserve costs of ALREADY RECORDED speech separately from the zero-
+    # cost reporting operation. Paid POST receipts have estimated usage only;
+    # the provider invoice is not available through this repository.
+    stage1_paid=[r for r in charged["rows"]
+                 if r.get("batchId")=="KIDS_V4_OLDER_STAGE1_EXACT_65"]
+    stage1_estimate=round(sum(float(r["estimatedCreditsAtObservedRate"])
+                              for r in stage1_paid),2)
+    stage1_ids=[r.get("providerRequestId") for r in stage1_paid]
+    require(all(isinstance(x,str) and x for x in stage1_ids)
+            and len(set(stage1_ids))==len(stage1_ids),
+            "charged stage1 voice originals lack unique provider receipts")
+    usage_file=ROOT/"kids/data/quiz-v4-older-stage1-usage.json"
+    stage1_usage=read("kids/data/quiz-v4-older-stage1-usage.json") if usage_file.is_file() else None
+    if stage1_usage:
+        require(stage1_usage.get("batchId")=="KIDS_V4_OLDER_STAGE1_EXACT_65"
+                and sum(int(run["newOriginalsThisRun"]) for run in stage1_usage["runs"])
+                ==len(stage1_paid),
+                "stage1 paid originals and batch usage counts disagree")
+        journal=stage1_usage.get("requestJournal",{}).get("entries",[])
+        require(len(journal)==len(stage1_paid)
+                and {x["providerRequestId"] for x in journal
+                     if x.get("status")=="ORIGINAL_MP3_SAVED"}==set(stage1_ids),
+                "paid V4 stage1 originals and protected provider request journal disagree")
+    else:
+        require(not stage1_paid,"paid stage1 takes exist without durable usage file")
+    stage1_exact=sum(float(r["exactBilledCredits"]) for r in stage1_paid
+                     if isinstance(r.get("exactBilledCredits"),(int,float)))
+    stage1_exact_confirmed=bool(stage1_paid) and all(
+        isinstance(r.get("exactBilledCredits"),(int,float)) for r in stage1_paid)
     stage1_report_file=ROOT/"kids/review-only/quiz-v4-older-stage1-next-recording-batch.json"
     stage1_report=read("kids/review-only/quiz-v4-older-stage1-next-recording-batch.json") if stage1_report_file.is_file() else None
     if stage1_report is not None:
@@ -196,6 +225,11 @@ def main():
         "olderStage1RequiresFreshCanonicalSourceAudit":True,
         "olderStage1RequiresExactBatchFingerprintForPaidRun":True,
         "olderStage1CostForecastUnconfirmed":True,
+        "olderStage1PaidOriginalsAlreadyRecorded":len(stage1_paid),
+        "olderStage1PaidOriginalEstimatedCreditsAlreadyUsed":stage1_estimate,
+        "olderStage1PaidActualCreditsVerified":round(stage1_exact,2) if stage1_exact_confirmed else None,
+        "olderStage1ExactProviderBillingNotYetReconciled":not stage1_exact_confirmed,
+        "olderStage1PaidOriginalReceiptIdsRecorded":len(stage1_ids),
         "olderStage1RealPaidOriginalIntegrityAudit":"kids/tools/audit_quiz_v4_stage1_paid_audio_integrity.py",
         "olderStage1RealPaidOriginalIntegrityWorkflow":".github/workflows/kids-v4-stage1-paid-original-integrity.yml",
         "olderStage1InternalSourceAnswerAuditItems":stage_source["totalQuestions"] if stage_source else 0,
@@ -239,7 +273,8 @@ def main():
     header.extend([
         "- Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **"+str(len(prior))+" importiert**, **"+str(count)+" noch ohne heruntergeladene Original-MP3-Datei**.",
         "- Zusätzlich im Originalregister: **"+str(len(saved["textClips"]))+" Textschlüssel**, davon **"+str(len(charged["rows"]))+" direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.",
-        "- Kosten für den bisherigen Import und diese Berichterstellung: **0 neue ElevenLabs-Sprachcredits**.",
+        "- Erste neue V4-Aufnahmerunde für ältere Kinder: **"+str(details["olderStage1PaidOriginalsAlreadyRecorded"])+" ECHTE Original-MP3s** mit **"+str(details["olderStage1PaidOriginalReceiptIdsRecorded"])+" eindeutigen Anbieter-Anfragebelegen**; dafür geschätzte **"+str(details["olderStage1PaidOriginalEstimatedCreditsAlreadyUsed"])+" Credits**. **Tatsächliche Provider-Abbuchung bisher NICHT abgeglichen**.",
+        "- Kosten ausschließlich für den kostenlosen Import-/QA-/Berichtslauf: **0 neue ElevenLabs-Sprachcredits**. Diese Null gilt NICHT für die bereits kostenpflichtig generierten V4-Originalaufnahmen.",
         "- Noch geschätzter Bedarf für alle 450 nach gegenwärtigem Plan: **"+str(plan["estimatedAdditionalCreditsForFullSelected450"])+" Credits**; **keine bestätigte Rechnungsabbuchung** (Ledger enthält Schätzwerte).",
         "- Menschliche Aussprache-/Hörfreigabe: **0**. Freigabeschalter: **aus**. Kein Live-Push und kein Merge.",
         "- Rückimportierte Selbstauskünfte zur Hörprüfung: **"+str(details["selfAttestedHearingClaimCount"])+"**; gemeldete Audiofehler: **"+str(details["reportedHearingIssuesCount"])+"**. Diese Einträge sind noch KEINE unabhängig bestätigte Freigabe.",
