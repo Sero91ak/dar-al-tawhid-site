@@ -7,35 +7,38 @@
   if(global.__darFrauenStickyScrollSafeV2)return;
   global.__darFrauenStickyScrollSafeV2=true;
   var scheduled=false,observer=null,sizeObserver=null,bodyObserver=null,tracked=null;
-  var originalRoot=null,previousX=null,previousY=null,previousXPriority="",previousYPriority="";
-  // Only Frauen gets a new native-scroll owning element. Restore any inline
-  // declarations as soon as this route is left. Do not touch body/html.
+  var savedOwners=[];
   function restoreOverflow(){
-    if(!originalRoot)return;
-    try{
-      for(var item of [{key:"overflow-x",value:previousX,priority:previousXPriority},
-                       {key:"overflow-y",value:previousY,priority:previousYPriority}]){
-        if(item.value)originalRoot.style.setProperty(item.key,item.value,item.priority);
-        else originalRoot.style.removeProperty(item.key);
+    savedOwners.forEach(function(owner){
+      var el=owner.el;
+      if(!el)return;
+      for(var key of ["overflow-x","overflow-y"]){
+        var prior=owner[key];
+        if(prior.value)el.style.setProperty(key,prior.value,prior.priority);
+        else el.style.removeProperty(key);
       }
-    }catch(err){}
-    originalRoot=null;
+    });
+    savedOwners=[];
   }
   function ensureOverflow(root){
-    if(originalRoot!==root){
+    var required=[root,document.body];
+    if(savedOwners.length!==required.length||savedOwners.some(function(o,i){return o.el!==required[i]})){
       restoreOverflow();
-      originalRoot=root;
-      previousX=root.style.getPropertyValue("overflow-x");
-      previousY=root.style.getPropertyValue("overflow-y");
-      previousXPriority=root.style.getPropertyPriority("overflow-x");
-      previousYPriority=root.style.getPropertyPriority("overflow-y");
+      required.forEach(function(el){
+        savedOwners.push({el:el,
+          "overflow-x":{value:el.style.getPropertyValue("overflow-x"),priority:el.style.getPropertyPriority("overflow-x")},
+          "overflow-y":{value:el.style.getPropertyValue("overflow-y"),priority:el.style.getPropertyPriority("overflow-y")}});
+      });
     }
-    // Scoped inline important beats legacy #appView overflow rules that
-    // otherwise create a never-scrolling sticky ancestor on iOS WebKit.
-    if(root.style.getPropertyValue("overflow-x")!=="clip"||root.style.getPropertyValue("overflow-y")!=="visible"){
-      root.style.setProperty("overflow-x","clip","important");
-      root.style.setProperty("overflow-y","visible","important");
-    }
+    // #appView AND body must be non-scroll ancestors; the document remains
+    // the only native vertical scroller. Restore prior inline declarations
+    // on route exit, never on a scroll or touch event.
+    required.forEach(function(el){
+      if(el.style.getPropertyValue("overflow-x")!=="clip"||el.style.getPropertyPriority("overflow-x")!=="important")
+        el.style.setProperty("overflow-x","clip","important");
+      if(el.style.getPropertyValue("overflow-y")!=="visible"||el.style.getPropertyPriority("overflow-y")!=="important")
+        el.style.setProperty("overflow-y","visible","important");
+    });
   }
   function reconcile(){
     scheduled=false;
