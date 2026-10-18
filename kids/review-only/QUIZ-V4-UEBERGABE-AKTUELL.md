@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `98624b52819a45521f2fee93a395a6cfd9c06a56`
+- Commit beim Erstellen dieses Berichts: `5735ceaff3881c1015079fe4ab51446a95273e8e`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **287 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1055 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -17,7 +17,7 @@
 - Alter 7-8: **6/150** komplett; vorhandene Hörteile question=6, correct=150, retry=150, explanation=16.
 - Alter 9-10: **4/150** komplett; vorhandene Hörteile question=4, correct=150, retry=150, explanation=11.
 - Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **47 importiert**, **9 noch ohne heruntergeladene Original-MP3-Datei**.
-- Zusätzlich im Originalregister: **397 Textschlüssel**, davon **350 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
+- Zusätzlich im Originalregister: **398 Textschlüssel**, davon **351 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
 - Erste neue V4-Aufnahmerunde für ältere Kinder: **10 ECHTE Original-MP3s** mit **10 eindeutigen Anbieter-Anfragebelegen**; dafür geschätzte **233.55 Credits**. **Tatsächliche Provider-Abbuchung bisher NICHT abgeglichen**.
 - Kosten ausschließlich für den kostenlosen Import-/QA-/Berichtslauf: **0 neue ElevenLabs-Sprachcredits**. Diese Null gilt NICHT für die bereits kostenpflichtig generierten V4-Originalaufnahmen.
 - Noch geschätzter Bedarf für alle 450 nach gegenwärtigem Plan: **79075.79 Credits**; **keine bestätigte Rechnungsabbuchung** (Ledger enthält Schätzwerte).
