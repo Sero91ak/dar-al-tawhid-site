@@ -64,13 +64,43 @@ function syncTheme(){
  const app=document.querySelector(".app");
  const gender=app?.dataset.gender||document.documentElement.dataset.kidsBootGender||"boy";
  focus.dataset.gender=gender;
+ // Share the actual parent profile's palette, including later appearance changes.
+ const parent=document.getElementById("view-parents");
+ if(parent){
+  const computed=getComputedStyle(parent);
+  for(const [local,source] of [
+   ["--q-bg","--kp-card"],["--q-surface","--kp-raised"],
+   ["--q-surface2","--kp-raised"],["--q-accent","--kp-accent"],
+   ["--q-text","--kp-ink"],["--q-muted","--kp-muted"],["--q-edge","--kp-stroke"]
+  ]){
+   const value=computed.getPropertyValue(source).trim();
+   if(value)focus.style.setProperty(local,value);
+  }
+ }
  for(const id of ["kidsVisitorSettingsSheet","kidsVisitorSettingsIntro"]){
-  const el=$(id);if(el)el.dataset.gender=gender;
+  const el=$(id);
+  if(el){
+   el.dataset.gender=gender;
+   if(parent){
+    const palette=getComputedStyle(parent);
+    for(const [local,source] of [["--kn-ink","--kp-ink"],["--kn-gold","--kp-accent"],["--kn-border","--kp-stroke"]]){
+     const value=palette.getPropertyValue(source).trim();
+     if(value)el.style.setProperty(local,value);
+    }
+   }
+  }
  }
 }
 const app=document.querySelector(".app");
-if(app&&typeof MutationObserver!=="undefined")
- new MutationObserver(syncTheme).observe(app,{attributes:true,attributeFilter:["data-gender","data-theme"]});
+if(typeof MutationObserver!=="undefined"){
+ if(app)new MutationObserver(syncTheme).observe(app,{attributes:true,attributeFilter:["class","data-gender","data-theme","data-appearance"]});
+ new MutationObserver(syncTheme).observe(document.documentElement,{attributes:true,attributeFilter:["class","data-kids-boot-gender","data-theme"]});
+ // The parent's first-run invitation is mounted after a delay; tint it too.
+ new MutationObserver(mutations=>{
+  if(mutations.some(m=>Array.from(m.addedNodes).some(n=>n.nodeType===1&&
+     (n.id==="kidsVisitorSettingsIntro"||n.id==="kidsVisitorSettingsSheet"))))syncTheme();
+ }).observe(document.body,{childList:true});
+}
 syncTheme();
 function selectPlace(place,kind){
  if(!valid(place))return false;
