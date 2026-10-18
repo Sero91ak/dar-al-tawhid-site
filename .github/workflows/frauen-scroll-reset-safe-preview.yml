@@ -24,10 +24,10 @@ jobs:
       - run: |
           npm install --no-save --ignore-scripts playwright
           npx playwright install --with-deps chromium webkit
-      - name: Browser-intercept safe adapter (visitor remains unchanged)
-        run: node scripts/test-frauen-scroll-reset-safe.cjs
       - name: Verify DOM-preserving sticky image and attached search in real Frauen HTML
         run: node scripts/test-frauen-sticky-safe-v2.cjs
+      - name: Browser-intercept safe adapter (visitor remains unchanged)
+        run: node scripts/test-frauen-scroll-reset-safe.cjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
