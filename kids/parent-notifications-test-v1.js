@@ -67,6 +67,7 @@ function refreshQibla(){
  if($("knQiblaCity"))$("knQiblaCity").textContent=place?.name||place?.city||"Bitte Stadt oder Gebetsort wählen";
  if($("knQiblaDegree"))$("knQiblaDegree").textContent=bearing===null?"—":Math.round(bearing)+"°";
  if($("knQiblaArrow"))$("knQiblaArrow").style.transform="rotate("+((bearing===null?0:bearing)-(heading||0))+"deg)";
+ if($("knQiblaArrow")?.parentElement)$("knQiblaArrow").parentElement.classList.toggle("is-live",heading!==null);
  if($("knQiblaNote"))$("knQiblaNote").textContent=bearing===null?"Ort wählen, um die Richtung zu berechnen.":heading===null?"Geografische Richtung in Grad ab Norden.":"Live-Ausrichtung über den Gerätesensor (Genauigkeit geräteabhängig).";
 }
 function prayerDate(tz){
@@ -150,12 +151,17 @@ function setupWelcome(){
  const now=element("button","kn-btn kn-btn-primary","Einstellen");now.type="button";now.addEventListener("click",open);
  const later=element("button","kn-btn","Später");later.type="button";later.addEventListener("click",hideWelcome);
  toast.append(now,later);document.body.append(toast);
- setTimeout(()=>{
+ let attempts=0;
+ const offerAfterOnboarding=()=>{
   if(get(SEEN))return;
-  // Never interrupt the initial child profile selection.
-  if($("profileJoin")?.hidden===false||$("kidsJoin")?.classList.contains("open"))return;
+  // Do not interrupt the initial child profile selection or welcome screen.
+  if($("profileJoin")?.hidden===false||$("kidsJoin")?.classList.contains("open")){
+   if(++attempts<60)setTimeout(offerAfterOnboarding,1000);
+   return;
+  }
   toast.hidden=false;set(SEEN,"1");
- },3800);
+ };
+ setTimeout(offerAfterOnboarding,3800);
 }
 function init(){
  const page=$("view-parents");
