@@ -92,6 +92,7 @@ struct KidsWebAppView: UIViewRepresentable {
         private var readingKeepsScreenAwake = false
 #if KIDS_CREATOR_TEST
         private var pendingCreatorTab: String?
+        private var loadProgressObservation: NSKeyValueObservation?
 #endif
 
         func attach(_ webView: WKWebView) {
@@ -115,6 +116,24 @@ struct KidsWebAppView: UIViewRepresentable {
                 name: Notification.Name("DarKidsCreatorNavigate"),
                 object: nil
             )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(retryInitialLoad(_:)),
+                name: Notification.Name("DarKidsCreatorRetryInitialLoad"),
+                object: nil
+            )
+            // Actual WebKit estimated page-loading progress, capped below 100%
+            // until didFinish confirms a completed navigation.
+            loadProgressObservation = webView.observe(\.estimatedProgress, options: [.new]) { [weak self] page, _ in
+                let fraction = min(0.95, max(0.0, page.estimatedProgress))
+                DispatchQueue.main.async { [weak self] in
+                    guard self != nil else { return }
+                    NotificationCenter.default.post(
+                        name: Notification.Name("DarKidsCreatorLoadProgress"),
+                        object: fraction
+                    )
+                }
+            }
 #endif
         }
 
@@ -126,6 +145,7 @@ struct KidsWebAppView: UIViewRepresentable {
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsNowPlaying")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsScreenAwake")
 #if KIDS_CREATOR_TEST
+            loadProgressObservation?.invalidate()
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsCreatorSplashReady")
 #endif
         }
@@ -143,6 +163,11 @@ struct KidsWebAppView: UIViewRepresentable {
         }
 
 #if KIDS_CREATOR_TEST
+        @objc private func retryInitialLoad(_ notice: Notification) {
+            guard let page = webView else { return }
+            loadKidsHome(in: page)
+        }
+
         // The native menu never grants creator permissions. Only navigation
         // to existing KIDS modules on the separate test Worker is permitted.
         @objc private func creatorNavigate(_ notice: Notification) {
@@ -354,6 +379,12 @@ struct KidsWebAppView: UIViewRepresentable {
 #endif
             guard !hasPresentedInitialPage else { return }
             hasPresentedInitialPage = true
+#if KIDS_CREATOR_TEST
+            NotificationCenter.default.post(
+                name: Notification.Name("DarKidsCreatorPageLoaded"),
+                object: nil
+            )
+#endif
             UIView.animate(
                 withDuration: 0.28,
                 delay: 0,
@@ -364,10 +395,20 @@ struct KidsWebAppView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+#if KIDS_CREATOR_TEST
+            if (error as NSError).code != NSURLErrorCancelled && !hasPresentedInitialPage {
+                NotificationCenter.default.post(name: Notification.Name("DarKidsCreatorLoadFailed"), object: nil)
+            }
+#endif
             presentWebView(webView)
         }
 
         func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+#if KIDS_CREATOR_TEST
+            if (error as NSError).code != NSURLErrorCancelled && !hasPresentedInitialPage {
+                NotificationCenter.default.post(name: Notification.Name("DarKidsCreatorLoadFailed"), object: nil)
+            }
+#endif
             presentWebView(webView)
         }
 
