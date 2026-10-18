@@ -43,7 +43,13 @@ jobs:
           sha=[h for w in waves for h in w["exactTextSHA256"]]
           assert p["modelId"]=="eleven_v4" and p["voiceId"]=="DkU7j9uO4ZEtLD2iRZSH"
           assert len(sha)==len(set(sha))==p["unrecordedOriginals"]
-          assert p["alreadyStoredStageOriginals"]+p["unrecordedOriginals"]==65
+          assert p["alreadyStoredStageOriginals"]+p["reservedFlowOriginalsNotYetInGithub"]+p["newOriginalsEligibleForSeparatePaidApproval"]==65
+          assert p["totalStillMissingOriginalMP3s"]==p["reservedFlowOriginalsNotYetInGithub"]+p["unrecordedOriginals"]
+          assert p["newOriginalsEligibleForSeparatePaidApproval"]==len(sha)
+          assert p["reservedFlowTakesMustNotBeRegenerated"] and (
+              p["providerStatusReconciliationRequiredForReserved"]==
+              (p["reservedFlowOriginalsNotYetInGithub"]>0)
+          )
           assert sum(w["uniqueNewOriginals"] for w in waves)==len(sha)
           assert all(0<w["uniqueNewOriginals"]<=10 and w["estimatedCreditsNotAnInvoice"]<=850 for w in waves)
           assert all(w["manualFreshFingerprintRequired"] and not w["automaticallyAuthorized"] for w in waves)
