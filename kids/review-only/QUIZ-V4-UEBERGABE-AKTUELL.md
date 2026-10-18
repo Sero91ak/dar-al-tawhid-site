@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `11b902651426c332ee5a913257e192f21aa406a9`
+- Commit beim Erstellen dieses Berichts: `e4536c1fa64c92f06df0efc66023af96ecfe8b7e`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **287 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1055 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -18,7 +18,8 @@
 - Alter 9-10: **4/150** komplett; vorhandene Hörteile question=4, correct=150, retry=150, explanation=11.
 - Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **47 importiert**, **9 noch ohne heruntergeladene Original-MP3-Datei**.
 - Zusätzlich im Originalregister: **397 Textschlüssel**, davon **350 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
-- Kosten für den bisherigen Import und diese Berichterstellung: **0 neue ElevenLabs-Sprachcredits**.
+- Erste neue V4-Aufnahmerunde für ältere Kinder: **10 ECHTE Original-MP3s** mit **10 eindeutigen Anbieter-Anfragebelegen**; dafür geschätzte **233.55 Credits**. **Tatsächliche Provider-Abbuchung bisher NICHT abgeglichen**.
+- Kosten ausschließlich für den kostenlosen Import-/QA-/Berichtslauf: **0 neue ElevenLabs-Sprachcredits**. Diese Null gilt NICHT für die bereits kostenpflichtig generierten V4-Originalaufnahmen.
 - Noch geschätzter Bedarf für alle 450 nach gegenwärtigem Plan: **79075.79 Credits**; **keine bestätigte Rechnungsabbuchung** (Ledger enthält Schätzwerte).
 - Menschliche Aussprache-/Hörfreigabe: **0**. Freigabeschalter: **aus**. Kein Live-Push und kein Merge.
 - Rückimportierte Selbstauskünfte zur Hörprüfung: **0**; gemeldete Audiofehler: **0**. Diese Einträge sind noch KEINE unabhängig bestätigte Freigabe.
