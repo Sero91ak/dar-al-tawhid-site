@@ -23,6 +23,42 @@ export default {
       // Paid APIs and mutating calls remain disabled until owner auth exists.
       return textResponse("Creator staging: API currently disabled", 405);
     }
+    // KIDS TEST: exact public, read-only prayer calculation (same adult engine).
+    // This does not grant access to any adult data or mutable APIs.
+    if (url.pathname === "/api/prayer/times") {
+      const lat = Number(url.searchParams.get("lat"));
+      const lon = Number(url.searchParams.get("lon"));
+      const angle = Number(url.searchParams.get("angle") || "12");
+      const asr = Number(url.searchParams.get("asr") || "1");
+      const tz = String(url.searchParams.get("tz") || "");
+      const date = String(url.searchParams.get("date") || "");
+      if (!Number.isFinite(lat) || Math.abs(lat) > 90 ||
+          !Number.isFinite(lon) || Math.abs(lon) > 180 ||
+          !Number.isFinite(angle) || angle < 1 || angle > 30 ||
+          ![1, 2].includes(asr) || !tz || tz.length > 80 ||
+          !/^\\d{4}-\\d{2}-\\d{2}$/.test(date)) {
+        return textResponse("Invalid prayer time query", 400);
+      }
+      const upstream = new URL("https://dar-admin-publisher.sero91ak.workers.dev/api/prayer/times");
+      for (const key of ["lat","lon","angle","asr","tz","date"]) {
+        upstream.searchParams.set(key, url.searchParams.get(key) || "");
+      }
+      try {
+        const res = await fetch(upstream.toString(), { method: "GET", redirect: "error", cache: "no-store" });
+        const data = await res.text();
+        return new Response(request.method === "HEAD" ? null : data, {
+          status: res.status,
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "Cache-Control": "private, no-store, max-age=0",
+            "X-Robots-Tag": ROBOT,
+            "X-Content-Type-Options": "nosniff"
+          }
+        });
+      } catch (_) {
+        return textResponse("Prayer times unavailable", 503);
+      }
+    }
     if (url.pathname === "/kids" || url.pathname === "/kids/") {
       // Cloudflare HTML handling canonically serves start.html at /kids/start.
       // Never redirect /kids/start back to start.html: that creates a 307 loop.
