@@ -716,3 +716,38 @@ body.is-settings-route .dar-city-search-result:focus-visible{
   outline:2px solid var(--dar-perm-gold)!important;
   outline-offset:2px;
 }
+
+
+/* DAR TEST LOCATION: iOS keyboard/viewport stability, scoped to Standort only.
+   Keep the original capsule nav unchanged outside the focused city input. */
+html.dar-location-keyboard-session body.is-settings-route #appChromeDock #bottomNav.bottom-nav,
+html.dar-location-keyboard-session body.is-settings-route #bottomNav.bottom-nav {
+  visibility:hidden!important;
+  opacity:0!important;
+  pointer-events:none!important;
+  transition:none!important;
+}
+html body.is-settings-route .dsh-detail[data-settings-page="location"] #darManualCityPanel {
+  overflow-anchor:none!important;
+}
+html body.is-settings-route .dsh-detail[data-settings-page="location"] #darManualCityInput {
+  scroll-margin-top:22px;
+  scroll-margin-bottom:55px;
+}
+html body.is-settings-route .dsh-detail[data-settings-page="location"] #darCityResults:not([hidden]) {
+  box-sizing:border-box;
+  height:min(240px, 34svh)!important;
+  max-height:min(240px, 34svh)!important;
+  flex:1 0 100%!important;
+  min-height:0!important;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  overflow-anchor:none;
+  align-content:flex-start;
+}
+html body.is-settings-route .dsh-detail[data-settings-page="location"] #darCityResults .dar-city-search-result {
+  flex:0 0 auto;
+  touch-action:manipulation;
+}
