@@ -1,4 +1,4 @@
-const CACHE_NAME="dar-al-tawhid-kids-v1448";
+const CACHE_NAME="dar-al-tawhid-kids-v1449";
 const KIDS_OFFLINE_CACHE="dar-al-tawhid-kids-offline-v1";
 // KIDS_OFFLINE_RELEASE_SCOPE_V1: production changes remain inside approved Kids lane.
 // KIDS_V202_DOWNLOAD_TABS_RELEASE_TRIGGER_20261010: detail-only offline controls; manifest V202 synchronized.
@@ -6,6 +6,9 @@ const KIDS_BUILD_ID="kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren";
 const DUA_AUDIO_RUNTIME="1244";
 // QUIZ_HOME_RESTORE_V1225: refresh installed PWAs with the restored Quiz entry.
 const CORE_PRECACHE=[
+  "/kids/splash-visitor-v1.css?v=20261018-1",
+  "/kids/splash-visitor-v1.js?v=20261018-1",
+  "/kids/assets/kids-splash-20261017-v1.jpg",
   "/kids/kids-birth-month-v1431.js?v=1431",
   "/kids/kids-birth-month-v1431.css?v=1431",
   "/kids/kids-nav-v1421.css?v=1422",
