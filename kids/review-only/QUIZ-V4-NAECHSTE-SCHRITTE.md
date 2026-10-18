@@ -2,19 +2,23 @@
 
 **Verbindlich:** Serhat-Masterstimme `DkU7j9uO4ZEtLD2iRZSH`, Modell `eleven_v4`.
 Kein bestehendes bezahltes Original darf erneut synthetisiert werden. Keine Audiofreigabe und kein Live-Push.
+Auch alle reservierten/eingereichten ElevenLabs-Flow-Aufnahmen bleiben bis zur Klärung für neue TTS-Kosten gesperrt.
 
-| Alter | Technisch komplett | Nur alte Originale nachladen | Neue V4-Originale erforderlich |
-|---|---:|---:|---:|
-| 4-6 | 70 | 80 | 0 |
-| 7-8 | 6 | 0 | 144 |
-| 9-10 | 4 | 0 | 146 |
+| Alter | Technisch komplett | Nur alte Originale nachladen | Nur offenen Flow klären | Neue V4-Originale erforderlich |
+|---|---:|---:|---:|---:|
+| 4-6 | 70 | 80 | 0 | 0 |
+| 7-8 | 6 | 0 | 1 | 143 |
+| 9-10 | 4 | 0 | 2 | 144 |
 
 **Schon bezahlte Originale noch zu retten:** 9.
-**Neue einzigartige Texte nach echtem Deduplizieren:** 1369 (nur Berechnungsbasis; keine Credits bestellt).
+**Ungeklärte verbundene Flow-Originale, die nicht erneut gekauft werden dürfen:** 8.
+**Quizfragen, die nur auf verbundene Flow-Originale warten:** 3.
+**Neue einzigartige Texte nach echtem Deduplizieren:** 1361 (nur Berechnungsbasis; keine Credits bestellt).
 
 ## Nächste technische Aktion
 1. Die historischen neun `eleven_v4`-MP3s mit echten Generation-IDs importieren, nicht regenerieren.
-2. Den vorhandenen kostenfreien Offline-Zusammenbau und die Quiz-MP3-Zuordnung erneut ausführen.
+2. Die ausstehenden bereits reservierten oder eingereichten verbundenen Flow-Originale prüfen und NUR als echte Original-MP3s importieren. Keine erneute Synthese dieser Text-SHAs.
+3. Den vorhandenen kostenfreien Offline-Zusammenbau und die Quiz-MP3-Zuordnung erneut ausführen.
 3. Danach diese Priorisierung mit `python3 kids/tools/plan_quiz_v4_finish_without_duplicate_credits.py` erneut aufbauen.
 4. Noch offene neue V4-Originaltexte erneut mit dem Ledger deduplizieren und nur nach Kostenfreigabe produzieren.
 5. Menschliche Ausspracheprüfung, Offline-/Gerätetest, Freigabeschalter weiterhin aus.
