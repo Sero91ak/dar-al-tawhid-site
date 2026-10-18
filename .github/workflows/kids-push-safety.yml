@@ -1,0 +1,67 @@
+name: Kids Push Safety (no deployment)
+
+on:
+  push:
+    branches:
+      - feature/tawhid-kids-push-isolation-*
+    paths:
+      - 'kids/kids-push-parent-v1.js'
+      - 'kids/kids-push-parent-auth-v1.js'
+      - 'kids/push/onesignal/**'
+      - 'kids/tools/test-kids-push-isolation.cjs'
+      - 'kids/tools/test-kids-prayer-scheduler.cjs'
+      - 'cloudflare/kids-prayer-worker.js'
+      - 'cloudflare/wrangler.kids-push.toml'
+      - 'kids/index.html'
+      - 'kids/start.html'
+      - 'cloudflare/kids-content-push.js'
+      - 'ios/DarAlTawhidKids/**'
+      - '.github/workflows/kids-push-safety.yml'
+  pull_request:
+    paths:
+      - 'kids/**'
+      - 'cloudflare/kids-content-push.js'
+      - 'ios/DarAlTawhidKids/**'
+      - '.github/workflows/kids-push-safety.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-push-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  kids-push-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate isolated Kids push sender and parent controls
+        run: |
+          node --version
+          node kids/tools/test-kids-push-isolation.cjs
+          node kids/tools/test-kids-prayer-scheduler.cjs
+          node --check cloudflare/kids-prayer-worker.js
+          node --check kids/kids-push-parent-auth-v1.js
+          node --input-type=module --check < supabase/functions/kids-push-enroll/index.ts
+          node --check kids/kids-push-parent-v1.js
+          node --check cloudflare/kids-content-push.js
+          node --check kids/tools/test-kids-push-isolation.cjs
+      - name: Validate Apple entitlements and privacy metadata
+        run: |
+          python3 - <<'PY'
+          import pathlib,plistlib
+          root=pathlib.Path('ios/DarAlTawhidKids/DarAlTawhidKids')
+          info=plistlib.loads((root/'Info.plist').read_bytes())
+          assert info.get('NSFaceIDUsageDescription')
+          assert 'remote-notification' in info.get('UIBackgroundModes',[])
+          for name,expected in [('DarAlTawhidKidsPushDebug.entitlements','development'),('DarAlTawhidKidsPushRelease.entitlements','production')]:
+              ent=plistlib.loads((root/name).read_bytes())
+              assert ent.get('aps-environment')==expected,(name,ent)
+          project=pathlib.Path('ios/DarAlTawhidKids/DarAlTawhidKids.xcodeproj/project.pbxproj').read_text()
+          assert 'OneSignal-XCFramework.git' in project
+          assert 'KidsPushNotifications.swift in Sources' in project
+          print('iOS static configuration checks passed; Xcode build still required')
+          PY

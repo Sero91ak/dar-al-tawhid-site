@@ -3,6 +3,7 @@ import UIKit
 
 @main
 struct DarAlTawhidKidsApp: App {
+    @UIApplicationDelegateAdaptor(KidsPushAppDelegate.self) private var pushAppDelegate
     init() {
         let night = UIColor(red: 12 / 255, green: 38 / 255, blue: 54 / 255, alpha: 1)
         UIWindow.appearance().backgroundColor = night

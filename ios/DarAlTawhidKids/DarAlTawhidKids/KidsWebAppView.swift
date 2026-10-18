@@ -1,6 +1,7 @@
 import SwiftUI
 import UIKit
 import WebKit
+import OneSignalFramework
 import AVFoundation
 import MediaPlayer
 
@@ -17,6 +18,7 @@ struct KidsWebAppView: UIViewRepresentable {
         configuration.defaultWebpagePreferences.allowsContentJavaScript = true
         configuration.userContentController.add(context.coordinator, name: "darKidsNowPlaying")
         configuration.userContentController.add(context.coordinator, name: "darKidsScreenAwake")
+        configuration.userContentController.add(context.coordinator, name: "darKidsPush")
 
 #if KIDS_CREATOR_TEST
         let officialMarker = ""
@@ -100,6 +102,12 @@ struct KidsWebAppView: UIViewRepresentable {
                 name: UIApplication.didEnterBackgroundNotification,
                 object: nil
             )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(openKidsPush(_:)),
+                name: .kidsOpenPush,
+                object: nil
+            )
 #if KIDS_CREATOR_TEST
             NotificationCenter.default.addObserver(
                 self,
@@ -117,6 +125,7 @@ struct KidsWebAppView: UIViewRepresentable {
             }
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsNowPlaying")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsScreenAwake")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsPush")
         }
 
         func loadKidsHome(in webView: WKWebView) {
@@ -124,7 +133,7 @@ struct KidsWebAppView: UIViewRepresentable {
             hasPresentedInitialPage = false
             webView.load(
                 URLRequest(
-                    url: KidsAppShell.launchURL,
+                    url: KidsPushNotifications.takePendingNotificationURL().map { KidsAppShell.inAppURL(from: $0) } ?? KidsAppShell.launchURL,
                     cachePolicy: .reloadIgnoringLocalCacheData,
                     timeoutInterval: 30
                 )
@@ -192,6 +201,75 @@ struct KidsWebAppView: UIViewRepresentable {
             DispatchQueue.main.async {
                 UIApplication.shared.isIdleTimerDisabled = enabled
             }
+        }
+
+        @objc private func openKidsPush(_ notification: Notification) {
+            guard let url = notification.object as? URL,
+                  KidsAppShell.isKidsURL(url),
+                  let page = webView else { return }
+            _ = KidsPushNotifications.takePendingNotificationURL()
+            page.load(URLRequest(
+                url: KidsAppShell.inAppURL(from: url),
+                cachePolicy: .reloadIgnoringLocalCacheData,
+                timeoutInterval: 30
+            ))
+        }
+
+        private func sendKidsPushPermissionResult(_ enabled: Bool) {
+            let value = enabled ? "true" : "false"
+            webView?.evaluateJavaScript(
+                "window.dispatchEvent(new CustomEvent('dar-kids-push-permission',{detail:{enabled:\(value)}}))",
+                completionHandler: nil
+            )
+        }
+
+        private func handleKidsPush(_ message: WKScriptMessage, body: [String: Any]) {
+            #if KIDS_CREATOR_TEST
+            // Creator builds never subscribe to the visitor's OneSignal app.
+            return
+            #else
+            guard message.frameInfo.isMainFrame,
+                  let currentURL = webView?.url,
+                  KidsAppShell.isKidsURL(currentURL) else { return }
+            let action = body["action"] as? String ?? ""
+            let settings = body["settings"] as? [String: Any] ?? [:]
+            let ageGroup = body["age"] as? String ?? ""
+            switch action {
+            case "enable":
+                KidsPushNotifications.requestParentActivation { [weak self] granted in
+                    if granted {
+                        KidsPushNotifications.applyParentPreferences(settings, ageGroup: ageGroup)
+                    }
+                    self?.sendKidsPushPermissionResult(granted)
+                }
+            case "configure":
+                KidsPushNotifications.applyParentPreferences(settings, ageGroup: ageGroup)
+            case "subscription":
+                // Keep the OneSignal identifier in the native process until
+                // the parent's verified-enrollment flow requests it.
+                Task { [weak self] in
+                    for _ in 0..<20 {
+                        if let id = OneSignal.User.pushSubscription.id,
+                           UUID(uuidString: id) != nil {
+                            let script = "window.dispatchEvent(new CustomEvent('dar-kids-native-subscription',{detail:{id:'\\(id)'}}))"
+                            await MainActor.run { [weak self] in
+                                self?.webView?.evaluateJavaScript(script, completionHandler: nil)
+                            }
+                            return
+                        }
+                        try? await Task.sleep(nanoseconds: 250_000_000)
+                    }
+                    await MainActor.run { [weak self] in
+                        self?.webView?.evaluateJavaScript("window.dispatchEvent(new CustomEvent('dar-kids-native-subscription',{detail:{id:null}}))", completionHandler: nil)
+                    }
+                }
+            case "disable":
+                KidsPushNotifications.revokeParentActivation()
+                sendKidsPushPermissionResult(false)
+            default:
+                break
+            }
+            #endif
         }
 
         private func configurePlaybackSession() {
@@ -322,6 +400,8 @@ struct KidsWebAppView: UIViewRepresentable {
                 applyKidsNowPlaying(body)
             case "darKidsScreenAwake":
                 applyKidsScreenAwake(body)
+            case "darKidsPush":
+                handleKidsPush(message, body: body)
             default:
                 break
             }

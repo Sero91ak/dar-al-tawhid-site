@@ -1,0 +1,58 @@
+name: Setup Kids Prayer Worker (disabled only)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: setup-kids-prayer-worker
+  cancel-in-progress: false
+
+jobs:
+  setup-disabled-worker:
+    name: Install isolated Kids prayer worker (notifications OFF)
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    environment: kids-push-setup
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify runtime and tests
+        run: |
+          node kids/tools/test-kids-push-isolation.cjs
+          node kids/tools/test-kids-prayer-scheduler.cjs
+          node --check cloudflare/kids-prayer-worker.js
+          grep -q 'KIDS_PRAYER_PUSH_ENABLED = "false"' cloudflare/wrangler.kids-push.toml
+          grep -q '^name = "dar-tawhid-kids-prayer"' cloudflare/wrangler.kids-push.toml
+      - name: Ensure required cloud credentials exist
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ONESIGNAL_KIDS_API_KEY: ${{ secrets.ONESIGNAL_KIDS_API_KEY }}
+          SUPABASE_KIDS_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_KIDS_SERVICE_ROLE_KEY }}
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" || { echo "::error::Missing Cloudflare token"; exit 1; }
+          test -n "$CLOUDFLARE_ACCOUNT_ID" || { echo "::error::Missing Cloudflare account ID"; exit 1; }
+          test -n "$ONESIGNAL_KIDS_API_KEY" || { echo "::error::Missing Kids-scoped OneSignal REST key"; exit 1; }
+          test -n "$SUPABASE_KIDS_SERVICE_ROLE_KEY" || { echo "::error::Missing Kids Supabase server key"; exit 1; }
+      - name: Install pinned Wrangler
+        run: npm install -g wrangler@4.86.0
+      - name: Deploy Kids-only worker with sends disabled
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: wrangler deploy --config cloudflare/wrangler.kids-push.toml
+      - name: Install private Kids-only secrets (do not echo)
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          ONESIGNAL_KIDS_API_KEY: ${{ secrets.ONESIGNAL_KIDS_API_KEY }}
+          SUPABASE_KIDS_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_KIDS_SERVICE_ROLE_KEY }}
+        run: |
+          printf '%s' "$ONESIGNAL_KIDS_API_KEY" | wrangler secret put ONESIGNAL_KIDS_API_KEY --config cloudflare/wrangler.kids-push.toml
+          printf '%s' "$SUPABASE_KIDS_SERVICE_ROLE_KEY" | wrangler secret put SUPABASE_KIDS_SERVICE_ROLE_KEY --config cloudflare/wrangler.kids-push.toml
+      - name: Confirm send gate remains disabled
+        run: |
+          grep -q 'KIDS_PRAYER_PUSH_ENABLED = "false"' cloudflare/wrangler.kids-push.toml
+          echo "Kids Worker setup completed. Notifications remain DISABLED."

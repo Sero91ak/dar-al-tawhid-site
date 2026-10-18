@@ -209,3 +209,8 @@
   CDN-Cache-Control: no-cache
   Cloudflare-CDN-Cache-Control: no-cache
 
+
+/kids/push/onesignal/OneSignalSDKWorker.js
+  Content-Type: application/javascript; charset=utf-8
+  Cache-Control: no-cache, must-revalidate, max-age=0
+  Service-Worker-Allowed: /kids/push/onesignal/
