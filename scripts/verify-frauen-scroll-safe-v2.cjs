@@ -143,7 +143,7 @@ async function runCase(browser,cfg,origin){
   const beforeRefresh=await page.evaluate(()=>window.scrollY);
   await page.evaluate(()=>window.render());
   assert.ok(Math.abs((await page.evaluate(()=>window.scrollY))-beforeRefresh)<3,tag+" same-route render reset after search");
-  await page.evaluate(()=>document.dispatchEvent(new Event("dar:live-sync-done")));
+  await page.evaluate(()=>window.dispatchEvent(new Event("dar:live-sync-done")));
   await page.waitForTimeout(120);
   assert.ok(Math.abs((await page.evaluate(()=>window.scrollY))-beforeRefresh)<3,tag+" live sync reset scroll");
   assert.equal(await page.locator("#dataVersion").innerText(),"Datenversion: 1");
