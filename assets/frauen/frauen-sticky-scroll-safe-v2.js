@@ -6,12 +6,45 @@
   "use strict";
   if(global.__darFrauenStickyScrollSafeV2)return;
   global.__darFrauenStickyScrollSafeV2=true;
-  var scheduled=false,observer=null,sizeObserver=null,tracked=null;
+  var scheduled=false,observer=null,sizeObserver=null,bodyObserver=null,tracked=null;
+  var originalRoot=null,previousX=null,previousY=null,previousXPriority="",previousYPriority="";
+  // Only Frauen gets a new native-scroll owning element. Restore any inline
+  // declarations as soon as this route is left. Do not touch body/html.
+  function restoreOverflow(){
+    if(!originalRoot)return;
+    try{
+      for(var item of [{key:"overflow-x",value:previousX,priority:previousXPriority},
+                       {key:"overflow-y",value:previousY,priority:previousYPriority}]){
+        if(item.value)originalRoot.style.setProperty(item.key,item.value,item.priority);
+        else originalRoot.style.removeProperty(item.key);
+      }
+    }catch(err){}
+    originalRoot=null;
+  }
+  function ensureOverflow(root){
+    if(originalRoot!==root){
+      restoreOverflow();
+      originalRoot=root;
+      previousX=root.style.getPropertyValue("overflow-x");
+      previousY=root.style.getPropertyValue("overflow-y");
+      previousXPriority=root.style.getPropertyPriority("overflow-x");
+      previousYPriority=root.style.getPropertyPriority("overflow-y");
+    }
+    // Scoped inline important beats legacy #appView overflow rules that
+    // otherwise create a never-scrolling sticky ancestor on iOS WebKit.
+    if(root.style.getPropertyValue("overflow-x")!=="clip"||root.style.getPropertyValue("overflow-y")!=="visible"){
+      root.style.setProperty("overflow-x","clip","important");
+      root.style.setProperty("overflow-y","visible","important");
+    }
+  }
   function reconcile(){
     scheduled=false;
-    if(!document.body||!document.body.classList.contains("is-frauen-route"))return;
+    if(!document.body||!document.body.classList.contains("is-frauen-route")){
+      restoreOverflow();return;
+    }
     var root=document.getElementById("appView");
-    if(!root)return;
+    if(!root){restoreOverflow();return;}
+    ensureOverflow(root);
     var shells=root.querySelectorAll(".frauen-library-shell,.frauen-library-list");
     shells.forEach(function(shell){
       var hero=shell.querySelector(":scope > .frauen-library-hero");
@@ -41,6 +74,8 @@
       sizeObserver=new ResizeObserver(schedule);
     observer=new MutationObserver(schedule);
     observer.observe(root,{childList:true,subtree:true});
+    bodyObserver=new MutationObserver(schedule);
+    bodyObserver.observe(document.body,{attributes:true,attributeFilter:["class"]});
     global.addEventListener("resize",schedule,{passive:true});
     document.addEventListener("dar:frauen-render",schedule);
     schedule();
