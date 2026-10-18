@@ -3,6 +3,10 @@
  * Existing Frauen Hero imagery, crop, text and search appearance are immutable.
  * Sticky siblings, without DOM reparenting, scroll locking or glass overlays.
  */
+html[data-dar-frauen-scroll-safe="1"] body.is-frauen-route{
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+}
 html[data-dar-frauen-scroll-safe="1"] body.is-frauen-route #appView.view,
 html[data-dar-frauen-scroll-safe="1"] body.is-frauen-route #appView{
   /* overflow-x:hidden implicitly computes overflow-y:auto in WebKit,
