@@ -1,0 +1,162 @@
+{
+  "project": "DĀR AL TAWḤĪD",
+  "date": "2026-10-18",
+  "range": "HAD-0393–HAD-0412",
+  "kind": "20-record source and isnad audit",
+  "baseline": "Earlier 0393–0442 audit maintained; no reset of prior verified outcomes",
+  "counts": {
+    "inspected": 20,
+    "athar": 18,
+    "alreadySharhVerifiedHadith": 2,
+    "recordFilesUpdated": 7,
+    "earlyArabicSourcesReconfirmed": 6,
+    "atharFullyGradedNew": 0,
+    "attributionCorrections": 1,
+    "downgradedFalseAuthenticity": 1,
+    "brandNewRecords": 0
+  },
+  "records": [
+    {
+      "id": "HAD-0393",
+      "recordType": "athar",
+      "result": "Primary located; isnad grading pending",
+      "fileChanged": false
+    },
+    {
+      "id": "HAD-0394",
+      "recordType": "athar",
+      "result": "al-Ajurri 127 direct hearing chain corroborated, full rijal pending",
+      "fileChanged": true
+    },
+    {
+      "id": "HAD-0395",
+      "recordType": "athar",
+      "result": "al-Khatib direct chain; conflicting grading remains",
+      "fileChanged": false
+    },
+    {
+      "id": "HAD-0396",
+      "recordType": "athar",
+      "result": "Qadi Iyad quotes Malik from al-Mabsut, original isnad unverified",
+      "fileChanged": false
+    },
+    {
+      "id": "HAD-0397",
+      "recordType": "athar",
+      "result": "al-Lalakai 315 direct narration corroborated, full rijal pending",
+      "fileChanged": true
+    },
+    {
+      "id": "HAD-0398",
+      "recordType": "athar",
+      "result": "al-Khatib narrator uncertainty ('father or Ibn Misar') preserved",
+      "fileChanged": false
+    },
+    {
+      "id": "HAD-0399",
+      "recordType": "athar",
+      "result": "al-Shafi'i student hearing; complete chain pending",
+      "fileChanged": false
+    },
+    {
+      "id": "HAD-0400",
+      "recordType": "athar",
+      "result": "al-Lalakai 317 and Tabaqat al-Hanabilah direct hearing corroborated",
+      "fileChanged": true
+    },
+    {
+      "id": "HAD-0401",
+      "recordType": "athar",
+      "result": "Barbahari original author text present; edition unverified",
+      "fileChanged": false
+    },
+    {
+      "id": "HAD-0402",
+      "recordType": "athar",
+      "result": "Ibn al-Mubarak isnad in Muslim Muqaddimah 1/16 directly corroborated",
+      "fileChanged": true
+    },
+    {
+      "id": "HAD-0403",
+      "recordType": "athar",
+      "result": "Hasan al-Basri wording in Tabari on 23:60 corroborated",
+      "fileChanged": true
+    },
+    {
+      "id": "HAD-0404",
+      "recordType": "athar",
+      "result": "Original Ibn Abd al-Barr no.1762 is Mujahid, not Malik; speaker corrected",
+      "fileChanged": true
+    },
+    {
+      "id": "HAD-0405",
+      "recordType": "athar",
+      "result": "Umar ibn Abd al-Aziz letter via Abu Dawud 4612, chain grading pending",
+      "fileChanged": false
+    },
+    {
+      "id": "HAD-0406",
+      "recordType": "athar",
+      "result": "No precisely identifiable original or chain: downgrade authenticity assertion",
+      "fileChanged": true
+    },
+    {
+      "id": "HAD-0407",
+      "recordType": "athar",
+      "result": "Qatadah on Q17:36 two Tabari paths; individual grading pending",
+      "fileChanged": false
+    },
+    {
+      "id": "HAD-0408",
+      "recordType": "athar",
+      "result": "al-Lalakai primary located; full grading pending",
+      "fileChanged": false
+    },
+    {
+      "id": "HAD-0409",
+      "recordType": "athar",
+      "result": "Waki' hears via student, complete path pending",
+      "fileChanged": false
+    },
+    {
+      "id": "HAD-0410",
+      "recordType": "athar",
+      "result": "Yahya al-Qattan quote in Ibn al-Salah with unresolved path",
+      "fileChanged": false
+    },
+    {
+      "id": "HAD-0411",
+      "recordType": "hadith",
+      "result": "Already authenticated prophetic hadith with classical sharh",
+      "fileChanged": false
+    },
+    {
+      "id": "HAD-0412",
+      "recordType": "hadith",
+      "result": "Already authenticated prophetic hadith with classical sharh",
+      "fileChanged": false
+    }
+  ],
+  "sourceReferences": {
+    "HAD-0394": "https://www.islamweb.net/ar/library/content/1006/127/index.php",
+    "HAD-0397": "https://www.islamweb.net/ar/library/content/110/30/index.php",
+    "HAD-0400": "https://www.islamweb.net/ar/library/content/110/32/index.php",
+    "HAD-0402": "https://islamweb.net/ar/library/content/1/33/",
+    "HAD-0403": "https://www.islamweb.net/ar/library/content/50/3474/",
+    "HAD-0404": "https://islamweb.net/ar/library/content/1040/1501/"
+  },
+  "blockers": [
+    "HAD-0406 exact Arabic original missing",
+    "HAD-0393,0395–0399 and HAD-0405,0407–0410 need individual rijal grading",
+    "Printed edition pagination not verified for every cited record"
+  ],
+  "publication": {
+    "mainCommitted": true,
+    "canonicalWorkflow": ".github/workflows/canonical-islamic-content-live.yml",
+    "cloudflareEndpoint": "https://dar-al-tawhid.de/apple-tv/hadith/catalog.json",
+    "cloudflareConfirmed": false,
+    "nativeDeviceConfirmed": false,
+    "oneSignalNotification": false
+  },
+  "nextAction": "Review 10/20 actual open records in HAD-0443–0462, continue original-chain research on HAD-0406, preserve nonduplicate rule; do not revisit already fully reviewed hadith without actual defect."
+}
