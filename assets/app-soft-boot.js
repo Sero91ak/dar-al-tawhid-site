@@ -423,7 +423,7 @@
       document.addEventListener("DOMContentLoaded", function () { ensureOverlay(); syncEdgeFill(); paint(); setTimeout(maybeFinish, 60); }, { once: true });
     } else { syncEdgeFill(); setTimeout(maybeFinish, 60); }
     window.addEventListener("load", function () { setTimeout(maybeFinish, 40); setTimeout(function () { if (!finished && (!IS_DEDICATED_PWA || viewLooksReady())) finish(); }, 4000); });
-    window.addEventListener("pageshow", function (ev) { try { if (ev && ev.persisted && /Android/i.test(String(navigator.userAgent || ""))) { location.reload(); return; } } catch (e) {} setTimeout(maybeFinish, 40); });
+    window.addEventListener("pageshow", function () { /* BFCache restores an existing app session: NEVER launch the 0–100% loader or force reload. */ setTimeout(maybeFinish, 40); });
     window.addEventListener("hashchange", function () { if (finished || window.__darSoftBootLocked) return; setTimeout(maybeFinish, 60); });
     try {
       bootObserver = new MutationObserver(function (records) {

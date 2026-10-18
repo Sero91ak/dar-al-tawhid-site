@@ -345,3 +345,59 @@ html[data-theme] body.has-bottom-nav #appView.view > .dar-responsive-page > .dar
     padding-block:14px!important;
   }
 }
+
+
+/* DAR_ADULT_CONTENT_NAV_AXIS_V1400 · responsive content, never heroic media.
+ * The 100%-wide app stage uses the same symmetric safe gutters as bottom nav.
+ * Override historical 52rem/860px post-reader caps; do not change hero
+ * position/background, Frauen sticky ancestors, Nav capsule or bottom spacing. */
+html[data-theme] body.has-bottom-nav{
+  --dar-content-axis-gutter:max(12px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  --dar-content-axis-width:calc(100% - var(--dar-content-axis-gutter) - var(--dar-content-axis-gutter));
+}
+html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader{
+  width:100%!important;max-width:none!important;max-inline-size:none!important;
+  margin-inline:0!important;padding-inline:0!important;
+}
+html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > :is(
+  .post-reader-main,.post-after-panel,.related-compact,.related-compact-list,[data-post-after-panel],
+  .post-actions-wrap,.post-nav-wrap
+){
+  width:var(--dar-content-axis-width)!important;
+  max-width:none!important;
+  max-inline-size:none!important;
+  margin-left:auto!important;margin-right:auto!important;
+  min-width:0!important;
+  box-sizing:border-box!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader-main :is(
+  .statement,.post-source,.post-key-message,.post-reader-speaker,.post-slide-quote,
+  .post-reader-sep,.post-action-row
+){
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  margin-inline:0!important;
+  box-sizing:border-box!important;
+}
+/* Section containers can fill their allocated stage; do not touch image hero
+ * layers or their sticky search bars. Deliberately target the lists/panels,
+ * not the Frauen or Library section roots. */
+html[data-theme] body.has-bottom-nav #appView.view :is(
+  .books-library-list,.library-list,.lib-content,.lib-main-content,
+  .hadith-leaf-list,.hadith-list,.hadith-catalog-list,
+  .frauen-library-area-grid,.frauen-library-grid,.frauen-library-list,.frauen-post-list,
+  .dua-theme-grid,.dua-collection-list,.dua-list,
+  .topic-collection,.topic-collection-list,.post-grid
+){
+  width:var(--dar-content-axis-width)!important;
+  max-width:none!important;min-width:0!important;
+  box-sizing:border-box!important;margin-inline:auto!important;
+}
+@media(min-width:768px){
+  html[data-theme] body.has-bottom-nav{
+    --dar-content-axis-gutter:max(18px,1.8vw,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  }
+}
+/* Keep generous tappable whitespace even on the narrowest screens. */
+@media(max-width:390px){
+  html[data-theme] body.has-bottom-nav{--dar-content-axis-gutter:max(11px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));}
+}
