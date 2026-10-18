@@ -69,7 +69,7 @@ async function getRegistrations(dbKey) {
   for (let offset = 0; offset < MAX_DEVICES; offset += PAGE_SIZE) {
     const url = new URL(SUPABASE_URL + "/rest/v1/kids_push_subscriptions");
     url.searchParams.set("select", [
-      "onesignal_subscription_id", "prayer_lat", "prayer_lon", "prayer_city",
+      "onesignal_subscription_id", "client_platform", "prayer_lat", "prayer_lon", "prayer_city",
       "prayer_timezone", "prayer_angle", "prayer_asr_factor",
       "prayer_advance_minutes", "last_seen_at"
     ].join(","));
@@ -102,9 +102,10 @@ function eligible(row, now) {
   return Number.isFinite(seen) && (now - seen) >= 0 && (now - seen) <= MAX_REGISTRATION_AGE;
 }
 
-async function deliver(env, pushKey, subscriptionID, prayerKey, prayerName, day, target, now) {
+async function deliver(env, pushKey, subscriptionID, platform, prayerKey, prayerName, day, target, now) {
   const idempotency = await uuid("kids-prayer:v1:" + subscriptionID + ":" + day + ":" + prayerKey);
-  const launch = "https://dar-al-tawhid.de/kids/start?view=prayer";
+  const launch = (platform === "native_ios"
+    ? "https://dar-al-tawhid.de" : "https://kids.dar-al-tawhid.de") + "/kids/start?view=prayer";
   const payload = {
     app_id: APP_ID,
     target_channel: "push",
@@ -164,7 +165,7 @@ export async function scheduledKidsPrayerPush(env, now = Date.now()) {
         if (!hm) continue; // Polar/high-latitude invalid times are never guessed.
         const when = localClockUTC(day, hm, tz) - advance;
         if (!Number.isFinite(when) || when < now - GRACE || when > now + LOOKAHEAD) continue;
-        await deliver(env, sec.pushKey, row.onesignal_subscription_id, prayerKey, prayerName, day, when, now);
+        await deliver(env, sec.pushKey, row.onesignal_subscription_id, row.client_platform, prayerKey, prayerName, day, when, now);
         planned++;
       }
     } catch (_) {
