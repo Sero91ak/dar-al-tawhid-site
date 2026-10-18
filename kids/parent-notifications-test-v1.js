@@ -297,8 +297,11 @@ function init(){
  });
  $("knQiblaCompass").addEventListener("click",startCompass);
  window.addEventListener("dar-kids-test-native-notifications",event=>{
+  const oldPermission=nativePermission;
   if(event.detail?.status)nativePermission=String(event.detail.status);
-  refreshPermission();if(event.detail?.status==="granted")nativeSchedule();if(event.detail?.message)message(String(event.detail.message));
+  refreshPermission();
+  if(nativePermission==="granted"&&oldPermission!=="granted")nativeSchedule();
+  if(event.detail?.message)message(String(event.detail.message));
  });
  refreshSummary();refreshPrayers();refreshQibla();refreshPermission();setupWelcome();
  window.addEventListener("pageshow",()=>{if(nativeAvailable()){deviceMessage("status");nativeSchedule()}});
