@@ -61,12 +61,13 @@ async function main() {
   assert.equal(calls.length, 2);
   const db = calls[0].url, payload = calls[1].payload;
   assert.ok(db.includes("parent_consent_verified_at=not.is.null"));
+  assert.ok(db.includes("guardian_auth_id=not.is.null"));
   assert.ok(db.includes("consent_revoked_at=is.null"));
   assert.ok(db.includes("prayer_enabled=eq.true"));
   assert.equal(payload.app_id, env.ONESIGNAL_KIDS_APP_ID);
   assert.deepEqual(Array.from(payload.include_subscription_ids), [subID]);
   assert.equal(payload.send_after, "2026-10-18T12:03:00.000Z");
-  assert.ok(payload.idempotency_key);
+  assert.match(payload.idempotency_key, /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
   assert.ok(payload.url.includes("/kids/start?view=prayer"));
   console.log("PASS: Kids prayer cron disabled by default; filtered, exact UTC send simulated");
 }
