@@ -84,6 +84,13 @@ html[data-theme] body.is-topic-route #appView .topic-collection-page > .main-sea
     margin-top:-18px!important;
   }
 }
+/* When the software keyboard occupies most of a phone viewport, stop pinning
+   this tall rail while its search input is focused so native caret scrolling works. */
+@media(max-width:699px) and (pointer:coarse){
+  html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage:focus-within{
+    position:relative!important;
+  }
+}
 @media(prefers-reduced-motion:reduce){
   html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
     scroll-behavior:auto!important;
