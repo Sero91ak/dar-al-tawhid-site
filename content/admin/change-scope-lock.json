@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "frauen-scroll-reset-versioned-candidate-20261018",
+      "at": "2026-10-18T11:35:00+02:00",
+      "approvedBy": "user-explicit-continue-fixing-hero-scroll-issues-in-verified-staging-20261018",
+      "reason": "Versioned read-only-in-production Frauen live adapter V2 candidate and isolated Playwright contract. Frozen Frauen original source, existing router, Test and visitor HTML/CSS, Kids, push, prayer, Service Worker remain untouched pending QA.",
+      "paths": [
+        "assets/frauen/frauen-live-adapter-scroll-safe-v2.js",
+        "scripts/verify-frauen-scroll-safe-v2.cjs",
+        ".github/workflows/check-frauen-scroll-safe-v2.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-02T23:59:00.000Z"
+    },
+    {
       "id": "adult-immersive-hero-test-20261018",
       "at": "2026-10-18T07:25:00+02:00",
       "approvedBy": "user-explicit-global-immersive-hero-scroll-under-test-visitor-desktop-20261018",
