@@ -3,6 +3,7 @@
 
 const fs = require("fs");
 const path = require("path");
+const { createHash } = require("crypto");
 
 const ROOT = path.join(__dirname, "..");
 const HADITH_ROOT = path.join(ROOT, "apple-tv", "hadith");
@@ -195,6 +196,28 @@ function rebuildHadith() {
     }
   }
 
+  // A stable content fingerprint avoids updating the catalog's version timestamp
+  // on every build. Repeated builds of identical content must be no-ops.
+  const contentRevision = createHash("sha256")
+    .update(JSON.stringify(allRecords))
+    .update("\\n" + String(tadCount))
+    .digest("hex")
+    .slice(0, 24);
+  const syncStatusPath = path.join(HADITH_ROOT, "sync-status.json");
+  let previousStatus = null;
+  if (fs.existsSync(syncStatusPath)) {
+    try { previousStatus = JSON.parse(fs.readFileSync(syncStatusPath, "utf8")); } catch (_) {}
+  }
+  const rebuiltAt = previousStatus &&
+    previousStatus.contentRevision === contentRevision &&
+    previousStatus.hadithCount === allRecords.length &&
+    previousStatus.hadithLatestId === latest &&
+    previousStatus.atharCount === typeCounts.athar &&
+    previousStatus.tadabburCount === tadCount &&
+    previousStatus.rebuiltAt
+      ? previousStatus.rebuiltAt
+      : new Date().toISOString();
+
   const stamp = {
     schemaVersion: 1,
     liveRoot: "https://dar-al-tawhid.de/apple-tv/",
@@ -202,9 +225,10 @@ function rebuildHadith() {
     hadithLatestId: latest,
     atharCount: typeCounts.athar,
     tadabburCount: tadCount,
-    rebuiltAt: new Date().toISOString()
+    contentRevision: contentRevision,
+    rebuiltAt: rebuiltAt
   };
-  writeJson(path.join(HADITH_ROOT, "sync-status.json"), stamp, true);
+  writeJson(syncStatusPath, stamp, true);
 
   const ssDir = path.join(ROOT, "apple-tv", "screensaver");
   if (fs.existsSync(path.join(ssDir, "catalog.json"))) {
@@ -212,6 +236,7 @@ function rebuildHadith() {
     ss.contentVersion = allRecords.length;
     ss.entriesCount = allRecords.length;
     ss.lastUpdated = stamp.rebuiltAt;
+    ss.contentRevision = contentRevision;
     writeJson(path.join(ssDir, "catalog.json"), ss, true);
   }
   if (fs.existsSync(path.join(ssDir, "entries-index.json"))) {
