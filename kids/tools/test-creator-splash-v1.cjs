@@ -55,7 +55,22 @@ assert.match(js,/ktb-soft-fallback/,"safe fallback active");
 assert.doesNotMatch(js,/makeShards|posterNatural|ktb-shatter|kids-test-boot-bridge/,"no tile generator or blue intermediary");
 assert.match(js,/minDisplayMs=1500/,"no forced 3.5s waiting");
 assert.match(nativeView,/Image\("KidsTestLaunchPoster"\)/);
-assert.match(nativeView,/\.onReceive\(NotificationCenter\.default\.publisher\(for: Notification\.Name\("DarKidsCreatorSplashReady"\)\)\)/);
+// New isolated native test startup: real WebKit loading bar (0–95%), 100% only
+// after didFinish, a retry on network failure, and no visitor-build changes.
+assert.match(nativeView,/nativeLoadProgress = 0/,"native loading starts at 0%");
+assert.match(nativeView,/min\(95, max\(nativeLoadProgress, Int\(value \* 100\)\)\)/,"intermediate progress is monotonic and capped");
+assert.match(nativeView,/Notification\.Name\("DarKidsCreatorLoadProgress"\)/,"SwiftUI listens to WebKit progress");
+assert.match(nativeView,/Notification\.Name\("DarKidsCreatorPageLoaded"\)/,"SwiftUI listens for completed navigation");
+assert.match(nativeView,/nativeLoadProgress = 100/,"100% is displayed before dismiss");
+assert.match(nativeView,/Notification\.Name\("DarKidsCreatorLoadFailed"\)/,"failed initial navigation keeps retry visible");
+assert.match(nativeView,/Notification\.Name\("DarKidsCreatorRetryInitialLoad"\)/,"failed startup can retry");
+assert.match(nativeWeb,/webView\.observe\(\\\.estimatedProgress/,"observe real WebKit loading, not a fake clock");
+assert.match(nativeWeb,/min\(0\.95, max\(0\.0, page\.estimatedProgress\)\)/,"estimated progress is capped before finish");
+assert.match(nativeWeb,/Notification\.Name\("DarKidsCreatorPageLoaded"\)/,"native page-loaded confirmation is wired");
+assert.match(nativeWeb,/Notification\.Name\("DarKidsCreatorLoadFailed"\)/,"network failures reported to the overlay");
+assert.match(nativeWeb,/Notification\.Name\("DarKidsCreatorRetryInitialLoad"\)/,"initial load retry is observed");
+assert.match(nativeView,/#else\s+var body: some View \{\s+KidsWebAppView\(\)/,"visitor root continues directly into existing web view");
+
 assert.match(nativeWeb,/configuration\.userContentController\.add\(context\.coordinator, name: "darKidsCreatorSplashReady"\)/);
 const launchStoryboard=read("ios/DarAlTawhidKids/DarAlTawhidKids/KidsCreatorLaunchScreen.storyboard");
 assert.match(launchStoryboard,/image="KidsTestLaunchPoster"/,"native first frame uses bundled KIDS artwork");
