@@ -85,31 +85,76 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-031",
+      "questionId": "kids-quiz-080",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Den Zorn zurückhalten und verzeihen",
-        "Sofort beleidigen",
-        "Etwas kaputt machen"
+        "Nein",
+        "Ja",
+        "Nur vor Freunden"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a1",
         "a2",
         "a3"
       ],
+      "originalQuestionAudioSHA256": "3fba89933ff82a7b779b71a6482177bf623e2b0c07829396d14bd43952790bf8",
+      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Dürfen wir andere mit beleidigenden Spitznamen rufen? Antwort 1: Nein. Antwort 2: Ja. Antwort 3: Nur vor Freunden. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "3fba89933ff82a7b779b71a6482177bf623e2b0c07829396d14bd43952790bf8",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Hör dir die Frage und die Antworten in Ruhe an.",
+        "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
+        "Antwort 1:",
+        "Nein.",
+        "Antwort 2:",
+        "Ja.",
+        "Antwort 3:",
+        "Nur vor Freunden.",
+        "Wähle die Antwort, die du für richtig hältst."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 49:11",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-031",
+      "ageBand": "7-8",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Sofort beleidigen",
+        "Den Zorn zurückhalten und verzeihen",
+        "Etwas kaputt machen"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a1",
+        "a3"
+      ],
       "originalQuestionAudioSHA256": "d30e8e74cb575b036d0b34a89baa8c3b5f2039cd419c02494bdc84e7e549eb57",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was ist besser, wenn wir wütend sind? Antwort 1: Den Zorn zurückhalten und verzeihen. Antwort 2: Sofort beleidigen. Antwort 3: Etwas kaputt machen. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "d30e8e74cb575b036d0b34a89baa8c3b5f2039cd419c02494bdc84e7e549eb57",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was ist besser, wenn wir wütend sind? Antwort 1: Sofort beleidigen. Antwort 2: Den Zorn zurückhalten und verzeihen. Antwort 3: Etwas kaputt machen. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "352acbb7a3b882cbcfe7d249662e547ce8b366a8ea5310f07290784941734663",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
         "Was ist besser, wenn wir wütend sind?",
         "Antwort 1:",
-        "Den Zorn zurückhalten und verzeihen.",
-        "Antwort 2:",
         "Sofort beleidigen.",
+        "Antwort 2:",
+        "Den Zorn zurückhalten und verzeihen.",
         "Antwort 3:",
         "Etwas kaputt machen.",
         "Wähle die Antwort, die du für richtig hältst."
@@ -219,20 +264,20 @@
       "questionId": "kids-quiz-520",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
         "Wissen und Macht",
-        "Schlummer und Schlaf",
-        "Hören und Sehen"
+        "Hören und Sehen",
+        "Schlummer und Schlaf"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a1",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "d0b7fed65d8580fe3135f41022fe2ec6ff43389a54c4a438b488f75aafb1e733",
-      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Welche zwei Dinge verneint Āyat al-Kursī für Allah? Antwort 1: Wissen und Macht. Antwort 2: Schlummer und Schlaf. Antwort 3: Hören und Sehen. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "d604c162767c971f2a64f84f3591eaa2b207a0fb5d5f1fe9d3805cd1db184079",
+      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Welche zwei Dinge verneint Āyat al-Kursī für Allah? Antwort 1: Wissen und Macht. Antwort 2: Hören und Sehen. Antwort 3: Schlummer und Schlaf. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "f18dcee12209bfcdc0d723a945dc46374be9c635939461b3d3a07f2988e11e6d",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Hör dir die Frage und die Antworten in Ruhe an.",
@@ -240,9 +285,9 @@
         "Antwort 1:",
         "Wissen und Macht.",
         "Antwort 2:",
-        "Schlummer und Schlaf.",
-        "Antwort 3:",
         "Hören und Sehen.",
+        "Antwort 3:",
+        "Schlummer und Schlaf.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -256,51 +301,6 @@
         240
       ],
       "originalSource": "Qurʾān 2:255",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-080",
-      "ageBand": "7-8",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Ja",
-        "Nur vor Freunden",
-        "Nein"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a3",
-        "a1"
-      ],
-      "originalQuestionAudioSHA256": "3fba89933ff82a7b779b71a6482177bf623e2b0c07829396d14bd43952790bf8",
-      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Dürfen wir andere mit beleidigenden Spitznamen rufen? Antwort 1: Ja. Antwort 2: Nur vor Freunden. Antwort 3: Nein. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "96fdcc84126426f1728a6660a44b4ec357d2a2586b88b761155f20ba9dea9164",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Hör dir die Frage und die Antworten in Ruhe an.",
-        "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
-        "Antwort 1:",
-        "Ja.",
-        "Antwort 2:",
-        "Nur vor Freunden.",
-        "Antwort 3:",
-        "Nein.",
-        "Wähle die Antwort, die du für richtig hältst."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 49:11",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
