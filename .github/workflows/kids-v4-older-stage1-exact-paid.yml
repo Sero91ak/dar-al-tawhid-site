@@ -10,8 +10,8 @@ on:
         options:
           - "NO"
           - "YES"
-      confirm_manual_source_review:
-        description: "I personally reviewed 20 lesson texts, answer keys and sources"
+      acknowledge_existing_canonical_approval:
+        description: "Confirm already approved 450 original questions and unchanged speech texts; no repeat review"
         required: true
         type: choice
         options:
@@ -31,7 +31,7 @@ concurrency:
 
 jobs:
   original-v4-first20-older-questions:
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.authorize_new_credit_spend == 'YES' && github.event.inputs.confirm_manual_source_review == 'YES' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.authorize_new_credit_spend == 'YES' && github.event.inputs.acknowledge_existing_canonical_approval == 'YES' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -70,7 +70,7 @@ jobs:
       - name: Generate at most ten specifically approved new original V4 speech parts
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
-          KIDS_V4_STAGE1_HUMAN_CONTENT_CHECK: ${{ github.event.inputs.confirm_manual_source_review }}
+          KIDS_V4_STAGE1_APPROVED_CANONICAL_450: ${{ github.event.inputs.acknowledge_existing_canonical_approval }}
           KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL: ${{ github.event.inputs.authorize_new_credit_spend }}
           KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256: ${{ github.event.inputs.approve_exact_batch_fingerprint_sha256 }}
         run: |
