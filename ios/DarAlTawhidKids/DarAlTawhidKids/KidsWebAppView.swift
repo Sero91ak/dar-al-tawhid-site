@@ -3,6 +3,7 @@ import UIKit
 import WebKit
 import AVFoundation
 import MediaPlayer
+import UserNotifications
 
 struct KidsWebAppView: UIViewRepresentable {
     func makeCoordinator() -> Coordinator {
@@ -19,6 +20,7 @@ struct KidsWebAppView: UIViewRepresentable {
         configuration.userContentController.add(context.coordinator, name: "darKidsScreenAwake")
 #if KIDS_CREATOR_TEST
         configuration.userContentController.add(context.coordinator, name: "darKidsCreatorSplashReady")
+        configuration.userContentController.add(context.coordinator, name: "darKidsTestNotifications")
 #endif
 
 #if KIDS_CREATOR_TEST
@@ -74,6 +76,10 @@ struct KidsWebAppView: UIViewRepresentable {
         webView.uiDelegate = context.coordinator
         webView.alpha = 1
 
+#if KIDS_CREATOR_TEST
+        // Local notification test banners also appear while KIDS TEST is foregrounded.
+        UNUserNotificationCenter.current().delegate = context.coordinator
+#endif
         context.coordinator.attach(webView)
         context.coordinator.loadKidsHome(in: webView)
         return webView
@@ -81,7 +87,7 @@ struct KidsWebAppView: UIViewRepresentable {
 
     func updateUIView(_ uiView: WKWebView, context: Context) {}
 
-    final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler {
+    final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler, UNUserNotificationCenterDelegate {
         private weak var webView: WKWebView?
         private var hasPresentedInitialPage = false
         private var remoteCommandsReady = false
@@ -147,6 +153,7 @@ struct KidsWebAppView: UIViewRepresentable {
 #if KIDS_CREATOR_TEST
             loadProgressObservation?.invalidate()
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsCreatorSplashReady")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darKidsTestNotifications")
 #endif
         }
 
@@ -229,6 +236,86 @@ struct KidsWebAppView: UIViewRepresentable {
                 UIApplication.shared.isIdleTimerDisabled = enabled
             }
         }
+
+#if KIDS_CREATOR_TEST
+        private func kidsTestNotifyResponse(_ status: String, message: String? = nil) {
+            let detail: [String: String] = ["status": status, "message": message ?? ""]
+            guard let data = try? JSONSerialization.data(withJSONObject: detail),
+                  let json = String(data: data, encoding: .utf8) else { return }
+            DispatchQueue.main.async { [weak self] in
+                self?.webView?.evaluateJavaScript(
+                    "window.dispatchEvent(new CustomEvent('dar-kids-test-native-notifications',{detail:\(json)}))",
+                    completionHandler: nil
+                )
+            }
+        }
+
+        private func kidsTestNotifyStatus(_ message: String? = nil) {
+            UNUserNotificationCenter.current().getNotificationSettings { [weak self] settings in
+                let name: String
+                switch settings.authorizationStatus {
+                case .authorized, .provisional, .ephemeral: name = "granted"
+                case .denied: name = "denied"
+                default: name = "notDetermined"
+                }
+                self?.kidsTestNotifyResponse(name, message: message)
+            }
+        }
+
+        private func handleKidsTestNotify(_ message: WKScriptMessage, body: [String: Any]) {
+            guard message.frameInfo.isMainFrame,
+                  webView?.url?.host?.lowercased() == "dar-al-tawhid-kids-creator.sero91ak.workers.dev",
+                  let action = body["action"] as? String else { return }
+            let center = UNUserNotificationCenter.current()
+            switch action {
+            case "status":
+                kidsTestNotifyStatus()
+            case "request":
+                // The system prompt is only triggered by a parent's explicit button tap.
+                center.requestAuthorization(options: [.alert, .badge, .sound]) { [weak self] _, _ in
+                    self?.kidsTestNotifyStatus()
+                }
+            case "test":
+                center.getNotificationSettings { [weak self] settings in
+                    guard settings.authorizationStatus == .authorized ||
+                          settings.authorizationStatus == .provisional else {
+                        self?.kidsTestNotifyStatus("Zuerst iOS-Benachrichtigungen erlauben.")
+                        return
+                    }
+                    let content = UNMutableNotificationContent()
+                    content.title = "TAWḤĪD KIDS · Test"
+                    content.body = "Die lokale iOS-Benachrichtigung funktioniert."
+                    content.sound = .default
+                    let request = UNNotificationRequest(
+                        identifier: "kids.creator.parent.test." + UUID().uuidString,
+                        content: content,
+                        trigger: UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                    )
+                    center.add(request) { [weak self] error in
+                        self?.kidsTestNotifyStatus(error == nil
+                            ? "Eine lokale Testmitteilung ist für fünf Sekunden später geplant."
+                            : "Die Testmitteilung konnte nicht eingerichtet werden.")
+                    }
+                }
+            case "openSettings":
+                DispatchQueue.main.async {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(url)
+                    }
+                }
+            default:
+                break
+            }
+        }
+
+        func userNotificationCenter(
+            _ center: UNUserNotificationCenter,
+            willPresent notification: UNNotification,
+            withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+        ) {
+            completionHandler([.banner, .list, .sound])
+        }
+#endif
 
         private func configurePlaybackSession() {
             let session = AVAudioSession.sharedInstance()
@@ -359,6 +446,8 @@ struct KidsWebAppView: UIViewRepresentable {
             case "darKidsScreenAwake":
                 applyKidsScreenAwake(body)
 #if KIDS_CREATOR_TEST
+            case "darKidsTestNotifications":
+                handleKidsTestNotify(message, body: body)
             case "darKidsCreatorSplashReady":
                 // Fired only after the first illustrated web splash frame is ready.
                 DispatchQueue.main.async {
