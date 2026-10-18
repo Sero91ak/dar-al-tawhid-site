@@ -1,0 +1,150 @@
+{
+  "project": "DĀR AL TAWḤĪD",
+  "date": "2026-10-18",
+  "range": "HAD-0443–HAD-0462",
+  "sourceOfTruth": "apple-tv/hadith/series/",
+  "baselineAudit": "apple-tv/hadith/audit/0443-0492-earliest-sharh-audit.json",
+  "counts": {
+    "inspected": 20,
+    "athar": 8,
+    "hadith": 12,
+    "individualRecordFilesChanged": 4,
+    "newHadith": 0,
+    "newAthar": 0,
+    "hadithAlreadyWithSharh": 12,
+    "verifiedSharhNewlyAdded": 0
+  },
+  "checkedIds": [
+    "HAD-0443",
+    "HAD-0444",
+    "HAD-0445",
+    "HAD-0446",
+    "HAD-0447",
+    "HAD-0448",
+    "HAD-0449",
+    "HAD-0450",
+    "HAD-0451",
+    "HAD-0452",
+    "HAD-0453",
+    "HAD-0454",
+    "HAD-0455",
+    "HAD-0456",
+    "HAD-0457",
+    "HAD-0458",
+    "HAD-0459",
+    "HAD-0460",
+    "HAD-0461",
+    "HAD-0462"
+  ],
+  "changed": [
+    {
+      "id": "HAD-0443",
+      "change": "Muʿallaq primary quote corroborated, weak connected route through Salih mawla at-Tawʾamah and support mentioned; not automatically sahih"
+    },
+    {
+      "id": "HAD-0444",
+      "change": "Ibn Umar prayer on snow: exact Bukhari suspended quote, no independently confirmed connected chain"
+    },
+    {
+      "id": "HAD-0449",
+      "change": "Umar original Bukhari 365 wording restored, separated from the Prophet's answer, citation grade corrected"
+    },
+    {
+      "id": "HAD-0450",
+      "change": "Ibn Masud original Darimi 169 wording restored; Ḥafṣ ibn Ġiyāṯ's explicit doubt makes chain disconnected, false authentic label removed"
+    }
+  ],
+  "noNeedToBackfill": [
+    "HAD-0445",
+    "HAD-0451",
+    "HAD-0452",
+    "HAD-0453",
+    "HAD-0454",
+    "HAD-0455",
+    "HAD-0456",
+    "HAD-0457",
+    "HAD-0458",
+    "HAD-0459",
+    "HAD-0460",
+    "HAD-0461",
+    "HAD-0462"
+  ],
+  "semanticDuplicatesIdentifiedNotEdited": [
+    {
+      "record": "HAD-0445",
+      "reference": "HAD-0425",
+      "source": "Bukhari 385"
+    },
+    {
+      "record": "HAD-0448",
+      "reference": "HAD-0417",
+      "source": "Bukhari 377, overlapping but distinct Sahl segment"
+    },
+    {
+      "record": "HAD-0453",
+      "reference": "HAD-0003",
+      "source": "Bukhari 10"
+    },
+    {
+      "record": "HAD-0456",
+      "reference": "HAD-0004",
+      "source": "Bukhari 13"
+    },
+    {
+      "record": "HAD-0457",
+      "reference": "HAD-0015",
+      "source": "Muslim 2564"
+    },
+    {
+      "record": "HAD-0459",
+      "reference": "HAD-0078",
+      "source": "Muslim 2956"
+    }
+  ],
+  "stillOpen": [
+    {
+      "record": "HAD-0447",
+      "problem": "Different early attribution concerning Ahmad and scholar's exception; preserve existing needs-review"
+    },
+    {
+      "record": "HAD-0450",
+      "problem": "Chain interruption documented; no proven alternative continuous chain yet"
+    },
+    {
+      "record": "HAD-0443",
+      "problem": "Full independently verified connected isnad still absent"
+    },
+    {
+      "record": "HAD-0444",
+      "problem": "Full independently verified connected isnad still absent"
+    },
+    {
+      "record": "HAD-0460",
+      "problem": "Earlier chronologically prior direct Sharh check to Ali al-Qari not completed; retain existing record and mark audit future review"
+    }
+  ],
+  "evidence": [
+    "https://www.islamweb.net/ar/library/content/302/361/",
+    "https://ablibrary.net/book_content/b/2601/409",
+    "https://dorar.net/h/w2Ydf0kH?osoul=1",
+    "https://www.islamweb.com/ar/library/content/302/335/",
+    "https://www.islamweb.net/ar/library/content/8/171/",
+    "https://dorar.net/h/7m9uPwYn?osoul=1"
+  ],
+  "publishing": {
+    "mainFileCommitsCompleted": 4,
+    "endpoint": "https://dar-al-tawhid.de/apple-tv/hadith/catalog.json",
+    "endpointHttpVerification": "not confirmed; public URL inaccessible through current fetch",
+    "appleTvNativeRuntime": "not verified",
+    "iOSNativeRuntime": "not verified",
+    "oneSignal": false,
+    "kids": false,
+    "appVisualChanges": false
+  },
+  "next": {
+    "range": "HAD-0463–HAD-0482",
+    "goal": "20 individual original-source verification candidates, early Sharh where truly missing, ongoing new authentic hadith+Sharh and athar distinctness checks",
+    "newId": "HAD-3358 only after checking freshest canonical catalog"
+  },
+  "status": "4 corrections published to GitHub main; no claim of successful Cloudflare/mobile/tvOS release."
+}
