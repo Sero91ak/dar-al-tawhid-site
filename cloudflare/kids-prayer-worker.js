@@ -49,7 +49,7 @@ function localClockUTC(day, hm, tz) {
 async function uuid(seed) {
   const sha = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(seed)));
   const hex = [...sha.slice(0, 16)].map(x => x.toString(16).padStart(2, "0")).join("");
-  return hex.slice(0, 8) + "-" + hex.slice(8, 12) + "-5" +
+  return hex.slice(0, 8) + "-" + hex.slice(8, 12) + "-4" +
     hex.slice(13, 16) + "-" +
     (((parseInt(hex.slice(16, 18), 16) & 0x3f) | 0x80).toString(16).padStart(2, "0") + hex.slice(18, 20)) +
     "-" + hex.slice(20, 32);
@@ -74,6 +74,7 @@ async function getRegistrations(dbKey) {
       "prayer_advance_minutes", "last_seen_at"
     ].join(","));
     url.searchParams.set("parent_consent_verified_at", "not.is.null");
+    url.searchParams.set("guardian_auth_id", "not.is.null");
     url.searchParams.set("consent_revoked_at", "is.null");
     url.searchParams.set("prayer_enabled", "eq.true");
     url.searchParams.set("order", "onesignal_subscription_id.asc");
