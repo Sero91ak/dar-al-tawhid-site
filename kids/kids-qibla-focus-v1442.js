@@ -146,7 +146,7 @@ function onOrientation(event){
   value=norm(event.webkitCompassHeading);
   accuracy=typeof event.webkitCompassAccuracy==="number"?event.webkitCompassAccuracy:null;
   if(accuracy!==null&&(accuracy<0||accuracy>45)){
-   message("Kompass nicht ausreichend kalibriert. Bitte das Gerät bewegen und Metall meiden.");return;
+   heading=null;render();message("Kompass nicht ausreichend kalibriert. Bitte das Gerät bewegen und Metall meiden.");return;
   }
  }else if(event.absolute===true&&typeof event.alpha==="number"&&Number.isFinite(event.alpha)){
   const angle=Number(screen.orientation?.angle??window.orientation??0)||0;
@@ -259,7 +259,6 @@ function open(){
 }
 launch.addEventListener("click",open);
 $("kqClose").addEventListener("click",close);
-focus.addEventListener("click",e=>{if(e.target===focus)close()});
 $("kqGps").addEventListener("click",requestGps);
 $("kqSensor").addEventListener("click",startCompass);
 $("kqPrayerPlace").addEventListener("click",prayerPlace);
