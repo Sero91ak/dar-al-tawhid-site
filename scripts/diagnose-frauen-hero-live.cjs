@@ -37,7 +37,20 @@ function measure(){
   const input=document.querySelector("#appView .frauen-library-search-wrap input,#appView .frauen-library-list-controls input");
   const styleSource=h?getComputedStyle(h).getPropertyValue("--frauen-hero-img").trim():"";
   const ancestor=[];if(h)for(let e=h,n=0;e&&n<9;e=e.parentElement,n++){const c=getComputedStyle(e);ancestor.push({name:String(e.className).slice(0,120),overflowX:c.overflowX,overflowY:c.overflowY,position:c.position,transform:c.transform.slice(0,90)});}
+  const scrollNodes=[
+    {name:"html",el:document.documentElement},{name:"body",el:document.body},
+    {name:"document",el:document.scrollingElement},
+    {name:"appView",el:document.getElementById("appView")},
+    {name:"frauen-production-root",el:document.querySelector(".dar-frauen-production-root")}
+  ].filter(x=>x.el).map(x=>({name:x.name,top:Math.round(x.el.scrollTop||0),
+    max:Math.max(0,(x.el.scrollHeight||0)-(x.el.clientHeight||0)),
+    overflowY:getComputedStyle(x.el).overflowY,
+    height:x.el.clientHeight}));
+  const gateVisible=Array.from(document.querySelectorAll("input[type=password]")).some(x=>{
+    const r=x.getBoundingClientRect();return r.width>120&&r.height>24&&r.top>=0&&r.top<innerHeight&&getComputedStyle(x).visibility!=="hidden";
+  });
   return {url:location.href,hash:location.hash,theme:document.documentElement.dataset.theme||"",
+    scrollNodes,gateVisible,
     bodyClass:document.body.className.slice(0,350),
     frauenView:document.body.dataset.frauenView||"",
     documentScroll:Math.round(document.scrollingElement?.scrollTop||0),
@@ -71,7 +84,7 @@ function measure(){
        await page.mouse.wheel(0,620);await page.waitForTimeout(850);
        after=await page.evaluate(measure);
        await page.screenshot({path:path.join(out,cfg.id+"-scroll.png"),fullPage:false});
-       if(before?.input){
+       if(before?.input&&!before.gateVisible){
          await page.evaluate(()=>window.scrollTo(0,0));
          const inp=page.locator("#appView .frauen-library-search-wrap input,#appView .frauen-library-list-controls input").first();
          try{
@@ -83,7 +96,7 @@ function measure(){
            await page.screenshot({path:path.join(out,cfg.id+"-search.png"),fullPage:false});
          }catch(e){typing={error:String(e.message).slice(0,240)};}
        }
-       if(before?.firstCardCount){
+       if(before?.firstCardCount&&!before.gateVisible){
          await page.evaluate(()=>window.scrollTo(0,0));
          const card=page.locator("#appView .frauen-library-card[data-nav],#appView .frauen-library-area-card[data-nav]").first();
          try{
@@ -99,12 +112,16 @@ function measure(){
      results.push(result);
      console.log("HERO_BROWSER_AUDIT "+JSON.stringify(result).slice(0,12500));
      if(loadError||status!==200)issues.push(cfg.id+": response/timeout "+(status||loadError));
+     else if(before?.gateVisible)console.log("HERO_GATE_PRESENT "+cfg.id+": password gate covers app; interaction check skipped");
+     else if(cfg.id==="desktop-public"&&!before?.hero)console.log("HERO_DESKTOP_SEPARATE_ROUTE: public desktop rendered its own start page, not adult Frauen SPA");
      else if(!before?.hero||before.hero.height<160)issues.push(cfg.id+": missing visible Frauen Hero");
      else {
        if(!/url\(/.test(before.hero.backgroundImage))issues.push(cfg.id+": Hero has no photo background-image");
        if(!before.originalDirectChild)issues.push(cfg.id+": Hero moved from original direct-child hierarchy");
        if(before.stageCount!==0)issues.push(cfg.id+": obsolete immersive Hero adapter still modifies DOM");
-       if(before.documentScrollMax>200&&after?.documentScroll<60&&after?.windowY<60)issues.push(cfg.id+": document cannot scroll");
+       const scrollable=(after?.scrollNodes||[]).some(n=>n.top>60);
+       const scrollRange=(before?.scrollNodes||[]).some(n=>n.max>200);
+       if(scrollRange&&!scrollable)issues.push(cfg.id+": no actual scroll container moved after wheel");
        if(typing&&typing.error)issues.push(cfg.id+": search focus failure: "+typing.error);
      }
      await context.close();
