@@ -3,6 +3,8 @@ on:
   pull_request:
     paths:
       - 'assets/frauen/frauen-live-adapter-scroll-safe-v2.js'
+      - 'assets/frauen/frauen-sticky-scroll-safe-v2.css'
+      - 'assets/frauen/frauen-sticky-scroll-safe-v2.js'
       - 'scripts/verify-frauen-scroll-safe-v2.cjs'
       - '.github/workflows/check-frauen-scroll-safe-v2.yml'
   workflow_dispatch:
