@@ -1,104 +1,119 @@
 #!/usr/bin/env node
 "use strict";
-/* Browser-based, read-only Frauen hero diagnosis: public Test + visitor SPA.
-   Preserve image/card/navigation logic; record actual computed layout on screen. */
-const { chromium } = require("playwright");
+/* FRAUEN_HERO_LIVE_BROWSER_QA_V2 · read-only, screenshot-based regression probe.
+ * No application scripts/styles injected. Inspect the real deployed Test,
+ * visitor/native-web, Android PWA and desktop surfaces after a rollback.
+ * Never send pushes, submit forms or mutate user data.
+ */
+const { chromium }=require("playwright");
 const fs=require("node:fs");
 const path=require("node:path");
 const out=path.join(process.cwd(),"frauen-hero-live-evidence");
 fs.mkdirSync(out,{recursive:true});
-const all=[];
+const base="https://dar-al-tawhid.de";
 const routes=[
-  {key:"visitor",url:"https://dar-al-tawhid.de/?frauen-hero-probe=1392#frauen"},
-  {key:"test",url:"https://dar-al-tawhid.de/test/?frauen-hero-probe=1392#frauen"}
+ {id:"dar-test-iphone",url:base+"/test/?heroVisualAudit=20261018#frauen",width:393,height:852,mobile:true,
+  ua:"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"},
+ {id:"visitor-ios-webview",url:base+"/?heroVisualAudit=20261018#frauen",width:393,height:852,mobile:true,
+  ua:"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS"},
+ {id:"visitor-android-pwa",url:base+"/pwa/?heroVisualAudit=20261018#frauen",width:412,height:915,mobile:true,
+  ua:"Mozilla/5.0 (Linux; Android 16; Pixel 9) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Mobile Safari/537.36"},
+ {id:"desktop-public",url:base+"/?heroVisualAudit=20261018#frauen",width:1440,height:900,mobile:false,
+  ua:"Mozilla/5.0 (Macintosh; Intel Mac OS X 15_0) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/19.0 Safari/605.1.15"}
 ];
-function snapshot(){
-  const hero=document.querySelector(".frauen-library-pinned-header .frauen-library-hero");
-  const stage=document.querySelector(".frauen-library-pinned-header");
-  const heading=document.querySelector(".frauen-library-section-head");
-  const app=document.querySelector("#appView");
-  const shell=document.querySelector(".frauen-library-shell");
-  const doc=document.scrollingElement;
-  const pick=e=>{
-    if(!e)return null;
-    const r=e.getBoundingClientRect(),c=getComputedStyle(e);
-    return {tag:e.tagName,id:e.id,classes:String(e.className).slice(0,180),
-      top:Math.round(r.top),bottom:Math.round(r.bottom),
-      left:Math.round(r.left),right:Math.round(r.right),
-      width:Math.round(r.width),height:Math.round(r.height),
+function measure(){
+  const pick=function(el){
+    if(!el)return null;
+    const c=getComputedStyle(el),b=el.getBoundingClientRect();
+    return {exists:true,tag:el.tagName,cls:String(el.className).slice(0,160),
+      top:Math.round(b.top),bottom:Math.round(b.bottom),left:Math.round(b.left),
+      width:Math.round(b.width),height:Math.round(b.height),position:c.position,
       display:c.display,visibility:c.visibility,opacity:c.opacity,
-      position:c.position,overflowX:c.overflowX,overflowY:c.overflowY,
-      backgroundImage:c.backgroundImage.slice(0,420),zIndex:c.zIndex,
-      scrollTop:e.scrollTop,scrollHeight:e.scrollHeight,clientHeight:e.clientHeight,
-      clipPath:c.clipPath,transform:c.transform,
-      parent:e.parentElement?String(e.parentElement.className).slice(0,120):""};
+      overflow:c.overflow,backgroundImage:c.backgroundImage.slice(0,520),
+      backgroundSize:c.backgroundSize,zIndex:c.zIndex};
   };
-  let ancestors=[];
-  if(hero){for(let x=hero,n=0;x&&n<12;x=x.parentElement,n++)ancestors.push(pick(x));}
-  return {hash:location.hash,theme:document.documentElement.getAttribute("data-theme"),
-    bodyClass:document.body?.className,view:document.body?.getAttribute("data-frauen-view"),
-    docScroll:doc?.scrollTop,windowY:scrollY,viewport:{w:innerWidth,h:innerHeight},
-    hero:pick(hero),stage:pick(stage),heading:pick(heading),
-    body:pick(document.body),html:pick(document.documentElement),
-    inlineStyles:{body:document.body?.getAttribute("style"),html:document.documentElement?.getAttribute("style")},
-    app:pick(app),shell:pick(shell),ancestors,
-    heroHtml:hero?.outerHTML.slice(0,400),
-    shellChildren:shell?[...shell.children].slice(0,7).map(x=>({tag:x.tagName,cls:String(x.className).slice(0,150),head:x.outerHTML.slice(0,260)})):[],
-    renderer:(()=>{
-      try{
-        const p=window.DARFrauenFiqh;
-        const html=typeof p?.render==="function"?String(p.render("")):"";
-        return {exists:!!p,render:typeof p?.render,
-          generatedLength:html.length,generatedHero:html.includes("frauen-library-hero"),
-          generatedStage:html.includes("frauen-library-pinned-header"),
-          generatedHeader:html.slice(0,330)};
-      }catch(e){return {error:String(e)}}
-    })(),
-    images:[...document.querySelectorAll(".frauen-library-card.has-visual")].slice(0,2).map(pick),
-    styles:[...document.querySelectorAll('link[rel="stylesheet"]')].filter(x=>/frauen/.test(x.href)).map(x=>x.href)};
+  const h=document.querySelector("#appView .frauen-library-hero");
+  const section=document.querySelector("#appView .frauen-library-shell,#appView .frauen-library-list");
+  const input=document.querySelector("#appView .frauen-library-search-wrap input,#appView .frauen-library-list-controls input");
+  const styleSource=h?getComputedStyle(h).getPropertyValue("--frauen-hero-img").trim():"";
+  const ancestor=[];if(h)for(let e=h,n=0;e&&n<9;e=e.parentElement,n++){const c=getComputedStyle(e);ancestor.push({name:String(e.className).slice(0,120),overflowX:c.overflowX,overflowY:c.overflowY,position:c.position,transform:c.transform.slice(0,90)});}
+  return {url:location.href,hash:location.hash,theme:document.documentElement.dataset.theme||"",
+    bodyClass:document.body.className.slice(0,350),
+    frauenView:document.body.dataset.frauenView||"",
+    documentScroll:Math.round(document.scrollingElement?.scrollTop||0),
+    documentScrollMax:Math.max(0,(document.scrollingElement?.scrollHeight||0)-(document.scrollingElement?.clientHeight||0)),
+    windowY:Math.round(scrollY), viewport:{width:innerWidth,height:innerHeight},
+    hero:pick(h),heroImageVar:styleSource,heroParent:h?.parentElement?.className||null,
+    originalDirectChild:!!(h&&h.parentElement===section),section:pick(section),
+    input:pick(input),search:pick(document.querySelector("#appView .frauen-library-search-wrap,#appView .frauen-library-list-controls")),
+    stageCount:document.querySelectorAll(".dar-immersive-hero-stage").length,
+    heroCount:document.querySelectorAll("#appView .frauen-library-hero").length,
+    firstCardCount:document.querySelectorAll("#appView .frauen-library-card[data-nav],#appView .frauen-library-area-card[data-nav]").length,
+    ancestors:ancestor};
 }
 (async()=>{
- let browser;let issues=[];
+ let browser;const results=[],issues=[];
  try{
-  browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
-  for(const route of routes){
-   const context=await browser.newContext({viewport:{width:393,height:852},deviceScaleFactor:2,isMobile:true,hasTouch:true,locale:"de-DE",userAgent:route.key==="visitor"?"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1 DarAlTawhid-iOS":"Mozilla/5.0 (iPhone; CPU iPhone OS 17_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.6 Mobile/15E148 Safari/604.1"});
-   const page=await context.newPage();const errors=[];
-   page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
-   const response=await page.goto(route.url,{waitUntil:"domcontentloaded",timeout:60000});
-   await page.waitForTimeout(6000);
-   let before=await page.evaluate(snapshot);
-   await page.screenshot({path:path.join(out,route.key+"-initial.png")});
-   // Simulate the proposed code on the currently deployed app, before merging.
-   const localScript=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-fiqh.js":"assets/frauen/frauen-fiqh.js"),"utf8");
-   const tag="/* DAR_FRAUEN_HERO_DOM_INTEGRITY_V1392";
-   if(!localScript.includes(tag))throw Error("Repair snippet not in checkout");
-   await page.addScriptTag({content:localScript.slice(localScript.indexOf(tag))});
-   const localCss=fs.readFileSync(path.join(process.cwd(),route.key==="test"?"test/assets/frauen/frauen-authority-v1292.css":"assets/frauen/frauen-authority-v1292.css"),"utf8");
-   const cssTag="/* DAR_FRAUEN_HERO_SCROLL_ANCESTOR_V1392";
-   if(!localCss.includes(cssTag))throw Error("Scroll CSS absent in checkout");
-   await page.addStyleTag({content:localCss.slice(localCss.indexOf(cssTag))});
-   await page.waitForTimeout(1100);
-   let repaired=await page.evaluate(snapshot);
-   await page.screenshot({path:path.join(out,route.key+"-repaired.png")});
-
-   await page.mouse.wheel(0,560);
-   await page.waitForTimeout(330);
-   await page.waitForTimeout(450);
-   let after=await page.evaluate(snapshot);
-   await page.screenshot({path:path.join(out,route.key+"-after-scroll.png")});
-   all.push({key:route.key,status:response.status(),before,repaired,after,errors});
-   console.log(JSON.stringify({route:route.key,status:response.status(),
-    before:{bodyClass:before.bodyClass,theme:before.theme,view:before.view,scroll:before.docScroll,hero:before.hero,stage:before.stage,heading:before.heading,app:before.app,images:before.images.length,styles:before.styles,shellChildren:before.shellChildren,renderer:before.renderer},
-    repaired:{hero:repaired.hero,stage:repaired.stage,heading:repaired.heading,renderer:repaired.renderer,body:repaired.body,html:repaired.html,inline:repaired.inlineStyles,ancestors:repaired.ancestors.map(x=>({cls:x.classes,overflowX:x.overflowX,overflowY:x.overflowY}))},after:{scroll:after.docScroll,body:after.body,hero:after.hero,stage:after.stage,heading:after.heading,ancestors:after.ancestors.map(x=>({cls:x.classes,overflowY:x.overflowY}))},errors}));
-   if(before.app&&(!repaired.hero||repaired.hero.height<180||repaired.hero.bottom<100)){
-     issues.push(route.key+" upper hero missing from first viewport");
+   browser=await chromium.launch({headless:true,args:["--no-sandbox"]});
+   for(const cfg of routes){
+     const context=await browser.newContext({viewport:{width:cfg.width,height:cfg.height},
+       deviceScaleFactor:cfg.mobile?2:1,isMobile:cfg.mobile,hasTouch:cfg.mobile,
+       userAgent:cfg.ua,locale:"de-DE",javaScriptEnabled:true,ignoreHTTPSErrors:false});
+     const page=await context.newPage();const errors=[],imageResponses=[];
+     page.on("pageerror",e=>errors.push(String(e.message).slice(0,300)));
+     page.on("response",r=>{if(/\/assets\/frauen\//.test(r.url()))imageResponses.push({status:r.status(),url:r.url().slice(0,170)});});
+     let status=null,loadError=null,before=null,after=null,typing=null,subpage=null;
+     try{
+       const res=await page.goto(cfg.url,{waitUntil:"domcontentloaded",timeout:55000});status=res?.status()||0;
+       await page.waitForTimeout(7000);
+       before=await page.evaluate(measure);
+       await page.screenshot({path:path.join(out,cfg.id+"-before.png"),fullPage:false});
+       await page.mouse.wheel(0,620);await page.waitForTimeout(850);
+       after=await page.evaluate(measure);
+       await page.screenshot({path:path.join(out,cfg.id+"-scroll.png"),fullPage:false});
+       if(before?.input){
+         await page.evaluate(()=>window.scrollTo(0,0));
+         const inp=page.locator("#appView .frauen-library-search-wrap input,#appView .frauen-library-list-controls input").first();
+         try{
+           await inp.click({timeout:5000});
+           typing={focus:await inp.evaluate(el=>document.activeElement===el),valueBefore:await inp.inputValue()};
+           await inp.fill("frau",{timeout:5000});
+           await page.waitForTimeout(600);
+           typing.valueAfter=await page.locator("#appView .frauen-library-search-wrap input,#appView .frauen-library-list-controls input").first().inputValue({timeout:1500});
+           await page.screenshot({path:path.join(out,cfg.id+"-search.png"),fullPage:false});
+         }catch(e){typing={error:String(e.message).slice(0,240)};}
+       }
+       if(before?.firstCardCount){
+         await page.evaluate(()=>window.scrollTo(0,0));
+         const card=page.locator("#appView .frauen-library-card[data-nav],#appView .frauen-library-area-card[data-nav]").first();
+         try{
+           await card.click({timeout:5000});await page.waitForTimeout(1500);
+           subpage=await page.evaluate(measure);
+           await page.screenshot({path:path.join(out,cfg.id+"-navigation.png"),fullPage:false});
+         }catch(e){subpage={error:String(e.message).slice(0,250)};}
+       }
+     }catch(e){loadError=String(e.stack||e).slice(0,750);}
+     const result={id:cfg.id,status,loadError,before,after,typing,
+       subpage:subpage?{hash:subpage.hash,hero:subpage.hero?.height||0,bodyClass:subpage.bodyClass,error:subpage.error||null}:null,
+       imageResponses,errors:errors.slice(0,12)};
+     results.push(result);
+     console.log("HERO_BROWSER_AUDIT "+JSON.stringify(result).slice(0,12500));
+     if(loadError||status!==200)issues.push(cfg.id+": response/timeout "+(status||loadError));
+     else if(!before?.hero||before.hero.height<160)issues.push(cfg.id+": missing visible Frauen Hero");
+     else {
+       if(!/url\(/.test(before.hero.backgroundImage))issues.push(cfg.id+": Hero has no photo background-image");
+       if(!before.originalDirectChild)issues.push(cfg.id+": Hero moved from original direct-child hierarchy");
+       if(before.stageCount!==0)issues.push(cfg.id+": obsolete immersive Hero adapter still modifies DOM");
+       if(before.documentScrollMax>200&&after?.documentScroll<60&&after?.windowY<60)issues.push(cfg.id+": document cannot scroll");
+       if(typing&&typing.error)issues.push(cfg.id+": search focus failure: "+typing.error);
+     }
+     await context.close();
    }
-   if(before.app&&after.stage&&after.stage.bottom<100)issues.push(route.key+" stage scrolls off-screen");
-   if(before.app&&before.app.scrollHeight>before.app.clientHeight+200&&after.docScroll<100)issues.push(route.key+" content cannot scroll normally");
-   await context.close();
-  }
- }catch(e){issues.push(String(e.stack||e));console.error(e);}
- finally{if(browser)await browser.close();fs.writeFileSync(path.join(out,"diagnosis.json"),JSON.stringify({all,issues},null,2));}
- if(issues.length){console.error("HERO_LIVE_FAILURES",issues);process.exitCode=1;}
+ }catch(err){issues.push("audit runner: "+String(err.stack||err).slice(0,600));}
+ finally{
+   if(browser)await browser.close();
+   fs.writeFileSync(path.join(out,"audit.json"),JSON.stringify({results,issues},null,2));
+   console.log("HERO_BROWSER_AUDIT_ISSUES "+JSON.stringify(issues));
+   if(issues.length)process.exitCode=1;
+ }
 })();
