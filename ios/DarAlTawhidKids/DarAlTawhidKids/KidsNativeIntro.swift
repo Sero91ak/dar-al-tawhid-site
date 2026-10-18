@@ -1,17 +1,53 @@
 import SwiftUI
 import UIKit
+import AVFoundation
 
 // KIDS_NATIVE_CLEAN_START_V2: visitor always runs the original full-screen app.
 // Creator controls compile ONLY with KIDS_CREATOR_TEST and cannot leak into App Store.
+// KIDS_NATIVE_PARALLEL_START_V3
+// Keep the approved movie in front while the real homepage loads underneath.
+// Never reveal a placeholder between the last video frame and the painted page.
 struct KidsRootView: View {
+    @State private var webHomeReady = false
+    @State private var introCompleted = false
+    @State private var showIntro = true
 #if KIDS_CREATOR_TEST
     @State private var showCreatorPanel = false
+#endif
 
+    private var parallelStart: some View {
+        ZStack {
+            KidsWebAppView(onHomeReady: {
+                webHomeReady = true
+            })
+            .ignoresSafeArea()
+
+            if showIntro {
+                KidsIntroMovieView(onFinished: {
+                    introCompleted = true
+                })
+                .ignoresSafeArea()
+                .allowsHitTesting(false)
+                .transition(.opacity)
+            }
+        }
+        .background(Color(red: 12.0 / 255, green: 38.0 / 255, blue: 54.0 / 255))
+        .onChange(of: webHomeReady) { _ in revealReadyPage() }
+        .onChange(of: introCompleted) { _ in revealReadyPage() }
+    }
+
+    private func revealReadyPage() {
+        guard webHomeReady, introCompleted, showIntro else { return }
+        // A short crossfade hides any difference in final-frame color.
+        withAnimation(.easeOut(duration: 0.12)) {
+            showIntro = false
+        }
+    }
+
+#if KIDS_CREATOR_TEST
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
-            KidsWebAppView()
-                .ignoresSafeArea()
-                .background(Color(red: 12.0 / 255, green: 38.0 / 255, blue: 54.0 / 255))
+            parallelStart
 
             Button {
                 showCreatorPanel = true
@@ -46,11 +82,68 @@ struct KidsRootView: View {
     }
 #else
     var body: some View {
-        KidsWebAppView()
-            .ignoresSafeArea()
-            .background(Color(red: 12.0 / 255, green: 38.0 / 255, blue: 54.0 / 255))
+        parallelStart
     }
 #endif
+}
+
+/// An AVPlayerLayer, not VideoPlayer: no controls, system overlays or extra taps.
+/// The final video frame remains visible after playback until the web home
+/// confirms it is ready. Asset is bundled once; no video network request.
+private struct KidsIntroMovieView: UIViewRepresentable {
+    let onFinished: () -> Void
+
+    func makeUIView(context: Context) -> KidsIntroMovieLayer {
+        let view = KidsIntroMovieLayer()
+        view.onFinished = onFinished
+        view.start()
+        return view
+    }
+
+    func updateUIView(_ view: KidsIntroMovieLayer, context: Context) {
+        view.onFinished = onFinished
+    }
+}
+
+private final class KidsIntroMovieLayer: UIView {
+    var onFinished: (() -> Void)?
+    private var player: AVPlayer?
+    private var endObserver: NSObjectProtocol?
+
+    override static var layerClass: AnyClass { AVPlayerLayer.self }
+
+    private var videoLayer: AVPlayerLayer {
+        layer as! AVPlayerLayer
+    }
+
+    func start() {
+        backgroundColor = UIColor(red: 12 / 255, green: 38 / 255, blue: 54 / 255, alpha: 1)
+        videoLayer.videoGravity = .resizeAspectFill
+        guard let url = Bundle.main.url(forResource: "intro-ios", withExtension: "mp4") else {
+            // Never block the whole app when a development bundle omits the video.
+            DispatchQueue.main.async { [weak self] in self?.onFinished?() }
+            return
+        }
+
+        let movie = AVPlayer(url: url)
+        movie.isMuted = true
+        movie.actionAtItemEnd = .pause
+        videoLayer.player = movie
+        player = movie
+        endObserver = NotificationCenter.default.addObserver(
+            forName: .AVPlayerItemDidPlayToEndTime,
+            object: movie.currentItem,
+            queue: .main
+        ) { [weak self] _ in
+            self?.onFinished?()
+        }
+        movie.play()
+    }
+
+    deinit {
+        if let endObserver { NotificationCenter.default.removeObserver(endObserver) }
+        player?.pause()
+    }
 }
 
 #if KIDS_CREATOR_TEST
