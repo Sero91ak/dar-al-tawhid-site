@@ -2594,6 +2594,18 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 @media(prefers-reduced-motion:reduce){.more-tastatur-link,.more-tastatur-action{transition:none!important}}
 </style>
 <link rel="stylesheet" href="/desktop-preview/dar-public-app-promo-v1.css?v=20261017-1">
+<style id="pr-city-search-style-v1">
+.pr-city-toolbar{position:relative;z-index:2;padding:0 clamp(14px,2.5vw,28px) 13px;color:#f5f0e7;font-size:13px}
+.pr-city-toolbar button{cursor:pointer;background:rgba(255,255,255,.08);color:inherit;border:1px solid rgba(226,208,163,.4);border-radius:13px;padding:10px 15px;font:inherit;font-weight:700}
+.pr-city-toolbar form:not([hidden]){display:grid;gap:9px;margin-top:12px;max-width:570px}
+.pr-city-toolbar [hidden]{display:none!important}
+.pr-city-toolbar label{font-weight:700}
+.pr-city-input-row{display:flex;flex-wrap:wrap;gap:8px}
+.pr-city-input-row input{min-width:160px;flex:1;max-width:420px;padding:11px 14px;border:1px solid rgba(226,208,163,.5);border-radius:13px;background:rgba(255,255,255,.95);color:#13251b;font:inherit;font-size:16px}
+#prCityResults:not([hidden]){display:grid;gap:7px;max-height:255px;overflow-y:auto;overscroll-behavior:contain}
+#prCityResults button{text-align:left;width:100%;font-size:13px;padding:11px 14px}
+#prCityInfo{min-height:1em;color:#f3e7c9}
+</style>
 </head>
 <style id="dar-touch-active-fix">
 @media (hover:none) and (pointer:coarse){
@@ -2705,6 +2717,15 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
     <div class="prayer-next"><div class="prayer-label">Nächstes Gebet</div><b id="prNext">—</b><small id="prNextTime">—</small></div>
     <div id="prCountdown" class="prayer-count">--:--:--<span>bis zum nächsten Gebet</span></div>
     <button id="prLocate" class="prayer-locate" type="button">Standort verwenden</button>
+   </div>
+   <div class="pr-city-toolbar">
+    <button id="prCityOpen" type="button" aria-controls="prCityForm" aria-expanded="false">Stadt oder PLZ auswählen</button>
+    <form id="prCityForm" hidden autocomplete="off" role="search" aria-label="Stadt oder Postleitzahl suchen">
+     <label for="prCityQuery">Ort oder Postleitzahl</label>
+     <div class="pr-city-input-row"><input id="prCityQuery" type="search" placeholder="Stadtname oder PLZ" autocomplete="off" enterkeyhint="search" maxlength="100"/><button type="submit">Suchen</button></div>
+     <div id="prCityResults" role="group" aria-label="Ortsvorschläge" aria-live="polite" hidden></div>
+     <small id="prCityInfo" role="status" aria-live="polite"></small>
+    </form>
    </div>
   </section>
  </div>
@@ -3256,7 +3277,14 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
     return a.city||a.town||a.village||a.municipality||a.city_district||a.county||"";
    }).catch(function(){return ""})
  }
- function saveDesktopPrayerLoc(v){try{localStorage.setItem("darDesktopPrayerLocationV1",JSON.stringify(v))}catch(e){}}
+ function saveDesktopPrayerLoc(v,mode){
+  try{localStorage.setItem("darDesktopPrayerLocationV1",JSON.stringify(v))}catch(e){}
+  try{
+   var current=JSON.parse(localStorage.getItem("darPrayerSettingsV1")||"{}");
+   var next=Object.assign({},current,{lat:Number(v.lat),lon:Number(v.lon),city:String(v.city||"Dein Standort"),locationGranted:true,locationMode:mode||current.locationMode||"auto",locationUpdatedAt:Date.now()});
+   localStorage.setItem("darPrayerSettingsV1",JSON.stringify(next));
+  }catch(e){}
+ }
  function initPrayerTicker(){
   clearInterval(prayerTimer);
   var locate=document.getElementById("prLocate");if(!locate)return;
@@ -3279,15 +3307,96 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
     saveDesktopPrayerLoc(saved);paintLocate(saved);drawPrayer()
    })
   }
+
+  /* Separate compact search for the public Desktop web page.
+     Open-Meteo provides autocomplete, OSM is used only on submitted searches. */
+  var cityToggle=document.getElementById("prCityOpen"),cityForm=document.getElementById("prCityForm");
+  var cityInput=document.getElementById("prCityQuery"),cityResults=document.getElementById("prCityResults"),cityInfo=document.getElementById("prCityInfo");
+  var citySeq=0,cityTimer=0,cityPlaces=[];
+  function place(city,lat,lon,zip,region,country){
+   lat=Number(lat);lon=Number(lon);
+   if(!city||!Number.isFinite(lat)||!Number.isFinite(lon)||Math.abs(lat)>90||Math.abs(lon)>180)return null;
+   var c=String(country||"").toUpperCase();
+   return {city:String(city),lat:lat,lon:lon,zip:String(zip||""),region:String(region||""),country:c,
+     label:[city,zip,region,c==="DE"?"":c].filter(Boolean).join(" · ")};
+  }
+  async function getCityJson(url){
+   var ctl=new AbortController(),tim=setTimeout(function(){ctl.abort()},8500);
+   try{var res=await fetch(url,{cache:"no-store",signal:ctl.signal});if(!res.ok)throw Error("city_http_"+res.status);return await res.json()}
+   finally{clearTimeout(tim)}
+  }
+  async function desktopFindCities(q,explicit){
+   var zip=/^\d{5}$/.test(q),items=[];
+   if(zip){
+    try{
+     var data=await getCityJson("https://api.zippopotam.us/de/"+encodeURIComponent(q));
+     items=(data.places||[]).map(function(p){return place(p["place name"],p.latitude,p.longitude,q,p.state,"DE")}).filter(Boolean);
+    }catch(e){}
+   }
+   if(!items.length){
+    try{
+     var m=await getCityJson("https://geocoding-api.open-meteo.com/v1/search?name="+encodeURIComponent(q)+"&count=12&language=de&format=json");
+     items=(m.results||[]).map(function(p){return place(p.name,p.latitude,p.longitude,p.postcode||"",p.admin1,p.country_code||p.country)}).filter(Boolean);
+     if(zip)items=items.filter(function(p){return p.country==="DE"&&(!p.zip||p.zip===q)});
+    }catch(e){}
+   }
+   if(!items.length&&explicit){
+    try{
+     var url="https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=7&accept-language=de&"+
+       (zip?"postalcode="+encodeURIComponent(q)+"&countrycodes=de":"q="+encodeURIComponent(q));
+     var n=await getCityJson(url);
+     items=(Array.isArray(n)?n:[]).map(function(p){var a=p.address||{};return place(a.city||a.town||a.village||a.municipality||p.name,p.lat,p.lon,a.postcode||(zip?q:""),a.state,a.country_code)}).filter(Boolean);
+    }catch(e){}
+   }
+   var seen=new Set();
+   return items.sort(function(a,b){return (b.country==="DE"?1:0)-(a.country==="DE"?1:0)}).filter(function(p){
+    var k=p.city.toLocaleLowerCase("de")+":"+p.lat.toFixed(2)+":"+p.lon.toFixed(2);
+    if(seen.has(k))return false;seen.add(k);return true;
+   }).slice(0,10);
+  }
+  function showCityItems(items){
+   cityPlaces=items;cityResults.replaceChildren();cityResults.hidden=false;
+   if(!items.length){cityResults.textContent="Keinen passenden Ort gefunden. Bitte Stadt oder PLZ prüfen.";return}
+   items.forEach(function(p,index){
+    var b=document.createElement("button");b.type="button";b.dataset.placeIndex=String(index);b.textContent=p.label;
+    b.onclick=function(e){e.preventDefault();e.stopPropagation();
+     var prev=readPrayerLoc()||{},s={lat:p.lat,lon:p.lon,city:p.city,angle:prev.angle||12,asrFactor:prev.asrFactor||1};
+     ++citySeq;clearTimeout(cityTimer);saveDesktopPrayerLoc(s,"manual");cityForm.hidden=true;
+     cityToggle.setAttribute("aria-expanded","false");cityInfo.textContent="Standort gespeichert: "+p.city;drawPrayer();
+    };
+    cityResults.appendChild(b);
+   });
+  }
+  async function searchCityChoices(explicit){
+   var q=String(cityInput.value||"").trim(),seq=++citySeq;
+   if(q.length<2){if(explicit)cityInfo.textContent="Bitte einen Stadtnamen oder eine gültige Postleitzahl eingeben.";return}
+   cityInfo.textContent="Orte werden gesucht …";
+   try{
+    var items=await desktopFindCities(q,explicit);
+    if(seq!==citySeq||!cityInput.isConnected||cityForm.hidden||cityInput.value.trim()!==q)return;
+    showCityItems(items);cityInfo.textContent=items.length?"Passende Stadt auswählen.":"";
+   }catch(e){if(seq===citySeq)cityInfo.textContent="Ortsuche derzeit nicht verfügbar."}
+  }
+  if(cityToggle&&cityForm&&cityInput&&cityResults){
+   cityToggle.onclick=function(){cityForm.hidden=!cityForm.hidden;cityToggle.setAttribute("aria-expanded",String(!cityForm.hidden));
+    if(!cityForm.hidden)cityInput.focus({preventScroll:true});
+   };
+   cityInput.oninput=function(){++citySeq;clearTimeout(cityTimer);cityResults.hidden=true;
+    var q=String(cityInput.value||"").trim();
+    if(q.length>=3&&(!/^\d+$/.test(q)||q.length>=5))cityTimer=setTimeout(function(){void searchCityChoices(false)},420);
+   };
+   cityForm.onsubmit=function(e){e.preventDefault();e.stopPropagation();clearTimeout(cityTimer);void searchCityChoices(true)};
+  }
+
   locate.onclick=function(){
    if(!navigator.geolocation){locate.textContent="Standort nicht verfügbar";return}
    locate.classList.remove("has-place");
    locate.textContent="Standort wird ermittelt …";
    navigator.geolocation.getCurrentPosition(function(pos){
     var v={lat:pos.coords.latitude,lon:pos.coords.longitude,city:"Dein Standort",angle:12,asrFactor:1};
-    saveDesktopPrayerLoc(v);drawPrayer();
+    saveDesktopPrayerLoc(v,"auto");drawPrayer();
     reversePrayerPlace(v.lat,v.lon).then(function(name){
-     if(name){v.city=name;saveDesktopPrayerLoc(v)}
+     if(name){v.city=name;saveDesktopPrayerLoc(v,"auto")}
      paintLocate(v);drawPrayer()
     })
    },function(){paintLocate(readPrayerLoc())},{enableHighAccuracy:false,timeout:10000,maximumAge:3600000})
