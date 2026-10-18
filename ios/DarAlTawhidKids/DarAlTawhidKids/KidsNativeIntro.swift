@@ -86,7 +86,7 @@ struct KidsRootView: View {
             .presentationDragIndicator(.visible)
         }
         .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DarKidsCreatorLoadProgress"))) { notice in
-            guard showNativeStartPoster, !nativeLoadFailed,
+            guard showNativeStartPoster, !nativeLoadFailed, nativeLoadProgress < 100,
                   let value = notice.object as? Double else { return }
             let next = min(95, max(nativeLoadProgress, Int(value * 100)))
             withAnimation(.easeOut(duration: 0.28)) {
