@@ -1,7 +1,7 @@
 import Foundation
 
 /// Standalone regression tests without an Xcode project:
-/// swiftc apple-tv/screensaver/ScreensaverRotationStore.swift \\
+/// swiftc apple-tv/screensaver/ScreensaverRotationStore.swift \
 ///   apple-tv/screensaver/tests/main.swift -o /tmp/dar-rotation-test
 /// /tmp/dar-rotation-test
 func check(_ expression: @autoclosure () -> Bool, _ message: String) {
@@ -11,13 +11,13 @@ func check(_ expression: @autoclosure () -> Bool, _ message: String) {
 func cards(_ count: Int, start: Int = 1) -> [ScreensaverRotationStore.Card] {
     let kinds = ScreensaverRotationStore.Kind.allCases
     return (start..<(start + count)).map {
-        .init(id: "CARD-\\($0)", kind: kinds[($0 - 1) % 3])
+        .init(id: "CARD-\($0)", kind: kinds[($0 - 1) % 3])
     }
 }
 
 func statePath() -> URL {
     FileManager.default.temporaryDirectory
-        .appendingPathComponent("rotation-test-\\(UUID().uuidString).json")
+        .appendingPathComponent("rotation-test-\(UUID().uuidString).json")
 }
 
 func restartAndUniquePass() {
@@ -73,7 +73,7 @@ func updatesNeverRestart() {
         seen.insert(card.id)
         store.markCurrentAsDisplayed()
     }
-    check(seen == Set(cards(18).map(\\.id)), "Pass lost an entry after sync")
+    check(seen == Set(cards(18).map(\.id)), "Pass lost an entry after sync")
 }
 
 func mixAndRemoval() {
