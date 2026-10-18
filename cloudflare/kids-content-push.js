@@ -1,13 +1,14 @@
-const DEFAULT_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
+// Kids-only OneSignal integration. No fallbacks to adult app configuration.
+const KIDS_APP_ID = "f8d837a0-406a-4a8a-8c6a-e0c2f8bc2766";
 
 function key(env) {
-  return String(env.ONESIGNAL_API_KEY_NEW || env.ONESIGNAL_API_KEY || env.ONESIGNAL_APP_API_KEY || "")
+  return String(env.ONESIGNAL_KIDS_API_KEY || "")
     .replace(/\s+/g, "")
     .trim();
 }
 
 function appId(env) {
-  return String(env.ONESIGNAL_APP_ID || DEFAULT_APP_ID).trim();
+  return String(env.ONESIGNAL_KIDS_APP_ID || "").trim();
 }
 
 function kidsBase(env) {
@@ -63,7 +64,11 @@ function launchUrl(env, item) {
 function audienceFilters(item) {
   const groups = ageGroupsFor(item);
   const filters = [
-    { field: "tag", key: "dar_kids", relation: "=", value: "true" }
+    { field: "tag", key: "dar_kids", relation: "=", value: "true" },
+    { operator: "AND" },
+    { field: "tag", key: "kids_parent_push_consent", relation: "=", value: "yes" },
+    { operator: "AND" },
+    { field: "tag", key: "kids_content_push", relation: "=", value: "yes" }
   ];
   if (!groups.length) return filters;
 
@@ -80,10 +85,14 @@ export async function sendKidsContentPush(env, item) {
   if (!item || item?.push?.enabled === false) {
     return { sent: false, skipped: true, reason: "Push für diesen Inhalt deaktiviert" };
   }
-  const apiKey = key(env);
-  if (!apiKey) return { sent: false, skipped: true, reason: "OneSignal API-Key fehlt" };
+  // Both credentials must be explicitly set for the Kids app.
+  // A disabled/misconfigured lane must never attempt an adult notification.
   const id = appId(env);
-  if (!id) return { sent: false, skipped: true, reason: "OneSignal App-ID fehlt" };
+  if (id !== KIDS_APP_ID) {
+    return { sent: false, skipped: true, reason: "Kids-OneSignal App-ID fehlt oder ist falsch" };
+  }
+  const apiKey = key(env);
+  if (!apiKey) return { sent: false, skipped: true, reason: "Kids-OneSignal API-Key fehlt" };
 
   const copy = copyFor(item);
   const url = launchUrl(env, item);
