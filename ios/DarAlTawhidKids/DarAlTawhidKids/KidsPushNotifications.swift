@@ -34,13 +34,17 @@ enum KidsPushNotifications {
         #else
         guard !didBootstrap else { return }
         didBootstrap = true
+        // Do not transmit even an anonymous child-device subscription before
+        // explicit parental approval; OneSignal's privacy gate starts first.
+        OneSignal.setConsentRequired(true)
+        OneSignal.setConsentGiven(parentEnabled)
         OneSignal.initialize(appID, withLaunchOptions: launchOptions)
         OneSignal.Notifications.addClickListener(clickListener)
         if !parentEnabled {
             OneSignal.User.pushSubscription.optOut()
+        } else {
+            refreshTags()
         }
-        // Parent opt-in is per installation and can be revoked at any time.
-        refreshTags()
         #endif
     }
 
@@ -65,6 +69,7 @@ enum KidsPushNotifications {
                     completion(false)
                     return
                 }
+                OneSignal.setConsentGiven(true)
                 OneSignal.Notifications.requestPermission({ granted in
                     DispatchQueue.main.async {
                         UserDefaults.standard.set(granted, forKey: parentOptInKey)
@@ -74,6 +79,9 @@ enum KidsPushNotifications {
                             OneSignal.User.pushSubscription.optOut()
                         }
                         refreshTags()
+                        if !granted {
+                            OneSignal.setConsentGiven(false)
+                        }
                         completion(granted)
                     }
                 }, fallbackToSettings: true)
@@ -87,6 +95,7 @@ enum KidsPushNotifications {
         #if !KIDS_CREATOR_TEST
         OneSignal.User.pushSubscription.optOut()
         refreshTags()
+        OneSignal.setConsentGiven(false)
         #endif
     }
 
