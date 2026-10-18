@@ -1,0 +1,33 @@
+name: Kids Visitor Settings Web Safety
+
+on:
+  pull_request:
+    paths:
+      - 'kids/index.html'
+      - 'kids/start.html'
+      - 'kids/shell.html'
+      - 'kids/parent-notifications-visitor-v1.js'
+      - 'kids/parent-notifications-visitor-v1.css'
+      - 'kids/tools/test-kids-visitor-settings-ui-v1.cjs'
+      - '.github/workflows/kids-visitor-settings-ui.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  visitor-ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check Kids production UI without changing visitor iOS native
+        run: |
+          node --check kids/parent-notifications-visitor-v1.js
+          node --check kids/tools/test-kids-visitor-settings-ui-v1.cjs
+          node kids/tools/test-kids-visitor-settings-ui-v1.cjs
+      - name: Ensure no remote notification sends or secrets
+        run: |
+          ! grep -q 'api.onesignal.com' kids/parent-notifications-visitor-v1.js
+          ! grep -q 'sb_secret_' kids/parent-notifications-visitor-v1.js
+          ! grep -q 'OneSignal.initialize' kids/parent-notifications-visitor-v1.js
