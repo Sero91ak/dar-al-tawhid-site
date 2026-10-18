@@ -76,7 +76,14 @@ function rearrangeHeader(){
  const greet=h.querySelector(".hero-text");
  const prayer=h.querySelector("#headerPrayerStatus");
  if(greet&&prayer&&greet.nextElementSibling!==prayer)h.insertBefore(greet,prayer);
- const weather=document.getElementById("dv3Weather");
+ const weatherNodes=Array.from(document.querySelectorAll("#dv3Weather"));
+ const weather=weatherNodes.find(n=>n.closest("#appView"))||weatherNodes[0];
+ const oldWeather=weatherNodes.find(n=>n!==weather);
+ if(weather&&oldWeather){
+   const prev=String(oldWeather.textContent||"").trim();
+   if(prev&&!prev.includes("geladen"))weather.textContent=prev;
+ }
+ weatherNodes.forEach(n=>{if(n!==weather)n.remove()});
  if(weather&&prayer&&weather.previousElementSibling!==prayer)prayer.after(weather);
  const root=document.documentElement;
  root.classList.add("dar-home-v3");
