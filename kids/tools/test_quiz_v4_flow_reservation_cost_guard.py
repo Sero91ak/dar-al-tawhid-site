@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+"""Zero-credit integrity test: old-nine and connected ElevenLabs Flow reservations.
+
+Run AFTER plan_quiz_v4_finish_without_duplicate_credits.py.
+Uses only existing private JSON data; NO provider operations, no fake audio.
+"""
+from __future__ import annotations
+import hashlib
+import json
+from pathlib import Path
+from quiz_v4_no_double_charge_guard import protect_paid_texts
+
+ROOT=Path(__file__).resolve().parents[2]
+OUT=ROOT/"kids/review-only/quiz-v4-450-next-completion-priority.json"
+PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
+REG=ROOT/"kids/data/quiz-v4-450-original-clip-registry.json"
+LEDGER=ROOT/"kids/data/quiz-v4-450-paid-generation-ledger.json"
+OLD=ROOT/"kids/data/quiz-v4-missing9-prepaid-originals.json"
+FLOW=ROOT/"kids/data/quiz-v4-connected-flow-originals-ledger.json"
+PARTS=("question","correct","retry","explanation")
+VOICE="DkU7j9uO4ZEtLD2iRZSH"
+
+def load(path):
+    return json.loads(path.read_text(encoding="utf-8"))
+
+def fail_unless(test,description):
+    if not test:raise AssertionError("KIDS_V4_FLOW_DOUBLE_CREDIT_FAIL: "+description)
+
+def digest(text):
+    return hashlib.sha256(text.encode("utf-8")).hexdigest()
+
+def main():
+    report,plan,reg,ledger,nine,flow=map(load,(OUT,PLAN,REG,LEDGER,OLD,FLOW))
+    protect=protect_paid_texts(ROOT,reg,ledger)
+    missing9={r["originalSpokenText"] for r in nine["items"]
+              if r["generationId"] not in reg["generationClips"]}
+    reserved={r["sourceText"] for r in flow["entries"]
+              if r["status"]!="IMPORTED_ORIGINAL_MP3_VERIFIED"}
+    registered=set(reg["textClips"])
+    fail_unless(not (reserved&registered or reserved&missing9),
+                "connected Flow pending text is already saved or an old nine original")
+    fail_unless(reserved<=protect,"Flow pending text not protected against double charges")
+    expected=set()
+    expected_reserved=set()
+    for row in plan["recipes"]:
+        for part in PARTS:
+            entry=row[part]
+            for text in entry.get("segments",[]):
+                if text in registered:continue
+                if text in reserved:expected_reserved.add(text)
+                elif text not in missing9:expected.add(text)
+    summary=report["summary"]
+    fail_unless(summary["selectedQuestions"]==450 and
+                summary["voiceId"]==VOICE and
+                summary["modelId"]=="eleven_v4",
+                "changed canonical voice or 450 review scope")
+    fail_unless(summary["connectedFlowOriginalTextsPendingOrReserved"]==len(reserved)
+                and summary["reservedFlowOriginalsExcludedFromNewChargeQueue"]==len(reserved),
+                "Flow reservation counts inconsistent with real connected ledger")
+    fail_unless(set(reserved)==expected_reserved,"some pending Flow texts not used or not blocked")
+    fail_unless(summary["missingGenuineNewExactSegments"]==len(expected)
+                and summary["missingGenuineNewTextCodepoints"]==sum(len(x) for x in expected),
+                "genuine new V4 cost count includes duplicate or reserved take")
+    queue=report["possibleNewSpeechPriorityAfterOriginalRecovery"]
+    queue_hashes=[h for q in queue for h in q["newTextSha256"]]
+    fail_unless(len(queue_hashes)==len(set(queue_hashes))
+                and set(queue_hashes)=={digest(t) for t in expected},
+                "paid audio completion queue missing a needed source or duplicates one")
+    fail_unless(not ({digest(x) for x in reserved}&set(queue_hashes)),
+                "already reserved connected Flow text was offered to paid synthesis")
+    fail_unless(all(x["newSynthesisAllowed"] is False
+                    for x in report["connectedFlowOriginalsToRecoverWithoutSecondPurchase"]),
+                "unresolved Flow items marked eligible for new paid TTS")
+    totals=sum(sum(groups.values()) for groups in summary["ageCounts"].values())
+    fail_unless(totals==450,"unaccounted quiz groups in recovery plan")
+    fail_unless(summary["alreadyTechnicallyComplete"]
+                +summary["questionsBlockedOnlyOnAlreadyPaidNine"]
+                +summary["questionsWaitingOnlyForConnectedFlowOriginals"]
+                +summary["questionsNeedingAtLeastOneGenuinelyNewOriginal"]==450,
+                "one or more quiz questions miscategorized")
+    fail_unless(summary["newElevenLabsCreditsSpent"]==0 and
+                summary["paidSynthesisAuthorized"] is False and
+                summary["publicReleaseAllowed"] is False,
+                "cost-only report must never authorize spending or release")
+    print("PASS: %d reserved Flow originals protected; %d genuine new fragments; "
+          "all 450 questions accounted; 0 extra provider requests."%
+          (len(reserved),len(expected)))
+
+if __name__=="__main__":main()
