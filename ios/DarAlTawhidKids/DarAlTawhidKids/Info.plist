@@ -38,6 +38,10 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<false/>
 	</dict>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Mit Zustimmung nutzt TAWḤĪD KIDS den Standort für Gebetszeiten und die Qibla-Richtung.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Mit Zustimmung nutzt TAWḤĪD KIDS die Gerätesensoren für den Live-Qibla-Kompass.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

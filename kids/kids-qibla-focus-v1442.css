@@ -1,0 +1,141 @@
+/* KIDS_QIBLA_FOCUS_V1442 — isolated home shortcuts, modal and profile palette. */
+#view-today .kids-salah-shortcuts{
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:10px;width:100%;min-width:0;margin:9px auto 0;align-items:stretch;
+}
+#view-today .kids-salah-shortcuts > button{
+  width:100%!important;min-width:0!important;min-height:48px!important;margin:0!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;gap:5px!important;
+  padding:8px 9px!important;border-radius:17px!important;line-height:1.15!important;
+  font:700 clamp(12px,3.5vw,16px)/1.15 "Fredoka","SF Pro Rounded",system-ui,sans-serif!important;
+  box-sizing:border-box!important;white-space:nowrap;cursor:pointer;touch-action:manipulation;
+}
+#view-today .kids-salah-shortcuts .kids-shortcut-emoji{font-size:clamp(17px,4.3vw,21px)!important;line-height:1!important}
+#view-today .kids-salah-shortcuts .kids-shortcut-tail{font-size:19px!important;line-height:1!important}
+#view-today .kids-salah-shortcuts .kids-qibla-shortcut{
+  border:1px solid rgba(247,219,153,.32)!important;
+  background:linear-gradient(125deg,rgba(241,199,126,.16),rgba(50,92,93,.22))!important;
+  color:#ffebbb!important;
+}
+.app[data-gender="girl"] #view-today .kids-salah-shortcuts .kids-qibla-shortcut{
+  border-color:rgba(249,203,224,.43)!important;
+  background:linear-gradient(125deg,rgba(191,104,149,.25),rgba(105,64,119,.24))!important;
+  color:#ffe1f0!important;
+}
+@media(max-width:350px){
+  #view-today .kids-salah-shortcuts{gap:6px}
+  #view-today .kids-salah-shortcuts > button{font-size:12px!important;gap:3px!important;padding:7px 5px!important}
+}
+.kids-qibla-focus[hidden]{display:none!important}
+.kids-qibla-focus{
+  --q-bg:#102b39;--q-surface:#1d3b47;--q-surface2:#294552;
+  --q-accent:#f1cf8c;--q-text:#fff5e8;--q-muted:#d2e3e3;
+  --q-edge:rgba(243,208,139,.36);--q-soft:rgba(243,208,139,.10);
+  position:fixed;inset:0;z-index:2147482900;
+  box-sizing:border-box;display:flex;align-items:center;justify-content:center;
+  padding:max(12px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px))
+    max(12px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));
+  background:rgba(6,14,26,.88);color:var(--q-text);font-family:inherit;
+  overscroll-behavior:contain;isolation:isolate;
+}
+.kids-qibla-focus[data-gender="girl"]{
+  --q-bg:#302138;--q-surface:#48314d;--q-surface2:#5c3c5c;
+  --q-accent:#f3cbd7;--q-text:#fff0f1;--q-muted:#ead0e2;
+  --q-edge:rgba(250,207,225,.4);--q-soft:rgba(239,161,205,.13);
+  background:rgba(31,16,38,.89);
+}
+.kids-qibla-focus .kq-dialog{
+  width:min(100%,560px);max-height:100%;overflow-y:auto;overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;box-sizing:border-box;
+  background:radial-gradient(ellipse at 70% 5%,var(--q-surface2),transparent 56%),var(--q-bg);
+  border:1px solid var(--q-edge);border-radius:29px;
+  box-shadow:0 18px 70px rgba(0,0,0,.43);
+  padding:clamp(16px,3.5vw,25px);
+}
+.kids-qibla-focus .kq-header{display:flex;justify-content:space-between;align-items:flex-start;gap:14px}
+.kids-qibla-focus .kq-eyebrow{font-size:11px;font-weight:850;letter-spacing:.115em;color:var(--q-accent)}
+.kids-qibla-focus h2{color:var(--q-text);font:850 clamp(25px,6vw,34px)/1.17 "Fredoka",system-ui,sans-serif;margin:5px 0 0}
+.kids-qibla-focus .kq-close{
+  width:46px;height:46px;flex:0 0 46px;font-size:26px;line-height:1;border-radius:16px;
+  background:var(--q-soft);color:var(--q-text);border:1px solid var(--q-edge);cursor:pointer;
+}
+.kids-qibla-focus .kq-description{font-size:13px;line-height:1.45;color:var(--q-muted);margin:7px 0 6px}
+.kids-qibla-focus .kq-compass-stage{
+  display:flex;flex-direction:column;align-items:center;text-align:center;margin:7px auto 12px;
+}
+.kids-qibla-focus .kq-compass{
+  width:clamp(172px,48vw,234px);aspect-ratio:1;position:relative;border-radius:50%;
+  display:grid;place-items:center;margin:0 auto 7px;
+  border:2px solid var(--q-edge);
+  background:radial-gradient(circle at 50% 42%,var(--q-surface2),var(--q-bg) 68%);
+  box-shadow:inset 0 0 0 9px var(--q-soft),0 12px 32px rgba(0,0,0,.16);
+}
+.kids-qibla-focus .kq-compass::before{
+  content:"";position:absolute;inset:15px;border:1px dashed var(--q-edge);border-radius:50%;
+}
+.kids-qibla-focus .kq-needle{
+  display:grid;place-items:center;width:65%;height:65%;
+  color:var(--q-accent);transform:rotate(0deg);transition:transform 160ms linear;
+  will-change:transform;filter:drop-shadow(0 3px 8px rgba(0,0,0,.18));
+}
+.kids-qibla-focus .kq-needle svg{width:100%;height:100%;overflow:visible}
+.kids-qibla-focus .kq-center{
+  position:absolute;width:20px;height:20px;border-radius:50%;
+  background:var(--q-text);border:4px solid var(--q-accent);
+}
+.kids-qibla-focus .kq-bearing{font-size:clamp(23px,6vw,32px);font-weight:900;color:var(--q-accent);font-variant-numeric:tabular-nums}
+.kids-qibla-focus .kq-city{font-size:14px;color:var(--q-text);font-weight:750;line-height:1.35}
+.kids-qibla-focus .kq-live{font-size:12px;line-height:1.4;color:var(--q-muted);min-height:19px;margin:5px 0 0}
+.kids-qibla-focus .kq-actions{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px;margin:11px 0}
+.kids-qibla-focus .kq-button{
+  min-height:49px;border:1px solid var(--q-edge);border-radius:15px;padding:9px 10px;
+  font:750 13px/1.25 "Fredoka",system-ui,sans-serif;color:var(--q-text);
+  background:var(--q-soft);cursor:pointer;touch-action:manipulation;
+}
+.kids-qibla-focus .kq-button--primary{background:var(--q-accent);color:var(--q-bg);border-color:transparent}
+.kids-qibla-focus .kq-button[disabled]{opacity:.5}
+.kids-qibla-focus .kq-field{font-size:13px;font-weight:800;color:var(--q-text);display:block;margin:7px 0}
+.kids-qibla-focus .kq-search{
+  box-sizing:border-box;width:100%;min-height:48px;border-radius:15px;
+  background:var(--q-surface);border:1px solid var(--q-edge);color:var(--q-text);
+  padding:12px 14px;font:500 16px/1.3 system-ui,sans-serif;
+}
+.kids-qibla-focus .kq-results{max-height:170px;overflow-y:auto;overscroll-behavior:contain}
+.kids-qibla-focus .kq-result{
+  width:100%;padding:12px;min-height:44px;text-align:left;
+  background:var(--q-surface);color:var(--q-text);border:0;border-bottom:1px solid var(--q-edge);
+  font:650 13px/1.35 system-ui,sans-serif;
+}
+.kids-qibla-focus .kq-status{min-height:34px;margin:9px 0 0;font-size:12px;line-height:1.4;color:var(--q-muted)}
+.kids-qibla-focus .kq-help{color:var(--q-muted);opacity:.85;font-size:11px;line-height:1.4;margin:5px 0 0}
+.kids-qibla-focus :is(button,input):focus-visible{
+  outline:3px solid var(--q-accent);outline-offset:3px;
+}
+body.kids-qibla-focus-open,
+body.kids-qibla-focus-open .shell{overscroll-behavior:contain;overflow:hidden!important}
+body.kids-qibla-focus-open .app{pointer-events:none}
+#kidsVisitorSettingsSheet[data-gender="girl"]{
+  --kn-ink:#fff0f1;--kn-gold:#f5d08b;--kn-border:rgba(246,197,219,.39);
+  --kn-glass:rgba(246,197,219,.10);background:rgba(30,17,37,.86)!important;
+}
+#kidsVisitorSettingsSheet[data-gender="girl"] .kn-panel{
+  background:linear-gradient(145deg,#48314a,#302139 70%,#4d3046)!important;
+  color:#fff0f1;
+}
+#kidsVisitorSettingsSheet[data-gender="girl"] :is(select,input[type="search"]){
+  background:#4c334f!important;color:#fff0f1!important;border-color:rgba(246,197,219,.4)!important;
+}
+#kidsVisitorSettingsSheet[data-gender="girl"] .kn-btn-primary{
+  background:#f3cbd7!important;color:#302139!important;
+}
+#kidsVisitorSettingsSheet[data-gender="girl"] .kn-hero{
+  background:linear-gradient(115deg,rgba(243,193,214,.18),rgba(156,112,162,.06))!important;
+}
+#kidsVisitorSettingsIntro[data-gender="girl"]{
+  background:linear-gradient(120deg,#49314e,#34233d)!important;
+  border-color:rgba(246,197,219,.48)!important;color:#fff0f1!important;
+}
+#kidsVisitorSettingsIntro[data-gender="girl"] .kn-btn-primary{background:#f3cbd7!important;color:#302139!important}
+#kidsVisitorSettingsSheet [data-kids-qibla-replaced="true"] .kn-card{display:none!important}
+#kidsVisitorSettingsSheet .kq-parent-entry{width:100%;margin:5px 0 0;text-align:center}
+@media(prefers-reduced-motion:reduce){.kids-qibla-focus .kq-needle{transition:none}}

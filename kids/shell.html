@@ -6961,7 +6961,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
   // The next navigation uses network-first and receives the latest release.
   if("serviceWorker" in navigator){
     window.addEventListener("load",function(){
-      navigator.serviceWorker.register("/kids/sw.js?v=1446",{scope:"/kids/",updateViaCache:"none"})
+      navigator.serviceWorker.register("/kids/sw.js?v=1447",{scope:"/kids/",updateViaCache:"none"})
         .then(function(reg){return reg.update().catch(function(){})})
         .catch(function(){});
     },{once:true});
@@ -11878,4 +11878,9 @@ html body .app[data-gender="girl"] #view-today > #kidsAcademyPriority .kids-acad
 <!-- TAWḤĪD KIDS Visitor Settings v1: Parent notifications + Quick Qibla -->
 <link rel="stylesheet" href="/kids/parent-notifications-visitor-v1.css?v=1">
 <script src="/kids/parent-notifications-visitor-v1.js?v=1" defer></script>
+<!-- KIDS_QIBLA_FOCUS_V1442: kids-only compact home CTA, real GPS and sensor-based compass, profile color authority -->
+<link rel="stylesheet" href="/kids/kids-qibla-focus-v1442.css?v=1442">
+<script src="/kids/kids-qibla-focus-v1442.js?v=1442" defer></script>
+<!-- KIDS_PROFILE_LAYOUT_CONTRACT_V1447: automatic parent card width and boy/girl colour inheritance -->
+<link rel="stylesheet" href="/kids/kids-profile-layout-contract-v1447.css?v=1447">
 </html>
