@@ -7,6 +7,9 @@ struct KidsRootView: View {
 #if KIDS_CREATOR_TEST
     @State private var showCreatorPanel = false
     @State private var showNativeStartPoster = true
+    @State private var nativeLoadProgress = 0
+    @State private var nativeLoadFailed = false
+    @State private var nativeLoadSlow = false
 
     var body: some View {
         ZStack(alignment: .bottomTrailing) {
@@ -14,21 +17,38 @@ struct KidsRootView: View {
                 .ignoresSafeArea()
                 .background(Color(red: 12.0 / 255, green: 38.0 / 255, blue: 54.0 / 255))
 
-            // KIDS TEST only: bridge the iOS native launch frame to the web splash.
-            // The same poster image is bundled locally, so there is no network
-            // or WKWebView white frame between the system launch and first paint.
+            // KIDS TEST only: native first paint and real WKWebView load progress.
+            // The visitor app does not compile this loading overlay.
             if showNativeStartPoster {
                 GeometryReader { geometry in
-                    Image("KidsTestLaunchPoster")
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: geometry.size.width, height: geometry.size.height)
-                        .clipped()
+                    ZStack(alignment: .bottom) {
+                        Image("KidsTestLaunchPoster")
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: geometry.size.width, height: geometry.size.height)
+                            .clipped()
+
+                        KidsCreatorLaunchProgress(
+                            percent: nativeLoadProgress,
+                            failed: nativeLoadFailed,
+                            slow: nativeLoadSlow,
+                            retry: {
+                                nativeLoadProgress = 0
+                                nativeLoadFailed = false
+                                nativeLoadSlow = false
+                                NotificationCenter.default.post(
+                                    name: Notification.Name("DarKidsCreatorRetryInitialLoad"),
+                                    object: nil
+                                )
+                            }
+                        )
+                        .padding(.horizontal, 22)
+                        .padding(.bottom, max(geometry.safeAreaInsets.bottom, 16) + 32)
+                    }
+                    .frame(width: geometry.size.width, height: geometry.size.height)
                 }
                 .ignoresSafeArea()
-                .transition(.opacity.animation(.easeInOut(duration: 0.68)))
-                .accessibilityHidden(true)
-                .allowsHitTesting(false)
+                .transition(.opacity)
                 .zIndex(2)
             }
 
@@ -65,18 +85,38 @@ struct KidsRootView: View {
             .presentationDetents([.medium, .large])
             .presentationDragIndicator(.visible)
         }
-        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DarKidsCreatorSplashReady"))) { _ in
-            withAnimation(.easeInOut(duration: 0.68)) {
-                showNativeStartPoster = false
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DarKidsCreatorLoadProgress"))) { notice in
+            guard showNativeStartPoster, !nativeLoadFailed,
+                  let value = notice.object as? Double else { return }
+            let next = min(95, max(nativeLoadProgress, Int(value * 100)))
+            withAnimation(.easeOut(duration: 0.28)) {
+                nativeLoadProgress = next
             }
         }
-        .task {
-            // A failed web load must never trap the user beneath the native cover.
-            try? await Task.sleep(nanoseconds: 9_800_000_000)
-            if !Task.isCancelled && showNativeStartPoster {
-                withAnimation(.easeInOut(duration: 0.68)) {
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DarKidsCreatorPageLoaded"))) { _ in
+            guard showNativeStartPoster else { return }
+            nativeLoadFailed = false
+            nativeLoadSlow = false
+            withAnimation(.easeOut(duration: 0.25)) {
+                nativeLoadProgress = 100
+            }
+            // Show the true 100% state briefly before revealing the loaded app.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.42) {
+                guard showNativeStartPoster else { return }
+                withAnimation(.easeInOut(duration: 0.48)) {
                     showNativeStartPoster = false
                 }
+            }
+        }
+        .onReceive(NotificationCenter.default.publisher(for: Notification.Name("DarKidsCreatorLoadFailed"))) { _ in
+            guard showNativeStartPoster else { return }
+            nativeLoadFailed = true
+        }
+        .task {
+            // Do not claim 100% or uncover a failed/blank page.
+            try? await Task.sleep(nanoseconds: 18_000_000_000)
+            if !Task.isCancelled && showNativeStartPoster && nativeLoadProgress < 100 {
+                nativeLoadSlow = true
             }
         }
     }
@@ -90,6 +130,63 @@ struct KidsRootView: View {
 }
 
 #if KIDS_CREATOR_TEST
+/// Compact animated progress bar placed above the safe-area footer of the existing launch art.
+private struct KidsCreatorLaunchProgress: View {
+    let percent: Int
+    let failed: Bool
+    let slow: Bool
+    let retry: () -> Void
+
+    private let gold = Color(red: 0.93, green: 0.81, blue: 0.59)
+
+    var body: some View {
+        VStack(spacing: 12) {
+            HStack(alignment: .firstTextBaseline, spacing: 12) {
+                Text(failed ? "Verbindung fehlgeschlagen" :
+                     slow ? "Laden dauert länger" : "Kinderwelt wird vorbereitet")
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white)
+                    .lineLimit(2)
+                Spacer(minLength: 4)
+                Text("\(percent) %")
+                    .font(.system(size: 18, weight: .bold, design: .rounded))
+                    .monospacedDigit()
+                    .foregroundStyle(gold)
+            }
+
+            ProgressView(value: Double(percent), total: 100)
+                .progressViewStyle(.linear)
+                .tint(gold)
+                .animation(.easeOut(duration: 0.28), value: percent)
+                .accessibilityLabel("Ladefortschritt")
+                .accessibilityValue("\(percent) Prozent")
+
+            if failed || slow {
+                Button(action: retry) {
+                    Label("Erneut laden", systemImage: "arrow.clockwise")
+                        .font(.system(size: 13, weight: .bold, design: .rounded))
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(gold)
+                .foregroundStyle(Color(red: 0.06, green: 0.15, blue: 0.20))
+                .accessibilityHint("Startseite erneut laden")
+            }
+        }
+        .padding(.horizontal, 19)
+        .padding(.vertical, 17)
+        .frame(maxWidth: 420)
+        .background(
+            RoundedRectangle(cornerRadius: 21, style: .continuous)
+                .fill(Color(red: 0.04, green: 0.12, blue: 0.19).opacity(0.91))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 21, style: .continuous)
+                .stroke(gold.opacity(0.35), lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.24), radius: 16, y: 7)
+    }
+}
+
 private struct KidsCreatorPanel: View {
     let navigate: (String) -> Void
 
