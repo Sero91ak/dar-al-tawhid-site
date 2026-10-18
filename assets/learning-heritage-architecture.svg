@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1440 620" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Historisch inspirierte Steinarkaden einer gelehrten Bibliothek ohne Personen">
+<defs>
+<linearGradient id="sky" x2=".1" y2="1"><stop stop-color="#8e7955"/><stop offset=".55" stop-color="#776e52"/><stop offset="1" stop-color="#373e33"/></linearGradient>
+<linearGradient id="sand" x2="0" y2="1"><stop stop-color="#c3b08a"/><stop offset=".45" stop-color="#a59575"/><stop offset="1" stop-color="#675f4d"/></linearGradient>
+<linearGradient id="deep" x2="0" y2="1"><stop stop-color="#33443c"/><stop offset="1" stop-color="#152725"/></linearGradient>
+<linearGradient id="light" x2="0" y2="1"><stop stop-color="#eedab5" stop-opacity=".5"/><stop offset="1" stop-color="#e1c89a" stop-opacity="0"/></linearGradient>
+<radialGradient id="warm"><stop stop-color="#f5e4b7" stop-opacity=".62"/><stop offset=".48" stop-color="#c8af7a" stop-opacity=".24"/><stop offset="1" stop-color="#e7cf94" stop-opacity="0"/></radialGradient>
+<pattern id="brick" width="138" height="47" patternUnits="userSpaceOnUse"><path d="M0 .5h138M0 47h138M69 0v47" stroke="#e8d7aa" stroke-opacity=".085" fill="none" stroke-width="2"/></pattern>
+<pattern id="geometry" width="86" height="86" patternUnits="userSpaceOnUse"><g fill="none" stroke="#ead8a9" stroke-opacity=".19" stroke-width="1.5"><path d="m43 4 39 39-39 39L4 43z"/><path d="M4 4h78v78H4z"/><path d="M43 4v78M4 43h78"/><circle cx="43" cy="43" r="25"/></g></pattern>
+<g id="shelf"><rect x="-90" y="310" width="180" height="112" rx="4" fill="#273c34" stroke="#a18f6a" stroke-opacity=".45"/><path d="M-90 347H90M-90 389H90" stroke="#b69c6e" stroke-opacity=".5" stroke-width="7"/><g fill="#786b4d"><rect x="-75" y="317" width="16" height="28" rx="2"/><rect x="-52" y="323" width="13" height="22" rx="2"/><rect x="-31" y="319" width="18" height="26" rx="2"/><rect x="0" y="320" width="13" height="25" rx="2"/><rect x="20" y="315" width="15" height="30" rx="2"/><rect x="44" y="322" width="10" height="23" rx="2"/><rect x="59" y="318" width="18" height="27" rx="2"/></g><g fill="#8b7955"><rect x="-73" y="361" width="12" height="26"/><rect x="-53" y="357" width="22" height="30"/><rect x="-25" y="367" width="13" height="20"/><rect x="-5" y="359" width="13" height="28"/><rect x="17" y="359" width="21" height="28"/><rect x="47" y="361" width="12" height="26"/><rect x="64" y="366" width="15" height="21"/></g></g>
+</defs>
+<rect width="1440" height="620" fill="url(#sky)"/>
+<rect width="1440" height="620" fill="url(#brick)"/>
+<rect width="1440" height="260" fill="url(#geometry)" opacity=".48"/>
+<circle cx="720" cy="160" r="390" fill="url(#warm)"/>
+<g opacity=".91">
+<path d="M-120 560V170C10 90 155 90 280 170V560zM240 560V170C370 90 515 90 640 170V560zM600 560V170C730 90 875 90 1000 170V560zM960 560V170C1090 90 1235 90 1360 170V560zM1320 560V170C1450 90 1595 90 1720 170V560z" fill="url(#sand)" stroke="#dfc9a0" stroke-opacity=".3" stroke-width="8"/>
+<path d="M-40 560V221Q60 125 140 207Q220 125 320 221V560H-40zM320 560V221Q420 125 500 207Q580 125 680 221V560H320zM680 560V221Q780 125 860 207Q940 125 1040 221V560H680zM1040 560V221Q1140 125 1220 207Q1300 125 1400 221V560H1040z" fill="url(#deep)" stroke="#baa27c" stroke-width="9"/>
+<path d="M-45 221Q60 116 140 205Q220 116 325 221M315 221Q420 116 500 205Q580 116 685 221M675 221Q780 116 860 205Q940 116 1045 221M1035 221Q1140 116 1220 205Q1300 116 1405 221" stroke="#e5d2aa" stroke-opacity=".5" stroke-width="5" fill="none"/>
+<g stroke="#b69e76" fill="url(#sand)">
+<rect x="296" y="153" width="32" height="430" rx="9"/><rect x="656" y="153" width="32" height="430" rx="9"/><rect x="1016" y="153" width="32" height="430" rx="9"/><rect x="1376" y="153" width="32" height="430" rx="9"/>
+<rect x="288" y="180" width="48" height="20" rx="3"/><rect x="648" y="180" width="48" height="20" rx="3"/><rect x="1008" y="180" width="48" height="20" rx="3"/><rect x="1368" y="180" width="48" height="20" rx="3"/>
+</g>
+<use xlink:href="#shelf" x="140" y="0" opacity=".52"/><use xlink:href="#shelf" x="500" y="0" opacity=".55"/><use xlink:href="#shelf" x="860" y="0" opacity=".55"/><use xlink:href="#shelf" x="1220" y="0" opacity=".52"/>
+</g>
+<rect y="515" width="1440" height="105" fill="#3f4537"/><g stroke="#decba0" stroke-opacity=".11" fill="none"><path d="M0 545H1440M0 590H1440M120 515 85 620M410 515 365 620M700 515 690 620M970 515 1020 620M1260 515 1335 620"/></g>
+<path d="M0 0h1440v620H0z" fill="url(#light)" opacity=".7"/>
+<rect width="1440" height="620" fill="#14221d" opacity=".12"/>
+</svg>
