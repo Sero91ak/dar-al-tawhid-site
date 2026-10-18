@@ -22,7 +22,7 @@ function load(){
  }catch(_){}
  return d;
 }
-function save(s){set(PREF,JSON.stringify(s));window.dispatchEvent(new Event("kids-test-notification-preferences-changed"))}
+function save(s){set(PREF,JSON.stringify(s));window.dispatchEvent(new Event("kids-test-notification-preferences-changed"));nativeSchedule()}
 function element(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e}
 function message(txt){if($("knStatus"))$("knStatus").textContent=txt}
 function deviceMessage(action){
@@ -69,6 +69,50 @@ function refreshQibla(){
  if($("knQiblaArrow"))$("knQiblaArrow").style.transform="rotate("+((bearing===null?0:bearing)-(heading||0))+"deg)";
  if($("knQiblaArrow")?.parentElement)$("knQiblaArrow").parentElement.classList.toggle("is-live",heading!==null);
  if($("knQiblaNote"))$("knQiblaNote").textContent=bearing===null?"Ort wählen, um die Richtung zu berechnen.":heading===null?"Geografische Richtung in Grad ab Norden.":"Live-Ausrichtung über den Gerätesensor (Genauigkeit geräteabhängig).";
+}
+// Schedule local alerts only for already calculated real Kids Salah times.
+function localPrayerMillis(day,hm,tz){
+ if(!/^\d{4}-\d{2}-\d{2}$/.test(day)||!/^\d{1,2}:\d{2}$/.test(hm))return NaN;
+ const [y,m,d]=day.split("-").map(Number),[h,minute]=hm.split(":").map(Number);
+ if(h>23||minute>59)return NaN;
+ const expected=Date.UTC(y,m-1,d,h,minute);
+ let actual=expected;
+ try{
+  const fmt=new Intl.DateTimeFormat("en-GB",{timeZone:tz,year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"});
+  for(let i=0;i<4;i++){
+   const p=fmt.formatToParts(new Date(actual)),n=k=>Number(p.find(x=>x.type===k)?.value||0);
+   actual+=expected-Date.UTC(n("year"),n("month")-1,n("day"),n("hour"),n("minute"));
+  }
+ }catch(_){return NaN}
+ return actual;
+}
+function nativeSchedule(){
+ if(!nativeAvailable()||nativePermission!=="granted")return;
+ const s=load(),place=prayerPlace(),schedule=[];
+ if(s.channels.prayer&&place){
+  try{
+   const cache=JSON.parse(get(PRAYER_CACHE)||"null");
+   const placeKey=[place.lat,place.lon].join("|");
+   if(cache?.days&&String(cache.placeKey||"").startsWith(placeKey)){
+    const now=Date.now();
+    const days=Object.keys(cache.days).sort();
+    for(const day of days){
+     for(const [key,label] of PRAYERS){
+      if(!s.prayers[key])continue;
+      const hm=cache.days[day]?.times?.[key]?.time;
+      if(!hm)continue;
+      const epoch=localPrayerMillis(day,hm,place.tz)-s.advance*60000;
+      if(!Number.isFinite(epoch)||epoch<now+60000||epoch>now+48*3600000)continue;
+      schedule.push({key,day,label,epoch,advance:s.advance});
+     }
+    }
+   }
+  }catch(_){}
+ }
+ schedule.sort((a,b)=>a.epoch-b.epoch);
+ try{window.webkit.messageHandlers.darKidsTestNotifications.postMessage({
+  action:"syncSchedule",schedule:schedule.slice(0,14)
+ })}catch(_){}
 }
 function prayerDate(tz){
  try{
@@ -138,6 +182,7 @@ function open(){
  $("knClose").focus({preventScroll:true});
  hideWelcome();refreshSummary();refreshPrayers();refreshQibla();refreshPermission();
  deviceMessage("status");
+ nativeSchedule();
 }
 function close(){
  if(!$("kidsTestSettingsSheet"))return;
@@ -253,9 +298,10 @@ function init(){
  $("knQiblaCompass").addEventListener("click",startCompass);
  window.addEventListener("dar-kids-test-native-notifications",event=>{
   if(event.detail?.status)nativePermission=String(event.detail.status);
-  refreshPermission();if(event.detail?.message)message(String(event.detail.message));
+  refreshPermission();if(event.detail?.status==="granted")nativeSchedule();if(event.detail?.message)message(String(event.detail.message));
  });
  refreshSummary();refreshPrayers();refreshQibla();refreshPermission();setupWelcome();
+ window.addEventListener("pageshow",()=>{if(nativeAvailable()){deviceMessage("status");nativeSchedule()}});
  window.DARKidsTestNotificationSettings={open,close,getPreferences:load,qiblaBearing:(lat,lon)=>qiblaBearing({lat,lon})};
 }
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",init,{once:true});else init();
