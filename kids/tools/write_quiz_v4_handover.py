@@ -50,6 +50,13 @@ def main():
     plan=read("kids/data/quiz-v4-450-production-status.json")
     release=read("kids/data/quiz-curation-release.json")
     recovery_priority=read("kids/review-only/quiz-v4-450-next-completion-priority.json")["summary"]
+    connected_flow=read("kids/data/quiz-v4-connected-flow-originals-ledger.json")
+    require(connected_flow.get("modelId")==MODEL and connected_flow.get("voiceId")==VOICE
+            and connected_flow.get("live") is False,"connected Flow originals must remain review-only")
+    flow_pending=[x for x in connected_flow["entries"]
+                  if x["status"]!="IMPORTED_ORIGINAL_MP3_VERIFIED"]
+    require(len({x["sourceTextSHA256"] for x in flow_pending})==len(flow_pending),
+            "duplicated connected Flow pending original; do not spend new credits")
     cost=read("kids/review-only/quiz-v4-remaining-unique-audio-credit-breakdown.json")
     draft_file=ROOT/"kids/review-only/quiz-v4-older300-compact-spoken-proposals.json"
     speech_draft=read("kids/review-only/quiz-v4-older300-compact-spoken-proposals.json") if draft_file.is_file() else None
@@ -183,7 +190,8 @@ def main():
     require(recovery_priority["modelId"]==MODEL and recovery_priority["voiceId"]==VOICE,
             "recovery-first completion plan has wrong voice/model")
     priority_current=(recovery_priority["alreadyTechnicallyComplete"]==import_status["completeFourPartQuestions"]
-                      and recovery_priority["previouslyPaidMissingGenerationCount"]==len(paid_import["remainingGenerationIds"]))
+                      and recovery_priority["previouslyPaidMissingGenerationCount"]==len(paid_import["remainingGenerationIds"])
+                      and recovery_priority.get("connectedFlowOriginalTextsPendingOrReserved")==len(flow_pending))
     sha=current_commit()
     count=len(paid_import["remainingGenerationIds"])
     details={
@@ -203,6 +211,11 @@ def main():
         "creditBudgetAspirationalTarget":cost["earlierAspirationalBudgetCredits"],
         "estimatedAudioTextReductionForTargetPercent":cost["approxTextReductionPercentageNeededAtSameRate"],
         "recoveryFirstPriorityPlanFresh":priority_current,
+        "connectedFlowOriginalsPendingOrReserved":len(flow_pending),
+        "connectedFlowAlreadySubmittedAwaitingImport":sum(x["status"]=="GENERATION_SUBMITTED_DO_NOT_RETRY" for x in flow_pending),
+        "connectedFlowReservedUnspentNotToRebuy":sum(x["status"]=="RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED" for x in flow_pending),
+        "questionsWaitingOnlyForConnectedFlowOriginals":recovery_priority.get("questionsWaitingOnlyForConnectedFlowOriginals") if priority_current else None,
+        "genuinelyNewFragmentsExcludingFlowReservations":recovery_priority.get("missingGenuineNewExactSegments") if priority_current else None,
         "onlyAlreadyPaidMP3RecoveryBlockedQuestions":recovery_priority["questionsBlockedOnlyOnAlreadyPaidNine"] if priority_current else None,
         "questionsNeedingNewV4Originals":recovery_priority["questionsNeedingAtLeastOneGenuinelyNewOriginal"] if priority_current else None,
         "originalV4TextClipsRegistered":len(saved["textClips"]),
@@ -280,6 +293,9 @@ def main():
         "- Rückimportierte Selbstauskünfte zur Hörprüfung: **"+str(details["selfAttestedHearingClaimCount"])+"**; gemeldete Audiofehler: **"+str(details["reportedHearingIssuesCount"])+"**. Diese Einträge sind noch KEINE unabhängig bestätigte Freigabe.",
         "",
         "Genauer kostenfreier Restplan: `kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md` und `kids/review-only/quiz-v4-450-next-completion-priority.json`.",
+        "Zusätzliche globale Kostensperre: **"+str(details["connectedFlowOriginalsPendingOrReserved"])+"** echte Originaltexte sind im verbundenen ElevenLabs Flow noch reserviert/eingereicht und dürfen nicht erneut in eine kostenpflichtige TTS-Auswahl geraten. **"+str(details["connectedFlowAlreadySubmittedAwaitingImport"])+"** davon sind bereits eingereicht, **"+str(details["connectedFlowReservedUnspentNotToRebuy"])+"** sind vorerst unbezahlt reserviert. Der gesamte Audioabschlussplan unterscheidet diese Originale von wirklich neuen Sprachfragmenten.",
+        "Nur bei frisch erzeugtem Abschlussplan: **"+(str(details["questionsWaitingOnlyForConnectedFlowOriginals"]) if priority_current else "Plan muss neu erstellt werden")+"** Fragen warten ausschließlich auf verbundene Flow-Originale. Wirklich neue noch zu generierende V4-Sprachfragmente nach Deduplizierung: **"+(str(details["genuinelyNewFragmentsExcludingFlowReservations"]) if priority_current else "Plan muss neu erstellt werden")+"**. Diese Werte sind keine neue providerbestätigte Abrechnung.",
+
         "",
         "## Noch fehlende, **bereits bezahlte** Originalaufnahmen",
         "",
