@@ -196,8 +196,32 @@ def import_backup(zip_path,root=ROOT,apply=False):
                     fail("saved provider attempt does not match original MP3 hash")
         local_usage=read(root/USAGE) if (root/USAGE).is_file() else {}
         local_attempts=local_usage.get("requestJournal",{}).get("entries",[])
-        for entry in local_attempts:
-            if entry not in entries:fail("old pending paid request was erased by backup")
+        by_digest={x["textSHA256"]:x for x in entries}
+        paid_by_digest={r.get("textSha256"):r for r in new_ledger
+                        if r.get("batchId")==BATCH}
+        for old in local_attempts:
+            new=by_digest.get(old.get("textSHA256"))
+            if new==old:
+                continue
+            # A runner that pushed REQUEST_STARTED_UNCONFIRMED before a
+            # charged POST can crash AFTER receiving actual MP3 bytes but
+            # BEFORE pushing its saved receipt. Accept only a genuine
+            # forward-only upgrade verified against MP3 registry AND ledger.
+            if (new is not None
+                and old.get("status")=="REQUEST_STARTED_UNCONFIRMED"
+                and new.get("status")=="ORIGINAL_MP3_SAVED"
+                and all(new.get(k)==v for k,v in old.items())):
+                digest_text=old["textSHA256"]
+                spoken=next((t for t in originals
+                             if source_digest(t)==digest_text),None)
+                clip=right.get(spoken) if spoken else None
+                paid=paid_by_digest.get(digest_text)
+                if (clip is not None and paid is not None
+                    and new.get("mp3SHA256")==clip.get("sha256")==paid.get("mp3Sha256")
+                    and new.get("providerRequestId")==clip.get("providerRequestId")==paid.get("providerRequestId")
+                    and bool(new.get("providerRequestId"))):
+                    continue
+            fail("old paid POST marker erased, changed or not supported by original MP3 and provider receipt")
         pending=[x["textSHA256"] for x in entries if x["status"]=="REQUEST_STARTED_UNCONFIRMED"]
         result={"scope":"PRIVATE_KIDS_V4_ORIGINAL_PAID_ACTIONS_SALVAGE","reviewOnly":True,
           "newlyRecoveredRealOriginalMP3s":len(fresh),"unchangedExistingOriginals":len(left),
