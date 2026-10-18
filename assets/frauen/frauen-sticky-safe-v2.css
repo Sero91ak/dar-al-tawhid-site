@@ -4,6 +4,7 @@
  * Restore normal viewport scrolling: #appView/.app currently compute
  * overflow-y:auto as a side effect of overflow-x:hidden and trap sticky.
  */
+html[data-theme] body.is-frauen-route,
 html[data-theme] body.is-frauen-route #appView.view,
 html[data-theme] body.is-frauen-route > .app{
   overflow-x:clip!important;
