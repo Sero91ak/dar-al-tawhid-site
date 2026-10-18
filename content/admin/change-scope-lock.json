@@ -8430,6 +8430,22 @@
         "scripts/check-quellen-client.cjs"
       ],
       "expiresAt": "2026-10-26T23:59:00.000Z"
+    },
+    {
+      "id": "qsource-light-contrast-and-heritage-learning-global-20261018",
+      "at": "2026-10-18T16:10:00+02:00",
+      "approvedBy": "user-20261018-explicit-visual-correction-images-8466-8469",
+      "reason": "Fix low contrast/light mode including arabic wrap on Q45 source; install compact historic madrasa-inspired reusable template for existing and future source learning pages, preserving content and post. Only appearance and accessibility; no extra posts, notification resends, native or kids modifications.",
+      "paths": [
+        "assets/q-source-dar-al-layl.css",
+        "assets/learning-heritage.css",
+        "assets/learning-heritage-architecture.svg",
+        "lernen/ikhlas/index.html",
+        "q/45/index.html",
+        "AGENTS.md",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-26T23:59:00.000Z"
     }
   ],
   "enabled": true

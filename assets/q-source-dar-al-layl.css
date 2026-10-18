@@ -489,3 +489,57 @@ body.qsource-body::after{
   .qsource-meta-row{grid-template-columns:1fr;gap:3px;padding:8px 0}
   .qsource-link{min-height:58px;padding:9px 4px}
 }
+
+/* ACCESSIBLE QSOURCE PALETTES · 2026-10-18
+   The original sheet was dark-only. Older CSS/color schemes or a native
+   light-mode override were producing cream text over pale white backgrounds.
+   Use contrast-safe tokens for EVERY /q/ card, without touching post bodies. */
+@media (prefers-color-scheme:light) {
+  :root {
+    color-scheme:light;
+    --q-bg:#f7f4ec;--q-bg-2:#eee9dd;
+    --q-text:#25382c;--q-text-soft:#405248;--q-text-muted:#526356;
+    --q-gold:#73572e;--q-gold-soft:#664923;--q-gold-deep:#8e6b35;
+    --q-line:rgba(105,81,42,.48);--q-line-soft:rgba(105,81,42,.29);
+    --q-line-faint:rgba(105,81,42,.18);
+    --q-shadow:0 8px 20px rgba(44,44,30,.08);
+  }
+  html {background:var(--q-bg)}
+  body.qsource-body {
+    background:linear-gradient(180deg,#fcfaf4 0%,#f7f4ec 100%);
+  }
+  .qsource-hero::after {opacity:.032}
+  .qsource-section:hover {background:linear-gradient(90deg,rgba(123,93,47,.055),transparent 70%)}
+  .qsource-link:hover,.qsource-link:focus-visible {background:linear-gradient(90deg,#f0eadc,transparent 78%)}
+  .qsource-social a,.qsource-footer a {background:rgba(98,75,36,.035)}
+}
+/* Explicit theme overrides cover apps that set a theme attribute instead of
+   following the operating system appearance. */
+:root[data-theme="light"],
+:root[data-mode="light"],
+:root.light,
+:root.light-mode,
+body.qsource-body[data-theme="light"]{
+  color-scheme:light;
+  --q-bg:#f7f4ec;--q-bg-2:#eee9dd;
+  --q-text:#25382c;--q-text-soft:#405248;--q-text-muted:#526356;
+  --q-gold:#73572e;--q-gold-soft:#664923;--q-gold-deep:#8e6b35;
+  --q-line:rgba(105,81,42,.48);--q-line-soft:rgba(105,81,42,.29);
+  --q-line-faint:rgba(105,81,42,.18);
+  --q-shadow:0 8px 20px rgba(44,44,30,.08);
+}
+:root[data-theme="light"] body.qsource-body,
+:root[data-mode="light"] body.qsource-body,
+:root.light body.qsource-body,
+:root.light-mode body.qsource-body,
+body.qsource-body[data-theme="light"]{
+  background:linear-gradient(180deg,#fcfaf4 0%,#f7f4ec 100%);
+}
+.qsource-section{overflow-wrap:break-word}
+.qsource-arabic{overflow-wrap:break-word;word-break:normal}
+.qsource-arabic[dir="rtl"]{unicode-bidi:isolate}
+.qsource-meta-value,.qsource-link-sub{overflow-wrap:anywhere}
+@media(max-width:640px){
+  .qsource-section-head{align-items:baseline;min-width:0}
+  .qsource-arabic{font-size:clamp(20px,5vw,27px);line-height:1.85}
+}
