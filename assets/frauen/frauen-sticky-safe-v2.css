@@ -7,8 +7,10 @@
 html[data-theme] body.is-frauen-route,
 html[data-theme] body.is-frauen-route #appView.view,
 html[data-theme] body.is-frauen-route > .app{
-  overflow-x:clip!important;
-  overflow-y:visible!important;
+  /* Do not mix overflow-x:hidden with overflow-y:visible: browsers compute
+     that pair as a non-scrolling overflow-y:auto ancestor that traps sticky.
+     Reset both axes for this one page only; html clips horizontal overflow. */
+  overflow:visible!important;
 }
 html[data-theme] body.is-frauen-route #appView .frauen-library-shell[data-dar-frauen-sticky-safe="1"] > .frauen-library-hero,
 html[data-theme] body.is-frauen-route #appView .frauen-library-list[data-dar-frauen-sticky-safe="1"] > .frauen-library-hero{
