@@ -61,25 +61,54 @@ function launchUrl(env, item) {
   return u.toString();
 }
 
-function audienceFilters(item) {
-  const groups = ageGroupsFor(item);
-  const filters = [
-    { field: "tag", key: "dar_kids", relation: "=", value: "true" },
-    { operator: "AND" },
-    { field: "tag", key: "kids_parent_push_consent", relation: "=", value: "yes" },
-    { operator: "AND" },
-    { field: "tag", key: "kids_content_push", relation: "=", value: "yes" }
-  ];
-  if (!groups.length) return filters;
+const SUPABASE_KIDS_URL = "https://djyfkttjbdraynuxrzno.supabase.co";
+const AUDIENCE_PAGE_SIZE = 500;
+const MAX_VERIFIED_DEVICES = 10000;
 
-  // Do not combine an OR expression with parent-consent filters: OneSignal
-  // filters are flat and an OR branch may escape mandatory opt-in conditions.
-  // in_array keeps age targeting inside a single AND condition.
-  filters.push(
-    { operator: "AND" },
-    { field: "tag", key: "kids_age", relation: "in_array", value: groups.join(",") }
-  );
-  return filters;
+// Only the database's service-role-only, already verified and parent-enabled
+// Kids registrations are permitted to receive a content notification. Never
+// rely on client-controlled OneSignal tags as proof of guardian authorization.
+async function readVerifiedAudience(env, item) {
+  const secret = String(env.SUPABASE_KIDS_SERVICE_ROLE_KEY || "").trim();
+  if (!secret) {
+    return { ids: [], error: "Kids-Supabase-Dienstschlüssel fehlt" };
+  }
+  const groups = ageGroupsFor(item);
+  if (!groups.length) {
+    return { ids: [], error: "Keine passende Altersstufe" };
+  }
+  const headers = { apikey: secret, Accept: "application/json" };
+  if (secret.startsWith("eyJ")) headers.Authorization = `Bearer ${secret}`;
+  const ids = new Set();
+  for (let offset = 0; offset < MAX_VERIFIED_DEVICES; offset += AUDIENCE_PAGE_SIZE) {
+    const url = new URL(SUPABASE_KIDS_URL + "/rest/v1/kids_push_subscriptions");
+    url.searchParams.set("select", "onesignal_subscription_id");
+    url.searchParams.set("content_enabled", "eq.true");
+    url.searchParams.set("parent_consent_verified_at", "not.is.null");
+    url.searchParams.set("consent_revoked_at", "is.null");
+    url.searchParams.set("kids_age_band", `in.(${groups.join(",")})`);
+    const response = await fetch(url.toString(), {
+      headers: {
+        ...headers,
+        Range: `${offset}-${offset + AUDIENCE_PAGE_SIZE - 1}`
+      },
+      cache: "no-store"
+    });
+    if (!response.ok) {
+      return { ids: [], error: `Kids-Supabase-Lesezugriff fehlgeschlagen (${response.status})` };
+    }
+    const data = await response.json().catch(() => null);
+    if (!Array.isArray(data)) {
+      return { ids: [], error: "Kids-Supabase-Antwort ungültig" };
+    }
+    for (const row of data) {
+      const id = String(row?.onesignal_subscription_id || "").trim();
+      if (/^[a-f0-9-]{30,50}$/i.test(id)) ids.add(id);
+    }
+    if (data.length < AUDIENCE_PAGE_SIZE) return { ids: [...ids], error: "" };
+  }
+  // Never silently drop registered recipients when hitting the safety cap.
+  return { ids: [], error: "Kids-Audience-Limit erreicht; Versand angehalten" };
 }
 
 export async function sendKidsContentPush(env, item) {
@@ -95,57 +124,74 @@ export async function sendKidsContentPush(env, item) {
   const apiKey = key(env);
   if (!apiKey) return { sent: false, skipped: true, reason: "Kids-OneSignal API-Key fehlt" };
 
+  const audience = await readVerifiedAudience(env, item);
+  if (audience.error) {
+    return { sent: false, skipped: true, reason: audience.error };
+  }
+  if (!audience.ids.length) {
+    return { sent: false, skipped: true, reason: "Keine serverseitig bestätigte Elternfreigabe vorhanden" };
+  }
   const copy = copyFor(item);
   const url = launchUrl(env, item);
-  const seed = `kids-content:${item.id}:r${item.publishedRevision || item.revision || 1}`;
-  const payload = {
-    app_id: id,
-    target_channel: "push",
-    filters: audienceFilters(item),
-    headings: { de: copy.title, en: copy.title },
-    contents: { de: copy.body, en: copy.body },
-    url,
-    data: {
-      type: "kids_content",
-      contentId: item.id,
-      kind: item.kind,
-      title: item.title,
-      ageMin: item.ageMin,
-      ageMax: item.ageMax,
+  const revision = item.publishedRevision || item.revision || 1;
+  const seed = `kids-content:${item.id}:r${revision}`;
+  let recipients = 0;
+  const notificationIds = [];
+  const errors = [];
+  // OneSignal does not permit combining subscription IDs and tag filters.
+  // The strict authorization decision therefore happens before this call.
+  for (let offset = 0; offset < audience.ids.length; offset += AUDIENCE_PAGE_SIZE) {
+    const index = offset / AUDIENCE_PAGE_SIZE;
+    const payload = {
+      app_id: id,
+      target_channel: "push",
+      include_subscription_ids: audience.ids.slice(offset, offset + AUDIENCE_PAGE_SIZE),
+      headings: { de: copy.title, en: copy.title },
+      contents: { de: copy.body, en: copy.body },
       url,
-      publishedAt: item.publishedAt
-    },
-    idempotency_key: await uuid(seed),
-    chrome_web_icon: "https://dar-al-tawhid.de/kids/icons/icon-192.png?v=logo28",
-    chrome_web_badge: "https://dar-al-tawhid.de/notification-badge-96.png?v=3",
-    firefox_icon: "https://dar-al-tawhid.de/kids/icons/icon-192.png?v=logo28",
-    name: `kids-content-${item.id}-r${item.publishedRevision || item.revision || 1}`
-  };
-
-  const res = await fetch("https://api.onesignal.com/notifications", {
-    method: "POST",
-    headers: {
-      Authorization: `Key ${apiKey}`,
-      "Content-Type": "application/json",
-      Accept: "application/json"
-    },
-    body: JSON.stringify(payload)
-  });
-  const data = await res.json().catch(() => ({}));
-  const recipients = Number(data?.recipients || 0);
-  const notificationId = String(data?.id || "").trim();
-  const errors = data?.errors || null;
-  const sent = res.ok && Boolean(notificationId) && recipients > 0;
+      data: {
+        type: "kids_content",
+        contentId: item.id,
+        kind: item.kind,
+        title: item.title,
+        ageMin: item.ageMin,
+        ageMax: item.ageMax,
+        url,
+        publishedAt: item.publishedAt
+      },
+      idempotency_key: await uuid(`${seed}:batch:${index}`),
+      chrome_web_icon: "https://dar-al-tawhid.de/kids/icons/icon-192.png?v=logo28",
+      chrome_web_badge: "https://dar-al-tawhid.de/notification-badge-96.png?v=3",
+      firefox_icon: "https://dar-al-tawhid.de/kids/icons/icon-192.png?v=logo28",
+      name: `kids-content-${item.id}-r${revision}-batch-${index}`
+    };
+    const response = await fetch("https://api.onesignal.com/notifications", {
+      method: "POST",
+      headers: {
+        Authorization: `Key ${apiKey}`,
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+    const result = await response.json().catch(() => ({}));
+    const messageId = String(result?.id || "");
+    if (!response.ok || !messageId) {
+      errors.push({ batch: index, status: response.status });
+      continue;
+    }
+    notificationIds.push(messageId);
+    recipients += Number(result?.recipients || 0);
+  }
   return {
-    sent,
+    sent: recipients > 0,
     prepared: true,
-    httpStatus: res.status,
     recipients,
-    notificationId,
+    notificationId: notificationIds[0] || "",
+    notificationIds,
     url,
-    filters: payload.filters,
-    errors,
-    reason: sent ? "" : (errors ? JSON.stringify(errors) : recipients === 0 ? "Keine passende Kids-Push-Zielgruppe" : `OneSignal ${res.status}`)
+    errors: errors.length ? errors : null,
+    reason: recipients > 0 ? "" : "Keine bestätigte Kids-Push-Zustellung"
   };
 }
 
@@ -155,6 +201,7 @@ export function kidsPushPreview(env, item) {
     ...copy,
     url: launchUrl(env, item),
     ageGroups: ageGroupsFor(item),
-    filters: audienceFilters(item)
+    filters: [],
+    targeting: "supabase_verified_parent_subscriptions_only"
   };
 }
