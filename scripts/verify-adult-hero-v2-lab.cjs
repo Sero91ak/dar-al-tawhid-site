@@ -99,8 +99,14 @@ const main=async()=>{
         assert.equal(initial.railPosition,"sticky",label+" initial rail must be sticky");
         assert.ok(initial.total-initial.client>160,label+" fixture lacks scrollable content");
         await page.screenshot({path:path.join(evidence,label+"-top.png")});
-        await page.mouse.wheel(0,430);
-        await page.waitForTimeout(200);
+        // Mobile WebKit does not implement mouse.wheel. Use its native
+        // scroll container API to validate sticky geometry independently.
+        // Chromium cases still exercise real wheel scrolling.
+        if(engineName==="webkit")
+          await page.evaluate(()=>window.scrollTo({top:430,behavior:"instant"}));
+        else
+          await page.mouse.wheel(0,430);
+        await page.waitForTimeout(250);
         const moved=await page.evaluate(snapshot);
         assert.ok(moved.y>90,label+" natural document scrolling blocked: "+moved.y);
         assert.ok(Math.abs(moved.rail.top)<=2,label+" rail moved on scroll "+moved.rail.top);
