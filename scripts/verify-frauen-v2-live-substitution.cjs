@@ -53,7 +53,13 @@ async function scenario(target){
    if(response?.status()!==200)throw Error("HTTP status "+response?.status());
    await page.waitForFunction(()=>document.querySelector("#appView .frauen-library-hero")&&document.body.classList.contains("is-frauen-route"),{timeout:20000});
    await page.waitForTimeout(2000);
-   if(!replaced)throw Error("V2 adapter was NOT substituted; browser still using legacy");
+   // The Android PWA mounts the Frauen renderer directly and does not request
+   // the iOS/native adapter. Its sticky/scroll CSS is checked independently;
+   // never claim it received the native adapter.
+   if(!replaced&&ctxName!=="android-pwa-chromium")
+     throw Error("V2 adapter was NOT substituted on native iOS route");
+   if(ctxName==="android-pwa-chromium"&&replaced)
+     throw Error("Unexpected PWA adapter routing change; inspect independently");
    await page.evaluate(()=>document.documentElement.setAttribute("data-dar-frauen-scroll-safe","1"));
    await page.addStyleTag({content:stickyCSS});
    await page.addScriptTag({content:stickyJS});
@@ -63,7 +69,7 @@ async function scenario(target){
    if(!before.heroBackground?.includes("03-erste-generationen.jpg"))throw Error("Original Frauen photo missing");
    if(before.heroPosition!=="sticky"||before.searchPosition!=="sticky")throw Error("Hero/Search sticky not applied "+JSON.stringify(before));
    if(before.legacyStage)throw Error("V1 DOM reparenting detected");
-   if(before.appOverflow!=="visible")throw Error("Nested iOS overflow still captures sticky: "+before.appOverflow);
+   if(before.appOverflow!=="visible")throw Error("Nested overflow still captures sticky: "+JSON.stringify(before));
    await page.screenshot({path:path.join(out,ctxName+"-before.png")});
    await page.evaluate(()=>window.scrollTo(0,620));
    await page.waitForTimeout(420);
