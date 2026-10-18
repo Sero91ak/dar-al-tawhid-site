@@ -39,7 +39,12 @@
       }
     }
   }
-  function queue(){if(frame)return;frame=(global.requestAnimationFrame||setTimeout)(apply);}
+  function queue(){
+    if(frame)return;
+    // Safari/WebKit requires the correct receiver for requestAnimationFrame.
+    frame=typeof global.requestAnimationFrame==="function"
+      ?global.requestAnimationFrame(apply):global.setTimeout(apply,16);
+  }
   function watchApp(){
     var app=document.getElementById("appView");
     if(!app||domObserver)return;
