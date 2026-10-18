@@ -1,0 +1,68 @@
+/* KIDS_TEST_PARENT_SETTINGS_V1 – isolated to KIDS TEST, style follows profile palette */
+#kidsTestSettingsEntry,
+#kidsTestSettingsSheet,
+#kidsTestSettingsIntro{--kn-ink:#f8f2e9;--kn-gold:#ebc985;--kn-border:rgba(231,198,133,.22);--kn-glass:rgba(255,255,255,.07);color:var(--kn-ink);font-family:inherit}
+.app[data-gender="girl"] #kidsTestSettingsEntry,
+.app[data-gender="girl"] #kidsTestSettingsSheet{--kn-gold:#f1c4d5;--kn-border:rgba(244,194,215,.32);--kn-glass:rgba(241,194,215,.10)}
+#kidsTestSettingsEntry{margin:14px 0 18px!important;border:1px solid var(--kn-border)!important;border-radius:24px!important;background:linear-gradient(125deg,rgba(20,48,59,.98),rgba(35,57,69,.94))!important;box-shadow:0 12px 30px rgba(0,0,0,.17);overflow:hidden}
+.app[data-gender="girl"] #kidsTestSettingsEntry{background:linear-gradient(125deg,#36283f,#5a3a4d)!important}
+#kidsTestSettingsEntry .kn-entry{width:100%;padding:19px 18px;text-align:left;border:0;background:none;color:inherit;display:flex;align-items:center;gap:13px;min-height:88px;cursor:pointer}
+#kidsTestSettingsEntry .kn-bell{display:grid;place-items:center;flex:0 0 46px;width:46px;height:46px;border-radius:15px;background:rgba(235,201,133,.13);color:var(--kn-gold);font-size:24px}
+#kidsTestSettingsEntry .kn-entry-copy{min-width:0;display:grid;gap:4px;flex:1}
+#kidsTestSettingsEntry .kn-entry-copy small{font-size:10px;letter-spacing:.12em;font-weight:850;color:var(--kn-gold)}
+#kidsTestSettingsEntry .kn-entry-copy strong{font-size:18px;line-height:1.2;font-weight:800}
+#kidsTestSettingsEntry .kn-entry-copy span{font-size:12px;line-height:1.42;opacity:.77}
+#kidsTestSettingsEntry .kn-chevron{font-size:28px;color:var(--kn-gold)}
+#kidsTestSettingsSheet[hidden],#kidsTestSettingsIntro[hidden]{display:none!important}
+#kidsTestSettingsSheet{position:fixed;inset:0;z-index:2147482000;background:rgba(5,13,23,.82);display:flex;align-items:flex-end;justify-content:center;overscroll-behavior:contain;touch-action:auto}
+#kidsTestSettingsSheet .kn-panel{position:relative;display:flex;flex-direction:column;width:100%;max-width:670px;height:min(92dvh,900px);min-height:0;border:1px solid var(--kn-border);border-radius:30px 30px 0 0;background:linear-gradient(145deg,#102c39,#0c2330 66%,#152c36);box-shadow:0 -15px 60px rgba(0,0,0,.35);overflow:hidden}
+.app[data-gender="girl"] ~ #kidsTestSettingsSheet .kn-panel,
+html[data-kids-boot-gender="girl"] #kidsTestSettingsSheet .kn-panel{background:linear-gradient(145deg,#38283e,#291f39 70%,#462f44)}
+#kidsTestSettingsSheet .kn-top{flex:none;padding:18px 20px 12px;border-bottom:1px solid var(--kn-border);display:flex;align-items:center;justify-content:space-between;gap:10px}
+#kidsTestSettingsSheet .kn-top small{font-size:10px;font-weight:850;letter-spacing:.12em;color:var(--kn-gold)}
+#kidsTestSettingsSheet .kn-top h2{font-size:23px;line-height:1.2;margin:5px 0 0;color:var(--kn-ink)}
+#kidsTestSettingsSheet .kn-close{border:1px solid var(--kn-border);color:var(--kn-ink);background:var(--kn-glass);border-radius:14px;width:43px;height:43px;font-size:23px;flex:none}
+#kidsTestSettingsSheet .kn-body{overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;flex:1;min-height:0;padding:17px 17px calc(30px + env(safe-area-inset-bottom,0px))}
+#kidsTestSettingsSheet .kn-hero{border-radius:21px;padding:18px 17px;background:linear-gradient(115deg,rgba(233,195,116,.13),rgba(233,195,116,.025));border:1px solid var(--kn-border)}
+#kidsTestSettingsSheet .kn-hero strong{display:block;font-size:17px;margin:0 0 8px}
+#kidsTestSettingsSheet .kn-hero p{margin:0;color:rgba(255,255,255,.78);line-height:1.55;font-size:13px}
+#kidsTestSettingsSheet .kn-status{padding:10px 12px;margin:12px 0;border-radius:13px;background:rgba(255,255,255,.07);border:1px solid var(--kn-border);font-size:12px;line-height:1.55}
+#kidsTestSettingsSheet .kn-section{margin-top:23px}
+#kidsTestSettingsSheet .kn-section>h3{font-size:15px;font-weight:850;letter-spacing:.02em;margin:0 0 8px;color:var(--kn-ink)}
+#kidsTestSettingsSheet .kn-section>p{margin:0 0 13px;font-size:12px;color:rgba(255,255,255,.7)}
+#kidsTestSettingsSheet .kn-row{display:flex;align-items:center;gap:12px;justify-content:space-between;min-height:62px;padding:11px 0;border-bottom:1px solid rgba(255,255,255,.09)}
+#kidsTestSettingsSheet .kn-row>span{flex:1;min-width:0;font-size:14px;font-weight:700}
+#kidsTestSettingsSheet .kn-row small{display:block;font-size:11px;font-weight:450;color:rgba(255,255,255,.66);margin-top:3px}
+#kidsTestSettingsSheet .kn-row input[type=checkbox]{appearance:none;-webkit-appearance:none;width:49px;height:29px;border-radius:100px;flex:0 0 49px;background:rgba(225,225,225,.2);position:relative;border:1px solid rgba(255,255,255,.22);transition:background .2s}
+#kidsTestSettingsSheet .kn-row input[type=checkbox]::before{content:"";position:absolute;top:3px;left:3px;width:21px;height:21px;border-radius:50%;background:#f9f6ed;box-shadow:0 1px 4px rgba(0,0,0,.3);transition:transform .2s}
+#kidsTestSettingsSheet .kn-row input[type=checkbox]:checked{background:#9e7950;border-color:var(--kn-gold)}
+#kidsTestSettingsSheet .kn-row input[type=checkbox]:checked::before{transform:translateX(20px)}
+#kidsTestSettingsSheet .kn-controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center}
+#kidsTestSettingsSheet .kn-btn{min-height:44px;border-radius:13px;padding:10px 15px;border:1px solid var(--kn-border);background:var(--kn-glass);color:var(--kn-ink);font-weight:750;line-height:1.3}
+#kidsTestSettingsSheet .kn-btn-primary{background:var(--kn-gold);color:#172633;border-color:transparent}
+#kidsTestSettingsSheet .kn-btn:disabled{opacity:.45}
+#kidsTestSettingsSheet :is(select,input[type=search]){font:inherit;min-height:44px;border-radius:12px;background:#1b3844;border:1px solid var(--kn-border);color:#fff;padding:9px 12px;font-size:14px;max-width:100%}
+#kidsTestSettingsSheet input[type=search]{width:100%;margin:8px 0}
+#kidsTestSettingsSheet select{min-width:96px}
+#kidsTestSettingsSheet .kn-prayer{display:flex;align-items:center;gap:10px;min-height:53px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.085)}
+#kidsTestSettingsSheet .kn-prayer label{display:flex;align-items:center;flex:1;gap:10px;font-size:13px;cursor:pointer}
+#kidsTestSettingsSheet .kn-prayer input{accent-color:var(--kn-gold);width:19px;height:19px}
+#kidsTestSettingsSheet .kn-prayer time{font-variant-numeric:tabular-nums;font-weight:800;font-size:15px;color:var(--kn-gold);min-width:47px;text-align:right}
+#kidsTestSettingsSheet .kn-card{padding:16px;border:1px solid var(--kn-border);border-radius:21px;background:var(--kn-glass)}
+#kidsTestSettingsSheet .kn-qibla-bearing{display:flex;align-items:center;gap:20px}
+#kidsTestSettingsSheet .kn-qibla-dial{width:120px;height:120px;border:1px solid var(--kn-border);background:radial-gradient(circle,rgba(241,209,147,.16),rgba(0,0,0,.12));border-radius:50%;display:grid;place-items:center;position:relative;flex:none}
+#kidsTestSettingsSheet .kn-qibla-dial:before{content:"N";position:absolute;top:7px;font-size:10px;color:var(--kn-gold);font-weight:900}
+#kidsTestSettingsSheet .kn-qibla-arrow{font-size:62px;line-height:1;color:var(--kn-gold);display:block;transition:transform .3s ease}
+#kidsTestSettingsSheet .kn-qibla-value{font-size:29px;display:block;font-variant-numeric:tabular-nums}
+#kidsTestSettingsSheet .kn-qibla-city{font-size:12px;opacity:.8;line-height:1.45}
+#kidsTestSettingsSheet .kn-results{max-height:185px;overflow-y:auto}
+#kidsTestSettingsSheet .kn-results button{display:block;width:100%;text-align:left;border:0;border-bottom:1px solid rgba(255,255,255,.1);background:transparent;padding:11px 7px;color:#fff;font:inherit;font-size:13px}
+#kidsTestSettingsSheet .kn-results button:focus-visible,#kidsTestSettingsSheet :is(button,input,select):focus-visible{outline:3px solid var(--kn-gold);outline-offset:2px}
+#kidsTestSettingsIntro{position:fixed;z-index:2147481900;left:12px;right:12px;bottom:calc(84px + env(safe-area-inset-bottom,0px));max-width:460px;margin:0 auto;background:linear-gradient(115deg,#123442,#243945);padding:16px;border:1px solid rgba(235,201,133,.45);border-radius:22px;box-shadow:0 12px 55px rgba(0,0,0,.45)}
+#kidsTestSettingsIntro strong{font-size:15px;display:block;margin-bottom:7px}
+#kidsTestSettingsIntro p{font-size:12px;line-height:1.5;opacity:.83;margin:0 0 12px}
+#kidsTestSettingsIntro .kn-btn{border:1px solid rgba(235,201,133,.38);border-radius:11px;min-height:42px;background:transparent;color:#fff;padding:7px 15px;font-weight:750}
+#kidsTestSettingsIntro .kn-btn-primary{background:#ebc985;color:#152735;margin-right:8px}
+@media (min-width:750px){#kidsTestSettingsSheet{align-items:center}#kidsTestSettingsSheet .kn-panel{border-radius:27px;height:min(84dvh,900px)}}
+@media (max-width:380px){#kidsTestSettingsSheet .kn-qibla-dial{width:98px;height:98px}#kidsTestSettingsSheet .kn-qibla-arrow{font-size:48px}#kidsTestSettingsSheet .kn-prayer{gap:6px}}
+@media (prefers-reduced-motion:reduce){#kidsTestSettingsSheet .kn-qibla-arrow{transition:none!important}}
