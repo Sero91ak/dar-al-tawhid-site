@@ -35,13 +35,14 @@ return '<div id="dv3Home" class="dv3-home" data-v3-version="3.1">'+
   '<div class="dv3-hometitle"><div><small>WILLKOMMEN IM DĀR</small><h2>Startseite</h2></div><button class="dv3-accountlink" type="button" data-dv3-nav="account" aria-label="Konto öffnen oder registrieren">'+icon("lock")+'<span>Konto / Registrieren</span><b>→</b></button></div>'+
   '<div class="dv3-services"><div class="dv3-services-top"><span>HEUTE IM ÜBERBLICK</span><button type="button" data-dv3-nav="prayer">Gebetszeiten öffnen →</button></div><div id="dv3Weather" class="dv3-weather" role="status" aria-live="polite">Wetterdaten werden geladen …</div></div>'+
   '<div class="dv3-search-box"><label class="dv3-search-label" for="homeSearchInput"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7"/><path d="m16 16 5 5"/></svg></label><input id="homeSearchInput" type="search" autocomplete="off" enterkeyhint="search" placeholder="Beiträge, Gelehrte, Bücher durchsuchen …" aria-label="Beiträge, Gelehrte und Bücher suchen"><button type="button" id="dv3SearchClear" aria-label="Suche löschen" hidden>×</button></div>'+
-  '<button type="button" class="dv3-tawhid" data-dv3-nav="tawhid-guide"><span class="dv3-ornament" aria-hidden="true">◈</span><span class="dv3-kicker">GRUNDLAGEN DES GLAUBENS</span><strong>Tawḥīd &amp; ʿAqīdah</strong><span class="dv3-description">Den Glauben verstehen – mit Qurʾān, Sunnah und Aussagen der frühen Gelehrten.</span><span class="dv3-tawhid-footer">Zum Wissensbereich <b>→</b></span></button>'+
+  '<button type="button" class="dv3-tawhid" data-dv3-nav="tawhid-guide"><span class="dv3-ornament" aria-hidden="true"></span><span class="dv3-kicker">GRUNDLAGEN DES GLAUBENS</span><strong>Tawḥīd &amp; ʿAqīdah</strong><span class="dv3-description">Den Glauben verstehen – mit Qurʾān, Sunnah und Aussagen der frühen Gelehrten.</span><span class="dv3-tawhid-footer">Zum Wissensbereich <b>→</b></span></button>'+
   '<section class="dv3-section" aria-labelledby="dv3LatestTitle"><div class="dv3-section-title"><h3 id="dv3LatestTitle">Neueste Beiträge</h3><button type="button" data-dv3-nav="recent">Alle lesen →</button></div><div id="dv3Latest" class="dv3-posts" aria-live="polite"><span>Beiträge werden geladen …</span></div></section>'+
   '<section class="dv3-section" aria-labelledby="dv3QuickTitle"><div class="dv3-section-title"><h3 id="dv3QuickTitle">Schnellzugriff</h3><button type="button" data-dv3-nav="more">Alle Bereiche →</button></div><div class="dv3-quick-grid">'+quick+'</div><details class="dv3-more"><summary>Weitere Wissens- und App-Bereiche <span aria-hidden="true">⌄</span></summary><div class="dv3-more-grid">'+more+'</div></details></section>'+
   '<section class="dv3-bottom"><div id="dv3QuranSlot"></div><div class="dv3-bottom-row"><button data-dv3-nav="calendar" type="button">Kalender &amp; Hijrī-Datum →</button><button data-dv3-nav="settings" type="button">Einstellungen →</button></div></section>'+
   '<div id="dv3ThemePanel" class="dv3-theme-panel" hidden role="dialog" aria-label="Erscheinungsbild wählen"><div><strong>Erscheinungsbild</strong><button type="button" data-dv3-close aria-label="Schließen">×</button></div><div class="dv3-theme-grid">'+swatches+'</div></div>'+
 '</div>';
 }
+window.DARHomeV3Markup=make;
 function renderLatest(){
  const el=document.getElementById("dv3Latest");if(!el)return;
  let data=[];
@@ -127,15 +128,11 @@ function sync(){
  const shell=document.querySelector("#appView .home-v380-shell");
  if(!shell)return;
  ensureTopControls();rearrangeHeader();
- let root=document.getElementById("dv3Home");
- if(!root){shell.insertAdjacentHTML("afterbegin",make());root=document.getElementById("dv3Home");lastPosts="";}
+ const root=document.getElementById("dv3Home");
+ if(!root)return; // Single canonical renderer owns the home; never insert a second layout.
  const searchBlock=shell.querySelector("#homeSearchBlock");
  const searchField=root.querySelector(".dv3-search-box");
  if(searchBlock&&searchField&&searchField.nextElementSibling!==searchBlock)searchField.insertAdjacentElement("afterend",searchBlock);
- const q=shell.querySelector(".home-v380-quran-hero");
- const slot=root.querySelector("#dv3QuranSlot");
- if(q&&slot&&q.parentElement!==slot)slot.appendChild(q);
- // Existing account banner remains functional but becomes a compact, explicit account entry.
  renderLatest();fetchWeather();
  const select=document.querySelectorAll("#dv3ThemePanel [data-dv3-theme]");
  const current=document.documentElement.getAttribute("data-theme");
