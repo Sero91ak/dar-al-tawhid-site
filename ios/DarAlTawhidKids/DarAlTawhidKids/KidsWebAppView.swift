@@ -243,6 +243,25 @@ struct KidsWebAppView: UIViewRepresentable {
                 }
             case "configure":
                 KidsPushNotifications.applyParentPreferences(settings, ageGroup: ageGroup)
+            case "subscription":
+                // Keep the OneSignal identifier in the native process until
+                // the parent's verified-enrollment flow requests it.
+                Task { [weak self] in
+                    for _ in 0..<20 {
+                        if let id = OneSignal.User.pushSubscription.id,
+                           UUID(uuidString: id) != nil {
+                            let script = "window.dispatchEvent(new CustomEvent('dar-kids-native-subscription',{detail:{id:'\\(id)'}}))"
+                            await MainActor.run { [weak self] in
+                                self?.webView?.evaluateJavaScript(script, completionHandler: nil)
+                            }
+                            return
+                        }
+                        try? await Task.sleep(nanoseconds: 250_000_000)
+                    }
+                    await MainActor.run { [weak self] in
+                        self?.webView?.evaluateJavaScript("window.dispatchEvent(new CustomEvent('dar-kids-native-subscription',{detail:{id:null}}))", completionHandler: nil)
+                    }
+                }
             case "disable":
                 KidsPushNotifications.revokeParentActivation()
                 sendKidsPushPermissionResult(false)
