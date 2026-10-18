@@ -12,6 +12,7 @@ import hashlib
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
+from quiz_v4_no_double_charge_guard import protect_paid_texts
 
 ROOT=Path(__file__).resolve().parents[2]
 MODEL="eleven_v4"
@@ -22,6 +23,7 @@ REG=ROOT/"kids/data/quiz-v4-450-original-clip-registry.json"
 LEDGER=ROOT/"kids/data/quiz-v4-450-paid-generation-ledger.json"
 PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
 NINE=ROOT/"kids/data/quiz-v4-missing9-prepaid-originals.json"
+FLOW=ROOT/"kids/data/quiz-v4-connected-flow-originals-ledger.json"
 STAGE=ROOT/"kids/review-only/quiz-v4-450-actual-mp3-import.json"
 RELEASE=ROOT/"kids/data/quiz-curation-release.json"
 OUT=ROOT/"kids/review-only/quiz-v4-450-next-completion-priority.json"
@@ -58,6 +60,19 @@ def main():
     need(charged<=set(stored),"paid ledger entry missing from MP3 registry")
     need(not (charged&set(by_text)),"paid missing Flow text also charged by direct TTS")
     recorded=set(stored)
+    # Connected ElevenLabs Flow originals may already be charged or reserved.
+    # Exclude them from future paid requests until the ORIGINAL is imported.
+    protected=protect_paid_texts(ROOT,reg,ledger)
+    flow=load(FLOW)
+    need(flow.get("modelId")==MODEL and flow.get("voiceId")==VOICE
+         and flow.get("live") is False, "connected provider Flow identity changed")
+    pending_flow={r["sourceText"]:r for r in flow["entries"]
+                  if r["status"]!="IMPORTED_ORIGINAL_MP3_VERIFIED"}
+    need(len(pending_flow)==sum(r["status"]!="IMPORTED_ORIGINAL_MP3_VERIFIED"
+                                for r in flow["entries"]),
+         "duplicate reserved Flow text")
+    need(not (set(pending_flow)&recorded) and set(pending_flow)<=protected,
+         "reserved Flow text already recorded or not protected against repurchase")
 
     pending=defaultdict(set)
     records=[]
@@ -67,10 +82,10 @@ def main():
     for recipe in plan["recipes"]:
         qid,age=recipe["questionId"],recipe["ageBand"]
         need(age in AGES and qid in stage["questions"],"unknown quiz ID/age")
-        question_new=set();question_paid=set();blocked_parts={}
+        question_new=set();question_paid=set();question_flow=set();blocked_parts={}
         for part in PARTS:
             entry=recipe[part]
-            missing_new=set();missing_old=set()
+            missing_new=set();missing_old=set();missing_flow=set()
             if entry["mode"]=="existing-paid-exact":
                 gid=entry["generationId"]
                 if gid not in paid:
@@ -84,8 +99,11 @@ def main():
                     if segment in recorded:continue
                     if segment in by_text:
                         missing_old.update(by_text[segment])
+                    elif segment in pending_flow:
+                        missing_flow.add(segment)
                     else:
-                        need(segment not in charged,"already charged original would be billed again")
+                        need(segment not in protected,
+                             "previously charged or reserved V4 text in new credit queue")
                         missing_new.add(segment)
                         pending[segment].add((qid,age,part))
             else:
