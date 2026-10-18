@@ -206,7 +206,7 @@ def main():
     old_subscription=stage1.subscription
     old_tts=stage1.original_mp3
     try:
-        os.environ["KIDS_V4_STAGE1_HUMAN_CONTENT_CHECK"]="YES"
+        os.environ["KIDS_V4_STAGE1_APPROVED_CANONICAL_450"]="YES"
         os.environ["KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL"]="YES"
         os.environ["KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256"]="0"*64
         os.environ["ELEVENLABS_API_KEY"]="DO-NOT-USE-TEST-CREDENTIAL"
