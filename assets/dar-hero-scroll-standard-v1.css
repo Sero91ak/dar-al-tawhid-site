@@ -88,3 +88,58 @@
   [data-hero-kind="category"] .dar-hero,
   [data-hero-kind="post"] .dar-hero{min-height:clamp(160px,46svh,240px)}
 }
+
+
+/* DAR_RESPONSIVE_HERO_RAIL_V1402 · 2026-10-18
+ * One opt-in height language for future mobile/iPad/desktop sections.
+ * Heights are minima, not fixed crops: multiline titles may expand.
+ * No Frauen override, background-image reassignment or DOM moves. */
+[data-hero-kind]{
+  --dar-hero-smart-landing:clamp(226px,31svh,370px);
+  --dar-hero-smart-category:clamp(168px,21svh,258px);
+  --dar-hero-smart-post:clamp(148px,18svh,214px);
+}
+[data-hero-kind="landing"] .dar-hero{
+  min-height:var(--dar-hero-smart-landing);
+  height:auto;
+  max-height:none;
+}
+[data-hero-kind="category"] .dar-hero{
+  min-height:var(--dar-hero-smart-category);
+  height:auto;
+  max-height:none;
+}
+[data-hero-kind="post"] .dar-hero{
+  min-height:var(--dar-hero-smart-post);
+  height:auto;
+  max-height:none;
+}
+[data-hero-kind][data-hero-scroll="sticky"] > .dar-hero-stage{
+  position:sticky;
+  top:0;
+  z-index:64;
+  isolation:isolate;
+  overflow:visible;
+}
+[data-hero-kind][data-hero-scroll="sticky"] .dar-page-content{
+  position:relative;
+  z-index:1;
+}
+[data-hero-kind] .dar-hero{
+  background-size:cover;
+  background-position:var(--dar-hero-focus,center center);
+}
+@media(min-width:768px){
+  [data-hero-kind]{
+    --dar-hero-smart-landing:clamp(264px,29svh,440px);
+    --dar-hero-smart-category:clamp(220px,24svh,308px);
+    --dar-hero-smart-post:clamp(198px,21svh,260px);
+  }
+}
+@media(max-height:540px) and (orientation:landscape){
+  [data-hero-kind]{
+    --dar-hero-smart-landing:clamp(145px,32svh,230px);
+    --dar-hero-smart-category:clamp(132px,29svh,200px);
+    --dar-hero-smart-post:clamp(120px,27svh,176px);
+  }
+}
