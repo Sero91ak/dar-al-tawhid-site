@@ -21,7 +21,7 @@ const bearing=p=>{
 };
 const nameOf=p=>p?.name||p?.city||"Ausgewählter Ort";
 let selected=null,source="none",heading=null,needleAngle=null,isOpen=false,searchTimer=null,searchTicket=0,request=null,liveTimer=null;
-let lastFocus=null,wasInert=false,lastLiveMessage="";
+let lastFocus=null,wasInert=false,lastLiveMessage="",session=0,gpsRequest=0,sensorRequest=0;
 const controls=document.createElement("div");controls.className="kids-salah-shortcuts";
 original.parentNode.insertBefore(controls,original);
 controls.appendChild(original);
@@ -145,6 +145,9 @@ function onOrientation(event){
  if(typeof event.webkitCompassHeading==="number"&&Number.isFinite(event.webkitCompassHeading)&&event.webkitCompassHeading>=0){
   value=norm(event.webkitCompassHeading);
   accuracy=typeof event.webkitCompassAccuracy==="number"?event.webkitCompassAccuracy:null;
+  if(accuracy!==null&&(accuracy<0||accuracy>45)){
+   message("Kompass nicht ausreichend kalibriert. Bitte das Gerät bewegen und Metall meiden.");return;
+  }
  }else if(event.absolute===true&&typeof event.alpha==="number"&&Number.isFinite(event.alpha)){
   const angle=Number(screen.orientation?.angle??window.orientation??0)||0;
   value=norm(360-event.alpha+angle);
@@ -156,13 +159,16 @@ function onOrientation(event){
  if(lastLiveMessage!==info){message(info);lastLiveMessage=info}
 }
 async function startCompass(){
+ const epoch=session,requestId=++sensorRequest;
  const Orientation=window.DeviceOrientationEvent;
  if(!Orientation){message("Kein Gerätesensor verfügbar. Die Gradzahl ab Norden bleibt nutzbar.");return}
  try{
   if(typeof Orientation.requestPermission==="function"){
    const permit=await Orientation.requestPermission();
+   if(!isOpen||epoch!==session||requestId!==sensorRequest)return;
    if(permit!=="granted"){message("Kompass nicht freigegeben. Nutze die Gradzahl ab Norden.");return}
   }
+  if(!isOpen||epoch!==session||requestId!==sensorRequest)return;
   stopCompass();
   message("Warte auf einen zuverlässigen Kompasswert …");
   window.addEventListener("deviceorientationabsolute",onOrientation,true);
@@ -173,15 +179,18 @@ async function startCompass(){
  }catch(_){message("Gerätekompass ist hier nicht verfügbar. Bitte Berechtigungen prüfen.")}
 }
 function requestGps(){
+ const epoch=session,requestId=++gpsRequest;
  if(!navigator.geolocation){message("GPS nicht verfügbar. Bitte Stadt suchen.");return}
  message("Dein Standort wird gesucht …");
  $("kqGps").disabled=true;
  navigator.geolocation.getCurrentPosition(pos=>{
-  $("kqGps").disabled=false;if(!isOpen)return;
+  if(!isOpen||epoch!==session||requestId!==gpsRequest)return;
+  $("kqGps").disabled=false;
   const p={lat:pos.coords.latitude,lon:pos.coords.longitude,name:"Mein aktueller Standort"};
-  if(selectPlace(p,"gps"))message("GPS bestimmt (±"+Math.round(pos.coords.accuracy)+" m). Jetzt kannst du den Live-Kompass starten.");
+  if(selectPlace(p,"gps"))message("GPS bestimmt"+(Number.isFinite(pos.coords.accuracy)?" (±"+Math.round(pos.coords.accuracy)+" m)":"")+". Jetzt kannst du den Live-Kompass starten.");
  },err=>{
-  $("kqGps").disabled=false;if(!isOpen)return;
+  if(!isOpen||epoch!==session||requestId!==gpsRequest)return;
+  $("kqGps").disabled=false;
   const denied=err?.code===1;
   message(denied?"Standort nicht erlaubt. Bitte in den Geräteeinstellungen erlauben oder eine Stadt suchen.":"Standort nicht erreichbar. Bitte eine Stadt auswählen oder erneut versuchen.");
  },{enableHighAccuracy:true,timeout:15000,maximumAge:15000});
@@ -225,7 +234,7 @@ async function searchCity(term){
 }
 function close(){
  if(!isOpen)return;
- isOpen=false;stopCompass();clearTimeout(searchTimer);searchTicket++;
+ isOpen=false;session++;gpsRequest++;sensorRequest++;stopCompass();clearTimeout(searchTimer);searchTicket++;
  if(request)request.abort();request=null;
  focus.hidden=true;document.body.classList.remove("kids-qibla-focus-open");
  if(app)app.inert=wasInert;
@@ -235,10 +244,10 @@ function open(){
  if(isOpen)return;
  lastFocus=document.activeElement;wasInert=Boolean(app?.inert);
  syncTheme();setDefaultPlace();heading=null;needleAngle=null;render();
- isOpen=true;focus.hidden=false;
+ isOpen=true;session++;focus.hidden=false;
  document.body.classList.add("kids-qibla-focus-open");
  if(app)app.inert=true;
- results.replaceChildren();query.value="";
+ results.replaceChildren();query.value="";$("kqGps").disabled=false;
  message("Nutze GPS oder deinen Gebetsort; Live-Kompass wird nur mit Sensorsignal aktiv.");
  $("kqClose").focus({preventScroll:true});
  // Do not trigger a new GPS permission prompt implicitly; reuse existing consent.
