@@ -123,91 +123,94 @@ def main():
          "second batch ignores fixed original count or estimated cost ceiling")
     must(all(qid in qids for qid in second_finished),
          "projected completions refer to a nonselected question")
-    # Simulate a paid request with an uncertain provider result. Its SHA is
-    # metadata ONLY: no mock MP3 and no provider network activity.
-    with tempfile.TemporaryDirectory() as temp:
-        saved_usage=stage1.USAGE
-        saved_attempts=stage1.ATTEMPTS
-        try:
-            stage1.USAGE=Path(temp)/"usage-already-backed-up.json"
-            stage1.ATTEMPTS=Path(temp)/"requests-local.json"
-            test_attempt={
-                "textSHA256":source["originalTextRecordingQueue"][0]["spokenTextSHA256"],
-                "batchId":stage1.BATCH,"status":"REQUEST_STARTED_UNCONFIRMED",
-                "startedAt":"2026-10-17T00:00:00+00:00"}
-            journal={"schemaVersion":1,"modelId":stage1.MODEL,
-                     "voiceId":stage1.VOICE,
-                     "purpose":"DO_NOT_REGENERATE_UNCERTAIN_PAID_REQUESTS",
-                     "entries":[test_attempt]}
-            stage1.durable_attempts(journal)
-            backup=json.loads(stage1.USAGE.read_text(encoding="utf-8"))
-            must(backup["requestJournal"]==journal and
-                 json.loads(stage1.ATTEMPTS.read_text(encoding="utf-8"))==journal,
-                 "uncertain paid POST journal not present in existing always-uploaded usage backup")
-            # Demonstrate that the backup alone blocks a retry even if the
-            # local journal is missing on the next runner.
-            stage1.ATTEMPTS.unlink()
+    # Once all exact originals exist, no fake request is necessary: never
+    # generate or misidentify an already-recorded text as an unpaid test.
+    if missing:
+        # Simulate a paid request with an uncertain provider result. Its SHA is
+        # metadata ONLY: no mock MP3 and no provider network activity.
+        with tempfile.TemporaryDirectory() as temp:
+            saved_usage=stage1.USAGE
+            saved_attempts=stage1.ATTEMPTS
             try:
-                stage1.prepare()
-            except RuntimeError as exc:
-                must("NEVER REBUY" in str(exc),
-                     "unconfirmed billed V4 request was not blocked as previously attempted")
-            else:
-                raise AssertionError("An uncertain original V4 POST was allowed to be bought twice")
-        finally:
-            stage1.USAGE=saved_usage
-            stage1.ATTEMPTS=saved_attempts
+                stage1.USAGE=Path(temp)/"usage-already-backed-up.json"
+                stage1.ATTEMPTS=Path(temp)/"requests-local.json"
+                test_attempt={
+                    "textSHA256":missing[0]["spokenTextSHA256"],
+                    "batchId":stage1.BATCH,"status":"REQUEST_STARTED_UNCONFIRMED",
+                    "startedAt":"2026-10-17T00:00:00+00:00"}
+                journal={"schemaVersion":1,"modelId":stage1.MODEL,
+                         "voiceId":stage1.VOICE,
+                         "purpose":"DO_NOT_REGENERATE_UNCERTAIN_PAID_REQUESTS",
+                         "entries":[test_attempt]}
+                stage1.durable_attempts(journal)
+                backup=json.loads(stage1.USAGE.read_text(encoding="utf-8"))
+                must(backup["requestJournal"]==journal and
+                     json.loads(stage1.ATTEMPTS.read_text(encoding="utf-8"))==journal,
+                     "uncertain paid POST journal not present in existing always-uploaded usage backup")
+                # Demonstrate that the backup alone blocks a retry even if the
+                # local journal is missing on the next runner.
+                stage1.ATTEMPTS.unlink()
+                try:
+                    stage1.prepare()
+                except RuntimeError as exc:
+                    must("NEVER REBUY" in str(exc),
+                         "unconfirmed billed V4 request was not blocked as previously attempted")
+                else:
+                    raise AssertionError("An uncertain original V4 POST was allowed to be bought twice")
+            finally:
+                stage1.USAGE=saved_usage
+                stage1.ATTEMPTS=saved_attempts
 
-    # Checkpoint requires the real GitHub review runner and cannot silently
-    # continue to ElevenLabs if the remote commit is not possible.
-    original_git=stage1.subprocess.run
-    initial_environ=dict(os.environ)
-    calls=[]
-    def fake_git(args,**kwargs):
-        calls.append(args)
-        return SimpleNamespace(returncode=0,
-            stdout=("kids/data/quiz-v4-450-original-clip-registry.json\n"
-                    if args[1:3]==["diff","--cached"] else ""),stderr="")
-    try:
-        stage1.subprocess.run=fake_git
-        os.environ.pop("GITHUB_ACTIONS",None)
-        try:
-            stage1.persist_remote_paid_checkpoint(stage1.REG,purpose="test-block")
-        except RuntimeError as exc:
-            must("checkpoint-capable GitHub review runner" in str(exc),
-                 "untrusted local execution was not rejected")
-        else:
-            raise AssertionError("Paid audio could proceed outside the review runner")
-        must(not calls,"called GitHub from an untrusted non-workflow context")
-        os.environ["GITHUB_ACTIONS"]="true"
-        os.environ["GITHUB_REF_NAME"]="review/kids-quiz-v4-batch-001-020-20261014"
-        stage1.persist_remote_paid_checkpoint(stage1.REG,purpose="test-checkpoint")
-        must(any(args[1]=="commit" for args in calls)
-             and any(args[1]=="push" for args in calls),
-             "real paid GitHub checkpoint must commit and push before TTS")
-        calls.clear()
-        def failed_git(args,**kwargs):
+        # Checkpoint requires the real GitHub review runner and cannot silently
+        # continue to ElevenLabs if the remote commit is not possible.
+        original_git=stage1.subprocess.run
+        initial_environ=dict(os.environ)
+        calls=[]
+        def fake_git(args,**kwargs):
             calls.append(args)
-            if args[1]=="push":
-                return SimpleNamespace(returncode=1,stdout="",stderr="REMOTE_REJECTED")
-            return fake_git(args,**kwargs)
-        stage1.subprocess.run=failed_git
+            return SimpleNamespace(returncode=0,
+                stdout=("kids/data/quiz-v4-450-original-clip-registry.json\n"
+                        if args[1:3]==["diff","--cached"] else ""),stderr="")
         try:
-            stage1.persist_remote_paid_checkpoint(stage1.REG,purpose="test-deny")
-        except RuntimeError as exc:
-            must("GitHub paid original checkpoint failed" in str(exc),
-                 "failed paid checkpoint should stop the next provider POST")
-        else:
-            raise AssertionError("Remote push failure did not block new ElevenLabs charges")
-    finally:
-        stage1.subprocess.run=original_git
-        os.environ.clear()
-        os.environ.update(initial_environ)
-    generator_source=Path(stage1.__file__).read_text(encoding="utf-8")
-    must(generator_source.index('purpose="request-"+sha(text)[:12]')<
-         generator_source.index('audio,request_id=original_mp3(key,text)')<
-         generator_source.index('purpose="original-"+sha(text)[:12]'),
-         "remote request checkpoint must precede TTS, and original MP3 checkpoint follow it")
+            stage1.subprocess.run=fake_git
+            os.environ.pop("GITHUB_ACTIONS",None)
+            try:
+                stage1.persist_remote_paid_checkpoint(stage1.REG,purpose="test-block")
+            except RuntimeError as exc:
+                must("checkpoint-capable GitHub review runner" in str(exc),
+                     "untrusted local execution was not rejected")
+            else:
+                raise AssertionError("Paid audio could proceed outside the review runner")
+            must(not calls,"called GitHub from an untrusted non-workflow context")
+            os.environ["GITHUB_ACTIONS"]="true"
+            os.environ["GITHUB_REF_NAME"]="review/kids-quiz-v4-batch-001-020-20261014"
+            stage1.persist_remote_paid_checkpoint(stage1.REG,purpose="test-checkpoint")
+            must(any(args[1]=="commit" for args in calls)
+                 and any(args[1]=="push" for args in calls),
+                 "real paid GitHub checkpoint must commit and push before TTS")
+            calls.clear()
+            def failed_git(args,**kwargs):
+                calls.append(args)
+                if args[1]=="push":
+                    return SimpleNamespace(returncode=1,stdout="",stderr="REMOTE_REJECTED")
+                return fake_git(args,**kwargs)
+            stage1.subprocess.run=failed_git
+            try:
+                stage1.persist_remote_paid_checkpoint(stage1.REG,purpose="test-deny")
+            except RuntimeError as exc:
+                must("GitHub paid original checkpoint failed" in str(exc),
+                     "failed paid checkpoint should stop the next provider POST")
+            else:
+                raise AssertionError("Remote push failure did not block new ElevenLabs charges")
+        finally:
+            stage1.subprocess.run=original_git
+            os.environ.clear()
+            os.environ.update(initial_environ)
+        generator_source=Path(stage1.__file__).read_text(encoding="utf-8")
+        must(generator_source.index('purpose="request-"+sha(text)[:12]')<
+             generator_source.index('audio,request_id=original_mp3(key,text)')<
+             generator_source.index('purpose="original-"+sha(text)[:12]'),
+             "remote request checkpoint must precede TTS, and original MP3 checkpoint follow it")
 
     # Even with both manual YES inputs, a wrong exact-batch fingerprint must
     # stop the producer BEFORE obtaining provider balance or sending paid TTS.
