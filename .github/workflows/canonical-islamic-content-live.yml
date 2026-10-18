@@ -106,14 +106,17 @@ jobs:
           AUTOPUBLISH_REPORT_PATH: ${{ runner.temp }}/adult-publication.json
         run: |
           created="$(node -e "const f=require('fs');const p=process.env.AUTOPUBLISH_REPORT_PATH;console.log(f.existsSync(p)?(JSON.parse(f.readFileSync(p)).created||[]).length:0)")"
-          if [ "$created" -eq 0 ]; then
-            echo "Kein neuer Apple-TV-Datensatz – kein zusätzlicher Commit."
-            exit 0
-          fi
           git config user.name "dar-al-tawhid-content-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apple-tv/hadith/series apple-tv/hadith/catalog.json apple-tv/hadith/manifest.json apple-tv/hadith/sync-status.json
-          git diff --cached --quiet && exit 0
+          # New records and updated remote catalogs are one atomic GitHub content push.
+          # The screensaver catalog/index must not lag behind the Hadith source catalog.
+          # Rebuild timestamps are now stable when the content fingerprint is unchanged,
+          # so the self-triggered follow-up workflow becomes a no-op (no deploy loop).
+          git add apple-tv/hadith/series apple-tv/hadith/catalog.json apple-tv/hadith/manifest.json apple-tv/hadith/sync-status.json apple-tv/screensaver/catalog.json apple-tv/screensaver/entries-index.json
+          if git diff --cached --quiet; then
+            echo "Kein neuer Apple-TV-Datensatz und kein Katalog-Drift – kein zusätzlicher Commit. Created: $created"
+            exit 0
+          fi
           git commit -m "Apple TV: neue geprüfte Erwachsenen-Aussagen automatisch synchronisiert"
           git fetch origin main
           git -c rebase.autoStash=true rebase origin/main
