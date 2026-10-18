@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "generated": "2026-10-17T08:52:18.806Z",
+  "generated": "2026-10-18T13:40:56.000Z",
   "pushes": {
     "wahrer-iman-zeigt-sich-in-den-taten-452": {
       "postId": "wahrer-iman-zeigt-sich-in-den-taten-452",
@@ -1492,6 +1492,58 @@
           }
         ],
         "note": "Original automated GitHub notification attempt targeted Subscribed Users and returned empty id with error: All included players are not subscribed. No provider send ID in that attempt. Manual standard DAR_PUSH notification successfully accepted; no duplicate DAR_PUSH send required. Verified provider statistics, not device open confirmations."
+      }
+    },
+    "sufyan-schmueckt-wissen-nicht-sich-selbst-20261018-478": {
+      "kind": "post",
+      "postId": "sufyan-schmueckt-wissen-nicht-sich-selbst-20261018-478",
+      "filename": "sufyan-schmueckt-wissen-nicht-sich-selbst-20261018.md",
+      "postPath": "content/posts/sufyan-schmueckt-wissen-nicht-sich-selbst-20261018.md",
+      "postTitle": "📖 Wissen statt Selbstdarstellung",
+      "sourcePage": "https://dar-al-tawhid.de/q/45/",
+      "createdAt": "2026-10-18T13:40:56.000Z",
+      "updatedAt": "2026-10-18T13:40:56.000Z",
+      "status": "sent",
+      "pushApproved": true,
+      "pushApprovedAt": "2026-10-18T13:40:56.000Z",
+      "sentAt": "2026-10-18T13:40:56.000Z",
+      "lastError": "",
+      "approvalOrigin": "User explicitly approved exact Sufyān ath-Thawrī single post, Q45, existing learning page design and all-inclusive live + DAR_PUSH on 2026-10-18.",
+      "liveCheck": {
+        "ok": true,
+        "checkedAt": "2026-10-18T13:39:42.337Z",
+        "source": "Cloudflare visitor GitHub Actions 39132340548 and OneSignal post workflow 39132340570",
+        "diagnosis": "Visitor production deploy completed success. APP_LIVE_PARITY OK, 45 public sources Q45 live OK, post index/public Markdown/visitor deep link all confirmed by automated live gates."
+      },
+      "pushResult": {
+        "provider": "OneSignal",
+        "notificationId": "ebaf5102-3df5-4604-a2af-85bc1afa3845",
+        "target": "segment:DAR_PUSH",
+        "targetUrl": "https://dar-al-tawhid.de/?post=sufyan-schmueckt-wissen-nicht-sich-selbst-20261018-478#post/sufyan-schmueckt-wissen-nicht-sich-selbst-20261018-478",
+        "sourcePage": "https://dar-al-tawhid.de/q/45/",
+        "idempotencyKey": "e5a1f4c2-06b8-486f-b361-1c010662d022",
+        "successful": 95,
+        "failed": 0,
+        "errored": 0,
+        "confirmedReceived": 0,
+        "channelResults": [
+          {
+            "channel": "ios",
+            "successful": 80,
+            "failed": 0
+          },
+          {
+            "channel": "safari_web_push",
+            "successful": 10,
+            "failed": 0
+          },
+          {
+            "channel": "chrome_web_push",
+            "successful": 5,
+            "failed": 0
+          }
+        ],
+        "note": "Automatic GitHub action attempted Subscribed Users but provider returned empty id and error All included players are not subscribed. No provider send ID from that attempt. User-authorized subsequent single DAR_PUSH submission accepted (OneSignal returned real ID). Provider successful indicates accepted/processed, not device opening confirmation."
       }
     }
   }
