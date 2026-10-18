@@ -158,12 +158,15 @@
       "id": "frauen-scroll-reset-safe-preview-20261018",
       "at": "2026-10-18T10:12:00+02:00",
       "approvedBy": "user-explicit-continue-repair-until-all-frauen-hero-scroll-faults-eliminated-20261018",
-      "reason": "Read-only, non-live preview of versioned Frauen adapter. Preserve immutable original Frauen files and all live/test lanes; stage code/tests only, no production injection.",
+      "reason": "Read-only, non-live preview of versioned Frauen adapter. Preserve immutable original Frauen files and all live/test lanes; stage code/tests only, no production injection. Extend preview with DOM-preserving sticky Hero+search CSS and ResizeObserver diagnostics, still no live injection.",
       "paths": [
         "assets/frauen/frauen-live-adapter-safe-v1.js",
         "scripts/test-frauen-scroll-reset-safe.cjs",
         ".github/workflows/frauen-scroll-reset-safe-preview.yml",
-        "content/admin/change-scope-lock.json"
+        "content/admin/change-scope-lock.json",
+        "assets/frauen/frauen-sticky-safe-v2.css",
+        "assets/frauen/frauen-sticky-safe-v2.js",
+        "scripts/test-frauen-sticky-safe-v2.cjs"
       ],
       "expiresAt": "2026-11-08T23:59:00.000Z"
     },
