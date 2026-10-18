@@ -24,6 +24,10 @@ function measured(){
   position:c.position,backgroundImage:c.backgroundImage.slice(0,280),z:c.zIndex};};
  return {scroll:window.scrollY,documentMax:document.documentElement.scrollHeight-innerHeight,hero:sty(hero),
   search:sty(search),containerOverflow:app?getComputedStyle(app).overflowY:null,
+  bodyOverflow:getComputedStyle(document.body).overflowY,bodyClass:document.body.className,
+  heroParent:hero?.parentElement?.className,searchParent:search?.parentElement?.className,
+  shellKids:shell?[...shell.children].slice(0,6).map(x=>String(x.className).slice(0,120)):[],
+  stickyJS:!!window.DARFrauenStickySafeV2,
   shellOptIn:shell?.getAttribute("data-dar-frauen-sticky-safe")||"",hvar:shell?.style.getPropertyValue("--dar-frauen-sticky-hero-height")||"",
   stageCount:document.querySelectorAll(".dar-immersive-hero-stage").length,
   photoCount:document.querySelectorAll("#appView .frauen-library-hero").length,
@@ -53,7 +57,7 @@ function measured(){
    await page.addScriptTag({content:script});
    await page.waitForTimeout(220);
    const ready=await page.evaluate(measured);
-   assert.equal(ready.shellOptIn,"1",cfg.name+": no opt-in measured");
+   assert.equal(ready.shellOptIn,"1",cfg.name+": no opt-in measured "+JSON.stringify(ready).slice(0,1400));
    assert.equal(ready.hero.position,"sticky",cfg.name+": background not sticky");
    assert.equal(ready.search.position,"sticky",cfg.name+": search not sticky");
    assert.ok(ready.widthOverflow<=2,cfg.name+": horizontal overflow");
@@ -69,7 +73,7 @@ function measured(){
        searchSame:beforeSearch===document.querySelector("#appView .frauen-library-search-wrap,#appView .frauen-library-list-controls")};
    });
    assert.ok(transition.y>120,cfg.name+": scroll not working");
-   assert.ok(Math.abs(transition.heroTop)<=8,cfg.name+": hero scrolls away "+JSON.stringify(transition));
+   assert.ok(Math.abs(transition.heroTop)<=8,cfg.name+": hero scrolls away "+JSON.stringify({transition,ready}).slice(0,1900));
    assert.ok(Math.abs(transition.searchDelta+31)<=18,cfg.name+": search detached from hero "+JSON.stringify(transition));
    assert.ok(transition.heroSame&&transition.searchSame,cfg.name+": DOM children replaced during sticky scroll");
    await page.screenshot({path:path.join(output,cfg.name+"-scroll.png")});
