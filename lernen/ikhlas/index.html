@@ -29,19 +29,141 @@ button.secondary{border:1px solid var(--line);background:var(--raised);color:var
 @media(prefers-color-scheme:light){:root{color-scheme:light;--bg:#f6f3eb;--surface:#fffdf7;--raised:#ede9df;--line:#bcb7a8;--text:#22302e;--muted:#536460;--gold:#725d36;--green:#306749}body{background:radial-gradient(ellipse 85% 26% at 50% 0%,#e1dfcf 0%,transparent 95%),var(--bg)}.panel{background:#fffdf7;box-shadow:0 10px 30px #1b332018}.choice{background:#f9f7f0;color:var(--text);border-color:#bcb7a8}.choice.selected{background:#ede7d7}.choice.correct{background:#dbede1}.choice.incorrect{background:#f3e2d8}.feedback{background:#f2efe5;color:var(--text)}button.primary{background:#927547;color:#fff}.emphasis{color:#886327}}
 @media(max-width:390px){main{width:calc(100% - 24px)}.panel{padding:19px}.meta{font-size:.73rem}.brand{font-size:.69rem}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+
+/* LEARNING_REFINEMENT_Q45_V1 — isolated Ikhlas lesson design; quiz data unchanged */
+:root{
+  --lr-ink:#f7f3e9;--lr-muted:#c1cec8;--lr-soft:#aebdb5;--lr-gold:#e2c894;
+  --lr-line:rgba(218,194,146,.25);--lr-card:#142321;--lr-card2:#1b2d29;--lr-good:#aee0bf;
+}
+html{scroll-padding-top:24px}
+body{
+  background:
+    radial-gradient(ellipse 76% 23% at 50% 0%,rgba(194,172,118,.19),transparent 88%),
+    radial-gradient(ellipse 70% 25% at 100% 28%,rgba(55,113,90,.18),transparent 88%),
+    linear-gradient(180deg,#0e1d1a,#111b19 62%,#0c1715);
+  color:var(--lr-ink);font-size:16px;line-height:1.72;
+}
+main{width:min(100% - 28px,780px);padding-top:max(24px,env(safe-area-inset-top));}
+.learning-masthead{position:relative;padding:23px 12px 0;text-align:center}
+.learning-masthead::before{
+  content:"";position:absolute;z-index:-1;left:50%;top:-42px;transform:translateX(-50%);
+  width:min(490px,90vw);height:260px;
+  border-radius:47% 47% 20% 20% / 62% 62% 20% 20%;
+  border:1px solid rgba(218,194,146,.13);
+  background:radial-gradient(ellipse at 50% 28%,rgba(218,194,146,.13),transparent 70%);
+  pointer-events:none;
+}
+.learning-mark{
+  width:89px;height:89px;margin:0 auto 11px;
+  display:grid;place-items:center;border-radius:50%;
+  border:1px solid rgba(235,208,154,.48);
+  background:radial-gradient(circle at 50% 25%,rgba(247,218,159,.15),rgba(23,44,38,.2));
+  box-shadow:0 0 0 7px rgba(218,194,146,.045),0 12px 35px rgba(0,0,0,.18)
+}
+.learning-mark .logo{width:72px;height:72px;object-fit:contain;margin:0;border-radius:50%}
+.brand{font-family:Georgia,"Times New Roman",serif;color:#ebd3a0;font-size:clamp(17px,4.3vw,22px);line-height:1.25;font-weight:700;letter-spacing:.13em}
+.learning-sign{margin:4px 0 1px;font-family:"Snell Roundhand","Apple Chancery","Segoe Script",cursive;font-size:clamp(17px,4.8vw,24px);line-height:1.3;color:#e5ca94}
+.learning-ornament{display:flex;align-items:center;justify-content:center;gap:10px;color:#d6b979;margin:9px auto 8px;font-size:16px}
+.learning-ornament::before,.learning-ornament::after{content:"";width:min(92px,24vw);height:1px;background:linear-gradient(90deg,transparent,rgba(220,187,112,.62))}
+.learning-ornament::after{transform:rotate(180deg)}
+.intro{position:relative;isolation:isolate;text-align:center;padding:18px 12px 18px}
+.intro::before{content:"";position:absolute;z-index:-1;inset:0 4% 0;border-radius:35% 35% 10px 10px/26% 26% 10px 10px;background:linear-gradient(180deg,rgba(224,197,147,.05),transparent)}
+.pill{border:1px solid rgba(226,200,148,.5);background:rgba(226,200,148,.09);color:#eed8ae;font-weight:700;letter-spacing:.03em;font-size:.79rem;padding:8px 15px}
+.kicker{margin-top:21px;color:#dec994;font-size:.73rem;letter-spacing:.19em}
+h1{color:var(--lr-ink);font-size:clamp(2rem,6.6vw,3.55rem);line-height:1.14;letter-spacing:-.028em;max-width:690px;margin:8px auto 14px;overflow-wrap:anywhere}
+h1 em{display:inline;font-weight:450;font-family:Georgia,"Times New Roman",serif;color:#f0d8aa;font-style:normal}
+.learning-dash{color:#a98f61;font-weight:400}
+.lede{color:#d6dfd7;font-size:clamp(.99rem,2.65vw,1.1rem);line-height:1.75;max-width:600px;margin-bottom:24px}
+.learning-overview{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid var(--lr-line);border-radius:18px;overflow:hidden;background:rgba(29,48,42,.76);max-width:590px;margin:0 auto 10px}
+.learning-overview>div{padding:15px 5px 13px;min-width:0;text-align:center}
+.learning-overview>div+div{border-left:1px solid var(--lr-line)}
+.overview-no{display:block;color:#e4c995;font-weight:750;font-size:1.28rem;line-height:1.15;font-family:Georgia,"Times New Roman",serif}
+.overview-label{display:block;color:#d5ded5;font-size:clamp(.66rem,2.3vw,.78rem);line-height:1.3;margin-top:5px}
+.meta{padding:1px 3px 0;color:#d2dfd4;font-size:.81rem;font-weight:650}
+.progress{margin:10px 0 24px;height:8px;background:#344c42;border:1px solid rgba(221,197,151,.23)}
+.progress>div{background:linear-gradient(90deg,#b49455,#efd29e);border-radius:20px}
+.panel{position:relative;overflow:hidden;border:1px solid rgba(226,200,148,.25);
+  background:linear-gradient(150deg,#24362f,#14241f 68%);border-radius:24px;
+  padding:clamp(22px,5.6vw,38px);box-shadow:0 18px 40px rgba(0,0,0,.17)}
+.panel::before{content:"";position:absolute;right:-85px;top:-95px;width:220px;height:220px;border-radius:50%;border:1px solid rgba(224,194,140,.1);pointer-events:none}
+.panel h2{color:#fff8e8;letter-spacing:-.025em;font-size:clamp(1.58rem,5.1vw,2.3rem)}
+.panel p,.panel .help{color:#dfe9df}
+.panel .quote{color:#f7f1e1;font-size:clamp(1.17rem,4.2vw,1.55rem);line-height:1.74;padding:4px 0 5px}
+.panel .quote strong,.panel strong{color:#f2d8a3;font-weight:800}
+.panel .source{color:#cbd8cb;border-top-color:rgba(218,194,146,.24);font-size:.86rem;overflow-wrap:anywhere}
+.panel .source a{color:#efd39c;text-decoration:underline;text-underline-offset:3px}
+.question-count{color:#f2ce90;letter-spacing:.16em}
+.choice{background:#1a3029;border-color:#587367;color:#f6f5e9;border-radius:14px;padding:16px 18px;min-height:54px;font-size:1rem}
+.choice:hover:not(:disabled){background:#27463a;border-color:#d7bd82}
+.choice.selected{background:#3c4a36;border-color:#efcf8d}
+.choice.correct{background:#1e503b;color:#fff8e8;border-color:#9ce4ba}
+.choice.incorrect{background:#573a32;color:#fff5eb;border-color:#e2a694}
+.feedback{background:#2e3b33;color:#f7f4e6;border-left-color:#edca8f}
+.feedback.good{border-left-color:#a4deb9}
+button.primary{background:linear-gradient(115deg,#e3c78c,#f5dcaa);color:#202719;box-shadow:0 6px 18px rgba(0,0,0,.15);padding:13px 23px;font-weight:850}
+button.primary:hover{filter:brightness(1.06)}
+button.secondary,.actions a.secondary{background:#2f433a;border-color:#829780;color:#f5f1e6;text-decoration:none}
+input[type="checkbox"]{accent-color:#d1b77b}
+.checkline{border-bottom-color:rgba(224,198,142,.17)}
+.note{border-color:rgba(224,198,142,.34);color:#e1ebdf;background:rgba(255,255,255,.035)}
+.footer{color:#c0cfc4;font-size:.83rem;line-height:1.8}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #ead49c;outline-offset:3px}
+@media(prefers-color-scheme:light){
+  body{background:radial-gradient(ellipse at 50% 0%,rgba(208,184,133,.27),transparent 32%),linear-gradient(180deg,#f7f4ed,#f4f1e8 68%,#ede7db);color:#25342d}
+  .learning-masthead::before{background:radial-gradient(ellipse at 50% 28%,rgba(165,126,67,.09),transparent 70%);border-color:rgba(130,100,58,.18)}
+  .learning-mark{background:#fffdf7;border-color:#9b8459;box-shadow:0 0 0 7px rgba(175,137,80,.08)}
+  .brand,.learning-sign{color:#634e2c}.learning-ornament{color:#87703f}
+  .pill{background:#f3e8d4;border-color:#a48a5d;color:#5a4527}
+  .kicker{color:#715733}
+  h1{color:#25342d}h1 em{color:#785d32}.lede{color:#40594d}
+  .learning-overview{background:#fffaf0;border-color:#a99e89}
+  .learning-overview>div+div{border-left-color:#c2b6a1}
+  .overview-no{color:#745829}.overview-label{color:#3b4d42}
+  .meta{color:#3c5148}.progress{background:#d7d6c8;border-color:#aa9a7b}
+  .panel{background:linear-gradient(145deg,#fffdf8,#f7f3e8);border-color:#c3b79c;box-shadow:0 16px 36px rgba(35,47,40,.12)}
+  .panel h2{color:#25342d}.panel p,.panel .help{color:#344c40}
+  .panel .quote{color:#283d33}.panel .quote strong,.panel strong{color:#644720}
+  .panel .source{color:#44574c;border-top-color:#d2c8b6}.panel .source a{color:#64471f}
+  .question-count{color:#775623}
+  .choice{background:#fffcf6;color:#263a30;border-color:#a9aa99}
+  .choice:hover:not(:disabled){background:#e9e9dc;border-color:#745d38}
+  .choice.selected{background:#ebdfc4;border-color:#8f6c33}
+  .choice.correct{background:#d8eddb;color:#20382b;border-color:#548767}
+  .choice.incorrect{background:#f0d9d1;color:#51352e;border-color:#ad7968}
+  .feedback{background:#eee8d6;color:#24392d}.feedback.good{border-left-color:#47865e}
+  button.secondary,.actions a.secondary{background:#f3eee3;color:#334b3a;border-color:#998a70}
+  .note{color:#334c3e;background:#f7f3e8;border-color:#a89a79}
+  .footer{color:#516459}
+}
+@media(max-width:410px){main{width:calc(100% - 22px)}
+  .learning-overview>div{padding:13px 4px}
+  .panel{padding:21px}
+  .intro{padding:12px 2px 18px}
+  h1{font-size:clamp(1.85rem,7.2vw,2.35rem)}
+  .meta{font-size:.76rem}
+}
+@media(prefers-reduced-motion:reduce){.progress>div,.panel,.choice{transition:none!important}}
+
 </style>
 </head>
 <body>
 <main>
-<header>
-<img class="logo" src="/app-icon-512.png" width="64" height="64" alt="DĀR AL TAWḤĪD" loading="eager">
-<p class="brand">DĀR AL TAWḤĪD · WISSEN & PRAXIS</p>
+<header class="learning-masthead">
+<div class="learning-mark"><img class="logo" src="/watermark-my-logo-full.png" width="84" height="84" alt="DĀR AL TAWḤĪD Logo" loading="eager"></div>
+<p class="brand">DĀR AL TAWḤĪD</p>
+<p class="learning-sign">by Serhat Abu Malik</p>
+<div class="learning-ornament" aria-hidden="true">✦</div>
 </header>
 <div class="intro">
-<span class="pill">Frei zugänglich · Ohne Anmeldung</span>
-<p class="kicker">Selbstlern-Einheit</p>
-<h1>𝐈𝐤𝐡𝐥āṣ – <em>auf­richtig</em> handeln</h1>
-<p class="lede">Eine kurze Lerneinheit über die Absicht im Herzen und das Handeln gemäß der Sunnah – mit vier Fragen und einer dreitägigen Übung.</p>
+<span class="pill">Unentgeltlich · Ohne Anmeldung</span>
+<p class="kicker">Wissen · Reflexion · Praxis</p>
+<h1>𝐈𝐤𝐡𝐥āṣ <span class="learning-dash">—</span><em> aufrichtig handeln</em></h1>
+<p class="lede">Die Absicht im Herzen und das Handeln gemäß der Sunnah: eine ruhige Lerneinheit, um beide Grundlagen bewusst zu betrachten.</p>
+<div class="learning-overview" aria-label="Aufbau der Lerneinheit">
+<div><span class="overview-no">01</span><span class="overview-label">Grundlage</span></div>
+<div><span class="overview-no">04</span><span class="overview-label">Verständnisfragen</span></div>
+<div><span class="overview-no">03</span><span class="overview-label">Tage Selbstprüfung</span></div>
+</div>
 </div>
 <div class="meta"><span id="step-label">Einführung</span><span id="percent-label">0 % abgeschlossen</span></div>
 <div class="progress" role="progressbar" aria-label="Lernfortschritt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progress"><div id="progress-fill"></div></div>

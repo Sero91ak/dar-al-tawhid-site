@@ -8412,6 +8412,24 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
+      "id": "sufyan-schmueckt-wissen-q45-post478-learning-polish-20261018",
+      "at": "2026-10-18T14:37:00+02:00",
+      "approvedBy": "user-explicit-create-sufyan-source-and-design-existing-learning-page-then-push-live-adult-DAR_PUSH-20261018",
+      "reason": "User approved exact previously drafted Sufyan ath-Thawri statement + exact Fazit as single adult post. Source evidence and all explanation only on separate newly numbered Q45 card, preserve existing learning quiz content while locally improving its design. Explicit full publishing and adult notification DAR_PUSH after verified live deploy. No Kids, native iOS, shared theme, push-code or prayer changes. Public Quellenbibliothek snapshots must be synchronized atomically with Q registry and Q45; includes only the two synced catalog files. Minimal source-library test-only correction: its cache assertion expects obsolete style version -1 although the existing library already references version -2; align assertion to deployed version without changing CSS or UI.",
+      "paths": [
+        "q/45/index.html",
+        "q/_registry/shortlinks.json",
+        "content/posts/sufyan-schmueckt-wissen-nicht-sich-selbst-20261018.md",
+        "content/posts/posts-index.json",
+        "lernen/ikhlas/index.html",
+        "content/admin/change-scope-lock.json",
+        "quellen/index.html",
+        "quellen/shortlinks.json",
+        "scripts/check-quellen-client.cjs"
+      ],
+      "expiresAt": "2026-10-26T23:59:00.000Z"
     }
   ],
   "enabled": true
