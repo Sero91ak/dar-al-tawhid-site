@@ -224,7 +224,7 @@
   });
   function openNotificationDestination() {
     const requested = new URL(location.href).searchParams.get("view");
-    if (!["quiz", "learning", "stories", "parents"].includes(requested)) return;
+    if (!["quiz", "learning", "stories", "parents", "prayer"].includes(requested)) return;
     let attempts = 0;
     const waitForKidsUI = () => {
       if (document.getElementById("profileJoin")?.hidden === false) return;
@@ -232,7 +232,8 @@
         quiz: "#openQuizButton",
         learning: "[data-academy-open=\"1\"]",
         stories: ".bottom-nav .nav-btn[data-target=\"stories\"]",
-        parents: ".bottom-nav .nav-btn[data-target=\"parents\"]"
+        parents: ".bottom-nav .nav-btn[data-target=\"parents\"]",
+        prayer: "#kidsSalahOpenDay"
       }[requested];
       const button = document.querySelector(selector);
       if (!button) {
