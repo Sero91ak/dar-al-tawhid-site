@@ -33,7 +33,7 @@ const more=LINKS.slice(4).map((x,i)=>'<button class="dv3-more-link" type="button
 const swatches=THEMES.map(([k,v])=>'<button type="button" data-dv3-theme="'+k+'" aria-pressed="false"><span class="dv3-color dv3-color--'+k+'"></span>'+esc(v)+'</button>').join("");
 return '<div id="dv3Home" class="dv3-home" data-v3-version="3.1">'+
   '<div class="dv3-hometitle"><div><small>WILLKOMMEN IM DĀR</small><h2>Startseite</h2></div><button class="dv3-accountlink" type="button" data-dv3-nav="account" aria-label="Konto öffnen oder registrieren">'+icon("lock")+'<span>Konto / Registrieren</span><b>→</b></button></div>'+
-  '<div class="dv3-services"><div class="dv3-services-top"><span>HEUTE IM ÜBERBLICK</span><button type="button" data-dv3-nav="prayer">Gebetszeiten öffnen →</button></div><div id="dv3Weather" class="dv3-weather" role="status" aria-live="polite">Wetterdaten werden geladen …</div></div>'+
+  '<div id="dv3Weather" class="dv3-weather" role="status" aria-live="polite">Wetterdaten werden geladen …</div>'+
   '<div class="dv3-search-box"><label class="dv3-search-label" for="homeSearchInput"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7"/><path d="m16 16 5 5"/></svg></label><input id="homeSearchInput" type="search" autocomplete="off" enterkeyhint="search" placeholder="Beiträge, Gelehrte, Bücher durchsuchen …" aria-label="Beiträge, Gelehrte und Bücher suchen"><button type="button" id="dv3SearchClear" aria-label="Suche löschen" hidden>×</button></div>'+
   '<button type="button" class="dv3-tawhid" data-dv3-nav="tawhid-guide"><span class="dv3-ornament" aria-hidden="true"></span><span class="dv3-kicker">GRUNDLAGEN DES GLAUBENS</span><strong>Tawḥīd &amp; ʿAqīdah</strong><span class="dv3-description">Den Glauben verstehen – mit Qurʾān, Sunnah und Aussagen der frühen Gelehrten.</span><span class="dv3-tawhid-footer">Zum Wissensbereich <b>→</b></span></button>'+
   '<section class="dv3-section" aria-labelledby="dv3LatestTitle"><div class="dv3-section-title"><h3 id="dv3LatestTitle">Neueste Beiträge</h3><button type="button" data-dv3-nav="recent">Alle lesen →</button></div><div id="dv3Latest" class="dv3-posts" aria-live="polite"><span>Beiträge werden geladen …</span></div></section>'+
@@ -76,6 +76,8 @@ function rearrangeHeader(){
  const greet=h.querySelector(".hero-text");
  const prayer=h.querySelector("#headerPrayerStatus");
  if(greet&&prayer&&greet.nextElementSibling!==prayer)h.insertBefore(greet,prayer);
+ const weather=document.getElementById("dv3Weather");
+ if(weather&&prayer&&weather.previousElementSibling!==prayer)prayer.after(weather);
  const root=document.documentElement;
  root.classList.add("dar-home-v3");
 }
@@ -118,6 +120,7 @@ function sync(){
    copy.remove();
   }
   document.getElementById("dv3HeaderActions")?.remove();
+  document.getElementById("dv3Weather")?.remove();
   const h=document.querySelector(".top-shell .header");
   const pr=h?.querySelector("#headerPrayerStatus");
   const greeting=h?.querySelector(".hero-text");
