@@ -3270,12 +3270,15 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   return null
  }
  function reversePrayerPlace(lat,lon){
-  return fetch("https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+encodeURIComponent(lat)+"&lon="+encodeURIComponent(lon)+"&zoom=10&addressdetails=1&accept-language=de",{headers:{"Accept":"application/json"}})
-   .then(function(r){if(!r.ok)throw new Error("reverse "+r.status);return r.json()})
-   .then(function(d){
-    var a=d&&d.address||{};
-    return a.city||a.town||a.village||a.municipality||a.city_district||a.county||"";
-   }).catch(function(){return ""})
+  var bdc="https://api.bigdatacloud.net/data/reverse-geocode-client?latitude="+encodeURIComponent(lat)+"&longitude="+encodeURIComponent(lon)+"&localityLanguage=de";
+  return fetch(bdc,{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("reverse_primary_"+r.status);return r.json()})
+   .then(function(d){var city=String(d.locality||d.city||"").trim();if(!city)throw Error("reverse_primary_no_city");return city})
+   .catch(function(){
+    return fetch("https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+encodeURIComponent(lat)+"&lon="+encodeURIComponent(lon)+"&zoom=10&addressdetails=1&accept-language=de",{cache:"no-store"})
+     .then(function(r){if(!r.ok)throw Error("reverse_fallback_"+r.status);return r.json()})
+     .then(function(d){var a=d&&d.address||{};return a.city||a.town||a.village||a.municipality||a.city_district||a.county||""})
+     .catch(function(){return ""});
+   });
  }
  function saveDesktopPrayerLoc(v,mode){
   try{localStorage.setItem("darDesktopPrayerLocationV1",JSON.stringify(v))}catch(e){}
