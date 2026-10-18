@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "title": "DĀR AL TAWḤĪD Zentrum – fortlaufende kanonische Ḥadīṯ/Šarḥ/Āṯār und Qurʾān/Tadabbur-Arbeit",
+  "effectiveDate": "2026-10-18",
+  "owner": "DĀR AL TAWḤĪD Zentrale (bestehende stündliche Automatik)",
+  "persistentAcrossChats": true,
+  "centralAutomation": "DĀR AL TAWḤĪD Zentrale",
+  "doNotCreateSecondAutomation": true,
+  "tracks": {
+    "hadithSharh": {
+      "active": true,
+      "continuous": true,
+      "dataset": "apple-tv/hadith/series/",
+      "catalog": "apple-tv/hadith/catalog.json",
+      "manifest": "apple-tv/hadith/manifest.json",
+      "firstPriority": "Old genuine open Šarḥ gaps (not duplicates) and isnād-critical records; independently add new nonduplicate hadith only with verified early direct Arabic Šarḥ.",
+      "newContentMustHave": "Authenticated hadith + exact source number/chapter + verified direct classical Šarḥ with named scholar, work, precise reference and primary link.",
+      "earliestSharh": "Research earliest verifiable direct commentary to exact narration/claim; mere citation or later summary is not Šarḥ.",
+      "avoid": "No fabricated source, isnād grade, pages, exact wording or semantic duplicates; edition unknown stays null.",
+      "currentNextId": "HAD-3358",
+      "historicalCheckpoint": "HAD-3357; verify live head before writing",
+      "continueUntil": "No fixed end; continue while genuinely new unique authentic material exists; review backlog separately."
+    },
+    "athar": {
+      "active": true,
+      "continuous": true,
+      "recordType": "athar",
+      "requiresSharh": false,
+      "needsOriginalText": true,
+      "assessment": "Verify exact scholar/sahabi attribution, full chain whenever available, mawqūf vs maqtūʿ vs marfūʿ, and credible individual isnād status; never infer ṣaḥīḥ from book or generic label.",
+      "unresolvedCases": "Use documented needs-review; do not silently present as authenticated; exclude unsafe new records from canonical live content until checked.",
+      "backlogNext": "HAD-0383–HAD-0392 and genuine old open individual attribution audits, then next 10/20."
+    },
+    "quranTadabbur": {
+      "active": true,
+      "finite": true,
+      "source": "apple-tv/quran/tadabbur/",
+      "catalog": "apple-tv/quran/tadabbur/catalog.json",
+      "canonicalVerseCount": 6236,
+      "verifiedCheckpoint": 4702,
+      "remainingAtCheckpoint": 1534,
+      "rule": "Only exactly relevant, original, isnād-reviewed early Tafsīr/Tadabbur for each missing Surah:Ayah. Never fabricate to reach 6236.",
+      "completion": "At 6236 independently verified unique verses, mark task complete; do not produce recycled fictitious 'new' verses. Continue only correction/review thereafter."
+    }
+  },
+  "batch": {
+    "preferredSize": 20,
+    "minTarget": 10,
+    "verifyEachIndividually": true,
+    "partialHandling": "Record count of inspected vs verified vs unresolved separately; never claim 20 new verified entries if some are blocked. No automatic skip, no repeated reviewing of settled IDs.",
+    "progress": [
+      "Retrieve latest main SHA and saved audit before each block",
+      "Read original Arabic source and exact location",
+      "Grade independently and identify semantic duplicates",
+      "Use fresh file blob SHAs with narrow changes",
+      "Update index/catalog/manifest atomically or via proven rebuild and validators",
+      "Trigger existing canonical live sync and verify deployment",
+      "Save next open cursor and blockers for next run and next chat"
+    ]
+  },
+  "globalDelivery": {
+    "requested": "Auto-sync each completed verified canonical content block immediately after write to existing public adult delivery path.",
+    "audiences": [
+      "Adult website",
+      "Adult visitor Web-App/PWA",
+      "Adult iOS WebView and native iOS content layer (remote JSON where implemented)",
+      "Adult Android Web-App",
+      "Apple TV app, home and ambient screensaver"
+    ],
+    "sourceOfTruth": "apple-tv/hadith/ and apple-tv/quran/tadabbur/",
+    "workflow": ".github/workflows/canonical-islamic-content-live.yml",
+    "realityGate": "Main commit is not live proof: check GitHub Actions job, build/validator, Cloudflare production, accessible content endpoint, cache version/TTL and independent device fetching. Native code/API additions still require iOS/tvOS builds and App Store releases; content JSON does not.",
+    "screensaver": "Persistent shuffle bag with full unseen cycle before repetition. New ids append to remaining; never reset on app open or cycle. Verify runtime storage independently.",
+    "noPushNotifications": "Content publication to endpoint is not OneSignal or device notification. Never trigger extra subscribers' push or daily editorial post. Existing protected locks remain unchanged.",
+    "independentTracks": "Kids excluded unless explicitly instructed. Daily single adult post, q-source cards, Kids, prayer and all push lanes remain separate."
+  },
+  "qualityGates": [
+    "source-authenticity",
+    "earliest-direct-sharh",
+    "athar-isnad",
+    "duplicate-cross-index",
+    "catalog-integrity",
+    "global-live-endpoint-check",
+    "screensaver-rotation-state",
+    "no-unauthorized-push",
+    "no-native-app-changes"
+  ],
+  "progress": {
+    "snapshotAsOf": "2026-10-18",
+    "hadithAndAtharCatalogCount": 3357,
+    "hadith": 2408,
+    "athar": 949,
+    "latestProcessedTen": [
+      "HAD-0371",
+      "HAD-0372",
+      "HAD-0375",
+      "HAD-0376",
+      "HAD-0377",
+      "HAD-0378",
+      "HAD-0379",
+      "HAD-0380",
+      "HAD-0381",
+      "HAD-0382"
+    ],
+    "verifiedMeaning": "10 source/grade audits completed; NOT 10 newly authenticated transmissions. User's target of 10/20 means work units, not forced success.",
+    "evidence": [
+      "apple-tv/hadith/audit/2026-10-18-sharh-athar-continuation.json"
+    ],
+    "nextRequestedBatch": "10–20 IDs from first actual open, starting HAD-0383–0392; run semantic duplicates and early Sharḥ gaps in parallel"
+  }
+}
