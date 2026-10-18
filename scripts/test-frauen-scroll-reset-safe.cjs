@@ -83,15 +83,34 @@ function read(){
    const r=await page.evaluate(async()=>{
      const hero=document.querySelector("#appView .frauen-library-hero");
      const input=document.querySelector("#appView .frauen-library-search-wrap input");
+     const trace=[];
+     const nativeScrollTo=window.scrollTo;
+     window.scrollTo=function(...args){
+       trace.push({type:"scrollTo",args,at:document.scrollingElement?.scrollTop||0,
+         stack:String(new Error().stack).slice(0,900)});
+       return nativeScrollTo.apply(this,args);
+     };
+     const nativeIntoView=Element.prototype.scrollIntoView;
+     Element.prototype.scrollIntoView=function(...args){
+       trace.push({type:"scrollIntoView",cls:String(this.className).slice(0,85),
+         stack:String(new Error().stack).slice(0,900)});
+       return nativeIntoView.apply(this,args);
+     };
+     const fired=[];
+     document.addEventListener("dar:frauen-render",()=>fired.push("frauen-render"),{once:true});
      window.scrollTo(0,Math.min(420,document.documentElement.scrollHeight-innerHeight-50));
      await new Promise(x=>setTimeout(x,180));
      const beforeY=window.scrollY;
      document.dispatchEvent(new Event("dar:render"));
      const immediate=window.scrollY;
      await new Promise(x=>requestAnimationFrame(()=>setTimeout(x,120)));
-     return {beforeY,immediate,afterY:window.scrollY,
+     const result={beforeY,immediate,afterY:window.scrollY,
+       hash:location.hash,trace:trace.slice(0,22),events:fired,
        sameHero:hero===document.querySelector("#appView .frauen-library-hero"),
        sameSearch:input===document.querySelector("#appView .frauen-library-search-wrap input")};
+     window.scrollTo=nativeScrollTo;
+     Element.prototype.scrollIntoView=nativeIntoView;
+     return result;
    });
    assert.ok(r.beforeY>100,cfg.id+" cannot scroll before re-render event");
    assert.ok(Math.abs(r.afterY-r.beforeY)<=3,cfg.id+" scroll reset after global render: "+JSON.stringify(r));
