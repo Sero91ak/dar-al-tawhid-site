@@ -56,7 +56,8 @@
       "Update index/catalog/manifest atomically or via proven rebuild and validators",
       "Trigger existing canonical live sync and verify deployment",
       "Save next open cursor and blockers for next run and next chat"
-    ]
+    ],
+    "commitGrouping": "Prefer one atomic Git tree/commit per reviewed 10–20-entry batch (with all changed files, related audit and catalog/manifest), then one canonical workflow/deploy. Never start 10–20 separate deploys just to complete one batch; exceptionally use safe sequential commits when tool does not offer atomic batching and audit that limitation."
   },
   "globalDelivery": {
     "requested": "Auto-sync each completed verified canonical content block immediately after write to existing public adult delivery path.",
@@ -72,7 +73,8 @@
     "realityGate": "Main commit is not live proof: check GitHub Actions job, build/validator, Cloudflare production, accessible content endpoint, cache version/TTL and independent device fetching. Native code/API additions still require iOS/tvOS builds and App Store releases; content JSON does not.",
     "screensaver": "Persistent shuffle bag with full unseen cycle before repetition. New ids append to remaining; never reset on app open or cycle. Verify runtime storage independently.",
     "noPushNotifications": "Content publication to endpoint is not OneSignal or device notification. Never trigger extra subscribers' push or daily editorial post. Existing protected locks remain unchanged.",
-    "independentTracks": "Kids excluded unless explicitly instructed. Daily single adult post, q-source cards, Kids, prayer and all push lanes remain separate."
+    "independentTracks": "Kids excluded unless explicitly instructed. Daily single adult post, q-source cards, Kids, prayer and all push lanes remain separate.",
+    "releaseGranularity": "Immediately after each verified 10–20 item block is complete; 'immediately' means no unnecessary delay after the block QA succeeds, not one release per draft file."
   },
   "qualityGates": [
     "source-authenticity",
