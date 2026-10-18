@@ -56,4 +56,35 @@ const snippet=ui.match(/function qiblaBearing\(p\)\{[\s\S]*?\n\}/);
 assert.ok(snippet,"Qibla function exists");
 const bearing=vm.runInNewContext(snippet[0]+";qiblaBearing({lat:50.6256,lon:6.9491})",{}, {timeout:1000});
 assert.ok(bearing>120&&bearing<135,"Rheinbach Qibla bearing must be approximately 127°");
+async function testPrayerAPI(){
+// Mock creator-only prayer API; no real network and no privileged APIs.
+const workerSource=read("kids/creator-test/worker.js");
+const program=new vm.Script(workerSource.replace("export default {","const worker = {")+"\nworker");
+let upstreamCount=0,upstreamURL="";
+const mock={
+ URL,Headers,Response,
+ fetch:async target=>{
+  upstreamCount++;upstreamURL=String(target);
+  return new Response(JSON.stringify({ok:true,times:{fajr:{time:"05:04"}}}),{
+   status:200,headers:{"content-type":"application/json"}
+  });
+ }
+};
+const worker=program.runInNewContext(mock);
+const apiURL="https://dar-al-tawhid-kids-creator.sero91ak.workers.dev/api/prayer/times?lat=50.6256&lon=6.9491&tz=Europe%2FBerlin&angle=12&asr=1&date=2026-10-18";
+const valid=await worker.fetch(new Request(apiURL),{});
+assert.equal(valid.status,200,"read-only prayer calculation available in creator test");
+assert.equal((await valid.json()).times.fajr.time,"05:04");
+assert.equal(upstreamCount,1);
+assert.ok(upstreamURL.startsWith("https://dar-admin-publisher.sero91ak.workers.dev/api/prayer/times?"));
+const bad=await worker.fetch(new Request(apiURL.replace("lat=50.6256","lat=999")),{});
+assert.equal(bad.status,400,"invalid coordinates rejected before upstream");
+assert.equal(upstreamCount,1);
+const denied=await worker.fetch(new Request(apiURL,{method:"POST"}),{});
+assert.equal(denied.status,405,"no API writes from creator test");
+assert.equal(upstreamCount,1);
+
+}
+testPrayerAPI().then(()=>{
 console.log("PASS: staging-only notification settings, 5 prayers, Qibla, local iOS bridge and safe visitor guard");
+}).catch(err=>{console.error(err);process.exitCode=1});
