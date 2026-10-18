@@ -1,0 +1,120 @@
+{
+  "project": "DĀR AL TAWḤĪD – Ḥadīṯ, Šarḥ & Āṯār",
+  "auditDate": "2026-10-18",
+  "status": "incremental-source-audit",
+  "sourceOfTruth": "apple-tv/hadith/series/",
+  "baselineLatestId": "HAD-3355",
+  "currentLatestId": "HAD-3357",
+  "changes": [
+    {
+      "id": "HAD-0023",
+      "action": "backfill-verified-early-commentary",
+      "scholar": "Ibn ʿAbd al-Barr",
+      "work": "at-Tamhīd",
+      "volume": "22",
+      "digitalPages": "12–13",
+      "primaryURL": "https://www.islamweb.net/ar/library/content/78/1414/",
+      "editionUnresolved": true,
+      "note": "Commentary context directly precedes Abu-Dharr report, not an independent isolated line-by-line Sharḥ."
+    },
+    {
+      "id": "HAD-3356",
+      "action": "new-sahih-hadith-with-verified-sharh",
+      "hadith": "Ṣaḥīḥ Muslim 1567",
+      "scholar": "an-Nawawī",
+      "work": "al-Minhāǧ",
+      "volume": "10",
+      "digitalPages": "177–179",
+      "primaryURL": "https://www.islamweb.net/ar/library/content/53/4779/"
+    },
+    {
+      "id": "HAD-3357",
+      "action": "new-athar-correctly-qualified",
+      "attribution": "Ibn Masʿūd",
+      "primary": "Ṣaḥīḥ Muslim, Muqaddimah; al-Bayhaqī, al-Madḫal 611",
+      "isnad": "munqaṭiʿ; not ṣaḥīḥ",
+      "evidence": "https://www.islamweb.net/ar/library/content/1/18/"
+    },
+    {
+      "id": "HAD-0373",
+      "action": "isnad-individual-audit",
+      "attribution": "Ḥudhayfah",
+      "sources": "Ṣaḥīḥ al-Buḫārī 3606; Ṣaḥīḥ Muslim 1847",
+      "grade": "connected ṣaḥīḥ chain",
+      "evidence": "https://dorar.net/hadith/sharh/14803"
+    },
+    {
+      "id": "HAD-0374",
+      "action": "isnad-individual-audit",
+      "attribution": "ʿAlī ibn Abī Ṭālib",
+      "source": "Ṣaḥīḥ al-Buḫārī 127",
+      "isnad": "ʿUbaydallāh ibn Mūsā → Maʿrūf ibn Ḫarbūḏ → Abū aṭ-Ṭufayl → ʿAlī",
+      "grade": "mauqūf, not marfūʿ",
+      "evidence": "https://dorar.net/hadith/sharh/7214"
+    }
+  ],
+  "screenedAsDeliberateDuplicates": [
+    "HAD-0101",
+    "HAD-0104",
+    "HAD-0105",
+    "HAD-0106",
+    "HAD-0108",
+    "HAD-0117",
+    "HAD-0119",
+    "HAD-0124",
+    "HAD-0136",
+    "HAD-0139",
+    "HAD-0149",
+    "HAD-0150",
+    "HAD-0154",
+    "HAD-0202",
+    "HAD-0203",
+    "HAD-0206",
+    "HAD-0207",
+    "HAD-0209",
+    "HAD-0210",
+    "HAD-0212",
+    "HAD-0213",
+    "HAD-0215",
+    "HAD-0216",
+    "HAD-0217",
+    "HAD-0219",
+    "HAD-0223",
+    "HAD-0225",
+    "HAD-0227",
+    "HAD-0238",
+    "HAD-0242",
+    "HAD-0244",
+    "HAD-0252",
+    "HAD-0256",
+    "HAD-0260",
+    "HAD-0261",
+    "HAD-0263"
+  ],
+  "outstanding": [
+    {
+      "id": "HAD-0039",
+      "issue": "No early directly attributable point-specific Sharḥ confirmed for at-Tirmiḏī 2910",
+      "action": "Keep needs-review; find source from early scholar rather than presenting a modern summary as a classical Sharḥ",
+      "primaryHadith": "https://dorar.net/hadith/sharh/36015"
+    },
+    {
+      "range": "HAD-0371–HAD-0392",
+      "issue": "Historical block of 22 Āṯār with unverified individual isnād according to audit 0343–0392; HAD-0373 and HAD-0374 now separately inspected",
+      "action": "Continue individual isnād reviews; do not equate source citation to verified chain"
+    },
+    {
+      "category": "dupes",
+      "issue": "Old needs-review can mean duplicate or merge rather than missing Šarḥ",
+      "action": "Do not falsely set verified, count twice or revive duplicate cards"
+    }
+  ],
+  "publicationSafety": "Only reviewed entries and metadata changed. No new post, alert, OneSignal or notification. Existing screensaver visual zones and app screens untouched.",
+  "editorialPolicy": [
+    "Early Arabic directly grounded commentary is preferred",
+    "Never invent pagination",
+    "Mauqūf / marfūʿ separated",
+    "Āṯār require honest chain status, not obligatory Šarḥ",
+    "Retain unresolved print-edition checks"
+  ]
+}
