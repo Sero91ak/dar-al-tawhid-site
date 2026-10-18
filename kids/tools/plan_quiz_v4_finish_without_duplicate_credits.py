@@ -221,20 +221,25 @@ def main():
     lines=["# KIDS-Quiz – V4-Rettung zuerst, danach neue Aufnahmen (Review)",
            "","**Verbindlich:** Serhat-Masterstimme `"+VOICE+"`, Modell `eleven_v4`.",
            "Kein bestehendes bezahltes Original darf erneut synthetisiert werden. Keine Audiofreigabe und kein Live-Push.",
+           "Auch alle reservierten/eingereichten ElevenLabs-Flow-Aufnahmen bleiben bis zur Klärung für neue TTS-Kosten gesperrt.",
            "",
-           "| Alter | Technisch komplett | Nur alte Originale nachladen | Neue V4-Originale erforderlich |",
-           "|---|---:|---:|---:|"]
+           "| Alter | Technisch komplett | Nur alte Originale nachladen | Nur offenen Flow klären | Neue V4-Originale erforderlich |",
+           "|---|---:|---:|---:|---:|"]
     for age in AGES:
         b=by_age[age]
         lines.append("| "+age+" | "+str(b["complete-v4-review"])+" | "+
                      str(b["restore-prepaid-originals-only"])+" | "+
+                     str(b["await-connected-flow-only"]+b["await-other-prepaid-or-reserved-only"])+" | "+
                      str(b["new-original-v4-needed"]+b["both-prepaid-recovery-and-new-v4"])+" |")
     lines+=["","**Schon bezahlte Originale noch zu retten:** "+str(len(missing9))+".",
+           "**Ungeklärte verbundene Flow-Originale, die nicht erneut gekauft werden dürfen:** "+str(len(pending_flow))+".",
+           "**Quizfragen, die nur auf verbundene Flow-Originale warten:** "+str(summary["questionsWaitingOnlyForConnectedFlowOriginals"])+".",
            "**Neue einzigartige Texte nach echtem Deduplizieren:** "+str(len(every_new))+
            " (nur Berechnungsbasis; keine Credits bestellt).",
            "","## Nächste technische Aktion",
            "1. Die historischen neun `eleven_v4`-MP3s mit echten Generation-IDs importieren, nicht regenerieren.",
-           "2. Den vorhandenen kostenfreien Offline-Zusammenbau und die Quiz-MP3-Zuordnung erneut ausführen.",
+           "2. Die ausstehenden bereits reservierten oder eingereichten verbundenen Flow-Originale prüfen und NUR als echte Original-MP3s importieren. Keine erneute Synthese dieser Text-SHAs.",
+           "3. Den vorhandenen kostenfreien Offline-Zusammenbau und die Quiz-MP3-Zuordnung erneut ausführen.",
            "3. Danach diese Priorisierung mit `python3 kids/tools/plan_quiz_v4_finish_without_duplicate_credits.py` erneut aufbauen.",
            "4. Noch offene neue V4-Originaltexte erneut mit dem Ledger deduplizieren und nur nach Kostenfreigabe produzieren.",
            "5. Menschliche Ausspracheprüfung, Offline-/Gerätetest, Freigabeschalter weiterhin aus.",
