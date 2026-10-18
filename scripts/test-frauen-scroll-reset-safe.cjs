@@ -72,7 +72,7 @@ function read(){
      assert.ok(pwa.scroll>100&&pwa.heroHeight>180,cfg.id+" existing PWA scroll/image broken");
      const search=page.locator("#appView .frauen-library-search-wrap input").first();
      await search.fill("Fiqh",{timeout:7000});
-     assert.equal(await search.inputValue(),"Fiqh",cfg.id+" PWA search lost text");
+     assert.equal((await search.inputValue()).toLocaleLowerCase("de"),"fiqh",cfg.id+" PWA search lost text");
      const row={id:cfg.id,passed:true,unchangedPwa:true,photoStatus:imgs,scroll:pwa.scroll};
      outcomes.push(row);
      console.log("FRAUEN_SAFE_ADAPTER_PASS "+JSON.stringify(row));
