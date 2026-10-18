@@ -161,3 +161,10 @@ html.dar-home-v3 body.is-home-route .dv3-color--dar-al-layl{background:#09100f}
  html.dar-home-v3 body.is-home-route .header-prayer-hub__main{gap:2px!important}
 }
 @media(min-width:900px){html.dar-home-v3 body.is-home-route .top-shell{max-width:900px;margin:auto}html.dar-home-v3 body.is-home-route #appView{max-width:940px;margin:auto}}
+
+html.dar-home-v3{background-image:none!important;background-color:var(--dv3-bg)!important}
+html.dar-home-v3 body.is-home-route .brand-main{flex:1 1 auto!important;min-width:0!important}
+html.dar-home-v3 body.is-home-route .brand-main .dv3-brand-copy{display:flex!important;flex-direction:column!important;min-width:0!important;gap:2px!important}
+html.dar-home-v3 body.is-home-route .brand-main .brand-kicker-row{display:block!important;order:0!important}
+html.dar-home-v3 body.is-home-route .brand-main .brand-title-refined{display:block!important;order:1!important}
+html.dar-home-v3 body.is-home-route .header-row--brand-only>.brand{flex:1 1 auto!important;min-width:0!important}
