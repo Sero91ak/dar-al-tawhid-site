@@ -6,15 +6,15 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `c5de385b67e702fe00deee18b61e6d1257c0e3e1`
+- Commit beim Erstellen dieses Berichts: `8dd85ed8d38613906393b3ca3b0fd8980f137c8e`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
-- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **287 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1055 Frage-/Lob-/Retry-/Erklärungsteile**.
+- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **288 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1056 Frage-/Lob-/Retry-/Erklärungsteile**.
 - Technisch vierteilig vollständig: **80/450**, noch unvollständig: **370/450**.
 - Letzter V4-Kostenaudit: **1368 neue Sprachfragmente** = **64395 Unicode-Zeichen**; **0 neue Lob-/Retry-Fragmente**, **0 neue V4-Texte für 4–6 Jahre**.
 - Nach Originalkosten getrennt: **80 Fragen nur durch bereits bezahlte MP3s blockiert**, **287 Fragen benötigen neue V4-Originaltexte**.
 - Alter 4-6: **70/150** komplett; vorhandene Hörteile question=100, correct=85, retry=85, explanation=148.
-- Alter 7-8: **6/150** komplett; vorhandene Hörteile question=6, correct=150, retry=150, explanation=16.
+- Alter 7-8: **6/150** komplett; vorhandene Hörteile question=6, correct=150, retry=150, explanation=17.
 - Alter 9-10: **4/150** komplett; vorhandene Hörteile question=4, correct=150, retry=150, explanation=11.
 - Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **47 importiert**, **9 noch ohne heruntergeladene Original-MP3-Datei**.
 - Zusätzlich im Originalregister: **398 Textschlüssel**, davon **351 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
