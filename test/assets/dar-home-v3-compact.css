@@ -175,3 +175,23 @@ html.dar-home-v3 body.is-home-route .dv3-accountlink img{width:19px;height:19px}
 html.dar-home-v3 body.is-home-route .dv3-accountlink span{display:block!important;white-space:nowrap;font-size:10px}
 html.dar-home-v3 body.is-home-route .dv3-accountlink{min-width:0;max-width:55%;padding:8px}
 }
+
+/* V3 final single-canvas rules: weather belongs to prayer header; no duplicate day card */
+html.dar-home-v3 body.is-home-route .top-shell .dv3-weather{
+ display:block!important;width:100%!important;box-sizing:border-box!important;
+ padding:4px 9px 7px!important;margin:0 0 2px!important;
+ color:var(--dv3-muted)!important;background:var(--dv3-card)!important;
+ border:1px solid var(--dv3-line)!important;border-top:0!important;
+ border-radius:0 0 12px 12px!important;font-size:10px!important;
+ line-height:1.35!important;letter-spacing:0!important;
+}
+html.dar-home-v3 body.is-home-route .top-shell #headerPrayerStatus:has(+ .dv3-weather){
+ border-bottom-left-radius:7px!important;border-bottom-right-radius:7px!important;
+}
+html.dar-home-v3 body.is-home-route .dv3-ornament{display:none!important}
+html.dar-home-v3 body.is-home-route .home-v380-shell::before,
+html.dar-home-v3 body.is-home-route .home-v380-shell::after,
+html.dar-home-v3 body.is-home-route #appView::before,
+html.dar-home-v3 body.is-home-route #appView::after{
+ content:none!important;display:none!important;background:none!important;
+}
