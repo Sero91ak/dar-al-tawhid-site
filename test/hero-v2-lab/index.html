@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="de" data-theme="salbei">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Dar Test Labor · Sticky Hero Safe V2 (isoliert)</title>
+  <style>
+    :root{color-scheme:light;--page:#f1f4ed;--ink:#172923;--muted:#4b6358;--search:#fffefa;--border:#c7d6cb;--accent:#274c3f}
+    [data-theme="dark"]{color-scheme:dark;--page:#071b1d;--ink:#f8f1e5;--muted:#c8d6d1;--search:#193131;--border:#55716a;--accent:#d6bd80}
+    *,*::before,*::after{box-sizing:border-box}
+    html{margin:0;min-width:0;width:100%;scroll-behavior:auto}
+    body{margin:0;width:100%;min-width:0;background:var(--page);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;overflow-x:clip}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    button:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+    [hidden]{display:none!important}
+    .laboratory{width:100%;min-width:0}
+    /* DAR_STICKY_HERO_SAFE_V2 · opt-in, owned by this isolated page only.
+       No runtime DOM reparenting, JS scroll listeners or position:fixed.
+       The rail and its search are siblings of the reading content. */
+    .hero-v2-rail{position:sticky;top:0;z-index:20;isolation:isolate;width:100%;background:var(--page)}
+    .hero-v2-photo{
+      position:relative;display:flex;flex-direction:column;justify-content:flex-end;
+      min-height:clamp(238px,39svh,450px);width:100%;overflow:hidden;
+      padding:clamp(25px,5vw,70px) max(22px,calc((100vw - 1140px)/2 + 28px)) 55px;
+      border-radius:0 0 clamp(24px,3vw,38px) clamp(24px,3vw,38px);
+      background-image:linear-gradient(90deg,rgba(4,20,20,.93) 0%,rgba(4,20,20,.76) 43%,rgba(4,20,20,.1) 100%),url("../../assets/frauen/library-v1224/03-erste-generationen.jpg");
+      background-size:cover;background-position:center,66% 48%;background-repeat:no-repeat;
+      color:#fff9ea
+    }
+    .hero-v2-photo[data-variant="chapter"]{
+      background-image:linear-gradient(90deg,rgba(4,20,20,.91) 0%,rgba(4,20,20,.70) 42%,rgba(4,20,20,.09) 100%),url("../../assets/frauen/library-v1224/01-grundlagen-din.jpg");
+      background-position:center,72% 45%
+    }
+    .hero-v2-copy{position:relative;z-index:1;max-width:min(690px,95%)}
+    .eyebrow{margin:0 0 9px;color:#e9d59e;font-weight:800;letter-spacing:.14em;font-size:clamp(.64rem,1.9vw,.78rem)}
+    .hero-v2-copy h1{margin:0;font:500 clamp(2.3rem,7vw,4.6rem)/1.04 Georgia,serif;text-wrap:balance;letter-spacing:-.025em}
+    .hero-v2-copy p:last-child{margin:15px 0 0;font-size:clamp(.87rem,2.5vw,1.2rem);max-width:570px}
+    .hero-v2-searchrow{position:relative;z-index:2;width:100%;padding:0 18px 16px;margin:-22px auto 0;background:transparent}
+    .hero-v2-search{
+      display:flex;align-items:center;gap:12px;max-width:880px;min-height:58px;margin:0 auto;
+      border:1px solid var(--border);border-radius:22px;background:var(--search);color:var(--ink);
+      padding:8px 15px;box-shadow:0 6px 16px rgba(0,0,0,.06)
+    }
+    .hero-v2-search svg{width:21px;height:21px;flex:none;fill:none;stroke:var(--muted);stroke-width:2.2}
+    .hero-v2-search input{min-width:0;flex:1;width:100%;height:44px;border:0;outline:0!important;background:transparent;color:var(--ink);font-size:16px}
+    .hero-v2-search input::placeholder{color:var(--muted);opacity:.95}
+    .hero-v2-search:focus-within{outline:3px solid var(--accent);outline-offset:2px}
+    .hero-v2-content{position:relative;z-index:0;width:min(1100px,100%);min-width:0;margin:0 auto;padding:25px clamp(18px,4.3vw,46px) max(140px,12svh);background:var(--page)}
+    .v2-tools{display:flex;flex-wrap:wrap;align-items:center;gap:9px;justify-content:space-between;padding:0 0 20px}
+    .v2-tools small{font-size:.77rem;color:var(--muted);font-weight:700}
+    .v2-theme{border:1px solid var(--border);border-radius:99px;padding:10px 15px;min-height:44px;background:var(--search);color:var(--ink)}
+    .v2-section h2{margin:0 0 8px;font:500 clamp(1.6rem,3.7vw,2.35rem)/1.2 Georgia,serif}
+    .v2-section>p{margin:0 0 25px;color:var(--muted)}
+    .v2-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+    .v2-card{position:relative;display:flex;flex-direction:column;align-items:flex-start;min-width:0;text-align:left;min-height:185px;padding:23px;border-radius:26px;border:1px solid var(--border);
+      background:var(--search);color:var(--ink);transition:transform .15s ease,border-color .15s ease}
+    .v2-card strong{display:block;font:500 clamp(1.28rem,2.7vw,1.8rem)/1.15 Georgia,serif;margin:9px 0}
+    .v2-card .tag{font-weight:800;color:var(--muted);font-size:.72rem;letter-spacing:.12em}
+    .v2-card .desc{font-size:.9rem;color:var(--muted)}
+    .v2-card .arrow{font-size:1.35rem;position:absolute;right:20px;bottom:14px;color:var(--accent)}
+    .v2-card[hidden]{display:none}
+    .detail{min-height:460px}
+    .v2-back{min-height:46px;border:1px solid var(--border);border-radius:999px;padding:10px 16px;color:var(--ink);background:var(--search);margin-bottom:28px}
+    .detail p{max-width:650px;color:var(--muted)}
+    .v2-end{border-top:1px solid var(--border);padding-top:35px;margin-top:40px;color:var(--muted);font-size:.9rem}
+    @media(max-width:650px){
+      .v2-grid{grid-template-columns:1fr;gap:13px}
+      .hero-v2-photo{min-height:clamp(285px,43svh,360px);padding:30px 22px 50px;background-position:center,67% 48%}
+      .hero-v2-searchrow{padding-inline:16px}
+      .v2-card{min-height:175px}
+      .hero-v2-copy p:last-child{font-size:.91rem}
+    }
+    @media(max-height:580px) and (orientation:landscape){
+      .hero-v2-photo{min-height:clamp(155px,32svh,240px);padding-block:14px 37px}
+      .hero-v2-copy h1{font-size:clamp(1.7rem,5vh,2.5rem)}
+      .hero-v2-copy p:last-child{font-size:.74rem;margin-top:5px}
+      .hero-v2-searchrow{margin-top:-13px;padding-bottom:8px}
+      .hero-v2-search{min-height:48px}
+    }
+    /* Keep text entry usable on phones when the virtual keyboard opens.
+       The temporary focus exception never intercepts touch or scroll. */
+    @media(max-width:650px) and (pointer:coarse){
+      .hero-v2-rail:focus-within{position:relative}
+    }
+    @media(prefers-reduced-motion:reduce){.v2-card{transition:none}}
+  </style>
+</head>
+<body>
+<div class="laboratory" id="heroV2Lab" data-hero-v2="true">
+  <div class="hero-v2-rail" data-testid="sticky-rail">
+    <header class="hero-v2-photo" id="v2HeroPhoto" data-testid="hero-photo">
+      <div class="hero-v2-copy">
+        <p class="eyebrow">DĀR AL TAWḤĪD · ISOLIERTES TESTLABOR V2</p>
+        <h1 id="v2Title">Frauen im Islam</h1>
+        <p id="v2Subtitle">Qurʾān · Sunnah · Fiqh · Frauen der ersten Generationen</p>
+      </div>
+    </header>
+    <div class="hero-v2-searchrow" id="heroV2SearchRow" data-testid="attached-search">
+      <label class="hero-v2-search" for="heroV2Search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+        <input id="heroV2Search" type="search" autocomplete="off" placeholder="Thema, Aussage, Person oder Werk suchen" aria-label="Wissensbibliothek durchsuchen">
+      </label>
+    </div>
+  </div>
+  <main class="hero-v2-content" data-testid="reading-content">
+    <div class="v2-tools">
+      <small id="v2Status">ISOLIERTE VORSCHAU · KEINE LIVE-ÄNDERUNG</small>
+      <button class="v2-theme" id="v2Theme" type="button">Dunkles Erscheinungsbild</button>
+    </div>
+    <section class="v2-section" id="v2List">
+      <h2>Wissen geordnet nach Lebensbereichen</h2>
+      <p>Diese Testkarten prüfen Layout, Suche, Navigation und weiches Scrollen. Sie verändern keine App-Inhalte.</p>
+      <div class="v2-grid" id="v2Grid">
+        <button type="button" class="v2-card" data-topic="grundlagen des din tawhid iman" data-title="Grundlagen des Dīn"><span class="tag">ʿAQĪDAH · ʿIBĀDAH</span><strong>Grundlagen des Dīn</strong><span class="desc">Tawḥīd, Īmān, Dhikr und die Grundlagen eines rechtschaffenen Lebens.</span><span class="arrow" aria-hidden="true">›</span></button>
+        <button type="button" class="v2-card" data-topic="fiqh frauen reinigung gebet" data-title="Fiqh der Frauen"><span class="tag">PFLICHTWISSEN · ALLTAG</span><strong>Fiqh der Frauen</strong><span class="desc">Überblick der zentralen Fragen aus dem Fiqh.</span><span class="arrow" aria-hidden="true">›</span></button>
+        <button type="button" class="v2-card" data-topic="erste generationen sahabiyyat" data-title="Frauen der ersten Generationen"><span class="tag">ṢAḤĀBAH · SALAF</span><strong>Frauen der ersten Generationen</strong><span class="desc">Frühe Generationen und überliefertes Wissen.</span><span class="arrow" aria-hidden="true">›</span></button>
+        <button type="button" class="v2-card" data-topic="familie erziehung ehe kinder" data-title="Familie und Erziehung"><span class="tag">FAMILIE · ADAB</span><strong>Familie und Erziehung</strong><span class="desc">Familie, gutes Benehmen und Erziehung.</span><span class="arrow" aria-hidden="true">›</span></button>
+        <button type="button" class="v2-card" data-topic="wissen adab dawah" data-title="Wissen und Adab"><span class="tag">WISSEN · CHARAKTER</span><strong>Wissen und Adab</strong><span class="desc">Lernen, Lehren und verantwortliches Handeln.</span><span class="arrow" aria-hidden="true">›</span></button>
+        <button type="button" class="v2-card" data-topic="alltag schutz reise" data-title="Alltag und Schutz"><span class="tag">ALLTAG · SCHUTZ</span><strong>Alltag und Schutz</strong><span class="desc">Alltägliche Situationen und Schutz der persönlichen Grenzen.</span><span class="arrow" aria-hidden="true">›</span></button>
+      </div>
+      <p id="v2Empty" hidden>Keine passenden Themen gefunden.</p>
+    </section>
+    <section class="v2-section detail" id="v2Detail" hidden>
+      <button class="v2-back" type="button" id="v2Back">‹ Zurück zur Übersicht</button>
+      <h2 id="v2DetailTitle">Grundlagen des Dīn</h2>
+      <p>Isolierte Test-Unterseite. Hier prüfen wir, ob der Hero-Bereich beim Navigieren sichtbar bleibt, die Elemente bedienbar sind und Inhalte unter der fixierten Bildfläche scrollen.</p>
+      <p>Es werden keine bestehenden Frauenbeiträge oder geprüften Quellen verändert.</p>
+    </section>
+    <div class="v2-end">DĀR AL TAWḤĪD · DAR_STICKY_HERO_SAFE_V2 · Nur technischer Test, keine Produktions-App.</div>
+  </main>
+</div>
+<script>
+(function(){
+  "use strict";
+  const root=document.getElementById("heroV2Lab");
+  const input=document.getElementById("heroV2Search");
+  const list=document.getElementById("v2List");
+  const detail=document.getElementById("v2Detail");
+  const photo=document.getElementById("v2HeroPhoto");
+  const searchrow=document.getElementById("heroV2SearchRow");
+  const cards=Array.from(document.querySelectorAll("#v2Grid .v2-card"));
+  const noSearch=new URLSearchParams(location.search).get("search")==="0";
+  searchrow.hidden=noSearch;
+  function filter(){
+    const q=(input.value||"").trim().toLocaleLowerCase("de");
+    let visible=0;
+    for(const card of cards){
+      const hay=(card.dataset.topic+" "+card.dataset.title).toLocaleLowerCase("de");
+      const match=!q||hay.includes(q);
+      card.hidden=!match;
+      if(match)visible++;
+    }
+    document.getElementById("v2Empty").hidden=visible>0;
+  }
+  function openCard(card){
+    list.hidden=true;
+    detail.hidden=false;
+    photo.dataset.variant="chapter";
+    document.getElementById("v2Title").textContent=card.dataset.title;
+    document.getElementById("v2Subtitle").textContent="Geordnete Kapitel und überprüfbare Inhalte";
+    document.getElementById("v2DetailTitle").textContent=card.dataset.title;
+    searchrow.hidden=true;
+    window.scrollTo(0,0);
+  }
+  function back(){
+    list.hidden=false;
+    detail.hidden=true;
+    photo.dataset.variant="";
+    document.getElementById("v2Title").textContent="Frauen im Islam";
+    document.getElementById("v2Subtitle").textContent="Qurʾān · Sunnah · Fiqh · Frauen der ersten Generationen";
+    searchrow.hidden=noSearch;
+    window.scrollTo(0,0);
+  }
+  input.addEventListener("input",filter);
+  for(const c of cards)c.addEventListener("click",function(){openCard(c)});
+  document.getElementById("v2Back").addEventListener("click",back);
+  document.getElementById("v2Theme").addEventListener("click",function(){
+    const dark=document.documentElement.dataset.theme!=="dark";
+    document.documentElement.dataset.theme=dark?"dark":"salbei";
+    this.textContent=dark?"Helles Erscheinungsbild":"Dunkles Erscheinungsbild";
+  });
+  root.dataset.ready="1";
+})();
+</script>
+</body>
+</html>
