@@ -155,6 +155,23 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-immersive-hero-test-20261018",
+      "at": "2026-10-18T07:25:00+02:00",
+      "approvedBy": "user-explicit-global-immersive-hero-scroll-under-test-visitor-desktop-20261018",
+      "reason": "Adult Hero plus attached search sticky scroll-under and safe-area/full-bleed visual repair, test first, visitor/native Android PWA and desktop only after verification. Do not touch Kids, prayer, push, service worker, content or navigation.",
+      "paths": [
+        "test/assets/adult-immersive-hero-v1.css",
+        "test/assets/adult-immersive-hero-v1.js",
+        "assets/adult-immersive-hero-v1.css",
+        "assets/adult-immersive-hero-v1.js",
+        "cloudflare/test-app-worker.js",
+        "cloudflare/site-router.js",
+        "desktop-preview/index.html",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-02T23:59:00.000Z"
+    },
+    {
       "id": "adult-hadith-test-to-visitor-parity-20261018",
       "at": "2026-10-18T07:08:00+02:00",
       "approvedBy": "user-explicit-hadith-test-current-parity-global-visitor-release-20261018",
