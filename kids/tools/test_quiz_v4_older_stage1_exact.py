@@ -31,8 +31,20 @@ def main():
     must(real["realMP3BytesChecked"]==expected_stage1 and
          real["totalNewOriginals"]==expected_stage1,
          "actual paid original MP3 bytes are missing, forged or out of sync")
-    must(real["sourceRemaining"]==len(missing),
-         "source-remaining queue differs from real paid originals")
+    # Forensic sourceRemaining counts every Stage-1 take NOT in this
+    # *direct-paid* receipt ledger. It therefore still includes the
+    # connected Flow originals that are already imported and those
+    # reserved/not yet delivered; neither class is eligible for re-buy.
+    stored=sum(item["spokenText"] in registry["textClips"]
+               for item in source["originalTextRecordingQueue"])
+    reserved=len(source["_reservedUnimportedTextSHA256"])
+    flow_saved=stored-expected_stage1
+    must(flow_saved>=0 and stored+reserved+len(missing)==65
+         and real["sourceRemaining"]==len(missing)+reserved+flow_saved,
+         "direct-paid receipt remainder was confused with unreserved new V4 speech queue")
+    must(not {p["spokenTextSHA256"] for p in missing}.intersection(
+         source["_reservedUnimportedTextSHA256"]),
+         "reserved/purchased connected Flow voice original was selected for repurchase")
     must(real["requestJournalReconciled"] is True and
          real["newCreditsSpentByThisAudit"]==0 and
          real["publicReleaseAllowed"] is False,
