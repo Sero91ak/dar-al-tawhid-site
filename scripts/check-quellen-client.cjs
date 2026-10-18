@@ -77,7 +77,7 @@ assert.match(offline.getNode("sourceList").innerHTML, /href="\/q\/37\/"/);
   assert.match(royalCss, /body\.qsource-body \.qsource-page\{[\s\S]*?padding-top:var\(--ql-safe-header-offset\)/, "Q page must begin below iPhone status bar");
   assert.match(royalCss, /body\.qsource-body \.qsource-header\{[\s\S]*?position:sticky;[\s\S]*?top:var\(--ql-safe-header-offset\)/, "Q logo and theme control must remain at the same height when scrolling");
   assert.match(royalCss, /overflow-x:clip!important/, "iOS overflow must not break sticky positioning");
-  assert.match(html, /qapp-toolbar-20261013-1/, "Refresh the mobile stylesheet cache");
+  assert.match(html, /qapp-toolbar-20261013-2/, "Keep the current verified mobile stylesheet cache version");
   assert.match(html, /q-source-app-view\.js/, "App-frame source navigation must load in owner library");
   assert.match(royalJs, /Einzelner Quellenbeleg/, "Individual Q must remain standalone");
   assert.doesNotMatch(royalJs, /renderNeighbors|back\.href\s*=\s*"\/quellen\//, "No previous/next Q or owner-index link for public readers");
