@@ -1,5 +1,9 @@
 (function(global){
   "use strict";
+  // The iOS shell sometimes includes the same adapter more than once.
+  // Never register duplicate render/hashchange listeners or scroll handlers.
+  if(global.__DAR_FRAUEN_SCROLL_SAFE_V1_ACTIVE)return;
+  global.__DAR_FRAUEN_SCROLL_SAFE_V1_ACTIVE=true;
   var ENTRY_ATTR="data-dar-frauen-live-entry";
   var hookTimer=0,entryScheduled=false,painting=false;
   // Incidental global renders must not rebuild Frauen or reset its scroll.
