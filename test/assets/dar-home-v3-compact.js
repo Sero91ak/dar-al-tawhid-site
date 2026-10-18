@@ -1,0 +1,149 @@
+/* DĀR AL TAWḤĪD · V3 TEST HOME · 2026-10-18
+   Test route only. Reuse canonical app prayer, account, theme, posts and navigation.
+   Never patch native visitors, iOS, other routes or the original live hero. */
+(function(){
+"use strict";
+if(!/^\/test(?:\/|$)/.test(location.pathname)||/^\/test\/kids(?:\/|$)/.test(location.pathname))return;
+if(window.__DAR_TEST_HOME_V3)return;
+window.__DAR_TEST_HOME_V3=true;
+const THEMES=[["light","Hell"],["soft","Sanft Elegant"],["eisgold","Eisgold"],["salbei","Salbei Elfenbein"],["dark","Klassisch Dunkel"],["royal","Royal Nachtblau"],["bordeaux","Bordeaux Royal"],["dar-al-layl","Dār al-Layl"]];
+const LINKS=[
+ ["bibliothek","Bibliothek","Eigene PDFs und Schriften","▥"],
+ ["books","Quellenbibliothek","Klassische Werke","▤"],
+ ["scholars","Gelehrte","Salaf und Imāme","♙"],
+ ["duas","Duʿāʾ","Authentische Bittgebete","✧"],
+ ["quran","Qurʾān","Lesen und Tafsīr","۞"],
+ ["hadith","Ḥadīṯ","Sunnah und Überlieferungen","◈"],
+ ["frauen","Frauenbereich","Wissen und Fiqh","❀"],
+ ["propheten","Propheten","Geschichten und Lehren","✦"],
+ ["quiz","Dīn-Quiz","Wissen prüfen","◇"],
+ ["prayer","Gebetszeiten","Qiblah und Kalender","◷"]
+];
+const esc=x=>String(x==null?"":x).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+const icon=(name)=>'<img src="/test/assets/dar-3d-icons/'+name+'.png" loading="lazy" alt="" decoding="async">';
+let lastPosts="",lastCity="",weatherBusy=false,weatherKey="",weatherAt=0,scheduled=false;
+const nativeNav=(name,val)=>{
+ try{if(typeof navigate==="function"){navigate(name,val||"");return}}catch(e){}
+ location.hash="#"+name+(val?"/"+encodeURIComponent(val):"");
+};
+function isHome(){return !!(document.body&&document.body.classList.contains("is-home-route"))}
+function make(){
+const quick=LINKS.slice(0,4).map((x,i)=>'<button type="button" class="dv3-quick" data-dv3-nav="'+x[0]+'"><span class="dv3-quick-icon">'+icon(["library","library","scholars","dua"][i])+'</span><span><b>'+esc(x[1])+'</b><small>'+esc(x[2])+'</small></span></button>').join("");
+const more=LINKS.slice(4).map((x,i)=>'<button class="dv3-more-link" type="button" data-dv3-nav="'+esc(x[0])+'"><span class="dv3-mini-ico">'+icon(["quran","hadith","frauen","prophets","quiz","prayer"][i])+'</span><span>'+esc(x[1])+'</span><b aria-hidden="true">→</b></button>').join("");
+const swatches=THEMES.map(([k,v])=>'<button type="button" data-dv3-theme="'+k+'" aria-pressed="false"><span class="dv3-color dv3-color--'+k+'"></span>'+esc(v)+'</button>').join("");
+return '<div id="dv3Home" class="dv3-home" data-v3-version="3.1">'+
+  '<div class="dv3-hometitle"><div><small>WILLKOMMEN IM DĀR</small><h2>Startseite</h2></div><button class="dv3-accountlink" type="button" data-dv3-nav="account" aria-label="Konto öffnen oder registrieren">'+icon("account")+'<span>Konto / Registrieren</span><b>→</b></button></div>'+
+  '<div class="dv3-services"><div class="dv3-services-top"><span>HEUTE IM ÜBERBLICK</span><button type="button" data-dv3-nav="prayer">Gebetszeiten öffnen →</button></div><div id="dv3Weather" class="dv3-weather" role="status" aria-live="polite">Wetterdaten werden geladen …</div></div>'+
+  '<div class="dv3-search-box"><label class="dv3-search-label" for="homeSearchInput"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7"/><path d="m16 16 5 5"/></svg></label><input id="homeSearchInput" type="search" autocomplete="off" enterkeyhint="search" placeholder="Beiträge, Gelehrte, Bücher durchsuchen …" aria-label="Beiträge, Gelehrte und Bücher suchen"><button type="button" id="dv3SearchClear" aria-label="Suche löschen" hidden>×</button></div>'+
+  '<button type="button" class="dv3-tawhid" data-dv3-nav="tawhid-guide"><span class="dv3-ornament" aria-hidden="true">◈</span><span class="dv3-kicker">GRUNDLAGEN DES GLAUBENS</span><strong>Tawḥīd &amp; ʿAqīdah</strong><span class="dv3-description">Den Glauben verstehen – mit Qurʾān, Sunnah und Aussagen der frühen Gelehrten.</span><span class="dv3-tawhid-footer">Zum Wissensbereich <b>→</b></span></button>'+
+  '<section class="dv3-section" aria-labelledby="dv3LatestTitle"><div class="dv3-section-title"><h3 id="dv3LatestTitle">Neueste Beiträge</h3><button type="button" data-dv3-nav="recent">Alle lesen →</button></div><div id="dv3Latest" class="dv3-posts" aria-live="polite"><span>Beiträge werden geladen …</span></div></section>'+
+  '<section class="dv3-section" aria-labelledby="dv3QuickTitle"><div class="dv3-section-title"><h3 id="dv3QuickTitle">Schnellzugriff</h3><button type="button" data-dv3-nav="more">Alle Bereiche →</button></div><div class="dv3-quick-grid">'+quick+'</div><details class="dv3-more"><summary>Weitere Wissens- und App-Bereiche <span aria-hidden="true">⌄</span></summary><div class="dv3-more-grid">'+more+'</div></details></section>'+
+  '<section class="dv3-bottom"><div id="dv3QuranSlot"></div><div class="dv3-bottom-row"><button data-dv3-nav="calendar" type="button">Kalender &amp; Hijrī-Datum →</button><button data-dv3-nav="settings" type="button">Einstellungen →</button></div></section>'+
+  '<div id="dv3ThemePanel" class="dv3-theme-panel" hidden role="dialog" aria-label="Erscheinungsbild wählen"><div><strong>Erscheinungsbild</strong><button type="button" data-dv3-close aria-label="Schließen">×</button></div><div class="dv3-theme-grid">'+swatches+'</div></div>'+
+'</div>';
+}
+function renderLatest(){
+ const el=document.getElementById("dv3Latest");if(!el)return;
+ let data=[];
+ try{if(typeof posts!=="undefined"&&Array.isArray(posts))data=posts.filter(p=>p&&p.id).slice(0,2)}catch(e){}
+ const sig=data.map(p=>p.id+"|"+p.title).join(":");
+ if(sig===lastPosts&&el.dataset.ready)return;
+ lastPosts=sig;el.dataset.ready="1";
+ el.innerHTML=data.length?data.map((p,i)=>{
+  const line=[p.scholar,p.category].filter(Boolean).join(" · ");
+  return '<button type="button" class="dv3-post" data-dv3-nav="post" data-dv3-value="'+esc(p.id)+'"><span class="dv3-post-icon">'+(i===0?"▤":"✒")+'</span><span class="dv3-post-body"><small>'+(i===0?"AKTUELLE VERÖFFENTLICHUNG":"WEITERER BEITRAG")+'</small><b>'+esc(p.title)+'</b><em>'+esc(line||"Qurʾān · Sunnah · Aṯār")+'</em></span><span class="dv3-post-arrow" aria-hidden="true">→</span></button>';
+ }).join(""):'<button type="button" class="dv3-post" data-dv3-nav="recent">Alle Veröffentlichungen ansehen →</button>';
+}
+function ensureTopControls(){
+ const row=document.querySelector(".top-shell .header-row--brand-only");if(!row)return;
+ if(!row.querySelector("#dv3HeaderActions")){
+  const el=document.createElement("div");el.id="dv3HeaderActions";el.className="dv3-top-actions";
+  el.innerHTML='<button type="button" class="dv3-tool" data-dv3-theme-open aria-label="Erscheinungsbild wechseln" title="Farbwelt">◐</button><button type="button" class="dv3-tool" data-dv3-nav="settings" data-dv3-value="notifications" aria-label="Benachrichtigungen einstellen" title="Benachrichtigungen">♧</button><button type="button" class="dv3-tool" data-dv3-nav="settings" aria-label="Einstellungen öffnen" title="Einstellungen">⚙</button>';
+  row.appendChild(el);
+ }
+ const k=row.querySelector(".brand-kicker-row small");
+ if(k&&k.textContent!=="BEITRÄGE NACH QURʾĀN · SUNNAH · AṮĀR")k.textContent="BEITRÄGE NACH QURʾĀN · SUNNAH · AṮĀR";
+}
+function rearrangeHeader(){
+ const h=document.querySelector(".top-shell .header");
+ if(!h)return;
+ const greet=h.querySelector(".hero-text");
+ const prayer=h.querySelector("#headerPrayerStatus");
+ if(greet&&prayer&&greet.nextElementSibling!==prayer)h.insertBefore(greet,prayer);
+ const root=document.documentElement;
+ root.classList.add("dar-home-v3");
+}
+async function fetchWeather(){
+ if(!isHome()||weatherBusy)return;
+ const target=document.getElementById("dv3Weather");if(!target)return;
+ let city="";
+ try{if(typeof getPrayerSettings==="function")city=String(getPrayerSettings()?.city||"").trim()}catch(e){}
+ if(!city){target.textContent="Wetter: Standort in Gebetszeiten festlegen";return;}
+ const key=city.toLowerCase();
+ if(weatherKey===key&&Date.now()-weatherAt<30*60*1000)return;
+ weatherKey=key;weatherAt=Date.now();weatherBusy=true;
+ target.textContent="Wetter für "+city+" wird geladen …";
+ try{
+  const geo=await fetch("https://geocoding-api.open-meteo.com/v1/search?name="+encodeURIComponent(city)+"&count=1&language=de",{signal:AbortSignal.timeout(7000)}).then(r=>r.ok?r.json():null);
+  const hit=geo?.results?.[0];
+  if(!hit)throw Error("Standort nicht gefunden");
+  const url="https://api.open-meteo.com/v1/forecast?latitude="+encodeURIComponent(hit.latitude)+"&longitude="+encodeURIComponent(hit.longitude)+"&current=temperature_2m,weather_code&timezone=auto";
+  const data=await fetch(url,{signal:AbortSignal.timeout(7000)}).then(r=>r.ok?r.json():null);
+  if(!data?.current||!Number.isFinite(data.current.temperature_2m))throw Error("Wetter nicht verfügbar");
+  const temp=Math.round(data.current.temperature_2m),code=Number(data.current.weather_code);
+  const desc=code===0?"Klar":code<=3?"Leicht bewölkt":code<=48?"Nebel":code<=67?"Regen":code<=77?"Schnee":code<=82?"Schauer":code<=86?"Schneeschauer":"Gewitter";
+  if(target.isConnected&&isHome())target.textContent="Wetter · "+city+": "+temp+" °C · "+desc;
+ }catch(e){if(target.isConnected)target.textContent="Wetter · "+city+": derzeit nicht verfügbar";}
+ finally{weatherBusy=false;}
+}
+function sync(){
+ if(!document.body)return;
+ if(!isHome()){document.documentElement.classList.remove("dar-home-v3");lastPosts="";return;}
+ const shell=document.querySelector("#appView .home-v380-shell");
+ if(!shell)return;
+ ensureTopControls();rearrangeHeader();
+ let root=document.getElementById("dv3Home");
+ if(!root){shell.insertAdjacentHTML("afterbegin",make());root=document.getElementById("dv3Home");lastPosts="";}
+ const q=shell.querySelector(".home-v380-quran-hero");
+ const slot=root.querySelector("#dv3QuranSlot");
+ if(q&&slot&&q.parentElement!==slot)slot.appendChild(q);
+ // Existing account banner remains functional but becomes a compact, explicit account entry.
+ renderLatest();fetchWeather();
+ const select=document.querySelectorAll("#dv3ThemePanel [data-dv3-theme]");
+ const current=document.documentElement.getAttribute("data-theme");
+ select.forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.dv3Theme===current)));
+}
+function queue(){
+ if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;try{sync()}catch(e){console.warn("DAR test home v3:",e)}});
+}
+document.addEventListener("click",function(e){
+ const button=e.target.closest?.("[data-dv3-nav],[data-dv3-theme-open],[data-dv3-theme],[data-dv3-close],#dv3SearchClear");
+ if(!button||!/^\/test(?:\/|$)/.test(location.pathname))return;
+ if(button.hasAttribute("data-dv3-nav")){
+  e.preventDefault();e.stopPropagation();nativeNav(button.dataset.dv3Nav,button.dataset.dv3Value);return;
+ }
+ if(button.matches("[data-dv3-theme-open]")){e.preventDefault();e.stopPropagation();const p=document.getElementById("dv3ThemePanel");if(p)p.hidden=!p.hidden;return;}
+ if(button.matches("[data-dv3-theme]")){
+  e.preventDefault();e.stopPropagation();const choice=button.dataset.dv3Theme;
+  try{if(typeof applyTheme==="function")applyTheme(choice);else nativeNav("settings","appearance")}catch(x){nativeNav("settings","appearance")}
+  const p=document.getElementById("dv3ThemePanel");if(p)p.hidden=true;queue();return;
+ }
+ if(button.matches("[data-dv3-close]")){e.preventDefault();document.getElementById("dv3ThemePanel").hidden=true;return;}
+ if(button.id==="dv3SearchClear"){const x=document.getElementById("homeSearchInput");if(x){x.value="";x.dispatchEvent(new Event("input",{bubbles:true}));x.focus();}}
+},true);
+document.addEventListener("input",function(e){
+ if(e.target?.id!=="homeSearchInput"||!document.getElementById("dv3Home"))return;
+ const clear=document.getElementById("dv3SearchClear");if(clear)clear.hidden=!e.target.value;
+ try{if(typeof applyHomeFilters==="function")applyHomeFilters()}catch(err){}
+});
+document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;const p=document.getElementById("dv3ThemePanel");if(p&&!p.hidden){p.hidden=true;e.preventDefault();}});
+document.addEventListener("dar:view-rendered",queue);
+window.addEventListener("hashchange",queue);
+window.addEventListener("pageshow",queue);
+document.addEventListener("DOMContentLoaded",function(){
+ const app=document.getElementById("appView");
+ if(app)new MutationObserver(queue).observe(app,{childList:true,subtree:false});
+ queue();
+});
+if(document.readyState!=="loading")queue();
+})();
