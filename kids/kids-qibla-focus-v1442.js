@@ -14,6 +14,8 @@ const get=k=>{try{return JSON.parse(localStorage.getItem(k)||"null")}catch(_){re
 const put=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(_){}};
 const valid=p=>p&&Number.isFinite(Number(p.lat))&&Number.isFinite(Number(p.lon))&&Math.abs(Number(p.lat))<=90&&Math.abs(Number(p.lon))<=180;
 const norm=n=>(n%360+360)%360;
+const angularDistance=(a,b)=>Math.abs(((a-b+540)%360)-180);
+const QIBLA_ALIGN_ENTER=6,QIBLA_ALIGN_EXIT=9,QIBLA_ALIGN_STABLE_MS=250;
 const bearing=p=>{
  const radians=x=>x*Math.PI/180;
  const a=radians(Number(p.lat)),b=radians(KAABA.lat),delta=radians(KAABA.lon-Number(p.lon));
@@ -22,20 +24,25 @@ const bearing=p=>{
 const nameOf=p=>p?.name||p?.city||"Ausgewählter Ort";
 let selected=null,source="none",heading=null,needleAngle=null,isOpen=false,searchTimer=null,searchTicket=0,request=null,liveTimer=null;
 let lastFocus=null,wasInert=false,lastLiveMessage="",session=0,gpsRequest=0,sensorRequest=0;
+let aligned=false,alignmentCandidateAt=0;
 const controls=document.createElement("div");controls.className="kids-salah-shortcuts";
 original.parentNode.insertBefore(controls,original);
 controls.appendChild(original);
 const titleText=original.firstChild;
-if(titleText&&titleText.nodeType===Node.TEXT_NODE)titleText.textContent="Gebetszeiten ";
+if(titleText&&titleText.nodeType===Node.TEXT_NODE){
+ const label=document.createElement("span");
+ label.className="kids-shortcut-label";label.textContent="Gebetszeiten";
+ original.replaceChild(label,titleText);
+}
 original.setAttribute("aria-label","Alle fünf Gebetszeiten ansehen");
 const clockIcon=document.createElement("span");
 clockIcon.className="kids-shortcut-emoji";clockIcon.setAttribute("aria-hidden","true");clockIcon.textContent="🕰️";
 original.insertBefore(clockIcon,original.firstChild);
 original.lastElementChild?.classList.add("kids-shortcut-tail");
 const launch=document.createElement("button");
-launch.type="button";launch.id="kidsQiblaQuick";launch.className="kids-qibla-shortcut";
+launch.type="button";launch.id="kidsQiblaQuick";launch.className="kids-salah-open-day kids-qibla-shortcut";
 launch.setAttribute("aria-haspopup","dialog");
-launch.innerHTML='<span class="kids-shortcut-emoji" aria-hidden="true">🧭</span><span>Qibla</span><span class="kids-shortcut-tail" aria-hidden="true">›</span>';
+launch.innerHTML='<span class="kids-shortcut-emoji" aria-hidden="true">🧭</span><span class="kids-shortcut-label">Qibla</span><span class="kids-shortcut-tail" aria-hidden="true">›</span>';
 controls.appendChild(launch);
 const focus=document.createElement("section");
 focus.id="kidsQiblaFocus";focus.className="kids-qibla-focus";focus.hidden=true;
@@ -104,6 +111,7 @@ if(typeof MutationObserver!=="undefined"){
 syncTheme();
 function selectPlace(place,kind){
  if(!valid(place))return false;
+ clearAlignment();
  selected={lat:Number(place.lat),lon:Number(place.lon),name:nameOf(place)};
  source=kind;render();return true;
 }
@@ -111,7 +119,16 @@ function setDefaultPlace(){
  const saved=get(QIBLA_PLACE),prayer=get(PRAYER_PLACE);
  if(valid(saved))selectPlace(saved,"city");
  else if(valid(prayer))selectPlace(prayer,"prayer");
- else{selected=null;source="none";render()}
+ else{clearAlignment();selected=null;source="none";render()}
+}
+function setAligned(value){
+ if(aligned===value)return;
+ aligned=Boolean(value);
+ focus.classList.toggle("is-aligned",aligned);
+}
+function clearAlignment(){
+ alignmentCandidateAt=0;
+ setAligned(false);
 }
 function render(){
  const q=selected?bearing(selected):null;
@@ -126,10 +143,12 @@ function render(){
  }
  if(q===null)live.textContent="Zuerst einen Ort auswählen.";
  else if(heading===null)live.textContent="Grad ab Norden · Live-Ausrichtung noch nicht aktiviert";
+ else if(aligned)live.textContent="✨ Qibla gefunden! Du blickst Richtung Makkah.";
  else {
   const turn=((q-heading+540)%360)-180;
-  live.textContent=Math.abs(turn)<7?"Richtung Makkah ist gerade voraus ✨":
-   "Drehe dich etwa "+Math.round(Math.abs(turn))+"° nach "+(turn>0?"rechts":"links")+" ✨";
+  live.textContent=Math.abs(turn)<=QIBLA_ALIGN_ENTER?
+   "Fast geschafft! Halte das Gerät kurz ruhig.":
+   "Drehe dich etwa "+Math.round(Math.abs(turn))+"° nach "+(turn>0?"rechts":"links")+".";
  }
  const badge=focus.querySelector(".kq-compass");
  if(badge)badge.setAttribute("aria-label",heading===null?"Qibla "+(q===null?"unbekannt":Math.round(q)+" Grad ab Norden"):"Live-Qibla, "+live.textContent);
@@ -139,6 +158,7 @@ function stopCompass(){
  window.removeEventListener("deviceorientation",onOrientation,true);
  window.removeEventListener("deviceorientationabsolute",onOrientation,true);
  clearTimeout(liveTimer);liveTimer=null;heading=null;lastLiveMessage="";
+ clearAlignment();
 }
 function onOrientation(event){
  let value=null,accuracy=null;
@@ -146,16 +166,30 @@ function onOrientation(event){
   value=norm(event.webkitCompassHeading);
   accuracy=typeof event.webkitCompassAccuracy==="number"?event.webkitCompassAccuracy:null;
   if(accuracy!==null&&(accuracy<0||accuracy>45)){
-   heading=null;render();message("Kompass nicht ausreichend kalibriert. Bitte das Gerät bewegen und Metall meiden.");return;
+   heading=null;clearAlignment();render();message("Kompass nicht ausreichend kalibriert. Bitte das Gerät bewegen und Metall meiden.");return;
   }
  }else if(event.absolute===true&&typeof event.alpha==="number"&&Number.isFinite(event.alpha)){
   const angle=Number(screen.orientation?.angle??window.orientation??0)||0;
   value=norm(360-event.alpha+angle);
  }else return;
  if(!isOpen||value===null)return;
- heading=value;render();
- const info=accuracy!==null&&(accuracy<0||accuracy>25)?
-  "Kompass aktiv, aber ungenau. Bewege das Gerät zum Kalibrieren.":"Live-Ausrichtung aktiv · Genauigkeit geräteabhängig.";
+ heading=value;
+ // A geographic bearing by itself cannot trigger success. Require accurate
+ // NORTH-REFERENCED heading and at least 250ms of stable sensor agreement.
+ const target=selected?bearing(selected):null;
+ const difference=target===null?Infinity:angularDistance(target,value);
+ const confidence=accuracy===null||(accuracy>=0&&accuracy<=25);
+ if(confidence&&difference<=QIBLA_ALIGN_ENTER){
+  if(!alignmentCandidateAt)alignmentCandidateAt=Date.now();
+  if(Date.now()-alignmentCandidateAt>=QIBLA_ALIGN_STABLE_MS)setAligned(true);
+ }else{
+  alignmentCandidateAt=0;
+  if(!confidence||difference>=QIBLA_ALIGN_EXIT||target===null)setAligned(false);
+ }
+ render();
+ const info=aligned?"✨ Qibla gefunden! Die Richtung nach Makkah stimmt.":
+  !confidence?"Kompass noch ungenau. Bitte das Gerät bewegen und kalibrieren.":
+  "Live-Ausrichtung aktiv · Genauigkeit geräteabhängig.";
  if(lastLiveMessage!==info){message(info);lastLiveMessage=info}
 }
 async function startCompass(){
@@ -299,5 +333,5 @@ function linkParentSettings(){
 }
 linkParentSettings();
 document.addEventListener("DOMContentLoaded",linkParentSettings,{once:true});
-window.DARKidsQiblaFocus={open,close,bearing:(lat,lon)=>valid({lat,lon})?bearing({lat,lon}):null};
+window.DARKidsQiblaFocus={open,close,bearing:(lat,lon)=>valid({lat,lon})?bearing({lat,lon}):null,angularDistance};
 })();
