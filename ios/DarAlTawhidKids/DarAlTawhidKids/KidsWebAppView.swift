@@ -218,6 +218,10 @@ struct KidsWebAppView: UIViewRepresentable {
 #endif
 
         @objc private func appDidBecomeActive() {
+#if KIDS_CREATOR_TEST
+            // Refresh local Salah reminders on the next foreground visit.
+            kidsTestNotifyStatus()
+#endif
             UIApplication.shared.isIdleTimerDisabled = readingKeepsScreenAwake
             guard hasKidsNowPlaying else { return }
             webView?.evaluateJavaScript(
