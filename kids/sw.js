@@ -488,6 +488,13 @@ self.addEventListener("fetch",function(event){
     event.respondWith(networkFirst(request));
     return;
   }
+  /* KIDS_VISITOR_PARENT_NOTIFICATIONS_V1: keep freshly released parental
+     notification controls and Quick Qibla current in installed PWAs; use offline fallback. */
+  if(url.pathname==="/kids/parent-notifications-visitor-v1.js"||
+     url.pathname==="/kids/parent-notifications-visitor-v1.css"){
+    event.respondWith(networkFirst(request));
+    return;
+  }
   /* Parent dashboard CSS and JS: fetch current online with offline fallback. */
   if(url.pathname==="/kids/parents-dashboard-v1432.css"||url.pathname==="/kids/parents-dashboard-v1432.js"||url.pathname==="/kids/parents-compact-timer-v1436.css"||url.pathname==="/kids/parents-compact-timer-v1436.js"){
     event.respondWith(networkFirst(request));return;
