@@ -267,10 +267,6 @@ function browserManifestResponse(request, androidBrowser = false) {
   });
   return new Response(request.method === "HEAD" ? null : JSON.stringify(manifest, null, 2), { status: 200, headers });
 }
-function adultImmersiveHeroVisitorAddon() {
-  return '<link rel="stylesheet" id="darAdultImmersiveHeroVisitorV1" href="/assets/adult-immersive-hero-v1.css?v=20261018-1">' +
-    '<script defer id="darAdultImmersiveHeroVisitorScriptV1" src="/assets/adult-immersive-hero-v1.js?v=20261018-1"></script>';
-}
 function adultCompactHeroAddon() {
   return '<link rel="stylesheet" id="darAdultHeroCompactEdgeV1396" href="/assets/adult-responsive-viewport-v1381.css?v=hero-compact-edge-v1396">';
 }
@@ -1431,11 +1427,6 @@ export default {
           html = html.includes("<head>") ? html.replace("<head>", "<head>" + iosPwaGuard + pwaHead) : iosPwaGuard + pwaHead + html;
         }
       }
-      // Adult Android PWA uses the same visitor Hero contract as native/web.
-      if (assetResponse.ok && !html.includes('id="darAdultImmersiveHeroVisitorV1"')) {
-        const addon = adultImmersiveHeroVisitorAddon();
-        html = html.includes("</body>") ? html.replace("</body>", addon + "</body>") : html + addon;
-      }
       headers.set("Content-Type", "text/html; charset=utf-8");
       return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
     }
@@ -1661,10 +1652,6 @@ export default {
         const androidAddon = androidNativeToolsAddon();
         html = html.includes("</body>") ? html.replace("</body>", androidAddon + "</body>") : html + androidAddon;
       }
-      if (assetResponse.ok && !html.includes('id="darAdultImmersiveHeroVisitorV1"')) {
-        const addon = adultImmersiveHeroVisitorAddon();
-        html = html.includes("</body>") ? html.replace("</body>", addon + "</body>") : html + addon;
-      }
       headers.set("Content-Type", "text/html; charset=utf-8");
       return new Response(html, {
         status: assetResponse.status,
@@ -1694,7 +1681,6 @@ export default {
         if (!html.includes("desktop-overhaul.js")) html = html.replace("</body>", scriptTag + "</body>");
         if (!html.includes("darPublicWebsiteGuardV1")) html = html.replace("</body>", publicWebsiteAddon() + "</body>");
         if (!html.includes("darAdultHeroCompactEdgeV1396")) html = html.replace("</body>", adultCompactHeroAddon() + "</body>");
-        if (!html.includes('id="darAdultImmersiveHeroVisitorV1"')) html = html.replace("</body>", adultImmersiveHeroVisitorAddon() + "</body>");
       }
       headers.set("Content-Type", "text/html; charset=utf-8");
       return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
