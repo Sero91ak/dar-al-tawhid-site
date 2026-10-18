@@ -99,6 +99,7 @@ struct KidsWebAppView: UIViewRepresentable {
 #if KIDS_CREATOR_TEST
         private var pendingCreatorTab: String?
         private var loadProgressObservation: NSKeyValueObservation?
+        private var kidsPrayerScheduleRevision = 0
 #endif
 
         func attach(_ webView: WKWebView) {
@@ -295,6 +296,63 @@ struct KidsWebAppView: UIViewRepresentable {
                         self?.kidsTestNotifyStatus(error == nil
                             ? "Eine lokale Testmitteilung ist für fünf Sekunden später geplant."
                             : "Die Testmitteilung konnte nicht eingerichtet werden.")
+                    }
+                }
+            case "syncSchedule":
+                // Creator-only local reminders, never APNs or OneSignal.
+                // Restrict notifications to real calculated timestamps, at most 48h.
+                let rows = body["schedule"] as? [[String: Any]] ?? []
+                guard rows.count <= 14 else { return }
+                var planned: [(id: String, request: UNNotificationRequest)] = []
+                let now = Date()
+                var calendar = Calendar(identifier: .gregorian)
+                calendar.timeZone = TimeZone(secondsFromGMT: 0)!
+                let allowedKeys: Set<String> = ["fajr", "dhuhr", "asr", "maghrib", "isha"]
+                for row in rows {
+                    guard let key = row["key"] as? String,
+                          allowedKeys.contains(key),
+                          let day = row["day"] as? String,
+                          day.range(of: #"^\d{4}-\d{2}-\d{2}$"#, options: .regularExpression) != nil,
+                          let label = row["label"] as? String,
+                          let epoch = (row["epoch"] as? NSNumber)?.doubleValue,
+                          epoch.isFinite,
+                          let advance = (row["advance"] as? NSNumber)?.intValue,
+                          [0, 5, 10, 15, 30].contains(advance) else { continue }
+                    let time = Date(timeIntervalSince1970: epoch / 1000)
+                    guard time.timeIntervalSince(now) >= 60,
+                          time.timeIntervalSince(now) <= 48 * 3600 else { continue }
+                    let content = UNMutableNotificationContent()
+                    content.title = "TAWḤĪD KIDS · " + label
+                    content.body = advance == 0
+                        ? "Es ist Zeit für dein Gebet."
+                        : "In " + String(advance) + " Minuten beginnt dein Gebet."
+                    content.sound = .default
+                    let components = calendar.dateComponents(
+                        [.year, .month, .day, .hour, .minute], from: time)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+                    let id = "kids.creator.salah." + key + "." + day
+                    planned.append((
+                        id: id,
+                        request: UNNotificationRequest(
+                            identifier: id, content: content, trigger: trigger)
+                    ))
+                }
+                kidsPrayerScheduleRevision += 1
+                let revision = kidsPrayerScheduleRevision
+                center.getPendingNotificationRequests { [weak self] requests in
+                    DispatchQueue.main.async { [weak self] in
+                        guard let self,
+                              self.kidsPrayerScheduleRevision == revision else { return }
+                        let old = requests.map(\.identifier).filter {
+                            $0.hasPrefix("kids.creator.salah.")
+                        }
+                        center.removePendingNotificationRequests(withIdentifiers: old)
+                        for item in planned {
+                            center.add(item.request) { _ in }
+                        }
+                        self.kidsTestNotifyStatus(
+                            String(planned.count) +
+                            " lokale Gebetserinnerungen für die nächsten 48 Stunden geplant.")
                     }
                 }
             case "openSettings":
