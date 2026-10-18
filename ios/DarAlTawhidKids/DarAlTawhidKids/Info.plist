@@ -33,6 +33,8 @@
 	<false/>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Eltern können die Freigabe für TAWḤĪD KIDS-Benachrichtigungen mit Face ID bestätigen.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
