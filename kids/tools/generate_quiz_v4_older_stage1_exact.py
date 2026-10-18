@@ -89,7 +89,7 @@ def persist_remote_paid_checkpoint(*paths, purpose):
     git("add","--",*(str(p.relative_to(ROOT)) for p in paths))
     staged=git("diff","--cached","--name-only").stdout.strip()
     check(bool(staged),"paid original already checkpointed or missing; STOP before proceeding")
-    git("commit","-m","audio(kids V4): protect paid original "+purpose)
+    git("commit","-m","audio(kids V4): protect paid original "+purpose+" [skip ci]")
     git("push","origin","HEAD:"+expected)
     print("KIDS_V4_ORIGINAL_CHECKPOINT_SAVED "+purpose,flush=True)
 
