@@ -321,10 +321,12 @@ def main():
         print("PASS_KIDS_V4_OLDER_STAGE1_NO_CREDIT_PREFLIGHT "+
               json.dumps(report,ensure_ascii=False),flush=True)
         return
-    # The actual source review and the spend are separate user actions;
+    # Existing approved 450 canonical answers are verified by SHA; only acknowledge
+    # that original review, do not request an unnecessary second review. Credit
+    # expenditure remains separately and explicitly authorized.
     # neither is inferred from previous messages or from the JSON preflight.
-    check(os.getenv("KIDS_V4_STAGE1_HUMAN_CONTENT_CHECK")=="YES",
-          "requires explicit completed human source/text review")
+    check(os.getenv("KIDS_V4_STAGE1_APPROVED_CANONICAL_450")=="YES",
+          "requires acknowledgement of existing approved original 450 questions, without repeating the old review")
     check(os.getenv("KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL")=="YES",
           "requires explicit paid-credit authorization for this run")
     check(os.getenv("KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256","").strip()==paid_snapshot,
