@@ -108,11 +108,13 @@ def main():
                         pending[segment].add((qid,age,part))
             else:
                 raise RuntimeError("Unknown V4 recipe mode; refusing paid queue")
-            if missing_old or missing_new:
+            if missing_old or missing_new or missing_flow:
                 blocked_parts[part]={"alreadyPaidNotYetImported":sorted(missing_old),
+                                     "awaitingConnectedFlowOriginalTextSha256":sorted(txt_hash(x) for x in missing_flow),
                                      "newOriginalTextSha256":sorted(txt_hash(x) for x in missing_new)}
             question_new.update(missing_new)
             question_paid.update(missing_old)
+            question_flow.update(missing_flow)
         for gid in question_paid:prepaid_uses[gid]+=1
         q_stage=stage["questions"][qid]
         need(q_stage["ageBand"]==age,"wrong stage age group")
@@ -121,14 +123,17 @@ def main():
         actual_complete=q_stage["fourPartTechnicallyReady"]
         need(actual_complete==(not blocked_parts),"Staged full-MP3 claim conflicts with originals: "+qid)
         if not blocked_parts:group="complete-v4-review"
-        elif question_paid and not question_new:group="restore-prepaid-originals-only"
-        elif question_paid and question_new:group="both-prepaid-recovery-and-new-v4"
+        elif question_flow and not question_new and not question_paid:group="await-connected-flow-only"
+        elif question_paid and not question_new and not question_flow:group="restore-prepaid-originals-only"
+        elif (question_paid or question_flow) and not question_new:group="await-other-prepaid-or-reserved-only"
+        elif (question_paid or question_flow) and question_new:group="both-prepaid-recovery-and-new-v4"
         else:group="new-original-v4-needed"
         by_age[age][group]+=1
         every_new.update(question_new)
         records.append({
             "questionId":qid,"ageBand":age,"status":group,
             "missingPreviouslyPaidGenerationIds":sorted(question_paid),
+            "missingConnectedFlowOriginalTextSha256":sorted(txt_hash(x) for x in question_flow),
             "missingNewTextSha256":sorted(txt_hash(s) for s in question_new),
             "newUniqueSegmentCount":len(question_new),
             "incrementalTextCodepointsIfAlone":sum(len(s) for s in question_new),
@@ -139,6 +144,8 @@ def main():
          sum(int(q["fourPartTechnicallyReady"]) for q in stage["questions"].values()),
          "Current full-part stage count inconsistent")
     need(not set(by_text)&every_new,"Prepaid originals incorrectly in chargeable list")
+    need(not set(pending_flow)&every_new,
+         "Reserved connected ElevenLabs Flow originals entered the new credit queue")
     # A potential new-TTS priority order: finish the most questions with
     # the fewest unique new text characters, reusing selections already made.
     # First age 4–6, then 7–8, then 9–10. Prepaid-only items remain blocked
