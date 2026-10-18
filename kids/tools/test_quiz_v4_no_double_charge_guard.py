@@ -51,10 +51,24 @@ def main():
     old = json.loads((ROOT / "kids/data/quiz-v4-missing9-prepaid-originals.json")
                      .read_text(encoding="utf-8"))
     protected = protect_paid_texts(ROOT, reg, ledger)
+    # Other audio workers can have connected ElevenLabs generations already
+    # submitted or reserved even when MP3 bytes have not yet reached GitHub.
+    # Those source texts are protected too; do not treat them as unbilled.
+    flow_path=ROOT/"kids/data/quiz-v4-connected-flow-originals-ledger.json"
+    connected=json.loads(flow_path.read_text(encoding="utf-8")) if flow_path.is_file() else {"entries":[]}
+    connected_pending={e["sourceText"] for e in connected["entries"]
+                       if e["status"]!="IMPORTED_ORIGINAL_MP3_VERIFIED"}
     expected = (set(reg["textClips"]) |
                 {r["text"] for r in ledger["rows"]} |
-                {r["originalSpokenText"] for r in old["items"]})
-    require(protected == expected, "Some previous V4 charges are missing from protection")
+                {r["originalSpokenText"] for r in old["items"]} |
+                connected_pending)
+    require(protected == expected, "Some previously paid or connected pending V4 speech missing from protection")
+    for text in connected_pending:
+        refused(lambda text=text: prohibit_prepaid_selection(text,protected),
+                "connected flow reserved/pending original")
+    require(not connected_pending.intersection(
+            {r["originalSpokenText"] for r in old["items"]}),
+            "connected flow would duplicate one of nine historical paid originals")
     require(len({r["providerRequestId"] for r in ledger["rows"] if r.get("providerRequestId")}) ==
             sum(bool(r.get("providerRequestId")) for r in ledger["rows"]),
             "Duplicate paid provider receipts")
