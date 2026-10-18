@@ -33,6 +33,18 @@ def build():
         raise RuntimeError("Original stage text hashes changed")
     if any(x["spokenText"] in protected for x in outstanding):
         raise RuntimeError("Paid original wrongly placed in future recording waves")
+    actually_stored=sum(x["spokenText"] in registry["textClips"]
+                        for x in source["originalTextRecordingQueue"])
+    reserved_sha=source.get("_reservedUnimportedTextSHA256",[])
+    reserved=len(reserved_sha)
+    if (len(reserved_sha)!=len(set(reserved_sha)) or
+            set(reserved_sha)&missing_sha or
+            not set(reserved_sha)<=source_sha or
+            actually_stored+reserved+len(outstanding)!=65):
+        raise RuntimeError("Saved, reserved-but-missing and new V4 original classes overlap")
+    # Reserved Flow takes are NOT existing MP3s. Never report them as stored,
+    # and do not charge them again until their provider state is reconciled.
+
     previous_paid=set(registry["textClips"])
     wave_rows=[]
     remaining=outstanding[:]
@@ -72,7 +84,10 @@ def build():
         "scope":"TAWHID_KIDS_OLDER_STAGE1_ZERO_CREDIT_RECORDING_ROADMAP",
         "stageQuestionCount":20,
         "stageOriginalTextCount":65,
-        "alreadyStoredStageOriginals":65-len(outstanding),
+        "alreadyStoredStageOriginals":actually_stored,
+        "reservedFlowOriginalsNotYetInGithub":reserved,
+        "totalStillMissingOriginalMP3s":reserved+len(outstanding),
+        "newOriginalsEligibleForSeparatePaidApproval":len(outstanding),
         "unrecordedOriginals":len(outstanding),
         "manualWavesRemaining":len(wave_rows),
         "modelId":MODEL,
@@ -85,6 +100,8 @@ def build():
         "estimatesAreNotProviderBills":True,
         "estimatedRemainingCredits":round(sum(w["estimatedCreditsNotAnInvoice"] for w in wave_rows),2),
         "earlierPrepaidNineMustNeverBeRegenerated":True,
+        "reservedFlowTakesMustNotBeRegenerated":True,
+        "providerStatusReconciliationRequiredForReserved":reserved>0,
         "wavesAfterFirstAreProvisionalUntilFreshRegistryAndLedgerAudit":True,
         "firstWaveRequiresActualCurrentAuditFingerprint":True,
         "recordingWaves":wave_rows,
@@ -103,7 +120,10 @@ def main():
         args.output.parent.mkdir(parents=True,exist_ok=True)
         args.output.write_text(data,encoding="utf-8")
     print("KIDS_V4_ZERO_CREDIT_STAGE1_WAVES "+json.dumps({
-        "missingOriginals":plan["unrecordedOriginals"],
+        "missingOriginals":plan["totalStillMissingOriginalMP3s"],
+        "alreadyStored":plan["alreadyStoredStageOriginals"],
+        "reservedFlowNotImported":plan["reservedFlowOriginalsNotYetInGithub"],
+        "newTextsEligibleAfterApproval":plan["newOriginalsEligibleForSeparatePaidApproval"],
         "manualWaves":plan["manualWavesRemaining"],
         "estimatedCreditsNotInvoice":plan["estimatedRemainingCredits"],
         "firstWaveQuestionsCouldComplete":plan["recordingWaves"][0]["couldCompleteQuestionIds"] if plan["recordingWaves"] else [],
