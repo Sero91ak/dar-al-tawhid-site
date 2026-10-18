@@ -97,7 +97,7 @@
       "apple-tv/hadith/audit/2026-10-18-sharh-athar-continuation.json",
       "apple-tv/hadith/audit/0371-0392-20261018-two-batches.json"
     ],
-    "nextRequestedBatch": "Inspect genuine open Sharḥ and Athar attribution candidates HAD-0393–HAD-0412, but skip any already settled in prior audits. Add new unique Hadith with Šarḥ / independently graded Athar from HAD-3358 onward.",
+    "nextRequestedBatch": "HAD-0443–HAD-0462 (20 candidates) with open real attribution/isnad work; separately resolve HAD-0406 only if original text and chain found",
     "completedBatches": [
       {
         "date": "2026-10-18",
@@ -161,6 +161,23 @@
       "HAD-0391",
       "HAD-0392"
     ],
-    "warning": "20 audited/updated ≠ 20 newly authenticated; exactly two HAD-0380 and HAD-0391 identified as securely transmitted in this new 20-item audit; other statuses preserved as pending/weak."
+    "warning": "20 audited/updated ≠ 20 newly authenticated; exactly two HAD-0380 and HAD-0391 identified as securely transmitted in this new 20-item audit; other statuses preserved as pending/weak.",
+    "lastCompletedBatch": {
+      "date": "2026-10-18",
+      "range": "HAD-0393–HAD-0412",
+      "inspected": 20,
+      "athar": 18,
+      "hadithAlreadySharhVerified": 2,
+      "recordsUpdated": 7,
+      "newRecords": 0,
+      "fullyNewAtharGraded": 0,
+      "auditPath": "apple-tv/hadith/audit/0393-0412-20261018-continuation.json",
+      "important": [
+        "HAD-0404: original Ibn Abd al-Barr 1762 wording is Mujahid, narrator corrected",
+        "HAD-0406: unverified source/isnad, do not present as authentic"
+      ],
+      "deployState": "main committed; Cloudflare / native device fetch not independently verified"
+    },
+    "historicalCountNote": "3,357 catalog rows at previously checked main; no new HAD IDs in this batch, do not infer live endpoints from commits"
   }
 }
