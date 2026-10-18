@@ -8473,6 +8473,20 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-01T23:59:00.000Z"
+    },
+    {
+      "id": "visitor-compact-hero-sticky-after-test-20261018",
+      "at": "2026-10-18T18:06:00+02:00",
+      "approvedBy": "user-global-responsive-hero-and-under-scroll-with-sticky-search-20261018",
+      "reason": "Stage 2 visitor-only after isolated Dar Test rollout: same compact photo-backed Hero+sticky measured search design, preserving actual Frauen photo data and source, no Kids/native binaries or other app lane changes. Append reusable responsive hero minima, route-scope CSS, existing height observer, and source/visual parity guard. No push notification for purely UI fixes.",
+      "paths": [
+        "assets/dar-hero-scroll-standard-v1.css",
+        "assets/adult-responsive-viewport-v1381.css",
+        "assets/adult-immersive-hero-v1.js",
+        "scripts/hero-scroll-standard-guard.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-01T23:59:00.000Z"
     }
   ],
   "enabled": true
