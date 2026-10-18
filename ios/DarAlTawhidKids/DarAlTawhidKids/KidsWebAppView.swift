@@ -392,7 +392,10 @@ struct KidsWebAppView: UIViewRepresentable {
 
         func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
 #if !KIDS_CREATOR_TEST
-            if (error as NSError).code != NSURLErrorCancelled && !hasPresentedInitialPage {
+            // A canceled request can be a normal redirect/retry; do not dismiss progress
+            // or prematurely mark the initial page as presented.
+            if (error as NSError).code == NSURLErrorCancelled { return }
+            if !hasPresentedInitialPage {
                 NotificationCenter.default.post(name: Notification.Name("DarKidsVisitorLoadFailed"), object: nil)
             }
 #endif
@@ -401,7 +404,10 @@ struct KidsWebAppView: UIViewRepresentable {
 
         func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
 #if !KIDS_CREATOR_TEST
-            if (error as NSError).code != NSURLErrorCancelled && !hasPresentedInitialPage {
+            // A canceled request can be a normal redirect/retry; do not dismiss progress
+            // or prematurely mark the initial page as presented.
+            if (error as NSError).code == NSURLErrorCancelled { return }
+            if !hasPresentedInitialPage {
                 NotificationCenter.default.post(name: Notification.Name("DarKidsVisitorLoadFailed"), object: nil)
             }
 #endif
