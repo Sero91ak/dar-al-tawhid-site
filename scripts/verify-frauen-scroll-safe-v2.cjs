@@ -24,7 +24,7 @@ for(const fname of ["cloudflare/test-app-worker.js","cloudflare/site-router.js"]
   assert.ok(!data.includes("darAdultImmersiveHeroVisitorV1")&&!data.includes("darAdultImmersiveHeroTestV1"));
 }
 const fixture=(isOld)=>`<!doctype html>
-<html lang="de"><head><meta charset="utf-8">
+<html lang="de" ${isOld?"":'data-dar-frauen-scroll-safe="1"'}><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <style>
 :root{background:#f3f2eb;color:#173028;font-family:system-ui}
@@ -33,7 +33,7 @@ const fixture=(isOld)=>`<!doctype html>
 .frauen-library-hero{background-image:linear-gradient(90deg,rgba(0,15,15,.78),rgba(0,15,15,.07)),url("/assets/frauen/library-v1224/03-erste-generationen.jpg");background-size:cover;background-position:center;height:330px;width:100%;padding:40px 20px;display:flex;flex-direction:column;justify-content:end;color:white}
 .frauen-library-hero h1{font:40px Georgia,serif;margin:0}.frauen-library-search-wrap{padding:15px 22px;background:#eaf0e8}.frauen-library-search-wrap input{font-size:17px;padding:14px;width:100%}
 .frauen-library-card{padding:25px;border:1px solid #bdcbc0;border-radius:22px;background:#fffdfa;min-height:185px;display:block;width:calc(100% - 36px);margin:15px 18px;text-align:left;font-size:18px;color:#173028}
-</style></head><body><div id="appView"></div>
+</style>${!isOld?'<link rel="stylesheet" href="/assets/frauen/frauen-sticky-scroll-safe-v2.css">':""}</head><body><div id="appView"></div>
 <script>
 window.__baseCalls=0;window.__viewPaints=0;window.__bindCalls=0;window.__renderEvents=0;
 window.__search="";window.__dataVersion=0;
@@ -68,6 +68,7 @@ reload:function(){window.__dataVersion++;return Promise.resolve()}
 document.addEventListener("dar:frauen-render",function(){window.__renderEvents++});
 </script>
 <script src="/${isOld?"assets/frauen/frauen-live-adapter.js":versioned}"></script>
+${!isOld?'<script src="/assets/frauen/frauen-sticky-scroll-safe-v2.js"></script>':""}
 </body></html>`;
 const server=http.createServer((request,response)=>{
   const p=new URL(request.url,"http://localhost").pathname;
@@ -100,6 +101,10 @@ function styleProbe(){
   hero:{top:r?.top,height:r?.height,width:r?.width,img:hero?getComputedStyle(hero).backgroundImage:null},
   firstCard:document.querySelector(".frauen-library-card")?.getBoundingClientRect().top,
   rootChildren:document.querySelectorAll("#appView > .dar-frauen-production-root").length,
+  heroPosition:hero?getComputedStyle(hero).position:"",
+  searchPosition:getComputedStyle(document.querySelector(".frauen-library-search-wrap")).position,
+  searchTop:document.querySelector(".frauen-library-search-wrap").getBoundingClientRect().top,
+  appOverflowY:getComputedStyle(document.getElementById("appView")).overflowY,
   bodyClass:document.body.className,view:document.body.dataset.frauenView||""};
 }
 async function runCase(browser,cfg,origin){
@@ -111,8 +116,12 @@ async function runCase(browser,cfg,origin){
  page.on("response",r=>{if(r.status()>=400)missing.push(r.status()+":"+r.url())});
  try{
   await page.goto(origin+"/#frauen",{waitUntil:"load"});
-  await page.waitForFunction(()=>document.querySelector(".frauen-library-hero"));
+  await page.waitForFunction(()=>document.querySelector(".frauen-library-hero") &&
+    document.querySelector(".frauen-library-shell")?.style.getPropertyValue("--dar-frauen-search-sticky-top"));
   const initial=await page.evaluate(styleProbe);
+  assert.equal(initial.heroPosition,"sticky",tag+" sticky hero not active");
+  assert.equal(initial.searchPosition,"sticky",tag+" attached search not sticky");
+  assert.equal(initial.appOverflowY,"visible",tag+" nested overflow blocks stickiness");
   assert.match(initial.hero.img,/03-erste-generationen\.jpg/);
   assert.equal(initial.rootChildren,1);
   assert.ok(initial.hero.height>=280);
@@ -121,6 +130,10 @@ async function runCase(browser,cfg,origin){
   await page.waitForTimeout(70);
   const y1=await page.evaluate(()=>window.scrollY);
   assert.ok(y1>300,tag+" cannot initially scroll");
+  const sticky=await page.evaluate(styleProbe);
+  assert.ok(Math.abs(sticky.hero.top)<=2,tag+" Hero moved while page scrolled "+sticky.hero.top);
+  assert.ok(Math.abs(sticky.searchTop-initial.searchTop)<=2,tag+" attached search moved independently");
+  assert.ok(sticky.firstCard<initial.hero.height,tag+" reading cards do not pass under Hero");
   const oldHeroId=await page.evaluate(()=>{window.__initialHero=document.querySelector(".frauen-library-hero");return window.__renderEvents});
   await page.evaluate(()=>{for(let n=0;n<5;n++)window.render();document.dispatchEvent(new Event("dar:render"));});
   await page.waitForTimeout(120);
