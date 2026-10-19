@@ -285,6 +285,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Hör dir die Frage und die Antworten in Ruhe an. Welche zwei Dinge verneint Āyat al-Kursī für Allah? Antwort 1: Schlummer und Schlaf. Antwort 2: Wissen und Macht. Antwort 3: Hören und Sehen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/9d9e7d0a7fd3d677dea9fdc94a3bf4dcf42b2da5.mp3",
+      "sha256": "4fb397cd0ece94065ecc27955ac5606214f2ee999a3c97529aceb9d6e8087591",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Das merken wir uns: Allah wird weder von Schlummer noch von Schlaf erfasst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/305847d070f7d180ec89cdfb87537ac52f569fa2.mp3",
       "sha256": "51989dc7a269b8d1a60d2505ae2e80e7a95c13fafba6d93270f9f5c055d4e578",
@@ -395,6 +406,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Welche Sache gehört zu den fünf Säulen des Islam? Antwort 1: Das Gebet. Antwort 2: Ein Glücksbringer. Antwort 3: Die eigene Meinung. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8fc9adb7ae9e36373ac076395a379f0e0becf417.mp3",
+      "sha256": "bd6d9b6b7ab923cce6f15ab7063c0744cb81fde2c8b9315f26dffee3620a1976",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Allāhumma bārik! O Allah, schenke Segen. Du hast die passende Antwort gefunden!": {
       "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/9c07f20e03175709966519f34ed00db1.mp3",
       "sha256": "03a4ba13563e25d283a7a6f387ea01160dc523153c28a0c129ffdcbf9db686b0",
@@ -475,6 +497,17 @@
     "Das merken wir uns: Allah befiehlt, die Gebete zu bewahren.": {
       "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/86T6VNKlu9GVu80Q0WI5.mp3",
       "sha256": "22f373c2c0661722454a4f46d57bbf05ef50a3d7a2e3227ee1cccba2ed7d0357",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Welche Körperteile nennt Qurʾān 5:6 beim Wuḍūʾ? Antwort 1: Gesicht, Arme, Kopf und Füße. Antwort 2: Nur Hände. Antwort 3: Nur Gesicht. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/be4e0b057602d69b1e92bc011450927e8519c634.mp3",
+      "sha256": "29cd160589536f1ab748e8eb95ddd6329de2f51f9466c98564684bc61ab2b381",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -3780,13 +3813,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Hören und Sehen.",
-            "Schlummer und Schlaf.",
-            "Welche zwei Dinge verneint Āyat al-Kursī für Allah?",
-            "Wissen und Macht."
-          ]
+          "available": true,
+          "textSha256": "d0b7fed65d8580fe3135f41022fe2ec6ff43389a54c4a438b488f75aafb1e733",
+          "mp3Sha256": "4fb397cd0ece94065ecc27955ac5606214f2ee999a3c97529aceb9d6e8087591",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/9d9e7d0a7fd3d677dea9fdc94a3bf4dcf42b2da5.mp3"
         },
         "correct": {
           "available": true,
@@ -3807,7 +3837,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/305847d070f7d180ec89cdfb87537ac52f569fa2.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-526": {
       "ageBand": "7-8",
@@ -5527,12 +5557,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Das Gebet.",
-            "Die eigene Meinung.",
-            "Ein Glücksbringer."
-          ]
+          "available": true,
+          "textSha256": "f60b00fd91492fc1168f1fafc53487fdc879b5f885ce4d58d2b674fbd4d7272e",
+          "mp3Sha256": "bd6d9b6b7ab923cce6f15ab7063c0744cb81fde2c8b9315f26dffee3620a1976",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8fc9adb7ae9e36373ac076395a379f0e0becf417.mp3"
         },
         "correct": {
           "available": true,
@@ -5685,12 +5713,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Gesicht, Arme, Kopf und Füße.",
-            "Nur Gesicht.",
-            "Nur Hände."
-          ]
+          "available": true,
+          "textSha256": "9295fc97b366e4d96e906632ccc25f57291231ab6d66083101b1df5d48965d34",
+          "mp3Sha256": "29cd160589536f1ab748e8eb95ddd6329de2f51f9466c98564684bc61ab2b381",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/be4e0b057602d69b1e92bc011450927e8519c634.mp3"
         },
         "correct": {
           "available": true,
@@ -5711,7 +5737,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/41c715a2b6ebbe74b46c43e744595653a23dfd03.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-045": {
       "ageBand": "9-10",
