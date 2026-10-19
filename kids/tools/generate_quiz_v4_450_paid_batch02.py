@@ -72,7 +72,7 @@ def build_canonical_v4_payload(spoken, *, language="de"):
     if not p.is_relative_to(ROOT.resolve()) or not p.is_file():
         raise RuntimeError("V4_MASTER_PLS_MISSING")
     data=p.read_bytes()
-    git_sha=hashlib.sha1(b"blob "+str(len(data)).encode("ascii")+b"\\x00"+data).hexdigest()
+    git_sha=hashlib.sha1(b"blob "+str(len(data)).encode("ascii")+b"\x00"+data).hexdigest()
     if git_sha!=dic.get("gitBlobSha"):
         raise RuntimeError("V4_MASTER_PLS_GIT_SHA_MISMATCH")
     ns="{http://www.w3.org/2005/01/pronunciation-lexicon}"
@@ -91,12 +91,12 @@ def build_canonical_v4_payload(spoken, *, language="de"):
         raise RuntimeError("V4_MASTER_PLS_QURAN_IMAN_ALIASES_MISSING")
     # A mixed Latin/Arabic-script speech item MUST be explicitly segmented
     # before synthesis, never guessed as German or Arabic.
-    has_arabic=bool(re.search(r"[\\u0621-\\u064A]",spoken))
+    has_arabic=bool(re.search(r"[\u0621-\u064A]",spoken))
     has_latin=bool(re.search(r"[A-Za-zÀ-ÿ]",spoken))
     if has_arabic and has_latin:
         raise RuntimeError("V4_MIXED_LANGUAGE: split German and native Fuṣḥā audio before charging")
     if language=="ar":
-        if not has_arabic or has_latin or not re.search(r"[\\u064B-\\u065F\\u0670]",spoken):
+        if not has_arabic or has_latin or not re.search(r"[\u064B-\u065F\u0670]",spoken):
             raise RuntimeError("V4_FUSHA: require separately vocalized Arabic-only script")
         # Never apply de-DE transliteration aliases to genuine Arabic;
         # preserve madd, shaddah and case vowels in the source.
@@ -130,7 +130,7 @@ def original_mp3(key,spoken):
                 raise RuntimeError("Unexpected V4 MP3 HTTP/content-type. NEVER RETRY blindly.")
     except urllib.error.HTTPError as exc:
         raise RuntimeError(f"ElevenLabs V4 master+dictionary HTTP {exc.code}; NO AUTOMATIC RETRY")
-    if not (1500<len(data)<1500000) or not(data.startswith(b"ID3") or data[:1]==b"\\xff"):
+    if not (1500<len(data)<1500000) or not(data.startswith(b"ID3") or data[:1]==b"\xff"):
         raise RuntimeError("Invalid original MP3 response; NO AUTOMATIC RETRY")
     return data,rid
 
