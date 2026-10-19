@@ -65,6 +65,8 @@ Dieser Ordner ist die zentrale Ablage für alle nummerierten Quellenlinks.
 | `q/43` | Wahre Tarbiyyah – Erziehung ist Verantwortung | `Qatādah ibn Diʿāmah` | Familie zum Gehorsam gegenüber Allah anleiten und bei den Geboten unterstützen. |
 | `q/44` | Die Nafs und der wahre Aḫlāq | `Der Prophet ﷺ / an-Nawwās ibn Samʿān` | Rechtschaffenheit, Sünde, inneres Gewissen, frühester direkter Šarḥ aṭ-Ṭaḥāwīs. |
 
+| `q/46` | Wissen und vorbildliche Lebensführung | `Muḥammad ibn Sīrīn` | Sie lernten vorbildliche Lebensführung ebenso wie das Wissen. |
+
 ## Sonderbereiche
 
 - `q/_registry/` ist nur Verwaltung: Nummerierung, Vorlage und Registry.
