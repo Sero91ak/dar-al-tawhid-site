@@ -1,9 +1,9 @@
 {
   "scope": "KIDS_V4_CONNECTED_PAID_ORIGINALS_GET_ONLY",
-  "requestedOriginals": 3,
+  "requestedOriginals": 2,
   "providerGETsAttempted": 1,
   "downloadedOriginals": 0,
-  "importedOriginals": 1,
+  "importedOriginals": 0,
   "providerHTTP": 402,
   "failedGenerationId": "15jWoEmEjxXcSEz9r79Z",
   "newPaidSpeechCalls": 0,
@@ -13,8 +13,5 @@
   "reusedAlreadyPaidGenerationsOnly": true,
   "humanListeningApproved": false,
   "publicReleaseEnabled": false,
-  "blocked": "Provider read-only original download denied; retain paid generation and do not regenerate.",
-  "signedOriginalGetImported": 1,
-  "signedGetWasZeroCredit": true,
-  "sourceGenerationId": "UoyfOZJg4ysPhTee41ru"
+  "blocked": "Provider read-only original download denied; retain paid generation and do not regenerate."
 }
