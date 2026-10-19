@@ -303,7 +303,7 @@ def main():
         "modelId":MODEL,"voiceId":VOICE,"reviewOnly":True,
         "questionCount":20,"questions7to8":10,"questions9to10":10,
         "stageExpectedNewOriginals":STAGE_SIZE,
-        "previouslyRecordedFirstStageOriginals":STAGE_SIZE-len(missing)-len(stage["_reservedUnimportedTextSHA256"]),
+        "previouslyRecordedFirstStageOriginals":STAGE_SIZE-len(missing)-len(stage["_reservedUnimportedTextSHA256"])-len(stage["_uncertainPaidRequestTextSHA256"]),
         "remainingFirstStageOriginals":len(missing)+len(stage["_reservedUnimportedTextSHA256"])+len(stage["_uncertainPaidRequestTextSHA256"]),
         "reservedOrSubmittedInConnectedFlowNotToRebuy":len(stage["_reservedUnimportedTextSHA256"]),
         "uncertainPreviousPaidRequestsNotToRebuy":len(stage["_uncertainPaidRequestTextSHA256"]),
