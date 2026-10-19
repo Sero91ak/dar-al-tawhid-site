@@ -17,23 +17,23 @@
       },
       "9-10": {
         "new-original-v4-needed": 142,
-        "await-connected-flow-only": 2,
+        "await-connected-flow-only": 3,
         "complete-v4-review": 4,
-        "both-prepaid-recovery-and-new-v4": 2
+        "both-prepaid-recovery-and-new-v4": 1
       }
     },
     "alreadyTechnicallyComplete": 80,
     "questionsBlockedOnlyOnAlreadyPaidNine": 80,
-    "questionsWaitingOnlyForConnectedFlowOriginals": 3,
-    "connectedFlowOriginalTextsPendingOrReserved": 9,
+    "questionsWaitingOnlyForConnectedFlowOriginals": 4,
+    "connectedFlowOriginalTextsPendingOrReserved": 11,
     "connectedFlowUnsettledStatuses": {
       "GENERATION_SUBMITTED_DO_NOT_RETRY": 1,
       "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED": 7,
-      "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT": 1
+      "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT": 3
     },
-    "questionsNeedingAtLeastOneGenuinelyNewOriginal": 287,
+    "questionsNeedingAtLeastOneGenuinelyNewOriginal": 286,
     "previouslyPaidMissingGenerationCount": 9,
-    "reservedFlowOriginalsExcludedFromNewChargeQueue": 9,
+    "reservedFlowOriginalsExcludedFromNewChargeQueue": 11,
     "previouslyPaidMissingGenerationIds": [
       "1UAwmEQ77D4BmA9DttHZ",
       "2xy9ZLej1wPTrnvAr9p7",
@@ -45,8 +45,8 @@
       "UUmC2fDiXaV5W1IQSumA",
       "aoKJuahenrKHfUE5OD9j"
     ],
-    "missingGenuineNewExactSegments": 1358,
-    "missingGenuineNewTextCodepoints": 64174,
+    "missingGenuineNewExactSegments": 1356,
+    "missingGenuineNewTextCodepoints": 64102,
     "distinctPreviouslySavedOriginalTextKeys": 399,
     "directPaidOriginalsWithUniqueReceipts": 352,
     "newElevenLabsCreditsSpent": 0,
@@ -8623,33 +8623,31 @@
     {
       "questionId": "kids-quiz-046",
       "ageBand": "9-10",
-      "status": "both-prepaid-recovery-and-new-v4",
+      "status": "await-connected-flow-only",
       "missingPreviouslyPaidGenerationIds": [],
       "missingConnectedFlowOriginalTextSha256": [
-        "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1"
-      ],
-      "missingNewTextSha256": [
+        "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
         "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
         "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30"
       ],
-      "newUniqueSegmentCount": 2,
-      "incrementalTextCodepointsIfAlone": 72,
+      "missingNewTextSha256": [],
+      "newUniqueSegmentCount": 0,
+      "incrementalTextCodepointsIfAlone": 0,
       "incompleteParts": {
         "question": {
           "alreadyPaidNotYetImported": [],
           "awaitingConnectedFlowOriginalTextSha256": [
-            "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1"
-          ],
-          "newOriginalTextSha256": [
+            "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
             "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59"
-          ]
+          ],
+          "newOriginalTextSha256": []
         },
         "explanation": {
           "alreadyPaidNotYetImported": [],
-          "awaitingConnectedFlowOriginalTextSha256": [],
-          "newOriginalTextSha256": [
+          "awaitingConnectedFlowOriginalTextSha256": [
             "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30"
-          ]
+          ],
+          "newOriginalTextSha256": []
         }
       }
     },
@@ -16156,30 +16154,14 @@
     },
     {
       "priority": 144,
-      "questionId": "kids-quiz-046",
-      "ageBand": "9-10",
-      "requiresPrepaidRecovery": false,
-      "requiresConnectedFlowResolution": true,
-      "incrementalUnrecordedSegmentCount": 2,
-      "incrementalUnicodeCodepoints": 72,
-      "cumulativeNewUniqueSegments": 688,
-      "cumulativeUnicodeCodepoints": 29000,
-      "newTextSha256": [
-        "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
-        "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30"
-      ],
-      "speechGenerationAuthorized": false
-    },
-    {
-      "priority": 145,
       "questionId": "kids-quiz-044",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 109,
-      "cumulativeNewUniqueSegments": 692,
-      "cumulativeUnicodeCodepoints": 29109,
+      "cumulativeNewUniqueSegments": 690,
+      "cumulativeUnicodeCodepoints": 29037,
       "newTextSha256": [
         "0025ccf2f7451b10d993fb078c9fabdb6340113329baefee6d3865ab5e5c8210",
         "76a038aceb3d05f0d575fe4f9be8ae7b32607fe4f988791cd3bcc0fae8bbdf3d",
@@ -16189,15 +16171,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 146,
+      "priority": 145,
       "questionId": "kids-quiz-047",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 3,
       "incrementalUnicodeCodepoints": 131,
-      "cumulativeNewUniqueSegments": 695,
-      "cumulativeUnicodeCodepoints": 29240,
+      "cumulativeNewUniqueSegments": 693,
+      "cumulativeUnicodeCodepoints": 29168,
       "newTextSha256": [
         "1af5365d9734f535d1948cae8b5ec286f88727576fd4bb615a0be14053e6b03b",
         "3b43d4566de6a39db5785d2c137ecefd989a1a683ed9d85eec94b243f6024a88",
@@ -16206,15 +16188,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 147,
+      "priority": 146,
       "questionId": "kids-quiz-087",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 137,
-      "cumulativeNewUniqueSegments": 699,
-      "cumulativeUnicodeCodepoints": 29377,
+      "cumulativeNewUniqueSegments": 697,
+      "cumulativeUnicodeCodepoints": 29305,
       "newTextSha256": [
         "3187ccfad772adc07723e0aa8a3969e824628f7aa30995ed4a230ff15308d697",
         "b0a36ae51b05350c8206670b70ac770fcdf5b0beebfdfb479d520313a0cc1834",
@@ -16224,15 +16206,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 148,
+      "priority": 147,
       "questionId": "kids-quiz-036",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 140,
-      "cumulativeNewUniqueSegments": 703,
-      "cumulativeUnicodeCodepoints": 29517,
+      "cumulativeNewUniqueSegments": 701,
+      "cumulativeUnicodeCodepoints": 29445,
       "newTextSha256": [
         "36d6dc925641e77b0f02539d3ec1be42c1d49a365e620fca5c96825e4bfa7701",
         "4c99e2362f9ca1835d1bfb8439629d7ae500e0a12c0b711f65f678b4000f2e34",
@@ -16242,15 +16224,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 149,
+      "priority": 148,
       "questionId": "kids-quiz-037",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 164,
-      "cumulativeNewUniqueSegments": 707,
-      "cumulativeUnicodeCodepoints": 29681,
+      "cumulativeNewUniqueSegments": 705,
+      "cumulativeUnicodeCodepoints": 29609,
       "newTextSha256": [
         "2743acd226fcdf3cc9567738239a870973141a7e4e9786ff29e8312c81cf6258",
         "570f4970e971d57e0c4bb84c50b9cdcbeceba4650f64e3cba0e8b5aec42dcfbf",
@@ -16260,15 +16242,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 150,
+      "priority": 149,
       "questionId": "kids-quiz-094",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": true,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 169,
-      "cumulativeNewUniqueSegments": 711,
-      "cumulativeUnicodeCodepoints": 29850,
+      "cumulativeNewUniqueSegments": 709,
+      "cumulativeUnicodeCodepoints": 29778,
       "newTextSha256": [
         "19bfa98affb9028bdd7d6513b20a1a19afe448d3c63868aaa1ea9fa23d841a73",
         "51779e04ba72573f36f30414336c73993bd6d6fe41c295843914c59cd446c48a",
@@ -16278,15 +16260,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 151,
+      "priority": 150,
       "questionId": "kids-quiz-147",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 173,
-      "cumulativeNewUniqueSegments": 716,
-      "cumulativeUnicodeCodepoints": 30023,
+      "cumulativeNewUniqueSegments": 714,
+      "cumulativeUnicodeCodepoints": 29951,
       "newTextSha256": [
         "0d621a71d46bc4b9e12dbd53fe94306c398b1a9c9b9befaeb093340584956d7e",
         "5f9499af19ffa677d03ca93d63b0269463ea7dbb5297366b63acbc47df09a8f1",
@@ -16297,15 +16279,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 152,
+      "priority": 151,
       "questionId": "kids-quiz-494",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 175,
-      "cumulativeNewUniqueSegments": 720,
-      "cumulativeUnicodeCodepoints": 30198,
+      "cumulativeNewUniqueSegments": 718,
+      "cumulativeUnicodeCodepoints": 30126,
       "newTextSha256": [
         "3a5edbebdf85a0d5d8380abeec24cc01d84330962054e742ea43c33cda1c5771",
         "57534feaca0eb8af16d14befadae4c7976b31f69888dac368fac6567711e1c27",
@@ -16315,15 +16297,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 153,
+      "priority": 152,
       "questionId": "kids-quiz-091",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 177,
-      "cumulativeNewUniqueSegments": 724,
-      "cumulativeUnicodeCodepoints": 30375,
+      "cumulativeNewUniqueSegments": 722,
+      "cumulativeUnicodeCodepoints": 30303,
       "newTextSha256": [
         "324a1a5a938bc16f8573639f30c093606bdfac74c793b0613b26250a733814a8",
         "683f015c1ecaec931aa30211fb2a9a5a9d559c414736ce4c4d0b9411f98b2287",
@@ -16333,15 +16315,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 154,
+      "priority": 153,
       "questionId": "kids-quiz-095",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 178,
-      "cumulativeNewUniqueSegments": 729,
-      "cumulativeUnicodeCodepoints": 30553,
+      "cumulativeNewUniqueSegments": 727,
+      "cumulativeUnicodeCodepoints": 30481,
       "newTextSha256": [
         "49f1f8aec14a26d134fdc37c659ad2f619c8eb1b0ea971976f419d3158d9831f",
         "61e82e4837d1c936c7670ac2d514fb416a631b560bb804644d60dbd4b77d60df",
@@ -16352,15 +16334,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 155,
+      "priority": 154,
       "questionId": "kids-quiz-344",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 181,
-      "cumulativeNewUniqueSegments": 733,
-      "cumulativeUnicodeCodepoints": 30734,
+      "cumulativeNewUniqueSegments": 731,
+      "cumulativeUnicodeCodepoints": 30662,
       "newTextSha256": [
         "6ce6fa008dfcbaddc21e6f7995f9f16cac31265c70b5ad296c14eb02a7025de6",
         "a8a225a0ba32659594a4f6fde9f4bc52d04da6b1a812dae49fc749d016f8fd0b",
@@ -16370,15 +16352,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 156,
+      "priority": 155,
       "questionId": "kids-quiz-035",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 182,
-      "cumulativeNewUniqueSegments": 737,
-      "cumulativeUnicodeCodepoints": 30916,
+      "cumulativeNewUniqueSegments": 735,
+      "cumulativeUnicodeCodepoints": 30844,
       "newTextSha256": [
         "0244c25574da36076ec177d092f4f695ddf0deac31ed4fa5f6db892595556f68",
         "0271e33fde09414e42be129d390a39a66f1f852da2045dd0aa4f8ff9d798b6e1",
@@ -16388,15 +16370,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 157,
+      "priority": 156,
       "questionId": "kids-quiz-386",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 182,
-      "cumulativeNewUniqueSegments": 742,
-      "cumulativeUnicodeCodepoints": 31098,
+      "cumulativeNewUniqueSegments": 740,
+      "cumulativeUnicodeCodepoints": 31026,
       "newTextSha256": [
         "139c62408d1f94f5565e5ff6baf7a3aa052693b3d733efc782d5c6b6d8035af1",
         "5f215fd9c627458ea61bc483cafa90a3aeef9e41d8429f7150fbb992be09c685",
@@ -16407,15 +16389,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 158,
+      "priority": 157,
       "questionId": "kids-quiz-338",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 178,
-      "cumulativeNewUniqueSegments": 746,
-      "cumulativeUnicodeCodepoints": 31276,
+      "cumulativeNewUniqueSegments": 744,
+      "cumulativeUnicodeCodepoints": 31204,
       "newTextSha256": [
         "26cd78210197fb7a23f1529da2003867f9b81de05ab41464bc08ff3fbb1f7532",
         "8fe47281b5907f92720e54209e0c70a061a22516b5d2e883f6183613c6720bcf",
@@ -16425,15 +16407,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 159,
+      "priority": 158,
       "questionId": "kids-quiz-387",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 188,
-      "cumulativeNewUniqueSegments": 751,
-      "cumulativeUnicodeCodepoints": 31464,
+      "cumulativeNewUniqueSegments": 749,
+      "cumulativeUnicodeCodepoints": 31392,
       "newTextSha256": [
         "519af5b3f834995a415d639f93f1ba2ec6f58274ec5b5cab7677cea79c991b27",
         "5257786b243f81590d2ea8922c8ef29e6e2482237699f4c07d912acc2372da6f",
@@ -16444,15 +16426,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 160,
+      "priority": 159,
       "questionId": "kids-quiz-096",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 193,
-      "cumulativeNewUniqueSegments": 756,
-      "cumulativeUnicodeCodepoints": 31657,
+      "cumulativeNewUniqueSegments": 754,
+      "cumulativeUnicodeCodepoints": 31585,
       "newTextSha256": [
         "27b73047c83c2130648a75b91395b0eceecdc7dc28b5b2962e9f282d711fd0be",
         "37322ef448a954ddc1e550f10da4217d37261ea92037f4b3045f2479bf88b856",
@@ -16463,15 +16445,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 161,
+      "priority": 160,
       "questionId": "kids-quiz-040",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 197,
-      "cumulativeNewUniqueSegments": 760,
-      "cumulativeUnicodeCodepoints": 31854,
+      "cumulativeNewUniqueSegments": 758,
+      "cumulativeUnicodeCodepoints": 31782,
       "newTextSha256": [
         "04cb43fb1b7ad395444695ba7234d35d739e4aeb353c180fa1956c18851b1028",
         "0b6ebb0a207516310dfc813d954ec7d04946e7de180742a692e1aac1536b0584",
@@ -16481,15 +16463,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 162,
+      "priority": 161,
       "questionId": "kids-quiz-093",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 197,
-      "cumulativeNewUniqueSegments": 765,
-      "cumulativeUnicodeCodepoints": 32051,
+      "cumulativeNewUniqueSegments": 763,
+      "cumulativeUnicodeCodepoints": 31979,
       "newTextSha256": [
         "03f251a1176a4d0cbabe04dcd8e4ff58572f512ca0a2f0ebb701f2aaff11309a",
         "1b09c0d0efa23ec3131e93ce763bbc0e8f63a79c0938ce349061f62df7e65fd1",
@@ -16500,15 +16482,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 163,
+      "priority": 162,
       "questionId": "kids-quiz-811",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 200,
-      "cumulativeNewUniqueSegments": 769,
-      "cumulativeUnicodeCodepoints": 32251,
+      "cumulativeNewUniqueSegments": 767,
+      "cumulativeUnicodeCodepoints": 32179,
       "newTextSha256": [
         "6d31b2c164b3915dc8cc4a6dcf7d7ac7804dad716651d9c889ee8aef208c8eb8",
         "a5df00d3130a0c7fcdb3023dafddf68546045c4b53b6cb8b8295cca193a0472c",
@@ -16518,15 +16500,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 164,
+      "priority": 163,
       "questionId": "kids-quiz-853",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 201,
-      "cumulativeNewUniqueSegments": 773,
-      "cumulativeUnicodeCodepoints": 32452,
+      "cumulativeNewUniqueSegments": 771,
+      "cumulativeUnicodeCodepoints": 32380,
       "newTextSha256": [
         "3401b9f4f95ca9b9a46d58b5d7fd7a52feffc032cc7881229f062f69e0a7361e",
         "4d3610f68cc9928cb72f54ee92ef32c5600ad02c5f8e3515fa77f4bc7bd60415",
@@ -16536,15 +16518,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 165,
+      "priority": 164,
       "questionId": "kids-quiz-150",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 202,
-      "cumulativeNewUniqueSegments": 778,
-      "cumulativeUnicodeCodepoints": 32654,
+      "cumulativeNewUniqueSegments": 776,
+      "cumulativeUnicodeCodepoints": 32582,
       "newTextSha256": [
         "6a5a43ac89ed6b6ab8602c0aa6312a73e90fd19634a5770143a97189b1537966",
         "736f4996fc8e2fea25ea37b3cc2e719d0c9f0f94426d11b10f2d645a068db5a4",
@@ -16555,15 +16537,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 166,
+      "priority": 165,
       "questionId": "kids-quiz-097",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 205,
-      "cumulativeNewUniqueSegments": 783,
-      "cumulativeUnicodeCodepoints": 32859,
+      "cumulativeNewUniqueSegments": 781,
+      "cumulativeUnicodeCodepoints": 32787,
       "newTextSha256": [
         "00a95654c7391efb2e485544d15194536cd1682a4a6dc4b0dae66bc1c367cf22",
         "3963e6661cf666ce9856c93d7c0c7fa45ccf9e7b88fdf1a99fb1641bd84bdc89",
@@ -16574,15 +16556,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 167,
+      "priority": 166,
       "questionId": "kids-quiz-146",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 207,
-      "cumulativeNewUniqueSegments": 788,
-      "cumulativeUnicodeCodepoints": 33066,
+      "cumulativeNewUniqueSegments": 786,
+      "cumulativeUnicodeCodepoints": 32994,
       "newTextSha256": [
         "420ce826144db28126c7e463597b104137882ce766a72efe39ff5c475007a07a",
         "8858b35aec9a72206254a9b5010fd33698b3b1d735ede86d2619ac445ef7f376",
@@ -16593,15 +16575,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 168,
+      "priority": 167,
       "questionId": "kids-quiz-092",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 210,
-      "cumulativeNewUniqueSegments": 793,
-      "cumulativeUnicodeCodepoints": 33276,
+      "cumulativeNewUniqueSegments": 791,
+      "cumulativeUnicodeCodepoints": 33204,
       "newTextSha256": [
         "70b22bd47b2479da7130f832163fdd2942672c93b9fa32c2532dd3480f7874b8",
         "96bf9511b6cd310cbca79ddf2265db56da8c33ed275f5c3e59c484631cb25acd",
@@ -16612,15 +16594,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 169,
+      "priority": 168,
       "questionId": "kids-quiz-390",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 211,
-      "cumulativeNewUniqueSegments": 798,
-      "cumulativeUnicodeCodepoints": 33487,
+      "cumulativeNewUniqueSegments": 796,
+      "cumulativeUnicodeCodepoints": 33415,
       "newTextSha256": [
         "5a61539aedb8b9f058ea5311e5784bb967b99b52ce354a19c22ccd491b8c2aae",
         "675c4cd16069056d7e80037ca4e349149daa33a2e65d9e7667d3e26f319b24f4",
@@ -16631,15 +16613,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 170,
+      "priority": 169,
       "questionId": "kids-quiz-137",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 213,
-      "cumulativeNewUniqueSegments": 803,
-      "cumulativeUnicodeCodepoints": 33700,
+      "cumulativeNewUniqueSegments": 801,
+      "cumulativeUnicodeCodepoints": 33628,
       "newTextSha256": [
         "83a84f9056fbed9a4432e140a64605ad75a5dfd3287199cdf8dda77dfa544858",
         "c35d1cf6d538eb1d3899c8bcaf22ef40530c60108675c940d0774cdd100931c1",
@@ -16650,15 +16632,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 171,
+      "priority": 170,
       "questionId": "kids-quiz-141",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 213,
-      "cumulativeNewUniqueSegments": 808,
-      "cumulativeUnicodeCodepoints": 33913,
+      "cumulativeNewUniqueSegments": 806,
+      "cumulativeUnicodeCodepoints": 33841,
       "newTextSha256": [
         "0b71d7be499e16a51ef37b6378a4611a5c0fff3ee08b2310ce695954b9111cf3",
         "55934d05144293cb13cca07306e6adc9692876b043db963f93412248d0b35aa5",
@@ -16669,15 +16651,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 172,
+      "priority": 171,
       "questionId": "kids-quiz-295",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 215,
-      "cumulativeNewUniqueSegments": 813,
-      "cumulativeUnicodeCodepoints": 34128,
+      "cumulativeNewUniqueSegments": 811,
+      "cumulativeUnicodeCodepoints": 34056,
       "newTextSha256": [
         "125dd6c74c2c3505e31d5543d1c0975dbe299140807d3933ddaf2a1f53fc212e",
         "600f3b0c21935dbf5dcb677fcc2dd0ed362f463abacdf4ac033cb3f60e1fe45a",
@@ -16688,15 +16670,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 173,
+      "priority": 172,
       "questionId": "kids-quiz-841",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 216,
-      "cumulativeNewUniqueSegments": 817,
-      "cumulativeUnicodeCodepoints": 34344,
+      "cumulativeNewUniqueSegments": 815,
+      "cumulativeUnicodeCodepoints": 34272,
       "newTextSha256": [
         "4f389b7d00641396b7bb4a6174f773a2b8997de52fbfa84408f3c53544c11401",
         "7e73c424f35c6d4907dde448fe98e832ba8e8d2effff41940113b76a5a323d8a",
@@ -16706,15 +16688,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 174,
+      "priority": 173,
       "questionId": "kids-quiz-819",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 217,
-      "cumulativeNewUniqueSegments": 821,
-      "cumulativeUnicodeCodepoints": 34561,
+      "cumulativeNewUniqueSegments": 819,
+      "cumulativeUnicodeCodepoints": 34489,
       "newTextSha256": [
         "2d351d06b421ba5202566e3ed036920b115078a6817d12357f0c439613052af2",
         "2fe0a3981930f57a4b72aad8b2313bdc00d9f65b92c45b2fa9f1496f5d12a3f2",
@@ -16724,15 +16706,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 175,
+      "priority": 174,
       "questionId": "kids-quiz-492",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 217,
-      "cumulativeNewUniqueSegments": 826,
-      "cumulativeUnicodeCodepoints": 34778,
+      "cumulativeNewUniqueSegments": 824,
+      "cumulativeUnicodeCodepoints": 34706,
       "newTextSha256": [
         "0ddef1909a65ff741d7f4d2332664f85c8989967405a4005ff13b84e63ab80f2",
         "59342c73904924cc36cb27ab28a584945ae91a06d6d1f22b3febc755b771362f",
@@ -16743,15 +16725,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 176,
+      "priority": 175,
       "questionId": "kids-quiz-821",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 218,
-      "cumulativeNewUniqueSegments": 830,
-      "cumulativeUnicodeCodepoints": 34996,
+      "cumulativeNewUniqueSegments": 828,
+      "cumulativeUnicodeCodepoints": 34924,
       "newTextSha256": [
         "24987c94713bd1c4617f070aafde2eb34bbaef91effa91da33e9a054ef685239",
         "ea9b10a0a43a9a0de24fc3d26136e2d91133dcc5c6f0c9fd5df413127a8733f1",
@@ -16761,15 +16743,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 177,
+      "priority": 176,
       "questionId": "kids-quiz-086",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 218,
-      "cumulativeNewUniqueSegments": 835,
-      "cumulativeUnicodeCodepoints": 35214,
+      "cumulativeNewUniqueSegments": 833,
+      "cumulativeUnicodeCodepoints": 35142,
       "newTextSha256": [
         "37c650b5752ea2c76144ca7fdfa2444ca0c49aaea2c1e3203a2f4d0d9378eb2a",
         "881ae0f854065eebee51b95bdd2951df93c0dfacd5fc351a5e0895a8b68bb996",
@@ -16780,15 +16762,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 178,
+      "priority": 177,
       "questionId": "kids-quiz-235",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 222,
-      "cumulativeNewUniqueSegments": 839,
-      "cumulativeUnicodeCodepoints": 35436,
+      "cumulativeNewUniqueSegments": 837,
+      "cumulativeUnicodeCodepoints": 35364,
       "newTextSha256": [
         "1474fac42d64f67d9931de76211aa9c18104662a1e1514ed2cfa2ce883c4198e",
         "170448a43db19f5b59be0f3afda79b66ee1595ed82e69a9da9ec2e3f1d3cfa83",
@@ -16798,15 +16780,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 179,
+      "priority": 178,
       "questionId": "kids-quiz-491",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 223,
-      "cumulativeNewUniqueSegments": 843,
-      "cumulativeUnicodeCodepoints": 35659,
+      "cumulativeNewUniqueSegments": 841,
+      "cumulativeUnicodeCodepoints": 35587,
       "newTextSha256": [
         "1f7acd824246b35a2bc5aef5c68028b29c04e5486734a7564d43431942a0e9c1",
         "3ce6943e26acc088d3156ab3bfab3a189de3b61e8737185e09b45198707d4cf6",
@@ -16816,15 +16798,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 180,
+      "priority": 179,
       "questionId": "kids-quiz-817",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 223,
-      "cumulativeNewUniqueSegments": 847,
-      "cumulativeUnicodeCodepoints": 35882,
+      "cumulativeNewUniqueSegments": 845,
+      "cumulativeUnicodeCodepoints": 35810,
       "newTextSha256": [
         "3a1066b0ccb05bc9dfb094c113a186dbbd2b84fdf2acb2e612753b82b77821a7",
         "8cd482642854476ada32fc9f49ce1a3921c10cb82e61ce94a2c2a5fde09d76e1",
@@ -16834,15 +16816,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 181,
+      "priority": 180,
       "questionId": "kids-quiz-845",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 223,
-      "cumulativeNewUniqueSegments": 851,
-      "cumulativeUnicodeCodepoints": 36105,
+      "cumulativeNewUniqueSegments": 849,
+      "cumulativeUnicodeCodepoints": 36033,
       "newTextSha256": [
         "0e3e992ed6f850bd4437d79a8a77340673d0835366e1e40e15e582acbf3bb3f2",
         "204b4f195bb9e9a1c1d818ad86e2b201ba696529d8b4c741e23fbab65f4a2dfd",
@@ -16852,15 +16834,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 182,
+      "priority": 181,
       "questionId": "kids-quiz-289",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 223,
-      "cumulativeNewUniqueSegments": 856,
-      "cumulativeUnicodeCodepoints": 36328,
+      "cumulativeNewUniqueSegments": 854,
+      "cumulativeUnicodeCodepoints": 36256,
       "newTextSha256": [
         "320697a9895ccb745a809a8d78ba5599941b17de0e1077e8b9fd17a67b19b06b",
         "ce4899e7f6bc02f9b43cb1d75854fbe682ec10f239718f8f74399984b34c41d2",
@@ -16871,15 +16853,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 183,
+      "priority": 182,
       "questionId": "kids-quiz-809",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 224,
-      "cumulativeNewUniqueSegments": 860,
-      "cumulativeUnicodeCodepoints": 36552,
+      "cumulativeNewUniqueSegments": 858,
+      "cumulativeUnicodeCodepoints": 36480,
       "newTextSha256": [
         "07a567cf0c4696e1b9583770abe71438ad463288527cbc73218d86fe109a4d8e",
         "0e0bddb961e27e3e0afd7da7c8f66bbf55ac42442d5a1857f2cecf908bdc9fa5",
@@ -16889,15 +16871,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 184,
+      "priority": 183,
       "questionId": "kids-quiz-487",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 224,
-      "cumulativeNewUniqueSegments": 865,
-      "cumulativeUnicodeCodepoints": 36776,
+      "cumulativeNewUniqueSegments": 863,
+      "cumulativeUnicodeCodepoints": 36704,
       "newTextSha256": [
         "075daaa95c83f43e96c16cf516e3261e402669fba1f121a6fdf0426f01ea2b82",
         "761602f516aa2ee26d37de1c14c05339f3772cebadfbdd29a1a99a56c5c32a84",
@@ -16908,15 +16890,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 185,
+      "priority": 184,
       "questionId": "kids-quiz-285",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 225,
-      "cumulativeNewUniqueSegments": 870,
-      "cumulativeUnicodeCodepoints": 37001,
+      "cumulativeNewUniqueSegments": 868,
+      "cumulativeUnicodeCodepoints": 36929,
       "newTextSha256": [
         "0189209536f112ecbb1e23a125e5beeffda79dd724ff280a3fa33a140241441b",
         "473294c3317a225b55f7e791e60af53da9aa002c0d6dde86c3c8bc410ce52a5f",
@@ -16927,15 +16909,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 186,
+      "priority": 185,
       "questionId": "kids-quiz-885",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 226,
-      "cumulativeNewUniqueSegments": 874,
-      "cumulativeUnicodeCodepoints": 37227,
+      "cumulativeNewUniqueSegments": 872,
+      "cumulativeUnicodeCodepoints": 37155,
       "newTextSha256": [
         "2b24ada82e3e0f796b450800b1a24328023661d4beeba18ebf85a7bf3f132774",
         "886c13e7b95ab9daad3c554f97fee2d011de8d7ebbd39ea4979c1e9a0875810a",
@@ -16945,15 +16927,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 187,
+      "priority": 186,
       "questionId": "kids-quiz-188",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 227,
-      "cumulativeNewUniqueSegments": 879,
-      "cumulativeUnicodeCodepoints": 37454,
+      "cumulativeNewUniqueSegments": 877,
+      "cumulativeUnicodeCodepoints": 37382,
       "newTextSha256": [
         "1ffcbead637824dc5103a9ba4bc43a23567c237793ea3aabe3241d9bd8eac48c",
         "2d04818768d0ae162c58c055262829470f0334674858e634b4f773803bc59ff7",
@@ -16964,15 +16946,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 188,
+      "priority": 187,
       "questionId": "kids-quiz-286",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 227,
-      "cumulativeNewUniqueSegments": 884,
-      "cumulativeUnicodeCodepoints": 37681,
+      "cumulativeNewUniqueSegments": 882,
+      "cumulativeUnicodeCodepoints": 37609,
       "newTextSha256": [
         "08d00fba17c236887be27e81c3542328591272c1e72fa6d8b1cb38d08cf70210",
         "23eea859d8f7cfa36f9bc61b51eac6643bf8c2c201f85994345d264f22ba6c96",
@@ -16983,15 +16965,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 189,
+      "priority": 188,
       "questionId": "kids-quiz-299",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 227,
-      "cumulativeNewUniqueSegments": 889,
-      "cumulativeUnicodeCodepoints": 37908,
+      "cumulativeNewUniqueSegments": 887,
+      "cumulativeUnicodeCodepoints": 37836,
       "newTextSha256": [
         "0ba1229f252094e6d3f3442eefafd6ff29c64906a4ddb9d138807384f8524570",
         "366bc733f326fd80a4ecfc3ce19254e432589dd0a357663ed9a53d12133340e9",
@@ -17002,15 +16984,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 190,
+      "priority": 189,
       "questionId": "kids-quiz-288",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 228,
-      "cumulativeNewUniqueSegments": 894,
-      "cumulativeUnicodeCodepoints": 38136,
+      "cumulativeNewUniqueSegments": 892,
+      "cumulativeUnicodeCodepoints": 38064,
       "newTextSha256": [
         "3262859cad9bfa968b1e0a6b53034291f59847c45077757090bc95638982c568",
         "3a2e365c21c95960a3794c9df628fb897b57eadad00177543c04533ac5cc3e44",
@@ -17021,15 +17003,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 191,
+      "priority": 190,
       "questionId": "kids-quiz-873",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 229,
-      "cumulativeNewUniqueSegments": 898,
-      "cumulativeUnicodeCodepoints": 38365,
+      "cumulativeNewUniqueSegments": 896,
+      "cumulativeUnicodeCodepoints": 38293,
       "newTextSha256": [
         "1788fd23ec6a09fead7cc5fa768012008be7d424dbd9104116e2f1e2136801aa",
         "33d349739269759db9a4959a1aeaa17092c3991efcee22e77ace84ea3e450799",
@@ -17039,15 +17021,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 192,
+      "priority": 191,
       "questionId": "kids-quiz-148",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 229,
-      "cumulativeNewUniqueSegments": 903,
-      "cumulativeUnicodeCodepoints": 38594,
+      "cumulativeNewUniqueSegments": 901,
+      "cumulativeUnicodeCodepoints": 38522,
       "newTextSha256": [
         "52d6fab8c41110117621f23390cfbc6677e8d42da5475ac6dfbb681c824e7984",
         "5e49769efed377490abdf2eea2d9a8845a9b2983966a460be269f2e499d1be00",
@@ -17058,15 +17040,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 193,
+      "priority": 192,
       "questionId": "kids-quiz-813",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 230,
-      "cumulativeNewUniqueSegments": 907,
-      "cumulativeUnicodeCodepoints": 38824,
+      "cumulativeNewUniqueSegments": 905,
+      "cumulativeUnicodeCodepoints": 38752,
       "newTextSha256": [
         "8714cc9f332b56724b102317008893e514c2566044d3391b853f91fd6253a22b",
         "877bbd1927dc0db40d7368893cdb9686ed5bc9a5ed38f231e8a4ba22008137a2",
@@ -17076,15 +17058,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 194,
+      "priority": 193,
       "questionId": "kids-quiz-835",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 231,
-      "cumulativeNewUniqueSegments": 911,
-      "cumulativeUnicodeCodepoints": 39055,
+      "cumulativeNewUniqueSegments": 909,
+      "cumulativeUnicodeCodepoints": 38983,
       "newTextSha256": [
         "4b9bb4a135361d1b2b6f9666e526033cabc4779d5f97b742a68d085793fafb2f",
         "59a561d05f1e1440122b303564614e75091da2f27e419bd04b3fd1e5332360be",
@@ -17094,15 +17076,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 195,
+      "priority": 194,
       "questionId": "kids-quiz-865",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 233,
-      "cumulativeNewUniqueSegments": 915,
-      "cumulativeUnicodeCodepoints": 39288,
+      "cumulativeNewUniqueSegments": 913,
+      "cumulativeUnicodeCodepoints": 39216,
       "newTextSha256": [
         "2907bc1d45c734bbfbda146c2953d29a9b457d98bbc39d212bed1adabf81e818",
         "4a1a67b61c627013766da3d53c4d874d10249d586d045c822c0ca13b5d2ab788",
@@ -17112,15 +17094,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 196,
+      "priority": 195,
       "questionId": "kids-quiz-815",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 234,
-      "cumulativeNewUniqueSegments": 919,
-      "cumulativeUnicodeCodepoints": 39522,
+      "cumulativeNewUniqueSegments": 917,
+      "cumulativeUnicodeCodepoints": 39450,
       "newTextSha256": [
         "395bee8572af4dffde237bc51975a250cbdd46c99d33cd8e9805604e0a890cdd",
         "a889589c64934688b641d582a57a16e9efb1bdd362488398e60de4c4949ba9ae",
@@ -17130,15 +17112,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 197,
+      "priority": 196,
       "questionId": "kids-quiz-891",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 234,
-      "cumulativeNewUniqueSegments": 923,
-      "cumulativeUnicodeCodepoints": 39756,
+      "cumulativeNewUniqueSegments": 921,
+      "cumulativeUnicodeCodepoints": 39684,
       "newTextSha256": [
         "1c60653801cf0df7174cdf96a853f5a5609bf6e65edd24b400d93e8d99672ac0",
         "66328f0b77a88e32a781ebbafd523af8b76ca5b1acfa73739acb9818c83a04ea",
@@ -17148,15 +17130,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 198,
+      "priority": 197,
       "questionId": "kids-quiz-823",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 235,
-      "cumulativeNewUniqueSegments": 927,
-      "cumulativeUnicodeCodepoints": 39991,
+      "cumulativeNewUniqueSegments": 925,
+      "cumulativeUnicodeCodepoints": 39919,
       "newTextSha256": [
         "1b866d69c1282caee17bcc607a4003cdb3a7a684eba26d4b46505ccfea1166b8",
         "1c54acf98fa7d5563ebcb0a1b08ef7bed4e6f4cef8ebd679553a01b3cd2117da",
@@ -17166,15 +17148,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 199,
+      "priority": 198,
       "questionId": "kids-quiz-335",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 237,
-      "cumulativeNewUniqueSegments": 932,
-      "cumulativeUnicodeCodepoints": 40228,
+      "cumulativeNewUniqueSegments": 930,
+      "cumulativeUnicodeCodepoints": 40156,
       "newTextSha256": [
         "5e2bbe07fd454a567ee7b935cb39a05dfac138c9291050187ed33998190741d2",
         "8a6dafbdf56220d39c17dff9f3ca678a240d5b989ebd462f28f371c602f4756e",
@@ -17185,15 +17167,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 200,
+      "priority": 199,
       "questionId": "kids-quiz-200",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 238,
-      "cumulativeNewUniqueSegments": 937,
-      "cumulativeUnicodeCodepoints": 40466,
+      "cumulativeNewUniqueSegments": 935,
+      "cumulativeUnicodeCodepoints": 40394,
       "newTextSha256": [
         "06a163cda26e69ac5982151a00021903542621401567942d87645fe6eb0f75ae",
         "082112ba0551e8e4a12408b09cffe9562ef5a5ef77feb228ad69793db5fad8e5",
@@ -17204,15 +17186,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 201,
+      "priority": 200,
       "questionId": "kids-quiz-869",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 239,
-      "cumulativeNewUniqueSegments": 941,
-      "cumulativeUnicodeCodepoints": 40705,
+      "cumulativeNewUniqueSegments": 939,
+      "cumulativeUnicodeCodepoints": 40633,
       "newTextSha256": [
         "8e4028f3c42881a07e8166b8f93f75983c5ddaeb5068750780d4b177be7d3bf5",
         "b4685f5b4a34614ad7ab29fe84fdb3d10f75ebd47221d00a784e22872d8fe979",
@@ -17222,15 +17204,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 202,
+      "priority": 201,
       "questionId": "kids-quiz-099",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 239,
-      "cumulativeNewUniqueSegments": 946,
-      "cumulativeUnicodeCodepoints": 40944,
+      "cumulativeNewUniqueSegments": 944,
+      "cumulativeUnicodeCodepoints": 40872,
       "newTextSha256": [
         "85e87453ec290e8cfce322e767ee174bad5a0915a0efdb507c58d2b63b712570",
         "8e999891a62d2b8edb69eae3af96c4737cf635e7be6e88924346b21b1da9cbf5",
@@ -17241,15 +17223,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 203,
+      "priority": 202,
       "questionId": "kids-quiz-237",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 239,
-      "cumulativeNewUniqueSegments": 951,
-      "cumulativeUnicodeCodepoints": 41183,
+      "cumulativeNewUniqueSegments": 949,
+      "cumulativeUnicodeCodepoints": 41111,
       "newTextSha256": [
         "6d4819f33f70707b488d4acfdfb7b97c5ead7175523c8c7353a2d380e65e4989",
         "73b020ccb68ace07fc656078e92d5fcdbdbfe0ea9b9ae3067986cb1245d3c510",
@@ -17260,15 +17242,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 204,
+      "priority": 203,
       "questionId": "kids-quiz-250",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 239,
-      "cumulativeNewUniqueSegments": 956,
-      "cumulativeUnicodeCodepoints": 41422,
+      "cumulativeNewUniqueSegments": 954,
+      "cumulativeUnicodeCodepoints": 41350,
       "newTextSha256": [
         "157f8558878db62bff8d37bbe1a8f00048514b77a970164d8c5e7f9ad754f115",
         "1a2ab544871213dbca4c3a9be4ce8042b45b1453e1a23bf4c78c8cedadf9915b",
@@ -17279,15 +17261,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 205,
+      "priority": 204,
       "questionId": "kids-quiz-899",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 240,
-      "cumulativeNewUniqueSegments": 960,
-      "cumulativeUnicodeCodepoints": 41662,
+      "cumulativeNewUniqueSegments": 958,
+      "cumulativeUnicodeCodepoints": 41590,
       "newTextSha256": [
         "186dead94d8997c6b58be71cf4c9e4e1b1167910e4752e7a9d4b2f8061688810",
         "9814a4df77167ed8abb9056e68c9a53ed35ed7556b33cc09a26678def648d3f0",
@@ -17297,15 +17279,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 206,
+      "priority": 205,
       "questionId": "kids-quiz-600",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 240,
-      "cumulativeNewUniqueSegments": 965,
-      "cumulativeUnicodeCodepoints": 41902,
+      "cumulativeNewUniqueSegments": 963,
+      "cumulativeUnicodeCodepoints": 41830,
       "newTextSha256": [
         "2e27352e15b6fba6eb2e047eb2f6c1ba7b38c06638de7b4e41307c14cc24a450",
         "8ab047f4831dc45551eae1f3bee50966c843a519d4678aabcd2ca9ca49bde08b",
@@ -17316,15 +17298,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 207,
+      "priority": 206,
       "questionId": "kids-quiz-499",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 242,
-      "cumulativeNewUniqueSegments": 970,
-      "cumulativeUnicodeCodepoints": 42144,
+      "cumulativeNewUniqueSegments": 968,
+      "cumulativeUnicodeCodepoints": 42072,
       "newTextSha256": [
         "220295c704c3f3b470b88de6430ca1fbb43b4d139bf4370693cfaecbb359f9d5",
         "4336e5d692fbd4d35652e0f81e57ac4033c40fe6e24419685f064804bb95ea87",
@@ -17335,15 +17317,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 208,
+      "priority": 207,
       "questionId": "kids-quiz-863",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 243,
-      "cumulativeNewUniqueSegments": 974,
-      "cumulativeUnicodeCodepoints": 42387,
+      "cumulativeNewUniqueSegments": 972,
+      "cumulativeUnicodeCodepoints": 42315,
       "newTextSha256": [
         "25f6ec3aacac8334a86e362b52114da07367ebd21e64247fd9e67012af1d625b",
         "710218d6ed48f982c62ae4e0aa69c9f6531167c525ceb99c9416535a34b890c5",
@@ -17353,15 +17335,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 209,
+      "priority": 208,
       "questionId": "kids-quiz-889",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 243,
-      "cumulativeNewUniqueSegments": 978,
-      "cumulativeUnicodeCodepoints": 42630,
+      "cumulativeNewUniqueSegments": 976,
+      "cumulativeUnicodeCodepoints": 42558,
       "newTextSha256": [
         "20789a14e3c4ffe47b348134c5d912b1237a19894a0dfff80078880b88e4490a",
         "9162b5d05642ceb7fd10522b2e2b0d22ab4bf5d29af939e3ce4c87ac61538ef4",
@@ -17371,15 +17353,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 210,
+      "priority": 209,
       "questionId": "kids-quiz-089",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 243,
-      "cumulativeNewUniqueSegments": 983,
-      "cumulativeUnicodeCodepoints": 42873,
+      "cumulativeNewUniqueSegments": 981,
+      "cumulativeUnicodeCodepoints": 42801,
       "newTextSha256": [
         "328f7c50eb96d539f0714972ae67bbb07cbb4ed4ad127e50f4db4938157a5e7e",
         "5b89ef925409d85794581aaa6dd1ec3c718becb0fee81e52706cd40eb72c35ca",
@@ -17390,15 +17372,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 211,
+      "priority": 210,
       "questionId": "kids-quiz-139",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 243,
-      "cumulativeNewUniqueSegments": 988,
-      "cumulativeUnicodeCodepoints": 43116,
+      "cumulativeNewUniqueSegments": 986,
+      "cumulativeUnicodeCodepoints": 43044,
       "newTextSha256": [
         "237a90780401e7f904b1714b3465dcc692b32f40ea33ad6af8ec9ea7630270dd",
         "38fe99159e570f790dbc79c6ba70149447105bbd3b37ce7c2d62afbcf114ef06",
@@ -17409,15 +17391,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 212,
+      "priority": 211,
       "questionId": "kids-quiz-136",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 244,
-      "cumulativeNewUniqueSegments": 993,
-      "cumulativeUnicodeCodepoints": 43360,
+      "cumulativeNewUniqueSegments": 991,
+      "cumulativeUnicodeCodepoints": 43288,
       "newTextSha256": [
         "2557faf47b4dc4a0571468adb94a257812cee33269f194008f90320f2e314244",
         "933f7ecf5a0fed9babd2fdd64915adb5d4ea754d9931a42ad57f63a84d3649bc",
@@ -17428,15 +17410,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 213,
+      "priority": 212,
       "questionId": "kids-quiz-246",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 244,
-      "cumulativeNewUniqueSegments": 998,
-      "cumulativeUnicodeCodepoints": 43604,
+      "cumulativeNewUniqueSegments": 996,
+      "cumulativeUnicodeCodepoints": 43532,
       "newTextSha256": [
         "2e8e9021caf8df57e987199a87e02bd11097b6f7516a47805c15d86e51387298",
         "2f8c68e87f8d6c1703c4f9da8555c6faf8c240f3ec9997fd11de46fba12729f2",
@@ -17447,15 +17429,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 214,
+      "priority": 213,
       "questionId": "kids-quiz-297",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 245,
-      "cumulativeNewUniqueSegments": 1003,
-      "cumulativeUnicodeCodepoints": 43849,
+      "cumulativeNewUniqueSegments": 1001,
+      "cumulativeUnicodeCodepoints": 43777,
       "newTextSha256": [
         "310c3406a7b390e4bf3c05c4f6631bf454a3a2a28071248935f42fdc5ceee4da",
         "5ab1087d15e2ece4b572caf577aaf52ffd1a3735952d807af0d213c73d443b0d",
@@ -17466,15 +17448,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 215,
+      "priority": 214,
       "questionId": "kids-quiz-444",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 246,
-      "cumulativeNewUniqueSegments": 1008,
-      "cumulativeUnicodeCodepoints": 44095,
+      "cumulativeNewUniqueSegments": 1006,
+      "cumulativeUnicodeCodepoints": 44023,
       "newTextSha256": [
         "39195d76b016a9faeedd04181a053a08f021be88727898dff6f875fed05295bd",
         "b5408c912167e6d6b4f56b6177f7ab57af510379b793f5c80e18e178811e0746",
@@ -17485,15 +17467,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 216,
+      "priority": 215,
       "questionId": "kids-quiz-879",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 247,
-      "cumulativeNewUniqueSegments": 1012,
-      "cumulativeUnicodeCodepoints": 44342,
+      "cumulativeNewUniqueSegments": 1010,
+      "cumulativeUnicodeCodepoints": 44270,
       "newTextSha256": [
         "6386afbbf0cc916f1f7a1027de9ed7688594615e40e0d9d5a5e1fff98c97f2d2",
         "817e59b93dbd28404d5a1ba0a673113560544482038da3f3950b0fb4a27b6486",
@@ -17503,15 +17485,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 217,
+      "priority": 216,
       "questionId": "kids-quiz-135",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 247,
-      "cumulativeNewUniqueSegments": 1017,
-      "cumulativeUnicodeCodepoints": 44589,
+      "cumulativeNewUniqueSegments": 1015,
+      "cumulativeUnicodeCodepoints": 44517,
       "newTextSha256": [
         "0ed0bc20aaa06f668fbd1c793b1eb6ec462d498bc41f5c2a9b107b81d756afc9",
         "29c398d46faaff3c9245851cb70e2da73457e4a42c81311ecc62113677aa1944",
@@ -17522,15 +17504,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 218,
+      "priority": 217,
       "questionId": "kids-quiz-187",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 247,
-      "cumulativeNewUniqueSegments": 1022,
-      "cumulativeUnicodeCodepoints": 44836,
+      "cumulativeNewUniqueSegments": 1020,
+      "cumulativeUnicodeCodepoints": 44764,
       "newTextSha256": [
         "138904a4435402792f98ed4c97d1a695123733a12356815cfd562276af994b87",
         "3611edde57cfb01d4ddf72fb5c4d0a3ddfc9968c3e2f1eadfb2f62965872d1fa",
@@ -17541,15 +17523,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 219,
+      "priority": 218,
       "questionId": "kids-quiz-398",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 247,
-      "cumulativeNewUniqueSegments": 1027,
-      "cumulativeUnicodeCodepoints": 45083,
+      "cumulativeNewUniqueSegments": 1025,
+      "cumulativeUnicodeCodepoints": 45011,
       "newTextSha256": [
         "4673df88305436c155f423d0e2c11b038663a3915d07f5ac3d100fe402713ce3",
         "4dc982e73b28135d9d0058c749f8b14059c45afd9ab3faadf7331064881c6bf4",
@@ -17560,15 +17542,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 220,
+      "priority": 219,
       "questionId": "kids-quiz-641",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 247,
-      "cumulativeNewUniqueSegments": 1032,
-      "cumulativeUnicodeCodepoints": 45330,
+      "cumulativeNewUniqueSegments": 1030,
+      "cumulativeUnicodeCodepoints": 45258,
       "newTextSha256": [
         "4d85f01d1ca25d95a0979a3cbd517666df0527b2afe82c65f484adf9c082cb0a",
         "51d3320b53f6728f91ded1f6e31f9572c496fa8163bac1a0716df94d3f818286",
@@ -17579,15 +17561,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 221,
+      "priority": 220,
       "questionId": "kids-quiz-644",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 247,
-      "cumulativeNewUniqueSegments": 1037,
-      "cumulativeUnicodeCodepoints": 45577,
+      "cumulativeNewUniqueSegments": 1035,
+      "cumulativeUnicodeCodepoints": 45505,
       "newTextSha256": [
         "2e736501ab5bf38fb038ebd12272cf3f00252ab7506f3542dd39aee981061438",
         "4cd7e81ea32c534b0ae1d6af4471efdb06bb037fc140ae2231365cd126ef20dc",
@@ -17598,15 +17580,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 222,
+      "priority": 221,
       "questionId": "kids-quiz-586",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 248,
-      "cumulativeNewUniqueSegments": 1041,
-      "cumulativeUnicodeCodepoints": 45825,
+      "cumulativeNewUniqueSegments": 1039,
+      "cumulativeUnicodeCodepoints": 45753,
       "newTextSha256": [
         "32e88c25a594ea71a0744bd0827093639b1ae0fa4569bc3ee2b4061464ab0945",
         "3de965f77f11d4acb676ed33d5adb65e4d5a9eeced6281351478c90a7edff2fb",
@@ -17616,15 +17598,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 223,
+      "priority": 222,
       "questionId": "kids-quiz-861",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 248,
-      "cumulativeNewUniqueSegments": 1045,
-      "cumulativeUnicodeCodepoints": 46073,
+      "cumulativeNewUniqueSegments": 1043,
+      "cumulativeUnicodeCodepoints": 46001,
       "newTextSha256": [
         "0fd0bbcb0cebd4f40c13951ec70dde720c31350073670a16996fae7bc5877c63",
         "62ca44721a64b608a023514b263b9f90165afb2337ae293d3120db1e4b11e307",
@@ -17634,15 +17616,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 224,
+      "priority": 223,
       "questionId": "kids-quiz-100",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 249,
-      "cumulativeNewUniqueSegments": 1050,
-      "cumulativeUnicodeCodepoints": 46322,
+      "cumulativeNewUniqueSegments": 1048,
+      "cumulativeUnicodeCodepoints": 46250,
       "newTextSha256": [
         "921b81fe060e878e4533388c667d2518578e773d338b5aba08f6662e5e5b071d",
         "992d7715f10aac8f32cb382065012c9fd34184c73d19bdbaae4baf67bb86d951",
@@ -17653,15 +17635,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 225,
+      "priority": 224,
       "questionId": "kids-quiz-643",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 250,
-      "cumulativeNewUniqueSegments": 1055,
-      "cumulativeUnicodeCodepoints": 46572,
+      "cumulativeNewUniqueSegments": 1053,
+      "cumulativeUnicodeCodepoints": 46500,
       "newTextSha256": [
         "114266786af05ce64231f07d66422bac900ad4e3ae438e171a15e4e1bc47056c",
         "23ce3b5b0749cb21ee4111bdd401908e6486743e77774672810f9db8024cf158",
@@ -17672,15 +17654,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 226,
+      "priority": 225,
       "questionId": "kids-quiz-837",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 251,
-      "cumulativeNewUniqueSegments": 1059,
-      "cumulativeUnicodeCodepoints": 46823,
+      "cumulativeNewUniqueSegments": 1057,
+      "cumulativeUnicodeCodepoints": 46751,
       "newTextSha256": [
         "6c441bab9ce0e64c023c1268649644a5896918af3321b8d56410fcf009adb21e",
         "9b22c5ad4ca297ee3aec1ba1cbe5f6e83bdfb3231050717c707d8dfdda66e91c",
@@ -17690,15 +17672,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 227,
+      "priority": 226,
       "questionId": "kids-quiz-296",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 251,
-      "cumulativeNewUniqueSegments": 1064,
-      "cumulativeUnicodeCodepoints": 47074,
+      "cumulativeNewUniqueSegments": 1062,
+      "cumulativeUnicodeCodepoints": 47002,
       "newTextSha256": [
         "4c3876dcce555cb1e5967e060b76318b5ef972868b562ca113d1be5067f68f99",
         "7dd51d424b7afd50b6bd3f18aa71817d5012b23e640c549d3ac6b07fe047cad7",
@@ -17709,15 +17691,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 228,
+      "priority": 227,
       "questionId": "kids-quiz-535",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 251,
-      "cumulativeNewUniqueSegments": 1069,
-      "cumulativeUnicodeCodepoints": 47325,
+      "cumulativeNewUniqueSegments": 1067,
+      "cumulativeUnicodeCodepoints": 47253,
       "newTextSha256": [
         "513264eecb16797f45cdf5451a964ba60b1d89d3b5960eec194eb3b10f52f7db",
         "68ccf72149e439c46fe64d26ddbdef131236aa5b5f0b53f771b7a9033348f4e1",
@@ -17728,15 +17710,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 229,
+      "priority": 228,
       "questionId": "kids-quiz-541",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 253,
-      "cumulativeNewUniqueSegments": 1074,
-      "cumulativeUnicodeCodepoints": 47578,
+      "cumulativeNewUniqueSegments": 1072,
+      "cumulativeUnicodeCodepoints": 47506,
       "newTextSha256": [
         "5846b509abe503191d3e3e33365f357967dd9d3e470da53265b395c6fb8a500f",
         "771d2427ada29b4fc666b721fd9171825ddd0fbe4b7c96da54f427d8ee7b285a",
@@ -17747,15 +17729,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 230,
+      "priority": 229,
       "questionId": "kids-quiz-635",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 253,
-      "cumulativeNewUniqueSegments": 1079,
-      "cumulativeUnicodeCodepoints": 47831,
+      "cumulativeNewUniqueSegments": 1077,
+      "cumulativeUnicodeCodepoints": 47759,
       "newTextSha256": [
         "6ec2761abf9ffdea001283cbaea9ae4de56160941ccaf28d81b3b033ac5ecd86",
         "7f9949383d5463bf290e4554c2505e3d3b3b76bce245aa35fa293258c43443e7",
@@ -17766,15 +17748,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 231,
+      "priority": 230,
       "questionId": "kids-quiz-829",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 253,
-      "cumulativeNewUniqueSegments": 1084,
-      "cumulativeUnicodeCodepoints": 48084,
+      "cumulativeNewUniqueSegments": 1082,
+      "cumulativeUnicodeCodepoints": 48012,
       "newTextSha256": [
         "06de88a0d12943329469330654934e1014d6c92d2bfcbd75aa0196af0a6dece0",
         "36de68fd227292e16f034694219e0777d346f12a89d93d7c6d9ce279aa7f0ea2",
@@ -17785,15 +17767,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 232,
+      "priority": 231,
       "questionId": "kids-quiz-592",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 255,
-      "cumulativeNewUniqueSegments": 1089,
-      "cumulativeUnicodeCodepoints": 48339,
+      "cumulativeNewUniqueSegments": 1087,
+      "cumulativeUnicodeCodepoints": 48267,
       "newTextSha256": [
         "0464c882010aa015a5eefb50001a90ac7b1035ff6f0f08ae256810e63bfedbcc",
         "0d49256495d2fcca2b8539025ce52f979e404a65563c49931a2e4ad9548c9b25",
@@ -17804,15 +17786,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 233,
+      "priority": 232,
       "questionId": "kids-quiz-636",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 256,
-      "cumulativeNewUniqueSegments": 1094,
-      "cumulativeUnicodeCodepoints": 48595,
+      "cumulativeNewUniqueSegments": 1092,
+      "cumulativeUnicodeCodepoints": 48523,
       "newTextSha256": [
         "0dbe1cf29d18df24c1595ff53efa8b7e28aa9b1c7cd803b0eaea40ace4e0f6cd",
         "314d0c23ad5e3ec5ee8821c4d5f02fc159f9c0cd9c2805e727c80f9428cc6c76",
@@ -17823,15 +17805,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 234,
+      "priority": 233,
       "questionId": "kids-quiz-883",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 257,
-      "cumulativeNewUniqueSegments": 1098,
-      "cumulativeUnicodeCodepoints": 48852,
+      "cumulativeNewUniqueSegments": 1096,
+      "cumulativeUnicodeCodepoints": 48780,
       "newTextSha256": [
         "64ecd7185cabde1c2b4a512d59e1a9166955b780d4c04150f3a727ca21f977b1",
         "90e706794a6d66d78e7918bed1849279195bfafe136e6a1fc41c1e586a170c9a",
@@ -17841,15 +17823,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 235,
+      "priority": 234,
       "questionId": "kids-quiz-249",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 257,
-      "cumulativeNewUniqueSegments": 1103,
-      "cumulativeUnicodeCodepoints": 49109,
+      "cumulativeNewUniqueSegments": 1101,
+      "cumulativeUnicodeCodepoints": 49037,
       "newTextSha256": [
         "2e717206b5645cf701bfa6cf05370103d77e8ee6c002fa90d4af6493a1fff5cb",
         "5b7ecc550b9e24b460f371d4084a25476fa4721a94990e37970aecbfdf708740",
@@ -17860,15 +17842,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 236,
+      "priority": 235,
       "questionId": "kids-quiz-887",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 258,
-      "cumulativeNewUniqueSegments": 1107,
-      "cumulativeUnicodeCodepoints": 49367,
+      "cumulativeNewUniqueSegments": 1105,
+      "cumulativeUnicodeCodepoints": 49295,
       "newTextSha256": [
         "45968434786bc1f73677f48876ec14f30eeaa5a6c3bef32973d15733775876ab",
         "82d180936c01d709aa78e0cf914f8b2989888aae5aa5267617a2b1c868ff71fc",
@@ -17878,15 +17860,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 237,
+      "priority": 236,
       "questionId": "kids-quiz-193",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 258,
-      "cumulativeNewUniqueSegments": 1112,
-      "cumulativeUnicodeCodepoints": 49625,
+      "cumulativeNewUniqueSegments": 1110,
+      "cumulativeUnicodeCodepoints": 49553,
       "newTextSha256": [
         "12d753aebb065819cae24d40c7eec02a35d7e56bc7f72abe28a90b11afe023cb",
         "221b212191142a062c23caa5caf0457cba0fc8ff4dcf4b79b95ed5058e4ea361",
@@ -17897,15 +17879,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 238,
+      "priority": 237,
       "questionId": "kids-quiz-199",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 259,
-      "cumulativeNewUniqueSegments": 1117,
-      "cumulativeUnicodeCodepoints": 49884,
+      "cumulativeNewUniqueSegments": 1115,
+      "cumulativeUnicodeCodepoints": 49812,
       "newTextSha256": [
         "574f40cb8617bcb53874e37e27e3c7cfaccc6db11e54d107f127d2dafa5005be",
         "5f385d9b34ea90208205ccdac2d4e58b1f739e26c70fc7989319f14d6981a9f5",
@@ -17916,15 +17898,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 239,
+      "priority": 238,
       "questionId": "kids-quiz-245",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 259,
-      "cumulativeNewUniqueSegments": 1122,
-      "cumulativeUnicodeCodepoints": 50143,
+      "cumulativeNewUniqueSegments": 1120,
+      "cumulativeUnicodeCodepoints": 50071,
       "newTextSha256": [
         "06dfce1ada836908f8102395d0768723f83ad57e86cc16cff52583b6368f878c",
         "69aa8736083577cb781227546224bd329f3faec84ccd32f5eabb8453d711d459",
@@ -17935,15 +17917,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 240,
+      "priority": 239,
       "questionId": "kids-quiz-650",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 259,
-      "cumulativeNewUniqueSegments": 1127,
-      "cumulativeUnicodeCodepoints": 50402,
+      "cumulativeNewUniqueSegments": 1125,
+      "cumulativeUnicodeCodepoints": 50330,
       "newTextSha256": [
         "1d3a086d3f7936203f90c323bf43349831fa5a1788a07a4b02d2dc7f291c95f6",
         "2a9d2b88a71b72370fd0bdf40b293580525fac823aa439149f45ecf95a224747",
@@ -17954,15 +17936,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 241,
+      "priority": 240,
       "questionId": "kids-quiz-438",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 260,
-      "cumulativeNewUniqueSegments": 1131,
-      "cumulativeUnicodeCodepoints": 50662,
+      "cumulativeNewUniqueSegments": 1129,
+      "cumulativeUnicodeCodepoints": 50590,
       "newTextSha256": [
         "2f17864a35eb0a2f2828bb6dbbf77a219ee015532d92fd22ddf822418797e87f",
         "66439a4a5e5c3d6817757c965439de157277a2d17264ef4a7c697313e434f19a",
@@ -17972,15 +17954,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 242,
+      "priority": 241,
       "questionId": "kids-quiz-589",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 261,
-      "cumulativeNewUniqueSegments": 1136,
-      "cumulativeUnicodeCodepoints": 50923,
+      "cumulativeNewUniqueSegments": 1134,
+      "cumulativeUnicodeCodepoints": 50851,
       "newTextSha256": [
         "06bfd10d9685cb7c8d76ff041f739119cdd3238f01ad2827721e71716d6d971c",
         "239e5f99f446cf194f84c3c26af7241855da27ed2bb9f0481a3e0e7f01e6eac3",
@@ -17991,15 +17973,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 243,
+      "priority": 242,
       "questionId": "kids-quiz-639",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 264,
-      "cumulativeNewUniqueSegments": 1141,
-      "cumulativeUnicodeCodepoints": 51187,
+      "cumulativeNewUniqueSegments": 1139,
+      "cumulativeUnicodeCodepoints": 51115,
       "newTextSha256": [
         "29346ee580bc23d70ec0dfc3786a25c3614942b522c2f0d096b64f463b2af9a6",
         "7247f0579a3b02c53ecb42f1386213f44cad50c93806d7a4f45a2c8b2a2a2d77",
@@ -18010,15 +17992,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 244,
+      "priority": 243,
       "questionId": "kids-quiz-875",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 265,
-      "cumulativeNewUniqueSegments": 1145,
-      "cumulativeUnicodeCodepoints": 51452,
+      "cumulativeNewUniqueSegments": 1143,
+      "cumulativeUnicodeCodepoints": 51380,
       "newTextSha256": [
         "1a2865d2e783cb6a62e1f479e0ca52680508a5ba3b4552601ce1cc3edaaecfbb",
         "46ff5f38aefe7fa8a2971b10f93c3bc6e5e99a6efe798b6cbe64a1ae43babfe4",
@@ -18028,15 +18010,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 245,
+      "priority": 244,
       "questionId": "kids-quiz-638",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 265,
-      "cumulativeNewUniqueSegments": 1150,
-      "cumulativeUnicodeCodepoints": 51717,
+      "cumulativeNewUniqueSegments": 1148,
+      "cumulativeUnicodeCodepoints": 51645,
       "newTextSha256": [
         "33b63865bcb90d96afee4b7475c40e0330497ad6a4fe124c06bc39957024ca74",
         "4c0fd432a205547b3bdd61f830113de899e103294924fb8514f735b500074c75",
@@ -18047,15 +18029,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 246,
+      "priority": 245,
       "questionId": "kids-quiz-247",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 267,
-      "cumulativeNewUniqueSegments": 1155,
-      "cumulativeUnicodeCodepoints": 51984,
+      "cumulativeNewUniqueSegments": 1153,
+      "cumulativeUnicodeCodepoints": 51912,
       "newTextSha256": [
         "453e56132a92d0df43b1f536d7d3a4cbc641421ec08c50252af0c3969593ecf1",
         "80fc55a5b461e50fa275edd49402c6e128704c083a867df86cfd52abc0128606",
@@ -18066,15 +18048,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 247,
+      "priority": 246,
       "questionId": "kids-quiz-240",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 269,
-      "cumulativeNewUniqueSegments": 1159,
-      "cumulativeUnicodeCodepoints": 52253,
+      "cumulativeNewUniqueSegments": 1157,
+      "cumulativeUnicodeCodepoints": 52181,
       "newTextSha256": [
         "1bb6634124ef8d268dd8675495081b1612b481202ceaaebad93b9947d1800e57",
         "2b55692990da0a6648a54b2ac6dc797a56fd8a6170fb747688bc7c14672f9eda",
@@ -18084,15 +18066,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 248,
+      "priority": 247,
       "questionId": "kids-quiz-300",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 270,
-      "cumulativeNewUniqueSegments": 1164,
-      "cumulativeUnicodeCodepoints": 52523,
+      "cumulativeNewUniqueSegments": 1162,
+      "cumulativeUnicodeCodepoints": 52451,
       "newTextSha256": [
         "3782abcdc3c76ac7c135cd5c4f1250f83edc87f423f49b1fe7a8cba1b2f87c24",
         "4ab55a8ce99d014b48918505e04f13ef10506f120988fd7423cd9ca48ec35d2c",
@@ -18103,15 +18085,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 249,
+      "priority": 248,
       "questionId": "kids-quiz-189",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 272,
-      "cumulativeNewUniqueSegments": 1169,
-      "cumulativeUnicodeCodepoints": 52795,
+      "cumulativeNewUniqueSegments": 1167,
+      "cumulativeUnicodeCodepoints": 52723,
       "newTextSha256": [
         "89aabafa564f3d555efcfddc129feea26ae5c974dd3e8dcbdd344b68c85a2406",
         "98615fe4ee3e8850e7c05203fab890afa895350ae365512c38e5eb3f3ef61341",
@@ -18122,15 +18104,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 250,
+      "priority": 249,
       "questionId": "kids-quiz-244",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 272,
-      "cumulativeNewUniqueSegments": 1174,
-      "cumulativeUnicodeCodepoints": 53067,
+      "cumulativeNewUniqueSegments": 1172,
+      "cumulativeUnicodeCodepoints": 52995,
       "newTextSha256": [
         "15c9f367eeba818e9a30a26afb294d9e69cbeb2791a5cafb566cdf7aeccf7daa",
         "1994a219cbe1468ae5bcc7ecf6973083ac7fdd429afddbae0aaec0d8ac02060c",
@@ -18141,15 +18123,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 251,
+      "priority": 250,
       "questionId": "kids-quiz-859",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 272,
-      "cumulativeNewUniqueSegments": 1179,
-      "cumulativeUnicodeCodepoints": 53339,
+      "cumulativeNewUniqueSegments": 1177,
+      "cumulativeUnicodeCodepoints": 53267,
       "newTextSha256": [
         "2b976c63a048dd3356ed7d27544ef8bb1be274a0c17ea65728e5334b58e5d093",
         "3ba8f022558ef9dede95fba93f271ed9ce1ddc0fc2583b619fa472fd9b8d4254",
@@ -18160,15 +18142,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 252,
+      "priority": 251,
       "questionId": "kids-quiz-194",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 273,
-      "cumulativeNewUniqueSegments": 1184,
-      "cumulativeUnicodeCodepoints": 53612,
+      "cumulativeNewUniqueSegments": 1182,
+      "cumulativeUnicodeCodepoints": 53540,
       "newTextSha256": [
         "2bacf1ca08d2372e1a0ba80f59a4fdd440f8b85f6b763d3d9e1fe4751c290a64",
         "3db432ce3f7bc96ae6aac5da8fbc4b70f5b4e1e2f6cc1bb458b2cffc4a85eae4",
@@ -18179,15 +18161,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 253,
+      "priority": 252,
       "questionId": "kids-quiz-339",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 276,
-      "cumulativeNewUniqueSegments": 1189,
-      "cumulativeUnicodeCodepoints": 53888,
+      "cumulativeNewUniqueSegments": 1187,
+      "cumulativeUnicodeCodepoints": 53816,
       "newTextSha256": [
         "22722dde9fdda37c596a400c19b7edb88c0d5561ce729b8ce51b788aa6a9b20d",
         "4f8516a3398874ce9864b473032077839e2e2ae8658b74ba53b519083c2bcffc",
@@ -18198,15 +18180,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 254,
+      "priority": 253,
       "questionId": "kids-quiz-597",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 276,
-      "cumulativeNewUniqueSegments": 1194,
-      "cumulativeUnicodeCodepoints": 54164,
+      "cumulativeNewUniqueSegments": 1192,
+      "cumulativeUnicodeCodepoints": 54092,
       "newTextSha256": [
         "0baceeb480ca846ea24425805d158a575643eace6870957f2235fa50f025db4a",
         "1d1ce99839f1e4c515a85f6b4720b47f3561d4cf5e8cf287651bf8ece3dd1258",
@@ -18217,15 +18199,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 255,
+      "priority": 254,
       "questionId": "kids-quiz-196",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 277,
-      "cumulativeNewUniqueSegments": 1199,
-      "cumulativeUnicodeCodepoints": 54441,
+      "cumulativeNewUniqueSegments": 1197,
+      "cumulativeUnicodeCodepoints": 54369,
       "newTextSha256": [
         "34da164949d5b92d52711e0a0fd882d20774dfd23950c18b35d7653c9bd10604",
         "63d056ed88051e3bb6248b4dd25990b85a795f87bed79359b9fcc55bea0912b7",
@@ -18236,15 +18218,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 256,
+      "priority": 255,
       "questionId": "kids-quiz-138",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 278,
-      "cumulativeNewUniqueSegments": 1204,
-      "cumulativeUnicodeCodepoints": 54719,
+      "cumulativeNewUniqueSegments": 1202,
+      "cumulativeUnicodeCodepoints": 54647,
       "newTextSha256": [
         "1ae99587482c208f1b7e3f9eaf5dc21953f1ad04be58df3e013c1f54aa06fe28",
         "1c38341169fbb7fd8b57be97e4385f39d86e04f9d969824f54332ace59cc3e97",
@@ -18255,15 +18237,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 257,
+      "priority": 256,
       "questionId": "kids-quiz-493",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 278,
-      "cumulativeNewUniqueSegments": 1209,
-      "cumulativeUnicodeCodepoints": 54997,
+      "cumulativeNewUniqueSegments": 1207,
+      "cumulativeUnicodeCodepoints": 54925,
       "newTextSha256": [
         "0721c1ca0431cac5fcc9f69ef92200e9b7426cea7ef9aec8440b69d3d704ffe2",
         "2f5ad42c22def04be8754973e0de55e7b110b63509692a7b7b80626aefaa38d3",
@@ -18274,15 +18256,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 258,
+      "priority": 257,
       "questionId": "kids-quiz-640",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 278,
-      "cumulativeNewUniqueSegments": 1214,
-      "cumulativeUnicodeCodepoints": 55275,
+      "cumulativeNewUniqueSegments": 1212,
+      "cumulativeUnicodeCodepoints": 55203,
       "newTextSha256": [
         "23001c30ba8f4df6c3799e196f71fbd1c756f2dd8fd5356a68e67d9d2d77a5a1",
         "38b3f26904571bf99262b07a68bcf35d37b806d44159a69c26341ed01f49e75b",
@@ -18293,15 +18275,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 259,
+      "priority": 258,
       "questionId": "kids-quiz-236",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 279,
-      "cumulativeNewUniqueSegments": 1219,
-      "cumulativeUnicodeCodepoints": 55554,
+      "cumulativeNewUniqueSegments": 1217,
+      "cumulativeUnicodeCodepoints": 55482,
       "newTextSha256": [
         "104c11c9f4aaa18da7b9d5aabc2d0e592b1889a8dab9630003b64e0a7d88d095",
         "63df6bb2a7c9e35bc33f7b42195f81f28101d3dd68a7df2d3434e8db59c88d30",
@@ -18312,15 +18294,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 260,
+      "priority": 259,
       "questionId": "kids-quiz-599",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 282,
-      "cumulativeNewUniqueSegments": 1224,
-      "cumulativeUnicodeCodepoints": 55836,
+      "cumulativeNewUniqueSegments": 1222,
+      "cumulativeUnicodeCodepoints": 55764,
       "newTextSha256": [
         "005dc56ca249f6a80a411d5c3557b85dc9d609451fa89db8b31e696533764c3b",
         "1ad372137d54a6ddc3b1b7e1d8f833e0bb600912ba0608e16ef437475697d585",
@@ -18331,15 +18313,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 261,
+      "priority": 260,
       "questionId": "kids-quiz-893",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 285,
-      "cumulativeNewUniqueSegments": 1229,
-      "cumulativeUnicodeCodepoints": 56121,
+      "cumulativeNewUniqueSegments": 1227,
+      "cumulativeUnicodeCodepoints": 56049,
       "newTextSha256": [
         "114a8c2eb96e400c903f98c2cb1f0d366addfe36a885db7ecb51498bcbcdd131",
         "1c49f5fa0a5de882a8f7f5cd7cdb2eddc122aaf35073952ae9eeb98027866c0f",
@@ -18350,15 +18332,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 262,
+      "priority": 261,
       "questionId": "kids-quiz-198",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 286,
-      "cumulativeNewUniqueSegments": 1234,
-      "cumulativeUnicodeCodepoints": 56407,
+      "cumulativeNewUniqueSegments": 1232,
+      "cumulativeUnicodeCodepoints": 56335,
       "newTextSha256": [
         "1a74e8ccd009c154fb94517d7ad777c9389ec2ddbb8a7df8ddb08517b78d6413",
         "6708688a67936b25d7864af8cd3b0ce27ea8a4a05df810636b000b6bc9b71fce",
@@ -18369,15 +18351,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 263,
+      "priority": 262,
       "questionId": "kids-quiz-498",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 287,
-      "cumulativeNewUniqueSegments": 1239,
-      "cumulativeUnicodeCodepoints": 56694,
+      "cumulativeNewUniqueSegments": 1237,
+      "cumulativeUnicodeCodepoints": 56622,
       "newTextSha256": [
         "5585c004f099dd46ef8c96a67a6e65f2fc8d69d67a1bd61eb28a3248c6baaa00",
         "62ecc8f819777bd135c21622b38b7aec872b2e39aecf134503b3b1d143eb9ac2",
@@ -18388,15 +18370,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 264,
+      "priority": 263,
       "questionId": "kids-quiz-587",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 287,
-      "cumulativeNewUniqueSegments": 1244,
-      "cumulativeUnicodeCodepoints": 56981,
+      "cumulativeNewUniqueSegments": 1242,
+      "cumulativeUnicodeCodepoints": 56909,
       "newTextSha256": [
         "310e75ce5ec004ecbf76335de0b67eb7a80925b989fd3da7da85245e061b5c50",
         "7a1f74dc1ff99f002e69f62215d7f92e50485455ab8737fba42162403b26a7a7",
@@ -18407,15 +18389,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 265,
+      "priority": 264,
       "questionId": "kids-quiz-649",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 288,
-      "cumulativeNewUniqueSegments": 1249,
-      "cumulativeUnicodeCodepoints": 57269,
+      "cumulativeNewUniqueSegments": 1247,
+      "cumulativeUnicodeCodepoints": 57197,
       "newTextSha256": [
         "122ace62219896eedbb27549afb90f8324cc9b0498d7b7a30791b43daa428200",
         "6485d5d2a74aec9dc49a0c84296be79fae624dde575f895830f38a0584b42ba9",
@@ -18426,15 +18408,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 266,
+      "priority": 265,
       "questionId": "kids-quiz-486",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 291,
-      "cumulativeNewUniqueSegments": 1254,
-      "cumulativeUnicodeCodepoints": 57560,
+      "cumulativeNewUniqueSegments": 1252,
+      "cumulativeUnicodeCodepoints": 57488,
       "newTextSha256": [
         "05e833224cb3b732f4995e64538af0cafc949da30bf8a3aa24d36f05ca4af121",
         "3cf538775cef87dc3ccc7be039dd95a88cac8059d99838a06706772cf546bcea",
@@ -18445,15 +18427,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 267,
+      "priority": 266,
       "questionId": "kids-quiz-388",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 292,
-      "cumulativeNewUniqueSegments": 1259,
-      "cumulativeUnicodeCodepoints": 57852,
+      "cumulativeNewUniqueSegments": 1257,
+      "cumulativeUnicodeCodepoints": 57780,
       "newTextSha256": [
         "05e086179c5483b9a00f7b5c035ed6553bcc02b7c1d09ace0645a85e454ccdfa",
         "1177a2ca52388240969a4de0edf17ffdcf3cfd91b8bc6cff4e69a0aa70c0194a",
@@ -18464,15 +18446,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 268,
+      "priority": 267,
       "questionId": "kids-quiz-855",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 292,
-      "cumulativeNewUniqueSegments": 1264,
-      "cumulativeUnicodeCodepoints": 58144,
+      "cumulativeNewUniqueSegments": 1262,
+      "cumulativeUnicodeCodepoints": 58072,
       "newTextSha256": [
         "746d415469aaa841fdb7e225e140d89be46374949c11dd2a8626a647390a7319",
         "be2747064e6b44968cc8cc167eaf84bd4007e0a881359e7b017f6d7a0aeab651",
@@ -18483,15 +18465,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 269,
+      "priority": 268,
       "questionId": "kids-quiz-488",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 294,
-      "cumulativeNewUniqueSegments": 1269,
-      "cumulativeUnicodeCodepoints": 58438,
+      "cumulativeNewUniqueSegments": 1267,
+      "cumulativeUnicodeCodepoints": 58366,
       "newTextSha256": [
         "997fcadc73feb193852183f0f25d4b2a0c4eee9babc096b307b480b037a9dea8",
         "b09c2592cdbca0df07d69b233144a75be78ceb953145caad510fd2260884f41c",
@@ -18502,15 +18484,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 270,
+      "priority": 269,
       "questionId": "kids-quiz-292",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 296,
-      "cumulativeNewUniqueSegments": 1274,
-      "cumulativeUnicodeCodepoints": 58734,
+      "cumulativeNewUniqueSegments": 1272,
+      "cumulativeUnicodeCodepoints": 58662,
       "newTextSha256": [
         "3279d1971e072f26c78e633c5d037d9c00f146763c23667e6198a298d6b5a6d6",
         "c7e6ef3a1164d4bfdfd50c059e5279cf656c62338aac0b384935da6bed987cb6",
@@ -18521,15 +18503,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 271,
+      "priority": 270,
       "questionId": "kids-quiz-831",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 297,
-      "cumulativeNewUniqueSegments": 1279,
-      "cumulativeUnicodeCodepoints": 59031,
+      "cumulativeNewUniqueSegments": 1277,
+      "cumulativeUnicodeCodepoints": 58959,
       "newTextSha256": [
         "0c7c867495cde341fa9f285bcd0a957bb40ffc63abb5181918d8ddf030732470",
         "6413b1dd6581aaaa958d85d4be74cdf64f067e80c5292710b55c78f7950bdc8e",
@@ -18540,15 +18522,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 272,
+      "priority": 271,
       "questionId": "kids-quiz-877",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 4,
       "incrementalUnicodeCodepoints": 300,
-      "cumulativeNewUniqueSegments": 1283,
-      "cumulativeUnicodeCodepoints": 59331,
+      "cumulativeNewUniqueSegments": 1281,
+      "cumulativeUnicodeCodepoints": 59259,
       "newTextSha256": [
         "00c5f70961685d4cbd8bc2ac0fb386160df32b6101d0b8ac49325e0c1922a8e7",
         "20a981c7c9616f0d3f834d8f3a910f91b7bc05571ce5e61564c3b450dd6d994f",
@@ -18558,15 +18540,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 273,
+      "priority": 272,
       "questionId": "kids-quiz-437",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 302,
-      "cumulativeNewUniqueSegments": 1288,
-      "cumulativeUnicodeCodepoints": 59633,
+      "cumulativeNewUniqueSegments": 1286,
+      "cumulativeUnicodeCodepoints": 59561,
       "newTextSha256": [
         "79b7d411e34a47540c479b83be9bb9ba6e1e3f5e12e0ef52a258a5c235a6a295",
         "7dc6c32c3d289aed1ccca0bfbae35a05210943a80e9b3206737794bb385f7bb6",
@@ -18577,15 +18559,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 274,
+      "priority": 273,
       "questionId": "kids-quiz-496",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 303,
-      "cumulativeNewUniqueSegments": 1293,
-      "cumulativeUnicodeCodepoints": 59936,
+      "cumulativeNewUniqueSegments": 1291,
+      "cumulativeUnicodeCodepoints": 59864,
       "newTextSha256": [
         "1e45d109609ad84d1aecbd25c0fa5401f78ec5dd8fa3ab3791f3659cdede8e05",
         "4944634403665f3f35d3a751cb2864bee3c24a9762b95518dfa3b8b56c76cebb",
@@ -18596,15 +18578,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 275,
+      "priority": 274,
       "questionId": "kids-quiz-591",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 304,
-      "cumulativeNewUniqueSegments": 1298,
-      "cumulativeUnicodeCodepoints": 60240,
+      "cumulativeNewUniqueSegments": 1296,
+      "cumulativeUnicodeCodepoints": 60168,
       "newTextSha256": [
         "3d7359ed272e4f81849e5e29712f5ec44f3777c15be4a75fa3f9aa9af57663da",
         "74ab893a6193fc4bbc4f80716e40faa7907b167a7bf420e5ea9d3b93b965bac5",
@@ -18615,15 +18597,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 276,
+      "priority": 275,
       "questionId": "kids-quiz-881",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 305,
-      "cumulativeNewUniqueSegments": 1303,
-      "cumulativeUnicodeCodepoints": 60545,
+      "cumulativeNewUniqueSegments": 1301,
+      "cumulativeUnicodeCodepoints": 60473,
       "newTextSha256": [
         "1a493eae178edccd5defb0a18455f22ac590546f268f7dc2e572d5f1b41408a2",
         "9ce5d00aabce1ffdeaf96cf4cff19572af1b6aee2e8015bf057e8a3ef7be7c66",
@@ -18634,15 +18616,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 277,
+      "priority": 276,
       "questionId": "kids-quiz-085",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 310,
-      "cumulativeNewUniqueSegments": 1308,
-      "cumulativeUnicodeCodepoints": 60855,
+      "cumulativeNewUniqueSegments": 1306,
+      "cumulativeUnicodeCodepoints": 60783,
       "newTextSha256": [
         "4452fd4f89cc6986f061537eec01cdfbb74f6603f656d0a5b43a9f4e99785424",
         "59e7f1b9eb1dbc1b45081fdb88cc79fb2de5f564a5811b45337e8fe723973f69",
@@ -18653,15 +18635,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 278,
+      "priority": 277,
       "questionId": "kids-quiz-450",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 310,
-      "cumulativeNewUniqueSegments": 1313,
-      "cumulativeUnicodeCodepoints": 61165,
+      "cumulativeNewUniqueSegments": 1311,
+      "cumulativeUnicodeCodepoints": 61093,
       "newTextSha256": [
         "0d121cce45357d5d6e78e48083e40c9570fca726e78bc7c6d331a6d96bc99aa2",
         "3097d2c4abdb293956cc1f2429cff205f8265c28fd8a5f1eb636f82faf20e27b",
@@ -18672,15 +18654,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 279,
+      "priority": 278,
       "questionId": "kids-quiz-839",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 316,
-      "cumulativeNewUniqueSegments": 1318,
-      "cumulativeUnicodeCodepoints": 61481,
+      "cumulativeNewUniqueSegments": 1316,
+      "cumulativeUnicodeCodepoints": 61409,
       "newTextSha256": [
         "64aa1800ac76473b18067681083ae7757626fbd3947a4c2bf358ceee1263e616",
         "6da28a03bbc0c4503bc9d532ce90ee3fba0317b7278bebb391160197326b1267",
@@ -18691,15 +18673,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 280,
+      "priority": 279,
       "questionId": "kids-quiz-539",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 317,
-      "cumulativeNewUniqueSegments": 1323,
-      "cumulativeUnicodeCodepoints": 61798,
+      "cumulativeNewUniqueSegments": 1321,
+      "cumulativeUnicodeCodepoints": 61726,
       "newTextSha256": [
         "5b880e5668826e961fe93052698b289e44998ee5167b2f0845d85c56c4edbeae",
         "721343d5d114291865145ca213fbea38aeecb520f177bb8c985410048be0f94a",
@@ -18710,15 +18692,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 281,
+      "priority": 280,
       "questionId": "kids-quiz-596",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 317,
-      "cumulativeNewUniqueSegments": 1328,
-      "cumulativeUnicodeCodepoints": 62115,
+      "cumulativeNewUniqueSegments": 1326,
+      "cumulativeUnicodeCodepoints": 62043,
       "newTextSha256": [
         "11af5414c8f90523b3aaf36c4fedcd1f376bf7969ecda2005e71b2431d2c1a7a",
         "2810d49c7afd783bfcd2d215bf2e4519812fed34e6074bc0e996a4b882ed8e31",
@@ -18729,15 +18711,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 282,
+      "priority": 281,
       "questionId": "kids-quiz-590",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 318,
-      "cumulativeNewUniqueSegments": 1333,
-      "cumulativeUnicodeCodepoints": 62433,
+      "cumulativeNewUniqueSegments": 1331,
+      "cumulativeUnicodeCodepoints": 62361,
       "newTextSha256": [
         "14958c78e841ed712af1b4f2111bc3002cd7fcaaea96056ff41f180b8bc826ac",
         "150413803bb9c63ff4536e7cb994719f49eeae6255e797122f83797e71a045c2",
@@ -18748,15 +18730,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 283,
+      "priority": 282,
       "questionId": "kids-quiz-495",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 321,
-      "cumulativeNewUniqueSegments": 1338,
-      "cumulativeUnicodeCodepoints": 62754,
+      "cumulativeNewUniqueSegments": 1336,
+      "cumulativeUnicodeCodepoints": 62682,
       "newTextSha256": [
         "b82c8eec597525750e28be13e373eaa039a99ea7a0600276aa8304990db81049",
         "d26739f7efe753caefd330caaef5adb042dd3b0fe8a879fdd13692783ca4bf99",
@@ -18767,15 +18749,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 284,
+      "priority": 283,
       "questionId": "kids-quiz-298",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 331,
-      "cumulativeNewUniqueSegments": 1343,
-      "cumulativeUnicodeCodepoints": 63085,
+      "cumulativeNewUniqueSegments": 1341,
+      "cumulativeUnicodeCodepoints": 63013,
       "newTextSha256": [
         "32be421cb9c04fe328ff93855a6a6723234d45e57e44953f2f5cbd6ed2cad4e2",
         "4b270ca611bf3e1da87cd1b38021218ca0b2b9b82af5b0b35b9a9ea3820fab86",
@@ -18786,15 +18768,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 285,
+      "priority": 284,
       "questionId": "kids-quiz-594",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 334,
-      "cumulativeNewUniqueSegments": 1348,
-      "cumulativeUnicodeCodepoints": 63419,
+      "cumulativeNewUniqueSegments": 1346,
+      "cumulativeUnicodeCodepoints": 63347,
       "newTextSha256": [
         "03358ed110e09526a13e6931fdec6826afe0ddbba3791c6a71f71021e64106c8",
         "2e7266a09040ad2c58529c6b007d06f9aecd2f3d5fd5a0a508eabf0bce4d8e06",
@@ -18805,15 +18787,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 286,
+      "priority": 285,
       "questionId": "kids-quiz-485",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 362,
-      "cumulativeNewUniqueSegments": 1353,
-      "cumulativeUnicodeCodepoints": 63781,
+      "cumulativeNewUniqueSegments": 1351,
+      "cumulativeUnicodeCodepoints": 63709,
       "newTextSha256": [
         "0522ed83008bed6325172d08caa67f550019919b7d577dcb7011bddd7465cd7d",
         "1effaf9c1f91b9a2dcdf3d56d214af98d3b84ff9347dcaf7e5d652d3ec464dea",
@@ -18824,15 +18806,15 @@
       "speechGenerationAuthorized": false
     },
     {
-      "priority": 287,
+      "priority": 286,
       "questionId": "kids-quiz-500",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
       "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 5,
       "incrementalUnicodeCodepoints": 393,
-      "cumulativeNewUniqueSegments": 1358,
-      "cumulativeUnicodeCodepoints": 64174,
+      "cumulativeNewUniqueSegments": 1356,
+      "cumulativeUnicodeCodepoints": 64102,
       "newTextSha256": [
         "198bedbe3331a20a8ac1eeecd6534eab93172d1e1d74c2936e82ae970dfb3298",
         "5bc8dc30dbedcec337152b939fe522173781a2660d89e3a72f60db9be5b42119",
@@ -18850,8 +18832,18 @@
       "newSynthesisAllowed": false
     },
     {
+      "sourceTextSha256": "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
+      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
+      "newSynthesisAllowed": false
+    },
+    {
       "sourceTextSha256": "f61315c7fd09b325a685b9682917d124c9c132ae2e8b6965d66613d21d6db91e",
       "status": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "newSynthesisAllowed": false
+    },
+    {
+      "sourceTextSha256": "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30",
+      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
       "newSynthesisAllowed": false
     },
     {
