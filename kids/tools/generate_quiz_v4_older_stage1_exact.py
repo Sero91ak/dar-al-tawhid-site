@@ -294,7 +294,7 @@ def main():
     # old fingerprint and requires a new deliberate approval.
     paid_snapshot=hashlib.sha256(
         PREP.read_bytes()+b"\\x00"+REG.read_bytes()+b"\\x00"+
-        LEDGER.read_bytes()+b"\\x00"+
+        LEDGER.read_bytes()+b"\\x00"+USAGE.read_bytes()+b"\\x00"+ATTEMPTS.read_bytes()+b"\\x00"+
         json.dumps([x["spokenTextSHA256"] for x in selected],
                    ensure_ascii=False,separators=(",",":")).encode("utf-8")
     ).hexdigest()
@@ -304,7 +304,7 @@ def main():
         "questionCount":20,"questions7to8":10,"questions9to10":10,
         "stageExpectedNewOriginals":STAGE_SIZE,
         "previouslyRecordedFirstStageOriginals":STAGE_SIZE-len(missing)-len(stage["_reservedUnimportedTextSHA256"]),
-        "remainingFirstStageOriginals":len(missing)+len(stage["_reservedUnimportedTextSHA256"]),
+        "remainingFirstStageOriginals":len(missing)+len(stage["_reservedUnimportedTextSHA256"])+len(stage["_uncertainPaidRequestTextSHA256"]),
         "reservedOrSubmittedInConnectedFlowNotToRebuy":len(stage["_reservedUnimportedTextSHA256"]),
         "uncertainPreviousPaidRequestsNotToRebuy":len(stage["_uncertainPaidRequestTextSHA256"]),
         "uncertainPaidRequestTextSHA256":stage["_uncertainPaidRequestTextSHA256"],
