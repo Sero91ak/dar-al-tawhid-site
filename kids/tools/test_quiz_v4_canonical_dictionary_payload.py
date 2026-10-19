@@ -5,6 +5,7 @@ Audits real production API payload including 10,099 lexemes and pinned Git
 blob SHA. Never makes HTTP requests or launches any paid speech generation.
 """
 import json
+import os
 import sys
 import tempfile
 from pathlib import Path
@@ -50,13 +51,15 @@ def main():
     # The HTTP transport is mocked: ZERO credits, no network calls.
     prior_hold=t.PRONUNCIATION_HOLD
     prior_urlopen=t.urllib.request.urlopen
+    prior_sample=os.environ.get('KIDS_V4_STAGE1_SAMPLE_ONLY')
     try:
         with tempfile.TemporaryDirectory() as folder:
             h=Path(folder)/"hold.json"
             h.write_text(json.dumps({"productionPaused":True,"dictionaryProviderVerified":False,"ownerRestartAuthorized":False}))
             t.PRONUNCIATION_HOLD=h
             must_fail(lambda:t.original_mp3("NO_REAL_KEY","Der Qurʾān."),"PRONUNCIATION_HOLD")
-            h.write_text(json.dumps({"productionPaused":False,"dictionaryProviderVerified":True,"ownerRestartAuthorized":True}))
+            h.write_text(json.dumps({"productionPaused":False,"dictionaryProviderVerified":True,"ownerRestartAuthorized":True,"authorizedNewOriginalsBeforeHearing":1,"humanListeningQualityGateReleased":False}))
+            os.environ['KIDS_V4_STAGE1_SAMPLE_ONLY']='YES'
             calls=[]
             class PretendMp3:
                 status=200
@@ -82,6 +85,10 @@ def main():
     finally:
         t.PRONUNCIATION_HOLD=prior_hold
         t.urllib.request.urlopen=prior_urlopen
+        if prior_sample is None:
+            os.environ.pop('KIDS_V4_STAGE1_SAMPLE_ONLY',None)
+        else:
+            os.environ['KIDS_V4_STAGE1_SAMPLE_ONLY']=prior_sample
     old=t.PRONUNCIATION
     try:
         with tempfile.TemporaryDirectory() as folder:
