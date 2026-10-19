@@ -37,12 +37,25 @@ def main():
     }
     assert t.build_canonical_v4_payload("Angeben.")["pronunciation_dictionary_locators"]==english["pronunciation_dictionary_locators"]
     assert t.build_canonical_v4_payload("Iman.")["language_code"]=="de"
+    # Verify user spelling remains in the *quiz*; only provider TTS graphemes
+    # resolve to exact-existing forms in the original 10,099-entry dictionary.
+    compound=t.build_canonical_v4_payload("Bismi-llāh – im Namen Allahs.")
+    assert compound["text"]=="Bismillāh – im Namen Allahs."
+    assert compound["pronunciation_dictionary_locators"]==english["pronunciation_dictionary_locators"]
+    supplication=t.build_canonical_v4_payload("In schāʾ Allāh – wenn Allah will.")
+    assert supplication["text"]=="in sha' Allah – wenn Allah will."
+    assert supplication["pronunciation_dictionary_locators"]==english["pronunciation_dictionary_locators"]
+
     fusha=t.build_canonical_v4_payload("الْقُرْآنُ وَالْإِيمَانُ.",language="ar")
     assert fusha["model_id"]=="eleven_v4" and fusha["language_code"]=="ar"
     assert "pronunciation_dictionary_locators" not in fusha
     assert fusha["text"]=="الْقُرْآنُ وَالْإِيمَانُ."
     assert fusha["apply_text_normalization"]=="off"
     must_fail(lambda:t.build_canonical_v4_payload("Der الْقُرْآنُ"),"V4_MIXED_LANGUAGE")
+    must_fail(lambda:t.build_canonical_v4_payload("Muḥammad ﷺ wird erwähnt."),"V4_MIXED_LANGUAGE")
+    must_fail(lambda:t.build_canonical_v4_payload("Mūsā عليه السلام lebte."),"V4_MIXED_LANGUAGE")
+    must_fail(lambda:t.build_canonical_v4_payload("ﷺ",language="de"),"V4_GERMAN_SOURCE_CONTAINS_ARABIC")
+
     must_fail(lambda:t.build_canonical_v4_payload("الْقُرْآنُ",language="de"),"V4_GERMAN_SOURCE_CONTAINS_ARABIC")
     must_fail(lambda:t.build_canonical_v4_payload("القرآن",language="ar"),"V4_FUSHA")
     must_fail(lambda:t.build_canonical_v4_payload("Iman.",language="ar"),"V4_FUSHA")
@@ -108,7 +121,7 @@ def main():
             must_fail(lambda:t.build_canonical_v4_payload("Der Qurʾān."),"V4_MASTER_PLS_RULE_COUNT_MISMATCH")
     finally:
         t.PRONUNCIATION=old
-    print("PASS_KIDS_V4_MASTER_10099_RULE_DICTIONARY_PAYLOAD; German Qurʾān/Īmān; vocalized native Fuṣḥā; mixed text rejection; production one-test pilot gate; ZERO credits")
+    print("PASS_KIDS_V4_MASTER_10099_RULE_DICTIONARY_PAYLOAD; German Qurʾān/Īmān; exact owner Bismi/Schāʾ aliases; Arabic ﷺ blocked from German TTS; real HTTP mock; ZERO credits")
 
 
 if __name__=="__main__":
