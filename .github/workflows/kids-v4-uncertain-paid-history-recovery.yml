@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - 'kids/tools/recover_quiz_v4_uncertain_history.py'
+      - 'kids/tools/test_quiz_v4_uncertain_history.py'
       - '.github/workflows/kids-v4-uncertain-paid-history-recovery.yml'
   workflow_dispatch:
 
@@ -30,6 +31,8 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m py_compile kids/tools/recover_quiz_v4_uncertain_history.py
+          python3 -m py_compile kids/tools/test_quiz_v4_uncertain_history.py
+          python3 kids/tools/test_quiz_v4_uncertain_history.py
           python3 kids/tools/recover_quiz_v4_uncertain_history.py
           python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
 
