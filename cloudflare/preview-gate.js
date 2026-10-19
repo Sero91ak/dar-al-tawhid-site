@@ -312,11 +312,11 @@ function editorLoginHtml(target,error="") {
  +'button{width:100%;height:48px;margin-top:16px;background:#d2b982;border:0;border-radius:10px;'
  +'font:700 15px system-ui;cursor:pointer}.err{color:#ffc2b4}a{color:#d2b982}</style></head><body><main>'
  +'<small>DĀR AL TAWḤĪD · TEST</small><h1>Layout-Studio</h1>'
- +'<p>Verwende hier dasselbe Passwort wie beim bestehenden Test-Zugang. Die Kids-Akademie bleibt getrennt.</p>'
+ +'<p>Melde dich mit deinem Layout-Editor-Passwort an. Die Test-App und Kids-Akademie bleiben getrennt.</p>'
  +(error?'<p class="err" role="alert">'+academyEscape(error)+'</p>':"")
  +'<form method="post" action="'+EDITOR_LOGIN+'">'
  +'<input type="hidden" name="next" value="'+academyEscape(target)+'">'
- +'<label for="pass">Test-App-Passwort</label>'
+ +'<label for="pass">Layout-Editor-Passwort</label>'
  +'<input id="pass" type="password" name="password" maxlength="256" required autocomplete="current-password">'
  +'<button type="submit">Editor öffnen</button></form>'
  +'<p><a href="/test/">Zur Test-App</a></p></main></body></html>';
@@ -343,7 +343,9 @@ async function editorHasCookie(request,secret) {
 export async function layoutEditorAccess(request,url,env) {
  const path=url.pathname,isLogin=path===EDITOR_LOGIN;
  if(!isLogin&&!EDITOR_FILES.has(path))return null;
- const pass=String(env&&env.PREVIEW_GATE_PASS||"");
+ // Layout editor can have its own Cloudflare secret. Existing Test PIN works
+ // only until that new secret is provisioned; never store passwords in Git.
+ const pass=String(env&&(env.DAR_LAYOUT_EDITOR_PASSWORD || env.PREVIEW_GATE_PASS)||"");
  const secret=academyOwnerSecret(env);
  const destination=editorTarget(url.searchParams.get("next")||path);
  if(!pass||!secret)return editorPage(destination,"Der geschützte Test-Zugang ist noch nicht vollständig eingerichtet.",503);
