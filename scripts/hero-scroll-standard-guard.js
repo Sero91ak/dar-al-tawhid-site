@@ -112,7 +112,7 @@ if(fnStart<0||fnEnd<0)fail("Cloudflare Hero-Addon nicht auffindbar");
 const context={};
 vm.runInNewContext(router.slice(fnStart,fnEnd),context,{timeout:1200});
 const addon=context.adultCompactHeroAddon();
-if(!addon.includes("visitor-hero-v1403-20261018")||
+if(!addon.includes("visitor-hero-safearea-v1404-20261019")||
    !addon.includes("adult-hero-height-runtime-v1403.js")||
    !/<script\b[^>]*><\/script>/.test(addon)){
  fail("Cloudflare muss den neuen CSS-Stand und gültige Runtime-Script-Tags ausliefern");
@@ -120,8 +120,8 @@ if(!addon.includes("visitor-hero-v1403-20261018")||
 const original='<html><body><link rel="stylesheet" id="darAdultHeroCompactEdgeV1396" href="/old.css"></body></html>';
 const repaired=context.activateAdultCompactHero(original);
 if(repaired.includes('id="darAdultHeroCompactEdgeV1396"') ||
- (repaired.match(/id="darAdultHeroCompactEdgeV1403"/g)||[]).length!==1 ||
- (repaired.match(/id="darAdultHeroHeightRuntimeV1403"/g)||[]).length!==1){
+ (repaired.match(/id="darAdultHeroCompactEdgeV1404"/g)||[]).length!==1 ||
+ (repaired.match(/id="darAdultHeroHeightRuntimeV1404"/g)||[]).length!==1){
  fail("Hero HTML darf keine alte oder doppelte Stylesheet-Injektion enthalten");
 }
 if(context.activateAdultCompactHero(repaired)!==repaired){
@@ -132,6 +132,48 @@ for(const required of [
  "if (assetResponse.ok) html = activateAdultCompactHero(html);",
  "html = activateAdultCompactHero(html);"
 ]){
- if(!router.includes(required))fail("Nicht alle PWA/iOS/Website-Wege aktivieren V1403");
+ if(!router.includes(required))fail("Nicht alle PWA/iOS/Website-Wege aktivieren V1404");
 }
-ok("V1403 wird ohne DOM-Verschiebung und mit eindeutigem Cache-Buster auf iOS, PWA und Web ausgeliefert");
+ok("V1404 wird ohne DOM-Verschiebung und mit eindeutigem Cache-Buster auf iOS, PWA und Web ausgeliefert");
+
+
+/* DAR_VISITOR_HERO_SAFE_TOP_V1404
+ * The previous screenshot failure was not an absent stylesheet: the
+ * compiled official iOS WKWebView added its own higher-priority body padding.
+ * Guard against reintroducing that pale strip on all photo-bearing routes. */
+const nativeView=fs.readFileSync(path.join(root,"ios/DarAlTawhid/DarAlTawhid/WebAppView.swift"),"utf8");
+const v1404Css=visitorResponsive.split("/* DAR_VISITOR_IOS_HERO_EDGE_SEARCH_V1404")[1];
+if(!v1404Css)fail("Native Hero Safe-Area override V1404 fehlt");
+if(!nativeView.includes("body.is-area-route:not(.is-feed-fullscreen)") ||
+   !nativeView.includes("--dar-native-safe-top")){
+ fail("Unbekannte native iOS Safe-Area CSS Herkunft: Hero zuerst erneut vermessen");
+}
+for(const required of [
+ "body.has-bottom-nav.is-area-route:is(",
+ ".is-topics-route,.is-topic-route,.is-post-route,.is-hadith-route",
+ ".is-dua-route,.is-frauen-route",
+ "padding-top:0!important",
+ "padding-top:max(16px,calc(var(--dar-native-safe-top",
+ "top:calc(var(--dar-immersive-hero-height,185px) - var(--dar-hero-join))!important",
+ "width:100%!important",
+ "background:var(--bg,#f4efec)!important",
+ ":focus-within > :is(.search-panel,.search-pro-panel,.main-search,#homeSearchBlock)",
+ "min-height:clamp(148px,17svh,207px)!important"
+]){
+ if(!v1404Css.includes(required))fail("V1404 Inhalt / responsiver Safe-Area Vertrag fehlt: "+required);
+}
+if(/--frauen-hero-img\s*:|\.frauen-library-hero[^{]*\{[^}]*background-image\s*:/.test(v1404Css)){
+ fail("Frauen Bildquelle darf niemals aus neuem CSS neu vergeben werden");
+}
+const stale='<html><head></head><body><link rel="stylesheet" id="darAdultHeroCompactEdgeV1403" href="/old.css"><script defer id="darAdultHeroHeightRuntimeV1403" src="/old.js"></script></body></html>';
+const replaced=context.activateAdultCompactHero(stale);
+if(replaced.includes('id="darAdultHeroCompactEdgeV1403"') ||
+   replaced.includes('id="darAdultHeroHeightRuntimeV1403"') ||
+   (replaced.match(/id="darAdultHeroCompactEdgeV1404"/g)||[]).length!==1 ||
+   (replaced.match(/id="darAdultHeroHeightRuntimeV1404"/g)||[]).length!==1){
+ fail("V1404 muss alte Hero-Injektion durch genau eine frische Instanz ersetzen");
+}
+if(context.activateAdultCompactHero(replaced)!==replaced){
+ fail("V1404 darf bei wiederholter Worker-Injektion keine doppelten Styles/JS erzeugen");
+}
+ok("V1404 native iOS Safe-Area Konflikt behoben, Hero/Sticky-Suche kompakt und korrekt gecacht");
