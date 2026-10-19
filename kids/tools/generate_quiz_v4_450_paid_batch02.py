@@ -115,6 +115,13 @@ def original_mp3(key,spoken,*,language="de"):
     hold=load(PRONUNCIATION_HOLD)
     if hold.get("productionPaused") is not False or hold.get("dictionaryProviderVerified") is not True or hold.get("ownerRestartAuthorized") is not True:
         raise RuntimeError("PRONUNCIATION_HOLD: no paid V4 until current 10,099-rule lexicon, Fuṣḥā and explicit owner restart are verified")
+    # This is the common paid HTTP POST used by multiple old workflows.
+    # NO workflow may quietly render 20+ new takes while the first correctly
+    # dictionary-bound recording still awaits the user's hearing verdict.
+    if hold.get("humanListeningQualityGateReleased") is not True:
+        if (os.environ.get("KIDS_V4_STAGE1_SAMPLE_ONLY")!="YES"
+                or hold.get("authorizedNewOriginalsBeforeHearing")!=1):
+            raise RuntimeError("V4_HUMAN_HEARING_GATE: at most one owner-approved dictionary pilot before any more paid synthesis")
     body=build_canonical_v4_payload(spoken,language=language)
     req=urllib.request.Request(
         "https://api.elevenlabs.io/v1/text-to-speech/"+VOICE+
