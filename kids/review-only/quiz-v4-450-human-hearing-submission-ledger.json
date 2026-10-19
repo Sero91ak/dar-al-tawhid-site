@@ -3,7 +3,7 @@
   "scope": "TAWHID_KIDS_450_PRIVATE_SELF_ATTESTED_HEARING_SUBMISSIONS",
   "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "modelId": "eleven_v4",
-  "knownRealV4TextClips": 289,
+  "knownRealV4TextClips": 292,
   "ageSubmitted": [],
   "claimedApprovalClipCount": 0,
   "submittedIssueClipCount": 0,
@@ -24,13 +24,13 @@
     },
     "7-8": {
       "questions": 150,
-      "fourPartTechnical": 6,
+      "fourPartTechnical": 7,
       "allFourSelfAttestedUnverified": 0,
       "questionsWithReportedIssue": 0
     },
     "9-10": {
       "questions": 150,
-      "fourPartTechnical": 4,
+      "fourPartTechnical": 5,
       "allFourSelfAttestedUnverified": 0,
       "questionsWithReportedIssue": 0
     }
@@ -360,8 +360,7 @@
       "selfAttestedParts": [],
       "reportedIssueParts": [],
       "missingOriginalParts": [
-        "explanation",
-        "question"
+        "explanation"
       ],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
@@ -411,9 +410,7 @@
       "ageBand": "9-10",
       "selfAttestedParts": [],
       "reportedIssueParts": [],
-      "missingOriginalParts": [
-        "question"
-      ],
+      "missingOriginalParts": [],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
     },
@@ -3265,9 +3262,7 @@
       "ageBand": "7-8",
       "selfAttestedParts": [],
       "reportedIssueParts": [],
-      "missingOriginalParts": [
-        "question"
-      ],
+      "missingOriginalParts": [],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
     },
