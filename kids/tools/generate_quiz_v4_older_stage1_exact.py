@@ -353,6 +353,9 @@ def main():
           "requires explicit paid-credit authorization for this run")
     check(os.getenv("KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256","").strip()==paid_snapshot,
           "batch SHA does not match actual voice, current source texts, paid ledger and next ten originals; re-audit and re-authorize, NO credits spent")
+    hold=read(ROOT/"kids/data/quiz-v4-pronunciation-hold.json")
+    check(hold.get("productionPaused") is False and hold.get("humanPronunciationApproved") is True,
+          "PRONUNCIATION_HOLD: user stopped V4 TTS; existing ElevenLabs lexicon and Arabic Fusha must be verified before any paid recording")
     check(bool(selected),"first 65 already recorded; no further purchases")
     key=os.getenv("ELEVENLABS_API_KEY","").strip()
     check(bool(key),"provider credential absent")
