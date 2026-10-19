@@ -96,7 +96,7 @@ const ACADEMY_OWNER_ARCHIVE = "/akademie/unterrichtsarchiv";
 
 export function isAcademyOwnerRoute(pathname) {
   // Explicit allowlist: no wildcard, no traversal into unrelated test assets.
-  const allowed = ["", "/", "/index.html", "/audio-audit-v18.html", "/unterrichtszentrale-v23.html", "/redaktion-katalog-v1.json", "/login"];
+  const allowed = ["", "/", "/index.html", "/audio-audit-v18.html", "/unterrichtszentrale-v23.html", "/redaktion-katalog-v1.json", "/startseiten-editor.html", "/login"];
   if (pathname === ACADEMY_OWNER_ARCHIVE || pathname === ACADEMY_OWNER_ARCHIVE + "/" ||
       pathname === ACADEMY_OWNER_ARCHIVE + "/index.html" || pathname === ACADEMY_OWNER_ARCHIVE + "/daten.json") return true;
   // The physical archive assets must ALSO require owner authentication.
@@ -275,5 +275,6 @@ export function academyOwnerAssetPath(pathname) {
   if (suffix === "/audio-audit-v18.html") return ACADEMY_OLD_ROOT + "/audio-audit-v18.html";
   if (suffix === "/unterrichtszentrale-v23.html") return ACADEMY_OLD_ROOT + "/unterrichtszentrale-v23.html";
   if (suffix === "/redaktion-katalog-v1.json") return ACADEMY_OLD_ROOT + "/redaktion-katalog-v1.json";
+  if (suffix === "/startseiten-editor.html") return ACADEMY_OLD_ROOT + "/startseiten-editor.html";
   return null;
 }
