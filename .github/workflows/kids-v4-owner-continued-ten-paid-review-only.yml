@@ -1,0 +1,150 @@
+name: KIDS V4 Owner-Authorized Ten Exact Dictionary Master Originals
+
+on:
+  push:
+    branches:
+      - review/kids-quiz-v4-batch-001-020-20261014
+    paths:
+      - kids/review-only/quiz-v4-owner-next-ten-command.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+
+jobs:
+  original-serhat-dictionary-v4-ten:
+    if: >-
+      github.repository == 'Sero91ak/dar-al-tawhid-site' &&
+      github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
+      github.event.head_commit.message == 'audio(kids V4): owner authorized next ten exact 10099-rule original MP3s [20261019]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      KIDS_V4_STAGE1_APPROVED_CANONICAL_450: 'YES'
+      KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL: 'YES'
+      KIDS_V4_STAGE1_SAMPLE_ONLY: 'NO'
+      KIDS_V4_STAGE1_OWNER_CORRECT_DICTIONARY_BATCH: 'YES'
+
+    steps:
+      - name: Checkout current reviewed 450 and original audio receipts
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          fetch-depth: 0
+
+      - name: Verify exact user mandate and 10099 dictionary for next unique ten
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/generate_quiz_v4_450_paid_batch02.py kids/tools/generate_quiz_v4_older_stage1_exact.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/test_quiz_v4_quarantine.py
+          python3 kids/tools/verify_quiz_v4_master_dictionary_provider_get_only.py
+          python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --audit
+          python3 - <<'PY'
+          import json,hashlib,os,re
+          from pathlib import Path
+          read=lambda p:json.loads(Path(p).read_text(encoding='utf-8'))
+          command=read('kids/review-only/quiz-v4-owner-next-ten-command.json')
+          batch=read('kids/review-only/quiz-v4-older-stage1-next-recording-batch.json')
+          hold=read('kids/data/quiz-v4-pronunciation-hold.json')
+          journal=read('kids/data/quiz-v4-older-stage1-request-journal.json')
+          usage=read('kids/data/quiz-v4-older-stage1-usage.json')
+          registry=read('kids/data/quiz-v4-450-original-clip-registry.json')
+          preflight=read('.github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json')
+          assert command['scope']=='USER_AUTHORIZED_TEN_AUTHENTIC_ELEVEN_V4_QUIZ_ORIGINALS'
+          assert command['explicitNewPaidOriginals']==10
+          assert command['estimatedCreditsUpperBound']==240
+          assert command['modelId']==hold['modelId']=='eleven_v4'
+          assert command['voiceId']==hold['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert command['dictionaryId']==hold['dictionaryId']=='Q8w3SxtoVo8NSjsnlJEd'
+          assert command['dictionaryVersionId']==hold['dictionaryVersionId']=='wSzgkGpAwEDiTak8DApc'
+          assert command['ownerExplicitContinuedAudioProduction'] is True
+          assert command['requiresHumanListeningBeforePublicRelease'] is True
+          assert command['publicReleaseEnabled'] is False
+          assert hold['ownerExplicitlyRequestedContinuedPaidQuizProduction'] is True
+          assert hold['allowOneStrictTenOriginalDictionaryBatchBeforeListeningApproval'] is True
+          assert hold['maximumPreHearingAdditionalNewOriginals']==10
+          assert hold['maximumPreHearingAdditionalEstimatedCredits']==240
+          assert hold['humanListeningQualityGateReleased'] is False
+          assert hold['humanPronunciationApproved'] is False
+          assert batch['manualApprovalMustMatchExactBatchFingerprintSHA256']==command['exactBatchFingerprintSHA256']
+          assert batch['nextExactTextSha256']==command['exactTextSHA256']
+          assert len(batch['nextExactTextSha256'])==10==len(set(batch['nextExactTextSha256']))
+          assert batch['nextEstimatedCreditsNotProviderBill']<=240
+          rows={x['spokenTextSHA256']:x['spokenText'] for x in preflight['originalTextRecordingQueue']}
+          for sha in command['exactTextSHA256']:
+            text=rows[sha]
+            assert hashlib.sha256(text.encode('utf-8')).hexdigest()==sha
+            assert text not in registry['textClips']
+            assert not re.search(r'[\u0621-\u064A]|ﷺ',text), 'Arabic Fuṣḥā must be segmented'
+            assert not any(j['textSHA256']==sha for j in journal['entries']), 'Already spent or uncertain'
+          assert not any(x.get('isOwnerPostPilotTenTake') for x in usage['runs'])
+          assert read('kids/data/quiz-curation-release.json')['enabled'] is False
+          with open(os.environ['GITHUB_ENV'],'a',encoding='utf-8') as fd:
+            fd.write('KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256='+command['exactBatchFingerprintSHA256']+'\n')
+          print('PASS: exact approved ten new V4 originals; pinned master lexicon; <=240 estimated credits; public release OFF')
+          PY
+
+      - name: Generate ten exact unique originals only after durable remote BEFORE and AFTER POST checkpoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --produce
+
+      - name: Decode MP3, quarantine bad legacy takes and compose 450 internal quiz assignments
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null || ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update -qq
+            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+          fi
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+
+      - name: Commit review-only composed verified MP3s and sync progress without publishing
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name tawhid-kids-v4-paid-originals-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-450-original-clip-registry.json kids/data/quiz-v4-450-paid-generation-ledger.json
+          git add kids/data/quiz-v4-older-stage1-usage.json kids/data/quiz-v4-older-stage1-request-journal.json
+          git add kids/assets/kids-quiz-audio/v4-curated450-review/ kids/assets/kids-quiz-audio/v4-first150-composed-review/ kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-450-production-status.json kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-older-stage1-next-recording-batch.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'audio(kids V4): compose ten original dictionary-bound takes into private quiz review [skip ci]'
+          for attempt in 1 2 3 4; do
+            git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014 && exit 0
+            git fetch --no-tags origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase --autostash FETCH_HEAD || exit 1
+          done
+          exit 1
+
+      - name: Preserve original MP3s, request journal and cost ledger even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-owner-next-ten-real-original-mp3-protected-receipts
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json
+            kids/data/quiz-v4-older-stage1-usage.json
+            kids/data/quiz-v4-older-stage1-request-journal.json
