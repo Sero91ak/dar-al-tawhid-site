@@ -4,6 +4,7 @@ import Foundation
 import UIKit
 import WebKit
 import WidgetKit
+import ActivityKit
 
 final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
     static let shared = DarNativePermissions()
@@ -272,5 +273,94 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
         let handlers = pendingGeoDecisions
         pendingGeoDecisions.removeAll()
         handlers.forEach { $0(decision) }
+    }
+}
+
+/* Local preference cannot override Apple's system-wide Live Activity permission.
+   Every status response reports both values separately. */
+@MainActor
+enum DarPrayerLiveActivityController {
+    private static let preference = "dar.ios.prayer.live-activity.enabled"
+
+    static func handle(_ payload: [String: Any], webView: WKWebView?) {
+        let action = payload["action"] as? String ?? "status"
+        switch action {
+        case "set":
+            let desired = payload["enabled"] as? Bool ?? false
+            let allowed: Bool
+            if #available(iOS 16.1, *) {
+                allowed = ActivityAuthorizationInfo().areActivitiesEnabled
+            } else { allowed = false }
+            UserDefaults.standard.set(desired && allowed, forKey: preference)
+            if desired && allowed { refresh() }
+            else { endAll() }
+        case "open-settings":
+            if let url = URL(string: UIApplication.openSettingsURLString) {
+                UIApplication.shared.open(url)
+            }
+        default: break
+        }
+        sendStatus(webView)
+    }
+
+    static func sendStatus(_ webView: WKWebView?) {
+        let supported: Bool
+        let allowed: Bool
+        if #available(iOS 16.1, *) {
+            supported = true
+            allowed = ActivityAuthorizationInfo().areActivitiesEnabled
+        } else {
+            supported = false
+            allowed = false
+        }
+        let enabled = UserDefaults.standard.bool(forKey: preference)
+        let script = "if(window.DarLiveActivitySettings)DarLiveActivitySettings.receive({supported:\(supported),allowed:\(allowed),enabled:\(enabled)});"
+        webView?.evaluateJavaScript(script, completionHandler: nil)
+    }
+
+    static func refresh() {
+        guard UserDefaults.standard.bool(forKey: preference) else { return }
+        if #available(iOS 16.1, *) {
+            guard ActivityAuthorizationInfo().areActivitiesEnabled else { return }
+            let snapshot = DarDailyContent.refresh(DarWidgetStore.load())
+            let next = DarPrayerEngine.next(from: snapshot.prayers)
+            let parts = next.time.split(separator: ":")
+            guard parts.count == 2, let hour = Int(parts[0]), let minute = Int(parts[1]),
+                  (0...23).contains(hour), (0...59).contains(minute) else { return }
+            var calendar = Calendar(identifier: .gregorian)
+            calendar.timeZone = .current
+            let now = Date()
+            guard let today = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: now) else { return }
+            let target = today > now ? today : calendar.date(byAdding: .day, value: 1, to: today) ?? today
+            let state = DarPrayerLiveAttributes.ContentState(
+                prayerName: next.name,
+                targetDate: target,
+                city: snapshot.cityLabel
+            )
+            let content = ActivityContent(state: state, staleDate: target)
+            if let activity = Activity<DarPrayerLiveAttributes>.activities.first {
+                Task { await activity.update(content) }
+            } else {
+                do {
+                    _ = try Activity<DarPrayerLiveAttributes>.request(
+                        attributes: DarPrayerLiveAttributes(title: "DĀR AL TAWḤĪD"),
+                        content: content,
+                        pushType: nil
+                    )
+                } catch {
+                    // Missing OS permission and ActivityKit errors are reported through status.
+                }
+            }
+        }
+    }
+
+    private static func endAll() {
+        if #available(iOS 16.1, *) {
+            Task {
+                for activity in Activity<DarPrayerLiveAttributes>.activities {
+                    await activity.end(nil, dismissalPolicy: .immediate)
+                }
+            }
+        }
     }
 }
