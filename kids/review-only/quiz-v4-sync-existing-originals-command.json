@@ -8,5 +8,8 @@
   "keepRejectedBadDictionaryClipsInQuarantine": true,
   "keepAllPreviousPaidRequestReceipts": true,
   "expectedSelectedQuestions": 450,
-  "minimumSavedOriginals": 401
+  "minimumSavedOriginals": 401,
+  "zeroCreditImportQueue": "ISOLATED_FROM_PAID_TTS_QUEUE",
+  "requireAllSavedOriginalsPreserved": true,
+  "recoveryNoNewTTS": true
 }
