@@ -3,6 +3,7 @@ import UIKit
 import WebKit
 import PDFKit
 import MediaPlayer
+import ActivityKit
 
 final class InsetAwareWebView: WKWebView {
     var onInsetsChange: (() -> Void)?
@@ -74,6 +75,7 @@ struct WebAppView: UIViewRepresentable {
         userContentController.add(context.coordinator, name: "darPushReactivate")
         userContentController.add(context.coordinator, name: "darPushExternalId")
         userContentController.add(context.coordinator, name: "darAppIcon")
+        userContentController.add(context.coordinator, name: "darLiveActivitySettings")
         userContentController.add(context.coordinator, name: "darQuranNowPlaying")
         userContentController.add(context.coordinator, name: "darShareImage")
         userContentController.add(context.coordinator, name: "darNative")
@@ -828,6 +830,7 @@ struct WebAppView: UIViewRepresentable {
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushReactivate")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushExternalId")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppIcon")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darLiveActivitySettings")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darQuranNowPlaying")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darNative")
             NotificationCenter.default.removeObserver(self)
@@ -965,6 +968,9 @@ struct WebAppView: UIViewRepresentable {
             if let src = body["postSource"] as? String, !src.isEmpty { snap.postSource = src }
             if let dsrc = body["duaSource"] as? String, !dsrc.isEmpty { snap.duaSource = dsrc }
             DarWidgetStore.save(DarDailyContent.refresh(snap))
+            Task { @MainActor in
+                if #available(iOS 16.2, *) { await DarLiveActivityControl.reconcile() }
+            }
         }
 
         private func applyQuranNowPlaying(_ body: [String: Any]) {
@@ -1108,6 +1114,21 @@ struct WebAppView: UIViewRepresentable {
             presenter.present(controller, animated: true)
         }
 
+        private func pushLiveActivityStatus() {
+            let status: [String: Any]
+            if #available(iOS 16.2, *) {
+                status = DarLiveActivityControl.status()
+            } else {
+                status = ["supported": false, "allowed": false, "enabled": false]
+            }
+            guard let data = try? JSONSerialization.data(withJSONObject: status),
+                  let json = String(data: data, encoding: .utf8) else { return }
+            webView?.evaluateJavaScript(
+                "window.DarLiveActivitySettings && window.DarLiveActivitySettings.receive(\(json));",
+                completionHandler: nil
+            )
+        }
+
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
             if message.name == "darNative" {
                 let body = message.body as? [String: Any] ?? [:]
@@ -1151,6 +1172,23 @@ struct WebAppView: UIViewRepresentable {
                 let name = body["name"] as? String ?? ""
                 let id = body["id"] as? String ?? ""
                 DarAppIcons.set(name.isEmpty ? id : name)
+                return
+            }
+            if message.name == "darLiveActivitySettings" {
+                let body = message.body as? [String: Any] ?? [:]
+                let action = body["action"] as? String ?? "status"
+                if action == "open-settings", let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                } else if action == "set", let enabled = body["enabled"] as? Bool {
+                    Task { @MainActor in
+                        if #available(iOS 16.2, *) {
+                            await DarLiveActivityControl.setEnabled(enabled)
+                        }
+                        self.pushLiveActivityStatus()
+                    }
+                } else {
+                    pushLiveActivityStatus()
+                }
                 return
             }
             if message.name == "darQuranNowPlaying" {
@@ -1967,6 +2005,10 @@ struct WebAppView: UIViewRepresentable {
             updateViewportInsets()
             applyPendingQuickActionIfNeeded()
             DarPushNotifications.syncWithServerThenScheduleLocalFallback()
+            Task { @MainActor in
+                if #available(iOS 16.2, *) { await DarLiveActivityControl.reconcile() }
+                self.pushLiveActivityStatus()
+            }
             webView.evaluateJavaScript(
                 """
                 (function(){
@@ -2448,5 +2490,78 @@ private final class LibraryPDFViewController: UIViewController {
             }
         }
         return nil
+    }
+}
+
+
+// Separate ActivityKit-Einstellungen: niemals Push-/OneSignal-Schalter verändern.
+// StandBy-Widgets bleiben beim Ausschalten dieser Live Activity bestehen.
+@available(iOS 16.2, *)
+private enum DarLiveActivityControl {
+    private static let preferenceKey = "darLiveActivitiesEnabledV1"
+
+    static var userEnabled: Bool {
+        UserDefaults.standard.bool(forKey: preferenceKey)
+    }
+
+    static func status() -> [String: Any] {
+        [
+            "supported": true,
+            "allowed": ActivityAuthorizationInfo().areActivitiesEnabled,
+            "enabled": userEnabled,
+            "active": !Activity<DarPrayerLiveActivityAttributes>.activities.isEmpty
+        ]
+    }
+
+    static func setEnabled(_ enabled: Bool) async {
+        guard ActivityAuthorizationInfo().areActivitiesEnabled || !enabled else { return }
+        UserDefaults.standard.set(enabled, forKey: preferenceKey)
+        if enabled {
+            await reconcile()
+        } else {
+            await endAll()
+        }
+    }
+
+    static func endAll() async {
+        for activity in Activity<DarPrayerLiveActivityAttributes>.activities {
+            await activity.end(nil, dismissalPolicy: .immediate)
+        }
+    }
+
+    static func reconcile() async {
+        guard userEnabled, ActivityAuthorizationInfo().areActivitiesEnabled else { return }
+        let snapshot = DarDailyContent.refresh(DarWidgetStore.load())
+        guard !snapshot.prayers.isEmpty else { return }
+        let name = snapshot.nextPrayerName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let parts = snapshot.nextPrayerTime.split(separator: ":")
+        guard !name.isEmpty, parts.count >= 2,
+              let hour = Int(parts[0]), let minute = Int(parts[1]),
+              (0..<24).contains(hour), (0..<60).contains(minute) else { return }
+        let now = Date()
+        let calendar = Calendar.current
+        guard var date = calendar.date(bySettingHour: hour, minute: minute, second: 0, of: now) else { return }
+        if date <= now {
+            guard let nextDay = calendar.date(byAdding: .day, value: 1, to: date) else { return }
+            date = nextDay
+        }
+        let state = DarPrayerLiveActivityAttributes.ContentState(prayerName: name, prayerDate: date)
+        let content = ActivityContent(state: state, staleDate: date)
+        let current = Activity<DarPrayerLiveActivityAttributes>.activities
+        if let activity = current.first {
+            await activity.update(content)
+            for duplicate in current.dropFirst() {
+                await duplicate.end(nil, dismissalPolicy: .immediate)
+            }
+            return
+        }
+        let attributes = DarPrayerLiveActivityAttributes(
+            city: snapshot.cityLabel.isEmpty ? "Gebetszeiten" : snapshot.cityLabel
+        )
+        do {
+            _ = try Activity.request(attributes: attributes, content: content, pushType: nil)
+        } catch {
+            // Fehler nicht als Aktivitätserfolg melden; native Anzeige bleibt nutzbar.
+        }
     }
 }

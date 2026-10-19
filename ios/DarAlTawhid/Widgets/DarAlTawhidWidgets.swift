@@ -1,5 +1,6 @@
 import SwiftUI
 import WidgetKit
+import ActivityKit
 import AppIntents
 
 private enum DarColors {
@@ -1111,11 +1112,76 @@ struct DarIslamicDayPremiumWidget: Widget {
     }
 }
 
+
+@available(iOS 16.1, *)
+struct DarPrayerLiveActivityWidget: Widget {
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(for: DarPrayerLiveActivityAttributes.self) { context in
+            HStack(alignment: .center, spacing: 16) {
+                VStack(alignment: .leading, spacing: 5) {
+                    Text("DĀR AL TAWḤĪD")
+                        .font(.system(size: 10, weight: .bold, design: .rounded))
+                        .tracking(1)
+                        .foregroundStyle(DarColors.gold)
+                    Text("Nächstes Gebet · " + context.state.prayerName)
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundStyle(DarColors.cream)
+                    Text(context.attributes.city)
+                        .font(.caption2)
+                        .foregroundStyle(DarColors.muted)
+                        .lineLimit(1)
+                }
+                Spacer(minLength: 2)
+                VStack(alignment: .trailing, spacing: 4) {
+                    Text(context.state.prayerDate, style: .time)
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                        .foregroundStyle(DarColors.gold)
+                    Text(timerInterval: Date()...max(Date().addingTimeInterval(1), context.state.prayerDate), countsDown: true)
+                        .font(.system(size: 13, weight: .semibold, design: .monospaced))
+                        .foregroundStyle(DarColors.cream)
+                }
+            }
+            .padding(15)
+            .activityBackgroundTint(DarColors.deepNavy)
+            .activitySystemActionForegroundColor(DarColors.gold)
+        } dynamicIsland: { context in
+            DynamicIsland {
+                DynamicIslandExpandedRegion(.leading) {
+                    Text(context.state.prayerName)
+                        .font(.headline)
+                }
+                DynamicIslandExpandedRegion(.trailing) {
+                    Text(context.state.prayerDate, style: .time)
+                        .font(.headline)
+                }
+                DynamicIslandExpandedRegion(.bottom) {
+                    Text(timerInterval: Date()...max(Date().addingTimeInterval(1), context.state.prayerDate), countsDown: true)
+                        .font(.system(.title3, design: .monospaced, weight: .bold))
+                        .foregroundStyle(DarColors.gold)
+                }
+            } compactLeading: {
+                Image(systemName: "moon.stars.fill")
+                    .foregroundStyle(DarColors.gold)
+            } compactTrailing: {
+                Text(context.state.prayerDate, style: .time)
+                    .font(.caption2)
+            } minimal: {
+                Image(systemName: "moon.stars.fill")
+                    .foregroundStyle(DarColors.gold)
+            }
+            .widgetURL(URL(string: "daraltawhid://prayer"))
+        }
+    }
+}
+
 @main
 struct DarAlTawhidWidgets: WidgetBundle {
     @WidgetBundleBuilder
     var body: some Widget {
         PrayerTimesWidget()
+        if #available(iOS 16.1, *) {
+            DarPrayerLiveActivityWidget()
+        }
         IslamicCalendarWidget()
         QiblaWidget()
         DailyWidget()
