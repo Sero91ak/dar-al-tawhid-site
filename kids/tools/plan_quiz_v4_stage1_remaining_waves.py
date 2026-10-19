@@ -36,14 +36,21 @@ def build():
     actually_stored=sum(x["spokenText"] in registry["textClips"]
                         for x in source["originalTextRecordingQueue"])
     reserved_sha=source.get("_reservedUnimportedTextSHA256",[])
+    uncertain_sha=source.get("_uncertainPaidRequestTextSHA256",[])
     reserved=len(reserved_sha)
+    uncertain=len(uncertain_sha)
+    blocked=set(reserved_sha)|set(uncertain_sha)
     if (len(reserved_sha)!=len(set(reserved_sha)) or
-            set(reserved_sha)&missing_sha or
-            not set(reserved_sha)<=source_sha or
-            actually_stored+reserved+len(outstanding)!=65):
-        raise RuntimeError("Saved, reserved-but-missing and new V4 original classes overlap")
-    # Reserved Flow takes are NOT existing MP3s. Never report them as stored,
-    # and do not charge them again until their provider state is reconciled.
+            len(uncertain_sha)!=len(set(uncertain_sha)) or
+            set(reserved_sha)&set(uncertain_sha) or
+            blocked&missing_sha or
+            not blocked<=source_sha or
+            actually_stored+reserved+uncertain+len(outstanding)!=65):
+        raise RuntimeError("Saved, reserved Flow, uncertain prior POST and genuinely new V4 classes overlap")
+    # An unconfirmed previous POST is NOT a new unpaid original. ElevenLabs
+    # might already have charged it: quarantine until original history GET or
+    # paid-run backup proves whether actual bytes exist.
+    # Reserved Flow takes are also NOT existing MP3s, and must not be bought twice.
 
     previous_paid=set(registry["textClips"])
     wave_rows=[]
@@ -86,7 +93,11 @@ def build():
         "stageOriginalTextCount":65,
         "alreadyStoredStageOriginals":actually_stored,
         "reservedFlowOriginalsNotYetInGithub":reserved,
-        "totalStillMissingOriginalMP3s":reserved+len(outstanding),
+        "uncertainPreviousPaidRequestsQuarantined":uncertain,
+        "uncertainRequestExactTextSHA256":sorted(uncertain_sha),
+        "mustNotRebuyUncertainOriginals":True,
+        "historyOrBackupRecoveryRequiredForUncertain":uncertain>0,
+        "totalStillMissingOriginalMP3s":reserved+uncertain+len(outstanding),
         "newOriginalsEligibleForSeparatePaidApproval":len(outstanding),
         "unrecordedOriginals":len(outstanding),
         "manualWavesRemaining":len(wave_rows),
@@ -123,6 +134,7 @@ def main():
         "missingOriginals":plan["totalStillMissingOriginalMP3s"],
         "alreadyStored":plan["alreadyStoredStageOriginals"],
         "reservedFlowNotImported":plan["reservedFlowOriginalsNotYetInGithub"],
+        "previousPaidRequestUnconfirmed":plan["uncertainPreviousPaidRequestsQuarantined"],
         "newTextsEligibleAfterApproval":plan["newOriginalsEligibleForSeparatePaidApproval"],
         "manualWaves":plan["manualWavesRemaining"],
         "estimatedCreditsNotInvoice":plan["estimatedRemainingCredits"],
