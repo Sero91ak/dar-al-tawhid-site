@@ -27,5 +27,12 @@
   "publicReleaseEnabled": false,
   "noRetakeOfPreviouslyPaidOrUncertainTexts": true,
   "originalReviewQuestionSet": 450,
-  "reason": "User renewed explicit order to generate all 450 missing quiz audios, protect originals, use existing Serhat master and pinned lexicon. This is ONLY one limited 10-original recording wave. Listening quality remains pending."
+  "reason": "User renewed explicit order to generate all 450 missing quiz audios, protect originals, use existing Serhat master and pinned lexicon. This is ONLY one limited 10-original recording wave. Listening quality remains pending.",
+  "triggeredFromOwnerContinueRequestOn20261019": true,
+  "liveAppChangesAllowed": false,
+  "releaseFlagMustRemainOff": true,
+  "expectedUniqueOriginalCountBeforePaidWave": 401,
+  "costCeilingEstimatedCredits": 240,
+  "triggerOnce": true,
+  "audioQualityAfterGeneration": "PENDING_HUMAN_LISTENING_NO_PUBLICATION"
 }
