@@ -1,0 +1,59 @@
+name: iOS Native Bridge Syntax Guard
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ios/DarAlTawhid/DarAlTawhid/DarNativePermissions.swift
+      - ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift
+      - ios/DarAlTawhid/DarAlTawhid/WebAppView.swift
+      - ios/DarAlTawhid/DarAlTawhid/Info.plist
+      - ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift
+      - ios/DarAlTawhid/Shared/DarWidgetTheme.swift
+      - ios/DarAlTawhid/DarAlTawhid.xcodeproj/project.pbxproj
+      - assets/dar-setup-hub.js
+      - test/assets/dar-setup-hub.js
+      - .github/workflows/ios-native-bridge-guard.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  syntax:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Swift files parse without linking Apple frameworks
+        run: |
+          swiftc -frontend -parse \
+            ios/DarAlTawhid/DarAlTawhid/DarNativePermissions.swift \
+            ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift \
+            ios/DarAlTawhid/DarAlTawhid/WebAppView.swift \
+            ios/DarAlTawhid/DarAlTawhid/Widgets/DarAlTawhidWidgets.swift \
+            ios/DarAlTawhid/Shared/DarWidgetTheme.swift
+      - name: Adult web location scripts syntax
+        run: |
+          node --check assets/dar-setup-hub.js
+          node --check test/assets/dar-setup-hub.js
+      - name: Native capabilities and compiled bridge presence
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import plistlib
+          root=Path('ios/DarAlTawhid')
+          with (root/'DarAlTawhid/Info.plist').open('rb') as f:
+              data=plistlib.load(f)
+          assert data.get('NSSupportsLiveActivities') is True
+          assert 'location' in data.get('UIBackgroundModes',[])
+          assert data.get('NSLocationAlwaysAndWhenInUseUsageDescription')
+          pbx=(root/'DarAlTawhid.xcodeproj/project.pbxproj').read_text()
+          assert 'DarNativePermissions.swift in Sources' in pbx
+          active=(root/'DarAlTawhid/WebAppView.swift').read_text()
+          assert 'darLiveActivitySettings' in active
+          assert 'DarNativePermissions.shared.requestLocationIfNeeded()' in active
+          assert 'DarPrayerLiveActivityController.handle' in active
+          assert 'requestGeolocationPermissionFor' in active
+          print('iOS bridge syntax and configuration: OK (not an Xcode build)')
+          PY
