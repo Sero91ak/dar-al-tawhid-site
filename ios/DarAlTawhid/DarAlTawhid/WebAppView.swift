@@ -2497,7 +2497,6 @@ private final class LibraryPDFViewController: UIViewController {
 // Separate ActivityKit-Einstellungen: niemals Push-/OneSignal-Schalter verändern.
 // StandBy-Widgets bleiben beim Ausschalten dieser Live Activity bestehen.
 @available(iOS 16.2, *)
-@MainActor
 private enum DarLiveActivityControl {
     private static let preferenceKey = "darLiveActivitiesEnabledV1"
 
