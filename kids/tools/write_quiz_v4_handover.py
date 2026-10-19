@@ -109,6 +109,16 @@ def main():
                      if isinstance(r.get("exactBilledCredits"),(int,float)))
     stage1_exact_confirmed=bool(stage1_paid) and all(
         isinstance(r.get("exactBilledCredits"),(int,float)) for r in stage1_paid)
+    history_recovery_file=ROOT/"kids/data/quiz-v4-older-stage1-free-history-recovery.json"
+    history_recovery=read("kids/data/quiz-v4-older-stage1-free-history-recovery.json") if history_recovery_file.is_file() else None
+    if history_recovery is not None:
+        require(history_recovery.get("scope")=="KIDS_V4_UNCERTAIN_PAID_AUDIO_HISTORY_RECOVERY_ONLY"
+                and history_recovery.get("modelId")==MODEL
+                and history_recovery.get("voiceId")==VOICE
+                and history_recovery.get("newSynthesisCalls")==0
+                and history_recovery.get("newSpeechCreditsSpent")==0
+                and history_recovery.get("publicReleaseEnabled") is False,
+                "history recovery may only retrieve genuine already-charged V4 original audio")
     stage1_report_file=ROOT/"kids/review-only/quiz-v4-older-stage1-next-recording-batch.json"
     stage1_report=read("kids/review-only/quiz-v4-older-stage1-next-recording-batch.json") if stage1_report_file.is_file() else None
     if stage1_report is not None:
@@ -256,6 +266,9 @@ def main():
         "olderStage1ExactProviderBillingNotYetReconciled":not stage1_exact_confirmed,
         "olderStage1PaidOriginalReceiptIdsRecorded":len(stage1_ids),
         "olderStage1UnconfirmedPreviousPaidRequestsQuarantined":len(unconfirmed_journal),
+        "olderStage1HistoryRecoveryResult":history_recovery.get("result") if history_recovery else "NOT_YET_COMPLETED",
+        "olderStage1GenuineOriginalsRecoveredFromHistory":history_recovery.get("successfulAuthenticHistoryImports",0) if history_recovery else 0,
+        "olderStage1HistoryRecoveryOnlyGETNoCredits":True,
         "olderStage1UnconfirmedTextSHA256":[x["textSHA256"] for x in unconfirmed_journal],
         "olderStage1RealPaidOriginalIntegrityAudit":"kids/tools/audit_quiz_v4_stage1_paid_audio_integrity.py",
         "olderStage1RealPaidOriginalIntegrityWorkflow":".github/workflows/kids-v4-stage1-paid-original-integrity.yml",
@@ -379,6 +392,13 @@ def main():
         "WICHTIG: Gleicher Text allein ist KEIN Beweis derselben alten Aufnahme. Ein Original darf nur importiert werden, wenn ein eindeutiger Treffer zusätzlich per History-ID oder Request-ID nachweislich mit der ursprünglichen Generation-ID verknüpft ist. Doppelte oder unverbundene Treffer bleiben ungeklärt und dürfen NICHT als alte Originale etikettiert werden.",
         "Offline-Sicherheitstest: `kids/tools/test_quiz_v4_flow_history_discovery.py` (richtige ID, Mehrdeutigkeit, falsche Stimme, 402, Pagination). Der ausführende GET-only-Workflow `.github/workflows/kids-v4-last9-paid-free-get.yml` startet nach GitHub-Actions-Freigabe. Erst danach aus dem importierten MP3-SHA und dem Statusbericht ablesen, ob tatsächlich eine Datei zurückkam.",
 
+        "",
+        "## Neuer Originalaudio-Rückholweg für ungeklärte V4-Abbuchung",
+        "",
+        "Die ursprünglichen 10 V4-Original-MP3s sind im GitHub-Register/Abrechnungsledger gespeichert. Zusätzlich ist ein früherer kostenpflichtiger V4-Aufruf mit unklarem Ergebnis gegen jede erneute Ausgabe gesperrt.",
+        "Neues Script: `kids/tools/recover_quiz_v4_uncertain_history.py`; Null-Credit-GitHub-Aktion: `.github/workflows/kids-v4-uncertain-paid-history-recovery.yml`.",
+        "Die ElevenLabs-Verlaufssuche darf ausschließlich GET `/v1/history` verwenden und eine gespeicherte MP3 nur aus GET `/v1/history/{history_item_id}/audio` abrufen. Zuordnung nur bei genau einer Übereinstimmung von Original-Sprachtext, `eleven_v4`, Master-Voice-ID und historischem Anfrage-Zeitfenster. Bei 402, nicht eindeutigem Treffer oder fehlendem Provider-Zugriff: NICHT erneut kaufen.",
+        "Letzter im GitHub-Report gespeicherter Ergebnisstatus: `"+str(details["olderStage1HistoryRecoveryResult"])+"`; echte hierdurch wiederhergestellte Original-MP3s: **"+str(details["olderStage1GenuineOriginalsRecoveredFromHistory"])+"**. Der Wert 0 bleibt maßgeblich, solange keine Originalbytes mit SHA und Provider-History-ID gesichert wurden.",
         "",
         "## Erster exakt gebundener V4-Auftrag für 7–10 Jahre",
         "",
