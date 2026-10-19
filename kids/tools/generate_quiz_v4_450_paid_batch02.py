@@ -7,7 +7,7 @@ MP3s and ledger are written immediately and backed up by GitHub artifacts.
 NEVER retries a charged/uncertain API call or modifies live quiz manifests.
 """
 from __future__ import annotations
-import hashlib,json,os,time,urllib.error,urllib.request
+import hashlib,json,os,time,urllib.error,urllib.request,re
 from datetime import datetime,timezone
 from pathlib import Path
 from quiz_v4_no_double_charge_guard import protect_paid_texts, prohibit_prepaid_selection
@@ -180,10 +180,26 @@ def original_mp3(key,spoken,*,language="de"):
 def age_for(plan):
     return {r["questionId"]:r["ageBand"] for r in plan["recipes"]}
 
+# Exact Arabic words from the 450-corpus source audit that do NOT occur
+# as exact graphemes in the user's authentic 10,099-rule German PLS.
+# Do NOT guess pronunciations or silently record them with a German model.
+# Two high-frequency equivalent forms (Bismi-llāh / In schāʾ Allāh) are
+# already mapped to authentic owner dictionary graphemes in the payload.
+UNLISTED_OWNER_TERMS=re.compile(
+    r"(?i)(?<![\\w])(?:ash-sharḥ|ayyūbs|bārik|ghībah|halāle|halālen|"
+    r"luqmāns|muttaqīn|muḥsinīn|mūsās|qurʾān-duʿāʾ|qurʾān-lesen|"
+    r"qurʾān-vers|schahāda|sulaymāns|zakariyyās|ādams|ʿīsās)(?![\\w])"
+)
+ARABIC_UNSEGMENTED=re.compile(r"[\\u0621-\\u064A]|ﷺ")
+
+def source_requires_separate_pronunciation_approval(text):
+    return bool(ARABIC_UNSEGMENTED.search(text) or UNLISTED_OWNER_TERMS.search(text))
+
 def choose(plan,registry,protected):
     existing=set((registry.get("textClips") or {}).keys())
     ages=age_for(plan)
-    available=[r for r in plan["pendingAudioFragments"] if r["text"] not in existing and r["text"] not in protected]
+    available=[r for r in plan["pendingAudioFragments"] if r["text"] not in existing and r["text"] not in protected
+               and not source_requires_separate_pronunciation_approval(r["text"])]
     if len(available)<LIMIT:raise RuntimeError("Remaining unrecorded fragments below batch size")
     selected=[];seen=set()
     def take(r):
@@ -262,6 +278,16 @@ def main():
         raise RuntimeError("V4 batch02 contains prior paid/uncertain request; recover the exact original first, NEVER re-synthesize")
     protected=protect_paid_texts(ROOT,registry,ledger)
     chosen,estimate=choose(plan,registry,protected)
+    # All source-pronunciation defects are rejected BEFORE checking balance or
+    # starting the first billable MP3. A late failure could waste prior takes.
+    for item in chosen:
+        if source_requires_separate_pronunciation_approval(item["text"]):
+            raise RuntimeError("V4_PAID_PRECHECK_UNSEGMENTED_ARABIC_OR_UNLISTED_OWNER_PLS")
+        exact_payload=build_canonical_v4_payload(item["text"],language="de")
+        if exact_payload["pronunciation_dictionary_locators"]!=[{
+            "pronunciation_dictionary_id":"Q8w3SxtoVo8NSjsnlJEd",
+            "version_id":"wSzgkGpAwEDiTak8DApc"}]:
+            raise RuntimeError("V4_PAID_PRECHECK_CANONICAL_LEXICON_MISSING")
     before=subscription(key)
     if before<max(estimate*1.5,estimate+50.0):
         raise RuntimeError("Subscription budget lower than estimated batch: no charges")
