@@ -365,6 +365,13 @@ def main():
     # Initial resumed production is ONLY ONE sample; no uncontrolled 10-take
     # series until it is heard with the user's authentic dictionary.
     sample_only=os.getenv("KIDS_V4_STAGE1_SAMPLE_ONLY")=="YES"
+    if sample_only:
+        existing_journal=read(ATTEMPTS) if ATTEMPTS.is_file() else {"entries":[]}
+        check(not any(x.get("dictionaryPilot20261019") is True for x in existing_journal.get("entries",[])),
+              "one-time master dictionary V4 hearing pilot was already attempted; no second paid sample")
+        old_usage=read(USAGE) if USAGE.is_file() else {"runs":[]}
+        check(not any(x.get("isSingleDictionaryPilot") is True for x in old_usage.get("runs",[])),
+              "one-time owner pilot already billed; hearing QA required before new credits")
     batch_to_record=selected[:1] if sample_only else selected
     if not sample_only:
         check(hold.get("humanListeningQualityGateReleased") is True,
@@ -391,6 +398,7 @@ def main():
             "schemaVersion":1,"modelId":MODEL,"voiceId":VOICE,
             "purpose":"DO_NOT_REGENERATE_UNCERTAIN_PAID_REQUESTS","entries":[]}
         attempt={"textSHA256":sha(text),
+                 "dictionaryPilot20261019":sample_only,
                  "status":"REQUEST_STARTED_UNCONFIRMED",
                  "startedAt":datetime.now(timezone.utc).isoformat(),
                  "batchId":BATCH}
