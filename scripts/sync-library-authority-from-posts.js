@@ -281,6 +281,19 @@ function main() {
     }
 
     const title = canonicalTitleFromPosts(rawBookTitle, samples);
+    // Never create a second authority record if a source-derived canonical title
+    // already belongs to an existing verified work. An ambiguous source remains
+    // unpublished in the canonical books index until its attribution is checked.
+    const titleOwner = lookup.get(normalize(title));
+    if (titleOwner) {
+      skipped.push({
+        book: rawBookTitle,
+        postCount: samples.length,
+        reason: 'canonical-title-collision',
+        conflictingWorkId: titleOwner.id
+      });
+      continue;
+    }
     const id = ensureUniqueId(slugify(title || rawBookTitle), usedIds);
     const aliases = unique(rawBookTitle !== title ? [rawBookTitle] : []);
 
