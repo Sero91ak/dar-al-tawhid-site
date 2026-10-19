@@ -7,14 +7,17 @@
   "questions7to8": 10,
   "questions9to10": 10,
   "stageExpectedNewOriginals": 65,
-  "previouslyRecordedFirstStageOriginals": 24,
-  "remainingFirstStageOriginals": 41,
+  "previouslyRecordedFirstStageOriginals": 25,
+  "remainingFirstStageOriginals": 40,
   "reservedOrSubmittedInConnectedFlowNotToRebuy": 8,
-  "genuinelyUnreservedTextsEligibleForNewV4": 33,
+  "uncertainPreviousPaidRequestsNotToRebuy": 1,
+  "uncertainPaidRequestTextSHA256": [
+    "fc4f586cf59297c43335f3aae64428bdf00fb10ec362ffb33c9620ff9a851f70"
+  ],
+  "genuinelyUnreservedTextsEligibleForNewV4": 32,
   "nextPaidRunOriginalLimit": 10,
-  "manualApprovalMustMatchExactBatchFingerprintSHA256": "f9c2fc30cb48292c3b9bcf7eadae9bcdefcea2673a2005321c3937a11fb2329a",
+  "manualApprovalMustMatchExactBatchFingerprintSHA256": "7ce9d200f6c4bf6a7fd2201dd78f8cf883e45283f48570c0516e68de98278a41",
   "nextExactTextSha256": [
-    "fc4f586cf59297c43335f3aae64428bdf00fb10ec362ffb33c9620ff9a851f70",
     "7e9ac0c6d55d39e7178b95063868512bebdb585f2614d860bc31e224ffa8acba",
     "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
     "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
@@ -23,16 +26,16 @@
     "26c5c88b086fd686bbd8019e40b5af7c0fbf099839ff30a826ea760e7b75494c",
     "c84dc49dbd4b99ce6ce415deae19420367435839225e54a4ca2499dbce19c144",
     "dc6ecad04fc7acbebed8fa7d3143de39cc72d685360a327bb92c7509de6a34c1",
-    "708b9bca04007bc28b4548bdf8f1e9c295c352cff409f728ec219416a4c7117e"
+    "708b9bca04007bc28b4548bdf8f1e9c295c352cff409f728ec219416a4c7117e",
+    "4c99e2362f9ca1835d1bfb8439629d7ae500e0a12c0b711f65f678b4000f2e34"
   ],
   "questionsThatCouldGainCompleteV4AudioAfterNextRun": [
     "kids-quiz-046",
-    "kids-quiz-080",
     "kids-quiz-520"
   ],
-  "newlyCompleteQuestionCountProjectedFromActualSourceGaps": 3,
+  "newlyCompleteQuestionCountProjectedFromActualSourceGaps": 2,
   "audioQualityStillRequiresHumanApproval": true,
-  "nextEstimatedCreditsNotProviderBill": 264.56,
+  "nextEstimatedCreditsNotProviderBill": 230.64,
   "estimatedPerRunCreditsMaximum": 850.0,
   "previouslyPaidHistoricalFlowTextsInQueue": 0,
   "paidSynthesisAuthorizedByAudit": false,
