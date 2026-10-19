@@ -354,19 +354,30 @@ def main():
     check(os.getenv("KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256","").strip()==paid_snapshot,
           "batch SHA does not match actual voice, current source texts, paid ledger and next ten originals; re-audit and re-authorize, NO credits spent")
     hold=read(ROOT/"kids/data/quiz-v4-pronunciation-hold.json")
-    check(hold.get("productionPaused") is False and hold.get("humanPronunciationApproved") is True,
-          "PRONUNCIATION_HOLD: user stopped V4 TTS; existing ElevenLabs lexicon and Arabic Fusha must be verified before any paid recording")
+    check(hold.get("productionPaused") is False and hold.get("dictionaryProviderVerified") is True
+          and hold.get("ownerRestartAuthorized") is True,
+          "PRONUNCIATION_HOLD: current provider lexicon/Arabic Fuṣḥā must be verified before paid V4; no more bad takes")
+    check(hold.get("humanPronunciationApproved") is False,
+          "do not falsely mark previous spoken audio as human-approved")
     check(bool(selected),"first 65 already recorded; no further purchases")
     key=os.getenv("ELEVENLABS_API_KEY","").strip()
     check(bool(key),"provider credential absent")
+    # Initial resumed production is ONLY ONE sample; no uncontrolled 10-take
+    # series until it is heard with the user's authentic dictionary.
+    sample_only=os.getenv("KIDS_V4_STAGE1_SAMPLE_ONLY")=="YES"
+    batch_to_record=selected[:1] if sample_only else selected
+    if not sample_only:
+        check(hold.get("humanListeningQualityGateReleased") is True,
+              "V4 first correct dictionary pilot must pass listening QA before multi-take spending")
+    run_estimate=round(sum(len(x["spokenText"])*RATE_FOR_ESTIMATE_ONLY for x in batch_to_record),2)
     available=subscription(key)
-    check(available>=required_subscription_credits(estimate),
-          "insufficient provider credits for THIS batch plus safety margin; no paid calls started")
+    check(available>=required_subscription_credits(run_estimate),
+          "insufficient provider credits for THIS small batch plus safety margin; no paid calls started")
     OUTPUT.mkdir(parents=True,exist_ok=True)
     completed=0
     # New texts are not reselected from the global pending list: the exact
     # stage-1 source texts are the sole allowed billable candidates.
-    for item in selected:
+    for item in batch_to_record:
         text=item["spokenText"]
         prohibit_prepaid_selection(text,protected)
         check(text not in reg["textClips"],"cannot re-record existing original")
@@ -405,12 +416,20 @@ def main():
             "audioListeningApproved":False,"qaApproval":"pending-human-auditory-review",
             "source":"official-direct-v4-text-to-speech-api",
             "status":"completed-original-mp3-on-review-branch-not-live",
-            "providerRequestId":request_id}
+            "providerRequestId":request_id,
+            "pronunciationDictionaryId":"Q8w3SxtoVo8NSjsnlJEd",
+            "pronunciationDictionaryVersionId":"wSzgkGpAwEDiTak8DApc",
+            "pronunciationLanguageCode":"de",
+            "pronunciationMasterRuleCount":10099,
+            "pronunciationQualityApproved":False}
         ledger["rows"].append({
             "batchId":BATCH,"text":text,"textSha256":sha(text),
             "estimatedCreditsAtObservedRate":round(len(text)*RATE_FOR_ESTIMATE_ONLY,4),
             "exactBilledCredits":None,"mp3Sha256":audiosha,
             "providerRequestId":request_id,"createdAt":datetime.now(timezone.utc).isoformat(),
+            "pronunciationDictionaryId":"Q8w3SxtoVo8NSjsnlJEd",
+            "pronunciationDictionaryVersionId":"wSzgkGpAwEDiTak8DApc",
+            "pronunciationLanguageCode":"de",
             "note":"Original V4; audit exact provider billing; no blind retries"})
         write(REG,reg);write(LEDGER,ledger)
         attempt["status"]="ORIGINAL_MP3_SAVED"
@@ -436,11 +455,13 @@ def main():
     observed_delta=(round(max(0.0,available-balance_after),2)
                     if balance_after is not None else None)
     summary={"batchId":BATCH,"newOriginalsThisRun":completed,
-             "estimatedCreditsNotProviderBill":round(sum(len(x["spokenText"])*RATE_FOR_ESTIMATE_ONLY for x in selected),2),
+             "estimatedCreditsNotProviderBill":run_estimate,
+             "isSingleDictionaryPilot":sample_only,
+             "masterDictionaryRules":10099,
              "startingAvailableCreditsFromSubscription":round(available,2),
              "endingAvailableCreditsFromSubscription":(round(balance_after,2) if balance_after is not None else None),
              "observedSubscriptionUsageDeltaNotInvoice":observed_delta,
-             "minimumStartCreditsRequiredForThisBatch":required_subscription_credits(estimate),
+             "minimumStartCreditsRequiredForThisBatch":required_subscription_credits(run_estimate),
              "remainingStage1Originals":len(missing)-completed,
              "exactBilledCreditsUnknown":True,"live":False,
              "humanListeningApproved":False}
