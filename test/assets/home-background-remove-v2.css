@@ -1,0 +1,92 @@
+/* DAR TEST HOME · photo-free background authority v2 · 2026-10-19
+   Served only with the adult /test HTML. No visitor, KIDS, or subpage change.
+   The old top hero/study photo, lower study photo and mobile SVG canvas must
+   never paint behind the Startseite, independently of theme and screen size. */
+
+/* Old legacy scripts also painted the photo directly on <html>. */
+html:has(body.is-home-route),
+html.dar-home-v3:has(body.is-home-route),
+html.dar-home-v1194:has(body.is-home-route){
+  background-color:var(--dv3-bg,var(--bg))!important;
+  background-image:none!important;
+  background-blend-mode:normal!important;
+}
+
+html[data-theme] body.is-home-route,
+html.dar-home-v3 body.is-home-route,
+html.dar-home-v1194 body.is-home-route {
+  background:var(--dv3-bg,var(--bg))!important;
+  background-image:none!important;
+  background-attachment:scroll!important;
+  background-blend-mode:normal!important;
+}
+
+/* Remove old photographic canvases without hiding ordinary icons or content. */
+html[data-theme] body.is-home-route :is(
+  #appRoot,#appShell,.app,.app-shell,.page-shell,.top-shell,
+  .top-shell.theme-hero-shell,.top-shell .header.theme-hero-surface,
+  .top-shell .header,#appView,#appView.view,#appView .home-v380-shell
+){
+  background-image:none!important;
+  background-attachment:scroll!important;
+}
+html[data-theme] body.is-home-route :is(
+  .top-shell,.top-shell.theme-hero-shell,.top-shell .header.theme-hero-surface,
+  .top-shell .header,#appView,#appView.view,#appView .home-v380-shell
+){
+  background:transparent!important;
+  background-image:none!important;
+}
+html[data-theme] body.is-home-route #appRoot,
+html[data-theme] body.is-home-route #appShell,
+html[data-theme] body.is-home-route .app,
+html[data-theme] body.is-home-route .app-shell,
+html[data-theme] body.is-home-route .page-shell{
+  background-color:transparent!important;
+  background-image:none!important;
+}
+
+/* Pseudoelements were responsible for the lower photo even when the body
+   had background-image:none. Disable ONLY page-level picture layers. */
+html[data-theme] body.is-home-route::before,
+html[data-theme] body.is-home-route::after,
+html[data-theme] body.is-home-route #appRoot::before,
+html[data-theme] body.is-home-route #appRoot::after,
+html[data-theme] body.is-home-route .top-shell::before,
+html[data-theme] body.is-home-route .top-shell::after,
+html[data-theme] body.is-home-route .top-shell .header::before,
+html[data-theme] body.is-home-route .top-shell .header::after,
+html[data-theme] body.is-home-route #appView::before,
+html[data-theme] body.is-home-route #appView::after,
+html[data-theme] body.is-home-route #appView.view::before,
+html[data-theme] body.is-home-route #appView.view::after,
+html[data-theme] body.is-home-route .home-v380-shell::before,
+html[data-theme] body.is-home-route .home-v380-shell::after,
+html[data-theme].dar-home-v1194 body.is-home-route #appView.view::before,
+html[data-theme].dar-home-v1194 body.is-home-route #appView.view::after{
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  background-image:none!important;
+}
+
+/* Legacy photo containers, not the editorial cards or 3D icons. */
+html[data-theme] body.is-home-route .dt-study-scene,
+html[data-theme] body.is-home-route #dtContinue1194.dt-study-scene,
+html[data-theme] body.is-home-route .top-shell>.isnad.dt-isnad,
+html[data-theme] body.is-home-route .home-v380-quran-hero{
+  background-image:none!important;
+}
+/* The selected appearance also determines the text on the now-flat Hero. */
+html.dar-home-v3 body.is-home-route .top-shell :is(
+  .brand-title-refined,.dt-hero-title,.dt-hero-title strong,.dt-hero-title span,
+  .dt-hero-lead,.hero-text .salam,.hero-text .intro
+){
+  color:var(--dv3-ink,var(--text))!important;
+  -webkit-text-fill-color:var(--dv3-ink,var(--text))!important;
+  text-shadow:none!important;
+}
+html.dar-home-v3 body.is-home-route .top-shell :is(.dt-hero-kicker,.isnad-label,.isnad-speaker){
+  color:var(--dv3-gold,var(--gold2))!important;
+  -webkit-text-fill-color:var(--dv3-gold,var(--gold2))!important;
+}

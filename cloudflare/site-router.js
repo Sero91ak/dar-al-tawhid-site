@@ -1720,6 +1720,32 @@ export default {
       if (request.method === "HEAD") {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
+      // The public dar-al-tawhid.de/test route is served by THIS router,
+      // not by cloudflare/test-app-worker.js. Previous Home CSS updates there
+      // therefore never reached the user's real Test iOS app.
+      const testHomeHtml =
+        (url.pathname === "/test" || url.pathname === "/test/" || url.pathname === "/test/index.html");
+      if (testHomeHtml && assetResponse.ok) {
+        let html = await assetResponse.text();
+        const v3Styles = '<link rel="stylesheet" id="darTestHomeV3ActualRoute" href="/test/assets/dar-home-v3-compact.css?v=20261019-home-plain-v2">';
+        const noPhotos = '<link rel="stylesheet" id="darTestHomeNoPhotosActualRouteV2" href="/test/assets/home-background-remove-v2.css?v=20261019-photo-free-v2">';
+        if (!html.includes('id="darTestHomeV3ActualRoute"')) {
+          html = html.includes("</head>") ? html.replace("</head>", v3Styles + "\n</head>") : v3Styles + html;
+        }
+        // Put the no-photo rule after all older Startseite CSS. It is limited
+        // to body.is-home-route and never replaces theme colours or icons.
+        if (!html.includes('id="darTestHomeNoPhotosActualRouteV2"')) {
+          html = html.includes("</body>") ? html.replace("</body>", noPhotos + "\n</body>") : html + noPhotos;
+        }
+        headers.set("Content-Type", "text/html; charset=utf-8");
+        headers.delete("Content-Length");
+        headers.delete("Content-Encoding");
+        return new Response(html, {
+          status: assetResponse.status,
+          statusText: assetResponse.statusText,
+          headers
+        });
+      }
       return new Response(assetResponse.body, {
         status: assetResponse.status,
         statusText: assetResponse.statusText,
