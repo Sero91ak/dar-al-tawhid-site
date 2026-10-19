@@ -4,6 +4,8 @@ on:
     branches: [review/kids-quiz-v4-batch-001-020-20261014]
     paths:
       - kids/tools/plan_quiz_v4_450_next_canonical_paid_origins.py
+      - kids/tools/test_quiz_v4_450_wave_checkpoint_dry.py
+      - kids/tools/generate_quiz_v4_450_paid_batch02.py
       - .github/workflows/kids-v4-next20-master-originals-plan-no-credits.yml
 permissions:
   contents: read
@@ -21,6 +23,7 @@ jobs:
           set -euo pipefail
           python3 -m py_compile kids/tools/generate_quiz_v4_450_paid_batch02.py kids/tools/plan_quiz_v4_450_next_canonical_paid_origins.py
           python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/test_quiz_v4_450_wave_checkpoint_dry.py
           python3 kids/tools/plan_quiz_v4_450_next_canonical_paid_origins.py
           python3 - <<'PY'
           import json
