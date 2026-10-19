@@ -116,7 +116,7 @@ def download(key,history_id):
         guard(response.status==200,"history audio download failed")
         audio=response.read(2000001)
         guard(1800<len(audio)<2000000 and
-              (audio[:3]==b"ID3" or audio[:1]==b"\\xff"),"download not real MP3 bytes")
+              (audio[:3]==b"ID3" or audio[:1]==b"\xff"),"download not real MP3 bytes")
         return audio
 
 def verify_mp3(file):
