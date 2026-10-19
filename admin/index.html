@@ -951,6 +951,46 @@ function updateNewPostModeStatus(){
   if(preview){if(html)preview.outerHTML=html;else preview.remove()}
   else if(html){const ta=document.getElementById("postMarkdownInput");if(ta)ta.insertAdjacentHTML("afterend",html)}
 }
+
+/* DAR_ADMIN_EDITORIAL_20261019: Single and slide posts share one protected reader rule.
+   Chat drafts: exactly 4 hashtags directly after title; visitor files: tags: [],
+   no hashtag line, no social footer and no Arabic original inside article body.
+   Arabic originals and marked external proof remain on the dedicated /q/N/ page.
+   Never generate, alter or approve sources automatically. */
+function prepareDarAdminEditorialPost(markdown, mode){
+  const input=String(markdown||"").replace(/\r\n/g,"\n");
+  const parts=input.match(/^(---[ \t]*\n)([\s\S]*?)(\n---[ \t]*\n)([\s\S]*)$/);
+  const errors=[];
+  if(!parts)return{ok:false,markdown:input,errors:["Frontmatter für den veröffentlichten Beitrag fehlt."]};
+  let fm=parts[2],body=parts[4];
+  const required=(field)=>new RegExp("^"+field+":\\s*\\S","m").test(fm);
+  if(!required("source"))errors.push("Bibliografische Quelle im Frontmatter (source:) fehlt.");
+  const qrefs=[...fm.matchAll(/^\s*url:\s*['"]?\/q\/([1-9]\d*)\/?['"]?\s*$/gm)];
+  if(!qrefs.length)errors.push("Geprüfter interner /q/N/-Link im Frontmatter (links:) fehlt. Erst Quellenlink erstellen.");
+  if(/[\u0600-\u06ff\u0750-\u077f\u08a0-\u08ff\ufb50-\ufdff\ufe70-\ufeff]/u.test(body))
+    errors.push("Arabischer Originaltext im Beitrag: ausschließlich in der Q-Quellenkarte führen.");
+  if(/^\s*(?:📥\s*Telegram|📸\s*Instagram|🌐\s*(?:Website|Webseite)|(?:Folgt|Folge uns)\s+für mehr Wissen)/imu.test(body))
+    errors.push("Social-Media-Fußzeile oder Werbeaufruf im Beitrag entfernen.");
+  if(/https?:\/\/(?!dar-al-tawhid\.de\/q\/)\S+/i.test(body))
+    errors.push("Externe URLs im Beitrag entfernen und als markierte Direktnachweise in /q/N/ eintragen.");
+  if(!/^(?:tags:)/m.test(fm))fm+="\ntags: []";
+  else if(/^tags:\s*$/m.test(fm))fm=fm.replace(/^tags:\s*\n(?:[ \t]+-[^\n]*\n?)*/m,"tags: []\n");
+  else fm=fm.replace(/^tags:[^\n]*$/m,"tags: []");
+  const isSlide=mode==="slide";
+  const lines=body.split("\n").filter(line=>{
+    // Remove exactly hashtag-only draft lines, never ordinary Markdown headings.
+    if(/^\s*#[\p{L}\p{N}_-]+(?:\s+#[\p{L}\p{N}_-]+)*\s*$/u.test(line))return false;
+    // Bibliography/Q-link are held once in frontmatter and rendered in the
+    // separate source area. Never remove individual slide assertions.
+    if(!isSlide && /^\s*(?:📝\s*(?:Quelle|𝐐𝐮𝐞𝐥𝐥𝐞)\s*:|(?:\*{1,2})?Quelle(?:\*{1,2})?\s*:|🔗\s*(?:https?:\/\/)?(?:www\.)?dar-al-tawhid\.de\/q\/\d+\b)/u.test(line))return false;
+    return true;
+  });
+  body=lines.join("\n").replace(/\n{3,}/g,"\n\n");
+  if(!body.trim())errors.push("Aussagetext fehlt.");
+  const next=parts[1]+fm+parts[3]+body;
+  return{ok:errors.length===0,markdown:next,errors,qrefs:qrefs.map(m=>Number(m[1]))};
+}
+
 function checkNewPostMarkdown(){
   draftMarkdown=document.getElementById("postMarkdownInput")?.value||"";
   draftFilename=(document.getElementById("postFilenameInput")?.value||"").trim();
@@ -971,6 +1011,12 @@ function checkNewPostMarkdown(){
   if(!prepared.ok){
     setUploadStatus(`<span style="color:#f87171"><strong>Prüfung fehlgeschlagen:</strong> ${esc(prepared.errors.join(" · "))}</span>`);
     toast("Prüfung fehlgeschlagen");
+    return false;
+  }
+  const editorial=prepareDarAdminEditorialPost(draftMarkdown,draftPostMode);
+  if(!editorial.ok){
+    setUploadStatus(`<span style="color:#f87171"><strong>DĀR-Beitragsregel:</strong> ${esc(editorial.errors.join(" · "))}</span>`);
+    toast("DĀR-Beitragsregel nicht erfüllt");
     return false;
   }
   const status=DARSlidePostParser.formatSlideStatusLine(draftMarkdown,draftPostMode);
@@ -3658,6 +3704,13 @@ function renderActions(rows){
             <label><input type="radio" name="newPostMode" value="slide" ${draftPostMode==="slide"?"checked":""}> Slide-Modus</label>
           </div>
           <div class="admin-post-mode-status" id="newPostModeStatus">${esc(window.DARSlidePostParser?DARSlidePostParser.formatSlideStatusLine(draftMarkdown,draftPostMode==="slide"?"slide":"single"):(draftPostMode==="slide"?"Slide-Modus":"Einzelbeitrag"))}</div>
+          <details class="admin-fold" style="margin:9px 0 12px" aria-label="DĀR Beitragsregel">
+            <summary>DĀR-Beitragsregel · 19.10.2026</summary>
+            <div class="admin-fold-body">
+              <p class="upload-status">Chat-Prüfentwurf: genau <b>4 Hashtags direkt unter dem Titel</b>, dann 🖋️ Sprecher und Aussage, 📝 genaue Quelle und ein kurzes 🌙 Fazit. Kein arabischer Originaltext und keine Telegram-/Website-/Instagram-Zeilen.</p>
+              <p class="upload-status">Veröffentlichung: <b>tags: []</b>, keine sichtbaren Hashtags, Quellenangaben und der geprüfte <b>/q/N/</b>-Link nur im Quellenbereich. Arabisches Original und markierte externe Direktnachweise ausschließlich auf der Q-Quellenkarte. Einzelbeitrag und Slide-Modus werden vor dem Veröffentlichen geprüft; keine automatische Quellenfreigabe.</p>
+            </div>
+          </details>
           <label class="field-label" for="postMarkdownInput">Komplettes Markdown einfügen</label>
           <p class="upload-status" style="margin:0 0 8px">Getrennt halten: <b>Aussage</b> und eigene Zeile <code>🌙 Fazit:</code>. Teilen nutzt standardmäßig nur Aussage + Quelle, nicht das Fazit.</p>
           <textarea class="paste-area markdown-editor" id="postMarkdownInput" spellcheck="false" placeholder="Kompletten Markdown-Beitrag hier einfügen…">${esc(draftMarkdown)}</textarea>
@@ -4538,7 +4591,13 @@ async function uploadPostViaWorker(){
     : {ok:true,markdown:draftMarkdown,errors:[],warnings:[]};
   if(!prepared.ok){setUploadStatus(`<span style="color:#f87171"><strong>${draftPostMode==="slide"?"Slide-Fehler":"Einzelbeitrag-Fehler"}:</strong> ${esc(prepared.errors.join(" · "))}</span>`);finishPublishTrack("error",prepared.errors.join(" · "));return}
   if(prepared.warnings?.length)addAdminLog("Slide","Hinweise",prepared.warnings.join(" · "));
-  draftMarkdown=prepared.markdown||draftMarkdown;
+  const editorial=prepareDarAdminEditorialPost(prepared.markdown||draftMarkdown,draftPostMode);
+  if(!editorial.ok){
+    setUploadStatus(`<span style="color:#f87171"><strong>DĀR-Beitragsregel:</strong> ${esc(editorial.errors.join(" · "))}</span>`);
+    finishPublishTrack("error",editorial.errors.join(" · "));
+    return;
+  }
+  draftMarkdown=editorial.markdown;
   const mdInput=document.getElementById("postMarkdownInput");if(mdInput)mdInput.value=draftMarkdown;
   updateNewPostModeStatus();
   const preview=markdownPreviewData(draftMarkdown);
@@ -4568,6 +4627,9 @@ async function uploadPostViaWorker(){
       if(!again.ok){finishPublishTrack("error",again.errors.join(" · "));setUploadStatus(`<span style="color:#f87171">${esc(again.errors.join(" · "))}</span>`);uploadBusy=false;const btn=document.getElementById("uploadPostBtn");if(btn){btn.disabled=false;btn.textContent="Veröffentlichen"}return}
       markdown=again.markdown;
     }
+    const editorialFinal=prepareDarAdminEditorialPost(markdown,draftPostMode);
+    if(!editorialFinal.ok)throw Error("DĀR-Beitragsregel: "+editorialFinal.errors.join(" · "));
+    markdown=editorialFinal.markdown;
     const postId=frontmatterValue(markdown,"id")||draftFilename.replace(/\.md$/i,"");
     const postTitle=frontmatterValue(markdown,"title")||preview.title||"Beitrag";
     const ok=confirm(`Möchtest du diese Änderung wirklich veröffentlichen?\n\nModus: ${draftPostMode==="slide"?"Slide":"Einzelbeitrag"}\nTitel: ${postTitle}\nDatei: ${draftFilename}\nPush-ID: ${postId}\n\nDer Push an alle Nutzer wird automatisch gesendet, sobald der Beitrag live ist.`);
@@ -4666,6 +4728,9 @@ async function uploadBulkPackViaWorker(){
   const raw=document.getElementById("bulkPackMarkdownInput")?.value||"";
   const category=(document.getElementById("bulkCategoryInput")?.value||"").trim();
   const posts=splitBulkMarkdownPostsForPublish(raw).map(md=>applyBulkCategoryToMarkdown(md,category));
+  const editorialErrors=[];
+  posts.forEach((md,i)=>{const check=prepareDarAdminEditorialPost(md,/^(?:type|layout):\\s*["']?slides?["']?\\s*$/m.test(md)?"slide":"single");if(!check.ok)editorialErrors.push("Beitrag "+(i+1)+": "+check.errors.join(" · "))});
+  if(editorialErrors.length){setBulkPackStatus("<strong>DĀR-Beitragsregel:</strong> "+esc(editorialErrors.slice(0,5).join(" | ")));toast("Sammelpaket nach Beitragsregel prüfen");return}
   if(!posts.length){setBulkPackStatus("Keine Beiträge erkannt. Prüfberichte/readme werden automatisch übersprungen. Beiträge mit <strong>===</strong> trennen oder Frontmatter nutzen.");toast("Paket leer");return}
   startPublishTrack("bulk",{category:category||"Sammelpaket",count:posts.length});
   updatePublishStep("count","ok",`${posts.length} Beiträge`);
@@ -4686,8 +4751,10 @@ async function uploadBulkPackViaWorker(){
       const title=frontmatterValue(md,"title")||`Beitrag ${i+1}`;
       const filename=suggestFilename(md,nextNum);
       const normalized=normalizeMarkdownForUpload(md,nextNum);
+      const editorial=prepareDarAdminEditorialPost(normalized,/^(?:type|layout):\s*["']?slides?["']?\s*$/m.test(normalized)?"slide":"single");
+      if(!editorial.ok)throw Error("DĀR-Beitragsregel, Beitrag "+(i+1)+": "+editorial.errors.join(" · "));
       nextNum+=1;
-      return {markdown:normalized,filename,title,number:nextNum-1};
+      return {markdown:editorial.markdown,filename,title,number:nextNum-1};
     });
     setBulkPackStatus(`Veröffentliche <strong>${prepared.length} Beiträge</strong> in einem Schritt …`);
     lastResult=await publishBulkViaWorkerRequest(prepared);
