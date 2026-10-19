@@ -1863,3 +1863,34 @@ html[data-theme] body.is-post-route #appView .post-reader-main .statement.post-a
   -webkit-text-fill-color:var(--dar-post-copy-emphasis)!important;
   text-shadow:none!important;
 }
+
+/* DAR_SEPARATE_FAZIT_20261019 */
+html[data-theme] body.is-post-route .post-reader .dar-fazit-isolated{
+  display:block!important;
+  margin:24px 0 22px!important;
+  padding:16px 0 22px!important;
+  background:transparent!important;
+  border:0!important;
+  border-top:1px solid var(--px-line,var(--line,rgba(128,128,128,.22)))!important;
+  border-bottom:1px solid var(--px-line,var(--line,rgba(128,128,128,.22)))!important;
+  border-radius:0!important;
+  color:var(--text)!important;
+  box-shadow:none!important;
+}
+html[data-theme] body.is-post-route .post-reader .dar-fazit-isolated h3{
+  margin:0 0 10px!important;
+  font-size:clamp(.79rem,2.75vw,.95rem)!important;
+  line-height:1.4!important;
+  letter-spacing:.045em!important;
+  font-weight:750!important;
+  color:var(--muted,var(--text))!important;
+}
+html[data-theme] body.is-post-route .post-reader .dar-fazit-isolated .post-fazit-body{
+  font-family:var(--font-body,inherit)!important;
+  font-size:clamp(.97rem,3.4vw,1.08rem)!important;
+  font-style:normal!important;
+  font-weight:400!important;
+  line-height:1.7!important;
+  color:var(--text)!important;
+  overflow-wrap:break-word!important;
+}
