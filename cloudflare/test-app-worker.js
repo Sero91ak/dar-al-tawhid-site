@@ -483,12 +483,16 @@ async function finalizeDarTestHomeV1193(asset) {
   if (!html.includes('id="darHeroBackgroundAuthorityV3"')) {
     html += '<link rel="stylesheet" id="darHeroBackgroundAuthorityV3" href="/test/assets/hero-background-authority.css?v=hero-bg-v7">';
   }
-  // Test adult Home only: final visual authority that prevents old photo layers
-  // from returning on iPhone, iPad, desktop or after theme/route changes.
-  const plainHomeCssV1 = '<link rel="stylesheet" id="darTestHomeNoBackgroundsV1" href="/test/assets/home-no-backgrounds-v1.css?v=20261019-no-photo">';
-  if (!html.includes('id="darTestHomeNoBackgroundsV1"')) {
-    // Keep this LAST, after other Test CSS authority injections.
-    html += plainHomeCssV1;
+  // Same visual fix as the public-domain site router, for the separate
+  // dedicated Test Worker origin. Only affects the adult Test Home.
+  const homeV3Css = '<link rel="stylesheet" id="darTestHomeV3ActualRoute" href="/test/assets/dar-home-v3-compact.css?v=20261019-home-plain-v2">';
+  const photoRemoveCss = '<link rel="stylesheet" id="darTestHomeNoPhotosActualRouteV2" href="/test/assets/home-background-remove-v2.css?v=20261019-photo-free-v2">';
+  html = html.replace(/<link\b[^>]*\bid=["']darTestHomeNoBackgroundsV1["'][^>]*>\s*/gi, "");
+  if (!html.includes('id="darTestHomeV3ActualRoute"')) {
+    html = html.includes("</head>") ? html.replace("</head>", homeV3Css + "\n</head>") : homeV3Css + html;
+  }
+  if (!html.includes('id="darTestHomeNoPhotosActualRouteV2"')) {
+    html = html.includes("</body>") ? html.replace("</body>", photoRemoveCss + "\n</body>") : html + photoRemoveCss;
   }
 
 
