@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "scope": "TAWHID_KIDS_ALL_PAID_QUIZ_V4_TTS",
+  "productionPaused": true,
+  "stopReason": "2026-10-19 user explicitly stopped speech generation: master voice used without existing ElevenLabs pronunciation dictionary; Arabic Fusha and Islamic terminology pronounced incorrectly",
+  "requiredBeforeResume": [
+    "Identify and verify existing user pronunciation dictionary ID/version",
+    "Bind correct pronunciation dictionary locator to every eleven_v4 request",
+    "Validate Arabic Fusha versus German surrounding text and representative Arabic terms before further paid speech",
+    "Review three already paid new generation IDs; never regenerate while held",
+    "Explicitly lift this stop only after pronunciation checks"
+  ],
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "humanPronunciationApproved": false,
+  "paidSpeechAuthorized": false,
+  "publicQuizAudioReleaseAuthorized": false,
+  "protectedRecentGenerationIds": [
+    "UoyfOZJg4ysPhTee41ru",
+    "15jWoEmEjxXcSEz9r79Z",
+    "fXiqKqmUPFZBMOCKBUQ5"
+  ]
+}
