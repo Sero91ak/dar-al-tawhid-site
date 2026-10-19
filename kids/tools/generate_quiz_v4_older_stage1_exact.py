@@ -148,6 +148,7 @@ def prepare():
     check(journal.get("modelId")==MODEL and journal.get("voiceId")==VOICE
           and isinstance(journal.get("entries"),list),"invalid write-ahead paid audit journal")
     attempted=set()
+    unresolved=set()
     for entry in journal["entries"]:
         digest=entry.get("textSHA256")
         check(isinstance(digest,str) and len(digest)==64 and digest not in attempted,
@@ -156,8 +157,11 @@ def prepare():
         text=next((x["spokenText"] for x in rows if x["spokenTextSHA256"]==digest),None)
         check(text is not None,"paid request log references an unapproved spoken text")
         if entry.get("status")=="REQUEST_STARTED_UNCONFIRMED":
-            check(text in reg["textClips"],
-                  "previous paid POST has unconfirmed result; reconcile provider and MP3 artifact manually, NEVER REBUY")
+            # An ambiguous provider POST may have consumed credits. Quarantine
+            # THIS text only; continue planning other unpaid originals.
+            check(text not in reg["textClips"] and text not in {row["text"] for row in ledger["rows"]},
+                  "unconfirmed request conflicts with saved MP3/receipt; reconcile without another POST")
+            unresolved.add(digest)
         elif entry.get("status")=="ORIGINAL_MP3_SAVED":
             check(text in reg["textClips"] and
                   reg["textClips"][text]["sha256"]==entry.get("mp3SHA256"),
@@ -169,6 +173,7 @@ def prepare():
     check(paid<=set(reg["textClips"]),"charged original missing from registry")
     outstanding=[]
     reserved_pending=[]
+    uncertain_pending=[]
     for x in rows:
         text=x["spokenText"]
         if text in reg["textClips"]:
@@ -179,7 +184,9 @@ def prepare():
                   "recorded original differs from exact first-stage source")
         else:
             check(text not in paid,"previously charged exact text is missing MP3, DO NOT buy again")
-            if text in protected:
+            if x["spokenTextSHA256"] in unresolved:
+                uncertain_pending.append(x)
+            elif text in protected:
                 # A connected ElevenLabs Flow has already reserved or
                 # submitted this exact original. Never POST it again.
                 reserved_pending.append(x)
@@ -188,7 +195,9 @@ def prepare():
     # Private in-memory queue metadata; NEVER change the canonical 65 texts.
     stage["_reservedUnimportedTextSHA256"]=[
         x["spokenTextSHA256"] for x in reserved_pending]
-    check(len(outstanding)+len(reserved_pending)+
+    stage["_uncertainPaidRequestTextSHA256"]=[
+        x["spokenTextSHA256"] for x in uncertain_pending]
+    check(len(outstanding)+len(reserved_pending)+len(uncertain_pending)+
           sum(x["spokenText"] in reg["textClips"] for x in rows)==STAGE_SIZE,
           "missing or doubly counted stage1 V4 originals")
     return reg,ledger,stage,outstanding,protected
@@ -203,6 +212,7 @@ def candidate_batch(outstanding, stage):
     allowed={x["spokenTextSHA256"]:x for x in stage["originalTextRecordingQueue"]}
     pending={x["spokenTextSHA256"]:x for x in outstanding}
     blocked=set(stage.get("_reservedUnimportedTextSHA256",[]))
+    blocked.update(stage.get("_uncertainPaidRequestTextSHA256",[]))
     check(len(allowed)==STAGE_SIZE and len(pending)==len(outstanding)
           and not blocked.intersection(pending)
           and blocked<=set(allowed),
@@ -296,6 +306,8 @@ def main():
         "previouslyRecordedFirstStageOriginals":STAGE_SIZE-len(missing)-len(stage["_reservedUnimportedTextSHA256"]),
         "remainingFirstStageOriginals":len(missing)+len(stage["_reservedUnimportedTextSHA256"]),
         "reservedOrSubmittedInConnectedFlowNotToRebuy":len(stage["_reservedUnimportedTextSHA256"]),
+        "uncertainPreviousPaidRequestsNotToRebuy":len(stage["_uncertainPaidRequestTextSHA256"]),
+        "uncertainPaidRequestTextSHA256":stage["_uncertainPaidRequestTextSHA256"],
         "genuinelyUnreservedTextsEligibleForNewV4":len(missing),
         "nextPaidRunOriginalLimit":COUNT_PER_RUN,
         "manualApprovalMustMatchExactBatchFingerprintSHA256":paid_snapshot,
