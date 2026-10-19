@@ -19,5 +19,8 @@
   "knownMissingAudioDecoderFixedInWorkflow": true,
   "reconciledSinglePaidPilotFromActualRequestReceipt": true,
   "audioOriginalsAlreadyPaid": true,
-  "zeroCreditRecompositionPass": "after-positive-exact-11-original-paid-ledger-reconciliation"
+  "zeroCreditRecompositionPass": "after-positive-exact-11-original-paid-ledger-reconciliation",
+  "conflictSafeDerivedArtifactRebuild": true,
+  "doNotModifyPaidReceiptsOrOriginalBytes": true,
+  "originallyPaidV4PilotReconciled": true
 }
