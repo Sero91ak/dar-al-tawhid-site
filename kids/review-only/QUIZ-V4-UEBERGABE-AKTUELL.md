@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `ef31ab8d2a4c27f27257687a788562559b1945cb`
+- Commit beim Erstellen dieses Berichts: `403d78dbe082772726e8090e289b76720d4a7ebb`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **288 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1056 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -108,7 +108,7 @@ Aus den 450 ausgewählten Fragen sind **20 ältere Quizfragen (10 × 7–8 und 1
 
 Der ausführbare, fortsetzbare Kostengenerator `kids/tools/generate_quiz_v4_older_stage1_exact.py` benutzt ausschließlich die 65 unveränderlichen Sprachtext-Prüfsummen dieser Stufe. `--audit` kostet 0 Credits; `--produce` erfordert zwei bestätigte Freigaben und begrenzt jede Ausführung auf höchstens zehn Original-MP3s und höchstens 850 prognostizierte Credits. Quelle der unveränderten Texte: `.github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json`.
 Manuelle Produktions-Pipeline: `.github/workflows/kids-v4-older-stage1-exact-paid.yml`. Die frühere doppelte Frageprüfung ist abgeschafft: Stattdessen wird nur die vorhandene `approved`-Freigabe der 450 Originalfragen bestätigt; das eigentliche Ausgabe-Budget wird separat genehmigt. Kostenfreier CI-Vortest: `.github/workflows/kids-v4-older-stage1-exact-audit.yml`. Sie speichert Originale mit Ledger/Backups sowie die danach neu zusammengesetzten privaten Quiz-Hördateien. Kein Live-Deploy.
-V4-Originale dieser ersten 65er-Stufe: **25 tatsächlich gespeicherte MP3s** + **8 reservierte oder bereits angefragte ElevenLabs-Flow-Aufnahmen OHNE MP3 in GitHub** + **31 noch nicht reservierte Texte** = 65. Die acht Flow-Vormerkungen sind ausdrücklich NICHT als fertig aufgenommene MP3 zu zählen.
+V4-Originale dieser ersten 65er-Stufe: **25 tatsächlich gespeicherte MP3s** + **8 im Flow reservierte/angefragte Originale ohne MP3** + **1 früherer TTS-POST mit unbestätigtem Ergebnis, gegen Neukauf gesperrt** + **31 wirklich neu produzierbare, unreservierte Texte** = 65. Nur die letzte Kategorie darf nach separater Freigabe Credits kosten. Der Rest wird durch Wiederverwendung oder Originalexport geklärt.
 Nächste freigabepflichtige Aufnahmerunde: **10 Texte**; geschätzte **237.42 Credits**, kein Provider-Rechnungswert. Bei reservierten Flow-Aufnahmen zuerst echten Anbieterstatus und exportierbare Original-MP3 prüfen, keinesfalls automatisch erneut bezahlen.
 
 ## Nachweis der tatsächlich gespeicherten bezahlten V4-Original-MP3s
