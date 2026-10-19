@@ -1,0 +1,62 @@
+/* DĀR AL TAWḤĪD · TEST APP ONLY · Home photo removal · 2026-10-19
+   Remove the upper Hero photo and lower study photo, including the combined
+   mobile canvas. Keep the theme palette and the actual content/navigation. */
+html.dar-home-v1194 body.is-home-route,
+html[data-theme] body.is-home-route {
+  background-color:var(--dt-page,var(--bg))!important;
+  background-image:none!important;
+  background-blend-mode:normal!important;
+}
+html.dar-home-v1194 body.is-home-route::before,
+html.dar-home-v1194 body.is-home-route::after,
+html[data-theme] body.is-home-route #appRoot::before,
+html[data-theme] body.is-home-route #appView.view::before,
+html[data-theme] body.is-home-route #appView.view::after,
+html.dar-home-v1194 body.is-home-route .top-shell>.isnad.dt-isnad::after {
+  content:none!important;
+  display:none!important;
+  background:none!important;
+  background-image:none!important;
+}
+html[data-theme] body.is-home-route #appRoot,
+html.dar-home-v1194 body.is-home-route .top-shell,
+html.dar-home-v1194 body.is-home-route .top-shell.theme-hero-shell,
+html.dar-home-v1194 body.is-home-route .top-shell .header.theme-hero-surface,
+html.dar-home-v1194 body.is-home-route #appView.view,
+html.dar-home-v1194 body.is-home-route .dt-study-scene,
+html.dar-home-v1194 body.is-home-route #dtContinue1194.dt-study-scene,
+html.dar-home-v1194 body.is-home-route .home-v380-quran-hero {
+  background:transparent!important;
+  background-image:none!important;
+  box-shadow:none!important;
+}
+/* Restore appearance-dependent typography; the old white-on-photo colours
+   are not legible on Salbei, Elfenbein, Eisgold and other light themes. */
+html.dar-home-v1194 body.is-home-route .top-shell :is(
+  .brand-main .brand-title-refined,
+  .brand-kicker-row small,
+  .dt-hero-title,
+  .dt-hero-title strong,
+  .dt-hero-title span,
+  .dt-hero-lead,
+  .dt-study-copy h2,
+  .dt-study-copy p
+) {
+  color:var(--dt-ink,var(--text))!important;
+  -webkit-text-fill-color:var(--dt-ink,var(--text))!important;
+  text-shadow:none!important;
+}
+html.dar-home-v1194 body.is-home-route .top-shell :is(
+  .dt-hero-kicker,.dt-study-copy small
+){
+  color:var(--dt-accent,var(--gold2))!important;
+  -webkit-text-fill-color:var(--dt-accent,var(--gold2))!important;
+  text-shadow:none!important;
+}
+html.dar-home-v1194 body.is-home-route .top-shell :is(
+  .dt-hero-search,.dt-hero-native-search
+){
+  color:var(--dt-ink,var(--text))!important;
+  -webkit-text-fill-color:var(--dt-ink,var(--text))!important;
+}
+/* Never conceal the logo, icons, buttons, footer or bottom navigation. */
