@@ -27,5 +27,11 @@
   "dictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
   "dictionaryRuleCount": 10099,
   "authorizedNewOriginalsBeforeHearing": 1,
-  "humanListeningQualityGateReleased": false
+  "humanListeningQualityGateReleased": false,
+  "ownerExplicitlyRequestedContinuedPaidQuizProduction": true,
+  "ownerRequestedAll450Originals": true,
+  "allowOneStrictTenOriginalDictionaryBatchBeforeListeningApproval": true,
+  "maximumPreHearingAdditionalNewOriginals": 10,
+  "maximumPreHearingAdditionalEstimatedCredits": 240,
+  "consentReason": "User explicitly requested generating ALL 450 quiz audio originals after current ElevenLabs V4 model, original Serhat master voice and provider-confirmed 10099-rule dictionary correction; allow only one bounded <=10 text and <=240 estimated credit wave first; no human pronunciation approval is asserted; public release remains prohibited."
 }
