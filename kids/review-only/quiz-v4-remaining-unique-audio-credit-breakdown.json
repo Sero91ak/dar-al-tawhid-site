@@ -5,10 +5,10 @@
   "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "selectedQuestions": 450,
   "previouslyPaidMissingFlowOriginals": 9,
-  "alreadySavedDistinctV4TextClips": 401,
-  "uniqueTrulyNewTextFragments": 1365,
-  "trulyNewTextCodepoints": 64304,
-  "newTextCodepointsBeforeCrossAgeDedup": 65801,
+  "alreadySavedDistinctV4TextClips": 410,
+  "uniqueTrulyNewTextFragments": 1356,
+  "trulyNewTextCodepoints": 64120,
+  "newTextCodepointsBeforeCrossAgeDedup": 65617,
   "codepointsSavedByCrossAgeReuse": 1497,
   "crossAgeSharedNewTextFragments": 28,
   "byAge": {
@@ -38,9 +38,9 @@
     },
     "7-8": {
       "question": {
-        "uniqueNewSegments": 556,
-        "newTextCodepoints": 19696,
-        "newTextAssignments": 562
+        "uniqueNewSegments": 552,
+        "newTextCodepoints": 19591,
+        "newTextAssignments": 558
       },
       "correct": {
         "uniqueNewSegments": 0,
@@ -57,14 +57,14 @@
         "newTextCodepoints": 9306,
         "newTextAssignments": 133
       },
-      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 689,
-      "newCodepointsWithoutCrossAgeDedupe": 29002
+      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 685,
+      "newCodepointsWithoutCrossAgeDedupe": 28897
     },
     "9-10": {
       "question": {
-        "uniqueNewSegments": 566,
-        "newTextCodepoints": 25417,
-        "newTextAssignments": 569
+        "uniqueNewSegments": 561,
+        "newTextCodepoints": 25338,
+        "newTextAssignments": 564
       },
       "correct": {
         "uniqueNewSegments": 0,
@@ -81,8 +81,8 @@
         "newTextCodepoints": 11382,
         "newTextAssignments": 138
       },
-      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 704,
-      "newCodepointsWithoutCrossAgeDedupe": 36799
+      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 699,
+      "newCodepointsWithoutCrossAgeDedupe": 36720
     }
   },
   "newSpeechNeededForAge4to6": false,
@@ -90,8 +90,8 @@
   "originalForecastNotAnInvoice": true,
   "earlierAspirationalBudgetCredits": 27860.0,
   "currentEstimateOverTargetCredits": 51215.79,
-  "derivedForecastCreditsPerNewCodepoint": 1.229718,
-  "approxCodepointCeilingToHitBudgetAtUnchangedForecastRate": 22655,
+  "derivedForecastCreditsPerNewCodepoint": 1.233247,
+  "approxCodepointCeilingToHitBudgetAtUnchangedForecastRate": 22590,
   "approxTextReductionPercentageNeededAtSameRate": 64.8,
   "creditForecastMustBeRecheckedAgainstProviderBilling": true,
   "candidateTextEditsAuthorized": false,
