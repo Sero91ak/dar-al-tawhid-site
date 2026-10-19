@@ -73,6 +73,7 @@
   var THEME_FILLS = {
     dark: "#050706",
     light: "#f7f0df",
+    salbei: "#F4F6F0",
     soft: "#f2e6e2",
     royal: "#07162c",
     bordeaux: "#140B0C",
@@ -104,12 +105,13 @@
   function resolveThemeId() {
     try {
       var t = (document.documentElement && document.documentElement.getAttribute("data-theme")) || "";
+      if (t === "light" && document.documentElement && document.documentElement.getAttribute("data-theme-variant") === "salbei") return "salbei";
       if (t && THEME_FILLS[t]) return t;
-      t = localStorage.getItem("darThemeV1") || "dark";
+      t = localStorage.getItem("darThemeV1") || "salbei";
       if (t === "emerald" || t === "smaragd" || t === "aurora") t = "dark";
       if (!THEME_FILLS[t]) t = "dark";
       return t;
-    } catch (e) { return "dark"; }
+    } catch (e) { return "salbei"; }
   }
   function hexFromCssValue(raw) {
     if (!raw) return "";
