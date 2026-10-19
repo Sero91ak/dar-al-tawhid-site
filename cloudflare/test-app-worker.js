@@ -3,6 +3,7 @@ import { composeIlmWithGemini } from "./ilm-gemini-bridge.js";
 import { researchIlmWithGemini } from "./ilm-gemini-open-research.js";
 import { composeIlmWithGroqFree } from "./ilm-groq-free-bridge.js";
 import { gateHiddenSurfaces, academyOwnerAccess, academyOwnerAssetPath, layoutEditorAccess } from "./preview-gate.js";
+import { EDITOR_STUDIO_HTML } from "./layout-editor-bundle-v3.js";
 const KIDS_VERSION_BODY = JSON.stringify({
   buildId: "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
   label: "KIDS · V1.09.22"
@@ -646,31 +647,14 @@ export default {
     // Test Layout Editor login, isolated from KIDS Academy owner privileges.
     const editorAccess = await layoutEditorAccess(request,url,env);
     if(editorAccess instanceof Response)return editorAccess;
-    // Safari/iPad-compatible HTML sign-in: validate the editor password on POST,
-    // then inline the protected CSS+JS into the returned editor document.
-    // No password-equivalent cookie, localStorage credential, or Academy login needed.
+    // V3 Editor: return one prebuilt, self-contained HTML page only after
+    // successful server-side password validation. Avoid dynamic ASSETS.fetch
+    // on POST, which could return 503 on iPad and mask the real editor.
+    // The public Test/Kids/Visitor applications are not modified here.
     if(editorAccess && editorAccess.renderEditor===true) {
-      const fetchEditorAsset=async (publicPath)=>{
-        const mapped=academyOwnerAssetPath(publicPath);
-        if(!mapped)throw new Error("Layout-Editor-Asset unbekannt");
-        const u=new URL(request.url);u.pathname=mapped;u.search="";
-        const asset=await env.ASSETS.fetch(new Request(u.toString(),{method:"GET"}));
-        if(!asset.ok)throw new Error("Layout-Editor-Asset fehlt ("+asset.status+")");
-        return asset.text();
-      };
-      try {
-        const [source,css,script]=await Promise.all([
-          fetchEditorAsset("/test/academy/startseiten-editor.html"),
-          fetchEditorAsset("/test/academy/startseiten-studio-v3.css"),
-          fetchEditorAsset("/test/academy/startseiten-studio-v3.js")
-        ]);
-        const styleTag=/<link\b[^>]*href=["'][^"']*startseiten-studio-v3\.css[^"']*["'][^>]*>/i;
-        const scriptTag=/<script\b[^>]*src=["'][^"']*startseiten-studio-v3\.js[^"']*["'][^>]*><\/script>/i;
-        if(!styleTag.test(source)||!scriptTag.test(source))
-          throw new Error("Layout-Studio-V3-Verknüpfung fehlt");
-        const assembled=source.replace(styleTag,'<style id="editor-inline-v3">'+css.replace(/<\/style/gi,"<\\/style")+'</style>')
-          .replace(scriptTag,'<script id="editor-inline-v3">'+script.replace(/<\/script/gi,"<\\/script")+'</script>');
-        return new Response(assembled,{status:200,headers:{
+      return new Response(EDITOR_STUDIO_HTML,{
+        status:200,
+        headers:{
           "Content-Type":"text/html; charset=utf-8",
           "Cache-Control":"private, no-store, max-age=0",
           "CDN-Cache-Control":"no-store",
@@ -678,13 +662,8 @@ export default {
           "X-Frame-Options":"DENY",
           "X-Robots-Tag":"noindex,nofollow,noarchive",
           "Referrer-Policy":"same-origin"
-        }});
-      }catch(e){
-        console.error("Test Layout Editor loading failed:",String(e&&e.message||e));
-        return new Response("Der Layout-Editor konnte noch nicht geladen werden. Bitte später erneut versuchen.",{
-          status:503,headers:{"Content-Type":"text/plain; charset=utf-8","Cache-Control":"no-store"}
-        });
-      }
+        }
+      });
     }
     if(editorAccess===true){
       const mapped=academyOwnerAssetPath(url.pathname);
