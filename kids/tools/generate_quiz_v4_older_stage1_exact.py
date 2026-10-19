@@ -39,6 +39,16 @@ RATE_FOR_ESTIMATE_ONLY=0.969066
 STAGE_SIZE=65
 STAGE_CHARACTERS=1842
 
+def required_subscription_credits(estimate):
+    """A prudent cushion for THIS batch, not the unrelated 850-credit hard cap.
+
+    ElevenLabs reports consumption differently by model/account; estimates
+    are not invoices. Never demand 850 credits for a 237-credit batch.
+    """
+    check(isinstance(estimate,(int,float)) and 0<estimate<=MAX_ESTIMATED_CREDITS_PER_RUN,
+          "estimated new recording batch exceeds 850-credit safety ceiling")
+    return round(max(estimate*1.5,estimate+50.0),2)
+
 def read(path):return json.loads(path.read_text(encoding="utf-8"))
 def write(path,data):
     """Replace each paid-audio ledger/checkpoint atomically on the same disk."""
@@ -347,8 +357,8 @@ def main():
     key=os.getenv("ELEVENLABS_API_KEY","").strip()
     check(bool(key),"provider credential absent")
     available=subscription(key)
-    check(available>=max(estimate*1.5,MAX_ESTIMATED_CREDITS_PER_RUN),
-          "insufficient provider credits; no paid calls started")
+    check(available>=required_subscription_credits(estimate),
+          "insufficient provider credits for THIS batch plus safety margin; no paid calls started")
     OUTPUT.mkdir(parents=True,exist_ok=True)
     completed=0
     # New texts are not reselected from the global pending list: the exact
@@ -412,8 +422,22 @@ def main():
         print("PAID_V4_STAGE1_ORIGINAL_SAVED "+
               json.dumps({"count":completed,"sha256":audiosha,
                           "textSHA256":sha(text),"mp3Bytes":len(audio)}),flush=True)
+    # Only after each genuine MP3 has been remotely checkpointed: read account
+    # consumption for a useful estimate. Other activity may affect the delta.
+    # Failed billing GET must never discard or cause a repeat paid original.
+    balance_after=None
+    try:
+        balance_after=subscription(key)
+    except Exception:
+        print("KIDS_V4_PROVIDER_BILLING_GET_UNAVAILABLE: originals already saved, do NOT regenerate",flush=True)
+    observed_delta=(round(max(0.0,available-balance_after),2)
+                    if balance_after is not None else None)
     summary={"batchId":BATCH,"newOriginalsThisRun":completed,
              "estimatedCreditsNotProviderBill":round(sum(len(x["spokenText"])*RATE_FOR_ESTIMATE_ONLY for x in selected),2),
+             "startingAvailableCreditsFromSubscription":round(available,2),
+             "endingAvailableCreditsFromSubscription":(round(balance_after,2) if balance_after is not None else None),
+             "observedSubscriptionUsageDeltaNotInvoice":observed_delta,
+             "minimumStartCreditsRequiredForThisBatch":required_subscription_credits(estimate),
              "remainingStage1Originals":len(missing)-completed,
              "exactBilledCreditsUnknown":True,"live":False,
              "humanListeningApproved":False}
