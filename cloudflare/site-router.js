@@ -270,16 +270,17 @@ function browserManifestResponse(request, androidBrowser = false) {
 /* Visitor-only hero activation: versioned CSS and read-only measured offset.
  * Do not append the historical DOM-reparenting Frauen immersive adapter. */
 function adultCompactHeroAddon() {
-  return '<link rel="stylesheet" id="darAdultHeroCompactEdgeV1403" href="/assets/adult-responsive-viewport-v1381.css?v=visitor-hero-v1403-20261018">' +
-    '<script defer id="darAdultHeroHeightRuntimeV1403" src="/assets/adult-hero-height-runtime-v1403.js?v=visitor-hero-v1403-20261018"></' + 'script>';
+  return '<link rel="stylesheet" id="darAdultHeroCompactEdgeV1404" href="/assets/adult-responsive-viewport-v1381.css?v=visitor-hero-safearea-v1404-20261019">' +
+    '<script defer id="darAdultHeroHeightRuntimeV1404" src="/assets/adult-hero-height-runtime-v1403.js?v=visitor-hero-safearea-v1404-20261019"></' + 'script>';
 }
 function activateAdultCompactHero(html) {
   if (typeof html !== "string") return html;
-  // Remove only the old injected marker, never the normal app stylesheet or
-  // any historic Frauen, search, navigation, service worker or base link.
-  html = html.replace(/<link\b[^>]*\bid=["']darAdultHeroCompactEdgeV1396["'][^>]*>/gi, "");
-  if (!html.includes('id="darAdultHeroCompactEdgeV1403"') ||
-      !html.includes('id="darAdultHeroHeightRuntimeV1403"')) {
+  // Clean only known injected Hero tags. Never remove the underlying native
+  // viewport bridge or the original Frauen CSS, photos or app navigation.
+  html = html.replace(/<link\b(?=[^>]*\bid=["']darAdultHeroCompactEdgeV(?:1396|1403)["'])[^>]*>/gi, "");
+  html = html.replace(/<script\b(?=[^>]*\bid=["']darAdultHeroHeightRuntimeV1403["'])[^>]*>\s*<\/script\s*>/gi, "");
+  if (!html.includes('id="darAdultHeroCompactEdgeV1404"') ||
+      !html.includes('id="darAdultHeroHeightRuntimeV1404"')) {
     const injection = adultCompactHeroAddon();
     html = html.includes("</body>") ? html.replace("</body>", injection + "</body>") : html + injection;
   }

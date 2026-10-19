@@ -634,3 +634,149 @@ html[data-theme] body.is-frauen-route #appView
   .frauen-library-search-wrap,.frauen-library-list-controls
   ){top:max(0px,calc(var(--dar-immersive-hero-height,170px) - 15px))!important;}
 }
+
+
+/* DAR_VISITOR_IOS_HERO_EDGE_SEARCH_V1404 · 2026-10-19
+ * Root cause of the pale band on official iOS visitor builds:
+ * WebAppView.swift injects
+ * html.dar-ios-native-app body.is-area-route:not(.is-feed-fullscreen) {
+ *   padding-top:max(8px,var(--safe-top),var(--dar-native-safe-top,0px)) !important
+ * }
+ * and thus pushes the photograph below the status bar. The route-specific
+ * selector below outranks that injection WITHOUT editing native code or
+ * removing safe-area spacing from any non-Hero screen.
+ *
+ * The portrait photo extends behind the iOS status bar, while text remains
+ * below its native inset; background imagery remains entirely theme-owned.
+ */
+html.dar-ios-native-app body.has-bottom-nav.is-area-route:is(
+  .is-topics-route,.is-topic-route,.is-post-route,.is-hadith-route,
+  .is-dua-route,.is-frauen-route
+):not(.is-feed-fullscreen){
+  padding-top:0!important;
+}
+html.dar-ios-native-app body.has-bottom-nav:is(
+  .is-topics-route,.is-topic-route,.is-post-route,.is-hadith-route,
+  .is-dua-route,.is-frauen-route
+) #appView.view{
+  margin-top:0!important;
+  padding-top:0!important;
+}
+/* Device-safe text position: full-bleed photograph, readable headings;
+ * do not reserve an additional bright strip ABOVE the cover. */
+html.dar-ios-native-app body.has-bottom-nav.is-topics-route
+ #appView.view > .topics-hub > .view-head,
+html.dar-ios-native-app body.has-bottom-nav.is-topic-route
+ #appView.view > .topic-collection-page > .view-head,
+html.dar-ios-native-app body.has-bottom-nav.is-post-route
+ #appView.view > .post-reader > .post-reader-title,
+html.dar-ios-native-app body.has-bottom-nav.is-hadith-route
+ #appView .hadith-hub > .view-head,
+html.dar-ios-native-app body.has-bottom-nav.is-dua-route
+ #appView .dua-hub > .view-head{
+  padding-top:max(16px,calc(var(--dar-native-safe-top,env(safe-area-inset-top,0px)) + 10px))!important;
+}
+/* Reuse one compact set of responsive cover minima. No max-height crop:
+ * the heading may expand where large text or accessibility needs it. */
+html[data-theme] body.is-topics-route #appView.view > .topics-hub.topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView.view > .topic-collection-page.topic-collection-page > .view-head,
+html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head,
+html[data-theme] body.is-dua-route #appView .dua-hub > .view-head{
+  min-height:clamp(165px,20svh,232px)!important;
+  height:auto!important;
+  max-height:none!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+}
+html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
+  min-height:clamp(148px,17svh,207px)!important;
+  height:auto!important;
+  max-height:none!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+}
+/* One opaque full-width search rail pinned directly onto the image edge.
+ * Other content passes underneath. No independent floating card or blur band.
+ * Only existing direct-child search wrappers are targeted; inputs stay intact. */
+html[data-theme] body:is(
+ .is-topics-route,.is-topic-route,.is-hadith-route,.is-dua-route
+) #appView :is(
+ .topics-hub,.topic-collection-page,.hadith-hub,.dua-hub
+) > :is(.search-panel,.search-pro-panel,.main-search,#homeSearchBlock){
+  --dar-hero-join:12px;
+  position:sticky!important;
+  top:calc(var(--dar-immersive-hero-height,185px) - var(--dar-hero-join))!important;
+  z-index:65!important;
+  align-self:stretch!important;
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:calc(-1 * var(--dar-hero-join)) 0 0!important;
+  padding:7px max(13px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px)) 10px!important;
+  background:var(--bg,#f4efec)!important;
+  background-image:none!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+  box-sizing:border-box!important;
+  isolation:isolate;
+  overflow:visible!important;
+}
+/* Content is never a sticky ancestor or second scroller. */
+html[data-theme] body.is-post-route #appView .post-reader-main,
+html[data-theme] body.is-topic-route #appView .topic-collection,
+html[data-theme] body.is-topics-route #appView .topics-theme-grid,
+html[data-theme] body.is-hadith-route #appView .dua-theme-grid,
+html[data-theme] body.is-dua-route #appView .dua-theme-grid{
+  position:relative;
+  z-index:1;
+}
+/* Frau retains her approved hero source, image and existing sticky rail.
+ * Only the own search bar gets a solid width-matched background so no
+ * transparent strips appear around it on iPhone/iPad. */
+html[data-theme] body.is-frauen-route #appView
+ :is(.frauen-library-shell,.frauen-library-list) >
+ :is(.frauen-library-search-wrap,.frauen-library-list-controls){
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  padding-inline:max(13px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))!important;
+  border-radius:0!important;
+  background:var(--bg,#f4efec)!important;
+  box-shadow:none!important;
+}
+/* Keyboard focus: do not pin focused search controls beneath software keyboard. */
+@media(max-width:699px) and (pointer:coarse){
+  html[data-theme] body:is(
+   .is-topics-route,.is-topic-route,.is-hadith-route,.is-dua-route
+  ) #appView :is(
+   .topics-hub,.topic-collection-page,.hadith-hub,.dua-hub
+  ):focus-within > :is(.search-panel,.search-pro-panel,.main-search,#homeSearchBlock){
+    position:relative!important;
+    top:auto!important;
+  }
+}
+@media(min-width:768px){
+  html[data-theme] body.is-topics-route #appView.view > .topics-hub.topics-hub > .view-head,
+  html[data-theme] body.is-topic-route #appView.view > .topic-collection-page.topic-collection-page > .view-head,
+  html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head,
+  html[data-theme] body.is-dua-route #appView .dua-hub > .view-head{
+    min-height:clamp(205px,21svh,290px)!important;
+  }
+  html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
+    min-height:clamp(190px,19svh,250px)!important;
+  }
+}
+@media(max-height:540px) and (orientation:landscape){
+  html[data-theme] body.is-topics-route #appView.view > .topics-hub.topics-hub > .view-head,
+  html[data-theme] body.is-topic-route #appView.view > .topic-collection-page.topic-collection-page > .view-head,
+  html[data-theme] body.is-hadith-route #appView .hadith-hub > .view-head,
+  html[data-theme] body.is-dua-route #appView .dua-hub > .view-head{
+    min-height:clamp(120px,28svh,185px)!important;
+  }
+  html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
+    min-height:clamp(110px,26svh,170px)!important;
+  }
+}
