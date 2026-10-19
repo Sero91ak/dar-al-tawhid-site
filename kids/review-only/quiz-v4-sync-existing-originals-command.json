@@ -11,5 +11,10 @@
   "minimumSavedOriginals": 401,
   "zeroCreditImportQueue": "ISOLATED_FROM_PAID_TTS_QUEUE",
   "requireAllSavedOriginalsPreserved": true,
-  "recoveryNoNewTTS": true
+  "recoveryNoNewTTS": true,
+  "requireSystemAudioDecoders": [
+    "ffprobe",
+    "ffmpeg"
+  ],
+  "knownMissingAudioDecoderFixedInWorkflow": true
 }
