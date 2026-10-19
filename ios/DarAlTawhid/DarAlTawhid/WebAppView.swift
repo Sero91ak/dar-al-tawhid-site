@@ -69,6 +69,7 @@ struct WebAppView: UIViewRepresentable {
         userContentController.add(context.coordinator, name: "darAppearance")
         userContentController.add(context.coordinator, name: "darWidgetSnapshot")
         userContentController.add(context.coordinator, name: "darPushSettings")
+        userContentController.add(context.coordinator, name: "darLiveActivitySettings")
         userContentController.add(context.coordinator, name: "darHaptic")
         userContentController.add(context.coordinator, name: "darPushTest")
         userContentController.add(context.coordinator, name: "darPushReactivate")
@@ -793,6 +794,7 @@ struct WebAppView: UIViewRepresentable {
             self.webView = webView
             self.backdropView = backdropView
             self.containerView = containerView
+            DarNativePermissions.shared.attach(webView: webView)
             installLoadingOverlay(on: containerView)
             applySurfaceColor(pageSurfaceColor)
             showLoadingOverlay(subtitle: "App wird geladen")
@@ -823,6 +825,7 @@ struct WebAppView: UIViewRepresentable {
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppearance")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darWidgetSnapshot")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushSettings")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darLiveActivitySettings")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darHaptic")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushTest")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushReactivate")
@@ -1124,6 +1127,10 @@ struct WebAppView: UIViewRepresentable {
                 Task { @MainActor in self.shareImageFromWeb(body) }
                 return
             }
+            if message.name == "darLiveActivitySettings" {
+                DarPrayerLiveActivityController.handle(message.body as? [String: Any] ?? [:], webView: webView)
+                return
+            }
             if message.name == "darPushTest" {
                 let body = message.body as? [String: Any] ?? [:]
                 DarPushNotifications.showTest(
@@ -1284,6 +1291,16 @@ struct WebAppView: UIViewRepresentable {
             showLoadError(in: webView)
         }
 
+        @available(iOS 15.0, *)
+        func webView(
+            _ webView: WKWebView,
+            requestGeolocationPermissionFor origin: WKSecurityOrigin,
+            initiatedByFrame frame: WKFrameInfo,
+            decisionHandler: @escaping (WKPermissionDecision) -> Void
+        ) {
+            DarNativePermissions.shared.decideGeolocation(decisionHandler)
+        }
+
         func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
             showLoadingOverlay(subtitle: "App wird geladen")
             scheduleLoadTimeout(for: webView)
@@ -1301,6 +1318,9 @@ struct WebAppView: UIViewRepresentable {
             handlePossibleLibraryReaderRoute(currentURL)
             applyPendingQuickActionIfNeeded()
             injectNativePushBridge()
+            DarNativePermissions.shared.requestLocationIfNeeded()
+            DarPrayerLiveActivityController.refresh()
+            DarPrayerLiveActivityController.sendStatus(webView)
         }
 
         @objc func injectNativePushBridge() {
@@ -1964,6 +1984,8 @@ struct WebAppView: UIViewRepresentable {
         @objc
         private func appDidBecomeActive() {
             guard let webView else { return }
+            DarPrayerLiveActivityController.refresh()
+            DarPrayerLiveActivityController.sendStatus(webView)
             updateViewportInsets()
             applyPendingQuickActionIfNeeded()
             DarPushNotifications.syncWithServerThenScheduleLocalFallback()
