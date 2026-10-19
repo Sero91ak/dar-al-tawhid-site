@@ -12,6 +12,7 @@ struct WebAppView: UIViewRepresentable {
     private static let messageNames = [
         "darNative",
         "darPushSettings",
+        "darLiveActivitySettings",
         "darPushTest",
         "darAppIcon",
         "darHaptic",
@@ -233,7 +234,18 @@ struct WebAppView: UIViewRepresentable {
                 name: .darNativePushPermission,
                 object: nil
             )
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(refreshNativeLiveActivity),
+                name: UIApplication.didBecomeActiveNotification,
+                object: nil
+            )
             DarPushNotifications.requestAuthorization()
+        }
+
+        @objc private func refreshNativeLiveActivity() {
+            DarPrayerLiveActivityController.refresh()
+            DarPrayerLiveActivityController.sendStatus(webView)
         }
 
         func detach() {
@@ -294,6 +306,9 @@ struct WebAppView: UIViewRepresentable {
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
             finishLoading()
             injectNativePushBridge()
+            DarNativePermissions.shared.requestLocationIfNeeded()
+            DarPrayerLiveActivityController.refresh()
+            DarPrayerLiveActivityController.sendStatus(webView)
             if let url = pendingURL {
                 pendingURL = nil
                 open(url)
@@ -442,6 +457,8 @@ struct WebAppView: UIViewRepresentable {
                     return
                 }
                 DarNativePermissions.shared.handleWebMessage(message.body)
+            case "darLiveActivitySettings":
+                DarPrayerLiveActivityController.handle(body, webView: webView)
             case "darPushSettings":
                 DarPushNotifications.applyWebPrayerSettings(body)
             case "darPushTest":
