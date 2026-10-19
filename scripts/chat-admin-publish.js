@@ -52,7 +52,11 @@ function stripPublicExtras(markdown) {
     }
     return true;
   });
-  const cleanedBody = statementLines.join("\n").replace(/\n{3,}/g, "\n\n");
+  // Reader contract: ensure elegant Latin is rendered with complete umlauts,
+  // even when Chat drafts use mathematical calligraphic alphabet glyphs.
+  const cleanedBody = statementLines.join("\n")
+    .replace(/[\u{1D400}-\u{1D7FF}]/gu, c => c.normalize("NFKC"))
+    .replace(/\n{3,}/g, "\n\n");
   return parts[1] + cleanedFm + parts[3] + cleanedBody;
 }
 
@@ -85,6 +89,11 @@ function inspect(request) {
     requireValid(fs.existsSync(path.join(ROOT, "q", String(number), "index.html")), "source page missing");
   }
   requireValid(!/https?:\/\/(?!dar-al-tawhid\.de\/q\/)/i.test(markdown), "foreign URL in reader content");
+  const publishedBody=markdown.slice(fm.index+fm[0].length);
+  requireValid(!/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/u.test(publishedBody), "Arabic original belongs on Q source card");
+  const fazitMarks=[...publishedBody.matchAll(/🌙\s*(?:\*\*)?\s*(?:Fazit|𝐅𝐚𝐳𝐢𝐭)\s*:/gu)];
+  requireValid(fazitMarks.length<=1, "duplicate Fazit");
+  requireValid(!fazitMarks.length||/^\s*🌙\s*(?:\*\*)?\s*(?:Fazit|𝐅𝐚𝐳𝐢𝐭)\s*:/mu.test(publishedBody), "Fazit must start its own line");
   const filename = String(request.filename || "").trim();
   requireValid(!filename || /^[a-z0-9][a-z0-9-]{2,130}\.md$/.test(filename), "unsafe filename");
   return { markdown, filename, id, sourceRefs };
