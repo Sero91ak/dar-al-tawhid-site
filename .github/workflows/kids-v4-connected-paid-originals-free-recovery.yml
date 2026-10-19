@@ -8,6 +8,8 @@ on:
       - 'kids/tools/import_quiz_v4_connected_flow_originals.py'
       - 'kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py'
       - 'kids/data/quiz-v4-connected-flow-originals-ledger.json'
+      - 'kids/tools/import_quiz_v4_encrypted_signed_original.py'
+      - 'kids/data/v4-connected-signed-import/sealed-creative-original.json'
       - '.github/workflows/kids-v4-connected-paid-originals-free-recovery.yml'
 
 permissions:
@@ -45,6 +47,19 @@ jobs:
           set -euo pipefail
           python3 kids/tools/recover_quiz_v4_connected_get_only.py
           python3 kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py
+      - name: Import one confirmed original through sealed time-limited provider URL, no new speech
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          envelope=kids/data/v4-connected-signed-import/sealed-creative-original.json
+          if [ -f "$envelope" ]; then
+            python3 -m py_compile kids/tools/import_quiz_v4_encrypted_signed_original.py
+            python3 kids/tools/import_quiz_v4_encrypted_signed_original.py --audit
+            python3 kids/tools/import_quiz_v4_encrypted_signed_original.py --import
+          else
+            echo 'No sealed provider-original URL present; no generation or download.'
+          fi
       - name: Join and hash-check any newly imported genuine MP3s, keep release disabled
         run: |
           set -euo pipefail
