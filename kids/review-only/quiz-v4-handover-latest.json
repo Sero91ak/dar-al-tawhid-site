@@ -3,7 +3,7 @@
   "app": "TAWḤĪD KIDS",
   "branch": "review/kids-quiz-v4-batch-001-020-20261014",
   "pullRequest": "https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143",
-  "basedOnReviewedCommit": "3b6c8ea817c237b0fcc0594b8a08932650ccdc3d",
+  "basedOnReviewedCommit": "02a7d1326f772bcff5362d32f65f7dc7cdb3a9df",
   "modelId": "eleven_v4",
   "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "totalCanonicalQuestions": 900,
@@ -112,6 +112,9 @@
   "olderStage1ExactProviderBillingNotYetReconciled": true,
   "olderStage1PaidOriginalReceiptIdsRecorded": 10,
   "olderStage1UnconfirmedPreviousPaidRequestsQuarantined": 1,
+  "olderStage1HistoryRecoveryResult": "FINISHED_READ_ONLY_HISTORY_RECOVERY",
+  "olderStage1GenuineOriginalsRecoveredFromHistory": 0,
+  "olderStage1HistoryRecoveryOnlyGETNoCredits": true,
   "olderStage1UnconfirmedTextSHA256": [
     "fc4f586cf59297c43335f3aae64428bdf00fb10ec362ffb33c9620ff9a851f70"
   ],

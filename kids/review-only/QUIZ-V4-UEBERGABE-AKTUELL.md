@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `3b6c8ea817c237b0fcc0594b8a08932650ccdc3d`
+- Commit beim Erstellen dieses Berichts: `02a7d1326f772bcff5362d32f65f7dc7cdb3a9df`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **288 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1056 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -94,6 +94,13 @@ Null-Credit-Regressionsprüfung: `kids/tools/test_quiz_v4_prepaid_end_to_end_wir
 Zusätzlicher offizieller Null-Credit-Wiederherstellungsversuch seit 17.10.2026: `kids/tools/recover_quiz_v4_missing9_get_only.py` durchsucht nun GET `/v1/history` mit Filter `source=Flows`, `voice_id` und `model_id=eleven_v4` nach den **genau neun historisch bezahlten Texten**. Das berücksichtigt, dass ElevenLabs-Flow-generation_id NICHT zwangsläufig history_item_id ist. Die Suche bleibt auf 5 × 100 Verlaufseinträge begrenzt; keine erneute Sprachgenerierung.
 WICHTIG: Gleicher Text allein ist KEIN Beweis derselben alten Aufnahme. Ein Original darf nur importiert werden, wenn ein eindeutiger Treffer zusätzlich per History-ID oder Request-ID nachweislich mit der ursprünglichen Generation-ID verknüpft ist. Doppelte oder unverbundene Treffer bleiben ungeklärt und dürfen NICHT als alte Originale etikettiert werden.
 Offline-Sicherheitstest: `kids/tools/test_quiz_v4_flow_history_discovery.py` (richtige ID, Mehrdeutigkeit, falsche Stimme, 402, Pagination). Der ausführende GET-only-Workflow `.github/workflows/kids-v4-last9-paid-free-get.yml` startet nach GitHub-Actions-Freigabe. Erst danach aus dem importierten MP3-SHA und dem Statusbericht ablesen, ob tatsächlich eine Datei zurückkam.
+
+## Neuer Originalaudio-Rückholweg für ungeklärte V4-Abbuchung
+
+Die ursprünglichen 10 V4-Original-MP3s sind im GitHub-Register/Abrechnungsledger gespeichert. Zusätzlich ist ein früherer kostenpflichtiger V4-Aufruf mit unklarem Ergebnis gegen jede erneute Ausgabe gesperrt.
+Neues Script: `kids/tools/recover_quiz_v4_uncertain_history.py`; Null-Credit-GitHub-Aktion: `.github/workflows/kids-v4-uncertain-paid-history-recovery.yml`.
+Die ElevenLabs-Verlaufssuche darf ausschließlich GET `/v1/history` verwenden und eine gespeicherte MP3 nur aus GET `/v1/history/{history_item_id}/audio` abrufen. Zuordnung nur bei genau einer Übereinstimmung von Original-Sprachtext, `eleven_v4`, Master-Voice-ID und historischem Anfrage-Zeitfenster. Bei 402, nicht eindeutigem Treffer oder fehlendem Provider-Zugriff: NICHT erneut kaufen.
+Letzter im GitHub-Report gespeicherter Ergebnisstatus: `FINISHED_READ_ONLY_HISTORY_RECOVERY`; echte hierdurch wiederhergestellte Original-MP3s: **0**. Der Wert 0 bleibt maßgeblich, solange keine Originalbytes mit SHA und Provider-History-ID gesichert wurden.
 
 ## Erster exakt gebundener V4-Auftrag für 7–10 Jahre
 
