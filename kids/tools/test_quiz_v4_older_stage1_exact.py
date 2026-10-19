@@ -38,10 +38,17 @@ def main():
     stored=sum(item["spokenText"] in registry["textClips"]
                for item in source["originalTextRecordingQueue"])
     reserved=len(source["_reservedUnimportedTextSHA256"])
+    uncertain=len(source.get("_uncertainPaidRequestTextSHA256",[]))
     flow_saved=stored-expected_stage1
-    must(flow_saved>=0 and stored+reserved+len(missing)==65
-         and real["sourceRemaining"]==len(missing)+reserved+flow_saved,
+    must(flow_saved>=0 and stored+reserved+uncertain+len(missing)==65
+         and real["sourceRemaining"]==len(missing)+reserved+uncertain+flow_saved,
          "direct-paid receipt remainder was confused with unreserved new V4 speech queue")
+    must(real.get("uncertainOriginalRequestCount")==uncertain
+         and real.get("uncertainOriginalRequestTextSHA256")==sorted(source.get("_uncertainPaidRequestTextSHA256",[])),
+         "uncertain charged original lacks explicit review-only quarantine evidence")
+    must(not {p["spokenTextSHA256"] for p in missing}.intersection(
+         source.get("_uncertainPaidRequestTextSHA256",[])),
+         "an unresolved provider request was selected again for paid synthesis")
     must(not {p["spokenTextSHA256"] for p in missing}.intersection(
          source["_reservedUnimportedTextSHA256"]),
          "reserved/purchased connected Flow voice original was selected for repurchase")
@@ -138,10 +145,11 @@ def main():
                     "textSHA256":missing[0]["spokenTextSHA256"],
                     "batchId":stage1.BATCH,"status":"REQUEST_STARTED_UNCONFIRMED",
                     "startedAt":"2026-10-17T00:00:00+00:00"}
+                original_journal=stage1.read(saved_attempts)
                 journal={"schemaVersion":1,"modelId":stage1.MODEL,
                          "voiceId":stage1.VOICE,
                          "purpose":"DO_NOT_REGENERATE_UNCERTAIN_PAID_REQUESTS",
-                         "entries":[test_attempt]}
+                         "entries":[*original_journal["entries"],test_attempt]}
                 stage1.durable_attempts(journal)
                 backup=json.loads(stage1.USAGE.read_text(encoding="utf-8"))
                 must(backup["requestJournal"]==journal and
@@ -150,13 +158,14 @@ def main():
                 # Demonstrate that the backup alone blocks a retry even if the
                 # local journal is missing on the next runner.
                 stage1.ATTEMPTS.unlink()
-                try:
-                    stage1.prepare()
-                except RuntimeError as exc:
-                    must("NEVER REBUY" in str(exc),
-                         "unconfirmed billed V4 request was not blocked as previously attempted")
-                else:
-                    raise AssertionError("An uncertain original V4 POST was allowed to be bought twice")
+                _r,_l,sim_stage,sim_missing,_protected=stage1.prepare()
+                must(test_attempt["textSHA256"] in sim_stage["_uncertainPaidRequestTextSHA256"],
+                     "unconfirmed original was not quarantined using the mirrored backup journal")
+                must(test_attempt["textSHA256"] not in {x["spokenTextSHA256"] for x in sim_missing},
+                     "an uncertain paid original was reselected for spending")
+                sim_batch,_,_=stage1.candidate_batch(sim_missing,sim_stage)
+                must(test_attempt["textSHA256"] not in {x["spokenTextSHA256"] for x in sim_batch},
+                     "the next cost-limited batch selected a text with an unresolved prior paid POST")
             finally:
                 stage1.USAGE=saved_usage
                 stage1.ATTEMPTS=saved_attempts
