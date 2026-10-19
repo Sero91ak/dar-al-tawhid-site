@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "scope": "KIDS_V4_SUBMITTED_FLOW_HISTORY_CANDIDATES_GET_ONLY",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "reviewOnly": true,
+  "submittedWithoutConfirmedMP3": 1,
+  "reservedUnspentExcludedFromHistoryRecovery": 7,
+  "historyPagesMaximum": 5,
+  "historyRecordsMaximum": 500,
+  "newSynthesisCalls": 0,
+  "newSpeechCreditsSpent": 0,
+  "originalMP3sDownloaded": 0,
+  "quizAudioRegistryChanged": false,
+  "humanHearingApproved": false,
+  "publicReleaseEnabled": false,
+  "unprovenHistoryCandidateMustNotBeImported": true,
+  "items": [
+    {
+      "textSHA256": "4c7da6824790eb5523bd9917b508c0e12339443228b8d5ce840445946724d32e",
+      "flowId": "1q8pGIR0nRKIekoSCt0j",
+      "nodeId": "9rHdH1dXDOvmsgB4AMu2",
+      "candidateCount": 0,
+      "candidates": [],
+      "exactOriginalProven": false,
+      "providerAudioImported": false,
+      "nextAction": "Correlate history item with original Flow generation/session, then GET original MP3; never regenerate"
+    }
+  ],
+  "status": "READ_ONLY_HISTORY_SCAN_COMPLETED",
+  "historyResultsTruncated": false
+}
