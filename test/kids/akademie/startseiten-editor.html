@@ -1,268 +1,150 @@
 <!doctype html>
-<html lang="de">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="robots" content="noindex,nofollow,noarchive">
-<meta name="theme-color" content="#0b1718">
-<title>Startseiten-Atelier · DĀR AL TAWḤĪD TEST</title>
-<style>
-:root{color-scheme:dark;--bg:#081618;--panel:#122628;--line:#314747;--accent:#d7c28f;--ink:#f1ecdf;--muted:#a8b9b6}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;font:14px/1.45 -apple-system,BlinkMacSystemFont,"Avenir Next",system-ui,sans-serif;background:var(--bg);color:var(--ink)}
-button,input,select,textarea{font:inherit}button{cursor:pointer}
-button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px max(15px,env(safe-area-inset-left));border-bottom:1px solid var(--line);background:#102021}
-.top strong{display:block;font:500 clamp(18px,4vw,26px)/1.1 Georgia,serif;letter-spacing:.025em}
-.top small{color:var(--accent);font-size:10px;letter-spacing:.14em;font-weight:750}
-.top a{color:var(--accent);text-decoration:none;font-size:12px}
-main{display:grid;grid-template-columns:minmax(0,1fr) 315px;min-height:calc(100dvh - 72px);gap:0}
-.stage{min-width:0;padding:14px;overflow:auto;background:radial-gradient(circle at 50% 5%,#193131,transparent 62%)}
-.toolbar{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:13px}
-.toolbar label,.toolbar button{font-size:12px}
-.controls{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-button,.choice{border:1px solid var(--line);background:#172d2f;color:var(--ink);border-radius:10px;padding:8px 10px;min-height:37px}
-button:hover{border-color:#627771}
-button.primary{background:var(--accent);border-color:var(--accent);color:#17201b;font-weight:750}
-button.warn{color:#f4cfb8}
-.choice{min-width:107px}
-.canvas{width:min(100%,410px);margin:0 auto;transition:width .15s;position:relative}
-.screenbar{height:23px;border-radius:15px 15px 0 0;background:#243a3b;text-align:center;font-size:10px;color:#bed0c8;padding:4px}
-iframe{display:block;width:100%;height:730px;border:0;background:#f1eee7;border-radius:0 0 16px 16px}
-.frame-note{max-width:710px;margin:14px auto 0;color:var(--muted);font-size:12px;text-align:center}
-.side{border-left:1px solid var(--line);padding:15px 15px 25px;background:var(--panel);overflow:auto;max-height:calc(100dvh - 72px)}
-.side h2{font:500 22px/1.15 Georgia,serif;margin:0 0 7px}
-.side p{color:var(--muted);font-size:12px;margin:3px 0 13px}
-.field{display:block;margin:12px 0}
-.field span{display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:5px}
-.field input,.field textarea,.field select{width:100%;border:1px solid #416061;background:#0e2123;color:var(--ink);padding:9px;border-radius:9px;min-height:39px}
-.field input[type=range]{padding:0;border:0;min-height:25px;accent-color:var(--accent);background:transparent}
-textarea{resize:vertical;min-height:100px!important}
-.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}
-.actions button{min-width:0}
-.note{font-size:11px;color:var(--muted);padding:10px 0;line-height:1.5}
-.status{margin-top:9px;min-height:35px;border-top:1px solid var(--line);padding-top:8px;font-size:12px;color:var(--accent)}
-.hidden{display:none!important}
-.checkline{display:flex;align-items:flex-start;gap:9px;margin-top:15px;font-size:12px;color:var(--ink)}
-.checkline input{accent-color:var(--accent);width:18px;height:18px;flex-shrink:0}
-hr{border:0;border-top:1px solid var(--line);margin:16px 0}
-.kbd{color:var(--accent)}
-@media(max-width:820px){
- main{grid-template-columns:1fr}
- .side{border-left:0;border-top:1px solid var(--line);max-height:none}
- .stage{padding:11px 7px}
- iframe{height:68dvh;min-height:440px}
- .top{padding:12px 15px}
- .side .sliders{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 14px}
-}
-@media(max-width:365px){.side .sliders{display:block}.top a{font-size:10px}}
-</style>
-</head>
-<body>
-<header class="top"><div><small>GESCHÜTZTES TEST-ATELIER · V1</small><strong>DĀR AL TAWḤĪD</strong></div><a href="/test/index.html#home" target="_blank" rel="noopener">Test-App ↗</a></header>
-<main>
-<section class="stage" aria-label="Bearbeitbare Test-App">
- <div class="toolbar">
-  <div class="controls">
-   <label for="device">Vorschau</label>
-   <select id="device" class="choice" aria-label="Gerätebreite">
-    <option value="375">iPhone 375</option><option value="393" selected>iPhone 393</option>
-    <option value="430">iPhone 430</option><option value="768">iPad 768</option>
-    <option value="1024">iPad 1024</option><option value="100%">Automatisch</option>
+<html lang="de"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#0d1d22">
+<title>Startseiten-Studio V2 · DĀR AL TAWḤĪD</title>
+<link rel="stylesheet" href="/test/academy/startseiten-studio-v2.css?v=20261019-studio-v2">
+</head><body>
+<div id="studio" class="studio">
+<header class="studio-head">
+ <div class="brand"><span class="eyebrow">DĀR AL TAWḤĪD · TEST-ATELIER</span><strong>Visuelles Layout-Studio</strong></div>
+ <span class="scope"><span class="dot"></span> Privat · Entwurfsmodus</span>
+ <button id="undo" title="Rückgängig" aria-label="Rückgängig">↶</button><button id="redo" title="Wiederherstellen" aria-label="Wiederherstellen">↷</button>
+ <button id="save" class="gold">Entwurf sichern</button><a class="back" href="/test/index.html#home" target="_blank" rel="noopener">Test-App ↗</a>
+</header>
+<aside class="tools" aria-label="Werkzeuggruppen">
+ <button class="tool active" data-tab="select"><b>◇</b><span>Auswahl</span></button>
+ <button class="tool" data-tab="text"><b>T</b><span>Text</span></button>
+ <button class="tool" data-tab="layout"><b>⇱</b><span>Layout</span></button>
+ <button class="tool" data-tab="design"><b>◒</b><span>Design</span></button>
+ <button class="tool" data-tab="images"><b>▧</b><span>Bilder</span></button>
+ <button class="tool" data-tab="layers"><b>▤</b><span>Ebenen</span></button>
+ <button class="tool" data-tab="export"><b>⇩</b><span>Export</span></button>
+</aside>
+<section class="workspace" aria-label="Interaktives App-Layout">
+ <div class="stage-toolbar">
+  <div class="segment" aria-label="Bearbeitungsmodus">
+   <button data-mode="select" class="active">Markieren</button>
+   <button data-mode="move">Ziehen</button>
+   <button data-mode="area">Fläche</button>
+   <button data-mode="word">Wort</button>
+   <button data-mode="app">Bedienen</button>
+  </div>
+  <div class="stage-right">
+   <select id="device" title="Gerät und Breite" aria-label="Gerätebreite">
+    <option value="320">320 px</option><option value="375">iPhone klein</option>
+    <option value="393" selected>iPhone</option><option value="430">iPhone Max</option>
+    <option value="768">iPad</option><option value="1024">iPad Pro</option>
+    <option value="1366">iPad 13″</option>
    </select>
-   <select id="theme" class="choice" aria-label="Erscheinungsbild">
-    <option value="soft">Sanft Elegant</option><option value="light">Klassisch Hell</option>
+   <select id="theme" aria-label="Erscheinungsbild">
+    <option value="soft">Sanft Elegant</option><option value="light">Hell</option>
     <option value="salbei">Salbei Elfenbein</option><option value="eisgold">Eisgold</option>
-    <option value="dark">Klassisch Dunkel</option><option value="royal">Royal Nachtblau</option>
+    <option value="dark">Dunkel</option><option value="royal">Royal Nachtblau</option>
     <option value="bordeaux">Bordeaux Royal</option><option value="dar-al-layl">Dār al-Layl</option>
    </select>
+   <label class="zoom-label" for="zoom">Zoom <output id="zoomOut">100%</output></label>
+   <input type="range" id="zoom" min="40" max="140" step="5" value="100" aria-label="Zoom">
+   <button id="reload" title="Test-Vorschau neu laden">↻</button>
   </div>
-  <div class="controls"><button type="button" id="pick" class="primary">Element wählen</button><button type="button" id="reload">Neu laden</button></div>
  </div>
- <div class="canvas" id="canvas"><div class="screenbar">ECHTE TEST-STARTSEITE · LOKALE ENTWURFSVORSCHAU</div><iframe id="preview" title="Bearbeitbare echte DĀR AL TAWḤĪD Test-Startseite" src="/test/index.html?env=staging&dar-editor=1#home"></iframe></div>
- <p class="frame-note">Tippe in der Vorschau auf ein Element. Änderungen werden nur für deinen Entwurf vorgenommen. Für echte App-Funktionen „Element wählen“ deaktivieren.</p>
+ <div class="canvas-scroll" id="canvasScroll">
+  <div class="device-wrap" id="deviceWrap"><div class="device" id="deviceBox">
+   <div class="device-bar"><span>●</span><span>Dar Test · Echte Startseite</span><span>●</span></div>
+   <iframe id="appFrame" title="Live-Struktur der Test-App als bearbeitbare Vorschau" src="/test/index.html?env=staging&dar-editor=2#home"></iframe>
+  </div></div>
+ </div>
+ <div class="stage-footer">
+  <span id="status" role="status" aria-live="polite">Editor wird geladen …</span>
+  <span id="selectionInfo">Kein Bereich gewählt</span>
+ </div>
 </section>
-<aside class="side">
- <h2>Layout bearbeiten</h2>
- <p>Texte, Schriftgrößen, Abstände und Positionen ohne Programmierung verändern.</p>
- <label class="field"><span>Ausgewählter Bereich</span><select id="target"></select></label>
- <div class="sliders">
-  <label class="field"><span>Schriftgröße <output id="fontOut"></output></span><input id="font" type="range" min="8" max="86" step="1"></label>
-  <label class="field"><span>Nach links / rechts <output id="xOut"></output></span><input id="x" type="range" min="-130" max="130" step="1" value="0"></label>
-  <label class="field"><span>Nach oben / unten <output id="yOut"></output></span><input id="y" type="range" min="-160" max="160" step="1" value="0"></label>
-  <label class="field"><span>Abstand oben <output id="topOut"></output></span><input id="top" type="range" min="-50" max="100" step="1" value="0"></label>
-  <label class="field"><span>Zeilenhöhe <output id="lineOut"></output></span><input id="line" type="range" min="0.8" max="2.2" step="0.05" value="1.2"></label>
-  <label class="field"><span>Buchstabenabstand <output id="trackingOut"></output></span><input id="tracking" type="range" min="-3" max="10" step="0.25" value="0"></label>
-  <label class="field"><span>Breite in % <output id="widthOut"></output></span><input id="width" type="range" min="30" max="100" step="1" value="100"></label>
+<aside class="inspector" aria-label="Eigenschaften">
+ <div class="panel-top"><small>OBJEKT · EIGENSCHAFTEN</small><h2 id="selectedName">Wähle einen Bereich</h2><p id="selectedPath">Tippe auf einen Text, eine Fläche, ein Bild oder ein App-Element.</p></div>
+ <div class="inspector-scroll">
+  <section data-panel="select" class="panel active">
+   <h3>Auswahlwerkzeuge</h3><p>Tippe auf ein Element oder wähle einen Bereich in der Ebenenliste. „Fläche“ markiert mehrere Elemente mit einem Rechteck.</p>
+   <div class="btn-grid"><button id="selectParent">Elternelement ↑</button><button id="selectChild">Kindelement ↓</button><button id="selectPrevious">Vorheriges ←</button><button id="selectNext">Nächstes →</button></div>
+   <hr><h3>Bearbeitungsaktionen</h3>
+   <div class="btn-grid"><button id="hideSelected" class="danger">Fläche entfernen</button><button id="showSelected">Wieder einblenden</button><button id="collapseGap">Lücke schließen</button><button id="removeSpace">Abstand null</button></div>
+   <p>„Fläche entfernen“ blendet nur den gewählten Bereich aus und gibt den Platz im Scrollbereich frei. Du kannst alles rückgängig machen.</p>
+  </section>
+  <section data-panel="text" class="panel">
+   <h3>Typografie</h3>
+   <label>Text des gewählten Elements<textarea id="textValue" rows="4" placeholder="Text bearbeiten"></textarea></label>
+   <button id="applyText">Text übernehmen</button>
+   <div class="field-row"><label>Schriftgröße <input data-prop="fontSize" type="range" min="8" max="110" value="24"><output data-value="fontSize"></output></label>
+   <label>Zeilenhöhe<input data-prop="lineHeight" type="range" min="0.8" max="2.6" step="0.05" value="1.2"><output data-value="lineHeight"></output></label></div>
+   <label>Schriftfamilie<select data-prop="fontFamily">
+    <option value="">App-Originalschrift</option><option value="Georgia,serif">Georgia – klassisch</option>
+    <option value="'Iowan Old Style',Georgia,serif">Iowan Old Style</option>
+    <option value="'Palatino Linotype',Palatino,serif">Palatino</option>
+    <option value="'Baskerville',Georgia,serif">Baskerville</option>
+    <option value="-apple-system,BlinkMacSystemFont,system-ui,sans-serif">Apple System</option>
+    <option value="'Avenir Next',Avenir,system-ui,sans-serif">Avenir Next</option>
+    <option value="'Times New Roman',serif">Times New Roman</option>
+   </select></label>
+   <div class="field-row"><label>Schriftstärke<select data-prop="fontWeight"><option value="">Original</option><option value="400">Normal</option><option value="500">Medium</option><option value="600">Halbfett</option><option value="700">Fett</option><option value="800">Extrafett</option></select></label>
+   <label>Ausrichtung<select data-prop="textAlign"><option value="">Original</option><option value="left">Links</option><option value="center">Mitte</option><option value="right">Rechts</option></select></label></div>
+   <label>Buchstabenabstand<input data-prop="letterSpacing" type="range" min="-4" max="14" step="0.25" value="0"><output data-value="letterSpacing"></output></label>
+   <hr><h3>Einzelnes Wort</h3><p>Wortmodus wählen, Wort in der Vorschau markieren und dann „Wort als Ebene“ antippen. Das Wort lässt sich anschließend unabhängig bewegen und gestalten.</p>
+   <button id="createFragment">Wort als eigene Ebene</button>
+  </section>
+  <section data-panel="layout" class="panel">
+   <h3>Position &amp; Dimension</h3><p>Element antippen, gedrückt halten und verschieben. Mit dem Griff unten rechts skalieren.</p>
+   <div class="field-row">
+    <label>Links / rechts<input data-prop="x" type="range" min="-450" max="450" step="1" value="0"><output data-value="x"></output></label>
+    <label>Hoch / runter<input data-prop="y" type="range" min="-600" max="600" step="1" value="0"><output data-value="y"></output></label>
+    <label>Breite<input data-prop="width" type="range" min="12" max="150" step="1" value="100"><output data-value="width"></output></label>
+    <label>Höhe<input data-prop="height" type="range" min="0" max="700" step="1" value="0"><output data-value="height"></output></label>
+    <label>Abstand oben<input data-prop="marginTop" type="range" min="-120" max="220" step="1" value="0"><output data-value="marginTop"></output></label>
+    <label>Abstand unten<input data-prop="marginBottom" type="range" min="-120" max="220" step="1" value="0"><output data-value="marginBottom"></output></label>
+    <label>Innenabstand<input data-prop="padding" type="range" min="0" max="100" step="1" value="0"><output data-value="padding"></output></label>
+    <label>Eckenradius<input data-prop="radius" type="range" min="0" max="70" step="1" value="0"><output data-value="radius"></output></label>
+   </div>
+   <label class="check"><input id="snap" type="checkbox" checked>Beim Ziehen am 8-px-Raster ausrichten</label>
+   <label class="check"><input id="perDevice" type="checkbox">Anpassungen nur für dieses Geräteformat</label>
+   <div class="btn-grid"><button id="zForward">Nach vorne ↑</button><button id="zBackward">Nach hinten ↓</button></div>
+   <hr><h3>Scrollbereich</h3>
+   <label>Vorschauhöhe<input id="viewHeight" type="range" min="450" max="2200" value="950" step="25"><output id="heightOut">950 px</output></label>
+   <div class="btn-grid"><button id="shrinkSection">Abschnitt verkürzen</button><button id="expandSection">Abschnitt verlängern</button></div>
+  </section>
+  <section data-panel="design" class="panel">
+   <h3>Erscheinungsbild-Farben</h3><p>Farben aus dem aktuell gewählten App-Erscheinungsbild übernehmen; keine zweite Palette über der App erzeugen.</p>
+   <label>Textfarbe<select data-prop="color"><option value="">App-Original</option><option value="var(--dt-ink)">Theme-Schrift</option><option value="var(--dt-muted)">Theme-Gedämpft</option><option value="var(--dt-accent)">Theme-Akzent</option></select></label>
+   <label>Flächenfarbe<select data-prop="background"><option value="">Keine zusätzliche Fläche</option><option value="transparent">Transparent</option><option value="var(--dt-page)">Theme-Hintergrund</option><option value="var(--dt-nav-bg)">Theme-Oberfläche</option></select></label>
+   <label>Deckkraft<input data-prop="opacity" type="range" min="0.05" max="1" step="0.05" value="1"><output data-value="opacity"></output></label>
+   <div class="btn-grid"><button id="autoTheme">Theme-Farben übernehmen</button><button id="removeBackground">Kasten entfernen</button></div>
+   <hr><h3>Design-Varianten</h3><p>Teste die Elemente in allen acht Erscheinungsbildern und mehreren Bildschirmgrößen, bevor du die Änderungen exportierst.</p>
+   <button id="cycleTheme">Nächstes Erscheinungsbild →</button>
+  </section>
+  <section data-panel="images" class="panel">
+   <h3>Bilder &amp; Hintergründe</h3><label>Datei von iPad / Fotos auswählen<input id="imageFile" type="file" accept="image/*"></label>
+   <label>Oder Bildadresse (HTTPS)<input id="imageUrl" type="url" placeholder="https://…"></label>
+   <div class="btn-grid"><button id="imageOverlay">Bild als Ebene</button><button id="imageBackground">Bild als Hintergrund</button></div>
+   <label>Darstellung<select id="imageFit"><option value="cover">Fläche füllen</option><option value="contain">Ganz anzeigen</option></select></label>
+   <label>Bild-Deckkraft<input id="imageOpacity" type="range" min=".1" max="1" step=".05" value="1"><output id="imageOpacityOut">100%</output></label>
+   <button id="clearImage" class="danger">Bild aus Entwurf entfernen</button>
+   <p class="hint">Lokale Bilder werden komprimiert. Du kannst sie als Ebene frei ziehen oder als Hintergrund eines Abschnitts verwenden. Die App erhält sie erst nach einer separaten Veröffentlichung.</p>
+  </section>
+  <section data-panel="layers" class="panel">
+   <h3>Ebenenübersicht</h3><p>Einzelne Bereiche auswählen, verschieben, ausblenden oder zurücksetzen. Die echte App-Navigation bleibt bestehen.</p>
+   <input id="layerFilter" type="search" placeholder="Ebene suchen …" aria-label="Ebenen durchsuchen">
+   <div id="layerList" class="layers" role="list"></div>
+   <div class="btn-grid"><button id="layerUp">Ebene nach oben</button><button id="layerDown">Ebene nach unten</button></div>
+   <button id="resetElement">Gewähltes Element zurücksetzen</button>
+  </section>
+  <section data-panel="export" class="panel">
+   <h3>Entwurf &amp; Übergabe</h3><p>Die Test-App wird nicht stillschweigend verändert. Deine Gestaltung bleibt zunächst lokal und kann gezielt übergeben werden.</p>
+   <div class="btn-grid"><button id="save2" class="gold">Zwischenspeichern</button><button id="loadDraft">Entwurf laden</button><button id="exportAll">Alle Änderungen exportieren</button><button id="exportPart">Nur gewählten Bereich</button><button id="importBtn">Entwurf importieren</button><button id="resetAll" class="danger">Entwurf zurücksetzen</button></div>
+   <input id="importFile" type="file" accept=".json,application/json" hidden>
+   <label class="check"><input id="applyLocal" type="checkbox">Mein Layout auf diesem Gerät auch in der normalen Test-App anzeigen</label>
+   <div class="notice"><strong>Selektiver Test-Push:</strong> Exportiere einen Abschnitt und gib ihn zur Integration frei. Eine Serververöffentlichung erfolgt nicht automatisch durch diesen Editor.</div>
+   <button id="exportReview">Freigabe-Paket für diesen Bereich</button>
+  </section>
  </div>
- <label class="field"><span>Text ändern <small id="textLock"></small></span><textarea id="copy" rows="3" placeholder="Text des gewählten Bereichs" maxlength="4000"></textarea></label>
- <p class="note">Gebetszeiten, Standort und andere Live-Daten werden nicht durch statische Texte ersetzt. Schrift, Position und Abstände kannst du dort trotzdem verändern.</p>
- <div class="actions">
-  <button type="button" id="undo">↶ Rückgängig</button><button type="button" id="resetPart">Element zurücksetzen</button>
-  <button type="button" class="primary" id="save">Entwurf speichern</button><button type="button" id="export">JSON exportieren</button>
-  <button type="button" id="importBtn">JSON importieren</button><button type="button" id="resetAll" class="warn">Alles zurücksetzen</button>
- </div>
- <input id="importFile" type="file" accept=".json,application/json" class="hidden">
- <label class="checkline"><input id="applyLocal" type="checkbox"><span>Diesen Entwurf <b>auf diesem Gerät</b> auch beim normalen Öffnen der Test-Startseite anzeigen.</span></label>
- <p class="note">Gespeicherte Änderungen gelten nur im aktuellen Browser und bleiben vom öffentlichen Besucherauftritt getrennt. Mit dem JSON-Export können wir dein freigegebenes Layout später zentral übernehmen.</p>
- <div id="status" class="status" role="status" aria-live="polite">Vorschau wird geladen …</div>
+ <footer class="inspector-foot"><button id="resetCurrent">Element zurücksetzen</button><button id="exportCurrent">Bereich exportieren</button></footer>
 </aside>
-</main>
-<script>
-(function(){
-"use strict";
-const STORAGE="dar_v47_visual_editor_draft_v1", ENABLE="dar_v47_visual_editor_enabled_v1";
-const targets=[
- ["leadin","Beitragsüberschrift",".dar-v47-leadin",true],
- ["logo","Markenlogo",".brand-main .logo",false],
- ["brand","DĀR AL TAWḤĪD",".brand-main .brand-title-refined",true],
- ["rule","Markenlinie",".brand-main .brand-title-refined::after",false],
- ["tools","Licht · Glocke · Einstellungen","#dv3HeaderActions",false],
- ["prayer","Gebetszeiten gesamt","#headerPrayerStatus",false],
- ["current","Aktuelles Gebet","#headerPrayerStatus .header-prayer-zone--now",false],
- ["countdown","Countdown","#headerPrayerStatus .header-prayer-zone--middle",false],
- ["next","Nächstes Gebet","#headerPrayerStatus .header-prayer-zone--next",false],
- ["meta","Datum · Hijrī · Uhrzeit · Ort","#headerPrayerStatus .header-prayer-hub__status",false],
- ["salam","Vollständiger Salām",".dar-v47-salam",true],
- ["intro","Begrüßungstext",".dar-v47-intro",true],
- ["search","Wissenssuche","#dtHero1194 .dt-hero-search-slot",false],
- ["quote","Ibn-Sīrīn-Aussage",".top-shell > .isnad",false],
- ["quick","Schnellzugriffe","#dv3Home .dv3-quick-grid",false],
- ["posts","Neueste Beiträge","#dv3Latest",false]
-];
-const editableText={leadin:true,brand:true,salam:true,intro:true};
-const $=id=>document.getElementById(id);
-const frame=$("preview"), canvas=$("canvas"),sel=$("target");
-let draft={version:1,items:{}},active="brand",frameDoc=null,picking=true,busy=false,undo=[],marker=null;
-function clamp(v,min,max){return Math.min(max,Math.max(min,Number(v)||0))}
-function msg(s){$("status").textContent=s}
-function itemFor(key){return draft.items[key]||(draft.items[key]={})}
-function selector(key){return (targets.find(t=>t[0]===key)||[])[2]}
-function nodeFor(key){if(!frameDoc)return null;const s=selector(key);if(!s||s.includes("::"))return null;return frameDoc.querySelector(s)}
-function toastIfNoFrame(){if(frameDoc)return false;msg("Testseite konnte nicht im Vorschaufenster gelesen werden. Bitte im selben Browser auf derselben Domain öffnen.");return true}
-function mark(el){
- if(marker){marker.remove();marker=null}
- if(!el||!frameDoc)return;
- marker=frameDoc.createElement("div");marker.setAttribute("data-dar-editor-outline","");
- marker.style.cssText="position:absolute;pointer-events:none;outline:2px dashed #b79648;outline-offset:3px;z-index:2147483600;border-radius:3px;";
- (frameDoc.body||frameDoc.documentElement).appendChild(marker);
- const r=el.getBoundingClientRect(),sx=frame.contentWindow.scrollX||0,sy=frame.contentWindow.scrollY||0;
- marker.style.left=(r.left+sx)+"px";marker.style.top=(r.top+sy)+"px";marker.style.width=r.width+"px";marker.style.height=r.height+"px";
-}
-function apply(){
- if(!frameDoc)return;
- for(const t of targets){
-  let key=t[0],data=draft.items[key]||{};
-  let node=nodeFor(key);
-  if(key!=="rule"&&!node)continue;
-  if(key==="rule"){
-   let style=frameDoc.getElementById("darEditorRule");
-   if(!style){style=frameDoc.createElement("style");style.id="darEditorRule";frameDoc.head.appendChild(style)}
-   style.textContent="html.dar-home-v47-layout body.is-home-route .brand-title-refined::after{width:"+(data.width||100)+"%!important;translate:"+(data.x||0)+"px "+(data.y||0)+"px!important}";
-   continue;
-  }
-  const css=node.style;
-  for(const [p,val] of [["font-size",data.font==null?null:data.font+"px"],["translate",(data.x||data.y)?(data.x||0)+"px "+(data.y||0)+"px":null],["margin-top",data.top==null?null:data.top+"px"],["line-height",data.line==null?null:String(data.line)],["letter-spacing",data.tracking==null?null:data.tracking+"px"],["max-width",data.width==null?null:data.width+"%"]]){
-   if(val===null)css.removeProperty(p);else css.setProperty(p,val,"important");
-  }
-  if(editableText[key]&&typeof data.text==="string"&&node.textContent!==data.text){node.textContent=data.text;}
- }
- let chosen=nodeFor(active);if(chosen)mark(chosen);
-}
-function capture(){undo.push(JSON.stringify(draft));if(undo.length>35)undo.shift()}
-function prepareFields(){
- const n=nodeFor(active),d=draft.items[active]||{},st=n&&frame.contentWindow.getComputedStyle(n);
- const defaults={
-  font:Math.round(parseFloat(st?.fontSize)||24),x:0,y:0,
-  top:Math.round(parseFloat(st?.marginTop)||0),
-  line:Math.round((parseFloat(st?.lineHeight)/(parseFloat(st?.fontSize)||20)||1.2)*20)/20,
-  tracking:0,width:100
- };
- for(const k of ["font","x","y","top","line","tracking","width"]){
-  let value=d[k]??defaults[k],c=$(k);if(c){value=clamp(value,Number(c.min),Number(c.max));c.value=value;$(k+"Out").textContent=value+(k==="line"?"×":k==="width"?"%":k==="tracking"?" px":" px");}
- }
- $("copy").disabled=!editableText[active];
- $("textLock").textContent=editableText[active]?"":"(Live-Inhalt geschützt)";
- $("copy").value=editableText[active]?(typeof d.text==="string"?d.text:n?.textContent?.trim()||""):"";
- if(n){mark(n);msg("Ausgewählt: "+(targets.find(t=>t[0]===active)||[])[1])}
- else msg("Bereich ist in der Test-App gerade noch nicht sichtbar.");
-}
-function select(key){active=key;sel.value=key;prepareFields()}
-function keyFromClick(el){
- for(const target of targets){
-  const css=target[2];if(css.includes("::"))continue;
-  try{if(el.closest(css))return target[0]}catch(_){}
- }
- return null;
-}
-function bindFrame(){
- try{frameDoc=frame.contentDocument;if(!frameDoc||!frameDoc.body)throw Error("no document");
- frameDoc.addEventListener("click",function(e){
-  if(!picking)return;
-  const k=keyFromClick(e.target);if(k){e.preventDefault();e.stopImmediatePropagation();select(k)}
- },true);
- frameDoc.addEventListener("pointerdown",function(e){if(!picking)return;if(keyFromClick(e.target)){e.stopImmediatePropagation();e.preventDefault()}},true);
- frame.contentWindow.addEventListener("scroll",function(){const node=nodeFor(active);if(node)mark(node)},{passive:true});
- setTimeout(function(){apply();select(active);applyTheme()},280);
- setTimeout(function(){apply();select(active)},1500);
- setTimeout(function(){apply();select(active)},3500);
- msg("Echte Test-App geladen. Tippe auf einen Bereich.");
- }catch(error){frameDoc=null;msg("Vorschau im iFrame nicht verfügbar. Bitte den Editor direkt auf dar-al-tawhid.de öffnen.")}
-}
-function applyTheme(){
- if(!frameDoc)return;
- const key=$("theme").value;
- frameDoc.documentElement.setAttribute("data-theme",key==="salbei"?"light":key);
- if(key==="salbei")frameDoc.documentElement.setAttribute("data-theme-variant","salbei");
- else frameDoc.documentElement.removeAttribute("data-theme-variant");
-}
-for(const t of targets){const op=document.createElement("option");op.value=t[0];op.textContent=t[1];sel.appendChild(op)}
-try{
- const saved=JSON.parse(localStorage.getItem(STORAGE)||"null");
- if(saved?.version===1&&saved.items&&typeof saved.items==="object"){
-  draft={version:1,items:{}};
-  for(const t of targets){const a=saved.items[t[0]];if(a&&typeof a==="object"){draft.items[t[0]]={};for(const k of ["font","x","y","top","line","tracking","width"]){if(Number.isFinite(a[k]))draft.items[t[0]][k]=a[k]}if(editableText[t[0]]&&typeof a.text==="string")draft.items[t[0]].text=a.text.slice(0,4000)}}
- }
- $("applyLocal").checked=localStorage.getItem(ENABLE)==="1";
-}catch(_){}
-sel.addEventListener("change",()=>select(sel.value));
-for(const k of ["font","x","y","top","line","tracking","width"])$(k).addEventListener("input",function(){
- const d=itemFor(active);if(!busy){capture();busy=true;setTimeout(()=>busy=false,250)}
- d[k]=Number(this.value);$(k+"Out").textContent=this.value+(k==="line"?"×":k==="width"?"%":" px");
- apply();
-});
-$("copy").addEventListener("change",function(){if(!editableText[active])return;capture();itemFor(active).text=this.value.slice(0,4000);apply()});
-$("device").addEventListener("change",function(){canvas.style.width=this.value==="100%"?"100%":Math.min(Number(this.value),1024)+"px"});
-$("theme").addEventListener("change",applyTheme);
-$("pick").addEventListener("click",function(){picking=!picking;this.textContent=picking?"Element wählen":"App bedienen";this.classList.toggle("primary",picking);msg(picking?"Bearbeitungsmodus: Bereich in der Vorschau antippen.":"Bedienmodus: App-Links und Suche sind anklickbar.")});
-$("reload").addEventListener("click",function(){frame.src="/test/index.html?env=staging&dar-editor=1&r="+Date.now()+"#home"});
-$("undo").addEventListener("click",function(){if(!undo.length)return;draft=JSON.parse(undo.pop());apply();prepareFields()});
-$("resetPart").addEventListener("click",function(){capture();delete draft.items[active];if(frameDoc){frame.src="/test/index.html?env=staging&dar-editor=1&r="+Date.now()+"#home"}msg("Element zurückgesetzt.")});
-$("save").addEventListener("click",function(){try{localStorage.setItem(STORAGE,JSON.stringify(draft));msg("Entwurf in diesem Browser gespeichert.")}catch(e){msg("Speichern nicht möglich: Speicherplatz oder Browserrichtlinie.")}});
-$("applyLocal").addEventListener("change",function(){try{localStorage.setItem(STORAGE,JSON.stringify(draft));localStorage.setItem(ENABLE,this.checked?"1":"0");msg(this.checked?"Lokale Test-App-Vorschau aktiviert (nur dieses Gerät).":"Lokale Test-App-Vorschau deaktiviert.")}catch(e){msg("Lokales Speichern fehlgeschlagen.")}});
-$("export").addEventListener("click",function(){
- const json=JSON.stringify({version:1,project:"DAR AL TAWHID TEST V4.7",exportedAt:new Date().toISOString(),items:draft.items},null,2);
- const blob=new Blob([json],{type:"application/json"}),a=document.createElement("a"),url=URL.createObjectURL(blob);
- a.href=url;a.download="dar-test-startseite-entwurf.json";document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
- msg("JSON-Entwurf exportiert.");
-});
-$("importBtn").addEventListener("click",()=>$("importFile").click());
-$("importFile").addEventListener("change",async function(){
- const file=this.files?.[0];if(!file)return;
- try{if(file.size>100000)throw Error("Datei zu groß");
- const data=JSON.parse(await file.text());if(data?.version!==1||!data.items||typeof data.items!=="object")throw Error("Ungültiges Format");
- capture();draft={version:1,items:{}};
- for(const t of targets){const d=data.items[t[0]];if(!d||typeof d!=="object")continue;
-  const clean={};for(const k of ["font","x","y","top","line","tracking","width"]){if(Number.isFinite(d[k]))clean[k]=clamp(d[k],k==="line"?.8:k==="tracking"?-3:k==="x"?-130:k==="y"?-160:k==="top"?-50:k==="width"?30:8,k==="line"?2.2:k==="tracking"?10:k==="x"?130:k==="y"?160:k==="top"?100:k==="width"?100:86)}
-  if(editableText[t[0]]&&typeof d.text==="string")clean.text=d.text.slice(0,4000);draft.items[t[0]]=clean;
- }
- apply();prepareFields();msg("JSON-Entwurf importiert.");
- }catch(e){msg("Import fehlgeschlagen: "+e.message)}finally{this.value=""}
-});
-$("resetAll").addEventListener("click",function(){if(!confirm("Alle lokalen Layout-Anpassungen wirklich zurücksetzen?"))return;draft={version:1,items:{}};undo=[];localStorage.removeItem(STORAGE);localStorage.removeItem(ENABLE);$("applyLocal").checked=false;frame.src="/test/index.html?env=staging&dar-editor=1&r="+Date.now()+"#home";msg("Lokaler Entwurf zurückgesetzt.")});
-frame.addEventListener("load",bindFrame);
-sel.value=active;canvas.style.width="393px";
-})();
-</script>
-</body>
-</html>
+</div>
+<script src="/test/academy/startseiten-studio-v2.js?v=20261019-studio-v2" defer></script>
+</body></html>

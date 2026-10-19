@@ -510,7 +510,8 @@ async function finalizeDarTestHomeV1193(asset) {
   const v47FinalAssets =
     '<link rel="stylesheet" id="darHomeV47CssFinal" href="/test/assets/dar-home-v47-layout.css?v=20261019-v47r2">' +
     '<script id="darHomeV47JsFinal" data-dar-home-v47 src="/test/assets/dar-home-v47-layout.js?v=20261019-v47r2"></script>' +
-    '<script id="darLocalHomeEditorV1" src="/test/assets/dar-test-home-editor-apply-v1.js?v=editor-20261019-1"></script>';
+    '<script id="darLocalHomeEditorV1" src="/test/assets/dar-test-home-editor-apply-v1.js?v=editor-20261019-1"></script>' +
+    '<script id="darLocalHomeStudioV2" src="/test/assets/dar-test-studio-local-v2.js?v=studio-20261019-2"></script>';
   const v47Insert = html.lastIndexOf("</html>");
   if (v47Insert >= 0) html = html.slice(0, v47Insert) + v47FinalAssets + html.slice(v47Insert);
   else html += v47FinalAssets;
