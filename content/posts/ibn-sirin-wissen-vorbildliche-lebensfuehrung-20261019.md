@@ -21,10 +21,8 @@ logo: "logo-black.png"
 status: "published"
 ---
 
-#Wissen #Charakter #Salaf #IbnSirin
-
 🖋️ **Muḥammad ibn Sīrīn** sagte:
 
-„Sie lernten die **𝒗𝒐𝒓𝒃𝒊𝒍𝒅𝒍𝒊𝒄𝒉𝒆 𝑳𝒆𝒃𝒆𝒏𝒔𝒇ü𝒉𝒓𝒖𝒏𝒈** genauso, wie sie das **𝑾𝒊𝒔𝒔𝒆𝒏** lernten.“
+„Sie lernten die **vorbildliche Lebensführung** genauso, wie sie das **Wissen** lernten.“
 
-🌙 **𝐅𝐚𝐳𝐢𝐭:** Wissen allein genügt nicht. Die frühen Generationen legten ebenso großen Wert auf **Charakter und vorbildliches Verhalten**.
+🌙 **Fazit:** Wissen allein genügt nicht. Die frühen Generationen legten ebenso großen Wert auf **Charakter und vorbildliches Verhalten**.
