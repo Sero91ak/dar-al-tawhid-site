@@ -248,18 +248,18 @@ body.heritage-learning.wqa-page .wqa-mini{
 (function(){
 "use strict";
 const questions=[
- {q:"Wem wird die überlieferte Aussage zugeschrieben?",
-  choices:["Muḥammad ibn Sīrīn","Dem Propheten ﷺ","Al-Ḫaṭīb als seinem eigenen Wort"],
-  correct:0,why:"Ibn Sīrīn ist der berichtete Sprecher; al-Ḫaṭīb dokumentiert die Überlieferung."},
- {q:"Was lernten sie laut dem Bericht neben dem Wissen?",
-  choices:["Nur Buchtitel auswendig","Vorbildliche Lebensführung","Ausschließlich Schreiben"],
-  correct:1,why:"Die Aussage nennt al-hady, also gute Führung und vorbildliches Verhalten."},
- {q:"Wie ist die deutsche Aussage auf Q46 gekennzeichnet?",
-  choices:["Als Qurʾānvers","Als wörtlicher prophetischer Ḥadīṯ","Als sinngemäße Wiedergabe"],
-  correct:2,why:"Der deutsche Wortlaut ist eine sinngemäße Übersetzung, kein neues Originalzitat."},
- {q:"Welche Zuschreibung wäre nicht korrekt?",
-  choices:["Ein Wort des Tābiʿī Ibn Sīrīn","Ein Ausspruch des Propheten ﷺ","Eine bei al-Ḫaṭīb dokumentierte Aussage"],
-  correct:1,why:"Die Aussage gehört zu Ibn Sīrīn und ist kein prophetischer Ḥadīṯ."}
+ {q:"Welche beiden Bereiche nennt Ibn Sīrīn als Gegenstand des Lernens?",
+  choices:["Wissen und die Anerkennung durch Menschen","Wissen und vorbildliche Lebensführung","Wissen und die Kunst der öffentlichen Rede"],
+  correct:1,why:"Ibn Sīrīn nennt ausdrücklich al-ʿilm (Wissen) und al-hady (vorbildliche Lebensführung)."},
+ {q:"Was ist in dieser Aussage mit al-hady gemeint?",
+  choices:["Eine bestimmte Methode, Texte abzuschreiben","Die Anzahl der gelernten Überlieferungen","Gute Lebensführung, Haltung und Verhalten"],
+  correct:2,why:"Al-hady bezeichnet hier die gute Führung und das gelebte Verhalten; nicht die Anzahl der gelernten Texte."},
+ {q:"Was zeigt der bei al-Ḫaṭīb anschließende Bericht über das Beobachten von al-Qāsim?",
+  choices:["Auch das Verhalten eines Vorbilds kann bewusst gelernt werden.","Für den Wissenserwerb zählt nur die Anzahl der Bücher.","Gute Lebensführung lässt sich allein durch das Auswendiglernen erreichen."],
+  correct:0,why:"Der Bericht erwähnt, dass Ibn Sīrīn das Verhalten al-Qāsims beobachten ließ. Diese Beobachtung gehört zum Lernen von al-hady."},
+ {q:"Welches Vorgehen entspricht dem Grundgedanken dieser Überlieferung?",
+  choices:["Gute Umgangsformen machen das Lernen religiöser Belege überflüssig.","Wissen erwerben und zugleich das eigene Verhalten verbessern.","Erst nach vollständigem Wissenserwerb mit gutem Verhalten beginnen."],
+  correct:1,why:"Wissen und guter Umgang werden nebeneinander gelernt. Weder ersetzt das Verhalten die Belege noch wird es auf später verschoben."}
 ];
 const byId=id=>document.getElementById(id);
 const panel=byId("quizPanel"),results=byId("resultPanel"),answers=byId("choices");
