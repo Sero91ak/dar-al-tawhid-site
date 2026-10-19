@@ -6,11 +6,17 @@ on:
       - main
     paths:
       - 'q/**'
+      - 'lernen/**'
+      - 'assets/q-source-dar-al-layl.css'
+      - 'assets/learning-heritage.css'
       - 'assets/dar-app-chrome.js'
       - '.github/workflows/check-qsource-standard.yml'
   pull_request:
     paths:
       - 'q/**'
+      - 'lernen/**'
+      - 'assets/q-source-dar-al-layl.css'
+      - 'assets/learning-heritage.css'
       - 'assets/dar-app-chrome.js'
       - '.github/workflows/check-qsource-standard.yml'
   workflow_dispatch:
@@ -35,3 +41,6 @@ jobs:
 
       - name: In-app source navigation regression
         run: node q/_registry/check-source-navigation.mjs
+
+      - name: Q46 single-screen learning and appearance regression
+        run: node q/_registry/check-learning-quiz.cjs
