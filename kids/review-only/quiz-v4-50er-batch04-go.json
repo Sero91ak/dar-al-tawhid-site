@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "scope": "TAWHID_KIDS_V4_EXPLICIT_ONE_TIME_NEXT50_REVIEW_ONLY",
+  "exactBatchId": "KIDS_V4_450_BATCH_04_50",
+  "userRequestedExactly50NewMP3Originals": true,
+  "userRequest": "Arbeite direkt in 50er Schritten. 50 erzeugen, fertigstellen, reinpushen.",
+  "reviewOnly": true,
+  "liveReleaseAuthorized": false,
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "maximumEstimatedCredits": 2600,
+  "zeroCreditAuditEstimatedCredits": 1579.58,
+  "approvedNext50SHA256": "a265ed36f48158a12e5e063a61c09074741f05441d665c3c0a16217ad4a8bc9b",
+  "approvedRegistryBlobSHA": "388b5db419c245673277ebb0652bf866c6123bf6",
+  "approvedPaidLedgerBlobSHA": "aa2f33c688b5eca097d1bc468aec0236a3c26eb7",
+  "previousBatch03OriginalCount": 50,
+  "uniqueNewOriginalsToProduce": 50,
+  "reason": "Use only genuine yet-unpaid V4 original fragments. Complete and import 450 review playback mapping from saved originals, keep public release off.",
+  "mustNotRepurchasePreviouslyPaid": true,
+  "noAutoRetryOnUncertainProviderResult": true,
+  "actualCostAndGenerationMustBeCheckedFromGitHubActions": true
+}
