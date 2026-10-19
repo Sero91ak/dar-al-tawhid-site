@@ -490,7 +490,7 @@
         "kids-quiz-046"
       ],
       "sourceAudioPart": "question",
-      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
+      "status": "IMPORTED_ORIGINAL_MP3_VERIFIED",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -505,7 +505,10 @@
       "providerGenerationDurationSeconds": 1.28,
       "providerStatus": "completed",
       "providerMediaStoredInElevenLabs": true,
-      "originalMP3ImportedIntoGithub": false
+      "originalMP3ImportedIntoGithub": true,
+      "importedMP3SHA256": "3dc9260a2729bf5a6ed60026f385736e1a4b5d0a0dacc2d39ac8a445bb1517c3",
+      "savedURL": "/kids/assets/kids-quiz-audio/v4-connected-flow-original-review/BpifmV2fZsec4HdoTxJT.mp3",
+      "originalMP3Bytes": 38484
     }
   ]
 }

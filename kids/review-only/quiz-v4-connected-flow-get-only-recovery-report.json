@@ -3,7 +3,7 @@
   "requestedOriginals": 1,
   "providerGETsAttempted": 1,
   "downloadedOriginals": 0,
-  "importedOriginals": 0,
+  "importedOriginals": 1,
   "providerHTTP": 402,
   "failedGenerationId": "BpifmV2fZsec4HdoTxJT",
   "newPaidSpeechCalls": 0,
@@ -13,5 +13,8 @@
   "reusedAlreadyPaidGenerationsOnly": true,
   "humanListeningApproved": false,
   "publicReleaseEnabled": false,
-  "blocked": "Provider read-only original download denied; retain paid generation and do not regenerate."
+  "blocked": "Provider read-only original download denied; retain paid generation and do not regenerate.",
+  "signedOriginalGetImported": 1,
+  "signedGetWasZeroCredit": true,
+  "sourceGenerationId": "BpifmV2fZsec4HdoTxJT"
 }
