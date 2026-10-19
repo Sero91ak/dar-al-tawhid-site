@@ -175,75 +175,32 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-041",
+      "questionId": "kids-quiz-046",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 2,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Viel Geld",
-        "Taqwā",
-        "Eine berühmte Familie"
+        "Glücksspiele spielen",
+        "Zakāh geben",
+        "Angeben"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
         "a1",
         "a3"
       ],
-      "originalQuestionAudioSHA256": "158edb64d135235e94f09dd7d993367058b3d52527a85db6b9a8472a62cf1826",
-      "proposedQuestionAudioText": "Was macht einen Menschen bei Allah besonders geehrt? Antwort 1: Viel Geld. Antwort 2: Taqwā. Antwort 3: Eine berühmte Familie. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "f153705bf70f58fcf82ad0576feb6a24168e60d6950fc4e40fb386f7dbc1f176",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Was macht einen Menschen bei Allah besonders geehrt?",
-        "Antwort 1:",
-        "Viel Geld.",
-        "Antwort 2:",
-        "Taqwā.",
-        "Antwort 3:",
-        "Eine berühmte Familie.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 49:13",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-046",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Glücksspiele spielen",
-        "Angeben",
-        "Zakāh geben"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a3",
-        "a1"
-      ],
       "originalQuestionAudioSHA256": "38711dd070a500c87045bb8996b0e7f122bedc48efd7c06dd3e13c830055b9c7",
-      "proposedQuestionAudioText": "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet? Antwort 1: Glücksspiele spielen. Antwort 2: Angeben. Antwort 3: Zakāh geben. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "205d623abd2e8437e4ebeaa25fa41be24f0eae96bf681b3eead9649f1cb2ab5d",
+      "proposedQuestionAudioText": "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet? Antwort 1: Glücksspiele spielen. Antwort 2: Zakāh geben. Antwort 3: Angeben. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "df1b8c12a9542aa0a98c53d2f57e886c4d33e1bf465b8945c528919cc0282a1d",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet?",
         "Antwort 1:",
         "Glücksspiele spielen.",
         "Antwort 2:",
-        "Angeben.",
-        "Antwort 3:",
         "Zakāh geben.",
+        "Antwort 3:",
+        "Angeben.",
         "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
@@ -256,6 +213,49 @@
         240
       ],
       "originalSource": "Qurʾān 2:43",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-041",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 3,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Viel Geld",
+        "Eine berühmte Familie",
+        "Taqwā"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a3",
+        "a1"
+      ],
+      "originalQuestionAudioSHA256": "158edb64d135235e94f09dd7d993367058b3d52527a85db6b9a8472a62cf1826",
+      "proposedQuestionAudioText": "Was macht einen Menschen bei Allah besonders geehrt? Antwort 1: Viel Geld. Antwort 2: Eine berühmte Familie. Antwort 3: Taqwā. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "8cdbd365c3625167743863250b7c3078a167cf63ffcfafb0ab314bdf1dfcdb50",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Was macht einen Menschen bei Allah besonders geehrt?",
+        "Antwort 1:",
+        "Viel Geld.",
+        "Antwort 2:",
+        "Eine berühmte Familie.",
+        "Antwort 3:",
+        "Taqwā.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 49:13",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
