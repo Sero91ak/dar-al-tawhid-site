@@ -9,7 +9,12 @@
 <header class="studio-head">
  <div class="brand"><span class="eyebrow">DĀR AL TAWḤĪD · TEST-ATELIER</span><strong>Visuelles Layout-Studio</strong></div>
  <span class="scope"><span class="dot"></span> Geschützter Designentwurf · kein automatischer Push</span>
- <button id="undo" title="Rückgängig" aria-label="Rückgängig">↶</button><button id="redo" title="Wiederherstellen" aria-label="Wiederherstellen">↷</button>
+ <button id="undo" title="Schritt zurück – ohne Neuladen" aria-label="Rückgängig">↶</button><button id="redo" title="Schritt vor – ohne Neuladen" aria-label="Wiederherstellen">↷</button>
+ <label class="history-label" for="historyPosition">Verlauf</label>
+ <select id="historyPosition" class="history-picker" aria-label="Bearbeitungsstand auswählen"><option value="0">Aktueller Stand</option></select>
+ <button id="savePoint" title="Aktuellen Stand als Zwischenstand sichern">Stand sichern</button>
+ <select id="checkpointList" class="history-picker" aria-label="Gespeicherter Zwischenstand"><option value="">Zwischenstand wählen</option></select>
+ <button id="restorePoint" title="Gewählten Zwischenstand wiederherstellen">Stand laden</button>
  <button id="save" class="gold">Entwurf sichern</button><a class="back" href="/test/index.html#home" target="_blank" rel="noopener">Test-App ↗</a>
 </header>
 <aside class="tools" aria-label="Werkzeuggruppen">
@@ -35,6 +40,7 @@
    <button data-mode="word">Wort</button>
    <button data-mode="reflow">Umordnen</button>
    <button data-mode="app">Bedienen</button>
+   <span class="mode-indicator" id="editIndicator">Bearbeiten aktiv · App-Schaltflächen gesperrt</span>
   </div>
   <div class="stage-right">
    <select id="device" title="Gerät und Breite" aria-label="Gerätebreite">
@@ -137,7 +143,7 @@
   <section data-panel="layout" class="panel">
    <label>Layout-Befehl (z. B. „Schrift 28“, „nach rechts 20“, „Lücke schließen“) <input id="layoutCommand" type="text" placeholder="Befehl eingeben …"></label>
    <button id="executeCommand">Befehl ausführen</button>
-   <h3>Position &amp; Dimension</h3><p>Element antippen, gedrückt halten und verschieben. Mit dem Griff unten rechts skalieren.</p>
+   <h3>Position &amp; Dimension</h3><p>Element antippen, dann an einem der acht Griffe skalieren (Ecken und Seiten). Bildproportionen bleiben erhalten. Bearbeiten sperrt App-Buttons; nur „Bedienen“ aktiviert sie wieder.</p>
    <div class="field-row">
     <label>Links / rechts<input data-prop="x" type="range" min="-450" max="450" step="1" value="0"><output data-value="x"></output></label>
     <label>Hoch / runter<input data-prop="y" type="range" min="-600" max="600" step="1" value="0"><output data-value="y"></output></label>
@@ -165,12 +171,21 @@
    <button id="cycleTheme">Nächstes Erscheinungsbild →</button>
   </section>
   <section data-panel="images" class="panel">
-   <h3>Bilder &amp; Hintergründe</h3><label>Datei von iPad / Fotos auswählen<input id="imageFile" type="file" accept="image/*"></label>
+   <h3>Bilder &amp; Hintergründe</h3>
+   <button id="quickBackground" class="gold">+ Bild sofort als Hintergrund wählen</button>
+   <label>Datei von iPad / Fotos auswählen<input id="imageFile" type="file" accept="image/*"></label>
    <label>Oder Bildadresse (HTTPS)<input id="imageUrl" type="url" placeholder="https://…"></label>
    <div class="btn-grid"><button id="imageOverlay">Bild als Ebene</button><button id="imageBackground">Bild als Hintergrund</button></div>
    <label>Darstellung<select id="imageFit"><option value="cover">Fläche füllen</option><option value="contain">Ganz anzeigen</option></select></label>
+   <label>Bildausschnitt vergrößern (ohne Verzerrung)<input id="bgScale" type="range" min="100" max="250" step="5" value="100"><output id="bgScaleOut">100%</output></label>
+   <div class="field-row">
+    <label>Ausschnitt links/rechts<input id="bgX" type="range" min="0" max="100" value="50"><output id="bgXOut">50%</output></label>
+    <label>Ausschnitt oben/unten<input id="bgY" type="range" min="0" max="100" value="50"><output id="bgYOut">50%</output></label>
+   </div>
+   <label class="check"><input id="pinBackground" type="checkbox">Hintergrund oben fixieren, Inhalte scrollen darunter</label>
    <label>Bild-Deckkraft<input id="imageOpacity" type="range" min=".1" max="1" step=".05" value="1"><output id="imageOpacityOut">100%</output></label>
    <button id="clearImage" class="danger">Bild aus Entwurf entfernen</button>
+   <p class="hint">Die Bildproportionen bleiben beim Ziehen erhalten. Für große Darstellungen wird nicht künstlich hochskaliert; Hintergrund-Cropping erfolgt über „Ausschnitt“.</p>
    <p class="hint">Lokale Bilder werden komprimiert. Du kannst sie als Ebene frei ziehen oder als Hintergrund eines Abschnitts verwenden. Die App erhält sie erst nach einer separaten Veröffentlichung.</p>
   </section>
   <section data-panel="layers" class="panel">

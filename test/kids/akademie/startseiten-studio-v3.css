@@ -176,3 +176,41 @@ hr{border:0;border-top:1px solid var(--line);margin:19px 0}
  .stage-footer{min-height:43px}
  .transfer-panel{position:sticky;bottom:0;left:auto;right:auto;margin:6px;z-index:10}
 }
+
+
+/* Visual Studio V4 – editing-safe toolbar, history and scalable backgrounds */
+.studio{grid-template-rows:auto minmax(0,1fr)}
+.studio-head{min-height:76px;height:auto;flex-wrap:wrap;row-gap:8px;padding:10px 15px;align-content:center}
+.studio-head .brand{flex:1 1 190px;min-width:160px}
+.studio-head .scope{margin:0 4px 0 auto}
+.studio-head .history-label{font-size:11px;color:var(--muted);white-space:nowrap}
+.studio-head .history-picker{min-width:0;width:clamp(105px,10vw,195px);max-width:200px;min-height:38px;border:1px solid var(--line);background:#173139;color:var(--fg);font-size:11px;text-overflow:ellipsis}
+.studio-head #savePoint,.studio-head #restorePoint{min-height:38px;white-space:nowrap;font-size:11px}
+.studio-head #undo,.studio-head #redo{font-size:19px;min-width:38px;touch-action:manipulation}
+.studio-head button:disabled{opacity:.36}
+.stage-toolbar .mode-indicator{display:inline-flex;align-items:center;padding:7px 9px;min-height:32px;border:1px solid #716451;border-radius:9px;color:#edd9b2;background:#293c39;font-size:10px;letter-spacing:.01em;white-space:normal}
+.stage-toolbar .mode-indicator.is-live{background:#203b34;border-color:#4d7660;color:#c8ebd6}
+.panel #quickBackground{display:block;width:100%;min-height:44px;text-align:center;margin:6px 0 13px}
+.panel [id^=bg][type=range]{accent-color:var(--gold)}
+@media(min-width:1150px){
+ .studio-head .history-picker{width:170px}
+ .studio-head #savePoint,.studio-head #restorePoint{font-size:12px}
+}
+@media(max-width:1160px){
+ .studio-head .scope{display:none}
+ .studio-head .history-label{display:none}
+ .studio-head .history-picker{width:125px}
+}
+@media(max-width:750px){
+ .studio{grid-template-rows:auto auto minmax(420px,76dvh) auto}
+ .studio-head{position:sticky;top:0;row-gap:6px;padding:8px}
+ .studio-head .brand{flex:1 1 100%;min-width:0}
+ .studio-head .history-picker{flex:1 1 130px;width:auto;max-width:none}
+ .studio-head #savePoint,.studio-head #restorePoint{flex:1 0 97px}
+ .studio-head #undo,.studio-head #redo{min-width:44px}
+ .stage-toolbar .mode-indicator{width:100%;font-size:10px}
+}
+@media(max-width:380px){
+ .studio-head .history-picker{flex-basis:107px}
+ .studio-head #savePoint,.studio-head #restorePoint{font-size:10px;flex-basis:83px;padding:6px}
+}

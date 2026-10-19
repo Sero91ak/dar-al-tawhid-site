@@ -75,6 +75,9 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Editor V4 – Werkzeuge und Rückgängig prüfen
+        run: node scripts/check-layout-studio-v4.cjs
+
       - name: Test-App Staging aus test-library-canonical übernehmen
         run: |
           git fetch origin test-library-canonical
