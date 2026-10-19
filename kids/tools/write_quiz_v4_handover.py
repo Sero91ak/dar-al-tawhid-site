@@ -84,16 +84,25 @@ def main():
             "charged stage1 voice originals lack unique provider receipts")
     usage_file=ROOT/"kids/data/quiz-v4-older-stage1-usage.json"
     stage1_usage=read("kids/data/quiz-v4-older-stage1-usage.json") if usage_file.is_file() else None
+    unconfirmed_journal=[]
     if stage1_usage:
         require(stage1_usage.get("batchId")=="KIDS_V4_OLDER_STAGE1_EXACT_65"
                 and sum(int(run["newOriginalsThisRun"]) for run in stage1_usage["runs"])
                 ==len(stage1_paid),
                 "stage1 paid originals and batch usage counts disagree")
         journal=stage1_usage.get("requestJournal",{}).get("entries",[])
-        require(len(journal)==len(stage1_paid)
-                and {x["providerRequestId"] for x in journal
-                     if x.get("status")=="ORIGINAL_MP3_SAVED"}==set(stage1_ids),
-                "paid V4 stage1 originals and protected provider request journal disagree")
+        saved_journal=[x for x in journal if x.get("status")=="ORIGINAL_MP3_SAVED"]
+        unconfirmed_journal=[x for x in journal if x.get("status")=="REQUEST_STARTED_UNCONFIRMED"]
+        require(len(journal)==len(saved_journal)+len(unconfirmed_journal)
+                and len(saved_journal)==len(stage1_paid)
+                and {x["providerRequestId"] for x in saved_journal}==set(stage1_ids),
+                "saved paid originals or unmatched provider request journal disagree")
+        require(len({x.get("textSHA256") for x in journal})==len(journal)
+                and not {x.get("textSHA256") for x in unconfirmed_journal}.intersection(
+                    {r["textSha256"] for r in stage1_paid})
+                and all(not x.get("providerRequestId") and not x.get("mp3SHA256")
+                        for x in unconfirmed_journal),
+                "unconfirmed original attempts must remain separate and blocked from new paid requests")
     else:
         require(not stage1_paid,"paid stage1 takes exist without durable usage file")
     stage1_exact=sum(float(r["exactBilledCredits"]) for r in stage1_paid
@@ -246,6 +255,8 @@ def main():
         "olderStage1PaidActualCreditsVerified":round(stage1_exact,2) if stage1_exact_confirmed else None,
         "olderStage1ExactProviderBillingNotYetReconciled":not stage1_exact_confirmed,
         "olderStage1PaidOriginalReceiptIdsRecorded":len(stage1_ids),
+        "olderStage1UnconfirmedPreviousPaidRequestsQuarantined":len(unconfirmed_journal),
+        "olderStage1UnconfirmedTextSHA256":[x["textSHA256"] for x in unconfirmed_journal],
         "olderStage1RealPaidOriginalIntegrityAudit":"kids/tools/audit_quiz_v4_stage1_paid_audio_integrity.py",
         "olderStage1RealPaidOriginalIntegrityWorkflow":".github/workflows/kids-v4-stage1-paid-original-integrity.yml",
         "olderStage1InternalSourceAnswerAuditItems":stage_source["totalQuestions"] if stage_source else 0,
@@ -290,6 +301,7 @@ def main():
         "- Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **"+str(len(prior))+" importiert**, **"+str(count)+" noch ohne heruntergeladene Original-MP3-Datei**.",
         "- Zusätzlich im Originalregister: **"+str(len(saved["textClips"]))+" Textschlüssel**, davon **"+str(len(charged["rows"]))+" direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.",
         "- Erste neue V4-Aufnahmerunde für ältere Kinder: **"+str(details["olderStage1PaidOriginalsAlreadyRecorded"])+" ECHTE Original-MP3s** mit **"+str(details["olderStage1PaidOriginalReceiptIdsRecorded"])+" eindeutigen Anbieter-Anfragebelegen**; dafür geschätzte **"+str(details["olderStage1PaidOriginalEstimatedCreditsAlreadyUsed"])+" Credits**. **Tatsächliche Provider-Abbuchung bisher NICHT abgeglichen**.",
+        "- ACHTUNG: **"+str(details["olderStage1UnconfirmedPreviousPaidRequestsQuarantined"])+" ungeklärte(r) V4-POST-Versuch(e)** sind ohne bestätigte MP3 gespeichert und von neuen kostenpflichtigen Anfragen AUSGESCHLOSSEN. Zuerst Originalbytes/Kostenbeleg klären, keinesfalls den betreffenden Text nochmals synthetisieren.",
         "- Kosten ausschließlich für den kostenlosen Import-/QA-/Berichtslauf: **0 neue ElevenLabs-Sprachcredits**. Diese Null gilt NICHT für die bereits kostenpflichtig generierten V4-Originalaufnahmen.",
         "- Noch geschätzter Bedarf für alle 450 nach gegenwärtigem Plan: **"+str(plan["estimatedAdditionalCreditsForFullSelected450"])+" Credits**; **keine bestätigte Rechnungsabbuchung** (Ledger enthält Schätzwerte).",
         "- Menschliche Aussprache-/Hörfreigabe: **0**. Freigabeschalter: **aus**. Kein Live-Push und kein Merge.",
