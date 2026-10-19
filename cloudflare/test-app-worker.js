@@ -508,11 +508,19 @@ async function finalizeDarTestHomeV1193(asset) {
   // The older JS-only loader could be cached and cannot guarantee these assets.
   html = html.replace(/<link\b[^>]*\bid=["']darHomeV47CssFinal["'][^>]*>\s*/gi, "");
   html = html.replace(/<script\b[^>]*\bid=["']darHomeV47JsFinal["'][^>]*><\/script>\s*/gi, "");
+  // V4.8: adult Test Home only — layout polish and fuzzy multi-source search.
+  // Do not change the bottom navigation, prayer engine, KIDS or live visitor.
+  html = html.replace(/<link\b[^>]*\bid=["']darHomeV48Polish["'][^>]*>\s*/gi, "");
+  html = html.replace(/<script\b[^>]*\bid=["']darSearchV48Core["'][^>]*><\/script>\s*/gi, "");
+  html = html.replace(/<script\b[^>]*\bid=["']darSearchV48Ui["'][^>]*><\/script>\s*/gi, "");
   const v47FinalAssets =
     '<link rel="stylesheet" id="darHomeV47CssFinal" href="/test/assets/dar-home-v47-layout.css?v=20261019-v47r2">' +
     '<script id="darHomeV47JsFinal" data-dar-home-v47 src="/test/assets/dar-home-v47-layout.js?v=20261019-v47r2"></script>' +
     '<script id="darLocalHomeEditorV1" src="/test/assets/dar-test-home-editor-apply-v1.js?v=editor-20261019-1"></script>' +
-    '<script id="darLocalHomeStudioV2" src="/test/assets/dar-test-studio-local-v2.js?v=studio-20261019-3"></script>';
+    '<script id="darLocalHomeStudioV2" src="/test/assets/dar-test-studio-local-v2.js?v=studio-20261019-3"></script>' +
+    '<link rel="stylesheet" id="darHomeV48Polish" href="/test/assets/dar-home-v48-polish.css?v=20261019-48-1">' +
+    '<script id="darSearchV48Core" src="/test/assets/dar-smart-search-core-v48.js?v=20261019-48-1"></script>' +
+    '<script id="darSearchV48Ui" src="/test/assets/dar-smart-search-ui-v48.js?v=20261019-48-1"></script>';
   const v47Insert = html.lastIndexOf("</html>");
   if (v47Insert >= 0) html = html.slice(0, v47Insert) + v47FinalAssets + html.slice(v47Insert);
   else html += v47FinalAssets;
