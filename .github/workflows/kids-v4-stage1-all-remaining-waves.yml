@@ -43,8 +43,23 @@ jobs:
           sha=[h for w in waves for h in w["exactTextSHA256"]]
           assert p["modelId"]=="eleven_v4" and p["voiceId"]=="DkU7j9uO4ZEtLD2iRZSH"
           assert len(sha)==len(set(sha))==p["unrecordedOriginals"]
-          assert p["alreadyStoredStageOriginals"]+p["reservedFlowOriginalsNotYetInGithub"]+p["newOriginalsEligibleForSeparatePaidApproval"]==65
-          assert p["totalStillMissingOriginalMP3s"]==p["reservedFlowOriginalsNotYetInGithub"]+p["unrecordedOriginals"]
+          assert (
+              p["alreadyStoredStageOriginals"]
+              +p["reservedFlowOriginalsNotYetInGithub"]
+              +p["uncertainPreviousPaidRequestsQuarantined"]
+              +p["newOriginalsEligibleForSeparatePaidApproval"]==65
+          ), 'One of 65 exact stage1 original texts was omitted or double counted'
+          assert p["totalStillMissingOriginalMP3s"]==(
+              p["reservedFlowOriginalsNotYetInGithub"]
+              +p["uncertainPreviousPaidRequestsQuarantined"]
+              +p["unrecordedOriginals"]
+          ), 'Quarantined previously charged original omitted from missing audio count'
+          assert p["mustNotRebuyUncertainOriginals"] is True
+          assert p["historyOrBackupRecoveryRequiredForUncertain"]==(
+              p["uncertainPreviousPaidRequestsQuarantined"]>0
+          )
+          assert len(p["uncertainRequestExactTextSHA256"])==p["uncertainPreviousPaidRequestsQuarantined"]
+          assert not set(sha).intersection(p["uncertainRequestExactTextSHA256"]), 'Unconfirmed previous POST would be bought twice'
           assert p["newOriginalsEligibleForSeparatePaidApproval"]==len(sha)
           assert p["reservedFlowTakesMustNotBeRegenerated"] and (
               p["providerStatusReconciliationRequiredForReserved"]==
