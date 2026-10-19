@@ -13,6 +13,7 @@ from collections import Counter
 from pathlib import Path
 
 from quiz_v4_first150_offline_join import assemble, hashfile, probe, source_mp3
+from quiz_v4_quarantine import quarantined_originals
 
 ROOT = Path(__file__).resolve().parents[2]
 PLAN = ROOT / "kids/data/quiz-v4-curated-450-production-review.json"
@@ -58,8 +59,13 @@ def main():
         if sum(r["ageBand"] == band for r in plan["recipes"]) != 150:
             raise RuntimeError("Exactly 150 curated questions per age band required")
 
-    originals = registry["textClips"]
-    generation = registry["generationClips"]
+    # Keep paid original bytes and receipts, but reject the three recordings
+    # made without the owner's pronunciation dictionary from ANY quiz preview.
+    blocked_texts,blocked_generations=quarantined_originals(ROOT)
+    originals={text:audio for text,audio in registry["textClips"].items()
+               if text not in blocked_texts}
+    generation={gid:audio for gid,audio in registry["generationClips"].items()
+                if gid not in blocked_generations}
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     # Strict source audio verification is cached only within this invocation.
     verified_source = {}
