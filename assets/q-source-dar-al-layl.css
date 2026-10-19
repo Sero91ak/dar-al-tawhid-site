@@ -576,3 +576,43 @@ body.qsource-body[data-theme="light"]{
   border-color:var(--q-gold-deep,#dfba75);
 }
 @media(max-width:390px){.qsource-learning{padding:14px 15px}}
+
+/* QSOURCE_LEARNING_CONTRAST_V2
+   Explicit appearance wins over iOS system palette and native iframe theme.
+   Do not inherit the alternate mode's q-gold-soft/q-text-soft on learning CTA. */
+:root[data-q-theme="dark"] .qsource-learning,
+:root[data-theme="dark"] .qsource-learning {
+  background:linear-gradient(120deg,#203127,#16241e)!important;
+  color:#fff3dc!important;border-color:#a58a54!important;
+  box-shadow:inset 0 1px 0 #e4c99125;
+}
+:root[data-q-theme="dark"] .qsource-learning strong,
+:root[data-theme="dark"] .qsource-learning strong {
+  color:#f7dea9!important;
+}
+:root[data-q-theme="dark"] .qsource-learning span,
+:root[data-theme="dark"] .qsource-learning span {
+  color:#e0decf!important;
+}
+:root[data-q-theme="dark"] .qsource-learning strong span,
+:root[data-theme="dark"] .qsource-learning strong span {
+  color:#f7dea9!important;
+}
+:root[data-q-theme="light"] .qsource-learning,
+:root[data-theme="light"] .qsource-learning {
+  background:linear-gradient(130deg,#fffaf0,#f0e8d8)!important;
+  color:#243a2c!important;border-color:#a99061!important;
+  box-shadow:inset 0 1px 0 #fff;
+}
+:root[data-q-theme="light"] .qsource-learning strong,
+:root[data-theme="light"] .qsource-learning strong {
+  color:#55391a!important;
+}
+:root[data-q-theme="light"] .qsource-learning span,
+:root[data-theme="light"] .qsource-learning span {
+  color:#3b5142!important;
+}
+:root[data-q-theme="light"] .qsource-learning strong span,
+:root[data-theme="light"] .qsource-learning strong span {
+  color:#55391a!important;
+}
