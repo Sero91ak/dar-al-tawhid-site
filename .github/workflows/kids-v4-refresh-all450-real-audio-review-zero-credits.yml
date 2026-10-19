@@ -42,6 +42,15 @@ jobs:
           assert h['authorizedNewOriginalsBeforeHearing']==1
           print('PASS: review only, no paid generation, retain all master MP3 identities')
           PY
+      - name: Install native MP3 decoder and composer (no TTS, no API credentials)
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null || ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update -qq
+            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+          fi
+          ffprobe -version | head -n 1
+          ffmpeg -version | head -n 1
       - name: Validate all currently paid genuine originals (including pilot)
         run: |
           set -euo pipefail
