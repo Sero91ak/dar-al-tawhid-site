@@ -11,6 +11,7 @@ import hashlib,json,subprocess,tempfile
 from collections import Counter
 from pathlib import Path
 from import_quiz_v4_prepaid_flow_originals import original_metadata
+from quiz_v4_quarantine import quarantined_originals
 
 ROOT=Path(__file__).resolve().parents[2]
 PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
@@ -87,19 +88,22 @@ def main():
     plan,registry,old=map(load,(PLAN,REG,PAID))
     chosen=[r for r in plan["recipes"] if r["ageBand"]=="4-6"]
     if len(chosen)!=150:raise RuntimeError("Exactly 150 first-age recipes required")
-    original=registry["textClips"];paid_known={q["questionId"]:q for q in old["items"]}
+    blocked_texts,blocked_generations=quarantined_originals(ROOT)
+    original={text:media for text,media in registry["textClips"].items()
+              if text not in blocked_texts}
+    paid_known={q["questionId"]:q for q in old["items"]}
     if len(old["items"])!=20:raise RuntimeError("Previously paid 20 originals disappeared")
     all_paid_ids={take["generationId"] for q in old["items"] for take in q["recordings"]}
     if len(all_paid_ids)!=56:
         raise RuntimeError("Previously paid original generation ledger must contain 56 unique IDs")
-    imported_paid_ids=set(registry.get("generationClips") or {})
+    imported_paid_ids=set(registry.get("generationClips") or {})-blocked_generations
     if imported_paid_ids-all_paid_ids:
         raise RuntimeError("Registry contains an unknown previously paid generation ID")
     missing_all_paid_ids=sorted(all_paid_ids-imported_paid_ids)
     paid_receipts=original_metadata()
     if set(paid_receipts)!=all_paid_ids:
         raise RuntimeError("Original paid MP3 receipt IDs and production plan diverged")
-    hypothetical_original_texts=set(original)|{paid_receipts[gid]["text"] for gid in missing_all_paid_ids}
+    hypothetical_original_texts=(set(original)|{paid_receipts[gid]["text"] for gid in missing_all_paid_ids})-blocked_texts
     OUT.mkdir(parents=True,exist_ok=True)
     text_audio={}
     missing=set()
@@ -119,7 +123,7 @@ def main():
             part=q[kind];text=part["text"]
             if part["mode"]=="existing-paid-exact":
                 gid=part["generationId"]
-                imported=(registry.get("generationClips") or {}).get(gid)
+                imported=(registry.get("generationClips") or {}).get(gid) if gid not in blocked_generations else None
                 if imported:
                     genuine=source_mp3(imported)
                     if text not in text_audio:
