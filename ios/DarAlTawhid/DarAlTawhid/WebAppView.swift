@@ -1345,6 +1345,20 @@ struct WebAppView: UIViewRepresentable {
                 }
               }catch(e){}
               function patch(){
+                // Keep GPS/manual location, prayer times and notification settings
+                // synchronized with Swift whenever the web app saves changes.
+                if(typeof setPrayerSettings==="function"&&!window.__darIosPrayerSettingsSyncV1){
+                  window.__darIosPrayerSettingsSyncV1=true;
+                  var originalSetPrayerSettings=setPrayerSettings;
+                  setPrayerSettings=function(){
+                    var updated=originalSetPrayerSettings.apply(this,arguments);
+                    try{
+                      var full=typeof getPrayerSettings==="function"?getPrayerSettings():updated;
+                      webkit.messageHandlers.darPushSettings.postMessage(full);
+                    }catch(e){}
+                    return updated;
+                  };
+                }
                 if(typeof readOneSignalPushSubscriptionState==="function"){
                   readOneSignalPushSubscriptionState=function(){
                     return {subscriptionId:window.DAR_IOS_ONESIGNAL_ID||"",token:window.DAR_IOS_PUSH_TOKEN||"",optedIn:!!window.DAR_IOS_ONESIGNAL_ID,ready:!!window.DAR_IOS_ONESIGNAL_ID};
