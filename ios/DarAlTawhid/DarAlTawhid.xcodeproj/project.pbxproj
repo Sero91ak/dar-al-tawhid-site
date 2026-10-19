@@ -36,6 +36,7 @@
 		A2000000000000000000000C /* DarWidgetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000016 /* DarWidgetViews.swift */; };
 		A2000000000000000000000D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000017 /* PrivacyInfo.xcprivacy */; };
 		A2000000000000000000000E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A20000000000000000000018 /* Assets.xcassets */; };
+		D46100000000000000000001 /* DarNativePermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46100000000000000000011 /* DarNativePermissions.swift */; };
 		A40000000000000000000001 /* DarPushNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40000000000000000000011 /* DarPushNotifications.swift */; };
 		A70000000000000000000001 /* DarHaptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000011 /* DarHaptics.swift */; };
 		A70000000000000000000002 /* DarAppIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A70000000000000000000012 /* DarAppIntents.swift */; };
@@ -196,6 +197,7 @@
 		A30000000000000000000015 /* DarDailyContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarDailyContent.swift; sourceTree = "<group>"; };
 		A30000000000000000000016 /* DarWidgetTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetTheme.swift; sourceTree = "<group>"; };
 		A30000000000000000000017 /* DarWidgetRemote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarWidgetRemote.swift; sourceTree = "<group>"; };
+		D46100000000000000000011 /* DarNativePermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarNativePermissions.swift; sourceTree = "<group>"; };
 		A40000000000000000000011 /* DarPushNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPushNotifications.swift; sourceTree = "<group>"; };
 		A70000000000000000000011 /* DarHaptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarHaptics.swift; sourceTree = "<group>"; };
 		A70000000000000000000012 /* DarAppIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarAppIntents.swift; sourceTree = "<group>"; };
@@ -336,6 +338,7 @@
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000011 /* DarAlTawhidApp.swift */,
+				D46100000000000000000011 /* DarNativePermissions.swift */,
 				A40000000000000000000011 /* DarPushNotifications.swift */,
 				A70000000000000000000011 /* DarHaptics.swift */,
 				A70000000000000000000014 /* DarAppShortcuts.swift */,
@@ -691,6 +694,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A10000000000000000000001 /* DarAlTawhidApp.swift in Sources */,
+				D46100000000000000000001 /* DarNativePermissions.swift in Sources */,
 				A40000000000000000000001 /* DarPushNotifications.swift in Sources */,
 				A70000000000000000000001 /* DarHaptics.swift in Sources */,
 				A90000000000000000000001 /* DarAppIcons.swift in Sources */,
