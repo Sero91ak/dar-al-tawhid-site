@@ -372,7 +372,18 @@ def main():
         old_usage=read(USAGE) if USAGE.is_file() else {"runs":[]}
         check(not any(x.get("isSingleDictionaryPilot") is True for x in old_usage.get("runs",[])),
               "one-time owner pilot already billed; hearing QA required before new credits")
-    batch_to_record=selected[:1] if sample_only else selected
+    # The ONE hearing pilot must actually exercise the owner's canonical
+    # Qurʾān pronunciation rule, not a generic German answer like "Das Gebet".
+    # Choose only within the SAME already-fingerprinted, genuinely new ten
+    # original phrases; all prior paid/quarantined texts remain protected.
+    if sample_only:
+        eligible_pilot=[x for x in selected
+                        if "Qurʾān" in x["spokenText"] and "Wuḍūʾ" in x["spokenText"]]
+        check(len(eligible_pilot)==1,
+              "Qurʾān/Wuḍūʾ new exact V4 original missing from approved SHA sequence")
+        batch_to_record=eligible_pilot
+    else:
+        batch_to_record=selected
     if not sample_only:
         check(hold.get("humanListeningQualityGateReleased") is True,
               "V4 first correct dictionary pilot must pass listening QA before multi-take spending")
