@@ -763,7 +763,7 @@ html body.is-settings-route #appView .dar-la-switch input:disabled { cursor:not-
 html body.is-settings-route #appView .dar-la-switch input:disabled + .dar-la-track { opacity:.44; }
 html body.is-settings-route #appView .dar-la-system-link {
   border:0;background:transparent;color:var(--dsh-accent);
-  font:600 11px/1.3 inherit;text-align:left;text-decoration:underline;
+  font-size:11px;font-weight:600;line-height:1.3;font-family:inherit;text-align:left;text-decoration:underline;
   padding:3px 0;min-height:28px;cursor:pointer;
 }
 html body.is-settings-route #appView .dar-la-system-link[hidden] {display:none!important;}
