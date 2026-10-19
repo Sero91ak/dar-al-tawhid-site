@@ -1,0 +1,105 @@
+{
+  "schemaVersion": 1,
+  "scope": "KIDS_V4_OLDER_STAGE1_NEXT_EXACT_TEN_PROVIDER_COST_ESTIMATE_ONLY",
+  "checkedOn": "2026-10-19",
+  "reviewOnly": true,
+  "published": false,
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "verifiedExistingMasterVoiceName": "Serhat Abu Malik – Master",
+  "sourceAudit": "kids/review-only/quiz-v4-older-stage1-next-recording-batch.json",
+  "batchFingerprintSHA256": "fd8c0be4c0e54932f7e4e43ab0f7bb864cd2e24173740e505c28073d3ba76a09",
+  "generatedBy": "ElevenLabs connected estimate_only calls for one variation per exact text; no generation request started",
+  "sourceTextCount": 65,
+  "alreadySaved": 25,
+  "reservedOrSubmittedNotToRebuy": 8,
+  "previousRequestUnconfirmedNotToRebuy": 1,
+  "genuinelyNewEligible": 31,
+  "firstWaveLength": 10,
+  "remainingWavesCount": 4,
+  "firstWaveCouldCompleteQuestionIds": [
+    "kids-quiz-046",
+    "kids-quiz-520"
+  ],
+  "estimatedCreditsProvider": 237.42,
+  "estimatedCreditsLocalPlan": 237.42,
+  "differenceCreditsRoundedToCents": 0,
+  "estimates": [
+    {
+      "item": 1,
+      "spokenTextSHA256": "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
+      "spokenText": "Glücksspiele spielen.",
+      "providerEstimatedCredits": 20.3504,
+      "estimateOnly": true
+    },
+    {
+      "item": 2,
+      "spokenTextSHA256": "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
+      "spokenText": "Angeben.",
+      "providerEstimatedCredits": 7.7525,
+      "estimateOnly": true
+    },
+    {
+      "item": 3,
+      "spokenTextSHA256": "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30",
+      "spokenText": "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam.",
+      "providerEstimatedCredits": 62.0202,
+      "estimateOnly": true
+    },
+    {
+      "item": 4,
+      "spokenTextSHA256": "084389eb9e1a1835b65ced759ed2061ab1205a1c4d04c94e50fd3123ddfa2ab0",
+      "spokenText": "Welche zwei Dinge verneint Āyat al-Kursī für Allah?",
+      "providerEstimatedCredits": 49.4224,
+      "estimateOnly": true
+    },
+    {
+      "item": 5,
+      "spokenTextSHA256": "26c5c88b086fd686bbd8019e40b5af7c0fbf099839ff30a826ea760e7b75494c",
+      "spokenText": "Hören und Sehen.",
+      "providerEstimatedCredits": 15.5051,
+      "estimateOnly": true
+    },
+    {
+      "item": 6,
+      "spokenTextSHA256": "c84dc49dbd4b99ce6ce415deae19420367435839225e54a4ca2499dbce19c144",
+      "spokenText": "Schlummer und Schlaf.",
+      "providerEstimatedCredits": 20.3504,
+      "estimateOnly": true
+    },
+    {
+      "item": 7,
+      "spokenTextSHA256": "dc6ecad04fc7acbebed8fa7d3143de39cc72d685360a327bb92c7509de6a34c1",
+      "spokenText": "Wissen und Macht.",
+      "providerEstimatedCredits": 16.4741,
+      "estimateOnly": true
+    },
+    {
+      "item": 8,
+      "spokenTextSHA256": "708b9bca04007bc28b4548bdf8f1e9c295c352cff409f728ec219416a4c7117e",
+      "spokenText": "Das Gebet.",
+      "providerEstimatedCredits": 9.6907,
+      "estimateOnly": true
+    },
+    {
+      "item": 9,
+      "spokenTextSHA256": "4c99e2362f9ca1835d1bfb8439629d7ae500e0a12c0b711f65f678b4000f2e34",
+      "spokenText": "Ein Glücksbringer.",
+      "providerEstimatedCredits": 17.4432,
+      "estimateOnly": true
+    },
+    {
+      "item": 10,
+      "spokenTextSHA256": "36d6dc925641e77b0f02539d3ec1be42c1d49a365e620fca5c96825e4bfa7701",
+      "spokenText": "Die eigene Meinung.",
+      "providerEstimatedCredits": 18.4123,
+      "estimateOnly": true
+    }
+  ],
+  "noTtsRequestsSent": true,
+  "newPaidAudioFilesCreated": 0,
+  "elevenLabsCreditsChargedByThisPreflight": 0,
+  "actualInvoiceVerified": false,
+  "paidWorkflowDispatched": false,
+  "note": "This snapshot only checks cost estimation for the immutable next batch; not proof of payment, MP3 bytes, pronunciation, or quiz release. Any new recording requires existing exact-hash batch guard, manual GitHub Actions workflow dispatch, secure MP3 receipt and playback QA. The nine historical prepaid originals, eight protected flow entries, and uncertain previous POST must never be repurchased."
+}
