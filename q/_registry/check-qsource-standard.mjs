@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', '..');
 const qRoot = path.join(root, 'q');
 const minStrict = 43;
+const minCompleteNavigation = 46; // Q46 and newer require real four-icon social links and a working, related learning module.
 const fail = [];
 const warn = [];
 const attr = (tag, key) => {
@@ -123,6 +124,48 @@ for (const n of files) {
     if (href.includes('#:~:text=') || /#page=[1-9]\d*/i.test(href)) hasMarkedEvidence = true;
     if (n >= minStrict && !permitted(url.hostname))
       fail.push(label + 'neue externe Nachweisdomain nicht freigegeben: ' + url.hostname);
+  }
+  // SOURCE_CARD_FOOTER_AND_LEARNING_GATE_V1
+  // Checking only the nav container used to pass pages with a single homepage
+  // link; verify every required icon destination instead.
+  if (n >= minCompleteNavigation) {
+    const nav = /<nav\b[^>]*class\s*=\s*(["'])[^"']*\bqsource-social\b[^"']*\1[^>]*>([\s\S]*?)<\/nav>/i.exec(html);
+    const social = nav ? [...nav[2].matchAll(/<a\b[^>]*>/gi)].map(x => x[0]) : [];
+    const requiredSocial = {
+      telegram: 'https://t.me/dar_al_tauhid',
+      instagram: 'https://www.instagram.com/dar_at_tawhid/',
+      whatsapp: 'https://whatsapp.com/channel/0029VbBK0YaDp2Q8A0kW1F3g',
+      web: '/'
+    };
+    for (const [cls, expected] of Object.entries(requiredSocial)) {
+      const found = social.find(tag => attr(tag, 'class').split(/\s+/).includes(cls));
+      if (!found) {
+        fail.push(label + 'Social-Icon fehlt: ' + cls);
+      } else if (attr(found, 'href') !== expected) {
+        fail.push(label + 'Social-Icon mit falscher Adresse: ' + cls);
+      } else if (!attr(found, 'aria-label')) {
+        fail.push(label + 'Social-Icon ohne barrierefreie Beschriftung: ' + cls);
+      }
+    }
+    const learning = anchorTags.find(tag => attr(tag, 'class').split(/\s+/).includes('qsource-learning'));
+    if (!learning) {
+      fail.push(label + 'zugehöriger Lernbereich-Link (.qsource-learning) fehlt');
+    } else {
+      const href = attr(learning, 'href');
+      if (!/^\/lernen\/[a-z0-9-]+\/$/.test(href)) {
+        fail.push(label + 'Lernbereich-Link muss auf /lernen/<slug>/ zeigen');
+      } else {
+        const lessonFile = path.join(root, href.slice(1), 'index.html');
+        const exists = (await fs.stat(lessonFile).catch(() => null))?.isFile();
+        if (!exists) fail.push(label + 'verlinkte Lernseite fehlt: ' + href);
+        if (!attr(learning, 'aria-label')) fail.push(label + 'Lernbereich-Link ohne Beschriftung');
+      }
+      const lessonPos = html.indexOf(learning);
+      if (socialPos >= 0 && lessonPos > socialPos)
+        fail.push(label + 'Lernbereich gehört vor die Social-Icon-Leiste');
+      if (sourcePos >= 0 && lessonPos < sourcePos)
+        fail.push(label + 'Lernbereich gehört nach den Originalnachweisen');
+    }
   }
   if (!realEvidence) fail.push(label + 'kein echter externer Originalnachweis');
   if (!hasMarkedEvidence) {
