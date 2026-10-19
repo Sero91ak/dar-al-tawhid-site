@@ -74,6 +74,7 @@ def run():
         fail("450 age band count changed")
 
     used=collections.defaultdict(set)
+    examples={}
     mixed=[]
     fully_arabic=[]
     all_fragments=set()
@@ -91,6 +92,7 @@ def run():
                     row={"questionId":q["questionId"],"ageBand":q["ageBand"],
                          "part":kind,"fragmentSha256":hashlib.sha256(phrase.encode("utf-8")).hexdigest()}
                     if LATIN.search(phrase):
+                        row["spokenText"]=phrase
                         mixed.append(row)
                     else:
                         fully_arabic.append(row)
@@ -98,7 +100,9 @@ def run():
                     token=match.group(0).strip("-")
                     if not TRANSLIT.search(token):
                         continue
-                    used[unicodedata.normalize("NFC",token).casefold()].add(q["questionId"])
+                    normalized=unicodedata.normalize("NFC",token).casefold()
+                    used[normalized].add(q["questionId"])
+                    examples.setdefault(normalized,{"questionId":q["questionId"],"spokenText":phrase})
 
     absent=[]
     keys=list(dictionary.keys())
@@ -108,7 +112,8 @@ def run():
         if any(term in key for key in keys):
             continue
         absent.append({"term":term,"usedByQuestions":sorted(qids)[:20],
-                       "uniqueQuestionCount":len(qids)})
+                       "uniqueQuestionCount":len(qids),
+                       "firstOriginalContext":examples[term]})
     result={
         "schemaVersion":1,
         "scope":"KIDS_ALL_450_V4_OWNER_DICTIONARY_COVERAGE_READ_ONLY",
