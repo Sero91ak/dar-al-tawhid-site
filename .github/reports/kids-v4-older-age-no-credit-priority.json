@@ -25,10 +25,10 @@
     "7-8": 26,
     "9-10": 24
   },
-  "allRemainingUnrecordedOlderAgeDistinctTextCount": 1367,
-  "allRemainingUnrecordedOlderAgeCharacters": 64383,
-  "newDistinctTextCountForFirst40": 164,
-  "newCharactersForFirst40": 5655,
+  "allRemainingUnrecordedOlderAgeDistinctTextCount": 1366,
+  "allRemainingUnrecordedOlderAgeCharacters": 64362,
+  "newDistinctTextCountForFirst40": 163,
+  "newCharactersForFirst40": 5634,
   "priorityQuestionSteps": [
     {
       "order": 1,
@@ -60,6 +60,21 @@
     },
     {
       "order": 3,
+      "questionId": "kids-quiz-046",
+      "ageBand": "9-10",
+      "category": "Zakāh",
+      "missingOriginalTextCountForQuestion": 2,
+      "incrementalDistinctNewOriginals": 2,
+      "incrementalNewCharacters": 72,
+      "newOriginalTextSHA256": [
+        "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
+        "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30"
+      ],
+      "originalQuestionTextChanged": false,
+      "maySynthesizeAutomatically": false
+    },
+    {
+      "order": 4,
       "questionId": "kids-quiz-031",
       "ageBand": "7-8",
       "category": "Aḫlāq",
@@ -70,22 +85,6 @@
         "f61315c7fd09b325a685b9682917d124c9c132ae2e8b6965d66613d21d6db91e",
         "3a6cb0a42b1c41a9f1439cde7ae0b5ac8a7d836c2852e128b1fd076d4965fd86",
         "0ea5f9ee190759019ce3cdd2322d756a8062ed00c1925f5f759ccfa4a158bea4"
-      ],
-      "originalQuestionTextChanged": false,
-      "maySynthesizeAutomatically": false
-    },
-    {
-      "order": 4,
-      "questionId": "kids-quiz-046",
-      "ageBand": "9-10",
-      "category": "Zakāh",
-      "missingOriginalTextCountForQuestion": 3,
-      "incrementalDistinctNewOriginals": 3,
-      "incrementalNewCharacters": 93,
-      "newOriginalTextSHA256": [
-        "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
-        "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30",
-        "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1"
       ],
       "originalQuestionTextChanged": false,
       "maySynthesizeAutomatically": false
@@ -725,8 +724,8 @@
       "selectedQuestionIds": [
         "kids-quiz-045",
         "kids-quiz-080",
-        "kids-quiz-031",
         "kids-quiz-046",
+        "kids-quiz-031",
         "kids-quiz-041",
         "kids-quiz-520",
         "kids-quiz-044",
@@ -744,8 +743,8 @@
         "kids-quiz-094",
         "kids-quiz-147"
       ],
-      "newDistinctOriginals": 73,
-      "newOriginalCharacters": 2335,
+      "newDistinctOriginals": 72,
+      "newOriginalCharacters": 2314,
       "incrementalOriginalTextSha256": [
         "69e960d76c59a506808b0908ef47bc739cf012086feba91e5b271210ebc225c5",
         "3b43d4566de6a39db5785d2c137ecefd989a1a683ed9d85eec94b243f6024a88",
@@ -786,7 +785,6 @@
         "51eda3151d0e7569164eee36dfeede6adacd9ec31228e9e02382e90fe91a69df",
         "ba50503ceb2744aa7caf5322880bc56adc7e08739345e768493b17dd263c846f",
         "4cfa66c966f228c8ca4062cc59a24ce26ddc05b9f2169c2aa237826181c23605",
-        "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
         "9f4bcc4790f18bc4b877ba10907888374400f44b8d4c6aa3674e22a6acc8a16a",
         "821e0226956e087a1ffdb579e8b79f732ebc9c534bdea3357225e656cae29a16",
         "1af5365d9734f535d1948cae8b5ec286f88727576fd4bb615a0be14053e6b03b",
@@ -1614,14 +1612,6 @@
       "spokenText": "Gleichgültigkeit.",
       "sha256": "4cfa66c966f228c8ca4062cc59a24ce26ddc05b9f2169c2aa237826181c23605",
       "characterCount": 17,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Glücksspiele spielen.",
-      "sha256": "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
-      "characterCount": 21,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
