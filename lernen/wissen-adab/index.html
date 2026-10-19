@@ -242,7 +242,7 @@ body.heritage-learning.wqa-page .wqa-mini{
      </div>
    </div>
  </section>
- <p class="wqa-mini">Vier Antworten · jeweils eine Frage · keine Anmeldung nötig</p>
+ <p class="wqa-mini">Vier Fragen · eine Frage pro Ansicht · keine Anmeldung</p>
 </main>
 <script>
 (function(){
@@ -252,14 +252,14 @@ const questions=[
   choices:["Muḥammad ibn Sīrīn","Dem Propheten ﷺ","Al-Ḫaṭīb als seinem eigenen Wort"],
   correct:0,why:"Ibn Sīrīn ist der berichtete Sprecher; al-Ḫaṭīb dokumentiert die Überlieferung."},
  {q:"Was lernten sie laut dem Bericht neben dem Wissen?",
-  choices:["Vorbildliche Lebensführung","Nur Buchtitel auswendig","Ausschließlich Schreiben"],
-  correct:0,why:"Die Aussage nennt al-hady, also gute Führung und vorbildliches Verhalten."},
+  choices:["Nur Buchtitel auswendig","Vorbildliche Lebensführung","Ausschließlich Schreiben"],
+  correct:1,why:"Die Aussage nennt al-hady, also gute Führung und vorbildliches Verhalten."},
  {q:"Wie ist die deutsche Aussage auf Q46 gekennzeichnet?",
-  choices:["Als sinngemäße Wiedergabe","Als Qurʾānvers","Als wörtlicher prophetischer Ḥadīṯ"],
-  correct:0,why:"Der deutsche Wortlaut ist eine sinngemäße Übersetzung, kein neues Originalzitat."},
+  choices:["Als Qurʾānvers","Als wörtlicher prophetischer Ḥadīṯ","Als sinngemäße Wiedergabe"],
+  correct:2,why:"Der deutsche Wortlaut ist eine sinngemäße Übersetzung, kein neues Originalzitat."},
  {q:"Welche Zuschreibung wäre nicht korrekt?",
-  choices:["Ein Ausspruch des Propheten ﷺ","Ein Wort des Tābiʿī Ibn Sīrīn","Eine bei al-Ḫaṭīb dokumentierte Aussage"],
-  correct:0,why:"Die Aussage gehört zu Ibn Sīrīn und ist kein prophetischer Ḥadīṯ."}
+  choices:["Ein Wort des Tābiʿī Ibn Sīrīn","Ein Ausspruch des Propheten ﷺ","Eine bei al-Ḫaṭīb dokumentierte Aussage"],
+  correct:1,why:"Die Aussage gehört zu Ibn Sīrīn und ist kein prophetischer Ḥadīṯ."}
 ];
 const byId=id=>document.getElementById(id);
 const panel=byId("quizPanel"),results=byId("resultPanel"),answers=byId("choices");
