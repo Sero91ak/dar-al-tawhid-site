@@ -111,11 +111,11 @@ def build_canonical_v4_payload(spoken, *, language="de"):
                 "version_id":dic["versionId"]}]}
 
 
-def original_mp3(key,spoken):
+def original_mp3(key,spoken,*,language="de"):
     hold=load(PRONUNCIATION_HOLD)
     if hold.get("productionPaused") is not False or hold.get("humanPronunciationApproved") is not True:
         raise RuntimeError("PRONUNCIATION_HOLD: no paid V4 until 10,099-rule master and Arabic Fuṣḥā are verified")
-    body=build_canonical_v4_payload(spoken,language="de")
+    body=build_canonical_v4_payload(spoken,language=language)
     req=urllib.request.Request(
         "https://api.elevenlabs.io/v1/text-to-speech/"+VOICE+
         "?output_format=mp3_44100_128",
