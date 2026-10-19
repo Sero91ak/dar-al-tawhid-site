@@ -130,6 +130,49 @@
       "humanApproved": false
     },
     {
+      "questionId": "kids-quiz-046",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Glücksspiele spielen",
+        "Zakāh geben",
+        "Angeben"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a1",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "38711dd070a500c87045bb8996b0e7f122bedc48efd7c06dd3e13c830055b9c7",
+      "proposedQuestionAudioText": "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet? Antwort 1: Glücksspiele spielen. Antwort 2: Zakāh geben. Antwort 3: Angeben. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "df1b8c12a9542aa0a98c53d2f57e886c4d33e1bf465b8945c528919cc0282a1d",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet?",
+        "Antwort 1:",
+        "Glücksspiele spielen.",
+        "Antwort 2:",
+        "Zakāh geben.",
+        "Antwort 3:",
+        "Angeben.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 2:43",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
       "questionId": "kids-quiz-031",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
@@ -170,49 +213,6 @@
         240
       ],
       "originalSource": "Qurʾān 3:134",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-046",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Glücksspiele spielen",
-        "Zakāh geben",
-        "Angeben"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a1",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "38711dd070a500c87045bb8996b0e7f122bedc48efd7c06dd3e13c830055b9c7",
-      "proposedQuestionAudioText": "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet? Antwort 1: Glücksspiele spielen. Antwort 2: Zakāh geben. Antwort 3: Angeben. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "df1b8c12a9542aa0a98c53d2f57e886c4d33e1bf465b8945c528919cc0282a1d",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet?",
-        "Antwort 1:",
-        "Glücksspiele spielen.",
-        "Antwort 2:",
-        "Zakāh geben.",
-        "Antwort 3:",
-        "Angeben.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 2:43",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
