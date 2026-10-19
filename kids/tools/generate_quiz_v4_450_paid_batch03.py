@@ -40,24 +40,12 @@ def subscription(key):
         obj=json.loads(response.read().decode("utf-8"))
     return float(obj["character_limit"])-float(obj["character_count"])
 
+# NEVER create a separate text-only ElevenLabs HTTP payload here:
+# always route through the master lexicon + Fuṣḥā safety + hearing gates.
+from generate_quiz_v4_450_paid_batch02 import original_mp3 as _canonical_v4_original_mp3
+
 def original_mp3(key,spoken):
-    req=urllib.request.Request(
-        "https://api.elevenlabs.io/v1/text-to-speech/"+VOICE+
-        "?output_format=mp3_44100_128",
-        data=json.dumps({"text":spoken,"model_id":MODEL},ensure_ascii=False).encode("utf-8"),
-        method="POST",headers={"xi-api-key":key,"Accept":"audio/mpeg","Content-Type":"application/json"})
-    try:
-        with urllib.request.urlopen(req,timeout=110) as r:
-            data=r.read(1500000)
-            ct=r.headers.get("Content-Type","")
-            rid=r.headers.get("request-id") or r.headers.get("xi-request-id")
-            if r.status!=200 or ("audio/" not in ct and "octet-stream" not in ct):
-                raise RuntimeError("Unexpected direct MP3 HTTP/content-type. NEVER RETRY blindly.")
-    except urllib.error.HTTPError as exc:
-        raise RuntimeError(f"ElevenLabs direct original-MP3 response HTTP {exc.code}; NO AUTOMATIC RETRY")
-    if not (1500<len(data)<1500000) or not(data.startswith(b"ID3") or data[:1]==b"\xff"):
-        raise RuntimeError("Invalid original MP3 response; NO AUTOMATIC RETRY")
-    return data,rid
+    return _canonical_v4_original_mp3(key,spoken)
 
 def age_for(plan):
     return {r["questionId"]:r["ageBand"] for r in plan["recipes"]}
