@@ -31,7 +31,9 @@ concurrency:
 
 jobs:
   original-v4-first20-older-questions:
-    if: github.event_name == 'workflow_dispatch' && github.event.inputs.authorize_new_credit_spend == 'YES' && github.event.inputs.acknowledge_existing_canonical_approval == 'YES' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
+    # EMERGENCY STOP 2026-10-19: user reports missing 10,099-rule master pronunciation dictionary.
+    # No TTS launch until verified Fuṣḥā and corrected dictionary binding; avoid new charges.
+    if: false
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
