@@ -162,6 +162,9 @@ def main():
         "creditsForecastCeiling":MAX_COST,
         "questionIDsPotentiallyMadeFourPartComplete":question_ids,
         "selectedExactTextSHA256":[hashlib.sha256(z["text"].encode("utf-8")).hexdigest() for z in chosen],
+        "approvalFingerprintSHA256":hashlib.sha256(
+            json.dumps([hashlib.sha256(z["text"].encode("utf-8")).hexdigest() for z in chosen],
+                       separators=(",",":")).encode("utf-8")).hexdigest(),
         "existingChargedOriginalsWillNotBeRegenerated":True,
         "newCreditsSpentByAudit":0,"humanAudioApproved":False,"publicAppEnabled":False
     }
@@ -173,7 +176,7 @@ def main():
     if JOURNAL.exists():
         raise RuntimeError("An earlier fifty-take batch was reserved or partially paid: STOP, recover real originals")
     approval=os.environ.get("KIDS_V4_APPROVED_FIFTY_TEXT_SHA256","").strip()
-    campaign_hash=hashlib.sha256(json.dumps(plan_report["selectedExactTextSHA256"],separators=(",",":")).encode("utf-8")).hexdigest()
+    campaign_hash=plan_report["approvalFingerprintSHA256"]
     if approval!=campaign_hash:
         raise RuntimeError("Exact 50-source SHA digest differs from approved review. Zero paid calls.")
     before=subscription(key)
