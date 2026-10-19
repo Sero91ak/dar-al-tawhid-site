@@ -982,3 +982,54 @@ html[data-theme="light"][data-theme-variant="salbei"] body.is-quiz-route :is(
   color:inherit!important;
   -webkit-text-fill-color:currentColor!important;
 }
+
+/* SALBEI_QUIZ_ROUTE_INDEPENDENT_CONTRAST_V3 · 2026-10-19
+   The iOS container can display quiz before body.is-quiz-route gets set.
+   Apply directly to the *quiz shell* so source/explanation is never dark text
+   on a dark panel on Salbei Elfenbein. No layout / other theme modifications. */
+html[data-theme="light"][data-theme-variant="salbei"] .quiz-shell.quiz-shell-pro :is(
+  .quiz-feedback,.quiz-feedback-box,.quiz-feedback-card,.quiz-feedback-message,
+  .quiz-explanation,.quiz-explanation-box,.quiz-explanation-card,.quiz-explanation-panel,
+  .quiz-explain,.quiz-explain-box,.quiz-explain-card,
+  .quiz-source,.quiz-source-box,.quiz-source-card,.quiz-source-panel,
+  .quiz-question-source,.quiz-question-explanation,
+  [class*="quiz-explanation"],[class*="quiz-explain"],
+  [class*="quiz-feedback"],[class*="quiz-source"]
+){
+  background:#F8FAF6!important;
+  background-image:none!important;
+  color:#253C2E!important;
+  -webkit-text-fill-color:#253C2E!important;
+  border-color:#B9C9BD!important;
+  box-shadow:none!important;
+  opacity:1!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] .quiz-shell.quiz-shell-pro :is(
+  .quiz-feedback,.quiz-feedback-box,.quiz-feedback-card,.quiz-feedback-message,
+  .quiz-explanation,.quiz-explanation-box,.quiz-explanation-card,.quiz-explanation-panel,
+  .quiz-explain,.quiz-explain-box,.quiz-explain-card,
+  .quiz-source,.quiz-source-box,.quiz-source-card,.quiz-source-panel,
+  [class*="quiz-explanation"],[class*="quiz-explain"],
+  [class*="quiz-feedback"],[class*="quiz-source"]
+) :is(h2,h3,h4,p,span,strong,b,small,em,div,a){
+  color:#253C2E!important;
+  -webkit-text-fill-color:#253C2E!important;
+  text-shadow:none!important;
+  opacity:1!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] .quiz-shell.quiz-shell-pro :is(
+  .quiz-feedback.correct,.quiz-feedback.success,.quiz-feedback.is-correct,
+  .quiz-feedback-box.correct,.quiz-feedback-card.correct
+){
+  background:#E8F3E8!important;
+  color:#245B35!important;
+  -webkit-text-fill-color:#245B35!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] .quiz-shell.quiz-shell-pro :is(
+  .quiz-feedback.incorrect,.quiz-feedback.wrong,.quiz-feedback.is-wrong,
+  .quiz-feedback-box.wrong,.quiz-feedback-card.wrong
+){
+  background:#F9ECE8!important;
+  color:#873B37!important;
+  -webkit-text-fill-color:#873B37!important;
+}
