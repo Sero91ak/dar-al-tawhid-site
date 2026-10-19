@@ -557,6 +557,30 @@
       "providerStatus": "completed",
       "providerMediaStoredInElevenLabs": true,
       "originalMP3ImportedIntoGithub": false
+    },
+    {
+      "sourceText": "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam.",
+      "sourceTextSHA256": "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30",
+      "sourceQuestionIds": [
+        "kids-quiz-046"
+      ],
+      "sourceAudioPart": "explanation",
+      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
+      "provider": "ElevenLabs",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "flowId": "r6F5uzBi4xnca5w16H4K",
+      "generationId": "fXiqKqmUPFZBMOCKBUQ5",
+      "estimatedCreditsNotInvoice": 62.020229074889876,
+      "actualProviderCredits": 62.020229074889876,
+      "humanListeningApproved": false,
+      "publicReleaseAllowed": false,
+      "nodeId": "vMytUv5qLmyoQRlAN5Uc",
+      "sessionId": "UllZeSYZLnhHUdFAzk5M",
+      "providerGenerationDurationSeconds": 4.24,
+      "providerStatus": "completed",
+      "providerMediaStoredInElevenLabs": true,
+      "originalMP3ImportedIntoGithub": false
     }
   ]
 }
