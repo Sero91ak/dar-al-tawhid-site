@@ -854,3 +854,64 @@
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",requestFresh,{once:true});
   else requestFresh();
 })();
+
+
+/* Opt-in control for iOS significant-location updates; no silent Always request.
+   Uses the existing location detail, theme colors and native bridge. */
+(function(){
+  "use strict";
+  if(window.__darIosBackgroundLocationUIV1)return;
+  window.__darIosBackgroundLocationUIV1=true;
+  var status=null,queued=false;
+  function handler(){
+    try{return window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darNative;}
+    catch(e){return null;}
+  }
+  function send(type){var h=handler();if(h)try{h.postMessage({type:type});}catch(e){}}
+  function settings(){
+    try{return typeof getPrayerSettings==="function"?(getPrayerSettings()||{}):{};}catch(e){return {};}
+  }
+  function mount(){
+    queued=false;
+    var parent=document.querySelector('#appView .dsh-detail[data-settings-page="location"] .dar-permission-location');
+    if(!parent||!handler())return;
+    var row=parent.querySelector(".dar-location-native-background");
+    var auto=settings().locationMode==="auto";
+    if(!auto){if(row)row.remove();return;}
+    if(!row){
+      row=document.createElement("div");
+      row.className="dar-location-native-background";
+      row.style.cssText="padding:14px 2px 3px;margin-top:15px;border-top:1px solid var(--dsh-line,currentColor)";
+      row.innerHTML='<strong style="display:block;font-size:14px;color:var(--dsh-ink,inherit)">Standortwechsel im Hintergrund</strong>'+
+        '<p class="dar-location-native-caption" style="margin:5px 0 9px;font-size:12px;line-height:1.5;color:var(--dsh-muted,inherit)"></p>'+
+        '<button type="button" class="dar-location-native-action" style="font:600 13px inherit;border:1px solid var(--dsh-line,#888);border-radius:12px;padding:10px 12px;background:var(--dsh-surface,transparent);color:var(--dsh-accent,inherit);cursor:pointer"></button>';
+      parent.appendChild(row);
+      row.querySelector("button").addEventListener("click",function(){
+        if(status&&status.backgroundOptIn&&status.authorization==="always")send("location-background-off");
+        else if(status&&(status.authorization==="denied"||status.authorization==="restricted"))send("location-open-settings");
+        else send("location-background");
+      });
+    }
+    var caption=row.querySelector(".dar-location-native-caption");
+    var button=row.querySelector(".dar-location-native-action");
+    var active=!!(status&&status.authorization==="always"&&status.backgroundOptIn);
+    caption.textContent=active?
+      "Aktiv. iOS meldet größere Ortswechsel energiesparend; Gebetszeiten werden bei der nächsten möglichen Ausführung aktualisiert.":
+      "Optional: Mit „Immer erlauben“ kann iOS größere Standortwechsel auch außerhalb der geöffneten App melden. Manuelle Städte bleiben unberührt.";
+    button.textContent=active?"Hintergrundaktualisierung ausschalten":
+      status&&(status.authorization==="denied"||status.authorization==="restricted")
+      ?"Standortfreigabe in iOS öffnen":"Hintergrundaktualisierung erlauben";
+    button.setAttribute("aria-pressed",String(active));
+  }
+  function schedule(){
+    if(queued)return;queued=true;setTimeout(mount,70);
+  }
+  window.addEventListener("dar-native-location-status",function(ev){status=ev.detail||null;schedule();});
+  window.addEventListener("hashchange",schedule);
+  document.addEventListener("dar:render",schedule);
+  document.addEventListener("dar:location-updated",schedule);
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",schedule,{once:true});
+  else schedule();
+  var app=document.getElementById("appView");
+  if(app&&window.MutationObserver)new MutationObserver(schedule).observe(app,{subtree:true,childList:true});
+})();
