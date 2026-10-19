@@ -85,6 +85,49 @@
       "humanApproved": false
     },
     {
+      "questionId": "kids-quiz-044",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Nur Hände",
+        "Gesicht, Arme, Kopf und Füße",
+        "Nur Gesicht"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a1",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "9295fc97b366e4d96e906632ccc25f57291231ab6d66083101b1df5d48965d34",
+      "proposedQuestionAudioText": "Welche Körperteile nennt Qurʾān 5:6 beim Wuḍūʾ? Antwort 1: Nur Hände. Antwort 2: Gesicht, Arme, Kopf und Füße. Antwort 3: Nur Gesicht. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "44f36b47fdf5f202a23a3962ea2e9e308bf635fbc28fee3b504f345cbf436bf6",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Welche Körperteile nennt Qurʾān 5:6 beim Wuḍūʾ?",
+        "Antwort 1:",
+        "Nur Hände.",
+        "Antwort 2:",
+        "Gesicht, Arme, Kopf und Füße.",
+        "Antwort 3:",
+        "Nur Gesicht.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 5:6",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
       "questionId": "kids-quiz-080",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
@@ -133,29 +176,29 @@
       "questionId": "kids-quiz-046",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
         "Glücksspiele spielen",
-        "Zakāh geben",
-        "Angeben"
+        "Angeben",
+        "Zakāh geben"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a1",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "38711dd070a500c87045bb8996b0e7f122bedc48efd7c06dd3e13c830055b9c7",
-      "proposedQuestionAudioText": "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet? Antwort 1: Glücksspiele spielen. Antwort 2: Zakāh geben. Antwort 3: Angeben. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "df1b8c12a9542aa0a98c53d2f57e886c4d33e1bf465b8945c528919cc0282a1d",
+      "proposedQuestionAudioText": "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet? Antwort 1: Glücksspiele spielen. Antwort 2: Angeben. Antwort 3: Zakāh geben. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "205d623abd2e8437e4ebeaa25fa41be24f0eae96bf681b3eead9649f1cb2ab5d",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet?",
         "Antwort 1:",
         "Glücksspiele spielen.",
         "Antwort 2:",
-        "Zakāh geben.",
-        "Antwort 3:",
         "Angeben.",
+        "Antwort 3:",
+        "Zakāh geben.",
         "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
@@ -221,29 +264,29 @@
       "questionId": "kids-quiz-041",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
+      "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Taqwā",
         "Viel Geld",
-        "Eine berühmte Familie",
-        "Taqwā"
+        "Eine berühmte Familie"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
         "a2",
-        "a3",
-        "a1"
+        "a3"
       ],
       "originalQuestionAudioSHA256": "158edb64d135235e94f09dd7d993367058b3d52527a85db6b9a8472a62cf1826",
-      "proposedQuestionAudioText": "Was macht einen Menschen bei Allah besonders geehrt? Antwort 1: Viel Geld. Antwort 2: Eine berühmte Familie. Antwort 3: Taqwā. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "8cdbd365c3625167743863250b7c3078a167cf63ffcfafb0ab314bdf1dfcdb50",
+      "proposedQuestionAudioText": "Was macht einen Menschen bei Allah besonders geehrt? Antwort 1: Taqwā. Antwort 2: Viel Geld. Antwort 3: Eine berühmte Familie. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "158edb64d135235e94f09dd7d993367058b3d52527a85db6b9a8472a62cf1826",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Was macht einen Menschen bei Allah besonders geehrt?",
         "Antwort 1:",
-        "Viel Geld.",
-        "Antwort 2:",
-        "Eine berühmte Familie.",
-        "Antwort 3:",
         "Taqwā.",
+        "Antwort 2:",
+        "Viel Geld.",
+        "Antwort 3:",
+        "Eine berühmte Familie.",
         "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
@@ -301,49 +344,6 @@
         240
       ],
       "originalSource": "Qurʾān 2:255",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-044",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Gesicht, Arme, Kopf und Füße",
-        "Nur Hände",
-        "Nur Gesicht"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
-        "a2",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "9295fc97b366e4d96e906632ccc25f57291231ab6d66083101b1df5d48965d34",
-      "proposedQuestionAudioText": "Welche Körperteile nennt Qurʾān 5:6 beim Wuḍūʾ? Antwort 1: Gesicht, Arme, Kopf und Füße. Antwort 2: Nur Hände. Antwort 3: Nur Gesicht. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "9295fc97b366e4d96e906632ccc25f57291231ab6d66083101b1df5d48965d34",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Welche Körperteile nennt Qurʾān 5:6 beim Wuḍūʾ?",
-        "Antwort 1:",
-        "Gesicht, Arme, Kopf und Füße.",
-        "Antwort 2:",
-        "Nur Hände.",
-        "Antwort 3:",
-        "Nur Gesicht.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 5:6",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
