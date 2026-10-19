@@ -328,36 +328,85 @@ async function editorPasswordMatches(input) {
  for(let i=0;i<32;i++)different|=actual[i]^expected[i];
  return different===0;
 }
+
+function editorLoginPage(error="",status=200) {
+ const message=error?'<p role="alert" class="error">'+academyEscape(error)+'</p>':"";
+ const html='<!doctype html><html lang="de"><head><meta charset="utf-8">'
+  +'<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
+  +'<meta name="robots" content="noindex,nofollow,noarchive">'
+  +'<title>DĀR AL TAWḤĪD · Layout-Studio anmelden</title>'
+  +'<style>*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#091c24;'
+  +'color:#f3eee2;font:16px/1.5 -apple-system,BlinkMacSystemFont,system-ui,sans-serif}'
+  +'body{min-height:100dvh;display:grid;place-items:center;padding:20px}'
+  +'main{width:min(100%,450px);border:1px solid #4a6460;border-radius:22px;background:#142b31;padding:clamp(22px,5vw,36px)}'
+  +'small{font-size:11px;letter-spacing:.15em;font-weight:750;color:#d7bb85}'
+  +'h1{font:500 29px/1.16 Georgia,serif;margin:10px 0}'
+  +'p{font-size:14px;line-height:1.55;color:#c8d2ca}'
+  +'.error{color:#ffbeac}label{display:block;font-size:14px;margin:17px 0 5px}'
+  +'input{display:block;width:100%;border:1px solid #6b8079;border-radius:12px;'
+  +'background:#091e24;color:#fff;min-height:50px;padding:12px;font:inherit}'
+  +'button{display:block;margin:16px 0 0;width:100%;background:#d4bc86;border:0;border-radius:12px;'
+  +'color:#1b2527;min-height:50px;font:750 16px system-ui;cursor:pointer}'
+  +'a{color:#d4bc86;text-decoration:none}footer{font-size:12px;color:#a9b8b2;margin-top:17px}</style>'
+  +'</head><body><main><small>DĀR AL TAWḤĪD · TEST</small><h1>Layout-Studio</h1>'
+  +'<p>Melde dich an, um die geschützte Bearbeitungsseite zu öffnen.</p>'
+  +message
+  +'<form method="post" action="/test/academy/startseiten-editor-login" autocomplete="on">'
+  +'<label for="user">Benutzername</label><input id="user" name="username" value="Dawud" '
+  +'autocapitalize="none" spellcheck="false" autocomplete="username" required maxlength="80">'
+  +'<label for="password">Passwort</label><input id="password" type="password" name="password" '
+  +'autocomplete="current-password" required maxlength="256">'
+  +'<button type="submit">Editor öffnen</button></form>'
+  +'<footer><a href="/test/">Zur Test-App</a> · Keine Cloudflare-Einstellungen erforderlich.</footer>'
+  +'</main></body></html>';
+ return new Response(html,{status,headers:{
+  "Content-Type":"text/html; charset=utf-8",
+  "Cache-Control":"private, no-store, max-age=0",
+  "CDN-Cache-Control":"no-store",
+  "Content-Security-Policy":"default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",
+  "X-Content-Type-Options":"nosniff",
+  "X-Frame-Options":"DENY",
+  "X-Robots-Tag":"noindex,nofollow,noarchive"
+ }});
+}
 function editorUnauthorized() {
- return new Response("Anmeldung erforderlich. Benutzername: Dawud",{status:401,headers:{
-  "WWW-Authenticate":'Basic realm="DAR Test Layout Editor", charset="UTF-8"',
+ return new Response("Bitte auf der Anmeldeseite anmelden.",{status:401,headers:{
   "Cache-Control":"private, no-store, max-age=0",
   "Content-Type":"text/plain; charset=utf-8",
-  "X-Robots-Tag":"noindex, nofollow, noarchive",
   "X-Content-Type-Options":"nosniff"
  }});
 }
 export async function layoutEditorAccess(request,url,env) {
  const path=url.pathname;
- if(path===EDITOR_LOGIN){
-  return new Response(null,{status:302,headers:{
-   "Location":ACADEMY_NEW_ROOT + "/startseiten-editor.html",
-   "Cache-Control":"no-store"
-  }});
+ const isLogin=path===EDITOR_LOGIN;
+ if(!isLogin&&!EDITOR_FILES.has(path))return null;
+ if(isLogin) {
+  if(request.method==="GET"||request.method==="HEAD")return editorLoginPage();
+  if(request.method!=="POST")return new Response("Method not allowed",{status:405,headers:{Allow:"GET, HEAD, POST"}});
+  const origin=request.headers.get("Origin");
+  if(origin && origin!==url.origin)return editorLoginPage("Ungültiger Ursprung. Bitte die Seite direkt öffnen.",403);
+  const len=Number(request.headers.get("Content-Length")||0);
+  if(!Number.isFinite(len)||len>4096)return editorLoginPage("Anfrage zu groß.",413);
+  const ct=request.headers.get("Content-Type")||"";
+  if(!ct.startsWith("application/x-www-form-urlencoded")&&!ct.startsWith("multipart/form-data"))
+   return editorLoginPage("Ungültiges Formular.",415);
+  let data;try{data=await request.formData()}catch(_){return editorLoginPage("Formular konnte nicht gelesen werden.",400)}
+  const username=String(data.get("username")||"");
+  const password=String(data.get("password")||"");
+  if(username!=="Dawud"||password.length>256||!await editorPasswordMatches(password))
+   return editorLoginPage("Benutzername oder Passwort nicht korrekt.",401);
+  return {renderEditor:true};
  }
- if(!EDITOR_FILES.has(path))return null;
- if(request.method!=="GET" && request.method!=="HEAD")
-  return new Response("Method not allowed",{status:405,headers:{"Allow":"GET, HEAD","Cache-Control":"no-store"}});
+ if(request.method!=="GET"&&request.method!=="HEAD")
+  return new Response("Method not allowed",{status:405,headers:{Allow:"GET, HEAD"}});
  const header=String(request.headers.get("Authorization")||"");
- const match=header.match(/^Basic\s+([A-Za-z0-9+/=]+)$/i);
- if(!match)return editorUnauthorized();
- let decoded="";
- try {decoded=atob(match[1]);} catch(_){return editorUnauthorized();}
- const colon=decoded.indexOf(":");
- if(colon<0)return editorUnauthorized();
- const username=decoded.slice(0,colon);
- const password=decoded.slice(colon+1);
- if(username!=="Dawud" || !(await editorPasswordMatches(password)))
-  return editorUnauthorized();
- return true;
+ const basic=header.match(/^Basic\s+([A-Za-z0-9+/=]+)$/i);
+ if(basic){
+  let decoded="";try{decoded=atob(basic[1])}catch(_){}
+  const index=decoded.indexOf(":");
+  if(index>=0&&decoded.slice(0,index)==="Dawud"&&await editorPasswordMatches(decoded.slice(index+1)))
+   return true;
+ }
+ if(path===ACADEMY_NEW_ROOT+"/startseiten-editor.html")return editorLoginPage();
+ return editorUnauthorized();
 }

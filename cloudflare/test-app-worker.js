@@ -646,6 +646,46 @@ export default {
     // Test Layout Editor login, isolated from KIDS Academy owner privileges.
     const editorAccess = await layoutEditorAccess(request,url,env);
     if(editorAccess instanceof Response)return editorAccess;
+    // Safari/iPad-compatible HTML sign-in: validate the editor password on POST,
+    // then inline the protected CSS+JS into the returned editor document.
+    // No password-equivalent cookie, localStorage credential, or Academy login needed.
+    if(editorAccess && editorAccess.renderEditor===true) {
+      const fetchEditorAsset=async (publicPath)=>{
+        const mapped=academyOwnerAssetPath(publicPath);
+        if(!mapped)throw new Error("Layout-Editor-Asset unbekannt");
+        const u=new URL(request.url);u.pathname=mapped;u.search="";
+        const asset=await env.ASSETS.fetch(new Request(u.toString(),{method:"GET"}));
+        if(!asset.ok)throw new Error("Layout-Editor-Asset fehlt ("+asset.status+")");
+        return asset.text();
+      };
+      try {
+        const [source,css,script]=await Promise.all([
+          fetchEditorAsset("/test/academy/startseiten-editor.html"),
+          fetchEditorAsset("/test/academy/startseiten-studio-v3.css"),
+          fetchEditorAsset("/test/academy/startseiten-studio-v3.js")
+        ]);
+        const styleTag=/<link\b[^>]*href=["'][^"']*startseiten-studio-v3\.css[^"']*["'][^>]*>/i;
+        const scriptTag=/<script\b[^>]*src=["'][^"']*startseiten-studio-v3\.js[^"']*["'][^>]*><\/script>/i;
+        if(!styleTag.test(source)||!scriptTag.test(source))
+          throw new Error("Layout-Studio-V3-Verknüpfung fehlt");
+        const assembled=source.replace(styleTag,'<style id="editor-inline-v3">'+css.replace(/<\/style/gi,"<\\/style")+'</style>')
+          .replace(scriptTag,'<script id="editor-inline-v3">'+script.replace(/<\/script/gi,"<\\/script")+'</script>');
+        return new Response(assembled,{status:200,headers:{
+          "Content-Type":"text/html; charset=utf-8",
+          "Cache-Control":"private, no-store, max-age=0",
+          "CDN-Cache-Control":"no-store",
+          "X-Content-Type-Options":"nosniff",
+          "X-Frame-Options":"DENY",
+          "X-Robots-Tag":"noindex,nofollow,noarchive",
+          "Referrer-Policy":"same-origin"
+        }});
+      }catch(e){
+        console.error("Test Layout Editor loading failed:",String(e&&e.message||e));
+        return new Response("Der Layout-Editor konnte noch nicht geladen werden. Bitte später erneut versuchen.",{
+          status:503,headers:{"Content-Type":"text/plain; charset=utf-8","Cache-Control":"no-store"}
+        });
+      }
+    }
     if(editorAccess===true){
       const mapped=academyOwnerAssetPath(url.pathname);
       if(!mapped)return new Response("Not found",{status:404});
