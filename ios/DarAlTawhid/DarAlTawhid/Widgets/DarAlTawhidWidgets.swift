@@ -1,6 +1,7 @@
 import SwiftUI
 import WidgetKit
 import AppIntents
+import ActivityKit
 
 struct DarTimelineProvider: TimelineProvider {
     func placeholder(in context: Context) -> DarEntry {
@@ -178,6 +179,67 @@ struct LockHijriPrayerWidget: Widget {
     }
 }
 
+/// Prayer countdown on the Lock Screen and Dynamic Island.
+/// iOS owns the dimensions; we keep the presentation compact and theme-neutral.
+@available(iOSApplicationExtension 16.1, *)
+struct DarPrayerLiveWidget: Widget {
+    var body: some WidgetConfiguration {
+        ActivityConfiguration(for: DarPrayerLiveAttributes.self) { context in
+            HStack(spacing: 12) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("DĀR AL TAWḤĪD").font(.caption2).tracking(1.1)
+                    Text(context.state.prayerName).font(.headline)
+                    Text(context.state.city).font(.caption).lineLimit(1)
+                }
+                Spacer(minLength: 4)
+                if context.state.targetDate > Date() {
+                    Text(timerInterval: Date()...context.state.targetDate, countsDown: true)
+                        .monospacedDigit().font(.title3.bold())
+                } else {
+                    Text("Gebetszeit").font(.caption.bold())
+                }
+            }
+            .padding(16)
+            .foregroundStyle(Color(red: 0.92, green: 0.85, blue: 0.68))
+            .activityBackgroundTint(Color(red: 0.05, green: 0.09, blue: 0.08))
+            .activitySystemActionForegroundColor(.white)
+        } dynamicIsland: { context in
+            DynamicIsland {
+                DynamicIslandExpandedRegion(.leading) {
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text("DĀR AL TAWḤĪD").font(.caption2)
+                        Text(context.state.prayerName).font(.headline)
+                    }
+                }
+                DynamicIslandExpandedRegion(.trailing) {
+                    if context.state.targetDate > Date() {
+                        Text(timerInterval: Date()...context.state.targetDate, countsDown: true)
+                            .monospacedDigit().font(.headline)
+                    } else {
+                        Text("Gebetszeit").font(.caption2)
+                    }
+                }
+                DynamicIslandExpandedRegion(.bottom) {
+                    Text(context.state.city).font(.caption).lineLimit(1)
+                }
+            } compactLeading: {
+                Text(context.state.prayerName.prefix(3)).font(.caption2.bold())
+            } compactTrailing: {
+                if context.state.targetDate > Date() {
+                    Text(timerInterval: Date()...context.state.targetDate, countsDown: true)
+                        .monospacedDigit().font(.caption2)
+                        .frame(maxWidth: 55)
+                } else {
+                    Text("Jetzt").font(.caption2)
+                }
+            } minimal: {
+                Image(systemName: "moon.stars.fill")
+            }
+            .keylineTint(Color(red: 0.84, green: 0.72, blue: 0.48))
+        }
+    }
+}
+
 /// Legacy kind from older builds — keeps existing home-screen widgets working after upgrades.
 struct LegacyPrayerWidget: Widget {
     var body: some WidgetConfiguration {
@@ -194,6 +256,9 @@ struct LegacyPrayerWidget: Widget {
 struct DarAlTawhidWidgets: WidgetBundle {
     var body: some Widget {
         PrayerTimerWidget()
+        if #available(iOSApplicationExtension 16.1, *) {
+            DarPrayerLiveWidget()
+        }
         LegacyPrayerWidget()
         PrayerListWidget()
         PrayerDayWidget()
