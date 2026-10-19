@@ -119,9 +119,17 @@ def original_mp3(key,spoken,*,language="de"):
     # NO workflow may quietly render 20+ new takes while the first correctly
     # dictionary-bound recording still awaits the user's hearing verdict.
     if hold.get("humanListeningQualityGateReleased") is not True:
-        if (os.environ.get("KIDS_V4_STAGE1_SAMPLE_ONLY")!="YES"
-                or hold.get("authorizedNewOriginalsBeforeHearing")!=1):
-            raise RuntimeError("V4_HUMAN_HEARING_GATE: at most one owner-approved dictionary pilot before any more paid synthesis")
+        one_pilot=(os.environ.get("KIDS_V4_STAGE1_SAMPLE_ONLY")=="YES"
+                   and hold.get("authorizedNewOriginalsBeforeHearing")==1)
+        one_owner_batch=(os.environ.get("KIDS_V4_STAGE1_OWNER_CORRECT_DICTIONARY_BATCH")=="YES"
+                         and os.environ.get("KIDS_V4_STAGE1_SAMPLE_ONLY")!="YES"
+                         and os.environ.get("KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL")=="YES"
+                         and hold.get("ownerExplicitlyRequestedContinuedPaidQuizProduction") is True
+                         and hold.get("allowOneStrictTenOriginalDictionaryBatchBeforeListeningApproval") is True
+                         and hold.get("maximumPreHearingAdditionalNewOriginals")==10
+                         and hold.get("maximumPreHearingAdditionalEstimatedCredits")==240)
+        if not (one_pilot or one_owner_batch):
+            raise RuntimeError("V4_HUMAN_HEARING_GATE: bulk recording requires explicit owner one-batch consent and exact paid workflow; do not claim human listening approval")
     body=build_canonical_v4_payload(spoken,language=language)
     req=urllib.request.Request(
         "https://api.elevenlabs.io/v1/text-to-speech/"+VOICE+
