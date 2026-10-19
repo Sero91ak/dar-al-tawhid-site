@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `12a1e685710cf5574a3191104110f051b704422a`
+- Commit beim Erstellen dieses Berichts: `2ea3ae5ad09c50ef0a272a510accabf821723aea`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **288 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1056 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -26,8 +26,8 @@
 - Rückimportierte Selbstauskünfte zur Hörprüfung: **0**; gemeldete Audiofehler: **0**. Diese Einträge sind noch KEINE unabhängig bestätigte Freigabe.
 
 Genauer kostenfreier Restplan: `kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md` und `kids/review-only/quiz-v4-450-next-completion-priority.json`.
-Zusätzliche globale Kostensperre: **8** echte Originaltexte sind im verbundenen ElevenLabs Flow noch reserviert/eingereicht und dürfen nicht erneut in eine kostenpflichtige TTS-Auswahl geraten. **1** davon sind bereits eingereicht, **7** sind vorerst unbezahlt reserviert. Der gesamte Audioabschlussplan unterscheidet diese Originale von wirklich neuen Sprachfragmenten.
-Nur bei frisch erzeugtem Abschlussplan: **3** Fragen warten ausschließlich auf verbundene Flow-Originale. Wirklich neue noch zu generierende V4-Sprachfragmente nach Deduplizierung: **1360**. Diese Werte sind keine neue providerbestätigte Abrechnung.
+Zusätzliche globale Kostensperre: **9** echte Originaltexte sind im verbundenen ElevenLabs Flow noch reserviert/eingereicht und dürfen nicht erneut in eine kostenpflichtige TTS-Auswahl geraten. **1** davon sind bereits eingereicht, **7** sind vorerst unbezahlt reserviert. Der gesamte Audioabschlussplan unterscheidet diese Originale von wirklich neuen Sprachfragmenten.
+Nur bei frisch erzeugtem Abschlussplan: **3** Fragen warten ausschließlich auf verbundene Flow-Originale. Wirklich neue noch zu generierende V4-Sprachfragmente nach Deduplizierung: **1359**. Diese Werte sind keine neue providerbestätigte Abrechnung.
 
 ## Noch fehlende, **bereits bezahlte** Originalaufnahmen
 
