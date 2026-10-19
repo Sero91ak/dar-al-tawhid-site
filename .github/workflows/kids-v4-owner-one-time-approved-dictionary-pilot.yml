@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: tawhid-kids-v4-450-shared-paid-queue
+  group: tawhid-kids-single-owner-dictionary-pilot-20261019
   cancel-in-progress: false
 
 jobs:
