@@ -186,11 +186,11 @@ def age_for(plan):
 # Two high-frequency equivalent forms (Bismi-llāh / In schāʾ Allāh) are
 # already mapped to authentic owner dictionary graphemes in the payload.
 UNLISTED_OWNER_TERMS=re.compile(
-    r"(?i)(?<![\\w])(?:ash-sharḥ|ayyūbs|bārik|ghībah|halāle|halālen|"
+    r"(?i)(?<![\w])(?:ash-sharḥ|ayyūbs|bārik|ghībah|halāle|halālen|"
     r"luqmāns|muttaqīn|muḥsinīn|mūsās|qurʾān-duʿāʾ|qurʾān-lesen|"
-    r"qurʾān-vers|schahāda|sulaymāns|zakariyyās|ādams|ʿīsās)(?![\\w])"
+    r"qurʾān-vers|schahāda|sulaymāns|zakariyyās|ādams|ʿīsās)(?![\w])"
 )
-ARABIC_UNSEGMENTED=re.compile(r"[\\u0621-\\u064A]|ﷺ")
+ARABIC_UNSEGMENTED=re.compile(r"[\u0621-\u064A]|ﷺ")
 
 def source_requires_separate_pronunciation_approval(text):
     return bool(ARABIC_UNSEGMENTED.search(text) or UNLISTED_OWNER_TERMS.search(text))
