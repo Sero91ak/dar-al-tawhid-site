@@ -1,85 +1,334 @@
 <!doctype html>
-<html lang="de">
+<html lang="de" data-q-theme="light">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#14251e">
+<meta name="theme-color" content="#f7f4eb">
 <meta name="robots" content="index,follow">
-<title>Wissen und Adab · Lernbereich | DĀR AL TAWḤĪD</title>
-<meta name="description" content="Kostenfreie Lernseite zur überlieferten Aussage von Muḥammad ibn Sīrīn über Wissen und vorbildliche Lebensführung – mit vier Verständnisfragen und direktem Quellenlink.">
+<title>Wissen und Adab · 4 Verständnisfragen | DĀR AL TAWḤĪD</title>
+<meta name="description" content="Kompakter interaktiver Lernbereich zu Ibn Sīrīn: vier Fragen, direkt auswählbare Antworten und geprüfter Rücklink zu Q46.">
 <link rel="canonical" href="https://dar-al-tawhid.de/lernen/wissen-adab/">
-<meta property="og:title" content="Wissen und Adab – DĀR AL TAWḤĪD">
-<meta property="og:description" content="Die Aussage von Ibn Sīrīn verstehen und das Gelernte mit vier Fragen überprüfen.">
+<meta property="og:title" content="Wissen und Adab – vier Verständnisfragen">
+<meta property="og:description" content="Wissen anwenden, Antwort auswählen und die Bedeutung der Aussage Ibn Sīrīns prüfen.">
+<script>
+/* Same appearance choice as the /q/ source cards. Avoid wrong colors before paint. */
+try {
+  const stored = localStorage.getItem("dar-quellen-royal-theme");
+  document.documentElement.dataset.qTheme = stored === "dark" ? "dark" : "light";
+} catch(e) {
+  document.documentElement.dataset.qTheme = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+</script>
 <link rel="stylesheet" href="/assets/learning-heritage.css?v=20261018a">
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{font-family:system-ui,-apple-system,"Segoe UI",sans-serif}a{color:#f7dba3}button{font:inherit;cursor:pointer}
-main{margin:0 auto}header.learning-masthead{display:flex;align-items:center;gap:13px;margin-bottom:9px}.learning-mark{display:block;border-radius:12px}.learning-mark img{width:47px;height:47px;object-fit:contain}.brand{margin:0}.learning-sign{margin:2px 0 0}.intro{margin-bottom:13px}
-.intro h1{margin:8px 0 5px;font-size:clamp(1.65rem,6vw,2.25rem)}.kicker{margin:0}.sub{color:#e5e5d6;margin:4px 0 10px}
-.card{padding:clamp(16px,4vw,22px);margin:11px 0;border:1px solid rgba(220,193,131,.44);border-radius:17px;background:rgba(16,36,30,.94);box-shadow:0 7px 25px rgba(0,0,0,.12)}
-.card h2{font-size:1.1rem;color:#f3d79a;margin:0 0 9px}.quote{font:600 clamp(1.15rem,4.7vw,1.43rem)/1.6 Georgia,serif;margin:0}.note{color:#e5e5d6;font-size:.93rem;margin:9px 0 0}.source{font-size:.9rem;line-height:1.65}
-.actions{display:flex;flex-wrap:wrap;gap:8px}.actions a,.actions button,.next{display:inline-flex;justify-content:center;align-items:center;padding:10px 14px;border-radius:11px;border:1px solid #e3c48b;background:#21372e;color:#fff1d4;text-decoration:none;font-weight:650}
-.quiz-progress{font-size:.85rem;color:#f3d79a;margin-bottom:10px}.answers{display:grid;gap:9px}.answers button{width:100%;text-align:left;color:#f6f1e9;background:#244036;border:1px solid rgba(242,213,161,.4);border-radius:12px;padding:13px 14px;line-height:1.45}
-.answers button:focus-visible,.next:focus-visible,.actions a:focus-visible{outline:3px solid #f3d79a;outline-offset:3px}
-.answers button[aria-pressed="true"]{background:#715c36;border-color:#f3d79a}
-.feedback{min-height:38px;margin:10px 0;color:#f6deb4;font-size:.94rem}.next{margin-top:4px}.next[hidden],.quiz-panel[hidden],.finished[hidden]{display:none!important}
-.finished strong{color:#f8dca1}.footer-note{text-align:center;color:#e5e5d6;font-size:.83rem;padding:10px 0 20px}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* WISSEN_ADAB_SCREEN_QUIZ_V2 – isolated colors, no inherited low-contrast text */
+*{box-sizing:border-box}
+html{margin:0;min-width:0;overflow:hidden}
+html[data-q-theme="light"]{color-scheme:light}
+html[data-q-theme="dark"]{color-scheme:dark}
+html[data-q-theme="light"] body.heritage-learning.wqa-page{
+  --qa-bg:#f5f1e8;--qa-paper:#fffdf7;--qa-ink:#20342a;--qa-soft:#41574a;
+  --qa-gold:#80602f;--qa-line:#b7a27c;--qa-choice:#f9f5eb;--qa-focus:#786027;
+  --qa-success:#225b39;--qa-good:#e0f1e4;--qa-bad:#fde5dd;--qa-danger:#8a3b26;
+  --qa-shadow:0 14px 36px #4d3b1f20;
+}
+html[data-q-theme="dark"] body.heritage-learning.wqa-page{
+  --qa-bg:#0d1713;--qa-paper:#17271f;--qa-ink:#fff5df;--qa-soft:#d9d4bc;
+  --qa-gold:#f3d79d;--qa-line:#8a7952;--qa-choice:#22392d;--qa-focus:#edd18a;
+  --qa-success:#bbefc8;--qa-good:#1e4a32;--qa-bad:#59352f;--qa-danger:#ffb2a3;
+  --qa-shadow:0 14px 38px #0004;
+}
+body.heritage-learning.wqa-page{
+  margin:0;overflow:hidden;height:100dvh;min-height:0;
+  background:var(--qa-bg)!important;color:var(--qa-ink)!important;
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.4;-webkit-text-size-adjust:100%;
+}
+body.heritage-learning.wqa-page main.wqa-shell{
+  height:100dvh;min-height:0;max-width:680px;width:min(calc(100% - 24px),680px);
+  margin:0 auto;padding:clamp(8px,1.6dvh,16px) 0 clamp(9px,1.5dvh,16px);
+  display:flex;flex-direction:column;gap:clamp(8px,1.4dvh,14px);
+  isolation:isolate;
+}
+body.heritage-learning.wqa-page main.wqa-shell::before{
+  z-index:-1;inset:0 -12px auto;height:clamp(105px,22dvh,170px);
+  background:
+    linear-gradient(180deg,transparent 0%,var(--qa-bg) 100%),
+    url("/assets/learning-heritage-architecture.svg") center 24%/cover no-repeat;
+  opacity:.32;-webkit-mask-image:none;mask-image:none;pointer-events:none;
+}
+body.heritage-learning.wqa-page .wqa-head{
+  flex:0 0 auto;display:flex;align-items:center;gap:9px;min-height:54px;
+  padding:0 1px;
+}
+body.heritage-learning.wqa-page .wqa-logo{
+  width:42px;height:42px;object-fit:contain;background:var(--qa-paper);
+  border:1px solid var(--qa-line);border-radius:50%;padding:3px;flex:none;
+}
+body.heritage-learning.wqa-page .wqa-brand{flex:1;min-width:0}
+body.heritage-learning.wqa-page .wqa-brand strong{
+  display:block;color:var(--qa-ink);font:700 clamp(15px,4vw,20px)/1.13 Georgia,serif;
+  letter-spacing:.06em;white-space:nowrap;
+}
+body.heritage-learning.wqa-page .wqa-brand small{
+  display:block;color:var(--qa-soft);font-size:clamp(10px,2.7vw,12px);margin-top:3px;
+}
+body.heritage-learning.wqa-page .wqa-theme{
+  flex:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--qa-line);
+  color:var(--qa-gold);background:var(--qa-paper);font-size:20px;
+  display:grid;place-items:center;cursor:pointer;
+}
+body.heritage-learning.wqa-page .wqa-source{
+  display:flex;align-items:center;justify-content:space-between;gap:9px;flex:0 0 auto;
+  padding:0 3px;min-width:0;
+}
+body.heritage-learning.wqa-page .wqa-topic{
+  font-size:clamp(10px,2.8vw,12px);font-weight:800;color:var(--qa-gold);
+  letter-spacing:.08em;text-transform:uppercase;
+}
+body.heritage-learning.wqa-page .wqa-source a{
+  font-size:clamp(11px,2.8vw,13px);font-weight:700;color:var(--qa-ink)!important;
+  border-bottom:1px solid var(--qa-line);text-decoration:none;white-space:nowrap;
+}
+body.heritage-learning.wqa-page .wqa-card{
+  flex:1 1 auto;min-height:0;display:flex;flex-direction:column;
+  border:1px solid var(--qa-line);border-radius:clamp(16px,4.5vw,23px);
+  background:var(--qa-paper);color:var(--qa-ink);
+  box-shadow:var(--qa-shadow);padding:clamp(12px,3.6vw,22px);
+  overflow:hidden;
+}
+body.heritage-learning.wqa-page .wqa-overline{
+  display:flex;justify-content:space-between;align-items:center;gap:10px;flex:none;
+  color:var(--qa-gold);font-size:clamp(10px,2.9vw,12px);
+  font-weight:800;letter-spacing:.06em;
+}
+body.heritage-learning.wqa-page .wqa-track{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0 clamp(12px,2.8dvh,23px);
+  flex:none;
+}
+body.heritage-learning.wqa-page .wqa-track i{
+  height:5px;border-radius:10px;background:var(--qa-line);opacity:.36;
+}
+body.heritage-learning.wqa-page .wqa-track i[data-active="true"]{
+  opacity:1;background:var(--qa-gold);
+}
+body.heritage-learning.wqa-page .wqa-question{
+  font:700 clamp(18px,4.8vw,26px)/1.22 Georgia,"Times New Roman",serif;
+  color:var(--qa-ink)!important;margin:0 0 clamp(12px,2.8dvh,23px);
+  letter-spacing:-.008em;flex:none;
+}
+body.heritage-learning.wqa-page .wqa-options{
+  display:grid;grid-template-rows:repeat(3,minmax(0,1fr));
+  gap:clamp(7px,1.5dvh,12px);flex:1 1 auto;min-height:0;
+}
+body.heritage-learning.wqa-page .wqa-choice{
+  width:100%;height:100%;min-height:46px;
+  display:flex;gap:11px;align-items:center;text-align:left;
+  border:1px solid var(--qa-line);border-radius:13px;padding:8px clamp(9px,2.7vw,15px);
+  background:var(--qa-choice)!important;color:var(--qa-ink)!important;
+  font:600 clamp(13px,3.6vw,16px)/1.28 system-ui,sans-serif;
+  cursor:pointer;overflow-wrap:break-word;
+}
+body.heritage-learning.wqa-page .wqa-letter{
+  width:28px;height:28px;display:grid;place-items:center;flex:none;
+  border-radius:9px;background:var(--qa-paper);border:1px solid var(--qa-line);
+  color:var(--qa-gold);font-weight:800;font-size:12px;
+}
+body.heritage-learning.wqa-page .wqa-choice[data-state="correct"]{
+  background:var(--qa-good)!important;border-color:var(--qa-success);
+}
+body.heritage-learning.wqa-page .wqa-choice[data-state="wrong"]{
+  background:var(--qa-bad)!important;border-color:var(--qa-danger);
+}
+body.heritage-learning.wqa-page .wqa-choice[disabled]{cursor:default;opacity:1}
+body.heritage-learning.wqa-page .wqa-explain{
+  min-height:42px;flex:none;margin:clamp(8px,1.7dvh,14px) 0 0;
+  font-size:clamp(12px,3vw,14px);line-height:1.3;
+  color:var(--qa-soft)!important;
+}
+body.heritage-learning.wqa-page .wqa-explain[data-status="correct"]{color:var(--qa-success)!important}
+body.heritage-learning.wqa-page .wqa-explain[data-status="wrong"]{color:var(--qa-danger)!important}
+body.heritage-learning.wqa-page .wqa-next{
+  display:block;width:100%;min-height:43px;flex:none;
+  margin-top:8px;padding:9px 14px;border:0;border-radius:12px;
+  color:var(--qa-bg);background:var(--qa-gold);font-weight:800;
+  font-size:clamp(13px,3.6vw,16px);cursor:pointer;
+}
+body.heritage-learning.wqa-page .wqa-next[disabled]{
+  cursor:default;opacity:.48;
+}
+body.heritage-learning.wqa-page button:focus-visible,
+body.heritage-learning.wqa-page a:focus-visible{
+  outline:3px solid var(--qa-focus);outline-offset:3px;
+}
+body.heritage-learning.wqa-page .wqa-result{
+  display:flex;flex:1;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;gap:clamp(12px,2.7dvh,21px);
+}
+body.heritage-learning.wqa-page .wqa-result h1{
+  margin:0;color:var(--qa-ink)!important;font:700 clamp(24px,7vw,36px)/1.18 Georgia,serif;
+}
+body.heritage-learning.wqa-page .wqa-score{
+  color:var(--qa-gold)!important;font:800 clamp(42px,11vw,64px)/1 Georgia,serif;
+}
+body.heritage-learning.wqa-page .wqa-result p{
+  margin:0;color:var(--qa-soft)!important;
+  font-size:clamp(13px,3.7vw,16px);max-width:410px;
+}
+body.heritage-learning.wqa-page .wqa-result-actions{width:100%;display:grid;gap:9px}
+body.heritage-learning.wqa-page .wqa-result-actions button,
+body.heritage-learning.wqa-page .wqa-result-actions a{
+  display:grid;place-items:center;min-height:46px;border-radius:11px;
+  border:1px solid var(--qa-line);background:var(--qa-choice);
+  color:var(--qa-ink)!important;text-decoration:none;font-weight:750;cursor:pointer;
+}
+body.heritage-learning.wqa-page .wqa-result-actions button{
+  background:var(--qa-gold);color:var(--qa-bg)!important;border-color:var(--qa-gold);
+}
+body.heritage-learning.wqa-page [hidden]{display:none!important}
+body.heritage-learning.wqa-page .wqa-mini{
+  text-align:center;color:var(--qa-soft);flex:none;
+  font-size:clamp(10px,2.8vw,12px);margin:0;white-space:normal;
+}
+@media(max-height:650px){
+  body.heritage-learning.wqa-page main.wqa-shell{gap:6px;padding:5px 0}
+  body.heritage-learning.wqa-page .wqa-head{min-height:41px}
+  body.heritage-learning.wqa-page .wqa-logo{width:34px;height:34px}
+  body.heritage-learning.wqa-page .wqa-theme{width:34px;height:34px}
+  body.heritage-learning.wqa-page .wqa-card{padding:11px}
+  body.heritage-learning.wqa-page .wqa-track{margin:6px 0 10px}
+  body.heritage-learning.wqa-page .wqa-question{margin-bottom:9px;font-size:18px}
+  body.heritage-learning.wqa-page .wqa-explain{min-height:29px;margin-top:7px;font-size:11.5px}
+  body.heritage-learning.wqa-page .wqa-choice{font-size:12px;min-height:40px}
+  body.heritage-learning.wqa-page .wqa-next{min-height:39px}
+  body.heritage-learning.wqa-page .wqa-mini{font-size:10px}
+}
+@media(max-height:480px){
+  /* accessibility escape hatch: do not cut off options on unusually small devices */
+  body.heritage-learning.wqa-page .wqa-card{overflow:auto}
+  body.heritage-learning.wqa-page .wqa-options{grid-template-rows:repeat(3,minmax(41px,auto))}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 </style>
 </head>
-<body class="heritage-learning" data-learning-stage="intro">
-<main>
-<header class="learning-masthead">
-  <a class="learning-mark" href="/"><img class="logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD"></a>
-  <div><p class="brand">DĀR AL TAWḤĪD</p><p class="learning-sign">by Serhat Abu Malik</p></div>
-</header>
-<section class="intro">
-  <p class="kicker">LERNBEREICH · ADAB & WISSEN</p>
-  <h1>Wissen und vorbildliche Lebensführung</h1>
-  <p class="sub">Die Aussage von Muḥammad ibn Sīrīn verstehen · 4 kurze Verständnisfragen · kostenlos</p>
-</section>
-<section class="card" aria-label="Ausgangsaussage">
-  <h2>Der überlieferte Grundgedanke</h2>
-  <blockquote class="quote">„Sie lernten die <strong>vorbildliche Lebensführung</strong> genauso, wie sie das <strong>Wissen</strong> lernten.“</blockquote>
-  <p class="note">Sinngemäße deutsche Übersetzung des von Muḥammad ibn Sīrīn überlieferten Wortes. Dies ist eine Aussage eines Tābiʿī, kein prophetischer Ḥadīṯ.</p>
-  <p class="source">📝 al-Ḫaṭīb al-Baġdādī, <em>al-Ǧāmiʿ li-Aḫlāq ar-Rāwī wa-Ādāb as-Sāmiʿ</em>, Bd. 1, S. 80, Nr. 9.</p>
-  <div class="actions"><a href="/q/46/">Originalwortlaut und Quellenkarte Q46 ↗</a><a href="/">Zur Beitragsübersicht</a></div>
-</section>
-<section class="card">
- <h2>Was bedeutet das für das Lernen?</h2>
- <p>In der überlieferten Aussage stehen das Erlernen von Wissen und das Erlernen guter Lebensführung nebeneinander. Die Aussage erinnert daran, dass Wissen nicht bloß aus Begriffen besteht: Auch Haltung und Umgang sollen bewusst gelernt werden.</p>
- <p class="note">Die folgende Übung ist eine pädagogische Zusammenfassung der Aussage, kein zusätzlicher Wortlaut Ibn Sīrīns und keine eigenständige Überlieferung.</p>
-</section>
-<section class="card quiz-panel" id="quiz-panel" aria-labelledby="quiz-title">
- <h2 id="quiz-title">Verständnisfragen</h2>
- <p class="quiz-progress" id="progress" aria-live="polite">Frage 1 von 4</p>
- <p id="question" style="font-weight:650;margin:7px 0 13px"></p>
- <div class="answers" id="answers"></div>
- <p class="feedback" id="feedback" aria-live="polite"></p>
- <button type="button" class="next" id="next" hidden>Weiter zur nächsten Frage</button>
-</section>
-<section class="card finished" id="finished" hidden aria-live="polite">
- <h2>Übung abgeschlossen</h2>
- <p><strong id="score"></strong></p>
- <p>Zurück zur Quellenkarte: Lies die ursprüngliche Aussage noch einmal und unterscheide zwischen dem historischen Wortlaut und seiner praktischen Erläuterung.</p>
- <div class="actions"><a href="/q/46/">Quellenkarte Q46 öffnen</a><button type="button" id="restart">Fragen wiederholen</button></div>
-</section>
-<p class="footer-note">Lernangebot · Keine eigene Quelle oder Rechtsauskunft · DĀR AL TAWḤĪD</p>
+<body class="heritage-learning wqa-page" data-learning-stage="quiz">
+<main class="wqa-shell">
+ <header class="wqa-head">
+   <img class="wqa-logo" src="/watermark-my-logo-full.png" alt="DĀR AL TAWḤĪD Logo">
+   <div class="wqa-brand"><strong>DĀR AL TAWḤĪD</strong><small>Wissen erarbeiten · by Serhat Abu Malik</small></div>
+   <button type="button" class="wqa-theme" id="themeToggle" aria-label="Erscheinungsbild wechseln" title="Hell/Dunkel umschalten">☾</button>
+ </header>
+ <div class="wqa-source">
+   <span class="wqa-topic">ADAB & WISSEN · LERNBEREICH</span>
+   <a href="/q/46/" aria-label="Zur Originalquelle Q46">Quelle Q46 ↗</a>
+ </div>
+ <section class="wqa-card" id="quizPanel" aria-labelledby="question">
+   <div class="wqa-overline"><span id="questionCount">FRAGE 1 VON 4</span><span id="answeredCount">0 richtig</span></div>
+   <div class="wqa-track" id="progressTrack" aria-label="Lernfortschritt"><i data-active="true"></i><i></i><i></i><i></i></div>
+   <h1 class="wqa-question" id="question" tabindex="-1">Wem wird die überlieferte Aussage zugeschrieben?</h1>
+   <div class="wqa-options" id="choices" aria-label="Antwortmöglichkeiten"></div>
+   <p class="wqa-explain" id="explanation" aria-live="polite">Wähle eine Antwort aus.</p>
+   <button type="button" class="wqa-next" id="nextButton" disabled>Antwort auswählen</button>
+ </section>
+ <section class="wqa-card" id="resultPanel" hidden aria-labelledby="resultHeading">
+   <div class="wqa-result">
+     <span class="wqa-topic">LERNBEREICH ABGESCHLOSSEN</span>
+     <h1 id="resultHeading">Gut gearbeitet!</h1>
+     <strong class="wqa-score" id="scoreText">0 / 4</strong>
+     <p>Diese Fragen überprüfen das Verständnis. Die arabische Originalüberlieferung und der Nachweis befinden sich auf Q46.</p>
+     <div class="wqa-result-actions">
+       <button type="button" id="restartButton">Fragen wiederholen</button>
+       <a href="/q/46/">Originalquelle Q46 lesen ↗</a>
+     </div>
+   </div>
+ </section>
+ <p class="wqa-mini">Vier Antworten · jeweils eine Frage · keine Anmeldung nötig</p>
 </main>
 <script>
 (function(){
 "use strict";
-var questions=[
- {q:"Wem wird die Aussage auf der Quellenkarte zugeschrieben?",options:["Muḥammad ibn Sīrīn","Dem Propheten ﷺ","Al-Ḫaṭīb al-Baġdādī als seinem eigenen Wort"],correct:0,why:"Der überlieferte Sprecher ist der Tābiʿī Muḥammad ibn Sīrīn; al-Ḫaṭīb dokumentiert die Überlieferung."},
- {q:"Was wurde der Aussage zufolge neben dem Wissen gelernt?",options:["Vorbildliche Lebensführung und gutes Verhalten","Nur die Namen von Büchern","Ausschließlich das Schreiben"],correct:0,why:"Neben dem Wissen nennt die Aussage al-hady: gute Führung und vorbildliches Verhalten."},
- {q:"Wie ist die deutsche Formulierung auf Q46 gekennzeichnet?",options:["Als sinngemäße Wiedergabe","Als wortgetreue deutsche Prophetenrede","Als eigenständiger Qurʾānvers"],correct:0,why:"Die deutsche Fassung gibt die überlieferte Aussage sinngemäß wieder."},
- {q:"Was darf man über den Bericht nicht behaupten?",options:["Er sei ein prophetischer Ḥadīṯ","Er spreche Wissen und Lebensführung an","Er werde bei al-Ḫaṭīb genannt"],correct:0,why:"Der Bericht ist eine Aussage Ibn Sīrīns und darf nicht dem Propheten ﷺ zugeschrieben werden."}
+const questions=[
+ {q:"Wem wird die überlieferte Aussage zugeschrieben?",
+  choices:["Muḥammad ibn Sīrīn","Dem Propheten ﷺ","Al-Ḫaṭīb als seinem eigenen Wort"],
+  correct:0,why:"Ibn Sīrīn ist der berichtete Sprecher; al-Ḫaṭīb dokumentiert die Überlieferung."},
+ {q:"Was lernten sie laut dem Bericht neben dem Wissen?",
+  choices:["Vorbildliche Lebensführung","Nur Buchtitel auswendig","Ausschließlich Schreiben"],
+  correct:0,why:"Die Aussage nennt al-hady, also gute Führung und vorbildliches Verhalten."},
+ {q:"Wie ist die deutsche Aussage auf Q46 gekennzeichnet?",
+  choices:["Als sinngemäße Wiedergabe","Als Qurʾānvers","Als wörtlicher prophetischer Ḥadīṯ"],
+  correct:0,why:"Der deutsche Wortlaut ist eine sinngemäße Übersetzung, kein neues Originalzitat."},
+ {q:"Welche Zuschreibung wäre nicht korrekt?",
+  choices:["Ein Ausspruch des Propheten ﷺ","Ein Wort des Tābiʿī Ibn Sīrīn","Eine bei al-Ḫaṭīb dokumentierte Aussage"],
+  correct:0,why:"Die Aussage gehört zu Ibn Sīrīn und ist kein prophetischer Ḥadīṯ."}
 ];
-var step=0,score=0,answered=false;
-var panel=document.getElementById("quiz-panel"),end=document.getElementById("finished"),answers=document.getElementById("answers"),feedback=document.getElementById("feedback"),next=document.getElementById("next");
-function show(){answered=false;var item=questions[step];document.getElementById("progress").textContent="Frage "+(step+1)+" von "+questions.length;document.getElementById("question").textContent=item.q;answers.replaceChildren();feedback.textContent="";next.hidden=true;item.options.forEach(function(option,i){var b=document.createElement("button");b.type="button";b.textContent=option;b.setAttribute("aria-pressed","false");b.addEventListener("click",function(){if(answered)return;answered=true;Array.from(answers.children).forEach(function(x){x.disabled=true});b.setAttribute("aria-pressed","true");var right=i===item.correct;if(right)score++;feedback.textContent=(right?"Richtig. ":"Nicht ganz. ")+item.why;next.hidden=false;next.textContent=step===questions.length-1?"Ergebnis anzeigen":"Weiter zur nächsten Frage";next.focus()});answers.appendChild(b)})}
-next.addEventListener("click",function(){step++;if(step===questions.length){panel.hidden=true;end.hidden=false;document.body.setAttribute("data-learning-stage","abschluss");document.getElementById("score").textContent=score+" von "+questions.length+" richtig";end.scrollIntoView({block:"start"})}else show()});
-document.getElementById("restart").addEventListener("click",function(){step=0;score=0;end.hidden=true;panel.hidden=false;document.body.setAttribute("data-learning-stage","quiz");show();panel.scrollIntoView({block:"start"})});
+const byId=id=>document.getElementById(id);
+const panel=byId("quizPanel"),results=byId("resultPanel"),answers=byId("choices");
+const next=byId("nextButton"),feedback=byId("explanation"),question=byId("question");
+let step=0,score=0,selected=false;
+function show(){
+ const item=questions[step];selected=false;
+ byId("questionCount").textContent="FRAGE "+(step+1)+" VON "+questions.length;
+ byId("answeredCount").textContent=score+" richtig";
+ [...byId("progressTrack").children].forEach((el,i)=>el.dataset.active=String(i<=step));
+ question.textContent=item.q;
+ answers.replaceChildren();
+ item.choices.forEach((name,i)=>{
+   const button=document.createElement("button");button.type="button";
+   button.className="wqa-choice";button.setAttribute("aria-label","Antwort "+(i+1)+": "+name);
+   const letter=document.createElement("span");letter.className="wqa-letter";letter.textContent="ABC"[i];letter.setAttribute("aria-hidden","true");
+   const wording=document.createElement("span");wording.textContent=name;
+   button.append(letter,wording);
+   button.addEventListener("click",()=>choose(i,button));
+   answers.appendChild(button);
+ });
+ feedback.textContent="Wähle eine Antwort aus.";feedback.dataset.status="";
+ next.disabled=true;next.textContent="Antwort auswählen";
+}
+function choose(i,button){
+ if(selected)return;selected=true;
+ const item=questions[step],correct=i===item.correct;
+ if(correct)score++;
+ [...answers.children].forEach((b,n)=>{
+   b.disabled=true;
+   if(n===item.correct)b.dataset.state="correct";
+   else if(n===i)b.dataset.state="wrong";
+ });
+ feedback.dataset.status=correct?"correct":"wrong";
+ feedback.textContent=(correct?"Richtig. ":"Nicht ganz. ")+item.why;
+ byId("answeredCount").textContent=score+" richtig";
+ next.disabled=false;next.textContent=step===questions.length-1?"Ergebnis ansehen":"Nächste Frage →";
+}
+next.addEventListener("click",()=>{
+ if(!selected)return;
+ step++;
+ if(step===questions.length){
+   panel.hidden=true;results.hidden=false;
+   byId("scoreText").textContent=score+" / "+questions.length;
+   byId("resultHeading").textContent=score===questions.length?"Sehr gut!":"Übung abgeschlossen";
+   document.body.dataset.learningStage="complete";
+   byId("resultHeading").focus?.({preventScroll:true});
+ }else{show();question.focus({preventScroll:true})}
+});
+byId("restartButton").addEventListener("click",()=>{
+ step=0;score=0;results.hidden=true;panel.hidden=false;
+ document.body.dataset.learningStage="quiz";show();
+ question.focus({preventScroll:true});
+});
+function applyTheme(theme){
+ const value=theme==="dark"?"dark":"light";
+ document.documentElement.dataset.qTheme=value;
+ byId("themeToggle").textContent=value==="dark"?"☀":"☾";
+ byId("themeToggle").setAttribute("aria-label",value==="dark"?"Helles Erscheinungsbild einschalten":"Dunkles Erscheinungsbild einschalten");
+ document.querySelector('meta[name="theme-color"]').content=value==="dark"?"#0d1713":"#f5f1e8";
+ try{localStorage.setItem("dar-quellen-royal-theme",value)}catch(e){}
+}
+byId("themeToggle").addEventListener("click",()=>applyTheme(document.documentElement.dataset.qTheme==="dark"?"light":"dark"));
+window.addEventListener("pageshow",()=>{
+ try{applyTheme(localStorage.getItem("dar-quellen-royal-theme")==="dark"?"dark":"light")}catch(e){}
+});
+applyTheme(document.documentElement.dataset.qTheme);
 show();
 })();
 </script>
-</body></html>
+</body>
+</html>
