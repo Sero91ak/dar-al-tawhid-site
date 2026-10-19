@@ -133,7 +133,13 @@ async function main() {
   const postReference = requireArg(args, "postReference");
   const statementSummary = requireArg(args, "summary");
   const sourceLabel = requireArg(args, "source");
+  // Every new source card has a relevant, already-created learning module.
+  // No generic Ikhlas link for an unrelated source and no dead placeholder URL.
+  const learningPath = requireArg(args, "learning");
+  if (!/^\/lernen\/[a-z0-9-]+\/$/.test(learningPath))
+    throw new Error("--learning muss ein lokaler Pfad wie /lernen/wissen-adab/ sein");
   await ensureTargetPath(targetPath);
+  await ensureTargetPath(learningPath + "index.html");
 
   const registry = await readJson(REGISTRY_PATH);
   const rawNext = String(await fs.readFile(NEXT_PATH, "utf8")).trim();
@@ -149,6 +155,8 @@ async function main() {
   const html = tpl
     .replaceAll("__NUMBER__", String(number))
     .replaceAll("__TARGET_PATH__", escapeHtml(targetPath))
+    .replaceAll("__LEARNING_PATH__", escapeHtml(learningPath))
+    .replaceAll("__LEARNING_TITLE__", escapeHtml(title))
     .replaceAll("__TITLE__", escapeHtml(title))
     .replaceAll("__SUMMARY__", escapeHtml(statementSummary))
     .replaceAll("__SOURCE_LABEL__", escapeHtml(sourceLabel))
