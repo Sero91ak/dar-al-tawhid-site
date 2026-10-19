@@ -9,7 +9,7 @@ verificationNote: "Al-Ḫaṭīb, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī, 1/80, Nr. 9
 category: "Adab"
 topic: "Wissen, Charakter und vorbildliche Lebensführung"
 scholar: "Muḥammad ibn Sīrīn"
-book: "al-Ḫaṭīb al-Baġdādī, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī"
+book: "al-Jāmiʿ li-Akhlāq ar-Rāwī wa Ādāb as-Sāmiʿ"
 source: "al-Ḫaṭīb al-Baġdādī, al-Ǧāmiʿ li-Aḫlāq ar-Rāwī wa-Ādāb as-Sāmiʿ, Bd. 1, S. 80, Nr. 9."
 sourceVolume: "1"
 sourcePage: "80"
