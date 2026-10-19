@@ -123,3 +123,16 @@ body.is-more-route .dar-more-v15 .dm-exact-sr{position:absolute!important;overfl
 body.is-more-route .dar-more-v15 .dm-exact-promo .dm-showcase-footnote{margin:11px 4px 0;max-width:100%;font-size:clamp(10px,1.6vw,12px);line-height:1.5}
 @media(min-width:700px){body.is-more-route .dar-more-v15 .dm-exact-stack{gap:15px}body.is-more-route .dar-more-v15 .dm-exact-card{border-radius:32px}}
 @media(prefers-reduced-motion:reduce){body.is-more-route .dar-more-v15 .dm-exact-action{transition:none}}
+ 
+/* MORE_COMPACT_NO_DUPLICATE_FRAUEN_V1
+   Preserve the Frauen featureCatalog card; suppress injected duplicate only. */
+body.is-more-route #appView [data-dar-frauen-live-entry]{display:none!important}
+@media(max-width:699px){
+  body.is-more-route .dar-more-v15 .dm-grid{gap:7px}
+  body.is-more-route .dar-more-v15 .dm-card{min-height:88px;padding:8px 9px 9px;border-radius:14px}
+  body.is-more-route .dar-more-v15 .dm-cardhead{gap:6px}
+  body.is-more-route .dar-more-v15 .dm-cardicon{width:32px;height:35px;flex-basis:32px}
+  body.is-more-route .dar-more-v15 .dm-cardicon img{width:32px;height:33px}
+  body.is-more-route .dar-more-v15 .dm-cardtitle strong{font-size:clamp(13.8px,3.65vw,15.5px);line-height:1.2}
+  body.is-more-route .dar-more-v15 .dm-desc{margin-top:4px;font-size:clamp(11.9px,3.07vw,12.8px);line-height:1.34}
+}
