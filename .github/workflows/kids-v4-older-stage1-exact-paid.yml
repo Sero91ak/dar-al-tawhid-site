@@ -1,4 +1,4 @@
-name: KIDS V4 Older First20 Exact Originals (max 10 per manually approved run)
+name: KIDS V4 One Correct Master Dictionary Pilot (one billed take only)
 
 on:
   workflow_dispatch:
@@ -31,9 +31,7 @@ concurrency:
 
 jobs:
   original-v4-first20-older-questions:
-    # EMERGENCY STOP 2026-10-19: user reports missing 10,099-rule master pronunciation dictionary.
-    # No TTS launch until verified Fuṣḥā and corrected dictionary binding; avoid new charges.
-    if: false
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.authorize_new_credit_spend == 'YES' && github.event.inputs.acknowledge_existing_canonical_approval == 'YES' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
@@ -45,9 +43,12 @@ jobs:
       - name: Zero-credit preflight of exact 65 texts, original receipts, and 10-part spend cap
         env:
           EXPECTED_V4_BATCH_SHA256: ${{ github.event.inputs.approve_exact_batch_fingerprint_sha256 }}
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
         run: |
           set -euo pipefail
           python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/verify_quiz_v4_master_dictionary_provider_get_only.py
           python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --audit
           python3 - <<'PY'
           import json
@@ -63,18 +64,24 @@ jobs:
           assert isinstance(a['manualApprovalMustMatchExactBatchFingerprintSHA256'],str)
           assert len(a['manualApprovalMustMatchExactBatchFingerprintSHA256'])==64
           assert a['manualApprovalMustMatchExactBatchFingerprintSHA256']==os.environ.get('EXPECTED_V4_BATCH_SHA256'), 'Stale or incorrect batch fingerprint; STOP before TTS'
+          hold=json.loads(Path('kids/data/quiz-v4-pronunciation-hold.json').read_text())
+          assert hold['productionPaused'] is False
+          assert hold['dictionaryProviderVerified'] is True and hold['ownerRestartAuthorized'] is True
+          assert hold['authorizedNewOriginalsBeforeHearing']==1 and hold['humanListeningQualityGateReleased'] is False
+          assert hold['publicQuizAudioReleaseAuthorized'] is False
           assert a['paidSynthesisAuthorizedByAudit'] is False
           assert a['newElevenLabsCreditsSpentByAudit']==0
           assert a['publicReleaseAllowed'] is False
           print('PASS: only exact stage1 V4 recording queue may be purchased.')
           PY
 
-      - name: Generate at most ten specifically approved new original V4 speech parts
+      - name: Generate exactly ONE verified dictionary pilot with real MP3 checkpoint
         env:
           ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
           KIDS_V4_STAGE1_APPROVED_CANONICAL_450: ${{ github.event.inputs.acknowledge_existing_canonical_approval }}
           KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL: ${{ github.event.inputs.authorize_new_credit_spend }}
           KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256: ${{ github.event.inputs.approve_exact_batch_fingerprint_sha256 }}
+          KIDS_V4_STAGE1_SAMPLE_ONLY: 'YES'
         run: |
           set -euo pipefail
           python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --produce
