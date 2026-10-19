@@ -509,6 +509,30 @@
       "importedMP3SHA256": "3dc9260a2729bf5a6ed60026f385736e1a4b5d0a0dacc2d39ac8a445bb1517c3",
       "savedURL": "/kids/assets/kids-quiz-audio/v4-connected-flow-original-review/BpifmV2fZsec4HdoTxJT.mp3",
       "originalMP3Bytes": 38484
+    },
+    {
+      "sourceText": "Glücksspiele spielen.",
+      "sourceTextSHA256": "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
+      "sourceQuestionIds": [
+        "kids-quiz-046"
+      ],
+      "sourceAudioPart": "question",
+      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
+      "provider": "ElevenLabs",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "flowId": "r6F5uzBi4xnca5w16H4K",
+      "generationId": "UoyfOZJg4ysPhTee41ru",
+      "estimatedCreditsNotInvoice": 20.350387665198237,
+      "actualProviderCredits": 20.350387665198237,
+      "humanListeningApproved": false,
+      "publicReleaseAllowed": false,
+      "nodeId": "SwUtaU0zMD7BWQYb4Bn2",
+      "sessionId": "2n1iziIMUiBd52ZP47zB",
+      "providerGenerationDurationSeconds": 1.52,
+      "providerStatus": "completed",
+      "providerMediaStoredInElevenLabs": true,
+      "originalMP3ImportedIntoGithub": false
     }
   ]
 }
