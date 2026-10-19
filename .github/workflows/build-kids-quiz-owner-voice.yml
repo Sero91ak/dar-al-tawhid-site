@@ -84,6 +84,12 @@ jobs:
             echo "Non-voice code update: no paid synthesis is authorized."
           fi
 
+      - name: Emergency stop for Quiz V4 and Full - owner's pronunciation dictionary missing
+        if: env.VOICE_BUILD_SCOPE == 'quiz' || env.VOICE_BUILD_SCOPE == 'full'
+        run: |
+          echo "::error::TAWḤĪD KIDS quiz paid speech STOPPED by owner 2026-10-19. Master dictionary + Arabic Fuṣḥā validation required; do not spend credits."
+          exit 1
+
       - name: Resolve available DĀR owner voice path
         run: |
           set -euo pipefail
