@@ -17,9 +17,9 @@ from pathlib import Path
 REVIEW="review/kids-quiz-v4-batch-001-020-20261014"
 VOICE="DkU7j9uO4ZEtLD2iRZSH"
 MODEL="eleven_v4"
-BATCH="KIDS_V4_450_BATCH_03_50"
+BATCH="KIDS_V4_450_BATCH_04_50"
 MAX_NEW=50
-JOURNAL=Path("kids/data/quiz-v4-450-batch03-attempts.json")
+JOURNAL=Path("kids/data/quiz-v4-450-batch04-attempts.json")
 
 def load():
     if JOURNAL.exists():
@@ -65,31 +65,44 @@ def commit_checkpoint(*paths):
                 raise RuntimeError("Checkpoint conflict. Stop paid POST and recover already-paid artifacts, NEVER retry.") from exc
     raise RuntimeError("Could not persist paid MP3 checkpoint to GitHub. Stop synthesis.")
 
+
+def reserve_batch(selected_hashes):
+    """Push all 50 exact SHA reservations ONCE before any potentially paid call.
+
+    If a runner crashes, the remote journal blocks accidental re-purchase;
+    recover the actual MP3s from original provider history and runner artifact.
+    """
+    if len(selected_hashes)!=MAX_NEW or len(set(selected_hashes))!=MAX_NEW:
+        raise RuntimeError("Exactly 50 distinct new original texts required")
+    if JOURNAL.exists():
+        raise RuntimeError("An earlier paid 50er batch is already reserved. Reconcile originals before any more charges")
+    data=load()
+    data["approvedSelection"]=selected_hashes
+    data["attempts"]=[{"textSha256":d,"status":"RESERVED_BEFORE_BILLING"} for d in selected_hashes]
+    JOURNAL.parent.mkdir(parents=True,exist_ok=True)
+    JOURNAL.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+    commit_checkpoint(JOURNAL)
+    return data
+
 def record_before_post(spoken,selected_hashes):
     data=load()
-    if not (len(selected_hashes)==MAX_NEW and len(set(selected_hashes))==MAX_NEW):
-        raise RuntimeError("The first 50 billed source hashes must be immutable and distinct")
-    if data.get("approvedSelection") is not None and data["approvedSelection"]!=selected_hashes:
-        raise RuntimeError("50-source selection changed after billing; DO NOT BUY")
-    data["approvedSelection"]=selected_hashes
-    hashvalue=hashlib.sha256(spoken.encode("utf-8")).hexdigest()
-    if hashvalue not in selected_hashes:
-        raise RuntimeError("Unapproved exact text in billed fifty")
-    if any(x["textSha256"]==hashvalue for x in data["attempts"]):
-        raise RuntimeError("Previous paid request for exact text, including uncertain responses; DO NOT RETRY")
-    data["attempts"].append({"textSha256":hashvalue,"status":"SUBMITTED_UNKNOWN_RESULT"})
-    JOURNAL.parent.mkdir(parents=True,exist_ok=True)
-    JOURNAL.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    # Atomic cost barrier: do NOT POST before GitHub accepts this marker.
-    commit_checkpoint(JOURNAL)
-    return hashvalue
+    if data.get("approvedSelection")!=selected_hashes:
+        raise RuntimeError("Prepared 50 original SHA selection changed; stop payment")
+    digest=hashlib.sha256(spoken.encode("utf-8")).hexdigest()
+    matches=[z for z in data["attempts"] if z["textSha256"]==digest]
+    if len(matches)!=1 or matches[0]["status"]!="RESERVED_BEFORE_BILLING":
+        raise RuntimeError("Original may already be charged or previously attempted; NO REBUY")
+    matches[0]["status"]="SUBMITTED_UNKNOWN_RESULT"
+    JOURNAL.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+    return digest
 
 def record_returned_mp3(textsha,mp3sha,filepath,registry_path,ledger_path,request_id):
     data=load()
     matches=[x for x in data["attempts"] if x["textSha256"]==textsha]
     if len(matches)!=1 or matches[0]["status"]!="SUBMITTED_UNKNOWN_RESULT":
-        raise RuntimeError("The original paid audio receipt is ambiguous; DO NOT REPEAT")
+        raise RuntimeError("Cannot reconcile original paid MP3 receipt; NEVER RETRY")
     matches[0].update({"status":"ORIGINAL_MP3_SAVED",
                        "mp3Sha256":mp3sha,"providerRequestId":request_id})
-    JOURNAL.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
-    commit_checkpoint(JOURNAL,filepath,registry_path,ledger_path)
+    JOURNAL.write_text(json.dumps(data,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+    if not Path(filepath).exists() or not Path(registry_path).exists() or not Path(ledger_path).exists():
+        raise RuntimeError("Original MP3 bytes or paid ledger missing after charged POST")
