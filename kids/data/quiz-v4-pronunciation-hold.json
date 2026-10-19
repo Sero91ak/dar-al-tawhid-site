@@ -1,23 +1,31 @@
 {
   "schemaVersion": 1,
   "scope": "TAWHID_KIDS_ALL_PAID_QUIZ_V4_TTS",
-  "productionPaused": true,
-  "stopReason": "2026-10-19 user explicitly stopped speech generation: master voice used without existing ElevenLabs pronunciation dictionary; Arabic Fusha and Islamic terminology pronounced incorrectly",
+  "productionPaused": false,
+  "stopReason": "2026-10-19 original wrong-pronunciation series stopped; only ONE new dictionary-verified eleven_v4 original pilot is now authorized; multi-take and public release stay forbidden until owner hears sample",
   "requiredBeforeResume": [
-    "Identify and verify existing user pronunciation dictionary ID/version",
-    "Bind correct pronunciation dictionary locator to every eleven_v4 request",
-    "Validate Arabic Fusha versus German surrounding text and representative Arabic terms before further paid speech",
-    "Review three already paid new generation IDs; never regenerate while held",
-    "Explicitly lift this stop only after pronunciation checks"
+    "First paid pilot only after exact current dictionary GET and API-payload tests passed",
+    "One test original must be securely checkpointed before/after POST, using original SHA and ledger",
+    "Listen to new V4 sample for Quran/Iman/Fusha correctness; no more than one take before hearing",
+    "Do not reuse or publish three quarantined invalid old audio takes",
+    "Larger paid batches remain blocked until listening quality gate is released"
   ],
   "modelId": "eleven_v4",
   "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "humanPronunciationApproved": false,
-  "paidSpeechAuthorized": false,
+  "paidSpeechAuthorized": true,
   "publicQuizAudioReleaseAuthorized": false,
   "protectedRecentGenerationIds": [
     "UoyfOZJg4ysPhTee41ru",
     "15jWoEmEjxXcSEz9r79Z",
     "fXiqKqmUPFZBMOCKBUQ5"
-  ]
+  ],
+  "ownerRestartAuthorized": true,
+  "dictionaryProviderVerified": true,
+  "dictionaryVerificationGitHubRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39254840104",
+  "dictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+  "dictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
+  "dictionaryRuleCount": 10099,
+  "authorizedNewOriginalsBeforeHearing": 1,
+  "humanListeningQualityGateReleased": false
 }
