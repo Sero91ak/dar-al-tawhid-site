@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-19T16:37:26Z",
+  "timestamp": "2026-10-19T16:40:03Z",
   "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "39284091276",
+  "finishedDeployConclusion": "cancelled",
+  "finishedDeployRun": "39286040406",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -76,8 +76,8 @@
       "head_sha": "cb7ce3e84f5f708593f8e92b9704751f5980e771",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39286144741",
       "id": 39286144741,
-      "status": "queued",
-      "updated_at": "2026-10-19T16:31:41Z"
+      "status": "pending",
+      "updated_at": "2026-10-19T16:38:47Z"
     },
     {
       "conclusion": null,
@@ -89,13 +89,13 @@
       "updated_at": "2026-10-19T16:30:57Z"
     },
     {
-      "conclusion": null,
+      "conclusion": "cancelled",
       "created_at": "2026-10-19T16:30:55Z",
       "head_sha": "161ac5825ced10bd2a82adcd07bf8b87578f6ceb",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39286040406",
       "id": 39286040406,
-      "status": "pending",
-      "updated_at": "2026-10-19T16:36:02Z"
+      "status": "completed",
+      "updated_at": "2026-10-19T16:39:10Z"
     },
     {
       "conclusion": null,
@@ -103,8 +103,8 @@
       "head_sha": "5b0e6b3d5133bf85a9ee26fb55304d661799d340",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39285900312",
       "id": 39285900312,
-      "status": "queued",
-      "updated_at": "2026-10-19T16:29:58Z"
+      "status": "in_progress",
+      "updated_at": "2026-10-19T16:39:57Z"
     },
     {
       "conclusion": null,
@@ -112,8 +112,8 @@
       "head_sha": "e5f8499058b36504e1753ba37dc1660b240996c5",
       "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39285091121",
       "id": 39285091121,
-      "status": "queued",
-      "updated_at": "2026-10-19T16:23:46Z"
+      "status": "in_progress",
+      "updated_at": "2026-10-19T16:39:08Z"
     },
     {
       "conclusion": "success",
