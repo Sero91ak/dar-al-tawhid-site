@@ -12,6 +12,7 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/"kids/tools"))
 from quiz_v4_all900_release_gate import check
+from quiz_v4_quarantine import quarantined_originals,blocked_full_utterances
 
 CURATED=ROOT/"kids/data/quiz-kids-curated-450-review.json"
 ARCHIVE=ROOT/"kids/data/quiz-kids-expansion-reserve-450.json"
@@ -54,6 +55,10 @@ def main():
     if voice.get("modelId")!="eleven_v4" or voice.get("voiceId")!="DkU7j9uO4ZEtLD2iRZSH":
         raise RuntimeError("Unknown original V4 master speech")
     keys={r[k]["text"] for r in records for k in FIELDS}
+    # Ban old mispronounced provider originals even when a stale composite
+    # is present in the public manifest or claims approval.
+    banned_texts,banned_ids=quarantined_originals(ROOT)
+    banned_full=blocked_full_utterances(records,banned_texts,banned_ids)
     manifest=load(MANIFEST).get("entries") or {}
     errors=Counter()
     approved=set()
@@ -61,6 +66,10 @@ def main():
         issue=check(manifest.get(phrase))
         if issue:errors[issue]+=1
         else:approved.add(phrase)
+    quarantined_approved=approved&banned_full
+    if quarantined_approved:
+        errors["previously-rejected-pronunciation-source"]+=len(quarantined_approved)
+        approved-=quarantined_approved
     by_age={}
     for age in ("4-6","7-8","9-10"):
         rows=[r for r in records if r["ageBand"]==age]
@@ -73,6 +82,9 @@ def main():
        "uniqueFullAudioTextKeys":len(keys),
        "importedAndListeningApprovedKeys":len(approved),
        "audioMissingOrUnapprovedKeys":len(keys)-len(approved),
+       "quarantinedPaidGenerationIDs":len(banned_ids),
+       "blockedFullUtteranceKeys":len(banned_full),
+       "quarantinedAlreadyApprovedKeys":len(quarantined_approved),
        "byAge":by_age,"errorCounts":dict(errors),
        "releaseSwitchEnabled":config_enabled,
        "releaseAllowed":allowed and not a.ignore_flag,
