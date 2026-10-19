@@ -25,15 +25,15 @@
     "alreadyTechnicallyComplete": 80,
     "questionsBlockedOnlyOnAlreadyPaidNine": 80,
     "questionsWaitingOnlyForConnectedFlowOriginals": 4,
-    "connectedFlowOriginalTextsPendingOrReserved": 11,
+    "connectedFlowOriginalTextsPendingOrReserved": 10,
     "connectedFlowUnsettledStatuses": {
       "GENERATION_SUBMITTED_DO_NOT_RETRY": 1,
       "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED": 7,
-      "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT": 3
+      "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT": 2
     },
     "questionsNeedingAtLeastOneGenuinelyNewOriginal": 286,
     "previouslyPaidMissingGenerationCount": 9,
-    "reservedFlowOriginalsExcludedFromNewChargeQueue": 11,
+    "reservedFlowOriginalsExcludedFromNewChargeQueue": 10,
     "previouslyPaidMissingGenerationIds": [
       "1UAwmEQ77D4BmA9DttHZ",
       "2xy9ZLej1wPTrnvAr9p7",
@@ -47,8 +47,8 @@
     ],
     "missingGenuineNewExactSegments": 1356,
     "missingGenuineNewTextCodepoints": 64102,
-    "distinctPreviouslySavedOriginalTextKeys": 399,
-    "directPaidOriginalsWithUniqueReceipts": 352,
+    "distinctPreviouslySavedOriginalTextKeys": 400,
+    "directPaidOriginalsWithUniqueReceipts": 353,
     "newElevenLabsCreditsSpent": 0,
     "paidSynthesisAuthorized": false,
     "humanListeningApproved": false,
@@ -8626,7 +8626,6 @@
       "status": "await-connected-flow-only",
       "missingPreviouslyPaidGenerationIds": [],
       "missingConnectedFlowOriginalTextSha256": [
-        "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
         "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
         "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30"
       ],
@@ -8637,7 +8636,6 @@
         "question": {
           "alreadyPaidNotYetImported": [],
           "awaitingConnectedFlowOriginalTextSha256": [
-            "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
             "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59"
           ],
           "newOriginalTextSha256": []
@@ -18854,11 +18852,6 @@
     {
       "sourceTextSha256": "3a6cb0a42b1c41a9f1439cde7ae0b5ac8a7d836c2852e128b1fd076d4965fd86",
       "status": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
-      "newSynthesisAllowed": false
-    },
-    {
-      "sourceTextSha256": "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
-      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
       "newSynthesisAllowed": false
     },
     {

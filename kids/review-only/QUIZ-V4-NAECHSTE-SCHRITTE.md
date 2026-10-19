@@ -11,7 +11,7 @@ Auch alle reservierten/eingereichten ElevenLabs-Flow-Aufnahmen bleiben bis zur K
 | 9-10 | 4 | 0 | 3 | 143 |
 
 **Schon bezahlte Originale noch zu retten:** 9.
-**Ungeklärte verbundene Flow-Originale, die nicht erneut gekauft werden dürfen:** 11.
+**Ungeklärte verbundene Flow-Originale, die nicht erneut gekauft werden dürfen:** 10.
 **Quizfragen, die nur auf verbundene Flow-Originale warten:** 4.
 **Neue einzigartige Texte nach echtem Deduplizieren:** 1356 (nur Berechnungsbasis; keine Credits bestellt).
 
