@@ -18,5 +18,7 @@
   "repeatPaidTakeAfterUnknownResponseAllowed": false,
   "reason": "User explicitly authorized continue building all 450 quiz audios using existing ElevenLabs master voice and original pronunciation lexicon; exactly one genuine Fuṣḥā-aware pilot before wider paid batches.",
   "workflowSyntaxCorrectionAfterNoJobs": true,
-  "isolatedActionsQueueRetryAfterPreJobCancel": true
+  "isolatedActionsQueueRetryAfterPreJobCancel": true,
+  "gitRemoteReceiptRaceCorrectionVerifiedByNoPaidPOSTLog": true,
+  "remoteReceiptRetryAttempt": 2
 }
