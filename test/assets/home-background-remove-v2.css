@@ -3,6 +3,15 @@
    The old top hero/study photo, lower study photo and mobile SVG canvas must
    never paint behind the Startseite, independently of theme and screen size. */
 
+/* Old legacy scripts also painted the photo directly on <html>. */
+html:has(body.is-home-route),
+html.dar-home-v3:has(body.is-home-route),
+html.dar-home-v1194:has(body.is-home-route){
+  background-color:var(--dv3-bg,var(--bg))!important;
+  background-image:none!important;
+  background-blend-mode:normal!important;
+}
+
 html[data-theme] body.is-home-route,
 html.dar-home-v3 body.is-home-route,
 html.dar-home-v1194 body.is-home-route {
