@@ -67,6 +67,20 @@ def main():
          "model/voice drift")
     must(0<=len(batch)<=10 and estimate<=850,
          "unapproved unexpected spend")
+    # 850 is the ABSOLUTE per-run ceiling, not a minimum balance requirement.
+    # Older behaviour refused an economical ~237-credit batch unless 850 were
+    # available. The new cushion is proportional and never starts a request
+    # without some margin for account/model billing differences.
+    must(stage1.required_subscription_credits(237.42)==356.13,
+         "next economical V4 batch requires an excessive or insufficient balance")
+    must(stage1.required_subscription_credits(10)==60.0
+         and stage1.required_subscription_credits(850)==1275.0,
+         "subscription cushion must scale to the actual selected batch")
+    try:
+        stage1.required_subscription_credits(850.01)
+    except RuntimeError:pass
+    else:raise AssertionError("cost greater than fixed safety ceiling accepted")
+
     assert len(complete_qids)==len(set(complete_qids))
     if len(missing)==65:
         must(len(complete_qids)>=2,
