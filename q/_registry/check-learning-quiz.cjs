@@ -47,4 +47,20 @@ const answerKeys=[...quiz.matchAll(/correct:(\d),why:/g)].map(x=>Number(x[1]));
 assert.equal(answerKeys.length,4,"all four quiz answers need explicit answer keys");
 assert.ok(new Set(answerKeys).size >= 3,"correct answers must not always sit on the same option");
 assertHas(html,/Vier Fragen · eine Frage pro Ansicht/,"single-question quiz footer label must be accurate");
+const stems=[...quiz.matchAll(/\{q:"([^"]+)"/g)].map(x=>x[1]);
+assert.equal(stems.length,4,"four independently checkable question stems required");
+assert.equal(new Set(stems).size,4,"no duplicate quiz questions");
+for (const stem of stems) {
+  assert.ok(!/\bQ\s?4[56]\b|deutsche Aussage|gekennzeichnet|Quellenkarte|Quelle(?:n)?nummer|ChatGPT|Layout|veröffentlicht|Überlieferungsstatus/i.test(stem),
+    "quiz must examine Ibn Sīrīn's actual subject, not editorial metadata: " + stem);
+}
+assert.ok(stems.some(x=>/beiden Bereiche|Wissen|Gegenstand des Lernens/i.test(x)),"question about knowledge and conduct missing");
+assert.ok(stems.some(x=>/al-hady/i.test(x)),"question about source term al-hady missing");
+assert.ok(stems.some(x=>/al-Qāsim/i.test(x)),"question about learning from a lived model missing");
+assert.ok(stems.some(x=>/Vorgehen|Grundgedanken/i.test(x)),"practical application missing");
+const sage=fs.readFileSync(path.join(root,"assets/theme-salbei-elfenbein.css"),"utf8");
+assertHas(sage,/SALBEI_ELFENBEIN_QUIZ_READABILITY_V2/,"sage ivory quiz contrast repair missing");
+assertHas(sage,/\.quiz-explanation[^}]*\.quiz-source/s,"explanation and source must have themed contrast selectors");
+assertHas(sage,/-webkit-text-fill-color:#253C2E!important/,"dark text must remain readable in iOS webview");
+
 console.log("OK: Q46 quiz single-screen structure, four-answer flow, Q backlink, light/dark contrast, script syntax.");
