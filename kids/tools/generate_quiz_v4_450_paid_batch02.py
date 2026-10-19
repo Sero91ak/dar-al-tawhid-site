@@ -17,12 +17,20 @@ PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
 READY=ROOT/"kids/data/quiz-v4-450-api-readiness.json"
 REGISTRY=ROOT/"kids/data/quiz-v4-450-original-clip-registry.json"
 LEDGER=ROOT/"kids/data/quiz-v4-450-paid-generation-ledger.json"
-ATTEMPTS=ROOT/"kids/data/quiz-v4-450-batch02-request-journal.json"
+ATTEMPTS=(ROOT/"kids/data/quiz-v4-450-batch02-request-journal.json"
+          if BATCH=="KIDS_V4_450_BATCH_02_20"
+          else ROOT/"kids/data/quiz-v4-paid-wave-journals"/(BATCH+".json"))
+USAGE=(ROOT/"kids/data/quiz-v4-450-batch02-usage.json"
+       if BATCH=="KIDS_V4_450_BATCH_02_20"
+       else ROOT/"kids/data/quiz-v4-paid-wave-usage"/(BATCH+".json"))
 TECHQA=ROOT/"kids/data/quiz-v4-450-saved-mp3-technical-qa.json"
 OUTPUT=ROOT/"kids/assets/kids-quiz-audio/v4-curated450-review"
 VOICE="DkU7j9uO4ZEtLD2iRZSH"
 MODEL="eleven_v4"
-BATCH="KIDS_V4_450_BATCH_02_20"
+# Default preserves the legacy original campaign identity. Subsequent
+# distinct, user-approved 20-text recording waves get stable, NONREUSABLE
+# names; provider SHA identities remain global across all waves.
+BATCH=os.environ.get("KIDS_V4_450_BATCH_ID","KIDS_V4_450_BATCH_02_20").strip()
 RATE=0.969066
 LIMIT=20
 MAX_COST=1200
@@ -215,6 +223,14 @@ def main():
     # avoid a circular import at module load. Never leave a paid request
     # orphaned on an ephemeral Actions runner.
     from generate_quiz_v4_older_stage1_exact import persist_remote_paid_checkpoint
+    import re
+    if (BATCH!="KIDS_V4_450_BATCH_02_20"
+        and (not re.fullmatch(r"KIDS_V4_450_WAVE_[0-9]{3}_20",BATCH)
+             or BATCH=="KIDS_V4_450_WAVE_000_20")):
+        raise RuntimeError("Invalid unique paid wave ID, do not start TTS")
+    if (os.environ.get("GITHUB_ACTIONS")!="true"
+        or os.environ.get("GITHUB_REF_NAME")!="review/kids-quiz-v4-batch-001-020-20261014"):
+        raise RuntimeError("Paid original waves require the checkpoint-capable private GitHub review runner")
     key=os.environ.get("ELEVENLABS_API_KEY","").strip()
     if not key:raise RuntimeError("ElevenLabs API key missing")
     if load(ROOT/"kids/data/quiz-curation-release.json").get("enabled") is not False:
@@ -245,7 +261,7 @@ def main():
     protected=protect_paid_texts(ROOT,registry,ledger)
     chosen,estimate=choose(plan,registry,protected)
     before=subscription(key)
-    if before<max(MAX_COST*1.25,estimate*1.4):
+    if before<max(estimate*1.5,estimate+50.0):
         raise RuntimeError("Subscription budget lower than estimated batch: no charges")
     print(f"V4_450_BATCH02_PLAN clips={len(chosen)} estimated_max={MAX_COST} estimate={estimate:.2f}",flush=True)
     OUTPUT.mkdir(parents=True,exist_ok=True)
@@ -305,8 +321,8 @@ def main():
            "billableExpenseApproximate":True,
            "source":"eleven_v4","savedOnRunner":True,
            "listeningApproved":False,"live":False}
-    save(ROOT/"kids/data/quiz-v4-450-batch02-usage.json",stats)
-    persist_remote_paid_checkpoint(ROOT/"kids/data/quiz-v4-450-batch02-usage.json",
+    save(USAGE,stats)
+    persist_remote_paid_checkpoint(USAGE,
                                    purpose="batch02-final-usage")
     print("V4_450_BATCH02_SAVED_ALL "+json.dumps(stats,ensure_ascii=False),flush=True)
 
