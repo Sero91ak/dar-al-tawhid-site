@@ -88,8 +88,8 @@
     "no-native-app-changes"
   ],
   "progress": {
-    "snapshotAsOf": "2026-10-18",
-    "hadithAndAtharCatalogCount": 3357,
+    "snapshotAsOf": "2026-10-19",
+    "hadithAndAtharCatalogCount": 3358,
     "hadith": 2408,
     "athar": 949,
     "verifiedMeaning": "10 source/grade audits completed; NOT 10 newly authenticated transmissions. User's target of 10/20 means work units, not forced success.",
@@ -97,7 +97,7 @@
       "apple-tv/hadith/audit/2026-10-18-sharh-athar-continuation.json",
       "apple-tv/hadith/audit/0371-0392-20261018-two-batches.json"
     ],
-    "nextRequestedBatch": "HAD-0443–HAD-0462 (20 candidates) with open real attribution/isnad work; separately resolve HAD-0406 only if original text and chain found",
+    "nextRequestedBatch": "HAD-0483–HAD-0502, 20 individual legacy sources and isnad checks, prioritisizing unresolved genuine sharh, avoiding duplicate records",
     "completedBatches": [
       {
         "date": "2026-10-18",
@@ -163,21 +163,24 @@
     ],
     "warning": "20 audited/updated ≠ 20 newly authenticated; exactly two HAD-0380 and HAD-0391 identified as securely transmitted in this new 20-item audit; other statuses preserved as pending/weak.",
     "lastCompletedBatch": {
-      "date": "2026-10-18",
-      "range": "HAD-0393–HAD-0412",
+      "date": "2026-10-19",
+      "range": "HAD-0463–HAD-0482",
       "inspected": 20,
-      "athar": 18,
-      "hadithAlreadySharhVerified": 2,
-      "recordsUpdated": 7,
-      "newRecords": 0,
-      "fullyNewAtharGraded": 0,
-      "auditPath": "apple-tv/hadith/audit/0393-0412-20261018-continuation.json",
-      "important": [
-        "HAD-0404: original Ibn Abd al-Barr 1762 wording is Mujahid, narrator corrected",
-        "HAD-0406: unverified source/isnad, do not present as authentic"
+      "existingHadith": 8,
+      "hadithAlreadySharhVerified": 7,
+      "hadithNeedsReview": 1,
+      "existingAtharAudited": 12,
+      "atharFilesUpdated": 12,
+      "authenticatedViaExplicitScholarlyIsnadAssessment": 1,
+      "newHadithOrAthar": 0,
+      "auditPath": "apple-tv/hadith/audit/0463-0482-20261019-continuation.json",
+      "notes": [
+        "HAD-0479 Ibn Kathir explicitly says isnad sahih for Abu Bakr's address",
+        "HAD-0472/0474/0480 are not independently sahih",
+        "HAD-0471/0474/0481 linked to earlier duplicates"
       ],
-      "deployState": "main committed; Cloudflare / native device fetch not independently verified"
+      "deployState": "GitHub main committed; cloud production and native runtime not confirmed"
     },
-    "historicalCountNote": "3,357 catalog rows at previously checked main; no new HAD IDs in this batch, do not infer live endpoints from commits"
+    "historicalCountNote": "3358 and HAD-3359 next as last verified catalog start of this batch; re-read main before assigning a new record id"
   }
 }
