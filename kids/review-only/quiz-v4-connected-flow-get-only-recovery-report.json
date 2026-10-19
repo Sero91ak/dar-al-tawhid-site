@@ -1,20 +1,16 @@
 {
   "scope": "KIDS_V4_CONNECTED_PAID_ORIGINALS_GET_ONLY",
-  "requestedOriginals": 1,
-  "providerGETsAttempted": 1,
+  "requestedOriginals": 0,
+  "providerGETsAttempted": 0,
   "downloadedOriginals": 0,
-  "importedOriginals": 1,
-  "providerHTTP": 402,
-  "failedGenerationId": "BpifmV2fZsec4HdoTxJT",
+  "importedOriginals": 0,
+  "providerHTTP": null,
+  "failedGenerationId": null,
   "newPaidSpeechCalls": 0,
   "newSynthesisCredits": 0,
   "modelId": "eleven_v4",
   "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "reusedAlreadyPaidGenerationsOnly": true,
   "humanListeningApproved": false,
-  "publicReleaseEnabled": false,
-  "blocked": "Provider read-only original download denied; retain paid generation and do not regenerate.",
-  "signedOriginalGetImported": 1,
-  "signedGetWasZeroCredit": true,
-  "sourceGenerationId": "BpifmV2fZsec4HdoTxJT"
+  "publicReleaseEnabled": false
 }
