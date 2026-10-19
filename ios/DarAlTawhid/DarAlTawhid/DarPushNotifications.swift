@@ -270,6 +270,9 @@ enum DarPushNotifications {
         snap.longitude = lon
         if delta >= 1500 { snap.cityLabel = "Standort erkannt" }
         DarWidgetStore.save(DarDailyContent.refresh(snap))
+        // The active WebView forwards its changes through darPushSettings.
+        // Only suspended/background travel requires the native server fallback.
+        guard UIApplication.shared.applicationState != .active else { return }
         let syncKey = "dar.ios.location.last.server.sync"
         let last = UserDefaults.standard.double(forKey: syncKey)
         guard Date().timeIntervalSince1970 - last > 900 else { return }
