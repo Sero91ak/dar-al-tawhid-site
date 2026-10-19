@@ -975,8 +975,9 @@
     if(!valid(lat,lon,acc))return;
     if(t && (t>Date.now()+60000||Date.now()-t>600000))return;
     var s=current();
-    if(s.locationMode==="manual")return;
-    if(s.locationMode!=="auto"&&s.locationGranted!==true)return;
+    // A new user who has just granted iOS GPS consent starts in Auto mode.
+    // Never overwrite a city previously chosen manually.
+    if(s.locationMode==="manual"&&(s.locationGranted===true||Number(s.locationUpdatedAt)>0))return;
     if(typeof setPrayerSettings!=="function"){
       if(!retryTimer)retryTimer=setTimeout(function(){retryTimer=0;void updatePosition(data);},1000);
       return;
@@ -1022,7 +1023,6 @@
   window.addEventListener("pageshow",requestFresh);
   window.addEventListener("focus",requestFresh);
   document.addEventListener("visibilitychange",function(){if(!document.hidden)requestFresh();});
-  document.addEventListener("dar:location-updated",function(){if(current().locationMode==="auto")requestFresh();});
   if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",requestFresh,{once:true});
   else requestFresh();
 })();
