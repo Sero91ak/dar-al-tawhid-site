@@ -17,6 +17,17 @@ def check(ok,msg):
 def main():
     check(producer.MODEL=="eleven_v4" and producer.VOICE=="DkU7j9uO4ZEtLD2iRZSH","wrong owner model/voice")
     check(producer.LIMIT==20 and producer.MAX_COST==1200,"paid batch ceiling drifted")
+    for unsafe in ("Allāhumma bārik!", "Der Prophet ﷺ sagte...",
+                   "Worum bat Mūsā عليه السلام?",
+                   "Was lehrt der Ash-Sharḥ?", "Ghībah"):
+        check(producer.source_requires_separate_pronunciation_approval(unsafe),
+              "unapproved Arabic or missing PLS term was allowed to charge: "+unsafe)
+    for safe in ("In schāʾ Allāh – wenn Allah will",
+                 "Bismi-llāh – im Namen Allahs",
+                 "Der Qurʾān erklärt den Īmān"):
+        check(not producer.source_requires_separate_pronunciation_approval(safe),
+              "an exact master lexicon term was needlessly blocked: "+safe)
+
     code=inspect.getsource(producer.main)
     check('persist_remote_paid_checkpoint(ATTEMPTS,purpose="batch02-request-"'
           in code,"missing remote journal before ElevenLabs API POST")
