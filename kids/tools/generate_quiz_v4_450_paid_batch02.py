@@ -83,15 +83,22 @@ def build_canonical_v4_payload(spoken, *, language="de"):
     if len(lexemes)!=dic.get("ruleCount") or len(lexemes)!=10099:
         raise RuntimeError("V4_MASTER_PLS_RULE_COUNT_MISMATCH")
     core={}
+    safe_aliases={}
+    safe_forms={"Bismillāh":"Bismillaah","in sha' Allah":"in schaa Allaah"}
     for x in lexemes:
         label=x.findtext(ns+"grapheme")
         if label in ("Qurʾān","Īmān","Koran","Iman"):
             core[label]=x.findtext(ns+"alias")
+        if label in safe_forms:
+            safe_aliases[label]=x.findtext(ns+"alias")
+    if safe_aliases!=safe_forms:
+        raise RuntimeError("V4_CANONICAL_OWNER_GERMAN_PHRASE_ALIASES_CHANGED_STOP")
+
     if core.get("Qurʾān")!="Qur-aan" or core.get("Īmān")!="Iimaan":
         raise RuntimeError("V4_MASTER_PLS_QURAN_IMAN_ALIASES_MISSING")
     # A mixed Latin/Arabic-script speech item MUST be explicitly segmented
     # before synthesis, never guessed as German or Arabic.
-    has_arabic=bool(re.search(r"[\u0621-\u064A]",spoken))
+    has_arabic=bool(re.search(r"[\u0621-\u064A]",spoken) or "ﷺ" in spoken)
     has_latin=bool(re.search(r"[A-Za-zÀ-ÿ]",spoken))
     if has_arabic and has_latin:
         raise RuntimeError("V4_MIXED_LANGUAGE: split German and native Fuṣḥā audio before charging")
@@ -104,7 +111,14 @@ def build_canonical_v4_payload(spoken, *, language="de"):
                 "apply_text_normalization":"off"}
     if has_arabic:
         raise RuntimeError("V4_GERMAN_SOURCE_CONTAINS_ARABIC: split Fuṣḥā before charging")
-    return {"text":spoken,"model_id":MODEL,"language_code":"de",
+    # These two common quiz variants are NOT listed verbatim as graphemes
+    # in the user's ORIGINAL 10099-rule dictionary. Bind them to the
+    # semantically identical forms it DOES contain, without touching
+    # immutable displayed quiz text, source SHA or any saved MP3 receipt.
+    # Do not invent a pronunciation for other unlisted Arabic terms.
+    normalized=spoken.replace("Bismi-llāh","Bismillāh")
+    normalized=normalized.replace("In schāʾ Allāh","in sha' Allah")
+    return {"text":normalized,"model_id":MODEL,"language_code":"de",
             "apply_text_normalization":"off",
             "pronunciation_dictionary_locators":[{
                 "pronunciation_dictionary_id":dic["id"],
