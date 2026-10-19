@@ -1,0 +1,43 @@
+name: KIDS V4 Master Fuṣḥā and 10099 Rule Provider Verification (zero-credit)
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/kids-v4-master-pronunciation-get-and-test.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify-actual-master-without-tts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout the currently open private V4 review only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Validate exact master lexicon and native Arabic safety without synthesis
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/generate_quiz_v4_450_paid_batch02.py kids/tools/generate_quiz_v4_older_stage1_exact.py kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --audit
+      - name: Independently verify the user's current ElevenLabs dictionary using GET only
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 kids/tools/verify_quiz_v4_master_dictionary_provider_get_only.py
+      - name: Verify no paid render and no release
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          hold=json.loads(Path('kids/data/quiz-v4-pronunciation-hold.json').read_text(encoding='utf-8'))
+          assert hold['productionPaused'] is True
+          assert hold['humanPronunciationApproved'] is False
+          public=json.loads(Path('kids/data/quiz-curation-release.json').read_text(encoding='utf-8'))
+          assert public['enabled'] is False
+          print('ZERO-CREDIT V4 PREFLIGHT ENDED; no TTS POST, no public app modification.')
+          PY
