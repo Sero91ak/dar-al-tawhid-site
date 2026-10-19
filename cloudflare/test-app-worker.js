@@ -487,8 +487,8 @@ async function finalizeDarTestHomeV1193(asset) {
   // from returning on iPhone, iPad, desktop or after theme/route changes.
   const plainHomeCssV1 = '<link rel="stylesheet" id="darTestHomeNoBackgroundsV1" href="/test/assets/home-no-backgrounds-v1.css?v=20261019-no-photo">';
   if (!html.includes('id="darTestHomeNoBackgroundsV1"')) {
-    if (html.includes("</body>")) html = html.replace("</body>", plainHomeCssV1 + "\n</body>");
-    else html += plainHomeCssV1;
+    // Keep this LAST, after other Test CSS authority injections.
+    html += plainHomeCssV1;
   }
 
 
