@@ -17,6 +17,7 @@ PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
 READY=ROOT/"kids/data/quiz-v4-450-api-readiness.json"
 REGISTRY=ROOT/"kids/data/quiz-v4-450-original-clip-registry.json"
 LEDGER=ROOT/"kids/data/quiz-v4-450-paid-generation-ledger.json"
+ATTEMPTS=ROOT/"kids/data/quiz-v4-450-batch02-request-journal.json"
 TECHQA=ROOT/"kids/data/quiz-v4-450-saved-mp3-technical-qa.json"
 OUTPUT=ROOT/"kids/assets/kids-quiz-audio/v4-curated450-review"
 VOICE="DkU7j9uO4ZEtLD2iRZSH"
@@ -30,8 +31,11 @@ def load(path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 def save(path,obj):
+    """Atomic on-disk paid receipt before durable remote GitHub push."""
     path.parent.mkdir(parents=True,exist_ok=True)
-    path.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    tmp=path.with_name(path.name+".pending")
+    tmp.write_text(json.dumps(obj,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    tmp.replace(path)
 
 def subscription(key):
     req=urllib.request.Request("https://api.elevenlabs.io/v1/user/subscription",
@@ -206,6 +210,11 @@ def main():
     hold=load(PRONUNCIATION_HOLD)
     if hold.get("humanListeningQualityGateReleased") is not True:
         raise RuntimeError("V4_AUDIO_RESTART: large paid batches suspended until one correct canonical-dictionary original is heard and accepted")
+    # Reuse the same remotely confirmed SHA checkpoint engine as the
+    # already-successful stage1 paid pilot. Import inside the paid pathway to
+    # avoid a circular import at module load. Never leave a paid request
+    # orphaned on an ephemeral Actions runner.
+    from generate_quiz_v4_older_stage1_exact import persist_remote_paid_checkpoint
     key=os.environ.get("ELEVENLABS_API_KEY","").strip()
     if not key:raise RuntimeError("ElevenLabs API key missing")
     if load(ROOT/"kids/data/quiz-curation-release.json").get("enabled") is not False:
@@ -226,6 +235,13 @@ def main():
         return
     if old_for_batch:
         raise RuntimeError("Partially charged batch exists. Reconcile exact saved originals first; never retry")
+    attempts=load(ATTEMPTS) if ATTEMPTS.is_file() else {"batchId":BATCH,"entries":[]}
+    if attempts.get("batchId")!=BATCH or not isinstance(attempts.get("entries"),list):
+        raise RuntimeError("V4 batch02 original write-ahead journal changed; STOP")
+    if attempts["entries"]:
+        # Any prior request, including HTTP uncertainty, is protected. Never
+        # replay an earlier paid batch from a new ephemeral GitHub runner.
+        raise RuntimeError("V4 batch02 contains prior paid/uncertain request; recover the exact original first, NEVER re-synthesize")
     protected=protect_paid_texts(ROOT,registry,ledger)
     chosen,estimate=choose(plan,registry,protected)
     before=subscription(key)
@@ -242,6 +258,17 @@ def main():
         dest=OUTPUT/(code[:32]+".mp3")
         if dest.exists():
             raise RuntimeError("Original bytes exist without ledger. Do NOT synthesize again")
+        # Remote write-ahead checkpoint succeeds BEFORE any ElevenLabs POST.
+        # A timeout, 402, ambiguous error or runner restart can therefore
+        # never silently cause a fresh charge for this exact source SHA.
+        text_sha=hashlib.sha256(text.encode("utf-8")).hexdigest()
+        attempt={"textSHA256":text_sha,"status":"REQUEST_STARTED_UNCONFIRMED",
+                 "batchId":BATCH,"startedAt":datetime.now(timezone.utc).isoformat(),
+                 "masterDictionaryId":"Q8w3SxtoVo8NSjsnlJEd",
+                 "masterDictionaryVersionId":"wSzgkGpAwEDiTak8DApc"}
+        attempts["entries"].append(attempt)
+        save(ATTEMPTS,attempts)
+        persist_remote_paid_checkpoint(ATTEMPTS,purpose="batch02-request-"+text_sha[:12])
         audio,request_id=original_mp3(key,text)
         dest.write_bytes(audio)
         actual=hashlib.sha256(audio).hexdigest()
@@ -261,7 +288,13 @@ def main():
             "providerRequestId":request_id,"createdAt":datetime.now(timezone.utc).isoformat(),
             "note":"Provider charged for audio; verify exact billing; no blind retries"
         })
-        save(REGISTRY,registry);save(LEDGER,ledger)
+        attempt["status"]="ORIGINAL_MP3_SAVED"
+        attempt["mp3SHA256"]=actual
+        attempt["providerRequestId"]=request_id
+        save(REGISTRY,registry);save(LEDGER,ledger);save(ATTEMPTS,attempts)
+        persist_remote_paid_checkpoint(
+            ATTEMPTS,REGISTRY,LEDGER,dest,
+            purpose="batch02-original-"+text_sha[:12])
         print(f"V4_450_BATCH02_ORIGINAL_SAVED locally={n}/{len(chosen)} sha={actual[:16]} size={len(audio)}",flush=True)
         if n<len(chosen):time.sleep(0.65)
     after=subscription(key)
@@ -273,6 +306,8 @@ def main():
            "source":"eleven_v4","savedOnRunner":True,
            "listeningApproved":False,"live":False}
     save(ROOT/"kids/data/quiz-v4-450-batch02-usage.json",stats)
+    persist_remote_paid_checkpoint(ROOT/"kids/data/quiz-v4-450-batch02-usage.json",
+                                   purpose="batch02-final-usage")
     print("V4_450_BATCH02_SAVED_ALL "+json.dumps(stats,ensure_ascii=False),flush=True)
 
 if __name__=="__main__":
