@@ -194,7 +194,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // v20261019: no background-photo preloads in the Test Home.
   // Remove any legacy links already embedded in the static Test shell.
-  html = html.replace(/<link\\b[^>]*\\bid=["']darHome(?:HeroMobile|HeroWide|Study)PreloadV1239["'][^>]*>\\s*/gi, "");
+  html = html.replace(/<link\b[^>]*\bid=["']darHome(?:HeroMobile|HeroWide|Study)PreloadV1239["'][^>]*>\s*/gi, "");
 
   // v1211: load the global light/dark contrast authority LAST on every Test-App HTML route.
   // Reuses the Test-only Salbei stylesheet; its final section is theme-agnostic and fixes all appearances.
@@ -487,7 +487,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // from returning on iPhone, iPad, desktop or after theme/route changes.
   const plainHomeCssV1 = '<link rel="stylesheet" id="darTestHomeNoBackgroundsV1" href="/test/assets/home-no-backgrounds-v1.css?v=20261019-no-photo">';
   if (!html.includes('id="darTestHomeNoBackgroundsV1"')) {
-    if (html.includes("</body>")) html = html.replace("</body>", plainHomeCssV1 + "\\n</body>");
+    if (html.includes("</body>")) html = html.replace("</body>", plainHomeCssV1 + "\n</body>");
     else html += plainHomeCssV1;
   }
 
