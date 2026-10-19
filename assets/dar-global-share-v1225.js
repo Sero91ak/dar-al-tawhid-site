@@ -522,8 +522,84 @@
     }
     buildShareStandard(panel,attrs);
   }
+
+  /* DAR_READER_STATEMENT_FAZIT_V1 – post-body separation only.
+     Does not touch Q evidence, image sharing, Kids, sources or push. */
+  function darSeparateStatementAndFazit(root){
+    var scope=root&&root.querySelectorAll?root:document;
+    var readers=[];
+    if(scope.matches&&scope.matches(".post-reader"))readers.push(scope);
+    if(scope.closest){var parent=scope.closest(".post-reader");if(parent)readers.push(parent)}
+    if(scope.querySelectorAll)scope.querySelectorAll(".post-reader").forEach(function(r){readers.push(r)});
+    readers.forEach(function(reader){
+      var quote=reader.querySelector(".post-aussage-text");
+      if(!quote||quote.dataset.darStatementSplitV1==="yes")return;
+      var raw=String(quote.innerText||quote.textContent||"");
+      if(!raw.trim())return;
+      quote.dataset.darStatementSplitV1="yes";
+      var standalone=/^\s*(?:#[\p{L}\p{N}_-]+\s*)+$/u;
+      quote.querySelectorAll("p").forEach(function(p){
+        if(standalone.test(p.textContent||""))p.remove();
+      });
+      Array.from(quote.childNodes).forEach(function(n){
+        if(n.nodeType===3&&standalone.test(n.textContent||""))n.remove();
+      });
+      var fazit=/^\s*🌙\s*(?:(?:\*{1,2})?\s*)?(?:Fazit|𝐅𝐚𝐳𝐢𝐭)\s*:?\s*/u;
+      var phase=quote.querySelectorAll("p,div");
+      var fazitParagraph=null;
+      phase.forEach(function(p){if(!fazitParagraph&&fazit.test(p.textContent||""))fazitParagraph=p});
+      var conclusion="",conclusionHtml="";
+      if(fazitParagraph){
+        conclusion=String(fazitParagraph.textContent||"").replace(fazit,"").trim();
+        // Extract the whole original paragraph while preserving highlighted words.
+        var mirror=fazitParagraph.cloneNode(true);
+        var leading=mirror.firstChild;
+        if(leading&&leading.nodeType===3)leading.textContent=leading.textContent.replace(/^\s*🌙\s*/u,"");
+        var firstBold=mirror.querySelector("strong,b");
+        if(firstBold&&/^(?:Fazit|𝐅𝐚𝐳𝐢𝐭)\s*:?$/u.test((firstBold.textContent||"").trim()))firstBold.remove();
+        var html=mirror.innerHTML;
+        conclusionHtml=html.replace(/^\s*(?:🌙\s*)?(?:Fazit|𝐅𝐚𝐳𝐢𝐭)?\s*:?\s*/u,"").trim();
+        fazitParagraph.remove();
+      }else{
+        var value=String(quote.innerText||quote.textContent||"");
+        var m=/🌙\s*(?:Fazit|𝐅𝐚𝐳𝐢𝐭)\s*:\s*/u.exec(value);
+        if(m){
+          var lead=value.slice(0,m.index).trim();
+          conclusion=value.slice(m.index+m[0].length).trim();
+          quote.textContent=lead.replace(/^\s*(?:#[\p{L}\p{N}_-]+\s*)+\n?/u,"");
+        }
+      }
+      if(conclusion&&!reader.querySelector("[data-post-fazit]")){
+        var section=document.createElement("section");
+        section.className="post-key-message dar-fazit-isolated";
+        section.setAttribute("data-post-fazit","true");
+        section.setAttribute("aria-label","Fazit");
+        var head=document.createElement("h3");
+        head.textContent="🌙 Fazit";
+        var body=document.createElement("div");
+        body.className="post-fazit-body";
+        if(conclusionHtml)body.innerHTML=conclusionHtml;
+        else body.textContent=conclusion;
+        section.appendChild(head);
+        section.appendChild(body);
+        var block=quote.closest(".post-aussage,.statement")||quote;
+        block.insertAdjacentElement("afterend",section);
+      }
+      // Ibn Sīrīn was a Tābiʿī, not a companion: no unverified
+      // companion honorific or Arabic-only label in this German post.
+      var speaker=reader.querySelector(".post-reader-speaker__name");
+      if(speaker&&/Muḥammad ibn Sīrīn/i.test(speaker.textContent||"")){
+        speaker.querySelectorAll(".honorific").forEach(function(n){n.remove()});
+        Array.from(speaker.childNodes).forEach(function(n){
+          if(n.nodeType===3)n.textContent=n.textContent.replace(/[\u0600-\u06ff]+(?:\s+[\u0600-\u06ff]+)*/gu,"").trim();
+        });
+      }
+    });
+  }
+
   function enhance(root){
     var scope=root&&root.querySelectorAll?root:document;
+    darSeparateStatementAndFazit(scope);
     injectStandalonePanels(scope);
     var panels=[];
     if(scope.matches&&scope.matches(".share-panel"))panels.push(scope);
