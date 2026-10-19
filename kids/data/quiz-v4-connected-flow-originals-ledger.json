@@ -482,6 +482,30 @@
       "actualProviderCredits": null,
       "humanListeningApproved": false,
       "publicReleaseAllowed": false
+    },
+    {
+      "sourceText": "Zakāh geben.",
+      "sourceTextSHA256": "7e9ac0c6d55d39e7178b95063868512bebdb585f2614d860bc31e224ffa8acba",
+      "sourceQuestionIds": [
+        "kids-quiz-046"
+      ],
+      "sourceAudioPart": "question",
+      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
+      "provider": "ElevenLabs",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "flowId": "wd3J3T6jzKMTntUe6kqJ",
+      "generationId": "BpifmV2fZsec4HdoTxJT",
+      "estimatedCreditsNotInvoice": 11.62879295154185,
+      "actualProviderCredits": 11.62879295154185,
+      "humanListeningApproved": false,
+      "publicReleaseAllowed": false,
+      "nodeId": "uwxBw31V1QyOe4kULz7Y",
+      "sessionId": "1NDZUL5T8A4PVCeNxJMu",
+      "providerGenerationDurationSeconds": 1.28,
+      "providerStatus": "completed",
+      "providerMediaStoredInElevenLabs": true,
+      "originalMP3ImportedIntoGithub": false
     }
   ]
 }
