@@ -233,7 +233,7 @@ enum DarWidgetKeys {
 
 // Gemeinsames ActivityKit-Datenmodell für Host-App und Widget-Erweiterung.
 @available(iOS 16.1, *)
-struct DarPrayerLiveActivityAttributes: ActivityKit.ActivityAttributes {
+struct DarPrayerLiveActivityAttributes: ActivityAttributes {
     struct ContentState: Codable, Hashable {
         var prayerName: String
         var prayerDate: Date
