@@ -6,6 +6,8 @@ on:
       - review/kids-quiz-v4-batch-001-020-20261014
     paths:
       - kids/tools/audit_quiz_v4_all450_master_lexicon.py
+      - kids/tools/generate_quiz_v4_450_paid_batch02.py
+      - kids/tools/test_quiz_v4_canonical_dictionary_payload.py
       - .github/workflows/kids-v4-all450-master-dictionary-audit-no-credits.yml
 
 permissions:
@@ -25,6 +27,8 @@ jobs:
         run: |
           set -euo pipefail
           python3 -m py_compile kids/tools/audit_quiz_v4_all450_master_lexicon.py
+          python3 -m py_compile kids/tools/generate_quiz_v4_450_paid_batch02.py kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
           python3 kids/tools/audit_quiz_v4_all450_master_lexicon.py
           python3 - <<'PY'
           import json
