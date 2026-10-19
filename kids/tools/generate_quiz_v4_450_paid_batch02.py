@@ -41,6 +41,9 @@ def subscription(key):
     return float(obj["character_limit"])-float(obj["character_count"])
 
 def original_mp3(key,spoken):
+    hold=load(ROOT/"kids/data/quiz-v4-pronunciation-hold.json")
+    if hold.get("productionPaused") is not False or hold.get("humanPronunciationApproved") is not True:
+        raise RuntimeError("PRONUNCIATION_HOLD: user stopped ElevenLabs V4; no new TTS until the master pronunciation dictionary and Fusha are verified")
     req=urllib.request.Request(
         "https://api.elevenlabs.io/v1/text-to-speech/"+VOICE+
         "?output_format=mp3_44100_128",
