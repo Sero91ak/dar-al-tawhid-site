@@ -56,25 +56,13 @@ def select_tasks(plan,registry,protected):
         raise RuntimeError("Planned pilot would exceed strict 120-credit estimate cap")
     return picked
 
+# Historical pilot now uses the same canonical owner-master V4 API request,
+# with the real 10,099-rule dictionary and native Fuṣḥā safeguards.
+# Its old dictionary-free HTTP POST is permanently disabled.
+from generate_quiz_v4_450_paid_batch02 import original_mp3 as _canonical_v4_original_mp3
+
 def request_audio(key,text):
-    uri="https://api.elevenlabs.io/v1/text-to-speech/"+VOICE+"?output_format=mp3_44100_128"
-    body=json.dumps({"text":text,"model_id":MODEL},ensure_ascii=False).encode("utf-8")
-    req=urllib.request.Request(uri,body,method="POST",headers={
-        "xi-api-key":key,"Accept":"audio/mpeg","Content-Type":"application/json"})
-    # IMPORTANT: urllib does not automatically retry a POST; never do so here.
-    with urllib.request.urlopen(req,timeout=110) as resp:
-        if resp.status!=200:
-            raise RuntimeError(f"Unexpected V4 HTTP {resp.status}, no retry")
-        ct=resp.headers.get("Content-Type","")
-        if "audio/" not in ct and "octet-stream" not in ct:
-            raise RuntimeError("Provider did not return MP3 bytes; NO retry")
-        audio=resp.read(1500000)
-        if not (1500<len(audio)<1500000):
-            raise RuntimeError("Provider MP3 output empty or oversized; NO retry")
-        if not (audio.startswith(b"ID3") or audio[:1]==b"\xff"):
-            raise RuntimeError("Provider response does not start like an MP3; NO retry")
-        req_id=resp.headers.get("request-id") or resp.headers.get("xi-request-id")
-    return audio,req_id
+    return _canonical_v4_original_mp3(key,text)
 
 def main():
     key=os.environ.get("ELEVENLABS_API_KEY","").strip()
