@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import ActivityKit
 
 struct DarWidgetPalette {
     var id: String
@@ -103,4 +104,16 @@ extension Color {
             blue: Double(value & 0xFF) / 255
         )
     }
+}
+
+/* Shared by the iOS app and its widget extension. The user's own switch
+   controls whether prayer Live Activities are created by our app. */
+@available(iOS 16.1, *)
+struct DarPrayerLiveAttributes: ActivityAttributes {
+    struct ContentState: Codable, Hashable {
+        var prayerName: String
+        var targetDate: Date
+        var city: String
+    }
+    var title: String
 }
