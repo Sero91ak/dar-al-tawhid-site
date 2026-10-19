@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT/"kids/tools"))
 import plan_quiz_v4_all450_exact_paid_original_waves as planner
 from generate_quiz_v4_450_paid_batch02 import original_mp3, subscription
+from generate_quiz_v4_older_stage1_exact import persist_remote_paid_checkpoint
 from quiz_v4_no_double_charge_guard import protect_paid_texts, prohibit_prepaid_selection
 
 VOICE = "DkU7j9uO4ZEtLD2iRZSH"
@@ -170,8 +171,9 @@ def main():
     key=os.getenv("ELEVENLABS_API_KEY","").strip()
     require(bool(key),"ElevenLabs API key not available")
     available=subscription(key)
-    require(available>=max(report["nextEstimatedCreditsNotInvoice"]*1.5,2000),
-            "insufficient available prepaid credits for this exact V4 wave")
+    estimate=report["nextEstimatedCreditsNotInvoice"]
+    require(available>=max(estimate*1.5,estimate+50.0),
+            "insufficient provider credits for current exact V4 wave plus proportional reserve")
     OUT.mkdir(parents=True,exist_ok=True)
     count=0
     for item in items:
@@ -189,6 +191,11 @@ def main():
                 "paid request already attempted")
         journal["entries"].append(logitem)
         keep_journal(journal)
+        # HARD ANTI-DOUBLE-CHARGE CONTRACT: request uncertainty must be
+        # durably committed and pushed BEFORE any paid ElevenLabs HTTP POST.
+        # A GitHub permission/race failure blocks speech without a charge.
+        persist_remote_paid_checkpoint(JOURNAL,BACKUP,
+                                       purpose="all450-request-"+h[:12])
         audio,request_id=original_mp3(key,s)
         temp=target.with_name(target.name+".pending")
         temp.write_bytes(audio)
@@ -211,6 +218,8 @@ def main():
         logitem["mp3SHA256"]=audiosha
         logitem["providerRequestId"]=request_id
         keep_journal(journal)
+        persist_remote_paid_checkpoint(REG,LEDGER,JOURNAL,BACKUP,target,
+                                       purpose="all450-original-"+h[:12])
         require(bool(request_id),
                 "provider omitted charge receipt; paid MP3 backed up, stop before next request")
         count+=1
