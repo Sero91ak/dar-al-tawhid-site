@@ -83,7 +83,7 @@ ok("Kompakter Hero mit angehefteter Suche, responsive, gleiche Regeln Besucher/T
 const vm=require("node:vm");
 const router=fs.readFileSync(path.join(root,"cloudflare/site-router.js"),"utf8");
 const runtime=fs.readFileSync(path.join(root,"assets/adult-hero-height-runtime-v1403.js"),"utf8");
-const v1403Css=visitorResponsive.split("/* DAR_VISITOR_HERO_RAIL_CONNECTED_V1403")[1];
+const v1403Css=(visitorResponsive.split("/* DAR_VISITOR_HERO_RAIL_CONNECTED_V1403")[1]||"").split("/* DAR_VISITOR_IOS_HERO_EDGE_SEARCH_V1404")[0];
 if(!v1403Css)fail("Aktivierung V1403 fehlt im Besucher CSS");
 for(const expected of [
  "position:sticky!important",
