@@ -73,11 +73,12 @@ def durable_attempts(journal):
 
 
 def persist_remote_paid_checkpoint(*paths, purpose):
-    """Fail closed unless the real GitHub review branch saved this paid state.
+    """Write and confirm the real GitHub pre/post-POST receipts without double billing.
 
-    No TTS may start before the pre-POST receipt is remotely committed.
-    After any successful paid POST, persist the real MP3, SHA and billing
-    receipt before the next paid text. A remote conflict stops production.
+    The review branch receives unrelated CI commits while recording is running.
+    A non-fast-forward push may be safely rebased BEFORE a new ElevenLabs POST,
+    because this local commit has never been lost or duplicated. Never force
+    push, discard an original, retry synthesis, or treat a failed push as proof.
     """
     expected="review/kids-quiz-v4-batch-001-020-20261014"
     check(os.getenv("GITHUB_ACTIONS")=="true"
@@ -85,11 +86,12 @@ def persist_remote_paid_checkpoint(*paths, purpose):
           "paid original requires checkpoint-capable GitHub review runner")
     check(paths and all(Path(p).is_file() for p in paths),
           "missing real request journal, original receipt or MP3 checkpoint")
-    def git(*args):
+    def git(*args, allow_fail=False):
         result=subprocess.run(["git",*args],cwd=ROOT,check=False,
-                              capture_output=True,text=True,timeout=40)
-        check(result.returncode==0,"GitHub paid original checkpoint failed ("+
-              purpose+"); provider credits MUST NOT be spent again until recovery")
+                              capture_output=True,text=True,timeout=50)
+        if not allow_fail:
+            check(result.returncode==0,"GitHub paid original checkpoint git "+
+                  str(args[0])+" failed ("+purpose+"); NEVER retry a paid POST")
         return result
     git("config","user.name","dar-kids-v4-paid-original-checkpoint")
     git("config","user.email","41898282+github-actions[bot]@users.noreply.github.com")
@@ -100,36 +102,46 @@ def persist_remote_paid_checkpoint(*paths, purpose):
     staged=git("diff","--cached","--name-only").stdout.strip()
     check(bool(staged),"paid original already checkpointed or missing; STOP before proceeding")
     git("commit","-m","audio(kids V4): protect paid original "+purpose+" [skip ci]")
-    # Multiple independent zero-credit GitHub QA jobs update this review
-    # branch. A regular non-fast-forward must NEVER prevent a legitimate
-    # receipt checkpoint forever, but we may ONLY rebase a committed receipt
-    # and retry when the rejection is explicitly non-fast-forward.
-    # On ANY merge conflict, authentication error, or uncertain Git result,
-    # abort BEFORE new paid TTS. Never force-push a charged original.
-    for attempt_number in range(1,6):
-        push=subprocess.run(["git","push","origin","HEAD:"+expected],
-            cwd=ROOT,capture_output=True,text=True,timeout=45,check=False)
-        if push.returncode==0:
-            print("KIDS_V4_ORIGINAL_CHECKPOINT_SAVED "+
-                  json.dumps({"purpose":purpose,"gitPushAttempt":attempt_number}),flush=True)
+
+    for attempt in range(1,6):
+        pushed=git("push","origin","HEAD:"+expected,allow_fail=True)
+        if pushed.returncode==0:
+            # Authoritative remote confirmation required before the paid POST.
+            remote=git("ls-remote","--heads","origin",expected).stdout.strip()
+            local=git("rev-parse","HEAD").stdout.strip()
+            check(bool(remote) and remote.split()[0]==local,
+                  "push returned success but remote checkpoint SHA differs")
+            print("KIDS_V4_ORIGINAL_CHECKPOINT_SAVED "+purpose+
+                  " remote_sha="+local[:12],flush=True)
             return
-        err=((push.stderr or "")+" "+(push.stdout or "")).lower()
-        if not any(reason in err for reason in
-                   ("non-fast-forward","fetch first","failed to push some refs",
-                    "stale info","remote contains work")):
-            raise RuntimeError("KIDS_V4_PAID_ORIGINAL_CHECKPOINT_PERMISSION_OR_NETWORK_FAILURE: "+
-                "GitHub rejected remote persistence (not a verifiable concurrent update); "+
-                "NO NEW PROVIDER POST permitted")
-        if attempt_number==5:
-            break
-        print("KIDS_V4_CHECKPOINT_NON_FAST_FORWARD: rebase committed receipt without "+
-              "resynthesis; retry "+str(attempt_number),flush=True)
-        git("fetch","origin",expected)
-        git("rebase","FETCH_HEAD")
-        # The pre-paid journal or original MP3 remains committed and re-applied
-        # by Git. A rebase conflict raises before any charged provider call.
-    raise RuntimeError("KIDS_V4_PAID_CHECKPOINT_CONCURRENT_UPDATES_EXHAUSTED: "+
-                       "preserve current committed proof; no new TTS requests")
+
+        # Only a competing review-branch commit may be automatically resolved.
+        err=(pushed.stderr or "")[-1400:]
+        conflict=("non-fast-forward" in err or "fetch first" in err
+                  or "failed to push some refs" in err
+                  or "[rejected]" in err)
+        if not conflict or attempt==5:
+            code=("NON_FAST_FORWARD_MAX_RETRIES" if conflict
+                  else "GITHUB_TOKEN_PERMISSION_OR_BRANCH_RULES")
+            raise RuntimeError("KIDS_V4_STAGE1_PAYMENT_BLOCKED: remote GitHub "+
+                  code+" before/after "+purpose+
+                  "; original request evidence preserved; DO NOT retry TTS. "+
+                  "Remote error class: "+("non-fast-forward" if conflict
+                                         else ("permission" if "403" in err or "denied" in err.lower()
+                                               else "other")))
+        git("fetch","--no-tags","origin",expected)
+        # Autostash unrelated audited files while reapplying only THIS receipt.
+        # Conflict or restricted branch permissions are a hard stop, not an
+        # excuse to override any original MP3 SHA or remote payment journal.
+        rebased=git("rebase","--autostash","FETCH_HEAD",allow_fail=True)
+        if rebased.returncode!=0:
+            git("rebase","--abort",allow_fail=True)
+            raise RuntimeError("KIDS_V4_STAGE1_PAYMENT_BLOCKED: real GitHub "+
+                               "paid checkpoint rebase conflict, preserve saved "+
+                               "MP3 and never retry this paid original")
+        print("KIDS_V4_CHECKPOINT_FAST_FORWARD_RETRY_NO_TTS "+
+              purpose+" count="+str(attempt),flush=True)
+    raise RuntimeError("KIDS_V4_STAGE1_PAYMENT_BLOCKED: remote checkpoint unavailable")
 
 
 def prepare():
