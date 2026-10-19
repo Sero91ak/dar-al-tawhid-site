@@ -1083,3 +1083,85 @@ html[data-theme] body.is-post-route #appView .post-reader-main .statement.post-a
   -webkit-text-fill-color:var(--dar-post-copy-emphasis)!important;
   text-shadow:none!important;
 }
+
+
+/* SALBEI_ELFENBEIN_QUIZ_READABILITY_V2 · 2026-10-19
+   Quiz feedback, explanation and source panels must not retain black
+   background + dark text after the global light appearance activates.
+   Scope exclusively to the adult quiz route and this single variant. */
+html[data-theme="light"][data-theme-variant="salbei"] body.is-quiz-route .quiz-shell,
+html[data-theme="light"][data-theme-variant="salbei"] .quiz-shell.quiz-shell-pro{
+  --quiz-bg:#F4F6F0!important;
+  --quiz-card:#FFFFFF!important;
+  --quiz-surface:#FFFFFF!important;
+  --quiz-elev:#F7F9F5!important;
+  --quiz-soft:#F2F5EF!important;
+  --quiz-border:rgba(94,116,101,.26)!important;
+  --quiz-line:rgba(94,116,101,.26)!important;
+  --quiz-title:#172B20!important;
+  --quiz-text:#172B20!important;
+  --quiz-text-primary:#172B20!important;
+  --quiz-text-secondary:#43574A!important;
+  --quiz-muted:#465B4E!important;
+  --quiz-accent:#3F5D4B!important;
+  --quiz-ok:#245B35!important;
+  --quiz-bad:#873B37!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-quiz-route :is(
+  .quiz-feedback,.quiz-feedback-box,.quiz-feedback-card,.quiz-feedback-message,
+  .quiz-explanation,.quiz-explanation-box,.quiz-explanation-card,.quiz-explanation-panel,
+  .quiz-explain,.quiz-explain-box,.quiz-explain-card,
+  .quiz-source,.quiz-source-box,.quiz-source-card,.quiz-source-panel,
+  .quiz-question-source,.quiz-question-explanation
+){
+  background:#F9FAF6!important;
+  background-image:none!important;
+  color:#253C2E!important;
+  -webkit-text-fill-color:#253C2E!important;
+  border-color:rgba(94,116,101,.28)!important;
+  box-shadow:none!important;
+  opacity:1!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-quiz-route :is(
+  .quiz-feedback,.quiz-feedback-box,.quiz-feedback-card,.quiz-feedback-message,
+  .quiz-explanation,.quiz-explanation-box,.quiz-explanation-card,.quiz-explanation-panel,
+  .quiz-explain,.quiz-explain-box,.quiz-explain-card,
+  .quiz-source,.quiz-source-box,.quiz-source-card,.quiz-source-panel,
+  .quiz-question-source,.quiz-question-explanation
+) :is(h2,h3,h4,p,span,strong,b,small,em,div){
+  color:#253C2E!important;
+  -webkit-text-fill-color:#253C2E!important;
+  opacity:1!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-quiz-route :is(
+  .quiz-feedback,.quiz-explanation,.quiz-source,.quiz-explain
+) :is(.label,.title,.quiz-panel-title,.quiz-explanation-title,.quiz-source-title){
+  color:#385740!important;
+  -webkit-text-fill-color:#385740!important;
+  font-weight:800;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-quiz-route :is(
+  .quiz-feedback.correct,.quiz-feedback.success,.quiz-feedback.is-correct,
+  .quiz-feedback-box.correct,.quiz-feedback-card.correct,
+  .quiz-explanation.correct,.quiz-explanation.is-correct
+){
+  background:#E8F3E8!important;
+  color:#245B35!important;
+  -webkit-text-fill-color:#245B35!important;
+  border-color:#94BD9C!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-quiz-route :is(
+  .quiz-feedback.wrong,.quiz-feedback.incorrect,.quiz-feedback.is-wrong,
+  .quiz-feedback-box.wrong,.quiz-feedback-card.wrong
+){
+  background:#F9ECE8!important;
+  color:#873B37!important;
+  -webkit-text-fill-color:#873B37!important;
+  border-color:#D3A39B!important;
+}
+html[data-theme="light"][data-theme-variant="salbei"] body.is-quiz-route :is(
+  .quiz-answer.correct,.quiz-answer.wrong
+) :is(span,b,strong,small){
+  color:inherit!important;
+  -webkit-text-fill-color:currentColor!important;
+}
