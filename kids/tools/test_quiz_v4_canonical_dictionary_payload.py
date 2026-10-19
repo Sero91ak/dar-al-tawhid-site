@@ -46,6 +46,41 @@ def main():
     must_fail(lambda:t.build_canonical_v4_payload("القرآن",language="ar"),"V4_FUSHA")
     must_fail(lambda:t.build_canonical_v4_payload("Iman.",language="ar"),"V4_FUSHA")
     must_fail(lambda:t.original_mp3("NO_REAL_KEY","Der Qurʾān."),"PRONUNCIATION_HOLD")
+    # Prove the REAL outgoing HTTP request (not merely an unused helper)
+    # includes the correct dictionary+version, even in the paid code path.
+    # The HTTP transport is mocked: ZERO credits, no network calls.
+    prior_hold=t.PRONUNCIATION_HOLD
+    prior_urlopen=t.urllib.request.urlopen
+    try:
+        with tempfile.TemporaryDirectory() as folder:
+            h=Path(folder)/"hold.json"
+            h.write_text(json.dumps({"productionPaused":False,"humanPronunciationApproved":True}))
+            t.PRONUNCIATION_HOLD=h
+            calls=[]
+            class PretendMp3:
+                status=200
+                headers={"Content-Type":"audio/mpeg","request-id":"TEST-FAKE-NOT-A-REAL-RECEIPT"}
+                def __enter__(self):return self
+                def __exit__(self,*_args):return False
+                def read(self,_n):return b"ID3"+(b"x"*2000)
+            def intercept(request,**kwargs):
+                calls.append(request)
+                return PretendMp3()
+            t.urllib.request.urlopen=intercept
+            audio,_=t.original_mp3("FAKE-TEST-KEY","Der Qurʾān lehrt den Īmān.")
+            assert audio.startswith(b"ID3") and len(calls)==1
+            assert calls[0].get_method()=="POST"
+            sent=json.loads(calls[0].data.decode("utf-8"))
+            assert sent==english and sent["language_code"]=="de"
+            assert sent["pronunciation_dictionary_locators"]==english["pronunciation_dictionary_locators"]
+            calls.clear()
+            t.original_mp3("FAKE-TEST-KEY","الْقُرْآنُ وَالْإِيمَانُ.",language="ar")
+            assert len(calls)==1
+            arabic_sent=json.loads(calls[0].data.decode("utf-8"))
+            assert arabic_sent==fusha and "pronunciation_dictionary_locators" not in arabic_sent
+    finally:
+        t.PRONUNCIATION_HOLD=prior_hold
+        t.urllib.request.urlopen=prior_urlopen
     old=t.PRONUNCIATION
     try:
         with tempfile.TemporaryDirectory() as folder:
