@@ -1,0 +1,44 @@
+name: KIDS V4 450 Fuṣḥā Shared Source Plan (zero credits)
+on:
+  push:
+    branches:
+      - review/kids-quiz-v4-batch-001-020-20261014
+    paths:
+      - kids/tools/plan_quiz_v4_arabic_original_reuse.py
+      - .github/workflows/kids-v4-450-fusha-audio-reuse-plan-zero-credits.yml
+permissions:
+  contents: read
+jobs:
+  canonical-native-fusha-reuse-plan:
+    if: github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout private 450 question plan
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Preserve displayed texts and deduplicate all native Arabic V4 recordings
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/plan_quiz_v4_arabic_original_reuse.py
+          python3 kids/tools/plan_quiz_v4_arabic_original_reuse.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          a=json.loads(Path('kids/review-only/quiz-v4-arabic-fusha-shared-audio-plan.json').read_text())
+          assert a['selectedQuestions']==450 and a['arabicMasterNewSpeechSourceCountAtMost']==2
+          assert a['newPaidGenerationCalls']==a['newCreditsSpent']==0
+          assert a['approvedVisibleQuizTextModified'] is False
+          assert a['humanListeningApproved'] is False and a['publicRelease'] is False
+          assert json.loads(Path('kids/data/quiz-curation-release.json').read_text())['enabled'] is False
+          print('PASS: native vocalized Arabic is its own shared source; no ElevenLabs credits spent')
+          PY
+      - name: Preserve phonetic and per-question Fuṣḥā segmentation report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-450-fusha-shared-originals-plan-0-credits
+          retention-days: 30
+          if-no-files-found: warn
+          path: kids/review-only/quiz-v4-arabic-fusha-shared-audio-plan.json
