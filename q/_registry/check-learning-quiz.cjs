@@ -62,5 +62,27 @@ const sage=fs.readFileSync(path.join(root,"assets/theme-salbei-elfenbein.css"),"
 assertHas(sage,/SALBEI_ELFENBEIN_QUIZ_READABILITY_V2/,"sage ivory quiz contrast repair missing");
 assertHas(sage,/\.quiz-explanation[^}]*\.quiz-source/s,"explanation and source must have themed contrast selectors");
 assertHas(sage,/-webkit-text-fill-color:#253C2E!important/,"dark text must remain readable in iOS webview");
+assertHas(sage,/SALBEI_QUIZ_ROUTE_INDEPENDENT_CONTRAST_V3/,"Salbei light quiz readability must work without body route class");
+assertHas(sage,/\.quiz-shell\.quiz-shell-pro :is\(/,"Salbei color scope must attach directly to quiz shell");
+assertHas(sage,/\[class\*="quiz-explanation"\]/,"Salbei needs fallbacks for dynamically named explanation panels");
+assertHas(sage,/\[class\*="quiz-source"\]/,"Salbei needs fallbacks for dynamically named source panels");
+assertHas(sage,/background:#F8FAF6!important/,"Salbei answer/source surfaces must not remain dark");
+function colorContrast(hexA,hexB){
+  const channel=(hex)=>{
+    const n=parseInt(hex,16)/255;
+    return n<=0.04045?n/12.92:((n+0.055)/1.055)**2.4;
+  };
+  const luminance=(hex)=>{
+    const n=hex.replace(/^#/,"");
+    return [0.2126,0.7152,0.0722].reduce((sum,weight,i)=>
+      sum+weight*channel(n.slice(i*2,i*2+2)),0);
+  };
+  const a=luminance(hexA),b=luminance(hexB);
+  return (Math.max(a,b)+0.05)/(Math.min(a,b)+0.05);
+}
+assert.ok(colorContrast("#253C2E","#F8FAF6")>=7,"Salbei explanation contrast must meet WCAG AAA normal text");
+assert.ok(colorContrast("#245B35","#E8F3E8")>=4.5,"positive feedback must meet WCAG AA normal text");
+assert.ok(colorContrast("#873B37","#F9ECE8")>=4.5,"negative feedback must meet WCAG AA normal text");
 
-console.log("OK: Q46 quiz single-screen structure, four-answer flow, Q backlink, light/dark contrast, script syntax.");
+
+console.log("OK: Q46 four-question single-screen quiz, source-grounded content, Salbei quiz feedback contrast, scripts.");
