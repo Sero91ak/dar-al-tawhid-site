@@ -11,9 +11,9 @@ Auch alle reservierten/eingereichten ElevenLabs-Flow-Aufnahmen bleiben bis zur K
 | 9-10 | 4 | 0 | 2 | 144 |
 
 **Schon bezahlte Originale noch zu retten:** 9.
-**Ungeklärte verbundene Flow-Originale, die nicht erneut gekauft werden dürfen:** 8.
+**Ungeklärte verbundene Flow-Originale, die nicht erneut gekauft werden dürfen:** 9.
 **Quizfragen, die nur auf verbundene Flow-Originale warten:** 3.
-**Neue einzigartige Texte nach echtem Deduplizieren:** 1360 (nur Berechnungsbasis; keine Credits bestellt).
+**Neue einzigartige Texte nach echtem Deduplizieren:** 1359 (nur Berechnungsbasis; keine Credits bestellt).
 
 ## Nächste technische Aktion
 1. Die historischen neun `eleven_v4`-MP3s mit echten Generation-IDs importieren, nicht regenerieren.
