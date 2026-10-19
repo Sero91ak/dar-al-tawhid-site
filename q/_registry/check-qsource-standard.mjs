@@ -162,7 +162,7 @@ for (const n of files) {
           const lessonHtml = await fs.readFile(lessonFile, 'utf8');
           if (!lessonHtml.includes('/q/' + n + '/'))
             fail.push(label + 'verlinkter Lernbereich enthält keinen Rücklink zu Q' + n);
-          if (!/<body\\b[^>]*class\\s*=\\s*(["'])[^"']*\\bheritage-learning\\b[^"']*\\1/i.test(lessonHtml))
+          if (!/<body\b[^>]*class\s*=\s*(["'])[^"']*\bheritage-learning\b[^"']*\1/i.test(lessonHtml))
             fail.push(label + 'Lernbereich verwendet nicht die gemeinsame Learning-Heritage-Vorlage');
         }
         if (!attr(learning, 'aria-label')) fail.push(label + 'Lernbereich-Link ohne Beschriftung');
