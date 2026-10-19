@@ -110,3 +110,18 @@ body.is-more-route .dm15-shell .dm-exact-sr{position:absolute!important;overflow
 body.is-more-route .dm15-shell .dm-exact-promo .dm-showcase-footnote{margin:11px 4px 0;max-width:100%;font-size:clamp(10px,1.6vw,12px);line-height:1.5}
 @media(min-width:700px){body.is-more-route .dm15-shell .dm-exact-stack{gap:15px}body.is-more-route .dm15-shell .dm-exact-card{border-radius:32px}}
 @media(prefers-reduced-motion:reduce){body.is-more-route .dm15-shell .dm-exact-action{transition:none}}
+
+/* MORE_COMPACT_NO_DUPLICATE_FRAUEN_V1
+   Hide only the legacy injection; the canonical Frauen tile in dm15Grid stays.
+   Reduce unnecessary scroll without truncating titles/descriptions. */
+body.is-more-route #appView [data-dar-frauen-live-entry]{display:none!important}
+@media(max-width:699px){
+  body.is-more-route #appView .dm15-shell{padding-top:8px;padding-bottom:12px}
+  body.is-more-route #appView .dm15-grid{gap:7px}
+  body.is-more-route #appView .dm15-feature{padding:8px 9px 9px;border-radius:14px}
+  body.is-more-route .dm15-row{min-height:34px;gap:6px}
+  body.is-more-route .dm15-glyph{width:32px;height:35px;flex-basis:32px}
+  body.is-more-route .dm15-glyph img{width:32px;height:33px}
+  body.is-more-route #appView .dm15-name{font-size:clamp(13.8px,3.65vw,15.5px);line-height:1.19}
+  body.is-more-route .dm15-description{margin-top:4px;font-size:clamp(11.9px,3.07vw,12.8px);line-height:1.34}
+}
