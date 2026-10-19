@@ -3,12 +3,12 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#0d1d22">
 <title>Startseiten-Studio V2 · DĀR AL TAWḤĪD</title>
-<link rel="stylesheet" href="/test/academy/startseiten-studio-v2.css?v=20261019-studio-v2">
+<link rel="stylesheet" href="/test/academy/startseiten-studio-v3.css?v=20261019-studio-v3">
 </head><body>
 <div id="studio" class="studio">
 <header class="studio-head">
  <div class="brand"><span class="eyebrow">DĀR AL TAWḤĪD · TEST-ATELIER</span><strong>Visuelles Layout-Studio</strong></div>
- <span class="scope"><span class="dot"></span> Privat · Entwurfsmodus</span>
+ <span class="scope"><span class="dot"></span> Geschützter Designentwurf · kein automatischer Push</span>
  <button id="undo" title="Rückgängig" aria-label="Rückgängig">↶</button><button id="redo" title="Wiederherstellen" aria-label="Wiederherstellen">↷</button>
  <button id="save" class="gold">Entwurf sichern</button><a class="back" href="/test/index.html#home" target="_blank" rel="noopener">Test-App ↗</a>
 </header>
@@ -22,12 +22,18 @@
  <button class="tool" data-tab="export"><b>⇩</b><span>Export</span></button>
 </aside>
 <section class="workspace" aria-label="Interaktives App-Layout">
+ <nav class="page-tabs" aria-label="Arbeitsfläche wählen" id="pageTabs">
+  <button type="button" class="active" data-page="test"><span>01</span> Test-App</button>
+  <button type="button" data-page="html"><span>02</span> HTML-Vorlage</button>
+  <button type="button" data-page="visitor"><span>03</span> Besucher-App <small>Entwurf</small></button>
+ </nav>
  <div class="stage-toolbar">
   <div class="segment" aria-label="Bearbeitungsmodus">
    <button data-mode="select" class="active">Markieren</button>
    <button data-mode="move">Ziehen</button>
    <button data-mode="area">Fläche</button>
    <button data-mode="word">Wort</button>
+   <button data-mode="reflow">Umordnen</button>
    <button data-mode="app">Bedienen</button>
   </div>
   <div class="stage-right">
@@ -36,6 +42,14 @@
     <option value="393" selected>iPhone</option><option value="430">iPhone Max</option>
     <option value="768">iPad</option><option value="1024">iPad Pro</option>
     <option value="1366">iPad 13″</option>
+    <option value="1440">Desktop groß</option>
+    <option value="1920">Desktop Full HD</option>
+    <option value="344">Fold Außen · Muster</option>
+    <option value="402">Fold außen breit · Muster</option>
+    <option value="600">Fold innen schmal · Muster</option>
+    <option value="748">Fold innen · Muster</option>
+    <option value="884">Fold innen breit · Muster</option>
+    <option value="1080">Duales Display · Muster</option>
    </select>
    <select id="theme" aria-label="Erscheinungsbild">
     <option value="soft">Sanft Elegant</option><option value="light">Hell</option>
@@ -44,15 +58,42 @@
     <option value="bordeaux">Bordeaux Royal</option><option value="dar-al-layl">Dār al-Layl</option>
    </select>
    <label class="zoom-label" for="zoom">Zoom <output id="zoomOut">100%</output></label>
-   <input type="range" id="zoom" min="40" max="140" step="5" value="100" aria-label="Zoom">
-   <button id="reload" title="Test-Vorschau neu laden">↻</button>
+   <button type="button" id="zoomDown" aria-label="Verkleinern">−</button>
+   <input type="range" id="zoom" min="25" max="250" step="5" value="100" aria-label="Zoom">
+   <button type="button" id="zoomUp" aria-label="Vergrößern">+</button>
+   <button type="button" id="zoomFit" title="An Arbeitsfläche anpassen">Einpassen</button>
+   <button type="button" id="orientation" title="Hoch- oder Querformat wechseln">↻ Quer</button>
+   <select id="placement" aria-label="Position auf der Arbeitsfläche">
+     <option value="center">Mittig</option><option value="left">Links</option>
+     <option value="right">Rechts</option><option value="free">Frei verschieben</option>
+   </select>
+   <button id="toggleCompare" title="Zweite Ansicht daneben anzeigen">Vergleich</button>
+   <button id="focusStage" title="Vorschau bildschirmfüllend">Fokus</button>
+   <button id="reload" title="Vorschau neu laden">↻</button>
   </div>
+ </div>
+ <div class="viewport-controls">
+  <label>Breite <input id="customWidth" type="number" min="240" max="2560" value="393" aria-label="Eigene Breite"> px</label>
+  <label>Höhe <input id="customHeight" type="number" min="320" max="3500" value="950" aria-label="Eigene Höhe"> px</label>
+  <span>Apple Pencil · Touch · Tastatur · Zoom</span>
  </div>
  <div class="canvas-scroll" id="canvasScroll">
   <div class="device-wrap" id="deviceWrap"><div class="device" id="deviceBox">
-   <div class="device-bar"><span>●</span><span>Dar Test · Echte Startseite</span><span>●</span></div>
-   <iframe id="appFrame" title="Live-Struktur der Test-App als bearbeitbare Vorschau" src="/test/index.html?env=staging&dar-editor=2#home"></iframe>
+   <div class="device-bar"><span>●</span><span id="activePageLabel">Test-App · aktuelle Startseite</span><span>●</span></div>
+   <iframe id="appFrame" title="Live-Struktur der Test-App als bearbeitbare Vorschau" src="/test/index.html?env=staging&dar-editor=3#home"></iframe>
   </div></div>
+  <div id="comparison" class="comparison" hidden>
+   <div class="comparison-head">Vergleichsansicht <select id="comparePage"><option value="visitor">Besucher-App</option><option value="test">Test-App</option><option value="html">HTML-Vorlage</option></select></div>
+   <iframe id="compareFrame" title="Nur lesbare Vergleichsansicht" loading="lazy"></iframe>
+   <small>Vergleichsansicht ist schreibgeschützt. Wechsel zum Tab, um diese Fläche zu bearbeiten.</small>
+  </div>
+ </div>
+ <div id="transferPanel" class="transfer-panel" hidden>
+   <b>Bereich übertragen</b>
+   <span id="transferName">Keine Auswahl</span>
+   <label>Zielseite <select id="transferTarget"><option value="test">Test-App</option><option value="html">HTML-Vorlage</option><option value="visitor">Besucher-App (Entwurf)</option></select></label>
+   <button type="button" id="copyToTarget">Kopieren &amp; Ziel öffnen</button>
+   <button type="button" id="cancelTransfer">Abbrechen</button>
  </div>
  <div class="stage-footer">
   <span id="status" role="status" aria-live="polite">Editor wird geladen …</span>
@@ -66,6 +107,9 @@
    <h3>Auswahlwerkzeuge</h3><p>Tippe auf ein Element oder wähle einen Bereich in der Ebenenliste. „Fläche“ markiert mehrere Elemente mit einem Rechteck.</p>
    <div class="btn-grid"><button id="selectParent">Elternelement ↑</button><button id="selectChild">Kindelement ↓</button><button id="selectPrevious">Vorheriges ←</button><button id="selectNext">Nächstes →</button></div>
    <hr><h3>Bearbeitungsaktionen</h3>
+   <div class="btn-grid"><button id="copyElement">Bereich kopieren</button><button id="pasteBefore">Davor einsetzen</button><button id="pasteAfter">Danach einsetzen</button><button id="copyBetween">Zwischen Tabs übertragen</button></div>
+   <label>Einfügeposition <select id="insertWhere"><option value="before">Vor markiertem Bereich</option><option value="after">Nach markiertem Bereich</option></select></label>
+   <p>Kopierte Abschnitte erscheinen als neue Entwurfs-Ebene; andere Inhalte rücken im Dokumentfluss automatisch nach oben oder unten. Originale und Funktionen bleiben erhalten.</p>
    <div class="btn-grid"><button id="hideSelected" class="danger">Fläche entfernen</button><button id="showSelected">Wieder einblenden</button><button id="collapseGap">Lücke schließen</button><button id="removeSpace">Abstand null</button></div>
    <p>„Fläche entfernen“ blendet nur den gewählten Bereich aus und gibt den Platz im Scrollbereich frei. Du kannst alles rückgängig machen.</p>
   </section>
@@ -91,6 +135,8 @@
    <button id="createFragment">Wort als eigene Ebene</button>
   </section>
   <section data-panel="layout" class="panel">
+   <label>Layout-Befehl (z. B. „Schrift 28“, „nach rechts 20“, „Lücke schließen“) <input id="layoutCommand" type="text" placeholder="Befehl eingeben …"></label>
+   <button id="executeCommand">Befehl ausführen</button>
    <h3>Position &amp; Dimension</h3><p>Element antippen, gedrückt halten und verschieben. Mit dem Griff unten rechts skalieren.</p>
    <div class="field-row">
     <label>Links / rechts<input data-prop="x" type="range" min="-450" max="450" step="1" value="0"><output data-value="x"></output></label>
@@ -139,6 +185,7 @@
    <div class="btn-grid"><button id="save2" class="gold">Zwischenspeichern</button><button id="loadDraft">Entwurf laden</button><button id="exportAll">Alle Änderungen exportieren</button><button id="exportPart">Nur gewählten Bereich</button><button id="importBtn">Entwurf importieren</button><button id="resetAll" class="danger">Entwurf zurücksetzen</button></div>
    <input id="importFile" type="file" accept=".json,application/json" hidden>
    <label class="check"><input id="applyLocal" type="checkbox">Mein Layout auf diesem Gerät auch in der normalen Test-App anzeigen</label>
+   <div class="notice"><strong>Kein direkter Push:</strong> Gestaltungen der Besucher-App bleiben strikt lokale Entwürfe. Einen Abschnitt kannst du exportieren und erst nach separater, berechtigter Freigabe in Test oder Besucher-App integrieren.</div>
    <div class="notice"><strong>Selektiver Test-Push:</strong> Exportiere einen Abschnitt und gib ihn zur Integration frei. Eine Serververöffentlichung erfolgt nicht automatisch durch diesen Editor.</div>
    <button id="exportReview">Freigabe-Paket für diesen Bereich</button>
   </section>
@@ -146,5 +193,5 @@
  <footer class="inspector-foot"><button id="resetCurrent">Element zurücksetzen</button><button id="exportCurrent">Bereich exportieren</button></footer>
 </aside>
 </div>
-<script src="/test/academy/startseiten-studio-v2.js?v=20261019-studio-v2" defer></script>
+<script src="/test/academy/startseiten-studio-v3.js?v=20261019-studio-v3" defer></script>
 </body></html>

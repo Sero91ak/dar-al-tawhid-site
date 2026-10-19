@@ -3,16 +3,24 @@
 (function(){"use strict";
 if(!/^\/test(?:\/|$)/.test(location.pathname)||/^\/test\/kids(?:\/|$)/.test(location.pathname))return;
 if(window.__DAR_TEST_STUDIO_LOCAL_V2)return;window.__DAR_TEST_STUDIO_LOCAL_V2=true;
-const KEY="dar_visual_studio_v2",ACTIVE="dar_visual_studio_local_enabled_v2";
+const KEY="dar_visual_studio_v3",ACTIVE="dar_visual_studio_local_enabled_v3",OLD="dar_visual_studio_v2",OLD_ACTIVE="dar_visual_studio_local_enabled_v2";
 const root=document.documentElement;
 let running=false,queued=false;
 const num=(v,a,b)=>typeof v==="number"&&Number.isFinite(v)?Math.max(a,Math.min(b,v)):null;
 const cssEsc=v=>window.CSS&&CSS.escape?CSS.escape(v):String(v).replace(/([^a-zA-Z0-9_-])/g,"\\$1");
-function get(){try{const data=JSON.parse(localStorage.getItem(KEY)||"null");return data?.version===2&&data.items&&typeof data.items==="object"?data:null}catch(e){return null}}
-function enabled(){try{return localStorage.getItem(ACTIVE)==="1"}catch(e){return false}}
+function get(){
+ try{
+  const d=JSON.parse(localStorage.getItem(KEY)||"null");
+  if(d?.version===3&&d.pages?.test?.version===2&&d.pages.test.items)return d.pages.test;
+  const old=JSON.parse(localStorage.getItem(OLD)||"null");
+  return old?.version===2&&old.items?old:null;
+ }catch(e){return null}
+}
+function enabled(){try{return localStorage.getItem(ACTIVE)==="1"||localStorage.getItem(OLD_ACTIVE)==="1"}catch(e){return false}}
 function byKey(key){
  if(key.startsWith("image:"))return document.querySelector('[data-ve-image-id="'+cssEsc(key.slice(6))+'"]');
  if(key.startsWith("fragment:"))return document.querySelector('[data-ve-fragment-id="'+cssEsc(key.slice(9))+'"]');
+ if(key.startsWith("transfer:"))return document.querySelector('[data-ve-transfer-id="'+cssEsc(key.slice(9))+'"]');
  try{return document.querySelector(key)}catch(e){return null}
 }
 function applyOne(el,v){
@@ -72,10 +80,43 @@ function images(data){
   applyOne(el,{opacity:image.opacity??1,width:30,...base,...bp});
  }
 }
+function flowNode(node){return node&&(node.closest("section,article,header,footer,li,.dv3-post,.dv3-quick,.home-line-row,.brand-main")||node)}
+function transfers(data){
+ for(const x of data.transfers||[]){
+  if(!x?.id||!x?.anchor||!x?.snapshot)continue;
+  const anchor=flowNode(byKey(x.anchor));if(!anchor?.parentNode)continue;
+  let el=document.querySelector('[data-ve-transfer-id="'+cssEsc(x.id)+'"]');
+  if(!el){
+   el=document.createElement("section");el.dataset.veTransferId=x.id;
+   el.setAttribute("aria-label","Lokal gespeicherter Entwurfsabschnitt");
+   const p=document.createElement("p");p.textContent=String(x.snapshot.text||"").slice(0,1800);
+   p.style.cssText="margin:0;white-space:normal;color:inherit";
+   if(x.snapshot.image&&/^https:\/\//.test(x.snapshot.image)){
+    const img=document.createElement("img");img.src=x.snapshot.image;img.alt="";
+    img.style.cssText="display:block;max-width:100%;height:auto;max-height:240px;margin:0 0 9px";
+    el.appendChild(img);
+   }
+   el.appendChild(p);
+   el.style.cssText="position:relative;display:block;min-width:0;padding:14px 16px;margin:6px 0;border:1px solid var(--dt-accent,#a88c5b);border-radius:12px;background:var(--dt-page,transparent);color:var(--dt-ink,inherit)";
+  }
+  if(x.where==="after"){
+   if(anchor.nextElementSibling!==el)anchor.parentNode.insertBefore(el,anchor.nextSibling);
+  }else if(anchor.previousElementSibling!==el)anchor.parentNode.insertBefore(el,anchor);
+ }
+}
+function moves(data){
+ for(const m of data.moves||[]){
+  const src=byKey(m.source),anchor=flowNode(byKey(m.anchor));
+  if(!src||!anchor||src===anchor||src.contains(anchor)||!anchor.parentNode)continue;
+  if(m.where==="after"){
+   if(anchor.nextElementSibling!==src)anchor.parentNode.insertBefore(src,anchor.nextSibling);
+  }else if(anchor.previousElementSibling!==src)anchor.parentNode.insertBefore(src,anchor);
+ }
+}
 function apply(){
  if(!document.body?.classList.contains("is-home-route")||!enabled())return;
  const data=get();if(!data)return;
- fragments(data);images(data);
+ fragments(data);transfers(data);moves(data);images(data);
  const width=innerWidth,group=width<=500?"phone":width<=1100?"tablet":"wide";
  for(const [key,value]of Object.entries(data.items).slice(0,350)){
   const el=byKey(key);if(el)applyOne(el,{...value,...(value.breakpoints?.[group]||{})});

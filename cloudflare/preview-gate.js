@@ -96,7 +96,7 @@ const ACADEMY_OWNER_ARCHIVE = "/akademie/unterrichtsarchiv";
 
 export function isAcademyOwnerRoute(pathname) {
   // Explicit allowlist: no wildcard, no traversal into unrelated test assets.
-  const allowed = ["", "/", "/index.html", "/audio-audit-v18.html", "/unterrichtszentrale-v23.html", "/redaktion-katalog-v1.json", "/startseiten-editor.html", "/startseiten-studio-v2.css", "/startseiten-studio-v2.js", "/login"];
+  const allowed = ["", "/", "/index.html", "/audio-audit-v18.html", "/unterrichtszentrale-v23.html", "/redaktion-katalog-v1.json", "/startseiten-editor.html", "/startseiten-studio-v2.css", "/startseiten-studio-v2.js", "/startseiten-studio-v3.css", "/startseiten-studio-v3.js", "/login"];
   if (pathname === ACADEMY_OWNER_ARCHIVE || pathname === ACADEMY_OWNER_ARCHIVE + "/" ||
       pathname === ACADEMY_OWNER_ARCHIVE + "/index.html" || pathname === ACADEMY_OWNER_ARCHIVE + "/daten.json") return true;
   // The physical archive assets must ALSO require owner authentication.
@@ -278,5 +278,7 @@ export function academyOwnerAssetPath(pathname) {
   if (suffix === "/startseiten-editor.html") return ACADEMY_OLD_ROOT + "/startseiten-editor.html";
   if (suffix === "/startseiten-studio-v2.css") return ACADEMY_OLD_ROOT + "/startseiten-studio-v2.css";
   if (suffix === "/startseiten-studio-v2.js") return ACADEMY_OLD_ROOT + "/startseiten-studio-v2.js";
+  if (suffix === "/startseiten-studio-v3.css") return ACADEMY_OLD_ROOT + "/startseiten-studio-v3.css";
+  if (suffix === "/startseiten-studio-v3.js") return ACADEMY_OLD_ROOT + "/startseiten-studio-v3.js";
   return null;
 }
