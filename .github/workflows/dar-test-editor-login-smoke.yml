@@ -1,0 +1,50 @@
+name: Dar Test Editor Login Smoke
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/dar-test-editor-login-smoke.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  editor-login:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify editor login on public and workers.dev routes
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const sites = [
+            "https://dar-al-tawhid.de",
+            "https://dar-al-tawhid-test.sero91ak.workers.dev"
+          ];
+          let failures = 0;
+          for (const origin of sites) {
+            try {
+              const page = await fetch(origin + "/test/academy/startseiten-editor.html?smoke=" + Date.now(), { redirect: "manual" });
+              const html = await page.text();
+              const pageOK = page.status === 200 && html.includes("Layout-Studio") && html.includes('name="password"') && html.includes('name="username"');
+              console.log(origin + " editor login: status=" + page.status + " form=" + pageOK);
+              if (!pageOK) { failures++; continue; }
+
+              const response = await fetch(origin + "/test/academy/startseiten-editor-login", {
+                method: "POST",
+                body: new URLSearchParams({ username: "Dawud", password: "intentionally-wrong-test-value" }),
+                headers: { "Origin": origin, "Content-Type": "application/x-www-form-urlencoded" },
+                redirect: "manual"
+              });
+              const denied = response.status === 401;
+              console.log(origin + " invalid password rejected: status=" + response.status + " ok=" + denied);
+              if (!denied) failures++;
+            } catch (error) {
+              console.error(origin + " editor error: " + String(error));
+              failures++;
+            }
+          }
+          if (failures) process.exit(1);
+          NODE
