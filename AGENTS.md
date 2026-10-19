@@ -146,6 +146,9 @@ Geschützt durch `content/admin/change-scope-lock.json` und `scripts/change-scop
 
 ## DĀR AL TAWḤĪD ZENTRUM · Verbindliche Beitragsstruktur (19.10.2026)
 
+- **Unabdingbare Quellenlink-Vorlage im Chat VOR jeder Freigabe (Nutzerkorrektur 19.10.2026):** Bei „Gib mir einen Beitrag“ oder einem zur Überarbeitung vorgelegten Einzel-/Slide-Beitrag IMMER den vollständigen Chat-Kontrollentwurf ausgeben: 📖 Titel, unmittelbar darunter genau vier Hashtags, 🖋️ Sprecher und ausschließlich deutsche Aussage, 📝 genaues Quellenwerk/Band/Seite/Nummer; **darunter die tatsächlich überprüften, direkt anklickbaren Originalquellenlinks mit `#:~:text=` oder Scan-PDF `#page=`**; 🌙 separates kurzes Fazit. Ein bereits existierender zentraler `/q/N/`-Kurzlink darf zusätzlich angezeigt werden, **ersetzt den Originalnachweis aber nicht**. Keine arabischen Originalzitate im deutschen Chat-Beitrag, keine Social-Fußblöcke. Keine fehlende/ungeprüfte Quelle als verifiziert bezeichnen. **Diese Prüfversion ist nie automatisch eine Publikationsfreigabe.** Erst auf „Erzeuge Quellenlink“ die Quellen auf die zentrale Q-Seite bündeln; anschließend beim App-Post die externen Prüflinks aus dem Aussagekörper herausnehmen, nur `source` und `links` im Frontmatter behalten und `tags: []` erzwingen. Vor einer Veröffentlichung hat der Nutzer den Entwurf mitsamt echten Direktnachweisen kontrollieren können. Keine automatische OneSignal-Nachricht aus einem Content-Push.
+
+
 **Veröffentlichungs- vs. Geräte-Push-Bedeutung (ausdrückliche Korrektur 19.10.2026):** „Beitrag über DĀR Admin pushen“ = korrigierten/verifizierten Beitrag für Besucher verfügbar machen, **ohne** Nachricht an Nutzergeräte. Berichtigungsbenachrichtigungen nur nach einem **eigenständigen expliziten Versandauftrag** mit geklärtem Text und Zielgruppe. Keine automatische OneSignal-Auslösung durch eine Layout-, Quellen-, Text- oder Schriftkorrektur.
 
 
