@@ -963,6 +963,8 @@ function prepareDarAdminEditorialPost(markdown, mode){
   const errors=[];
   if(!parts)return{ok:false,markdown:input,errors:["Frontmatter für den veröffentlichten Beitrag fehlt."]};
   let fm=parts[2],body=parts[4];
+  // Normalize decorated Latin math-alphabet glyphs on input; preserve diacritics.
+  body=body.replace(/[\u{1D400}-\u{1D7FF}]/gu,char=>char.normalize("NFKC"));
   const required=(field)=>new RegExp("^"+field+":\\s*\\S","m").test(fm);
   if(!required("source"))errors.push("Bibliografische Quelle im Frontmatter (source:) fehlt.");
   const qrefs=[...fm.matchAll(/^\s*url:\s*['"]?\/q\/([1-9]\d*)\/?['"]?\s*$/gm)];
@@ -986,6 +988,9 @@ function prepareDarAdminEditorialPost(markdown, mode){
     return true;
   });
   body=lines.join("\n").replace(/\n{3,}/g,"\n\n");
+  const fazitMatches=[...body.matchAll(/🌙\s*(?:\*\*)?\s*(?:Fazit|𝐅𝐚𝐳𝐢𝐭)\s*:?/gu)];
+  if(fazitMatches.length>1)errors.push("Fazit mehrfach vorhanden.");
+  if(fazitMatches.length&&!body.split("\n").some(line=>/^\s*🌙\s*(?:\*\*)?\s*(?:Fazit|𝐅𝐚𝐳𝐢𝐭)/u.test(line)))errors.push("Fazit muss mit eigener Zeile „🌙 Fazit:“ beginnen.");
   if(!body.trim())errors.push("Aussagetext fehlt.");
   const next=parts[1]+fm+parts[3]+body;
   return{ok:errors.length===0,markdown:next,errors,qrefs:qrefs.map(m=>Number(m[1]))};
@@ -1018,6 +1023,11 @@ function checkNewPostMarkdown(){
     setUploadStatus(`<span style="color:#f87171"><strong>DĀR-Beitragsregel:</strong> ${esc(editorial.errors.join(" · "))}</span>`);
     toast("DĀR-Beitragsregel nicht erfüllt");
     return false;
+  }
+  if(editorial.markdown!==draftMarkdown){
+    draftMarkdown=editorial.markdown;
+    const editor=document.getElementById("postMarkdownInput");
+    if(editor)editor.value=draftMarkdown;
   }
   const status=DARSlidePostParser.formatSlideStatusLine(draftMarkdown,draftPostMode);
   const warn=prepared.warnings?.length?`<br><span style="color:#fbbf24">${esc(prepared.warnings.join(" · "))}</span>`:"";
