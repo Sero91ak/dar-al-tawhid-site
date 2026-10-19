@@ -133,6 +133,9 @@ def main():
     selected=candidates[:MAX_IN_PLAN]
     if len({x["sourceTextSHA256"] for x in selected})!=len(selected):
         raise RuntimeError("Duplicate new-original SHA selected")
+    if any(x["spokenText"] in reg["textClips"] or x["spokenText"] in protected
+           or x["sourceTextSHA256"] in blocked_hashes for x in selected):
+        raise RuntimeError("Previously paid, reserved or uncertain text entered candidate plan")
     waves=[]
     for original in selected:
         if not waves or len(waves[-1]["items"])>=10 or waves[-1]["estimatedCreditsNotInvoice"]+original["estimatedCreditsNotInvoice"]>MAX_PER_WAVE:
@@ -148,6 +151,11 @@ def main():
     result={
         "schemaVersion":1,
         "scope":"TAWHID_KIDS_V4_NEXT100_SOURCE_EXACT_10099_RULE_LEXICON_PLAN",
+        "basedOnOriginalRegistrySHA256":hashlib.sha256(REG.read_bytes()).hexdigest(),
+        "basedOnPaidLedgerSHA256":hashlib.sha256(LEDGER.read_bytes()).hexdigest(),
+        "basedOnLatestOwnerPronunciationHoldSHA256":hashlib.sha256(HOLD.read_bytes()).hexdigest(),
+        "existingOriginalsAccountedFor":len(reg["textClips"]),
+        "protectedPaidOrReservedSourceCount":len(protected),
         "selected450QuestionCount":450,
         "sourceTextImmutable":True,
         "modelId":MODEL,"voiceId":VOICE,
