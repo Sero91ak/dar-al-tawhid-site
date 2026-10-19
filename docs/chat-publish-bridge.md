@@ -10,9 +10,10 @@ Diese Branch vorbereitet eine sichere Weiterleitung von ChatGPT an den vorhanden
 
 ## Verbindlicher Veröffentlichungsinhalt
 
-- Ein Chat-Prüfentwurf enthält genau vier Hashtags direkt unter dem Titel. Beim Veröffentlichen werden alle Hashtags aus der Aussage entfernt und `tags: []` erzwungen; sie sind niemals Teil des veröffentlichten Fließtexts.
+- Ein Chat-Prüfentwurf enthält genau vier Hashtags direkt unter dem Titel: **immer `#DarAlTawhid` zuerst**, danach drei thematisch bzw. zum Sprecher passende Hashtags. Beim Veröffentlichen werden alle Hashtags aus der Aussage entfernt und `tags: []` erzwungen; sie sind niemals Teil des veröffentlichten Fließtexts.
 - Auf den Besucheroberflächen werden **Titel**, **Sprecher**, **Aussage**, **Fazit** und **Quelle mit geprüftem `/q/N/`-Nachweis** als getrennte Bereiche dargestellt. Die Aussagefläche enthält ausschließlich das Zitat. Der Fazit-Absatz `🌙 Fazit:` wird vor der Anzeige aus dem Zitat herausgelöst.
 - Keine Social-Media-Hashtags, Telegram-/Instagram-/Webseiten-Fußzeilen, arabischen Originalpassagen oder Werbeaufrufe im veröffentlichten Beitrag. Mathematische Schmuckalphabet-Zeichen im Zitat/Fazit werden beim Erstellen normalisiert, damit Umlaute (z. B. „Lebensführung“) einheitlich lesbar bleiben.
+- Für WhatsApp und andere Weiterleitungen Quellenkarten zusätzlich immer als **voll ausgeschriebene URL in einer eigenen Zeile** ausgeben, z. B. `https://dar-al-tawhid.de/q/46/`. Reine Linktitel oder Markdown-Beschriftungen ohne sichtbare URL sind nicht als teilbare Quellenlinks ausreichend. Keine unsichtbaren Unicode-Zeichen an der URL anhängen.
 - Bei `Erzeuge Quellenlink` werden zunächst die überprüften `/q/<nummer>`-Quellenseiten samt Registry angelegt. Dieser Auftrag veröffentlicht noch keinen Beitrag und sendet keine Gerätebenachrichtigung.
 - **Wenn ein bestehender Beitrag korrigiert wurde:** denselben Post aktualisieren, Index und App-Deploy synchronisieren, tatsächliche Besucheransicht prüfen; **keine Gerätebenachrichtigung**. Eine gesonderte Berichtigungsnachricht darf erst nach einer ausdrücklichen Nachricht-versenden-Anweisung mit festgelegtem Wortlaut und Empfängern verschickt werden.
 - Die Linknummerierung, Quellenprüfung, Einzel-/Slide-Logik und der bestehende DAR-Admin-Publisher bleiben verbindlich.
