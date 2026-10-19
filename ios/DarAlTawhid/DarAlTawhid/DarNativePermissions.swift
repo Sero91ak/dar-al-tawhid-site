@@ -200,7 +200,7 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
         case .restricted: state = "restricted"
         @unknown default: state = "unknown"
         }
-        let js = "window.dispatchEvent(new CustomEvent('dar-native-location-status',{detail:{authorization:'\\(state)',backgroundOptIn:\\(backgroundOptIn ? "true" : "false")}}));"
+        let js = "window.dispatchEvent(new CustomEvent('dar-native-location-status',{detail:{authorization:'\(state)',backgroundOptIn:\(backgroundOptIn ? "true" : "false")}}));"
         webView?.evaluateJavaScript(js, completionHandler: nil)
     }
 
