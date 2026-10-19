@@ -16,5 +16,8 @@
     "ffprobe",
     "ffmpeg"
   ],
-  "knownMissingAudioDecoderFixedInWorkflow": true
+  "knownMissingAudioDecoderFixedInWorkflow": true,
+  "reconciledSinglePaidPilotFromActualRequestReceipt": true,
+  "audioOriginalsAlreadyPaid": true,
+  "zeroCreditRecompositionPass": "after-positive-exact-11-original-paid-ledger-reconciliation"
 }
