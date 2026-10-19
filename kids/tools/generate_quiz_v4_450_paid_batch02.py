@@ -40,14 +40,86 @@ def subscription(key):
         obj=json.loads(response.read().decode("utf-8"))
     return float(obj["character_limit"])-float(obj["character_count"])
 
+# One canonical, pinned user dictionary; never substitute a new alias list,
+# an assistant-generated voice, or another model.
+PRONUNCIATION=ROOT/"data/pronunciation/elevenlabs-production.json"
+PRONUNCIATION_HOLD=ROOT/"kids/data/quiz-v4-pronunciation-hold.json"
+
+def build_canonical_v4_payload(spoken, *, language="de"):
+    """Fail closed before any paid request unless the original 10,099-rule
+    German lexicon, its version and its content SHA match GitHub exactly.
+
+    Native Arabic Fuṣḥā is intentionally a distinct language profile: the
+    German de-DE PLS uses Latin transliteration aliases, which must NOT
+    rewrite fully vocalized Arabic words. The existing owner voice is shared.
+    """
+    import re
+    import xml.etree.ElementTree as ET
+    if not isinstance(spoken,str) or not spoken.strip() or spoken!=spoken.strip():
+        raise RuntimeError("V4_SOURCE_TEXT_INVALID: use exact approved speech text")
+    if language not in ("de","ar"):
+        raise RuntimeError("V4_LANGUAGE_INVALID: only German or native Arabic")
+    cfg=load(PRONUNCIATION)
+    voice=cfg.get("masterVoice") or {}
+    dic=cfg.get("pronunciationDictionary") or {}
+    if cfg.get("modelId")!=MODEL or voice.get("voiceId")!=VOICE:
+        raise RuntimeError("V4_MASTER_VOICE_MODEL_MISMATCH")
+    if dic.get("requiredForProduction") is not True:
+        raise RuntimeError("V4_MASTER_DICTIONARY_REQUIRED")
+    if dic.get("id")!="Q8w3SxtoVo8NSjsnlJEd" or dic.get("versionId")!="wSzgkGpAwEDiTak8DApc":
+        raise RuntimeError("V4_MASTER_DICTIONARY_ID_OR_VERSION_MISMATCH")
+    p=(ROOT/str(dic.get("masterFile",""))).resolve()
+    if not p.is_relative_to(ROOT.resolve()) or not p.is_file():
+        raise RuntimeError("V4_MASTER_PLS_MISSING")
+    data=p.read_bytes()
+    git_sha=hashlib.sha1(b"blob "+str(len(data)).encode("ascii")+b"\\x00"+data).hexdigest()
+    if git_sha!=dic.get("gitBlobSha"):
+        raise RuntimeError("V4_MASTER_PLS_GIT_SHA_MISMATCH")
+    ns="{http://www.w3.org/2005/01/pronunciation-lexicon}"
+    root=ET.fromstring(data)
+    if root.tag!=ns+"lexicon" or root.attrib.get("{http://www.w3.org/XML/1998/namespace}lang")!="de-DE":
+        raise RuntimeError("V4_MASTER_PLS_INVALID_LANGUAGE")
+    lexemes=root.findall(ns+"lexeme")
+    if len(lexemes)!=dic.get("ruleCount") or len(lexemes)!=10099:
+        raise RuntimeError("V4_MASTER_PLS_RULE_COUNT_MISMATCH")
+    core={}
+    for x in lexemes:
+        label=x.findtext(ns+"grapheme")
+        if label in ("Qurʾān","Īmān","Koran","Iman"):
+            core[label]=x.findtext(ns+"alias")
+    if core.get("Qurʾān")!="Qur-aan" or core.get("Īmān")!="Iimaan":
+        raise RuntimeError("V4_MASTER_PLS_QURAN_IMAN_ALIASES_MISSING")
+    # A mixed Latin/Arabic-script speech item MUST be explicitly segmented
+    # before synthesis, never guessed as German or Arabic.
+    has_arabic=bool(re.search(r"[\\u0621-\\u064A]",spoken))
+    has_latin=bool(re.search(r"[A-Za-zÀ-ÿ]",spoken))
+    if has_arabic and has_latin:
+        raise RuntimeError("V4_MIXED_LANGUAGE: split German and native Fuṣḥā audio before charging")
+    if language=="ar":
+        if not has_arabic or has_latin or not re.search(r"[\\u064B-\\u065F\\u0670]",spoken):
+            raise RuntimeError("V4_FUSHA: require separately vocalized Arabic-only script")
+        # Never apply de-DE transliteration aliases to genuine Arabic;
+        # preserve madd, shaddah and case vowels in the source.
+        return {"text":spoken,"model_id":MODEL,"language_code":"ar",
+                "apply_text_normalization":"off"}
+    if has_arabic:
+        raise RuntimeError("V4_GERMAN_SOURCE_CONTAINS_ARABIC: split Fuṣḥā before charging")
+    return {"text":spoken,"model_id":MODEL,"language_code":"de",
+            "apply_text_normalization":"off",
+            "pronunciation_dictionary_locators":[{
+                "pronunciation_dictionary_id":dic["id"],
+                "version_id":dic["versionId"]}]}
+
+
 def original_mp3(key,spoken):
-    hold=load(ROOT/"kids/data/quiz-v4-pronunciation-hold.json")
+    hold=load(PRONUNCIATION_HOLD)
     if hold.get("productionPaused") is not False or hold.get("humanPronunciationApproved") is not True:
-        raise RuntimeError("PRONUNCIATION_HOLD: user stopped ElevenLabs V4; no new TTS until the master pronunciation dictionary and Fusha are verified")
+        raise RuntimeError("PRONUNCIATION_HOLD: no paid V4 until 10,099-rule master and Arabic Fuṣḥā are verified")
+    body=build_canonical_v4_payload(spoken,language="de")
     req=urllib.request.Request(
         "https://api.elevenlabs.io/v1/text-to-speech/"+VOICE+
         "?output_format=mp3_44100_128",
-        data=json.dumps({"text":spoken,"model_id":MODEL},ensure_ascii=False).encode("utf-8"),
+        data=json.dumps(body,ensure_ascii=False).encode("utf-8"),
         method="POST",headers={"xi-api-key":key,"Accept":"audio/mpeg","Content-Type":"application/json"})
     try:
         with urllib.request.urlopen(req,timeout=110) as r:
@@ -55,10 +127,10 @@ def original_mp3(key,spoken):
             ct=r.headers.get("Content-Type","")
             rid=r.headers.get("request-id") or r.headers.get("xi-request-id")
             if r.status!=200 or ("audio/" not in ct and "octet-stream" not in ct):
-                raise RuntimeError("Unexpected direct MP3 HTTP/content-type. NEVER RETRY blindly.")
+                raise RuntimeError("Unexpected V4 MP3 HTTP/content-type. NEVER RETRY blindly.")
     except urllib.error.HTTPError as exc:
-        raise RuntimeError(f"ElevenLabs direct original-MP3 response HTTP {exc.code}; NO AUTOMATIC RETRY")
-    if not (1500<len(data)<1500000) or not(data.startswith(b"ID3") or data[:1]==b"\xff"):
+        raise RuntimeError(f"ElevenLabs V4 master+dictionary HTTP {exc.code}; NO AUTOMATIC RETRY")
+    if not (1500<len(data)<1500000) or not(data.startswith(b"ID3") or data[:1]==b"\\xff"):
         raise RuntimeError("Invalid original MP3 response; NO AUTOMATIC RETRY")
     return data,rid
 
