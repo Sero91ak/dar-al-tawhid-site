@@ -35,9 +35,22 @@ Jede nummerierte Quellenseite muss diesen Aufbau verwenden:
 8. Direktlinks mit Textfragment (`#:~:text=`) oder geprüften PDF-Seitenankern (`#page=`) sind Pflicht, sobald die Stelle sicher bestimmt ist.
 9. Keine alten Listen wie `<ul class="qsource-link-list">` für Quellenlinks verwenden.
 10. Keine Text-Footer wie `Telegram Instagram WhatsApp Website` verwenden.
-11. Nach den Linkkarten steht immer die Social-Icon-Leiste `<nav class="qsource-social">` mit anklickbaren Icons für Telegram, Instagram, WhatsApp und Website.
-12. Interner Fallback bleibt als letzte Webkarte möglich: `/q/<nummer>/`.
-13. Quellenlinks werden nicht automatisch in Beiträgen veröffentlicht, sondern erst nach Freigabe des Nutzers; die `/q/<nummer>/`-Seite darf die vollständigen Direktnachweise enthalten.
+11. Nach den Originalnachweisen muss **immer** der thematisch passende interne Lernbereich verlinkt sein: `<a class="qsource-learning" href="/lernen/<passender-slug>/" ...>`. Die Lernseite muss existieren, das Wissen der jeweiligen Quelle behandeln und zu derselben Q-Nummer zurückverlinken. Wenn keine passende Lernseite existiert, **vor Veröffentlichung eine eigene passende Lernseite anlegen**. Der Lernbereich ist keine weitere Überlieferungsquelle.
+12. Ganz am Schluss folgt **immer die vollständige Icon-Leiste** `<nav class="qsource-social">` mit vier **funktionierenden Links**: Telegram `https://t.me/dar_al_tauhid`, Instagram `https://www.instagram.com/dar_at_tawhid/`, WhatsApp-Kanal `https://whatsapp.com/channel/0029VbBK0YaDp2Q8A0kW1F3g` und Website `/`. Eine einzelne Homepage-Schaltfläche reicht nicht aus. Die Icons werden über die zentrale CSS gerendert; zugängliche Beschriftung ist Pflicht.
+13. Die sichtbare geteilte Quellenadresse lautet ohne Protokoll `dar-al-tawhid.de/q/<nummer>/` (mit Schluss-Slash); die technischen URLs verwenden HTTPS. Keine reinen beschrifteten Markdown-Links zum Weiterkopieren.
+14. Originalnachweise müssen verifiziert, markiert und in den vorgesehenen Linkkarten erfasst sein; die Lernseite ersetzt niemals Quellen-/Isnād-Belege.
+15. Quellenlinks werden nicht automatisch in Beiträgen veröffentlicht, sondern erst nach Freigabe des Nutzers; eine Q-Seite oder Lernseite löst **keine OneSignal-Nachricht** aus.
+
+## Standard-Lernbereich direkt vor den Social-Icons
+
+```html
+<a class="qsource-learning" href="/lernen/wissen-adab/" aria-label="Lernbereich öffnen">
+  <strong>Wissen vertiefen: passender Lernbereich ↗</strong>
+  <span>Freiwillig lernen und den Inhalt anhand von Verständnisfragen überprüfen.</span>
+</a>
+```
+
+Das Beispiel ist an **Q46 (Ibn Sīrīn)** gebunden; es darf bei anderen Aussagen nicht pauschal übernommen werden. Jede Lektion benutzt `assets/learning-heritage.css` und verlinkt zurück auf ihre eigene `/q/N/`-Quellenkarte.
 
 ## Standard-Social-Icon-Leiste
 
@@ -74,7 +87,8 @@ node q/_registry/register-shortlink.mjs \
   --speaker "Sprecher oder Überlieferer" \
   --postReference statement-00X \
   --summary "Kernaussage in 1 Satz" \
-  --source "Primärquelle in Kurzform"
+  --source "Primärquelle in Kurzform" \
+  --learning /lernen/passender-bereich/
 ```
 
 2. Script erzeugt automatisch:
@@ -85,9 +99,9 @@ node q/_registry/register-shortlink.mjs \
    - `q/README.md` zeigt die Nummer mit Thema und Sprecher in GitHub
 
 ## Kurzformat für Posts
-- Immer ohne Schema schreiben:
-  - `dar-al-tawhid.de/q/1`
-  - `dar-al-tawhid.de/q/2`
+- Immer ohne Schema schreiben, **mit Schluss-Slash**:
+  - `dar-al-tawhid.de/q/1/`
+  - `dar-al-tawhid.de/q/2/`
   - ...
 
 ## Hinweis
