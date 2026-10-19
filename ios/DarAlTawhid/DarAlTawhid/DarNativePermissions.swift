@@ -45,6 +45,11 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
             requestLocationIfNeeded()
         case "location-background":
             enableBackgroundMonitoring()
+        case "location-background-off":
+            UserDefaults.standard.set(false, forKey: backgroundPreferenceKey)
+            locationManager.stopMonitoringSignificantLocationChanges()
+            locationManager.allowsBackgroundLocationUpdates = false
+            sendLocationStatus()
         case "location-open-settings":
             if let url = URL(string: UIApplication.openSettingsURLString) {
                 UIApplication.shared.open(url)
@@ -139,7 +144,7 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
             locationManager.distanceFilter = liveQibla ? 20 : 500
             locationManager.startUpdatingLocation()
             trackingRegularly = true
-            if backgroundOptIn && locationManager.authorizationStatus == .authorizedAlways {
+            if backgroundOptIn && DarPushNotifications.storedWebSettings()["locationMode"] as? String == "auto" && locationManager.authorizationStatus == .authorizedAlways {
                 locationManager.allowsBackgroundLocationUpdates = true
                 locationManager.startMonitoringSignificantLocationChanges()
             }
@@ -174,7 +179,7 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
         locationManager.stopUpdatingHeading()
         locationManager.stopUpdatingLocation()
         trackingRegularly = false
-        if backgroundOptIn && locationManager.authorizationStatus == .authorizedAlways {
+        if backgroundOptIn && DarPushNotifications.storedWebSettings()["locationMode"] as? String == "auto" && locationManager.authorizationStatus == .authorizedAlways {
             locationManager.allowsBackgroundLocationUpdates = true
             locationManager.startMonitoringSignificantLocationChanges()
         }
@@ -213,7 +218,7 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
         switch manager.authorizationStatus {
         case .authorizedWhenInUse, .authorizedAlways:
             if liveQibla { startLiveQibla() } else { startForegroundTracking() }
-            if backgroundOptIn && manager.authorizationStatus == .authorizedAlways {
+            if backgroundOptIn && DarPushNotifications.storedWebSettings()["locationMode"] as? String == "auto" && manager.authorizationStatus == .authorizedAlways {
                 manager.allowsBackgroundLocationUpdates = true
                 manager.startMonitoringSignificantLocationChanges()
             }
@@ -241,6 +246,7 @@ final class DarNativePermissions: NSObject, CLLocationManagerDelegate {
         mostRecentLocation = loc
         deliver(loc)
         DarPushNotifications.applyNativeLocation(loc)
+        Task { @MainActor in DarPrayerLiveActivityController.refresh() }
         WidgetCenter.shared.reloadAllTimelines()
     }
 
