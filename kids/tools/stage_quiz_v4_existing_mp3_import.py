@@ -12,6 +12,7 @@ import json
 import subprocess
 from collections import Counter
 from pathlib import Path
+from quiz_v4_quarantine import quarantined_originals,blocked_full_utterances
 
 ROOT=Path(__file__).resolve().parents[2]
 PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
@@ -80,12 +81,18 @@ def main():
     require(isinstance(recipes,list) and len(recipes)==450 and
             len({q.get("questionId") for q in recipes})==450,
             "Expected exactly 450 independent question IDs")
+    blocked_texts,blocked_generations=quarantined_originals(ROOT)
+    # Stale composed MP3 previews can survive a prior error. Never re-stage
+    # anything whose constituent original was explicitly rejected by user.
+    blocked_utterances=blocked_full_utterances(recipes,blocked_texts,blocked_generations)
     sources=[checked_preview(YOUNG),checked_preview(OLDER)]
     all_keys={r[k]["text"] for r in recipes for k in KINDS}
     candidates={}
     for preview in sources:
         for phrase,item in preview.items():
             require(phrase in all_keys,"Preview contains extra/unrecognized quiz audio")
+            if phrase in blocked_utterances:
+                continue
             if phrase in candidates:
                 other=candidates[phrase]
                 require(other["sha256"]==item.get("sha256"),
