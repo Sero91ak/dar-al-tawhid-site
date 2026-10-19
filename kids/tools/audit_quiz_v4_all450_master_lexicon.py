@@ -133,6 +133,13 @@ def run():
     }
     OUT.parent.mkdir(parents=True,exist_ok=True)
     OUT.write_text(json.dumps(result,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
+    # Supply the exact unmatched tokens and source identifiers in the PRIVATE
+    # GitHub Actions log. The full JSON is also a private CI artifact.
+    # Do not invent aliases, edit original speech text or synthesize a test.
+    print("KIDS_V4_ALL450_UNMATCHED_PRONUNCIATION_TERMS "+
+          json.dumps(absent,ensure_ascii=False),flush=True)
+    print("KIDS_V4_ALL450_NATIVE_FUSHA_MIXED_SEGMENTS "+
+          json.dumps(mixed,ensure_ascii=False),flush=True)
     print("PASS_KIDS_V4_ALL_450_MASTER_DICTIONARY_AUDIT "+json.dumps({
         "selectedQuestions":450,
         "uniqueSourceSegments":len(all_fragments),
