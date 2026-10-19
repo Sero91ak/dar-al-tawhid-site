@@ -284,8 +284,10 @@ export function academyOwnerAssetPath(pathname) {
 }
 
 
-/* Test layout editor auth. Reuses configured Test PIN, NEVER the public default.
-   Editor cookie is independent and has NO Academy/KIDS authorization. */
+/* Private adult Test layout editor.
+   Browser-native HTTP Basic authentication with a PBKDF2-SHA256 verifier.
+   Only the editor files are protected by this credential; no child account
+   or academy owner role is granted. The password is not kept in source. */
 const EDITOR_LOGIN = ACADEMY_NEW_ROOT + "/startseiten-editor-login";
 const EDITOR_FILES = new Set([
  ACADEMY_NEW_ROOT + "/startseiten-editor.html",
@@ -294,84 +296,68 @@ const EDITOR_FILES = new Set([
  ACADEMY_NEW_ROOT + "/startseiten-studio-v3.css",
  ACADEMY_NEW_ROOT + "/startseiten-studio-v3.js"
 ]);
-const EDITOR_COOKIE = "dar_test_layout_editor_v1", EDITOR_SESSION_SECONDS = 43200;
-function editorTarget(raw) {
- try { const u=new URL(String(raw||""),"https://dar-al-tawhid.de"); if(EDITOR_FILES.has(u.pathname)) return u.pathname; } catch(_){}
- return ACADEMY_NEW_ROOT + "/startseiten-editor.html";
+const EDITOR_PASSWORD_SALT = "35cf74c4b11aa0ce611ea7a23a212b1d67235c45443e637d";
+const EDITOR_PASSWORD_VERIFIER = "4ca6fa337a1431146b7011e1e08475d0e67b3729e7cafaf3dc349447cc1d6fbc";
+const EDITOR_PASSWORD_ITERATIONS = 420000;
+function editorHex(bytes) {
+ let hex = "";
+ for(const value of bytes) hex += value.toString(16).padStart(2,"0");
+ return hex;
 }
-function editorLoginHtml(target,error="") {
- return '<!doctype html><html lang="de"><head><meta charset="utf-8">'
- +'<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
- +'<meta name="robots" content="noindex,nofollow"><title>Layout-Studio · Anmeldung</title>'
- +'<style>*{box-sizing:border-box}body{min-height:100dvh;margin:0;display:grid;place-items:center;padding:20px;'
- +'background:#0b1b24;color:#f3ede2;font:16px/1.5 system-ui,sans-serif}main{width:min(100%,420px);'
- +'padding:30px;border:1px solid #48605c;border-radius:20px;background:#142a30}'
- +'small{color:#c8ad78;letter-spacing:.12em}h1{font:500 27px Georgia,serif}p{font-size:14px;color:#c6d1cb}'
- +'label{display:block;font-size:13px;margin-top:18px}input{width:100%;height:48px;margin-top:6px;'
- +'background:#071b20;color:white;border:1px solid #65807a;border-radius:10px;padding:11px;font:inherit}'
- +'button{width:100%;height:48px;margin-top:16px;background:#d2b982;border:0;border-radius:10px;'
- +'font:700 15px system-ui;cursor:pointer}.err{color:#ffc2b4}a{color:#d2b982}</style></head><body><main>'
- +'<small>DĀR AL TAWḤĪD · TEST</small><h1>Layout-Studio</h1>'
- +'<p>Melde dich mit deinem Layout-Editor-Passwort an. Die Test-App und Kids-Akademie bleiben getrennt.</p>'
- +(error?'<p class="err" role="alert">'+academyEscape(error)+'</p>':"")
- +'<form method="post" action="'+EDITOR_LOGIN+'">'
- +'<input type="hidden" name="next" value="'+academyEscape(target)+'">'
- +'<label for="pass">Layout-Editor-Passwort</label>'
- +'<input id="pass" type="password" name="password" maxlength="256" required autocomplete="current-password">'
- +'<button type="submit">Editor öffnen</button></form>'
- +'<p><a href="/test/">Zur Test-App</a></p></main></body></html>';
-}
-function editorPage(target,error="",status=200) {
- return new Response(editorLoginHtml(target,error),{status,headers:academyNoStore({
-  "Content-Type":"text/html; charset=utf-8",
-  "Content-Security-Policy":"default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'"
- })});
-}
-async function editorHasCookie(request,secret) {
- const cookies=String(request.headers.get("Cookie")||"").split(";");
- for(const c of cookies){
-  const t=c.trim();if(!t.startsWith(EDITOR_COOKIE+"="))continue;
-  const parts=t.slice(EDITOR_COOKIE.length+1).split(".");
-  if(parts.length!==3||parts[0]!=="v1"||!/^\d{10,13}$/.test(parts[1]))continue;
-  const exp=Number(parts[1]),now=Math.floor(Date.now()/1000);
-  if(!Number.isSafeInteger(exp)||exp<=now||exp>now+EDITOR_SESSION_SECONDS)continue;
-  const expected=await academySign(secret,"dar-test-editor-v1|"+parts[1]);
-  if(await academyPasswordMatches(expected,parts[2]))return true;
+function editorBytes(hex) {
+ if(typeof hex!=="string" || hex.length%2) return null;
+ const array=new Uint8Array(hex.length/2);
+ for(let i=0;i<array.length;i++){
+  const pair=hex.slice(i*2,i*2+2);
+  if(!/^[0-9a-f]{2}$/i.test(pair))return null;
+  array[i]=parseInt(pair,16);
  }
- return false;
+ return array;
+}
+async function editorPasswordMatches(input) {
+ const salt=editorBytes(EDITOR_PASSWORD_SALT);
+ const expected=editorBytes(EDITOR_PASSWORD_VERIFIER);
+ if(!salt||!expected||!input||input.length>256)return false;
+ const encoder = new TextEncoder();
+ const key=await crypto.subtle.importKey("raw",encoder.encode(input),"PBKDF2",false,["deriveBits"]);
+ const digest=await crypto.subtle.deriveBits({
+  name:"PBKDF2",salt,iterations:EDITOR_PASSWORD_ITERATIONS,hash:"SHA-256"
+ },key,256);
+ const actual=new Uint8Array(digest);
+ let different=0;
+ for(let i=0;i<32;i++)different|=actual[i]^expected[i];
+ return different===0;
+}
+function editorUnauthorized() {
+ return new Response("Anmeldung erforderlich. Benutzername: Dawud",{status:401,headers:{
+  "WWW-Authenticate":'Basic realm="DAR Test Layout Editor", charset="UTF-8"',
+  "Cache-Control":"private, no-store, max-age=0",
+  "Content-Type":"text/plain; charset=utf-8",
+  "X-Robots-Tag":"noindex, nofollow, noarchive",
+  "X-Content-Type-Options":"nosniff"
+ }});
 }
 export async function layoutEditorAccess(request,url,env) {
- const path=url.pathname,isLogin=path===EDITOR_LOGIN;
- if(!isLogin&&!EDITOR_FILES.has(path))return null;
- // Layout editor can have its own Cloudflare secret. Existing Test PIN works
- // only until that new secret is provisioned; never store passwords in Git.
- const pass=String(env&&(env.DAR_LAYOUT_EDITOR_PASSWORD || env.PREVIEW_GATE_PASS)||"");
- const secret=academyOwnerSecret(env);
- const destination=editorTarget(url.searchParams.get("next")||path);
- if(!pass||!secret)return editorPage(destination,"Der geschützte Test-Zugang ist noch nicht vollständig eingerichtet.",503);
- if(isLogin&&request.method==="POST"){
-  if(request.headers.get("Origin")!==url.origin)return editorPage(destination,"Ungültiger Anmeldeursprung.",403);
-  if(Number(request.headers.get("Content-Length")||"0")>2048)return editorPage(destination,"Anfrage zu groß.",413);
-  let form;try{form=await request.formData()}catch(_){return editorPage(destination,"Bitte erneut anmelden.",400)}
-  const submitted=String(form.get("password")||"").slice(0,257);
-  const target=editorTarget(form.get("next"));
-  if(!submitted||submitted.length>256||!(await academyPasswordMatches(submitted,pass)))
-   return editorPage(target,"Passwort nicht korrekt.",401);
-  const exp=String(Math.floor(Date.now()/1000)+EDITOR_SESSION_SECONDS);
-  const sig=await academySign(secret,"dar-test-editor-v1|"+exp);
-  const cookie=EDITOR_COOKIE+"=v1."+exp+"."+sig
-   +"; Path=/test/academy; Max-Age="+EDITOR_SESSION_SECONDS+"; HttpOnly; Secure; SameSite=Lax";
-  return new Response(null,{status:303,headers:academyNoStore({"Location":target,"Set-Cookie":cookie})});
+ const path=url.pathname;
+ if(path===EDITOR_LOGIN){
+  return new Response(null,{status:302,headers:{
+   "Location":ACADEMY_NEW_ROOT + "/startseiten-editor.html",
+   "Cache-Control":"no-store"
+  }});
  }
- if(isLogin&&request.method!=="GET"&&request.method!=="HEAD")
-  return new Response("Method not allowed",{status:405,headers:academyNoStore({Allow:"GET, HEAD, POST"})});
- if(request.method!=="GET"&&request.method!=="HEAD")
-  return new Response("Method not allowed",{status:405,headers:academyNoStore({Allow:"GET, HEAD"})});
- if(await editorHasCookie(request,secret)){
-  if(isLogin)return new Response(null,{status:303,headers:academyNoStore({"Location":destination})});
-  return true;
- }
- if(isLogin)return editorPage(destination);
- const login=new URL(EDITOR_LOGIN,url.origin);login.searchParams.set("next",destination);
- return new Response(null,{status:302,headers:academyNoStore({"Location":login.pathname+login.search})});
+ if(!EDITOR_FILES.has(path))return null;
+ if(request.method!=="GET" && request.method!=="HEAD")
+  return new Response("Method not allowed",{status:405,headers:{"Allow":"GET, HEAD","Cache-Control":"no-store"}});
+ const header=String(request.headers.get("Authorization")||"");
+ const match=header.match(/^Basic\s+([A-Za-z0-9+/=]+)$/i);
+ if(!match)return editorUnauthorized();
+ let decoded="";
+ try {decoded=atob(match[1]);} catch(_){return editorUnauthorized();}
+ const colon=decoded.indexOf(":");
+ if(colon<0)return editorUnauthorized();
+ const username=decoded.slice(0,colon);
+ const password=decoded.slice(colon+1);
+ if(username!=="Dawud" || !(await editorPasswordMatches(password)))
+  return editorUnauthorized();
+ return true;
 }

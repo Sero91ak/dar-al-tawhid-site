@@ -1,23 +1,25 @@
-# Layout-Editor: eigenes Passwort
+# Layout-Studio: Anmeldung ohne zusätzliche Cloudflare-Eingabe
 
-Geschützter Editor: `https://dar-al-tawhid.de/test/academy/startseiten-editor.html`
+Editor: `https://dar-al-tawhid.de/test/academy/startseiten-editor.html`
 
-## Cloudflare-Konfiguration
+Der Editor hat nun eine eigene, ausschließlich auf seine HTML-, JS- und CSS-Dateien
+begrenzte **Browser-Basic-Anmeldung**. Auf dem iPad in Safari den festgelegten
+Benutzernamen und das vom Eigentümer gewählte Passwort eingeben.
 
-Der Dar-Test-Worker unterstützt den **verschlüsselten Worker-Secret**-Namen
-`DAR_LAYOUT_EDITOR_PASSWORD`. Dieser Wert hat Vorrang vor dem bestehenden
-`PREVIEW_GATE_PASS`. Der bestehende Test-App-Zugang und die Kids-Akademie
-werden dadurch nicht geändert.
+Der **gesalzene PBKDF2-SHA256-Prüfwert** liegt in `cloudflare/preview-gate.js`.
+Das Klartextpasswort wird dort nicht abgelegt. Ein separates Worker-Secret oder
+eine manuelle Cloudflare-Einstellung ist für diesen Zugang nicht nötig.
 
-- Im Cloudflare-Dashboard den tatsächlich eingesetzten **Dar-Test-Worker** öffnen.
-- **Settings → Variables and Secrets → Add** wählen.
-- Den Namen `DAR_LAYOUT_EDITOR_PASSWORD` angeben, Typ **Secret** auswählen.
-- Den gewünschten Wert direkt in Cloudflare eingeben und bereitstellen.
-- Den Editor in einer privaten Safari-Ansicht neu öffnen und die Anmeldung testen.
+Der Editor-Zugang ist **kein** Erstellerzugang für die Kids-Akademie und
+ändert den Test-Login der App selbst nicht. Alle Test-/Besucher-Veröffentlichungen
+bleiben getrennt vom Editor-Login und benötigen ihre reguläre Freigabe.
 
-**Wichtig:** Keine Passwörter in `.toml`, GitHub, JSON, HTML, CSS, JavaScript,
-Logs oder Dokumentation eintragen. Falls der neue Secret-Wert noch nicht
-gesetzt ist, funktioniert vorläufig weiterhin das bestehende Test-Zugangspasswort.
+**Hinweis:** Ein fest im öffentlich zugänglichen Repository gespeicherter
+Passwort-Prüfwert kann offline angegriffen werden. Deshalb den Editor niemals
+für vertrauliche Kundendaten oder unbeschränkte Produktionsrechte verwenden.
+Für eine spätere serverseitige Live-Veröffentlichung muss eine stärkere
+Authentifizierung mit privaten Secrets und idealerweise 2FA eingerichtet werden.
 
-Die separate, signierte Editor-Sitzung ist auf die geschützten Editor-Dateien
-beschränkt und gewährt keine Kids-Akademie-Erstellerrechte.
+Nach einer Passwortänderung kann Safari die vorhandene Basic-Anmeldung
+zwischenspeichern. Bei einer 401-Antwort die Zugangsdaten erneut eingeben oder
+eine private Safari-Registerkarte nutzen.
