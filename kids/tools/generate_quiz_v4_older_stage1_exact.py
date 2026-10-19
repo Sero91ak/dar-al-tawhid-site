@@ -425,9 +425,29 @@ def main():
     else:
         batch_to_record=selected
     if not sample_only:
-        check(hold.get("humanListeningQualityGateReleased") is True,
-              "V4 first correct dictionary pilot must pass listening QA before multi-take spending")
+        if hold.get("humanListeningQualityGateReleased") is not True:
+            # User has explicitly renewed the order to finish all 450. Permit
+            # only ONE safely bounded <=10-original, <=240-estimated-credit
+            # internal recording wave, WITHOUT claiming that anyone listened.
+            check(os.getenv("KIDS_V4_STAGE1_OWNER_CORRECT_DICTIONARY_BATCH")=="YES"
+                  and hold.get("ownerExplicitlyRequestedContinuedPaidQuizProduction") is True
+                  and hold.get("allowOneStrictTenOriginalDictionaryBatchBeforeListeningApproval") is True
+                  and hold.get("maximumPreHearingAdditionalNewOriginals")==10
+                  and hold.get("maximumPreHearingAdditionalEstimatedCredits")==240
+                  and len(batch_to_record)<=10,
+                  "Only one explicit 10-take owner-authorized V4 dictionary wave; full production still quality gated")
+            previous=read(USAGE) if USAGE.is_file() else {"runs":[]}
+            check(not any(x.get("isOwnerPostPilotTenTake") is True for x in previous.get("runs",[])),
+                  "Owner-approved post-pilot 10-take wave previously charged; NO second wave without reconciliation")
+            check(any(x.get("dictionaryPilot20261019") is True
+                      and x.get("status")=="ORIGINAL_MP3_SAVED"
+                      and x.get("mp3SHA256") and x.get("providerRequestId")
+                      for x in read(ATTEMPTS)["entries"]),
+                  "No authentic 10099-rule pilot original safely checkpointed")
     run_estimate=round(sum(len(x["spokenText"])*RATE_FOR_ESTIMATE_ONLY for x in batch_to_record),2)
+    if not sample_only and hold.get("humanListeningQualityGateReleased") is not True:
+        check(run_estimate<=240,
+              "Estimated owner-directed pilot-follow-up batch exceeds 240-credit ceiling")
     available=subscription(key)
     check(available>=required_subscription_credits(run_estimate),
           "insufficient provider credits for THIS small batch plus safety margin; no paid calls started")
@@ -516,6 +536,7 @@ def main():
     summary={"batchId":BATCH,"newOriginalsThisRun":completed,
              "estimatedCreditsNotProviderBill":run_estimate,
              "isSingleDictionaryPilot":sample_only,
+             "isOwnerPostPilotTenTake":not sample_only and hold.get("humanListeningQualityGateReleased") is not True,
              "masterDictionaryRules":10099,
              "startingAvailableCreditsFromSubscription":round(available,2),
              "endingAvailableCreditsFromSubscription":(round(balance_after,2) if balance_after is not None else None),
