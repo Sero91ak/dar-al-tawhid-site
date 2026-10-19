@@ -1,0 +1,208 @@
+{
+  "project": "DĀR AL TAWḤĪD",
+  "date": "2026-10-19",
+  "range": "HAD-0463–HAD-0482",
+  "sourceOfTruth": "apple-tv/hadith/series/",
+  "kind": "20-item classical sharh/athar primary and isnad audit",
+  "counts": {
+    "inspected": 20,
+    "existingHadith": 8,
+    "existingAthar": 12,
+    "hadithSharhAlreadyVerified": 7,
+    "hadithAuthenticityReviewOpen": 1,
+    "legacyAtharFilesUpdated": 12,
+    "semanticallyOverlappingAtharIds": 3,
+    "newlyCreatedRecords": 0,
+    "newlyAuthenticatedViaScholarAssessment": 1
+  },
+  "records": [
+    {
+      "id": "HAD-0463",
+      "recordType": "hadith",
+      "status": "needs-review",
+      "note": "At-Tirmidhi 2317 marfu vs early mursal; Ibn Rajab favors mursal; no certification",
+      "updatedThisBatch": false
+    },
+    {
+      "id": "HAD-0464",
+      "recordType": "hadith",
+      "status": "prior-sharh-verified",
+      "note": "Bukhari 52 and Muslim 1599, Ibn Rajab direct commentary already recorded",
+      "updatedThisBatch": false
+    },
+    {
+      "id": "HAD-0465",
+      "recordType": "hadith",
+      "status": "prior-sharh-verified",
+      "note": "Bukhari 1 and Muslim 1907, Ibn Rajab direct commentary already recorded",
+      "updatedThisBatch": false
+    },
+    {
+      "id": "HAD-0466",
+      "recordType": "hadith",
+      "status": "prior-sharh-verified",
+      "note": "Muslim 47 vs Bukhari 6018 narrator wording differences already distinguished",
+      "updatedThisBatch": false
+    },
+    {
+      "id": "HAD-0467",
+      "recordType": "hadith",
+      "status": "prior-sharh-verified",
+      "note": "Bukhari 893 Muslim 1829, direct Nawawi commentary already recorded",
+      "updatedThisBatch": false
+    },
+    {
+      "id": "HAD-0468",
+      "recordType": "hadith",
+      "status": "prior-sharh-verified-earliest-pending",
+      "note": "Abu Dawud 4918, chain with Kathir ibn Zayd, al-Munawi sharh; earlier direct commentary research future",
+      "updatedThisBatch": false
+    },
+    {
+      "id": "HAD-0469",
+      "recordType": "hadith",
+      "status": "prior-sharh-verified",
+      "note": "Bukhari 6094 Muslim 2607 direct Nawawi commentary already recorded",
+      "updatedThisBatch": false
+    },
+    {
+      "id": "HAD-0470",
+      "recordType": "hadith",
+      "status": "prior-sharh-verified",
+      "note": "Bukhari 2989 Muslim 1009; early Ibn Battal commentary cited by al-Ayni; direct edition still open",
+      "updatedThisBatch": false
+    },
+    {
+      "id": "HAD-0471",
+      "recordType": "athar",
+      "status": "duplicate",
+      "note": "Darimi 205 same exact statement as HAD-0371; source verified, final rijal still pending",
+      "updatedThisBatch": true
+    },
+    {
+      "id": "HAD-0472",
+      "recordType": "athar",
+      "status": "broken-chain",
+      "note": "Ibn Battah 178 Abu Ubaydah's missing hearing from Ibn Masud; not sahih",
+      "updatedThisBatch": true
+    },
+    {
+      "id": "HAD-0473",
+      "recordType": "athar",
+      "status": "source-located",
+      "note": "Al-Lalakai 125 Ibn Hajar Matalib 2982 common Mahdi ibn Abi Mahdi path; not 2 independent ways",
+      "updatedThisBatch": true
+    },
+    {
+      "id": "HAD-0474",
+      "recordType": "athar",
+      "status": "broken-chain-duplicate",
+      "note": "Ahmad az-Zuhd 633 Thabit to Umar incomplete, same text as HAD-0377",
+      "updatedThisBatch": true
+    },
+    {
+      "id": "HAD-0475",
+      "recordType": "athar",
+      "status": "attribution-disputed",
+      "note": "al-Khatib nine-father chain to Ali not secure, identical wording also narrated from Sufyan and Ibn al-Munkadir",
+      "updatedThisBatch": true
+    },
+    {
+      "id": "HAD-0476",
+      "recordType": "athar",
+      "status": "attribution-unverified",
+      "note": "Ali proverb people hostile to what they do not know not found with exact isnad in asserted Ibn Abd al-Barr source",
+      "updatedThisBatch": true
+    },
+    {
+      "id": "HAD-0477",
+      "recordType": "athar",
+      "status": "corrected-wording-weak",
+      "note": "Actual Abu Darda wording in Ibn Abd al-Barr 963 concerns signs of ignorance; complete reliable chain absent",
+      "updatedThisBatch": true
+    },
+    {
+      "id": "HAD-0478",
+      "recordType": "athar",
+      "status": "source-located-mursal-variants",
+      "note": "Waki az-Zuhd 220 Abu Darda path via Farat ibn Sulayman; alternate mursal noted by Dhahabi",
+      "updatedThisBatch": true
+    },
+    {
+      "id": "HAD-0479",
+      "recordType": "athar",
+      "status": "scholar-graded-sahih",
+      "note": "Abu Bakr inauguration speech Ibn Hisham 2/661, Ibn Kathir al-Bidayah 8/90 with Ibn Ishaq Zuhri Anas and 'isnad sahih'",
+      "updatedThisBatch": true
+    },
+    {
+      "id": "HAD-0480",
+      "recordType": "athar",
+      "status": "weak-chain",
+      "note": "Darimi 251 alternative 257 Tamim al-Dari path via Safwan ibn Rustam and Abd al-Rahman ibn Maysarah, unknown narrator and inqita",
+      "updatedThisBatch": true
+    },
+    {
+      "id": "HAD-0481",
+      "recordType": "athar",
+      "status": "duplicate-source-located",
+      "note": "Same Ibn Umar bidah quote already HAD-0372, al-Lalakai 126 with Shababah Hisham Nafi",
+      "updatedThisBatch": true
+    },
+    {
+      "id": "HAD-0482",
+      "recordType": "athar",
+      "status": "late-quote-unverified",
+      "note": "Hudhayfah full formula in al-Shatibi cited, early Abu Dawud az-Zuhd attribution unproven; early admonition differs",
+      "updatedThisBatch": true
+    }
+  ],
+  "sourceEvidence": {
+    "HAD-0471": "https://islamweb.net/ar/library/content/8/208/",
+    "HAD-0472": "https://www.islamweb.net/ar/library/content/1029/181/",
+    "HAD-0473": [
+      "https://www.islamweb.net/ar/library/content/110/24/",
+      "https://www.islamweb.net/ar/library/content/1003/2992/"
+    ],
+    "HAD-0474": "https://www.islamweb.net/ar/library/content/1013/632/",
+    "HAD-0475": "https://www.islamweb.net/ar/library/content/1040/1094/",
+    "HAD-0477": "https://dorar.net/alakhlaq/4448/",
+    "HAD-0478": "https://www.islamweb.net/ar/library/content/1100/206/",
+    "HAD-0479": [
+      "https://www.islamweb.net/ar/library/content/58/1655/",
+      "https://www.islamweb.net/ar/library/content/59/564/"
+    ],
+    "HAD-0480": "https://www.islamweb.net/ar/library/content/8/254/",
+    "HAD-0481": "https://www.islamweb.net/ar/library/content/110/24/",
+    "HAD-0482": "https://www.islamweb.net/ar/library/content/109/104/"
+  },
+  "strictNotes": [
+    "Direct classical Sharh at HAD-0463 remains not verified because transmission marfu vs mursal is contested",
+    "Seven of other hadith already verified; no unsourced new Sharh invented",
+    "Strong ʿAli or Ḥuḏayfah attribution was not assumed from unsourced sayings",
+    "Three semantic overlaps: HAD-0471/HAD-0371, HAD-0474/HAD-0377, HAD-0481/HAD-0372",
+    "Only HAD-0479 supported here by explicit Ibn Kathir 'isnad sahih' assessment; rest are located, questionable, or pending"
+  ],
+  "deployment": {
+    "githubCommitted": true,
+    "workflow": ".github/workflows/canonical-islamic-content-live.yml",
+    "cloudflareVerified": false,
+    "nativeIosVerified": false,
+    "appleTvVerified": false,
+    "pushNotificationsSent": false,
+    "appCodeChanged": false
+  },
+  "catalogAtStart": {
+    "totalCount": 3358,
+    "nextId": "HAD-3359"
+  },
+  "next": {
+    "range": "HAD-0483–HAD-0502",
+    "priorities": [
+      "individual isnad for legacy athar",
+      "HAD-0463 alternative marfu/mursal and earliest direct commentary",
+      "no new HAD number without full source and duplicate review"
+    ],
+    "rule": "target 10/20 checked individually; no forced additions"
+  }
+}
