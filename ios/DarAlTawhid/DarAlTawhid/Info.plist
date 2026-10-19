@@ -421,6 +421,7 @@
 	<array>
 		<string>audio</string>
 		<string>remote-notification</string>
+		<string>location</string>
 	</array>
 	<key>UIApplicationShortcutItems</key>
 	<array>
@@ -463,6 +464,8 @@
 	</array>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Bei ausdrücklich aktivierter Hintergrundaktualisierung nutzt DĀR AL TAWḤĪD größere Standortwechsel, damit Gebetszeiten und Erinnerungen auf Reisen aktuell bleiben. Diese Berechtigung kann jederzeit widerrufen werden.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Der Standort wird nur genutzt, wenn du standortbezogene Gebetszeiten oder die Qibla-Funktion verwenden moechtest.</string>
 	<key>NSMotionUsageDescription</key>
