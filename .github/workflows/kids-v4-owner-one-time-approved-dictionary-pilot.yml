@@ -16,7 +16,8 @@ concurrency:
 
 jobs:
   authorized-single-master-dictionary-audio:
-    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' && github.event.head_commit.message == 'audio(kids): owner-authorized single authentic dictionary V4 hearing pilot [20261019]'
+    if: >-
+      github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' && github.event.head_commit.message == 'audio(kids): owner-authorized single authentic dictionary V4 hearing pilot [20261019]'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
