@@ -665,3 +665,109 @@
     }
   }, true);
 })();
+
+
+/* StandBy / Live Activities · Erwachsenen-App · 19.10.2026
+   Schalter bleibt bewusst deaktiviert, solange die echte native Bridge fehlt.
+   Keine Abhängigkeit von OneSignal-/Gebets-Push-Einstellungen. */
+(function () {
+  "use strict";
+  if (window.DarLiveActivitySettings) return;
+  var rowId = "dar-live-activity-settings-row";
+  var lastStatus = null;
+  var waiting = false;
+  var nativeHandler = function () {
+    try { return window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.darLiveActivitySettings; }
+    catch (e) { return null; }
+  };
+  function send(payload) {
+    var handler = nativeHandler();
+    if (!handler) return false;
+    try { handler.postMessage(payload); return true; } catch (e) { return false; }
+  }
+  function label(status) {
+    if (!nativeHandler()) return "Nur in der aktualisierten iOS-App steuerbar";
+    if (!status) return "iOS-Verfügbarkeit wird geprüft";
+    if (!status.supported) return "Live Activities sind in diesem App-Build noch nicht eingerichtet";
+    if (!status.allowed) return "In den iOS-Einstellungen derzeit nicht erlaubt";
+    return status.enabled ? "Auf diesem Gerät eingeschaltet" : "Auf diesem Gerät ausgeschaltet";
+  }
+  function refreshRow() {
+    var row = document.getElementById(rowId);
+    if (!row) return;
+    var control = row.querySelector("input");
+    var caption = row.querySelector(".dar-la-caption");
+    var permitted = !!(nativeHandler() && lastStatus && lastStatus.supported && lastStatus.allowed);
+    control.checked = !!(lastStatus && lastStatus.enabled && permitted);
+    control.disabled = waiting || !permitted;
+    control.setAttribute("aria-checked", String(control.checked));
+    var message = label(lastStatus);
+    if (caption && caption.textContent !== message) caption.textContent = message;
+    row.classList.toggle("dar-la-unavailable", !permitted);
+    var settingsButton = row.querySelector(".dar-la-system-link");
+    if (settingsButton) settingsButton.hidden = !(nativeHandler() && lastStatus && lastStatus.supported && !lastStatus.allowed);
+  }
+  function mount() {
+    var home = document.querySelector("#appView .dsh-shell.dsh-home");
+    if (!home) return;
+    if (document.getElementById(rowId)) { refreshRow(); return; }
+    var rows = Array.prototype.slice.call(home.querySelectorAll(".dsh-list .dsh-row"));
+    var anchor = rows.find(function (row) { return /Benachrichtigungen|Mitteilungen/i.test(row.textContent || ""); });
+    var list = anchor ? anchor.closest(".dsh-list") : home.querySelector(".dsh-list");
+    if (!list) return;
+    var row = document.createElement("div");
+    row.id = rowId;
+    row.className = "dsh-row dar-la-settings-row";
+    row.innerHTML =
+      '<span class="dsh-row-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5" y="4" width="14" height="16" rx="4"/><path d="M9 8h6M9 12h6M9 16h3"/></svg></span>' +
+      '<span class="dsh-row-main"><span class="dsh-row-title">Live Activities</span>' +
+      '<span class="dsh-row-sub dar-la-caption" aria-live="polite">iOS-Verfügbarkeit wird geprüft</span>' +
+      '<button type="button" class="dar-la-system-link" hidden>iOS-Einstellungen öffnen</button></span>' +
+      '<label class="dar-la-switch" aria-label="Live Activities ein- oder ausschalten">' +
+      '<input type="checkbox" role="switch" aria-label="Live Activities" disabled>' +
+      '<span class="dar-la-track" aria-hidden="true"></span></label>';
+    if (anchor && anchor.parentNode === list) anchor.insertAdjacentElement("afterend", row);
+    else list.appendChild(row);
+    row.querySelector("input").addEventListener("change", function (event) {
+      var desired = !!event.currentTarget.checked;
+      if (waiting || !lastStatus || !lastStatus.supported || !lastStatus.allowed) {
+        refreshRow(); return;
+      }
+      waiting = true;
+      refreshRow();
+      if (!send({ action: "set", enabled: desired })) {
+        waiting = false;
+        refreshRow();
+      }
+    });
+    row.querySelector(".dar-la-system-link").addEventListener("click", function () {
+      send({ action: "open-settings" });
+    });
+    refreshRow();
+    if (nativeHandler()) send({ action: "status" });
+  }
+  var queued = false;
+  function schedule() {
+    if (queued) return;
+    queued = true;
+    setTimeout(function () { queued = false; mount(); }, 35);
+  }
+  window.DarLiveActivitySettings = {
+    receive: function (status) {
+      if (!status || typeof status !== "object") return;
+      waiting = false;
+      lastStatus = status;
+      refreshRow();
+    },
+    refresh: function () { if (nativeHandler()) send({ action: "status" }); schedule(); }
+  };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", schedule);
+  else schedule();
+  window.addEventListener("hashchange", schedule);
+  window.addEventListener("focus", function () { window.DarLiveActivitySettings.refresh(); });
+  document.addEventListener("dar:render", schedule);
+  var target = document.getElementById("appView") || document.body;
+  if (target && window.MutationObserver) {
+    new MutationObserver(schedule).observe(target, { childList: true, subtree: true });
+  }
+})();
