@@ -1,0 +1,158 @@
+{
+  "project": "DĀR AL TAWḤĪD",
+  "track": "I - canonical hadith/athar continuation",
+  "date": "2026-10-19",
+  "timezone": "Europe/Berlin",
+  "baseMainSha": "61a46c3c4e527d7363457e73c6a0558c62081bb8",
+  "scope": "Isolated audit only, no source-record changes, no merge, no live release",
+  "range": "HAD-0593–HAD-0612",
+  "counts": {
+    "repoRecordsIndividuallyRead": 20,
+    "athar": 18,
+    "hadith": 2,
+    "independentOriginalSourceMatches": 3,
+    "hadithSourceAuthenticatedFromMuslim": 1,
+    "newlyFullyGradedAthar": 0,
+    "duplicateAlreadyMarked": 2,
+    "newUniqueEntries": 0,
+    "sourceRecordEdits": 0,
+    "publicReleases": 0
+  },
+  "caution": "20 metadata records inspected does NOT mean 20 original narrations authenticated. 0593/0594 primary matches do not establish full isnad grading; 0611 early sharh candidate is not yet earliest independently verified.",
+  "records": [
+    {
+      "id": "HAD-0593",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "original-quote-located; chain-and-attribution-grading-open",
+      "primary": "al-Dhahabi, Siyar A'lam al-Nubala, al-Awza'i, vol.7; quotation via al-'Abbas b. al-Walid from his father",
+      "evidence": "https://islamweb.net/ar/library/content/60/1151/",
+      "issue": "Catalog names al-Lalaka'i without number; current independent primary match is al-Dhahabi. Do not silently substitute source or call chain sahih."
+    },
+    {
+      "id": "HAD-0594",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "original-direct-source-located; full-isnad-grade-open",
+      "primary": "al-Lalaka'i, Sharh Usul I'tiqad, no.315",
+      "evidence": "https://www.islamweb.net/ar/library/content/110/30/",
+      "issue": "Original includes Abu Ishaq asking al-Awza'i; full narrator identification and rijal grading still open."
+    },
+    {
+      "id": "HAD-0595",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0596",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0597",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0598",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0599",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0600",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "previously-verified-duplicate",
+      "duplicateOf": "HAD-0498",
+      "issue": "No republication or new unique count."
+    },
+    {
+      "id": "HAD-0601",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0602",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0603",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0604",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0605",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0606",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0607",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0608",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0609",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0610",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "needs-original-arabic-exact-location-and-isnad"
+    },
+    {
+      "id": "HAD-0611",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "prophetic-primary-authenticated; direct-sharh-candidate-located; earliest-not-proven",
+      "primary": "Sahih Muslim, Kitab al-Birr wa-l-Silah, Bab Istihbab al-'Afw wa-l-Tawadu', no.2588",
+      "evidence": "https://islamweb.net/ar/library/content/1/4761/",
+      "sharhCandidate": {
+        "scholar": "Abu al-'Abbas al-Qurtubi",
+        "work": "al-Mufhim li-ma Ashkala min Talkhis Kitab Muslim",
+        "url": "https://www.islamweb.net/amp/ar/library/content/317/4326/",
+        "direct": true,
+        "earliestVerified": false
+      },
+      "issue": "Catalog omits source number, sharhStatus and early direct sharh fields. No publish-ready change until earliest classical direct commentary comparison is completed."
+    },
+    {
+      "id": "HAD-0612",
+      "reviewLevel": "repo-record-metadata-read",
+      "status": "previously-verified-duplicate",
+      "duplicateOf": "HAD-0457",
+      "issue": "Existing verified metadata retained; no republication."
+    }
+  ],
+  "blockers": [
+    "Most Athar entries 0593-0610 still have no exact numbered source or Arabic original in canonical JSON; no independent full-chain grading.",
+    "HAD-0593 original quote found in al-Dhahabi; catalog cites al-Lalaka'i without exact location.",
+    "HAD-0611 Muslim 2588 primary and direct al-Qurtubi sharh identified, but earliest direct classical sharh not proven.",
+    "HAD-0600 and HAD-0612 duplicate existing records; do not republish.",
+    "Main/catalog live unchanged pending fully verified corrections and validators."
+  ],
+  "next": "Continue individual Arabic primary source and rijal verification of HAD-0593–0610, prioritize HAD-0593 source attribution, HAD-0594 full chain and HAD-0611 earliest direct sharh.",
+  "live": {
+    "mainChanged": false,
+    "cloudflareVerified": false,
+    "deviceVerified": false,
+    "pushSent": false
+  }
+}
