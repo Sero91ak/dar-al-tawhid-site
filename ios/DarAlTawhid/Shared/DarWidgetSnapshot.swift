@@ -1,4 +1,5 @@
 import Foundation
+import ActivityKit
 
 struct DarPrayerSlot: Codable, Identifiable, Hashable {
     let id: String
@@ -227,4 +228,15 @@ enum DarWidgetKeys {
     static let appGroup = "group.de.daraltawhid.app"
     static let snapshot = "dar.widget.snapshot.v2"
     static let pendingDestination = "dar.widget.pending.hash"
+}
+
+
+// Gemeinsames ActivityKit-Datenmodell für Host-App und Widget-Erweiterung.
+@available(iOS 16.1, *)
+struct DarPrayerLiveActivityAttributes: ActivityKit.ActivityAttributes {
+    struct ContentState: Codable, Hashable {
+        var prayerName: String
+        var prayerDate: Date
+    }
+    var city: String
 }
