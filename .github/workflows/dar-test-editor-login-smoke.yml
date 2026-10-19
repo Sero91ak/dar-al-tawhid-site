@@ -28,13 +28,13 @@ jobs:
             try {
               const page = await fetch(origin + "/test/academy/startseiten-editor.html?smoke=" + Date.now(), { redirect: "manual" });
               const html = await page.text();
-              const pageOK = page.status === 200 && html.includes("Layout-Studio") && html.includes('name="password"') && html.includes('name="username"');
+              const pageOK = page.status === 200 && html.includes("Layout-Studio") && html.includes('name="password"') && !html.includes('name="username"') && !html.includes('autocomplete="username"');
               console.log(origin + " editor login: status=" + page.status + " form=" + pageOK);
               if (!pageOK) { failures++; continue; }
 
               const response = await fetch(origin + "/test/academy/startseiten-editor-login", {
                 method: "POST",
-                body: new URLSearchParams({ username: "Dawud", password: "intentionally-wrong-test-value" }),
+                body: new URLSearchParams({ password: "intentionally-wrong-test-value" }),
                 headers: { "Origin": origin, "Content-Type": "application/x-www-form-urlencoded" },
                 redirect: "manual"
               });

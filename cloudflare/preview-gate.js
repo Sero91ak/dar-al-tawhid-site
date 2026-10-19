@@ -337,33 +337,61 @@ async function editorPasswordMatches(input) {
 
 function editorLoginPage(error="",status=200) {
  const message=error?'<p role="alert" class="error">'+academyEscape(error)+'</p>':"";
+ // Mirrors the adult Test-App's compact, password-only access experience.
+ // No username, no second identity field, no native Basic-Auth browser prompt.
  const html='<!doctype html><html lang="de"><head><meta charset="utf-8">'
   +'<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">'
   +'<meta name="robots" content="noindex,nofollow,noarchive">'
-  +'<title>DĀR AL TAWḤĪD · Layout-Studio anmelden</title>'
-  +'<style>*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#091c24;'
-  +'color:#f3eee2;font:16px/1.5 -apple-system,BlinkMacSystemFont,system-ui,sans-serif}'
-  +'body{min-height:100dvh;display:grid;place-items:center;padding:20px}'
-  +'main{width:min(100%,450px);border:1px solid #4a6460;border-radius:22px;background:#142b31;padding:clamp(22px,5vw,36px)}'
-  +'small{font-size:11px;letter-spacing:.15em;font-weight:750;color:#d7bb85}'
-  +'h1{font:500 29px/1.16 Georgia,serif;margin:10px 0}'
-  +'p{font-size:14px;line-height:1.55;color:#c8d2ca}'
-  +'.error{color:#ffbeac}label{display:block;font-size:14px;margin:17px 0 5px}'
-  +'input{display:block;width:100%;border:1px solid #6b8079;border-radius:12px;'
-  +'background:#091e24;color:#fff;min-height:50px;padding:12px;font:inherit}'
-  +'button{display:block;margin:16px 0 0;width:100%;background:#d4bc86;border:0;border-radius:12px;'
-  +'color:#1b2527;min-height:50px;font:750 16px system-ui;cursor:pointer}'
-  +'a{color:#d4bc86;text-decoration:none}footer{font-size:12px;color:#a9b8b2;margin-top:17px}</style>'
-  +'</head><body><main><small>DĀR AL TAWḤĪD · TEST</small><h1>Layout-Studio</h1>'
-  +'<p>Melde dich an, um die geschützte Bearbeitungsseite zu öffnen.</p>'
+  +'<meta name="theme-color" content="#0a1c23">'
+  +'<title>DĀR AL TAWḤĪD · Test-Editor entsperren</title>'
+  +'<style>*{box-sizing:border-box}html,body{margin:0;min-height:100%;'
+  +'background:#0a1c23;color:#f7f0e2;font:16px/1.5 -apple-system,BlinkMacSystemFont,'
+  +'"Avenir Next",system-ui,sans-serif;-webkit-text-size-adjust:100%}'
+  +'body{min-height:100svh;display:grid;place-items:center;padding:'
+  +'calc(env(safe-area-inset-top,0px) + 22px) 20px '
+  +'calc(env(safe-area-inset-bottom,0px) + 22px);'
+  +'background:radial-gradient(ellipse at 55% -15%,#274345,#0a1c23 70%)}'
+  +'main{width:min(100%,440px);padding:clamp(24px,5vw,38px);'
+  +'border:1px solid rgba(218,192,138,.32);border-radius:24px;'
+  +'background:linear-gradient(145deg,#183339,#10262d);'
+  +'box-shadow:0 24px 65px #0005;text-align:center}'
+  +'.symbol{margin:0 auto 14px;width:56px;height:56px;border-radius:19px;'
+  +'border:1px solid rgba(217,185,118,.4);display:grid;place-items:center;'
+  +'font:500 29px Georgia,serif;color:#dac290;background:#1d3d3e}'
+  +'small{display:block;color:#d7bd86;letter-spacing:.15em;font-size:10px;font-weight:750}'
+  +'h1{font:500 clamp(23px,5.8vw,31px)/1.13 Georgia,serif;'
+  +'margin:9px 0 12px;letter-spacing:.015em}'
+  +'.subtitle{font-size:14px;line-height:1.55;color:#c6d2cb;margin:0 0 23px}'
+  +'.error{color:#ffd0be;background:#4e302b;border:1px solid #95665e;'
+  +'padding:10px;border-radius:10px;text-align:left;font-size:13px}'
+  +'label{display:block;font-size:12px;color:#d9d9ca;margin-bottom:8px;'
+  +'font-weight:650;letter-spacing:.035em;text-align:left}'
+  +'input{appearance:none;-webkit-appearance:none;display:block;width:100%;'
+  +'height:54px;background:#0a2026;color:#fff;'
+  +'border:1px solid #68837b;border-radius:14px;'
+  +'padding:0 17px;font:500 17px system-ui;letter-spacing:.04em;'
+  +'outline-offset:3px;text-align:left}'
+  +'input::placeholder{color:#b6c4bd;opacity:.7}'
+  +'input:focus-visible{outline:2px solid #d8bc82;border-color:#d8bc82}'
+  +'button{display:block;width:100%;min-height:52px;margin-top:16px;'
+  +'padding:11px 15px;border:0;border-radius:14px;background:#d8bf88;'
+  +'color:#12232a;font:750 15px system-ui;cursor:pointer;touch-action:manipulation}'
+  +'button:focus-visible{outline:2px solid #f7e2b4;outline-offset:3px}'
+  +'footer{margin:19px 0 0;font-size:12px;color:#a9bfb5}'
+  +'a{color:#d9c18b;text-decoration:none}a:focus-visible{outline:2px solid #d8bc82}'
+  +'@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}'
+  +'</style></head><body><main>'
+  +'<div class="symbol" aria-hidden="true">D</div>'
+  +'<small>DĀR AL TAWḤĪD · TEST-APP</small><h1>Layout-Studio</h1>'
+  +'<p class="subtitle">Gib dein Test-Editor-Passwort ein, um den Bearbeitungsbereich zu öffnen.</p>'
   +message
   +'<form method="post" action="/test/academy/startseiten-editor-login" autocomplete="on">'
-  +'<label for="user">Benutzername</label><input id="user" name="username" value="Dawud" '
-  +'autocapitalize="none" spellcheck="false" autocomplete="username" required maxlength="80">'
-  +'<label for="password">Passwort</label><input id="password" type="password" name="password" '
-  +'autocomplete="current-password" required maxlength="256">'
+  +'<label for="password">Passwort</label>'
+  +'<input id="password" type="password" name="password" '
+  +'autocomplete="current-password" autocapitalize="none" spellcheck="false" '
+  +'enterkeyhint="go" required maxlength="256" placeholder="Passwort eingeben">'
   +'<button type="submit">Editor öffnen</button></form>'
-  +'<footer><a href="/test/">Zur Test-App</a> · Keine Cloudflare-Einstellungen erforderlich.</footer>'
+  +'<footer><a href="/test/">Zur Test-App</a></footer>'
   +'</main></body></html>';
  return new Response(html,{status,headers:{
   "Content-Type":"text/html; charset=utf-8",
@@ -397,22 +425,13 @@ export async function layoutEditorAccess(request,url,env) {
   if(!ct.startsWith("application/x-www-form-urlencoded")&&!ct.startsWith("multipart/form-data"))
    return editorLoginPage("Ungültiges Formular.",415);
   let data;try{data=await request.formData()}catch(_){return editorLoginPage("Formular konnte nicht gelesen werden.",400)}
-  const username=String(data.get("username")||"");
   const password=String(data.get("password")||"");
-  if(username!=="Dawud"||password.length>256||!await editorPasswordMatches(password))
-   return editorLoginPage("Benutzername oder Passwort nicht korrekt.",401);
+  if(!password||password.length>256||!(await editorPasswordMatches(password)))
+   return editorLoginPage("Passwort nicht korrekt. Bitte erneut eingeben.",401);
   return {renderEditor:true};
  }
  if(request.method!=="GET"&&request.method!=="HEAD")
   return new Response("Method not allowed",{status:405,headers:{Allow:"GET, HEAD"}});
- const header=String(request.headers.get("Authorization")||"");
- const basic=header.match(/^Basic\s+([A-Za-z0-9+/=]+)$/i);
- if(basic){
-  let decoded="";try{decoded=atob(basic[1])}catch(_){}
-  const index=decoded.indexOf(":");
-  if(index>=0&&decoded.slice(0,index)==="Dawud"&&await editorPasswordMatches(decoded.slice(index+1)))
-   return true;
- }
  if(path===ACADEMY_NEW_ROOT+"/startseiten-editor.html")return editorLoginPage();
  return editorUnauthorized();
 }
