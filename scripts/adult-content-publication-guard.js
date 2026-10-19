@@ -99,7 +99,12 @@ function selected(){
 function validate(p,otherPosts,existingTv){
  if(p.skip)return "skip";
  if(!p.fm.scholar||!p.fm.source||p.text.length<36||p.text.length>20000)block("missing speaker, source or statement",{post:p.file});
- if(/^\s*#[\p{L}\p{N}_-]+\s*$/gmu.test(p.body)||/(?:^|\n)\s*(?:📥\s*Telegram|🌐\s*Website|📸\s*Instagram)\s*:/u.test(p.body))block("visible hashtags or outdated social footer",{post:p.file});
+ // Central editorial contract: publication text is not a social draft.
+ if(/^(?:[ \t]*#[\p{L}\p{N}_-]+[ \t]*)+$/gmu.test(p.body)||/(?:^|\n)\s*(?:📥\s*Telegram|🌐\s*Website|📸\s*Instagram)\s*:/u.test(p.body))block("visible hashtags or outdated social footer",{post:p.file});
+ if(/[\u{1D400}-\u{1D7FF}]/u.test(p.body))block("mathematical decorative alphabet in quote or conclusion; normalize before publication",{post:p.file});
+ if(/[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF]/u.test(p.body))block("Arabic original belongs on the Q source card, not in the German statement",{post:p.file});
+ if(/🌙\s*(?:Fazit|𝐅𝐚𝐳𝐢𝐭)\s*:/u.test(p.body)&&!/^\s*🌙\s*(?:Fazit|𝐅𝐚𝐳𝐢𝐭)\s*:/mu.test(p.body))
+   block("conclusion must begin its own paragraph for separate Fazit rendering",{post:p.file});
  const q=p.sourceLink;
  if(/^\s*(?:📝\s*(?:\*\*)?Quelle|🔗\s*(?:https?:\/\/)?(?:www\.)?dar-al-tawhid\.de\/q\/|(?:\*\*)?Überlieferungsstatus(?:\*\*)?\s*:)/mu.test(p.body))
   block("source, q link or isnad explanation duplicated in app statement; move to source card /q/",{post:p.file});
