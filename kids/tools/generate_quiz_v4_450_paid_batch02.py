@@ -17,6 +17,8 @@ PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
 READY=ROOT/"kids/data/quiz-v4-450-api-readiness.json"
 REGISTRY=ROOT/"kids/data/quiz-v4-450-original-clip-registry.json"
 LEDGER=ROOT/"kids/data/quiz-v4-450-paid-generation-ledger.json"
+# The unique wave ID must exist before deriving the per-wave journal path.
+BATCH=os.environ.get("KIDS_V4_450_BATCH_ID","KIDS_V4_450_BATCH_02_20").strip()
 ATTEMPTS=(ROOT/"kids/data/quiz-v4-450-batch02-request-journal.json"
           if BATCH=="KIDS_V4_450_BATCH_02_20"
           else ROOT/"kids/data/quiz-v4-paid-wave-journals"/(BATCH+".json"))
@@ -30,7 +32,7 @@ MODEL="eleven_v4"
 # Default preserves the legacy original campaign identity. Subsequent
 # distinct, user-approved 20-text recording waves get stable, NONREUSABLE
 # names; provider SHA identities remain global across all waves.
-BATCH=os.environ.get("KIDS_V4_450_BATCH_ID","KIDS_V4_450_BATCH_02_20").strip()
+
 RATE=0.969066
 LIMIT=20
 MAX_COST=1200
