@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `31a4b966c7eedc4b8fe35a4f26514f2f2c4244ea`
+- Commit beim Erstellen dieses Berichts: `12a1e685710cf5574a3191104110f051b704422a`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **288 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1056 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -101,7 +101,7 @@ Aus den 450 ausgewählten Fragen sind **20 ältere Quizfragen (10 × 7–8 und 1
 
 Der ausführbare, fortsetzbare Kostengenerator `kids/tools/generate_quiz_v4_older_stage1_exact.py` benutzt ausschließlich die 65 unveränderlichen Sprachtext-Prüfsummen dieser Stufe. `--audit` kostet 0 Credits; `--produce` erfordert zwei bestätigte Freigaben und begrenzt jede Ausführung auf höchstens zehn Original-MP3s und höchstens 850 prognostizierte Credits. Quelle der unveränderten Texte: `.github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json`.
 Manuelle Produktions-Pipeline: `.github/workflows/kids-v4-older-stage1-exact-paid.yml`. Die frühere doppelte Frageprüfung ist abgeschafft: Stattdessen wird nur die vorhandene `approved`-Freigabe der 450 Originalfragen bestätigt; das eigentliche Ausgabe-Budget wird separat genehmigt. Kostenfreier CI-Vortest: `.github/workflows/kids-v4-older-stage1-exact-audit.yml`. Sie speichert Originale mit Ledger/Backups sowie die danach neu zusammengesetzten privaten Quiz-Hördateien. Kein Live-Deploy.
-V4-Originale dieser ersten 65er-Stufe: **25 tatsächlich gespeicherte MP3s** + **8 reservierte oder bereits angefragte ElevenLabs-Flow-Aufnahmen OHNE MP3 in GitHub** + **32 noch nicht reservierte Texte** = 65. Die acht Flow-Vormerkungen sind ausdrücklich NICHT als fertig aufgenommene MP3 zu zählen.
+V4-Originale dieser ersten 65er-Stufe: **24 tatsächlich gespeicherte MP3s** + **8 reservierte oder bereits angefragte ElevenLabs-Flow-Aufnahmen OHNE MP3 in GitHub** + **32 noch nicht reservierte Texte** = 65. Die acht Flow-Vormerkungen sind ausdrücklich NICHT als fertig aufgenommene MP3 zu zählen.
 Nächste freigabepflichtige Aufnahmerunde: **10 Texte**; geschätzte **230.64 Credits**, kein Provider-Rechnungswert. Bei reservierten Flow-Aufnahmen zuerst echten Anbieterstatus und exportierbare Original-MP3 prüfen, keinesfalls automatisch erneut bezahlen.
 
 ## Nachweis der tatsächlich gespeicherten bezahlten V4-Original-MP3s
@@ -120,7 +120,7 @@ Nur nach wirklicher inhaltlicher und finanzieller Freigabe neue V4-Stimmenaufnah
 Aktuelle zusätzliche Schutzregel: Der V4-Quellenprüfer muss auch nach bereits gespeicherten Teil-Batches mit 55, 45 usw. fehlenden Originalen erneut bestehen. Die kostenpflichtige Stufe berechnet dafür jedes Mal einen SHA-256-Fingerabdruck aus Originalquelle, gespeicherten MP3-Zuordnungen, vorherigen Kostenbelegen und den nächsten genauen Sprechtext-SHAs.
 Nur wenn der ausdrücklich bestätigte Batch-Fingerabdruck exakt zur neu geprüften Quelle und zum aktuellen Ledger passt, darf der Produktionscode überhaupt eine Anfrage an ElevenLabs senden. Bei Abweichung: STOP vor Provider-GET oder TTS-POST; keine stillschweigende Kreditfreigabe.
 Zusätzliche Absicherung: unmittelbar VOR jedem potenziell kostenpflichtigen POST schreibt der Generator einen als UNBESTÄTIGT markierten SHA-/Batch-Eintrag in `kids/data/quiz-v4-older-stage1-request-journal.json` und spiegelt ihn in `kids/data/quiz-v4-older-stage1-usage.json`. Die Usage-Datei ist bereits Teil des GitHub-Actions-Backups mit `if: always()`. Nach erhaltenen originalen MP3-Bytes werden Ledger und Originalregister atomar gespeichert; eine unsichere frühere Abrechnung oder unterbrochene Anfrage verbietet jede erneute Generierung derselben Sprachaufnahme, bis die Originaldatei/Provider-Abbuchung geklärt wurde.
-Aktuell im Reviewprotokoll vorhandener Fingerabdruck: `7ce9d200f6c4bf6a7fd2201dd78f8cf883e45283f48570c0516e68de98278a41`. Nach jeder MP3-Ergänzung erneut berechnen.
+Aktuell im Reviewprotokoll vorhandener Fingerabdruck: `ca6c7c48687d5684fd538e5958173f0cebb6d48b5402be94229fba67c931b90b`. Nach jeder MP3-Ergänzung erneut berechnen.
 
 ## Sicherer echter V4-Originalabruf und Kostenschutz bei Unterbrechung
 
