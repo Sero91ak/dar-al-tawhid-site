@@ -192,16 +192,9 @@ async function finalizeDarTestHomeV1193(asset) {
     else html = html.replace("<body", earlyHomeClass + "<body");
   }
 
-  // v1239: start loading both Home scenes before layout JS runs.
-  // The URLs are exactly the same cache keys used by CSS/JS, so no duplicate image transfer occurs.
-  if (!html.includes("darHomeHeroMobilePreloadV1239")) {
-    const homePreloads =
-      '<link rel="preload" id="darHomeHeroMobilePreloadV1239" as="image" href="/test/assets/home-v1194/home-mobile-canvas-v1324.svg?v=1324-home" media="(max-width:759px)" fetchpriority="high">\n' +
-      '<link rel="preload" id="darHomeHeroWidePreloadV1239" as="image" href="/test/assets/home-v1194/hero-wide-adobe.jpg?v=1239-home" media="(min-width:760px)" fetchpriority="high">\n' +
-      '<link rel="preload" id="darHomeStudyPreloadV1239" as="image" href="/test/assets/home-v1194/study-runway.jpg?v=1239-home" media="(min-width:760px)" fetchpriority="high">\n';
-    if (html.includes("</head>")) html = html.replace("</head>", homePreloads + "</head>");
-    else html = html.replace("<body", homePreloads + "<body");
-  }
+  // v20261019: no background-photo preloads in the Test Home.
+  // Remove any legacy links already embedded in the static Test shell.
+  html = html.replace(/<link\b[^>]*\bid=["']darHome(?:HeroMobile|HeroWide|Study)PreloadV1239["'][^>]*>\s*/gi, "");
 
   // v1211: load the global light/dark contrast authority LAST on every Test-App HTML route.
   // Reuses the Test-only Salbei stylesheet; its final section is theme-agnostic and fixes all appearances.
@@ -212,8 +205,8 @@ async function finalizeDarTestHomeV1193(asset) {
   }
 
   // Keep only the existing v1194 home authority and refresh its assets.
-  html = html.replace(/dar-home-library-v1194\.css\?v=[^"'`\s]+/g, "dar-home-library-v1194.css?v=1324-single-canvas");
-  html = html.replace(/dar-home-library-v1194\.js\?v=[^"'`\s]+/g, "dar-home-library-v1194.js?v=1324-single-canvas");
+  html = html.replace(/dar-home-library-v1194\.css\?v=[^"'`\s]+/g, "dar-home-library-v1194.css?v=20261019-plain-home");
+  html = html.replace(/dar-home-library-v1194\.js\?v=[^"'`\s]+/g, "dar-home-library-v1194.js?v=20261019-plain-home");
   html = html.replace(/dar-library-redesign-v1168\.css\?v=[^"'`\s]+/g, "dar-library-redesign-v1168.css?v=1213-quran-native");
   html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"'`\s]+/g, "dar-library-redesign-v1168.js?v=1213-quran-native");
 
@@ -490,6 +483,14 @@ async function finalizeDarTestHomeV1193(asset) {
   if (!html.includes('id="darHeroBackgroundAuthorityV3"')) {
     html += '<link rel="stylesheet" id="darHeroBackgroundAuthorityV3" href="/test/assets/hero-background-authority.css?v=hero-bg-v7">';
   }
+  // Test adult Home only: final visual authority that prevents old photo layers
+  // from returning on iPhone, iPad, desktop or after theme/route changes.
+  const plainHomeCssV1 = '<link rel="stylesheet" id="darTestHomeNoBackgroundsV1" href="/test/assets/home-no-backgrounds-v1.css?v=20261019-no-photo">';
+  if (!html.includes('id="darTestHomeNoBackgroundsV1"')) {
+    // Keep this LAST, after other Test CSS authority injections.
+    html += plainHomeCssV1;
+  }
+
 
   // DAR_FRAUEN_HERO_DOM_RUNTIME_V1394: repair cache-key only.
   // The script already exists in the Test shell; never duplicate it.
