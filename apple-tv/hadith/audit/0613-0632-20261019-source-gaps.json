@@ -1,0 +1,216 @@
+{
+  "schemaVersion": 1,
+  "auditType": "read_only_existing_record_metadata_and_targeted_primary_source_review",
+  "date": "2026-10-19",
+  "baseMainSha": "61a46c3c4e527d7363457e73c6a0558c62081bb8",
+  "range": "HAD-0613–HAD-0632",
+  "recordsInspected": 20,
+  "newAuthenticated": 0,
+  "newPublished": 0,
+  "existingSemanticDuplicates": 2,
+  "sourceTextAndClassicalCommentaryFound": 1,
+  "sourceAndClassicalGradeChecked": 1,
+  "earlyDirectSharhFullyApproved": 0,
+  "recordTypeCounts": {
+    "hadith": 20,
+    "athar": 0
+  },
+  "criticalFinding": "18 of 20 existing records lack sharhStatus and direct sharh metadata; 2 records are already marked semantic duplicates. Source authenticity and earliest direct sharh are not verified by generic collection-level grades.",
+  "noProductionMutation": true,
+  "sourceLinks": [
+    "https://www.islamweb.net/ar/library/content/78/1060/",
+    "https://www.islamweb.net/ar/library/content/53/7544/",
+    "https://dorar.net/h/tPN4Wfm2?osoul=1"
+  ],
+  "notes": [
+    "This is not 20 newly authenticated hadith; do not auto-publish, rebuild catalog, or push.",
+    "Ḫaṭṭābī commentary to HAD-0613 currently only traced via later quote; original passage and earliest status remain open.",
+    "No Kids/OneSignal/Cloudflare changes."
+  ],
+  "records": [
+    {
+      "id": "HAD-0613",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "primary_text_and_direct_classical_commentary_found_earliest_unresolved",
+      "source": "Ṣaḥīḥ Muslim 2563; Ibn ʿAbd al-Barr, al-Tamhīd, 18/19–23 (digital pagination)",
+      "note": "Muslim chain Mālik > Abū al-Zinād > al-Aʿraj > Abū Hurayrah reproduced in al-Tamhīd; Ibn ʿAbd al-Barr discusses exact hadith. Earlier al-Ḫaṭṭābī commentary quoted by an-Nawawī but original passage not yet independently located; do NOT set sharhStatus=verified earliest."
+    },
+    {
+      "id": "HAD-0614",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0615",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0616",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0617",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "existing_semantic_duplicate",
+      "duplicateOf": "HAD-0458",
+      "note": "Already marked semanticDuplicateOf in source; do not republish."
+    },
+    {
+      "id": "HAD-0618",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0619",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0620",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0621",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0622",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0623",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0624",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "existing_semantic_duplicate",
+      "duplicateOf": "HAD-0459",
+      "note": "Already marked semanticDuplicateOf in source; do not republish."
+    },
+    {
+      "id": "HAD-0625",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0626",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "authenticity_and_early_direct_sharh_pending",
+      "note": "Existing ambiguous Ṣaḥīḥ/ḥasan grade is not independently established from chain/critical source. Al-Ḥākim attribution noted in secondary Islamweb discussion; original chain and early direct sharh still needed."
+    },
+    {
+      "id": "HAD-0627",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0628",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0629",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "source_and_classical_grade_checked_early_direct_sharh_open",
+      "source": "Sunan Abī Dāwūd 4833; Ǧāmiʿ at-Tirmiḏī 2378",
+      "note": "At-Tirmiḏī calls this ḥasan ġarīb; al-Baġawī 6/470 reports ḥasan ġarīb. This grading is not evidence of direct sharh; locate earliest genuine explanatory passage."
+    },
+    {
+      "id": "HAD-0630",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0631",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    },
+    {
+      "id": "HAD-0632",
+      "recordType": "hadith",
+      "inspection": "repository_record_fields_read",
+      "independentAuthentication": "not_completed",
+      "canonicalPublication": "unchanged",
+      "status": "exact_source_number_and_early_direct_sharh_pending",
+      "note": "Repository gives generic collection title and/or unsupported summary; do not infer individual isnad or early sharh."
+    }
+  ]
+}
