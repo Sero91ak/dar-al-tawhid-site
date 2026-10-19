@@ -45,7 +45,6 @@ def main():
     must_fail(lambda:t.build_canonical_v4_payload("الْقُرْآنُ",language="de"),"V4_GERMAN_SOURCE_CONTAINS_ARABIC")
     must_fail(lambda:t.build_canonical_v4_payload("القرآن",language="ar"),"V4_FUSHA")
     must_fail(lambda:t.build_canonical_v4_payload("Iman.",language="ar"),"V4_FUSHA")
-    must_fail(lambda:t.original_mp3("NO_REAL_KEY","Der Qurʾān."),"PRONUNCIATION_HOLD")
     # Prove the REAL outgoing HTTP request (not merely an unused helper)
     # includes the correct dictionary+version, even in the paid code path.
     # The HTTP transport is mocked: ZERO credits, no network calls.
@@ -54,8 +53,10 @@ def main():
     try:
         with tempfile.TemporaryDirectory() as folder:
             h=Path(folder)/"hold.json"
-            h.write_text(json.dumps({"productionPaused":False,"humanPronunciationApproved":True}))
+            h.write_text(json.dumps({"productionPaused":True,"dictionaryProviderVerified":False,"ownerRestartAuthorized":False}))
             t.PRONUNCIATION_HOLD=h
+            must_fail(lambda:t.original_mp3("NO_REAL_KEY","Der Qurʾān."),"PRONUNCIATION_HOLD")
+            h.write_text(json.dumps({"productionPaused":False,"dictionaryProviderVerified":True,"ownerRestartAuthorized":True}))
             calls=[]
             class PretendMp3:
                 status=200
@@ -100,7 +101,7 @@ def main():
             must_fail(lambda:t.build_canonical_v4_payload("Der Qurʾān."),"V4_MASTER_PLS_RULE_COUNT_MISMATCH")
     finally:
         t.PRONUNCIATION=old
-    print("PASS_KIDS_V4_MASTER_10099_RULE_DICTIONARY_PAYLOAD; German Qurʾān/Īmān; vocalized native Fuṣḥā; mixed text rejection; production HOLD; ZERO credits")
+    print("PASS_KIDS_V4_MASTER_10099_RULE_DICTIONARY_PAYLOAD; German Qurʾān/Īmān; vocalized native Fuṣḥā; mixed text rejection; production one-test pilot gate; ZERO credits")
 
 
 if __name__=="__main__":
