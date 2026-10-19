@@ -102,28 +102,13 @@
     }
     return null;
   }
+  /* MEHR_DUPLICATE_FRAUEN_ROW_REMOVED_V1
+   * Frauen im Islam is already a featureCatalog tile in the upper learning grid.
+   * Do not inject a second bottom entry. Retain routing and click handling. */
   function injectEntry(){
-    if(isFrauen())return;
-    if(document.querySelector("["+ENTRY_ATTR+"]"))return;
-    var body=document.body,h=String(location.hash||"");
-    if(!(body&&body.classList.contains("is-more-route"))&&h.indexOf("#more")!==0)return;
-    var target=learningTarget();
-    if(!target)return;
-    var btn=document.createElement("button");
-    btn.type="button";
-    btn.className="more-feature-row dar-frauen-live-entry";
-    btn.setAttribute(ENTRY_ATTR,"1");
-    btn.setAttribute("data-nav","frauen");
-    btn.setAttribute("data-feature-search","frauen islam fiqh sahabiyyat wissen familie reinigung gebet fasten");
-    btn.setAttribute("aria-label","Frauen im Islam öffnen");
-    btn.innerHTML=
-      '<span class="feature-icon more-feature-row__icon" aria-hidden="true"><img class="dar3d-icon" src="/assets/dar-3d-icons/frauen.png" alt=""></span>'+
-      '<span class="dar-frauen-live-entry__body"><h4>Frauen im Islam <span class="feature-badge">Wissen</span></h4><p>Fiqh · Ṣaḥābiyyāt · Familie · Pflichtwissen</p></span>'+
-      '<span aria-hidden="true">›</span>';
-    var prophet=target.querySelector('.more-feature-row[data-nav="propheten"]');
-    if(prophet&&prophet.nextSibling)target.insertBefore(btn,prophet.nextSibling);
-    else target.appendChild(btn);
+    document.querySelectorAll("["+ENTRY_ATTR+"]").forEach(function(entry){entry.remove()});
   }
+
   function scheduleEntry(){
     if(entryScheduled)return;
     entryScheduled=true;
