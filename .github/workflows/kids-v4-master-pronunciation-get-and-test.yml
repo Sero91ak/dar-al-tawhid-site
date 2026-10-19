@@ -1,4 +1,5 @@
 name: KIDS V4 Master Fuṣḥā and 10099 Rule Provider Verification (zero-credit)
+# Recheck the outgoing text-to-speech HTTP JSON via transport mock; never send paid test speech.
 on:
   push:
     branches: [main]
