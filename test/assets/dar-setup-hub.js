@@ -943,3 +943,86 @@
     new MutationObserver(schedule).observe(target, { childList: true, subtree: true });
   }
 })();
+
+
+/* DĀR AL TAWḤĪD · Location continuity for live + test · 2026-10-19
+   Native CoreLocation positions, foreground recovery and manual-city protection.
+   Never request background tracking from JavaScript without an explicit action. */
+(function(){
+  "use strict";
+  if(window.__darLocationContinuityV1)return;
+  window.__darLocationContinuityV1=true;
+  var lastApplied=0, geocodeSerial=0, retryTimer=0;
+  function current(){try{return typeof getPrayerSettings==="function"?(getPrayerSettings()||{}):{};}catch(e){return {};}}
+  function valid(lat,lon,acc){
+    return Number.isFinite(lat)&&Number.isFinite(lon)&&lat>=-90&&lat<=90&&lon>=-180&&lon<=180&&
+      Number.isFinite(acc)&&acc>=0&&acc<=2500;
+  }
+  function distance(a,b,c,d){
+    var p=Math.PI/180, x=(c-a)*p, y=(d-b)*p*Math.cos((a+c)*p/2);
+    return 6371000*Math.sqrt(x*x+y*y);
+  }
+  function notifyPrayer(s){
+    try{if(typeof updateHeaderPrayerStatus==="function")updateHeaderPrayerStatus();}catch(e){}
+    try{if(typeof updatePrayerCountdowns==="function")updatePrayerCountdowns();}catch(e){}
+    try{window.dispatchEvent(new CustomEvent("dar:location-updated",{detail:{mode:"auto",city:s.city,source:"native"}}));}catch(e){}
+    var el=document.getElementById("darPermissionCityText");
+    if(el)el.textContent=(s.city||"Ort wird ermittelt …")+" · GPS automatisch";
+  }
+  async function updatePosition(data){
+    var lat=Number(data&&data.lat),lon=Number(data&&(data.lng!=null?data.lng:data.lon));
+    var acc=Number(data&&data.acc), t=Number(data&&data.timestamp);
+    if(!valid(lat,lon,acc))return;
+    if(t && (t>Date.now()+60000||Date.now()-t>600000))return;
+    var s=current();
+    if(s.locationMode==="manual")return;
+    if(s.locationMode!=="auto"&&s.locationGranted!==true)return;
+    if(typeof setPrayerSettings!=="function"){
+      if(!retryTimer)retryTimer=setTimeout(function(){retryTimer=0;void updatePosition(data);},1000);
+      return;
+    }
+    var hasOld=s.lat!=null&&s.lon!=null&&Number.isFinite(Number(s.lat))&&Number.isFinite(Number(s.lon));
+    var meters=hasOld?distance(Number(s.lat),Number(s.lon),lat,lon):Infinity;
+    var age=Date.now()-Number(s.locationUpdatedAt||0);
+    if(meters<700&&age<30*60000)return;
+    // Avoid high-frequency GPS samples triggering expensive push/server refreshes.
+    if(Date.now()-lastApplied<45000&&meters<3000)return;
+    lastApplied=Date.now();
+    var city=meters<1500&&s.city&&s.city!=="Ort wird ermittelt …"
+      ?s.city:"Ort wird ermittelt …";
+    try{
+      setPrayerSettings({lat:lat,lon:lon,city:city,locationMode:"auto",
+        locationGranted:true,locationUpdatedAt:Date.now()});
+    }catch(e){return;}
+    notifyPrayer(current());
+    var serial=++geocodeSerial;
+    try{
+      if(typeof reversePrayerCity!=="function")return;
+      var name=await reversePrayerCity(lat,lon);
+      if(serial!==geocodeSerial||typeof name!=="string"||!name.trim())return;
+      var fresh=current();
+      if(fresh.locationMode!=="auto"||Math.abs(Number(fresh.lat)-lat)>.001
+        ||Math.abs(Number(fresh.lon)-lon)>.001)return;
+      if(fresh.city!==name.trim()){
+        setPrayerSettings({city:name.trim()});
+        notifyPrayer(current());
+      }
+    }catch(e){ /* GPS coordinates remain authoritative if geocoding fails */ }
+  }
+  function nativeHandler(){
+    try{return window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darNative;}
+    catch(e){return null;}
+  }
+  function requestFresh(){
+    var s=current(),handler=nativeHandler();
+    if(!handler||s.locationMode!=="auto")return;
+    try{handler.postMessage({type:"location-resume"});}catch(e){}
+  }
+  window.addEventListener("dar-native-location",function(ev){void updatePosition(ev.detail);});
+  window.addEventListener("pageshow",requestFresh);
+  window.addEventListener("focus",requestFresh);
+  document.addEventListener("visibilitychange",function(){if(!document.hidden)requestFresh();});
+  document.addEventListener("dar:location-updated",function(){if(current().locationMode==="auto")requestFresh();});
+  if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",requestFresh,{once:true});
+  else requestFresh();
+})();
