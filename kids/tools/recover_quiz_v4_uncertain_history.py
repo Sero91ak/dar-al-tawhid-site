@@ -46,9 +46,11 @@ def guard(cond,msg):
 def targets():
     stages=get(PREP)
     reg=get(REG);ledger=get(LEDGER);journal=get(JOURNAL);usage=get(USAGE)
-    guard(reg["modelId"]==ledger["modelId"]==journal["modelId"]==MODEL
-          and reg["voiceId"]==ledger["voiceId"]==journal["voiceId"]==VOICE,
-          "original provider model or master voice differs")
+    guard(reg.get("modelId")==journal.get("modelId")==MODEL
+          and reg.get("voiceId")==journal.get("voiceId")==VOICE
+          and ledger.get("scope")=="CURATED_450_V4_PAID_LEDGER"
+          and isinstance(ledger.get("rows"),list),
+          "original provider model, master voice or paid ledger scope differs")
     guard(reg["live"] is False and ledger["live"] is False,
           "public/release state is not review-only")
     guard(usage.get("requestJournal")==journal,"write-ahead provider record and backup differ")
