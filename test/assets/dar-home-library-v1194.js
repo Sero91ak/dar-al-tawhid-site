@@ -670,3 +670,14 @@ function observe(){
 if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",observe,{once:true});
 else observe();
 })();
+/* V4.7 HOME TEST layout – inject only the new style/adapter, never change visitor route. */
+(function(){
+ if(!/^\/test(?:\/|$)/.test(location.pathname)||/^\/test\/kids(?:\/|$)/.test(location.pathname))return;
+ if(document.querySelector('script[data-dar-home-v47]'))return;
+ var css=document.createElement("link");css.rel="stylesheet";
+ css.href="/test/assets/dar-home-v47-layout.css?v=20261019-147";
+ css.setAttribute("data-dar-home-v47-css","");document.head.appendChild(css);
+ var script=document.createElement("script");
+ script.src="/test/assets/dar-home-v47-layout.js?v=20261019-147";
+ script.setAttribute("data-dar-home-v47","");document.head.appendChild(script);
+})();
