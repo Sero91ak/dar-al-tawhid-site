@@ -13,7 +13,7 @@ function sync(){
  var row=header&&header.querySelector(".header-row--brand-only");
  var prayer=document.getElementById("headerPrayerStatus");
  var hero=header&&header.querySelector("#dtHero1194");
- if(!header||!row||!prayer||!hero)return;
+ if(!header||!row||!prayer)return;
  document.documentElement.classList.add("dar-home-v47-layout");
  var lead=document.getElementById("darHomeV47Leadin");
  if(!lead){lead=make("p","dar-v47-leadin","BEITRÄGE NACH QURʾĀN, SUNNAH & ĀTHĀR");lead.id="darHomeV47Leadin"}
@@ -30,7 +30,7 @@ function sync(){
  if(welcome.parentNode!==header)header.appendChild(welcome);
  /* Original native prayer node stays in place with its own events/update calls. */
  prayer.classList.add("dar-v47-prayer");
- var search=hero.querySelector(".dt-hero-search-slot");
+ var search=hero&&hero.querySelector(".dt-hero-search-slot");
  if(search)search.classList.add("dar-v47-search");
  /* Reuse the V3 navigation and its original 3D icon images. */
  var quick=document.querySelector("#dv3Home .dv3-quick-grid");
@@ -48,6 +48,8 @@ function init(){
  queue();
  var view=document.getElementById("appView");
  if(view)new MutationObserver(queue).observe(view,{childList:true,subtree:false});
+ var top=document.querySelector(".top-shell");
+ if(top)new MutationObserver(queue).observe(top,{childList:true,subtree:true});
  new MutationObserver(queue).observe(document.body,{attributes:true,attributeFilter:["class"]});
  new MutationObserver(queue).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme","data-theme-variant"]});
  document.addEventListener("dar:view-rendered",queue);

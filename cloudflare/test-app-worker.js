@@ -206,7 +206,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // Keep only the existing v1194 home authority and refresh its assets.
   html = html.replace(/dar-home-library-v1194\.css\?v=[^"'`\s]+/g, "dar-home-library-v1194.css?v=20261019-plain-home");
-  html = html.replace(/dar-home-library-v1194\.js\?v=[^"'`\s]+/g, "dar-home-library-v1194.js?v=20261019-plain-home");
+  html = html.replace(/dar-home-library-v1194\.js\?v=[^"'`\s]+/g, "dar-home-library-v1194.js?v=20261019-v47r2");
   html = html.replace(/dar-library-redesign-v1168\.css\?v=[^"'`\s]+/g, "dar-library-redesign-v1168.css?v=1213-quran-native");
   html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"'`\s]+/g, "dar-library-redesign-v1168.js?v=1213-quran-native");
 
@@ -500,6 +500,19 @@ async function finalizeDarTestHomeV1193(asset) {
   // The script already exists in the Test shell; never duplicate it.
   html = html.replace(/(\/test\/assets\/frauen\/frauen-fiqh\.js)(?:\?v=[^"'<\s]*)?/g,
     "$1?v=frauen-rollback-20261016-1500");
+
+
+  // DĀR TEST HOME V4.7R2: final and directly versioned visual authority.
+  // This is limited to the /test HTML shell by the caller, never visitor/KIDS.
+  // The older JS-only loader could be cached and cannot guarantee these assets.
+  html = html.replace(/<link\b[^>]*\bid=["']darHomeV47CssFinal["'][^>]*>\s*/gi, "");
+  html = html.replace(/<script\b[^>]*\bid=["']darHomeV47JsFinal["'][^>]*><\/script>\s*/gi, "");
+  const v47FinalAssets =
+    '<link rel="stylesheet" id="darHomeV47CssFinal" href="/test/assets/dar-home-v47-layout.css?v=20261019-v47r2">' +
+    '<script id="darHomeV47JsFinal" data-dar-home-v47 src="/test/assets/dar-home-v47-layout.js?v=20261019-v47r2"></script>';
+  const v47Insert = html.lastIndexOf("</html>");
+  if (v47Insert >= 0) html = html.slice(0, v47Insert) + v47FinalAssets + html.slice(v47Insert);
+  else html += v47FinalAssets;
 
   const headers = new Headers(asset.headers);
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
