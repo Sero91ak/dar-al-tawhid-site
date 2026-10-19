@@ -1042,10 +1042,25 @@ function previewNewPostMarkdown(){
   if(!box){toast("Vorschau nicht verfügbar");return}
   if(!draftMarkdown.trim()){box.hidden=false;box.innerHTML="<p>Bitte zuerst Markdown einfügen.</p>";return}
   const p=markdownPreviewData(draftMarkdown);
-  const modeLine=window.DARSlidePostParser?DARSlidePostParser.formatSlideStatusLine(draftMarkdown,draftPostMode):(draftPostMode==="slide"?"Slide-Modus":"Einzelbeitrag");
+  const prepared=prepareDarAdminEditorialPost(draftMarkdown,draftPostMode);
   box.hidden=false;
-  box.innerHTML=`<h4>${esc(p.title)}</h4><p>${esc(p.quote)}</p><p style="margin-top:8px"><strong>${esc(modeLine)}</strong></p><p style="margin-top:6px">${esc(p.category)} · ${esc(p.scholar)} · ${esc(p.source)}</p>`;
-  toast("Vorschau aktualisiert");
+  if(!prepared.ok){
+    box.innerHTML=`<p><strong>DĀR-Beitragsregel:</strong> ${esc(prepared.errors.join(" · "))}</p>`;
+    toast("Beitrag erst korrigieren");
+    return;
+  }
+  const cleanBody=prepared.markdown.replace(/^---[ \t]*\n[\s\S]*?\n---[ \t]*\n/,"");
+  const quoteMatch=cleanBody.match(/„[\s\S]*?“/u);
+  const quoteText=String(quoteMatch?quoteMatch[0]:p.quote||"").replace(/\*\*/g,"").trim();
+  const fazitMatch=cleanBody.match(/^\s*🌙\s*(?:\*\*)?\s*(?:Fazit|𝐅𝐚𝐳𝐢𝐭)\s*(?:\*\*)?\s*:\s*(.+)$/mu);
+  const fazitText=String(fazitMatch?.[1]||"").replace(/\*\*/g,"").trim();
+  const modeLine=window.DARSlidePostParser?DARSlidePostParser.formatSlideStatusLine(prepared.markdown,draftPostMode):(draftPostMode==="slide"?"Slide-Modus":"Einzelbeitrag");
+  box.innerHTML=`<h4>${esc(p.title)}</h4>
+    <section style="margin-top:14px"><b>AUSSAGE</b><p style="font-size:1.15em;line-height:1.65;margin:8px 0 0">${esc(quoteText)}</p></section>
+    ${fazitText?`<section style="margin-top:20px;border-top:1px solid var(--line);padding-top:12px"><b>🌙 Fazit</b><p style="line-height:1.6;margin:8px 0 0">${esc(fazitText)}</p></section>`:""}
+    <section style="margin-top:20px;border-top:1px solid var(--line);padding-top:12px"><b>QUELLE</b><p style="line-height:1.55;margin:8px 0 0">${esc(p.source)}</p></section>
+    <p style="margin-top:10px"><strong>${esc(modeLine)}</strong> · ${esc(p.category)} · ${esc(p.scholar)}</p>`;
+  toast("Getrennte Vorschau aktualisiert");
 }
 function readLocalDraftRecord(){try{const d=JSON.parse(localStorage.getItem(ADMIN_DRAFT_KEY)||"null");return d&&typeof d==="object"?d:null}catch(e){return null}}
 function clearLocalDraft(note="Entwurf gelöscht."){draftMarkdown="";draftFilename="";draftStatus="";draftNextNumber=null;draftPostMode="single";try{localStorage.removeItem(ADMIN_DRAFT_KEY)}catch(e){}const text=document.getElementById("postMarkdownInput");if(text)text.value="";const filenameInput=document.getElementById("postFilenameInput");if(filenameInput)filenameInput.value="";toast(note);addAdminLog("Entwurf",note,"—");renderShell()}
