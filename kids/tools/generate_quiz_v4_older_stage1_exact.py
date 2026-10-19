@@ -100,8 +100,36 @@ def persist_remote_paid_checkpoint(*paths, purpose):
     staged=git("diff","--cached","--name-only").stdout.strip()
     check(bool(staged),"paid original already checkpointed or missing; STOP before proceeding")
     git("commit","-m","audio(kids V4): protect paid original "+purpose+" [skip ci]")
-    git("push","origin","HEAD:"+expected)
-    print("KIDS_V4_ORIGINAL_CHECKPOINT_SAVED "+purpose,flush=True)
+    # Multiple independent zero-credit GitHub QA jobs update this review
+    # branch. A regular non-fast-forward must NEVER prevent a legitimate
+    # receipt checkpoint forever, but we may ONLY rebase a committed receipt
+    # and retry when the rejection is explicitly non-fast-forward.
+    # On ANY merge conflict, authentication error, or uncertain Git result,
+    # abort BEFORE new paid TTS. Never force-push a charged original.
+    for attempt_number in range(1,6):
+        push=subprocess.run(["git","push","origin","HEAD:"+expected],
+            cwd=ROOT,capture_output=True,text=True,timeout=45,check=False)
+        if push.returncode==0:
+            print("KIDS_V4_ORIGINAL_CHECKPOINT_SAVED "+
+                  json.dumps({"purpose":purpose,"gitPushAttempt":attempt_number}),flush=True)
+            return
+        err=((push.stderr or "")+" "+(push.stdout or "")).lower()
+        if not any(reason in err for reason in
+                   ("non-fast-forward","fetch first","failed to push some refs",
+                    "stale info","remote contains work")):
+            raise RuntimeError("KIDS_V4_PAID_ORIGINAL_CHECKPOINT_PERMISSION_OR_NETWORK_FAILURE: "+
+                "GitHub rejected remote persistence (not a verifiable concurrent update); "+
+                "NO NEW PROVIDER POST permitted")
+        if attempt_number==5:
+            break
+        print("KIDS_V4_CHECKPOINT_NON_FAST_FORWARD: rebase committed receipt without "+
+              "resynthesis; retry "+str(attempt_number),flush=True)
+        git("fetch","origin",expected)
+        git("rebase","FETCH_HEAD")
+        # The pre-paid journal or original MP3 remains committed and re-applied
+        # by Git. A rebase conflict raises before any charged provider call.
+    raise RuntimeError("KIDS_V4_PAID_CHECKPOINT_CONCURRENT_UPDATES_EXHAUSTED: "+
+                       "preserve current committed proof; no new TTS requests")
 
 
 def prepare():
