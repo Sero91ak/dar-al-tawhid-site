@@ -43,4 +43,8 @@ for(const script of scripts)new vm.Script(script[1],{filename:"lernen/wissen-ada
 const quiz=scripts[1][1];
 assert.equal((quiz.match(/\{q:"/g)||[]).length,4,"expected four factual questions");
 assert.equal((quiz.match(/choices:\[/g)||[]).length,4,"expected four answer groups");
+const answerKeys=[...quiz.matchAll(/correct:(\d),why:/g)].map(x=>Number(x[1]));
+assert.equal(answerKeys.length,4,"all four quiz answers need explicit answer keys");
+assert.ok(new Set(answerKeys).size >= 3,"correct answers must not always sit on the same option");
+assertHas(html,/Vier Fragen · eine Frage pro Ansicht/,"single-question quiz footer label must be accurate");
 console.log("OK: Q46 quiz single-screen structure, four-answer flow, Q backlink, light/dark contrast, script syntax.");
