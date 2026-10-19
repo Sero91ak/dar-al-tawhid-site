@@ -113,8 +113,8 @@ def build_canonical_v4_payload(spoken, *, language="de"):
 
 def original_mp3(key,spoken,*,language="de"):
     hold=load(PRONUNCIATION_HOLD)
-    if hold.get("productionPaused") is not False or hold.get("humanPronunciationApproved") is not True:
-        raise RuntimeError("PRONUNCIATION_HOLD: no paid V4 until 10,099-rule master and Arabic Fuṣḥā are verified")
+    if hold.get("productionPaused") is not False or hold.get("dictionaryProviderVerified") is not True or hold.get("ownerRestartAuthorized") is not True:
+        raise RuntimeError("PRONUNCIATION_HOLD: no paid V4 until current 10,099-rule lexicon, Fuṣḥā and explicit owner restart are verified")
     body=build_canonical_v4_payload(spoken,language=language)
     req=urllib.request.Request(
         "https://api.elevenlabs.io/v1/text-to-speech/"+VOICE+
@@ -172,6 +172,11 @@ def choose(plan,registry,protected):
     return selected,estimate
 
 def main():
+    # The older 20-take pathway is NOT the first-test restart pathway:
+    # a single original from the stage-1 guarded producer must be heard first.
+    hold=load(PRONUNCIATION_HOLD)
+    if hold.get("humanListeningQualityGateReleased") is not True:
+        raise RuntimeError("V4_AUDIO_RESTART: large paid batches suspended until one correct canonical-dictionary original is heard and accepted")
     key=os.environ.get("ELEVENLABS_API_KEY","").strip()
     if not key:raise RuntimeError("ElevenLabs API key missing")
     if load(ROOT/"kids/data/quiz-curation-release.json").get("enabled") is not False:
