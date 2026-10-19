@@ -4729,7 +4729,7 @@ async function uploadBulkPackViaWorker(){
   const category=(document.getElementById("bulkCategoryInput")?.value||"").trim();
   const posts=splitBulkMarkdownPostsForPublish(raw).map(md=>applyBulkCategoryToMarkdown(md,category));
   const editorialErrors=[];
-  posts.forEach((md,i)=>{const check=prepareDarAdminEditorialPost(md,/^(?:type|layout):\\s*["']?slides?["']?\\s*$/m.test(md)?"slide":"single");if(!check.ok)editorialErrors.push("Beitrag "+(i+1)+": "+check.errors.join(" · "))});
+  posts.forEach((md,i)=>{const check=prepareDarAdminEditorialPost(md,/^(?:type|layout):\s*["']?slides?["']?\s*$/m.test(md)?"slide":"single");if(!check.ok)editorialErrors.push("Beitrag "+(i+1)+": "+check.errors.join(" · "))});
   if(editorialErrors.length){setBulkPackStatus("<strong>DĀR-Beitragsregel:</strong> "+esc(editorialErrors.slice(0,5).join(" | ")));toast("Sammelpaket nach Beitragsregel prüfen");return}
   if(!posts.length){setBulkPackStatus("Keine Beiträge erkannt. Prüfberichte/readme werden automatisch übersprungen. Beiträge mit <strong>===</strong> trennen oder Frontmatter nutzen.");toast("Paket leer");return}
   startPublishTrack("bulk",{category:category||"Sammelpaket",count:posts.length});
