@@ -8513,6 +8513,19 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-01T23:59:00.000Z"
+    },
+    {
+      "id": "visitor-real-ios-hero-safearea-and-sticky-search-v1404-20261019",
+      "at": "2026-10-19T08:40:00+02:00",
+      "approvedBy": "user-repeated-explicit-visitor-app-hero-corrections-not-live-20261019",
+      "reason": "User says visitor Hero corrections not visible. Root cause: native iOS injected body.is-area-route padding-top:max(8px,var(--safe-top),var(--dar-native-safe-top)) !important causes pale band above photo despite V1403. Scoped v1404 patch removes extra body spacing only for photo-bearing adult routes, adds title safe inset padding, attaches search to measured hero edge full bleed with no translucent stripe, tighter responsive sizing and new cache version. Preserve all Frau original imagery, appearance palettes, Kids, native Swift, bottom nav, push, and no external assets.",
+      "paths": [
+        "assets/adult-responsive-viewport-v1381.css",
+        "cloudflare/site-router.js",
+        "scripts/hero-scroll-standard-guard.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-05T23:59:00.000Z"
     }
   ],
   "enabled": true
