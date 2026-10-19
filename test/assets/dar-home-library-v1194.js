@@ -72,106 +72,35 @@ function removeOldLayers(){
 }
 function applyHomeAtmosphereV1204(){
   if(!isHome())return;
+  // Test Home only: remove both historical photo scenes (top + bottom).
+  // The active appearance owns the single background and foreground colours.
   var html=document.documentElement;
-  var theme=String(html.getAttribute("data-theme")||"").toLowerCase();
-  var light=(theme==="light"||theme==="soft"||theme==="eisgold");
-  var mobile=!!(window.matchMedia&&window.matchMedia("(max-width:759px)").matches);
-  var singleCanvas=light&&mobile;
   var body=document.body;
   var top=document.querySelector(".top-shell");
   var header=top&&top.querySelector(".header");
   var view=document.getElementById("appView");
-  var page=(body&&getComputedStyle(body).getPropertyValue("--dt-page").trim())||(light?"#f5f1e7":"#050706");
-  var heroImg=window.matchMedia&&window.matchMedia("(min-width:760px)").matches
-    ? "/test/assets/home-v1194/hero-wide-adobe.jpg?v=1239-home"
-    : "/test/assets/home-v1194/hero-mobile-adobe.jpg?v=1239-home";
+  var page=(getComputedStyle(body).getPropertyValue("--dt-page").trim())||"var(--bg)";
 
-  html.classList.toggle("dar-home-single-canvas-v1324",singleCanvas);
-
-  if(singleCanvas){
-    if(html){
-      html.style.setProperty("background-color",page,"important");
-      html.style.setProperty("background-image","none","important");
-      html.style.setProperty("background-repeat","no-repeat","important");
-    }
-    if(body){
-      body.style.setProperty("background-color",page,"important");
-      body.style.setProperty("background-image","url('/test/assets/home-v1194/home-mobile-canvas-v1324.svg?v=1324-home')","important");
-      body.style.setProperty("background-repeat","no-repeat","important");
-      body.style.setProperty("background-size","100% auto","important");
-      body.style.setProperty("background-position","center top","important");
-      body.style.setProperty("background-attachment","scroll","important");
-    }
-    [top,header,view].forEach(function(el){
-      if(!el)return;
-      el.style.setProperty("background","transparent","important");
-      el.style.setProperty("background-color","transparent","important");
-      el.style.setProperty("background-image","none","important");
-      el.style.removeProperty("background-repeat");
-      el.style.removeProperty("background-size");
-      el.style.removeProperty("background-position");
-      el.style.removeProperty("background-attachment");
-    });
-    document.querySelectorAll("#appView .home-v380-shell,#appView .home-v380-section,#appView .home-line-list,#appView .home-line-grid,.top-shell .header").forEach(function(el){
-      el.style.setProperty("background-color","transparent","important");
-      el.style.setProperty("background-image","none","important");
-    });
-    return;
-  }
-
-  if(body){
-    body.style.removeProperty("background-repeat");
-    body.style.removeProperty("background-size");
-    body.style.removeProperty("background-position");
-    body.style.removeProperty("background-attachment");
-  }
-
-  if(html){
-    html.style.setProperty("background-color",page,"important");
-    html.style.setProperty(
-      "background-image",
-      light
-        ? "linear-gradient(90deg,rgba(249,246,238,.44),rgba(249,246,238,.10)),url('"+heroImg+"')"
-        : "linear-gradient(90deg,rgba(2,3,2,.58),rgba(2,3,2,.10)),url('"+heroImg+"')",
-      "important"
-    );
-    html.style.setProperty("background-repeat","no-repeat","important");
-    html.style.setProperty("background-size","cover","important");
-    html.style.setProperty("background-position","62% top","important");
-  }
-  if(body){
-    body.style.setProperty("background-color",page,"important");
-    body.style.setProperty("background-image","none","important");
-  }
-  if(top){
-    top.style.setProperty("background-color",page,"important");
-    top.style.setProperty(
-      "background-image",
-      light
-        ? "linear-gradient(180deg,rgba(249,246,238,.24) 0%,rgba(249,246,238,.28) 36%,rgba(249,246,238,.42) 78%,rgba(249,246,238,.48) 100%),linear-gradient(90deg,rgba(249,246,238,.50) 0%,rgba(249,246,238,.28) 50%,rgba(249,246,238,.12) 100%),url('"+heroImg+"')"
-        : "linear-gradient(180deg,rgba(2,3,2,.10) 0%,rgba(2,3,2,.18) 34%,rgba(2,3,2,.58) 72%,rgba(2,3,2,.98) 100%),linear-gradient(90deg,rgba(2,3,2,.58) 0%,rgba(2,3,2,.28) 48%,rgba(2,3,2,.08) 100%),url('"+heroImg+"')",
-      "important"
-    );
-    top.style.setProperty("background-repeat","no-repeat","important");
-    top.style.setProperty("background-size","100% 100%,100% 100%,cover","important");
-    top.style.setProperty("background-position","center,center,62% 32%","important");
-  }
-  if(header){
-    header.style.setProperty("background","transparent","important");
-    header.style.setProperty("background-image","none","important");
-  }
-  if(view){
-    view.style.setProperty("background-color","transparent","important");
-    view.style.setProperty("background-image","none","important");
-    view.style.removeProperty("background-repeat");
-    view.style.removeProperty("background-size");
-    view.style.removeProperty("background-position");
-  }
-  document.querySelectorAll("#appView .home-v380-shell,#appView .home-v380-section,#appView .home-line-list,#appView .home-line-grid,.top-shell .header").forEach(function(el){
+  html.classList.remove("dar-home-single-canvas-v1324");
+  html.style.setProperty("background-color",page,"important");
+  html.style.setProperty("background-image","none","important");
+  body.dataset.darTestHomePlainBackground="1";
+  body.style.setProperty("background-color",page,"important");
+  body.style.setProperty("background-image","none","important");
+  [html,body].forEach(function(el){
+    ["background-repeat","background-size","background-position","background-attachment",
+     "background-blend-mode"].forEach(function(prop){el.style.removeProperty(prop)});
+  });
+  [top,header,view].forEach(function(el){
+    if(!el)return;
     el.style.setProperty("background-color","transparent","important");
-    if(!el.classList.contains("header"))el.style.setProperty("background-image","none","important");
+    el.style.setProperty("background-image","none","important");
+    ["background-repeat","background-size","background-position","background-attachment"].forEach(function(prop){
+      el.style.removeProperty(prop);
+    });
   });
 }
+
 function ensureHero(){
   var top=document.querySelector(".top-shell");
   var header=top&&top.querySelector(".header");
@@ -696,6 +625,18 @@ function sync(){
     document.documentElement.style.removeProperty("background-repeat");
     document.documentElement.style.removeProperty("background-size");
     document.documentElement.style.removeProperty("background-position");
+    if(document.body&&document.body.dataset.darTestHomePlainBackground==="1"){
+      delete document.body.dataset.darTestHomePlainBackground;
+      ["background-color","background-image","background-repeat","background-size",
+       "background-position","background-attachment","background-blend-mode"].forEach(function(prop){
+        document.body.style.removeProperty(prop);
+      });
+      [document.querySelector(".top-shell"),
+       document.querySelector(".top-shell .header"),
+       document.getElementById("appView")].forEach(function(el){
+        if(el){el.style.removeProperty("background-color");el.style.removeProperty("background-image")}
+      });
+    }
     return;
   }
   removeOldLayers();
