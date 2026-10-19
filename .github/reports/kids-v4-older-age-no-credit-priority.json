@@ -25,10 +25,10 @@
     "7-8": 26,
     "9-10": 24
   },
-  "allRemainingUnrecordedOlderAgeDistinctTextCount": 1368,
-  "allRemainingUnrecordedOlderAgeCharacters": 64395,
-  "newDistinctTextCountForFirst40": 165,
-  "newCharactersForFirst40": 5667,
+  "allRemainingUnrecordedOlderAgeDistinctTextCount": 1367,
+  "allRemainingUnrecordedOlderAgeCharacters": 64383,
+  "newDistinctTextCountForFirst40": 164,
+  "newCharactersForFirst40": 5655,
   "priorityQuestionSteps": [
     {
       "order": 1,
@@ -76,6 +76,22 @@
     },
     {
       "order": 4,
+      "questionId": "kids-quiz-046",
+      "ageBand": "9-10",
+      "category": "Zakāh",
+      "missingOriginalTextCountForQuestion": 3,
+      "incrementalDistinctNewOriginals": 3,
+      "incrementalNewCharacters": 93,
+      "newOriginalTextSHA256": [
+        "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
+        "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30",
+        "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1"
+      ],
+      "originalQuestionTextChanged": false,
+      "maySynthesizeAutomatically": false
+    },
+    {
+      "order": 5,
       "questionId": "kids-quiz-041",
       "ageBand": "9-10",
       "category": "Taqwā",
@@ -87,23 +103,6 @@
         "714d54ae7924cfcb2c825b0034bafb8ab7782232a2f4077c4d655473547c84e3",
         "28e0b40b0a26df80db84d1b821cba380eb080de6ed8e48d35be91429d67f3a2a",
         "c265ab0d6a574a70d90d169bc81cb84320465ce7e9f5a88a34d22c01c6317231"
-      ],
-      "originalQuestionTextChanged": false,
-      "maySynthesizeAutomatically": false
-    },
-    {
-      "order": 5,
-      "questionId": "kids-quiz-046",
-      "ageBand": "9-10",
-      "category": "Zakāh",
-      "missingOriginalTextCountForQuestion": 4,
-      "incrementalDistinctNewOriginals": 4,
-      "incrementalNewCharacters": 105,
-      "newOriginalTextSHA256": [
-        "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
-        "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30",
-        "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
-        "7e9ac0c6d55d39e7178b95063868512bebdb585f2614d860bc31e224ffa8acba"
       ],
       "originalQuestionTextChanged": false,
       "maySynthesizeAutomatically": false
@@ -727,8 +726,8 @@
         "kids-quiz-045",
         "kids-quiz-080",
         "kids-quiz-031",
-        "kids-quiz-041",
         "kids-quiz-046",
+        "kids-quiz-041",
         "kids-quiz-520",
         "kids-quiz-044",
         "kids-quiz-025",
@@ -745,8 +744,8 @@
         "kids-quiz-094",
         "kids-quiz-147"
       ],
-      "newDistinctOriginals": 74,
-      "newOriginalCharacters": 2347,
+      "newDistinctOriginals": 73,
+      "newOriginalCharacters": 2335,
       "incrementalOriginalTextSha256": [
         "69e960d76c59a506808b0908ef47bc739cf012086feba91e5b271210ebc225c5",
         "3b43d4566de6a39db5785d2c137ecefd989a1a683ed9d85eec94b243f6024a88",
@@ -820,8 +819,7 @@
         "d956e6103cfb5513a61f2ebb2d5b493670cfd90f6f0fc92d8e48d7fbaf186e79",
         "7b60c8badf8b3f5d29293f91425f62ee2bc03ad2b2c26b4ff9a747bd6bf6607b",
         "3760c9455930fa987546d5a6d2ff37de6990a91aeefe51a1adc9fb74bb56d00b",
-        "dc6ecad04fc7acbebed8fa7d3143de39cc72d685360a327bb92c7509de6a34c1",
-        "7e9ac0c6d55d39e7178b95063868512bebdb585f2614d860bc31e224ffa8acba"
+        "dc6ecad04fc7acbebed8fa7d3143de39cc72d685360a327bb92c7509de6a34c1"
       ],
       "projectedFullFourPartQuestionsIfAllPreviousStageFilesVerified": {
         "7-8": 16,
@@ -2272,14 +2270,6 @@
       "spokenText": "Wovor warnte Luqmān seinen Sohn besonders?",
       "sha256": "5929ba45ede080ea0aa75020030b99af5e6014843dfaaec3cdb0aeb42456fe49",
       "characterCount": 42,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Zakāh geben.",
-      "sha256": "7e9ac0c6d55d39e7178b95063868512bebdb585f2614d860bc31e224ffa8acba",
-      "characterCount": 12,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
