@@ -36,9 +36,13 @@ jobs:
           import json
           from pathlib import Path
           hold=json.loads(Path('kids/data/quiz-v4-pronunciation-hold.json').read_text(encoding='utf-8'))
-          assert hold['productionPaused'] is True
+          assert hold['productionPaused'] is False
+          assert hold['dictionaryProviderVerified'] is True
+          assert hold['ownerRestartAuthorized'] is True
+          assert hold['authorizedNewOriginalsBeforeHearing'] == 1
+          assert hold['humanListeningQualityGateReleased'] is False
           assert hold['humanPronunciationApproved'] is False
           public=json.loads(Path('kids/data/quiz-curation-release.json').read_text(encoding='utf-8'))
           assert public['enabled'] is False
-          print('ZERO-CREDIT V4 PREFLIGHT ENDED; no TTS POST, no public app modification.')
+          print('ZERO-CREDIT V4 MASTER PREFLIGHT: one paid pilot may be manually started; none started by this test, public remains OFF.')
           PY
