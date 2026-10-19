@@ -296,9 +296,9 @@ const EDITOR_FILES = new Set([
  ACADEMY_NEW_ROOT + "/startseiten-studio-v3.css",
  ACADEMY_NEW_ROOT + "/startseiten-studio-v3.js"
 ]);
-const EDITOR_PASSWORD_SALT = "35cf74c4b11aa0ce611ea7a23a212b1d67235c45443e637d";
-const EDITOR_PASSWORD_VERIFIER = "4ca6fa337a1431146b7011e1e08475d0e67b3729e7cafaf3dc349447cc1d6fbc";
-const EDITOR_PASSWORD_ITERATIONS = 420000;
+const EDITOR_PASSWORD_SALT = "2440a5958623db7d9748279df424babba1dcd99489ea7386";
+const EDITOR_PASSWORD_VERIFIER = "fb151b989e428b52911b243f834f9d795a7651e4f455d9d783456b69d92dd5c9";
+const EDITOR_PASSWORD_ITERATIONS = 100000;
 function editorHex(bytes) {
  let hex = "";
  for(const value of bytes) hex += value.toString(16).padStart(2,"0");
@@ -320,9 +320,15 @@ async function editorPasswordMatches(input) {
  if(!salt||!expected||!input||input.length>256)return false;
  const encoder = new TextEncoder();
  const key=await crypto.subtle.importKey("raw",encoder.encode(input),"PBKDF2",false,["deriveBits"]);
- const digest=await crypto.subtle.deriveBits({
-  name:"PBKDF2",salt,iterations:EDITOR_PASSWORD_ITERATIONS,hash:"SHA-256"
- },key,256);
+ let digest;
+ try {
+  digest=await crypto.subtle.deriveBits({
+   name:"PBKDF2",salt,iterations:EDITOR_PASSWORD_ITERATIONS,hash:"SHA-256"
+  },key,256);
+ } catch (error) {
+  console.error("Editor password verifier unavailable:",String(error&&error.name||"crypto error"));
+  return false;
+ }
  const actual=new Uint8Array(digest);
  let different=0;
  for(let i=0;i<32;i++)different|=actual[i]^expected[i];
