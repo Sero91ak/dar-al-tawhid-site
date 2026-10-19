@@ -41,11 +41,24 @@ button,select,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.
  .preview-only .studio-panel,.preview-only .mobile-controls{display:none!important}
 }
 @media(min-width:881px){.studio-panel.drawer-closed{display:block!important}}
+
+/* Compact two-row iPhone editing toolbar, independent of template themes */
+@media(max-width:880px){
+ .studio-brand{order:0!important;flex:1 1 140px!important;white-space:nowrap}
+ .studio-brand small{display:none!important}
+ #togglePreview{order:1!important;flex:0 0 auto!important}
+ .studio-top .devices{order:2!important;flex:1 1 110px!important;min-width:80px!important;max-width:calc(100% - 205px);gap:3px!important;overflow-x:auto!important}
+ .studio-top .devices button{min-width:43px!important;min-height:34px!important}
+ .studio-top select{order:3!important;width:112px!important;max-width:112px!important;flex:0 0 112px!important}
+ #exportHtml{order:4!important;flex:0 0 82px!important;min-width:82px!important;padding:5px!important;font-size:11px!important}
+ .studio-top{min-height:92px!important}.studio-top .chip{min-height:35px!important}
+ body:has(.studio-panel:not(.drawer-closed)) .mobile-controls{display:none!important}
+}
 </style></head><body><div class="studio-app"><header class="studio-top">
 <div class="studio-brand"><div class="mark">DĀR AL TAWḤĪD</div><small>Startseiten-Studio · V4.7 · eigene Entwürfe</small></div>
 <div class="devices" aria-label="Vorschaugerät"><button class="chip" data-size="320">320</button><button class="chip active" data-size="390">iPhone</button><button class="chip" data-size="430">430</button><button class="chip" data-size="768">iPad</button><button class="chip" data-size="1024">Desktop</button></div>
 <select class="control" id="theme" aria-label="Erscheinungsbild"><option value="light">Klassisch Hell</option><option value="soft" selected>Sanft Elegant</option><option value="eisgold">Eisgold</option><option value="salbei">Salbei Elfenbein</option><option value="dark">Klassisch Dunkel</option><option value="royal">Royal Nachtblau</option><option value="bordeaux">Bordeaux Royal</option><option value="dar-al-layl">Dār al-Layl</option></select>
-<button class="chip" id="togglePreview" type="button">Vorschau</button><button class="chip action-primary" id="exportHtml" type="button">HTML exportieren</button></header>
+<button class="chip" id="togglePreview" type="button">Vorschau</button><button class="chip action-primary" id="exportHtml" type="button">Export HTML</button></header>
 <main class="studio-canvas" id="canvas" aria-label="Bearbeitbare Startseiten-Vorschau"><div class="frame-space" id="frameSpace"><iframe id="preview" title="DĀR AL TAWḤĪD Startseiten-Layout" sandbox="allow-scripts allow-same-origin allow-downloads" referrerpolicy="no-referrer"></iframe></div></main>
 <aside class="studio-panel drawer-closed" id="panel" aria-label="Layout-Einstellungen"><div class="panel-row" style="justify-content:space-between;align-items:center"><h2 class="panel-title">Layout-Werkzeuge</h2><button class="chip" id="closePanel" type="button" style="flex:0 0 auto;font-size:12px">Schließen</button></div><p class="panel-sub">Ein Element antippen. Änderungen werden sofort sichtbar und auf diesem Gerät gespeichert.</p>
 <div class="field"><label for="element">Ausgewählter Bereich</label><select id="element"><option value="">Element auswählen ...</option></select><div class="panel-pill" id="selectionName">Element auswählen</div><div class="help" id="geometry">Tippe einen Text oder Abschnitt in der Vorschau an.</div></div>
