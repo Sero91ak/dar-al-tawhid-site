@@ -16,24 +16,23 @@
         "await-connected-flow-only": 1
       },
       "9-10": {
-        "new-original-v4-needed": 142,
+        "new-original-v4-needed": 143,
         "await-connected-flow-only": 2,
         "complete-v4-review": 4,
-        "both-prepaid-recovery-and-new-v4": 2
+        "both-prepaid-recovery-and-new-v4": 1
       }
     },
     "alreadyTechnicallyComplete": 80,
     "questionsBlockedOnlyOnAlreadyPaidNine": 80,
     "questionsWaitingOnlyForConnectedFlowOriginals": 3,
-    "connectedFlowOriginalTextsPendingOrReserved": 9,
+    "connectedFlowOriginalTextsPendingOrReserved": 8,
     "connectedFlowUnsettledStatuses": {
       "GENERATION_SUBMITTED_DO_NOT_RETRY": 1,
-      "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED": 7,
-      "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT": 1
+      "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED": 7
     },
     "questionsNeedingAtLeastOneGenuinelyNewOriginal": 287,
     "previouslyPaidMissingGenerationCount": 9,
-    "reservedFlowOriginalsExcludedFromNewChargeQueue": 9,
+    "reservedFlowOriginalsExcludedFromNewChargeQueue": 8,
     "previouslyPaidMissingGenerationIds": [
       "1UAwmEQ77D4BmA9DttHZ",
       "2xy9ZLej1wPTrnvAr9p7",
@@ -47,8 +46,8 @@
     ],
     "missingGenuineNewExactSegments": 1359,
     "missingGenuineNewTextCodepoints": 64195,
-    "distinctPreviouslySavedOriginalTextKeys": 398,
-    "directPaidOriginalsWithUniqueReceipts": 351,
+    "distinctPreviouslySavedOriginalTextKeys": 399,
+    "directPaidOriginalsWithUniqueReceipts": 352,
     "newElevenLabsCreditsSpent": 0,
     "paidSynthesisAuthorized": false,
     "humanListeningApproved": false,
@@ -8623,11 +8622,9 @@
     {
       "questionId": "kids-quiz-046",
       "ageBand": "9-10",
-      "status": "both-prepaid-recovery-and-new-v4",
+      "status": "new-original-v4-needed",
       "missingPreviouslyPaidGenerationIds": [],
-      "missingConnectedFlowOriginalTextSha256": [
-        "7e9ac0c6d55d39e7178b95063868512bebdb585f2614d860bc31e224ffa8acba"
-      ],
+      "missingConnectedFlowOriginalTextSha256": [],
       "missingNewTextSha256": [
         "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
         "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
@@ -8638,9 +8635,7 @@
       "incompleteParts": {
         "question": {
           "alreadyPaidNotYetImported": [],
-          "awaitingConnectedFlowOriginalTextSha256": [
-            "7e9ac0c6d55d39e7178b95063868512bebdb585f2614d860bc31e224ffa8acba"
-          ],
+          "awaitingConnectedFlowOriginalTextSha256": [],
           "newOriginalTextSha256": [
             "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
             "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59"
@@ -16161,7 +16156,7 @@
       "questionId": "kids-quiz-046",
       "ageBand": "9-10",
       "requiresPrepaidRecovery": false,
-      "requiresConnectedFlowResolution": true,
+      "requiresConnectedFlowResolution": false,
       "incrementalUnrecordedSegmentCount": 3,
       "incrementalUnicodeCodepoints": 93,
       "cumulativeNewUniqueSegments": 689,
@@ -18885,11 +18880,6 @@
     {
       "sourceTextSha256": "c265ab0d6a574a70d90d169bc81cb84320465ce7e9f5a88a34d22c01c6317231",
       "status": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
-      "newSynthesisAllowed": false
-    },
-    {
-      "sourceTextSha256": "7e9ac0c6d55d39e7178b95063868512bebdb585f2614d860bc31e224ffa8acba",
-      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
       "newSynthesisAllowed": false
     }
   ],
