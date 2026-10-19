@@ -517,7 +517,7 @@
         "kids-quiz-046"
       ],
       "sourceAudioPart": "question",
-      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
+      "status": "IMPORTED_ORIGINAL_MP3_VERIFIED",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -532,7 +532,10 @@
       "providerGenerationDurationSeconds": 1.52,
       "providerStatus": "completed",
       "providerMediaStoredInElevenLabs": true,
-      "originalMP3ImportedIntoGithub": false
+      "originalMP3ImportedIntoGithub": true,
+      "importedMP3SHA256": "48edcc1b525aa04d9691bfbb7fbe6094d14d087824a695d9f0f2d81958ef2734",
+      "savedURL": "/kids/assets/kids-quiz-audio/v4-connected-flow-original-review/UoyfOZJg4ysPhTee41ru.mp3",
+      "originalMP3Bytes": 42664
     },
     {
       "sourceText": "Angeben.",
