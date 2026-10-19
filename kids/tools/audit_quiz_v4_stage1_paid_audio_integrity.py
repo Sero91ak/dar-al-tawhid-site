@@ -76,16 +76,27 @@ def validate():
     ensure(isinstance(attempts,list),"no original POST attempt records")
     ensure(len(attempts)==len({x.get("textSHA256") for x in attempts}),
            "multiple charged attempts reference a single original")
-    uncertain=[x for x in attempts if x.get("status")!="ORIGINAL_MP3_SAVED"]
-    ensure(not uncertain,
-           "unconfirmed billed POST requires manual recovery before more production")
-    ensure(len(attempts)==len(rows) and
-           {x["textSHA256"] for x in attempts}==set(recorded),
-           "provider requests diverge from real billed originals")
+    uncertain=[x for x in attempts if x.get("status")=="REQUEST_STARTED_UNCONFIRMED"]
+    saved_attempts=[x for x in attempts if x.get("status")=="ORIGINAL_MP3_SAVED"]
+    ensure(len(saved_attempts)+len(uncertain)==len(attempts),
+           "unknown provider paid POST journal status")
+    ensure(len(saved_attempts)==len(rows) and
+           {x["textSHA256"] for x in saved_attempts}==set(recorded),
+           "saved provider requests diverge from real billed originals")
+    uncertain_shas={x.get("textSHA256") for x in uncertain}
+    ensure(uncertain_shas<=set(source) and not (uncertain_shas & set(recorded)),
+           "unconfirmed paid POST collides with recorded original or unapproved text")
+    for entry in uncertain:
+        digest=entry["textSHA256"]
+        text=source[digest]
+        ensure(text not in registry["textClips"]
+               and not entry.get("providerRequestId")
+               and not entry.get("mp3SHA256"),
+               "uncertain provider take has registered MP3 bytes; reconcile before use")
     visited_requests=set()
     sha_mp3=set()
     checked=[]
-    for entry in attempts:
+    for entry in saved_attempts:
         digest=entry["textSHA256"]
         row=recorded[digest]
         text=source[digest]
@@ -137,6 +148,10 @@ def validate():
             "totalNewOriginals":total_recorded,
             "sourceRemaining":65-total_recorded,
             "requestJournalReconciled":True,
+            "allPaidRequestsResolved":not uncertain,
+            "uncertainOriginalRequestCount":len(uncertain),
+            "uncertainOriginalRequestTextSHA256":sorted(uncertain_shas),
+            "blockedFromDuplicatePaidRequests":True,
             "distinctProviderRequestIds":len(visited_requests),
             "realMP3BytesChecked":len(checked),
             "exactProviderCreditsReconciled":False,
