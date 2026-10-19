@@ -1,6 +1,7 @@
 import Foundation
 import UserNotifications
 import UIKit
+import CoreLocation
 #if !targetEnvironment(macCatalyst)
 import OneSignalFramework
 #endif
@@ -240,6 +241,40 @@ enum DarPushNotifications {
                 applyPrayerReminderLane(settings: clean)
             }
         }
+    }
+
+    /// Preserve GPS travel updates when the WebView is suspended.
+    /// The manual city is never replaced. The push server is synced at most
+    /// once per 15 minutes during repeated significant-location callbacks.
+    static func applyNativeLocation(_ location: CLLocation) {
+        var settings = storedWebSettings()
+        guard settings["locationMode"] as? String == "auto" else { return }
+        let lat = location.coordinate.latitude
+        let lon = location.coordinate.longitude
+        let oldLat = number(settings["lat"])
+        let oldLon = number(settings["lon"])
+        let delta: CLLocationDistance
+        if let oldLat, let oldLon,
+           CLLocationCoordinate2DIsValid(CLLocationCoordinate2D(latitude: oldLat, longitude: oldLon)) {
+            delta = CLLocation(latitude: oldLat, longitude: oldLon).distance(from: location)
+        } else { delta = .greatestFiniteMagnitude }
+        guard delta >= 700 else { return }
+        settings["lat"] = lat
+        settings["lon"] = lon
+        settings["locationUpdatedAt"] = Date().timeIntervalSince1970 * 1000
+        settings["locationGranted"] = true
+        if delta >= 1500 { settings["city"] = "Ort wird ermittelt …" }
+        UserDefaults.standard.set(settings, forKey: settingsKey)
+        var snap = DarWidgetStore.load()
+        snap.latitude = lat
+        snap.longitude = lon
+        if delta >= 1500 { snap.cityLabel = "Standort erkannt" }
+        DarWidgetStore.save(DarDailyContent.refresh(snap))
+        let syncKey = "dar.ios.location.last.server.sync"
+        let last = UserDefaults.standard.double(forKey: syncKey)
+        guard Date().timeIntervalSince1970 - last > 900 else { return }
+        UserDefaults.standard.set(Date().timeIntervalSince1970, forKey: syncKey)
+        syncWithServerThenScheduleLocalFallback(force: true)
     }
 
     /// WKWebView JSON often includes NSNull for lat/lon; UserDefaults rejects that.
