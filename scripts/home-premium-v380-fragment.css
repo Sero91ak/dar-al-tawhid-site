@@ -233,4 +233,24 @@ body.is-home-route .footer strong{font-size:14px}
   .home-v380-post-slider,.home-v380-lib-grid{scroll-behavior:auto}
 }
 .home-v380-app-status,.home-push-strip{display:none!important}
+
+/* Unicode-safe article headings: use genuine font weights and stable script fallback. */
+.home-v380-post-preview{min-width:0;box-sizing:border-box}
+.home-v380-post-title{
+  font-family:ui-serif,Georgia,"Times New Roman",serif;
+  font-weight:700;font-synthesis:none;font-kerning:normal;
+  overflow-wrap:anywhere;word-break:normal;hyphens:auto;
+  line-height:1.32;min-width:0;
+}
+.home-v380-post-excerpt,.home-v380-post-meta{
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-weight:500;font-synthesis:none;line-height:1.5;
+  overflow-wrap:anywhere;word-break:normal;min-width:0;
+}
+.home-v380-post-preview :is([lang="ar"],[dir="rtl"]){
+  font-family:"Geeza Pro","Noto Naskh Arabic","Noto Sans Arabic",serif;
+  font-synthesis:none;direction:rtl;unicode-bidi:isolate;line-height:1.75;
+}
+.home-v380-post-slider{scroll-padding-inline:2px;min-width:0}
+.home-v380-post-slider > .home-v380-post-preview{scroll-snap-align:start}
 </style>
