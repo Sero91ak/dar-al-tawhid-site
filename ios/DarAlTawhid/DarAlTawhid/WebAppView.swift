@@ -657,6 +657,8 @@ struct WebAppView: UIViewRepresentable {
         webView.scrollView.canCancelContentTouches = true
         webView.scrollView.backgroundColor = bootInk
         webView.scrollView.alwaysBounceVertical = false
+        // DAR_ADULT_TOP_SCROLL_BOUNDARY_V1: prevent WKWebView rubber-band at edges.
+        webView.scrollView.bounces = false
         webView.allowsBackForwardNavigationGestures = true
         webView.isOpaque = true
         webView.backgroundColor = bootInk
