@@ -347,13 +347,13 @@ async function fetchVersionBuild(base) {
     for (let attempt=1;attempt<=5;attempt++) {
       try {
         const shell=await fetchText(base+"/?scroll-v4-check="+Date.now());
-        const js=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-hero-edge-v6");
-        const css=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-hero-edge-v6");
+        const js=await fetchText(base+"/test/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-scroll-viewport-v7");
+        const css=await fetchText(base+"/test/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-scroll-viewport-v7");
         const htmlOk=shell.status===200
           &&shell.text.includes("darAdultTopBoundaryJsV1")
-          &&shell.text.includes("20261020-hero-edge-v6");
+          &&shell.text.includes("20261020-scroll-viewport-v7");
         const jsOk=js.status===200&&js.text.includes("DAR_ADULT_TOP_SCROLL_BOUNDARY_V3")
-          &&js.text.includes("Math.abs(dy)>=1")&&js.text.includes('stepY>0?"up":"down"')&&js.text.includes("DAR_GLOBAL_ADULT_HERO_EDGE_BINDING_V6")&&js.text.includes("Math.ceil(active.top+68)")&&js.text.includes("getBoundingClientRect()")&&js.text.includes("--dar-hero-edge-height");
+          &&js.text.includes("window.innerHeight")&&js.text.includes('stepY>0?"up":"down"')&&js.text.includes("DAR_GLOBAL_ADULT_HERO_EDGE_BINDING_V6");
         const cssOk=css.status===200&&css.text.includes("overscroll-behavior-y:none")&&css.text.includes("DAR_GLOBAL_ADULT_HERO_SAFE_TOP_V6")&&css.text.includes("mask-image:linear-gradient")&&css.text.includes("filter:none")&&css.text.includes("height:var(--dar-hero-edge-height");
         ok=htmlOk&&jsOk&&cssOk;
         console.log("adult hero-edge v6 "+label+": html="+htmlOk+" js="+jsOk+" css="+cssOk+" attempt="+attempt+"/5");

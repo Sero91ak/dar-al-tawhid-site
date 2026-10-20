@@ -41,8 +41,13 @@ function canScroll(direction){
  if(scope)return false;
  var scroll=document.scrollingElement||document.documentElement;
  if(!scroll)return false;
- max=Math.max(0,scroll.scrollHeight-scroll.clientHeight);
- var offset=Math.max(0,scroll.scrollTop||window.scrollY||0);
+ /* html.clientHeight can equal the content height while the visual
+  * viewport is shorter. Comparing only those two values reported
+  * "nothing to scroll" and preventDefault then froze the Test app. */
+ var viewport=window.innerHeight||scroll.clientHeight||0;
+ var extent=Math.max(scroll.scrollHeight||0,document.documentElement?document.documentElement.scrollHeight:0,document.body?document.body.scrollHeight:0);
+ max=Math.max(0,extent-viewport);
+ var offset=Math.max(0,window.scrollY||scroll.scrollTop||0);
  return direction==="up"?offset>0.5:offset<max-0.5;
 }
 document.addEventListener("touchstart",function(event){
