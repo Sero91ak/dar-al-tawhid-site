@@ -25,10 +25,10 @@
     "7-8": 29,
     "9-10": 27
   },
-  "allRemainingUnrecordedOlderAgeDistinctTextCount": 1330,
-  "allRemainingUnrecordedOlderAgeCharacters": 63355,
-  "newDistinctTextCountForFirst40": 156,
-  "newCharactersForFirst40": 5741,
+  "allRemainingUnrecordedOlderAgeDistinctTextCount": 1328,
+  "allRemainingUnrecordedOlderAgeCharacters": 63296,
+  "newDistinctTextCountForFirst40": 154,
+  "newCharactersForFirst40": 5682,
   "priorityQuestionSteps": [
     {
       "order": 1,
@@ -165,6 +165,21 @@
     },
     {
       "order": 10,
+      "questionId": "kids-quiz-037",
+      "ageBand": "9-10",
+      "category": "Īmān",
+      "missingOriginalTextCountForQuestion": 2,
+      "incrementalDistinctNewOriginals": 2,
+      "incrementalNewCharacters": 105,
+      "newOriginalTextSHA256": [
+        "e0928ea3ff0820299e759a5f398cd30fbecc92662cb03c7f501cc1c2e69d90f4",
+        "df70f184d1f8dc008acdc06cd43b33804731b9d58aa7c166edd84434ba5679b9"
+      ],
+      "originalQuestionTextChanged": false,
+      "maySynthesizeAutomatically": false
+    },
+    {
+      "order": 11,
       "questionId": "kids-quiz-030",
       "ageBand": "7-8",
       "category": "Adab",
@@ -181,7 +196,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 11,
+      "order": 12,
       "questionId": "kids-quiz-276",
       "ageBand": "7-8",
       "category": "Duʿāʾ",
@@ -198,7 +213,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 12,
+      "order": 13,
       "questionId": "kids-quiz-027",
       "ageBand": "7-8",
       "category": "Adab",
@@ -215,7 +230,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 13,
+      "order": 14,
       "questionId": "kids-quiz-070",
       "ageBand": "7-8",
       "category": "Tawḥīd",
@@ -233,7 +248,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 14,
+      "order": 15,
       "questionId": "kids-quiz-531",
       "ageBand": "7-8",
       "category": "Wissen",
@@ -250,7 +265,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 15,
+      "order": 16,
       "questionId": "kids-quiz-120",
       "ageBand": "7-8",
       "category": "Qurʾān",
@@ -267,7 +282,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 16,
+      "order": 17,
       "questionId": "kids-quiz-231",
       "ageBand": "7-8",
       "category": "Dhikr",
@@ -285,7 +300,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 17,
+      "order": 18,
       "questionId": "kids-quiz-024",
       "ageBand": "7-8",
       "category": "Sunnah",
@@ -302,7 +317,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 18,
+      "order": 19,
       "questionId": "kids-quiz-277",
       "ageBand": "7-8",
       "category": "Qurʾān",
@@ -320,7 +335,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 19,
+      "order": 20,
       "questionId": "kids-quiz-383",
       "ageBand": "7-8",
       "category": "Schöpfung",
@@ -338,7 +353,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 20,
+      "order": 21,
       "questionId": "kids-quiz-079",
       "ageBand": "7-8",
       "category": "Adab",
@@ -356,7 +371,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 21,
+      "order": 22,
       "questionId": "kids-quiz-073",
       "ageBand": "7-8",
       "category": "Aḫlāq",
@@ -373,7 +388,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 22,
+      "order": 23,
       "questionId": "kids-quiz-530",
       "ageBand": "7-8",
       "category": "Tawakkul",
@@ -391,7 +406,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 23,
+      "order": 24,
       "questionId": "kids-quiz-321",
       "ageBand": "7-8",
       "category": "Qurʾān",
@@ -408,7 +423,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 24,
+      "order": 25,
       "questionId": "kids-quiz-131",
       "ageBand": "7-8",
       "category": "Adab",
@@ -421,23 +436,6 @@
         "10f57a8b9debddee8f81752342f7826d662d4f1580bd5f3549f8498ab48e3292",
         "4be0e5da5ff46a7fd12a928b1da1892444715102dd3f4d3496b48af2eaca4ba9",
         "869d8949526c1c251318ffaad2a30db73e6fe8ad56956968e04dee5da6f7a084"
-      ],
-      "originalQuestionTextChanged": false,
-      "maySynthesizeAutomatically": false
-    },
-    {
-      "order": 25,
-      "questionId": "kids-quiz-037",
-      "ageBand": "9-10",
-      "category": "Īmān",
-      "missingOriginalTextCountForQuestion": 4,
-      "incrementalDistinctNewOriginals": 4,
-      "incrementalNewCharacters": 164,
-      "newOriginalTextSHA256": [
-        "2743acd226fcdf3cc9567738239a870973141a7e4e9786ff29e8312c81cf6258",
-        "570f4970e971d57e0c4bb84c50b9cdcbeceba4650f64e3cba0e8b5aec42dcfbf",
-        "e0928ea3ff0820299e759a5f398cd30fbecc92662cb03c7f501cc1c2e69d90f4",
-        "df70f184d1f8dc008acdc06cd43b33804731b9d58aa7c166edd84434ba5679b9"
       ],
       "originalQuestionTextChanged": false,
       "maySynthesizeAutomatically": false
@@ -724,20 +722,20 @@
         "kids-quiz-031",
         "kids-quiz-036",
         "kids-quiz-041",
+        "kids-quiz-037",
         "kids-quiz-030",
         "kids-quiz-276",
         "kids-quiz-027",
         "kids-quiz-070",
         "kids-quiz-531",
-        "kids-quiz-037",
         "kids-quiz-094",
         "kids-quiz-147",
         "kids-quiz-091",
         "kids-quiz-095",
         "kids-quiz-344"
       ],
-      "newDistinctOriginals": 63,
-      "newOriginalCharacters": 2288,
+      "newDistinctOriginals": 61,
+      "newOriginalCharacters": 2229,
       "incrementalOriginalTextSha256": [
         "69e960d76c59a506808b0908ef47bc739cf012086feba91e5b271210ebc225c5",
         "c0f09765841cd6fa9d2f212ad55c07b8aada32bf782fd70e83aa9b8fba6aedd0",
@@ -757,8 +755,6 @@
         "49f1f8aec14a26d134fdc37c659ad2f619c8eb1b0ea971976f419d3158d9831f",
         "f61315c7fd09b325a685b9682917d124c9c132ae2e8b6965d66613d21d6db91e",
         "998336344ec248219b666842645f4fdbbc837affb40c92a017d4afafb5f9dfa9",
-        "2743acd226fcdf3cc9567738239a870973141a7e4e9786ff29e8312c81cf6258",
-        "570f4970e971d57e0c4bb84c50b9cdcbeceba4650f64e3cba0e8b5aec42dcfbf",
         "e0928ea3ff0820299e759a5f398cd30fbecc92662cb03c7f501cc1c2e69d90f4",
         "50e1ee367eed5a02664b1dc9d49b7d5f7c9f4e899f758070647aa62d525dd6f1",
         "9df2dcf27c84e5c79234bac8e2398b23f45b95064579fe1879b1571f7474cfbd",
@@ -1238,22 +1234,6 @@
       "spokenText": "Der Gesandte Allahs ﷺ.",
       "sha256": "998336344ec248219b666842645f4fdbbc837affb40c92a017d4afafb5f9dfa9",
       "characterCount": 22,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Der Glaube an Allahs Bestimmung.",
-      "sha256": "2743acd226fcdf3cc9567738239a870973141a7e4e9786ff29e8312c81cf6258",
-      "characterCount": 32,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Der Glaube an Glückszahlen.",
-      "sha256": "570f4970e971d57e0c4bb84c50b9cdcbeceba4650f64e3cba0e8b5aec42dcfbf",
-      "characterCount": 27,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
