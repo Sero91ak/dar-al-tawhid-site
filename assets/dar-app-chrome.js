@@ -270,3 +270,22 @@
     }).observe(document.documentElement,{childList:true,subtree:true});
   }catch(e){}
 })();
+
+/* DAR_VISITOR_DUO_SIDE_NAV_V1346
+   Reuse the verified adult test navigation without touching KIDS or the test shell.
+   The normal bottom dock stays available as a user choice. */
+(function(){
+  try{
+    if(!window.location || (window.location.pathname!=="/" && window.location.pathname!=="/index.html"))return;
+    if(window.__darVisitorDuoSideNavLoading)return;
+    window.__darVisitorDuoSideNavLoading=true;
+    var css=document.createElement("link");
+    css.rel="stylesheet";
+    css.href="/assets/visitor-duo-side-nav.css?v=1346";
+    (document.head||document.documentElement).appendChild(css);
+    var js=document.createElement("script");
+    js.src="/assets/visitor-duo-side-nav.js?v=1346";
+    js.async=false;
+    (document.head||document.documentElement).appendChild(js);
+  }catch(e){}
+})();
