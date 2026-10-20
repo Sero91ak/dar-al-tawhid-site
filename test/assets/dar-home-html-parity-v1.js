@@ -18,7 +18,13 @@ var links=[
  ["books","library.png","Bibliothek","Bücher & PDFs"],["scholars","scholars.png","Gelehrte","Biografien"],
  ["books","scale.png","Quellen","Nachweise"],["duas","dua.png","Duʿāʾ","Bittgebete"],
  ["topics","topics.png","ʿAqīdah","Grundlagen"],["quran","quran.png","Qurʾān","Lesen & hören"],
- ["quiz","quiz.png","Quiz","Wissen prüfen"]
+ ["quiz","quiz.png","Quiz","Wissen prüfen"],
+ ["bibliothek","library.png","DĀR-Bibliothek","Eigene PDFs"],
+ ["quran-player","audio.png","Qurʾān-Player","Hören & Rezitation"],
+ ["zakat","zakat.png","Zakāt-Rechner","Berechnung"],
+ ["wasiyyah","wasiyyah.png","Testament","Waṣiyyah"],
+ ["propheten","prophets.png","Propheten","Geschichten"],
+ ["prayer","prayer.png","Gebetszeiten","Kalender"]
 ];
 function esc(x){return String(x==null?"":x).replace(/[&<>"']/g,function(z){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[z]})}
 function route(dest,val){if(dest==="library")dest="bibliothek"; // Open the real app library, not only the home-page tile grid.
@@ -34,13 +40,12 @@ function html(){
   '<div class="dhp-kicker">BEITRÄGE NACH QURʾĀN, SUNNAH &amp; ĀTHĀR</div>'+
   '<div class="dhp-brand"><div class="dhp-seal" id="dhpBrandSeal"></div><div class="dhp-brand-copy"><h1>DĀR AL TAWḤĪD</h1><span class="dhp-brand-rule" aria-hidden="true"></span><small>Wissen · Überlieferung · Erkenntnis</small></div></div>'+
   '<button type="button" class="dhp-prayer" data-dhp-route="prayer" aria-label="Gebetszeiten öffnen"><div class="dhp-prayer-top"><div><div class="dhp-kicker">NÄCHSTES GEBET</div><b id="dhpPrayerName">Gebetszeiten</b><div class="dhp-tiny dhp-muted">Standortabhängige Gebetszeiten</div></div><div class="dhp-prayer-right"><div class="dhp-clock" id="dhpPrayerClock">–</div><div class="dhp-tiny dhp-muted" id="dhpPrayerRemain"></div></div></div><div class="dhp-prayer-footer"><span id="dhpPrayerDate">Gebetskalender</span><span id="dhpPrayerHijri"></span><span id="dhpPrayerPlace">Standort</span></div></button>'+
-  '<h2 class="dhp-greeting">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</h2>'+
+  '<section class="dhp-welcome" aria-label="Begrüßung bei DĀR AL TAWḤĪD"><h2 class="dhp-greeting">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</h2><div class="dhp-welcome-rule" aria-hidden="true"></div><p class="dhp-intro">Willkommen bei <strong>DĀR AL TAWḤĪD</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</p></section>'+
   '<section class="dhp-isnad" aria-labelledby="dhpQuoteTitle"><div class="dhp-isnad-label" id="dhpQuoteTitle">ÜBERLIEFERUNGSMAẞSTAB</div><blockquote class="dhp-quote">„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“<div class="dhp-tiny dhp-quote-source">Muḥammad ibn Sīrīn</div></blockquote></section>'+
-  '<p class="dhp-intro">Willkommen bei <strong>DĀR AL TAWḤĪD</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</p>'+
   '<div class="dhp-quickbar" aria-label="Schnellzugriffe">'+q+'</div>'+
-  '<div class="dhp-search-box"><label class="dhp-search" for="dhpSearch"><span aria-hidden="true" class="dhp-search-icon">⌕</span><input id="dhpSearch" type="search" autocomplete="off" spellcheck="false" placeholder="Wissen, Qurʾān, Ḥadīṯ, Themen suchen …" aria-label="Intelligente Suche"><button type="button" id="dhpSearchClear" aria-label="Suche leeren">×</button></label><div id="dhpResults" class="dhp-results" hidden role="listbox"></div></div>'+
+  '<section class="dhp-search-box" aria-label="Intelligente Wissenssuche"><div class="dhp-search-pill"><span aria-hidden="true" class="dhp-search-icon">⌕</span><input id="dhpSearch" type="search" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" placeholder="Wissen, Qurʾān, Ḥadīṯ, Themen suchen …" aria-label="Intelligente Suche in allen Bereichen" aria-controls="dhpResults" aria-expanded="false"><button type="button" id="dhpSearchClear" aria-label="Suchtext löschen" hidden>×</button></div><div id="dhpResults" class="dhp-results" hidden role="listbox" aria-label="Suchergebnisse"></div></section>'+
   '<section class="dhp-section dhp-quran-section" aria-label="Qurʾān"><button type="button" class="dhp-quran-capsule" data-dhp-route="quran"><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/quran.png" alt="" loading="lazy" decoding="async"></span><span><strong>Qurʾān</strong><small id="dhpQResume">Lesen · hören · weiterlernen</small></span></button></section>'+
-  '<section class="dhp-section" aria-labelledby="dhpTodayTitle"><div class="dhp-head"><h2 id="dhpTodayTitle">Heute für dich</h2><span class="dhp-tiny dhp-muted">Tägliche Impulse</span></div><div class="dhp-two"><button type="button" class="dhp-panel dhp-smallcard" data-dhp-route="recent" id="dhpTodayArticle"><span class="dhp-kicker">EMPFEHLUNG</span><h3 id="dhpTodayName">Wissen vertiefen</h3><p>Ein ausgewählter Beitrag aus der App.</p></button><button type="button" class="dhp-panel dhp-smallcard" data-dhp-route="duas"><span class="dhp-kicker">DUʿĀʾ</span><h3>Bittgebet des Tages</h3><p>Mit Quellen und direktem Zugang.</p></button></div></section>'+
+  '<section class="dhp-section" aria-labelledby="dhpTodayTitle"><div class="dhp-head"><h2 id="dhpTodayTitle">Heute für dich</h2><span class="dhp-tiny dhp-muted">Tägliche Impulse</span></div><div class="dhp-today-stack"><button type="button" class="dhp-today-row" data-dhp-route="recent" id="dhpTodayArticle"><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/posts.png" alt="" loading="lazy"></span><span class="dhp-today-copy"><span class="dhp-kicker">EMPFEHLUNG</span><strong id="dhpTodayName">Wissen vertiefen</strong></span></button><button type="button" class="dhp-today-row" data-dhp-route="duas"><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/dua.png" alt="" loading="lazy"></span><span class="dhp-today-copy"><span class="dhp-kicker">DUʿĀʾ</span><strong>Bittgebet des Tages</strong></span></button></div></section>'+
   '<section class="dhp-section" aria-labelledby="dhpPostsTitle"><div class="dhp-head"><h2 id="dhpPostsTitle">Neueste Veröffentlichungen</h2><button type="button" data-dhp-route="recent">Alle ansehen</button></div><div id="dhpPosts" class="dhp-posts"><button type="button" class="dhp-panel dhp-feature" data-dhp-route="recent"><span class="dhp-kicker">VERÖFFENTLICHUNGEN</span><h3>Neueste Beiträge öffnen</h3><p>Aktuelle Veröffentlichungen direkt aus der App.</p></button></div></section>'+
   '<section class="dhp-section" id="dhpPopular" hidden aria-labelledby="dhpPopularTitle"><div class="dhp-head"><h2 id="dhpPopularTitle">Meist gelesen</h2><button type="button" data-dhp-route="recent">Alle ansehen</button></div><div id="dhpPopularList"></div></section>'+
   '<section class="dhp-section" id="dhpLibrary" aria-labelledby="dhpLibraryTitle"><div class="dhp-head"><h2 id="dhpLibraryTitle">Wissen direkt öffnen</h2><button type="button" data-dhp-route="more">Alle Bereiche</button></div><div class="dhp-library">'+l+'</div></section>'+
@@ -195,7 +200,13 @@ function create(){
   root.innerHTML=html();top.insertAdjacentElement("afterend",root);
   root.addEventListener("click",click);
   var inp=root.querySelector("#dhpSearch");
-  if(inp){inp.addEventListener("input",input);inp.addEventListener("keydown",function(e){
+  if(inp){
+   var pill=root.querySelector(".dhp-search-pill");
+   if(pill)pill.addEventListener("click",function(e){if(e.target.closest("#dhpSearchClear"))return;inp.focus()});
+   inp.addEventListener("input",input);
+   inp.addEventListener("focus",function(){root.querySelector(".dhp-search-box").classList.add("is-focused")});
+   inp.addEventListener("blur",function(){root.querySelector(".dhp-search-box").classList.remove("is-focused")});
+   inp.addEventListener("keydown",function(e){
    if(e.key==="Escape"){root.querySelector("#dhpResults").hidden=true;inp.blur()}
    if(e.key==="Enter"){var first=root.querySelector("#dhpResults .dhp-result");if(first){e.preventDefault();first.click()}}
   })}
@@ -222,27 +233,40 @@ function input(){
  var root=document.getElementById(ID),inp=root&&root.querySelector("#dhpSearch");
  if(!inp)return;
  clearTimeout(inputTimer);
- var box=root.querySelector("#dhpResults");
+ var box=root.querySelector("#dhpResults"), clear=root.querySelector("#dhpSearchClear");
  var q=String(inp.value||"").trim();
+ if(clear)clear.hidden=!q;
+ inp.setAttribute("aria-expanded",q.length>=2?"true":"false");
  if(q.length<2){box.hidden=true;box.replaceChildren();return}
  inputTimer=setTimeout(function(){
   var api=window.DarTestSmartSearchV48;
   var start=api&&api.load?api.load():Promise.resolve();
   Promise.resolve(start).then(function(){
    if(!inp.isConnected||inp.value.trim()!==q)return;
-   var found=api&&api.find?api.find(q).slice(0,7):[];
+   var found=api&&api.find?api.find(q).slice(0,9):[];
    box.replaceChildren();
-   if(!found.length){var p=document.createElement("div");p.className="dhp-result";p.textContent="Keine direkten Titel gefunden – Suche verfeinern";box.appendChild(p)}
+   var title=document.createElement("div");title.className="dhp-results-head";
+   var heading=document.createElement("strong");heading.textContent="Suchergebnisse";
+   var count=document.createElement("span");count.textContent=found.length+" Treffer";
+   title.append(heading,count);box.append(title);
+   var list=document.createElement("div");list.className="dhp-results-list";
+   if(!found.length){
+    var empty=document.createElement("p");empty.className="dhp-empty-search";
+    empty.textContent="Keine direkten Treffer. Versuche eine andere Schreibweise oder einen verwandten Begriff.";
+    list.append(empty);
+   }
    found.forEach(function(a){
     var b=document.createElement("button");b.type="button";b.className="dhp-result";b.setAttribute("role","option");
     b.dataset.dhpRoute=a.hash?"hash":(a.route||"topics");
     if(a.hash)b.dataset.dhpValue=a.hash;
-    var label=document.createElement("span");label.textContent=a.label||a.title||"";
-    var kind=document.createElement("small");kind.textContent=a.group||"Wissen";
-    b.appendChild(label);b.appendChild(kind);box.appendChild(b);
+    var label=document.createElement("strong");label.className="dhp-result-title";
+    label.textContent=a.label||a.title||"";
+    var kind=document.createElement("span");kind.className="dhp-result-group";
+    kind.textContent=a.group==="Beiträge"?"Beitrag":(a.group||"Wissen");
+    b.append(label,kind);list.append(b);
    });
-   box.hidden=false;
-  }).catch(function(){box.hidden=true});
+   box.append(list);box.hidden=false;
+  }).catch(function(){box.hidden=true;inp.setAttribute("aria-expanded","false")});
  },120);
 }
 function updateBrand(){
@@ -289,7 +313,7 @@ function recent(){
  target.replaceChildren();
  list.slice(0,4).forEach(function(p,i){
   var btn=document.createElement("button");btn.type="button";
-  btn.className=i?"dhp-article":"dhp-panel dhp-feature";
+  btn.className=i?"dhp-article dhp-post-capsule":"dhp-panel dhp-feature dhp-post-capsule";
   btn.dataset.dhpRoute="post";btn.dataset.dhpValue=p.id;
   if(i===0){
    var tag=document.createElement("span");tag.className="dhp-kicker";tag.textContent="NEUESTE VERÖFFENTLICHUNG";
