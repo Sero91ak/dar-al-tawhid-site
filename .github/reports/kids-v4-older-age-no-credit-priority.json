@@ -18,17 +18,17 @@
   },
   "remainingOlderAgeSelectedQuestions": 260,
   "baselineFullFourPartQuestions": {
-    "7-8": 52,
-    "9-10": 60
+    "7-8": 56,
+    "9-10": 63
   },
   "projectedFullQuestionsOnlyIfEveryListedAuthenticMP3IsLaterGeneratedAndVerified": {
-    "7-8": 72,
-    "9-10": 80
+    "7-8": 76,
+    "9-10": 83
   },
-  "allRemainingUnrecordedOlderAgeDistinctTextCount": 829,
-  "allRemainingUnrecordedOlderAgeCharacters": 41598,
-  "newDistinctTextCountForFirst40": 112,
-  "newCharactersForFirst40": 5385,
+  "allRemainingUnrecordedOlderAgeDistinctTextCount": 768,
+  "allRemainingUnrecordedOlderAgeCharacters": 39427,
+  "newDistinctTextCountForFirst40": 99,
+  "newCharactersForFirst40": 4943,
   "priorityQuestionSteps": [
     {
       "order": 1,
@@ -204,6 +204,20 @@
     },
     {
       "order": 13,
+      "questionId": "kids-quiz-271",
+      "ageBand": "7-8",
+      "category": "Adab",
+      "missingOriginalTextCountForQuestion": 1,
+      "incrementalDistinctNewOriginals": 1,
+      "incrementalNewCharacters": 74,
+      "newOriginalTextSHA256": [
+        "14afc3b0a4d906a6b904f55ce0cde04f976e51f3665e01644431d5da23c14305"
+      ],
+      "originalQuestionTextChanged": false,
+      "maySynthesizeAutomatically": false
+    },
+    {
+      "order": 14,
       "questionId": "kids-quiz-573",
       "ageBand": "7-8",
       "category": "Tawḥīd",
@@ -217,7 +231,22 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 14,
+      "order": 15,
+      "questionId": "kids-quiz-131",
+      "ageBand": "7-8",
+      "category": "Adab",
+      "missingOriginalTextCountForQuestion": 2,
+      "incrementalDistinctNewOriginals": 2,
+      "incrementalNewCharacters": 88,
+      "newOriginalTextSHA256": [
+        "3b5971737a02434d3ae8aafb2c67c9d68733c7b1184519fce1f7666835d29c84",
+        "10f57a8b9debddee8f81752342f7826d662d4f1580bd5f3549f8498ab48e3292"
+      ],
+      "originalQuestionTextChanged": false,
+      "maySynthesizeAutomatically": false
+    },
+    {
+      "order": 16,
       "questionId": "kids-quiz-041",
       "ageBand": "9-10",
       "category": "Taqwā",
@@ -233,7 +262,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 15,
+      "order": 17,
       "questionId": "kids-quiz-036",
       "ageBand": "9-10",
       "category": "Islam",
@@ -247,7 +276,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 16,
+      "order": 18,
       "questionId": "kids-quiz-024",
       "ageBand": "7-8",
       "category": "Sunnah",
@@ -262,7 +291,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 17,
+      "order": 19,
       "questionId": "kids-quiz-097",
       "ageBand": "9-10",
       "category": "Ṣalāh",
@@ -276,7 +305,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 18,
+      "order": 20,
       "questionId": "kids-quiz-040",
       "ageBand": "9-10",
       "category": "Adab",
@@ -290,7 +319,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 19,
+      "order": 21,
       "questionId": "kids-quiz-137",
       "ageBand": "9-10",
       "category": "Iḥsān",
@@ -304,7 +333,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 20,
+      "order": 22,
       "questionId": "kids-quiz-499",
       "ageBand": "9-10",
       "category": "Duʿāʾ",
@@ -318,7 +347,21 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 21,
+      "order": 23,
+      "questionId": "kids-quiz-135",
+      "ageBand": "9-10",
+      "category": "Iḥsān",
+      "missingOriginalTextCountForQuestion": 1,
+      "incrementalDistinctNewOriginals": 1,
+      "incrementalNewCharacters": 115,
+      "newOriginalTextSHA256": [
+        "941b152c84c018e0c60fa5bc81cf00656d3b0226c51cfa1bab9dc8aeeddec1d1"
+      ],
+      "originalQuestionTextChanged": false,
+      "maySynthesizeAutomatically": false
+    },
+    {
+      "order": 24,
       "questionId": "kids-quiz-487",
       "ageBand": "9-10",
       "category": "Tazkiyyah",
@@ -333,59 +376,123 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 22,
-      "questionId": "kids-quiz-131",
+      "order": 25,
+      "questionId": "kids-quiz-589",
+      "ageBand": "9-10",
+      "category": "Ṣalāh",
+      "missingOriginalTextCountForQuestion": 2,
+      "incrementalDistinctNewOriginals": 2,
+      "incrementalNewCharacters": 153,
+      "newOriginalTextSHA256": [
+        "76b548ae116b05527a5cb6f37c55a6e32a2e891c59267524b8723136c6c7fdca",
+        "5e0e2fc9242d6e8a2a92f65f527eb72ecf9157b36231161e584b71a1c4ced4c8"
+      ],
+      "originalQuestionTextChanged": false,
+      "maySynthesizeAutomatically": false
+    },
+    {
+      "order": 26,
+      "questionId": "kids-quiz-124",
       "ageBand": "7-8",
-      "category": "Adab",
-      "missingOriginalTextCountForQuestion": 5,
-      "incrementalDistinctNewOriginals": 5,
+      "category": "Qurʾān",
+      "missingOriginalTextCountForQuestion": 4,
+      "incrementalDistinctNewOriginals": 4,
+      "incrementalNewCharacters": 161,
+      "newOriginalTextSHA256": [
+        "52d7383320beb16f7801bdd6f7d0f39b56573bfbd0437604871de08d99fb0c22",
+        "c5e37e7249f56be03fbb05446024ba9190b4a1845dabfd72300b3f09a2c7ec3e",
+        "0b01af7aaa5e65c78a698c4b5195fabf9105ac4c2d373d8878a942d8da2ef174",
+        "7247e5490a17e9b415f139dfb6eea2d137d62270b703a0dabaf6c36aa406bfc4"
+      ],
+      "originalQuestionTextChanged": false,
+      "maySynthesizeAutomatically": false
+    },
+    {
+      "order": 27,
+      "questionId": "kids-quiz-323",
+      "ageBand": "7-8",
+      "category": "Duʿāʾ",
+      "missingOriginalTextCountForQuestion": 3,
+      "incrementalDistinctNewOriginals": 3,
+      "incrementalNewCharacters": 162,
+      "newOriginalTextSHA256": [
+        "58561f3616707c602529b4ed320f27c2c82a765089d394ff06fb446708c4280c",
+        "a266ab5e55bdef6d830a00070b4c9e89edc9f0c121198cbd27b1ed70c5d839d0",
+        "6da30dbd757057d870abe2544acb34f12eb619978e9f106b45eb292899eb52e0"
+      ],
+      "originalQuestionTextChanged": false,
+      "maySynthesizeAutomatically": false
+    },
+    {
+      "order": 28,
+      "questionId": "kids-quiz-226",
+      "ageBand": "7-8",
+      "category": "Īmān",
+      "missingOriginalTextCountForQuestion": 4,
+      "incrementalDistinctNewOriginals": 4,
       "incrementalNewCharacters": 163,
       "newOriginalTextSHA256": [
-        "3b5971737a02434d3ae8aafb2c67c9d68733c7b1184519fce1f7666835d29c84",
-        "a00c7b94ac1708e1ba8d937020d245e62975e8e1157c4dd07a57b664a31089b9",
-        "10f57a8b9debddee8f81752342f7826d662d4f1580bd5f3549f8498ab48e3292",
-        "4be0e5da5ff46a7fd12a928b1da1892444715102dd3f4d3496b48af2eaca4ba9",
-        "869d8949526c1c251318ffaad2a30db73e6fe8ad56956968e04dee5da6f7a084"
+        "1a0ea46c59b52132aead3245dba335a40d2cb556bf39672456e1837a486c5aac",
+        "0f8190c86c1b9dc9888bb01b80cf5a69550f4089b6cfc283c427c82156cd8550",
+        "4bb533c0dc812929c489231d3ff00f27ba92fd4bbfca5a77d68a83bd0b5b40f9",
+        "80eb355d0dc562b3445a1fc899cd1a02e1f8ddfc7ba5bb7145397d6649777c16"
       ],
       "originalQuestionTextChanged": false,
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 23,
-      "questionId": "kids-quiz-743",
+      "order": 29,
+      "questionId": "kids-quiz-184",
       "ageBand": "7-8",
-      "category": "Aḫlāq",
+      "category": "Qurʾān",
       "missingOriginalTextCountForQuestion": 4,
       "incrementalDistinctNewOriginals": 4,
-      "incrementalNewCharacters": 176,
+      "incrementalNewCharacters": 164,
       "newOriginalTextSHA256": [
-        "8231f7d9eb8b1d4a3c50050733dc932205580febc63e145df9a3d0f6bd05cfe0",
-        "9e1dfa823a3a50d349f18ff3d8d395a39e58a9f2aaf1ef2aab24558b4d690209",
-        "c4608bc61f895d4d07bb060df964b56d061bef0ba18977707668ee45ae0dfd49",
-        "18bb34c32d0541b99eee47c5152b92d3f4f79be20b3d88c442b60a356a7b708b"
+        "d2b8ed43c255b82e72a1f5e016bd5e4c9d6dc97dcfc29c11923aae662fa4e8d9",
+        "bae21197b2f3e067aed7e5cb6b6038803a2ed09602084fdb60d299bbe3abd231",
+        "b4a4698583f9299c0ebaa987d8d2116cecf959d9429d0675da04ffd181ca67cc",
+        "823a9acc39956effb41c6b02ee3cc0b1639f9fc49cf17cea1ca6bd85c001be18"
       ],
       "originalQuestionTextChanged": false,
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 24,
-      "questionId": "kids-quiz-220",
+      "order": 30,
+      "questionId": "kids-quiz-281",
       "ageBand": "7-8",
-      "category": "Schöpfung",
+      "category": "Ṣadaqah",
       "missingOriginalTextCountForQuestion": 4,
       "incrementalDistinctNewOriginals": 4,
-      "incrementalNewCharacters": 178,
+      "incrementalNewCharacters": 171,
       "newOriginalTextSHA256": [
-        "60167eb956e202c1b13cba2f8f112eed2f6c2e30c87478bde6dfe3bdd09323d7",
-        "bfc380113aa11b2ca75e4c550c94d905851b97f9df71dd9a1d9575905dfaea3a",
-        "c9f85e63dbc8febbcf5669ecda4f81d067c80a0a6ec508c6d5516c00e37221ef",
-        "830482a66342df280d5a7d0937f961eead34c4ceb1ba1aa3475177e5ebe45285"
+        "0f5ee9c49837c463b33a028a7cc2172ddca0013c7b7148f96a6ddd0004d38876",
+        "bec17579a48b6a3371ca225df120e926c3a1f159278b77fdecd396a6b2919d5f",
+        "1bd7c931781ab57888ca5e66c6a7e5d8d8deea50a845eee515a410d63439e8c0",
+        "8a7ec220b866ece45ff97114b4e41be2c99a0f49996756d9b8018bf633feac1b"
       ],
       "originalQuestionTextChanged": false,
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 25,
+      "order": 31,
+      "questionId": "kids-quiz-474",
+      "ageBand": "7-8",
+      "category": "Ṣalāh",
+      "missingOriginalTextCountForQuestion": 4,
+      "incrementalDistinctNewOriginals": 4,
+      "incrementalNewCharacters": 175,
+      "newOriginalTextSHA256": [
+        "5eec796d8da2d392cf7b6138a88af16af66f79e4888ac84bf01421f6a1718182",
+        "52f06a31d874942c8a99a9752db9bf2463542a49611c51955a7cb98290f6e69c",
+        "c6bfd3ec0206a45e726c0e5a5f759ec1190a484f7292e253a4ab967e0cbe7d57",
+        "18e4113e2d739fcade827e070a06e55e8f2af1e16edfaf69d284cde04fec5310"
+      ],
+      "originalQuestionTextChanged": false,
+      "maySynthesizeAutomatically": false
+    },
+    {
+      "order": 32,
       "questionId": "kids-quiz-725",
       "ageBand": "7-8",
       "category": "Dankbarkeit",
@@ -402,58 +509,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 26,
-      "questionId": "kids-quiz-751",
-      "ageBand": "7-8",
-      "category": "Aḫlāq",
-      "missingOriginalTextCountForQuestion": 4,
-      "incrementalDistinctNewOriginals": 4,
-      "incrementalNewCharacters": 178,
-      "newOriginalTextSHA256": [
-        "f3c56865cef8c28aff96579d47ec0874e7b80537aa66002c413a72e1c2909222",
-        "8fde808275fdae98804573be7ef10baeb52fa24692e25f118f8b984daa84210d",
-        "b76a4e92efdf892ce00bcc9d239d1173d338bb6bac5a49402198f9d428d9e341",
-        "81ea3f1d49587f7a79e8b525cfc684ce3a027ab42116de07cb408048639649a1"
-      ],
-      "originalQuestionTextChanged": false,
-      "maySynthesizeAutomatically": false
-    },
-    {
-      "order": 27,
-      "questionId": "kids-quiz-271",
-      "ageBand": "7-8",
-      "category": "Adab",
-      "missingOriginalTextCountForQuestion": 4,
-      "incrementalDistinctNewOriginals": 4,
-      "incrementalNewCharacters": 178,
-      "newOriginalTextSHA256": [
-        "14afc3b0a4d906a6b904f55ce0cde04f976e51f3665e01644431d5da23c14305",
-        "952696875c5a52f7dd2dba4790dfb861a176d434ab3dd52861ef3949fda98af8",
-        "c84ae635ca701d103274f5a514bde8afa9abda10f44a24bf4752c90a43970e5f",
-        "7251c9f95856ebb31b5a594a70a3928a8934d146ee290ad225adc1ba7e56d1eb"
-      ],
-      "originalQuestionTextChanged": false,
-      "maySynthesizeAutomatically": false
-    },
-    {
-      "order": 28,
-      "questionId": "kids-quiz-769",
-      "ageBand": "7-8",
-      "category": "Ṣabr",
-      "missingOriginalTextCountForQuestion": 4,
-      "incrementalDistinctNewOriginals": 4,
-      "incrementalNewCharacters": 179,
-      "newOriginalTextSHA256": [
-        "802de3e52c14b014dbeec8fa82daf704290839bbaa6341df6e2582e5990522ef",
-        "e0a9a7fb6c18703223e6174d84cfd94997d2643c596161beabf1640ce43c53cb",
-        "927ed423d67d7a98ba834abd86e3dd526e944cae953874215a0c59574f8077bd",
-        "2f62b8963987fca9ecc5e1bfb4fab8c6b9466d2be5364a9d73d7a2b6b1f99e30"
-      ],
-      "originalQuestionTextChanged": false,
-      "maySynthesizeAutomatically": false
-    },
-    {
-      "order": 29,
+      "order": 33,
       "questionId": "kids-quiz-320",
       "ageBand": "7-8",
       "category": "Qurʾān",
@@ -470,41 +526,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 30,
-      "questionId": "kids-quiz-719",
-      "ageBand": "7-8",
-      "category": "Tawḥīd",
-      "missingOriginalTextCountForQuestion": 4,
-      "incrementalDistinctNewOriginals": 4,
-      "incrementalNewCharacters": 180,
-      "newOriginalTextSHA256": [
-        "50f375d2cacefbbecc4f4a5ff89c940343383253e7b700528f9f9adfa2a2cd43",
-        "0d67d05fa9e4506cc9438f261e4c910386b1416a30dc09cc146becdaf5c5ac2a",
-        "4c4950e94b36ed62d3ad918b46f5f030a7c8152ce2a7e7bfd1b2b1a6c7392715",
-        "3c9404d90fd0d354c10edba8d3c900d707fcd7e2f66861ee254f6a2ab6aa519d"
-      ],
-      "originalQuestionTextChanged": false,
-      "maySynthesizeAutomatically": false
-    },
-    {
-      "order": 31,
-      "questionId": "kids-quiz-323",
-      "ageBand": "7-8",
-      "category": "Duʿāʾ",
-      "missingOriginalTextCountForQuestion": 4,
-      "incrementalDistinctNewOriginals": 4,
-      "incrementalNewCharacters": 180,
-      "newOriginalTextSHA256": [
-        "58561f3616707c602529b4ed320f27c2c82a765089d394ff06fb446708c4280c",
-        "a266ab5e55bdef6d830a00070b4c9e89edc9f0c121198cbd27b1ed70c5d839d0",
-        "cc8715020150c4a57a183b69ef6e534c48d71a0b7a8ced9fe6058cf0ed268675",
-        "6da30dbd757057d870abe2544acb34f12eb619978e9f106b45eb292899eb52e0"
-      ],
-      "originalQuestionTextChanged": false,
-      "maySynthesizeAutomatically": false
-    },
-    {
-      "order": 32,
+      "order": 34,
       "questionId": "kids-quiz-586",
       "ageBand": "9-10",
       "category": "Iḥsān",
@@ -520,25 +542,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 33,
-      "questionId": "kids-quiz-285",
-      "ageBand": "9-10",
-      "category": "Daʿwah",
-      "missingOriginalTextCountForQuestion": 5,
-      "incrementalDistinctNewOriginals": 5,
-      "incrementalNewCharacters": 225,
-      "newOriginalTextSHA256": [
-        "bc7bbdb7701b56938c46b4332242207cf3867ac8c8b756dd850ce04af5efaf4b",
-        "0189209536f112ecbb1e23a125e5beeffda79dd724ff280a3fa33a140241441b",
-        "647b6c8d78e9ad0ea74646dd4386a9e607c2552bfdb29da1e366ef13b5766833",
-        "473294c3317a225b55f7e791e60af53da9aa002c0d6dde86c3c8bc410ce52a5f",
-        "ab6ca205a5c92e89272d31b7194a924dfc6bfe2d246a26952d1481d23d581824"
-      ],
-      "originalQuestionTextChanged": false,
-      "maySynthesizeAutomatically": false
-    },
-    {
-      "order": 34,
+      "order": 35,
       "questionId": "kids-quiz-286",
       "ageBand": "9-10",
       "category": "Aḫlāq",
@@ -556,7 +560,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 35,
+      "order": 36,
       "questionId": "kids-quiz-299",
       "ageBand": "9-10",
       "category": "Aḫlāq",
@@ -574,7 +578,7 @@
       "maySynthesizeAutomatically": false
     },
     {
-      "order": 36,
+      "order": 37,
       "questionId": "kids-quiz-288",
       "ageBand": "9-10",
       "category": "Adab",
@@ -587,23 +591,6 @@
         "3a2e365c21c95960a3794c9df628fb897b57eadad00177543c04533ac5cc3e44",
         "3262859cad9bfa968b1e0a6b53034291f59847c45077757090bc95638982c568",
         "6d1b9ab027d522dfb876cc0cd7de7dc501d0417be7bbc0e2c97066ec7a802634"
-      ],
-      "originalQuestionTextChanged": false,
-      "maySynthesizeAutomatically": false
-    },
-    {
-      "order": 37,
-      "questionId": "kids-quiz-135",
-      "ageBand": "9-10",
-      "category": "Iḥsān",
-      "missingOriginalTextCountForQuestion": 4,
-      "incrementalDistinctNewOriginals": 4,
-      "incrementalNewCharacters": 231,
-      "newOriginalTextSHA256": [
-        "941b152c84c018e0c60fa5bc81cf00656d3b0226c51cfa1bab9dc8aeeddec1d1",
-        "29c398d46faaff3c9245851cb70e2da73457e4a42c81311ecc62113677aa1944",
-        "0ed0bc20aaa06f668fbd1c793b1eb6ec462d498bc41f5c2a9b107b81d756afc9",
-        "ca411fa8b2a68676efdfad69334954535ff6956a431f7158280f3a7866988666"
       ],
       "originalQuestionTextChanged": false,
       "maySynthesizeAutomatically": false
@@ -683,25 +670,24 @@
         "kids-quiz-025",
         "kids-quiz-046",
         "kids-quiz-031",
+        "kids-quiz-271",
         "kids-quiz-573",
         "kids-quiz-041",
         "kids-quiz-036",
-        "kids-quiz-024",
         "kids-quiz-097",
         "kids-quiz-040",
         "kids-quiz-137",
         "kids-quiz-499"
       ],
-      "newDistinctOriginals": 27,
-      "newOriginalCharacters": 1403,
+      "newDistinctOriginals": 26,
+      "newOriginalCharacters": 1383,
       "incrementalOriginalTextSha256": [
         "3963e6661cf666ce9856c93d7c0c7fa45ccf9e7b88fdf1a99fb1641bd84bdc89",
         "a3e970187b42c9fadce15572cee12497b6c96ae287b01aebb90ba143dbe817aa",
-        "44c57b99c900d0699752ef7d5e462c402a779fb9e9dd6394a3622ac4a41abb3b",
         "85b21ae546baedf84eeb01fcb70560697bfce2ee4ccdbd3b03c14fd91bd1caad",
+        "14afc3b0a4d906a6b904f55ce0cde04f976e51f3665e01644431d5da23c14305",
         "becd22c0112b03fa2cce2b4bee0b0c9c140833304a6551eb4a010ccac14ea6b1",
         "7d942f6f744f02d59b837f6ad98f204a1c75ccb8d97ce5ca0c5849fe953bb1fd",
-        "32ab60196f7698286e68efbc0ec4c50d978242e4f7bf10dccad9cbb31df9be6e",
         "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
         "f61315c7fd09b325a685b9682917d124c9c132ae2e8b6965d66613d21d6db91e",
         "998336344ec248219b666842645f4fdbbc837affb40c92a017d4afafb5f9dfa9",
@@ -724,8 +710,8 @@
         "b4d74b4c43d3d3872f308ed1d2aaa966896be7de59e86f1c6aba88af6904e2e7"
       ],
       "projectedFullFourPartQuestionsIfAllPreviousStageFilesVerified": {
-        "7-8": 62,
-        "9-10": 70
+        "7-8": 66,
+        "9-10": 73
       },
       "creditsSpent": 0,
       "automaticallyExecuted": false,
@@ -738,119 +724,107 @@
         "9-10": 10
       },
       "selectedQuestionIds": [
-        "kids-quiz-487",
         "kids-quiz-131",
-        "kids-quiz-743",
-        "kids-quiz-220",
-        "kids-quiz-725",
-        "kids-quiz-751",
-        "kids-quiz-271",
-        "kids-quiz-769",
-        "kids-quiz-320",
-        "kids-quiz-719",
+        "kids-quiz-024",
+        "kids-quiz-135",
+        "kids-quiz-487",
+        "kids-quiz-589",
+        "kids-quiz-124",
         "kids-quiz-323",
+        "kids-quiz-226",
+        "kids-quiz-184",
+        "kids-quiz-281",
+        "kids-quiz-474",
+        "kids-quiz-725",
+        "kids-quiz-320",
         "kids-quiz-586",
-        "kids-quiz-285",
         "kids-quiz-286",
         "kids-quiz-299",
         "kids-quiz-288",
-        "kids-quiz-135",
         "kids-quiz-335",
         "kids-quiz-200",
         "kids-quiz-099"
       ],
-      "newDistinctOriginals": 85,
-      "newOriginalCharacters": 3982,
+      "newDistinctOriginals": 73,
+      "newOriginalCharacters": 3560,
       "incrementalOriginalTextSha256": [
-        "bc7bbdb7701b56938c46b4332242207cf3867ac8c8b756dd850ce04af5efaf4b",
         "cfed9f0e44f9752a271f2f6caab21ddb40db79a6a6c3dcad82c94145de6176f8",
+        "44c57b99c900d0699752ef7d5e462c402a779fb9e9dd6394a3622ac4a41abb3b",
         "a5df8881639d740bc8dae5d0c9741141287e3834f1cc4fa39dd3ae7be6585e23",
         "3b5971737a02434d3ae8aafb2c67c9d68733c7b1184519fce1f7666835d29c84",
         "0aaa04226153efc57efa1bdae35e869ae8691318bf7ed8966228640ab683041b",
         "06a163cda26e69ac5982151a00021903542621401567942d87645fe6eb0f75ae",
         "a67093263ed50b585d9cb248cc297cde75d2d35b7d8224bcfbdeb76a38afbc02",
-        "60167eb956e202c1b13cba2f8f112eed2f6c2e30c87478bde6dfe3bdd09323d7",
-        "14afc3b0a4d906a6b904f55ce0cde04f976e51f3665e01644431d5da23c14305",
         "0ba1229f252094e6d3f3442eefafd6ff29c64906a4ddb9d138807384f8524570",
         "da2714c9977c8b3e523564d827a2e1aaeebde6f2bb96c16f66391f54576ca975",
         "082112ba0551e8e4a12408b09cffe9562ef5a5ef77feb228ad69793db5fad8e5",
-        "8231f7d9eb8b1d4a3c50050733dc932205580febc63e145df9a3d0f6bd05cfe0",
-        "a00c7b94ac1708e1ba8d937020d245e62975e8e1157c4dd07a57b664a31089b9",
+        "32ab60196f7698286e68efbc0ec4c50d978242e4f7bf10dccad9cbb31df9be6e",
+        "0f5ee9c49837c463b33a028a7cc2172ddca0013c7b7148f96a6ddd0004d38876",
+        "1a0ea46c59b52132aead3245dba335a40d2cb556bf39672456e1837a486c5aac",
+        "d2b8ed43c255b82e72a1f5e016bd5e4c9d6dc97dcfc29c11923aae662fa4e8d9",
         "48c41d4e4f77f1e3a00885c430bd2cb2dc17ec07c3f33e5243af4c105a17be94",
         "52eb1d9d165705b6ec24bb5c4415e0b522764231433f6cd47562d831d7f8684a",
-        "50f375d2cacefbbecc4f4a5ff89c940343383253e7b700528f9f9adfa2a2cd43",
-        "802de3e52c14b014dbeec8fa82daf704290839bbaa6341df6e2582e5990522ef",
-        "9e1dfa823a3a50d349f18ff3d8d395a39e58a9f2aaf1ef2aab24558b4d690209",
-        "952696875c5a52f7dd2dba4790dfb861a176d434ab3dd52861ef3949fda98af8",
+        "bec17579a48b6a3371ca225df120e926c3a1f159278b77fdecd396a6b2919d5f",
+        "5eec796d8da2d392cf7b6138a88af16af66f79e4888ac84bf01421f6a1718182",
         "941b152c84c018e0c60fa5bc81cf00656d3b0226c51cfa1bab9dc8aeeddec1d1",
         "bb3ea8c573ce7e8ba6aeac44ac8e9240d00120fc71773db413fe8e82fbbc8021",
         "8719e364a26f7d70a467d4dbc0151bd705e66952012afabf51b704f7695480c3",
         "d4d4292c6d7ab0bccdcd251a8bd8de1585ca4bbc0764c320d3124f989f703ee2",
+        "0f8190c86c1b9dc9888bb01b80cf5a69550f4089b6cfc283c427c82156cd8550",
         "d6ca416c91da8bb5249ffbdf2eaaa1e33c8f314e3591f1b830c8dfa6a72917e2",
+        "bae21197b2f3e067aed7e5cb6b6038803a2ed09602084fdb60d299bbe3abd231",
         "8736aa257aae65e86e8853114cfb56baa5a000974e8277e32faa88f6d4f79901",
-        "c4608bc61f895d4d07bb060df964b56d061bef0ba18977707668ee45ae0dfd49",
-        "0d67d05fa9e4506cc9438f261e4c910386b1416a30dc09cc146becdaf5c5ac2a",
-        "e0a9a7fb6c18703223e6174d84cfd94997d2643c596161beabf1640ce43c53cb",
-        "f3c56865cef8c28aff96579d47ec0874e7b80537aa66002c413a72e1c2909222",
         "366bc733f326fd80a4ecfc3ce19254e432589dd0a357663ed9a53d12133340e9",
         "dcee09de1a44a56eff5b848c28d5e0d6ade604d1ee5fc87cc1ad488311860b63",
         "3a2e365c21c95960a3794c9df628fb897b57eadad00177543c04533ac5cc3e44",
         "3262859cad9bfa968b1e0a6b53034291f59847c45077757090bc95638982c568",
-        "927ed423d67d7a98ba834abd86e3dd526e944cae953874215a0c59574f8077bd",
-        "8fde808275fdae98804573be7ef10baeb52fa24692e25f118f8b984daa84210d",
-        "c84ae635ca701d103274f5a514bde8afa9abda10f44a24bf4752c90a43970e5f",
+        "52f06a31d874942c8a99a9752db9bf2463542a49611c51955a7cb98290f6e69c",
         "10f57a8b9debddee8f81752342f7826d662d4f1580bd5f3549f8498ab48e3292",
         "6e355bdcc2d32a76285dfde315d4696a2c59ce3c7371033c25846f145062d2ef",
         "75debd1de89e9fb39f39c0553c6208427055108da727bc00a6ea5270ade72745",
-        "0189209536f112ecbb1e23a125e5beeffda79dd724ff280a3fa33a140241441b",
-        "647b6c8d78e9ad0ea74646dd4386a9e607c2552bfdb29da1e366ef13b5766833",
-        "473294c3317a225b55f7e791e60af53da9aa002c0d6dde86c3c8bc410ce52a5f",
+        "52d7383320beb16f7801bdd6f7d0f39b56573bfbd0437604871de08d99fb0c22",
         "761602f516aa2ee26d37de1c14c05339f3772cebadfbdd29a1a99a56c5c32a84",
-        "bfc380113aa11b2ca75e4c550c94d905851b97f9df71dd9a1d9575905dfaea3a",
-        "18bb34c32d0541b99eee47c5152b92d3f4f79be20b3d88c442b60a356a7b708b",
-        "29c398d46faaff3c9245851cb70e2da73457e4a42c81311ecc62113677aa1944",
+        "c6bfd3ec0206a45e726c0e5a5f759ec1190a484f7292e253a4ab967e0cbe7d57",
         "23eea859d8f7cfa36f9bc61b51eac6643bf8c2c201f85994345d264f22ba6c96",
-        "0ed0bc20aaa06f668fbd1c793b1eb6ec462d498bc41f5c2a9b107b81d756afc9",
         "d6ad3600d6d43d734c84c8684539fadda0c47b67f8cee002f4591adbcbfe20a7",
         "bd27e218fd9bc9cf9fc31553e061ed3af1e183f737057083927474c89a2fbcb9",
-        "b76a4e92efdf892ce00bcc9d239d1173d338bb6bac5a49402198f9d428d9e341",
-        "2f62b8963987fca9ecc5e1bfb4fab8c6b9466d2be5364a9d73d7a2b6b1f99e30",
-        "4c4950e94b36ed62d3ad918b46f5f030a7c8152ce2a7e7bfd1b2b1a6c7392715",
-        "3c9404d90fd0d354c10edba8d3c900d707fcd7e2f66861ee254f6a2ab6aa519d",
+        "76b548ae116b05527a5cb6f37c55a6e32a2e891c59267524b8723136c6c7fdca",
         "de44adee64aa7cc7410b989397ad8c31fed4ccd0d9105bc71acf761e5cdd2f8f",
         "fee58a1be97b704ccbebafd8db1b07a9b94e0aacd87b9c11d66e2967ded4754e",
         "58561f3616707c602529b4ed320f27c2c82a765089d394ff06fb446708c4280c",
         "8a6dafbdf56220d39c17dff9f3ca678a240d5b989ebd462f28f371c602f4756e",
         "5e2bbe07fd454a567ee7b935cb39a05dfac138c9291050187ed33998190741d2",
         "dc478d47f73910776f99f514d8452ba2c65a7787d3f87dbc3a122dd9b09b6ca8",
+        "c5e37e7249f56be03fbb05446024ba9190b4a1845dabfd72300b3f09a2c7ec3e",
+        "0b01af7aaa5e65c78a698c4b5195fabf9105ac4c2d373d8878a942d8da2ef174",
         "a21c63a596921086913f132d85c5a588806edfcefc1657c9eddfbc3d6465a3e8",
+        "4bb533c0dc812929c489231d3ff00f27ba92fd4bbfca5a77d68a83bd0b5b40f9",
+        "b4a4698583f9299c0ebaa987d8d2116cecf959d9429d0675da04ffd181ca67cc",
         "a266ab5e55bdef6d830a00070b4c9e89edc9f0c121198cbd27b1ed70c5d839d0",
-        "cc8715020150c4a57a183b69ef6e534c48d71a0b7a8ced9fe6058cf0ed268675",
         "56ebde2022bd65c94f2ef486af3be1ef3e16bcbe6abdc1bf485adf6f2c36c379",
-        "4be0e5da5ff46a7fd12a928b1da1892444715102dd3f4d3496b48af2eaca4ba9",
+        "1bd7c931781ab57888ca5e66c6a7e5d8d8deea50a845eee515a410d63439e8c0",
         "08d00fba17c236887be27e81c3542328591272c1e72fa6d8b1cb38d08cf70210",
         "6d1b9ab027d522dfb876cc0cd7de7dc501d0417be7bbc0e2c97066ec7a802634",
+        "18e4113e2d739fcade827e070a06e55e8f2af1e16edfaf69d284cde04fec5310",
+        "823a9acc39956effb41c6b02ee3cc0b1639f9fc49cf17cea1ca6bd85c001be18",
+        "8a7ec220b866ece45ff97114b4e41be2c99a0f49996756d9b8018bf633feac1b",
         "4c9169ca969287f875b7697958622c4270eab8e2b3da81ce6c68302c3b7d71fc",
         "7842efbb81763603216bd3d43c50a0f7f53b420e1bef422456bf2bd73ec34d17",
+        "80eb355d0dc562b3445a1fc899cd1a02e1f8ddfc7ba5bb7145397d6649777c16",
         "b3f092fa36a38ef66e9186ed557b0e551204fe9201b55c3007bf4b5304091e40",
+        "7247e5490a17e9b415f139dfb6eea2d137d62270b703a0dabaf6c36aa406bfc4",
         "b310f9f90d732ce1250930a7f9e9409639bc67c181ef97e1fb94173ce0c36d3b",
         "e651587c7e3277a3194dbbfa4fe79e0567a6ae0d3db3a2c353f2008d942eae45",
-        "869d8949526c1c251318ffaad2a30db73e6fe8ad56956968e04dee5da6f7a084",
         "32e88c25a594ea71a0744bd0827093639b1ae0fa4569bc3ee2b4061464ab0945",
-        "c9f85e63dbc8febbcf5669ecda4f81d067c80a0a6ec508c6d5516c00e37221ef",
-        "7251c9f95856ebb31b5a594a70a3928a8934d146ee290ad225adc1ba7e56d1eb",
-        "ab6ca205a5c92e89272d31b7194a924dfc6bfe2d246a26952d1481d23d581824",
         "6da30dbd757057d870abe2544acb34f12eb619978e9f106b45eb292899eb52e0",
-        "ca411fa8b2a68676efdfad69334954535ff6956a431f7158280f3a7866988666",
-        "830482a66342df280d5a7d0937f961eead34c4ceb1ba1aa3475177e5ebe45285",
-        "81ea3f1d49587f7a79e8b525cfc684ce3a027ab42116de07cb408048639649a1",
+        "5e0e2fc9242d6e8a2a92f65f527eb72ecf9157b36231161e584b71a1c4ced4c8",
         "918dc34be416781ba20a689391710eb4b7c468c031b250111937088deb219c38",
         "85e87453ec290e8cfce322e767ee174bad5a0915a0efdb507c58d2b63b712570",
         "8e999891a62d2b8edb69eae3af96c4737cf635e7be6e88924346b21b1da9cbf5"
       ],
       "projectedFullFourPartQuestionsIfAllPreviousStageFilesVerified": {
-        "7-8": 72,
-        "9-10": 80
+        "7-8": 76,
+        "9-10": 83
       },
       "creditsSpent": 0,
       "automaticallyExecuted": false,
@@ -862,14 +836,6 @@
       "spokenText": "Allah befahl dem Propheten ﷺ und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
       "sha256": "3963e6661cf666ce9856c93d7c0c7fa45ccf9e7b88fdf1a99fb1641bd84bdc89",
       "characterCount": 95,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Allah befiehlt Daʿwah mit Weisheit, guter Ermahnung und der besten Art der Diskussion.",
-      "sha256": "bc7bbdb7701b56938c46b4332242207cf3867ac8c8b756dd850ce04af5efaf4b",
-      "characterCount": 86,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -947,14 +913,6 @@
       "synthesized": false
     },
     {
-      "spokenText": "Allah erinnert an Nahrung aus dem Meer, Schmuck und Schiffe, die darauf fahren.",
-      "sha256": "60167eb956e202c1b13cba2f8f112eed2f6c2e30c87478bde6dfe3bdd09323d7",
-      "characterCount": 79,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
       "spokenText": "Allah erlaubt das Halāle und Gute und warnt vor den Schritten des Shayṭān.",
       "sha256": "14afc3b0a4d906a6b904f55ce0cde04f976e51f3665e01644431d5da23c14305",
       "characterCount": 74,
@@ -1011,17 +969,25 @@
       "synthesized": false
     },
     {
-      "spokenText": "Alle zum Lachen darüber bringen.",
-      "sha256": "8231f7d9eb8b1d4a3c50050733dc932205580febc63e145df9a3d0f6bd05cfe0",
-      "characterCount": 32,
+      "spokenText": "Allah verbietet, Spenden durch Vorhaltungen und Kränkungen zu entwerten.",
+      "sha256": "0f5ee9c49837c463b33a028a7cc2172ddca0013c7b7148f96a6ddd0004d38876",
+      "characterCount": 72,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
     },
     {
-      "spokenText": "Alles ohne Prüfung.",
-      "sha256": "a00c7b94ac1708e1ba8d937020d245e62975e8e1157c4dd07a57b664a31089b9",
-      "characterCount": 19,
+      "spokenText": "Allah, Engel, Bücher und Gesandte.",
+      "sha256": "1a0ea46c59b52132aead3245dba335a40d2cb556bf39672456e1837a486c5aac",
+      "characterCount": 34,
+      "usedInSelectedPriorityQuestions": 1,
+      "mustUseAuthorizedOriginalVoice": true,
+      "synthesized": false
+    },
+    {
+      "spokenText": "Alle Vögel waren verschwunden.",
+      "sha256": "d2b8ed43c255b82e72a1f5e016bd5e4c9d6dc97dcfc29c11923aae662fa4e8d9",
+      "characterCount": 30,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1051,33 +1017,17 @@
       "synthesized": false
     },
     {
-      "spokenText": "Das Geschöpf noch genauer mit Allah vergleichen.",
-      "sha256": "50f375d2cacefbbecc4f4a5ff89c940343383253e7b700528f9f9adfa2a2cd43",
-      "characterCount": 48,
+      "spokenText": "Dankbarkeit gegenüber Allah.",
+      "sha256": "bec17579a48b6a3371ca225df120e926c3a1f159278b77fdecd396a6b2919d5f",
+      "characterCount": 28,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
     },
     {
-      "spokenText": "Das Heft wegwerfen.",
-      "sha256": "802de3e52c14b014dbeec8fa82daf704290839bbaa6341df6e2582e5990522ef",
-      "characterCount": 19,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Den Fehler immer wieder nachmachen.",
-      "sha256": "9e1dfa823a3a50d349f18ff3d8d395a39e58a9f2aaf1ef2aab24558b4d690209",
-      "characterCount": 35,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Den Schritten des Shayṭān.",
-      "sha256": "952696875c5a52f7dd2dba4790dfb861a176d434ab3dd52861ef3949fda98af8",
-      "characterCount": 26,
+      "spokenText": "Das Gebet verlassen.",
+      "sha256": "5eec796d8da2d392cf7b6138a88af16af66f79e4888ac84bf01421f6a1718182",
+      "characterCount": 20,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1195,9 +1145,25 @@
       "synthesized": false
     },
     {
+      "spokenText": "Der Vers nennt zentrale Grundlagen des Īmān.",
+      "sha256": "0f8190c86c1b9dc9888bb01b80cf5a69550f4089b6cfc283c427c82156cd8550",
+      "characterCount": 44,
+      "usedInSelectedPriorityQuestions": 1,
+      "mustUseAuthorizedOriginalVoice": true,
+      "synthesized": false
+    },
+    {
       "spokenText": "Der Vers schützt Privatsphäre und lehrt respektvollen Zutritt.",
       "sha256": "d6ca416c91da8bb5249ffbdf2eaaa1e33c8f314e3591f1b830c8dfa6a72917e2",
       "characterCount": 62,
+      "usedInSelectedPriorityQuestions": 1,
+      "mustUseAuthorizedOriginalVoice": true,
+      "synthesized": false
+    },
+    {
+      "spokenText": "Der Wiedehopf fehlte.",
+      "sha256": "bae21197b2f3e067aed7e5cb6b6038803a2ed09602084fdb60d299bbe3abd231",
+      "characterCount": 21,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1227,41 +1193,9 @@
       "synthesized": false
     },
     {
-      "spokenText": "Ein Kind spricht ein schwieriges Wort falsch aus. Was passt am besten?",
-      "sha256": "c4608bc61f895d4d07bb060df964b56d061bef0ba18977707668ee45ae0dfd49",
-      "characterCount": 70,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Ein Kind vergleicht Allah mit einem Geschöpf. Was passt am besten?",
-      "sha256": "0d67d05fa9e4506cc9438f261e4c910386b1416a30dc09cc146becdaf5c5ac2a",
-      "characterCount": 66,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Eine Aufgabe ist schwierig und klappt nicht sofort. Was passt am besten?",
-      "sha256": "e0a9a7fb6c18703223e6174d84cfd94997d2643c596161beabf1640ce43c53cb",
-      "characterCount": 72,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
       "spokenText": "Eine berühmte Familie.",
       "sha256": "714d54ae7924cfcb2c825b0034bafb8ab7782232a2f4077c4d655473547c84e3",
       "characterCount": 22,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Einen gegen den anderen aufhetzen.",
-      "sha256": "f3c56865cef8c28aff96579d47ec0874e7b80537aa66002c413a72e1c2909222",
-      "characterCount": 34,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1307,25 +1241,9 @@
       "synthesized": false
     },
     {
-      "spokenText": "Geduldig weiterlernen und Allah um Hilfe bitten.",
-      "sha256": "927ed423d67d7a98ba834abd86e3dd526e944cae953874215a0c59574f8077bd",
-      "characterCount": 48,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Gerüchte über beide verbreiten.",
-      "sha256": "8fde808275fdae98804573be7ef10baeb52fa24692e25f118f8b984daa84210d",
+      "spokenText": "Für den Herrn beten und opfern.",
+      "sha256": "52f06a31d874942c8a99a9752db9bf2463542a49611c51955a7cb98290f6e69c",
       "characterCount": 31,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Guten Ratschlägen.",
-      "sha256": "c84ae635ca701d103274f5a514bde8afa9abda10f44a24bf4752c90a43970e5f",
-      "characterCount": 18,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1363,25 +1281,9 @@
       "synthesized": false
     },
     {
-      "spokenText": "Mit Beleidigungen.",
-      "sha256": "0189209536f112ecbb1e23a125e5beeffda79dd724ff280a3fa33a140241441b",
-      "characterCount": 18,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Mit Weisheit und guter Ermahnung.",
-      "sha256": "647b6c8d78e9ad0ea74646dd4386a9e607c2552bfdb29da1e366ef13b5766833",
-      "characterCount": 33,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Mit erfundenen Geschichten.",
-      "sha256": "473294c3317a225b55f7e791e60af53da9aa002c0d6dde86c3c8bc410ce52a5f",
-      "characterCount": 27,
+      "spokenText": "Maryam erklärte Zakariyyā, dass ihre Versorgung von Allah kam.",
+      "sha256": "52d7383320beb16f7801bdd6f7d0f39b56573bfbd0437604871de08d99fb0c22",
+      "characterCount": 62,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1395,25 +1297,9 @@
       "synthesized": false
     },
     {
-      "spokenText": "Nahrung, Schmuck und Schiffe.",
-      "sha256": "bfc380113aa11b2ca75e4c550c94d905851b97f9df71dd9a1d9575905dfaea3a",
-      "characterCount": 29,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Nicht auslachen und freundlich bleiben.",
-      "sha256": "18bb34c32d0541b99eee47c5152b92d3f4f79be20b3d88c442b60a356a7b708b",
-      "characterCount": 39,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Nur davon, wie andere sie sehen.",
-      "sha256": "29c398d46faaff3c9245851cb70e2da73457e4a42c81311ecc62113677aa1944",
-      "characterCount": 32,
+      "spokenText": "Nach der Gabe al-Kawthar folgt der Befehl, für den Herrn zu beten und zu opfern.",
+      "sha256": "c6bfd3ec0206a45e726c0e5a5f759ec1190a484f7292e253a4ab967e0cbe7d57",
+      "characterCount": 80,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1422,14 +1308,6 @@
       "spokenText": "Nur gegenüber Freunden.",
       "sha256": "23eea859d8f7cfa36f9bc61b51eac6643bf8c2c201f85994345d264f22ba6c96",
       "characterCount": 23,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Nur von ihrer Länge.",
-      "sha256": "0ed0bc20aaa06f668fbd1c793b1eb6ec462d498bc41f5c2a9b107b81d756afc9",
-      "characterCount": 20,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1451,33 +1329,9 @@
       "synthesized": false
     },
     {
-      "spokenText": "Ruhig helfen, dass beide fair miteinander sprechen.",
-      "sha256": "b76a4e92efdf892ce00bcc9d239d1173d338bb6bac5a49402198f9d428d9e341",
-      "characterCount": 51,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Sagen, dass du nie wieder lernen willst.",
-      "sha256": "2f62b8963987fca9ecc5e1bfb4fab8c6b9466d2be5364a9d73d7a2b6b1f99e30",
-      "characterCount": 40,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Sagen: Jeder Vergleich ist richtig.",
-      "sha256": "4c4950e94b36ed62d3ad918b46f5f030a7c8152ce2a7e7bfd1b2b1a6c7392715",
-      "characterCount": 35,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Sagen: Nichts ist Allah gleich.",
-      "sha256": "3c9404d90fd0d354c10edba8d3c900d707fcd7e2f66861ee254f6a2ab6aa519d",
-      "characterCount": 31,
+      "spokenText": "Qurʾān 62:9 befiehlt, beim Ruf zum Freitagsgebet zum Gedenken Allahs zu eilen und Handel ruhen zu lassen.",
+      "sha256": "76b548ae116b05527a5cb6f37c55a6e32a2e891c59267524b8723136c6c7fdca",
+      "characterCount": 105,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1531,6 +1385,22 @@
       "synthesized": false
     },
     {
+      "spokenText": "Sie kommt ohne Allahs Willen.",
+      "sha256": "c5e37e7249f56be03fbb05446024ba9190b4a1845dabfd72300b3f09a2c7ec3e",
+      "characterCount": 29,
+      "usedInSelectedPriorityQuestions": 1,
+      "mustUseAuthorizedOriginalVoice": true,
+      "synthesized": false
+    },
+    {
+      "spokenText": "Sie kommt von Sternen.",
+      "sha256": "0b01af7aaa5e65c78a698c4b5195fabf9105ac4c2d373d8878a942d8da2ef174",
+      "characterCount": 22,
+      "usedInSelectedPriorityQuestions": 1,
+      "mustUseAuthorizedOriginalVoice": true,
+      "synthesized": false
+    },
+    {
       "spokenText": "So tun, als hätte nur man selbst alles gemacht.",
       "sha256": "a21c63a596921086913f132d85c5a588806edfcefc1657c9eddfbc3d6465a3e8",
       "characterCount": 47,
@@ -1542,6 +1412,22 @@
       "spokenText": "Sofort beleidigen.",
       "sha256": "0ea5f9ee190759019ce3cdd2322d756a8062ed00c1925f5f759ccfa4a158bea4",
       "characterCount": 18,
+      "usedInSelectedPriorityQuestions": 1,
+      "mustUseAuthorizedOriginalVoice": true,
+      "synthesized": false
+    },
+    {
+      "spokenText": "Sterne, Glückszahlen und Horoskope.",
+      "sha256": "4bb533c0dc812929c489231d3ff00f27ba92fd4bbfca5a77d68a83bd0b5b40f9",
+      "characterCount": 35,
+      "usedInSelectedPriorityQuestions": 1,
+      "mustUseAuthorizedOriginalVoice": true,
+      "synthesized": false
+    },
+    {
+      "spokenText": "Sulaymān kontrollierte die Vögel und fragte nach dem Wiedehopf.",
+      "sha256": "b4a4698583f9299c0ebaa987d8d2116cecf959d9429d0675da04ffd181ca67cc",
+      "characterCount": 63,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1563,14 +1449,6 @@
       "synthesized": false
     },
     {
-      "spokenText": "Um ein Königreich.",
-      "sha256": "cc8715020150c4a57a183b69ef6e534c48d71a0b7a8ced9fe6058cf0ed268675",
-      "characterCount": 18,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
       "spokenText": "Unbegrenztes Wissen über das Verborgene.",
       "sha256": "56ebde2022bd65c94f2ef486af3be1ef3e16bcbe6abdc1bf485adf6f2c36c379",
       "characterCount": 40,
@@ -1579,17 +1457,17 @@
       "synthesized": false
     },
     {
-      "spokenText": "Verbotene Nahrung.",
-      "sha256": "4be0e5da5ff46a7fd12a928b1da1892444715102dd3f4d3496b48af2eaca4ba9",
-      "characterCount": 18,
+      "spokenText": "Viel Geld.",
+      "sha256": "c265ab0d6a574a70d90d169bc81cb84320465ce7e9f5a88a34d22c01c6317231",
+      "characterCount": 10,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
     },
     {
-      "spokenText": "Viel Geld.",
-      "sha256": "c265ab0d6a574a70d90d169bc81cb84320465ce7e9f5a88a34d22c01c6317231",
-      "characterCount": 10,
+      "spokenText": "Vorhaltungen und Verletzungen.",
+      "sha256": "1bd7c931781ab57888ca5e66c6a7e5d8d8deea50a845eee515a410d63439e8c0",
+      "characterCount": 30,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1611,6 +1489,30 @@
       "synthesized": false
     },
     {
+      "spokenText": "Was befiehlt Allah nach der Gabe al-Kawthar?",
+      "sha256": "18e4113e2d739fcade827e070a06e55e8f2af1e16edfaf69d284cde04fec5310",
+      "characterCount": 44,
+      "usedInSelectedPriorityQuestions": 1,
+      "mustUseAuthorizedOriginalVoice": true,
+      "synthesized": false
+    },
+    {
+      "spokenText": "Was bemerkte Sulaymān bei der Kontrolle der Vögel?",
+      "sha256": "823a9acc39956effb41c6b02ee3cc0b1639f9fc49cf17cea1ca6bd85c001be18",
+      "characterCount": 50,
+      "usedInSelectedPriorityQuestions": 1,
+      "mustUseAuthorizedOriginalVoice": true,
+      "synthesized": false
+    },
+    {
+      "spokenText": "Was darf eine Ṣadaqah nicht kaputtmachen?",
+      "sha256": "8a7ec220b866ece45ff97114b4e41be2c99a0f49996756d9b8018bf633feac1b",
+      "characterCount": 41,
+      "usedInSelectedPriorityQuestions": 1,
+      "mustUseAuthorizedOriginalVoice": true,
+      "synthesized": false
+    },
+    {
       "spokenText": "Was gab Allah Dāwūd nach dem Sieg über Ǧālūt?",
       "sha256": "4c9169ca969287f875b7697958622c4270eab8e2b3da81ce6c68302c3b7d71fc",
       "characterCount": 45,
@@ -1627,9 +1529,25 @@
       "synthesized": false
     },
     {
+      "spokenText": "Was nennt Qurʾān 2:285 beim Glauben der Gläubigen?",
+      "sha256": "80eb355d0dc562b3445a1fc899cd1a02e1f8ddfc7ba5bb7145397d6649777c16",
+      "characterCount": 50,
+      "usedInSelectedPriorityQuestions": 1,
+      "mustUseAuthorizedOriginalVoice": true,
+      "synthesized": false
+    },
+    {
       "spokenText": "Was sagt Qurʾān 42:40 über jemanden, der vergibt und Frieden stiftet?",
       "sha256": "b3f092fa36a38ef66e9186ed557b0e551204fe9201b55c3007bf4b5304091e40",
       "characterCount": 69,
+      "usedInSelectedPriorityQuestions": 1,
+      "mustUseAuthorizedOriginalVoice": true,
+      "synthesized": false
+    },
+    {
+      "spokenText": "Was sagte Maryam über ihre besondere Versorgung?",
+      "sha256": "7247e5490a17e9b415f139dfb6eea2d137d62270b703a0dabaf6c36aa406bfc4",
+      "characterCount": 48,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1651,33 +1569,9 @@
       "synthesized": false
     },
     {
-      "spokenText": "Welche Nahrung sollen Menschen wählen?",
-      "sha256": "869d8949526c1c251318ffaad2a30db73e6fe8ad56956968e04dee5da6f7a084",
-      "characterCount": 38,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
       "spokenText": "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes?",
       "sha256": "32e88c25a594ea71a0744bd0827093639b1ae0fa4569bc3ee2b4061464ab0945",
       "characterCount": 84,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Welchen Nutzen des Meeres nennt Qurʾān 16:14?",
-      "sha256": "c9f85e63dbc8febbcf5669ecda4f81d067c80a0a6ec508c6d5516c00e37221ef",
-      "characterCount": 45,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Welchen Schritten sollen wir nach Qurʾān 2:168 nicht folgen?",
-      "sha256": "7251c9f95856ebb31b5a594a70a3928a8934d146ee290ad225adc1ba7e56d1eb",
-      "characterCount": 60,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
@@ -1691,14 +1585,6 @@
       "synthesized": false
     },
     {
-      "spokenText": "Wie soll nach Qurʾān 16:125 zum Weg Allahs eingeladen werden?",
-      "sha256": "ab6ca205a5c92e89272d31b7194a924dfc6bfe2d246a26952d1481d23d581824",
-      "characterCount": 61,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
       "spokenText": "Worum baten die jungen Gläubigen in der Höhle?",
       "sha256": "6da30dbd757057d870abe2544acb34f12eb619978e9f106b45eb292899eb52e0",
       "characterCount": 46,
@@ -1707,25 +1593,9 @@
       "synthesized": false
     },
     {
-      "spokenText": "Wovon hängt der Wert einer Handlung nach dem berühmten Ḥadīṯ ab?",
-      "sha256": "ca411fa8b2a68676efdfad69334954535ff6956a431f7158280f3a7866988666",
-      "characterCount": 64,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Zauberei und Wahrsagerei.",
-      "sha256": "830482a66342df280d5a7d0937f961eead34c4ceb1ba1aa3475177e5ebe45285",
-      "characterCount": 25,
-      "usedInSelectedPriorityQuestions": 1,
-      "mustUseAuthorizedOriginalVoice": true,
-      "synthesized": false
-    },
-    {
-      "spokenText": "Zwei Freunde streiten wegen eines Spiels. Was passt am besten?",
-      "sha256": "81ea3f1d49587f7a79e8b525cfc684ce3a027ab42116de07cb408048639649a1",
-      "characterCount": 62,
+      "spokenText": "Zum Gedenken Allahs eilen und den Handel lassen.",
+      "sha256": "5e0e2fc9242d6e8a2a92f65f527eb72ecf9157b36231161e584b71a1c4ced4c8",
+      "characterCount": 48,
       "usedInSelectedPriorityQuestions": 1,
       "mustUseAuthorizedOriginalVoice": true,
       "synthesized": false
