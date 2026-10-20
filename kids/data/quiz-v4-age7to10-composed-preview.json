@@ -582,6 +582,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Überlege kurz, bevor du dich entscheidest. Welche Versorgung erhielt Maryam bei der Geburt? Antwort 1: Frische reife Datteln. Antwort 2: Goldmünzen. Antwort 3: Ein Königreich. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/c2729037a4d0c988166abe553a4458bfa0dc9534.mp3",
+      "sha256": "221f69e379d79166c9365f3907a107792b0c5feea1011a516ea4272bd9d5d9eb",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah ließ Maryam frische Datteln von der Palme erhalten.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/65fc8cfd0ee6c19c8ec6f622669995f2c688483e.mp3",
+      "sha256": "efa97fa9c0ea509175f5a7d797d3fdec413b6fea4aa8fad433cb66ec8717d86b",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Überlege kurz, bevor du dich entscheidest. Welche Eigenschaft brauchte Mūsā bei seiner Reise mit dem rechtschaffenen Diener? Antwort 1: Geduld. Antwort 2: Hochmut. Antwort 3: Spott. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/92249d9c56e78a267de2c85533c31aeb05a7e19d.mp3",
       "sha256": "487f27a4ca804e720af10b192320605b388bf583829d1c2f211ebd4fffccf57a",
@@ -1993,6 +2015,17 @@
     "Du hast eine islamische Frage und kennst die Antwort nicht. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Bei einer islamischen Frage fragt man zuverlässige Menschen mit Wissen. Antwort 2: Man sollte bei Unwissen einfach raten. Antwort 3: Jede beliebige Meinung ist gleich zuverlässig. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/b7728992c94edcea0a7b5e527b8b2222bca1f5f6.mp3",
       "sha256": "bbbf1518f6da56e6327850ca7d79819530b0d12e63f2e37f0fade3def0be646a",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Du wirst etwas gefragt und weißt es wirklich nicht. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Was wir nicht wissen, geben wir nicht als sichere Tatsache aus. Antwort 2: Raten darf als Wissen ausgegeben werden. Antwort 3: Unsicherheit muss man vor anderen verstecken. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ad7699a018d8248522c9650c0b07f68b89ddd506.mp3",
+      "sha256": "7c476d4d4731ddd52b420cc6f8ee6112c566e3c86d70ff0c49bba95ea008cb41",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -4192,12 +4225,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Ein Königreich.",
-            "Frische reife Datteln.",
-            "Welche Versorgung erhielt Maryam bei der Geburt?"
-          ]
+          "available": true,
+          "textSha256": "e95aebb1b0df627f5294188332c3e84af4fe6b0037c4d04f02332862c5ef2390",
+          "mp3Sha256": "221f69e379d79166c9365f3907a107792b0c5feea1011a516ea4272bd9d5d9eb",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/c2729037a4d0c988166abe553a4458bfa0dc9534.mp3"
         },
         "correct": {
           "available": true,
@@ -4212,13 +4243,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/6c9422cd2890292b5fbf67667ed913dc.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah ließ Maryam frische Datteln von der Palme erhalten."
-          ]
+          "available": true,
+          "textSha256": "9fa59836e63a05c80c38c459d812dfc07f4e7a8aa290425c608b8dd16b531b11",
+          "mp3Sha256": "efa97fa9c0ea509175f5a7d797d3fdec413b6fea4aa8fad433cb66ec8717d86b",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/65fc8cfd0ee6c19c8ec6f622669995f2c688483e.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-278": {
       "ageBand": "7-8",
@@ -4815,7 +4846,6 @@
           "missingOriginalSegments": [
             "Demut im Gebet.",
             "Lautes Reden.",
-            "Viel Besitz.",
             "Welche Eigenschaft nennt Qurʾān 23:1–2 zuerst bei erfolgreichen Gläubigen?"
           ]
         },
@@ -8730,8 +8760,7 @@
           "missingOriginalSegments": [
             "An Allahs Barmherzigkeit zu verzweifeln.",
             "Um Vergebung zu bitten.",
-            "Welche Haltung verbietet Qurʾān 39:53 trotz vieler Sünden?",
-            "Zu bereuen."
+            "Welche Haltung verbietet Qurʾān 39:53 trotz vieler Sünden?"
           ]
         },
         "correct": {
@@ -11508,13 +11537,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Du wirst etwas gefragt und weißt es wirklich nicht. Welcher Grundsatz hilft dir hier am besten?",
-            "Raten darf als Wissen ausgegeben werden.",
-            "Unsicherheit muss man vor anderen verstecken.",
-            "Was wir nicht wissen, geben wir nicht als sichere Tatsache aus."
-          ]
+          "available": true,
+          "textSha256": "f4d21b039adf0bf715263491a658300a5124b1fc131491b97d1e7ba0e8f6c72a",
+          "mp3Sha256": "7c476d4d4731ddd52b420cc6f8ee6112c566e3c86d70ff0c49bba95ea008cb41",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ad7699a018d8248522c9650c0b07f68b89ddd506.mp3"
         },
         "correct": {
           "available": true,
@@ -11535,7 +11561,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/e947008479ea6cfd9bc5698139895132da93d605.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-891": {
       "ageBand": "9-10",
