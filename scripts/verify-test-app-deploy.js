@@ -340,6 +340,24 @@ async function fetchVersionBuild(base) {
     }
   }
 
+  // HTML_V3_PARITY_LIVE_GUARD: verify real HTML and JS, not just buildId.
+  for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
+    let ok=false;
+    for(let attempt=1;attempt<=5;attempt++){
+      try{
+        const shell=await fetchText(base+"/?parity-v1368="+Date.now());
+        const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261020-v1");
+        const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"');
+        const present=js.status===200&&js.text.includes("window.__darHomeHtmlParityV1=true")&&js.text.includes("dhp-quickbar")&&js.text.includes("dhp-library");
+        ok=linked&&present;
+        console.log("HTML parity "+label+": shell="+shell.status+" linked="+linked+" js="+js.status+" runtime="+present+" attempt="+attempt+"/5");
+        if(ok)break;
+      }catch(e){console.log("HTML parity "+label+": "+(e.message||e))}
+      if(attempt<5)await sleep(DELAY_MS);
+    }
+    if(!ok)throw new Error("HTML V3 parity missing on "+label+": "+base);
+  }
+
   // MOTIF_IMAGE_DELIVERY_V5: ensure real assets reach both public and workers.dev.
   for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
     for (const name of ["fajr", "dhuhr", "asr", "maghrib", "isha"]) {
