@@ -4,6 +4,7 @@ on:
     branches: [review/kids-quiz-v4-batch-001-020-20261014]
     paths:
       - kids/review-only/quiz-v4-20261020-produce-request.md
+      - kids/review-only/quiz-v4-20261020-safe-retry-request.md
 permissions:
   contents: write
 concurrency:
