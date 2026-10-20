@@ -77,7 +77,7 @@ document.addEventListener("touchend",reset,{capture:true,passive:true});
 document.addEventListener("touchcancel",reset,{capture:true,passive:true});
 })();
 
-/* DAR_GLOBAL_ADULT_HERO_EDGE_BINDING_V5 · REAL OFFSET: extend REAL active hero artwork into
+/* DAR_GLOBAL_ADULT_HERO_EDGE_BINDING_V6 · REAL OFFSET: extend REAL active hero artwork into
  * upper safe area in visitor, Test and Android PWA. No extra touch interception. */
 (function(){
  "use strict";
@@ -148,7 +148,7 @@ document.addEventListener("touchcancel",reset,{capture:true,passive:true});
   }
   if(edge.style.getPropertyValue("--dar-hero-edge-image")!==active.image)
    edge.style.setProperty("--dar-hero-edge-image",active.image);
-  var extent=Math.ceil(active.top+2)+"px";
+  var extent=Math.ceil(active.top+68)+"px";
   if(edge.style.getPropertyValue("--dar-hero-edge-height")!==extent)
    edge.style.setProperty("--dar-hero-edge-height",extent);
   document.body.classList.add("dar-hero-edge-active");

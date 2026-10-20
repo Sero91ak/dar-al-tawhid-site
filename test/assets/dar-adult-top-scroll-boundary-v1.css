@@ -55,7 +55,7 @@ html,html body{
 /* No modifications to .app/#appView overflow (Android scroll-chain safeguard).
  * No modifications to the 5-tab bottom dock or fixed iOS safe areas. */
 
-/* DAR_GLOBAL_ADULT_HERO_SAFE_TOP_V5 · 2026-10-20
+/* DAR_GLOBAL_ADULT_HERO_SAFE_TOP_V6 · 2026-10-20
  * Existing photo, never an unrelated theme green/cream strip in exposed safe area.
  * One fixed, pointer-transparent continuation; no duplicate scroll container.
  * Native system pixels outside WKWebView require native host support.
@@ -70,6 +70,9 @@ body > #darHeroSafeTopFill{
   visibility:hidden;
   opacity:0;
   contain:paint;
+  /* Fade into the real, sharp hero instead of ending as a fake rectangle. */
+  -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 calc(100% - 68px),transparent 100%);
+  mask-image:linear-gradient(to bottom,#000 0%,#000 calc(100% - 68px),transparent 100%);
 }
 body.dar-hero-edge-active > #darHeroSafeTopFill{
   visibility:visible;
@@ -81,15 +84,16 @@ body.dar-hero-edge-active > #darHeroSafeTopFill{
   background-image:var(--dar-hero-edge-image,none);
   background-size:cover;
   background-repeat:no-repeat;
-  background-position:center top;
-  filter:blur(7px) saturate(.92) brightness(.83);
+  background-position:center 38%;
+  /* No artificial blur: it looked like a separate brown status bar. */
+  filter:none;
   transform:translateZ(0);
 }
 #darHeroSafeTopFill::after{
   content:"";
   position:absolute;inset:0;
   pointer-events:none;
-  background:linear-gradient(to bottom,rgba(5,11,12,.20),transparent 90%);
+  background:linear-gradient(to bottom,rgba(5,11,12,.28),rgba(5,11,12,.12) 42%,transparent 100%);
 }
 /* Home is the only route with a social/signature footer. The existing bottom
  * dock owns its clearance; prevent extra empty scroll between last card/footer. */
