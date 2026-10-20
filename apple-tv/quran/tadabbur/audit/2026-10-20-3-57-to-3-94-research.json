@@ -1,0 +1,178 @@
+{
+  "schemaVersion": "1.0",
+  "auditDate": "2026-10-20",
+  "project": "DĀR AL TAWḤĪD – Qurʾān Tadabbur",
+  "branch": "automation/tadabbur-audit-20261020-3-57-3-94",
+  "baseBranch": "main",
+  "baseMainCommit": "cd4389e9f53e7102660cafaf177b146d8151fe95",
+  "previousAudits": [
+    {
+      "branch": "automation/tadabbur-audit-20261020-3-15-3-31",
+      "commit": "15622642c629ec0bda8ac876e0697962a7efe40a",
+      "path": "apple-tv/quran/tadabbur/audit/2026-10-20-3-15-to-3-31-research.json"
+    },
+    {
+      "branch": "automation/tadabbur-audit-20261020-3-32-3-56",
+      "commit": "6be6a5bc8cebc6312ff0123232ee769cd54073f2",
+      "path": "apple-tv/quran/tadabbur/audit/2026-10-20-3-32-to-3-56-research.json"
+    }
+  ],
+  "baseline": {
+    "catalogEntries": 4702,
+    "totalVerses": 6236,
+    "missing": 1534,
+    "firstMissing": "2:82",
+    "lastMissing": "19:98",
+    "catalogBlobSha": "4d681a8c452ec1f346c187f9ce6948c6e8c1d494",
+    "entriesIndexBlobSha": "341488c34ef956bb19231d81a694c13049931b0b"
+  },
+  "summary": {
+    "newMissingReferencesInspected": 10,
+    "primarySourceSectionsInspected": 9,
+    "fullyAuthenticatedNewEntries": 0,
+    "canonicalEntriesAdded": 0,
+    "canonicalFilesChanged": false,
+    "liveDeployed": false,
+    "workflowRun": false
+  },
+  "qualityPolicy": "Research-only; sources checked at cited aṭ-Ṭabarī passages. Exact verse match and named chains noted where visible. Page presence ≠ authenticated isnād. No unverified ṣaḥīḥ/ḥasan, no invented citations. No Kids, push, main, catalog or live changes.",
+  "candidates": [
+    {
+      "reference": "3:57",
+      "source": "https://www.islamweb.net/ar/library/content/50/967/index.php",
+      "reportNumbers": [
+        7156
+      ],
+      "attribution": "Ibn ʿAbbās",
+      "isnad": "al-Muṯannā → ʿAbdullāh ibn Ṣāliḥ → Muʿāwiyah ibn Ṣāliḥ → ʿAlī ibn Abī Ṭalḥah → Ibn ʿAbbās",
+      "arabicExcerpt": "وَعَمِلُوا الصَّالِحَاتِ ... أَدَّوْا فَرَائِضِي",
+      "observation": "IMPORTANT VERSE MATCH: Ṭabarī 7156 glosses 3:57, not 3:56. ʿAlī ibn Abī Ṭalḥah's Ibn ʿAbbās Tafsīr is mediated; cannot assert fully connected chain or ṣaḥīḥ without transmission review.",
+      "status": "open-mediated-isnad",
+      "next": "Investigate ʿAlī ibn Abī Ṭalḥah → Ibn ʿAbbās mediation, ʿAbdullāh ibn Ṣāliḥ and corroborating early chains."
+    },
+    {
+      "reference": "3:58",
+      "source": "https://www.islamweb.net/ar/library/content/50/968/index.php",
+      "reportNumbers": [
+        7157,
+        7158,
+        7159
+      ],
+      "attribution": "Muḥammad ibn Jaʿfar ibn az-Zubayr / aḍ-Ḍaḥḥāk / Ibn ʿAbbās",
+      "isnad": "7157 Ibn Ḥumayd → Salamah → Ibn Isḥāq → Muḥammad ibn Jaʿfar; 7158 al-Muṯannā → Isḥāq → Abū Zuhayr → Juwaybir → aḍ-Ḍaḥḥāk; 7159 al-Muṯannā → ʿAbdullāh ibn Ṣāliḥ → Muʿāwiyah ibn Ṣāliḥ → ʿAlī → Ibn ʿAbbās",
+      "arabicExcerpt": "وَالذِّكْرِ ... الْقُرْآنُ",
+      "observation": "Specific early glosses of dhikr as Qurʾān present; 7158 includes Juwaybir (serious weakness concern), 7159 mediated Ibn ʿAbbās transmission; 7157 Ibn Ḥumayd concerns. No certified chain.",
+      "status": "open-isnad",
+      "next": "Verify Juwaybir rijāl and independent connected alternatives; avoid treating Ṭabarī's own prose as early isnād."
+    },
+    {
+      "reference": "3:62",
+      "source": "https://www.islamweb.net/ar/library/content/50/972/index.php",
+      "reportNumbers": [
+        7176,
+        7177
+      ],
+      "attribution": "Muḥammad ibn Jaʿfar ibn az-Zubayr / Ibn Jurayj",
+      "isnad": "7176 Ibn Ḥumayd → Salamah → Ibn Isḥāq → Muḥammad ibn Jaʿfar; 7177 al-Qāsim → al-Ḥusayn → Ḥajjāj → Ibn Jurayj",
+      "observation": "Reports explicitly explain 'al-qaṣaṣ al-ḥaqq' regarding ʿĪsā. 7176 requires Ibn Ḥumayd/Ibn Isḥāq scrutiny; 7177 Ibn Jurayj attribution/possible tadlīs and full chain not individually authenticated.",
+      "status": "open-isnad",
+      "next": "Examine report 7177 transmitters and Ibn Jurayj statement as early Tafsīr, then duplicate check."
+    },
+    {
+      "reference": "3:63",
+      "source": "https://www.islamweb.net/ar/library/content/50/972/index.php",
+      "reportNumbers": [],
+      "attribution": "aṭ-Ṭabarī's own explanation",
+      "isnad": null,
+      "observation": "Ṭabarī's 3:62–63 combined section directly explains 3:63 but numbered 7176/7177 concern 3:62; do not move them to 3:63 or invent a Salaf chain.",
+      "status": "open-no-direct-early-report",
+      "next": "Find an independent early Tafsīr specifically for 3:63 in Ibn Abī Ḥātim."
+    },
+    {
+      "reference": "3:67",
+      "source": "https://www.islamweb.net/ar/library/content/50/976/index.php",
+      "reportNumbers": [
+        7211,
+        7212,
+        7213
+      ],
+      "attribution": "ʿĀmir ash-Shaʿbī (7211) / ar-Rabīʿ (7212)",
+      "isnad": "7211 Isḥāq ibn Shāhīn al-Wāsiṭī → Khālid ibn ʿAbdullāh → Dāwūd → ʿĀmir ash-Shaʿbī",
+      "observation": "7211 explicitly reports claim by Jewish/Christian interlocutors and verse, but ash-Shaʿbī is Tābiʿī and occasion report is not automatically connected to revelation. 7213 long Zayd ibn ʿAmr narrative is distinct and must not be conflated.",
+      "status": "open-sabab-connection",
+      "next": "Check whether 7211 is mursal as sabab and whether the gloss is independently corroborated."
+    },
+    {
+      "reference": "3:69",
+      "source": "https://www.islamweb.net/ar/library/content/50/978/index.php",
+      "reportNumbers": [],
+      "attribution": "aṭ-Ṭabarī's own exposition",
+      "isnad": null,
+      "observation": "Inspected passage defines wish to mislead believers; no individually numbered early Salaf report isolated on this page. Author commentary is not a transmitted Salaf athar.",
+      "status": "open-no-direct-early-report",
+      "next": "Search Ibn Abī Ḥātim for specific 3:69 early explanation."
+    },
+    {
+      "reference": "3:76",
+      "source": "https://www.islamweb.net/ar/library/content/50/990/index.php",
+      "reportNumbers": [
+        7277
+      ],
+      "attribution": "Ibn ʿAbbās",
+      "isnad": "al-Muṯannā → ʿAbdullāh ibn Ṣāliḥ → Muʿāwiyah ibn Ṣāliḥ → ʿAlī ibn Abī Ṭalḥah → Ibn ʿAbbās",
+      "arabicExcerpt": "اتَّقَى الشِّرْكَ",
+      "observation": "Direct gloss of 'wa-ttaqā' as avoidance of shirk, but mediated Ibn ʿAbbās Tafsīr and narrator reliability require review; no ṣaḥīḥ label.",
+      "status": "open-mediated-isnad",
+      "next": "Review Ibn Abī Ṭalḥah transmission and independent support."
+    },
+    {
+      "reference": "3:80",
+      "source": "https://www.islamweb.net/ar/library/content/50/996/index.php",
+      "reportNumbers": [
+        7322
+      ],
+      "attribution": "Ibn Jurayj",
+      "isnad": "al-Qāsim → al-Ḥusayn → Ḥajjāj → Ibn Jurayj",
+      "arabicExcerpt": "وَلَا يَأْمُرَكُمْ ... النَّبِيُّ",
+      "observation": "Specific early gloss appears after Ṭabarī's discussion of readings; do not confuse author's qirāʾāt preference with an independently authenticated report. Full narrator and transmission checks remain.",
+      "status": "open-isnad",
+      "next": "Assess 7322 transmitters and alternative early explanations; check whether 3:80 duplicates an existing entry."
+    },
+    {
+      "reference": "3:82",
+      "source": "https://www.islamweb.net/ar/library/content/50/1000/index.php",
+      "reportNumbers": [
+        7339,
+        7340,
+        7341
+      ],
+      "attribution": "ʿAlī ibn Abī Ṭālib (7339) / Abū Jaʿfar ar-Rāzī (7340) / ar-Rabīʿ (7341)",
+      "isnad": "7339 al-Muṯannā → Isḥāq → ʿAbdullāh ibn Hāshim → Sayf ibn ʿUmar → Abū Rawq → Abū Ayyūb → ʿAlī",
+      "observation": "7339 contains Sayf ibn ʿUmar, a severe reliability concern; cannot publish as authenticated ʿAlī statement. 7341 begins 'ḥuddithtu ʿan ʿAmmār' and is not fully connected.",
+      "status": "open-weak-chain",
+      "next": "Assess 7340 independently and search reliable early alternative; do not upgrade 7339."
+    },
+    {
+      "reference": "3:94",
+      "source": "https://www.islamweb.net/ar/library/content/50/1009/index.php",
+      "reportNumbers": [
+        7421
+      ],
+      "attribution": "ʿĀmir ash-Shaʿbī",
+      "isnad": "al-Muṯannā → ʿAmr ibn ʿAwn → Hushaym → Zakariyyā → ash-Shaʿbī",
+      "arabicExcerpt": "نَزَلَتْ فِي الْيَهُودِ",
+      "observation": "Direct report tied to 3:94; need precise identification of Zakariyyā and Hushaym's transmission, and distinguish explanatory attribution from connected prophetic sabab. No final ʿilal/duplicate validation yet.",
+      "status": "needs-final-isnad",
+      "next": "Check Hushaym–Zakariyyā–Shaʿbī hearing and independent witness; then catalog duplicate/validator checks."
+    }
+  ],
+  "nextCursor": "3:95",
+  "priorityForReexamination": [
+    "3:24",
+    "3:57",
+    "3:67",
+    "3:94"
+  ],
+  "securityNote": "Global scope lock active. Adult canonical content subtree authorized but no unverified production entries. Support Gmail connector returned FORBIDDEN during this run; no email read or write.",
+  "releaseGate": "0 new authenticated entries, no canonical commit, no deploy."
+}
