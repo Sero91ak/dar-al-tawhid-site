@@ -1231,6 +1231,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Nimm dir Zeit für deine Antwort. Ein Kind spricht ein schwieriges Wort falsch aus. Was passt am besten? Antwort 1: Nicht auslachen und freundlich bleiben. Antwort 2: Alle zum Lachen darüber bringen. Antwort 3: Den Fehler immer wieder nachmachen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/cda1fac5d7a126f28ced527d5cf20f742e96e773.mp3",
+      "sha256": "a5690a9963a76a36678f9ffdef4ca122e23160c286d2bc835568ff1b383f76ee",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Das merken wir uns: Allah verbietet, andere zu verspotten.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/fe481b066811bcf3139a66e2a1054d576d036aaf.mp3",
       "sha256": "52d7af9dd95297e2dcebb68c0912b539fceddfd8313726d3045a5a83183e6f2a",
@@ -6784,13 +6795,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Alle zum Lachen darüber bringen.",
-            "Den Fehler immer wieder nachmachen.",
-            "Ein Kind spricht ein schwieriges Wort falsch aus. Was passt am besten?",
-            "Nicht auslachen und freundlich bleiben."
-          ]
+          "available": true,
+          "textSha256": "97d6de0e5de7f80c3b0f3b0e5b37d9999e243196c58508498091380fb528b3e1",
+          "mp3Sha256": "a5690a9963a76a36678f9ffdef4ca122e23160c286d2bc835568ff1b383f76ee",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/cda1fac5d7a126f28ced527d5cf20f742e96e773.mp3"
         },
         "correct": {
           "available": true,
@@ -6811,7 +6819,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/fe481b066811bcf3139a66e2a1054d576d036aaf.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-745": {
       "ageBand": "7-8",
