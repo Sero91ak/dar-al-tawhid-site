@@ -2056,6 +2056,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Welche Regel nennt Qurʾān 6:141 bei Ernte und Nahrung? Antwort 1: Das Recht am Erntetag geben und nicht verschwenden. Antwort 2: Alles wegwerfen. Antwort 3: Nur für sich selbst behalten. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a844de534b7c7f445e8ca7580fb2168e82ef363a.mp3",
+      "sha256": "09f112b4300368611efaa424975e536f954270aa4955846a0524ee7ebd8d55f9",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah befiehlt, das zustehende Recht zu geben und Verschwendung zu vermeiden.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/dcc4f5804027d197de06558ed63bcf4740fdece4.mp3",
+      "sha256": "de5d4e1386f06302b247a2db47b599cdc5af64a6b004ec3e4e2c65e71f57848d",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Für wen sind die Schöpfungszeichen in Qurʾān 3:190 besonders? Antwort 1: Für Menschen mit Verstand. Antwort 2: Nur für Reisende. Antwort 3: Nur für Könige. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/2b2a34aaa102a8a903d3ecf454e410afbf4d9e02.mp3",
       "sha256": "a116c206c29e9f496a9591f150410de109d0826bedbac0806d8edb1ee3b5a9be",
@@ -8515,12 +8537,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Das Recht am Erntetag geben und nicht verschwenden.",
-            "Nur für sich selbst behalten.",
-            "Welche Regel nennt Qurʾān 6:141 bei Ernte und Nahrung?"
-          ]
+          "available": true,
+          "textSha256": "ea9e896474bfa246d1e224f4fdfc55102b66e41c577606cf623a01b4ab8c5eff",
+          "mp3Sha256": "09f112b4300368611efaa424975e536f954270aa4955846a0524ee7ebd8d55f9",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a844de534b7c7f445e8ca7580fb2168e82ef363a.mp3"
         },
         "correct": {
           "available": true,
@@ -8535,13 +8555,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/5f074c76b6a312267ac00ac5e98fe8d9.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah befiehlt, das zustehende Recht zu geben und Verschwendung zu vermeiden."
-          ]
+          "available": true,
+          "textSha256": "3bf94bef1cee858646c5acfaa16726d9ee5e8d898efc942c6a83d0da0d2decb1",
+          "mp3Sha256": "de5d4e1386f06302b247a2db47b599cdc5af64a6b004ec3e4e2c65e71f57848d",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/dcc4f5804027d197de06558ed63bcf4740fdece4.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-189": {
       "ageBand": "9-10",
@@ -9774,7 +9794,6 @@
           "missingOriginalSegments": [
             "Eine Waise hart wegzustoßen und nicht zum Speisen Bedürftiger anzuspornen.",
             "Einen Gast freundlich zu empfangen.",
-            "Wissen zu lernen.",
             "Woran zeigt sich nach Qurʾān 107:1–3 ein schwerer Mangel im Glaubensverhalten?"
           ]
         },
