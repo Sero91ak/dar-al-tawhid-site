@@ -483,6 +483,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Hör dir die Frage und die Antworten in Ruhe an. Warum war Iblīs bei Allahs Befehl ungehorsam? Antwort 1: Er weigerte sich und war hochmütig. Antwort 2: Er hatte den Befehl nicht gehört. Antwort 3: Er schlief. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/d9c83d4213fb59ec048ddf83ef05913a3ace21fb.mp3",
+      "sha256": "097c740e99b1a73ce4c6283cfc9789cb3a38e78d162e496acf7ac414fa771289",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Iblīs verweigerte den Gehorsam aus Hochmut.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/74f947ff316e66c0265ca456ef5423672dc9f38b.mp3",
+      "sha256": "fa3a4c924ee44a89c5c82e4af4e5f70cc1c12f1f887b0fcdd76be079084c8e58",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Mal sehen, was du zu diesem Thema weißt. Was lässt Allah durch Regen wachsen? Antwort 1: Pflanzen wie Getreide, Oliven, Datteln und Trauben. Antwort 2: Nur Steine. Antwort 3: Nichts. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/1ca2f271cd3089814c152e74ce3c411fecdf8fc2.mp3",
       "sha256": "ff1f01941346a3c930d43866477b3ef2f709a7e54546581c0cb3af9df21f7ebd",
@@ -2111,6 +2133,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Du möchtest extra nur dann besonders schön beten, wenn andere zuschauen. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Wir machen ʿIbādah nicht, um vor Menschen Eindruck zu machen. Antwort 2: Je mehr Menschen zuschauen, desto richtiger wird eine Tat. Antwort 3: Die Meinung der Menschen ist wichtiger als die Absicht für Allah. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/2c5e7fa294e31061dd28b4e61c2047c90f5a2d93.mp3",
+      "sha256": "583e79c5a02c1e354befe6d005bb1f9c97e925d170c5214e7f06371b12b1cbbc",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Mehrere Kinder schummeln und sagen: „Alle machen das.“ Welcher Grundsatz hilft dir hier am besten? Antwort 1: Viele Menschen machen eine falsche Sache nicht automatisch richtig. Antwort 2: Wenn viele etwas tun, muss es richtig sein. Antwort 3: Gutes und Schlechtes sind immer gleich. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/d5ce26445bc3a3bf5cb4826dd4ad2f1bf4c45de2.mp3",
       "sha256": "3c49c184cd30674d1e82c7cf77888779c18812b34b7b6ef8eea1bffaac8bd1f3",
@@ -3485,12 +3518,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Er hatte den Befehl nicht gehört.",
-            "Er weigerte sich und war hochmütig.",
-            "Warum war Iblīs bei Allahs Befehl ungehorsam?"
-          ]
+          "available": true,
+          "textSha256": "b3f40f92fd97b5730cf89d5c9ac373b6244a872c54252681605ccdc6401e5516",
+          "mp3Sha256": "097c740e99b1a73ce4c6283cfc9789cb3a38e78d162e496acf7ac414fa771289",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/d9c83d4213fb59ec048ddf83ef05913a3ace21fb.mp3"
         },
         "correct": {
           "available": true,
@@ -3505,13 +3536,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/41388654c1245c28b6b3d2e93d8bf77a.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Iblīs verweigerte den Gehorsam aus Hochmut."
-          ]
+          "available": true,
+          "textSha256": "8e9493491d316c12d357e89cf8ff790f39e5b37b2ddf2334fb2dcf1da6d07c15",
+          "mp3Sha256": "fa3a4c924ee44a89c5c82e4af4e5f70cc1c12f1f887b0fcdd76be079084c8e58",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/74f947ff316e66c0265ca456ef5423672dc9f38b.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-177": {
       "ageBand": "7-8",
@@ -4006,7 +4037,6 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Vor dem Lernen.",
             "Vor guter Meinung.",
             "Vor vielem schlechten Verdacht.",
             "Wovor warnt Qurʾān 49:12 neben Ausspionieren und Nachrede?"
@@ -4264,7 +4294,6 @@
           "available": false,
           "missingOriginalSegments": [
             "Um Weite der Brust und Erleichterung seiner Aufgabe.",
-            "Um ein Schloss.",
             "Um viel Besitz.",
             "Worum bat Mūsā vor seiner Aufgabe bei Firʿawn?"
           ]
@@ -11465,13 +11494,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Die Meinung der Menschen ist wichtiger als die Absicht für Allah.",
-            "Du möchtest extra nur dann besonders schön beten, wenn andere zuschauen. Welcher Grundsatz hilft dir hier am besten?",
-            "Je mehr Menschen zuschauen, desto richtiger wird eine Tat.",
-            "Wir machen ʿIbādah nicht, um vor Menschen Eindruck zu machen."
-          ]
+          "available": true,
+          "textSha256": "13b0a4ef66890ecdcb6bcad7f9a6ae83517b265e246175a7c7e8019c7ab2cb2b",
+          "mp3Sha256": "583e79c5a02c1e354befe6d005bb1f9c97e925d170c5214e7f06371b12b1cbbc",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/2c5e7fa294e31061dd28b4e61c2047c90f5a2d93.mp3"
         },
         "correct": {
           "available": true,
@@ -11492,7 +11518,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/327c98605846378b2a8022d6e008912d4d35b736.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-879": {
       "ageBand": "9-10",
