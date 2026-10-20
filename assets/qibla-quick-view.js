@@ -65,6 +65,8 @@
     this._filter = new LowPassHeading();
     this._handler = this._onEvent.bind(this);
     this._samples = [];
+    this._nativeTimer = null;
+    this._nativeActive = false;
     this.needsPermission = typeof window !== "undefined" &&
       window.DeviceOrientationEvent &&
       typeof window.DeviceOrientationEvent.requestPermission === "function";
@@ -85,13 +87,15 @@
     if (typeof event.webkitCompassHeading === "number" && !Number.isNaN(event.webkitCompassHeading)) {
       return normalizeAngle(event.webkitCompassHeading);
     }
-    if (typeof event.alpha === "number" && !Number.isNaN(event.alpha)) {
-      var h = event.absolute ? 360 - event.alpha : 360 - event.alpha;
-      return normalizeAngle(h + this._screenAngle());
+    // Relative alpha has no magnetic-north reference and must never show
+    // a false Qibla alignment. Use only absolute orientation as fallback.
+    if (event.absolute === true && typeof event.alpha === "number" && Number.isFinite(event.alpha)) {
+      return normalizeAngle(360 - event.alpha + this._screenAngle());
     }
     return null;
   };
   HeadingProvider.prototype._onEvent = function (event) {
+    if (this._nativeActive) return; // Prefer CoreLocation true heading when available.
     var raw = this._rawHeading(event);
     if (raw == null) return;
     var acc = event.webkitCompassAccuracy;
@@ -109,6 +113,21 @@
     this.unreliable = badAcc || jump > 10;
     var smooth = this._filter.push(raw, this.unreliable ? 0.08 : 0.2);
     if (this._on) this._on(smooth, raw, this.unreliable);
+  };
+  HeadingProvider.prototype._nativeBridge = function () {
+    try {
+      return root.webkit && root.webkit.messageHandlers && root.webkit.messageHandlers.darNative;
+    } catch (e) { return null; }
+  };
+  HeadingProvider.prototype._readNative = function () {
+    var raw = root.DAR_NATIVE_HEADING;
+    if (raw === null || raw === undefined || raw === "" || !Number.isFinite(Number(raw))) return;
+    // The iOS bridge supplies CoreLocation heading for the device's portrait top.
+    var heading = normalizeAngle(Number(raw) + this._screenAngle());
+    this._nativeActive = true;
+    this.unreliable = false;
+    var smooth = this._filter.push(heading, 0.23);
+    if (this._on) this._on(smooth, heading, false);
   };
   HeadingProvider.prototype.requestPermission = async function () {
     if (!this.needsPermission) {
@@ -129,6 +148,16 @@
     if (this._listening) return;
     this._filter.reset();
     this._samples = [];
+    this._nativeActive = false;
+    var nativeBridge = this._nativeBridge();
+    if (nativeBridge) {
+      try {
+        root.DAR_NATIVE_HEADING = null; // Do not reuse heading from a previous session.
+        nativeBridge.postMessage({ type: "qibla-compass" });
+        var self = this;
+        this._nativeTimer = window.setInterval(function () { self._readNative(); }, 220);
+      } catch (e) { this._nativeTimer = null; }
+    }
     window.addEventListener("deviceorientation", this._handler, true);
     window.addEventListener("deviceorientationabsolute", this._handler, true);
     this._listening = true;
@@ -136,6 +165,14 @@
   };
   HeadingProvider.prototype.stop = function () {
     if (!this._listening) return;
+    if (this._nativeTimer != null) {
+      window.clearInterval(this._nativeTimer);
+      this._nativeTimer = null;
+    }
+    if (this._nativeBridge()) {
+      try { this._nativeBridge().postMessage({ type: "qibla-stop" }); } catch (e) {}
+    }
+    this._nativeActive = false;
     window.removeEventListener("deviceorientation", this._handler, true);
     window.removeEventListener("deviceorientationabsolute", this._handler, true);
     this._listening = false;
@@ -144,60 +181,61 @@
     root[LISTENER_FLAG] = Math.max(0, (root[LISTENER_FLAG] || 1) - 1);
   };
 
-  function LocationProvider() {
-    this._watchId = null;
+  function validCoordinate(value, limit) {
+    return value !== null && value !== undefined && value !== "" &&
+      Number.isFinite(Number(value)) && Math.abs(Number(value)) <= limit;
   }
+  function nativeLocation() {
+    var n = root.DAR_NATIVE_LOCATION || root.__darNativeLocation;
+    if (!n) return null;
+    var rawLat = n.latitude ?? n.lat;
+    var rawLon = n.longitude ?? n.lon ?? n.lng;
+    if (!validCoordinate(rawLat, 90) || !validCoordinate(rawLon, 180)) return null;
+    // Native timestamps are milliseconds. Ignore location data older than 10 minutes.
+    var timestamp = Number(n.timestamp);
+    if (Number.isFinite(timestamp) && timestamp > 0 &&
+        (timestamp > Date.now() + 60000 || Date.now() - timestamp > 600000)) return null;
+    return { lat: Number(rawLat), lon: Number(rawLon), city: n.city || "",
+      stale: false, source: "native" };
+  }
+  function savedPrayerLocation() {
+    try {
+      if (typeof root.getPrayerSettings !== "function") return null;
+      var s = root.getPrayerSettings();
+      if (!s) return null;
+      var lat = s.lat ?? s.latitude;
+      var lon = s.lon ?? s.longitude ?? s.lng;
+      if (!validCoordinate(lat, 90) || !validCoordinate(lon, 180)) return null;
+      return { lat: Number(lat), lon: Number(lon), city: s.city || "",
+        stale: true, source: "prayer", manual: s.locationMode === "manual" };
+    } catch (e) { return null; }
+  }
+  function LocationProvider() { this._watchId = null; }
   LocationProvider.prototype.cached = function () {
-    try {
-      var n = root.DAR_NATIVE_LOCATION;
-      var lat = Number(n && (n.latitude ?? n.lat));
-      var lon = Number(n && (n.longitude ?? n.lon ?? n.lng));
-      if (n && Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {
-        return { lat: lat, lon: lon, city: n.city || "", stale: false, source: "native" };
-      }
-    } catch (e) {}
-    try {
-      if (typeof root.getPrayerSettings === "function") {
-        var s = root.getPrayerSettings();
-        var plat = Number(s.lat ?? s.latitude);
-        var plon = Number(s.lon ?? s.longitude);
-        if (Number.isFinite(plat) && Number.isFinite(plon)) {
-          return { lat: plat, lon: plon, city: s.city || "", stale: false, source: "prayer" };
-        }
-      }
-    } catch (e2) {}
-    return null;
+    var saved = savedPrayerLocation();
+    // Never silently override an explicitly selected city with the phone GPS.
+    if (saved && saved.manual) return saved;
+    return nativeLocation() || saved;
   };
   LocationProvider.prototype.refresh = function (highAccuracy) {
-    var self = this;
+    var saved = savedPrayerLocation();
+    if (saved && saved.manual && !highAccuracy) return Promise.resolve(saved);
+    var nativeFix = nativeLocation();
+    if (nativeFix) return Promise.resolve(nativeFix);
     return new Promise(function (resolve, reject) {
-      try {
-        var n = root.DAR_NATIVE_LOCATION;
-        var lat = Number(n && (n.latitude ?? n.lat));
-        var lon = Number(n && (n.longitude ?? n.lon ?? n.lng));
-        if (n && Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {
-          resolve({ lat: lat, lon: lon, city: n.city || "", stale: false, source: "native" });
+      if (!navigator.geolocation) { reject(new Error("no-geo")); return; }
+      navigator.geolocation.getCurrentPosition(function (pos) {
+        var lat = pos && pos.coords && pos.coords.latitude;
+        var lon = pos && pos.coords && pos.coords.longitude;
+        if (!validCoordinate(lat, 90) || !validCoordinate(lon, 180)) {
+          reject(new Error("invalid-geo"));
           return;
         }
-      } catch (e) {}
-      if (!navigator.geolocation) {
-        reject(new Error("no-geo"));
-        return;
-      }
-      navigator.geolocation.getCurrentPosition(function (pos) {
-        resolve({
-          lat: pos.coords.latitude,
-          lon: pos.coords.longitude,
-          city: "",
-          stale: false,
-          source: "geo",
-          accuracy: pos.coords.accuracy
-        });
-      }, reject, {
-        enableHighAccuracy: !!highAccuracy,
+        resolve({lat: Number(lat), lon: Number(lon), city: "", stale: false,
+          source: "geo", accuracy: pos.coords.accuracy});
+      }, reject, {enableHighAccuracy: !!highAccuracy,
         timeout: highAccuracy ? 8000 : 5000,
-        maximumAge: highAccuracy ? 30000 : 30 * 60 * 1000
-      });
+        maximumAge: highAccuracy ? 30000 : 30 * 60 * 1000});
     });
   };
   LocationProvider.prototype.stop = function () {
@@ -242,6 +280,7 @@
     pending: false,
     alignedOnce: false,
     visBound: false,
+    nativeLocBound: false,
     swipeY: null
   };
 
@@ -258,13 +297,22 @@
   }
 
   function persistLoc(loc) {
-    if (!loc || !Number.isFinite(loc.lat) || !Number.isFinite(loc.lon)) return;
+    if (!loc || !Number.isFinite(loc.lat) || !Number.isFinite(loc.lon) ||
+        loc.source === "prayer" || loc.source === "native") return;
+    // Native GPS synchronization is owned by dar-setup-hub; do not double-sync
+    // or overwrite a location manually selected by the visitor.
     try {
-      if (typeof root.setPrayerSettings === "function") {
-        var patch = { lat: loc.lat, lon: loc.lon, locationGranted: true };
-        if (loc.city) patch.city = loc.city;
-        root.setPrayerSettings(patch);
-      }
+      if (typeof root.getPrayerSettings !== "function" ||
+          typeof root.setPrayerSettings !== "function") return;
+      var current = root.getPrayerSettings() || {};
+      if (current.locationMode === "manual") return;
+      var lat = Number(current.lat), lon = Number(current.lon);
+      if (Number.isFinite(lat) && Number.isFinite(lon) &&
+          Math.abs(lat - loc.lat) < 0.005 && Math.abs(lon - loc.lon) < 0.005) return;
+      var patch = { lat: loc.lat, lon: loc.lon, locationMode: "auto",
+        locationGranted: true, locationUpdatedAt: Date.now() };
+      if (loc.city) patch.city = loc.city;
+      root.setPrayerSettings(patch);
     } catch (e) {}
   }
 
@@ -446,6 +494,12 @@
   }
 
   async function requestLoc(fromUser) {
+    // Ask the native bridge for a fresh CoreLocation fix; a later event updates
+    // this panel without reopening it. The web Geolocation API remains fallback.
+    try {
+      var bridge = root.webkit && root.webkit.messageHandlers && root.webkit.messageHandlers.darNative;
+      if (bridge) bridge.postMessage({ type: "location-resume" });
+    } catch (e) {}
     var cached = engine.location.cached();
     if (cached) applyLoc(cached);
     else if (ui.root) ui.root.classList.add("is-loading");
@@ -468,7 +522,7 @@
   }
 
   async function startCompass(fromUser) {
-    if (engine.heading.needsPermission && engine.heading.permission !== "granted") {
+    if (!engine.heading._nativeBridge() && engine.heading.needsPermission && engine.heading.permission !== "granted") {
       var perm = await engine.heading.requestPermission();
       if (perm !== "granted") {
         setGate("compass");
@@ -482,6 +536,12 @@
     });
     engine.started = true;
     schedulePaint();
+  }
+
+  function onNativeLocation() {
+    if (!QiblaQuickView.isOpen()) return;
+    var loc = engine.location.cached();
+    if (loc) applyLoc(loc);
   }
 
   function onVis() {
@@ -506,6 +566,11 @@
       if (!ui.visBound) {
         document.addEventListener("visibilitychange", onVis);
         ui.visBound = true;
+      }
+      if (!ui.nativeLocBound) {
+        window.addEventListener("dar-native-location", onNativeLocation);
+        window.addEventListener("dar:location-updated", onNativeLocation);
+        ui.nativeLocBound = true;
       }
       var cached = engine.location.cached();
       if (cached) applyLoc(cached);
@@ -545,6 +610,11 @@
       if (ui.visBound) {
         document.removeEventListener("visibilitychange", onVis);
         ui.visBound = false;
+      }
+      if (ui.nativeLocBound) {
+        window.removeEventListener("dar-native-location", onNativeLocation);
+        window.removeEventListener("dar:location-updated", onNativeLocation);
+        ui.nativeLocBound = false;
       }
       if (ui.root && ui.root.parentNode) ui.root.parentNode.removeChild(ui.root);
       ui.root = null;
