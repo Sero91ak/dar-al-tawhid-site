@@ -978,6 +978,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Mal sehen, was du zu diesem Thema weißt. Wem nützt eine rechtschaffene Tat nach Qurʾān 41:46? Antwort 1: Dem Menschen selbst. Antwort 2: Nur anderen Menschen. Antwort 3: Niemandem. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/f666c8cb0013eb74029f93e8f2ffd8a99488604b.mp3",
+      "sha256": "813eaaaf06ce5bef9f77d81674f26f31bca2c996b799e4accd45ea04e19af1e0",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Der Vers lehrt persönliche Verantwortung: Gutes nützt dem Täter, Böses schadet ihm.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8bbaec56c65771015aa9830adc1f09465086384a.mp3",
+      "sha256": "1a208d8b65a7c0fcef36daa03d766eccad09c7a9993f7f46fe900ec1aa2dd5c4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Das merken wir uns: Anbetung und die Bitte um Hilfe richten wir an Allah allein.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/f612c8b4075004c4b54d9aec227f77c6f089228b.mp3",
       "sha256": "b472cf51f172d9ea7b1d76c1fd1bc22c875f1a5d94f1158fc578488211019c33",
@@ -3780,7 +3802,6 @@
           "available": false,
           "missingOriginalSegments": [
             "Einander mit einem guten, gesegneten Gruß zu grüßen.",
-            "Nur zu flüstern.",
             "Ohne Gruß hineinzulaufen.",
             "Was lehrt Qurʾān 24:61 beim Betreten von Häusern?"
           ]
@@ -6342,12 +6363,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Dem Menschen selbst.",
-            "Nur anderen Menschen.",
-            "Wem nützt eine rechtschaffene Tat nach Qurʾān 41:46?"
-          ]
+          "available": true,
+          "textSha256": "1da9e7c4b18dc32c0325e25346a75978bad4b79014d8f26764750e5a7bc58781",
+          "mp3Sha256": "813eaaaf06ce5bef9f77d81674f26f31bca2c996b799e4accd45ea04e19af1e0",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/f666c8cb0013eb74029f93e8f2ffd8a99488604b.mp3"
         },
         "correct": {
           "available": true,
@@ -6362,13 +6381,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/53nlCj9DCu1JkXZFBEZI.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Der Vers lehrt persönliche Verantwortung: Gutes nützt dem Täter, Böses schadet ihm."
-          ]
+          "available": true,
+          "textSha256": "c264758a07ab8344d775433f349ac752000edc133485f590b10b0239ace018fc",
+          "mp3Sha256": "1a208d8b65a7c0fcef36daa03d766eccad09c7a9993f7f46fe900ec1aa2dd5c4",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8bbaec56c65771015aa9830adc1f09465086384a.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-717": {
       "ageBand": "7-8",
@@ -8445,7 +8464,6 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Alles wegwerfen.",
             "Das Recht am Erntetag geben und nicht verschwenden.",
             "Nur für sich selbst behalten.",
             "Welche Regel nennt Qurʾān 6:141 bei Ernte und Nahrung?"
@@ -9578,7 +9596,6 @@
           "missingOriginalSegments": [
             "Damit Menschen über seine Āyāt nachdenken und sich erinnern.",
             "Damit es ungelesen bleibt.",
-            "Nur als Schmuck.",
             "Warum wurde das gesegnete Buch nach Qurʾān 38:29 herabgesandt?"
           ]
         },
