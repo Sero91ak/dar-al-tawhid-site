@@ -2045,6 +2045,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Wovon hängt der Wert einer Handlung nach dem berühmten Ḥadīṯ ab? Antwort 1: Von der Absicht. Antwort 2: Nur davon, wie andere sie sehen. Antwort 3: Nur von ihrer Länge. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ab96c53847cc2f5f28c4ccafd2d051b74ba8d8b7.mp3",
+      "sha256": "3ca83fe69e794f60879ec97b856f148129d8237df621f7bfe2b7cee8cb54ea63",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Worauf schaut Allah nach Ṣaḥīḥ Muslim 2564? Antwort 1: Auf Herzen und Taten. Antwort 2: Nur auf Aussehen und Besitz. Antwort 3: Nur auf Kleidung. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/6785271fdc0caf3ecac5a777f0c3624958fe5c1b.mp3",
       "sha256": "0293914d2bfc09a18a30b04a540ff94eadfa3556cd57ac66cb919200d42c4bbb",
@@ -4477,7 +4488,6 @@
           "available": false,
           "missingOriginalSegments": [
             "Allah, Engel, Bücher und Gesandte.",
-            "Nur sichtbare Dinge.",
             "Sterne, Glückszahlen und Horoskope.",
             "Was nennt Qurʾān 2:285 beim Glauben der Gläubigen?"
           ]
@@ -5199,8 +5209,7 @@
           "missingOriginalSegments": [
             "Ihn zu stillen und bei Gefahr in den Fluss zu legen.",
             "Ihn zu verstecken und nie wiederzusehen.",
-            "Was gab Allah Mūsās Mutter ein, als sie Angst um ihn hatte?",
-            "Zu Firʿawn zu gehen."
+            "Was gab Allah Mūsās Mutter ein, als sie Angst um ihn hatte?"
           ]
         },
         "correct": {
@@ -5390,7 +5399,6 @@
           "missingOriginalSegments": [
             "An ihre Nahrung und wie Allah sie hervorbringt.",
             "Nur an Unterhaltung.",
-            "Nur an ihren Besitz.",
             "Woran sollen Menschen nach Qurʾān 80:24 denken?"
           ]
         },
@@ -8281,11 +8289,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Nur davon, wie andere sie sehen.",
-            "Wovon hängt der Wert einer Handlung nach dem berühmten Ḥadīṯ ab?"
-          ]
+          "available": true,
+          "textSha256": "1dcff25a5f584046d5cb76280f6abed6ee1d9a70d03b25f30bff057807d19022",
+          "mp3Sha256": "3ca83fe69e794f60879ec97b856f148129d8237df621f7bfe2b7cee8cb54ea63",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ab96c53847cc2f5f28c4ccafd2d051b74ba8d8b7.mp3"
         },
         "correct": {
           "available": true,
