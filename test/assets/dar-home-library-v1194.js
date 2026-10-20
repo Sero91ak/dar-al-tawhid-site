@@ -650,7 +650,8 @@ function applySmartCompactV2(){
   ].join("\\n");document.head.appendChild(style);
  }
 }
-\nfunction sync(){
+
+function sync(){
   if(!document.documentElement||!document.body)return;
   if(!isHome()){
     document.documentElement.classList.remove("dar-home-v1194","dar-home-single-canvas-v1324");
