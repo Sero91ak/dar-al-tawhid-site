@@ -1309,6 +1309,10 @@ struct WebAppView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            // DAR_ADULT_SCROLL_NO_BOUNCE_V3: reassert UIKit scroll policy
+            // after every WKWebView navigation, including deep links.
+            webView.scrollView.bounces = false
+            webView.scrollView.alwaysBounceVertical = false
             guard let currentURL = webView.url, isAllowedInternalURL(currentURL) else { return }
             loadTimeoutWorkItem?.cancel()
             hasCompletedInitialLoad = true
