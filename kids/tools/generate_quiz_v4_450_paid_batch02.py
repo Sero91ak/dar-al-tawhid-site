@@ -156,8 +156,18 @@ def original_mp3(key,spoken,*,language="de"):
                          and hold.get("allowOneStrictTenOriginalDictionaryBatchBeforeListeningApproval") is True
                          and hold.get("maximumPreHearingAdditionalNewOriginals")==10
                          and hold.get("maximumPreHearingAdditionalEstimatedCredits")==240)
-        if not (one_pilot or one_owner_batch):
-            raise RuntimeError("V4_HUMAN_HEARING_GATE: bulk recording requires explicit owner one-batch consent and exact paid workflow; do not claim human listening approval")
+        # Explicitly renewed owner's all-450 request permits paid private staging,
+        # NOT a fabricated hearing approval or a public audio release.
+        # Only the dedicated SHA-journaled bulk workflow may set this flag.
+        owner_bulk=(os.environ.get("KIDS_V4_OWNER_450_BULK_EXPLICIT")=="YES"
+                    and hold.get("ownerRequestedAll450Originals") is True
+                    and hold.get("ownerExplicitlyRequestedContinuedPaidQuizProduction") is True
+                    and hold.get("ownerBulkConsent20261020") is True
+                    and hold.get("ownerBulkHearingApprovalClaimed") is False
+                    and hold.get("publicQuizAudioReleaseAuthorized") is False
+                    and os.environ.get("KIDS_V4_EXPLICIT_SPEND_APPROVAL")=="YES")
+        if not (one_pilot or one_owner_batch or owner_bulk):
+            raise RuntimeError("V4_HUMAN_HEARING_GATE: only owner-authorized SHA-checkpointed private originals; no fake listening approval or public release")
     body=build_canonical_v4_payload(spoken,language=language)
     req=urllib.request.Request(
         "https://api.elevenlabs.io/v1/text-to-speech/"+VOICE+
