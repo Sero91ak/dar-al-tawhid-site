@@ -35,8 +35,12 @@ JOURNAL = ROOT/"kids/data/quiz-v4-all450-paid-wave-request-journal.json"
 BACKUP = ROOT/"kids/data/quiz-v4-all450-paid-wave-usage-backup.json"
 REPORT = ROOT/"kids/review-only/quiz-v4-all450-next-exact-paid-wave.json"
 ONE_TIME_APPROVAL = ROOT/"kids/review-only/quiz-v4-20261020-one-wave-authorization.json"
-MAX_NEW_PER_CALL = 10
-MAX_ESTIMATED_CREDITS = 240.0
+# Standard audited one-wave mode stays at ten originals / 240 forecast credits.
+# Only an explicitly authorized, serialized GitHub 450-owner job may raise
+# the per-wave bound; per-text paid GitHub checkpoints are still mandatory.
+OWNER_450_BULK = os.getenv("KIDS_V4_OWNER_450_BULK_EXPLICIT") == "YES"
+MAX_NEW_PER_CALL = 25 if OWNER_450_BULK else 10
+MAX_ESTIMATED_CREDITS = 1500.0 if OWNER_450_BULK else 240.0
 
 
 def load(p):
