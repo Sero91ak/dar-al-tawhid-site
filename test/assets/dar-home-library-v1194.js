@@ -626,9 +626,18 @@ function applySmartCompactV2(){
  if(!bar){
   bar=document.createElement("div");bar.id="dtSmartQuickV2";
   bar.setAttribute("aria-label","Schnellzugriffe");
-  [["Qibla","qibla"],["Design","settings"],["Einstellungen","settings"],["Ḥadīṯ-Werke","hadith"],["Bibliothek","books"],["Frauen","frauen"]].forEach(function(pair){
+  [["Qibla","qibla"],["Design","appearance"],["Einstellungen","settings"],["Ḥadīṯ-Werke","hadith"],["Bibliothek","books"],["Frauen","frauen"]].forEach(function(pair){
    var b=document.createElement("button");b.type="button";b.className="dt-smart-action";b.textContent=pair[0];
-   b.addEventListener("click",function(){navTo(pair[1])});bar.appendChild(b);
+   b.addEventListener("click",function(){
+    if(pair[1]!=="appearance"){navTo(pair[1]);return;}
+    // Existing app settings own theme persistence; jump to that control.
+    navTo("settings");
+    setTimeout(function(){
+     var labels=Array.prototype.slice.call(document.querySelectorAll("h1,h2,h3,h4,label,button,[role=heading]"));
+     var target=labels.find(function(el){return /erscheinungsbild|farbschema|design und farben/i.test(String(el.textContent||"").trim())});
+     if(target){try{target.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){}}
+    },220);
+   });bar.appendChild(b);
   });
  }
  if(prayer.nextElementSibling!==bar)prayer.insertAdjacentElement("afterend",bar);
@@ -647,7 +656,7 @@ function applySmartCompactV2(){
    "html.dar-home-v1194 body.is-home-route .dt-filter-trigger{display:none!important;}",
    "html.dar-home-v1194 body.is-home-route #appView .home-v380-section{scroll-margin-top:90px;}",
    "@media(max-width:390px){html.dar-home-v1194 body.is-home-route .dt-smart-action{font-size:10px;padding:6px 3px;}}"
-  ].join("\\n");document.head.appendChild(style);
+  ].join("\n");document.head.appendChild(style);
  }
 }
 
