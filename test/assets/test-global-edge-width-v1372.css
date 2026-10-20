@@ -1645,3 +1645,95 @@ html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
   min-height:clamp(145px,33svh,205px)!important;
  }
 }
+
+
+/* DAR_TEST_EDGE_NO_PERIMETER_V1393 · 2026-10-20 · ADULT DAR TEST ONLY
+ * iPhone appearance video: one visible rounded perimeter travelled from
+ * ABOVE DĀR AL TAWḤĪD down BOTH screen sides; prayer/welcome/quick actions
+ * had another set of decorative outlines. The old image-era 100vw/-240px
+ * oversize stage MUST NOT survive on the now photo-free Home.
+ *
+ * The page is a FULL-BLEED CANVAS, never a bordered master capsule.
+ * Content keeps its responsive, safe-area-aware spacing and working
+ * controls. Do not touch document overflow, scrolling, fixed dock position,
+ * native prayer data, themes, real functional cards or any Kids/Visitor app.
+ */
+html[data-theme].dar-home-v47-layout.dar-home-v1194 body.is-home-route
+ .top-shell.theme-hero-shell{
+  --dt-top-oversize:0px!important;
+  position:relative!important;
+  inset:auto!important;
+  transform:none!important;
+  width:100%!important;
+  max-width:100%!important;
+  min-width:0!important;
+  margin:0!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+}
+/* Separate safe-area spacing belongs to the real header, not an oversized
+   empty wrapper. Never create a second background or a scroll surface. */
+html[data-theme].dar-home-v47-layout.dar-home-v1194 body.is-home-route
+ :is(.app,.app-shell,.page-shell,#appRoot,#appShell,
+     .top-shell,.top-shell.theme-hero-shell,
+     .top-shell .header,.top-shell .header.theme-hero-surface,
+     #appView.view,#appView .dv3-home,#dv3Home){
+  border:0!important;
+  border-width:0!important;
+  border-radius:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+  background-clip:border-box!important;
+}
+html[data-theme].dar-home-v47-layout.dar-home-v1194 body.is-home-route
+ :is(.app,.app-shell,.page-shell,#appRoot,#appShell,.top-shell,#appView.view){
+  min-width:0!important;
+  max-width:100%!important;
+}
+html[data-theme].dar-home-v47-layout.dar-home-v1194 body.is-home-route
+ :is(.top-shell,.top-shell.theme-hero-shell,
+     .top-shell .header,.top-shell .header.theme-hero-surface)::before,
+html[data-theme].dar-home-v47-layout.dar-home-v1194 body.is-home-route
+ :is(.top-shell,.top-shell.theme-hero-shell,
+     .top-shell .header,.top-shell .header.theme-hero-surface)::after{
+  content:none!important;
+  display:none!important;
+}
+/* Retain fill, radii and information grouping, but no stacked hairline boxes:
+   exactly the surfaces visibly outlined in the 23:01 Test video. */
+html[data-theme].dar-home-v47-layout.dar-home-v1194 body.is-home-route
+ :is(#headerPrayerStatus.header-prayer-hub,
+     .top-shell>.isnad.dt-isnad,
+     .dar-v47-welcome,
+     #dv3Home .dv3-quick,
+     #dv3Home .dv3-quick-grid,
+     #dv3Home .dv3-quick-grid>a,
+     #dv3Home .dv3-quick-grid>button,
+     #dv3Home .dv3-quick-grid>div,
+     #dv3Home .dv3-posts,
+     #dv3Home .dv3-tawhid,
+     #dv3Home .dv3-search-box,
+     #dv3Home .dv3-home-card,
+     #dv3Home .dv3-section-card){
+  border:0!important;
+  border-width:0!important;
+  outline:0!important;
+  box-shadow:none!important;
+}
+/* Rounded tab dock remains usable but it no longer paints another perimeter.
+   Active-tab highlight, glass tint, click targets and dock geometry remain. */
+html[data-theme].dar-home-v47-layout.dar-home-v1194 body.is-home-route
+ :is(#bottomNav.bottom-nav,#appChromeDock #bottomNav.bottom-nav){
+  border:0!important;
+  outline:0!important;
+}
+/* Wide-screen/tablet/foldable: no 100vw breakout from a centered parent.
+   Keep the same responsive canvas and gutters on every appearance. */
+@media(min-width:700px){
+ html[data-theme].dar-home-v47-layout.dar-home-v1194 body.is-home-route
+ .top-shell.theme-hero-shell{
+  width:100%!important;
+  max-width:100%!important;
+  margin-inline:0!important;
+ }
+}
