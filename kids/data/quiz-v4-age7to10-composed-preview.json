@@ -1022,6 +1022,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Mal sehen, was du zu diesem Thema weißt. Was ist Allah für den, der auf Ihn vertraut? Antwort 1: Allah genügt ihm. Antwort 2: Er braucht Allah nicht. Antwort 3: Er soll nur auf Menschen vertrauen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/54d51f6066d6cfcabc5b0589be89539cca2714c0.mp3",
+      "sha256": "898678bfadc62568af3ebf87501fd0c3188d0e5105d631f83a9f70752428949e",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Wer auf Allah vertraut, dem genügt Allah.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/6aa43ad3fd6f6c8bd1e98e0570e6a67b82ab20dc.mp3",
+      "sha256": "ed04c6fc681602ec481ab29dc1ba8517840b02b96ffcfdba4d07c7915e1ad0cf",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Nimm dir Zeit für deine Antwort. Sind Wissende und Nichtwissende gleich? Antwort 1: Nein. Antwort 2: Ja, immer. Antwort 3: Nur nachts. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/be35f73e6ec98edb40040a2015d9a8cb8a07ac89.mp3",
       "sha256": "0067778800701c8a32fa073e2ee2bad063a6b6e0d1db7421b77fa5659992b676",
@@ -5919,12 +5941,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Er braucht Allah nicht.",
-            "Er soll nur auf Menschen vertrauen.",
-            "Was ist Allah für den, der auf Ihn vertraut?"
-          ]
+          "available": true,
+          "textSha256": "731c52062bbd23d42da7cec3977c0721eea847554c4fe950ea598dd3408fc921",
+          "mp3Sha256": "898678bfadc62568af3ebf87501fd0c3188d0e5105d631f83a9f70752428949e",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/54d51f6066d6cfcabc5b0589be89539cca2714c0.mp3"
         },
         "correct": {
           "available": true,
@@ -5939,13 +5959,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/vTRh2ZkXhF0R0jOplwKS.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Wer auf Allah vertraut, dem genügt Allah."
-          ]
+          "available": true,
+          "textSha256": "83b3bce939475f552ae3c0295f6d61ea509edace1ceda5d854a6be2ce8ec4417",
+          "mp3Sha256": "ed04c6fc681602ec481ab29dc1ba8517840b02b96ffcfdba4d07c7915e1ad0cf",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/6aa43ad3fd6f6c8bd1e98e0570e6a67b82ab20dc.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-531": {
       "ageBand": "7-8",
