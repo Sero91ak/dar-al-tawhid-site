@@ -326,3 +326,11 @@ Der wiederhergestellte Frauen-Hero wird von diesem Vertrag nicht überschrieben.
 4. **Zukunft und Abnahme:** Jede neue Hero-Komponente folgt dem gleichen Standard; Bildquelle und Statusleistenkontrast werden pro Theme, Hoch-/Querformat und iPhone/iPad/Android/Desktop geprüft. Referenzimplementierung: `assets/dar-adult-top-scroll-boundary-v1.{css,js}` und `test/assets/dar-adult-top-scroll-boundary-v1.{css,js}`, jeweils über eigene Worker-Route mit Cache-Version. Test und Besucher getrennte Änderungs-/Deploy-Nachweise, ohne OneSignal-Gerätebenachrichtigung. Keine Inhalte, Gebetszeiten, Qibla, Navigation, Push-Spuren, Service Worker oder Manifest mitändern.
 
 **Auftrag ist nicht durch bloßen GitHub-Commit abgeschlossen.** Nach jedem Release die wirklich ausgelieferte HTML-/CSS-/JS-Version, Scroll-Grenzen, wechselnde Hero-Motive, Footer-Abstand und relevante Geräte prüfen. Ohne verifizierten Deployment-/Gerätetest nur „Code aktualisiert“, nicht „nativ live“ oder „vollständig repariert“ melden.
+
+
+## DĀR AL TAWḤĪD Zentrum – Q-Quellenkarten und Quiz strikt trennen (20.10.2026)
+
+- **Q-Quellenseiten** (`/q/N/`) sind eigenständige Nachweisseiten: Sie enthalten die **vollständigen, wortgetreu aus dem veröffentlichten Beitrag übernommenen deutschen Aussagen** aller genannten Sprecher, ihre Kennzeichnung als sinngemäß oder wörtlich, Originaltext, Fundstellen, verlinkte Primärnachweise und ggf. klar getrennte Erläuterungen. Keine Aussage durch bloße Kurz-Erklärung ersetzen.
+- **Quiz-/Lernseiten** (`/lernen/.../`) sind **ausschließlich für das Quiz** da. Kein Quellenlink/„Originalnachweise öffnen“ oben, kein erklärender Einleitungskasten („Was wird hier erläutert?“), keine vorgeschaltete Quellen-Erläuterung und kein zusätzlicher Quellenlink im Quiz-Footer oder Ergebnisbildschirm. Der Nutzer soll direkt nach dem Titel mit der ersten Frage beginnen.
+- Ein notwendiger Verweis von der **Q-Seite zum Quiz** darf auf der Q-Seite stehen, sofern die bestehende Publikationsprüfung ihn verlangt; die **Quizseite verlinkt nicht zurück auf Q**. Q-Seite und Quizseite dürfen nicht miteinander verwechselt oder vermischt werden.
+- Für neue Quizseiten dieselbe Trennung vor Veröffentlichung prüfen; bestehende Quizfragen, Antworten, Fortschritt, Wiederholung und Auswertung unverändert funktionsfähig halten.
