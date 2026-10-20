@@ -461,6 +461,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Mal sehen, was du zu diesem Thema weißt. Was sah Yūsuf in seinem frühen Traum? Antwort 1: Elf Sterne sowie Sonne und Mond. Antwort 2: Ein Schiff und einen Berg. Antwort 3: Nur eine Palme. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/db13a0e29723f05948f5a8885ff8998116a37a73.mp3",
+      "sha256": "b2eadbd812157fb94eb4d3f9aa0b6c15680de19bd36c8ab3dc7b587e154ca5da",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Yūsuf sah elf Sterne sowie Sonne und Mond sich vor ihm niederwerfen.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/854ddbd2e7486b5360363f0c4958739daf3a2ec0.mp3",
+      "sha256": "5b6edb45ec1e1bed6b14ff978d0a23ede9c379d0ae6df66d886088b2d7c276d0",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Überlege kurz, bevor du dich entscheidest. Darf Abneigung gegen Menschen uns ungerecht machen? Antwort 1: Nein. Antwort 2: Ja. Antwort 3: Nur manchmal. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a105c74e4552503b91ac79d8b1fd23def8baeadb.mp3",
       "sha256": "d033dbb1e9df9a09391f4e414a2a3a891cdec7bc0f375e1b0a5701d92451e242",
@@ -1685,6 +1707,28 @@
     "Worauf schaut Allah nach Ṣaḥīḥ Muslim 2564? Antwort 1: Auf Herzen und Taten. Antwort 2: Nur auf Aussehen und Besitz. Antwort 3: Nur auf Kleidung. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/6785271fdc0caf3ecac5a777f0c3624958fe5c1b.mp3",
       "sha256": "0293914d2bfc09a18a30b04a540ff94eadfa3556cd57ac66cb919200d42c4bbb",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Was befiehlt Qurʾān 17:35 beim Messen und Wiegen? Antwort 1: Vollständig messen und mit gerechter Waage wiegen. Antwort 2: Den eigenen Vorteil heimlich erhöhen. Antwort 3: Nur Freunde fair behandeln. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/58f3bb8f92faafcc87a5b941d75f503e394e3896.mp3",
+      "sha256": "178464d63fb42c76ae224a73da3289341fb4e455919bc2bfa172f11f1a952834",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah befiehlt korrektes Maß und gerechtes Wiegen.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/568651dfbf611781a95fc2e9b8ccf85e97fe415c.mp3",
+      "sha256": "5838f99af572a6165eaf21e5d882a437ef4420f7561fc167d0a02511c5fa3bba",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -3148,12 +3192,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Ein Schiff und einen Berg.",
-            "Elf Sterne sowie Sonne und Mond.",
-            "Was sah Yūsuf in seinem frühen Traum?"
-          ]
+          "available": true,
+          "textSha256": "1a69d5f9c914cefc3e61e9c08745251ecd2d2d4e5091c494b561f9d42f18375f",
+          "mp3Sha256": "b2eadbd812157fb94eb4d3f9aa0b6c15680de19bd36c8ab3dc7b587e154ca5da",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/db13a0e29723f05948f5a8885ff8998116a37a73.mp3"
         },
         "correct": {
           "available": true,
@@ -3168,13 +3210,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/6c9422cd2890292b5fbf67667ed913dc.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Yūsuf sah elf Sterne sowie Sonne und Mond sich vor ihm niederwerfen."
-          ]
+          "available": true,
+          "textSha256": "48d492e0bf9feb24464720b4c239cf9425341547ded022dda648e3931c2562e3",
+          "mp3Sha256": "5b6edb45ec1e1bed6b14ff978d0a23ede9c379d0ae6df66d886088b2d7c276d0",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/854ddbd2e7486b5360363f0c4958739daf3a2ec0.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-124": {
       "ageBand": "7-8",
@@ -8077,13 +8119,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Den eigenen Vorteil heimlich erhöhen.",
-            "Nur Freunde fair behandeln.",
-            "Vollständig messen und mit gerechter Waage wiegen.",
-            "Was befiehlt Qurʾān 17:35 beim Messen und Wiegen?"
-          ]
+          "available": true,
+          "textSha256": "8b3c23ec37474a8496534c9319a4ab2ddfa5a8b35d01af1b8647783992dd6673",
+          "mp3Sha256": "178464d63fb42c76ae224a73da3289341fb4e455919bc2bfa172f11f1a952834",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/58f3bb8f92faafcc87a5b941d75f503e394e3896.mp3"
         },
         "correct": {
           "available": true,
@@ -8098,13 +8137,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/29298414b8a2ce9d77963db1a61b6803.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah befiehlt korrektes Maß und gerechtes Wiegen."
-          ]
+          "available": true,
+          "textSha256": "6875da2d327ab1598e51330b46616575ae1299c2628592dca90e7214851816f8",
+          "mp3Sha256": "5838f99af572a6165eaf21e5d882a437ef4420f7561fc167d0a02511c5fa3bba",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/568651dfbf611781a95fc2e9b8ccf85e97fe415c.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-146": {
       "ageBand": "9-10",
