@@ -20,7 +20,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT/"kids/tools"))
 import plan_quiz_v4_all450_exact_paid_original_waves as planner
-from generate_quiz_v4_450_paid_batch02 import original_mp3, subscription
+from generate_quiz_v4_450_paid_batch02 import original_mp3, subscription, source_requires_separate_pronunciation_approval
 from generate_quiz_v4_older_stage1_exact import persist_remote_paid_checkpoint
 from quiz_v4_no_double_charge_guard import protect_paid_texts, prohibit_prepaid_selection
 
@@ -34,6 +34,9 @@ OUT = ROOT/"kids/assets/kids-quiz-audio/v4-curated450-review"
 JOURNAL = ROOT/"kids/data/quiz-v4-all450-paid-wave-request-journal.json"
 BACKUP = ROOT/"kids/data/quiz-v4-all450-paid-wave-usage-backup.json"
 REPORT = ROOT/"kids/review-only/quiz-v4-all450-next-exact-paid-wave.json"
+ONE_TIME_APPROVAL = ROOT/"kids/review-only/quiz-v4-20261020-one-wave-authorization.json"
+MAX_NEW_PER_CALL = 10
+MAX_ESTIMATED_CREDITS = 240.0
 
 
 def load(p):
@@ -110,10 +113,26 @@ def preflight():
     waves=queue["recordingWaves"]
     require(bool(waves),"all new original texts already saved")
     first=waves[0]
-    texts=first["exactTexts"]
-    require(1<=len(texts)<=25 and first["uniqueOriginals"]==len(texts)
-            and first["estimatedCreditsNotInvoice"]<=2000,
-            "unexpected new wave cost/size")
+    # The immutable 25-item planning wave is NOT a purchasing instruction.
+    # Select only fresh, pronunciation-covered originals that fit this user's
+    # newly authorized small cap; never buy 25 merely because the planner lists 25.
+    texts=[]
+    bounded_credits=0.0
+    for candidate in first["exactTexts"]:
+        if source_requires_separate_pronunciation_approval(candidate["text"]):
+            continue
+        cost=round(len(candidate["text"])*planner.ESTIMATE_CREDITS_PER_CODEPOINT,4)
+        if len(texts)>=MAX_NEW_PER_CALL:
+            break
+        if bounded_credits+cost>MAX_ESTIMATED_CREDITS:
+            continue
+        texts.append(candidate)
+        bounded_credits+=cost
+    bounded_credits=round(bounded_credits,2)
+    require(1<=len(texts)<=MAX_NEW_PER_CALL and
+            0<bounded_credits<=MAX_ESTIMATED_CREDITS and
+            len({x["textSHA256"] for x in texts})==len(texts),
+            "no unique, pronunciation-safe original fits user credit cap")
     for item in texts:
         s=item["text"]
         require(hashtext(s)==item["textSHA256"],
@@ -134,8 +153,8 @@ def preflight():
         "remainingDistinctSpeechOriginals":queue["trulyUnrecordedDistinctTextCount"],
         "plannedManualWavesRemaining":queue["recordingWaveCount"],
         "nextOriginalCount":len(texts),
-        "nextEstimatedCreditsNotInvoice":first["estimatedCreditsNotInvoice"],
-        "perWaveMaximumEstimatedCredits":2000,
+        "nextEstimatedCreditsNotInvoice":bounded_credits,
+        "perWaveMaximumEstimatedCredits":MAX_ESTIMATED_CREDITS,
         "exactTextSHA256":[x["textSHA256"] for x in texts],
         "userMustAuthorizeThisExactBatchFingerprintSHA256":source_hash,
         "humanContentReviewRequired":True,
@@ -161,10 +180,26 @@ def main():
         print("KIDS_450_V4_NO_CREDIT_PREFLIGHT "+
               json.dumps(report,ensure_ascii=False),flush=True)
         return
+    approval=load(ONE_TIME_APPROVAL)
+    require(approval.get("scope")=="KIDS_450_USER_AUTHORIZED_20261020_ONE_WAVE" and
+            approval.get("oneTimeAuthorization") is True and
+            approval.get("maxNewOriginals")==MAX_NEW_PER_CALL and
+            approval.get("maxEstimatedCredits")==MAX_ESTIMATED_CREDITS and
+            approval.get("modelId")==MODEL and approval.get("voiceId")==VOICE and
+            approval.get("publicReleaseAllowed") is False,
+            "not the exact one-time owner-approved 2026-10-20 batch")
+    require(approval.get("expectedRegistryGitBlobSha") ==
+            os.getenv("KIDS_V4_APPROVED_REGISTRY_BLOB_SHA") and
+            approval.get("expectedLedgerGitBlobSha") ==
+            os.getenv("KIDS_V4_APPROVED_LEDGER_BLOB_SHA"),
+            "authorization is not pinned to current original and ledger snapshot")
+    require(approval.get("exactBatchFingerprintSha256") ==
+            report["userMustAuthorizeThisExactBatchFingerprintSHA256"],
+            "authorization no longer matches exact uncharged V4 speech texts")
     require(os.getenv("KIDS_V4_EXPLICIT_SPEND_APPROVAL")=="YES",
             "run lacks the user's explicit consent to spend credits")
     require(os.getenv("KIDS_V4_HUMAN_SOURCE_CHECK")=="YES",
-            "manual question source/answer/Arabic term review was not confirmed")
+            "previously approved immutable canonical question/source review must be acknowledged")
     require(os.getenv("KIDS_V4_APPROVED_BATCH_FINGERPRINT","")==
             report["userMustAuthorizeThisExactBatchFingerprintSHA256"],
             "outdated source/voice/cost SHA or source changed, NO PURCHASE")
@@ -172,6 +207,8 @@ def main():
     require(bool(key),"ElevenLabs API key not available")
     available=subscription(key)
     estimate=report["nextEstimatedCreditsNotInvoice"]
+    require(0<estimate<=MAX_ESTIMATED_CREDITS and len(items)<=MAX_NEW_PER_CALL,
+            "user one-wave spend ceiling exceeded before any provider call")
     require(available>=max(estimate*1.5,estimate+50.0),
             "insufficient provider credits for current exact V4 wave plus proportional reserve")
     OUT.mkdir(parents=True,exist_ok=True)
