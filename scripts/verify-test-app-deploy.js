@@ -340,6 +340,30 @@ async function fetchVersionBuild(base) {
     }
   }
 
+  // ADULT_SCROLL_V3_REAL_ORIGIN_GATE: both test routes must deliver the
+  // very same first-touch edge-stop logic as the production visitor app.
+  for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
+    let ok=false;
+    for (let attempt=1;attempt<=5;attempt++) {
+      try {
+        const shell=await fetchText(base+"/?scroll-v3-check="+Date.now());
+        const js=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-scroll-v3");
+        const css=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-scroll-v3");
+        const htmlOk=shell.status===200
+          &&shell.text.includes("darAdultTopBoundaryJsV1")
+          &&shell.text.includes("20261020-scroll-v3");
+        const jsOk=js.status===200&&js.text.includes("DAR_ADULT_TOP_SCROLL_BOUNDARY_V3")
+          &&js.text.includes("Math.abs(dy)>=1")&&js.text.includes('stepY>0?"up":"down"');
+        const cssOk=css.status===200&&css.text.includes("overscroll-behavior-y:none");
+        ok=htmlOk&&jsOk&&cssOk;
+        console.log("adult scroll v3 "+label+": html="+htmlOk+" js="+jsOk+" css="+cssOk+" attempt="+attempt+"/5");
+        if(ok)break;
+      }catch(error){console.log("adult scroll v3 "+label+": "+(error.message||error))}
+      if(attempt<5)await sleep(DELAY_MS);
+    }
+    if(!ok)throw new Error("Adult scroll V3 not live at "+base);
+  }
+
   // HTML_V3_PARITY_LIVE_GUARD: verify real HTML and JS, not just buildId.
   for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
     let ok=false;
