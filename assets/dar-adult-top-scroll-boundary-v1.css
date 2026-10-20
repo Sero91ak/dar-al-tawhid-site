@@ -1,0 +1,15 @@
+/* DAR_ADULT_TOP_SCROLL_BOUNDARY_V1
+ * Stop page-edge rubber-band without creating a second scroll container.
+ * In particular never change #appView/.app overflow: this broke Android
+ * continuous finger-scrolling (DAR_TEST_ANDROID_NATIVE_SCROLL_CHAIN_V1392).
+ * Native WKWebView bounces=false is the final iOS layer.
+ */
+html,html body{
+  overscroll-behavior-y:none!important;
+}
+/* Existing modal readers and text panes keep their OWN scrolling; when
+   they reach their edges they must not hand momentum to the page behind. */
+html body :is(dialog[open],[role="dialog"]:not([hidden]),.modal.open,.modal.is-open,#darInternalSourceV3:not([hidden])){
+  overscroll-behavior-y:contain;
+}
+/* No overflow:hidden, position:fixed, touch-action:none or scroll-snap here. */
