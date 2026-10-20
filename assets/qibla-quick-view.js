@@ -151,8 +151,8 @@
     try {
       var n = root.DAR_NATIVE_LOCATION;
       var lat = Number(n && (n.latitude ?? n.lat));
-      var lon = Number(n && (n.longitude ?? n.lon));
-      if (Number.isFinite(lat) && Number.isFinite(lon)) {
+      var lon = Number(n && (n.longitude ?? n.lon ?? n.lng));
+      if (n && Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {
         return { lat: lat, lon: lon, city: n.city || "", stale: false, source: "native" };
       }
     } catch (e) {}
@@ -174,8 +174,8 @@
       try {
         var n = root.DAR_NATIVE_LOCATION;
         var lat = Number(n && (n.latitude ?? n.lat));
-        var lon = Number(n && (n.longitude ?? n.lon));
-        if (Number.isFinite(lat) && Number.isFinite(lon)) {
+        var lon = Number(n && (n.longitude ?? n.lon ?? n.lng));
+        if (n && Number.isFinite(lat) && Number.isFinite(lon) && Math.abs(lat) <= 90 && Math.abs(lon) <= 180) {
           resolve({ lat: lat, lon: lon, city: n.city || "", stale: false, source: "native" });
           return;
         }
