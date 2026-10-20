@@ -549,6 +549,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Mal sehen, was du zu diesem Thema weißt. Für wen bat Nūḥ am Ende seiner Sūrah um Vergebung? Antwort 1: Für sich, seine Eltern und die gläubigen Männer und Frauen. Antwort 2: Nur für Könige. Antwort 3: Für Götzen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/9d8e46e37394b877d1a518c5c8a48c3b33c50fc6.mp3",
+      "sha256": "fdd6d344491fc8eca9dea245dcd624bd93527f322cbac6843993aafc3a04c940",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Nūḥ bat Allah um Vergebung für sich, seine Eltern und die Gläubigen.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/34f7f115a1a2602a34d7b916c1a46785596a9162.mp3",
+      "sha256": "a75503e78200f25633438cc048343a7671c94480e5c26f89c29ca830d5840462",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Hör dir die Frage und die Antworten in Ruhe an. Wie rief Zakariyyā seinen Herrn an? Antwort 1: Leise und demütig. Antwort 2: Spöttisch. Antwort 3: Hochmütig. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/bc8c772d9c2ff6ffa58dd186926013832028508c.mp3",
       "sha256": "d0ef6f613faef1f13d8723fb83d27fa3834ac396697d0cdcde8f6130f95b6ab6",
@@ -1924,6 +1946,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Du hast einem Kind etwas geschenkt. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Nach einer Gabe verletzen wir den Empfänger nicht mit Worten. Antwort 2: Nach dem Geben darf man den anderen kleinmachen. Antwort 3: Eine Gabe ist besser, wenn man sie ständig vorhält. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/4e26786dddeaa3ab569123ee768815eee62fb94e.mp3",
+      "sha256": "88f1808f265354187d90feb96a486983650ef52ae8a890a560b8010f2b45d64c",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Du betest und niemand schaut dir zu. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Gute Taten und ʿIbādah werden aufrichtig für Allah getan. Antwort 2: Eine gute Tat ist nur wertvoll, wenn Menschen sie sehen. Antwort 3: Die Absicht für Allah ist unwichtig. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/bb5dc57422fa55fd99ad4d036026ca8d103dd7b8.mp3",
       "sha256": "ef29158249ca49d0420ee28ba6b4d271f7bb1dcef7bf9d422e2fb713f69769f4",
@@ -3290,7 +3323,6 @@
           "available": false,
           "missingOriginalSegments": [
             "Er hatte den Befehl nicht gehört.",
-            "Er schlief.",
             "Er weigerte sich und war hochmütig.",
             "Warum war Iblīs bei Allahs Befehl ungehorsam?"
           ]
@@ -4100,11 +4132,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Für sich, seine Eltern und die gläubigen Männer und Frauen.",
-            "Für wen bat Nūḥ am Ende seiner Sūrah um Vergebung?"
-          ]
+          "available": true,
+          "textSha256": "19c4b89cd5fc0cdf2d83afa75253df6bd1f8ee5a2940b78fe4b7d57059b0ef5f",
+          "mp3Sha256": "fdd6d344491fc8eca9dea245dcd624bd93527f322cbac6843993aafc3a04c940",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/9d8e46e37394b877d1a518c5c8a48c3b33c50fc6.mp3"
         },
         "correct": {
           "available": true,
@@ -4119,13 +4150,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/53nlCj9DCu1JkXZFBEZI.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Nūḥ bat Allah um Vergebung für sich, seine Eltern und die Gläubigen."
-          ]
+          "available": true,
+          "textSha256": "2539e2210fbd0b383b50393350cfa84ae9ca338c3baffb7a6a6c0a1c1e7bc71c",
+          "mp3Sha256": "a75503e78200f25633438cc048343a7671c94480e5c26f89c29ca830d5840462",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/34f7f115a1a2602a34d7b916c1a46785596a9162.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-276": {
       "ageBand": "7-8",
@@ -4165,7 +4196,6 @@
           "missingOriginalSegments": [
             "Ein Königreich.",
             "Frische reife Datteln.",
-            "Goldmünzen.",
             "Welche Versorgung erhielt Maryam bei der Geburt?"
           ]
         },
@@ -5761,7 +5791,6 @@
           "available": false,
           "missingOriginalSegments": [
             "Um Dankbarkeit und rechtschaffene Taten.",
-            "Um Hochmut.",
             "Um Vergessen der Gaben.",
             "Worum bat Sulaymān عليه السلام in Qurʾān 27:19?"
           ]
@@ -11197,13 +11226,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Du hast einem Kind etwas geschenkt. Welcher Grundsatz hilft dir hier am besten?",
-            "Eine Gabe ist besser, wenn man sie ständig vorhält.",
-            "Nach dem Geben darf man den anderen kleinmachen.",
-            "Nach einer Gabe verletzen wir den Empfänger nicht mit Worten."
-          ]
+          "available": true,
+          "textSha256": "1c9ac45c079d7f27100c6db935d2cae959aeebb4367315ed2ac5fcf5158f7061",
+          "mp3Sha256": "88f1808f265354187d90feb96a486983650ef52ae8a890a560b8010f2b45d64c",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/4e26786dddeaa3ab569123ee768815eee62fb94e.mp3"
         },
         "correct": {
           "available": true,
@@ -11224,7 +11250,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/d95ba2200c3037558aab40414df8b8015d147ef2.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-873": {
       "ageBand": "9-10",
