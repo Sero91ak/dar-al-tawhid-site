@@ -142,6 +142,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Nimm dir Zeit für deine Antwort. Was ist der Qurʾān für die Gottesfürchtigen? Antwort 1: Rechtleitung. Antwort 2: Nur ein Geschichtsbuch. Antwort 3: Nur für Gelehrte. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/03ccca0b2212efed42e6de99ddbe57d399f54fb4.mp3",
+      "sha256": "6268224512516d0af25a2d62a24a7627d643235111a2885ba4e43cad4935199b",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Du lernst mit jeder Frage mehr!": {
       "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/44b82a7bb0b692c35cd3c597000bc459.mp3",
       "sha256": "51b5d2f7e4646dcbe5c0c322c6023669303922a2322333e1aea8f14e2fe28e09",
@@ -615,6 +626,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Wen dürfen wir neben Allah anrufen oder anbeten? Antwort 1: Niemanden. Antwort 2: Heilige Menschen. Antwort 3: Sterne. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a9bf06e04640528da1cfdafbf1dfb3c288c9e74f.mp3",
+      "sha256": "4014d13a28fd4f61fe3ab3615c89253b193166b4d06d5f591b1c86dd72e2e066",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah befiehlt, in den Moscheen niemanden neben Ihm anzurufen.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/13c6ec12a1d506bff957880b8f0e7f1951fb65f3.mp3",
+      "sha256": "b2b514ce00a9a5e14406d8280dbf909014187ec251a2a0ef04285c85302ba3de",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Was sollen Menschen tun, wenn sie etwas nicht wissen? Antwort 1: Leute des Wissens fragen. Antwort 2: Raten und als sicher ausgeben. Antwort 3: Etwas erfinden. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8a6d814d2ca3c13220eecd39c4291ccb8384925c.mp3",
       "sha256": "d8633c59b6dee9a372babdb168eb47a464c33228f9bdaa9a08ef7a4e4610fb3a",
@@ -722,12 +755,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Nur ein Geschichtsbuch.",
-            "Nur für Gelehrte.",
-            "Rechtleitung."
-          ]
+          "available": true,
+          "textSha256": "1e6d4e8459a0cddf7a17134b89c85e1d5eb259bb7c689e2ce9dc84194e3c03e5",
+          "mp3Sha256": "6268224512516d0af25a2d62a24a7627d643235111a2885ba4e43cad4935199b",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/03ccca0b2212efed42e6de99ddbe57d399f54fb4.mp3"
         },
         "correct": {
           "available": true,
@@ -976,8 +1007,6 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Den Streit größer machen.",
-            "Frieden stiften.",
             "Gerüchte verbreiten."
           ]
         },
@@ -5981,12 +6010,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Heilige Menschen.",
-            "Niemanden.",
-            "Wen dürfen wir neben Allah anrufen oder anbeten?"
-          ]
+          "available": true,
+          "textSha256": "7f77a795849203f70eac9397c685a6f94be37d3a668a861d29fc845648304fcc",
+          "mp3Sha256": "4014d13a28fd4f61fe3ab3615c89253b193166b4d06d5f591b1c86dd72e2e066",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a9bf06e04640528da1cfdafbf1dfb3c288c9e74f.mp3"
         },
         "correct": {
           "available": true,
@@ -6001,13 +6028,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/0ead0dc9f2fad1a240fc68715a9d5325.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah befiehlt, in den Moscheen niemanden neben Ihm anzurufen."
-          ]
+          "available": true,
+          "textSha256": "b5f441fc2b68a6eb78e915fd053e121ed4f25263ab7bb12e05add5a8e98644be",
+          "mp3Sha256": "b2b514ce00a9a5e14406d8280dbf909014187ec251a2a0ef04285c85302ba3de",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/13c6ec12a1d506bff957880b8f0e7f1951fb65f3.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-089": {
       "ageBand": "9-10",
