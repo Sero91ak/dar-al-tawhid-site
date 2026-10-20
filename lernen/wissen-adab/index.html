@@ -248,18 +248,18 @@ body.heritage-learning.wqa-page .wqa-mini{
 (function(){
 "use strict";
 const questions=[
- {q:"Welche beiden Bereiche nennt Ibn Sīrīn als Gegenstand des Lernens?",
-  choices:["Wissen und die Anerkennung durch Menschen","Wissen und vorbildliche Lebensführung","Wissen und die Kunst der öffentlichen Rede"],
-  correct:1,why:"Ibn Sīrīn nennt ausdrücklich al-ʿilm (Wissen) und al-hady (vorbildliche Lebensführung)."},
- {q:"Was ist in dieser Aussage mit al-hady gemeint?",
-  choices:["Eine bestimmte Methode, Texte abzuschreiben","Die Anzahl der gelernten Überlieferungen","Gute Lebensführung, Haltung und Verhalten"],
-  correct:2,why:"Al-hady bezeichnet hier die gute Führung und das gelebte Verhalten; nicht die Anzahl der gelernten Texte."},
- {q:"Was zeigt der bei al-Ḫaṭīb anschließende Bericht über das Beobachten von al-Qāsim?",
-  choices:["Auch das Verhalten eines Vorbilds kann bewusst gelernt werden.","Für den Wissenserwerb zählt nur die Anzahl der Bücher.","Gute Lebensführung lässt sich allein durch das Auswendiglernen erreichen."],
-  correct:0,why:"Der Bericht erwähnt, dass Ibn Sīrīn das Verhalten al-Qāsims beobachten ließ. Diese Beobachtung gehört zum Lernen von al-hady."},
- {q:"Welches Vorgehen entspricht dem Grundgedanken dieser Überlieferung?",
-  choices:["Gute Umgangsformen machen das Lernen religiöser Belege überflüssig.","Wissen erwerben und zugleich das eigene Verhalten verbessern.","Erst nach vollständigem Wissenserwerb mit gutem Verhalten beginnen."],
-  correct:1,why:"Wissen und guter Umgang werden nebeneinander gelernt. Weder ersetzt das Verhalten die Belege noch wird es auf später verschoben."}
+ {q:"Welcher Bereich wurde nach Ibn Sīrīns Aussage ebenso wie das Wissen bewusst gelernt?",
+  choices:["Die Reihenfolge der Lehrbücher","Vorbildliche Lebensführung (al-hady)","Die Kunst, Diskussionen zu gewinnen"],
+  correct:1,why:"Ibn Sīrīn nennt al-hady – die gute Lebensführung – als etwas, das gemeinsam mit dem Wissen gelernt wurde."},
+ {q:"Ein Schüler kennt viele Belege, behandelt Fragende jedoch herablassend. Welche Haltung passt zur Aussage?",
+  choices:["Er sollte zunächst nur noch mehr Texte auswendig lernen.","Entscheidend ist allein, dass seine Antworten richtig sind.","Er sollte neben seinem Wissen gezielt seinen Umgang verbessern."],
+  correct:2,why:"Die Aussage stellt Wissen und gute Lebensführung nebeneinander. Gelehrsamkeit ersetzt keinen respektvollen Umgang."},
+ {q:"Welches Verhalten verbindet das Erlernen von Wissen mit Adab?",
+  choices:["Belege sorgfältig prüfen und anderen respektvoll begegnen","Aus Rücksicht auf andere niemals fachliche Fehler ansprechen","Möglichst schnell antworten, um besonders sicher zu wirken"],
+  correct:0,why:"Sorgfalt bei den Belegen und gutes Verhalten ergänzen sich; weder schweigende Gleichgültigkeit noch Selbstinszenierung sind das Ziel."},
+ {q:"Was verdeutlicht der Vergleich, dass gute Lebensführung wie Wissen gelernt wurde?",
+  choices:["Guter Charakter entsteht automatisch mit viel Wissen.","Auch gutes Verhalten verlangt bewusste Übung und Lernen.","Vorbildliche Lebensführung lässt sich allein an der Zahl gelernter Texte messen."],
+  correct:1,why:"Der Vergleich hebt hervor, dass vorbildliches Verhalten bewusst erlernt wird – nicht bloß durch Wissensbesitz entsteht."}
 ];
 const byId=id=>document.getElementById(id);
 const panel=byId("quizPanel"),results=byId("resultPanel"),answers=byId("choices");
