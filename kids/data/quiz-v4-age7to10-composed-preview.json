@@ -2243,6 +2243,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Wie soll nach Qurʾān 16:125 zum Weg Allahs eingeladen werden? Antwort 1: Mit Weisheit und guter Ermahnung. Antwort 2: Mit Beleidigungen. Antwort 3: Mit erfundenen Geschichten. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/771680548f388a0e4644032014f48d3fc4013bd0.mp3",
+      "sha256": "23111870044242afc9518d83aea7e7814b96bd3deaf682f22db4b3dc9d929d76",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah befiehlt Daʿwah mit Weisheit, guter Ermahnung und der besten Art der Diskussion.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/1d93a5b45369df3dbfc987eabcaec10abb094875.mp3",
+      "sha256": "83ec7f04b1eecbde8d192674dae45cfe3357775c68bfda2ad2dd5d5a9635302c",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Welche Belohnung nennt Qurʾān 2:262 für Menschen, die geben und danach nicht verletzen? Antwort 1: Lohn bei ihrem Herrn und keine Furcht oder Trauer. Antwort 2: Nur weltlichen Ruhm. Antwort 3: Keine Belohnung. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/0c5434c9d43fe9c3905bc0e710363ea10272974e.mp3",
       "sha256": "b7b598af4a3c1b60e6419a283fa11d9ba9a735a027098c90ede069c556a0a9a5",
@@ -9215,12 +9237,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Mit Weisheit und guter Ermahnung.",
-            "Mit erfundenen Geschichten.",
-            "Wie soll nach Qurʾān 16:125 zum Weg Allahs eingeladen werden?"
-          ]
+          "available": true,
+          "textSha256": "77e757cd7107191a5592def26e26293cb7e4d7ea2008a53049115a1e7d092be5",
+          "mp3Sha256": "23111870044242afc9518d83aea7e7814b96bd3deaf682f22db4b3dc9d929d76",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/771680548f388a0e4644032014f48d3fc4013bd0.mp3"
         },
         "correct": {
           "available": true,
@@ -9235,13 +9255,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/86012459c4bcd62787770eaeafe89964.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah befiehlt Daʿwah mit Weisheit, guter Ermahnung und der besten Art der Diskussion."
-          ]
+          "available": true,
+          "textSha256": "a210d071b23b1211a0d62f906e7cc62f1a72746a725f36bf803fe9e239878140",
+          "mp3Sha256": "83ec7f04b1eecbde8d192674dae45cfe3357775c68bfda2ad2dd5d5a9635302c",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/1d93a5b45369df3dbfc987eabcaec10abb094875.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-286": {
       "ageBand": "9-10",
