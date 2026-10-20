@@ -465,7 +465,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // DAR_TEST_ANDROID_CSS_DELIVERY_V1389: guarantee the exact latest Test
   // stylesheet even if the static shell already contains an old link.
   // Keep it late in the document for consistent theme/layout precedence.
-  const edgeLinkV1389 = '<link rel="stylesheet" id="darTestEdgeWidthV1372" href="/test/assets/test-global-edge-width-v1372.css?v=native-scroll-v1392">';
+  const edgeLinkV1389 = '<link rel="stylesheet" id="darTestEdgeWidthV1372" href="/test/assets/test-global-edge-width-v1372.css?v=edge-no-perimeter-v1393">';
   const existingEdgeLinkV1389 = /<link\b[^>]*\bid=["']darTestEdgeWidthV1372["'][^>]*>/i;
   if (existingEdgeLinkV1389.test(html)) {
     html = html.replace(existingEdgeLinkV1389, edgeLinkV1389);
