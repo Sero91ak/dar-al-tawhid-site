@@ -8526,6 +8526,23 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-11-05T23:59:00.000Z"
+    },
+    {
+      "id": "adult-global-hero-top-continuity-scroll-footer-20261020",
+      "at": "2026-10-20T20:34:00+02:00",
+      "approvedBy": "user-explicit-global-adult-visitor-test-web-android-hero-scroll-footer-20261020",
+      "reason": "Explicit global adult-only correction: extend existing photographic hero imagery through upper web safe area across tabs/future heroes, reuse existing two-edge no-bounce scroll controller, compress only redundant home/social footer gap, test and visitor+Android PWA parity. No Kids, Apple TV, push lanes, data, navigation, Qibla, prayer, service worker or manifests.",
+      "paths": [
+        "assets/dar-adult-top-scroll-boundary-v1.css",
+        "assets/dar-adult-top-scroll-boundary-v1.js",
+        "test/assets/dar-adult-top-scroll-boundary-v1.css",
+        "test/assets/dar-adult-top-scroll-boundary-v1.js",
+        "cloudflare/site-router.js",
+        "cloudflare/test-app-worker.js",
+        "AGENTS.md",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-20T23:59:00.000Z"
     }
   ],
   "enabled": true
