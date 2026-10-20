@@ -879,6 +879,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Für wen ist der Ḥaǧǧ zum Haus verpflichtend? Antwort 1: Für den, der dazu die Möglichkeit hat. Antwort 2: Für niemanden. Antwort 3: Nur für Kinder. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a476b64832a9cd63d60c83e2e01c679255b38399.mp3",
+      "sha256": "05ec6b5371a6da5931c27f11d35b6b99a79066982a8d147f2abfb5020751a0b2",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah verpflichtet den Ḥaǧǧ für diejenigen, die den Weg dorthin bewältigen können.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/5d043963bc658cc24275ef7c58f018355e308f0e.mp3",
+      "sha256": "07a4cd87228ccd3ad4b5068c9b7fbe746e0984bdb2657c1a1f93ea7227b42e97",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Was meiden die Diener des Allerbarmers nach Qurʾān 25:72? Antwort 1: Falsches Zeugnis. Antwort 2: Gutes Reden. Antwort 3: Hilfsbereitschaft. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/7fc34ead22f1d1dada573b22fc6cd9ecd3290f51.mp3",
       "sha256": "637fa3cd56eb428ae23d44d06a5be65c5d81cccf3c98a4157e0026a4667539a1",
@@ -1025,6 +1047,28 @@
     "Das merken wir uns: Allah hebt Īmān und Wissen als Ursachen besonderer Rangstufen hervor.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/31ddfe8f6854c5287e87e35a8a679a1820b26433.mp3",
       "sha256": "079b1c2b104a33b6270d297170947548b431e5de8b7ce843059cae34a81e5f8c",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Welche kurze Duʿāʾ lehrt Qurʾān 20:114? Antwort 1: Mein Herr, mehre mich an Wissen. Antwort 2: Mein Herr, mache mich berühmt. Antwort 3: Mein Herr, gib mir nur Besitz. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/416c21f0fe59646557778d208dd9446b0fd8d9ce.mp3",
+      "sha256": "164564e2ca40a2d518c9860001cfee1c72591e64df435d472c3e2814ff80be60",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah lehrt ausdrücklich, um Zunahme an Wissen zu bitten.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a3c35bdbdddfb2452dd2209ee35e7abf8808f5dc.mp3",
+      "sha256": "ed22ed746b48c21c1868f720cf706004d52face4768955064aeeb9feca049e3c",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -4184,7 +4228,6 @@
           "available": false,
           "missingOriginalSegments": [
             "Auch sie werden gesehen.",
-            "Nur große Taten zählen.",
             "Sie zählen nie.",
             "Was lehrt Sūrat az-Zalzalah über kleinste gute und schlechte Taten?"
           ]
@@ -6668,13 +6711,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Für den, der dazu die Möglichkeit hat.",
-            "Für niemanden.",
-            "Für wen ist der Ḥaǧǧ zum Haus verpflichtend?",
-            "Nur für Kinder."
-          ]
+          "available": true,
+          "textSha256": "dcac0c5bf3b11910e4471364e59bcbe023afcd6e496077319096a818b8ce5471",
+          "mp3Sha256": "05ec6b5371a6da5931c27f11d35b6b99a79066982a8d147f2abfb5020751a0b2",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a476b64832a9cd63d60c83e2e01c679255b38399.mp3"
         },
         "correct": {
           "available": true,
@@ -6689,13 +6729,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/29298414b8a2ce9d77963db1a61b6803.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah verpflichtet den Ḥaǧǧ für diejenigen, die den Weg dorthin bewältigen können."
-          ]
+          "available": true,
+          "textSha256": "042612beeb828e232a5b3abc0d609f35265c32b1eb1a43505402dd42d442b8a7",
+          "mp3Sha256": "07a4cd87228ccd3ad4b5068c9b7fbe746e0984bdb2657c1a1f93ea7227b42e97",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/5d043963bc658cc24275ef7c58f018355e308f0e.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-097": {
       "ageBand": "9-10",
@@ -8264,13 +8304,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Mein Herr, gib mir nur Besitz.",
-            "Mein Herr, mache mich berühmt.",
-            "Mein Herr, mehre mich an Wissen.",
-            "Welche kurze Duʿāʾ lehrt Qurʾān 20:114?"
-          ]
+          "available": true,
+          "textSha256": "7ab21168aaf009dfc0742940305d1d71c387da41ef99d6bcf6d70e7e7e4d319a",
+          "mp3Sha256": "164564e2ca40a2d518c9860001cfee1c72591e64df435d472c3e2814ff80be60",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/416c21f0fe59646557778d208dd9446b0fd8d9ce.mp3"
         },
         "correct": {
           "available": true,
@@ -8285,13 +8322,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/0ead0dc9f2fad1a240fc68715a9d5325.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah lehrt ausdrücklich, um Zunahme an Wissen zu bitten."
-          ]
+          "available": true,
+          "textSha256": "c932a07f95eb877e70800cf577b327b6a07d8a65e0e0807503dc2652c74fd506",
+          "mp3Sha256": "ed22ed746b48c21c1868f720cf706004d52face4768955064aeeb9feca049e3c",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a3c35bdbdddfb2452dd2209ee35e7abf8808f5dc.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-388": {
       "ageBand": "9-10",
@@ -8690,7 +8727,6 @@
           "available": false,
           "missingOriginalSegments": [
             "Kleine Taten werden immer ignoriert.",
-            "Nur große Taten zählen.",
             "Selbst kleinste gute und schlechte Taten werden sichtbar.",
             "Welche Verantwortung zeigt Qurʾān 99:7–8?"
           ]
