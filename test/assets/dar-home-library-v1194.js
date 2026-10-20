@@ -183,7 +183,7 @@ function ensureFunctionalHeroSearch(){
     field.classList.add("dt-hero-native-search");
     var input=field.querySelector("#homeSearchInput");
     if(input){
-      input.setAttribute("placeholder","Qurʾān, Ḥadīṯ, Gelehrte und Themen durchsuchen");
+      input.setAttribute("placeholder","Qurʾān, Ḥadīṯ, Frauen, Wissen suchen");
       input.setAttribute("aria-label","Schnellsuche: Qurʾān, Ḥadīṯ, Gelehrte und Themen durchsuchen");
     }
   }
@@ -626,7 +626,7 @@ function applySmartCompactV2(){
  if(!bar){
   bar=document.createElement("div");bar.id="dtSmartQuickV2";
   bar.setAttribute("aria-label","Schnellzugriffe");
-  [["Qibla","qibla"],["Design","theme"],["Einstellungen","settings"],["Ḥadīṯ-Werke","hadith"],["Bibliothek","books"],["Frauen","women"]].forEach(function(pair){
+  [["Qibla","qibla"],["Design","settings"],["Einstellungen","settings"],["Ḥadīṯ-Werke","hadith"],["Bibliothek","books"],["Frauen","frauen"]].forEach(function(pair){
    var b=document.createElement("button");b.type="button";b.className="dt-smart-action";b.textContent=pair[0];
    b.addEventListener("click",function(){navTo(pair[1])});bar.appendChild(b);
   });
@@ -639,7 +639,7 @@ function applySmartCompactV2(){
   style=document.createElement("style");style.id="dtSmartCompactStyleV2";
   style.textContent=[
    "html.dar-home-v1194 body.is-home-route #dtSmartQuickV2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:9px 0 3px;margin:0;}",
-   "html.dar-home-v1194 body.is-home-route .dt-smart-action{min-width:0;min-height:36px;padding:7px 5px;border:1px solid var(--dt-rule);border-radius:10px;background:transparent;color:var(--dt-ink);font:600 11px/1.2 inherit;cursor:pointer;}",
+   "html.dar-home-v1194 body.is-home-route .dt-smart-action{min-width:0;min-height:36px;padding:7px 5px;border:1px solid var(--dt-rule);border-radius:10px;background:transparent;color:var(--dt-ink);font-family:inherit;font-size:11px;font-weight:600;line-height:1.2;cursor:pointer;}",
    "html.dar-home-v1194 body.is-home-route .dt-smart-action:focus-visible{outline:2px solid var(--dt-accent);outline-offset:2px;}",
    "html.dar-home-v1194 body.is-home-route .dt-hero-search-slot{margin-top:8px!important;margin-bottom:3px!important;}",
    "html.dar-home-v1194 body.is-home-route .dt-smart-search-v2{min-height:44px!important;border-radius:12px!important;}",
