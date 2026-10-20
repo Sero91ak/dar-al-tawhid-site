@@ -483,6 +483,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Nimm dir Zeit für deine Antwort. Was tat Mūsā bei den zwei Frauen am Wasser? Antwort 1: Er half ihnen beim Tränken. Antwort 2: Er verspottete sie. Antwort 3: Er nahm ihnen ihr Wasser weg. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/2a16ed701687ef947f30a764c18d7388e98b515e.mp3",
+      "sha256": "bc4dd1c7c848cf3a6ccc98c3ad7be983f2f589f50e6179f7f887c21f686c5a0e",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Mūsā half den beiden Frauen und wandte sich danach mit einer Duʿāʾ an Allah.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/880575efa180e4998e34f7d1e83fc1a649f493e9.mp3",
+      "sha256": "3f589f57c5e488bdba19735f0af2b16ba13e051ebc6b75baf1c3298c25cd02e1",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Überlege kurz, bevor du dich entscheidest. Darf Abneigung gegen Menschen uns ungerecht machen? Antwort 1: Nein. Antwort 2: Ja. Antwort 3: Nur manchmal. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a105c74e4552503b91ac79d8b1fd23def8baeadb.mp3",
       "sha256": "d033dbb1e9df9a09391f4e414a2a3a891cdec7bc0f375e1b0a5701d92451e242",
@@ -3398,12 +3420,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Er half ihnen beim Tränken.",
-            "Er nahm ihnen ihr Wasser weg.",
-            "Was tat Mūsā bei den zwei Frauen am Wasser?"
-          ]
+          "available": true,
+          "textSha256": "d7e561bb6e52635703027b8ba550f34d6291b261c4c404a21d78cb5a253311c5",
+          "mp3Sha256": "bc4dd1c7c848cf3a6ccc98c3ad7be983f2f589f50e6179f7f887c21f686c5a0e",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/2a16ed701687ef947f30a764c18d7388e98b515e.mp3"
         },
         "correct": {
           "available": true,
@@ -3418,13 +3438,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/6c9422cd2890292b5fbf67667ed913dc.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Mūsā half den beiden Frauen und wandte sich danach mit einer Duʿāʾ an Allah."
-          ]
+          "available": true,
+          "textSha256": "ca96d121ad61e200b05b23f733c2929551798334101baa0d9e3ad9fec911a612",
+          "mp3Sha256": "3f589f57c5e488bdba19735f0af2b16ba13e051ebc6b75baf1c3298c25cd02e1",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/880575efa180e4998e34f7d1e83fc1a649f493e9.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-129": {
       "ageBand": "7-8",
@@ -4178,7 +4198,6 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Es waren Götter.",
             "Es waren Männer, denen Allah Offenbarung gab.",
             "Was antwortet Qurʾān 21:7 auf die Frage nach früheren Gesandten?"
           ]
@@ -8055,7 +8074,6 @@
           "missingOriginalSegments": [
             "Nur davon, wie andere sie sehen.",
             "Nur von ihrer Länge.",
-            "Von der Absicht.",
             "Wovon hängt der Wert einer Handlung nach dem berühmten Ḥadīṯ ab?"
           ]
         },
@@ -10135,7 +10153,6 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Nur um Reichtum.",
             "Nur um ein langes Leben.",
             "Um Gutes im Diesseits und Jenseits und Schutz vor dem Feuer.",
             "Was bittet die Duʿāʾ in Qurʾān 2:201?"
