@@ -4,3 +4,5 @@ Owner confirmed again on 2026-10-20: generate all 450 curated quiz voice compone
 Preflight rerun: codec-dependent QA moved after ffmpeg setup. Previous run consumed ZERO new ElevenLabs speech credits and no paid POST was attempted.
 
 Continuation 2026-10-20: all 20 previous genuine V4 originals are already SHA-checkpointed and must NOT be purchased again. Corrected machine-generated quiz map rebase collision handling. Resume from current 436 registered originals / 86 complete four-part questions; Qur'an recitations are exclusively the app's existing reciter, not ElevenLabs TTS. Continue new deduplicated narrator quiz fragments only; keep external human hearing approval and final public gate intact.
+
+Owner milestone 200 four-part questions: queue one serialized continuation only after the current paid runner completes or times out. Recheck the live saved audio registry, SHA receipt journal, master voice, Fuṣḥā dictionary and account credits before any new text generation. Never replay a previously charged or uncertain text. Private app mappings only until genuine human hearing QA.
