@@ -857,6 +857,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Wie beschreibt der Qurʾān Laylat al-Qadr? Antwort 1: Besser als tausend Monate. Antwort 2: Wie jeden anderen Abend. Antwort 3: Nur als historischen Tag. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/3309bd2c7601e6e9c7a6092de5c26da7bc88b34f.mp3",
+      "sha256": "1dce911ecf1b45c9cb939a5445e8394b76a1ca05c73f789471a78a69464f7283",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah sagt, dass Laylat al-Qadr besser als tausend Monate ist.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/b2f2dc8ecdcc5e1af657616466d7d35ac8cbd0cc.mp3",
+      "sha256": "22c6b848e03644eb708d4b25bdb621a1cf673909e500f15e3ed57bf90c9505be",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Was meiden die Diener des Allerbarmers nach Qurʾān 25:72? Antwort 1: Falsches Zeugnis. Antwort 2: Gutes Reden. Antwort 3: Hilfsbereitschaft. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/7fc34ead22f1d1dada573b22fc6cd9ecd3290f51.mp3",
       "sha256": "637fa3cd56eb428ae23d44d06a5be65c5d81cccf3c98a4157e0026a4667539a1",
@@ -915,6 +937,28 @@
     "Das merken wir uns: Allah beschreibt eine Gemeinschaft, die zum Guten ruft und moralische Verantwortung übernimmt.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/0a9acf81c12e0901b988b3b340850d3fe10c7047.mp3",
       "sha256": "320391b412ef95eeb26f80ff43c670e7c0aa3c713cf9aae92e8900b5539803c8",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Welche Belohnung nennt Qurʾān 2:262 für Menschen, die geben und danach nicht verletzen? Antwort 1: Lohn bei ihrem Herrn und keine Furcht oder Trauer. Antwort 2: Nur weltlichen Ruhm. Antwort 3: Keine Belohnung. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/0c5434c9d43fe9c3905bc0e710363ea10272974e.mp3",
+      "sha256": "b7b598af4a3c1b60e6419a283fa11d9ba9a735a027098c90ede069c556a0a9a5",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah lobt Spenden ohne Vorhaltungen und Kränkung.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/254c405e384c9df8331ceacbacd2eb1922aea4ea.mp3",
+      "sha256": "45d6bfe1642229300328ceb9f50644dae5cf3505eacc994effefd8c5303c5d7a",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -5817,7 +5861,6 @@
           "missingOriginalSegments": [
             "Den ersten zufälligen Kommentar im Internet übernehmen.",
             "Du hast eine islamische Frage und kennst die Antwort nicht. Was passt am besten?",
-            "Eine Antwort erfinden.",
             "Eine zuverlässige wissende Person fragen."
           ]
         },
@@ -5850,7 +5893,6 @@
           "missingOriginalSegments": [
             "Du wirst etwas gefragt und weißt es wirklich nicht. Was passt am besten?",
             "Ehrlich sagen, dass du es nicht weißt, und nachfragen.",
-            "Eine Antwort erfinden.",
             "So tun, als wärst du sicher."
           ]
         },
@@ -6596,13 +6638,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Besser als tausend Monate.",
-            "Nur als historischen Tag.",
-            "Wie beschreibt der Qurʾān Laylat al-Qadr?",
-            "Wie jeden anderen Abend."
-          ]
+          "available": true,
+          "textSha256": "3d4a72f2805b530409806a0bf1e176359e1aa681656fa2963b37beba83b07e3f",
+          "mp3Sha256": "1dce911ecf1b45c9cb939a5445e8394b76a1ca05c73f789471a78a69464f7283",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/3309bd2c7601e6e9c7a6092de5c26da7bc88b34f.mp3"
         },
         "correct": {
           "available": true,
@@ -6617,13 +6656,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/86012459c4bcd62787770eaeafe89964.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah sagt, dass Laylat al-Qadr besser als tausend Monate ist."
-          ]
+          "available": true,
+          "textSha256": "3f389566589bdb505c27f8d96715ee91208ddc672718aeb8a2c1020c7a14656c",
+          "mp3Sha256": "22c6b848e03644eb708d4b25bdb621a1cf673909e500f15e3ed57bf90c9505be",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/b2f2dc8ecdcc5e1af657616466d7d35ac8cbd0cc.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-096": {
       "ageBand": "9-10",
@@ -7808,12 +7847,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Keine Belohnung.",
-            "Lohn bei ihrem Herrn und keine Furcht oder Trauer.",
-            "Welche Belohnung nennt Qurʾān 2:262 für Menschen, die geben und danach nicht verletzen?"
-          ]
+          "available": true,
+          "textSha256": "0109bbaf7c65f2e7f45150a126e0ec26b653d4dbb4e682175c9b5953079a6cf1",
+          "mp3Sha256": "b7b598af4a3c1b60e6419a283fa11d9ba9a735a027098c90ede069c556a0a9a5",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/0c5434c9d43fe9c3905bc0e710363ea10272974e.mp3"
         },
         "correct": {
           "available": true,
@@ -7828,13 +7865,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/1743c561557e58bd975036b5947534da.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah lobt Spenden ohne Vorhaltungen und Kränkung."
-          ]
+          "available": true,
+          "textSha256": "b80667c628d7ef8331688145700293e98df1cf59d4766b1966509d651e95b47e",
+          "mp3Sha256": "45d6bfe1642229300328ceb9f50644dae5cf3505eacc994effefd8c5303c5d7a",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/254c405e384c9df8331ceacbacd2eb1922aea4ea.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-292": {
       "ageBand": "9-10",
@@ -9048,7 +9085,6 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Keine besondere Belohnung.",
             "Nähe zum Propheten ﷺ im Paradies.",
             "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes?"
           ]
