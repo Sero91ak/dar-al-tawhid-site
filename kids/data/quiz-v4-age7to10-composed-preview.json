@@ -538,6 +538,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Nimm dir Zeit für deine Antwort. Du hast eine islamische Frage und kennst die Antwort nicht. Was passt am besten? Antwort 1: Eine zuverlässige wissende Person fragen. Antwort 2: Eine Antwort erfinden. Antwort 3: Den ersten zufälligen Kommentar im Internet übernehmen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8daf759f0c85250cf4e61879961587bf4d8e6af8.mp3",
+      "sha256": "b268a4615b274cc2b6229056e45b215db2e528feaed3caad1bf87b59dd4c95b2",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Das merken wir uns: Allah weist darauf hin, Wissende zu fragen, wenn man etwas nicht weiß.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/c1b9effc6e5a929b59e70ada940703470e148294.mp3",
       "sha256": "85963fc2c99e5b98c3cb099118dd09074f5db4c3193b28d435605ee934c3ac0b",
@@ -1220,6 +1231,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Ein Kind sagt, dass es einen Spitznamen nicht mag. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Wir nennen Menschen nicht mit Namen, die sie verletzen. Antwort 2: Ein verletzender Spitzname ist harmlos, wenn er lustig klingt. Antwort 3: Im Streit darf man jeden Namen benutzen. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/bda030257fae0c925667f2bf0f09384b395e79ff.mp3",
+      "sha256": "67c641f6c34d514143a9e473c34d9236ac6c4a64b8cc6462d0875c526edb658c",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Eine Aufgabe ist schwierig und klappt nicht sofort. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Bei Schwierigkeiten helfen Ṣabr und Ṣalāh, richtig weiterzumachen. Antwort 2: Bei Schwierigkeiten soll man sofort aufgeben. Antwort 3: Geduld bedeutet, nichts mehr zu versuchen. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/7a3fedf05e539241f8d7d8dac3dd5ddc0cfb21ce.mp3",
       "sha256": "cf674aacaf1a59a6ed1b7cf6c38ef533fab908df8500a5475a6e6169f07ca8b4",
@@ -1234,6 +1256,17 @@
     "Etwas Wichtiges klappt schon länger nicht. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Ein Gläubiger verliert die Hoffnung auf Allahs Hilfe nicht. Antwort 2: Wenn etwas lange dauert, ist jede Hoffnung falsch. Antwort 3: Duʿāʾ ist nur erlaubt, wenn alles sofort klappt. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/41d84fbb0edfd23e4d218204ab9cf46a106d4c72.mp3",
       "sha256": "9deaf435c216148058e44816a1acbdcd39d289c4a6e89902a5e40b00bfe480a3",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Du betest und niemand schaut dir zu. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Gute Taten und ʿIbādah werden aufrichtig für Allah getan. Antwort 2: Eine gute Tat ist nur wertvoll, wenn Menschen sie sehen. Antwort 3: Die Absicht für Allah ist unwichtig. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/bb5dc57422fa55fd99ad4d036026ca8d103dd7b8.mp3",
+      "sha256": "ef29158249ca49d0420ee28ba6b4d271f7bb1dcef7bf9d422e2fb713f69769f4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -6008,12 +6041,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Den ersten zufälligen Kommentar im Internet übernehmen.",
-            "Du hast eine islamische Frage und kennst die Antwort nicht. Was passt am besten?",
-            "Eine zuverlässige wissende Person fragen."
-          ]
+          "available": true,
+          "textSha256": "285ccc297c8b52b87514684ef4188731c75b43f3b93804f26f58b885c1b1b268",
+          "mp3Sha256": "b268a4615b274cc2b6229056e45b215db2e528feaed3caad1bf87b59dd4c95b2",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8daf759f0c85250cf4e61879961587bf4d8e6af8.mp3"
         },
         "correct": {
           "available": true,
@@ -6034,7 +6065,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/c1b9effc6e5a929b59e70ada940703470e148294.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-797": {
       "ageBand": "7-8",
@@ -10270,13 +10301,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Ein Kind sagt, dass es einen Spitznamen nicht mag. Welcher Grundsatz hilft dir hier am besten?",
-            "Ein verletzender Spitzname ist harmlos, wenn er lustig klingt.",
-            "Im Streit darf man jeden Namen benutzen.",
-            "Wir nennen Menschen nicht mit Namen, die sie verletzen."
-          ]
+          "available": true,
+          "textSha256": "a787995c4e3e8257c55d04804a1f5604e88cb2a326a0aa1d42ec469d10738384",
+          "mp3Sha256": "67c641f6c34d514143a9e473c34d9236ac6c4a64b8cc6462d0875c526edb658c",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/bda030257fae0c925667f2bf0f09384b395e79ff.mp3"
         },
         "correct": {
           "available": true,
@@ -10297,7 +10325,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/5804d859a3c6f9b968df5e53e753a222b04c447e.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-839": {
       "ageBand": "9-10",
@@ -10627,13 +10655,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Die Absicht für Allah ist unwichtig.",
-            "Du betest und niemand schaut dir zu. Welcher Grundsatz hilft dir hier am besten?",
-            "Eine gute Tat ist nur wertvoll, wenn Menschen sie sehen.",
-            "Gute Taten und ʿIbādah werden aufrichtig für Allah getan."
-          ]
+          "available": true,
+          "textSha256": "e85cf3ea0247ae2a635b8e1da3b341d267eb7645c9fb537fc55ebba3d703b7e0",
+          "mp3Sha256": "ef29158249ca49d0420ee28ba6b4d271f7bb1dcef7bf9d422e2fb713f69769f4",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/bb5dc57422fa55fd99ad4d036026ca8d103dd7b8.mp3"
         },
         "correct": {
           "available": true,
@@ -10654,7 +10679,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/9a126d227572fbcaa4a73c4774c719d9af15d737.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-875": {
       "ageBand": "9-10",
