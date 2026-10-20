@@ -688,6 +688,7 @@ function sync(){
   document.documentElement.classList.add("dar-home-v1194");
   ensureHero();
   ensureMain();
+  applySmartCompactV2();
   applyHomeAtmosphereV1204();
   removeHomePersonalCreditV1238();
   compactHomeFooter();
