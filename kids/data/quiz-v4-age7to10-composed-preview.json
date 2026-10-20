@@ -780,6 +780,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Nimm dir Zeit für deine Antwort. Was lehrt Sūrat az-Zalzalah über kleinste gute und schlechte Taten? Antwort 1: Auch sie werden gesehen. Antwort 2: Sie zählen nie. Antwort 3: Nur große Taten zählen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/0943a18289c5d630dee1edd55be291b139d1262e.mp3",
+      "sha256": "e1edd74f717f8b920088e87f193948b83e258a8a3de227419ece8efbd63dc883",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah sagt, dass selbst das Gewicht eines Stäubchens an Gutem oder Bösem gesehen wird.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/203b9a70fa20ab258c06c9fd673d9d838d81c4f7.mp3",
+      "sha256": "f879bd93ea6140d04a91d79109a46913a2502429675bf4b652bebe24b3168b34",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Nimm dir Zeit für deine Antwort. Wie beschreibt Qurʾān 95:4 die Erschaffung des Menschen? Antwort 1: In bester Gestalt. Antwort 2: Ohne Ordnung. Antwort 3: Als bedeutungslos. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/1065aef4dffbc589dd67f955aaed4f364735324d.mp3",
       "sha256": "fac68fdb4b17c4e8d11f38c0e56f7a7b30757a53ef9005d67ccd8f54b9ce4c6d",
@@ -1652,6 +1674,17 @@
     "Wohin richten Muslime sich im Gebet? Antwort 1: Zur al-Masǧid al-Ḥarām in Makkah. Antwort 2: Zu irgendeinem Gebäude. Antwort 3: Immer nach Norden. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/dba6e3f7d5bc1c17cc7a5b418660c83a5c937779.mp3",
       "sha256": "30a2667f22431e9bcaa2b773af53ff6eb40b257073700003353a67db7ef6f6e3",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Worauf schaut Allah nach Ṣaḥīḥ Muslim 2564? Antwort 1: Auf Herzen und Taten. Antwort 2: Nur auf Aussehen und Besitz. Antwort 3: Nur auf Kleidung. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/6785271fdc0caf3ecac5a777f0c3624958fe5c1b.mp3",
+      "sha256": "0293914d2bfc09a18a30b04a540ff94eadfa3556cd57ac66cb919200d42c4bbb",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -3119,7 +3152,6 @@
           "missingOriginalSegments": [
             "Ein Schiff und einen Berg.",
             "Elf Sterne sowie Sonne und Mond.",
-            "Nur eine Palme.",
             "Was sah Yūsuf in seinem frühen Traum?"
           ]
         },
@@ -4692,7 +4724,6 @@
           "available": false,
           "missingOriginalSegments": [
             "Reichtum und Stärke.",
-            "Ruhm und Alter.",
             "Taqwā und Geduld.",
             "Welche zwei Eigenschaften nannte Yūsuf als Grund für guten Ausgang?"
           ]
@@ -5306,11 +5337,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Auch sie werden gesehen.",
-            "Was lehrt Sūrat az-Zalzalah über kleinste gute und schlechte Taten?"
-          ]
+          "available": true,
+          "textSha256": "a109c7bb4fc2b06773201018087edf8263e9a5089904fd785161f75ea6cde97b",
+          "mp3Sha256": "e1edd74f717f8b920088e87f193948b83e258a8a3de227419ece8efbd63dc883",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/0943a18289c5d630dee1edd55be291b139d1262e.mp3"
         },
         "correct": {
           "available": true,
@@ -5325,13 +5355,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/53nlCj9DCu1JkXZFBEZI.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah sagt, dass selbst das Gewicht eines Stäubchens an Gutem oder Bösem gesehen wird."
-          ]
+          "available": true,
+          "textSha256": "3175d182eeda802c7c80014b25f4106f2ded92b6fc23d3e25f6ad67a3e8f69f2",
+          "mp3Sha256": "f879bd93ea6140d04a91d79109a46913a2502429675bf4b652bebe24b3168b34",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/203b9a70fa20ab258c06c9fd673d9d838d81c4f7.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-482": {
       "ageBand": "7-8",
@@ -7951,13 +7981,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Auf Herzen und Taten.",
-            "Nur auf Aussehen und Besitz.",
-            "Nur auf Kleidung.",
-            "Worauf schaut Allah nach Ṣaḥīḥ Muslim 2564?"
-          ]
+          "available": true,
+          "textSha256": "05dbea2b10c255fce9116cbe42a24830ad72c47c072a975517ed2dbdb951c18a",
+          "mp3Sha256": "0293914d2bfc09a18a30b04a540ff94eadfa3556cd57ac66cb919200d42c4bbb",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/6785271fdc0caf3ecac5a777f0c3624958fe5c1b.mp3"
         },
         "correct": {
           "available": true,
