@@ -1735,6 +1735,14 @@ export default {
         (url.pathname === "/test" || url.pathname === "/test/" || url.pathname === "/test/index.html");
       if (testHomeHtml && assetResponse.ok) {
         let html = await assetResponse.text();
+        // SMART_TEST_HOME_V3: actual public /test/ router, cache-busted test-only Home JS.
+        // No visitor, public website, or KIDS HTML is modified by this branch.
+        html = html.replace(/dar-home-library-v1194\.js\?v=[^"'\x60\s]+/g,
+          "dar-home-library-v1194.js?v=20261020-smart-v3");
+        if (!html.includes("dar-home-library-v1194.js?v=20261020-smart-v3")) {
+          const homeScript = '<script defer id="darTestSmartHomeV3" src="/test/assets/dar-home-library-v1194.js?v=20261020-smart-v3"></script>';
+          html = html.includes("</body>") ? html.replace("</body>", homeScript + "\n</body>") : html + homeScript;
+        }
         const v3Styles = '<link rel="stylesheet" id="darTestHomeV3ActualRoute" href="/test/assets/dar-home-v3-compact.css?v=20261019-home-plain-v2">';
         const noPhotos = '<link rel="stylesheet" id="darTestHomeNoPhotosActualRouteV2" href="/test/assets/home-background-remove-v2.css?v=20261019-photo-free-v2">';
         if (!html.includes('id="darTestHomeV3ActualRoute"')) {
@@ -1745,6 +1753,7 @@ export default {
         if (!html.includes('id="darTestHomeNoPhotosActualRouteV2"')) {
           html = html.includes("</body>") ? html.replace("</body>", noPhotos + "\n</body>") : html + noPhotos;
         }
+        headers.set("X-DAR-Test-Home", "smart-v3-20261020");
         headers.set("Content-Type", "text/html; charset=utf-8");
         headers.delete("Content-Length");
         headers.delete("Content-Encoding");
