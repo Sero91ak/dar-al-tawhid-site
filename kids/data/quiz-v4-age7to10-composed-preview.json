@@ -1297,6 +1297,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Nimm dir Zeit für deine Antwort. Zwei Freunde streiten wegen eines Spiels. Was passt am besten? Antwort 1: Ruhig helfen, dass beide fair miteinander sprechen. Antwort 2: Einen gegen den anderen aufhetzen. Antwort 3: Gerüchte über beide verbreiten. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/3f7156c491c77cc181f56bd67ae2f6235bc369ae.mp3",
+      "sha256": "3d778e96d70c06e82540df5019fb962504a1bccd358fb35f312e7e8f28d80b34",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Das merken wir uns: Allah befiehlt Versöhnung zwischen Gläubigen.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/d9df00abeb48a51041eb9d897cf84ab8c4f496cb.mp3",
       "sha256": "fcc55cf21435308df0de3adf0a5d624c9c9f0eb12367a3522dc42a288ac233b0",
@@ -6885,13 +6896,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Einen gegen den anderen aufhetzen.",
-            "Gerüchte über beide verbreiten.",
-            "Ruhig helfen, dass beide fair miteinander sprechen.",
-            "Zwei Freunde streiten wegen eines Spiels. Was passt am besten?"
-          ]
+          "available": true,
+          "textSha256": "45d6ac3fe4a48806fd82f7025c4ea0b76a909bbe3083941f04d78dd5bd000c9b",
+          "mp3Sha256": "3d778e96d70c06e82540df5019fb962504a1bccd358fb35f312e7e8f28d80b34",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/3f7156c491c77cc181f56bd67ae2f6235bc369ae.mp3"
         },
         "correct": {
           "available": true,
@@ -6912,7 +6920,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/d9df00abeb48a51041eb9d897cf84ab8c4f496cb.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-753": {
       "ageBand": "7-8",
