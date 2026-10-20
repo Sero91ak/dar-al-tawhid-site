@@ -207,7 +207,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // Keep only the existing v1194 home authority and refresh its assets.
   html = html.replace(/dar-home-library-v1194\.css\?v=[^"'`\s]+/g, "dar-home-library-v1194.css?v=20261019-plain-home");
-  html = html.replace(/dar-home-library-v1194\.js\?v=[^"'`\s]+/g, "dar-home-library-v1194.js?v=20261019-v47r2");
+  html = html.replace(/dar-home-library-v1194\.js\?v=[^"'`\s]+/g, "dar-home-library-v1194.js?v=20261020-smart-v2");
   html = html.replace(/dar-library-redesign-v1168\.css\?v=[^"'`\s]+/g, "dar-library-redesign-v1168.css?v=1213-quran-native");
   html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"'`\s]+/g, "dar-library-redesign-v1168.js?v=1213-quran-native");
 
