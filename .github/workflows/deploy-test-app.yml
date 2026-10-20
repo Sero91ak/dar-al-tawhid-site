@@ -105,6 +105,9 @@ jobs:
           console.log('Dar Test Quran Player canonical version',version);
           NODE
 
+      - name: Qibla GPS/Kompass Bridge Regression (keine externen Dienste)
+        run: node scripts/test-qibla-native-bridge.cjs
+
       - name: Build + Build-IDs synchronisieren
         run: npm run build
 
