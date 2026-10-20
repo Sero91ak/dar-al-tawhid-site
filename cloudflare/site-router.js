@@ -1179,7 +1179,15 @@ export default {
           } });
         }
         try {
-          const asset = await env.ASSETS.fetch(request);
+          // Numbered source pages are physical /q/N/index.html files.
+          // Resolve the asset explicitly to avoid Workers Static Assets
+          // trailing-slash canonical redirects and accidental SPA fallbacks.
+          let asset = await env.ASSETS.fetch(request);
+          if (canonicalSourcePath && (!asset.ok || (asset.status >= 300 && asset.status < 400))) {
+            const directUrl = new URL(request.url);
+            directUrl.pathname = canonicalSourcePath + "index.html";
+            asset = await env.ASSETS.fetch(new Request(directUrl.toString(), request));
+          }
           const headers = new Headers(asset.headers);
           headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
           headers.set("CDN-Cache-Control", "no-store");
