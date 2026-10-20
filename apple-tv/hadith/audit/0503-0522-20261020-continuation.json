@@ -1,0 +1,218 @@
+{
+  "project": "DĀR AL TAWḤĪD",
+  "date": "2026-10-20",
+  "range": "HAD-0503–HAD-0522",
+  "kind": "20-item classical Sharh / Athar original-text and attribution audit",
+  "series": "apple-tv/hadith/series/451-550/",
+  "counts": {
+    "candidatesRead": 20,
+    "atharChecked": 8,
+    "hadithChecked": 12,
+    "canonicalRecordFilesChanged": 8,
+    "existingHadithWithVerifiedSharh": 12,
+    "unchangedBecausePreviouslyVerified": 12,
+    "newSharh": 0,
+    "newUniqueHadithOrAthar": 0,
+    "explicitSemanticDuplicateLinksAdded": 3,
+    "unverifiedAttributionFlagged": 2
+  },
+  "records": [
+    {
+      "id": "HAD-0503",
+      "recordType": "athar",
+      "status": "updated",
+      "notes": "Ayyub wording in Qawam al-Sunnah no.519 vs Abu Qilabah attribution by Dhahabi; shared kernel with HAD-0393; isnad still uncertain",
+      "recordModified": true
+    },
+    {
+      "id": "HAD-0504",
+      "recordType": "athar",
+      "status": "updated",
+      "notes": "Al-Bukhari Khalq Afal al-Ibad precise muallaq quote of Zuhri; older label Kitab Tawhid alone was unverified",
+      "recordModified": true
+    },
+    {
+      "id": "HAD-0505",
+      "recordType": "athar",
+      "status": "updated",
+      "notes": "Al-Lalakai 316 exact Sufyan ibn Uyaynah ten-point Sunnah definition, explicit student heard",
+      "recordModified": true
+    },
+    {
+      "id": "HAD-0506",
+      "recordType": "athar",
+      "status": "updated",
+      "notes": "Al-Hasan Basri statement verified at Tabari Q23:60, duplicate HAD-0403",
+      "recordModified": true
+    },
+    {
+      "id": "HAD-0507",
+      "recordType": "athar",
+      "status": "updated-unverified",
+      "notes": "Tawus 'dua weapon' wording/chain not found; different marfu report of Ali is disputed",
+      "recordModified": true
+    },
+    {
+      "id": "HAD-0508",
+      "recordType": "athar",
+      "status": "updated-unverified",
+      "notes": "Wahb ibn Munabbih sentence exact early Arabic original and isnad not found",
+      "recordModified": true
+    },
+    {
+      "id": "HAD-0509",
+      "recordType": "athar",
+      "status": "updated",
+      "notes": "Sa'id ibn al-Musayyib obedience and disobedience primary Abu Nu'aym Hilyah page 164",
+      "recordModified": true
+    },
+    {
+      "id": "HAD-0510",
+      "recordType": "athar",
+      "status": "updated",
+      "notes": "Al-Awzai al-Lalakai 315 early chain and duplicate HAD-0397",
+      "recordModified": true
+    },
+    {
+      "id": "HAD-0511",
+      "recordType": "hadith",
+      "status": "unchanged-existing-sharh",
+      "notes": "Bukhari 2442 authentic with direct classical Ibn Hajar sharh, no fresh correction needed",
+      "recordModified": false
+    },
+    {
+      "id": "HAD-0512",
+      "recordType": "hadith",
+      "status": "unchanged-existing-sharh",
+      "notes": "Muslim 2699 first clause Ibn Rajab direct sharh, four-clause series",
+      "recordModified": false
+    },
+    {
+      "id": "HAD-0513",
+      "recordType": "hadith",
+      "status": "unchanged-existing-sharh",
+      "notes": "Muslim 2699 separate clause and existing overlap with HAD-0512",
+      "recordModified": false
+    },
+    {
+      "id": "HAD-0514",
+      "recordType": "hadith",
+      "status": "unchanged-existing-sharh",
+      "notes": "Muslim 2699 separate clause and existing overlap with HAD-0512",
+      "recordModified": false
+    },
+    {
+      "id": "HAD-0515",
+      "recordType": "hadith",
+      "status": "unchanged-existing-sharh",
+      "notes": "Muslim 2699 separate clause and existing overlap with HAD-0512",
+      "recordModified": false
+    },
+    {
+      "id": "HAD-0516",
+      "recordType": "hadith",
+      "status": "unchanged-existing-sharh",
+      "notes": "Muslim 2674 dawah guidance, Nawawi direct sharh",
+      "recordModified": false
+    },
+    {
+      "id": "HAD-0517",
+      "recordType": "hadith",
+      "status": "unchanged-existing-sharh",
+      "notes": "Muslim 2674 opposite clause and existing duplicate HAD-0516",
+      "recordModified": false
+    },
+    {
+      "id": "HAD-0518",
+      "recordType": "hadith",
+      "status": "unchanged-existing-sharh",
+      "notes": "Bukhari 7376 Muslim 2319 mercy, Nawawi direct sharh; print page not verified",
+      "recordModified": false
+    },
+    {
+      "id": "HAD-0519",
+      "recordType": "hadith",
+      "status": "unchanged-existing-sharh",
+      "notes": "Abu Dawud 4942 Tirmidhi 1923, hasan, Ali al-Qari commentary; earliest prior sharh pending possible",
+      "recordModified": false
+    },
+    {
+      "id": "HAD-0520",
+      "recordType": "hadith",
+      "status": "unchanged-existing-sharh",
+      "notes": "Abu Dawud 4941 Tirmidhi 1924, Ibn Amr as narrator, existing 'Awn al-Ma'bud; earliest earlier sharh research pending",
+      "recordModified": false
+    },
+    {
+      "id": "HAD-0521",
+      "recordType": "hadith",
+      "status": "unchanged-existing-sharh",
+      "notes": "Muslim 2594, Aishah narrator, Abu al-Abbas al-Qurtubi commentary",
+      "recordModified": false
+    },
+    {
+      "id": "HAD-0522",
+      "recordType": "hadith",
+      "status": "unchanged-existing-sharh",
+      "notes": "Muslim 2592, Jarir narrator, Abu al-Abbas al-Qurtubi commentary",
+      "recordModified": false
+    }
+  ],
+  "sourceEvidence": {
+    "HAD-0503": [
+      "https://www.islamweb.net/ar/library/content/1086/796/",
+      "https://www.islamweb.net/ar/library/content/60/628/"
+    ],
+    "HAD-0504": [
+      "https://www.islamweb.net/ar/library/content/1017/78/",
+      "https://www.islamweb.net/ar/library/content/49/399/"
+    ],
+    "HAD-0505": "https://www.islamweb.net/ar/library/content/110/31/",
+    "HAD-0506": "https://quran.ksu.edu.sa/tafseer/tabary/sura23-aya60.html",
+    "HAD-0507": [
+      "https://islamweb.net/ar/library/content/74/1701/",
+      "https://www.islamweb.net/ar/library/content/304/8550/"
+    ],
+    "HAD-0509": "https://islamweb.net/ar/library/content/131/557/",
+    "HAD-0510": "https://www.islamweb.net/ar/library/content/110/30/",
+    "HAD-0511": "https://www.islamweb.net/ar/library/content/52/4436",
+    "HAD-0512": "https://www.islamweb.net/ar/library/content/81/190",
+    "HAD-0516": "https://www.islamweb.net/ar/library/content/53/7826",
+    "HAD-0518": "https://www.islamweb.net/ar/library/content/53/6931",
+    "HAD-0519": "https://www.islamweb.net/ar/library/content/79/9886",
+    "HAD-0520": "https://islamweb.net/ar/library/content/55/8548",
+    "HAD-0521": "https://www.islamweb.net/ar/library/content/317/4328"
+  },
+  "editorialCaveats": [
+    "Identical text across HAD entries does not add an independent transmission. HAD-0503↔0393, HAD-0506↔0403, HAD-0510↔0397 linked.",
+    "Al-Bukhari's bare Zuhri attribution is not a connected authenticated chain.",
+    "Existing hadith may be authentic with 12 assigned classical sharh, but claiming 'earliest' requires separate comparative scholarship; particularly 0519/0520.",
+    "Unverified Tayus and Wahb lines HAD-0507/0508 must not be counted or presented as sound primary-authenticated athar.",
+    "Display of unverified canonical legacy records still needs separate publication-gate enforcement; these source corrections alone do not remove them from a client."
+  ],
+  "publication": {
+    "githubCommitted": true,
+    "canonicalWorkflow": ".github/workflows/canonical-islamic-content-live.yml",
+    "deploymentStatus": "not independently verified",
+    "nativeIosStatus": "not independently verified",
+    "appleTvStatus": "not independently verified",
+    "noOneSignal": true,
+    "kidsUntouched": true,
+    "nativeAppCodeUntouched": true
+  },
+  "catalogAtStart": {
+    "total": 3358,
+    "hadith": 2408,
+    "athar": 950,
+    "latest": "HAD-3358",
+    "next": "HAD-3359"
+  },
+  "next": {
+    "batch": "HAD-0523–HAD-0542",
+    "parallel": [
+      "Early genuine Sharh gaps (e.g. HAD-0463 needs-review)",
+      "Authentic, unique new Hadith with earliest direct Sharh after rigorous duplicate search",
+      "Athar chain gaps and repeat prevention"
+    ]
+  }
+}
