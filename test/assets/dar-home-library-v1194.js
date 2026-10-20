@@ -630,24 +630,36 @@ function applySmartCompactV2(){
    var b=document.createElement("button");b.type="button";b.className="dt-smart-action";b.textContent=pair[0];
    b.addEventListener("click",function(){
     if(pair[1]!=="appearance"){navTo(pair[1]);return;}
-    // Existing app settings own theme persistence; jump to that control.
+    // Reuse the existing native appearance picker. No new colour engine.
+    var themeToggle=document.querySelector("#dv3HeaderActions [data-dv3-theme-open]");
+    if(themeToggle){themeToggle.click();return;}
     navTo("settings");
-    setTimeout(function(){
-     var labels=Array.prototype.slice.call(document.querySelectorAll("h1,h2,h3,h4,label,button,[role=heading]"));
-     var target=labels.find(function(el){return /erscheinungsbild|farbschema|design und farben/i.test(String(el.textContent||"").trim())});
-     if(target){try{target.scrollIntoView({behavior:"smooth",block:"center"})}catch(e){}}
-    },220);
    });bar.appendChild(b);
   });
  }
  if(prayer.nextElementSibling!==bar)prayer.insertAdjacentElement("afterend",bar);
  var field=hero.querySelector(".dt-hero-native-search");
  if(field)field.classList.add("dt-smart-search-v2");
+ // The V3 layout creates a second search input. Keep the native relocated
+ // search in the header, hide ONLY that redundant V3 surface.
+ var spare=document.querySelector("#dv3Home > .dv3-search-box");
+ if(spare)spare.hidden=!!hero.querySelector("#homeSearchInput");
  var style=document.getElementById("dtSmartCompactStyleV2");
  if(!style){
   style=document.createElement("style");style.id="dtSmartCompactStyleV2";
   style.textContent=[
-   "html.dar-home-v1194 body.is-home-route #dtSmartQuickV2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;padding:9px 0 3px;margin:0;}",
+   "html.dar-home-v1194 body.is-home-route #dtSmartQuickV2{order:3!important;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:7px 0 1px;margin:0;width:100%;}",
+   "html.dar-home-v47-layout.dar-home-v1194 body.is-home-route .dar-v47-welcome{order:4!important;margin:11px 0 7px!important;}",
+   "html.dar-home-v47-layout.dar-home-v1194 body.is-home-route #dtHero1194{order:5!important;margin:3px 0 5px!important;}",
+   "html.dar-home-v47-layout.dar-home-v1194 body.is-home-route .top-shell #dv3Weather{display:none!important;}",
+   "html.dar-home-v1194 body.is-home-route #dv3Home>.dv3-search-box[hidden]{display:none!important;}",
+   "html.dar-home-v1194 body.is-home-route #dv3Home{gap:9px!important;}",
+   "html.dar-home-v1194 body.is-home-route #dv3Home .dv3-hometitle{margin:0 0 5px!important;}",
+   "html.dar-home-v1194 body.is-home-route #dv3Home .dv3-hometitle h2{font-size:18px!important;}",
+   "html.dar-home-v1194 body.is-home-route #dv3Home .dv3-today-card>span{display:none!important;}",
+   "html.dar-home-v1194 body.is-home-route #dv3Home .dv3-extras{gap:8px!important;align-items:stretch!important;}",
+   "html.dar-home-v1194 body.is-home-route #dv3Home .dv3-today-card{height:auto!important;min-height:116px!important;gap:7px!important;}",
+   "html.dar-home-v1194 body.is-home-route #dv3Home .dv3-today-card>b{white-space:normal!important;line-height:1.35!important;}",
    "html.dar-home-v1194 body.is-home-route .dt-smart-action{min-width:0;min-height:36px;padding:7px 5px;border:1px solid var(--dt-rule);border-radius:10px;background:transparent;color:var(--dt-ink);font-family:inherit;font-size:11px;font-weight:600;line-height:1.2;cursor:pointer;}",
    "html.dar-home-v1194 body.is-home-route .dt-smart-action:focus-visible{outline:2px solid var(--dt-accent);outline-offset:2px;}",
    "html.dar-home-v1194 body.is-home-route .dt-hero-search-slot{margin-top:8px!important;margin-bottom:3px!important;}",
