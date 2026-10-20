@@ -824,6 +824,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Überlege kurz, bevor du dich entscheidest. Du betest und niemand schaut dir zu. Was passt am besten? Antwort 1: Trotzdem sorgfältig für Allah beten. Antwort 2: Nur schnell beten, weil niemand zusieht. Antwort 3: Das Gebet abbrechen, bis jemand kommt. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ab72ae0659d594fa65aa8d1916041b51cb5e8f18.mp3",
+      "sha256": "f91b499af6fffea0e0daa1cf8be1c4d771efe96f8d018c3b2df7b9bd38ea6d9a",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Das merken wir uns: Allah befiehlt, Ihm aufrichtig zu dienen.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/9a126d227572fbcaa4a73c4774c719d9af15d737.mp3",
       "sha256": "3cab5c296a863a2172eb45aa84e1fbc4b732dbedc8c034e26a1e3808b94ae61b",
@@ -1814,6 +1825,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Du hast dir mehr Essen genommen, als du schaffst. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Wir nutzen Gaben ohne Verschwendung. Antwort 2: Verschwendung ist in Ordnung, wenn genug da ist. Antwort 3: Mit Essen darf man absichtlich spielen und es wegwerfen. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/fa28469e7fb79596b35d0ecc269020043168c2c0.mp3",
+      "sha256": "8ff6f3193e38bc46d4cfdf8250da0a272f2c77fa58171741898fe0b08a552cbb",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Du betest und niemand schaut dir zu. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Gute Taten und ʿIbādah werden aufrichtig für Allah getan. Antwort 2: Eine gute Tat ist nur wertvoll, wenn Menschen sie sehen. Antwort 3: Die Absicht für Allah ist unwichtig. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/bb5dc57422fa55fd99ad4d036026ca8d103dd7b8.mp3",
       "sha256": "ef29158249ca49d0420ee28ba6b4d271f7bb1dcef7bf9d422e2fb713f69769f4",
@@ -2334,7 +2356,6 @@
           "missingOriginalSegments": [
             "Vor Hilfsbereitschaft.",
             "Vor Lernen.",
-            "Vor Shirk.",
             "Wovor warnte Luqmān seinen Sohn besonders?"
           ]
         },
@@ -3400,7 +3421,6 @@
           "available": false,
           "missingOriginalSegments": [
             "Nahrung, Schmuck und Schiffe.",
-            "Nur Regen.",
             "Welchen Nutzen des Meeres nennt Qurʾān 16:14?",
             "Zauberei und Wahrsagerei."
           ]
@@ -6364,13 +6384,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Das Gebet abbrechen, bis jemand kommt.",
-            "Du betest und niemand schaut dir zu. Was passt am besten?",
-            "Nur schnell beten, weil niemand zusieht.",
-            "Trotzdem sorgfältig für Allah beten."
-          ]
+          "available": true,
+          "textSha256": "62d9ae8b08aa1907f563484d7d9e9b8825f3aaf4990acb8123cebb34298c77bf",
+          "mp3Sha256": "f91b499af6fffea0e0daa1cf8be1c4d771efe96f8d018c3b2df7b9bd38ea6d9a",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ab72ae0659d594fa65aa8d1916041b51cb5e8f18.mp3"
         },
         "correct": {
           "available": true,
@@ -6391,7 +6408,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/9a126d227572fbcaa4a73c4774c719d9af15d737.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-783": {
       "ageBand": "7-8",
@@ -11069,13 +11086,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Du hast dir mehr Essen genommen, als du schaffst. Welcher Grundsatz hilft dir hier am besten?",
-            "Mit Essen darf man absichtlich spielen und es wegwerfen.",
-            "Verschwendung ist in Ordnung, wenn genug da ist.",
-            "Wir nutzen Gaben ohne Verschwendung."
-          ]
+          "available": true,
+          "textSha256": "6f636f394c0aa69b6c3ef1b29bb2f3b54787b7fc5292847b4180e64407c3cbb9",
+          "mp3Sha256": "8ff6f3193e38bc46d4cfdf8250da0a272f2c77fa58171741898fe0b08a552cbb",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/fa28469e7fb79596b35d0ecc269020043168c2c0.mp3"
         },
         "correct": {
           "available": true,
@@ -11096,7 +11110,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/187c3a1a4806eb47fc15a1157f077c56a0cd99d6.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-869": {
       "ageBand": "9-10",
