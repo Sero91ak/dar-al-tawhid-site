@@ -79,6 +79,18 @@ def build():
     age = {qid: row["ageBand"] for qid, row in by_id.items()}
     guard(Counter(age.values()) == {"4-6":150, "7-8":150, "9-10":150},
           "not 150 questions in each age band")
+    # A timed-out provider POST might already be billed. Exclude its exact
+    # source SHA from ALL new purchasing waves, without blocking unrelated
+    # genuinely unpaid source texts or silently trying the uncertain one again.
+    uncertain=set()
+    if STAGE_ATTEMPTS.is_file():
+        journal=load(STAGE_ATTEMPTS)
+        for attempt in journal.get("entries",[]):
+            if attempt.get("status")=="REQUEST_STARTED_UNCONFIRMED":
+                h=attempt.get("textSHA256")
+                guard(isinstance(h,str) and len(h)==64 and h not in uncertain,
+                      "duplicate or invalid uncertain paid source SHA")
+                uncertain.add(h)
     requested = {}
     use = defaultdict(set)
     question_fragments = defaultdict(set)
@@ -105,17 +117,19 @@ def build():
                 if s in reg["textClips"] or s in original_nine or s in flow_pending:
                     continue
                 h = digest(s)
+                if h in uncertain:
+                    # Already attempted: original bytes must be recovered,
+                    # never synthesize a paid replacement in another wave.
+                    continue
                 guard(s not in guards, "unreconciled old paid text: " + h)
                 requested[h] = s
                 use[h].add(q["questionId"])
                 question_fragments[q["questionId"]].add(h)
-    # Respect ambiguous sent-but-not-confirmed POSTs. They are NEVER retried.
-    if STAGE_ATTEMPTS.is_file():
-        journal = load(STAGE_ATTEMPTS)
-        for attempt in journal.get("entries", []):
-            if attempt.get("status") == "REQUEST_STARTED_UNCONFIRMED":
-                guard(attempt["textSHA256"] not in requested,
-                      "ambiguous charged POST has no recovered MP3; reconcile before planning")
+    # A provider-uncertain source remains protected and visibly excluded.
+    # Its absence from a new wave is a prerequisite, not permission to discard
+    # its previous payment record.
+    guard(not (set(requested) & uncertain),
+          "uncertain previous provider POST entered new paid queue")
     for q in recipes:
         for part in KINDS:
             s = q[part]["text"]
@@ -202,6 +216,7 @@ def build():
         "savedOriginalDirectTextCount":len(reg["textClips"]),
         "previouslyPaidUnrecoveredOriginals":len(original_nine),
         "connectedFlowOriginalsUnimportedNoRepurchase":len(flow_pending),
+        "uncertainAlreadyAttemptedSourceSHA256NeverRebuy":sorted(uncertain),
         "connectedFlowOriginalTextsAwaitingImport":sorted(flow_pending),
         "trulyUnrecordedDistinctTextCount":len(requested),
         "trulyUnrecordedCodepoints":sum(len(x) for x in requested.values()),
