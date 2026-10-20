@@ -6,20 +6,20 @@ Das ist ein **kostenfreier, unveröffentlichter Text- und Budgetaudit**.
 | Altersgruppe | Neue Fragen-Fragmente | Neue Erklärungs-Fragmente | Neue Lob-Audios | Neue Retry-Audios |
 |---|---:|---:|---:|---:|
 | 4-6 | 0 | 0 | 0 | 0 |
-| 7-8 | 530 | 130 | 0 | 0 |
-| 9-10 | 543 | 133 | 0 | 0 |
+| 7-8 | 350 | 78 | 0 | 0 |
+| 9-10 | 317 | 88 | 0 | 0 |
 
-- **1311** echte neue, unterschiedliche Originalfragmente nach Deduplizierung.
-- **62652** neue Unicode-Textzeichen insgesamt.
-- **25** altersübergreifend wiederverwendbare neue Fragmente.
-- **1455** Zeichen werden durch exakte altersübergreifende Wiederverwendung nicht mehrfach gekauft.
+- **833** echte neue, unterschiedliche Originalfragmente nach Deduplizierung.
+- **41774** neue Unicode-Textzeichen insgesamt.
+- **0** altersübergreifend wiederverwendbare neue Fragmente.
+- **0** Zeichen werden durch exakte altersübergreifende Wiederverwendung nicht mehrfach gekauft.
 - Für 4–6 Jahre sind **null neue Sprachgenerierungen** erforderlich, aber neun bereits bezahlte ElevenLabs-Flow-Originale müssen noch wiederhergestellt werden.
 
 ## Planungsbudget: früheres Ziel und aktueller Quelltext
 
 - Frühere interne Budgetzielgröße: **27860 Credits**.
 - Bisheriger, **nicht vom Provider bestätigter** Kostenansatz für den Vollausbau: **79075.79 Credits**.
-- Daraus rein rechnerisch: Bei unverändertem angenommenem Satz dürften nur etwa **22073** neue Textzeichen übrigbleiben (**64.8 %** Reduktion). Das ist keine belastbare Zusage über ElevenLabs-Rechnungen.
+- Daraus rein rechnerisch: Bei unverändertem angenommenem Satz dürften nur etwa **14717** neue Textzeichen übrigbleiben (**64.8 %** Reduktion). Das ist keine belastbare Zusage über ElevenLabs-Rechnungen.
 - Der bestehende Kostenansatz enthält keine hier autorisierten neuen TTS-Aufträge.
 
 ## Verbindliche Fortsetzung
