@@ -452,6 +452,9 @@ jobs:
           # „Neue Version verfügbar“ dauerhaft. Haupt-Branch-Skripte wiederherstellen.
           git checkout "${GITHUB_SHA}" -- scripts/patch-test-canonical-library.js scripts/cf-pages-build.js
 
+      - name: Qibla GPS/Kompass Bridge Regression (keine externen Dienste)
+        run: node scripts/test-qibla-native-bridge.cjs
+
       - name: Build + Build-IDs synchronisieren
         run: npm run build
 
