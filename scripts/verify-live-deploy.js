@@ -161,6 +161,35 @@ async function main() {
       ]
     );
 
+    // VISITOR_IOS_SCROLL_BOUNDARY_LIVE_V2
+    // Verify the REAL WKWebView response, not the public browser website.
+    // A successful Worker deploy alone cannot prove that the native shell
+    // receives the CSS/JS. Only the TestFlight binary can disable UIKit bounce.
+    const scrollCssHref = "/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-scroll-v2";
+    const scrollJsHref = "/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-scroll-v2";
+    const iosScrollHtmlOk = await waitForHtmlIncludes(
+      `${SITE_URL}/?ios-scroll-v2=${Date.now()}`,
+      [
+        'id="darAdultTopScrollCssV1"',
+        'id="darAdultTopScrollJsV1"',
+        scrollCssHref, scrollJsHref
+      ],
+      { "User-Agent": "DarAlTawhid-iOS/1.0 WKWebView" }
+    );
+    const iosScrollCssOk = await waitForHtmlIncludes(
+      `${SITE_URL}${scrollCssHref}`,
+      ["DAR_ADULT_TOP_SCROLL_BOUNDARY_V2", "POST HERO V2", "top:auto!important"]
+    );
+    const iosScrollJsOk = await waitForHtmlIncludes(
+      `${SITE_URL}${scrollJsHref}`,
+      ["DAR_ADULT_TOP_SCROLL_BOUNDARY_V2", "function canScroll(direction)", 'stepY>0?"up":"down"']
+    );
+    console.log(
+      `verify iOS scroll boundary: native-html=${iosScrollHtmlOk ? "ok" : "FAIL"}, ` +
+      `css=${iosScrollCssOk ? "ok" : "FAIL"}, js=${iosScrollJsOk ? "ok" : "FAIL"} ` +
+      "(native UIKit bounces requires a separately installed TestFlight build)"
+    );
+
     const { text } = await fetchStatus(`${SITE_URL}/`, nativeHeaders);
     const zakatMatch = text.match(/zakat-app\.js\?v=(\d+)/);
     const zakatVer = zakatMatch ? Number(zakatMatch[1]) : 0;
@@ -177,9 +206,9 @@ async function main() {
       200
     );
 
-    if (!responsiveHtmlOk || !responsiveCssOk || !publicWebsiteOk || !publicIsolationSwOk || !publicInstallManifestOk || !publicInstallWorkerOk || !visitorOk || !pwaOk || !pwaInstallerOk || !downloadButtonsOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
+    if (!iosScrollHtmlOk || !iosScrollCssOk || !iosScrollJsOk || !responsiveHtmlOk || !responsiveCssOk || !publicWebsiteOk || !publicIsolationSwOk || !publicInstallManifestOk || !publicInstallWorkerOk || !visitorOk || !pwaOk || !pwaInstallerOk || !downloadButtonsOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
       console.error(
-        `verify: Besucher-App fehlgeschlagen (responsive-html=${responsiveHtmlOk ? "ok" : "fail"}, responsive-css=${responsiveCssOk ? "ok" : "fail"}, public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, public-install-manifest=${publicInstallManifestOk ? "ok" : "fail"}, public-install-sw=${publicInstallWorkerOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, pwa-install=${pwaInstallerOk ? "ok" : "fail"}, downloads=${downloadButtonsOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
+        `verify: Besucher-App fehlgeschlagen (ios-scroll-html=${iosScrollHtmlOk ? "ok" : "fail"}, ios-scroll-css=${iosScrollCssOk ? "ok" : "fail"}, ios-scroll-js=${iosScrollJsOk ? "ok" : "fail"}, responsive-html=${responsiveHtmlOk ? "ok" : "fail"}, responsive-css=${responsiveCssOk ? "ok" : "fail"}, public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, public-install-manifest=${publicInstallManifestOk ? "ok" : "fail"}, public-install-sw=${publicInstallWorkerOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, pwa-install=${pwaInstallerOk ? "ok" : "fail"}, downloads=${downloadButtonsOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
       );
       failed += 1;
     } else {
