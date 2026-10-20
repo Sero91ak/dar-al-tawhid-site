@@ -32,6 +32,12 @@ jobs:
           python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
           python3 kids/tools/verify_quiz_v4_master_dictionary_provider_get_only.py
           test "$(python3 -c "import json;print(json.load(open('kids/data/quiz-curation-release.json'))['enabled'])")" = "False"
+      - name: Dry-run exact safe next wave without ElevenLabs speech charges
+        env:
+          KIDS_V4_OWNER_450_BULK_EXPLICIT: 'YES'
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce_quiz_v4_450_exact_manual_wave.py --audit
       - name: Install original MP3 codec validation tools
         run: |
           set -euo pipefail
