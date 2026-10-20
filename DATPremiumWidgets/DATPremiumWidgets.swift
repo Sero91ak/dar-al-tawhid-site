@@ -636,7 +636,7 @@ private struct DATBottomDetails: View {
     let entry: DATEntry
     let p: DATPalette
     var body: some View {
-        HStack(spacing: 4) {
+        HStack(spacing: 6) {
             DATEmojiIcon(emoji: "🗓️", size: 12)
             Text(Date(), format: .dateTime.weekday(.abbreviated).day().month(.abbreviated))
                 .lineLimit(1).minimumScaleFactor(0.75)
@@ -683,13 +683,14 @@ private struct DATCompactPrayerInfo: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             HStack(spacing: 3) {
-                DATEmojiIcon(emoji: "🗓️", size: 11)
+                DATEmojiIcon(emoji: "🗓️", size: 12)
                 Text(entry.date, format: .dateTime.weekday(.abbreviated).day().month(.abbreviated).locale(Locale(identifier: "de_DE")))
                     .foregroundStyle(Color(red: 0.62, green: 0.22, blue: 0.18))
                     .lineLimit(1)
-                    .minimumScaleFactor(0.48)
-                    .font(.system(size: 8.8, weight: .bold, design: .rounded))
+                    .minimumScaleFactor(0.78)
+                    .font(.system(size: 10.2, weight: .bold, design: .rounded))
             }
+            .layoutPriority(2)
             .frame(maxWidth: .infinity, alignment: .center)
             .overlay(alignment: .bottom) {
                 Rectangle()
@@ -710,6 +711,7 @@ private struct DATCompactPrayerInfo: View {
                     Text("—")
                 }
             }
+            .padding(.leading, 3)
             .frame(maxWidth: .infinity, alignment: .trailing)
         }
         .font(.system(size: 8.9, weight: .medium, design: .rounded))
