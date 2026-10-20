@@ -540,14 +540,14 @@ async function finalizeDarTestHomeV1193(asset) {
   // DAR_ADULT_TOP_SCROLL_BOUNDARY_V1: every adult Dar Test route uses
   // the real document scroll; clamp downward drags at the top without
   // locking vertical lists, prayers, Qurʾān or the bottom navigation.
-  const scrollCss = '<link rel="stylesheet" id="darAdultTopBoundaryCssV1" href="/test/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-v1">';
-  const scrollJs = '<script defer id="darAdultTopBoundaryJsV1" src="/test/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-v1"></script>';
+  const scrollCss = '<link rel="stylesheet" id="darAdultTopBoundaryCssV1" href="/test/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-scroll-v2">';
+  const scrollJs = '<script defer id="darAdultTopBoundaryJsV1" src="/test/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-scroll-v2"></script>';
   if(!html.includes('id="darAdultTopBoundaryCssV1"'))
     html=html.includes("</head>")?html.replace("</head>",scrollCss+"\n</head>"):scrollCss+html;
   if(!html.includes('id="darAdultTopBoundaryJsV1"'))
     html=html.includes("</body>")?html.replace("</body>",scrollJs+"\n</body>"):html+scrollJs;
   const headers = new Headers(asset.headers);
-  headers.set("X-DAR-Test-Scroll-Boundary", "v1");
+  headers.set("X-DAR-Test-Scroll-Boundary", "v2");
   headers.set("X-DAR-Test-Home", "html-parity-v50-20261020");
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");
