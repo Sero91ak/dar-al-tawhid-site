@@ -1,0 +1,173 @@
+{
+  "schemaVersion": "1.0",
+  "auditDate": "2026-10-20",
+  "project": "DĀR AL TAWḤĪD – Qurʾān Tadabbur",
+  "branch": "automation/tadabbur-audit-20261020-3-32-3-56",
+  "baseBranch": "main",
+  "baseMainCommit": "aba8f563ceb398cf31f221407aadddfd1ae990b9",
+  "previousAudit": {
+    "branch": "automation/tadabbur-audit-20261020-3-15-3-31",
+    "path": "apple-tv/quran/tadabbur/audit/2026-10-20-3-15-to-3-31-research.json",
+    "commit": "15622642c629ec0bda8ac876e0697962a7efe40a"
+  },
+  "baseline": {
+    "catalogEntries": 4702,
+    "totalVerses": 6236,
+    "missing": 1534,
+    "firstMissing": "2:82",
+    "lastMissing": "19:98",
+    "catalogStatus": "Verified against current main catalog and missing-references report; no new canonical entries in this audit."
+  },
+  "summary": {
+    "newMissingReferencesInspected": 10,
+    "previouslyAuditedReferencesReexamined": 1,
+    "primarySourceSectionsInspected": 11,
+    "fullyAuthenticatedNewEntries": 0,
+    "canonicalEntriesAdded": 0,
+    "canonicalFilesChanged": false,
+    "liveDeployed": false,
+    "workflowRun": false
+  },
+  "qualityPolicy": "Source sections and report numbers were checked individually. Presence in aṭ-Ṭabarī is not authentication. Do not call reports ṣaḥīḥ/ḥasan or create canonical records before individual rijāl/ʿilal, independent wording and duplicate checks. Arabic extracts are not substitute for source page. No conjectured pages or new content.",
+  "candidates": [
+    {
+      "reference": "3:32",
+      "source": "https://www.islamweb.net/ar/library/content/50/922/",
+      "reportNumber": 6850,
+      "attribution": "Muḥammad ibn Jaʿfar ibn az-Zubayr",
+      "isnad": "Ibn Ḥumayd → Salamah → Ibn Isḥāq → Muḥammad ibn Jaʿfar ibn az-Zubayr",
+      "observation": "Specific report ties obedience command to Najrān delegation; aṭ-Ṭabarī's own prose is not a separate authenticated Salaf report.",
+      "status": "open-isnad",
+      "next": "Check Ibn Ḥumayd and Ibn Isḥāq transmission, attribution and alternate direct Salaf routes."
+    },
+    {
+      "reference": "3:38",
+      "source": "https://www.islamweb.net/ar/library/content/50/932/",
+      "reportNumbers": [
+        6943,
+        6944
+      ],
+      "attribution": "as-Suddī (6944)",
+      "isnad": "Mūsā → ʿAmr → Asbāṭ → as-Suddī",
+      "arabicExcerpt": "ذُرِّيَّةً طَيِّبَةً ... مُبَارَكَةً",
+      "observation": "6944 directly glosses 'ṭayyibah' as blessed. 6943 says Ibn Isḥāq received information from unspecified 'some people of knowledge' and is not a connected attribution.",
+      "status": "open-isnad",
+      "next": "Identify full Mūsā/ʿAmr chain and Asbāṭ reliability; find independent early witness."
+    },
+    {
+      "reference": "3:40",
+      "source": "https://www.islamweb.net/ar/library/content/50/938/",
+      "reportNumbers": [
+        7001,
+        7002
+      ],
+      "attribution": "as-Suddī / ʿIkrimah",
+      "isnad": "7001 Mūsā → ʿAmr → Asbāṭ → as-Suddī; 7002 al-Qāsim → al-Ḥusayn → Ḥajjāj → Abū Bakr → ʿIkrimah",
+      "observation": "Narratives allege satanic whispering to Zakariyyā. Sensitive interpretation; aṭ-Ṭabarī also states an alternative non-accusatory reading. Not suitable for release without rigorous verification.",
+      "status": "open-high-risk",
+      "next": "Verify narrator identities and independent early evidence; do not assert prophetic doubt or theological conclusion from these routes."
+    },
+    {
+      "reference": "3:42",
+      "source": "https://www.islamweb.net/ar/library/content/50/943/",
+      "reportNumbers": [
+        7026,
+        7027,
+        7028,
+        7029
+      ],
+      "attribution": "ʿAlī via ʿAbdullāh ibn Jaʿfar; Qatādah also cites prophetic reports",
+      "isnad": "7026 al-Ḥusayn ibn ʿAlī aṣ-Ṣudāʾī → Muḥāḍir ibn al-Muwarriʿ → Hishām ibn ʿUrwah → ʿUrwah → ʿAbdullāh ibn Jaʿfar → ʿAlī; 7028 Bišr → Yazīd → Saʿīd → Qatādah (بلغنا/ذكر لنا)",
+      "observation": "Relevant early reports about Maryam's virtue found; Qatādah's 'dhukira lanā' does not establish a connected prophetic isnād. Compare 7026 against canonical hadith sources before selecting.",
+      "status": "open-hadith-crosscheck",
+      "next": "Independently verify 7026/7027 wording, authenticity and duplicate presence in canonical hadith library."
+    },
+    {
+      "reference": "3:43",
+      "source": "https://www.islamweb.net/ar/library/content/50/944/",
+      "reportNumbers": [
+        7038,
+        7042,
+        7043,
+        7044,
+        7045
+      ],
+      "attribution": "Muǧāhid / ar-Rabīʿ",
+      "isnad": "7038 Muḥammad ibn ʿAmr → Abū ʿĀṣim → ʿĪsā → Ibn Abī Naǧīḥ → Muǧāhid; 7043 al-Muṯannā → Isḥāq → ʿAbd ar-Razzāq → ath-Thawrī → Ibn Abī Laylā → Muǧāhid",
+      "arabicExcerpt": "أَطِيلِي الرُّكُودَ",
+      "observation": "Multiple reports interpret qunūt as extended standing/obedience; Ibn Abī Naǧīḥ's Muǧāhid tafsīr mediation and Ibn Abī Laylā reliability prevent blanket ṣaḥīḥ grading. 7044 begins ḥuddithtu ʿan ʿAmmār (unknown intermediary).",
+      "status": "open-isnad",
+      "next": "Check separate route via Mujāhid and reconcile exact rukūd/qunūt gloss without collapsing independent texts."
+    },
+    {
+      "reference": "3:47",
+      "source": "https://www.islamweb.net/ar/library/content/50/951/",
+      "reportNumber": 7079,
+      "attribution": "Muḥammad ibn Jaʿfar ibn az-Zubayr",
+      "isnad": "Ibn Ḥumayd → Salamah → Ibn Isḥāq → Muḥammad ibn Jaʿfar ibn az-Zubayr",
+      "observation": "Report explains 'kun fa-yakūn' and miraculous creation; source also has aṭ-Ṭabarī's own exposition, which must not be misattributed.",
+      "status": "open-isnad",
+      "next": "Find independent early commentary with acceptable isnād, verify speaker and wording."
+    },
+    {
+      "reference": "3:51",
+      "source": "https://www.islamweb.net/ar/library/content/50/960/",
+      "reportNumber": 7119,
+      "attribution": "Muḥammad ibn Jaʿfar ibn az-Zubayr",
+      "isnad": "Ibn Ḥumayd → Salamah → Ibn Isḥāq → Muḥammad ibn Jaʿfar ibn az-Zubayr",
+      "observation": "Report directly concerns 3:50–51, ʿĪsā's declaration of servitude and worship of Allah. Attribution through Ibn Ḥumayd not independently validated.",
+      "status": "open-isnad",
+      "next": "Check direct independent witness and avoid confusing aṭ-Ṭabarī's qirāʾāt commentary with Salaf attribution."
+    },
+    {
+      "reference": "3:53",
+      "source": "https://www.islamweb.net/ar/library/content/50/962/",
+      "reportNumber": 7130,
+      "attribution": "Muḥammad ibn Jaʿfar ibn az-Zubayr",
+      "isnad": "Ibn Ḥumayd → Salamah → Ibn Isḥāq → Muḥammad ibn Jaʿfar ibn az-Zubayr",
+      "observation": "Report paraphrases ḥawāriyyūn's belief, but primary section is aṭ-Ṭabarī's own explanation; no fully authenticated Salaf isnād established.",
+      "status": "open-isnad",
+      "next": "Seek direct companion/Tābiʿī commentary with independently acceptable chain."
+    },
+    {
+      "reference": "3:54",
+      "source": "https://www.islamweb.net/ar/library/content/50/963/",
+      "reportNumbers": [
+        7131,
+        7132
+      ],
+      "attribution": "as-Suddī",
+      "isnad": "Muḥammad ibn al-Ḥusayn → Aḥmad ibn al-Mufaḍḍal → Asbāṭ → as-Suddī",
+      "observation": "Detailed narrative about ʿĪsā, substitution and nineteen disciples; narrative details exceed explicit Qurʾān wording. Cannot present as historical certainty without corroboration.",
+      "status": "open-high-risk",
+      "next": "Individually assess Asbāṭ → as-Suddī narrative and external early support; preserve uncertainty."
+    },
+    {
+      "reference": "3:56",
+      "source": "https://www.islamweb.net/ar/library/content/50/967/",
+      "attribution": "aṭ-Ṭabarī (author's own exposition)",
+      "isnad": null,
+      "observation": "Section for 3:56 is primarily aṭ-Ṭabarī's own commentary. Number 7156 is attributed to Ibn ʿAbbās but directly glosses 'ʿamilū aṣ-ṣāliḥāt' in 3:57, NOT 3:56. Do not assign report 7156 to 3:56.",
+      "status": "open-no-direct-early-report",
+      "next": "Search Ibn Abī Ḥātim for early report specifically on 3:56; do not shift adjacent verse report."
+    }
+  ],
+  "reexamined": {
+    "reference": "3:24",
+    "source": "https://www.islamweb.net/ar/library/content/50/908/",
+    "reports": [
+      6786,
+      6787,
+      6788
+    ],
+    "textWitness": "Report 6786 exact wording independently displayed in two public editions of aṭ-Ṭabarī (Islamweb and quran.ksu.edu.sa); these are copies of same historical report, not independent isnād routes.",
+    "crossEditionWitness": "https://quran.ksu.edu.sa/tafseer/tabary/sura3-aya24.html",
+    "isnad": "aṭ-Ṭabarī → Bišr ibn Muʿāḏ → Yazīd ibn Zurayʿ → Saʿīd ibn Abī ʿArūbah → Qatādah",
+    "criticalNote": "Yazīd ibn Zurayʿ is an early transmitter from Saʿīd, and Saʿīd is a major Qatādah transmitter; independent final ʿilal, exact link to Qatādah, grading and duplicate proof remain open. Report 6787 is from ar-Rabīʿ and says Qatādah similarly, not a second direct connected route for 6786.",
+    "status": "needs-final-gate",
+    "next": "Complete individual isnād assessment and canonical duplicate check before adding."
+  },
+  "nextCursor": "3:57",
+  "commitScope": "Audit only on isolated branch; no main catalog, app, push, Kids or deployment changes.",
+  "releaseGate": "0 authenticated new entries, 0 canonical additions, no deployment. Research is not a production release."
+}
