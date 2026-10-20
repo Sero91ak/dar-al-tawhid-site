@@ -276,8 +276,8 @@ function adultCompactHeroAddon() {
 /* DAR_ADULT_TOP_SCROLL_BOUNDARY_V1 – adult visitor HTML only.
  * Add a root-only scroll stop; preserve Hero, sticky search, and all carousels. */
 function adultTopScrollBoundaryAddon() {
-  return '<link rel="stylesheet" id="darAdultTopScrollCssV1" href="/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-hero-edge-v5">' +
-    '<script defer id="darAdultTopScrollJsV1" src="/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-hero-edge-v5"></' + 'script>';
+  return '<link rel="stylesheet" id="darAdultTopScrollCssV1" href="/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-no-overlay-v8">' +
+    '<script defer id="darAdultTopScrollJsV1" src="/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-no-overlay-v8"></' + 'script>';
 }
 function activateAdultCompactHero(html) {
   if (typeof html !== "string") return html;

@@ -41,8 +41,13 @@ function canScroll(direction){
  if(scope)return false;
  var scroll=document.scrollingElement||document.documentElement;
  if(!scroll)return false;
- max=Math.max(0,scroll.scrollHeight-scroll.clientHeight);
- var offset=Math.max(0,scroll.scrollTop||window.scrollY||0);
+ /* html.clientHeight can equal the content height while the visual
+  * viewport is shorter. Comparing only those two values reported
+  * "nothing to scroll" and preventDefault then froze the Test app. */
+ var viewport=window.innerHeight||scroll.clientHeight||0;
+ var extent=Math.max(scroll.scrollHeight||0,document.documentElement?document.documentElement.scrollHeight:0,document.body?document.body.scrollHeight:0);
+ max=Math.max(0,extent-viewport);
+ var offset=Math.max(0,window.scrollY||scroll.scrollTop||0);
  return direction==="up"?offset>0.5:offset<max-0.5;
 }
 document.addEventListener("touchstart",function(event){
@@ -77,101 +82,4 @@ document.addEventListener("touchend",reset,{capture:true,passive:true});
 document.addEventListener("touchcancel",reset,{capture:true,passive:true});
 })();
 
-/* DAR_GLOBAL_ADULT_HERO_EDGE_BINDING_V5 · REAL OFFSET: extend REAL active hero artwork into
- * upper safe area in visitor, Test and Android PWA. No extra touch interception. */
-(function(){
- "use strict";
- if(window.__darAdultHeroEdgeBindingV4)return;
- if(/^\/(?:kids|test\/kids)(?:\/|$)/.test(String(location.pathname||"")))return;
- window.__darAdultHeroEdgeBindingV4=true;
- var scheduled=false, edge=null;
- var candidates=[
-  "#appView [data-hero-kind] .dar-hero",
-  "body.is-frauen-route #appView .frauen-library-hero",
-  "body.is-post-route #appView .post-reader > .post-reader-title",
-  "body.is-topic-route #appView .topic-collection-page > .view-head",
-  "body.is-topics-route #appView .topics-hub > .view-head",
-  "body.is-hadith-route #appView .hadith-hub > .view-head",
-  "body.is-dua-route #appView .dua-hub > .view-head",
-  "body.is-area-route #appView .view-head",
-  "#appView [data-dar-hero-image]"
- ];
- function artFor(node){
-  var cs=getComputedStyle(node), val=cs.backgroundImage||"none";
-  if(/url\(/i.test(val))return val;
-  for(var i=0;i<2;i++){
-   var p=getComputedStyle(node,i===0?"::before":"::after").backgroundImage||"none";
-   if(/url\(/i.test(p))return p;
-  }
-  var vars=["--frauen-hero-img","--dar-hero-img","--dar-hero-image","--dar-immersive-top-image"];
-  for(var j=0;j<vars.length;j++){
-   val=cs.getPropertyValue(vars[j]).trim();
-   if(/url\(/i.test(val))return val;
-  }
-  var img=node.querySelector("img[data-hero-art],.dar-hero-art img,.hero-image img,img.hero-image");
-  if(img&&img.currentSrc)return 'url('+JSON.stringify(img.currentSrc)+')';
-  return "";
- }
- /* V5: photo continuation extends to the actual hero top, not a fixed safe-area guess.
-  * Non-interactive visual layer only; first-touch scroll guard stays untouched. */
- function findArt(){
-  var maxGap=Math.min(360,Math.max(180,window.innerHeight*.31));
-  for(var i=0;i<candidates.length;i++){
-   var nodes=document.querySelectorAll(candidates[i]);
-   for(var j=0;j<nodes.length;j++){
-    var node=nodes[j];
-    if(!node.getClientRects().length)continue;
-    var rect=node.getBoundingClientRect();
-    if(rect.width<90||rect.height<45||rect.bottom<=0||rect.top>maxGap)continue;
-    var art=artFor(node);
-    if(art)return {image:art,top:Math.max(0,rect.top)};
-   }
-  }
-  return null;
- }
- function apply(){
-  scheduled=false;
-  if(!document.body||!document.getElementById("appView"))return;
-  var active=findArt();
-  if(!active||active.top<2){
-   document.body.classList.remove("dar-hero-edge-active");
-   return;
-  }
-  if(!edge){
-   edge=document.createElement("div");
-   edge.id="darHeroSafeTopFill";
-   edge.setAttribute("aria-hidden","true");
-   var surface=document.createElement("div");
-   surface.className="dar-hero-edge-art";
-   edge.appendChild(surface);
-   document.body.appendChild(edge);
-  }
-  if(edge.style.getPropertyValue("--dar-hero-edge-image")!==active.image)
-   edge.style.setProperty("--dar-hero-edge-image",active.image);
-  var extent=Math.ceil(active.top+2)+"px";
-  if(edge.style.getPropertyValue("--dar-hero-edge-height")!==extent)
-   edge.style.setProperty("--dar-hero-edge-height",extent);
-  document.body.classList.add("dar-hero-edge-active");
- }
- function schedule(){
-  if(scheduled)return;
-  scheduled=true;
-  requestAnimationFrame(apply);
- }
- function start(){
-  var root=document.getElementById("appView");
-  if(!root)return;
-  new MutationObserver(schedule).observe(root,{childList:true});
-  new MutationObserver(schedule).observe(document.body,{attributes:true,attributeFilter:["class"]});
-  new MutationObserver(schedule).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme","data-theme-variant"]});
-  root.addEventListener("load",schedule,true);
-  window.addEventListener("pageshow",schedule,{passive:true});
-  window.addEventListener("resize",schedule,{passive:true});
-  window.addEventListener("scroll",schedule,{passive:true});
-  window.addEventListener("popstate",schedule,{passive:true});
-  window.addEventListener("hashchange",schedule,{passive:true});
-  schedule();
- }
- if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",start,{once:true});
- else start();
-})();
+/* DAR_ADULT_SCROLL_EDGE_NO_OVERLAY_20261020: no cloned fixed hero; native/current hero renders exactly once. */
