@@ -15,7 +15,7 @@ jobs:
     if: >-
       github.repository == 'Sero91ak/dar-al-tawhid-site' &&
       github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
-      github.event.head_commit.message == 'audio(kids): start October 20 strict original-only V4 wave request'
+      (github.event.head_commit.message == 'audio(kids): start October 20 strict original-only V4 wave request' || github.event.head_commit.message == 'audio(kids): retry no-credit V4 audit with protected Fuṣḥā dictionary')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
