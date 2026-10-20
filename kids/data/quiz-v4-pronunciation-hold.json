@@ -2,13 +2,12 @@
   "schemaVersion": 1,
   "scope": "TAWHID_KIDS_ALL_PAID_QUIZ_V4_TTS",
   "productionPaused": false,
-  "stopReason": "2026-10-19 original wrong-pronunciation series stopped; only ONE new dictionary-verified eleven_v4 original pilot is now authorized; multi-take and public release stay forbidden until owner hears sample",
+  "stopReason": "Historical 2026-10-19 incorrect pronunciation takes remain quarantined. Owner explicitly reauthorized private paid all450 staging on 2026-10-20; no listening approval or public release has been claimed.",
   "requiredBeforeResume": [
-    "First paid pilot only after exact current dictionary GET and API-payload tests passed",
-    "One test original must be securely checkpointed before/after POST, using original SHA and ledger",
-    "Listen to new V4 sample for Quran/Iman/Fusha correctness; no more than one take before hearing",
-    "Do not reuse or publish three quarantined invalid old audio takes",
-    "Larger paid batches remain blocked until listening quality gate is released"
+    "Use identical owner voice eleven_v4 and verified 10099-rule master pronunciation library on every POST",
+    "Before each charged POST, push text-SHA attempt journal to GitHub; after response, push MP3 and receipt before another POST",
+    "Reuse exact existing paid originals, block uncertain paid requests; no double credits",
+    "Never treat technical QA as human Fuṣḥā listening approval or activate live release before real approval"
   ],
   "modelId": "eleven_v4",
   "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -33,5 +32,8 @@
   "allowOneStrictTenOriginalDictionaryBatchBeforeListeningApproval": true,
   "maximumPreHearingAdditionalNewOriginals": 10,
   "maximumPreHearingAdditionalEstimatedCredits": 240,
-  "consentReason": "User explicitly requested generating ALL 450 quiz audio originals after current ElevenLabs V4 model, original Serhat master voice and provider-confirmed 10099-rule dictionary correction; allow only one bounded <=10 text and <=240 estimated credit wave first; no human pronunciation approval is asserted; public release remains prohibited."
+  "consentReason": "20.10.2026: user again explicitly authorized paid generation for all 450 TAWḤĪD KIDS quiz items with his Serhat Abu Malik eleven_v4 voice, verified 10099-rule Fuṣḥā lexicon, strict hash deduplication and use of existing credits. Owner authorized private bulk staging before human listening; humanPronunciationApproved and humanListeningQualityGateReleased remain false; public quiz release remains forbidden until real listening approval. Hard stop on an ambiguous charged request, provider insufficient balance, duplicate, dictionary drift or cumulative 80000 estimated credits.",
+  "ownerBulkConsent20261020": true,
+  "ownerBulkHearingApprovalClaimed": false,
+  "ownerBulkTotalForecastCreditsMaximum": 80000
 }
