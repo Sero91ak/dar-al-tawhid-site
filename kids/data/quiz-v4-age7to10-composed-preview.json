@@ -615,6 +615,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Nimm dir Zeit für deine Antwort. Du bist vor etwas Wichtigem unruhig. Was passt am besten? Antwort 1: Allah gedenken und ruhig weiterhandeln. Antwort 2: Andere anschreien. Antwort 3: Nur über die Angst sprechen und Allah vergessen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/dd26ca9dd6bfce141aececed191ec1688f4e6d7d.mp3",
+      "sha256": "046397a47287570e5b413d75f6ae63368b7a9942f81e6701f9f6fadee8269908",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Das merken wir uns: Im Gedenken Allahs finden die Herzen Ruhe.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/91c2d83705b11323a58e2fb53cd4ec741e916cef.mp3",
       "sha256": "8a983450203d7aedcecd9709b341fab8a213bc2ca909835c67adbe115fd0adb0",
@@ -1630,6 +1641,17 @@
     "Ein Kind vergleicht Allah mit einem Geschöpf. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Allah gleicht keinem Geschöpf. Antwort 2: Allah ist wie besonders starke Geschöpfe. Antwort 3: Man darf Allah mit Menschen vergleichen. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/b21ceb02a2d3b16f202aaf469aa5e8c833f5649d.mp3",
       "sha256": "5b5eee3f75806749b76d3360a89c1fd8d20f62ad7debe4177fa2b871faadb230",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Du hast für eine Aufgabe geübt und bist trotzdem nervös. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Man bemüht sich und vertraut auf Allah. Antwort 2: Tawakkul bedeutet, gar nichts zu tun. Antwort 3: Nach dem eigenen Bemühen braucht man Allah nicht mehr. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/3fb16422202b4cc66e1fb290954bd851122d1b85.mp3",
+      "sha256": "35e668b33c70407f42e7e38eec1014fc353d6170517ae9b20ec97411a8e296ab",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -5231,7 +5253,6 @@
           "available": false,
           "missingOriginalSegments": [
             "Für Allah allein.",
-            "Für Ruhm.",
             "Für die Meinung anderer Menschen.",
             "Für wen sind Gebet, Opfer, Leben und Tod des Muslims?"
           ]
@@ -5853,13 +5874,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah gedenken und ruhig weiterhandeln.",
-            "Andere anschreien.",
-            "Du bist vor etwas Wichtigem unruhig. Was passt am besten?",
-            "Nur über die Angst sprechen und Allah vergessen."
-          ]
+          "available": true,
+          "textSha256": "6b73d4f07eb5c2371f920a7e73cfd7ba8f3515155804ee1115c840c8a099b16c",
+          "mp3Sha256": "046397a47287570e5b413d75f6ae63368b7a9942f81e6701f9f6fadee8269908",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/dd26ca9dd6bfce141aececed191ec1688f4e6d7d.mp3"
         },
         "correct": {
           "available": true,
@@ -5880,7 +5898,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/91c2d83705b11323a58e2fb53cd4ec741e916cef.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-729": {
       "ageBand": "7-8",
@@ -7695,7 +7713,6 @@
           "available": false,
           "missingOriginalSegments": [
             "An Allahs Barmherzigkeit verzweifeln.",
-            "Bereuen.",
             "Um Vergebung bitten.",
             "Was sollen Menschen mit vielen Sünden nicht tun?"
           ]
@@ -10453,13 +10470,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Du hast für eine Aufgabe geübt und bist trotzdem nervös. Welcher Grundsatz hilft dir hier am besten?",
-            "Man bemüht sich und vertraut auf Allah.",
-            "Nach dem eigenen Bemühen braucht man Allah nicht mehr.",
-            "Tawakkul bedeutet, gar nichts zu tun."
-          ]
+          "available": true,
+          "textSha256": "337b70c1f485c67878af28cacaa4e9edfc4b6b542dcf8c1130f3e6c2f4adbccb",
+          "mp3Sha256": "35e668b33c70407f42e7e38eec1014fc353d6170517ae9b20ec97411a8e296ab",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/3fb16422202b4cc66e1fb290954bd851122d1b85.mp3"
         },
         "correct": {
           "available": true,
@@ -10480,7 +10494,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/4d3b92298981f4eb5d2494bd378b4968fa6255e4.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-815": {
       "ageBand": "9-10",
