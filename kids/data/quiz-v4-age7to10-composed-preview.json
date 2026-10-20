@@ -1110,6 +1110,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Überlege kurz, bevor du dich entscheidest. Jemand sagt, man könne Duʿāʾ an einen Stern richten. Was passt am besten? Antwort 1: Nein, Duʿāʾ richtet man an Allah. Antwort 2: Ja, Sterne dürfen angerufen werden. Antwort 3: Es ist völlig egal, wen man anruft. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/7042df8901bf74f56d0963a6c4cd48a0d4788803.mp3",
+      "sha256": "689e92b84e86b02b0a4ad0a98a94c9e60e5d72c1e4f4fd40134612613dd66afa",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Das merken wir uns: Anbetung und die Bitte um Hilfe richten wir an Allah allein.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/f612c8b4075004c4b54d9aec227f77c6f089228b.mp3",
       "sha256": "b472cf51f172d9ea7b1d76c1fd1bc22c875f1a5d94f1158fc578488211019c33",
@@ -6518,13 +6529,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Es ist völlig egal, wen man anruft.",
-            "Ja, Sterne dürfen angerufen werden.",
-            "Jemand sagt, man könne Duʿāʾ an einen Stern richten. Was passt am besten?",
-            "Nein, Duʿāʾ richtet man an Allah."
-          ]
+          "available": true,
+          "textSha256": "c239b2afdf7e729420a35afa9d8edd67965377f57198abd17e75abad2f3fd819",
+          "mp3Sha256": "689e92b84e86b02b0a4ad0a98a94c9e60e5d72c1e4f4fd40134612613dd66afa",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/7042df8901bf74f56d0963a6c4cd48a0d4788803.mp3"
         },
         "correct": {
           "available": true,
@@ -6545,7 +6553,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/f612c8b4075004c4b54d9aec227f77c6f089228b.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-719": {
       "ageBand": "7-8",
