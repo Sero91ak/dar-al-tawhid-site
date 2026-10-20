@@ -32,14 +32,14 @@
       "questions": 150,
       "completeFourPartQuestions": 49,
       "availableParts": {
-        "question": 53,
+        "question": 54,
         "correct": 150,
         "retry": 150,
-        "explanation": 69
+        "explanation": 70
       },
       "missingParts": {
-        "explanation": 81,
-        "question": 97
+        "explanation": 80,
+        "question": 96
       }
     },
     "9-10": {
@@ -14457,6 +14457,18 @@
     "kids-quiz-573": {
       "ageBand": "7-8",
       "parts": {
+        "question": {
+          "spokenTextSha256": "2729c440684980ab892e44a5cb13f6aab0ac370492c0f12bb52edf5b11192cbc",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/83b47635be7f40b261de261a3c6f5f41f32cb7fe.mp3",
+          "sha256": "1f7aafc1e75108987000186468604c1e1fdd05236969d4b4400835a8f0534f47",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 237645,
+          "durationSeconds": 19.776,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
+        },
         "correct": {
           "spokenTextSha256": "c46aa1520af01daf2f55c6c1e8bf07cc30f198c53c736d5290a570951ba5ee4d",
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/44b82a7bb0b692c35cd3c597000bc459.mp3",
@@ -14483,7 +14495,6 @@
         }
       },
       "missing": {
-        "question": "unavailable-original-v4-mp3",
         "explanation": "unavailable-original-v4-mp3"
       },
       "fourPartTechnicallyReady": false,
@@ -15565,11 +15576,22 @@
           "audioListeningApproved": false,
           "qaApproval": "pending-human-auditory-review",
           "reviewOnly": true
+        },
+        "explanation": {
+          "spokenTextSha256": "c3de31252c574ca7bbcb6b186d6aa6ec7b132f04e739c46901d12b9e1212585c",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/559585251e022f14204e5197c52dd393bbdb4787.mp3",
+          "sha256": "036101574e883869c1a6861d8d9f29883dd27506c01a7accb93745a67b9158a9",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 80397,
+          "durationSeconds": 6.672,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
         }
       },
       "missing": {
-        "question": "unavailable-original-v4-mp3",
-        "explanation": "unavailable-original-v4-mp3"
+        "question": "unavailable-original-v4-mp3"
       },
       "fourPartTechnicallyReady": false,
       "humanListeningApproved": false,

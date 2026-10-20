@@ -1022,6 +1022,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Überlege kurz, bevor du dich entscheidest. Für wen sind Gebet, Opfer, Leben und Tod des Muslims? Antwort 1: Für Allah allein. Antwort 2: Für die Meinung anderer Menschen. Antwort 3: Für Ruhm. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/83b47635be7f40b261de261a3c6f5f41f32cb7fe.mp3",
+      "sha256": "1f7aafc1e75108987000186468604c1e1fdd05236969d4b4400835a8f0534f47",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Ayyūb wandte sich in seiner Not an Allah, und Allah nahm die Not von ihm.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/559585251e022f14204e5197c52dd393bbdb4787.mp3",
+      "sha256": "036101574e883869c1a6861d8d9f29883dd27506c01a7accb93745a67b9158a9",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Mal sehen, was du zu diesem Thema weißt. Wem nützt eine rechtschaffene Tat nach Qurʾān 41:46? Antwort 1: Dem Menschen selbst. Antwort 2: Nur anderen Menschen. Antwort 3: Niemandem. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/f666c8cb0013eb74029f93e8f2ffd8a99488604b.mp3",
       "sha256": "813eaaaf06ce5bef9f77d81674f26f31bca2c996b799e4accd45ea04e19af1e0",
@@ -5688,7 +5710,6 @@
           "missingOriginalSegments": [
             "Dass Taten bedeutungslos sind.",
             "Ein gutes, zufriedenes Leben.",
-            "Sicherer Verlust.",
             "Was bedeutet eine schwere Waage guter Taten in Sūrat al-Qāriʿah?"
           ]
         },
@@ -5974,11 +5995,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Für die Meinung anderer Menschen.",
-            "Für wen sind Gebet, Opfer, Leben und Tod des Muslims?"
-          ]
+          "available": true,
+          "textSha256": "2729c440684980ab892e44a5cb13f6aab0ac370492c0f12bb52edf5b11192cbc",
+          "mp3Sha256": "1f7aafc1e75108987000186468604c1e1fdd05236969d4b4400835a8f0534f47",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/83b47635be7f40b261de261a3c6f5f41f32cb7fe.mp3"
         },
         "correct": {
           "available": true,
@@ -6271,7 +6291,6 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Er rief andere an statt Allah.",
             "Wie reagierte Ayyūb عليه السلام in seiner schweren Prüfung?"
           ]
         },
@@ -6288,10 +6307,10 @@
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/vTRh2ZkXhF0R0jOplwKS.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Ayyūb wandte sich in seiner Not an Allah, und Allah nahm die Not von ihm."
-          ]
+          "available": true,
+          "textSha256": "c3de31252c574ca7bbcb6b186d6aa6ec7b132f04e739c46901d12b9e1212585c",
+          "mp3Sha256": "036101574e883869c1a6861d8d9f29883dd27506c01a7accb93745a67b9158a9",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/559585251e022f14204e5197c52dd393bbdb4787.mp3"
         }
       },
       "allFourPartsAvailable": false
