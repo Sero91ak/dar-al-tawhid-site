@@ -88,16 +88,16 @@
     "no-native-app-changes"
   ],
   "progress": {
-    "snapshotAsOf": "2026-10-19",
+    "snapshotAsOf": "2026-10-20",
     "hadithAndAtharCatalogCount": 3358,
     "hadith": 2408,
-    "athar": 949,
+    "athar": 950,
     "verifiedMeaning": "10 source/grade audits completed; NOT 10 newly authenticated transmissions. User's target of 10/20 means work units, not forced success.",
     "evidence": [
       "apple-tv/hadith/audit/2026-10-18-sharh-athar-continuation.json",
       "apple-tv/hadith/audit/0371-0392-20261018-two-batches.json"
     ],
-    "nextRequestedBatch": "HAD-0503–HAD-0522 (20 individual primary/isnad audits), in parallel real hadith sharh gaps and only unique authenticated new HAD-3359+",
+    "nextRequestedBatch": "HAD-0523–HAD-0542: 20 authentic primary-text/isnad/earliest direct Sharh checks. In parallel verify missing genuine Sharh HAD-0463 and new unique authentic Hadith/Sharh, only after duplicate proof.",
     "completedBatches": [
       {
         "date": "2026-10-18",
@@ -163,25 +163,29 @@
     ],
     "warning": "20 audited/updated ≠ 20 newly authenticated; exactly two HAD-0380 and HAD-0391 identified as securely transmitted in this new 20-item audit; other statuses preserved as pending/weak.",
     "lastCompletedBatch": {
-      "date": "2026-10-19",
-      "range": "HAD-0483–HAD-0502",
+      "date": "2026-10-20",
+      "range": "HAD-0503–HAD-0522",
       "inspected": 20,
-      "atharInspected": 20,
-      "hadithInspected": 0,
-      "recordFilesUpdated": 14,
-      "duplicatesLinked": 4,
+      "atharInspected": 8,
+      "hadithInspected": 12,
+      "canonicalFilesUpdated": 8,
+      "priorClassicalSharhVerified": 12,
+      "semanticDuplicatesLinked": 3,
+      "unverifiedAtharAttributionsFlagged": 2,
       "newRecords": 0,
       "newSharh": 0,
-      "auditPath": "apple-tv/hadith/audit/0483-0502-20261019-continuation.json",
-      "keyFindings": [
-        "al-Hakim graded Umar HAD-0487 sahih on two Sahih criteria; separate from our independent grade",
-        "al-Lalakai no 49 original chain for Sufyan HAD-0494",
-        "Mālik HAD-0496 has Ibn al-Majishun direct 'sami'tu', but later citation not full chain",
-        "HAD-0485 Qatadah-Ibn Masud broken; HAD-0492 and HAD-0502 remain early-isnad unresolved",
-        "HAD-0493/0495/0497/0498 have earlier equivalent records"
+      "auditPath": "apple-tv/hadith/audit/0503-0522-20261020-continuation.json",
+      "notes": [
+        "HAD-0503 Ayyub vs Abu Qilabah speaker variant documented",
+        "HAD-0504 Zuhri quote Bukhari Khalq Afal originally muallaq",
+        "HAD-0505 Sufyan ibn Uyaynah ten beliefs Lalakai 316",
+        "HAD-0506 Hasan al-Basri Tabari 23:60 and duplicate",
+        "HAD-0507/0508 exact early source and chain unavailable, no claim sahih",
+        "HAD-0509 Said ibn Musayyib source Hilyat al-Awliya",
+        "HAD-0510 duplicate Lalakai 315"
       ],
-      "deployState": "GitHub main saved; Cloudflare and native app runtime need separate verification"
+      "deployState": "GitHub main writes committed, deployment and independent iOS/AppleTV runtime receipt unverified"
     },
-    "historicalCountNote": "3358 and HAD-3359 next as last verified catalog start of this batch; re-read main before assigning a new record id"
+    "historicalCountNote": "Checked current main: catalog 3358 hadith 2408 athar 950 next HAD-3359; re-read for new additions."
   }
 }
