@@ -83,6 +83,8 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add kids/review-only/quiz-v4-20261020-one-wave-authorization.json
           git commit -m 'audio(kids V4): authorize one new deduplicated V4 wave [20261020]'
+          git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+          git rebase origin/review/kids-quiz-v4-batch-001-020-20261014
           git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014
       - name: Preserve no-credit authorization evidence
         if: always()
