@@ -736,6 +736,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Mal sehen, was du zu diesem Thema weißt. Was tat Ḏū l-Qarnayn für bedrohte Menschen? Antwort 1: Er half beim Bau einer Schutzbarriere. Antwort 2: Er verspottete sie. Antwort 3: Er nahm ihnen alles Geld. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/6dce1df639a172497a3140da7ac93435ecac957b.mp3",
+      "sha256": "98aa8834e4dc90d5866ec9e9c10a1a62ec89f82cfccbd06fc9a95883c75788ae",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Er half mit Kraft und Arbeit beim Bau einer Barriere gegen Schaden.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/90e703b8513f594cfcbd64dac8737adbb1f695df.mp3",
+      "sha256": "eeac44ab968ccfe439045bb618ccda95a8999df818f475c9639df282103ede55",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Mal sehen, was du zu diesem Thema weißt. Wem wandte Ibrāhīm sein Gesicht in reiner Anbetung zu? Antwort 1: Dem Schöpfer der Himmel und der Erde. Antwort 2: Den Sternen. Antwort 3: Den Götzen. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a3f3f71aa471ee4f6044ad516186b25b641a9919.mp3",
       "sha256": "5ce7f2ceae691833aa58e79a8b9e133d4319b06a9b40abb2358e12c6031e1875",
@@ -4776,12 +4798,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Er half beim Bau einer Schutzbarriere.",
-            "Er nahm ihnen alles Geld.",
-            "Was tat Ḏū l-Qarnayn für bedrohte Menschen?"
-          ]
+          "available": true,
+          "textSha256": "8afb9ba32a878503fb01494ae2054cea159d088fe7a6a0fcee16fe726ae7a058",
+          "mp3Sha256": "98aa8834e4dc90d5866ec9e9c10a1a62ec89f82cfccbd06fc9a95883c75788ae",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/6dce1df639a172497a3140da7ac93435ecac957b.mp3"
         },
         "correct": {
           "available": true,
@@ -4796,13 +4816,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/6c9422cd2890292b5fbf67667ed913dc.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Er half mit Kraft und Arbeit beim Bau einer Barriere gegen Schaden."
-          ]
+          "available": true,
+          "textSha256": "03a90d3f52c6557ae17a2951aa5848cf580d57613acd92b518231d92258cf79b",
+          "mp3Sha256": "eeac44ab968ccfe439045bb618ccda95a8999df818f475c9639df282103ede55",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/90e703b8513f594cfcbd64dac8737adbb1f695df.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-323": {
       "ageBand": "7-8",
@@ -9825,10 +9845,7 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Mit welchem Bild beschrieb der Prophet ﷺ die Haltung zur Dunyā?",
-            "Wie ein Fremder oder Reisender.",
-            "Wie jemand ohne Ziel.",
-            "Wie jemand, der ewig hier bleibt."
+            "Mit welchem Bild beschrieb der Prophet ﷺ die Haltung zur Dunyā?"
           ]
         },
         "correct": {
