@@ -77,6 +77,8 @@ on:
       - data/pronunciation/**
       - data/frauen-*.json
       - q/**
+      # Linked adult quiz/learning pages must publish with source cards.
+      - lernen/**
       - quellen/**
       - links/**
       - download/**
