@@ -615,6 +615,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Hör dir die Frage und die Antworten in Ruhe an. Welchen Nutzen des Meeres nennt Qurʾān 16:14? Antwort 1: Nahrung, Schmuck und Schiffe. Antwort 2: Zauberei und Wahrsagerei. Antwort 3: Nur Regen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/b514fe4c758e09583357532712af7ac95919d483.mp3",
+      "sha256": "b3c680408a79abd3699888ca07bb4c02e7eaa60350a59bc17814113281964a97",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah erinnert an Nahrung aus dem Meer, Schmuck und Schiffe, die darauf fahren.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/2c1155698167fa94805eec21149114b12065087d.mp3",
+      "sha256": "e37d23ccd1ca484a73a1756c4bc9b67ce40d7df9e5cd64b002d9d7a4ea71fe45",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Überlege kurz, bevor du dich entscheidest. Welche Dinge nennt Qurʾān 16:15 als Zeichen auf der Erde? Antwort 1: Berge, Flüsse und Wege. Antwort 2: Nur Häuser. Antwort 3: Nur Wolken. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/104938372924416ebf9f2c32a9d682712826cfa0.mp3",
       "sha256": "e046b53cf897c089a64aeb37b607a00ab1340bcda363a088fa5d2525b0ba8479",
@@ -4260,12 +4282,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Nahrung, Schmuck und Schiffe.",
-            "Welchen Nutzen des Meeres nennt Qurʾān 16:14?",
-            "Zauberei und Wahrsagerei."
-          ]
+          "available": true,
+          "textSha256": "23fdace417de1b628695472e2e5b8dd3870aa2cb58addd53c4a6e9cc7f7f9243",
+          "mp3Sha256": "b3c680408a79abd3699888ca07bb4c02e7eaa60350a59bc17814113281964a97",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/b514fe4c758e09583357532712af7ac95919d483.mp3"
         },
         "correct": {
           "available": true,
@@ -4280,13 +4300,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/vTRh2ZkXhF0R0jOplwKS.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah erinnert an Nahrung aus dem Meer, Schmuck und Schiffe, die darauf fahren."
-          ]
+          "available": true,
+          "textSha256": "7fcf927e7bebd739ee94b03a29d7064929a689609b947ab4ee6cc7a01f1feb90",
+          "mp3Sha256": "e37d23ccd1ca484a73a1756c4bc9b67ce40d7df9e5cd64b002d9d7a4ea71fe45",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/2c1155698167fa94805eec21149114b12065087d.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-221": {
       "ageBand": "7-8",
