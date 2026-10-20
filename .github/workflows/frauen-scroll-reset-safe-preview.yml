@@ -1,0 +1,39 @@
+name: Frauen Scroll Reset Safe Preview
+on:
+  pull_request:
+    paths:
+      - "assets/frauen/frauen-live-adapter-safe-v1.js"
+      - "scripts/test-frauen-scroll-reset-safe.cjs"
+      - "assets/frauen/frauen-sticky-safe-v2.css"
+      - "assets/frauen/frauen-sticky-safe-v2.js"
+      - "scripts/test-frauen-sticky-safe-v2.cjs"
+      - ".github/workflows/frauen-scroll-reset-safe-preview.yml"
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  visual:
+    name: Original hero + idempotent render in WebKit/Chromium
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: |
+          npm install --no-save --ignore-scripts playwright
+          npx playwright install --with-deps chromium webkit
+      - name: Verify DOM-preserving sticky image and attached search in real Frauen HTML
+        run: node scripts/test-frauen-sticky-safe-v2.cjs
+      - name: Browser-intercept safe adapter (visitor remains unchanged)
+        run: node scripts/test-frauen-scroll-reset-safe.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: frauen-scroll-reset-safe-evidence
+          path: |
+            frauen-scroll-reset-evidence/
+            frauen-sticky-v2-evidence/
+          retention-days: 7
+          if-no-files-found: warn
