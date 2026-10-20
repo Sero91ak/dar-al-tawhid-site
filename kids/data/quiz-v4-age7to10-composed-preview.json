@@ -2243,6 +2243,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Welche Wirkung nennt Qurʾān 17:9 für den Qurʾān? Antwort 1: Er leitet zu dem, was am geradesten ist. Antwort 2: Er fördert Hochmut. Antwort 3: Er macht Wahrheit unwichtig. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/501c4d9e851b52665f2e4225b0d29e8f5abd7e46.mp3",
+      "sha256": "625c5b6c62b576ea23340c8fe6c14b74dd7a9bdd4c275a6e74277d0d2691719d",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah beschreibt den Qurʾān als Rechtleitung zu dem geradesten Weg und als frohe Botschaft für Gläubige.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/fb8a0c1eb6b8692c9d35810e1d1e2ca2e2b4c4ea.mp3",
+      "sha256": "faf09045f26ac2cc7db145cd43a4e7afe885ec19d06739552e1508b7e0bde938",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Wie soll nach Qurʾān 16:125 zum Weg Allahs eingeladen werden? Antwort 1: Mit Weisheit und guter Ermahnung. Antwort 2: Mit Beleidigungen. Antwort 3: Mit erfundenen Geschichten. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/771680548f388a0e4644032014f48d3fc4013bd0.mp3",
       "sha256": "23111870044242afc9518d83aea7e7814b96bd3deaf682f22db4b3dc9d929d76",
@@ -9205,12 +9227,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Er leitet zu dem, was am geradesten ist.",
-            "Er macht Wahrheit unwichtig.",
-            "Welche Wirkung nennt Qurʾān 17:9 für den Qurʾān?"
-          ]
+          "available": true,
+          "textSha256": "fa7a163bf71d0645cd3099008bc796ca8261c22387a05efb957ce427ed70679c",
+          "mp3Sha256": "625c5b6c62b576ea23340c8fe6c14b74dd7a9bdd4c275a6e74277d0d2691719d",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/501c4d9e851b52665f2e4225b0d29e8f5abd7e46.mp3"
         },
         "correct": {
           "available": true,
@@ -9225,13 +9245,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/86012459c4bcd62787770eaeafe89964.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah beschreibt den Qurʾān als Rechtleitung zu dem geradesten Weg und als frohe Botschaft für Gläubige."
-          ]
+          "available": true,
+          "textSha256": "af87a70311ec6c9e3933bf3e910b12e77bf0dcf1249cc10dbf55363353b16396",
+          "mp3Sha256": "faf09045f26ac2cc7db145cd43a4e7afe885ec19d06739552e1508b7e0bde938",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/fb8a0c1eb6b8692c9d35810e1d1e2ca2e2b4c4ea.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-285": {
       "ageBand": "9-10",
