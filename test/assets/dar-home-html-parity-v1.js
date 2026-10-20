@@ -1,5 +1,5 @@
 /* DĀR AL TAWḤĪD · Test Home HTML-V3 visual parity.
- * Render a SINGLE preview-matched home. Preserve native routes, prayer feed,
+ * Refined V4.9 Test Home: native 3D assets, no duplicate footer. Preserve native routes, prayer feed,
  * fuzzy search, saved theme settings, and the existing bottom navigation.
  * Isolated to /test, never /kids or public visitor.
  */
@@ -10,15 +10,15 @@ if(window.__darHomeHtmlParityV1)return;
 window.__darHomeHtmlParityV1=true;
 var ID="darHomeHtmlParityV1", pending=false, lastItems="", inputTimer=null, clock=0;
 var quicks=[
- ["qibla","🧭","Qibla"],["theme","◐","Design"],
- ["settings","⚙","Einstellungen"],["library","▦","Bibliothek"]
+ ["qibla","qibla.png","Qibla"],["theme","spark.png","Design"],
+ ["settings","settings.png","Einstellungen"],["library","library.png","Bibliothek"]
 ];
 var links=[
- ["frauen","✿","Frauen","Wissen & Fiqh"],["hadith","▤","Ḥadīṯ-Werke","Sammlungen"],
- ["books","▦","Bibliothek","Bücher & PDFs"],["scholars","♧","Gelehrte","Biografien"],
- ["books","⌘","Quellen","Nachweise"],["duas","☾","Duʿāʾ","Bittgebete"],
- ["topics","◇","ʿAqīdah","Grundlagen"],["quran","☪","Qurʾān","Lesen & hören"],
- ["quiz","✧","Quiz","Wissen prüfen"]
+ ["frauen","frauen.png","Frauen","Wissen & Fiqh"],["hadith","hadith.png","Ḥadīṯ-Werke","Sammlungen"],
+ ["books","library.png","Bibliothek","Bücher & PDFs"],["scholars","scholars.png","Gelehrte","Biografien"],
+ ["books","scale.png","Quellen","Nachweise"],["duas","dua.png","Duʿāʾ","Bittgebete"],
+ ["topics","topics.png","ʿAqīdah","Grundlagen"],["quran","quran.png","Qurʾān","Lesen & hören"],
+ ["quiz","quiz.png","Quiz","Wissen prüfen"]
 ];
 function esc(x){return String(x==null?"":x).replace(/[&<>"']/g,function(z){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[z]})}
 function route(dest,val){if(dest==="library"){var el=document.getElementById("dhpLibrary");if(el)el.scrollIntoView({behavior:"smooth",block:"start"});return}
@@ -28,23 +28,24 @@ function route(dest,val){if(dest==="library"){var el=document.getElementById("dh
 }
 function nativeText(node,query){var el=node&&node.querySelector(query);return el?String(el.textContent||"").replace(/\s+/g," ").trim():""}
 function html(){
- var q=quicks.map(function(a){return '<button type="button" class="dhp-quick" data-dhp-route="'+a[0]+'"><span aria-hidden="true">'+a[1]+'</span>'+a[2]+'</button>'}).join("");
- var l=links.map(function(a){return '<button type="button" class="dhp-library-tile" data-dhp-route="'+a[0]+'"><span aria-hidden="true">'+a[1]+'</span><b>'+a[2]+'</b><small>'+a[3]+'</small></button>'}).join("");
+ var q=quicks.map(function(a){return '<button type="button" class="dhp-quick" data-dhp-route="'+a[0]+'"><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/'+a[1]+'" alt="" loading="lazy" decoding="async"></span><b>'+a[2]+'</b></button>'}).join("");
+ var l=links.map(function(a){return '<button type="button" class="dhp-library-tile" data-dhp-route="'+a[0]+'"><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/'+a[1]+'" alt="" loading="lazy" decoding="async"></span><b>'+a[2]+'</b><small>'+a[3]+'</small></button>'}).join("");
  return '<div class="dhp-content">'+
   '<div class="dhp-kicker">BEITRÄGE NACH QURʾĀN, SUNNAH &amp; ĀTHĀR</div>'+
-  '<div class="dhp-brand"><div class="dhp-seal" id="dhpBrandSeal">د</div><div><h1>DĀR AL TAWḤĪD</h1><small>Wissen · Überlieferung · Erkenntnis</small></div></div>'+
+  '<div class="dhp-brand"><div class="dhp-seal" id="dhpBrandSeal"></div><div class="dhp-brand-copy"><h1>DĀR AL TAWḤĪD</h1><span class="dhp-brand-rule" aria-hidden="true"></span><small>Wissen · Überlieferung · Erkenntnis</small></div></div>'+
   '<button type="button" class="dhp-prayer" data-dhp-route="prayer" aria-label="Gebetszeiten öffnen"><div class="dhp-prayer-top"><div><div class="dhp-kicker">NÄCHSTES GEBET</div><b id="dhpPrayerName">Gebetszeiten</b><div class="dhp-tiny dhp-muted">Standortabhängige Gebetszeiten</div></div><div class="dhp-prayer-right"><div class="dhp-clock" id="dhpPrayerClock">–</div><div class="dhp-tiny dhp-muted" id="dhpPrayerRemain"></div></div></div><div class="dhp-prayer-footer"><span id="dhpPrayerDate">Gebetskalender</span><span id="dhpPrayerHijri"></span><span id="dhpPrayerPlace">Standort</span></div></button>'+
   '<h2 class="dhp-greeting">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</h2>'+
-  '<p class="dhp-intro">Willkommen bei <strong>DĀR AL TAWḤĪD</strong> – einer geordneten Wissens-App mit Beiträgen aus Qurʾān, Sunnah und den Überlieferungen der Salaf.</p>'+
+  '<section class="dhp-isnad" aria-labelledby="dhpQuoteTitle"><div class="dhp-isnad-label" id="dhpQuoteTitle">ÜBERLIEFERUNGSMAẞSTAB</div><blockquote class="dhp-quote">„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“<div class="dhp-tiny dhp-quote-source">Muḥammad ibn Sīrīn</div></blockquote></section>'+
+  '<p class="dhp-intro">Willkommen bei <strong>DĀR AL TAWḤĪD</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</p>'+
   '<div class="dhp-quickbar" aria-label="Schnellzugriffe">'+q+'</div>'+
   '<div class="dhp-search-box"><label class="dhp-search" for="dhpSearch"><span aria-hidden="true" class="dhp-search-icon">⌕</span><input id="dhpSearch" type="search" autocomplete="off" spellcheck="false" placeholder="Wissen, Qurʾān, Ḥadīṯ, Themen suchen …" aria-label="Intelligente Suche"><button type="button" id="dhpSearchClear" aria-label="Suche leeren">×</button></label><div id="dhpResults" class="dhp-results" hidden role="listbox"></div></div>'+
-  '<section class="dhp-section" aria-labelledby="dhpQTitle"><div class="dhp-head"><h2 id="dhpQTitle">Dein Qurʾān</h2><button type="button" data-dhp-route="quran">Öffnen ↗</button></div><button type="button" class="dhp-panel dhp-resume" data-dhp-route="quran"><div><span class="dhp-kicker">WEITERLESEN</span><h3 id="dhpQResume">Deinen Lesefortschritt fortsetzen</h3><p>Qurʾān lesen · hören · weiterlernen</p></div><span class="dhp-arrow" aria-hidden="true">→</span></button></section>'+
+  '<section class="dhp-section dhp-quran-section" aria-label="Qurʾān"><button type="button" class="dhp-quran-capsule" data-dhp-route="quran"><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/quran.png" alt="" loading="lazy" decoding="async"></span><span><strong>Qurʾān</strong><small id="dhpQResume">Lesen · hören · weiterlernen</small></span></button></section>'+
   '<section class="dhp-section" aria-labelledby="dhpTodayTitle"><div class="dhp-head"><h2 id="dhpTodayTitle">Heute für dich</h2><span class="dhp-tiny dhp-muted">Tägliche Impulse</span></div><div class="dhp-two"><button type="button" class="dhp-panel dhp-smallcard" data-dhp-route="recent" id="dhpTodayArticle"><span class="dhp-kicker">EMPFEHLUNG</span><h3 id="dhpTodayName">Wissen vertiefen</h3><p>Ein ausgewählter Beitrag aus der App.</p></button><button type="button" class="dhp-panel dhp-smallcard" data-dhp-route="duas"><span class="dhp-kicker">DUʿĀʾ</span><h3>Bittgebet des Tages</h3><p>Mit Quellen und direktem Zugang.</p></button></div></section>'+
-  '<section class="dhp-section" aria-labelledby="dhpPostsTitle"><div class="dhp-head"><h2 id="dhpPostsTitle">Neueste Veröffentlichungen</h2><button type="button" data-dhp-route="recent">Alle ansehen ↗</button></div><div id="dhpPosts" class="dhp-posts"><button type="button" class="dhp-panel dhp-feature" data-dhp-route="recent"><span class="dhp-kicker">VERÖFFENTLICHUNGEN</span><h3>Neueste Beiträge öffnen</h3><p>Aktuelle Veröffentlichungen direkt aus der App.</p><span class="dhp-link">Alle lesen →</span></button></div></section>'+
-  '<section class="dhp-section" id="dhpPopular" hidden aria-labelledby="dhpPopularTitle"><div class="dhp-head"><h2 id="dhpPopularTitle">Meist gelesen</h2><button type="button" data-dhp-route="recent">Alle ansehen ↗</button></div><div id="dhpPopularList"></div></section>'+
-  '<section class="dhp-section" id="dhpLibrary" aria-labelledby="dhpLibraryTitle"><div class="dhp-head"><h2 id="dhpLibraryTitle">Wissen direkt öffnen</h2><button type="button" data-dhp-route="more">Alle Bereiche ↗</button></div><div class="dhp-library">'+l+'</div></section>'+
-  '<section class="dhp-section" aria-labelledby="dhpQuoteTitle"><div class="dhp-head"><h2 id="dhpQuoteTitle">Überlieferungsmaßstab</h2></div><div class="dhp-quote">„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“<div class="dhp-tiny dhp-quote-source">Muḥammad ibn Sīrīn</div></div></section>'+
-  '<div class="dhp-footer"><strong>DĀR AL TAWḤĪD</strong><span>Folgt für mehr Wissen aus Qurʾān &amp; Sunnah</span><span>by Serhat Abu Malik</span></div>'+
+  '<section class="dhp-section" aria-labelledby="dhpPostsTitle"><div class="dhp-head"><h2 id="dhpPostsTitle">Neueste Veröffentlichungen</h2><button type="button" data-dhp-route="recent">Alle ansehen</button></div><div id="dhpPosts" class="dhp-posts"><button type="button" class="dhp-panel dhp-feature" data-dhp-route="recent"><span class="dhp-kicker">VERÖFFENTLICHUNGEN</span><h3>Neueste Beiträge öffnen</h3><p>Aktuelle Veröffentlichungen direkt aus der App.</p></button></div></section>'+
+  '<section class="dhp-section" id="dhpPopular" hidden aria-labelledby="dhpPopularTitle"><div class="dhp-head"><h2 id="dhpPopularTitle">Meist gelesen</h2><button type="button" data-dhp-route="recent">Alle ansehen</button></div><div id="dhpPopularList"></div></section>'+
+  '<section class="dhp-section" id="dhpLibrary" aria-labelledby="dhpLibraryTitle"><div class="dhp-head"><h2 id="dhpLibraryTitle">Wissen direkt öffnen</h2><button type="button" data-dhp-route="more">Alle Bereiche</button></div><div class="dhp-library">'+l+'</div></section>'+
+  
+  
  '</div>';
 }
 function stylesheet(){
@@ -117,6 +118,70 @@ function stylesheet(){
 '#darHomeHtmlParityV1 .dhp-footer{text-align:center;font-size:12px;color:var(--dhp-muted);margin-top:30px;display:flex;flex-direction:column;gap:4px;}',
 '#darHomeHtmlParityV1 .dhp-footer strong{color:var(--dhp-ink);}',
 '@media(max-width:480px){#darHomeHtmlParityV1 .dhp-content{padding:20px 16px calc(115px + env(safe-area-inset-bottom,0px));}#darHomeHtmlParityV1 .dhp-brand h1{font-size:27px;}#darHomeHtmlParityV1 .dhp-quick{font-size:10px;}}'
+,
+ "#darHomeHtmlParityV1{--dhp-light:color-mix(in srgb,var(--dhp-paper) 86%,var(--dhp-bg) 14%);--dhp-halo:color-mix(in srgb,var(--dhp-accent) 15%,transparent 85%);--dhp-goldline:color-mix(in srgb,var(--dhp-gold) 72%,var(--dhp-line) 28%);}",
+ "#darHomeHtmlParityV1 .dhp-content{padding-top:17px!important;padding-bottom:calc(104px + env(safe-area-inset-bottom,0px))!important;}",
+ "#darHomeHtmlParityV1 .dhp-kicker{letter-spacing:.14em!important;}",
+ "#darHomeHtmlParityV1 .dhp-brand{margin:12px 0 20px!important;align-items:center!important;gap:13px!important;}",
+ "#darHomeHtmlParityV1 .dhp-brand-copy{flex:1;min-width:0!important;overflow:visible;}",
+ "#darHomeHtmlParityV1 .dhp-brand h1{font:650 clamp(22px,5.75vw,30px)/1.15 \"Iowan Old Style\",Georgia,serif!important;letter-spacing:.015em!important;white-space:nowrap!important;}",
+ "#darHomeHtmlParityV1 .dhp-brand small{font-size:clamp(11px,2.6vw,13px)!important;line-height:1.35!important;margin-top:9px!important;color:var(--dhp-muted)!important;}",
+ "#darHomeHtmlParityV1 .dhp-brand-rule{display:block;height:2px;max-width:100%;margin-top:12px;overflow:hidden;background:linear-gradient(90deg,var(--dhp-goldline) 0%,color-mix(in srgb,var(--dhp-gold) 38%,transparent) 48%,transparent 98%)!important;mask-image:linear-gradient(180deg,#000 0%,transparent 100%);border:0!important;}",
+ "#darHomeHtmlParityV1 .dhp-seal{width:53px!important;height:53px!important;border-color:var(--dhp-goldline)!important;box-shadow:0 5px 18px rgba(0,0,0,.04)!important;background:transparent!important;}",
+ "#darHomeHtmlParityV1 .dhp-seal:empty{display:none!important;}",
+ "#darHomeHtmlParityV1 .dhp-prayer{position:relative!important;isolation:isolate!important;overflow:hidden!important;border-radius:21px!important;border:1px solid var(--dhp-goldline)!important;background:linear-gradient(115deg,color-mix(in srgb,var(--dhp-paper) 88%,var(--dhp-bg) 12%),var(--dhp-paper))!important;box-shadow:0 10px 24px rgba(0,0,0,.045),inset 0 1px rgba(255,255,255,.13)!important;padding:17px 16px 14px!important;}",
+ "#darHomeHtmlParityV1 .dhp-prayer::before{content:\"\";position:absolute;right:-30px;top:-58px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--dhp-gold) 10%,transparent),transparent 67%);pointer-events:none;z-index:-1;}",
+ "#darHomeHtmlParityV1 .dhp-prayer-top{align-items:center!important;gap:12px!important;}",
+ "#darHomeHtmlParityV1 .dhp-prayer-top b{font:650 clamp(21px,5.8vw,27px)/1.14 \"Iowan Old Style\",Georgia,serif!important;margin:6px 0 4px!important;color:var(--dhp-ink)!important;}",
+ "#darHomeHtmlParityV1 .dhp-prayer-right{flex:0 0 auto!important;}",
+ "#darHomeHtmlParityV1 .dhp-clock{font:650 clamp(27px,7.2vw,35px)/1.1 \"Iowan Old Style\",Georgia,serif!important;font-variant-numeric:tabular-nums!important;letter-spacing:0!important;color:var(--dhp-gold)!important;}",
+ "#darHomeHtmlParityV1 .dhp-prayer-footer{margin-top:13px!important;padding-top:11px!important;border-color:var(--dhp-line)!important;gap:6px 12px!important;}",
+ "#darHomeHtmlParityV1 .dhp-greeting{font:650 clamp(23px,5.8vw,28px)/1.29 \"Iowan Old Style\",Georgia,serif!important;margin:21px 0 10px!important;letter-spacing:.005em!important;}",
+ "#darHomeHtmlParityV1 .dhp-isnad{margin:0 0 14px;padding:12px 15px 13px 16px;border:1px solid var(--dhp-line);border-radius:15px;background:color-mix(in srgb,var(--dhp-paper) 62%,var(--dhp-bg) 38%);position:relative;}",
+ "#darHomeHtmlParityV1 .dhp-isnad::before{content:\"\";position:absolute;left:0;top:13px;bottom:13px;width:2px;background:linear-gradient(180deg,var(--dhp-goldline),transparent);}",
+ "#darHomeHtmlParityV1 .dhp-isnad-label{font-size:10px;color:var(--dhp-accent);font-weight:800;letter-spacing:.12em;margin-bottom:5px;}",
+ "#darHomeHtmlParityV1 .dhp-quote{border:0!important;padding:0!important;margin:0!important;font:500 14px/1.52 \"Iowan Old Style\",Georgia,serif!important;color:var(--dhp-ink)!important;}",
+ "#darHomeHtmlParityV1 .dhp-quote-source{margin-top:5px!important;font:600 11px/1.4 -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif!important;color:var(--dhp-muted)!important;}",
+ "#darHomeHtmlParityV1 .dhp-intro{line-height:1.57!important;margin-bottom:16px!important;}",
+ "#darHomeHtmlParityV1 .dhp-intro strong{color:var(--dhp-accent)!important;}",
+ "#darHomeHtmlParityV1 .dhp-quickbar{gap:9px!important;margin:14px 0 17px!important;}",
+ "#darHomeHtmlParityV1 .dhp-quick{min-height:89px!important;border:1px solid var(--dhp-line)!important;border-radius:17px!important;padding:11px 4px 8px!important;background:linear-gradient(180deg,color-mix(in srgb,var(--dhp-paper) 93%,var(--dhp-bg) 7%),var(--dhp-paper))!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:6px!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.10)!important;}",
+ "#darHomeHtmlParityV1 .dhp-quick b{display:block!important;font:650 clamp(10px,2.35vw,12px)/1.25 -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif!important;}",
+ "#darHomeHtmlParityV1 .dhp-icon3d{width:40px;height:40px;flex:none;display:grid!important;place-items:center!important;margin:0!important;padding:0!important;border:0!important;background:none!important;box-shadow:none!important;font-size:0!important;}",
+ "#darHomeHtmlParityV1 .dhp-icon3d img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 4px 5px rgba(0,0,0,.11));transform:translateZ(0);}",
+ "#darHomeHtmlParityV1 .dhp-quick .dhp-icon3d{width:38px!important;height:38px!important;}",
+ "#darHomeHtmlParityV1 .dhp-search-box{margin-top:0!important;padding:0 13px!important;background:transparent!important;box-shadow:none!important;border:1px solid var(--dhp-line)!important;border-radius:18px!important;}",
+ "#darHomeHtmlParityV1 .dhp-search{min-height:49px!important;gap:11px!important;}",
+ "#darHomeHtmlParityV1 .dhp-search-icon{display:grid;place-items:center;color:var(--dhp-accent)!important;font-size:26px!important;}",
+ "#darHomeHtmlParityV1 .dhp-search input{height:45px!important;min-height:45px!important;padding:8px 0!important;font-size:14px!important;line-height:1.4!important;}",
+ "#darHomeHtmlParityV1 .dhp-search-box:focus-within{border-color:var(--dhp-accent)!important;box-shadow:0 0 0 4px var(--dhp-halo)!important;}",
+ "#darHomeHtmlParityV1 .dhp-quran-section{margin-top:18px!important;}",
+ "#darHomeHtmlParityV1 .dhp-quran-capsule{width:100%;min-height:67px;display:flex;align-items:center;gap:13px;text-align:left;border:1px solid var(--dhp-goldline);border-radius:999px;padding:11px 18px;background:linear-gradient(100deg,color-mix(in srgb,var(--dhp-paper) 83%,var(--dhp-bg) 17%),var(--dhp-paper));box-shadow:inset 0 1px 0 rgba(255,255,255,.10);}",
+ "#darHomeHtmlParityV1 .dhp-quran-capsule .dhp-icon3d{width:43px!important;height:43px!important;}",
+ "#darHomeHtmlParityV1 .dhp-quran-capsule strong{display:block;font:700 17px/1.2 \"Iowan Old Style\",Georgia,serif;color:var(--dhp-ink);}",
+ "#darHomeHtmlParityV1 .dhp-quran-capsule small{display:block;margin-top:3px;color:var(--dhp-muted);font:12px/1.35 -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif;}",
+ "#darHomeHtmlParityV1 .dhp-section{margin-top:23px!important;}",
+ "#darHomeHtmlParityV1 .dhp-head{align-items:center!important;gap:12px!important;padding-bottom:9px!important;margin-bottom:12px!important;border-bottom:1px solid var(--dhp-line)!important;}",
+ "#darHomeHtmlParityV1 .dhp-head h2{font:650 clamp(20px,5.1vw,24px)/1.25 \"Iowan Old Style\",Georgia,serif!important;}",
+ "#darHomeHtmlParityV1 .dhp-head button{font:700 11px/1.25 -apple-system,BlinkMacSystemFont,\"Segoe UI\",sans-serif!important;border:1px solid var(--dhp-line)!important;border-radius:999px!important;padding:8px 12px!important;background:var(--dhp-paper)!important;white-space:nowrap!important;}",
+ "#darHomeHtmlParityV1 .dhp-panel{border:1px solid var(--dhp-line)!important;border-radius:18px!important;background:var(--dhp-paper)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.08)!important;}",
+ "#darHomeHtmlParityV1 .dhp-two{gap:10px!important;}",
+ "#darHomeHtmlParityV1 .dhp-smallcard{min-height:110px!important;padding:14px 13px!important;}",
+ "#darHomeHtmlParityV1 .dhp-smallcard h3{font-size:clamp(16px,3.9vw,18px)!important;line-height:1.25!important;}",
+ "#darHomeHtmlParityV1 .dhp-feature{padding:14px 15px!important;background:linear-gradient(135deg,color-mix(in srgb,var(--dhp-paper) 78%,var(--dhp-accent) 22%),var(--dhp-paper))!important;margin-bottom:10px!important;}",
+ "#darHomeHtmlParityV1 .dhp-feature h3{font-size:clamp(18px,4.6vw,21px)!important;line-height:1.25!important;}",
+ "#darHomeHtmlParityV1 .dhp-feature p{margin-bottom:0!important;}",
+ "#darHomeHtmlParityV1 .dhp-article{border-bottom:1px solid var(--dhp-line)!important;padding:13px 2px!important;background:transparent!important;}",
+ "#darHomeHtmlParityV1 .dhp-article:last-child{border-bottom:0!important;}",
+ "#darHomeHtmlParityV1 .dhp-library{gap:10px!important;}",
+ "#darHomeHtmlParityV1 .dhp-library-tile{min-height:103px!important;padding:10px 5px 12px!important;gap:4px!important;border:1px solid var(--dhp-line)!important;border-radius:17px!important;background:radial-gradient(circle at 85% 3%,color-mix(in srgb,var(--dhp-accent) 9%,transparent),transparent 55%),var(--dhp-paper)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.10)!important;overflow:hidden!important;}",
+ "#darHomeHtmlParityV1 .dhp-library-tile .dhp-icon3d{width:41px!important;height:41px!important;}",
+ "#darHomeHtmlParityV1 .dhp-library-tile b{font-size:clamp(11px,2.8vw,13px)!important;line-height:1.2!important;}",
+ "#darHomeHtmlParityV1 .dhp-library-tile small{font-size:10px!important;line-height:1.25!important;}",
+ "#darHomeHtmlParityV1 :is(.dhp-prayer,.dhp-quick,.dhp-quran-capsule,.dhp-panel,.dhp-article,.dhp-library-tile,.dhp-head button){transition:box-shadow .22s ease,border-color .22s ease,transform .22s ease,background .22s ease!important;}",
+ "#darHomeHtmlParityV1 :is(.dhp-prayer,.dhp-quick,.dhp-quran-capsule,.dhp-panel,.dhp-article,.dhp-library-tile,.dhp-head button):is(:hover,:focus-visible){border-color:var(--dhp-accent)!important;box-shadow:0 0 0 4px var(--dhp-halo),0 8px 20px rgba(0,0,0,.065)!important;transform:translateY(-1px)!important;outline:none!important;}",
+ "@media(hover:none){#darHomeHtmlParityV1 :is(.dhp-quick,.dhp-library-tile,.dhp-quran-capsule,.dhp-panel):active{box-shadow:0 0 0 4px var(--dhp-halo)!important;transform:scale(.988)!important;}}",
+ "@media(max-width:375px){#darHomeHtmlParityV1 .dhp-content{padding-left:14px!important;padding-right:14px!important;}#darHomeHtmlParityV1 .dhp-brand h1{font-size:clamp(21px,5.65vw,25px)!important;}#darHomeHtmlParityV1 .dhp-brand{gap:10px!important;}#darHomeHtmlParityV1 .dhp-seal{width:46px!important;height:46px!important;}#darHomeHtmlParityV1 .dhp-quickbar{gap:6px!important;}#darHomeHtmlParityV1 .dhp-library{gap:7px!important;}#darHomeHtmlParityV1 .dhp-library-tile{padding-left:3px!important;padding-right:3px!important;}}"
  ].join("\n");
 }
 function create(){
@@ -189,6 +254,10 @@ function updateBrand(){
   seal.replaceChildren(img);
  }
 }
+function transliteratePrayer(name){
+ var words={"fajr":"Faǧr","fadschar":"Faǧr","fadsr":"Faǧr","dhuhr":"Ẓuhr","zuhr":"Ẓuhr","dhur":"Ẓuhr","dohr":"Ẓuhr","asr":"ʿAṣr","asar":"ʿAṣr","maghrib":"Maghrib","magrib":"Maghrib","isha":"ʿIshāʾ","ischaa":"ʿIshāʾ","ischā":"ʿIshāʾ","ischāʾ":"ʿIshāʾ","isha'a":"ʿIshāʾ"};
+ return words[String(name||"").toLowerCase().replace(/[^a-z\u00e4\u00f6\u00fc\u00df\u0101\u02bf\u02be]/g,"")]||name;
+}
 function updatePrayer(){
  var root=document.getElementById(ID),hub=document.getElementById("headerPrayerStatus");
  if(!root||!hub)return;
@@ -198,7 +267,7 @@ function updatePrayer(){
  var hour=nativeText(next,".header-prayer-hour")||nativeText(hub,".header-prayer-hour");
  var remaining=nativeText(hub,".header-prayer-zone__countdown")||nativeText(hub,".header-prayer-zone__count-label");
  var date=nativeText(hub,".header-prayer-hub__date"),hijri=nativeText(hub,".header-prayer-hub__hijri"),place=nativeText(hub,".header-prayer-hub__place");
- if(name)root.querySelector("#dhpPrayerName").textContent=name;
+ if(name)root.querySelector("#dhpPrayerName").textContent=transliteratePrayer(name);
  if(hour)root.querySelector("#dhpPrayerClock").textContent=hour;
  root.querySelector("#dhpPrayerRemain").textContent=remaining;
  if(date)root.querySelector("#dhpPrayerDate").textContent=date;
@@ -226,12 +295,11 @@ function recent(){
    var tag=document.createElement("span");tag.className="dhp-kicker";tag.textContent="NEUESTE VERÖFFENTLICHUNG";
    var h=document.createElement("h3");h.textContent=p.title;
    var meta=document.createElement("p");meta.textContent=p.sub||"Qurʾān · Sunnah · Āthār";
-   var action=document.createElement("span");action.className="dhp-link";action.textContent="Beitrag lesen →";
-   btn.append(tag,h,meta,action);
+   btn.append(tag,h,meta);
   }else{
-   var d=document.createElement("div"),h2=document.createElement("h3"),p2=document.createElement("p"),arrow=document.createElement("span");
-   h2.textContent=p.title;p2.textContent=p.sub;arrow.className="dhp-arrow";arrow.textContent="›";
-   d.append(h2,p2);btn.append(d,arrow);
+   var d=document.createElement("div"),h2=document.createElement("h3"),p2=document.createElement("p");
+   h2.textContent=p.title;p2.textContent=p.sub;
+   d.append(h2,p2);btn.append(d);
   }
   target.appendChild(btn);
  });
@@ -244,7 +312,7 @@ function quran(){
  var hero=document.querySelector("#dv3QuranSlot .home-v380-quran-hero");
  if(!hero)return;
  var name=nativeText(hero,"h2,h3,strong")||"";
- if(name&&name.length<75)root.querySelector("#dhpQResume").textContent=name;
+ if(name&&name.length<70)root.querySelector("#dhpQResume").textContent=name;
 }
 function modal(){
  var root=document.getElementById(ID),p=document.getElementById("dv3ThemePanel");
