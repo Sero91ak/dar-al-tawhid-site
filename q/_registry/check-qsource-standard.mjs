@@ -160,10 +160,22 @@ for (const n of files) {
         if (!exists) fail.push(label + 'verlinkte Lernseite fehlt: ' + href);
         else {
           const lessonHtml = await fs.readFile(lessonFile, 'utf8');
-          if (!lessonHtml.includes('/q/' + n + '/'))
+          if (n < 47 && !lessonHtml.includes('/q/' + n + '/'))
             fail.push(label + 'verlinkter Lernbereich enthält keinen Rücklink zu Q' + n);
           if (!/<body\b[^>]*class\s*=\s*(["'])[^"']*\bheritage-learning\b[^"']*\1/i.test(lessonHtml))
             fail.push(label + 'Lernbereich verwendet nicht die gemeinsame Learning-Heritage-Vorlage');
+          // QUIZ_SOURCE_SEPARATION_GATE_20261020: Q47+ quiz pages are quiz only.
+          // Source excerpts, commentary and external evidence belong on /q/N/.
+          if (n >= 47) {
+            const quizSourceLinks = [...lessonHtml.matchAll(/<a\b[^>]*href\s*=\s*(["'])(.*?)\1/gi)]
+              .filter(match => /^\/q\/[1-9]\d*\/?(?:[?#].*)?$/.test(match[2]));
+            if (quizSourceLinks.length)
+              fail.push(label + 'Quizseite enthält verbotene Quellenlinks');
+            if (/Was wird hier erläutert\?/.test(lessonHtml))
+              fail.push(label + 'Quizseite enthält verbotenen Erklärungskasten');
+            if (!/<(?:section|main)\b[^>]*id\s*=\s*(["'])[^"']*quiz[^"']*\1/i.test(lessonHtml))
+              fail.push(label + 'Lernbereich enthält keinen Quizabschnitt');
+          }
         }
         if (!attr(learning, 'aria-label')) fail.push(label + 'Lernbereich-Link ohne Beschriftung');
       }
