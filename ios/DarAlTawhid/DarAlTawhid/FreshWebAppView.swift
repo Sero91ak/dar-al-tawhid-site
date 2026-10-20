@@ -66,6 +66,9 @@ struct WebAppView: UIViewRepresentable {
         webView.isOpaque = true
         webView.scrollView.backgroundColor = host.backgroundColor
         webView.scrollView.contentInsetAdjustmentBehavior = .never
+        // DAR_ADULT_TOP_SCROLL_BOUNDARY_V1: clamp at top, keep natural vertical scrolling.
+        webView.scrollView.bounces = false
+        webView.scrollView.alwaysBounceVertical = false
         webView.allowsBackForwardNavigationGestures = true
         webView.customUserAgent = "DarAlTawhid-iOS/1.0 WKWebView"
         webView.navigationDelegate = context.coordinator
