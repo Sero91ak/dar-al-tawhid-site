@@ -747,6 +747,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Nimm dir Zeit für deine Antwort. Welchen Schritten sollen wir nach Qurʾān 2:168 nicht folgen? Antwort 1: Den Schritten des Shayṭān. Antwort 2: Dem Qurʾān. Antwort 3: Guten Ratschlägen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/45d26867bcef57f611994cd7b2b34793916d7950.mp3",
+      "sha256": "3037bd7298b678c396f2b8557e75b0a844951bb922bcac0d599dd26a8970aa06",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Überlege kurz, bevor du dich entscheidest. Worum bat Mūsā vor seiner Aufgabe bei Firʿawn? Antwort 1: Um Weite der Brust und Erleichterung seiner Aufgabe. Antwort 2: Um ein Schloss. Antwort 3: Um viel Besitz. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/b218da536d95fd93398760fe6afd114ba9895ac9.mp3",
       "sha256": "04defa50fb3c4a9a5add56f934de5dd08366765bd37b2fdf014e79e35fe07dcd",
@@ -4757,12 +4768,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Den Schritten des Shayṭān.",
-            "Guten Ratschlägen.",
-            "Welchen Schritten sollen wir nach Qurʾān 2:168 nicht folgen?"
-          ]
+          "available": true,
+          "textSha256": "aca5ce641e64715aae9bf5b2026edae3821781d07f99cc448528fa6c458dde53",
+          "mp3Sha256": "3037bd7298b678c396f2b8557e75b0a844951bb922bcac0d599dd26a8970aa06",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/45d26867bcef57f611994cd7b2b34793916d7950.mp3"
         },
         "correct": {
           "available": true,
