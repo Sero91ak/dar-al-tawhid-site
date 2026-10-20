@@ -6,15 +6,15 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `ea26ba9f1e565431e838f94ff8eff478f2c82606`
+- Commit beim Erstellen dieses Berichts: `902de9429a6ee6318896cba3ad0fed0dc6d30068`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
-- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **292 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1060 Frage-/Lob-/Retry-/Erklärungsteile**.
-- Technisch vierteilig vollständig: **82/450**, noch unvollständig: **368/450**.
+- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **294 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1062 Frage-/Lob-/Retry-/Erklärungsteile**.
+- Technisch vierteilig vollständig: **83/450**, noch unvollständig: **367/450**.
 - Letzter V4-Kostenaudit: **1350 neue Sprachfragmente** = **63911 Unicode-Zeichen**; **0 neue Lob-/Retry-Fragmente**, **0 neue V4-Texte für 4–6 Jahre**.
-- Nach Originalkosten getrennt: **80 Fragen nur durch bereits bezahlte MP3s blockiert**, **284 Fragen benötigen neue V4-Originaltexte**.
+- Prioritätsliste nach letztem MP3-Import neu berechnen; ursprüngliche V4-Quellen bleiben geschützt.
 - Alter 4-6: **70/150** komplett; vorhandene Hörteile question=100, correct=85, retry=85, explanation=148.
-- Alter 7-8: **7/150** komplett; vorhandene Hörteile question=7, correct=150, retry=150, explanation=17.
+- Alter 7-8: **8/150** komplett; vorhandene Hörteile question=8, correct=150, retry=150, explanation=18.
 - Alter 9-10: **5/150** komplett; vorhandene Hörteile question=6, correct=150, retry=150, explanation=12.
 - Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **47 importiert**, **9 noch ohne heruntergeladene Original-MP3-Datei**.
 - Zusätzlich im Originalregister: **416 Textschlüssel**, davon **369 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
@@ -27,7 +27,7 @@
 
 Genauer kostenfreier Restplan: `kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md` und `kids/review-only/quiz-v4-450-next-completion-priority.json`.
 Zusätzliche globale Kostensperre: **10** echte Originaltexte sind im verbundenen ElevenLabs Flow noch reserviert/eingereicht und dürfen nicht erneut in eine kostenpflichtige TTS-Auswahl geraten. **1** davon sind bereits eingereicht, **7** sind vorerst unbezahlt reserviert. Der gesamte Audioabschlussplan unterscheidet diese Originale von wirklich neuen Sprachfragmenten.
-Nur bei frisch erzeugtem Abschlussplan: **4** Fragen warten ausschließlich auf verbundene Flow-Originale. Wirklich neue noch zu generierende V4-Sprachfragmente nach Deduplizierung: **1345**. Diese Werte sind keine neue providerbestätigte Abrechnung.
+Nur bei frisch erzeugtem Abschlussplan: **Plan muss neu erstellt werden** Fragen warten ausschließlich auf verbundene Flow-Originale. Wirklich neue noch zu generierende V4-Sprachfragmente nach Deduplizierung: **Plan muss neu erstellt werden**. Diese Werte sind keine neue providerbestätigte Abrechnung.
 
 ## Noch fehlende, **bereits bezahlte** Originalaufnahmen
 
@@ -108,8 +108,8 @@ Aus den 450 ausgewählten Fragen sind **20 ältere Quizfragen (10 × 7–8 und 1
 
 Der ausführbare, fortsetzbare Kostengenerator `kids/tools/generate_quiz_v4_older_stage1_exact.py` benutzt ausschließlich die 65 unveränderlichen Sprachtext-Prüfsummen dieser Stufe. `--audit` kostet 0 Credits; `--produce` erfordert zwei bestätigte Freigaben und begrenzt jede Ausführung auf höchstens zehn Original-MP3s und höchstens 850 prognostizierte Credits. Quelle der unveränderten Texte: `.github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json`.
 Manuelle Produktions-Pipeline: `.github/workflows/kids-v4-older-stage1-exact-paid.yml`. Die frühere doppelte Frageprüfung ist abgeschafft: Stattdessen wird nur die vorhandene `approved`-Freigabe der 450 Originalfragen bestätigt; das eigentliche Ausgabe-Budget wird separat genehmigt. Kostenfreier CI-Vortest: `.github/workflows/kids-v4-older-stage1-exact-audit.yml`. Sie speichert Originale mit Ledger/Backups sowie die danach neu zusammengesetzten privaten Quiz-Hördateien. Kein Live-Deploy.
-V4-Originale dieser ersten 65er-Stufe: **37 tatsächlich gespeicherte MP3s** + **10 im Flow reservierte/angefragte Originale ohne MP3** + **1 früherer TTS-POST mit unbestätigtem Ergebnis, gegen Neukauf gesperrt** + **17 wirklich neu produzierbare, unreservierte Texte** = 65. Nur die letzte Kategorie darf nach separater Freigabe Credits kosten. Der Rest wird durch Wiederverwendung oder Originalexport geklärt.
-Nächste freigabepflichtige Aufnahmerunde: **10 Texte**; geschätzte **317.85 Credits**, kein Provider-Rechnungswert. Bei reservierten Flow-Aufnahmen zuerst echten Anbieterstatus und exportierbare Original-MP3 prüfen, keinesfalls automatisch erneut bezahlen.
+V4-Originale dieser ersten 65er-Stufe: **39 tatsächlich gespeicherte MP3s** + **10 im Flow reservierte/angefragte Originale ohne MP3** + **1 früherer TTS-POST mit unbestätigtem Ergebnis, gegen Neukauf gesperrt** + **15 wirklich neu produzierbare, unreservierte Texte** = 65. Nur die letzte Kategorie darf nach separater Freigabe Credits kosten. Der Rest wird durch Wiederverwendung oder Originalexport geklärt.
+Nächste freigabepflichtige Aufnahmerunde: **10 Texte**; geschätzte **342.08 Credits**, kein Provider-Rechnungswert. Bei reservierten Flow-Aufnahmen zuerst echten Anbieterstatus und exportierbare Original-MP3 prüfen, keinesfalls automatisch erneut bezahlen.
 
 ## Nachweis der tatsächlich gespeicherten bezahlten V4-Original-MP3s
 
@@ -127,7 +127,7 @@ Nur nach wirklicher inhaltlicher und finanzieller Freigabe neue V4-Stimmenaufnah
 Aktuelle zusätzliche Schutzregel: Der V4-Quellenprüfer muss auch nach bereits gespeicherten Teil-Batches mit 55, 45 usw. fehlenden Originalen erneut bestehen. Die kostenpflichtige Stufe berechnet dafür jedes Mal einen SHA-256-Fingerabdruck aus Originalquelle, gespeicherten MP3-Zuordnungen, vorherigen Kostenbelegen und den nächsten genauen Sprechtext-SHAs.
 Nur wenn der ausdrücklich bestätigte Batch-Fingerabdruck exakt zur neu geprüften Quelle und zum aktuellen Ledger passt, darf der Produktionscode überhaupt eine Anfrage an ElevenLabs senden. Bei Abweichung: STOP vor Provider-GET oder TTS-POST; keine stillschweigende Kreditfreigabe.
 Zusätzliche Absicherung: unmittelbar VOR jedem potenziell kostenpflichtigen POST schreibt der Generator einen als UNBESTÄTIGT markierten SHA-/Batch-Eintrag in `kids/data/quiz-v4-older-stage1-request-journal.json` und spiegelt ihn in `kids/data/quiz-v4-older-stage1-usage.json`. Die Usage-Datei ist bereits Teil des GitHub-Actions-Backups mit `if: always()`. Nach erhaltenen originalen MP3-Bytes werden Ledger und Originalregister atomar gespeichert; eine unsichere frühere Abrechnung oder unterbrochene Anfrage verbietet jede erneute Generierung derselben Sprachaufnahme, bis die Originaldatei/Provider-Abbuchung geklärt wurde.
-Aktuell im Reviewprotokoll vorhandener Fingerabdruck: `8fd86570e1b8057027657d299602441b847a0edd54c8d7d71c7098ac8e5ba136`. Nach jeder MP3-Ergänzung erneut berechnen.
+Aktuell im Reviewprotokoll vorhandener Fingerabdruck: `33da37c2deea88685fc3660babec74f631260a62617c8ddee0675e0efccbdcd7`. Nach jeder MP3-Ergänzung erneut berechnen.
 
 ## Sicherer echter V4-Originalabruf und Kostenschutz bei Unterbrechung
 
