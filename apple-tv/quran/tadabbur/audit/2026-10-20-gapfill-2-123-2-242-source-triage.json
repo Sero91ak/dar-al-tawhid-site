@@ -1,0 +1,119 @@
+{
+  "schemaVersion": "1.0",
+  "date": "2026-10-20",
+  "scope": "Adult Qurʾān/Tadabbur source triage only; NO canonical entry publication",
+  "baseMainSha": "9cc6a446e2e108417329c5b73a3afb2eb27309d1",
+  "catalogAtReview": {
+    "uniqueVerifiedReferences": 4702,
+    "missing": 1534,
+    "total": 6236,
+    "reportSha": "6bfdfab680c1c4185b475f14e5e14482e370edf8"
+  },
+  "sourceExcerptReviewed": 10,
+  "fullyIsnadVerified": 0,
+  "newCanonicalEntries": 0,
+  "allStillOpen": true,
+  "method": "Ten individually scoped verse-source inspections using direct indexed Arabic excerpts from Islamweb Tafsīr; original Arabic reports and candidate chains recorded when present. Not full independent ʿIlal verification. No source page or exact page anchors claimed beyond displayed source. Direct URL path must be opened and anchor checked before publication.",
+  "safety": {
+    "globalLock": true,
+    "canonicalAdultContentScopeApproved": true,
+    "branchOnly": true,
+    "mainUnchanged": true,
+    "noPush": true,
+    "noDeployment": true
+  },
+  "candidates": [
+    {
+      "reference": "2:123",
+      "work": "aṭ-Ṭabarī, Jāmiʿ al-bayān",
+      "report": null,
+      "sourceUrl": "https://www.islamweb.net/ar/library/content/50/387/%D8%A7%D9%84%D9%82%D9%88%D9%84-%D9%81%D9%8A-%D8%AA%D8%A3%D9%88%D9%8A%D9%84-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D9%88%D8%A7%D8%AA%D9%82%D9%88%D8%A7-%D9%8A%D9%88%D9%85%D8%A7-%D9%84%D8%A7-%D8%AA%D8%AC%D8%B2%D9%8A-%D9%86%D9%81%D8%B3-%D8%B9%D9%86-%D9%86%D9%81%D8%B3-%D8%B4%D9%8A%D8%A6%D8%A7-%D9%88%D9%84%D8%A7-%D9%8A%D9%82%D8%A8%D9%84-%D9%85%D9%86%D9%87%D8%A7-%D8%B9%D8%AF%D9%84-%D9%88%D9%84%D8%A7-%D8%AA%D9%86%D9%81%D8%B9%D9%87%D8%A7-%D8%B4%D9%81%D8%A7%D8%B9%D8%A9-%D9%88%D9%84%D8%A7-%D9%87%D9%85-%D9%8A%D9%86%D8%B5%D8%B1%D9%88%D9%86-",
+      "observation": "Ṭabarī explains the warning and explicitly refers back to the similar verse 2:48; no independent fully chained Salaf interpretation isolated in the inspected passage.",
+      "chainStatus": "no-eligible-salaf-isnad-isolated",
+      "next": "Search Ibn Abī Ḥātim for a direct report, not a thematic reuse of 2:48."
+    },
+    {
+      "reference": "2:131",
+      "work": "Ibn Abī Ḥātim, Tafsīr",
+      "report": "1274",
+      "sourceUrl": "https://www.islamweb.net/ar/library/content/218/139/%D8%AA%D9%81%D8%B3%D9%8A%D8%B1-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D8%A5%D8%B0-%D9%82%D8%A7%D9%84-%D9%84%D9%87-%D8%B1%D8%A8%D9%87-%D8%A3%D8%B3%D9%84%D9%85-%D9%82%D8%A7%D9%84-%D8%A3%D8%B3%D9%84%D9%85%D8%AA-%D9%84%D8%B1%D8%A8-%D8%A7%D9%84%D8%B9%D8%A7%D9%84%D9%85%D9%8A%D9%86",
+      "observation": "Direct al-Ḥasan al-Baṣrī interpretation; chain al-Ḥasan b. Aḥmad → Ibrāhīm b. ʿAbd Allāh b. Bashshār → Surūr b. al-Mughīrah → ʿAbbād b. Manṣūr → al-Ḥasan. Individual narrator and hearing analysis remains open.",
+      "chainStatus": "individual-rijal-and-sama-review-open",
+      "next": "Check ʿAbbād b. Manṣūr and chain continuity; compare parallel witnesses."
+    },
+    {
+      "reference": "2:133",
+      "work": "Ibn Abī Ḥātim, Tafsīr",
+      "report": "1278–1279",
+      "sourceUrl": "https://www.islamweb.net/ar/library/content/218/141/%D8%AA%D9%81%D8%B3%D9%8A%D8%B1-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D8%A3%D9%85-%D9%83%D9%86%D8%AA%D9%85-%D8%B4%D9%87%D8%AF%D8%A7%D8%A1-%D8%A5%D8%B0-%D8%AD%D8%B6%D8%B1-%D9%8A%D8%B9%D9%82%D9%88%D8%A8-%D8%A7%D9%84%D9%85%D9%88%D8%AA-%D8%A5%D8%B0-%D9%82%D8%A7%D9%84-%D9%84%D8%A8%D9%86%D9%8A%D9%87",
+      "observation": "1278: ʿIṣām b. Rawwād → Ādam → Abū Jaʿfar ar-Rāzī → ar-Rabīʿ → Abū al-ʿĀliyah. 1279: al-Ḥasan via ʿAbbād; both direct verse interpretations but grading unresolved.",
+      "chainStatus": "individual-rijal-and-continuity-review-open",
+      "next": "Assess Abū Jaʿfar ar-Rāzī / ʿAbbād separately and find corroboration."
+    },
+    {
+      "reference": "2:145",
+      "work": "aṭ-Ṭabarī, Jāmiʿ al-bayān",
+      "report": "2257–2258",
+      "sourceUrl": "https://www.islamweb.net/ar/library/content/50/452/%D8%A7%D9%84%D9%82%D9%88%D9%84-%D9%81%D9%8A-%D8%AA%D8%A3%D9%88%D9%8A%D9%84-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D9%88%D9%84%D8%A5%D9%86-%D8%A3%D8%AA%D9%8A%D8%AA-%D8%A7%D9%84%D8%B0%D9%8A%D9%86-%D8%A3%D9%88%D8%AA%D9%88%D8%A7-%D8%A7%D9%84%D9%83%D8%AA%D8%A7%D8%A8-%D8%A8%D9%83%D9%84-%D8%A2%D9%8A%D8%A9-%D9%85%D8%A7-%D8%AA%D8%A8%D8%B9%D9%88%D8%A7-%D9%82%D8%A8%D9%84%D8%AA%D9%83-",
+      "observation": "2257 Mūsā b. Hārūn → ʿAmr b. Ḥammād → Asbāṭ → as-Suddī, on differing qiblahs; 2258 Ibn Wahb → Ibn Zayd. No independently justified grade established.",
+      "chainStatus": "asbat-suddi-and-ibn-zayd-critical-review-open",
+      "next": "Verify transmitter assessments and distinguish lexical exegesis from historical asbāb claims."
+    },
+    {
+      "reference": "2:147",
+      "work": "Ibn Abī Ḥātim, Tafsīr",
+      "report": "early report on 2:147 (number not confirmed)",
+      "sourceUrl": "https://www.islamweb.net/ar/library/content/218/155/%D8%AA%D9%81%D8%B3%D9%8A%D8%B1-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D8%A7%D9%84%D8%AD%D9%82-%D9%85%D9%86-%D8%B1%D8%A8%D9%83-%D9%81%D9%84%D8%A7-%D8%AA%D9%83%D9%88%D9%86%D9%86-%D9%85%D9%86-%D8%A7%D9%84%D9%85%D9%85%D8%AA%D8%B1%D9%8A%D9%86",
+      "observation": "Reported ar-Rabīʿ via Abū Jaʿfar ar-Rāzī and Ādam; interpretation concerns the established qiblah. Precise report number and narrator review remain open.",
+      "chainStatus": "report-number-and-rijal-review-open",
+      "next": "Recover exact report number, check Abū Jaʿfar ar-Rāzī, confirm complete chain."
+    },
+    {
+      "reference": "2:162",
+      "work": "Ibn Abī Ḥātim, Tafsīr",
+      "report": "1458–1459",
+      "sourceUrl": "https://www.islamweb.net/ar/library/content/218/169/%D8%AA%D9%81%D8%B3%D9%8A%D8%B1-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D8%AE%D8%A7%D9%84%D8%AF%D9%8A%D9%86-%D9%81%D9%8A%D9%87%D8%A7-%D9%84%D8%A7-%D9%8A%D8%AE%D9%81%D9%81-%D8%B9%D9%86%D9%87%D9%85-%D8%A7%D9%84%D8%B9%D8%B0%D8%A7%D8%A8-%D9%88%D9%84%D8%A7-%D9%87%D9%85-%D9%8A%D9%86%D8%B8%D8%B1%D9%88%D9%86",
+      "observation": "1458 Abū al-ʿĀliyah via Abū Jaʿfar ar-Rāzī/ar-Rabīʿ; 1459 Ibn ʿAbbās through Bishr b. ʿUmārah → Abū Rawq → aḍ-Ḍaḥḥāk, not treated as proven connected.",
+      "chainStatus": "two-chains-critical-review-open",
+      "next": "Check aḍ-Ḍaḥḥāk/Ibn ʿAbbās linkage and Abū Jaʿfar chain separately."
+    },
+    {
+      "reference": "2:169",
+      "work": "aṭ-Ṭabarī, Jāmiʿ al-bayān",
+      "report": "2445",
+      "sourceUrl": "https://www.islamweb.net/ar/library/content/50/498/%D8%A7%D9%84%D9%82%D9%88%D9%84-%D9%81%D9%8A-%D8%AA%D8%A3%D9%88%D9%8A%D9%84-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D8%A5%D9%86%D9%85%D8%A7-%D9%8A%D8%A3%D9%85%D8%B1%D9%83%D9%85-%D8%A8%D8%A7%D9%84%D8%B3%D9%88%D8%A1-%D9%88%D8%A7%D9%84%D9%81%D8%AD%D8%B4%D8%A7%D8%A1-%D9%88%D8%A3%D9%86-%D8%AA%D9%82%D9%88%D9%84%D9%88%D8%A7-%D8%B9%D9%84%D9%89-%D8%A7%D9%84%D9%84%D9%87-%D9%85%D8%A7-%D9%84%D8%A7-%D8%AA%D8%B9%D9%84%D9%85%D9%88%D9%86-",
+      "observation": "as-Suddī distinguishes السوء (disobedience) from الفحشاء (fornication), via Mūsā b. Hārūn → ʿAmr → Asbāṭ → as-Suddī. Search excerpt available; full page returned a CAPTCHA on later open.",
+      "chainStatus": "source-full-view-captcha-and-isnad-review-open",
+      "next": "Use another allowed mirror or edition and check individual narrators."
+    },
+    {
+      "reference": "2:176",
+      "work": "aṭ-Ṭabarī, Jāmiʿ al-bayān",
+      "report": "2512",
+      "sourceUrl": "https://www.islamweb.net/ar/library/content/50/510/index.php",
+      "observation": "2512 Mūsā → ʿAmr → Asbāṭ → as-Suddī: those disputing the Book are Jews and Christians; the chain and precise claim need grading, not a blanket authentic label.",
+      "chainStatus": "asbat-suddi-critical-review-open",
+      "next": "Find independent early corroboration and examine narrator chain."
+    },
+    {
+      "reference": "2:209",
+      "work": "aṭ-Ṭabarī, Jāmiʿ al-bayān; Ibn Abī Ḥātim, Tafsīr",
+      "report": "Ṭabarī 4027–4031; Ibn Abī Ḥātim 1954–1956",
+      "sourceUrl": "https://www.islamweb.net/ar/library/content/50/606/%D8%A7%D9%84%D9%82%D9%88%D9%84-%D9%81%D9%8A-%D8%AA%D8%A3%D9%88%D9%8A%D9%84-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D9%81%D8%A5%D9%86-%D8%B2%D9%84%D9%84%D8%AA%D9%85-%D9%85%D9%86-%D8%A8%D8%B9%D8%AF-%D9%85%D8%A7-%D8%AC%D8%A7%D8%A1%D8%AA%D9%83%D9%85-%D8%A7%D9%84%D8%A8%D9%8A%D9%86%D8%A7%D8%AA-%D9%81%D8%A7%D8%B9%D9%84%D9%85%D9%88%D8%A7-%D8%A3%D9%86-%D8%A7%D9%84%D9%84%D9%87-%D8%B9%D8%B2%D9%8A%D8%B2-%D8%AD%D9%83%D9%8A%D9%85-",
+      "secondarySourceUrl": "https://www.islamweb.net/ar/library/content/218/217/%D8%AA%D9%81%D8%B3%D9%8A%D8%B1-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D9%81%D8%A5%D9%86-%D8%B2%D9%84%D9%84%D8%AA%D9%85-%D9%85%D9%86-%D8%A8%D8%B9%D8%AF-%D9%85%D8%A7-%D8%AC%D8%A7%D8%A1%D8%AA%D9%83%D9%85-%D8%A7%D9%84%D8%A8%D9%8A%D9%86%D8%A7%D8%AA-%D9%81%D8%A7%D8%B9%D9%84%D9%85%D9%88%D8%A7-%D8%A3%D9%86-%D8%A7%D9%84%D9%84%D9%87-%D8%B9%D8%B2%D9%8A%D8%B2-%D8%AD%D9%83%D9%8A%D9%85",
+      "observation": "Multiple direct reports: as-Suddī says فإن ضللتم; ʿAwfī family line to Ibn ʿAbbās explains الزلل; Ibn Jurayj, ar-Rabīʿ and Abū al-ʿĀliyah reports also appear. Individual chains not all sound merely by number.",
+      "chainStatus": "multiple-independent-chains-review-open",
+      "next": "Grade each route separately; do not conflate Ibn ʿAbbās with as-Suddī."
+    },
+    {
+      "reference": "2:242",
+      "work": "Ibn Abī Ḥātim, Tafsīr",
+      "report": "2407–2408",
+      "sourceUrl": "https://www.islamweb.net/ar/library/content/218/250/%D8%AA%D9%81%D8%B3%D9%8A%D8%B1-%D9%82%D9%88%D9%84%D9%87-%D8%AA%D8%B9%D8%A7%D9%84%D9%89-%D9%83%D8%B0%D9%84%D9%83-%D9%8A%D8%A8%D9%8A%D9%86-%D8%A7%D9%84%D9%84%D9%87-%D9%84%D9%83%D9%85-%D8%A2%D9%8A%D8%A7%D8%AA%D9%87-%D9%84%D8%B9%D9%84%D9%83%D9%85-%D8%AA%D8%B9%D9%82%D9%84%D9%88%D9%86",
+      "observation": "2407 Abū Zurʿah → Yaḥyā b. ʿAbd Allāh b. Bukayr → Ibn Lahīʿah → ʿAṭāʾ b. Dīnār → Saʿīd b. Jubayr; 2408 ar-Raḥmān b. Zayd via written transmission. Narrator and mode-of-transmission risks require explicit assessment.",
+      "chainStatus": "ibn-lahia-and-ibn-zayd-review-open",
+      "next": "Check Ibn Lahīʿah's transmission via Ibn Bukayr, and independent Saʿīd b. Jubayr route."
+    }
+  ],
+  "next": "Continue individual rijāl/ʿilal checking of 2:131, 2:133, 2:145, 2:209, 2:242 and find independent witnesses; never count them as verified before actual grading. Previous 10-candidate audit 2:82–2:122 remains separate."
+}
