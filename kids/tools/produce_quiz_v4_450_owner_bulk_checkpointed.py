@@ -97,8 +97,72 @@ def qa_and_push(progress):
         git("fetch","--no-tags","origin",BRANCH)
         rebased=git("rebase","--autostash","FETCH_HEAD",check_result=False)
         if rebased.returncode:
-            git("rebase","--abort",check_result=False)
-            raise RuntimeError("Composition push conflict; original paid MP3s are already checkpointed. DO NOT retry a charged POST.")
+            # This commit contains ONLY derived quiz preview/coverage files.
+            # Concurrent zero-credit quiz auditors routinely update the same
+            # derived JSON; a generic rebase abort previously stopped bulk
+            # production AFTER paid originals were safely checkpointed.
+            # Never resolve conflicts in receipts, source plans, or MP3 originals.
+            conflicted=[p for p in
+                        git("diff","--name-only","--diff-filter=U").stdout.splitlines()
+                        if p.strip()]
+            approved_exact={
+                "kids/data/quiz-v4-450-production-status.json",
+                "kids/data/quiz-v4-450-saved-mp3-technical-qa.json",
+                "kids/data/quiz-v4-first150-composed-preview.json",
+                "kids/data/quiz-v4-first150-audio-status.json",
+                "kids/data/quiz-v4-age7to10-composed-preview.json",
+                "kids/data/quiz-v4-age7to10-offline-coverage.json",
+                "kids/review-only/quiz-v4-450-actual-mp3-import.json",
+                "kids/review-only/quiz-v4-450-actual-mp3-import-summary.json",
+                "kids/review-only/quiz-v4-450-owner-bulk-progress.json",
+            }
+            approved_dirs=(
+                "kids/assets/kids-quiz-audio/v4-first150-composed-review/",
+                "kids/assets/kids-quiz-audio/v4-age7to10-composed-review/",
+            )
+            if not conflicted or any(
+                p not in approved_exact and not p.startswith(approved_dirs)
+                for p in conflicted
+            ):
+                git("rebase","--abort",check_result=False)
+                raise RuntimeError(
+                    "Non-derived paid/source conflict during Git rebase; "
+                    "original paid MP3s remain checkpointed. Never retry TTS."
+                )
+            for p in conflicted:
+                # During rebase, --theirs is the newly computed derived side.
+                # Recreate derived outputs again after integrating latest HEAD.
+                git("checkout","--theirs","--",p)
+                git("add","--",p)
+            continued=git("-c","core.editor=true","rebase","--continue",
+                          check_result=False)
+            if continued.returncode:
+                git("rebase","--abort",check_result=False)
+                raise RuntimeError(
+                    "Derived quiz conflict cannot be safely reconciled; "
+                    "original MP3s already stored. Never retry TTS."
+                )
+            # Revalidate and rebuild against all now-visible originals before
+            # the next push. This operation makes ZERO ElevenLabs requests.
+            for tool in ("qa_quiz_v4_saved_mp3.py",
+                         "quiz_v4_first150_offline_join.py",
+                         "quiz_v4_age7to10_offline_join.py",
+                         "report_quiz_v4_450_progress.py",
+                         "stage_quiz_v4_existing_mp3_import.py"):
+                invoke(tool)
+            refreshed=load(ROOT/"kids/data/quiz-v4-450-production-status.json")
+            check(refreshed["selectedTotal"]==450 and
+                  refreshed["appReleaseFlagEnabled"] is False and
+                  refreshed["completedQuestionsWithAllFourAudioParts"]>=
+                  progress["completeQuestions"],
+                  "Concurrent rebase changed private audio coverage unexpectedly")
+            git("add","--",*STAGE_PATHS)
+            staged=git("diff","--cached","--quiet",check_result=False)
+            if staged.returncode:
+                git("commit","-m",
+                    "audio(kids): refresh SHA-verified composed quiz after rebase [skip ci]")
+            print("KIDS450_DERIVED_ONLY_REBASE_RESOLVED_WITH_ZERO_CREDITS",
+                  len(conflicted),flush=True)
     raise RuntimeError("Private composition push rejected; paid originals protected, no paid retry")
 
 def main():
