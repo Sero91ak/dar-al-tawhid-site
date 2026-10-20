@@ -340,6 +340,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Mal sehen, was du zu diesem Thema weißt. Wovor warnte Luqmān seinen Sohn besonders? Antwort 1: Vor Shirk. Antwort 2: Vor Lernen. Antwort 3: Vor Hilfsbereitschaft. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8c984107cc90bbf2f95a5dbf1c3392d24de9f2bf.mp3",
+      "sha256": "c79f29928da773c21f2dc248c47a3b4dd20ae6424851199052eec9989777c748",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Luqmān erklärte, dass Shirk großes Unrecht ist.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/c8925042483752a2c9cc56c275ff760dd4df29fc.mp3",
+      "sha256": "57cc8b07c83250c13a62183a18f09db3a1afbd3c774fe8f01f1a8cf78bbce59d",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Überlege kurz, bevor du dich entscheidest. Wie begegnete Yūsuf seinen Brüdern später? Antwort 1: Er vergab ihnen. Antwort 2: Er verspottete sie. Antwort 3: Er log über sie. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/497d38e02b077400f453f134a4832fac12d14d26.mp3",
       "sha256": "b720932b11c7e448138abb3f28bc3cd90fbd811a22ac3ca6a5a5a8c15eae81d4",
@@ -1715,6 +1737,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Du hast einen Fehler gemacht und bereust ihn. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Nach einem Fehler kehrt man hoffnungsvoll zu Allah zurück. Antwort 2: Nach einem Fehler gibt es keinen Weg zurück. Antwort 3: Fehler sind egal und brauchen keine Tawbah. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/016872105bd961f6581dbbee4b3342c4b3e1c9ed.mp3",
+      "sha256": "d81a856873e8111db6d22a357ff9e1b1af8a3e4d304b6b9aa4f8e9d6e2c25136",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Du bekommst etwas Gutes, das du gebraucht hast. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Allahs Gaben erkennt man an und dankt Ihm dafür. Antwort 2: Gaben haben nichts mit Dankbarkeit zu tun. Antwort 3: Dankbarkeit bedeutet, mit Gaben anzugeben. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/36c7ec7d2d0006ef11b3ffc9784a0b7935a38594.mp3",
       "sha256": "eafa62eef83e3de175b4dbdb6f8a1d8bdafe5384d623442b5d6a236078d2351c",
@@ -2352,12 +2385,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Vor Hilfsbereitschaft.",
-            "Vor Lernen.",
-            "Wovor warnte Luqmān seinen Sohn besonders?"
-          ]
+          "available": true,
+          "textSha256": "bd5eff76cdf1292b5be0f836d3026980b22100be40eb25cd16ea7e1b15464b38",
+          "mp3Sha256": "c79f29928da773c21f2dc248c47a3b4dd20ae6424851199052eec9989777c748",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8c984107cc90bbf2f95a5dbf1c3392d24de9f2bf.mp3"
         },
         "correct": {
           "available": true,
@@ -2372,13 +2403,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/vTRh2ZkXhF0R0jOplwKS.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Luqmān erklärte, dass Shirk großes Unrecht ist."
-          ]
+          "available": true,
+          "textSha256": "11e7c01e76a8c922d4aa4e0c601ad6e59ebf63e36b4c34b31b350bfa4d7054d4",
+          "mp3Sha256": "57cc8b07c83250c13a62183a18f09db3a1afbd3c774fe8f01f1a8cf78bbce59d",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/c8925042483752a2c9cc56c275ff760dd4df29fc.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-071": {
       "ageBand": "7-8",
@@ -3749,7 +3780,6 @@
           "available": false,
           "missingOriginalSegments": [
             "Als Beschützer.",
-            "Als Feind.",
             "Als Vorbild.",
             "Wie sollen Menschen Shayṭān nach Qurʾān 35:6 behandeln?"
           ]
@@ -4599,8 +4629,7 @@
           "missingOriginalSegments": [
             "Nur zum Fisch.",
             "Nur zum Vogel.",
-            "Zu welchem Tier lädt Qurʾān 88:17 besonders zum Nachdenken ein?",
-            "Zum Kamel."
+            "Zu welchem Tier lädt Qurʾān 88:17 besonders zum Nachdenken ein?"
           ]
         },
         "correct": {
@@ -10555,13 +10584,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Du hast einen Fehler gemacht und bereust ihn. Welcher Grundsatz hilft dir hier am besten?",
-            "Fehler sind egal und brauchen keine Tawbah.",
-            "Nach einem Fehler gibt es keinen Weg zurück.",
-            "Nach einem Fehler kehrt man hoffnungsvoll zu Allah zurück."
-          ]
+          "available": true,
+          "textSha256": "84ea81b000c5ef07b4f676804c80b3fa659cdc6664d34b53c4fd3a97c3aad19e",
+          "mp3Sha256": "d81a856873e8111db6d22a357ff9e1b1af8a3e4d304b6b9aa4f8e9d6e2c25136",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/016872105bd961f6581dbbee4b3342c4b3e1c9ed.mp3"
         },
         "correct": {
           "available": true,
@@ -10582,7 +10608,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/9a53e441b0b8da313adf4de4dc1cd1b356ce69f1.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-817": {
       "ageBand": "9-10",
