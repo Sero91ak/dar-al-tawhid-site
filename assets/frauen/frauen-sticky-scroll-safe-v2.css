@@ -1,0 +1,39 @@
+/* DAR_FRAUEN_STICKY_SCROLL_SAFE_V2
+ * OPT-IN PROTOTYPE ONLY. No actual Test or Visitor HTML references this file.
+ * Existing Frauen Hero imagery, crop, text and search appearance are immutable.
+ * Sticky siblings, without DOM reparenting, scroll locking or glass overlays.
+ */
+html[data-dar-frauen-scroll-safe="1"] body.is-frauen-route{
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+}
+html[data-dar-frauen-scroll-safe="1"] body.is-frauen-route #appView.view,
+html[data-dar-frauen-scroll-safe="1"] body.is-frauen-route #appView{
+  /* overflow-x:hidden implicitly computes overflow-y:auto in WebKit,
+     creating a non-scrolling sticky ancestor. clip retains visible y-axis. */
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+}
+html[data-dar-frauen-scroll-safe="1"] body.is-frauen-route #appView .dar-frauen-production-root{
+  overflow:visible!important;
+}
+html[data-dar-frauen-scroll-safe="1"] body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list) > .frauen-library-hero{
+  position:sticky!important;
+  top:0!important;
+  z-index:71!important;
+  /* Do NOT alter image URL, size, margins, heights or pseudo-elements. */
+}
+html[data-dar-frauen-scroll-safe="1"] body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list) > :is(.frauen-library-search-wrap,.frauen-library-list-controls){
+  position:sticky!important;
+  top:var(--dar-frauen-search-sticky-top,0px)!important;
+  z-index:72!important;
+  /* The existing search card and negative overlap margin remain untouched. */
+}
+@media(max-height:480px) and (orientation:landscape){
+  /* Avoid pinning a tall image plus search that consumes the entire screen.
+     The regular accessible scroll path remains the fallback. */
+  html[data-dar-frauen-scroll-safe="1"] body.is-frauen-route #appView :is(.frauen-library-shell,.frauen-library-list) > :is(.frauen-library-hero,.frauen-library-search-wrap,.frauen-library-list-controls){
+    position:relative!important;
+    top:auto!important;
+  }
+}

@@ -1,0 +1,35 @@
+name: Frauen Scroll Reset Safe V2 Candidate
+on:
+  pull_request:
+    paths:
+      - 'assets/frauen/frauen-live-adapter-scroll-safe-v2.js'
+      - 'assets/frauen/frauen-sticky-scroll-safe-v2.css'
+      - 'assets/frauen/frauen-sticky-scroll-safe-v2.js'
+      - 'scripts/verify-frauen-scroll-safe-v2.cjs'
+      - '.github/workflows/check-frauen-scroll-safe-v2.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install Chromium and WebKit
+        run: |
+          npm install --no-save --ignore-scripts playwright
+          npx playwright install --with-deps chromium webkit
+      - name: Reproduce historical scroll reset and verify candidate (no live changes)
+        run: node scripts/verify-frauen-scroll-safe-v2.cjs
+      - name: Upload visual browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: frauen-scroll-safe-v2-candidate-evidence
+          path: frauen-scroll-safe-v2-evidence/
+          retention-days: 7
+          if-no-files-found: warn
