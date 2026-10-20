@@ -30,30 +30,30 @@
     },
     "7-8": {
       "questions": 150,
-      "completeFourPartQuestions": 65,
+      "completeFourPartQuestions": 67,
       "availableParts": {
-        "question": 71,
+        "question": 73,
         "correct": 150,
         "retry": 150,
-        "explanation": 82
+        "explanation": 83
       },
       "missingParts": {
-        "explanation": 68,
-        "question": 79
+        "explanation": 67,
+        "question": 77
       }
     },
     "9-10": {
       "questions": 150,
-      "completeFourPartQuestions": 73,
+      "completeFourPartQuestions": 75,
       "availableParts": {
-        "question": 80,
+        "question": 82,
         "correct": 150,
         "retry": 150,
-        "explanation": 75
+        "explanation": 77
       },
       "missingParts": {
-        "explanation": 75,
-        "question": 70
+        "explanation": 73,
+        "question": 68
       }
     }
   },
@@ -3530,6 +3530,18 @@
     "kids-quiz-089": {
       "ageBand": "9-10",
       "parts": {
+        "question": {
+          "spokenTextSha256": "37630d8835646635c6c466f811c9e63efe1dd705c2561918d879cd45fcf72194",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/3f13813e6b4d483dbef8c6b069992baa1be51ac8.mp3",
+          "sha256": "c7080db0fbc2f93df880b31feec46f3613d5d1f2fd328f0fc05930cadb75a165",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 209709,
+          "durationSeconds": 17.448,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
+        },
         "correct": {
           "spokenTextSha256": "0a7c240cf8165a3f4aa060dd508dc187100adb0865bb639d6804d4d306dc3fb2",
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/1199b51bb80a82c0a6dfe67a6a4aabaf.mp3",
@@ -3553,13 +3565,22 @@
           "audioListeningApproved": false,
           "qaApproval": "pending-human-auditory-review",
           "reviewOnly": true
+        },
+        "explanation": {
+          "spokenTextSha256": "29406414e0a5ebc5fe8beb3f2942eec2c6d89290bf12b7ad47fef76f7de9d6fb",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/87b3657b950dd55f42099d45fa2bff5f8bfca73b.mp3",
+          "sha256": "4f02c63257e4e49dd6f6b41d60e508bea8e85e0a806c7ccb8264fcd7b332e457",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 106317,
+          "durationSeconds": 8.832,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
         }
       },
-      "missing": {
-        "question": "unavailable-original-v4-mp3",
-        "explanation": "unavailable-original-v4-mp3"
-      },
-      "fourPartTechnicallyReady": false,
+      "missing": {},
+      "fourPartTechnicallyReady": true,
       "humanListeningApproved": false,
       "publicPlaybackAuthorized": false
     },
@@ -5245,6 +5266,18 @@
     "kids-quiz-139": {
       "ageBand": "9-10",
       "parts": {
+        "question": {
+          "spokenTextSha256": "f582357412947b0a223086eafab46c1fe4c25b547d39aed48e11b2280204fd99",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/1cdaa622410219bfec57231f1ba89314040fca82.mp3",
+          "sha256": "09ebc49bced0a9e78fa5bcc7a3e7b7aaa9c94e99aacd4b9870de9c4a2098a819",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 207693,
+          "durationSeconds": 17.28,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
+        },
         "correct": {
           "spokenTextSha256": "0a7c240cf8165a3f4aa060dd508dc187100adb0865bb639d6804d4d306dc3fb2",
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/1199b51bb80a82c0a6dfe67a6a4aabaf.mp3",
@@ -5268,13 +5301,22 @@
           "audioListeningApproved": false,
           "qaApproval": "pending-human-auditory-review",
           "reviewOnly": true
+        },
+        "explanation": {
+          "spokenTextSha256": "55d8de7439086d358bace3a9215d2c10d7f24ed2e6eb600750e8e6b22c1a1513",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/6f5809ca577add3e39a137d2c59adf7749775ac3.mp3",
+          "sha256": "a6b9cc8db2b24ff52ee6fba205ce2a34dc712a5a8c6f66dd167d0f7e3e2dc3f6",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 87021,
+          "durationSeconds": 7.224,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
         }
       },
-      "missing": {
-        "question": "unavailable-original-v4-mp3",
-        "explanation": "unavailable-original-v4-mp3"
-      },
-      "fourPartTechnicallyReady": false,
+      "missing": {},
+      "fourPartTechnicallyReady": true,
       "humanListeningApproved": false,
       "publicPlaybackAuthorized": false
     },
@@ -10329,6 +10371,18 @@
     "kids-quiz-320": {
       "ageBand": "7-8",
       "parts": {
+        "question": {
+          "spokenTextSha256": "dcf6e082e9e2f7013b653079b1a21b7847c310da8a39dbe28b344fa137e88889",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ff9b9ccb353a7cb6d14795b82a2890c10ab2bd20.mp3",
+          "sha256": "b37378afccc96cb0f9f1baa507f5ccacf534d0aacb60467c0fe0b233643743b1",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 245133,
+          "durationSeconds": 20.4,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
+        },
         "correct": {
           "spokenTextSha256": "361184168361ae774368033336fb7d63cc30b8addddbf1e6c022b7d9a30ea1e2",
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/N6KUNJZuktlS1uTmRNPI.mp3",
@@ -10352,13 +10406,22 @@
           "audioListeningApproved": false,
           "qaApproval": "pending-human-auditory-review",
           "reviewOnly": true
+        },
+        "explanation": {
+          "spokenTextSha256": "a51def2628fc2b6496e87fb7d01ab6220404136d5feb46ac4d71ed3e1c2f1b1a",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/3476f279d40fac125e1928ee1346bd4c0e59bceb.mp3",
+          "sha256": "70a636b3699617828af6481e215077a55cced5ab04ce1e0475689ee3a0b8f383",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 78381,
+          "durationSeconds": 6.504,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
         }
       },
-      "missing": {
-        "question": "unavailable-original-v4-mp3",
-        "explanation": "unavailable-original-v4-mp3"
-      },
-      "fourPartTechnicallyReady": false,
+      "missing": {},
+      "fourPartTechnicallyReady": true,
       "humanListeningApproved": false,
       "publicPlaybackAuthorized": false
     },
@@ -17617,6 +17680,18 @@
     "kids-quiz-725": {
       "ageBand": "7-8",
       "parts": {
+        "question": {
+          "spokenTextSha256": "6086836ae5d4164d1480e030b3139b8c51e5bda5e56487353dadb5105dff5e5e",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/4103ecaebda8beef2d10cbbc45ab934ce725defd.mp3",
+          "sha256": "46c5b2bca307fbd051398150ec140c541994706f92e236fc919c0c51f7210db3",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 273069,
+          "durationSeconds": 22.728,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
+        },
         "correct": {
           "spokenTextSha256": "361184168361ae774368033336fb7d63cc30b8addddbf1e6c022b7d9a30ea1e2",
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/N6KUNJZuktlS1uTmRNPI.mp3",
@@ -17654,10 +17729,8 @@
           "reviewOnly": true
         }
       },
-      "missing": {
-        "question": "unavailable-original-v4-mp3"
-      },
-      "fourPartTechnicallyReady": false,
+      "missing": {},
+      "fourPartTechnicallyReady": true,
       "humanListeningApproved": false,
       "publicPlaybackAuthorized": false
     },
