@@ -1033,6 +1033,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Überlege kurz, bevor du dich entscheidest. Ein Kind sagt, dass es einen Spitznamen nicht mag. Was passt am besten? Antwort 1: Den Spitznamen nicht mehr benutzen. Antwort 2: Ihn extra häufiger benutzen. Antwort 3: Andere auffordern, ihn auch zu sagen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/84f392dbb6432d71309c453882ac3c9dcf23448b.mp3",
+      "sha256": "6931e902af05ae51ba658bca5f8eaa6e25ddd37b0eab9a32b58902d208ec97d9",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Das merken wir uns: Allah verbietet beleidigende Spitznamen.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/5804d859a3c6f9b968df5e53e753a222b04c447e.mp3",
       "sha256": "640475b26ac830f551a4c57a8bed8c1e322c3037b4d649b53d58902d9d8d1f27",
@@ -1564,6 +1575,28 @@
     "Was sollen Gläubige tun, wenn zwei Gruppen von Gläubigen Streit haben? Antwort 1: Zwischen ihnen Frieden stiften. Antwort 2: Den Streit verbreiten. Antwort 3: Eine Seite verspotten. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/67b4cf4bfa0a5d8ec432fc7f1f97a53c1a9c4c8e.mp3",
       "sha256": "2442038bc94ae5c190159dcbf9a78fd5c2f69fa02e0456ce22de9728cc6720f2",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Was lehrt Qurʾān 3:159 nach einer entschlossenen Entscheidung? Antwort 1: Auf Allah vertrauen. Antwort 2: Immer wieder aus Angst alles abbrechen. Antwort 3: Nur auf die eigene Stärke vertrauen. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/7a48213bb207884f78cc4a52ca12bdd40730bab8.mp3",
+      "sha256": "022713df5c0ee451e5513f8df65bc9d216a0982ee88e2b9c8bb92279969a93b4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Nach Beratung und Entschluss befiehlt Allah Tawakkul auf Ihn.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/f477e1ec382a721af18897b5aaedf87aa4d40fc8.mp3",
+      "sha256": "08b9de95924e58041ee12b6ce72031bc34a1689fabbfffc9d10c7424b734c3ee",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -6553,13 +6586,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Andere auffordern, ihn auch zu sagen.",
-            "Den Spitznamen nicht mehr benutzen.",
-            "Ein Kind sagt, dass es einen Spitznamen nicht mag. Was passt am besten?",
-            "Ihn extra häufiger benutzen."
-          ]
+          "available": true,
+          "textSha256": "6ea77f7a8c49f1eb33a0c465e43af715fbe7671c208980954c0a5e369ef7687d",
+          "mp3Sha256": "6931e902af05ae51ba658bca5f8eaa6e25ddd37b0eab9a32b58902d208ec97d9",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/84f392dbb6432d71309c453882ac3c9dcf23448b.mp3"
         },
         "correct": {
           "available": true,
@@ -6580,7 +6610,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/5804d859a3c6f9b968df5e53e753a222b04c447e.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-749": {
       "ageBand": "7-8",
@@ -7627,13 +7657,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Auf Allah vertrauen.",
-            "Immer wieder aus Angst alles abbrechen.",
-            "Nur auf die eigene Stärke vertrauen.",
-            "Was lehrt Qurʾān 3:159 nach einer entschlossenen Entscheidung?"
-          ]
+          "available": true,
+          "textSha256": "52b0ea523d2ac006fd598ff5aa13cc473171b98291148c2d0af3d7569507ae7a",
+          "mp3Sha256": "022713df5c0ee451e5513f8df65bc9d216a0982ee88e2b9c8bb92279969a93b4",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/7a48213bb207884f78cc4a52ca12bdd40730bab8.mp3"
         },
         "correct": {
           "available": true,
@@ -7648,13 +7675,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/29298414b8a2ce9d77963db1a61b6803.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Nach Beratung und Entschluss befiehlt Allah Tawakkul auf Ihn."
-          ]
+          "available": true,
+          "textSha256": "5dee5a82768cafd12132afef46870d9768001fb0c3c4a2e9b1490432695f6cbc",
+          "mp3Sha256": "08b9de95924e58041ee12b6ce72031bc34a1689fabbfffc9d10c7424b734c3ee",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/f477e1ec382a721af18897b5aaedf87aa4d40fc8.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-087": {
       "ageBand": "9-10",
