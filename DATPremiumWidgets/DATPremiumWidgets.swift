@@ -1210,13 +1210,21 @@ private struct DATQiblaLargeView: View {
         DATClock.current(entry.snapshot, at: entry.date)?.name
     }
 
+    private var countdownProgress: Double {
+        let events = DATClock.events(entry.snapshot, relativeTo: entry.date)
+        guard let next = DATClock.next(entry.snapshot, at: entry.date),
+              let start = events.last(where: { !$0.name.lowercased().contains("sunrise") && !$0.name.lowercased().contains("sonnenaufgang") && $0.when <= entry.date })?.when,
+              next.when > start else { return 0 }
+        return min(1, max(0, entry.date.timeIntervalSince(start) / next.when.timeIntervalSince(start)))
+    }
+
     private var prayerRows: [[DATPrayer]] {
         let visible = Array(entry.snapshot.prayers.prefix(6))
         return [Array(visible.prefix(3)), Array(visible.dropFirst(3).prefix(3))]
     }
 
     @ViewBuilder
-    private func prayerCell(_ prayer: DATPrayer) -> some View {
+    private func prayerCell(_ prayer: DATPrayer, isLast: Bool) -> some View {
         let isNext = DATPrayerName.matches(prayer.name, nextName)
         let isCurrent = !isNext && currentName.map { DATPrayerName.matches(prayer.name, $0) } == true
         VStack(spacing: 2) {
@@ -1242,17 +1250,25 @@ private struct DATQiblaLargeView: View {
                 RoundedRectangle(cornerRadius: 8).stroke(p.accent.opacity(0.38), lineWidth: 0.7)
             }
         }
+        .overlay(alignment: .trailing) {
+            if !isLast {
+                Rectangle()
+                    .fill(p.calendarTint.opacity(0.42))
+                    .frame(width: 0.7, height: 26)
+                    .offset(x: 3)
+            }
+        }
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 6) {
+        VStack(alignment: .leading, spacing: 5) {
             HStack(alignment: .center, spacing: 8) {
                 Image("BrandMark")
                     .resizable()
                     .interpolation(.high)
                     .datFullColorWidgetImage()
                     .scaledToFit()
-                    .frame(width: 42, height: 42)
+                    .frame(width: 36, height: 36)
                     .accessibilityHidden(true)
                 VStack(alignment: .leading, spacing: 0) {
                     Text("DĀR AL TAWḤĪD")
@@ -1288,6 +1304,7 @@ private struct DATQiblaLargeView: View {
                     .foregroundStyle(p.hijriTint)
                 }
             }
+            .padding(.top, 2)
             HStack {
                 if let qiblaURL = URL(string: "daraltawhid://qibla") {
                     Link(destination: qiblaURL) {
@@ -1348,60 +1365,52 @@ private struct DATQiblaLargeView: View {
             VStack(spacing: 4) {
                 ForEach(Array(prayerRows.enumerated()), id: \.offset) { _, row in
                     HStack(spacing: 4) {
-                        ForEach(Array(row.enumerated()), id: \.offset) { _, prayer in
-                            prayerCell(prayer)
+                        ForEach(Array(row.enumerated()), id: \.offset) { index, prayer in
+                            prayerCell(prayer, isLast: index == row.count - 1)
                         }
                     }
                 }
             }
 
             DATRule(color: p.divider.opacity(0.75))
-            HStack(alignment: .center, spacing: 8) {
-                VStack(alignment: .leading, spacing: 1) {
-                    Text("NÄCHSTES GEBET")
-                        .font(.system(size: 9, weight: .bold, design: .rounded))
-                        .tracking(0.9)
-                        .foregroundStyle(p.muted)
-                    Text(DATPrayerName.display(DATClock.nextName(entry.snapshot, at: entry.date)))
-                        .font(.system(size: 22, weight: .semibold, design: .serif))
-                        .foregroundStyle(p.accent)
+            VStack(alignment: .leading, spacing: 3) {
+                HStack(alignment: .lastTextBaseline, spacing: 8) {
+                    VStack(alignment: .leading, spacing: 0) {
+                        Text("NÄCHSTES GEBET")
+                            .font(.system(size: 8.5, weight: .bold, design: .rounded))
+                            .tracking(0.8)
+                            .foregroundStyle(p.muted)
+                        Text(DATPrayerName.display(DATClock.nextName(entry.snapshot, at: entry.date)))
+                            .font(.system(size: 20, weight: .semibold, design: .serif))
+                            .foregroundStyle(p.accent)
+                            .lineLimit(1)
+                    }
+                    Spacer(minLength: 3)
+                    HStack(alignment: .lastTextBaseline, spacing: 7) {
+                        Text(DATClock.nextTime(entry.snapshot, at: entry.date))
+                            .font(.system(size: 23, weight: .bold, design: .rounded))
+                            .monospacedDigit()
+                            .foregroundStyle(p.calendarTint)
+                        DATMinuteCountdown(snapshot: entry.snapshot, date: entry.date, fontSize: 11)
+                            .foregroundStyle(p.calendarTint)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 3)
+                            .background(p.calendarTint.opacity(0.11), in: Capsule())
+                            .overlay(Capsule().stroke(p.calendarTint.opacity(0.48), lineWidth: 0.7))
+                    }
                 }
-                Spacer(minLength: 4)
-                VStack(alignment: .trailing, spacing: 2) {
-                    Text(DATClock.nextTime(entry.snapshot, at: entry.date))
-                        .font(.system(size: 25, weight: .bold, design: .rounded))
-                        .monospacedDigit()
-                        .foregroundStyle(p.calendarTint)
-                    DATMinuteCountdown(snapshot: entry.snapshot, date: entry.date, fontSize: 12)
-                        .foregroundStyle(p.calendarTint)
-                        .padding(.horizontal, 7)
-                        .padding(.vertical, 3)
-                        .background(p.calendarTint.opacity(0.13), in: Capsule())
-                        .overlay(Capsule().stroke(p.calendarTint.opacity(0.55), lineWidth: 0.7))
-                }
-            }
-            .padding(.horizontal, 8)
-            .padding(.vertical, 6)
-            .background {
-                RoundedRectangle(cornerRadius: 11)
-                    .fill(
-                        LinearGradient(
-                            colors: [p.bg.opacity(0.18), p.calendarTint.opacity(0.14), p.bg.opacity(0.28)],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    )
-            }
-            .overlay(alignment: .bottom) {
                 GeometryReader { proxy in
-                    Capsule()
-                        .fill(p.calendarTint.opacity(0.78))
-                        .frame(width: proxy.size.width * 0.55, height: 2)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 8)
+                    ZStack(alignment: .leading) {
+                        Rectangle().fill(p.calendarTint.opacity(0.28)).frame(height: 0.8)
+                        Rectangle()
+                            .fill(LinearGradient(colors: [p.calendarTint.opacity(0.35), p.calendarTint, p.calendarTint.opacity(0.72)], startPoint: .leading, endPoint: .trailing))
+                            .frame(width: proxy.size.width * countdownProgress, height: 1.4)
+                        Circle().fill(p.calendarTint).frame(width: 4, height: 4).offset(x: max(0, proxy.size.width * countdownProgress - 2))
+                    }
                 }
-                .frame(height: 2)
+                .frame(height: 5)
             }
+            .padding(.top, 1)
 
         }
         .padding(14)
