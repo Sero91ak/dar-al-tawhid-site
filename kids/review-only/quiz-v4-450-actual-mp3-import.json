@@ -44,16 +44,16 @@
     },
     "9-10": {
       "questions": 150,
-      "completeFourPartQuestions": 16,
+      "completeFourPartQuestions": 19,
       "availableParts": {
-        "question": 19,
+        "question": 22,
         "correct": 150,
         "retry": 150,
         "explanation": 21
       },
       "missingParts": {
         "explanation": 129,
-        "question": 131
+        "question": 128
       }
     }
   },
@@ -17635,6 +17635,18 @@
     "kids-quiz-861": {
       "ageBand": "9-10",
       "parts": {
+        "question": {
+          "spokenTextSha256": "48257faa1494707dbb9e2fc1f3132078a0be59f7abc1d6669c3c606a06b310d8",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/7a3fedf05e539241f8d7d8dac3dd5ddc0cfb21ce.mp3",
+          "sha256": "cf674aacaf1a59a6ed1b7cf6c38ef533fab908df8500a5475a6e6169f07ca8b4",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 280845,
+          "durationSeconds": 23.376,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
+        },
         "correct": {
           "spokenTextSha256": "b42843800733238cc7908203dcaf9829c8e1724fdc8fcf133e2bdcfee55e4260",
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/9c07f20e03175709966519f34ed00db1.mp3",
@@ -17672,10 +17684,8 @@
           "reviewOnly": true
         }
       },
-      "missing": {
-        "question": "unavailable-original-v4-mp3"
-      },
-      "fourPartTechnicallyReady": false,
+      "missing": {},
+      "fourPartTechnicallyReady": true,
       "humanListeningApproved": false,
       "publicPlaybackAuthorized": false
     },
@@ -17991,6 +18001,18 @@
     "kids-quiz-883": {
       "ageBand": "9-10",
       "parts": {
+        "question": {
+          "spokenTextSha256": "20da14558b5d4dfc7b14762032f3385308d933bb0b48d47a98c17de9a11aace7",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/24c78ab5c81b2f1ce06deafea40cbc8241e154b8.mp3",
+          "sha256": "121c200863f2c3988fd0f93556189e6f0db1eac7de7b2a2bcf7f977257080e69",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 283725,
+          "durationSeconds": 23.616,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
+        },
         "correct": {
           "spokenTextSha256": "7d401de35745d9593aa5afa5560f2ce8e06035907087348eb0c5308ce0a6a0e4",
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/9e9faf9f193dc49d01a4157ac6dd0bb5.mp3",
@@ -18028,10 +18050,8 @@
           "reviewOnly": true
         }
       },
-      "missing": {
-        "question": "unavailable-original-v4-mp3"
-      },
-      "fourPartTechnicallyReady": false,
+      "missing": {},
+      "fourPartTechnicallyReady": true,
       "humanListeningApproved": false,
       "publicPlaybackAuthorized": false
     },
@@ -18095,6 +18115,18 @@
     "kids-quiz-887": {
       "ageBand": "9-10",
       "parts": {
+        "question": {
+          "spokenTextSha256": "56da187bcea7b6fa25ee91039ff9045a57106f244ccd071041c97a1f457c2894",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/b7728992c94edcea0a7b5e527b8b2222bca1f5f6.mp3",
+          "sha256": "bbbf1518f6da56e6327850ca7d79819530b0d12e63f2e37f0fade3def0be646a",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 277965,
+          "durationSeconds": 23.136,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
+        },
         "correct": {
           "spokenTextSha256": "48c872cd4f784450e8af59bc60079477ab3a0ad415da09a845a169bf68ca3b88",
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/716b0b1ceff3b5f6e17ee99b992236fe.mp3",
@@ -18132,10 +18164,8 @@
           "reviewOnly": true
         }
       },
-      "missing": {
-        "question": "unavailable-original-v4-mp3"
-      },
-      "fourPartTechnicallyReady": false,
+      "missing": {},
+      "fourPartTechnicallyReady": true,
       "humanListeningApproved": false,
       "publicPlaybackAuthorized": false
     },

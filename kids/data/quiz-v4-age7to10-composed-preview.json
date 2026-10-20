@@ -956,6 +956,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Eine Aufgabe ist schwierig und klappt nicht sofort. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Bei Schwierigkeiten helfen Ṣabr und Ṣalāh, richtig weiterzumachen. Antwort 2: Bei Schwierigkeiten soll man sofort aufgeben. Antwort 3: Geduld bedeutet, nichts mehr zu versuchen. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/7a3fedf05e539241f8d7d8dac3dd5ddc0cfb21ce.mp3",
+      "sha256": "cf674aacaf1a59a6ed1b7cf6c38ef533fab908df8500a5475a6e6169f07ca8b4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Etwas Wichtiges klappt schon länger nicht. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Ein Gläubiger verliert die Hoffnung auf Allahs Hilfe nicht. Antwort 2: Wenn etwas lange dauert, ist jede Hoffnung falsch. Antwort 3: Duʿāʾ ist nur erlaubt, wenn alles sofort klappt. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/41d84fbb0edfd23e4d218204ab9cf46a106d4c72.mp3",
       "sha256": "9deaf435c216148058e44816a1acbdcd39d289c4a6e89902a5e40b00bfe480a3",
@@ -967,9 +978,31 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Eine Aufgabe fühlt sich schwer an und du wirst unsicher. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Allah verlangt von einer Seele nicht mehr, als sie tragen kann. Antwort 2: Allah verlangt grundsätzlich Unmögliches. Antwort 3: Schwierigkeit bedeutet immer, dass man aufgeben darf. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/24c78ab5c81b2f1ce06deafea40cbc8241e154b8.mp3",
+      "sha256": "121c200863f2c3988fd0f93556189e6f0db1eac7de7b2a2bcf7f977257080e69",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Du möchtest eine neue Duʿāʾ richtig lernen. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Nützliches Wissen ist etwas, worum wir Allah bitten und wofür wir lernen. Antwort 2: Man sollte nie mehr lernen wollen. Antwort 3: Wissen wächst nur durch Angeben. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8bb249353adee9af0ddc866d2eaba2fb265e89dc.mp3",
       "sha256": "128e8bad26d66609de63f1cbedc901e1126c9d6c13107b17adf8bcf486f94e8b",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Du hast eine islamische Frage und kennst die Antwort nicht. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Bei einer islamischen Frage fragt man zuverlässige Menschen mit Wissen. Antwort 2: Man sollte bei Unwissen einfach raten. Antwort 3: Jede beliebige Meinung ist gleich zuverlässig. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/b7728992c94edcea0a7b5e527b8b2222bca1f5f6.mp3",
+      "sha256": "bbbf1518f6da56e6327850ca7d79819530b0d12e63f2e37f0fade3def0be646a",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -1117,9 +1150,7 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Allah und Seinem Gesandten ﷺ.",
-            "Jeder Idee im Internet.",
-            "Nur der eigenen Meinung."
+            "Allah und Seinem Gesandten ﷺ."
           ]
         },
         "correct": {
@@ -10244,13 +10275,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Bei Schwierigkeiten helfen Ṣabr und Ṣalāh, richtig weiterzumachen.",
-            "Bei Schwierigkeiten soll man sofort aufgeben.",
-            "Eine Aufgabe ist schwierig und klappt nicht sofort. Welcher Grundsatz hilft dir hier am besten?",
-            "Geduld bedeutet, nichts mehr zu versuchen."
-          ]
+          "available": true,
+          "textSha256": "48257faa1494707dbb9e2fc1f3132078a0be59f7abc1d6669c3c606a06b310d8",
+          "mp3Sha256": "cf674aacaf1a59a6ed1b7cf6c38ef533fab908df8500a5475a6e6169f07ca8b4",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/7a3fedf05e539241f8d7d8dac3dd5ddc0cfb21ce.mp3"
         },
         "correct": {
           "available": true,
@@ -10271,7 +10299,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a5d7435177a33c138524c7fd74386f6b2f62651f.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-863": {
       "ageBand": "9-10",
@@ -10538,13 +10566,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah verlangt grundsätzlich Unmögliches.",
-            "Allah verlangt von einer Seele nicht mehr, als sie tragen kann.",
-            "Eine Aufgabe fühlt sich schwer an und du wirst unsicher. Welcher Grundsatz hilft dir hier am besten?",
-            "Schwierigkeit bedeutet immer, dass man aufgeben darf."
-          ]
+          "available": true,
+          "textSha256": "20da14558b5d4dfc7b14762032f3385308d933bb0b48d47a98c17de9a11aace7",
+          "mp3Sha256": "121c200863f2c3988fd0f93556189e6f0db1eac7de7b2a2bcf7f977257080e69",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/24c78ab5c81b2f1ce06deafea40cbc8241e154b8.mp3"
         },
         "correct": {
           "available": true,
@@ -10565,7 +10590,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8efd822f57eba877e7510a930b5557303f4884e6.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-885": {
       "ageBand": "9-10",
@@ -10601,13 +10626,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Bei einer islamischen Frage fragt man zuverlässige Menschen mit Wissen.",
-            "Du hast eine islamische Frage und kennst die Antwort nicht. Welcher Grundsatz hilft dir hier am besten?",
-            "Jede beliebige Meinung ist gleich zuverlässig.",
-            "Man sollte bei Unwissen einfach raten."
-          ]
+          "available": true,
+          "textSha256": "56da187bcea7b6fa25ee91039ff9045a57106f244ccd071041c97a1f457c2894",
+          "mp3Sha256": "bbbf1518f6da56e6327850ca7d79819530b0d12e63f2e37f0fade3def0be646a",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/b7728992c94edcea0a7b5e527b8b2222bca1f5f6.mp3"
         },
         "correct": {
           "available": true,
@@ -10628,7 +10650,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/c1b9effc6e5a929b59e70ada940703470e148294.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-889": {
       "ageBand": "9-10",
