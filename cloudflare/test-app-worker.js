@@ -532,8 +532,13 @@ async function finalizeDarTestHomeV1193(asset) {
     const smartSrc = '<script defer id="darTestSmartHomeV3" src="/test/assets/dar-home-library-v1194.js?v=20261020-smart-v4"></script>';
     html = html.includes("</body>") ? html.replace("</body>", smartSrc + "\n</body>") : html + smartSrc;
   }
+  // HTML_PREVIEW_PARITY_V1: render HTML V3 layout over native Test home only.
+  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261020-v1"></script>';
+  if (!html.includes('id="darTestHomeHtmlParityV1"')) {
+    html = html.includes("</body>") ? html.replace("</body>", parityScript + "\n</body>") : html + parityScript;
+  }
   const headers = new Headers(asset.headers);
-  headers.set("X-DAR-Test-Home", "smart-v4-20261020");
+  headers.set("X-DAR-Test-Home", "html-parity-v1-20261020");
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");
   headers.delete("Content-Length");
