@@ -5,12 +5,12 @@
   "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "selectedQuestions": 450,
   "previouslyPaidMissingFlowOriginals": 9,
-  "alreadySavedDistinctV4TextClips": 416,
-  "uniqueTrulyNewTextFragments": 1350,
-  "trulyNewTextCodepoints": 63911,
-  "newTextCodepointsBeforeCrossAgeDedup": 65408,
-  "codepointsSavedByCrossAgeReuse": 1497,
-  "crossAgeSharedNewTextFragments": 28,
+  "alreadySavedDistinctV4TextClips": 436,
+  "uniqueTrulyNewTextFragments": 1330,
+  "trulyNewTextCodepoints": 63355,
+  "newTextCodepointsBeforeCrossAgeDedup": 64810,
+  "codepointsSavedByCrossAgeReuse": 1455,
+  "crossAgeSharedNewTextFragments": 25,
   "byAge": {
     "4-6": {
       "question": {
@@ -38,9 +38,9 @@
     },
     "7-8": {
       "question": {
-        "uniqueNewSegments": 548,
-        "newTextCodepoints": 19487,
-        "newTextAssignments": 554
+        "uniqueNewSegments": 536,
+        "newTextCodepoints": 19256,
+        "newTextAssignments": 539
       },
       "correct": {
         "uniqueNewSegments": 0,
@@ -53,18 +53,18 @@
         "newTextAssignments": 0
       },
       "explanation": {
-        "uniqueNewSegments": 132,
-        "newTextCodepoints": 9220,
-        "newTextAssignments": 132
+        "uniqueNewSegments": 131,
+        "newTextCodepoints": 9163,
+        "newTextAssignments": 131
       },
-      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 680,
-      "newCodepointsWithoutCrossAgeDedupe": 28707
+      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 667,
+      "newCodepointsWithoutCrossAgeDedupe": 28419
     },
     "9-10": {
       "question": {
-        "uniqueNewSegments": 560,
-        "newTextCodepoints": 25319,
-        "newTextAssignments": 563
+        "uniqueNewSegments": 552,
+        "newTextCodepoints": 25152,
+        "newTextAssignments": 555
       },
       "correct": {
         "uniqueNewSegments": 0,
@@ -77,12 +77,12 @@
         "newTextAssignments": 0
       },
       "explanation": {
-        "uniqueNewSegments": 138,
-        "newTextCodepoints": 11382,
-        "newTextAssignments": 138
+        "uniqueNewSegments": 136,
+        "newTextCodepoints": 11239,
+        "newTextAssignments": 136
       },
-      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 698,
-      "newCodepointsWithoutCrossAgeDedupe": 36701
+      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 688,
+      "newCodepointsWithoutCrossAgeDedupe": 36391
     }
   },
   "newSpeechNeededForAge4to6": false,
@@ -90,8 +90,8 @@
   "originalForecastNotAnInvoice": true,
   "earlierAspirationalBudgetCredits": 27860.0,
   "currentEstimateOverTargetCredits": 51215.79,
-  "derivedForecastCreditsPerNewCodepoint": 1.23728,
-  "approxCodepointCeilingToHitBudgetAtUnchangedForecastRate": 22517,
+  "derivedForecastCreditsPerNewCodepoint": 1.248138,
+  "approxCodepointCeilingToHitBudgetAtUnchangedForecastRate": 22321,
   "approxTextReductionPercentageNeededAtSameRate": 64.8,
   "creditForecastMustBeRecheckedAgainstProviderBilling": true,
   "candidateTextEditsAuthorized": false,
