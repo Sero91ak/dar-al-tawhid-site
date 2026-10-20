@@ -1,0 +1,139 @@
+{
+  "schemaVersion": "1.0",
+  "auditDate": "2026-10-20",
+  "project": "DĀR AL TAWḤĪD – Qurʾān Tadabbur",
+  "branch": "automation/tadabbur-audit-20261020-3-15-3-31",
+  "baseBranch": "main",
+  "baseline": {
+    "catalogEntries": 4702,
+    "totalVerses": 6236,
+    "missing": 1534,
+    "report": "apple-tv/quran/tadabbur/missing-references.report.json",
+    "catalogBlobSha": "4d681a8c452ec1f346c187f9ce6948c6e8c1d494"
+  },
+  "summary": {
+    "newMissingReferencesInspected": 10,
+    "priorCandidateReexamined": 1,
+    "sourcePagesLocated": 11,
+    "fullyAuthenticatedNewEntries": 0,
+    "canonicalEntriesAdded": 0,
+    "canonicalFilesChanged": false,
+    "liveDeployed": false,
+    "workflowRun": false
+  },
+  "qualityPolicy": "This is a source/isnād research audit, not a certified canonical Tafsīr entry. Do not convert page presence into ṣaḥīḥ/ḥasan. Arabic fragments are excerpted from named source, not new fabricated Qurʾān or aḥādīṯ.",
+  "candidates": [
+    {
+      "reference": "3:15",
+      "source": "https://www.islamweb.net/ar/library/content/50/893/",
+      "report": "aṭ-Ṭabarī gives own grammatical explanation and report 6751 via Jābir about Allah's pleasure; no independent full rijāl/ʿilal check of 6751",
+      "arabic": "رِضْوَانِي",
+      "isnad": "Muḥammad ibn Bashshār → Abū Aḥmad az-Zubayrī → Sufyān → Muḥammad ibn al-Munkadir → Jābir (6751)",
+      "status": "open",
+      "next": "Examine marfūʿ/mauqūf status and compare exact Jābir report against early collections; verify individual narrators."
+    },
+    {
+      "reference": "3:16",
+      "source": "https://www.islamweb.net/ar/library/content/50/894/",
+      "report": "The inspected aṭ-Ṭabarī section is primarily his own grammatical/lexical explanation of the duʿāʾ; no separately authenticated early Āṯar isolated.",
+      "status": "open",
+      "next": "Seek Ibn Abī Ḥātim direct early report; do not attribute Ṭabarī's own explanation to Salaf."
+    },
+    {
+      "reference": "3:18",
+      "source": "https://www.islamweb.net/ar/library/content/50/897/",
+      "report": "Reports 6760 (as-Suddī) and 6762 (Muǧāhid) located; 6762 glosses بالقسط as بالعدل; Ibn Abī Naǧīḥ's transmission of Mujāhid's Tafsīr needs an explicit manuscript-mediated hearing caveat.",
+      "arabic": "بالقسط بالعدل",
+      "isnad": "6762: al-Muṯannā → Abū Ḥuḏayfah → Šibl → Ibn Abī Naǧīḥ → Muǧāhid",
+      "status": "open",
+      "next": "Check alternative independent chains and whether a connected ṣaḥīḥ attribution is warranted."
+    },
+    {
+      "reference": "3:20",
+      "source": "https://www.islamweb.net/ar/library/content/50/901/",
+      "report": "aṭ-Ṭabarī gives his own exposition; 6773 is Ibn Isḥāq → Muḥammad ibn Jaʿfar ibn az-Zubayr through Ibn Ḥumayd/Salamah. No completed rijāl/continuity assessment.",
+      "isnad": "Ibn Ḥumayd → Salamah → Ibn Isḥāq → Muḥammad ibn Jaʿfar ibn az-Zubayr",
+      "status": "open",
+      "next": "Check report continuity and corroborating early Tafsīr before using as a canonical attribution."
+    },
+    {
+      "reference": "3:21",
+      "source": "https://www.islamweb.net/ar/library/content/50/904/",
+      "report": "Report 6776 via Ibn Ḥumayd → Salamah → Ibn Isḥāq → Muḥammad ibn Jaʿfar ibn az-Zubayr; text of verse explained by aṭ-Ṭabarī, but report's chain not established.",
+      "isnad": "Ibn Ḥumayd → Salamah → Ibn Isḥāq → Muḥammad ibn Jaʿfar ibn az-Zubayr",
+      "status": "open",
+      "next": "Seek direct early companion/Tābiʿī Tafsīr with independently checked chain."
+    },
+    {
+      "reference": "3:22",
+      "source": "https://www.islamweb.net/ar/library/content/50/906/",
+      "report": "Only aṭ-Ṭabarī's own explanation of nullified deeds isolated in the inspected section, no authenticated early individual report.",
+      "status": "open",
+      "next": "Check Ibn Abī Ḥātim for directly relevant early attribution."
+    },
+    {
+      "reference": "3:24",
+      "source": "https://www.islamweb.net/ar/library/content/50/908/",
+      "report": "Direct Qatādah Tafsīr report 6786 located with strong early transmission route. Bishr ibn Muʿādh is ṣadūq; Yazīd ibn Zurayʿ is an early reliable transmitter from Saʿīd ibn Abī ʿArūbah before his ikhtilāṭ; Saʿīd is particularly established in Qatādah. Final individual ʿilal and duplicate proof still required before canonical inclusion.",
+      "arabic": "لَنْ تَمَسَّنَا النَّارُ إِلَّا تَحِلَّةَ الْقَسَمِ الَّتِي نَصَبْنَا فِيهَا الْعِجْلَ ... وَغَرَّهُمْ فِي دِينِهِمْ مَا كَانُوا يَفْتَرُونَ",
+      "isnad": "aṭ-Ṭabarī → Bišr ibn Muʿāḏ al-ʿAqadī → Yazīd ibn Zurayʿ → Saʿīd ibn Abī ʿArūbah → Qatādah (6786)",
+      "gradingAssessment": "Promising/likely acceptable to Qatādah; not certified as ṣaḥīḥ until independent final check. Maqtūʿ Tafsīr, not marfūʿ ḥadīṯ.",
+      "status": "needs-final-gate",
+      "next": "Verify exact Arabic in edition, cross-check 6786 against another witness, duplicate/canonical status and validators before adding."
+    },
+    {
+      "reference": "3:25",
+      "source": "https://www.islamweb.net/ar/library/content/50/909/",
+      "report": "The inspected aṭ-Ṭabarī section explains the verse in his own prose; no early individual chain found in that section.",
+      "status": "open",
+      "next": "Seek early companion/Tābiʿī interpretation in Ibn Abī Ḥātim."
+    },
+    {
+      "reference": "3:29",
+      "source": "https://www.islamweb.net/ar/library/content/50/918/",
+      "report": "aṭ-Ṭabarī report 6839 attributes a direct comment to as-Suddī via Mūsā → ʿAmr → Asbāṭ; isnād and transmission history remain unassessed.",
+      "arabic": "أخبرهم أنه يعلم ما أسروا من ذلك وما أعلنوا",
+      "isnad": "Mūsā → ʿAmr → Asbāṭ → as-Suddī (6839)",
+      "status": "open",
+      "next": "Verify narrator identities, chain and wording independently."
+    },
+    {
+      "reference": "3:31",
+      "source": "https://www.islamweb.net/ar/library/content/50/921/",
+      "report": "aṭ-Ṭabarī reports al-Ḥasan's context claim (6845–6846) but explicitly says the alleged occasion lacks an established authentic report; 6849 is Ibn Isḥāq through Ibn Ḥumayd. Do not publish any as verified occasion of revelation.",
+      "arabic": "وأما ما روى الحسن ... فلا خبر به عندنا يصح",
+      "status": "disputed-occasion",
+      "next": "Find a sound direct early explanatory Āṯar not reliant on the rejected sabab report."
+    }
+  ],
+  "followUpOnPreviouslyAudited": {
+    "reference": "3:12",
+    "source": "https://www.islamweb.net/ar/library/content/50/885/",
+    "reports": [
+      6671,
+      6672
+    ],
+    "arabic": "بِئْسَمَا مَهَّدُوا لِأَنْفُسِهِمْ",
+    "isnad": "Both routes converge on Ibn Abī Naǧīḥ → Muǧāhid.",
+    "newCriticalFinding": "Classical rijāl discussion reports Ibn Abī Naǧīḥ did not hear Mujāhid's full Tafsīr directly and received the material through al-Qāsim ibn Abī Bazzah's book. This must be recorded as a transmission caveat; do not label the two routes independently ṣaḥīḥ by merely counting them.",
+    "rijalSource": "https://al-maktaba.org/book/31615/26368",
+    "status": "unresolved-isnad"
+  },
+  "rijalSources": [
+    {
+      "topic": "Ibn Abī Naǧīḥ's Mujāhid Tafsīr transmission",
+      "url": "https://al-maktaba.org/book/31615/26368"
+    },
+    {
+      "topic": "Saʿīd ibn Abī ʿArūbah, his ikhtilāṭ and reliable early student Yazīd ibn Zurayʿ",
+      "url": "https://islamweb.net/ar/library/content/60/1101/"
+    },
+    {
+      "topic": "Bišr ibn Muʿāḏ graded ṣadūq",
+      "url": "https://islamweb.net/ar/library/content/56/48/"
+    }
+  ],
+  "nextCursor": "3:32",
+  "commitScope": "Audit-only, isolated branch. No edits to Kids, push, main catalog, index or deployment.",
+  "releaseGate": "No new canonical entries, no deployment."
+}
