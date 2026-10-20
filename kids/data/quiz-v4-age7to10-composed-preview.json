@@ -593,6 +593,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Überlege kurz, bevor du dich entscheidest. Was antwortet Qurʾān 21:7 auf die Frage nach früheren Gesandten? Antwort 1: Es waren Männer, denen Allah Offenbarung gab. Antwort 2: Es waren Götter. Antwort 3: Es waren Sterne. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/03427328c974985f301eba64b18cbad312d21c1c.mp3",
+      "sha256": "aff9c1199477f03d0d6a66d5f3380224329141274918a62169bac0d301984e64",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah sandte menschliche Gesandte und gab ihnen Offenbarung.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/199b543ca59b9a1684de97d8bae13a2c40830201.mp3",
+      "sha256": "2a3df3a1c07ece04c53b91214fff9d164ba784d857a58edbf691487f18a8d95d",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Überlege kurz, bevor du dich entscheidest. Wovor warnt Qurʾān 49:12 neben Ausspionieren und Nachrede? Antwort 1: Vor vielem schlechten Verdacht. Antwort 2: Vor guter Meinung. Antwort 3: Vor dem Lernen. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/fd600d79912934e37d71d43ef452a71b461a5c98.mp3",
       "sha256": "fa9e17281921abca394b58bc604277673d0b1b47c1f30cfc70bb658a6a852f79",
@@ -1278,6 +1300,17 @@
     "Das merken wir uns: Allah belastet keine Seele über ihr Vermögen hinaus.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/8efd822f57eba877e7510a930b5557303f4884e6.mp3",
       "sha256": "d28eef754799bd486bb319e1f125ba4a1d52e92c357717018b5ae91ff3d45bbc",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Überlege kurz, bevor du dich entscheidest. Du möchtest eine neue Duʿāʾ richtig lernen. Was passt am besten? Antwort 1: Allah um Wissen bitten und aufmerksam üben. Antwort 2: So tun, als könntest du sie schon. Antwort 3: Andere auslachen, die noch lernen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/498e048e43f7b576485ecc3224d3c9227b0f83d9.mp3",
+      "sha256": "23fe5db95f4c4e5d95f802a492d378679e2d3b2ff8ebab643a1efc15c1599a4e",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -4196,11 +4229,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Es waren Männer, denen Allah Offenbarung gab.",
-            "Was antwortet Qurʾān 21:7 auf die Frage nach früheren Gesandten?"
-          ]
+          "available": true,
+          "textSha256": "cf00c96dc1a600f2ac60dbb37b0fa0ed49ff94672d04733950f566525d563a93",
+          "mp3Sha256": "aff9c1199477f03d0d6a66d5f3380224329141274918a62169bac0d301984e64",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/03427328c974985f301eba64b18cbad312d21c1c.mp3"
         },
         "correct": {
           "available": true,
@@ -4215,13 +4247,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/vTRh2ZkXhF0R0jOplwKS.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah sandte menschliche Gesandte und gab ihnen Offenbarung."
-          ]
+          "available": true,
+          "textSha256": "f914793678f5add833d6999d59de56b3df9ab6f83b945368619b6ae38bf0a985",
+          "mp3Sha256": "2a3df3a1c07ece04c53b91214fff9d164ba784d857a58edbf691487f18a8d95d",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/199b543ca59b9a1684de97d8bae13a2c40830201.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-226": {
       "ageBand": "7-8",
@@ -7113,13 +7145,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah um Wissen bitten und aufmerksam üben.",
-            "Andere auslachen, die noch lernen.",
-            "Du möchtest eine neue Duʿāʾ richtig lernen. Was passt am besten?",
-            "So tun, als könntest du sie schon."
-          ]
+          "available": true,
+          "textSha256": "a5d83e8d2ef717d940ecfb447cee50a806038ac25db1aba4d7dcdefdf497f3a4",
+          "mp3Sha256": "23fe5db95f4c4e5d95f802a492d378679e2d3b2ff8ebab643a1efc15c1599a4e",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/498e048e43f7b576485ecc3224d3c9227b0f83d9.mp3"
         },
         "correct": {
           "available": true,
@@ -7140,7 +7169,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/cb00223f9017592a93683b452581525cfb9e4ad7.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-795": {
       "ageBand": "7-8",

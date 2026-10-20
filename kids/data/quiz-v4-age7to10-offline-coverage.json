@@ -6,24 +6,24 @@
   "elevenLabsCreditsSpent": 0,
   "humanListeningApprovalsCreated": 0,
   "originalMP3sCreatedBySynthesis": 0,
-  "sourceOriginalsVerified": 548,
-  "uniqueFullAudioClipsAvailable": 228,
-  "newOfflineComposites": 202,
+  "sourceOriginalsVerified": 557,
+  "uniqueFullAudioClipsAvailable": 231,
+  "newOfflineComposites": 205,
   "byAge": {
     "7-8": {
       "questions": 150,
-      "completeFourPartQuestions": 44,
+      "completeFourPartQuestions": 46,
       "availableFieldCounts": {
-        "question": 48,
+        "question": 50,
         "correct": 150,
         "retry": 150,
-        "explanation": 65
+        "explanation": 66
       },
       "missingFieldCounts": {
-        "question": 102,
+        "question": 100,
         "correct": 0,
         "retry": 0,
-        "explanation": 85
+        "explanation": 84
       }
     },
     "9-10": {
@@ -43,7 +43,7 @@
       }
     }
   },
-  "missingUniqueOriginalSegments": 884,
+  "missingUniqueOriginalSegments": 877,
   "missingOriginalSegmentsByFrequency": [
     {
       "fragment": "Taqwā.",
@@ -78,15 +78,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Den Zorn zurückhalten und verzeihen.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Sofort beleidigen.",
       "requiredByFields": 1
     },
     {
+      "fragment": "Den Zorn zurückhalten und verzeihen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Etwas kaputt machen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Wozu riefen die Gesandten ihre Völker?",
       "requiredByFields": 1
     },
     {
@@ -102,11 +106,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Wozu riefen die Gesandten ihre Völker?",
+      "fragment": "Allah sandte zu jeder Gemeinschaft einen Gesandten mit dem Ruf, Allah zu dienen und Ṭāġūt zu meiden.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah sandte zu jeder Gemeinschaft einen Gesandten mit dem Ruf, Allah zu dienen und Ṭāġūt zu meiden.",
+      "fragment": "Was taten Ibrāhīm und Ismāʿīl gemeinsam?",
       "requiredByFields": 1
     },
     {
@@ -114,15 +118,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie wurden Könige.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Sie hoben die Grundmauern des Hauses an.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Was taten Ibrāhīm und Ismāʿīl gemeinsam?",
+      "fragment": "Sie wurden Könige.",
       "requiredByFields": 1
     },
     {
@@ -134,15 +134,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Er empfiehlt sie.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Er nennt sie immer mutig.",
       "requiredByFields": 1
     },
     {
       "fragment": "Wie behandelt der Qurʾān Verschwendung?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Er empfiehlt sie.",
       "requiredByFields": 1
     },
     {
@@ -154,15 +154,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Stolz aufzutreten und laut zu schreien.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Andere zu ignorieren.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wie lehrte Luqmān seinen Sohn aufzutreten?",
       "requiredByFields": 1
     },
     {
@@ -170,7 +162,19 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Wie lehrte Luqmān seinen Sohn aufzutreten?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Stolz aufzutreten und laut zu schreien.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Luqmān warnte vor Hochmut und lehrte maßvolles Gehen und eine gesenkte Stimme.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Mit beiden Händen gleichzeitig essen.",
       "requiredByFields": 1
     },
     {
@@ -178,15 +182,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allahs Namen nennen und mit rechts essen.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Welche Essensregel lehrte der Prophet ﷺ einem Jungen?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Mit beiden Händen gleichzeitig essen.",
+      "fragment": "Allahs Namen nennen und mit rechts essen.",
       "requiredByFields": 1
     },
     {
@@ -198,7 +198,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie versteckten sich in einer Stadt.",
+      "fragment": "Sie flogen davon.",
       "requiredByFields": 1
     },
     {
@@ -206,7 +206,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie flogen davon.",
+      "fragment": "Sie versteckten sich in einer Stadt.",
       "requiredByFields": 1
     },
     {
@@ -218,7 +218,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie kommt von Sternen.",
+      "fragment": "Sie kommt ohne Allahs Willen.",
       "requiredByFields": 1
     },
     {
@@ -226,7 +226,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie kommt ohne Allahs Willen.",
+      "fragment": "Sie kommt von Sternen.",
       "requiredByFields": 1
     },
     {
@@ -234,15 +234,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie verspotteten die Gläubigen.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Sie glaubten an ihren Herrn, und Allah mehrte ihre Rechtleitung.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sie suchten nur Reichtum.",
       "requiredByFields": 1
     },
     {
@@ -250,11 +242,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah beschreibt sie als junge Gläubige und mehrte ihre Rechtleitung.",
+      "fragment": "Sie verspotteten die Gläubigen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Verbotene Nahrung.",
+      "fragment": "Sie suchten nur Reichtum.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Allah beschreibt sie als junge Gläubige und mehrte ihre Rechtleitung.",
       "requiredByFields": 1
     },
     {
@@ -263,6 +259,10 @@
     },
     {
       "fragment": "Halāle und gute Nahrung.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Verbotene Nahrung.",
       "requiredByFields": 1
     },
     {
@@ -282,23 +282,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Das Schlechte mit etwas Besserem abzuwehren.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Gerüchte zu verbreiten.",
       "requiredByFields": 1
     },
     {
+      "fragment": "Das Schlechte mit etwas Besserem abzuwehren.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah lehrt, Schlechtes mit dem Besseren abzuwehren; dadurch kann aus Feindschaft Nähe werden.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wie reagieren die Diener des Allerbarmers auf Unwissende?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sie antworten friedlich.",
       "requiredByFields": 1
     },
     {
@@ -310,7 +302,19 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Wie reagieren die Diener des Allerbarmers auf Unwissende?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sie antworten friedlich.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah beschreibt Seine Diener als demütig Gehende, die auf Unwissende friedlich antworten.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Hochmut, Streit und Verschwendung.",
       "requiredByFields": 1
     },
     {
@@ -326,10 +330,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Hochmut, Streit und Verschwendung.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Der Vers verbindet Gerechtigkeit, Iḥsān und Unterstützung der Verwandten.",
       "requiredByFields": 1
     },
@@ -338,7 +338,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nur reiche Menschen.",
+      "fragment": "Wen nennt Qurʾān 4:36 unter den Menschen, zu denen wir gut sein sollen?",
       "requiredByFields": 1
     },
     {
@@ -346,7 +346,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Wen nennt Qurʾān 4:36 unter den Menschen, zu denen wir gut sein sollen?",
+      "fragment": "Nur reiche Menschen.",
       "requiredByFields": 1
     },
     {
@@ -374,7 +374,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Wir sollen ihn nicht grob zurückweisen.",
+      "fragment": "Wir sollen ihn beschimpfen.",
       "requiredByFields": 1
     },
     {
@@ -382,11 +382,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Wie sollen wir einen Bittenden behandeln?",
+      "fragment": "Wir sollen ihn nicht grob zurückweisen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Wir sollen ihn beschimpfen.",
+      "fragment": "Wie sollen wir einen Bittenden behandeln?",
       "requiredByFields": 1
     },
     {
@@ -394,11 +394,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Warum speisten die Rechtschaffenen Bedürftige, Waisen und Gefangene?",
+      "fragment": "Sie wollten Allahs Wohlgefallen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie wollten berühmt werden.",
+      "fragment": "Warum speisten die Rechtschaffenen Bedürftige, Waisen und Gefangene?",
       "requiredByFields": 1
     },
     {
@@ -406,7 +406,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie wollten Allahs Wohlgefallen.",
+      "fragment": "Sie wollten berühmt werden.",
       "requiredByFields": 1
     },
     {
@@ -414,7 +414,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Was lehrt Qurʾān 24:61 beim Betreten von Häusern?",
+      "fragment": "Nur zu flüstern.",
       "requiredByFields": 1
     },
     {
@@ -426,7 +426,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nur zu flüstern.",
+      "fragment": "Was lehrt Qurʾān 24:61 beim Betreten von Häusern?",
       "requiredByFields": 1
     },
     {
@@ -434,7 +434,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah machte ihn allwissend.",
+      "fragment": "Allah lehrte ihn Zauberei.",
       "requiredByFields": 1
     },
     {
@@ -442,11 +442,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah lehrte ihn Zauberei.",
+      "fragment": "Allah lehrte ihn die Namen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah lehrte ihn die Namen.",
+      "fragment": "Allah machte ihn allwissend.",
       "requiredByFields": 1
     },
     {
@@ -462,15 +462,23 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Seine Reue war unmöglich.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Er sollte niemanden mehr um Vergebung bitten.",
       "requiredByFields": 1
     },
     {
+      "fragment": "Seine Reue war unmöglich.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah nahm Ādams Reue an und nennt Sich den Reue-Annehmenden und Barmherzigen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Menschen steuern sie.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Beide bewegen sich auf ihrer Bahn.",
       "requiredByFields": 1
     },
     {
@@ -482,23 +490,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Beide bewegen sich auf ihrer Bahn.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Menschen steuern sie.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Allah erschuf Nacht und Tag, Sonne und Mond; jeder bewegt sich auf seiner Bahn.",
       "requiredByFields": 1
     },
     {
       "fragment": "Welche zwei Zeichen nennt Qurʾān 16:68–69 bei den Bienen?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Dass Bienen das Wetter bestimmen.",
       "requiredByFields": 1
     },
     {
@@ -510,15 +506,11 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Dass Bienen das Wetter bestimmen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah leitet die Bienen und erwähnt in ihrem Getränk Heilung für Menschen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Er ignorierte Allahs Gabe.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Er lächelte und bat Allah um Dankbarkeit.",
       "requiredByFields": 1
     },
     {
@@ -530,7 +522,19 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Er lächelte und bat Allah um Dankbarkeit.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Er ignorierte Allahs Gabe.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Sulaymān lächelte und bat Allah, dankbar für Seine Gaben zu sein.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Der Wiedehopf fehlte.",
       "requiredByFields": 1
     },
     {
@@ -542,15 +546,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Wiedehopf fehlte.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Was bemerkte Sulaymān bei der Kontrolle der Vögel?",
       "requiredByFields": 1
     },
     {
       "fragment": "Sulaymān kontrollierte die Vögel und fragte nach dem Wiedehopf.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Welchen Nutzen des Meeres nennt Qurʾān 16:14?",
       "requiredByFields": 1
     },
     {
@@ -562,19 +566,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welchen Nutzen des Meeres nennt Qurʾān 16:14?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Allah erinnert an Nahrung aus dem Meer, Schmuck und Schiffe, die darauf fahren.",
       "requiredByFields": 1
     },
     {
       "fragment": "Schlaf als Ruhe, Nacht als Bedeckung und Tag für Tätigkeit.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Alle drei nur als Prüfungen ohne Nutzen.",
       "requiredByFields": 1
     },
     {
@@ -586,6 +582,10 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Alle drei nur als Prüfungen ohne Nutzen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah nennt diese drei als geordnete Gaben für das menschliche Leben.",
       "requiredByFields": 1
     },
@@ -594,7 +594,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Lebewesen brauchen niemals Wasser.",
+      "fragment": "Allah machte aus Wasser alles Lebendige.",
       "requiredByFields": 1
     },
     {
@@ -602,11 +602,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah machte aus Wasser alles Lebendige.",
+      "fragment": "Lebewesen brauchen niemals Wasser.",
       "requiredByFields": 1
     },
     {
       "fragment": "Der Vers nennt Wasser als grundlegendes Zeichen in Allahs Schöpfung des Lebens.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sie handeln unabhängig von Allah.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Wie beschreibt Qurʾān 66:6 die Engel?",
       "requiredByFields": 1
     },
     {
@@ -618,31 +626,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Wie beschreibt Qurʾān 66:6 die Engel?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sie handeln unabhängig von Allah.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Engel gehorchen Allah und führen Seine Befehle aus.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Was antwortet Qurʾān 21:7 auf die Frage nach früheren Gesandten?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Es waren Männer, denen Allah Offenbarung gab.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Allah sandte menschliche Gesandte und gab ihnen Offenbarung.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sterne, Glückszahlen und Horoskope.",
       "requiredByFields": 1
     },
     {
@@ -650,7 +634,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Was nennt Qurʾān 2:285 beim Glauben der Gläubigen?",
+      "fragment": "Sterne, Glückszahlen und Horoskope.",
       "requiredByFields": 1
     },
     {
@@ -658,15 +642,19 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Was nennt Qurʾān 2:285 beim Glauben der Gläubigen?",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Der Vers nennt zentrale Grundlagen des Īmān.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Warum erinnert Qurʾān 31:14 besonders an die Mutter?",
+      "fragment": "Sie trug das Kind unter Mühsal und stillte es.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie trug das Kind unter Mühsal und stillte es.",
+      "fragment": "Warum erinnert Qurʾān 31:14 besonders an die Mutter?",
       "requiredByFields": 1
     },
     {
@@ -686,19 +674,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Ehrerbietige und freundliche Worte.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Welche Sprechweise verlangt Qurʾān 17:23 gegenüber Eltern?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah verbietet selbst ein verächtliches Wort und befiehlt ehrerbietige Rede.",
+      "fragment": "Ehrerbietige und freundliche Worte.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Mit den Hochmütigen wegen ihres Hochmuts.",
+      "fragment": "Allah verbietet selbst ein verächtliches Wort und befiehlt ehrerbietige Rede.",
       "requiredByFields": 1
     },
     {
@@ -710,19 +694,11 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Mit den Hochmütigen wegen ihres Hochmuts.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah nennt Seine besondere Unterstützung für Menschen mit Taqwā und Iḥsān.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Als Heilung und Barmherzigkeit für die Gläubigen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Als Unterhaltung ohne Rechtleitung.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wie beschreibt Qurʾān 17:82 das, was vom Qurʾān herabgesandt wird?",
       "requiredByFields": 1
     },
     {
@@ -730,11 +706,23 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Wie beschreibt Qurʾān 17:82 das, was vom Qurʾān herabgesandt wird?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Als Unterhaltung ohne Rechtleitung.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Als Heilung und Barmherzigkeit für die Gläubigen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah beschreibt den Qurʾān als Heilung und Barmherzigkeit für die Gläubigen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Zu Streit und Hochmut.",
+      "fragment": "Zur Vergebung Allahs und zum Paradies.",
       "requiredByFields": 1
     },
     {
@@ -742,7 +730,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Zur Vergebung Allahs und zum Paradies.",
+      "fragment": "Zu Streit und Hochmut.",
       "requiredByFields": 1
     },
     {
@@ -754,11 +742,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Guten Ratschlägen.",
+      "fragment": "Welchen Schritten sollen wir nach Qurʾān 2:168 nicht folgen?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Welchen Schritten sollen wir nach Qurʾān 2:168 nicht folgen?",
+      "fragment": "Guten Ratschlägen.",
       "requiredByFields": 1
     },
     {
@@ -770,11 +758,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Warum fragte Ibrāhīm Allah, wie Tote lebendig werden?",
+      "fragment": "Damit sein Herz noch ruhiger und gewisser wird.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Weil er Menschen beeindrucken wollte.",
+      "fragment": "Warum fragte Ibrāhīm Allah, wie Tote lebendig werden?",
       "requiredByFields": 1
     },
     {
@@ -782,7 +770,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Damit sein Herz noch ruhiger und gewisser wird.",
+      "fragment": "Weil er Menschen beeindrucken wollte.",
       "requiredByFields": 1
     },
     {
@@ -794,11 +782,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Mit Hilfe von Götzen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Aus eigener göttlicher Macht.",
+      "fragment": "Mit Allahs Erlaubnis.",
       "requiredByFields": 1
     },
     {
@@ -806,7 +790,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Mit Allahs Erlaubnis.",
+      "fragment": "Aus eigener göttlicher Macht.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Mit Hilfe von Götzen.",
       "requiredByFields": 1
     },
     {
@@ -814,7 +802,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Dankbarkeit gegenüber Allah.",
+      "fragment": "Was darf eine Ṣadaqah nicht kaputtmachen?",
       "requiredByFields": 1
     },
     {
@@ -822,11 +810,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Was darf eine Ṣadaqah nicht kaputtmachen?",
+      "fragment": "Vorhaltungen und Verletzungen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Vorhaltungen und Verletzungen.",
+      "fragment": "Dankbarkeit gegenüber Allah.",
       "requiredByFields": 1
     },
     {
@@ -834,7 +822,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Was gab Allah Dāwūd nach dem Sieg über Ǧālūt?",
+      "fragment": "Unbegrenztes Wissen über das Verborgene.",
       "requiredByFields": 1
     },
     {
@@ -842,7 +830,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Unbegrenztes Wissen über das Verborgene.",
+      "fragment": "Was gab Allah Dāwūd nach dem Sieg über Ǧālūt?",
       "requiredByFields": 1
     },
     {
@@ -850,11 +838,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Worum baten die jungen Gläubigen in der Höhle?",
+      "fragment": "Um Barmherzigkeit und rechte Führung.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Um Barmherzigkeit und rechte Führung.",
+      "fragment": "Worum baten die jungen Gläubigen in der Höhle?",
       "requiredByFields": 1
     },
     {
@@ -870,15 +858,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Reichtum und Stärke.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Taqwā und Geduld.",
       "requiredByFields": 1
     },
     {
+      "fragment": "Reichtum und Stärke.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Yūsuf erklärte, dass Allah den Lohn der Gutes Tuenden nicht verloren gehen lässt, wenn sie Taqwā und Geduld haben.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Zur Anbetung vieler Götter.",
       "requiredByFields": 1
     },
     {
@@ -890,10 +882,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Zur Anbetung vieler Götter.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Zur Verehrung von Königen.",
       "requiredByFields": 1
     },
@@ -902,7 +890,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Ihn zu stillen und bei Gefahr in den Fluss zu legen.",
+      "fragment": "Ihn zu verstecken und nie wiederzusehen.",
       "requiredByFields": 1
     },
     {
@@ -910,7 +898,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Ihn zu verstecken und nie wiederzusehen.",
+      "fragment": "Ihn zu stillen und bei Gefahr in den Fluss zu legen.",
       "requiredByFields": 1
     },
     {
@@ -922,7 +910,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Damit ihr Auge getröstet wird und sie nicht traurig ist.",
+      "fragment": "Warum brachte Allah Mūsā zu seiner Mutter zurück?",
       "requiredByFields": 1
     },
     {
@@ -930,11 +918,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Damit sie reich wird.",
+      "fragment": "Damit ihr Auge getröstet wird und sie nicht traurig ist.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Warum brachte Allah Mūsā zu seiner Mutter zurück?",
+      "fragment": "Damit sie reich wird.",
       "requiredByFields": 1
     },
     {
@@ -942,11 +930,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Was erkannte Ibrāhīm über Stern, Mond und Sonne?",
+      "fragment": "Sie sind Geschöpfe und nicht würdig angebetet zu werden.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie sind Geschöpfe und nicht würdig angebetet zu werden.",
+      "fragment": "Was erkannte Ibrāhīm über Stern, Mond und Sonne?",
       "requiredByFields": 1
     },
     {
@@ -958,10 +946,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Was dürfen Menschen nach Qurʾān 67:15 auf der Erde tun?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Sie als Gott verehren.",
       "requiredByFields": 1
     },
@@ -970,15 +954,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Was dürfen Menschen nach Qurʾān 67:15 auf der Erde tun?",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Auf ihr gehen und von Allahs Versorgung essen.",
       "requiredByFields": 1
     },
     {
       "fragment": "Allah machte die Erde nutzbar und erinnert an die Rückkehr zu Ihm.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Nur an Unterhaltung.",
       "requiredByFields": 1
     },
     {
@@ -994,11 +978,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Die Verse erinnern an Regen, Erde und verschiedene Nahrungsmittel.",
+      "fragment": "Nur an Unterhaltung.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Was geschieht mit toter Erde, wenn Allah Regen sendet?",
+      "fragment": "Die Verse erinnern an Regen, Erde und verschiedene Nahrungsmittel.",
       "requiredByFields": 1
     },
     {
@@ -1010,6 +994,10 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Was geschieht mit toter Erde, wenn Allah Regen sendet?",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Sie verschwindet.",
       "requiredByFields": 1
     },
@@ -1018,7 +1006,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Damit Menschen nie geprüft werden.",
+      "fragment": "Um zu prüfen, wer die besten Taten tut.",
       "requiredByFields": 1
     },
     {
@@ -1030,11 +1018,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Um zu prüfen, wer die besten Taten tut.",
+      "fragment": "Damit Menschen nie geprüft werden.",
       "requiredByFields": 1
     },
     {
       "fragment": "Allah erklärt, dass Tod und Leben eine Prüfung sind, wer die besten Taten vollbringt.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sie beten nur, wenn andere zuschauen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sie bewahren und hüten sie.",
       "requiredByFields": 1
     },
     {
@@ -1046,19 +1042,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie bewahren und hüten sie.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sie beten nur, wenn andere zuschauen.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Allah lobt das sorgfältige Bewahren der Gebete.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sie ist verboten.",
       "requiredByFields": 1
     },
     {
@@ -1066,15 +1050,23 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Was sagt Qurʾān 2:271 über heimliche Ṣadaqah an Bedürftige?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Sie ist besonders gut und kann Sünden tilgen.",
       "requiredByFields": 1
     },
     {
+      "fragment": "Was sagt Qurʾān 2:271 über heimliche Ṣadaqah an Bedürftige?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sie ist verboten.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah lobt das verborgene Geben an Bedürftige und nennt darin Reinigung von Sünden.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Welche drei Bezeichnungen Allahs stehen am Anfang von Sūrat an-Nās?",
       "requiredByFields": 1
     },
     {
@@ -1086,10 +1078,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche drei Bezeichnungen Allahs stehen am Anfang von Sūrat an-Nās?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Herr, König und Gott der Menschen.",
       "requiredByFields": 1
     },
@@ -1098,15 +1086,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nur lange Reisen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Nahrung gegen Hunger und Sicherheit vor Angst.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Nur Gold und Silber.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Nur lange Reisen.",
       "requiredByFields": 1
     },
     {
@@ -1114,7 +1098,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Nahrung gegen Hunger und Sicherheit vor Angst.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah erinnert Quraysh an Nahrung gegen Hunger und Sicherheit vor Angst.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Nur Besitz sammeln.",
       "requiredByFields": 1
     },
     {
@@ -1123,10 +1115,6 @@
     },
     {
       "fragment": "Das Gebet verlassen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Nur Besitz sammeln.",
       "requiredByFields": 1
     },
     {
@@ -1162,10 +1150,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Gabe nennt Qurʾān 94:4 für den Propheten ﷺ?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Allah erhöhte seine Erwähnung.",
       "requiredByFields": 1
     },
@@ -1174,19 +1158,11 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Welche Gabe nennt Qurʾān 94:4 für den Propheten ﷺ?",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah sagt zum Propheten ﷺ, dass Er seine Erwähnung erhöht hat.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Was bedeutet eine schwere Waage guter Taten in Sūrat al-Qāriʿah?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Dass Taten bedeutungslos sind.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sicherer Verlust.",
       "requiredByFields": 1
     },
     {
@@ -1194,11 +1170,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Die Sūrah beschreibt denjenigen mit schweren Waagschalen in einem zufriedenen Leben.",
+      "fragment": "Sicherer Verlust.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Verspotten und wegschicken.",
+      "fragment": "Dass Taten bedeutungslos sind.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Was bedeutet eine schwere Waage guter Taten in Sūrat al-Qāriʿah?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Die Sūrah beschreibt denjenigen mit schweren Waagschalen in einem zufriedenen Leben.",
       "requiredByFields": 1
     },
     {
@@ -1206,11 +1190,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Nicht unterdrücken und nicht grob zurückweisen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Wie sollen Waisen und Bittende nach Sūrat aḍ-Ḍuḥā behandelt werden?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Nicht unterdrücken und nicht grob zurückweisen.",
+      "fragment": "Verspotten und wegschicken.",
       "requiredByFields": 1
     },
     {
@@ -1218,7 +1206,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nur für Geschenke zurück.",
+      "fragment": "Um Allahs willen.",
       "requiredByFields": 1
     },
     {
@@ -1226,7 +1214,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Um Allahs willen.",
+      "fragment": "Nur für Geschenke zurück.",
       "requiredByFields": 1
     },
     {
@@ -1235,6 +1223,10 @@
     },
     {
       "fragment": "Sie tun es um Allahs willen und erwarten keinen Lohn oder Dank von den Menschen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Welche Verheißung nennt Qurʾān 65:2 für Menschen mit Taqwā?",
       "requiredByFields": 1
     },
     {
@@ -1250,19 +1242,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Verheißung nennt Qurʾān 65:2 für Menschen mit Taqwā?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Allah verspricht demjenigen mit Taqwā einen Ausweg.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Allah genügt ihm.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Was ist Allah für den, der auf Ihn vertraut?",
       "requiredByFields": 1
     },
     {
@@ -1274,15 +1254,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Allah genügt ihm.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Was ist Allah für den, der auf Ihn vertraut?",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Wer auf Allah vertraut, dem genügt Allah.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wovor warnt Qurʾān 61:2–3, wenn es um unsere Worte und Taten geht?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Immer möglichst viel versprechen.",
       "requiredByFields": 1
     },
     {
@@ -1294,11 +1274,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah warnt davor, etwas zu sagen, das man selbst nicht tut.",
+      "fragment": "Immer möglichst viel versprechen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Etwas Gefährliches auf den Weg legen.",
+      "fragment": "Wovor warnt Qurʾān 61:2–3, wenn es um unsere Worte und Taten geht?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Allah warnt davor, etwas zu sagen, das man selbst nicht tut.",
       "requiredByFields": 1
     },
     {
@@ -1310,6 +1294,10 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Etwas Gefährliches auf den Weg legen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Andere am Weg hindern.",
       "requiredByFields": 1
     },
@@ -1318,7 +1306,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Für die Meinung anderer Menschen.",
+      "fragment": "Für wen sind Gebet, Opfer, Leben und Tod des Muslims?",
       "requiredByFields": 1
     },
     {
@@ -1326,11 +1314,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Für wen sind Gebet, Opfer, Leben und Tod des Muslims?",
+      "fragment": "Für die Meinung anderer Menschen.",
       "requiredByFields": 1
     },
     {
       "fragment": "Allah befiehlt dem Propheten ﷺ zu sagen, dass Gebet, Opfer, Leben und Tod Allah gehören.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Bevor der Tod kommt und keine Zeit mehr bleibt.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Wann sollen wir von Allahs Versorgung ausgeben?",
       "requiredByFields": 1
     },
     {
@@ -1342,14 +1338,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Wann sollen wir von Allahs Versorgung ausgeben?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Bevor der Tod kommt und keine Zeit mehr bleibt.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Allah ruft dazu auf, rechtzeitig von Seiner Versorgung auszugeben.",
       "requiredByFields": 1
     },
@@ -1358,7 +1346,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nur starke Tiere erhalten Versorgung.",
+      "fragment": "Was sagt Qurʾān 11:6 über die Versorgung der Lebewesen?",
       "requiredByFields": 1
     },
     {
@@ -1366,7 +1354,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Was sagt Qurʾān 11:6 über die Versorgung der Lebewesen?",
+      "fragment": "Nur starke Tiere erhalten Versorgung.",
       "requiredByFields": 1
     },
     {
@@ -1374,7 +1362,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah nimmt Tawbah an und vergibt schlechte Taten.",
+      "fragment": "Welche Hoffnung gibt Qurʾān 42:25 Menschen nach Fehlern?",
       "requiredByFields": 1
     },
     {
@@ -1382,15 +1370,19 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Allah nimmt Tawbah an und vergibt schlechte Taten.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah kennt unsere Taten nicht.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Hoffnung gibt Qurʾān 42:25 Menschen nach Fehlern?",
+      "fragment": "Allah nimmt die Reue Seiner Diener an und weiß, was sie tun.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah nimmt die Reue Seiner Diener an und weiß, was sie tun.",
+      "fragment": "Als jemanden, der Versorgung braucht.",
       "requiredByFields": 1
     },
     {
@@ -1402,10 +1394,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Als jemanden, der Versorgung braucht.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Wie beschreibt Qurʾān 51:58 Allah in Bezug auf Versorgung?",
       "requiredByFields": 1
     },
@@ -1414,11 +1402,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nur auf Lob zu warten.",
+      "fragment": "Sich weiter zu bemühen und sich dem Herrn zuzuwenden.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Was lehrt Sūrat ash-Sharḥ nach dem Ende einer Aufgabe?",
+      "fragment": "Nur auf Lob zu warten.",
       "requiredByFields": 1
     },
     {
@@ -1426,19 +1414,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sich weiter zu bemühen und sich dem Herrn zuzuwenden.",
+      "fragment": "Was lehrt Sūrat ash-Sharḥ nach dem Ende einer Aufgabe?",
       "requiredByFields": 1
     },
     {
       "fragment": "Die Sūrah lehrt fortgesetztes Bemühen und Ausrichtung auf Allah.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Nur Handel und Reisen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Welche Themen nennt Qurʾān 96:1–5 am Anfang der Offenbarung?",
       "requiredByFields": 1
     },
     {
@@ -1450,15 +1430,19 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Nur Handel und Reisen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Welche Themen nennt Qurʾān 96:1–5 am Anfang der Offenbarung?",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Die Verse verbinden Lesen im Namen Allahs mit Schöpfung, dem Stift und Wissen.",
       "requiredByFields": 1
     },
     {
       "fragment": "Ob es außer Allah einen Schöpfer gibt, der versorgt.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Ob Menschen sich selbst erschaffen.",
       "requiredByFields": 1
     },
     {
@@ -1470,19 +1454,11 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Ob Menschen sich selbst erschaffen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Der Vers erinnert daran, dass Allah allein Schöpfer und Versorger ist.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Woran erinnert Qurʾān 43:13–14 beim Reiten oder Fahren?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Nur an die Geschwindigkeit.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Daran, nie Duʿāʾ zu machen.",
       "requiredByFields": 1
     },
     {
@@ -1490,7 +1466,23 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Woran erinnert Qurʾān 43:13–14 beim Reiten oder Fahren?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Daran, nie Duʿāʾ zu machen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Nur an die Geschwindigkeit.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Die Verse lehren Dank und Erinnerung an Allah beim Nutzen eines Reittiers oder Fahrmittels.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Wie reagierte Ayyūb عليه السلام in seiner schweren Prüfung?",
       "requiredByFields": 1
     },
     {
@@ -1502,19 +1494,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Wie reagierte Ayyūb عليه السلام in seiner schweren Prüfung?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Ayyūb wandte sich in seiner Not an Allah, und Allah nahm die Not von ihm.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Was tat Mūsā عليه السلام, nachdem er den Frauen geholfen hatte?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Er wandte sich mit Duʿāʾ an Allah.",
       "requiredByFields": 1
     },
     {
@@ -1522,11 +1502,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nach seiner Hilfe bat Mūsā Allah um das Gute, das er brauchte.",
+      "fragment": "Er wandte sich mit Duʿāʾ an Allah.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Um Dankbarkeit und rechtschaffene Taten.",
+      "fragment": "Was tat Mūsā عليه السلام, nachdem er den Frauen geholfen hatte?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Nach seiner Hilfe bat Mūsā Allah um das Gute, das er brauchte.",
       "requiredByFields": 1
     },
     {
@@ -1538,19 +1522,11 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Um Dankbarkeit und rechtschaffene Taten.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Sulaymān bat um Dank für Allahs Gaben, rechtschaffenes Handeln und Eintritt in Allahs Barmherzigkeit.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Ob niemand Vergebung braucht.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Ob Härte immer besser ist.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Welche Frage stellt Qurʾān 24:22 nach dem Aufruf zum Verzeihen?",
       "requiredByFields": 1
     },
     {
@@ -1558,15 +1534,19 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Ob niemand Vergebung braucht.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Welche Frage stellt Qurʾān 24:22 nach dem Aufruf zum Verzeihen?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Ob Härte immer besser ist.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah verbindet unser Verzeihen mit der Hoffnung auf Seine Vergebung.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Dem Menschen selbst.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wem nützt eine rechtschaffene Tat nach Qurʾān 41:46?",
       "requiredByFields": 1
     },
     {
@@ -1574,11 +1554,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Vers lehrt persönliche Verantwortung: Gutes nützt dem Täter, Böses schadet ihm.",
+      "fragment": "Wem nützt eine rechtschaffene Tat nach Qurʾān 41:46?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Nein, Duʿāʾ richtet man an Allah.",
+      "fragment": "Dem Menschen selbst.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Der Vers lehrt persönliche Verantwortung: Gutes nützt dem Täter, Böses schadet ihm.",
       "requiredByFields": 1
     },
     {
@@ -1594,15 +1578,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Das Geschöpf noch genauer mit Allah vergleichen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sagen: Nichts ist Allah gleich.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Ein Kind vergleicht Allah mit einem Geschöpf. Was passt am besten?",
+      "fragment": "Nein, Duʿāʾ richtet man an Allah.",
       "requiredByFields": 1
     },
     {
@@ -1610,11 +1586,23 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Ein Kind vergleicht Allah mit einem Geschöpf. Was passt am besten?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sagen: Nichts ist Allah gleich.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Das Geschöpf noch genauer mit Allah vergleichen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Gar nichts mehr tun und nur warten.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Glauben, nur die eigene Kraft entscheide alles.",
+      "fragment": "Du hast für eine Aufgabe geübt und bist trotzdem nervös. Was passt am besten?",
       "requiredByFields": 1
     },
     {
@@ -1622,7 +1610,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Du hast für eine Aufgabe geübt und bist trotzdem nervös. Was passt am besten?",
+      "fragment": "Glauben, nur die eigene Kraft entscheide alles.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Denken: Allah vergibt mir niemals.",
       "requiredByFields": 1
     },
     {
@@ -1638,15 +1630,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Denken: Allah vergibt mir niemals.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Damit vor anderen angeben.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Du bekommst etwas Gutes, das du gebraucht hast. Was passt am besten?",
+      "fragment": "Allah danken und die Gabe gut nutzen.",
       "requiredByFields": 1
     },
     {
@@ -1654,7 +1638,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah danken und die Gabe gut nutzen.",
+      "fragment": "Du bekommst etwas Gutes, das du gebraucht hast. Was passt am besten?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Damit vor anderen angeben.",
       "requiredByFields": 1
     },
     {
@@ -1662,7 +1650,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Du spielst und die Zeit für das Gebet ist gekommen. Was passt am besten?",
+      "fragment": "Das Spiel unterbrechen und dich auf das Gebet vorbereiten.",
       "requiredByFields": 1
     },
     {
@@ -1670,7 +1658,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Das Spiel unterbrechen und dich auf das Gebet vorbereiten.",
+      "fragment": "Du spielst und die Zeit für das Gebet ist gekommen. Was passt am besten?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Den Fehler immer wieder nachmachen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Alle zum Lachen darüber bringen.",
       "requiredByFields": 1
     },
     {
@@ -1682,15 +1678,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Alle zum Lachen darüber bringen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Den Fehler immer wieder nachmachen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Gerüchte über beide verbreiten.",
+      "fragment": "Zwei Freunde streiten wegen eines Spiels. Was passt am besten?",
       "requiredByFields": 1
     },
     {
@@ -1698,11 +1686,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Zwei Freunde streiten wegen eines Spiels. Was passt am besten?",
+      "fragment": "Ruhig helfen, dass beide fair miteinander sprechen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Ruhig helfen, dass beide fair miteinander sprechen.",
+      "fragment": "Gerüchte über beide verbreiten.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Das Heft wegwerfen.",
       "requiredByFields": 1
     },
     {
@@ -1718,7 +1710,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Das Heft wegwerfen.",
+      "fragment": "Weiter gute Mittel nutzen und auf Allahs Hilfe hoffen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sagen: Es gibt niemals eine Lösung.",
       "requiredByFields": 1
     },
     {
@@ -1730,11 +1726,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Weiter gute Mittel nutzen und auf Allahs Hilfe hoffen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sagen: Es gibt niemals eine Lösung.",
+      "fragment": "Noch mehr nehmen, obwohl du satt bist.",
       "requiredByFields": 1
     },
     {
@@ -1742,23 +1734,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Du hast dir mehr Essen genommen, als du schaffst. Was passt am besten?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Nur passend nehmen und Reste sinnvoll aufbewahren.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Noch mehr nehmen, obwohl du satt bist.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Vor anderen sagen, das Kind brauche immer deine Hilfe.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Bei jedem Streit an das Geschenk erinnern.",
+      "fragment": "Du hast dir mehr Essen genommen, als du schaffst. Was passt am besten?",
       "requiredByFields": 1
     },
     {
@@ -1767,6 +1747,14 @@
     },
     {
       "fragment": "Du hast einem Kind etwas geschenkt. Was passt am besten?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Vor anderen sagen, das Kind brauche immer deine Hilfe.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Bei jedem Streit an das Geschenk erinnern.",
       "requiredByFields": 1
     },
     {
@@ -1790,6 +1778,14 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Du teilst dein Pausenbrot mit jemandem, der nichts dabeihat. Was passt am besten?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Teilen, ohne später Dank zu fordern.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Nur teilen, wenn du etwas zurückbekommst.",
       "requiredByFields": 1
     },
@@ -1798,15 +1794,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Teilen, ohne später Dank zu fordern.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Du teilst dein Pausenbrot mit jemandem, der nichts dabeihat. Was passt am besten?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Das Gebet als Vorführung benutzen.",
+      "fragment": "Du möchtest extra nur dann besonders schön beten, wenn andere zuschauen. Was passt am besten?",
       "requiredByFields": 1
     },
     {
@@ -1814,11 +1802,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Du möchtest extra nur dann besonders schön beten, wenn andere zuschauen. Was passt am besten?",
+      "fragment": "Nur auf die Zuschauer achten.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Nur auf die Zuschauer achten.",
+      "fragment": "Das Gebet als Vorführung benutzen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Nicht mitmachen, nur weil viele es tun.",
       "requiredByFields": 1
     },
     {
@@ -1830,15 +1822,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nicht mitmachen, nur weil viele es tun.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Mehrere Kinder schummeln und sagen: „Alle machen das.“ Was passt am besten?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Sofort denken, Allah verlange Unmögliches.",
+      "fragment": "Ruhig das Mögliche tun und Hilfe suchen.",
       "requiredByFields": 1
     },
     {
@@ -1850,23 +1838,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Ruhig das Mögliche tun und Hilfe suchen.",
+      "fragment": "Sofort denken, Allah verlange Unmögliches.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Du möchtest eine neue Duʿāʾ richtig lernen. Was passt am besten?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Andere auslachen, die noch lernen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "So tun, als könntest du sie schon.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Allah um Wissen bitten und aufmerksam üben.",
+      "fragment": "Du möchtest wissen, was Allah liebt. Was passt am besten?",
       "requiredByFields": 1
     },
     {
@@ -1878,15 +1854,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Du möchtest wissen, was Allah liebt. Was passt am besten?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Nur nach dem beliebtesten Trend gehen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Noch etwas Spannendes dazuerfinden.",
+      "fragment": "Es sofort der ganzen Gruppe erzählen.",
       "requiredByFields": 1
     },
     {
@@ -1894,7 +1866,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Es sofort der ganzen Gruppe erzählen.",
+      "fragment": "Noch etwas Spannendes dazuerfinden.",
       "requiredByFields": 1
     },
     {
@@ -1903,6 +1875,10 @@
     },
     {
       "fragment": "Qurʾān 49:6 lehrt, Nachrichten sorgfältig zu prüfen, damit man Menschen nicht aus Unwissenheit schadet.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sagen, Duʿāʾ für Eltern sei unnötig.",
       "requiredByFields": 1
     },
     {
@@ -1915,10 +1891,6 @@
     },
     {
       "fragment": "Nur über ihre Fehler sprechen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sagen, Duʿāʾ für Eltern sei unnötig.",
       "requiredByFields": 1
     },
     {
@@ -1962,14 +1934,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nur einige Menschen sollen Allah dienen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Es gibt keinen zu Recht Angebeteten außer Allah, also dient Ihm.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Jeder Gesandte brachte einen anderen Gott.",
       "requiredByFields": 1
     },
@@ -1978,15 +1942,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Nur einige Menschen sollen Allah dienen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Es gibt keinen zu Recht Angebeteten außer Allah, also dient Ihm.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah erklärte, dass Er vor Muḥammad ﷺ keinen Gesandten sandte, ohne ihm die Anbetung Allahs allein einzugeben.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Was sollen Gläubige tun, wenn eine unzuverlässige Person eine Nachricht bringt?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sie sofort weiterleiten.",
       "requiredByFields": 1
     },
     {
@@ -1994,7 +1958,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Sie sofort weiterleiten.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Sie ohne Beweis glauben.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Was sollen Gläubige tun, wenn eine unzuverlässige Person eine Nachricht bringt?",
       "requiredByFields": 1
     },
     {
@@ -2010,15 +1982,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Ṣadaqah ist immer Verlust.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Ṣadaqah ist nur für Reiche erlaubt.",
       "requiredByFields": 1
     },
     {
       "fragment": "Was sagte der Prophet ﷺ über Ṣadaqah und Vermögen?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Ṣadaqah ist immer Verlust.",
       "requiredByFields": 1
     },
     {
@@ -2034,19 +2006,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Reinheit ist die Hälfte des Īmān und das Gebet ist Licht.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Ṣadaqah hat keinen Wert.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Ḥadīṯ verbindet Reinheit, Dhikr, Gebet, Ṣadaqah, Geduld und Qurʾān mit dem Weg des Gläubigen.",
+      "fragment": "Reinheit ist die Hälfte des Īmān und das Gebet ist Licht.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Wovon hängt der Wert einer Handlung nach dem berühmten Ḥadīṯ ab?",
+      "fragment": "Der Ḥadīṯ verbindet Reinheit, Dhikr, Gebet, Ṣadaqah, Geduld und Qurʾān mit dem Weg des Gläubigen.",
       "requiredByFields": 1
     },
     {
@@ -2058,11 +2026,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Wovon hängt der Wert einer Handlung nach dem berühmten Ḥadīṯ ab?",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Der Prophet ﷺ lehrte, dass Handlungen nach den Absichten bewertet werden und jeder das erhält, was er beabsichtigt.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Nur sehr große Taten einmal im Leben.",
+      "fragment": "Beständige Taten, auch wenn sie klein sind.",
       "requiredByFields": 1
     },
     {
@@ -2074,7 +2046,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Beständige Taten, auch wenn sie klein sind.",
+      "fragment": "Nur sehr große Taten einmal im Leben.",
       "requiredByFields": 1
     },
     {
@@ -2090,7 +2062,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nur schwere Handlungen sind wertvoll.",
+      "fragment": "Man soll sich absichtlich überfordern.",
       "requiredByFields": 1
     },
     {
@@ -2098,11 +2070,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Man soll sich absichtlich überfordern.",
+      "fragment": "Nur schwere Handlungen sind wertvoll.",
       "requiredByFields": 1
     },
     {
       "fragment": "Der Prophet ﷺ lehrte, dass der Dīn leicht ist und warnte vor Überforderung und Übertreibung.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sie folgen Gerüchten.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Jeder entscheidet immer allein.",
       "requiredByFields": 1
     },
     {
@@ -2114,27 +2094,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Jeder entscheidet immer allein.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sie folgen Gerüchten.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Allah lobt diejenigen, deren Angelegenheiten durch Beratung untereinander geregelt werden.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wenn man nur Unbrauchbares abgibt.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wann erreicht man nach Qurʾān 3:92 eine besondere Stufe der Güte?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wenn man niemals teilt.",
       "requiredByFields": 1
     },
     {
@@ -2142,15 +2102,19 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Wenn man niemals teilt.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Wann erreicht man nach Qurʾān 3:92 eine besondere Stufe der Güte?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Wenn man nur Unbrauchbares abgibt.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah lehrt, dass man al-Birr nicht erreicht, bis man von dem spendet, was man liebt.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Welche Regel nennt Qurʾān 6:141 bei Ernte und Nahrung?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Nur für sich selbst behalten.",
       "requiredByFields": 1
     },
     {
@@ -2162,11 +2126,23 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Welche Regel nennt Qurʾān 6:141 bei Ernte und Nahrung?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Nur für sich selbst behalten.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah befiehlt, das zustehende Recht zu geben und Verschwendung zu vermeiden.",
       "requiredByFields": 1
     },
     {
       "fragment": "Sie schriftlich festzuhalten.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Was lehrt Qurʾān 2:282 über Schulden mit einem festen Rückzahlungstermin?",
       "requiredByFields": 1
     },
     {
@@ -2178,19 +2154,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Was lehrt Qurʾān 2:282 über Schulden mit einem festen Rückzahlungstermin?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Der längste Qurʾān-Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Weil niemand Fehler bereuen darf.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Warum sollen Menschen sich nicht selbst als besonders rein erklären?",
       "requiredByFields": 1
     },
     {
@@ -2198,7 +2162,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Weil niemand Fehler bereuen darf.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah weiß am besten, wer Taqwā besitzt.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Warum sollen Menschen sich nicht selbst als besonders rein erklären?",
       "requiredByFields": 1
     },
     {
@@ -2210,10 +2182,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Den Streit weiter anheizen.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Was soll geschehen, wenn zwei Gruppen von Gläubigen kämpfen?",
       "requiredByFields": 1
     },
@@ -2222,7 +2190,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Den Streit weiter anheizen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah befiehlt zunächst Versöhnung und bei Übertretung eine gerechte Rückführung zum Frieden.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Nur auf die eigene Kraft zu vertrauen.",
       "requiredByFields": 1
     },
     {
@@ -2230,15 +2206,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nützliche Dinge zu meiden.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Allah um Hilfe zu bitten und nicht aufzugeben.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Nur auf die eigene Kraft zu vertrauen.",
+      "fragment": "Nützliche Dinge zu meiden.",
       "requiredByFields": 1
     },
     {
@@ -2250,11 +2222,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Wer keine Barmherzigkeit zeigt, dem wird keine Barmherzigkeit gezeigt.",
+      "fragment": "Härte ist immer besser.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Härte ist immer besser.",
+      "fragment": "Wer keine Barmherzigkeit zeigt, dem wird keine Barmherzigkeit gezeigt.",
       "requiredByFields": 1
     },
     {
@@ -2266,15 +2238,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Absichtlich abschrecken.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Unverständliche Härte suchen.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Erleichtern und nicht unnötig erschweren.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Absichtlich abschrecken.",
       "requiredByFields": 1
     },
     {
@@ -2282,15 +2250,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Unverständliche Härte suchen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Der Prophet ﷺ befahl, zu erleichtern und nicht zu erschweren sowie frohe Botschaft zu geben und nicht abzuschrecken.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Was lehrt Qurʾān 2:286 über Allahs Verpflichtungen?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Jeder Mensch muss Unmögliches leisten.",
+      "fragment": "Allah belastet keine Seele über ihr Vermögen.",
       "requiredByFields": 1
     },
     {
@@ -2298,7 +2266,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah belastet keine Seele über ihr Vermögen.",
+      "fragment": "Jeder Mensch muss Unmögliches leisten.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Was lehrt Qurʾān 2:286 über Allahs Verpflichtungen?",
       "requiredByFields": 1
     },
     {
@@ -2310,11 +2282,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Menschen kennen alles Verborgene.",
+      "fragment": "Allah hat diese Schöpfung nicht sinnlos erschaffen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah hat diese Schöpfung nicht sinnlos erschaffen.",
+      "fragment": "Menschen kennen alles Verborgene.",
       "requiredByFields": 1
     },
     {
@@ -2326,7 +2298,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Glaube darf erzwungen werden.",
+      "fragment": "Welche Aussage enthält Qurʾān 2:256?",
       "requiredByFields": 1
     },
     {
@@ -2338,11 +2310,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Aussage enthält Qurʾān 2:256?",
+      "fragment": "Glaube darf erzwungen werden.",
       "requiredByFields": 1
     },
     {
       "fragment": "Der Vers erklärt, dass der rechte Weg vom Irrweg klar geworden ist und Glaube nicht erzwungen wird.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Privatsphäre nicht zu beachten.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Was lehrt Qurʾān 24:58 Kindern und Bediensteten zu bestimmten privaten Zeiten?",
       "requiredByFields": 1
     },
     {
@@ -2354,19 +2334,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Was lehrt Qurʾān 24:58 Kindern und Bediensteten zu bestimmten privaten Zeiten?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Privatsphäre nicht zu beachten.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Der Vers schützt die Privatsphäre im Haus durch Erlaubnisregeln zu bestimmten Zeiten.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Nur äußeren Schmuck wichtig zu nehmen.",
       "requiredByFields": 1
     },
     {
@@ -2378,6 +2346,10 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Nur äußeren Schmuck wichtig zu nehmen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Welche zwei Pflichten nennt Qurʾān 24:31 gläubigen Frauen?",
       "requiredByFields": 1
     },
@@ -2386,7 +2358,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Gerüchte seien harmlos.",
+      "fragment": "Jede Nachricht sofort weiterzusenden.",
       "requiredByFields": 1
     },
     {
@@ -2394,11 +2366,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Wovor warnt Qurʾān 24:15 beim Weitergeben ungeprüfter Aussagen?",
+      "fragment": "Gerüchte seien harmlos.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Jede Nachricht sofort weiterzusenden.",
+      "fragment": "Wovor warnt Qurʾān 24:15 beim Weitergeben ungeprüfter Aussagen?",
       "requiredByFields": 1
     },
     {
@@ -2406,19 +2378,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Reaktion lehrt Qurʾān 24:16 bei einer ungeheuerlichen Behauptung?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Sie anonym weiterzuleiten.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie spannender zu machen.",
+      "fragment": "Sie nicht leichtfertig nachzusprechen und Allah zu preisen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie nicht leichtfertig nachzusprechen und Allah zu preisen.",
+      "fragment": "Welche Reaktion lehrt Qurʾān 24:16 bei einer ungeheuerlichen Behauptung?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sie spannender zu machen.",
       "requiredByFields": 1
     },
     {
@@ -2430,15 +2402,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Wie beschreibt Qurʾān 3:191 die Menschen mit Verstand?",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Sie gedenken Allahs nur einmal im Jahr.",
       "requiredByFields": 1
     },
     {
       "fragment": "Sie meiden jedes Nachdenken.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wie beschreibt Qurʾān 3:191 die Menschen mit Verstand?",
       "requiredByFields": 1
     },
     {
@@ -2466,15 +2438,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Mit erfundenen Geschichten.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Mit Weisheit und guter Ermahnung.",
       "requiredByFields": 1
     },
     {
       "fragment": "Wie soll nach Qurʾān 16:125 zum Weg Allahs eingeladen werden?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Mit erfundenen Geschichten.",
       "requiredByFields": 1
     },
     {
@@ -2494,11 +2466,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nur wenn sie uns nützt.",
+      "fragment": "Wann gilt die Pflicht zur Gerechtigkeit nach Qurʾān 4:135?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Wann gilt die Pflicht zur Gerechtigkeit nach Qurʾān 4:135?",
+      "fragment": "Nur wenn sie uns nützt.",
       "requiredByFields": 1
     },
     {
@@ -2506,11 +2478,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Es verbietet jeden Besuch.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Es erlaubt heimliches Betreten.",
+      "fragment": "Warum ist Qurʾān 24:27 eine wichtige Adab-Regel?",
       "requiredByFields": 1
     },
     {
@@ -2518,7 +2486,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Warum ist Qurʾān 24:27 eine wichtige Adab-Regel?",
+      "fragment": "Es erlaubt heimliches Betreten.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Es verbietet jeden Besuch.",
       "requiredByFields": 1
     },
     {
@@ -2534,19 +2506,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah ändert ihren Zustand nicht, bis sie ändern, was in ihnen selbst ist.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Nur Reichtum verändert Menschen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Vers verbindet Allahs Bestimmung mit menschlicher Verantwortung für innere Veränderung.",
+      "fragment": "Allah ändert ihren Zustand nicht, bis sie ändern, was in ihnen selbst ist.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Man wird automatisch reich.",
+      "fragment": "Der Vers verbindet Allahs Bestimmung mit menschlicher Verantwortung für innere Veränderung.",
       "requiredByFields": 1
     },
     {
@@ -2562,6 +2530,10 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Man wird automatisch reich.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah verbindet Taqwā und richtige Rede mit Verbesserung der Taten und Vergebung.",
       "requiredByFields": 1
     },
@@ -2574,11 +2546,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Gerecht, auch wenn ein Verwandter betroffen ist.",
+      "fragment": "Immer zugunsten der Familie.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Immer zugunsten der Familie.",
+      "fragment": "Gerecht, auch wenn ein Verwandter betroffen ist.",
       "requiredByFields": 1
     },
     {
@@ -2594,11 +2566,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie brauchen keine guten Taten mehr.",
+      "fragment": "Die Engel beruhigen sie und verkünden ihnen das Paradies.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Die Engel beruhigen sie und verkünden ihnen das Paradies.",
+      "fragment": "Sie brauchen keine guten Taten mehr.",
       "requiredByFields": 1
     },
     {
@@ -2606,15 +2578,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Was sagt Qurʾān 42:40 über jemanden, der vergibt und Frieden stiftet?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Sein Lohn ist bei Allah.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Er hat immer verloren.",
       "requiredByFields": 1
     },
     {
@@ -2622,15 +2586,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Was sagt Qurʾān 42:40 über jemanden, der vergibt und Frieden stiftet?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Er hat immer verloren.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah erlaubt gerechte Gegenwehr, hebt aber Vergebung und Versöhnung besonders hervor.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Īmān, gute Taten, Wahrheit und Geduld.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Schweigen, Reisen, Essen und Schlaf.",
       "requiredByFields": 1
     },
     {
@@ -2638,7 +2602,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Schweigen, Reisen, Essen und Schlaf.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Reichtum, Ruhm, Stärke und Alter.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Īmān, gute Taten, Wahrheit und Geduld.",
       "requiredByFields": 1
     },
     {
@@ -2646,7 +2618,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie darf uns nicht ungerecht machen.",
+      "fragment": "Sie hebt alle Pflichten auf.",
       "requiredByFields": 1
     },
     {
@@ -2654,7 +2626,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie hebt alle Pflichten auf.",
+      "fragment": "Sie darf uns nicht ungerecht machen.",
       "requiredByFields": 1
     },
     {
@@ -2663,10 +2635,6 @@
     },
     {
       "fragment": "Allah befiehlt Gerechtigkeit selbst gegenüber Menschen, die man nicht mag.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Weil verschwenderisches Verhalten schwer getadelt wird.",
       "requiredByFields": 1
     },
     {
@@ -2682,11 +2650,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Qurʾān tadelt Verschwendung sehr deutlich und ruft zu verantwortungsvollem Umgang mit Besitz auf.",
+      "fragment": "Weil verschwenderisches Verhalten schwer getadelt wird.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Damit es ungelesen bleibt.",
+      "fragment": "Der Qurʾān tadelt Verschwendung sehr deutlich und ruft zu verantwortungsvollem Umgang mit Besitz auf.",
       "requiredByFields": 1
     },
     {
@@ -2694,11 +2662,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Damit Menschen über seine Āyāt nachdenken und sich erinnern.",
+      "fragment": "Damit es ungelesen bleibt.",
       "requiredByFields": 1
     },
     {
       "fragment": "Warum wurde das gesegnete Buch nach Qurʾān 38:29 herabgesandt?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Damit Menschen über seine Āyāt nachdenken und sich erinnern.",
       "requiredByFields": 1
     },
     {
@@ -2710,15 +2682,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Weil sie unwichtig sind.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Warum sollen Versprechen und Verpflichtungen ernst genommen werden?",
       "requiredByFields": 1
     },
     {
       "fragment": "Weil nach ihnen gefragt wird.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Weil sie unwichtig sind.",
       "requiredByFields": 1
     },
     {
@@ -2730,11 +2702,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Woran zeigt sich nach Qurʾān 107:1–3 ein schwerer Mangel im Glaubensverhalten?",
+      "fragment": "Einen Gast freundlich zu empfangen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Einen Gast freundlich zu empfangen.",
+      "fragment": "Woran zeigt sich nach Qurʾān 107:1–3 ein schwerer Mangel im Glaubensverhalten?",
       "requiredByFields": 1
     },
     {
@@ -2746,6 +2718,14 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Allah wird sie zu Seinen Wegen leiten.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sie werden nie geprüft.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Was verspricht Qurʾān 29:69 denen, die sich um Allahs willen ernsthaft bemühen?",
       "requiredByFields": 1
     },
@@ -2754,23 +2734,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie werden nie geprüft.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Allah wird sie zu Seinen Wegen leiten.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Allah verspricht den aufrichtig Bemühten Rechtleitung zu Seinen Wegen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah erleichtert ihm dadurch einen Weg zum Paradies.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Er braucht danach keine Taten mehr.",
+      "fragment": "Welche Belohnung nennt Ṣaḥīḥ Muslim 2699 für jemanden, der einen Weg geht, um Wissen zu suchen?",
       "requiredByFields": 1
     },
     {
@@ -2778,7 +2746,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Belohnung nennt Ṣaḥīḥ Muslim 2699 für jemanden, der einen Weg geht, um Wissen zu suchen?",
+      "fragment": "Er braucht danach keine Taten mehr.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Allah erleichtert ihm dadurch einen Weg zum Paradies.",
       "requiredByFields": 1
     },
     {
@@ -2794,15 +2766,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Es gibt keinen Unterschied zwischen Ḥalāl und Ḥarām.",
       "requiredByFields": 1
     },
     {
+      "fragment": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge?",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Der Prophet ﷺ erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Der Dīn ist nur Schweigen.",
       "requiredByFields": 1
     },
     {
@@ -2818,10 +2794,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Dīn ist nur Schweigen.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Der Prophet ﷺ sagte, der Dīn sei Naṣīḥah: gegenüber Allah, Seinem Buch, Seinem Gesandten, den Verantwortlichen und den Muslimen.",
       "requiredByFields": 1
     },
@@ -2831,10 +2803,6 @@
     },
     {
       "fragment": "Der Prophet ﷺ riet, in der Dunyā wie ein Fremder oder ein Reisender zu sein.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Gute Taten werden dadurch wertlos.",
       "requiredByFields": 1
     },
     {
@@ -2850,11 +2818,19 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Gute Taten werden dadurch wertlos.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Der Prophet ﷺ lehrte, dass selbst kleinere Leiden für den Muslim ein Grund für die Tilgung von Sünden sein können.",
       "requiredByFields": 1
     },
     {
       "fragment": "Welche Rolle nennt Qurʾān 96:4–5 für den Stift und das Lernen?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Allah lehrte durch den Stift und lehrte den Menschen Unbekanntes.",
       "requiredByFields": 1
     },
     {
@@ -2866,15 +2842,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah lehrte durch den Stift und lehrte den Menschen Unbekanntes.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Allah erwähnt das Lehren durch den Stift und dass Er den Menschen lehrte, was dieser nicht wusste.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Wie verbindet Sūrat al-Qāriʿah die Waage der Taten mit dem Ausgang im Jenseits?",
+      "fragment": "Jeder Ausgang ist unabhängig von Taten.",
       "requiredByFields": 1
     },
     {
@@ -2886,19 +2858,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Jeder Ausgang ist unabhängig von Taten.",
+      "fragment": "Wie verbindet Sūrat al-Qāriʿah die Waage der Taten mit dem Ausgang im Jenseits?",
       "requiredByFields": 1
     },
     {
       "fragment": "Die Sūrah beschreibt den guten Ausgang bei schweren Waagschalen und warnt vor dem Ausgang bei leichten.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Als ewigen Aufenthaltsort.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Als einzigen Zweck der Schöpfung.",
       "requiredByFields": 1
     },
     {
@@ -2910,15 +2874,23 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Als ewigen Aufenthaltsort.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Als einzigen Zweck der Schöpfung.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Der Vers beschreibt die vergängliche Dunyā mit Spiel, Zerstreuung, Schmuck, Prahlen und Konkurrenz um Besitz und Kinder.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Verheißung nennt Qurʾān 16:97 für gläubige Menschen mit rechtschaffenen Taten?",
+      "fragment": "Automatisch großen Besitz.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Automatisch großen Besitz.",
+      "fragment": "Welche Verheißung nennt Qurʾān 16:97 für gläubige Menschen mit rechtschaffenen Taten?",
       "requiredByFields": 1
     },
     {
@@ -2934,6 +2906,10 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Um Gutes im Diesseits und Jenseits und Schutz vor dem Feuer.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Was bittet die Duʿāʾ in Qurʾān 2:201?",
       "requiredByFields": 1
     },
@@ -2942,11 +2918,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Um Gutes im Diesseits und Jenseits und Schutz vor dem Feuer.",
+      "fragment": "Die Qurʾān-Duʿāʾ bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Die Qurʾān-Duʿāʾ bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.",
+      "fragment": "Sie leben ohne Verantwortung füreinander.",
       "requiredByFields": 1
     },
     {
@@ -2962,19 +2938,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie leben ohne Verantwortung füreinander.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Allah beschreibt gläubige Männer und Frauen als Unterstützer voneinander, die Gutes gebieten, Verwerfliches verbieten, beten und Zakāh geben.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Nichts ist Allah gleich, und Er ist der Allhörende, Allsehende.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Allah kennt nur Sichtbares.",
       "requiredByFields": 1
     },
     {
@@ -2982,7 +2946,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Allah kennt nur Sichtbares.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah gleicht Seiner Schöpfung.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Nichts ist Allah gleich, und Er ist der Allhörende, Allsehende.",
       "requiredByFields": 1
     },
     {
@@ -2990,15 +2962,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Reihenfolge lehrt Qurʾān 3:159 im Umgang mit Menschen und Entscheidungen?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Hart sein und nie jemanden beraten.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Nach jeder Entscheidung nur auf sich selbst vertrauen.",
+      "fragment": "Welche Reihenfolge lehrt Qurʾān 3:159 im Umgang mit Menschen und Entscheidungen?",
       "requiredByFields": 1
     },
     {
@@ -3006,7 +2974,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Nach jeder Entscheidung nur auf sich selbst vertrauen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Der Vers verbindet Sanftmut, Vergebung, Beratung, Entschluss und Tawakkul.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Warum sollen Gläubige nach Qurʾān 8:24 Allah und dem Gesandten folgen?",
       "requiredByFields": 1
     },
     {
@@ -3019,10 +2995,6 @@
     },
     {
       "fragment": "Damit sie nur über andere urteilen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Warum sollen Gläubige nach Qurʾān 8:24 Allah und dem Gesandten folgen?",
       "requiredByFields": 1
     },
     {
@@ -3042,14 +3014,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Einen Lohn wie derjenige, der die gute Tat ausführt.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Welchen Lohn hat jemand, der einen anderen zu einer guten Tat führt?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Überhaupt keinen Lohn.",
       "requiredByFields": 1
     },
@@ -3058,11 +3022,19 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Welchen Lohn hat jemand, der einen anderen zu einer guten Tat führt?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Einen Lohn wie derjenige, der die gute Tat ausführt.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Der Prophet ﷺ lehrte, dass derjenige, der auf Gutes hinweist, einen Lohn wie der Ausführende erhält.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Zum Gedenken Allahs eilen und den Handel lassen.",
+      "fragment": "Was sollen Gläubige tun, wenn am Freitag zum Gebet gerufen wird?",
       "requiredByFields": 1
     },
     {
@@ -3070,11 +3042,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Den Gebetsruf ignorieren.",
+      "fragment": "Zum Gedenken Allahs eilen und den Handel lassen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Was sollen Gläubige tun, wenn am Freitag zum Gebet gerufen wird?",
+      "fragment": "Den Gebetsruf ignorieren.",
       "requiredByFields": 1
     },
     {
@@ -3090,11 +3062,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Alle Arbeit für immer zu beenden.",
+      "fragment": "Was erlaubt und empfiehlt Qurʾān 62:10 nach dem Gebet?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Was erlaubt und empfiehlt Qurʾān 62:10 nach dem Gebet?",
+      "fragment": "Alle Arbeit für immer zu beenden.",
       "requiredByFields": 1
     },
     {
@@ -3106,15 +3078,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie fürchten ihren Herrn, glauben an Seine Zeichen und eilen zu guten Taten.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Sie suchen nur weltlichen Ruhm.",
       "requiredByFields": 1
     },
     {
       "fragment": "Wie beschreibt Qurʾān 23:57–61 rechtschaffene Gläubige?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sie fürchten ihren Herrn, glauben an Seine Zeichen und eilen zu guten Taten.",
       "requiredByFields": 1
     },
     {
@@ -3126,11 +3098,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Wirkung haben Allahs Verse nach Qurʾān 8:2 auf Gläubige?",
+      "fragment": "Ihr Īmān nimmt zu.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Ihr Īmān nimmt zu.",
+      "fragment": "Welche Wirkung haben Allahs Verse nach Qurʾān 8:2 auf Gläubige?",
       "requiredByFields": 1
     },
     {
@@ -3142,15 +3114,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Sie dient nur der Unterhaltung.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Sie hat keine Wirkung auf Herzen.",
       "requiredByFields": 1
     },
     {
       "fragment": "Haut und Herzen reagieren darauf und werden weich beim Gedenken Allahs.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sie dient nur der Unterhaltung.",
       "requiredByFields": 1
     },
     {
@@ -3162,7 +3134,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie geschieht mit Allahs Erlaubnis, und Glaube an Allah führt das Herz.",
+      "fragment": "Der Gläubige darf jede Hoffnung verlieren.",
       "requiredByFields": 1
     },
     {
@@ -3174,7 +3146,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Gläubige darf jede Hoffnung verlieren.",
+      "fragment": "Sie geschieht mit Allahs Erlaubnis, und Glaube an Allah führt das Herz.",
       "requiredByFields": 1
     },
     {
@@ -3182,15 +3154,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Wir gehören nur uns selbst.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Es gibt keine Rückkehr zu Allah.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Wir gehören Allah und zu Ihm kehren wir zurück.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Wir gehören nur uns selbst.",
       "requiredByFields": 1
     },
     {
@@ -3198,19 +3166,11 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Es gibt keine Rückkehr zu Allah.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah lobt diejenigen, die bei einem Unglück ihre Zugehörigkeit zu Ihm und ihre Rückkehr zu Ihm bekennen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wir lehnen jede Entscheidung ab.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wie antworten Gläubige, wenn sie zu Allah und Seinem Gesandten gerufen werden, damit zwischen ihnen entschieden wird?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wir hören und gehorchen.",
       "requiredByFields": 1
     },
     {
@@ -3218,15 +3178,19 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Wir hören und gehorchen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Wie antworten Gläubige, wenn sie zu Allah und Seinem Gesandten gerufen werden, damit zwischen ihnen entschieden wird?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Wir lehnen jede Entscheidung ab.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Qurʾān 24:51 beschreibt die Antwort der Gläubigen mit Hören und Gehorchen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Nur über Liebe zu sprechen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Dem Propheten ﷺ zu folgen.",
       "requiredByFields": 1
     },
     {
@@ -3234,7 +3198,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Dem Propheten ﷺ zu folgen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Was ist nach Qurʾān 3:31 ein Zeichen wahrer Liebe zu Allah?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Nur über Liebe zu sprechen.",
       "requiredByFields": 1
     },
     {
@@ -3242,7 +3214,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Kombination zeigt Qurʾān 11:6 über Allahs Umgang mit Geschöpfen?",
+      "fragment": "Er kennt ihre Orte und ihre Versorgung.",
       "requiredByFields": 1
     },
     {
@@ -3250,11 +3222,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Versorgung geschieht unabhängig von Ihm.",
+      "fragment": "Welche Kombination zeigt Qurʾān 11:6 über Allahs Umgang mit Geschöpfen?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Er kennt ihre Orte und ihre Versorgung.",
+      "fragment": "Versorgung geschieht unabhängig von Ihm.",
       "requiredByFields": 1
     },
     {
@@ -3266,7 +3238,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah nimmt Reue an, vergibt schlechte Taten und weiß, was Menschen tun.",
+      "fragment": "Welche drei Aussagen verbindet Qurʾān 42:25?",
       "requiredByFields": 1
     },
     {
@@ -3274,7 +3246,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche drei Aussagen verbindet Qurʾān 42:25?",
+      "fragment": "Allah nimmt Reue an, vergibt schlechte Taten und weiß, was Menschen tun.",
       "requiredByFields": 1
     },
     {
@@ -3290,11 +3262,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Über Allahs Zeichen nachdenken.",
+      "fragment": "Der Schöpfung göttliche Macht zuschreiben.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Schöpfung göttliche Macht zuschreiben.",
+      "fragment": "Über Allahs Zeichen nachdenken.",
       "requiredByFields": 1
     },
     {
@@ -3302,15 +3274,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche zwei Erinnerungen verbindet Qurʾān 43:13–14 mit dem Reiten?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Dank für Allahs Dienstbarmachung und Rückkehr zu Ihm.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Stolz auf Besitz und Vergessen Allahs.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Welche zwei Erinnerungen verbindet Qurʾān 43:13–14 mit dem Reiten?",
       "requiredByFields": 1
     },
     {
@@ -3318,7 +3286,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Dank für Allahs Dienstbarmachung und Rückkehr zu Ihm.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Die Verse lehren Dankbarkeit beim Reisen und Erinnerung an die Rückkehr zu Allah.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "In Not Allah anrufen und auf Seine Barmherzigkeit hoffen.",
       "requiredByFields": 1
     },
     {
@@ -3334,15 +3310,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "In Not Allah anrufen und auf Seine Barmherzigkeit hoffen.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Ayyūb wandte sich in der Prüfung an Allah; Allah antwortete und hob die Not auf.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Verbindung macht Sulaymāns Duʿāʾ in Qurʾān 27:19 deutlich?",
+      "fragment": "Dankbarkeit braucht keine Taten.",
       "requiredByFields": 1
     },
     {
@@ -3350,11 +3322,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Gaben sollen Hochmut erzeugen.",
+      "fragment": "Welche Verbindung macht Sulaymāns Duʿāʾ in Qurʾān 27:19 deutlich?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Dankbarkeit braucht keine Taten.",
+      "fragment": "Gaben sollen Hochmut erzeugen.",
       "requiredByFields": 1
     },
     {
@@ -3370,11 +3342,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Gutes nützt dem Täter, Böses fällt auf ihn zurück.",
+      "fragment": "Welches Prinzip formuliert Qurʾān 41:46 über gute und schlechte Taten?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Welches Prinzip formuliert Qurʾān 41:46 über gute und schlechte Taten?",
+      "fragment": "Gutes nützt dem Täter, Böses fällt auf ihn zurück.",
       "requiredByFields": 1
     },
     {
@@ -3386,10 +3358,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah fürchten, soweit man kann, hören, gehorchen und geben.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Sich absichtlich überfordern.",
       "requiredByFields": 1
     },
@@ -3398,19 +3366,11 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Allah fürchten, soweit man kann, hören, gehorchen und geben.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Der Vers verbindet Taqwā im Rahmen der Fähigkeit mit Gehorsam und großzügigem Geben.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Er verliert jede Belohnung.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Welche Verheißung nennt der Ḥadīṯ für jemanden, der einem Muslim eine Not erleichtert?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Allah erleichtert ihm eine Not am Tag der Auferstehung.",
       "requiredByFields": 1
     },
     {
@@ -3418,19 +3378,19 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Welche Verheißung nennt der Ḥadīṯ für jemanden, der einem Muslim eine Not erleichtert?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Er verliert jede Belohnung.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Allah erleichtert ihm eine Not am Tag der Auferstehung.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Der Prophet ﷺ lehrte, dass Hilfe in der Not eine große Belohnung im Jenseits hat.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Welche vier Eigenschaften retten nach Sūrat al-ʿAṣr vor Verlust?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Īmān, rechtschaffene Taten, Wahrheit und Geduld.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Besitz, Ruhm, Stärke und Alter.",
       "requiredByFields": 1
     },
     {
@@ -3438,11 +3398,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sūrat al-ʿAṣr verbindet Īmān, gute Taten sowie gegenseitige Empfehlung zu Wahrheit und Geduld.",
+      "fragment": "Besitz, Ruhm, Stärke und Alter.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Ein Freund beantwortet etwas falsch. Welcher Grundsatz hilft dir hier am besten?",
+      "fragment": "Īmān, rechtschaffene Taten, Wahrheit und Geduld.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Welche vier Eigenschaften retten nach Sūrat al-ʿAṣr vor Verlust?",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sūrat al-ʿAṣr verbindet Īmān, gute Taten sowie gegenseitige Empfehlung zu Wahrheit und Geduld.",
       "requiredByFields": 1
     },
     {
@@ -3451,6 +3419,10 @@
     },
     {
       "fragment": "Bei Streit sind harte Worte immer besser.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Ein Freund beantwortet etwas falsch. Welcher Grundsatz hilft dir hier am besten?",
       "requiredByFields": 1
     },
     {
@@ -3466,7 +3438,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Auch wenn es unangenehm ist, bleibt man ehrlich.",
+      "fragment": "Du hast aus Versehen etwas kaputt gemacht und wirst gefragt. Welcher Grundsatz hilft dir hier am besten?",
       "requiredByFields": 1
     },
     {
@@ -3474,15 +3446,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Du hast aus Versehen etwas kaputt gemacht und wirst gefragt. Welcher Grundsatz hilft dir hier am besten?",
+      "fragment": "Auch wenn es unangenehm ist, bleibt man ehrlich.",
       "requiredByFields": 1
     },
     {
       "fragment": "Allah befiehlt, mit den Wahrhaftigen zu sein.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Ghībah ist erlaubt, solange die Person es nicht hört.",
       "requiredByFields": 1
     },
     {
@@ -3498,6 +3466,10 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Ghībah ist erlaubt, solange die Person es nicht hört.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah verbietet üble Nachrede über Abwesende.",
       "requiredByFields": 1
     },
@@ -3510,11 +3482,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Auf schlechtes Verhalten antworten wir möglichst mit etwas Besserem.",
+      "fragment": "Gutes Verhalten gilt nur bei Freunden.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Gutes Verhalten gilt nur bei Freunden.",
+      "fragment": "Auf schlechtes Verhalten antworten wir möglichst mit etwas Besserem.",
       "requiredByFields": 1
     },
     {
@@ -3522,11 +3494,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Wir sprechen angemessen und nicht unnötig laut.",
+      "fragment": "Rücksicht auf andere ist beim Sprechen unwichtig.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Rücksicht auf andere ist beim Sprechen unwichtig.",
+      "fragment": "Wir sprechen angemessen und nicht unnötig laut.",
       "requiredByFields": 1
     },
     {
@@ -3542,11 +3514,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Eigene Entscheidungen haben keine Folgen.",
+      "fragment": "Du hast selbst etwas Falsches getan. Welcher Grundsatz hilft dir hier am besten?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Für eigene Fehler sollte immer jemand anderes verantwortlich sein.",
+      "fragment": "Eigene Entscheidungen haben keine Folgen.",
       "requiredByFields": 1
     },
     {
@@ -3554,7 +3526,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Du hast selbst etwas Falsches getan. Welcher Grundsatz hilft dir hier am besten?",
+      "fragment": "Für eigene Fehler sollte immer jemand anderes verantwortlich sein.",
       "requiredByFields": 1
     },
     {
