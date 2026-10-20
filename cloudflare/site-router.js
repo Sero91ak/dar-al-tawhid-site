@@ -273,6 +273,12 @@ function adultCompactHeroAddon() {
   return '<link rel="stylesheet" id="darAdultHeroCompactEdgeV1404" href="/assets/adult-responsive-viewport-v1381.css?v=visitor-hero-safearea-v1404-20261019">' +
     '<script defer id="darAdultHeroHeightRuntimeV1404" src="/assets/adult-hero-height-runtime-v1403.js?v=visitor-hero-safearea-v1404-20261019"></' + 'script>';
 }
+/* DAR_ADULT_TOP_SCROLL_BOUNDARY_V1 – adult visitor HTML only.
+ * Add a root-only scroll stop; preserve Hero, sticky search, and all carousels. */
+function adultTopScrollBoundaryAddon() {
+  return '<link rel="stylesheet" id="darAdultTopScrollCssV1" href="/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-v1">' +
+    '<script defer id="darAdultTopScrollJsV1" src="/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-v1"></' + 'script>';
+}
 function activateAdultCompactHero(html) {
   if (typeof html !== "string") return html;
   // Clean only known injected Hero tags. Never remove the underlying native
@@ -283,6 +289,15 @@ function activateAdultCompactHero(html) {
       !html.includes('id="darAdultHeroHeightRuntimeV1404"')) {
     const injection = adultCompactHeroAddon();
     html = html.includes("</body>") ? html.replace("</body>", injection + "</body>") : html + injection;
+  }
+  if (!html.includes('id="darAdultTopScrollCssV1"') ||
+      !html.includes('id="darAdultTopScrollJsV1"')) {
+    // One injection for all adult surfaces, including iOS WebApp and PWA.
+    // If the shell was partially cached, clear only these own two tags.
+    html = html.replace(/<link\b[^>]*\bid=["']darAdultTopScrollCssV1["'][^>]*>\s*/gi, "");
+    html = html.replace(/<script\b[^>]*\bid=["']darAdultTopScrollJsV1["'][^>]*>\s*<\/script\s*>\s*/gi, "");
+    const scrollAddon = adultTopScrollBoundaryAddon();
+    html = html.includes("</body>") ? html.replace("</body>", scrollAddon + "</body>") : html + scrollAddon;
   }
   return html;
 }
