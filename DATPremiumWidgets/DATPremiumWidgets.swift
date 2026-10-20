@@ -2350,7 +2350,7 @@ private struct DATClassicPrayerView: View {
 
     @ViewBuilder
     private func countdown(fontSize: CGFloat) -> some View {
-        if let target = nextTarget?.when {
+        if nextTarget != nil {
             TimelineView(.periodic(from: entry.date, by: 60)) { context in
                 Text(DATClock.compactRemainingText(snapshot, at: context.date))
                     .font(.system(size: fontSize, weight: .medium, design: .serif))
