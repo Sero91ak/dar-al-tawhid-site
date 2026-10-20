@@ -116,22 +116,26 @@ def preflight():
             "wrong full quiz plan")
     waves=queue["recordingWaves"]
     require(bool(waves),"all new original texts already saved")
-    first=waves[0]
-    # The immutable 25-item planning wave is NOT a purchasing instruction.
-    # Select only fresh, pronunciation-covered originals that fit this user's
-    # newly authorized small cap; never buy 25 merely because the planner lists 25.
+    # The recording plan orders pending texts across MANY immutable waves.
+    # A first wave can contain only separately-held Arabic terms or texts
+    # exceeding the narrower paid cap, while later waves contain safe texts.
+    # Scan the full pending queue in deterministic order, never relax the
+    # pronunciation hold, the original text SHA or the per-wave credit cap.
     texts=[]
     bounded_credits=0.0
-    for candidate in first["exactTexts"]:
-        if source_requires_separate_pronunciation_approval(candidate["text"]):
-            continue
-        cost=round(len(candidate["text"])*planner.ESTIMATE_CREDITS_PER_CODEPOINT,4)
+    for planned_wave in waves:
+        for candidate in planned_wave["exactTexts"]:
+            if len(texts)>=MAX_NEW_PER_CALL:
+                break
+            if source_requires_separate_pronunciation_approval(candidate["text"]):
+                continue
+            cost=round(len(candidate["text"])*planner.ESTIMATE_CREDITS_PER_CODEPOINT,4)
+            if bounded_credits+cost>MAX_ESTIMATED_CREDITS:
+                continue
+            texts.append(candidate)
+            bounded_credits+=cost
         if len(texts)>=MAX_NEW_PER_CALL:
             break
-        if bounded_credits+cost>MAX_ESTIMATED_CREDITS:
-            continue
-        texts.append(candidate)
-        bounded_credits+=cost
     bounded_credits=round(bounded_credits,2)
     require(1<=len(texts)<=MAX_NEW_PER_CALL and
             0<bounded_credits<=MAX_ESTIMATED_CREDITS and
