@@ -2364,6 +2364,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Was bittet die Duʿāʾ in Qurʾān 2:201? Antwort 1: Um Gutes im Diesseits und Jenseits und Schutz vor dem Feuer. Antwort 2: Nur um Reichtum. Antwort 3: Nur um ein langes Leben. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/2bad1647aedeeb567808ed764f73d1a7a0d9441f.mp3",
+      "sha256": "13529bcbbbe25857763cb6834ecf7290325d133736f3d917b371d3a499b327ec",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Jemand sagt, man könne Duʿāʾ an einen Stern richten. Welcher Grundsatz hilft dir hier am besten? Antwort 1: ʿIbādah und Duʿāʾ richten wir an Allah allein. Antwort 2: Duʿāʾ kann an jedes Geschöpf gerichtet werden. Antwort 3: Bei Duʿāʾ spielt Tawḥīd keine Rolle. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/6c56344bd58b8ab1d4182e452e2310f22bf0e001.mp3",
       "sha256": "80365e99c37ba505706f8a980b6bfe9aadfb50375fd417810ef12a8bf5d647e3",
@@ -5890,7 +5901,6 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Allah genügt ihm.",
             "Er braucht Allah nicht.",
             "Er soll nur auf Menschen vertrauen.",
             "Was ist Allah für den, der auf Ihn vertraut?"
@@ -10269,12 +10279,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Nur um ein langes Leben.",
-            "Um Gutes im Diesseits und Jenseits und Schutz vor dem Feuer.",
-            "Was bittet die Duʿāʾ in Qurʾān 2:201?"
-          ]
+          "available": true,
+          "textSha256": "5639afa25182c2e79b807284099b32b9188f945a0fdb0a79a5135b4c42fd5e35",
+          "mp3Sha256": "13529bcbbbe25857763cb6834ecf7290325d133736f3d917b371d3a499b327ec",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/2bad1647aedeeb567808ed764f73d1a7a0d9441f.mp3"
         },
         "correct": {
           "available": true,
