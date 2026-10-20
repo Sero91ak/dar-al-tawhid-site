@@ -130,6 +130,51 @@
       "humanApproved": false
     },
     {
+      "questionId": "kids-quiz-025",
+      "ageBand": "7-8",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Der reichste Mensch",
+        "Der Gesandte Allahs ﷺ",
+        "Der lauteste Mensch"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a1",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "a51f60ddaf482a58d77a3dbf0bc15a1d79bb959ff659fc3f6fc3c384f383f7a9",
+      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Wer ist für Muslime ein schönes Vorbild? Antwort 1: Der reichste Mensch. Antwort 2: Der Gesandte Allahs ﷺ. Antwort 3: Der lauteste Mensch. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "cd45d5a1cc3e5d5f033fbb5b1ff9f552ccc13fdb78f77b04db6851200c1774db",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Überlege kurz, bevor du dich entscheidest.",
+        "Wer ist für Muslime ein schönes Vorbild?",
+        "Antwort 1:",
+        "Der reichste Mensch.",
+        "Antwort 2:",
+        "Der Gesandte Allahs ﷺ.",
+        "Antwort 3:",
+        "Der lauteste Mensch.",
+        "Wähle die Antwort, die du für richtig hältst."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 33:21",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
       "questionId": "kids-quiz-046",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
@@ -176,20 +221,20 @@
       "questionId": "kids-quiz-031",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
         "Sofort beleidigen",
-        "Den Zorn zurückhalten und verzeihen",
-        "Etwas kaputt machen"
+        "Etwas kaputt machen",
+        "Den Zorn zurückhalten und verzeihen"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a1",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "d30e8e74cb575b036d0b34a89baa8c3b5f2039cd419c02494bdc84e7e549eb57",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was ist besser, wenn wir wütend sind? Antwort 1: Sofort beleidigen. Antwort 2: Den Zorn zurückhalten und verzeihen. Antwort 3: Etwas kaputt machen. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "352acbb7a3b882cbcfe7d249662e547ce8b366a8ea5310f07290784941734663",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was ist besser, wenn wir wütend sind? Antwort 1: Sofort beleidigen. Antwort 2: Etwas kaputt machen. Antwort 3: Den Zorn zurückhalten und verzeihen. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "1343235986566d7ac716bffe435552465946f36fa1dffff78de718f18a8cd83b",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
@@ -197,9 +242,9 @@
         "Antwort 1:",
         "Sofort beleidigen.",
         "Antwort 2:",
-        "Den Zorn zurückhalten und verzeihen.",
-        "Antwort 3:",
         "Etwas kaputt machen.",
+        "Antwort 3:",
+        "Den Zorn zurückhalten und verzeihen.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -299,51 +344,6 @@
         240
       ],
       "originalSource": "Qurʾān 49:13",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-025",
-      "ageBand": "7-8",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Der reichste Mensch",
-        "Der lauteste Mensch",
-        "Der Gesandte Allahs ﷺ"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a3",
-        "a1"
-      ],
-      "originalQuestionAudioSHA256": "a51f60ddaf482a58d77a3dbf0bc15a1d79bb959ff659fc3f6fc3c384f383f7a9",
-      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Wer ist für Muslime ein schönes Vorbild? Antwort 1: Der reichste Mensch. Antwort 2: Der lauteste Mensch. Antwort 3: Der Gesandte Allahs ﷺ. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "5d4f03d4455e2edfd8561f7a58f3a94329d30fcb61ef985215a911060f6d2bd5",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Überlege kurz, bevor du dich entscheidest.",
-        "Wer ist für Muslime ein schönes Vorbild?",
-        "Antwort 1:",
-        "Der reichste Mensch.",
-        "Antwort 2:",
-        "Der lauteste Mensch.",
-        "Antwort 3:",
-        "Der Gesandte Allahs ﷺ.",
-        "Wähle die Antwort, die du für richtig hältst."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 33:21",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
@@ -1102,78 +1102,33 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-129",
+      "questionId": "kids-quiz-277",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Ja",
-        "Nur manchmal",
-        "Nein"
+        "Goldmünzen",
+        "Ein Königreich",
+        "Frische reife Datteln"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
         "a3",
         "a1"
       ],
-      "originalQuestionAudioSHA256": "a6f7e4a92890326fe7bd1ae1b1c4527129cc4aa5e42eb485b24381df6ca63b69",
-      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Darf Abneigung gegen Menschen uns ungerecht machen? Antwort 1: Ja. Antwort 2: Nur manchmal. Antwort 3: Nein. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "32a4569af25c67a446ff29cb3f29c95031ef53e71c43970d00b6548c72a40a49",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Überlege kurz, bevor du dich entscheidest.",
-        "Darf Abneigung gegen Menschen uns ungerecht machen?",
-        "Antwort 1:",
-        "Ja.",
-        "Antwort 2:",
-        "Nur manchmal.",
-        "Antwort 3:",
-        "Nein.",
-        "Wähle die Antwort, die du für richtig hältst."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 5:8",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-277",
-      "ageBand": "7-8",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Frische reife Datteln",
-        "Goldmünzen",
-        "Ein Königreich"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
-        "a2",
-        "a3"
-      ],
       "originalQuestionAudioSHA256": "e95aebb1b0df627f5294188332c3e84af4fe6b0037c4d04f02332862c5ef2390",
-      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Welche Versorgung erhielt Maryam bei der Geburt? Antwort 1: Frische reife Datteln. Antwort 2: Goldmünzen. Antwort 3: Ein Königreich. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "e95aebb1b0df627f5294188332c3e84af4fe6b0037c4d04f02332862c5ef2390",
+      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Welche Versorgung erhielt Maryam bei der Geburt? Antwort 1: Goldmünzen. Antwort 2: Ein Königreich. Antwort 3: Frische reife Datteln. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "34d0cc74572797ce7ef0158a3d81249092e1445199e051ad447540162c05e6c7",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Überlege kurz, bevor du dich entscheidest.",
         "Welche Versorgung erhielt Maryam bei der Geburt?",
         "Antwort 1:",
-        "Frische reife Datteln.",
-        "Antwort 2:",
         "Goldmünzen.",
-        "Antwort 3:",
+        "Antwort 2:",
         "Ein Königreich.",
+        "Antwort 3:",
+        "Frische reife Datteln.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -1195,28 +1150,28 @@
       "questionId": "kids-quiz-383",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Sie verschwindet",
         "Sie wird wieder lebendig",
+        "Sie verschwindet",
         "Sie wird zu Gold"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
         "a1",
+        "a2",
         "a3"
       ],
       "originalQuestionAudioSHA256": "ce867c408cdce105bf6f9c86d67d9b7fd8bf46e73d1f6593f567466e10422524",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was geschieht mit toter Erde, wenn Allah Regen sendet? Antwort 1: Sie verschwindet. Antwort 2: Sie wird wieder lebendig. Antwort 3: Sie wird zu Gold. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "370d932c05702027bb7f77e1c37787e03af908807af38b8b0b27d7813033245b",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was geschieht mit toter Erde, wenn Allah Regen sendet? Antwort 1: Sie wird wieder lebendig. Antwort 2: Sie verschwindet. Antwort 3: Sie wird zu Gold. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "ce867c408cdce105bf6f9c86d67d9b7fd8bf46e73d1f6593f567466e10422524",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
         "Was geschieht mit toter Erde, wenn Allah Regen sendet?",
         "Antwort 1:",
-        "Sie verschwindet.",
-        "Antwort 2:",
         "Sie wird wieder lebendig.",
+        "Antwort 2:",
+        "Sie verschwindet.",
         "Antwort 3:",
         "Sie wird zu Gold.",
         "Wähle die Antwort, die du für richtig hältst."
@@ -1240,20 +1195,20 @@
       "questionId": "kids-quiz-079",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
+      "proposedCorrectAnswerPosition": 2,
       "displayAnswerLabelsInSameOrderAsSpeech": [
         "Er empfiehlt sie",
-        "Er nennt sie immer mutig",
-        "Er verbietet sie"
+        "Er verbietet sie",
+        "Er nennt sie immer mutig"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a3",
-        "a1"
+        "a1",
+        "a3"
       ],
       "originalQuestionAudioSHA256": "d93a19cfd13693a046be69727d7c2aebe3746fa2722141b6d33a07e32b269197",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Wie behandelt der Qurʾān Verschwendung? Antwort 1: Er empfiehlt sie. Antwort 2: Er nennt sie immer mutig. Antwort 3: Er verbietet sie. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "cc71b2e16a47600128eee6e5096c36dddfab6883abcad4cffee730fb1b723a21",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Wie behandelt der Qurʾān Verschwendung? Antwort 1: Er empfiehlt sie. Antwort 2: Er verbietet sie. Antwort 3: Er nennt sie immer mutig. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "3c6fc97bee236d45c95b4a6acdcba7825c6458ec02c201c173e9c64f1b3aa247",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
@@ -1261,9 +1216,9 @@
         "Antwort 1:",
         "Er empfiehlt sie.",
         "Antwort 2:",
-        "Er nennt sie immer mutig.",
-        "Antwort 3:",
         "Er verbietet sie.",
+        "Antwort 3:",
+        "Er nennt sie immer mutig.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -1285,30 +1240,30 @@
       "questionId": "kids-quiz-530",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Allah genügt ihm",
         "Er braucht Allah nicht",
-        "Er soll nur auf Menschen vertrauen"
+        "Er soll nur auf Menschen vertrauen",
+        "Allah genügt ihm"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
         "a2",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "731c52062bbd23d42da7cec3977c0721eea847554c4fe950ea598dd3408fc921",
-      "proposedQuestionAudioText": "Mal sehen, was du zu diesem Thema weißt. Was ist Allah für den, der auf Ihn vertraut? Antwort 1: Allah genügt ihm. Antwort 2: Er braucht Allah nicht. Antwort 3: Er soll nur auf Menschen vertrauen. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "731c52062bbd23d42da7cec3977c0721eea847554c4fe950ea598dd3408fc921",
+      "proposedQuestionAudioText": "Mal sehen, was du zu diesem Thema weißt. Was ist Allah für den, der auf Ihn vertraut? Antwort 1: Er braucht Allah nicht. Antwort 2: Er soll nur auf Menschen vertrauen. Antwort 3: Allah genügt ihm. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "0d5e2bec6a023e5a11f16181834c9a8fde897f959dec0481fdb898fa82fc2273",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Mal sehen, was du zu diesem Thema weißt.",
         "Was ist Allah für den, der auf Ihn vertraut?",
         "Antwort 1:",
-        "Allah genügt ihm.",
-        "Antwort 2:",
         "Er braucht Allah nicht.",
-        "Antwort 3:",
+        "Antwort 2:",
         "Er soll nur auf Menschen vertrauen.",
+        "Antwort 3:",
+        "Allah genügt ihm.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -1330,28 +1285,28 @@
       "questionId": "kids-quiz-131",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Verbotene Nahrung",
         "Halāle und gute Nahrung",
+        "Verbotene Nahrung",
         "Alles ohne Prüfung"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
         "a1",
+        "a2",
         "a3"
       ],
       "originalQuestionAudioSHA256": "b332e3c811a4c7300f026c44876c5df9bc502e4968284b7976e0a6a7508db12b",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Welche Nahrung sollen Menschen wählen? Antwort 1: Verbotene Nahrung. Antwort 2: Halāle und gute Nahrung. Antwort 3: Alles ohne Prüfung. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "9ed4c4ac65478a9f1b21adbb5fa5db788a248314bfbe402500f1b7eebd1ea314",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Welche Nahrung sollen Menschen wählen? Antwort 1: Halāle und gute Nahrung. Antwort 2: Verbotene Nahrung. Antwort 3: Alles ohne Prüfung. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "b332e3c811a4c7300f026c44876c5df9bc502e4968284b7976e0a6a7508db12b",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
         "Welche Nahrung sollen Menschen wählen?",
         "Antwort 1:",
-        "Verbotene Nahrung.",
-        "Antwort 2:",
         "Halāle und gute Nahrung.",
+        "Antwort 2:",
+        "Verbotene Nahrung.",
         "Antwort 3:",
         "Alles ohne Prüfung.",
         "Wähle die Antwort, die du für richtig hältst."
@@ -1367,6 +1322,51 @@
         240
       ],
       "originalSource": "Qurʾān 2:168",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-428",
+      "ageBand": "7-8",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Lautes Reden",
+        "Demut im Gebet",
+        "Viel Besitz"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a1",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "3f37e7f8d60d0a1fb7a3487bc496878b6aa108f01259e4dd72b2391705445f8e",
+      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Welche Eigenschaft nennt Qurʾān 23:1–2 zuerst bei erfolgreichen Gläubigen? Antwort 1: Lautes Reden. Antwort 2: Demut im Gebet. Antwort 3: Viel Besitz. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "f0f9fe65c078dd69a4ebce58499034a626a16c5501434361466b88423a6816eb",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Hör dir die Frage und die Antworten in Ruhe an.",
+        "Welche Eigenschaft nennt Qurʾān 23:1–2 zuerst bei erfolgreichen Gläubigen?",
+        "Antwort 1:",
+        "Lautes Reden.",
+        "Antwort 2:",
+        "Demut im Gebet.",
+        "Antwort 3:",
+        "Viel Besitz.",
+        "Wähle die Antwort, die du für richtig hältst."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 23:1–2",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
