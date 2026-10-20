@@ -1,0 +1,341 @@
+/* DAR VISITOR HERO + PRAYER + TOPIC LIBRARY v1 — adult visitor only, 2026-10-16.
+   All motifs are local to assets/, theme variables preserve appearance palettes.
+   Decorative image layers never intercept UI. */
+html[data-theme] body {
+  --dv-gutter: max(12px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  --dv-hero-left: color-mix(in srgb,var(--bg) 91%,transparent);
+  --dv-hero-mid: color-mix(in srgb,var(--bg) 58%,transparent);
+  --dv-hero-right: color-mix(in srgb,var(--bg) 13%,transparent);
+  --dv-hero-image: url("/assets/area-heroes-v1290/library.webp");
+}
+html[data-theme="light"] body,
+html[data-theme="soft"] body,
+html[data-theme="eisgold"] body,
+html[data-theme="salbei"] body,
+html[data-theme="light"][data-theme-variant="salbei"] body{
+  --dv-hero-left:color-mix(in srgb,var(--bg) 95%,transparent);
+  --dv-hero-mid:color-mix(in srgb,var(--bg) 77%,transparent);
+  --dv-hero-right:color-mix(in srgb,var(--bg) 25%,transparent);
+}
+html[data-theme="dark"] body,
+html[data-theme="royal"] body,
+html[data-theme="bordeaux"] body,
+html[data-theme="dar-al-layl"] body,
+html[data-theme="aurora"] body{
+  --dv-hero-left:color-mix(in srgb,var(--bg) 86%,transparent);
+  --dv-hero-mid:color-mix(in srgb,var(--bg) 52%,transparent);
+  --dv-hero-right:color-mix(in srgb,var(--bg) 8%,transparent);
+}
+html[data-theme] body.is-topics-route{--dv-hero-image:url("/assets/area-heroes-v1290/topics.webp")}
+html[data-theme] body.is-topic-route{--dv-hero-image:url("/assets/area-heroes-v1290/topic-detail.webp")}
+html[data-theme] body.is-post-route{--dv-hero-image:url("/assets/area-heroes-v1290/post-reader.webp")}
+html[data-theme] body.is-prayer-route{--dv-hero-image:url("/assets/area-heroes-v1290/prayer.webp")}
+html[data-theme] body.is-qibla-route{--dv-hero-image:url("/assets/area-heroes-v1290/qibla.webp")}
+html[data-theme] body.is-jummah-route{--dv-hero-image:url("/assets/area-heroes-v1290/jummah.webp")}
+html[data-theme] body.is-dua-route,body.is-duas-route{--dv-hero-image:url("/assets/area-heroes-v1290/dua.webp")}
+html[data-theme] body.is-more-route,body.is-settings-route{--dv-hero-image:url("/assets/area-heroes-v1290/more-hub.webp")}
+html[data-theme] body.is-library-route,body.is-source-library-route,body.is-account-route,body.is-about-route{--dv-hero-image:url("/assets/area-heroes-v1290/library.webp")}
+html[data-theme] body.is-quiz-route{--dv-hero-image:url("/assets/area-heroes-v1290/quiz.webp")}
+html[data-theme] body.is-quran-overview,body.is-quran-topic-route{--dv-hero-image:url("/assets/area-heroes-v1290/quran-overview.webp")}
+html[data-theme] body.is-quran-learn-route{--dv-hero-image:url("/assets/area-heroes-v1290/quran-learn.webp")}
+html[data-theme] body.is-scholar-route{--dv-hero-image:url("/assets/area-heroes-v1290/scholar-detail.webp")}
+html[data-theme] body.is-book-route{--dv-hero-image:url("/assets/area-heroes-v1290/book-detail.webp")}
+html[data-theme] body.is-news-route{--dv-hero-image:url("/assets/area-heroes-v1290/topics.webp")}
+/* Full-background hero rather than a floating image, with readable theme-dependent copy. */
+html[data-theme] body:is(
+ .is-topics-route,.is-topic-route,.is-post-route,.is-prayer-route,.is-qibla-route,
+ .is-jummah-route,.is-more-route,.is-quiz-route,.is-settings-route,.is-library-route,
+ .is-source-library-route,.is-dua-route,.is-duas-route,.is-scholar-route,
+ .is-book-route,.is-account-route,.is-about-route,.is-quran-topic-route,
+ .is-news-route
+) #appView > .view-head,
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title,
+html[data-theme] body.is-quran-overview #appView .qov-header{
+  position:relative!important;
+  isolation:isolate!important;
+  box-sizing:border-box!important;
+  width:calc(100% + var(--dv-gutter) + var(--dv-gutter))!important;
+  max-width:none!important;
+  min-height:clamp(248px,40vw,345px)!important;
+  margin:0 0 18px calc(0px - var(--dv-gutter))!important;
+  padding:36px max(20px,var(--dv-gutter)) 28px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  justify-content:flex-end!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:hidden!important;
+  background-color:var(--bg)!important;
+  background-image:
+    linear-gradient(90deg,var(--dv-hero-left) 0%,var(--dv-hero-mid) 47%,var(--dv-hero-right) 90%),
+    linear-gradient(0deg,color-mix(in srgb,var(--bg) 19%,transparent),transparent 67%),
+    var(--dv-hero-image)!important;
+  background-position:center,center,70% 48%!important;
+  background-size:cover,cover,cover!important;
+  background-repeat:no-repeat!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head > *,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head > *,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title > *,
+html[data-theme] body.is-quran-overview #appView .qov-header > *{
+  z-index:1!important;
+  position:relative!important;
+  width:min(690px,92%)!important;
+  max-width:100%!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub > .view-head::before,
+html[data-theme] body.is-topic-route #appView .topic-collection-page > .view-head::before,
+html[data-theme] body.is-post-route #appView .post-reader > .post-reader-title::before {
+  background:linear-gradient(90deg,color-mix(in srgb,var(--bg) 12%,transparent),transparent 68%)!important;
+  pointer-events:none!important;
+}
+html[data-theme] body:is(.is-topics-route,.is-topic-route,.is-post-route) #appView :is(.view-head h2,.post-reader-title h2){
+  max-width:100%!important;
+  font-size:clamp(2.05rem,7.7vw,3.85rem)!important;
+  line-height:1.06!important;
+  text-wrap:balance!important;
+  overflow-wrap:break-word!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub,
+html[data-theme] body.is-topic-route #appView .topic-collection-page{
+  width:100%!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin-inline:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+/* Complete visitor catalogue: preserve all original article tiles, group them in-place. */
+html[data-theme] body.is-topics-route #appView .topics-hub{
+ --vtop-ink:var(--text,#f5ebd9);
+ --vtop-accent:var(--gold2,#dec589);
+ --vtop-muted:var(--muted,#c9c1ae);
+ --vtop-surface:var(--card,var(--bg));
+ --vtop-line:var(--line2,rgba(222,197,137,.25));
+ --vtop-hover:color-mix(in srgb,var(--vtop-accent) 10%,var(--vtop-surface));
+}
+html[data-theme="light"] body.is-topics-route #appView .topics-hub{
+ --vtop-ink:#292216;--vtop-accent:#80602b;--vtop-muted:#635741;--vtop-surface:#fffcf3;--vtop-line:rgba(128,96,43,.28)}
+html[data-theme="soft"] body.is-topics-route #appView .topics-hub{
+ --vtop-ink:#32252b;--vtop-accent:#85576c;--vtop-muted:#6b5561;--vtop-surface:#fff5f8;--vtop-line:rgba(133,87,108,.29)}
+html[data-theme="salbei"] body.is-topics-route #appView .topics-hub,
+html[data-theme="light"][data-theme-variant="salbei"] body.is-topics-route #appView .topics-hub{
+ --vtop-ink:#203126;--vtop-accent:#496950;--vtop-muted:#506354;--vtop-surface:#f5f8ef;--vtop-line:rgba(73,105,80,.3)}
+html[data-theme="eisgold"] body.is-topics-route #appView .topics-hub{
+ --vtop-ink:#142338;--vtop-accent:#92702e;--vtop-muted:#536276;--vtop-surface:#f7fbff;--vtop-line:rgba(146,112,46,.3)}
+html[data-theme="dark"] body.is-topics-route #appView .topics-hub{
+ --vtop-ink:#f5efe3;--vtop-accent:#e0c682;--vtop-muted:#c6beac;--vtop-surface:#12140f;--vtop-line:rgba(224,198,130,.28)}
+html[data-theme="royal"] body.is-topics-route #appView .topics-hub{
+ --vtop-ink:#f7eedb;--vtop-accent:#e1c88e;--vtop-muted:#d3c7b5;--vtop-surface:#0a1b2e;--vtop-line:rgba(225,200,142,.3)}
+html[data-theme="bordeaux"] body.is-topics-route #appView .topics-hub{
+ --vtop-ink:#faeee5;--vtop-accent:#ecc999;--vtop-muted:#d9c3b9;--vtop-surface:#2c101c;--vtop-line:rgba(236,201,153,.3)}
+html[data-theme="dar-al-layl"] body.is-topics-route #appView .topics-hub{
+ --vtop-ink:#f2eee4;--vtop-accent:#d4c295;--vtop-muted:#c2c7ba;--vtop-surface:#171e1b;--vtop-line:rgba(212,194,149,.28)}
+html[data-theme="aurora"] body.is-topics-route #appView .topics-hub{
+ --vtop-ink:#f2f6ed;--vtop-accent:#a7d6bd;--vtop-muted:#c2d2c7;--vtop-surface:#112522;--vtop-line:rgba(167,214,189,.31)}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups{
+  width:calc(100% - var(--dv-gutter) - var(--dv-gutter))!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:0 auto 32px!important;
+  display:grid!important;
+  grid-template-columns:1fr!important;
+  gap:12px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label{
+  width:calc(100% - var(--dv-gutter) - var(--dv-gutter))!important;
+  max-width:none!important;
+  min-width:0!important;
+  margin:16px auto 13px!important;
+  padding-bottom:12px!important;
+  border-bottom:1px solid var(--vtop-line)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label b{
+  color:var(--vtop-ink)!important;
+  font-size:clamp(1.22rem,3.5vw,1.65rem)!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .topics-hub__label span{
+  color:var(--vtop-muted)!important;
+  font-size:.73rem!important;
+  letter-spacing:0!important;
+  text-transform:none!important;
+  text-align:right!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups details {
+  min-width:0!important;
+  border:1px solid color-mix(in srgb,var(--vtop-accent) 42%,var(--vtop-line))!important;
+  border-radius:18px!important;
+  background:var(--vtop-surface)!important;
+  box-shadow:0 10px 22px color-mix(in srgb,var(--bg) 33%,transparent),
+             inset 0 1px 0 color-mix(in srgb,var(--vtop-accent) 10%,transparent)!important;
+  overflow:hidden!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups details[open]{
+  border-color:color-mix(in srgb,var(--vtop-accent) 65%,var(--vtop-line))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups summary{
+  display:grid!important;
+  grid-template-columns:38px minmax(0,1fr) auto 19px!important;
+  align-items:center!important;
+  min-height:82px!important;
+  gap:11px!important;
+  padding:13px 16px!important;
+  cursor:pointer!important;
+  list-style:none!important;
+  color:var(--vtop-ink)!important;
+  background:
+    radial-gradient(ellipse 50% 140% at 100% -20%,color-mix(in srgb,var(--vtop-accent) 14%,transparent),transparent 84%),
+    linear-gradient(110deg,color-mix(in srgb,var(--vtop-accent) 7%,var(--vtop-surface)),var(--vtop-surface) 74%)!important;
+  touch-action:manipulation!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups details[open] summary{
+  border-bottom:1px solid var(--vtop-line)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups summary::-webkit-details-marker{display:none!important}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups summary:focus-visible{
+  outline:2px solid var(--vtop-accent)!important;outline-offset:-3px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups .dv-number{
+  display:grid;place-items:center;width:37px;height:37px;
+  border-radius:12px;border:1px solid color-mix(in srgb,var(--vtop-accent) 44%,transparent);
+  background:color-mix(in srgb,var(--vtop-accent) 8%,var(--vtop-surface));
+  color:var(--vtop-accent);font:650 .85rem/1 var(--font-display,var(--serif,Georgia,serif))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups .dv-title{
+  min-width:0;color:var(--vtop-ink);font:650 clamp(1rem,3.4vw,1.22rem)/1.34 var(--font-display,var(--serif,Georgia,serif))!important;
+  overflow-wrap:break-word;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups .dv-count{
+  color:var(--vtop-muted);font:650 .73rem/1.3 var(--sans,system-ui,sans-serif)!important;
+  white-space:nowrap;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups .dv-arrow{
+  color:var(--vtop-accent);font-size:1.36rem;transform:rotate(0deg);transition:transform .2s ease;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups details[open] .dv-arrow{
+ transform:rotate(90deg);
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups .dv-items{
+  padding:11px!important;
+  display:grid!important;
+  gap:8px!important;
+  grid-template-columns:1fr!important;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--vtop-accent) 5%,var(--vtop-surface)),var(--vtop-surface))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dv-items>.topics-theme-card,
+html[data-theme] body.is-topics-route #appView .topics-hub .dv-items>.topics-theme-card:is(:hover,:active,:focus-visible){
+  display:grid!important;
+  grid-template-columns:40px minmax(0,1fr) 18px!important;
+  gap:12px!important;
+  align-items:center!important;
+  min-height:72px!important;
+  margin:0!important;
+  padding:10px 12px!important;
+  border:1px solid color-mix(in srgb,var(--vtop-accent) 29%,var(--vtop-line))!important;
+  border-radius:13px!important;
+  background:linear-gradient(115deg,color-mix(in srgb,var(--vtop-accent) 5%,var(--vtop-surface)),var(--vtop-surface))!important;
+  box-shadow:none!important;transform:none!important;
+  color:var(--vtop-ink)!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dv-items>.topics-theme-card:focus-visible{
+ outline:2px solid var(--vtop-accent)!important;outline-offset:-2px!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dv-items>.topics-theme-card:hover{
+ background:color-mix(in srgb,var(--vtop-accent) 11%,var(--vtop-surface))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dv-items .topics-theme-card__idx{
+  display:none!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dv-items .topics-theme-card__icon{
+ width:39px!important;height:39px!important;max-width:39px!important;
+ border:1px solid var(--vtop-line)!important;
+ border-radius:50%!important;
+ background:color-mix(in srgb,var(--vtop-accent) 9%,var(--vtop-surface))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dv-items .topics-theme-card__body h3{
+ color:var(--vtop-ink)!important;font:650 clamp(1rem,3.4vw,1.15rem)/1.3 var(--font-display,var(--serif,Georgia,serif))!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dv-items .topics-theme-card__count{
+ color:var(--vtop-muted)!important;font-size:.76rem!important;letter-spacing:0!important;
+}
+html[data-theme] body.is-topics-route #appView .topics-hub .dv-items .topics-theme-card__chev{
+ color:var(--vtop-accent)!important;opacity:1!important;
+}
+html[data-theme] body.is-topic-route #appView .topic-collection-page>.topic-collection{
+ width:calc(100% - var(--dv-gutter) - var(--dv-gutter))!important;max-width:none!important;
+ margin-inline:auto!important;
+}
+html[data-theme] body.is-post-route #appView .post-reader-main{
+ width:calc(100% - var(--dv-gutter) - var(--dv-gutter))!important;
+ max-width:min(100%,900px)!important;margin:20px auto 0!important;
+}
+html[data-theme] body.is-post-route #appView{padding-bottom:calc(155px + env(safe-area-inset-bottom,0px))!important}
+/* Prayer motifs: decorative image behind original active buttons. */
+html #appView .notification-prayer-grid>.notification-prayer.dv-prayer-art,
+html #appView .prayer-page-noble .prayer-time-grid--top>.prayer-time-card.dv-prayer-art{
+ position:relative!important;isolation:isolate!important;overflow:hidden!important;
+ border-radius:14px!important;
+ background:var(--card,var(--bg))!important;
+ border:1px solid color-mix(in srgb,var(--gold2) 36%,var(--line2))!important;
+}
+html #appView .notification-prayer-grid>.notification-prayer.dv-prayer-art{min-height:104px!important}
+html #appView .prayer-page-noble .prayer-time-grid--top>.prayer-time-card.dv-prayer-art{min-height:105px!important}
+html #appView .dv-prayer-art>img.dv-prayer-picture{
+ position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+ z-index:0!important;object-fit:cover!important;object-position:center!important;
+ filter:saturate(1.1) contrast(1.05)!important;
+ opacity:1!important;pointer-events:none!important;user-select:none!important;
+ -webkit-user-select:none!important;
+}
+html #appView .dv-prayer-art::after{
+ content:"";position:absolute;inset:0;display:block!important;pointer-events:none!important;z-index:1!important;
+ background:linear-gradient(180deg,rgba(6,14,25,.13),rgba(4,12,23,.82))!important;
+}
+html #appView .dv-prayer-art>:not(img.dv-prayer-picture){
+ position:relative!important;z-index:2!important;
+ color:#fff8e9!important;-webkit-text-fill-color:#fff8e9!important;
+ text-shadow:0 1px 5px rgba(0,0,0,.84)!important;
+}
+html #appView .dv-prayer-art :is(b,span,small){
+ text-shadow:0 1px 5px rgba(0,0,0,.9)!important;
+}
+html #appView .notification-prayer-grid>.notification-prayer.dv-prayer-art.is-on,
+html #appView .prayer-page-noble .prayer-time-grid--top>.prayer-time-card.dv-prayer-art.active {
+ border-color:var(--gold2)!important;
+ box-shadow:inset 0 -2px 0 var(--gold2)!important;
+}
+html[data-theme="bordeaux"] #appView .dv-prayer-art::after{
+ background:linear-gradient(180deg,rgba(28,8,21,.14),rgba(31,6,25,.87))!important;
+}
+html[data-theme="dar-al-layl"] #appView .dv-prayer-art::after{
+ background:linear-gradient(180deg,rgba(8,26,20,.18),rgba(8,23,20,.88))!important;
+}
+html:is([data-theme="salbei"],[data-theme="light"][data-theme-variant="salbei"]) #appView .dv-prayer-art::after{
+ background:linear-gradient(180deg,rgba(19,35,28,.12),rgba(16,29,22,.79))!important;
+}
+@media(min-width:760px){
+ html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups .dv-items{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ }
+}
+@media(max-width:430px){
+ html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups summary{
+  grid-template-columns:31px minmax(0,1fr) auto 16px!important;
+  padding:11px!important;gap:8px!important;min-height:72px!important;
+ }
+ html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups .dv-number{
+  width:30px;height:30px;font-size:.71rem;
+ }
+ html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups .dv-title{font-size:.97rem!important}
+ html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups .dv-count{font-size:.67rem!important}
+ html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups .dv-items{padding:8px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html[data-theme] body.is-topics-route #appView .topics-hub .dar-visitor-topic-groups .dv-arrow{transition:none!important}
+}
