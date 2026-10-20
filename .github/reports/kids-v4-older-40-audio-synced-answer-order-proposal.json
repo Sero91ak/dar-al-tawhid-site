@@ -42,30 +42,73 @@
   "projectedExtraOriginalSpeechCharacters": 0,
   "proposedQuestionItems": [
     {
-      "questionId": "kids-quiz-045",
+      "questionId": "kids-quiz-094",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Im Ramaḍān",
-        "Im Muḥarram",
-        "Im Rabīʿ al-Awwal"
+        "Taqwā",
+        "Berühmtheit",
+        "Wettbewerb im Essen"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a1",
         "a2",
         "a3"
       ],
+      "originalQuestionAudioSHA256": "6548cc7d3c9a976077ff62109755fdd4921b303caef62aa7129a999af9db90c5",
+      "proposedQuestionAudioText": "Welches Ziel nennt Qurʾān 2:183 für das Fasten? Antwort 1: Taqwā. Antwort 2: Berühmtheit. Antwort 3: Wettbewerb im Essen. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "6548cc7d3c9a976077ff62109755fdd4921b303caef62aa7129a999af9db90c5",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Welches Ziel nennt Qurʾān 2:183 für das Fasten?",
+        "Antwort 1:",
+        "Taqwā.",
+        "Antwort 2:",
+        "Berühmtheit.",
+        "Antwort 3:",
+        "Wettbewerb im Essen.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 2:183",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-045",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Im Muḥarram",
+        "Im Ramaḍān",
+        "Im Rabīʿ al-Awwal"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a1",
+        "a3"
+      ],
       "originalQuestionAudioSHA256": "86e704520fba5e3b85a2a4a0dd61e96ece477215cbe65d608f21e63002aed0f9",
-      "proposedQuestionAudioText": "In welchem Monat ist das verpflichtende Fasten? Antwort 1: Im Ramaḍān. Antwort 2: Im Muḥarram. Antwort 3: Im Rabīʿ al-Awwal. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "86e704520fba5e3b85a2a4a0dd61e96ece477215cbe65d608f21e63002aed0f9",
+      "proposedQuestionAudioText": "In welchem Monat ist das verpflichtende Fasten? Antwort 1: Im Muḥarram. Antwort 2: Im Ramaḍān. Antwort 3: Im Rabīʿ al-Awwal. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "4dd6a06a033056e4d68e6c0223b4f3b71474e2140de9e8534d740707e6223dc8",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "In welchem Monat ist das verpflichtende Fasten?",
         "Antwort 1:",
-        "Im Ramaḍān.",
-        "Antwort 2:",
         "Im Muḥarram.",
+        "Antwort 2:",
+        "Im Ramaḍān.",
         "Antwort 3:",
         "Im Rabīʿ al-Awwal.",
         "Überlege und wähle die beste Antwort."
@@ -175,33 +218,78 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-023",
+      "questionId": "kids-quiz-276",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Nur ein Geschichtsbuch",
-        "Nur für Gelehrte",
-        "Rechtleitung"
+        "Spöttisch",
+        "Hochmütig",
+        "Leise und demütig"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
         "a3",
         "a1"
       ],
+      "originalQuestionAudioSHA256": "d612a30d69070ab8fb46024d49d963b9d18f92f5e86e503c7326da5eeccbab57",
+      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Wie rief Zakariyyā seinen Herrn an? Antwort 1: Spöttisch. Antwort 2: Hochmütig. Antwort 3: Leise und demütig. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "847bfa05683b640999d0b7d64e0e14b0cf31a4e42202ff593da28264655f164e",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Hör dir die Frage und die Antworten in Ruhe an.",
+        "Wie rief Zakariyyā seinen Herrn an?",
+        "Antwort 1:",
+        "Spöttisch.",
+        "Antwort 2:",
+        "Hochmütig.",
+        "Antwort 3:",
+        "Leise und demütig.",
+        "Wähle die Antwort, die du für richtig hältst."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 19:3",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-023",
+      "ageBand": "7-8",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 1,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Rechtleitung",
+        "Nur ein Geschichtsbuch",
+        "Nur für Gelehrte"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
+        "a2",
+        "a3"
+      ],
       "originalQuestionAudioSHA256": "1e6d4e8459a0cddf7a17134b89c85e1d5eb259bb7c689e2ce9dc84194e3c03e5",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was ist der Qurʾān für die Gottesfürchtigen? Antwort 1: Nur ein Geschichtsbuch. Antwort 2: Nur für Gelehrte. Antwort 3: Rechtleitung. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "1759f644d042efb972f4cdc6ebcb3b65ab232baf30caca932cd14689938ef474",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was ist der Qurʾān für die Gottesfürchtigen? Antwort 1: Rechtleitung. Antwort 2: Nur ein Geschichtsbuch. Antwort 3: Nur für Gelehrte. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "1e6d4e8459a0cddf7a17134b89c85e1d5eb259bb7c689e2ce9dc84194e3c03e5",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
         "Was ist der Qurʾān für die Gottesfürchtigen?",
         "Antwort 1:",
-        "Nur ein Geschichtsbuch.",
-        "Antwort 2:",
-        "Nur für Gelehrte.",
-        "Antwort 3:",
         "Rechtleitung.",
+        "Antwort 2:",
+        "Nur ein Geschichtsbuch.",
+        "Antwort 3:",
+        "Nur für Gelehrte.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -223,28 +311,28 @@
       "questionId": "kids-quiz-025",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Der Gesandte Allahs ﷺ",
         "Der reichste Mensch",
+        "Der Gesandte Allahs ﷺ",
         "Der lauteste Mensch"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
         "a2",
+        "a1",
         "a3"
       ],
       "originalQuestionAudioSHA256": "a51f60ddaf482a58d77a3dbf0bc15a1d79bb959ff659fc3f6fc3c384f383f7a9",
-      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Wer ist für Muslime ein schönes Vorbild? Antwort 1: Der Gesandte Allahs ﷺ. Antwort 2: Der reichste Mensch. Antwort 3: Der lauteste Mensch. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "a51f60ddaf482a58d77a3dbf0bc15a1d79bb959ff659fc3f6fc3c384f383f7a9",
+      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Wer ist für Muslime ein schönes Vorbild? Antwort 1: Der reichste Mensch. Antwort 2: Der Gesandte Allahs ﷺ. Antwort 3: Der lauteste Mensch. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "cd45d5a1cc3e5d5f033fbb5b1ff9f552ccc13fdb78f77b04db6851200c1774db",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Überlege kurz, bevor du dich entscheidest.",
         "Wer ist für Muslime ein schönes Vorbild?",
         "Antwort 1:",
-        "Der Gesandte Allahs ﷺ.",
-        "Antwort 2:",
         "Der reichste Mensch.",
+        "Antwort 2:",
+        "Der Gesandte Allahs ﷺ.",
         "Antwort 3:",
         "Der lauteste Mensch.",
         "Wähle die Antwort, die du für richtig hältst."
@@ -268,29 +356,29 @@
       "questionId": "kids-quiz-046",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
         "Glücksspiele spielen",
-        "Zakāh geben",
-        "Angeben"
+        "Angeben",
+        "Zakāh geben"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a1",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "38711dd070a500c87045bb8996b0e7f122bedc48efd7c06dd3e13c830055b9c7",
-      "proposedQuestionAudioText": "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet? Antwort 1: Glücksspiele spielen. Antwort 2: Zakāh geben. Antwort 3: Angeben. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "df1b8c12a9542aa0a98c53d2f57e886c4d33e1bf465b8945c528919cc0282a1d",
+      "proposedQuestionAudioText": "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet? Antwort 1: Glücksspiele spielen. Antwort 2: Angeben. Antwort 3: Zakāh geben. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "205d623abd2e8437e4ebeaa25fa41be24f0eae96bf681b3eead9649f1cb2ab5d",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Welche Handlung nennt der Qurʾān zusammen mit dem Gebet?",
         "Antwort 1:",
         "Glücksspiele spielen.",
         "Antwort 2:",
-        "Zakāh geben.",
-        "Antwort 3:",
         "Angeben.",
+        "Antwort 3:",
+        "Zakāh geben.",
         "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
@@ -311,20 +399,20 @@
       "questionId": "kids-quiz-031",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
         "Sofort beleidigen",
-        "Den Zorn zurückhalten und verzeihen",
-        "Etwas kaputt machen"
+        "Etwas kaputt machen",
+        "Den Zorn zurückhalten und verzeihen"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a1",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "d30e8e74cb575b036d0b34a89baa8c3b5f2039cd419c02494bdc84e7e549eb57",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was ist besser, wenn wir wütend sind? Antwort 1: Sofort beleidigen. Antwort 2: Den Zorn zurückhalten und verzeihen. Antwort 3: Etwas kaputt machen. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "352acbb7a3b882cbcfe7d249662e547ce8b366a8ea5310f07290784941734663",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was ist besser, wenn wir wütend sind? Antwort 1: Sofort beleidigen. Antwort 2: Etwas kaputt machen. Antwort 3: Den Zorn zurückhalten und verzeihen. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "1343235986566d7ac716bffe435552465946f36fa1dffff78de718f18a8cd83b",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
@@ -332,9 +420,9 @@
         "Antwort 1:",
         "Sofort beleidigen.",
         "Antwort 2:",
-        "Den Zorn zurückhalten und verzeihen.",
-        "Antwort 3:",
         "Etwas kaputt machen.",
+        "Antwort 3:",
+        "Den Zorn zurückhalten und verzeihen.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -348,49 +436,6 @@
         240
       ],
       "originalSource": "Qurʾān 3:134",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-036",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Ein Glücksbringer",
-        "Die eigene Meinung",
-        "Das Gebet"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a3",
-        "a1"
-      ],
-      "originalQuestionAudioSHA256": "f60b00fd91492fc1168f1fafc53487fdc879b5f885ce4d58d2b674fbd4d7272e",
-      "proposedQuestionAudioText": "Welche Sache gehört zu den fünf Säulen des Islam? Antwort 1: Ein Glücksbringer. Antwort 2: Die eigene Meinung. Antwort 3: Das Gebet. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "c2e02a589cfddefb6922f1916e79d47a84680371b2a749e8fdb257de21e44768",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Welche Sache gehört zu den fünf Säulen des Islam?",
-        "Antwort 1:",
-        "Ein Glücksbringer.",
-        "Antwort 2:",
-        "Die eigene Meinung.",
-        "Antwort 3:",
-        "Das Gebet.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Ṣaḥīḥ al-Bukhārī 8; Ṣaḥīḥ Muslim 16",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
@@ -439,82 +484,35 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-030",
-      "ageBand": "7-8",
+      "questionId": "kids-quiz-036",
+      "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
+      "proposedCorrectAnswerPosition": 2,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Spöttisch",
-        "Absichtlich verletzend",
-        "Respektvoll und freundlich"
+        "Ein Glücksbringer",
+        "Das Gebet",
+        "Die eigene Meinung"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a3",
-        "a1"
-      ],
-      "originalQuestionAudioSHA256": "c05931c71cebd3bf9b884fdf496d4284a5c2c9c3d5aad51e0b596dcfb069a105",
-      "proposedQuestionAudioText": "Mal sehen, was du zu diesem Thema weißt. Wie sprechen wir mit unseren Eltern? Antwort 1: Spöttisch. Antwort 2: Absichtlich verletzend. Antwort 3: Respektvoll und freundlich. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "00c7519157dee4a46d094794e211bc706d17a3ac46c53a1d3ddb130c577048a9",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Mal sehen, was du zu diesem Thema weißt.",
-        "Wie sprechen wir mit unseren Eltern?",
-        "Antwort 1:",
-        "Spöttisch.",
-        "Antwort 2:",
-        "Absichtlich verletzend.",
-        "Antwort 3:",
-        "Respektvoll und freundlich.",
-        "Wähle die Antwort, die du für richtig hältst."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 17:23–24",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-276",
-      "ageBand": "7-8",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Leise und demütig",
-        "Spöttisch",
-        "Hochmütig"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
         "a1",
-        "a2",
         "a3"
       ],
-      "originalQuestionAudioSHA256": "d612a30d69070ab8fb46024d49d963b9d18f92f5e86e503c7326da5eeccbab57",
-      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Wie rief Zakariyyā seinen Herrn an? Antwort 1: Leise und demütig. Antwort 2: Spöttisch. Antwort 3: Hochmütig. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "d612a30d69070ab8fb46024d49d963b9d18f92f5e86e503c7326da5eeccbab57",
+      "originalQuestionAudioSHA256": "f60b00fd91492fc1168f1fafc53487fdc879b5f885ce4d58d2b674fbd4d7272e",
+      "proposedQuestionAudioText": "Welche Sache gehört zu den fünf Säulen des Islam? Antwort 1: Ein Glücksbringer. Antwort 2: Das Gebet. Antwort 3: Die eigene Meinung. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "72cdfdbbedc19fe3ea81e80202c1c4528c5185be49d0d9a57400ae5b48d36b84",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
-        "Hör dir die Frage und die Antworten in Ruhe an.",
-        "Wie rief Zakariyyā seinen Herrn an?",
+        "Welche Sache gehört zu den fünf Säulen des Islam?",
         "Antwort 1:",
-        "Leise und demütig.",
+        "Ein Glücksbringer.",
         "Antwort 2:",
-        "Spöttisch.",
+        "Das Gebet.",
         "Antwort 3:",
-        "Hochmütig.",
-        "Wähle die Antwort, die du für richtig hältst."
+        "Die eigene Meinung.",
+        "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
-        240,
         240,
         70,
         240,
@@ -523,7 +521,7 @@
         70,
         240
       ],
-      "originalSource": "Qurʾān 19:3",
+      "originalSource": "Ṣaḥīḥ al-Bukhārī 8; Ṣaḥīḥ Muslim 16",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
@@ -532,28 +530,28 @@
       "questionId": "kids-quiz-027",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Alles weitererzählen",
         "Gutes sprechen oder schweigen",
+        "Alles weitererzählen",
         "Andere beleidigen"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
         "a1",
+        "a2",
         "a3"
       ],
       "originalQuestionAudioSHA256": "3f2778f601f79da845c3f068bba7eca64c29f665e86f9c57363ec10841045731",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was lehrte der Prophet ﷺ über unsere Worte? Antwort 1: Alles weitererzählen. Antwort 2: Gutes sprechen oder schweigen. Antwort 3: Andere beleidigen. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "a0eadfd51e6da1d5211fab63cc801f3bdbe4c6de562068298cbf1e49dc862fed",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was lehrte der Prophet ﷺ über unsere Worte? Antwort 1: Gutes sprechen oder schweigen. Antwort 2: Alles weitererzählen. Antwort 3: Andere beleidigen. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "3f2778f601f79da845c3f068bba7eca64c29f665e86f9c57363ec10841045731",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
         "Was lehrte der Prophet ﷺ über unsere Worte?",
         "Antwort 1:",
-        "Alles weitererzählen.",
-        "Antwort 2:",
         "Gutes sprechen oder schweigen.",
+        "Antwort 2:",
+        "Alles weitererzählen.",
         "Antwort 3:",
         "Andere beleidigen.",
         "Wähle die Antwort, die du für richtig hältst."
@@ -577,20 +575,20 @@
       "questionId": "kids-quiz-070",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
+      "proposedCorrectAnswerPosition": 2,
       "displayAnswerLabelsInSameOrderAsSpeech": [
         "Vor Lernen",
-        "Vor Hilfsbereitschaft",
-        "Vor Shirk"
+        "Vor Shirk",
+        "Vor Hilfsbereitschaft"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a3",
-        "a1"
+        "a1",
+        "a3"
       ],
       "originalQuestionAudioSHA256": "bd5eff76cdf1292b5be0f836d3026980b22100be40eb25cd16ea7e1b15464b38",
-      "proposedQuestionAudioText": "Mal sehen, was du zu diesem Thema weißt. Wovor warnte Luqmān seinen Sohn besonders? Antwort 1: Vor Lernen. Antwort 2: Vor Hilfsbereitschaft. Antwort 3: Vor Shirk. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "be5532b2553c1d23532e8233c39c9d47e4951081d8357f139b6eca50098511d8",
+      "proposedQuestionAudioText": "Mal sehen, was du zu diesem Thema weißt. Wovor warnte Luqmān seinen Sohn besonders? Antwort 1: Vor Lernen. Antwort 2: Vor Shirk. Antwort 3: Vor Hilfsbereitschaft. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "1196dc74a5676f298dd9f3849f92b1f7c925681fe7f454550bf78bd24e8a33fa",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Mal sehen, was du zu diesem Thema weißt.",
@@ -598,9 +596,9 @@
         "Antwort 1:",
         "Vor Lernen.",
         "Antwort 2:",
-        "Vor Hilfsbereitschaft.",
-        "Antwort 3:",
         "Vor Shirk.",
+        "Antwort 3:",
+        "Vor Hilfsbereitschaft.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -622,30 +620,30 @@
       "questionId": "kids-quiz-531",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Nein",
         "Ja, immer",
-        "Nur nachts"
+        "Nur nachts",
+        "Nein"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
         "a2",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "95dd9bf7861206b21aa4b4f5da117cf8ebaf71768edb3ece69b03bbdbd2c4db8",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Sind Wissende und Nichtwissende gleich? Antwort 1: Nein. Antwort 2: Ja, immer. Antwort 3: Nur nachts. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "95dd9bf7861206b21aa4b4f5da117cf8ebaf71768edb3ece69b03bbdbd2c4db8",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Sind Wissende und Nichtwissende gleich? Antwort 1: Ja, immer. Antwort 2: Nur nachts. Antwort 3: Nein. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "ef1ab7a181c0c87775a314ed1888133551248cdf8f2e2ee321627028c7a7b70d",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
         "Sind Wissende und Nichtwissende gleich?",
         "Antwort 1:",
-        "Nein.",
-        "Antwort 2:",
         "Ja, immer.",
-        "Antwort 3:",
+        "Antwort 2:",
         "Nur nachts.",
+        "Antwort 3:",
+        "Nein.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -664,289 +662,31 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-037",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Der Glaube an Horoskope",
-        "Der Glaube an Allahs Bestimmung",
-        "Der Glaube an Glückszahlen"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a1",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "4cd682f63c45e2f9dcf840df1b8e4d276bc1149f69bb622ced5f1bfb9219d5fd",
-      "proposedQuestionAudioText": "Welche Sache gehört zu den Grundlagen des Īmān? Antwort 1: Der Glaube an Horoskope. Antwort 2: Der Glaube an Allahs Bestimmung. Antwort 3: Der Glaube an Glückszahlen. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "344ba2f5bd67763099e3852e05d70b2c7f4b0524cfd31655e9c1a5931fa2d596",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Welche Sache gehört zu den Grundlagen des Īmān?",
-        "Antwort 1:",
-        "Der Glaube an Horoskope.",
-        "Antwort 2:",
-        "Der Glaube an Allahs Bestimmung.",
-        "Antwort 3:",
-        "Der Glaube an Glückszahlen.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Ṣaḥīḥ Muslim 8",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-094",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Berühmtheit",
-        "Wettbewerb im Essen",
-        "Taqwā"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a3",
-        "a1"
-      ],
-      "originalQuestionAudioSHA256": "6548cc7d3c9a976077ff62109755fdd4921b303caef62aa7129a999af9db90c5",
-      "proposedQuestionAudioText": "Welches Ziel nennt Qurʾān 2:183 für das Fasten? Antwort 1: Berühmtheit. Antwort 2: Wettbewerb im Essen. Antwort 3: Taqwā. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "b8df71f675381da3a533db4c943fa3fe60ffb738c94e6ebfd0cb06e13ea8fd02",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Welches Ziel nennt Qurʾān 2:183 für das Fasten?",
-        "Antwort 1:",
-        "Berühmtheit.",
-        "Antwort 2:",
-        "Wettbewerb im Essen.",
-        "Antwort 3:",
-        "Taqwā.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 2:183",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-147",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Falsches Zeugnis",
-        "Gutes Reden",
-        "Hilfsbereitschaft"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
-        "a2",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "66c8429be8223fe10b7c41921fcb6028b2a5af721879445543b595391ff83050",
-      "proposedQuestionAudioText": "Was meiden die Diener des Allerbarmers nach Qurʾān 25:72? Antwort 1: Falsches Zeugnis. Antwort 2: Gutes Reden. Antwort 3: Hilfsbereitschaft. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "66c8429be8223fe10b7c41921fcb6028b2a5af721879445543b595391ff83050",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Was meiden die Diener des Allerbarmers nach Qurʾān 25:72?",
-        "Antwort 1:",
-        "Falsches Zeugnis.",
-        "Antwort 2:",
-        "Gutes Reden.",
-        "Antwort 3:",
-        "Hilfsbereitschaft.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 25:72",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-091",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Spott",
-        "Ein gutes Wort und Vergebung",
-        "Vorwürfe"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a1",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "69f9f113a3d2b4370dfed7e704ca461d4982d3f21d2d0ffc1a38eea046df945b",
-      "proposedQuestionAudioText": "Was ist besser als eine Gabe, der Verletzung folgt? Antwort 1: Spott. Antwort 2: Ein gutes Wort und Vergebung. Antwort 3: Vorwürfe. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "5625266b2f3498c490cdb16a2c392e86f4d6284ea3965b45f966ebb7527245b4",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Was ist besser als eine Gabe, der Verletzung folgt?",
-        "Antwort 1:",
-        "Spott.",
-        "Antwort 2:",
-        "Ein gutes Wort und Vergebung.",
-        "Antwort 3:",
-        "Vorwürfe.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 2:263",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-095",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Wie jeden anderen Abend",
-        "Nur als historischen Tag",
-        "Besser als tausend Monate"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a3",
-        "a1"
-      ],
-      "originalQuestionAudioSHA256": "3d4a72f2805b530409806a0bf1e176359e1aa681656fa2963b37beba83b07e3f",
-      "proposedQuestionAudioText": "Wie beschreibt der Qurʾān Laylat al-Qadr? Antwort 1: Wie jeden anderen Abend. Antwort 2: Nur als historischen Tag. Antwort 3: Besser als tausend Monate. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "175ea62cb8ac68d4bc3a2aaa7fe2effa7272311303aa7405cd2ae6791a4133d5",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Wie beschreibt der Qurʾān Laylat al-Qadr?",
-        "Antwort 1:",
-        "Wie jeden anderen Abend.",
-        "Antwort 2:",
-        "Nur als historischen Tag.",
-        "Antwort 3:",
-        "Besser als tausend Monate.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 97:3",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-344",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Erlaubnis einholen und grüßen",
-        "Anklopfen und sofort eintreten",
-        "Nur den Namen rufen"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
-        "a2",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "e152081d8a042a50cb84794d455c333562e2be6f21e15ff8eec11976d63cd79d",
-      "proposedQuestionAudioText": "Welche zwei Schritte nennt Qurʾān 24:27 vor dem Betreten fremder Häuser? Antwort 1: Erlaubnis einholen und grüßen. Antwort 2: Anklopfen und sofort eintreten. Antwort 3: Nur den Namen rufen. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "e152081d8a042a50cb84794d455c333562e2be6f21e15ff8eec11976d63cd79d",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Welche zwei Schritte nennt Qurʾān 24:27 vor dem Betreten fremder Häuser?",
-        "Antwort 1:",
-        "Erlaubnis einholen und grüßen.",
-        "Antwort 2:",
-        "Anklopfen und sofort eintreten.",
-        "Antwort 3:",
-        "Nur den Namen rufen.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 24:27",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
       "questionId": "kids-quiz-120",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Es verbrannte ihn",
         "Allah machte es kühl und sicher",
+        "Es verbrannte ihn",
         "Es wurde von Menschen gelöscht"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
         "a1",
+        "a2",
         "a3"
       ],
       "originalQuestionAudioSHA256": "50c019696eb97ac9f7c645bb1d6b00e35b6352d903eecd5fa67550f217fb1cc3",
-      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Was geschah mit dem Feuer, in das Ibrāhīm geworfen wurde? Antwort 1: Es verbrannte ihn. Antwort 2: Allah machte es kühl und sicher. Antwort 3: Es wurde von Menschen gelöscht. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "b9cfd84aa6bca433d3d9716bcf96d14f3d16dc72956032e5966a83534df4f1f2",
+      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Was geschah mit dem Feuer, in das Ibrāhīm geworfen wurde? Antwort 1: Allah machte es kühl und sicher. Antwort 2: Es verbrannte ihn. Antwort 3: Es wurde von Menschen gelöscht. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "50c019696eb97ac9f7c645bb1d6b00e35b6352d903eecd5fa67550f217fb1cc3",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Hör dir die Frage und die Antworten in Ruhe an.",
         "Was geschah mit dem Feuer, in das Ibrāhīm geworfen wurde?",
         "Antwort 1:",
-        "Es verbrannte ihn.",
-        "Antwort 2:",
         "Allah machte es kühl und sicher.",
+        "Antwort 2:",
+        "Es verbrannte ihn.",
         "Antwort 3:",
         "Es wurde von Menschen gelöscht.",
         "Wähle die Antwort, die du für richtig hältst."
@@ -967,23 +707,238 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-231",
-      "ageBand": "7-8",
+      "questionId": "kids-quiz-147",
+      "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Durch Hochmut",
-        "Durch Streit",
-        "Durch das Gedenken Allahs"
+        "Gutes Reden",
+        "Hilfsbereitschaft",
+        "Falsches Zeugnis"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
         "a3",
         "a1"
       ],
+      "originalQuestionAudioSHA256": "66c8429be8223fe10b7c41921fcb6028b2a5af721879445543b595391ff83050",
+      "proposedQuestionAudioText": "Was meiden die Diener des Allerbarmers nach Qurʾān 25:72? Antwort 1: Gutes Reden. Antwort 2: Hilfsbereitschaft. Antwort 3: Falsches Zeugnis. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "cd025a5e7d50211641ef009c453e1ffffe4f8e24210b4dbc262a92eca68f6c2c",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Was meiden die Diener des Allerbarmers nach Qurʾān 25:72?",
+        "Antwort 1:",
+        "Gutes Reden.",
+        "Antwort 2:",
+        "Hilfsbereitschaft.",
+        "Antwort 3:",
+        "Falsches Zeugnis.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 25:72",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-095",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 1,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Besser als tausend Monate",
+        "Wie jeden anderen Abend",
+        "Nur als historischen Tag"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "3d4a72f2805b530409806a0bf1e176359e1aa681656fa2963b37beba83b07e3f",
+      "proposedQuestionAudioText": "Wie beschreibt der Qurʾān Laylat al-Qadr? Antwort 1: Besser als tausend Monate. Antwort 2: Wie jeden anderen Abend. Antwort 3: Nur als historischen Tag. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "3d4a72f2805b530409806a0bf1e176359e1aa681656fa2963b37beba83b07e3f",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Wie beschreibt der Qurʾān Laylat al-Qadr?",
+        "Antwort 1:",
+        "Besser als tausend Monate.",
+        "Antwort 2:",
+        "Wie jeden anderen Abend.",
+        "Antwort 3:",
+        "Nur als historischen Tag.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 97:3",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-344",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Anklopfen und sofort eintreten",
+        "Erlaubnis einholen und grüßen",
+        "Nur den Namen rufen"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a1",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "e152081d8a042a50cb84794d455c333562e2be6f21e15ff8eec11976d63cd79d",
+      "proposedQuestionAudioText": "Welche zwei Schritte nennt Qurʾān 24:27 vor dem Betreten fremder Häuser? Antwort 1: Anklopfen und sofort eintreten. Antwort 2: Erlaubnis einholen und grüßen. Antwort 3: Nur den Namen rufen. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "b9560f9c882cb126be21e5212585cb4ea8433c454ddd409469fe73c750805b67",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Welche zwei Schritte nennt Qurʾān 24:27 vor dem Betreten fremder Häuser?",
+        "Antwort 1:",
+        "Anklopfen und sofort eintreten.",
+        "Antwort 2:",
+        "Erlaubnis einholen und grüßen.",
+        "Antwort 3:",
+        "Nur den Namen rufen.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 24:27",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-035",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 3,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Nur freundlich zu wirken",
+        "Nur viel zu besitzen",
+        "Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a3",
+        "a1"
+      ],
+      "originalQuestionAudioSHA256": "49fd92082b387e2d1763eb0325ab562dd1e4424dcbefb5790a151ddcb3f05b88",
+      "proposedQuestionAudioText": "Welche Antwort beschreibt Iḥsān am besten? Antwort 1: Nur freundlich zu wirken. Antwort 2: Nur viel zu besitzen. Antwort 3: Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "fa846b113e12523fe682a258626aaaaeef64491b3e383803cf872f04795cd60f",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Welche Antwort beschreibt Iḥsān am besten?",
+        "Antwort 1:",
+        "Nur freundlich zu wirken.",
+        "Antwort 2:",
+        "Nur viel zu besitzen.",
+        "Antwort 3:",
+        "Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Ṣaḥīḥ Muslim 8",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-386",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 1,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Die Gläubigen und diejenigen mit Wissen",
+        "Nur Reiche",
+        "Nur Berühmte"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "dd4c9a36c1f81bbee416db4def1d2b03187fac07dceef284172824877b0dd558",
+      "proposedQuestionAudioText": "Wen erhöht Allah nach Qurʾān 58:11 in Rangstufen? Antwort 1: Die Gläubigen und diejenigen mit Wissen. Antwort 2: Nur Reiche. Antwort 3: Nur Berühmte. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "dd4c9a36c1f81bbee416db4def1d2b03187fac07dceef284172824877b0dd558",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Wen erhöht Allah nach Qurʾān 58:11 in Rangstufen?",
+        "Antwort 1:",
+        "Die Gläubigen und diejenigen mit Wissen.",
+        "Antwort 2:",
+        "Nur Reiche.",
+        "Antwort 3:",
+        "Nur Berühmte.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 58:11",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-231",
+      "ageBand": "7-8",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Durch Hochmut",
+        "Durch das Gedenken Allahs",
+        "Durch Streit"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a1",
+        "a3"
+      ],
       "originalQuestionAudioSHA256": "d18f9e8f515b62e9cc66439433e50f350bb47e53b36c29135c27dbe9daff6773",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Wodurch finden Herzen Ruhe? Antwort 1: Durch Hochmut. Antwort 2: Durch Streit. Antwort 3: Durch das Gedenken Allahs. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "a206aceaa92d3f5582fc478dea00bd7fbfca07c1447f8194e04c0f1085d2137e",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Wodurch finden Herzen Ruhe? Antwort 1: Durch Hochmut. Antwort 2: Durch das Gedenken Allahs. Antwort 3: Durch Streit. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "be9c55a6f9b0dd54f7ef2e6170ba41dd830d28788ebccf3f8c10d7857196ebd1",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
@@ -991,9 +946,9 @@
         "Antwort 1:",
         "Durch Hochmut.",
         "Antwort 2:",
-        "Durch Streit.",
-        "Antwort 3:",
         "Durch das Gedenken Allahs.",
+        "Antwort 3:",
+        "Durch Streit.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -1015,30 +970,30 @@
       "questionId": "kids-quiz-024",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Allah und Seinem Gesandten ﷺ",
         "Nur der eigenen Meinung",
-        "Jeder Idee im Internet"
+        "Jeder Idee im Internet",
+        "Allah und Seinem Gesandten ﷺ"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
         "a2",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "78ccae84d77d8a2a71fb038428adcedc16381262d4ad7ff2fd485a3c0e5df6fa",
-      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Wem gehorchen wir im Dīn? Antwort 1: Allah und Seinem Gesandten ﷺ. Antwort 2: Nur der eigenen Meinung. Antwort 3: Jeder Idee im Internet. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "78ccae84d77d8a2a71fb038428adcedc16381262d4ad7ff2fd485a3c0e5df6fa",
+      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Wem gehorchen wir im Dīn? Antwort 1: Nur der eigenen Meinung. Antwort 2: Jeder Idee im Internet. Antwort 3: Allah und Seinem Gesandten ﷺ. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "249076dd444c6ecba9763c100e2480bcdf557e1becbc9737dd25569b28094a8a",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Hör dir die Frage und die Antworten in Ruhe an.",
         "Wem gehorchen wir im Dīn?",
         "Antwort 1:",
-        "Allah und Seinem Gesandten ﷺ.",
-        "Antwort 2:",
         "Nur der eigenen Meinung.",
-        "Antwort 3:",
+        "Antwort 2:",
         "Jeder Idee im Internet.",
+        "Antwort 3:",
+        "Allah und Seinem Gesandten ﷺ.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -1060,28 +1015,28 @@
       "questionId": "kids-quiz-277",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Goldmünzen",
         "Frische reife Datteln",
+        "Goldmünzen",
         "Ein Königreich"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
         "a1",
+        "a2",
         "a3"
       ],
       "originalQuestionAudioSHA256": "e95aebb1b0df627f5294188332c3e84af4fe6b0037c4d04f02332862c5ef2390",
-      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Welche Versorgung erhielt Maryam bei der Geburt? Antwort 1: Goldmünzen. Antwort 2: Frische reife Datteln. Antwort 3: Ein Königreich. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "9d09d8767cfd75e5727eff78b1a8643c8a4891483046f9c208dd147c9ddbefd4",
+      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Welche Versorgung erhielt Maryam bei der Geburt? Antwort 1: Frische reife Datteln. Antwort 2: Goldmünzen. Antwort 3: Ein Königreich. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "e95aebb1b0df627f5294188332c3e84af4fe6b0037c4d04f02332862c5ef2390",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Überlege kurz, bevor du dich entscheidest.",
         "Welche Versorgung erhielt Maryam bei der Geburt?",
         "Antwort 1:",
-        "Goldmünzen.",
-        "Antwort 2:",
         "Frische reife Datteln.",
+        "Antwort 2:",
+        "Goldmünzen.",
         "Antwort 3:",
         "Ein Königreich.",
         "Wähle die Antwort, die du für richtig hältst."
@@ -1105,20 +1060,20 @@
       "questionId": "kids-quiz-383",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
+      "proposedCorrectAnswerPosition": 2,
       "displayAnswerLabelsInSameOrderAsSpeech": [
         "Sie verschwindet",
-        "Sie wird zu Gold",
-        "Sie wird wieder lebendig"
+        "Sie wird wieder lebendig",
+        "Sie wird zu Gold"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a3",
-        "a1"
+        "a1",
+        "a3"
       ],
       "originalQuestionAudioSHA256": "ce867c408cdce105bf6f9c86d67d9b7fd8bf46e73d1f6593f567466e10422524",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was geschieht mit toter Erde, wenn Allah Regen sendet? Antwort 1: Sie verschwindet. Antwort 2: Sie wird zu Gold. Antwort 3: Sie wird wieder lebendig. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "0f8190ef47cfb6940457e2e6959056986e15914a9cbef4a3124e24d609d5d4fd",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Was geschieht mit toter Erde, wenn Allah Regen sendet? Antwort 1: Sie verschwindet. Antwort 2: Sie wird wieder lebendig. Antwort 3: Sie wird zu Gold. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "370d932c05702027bb7f77e1c37787e03af908807af38b8b0b27d7813033245b",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
@@ -1126,9 +1081,9 @@
         "Antwort 1:",
         "Sie verschwindet.",
         "Antwort 2:",
-        "Sie wird zu Gold.",
-        "Antwort 3:",
         "Sie wird wieder lebendig.",
+        "Antwort 3:",
+        "Sie wird zu Gold.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -1150,30 +1105,30 @@
       "questionId": "kids-quiz-079",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Er verbietet sie",
         "Er empfiehlt sie",
-        "Er nennt sie immer mutig"
+        "Er nennt sie immer mutig",
+        "Er verbietet sie"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
         "a2",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "d93a19cfd13693a046be69727d7c2aebe3746fa2722141b6d33a07e32b269197",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Wie behandelt der Qurʾān Verschwendung? Antwort 1: Er verbietet sie. Antwort 2: Er empfiehlt sie. Antwort 3: Er nennt sie immer mutig. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "d93a19cfd13693a046be69727d7c2aebe3746fa2722141b6d33a07e32b269197",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Wie behandelt der Qurʾān Verschwendung? Antwort 1: Er empfiehlt sie. Antwort 2: Er nennt sie immer mutig. Antwort 3: Er verbietet sie. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "cc71b2e16a47600128eee6e5096c36dddfab6883abcad4cffee730fb1b723a21",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
         "Wie behandelt der Qurʾān Verschwendung?",
         "Antwort 1:",
-        "Er verbietet sie.",
-        "Antwort 2:",
         "Er empfiehlt sie.",
-        "Antwort 3:",
+        "Antwort 2:",
         "Er nennt sie immer mutig.",
+        "Antwort 3:",
+        "Er verbietet sie.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -1195,28 +1150,28 @@
       "questionId": "kids-quiz-073",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Er verspottete sie",
         "Er vergab ihnen",
+        "Er verspottete sie",
         "Er log über sie"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
         "a1",
+        "a2",
         "a3"
       ],
       "originalQuestionAudioSHA256": "11ff015318265fbefd7d57434d7f8776aea5f181ace236467c86e58c65401da1",
-      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Wie begegnete Yūsuf seinen Brüdern später? Antwort 1: Er verspottete sie. Antwort 2: Er vergab ihnen. Antwort 3: Er log über sie. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "1c297ab64f11edc86eff58e61875b8530ba38bbe0a9ed20777da8183145c85f1",
+      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Wie begegnete Yūsuf seinen Brüdern später? Antwort 1: Er vergab ihnen. Antwort 2: Er verspottete sie. Antwort 3: Er log über sie. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "11ff015318265fbefd7d57434d7f8776aea5f181ace236467c86e58c65401da1",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Überlege kurz, bevor du dich entscheidest.",
         "Wie begegnete Yūsuf seinen Brüdern später?",
         "Antwort 1:",
-        "Er verspottete sie.",
-        "Antwort 2:",
         "Er vergab ihnen.",
+        "Antwort 2:",
+        "Er verspottete sie.",
         "Antwort 3:",
         "Er log über sie.",
         "Wähle die Antwort, die du für richtig hältst."
@@ -1240,20 +1195,20 @@
       "questionId": "kids-quiz-530",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
+      "proposedCorrectAnswerPosition": 2,
       "displayAnswerLabelsInSameOrderAsSpeech": [
         "Er braucht Allah nicht",
-        "Er soll nur auf Menschen vertrauen",
-        "Allah genügt ihm"
+        "Allah genügt ihm",
+        "Er soll nur auf Menschen vertrauen"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a3",
-        "a1"
+        "a1",
+        "a3"
       ],
       "originalQuestionAudioSHA256": "731c52062bbd23d42da7cec3977c0721eea847554c4fe950ea598dd3408fc921",
-      "proposedQuestionAudioText": "Mal sehen, was du zu diesem Thema weißt. Was ist Allah für den, der auf Ihn vertraut? Antwort 1: Er braucht Allah nicht. Antwort 2: Er soll nur auf Menschen vertrauen. Antwort 3: Allah genügt ihm. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "0d5e2bec6a023e5a11f16181834c9a8fde897f959dec0481fdb898fa82fc2273",
+      "proposedQuestionAudioText": "Mal sehen, was du zu diesem Thema weißt. Was ist Allah für den, der auf Ihn vertraut? Antwort 1: Er braucht Allah nicht. Antwort 2: Allah genügt ihm. Antwort 3: Er soll nur auf Menschen vertrauen. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "0a5955c7b6fe9b411fe6e1e906c3fcb0f5f435a9bc62066602e3a4dcbe771af4",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Mal sehen, was du zu diesem Thema weißt.",
@@ -1261,9 +1216,9 @@
         "Antwort 1:",
         "Er braucht Allah nicht.",
         "Antwort 2:",
-        "Er soll nur auf Menschen vertrauen.",
-        "Antwort 3:",
         "Allah genügt ihm.",
+        "Antwort 3:",
+        "Er soll nur auf Menschen vertrauen.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -1285,30 +1240,30 @@
       "questionId": "kids-quiz-321",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Geduld",
         "Hochmut",
-        "Spott"
+        "Spott",
+        "Geduld"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
         "a2",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "3ae2e7b7e13d0fb5e62577ff9662858848a038be3ec3a5c86f1e2d9a9211468d",
-      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Welche Eigenschaft brauchte Mūsā bei seiner Reise mit dem rechtschaffenen Diener? Antwort 1: Geduld. Antwort 2: Hochmut. Antwort 3: Spott. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "3ae2e7b7e13d0fb5e62577ff9662858848a038be3ec3a5c86f1e2d9a9211468d",
+      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Welche Eigenschaft brauchte Mūsā bei seiner Reise mit dem rechtschaffenen Diener? Antwort 1: Hochmut. Antwort 2: Spott. Antwort 3: Geduld. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "ebc83f7bd3be86167022b1aa6c479bed0b5e34119917f5941279e872ad8051b3",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Überlege kurz, bevor du dich entscheidest.",
         "Welche Eigenschaft brauchte Mūsā bei seiner Reise mit dem rechtschaffenen Diener?",
         "Antwort 1:",
-        "Geduld.",
-        "Antwort 2:",
         "Hochmut.",
-        "Antwort 3:",
+        "Antwort 2:",
         "Spott.",
+        "Antwort 3:",
+        "Geduld.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -1330,28 +1285,28 @@
       "questionId": "kids-quiz-131",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Verbotene Nahrung",
         "Halāle und gute Nahrung",
+        "Verbotene Nahrung",
         "Alles ohne Prüfung"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
         "a1",
+        "a2",
         "a3"
       ],
       "originalQuestionAudioSHA256": "b332e3c811a4c7300f026c44876c5df9bc502e4968284b7976e0a6a7508db12b",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Welche Nahrung sollen Menschen wählen? Antwort 1: Verbotene Nahrung. Antwort 2: Halāle und gute Nahrung. Antwort 3: Alles ohne Prüfung. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "9ed4c4ac65478a9f1b21adbb5fa5db788a248314bfbe402500f1b7eebd1ea314",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Welche Nahrung sollen Menschen wählen? Antwort 1: Halāle und gute Nahrung. Antwort 2: Verbotene Nahrung. Antwort 3: Alles ohne Prüfung. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "b332e3c811a4c7300f026c44876c5df9bc502e4968284b7976e0a6a7508db12b",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Nimm dir Zeit für deine Antwort.",
         "Welche Nahrung sollen Menschen wählen?",
         "Antwort 1:",
-        "Verbotene Nahrung.",
-        "Antwort 2:",
         "Halāle und gute Nahrung.",
+        "Antwort 2:",
+        "Verbotene Nahrung.",
         "Antwort 3:",
         "Alles ohne Prüfung.",
         "Wähle die Antwort, die du für richtig hältst."
@@ -1372,35 +1327,37 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-035",
-      "ageBand": "9-10",
+      "questionId": "kids-quiz-428",
+      "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 2,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Nur freundlich zu wirken",
-        "Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht",
-        "Nur viel zu besitzen"
+        "Lautes Reden",
+        "Demut im Gebet",
+        "Viel Besitz"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
         "a1",
         "a3"
       ],
-      "originalQuestionAudioSHA256": "49fd92082b387e2d1763eb0325ab562dd1e4424dcbefb5790a151ddcb3f05b88",
-      "proposedQuestionAudioText": "Welche Antwort beschreibt Iḥsān am besten? Antwort 1: Nur freundlich zu wirken. Antwort 2: Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht. Antwort 3: Nur viel zu besitzen. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "07b2245f82ca399362408894a331182e392dba8c3abca25d8cf9a60256b7699b",
+      "originalQuestionAudioSHA256": "3f37e7f8d60d0a1fb7a3487bc496878b6aa108f01259e4dd72b2391705445f8e",
+      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Welche Eigenschaft nennt Qurʾān 23:1–2 zuerst bei erfolgreichen Gläubigen? Antwort 1: Lautes Reden. Antwort 2: Demut im Gebet. Antwort 3: Viel Besitz. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "f0f9fe65c078dd69a4ebce58499034a626a16c5501434361466b88423a6816eb",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
-        "Welche Antwort beschreibt Iḥsān am besten?",
+        "Hör dir die Frage und die Antworten in Ruhe an.",
+        "Welche Eigenschaft nennt Qurʾān 23:1–2 zuerst bei erfolgreichen Gläubigen?",
         "Antwort 1:",
-        "Nur freundlich zu wirken.",
+        "Lautes Reden.",
         "Antwort 2:",
-        "Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht.",
+        "Demut im Gebet.",
         "Antwort 3:",
-        "Nur viel zu besitzen.",
-        "Überlege und wähle die beste Antwort."
+        "Viel Besitz.",
+        "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
+        240,
         240,
         70,
         240,
@@ -1409,50 +1366,7 @@
         70,
         240
       ],
-      "originalSource": "Ṣaḥīḥ Muslim 8",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-386",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Nur Reiche",
-        "Nur Berühmte",
-        "Die Gläubigen und diejenigen mit Wissen"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a3",
-        "a1"
-      ],
-      "originalQuestionAudioSHA256": "dd4c9a36c1f81bbee416db4def1d2b03187fac07dceef284172824877b0dd558",
-      "proposedQuestionAudioText": "Wen erhöht Allah nach Qurʾān 58:11 in Rangstufen? Antwort 1: Nur Reiche. Antwort 2: Nur Berühmte. Antwort 3: Die Gläubigen und diejenigen mit Wissen. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "03b3ee40c01524f679ac6a543f322ba96894544a6f71af18a6d7c020ac4071ca",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Wen erhöht Allah nach Qurʾān 58:11 in Rangstufen?",
-        "Antwort 1:",
-        "Nur Reiche.",
-        "Antwort 2:",
-        "Nur Berühmte.",
-        "Antwort 3:",
-        "Die Gläubigen und diejenigen mit Wissen.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 58:11",
+      "originalSource": "Qurʾān 23:1–2",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
@@ -1461,27 +1375,27 @@
       "questionId": "kids-quiz-338",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Verwandte, Bedürftige und Reisende",
         "Nur Reiche",
+        "Verwandte, Bedürftige und Reisende",
         "Nur Händler"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
         "a2",
+        "a1",
         "a3"
       ],
       "originalQuestionAudioSHA256": "03955c0c488d228132906570a85b1b2900dbab857019427916fd3bca855aeedd",
-      "proposedQuestionAudioText": "Welche Gruppen nennt Qurʾān 17:26 beim Geben ihrer Rechte? Antwort 1: Verwandte, Bedürftige und Reisende. Antwort 2: Nur Reiche. Antwort 3: Nur Händler. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "03955c0c488d228132906570a85b1b2900dbab857019427916fd3bca855aeedd",
+      "proposedQuestionAudioText": "Welche Gruppen nennt Qurʾān 17:26 beim Geben ihrer Rechte? Antwort 1: Nur Reiche. Antwort 2: Verwandte, Bedürftige und Reisende. Antwort 3: Nur Händler. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "8572e53943b9c43fd08ab33ee8b245356a462a5c1310b0d7429124d1aafc776c",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Welche Gruppen nennt Qurʾān 17:26 beim Geben ihrer Rechte?",
         "Antwort 1:",
-        "Verwandte, Bedürftige und Reisende.",
-        "Antwort 2:",
         "Nur Reiche.",
+        "Antwort 2:",
+        "Verwandte, Bedürftige und Reisende.",
         "Antwort 3:",
         "Nur Händler.",
         "Überlege und wähle die beste Antwort."
@@ -1504,29 +1418,29 @@
       "questionId": "kids-quiz-387",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
         "Mein Herr, mache mich berühmt",
-        "Mein Herr, mehre mich an Wissen",
-        "Mein Herr, gib mir nur Besitz"
+        "Mein Herr, gib mir nur Besitz",
+        "Mein Herr, mehre mich an Wissen"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a1",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "7ab21168aaf009dfc0742940305d1d71c387da41ef99d6bcf6d70e7e7e4d319a",
-      "proposedQuestionAudioText": "Welche kurze Duʿāʾ lehrt Qurʾān 20:114? Antwort 1: Mein Herr, mache mich berühmt. Antwort 2: Mein Herr, mehre mich an Wissen. Antwort 3: Mein Herr, gib mir nur Besitz. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "739af0514dd4cc8c2135ba38373bcc92cf07f4bf100b14f3034c2b5496825c2a",
+      "proposedQuestionAudioText": "Welche kurze Duʿāʾ lehrt Qurʾān 20:114? Antwort 1: Mein Herr, mache mich berühmt. Antwort 2: Mein Herr, gib mir nur Besitz. Antwort 3: Mein Herr, mehre mich an Wissen. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "07d28ca4eacd4f5c3bd906c2bcf9c4fae0c29d07f0d47614b6e1255985bd7a15",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Welche kurze Duʿāʾ lehrt Qurʾān 20:114?",
         "Antwort 1:",
         "Mein Herr, mache mich berühmt.",
         "Antwort 2:",
-        "Mein Herr, mehre mich an Wissen.",
-        "Antwort 3:",
         "Mein Herr, gib mir nur Besitz.",
+        "Antwort 3:",
+        "Mein Herr, mehre mich an Wissen.",
         "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
@@ -1547,29 +1461,29 @@
       "questionId": "kids-quiz-096",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
+      "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Für den, der dazu die Möglichkeit hat",
         "Für niemanden",
-        "Nur für Kinder",
-        "Für den, der dazu die Möglichkeit hat"
+        "Nur für Kinder"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
         "a2",
-        "a3",
-        "a1"
+        "a3"
       ],
       "originalQuestionAudioSHA256": "dcac0c5bf3b11910e4471364e59bcbe023afcd6e496077319096a818b8ce5471",
-      "proposedQuestionAudioText": "Für wen ist der Ḥaǧǧ zum Haus verpflichtend? Antwort 1: Für niemanden. Antwort 2: Nur für Kinder. Antwort 3: Für den, der dazu die Möglichkeit hat. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "d25813c6fe89c82fb8b3d61a350dab0933e3cdedd0b806d202c56066d0b38418",
+      "proposedQuestionAudioText": "Für wen ist der Ḥaǧǧ zum Haus verpflichtend? Antwort 1: Für den, der dazu die Möglichkeit hat. Antwort 2: Für niemanden. Antwort 3: Nur für Kinder. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "dcac0c5bf3b11910e4471364e59bcbe023afcd6e496077319096a818b8ce5471",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Für wen ist der Ḥaǧǧ zum Haus verpflichtend?",
         "Antwort 1:",
-        "Für niemanden.",
-        "Antwort 2:",
-        "Nur für Kinder.",
-        "Antwort 3:",
         "Für den, der dazu die Möglichkeit hat.",
+        "Antwort 2:",
+        "Für niemanden.",
+        "Antwort 3:",
+        "Nur für Kinder.",
         "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
@@ -1582,49 +1496,6 @@
         240
       ],
       "originalSource": "Qurʾān 3:97",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-040",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Sie sind vor seiner Zunge und Hand sicher",
-        "Er verletzt sie mit Worten",
-        "Er schadet ihnen absichtlich"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
-        "a2",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "4e71eb5f7be84b9c511e9bb3f12a48dcb2cbfa43f2ee2d730c67f80037bb0263",
-      "proposedQuestionAudioText": "Woran erkennt man gutes muslimisches Verhalten gegenüber anderen Muslimen? Antwort 1: Sie sind vor seiner Zunge und Hand sicher. Antwort 2: Er verletzt sie mit Worten. Antwort 3: Er schadet ihnen absichtlich. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "4e71eb5f7be84b9c511e9bb3f12a48dcb2cbfa43f2ee2d730c67f80037bb0263",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Woran erkennt man gutes muslimisches Verhalten gegenüber anderen Muslimen?",
-        "Antwort 1:",
-        "Sie sind vor seiner Zunge und Hand sicher.",
-        "Antwort 2:",
-        "Er verletzt sie mit Worten.",
-        "Antwort 3:",
-        "Er schadet ihnen absichtlich.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Ṣaḥīḥ al-Bukhārī 10; Ṣaḥīḥ Muslim 40",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
@@ -1673,32 +1544,75 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-150",
+      "questionId": "kids-quiz-040",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Vom Lernen",
-        "Von guten Taten",
-        "Von schändlichen und verwerflichen Taten"
+        "Er verletzt sie mit Worten",
+        "Er schadet ihnen absichtlich",
+        "Sie sind vor seiner Zunge und Hand sicher"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
         "a3",
         "a1"
       ],
+      "originalQuestionAudioSHA256": "4e71eb5f7be84b9c511e9bb3f12a48dcb2cbfa43f2ee2d730c67f80037bb0263",
+      "proposedQuestionAudioText": "Woran erkennt man gutes muslimisches Verhalten gegenüber anderen Muslimen? Antwort 1: Er verletzt sie mit Worten. Antwort 2: Er schadet ihnen absichtlich. Antwort 3: Sie sind vor seiner Zunge und Hand sicher. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "4244d8c1d09e76f3bc389610f7dbfcf7489ed11eae10ec09db5228f5e1204d89",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Woran erkennt man gutes muslimisches Verhalten gegenüber anderen Muslimen?",
+        "Antwort 1:",
+        "Er verletzt sie mit Worten.",
+        "Antwort 2:",
+        "Er schadet ihnen absichtlich.",
+        "Antwort 3:",
+        "Sie sind vor seiner Zunge und Hand sicher.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Ṣaḥīḥ al-Bukhārī 10; Ṣaḥīḥ Muslim 40",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-150",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 1,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Von schändlichen und verwerflichen Taten",
+        "Vom Lernen",
+        "Von guten Taten"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
+        "a2",
+        "a3"
+      ],
       "originalQuestionAudioSHA256": "51ced03c97fcf4e4efc93af0344ba4ff0ad3fe78147dfbc7d91a0eb6d4272f02",
-      "proposedQuestionAudioText": "Wovon hält das richtig verrichtete Gebet nach Qurʾān 29:45 ab? Antwort 1: Vom Lernen. Antwort 2: Von guten Taten. Antwort 3: Von schändlichen und verwerflichen Taten. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "d5b4246eaa4e0f260954298fb494d6deba796590e5498c8a689bb54dfb9c1cd1",
+      "proposedQuestionAudioText": "Wovon hält das richtig verrichtete Gebet nach Qurʾān 29:45 ab? Antwort 1: Von schändlichen und verwerflichen Taten. Antwort 2: Vom Lernen. Antwort 3: Von guten Taten. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "51ced03c97fcf4e4efc93af0344ba4ff0ad3fe78147dfbc7d91a0eb6d4272f02",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Wovon hält das richtig verrichtete Gebet nach Qurʾān 29:45 ab?",
         "Antwort 1:",
-        "Vom Lernen.",
-        "Antwort 2:",
-        "Von guten Taten.",
-        "Antwort 3:",
         "Von schändlichen und verwerflichen Taten.",
+        "Antwort 2:",
+        "Vom Lernen.",
+        "Antwort 3:",
+        "Von guten Taten.",
         "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
@@ -1719,27 +1633,27 @@
       "questionId": "kids-quiz-097",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Zur al-Masǧid al-Ḥarām in Makkah",
         "Zu irgendeinem Gebäude",
+        "Zur al-Masǧid al-Ḥarām in Makkah",
         "Immer nach Norden"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
         "a2",
+        "a1",
         "a3"
       ],
       "originalQuestionAudioSHA256": "e69edab43b736c9166b819263cdb555496945956627b15588b710291c8946b0c",
-      "proposedQuestionAudioText": "Wohin richten Muslime sich im Gebet? Antwort 1: Zur al-Masǧid al-Ḥarām in Makkah. Antwort 2: Zu irgendeinem Gebäude. Antwort 3: Immer nach Norden. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "e69edab43b736c9166b819263cdb555496945956627b15588b710291c8946b0c",
+      "proposedQuestionAudioText": "Wohin richten Muslime sich im Gebet? Antwort 1: Zu irgendeinem Gebäude. Antwort 2: Zur al-Masǧid al-Ḥarām in Makkah. Antwort 3: Immer nach Norden. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "215e82b91c0504469d3a2084891b86536e48f38ba5563933869554b71d204019",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Wohin richten Muslime sich im Gebet?",
         "Antwort 1:",
-        "Zur al-Masǧid al-Ḥarām in Makkah.",
-        "Antwort 2:",
         "Zu irgendeinem Gebäude.",
+        "Antwort 2:",
+        "Zur al-Masǧid al-Ḥarām in Makkah.",
         "Antwort 3:",
         "Immer nach Norden.",
         "Überlege und wähle die beste Antwort."
@@ -1762,29 +1676,29 @@
       "questionId": "kids-quiz-146",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
         "Immer verschwenderisch",
-        "Weder verschwenderisch noch geizig",
-        "Sie geben nie etwas aus"
+        "Sie geben nie etwas aus",
+        "Weder verschwenderisch noch geizig"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a1",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "eee254c3f51d993ae89df7389af2fdafa707f82c890a48346aa13e4e78089d40",
-      "proposedQuestionAudioText": "Wie geben die Diener des Allerbarmers ihr Vermögen aus? Antwort 1: Immer verschwenderisch. Antwort 2: Weder verschwenderisch noch geizig. Antwort 3: Sie geben nie etwas aus. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "d1d4415e9227dbb30fde448d596f915e45774fab69c4c329369f7a51ed3eaed9",
+      "proposedQuestionAudioText": "Wie geben die Diener des Allerbarmers ihr Vermögen aus? Antwort 1: Immer verschwenderisch. Antwort 2: Sie geben nie etwas aus. Antwort 3: Weder verschwenderisch noch geizig. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "b267db591b8a1adf3a1870f0174a7b0ad0032cff9a772d7fb0763b071b89a0cb",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Wie geben die Diener des Allerbarmers ihr Vermögen aus?",
         "Antwort 1:",
         "Immer verschwenderisch.",
         "Antwort 2:",
-        "Weder verschwenderisch noch geizig.",
-        "Antwort 3:",
         "Sie geben nie etwas aus.",
+        "Antwort 3:",
+        "Weder verschwenderisch noch geizig.",
         "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
@@ -1797,6 +1711,92 @@
         240
       ],
       "originalSource": "Qurʾān 25:67",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-092",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 1,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Durch Vorhaltungen und Verletzungen",
+        "Durch eine gute Absicht",
+        "Durch heimliches Geben"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "ef9cae1b7c2e4004c7971390b7e54c42668d27562ead926a1eefcd89f7b66ed8",
+      "proposedQuestionAudioText": "Wodurch sollen wir unsere Ṣadaqah nicht zunichtemachen? Antwort 1: Durch Vorhaltungen und Verletzungen. Antwort 2: Durch eine gute Absicht. Antwort 3: Durch heimliches Geben. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "ef9cae1b7c2e4004c7971390b7e54c42668d27562ead926a1eefcd89f7b66ed8",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Wodurch sollen wir unsere Ṣadaqah nicht zunichtemachen?",
+        "Antwort 1:",
+        "Durch Vorhaltungen und Verletzungen.",
+        "Antwort 2:",
+        "Durch eine gute Absicht.",
+        "Antwort 3:",
+        "Durch heimliches Geben.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 2:264",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-390",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Sofort weiterleiten",
+        "Prüfen, bevor daraus Schaden entsteht",
+        "Immer das Schlimmste annehmen"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a1",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "d76e6753e2b623fcfc9536a9c9fdf5ec5953c923ad0c1154f9be32595c92c04d",
+      "proposedQuestionAudioText": "Welche Regel gibt Qurʾān 49:6 für wichtige Nachrichten? Antwort 1: Sofort weiterleiten. Antwort 2: Prüfen, bevor daraus Schaden entsteht. Antwort 3: Immer das Schlimmste annehmen. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "cca770c85996df047c0fa857bfe4c48e92232bd3fd1a796172bf817e90ec3dbd",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Welche Regel gibt Qurʾān 49:6 für wichtige Nachrichten?",
+        "Antwort 1:",
+        "Sofort weiterleiten.",
+        "Antwort 2:",
+        "Prüfen, bevor daraus Schaden entsteht.",
+        "Antwort 3:",
+        "Immer das Schlimmste annehmen.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 49:6",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
