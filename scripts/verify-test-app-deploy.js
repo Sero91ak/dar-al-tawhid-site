@@ -347,8 +347,8 @@ async function fetchVersionBuild(base) {
     for (let attempt=1;attempt<=5;attempt++) {
       try {
         const shell=await fetchText(base+"/?scroll-v4-check="+Date.now());
-        const js=await fetchText(base+"/test/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-scroll-viewport-v7");
-        const css=await fetchText(base+"/test/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-scroll-viewport-v7");
+        const js=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-scroll-viewport-v7");
+        const css=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-scroll-viewport-v7");
         const htmlOk=shell.status===200
           &&shell.text.includes("darAdultTopBoundaryJsV1")
           &&shell.text.includes("20261020-scroll-viewport-v7");
