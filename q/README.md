@@ -83,3 +83,5 @@ Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
 - Mobile und Tablet: feste, opake Kopfzeile mit korrekter Safe-Area; der Inhalt darf nicht durch die Status-/Kopfzeile scheinen. Gestenzoom nur in der Quellenansicht eingeschränkt, nicht global für die Desktop-Webseite.
 - Die gesamte Sammlung unter `/quellen/` ist als **Eigentümer-Übersicht** vorgesehen. **Sicherheitsstatus:** `noindex` und fehlende Rücklinks sind kein Zugriffsschutz. Ein Cloudflare-Access-Pfadschutz mit Ersteller-Login sowie eine Prüfung öffentlich gespeicherter Registerdaten sind separat erforderlich. Nicht als privat/authentifiziert ausgeben, bevor beides eingerichtet und getestet ist.
 - Präzise Quellen, arabischer Originaltext, Primärnachweise und vorhandene Q-Nummern dürfen bei UI-Korrekturen nicht verändert werden.
+
+| `q/47` | Tawḥīd, Īmān und Akhlāq – ein Dīn | `Ibn ʿAbbās; Qatādah` | Tafsīr zu an-Naḥl 16:90: Tawḥīd, Pflichten und guter Charakter. |
