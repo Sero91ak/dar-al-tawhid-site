@@ -709,6 +709,18 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
   if (isKidsPath(url)) return;
 
+  // Test-Startseite: neue JS-Version sofort vom Netz laden, alte Offline-Kopie nur als Fallback.
+  if (url.pathname === '/test/assets/dar-home-library-v1194.js') {
+    event.respondWith(fetch(request, { cache: 'no-store' }).then((response) => {
+      if (response && response.ok) {
+        const copy = response.clone();
+        caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => null);
+      }
+      return response;
+    }).catch(() => caches.match(request)));
+    return;
+  }
+
   // Keine OneSignal-Dateien anfassen.
   if (url.pathname.startsWith('/push/onesignal/')) return;
 
