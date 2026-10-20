@@ -285,6 +285,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Überlege kurz, bevor du dich entscheidest. Darf Abneigung gegen Menschen uns ungerecht machen? Antwort 1: Nein. Antwort 2: Ja. Antwort 3: Nur manchmal. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a105c74e4552503b91ac79d8b1fd23def8baeadb.mp3",
+      "sha256": "d033dbb1e9df9a09391f4e414a2a3a891cdec7bc0f375e1b0a5701d92451e242",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah befiehlt Gerechtigkeit und warnt davor, dass Abneigung zu Ungerechtigkeit führt.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/103e9ae437b9a0354c87009024d2763765577e6c.mp3",
+      "sha256": "4a67a3f63c0debf215d604b23444726411147c0263bc710ba132853b64424a9d",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Hör dir die Frage und die Antworten in Ruhe an. Welche zwei Dinge verneint Āyat al-Kursī für Allah? Antwort 1: Schlummer und Schlaf. Antwort 2: Wissen und Macht. Antwort 3: Hören und Sehen. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/9d9e7d0a7fd3d677dea9fdc94a3bf4dcf42b2da5.mp3",
       "sha256": "4fb397cd0ece94065ecc27955ac5606214f2ee999a3c97529aceb9d6e8087591",
@@ -766,9 +788,7 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Der Gesandte Allahs ﷺ.",
-            "Der lauteste Mensch.",
-            "Der reichste Mensch."
+            "Der Gesandte Allahs ﷺ."
           ]
         },
         "correct": {
@@ -1571,11 +1591,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Darf Abneigung gegen Menschen uns ungerecht machen?",
-            "Nur manchmal."
-          ]
+          "available": true,
+          "textSha256": "a6f7e4a92890326fe7bd1ae1b1c4527129cc4aa5e42eb485b24381df6ca63b69",
+          "mp3Sha256": "d033dbb1e9df9a09391f4e414a2a3a891cdec7bc0f375e1b0a5701d92451e242",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a105c74e4552503b91ac79d8b1fd23def8baeadb.mp3"
         },
         "correct": {
           "available": true,
@@ -1590,13 +1609,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/53nlCj9DCu1JkXZFBEZI.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah befiehlt Gerechtigkeit und warnt davor, dass Abneigung zu Ungerechtigkeit führt."
-          ]
+          "available": true,
+          "textSha256": "82c7789634bda22d1ee4a342e9c75752c055df582cf37c24afa6880477dc2383",
+          "mp3Sha256": "4a67a3f63c0debf215d604b23444726411147c0263bc710ba132853b64424a9d",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/103e9ae437b9a0354c87009024d2763765577e6c.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-131": {
       "ageBand": "7-8",
