@@ -13,3 +13,43 @@ html body :is(dialog[open],[role="dialog"]:not([hidden]),.modal.open,.modal.is-o
   overscroll-behavior-y:contain;
 }
 /* No overflow:hidden, position:fixed, touch-action:none or scroll-snap here. */
+
+/* DAR_ADULT_TOP_SCROLL_BOUNDARY_V2 · 2026-10-20
+ * Continuous document scroll, NO spring-back at top OR bottom.
+ * Preserve text selection, carousels, native inputs, hero imagery and
+ * anchored/sticky search. The JS interceptor runs only at a reached edge.
+ */
+html,html body{
+  overscroll-behavior-y:none!important;
+  scroll-snap-type:none!important;
+}
+/* POST HERO V2: compact first screen as in approved 19:50 iPhone screenshot.
+ * Full-bleed image remains exactly the original themed artwork; title stays
+ * inside the image above the bottom edge. Long/accessibility titles can grow.
+ * No fixed height, max-height clip, transform or shadow animation.
+ */
+@media (max-width:699px) and (orientation:portrait){
+  html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title,
+  html[data-theme] body.has-bottom-nav.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
+    min-height:clamp(174px,23svh,215px)!important;
+    height:auto!important;
+    max-height:none!important;
+    margin-block:0!important;
+    padding-top:max(17px,calc(var(--dar-native-safe-top,env(safe-area-inset-top,0px)) + 10px))!important;
+    padding-bottom:20px!important;
+    padding-inline:max(17px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))!important;
+    display:flex!important;
+    flex-direction:column!important;
+    justify-content:flex-end!important;
+    background-size:cover,cover,cover!important;
+    background-repeat:no-repeat!important;
+    background-position:center,center,center!important;
+    overflow:hidden!important;
+    animation:none!important;
+    transition:none!important;
+    transform:none!important;
+    box-shadow:none!important;
+  }
+}
+/* No modifications to .app/#appView overflow (Android scroll-chain safeguard).
+ * No modifications to the 5-tab bottom dock or fixed iOS safe areas. */
