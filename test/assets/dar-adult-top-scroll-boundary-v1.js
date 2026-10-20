@@ -1,5 +1,6 @@
-/* DAR_ADULT_TOP_SCROLL_BOUNDARY_V2 · two-ended scroll stop for adult visitor and Dar Test.
- * Suppress overshoot and spring-back at BOTH real document edges on iOS.
+/* DAR_ADULT_TOP_SCROLL_BOUNDARY_V3 · first-touch two-ended scroll stop for adult visitor and Dar Test.
+ * Block the very FIRST outward vertical touch movement at both document edges.
+ * Previous 7px axis delay let the native iOS spring gesture activate first.
  * Does not scrollTo, clone/reparent DOM, lock body overflow or alter sticky Heroes.
  * Nested readers scroll independently; horizontal swipes and momentum inside
  * available content are preserved. Never intercept the normal movement.
@@ -47,7 +48,9 @@ function canScroll(direction){
 document.addEventListener("touchstart",function(event){
  if(!adultShell()||!event.touches||event.touches.length!==1){reset();return}
  var target=event.target;
- if(!target||target.nodeType!==1||!target.closest){reset();return}
+ // Touches can originate on text nodes; do not silently turn off the guard.
+ if(target&&target.nodeType!==1)target=target.parentElement;
+ if(!target||!target.closest){reset();return}
  if(target.closest(gestureSelector)){reset();return}
  startTarget=target;
  scope=target.closest(overlaySelector);
@@ -59,11 +62,15 @@ document.addEventListener("touchmove",function(event){
  var point=event.touches[0],dx=point.clientX-initialX,dy=point.clientY-initialY;
  var stepY=point.clientY-lastY;
  lastY=point.clientY;
- if(!axis&&Math.abs(dx)+Math.abs(dy)>7)
-  axis=Math.abs(dy)>Math.abs(dx)*1.15?"vertical":"horizontal";
+ // Decide direction on the first clear movement (not after 7px).
+ // The former threshold could start UIKit rubber-banding before preventDefault.
+ if(!axis){
+  if(Math.abs(dy)>=1&&Math.abs(dy)>=Math.abs(dx)*1.12)axis="vertical";
+  else if(Math.abs(dx)>=2&&Math.abs(dx)>=Math.abs(dy)*1.25)axis="horizontal";
+ }
  if(axis!=="vertical"||stepY===0||event.defaultPrevented||!event.cancelable)return;
- // A finger pulled DOWN scrolls content UP; a finger pushed UP scrolls DOWN.
- // Cancel only if every scroll ancestor has reached that exact boundary.
+ // Finger down = scroll content toward its TOP; finger up = toward BOTTOM.
+ // Never cancel when the document or a nested reader can really scroll.
  if(!canScroll(stepY>0?"up":"down"))event.preventDefault();
 },{capture:true,passive:false});
 document.addEventListener("touchend",reset,{capture:true,passive:true});
