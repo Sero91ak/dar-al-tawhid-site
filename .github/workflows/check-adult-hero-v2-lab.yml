@@ -1,0 +1,34 @@
+name: Safe Adult Sticky Hero V2 Laboratory
+on:
+  pull_request:
+    paths:
+      - 'test/hero-v2-lab/**'
+      - 'scripts/verify-adult-hero-v2-lab.cjs'
+      - '.github/workflows/check-adult-hero-v2-lab.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-contract:
+    name: Chromium + WebKit native-scroll contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install isolated browser QA dependencies
+        run: |
+          npm install --no-save --ignore-scripts playwright
+          npx playwright install --with-deps chromium webkit
+      - name: Verify isolated V2 without touching live/test app
+        run: node scripts/verify-adult-hero-v2-lab.cjs
+      - name: Upload screenshots and measured geometry
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: adult-sticky-hero-safe-v2-browser-evidence
+          path: hero-v2-lab-evidence/
+          retention-days: 7
+          if-no-files-found: warn

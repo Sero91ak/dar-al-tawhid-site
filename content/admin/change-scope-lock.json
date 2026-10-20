@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "dar-sticky-hero-safe-v2-isolated-prototype-20261018",
+      "at": "2026-10-18T09:05:00+02:00",
+      "approvedBy": "user-explicit-safe-v2-isolated-prototype-and-qa-20261018",
+      "reason": "Isolated static prototype + browser regression guards for adult Sticky Hero V2 only. No integration into real Test or Visitor apps, no changes to Frauen, app navigation, push, service-worker, Kids or live routing.",
+      "paths": [
+        "test/hero-v2-lab/index.html",
+        "scripts/verify-adult-hero-v2-lab.cjs",
+        ".github/workflows/check-adult-hero-v2-lab.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-02T23:59:00.000Z"
+    },
+    {
       "id": "adult-immersive-hero-test-20261018",
       "at": "2026-10-18T07:25:00+02:00",
       "approvedBy": "user-explicit-global-immersive-hero-scroll-under-test-visitor-desktop-20261018",
