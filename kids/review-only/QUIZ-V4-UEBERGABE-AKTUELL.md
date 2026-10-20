@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `ba97171a14fe28e6b9ee2b833b4f7d303b103b8d`
+- Commit beim Erstellen dieses Berichts: `e3461183498805243a0102cfd05b740109a62ada`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **294 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1062 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -17,7 +17,7 @@
 - Alter 7-8: **8/150** komplett; vorhandene Hörteile question=8, correct=150, retry=150, explanation=18.
 - Alter 9-10: **5/150** komplett; vorhandene Hörteile question=6, correct=150, retry=150, explanation=12.
 - Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **47 importiert**, **9 noch ohne heruntergeladene Original-MP3-Datei**.
-- Zusätzlich im Originalregister: **416 Textschlüssel**, davon **369 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
+- Zusätzlich im Originalregister: **418 Textschlüssel**, davon **371 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
 - Erste neue V4-Aufnahmerunde für ältere Kinder: **21 ECHTE Original-MP3s** mit **21 eindeutigen Anbieter-Anfragebelegen**; dafür geschätzte **486.47 Credits**. **Tatsächliche Provider-Abbuchung bisher NICHT abgeglichen**.
 - ACHTUNG: **1 ungeklärte(r) V4-POST-Versuch(e)** sind ohne bestätigte MP3 gespeichert und von neuen kostenpflichtigen Anfragen AUSGESCHLOSSEN. Zuerst Originalbytes/Kostenbeleg klären, keinesfalls den betreffenden Text nochmals synthetisieren.
 - Kosten ausschließlich für den kostenlosen Import-/QA-/Berichtslauf: **0 neue ElevenLabs-Sprachcredits**. Diese Null gilt NICHT für die bereits kostenpflichtig generierten V4-Originalaufnahmen.
