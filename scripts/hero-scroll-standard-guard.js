@@ -177,3 +177,51 @@ if(context.activateAdultCompactHero(replaced)!==replaced){
  fail("V1404 darf bei wiederholter Worker-Injektion keine doppelten Styles/JS erzeugen");
 }
 ok("V1404 native iOS Safe-Area Konflikt behoben, Hero/Sticky-Suche kompakt und korrekt gecacht");
+
+
+/* DAR_GLOBAL_NO_DUPLICATED_HERO_REGRESSION_V1 · 20.10.2026
+ * The iPhone video exposed a second blurry/fixed hero over the real hero.
+ * Keep the adult gesture clamp, but NEVER resurrect the fixed photo clone.
+ * This check runs with the existing hero-scroll-standard guard in CI.
+ */
+const edgeCodeFiles=[
+ "assets/dar-adult-top-scroll-boundary-v1.js",
+ "test/assets/dar-adult-top-scroll-boundary-v1.js"
+];
+const edgeStyleFiles=[
+ "assets/dar-adult-top-scroll-boundary-v1.css",
+ "test/assets/dar-adult-top-scroll-boundary-v1.css"
+];
+const edgeJs=edgeCodeFiles.map(file=>fs.readFileSync(path.join(root,file),"utf8"));
+const edgeCss=edgeStyleFiles.map(file=>fs.readFileSync(path.join(root,file),"utf8"));
+if(edgeJs[0]!==edgeJs[1]||edgeCss[0]!==edgeCss[1])
+ fail("Test und Besucher müssen denselben globalen Scroll-Stopp ohne Hero-Kopie verwenden");
+for(let i=0;i<edgeJs.length;i++){
+ const js=edgeJs[i],css=edgeCss[i];
+ if(!js.includes("DAR_ADULT_TOP_SCROLL_BOUNDARY_V3")||
+    !js.includes("function canScroll(direction)")||
+    !js.includes("touchmove")||
+    !js.includes('if(!canScroll(stepY>0?"up":"down"))event.preventDefault()'))
+  fail(edgeCodeFiles[i]+": beidseitige Scroll-Kantensperre fehlt");
+ if(!css.includes("overscroll-behavior-y:none!important")||
+    !css.includes("DAR_ADULT_SCROLL_EDGE_NO_OVERLAY_20261020"))
+  fail(edgeStyleFiles[i]+": globaler No-Bounce-/No-Overlay-Vertrag fehlt");
+ if(/darHeroSafeTopFill|dar-hero-edge-art|dar-hero-edge-active|__darAdultHeroEdgeBindingV4/.test(js+css))
+  fail(edgeCodeFiles[i]+": verbotene geklonte/unscharfe Hero-Overlayfläche");
+}
+for(const hostFile of [
+ "ios/DarAlTawhid/DarAlTawhid/WebAppView.swift",
+ "ios/DarAlTawhid/DarAlTawhid/FreshWebAppView.swift"
+]){
+ const native=fs.readFileSync(path.join(root,hostFile),"utf8");
+ if(!native.includes("webView.scrollView.bounces = false"))
+  fail(hostFile+": nativen UIKit-Rubberband-Stopp wiederherstellen");
+}
+for(const hostFile of ["cloudflare/site-router.js","cloudflare/test-app-worker.js"]){
+ const source=fs.readFileSync(path.join(root,hostFile),"utf8");
+ if(!source.includes("20261020-no-overlay-v8")||
+    !source.includes("dar-adult-top-scroll-boundary-v1.css")||
+    !source.includes("dar-adult-top-scroll-boundary-v1.js"))
+  fail(hostFile+": zentralen no-overlay-v8 Scroll-Stopp in der HTML-Auslieferung vermisst");
+}
+ok("No-duplicated-hero v8: original image once, scroll-clamp preserved, Test/Visitor parity and native bounce=false");
