@@ -1110,6 +1110,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Überlege kurz, bevor du dich entscheidest. Mehrere Kinder wollen gemeinsam einen Raum sauber machen. Was passt am besten? Antwort 1: Beim guten Vorhaben helfen. Antwort 2: Absichtlich alles wieder schmutzig machen. Antwort 3: Andere vom Helfen abhalten. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/61aac4eaf03c4b3a0c4cfd3ab6e2771cce9407b4.mp3",
+      "sha256": "6367ab897da8f269fe714713eb77a0391d3f6c6efcddea88fb2ddf989b808597",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Das merken wir uns: Allah befiehlt Zusammenarbeit in Güte und Taqwā und verbietet Hilfe bei Sünde.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/391a7e1ca87186daee6fd2e5f5bdc814868626ed.mp3",
       "sha256": "d089a6595c95aeb0f4b9b140329774474cec58049b73f52becc2e7e8cb10c3ef",
@@ -4169,7 +4180,6 @@
           "missingOriginalSegments": [
             "Es waren Götter.",
             "Es waren Männer, denen Allah Offenbarung gab.",
-            "Es waren Sterne.",
             "Was antwortet Qurʾān 21:7 auf die Frage nach früheren Gesandten?"
           ]
         },
@@ -4390,8 +4400,7 @@
           "missingOriginalSegments": [
             "Mit den Hochmütigen wegen ihres Hochmuts.",
             "Mit denen, die Taqwā haben und Gutes tun.",
-            "Mit wem ist Allah nach Qurʾān 16:128?",
-            "Nur mit Reichen."
+            "Mit wem ist Allah nach Qurʾān 16:128?"
           ]
         },
         "correct": {
@@ -4995,7 +5004,6 @@
           "missingOriginalSegments": [
             "Sie kennen das Verborgene.",
             "Sie sind Geschöpfe und nicht würdig angebetet zu werden.",
-            "Sie sind Götter.",
             "Was erkannte Ibrāhīm über Stern, Mond und Sonne?"
           ]
         },
@@ -6699,13 +6707,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Absichtlich alles wieder schmutzig machen.",
-            "Andere vom Helfen abhalten.",
-            "Beim guten Vorhaben helfen.",
-            "Mehrere Kinder wollen gemeinsam einen Raum sauber machen. Was passt am besten?"
-          ]
+          "available": true,
+          "textSha256": "4ecb6e7005d3604cd11a46c8cf31140d1c7dcc06f74094af18b6efe42450786d",
+          "mp3Sha256": "6367ab897da8f269fe714713eb77a0391d3f6c6efcddea88fb2ddf989b808597",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/61aac4eaf03c4b3a0c4cfd3ab6e2771cce9407b4.mp3"
         },
         "correct": {
           "available": true,
@@ -6726,7 +6731,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/391a7e1ca87186daee6fd2e5f5bdc814868626ed.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-761": {
       "ageBand": "7-8",

@@ -30,16 +30,16 @@
     },
     "7-8": {
       "questions": 150,
-      "completeFourPartQuestions": 42,
+      "completeFourPartQuestions": 43,
       "availableParts": {
-        "question": 46,
+        "question": 47,
         "correct": 150,
         "retry": 150,
         "explanation": 64
       },
       "missingParts": {
         "explanation": 86,
-        "question": 104
+        "question": 103
       }
     },
     "9-10": {
@@ -17317,6 +17317,18 @@
     "kids-quiz-753": {
       "ageBand": "7-8",
       "parts": {
+        "question": {
+          "spokenTextSha256": "4ecb6e7005d3604cd11a46c8cf31140d1c7dcc06f74094af18b6efe42450786d",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/61aac4eaf03c4b3a0c4cfd3ab6e2771cce9407b4.mp3",
+          "sha256": "6367ab897da8f269fe714713eb77a0391d3f6c6efcddea88fb2ddf989b808597",
+          "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+          "modelId": "eleven_v4",
+          "bytes": 265293,
+          "durationSeconds": 22.08,
+          "audioListeningApproved": false,
+          "qaApproval": "pending-human-auditory-review",
+          "reviewOnly": true
+        },
         "correct": {
           "spokenTextSha256": "c46aa1520af01daf2f55c6c1e8bf07cc30f198c53c736d5290a570951ba5ee4d",
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/44b82a7bb0b692c35cd3c597000bc459.mp3",
@@ -17354,10 +17366,8 @@
           "reviewOnly": true
         }
       },
-      "missing": {
-        "question": "unavailable-original-v4-mp3"
-      },
-      "fourPartTechnicallyReady": false,
+      "missing": {},
+      "fourPartTechnicallyReady": true,
       "humanListeningApproved": false,
       "publicPlaybackAuthorized": false
     },
