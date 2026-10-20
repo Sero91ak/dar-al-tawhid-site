@@ -31,6 +31,8 @@ html,html body{
 @media (max-width:699px) and (orientation:portrait){
   html[data-theme] body.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title,
   html[data-theme] body.has-bottom-nav.is-post-route #appView.view > .post-reader.post-reader > .post-reader-title{
+    position:relative!important;
+    top:auto!important;
     min-height:clamp(174px,23svh,215px)!important;
     height:auto!important;
     max-height:none!important;
@@ -43,7 +45,6 @@ html,html body{
     justify-content:flex-end!important;
     background-size:cover,cover,cover!important;
     background-repeat:no-repeat!important;
-    background-position:center,center,center!important;
     overflow:hidden!important;
     animation:none!important;
     transition:none!important;
