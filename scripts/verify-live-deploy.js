@@ -165,8 +165,8 @@ async function main() {
     // Verify the REAL WKWebView response, not the public browser website.
     // A successful Worker deploy alone cannot prove that the native shell
     // receives the CSS/JS. Only the TestFlight binary can disable UIKit bounce.
-    const scrollCssHref = "/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-hero-edge-v4";
-    const scrollJsHref = "/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-hero-edge-v4";
+    const scrollCssHref = "/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-hero-edge-v5";
+    const scrollJsHref = "/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-hero-edge-v5";
     const iosScrollHtmlOk = await waitForHtmlIncludes(
       `${SITE_URL}/?ios-scroll-v2=${Date.now()}`,
       [
@@ -178,11 +178,11 @@ async function main() {
     );
     const iosScrollCssOk = await waitForHtmlIncludes(
       `${SITE_URL}${scrollCssHref}`,
-      ["DAR_ADULT_TOP_SCROLL_BOUNDARY_V2", "POST HERO V2", "top:auto!important"]
+      ["DAR_ADULT_TOP_SCROLL_BOUNDARY_V2", "POST HERO V2", "DAR_GLOBAL_ADULT_HERO_SAFE_TOP_V5", "height:var(--dar-hero-edge-height"]
     );
     const iosScrollJsOk = await waitForHtmlIncludes(
       `${SITE_URL}${scrollJsHref}`,
-      ["DAR_ADULT_TOP_SCROLL_BOUNDARY_V3", "function canScroll(direction)", 'stepY>0?"up":"down"', "Math.abs(dy)>=1"]
+      ["DAR_ADULT_TOP_SCROLL_BOUNDARY_V3", "DAR_GLOBAL_ADULT_HERO_EDGE_BINDING_V5", "getBoundingClientRect()", "--dar-hero-edge-height", "function canScroll(direction)", 'stepY>0?"up":"down"', "Math.abs(dy)>=1"]
     );
     console.log(
       `verify iOS scroll boundary: native-html=${iosScrollHtmlOk ? "ok" : "FAIL"}, ` +
