@@ -340,28 +340,28 @@ async function fetchVersionBuild(base) {
     }
   }
 
-  // ADULT_HERO_EDGE_V4_REAL_ORIGIN_GATE: both test routes must deliver the
+  // ADULT_HERO_EDGE_V5_REAL_ORIGIN_GATE: both test routes must deliver the
   // very same first-touch edge-stop logic as the production visitor app.
   for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
     let ok=false;
     for (let attempt=1;attempt<=5;attempt++) {
       try {
         const shell=await fetchText(base+"/?scroll-v4-check="+Date.now());
-        const js=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-hero-edge-v4");
-        const css=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-hero-edge-v4");
+        const js=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-hero-edge-v5");
+        const css=await fetchText(base+"/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-hero-edge-v5");
         const htmlOk=shell.status===200
           &&shell.text.includes("darAdultTopBoundaryJsV1")
-          &&shell.text.includes("20261020-hero-edge-v4");
+          &&shell.text.includes("20261020-hero-edge-v5");
         const jsOk=js.status===200&&js.text.includes("DAR_ADULT_TOP_SCROLL_BOUNDARY_V3")
-          &&js.text.includes("Math.abs(dy)>=1")&&js.text.includes('stepY>0?"up":"down"')&&js.text.includes("DAR_GLOBAL_ADULT_HERO_EDGE_BINDING_V4");
-        const cssOk=css.status===200&&css.text.includes("overscroll-behavior-y:none")&&css.text.includes("DAR_GLOBAL_ADULT_HERO_SAFE_TOP_V4");
+          &&js.text.includes("Math.abs(dy)>=1")&&js.text.includes('stepY>0?"up":"down"')&&js.text.includes("DAR_GLOBAL_ADULT_HERO_EDGE_BINDING_V5")&&js.text.includes("getBoundingClientRect()")&&js.text.includes("--dar-hero-edge-height");
+        const cssOk=css.status===200&&css.text.includes("overscroll-behavior-y:none")&&css.text.includes("DAR_GLOBAL_ADULT_HERO_SAFE_TOP_V5")&&css.text.includes("height:var(--dar-hero-edge-height");
         ok=htmlOk&&jsOk&&cssOk;
-        console.log("adult hero-edge v4 "+label+": html="+htmlOk+" js="+jsOk+" css="+cssOk+" attempt="+attempt+"/5");
+        console.log("adult hero-edge v5 "+label+": html="+htmlOk+" js="+jsOk+" css="+cssOk+" attempt="+attempt+"/5");
         if(ok)break;
-      }catch(error){console.log("adult hero-edge v4 "+label+": "+(error.message||error))}
+      }catch(error){console.log("adult hero-edge v5 "+label+": "+(error.message||error))}
       if(attempt<5)await sleep(DELAY_MS);
     }
-    if(!ok)throw new Error("Adult Hero-Edge V4 not live at "+base);
+    if(!ok)throw new Error("Adult Hero-Edge V5 not live at "+base);
   }
 
   // HTML_V3_PARITY_LIVE_GUARD: verify real HTML and JS, not just buildId.

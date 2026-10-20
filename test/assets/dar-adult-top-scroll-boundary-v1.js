@@ -77,7 +77,7 @@ document.addEventListener("touchend",reset,{capture:true,passive:true});
 document.addEventListener("touchcancel",reset,{capture:true,passive:true});
 })();
 
-/* DAR_GLOBAL_ADULT_HERO_EDGE_BINDING_V4: extend REAL active hero artwork into
+/* DAR_GLOBAL_ADULT_HERO_EDGE_BINDING_V5 · REAL OFFSET: extend REAL active hero artwork into
  * upper safe area in visitor, Test and Android PWA. No extra touch interception. */
 (function(){
  "use strict";
@@ -112,23 +112,28 @@ document.addEventListener("touchcancel",reset,{capture:true,passive:true});
   if(img&&img.currentSrc)return 'url('+JSON.stringify(img.currentSrc)+')';
   return "";
  }
+ /* V5: photo continuation extends to the actual hero top, not a fixed safe-area guess.
+  * Non-interactive visual layer only; first-touch scroll guard stays untouched. */
  function findArt(){
+  var maxGap=Math.min(360,Math.max(180,window.innerHeight*.31));
   for(var i=0;i<candidates.length;i++){
    var nodes=document.querySelectorAll(candidates[i]);
    for(var j=0;j<nodes.length;j++){
     var node=nodes[j];
     if(!node.getClientRects().length)continue;
+    var rect=node.getBoundingClientRect();
+    if(rect.width<90||rect.height<45||rect.bottom<=0||rect.top>maxGap)continue;
     var art=artFor(node);
-    if(art)return art;
+    if(art)return {image:art,top:Math.max(0,rect.top)};
    }
   }
-  return "";
+  return null;
  }
  function apply(){
   scheduled=false;
   if(!document.body||!document.getElementById("appView"))return;
-  var art=findArt();
-  if(!art){
+  var active=findArt();
+  if(!active||active.top<2){
    document.body.classList.remove("dar-hero-edge-active");
    return;
   }
@@ -141,8 +146,11 @@ document.addEventListener("touchcancel",reset,{capture:true,passive:true});
    edge.appendChild(surface);
    document.body.appendChild(edge);
   }
-  if(edge.style.getPropertyValue("--dar-hero-edge-image")!==art)
-   edge.style.setProperty("--dar-hero-edge-image",art);
+  if(edge.style.getPropertyValue("--dar-hero-edge-image")!==active.image)
+   edge.style.setProperty("--dar-hero-edge-image",active.image);
+  var extent=Math.ceil(active.top+2)+"px";
+  if(edge.style.getPropertyValue("--dar-hero-edge-height")!==extent)
+   edge.style.setProperty("--dar-hero-edge-height",extent);
   document.body.classList.add("dar-hero-edge-active");
  }
  function schedule(){
@@ -159,6 +167,7 @@ document.addEventListener("touchcancel",reset,{capture:true,passive:true});
   root.addEventListener("load",schedule,true);
   window.addEventListener("pageshow",schedule,{passive:true});
   window.addEventListener("resize",schedule,{passive:true});
+  window.addEventListener("scroll",schedule,{passive:true});
   window.addEventListener("popstate",schedule,{passive:true});
   window.addEventListener("hashchange",schedule,{passive:true});
   schedule();
