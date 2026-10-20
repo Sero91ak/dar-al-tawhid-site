@@ -307,6 +307,10 @@ struct WebAppView: UIViewRepresentable {
         }
 
         func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            // DAR_ADULT_SCROLL_NO_BOUNCE_V3: reassert UIKit scroll policy
+            // after every WKWebView navigation, including deep links.
+            webView.scrollView.bounces = false
+            webView.scrollView.alwaysBounceVertical = false
             finishLoading()
             injectNativePushBridge()
             DarNativePermissions.shared.requestLocationIfNeeded()
