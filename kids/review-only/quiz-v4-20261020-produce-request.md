@@ -7,3 +7,7 @@ Diese einmalige Produktionsanforderung autorisiert **nur** eine neu berechnete, 
 Ein kostenfreier Preflight schreibt die exakten neuen Text-SHA-Prüfsummen, Registry-/Ledger-SHAs und den aktuellen Batch-Fingerprint in eine einmalige Freigabedatei. Nur ein passender nachgelagerter GitHub-Job darf die Originale mit ElevenLabs erzeugen. Jede kostenpflichtige Anfrage muss **vorher** ein Remote-Write-Ahead-Journal besitzen und **danach** die echte MP3-Datei, deren SHA und die Provider-Anfrage-ID dauerhaft sichern. Unklare Ergebnisse dürfen nicht automatisch erneut bestellt werden.
 
 **Kein** Live-Push, keine automatische Freigabe der gesprochenen Aussprache, keine Ersetzung alter Originale, keine Umgehung der arabischen Fuṣḥā-Prüfung. Technisch erfolgreiche neue Original-MP3s werden direkt in die private Zuordnung der 450 ausgewählten Quizfragen übernommen; alle offenen Inhalte bleiben bis zur vollständigen Audio-/Quellenprüfung unveröffentlicht.
+
+
+## Quellschutz-Korrektur – 20.10.2026
+Die einzelne ungeklärte ältere Request-SHA wird weiterhin vollständig gesperrt, aber alle davon unabhängigen eindeutig neuen Aufnahmen dürfen im einmaligen SHA-geprüften, kreditbegrenzten Batch bleiben. Der vorherige Workflow scheiterte vor jedem kostenpflichtigen POST. Ein erneuter kostenloser Audit ist autorisiert; keine Wiederholung eines bezahlten Aufrufs.
