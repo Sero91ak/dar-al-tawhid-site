@@ -248,18 +248,18 @@ body.heritage-learning.wqa-page .wqa-mini{
 (function(){
 "use strict";
 const questions=[
- {q:"Welcher Bereich wurde nach Ibn Sīrīns Aussage ebenso wie das Wissen bewusst gelernt?",
-  choices:["Die Reihenfolge der Lehrbücher","Vorbildliche Lebensführung (al-hady)","Die Kunst, Diskussionen zu gewinnen"],
-  correct:1,why:"Ibn Sīrīn nennt al-hady – die gute Lebensführung – als etwas, das gemeinsam mit dem Wissen gelernt wurde."},
- {q:"Ein Schüler kennt viele Belege, behandelt Fragende jedoch herablassend. Welche Haltung passt zur Aussage?",
-  choices:["Er sollte zunächst nur noch mehr Texte auswendig lernen.","Entscheidend ist allein, dass seine Antworten richtig sind.","Er sollte neben seinem Wissen gezielt seinen Umgang verbessern."],
-  correct:2,why:"Die Aussage stellt Wissen und gute Lebensführung nebeneinander. Gelehrsamkeit ersetzt keinen respektvollen Umgang."},
- {q:"Welches Verhalten verbindet das Erlernen von Wissen mit Adab?",
-  choices:["Belege sorgfältig prüfen und anderen respektvoll begegnen","Aus Rücksicht auf andere niemals fachliche Fehler ansprechen","Möglichst schnell antworten, um besonders sicher zu wirken"],
-  correct:0,why:"Sorgfalt bei den Belegen und gutes Verhalten ergänzen sich; weder schweigende Gleichgültigkeit noch Selbstinszenierung sind das Ziel."},
- {q:"Was verdeutlicht der Vergleich, dass gute Lebensführung wie Wissen gelernt wurde?",
-  choices:["Guter Charakter entsteht automatisch mit viel Wissen.","Auch gutes Verhalten verlangt bewusste Übung und Lernen.","Vorbildliche Lebensführung lässt sich allein an der Zahl gelernter Texte messen."],
-  correct:1,why:"Der Vergleich hebt hervor, dass vorbildliches Verhalten bewusst erlernt wird – nicht bloß durch Wissensbesitz entsteht."}
+ {q:"Welche beiden Bereiche werden in Ibn Sīrīns Aussage als Gegenstand des Lernens nebeneinandergestellt?",
+  choices:["Wissen und öffentliche Redekunst","Wissen und vorbildliche Lebensführung","Wissen und Anzahl der Schüler"],
+  correct:1,why:"Ibn Sīrīn betont, dass gute Lebensführung mit derselben Ernsthaftigkeit wie Wissen gelernt wurde."},
+ {q:"Was meint al-hady im Zusammenhang dieser Überlieferung?",
+  choices:["Die genaue Reihenfolge von Unterrichtsthemen","Die Menge der auswendig gelernten Texte","Vorbildliche Lebensführung und gutes Verhalten"],
+  correct:2,why:"Al-hady bezeichnet hier gute Führung und Verhalten; Wissenserwerb und gelebter Adab gehören zusammen."},
+ {q:"Welche Form des Lernens veranschaulicht die erwähnte Beobachtung von al-Qāsim?",
+  choices:["Das Lernen am gelebten Vorbild","Die Bewertung öffentlicher Reden","Die Kontrolle schriftlicher Aufzeichnungen"],
+  correct:0,why:"Das Beobachten von Lebensführung und Verhalten eines Vorbildes zeigt, dass Adab auch durch gelebte Beispiele erlernt wurde."},
+ {q:"Welches Vorgehen setzt Ibn Sīrīns Grundgedanken im Umgang mit anderen am besten um?",
+  choices:["Möglichst viele Belege nennen, ohne auf den Ton zu achten","Wissen sorgfältig erlernen und Menschen respektvoll behandeln","Höflichkeit an die Stelle belegten Wissens setzen"],
+  correct:1,why:"Sorgfältiger Wissenserwerb und gutes Verhalten werden gemeinsam ernst genommen; das eine ersetzt nicht das andere."}
 ];
 const byId=id=>document.getElementById(id);
 const panel=byId("quizPanel"),results=byId("resultPanel"),answers=byId("choices");
