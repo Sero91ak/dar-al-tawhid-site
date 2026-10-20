@@ -533,12 +533,12 @@ async function finalizeDarTestHomeV1193(asset) {
     html = html.includes("</body>") ? html.replace("</body>", smartSrc + "\n</body>") : html + smartSrc;
   }
   // HTML_PREVIEW_PARITY_V1: render HTML V3 layout over native Test home only.
-  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261020-v49-native3d"></script>';
+  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261020-v50-welcome-search"></script>';
   if (!html.includes('id="darTestHomeHtmlParityV1"')) {
     html = html.includes("</body>") ? html.replace("</body>", parityScript + "\n</body>") : html + parityScript;
   }
   const headers = new Headers(asset.headers);
-  headers.set("X-DAR-Test-Home", "html-parity-v49-20261020");
+  headers.set("X-DAR-Test-Home", "html-parity-v50-20261020");
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");
   headers.delete("Content-Length");
