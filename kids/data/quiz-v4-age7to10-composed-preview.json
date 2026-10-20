@@ -2540,6 +2540,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Welche Wirkung haben Allahs Verse nach Qurʾān 8:2 auf Gläubige? Antwort 1: Ihr Īmān nimmt zu. Antwort 2: Ihr Īmān verschwindet. Antwort 3: Sie werden vom Gebet abgehalten. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a08fda7781284c23845bbb128570ad7b65e7ab6d.mp3",
+      "sha256": "05917999d731163494c2405800f8a89452dcf9367f9710a6aee3534dc3e15bb4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Die Verse beschreiben Gläubige, deren Herzen bei Allahs Gedenken bewegt werden und deren Īmān durch Seine Verse zunimmt.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/9e07393ab01147d5e32cecb0ea768d9792d89313.mp3",
+      "sha256": "3446ae652d60391cf7330162bc505eeca42d579e363fd0b90e6677188d1894d5",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Jemand sagt, man könne Duʿāʾ an einen Stern richten. Welcher Grundsatz hilft dir hier am besten? Antwort 1: ʿIbādah und Duʿāʾ richten wir an Allah allein. Antwort 2: Duʿāʾ kann an jedes Geschöpf gerichtet werden. Antwort 3: Bei Duʿāʾ spielt Tawḥīd keine Rolle. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/6c56344bd58b8ab1d4182e452e2310f22bf0e001.mp3",
       "sha256": "80365e99c37ba505706f8a980b6bfe9aadfb50375fd417810ef12a8bf5d647e3",
@@ -10721,12 +10743,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Ihr Īmān verschwindet.",
-            "Sie werden vom Gebet abgehalten.",
-            "Welche Wirkung haben Allahs Verse nach Qurʾān 8:2 auf Gläubige?"
-          ]
+          "available": true,
+          "textSha256": "43225d78fddd9a7ec24614073778527f053e69ba53f5c5cbfccf78d44eabc0a3",
+          "mp3Sha256": "05917999d731163494c2405800f8a89452dcf9367f9710a6aee3534dc3e15bb4",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a08fda7781284c23845bbb128570ad7b65e7ab6d.mp3"
         },
         "correct": {
           "available": true,
@@ -10741,13 +10761,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/0ead0dc9f2fad1a240fc68715a9d5325.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Die Verse beschreiben Gläubige, deren Herzen bei Allahs Gedenken bewegt werden und deren Īmān durch Seine Verse zunimmt."
-          ]
+          "available": true,
+          "textSha256": "6b460dbcdd36f55ffcd5be63fee67b2f161def9af24cf4e3cbc06c3fd67c2588",
+          "mp3Sha256": "3446ae652d60391cf7330162bc505eeca42d579e363fd0b90e6677188d1894d5",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/9e07393ab01147d5e32cecb0ea768d9792d89313.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-594": {
       "ageBand": "9-10",
