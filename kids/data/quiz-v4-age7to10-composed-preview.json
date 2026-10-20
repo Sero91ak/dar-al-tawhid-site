@@ -626,6 +626,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Mal sehen, was du zu diesem Thema weißt. Wem wandte Ibrāhīm sein Gesicht in reiner Anbetung zu? Antwort 1: Dem Schöpfer der Himmel und der Erde. Antwort 2: Den Sternen. Antwort 3: Den Götzen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a3f3f71aa471ee4f6044ad516186b25b641a9919.mp3",
+      "sha256": "5ce7f2ceae691833aa58e79a8b9e133d4319b06a9b40abb2358e12c6031e1875",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Ibrāhīm erklärte seine aufrichtige Hinwendung zu Allah, dem Schöpfer.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/2b0ef72d70ad5eab9c6541778c676abe82592c6f.mp3",
+      "sha256": "9adc99220775f3ab5a2f9b8031abd0981d101b0169ceba4a0975d433690f25b1",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Hör dir die Frage und die Antworten in Ruhe an. Welche Eigenschaft nennt Qurʾān 23:1–2 zuerst bei erfolgreichen Gläubigen? Antwort 1: Demut im Gebet. Antwort 2: Lautes Reden. Antwort 3: Viel Besitz. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/e6c45dcb0f4fe894d76d2b2e9edef108b3429f99.mp3",
       "sha256": "52ffcd3b2186d94447064e3d680038d4e17db90dfa935d85ffa6a8e4c27d2047",
@@ -2026,6 +2048,17 @@
     "Du betest und niemand schaut dir zu. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Gute Taten und ʿIbādah werden aufrichtig für Allah getan. Antwort 2: Eine gute Tat ist nur wertvoll, wenn Menschen sie sehen. Antwort 3: Die Absicht für Allah ist unwichtig. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/bb5dc57422fa55fd99ad4d036026ca8d103dd7b8.mp3",
       "sha256": "ef29158249ca49d0420ee28ba6b4d271f7bb1dcef7bf9d422e2fb713f69769f4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Mehrere Kinder schummeln und sagen: „Alle machen das.“ Welcher Grundsatz hilft dir hier am besten? Antwort 1: Viele Menschen machen eine falsche Sache nicht automatisch richtig. Antwort 2: Wenn viele etwas tun, muss es richtig sein. Antwort 3: Gutes und Schlechtes sind immer gleich. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/d5ce26445bc3a3bf5cb4826dd4ad2f1bf4c45de2.mp3",
+      "sha256": "3c49c184cd30674d1e82c7cf77888779c18812b34b7b6ef8eea1bffaac8bd1f3",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -4462,7 +4495,6 @@
           "missingOriginalSegments": [
             "Um Barmherzigkeit und rechte Führung.",
             "Um ein Königreich.",
-            "Um viel Gold.",
             "Worum baten die jungen Gläubigen in der Höhle?"
           ]
         },
@@ -4656,11 +4688,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Dem Schöpfer der Himmel und der Erde.",
-            "Wem wandte Ibrāhīm sein Gesicht in reiner Anbetung zu?"
-          ]
+          "available": true,
+          "textSha256": "6cc20b39445d3aa20c4d8567ac5b8100eaf36f9ecc3cfadd340a0862d8e15fff",
+          "mp3Sha256": "5ce7f2ceae691833aa58e79a8b9e133d4319b06a9b40abb2358e12c6031e1875",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/a3f3f71aa471ee4f6044ad516186b25b641a9919.mp3"
         },
         "correct": {
           "available": true,
@@ -4675,13 +4706,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/53nlCj9DCu1JkXZFBEZI.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Ibrāhīm erklärte seine aufrichtige Hinwendung zu Allah, dem Schöpfer."
-          ]
+          "available": true,
+          "textSha256": "0da237b88f88bb4c6312244f76b256ba3ac9376a7970834f32bdd015dbaa4677",
+          "mp3Sha256": "9adc99220775f3ab5a2f9b8031abd0981d101b0169ceba4a0975d433690f25b1",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/2b0ef72d70ad5eab9c6541778c676abe82592c6f.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-369": {
       "ageBand": "7-8",
@@ -4788,8 +4819,6 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Nur zum Fisch.",
-            "Nur zum Vogel.",
             "Zu welchem Tier lädt Qurʾān 88:17 besonders zum Nachdenken ein?"
           ]
         },
@@ -11419,13 +11448,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Gutes und Schlechtes sind immer gleich.",
-            "Mehrere Kinder schummeln und sagen: „Alle machen das.“ Welcher Grundsatz hilft dir hier am besten?",
-            "Viele Menschen machen eine falsche Sache nicht automatisch richtig.",
-            "Wenn viele etwas tun, muss es richtig sein."
-          ]
+          "available": true,
+          "textSha256": "2cd9a6eb55e194210d15f68540b82de050f4a6ecbfd5264f8dc83f8bb6bd9376",
+          "mp3Sha256": "3c49c184cd30674d1e82c7cf77888779c18812b34b7b6ef8eea1bffaac8bd1f3",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/d5ce26445bc3a3bf5cb4826dd4ad2f1bf4c45de2.mp3"
         },
         "correct": {
           "available": true,
@@ -11446,7 +11472,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/68eb85f61b24b4064d53c0b076282bffbf27a6b6.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-881": {
       "ageBand": "9-10",
