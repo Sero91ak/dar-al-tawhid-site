@@ -11,10 +11,9 @@ concurrency:
   cancel-in-progress: false
 jobs:
   generate-save-and-assemble-only-uncharged-v4:
-    if: >-
-      github.repository == 'Sero91ak/dar-al-tawhid-site' &&
-      github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
-      github.event.head_commit.message == 'audio(kids V4): authorize one new deduplicated V4 wave [20261020]' && false # disabled: execution is serialized in execute-after-preflight
+    # Retired duplicate paid path. No runner and no charge; the dedicated
+    # checkpointed owner workflow is the only active producer.
+    if: ${{ false }}
     runs-on: ubuntu-latest
     timeout-minutes: 55
     steps:
