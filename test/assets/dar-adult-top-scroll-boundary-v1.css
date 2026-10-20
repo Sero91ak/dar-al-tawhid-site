@@ -54,3 +54,55 @@ html,html body{
 }
 /* No modifications to .app/#appView overflow (Android scroll-chain safeguard).
  * No modifications to the 5-tab bottom dock or fixed iOS safe areas. */
+
+/* DAR_GLOBAL_ADULT_HERO_SAFE_TOP_V4 · 2026-10-20
+ * Existing photo, never an unrelated theme green/cream strip in exposed safe area.
+ * One fixed, pointer-transparent continuation; no duplicate scroll container.
+ * Native system pixels outside WKWebView require native host support.
+ */
+body > #darHeroSafeTopFill{
+  position:fixed;
+  top:0;left:0;right:0;
+  height:calc(min(88px,max(env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))) + 12px);
+  pointer-events:none;
+  z-index:58;
+  overflow:hidden;
+  visibility:hidden;
+  opacity:0;
+  contain:paint;
+}
+body.dar-hero-edge-active > #darHeroSafeTopFill{
+  visibility:visible;
+  opacity:1;
+}
+#darHeroSafeTopFill > .dar-hero-edge-art{
+  position:absolute;
+  inset:-12px;
+  background-image:var(--dar-hero-edge-image,none);
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position:center top;
+  filter:blur(7px) saturate(.92) brightness(.83);
+  transform:translateZ(0);
+}
+#darHeroSafeTopFill::after{
+  content:"";
+  position:absolute;inset:0;
+  pointer-events:none;
+  background:linear-gradient(to bottom,rgba(5,11,12,.20),transparent 90%);
+}
+/* Home is the only route with a social/signature footer. The existing bottom
+ * dock owns its clearance; prevent extra empty scroll between last card/footer. */
+body.has-bottom-nav.is-home-route > .app > #appView.view{
+  min-height:0!important;
+  padding-bottom:8px!important;
+}
+body.has-bottom-nav.is-home-route > .app > footer.footer{
+  margin-top:0!important;
+}
+body.has-bottom-nav.is-home-route #appView [data-hero-kind] .dar-page-content{
+  padding-bottom:clamp(12px,2svh,22px)!important;
+}
+body.has-bottom-nav:not(.is-home-route) #appView [data-hero-kind] .dar-page-content{
+  padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))!important;
+}
