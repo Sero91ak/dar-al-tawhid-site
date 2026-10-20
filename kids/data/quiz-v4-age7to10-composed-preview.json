@@ -505,6 +505,28 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Überlege kurz, bevor du dich entscheidest. Welche Dinge nennt Qurʾān 16:15 als Zeichen auf der Erde? Antwort 1: Berge, Flüsse und Wege. Antwort 2: Nur Häuser. Antwort 3: Nur Wolken. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/104938372924416ebf9f2c32a9d682712826cfa0.mp3",
+      "sha256": "e046b53cf897c089a64aeb37b607a00ab1340bcda363a088fa5d2525b0ba8479",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Das merken wir uns: Allah nennt Berge, Flüsse und Wege, damit Menschen ihren Weg finden.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/5bcbaae96b9d53c2c147ca096b4eac9a8aaafc2a.mp3",
+      "sha256": "1032efc5470dd4c1b831b812de57f7d3fbbdab9d153556e266e4b929a6f75b7e",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Mal sehen, was du zu diesem Thema weißt. Wie sollen Menschen Shayṭān nach Qurʾān 35:6 behandeln? Antwort 1: Als Feind. Antwort 2: Als Vorbild. Antwort 3: Als Beschützer. Wähle die Antwort, die du für richtig hältst.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/3b8fe4afb61538fb736fa34520519cbe5041ae04.mp3",
       "sha256": "63bbc1b690859579d4438536549b233f1fd9cb5921f2dbc0caf93dab7df08e96",
@@ -1795,6 +1817,17 @@
     "Du spielst und die Zeit für das Gebet ist gekommen. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Die Ṣalāh erinnert uns an Allah. Antwort 2: Gebet hat nichts mit Allahs Gedenken zu tun. Antwort 3: Spielen ist immer wichtiger als die Gebetszeit. Überlege und wähle die beste Antwort.": {
       "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/398a55e739926bd6e61dff6c91dc2317e6d69b9c.mp3",
       "sha256": "d35cd01fcf4ebc75919dbeb8d8e0125e6bb9a03ae92ec0cfc8f4f0051a6c15e1",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
+    "Deine Mutter bittet dich, dein Spielzeug wegzuräumen. Welcher Grundsatz hilft dir hier am besten? Antwort 1: Mit den Eltern spricht und handelt man respektvoll. Antwort 2: Respekt gilt nur, wenn man gerade gute Laune hat. Antwort 3: Ein Kind darf Eltern grob wegschicken. Überlege und wähle die beste Antwort.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/7acc75645e2070086043e1aec7b89013f7ada5fe.mp3",
+      "sha256": "f1c48aa5e0e9bb950ab01a8a19f30eee26631601bc1f24230a3ceb7800d0e50f",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "modelId": "eleven_v4",
       "qaApproval": "pending-human-auditory-review",
@@ -3514,12 +3547,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Berge, Flüsse und Wege.",
-            "Nur Wolken.",
-            "Welche Dinge nennt Qurʾān 16:15 als Zeichen auf der Erde?"
-          ]
+          "available": true,
+          "textSha256": "81ba7ae027530d12e159b619cd90f850c218931d31fb17478bb3bc7ee838482b",
+          "mp3Sha256": "e046b53cf897c089a64aeb37b607a00ab1340bcda363a088fa5d2525b0ba8479",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/104938372924416ebf9f2c32a9d682712826cfa0.mp3"
         },
         "correct": {
           "available": true,
@@ -3534,13 +3565,13 @@
           "url": "/kids/assets/kids-quiz-audio/v4-curated450-review/41388654c1245c28b6b3d2e93d8bf77a.mp3"
         },
         "explanation": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Allah nennt Berge, Flüsse und Wege, damit Menschen ihren Weg finden."
-          ]
+          "available": true,
+          "textSha256": "c75d5f63d18ab0343201e0aea5031e1d835f89553601e8fe0cb11708b33cfd6c",
+          "mp3Sha256": "1032efc5470dd4c1b831b812de57f7d3fbbdab9d153556e266e4b929a6f75b7e",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/5bcbaae96b9d53c2c147ca096b4eac9a8aaafc2a.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-222": {
       "ageBand": "7-8",
@@ -3973,7 +4004,6 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Dem Qurʾān.",
             "Den Schritten des Shayṭān.",
             "Guten Ratschlägen.",
             "Welchen Schritten sollen wir nach Qurʾān 2:168 nicht folgen?"
@@ -4072,7 +4102,6 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Für Götzen.",
             "Für sich, seine Eltern und die gläubigen Männer und Frauen.",
             "Für wen bat Nūḥ am Ende seiner Sūrah um Vergebung?"
           ]
@@ -10733,13 +10762,10 @@
       "ageBand": "9-10",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Deine Mutter bittet dich, dein Spielzeug wegzuräumen. Welcher Grundsatz hilft dir hier am besten?",
-            "Ein Kind darf Eltern grob wegschicken.",
-            "Mit den Eltern spricht und handelt man respektvoll.",
-            "Respekt gilt nur, wenn man gerade gute Laune hat."
-          ]
+          "available": true,
+          "textSha256": "0ed12e525fba4c2d6a29c4892a8183e1ccbfaaf3ad9e96326f77664448a2e1c4",
+          "mp3Sha256": "f1c48aa5e0e9bb950ab01a8a19f30eee26631601bc1f24230a3ceb7800d0e50f",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/7acc75645e2070086043e1aec7b89013f7ada5fe.mp3"
         },
         "correct": {
           "available": true,
@@ -10760,7 +10786,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/6ab43657df941875ed11241d2b5a2ab4898c0eb0.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-829": {
       "ageBand": "9-10",
