@@ -346,9 +346,20 @@ async function fetchVersionBuild(base) {
     for(let attempt=1;attempt<=5;attempt++){
       try{
         const shell=await fetchText(base+"/?parity-v1368="+Date.now());
-        const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261020-v1");
-        const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"');
-        const present=js.status===200&&js.text.includes("window.__darHomeHtmlParityV1=true")&&js.text.includes("dhp-quickbar")&&js.text.includes("dhp-library");
+        const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261020-v50-welcome-search");
+        const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"')&&shell.text.includes("v50-welcome-search");
+        const source=js.text||"";
+        const sequence=source.indexOf('class="dhp-welcome"')>=0
+          &&source.indexOf('class="dhp-isnad"')>source.indexOf('class="dhp-welcome"');
+        const present=js.status===200
+          &&source.includes("window.__darHomeHtmlParityV1=true")
+          &&source.includes("dhp-welcome-rule")
+          &&source.includes("dhp-search-pill")
+          &&source.includes("dhp-results-head")
+          &&source.includes("dhp-today-stack")
+          &&source.includes("wasiyyah.png")
+          &&source.includes("quran-player")
+          &&sequence;
         ok=linked&&present;
         console.log("HTML parity "+label+": shell="+shell.status+" linked="+linked+" js="+js.status+" runtime="+present+" attempt="+attempt+"/5");
         if(ok)break;
