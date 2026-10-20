@@ -3,7 +3,7 @@
   "scope": "TAWHID_KIDS_450_PRIVATE_SELF_ATTESTED_HEARING_SUBMISSIONS",
   "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "modelId": "eleven_v4",
-  "knownRealV4TextClips": 292,
+  "knownRealV4TextClips": 294,
   "ageSubmitted": [],
   "claimedApprovalClipCount": 0,
   "submittedIssueClipCount": 0,
@@ -24,7 +24,7 @@
     },
     "7-8": {
       "questions": 150,
-      "fourPartTechnical": 7,
+      "fourPartTechnical": 8,
       "allFourSelfAttestedUnverified": 0,
       "questionsWithReportedIssue": 0
     },
@@ -1079,10 +1079,7 @@
       "ageBand": "7-8",
       "selfAttestedParts": [],
       "reportedIssueParts": [],
-      "missingOriginalParts": [
-        "explanation",
-        "question"
-      ],
+      "missingOriginalParts": [],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
     },
