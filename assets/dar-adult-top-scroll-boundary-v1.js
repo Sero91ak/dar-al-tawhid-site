@@ -23,7 +23,12 @@ function canScroll(direction){
  var target=startTarget, max;
  for(var node=target;node&&node!==document;node=node.parentElement){
   if(node.nodeType!==1)continue;
-  if(node===document.documentElement)break;
+  // Body, app wrapper and #appView are not independent scrollers. Some
+  // WebKit/Android CSS computes overflow-y:auto from overflow-x:hidden.
+  // Treating them as nested scrollables silently re-enables overscroll.
+  if(node===document.scrollingElement||node===document.documentElement)break;
+  if(node===document.body||node.id==="appView"||
+     (node.classList&&node.classList.contains("app")))continue;
   var cs=window.getComputedStyle(node);
   if(/^(auto|scroll|overlay)$/.test(cs.overflowY)&&node.scrollHeight>node.clientHeight+1){
    max=node.scrollHeight-node.clientHeight;
