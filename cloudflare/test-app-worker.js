@@ -207,7 +207,7 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // Keep only the existing v1194 home authority and refresh its assets.
   html = html.replace(/dar-home-library-v1194\.css\?v=[^"'`\s]+/g, "dar-home-library-v1194.css?v=20261019-plain-home");
-  html = html.replace(/dar-home-library-v1194\.js\?v=[^"'`\s]+/g, "dar-home-library-v1194.js?v=20261020-smart-v3");
+  html = html.replace(/dar-home-library-v1194\.js\?v=[^"'`\s]+/g, "dar-home-library-v1194.js?v=20261020-smart-v4");
   html = html.replace(/dar-library-redesign-v1168\.css\?v=[^"'`\s]+/g, "dar-library-redesign-v1168.css?v=1213-quran-native");
   html = html.replace(/dar-library-redesign-v1168\.js\?v=[^"'`\s]+/g, "dar-library-redesign-v1168.js?v=1213-quran-native");
 
@@ -527,13 +527,13 @@ async function finalizeDarTestHomeV1193(asset) {
 
   // SMART_TEST_HOME_V3: active workers.dev /test shell; refresh canonical Home JS.
   html = html.replace(/dar-home-library-v1194\.js\?v=[^"'\x60\s]+/g,
-    "dar-home-library-v1194.js?v=20261020-smart-v3");
-  if (!html.includes("dar-home-library-v1194.js?v=20261020-smart-v3")) {
-    const smartSrc = '<script defer id="darTestSmartHomeV3" src="/test/assets/dar-home-library-v1194.js?v=20261020-smart-v3"></script>';
+    "dar-home-library-v1194.js?v=20261020-smart-v4");
+  if (!html.includes("dar-home-library-v1194.js?v=20261020-smart-v4")) {
+    const smartSrc = '<script defer id="darTestSmartHomeV3" src="/test/assets/dar-home-library-v1194.js?v=20261020-smart-v4"></script>';
     html = html.includes("</body>") ? html.replace("</body>", smartSrc + "\n</body>") : html + smartSrc;
   }
   const headers = new Headers(asset.headers);
-  headers.set("X-DAR-Test-Home", "smart-v3-20261020");
+  headers.set("X-DAR-Test-Home", "smart-v4-20261020");
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");
   headers.delete("Content-Length");
