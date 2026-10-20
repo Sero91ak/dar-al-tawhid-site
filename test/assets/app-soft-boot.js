@@ -357,7 +357,7 @@
       // blocking test soft-boot, without changing the live Android app flags.
       var isDarTestNative =
         (location.pathname === "/test" || location.pathname.indexOf("/test/") === 0) &&
-        /DarTestAndroid\/2(?:\b|$)/i.test(ua);
+        /DarTestAndroid\/[123](?:\b|$)/i.test(ua);
       if (isIosNative || isAndroidNative || isDarTestNative) {
         try {
           if (isAndroidNative) {
