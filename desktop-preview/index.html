@@ -4740,26 +4740,31 @@ renders.beitraege=function(){
   }).join("")+'</div>'
  }
  renders.start=function(){
-  var tawhid=foundationPostMatch(["tawhid","la ilaha","dua ist ibadah","dua an andere"],4);
-  var iman=foundationPostMatch(["iman ist wort und tat","iman nimmt zu","wahrer iman","vollkommener iman"],4);
-  var quranSunnah=foundationPostMatch(["quran ist allahs wort","festhalten an der sunnah","sunnah vor meinem wort","quran lernen"],4);
-  var adab=foundationPostMatch(["adab","akhlaq","charakter","zunge"],4);
-  var fiqh=foundationPostMatch(["fiqh","fatwa","halal haram"],4);
-  var duas=realData.duas.slice(0,2),pubs=realData.publications.slice(0,4);
-
+  // V8 is the only active public-browser homepage renderer.
+  // Keep all existing content loaders; never restore the legacy editorial hero.
+  var recent=(realData.posts||[]).filter(function(x){return x&&x.id&&x.title}).slice(0,6);
+  var destinations=[
+   ["hadith","Ḥadīṯ & Āṯār","hadith.png","Überlieferungen und ihre Fundstellen"],
+   ["quran","Qurʾān","quran.png","Lesen, hören und verstehen"],
+   ["beitraege","Beiträge","posts.png","Aussagen mit Originalquellen"],
+   ["bibliothek","Bibliothek","library.png","Werke und Veröffentlichungen"],
+   ["frauen","Frauen im Islam","frauen.png","Quellenbasierte Fachbereiche"],
+   ["wissen","Wissen","ilm.png","Themen, Begriffe und Grundlagen"]
+  ];
   return darSmartIntro()+
-   '<section class="home-foundations reveal">'+
-    '<article class="foundation-lead"><div class="foundation-lead-inner"><div><div class="foundation-label">GRUNDLAGE DES DĪN</div><h2>Was ist Tawḥīd?</h2><p>Tawḥīd bedeutet, Allah allein die Anbetung zu widmen und Ihm keinen Teil der ʿIbādah beizugesellen. Die Botschaft der Gesandten ruft dazu auf, Allah zu dienen und den Ṭāġūt zu meiden.</p>'+foundationLinks(tawhid,"Tawḥīd")+'</div><div class="foundation-proof"><div class="foundation-proof-ar" dir="rtl">وَلَقَدْ بَعَثْنَا فِي كُلِّ أُمَّةٍ رَسُولًا أَنِ اعْبُدُوا اللَّهَ وَاجْتَنِبُوا الطَّاغُوتَ</div><div class="foundation-proof-de">„Und Wir haben ja bereits in jeder Gemeinschaft einen Gesandten erweckt: Dient Allah und meidet den Ṭāġūt.“</div><a class="foundation-proof-ref desktop-link" data-page="quran" href="'+pUrl("quran","surah=16&ayah=36")+'">Qurʾān 16:36 · im Qurʾān öffnen →</a></div></div></article>'+
-    '<div class="foundation-grid">'+
-      '<article class="foundation-topic"><div class="foundation-label">ĪMĀN</div><h3>Glaube zeigt sich in Wort und Tat</h3><p>In der auf dieser Seite dargestellten Lehre von Ahl as-Sunnah wird Īmān mit Überzeugung, Wort und Tat verbunden; er nimmt durch Gehorsam zu und durch Sünde ab.</p><div class="topic-links">'+iman.slice(0,3).map(function(x){return '<a class="desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'">'+escBook(cleanTitle(x.title))+' →</a>'}).join("")+'</div></article>'+
-      '<article class="foundation-topic"><div class="foundation-label">QURʾĀN & SUNNAH</div><h3>Die Offenbarung als Maßstab</h3><p>Qurʾān und authentische Sunnah bilden die Grundlage, auf die Aussagen und Themen dieser Website zurückgeführt werden.</p><div class="topic-links">'+quranSunnah.slice(0,3).map(function(x){return '<a class="desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'">'+escBook(cleanTitle(x.title))+' →</a>'}).join("")+'</div></article>'+
-      '<article class="foundation-topic"><div class="foundation-label">ADAB & AKHLĀQ</div><h3>Wissen muss im Verhalten sichtbar werden</h3><p>Charakter, Zunge, Umgang mit Menschen und Aufrichtigkeit gehören zum praktischen Leben des Wissens.</p><div class="topic-links">'+adab.slice(0,3).map(function(x){return '<a class="desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'">'+escBook(cleanTitle(x.title))+' →</a>'}).join("")+'</div></article>'+
-      '<article class="foundation-topic"><div class="foundation-label">FIQH</div><h3>Handeln mit Wissen</h3><p>Rechtsfragen werden geordnet nach Themen und mit zugehörigen Quellen dargestellt.</p><div class="topic-links">'+fiqh.slice(0,3).map(function(x){return '<a class="desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'">'+escBook(cleanTitle(x.title))+' →</a>'}).join("")+'</div></article>'+
-    '</div>'+
+   '<section class="dar-v8-verse" aria-label="Qurʾānvers mit Quellennachweis">'+
+    '<div class="dar-v8-section-kicker">QURʾĀN · VERS ZUM NACHDENKEN</div>'+
+    '<div class="dar-v8-verse-layout"><div><h2>Die Grundlage der Botschaft</h2><p>„Dient Allah und meidet den Ṭāġūt.“</p><a class="desktop-link dar-v8-text-action" data-page="quran" href="'+pUrl("quran","surah=16&ayah=36")+'">Sūrah an-Naḥl · 16:36 im Qurʾān öffnen ↗</a></div>'+
+    '<div class="dar-v8-verse-ar" lang="ar" dir="rtl">وَلَقَدْ بَعَثْنَا فِي كُلِّ أُمَّةٍ رَسُولًا أَنِ اعْبُدُوا اللَّهَ وَاجْتَنِبُوا الطَّاغُوتَ</div></div>'+
    '</section>'+
-   ''+
-   '<section class="section reveal"><div class="section-head"><h2>Duʿāʾ</h2><a class="text-link desktop-link" data-page="dua" href="'+pUrl("dua")+'">Alle Duʿāʾ</a></div><div class="two-reading-cols">'+duas.map(function(d){return '<a class="dua-real desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><div class="real-source"><b>Quelle:</b> '+escBook(d.source)+'</div></a>'}).join("")+'</div></section>'+
-   '<section class="section parchment reveal"><div class="section-head"><h2>Bibliothek</h2><a class="text-link desktop-link" data-page="bibliothek" href="'+pUrl("bibliothek")+'">Alle Werke</a></div><div class="real-cover-grid">'+pubs.map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"Publikation")+(b.publishedAt?' · '+escBook(b.publishedAt):"")+'</small></a>'}).join("")+'</div></section>'+footer()
+   '<section class="dar-v8-recent" aria-label="Ausgewählte aktuelle Beiträge">'+
+    '<div class="dar-v8-section-bar"><div><div class="dar-v8-section-kicker">BEITRÄGE · QUELLENBASIERT</div><h2>Aus dem Beitragsbestand</h2><p>Öffne Aussagen direkt mit ihren vorhandenen Quellen.</p></div><a class="desktop-link dar-v8-text-action" data-page="beitraege" href="'+pUrl("beitraege")+'">Alle Beiträge ↗</a></div>'+
+    '<div class="dar-v8-recent-grid">'+(recent.length?recent.map(function(x){return '<a class="desktop-link dar-v8-recent-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'"><span>'+escBook(x.category||"Beitrag")+'</span><strong>'+escBook(cleanTitle(x.title))+'</strong><small>'+escBook(x.speaker||x.work||"Mit Direktnachweisen öffnen")+'</small><em>Beitrag lesen ↗</em></a>'}).join(""):'<p>Der Beitragsindex wird geladen …</p>')+'</div>'+
+   '</section>'+
+   '<section class="dar-v8-discover" aria-label="Alle Wissensbereiche">'+
+    '<div class="dar-v8-section-bar"><div><div class="dar-v8-section-kicker">VERNETZTES WISSENSZENTRUM</div><h2>Alle Bereiche entdecken</h2><p>Ein zusammenhängender Zugang zu Inhalten und Belegen.</p></div></div>'+
+    '<div class="dar-v8-discover-grid">'+destinations.map(function(x){return '<a class="dar-v8-discover-link desktop-link" data-page="'+x[0]+'" href="'+pUrl(x[0])+'"><img src="/assets/dar-3d-icons/'+x[2]+'?v=1095" alt="" loading="lazy"><span><strong>'+x[1]+'</strong><small>'+x[3]+'</small></span><b aria-hidden="true">↗</b></a>'}).join("")+'</div>'+
+   '</section>'+footer();
  };
  // --- end Homepage foundations v13 ---
 
