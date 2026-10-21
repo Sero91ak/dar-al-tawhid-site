@@ -3459,7 +3459,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
    var current=null;
    prayerOnly.forEach(function(x){var d=math.dateFromHour(now,x.time);if(d<=now)current=x});
    if(!current)current={name:"ʿIshāʾ"};
-   if(v8Strip)v8Strip.querySelectorAll("[data-v8-prayer]").forEach(function(el){el.classList.toggle("active",!!current.key&&el.getAttribute("data-v8-prayer")===current.key)});
+   if(strip)strip.querySelectorAll("[data-v8-prayer]").forEach(function(el){el.classList.toggle("active",!!current.key&&el.getAttribute("data-v8-prayer")===current.key)});
    if(cur)cur.textContent=current.name;if(city)city.textContent=loc.city;if(nextEl)nextEl.textContent=next.name;if(timeEl)timeEl.textContent=next.display+(next.tomorrow?" · morgen":"");
    var displayName=document.getElementById("darV8NextName"),displayTime=document.getElementById("darV8NextTime"),displayCount=document.getElementById("darV8Countdown");if(displayName)displayName.textContent=next.name;if(displayTime)displayTime.textContent=loc.city+" · "+next.display+(next.tomorrow?" · morgen":"");if(displayCount){var seconds=Math.max(0,Math.floor((next.date-now)/1000));displayCount.textContent=String(Math.floor(seconds/3600)).padStart(2,"0")+":"+String(Math.floor((seconds%3600)/60)).padStart(2,"0")+":"+String(seconds%60).padStart(2,"0")}
    if(count){var ms=Math.max(0,next.date-now),sec=Math.floor(ms/1000),h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;count.innerHTML=String(h).padStart(2,"0")+":"+String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")+'<span>bis zum nächsten Gebet</span>'}
