@@ -117,6 +117,8 @@ test("one content ID and URL independent of 9 translations", () => {
   const es = resolveRecipientPush({event:postEvent,copies,subscription:{push_opted_in:true,enabled:true,app_environment:"test",subscription_id:"two",app_locale:"es"}});
   assert.equal(fr.payload.data.content_id,postEvent.contentId);
   assert.equal(fr.payload.data.q_number,271);
+  assert.equal(fr.payload.data.source_url,"https://dar-al-tawhid.de/q/271/");
+  assert.equal(fr.payload.data.source_url,es.payload.data.source_url);
   assert.equal(fr.payload.url,es.payload.url);
   assert.equal(fr.payload.url,"https://dar-al-tawhid.de/#post/post%3Areadable-article");
 });
