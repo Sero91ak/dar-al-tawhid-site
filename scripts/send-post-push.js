@@ -73,7 +73,7 @@ function loadPendingRegistry() {
 function shouldSkipGhPostPush(postId, registry) {
   if (!postId) return false;
   const entry = registry?.pushes?.[postId];
-  if (!entry) return false;
+  if (!entry) { console.log(`Push für ${postId} hat keine explizite Admin-Freigabe — sicherheitshalber übersprungen.`); return true; }
   if (entry.status === "sent") {
     console.log(`Push für ${postId} bereits gesendet — GitHub Action übersprungen.`);
     return true;
