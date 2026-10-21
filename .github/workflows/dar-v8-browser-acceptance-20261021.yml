@@ -4,6 +4,7 @@ on:
     branches:
       - review/browser-v8-preview-isolation-20261021
       - fix/v8-immersive-mobile-tablet-20261021
+      - fix/browser-v8-visual-audit-1905-20261021
     paths:
       - 'desktop-preview/**'
       - '.github/workflows/dar-v8-browser-acceptance-20261021.yml'
@@ -18,7 +19,7 @@ permissions:
 jobs:
   browser:
     # Only test the isolated V8 browser review lane.
-    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021'
+    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021' || github.head_ref == 'fix/browser-v8-visual-audit-1905-20261021'
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
@@ -100,6 +101,18 @@ jobs:
                 if page=='gebetszeiten' and not state['prayer']:raise RuntimeError('Prayer page still legacy')
                 if page=='hadith' and not state['hadith']:raise RuntimeError('Hadith page missing')
                 if page=='suche' and not state['chat']:raise RuntimeError('Chat page missing')
+                if page=='quran':
+                  launch=driver.find_elements(By.ID,'darV8QuranAudioLaunch')
+                  if not launch:raise RuntimeError('Missing single Quran audio launch')
+                  legacy=driver.execute_script("return getComputedStyle(document.querySelector('.v8-real-player')).display")
+                  if legacy!='none':raise RuntimeError('Duplicate old Quran player visible on reading route: '+legacy)
+                if page=='start':
+                  WebDriverWait(driver,20).until(lambda d:bool(d.find_elements(By.CSS_SELECTOR,'#darV8Books .dar-v8-publication')))
+                  pubs=driver.execute_script("return [...document.querySelectorAll('#darV8Books .dar-v8-publication')].map(a=>({links:a.querySelectorAll('a.desktop-link').length,img:!!a.querySelector('img.dar-v8-book-cover'),height:Math.round(a.getBoundingClientRect().height)}))")
+                  if not pubs or not all(x['links']==1 for x in pubs):raise RuntimeError('Real PDF cover cards are not single full clickable cards '+str(pubs))
+                  if any(x['height']>260 for x in pubs):raise RuntimeError('Oversize PDF cards '+str(pubs))
+                  if len(pubs)>3:raise RuntimeError('Home book count grew unexpectedly '+str(pubs))
+
                 if page=='suche' and not driver.find_elements(By.ID,'darV8Messages'):raise RuntimeError('Messenger history not mounted')
                 if page=='suche':
                   geometry=driver.execute_script("""const el=document.querySelector('#pageRoot>.dar-v8-messenger'),r=el.getBoundingClientRect(),
@@ -112,6 +125,12 @@ jobs:
                   if geometry['sealRight'] is None or geometry['sealRight']>width:raise RuntimeError('Brand seal clipped '+str(geometry))
                 if page in ['start','suche','gebetszeiten','quran','frauen','hadith','mehr']:
                   driver.save_screenshot(output+'/'+device+'-'+page+'.png')
+              driver.get('http://127.0.0.1:8765/desktop-preview/index.html?page=quran')
+              WebDriverWait(driver,25).until(lambda d:bool(d.find_elements(By.ID,'darV8QuranAudioLaunch')))
+              driver.find_element(By.ID,'darV8QuranAudioLaunch').click()
+              WebDriverWait(driver,15).until(lambda d:d.execute_script("return document.body.classList.contains('dar-v8-player-fullscreen')"))
+              driver.find_element(By.ID,'darV8PlayerFullscreen').click()
+              if driver.execute_script("return document.body.classList.contains('dar-v8-player-fullscreen')"):raise RuntimeError('Quran source player cannot close')
               driver.get('http://127.0.0.1:8765/desktop-preview/index.html?page=start')
               WebDriverWait(driver,25).until(lambda d:bool(d.find_elements(By.ID,'darV8PlayerExpand')))
               driver.execute_script("arguments[0].scrollIntoView({block:'center',inline:'nearest',behavior:'instant'})",driver.find_element(By.ID,'darV8PlayerExpand'))
