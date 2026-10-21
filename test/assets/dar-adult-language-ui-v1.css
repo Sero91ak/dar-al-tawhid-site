@@ -1,0 +1,41 @@
+/* DĀR TEST · adult language preference in Start, Mehr, Einstellungen. Theme-aware. */
+#appView .dat-locale-choice{
+ --dat-ink:var(--text,#17261f);
+ --dat-muted:var(--muted,#687770);
+ --dat-accent:var(--gold2,var(--theme-accent,#b8a270));
+ --dat-line:color-mix(in srgb,var(--dat-accent) 45%,transparent);
+ display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;
+ width:100%;max-width:100%;min-width:0;min-height:0;
+ padding:13px 0 11px;margin:12px 0 8px;
+ border-top:1px solid var(--dat-line);border-bottom:1px solid var(--dat-line);
+ background:transparent!important;box-shadow:none!important;color:var(--dat-ink);
+ font-family:system-ui,-apple-system,sans-serif;
+}
+#appView .dat-locale-title{font-size:13px;line-height:1.4;font-weight:700;letter-spacing:.01em;color:var(--dat-ink)}
+#appView .dat-locale-buttons{display:flex;gap:8px;flex-wrap:wrap;align-items:center;min-width:0}
+#appView .dat-locale-buttons button{
+ -webkit-appearance:none;appearance:none;min-height:42px;padding:8px 17px;
+ border:1px solid var(--dat-line);border-radius:999px;cursor:pointer;
+ background:transparent;color:var(--dat-ink);font:700 13px/1.3 system-ui,-apple-system,sans-serif;
+ touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+}
+#appView .dat-locale-buttons button[aria-pressed="true"]{
+ border-color:var(--dat-accent);
+ background:color-mix(in srgb,var(--dat-accent) 14%,transparent);
+ box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--dat-accent) 22%,transparent);
+}
+#appView .dat-locale-buttons button:focus-visible{
+ outline:2px solid var(--dat-accent)!important;outline-offset:3px!important;
+}
+#appView .dat-locale-note{
+ color:var(--dat-muted);font:500 11px/1.55 system-ui,-apple-system,sans-serif;
+ margin:0;flex-basis:100%;overflow-wrap:anywhere;
+}
+#appView .dat-locale-home{margin:4px 0 13px}
+#appView .dat-locale-more{margin:8px 0 13px}
+#appView .dat-locale-settings{margin:0 0 22px}
+@media(max-width:540px){
+ #appView .dat-locale-choice{padding:10px 0;gap:7px 10px}
+ #appView .dat-locale-title{width:100%;font-size:12px}
+ #appView .dat-locale-buttons button{min-height:44px;font-size:12px;padding:8px 16px}
+}

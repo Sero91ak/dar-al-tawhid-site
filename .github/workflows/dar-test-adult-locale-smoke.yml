@@ -1,0 +1,93 @@
+name: DAR TEST Adult Turkish Language Controls
+on:
+  push:
+    branches:
+      - feature/test-adult-tr-language-settings-20261021
+    paths:
+      - 'test/assets/dar-more-v15.js'
+      - 'test/assets/dar-adult-language-ui-v1.js'
+      - 'test/assets/dar-adult-language-ui-v1.css'
+      - '.github/workflows/dar-test-adult-locale-smoke.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  locale-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Syntax and test-scope checks
+        shell: bash
+        run: |
+          node --check test/assets/dar-more-v15.js
+          node --check test/assets/dar-adult-language-ui-v1.js
+          node - <<'NODE'
+          const fs=require('fs'),js=fs.readFileSync('test/assets/dar-adult-language-ui-v1.js','utf8');
+          const loader=fs.readFileSync('test/assets/dar-more-v15.js','utf8');
+          if(!loader.includes('/test/assets/dar-adult-language-ui-v1.js'))throw Error('Missing test loader');
+          if(!js.includes('darAdultPreferredLocaleV1'))throw Error('Existing preference key not reused');
+          if(/\b(fetch|XMLHttpRequest|openai|onesignal)\s*\(/i.test(js))throw Error('Unexpected network or push side effects');
+          console.log('PASS: no paid translation or push changes');
+          NODE
+      - name: Prepare isolated browser fixture
+        shell: bash
+        run: |
+          cat >test/tests/dar-adult-language-fixture.html <<'HTML'
+          <!doctype html><html lang="de"><head><meta charset="utf-8"><title>Adult locale test</title></head>
+          <body><nav id="bottomNav"><button data-bottom-nav="home"><span class="nav-icon">⌂</span><span>Start</span></button><button data-bottom-nav="recent"><span class="nav-icon">▤</span><span>Beiträge</span></button></nav><main id="appView"><div class="home-v380-shell"><div id="dv3Home"><div class="dv3-hometitle"><h2>Startseite</h2></div><div class="dv3-language"><span>Sprache / Dil</span><button type="button" data-dv3-locale="de">Deutsch</button><button type="button" data-dv3-locale="tr">Türkçe</button></div><h3 id="dv3LatestTitle">Neueste Beiträge</h3><h3 id="dv3QuickTitle">Schnellzugriff</h3><input id="homeSearchInput" placeholder="Suche Wissen, Beiträge, Bücher, Gelehrte …"></div><p>Deutsches Original bleibt unangetastet.</p></div></main>
+          <script defer src="/test/assets/dar-more-v15.js"></script></body></html>
+          HTML
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-locale-http.log 2>&1 &
+          sleep 2
+      - name: Chrome checks Start - Mehr - Einstellungen
+        shell: bash
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 - <<'PY'
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.support.ui import WebDriverWait
+          opts=Options()
+          for flag in ['--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu']:
+              opts.add_argument(flag)
+          driver=webdriver.Chrome(options=opts)
+          try:
+              for w,h in [(393,852),(768,1024),(1440,900)]:
+                  driver.set_window_size(w,h)
+                  driver.get('http://127.0.0.1:8765/test/tests/dar-adult-language-fixture.html')
+                  WebDriverWait(driver,15).until(lambda d:d.execute_script("return !!window.DARAdultLanguageControlsV1"))
+                  if driver.find_elements(By.CSS_SELECTOR,'.dat-locale-home'):
+                      raise RuntimeError('Duplicate Home language picker created')
+
+                  driver.execute_script("window.DARAdultLanguageControlsV1.select('tr')")
+                  if driver.find_element(By.CSS_SELECTOR,'#dv3Home [data-dv3-locale="tr"]').get_attribute('aria-pressed')!='true':
+                      raise RuntimeError("Existing V3 language picker is not synchronized")
+                  if driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")!='tr':
+                      raise RuntimeError('Turkish choice not saved')
+                  if driver.find_element(By.ID,"dv3LatestTitle").text!="Son Paylaşımlar":
+                      raise RuntimeError("Turkish home UI not translated")
+                  if driver.find_element(By.CSS_SELECTOR,'#bottomNav [data-bottom-nav="home"] > span:last-child').text!='Ana Sayfa':
+                      raise RuntimeError('Turkish navigation not localized')
+                  if driver.find_element(By.CSS_SELECTOR,'#bottomNav [data-bottom-nav="recent"] > span:last-child').text!='Paylaşımlar':
+                      raise RuntimeError('Turkish post tab not localized')
+                  driver.execute_script("document.getElementById('appView').innerHTML='<div class=\"dar-more-v15\"><div class=\"dm-actions\"></div></div>'")
+                  WebDriverWait(driver,10).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'.dat-locale-more'))==1)
+                  pressed=driver.find_element(By.CSS_SELECTOR,'.dat-locale-more [data-dar-adult-language-choice="tr"]').get_attribute('aria-pressed')
+                  if pressed!='true':raise RuntimeError('More lost stored locale')
+                  driver.execute_script("document.getElementById('appView').innerHTML='<div class=\"dsh-home\"><div class=\"dsh-welcome\">Einstellungen</div></div>'")
+                  WebDriverWait(driver,10).until(lambda d:len(d.find_elements(By.CSS_SELECTOR,'.dat-locale-settings'))==1)
+                  driver.find_element(By.CSS_SELECTOR,'.dat-locale-settings [data-dar-adult-language-choice="de"]').click()
+                  if driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")!='de':
+                      raise RuntimeError('German selection not saved')
+                  if driver.find_element(By.CSS_SELECTOR,'#bottomNav [data-bottom-nav="home"] > span:last-child').text!='Start':
+                      raise RuntimeError('German navigation not restored')
+                  if driver.execute_script("return document.querySelectorAll('.dat-locale-settings').length")!=1:
+                      raise RuntimeError('Duplicate controls')
+                  if driver.execute_script("return document.getElementById('appView').scrollWidth > innerWidth+4"):
+                      raise RuntimeError('Horizontal overflow')
+                  print('PASS: responsive route persistence',w,h)
+          finally:
+              driver.quit()
+          PY
