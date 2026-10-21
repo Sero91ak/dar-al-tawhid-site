@@ -32,8 +32,9 @@ for(const kind of ["daily_dua","daily_recommendation","daily_ayah","new_post"]){
   type:kind,eventKey:"TEST|2026-10-22|"+kind,environment:"test",
   contentId:"TEST-CANONICAL:"+kind,sourceHash:"test-only-revision",
   qNumber:kind==="new_post"?271:undefined,
-  routeVerified:kind==="daily_ayah"?true:undefined,
-  deepLink:kind==="daily_ayah"?"https://dar-al-tawhid.de/#quran/1/1":undefined
+  postSlug:kind==="new_post"?"test-post-slug":undefined,
+  routeVerified:(kind==="new_post"||kind==="daily_ayah")?true:undefined,
+    deepLink:kind==="daily_ayah"?"https://dar-al-tawhid.de/#quran/1/1":undefined
  }});
 }
 assert.equal(cases.length,25);
