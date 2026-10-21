@@ -1,6 +1,10 @@
 name: KIDS Quiz V4 Recovery-First Completion Plan (zero credits)
 
 on:
+  push:
+    branches: [review/kids-quiz-v4-batch-001-020-20261014]
+    paths:
+      - 'kids/review-only/quiz-v4-450-recovery-priority-trigger.json'
   pull_request:
     branches: [main]
     paths:
@@ -23,7 +27,13 @@ concurrency:
 
 jobs:
   sort-unpaid-versus-prepaid-audio:
-    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    if: >-
+      (github.event_name == 'push' &&
+       github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
+       github.event.head_commit.message == 'review(kids v4): run zero-credit verified recovery priority 20261021') ||
+      (github.event_name == 'pull_request' &&
+       github.event.pull_request.number == 1143 &&
+       github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
