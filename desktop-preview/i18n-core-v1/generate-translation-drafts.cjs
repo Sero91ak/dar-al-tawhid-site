@@ -39,7 +39,7 @@ function validate(item,locale,values){
   const flatten=x=>Array.isArray(x)?x.join(" "):String(x||"");
   const original=Object.values(item.fields).map(flatten).join(" ");
   const candidate=Object.values(values).map(flatten).join(" ");
-  const arabic=x=>(x.match(/[\\u0621-\\u064a\\u066e-\\u06d3]/g)||[]).length;
+  const arabic=x=>(x.match(/[ء-يٮ-ۓ]/g)||[]).length;
   const latin=x=>(x.match(/[A-Za-zÀ-ž]/g)||[]).length;
   const a=arabic(candidate),l=latin(candidate),sourceArabic=arabic(original);
   if(l<20|| (sourceArabic<20 && a>l*0.35))return "wrong script: Turkish output must be predominantly Latin alphabet";
