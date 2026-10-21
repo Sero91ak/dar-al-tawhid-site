@@ -25,6 +25,22 @@ const LANGUAGE_KEY="darAdultPreferredLocaleV1";
 function currentLanguage(){try{return localStorage.getItem(LANGUAGE_KEY)==="tr"?"tr":"de"}catch(_){return"de"}}
 function syncLanguageButtons(){
  document.querySelectorAll("#dv3Home [data-dv3-locale]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.dv3Locale===currentLanguage())));
+ const root=document.getElementById("dv3Home");if(!root)return;
+ const tr=currentLanguage()==="tr";
+ // Small, explicitly reviewed static UI subset; original German posts are NOT machine-translated in the browser.
+ const entries=[
+  [".dv3-hometitle h2","Startseite","Ana Sayfa"],
+  [".dv3-hometitle small","WILLKOMMEN IM DĀR","DĀR'A HOŞ GELDİNİZ"],
+  [".dv3-accountlink span","Konto / Registrieren","Hesap / Kayıt"],
+  [".dv3-language > span","Sprache / Dil","Dil / Sprache"],
+  ["#dv3LatestTitle","Neueste Beiträge","En Yeni Yazılar"],
+  ["#dv3QuickTitle","Schnellzugriff","Hızlı Erişim"]
+ ];
+ for(const [selector,de,tu] of entries){const node=root.querySelector(selector);if(node)node.textContent=tr?tu:de}
+ const input=root.querySelector("#homeSearchInput");
+ if(input)input.placeholder=tr?"İlim, yazılar, kitaplar ve âlimler arasında ara …":"Suche Wissen, Beiträge, Bücher, Gelehrte …";
+ const status=root.querySelector("#dv3TranslationNotice");
+ if(status){status.hidden=!tr;status.textContent="İçeriklerin Türkçe çevirileri henüz onaylanmadı; Almanca asıllar gösterilir."}
 }
 function setLanguage(code){
  if(code!=="de"&&code!=="tr")return;
@@ -48,6 +64,8 @@ return '<div id="dv3Home" class="dv3-home" data-v3-version="3.1">'+
   '<div class="dv3-language" role="group" aria-label="Sprache wählen / Dil seçimi"><span>Sprache / Dil</span>'+
  [['de','Deutsch'],['tr','Türkçe']].map(([code,label])=>'<button type="button" data-dv3-locale="'+code+'" aria-pressed="'+(currentLanguage()===code)+'">'+label+'</button>').join('')+
  '</div>'+
+  '<p id="dv3TranslationNotice" hidden style="color:inherit;opacity:.79;font-size:12px;margin:8px 0 0" role="status"></p>'+
+  '<p style="margin:6px 0 16px;font-size:12px"><a href="/test/tr-review/" style="color:inherit;text-decoration:underline;text-underline-offset:4px">Türkischen OpenAI-Entwurf prüfen / Türkçe taslağı incele →</a></p>'+
   '<div id="dv3Weather" class="dv3-weather" role="status" aria-live="polite">Wetterdaten werden geladen …</div>'+
   '<div class="dv3-search-box"><label class="dv3-search-label" for="homeSearchInput"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7"/><path d="m16 16 5 5"/></svg></label><input id="homeSearchInput" type="search" autocomplete="off" enterkeyhint="search" placeholder="Suche Wissen, Beiträge, Bücher, Gelehrte …" aria-label="Beiträge, Gelehrte und Bücher suchen"><button type="button" id="dv3SearchClear" aria-label="Suche löschen" hidden>×</button></div>'+
   '<button type="button" class="dv3-tawhid" data-dv3-nav="tawhid-guide"><span class="dv3-ornament" aria-hidden="true"></span><span class="dv3-kicker">GRUNDLAGEN DES GLAUBENS</span><strong>Tawḥīd &amp; ʿAqīdah</strong><span class="dv3-description">Allah allein anbeten. Die Glaubensgrundlagen nach Qurʾān, Sunnah und dem Verständnis der Salaf.</span><span class="dv3-tawhid-footer">Bedeutung, Belege &amp; Quellen entdecken <b>→</b></span></button>'+
