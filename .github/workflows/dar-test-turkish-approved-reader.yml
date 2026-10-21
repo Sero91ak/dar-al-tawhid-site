@@ -8,6 +8,7 @@ on:
     paths:
       - 'test/assets/dar-test-turkish-content*'
       - 'test/assets/dar-test-turkish-ui*'
+      - 'test/assets/dar-adult-central-content*'
       - 'test/assets/dar-test-turkish-browser-smoke.py'
       - 'test/assets/dar-home-v3-compact.js'
       - 'test/assets/dar-setup-hub.js'
@@ -40,6 +41,8 @@ jobs:
           node --check test/assets/dar-setup-hub.js
           node --check test/assets/dar-test-turkish-ui.js
           node test/assets/dar-test-turkish-ui.test.cjs
+          node --check test/assets/dar-adult-central-content.js
+          node test/assets/dar-adult-central-content.test.cjs
           node test/assets/dar-test-turkish-content.test.cjs
           node scripts/verify-adult-post-language-manifests.cjs
       - name: Verify TEST-only route references and no client-side OpenAI calls
