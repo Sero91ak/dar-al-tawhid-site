@@ -275,12 +275,12 @@ async function fetchVersionBuild(base) {
         "box-shadow:0 0 0 1px",
         ":is(:active,:focus-visible,:focus-within)",
         "@media(hover:hover) and (pointer:fine)",
-        'html[data-theme="royal"]',
-        'html[data-theme="bordeaux"]',
-        'html[data-theme="dar-al-layl"]',
-        'html[data-theme="soft"]',
-        'html[data-theme="eisgold"]',
-        'html[data-theme="light"][data-theme-variant="salbei"]',
+        '--dhp-capsule-accent:#c5a66c',
+        '--dhp-capsule-accent:#bd9084',
+        '--dhp-capsule-accent:#bea878',
+        '--dhp-capsule-accent:#a27791',
+        '--dhp-capsule-accent:#a18a4f',
+        '--dhp-capsule-accent:#8e9d77',
         "@media(prefers-reduced-motion:reduce)"
       ];
       const valid = runtime.status === 200 && checks.every(s => runtime.text.includes(s));
