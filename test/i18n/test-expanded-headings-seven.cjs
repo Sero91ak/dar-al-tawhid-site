@@ -16,7 +16,18 @@ for(const locale of EXPECTED.slice(1)){
 }
 assert.equal(titles.bodyTranslation,false);
 assert.equal(titles.paidApiCalls,0);
-assert(Object.keys(titles.records).length>=103);
+assert(Object.keys(titles.records).length>=131);
+assert.equal(Object.values(titles.records).filter(x=>x.kind==="post").length>=34,true);
+for(const code of EXPECTED.slice(1)){
+ const map=pack.translations[code];
+ for(const german of ["API-Nachweis","Weiterlesen ›","Keine Treffer.","Geprüfte Beziehungen","Direktnachweis",
+  "Wird geöffnet…","Im Qurʾān genannt","Tägliche Impulse","Wissen vertiefen",
+  "Bittgebet des Tages","Neueste Veröffentlichungen","Gebetskalender wird geladen…",
+  "Gebetskalender öffnen","Monat auswählen","Gebetsort","Nächste Gebetszeit in",
+  "Einordnung","Keine freigegebenen Quellenberichte in dieser Gruppe."]){
+    assert(typeof map[german]==="string"&&map[german].trim(),code+" missing UI string: "+german);
+ }
+}
 const els=[],body={nodeType:1,closest:()=>null,getAttribute:()=>null};
 const makeText=(value,excluded=false)=>({nodeType:3,nodeValue:value,parentElement:{closest:()=>excluded?({tagName:"CANONICAL"}):null}});
 const primary=makeText("ÜBERLIEFERUNGSMAẞSTAB"),prayer=makeText("Faǧr"),weekday=makeText("Mittwoch, 21. Oktober 2026"),
