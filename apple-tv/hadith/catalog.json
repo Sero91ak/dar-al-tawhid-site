@@ -34,7 +34,6 @@
     "activation": "per-record-immediate"
   },
   "policy": {
-    "authenticOnly": false,
     "requireVerifiedSharh": false,
     "newHadithMustHaveVerifiedSharh": true,
     "hadithRequireAuthenticity": true,

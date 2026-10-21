@@ -134,7 +134,10 @@ function rebuildHadith() {
       activation: "per-record-immediate"
     },
     policy: {
-      authenticOnly: false,
+      // Older tvOS builds treat policy.authenticOnly=false as a reason to reject
+      // the entire mixed catalog. Keep the top-level mixed-catalog flag false;
+      // hadithRequireAuthenticity below describes the actual Hadith rule, while
+      // athar retain their individually disclosed isnad statuses.
       requireVerifiedSharh: false,
       newHadithMustHaveVerifiedSharh: true,
       hadithRequireAuthenticity: true,
