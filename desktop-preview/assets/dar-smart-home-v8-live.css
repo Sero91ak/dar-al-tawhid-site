@@ -57,3 +57,7 @@ body.dar-v8-home .dar-v8-top-welcome p:not(.dar-v8-salam){max-width:870px;margin
  body.dar-v8-home .dar-v8-top-welcome h1{font-size:25px;line-height:1.16}
  body.dar-v8-home .dar-v8-top-welcome .dar-v8-salam{font-size:16px;line-height:1.35}
 }
+
+/* V8 sections must never disappear behind legacy reveal observers. */
+body.dar-v8-home #darV8TopWelcome,
+body.dar-v8-home :is(.dar-v8-quick,.dar-v8-finder,.dar-v8-daily,.dar-v8-library){opacity:1!important;visibility:visible!important;transform:none!important;animation:none!important}
