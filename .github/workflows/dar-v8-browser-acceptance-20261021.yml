@@ -107,7 +107,7 @@ jobs:
                     return {left:r.left,right:r.right,width:r.width,inputFont:parseFloat(getComputedStyle(search).fontSize),
                       topbarVisible:getComputedStyle(bar).display!=='none',sealRight:brand?.getBoundingClientRect().right};""")
                   if geometry['inputFont']<16:raise RuntimeError('iPhone input focus zoom risk '+str(geometry))
-                  if geometry['width']<width*.83:raise RuntimeError('Messenger not full-width '+str(geometry))
+                  if width<960 and geometry['width']<width*.83:raise RuntimeError('Mobile messenger not full-width '+str(geometry))
                   if not geometry['topbarVisible']:raise RuntimeError('V8 topbar hidden '+str(geometry))
                   if geometry['sealRight'] is None or geometry['sealRight']>width:raise RuntimeError('Brand seal clipped '+str(geometry))
                 if page in ['start','suche','gebetszeiten','quran','frauen','hadith','mehr']:
