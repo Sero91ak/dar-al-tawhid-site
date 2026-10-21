@@ -104,6 +104,9 @@ on:
       - .assetsignore
       - package.json
       - scripts/cf-pages-build.js
+      - scripts/rebuild-canonical-islamic-content.js
+      - scripts/validate-canonical-content.js
+      - scripts/verify-apple-tv-live.js
       - scripts/sync-quellen-registry.cjs
       - scripts/sync-app-build-ids.js
       - scripts/verify-live-deploy.js
