@@ -202,6 +202,8 @@ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-wrap{
 }
 body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player #quranAudioPlayer.qa26-player{
  display:block!important;width:100%!important;max-width:none!important;min-width:0!important;
+ height:auto!important;min-height:0!important;max-height:none!important;
+ grid-template-rows:none!important;
  margin:0!important;padding:8px 0!important;overflow:visible!important;
  background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important
 }
