@@ -574,33 +574,78 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-573",
+      "questionId": "kids-quiz-271",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Für die Meinung anderer Menschen",
-        "Für Ruhm",
-        "Für Allah allein"
+        "Dem Qurʾān",
+        "Guten Ratschlägen",
+        "Den Schritten des Shayṭān"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
         "a3",
         "a1"
       ],
+      "originalQuestionAudioSHA256": "aca5ce641e64715aae9bf5b2026edae3821781d07f99cc448528fa6c458dde53",
+      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Welchen Schritten sollen wir nach Qurʾān 2:168 nicht folgen? Antwort 1: Dem Qurʾān. Antwort 2: Guten Ratschlägen. Antwort 3: Den Schritten des Shayṭān. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "1abe984dbf75c68719af6bd9933677d93edda45163652e674a5eb3cd7dfdd447",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Nimm dir Zeit für deine Antwort.",
+        "Welchen Schritten sollen wir nach Qurʾān 2:168 nicht folgen?",
+        "Antwort 1:",
+        "Dem Qurʾān.",
+        "Antwort 2:",
+        "Guten Ratschlägen.",
+        "Antwort 3:",
+        "Den Schritten des Shayṭān.",
+        "Wähle die Antwort, die du für richtig hältst."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 2:168",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-573",
+      "ageBand": "7-8",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 1,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Für Allah allein",
+        "Für die Meinung anderer Menschen",
+        "Für Ruhm"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
+        "a2",
+        "a3"
+      ],
       "originalQuestionAudioSHA256": "2729c440684980ab892e44a5cb13f6aab0ac370492c0f12bb52edf5b11192cbc",
-      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Für wen sind Gebet, Opfer, Leben und Tod des Muslims? Antwort 1: Für die Meinung anderer Menschen. Antwort 2: Für Ruhm. Antwort 3: Für Allah allein. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "5a008c1b8f576b28939a4d6ad7379f561c9ebead4a83e5bc79a66c96450d1b3f",
+      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Für wen sind Gebet, Opfer, Leben und Tod des Muslims? Antwort 1: Für Allah allein. Antwort 2: Für die Meinung anderer Menschen. Antwort 3: Für Ruhm. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "2729c440684980ab892e44a5cb13f6aab0ac370492c0f12bb52edf5b11192cbc",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Überlege kurz, bevor du dich entscheidest.",
         "Für wen sind Gebet, Opfer, Leben und Tod des Muslims?",
         "Antwort 1:",
-        "Für die Meinung anderer Menschen.",
-        "Antwort 2:",
-        "Für Ruhm.",
-        "Antwort 3:",
         "Für Allah allein.",
+        "Antwort 2:",
+        "Für die Meinung anderer Menschen.",
+        "Antwort 3:",
+        "Für Ruhm.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -700,51 +745,6 @@
         240
       ],
       "originalSource": "Ṣaḥīḥ al-Bukhārī 8; Ṣaḥīḥ Muslim 16",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-024",
-      "ageBand": "7-8",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Allah und Seinem Gesandten ﷺ",
-        "Nur der eigenen Meinung",
-        "Jeder Idee im Internet"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
-        "a2",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "78ccae84d77d8a2a71fb038428adcedc16381262d4ad7ff2fd485a3c0e5df6fa",
-      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Wem gehorchen wir im Dīn? Antwort 1: Allah und Seinem Gesandten ﷺ. Antwort 2: Nur der eigenen Meinung. Antwort 3: Jeder Idee im Internet. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "78ccae84d77d8a2a71fb038428adcedc16381262d4ad7ff2fd485a3c0e5df6fa",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Hör dir die Frage und die Antworten in Ruhe an.",
-        "Wem gehorchen wir im Dīn?",
-        "Antwort 1:",
-        "Allah und Seinem Gesandten ﷺ.",
-        "Antwort 2:",
-        "Nur der eigenen Meinung.",
-        "Antwort 3:",
-        "Jeder Idee im Internet.",
-        "Wähle die Antwort, die du für richtig hältst."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 4:59",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
@@ -922,49 +922,6 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-487",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Wie jemand, der ewig hier bleibt",
-        "Wie ein Fremder oder Reisender",
-        "Wie jemand ohne Ziel"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a1",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "0dcc8ec6a43ec7c178bf68117507f32fffcd0f86d5bf2d81d6eedcff039f4b77",
-      "proposedQuestionAudioText": "Mit welchem Bild beschrieb der Prophet ﷺ die Haltung zur Dunyā? Antwort 1: Wie jemand, der ewig hier bleibt. Antwort 2: Wie ein Fremder oder Reisender. Antwort 3: Wie jemand ohne Ziel. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "48db99d9ac79fc7f3417a9d9a2d535062e949820e658679925b2e5da365cae5c",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Mit welchem Bild beschrieb der Prophet ﷺ die Haltung zur Dunyā?",
-        "Antwort 1:",
-        "Wie jemand, der ewig hier bleibt.",
-        "Antwort 2:",
-        "Wie ein Fremder oder Reisender.",
-        "Antwort 3:",
-        "Wie jemand ohne Ziel.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Ṣaḥīḥ al-Bukhārī 6416",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
       "questionId": "kids-quiz-131",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
@@ -1010,78 +967,33 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-743",
+      "questionId": "kids-quiz-024",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Alle zum Lachen darüber bringen.",
-        "Den Fehler immer wieder nachmachen.",
-        "Nicht auslachen und freundlich bleiben."
+        "Nur der eigenen Meinung",
+        "Jeder Idee im Internet",
+        "Allah und Seinem Gesandten ﷺ"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
         "a3",
         "a1"
       ],
-      "originalQuestionAudioSHA256": "97d6de0e5de7f80c3b0f3b0e5b37d9999e243196c58508498091380fb528b3e1",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Ein Kind spricht ein schwieriges Wort falsch aus. Was passt am besten? Antwort 1: Alle zum Lachen darüber bringen. Antwort 2: Den Fehler immer wieder nachmachen. Antwort 3: Nicht auslachen und freundlich bleiben. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "7d84800ab0d335e781aa8c08179e6b6302650f7bdc93ef8fd2bf082a12ed750d",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Nimm dir Zeit für deine Antwort.",
-        "Ein Kind spricht ein schwieriges Wort falsch aus. Was passt am besten?",
-        "Antwort 1:",
-        "Alle zum Lachen darüber bringen.",
-        "Antwort 2:",
-        "Den Fehler immer wieder nachmachen.",
-        "Antwort 3:",
-        "Nicht auslachen und freundlich bleiben.",
-        "Wähle die Antwort, die du für richtig hältst."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 49:11",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-220",
-      "ageBand": "7-8",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Nahrung, Schmuck und Schiffe",
-        "Zauberei und Wahrsagerei",
-        "Nur Regen"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
-        "a2",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "23fdace417de1b628695472e2e5b8dd3870aa2cb58addd53c4a6e9cc7f7f9243",
-      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Welchen Nutzen des Meeres nennt Qurʾān 16:14? Antwort 1: Nahrung, Schmuck und Schiffe. Antwort 2: Zauberei und Wahrsagerei. Antwort 3: Nur Regen. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "23fdace417de1b628695472e2e5b8dd3870aa2cb58addd53c4a6e9cc7f7f9243",
+      "originalQuestionAudioSHA256": "78ccae84d77d8a2a71fb038428adcedc16381262d4ad7ff2fd485a3c0e5df6fa",
+      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Wem gehorchen wir im Dīn? Antwort 1: Nur der eigenen Meinung. Antwort 2: Jeder Idee im Internet. Antwort 3: Allah und Seinem Gesandten ﷺ. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "249076dd444c6ecba9763c100e2480bcdf557e1becbc9737dd25569b28094a8a",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Hör dir die Frage und die Antworten in Ruhe an.",
-        "Welchen Nutzen des Meeres nennt Qurʾān 16:14?",
+        "Wem gehorchen wir im Dīn?",
         "Antwort 1:",
-        "Nahrung, Schmuck und Schiffe.",
+        "Nur der eigenen Meinung.",
         "Antwort 2:",
-        "Zauberei und Wahrsagerei.",
+        "Jeder Idee im Internet.",
         "Antwort 3:",
-        "Nur Regen.",
+        "Allah und Seinem Gesandten ﷺ.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -1094,43 +1006,41 @@
         70,
         240
       ],
-      "originalSource": "Qurʾān 16:14",
+      "originalSource": "Qurʾān 4:59",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-725",
-      "ageBand": "7-8",
+      "questionId": "kids-quiz-135",
+      "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 2,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Damit vor anderen angeben.",
-        "Allah danken und die Gabe gut nutzen.",
-        "So tun, als hätte nur man selbst alles gemacht."
+        "Nur davon, wie andere sie sehen",
+        "Von der Absicht",
+        "Nur von ihrer Länge"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
         "a1",
         "a3"
       ],
-      "originalQuestionAudioSHA256": "6086836ae5d4164d1480e030b3139b8c51e5bda5e56487353dadb5105dff5e5e",
-      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Du bekommst etwas Gutes, das du gebraucht hast. Was passt am besten? Antwort 1: Damit vor anderen angeben. Antwort 2: Allah danken und die Gabe gut nutzen. Antwort 3: So tun, als hätte nur man selbst alles gemacht. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "4530c85da7adcb283d3698495ea7625ad73a4b75c1290daa33a3ecae157db91a",
+      "originalQuestionAudioSHA256": "1dcff25a5f584046d5cb76280f6abed6ee1d9a70d03b25f30bff057807d19022",
+      "proposedQuestionAudioText": "Wovon hängt der Wert einer Handlung nach dem berühmten Ḥadīṯ ab? Antwort 1: Nur davon, wie andere sie sehen. Antwort 2: Von der Absicht. Antwort 3: Nur von ihrer Länge. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "4dd81c46c87f1dcab97624e79ef02f59097a1e36cde200a0461d889f47f90b90",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
-        "Überlege kurz, bevor du dich entscheidest.",
-        "Du bekommst etwas Gutes, das du gebraucht hast. Was passt am besten?",
+        "Wovon hängt der Wert einer Handlung nach dem berühmten Ḥadīṯ ab?",
         "Antwort 1:",
-        "Damit vor anderen angeben.",
+        "Nur davon, wie andere sie sehen.",
         "Antwort 2:",
-        "Allah danken und die Gabe gut nutzen.",
+        "Von der Absicht.",
         "Antwort 3:",
-        "So tun, als hätte nur man selbst alles gemacht.",
-        "Wähle die Antwort, die du für richtig hältst."
+        "Nur von ihrer Länge.",
+        "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
-        240,
         240,
         70,
         240,
@@ -1139,43 +1049,41 @@
         70,
         240
       ],
-      "originalSource": "Qurʾān 14:7",
+      "originalSource": "Ṣaḥīḥ al-Bukhārī 54; Ṣaḥīḥ Muslim 1907",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-751",
-      "ageBand": "7-8",
+      "questionId": "kids-quiz-487",
+      "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Einen gegen den anderen aufhetzen.",
-        "Gerüchte über beide verbreiten.",
-        "Ruhig helfen, dass beide fair miteinander sprechen."
+        "Wie jemand, der ewig hier bleibt",
+        "Wie jemand ohne Ziel",
+        "Wie ein Fremder oder Reisender"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
         "a3",
         "a1"
       ],
-      "originalQuestionAudioSHA256": "45d6ac3fe4a48806fd82f7025c4ea0b76a909bbe3083941f04d78dd5bd000c9b",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Zwei Freunde streiten wegen eines Spiels. Was passt am besten? Antwort 1: Einen gegen den anderen aufhetzen. Antwort 2: Gerüchte über beide verbreiten. Antwort 3: Ruhig helfen, dass beide fair miteinander sprechen. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "9492d5f58c9894e4d482d3f23ea03443d5e185c5362f967fad126276361e9dd9",
+      "originalQuestionAudioSHA256": "0dcc8ec6a43ec7c178bf68117507f32fffcd0f86d5bf2d81d6eedcff039f4b77",
+      "proposedQuestionAudioText": "Mit welchem Bild beschrieb der Prophet ﷺ die Haltung zur Dunyā? Antwort 1: Wie jemand, der ewig hier bleibt. Antwort 2: Wie jemand ohne Ziel. Antwort 3: Wie ein Fremder oder Reisender. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "0aa1658e1a9e9eaa025be06077a7935570c35d23cdc839034282c6f6319a2db6",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
-        "Nimm dir Zeit für deine Antwort.",
-        "Zwei Freunde streiten wegen eines Spiels. Was passt am besten?",
+        "Mit welchem Bild beschrieb der Prophet ﷺ die Haltung zur Dunyā?",
         "Antwort 1:",
-        "Einen gegen den anderen aufhetzen.",
+        "Wie jemand, der ewig hier bleibt.",
         "Antwort 2:",
-        "Gerüchte über beide verbreiten.",
+        "Wie jemand ohne Ziel.",
         "Antwort 3:",
-        "Ruhig helfen, dass beide fair miteinander sprechen.",
-        "Wähle die Antwort, die du für richtig hältst."
+        "Wie ein Fremder oder Reisender.",
+        "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
-        240,
         240,
         70,
         240,
@@ -1184,129 +1092,82 @@
         70,
         240
       ],
-      "originalSource": "Qurʾān 49:10",
+      "originalSource": "Ṣaḥīḥ al-Bukhārī 6416",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-271",
+      "questionId": "kids-quiz-589",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 1,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Zum Gedenken Allahs eilen und den Handel lassen",
+        "Den Gebetsruf ignorieren",
+        "Nur weiterarbeiten"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "3f2ea6525d1272b4ed110ddb1d7b8b34df323cb8c65ef0bcf2a2b1c5b295ca35",
+      "proposedQuestionAudioText": "Was sollen Gläubige tun, wenn am Freitag zum Gebet gerufen wird? Antwort 1: Zum Gedenken Allahs eilen und den Handel lassen. Antwort 2: Den Gebetsruf ignorieren. Antwort 3: Nur weiterarbeiten. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "3f2ea6525d1272b4ed110ddb1d7b8b34df323cb8c65ef0bcf2a2b1c5b295ca35",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Was sollen Gläubige tun, wenn am Freitag zum Gebet gerufen wird?",
+        "Antwort 1:",
+        "Zum Gedenken Allahs eilen und den Handel lassen.",
+        "Antwort 2:",
+        "Den Gebetsruf ignorieren.",
+        "Antwort 3:",
+        "Nur weiterarbeiten.",
+        "Überlege und wähle die beste Antwort."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 62:9",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-124",
       "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Den Schritten des Shayṭān",
-        "Dem Qurʾān",
-        "Guten Ratschlägen"
+        "Sie kommt von Allah",
+        "Sie kommt von Sternen",
+        "Sie kommt ohne Allahs Willen"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a1",
         "a2",
         "a3"
       ],
-      "originalQuestionAudioSHA256": "aca5ce641e64715aae9bf5b2026edae3821781d07f99cc448528fa6c458dde53",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Welchen Schritten sollen wir nach Qurʾān 2:168 nicht folgen? Antwort 1: Den Schritten des Shayṭān. Antwort 2: Dem Qurʾān. Antwort 3: Guten Ratschlägen. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "aca5ce641e64715aae9bf5b2026edae3821781d07f99cc448528fa6c458dde53",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Nimm dir Zeit für deine Antwort.",
-        "Welchen Schritten sollen wir nach Qurʾān 2:168 nicht folgen?",
-        "Antwort 1:",
-        "Den Schritten des Shayṭān.",
-        "Antwort 2:",
-        "Dem Qurʾān.",
-        "Antwort 3:",
-        "Guten Ratschlägen.",
-        "Wähle die Antwort, die du für richtig hältst."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 2:168",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-769",
-      "ageBand": "7-8",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Das Heft wegwerfen.",
-        "Geduldig weiterlernen und Allah um Hilfe bitten.",
-        "Sagen, dass du nie wieder lernen willst."
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a1",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "c510625224b52a84f36b6ad1e62a76c6b73426d319bb27b491c02207b4023e23",
-      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Eine Aufgabe ist schwierig und klappt nicht sofort. Was passt am besten? Antwort 1: Das Heft wegwerfen. Antwort 2: Geduldig weiterlernen und Allah um Hilfe bitten. Antwort 3: Sagen, dass du nie wieder lernen willst. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "1be30a240139da6467f7e172debe8704f1cdd8d1546f39ca9533da82c826501f",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Überlege kurz, bevor du dich entscheidest.",
-        "Eine Aufgabe ist schwierig und klappt nicht sofort. Was passt am besten?",
-        "Antwort 1:",
-        "Das Heft wegwerfen.",
-        "Antwort 2:",
-        "Geduldig weiterlernen und Allah um Hilfe bitten.",
-        "Antwort 3:",
-        "Sagen, dass du nie wieder lernen willst.",
-        "Wähle die Antwort, die du für richtig hältst."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 2:153",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-320",
-      "ageBand": "7-8",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Nur Gold",
-        "Unbegrenztes Wissen über das Verborgene",
-        "Herrschaft und Weisheit"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a3",
-        "a1"
-      ],
-      "originalQuestionAudioSHA256": "dcf6e082e9e2f7013b653079b1a21b7847c310da8a39dbe28b344fa137e88889",
-      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Was gab Allah Dāwūd nach dem Sieg über Ǧālūt? Antwort 1: Nur Gold. Antwort 2: Unbegrenztes Wissen über das Verborgene. Antwort 3: Herrschaft und Weisheit. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "8166d227a7e73e7d4b56976b8fe9d3d27ae217e2a892f2f075366cc7b8b8c5a1",
+      "originalQuestionAudioSHA256": "b1ee2e1d691ac58f74c4793002e87ae181c9c3792367538b9f5884063f39a5dc",
+      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Was sagte Maryam über ihre besondere Versorgung? Antwort 1: Sie kommt von Allah. Antwort 2: Sie kommt von Sternen. Antwort 3: Sie kommt ohne Allahs Willen. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "b1ee2e1d691ac58f74c4793002e87ae181c9c3792367538b9f5884063f39a5dc",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Hör dir die Frage und die Antworten in Ruhe an.",
-        "Was gab Allah Dāwūd nach dem Sieg über Ǧālūt?",
+        "Was sagte Maryam über ihre besondere Versorgung?",
         "Antwort 1:",
-        "Nur Gold.",
+        "Sie kommt von Allah.",
         "Antwort 2:",
-        "Unbegrenztes Wissen über das Verborgene.",
+        "Sie kommt von Sternen.",
         "Antwort 3:",
-        "Herrschaft und Weisheit.",
+        "Sie kommt ohne Allahs Willen.",
         "Wähle die Antwort, die du für richtig hältst."
       ],
       "pauseAfterMsUnchanged": [
@@ -1319,52 +1180,7 @@
         70,
         240
       ],
-      "originalSource": "Qurʾān 2:251",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-719",
-      "ageBand": "7-8",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Sagen: Nichts ist Allah gleich.",
-        "Das Geschöpf noch genauer mit Allah vergleichen.",
-        "Sagen: Jeder Vergleich ist richtig."
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
-        "a2",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "7baa93845c37f9a24c1cadf57c095f5382d7b4d9f1bf877fb3145591563cc919",
-      "proposedQuestionAudioText": "Nimm dir Zeit für deine Antwort. Ein Kind vergleicht Allah mit einem Geschöpf. Was passt am besten? Antwort 1: Sagen: Nichts ist Allah gleich. Antwort 2: Das Geschöpf noch genauer mit Allah vergleichen. Antwort 3: Sagen: Jeder Vergleich ist richtig. Wähle die Antwort, die du für richtig hältst.",
-      "proposedQuestionAudioSHA256": "7baa93845c37f9a24c1cadf57c095f5382d7b4d9f1bf877fb3145591563cc919",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Nimm dir Zeit für deine Antwort.",
-        "Ein Kind vergleicht Allah mit einem Geschöpf. Was passt am besten?",
-        "Antwort 1:",
-        "Sagen: Nichts ist Allah gleich.",
-        "Antwort 2:",
-        "Das Geschöpf noch genauer mit Allah vergleichen.",
-        "Antwort 3:",
-        "Sagen: Jeder Vergleich ist richtig.",
-        "Wähle die Antwort, die du für richtig hältst."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 42:11",
+      "originalSource": "Qurʾān 3:37",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
@@ -1415,32 +1231,302 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-586",
-      "ageBand": "9-10",
+      "questionId": "kids-quiz-226",
+      "ageBand": "7-8",
       "originalCorrectAnswerPosition": 1,
       "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Nur weltlichen Ruhm",
-        "Keine besondere Belohnung",
-        "Nähe zum Propheten ﷺ im Paradies"
+        "Sterne, Glückszahlen und Horoskope",
+        "Nur sichtbare Dinge",
+        "Allah, Engel, Bücher und Gesandte"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
         "a3",
         "a1"
       ],
+      "originalQuestionAudioSHA256": "6ced2eecd95d52a749a07286ebb32330f0d047e35f7ce9d724fb176f4e2f3c1e",
+      "proposedQuestionAudioText": "Mal sehen, was du zu diesem Thema weißt. Was nennt Qurʾān 2:285 beim Glauben der Gläubigen? Antwort 1: Sterne, Glückszahlen und Horoskope. Antwort 2: Nur sichtbare Dinge. Antwort 3: Allah, Engel, Bücher und Gesandte. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "ad33308ecb34b6cb33151b12b0b4c941ab18f1747f047474e56859375dc06497",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Mal sehen, was du zu diesem Thema weißt.",
+        "Was nennt Qurʾān 2:285 beim Glauben der Gläubigen?",
+        "Antwort 1:",
+        "Sterne, Glückszahlen und Horoskope.",
+        "Antwort 2:",
+        "Nur sichtbare Dinge.",
+        "Antwort 3:",
+        "Allah, Engel, Bücher und Gesandte.",
+        "Wähle die Antwort, die du für richtig hältst."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 2:285",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-184",
+      "ageBand": "7-8",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 1,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Der Wiedehopf fehlte",
+        "Alle Vögel waren verschwunden",
+        "Es gab keine Vögel"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "9293ba56930abe6de9eb79245148a9e3ab22cd075a1c0931b8dc50155ff8ad57",
+      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Was bemerkte Sulaymān bei der Kontrolle der Vögel? Antwort 1: Der Wiedehopf fehlte. Antwort 2: Alle Vögel waren verschwunden. Antwort 3: Es gab keine Vögel. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "9293ba56930abe6de9eb79245148a9e3ab22cd075a1c0931b8dc50155ff8ad57",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Hör dir die Frage und die Antworten in Ruhe an.",
+        "Was bemerkte Sulaymān bei der Kontrolle der Vögel?",
+        "Antwort 1:",
+        "Der Wiedehopf fehlte.",
+        "Antwort 2:",
+        "Alle Vögel waren verschwunden.",
+        "Antwort 3:",
+        "Es gab keine Vögel.",
+        "Wähle die Antwort, die du für richtig hältst."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 27:20–22",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-281",
+      "ageBand": "7-8",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Eine gute Absicht",
+        "Vorhaltungen und Verletzungen",
+        "Dankbarkeit gegenüber Allah"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a1",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "5429ca22a8650bc31eaf0bb109702bb61a1b4a7d1d4562500b9a1044dcde4898",
+      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Was darf eine Ṣadaqah nicht kaputtmachen? Antwort 1: Eine gute Absicht. Antwort 2: Vorhaltungen und Verletzungen. Antwort 3: Dankbarkeit gegenüber Allah. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "e4cb684c164e03a56f009cd2fb149f300a26f7a441c640c14f8bec56f3d0aff2",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Überlege kurz, bevor du dich entscheidest.",
+        "Was darf eine Ṣadaqah nicht kaputtmachen?",
+        "Antwort 1:",
+        "Eine gute Absicht.",
+        "Antwort 2:",
+        "Vorhaltungen und Verletzungen.",
+        "Antwort 3:",
+        "Dankbarkeit gegenüber Allah.",
+        "Wähle die Antwort, die du für richtig hältst."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 2:264",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-474",
+      "ageBand": "7-8",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 3,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Das Gebet verlassen",
+        "Nur Besitz sammeln",
+        "Für den Herrn beten und opfern"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a3",
+        "a1"
+      ],
+      "originalQuestionAudioSHA256": "5177339673f19ad98d3a067ad969e89ebc41725ed33cd8aa44d8fcfbed2daf4f",
+      "proposedQuestionAudioText": "Mal sehen, was du zu diesem Thema weißt. Was befiehlt Allah nach der Gabe al-Kawthar? Antwort 1: Das Gebet verlassen. Antwort 2: Nur Besitz sammeln. Antwort 3: Für den Herrn beten und opfern. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "17f8a9fad1ace81e1c488886fb83d9b3697ed10cf4fd554c3f05d0a248dc317b",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Mal sehen, was du zu diesem Thema weißt.",
+        "Was befiehlt Allah nach der Gabe al-Kawthar?",
+        "Antwort 1:",
+        "Das Gebet verlassen.",
+        "Antwort 2:",
+        "Nur Besitz sammeln.",
+        "Antwort 3:",
+        "Für den Herrn beten und opfern.",
+        "Wähle die Antwort, die du für richtig hältst."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 108:1–2",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-725",
+      "ageBand": "7-8",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 1,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Allah danken und die Gabe gut nutzen.",
+        "Damit vor anderen angeben.",
+        "So tun, als hätte nur man selbst alles gemacht."
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
+        "a2",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "6086836ae5d4164d1480e030b3139b8c51e5bda5e56487353dadb5105dff5e5e",
+      "proposedQuestionAudioText": "Überlege kurz, bevor du dich entscheidest. Du bekommst etwas Gutes, das du gebraucht hast. Was passt am besten? Antwort 1: Allah danken und die Gabe gut nutzen. Antwort 2: Damit vor anderen angeben. Antwort 3: So tun, als hätte nur man selbst alles gemacht. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "6086836ae5d4164d1480e030b3139b8c51e5bda5e56487353dadb5105dff5e5e",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Überlege kurz, bevor du dich entscheidest.",
+        "Du bekommst etwas Gutes, das du gebraucht hast. Was passt am besten?",
+        "Antwort 1:",
+        "Allah danken und die Gabe gut nutzen.",
+        "Antwort 2:",
+        "Damit vor anderen angeben.",
+        "Antwort 3:",
+        "So tun, als hätte nur man selbst alles gemacht.",
+        "Wähle die Antwort, die du für richtig hältst."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 14:7",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-320",
+      "ageBand": "7-8",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Nur Gold",
+        "Herrschaft und Weisheit",
+        "Unbegrenztes Wissen über das Verborgene"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a1",
+        "a3"
+      ],
+      "originalQuestionAudioSHA256": "dcf6e082e9e2f7013b653079b1a21b7847c310da8a39dbe28b344fa137e88889",
+      "proposedQuestionAudioText": "Hör dir die Frage und die Antworten in Ruhe an. Was gab Allah Dāwūd nach dem Sieg über Ǧālūt? Antwort 1: Nur Gold. Antwort 2: Herrschaft und Weisheit. Antwort 3: Unbegrenztes Wissen über das Verborgene. Wähle die Antwort, die du für richtig hältst.",
+      "proposedQuestionAudioSHA256": "daf2300eb8584928bb513262741a7e0cc517e047729ff21295baef026663c102",
+      "originalSegmentsReusedWithoutRerecording": true,
+      "proposedOrderedAudioSegments": [
+        "Hör dir die Frage und die Antworten in Ruhe an.",
+        "Was gab Allah Dāwūd nach dem Sieg über Ǧālūt?",
+        "Antwort 1:",
+        "Nur Gold.",
+        "Antwort 2:",
+        "Herrschaft und Weisheit.",
+        "Antwort 3:",
+        "Unbegrenztes Wissen über das Verborgene.",
+        "Wähle die Antwort, die du für richtig hältst."
+      ],
+      "pauseAfterMsUnchanged": [
+        240,
+        240,
+        70,
+        240,
+        70,
+        240,
+        70,
+        240
+      ],
+      "originalSource": "Qurʾān 2:251",
+      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
+      "readyToApplyToVisitorApp": false,
+      "humanApproved": false
+    },
+    {
+      "questionId": "kids-quiz-586",
+      "ageBand": "9-10",
+      "originalCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
+      "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Nur weltlichen Ruhm",
+        "Nähe zum Propheten ﷺ im Paradies",
+        "Keine besondere Belohnung"
+      ],
+      "originalAnswerIdsInProposedDisplayOrder": [
+        "a2",
+        "a1",
+        "a3"
+      ],
       "originalQuestionAudioSHA256": "55fa255766bfba00079fa51cd6649a43d122778e8bc49554717fe5a24dfccad1",
-      "proposedQuestionAudioText": "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes? Antwort 1: Nur weltlichen Ruhm. Antwort 2: Keine besondere Belohnung. Antwort 3: Nähe zum Propheten ﷺ im Paradies. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "4e12a2103eb8cf887d812b9d3015ea8a4f4032236d36ba69d206f8a2ae1c4db3",
+      "proposedQuestionAudioText": "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes? Antwort 1: Nur weltlichen Ruhm. Antwort 2: Nähe zum Propheten ﷺ im Paradies. Antwort 3: Keine besondere Belohnung. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "48c53e1dac2729761b59ca1a11748682bb00cc5b636d3d42206ab797aa987d3a",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes?",
         "Antwort 1:",
         "Nur weltlichen Ruhm.",
         "Antwort 2:",
-        "Keine besondere Belohnung.",
-        "Antwort 3:",
         "Nähe zum Propheten ﷺ im Paradies.",
+        "Antwort 3:",
+        "Keine besondere Belohnung.",
         "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
@@ -1458,75 +1544,32 @@
       "humanApproved": false
     },
     {
-      "questionId": "kids-quiz-285",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Mit Weisheit und guter Ermahnung",
-        "Mit Beleidigungen",
-        "Mit erfundenen Geschichten"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
-        "a2",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "77e757cd7107191a5592def26e26293cb7e4d7ea2008a53049115a1e7d092be5",
-      "proposedQuestionAudioText": "Wie soll nach Qurʾān 16:125 zum Weg Allahs eingeladen werden? Antwort 1: Mit Weisheit und guter Ermahnung. Antwort 2: Mit Beleidigungen. Antwort 3: Mit erfundenen Geschichten. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "77e757cd7107191a5592def26e26293cb7e4d7ea2008a53049115a1e7d092be5",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Wie soll nach Qurʾān 16:125 zum Weg Allahs eingeladen werden?",
-        "Antwort 1:",
-        "Mit Weisheit und guter Ermahnung.",
-        "Antwort 2:",
-        "Mit Beleidigungen.",
-        "Antwort 3:",
-        "Mit erfundenen Geschichten.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Qurʾān 16:125",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
       "questionId": "kids-quiz-286",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
+      "proposedCorrectAnswerPosition": 3,
       "displayAnswerLabelsInSameOrderAsSpeech": [
         "Nur wenn sie uns nützt",
-        "Auch wenn sie gegen uns selbst oder Angehörige geht",
-        "Nur gegenüber Freunden"
+        "Nur gegenüber Freunden",
+        "Auch wenn sie gegen uns selbst oder Angehörige geht"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
         "a2",
-        "a1",
-        "a3"
+        "a3",
+        "a1"
       ],
       "originalQuestionAudioSHA256": "756700d0726d80befd96f1aa98a2d08229cd9994a657b856730d935c201f723d",
-      "proposedQuestionAudioText": "Wann gilt die Pflicht zur Gerechtigkeit nach Qurʾān 4:135? Antwort 1: Nur wenn sie uns nützt. Antwort 2: Auch wenn sie gegen uns selbst oder Angehörige geht. Antwort 3: Nur gegenüber Freunden. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "3902a7ff896e5ba42394c8d154bbfe094dd1518d438324a94d4c607b33c8bed0",
+      "proposedQuestionAudioText": "Wann gilt die Pflicht zur Gerechtigkeit nach Qurʾān 4:135? Antwort 1: Nur wenn sie uns nützt. Antwort 2: Nur gegenüber Freunden. Antwort 3: Auch wenn sie gegen uns selbst oder Angehörige geht. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "04e2ffece9cbde1d63ddbe24478b92051a1aa9fc166b80c42f1db7e438bfc3d7",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Wann gilt die Pflicht zur Gerechtigkeit nach Qurʾān 4:135?",
         "Antwort 1:",
         "Nur wenn sie uns nützt.",
         "Antwort 2:",
-        "Auch wenn sie gegen uns selbst oder Angehörige geht.",
-        "Antwort 3:",
         "Nur gegenüber Freunden.",
+        "Antwort 3:",
+        "Auch wenn sie gegen uns selbst oder Angehörige geht.",
         "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
@@ -1547,29 +1590,29 @@
       "questionId": "kids-quiz-299",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 3,
+      "proposedCorrectAnswerPosition": 1,
       "displayAnswerLabelsInSameOrderAsSpeech": [
+        "Sein Lohn ist bei Allah",
         "Er hat immer verloren",
-        "Seine Tat hat keinen Wert",
-        "Sein Lohn ist bei Allah"
+        "Seine Tat hat keinen Wert"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
+        "a1",
         "a2",
-        "a3",
-        "a1"
+        "a3"
       ],
       "originalQuestionAudioSHA256": "15e6c3ff81d423c3655f1d69422a6e4ea2a28d8e4174de8f185615b49fe5e653",
-      "proposedQuestionAudioText": "Was sagt Qurʾān 42:40 über jemanden, der vergibt und Frieden stiftet? Antwort 1: Er hat immer verloren. Antwort 2: Seine Tat hat keinen Wert. Antwort 3: Sein Lohn ist bei Allah. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "e176cf9c7aba1a422e859a3bfefc0b5f231c6f9c6d2d3bd35109eba11e5a200d",
+      "proposedQuestionAudioText": "Was sagt Qurʾān 42:40 über jemanden, der vergibt und Frieden stiftet? Antwort 1: Sein Lohn ist bei Allah. Antwort 2: Er hat immer verloren. Antwort 3: Seine Tat hat keinen Wert. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "15e6c3ff81d423c3655f1d69422a6e4ea2a28d8e4174de8f185615b49fe5e653",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Was sagt Qurʾān 42:40 über jemanden, der vergibt und Frieden stiftet?",
         "Antwort 1:",
-        "Er hat immer verloren.",
-        "Antwort 2:",
-        "Seine Tat hat keinen Wert.",
-        "Antwort 3:",
         "Sein Lohn ist bei Allah.",
+        "Antwort 2:",
+        "Er hat immer verloren.",
+        "Antwort 3:",
+        "Seine Tat hat keinen Wert.",
         "Überlege und wähle die beste Antwort."
       ],
       "pauseAfterMsUnchanged": [
@@ -1590,27 +1633,27 @@
       "questionId": "kids-quiz-288",
       "ageBand": "9-10",
       "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 1,
+      "proposedCorrectAnswerPosition": 2,
       "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Es schützt Häuser durch Erlaubnis und Gruß vor dem Eintreten",
         "Es erlaubt heimliches Betreten",
+        "Es schützt Häuser durch Erlaubnis und Gruß vor dem Eintreten",
         "Es verbietet jeden Besuch"
       ],
       "originalAnswerIdsInProposedDisplayOrder": [
-        "a1",
         "a2",
+        "a1",
         "a3"
       ],
       "originalQuestionAudioSHA256": "b6fb81c404dd35a85bdcd847a0303f3c0417712311e69023d917e06f6514595c",
-      "proposedQuestionAudioText": "Warum ist Qurʾān 24:27 eine wichtige Adab-Regel? Antwort 1: Es schützt Häuser durch Erlaubnis und Gruß vor dem Eintreten. Antwort 2: Es erlaubt heimliches Betreten. Antwort 3: Es verbietet jeden Besuch. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "b6fb81c404dd35a85bdcd847a0303f3c0417712311e69023d917e06f6514595c",
+      "proposedQuestionAudioText": "Warum ist Qurʾān 24:27 eine wichtige Adab-Regel? Antwort 1: Es erlaubt heimliches Betreten. Antwort 2: Es schützt Häuser durch Erlaubnis und Gruß vor dem Eintreten. Antwort 3: Es verbietet jeden Besuch. Überlege und wähle die beste Antwort.",
+      "proposedQuestionAudioSHA256": "19f2c8a47315f5827533bc6d7500e50e0363b9d89ff24aaaf8470c7f870fd0be",
       "originalSegmentsReusedWithoutRerecording": true,
       "proposedOrderedAudioSegments": [
         "Warum ist Qurʾān 24:27 eine wichtige Adab-Regel?",
         "Antwort 1:",
-        "Es schützt Häuser durch Erlaubnis und Gruß vor dem Eintreten.",
-        "Antwort 2:",
         "Es erlaubt heimliches Betreten.",
+        "Antwort 2:",
+        "Es schützt Häuser durch Erlaubnis und Gruß vor dem Eintreten.",
         "Antwort 3:",
         "Es verbietet jeden Besuch.",
         "Überlege und wähle die beste Antwort."
@@ -1625,49 +1668,6 @@
         240
       ],
       "originalSource": "Qurʾān 24:27",
-      "voicePlaybackAndVisualOrderMustRemainIdentical": true,
-      "readyToApplyToVisitorApp": false,
-      "humanApproved": false
-    },
-    {
-      "questionId": "kids-quiz-135",
-      "ageBand": "9-10",
-      "originalCorrectAnswerPosition": 1,
-      "proposedCorrectAnswerPosition": 2,
-      "displayAnswerLabelsInSameOrderAsSpeech": [
-        "Nur davon, wie andere sie sehen",
-        "Von der Absicht",
-        "Nur von ihrer Länge"
-      ],
-      "originalAnswerIdsInProposedDisplayOrder": [
-        "a2",
-        "a1",
-        "a3"
-      ],
-      "originalQuestionAudioSHA256": "1dcff25a5f584046d5cb76280f6abed6ee1d9a70d03b25f30bff057807d19022",
-      "proposedQuestionAudioText": "Wovon hängt der Wert einer Handlung nach dem berühmten Ḥadīṯ ab? Antwort 1: Nur davon, wie andere sie sehen. Antwort 2: Von der Absicht. Antwort 3: Nur von ihrer Länge. Überlege und wähle die beste Antwort.",
-      "proposedQuestionAudioSHA256": "4dd81c46c87f1dcab97624e79ef02f59097a1e36cde200a0461d889f47f90b90",
-      "originalSegmentsReusedWithoutRerecording": true,
-      "proposedOrderedAudioSegments": [
-        "Wovon hängt der Wert einer Handlung nach dem berühmten Ḥadīṯ ab?",
-        "Antwort 1:",
-        "Nur davon, wie andere sie sehen.",
-        "Antwort 2:",
-        "Von der Absicht.",
-        "Antwort 3:",
-        "Nur von ihrer Länge.",
-        "Überlege und wähle die beste Antwort."
-      ],
-      "pauseAfterMsUnchanged": [
-        240,
-        70,
-        240,
-        70,
-        240,
-        70,
-        240
-      ],
-      "originalSource": "Ṣaḥīḥ al-Bukhārī 54; Ṣaḥīḥ Muslim 1907",
       "voicePlaybackAndVisualOrderMustRemainIdentical": true,
       "readyToApplyToVisitorApp": false,
       "humanApproved": false
