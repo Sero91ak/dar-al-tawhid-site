@@ -1,0 +1,239 @@
+/* DĀR AL TAWḤĪD · Responsive V8 Smart UI · public browser-only.
+   Real interactions are separate from decorative art. All colors follow existing theme tokens. */
+body.desktop-overhaul-v18 .dar-v8-side-brand,
+body.desktop-overhaul-v18 .dar-v8-side-brand .dar-v8-orb,
+body.desktop-overhaul-v18 .dar-v8-sidebar .dar-v8-side-brand{
+ background:transparent!important;border:0!important;box-shadow:none!important;outline:0!important;
+}
+body.desktop-overhaul-v18 .dar-v8-side-brand{padding:4px 2px 13px!important}
+body.desktop-overhaul-v18 .dar-v8-side-brand .dar-v8-orb{font-size:31px!important}
+body.desktop-overhaul-v18 .dar-v8-side-brand:before,
+body.desktop-overhaul-v18 .dar-v8-side-brand:after{background:none!important;box-shadow:none!important}
+body.desktop-overhaul-v18 .dar-v8-topbar{box-shadow:none!important}
+body.desktop-overhaul-v18 .dar-v8-workspace{min-width:0}
+body.desktop-overhaul-v18 :is(.dar-v8-lang-toggle,.dar-v8-player-fullscreen-toggle){
+ appearance:none;border:1px solid var(--v8-line);background:transparent;color:var(--v8-ink);
+ border-radius:999px;padding:8px 11px;min-height:38px;min-width:0;font:700 11px/1.3 system-ui,-apple-system,sans-serif;cursor:pointer
+}
+body.desktop-overhaul-v18 :is(.dar-v8-lang-toggle,.dar-v8-player-fullscreen-toggle):is(:hover,:focus-visible){
+ border-color:var(--v8-gold);box-shadow:0 0 0 2px color-mix(in srgb,var(--v8-gold) 17%,transparent);outline:0!important
+}
+.dar-v8-language-menu[hidden]{display:none!important}
+.dar-v8-language-menu{
+ position:fixed;right:clamp(12px,3vw,55px);top:76px;z-index:400;display:grid;gap:6px;
+ width:min(340px,calc(100vw - 26px));max-height:80dvh;overflow:auto;
+ padding:17px;border:1px solid var(--v8-line);border-radius:22px;
+ background:var(--v8-paper);color:var(--v8-ink);box-shadow:0 18px 50px #132b2534
+}
+.dar-v8-language-menu strong{font:500 19px Georgia,serif;padding:3px 4px 10px}
+.dar-v8-language-menu button{
+ display:block;width:100%;text-align:start;padding:12px 14px;background:transparent;color:inherit;
+ border:1px solid transparent;border-radius:13px;font:600 13px system-ui;cursor:pointer
+}
+.dar-v8-language-menu button:hover,
+.dar-v8-language-menu button:focus-visible{background:color-mix(in srgb,var(--v8-gold) 13%,var(--v8-paper));border-color:var(--v8-line)}
+.dar-v8-language-menu small{color:var(--v8-muted);font-size:11px;line-height:1.65;padding:8px 4px}
+body.desktop-overhaul-v18 .dar-v8-language-settings{
+ max-width:1200px;margin:15px auto 25px;padding:clamp(18px,3vw,29px) 0;
+ border-bottom:1px solid var(--v8-line);color:var(--v8-ink)
+}
+.dar-v8-language-settings h2{font:500 clamp(24px,3vw,34px) Georgia,serif;margin:8px 0}
+.dar-v8-language-settings p{font-size:13px;line-height:1.8;color:var(--v8-muted);max-width:640px}
+.dar-v8-language-settings label{display:block;font-size:12px;margin:14px 0 6px;font-weight:700}
+.dar-v8-language-settings select{
+ width:min(440px,100%);min-height:51px;padding:10px 13px;font:600 15px system-ui;
+ color:var(--v8-ink);background:var(--v8-paper);border:1px solid var(--v8-line);border-radius:16px
+}
+body.desktop-overhaul-v18[data-dar-v8-route="suche"] #pageRoot>.dar-v8-route-hero{display:none!important}
+body.desktop-overhaul-v18[data-dar-v8-route="suche"] #pageRoot{padding-top:0!important}
+body.desktop-overhaul-v18 #pageRoot>.dar-v8-messenger{
+ display:flex;flex-direction:column;position:relative;isolation:isolate;overflow:hidden;
+ max-width:1120px;width:100%;height:calc(100dvh - 115px);min-height:570px;margin:15px auto 12px!important;
+ padding:0!important;border:1px solid var(--v8-line)!important;border-radius:25px!important;
+ background:color-mix(in srgb,var(--v8-bg) 88%,var(--v8-paper))!important;
+ box-shadow:0 15px 45px #15352510!important;color:var(--v8-ink);
+}
+body.desktop-overhaul-v18 .dar-v8-messenger:before{
+ content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;opacity:.16;
+ background:radial-gradient(circle at 80% 10%,color-mix(in srgb,var(--v8-gold) 35%,transparent),transparent 34%),
+ url('/assets/ilm/ilm-historical-majlis-v1234.jpg') center/cover
+}
+body.desktop-overhaul-v18 .dar-v8-messenger-header{
+ display:flex;align-items:center;gap:13px;padding:12px 18px;min-height:77px;flex:none;
+ background:color-mix(in srgb,var(--v8-paper) 94%,transparent);
+ border-bottom:1px solid var(--v8-line)
+}
+.dar-v8-messenger-header>img{height:47px;width:47px;object-fit:contain;flex:none;filter:drop-shadow(0 4px 6px #16312333)}
+.dar-v8-messenger-header>div{min-width:0;flex:1}
+.dar-v8-messenger-header>div>span{display:block;letter-spacing:.12em;font-weight:800;font-size:9px;color:var(--v8-gold)}
+.dar-v8-messenger-header h2{font:500 clamp(17px,2vw,22px) Georgia,serif;color:var(--v8-ink);margin:2px 0;white-space:normal}
+.dar-v8-messenger-header small{font-size:10px;color:var(--v8-muted)}
+.dar-v8-messenger-header button{background:transparent;border:1px solid var(--v8-line);border-radius:14px;min-height:38px;min-width:38px;color:var(--v8-ink);cursor:pointer}
+.dar-v8-messenger-header button:last-child{padding:7px 12px;font-size:12px}
+.dar-v8-messenger-divider{display:flex;justify-content:center;align-items:center;flex:none;padding:11px 15px 3px}
+.dar-v8-messenger-divider span{font-size:9px;color:var(--v8-muted);font-weight:700;letter-spacing:.13em}
+body.desktop-overhaul-v18 .dar-v8-messages{
+ flex:1;min-height:0;overflow:auto;overscroll-behavior:contain;scrollbar-width:thin;
+ display:flex;flex-direction:column;align-items:stretch;gap:13px;
+ padding:clamp(12px,2.4vw,25px);
+}
+.dar-v8-bubble{
+ display:flex;flex-direction:column;gap:7px;max-width:min(83%,690px);width:fit-content;min-width:0;
+ padding:14px 17px;border:1px solid var(--v8-line);box-shadow:0 3px 9px #071f1a0c;
+ border-radius:19px 19px 19px 5px;background:var(--v8-paper);color:var(--v8-ink);
+ overflow-wrap:anywhere
+}
+.dar-v8-bubble.is-user{
+ align-self:flex-end;border-radius:19px 19px 5px 19px;
+ background:color-mix(in srgb,var(--v8-gold) 16%,var(--v8-paper));border-color:color-mix(in srgb,var(--v8-gold) 32%,var(--v8-line));
+}
+.dar-v8-bubble.is-system{align-self:flex-start}
+.dar-v8-bubble-label{color:var(--v8-gold);font-size:10px;font-weight:750;letter-spacing:.04em}
+.dar-v8-bubble-copy{font:400 13px/1.8 system-ui,-apple-system,sans-serif;margin:0!important;color:var(--v8-ink)}
+.dar-v8-bubble-time{font-size:9px;align-self:flex-end;color:var(--v8-muted)}
+.dar-v8-bubble-sources{display:grid;gap:7px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));width:100%;min-width:0}
+.dar-v8-bubble-source{
+ min-width:0;display:flex;flex-direction:column;gap:5px;padding:11px 12px;
+ background:color-mix(in srgb,var(--v8-ink) 4%,var(--v8-paper));color:var(--v8-ink)!important;
+ border:1px solid var(--v8-line);border-radius:14px;text-decoration:none!important
+}
+.dar-v8-bubble-source span{font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--v8-gold)}
+.dar-v8-bubble-source strong{font:500 14px/1.45 Georgia,serif;overflow-wrap:anywhere}
+.dar-v8-bubble-source small{font:400 10px/1.5 system-ui;color:var(--v8-muted)}
+.dar-v8-bubble-source:is(:hover,:focus-visible){border-color:var(--v8-gold)!important;box-shadow:0 0 0 2px color-mix(in srgb,var(--v8-gold) 12%,transparent)}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-messenger .dar-v8-chat-samples{
+ flex:none;display:flex;overflow-x:auto;overscroll-behavior-x:contain;flex-wrap:nowrap;gap:6px;
+ scrollbar-width:thin;padding:8px 16px;border-top:1px solid var(--v8-line);
+ background:color-mix(in srgb,var(--v8-paper) 76%,transparent);max-width:100%;min-height:54px
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-messenger .dar-v8-chat-samples button{
+ flex:none;min-height:33px;padding:6px 11px;border:1px solid var(--v8-line)!important;
+ border-radius:999px!important;background:transparent!important;color:var(--v8-ink)!important;
+ font:600 11px system-ui;cursor:pointer;white-space:nowrap
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-messenger .dar-v8-chat-samples button:is(:hover,:focus-visible){
+ border-color:var(--v8-gold)!important;background:color-mix(in srgb,var(--v8-gold) 12%,var(--v8-paper))!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-messenger-composer{
+ position:relative;z-index:2;flex:none;display:grid;gap:7px;
+ padding:12px 17px 14px;margin:0!important;border-top:1px solid var(--v8-line);
+ background:var(--v8-paper);
+}
+.dar-v8-messenger-composer>label{font-size:10px;font-weight:730;color:var(--v8-muted)}
+body.desktop-overhaul-v18 .dar-v8-messenger-composer .dar-v8-chat-inputrow{
+ display:flex;align-items:center;gap:10px;padding:7px!important;
+ background:color-mix(in srgb,var(--v8-ink) 3%,var(--v8-paper));
+ border:1px solid var(--v8-line);border-radius:18px
+}
+body.desktop-overhaul-v18 .dar-v8-messenger-composer #siteSearch{
+ flex:1;min-width:0;width:100%;height:42px!important;box-shadow:none!important;
+ border:0!important;border-radius:12px!important;padding:0 9px!important;
+ font:400 15px system-ui!important;background:transparent!important;color:var(--v8-ink)!important;
+}
+body.desktop-overhaul-v18 .dar-v8-messenger-composer button{
+ flex:none;align-self:stretch;min-height:44px;cursor:pointer;
+ border:0!important;border-radius:13px!important;padding:8px 18px!important;
+ background:color-mix(in srgb,var(--v8-gold) 74%,#1c3f31)!important;color:#14271f!important;
+ font:750 12px system-ui!important
+}
+.dar-v8-messenger-composer>p{font:400 10px/1.6 system-ui!important;color:var(--v8-muted)!important;margin:0!important}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-messenger #searchResults[hidden],
+body.desktop-overhaul-v18 #pageRoot .dar-v8-messenger #darV8ChatSummary[hidden]{display:none!important}
+.dar-v8-player-backdrop{display:none}
+body.desktop-overhaul-v18 .v8-real-player{position:relative}
+body.desktop-overhaul-v18 .v8-real-player>.dar-v8-player-fullscreen-toggle{
+ position:absolute;right:6px;top:0;z-index:12;font-size:10px;padding:6px 10px;
+}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen>.dar-v8-player-backdrop{
+ display:block!important;position:fixed;inset:0;z-index:890;
+ border:0;background:rgba(7,19,16,.83);backdrop-filter:blur(13px);cursor:pointer
+}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player{
+ display:flex!important;flex-direction:column;justify-content:center;gap:17px;
+ position:fixed!important;z-index:900!important;
+ inset:max(14px,env(safe-area-inset-top)) max(14px,env(safe-area-inset-right))
+ max(14px,env(safe-area-inset-bottom)) max(14px,env(safe-area-inset-left))!important;
+ max-width:none!important;width:auto!important;height:auto!important;
+ margin:0!important;padding:clamp(22px,4vw,70px)!important;
+ overflow-y:auto!important;border:1px solid color-mix(in srgb,var(--v8-gold) 40%,var(--v8-line));
+ border-radius:28px!important;background:var(--v8-paper)!important;box-shadow:0 30px 100px #050e0c55!important;
+}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player>.dar-v8-player-fullscreen-toggle{top:16px;right:16px;min-height:42px}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .top-tool-card,
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-wrap{width:100%!important;max-width:900px!important;margin:0 auto!important}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player #quranAudioPlayer{width:100%!important;max-width:none!important;padding:16px!important;overflow:visible!important;background:var(--v8-paper)!important}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-controls{display:flex!important;flex-wrap:wrap!important;gap:10px!important;max-height:none!important;height:auto!important;visibility:visible!important;opacity:1!important}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-field{flex:1;min-width:min(100%,160px)!important}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player select{width:100%!important;min-height:43px!important;color:var(--v8-ink)!important;background:var(--v8-bg)!important;border:1px solid var(--v8-line)!important;border-radius:12px!important}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-title{font:500 clamp(19px,3vw,30px)/1.2 Georgia,serif!important;color:var(--v8-ink)!important}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player>.v8-player-label{color:var(--v8-ink)!important}
+body.desktop-overhaul-v18 .dar-v8-quran-global-results[hidden]{display:none!important}
+body.desktop-overhaul-v18 .dar-v8-quran-global-results{
+ padding:15px 0;margin:10px 0 17px;border-top:1px solid var(--v8-line);
+ display:grid;gap:7px;max-height:360px;overflow-y:auto
+}
+.dar-v8-quran-results-title{font:500 19px Georgia,serif;color:var(--v8-ink);padding:7px 2px}
+.dar-v8-quran-result{
+ text-decoration:none;color:var(--v8-ink);background:var(--v8-paper);border:1px solid var(--v8-line);
+ border-radius:14px;padding:12px 13px;display:grid;gap:7px
+}
+.dar-v8-quran-result strong{font-size:13px;color:var(--v8-ink)}
+.dar-v8-quran-result span{font-size:11px;line-height:1.6;color:var(--v8-muted)}
+.dar-v8-quran-result:is(:hover,:focus-visible){border-color:var(--v8-gold)}
+.dar-v8-quran-mode-note{padding:13px 0;color:var(--v8-muted);font-size:12px;line-height:1.65}
+body.desktop-overhaul-v18[data-dar-v8-route="quran"] #pageRoot .quran-reading-zone{max-width:1200px!important;margin-inline:auto!important}
+body.desktop-overhaul-v18[data-dar-v8-route="quran"] #pageRoot .quran-reading-zone>.toolbar button{min-height:39px}
+body.desktop-overhaul-v18 .dar-v8-day,
+body.desktop-overhaul-v18 .dar-v8-book,
+body.desktop-overhaul-v18 .dar-v8-recent-link{
+ position:relative;isolation:isolate;overflow:hidden!important;
+ background:var(--v8-paper)!important;border:1px solid var(--v8-line)!important;border-radius:20px!important
+}
+body.desktop-overhaul-v18 .dar-v8-day:before,
+body.desktop-overhaul-v18 .dar-v8-book:before,
+body.desktop-overhaul-v18 .dar-v8-recent-link:before{
+ content:"";position:absolute;inset:0;z-index:-1;opacity:.15;
+ background:linear-gradient(125deg,transparent 25%,color-mix(in srgb,var(--v8-gold) 28%,transparent)),url('/assets/post-heroes/post-reader.webp') center/cover;
+ pointer-events:none
+}
+body.desktop-overhaul-v18 .dar-v8-book{display:flex;flex-direction:column}
+body.desktop-overhaul-v18 .dar-v8-book img.dar-v8-book-cover{height:140px;width:100%;object-fit:contain;border-radius:12px;mix-blend-mode:multiply}
+body.desktop-overhaul-v18.dar-v8-night .dar-v8-book img.dar-v8-book-cover{mix-blend-mode:normal}
+body.desktop-overhaul-v18 .dar-v8-recent-link:before{background-image:linear-gradient(125deg,transparent,color-mix(in srgb,var(--v8-gold) 19%,transparent)),url('/assets/post-heroes/topic-detail.webp');opacity:.13}
+body.desktop-overhaul-v18 :is(.dar-v8-day,.dar-v8-book,.dar-v8-recent-link):focus-visible{outline:2px solid var(--v8-gold)!important;outline-offset:2px!important}
+@media(max-width:959px){
+ .dar-v8-language-menu{top:69px;right:12px}
+ body.desktop-overhaul-v18 .dar-v8-top-actions{gap:4px}
+ body.desktop-overhaul-v18 .dar-v8-lang-toggle{max-width:110px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:10px;min-height:36px;padding:5px 7px}
+ body.desktop-overhaul-v18 #pageRoot>.dar-v8-messenger{
+  height:calc(100dvh - 154px - env(safe-area-inset-bottom));min-height:430px;
+  margin:7px auto 10px!important;border-radius:20px!important
+ }
+ body.desktop-overhaul-v18.v8-chat-focused #pageRoot>.dar-v8-messenger{
+  height:calc(100dvh - 79px - env(safe-area-inset-bottom))
+ }
+ body.desktop-overhaul-v18 .dar-v8-messenger-header{padding:9px 11px;min-height:67px;gap:8px}
+ .dar-v8-messenger-header>img{width:36px;height:36px}
+ .dar-v8-messenger-header>div>span{font-size:8px}
+ .dar-v8-messenger-header h2{font-size:17px}
+ .dar-v8-messenger-header button:last-child{font-size:12px;padding:6px}
+ .dar-v8-messenger-header button:last-child span{display:none}
+ body.desktop-overhaul-v18 .dar-v8-messages{padding:12px;gap:10px}
+ .dar-v8-bubble{max-width:89%;padding:12px 13px}
+ .dar-v8-bubble-copy{font-size:12px}
+ body.desktop-overhaul-v18 .dar-v8-messenger-composer{padding:9px 10px 10px}
+ body.desktop-overhaul-v18 .dar-v8-messenger-composer .dar-v8-chat-inputrow{flex-direction:row!important}
+ body.desktop-overhaul-v18 .dar-v8-messenger-composer button{width:auto!important;padding:7px 11px!important}
+ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player{padding:65px 12px 18px!important;border-radius:18px!important}
+ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-controls{flex-direction:column!important}
+ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-field{width:100%!important}
+}
+@media(max-width:400px){
+ body.desktop-overhaul-v18 .dar-v8-breadcrumb{display:none}
+ body.desktop-overhaul-v18 .dar-v8-top-search{margin-left:auto}
+ .dar-v8-bubble-source{padding:9px}
+ body.desktop-overhaul-v18 .dar-v8-messenger-composer button span:first-child{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.desktop-overhaul-v18 :is(.dar-v8-bubble,.dar-v8-messenger,.dar-v8-quran-result){transition:none!important;scroll-behavior:auto!important}
+}
