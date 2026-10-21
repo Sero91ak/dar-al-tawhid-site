@@ -4748,13 +4748,16 @@ renders.beitraege=function(){
    '<div id="darV8HadithCount" class="dar-v8-result-count">Quelle wird geladen …</div><div id="darV8HadithResults" aria-live="polite"></div></section>'+footer()
  };
  renders.gebetszeiten=function(){
-  return '<section class="dar-v8-source-module" id="darV8PrayerOverview">'+
-   '<div class="dar-v8-mini-heading">GEBETSZEITEN · DEIN STANDORT</div>'+
-   '<h2>Die fünf täglichen Gebete</h2><p>Die Zeiten stammen aus unserer bestehenden Standortberechnung. Ohne freigegebenen Standort werden keine Uhrzeiten erfunden.</p>'+
+  return '<section class="dar-v8-source-module dar-v8-prayer-overview" id="darV8PrayerOverview">'+
+   '<div class="dar-v8-prayer-head"><div><div class="dar-v8-mini-heading">GEBETSZEITEN · DEIN STANDORT</div>'+
+   '<h2>Die fünf täglichen Gebete</h2><p>Standortbasierte Zeiten aus unserer bestehenden Berechnung.</p></div>'+
+   '<button type="button" class="dar-v8-inline-action" data-v8-location aria-label="Standort oder Stadt für die Gebetszeiten auswählen">Standort / Stadt ↗</button></div>'+
+   '<div class="dar-v8-prayer-live" aria-label="Nächstes Gebet und Countdown">'+
+   '<div><span>NÄCHSTES GEBET</span><strong data-v8-next-prayer>—</strong><small data-v8-next-time>Standort wird geladen</small></div>'+
+   '<div><span>VERBLEIBENDE ZEIT</span><strong data-v8-live-countdown>--:--:--</strong></div></div>'+
    '<div class="dar-v8-prayer-grid">'+
    [["fajr","Fajr"],["dhuhr","Ẓuhr"],["asr","ʿAṣr"],["maghrib","Maġrib"],["isha","ʿIshāʾ"]].map(function(p){return '<div class="dar-v8-prayer-cell"><span>'+p[1]+'</span><strong data-v8-copy-prayer="'+p[0]+'">—</strong></div>'}).join("")+
-   '</div><div class="dar-v8-prayer-status" data-v8-prayer-status>Standort wird vorbereitet …</div>'+
-   '<button type="button" class="dar-v8-inline-action" data-v8-location>Standort auswählen oder aktualisieren ↗</button>'+
+   '</div><div class="dar-v8-prayer-status" data-v8-prayer-status role="status">Standort wird vorbereitet …</div>'+
    '</section>'+footer()
  };
  renders.suche=function(){
