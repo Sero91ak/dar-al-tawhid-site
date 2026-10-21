@@ -1,0 +1,97 @@
+name: DAR Adult Multilingual Manuscripts
+
+on:
+  push:
+    branches:
+      - main
+      - feature/adult-multilingual-core-20261021
+    paths:
+      - 'content/posts/**'
+  workflow_dispatch:
+    inputs:
+      item_id:
+        description: 'Canonical content id (e.g. post:...), empty for first pending'
+        required: false
+        type: string
+      locale:
+        description: 'Draft locale or all'
+        required: false
+        default: all
+        type: choice
+        options: [all, ar, en, tr, ku, ckb, bs]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: dar-i18n-manuscripts-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    if: ${{ vars.DAR_I18N_AI_GENERATE_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate reference catalogs and source state
+        run: |
+          node desktop-preview/i18n-core-v1/validate-core.cjs
+          node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
+      - name: Determine new and stale language jobs (no push)
+        run: node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/worklist.json"
+      - name: Generate changed-post language manuscripts (drafts only)
+        env:
+          DAR_I18N_AI_API_URL: ${{ vars.DAR_I18N_AI_API_URL }}
+          DAR_I18N_AI_MODEL: ${{ vars.DAR_I18N_AI_MODEL }}
+          DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
+          DAR_I18N_PROVIDER_APPROVED: ${{ vars.DAR_I18N_PROVIDER_APPROVED }}
+          SELECT_ID: ${{ inputs.item_id }}
+          SELECT_LOCALE: ${{ inputs.locale }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=(--generate --inventory "$RUNNER_TEMP/worklist.json" --output "$RUNNER_TEMP/generated-drafts" --max-requests 6 --max-source-chars 9000 --max-output-tokens 5000 --locale "${SELECT_LOCALE:-all}")
+          if [[ -n "${SELECT_ID:-}" ]]; then
+            node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs "${args[@]}" --id "$SELECT_ID"
+          elif [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
+            mapfile -t changed < <(git diff --name-only HEAD^ HEAD -- 'content/posts/*.md' | head -n 2)
+            for source_path in "${changed[@]}"; do
+              node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs "${args[@]}" --source-path "$source_path"
+            done
+          else
+            echo "For historical content a specific canonical item_id is required."
+          fi
+      - name: Stage manuscripts as DRAFT pull request on canonical main
+        if: ${{ github.ref == 'refs/heads/main' }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          generated="$RUNNER_TEMP/generated-drafts/desktop-preview/i18n-core-v1/translations"
+          if [[ ! -d "$generated" ]]; then echo "No draft manuscripts."; exit 0; fi
+          mkdir -p desktop-preview/i18n-core-v1/translations
+          cp -R "$generated/." desktop-preview/i18n-core-v1/translations/
+          git add desktop-preview/i18n-core-v1/translations
+          if git diff --cached --quiet; then echo "No new manuscripts."; exit 0; fi
+          branch="i18n/manuscripts-${GITHUB_RUN_ID}"
+          git checkout -b "$branch"
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "chore(i18n): unreviewed multilingual manuscripts"
+          git push origin "HEAD:refs/heads/$branch"
+          gh pr create --base main --head "$branch" --draft --title "DRAFT: Mehrsprachige Beitragsfassungen ${GITHUB_RUN_ID}" --body "Nur redaktionelle Entwürfe. Quellen prüfen, alle sechs Sprachen fachlich freigeben und erst anschließend gesondert veröffentlichen. Keine Änderungen an Push, Gebetszeiten oder Apps."
+      - name: Store review artifacts even when pull-request creation is disabled
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-unapproved-language-manuscripts
+          path: ${{ runner.temp }}/generated-drafts/
+          retention-days: 7
+          if-no-files-found: warn

@@ -8545,6 +8545,17 @@
         "scripts/verify-test-app-deploy.js"
       ],
       "expiresAt": "2026-11-20T23:59:00.000Z"
+    },
+    {
+      "id": "adult-i18n-source-autodraft-ci-20261021",
+      "at": "2026-10-21T12:30:00+02:00",
+      "approvedBy": "user-explicit-20261021-multilingual-pipeline",
+      "reason": "Only read-only adult translation inventory and opt-in cost-gated draft generation workflows; does not modify Push, Kids, native apps, prayer or worker.",
+      "paths": [
+        ".github/workflows/dar-i18n-manuscripts.yml",
+        ".github/workflows/dar-i18n-translation-inventory.yml"
+      ],
+      "expiresAt": "2026-12-31T23:59:00Z"
     }
   ],
   "enabled": true

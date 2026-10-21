@@ -1,0 +1,676 @@
+{
+  "schemaVersion": 1,
+  "kind": "terminology-alias-index",
+  "editorialPolicy": "Search aliases only. NOT theological definitions. Source answers require evidence and translation review.",
+  "matchPolicy": {
+    "exactAliasFirst": true,
+    "rtlArabicNormalization": true,
+    "diacriticNormalization": true,
+    "multiWordNormalization": true,
+    "allowFuzzyForLatin": true,
+    "neverInventAnswer": true
+  },
+  "entries": [
+    {
+      "id": "tawhid",
+      "arabic": "التوحيد",
+      "domain": "ʿAqīdah",
+      "aliases": [
+        "tawhid",
+        "tawḥīd",
+        "tauhid",
+        "tevhid",
+        "tewhid",
+        "tewhîd",
+        "tewhîdê",
+        "تەوحید",
+        "توحيد",
+        "توحید",
+        "التوحيد",
+        "einzigkeit allahs",
+        "einzigkeit gottes",
+        "monotheism",
+        "oneness of allah"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "shirk",
+      "arabic": "الشرك",
+      "domain": "ʿAqīdah",
+      "aliases": [
+        "shirk",
+        "schirk",
+        "širk",
+        "şirk",
+        "schirck",
+        "شرك",
+        "الشرك",
+        "beigesellung",
+        "association of partners"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "iman",
+      "arabic": "الإيمان",
+      "domain": "ʿAqīdah",
+      "aliases": [
+        "iman",
+        "īmān",
+        "iiman",
+        "imân",
+        "imanê",
+        "ایمان",
+        "ئیمان",
+        "ايمان",
+        "الإيمان",
+        "glaube",
+        "glauben",
+        "faith",
+        "belief"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "kufr",
+      "arabic": "الكفر",
+      "domain": "ʿAqīdah",
+      "aliases": [
+        "kufr",
+        "küfür",
+        "kufur",
+        "kufêr",
+        "کفر",
+        "كفر",
+        "الكفر",
+        "unglaube",
+        "disbelief"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "bidah",
+      "arabic": "البدعة",
+      "domain": "Manhaǧ",
+      "aliases": [
+        "bidah",
+        "bidʿah",
+        "bid'a",
+        "bidaah",
+        "bidat",
+        "bid'at",
+        "bidatê",
+        "بدعة",
+        "البدعة",
+        "neuerung",
+        "innovation in religion"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "taghut",
+      "arabic": "الطاغوت",
+      "domain": "ʿAqīdah",
+      "aliases": [
+        "taghut",
+        "ṭāġūt",
+        "tagut",
+        "tağut",
+        "taghout",
+        "taġut",
+        "طاغوت",
+        "الطاغوت",
+        "تاغوت"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "aqidah",
+      "arabic": "العقيدة",
+      "domain": "ʿAqīdah",
+      "aliases": [
+        "aqidah",
+        "aqida",
+        "ʿaqīdah",
+        "akida",
+        "akîde",
+        "akide",
+        "akîda",
+        "عقيدة",
+        "العقيدة",
+        "glaubenslehre",
+        "creed"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "fiqh",
+      "arabic": "الفقه",
+      "domain": "Fiqh",
+      "aliases": [
+        "fiqh",
+        "fikh",
+        "fıkıh",
+        "fikih",
+        "feqih",
+        "fiqih",
+        "فقه",
+        "الفقه",
+        "rechtslehre",
+        "jurisprudence"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "usulfiqh",
+      "arabic": "أصول الفقه",
+      "domain": "Uṣūl",
+      "aliases": [
+        "usul al fiqh",
+        "usul ul fiqh",
+        "uṣūl al-fiqh",
+        "usul fiqh",
+        "usulu'l-fıkıh",
+        "أصول الفقه",
+        "اصول الفقه",
+        "fiqh grundlagen",
+        "principles of jurisprudence"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "usul",
+      "arabic": "الأصول",
+      "domain": "Uṣūl",
+      "aliases": [
+        "usul",
+        "uṣūl",
+        "usûl",
+        "اصول",
+        "الأصول",
+        "grundlagen",
+        "principles"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "asl",
+      "arabic": "الأصل",
+      "domain": "Uṣūl",
+      "aliases": [
+        "asl",
+        "aṣl",
+        "asıl",
+        "اصل",
+        "الأصل",
+        "grundlage",
+        "origin"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "asldin",
+      "arabic": "أصل الدين",
+      "domain": "ʿAqīdah",
+      "aliases": [
+        "asl ad din",
+        "aṣl ad-dīn",
+        "asluddin",
+        "asl al din",
+        "asludin",
+        "أصل الدين",
+        "اصل الدين",
+        "fundament der religion"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "din",
+      "arabic": "الدين",
+      "domain": "ʿAqīdah",
+      "aliases": [
+        "din",
+        "dīn",
+        "deen",
+        "dini",
+        "dîn",
+        "دين",
+        "الدين",
+        "religion",
+        "glaubensweg"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "quran",
+      "arabic": "القرآن",
+      "domain": "Qurʾān",
+      "aliases": [
+        "quran",
+        "qurʾān",
+        "koran",
+        "kur'an",
+        "qur'an",
+        "qur an",
+        "quranê",
+        "قرآن",
+        "القرآن",
+        "قورئان",
+        "kitab allah"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "sunnah",
+      "arabic": "السنة",
+      "domain": "Sunnah",
+      "aliases": [
+        "sunnah",
+        "sunna",
+        "sünnet",
+        "sünneti",
+        "السنة",
+        "سنة",
+        "سوننەت",
+        "prophetische sunnah"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "hadith",
+      "arabic": "الحديث",
+      "domain": "Ḥadīṯ",
+      "aliases": [
+        "hadith",
+        "ḥadīṯ",
+        "hadeeth",
+        "hadis",
+        "hadîs",
+        "حدیث",
+        "حديث",
+        "الحديث",
+        "حەدیث",
+        "überlieferung",
+        "prophetic hadith"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "athar",
+      "arabic": "الأثر",
+      "domain": "Āṯār",
+      "aliases": [
+        "athar",
+        "āṯār",
+        "āthār",
+        "asar",
+        "eseri",
+        "آثار",
+        "أثر",
+        "الأثر",
+        "berichte der salaf",
+        "early reports"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "tafsir",
+      "arabic": "التفسير",
+      "domain": "Tafsīr",
+      "aliases": [
+        "tafsir",
+        "tafsīr",
+        "tefsir",
+        "tefsîr",
+        "تفسير",
+        "التفسير",
+        "koranauslegung",
+        "exegesis"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "tadabbur",
+      "arabic": "التدبر",
+      "domain": "Qurʾān",
+      "aliases": [
+        "tadabbur",
+        "tedebbür",
+        "tadabbur al quran",
+        "تدبر",
+        "التدبر",
+        "nachdenken über quran"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "dua",
+      "arabic": "الدعاء",
+      "domain": "Duʿāʾ",
+      "aliases": [
+        "dua",
+        "duʿāʾ",
+        "duaa",
+        "du'a",
+        "dova",
+        "duayê",
+        "دعاء",
+        "الدعاء",
+        "دوعا",
+        "bittgebet",
+        "supplication"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "salah",
+      "arabic": "الصلاة",
+      "domain": "ʿIbādah",
+      "aliases": [
+        "salah",
+        "salat",
+        "ṣalāh",
+        "ṣalāt",
+        "namaz",
+        "nimêj",
+        "نماز",
+        "صلاة",
+        "الصلاة",
+        "gebet",
+        "prayer"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "ibadah",
+      "arabic": "العبادة",
+      "domain": "ʿIbādah",
+      "aliases": [
+        "ibadah",
+        "ʿibādah",
+        "ibadet",
+        "ʿibādat",
+        "ibadêt",
+        "عبادة",
+        "العبادة",
+        "anbetung",
+        "worship"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "ikhlas",
+      "arabic": "الإخلاص",
+      "domain": "ʿAqīdah",
+      "aliases": [
+        "ikhlas",
+        "ikhlāṣ",
+        "ihlas",
+        "ihlâs",
+        "اخلاص",
+        "الإخلاص",
+        "aufrichtigkeit",
+        "sincerity"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "taqwa",
+      "arabic": "التقوى",
+      "domain": "ʿAqīdah",
+      "aliases": [
+        "taqwa",
+        "taqwā",
+        "takva",
+        "تَقْوَى",
+        "تقوى",
+        "التقوى",
+        "gottesfurcht",
+        "god consciousness"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "ijma",
+      "arabic": "الإجماع",
+      "domain": "Uṣūl",
+      "aliases": [
+        "ijma",
+        "iǧmāʿ",
+        "idschma",
+        "ijmā",
+        "icma",
+        "الإجماع",
+        "اجماع",
+        "konsens",
+        "consensus"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "qiyas",
+      "arabic": "القياس",
+      "domain": "Uṣūl",
+      "aliases": [
+        "qiyas",
+        "qiyās",
+        "kıyas",
+        "qiyasê",
+        "قياس",
+        "القياس",
+        "analogieschluss",
+        "analogy"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "salaf",
+      "arabic": "السلف",
+      "domain": "Manhaǧ",
+      "aliases": [
+        "salaf",
+        "selef",
+        "salaf al salih",
+        "السلف",
+        "السلف الصالح",
+        "frühe generationen",
+        "early muslim generations"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "sahabah",
+      "arabic": "الصحابة",
+      "domain": "Sunnah",
+      "aliases": [
+        "sahaba",
+        "sahabah",
+        "ṣaḥābah",
+        "sahabe",
+        "صحابة",
+        "الصحابة",
+        "gefährten",
+        "companions"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "istighfar",
+      "arabic": "الاستغفار",
+      "domain": "Duʿāʾ",
+      "aliases": [
+        "istighfar",
+        "istiġfār",
+        "istigfar",
+        "istiğfar",
+        "استغفار",
+        "الاستغفار",
+        "vergebung erbitten",
+        "seeking forgiveness"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "sabr",
+      "arabic": "الصبر",
+      "domain": "Aḫlāq",
+      "aliases": [
+        "sabr",
+        "ṣabr",
+        "sabır",
+        "sebîr",
+        "صبر",
+        "الصبر",
+        "geduld",
+        "patience"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "adab",
+      "arabic": "الأدب",
+      "domain": "Aḫlāq",
+      "aliases": [
+        "adab",
+        "edeb",
+        "adabê",
+        "أدب",
+        "الأدب",
+        "benehmen",
+        "etiquette"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "akhlaq",
+      "arabic": "الأخلاق",
+      "domain": "Aḫlāq",
+      "aliases": [
+        "akhlaq",
+        "aḫlāq",
+        "ahlak",
+        "اخلاق",
+        "الأخلاق",
+        "charakter",
+        "morals"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    },
+    {
+      "id": "zakat",
+      "arabic": "الزكاة",
+      "domain": "Fiqh",
+      "aliases": [
+        "zakat",
+        "zakāt",
+        "zekat",
+        "zekât",
+        "زكاة",
+        "الزكاة",
+        "pflichtabgabe",
+        "almsgiving"
+      ],
+      "sourceLanguage": "ar",
+      "definitionStatus": "not_provided",
+      "reviewStatus": "alias-draft",
+      "relatedContentIds": []
+    }
+  ]
+}
