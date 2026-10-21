@@ -385,14 +385,6 @@ const DAR_DYNAMIC_UI_UNITS={
  ckb:{Funktionen:"ئەرک",Ergebnisse:"ئەنجام",Veröffentlichungen:"بڵاوکراوە",Beiträge:"وتار",Seiten:"لاپەڕە",Themenbereiche:"بابەت",Aussagen:"وتە",gemerkt:"پاشەکەوتکراو",Fundstellen:"ئاماژە",Einträge:"تۆمار",Sūren:"سوورەت",Āyāt:"ئایەت",Trefferquote:"ڕێژەی وەڵامی ڕاست",gewählt:"هەڵبژێردراوە"},
  bs:{Funktionen:"funkcija",Ergebnisse:"rezultata",Veröffentlichungen:"objava",Beiträge:"članaka",Seiten:"stranica",Themenbereiche:"tema",Aussagen:"izjava",gemerkt:"sačuvano",Fundstellen:"referenci",Einträge:"unosa",Sūren:"sura",Āyāt:"ajeta",Trefferquote:"uspješnosti",gewählt:"odabrano"}
 };
-const DAR_DYNAMIC_UI_MESSAGES={
- tr:{surah:"Sûre {name} aç",allSurahs:"{n} sûre; Arapça ve okunuşlarıyla.",works:"{n} incelenmiş eser ve atıf yapılan âlim.",duas:"Konulara göre {n} bilinen dua.",statements:"Kaynaklı {n} ifade.",names:"{n} isim ve ilişki."},
- en:{surah:"Open Sūrah {name}",allSurahs:"{n} surahs with Arabic and transliteration.",works:"{n} verified works and cited scholars.",duas:"{n} known supplications by topic.",statements:"{n} statements with sources.",names:"{n} names and relationships."},
- ar:{surah:"فتح سورة {name}",allSurahs:"{n} سورة بالنص العربي واللفظ المنقول.",works:"{n} مؤلفًا موثقًا مع العلماء المنقول عنهم.",duas:"{n} أدعية معروفة بحسب الموضوع.",statements:"{n} أقوال موثقة بالمصادر.",names:"{n} أسماء وصلات."},
- ku:{surah:"Sûreya {name} veke",allSurahs:"{n} sûre bi Erebî û vegotina dengî.",works:"{n} berhemên vekolînkirî û alimên hatine vegotin.",duas:"{n} duayên naskirî li gor mijaran.",statements:"{n} gotin bi çavkaniyan.",names:"{n} nav û têkilî."},
- ckb:{surah:"سوورەتی {name} بکەرەوە",allSurahs:"{n} سوورەت بە عەرەبی و خوێندنەوەی دەنگی.",works:"{n} بەرهەمی پشکنراو و زانایانی ئاماژەپێکراو.",duas:"{n} دوعای ناسراو بەپێی بابەت.",statements:"{n} وتەی بەسەرچاوە.",names:"{n} ناو و پەیوەندی."},
- bs:{surah:"Otvori suru {name}",allSurahs:"{n} sura s arapskim tekstom i transkripcijom.",works:"{n} provjerenih djela i citiranih učenjaka.",duas:"{n} poznatih dova po temama.",statements:"{n} izjava s izvorima.",names:"{n} imena i veza."}
-};
 function darDynamicUILocalize(value,language){
  const units=DAR_DYNAMIC_UI_UNITS[language];
  if(!units)return null;
@@ -427,20 +419,6 @@ function darDynamicUILocalize(value,language){
  if(openAyah){
   const label=language==="tr"?dictionary.get("Im Qurʾān öffnen")||languagePacks.get("tr")?.get("Im Qurʾān öffnen"):languagePacks.get(language)?.get("Im Qurʾān öffnen");
   return label?label+" · "+openAyah[1]:null;
- }
- const template=DAR_DYNAMIC_UI_MESSAGES[language];
- const openSurah=value.match(/^Sūrah ([^<>\n]{2,80}) öffnen$/);
- if(openSurah)return template.surah.replace("{name}",openSurah[1]);
- const countPatterns=[
-  [/^(\d+) Suren mit Arabisch und Lautschrift\.$/,"allSurahs"],
-  [/^(\d+) geprüfte Werke und zitierte Gelehrte\.$/,"works"],
-  [/^(\d+) bekannte Duʿāʾ nach Themen\.$/,"duas"],
-  [/^(\d+) Aussagen mit Quellen\.$/,"statements"],
-  [/^(\d+) Namen und Zuordnungen\.$/,"names"]
- ];
- for(const [pattern,key] of countPatterns){
-  const match=value.match(pattern);
-  if(match)return template[key].replace("{n}",match[1]);
  }
  return null;
 }
