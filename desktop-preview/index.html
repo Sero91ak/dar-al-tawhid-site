@@ -2803,19 +2803,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 
  function darSmartIntro(){return "<section class=\"dar-v8-quick\" aria-label=\"Wissensgrundlagen\"><div class=\"dar-v8-section-bar\"><div><div class=\"dar-v8-section-kicker\">ISLAMISCHES WISSEN · FUNDAMENTE</div><h2>Tawḥīd, Īmān &amp; Shirk</h2><p>Erklärungen aus Qurʾān, Sunnah und den überlieferten Aussagen der Salaf.</p></div><a class=\"desktop-link\" data-page=\"wissen\" href=\"/?page=wissen\">Alle Themen ↗</a></div><div class=\"dar-v8-terms\"><a class=\"dar-v8-term desktop-link\" data-page=\"suche\" href=\"/?page=suche&q=tauhid\"><span class=\"dar-v8-term-ar\" dir=\"rtl\" lang=\"ar\">التوحيد</span><b>Tawḥīd</b><small>Allah allein in der Anbetung verehren</small><em>Erklärung &amp; Belege ↗</em></a><a class=\"dar-v8-term desktop-link\" data-page=\"suche\" href=\"/?page=suche&q=iman\"><span class=\"dar-v8-term-ar\" dir=\"rtl\" lang=\"ar\">الإيمان</span><b>Īmān</b><small>Glaube, Wort und Tat</small><em>Erklärung &amp; Belege ↗</em></a><a class=\"dar-v8-term desktop-link\" data-page=\"suche\" href=\"/?page=suche&q=shirk\"><span class=\"dar-v8-term-ar\" dir=\"rtl\" lang=\"ar\">الشرك</span><b>Shirk</b><small>Beigesellung in der Anbetung</small><em>Erklärung &amp; Belege ↗</em></a></div></section><section class=\"dar-v8-finder\" aria-label=\"Interaktiver Wissenschat\"><div class=\"dar-v8-chat-mark\" aria-hidden=\"true\"><img src=\"/assets/dar-3d-icons/spark.png?v=1095\" alt=\"\" loading=\"lazy\"></div><div class=\"dar-v8-chat-copy\"><div class=\"dar-v8-section-kicker\">INTERAKTIVER WISSENSCHAT · QUELLENFINDER</div><h2>Frag uns zu Qurʾān, Sunnah und Āṯār</h2><p>Schreibe deine Frage. Wir suchen vorhandene Inhalte und überprüfbare Originalfundstellen auf unserer Website.</p><form id=\"darV8FinderForm\" class=\"dar-v8-form\" role=\"search\"><input id=\"darV8FinderQuery\" type=\"search\" required autocomplete=\"off\" maxlength=\"250\" placeholder=\"Hier Frage schreiben …\" aria-label=\"Wissensfrage\"><button type=\"submit\">Quellen finden ↗</button></form></div></section><section class=\"dar-v8-daily\" aria-label=\"Tagesinhalte\"><div class=\"dar-v8-section-bar\"><div><div class=\"dar-v8-section-kicker\">TÄGLICH NEU AUS DEM BESTAND</div><h2>Heute bei DĀR AL TAWḤĪD</h2><p>Beitrag und Duʿāʾ des Tages aus der bestehenden Rotation.</p></div></div><div class=\"dar-v8-dailygrid\" id=\"darV8Daily\"><p>Aktuelle Inhalte werden geladen …</p></div></section><section class=\"dar-v8-library\" aria-label=\"Neueste Bibliothekswerke\"><div class=\"dar-v8-section-bar\"><div><div class=\"dar-v8-section-kicker\">WERKE · PUBLIKATIONEN</div><h2>Zuletzt erschienen</h2></div><a class=\"desktop-link\" data-page=\"bibliothek\" href=\"/?page=bibliothek\">Bibliothek öffnen ↗</a></div><div class=\"dar-v8-bookgrid\" id=\"darV8Books\"><p>Bibliothek wird geladen …</p></div></section>"}
 
- function start(){
-  return darSmartIntro()+
-  ''+
-  '<section class="section parchment reveal"><div class="section-head"><h2>Im Fokus</h2><a class="text-link desktop-link" href="'+p("beitraege")+'" data-page="beitraege">Alle Beiträge</a></div><div class="grid-12"><div class="feature">'+
-  '<a class="rule-card desktop-link" href="'+p("beitrag","id=ibn-sirin")+'" data-page="beitrag"><div class="kicker">ĀṮĀR · QUELLENMETHODIK</div><h3>Dieses Wissen ist Dīn</h3><p>Ibn Sīrīn über die Sorgfalt, von wem religiöses Wissen genommen wird.</p></a>'+
-  '<a class="rule-card desktop-link" href="'+p("quran")+'" data-page="quran"><div class="kicker">QURʾĀN</div><h3>In der Buchansicht weiterlesen</h3><p>Arabisch und Deutsch direkt auf aufgeschlagenen Seiten lesen.</p></a></div><div class="side-stack">'+
-  '<a class="rule-card desktop-link" href="'+p("dua")+'" data-page="dua"><div class="kicker">DUʿĀʾ</div><h3>Bittgebete lesen</h3><p>Arabisch, Lautschrift, Bedeutung und Quelle direkt zusammen.</p></a>'+
-  '<a class="rule-card desktop-link" href="'+p("bibliothek")+'" data-page="bibliothek"><div class="kicker">BIBLIOTHEK</div><h3>Werke und Dossiers</h3><p>Nach Fachgebiet, Autor und Werk geordnet.</p></a></div></div></section>'+
-  '<section class="section reveal"><div class="section-head"><h2>Direkt öffnen</h2><p>Ausgewählte Bereiche</p></div><div class="list-lines">'+
-  '<a class="list-row desktop-link" href="'+p("beitrag","id=ibn-sirin")+'" data-page="beitrag"><span class="meta">Beitrag</span><strong>Dieses Wissen ist Dīn</strong><small>Lesen</small></a>'+
-  '<a class="list-row desktop-link" href="'+p("quran")+'" data-page="quran"><span class="meta">Qurʾān</span><strong>al-Fātiḥah in der Buchansicht</strong><small>Öffnen</small></a>'+
-  '<a class="list-row desktop-link" href="'+p("quellen")+'" data-page="quellen"><span class="meta">Quellen</span><strong>Werke und Direktnachweise</strong><small>Nachschlagen</small></a></div></section>'+androidPwaStartPromo()+footer()
- }
+
  var quranBookState={surah:1,spread:0,pages:[],meta:null,busy:false};
  function escBook(v){return String(v==null?"":v).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
  function arabicDigits(n){return String(n).replace(/\d/g,function(d){return "٠١٢٣٤٥٦٧٨٩"[Number(d)]})}
@@ -2935,7 +2923,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
     '</div>'+
    '</div></section>'+footer()
  }
- var renders={start:start,quran:quran,beitraege:beitraege,beitrag:beitrag,quelle:quelle,dua:dua,wissen:wissen,bibliothek:bibliothek,gebetszeiten:gebetszeiten,mehr:mehr,downloads:downloads,suche:suche,thema:thema,werk:werk,zakat:zakat,quiz:quiz,propheten:propheten,frauen:frauen,quellen:quellen,einstellungen:einstellungen};
+ var renders={start:null,quran:quran,beitraege:beitraege,beitrag:beitrag,quelle:quelle,dua:dua,wissen:wissen,bibliothek:bibliothek,gebetszeiten:gebetszeiten,mehr:mehr,downloads:downloads,suche:suche,thema:thema,werk:werk,zakat:zakat,quiz:quiz,propheten:propheten,frauen:frauen,quellen:quellen,einstellungen:einstellungen};
 
  function currentPage(){return (new URLSearchParams(location.search).get("page")||"start").toLowerCase()}
 
@@ -3876,12 +3864,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  intros.prophet=["PROPHET","Biografie und Belege","Geprüfte Angaben und Qurʾān-Stellen."];
  intros.frauenbereich=["FRAUEN","Geprüfte Inhalte","Aussagen mit Quelle und Direktnachweis."];
 
- renders.start=function(){
-  return darSmartIntro()+
-    '<section class="dar-v8-discover"><div class="dar-v8-section-bar"><div><div class="dar-v8-section-kicker">DEIN WISSENSZENTRUM</div><h2>Alle Bereiche entdecken</h2><p>Jeder Bereich ist direkt zugänglich, mit eigenem Quellen- und Suchkontext.</p></div></div><div class="dar-v8-discover-grid">'+
-    [["quran","Qurʾān","quran.png"],["hadith","Ḥadīṯ","hadith.png"],["beitraege","Beiträge","posts.png"],["dua","Duʿāʾ","dua.png"],["bibliothek","Bibliothek","library.png"],["frauen","Frauen","frauen.png"],["wissen","Wissen","ilm.png"],["gebetszeiten","Gebetszeiten","prayer.png"]].map(function(x){return '<a class="dar-v8-discover-link desktop-link" data-page="'+x[0]+'" href="'+pUrl(x[0])+'"><img src="/assets/dar-3d-icons/'+x[2]+'" alt="" loading="lazy"><strong>'+x[1]+'</strong><span>↗</span></a>'}).join("")+
-    '</div></section>'+footer()
- };
+
  
 renders.beitraege=function(){
   var q=new URLSearchParams(location.search),cat=q.get("cat")||"",cats=[];
@@ -4165,19 +4148,7 @@ renders.beitraege=function(){
     return ai-bi||postCatLabel(a).localeCompare(postCatLabel(b),"de")
   })
  }
- renders.start=function(){
-  var posts=realData.posts.slice(0,4),duas=realData.duas.slice(0,2),pubs=realData.publications.slice(0,4),props=realData.prophets.slice(0,5);
-  var lead=posts[0],rest=posts.slice(1,4);
-  return realIntro("DĀR AL TAWḤĪD","Qurʾān, Sunnah und überliefertes Wissen.","Lies den Qurʾān, höre Rezitation, öffne geprüfte Beiträge, Duʿāʾ, Werke und Quellen.")+
-   '<section class="hero reveal"><div><div class="hero-ar" dir="rtl">ٱهْدِنَا ٱلصِّرَاطَ ٱلْمُسۡتَقِيمَ</div><div class="hero-trans">„Leite uns den geraden Weg.“</div><span class="hero-ref">Qurʾān · al-Fātiḥah 1:6</span></div><div class="hero-note">Qurʾān lesen oder hören, Wissen nachschlagen und Quellen direkt öffnen.</div></section>'+
-   ''+
-   '<section class="focus-editorial reveal"><div class="section-head"><h2>Im Fokus</h2><a class="text-link desktop-link" data-page="beitraege" href="'+pUrl("beitraege")+'">Alle Beiträge</a></div><div class="focus-layout">'+
-   (lead?'<a class="focus-feature desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(lead.id))+'"><div class="eyebrow">'+escBook(postCatLabel(postCatKey(lead.category)))+'</div><h3>'+escBook(cleanTitle(lead.title))+'</h3><p>'+escBook(postExcerpt(lead))+'</p></a>':'')+
-   '<div class="focus-side">'+rest.map(function(x){return '<a class="focus-mini desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'"><div class="eyebrow">'+escBook(postCatLabel(postCatKey(x.category)))+'</div><h3>'+escBook(cleanTitle(x.title))+'</h3><p>'+escBook(x.speaker||x.work||"")+'</p></a>'}).join("")+'</div></div></section>'+
-   '<section class="section reveal"><div class="section-head"><h2>Duʿāʾ</h2><a class="text-link desktop-link" data-page="dua" href="'+pUrl("dua")+'">Alle Duʿāʾ</a></div><div class="two-reading-cols">'+duas.map(function(d){return '<a class="dua-real desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><div class="real-source"><b>Quelle:</b> '+escBook(d.source)+'</div></a>'}).join("")+'</div></section>'+
-   '<section class="section parchment reveal"><div class="section-head"><h2>Bibliothek</h2><a class="text-link desktop-link" data-page="bibliothek" href="'+pUrl("bibliothek")+'">Alle Werke</a></div><div class="real-cover-grid">'+pubs.map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"Publikation")+(b.publishedAt?' · '+escBook(b.publishedAt):"")+'</small></a>'}).join("")+'</div></section>'+
-   '<section class="section reveal"><div class="section-head"><h2>Die Propheten</h2><a class="text-link desktop-link" data-page="propheten" href="'+pUrl("propheten")+'">Alle öffnen</a></div><div class="list-lines">'+props.map(function(x){return '<a class="list-row desktop-link" data-page="prophet" href="'+pUrl("prophet","id="+encodeURIComponent(x.id))+'"><span class="meta">'+(x.uluAlAzm?"Ulū al-ʿAzm":"Prophet")+'</span><strong>'+escBook(x.name)+' '+escBook(x.honorific||"")+'</strong><small>'+escBook(x.people||(x.roles||[]).join(" · "))+'</small></a>'}).join("")+'</div></section>'+footer()
- };
+
  renders.beitraege=function(){
   var q=new URLSearchParams(location.search),cat=q.get("cat")||"",cats=postCategories();
   return realIntro("BEITRÄGE","Aussagen, Erklärungen und Quellen.","Zehn Beiträge pro Seite. Kategorien, Sprecher, Aussagen und Quellen bleiben klar voneinander unterscheidbar.")+
@@ -4698,20 +4669,7 @@ renders.beitraege=function(){
    '<nav class="foundation-more" aria-label="Weitere Grundlagen"><a class="desktop-link" data-page="quran" href="'+pUrl("quran")+'">Qurʾān</a><a class="desktop-link" data-page="beitraege" href="'+pUrl("beitraege","cat=aqidah")+'">ʿAqīdah</a><a class="desktop-link" data-page="beitraege" href="'+pUrl("beitraege","cat=sunnah")+'">Sunnah</a><a class="desktop-link" data-page="beitraege" href="'+pUrl("beitraege","cat=adab")+'">Adab & Akhlāq</a><a class="desktop-link" data-page="beitraege" href="'+pUrl("beitraege","cat=tazkiyah")+'">Tazkiyah</a><a class="desktop-link" data-page="wissen" href="'+pUrl("wissen")+'">Alle Themen</a></nav>'+
   '</section>'
  }
- renders.start=function(){
-  var posts=realData.posts.slice(0,4),duas=realData.duas.slice(0,2),pubs=realData.publications.slice(0,4),props=realData.prophets.slice(0,5);
-  var lead=posts[0],rest=posts.slice(1,4);
-  return realIntro("DĀR AL TAWḤĪD","Qurʾān, Sunnah und überliefertes Wissen.","Beginne mit den Grundlagen des Dīn, lies den Qurʾān und öffne Aussagen mit ihren Quellen.")+
-   '<section class="hero reveal"><div><div class="hero-ar" dir="rtl">ٱهْدِنَا ٱلصِّرَاطَ ٱلْمُسۡتَقِيمَ</div><div class="hero-trans">„Leite uns den geraden Weg.“</div><span class="hero-ref">Qurʾān · al-Fātiḥah 1:6</span></div><div class="hero-note">Tawḥīd und Īmān als Grundlagen, danach Qurʾān, Sunnah, Wissen und Quellen.</div></section>'+
-   ''+
-   foundationSection()+
-   '<section class="focus-editorial reveal"><div class="section-head"><h2>Neu & ausgewählt</h2><a class="text-link desktop-link" data-page="beitraege" href="'+pUrl("beitraege")+'">Alle Beiträge</a></div><div class="focus-layout">'+
-   (lead?'<a class="focus-feature desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(lead.id))+'"><div class="eyebrow">'+escBook(postCatLabel(postCatKey(lead.category)))+'</div><h3>'+escBook(cleanTitle(lead.title))+'</h3><p>'+escBook(postExcerpt(lead))+'</p></a>':'')+
-   '<div class="focus-side">'+rest.map(function(x){return '<a class="focus-mini desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'"><div class="eyebrow">'+escBook(postCatLabel(postCatKey(x.category)))+'</div><h3>'+escBook(cleanTitle(x.title))+'</h3><p>'+escBook(x.speaker||x.work||"")+'</p></a>'}).join("")+'</div></div></section>'+
-   '<section class="section reveal"><div class="section-head"><h2>Duʿāʾ</h2><a class="text-link desktop-link" data-page="dua" href="'+pUrl("dua")+'">Alle Duʿāʾ</a></div><div class="two-reading-cols">'+duas.map(function(d){return '<a class="dua-real desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><div class="real-source"><b>Quelle:</b> '+escBook(d.source)+'</div></a>'}).join("")+'</div></section>'+
-   '<section class="section parchment reveal"><div class="section-head"><h2>Bibliothek</h2><a class="text-link desktop-link" data-page="bibliothek" href="'+pUrl("bibliothek")+'">Alle Werke</a></div><div class="real-cover-grid">'+pubs.map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"Publikation")+(b.publishedAt?' · '+escBook(b.publishedAt):"")+'</small></a>'}).join("")+'</div></section>'+
-   '<section class="section reveal"><div class="section-head"><h2>Die Propheten</h2><a class="text-link desktop-link" data-page="propheten" href="'+pUrl("propheten")+'">Alle öffnen</a></div><div class="list-lines">'+props.map(function(x){return '<a class="list-row desktop-link" data-page="prophet" href="'+pUrl("prophet","id="+encodeURIComponent(x.id))+'"><span class="meta">'+(x.uluAlAzm?"Ulū al-ʿAzm":"Prophet")+'</span><strong>'+escBook(x.name)+' '+escBook(x.honorific||"")+'</strong><small>'+escBook(x.people||(x.roles||[]).join(" · "))+'</small></a>'}).join("")+'</div></section>'+footer()
- };
+
 
  // --- Homepage foundations v13 ---
  function foundationPostMatch(needles,limit){
