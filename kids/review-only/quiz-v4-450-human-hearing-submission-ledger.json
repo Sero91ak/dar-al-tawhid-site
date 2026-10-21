@@ -3,7 +3,7 @@
   "scope": "TAWHID_KIDS_450_PRIVATE_SELF_ATTESTED_HEARING_SUBMISSIONS",
   "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "modelId": "eleven_v4",
-  "knownRealV4TextClips": 757,
+  "knownRealV4TextClips": 752,
   "ageSubmitted": [],
   "claimedApprovalClipCount": 0,
   "submittedIssueClipCount": 0,
@@ -30,7 +30,7 @@
     },
     "9-10": {
       "questions": 150,
-      "fourPartTechnical": 118,
+      "fourPartTechnical": 115,
       "allFourSelfAttestedUnverified": 0,
       "questionsWithReportedIssue": 0
     }
@@ -776,7 +776,8 @@
       "selfAttestedParts": [],
       "reportedIssueParts": [],
       "missingOriginalParts": [
-        "explanation"
+        "explanation",
+        "question"
       ],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
@@ -2624,7 +2625,8 @@
       "selfAttestedParts": [],
       "reportedIssueParts": [],
       "missingOriginalParts": [
-        "explanation"
+        "explanation",
+        "question"
       ],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
@@ -3753,7 +3755,9 @@
       "ageBand": "9-10",
       "selfAttestedParts": [],
       "reportedIssueParts": [],
-      "missingOriginalParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
     },
@@ -3933,7 +3937,9 @@
       "ageBand": "9-10",
       "selfAttestedParts": [],
       "reportedIssueParts": [],
-      "missingOriginalParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
     },
@@ -3949,7 +3955,9 @@
       "ageBand": "9-10",
       "selfAttestedParts": [],
       "reportedIssueParts": [],
-      "missingOriginalParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
       "fourPartSelfAttestedPendingIdentityReview": false,
       "publicPlaybackApproved": false
     },
