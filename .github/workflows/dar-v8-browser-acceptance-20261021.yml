@@ -1,0 +1,124 @@
+name: DĀR V8 Browser Acceptance
+on:
+  push:
+    branches:
+      - review/browser-v8-preview-isolation-20261021
+    paths:
+      - 'desktop-preview/**'
+      - '.github/workflows/dar-v8-browser-acceptance-20261021.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'desktop-preview/**'
+      - '.github/workflows/dar-v8-browser-acceptance-20261021.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    # Only test the isolated V8 browser review lane.
+    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021'
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Static integrity and script syntax
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const html=fs.readFileSync('desktop-preview/index.html','utf8');
+          const route=fs.readFileSync('desktop-preview/assets/dar-v8-route-platform.js','utf8');
+          new Function(route);
+          const scripts=[...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
+            .filter(x=>!/(?:^|\s)src\s*=/.test(x[1])&&x[2].trim());
+          for(const s of scripts)new Function(s[2]);
+          for(const id of ['darV8Sidebar','darV8BreadLabel','darV8TopWelcome','darV8PrayerStrip','darV8MobileDock','darV8MoreSheet','qaAudio','qaReciter','pageRoot']){
+            if(!html.includes('id="'+id+'"'))throw Error('Missing '+id);
+          }
+          if((html.match(/renders\.start=function/g)||[]).length!==1)throw Error('Duplicate homepage renderer');
+          if(html.includes('<header class="site-header"'))throw Error('Legacy duplicate desktop header');
+          for(const key of ['home','quran','posts','hadith','dua','ilm','library','frauen','prayer','spark','more']){
+            if(!fs.existsSync('assets/dar-3d-icons/'+key+'.png'))throw Error('Missing 3D icon '+key);
+          }
+          console.log('OK: '+scripts.length+' browser scripts, router and all V8 DOM/icon contracts');
+          NODE
+      - name: Start local site
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-v8-browser.log 2>&1 &
+          sleep 2
+      - name: Check actual Chrome DOM and interactions on all viewports
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 - <<'PY'
+          import os,json,time
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.support.ui import WebDriverWait
+          output='/tmp/dar-v8-acceptance';os.makedirs(output,exist_ok=True)
+          opt=Options()
+          for flag in ['--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--hide-scrollbars']:
+              opt.add_argument(flag)
+          driver=webdriver.Chrome(options=opt)
+          routes=['start','quran','beitraege','hadith','wissen','suche','bibliothek','frauen','dua','gebetszeiten','mehr','quiz']
+          devices=[('desktop',1440,900),('phone',393,852),('fold',840,900)]
+          try:
+            for device,width,height in devices:
+              driver.set_window_size(width,height)
+              for page in routes:
+                driver.get('http://127.0.0.1:8765/desktop-preview/index.html?page='+page)
+                WebDriverWait(driver,25).until(lambda d:d.execute_script('return document.body.dataset.darV8Route===arguments[0] && document.querySelector("#pageRoot")?.innerHTML.length>30',page))
+                state=driver.execute_script("""const one=s=>document.querySelector(s), style=s=>getComputedStyle(one(s)).display;
+                  return {route:document.body.dataset.darV8Route,
+                    overflow:document.documentElement.scrollWidth-innerWidth,
+                    side:style('#darV8Sidebar'),dock:style('#darV8MobileDock'),
+                    dockLinks:document.querySelectorAll('#darV8MobileDock a').length,
+                    hero:one('#pageRoot .dar-v8-route-hero')!==null,
+                    welcome:style('#darV8TopWelcome'),
+                    prayer:one('#darV8PrayerOverview')!==null,
+                    hadith:one('#darV8HadithResults')!==null,
+                    chat:one('#darV8ChatForm')!==null};
+                """)
+                print(json.dumps({'device':device,**state},ensure_ascii=False),flush=True)
+                if state['overflow']>4:raise RuntimeError('Horizontal overflow: '+str(state))
+                if state['dockLinks']!=4:raise RuntimeError('Expected four bottom links plus More: '+str(state))
+                if (device=='desktop')!=(state['side']=='flex'):raise RuntimeError('Sidebar breakpoint: '+str(state))
+                if (device!='desktop')!=(state['dock']!='none'):raise RuntimeError('Dock breakpoint: '+str(state))
+                if page!='start' and not state['hero']:raise RuntimeError('V8 route hero missing: '+page)
+                if page!='start' and state['welcome']!='none':raise RuntimeError('Duplicate greeting on '+page)
+                if page=='gebetszeiten' and not state['prayer']:raise RuntimeError('Prayer page still legacy')
+                if page=='hadith' and not state['hadith']:raise RuntimeError('Hadith page missing')
+                if page=='suche' and not state['chat']:raise RuntimeError('Chat page missing')
+                if page in ['start','suche','gebetszeiten','quran','frauen','hadith','mehr']:
+                  driver.save_screenshot(output+'/'+device+'-'+page+'.png')
+              driver.get('http://127.0.0.1:8765/desktop-preview/index.html?page=start')
+              WebDriverWait(driver,25).until(lambda d:bool(d.find_elements(By.ID,'darV8PlayerExpand')))
+              driver.find_element(By.ID,'darV8PlayerExpand').click()
+              expanded=driver.execute_script("return document.getElementById('darV8PlayerExpand').getAttribute('aria-expanded')")
+              if expanded!='true':raise RuntimeError('Mini player expand did not respond')
+              if device!='desktop':
+                driver.find_element(By.ID,'darV8MoreToggle').click()
+                visible=driver.execute_script("return document.getElementById('darV8MoreSheet').hidden")
+                if visible:raise RuntimeError('More sheet did not open')
+                driver.find_element(By.CSS_SELECTOR,'#darV8MoreSheet [data-page="suche"]').click()
+                WebDriverWait(driver,25).until(lambda d:d.execute_script('return document.body.dataset.darV8Route==="suche"'))
+              else:
+                driver.find_element(By.CSS_SELECTOR,'.dar-v8-top-search').click()
+                WebDriverWait(driver,25).until(lambda d:d.execute_script('return document.body.dataset.darV8Route==="suche"'))
+              driver.find_element(By.CSS_SELECTOR,'[data-v8-ask="Was ist Tawḥīd?"]').click()
+              answer=driver.execute_script("return !!document.querySelector('#darV8ChatSummary strong') && document.getElementById('siteSearch').value.length>0")
+              if not answer:raise RuntimeError('Source chat examples not wired')
+            print('PASS: all 36 route/device configurations, navigation, More, player and source chat')
+          finally:
+            driver.quit()
+          PY
+      - name: Save screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-v8-browser-acceptance-shots
+          path: /tmp/dar-v8-acceptance/*.png
+          retention-days: 7
+          if-no-files-found: warn
