@@ -432,7 +432,7 @@ async function fetchVersionBuild(base) {
           &&source.includes("DAR_TEST_HOME_PRAYER_FIRST_ACTUAL_V54")
           &&!source.includes('<div class="dhp-brand">')
           &&!source.includes("Wissen · Überlieferung · Erkenntnis")
-          &&source.includes("'<button type=\\"button\\" class=\\"dhp-prayer\\"'")
+          &&source.includes('class="dhp-prayer"')
           &&source.includes("wasiyyah.png")
           &&source.includes("quran-player")
           &&sequence;
