@@ -72,7 +72,7 @@ jobs:
                   return {route:document.body.dataset.darV8Route,overflow:document.documentElement.scrollWidth-innerWidth,
                   sidebar:getComputedStyle(side).display,doc:getComputedStyle(dock).display,dockCount:dock.querySelectorAll('a').length,
                   hero:hero?{display:getComputedStyle(hero).display,height:hero.getBoundingClientRect().height,icon:!!hero.querySelector('img')}:null,
-                  content:$('#pageRoot').innerText.slice(0,110),active:active};
+                  content:$('#pageRoot')?.innerText?.slice(0,110)||'missing',active:active};
                 """)
                 if state['overflow']>3: raise RuntimeError(name+' '+route+' horizontal overflow '+str(state))
                 if state['dockCount']!=6: raise RuntimeError(name+' '+route+' missing 6-tab dock '+str(state))
