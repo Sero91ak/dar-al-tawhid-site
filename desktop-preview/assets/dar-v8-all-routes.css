@@ -244,3 +244,12 @@ body.desktop-overhaul-v18 :is(.dar-v8-side-link,.dar-v8-mobile-dock a,.dar-v8-mo
   padding-bottom:calc(110px + env(safe-area-inset-bottom))!important
  }
 }
+
+/* Topic questions must remain reachable when the mobile bottom dock is fixed. */
+@media(max-width:959px){
+ body.desktop-overhaul-v18 .dar-v8-chat-samples,
+ body.desktop-overhaul-v18 .dar-v8-chat-samples button{
+  scroll-margin-top:90px;
+  scroll-margin-bottom:calc(120px + env(safe-area-inset-bottom))
+ }
+}
