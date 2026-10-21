@@ -3,7 +3,7 @@
   "app": "TAWḤĪD KIDS",
   "branch": "review/kids-quiz-v4-batch-001-020-20261014",
   "pullRequest": "https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143",
-  "basedOnReviewedCommit": "2ccd87f9cb5acd2703747f53b502d6b6c199b88d",
+  "basedOnReviewedCommit": "ff5de41ab4a7ffc85b872e49109500d52918ffe5",
   "modelId": "eleven_v4",
   "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "totalCanonicalQuestions": 900,
@@ -28,37 +28,37 @@
     },
     "7-8": {
       "questions": 150,
-      "completeFourPartQuestions": 129,
+      "completeFourPartQuestions": 131,
       "availableParts": {
-        "question": 139,
+        "question": 141,
         "correct": 150,
         "retry": 150,
-        "explanation": 134
+        "explanation": 135
       },
       "missingParts": {
-        "explanation": 16,
-        "question": 11
+        "explanation": 15,
+        "question": 9
       }
     },
     "9-10": {
       "questions": 150,
-      "completeFourPartQuestions": 115,
+      "completeFourPartQuestions": 116,
       "availableParts": {
-        "question": 131,
+        "question": 135,
         "correct": 150,
         "retry": 150,
-        "explanation": 123
+        "explanation": 124
       },
       "missingParts": {
-        "explanation": 27,
-        "question": 19
+        "explanation": 26,
+        "question": 15
       }
     }
   },
-  "uniqueVerifiedQuizMP3s": 755,
-  "reusedSpeechPartAssignments": 1545,
-  "fourPartAudioQuestions": 314,
-  "missingPartsQuestions": 136,
+  "uniqueVerifiedQuizMP3s": 763,
+  "reusedSpeechPartAssignments": 1553,
+  "fourPartAudioQuestions": 317,
+  "missingPartsQuestions": 133,
   "remainingNewV4UniqueSegmentsByCostAudit": 75,
   "remainingNewV4TextCodepoints": 5068,
   "older300CompactSpokenDraftCount": 300,
@@ -102,7 +102,7 @@
   "olderStage1NewTextTakesNotPreviouslyReserved": 4,
   "olderStage1NextExactOriginalCount": 4,
   "olderStage1NextEstimatedCredits": 218.04,
-  "olderStage1NextExactBatchFingerprintSHA256": "5baec27e64796a07596a01a2958461ca442a6c84456ed86b629ee53647887651",
+  "olderStage1NextExactBatchFingerprintSHA256": "14e7d8770294163bd565004438e6420683095b3cbe007581b346da0260708741",
   "olderStage1RequiresFreshCanonicalSourceAudit": true,
   "olderStage1RequiresExactBatchFingerprintForPaidRun": true,
   "olderStage1CostForecastUnconfirmed": true,

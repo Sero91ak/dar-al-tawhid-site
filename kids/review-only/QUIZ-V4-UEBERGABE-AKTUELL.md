@@ -6,16 +6,16 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `2ccd87f9cb5acd2703747f53b502d6b6c199b88d`
+- Commit beim Erstellen dieses Berichts: `ff5de41ab4a7ffc85b872e49109500d52918ffe5`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
-- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **755 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1545 Frage-/Lob-/Retry-/Erklärungsteile**.
-- Technisch vierteilig vollständig: **314/450**, noch unvollständig: **136/450**.
+- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **763 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1553 Frage-/Lob-/Retry-/Erklärungsteile**.
+- Technisch vierteilig vollständig: **317/450**, noch unvollständig: **133/450**.
 - Letzter V4-Kostenaudit: **75 neue Sprachfragmente** = **5068 Unicode-Zeichen**; **0 neue Lob-/Retry-Fragmente**, **0 neue V4-Texte für 4–6 Jahre**.
 - Prioritätsliste nach letztem MP3-Import neu berechnen; ursprüngliche V4-Quellen bleiben geschützt.
 - Alter 4-6: **70/150** komplett; vorhandene Hörteile question=100, correct=85, retry=85, explanation=148.
-- Alter 7-8: **129/150** komplett; vorhandene Hörteile question=139, correct=150, retry=150, explanation=134.
-- Alter 9-10: **115/150** komplett; vorhandene Hörteile question=131, correct=150, retry=150, explanation=123.
+- Alter 7-8: **131/150** komplett; vorhandene Hörteile question=141, correct=150, retry=150, explanation=135.
+- Alter 9-10: **116/150** komplett; vorhandene Hörteile question=135, correct=150, retry=150, explanation=124.
 - Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **47 importiert**, **9 noch ohne heruntergeladene Original-MP3-Datei**.
 - Zusätzlich im Originalregister: **1743 Textschlüssel**, davon **1696 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
 - Erste neue V4-Aufnahmerunde für ältere Kinder: **21 ECHTE Original-MP3s** mit **21 eindeutigen Anbieter-Anfragebelegen**; dafür geschätzte **486.47 Credits**. **Tatsächliche Provider-Abbuchung bisher NICHT abgeglichen**.
@@ -127,7 +127,7 @@ Nur nach wirklicher inhaltlicher und finanzieller Freigabe neue V4-Stimmenaufnah
 Aktuelle zusätzliche Schutzregel: Der V4-Quellenprüfer muss auch nach bereits gespeicherten Teil-Batches mit 55, 45 usw. fehlenden Originalen erneut bestehen. Die kostenpflichtige Stufe berechnet dafür jedes Mal einen SHA-256-Fingerabdruck aus Originalquelle, gespeicherten MP3-Zuordnungen, vorherigen Kostenbelegen und den nächsten genauen Sprechtext-SHAs.
 Nur wenn der ausdrücklich bestätigte Batch-Fingerabdruck exakt zur neu geprüften Quelle und zum aktuellen Ledger passt, darf der Produktionscode überhaupt eine Anfrage an ElevenLabs senden. Bei Abweichung: STOP vor Provider-GET oder TTS-POST; keine stillschweigende Kreditfreigabe.
 Zusätzliche Absicherung: unmittelbar VOR jedem potenziell kostenpflichtigen POST schreibt der Generator einen als UNBESTÄTIGT markierten SHA-/Batch-Eintrag in `kids/data/quiz-v4-older-stage1-request-journal.json` und spiegelt ihn in `kids/data/quiz-v4-older-stage1-usage.json`. Die Usage-Datei ist bereits Teil des GitHub-Actions-Backups mit `if: always()`. Nach erhaltenen originalen MP3-Bytes werden Ledger und Originalregister atomar gespeichert; eine unsichere frühere Abrechnung oder unterbrochene Anfrage verbietet jede erneute Generierung derselben Sprachaufnahme, bis die Originaldatei/Provider-Abbuchung geklärt wurde.
-Aktuell im Reviewprotokoll vorhandener Fingerabdruck: `5baec27e64796a07596a01a2958461ca442a6c84456ed86b629ee53647887651`. Nach jeder MP3-Ergänzung erneut berechnen.
+Aktuell im Reviewprotokoll vorhandener Fingerabdruck: `14e7d8770294163bd565004438e6420683095b3cbe007581b346da0260708741`. Nach jeder MP3-Ergänzung erneut berechnen.
 
 ## Sicherer echter V4-Originalabruf und Kostenschutz bei Unterbrechung
 
