@@ -141,8 +141,16 @@ def build_canonical_v4_payload(spoken, *, language="de"):
 
 def original_mp3(key,spoken,*,language="de"):
     hold=load(PRONUNCIATION_HOLD)
-    if hold.get("productionPaused") is not False or hold.get("dictionaryProviderVerified") is not True or hold.get("ownerRestartAuthorized") is not True:
-        raise RuntimeError("PRONUNCIATION_HOLD: no paid V4 until current 10,099-rule lexicon, Fuṣḥā and explicit owner restart are verified")
+    if (hold.get("productionPaused") is not False
+        or hold.get("paidSpeechAuthorized") is not True
+        or hold.get("humanPronunciationApproved") is not True
+        or hold.get("dictionaryProviderVerified") is not True
+        or hold.get("ownerRestartAuthorized") is not True):
+        raise RuntimeError(
+            "PRONUNCIATION_HOLD: owner rejected Quran/Fuṣḥā pronunciation; "
+            "no charged V4 generation until a verified and personally accepted "
+            "auditory pilot plus fresh owner authorization"
+        )
     # This is the common paid HTTP POST used by multiple old workflows.
     # NO workflow may quietly render 20+ new takes while the first correctly
     # dictionary-bound recording still awaits the user's hearing verdict.
