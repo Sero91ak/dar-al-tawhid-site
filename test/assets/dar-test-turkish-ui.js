@@ -168,6 +168,40 @@ const EXTRA_ENTRIES=[
 ["App, Qurʾān, Duʿāʾ und Beiträge","Uygulama, Kur'ân, dua ve yazılar"]
 ];
 const dictionary=new Map([...ENTRIES,...EXTRA_ENTRIES]),backward=new Map(),ambiguous=new Set();
+/* Optional central interface catalog: one static asset, no client AI or paid calls.
+   Existing reviewed manual phrases take precedence; Arabic/source text excluded below. */
+const manualKeys=new Set(dictionary.keys());
+let remoteCatalogState="not-loaded";
+const CATALOG_PATH="/test/i18n/ui-tr.generated.json";
+function catalogSafe(de,tr){
+ if(typeof de!=="string"||typeof tr!=="string")return false;
+ if(de.trim()!==de||tr.trim()!==tr||de.length<2||de.length>180||tr.length<1||tr.length>220)return false;
+ if(/[\u0600-\u06ff]/.test(de)||/[<>]/.test(de+tr))return false;
+ if(/https?:\/\/|[\r\n]/.test(de+tr))return false;
+ return true;
+}
+async function loadCatalog(fetcher=global.fetch?.bind(global)){
+ if(remoteCatalogState==="loaded")return dictionary.size;
+ if(typeof fetcher!=="function"){remoteCatalogState="unavailable";return dictionary.size}
+ remoteCatalogState="loading";
+ try{
+  const response=await fetcher(CATALOG_PATH,{credentials:"same-origin",cache:"no-store"});
+  if(!response?.ok)throw Error("Catalog unavailable");
+  const data=await response.json();
+  if(data?.schemaVersion!==1||data.locale!=="tr"||data.sourceLocale!=="de"||
+     data.scope!=="adult-test-ui-only"||!data.entries||typeof data.entries!=="object"||
+     Array.isArray(data.entries))throw Error("Invalid UI catalog");
+  let added=0;
+  for(const [de,tr] of Object.entries(data.entries)){
+   if(!catalogSafe(de,tr)||manualKeys.has(de))continue;
+   dictionary.set(de,tr);added++;
+  }
+  remoteCatalogState="loaded";
+  schedule();
+  return dictionary.size;
+ }catch(_){remoteCatalogState="unavailable";return dictionary.size}
+}
+
 function translateExact(value){
  const known=dictionary.get(value);
  if(known!==undefined)return known;
@@ -242,6 +276,7 @@ function schedule(){
  else Promise.resolve().then(run);
 }
 function boot(){
+ loadCatalog();
  schedule();
  if(!global.MutationObserver||!global.document?.body)return;
  new global.MutationObserver(changes=>{
@@ -262,6 +297,9 @@ if(typeof global.document?.createElement==="function"&&global.document.head&&
  tag.defer=true;
  global.document.head.appendChild(tag);
 }
-global.DarTestTurkishUI={apply,schedule,locale:currentLocale,translatedKeys:dictionary.size,
+global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,
+  get translatedKeys(){return dictionary.size},
+  get catalogStatus(){return remoteCatalogState},
+  hasTranslation:(de)=>dictionary.has(de),
   contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};
 })(window);
