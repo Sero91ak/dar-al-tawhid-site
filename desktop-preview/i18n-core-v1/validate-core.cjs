@@ -3,12 +3,16 @@
 const assert=require("node:assert/strict"),fs=require("node:fs"),path=require("node:path");
 const load=p=>JSON.parse(fs.readFileSync(path.join(__dirname,p),"utf8"));
 const l=load("locales.json"),t=load("terms.json"),s=load("source-examples.json");
-const supported=["de","ar","en","tr","ku","ckb","bs"];
-assert.equal(l.schemaVersion,1);assert.deepEqual(Object.keys(l.locales).sort(),supported.sort());
+const initial=["de","ar","en","tr","ku","ckb","bs"];
+const supported=Object.keys(l.locales);
+assert.equal(l.schemaVersion,1);
+assert.equal(l.defaultLocale,"de");
+for(const code of initial)assert(l.locales[code],"required initial locale "+code);
 const expected=Object.keys(l.locales.de.messages);
 for(const code of supported){
  const x=l.locales[code];assert(x.name&&x.dir);
- assert.equal(x.dir,["ar","ckb"].includes(code)?"rtl":"ltr",code+" direction");
+ assert(["ltr","rtl"].includes(x.dir),code+" direction must be declared");
+ if(["ar","ckb"].includes(code))assert.equal(x.dir,"rtl",code+" right-to-left direction");
  for(const key of expected)assert(typeof x.messages[key]==="string"&&x.messages[key].trim(),code+" "+key);
  assert.equal(Object.keys(x.messages).length,expected.length,code+" keys");
 }
@@ -30,4 +34,4 @@ for(const v of s.records){
  assert(v.id&&v.title&&v.reference,"source should have title, stable id and reference");
  for(const code of supported.filter(x=>x!=="de"))assert.notEqual(v.translationStatus?.[code],"approved","preview cannot publish unreviewed translations");
 }
-console.log("PASS: 7 locale catalogs; "+expected.length+" keys each; "+t.entries.length+" terms; "+aliasSeen.size+" aliases; "+s.records.length+" grounded sample records.");
+console.log("PASS: "+supported.length+" locale catalogs; "+expected.length+" keys each; "+t.entries.length+" terms; "+aliasSeen.size+" aliases; "+s.records.length+" grounded sample records.");
