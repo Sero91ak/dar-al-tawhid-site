@@ -8641,6 +8641,19 @@
         "cloudflare/test-app-worker.js"
       ],
       "expiresAt": "2026-11-21T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-actual-html-parity-prayer-first-v54-20261021",
+      "at": "2026-10-21T22:56:00+02:00",
+      "approvedBy": "user-explicit-second-home-brand-remove-prayer-first-20261021",
+      "reason": "Fix actual visible /test Home parity renderer, remove its duplicated brand+tagline, place dynamic prayer card first, refresh version and verify live both origins; do not touch visitor native or Kids.",
+      "paths": [
+        "test/assets/dar-home-html-parity-v1.js",
+        "cloudflare/test-app-worker.js",
+        "scripts/verify-test-app-deploy.js",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-11-21T23:59:00.000Z"
     }
   ],
   "enabled": true
