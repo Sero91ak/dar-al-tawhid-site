@@ -1,0 +1,67 @@
+name: DAR Turkish First OpenAI Draft
+on:
+  push:
+    branches:
+      - feature/tr-openai-first-draft-20261021
+    paths:
+      - .github/workflows/dar-tr-first-openai-draft.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  translate-one-draft:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Canonical source inventory
+        shell: bash
+        run: |
+          node desktop-preview/i18n-core-v1/validate-core.cjs
+          node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/tr-worklist.json"
+      - name: Produce exactly one Turkish DRAFT (not published)
+        shell: bash
+        env:
+          DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
+          DAR_I18N_AI_API_URL: https://api.openai.com/v1/chat/completions
+          DAR_I18N_AI_MODEL: gpt-5.6-terra
+          DAR_I18N_PROVIDER_APPROVED: 'yes'
+        run: |
+          set -euo pipefail
+          test -n "${DAR_I18N_AI_API_KEY:-}" || { echo "::error::Missing private OpenAI API key"; exit 1; }
+          node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs \
+            --generate \
+            --inventory "$RUNNER_TEMP/tr-worklist.json" \
+            --output "$RUNNER_TEMP/tr-draft-output" \
+            --max-requests 1 \
+            --max-output-tokens 2400 \
+            --max-source-chars 9000 \
+            --locale tr \
+            --id post:imam-shafii-wahrheit-vor-meinung-462
+      - name: Verify generated draft remains unpublished
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'),path=require('path');
+          const root=path.join(process.env.RUNNER_TEMP,'tr-draft-output');
+          let hits=[];
+          function visit(dir){if(!fs.existsSync(dir))return;for(const d of fs.readdirSync(dir,{withFileTypes:true})){const p=path.join(dir,d.name);if(d.isDirectory())visit(p);else if(d.name.endsWith('.json'))hits.push(p);}}
+          visit(root);
+          if(hits.length!==1)throw Error('Expected exactly one DRAFT, got '+hits.length);
+          const data=JSON.parse(fs.readFileSync(hits[0],'utf8'));
+          if(data.locale!=='tr'||data.status!=='draft'||data.id!=='post:imam-shafii-wahrheit-vor-meinung-462'||!data.sourceHash||!data.fields?.body)throw Error('Invalid Turkish draft metadata');
+          if(data.reviewer!==null)throw Error('Generated text must not claim editorial approval');
+          const u=data.modelUsage||{};
+          console.log('PASS: one Turkish review-only manuscript; model='+data.model+'; input_tokens='+(u.prompt_tokens||0)+' output_tokens='+(u.completion_tokens||0));
+          NODE
+      - name: Save review-only translation artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-turkish-single-unapproved-draft
+          path: ${{ runner.temp }}/tr-draft-output/
+          retention-days: 7
+          if-no-files-found: warn
