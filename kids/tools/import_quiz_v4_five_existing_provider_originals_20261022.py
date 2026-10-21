@@ -24,12 +24,12 @@ def main():
     inputs=load(INPUT)
     ok(inputs["scope"]=="KIDS_V4_FIVE_PREGENERATED_REVIEW_ONLY" and inputs["newSpeechRequests"]==0 and inputs["publicRelease"] is False,"unsafe delivery scope")
     items=inputs["items"]
-    ok(len(items)==5,"not the specified five existing originals")
+    ok(len(items)==6,"not the specified six existing originals")
     ok(len(set(x["textSha256"] for x in items))==5 and len(set(x["generationId"] for x in items))==5,"duplicate audio source")
     reg,priority,connected=load(REG),load(PRIORITY),load(CONNECTED)
     ok(reg.get("live") is False and reg.get("voiceId")==VOICE and reg.get("modelId")=="eleven_v4","wrong registry")
     pendingNew={h for q in priority["possibleNewSpeechPriorityAfterOriginalRecovery"] for h in q["newTextSha256"]}
-    pendingConnected={x["sourceTextSHA256"]:x for x in connected["entries"] if x["status"]=="GENERATED_AWAITING_ORIGINAL_MP3_IMPORT"}
+    pendingConnected={x["sourceTextSHA256"]:x for x in connected["entries"] if x["status"] in ("GENERATED_AWAITING_ORIGINAL_MP3_IMPORT", "GENERATION_SUBMITTED_DO_NOT_RETRY")}
     receipts=[]
     for x in items:
         t=x["text"]
@@ -39,7 +39,8 @@ def main():
         ok(t not in reg["textClips"],"recording is already imported; no duplicate")
         ok(x["modelId"]=="eleven_v4" and x["voiceId"]==VOICE,"unexpected speaker or model")
         if h in pendingConnected:
-            ok(pendingConnected[h]["generationId"]==x["generationId"],"connected provider original ID mismatch")
+            ok(pendingConnected[h].get("generationId") in (None,x["generationId"]),"connected provider original ID mismatch")
+            ok(pendingConnected[h].get("nodeId") in (None,x.get("nodeId")),"source node ID mismatch")
         url=urllib.parse.urlsplit(x["signedSourceUrl"])
         ok(url.scheme=="https" and url.hostname=="storage.googleapis.com" and url.path.endswith("/"+x["generationId"]+"/content.mp3"),"unexpected original source URL")
         ok("X-Goog-Signature" in urllib.parse.parse_qs(url.query),"source URL is not signed")
@@ -69,7 +70,7 @@ def main():
         reg["textClips"][t]=entry
         if h in pendingConnected:
             row=pendingConnected[h]
-            row.update(status="IMPORTED_ORIGINAL_MP3_VERIFIED",originalMP3ImportedIntoGithub=True,
+            row.update(status="IMPORTED_ORIGINAL_MP3_VERIFIED",generationId=x["generationId"],originalMP3ImportedIntoGithub=True,
                 importedMP3SHA256=sha,originalMP3SHA256=sha,originalMP3URL=link,
                 humanListeningApproved=False,publicReleaseAllowed=False)
         receipts.append({"questionId":x["questionId"],"part":x["part"],"generationId":x["generationId"],
@@ -78,6 +79,6 @@ def main():
     save(RESULT,{"scope":"FIVE_V4_EXISTING_ORIGINALS_IMPORTED_REVIEW_ONLY",
         "count":len(receipts),"newSpeechRequests":0,"newSpeechCreditsSpent":0,
         "pronunciationApproved":False,"publicRelease":False,"receipts":receipts})
-    print("IMPORTED_EXISTING_FIVE_V4_ORIGINALS",len(receipts),"TTS_CREDITS=0")
+    print("IMPORTED_EXISTING_SIX_V4_ORIGINALS",len(receipts),"TTS_CREDITS=0")
 
 if __name__=="__main__": main()
