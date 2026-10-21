@@ -59,8 +59,30 @@ function colorLocale(){
  const label=d.getElementById("darV8SourceSearchLabel");if(label)label.textContent=t("searchExplain");
 }
 function selectLanguage(code){if(!supported.includes(code))return;try{localStorage.setItem(KEY,code)}catch(e){}
- colorLocale();w.dispatchEvent(new CustomEvent("dar-v8-locale-changed",{detail:{locale:code}}));
+ colorLocale();renderQuickLanguage();w.dispatchEvent(new CustomEvent("dar-v8-locale-changed",{detail:{locale:code}}));
  const m=d.getElementById("darV8LangMenu");if(m)m.hidden=true;
+}
+function renderQuickLanguage(){
+ if(currentPage!=="start"&&currentPage!=="mehr")return;
+ const host=currentPage==="start"?d.querySelector("#darV8TopWelcome .v8-copy"):d.querySelector("#pageRoot .more-grid");
+ if(!host)return;
+ let bar=d.getElementById("darV8QuickLanguage");
+ if(!bar){
+  bar=d.createElement("div");bar.id="darV8QuickLanguage";bar.className="dar-v8-quick-language";bar.setAttribute("role","group");bar.setAttribute("aria-label","Sprache auswählen / Dil seçimi");
+  const title=d.createElement("span");title.className="dar-v8-quick-language-title";title.textContent="Sprache / Dil";bar.append(title);
+  [["de","Deutsch"],["tr","Türkçe"]].forEach(([code,name])=>{
+   const btn=d.createElement("button");btn.type="button";btn.dataset.v8QuickLocale=code;btn.textContent=name;
+   btn.addEventListener("click",()=>selectLanguage(code));bar.append(btn);
+  });
+  const more=d.createElement("button");more.type="button";more.className="dar-v8-quick-language-more";more.textContent="Weitere Sprachen ▾";more.setAttribute("aria-controls","darV8LangMenu");
+  more.addEventListener("click",()=>{const toggle=d.getElementById("darV8LangToggle");if(toggle)toggle.click()});bar.append(more);
+  if(currentPage==="start")host.append(bar);else host.parentElement.insertBefore(bar,host);
+ }
+ bar.querySelectorAll("[data-v8-quick-locale]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.v8QuickLocale===locale())));
+ const more=bar.querySelector(".dar-v8-quick-language-more");
+ if(more)more.textContent=locale()==="tr"?"Diğer diller ▾":"Weitere Sprachen ▾";
+ const title=bar.querySelector(".dar-v8-quick-language-title");
+ if(title)title.textContent=locale()==="tr"?"Dil / Sprache":"Sprache / Dil";
 }
 function setupLanguages(){
  if(d.getElementById("darV8LangToggle"))return;
@@ -359,7 +381,7 @@ w.addEventListener("dar-v8-locale-changed",updateLocaleNotice);
 
 function init(key){
  if(currentPage && currentPage!==key){closePicker();if(d.body.classList.contains("dar-v8-player-fullscreen"))togglePlayer(false)}
- currentPage=key;setupLanguages();installPlayer();setupVisualViewport();setupTouchPlayerPicker();colorLocale();updateLocaleNotice();
+ currentPage=key;setupLanguages();installPlayer();setupVisualViewport();setupTouchPlayerPicker();colorLocale();renderQuickLanguage();updateLocaleNotice();
  colorLocale();
  if(key==="suche")initChat();
  if(key==="quran")initQuran();
