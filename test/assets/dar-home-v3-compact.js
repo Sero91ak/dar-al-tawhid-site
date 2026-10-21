@@ -34,12 +34,14 @@ const LINKS=[
 const esc=x=>String(x==null?"":x).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
 
 const LANGUAGE_KEY="darAdultPreferredLocaleV1";
-function currentLanguage(){try{return localStorage.getItem(LANGUAGE_KEY)==="tr"?"tr":"de"}catch(_){return"de"}}
+const LANGUAGE_CHOICES=[["de","Deutsch"],["tr","Türkçe"],["en","English"],["ar","العربية"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"]];
+const LANGUAGE_CODES=new Set(LANGUAGE_CHOICES.map(x=>x[0]));
+function currentLanguage(){try{return LANGUAGE_CODES.has(localStorage.getItem(LANGUAGE_KEY))?localStorage.getItem(LANGUAGE_KEY):"de"}catch(_){return"de"}}
 function syncLanguageButtons(){
  document.querySelectorAll("#dv3Home [data-dv3-locale]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.dv3Locale===currentLanguage())));
 }
 function setLanguage(code){
- if(code!=="de"&&code!=="tr")return;
+ if(!LANGUAGE_CODES.has(code))return;
  try{localStorage.setItem(LANGUAGE_KEY,code)}catch(_){}
  syncLanguageButtons();window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:code}}));
 }
@@ -58,7 +60,7 @@ const swatches=THEMES.map(([k,v])=>'<button type="button" data-dv3-theme="'+k+'"
 return '<div id="dv3Home" class="dv3-home" data-v3-version="3.1">'+
   '<div class="dv3-hometitle"><div><small>WILLKOMMEN IM DĀR</small><h2>Startseite</h2></div><button class="dv3-accountlink" type="button" data-dv3-nav="account" aria-label="Konto öffnen oder registrieren">'+icon("lock")+'<span>Konto / Registrieren</span><b>→</b></button></div>'+
   '<div class="dv3-language" role="group" aria-label="Sprache wählen / Dil seçimi"><span>Sprache / Dil</span>'+
- [['de','Deutsch'],['tr','Türkçe']].map(([code,label])=>'<button type="button" data-dv3-locale="'+code+'" aria-pressed="'+(currentLanguage()===code)+'">'+label+'</button>').join('')+
+ LANGUAGE_CHOICES.map(([code,label])=>'<button type="button" data-dv3-locale="'+code+'" aria-pressed="'+(currentLanguage()===code)+'">'+label+'</button>').join('')+
  '</div>'+
   '<div id="dv3Weather" class="dv3-weather" role="status" aria-live="polite">Wetterdaten werden geladen …</div>'+
   '<div class="dv3-search-box"><label class="dv3-search-label" for="homeSearchInput"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7"/><path d="m16 16 5 5"/></svg></label><input id="homeSearchInput" type="search" autocomplete="off" enterkeyhint="search" placeholder="Suche Wissen, Beiträge, Bücher, Gelehrte …" aria-label="Beiträge, Gelehrte und Bücher suchen"><button type="button" id="dv3SearchClear" aria-label="Suche löschen" hidden>×</button></div>'+

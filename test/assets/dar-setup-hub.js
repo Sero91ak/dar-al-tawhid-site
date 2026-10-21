@@ -97,11 +97,14 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
   }
 
   var LOCALE_KEY = "darAdultPreferredLocaleV1";
+  var LOCALE_CHOICES=[["de","Deutsch"],["tr","Türkçe"],["en","English"],["ar","العربية"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"]];
+  var LOCALE_CODES=new Set(LOCALE_CHOICES.map(function(x){return x[0]}));
+  function localeButtons(){return LOCALE_CHOICES.map(function(x){return '<button type="button" data-dar-setup-locale="'+x[0]+'" aria-pressed="'+String(activeLocale()===x[0])+'">'+x[1]+'</button>'}).join("")}
   function activeLocale() {
-    try { return localStorage.getItem(LOCALE_KEY) === "tr" ? "tr" : "de"; } catch (_) { return "de"; }
+    try { return LOCALE_CODES.has(localStorage.getItem(LOCALE_KEY)) ? localStorage.getItem(LOCALE_KEY) : "de"; } catch (_) { return "de"; }
   }
   function applyLocaleChoice(value) {
-    if (value !== "de" && value !== "tr") return;
+    if (!LOCALE_CODES.has(value)) return;
     try { localStorage.setItem(LOCALE_KEY,value); } catch (_) {}
     updateLocaleButtons();
     window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:value}}));
@@ -124,7 +127,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
       '    <p class="dar-setup-hub__sub">Standort, Gebetszeiten, Mitteilungen und Widgets</p>',
       "  </header>",
       '  <div class="dar-setup-hub__list">',
-      '    <div class="dar-setup-hub__row dar-setup-hub__locale-row"><div class="dar-setup-hub__copy"><strong>Sprache · Dil</strong><span>Türkisch und Deutsch auswählen. Fachtexte nur in geprüften Fassungen.</span></div><div class="dar-setup-hub__locale-choices" role="group" aria-label="App-Sprache"><button type="button" data-dar-setup-locale="de" aria-pressed="' + (activeLocale() === "de") + '">Deutsch</button><button type="button" data-dar-setup-locale="tr" aria-pressed="' + (activeLocale() === "tr") + '">Türkçe</button></div></div>',
+      '    <div class="dar-setup-hub__row dar-setup-hub__locale-row"><div class="dar-setup-hub__copy"><strong>Sprache · Dil</strong><span>Türkisch und Deutsch auswählen. Fachtexte nur in geprüften Fassungen.</span></div><div class="dar-setup-hub__locale-choices" role="group" aria-label="App-Sprache">' + localeButtons() + '</div></div>',
       '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Standort</strong><span>Für genaue Gebetszeiten und Widgets</span></div><button type="button" class="' +
         locBtnClass +
         '" data-dar-setup-action="location">Öffnen</button></div>',
@@ -300,8 +303,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
         '<div class="dsh-list"><div class="dsh-row dar-test-settings-locale-row">'+
         '<div class="dsh-row-copy"><strong>Sprache auswählen</strong><small>Türkisch und Deutsch. Fachbeiträge erscheinen erst nach Prüfung in der gewählten Sprache.</small></div>'+
         '<div class="dar-setup-hub__locale-choices" role="group" aria-label="App-Sprache">'+
-        '<button type="button" data-dar-setup-locale="de">Deutsch</button>'+
-        '<button type="button" data-dar-setup-locale="tr">Türkçe</button></div></div></div>';
+        localeButtons()+'</div></div></div>';
       var welcome=home.querySelector(".dsh-welcome");
       if(welcome)welcome.insertAdjacentElement("afterend",block);
       else home.insertBefore(block,home.firstChild);
