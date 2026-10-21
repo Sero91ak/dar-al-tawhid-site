@@ -21,6 +21,34 @@ dialog{padding:0;border:1px solid var(--line);border-radius:19px;width:min(600px
 @media(max-width:940px){.shell{grid-template-columns:minmax(0,1fr)}.sidebar{display:none}.mobile-brand{display:flex;align-items:center;gap:10px;font-family:Georgia,serif;font-size:15px;font-weight:700;white-space:nowrap}.mobile-brand .emblem{height:34px;width:34px;font-size:20px}.crumb{display:none}.topbar{height:73px}.page{padding:0 clamp(18px,4vw,42px) 110px}.main-grid{grid-template-columns:1fr;gap:24px}.rail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.mobile-dock{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:30;justify-content:space-around;gap:4px;background:color-mix(in srgb,var(--panel) 95%,transparent);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:11px 12px calc(11px + env(safe-area-inset-bottom))}.mobile-dock a{display:flex;align-items:center;flex-direction:column;gap:5px;font-size:10px;color:var(--muted);min-width:54px}.mobile-dock a:first-child{color:var(--green);font-weight:800}.mobile-dock svg{width:20px;height:20px}}
 @media(max-width:650px){.topbar{height:67px}.search-button{min-width:40px;width:41px;height:41px;justify-content:center;padding:0}.search-button span,.search-button .key{display:none}.action{width:39px;height:39px}.actions{gap:7px}.intro{padding:29px 0 22px}.intro h1{font-size:33px}.today{display:none}.hero{margin-left:-18px;margin-right:-18px;border-radius:0;min-height:350px;padding:30px 25px}.hero h2{font-size:36px}.hero p{font-size:13px}.hero-aside{display:none}.main-grid{margin-top:27px}.link-grid{gap:8px}.feature{min-height:145px;padding:16px 14px}.feature h4{font-size:17px;margin:17px 0 6px}.feature p{font-size:11px}.feature .symbol{font-size:24px}.rail{grid-template-columns:1fr}.quote{padding:22px 19px}.below{align-items:flex-start;flex-direction:column}.footer{flex-direction:column;align-items:flex-start;margin-top:8px}.section-head h3{font-size:21px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Standalone preview UI: knowledge chat; no app or push code touched */
+.k-chat{margin:28px 0 12px;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.k-chat header{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;padding:25px 28px}
+.k-chat h3{font:500 27px Georgia,serif;margin:7px 0 8px}.k-chat header p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}
+.k-tag{font-size:10px;color:var(--green);background:color-mix(in srgb,var(--green) 9%,transparent);padding:8px 12px;border-radius:50px;white-space:nowrap}
+.k-layout{display:grid;grid-template-columns:minmax(0,1fr) 220px;border-top:1px solid var(--line)}
+.k-main{min-width:0;display:flex;flex-direction:column}.k-log{height:335px;overflow:auto;overscroll-behavior:contain;padding:20px 25px;display:flex;flex-direction:column;gap:16px}
+.k-msg{max-width:100%;font-size:12px;line-height:1.65}.k-msg.person{align-self:flex-end;border-radius:16px 16px 3px 16px;padding:11px 16px;background:#2e5d49;color:white;max-width:85%;font-size:13px}
+.k-title{font-size:10px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.k-msg p{font-size:12px;line-height:1.7;margin:3px 0 10px}
+.k-hit{display:block;padding:11px 13px;border-left:2px solid var(--line);background:color-mix(in srgb,var(--green) 4%,transparent);border-radius:0 9px 9px 0;margin-top:8px}
+.k-hit:hover{border-left-color:var(--gold);background:color-mix(in srgb,var(--green) 9%,transparent)}.k-hit small{color:var(--gold);font-size:10px;letter-spacing:.04em}.k-hit strong{display:block;font-size:13px;margin:5px 0}.k-hit span{display:block;font-size:11px;color:var(--muted);line-height:1.55}
+.k-chips{display:flex;gap:7px;flex-wrap:wrap;margin:11px 0}.k-chips button{border:1px solid var(--line);border-radius:99px;padding:8px 12px;background:transparent;color:var(--ink);font-size:11px}
+.k-chips button:hover{border-color:var(--gold)}
+.k-form{position:relative;border-top:1px solid var(--line);padding:12px 18px}.k-input-row{display:flex;align-items:flex-end;gap:10px;border-radius:12px;border:1px solid var(--line);background:var(--paper);padding:9px 10px 9px 13px}
+.k-input-row:focus-within{border-color:var(--gold)}.k-input-row textarea{min-height:32px;max-height:95px;resize:none;flex:1;background:transparent;border:0;outline:0;min-width:0;color:var(--ink);font:13px/1.55 Arial,sans-serif}
+.k-input-row button{background:#285943;border:0;border-radius:10px;color:white;width:38px;height:38px;font-size:18px}.k-input-row button:disabled{opacity:.4;cursor:default}
+.k-foot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:10px;padding:10px 2px 0}.k-foot button{border:0;background:transparent;color:var(--gold);font-size:10px;text-decoration:underline}
+.k-suggest{position:absolute;bottom:100%;left:18px;right:18px;max-height:180px;overflow-y:auto;background:var(--panel);border:1px solid var(--line);padding:6px;border-radius:12px;box-shadow:0 12px 30px #0002;z-index:10}.k-suggest[hidden]{display:none}
+.k-suggest button{width:100%;text-align:left;padding:10px 12px;border-radius:7px;background:transparent;border:0;color:var(--ink);font-size:12px}.k-suggest button:hover{background:color-mix(in srgb,var(--green) 9%,transparent)}
+.k-side{border-left:1px solid var(--line);padding:19px 16px;background:color-mix(in srgb,var(--green) 2%,var(--panel))}
+.k-side h4{font:500 19px Georgia,serif;margin:8px 0 10px}.k-side p{font-size:11px;color:var(--muted);line-height:1.65;margin-bottom:19px}
+.k-topic{display:block;width:100%;border:0;border-top:1px solid var(--line);background:transparent;text-align:left;padding:13px 0;color:var(--ink);font-size:12px}
+.k-status{border-top:1px solid var(--line);padding-top:15px;margin-top:18px;font-size:10px;line-height:1.65;color:var(--muted)}
+@media(max-width:900px){.k-layout{grid-template-columns:1fr}.k-side{display:none}}
+@media(max-width:650px){.k-chat{margin:20px -18px 22px;border-radius:0}.k-chat header{padding:20px 18px}.k-chat h3{font-size:24px}.k-tag{font-size:0;min-width:10px;padding:8px}.k-tag::after{content:'●';font-size:12px}.k-log{height:340px;padding:17px 14px}.k-form{padding:10px 12px}.k-suggest{left:12px;right:12px}}
+
 </style>
 </head>
 <body>
@@ -75,6 +103,22 @@ dialog{padding:0;border:1px solid var(--line);border-radius:19px;width:min(600px
     </div>
     <div class="hero-aside">QURʾĀN · SUNNAH · SALAF</div>
   </section>
+
+<section class="k-chat" id="knowledgeChat" aria-labelledby="knowledgeTitle">
+<header><div><div class="eyebrow">SMART KNOWLEDGE · 0 € KI-API-KOSTEN</div><h3 id="knowledgeTitle">Dein Wissenschat</h3><p>Stelle Fragen in Alltagssprache. Finde geprüfte Website-Fundstellen statt erfundener KI-Antworten.</p></div><div class="k-tag">LOKALE SUCHE</div></header>
+<div class="k-layout"><div class="k-main">
+<div class="k-log" id="kLog" role="log" aria-live="polite"></div>
+<form class="k-form" id="kForm">
+<div id="kSuggest" class="k-suggest" hidden></div>
+<div class="k-input-row"><textarea id="kInput" aria-label="Frage an den Wissenschat" placeholder="Was sagen die Salaf über Īmān?" rows="1" maxlength="360"></textarea><button id="kSend" type="submit" disabled aria-label="Frage stellen">↑</button></div>
+<div class="k-foot"><span id="kStatus">Vorschau · Quellenindex wird geprüft</span><button type="button" id="kLearn">Lokales Lernen deaktivieren & Daten löschen</button></div>
+</form></div>
+<aside class="k-side"><div class="eyebrow">FRAGEN ZUM STARTEN</div><h4>Was möchtest du wissen?</h4><p>Der Chat sucht ausschließlich auf DĀR AL TAWḤĪD, nicht im freien Internet.</p>
+<button class="k-topic" type="button" data-k-question="Was finde ich zu Tawḥīd?">۞ &nbsp; Tawḥīd & Einzigkeit →</button>
+<button class="k-topic" type="button" data-k-question="Duʿāʾ um Geduld">☾ &nbsp; Duʿāʾ & Dhikr →</button>
+<button class="k-topic" type="button" data-k-question="Bücher über Iǧmāʿ">▤ &nbsp; Bibliothek & PDFs →</button>
+<button class="k-topic" type="button" data-k-question="Was ist der Unterschied zwischen Īmān und Kufr?">✧ &nbsp; Īmān & Kufr →</button>
+<div class="k-status"><strong id="kCount">Beispielquellen laden ...</strong><br>Quellen aus der eigenen Website. Beim Tippen: Vorschläge; nach Klicks: lokale Gewichtung. Ohne fremde API.</div></aside></div></section>
   <div class="main-grid">
     <div>
       <div class="section-head"><h3>Dein Zugang zum Wissen</h3><small>Direkte Verknüpfungen</small></div>
@@ -159,5 +203,62 @@ function updateClock(){var d=new Date();var h=d.getHours();document.getElementBy
 updateClock();setInterval(updateClock,30000);
 })();
 </script>
+<script>
+(function(){"use strict";
+const O="https://dar-al-tawhid.de", by=id=>document.getElementById(id);
+const ui={log:by("kLog"),input:by("kInput"),suggest:by("kSuggest"),status:by("kStatus"),count:by("kCount"),learn:by("kLearn"),send:by("kSend")};
+if(!ui.log||!ui.input)return;
+const stop=new Set("was wie wer wo wann woher wieso warum ist sind hat haben über uber zu zur aus bei der die das den dem des und oder eine einen ein einer einem etwas welches welche welcher bitte mir mich unsere unser sagen sagt sagte finde finden ich du wir ihr dort dazu hierzu auch schon jetzt noch denn zum für fuer ein mit nach gibt es".split(" "));
+const aliases={tawhid:"tawhid tauhid tawḥīd tawheed توحيد einzigkeit monotheismus",iman:"iman iiman īmān imaan glaube glauben إيمان",shirk:"shirk schirk beigesellung شرك",quran:"quran qurʾān koran koran قرآن qur an",aqidah:"aqidah aqida akida ʿaqīdah glaubenslehre",dua:"dua duaa duʿāʾ bittgebet دعاء",hadith:"hadith hadeeth hadis ḥadīṯ ḥadīth sunnah حديث",salaf:"salaf sahaba ṣaḥābah sahabah tābiʿīn tabiun",salah:"salah salat ṣalāh beten gebet gebetszeiten صلاة",kufr:"kufr kafir unglaube كفر",sabr:"sabr geduld geduldig",tafsir:"tafsir tafsīr koranauslegung",zakat:"zakat zakāt",ijma:"ijma iǧmāʿ idschma konsens",fiqh:"fiqh fikh rechtslehre"};
+const normalize=s=>String(s??"").toLocaleLowerCase("de").normalize("NFD").replace(/[\u0300-\u036f\u064b-\u065f]/g,"").replace(/[ʿʾ‘’'ʼ]/g,"").replace(/[āīūḥṣḍṭẓ]/g,ch=>({ā:"a",ī:"i",ū:"u",ḥ:"h",ṣ:"s",ḍ:"d",ṭ:"t",ẓ:"z"}[ch]||ch)).replace(/[^\p{L}\p{N}]+/gu," ").replace(/\s+/g," ").trim();
+const groups=new Map();Object.entries(aliases).forEach(([k,str])=>{str.split(" ").forEach(v=>groups.set(normalize(v),k));groups.set(k,k)});
+const toks=q=>normalize(q).split(" ").filter(t=>t.length>1&&!stop.has(t)).map(w=>groups.get(w)||w);
+const localRead=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}};
+const localSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let clicks=localRead("dat_chat_clicks_v3",{}),personal=localRead("dat_chat_optin_v3",true),mode="demo",previous="",db=[];
+function doc(d){if(!d||!d.title)return null;let u;try{u=new URL(String(d.url||""),O);if(u.origin!==O)return null}catch(e){return null}
+const item={id:String(d.id||d.title),title:String(d.title).slice(0,250),kind:String(d.kind||"Fundstelle"),excerpt:String(d.excerpt||"").slice(0,340),reference:String(d.reference||""),url:u.pathname+u.search+u.hash,words:[],titleWords:[]};item.titleWords=toks(item.title);
+item.words=[...new Set(toks([item.title,item.excerpt,item.reference,String(d.searchText||"").slice(0,1200)].join(" ")))].slice(0,160);return item}
+function add(list){const seen=new Set(db.map(x=>x.id));for(const raw of list){let d=doc(raw);if(d&&!seen.has(d.id)){db.push(d);seen.add(d.id)}}}
+add([
+{id:"section-quran",title:"Qurʾān und Tafsīr",kind:"Bereich",excerpt:"Qurʾān-Reader, Sūrah, Tafsīr, Rezitation und Tadabbur",searchText:"quran iman tawhid koran tafsir",url:"/#quran"},
+{id:"section-posts",title:"Beiträge und Überlieferungen",kind:"Bereich",excerpt:"Qurʾān, Sunnah, Salaf, ʿAqīdah und Fiqh",searchText:"salaf iman kufr sunnah hadith",url:"/?page=beitraege"},
+{id:"section-wissen",title:"Wissenszentrum",kind:"Bereich",excerpt:"Themen zu Tawḥīd, Īmān und ʿAqīdah",searchText:"tawhid iman shirk kufr ijma",url:"/?page=wissen"},
+{id:"section-dua",title:"Duʿāʾ Sammlung",kind:"Bereich",excerpt:"Bittgebete, Dhikr, Geduld und Vergebung",searchText:"dua gebet sabr geduld",url:"/?page=dua"},
+{id:"section-library",title:"Bibliothek",kind:"Bereich",excerpt:"Bücher und PDF-Veröffentlichungen",searchText:"buch bücher pdf ijma",url:"/?page=bibliothek"},
+{id:"pdf-ijtihad",title:"Al Ijtihad wa Taqlid",kind:"PDF",excerpt:"Veröffentlichung aus unserer Bibliothek",reference:"Bibliothek · Iǧtihād und Taqlīd",searchText:"ijtihad taqlid fiqh",url:"/assets/library/pdfs/pub-20260817-001-v1-1.pdf"},
+{id:"pdf-ijma",title:"Al Ijma",kind:"PDF",excerpt:"Veröffentlichung zum Iǧmāʿ",reference:"Bibliothek · Al Ijma",searchText:"ijma konsens",url:"/assets/library/pdfs/pub-20260809-001-v1-0.pdf"},
+{id:"dua-sabr",title:"Duʿāʾ um Geduld und festen Stand",kind:"Duʿāʾ",excerpt:"Unser Herr, gieße Geduld über uns aus, festige unsere Schritte.",reference:"Qurʾān 2:250",searchText:"sabr geduld standhaft",url:"/#dua/dua-002-sabr-thabbit"},
+{id:"dua-dunya",title:"Unser Herr, gib uns Gutes",kind:"Duʿāʾ",excerpt:"Unser Herr, gib uns Gutes im Diesseits und Jenseits.",reference:"Qurʾān 2:201",searchText:"dua jenseits dunya",url:"/#dua/dua-001-rabbana-atina"}
+]);
+function distance(a,b){if(Math.abs(a.length-b.length)>2)return 5;let p=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let n=[i];for(let j=1;j<=b.length;j++)n[j]=Math.min(n[j-1]+1,p[j]+1,p[j-1]+Number(a[i-1]!==b[j-1]));p=n}return p[b.length]}
+function score(d,q){const terms=toks(q);if(!terms.length)return 0;let points=0,hits=0;for(const t of terms){let s=0;if(d.titleWords.includes(t))s=10;else if(d.words.includes(t))s=5;else if(d.titleWords.some(x=>x.startsWith(t)&&t.length>=3))s=6;else if(d.words.some(x=>x.startsWith(t)&&t.length>=4))s=3;else if(t.length>=4&&d.titleWords.some(x=>distance(t,x)<=(t.length<6?1:2)))s=2;if(s){hits++;points+=s}}if(!hits)return 0;points*=Math.pow(hits/terms.length,1.6);if(hits===terms.length)points+=4;if(d.kind==="Bereich")points*=.72;if(personal)points+=Math.min(2,Number(clicks[d.id]||0)*.35);return points}
+function find(q,max=5){return db.map(d=>({d,s:score(d,q)})).filter(x=>x.s>2).sort((a,b)=>b.s-a.s).slice(0,max)}
+function el(tag,cls,text){let n=document.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=String(text);return n}
+function output(node){ui.log.appendChild(node);ui.log.scrollTop=ui.log.scrollHeight}
+function msg(){let n=el("div","k-msg");n.appendChild(el("div","k-title","DĀR · Wissensfinder"));return n}
+function chips(box,arr){let area=el("div","k-chips");arr.forEach(q=>{let b=el("button","",q);b.type="button";b.onclick=()=>submit(q);area.appendChild(b)});box.appendChild(area)}
+function submit(q){q=String(q||"").trim().slice(0,360);if(!q)return;ui.suggest.hidden=true;output(el("div","k-msg person",q));ui.input.value="";resize();let terms=toks(q);let hits=find(q,5);
+if(/^(und|was ist mit|zeige mehr|dazu|andere)/i.test(q)&&previous&&terms.length<=3){let extended=find(previous+" "+q,5);if(extended.length&&(!hits.length||extended[0].s>hits[0].s))hits=extended}
+if(terms.length)previous=q;let m=msg();
+if(!hits.length){m.appendChild(el("p","", "Dazu finde ich im aktuell verfügbaren Index keine ausreichend passende Fundstelle. Ich erfinde keine Antwort und keine Quellen."));m.appendChild(el("p","",mode==="demo"?"Diese HTML-Vorschau hat nur Beispieldaten. Nach Website-Einbindung werden die öffentlich freigegebenen Inhaltsindizes durchsucht.":"Präzisiere Gelehrter, Thema, Vers oder Quellwerk."));chips(m,["Tawḥīd","Duʿāʾ um Geduld","Iǧmāʿ"]);output(m);return}
+m.appendChild(el("p","", "Ich habe "+hits.length+" passende "+(hits.length===1?"Fundstelle":"Fundstellen")+" auf DĀR AL TAWḤĪD gefunden. Öffne die Treffer für den vollständigen Zusammenhang."));
+for(const {d} of hits){let a=el("a","k-hit");a.href=O+d.url;a.target="_blank";a.rel="noopener noreferrer";a.appendChild(el("small","",d.kind+" ↗"));a.appendChild(el("strong","",d.title));if(d.excerpt)a.appendChild(el("span","",d.excerpt));if(d.reference)a.appendChild(el("small","",d.reference));a.addEventListener("click",()=>{if(!personal)return;clicks[d.id]=Math.min(30,(Number(clicks[d.id]||0)+1));localSet("dat_chat_clicks_v3",clicks)});m.appendChild(a)}
+m.appendChild(el("p","",mode==="demo"?"Vorschau mit Beispielquellen. Vollständige Suche erst auf der Website.":"Suchtreffer sind keine neu formulierte Fatwā oder freie KI-Antwort."));output(m)}
+function resize(){ui.input.style.height="auto";ui.input.style.height=Math.min(95,ui.input.scrollHeight)+"px";ui.send.disabled=!ui.input.value.trim()}
+function suggest(){resize();let q=ui.input.value.trim();ui.suggest.replaceChildren();if(q.length<2){ui.suggest.hidden=true;return}let found=find(q,4);ui.suggest.hidden=!found.length;found.forEach(({d})=>{let b=el("button","",d.title+" ↗");b.type="button";b.onclick=()=>submit(d.title);ui.suggest.appendChild(b)})}
+by("kForm").addEventListener("submit",e=>{e.preventDefault();submit(ui.input.value)});
+ui.input.addEventListener("input",suggest);ui.input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey&&!e.isComposing){e.preventDefault();submit(ui.input.value)}if(e.key==="Escape")ui.suggest.hidden=true});
+document.querySelectorAll("[data-k-question]").forEach(x=>x.addEventListener("click",()=>submit(x.getAttribute("data-k-question"))));
+ui.learn.addEventListener("click",()=>{personal=!personal;clicks={};localSet("dat_chat_clicks_v3",{});localSet("dat_chat_optin_v3",personal);refresh()});
+function refresh(){ui.status.textContent=mode==="demo"?"Vorschau · Beispielquellen":mode==="online"?"Website-Index geladen":"Nur Grunddaten verfügbar";ui.count.textContent=db.length.toLocaleString("de-DE")+" Suchdatensätze";ui.learn.textContent=personal?"Lokales Lernen deaktivieren & Daten löschen":"Lokales Lernen aktivieren"}
+async function online(){if(location.hostname!=="dar-al-tawhid.de")return;const endpoints=[
+["/data/ilm-knowledge-index.json",data=>(data.entries||[]).map(d=>({id:d.id,title:d.title,kind:({quran:"Qurʾān",dua:"Duʿāʾ",athar:"Āṯār",sunnah:"Ḥadīṯ",posts:"Beitrag",quiz:"Quiz"}[d.kind]||d.kind),excerpt:d.excerpt,reference:d.reference,searchText:[d.searchText||"",d.body||"",...(d.contextHints||[])].join(" ").slice(0,1500),url:d.route?.view==="post"?"/#post/"+encodeURIComponent(d.route.value):d.route?.view==="dua"?"/#dua/"+encodeURIComponent(d.route.value):d.route?.view==="quran-surah"?"/#quran-surah/"+encodeURIComponent(d.route.value):"/?page="+(d.route?.view==="more"?"mehr":"wissen")}))],
+["/data/library-publications.json",data=>(data.publications||[]).map(d=>({id:"lib-"+d.id,title:d.title,kind:"Bibliothek",excerpt:d.description||d.subtitle||d.topic||"Buch aus unserer Bibliothek",reference:d.category,searchText:[d.topic,d.category,(d.tags||[]).join(" "),(d.searchAliases||[]).join(" ")].join(" "),url:d.pdfUrl||"/?page=bibliothek"}))],
+["/data/quran-search-keywords.json",data=>{(Array.isArray(data)?data:[]).forEach(d=>{let key=normalize(d.id||d.label);if(key)(d.terms||[]).forEach(t=>groups.set(normalize(t),key))});return []}]
+];
+let loaded=0;const all=await Promise.allSettled(endpoints.map(async ([url,parser])=>{let timeout=new AbortController(),timer=setTimeout(()=>timeout.abort(),12000);try{let r=await fetch(url,{signal:timeout.signal,cache:"default"});if(!r.ok)throw Error(r.status);return parser(await r.json())}finally{clearTimeout(timer)}}));for(const r of all)if(r.status==="fulfilled"){let a=r.value||[];add(a);loaded+=a.length}mode=loaded?"online":"offline";refresh();if(loaded){let b=msg();b.appendChild(el("p","",db.length.toLocaleString("de-DE")+" Einträge aus den Website-Indizes geladen. Frag jetzt nach einem Thema oder Gelehrten."));output(b)}}
+let intro=msg();intro.appendChild(el("p","","As-salāmu ʿalaikum! Stelle eine Frage zu unserem Wissen. Ich finde passende Seiten, Originalauszüge und Quellenhinweise. Freie KI-Antworten ohne Belege werden nicht erzeugt."));chips(intro,["Was finde ich über Tawḥīd?","Duʿāʾ um Geduld","Bücher über Iǧmāʿ"]);output(intro);refresh();online();
+})();</script>
 </body>
 </html>
