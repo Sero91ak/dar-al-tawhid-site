@@ -38,7 +38,8 @@ jobs:
             'elevenLabsProviderCallsAllowed':False,
             'previouslyPaidOriginalRepurchaseForbidden':True,
             'ownerRejectedPronunciationBlocked':True,
-            'noPublicRelease':True
+            'noPublicRelease':True,
+            'auditRevision':2
           }
           assert json.loads(Path('kids/data/quiz-curation-release.json').read_text())['enabled'] is False
           print('PASS KIDS source audit: no credentials, no TTS, no released MP3')
@@ -46,13 +47,28 @@ jobs:
       - name: Recompute every unfinished question from real staged audio and canonical Fuṣḥā sources
         run: |
           python3 -m py_compile kids/tools/audit_quiz_v4_exact_remaining_107.py
+          python3 -m py_compile kids/tools/plan_quiz_v4_finish_without_duplicate_credits.py
           python3 kids/tools/audit_quiz_v4_exact_remaining_107.py
+          python3 kids/tools/plan_quiz_v4_finish_without_duplicate_credits.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          report=json.loads(Path('kids/review-only/quiz-v4-current-unfinished-questions-source-audit.json').read_text())
+          priority=json.loads(Path('kids/review-only/quiz-v4-450-next-completion-priority.json').read_text())
+          assert priority['summary']['selectedQuestions']==450
+          assert priority['summary']['alreadyTechnicallyComplete']==report['completeFourPartQuestions']
+          assert priority['summary']['newElevenLabsCreditsSpent']==0
+          assert not priority['summary']['publicReleaseAllowed']
+          print('PASS genuine staged source count:',report['completeFourPartQuestions'],'of 450')
+          PY
       - name: Save authoritative reconciliation to private review, never main
         run: |
           set -euo pipefail
           git config user.name kids-v4-zero-credit-audit
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git add kids/review-only/quiz-v4-current-unfinished-questions-source-audit.json
+          git add kids/review-only/quiz-v4-450-next-completion-priority.json
+          git add kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md
           if git diff --cached --quiet; then
             echo 'Already up to date; no new audio costs'
             exit 0
@@ -81,4 +97,7 @@ jobs:
           name: kids-v4-current-unfinished-exact-source-report-zero-credits
           retention-days: 90
           if-no-files-found: warn
-          path: kids/review-only/quiz-v4-current-unfinished-questions-source-audit.json
+          path: |
+            kids/review-only/quiz-v4-current-unfinished-questions-source-audit.json
+            kids/review-only/quiz-v4-450-next-completion-priority.json
+            kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md
