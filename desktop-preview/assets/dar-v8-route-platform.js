@@ -128,7 +128,7 @@ function initHadith(ctx){
  input.addEventListener("input",paint);
  fetch("/test/data/hadith/search-index.json",{cache:"force-cache"}).then(r=>{if(!r.ok)throw Error("index "+r.status);return r.json()}).then(records=>{
   if(!input.isConnected)return;
-  cache=Array.isArray(records)?records:[];
+  cache=Array.isArray(records)?records.filter(h=>h&&h.id&&h.germanStatus==="verified"&&typeof h.german==="string"&&h.german.trim()):[];
   if(!cache.length)throw Error("no canonical hadith search data");
   paint();
  }).catch(()=>{
