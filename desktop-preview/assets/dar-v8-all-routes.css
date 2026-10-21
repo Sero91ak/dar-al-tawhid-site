@@ -1,0 +1,133 @@
+/* DĀR AL TAWḤĪD · V8 full-site public browser UI.
+ * All pages share one editorial / smart-design shell.
+ * Responsive browser-only tabbar. Native iOS/PWA navigation is not changed.
+ */
+:root{--v8-route-line:rgba(100,79,38,.16)}
+body.desktop-overhaul-v18{scroll-padding-bottom:90px;overscroll-behavior-y:none}
+body.desktop-overhaul-v18 :is(.dar-v8-route-hero,.dar-v8-source-module,.dar-v8-knowledge-chat) {box-sizing:border-box;min-width:0}
+body.desktop-overhaul-v18 .dar-v8-side-3d{width:32px;height:32px;object-fit:contain;flex:0 0 32px;filter:drop-shadow(0 2px 3px #283a2b1d)}
+body.desktop-overhaul-v18 .dar-v8-side-link{gap:12px}
+body.desktop-overhaul-v18 .dar-v8-mobile-dock,body.desktop-overhaul-v18 .dar-v8-more-sheet{display:none}
+body:not(.dar-v8-home) :is(#darV8TopWelcome,.v8-real-prayer,.isnad-ribbon){display:none!important}
+body:not(.dar-v8-home):not(.dar-v8-quran-route) .v8-real-player{display:none!important}
+body.dar-v8-quran-route .v8-real-player{display:block!important;max-width:1200px;margin:18px auto 20px;padding:0;min-width:0}
+body.dar-v8-quran-route .v8-real-player .qa26-player{border-radius:21px;background:var(--v8-paper);border:1px solid var(--v8-line);color:var(--v8-ink);padding:12px 52px 12px 15px;position:relative}
+body.dar-v8-quran-route .v8-real-player .qa26-controls{display:none!important}
+body.dar-v8-quran-route .v8-real-player.dar-v8-controls-open .qa26-controls{display:flex!important;flex-wrap:wrap;gap:10px;margin-top:14px}
+body.dar-v8-quran-route .v8-real-player .qa26-controls select{min-height:39px;background:var(--v8-paper);color:var(--v8-ink);border:1px solid var(--v8-line);border-radius:10px}
+body.dar-v8-quran-route .v8-real-player #qaPlay{background:#245c42!important;border-radius:50%;color:#fff!important;min-width:44px;min-height:44px}
+body.dar-v8-quran-route .v8-real-player .qa26-title{color:var(--v8-ink)!important}
+body.dar-v8-quran-route .v8-real-player .qa26-kicker{color:var(--v8-gold)!important}
+@media(max-width:590px){body.dar-v8-quran-route .v8-real-player .qa26-controls{flex-direction:column}body.dar-v8-quran-route .v8-real-player .qa26-field{width:100%}}
+body:not(.dar-v8-home) .dar-v8-workspace>.page{padding-top:10px!important}
+body:not(.dar-v8-home) .page-intro{display:none!important}
+body.desktop-overhaul-v18 .dar-v8-route-hero{position:relative;isolation:isolate;overflow:hidden;max-width:1200px;margin:22px auto 20px;padding:clamp(21px,3vw,37px);border-radius:27px;border:1px solid color-mix(in srgb,var(--v8-gold) 28%,var(--v8-line));background:linear-gradient(130deg,color-mix(in srgb,var(--v8-paper) 91%,var(--v8-gold)),color-mix(in srgb,var(--v8-bg) 88%,var(--v8-gold)));color:var(--v8-ink);box-shadow:0 12px 45px #142a2210;display:grid;grid-template-columns:minmax(0,1fr) 165px;gap:10px 20px}
+body.desktop-overhaul-v18 .dar-v8-route-hero:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 85% 20%,color-mix(in srgb,var(--v8-gold) 14%,transparent),transparent 36%),linear-gradient(145deg,transparent 50%,color-mix(in srgb,var(--v8-gold) 5%,transparent))}
+body.desktop-overhaul-v18 .dar-v8-route-copy{max-width:800px}.dar-v8-route-eyebrow{font-size:10px;letter-spacing:.16em;font-weight:830;color:var(--v8-gold)}.dar-v8-route-eyebrow span{padding:0 8px;color:var(--v8-muted)}
+body.desktop-overhaul-v18 .dar-v8-route-copy h1{font:500 clamp(29px,3.5vw,43px)/1.17 Georgia,serif;letter-spacing:-.03em;color:var(--v8-ink);margin:12px 0 9px}
+body.desktop-overhaul-v18 .dar-v8-route-copy p{max-width:690px;color:var(--v8-muted);font-size:13px;line-height:1.8;margin:0}
+body.desktop-overhaul-v18 .dar-v8-route-visual{height:128px;display:grid;place-items:center;align-self:center}
+body.desktop-overhaul-v18 .dar-v8-route-visual img{max-height:124px;max-width:138px;object-fit:contain;filter:drop-shadow(0 18px 14px #263a251b)}
+body.desktop-overhaul-v18 .dar-v8-route-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+body.desktop-overhaul-v18 .dar-v8-route-related{grid-column:1/-1;border-top:1px solid var(--v8-line);padding-top:13px;margin-top:7px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+body.desktop-overhaul-v18 .dar-v8-route-related>span{color:var(--v8-gold);font-size:9px;font-weight:790;letter-spacing:.1em;margin-inline-end:8px}
+body.desktop-overhaul-v18 .dar-v8-route-link{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--v8-line);background:color-mix(in srgb,var(--v8-paper) 87%,transparent);color:var(--v8-ink);border-radius:99px;min-height:40px;padding:5px 12px;text-decoration:none;font-size:11px;font-weight:690;max-width:100%}
+body.desktop-overhaul-v18 .dar-v8-route-link img{height:22px;width:22px;object-fit:contain}
+body.desktop-overhaul-v18 .dar-v8-route-link .arrow{color:var(--v8-gold);margin-inline-start:3px;font-size:13px}
+body.desktop-overhaul-v18 .dar-v8-route-link:hover{border-color:var(--v8-gold)}
+body.desktop-overhaul-v18:not(.dar-v8-home) .page>.ornament-line{display:none!important}
+body.desktop-overhaul-v18:not(.dar-v8-home) :is(.page>.section,.page>.parchment,.page>.quran-reading-zone){background:transparent!important;border:0!important;border-radius:0!important;box-shadow:none!important;margin-top:15px!important;min-width:0!important}
+body.desktop-overhaul-v18:not(.dar-v8-home) .section-head{border-color:var(--v8-line)!important}
+body.desktop-overhaul-v18:not(.dar-v8-home) :is(.rule-card,.real-cover,.dua-real,.knowledge-item,.more-row,.list-row,.related-note,.category-card,.source-work-row,.women-fiqh-card){background:var(--v8-paper)!important;color:var(--v8-ink)!important;border:1px solid var(--v8-line)!important;border-radius:19px!important;box-shadow:none!important}
+body.desktop-overhaul-v18:not(.dar-v8-home) :is(.toolbar,.smart-search,.search-input){border-color:var(--v8-line)!important}
+body.desktop-overhaul-v18:not(.dar-v8-home) :is(.source-work-list,.list-lines){display:grid;gap:10px}
+body.desktop-overhaul-v18 .dar-v8-source-module,body.desktop-overhaul-v18 .dar-v8-knowledge-chat{border:1px solid var(--v8-line);background:var(--v8-paper);padding:clamp(19px,3vw,32px);border-radius:24px;margin:19px 0 28px}
+body.desktop-overhaul-v18 .dar-v8-source-module h2,body.desktop-overhaul-v18 .dar-v8-knowledge-chat h2{font:500 clamp(22px,2.7vw,31px)/1.25 Georgia,serif;margin:7px 0 9px;color:var(--v8-ink)}
+body.desktop-overhaul-v18 .dar-v8-source-module p,body.desktop-overhaul-v18 .dar-v8-knowledge-chat p{font-size:13px;line-height:1.7;color:var(--v8-muted)}
+.dar-v8-mini-heading,.dar-v8-result-heading{color:var(--v8-gold);font-size:10px;letter-spacing:.16em;font-weight:820}
+body.desktop-overhaul-v18 :is(.dar-v8-source-query,.dar-v8-chat-inputrow input){width:100%;min-height:49px;min-width:0;border-radius:13px;border:1px solid var(--v8-line);background:var(--v8-surface);color:var(--v8-ink);font:16px system-ui;padding:12px 15px}
+.dar-v8-source-module label,.dar-v8-chat-form label{display:block;color:var(--v8-muted);font-size:11px;margin:14px 0 8px}
+.dar-v8-result-count{font-size:11px;color:var(--v8-gold);margin:15px 0 4px}
+.dar-v8-hadith-card{border-bottom:1px solid var(--v8-line);padding:17px 0}
+.dar-v8-hadith-card:last-child{border:0}.dar-v8-hadith-ref{color:var(--v8-gold);font-size:11px;font-weight:770;letter-spacing:.015em}
+.dar-v8-hadith-card p{color:var(--v8-ink)!important;font:500 16px/1.7 Georgia,serif;margin:9px 0}
+.dar-v8-hadith-card small{font-size:10px;color:var(--v8-muted)}
+.dar-v8-prayer-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px;margin:19px 0}
+.dar-v8-prayer-cell{background:color-mix(in srgb,var(--v8-gold) 10%,var(--v8-paper));border:1px solid var(--v8-line);border-radius:17px;min-height:83px;padding:13px 6px;text-align:center}
+.dar-v8-prayer-cell span{font-size:12px;color:var(--v8-muted);display:block}.dar-v8-prayer-cell strong{display:block;font:550 20px Georgia,serif;color:var(--v8-ink);margin-top:8px}
+.dar-v8-prayer-status{padding:12px 0;color:var(--v8-gold);font-size:13px}
+.dar-v8-inline-action{background:var(--v8-ink);color:var(--v8-paper);border:0;border-radius:99px;padding:12px 19px;min-height:44px;font-size:12px;font-weight:700}
+.dar-v8-chat-heading{display:flex;align-items:center;gap:17px}.dar-v8-chat-symbol{width:76px;height:76px;flex:none;border-radius:22px;background:linear-gradient(140deg,#c0ac7d31,#1c573c13);display:grid;place-items:center}
+.dar-v8-chat-symbol img{width:56px;height:56px;object-fit:contain}.dar-v8-chat-form{margin:15px 0 10px}
+.dar-v8-chat-inputrow{display:flex;gap:10px}.dar-v8-chat-inputrow input{flex:1}.dar-v8-chat-inputrow button{padding:0 20px;border:0;border-radius:14px;background:#1d5840;color:#fff;white-space:nowrap;font-size:12px;min-height:49px}
+.dar-v8-chat-samples{display:flex;flex-wrap:wrap;gap:7px}.dar-v8-chat-samples button{color:var(--v8-ink);font-size:11px;border:1px solid var(--v8-line);border-radius:99px;background:transparent;padding:10px 13px;min-height:42px}
+.dar-v8-chat-summary{border-inline-start:3px solid var(--v8-gold);background:color-mix(in srgb,var(--v8-gold) 10%,transparent);padding:5px 14px;margin:16px 0 22px;border-radius:0 9px 9px 0}
+.dar-v8-chat-summary p{margin:8px 0;font-size:12px!important}.dar-v8-chat-results .list-row{display:grid;padding:15px!important;gap:5px;align-items:start}
+.dar-v8-chat-results .meta{color:var(--v8-gold);font-size:10px}
+.dar-v8-chat-results .list-row strong{font:500 18px Georgia,serif}.dar-v8-chat-results .list-row small{color:var(--v8-muted)}
+.dar-v8-source-disclaimer{font-size:10px;line-height:1.7;color:var(--v8-muted);padding-top:13px;border-top:1px solid var(--v8-line);margin-top:17px}
+@media (max-width:959px){
+ body.desktop-overhaul-v18 .dar-v8-sidebar{display:none!important}
+ body.desktop-overhaul-v18 .dar-v8-workspace{padding-bottom:calc(85px + env(safe-area-inset-bottom))!important}
+ body.desktop-overhaul-v18 .dar-v8-mobile-dock{display:flex!important;align-items:center;justify-content:space-around;gap:3px;position:fixed;z-index:250;left:50%;transform:translateX(-50%);bottom:calc(9px + env(safe-area-inset-bottom));height:68px;width:min(650px,calc(100vw - 24px));background:color-mix(in srgb,var(--v8-paper) 94%,transparent);border:1px solid color-mix(in srgb,var(--v8-gold) 25%,var(--v8-line));border-radius:24px;padding:5px 7px;box-shadow:0 8px 35px #1f35202f;backdrop-filter:blur(19px)}
+ body.desktop-overhaul-v18 .dar-v8-mobile-dock :is(a,button){display:grid;place-items:center;align-content:center;gap:2px;flex:1;min-width:0;min-height:57px;padding:4px 1px;background:transparent;border:0;border-radius:17px;color:var(--v8-muted);font-size:10px;font-weight:680;text-decoration:none;letter-spacing:-.025em}
+ body.desktop-overhaul-v18 .dar-v8-mobile-dock :is(a,button).active,body.desktop-overhaul-v18 .dar-v8-mobile-dock [aria-current="page"]{background:color-mix(in srgb,var(--v8-gold) 14%,var(--v8-paper));color:var(--v8-ink)}
+ body.desktop-overhaul-v18 .dar-v8-mobile-dock img{width:33px;height:33px;object-fit:contain}
+ body.desktop-overhaul-v18 .dar-v8-more-sheet:not([hidden]){display:block!important;position:fixed;z-index:249;left:50%;transform:translateX(-50%);bottom:calc(84px + env(safe-area-inset-bottom));width:min(650px,calc(100vw - 24px));max-height:min(72dvh,570px);overflow:auto;background:var(--v8-paper);border:1px solid var(--v8-line);box-shadow:0 -9px 45px #10291e37;border-radius:22px;padding:18px}
+ body.desktop-overhaul-v18 .dar-v8-more-heading{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+ body.desktop-overhaul-v18 .dar-v8-more-heading strong{font:500 23px Georgia,serif;color:var(--v8-ink)}
+ body.desktop-overhaul-v18 .dar-v8-more-heading span{color:var(--v8-gold);font-size:11px}
+ body.desktop-overhaul-v18 .dar-v8-more-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ body.desktop-overhaul-v18 .dar-v8-more-grid a{display:flex;align-items:center;gap:11px;min-height:54px;background:color-mix(in srgb,var(--v8-gold) 7%,var(--v8-paper));border:1px solid var(--v8-line);border-radius:14px;padding:8px;color:var(--v8-ink);font-size:12px;text-decoration:none}
+ body.desktop-overhaul-v18 .dar-v8-more-grid img{width:29px;height:29px;object-fit:contain}
+ body.desktop-overhaul-v18 .dar-v8-route-hero{margin:15px 0 18px;grid-template-columns:1fr 90px;padding:19px}
+ body.desktop-overhaul-v18 .dar-v8-route-visual{height:90px}
+ body.desktop-overhaul-v18 .dar-v8-route-visual img{max-height:90px;max-width:85px}
+ body.desktop-overhaul-v18 .dar-v8-route-related{gap:6px}
+ body.desktop-overhaul-v18 .dar-v8-route-related>span{width:100%}
+}
+@media(max-width:560px){
+ body.desktop-overhaul-v18 .dar-v8-route-hero{grid-template-columns:1fr 56px;border-radius:18px;padding:16px}
+ body.desktop-overhaul-v18 .dar-v8-route-copy h1{font-size:25px}
+ body.desktop-overhaul-v18 .dar-v8-route-copy p{font-size:12px;line-height:1.6}
+ body.desktop-overhaul-v18 .dar-v8-route-visual{height:58px}.dar-v8-route-visual img{max-height:59px;max-width:58px}
+ body.desktop-overhaul-v18 .dar-v8-route-related .dar-v8-route-link{font-size:10px;padding:4px 9px;min-height:36px}
+ body.desktop-overhaul-v18 .dar-v8-route-related .dar-v8-route-link img{width:17px;height:17px}
+ body.desktop-overhaul-v18 .dar-v8-prayer-grid{gap:5px}
+ body.desktop-overhaul-v18 .dar-v8-prayer-cell{min-height:65px;padding:9px 1px;border-radius:10px}
+ body.desktop-overhaul-v18 .dar-v8-prayer-cell strong{font-size:12px}
+ body.desktop-overhaul-v18 .dar-v8-prayer-cell span{font-size:10px}
+ body.desktop-overhaul-v18 .dar-v8-chat-heading{align-items:flex-start;gap:10px}
+ body.desktop-overhaul-v18 .dar-v8-chat-symbol{height:49px;width:49px;border-radius:15px}
+ body.desktop-overhaul-v18 .dar-v8-chat-symbol img{height:39px;width:39px}
+ body.desktop-overhaul-v18 .dar-v8-chat-inputrow{flex-direction:column}
+ body.desktop-overhaul-v18 .dar-v8-chat-inputrow button{width:100%}
+ body.desktop-overhaul-v18 .dar-v8-source-module,body.desktop-overhaul-v18 .dar-v8-knowledge-chat{padding:16px;border-radius:18px}
+}
+@media(prefers-reduced-motion:reduce){body.desktop-overhaul-v18 *{scroll-behavior:auto!important}}
+
+
+/* Existing Runway/Adobe-style artwork integrated per section, source backgrounds
+   are decorative; source text/links are the canonical live content. */
+body.desktop-overhaul-v18 .dar-v8-route-hero{
+ background:linear-gradient(106deg,rgba(17,44,34,.97) 0%,rgba(24,53,41,.92) 53%,rgba(22,47,40,.76) 100%),url('/assets/post-heroes/topics.webp') center/cover!important;
+ border-color:rgba(215,186,121,.30)!important;color:#fff8e9!important;
+}
+body.desktop-overhaul-v18 .dar-v8-route-copy h1{color:#fff8e9!important}
+body.desktop-overhaul-v18 .dar-v8-route-copy p{color:#dfebe1!important}
+body.desktop-overhaul-v18 .dar-v8-route-eyebrow,body.desktop-overhaul-v18 .dar-v8-route-related>span{color:#d8be86!important}
+body.desktop-overhaul-v18 .dar-v8-route-related{border-top-color:rgba(235,218,166,.25)!important}
+body.desktop-overhaul-v18 .dar-v8-route-link{background:rgba(255,255,255,.13)!important;color:#fff9e7!important;border-color:rgba(237,209,157,.29)!important}
+body.desktop-overhaul-v18 .dar-v8-route-link .arrow{color:#edd39c}
+body.desktop-overhaul-v18[data-dar-v8-route="quran"] .dar-v8-route-hero{background:linear-gradient(103deg,rgba(13,37,44,.98),rgba(29,56,64,.85)),url('/assets/post-heroes/post-reader.webp') center/cover!important}
+body.desktop-overhaul-v18:is([data-dar-v8-route="beitraege"],[data-dar-v8-route="beitrag"]) .dar-v8-route-hero{background:linear-gradient(103deg,rgba(16,48,37,.96),rgba(43,60,43,.83)),url('/assets/post-heroes/topic-detail.webp') center/cover!important}
+body.desktop-overhaul-v18[data-dar-v8-route="hadith"] .dar-v8-route-hero{background:linear-gradient(103deg,rgba(12,36,28,.97),rgba(19,47,34,.83)),url('/assets/ilm/hadith-library-overview-v1267.webp') center/cover!important}
+body.desktop-overhaul-v18:is([data-dar-v8-route="wissen"],[data-dar-v8-route="suche"]) .dar-v8-route-hero{background:linear-gradient(103deg,rgba(12,37,32,.96),rgba(26,56,40,.82)),url('/assets/ilm/ilm-historical-majlis-v1234.jpg') center/cover!important}
+body.desktop-overhaul-v18:is([data-dar-v8-route="bibliothek"],[data-dar-v8-route="werk"]) .dar-v8-route-hero{background:linear-gradient(103deg,rgba(39,31,22,.97),rgba(63,48,34,.82)),url('/assets/post-heroes/post-reader.webp') center/cover!important}
+body.desktop-overhaul-v18 .dar-v8-route-link img{filter:drop-shadow(0 5px 8px #050f0a55)}
+/* Keyboard-focused source questions: keep reading area reachable above mobile keyboard. */
+@media(max-width:959px){
+ body.desktop-overhaul-v18.v8-chat-focused .dar-v8-mobile-dock{visibility:hidden!important;pointer-events:none!important}
+ body.desktop-overhaul-v18.v8-chat-focused .dar-v8-more-sheet{display:none!important}
+ body.desktop-overhaul-v18 .dar-v8-knowledge-chat{scroll-margin-top:12px;scroll-margin-bottom:34px}
+}
