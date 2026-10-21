@@ -255,3 +255,57 @@ body.dar-v8-home .v8-real-player.dar-v8-controls-open .dar-v8-expand{top:33px;tr
  body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-controls{flex-direction:column!important;align-items:stretch!important}
  body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-field{width:100%!important;flex:none!important}
 }
+
+
+/* V8 prayer card (real data from protected prayer engine; no fabricated default times). */
+body.dar-v8-home .v8-real-prayer>.top-tool-card.top-tool-prayer{display:none!important}
+body.dar-v8-home .v8-real-prayer.dar-v8-prayer-settings-open>.top-tool-card.top-tool-prayer{
+ display:block!important;margin:12px 0 6px!important;padding:13px!important;
+ border-top:1px solid var(--v8-line)!important;background:color-mix(in srgb,var(--v8-ink) 4%,var(--v8-paper))!important;
+ border-radius:15px!important
+}
+body.dar-v8-home .v8-real-prayer .v8-prayer-caption button{
+ border:0!important;padding:5px!important;background:transparent!important;
+ color:var(--v8-gold)!important;font:700 10px Inter,-apple-system,sans-serif!important;cursor:pointer
+}
+body.dar-v8-home .dar-v8-prayer-display{
+ display:flex!important;align-items:center!important;justify-content:space-between!important;
+ gap:20px!important;margin:8px 0 7px!important;min-height:48px!important;
+ color:var(--v8-ink)!important
+}
+body.dar-v8-home .dar-v8-prayer-next{display:grid;gap:2px;min-width:0}
+body.dar-v8-home .dar-v8-prayer-next span{
+ color:var(--v8-muted)!important;font-size:11px!important
+}
+body.dar-v8-home .dar-v8-prayer-next strong{
+ color:var(--v8-ink)!important;font:500 24px/1.15 Georgia,serif!important
+}
+body.dar-v8-home .dar-v8-prayer-next small{
+ color:var(--v8-muted)!important;font-size:10px!important
+}
+body.dar-v8-home .dar-v8-countdown{
+ white-space:nowrap;color:var(--v8-ink)!important;font:760 17px Inter,-apple-system,sans-serif!important
+}
+body.dar-v8-home .v8-real-prayer>.dar-v8-prayer-strip{
+ display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;
+ gap:5px!important;position:relative!important;inset:auto!important;
+ margin:9px 0 0!important;padding:0!important;width:100%!important;
+ float:none!important;height:auto!important;min-height:0!important;
+}
+body.dar-v8-home .v8-real-prayer>.dar-v8-prayer-strip>div{
+ display:block!important;position:static!important;min-height:54px!important;
+ padding:8px 3px!important;border-radius:13px!important;
+ background:color-mix(in srgb,var(--v8-ink) 5%,var(--v8-paper))!important;
+ color:var(--v8-ink)!important;line-height:1.55!important
+}
+body.dar-v8-home .v8-real-prayer>.dar-v8-prayer-strip>div.active{
+ background:color-mix(in srgb,var(--v8-gold) 19%,var(--v8-paper))!important
+}
+body.dar-v8-home .v8-real-prayer>.dar-v8-prayer-strip>div span,
+body.dar-v8-home .v8-real-prayer>.dar-v8-prayer-strip>div b{color:var(--v8-ink)!important}
+body.dar-v8-home .isnad-ribbon .isnad-quote{font-weight:500!important}
+body.dar-v8-home .isnad-ribbon .inline-source strong{color:var(--v8-ink)!important}
+@media(max-width:580px){
+ body.dar-v8-home .dar-v8-prayer-next strong{font-size:22px!important}
+ body.dar-v8-home .v8-real-prayer>.dar-v8-prayer-strip>div{min-height:46px!important;padding:6px 2px!important}
+}
