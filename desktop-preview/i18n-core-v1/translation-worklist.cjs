@@ -156,12 +156,12 @@ function scanLearning(){
   matches.sort((a,b)=>a.index-b.index);
   let parsed=0;
   for(const item of matches){
-   const match=item.match,question=decoded(match[1]),why=decoded(match[4]);
-   let options=null;try{options=JSON.parse("["+match[2]+"]")}catch(_){}
-   const correct=Number(match[3]);
+   const match=item.match,isTitle=item.style==="title-options",question=decoded(match[1]),why=decoded(match[isTitle?5:4]);
+   let options=null;try{options=JSON.parse("["+match[isTitle?3:2]+"]")}catch(_){}
+   const correct=Number(match[isTitle?4:3]);
    if(!question||!why||!Array.isArray(options)||!options.length||!Number.isSafeInteger(correct)||correct<0||correct>=options.length)continue;
    parsed++;count++;
-   const hint=item.style==="title-options"?decoded(match[0].match(/hint:"((?:\\.|[^"\\])*)"/)?.[1]||""):"";
+   const hint=isTitle?decoded(match[2]):"";
    add("learning",slug+"-question-"+parsed,sourcePath,{question,answers:options,explanation:why,title:slug,hint},
    {correctIndex:correct,originalHtmlPath:sourcePath,sourcePage:"/lernen/"+slug+"/"});
   }
