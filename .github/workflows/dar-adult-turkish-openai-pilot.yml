@@ -1,0 +1,86 @@
+name: DAR Adult Turkish OpenAI Pilot (one draft)
+on:
+  push:
+    branches:
+      - feature/turkish-openai-manuscript-pilot-20261021
+    paths:
+      - '.github/workflows/dar-adult-turkish-openai-pilot.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  one-turkish-draft:
+    # No repeat paid requests from a workflow re-run.
+    if: ${{ github.run_attempt == 1 }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate i18n source and inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
+          node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/dar-tr-worklist.json"
+          node - <<'NODE'
+          const fs=require('node:fs'),path=require('node:path');
+          const j=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/dar-tr-worklist.json','utf8'));
+          const target='content/posts/hasan-al-basri-selbstpruefung-20261021-481.md';
+          const q=j.queue.filter(x=>x.locale==='tr' && x.kind==='post' && x.sourcePath===target && ['pending','stale'].includes(x.state));
+          if(q.length!==1)throw Error('Expected exactly one reviewed-source Turkish candidate: '+q.length);
+          const item=j.items.find(x=>x.id===q[0].id);
+          if(!item || item.immutable?.sourceReviewBlocked)throw Error('Blocked canonical source');
+          if(JSON.stringify(item.fields).length>7000)throw Error('Source exceeds pilot character cap');
+          console.log('Source candidate verified:',item.id,'locale=tr, maximum 1 paid model request');
+          NODE
+      - name: Translate one canonical German adult post into Turkish DRAFT only
+        env:
+          DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
+          DAR_I18N_AI_API_URL: https://api.openai.com/v1/chat/completions
+          DAR_I18N_AI_MODEL: gpt-4.1
+          DAR_I18N_PROVIDER_APPROVED: 'yes'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "${DAR_I18N_AI_API_KEY:-}" ]]; then
+            echo "::error::Missing OpenAI secret DAR_I18N_AI_API_KEY"
+            exit 1
+          fi
+          node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs \
+            --generate \
+            --inventory "$RUNNER_TEMP/dar-tr-worklist.json" \
+            --output "$RUNNER_TEMP/dar-tr-pilot" \
+            --locale tr --kind post \
+            --source-path content/posts/hasan-al-basri-selbstpruefung-20261021-481.md \
+            --max-requests 1 --max-source-chars 7000 --max-output-tokens 3300
+      - name: Confirm review-only manuscript
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs=require('node:fs'),path=require('node:path');
+          const base=path.join(process.env.RUNNER_TEMP,'dar-tr-pilot/desktop-preview/i18n-core-v1/translations/tr/post');
+          const names=fs.readdirSync(base).filter(x=>x.endsWith('.json'));
+          if(names.length!==1)throw Error('Exactly one translation draft required');
+          const item=JSON.parse(fs.readFileSync(path.join(base,names[0]),'utf8'));
+          if(item.status!=='draft'||item.locale!=='tr'||item.reviewer!==null||
+             item.draftStatus!=='requires-linguistic-and-religious-review')throw Error('Review gate bypassed');
+          if(!item.fields.title || !item.fields.body || !item.modelUsage)throw Error('Incomplete generated draft');
+          console.log('PASS: One Turkish manuscript safely generated for language and religious review.');
+          console.log('Source ID:',item.id,'Generated filename:',names[0]);
+          console.log('OpenAI usage (tokens):',JSON.stringify(item.modelUsage));
+          NODE
+      - name: Keep translation in artifact only (never visitor publish)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-turkish-review-draft-one-post
+          path: ${{ runner.temp }}/dar-tr-pilot/
+          retention-days: 14
+          if-no-files-found: warn
