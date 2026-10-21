@@ -7,13 +7,6 @@ on:
       - feature/adult-multilingual-core-20261021
     paths:
       - 'content/posts/**'
-      - 'q/_registry/shortlinks.json'
-      - 'content/duas/duas.json'
-      - 'data/quiz-questions.json'
-      - 'apple-tv/hadith/**'
-      - 'lernen/**'
-      - 'desktop-preview/i18n-core-v1/**'
-      - '.github/workflows/dar-i18n-manuscripts.yml'
   workflow_dispatch:
     inputs:
       item_id:
@@ -28,7 +21,8 @@ on:
         options: [all, ar, en, tr, ku, ckb, bs]
 
 permissions:
-  contents: read
+  contents: write
+  pull-requests: write
 
 concurrency:
   group: dar-i18n-manuscripts-${{ github.ref }}
@@ -42,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          fetch-depth: 2
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -52,7 +46,7 @@ jobs:
           node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
       - name: Determine new and stale language jobs (no push)
         run: node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/worklist.json"
-      - name: Generate capped manuscript drafts (NOT approved)
+      - name: Generate changed-post language manuscripts (drafts only)
         env:
           DAR_I18N_AI_API_URL: ${{ vars.DAR_I18N_AI_API_URL }}
           DAR_I18N_AI_MODEL: ${{ vars.DAR_I18N_AI_MODEL }}
@@ -62,12 +56,18 @@ jobs:
           SELECT_LOCALE: ${{ inputs.locale }}
         shell: bash
         run: |
-          locale="${SELECT_LOCALE:-all}"
-          node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs \
-            --generate --inventory "$RUNNER_TEMP/worklist.json" \
-            --output "$RUNNER_TEMP/generated-drafts" \
-            --max-requests 6 --max-source-chars 9000 --max-output-tokens 5000 \
-            --locale "$locale" ${SELECT_ID:+--id "$SELECT_ID"}
+          set -euo pipefail
+          args=(--generate --inventory "$RUNNER_TEMP/worklist.json" --output "$RUNNER_TEMP/generated-drafts" --max-requests 6 --max-source-chars 9000 --max-output-tokens 5000 --locale "${SELECT_LOCALE:-all}")
+          if [[ -n "${SELECT_ID:-}" ]]; then
+            node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs "${args[@]}" --id "$SELECT_ID"
+          elif [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
+            mapfile -t changed < <(git diff --name-only HEAD^ HEAD -- 'content/posts/*.md' | head -n 2)
+            for source_path in "${changed[@]}"; do
+              node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs "${args[@]}" --source-path "$source_path"
+            done
+          else
+            echo "For historical content a specific canonical item_id is required."
+          fi
       - name: Upload unapproved draft artifacts only
         uses: actions/upload-artifact@v4
         with:
