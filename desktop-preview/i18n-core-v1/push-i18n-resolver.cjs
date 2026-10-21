@@ -105,8 +105,19 @@ function validateEvent(event) {
     if (event.mode === "advance" && ![5, 10, 15].includes(Number(event.minutes))) {
       throw new Error("Invalid advance window; only 5/10/15 minutes allowed");
     }
-  } else if (!String(event.contentId || "").trim()) {
-    throw new Error("Daily/post push requires canonical contentId");
+    if (event.mode === "advance" && !/^([01][0-9]|2[0-3]):[0-5][0-9]$/.test(String(event.time || ""))) {
+      throw new Error("Prayer prewarning requires a computed HH:MM target time");
+    }
+  } else {
+    if (!String(event.contentId || "").trim()) {
+      throw new Error("Daily/post push requires canonical contentId");
+    }
+    if (!String(event.sourceHash || "").trim()) {
+      throw new Error("Non-prayer push requires canonical source revision");
+    }
+    if (kind === "daily_ayah" && event.routeVerified !== true) {
+      throw new Error("Daily Āyah needs a verified destination and independent opt-in");
+    }
   }
   return kind;
 }
