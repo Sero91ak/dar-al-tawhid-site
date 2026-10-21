@@ -175,6 +175,13 @@ def main():
     check(wave.MAX_NEW_PER_CALL==25 and wave.MAX_ESTIMATED_CREDITS==1500,
           "bulk wave cap differs from strict reviewed settings")
     hold=load(HOLD)
+    # Explicit owner rejection supersedes older bulk-spend consent.
+    # Keep every saved original and receipt, but never start another paid take.
+    check(hold.get("productionPaused") is False and
+          hold.get("paidSpeechAuthorized") is True and
+          hold.get("ownerRestartAuthorized") is True and
+          hold.get("humanPronunciationApproved") is True,
+          "owner reported wrong Quran/Fusha pronunciation; paid bulk production paused")
     check(hold.get("ownerBulkConsent20261020") is True and
           hold.get("ownerBulkHearingApprovalClaimed") is False and
           hold.get("ownerBulkTotalForecastCreditsMaximum")==MAX_TOTAL_ESTIMATED_CREDITS and
@@ -198,6 +205,12 @@ def main():
        "estimatedCreditsCommittedThisRun":0.0,"waves":[]}
     total=0.0
     for i in range(MAX_WAVES):
+        current_hold=load(HOLD)
+        check(current_hold.get("productionPaused") is False and
+              current_hold.get("paidSpeechAuthorized") is True and
+              current_hold.get("ownerRestartAuthorized") is True and
+              current_hold.get("humanPronunciationApproved") is True,
+              "owner pronunciation stop is active, stop before another paid wave")
         try:
             queue,reg,ledger,protected,journal,items,report=wave.preflight()
         except RuntimeError as exc:
