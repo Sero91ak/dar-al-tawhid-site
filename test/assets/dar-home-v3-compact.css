@@ -394,3 +394,25 @@ html.dar-home-v3 body.is-home-route #appView [data-account-home-banner]{display:
 @media(max-width:350px){
  html.dar-home-v3 body.is-home-route .dv3-extras{grid-template-columns:1fr!important}
 }
+
+/* DAR TEST adult language choice: no parallel translations or API calls. */
+body.is-home-route .dv3-language{
+ display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:9px 0 12px;
+ margin:4px 0 9px;border-bottom:1px solid color-mix(in srgb,currentColor 18%,transparent);
+ font:600 12px/1.45 system-ui,-apple-system,sans-serif;color:inherit
+}
+body.is-home-route .dv3-language>span{opacity:.78;margin-inline-end:3px}
+body.is-home-route .dv3-language button{
+ min-height:40px;padding:8px 13px;border-radius:999px;
+ border:1px solid color-mix(in srgb,currentColor 27%,transparent);
+ background:transparent;color:inherit;cursor:pointer;
+ font:600 12px/1.3 system-ui,-apple-system,sans-serif;
+ -webkit-tap-highlight-color:transparent;touch-action:manipulation
+}
+body.is-home-route .dv3-language button[aria-pressed="true"]{
+ background:color-mix(in srgb,var(--gold,#bba273) 13%,transparent);
+ border-color:var(--gold,#bba273)
+}
+body.is-home-route .dv3-language button:focus-visible{
+ outline:2px solid var(--gold,#bba273);outline-offset:3px
+}

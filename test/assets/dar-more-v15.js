@@ -43,8 +43,26 @@ function renderOurApps(){
  </section>`;
 }
 
+const localeKey="darAdultPreferredLocaleV1";
+function currentLocale(){try{return localStorage.getItem(localeKey)==="tr"?"tr":"de"}catch(_){return"de"}}
+function setLocale(code){if(code!=="de"&&code!=="tr")return;try{localStorage.setItem(localeKey,code)}catch(_){}window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:code}}));sync();}
+function localeChoices(){
+ const value=currentLocale();
+ return '<section class="dm-locale" role="group" aria-label="Sprache wählen / Dil seçimi">'+
+ '<div class="dm-locale-copy"><strong>Sprache · Dil</strong><small>Türkische Inhalte werden nach Quellen- und Sprachprüfung freigegeben.</small></div>'+
+ '<div class="dm-locale-choices">'+
+ [['de','Deutsch'],['tr','Türkçe']].map(([code,label])=>'<button type="button" data-dm-locale="'+code+'" aria-pressed="'+(value===code)+'">'+label+'</button>').join('')+
+ '</div></section>';
+}
+function ensureLocaleCss(){
+ if(document.getElementById("dar-test-more-locale-css"))return;
+ const el=document.createElement("style");el.id="dar-test-more-locale-css";
+ el.textContent='.dar-more-v15 .dm-locale{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:12px 0;padding:12px 2px;border-block:1px solid color-mix(in srgb,currentColor 18%,transparent);color:inherit}.dm-locale-copy{display:grid;gap:5px;flex:1 1 170px}.dm-locale-copy strong{font-size:14px}.dm-locale-copy small{font-size:11px;opacity:.79;line-height:1.4}.dm-locale-choices{display:flex;gap:7px}.dar-more-v15 .dm-locale-choices button{min-height:42px;padding:9px 14px;border:1px solid color-mix(in srgb,currentColor 26%,transparent);border-radius:999px;color:inherit;background:transparent;font:600 12px system-ui,-apple-system,sans-serif;cursor:pointer}.dar-more-v15 .dm-locale-choices button[aria-pressed="true"]{border-color:var(--accent-gold,#bba273);background:color-mix(in srgb,var(--accent-gold,#bba273) 13%,transparent)}.dar-more-v15 .dm-locale-choices button:focus-visible{outline:2px solid var(--accent-gold,#bba273);outline-offset:3px}';
+ document.head.append(el);
+}
 const moreTheme=()=>document.documentElement.getAttribute("data-theme")||"dark";
 function render(items,header){
+ ensureLocaleCss();
  const data=Array.isArray(items)?items.filter(x=>x&&x.id!=="account"&&x.id!=="about"):[];
  if(!categories.some(c=>c[0]===chosen))chosen="wissen";
  const cats=categories.map(c=>'<button class="dm-cat" type="button" data-dm-category="'+c[0]+'" aria-pressed="'+(c[0]===chosen)+'">'+icon(c[3])+'<span>'+safe(c[1])+'</span></button>').join("");
@@ -63,6 +81,7 @@ function render(items,header){
  return '<section class="'+rootClass+'" data-dm-density="'+density+'">'+head+
  '<div class="dm-actions"><button type="button" class="dm-action" data-dm-search-toggle aria-label="Funktion suchen" aria-expanded="'+searchOpen+'">'+svg("search")+'</button><button type="button" class="dm-action" data-dm-theme-toggle aria-label="Erscheinungsbild in Einstellungen öffnen" aria-expanded="'+themeOpen+'">'+svg("palette")+'</button><button type="button" class="dm-action" data-dm-account-toggle aria-label="Konto und Synchronisierung öffnen" aria-expanded="'+accountOpen+'">'+svg("account")+'</button></div>'+
  '<div class="dm-search" '+(searchOpen?'':'hidden')+'><input id="moreFeatureSearch" type="search" placeholder="Funktion suchen…" autocomplete="off" aria-label="Funktion suchen" value="'+safe(query)+'"><button type="button" data-dm-search-close aria-label="Suche schließen">×</button></div>'+
+ localeChoices()+
  '<nav class="dm-tabs" aria-label="Bereiche">'+cats+'</nav><div class="dm-groups">'+groups+'</div>'+
  '<div class="dm-theme-backdrop" data-dm-theme-backdrop '+(themeOpen?'':'hidden')+'><section class="dm-theme-sheet" role="dialog" aria-modal="true" aria-labelledby="dmThemeTitle"><div class="dm-handle"></div><div class="dm-sheet-head"><div><small>DĀR AL TAWḤĪD · DESIGN</small><h3 id="dmThemeTitle">Erscheinungsbild</h3><p>Farbwelt wählen – die Inhalte bleiben unverändert.</p></div><button type="button" data-dm-theme-close aria-label="Schließen">×</button></div><div class="dm-theme-list">'+options+'</div><div class="dm-density-head">Darstellung</div><div class="dm-density-row"><button type="button" data-dm-density="compact" aria-pressed="'+(density==="compact")+'">Kompakt</button><button type="button" data-dm-density="comfort" aria-pressed="'+(density==="comfort")+'">Komfort</button></div></section></div></section>';
 }
@@ -87,6 +106,7 @@ function sync(){
   if(query)total+=visible;
  });
  root.querySelectorAll("[data-dm-category]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.getAttribute("data-dm-category")===chosen)));
+ root.querySelectorAll("[data-dm-locale]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.dmLocale===currentLocale())));
  const src=root.querySelector("#moreFeatureSearch");if(src&&src.value!==query)src.value=query;
  root.setAttribute("data-dm-density",density);
  root.classList.toggle("dm-searching",!!query);
@@ -103,6 +123,7 @@ function listen(e){
  const t=e.target&&e.target.closest?e.target.closest("button,[data-dm-theme-backdrop]"):null;
  const root=t&&t.closest("."+rootClass);if(!root)return;
  if(t.matches("[data-dm-theme-backdrop]")){if(e.target===t)closeSheet();return;}
+ if(t.hasAttribute("data-dm-locale")){setLocale(t.dataset.dmLocale);return;}
  if(t.hasAttribute("data-dm-category")){chosen=t.getAttribute("data-dm-category");query="";searchOpen=false;const search=root.querySelector(".dm-search");if(search)search.hidden=true;sync();return;}
  if(t.hasAttribute("data-dm-search-toggle")){searchOpen=!searchOpen;const search=root.querySelector(".dm-search");if(search)search.hidden=!searchOpen;t.setAttribute("aria-expanded",String(searchOpen));if(searchOpen)search.querySelector("input")?.focus();else{query="";sync();}return;}
  if(t.hasAttribute("data-dm-search-close")){searchOpen=false;query="";root.querySelector(".dm-search").hidden=true;root.querySelector("[data-dm-search-toggle]")?.setAttribute("aria-expanded","false");sync();return;}
@@ -113,6 +134,7 @@ function listen(e){
  if(t.hasAttribute("data-dm-theme")){const v=t.getAttribute("data-dm-theme");if(themes.some(x=>x[0]===v)&&typeof window.applyTheme==="function"){window.applyTheme(v);root.querySelectorAll("[data-dm-theme]").forEach(x=>x.setAttribute("aria-pressed",String(x.getAttribute("data-dm-theme")===v)));}return;}
 }
 document.addEventListener("click",listen);
+window.addEventListener("dar-adult-locale-changed",sync);
 document.addEventListener("input",function(e){if(e.target?.id!=="moreFeatureSearch"||!e.target.closest("."+rootClass))return;query=e.target.value.trim().toLocaleLowerCase("de");sync();});
 document.addEventListener("keydown",function(e){if(e.key==="Escape"&&themeOpen){e.preventDefault();closeSheet();}});
 const obs=new MutationObserver(()=>{const root=document.querySelector("."+rootClass);if(root&&root!==obs.last){obs.last=root;sync();}});
