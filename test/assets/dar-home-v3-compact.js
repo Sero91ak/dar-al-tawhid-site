@@ -20,6 +20,18 @@ const LINKS=[
  ["prayer","Gebetszeiten","Qiblah und Kalender","◷"]
 ];
 const esc=x=>String(x==null?"":x).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+
+const LANGUAGE_KEY="darAdultPreferredLocaleV1";
+function currentLanguage(){try{return localStorage.getItem(LANGUAGE_KEY)==="tr"?"tr":"de"}catch(_){return"de"}}
+function syncLanguageButtons(){
+ document.querySelectorAll("#dv3Home [data-dv3-locale]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.dv3Locale===currentLanguage())));
+}
+function setLanguage(code){
+ if(code!=="de"&&code!=="tr")return;
+ try{localStorage.setItem(LANGUAGE_KEY,code)}catch(_){}
+ syncLanguageButtons();window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:code}}));
+}
+
 const icon=(name)=>'<img src="/test/assets/dar-3d-icons/'+name+'.png" loading="lazy" alt="" decoding="async">';
 let lastPosts="",lastCity="",weatherBusy=false,weatherKey="",weatherAt=0,scheduled=false;
 const nativeNav=(name,val)=>{
@@ -33,6 +45,9 @@ const more=LINKS.slice(4).map((x,i)=>'<button class="dv3-more-link" type="button
 const swatches=THEMES.map(([k,v])=>'<button type="button" data-dv3-theme="'+k+'" aria-pressed="false"><span class="dv3-color dv3-color--'+k+'"></span>'+esc(v)+'</button>').join("");
 return '<div id="dv3Home" class="dv3-home" data-v3-version="3.1">'+
   '<div class="dv3-hometitle"><div><small>WILLKOMMEN IM DĀR</small><h2>Startseite</h2></div><button class="dv3-accountlink" type="button" data-dv3-nav="account" aria-label="Konto öffnen oder registrieren">'+icon("lock")+'<span>Konto / Registrieren</span><b>→</b></button></div>'+
+  '<div class="dv3-language" role="group" aria-label="Sprache wählen / Dil seçimi"><span>Sprache / Dil</span>'+
+ [['de','Deutsch'],['tr','Türkçe']].map(([code,label])=>'<button type="button" data-dv3-locale="'+code+'" aria-pressed="'+(currentLanguage()===code)+'">'+label+'</button>').join('')+
+ '</div>'+
   '<div id="dv3Weather" class="dv3-weather" role="status" aria-live="polite">Wetterdaten werden geladen …</div>'+
   '<div class="dv3-search-box"><label class="dv3-search-label" for="homeSearchInput"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7"/><path d="m16 16 5 5"/></svg></label><input id="homeSearchInput" type="search" autocomplete="off" enterkeyhint="search" placeholder="Suche Wissen, Beiträge, Bücher, Gelehrte …" aria-label="Beiträge, Gelehrte und Bücher suchen"><button type="button" id="dv3SearchClear" aria-label="Suche löschen" hidden>×</button></div>'+
   '<button type="button" class="dv3-tawhid" data-dv3-nav="tawhid-guide"><span class="dv3-ornament" aria-hidden="true"></span><span class="dv3-kicker">GRUNDLAGEN DES GLAUBENS</span><strong>Tawḥīd &amp; ʿAqīdah</strong><span class="dv3-description">Allah allein anbeten. Die Glaubensgrundlagen nach Qurʾān, Sunnah und dem Verständnis der Salaf.</span><span class="dv3-tawhid-footer">Bedeutung, Belege &amp; Quellen entdecken <b>→</b></span></button>'+
@@ -150,6 +165,7 @@ function sync(){
  const searchBlock=shell.querySelector("#homeSearchBlock");
  const searchField=root.querySelector(".dv3-search-box");
  if(searchBlock&&searchField&&searchField.nextElementSibling!==searchBlock)searchField.insertAdjacentElement("afterend",searchBlock);
+ syncLanguageButtons();
  renderLatest();fetchWeather();
  const select=document.querySelectorAll("#dv3ThemePanel [data-dv3-theme]");
  const current=document.documentElement.getAttribute("data-theme");
@@ -159,8 +175,9 @@ function queue(){
  if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;try{sync()}catch(e){console.warn("DAR test home v3:",e)}});
 }
 document.addEventListener("click",function(e){
- const button=e.target.closest?.("[data-dv3-nav],[data-dv3-theme-open],[data-dv3-theme],[data-dv3-close],#dv3SearchClear");
+ const button=e.target.closest?.("[data-dv3-locale],[data-dv3-nav],[data-dv3-theme-open],[data-dv3-theme],[data-dv3-close],#dv3SearchClear");
  if(!button||!/^\/test(?:\/|$)/.test(location.pathname))return;
+ if(button.hasAttribute("data-dv3-locale")){e.preventDefault();e.stopPropagation();setLanguage(button.dataset.dv3Locale);return;}
  if(button.hasAttribute("data-dv3-nav")){
   e.preventDefault();e.stopPropagation();nativeNav(button.dataset.dv3Nav,button.dataset.dv3Value);return;
  }
@@ -179,6 +196,8 @@ document.addEventListener("input",function(e){
  // Existing bindHomeV380Events already performs one native search; do not fire a second.
 });
 document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;const p=document.getElementById("dv3ThemePanel");if(p&&!p.hidden){p.hidden=true;e.preventDefault();}});
+window.addEventListener("dar-adult-locale-changed",syncLanguageButtons);
+window.addEventListener("storage",function(e){if(e.key===LANGUAGE_KEY)syncLanguageButtons()});
 document.addEventListener("dar:view-rendered",queue);
 window.addEventListener("hashchange",queue);
 window.addEventListener("pageshow",queue);
