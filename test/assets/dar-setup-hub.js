@@ -301,7 +301,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
       block.setAttribute("aria-label","Sprache und Inhalt / Dil ve içerik");
       block.innerHTML='<div class="dsh-group-head"><span>Sprache · Dil</span></div>'+
         '<div class="dsh-list"><div class="dsh-row dar-test-settings-locale-row">'+
-        '<div class="dsh-row-copy"><strong>Sprache auswählen</strong><small>Türkisch und Deutsch. Fachbeiträge erscheinen erst nach Prüfung in der gewählten Sprache.</small></div>'+
+        '<div class="dsh-row-copy"><strong>Sprache auswählen</strong><small>Sieben App-Sprachen. Fachinhalte erscheinen in der gewählten Sprache erst nach Quellen- und Sprachprüfung.</small></div>'+
         '<div class="dar-setup-hub__locale-choices" role="group" aria-label="App-Sprache">'+
         localeButtons()+'</div></div></div>';
       var welcome=home.querySelector(".dsh-welcome");
