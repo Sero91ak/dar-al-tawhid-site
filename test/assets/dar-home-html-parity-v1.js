@@ -37,8 +37,8 @@ function html(){
  var q=quicks.map(function(a){return '<button type="button" class="dhp-quick" data-dhp-route="'+a[0]+'"><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/'+a[1]+'" alt="" loading="lazy" decoding="async"></span><b>'+a[2]+'</b></button>'}).join("");
  var l=links.map(function(a){return '<button type="button" class="dhp-library-tile" data-dhp-route="'+a[0]+'"><span class="dhp-icon3d" aria-hidden="true"><img src="/test/assets/dar-3d-icons/'+a[1]+'" alt="" loading="lazy" decoding="async"></span><b>'+a[2]+'</b><small>'+a[3]+'</small></button>'}).join("");
  return '<div class="dhp-content">'+
-  '<div class="dhp-kicker">BEITRÄGE NACH QURʾĀN, SUNNAH &amp; ĀTHĀR</div>'+
-  '<div class="dhp-brand"><div class="dhp-seal" id="dhpBrandSeal"></div><div class="dhp-brand-copy"><h1>DĀR AL TAWḤĪD</h1><span class="dhp-brand-rule" aria-hidden="true"></span><small>Wissen · Überlieferung · Erkenntnis</small></div></div>'+
+  /* The only brand header is #darTestBrandHeaderV1 above this scroll surface. */
+
   '<button type="button" class="dhp-prayer" data-dhp-route="prayer" aria-label="Gebetszeiten öffnen"><div class="dhp-prayer-top"><div><div class="dhp-kicker">NÄCHSTES GEBET</div><b id="dhpPrayerName">Gebetszeiten</b><div class="dhp-tiny dhp-muted">Standortabhängige Gebetszeiten</div></div><div class="dhp-prayer-right"><div class="dhp-clock" id="dhpPrayerClock">–</div><div class="dhp-tiny dhp-muted" id="dhpPrayerRemain"></div></div></div><div class="dhp-prayer-footer"><span id="dhpPrayerDate">Gebetskalender</span><span id="dhpPrayerHijri"></span><span id="dhpPrayerPlace">Standort</span></div></button>'+
   '<section class="dhp-welcome" aria-label="Begrüßung bei DĀR AL TAWḤĪD"><h2 class="dhp-greeting">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</h2><div class="dhp-welcome-rule" aria-hidden="true"></div><p class="dhp-intro">Willkommen bei <strong>DĀR AL TAWḤĪD</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</p></section>'+
   '<section class="dhp-isnad" aria-labelledby="dhpQuoteTitle"><div class="dhp-isnad-label" id="dhpQuoteTitle">ÜBERLIEFERUNGSMAẞSTAB</div><blockquote class="dhp-quote">„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“<div class="dhp-tiny dhp-quote-source">Muḥammad ibn Sīrīn</div></blockquote></section>'+
@@ -306,6 +306,10 @@ function stylesheet(){
  "#darHomeHtmlParityV1 .dhp-footer{height:auto!important;min-height:0!important;margin-top:16px!important;margin-bottom:0!important;padding-bottom:0!important;}",
  "#darHomeHtmlParityV1 .dhp-library-tile::before,#darHomeHtmlParityV1 .dhp-library-tile::after{pointer-events:none!important;}",
  "@media(max-width:699px){#darHomeHtmlParityV1 .dhp-library{grid-auto-rows:minmax(108px,auto)!important;}#darHomeHtmlParityV1 .dhp-library-tile{min-height:108px!important;padding-block:10px 12px!important;}#darHomeHtmlParityV1 .dhp-content{padding-bottom:calc(var(--dar-nav-height,76px) + env(safe-area-inset-bottom,0px) + 12px)!important;}}"
+ /* DAR_TEST_HOME_PRAYER_FIRST_ACTUAL_V54: the parity renderer, not .top-shell, is visible! */
+ "#darHomeHtmlParityV1 .dhp-content{padding-top:0!important;}",
+ "#darHomeHtmlParityV1 .dhp-content>.dhp-prayer:first-child{margin-top:4px!important;}",
+ "html,html body{overscroll-behavior-y:none!important;}",
  ].join("\n");
 }
 function create(){
@@ -392,6 +396,7 @@ function updateBrand(){
  var root=document.getElementById(ID);if(!root)return;
  var real=document.querySelector(".top-shell .brand-main .logo,.top-shell .brand-main img.logo,.top-shell .brand img");
  var seal=root.querySelector("#dhpBrandSeal");
+ if(!seal)return; // Legacy Home brand removed; upper fixed header owns the seal.
  if(real&&real.getAttribute("src")&&!seal.querySelector("img")){
   var img=document.createElement("img");img.src=real.currentSrc||real.getAttribute("src");img.alt="DĀR AL TAWḤĪD";
   seal.replaceChildren(img);
