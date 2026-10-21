@@ -21,7 +21,7 @@ const baseEvent = {
 const postEvent = {
   type: "new_post", eventKey: "post:readable-article|revision-1",
   contentId: "post:readable-article", postSlug:"readable-article", routeVerified:true,
-  qNumber: 271, sourceHash:"sha-1", environment:"test"
+  qNumber: 271, qRegistryVerified:true, sourceHash:"sha-1", environment:"test"
 };
 
 test("nine adult languages, Arabic and Soranî RTL", () => {
@@ -147,6 +147,11 @@ test("new article cannot push to a guessed or unverified page",()=>{
  assert.throws(()=>resolveRecipientPush({event:{...postEvent,routeVerified:false},copies,subscription:s}),/verified canonical visitor route/);
  assert.throws(()=>resolveRecipientPush({event:{...postEvent,postSlug:"../../admin"},copies,subscription:s}),/verified canonical visitor route/);
  assert.throws(()=>resolveRecipientPush({event:{...postEvent,postSlug:""},copies,subscription:s}),/verified canonical visitor route/);
+});
+test("a guessed Q number is never exposed as a verified source",()=>{
+ const subscription={subscription_id:"q-test",app_locale:"de",push_opted_in:true,enabled:true,app_environment:"test"};
+ assert.throws(()=>resolveRecipientPush({event:{...postEvent,qRegistryVerified:false},copies,subscription}),/Q number/);
+ assert.throws(()=>resolveRecipientPush({event:{...postEvent,qNumber:0},copies,subscription}),/Q number/);
 });
 test("source revision, independent Āyah opt-in and exact target time",()=>{
  const subscription={subscription_id:"s",app_locale:"en",push_opted_in:true,enabled:true,app_environment:"test"};
