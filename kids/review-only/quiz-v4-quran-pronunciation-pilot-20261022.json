@@ -19,7 +19,16 @@
     "sessionId": "KhX5MAVVk7n9h1HqbwNO",
     "durationSeconds": 1.28,
     "creditsReported": 10.659726872246695,
-    "status": "generated-awaiting-independent-fusha-hearing-review"
+    "status": "generated-awaiting-independent-fusha-hearing-review",
+    "automatedAsr": {
+      "provider": "ElevenLabs Scribe",
+      "modelId": "eleven_scribe_v1",
+      "generationId": "CPTSy6adRBE9z3UO0HeS",
+      "transcript": "الْقُرْآنُ.",
+      "matchesIntendedWrittenWord": true,
+      "phoneticAccuracyAndTajweedProven": false,
+      "costCreditsReported": 0
+    }
   },
   "qualityGate": {
     "quranTermHumanApproved": false,
@@ -27,7 +36,8 @@
     "mixedLanguageMasterApproved": false,
     "appPublished": false,
     "questionsCompletedFromPilot": 0,
-    "doNotRerenderSamePromptWithoutRecoveryCheck": true
+    "doNotRerenderSamePromptWithoutRecoveryCheck": true,
+    "automatedTranscriptionChecked": true
   },
   "preservation": "Keep this generation in ElevenLabs. Not part of approved 450-question production or public audio manifest. The German master pronunciation dictionary is not guaranteed to have been applied by the connected creative speech route; a human auditory check is mandatory before adopting it.",
   "otherPriority": {
