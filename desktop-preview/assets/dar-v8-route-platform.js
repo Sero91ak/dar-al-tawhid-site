@@ -142,16 +142,29 @@ function enhanceSearch(ctx){
  const form=document.getElementById("darV8ChatForm"),input=document.getElementById("siteSearch"),summary=document.getElementById("darV8ChatSummary");
  if(!form||!input||!summary)return;
  function update(){
-  const q=input.value.trim();
-  const n=document.querySelectorAll("#searchResults .list-row").length;
+  const q=input.value.trim(),found=[...document.querySelectorAll("#searchResults a.list-row")].slice(0,5);
   summary.replaceChildren();
+  const heading=document.createElement("strong");
+  heading.textContent=!q?"Fragen zu unserem Quellenbestand":found.length?"Gefundene Originalfundstellen":"Derzeit keine belegte Fundstelle gefunden";
   const msg=document.createElement("p");
-  msg.textContent=q?(n?"Für „"+q+"“ wurden "+n+" Fundstellen angezeigt. Öffne einen Treffer, um die Quelle zu prüfen.":"Zu dieser Anfrage ist derzeit keine passende Fundstelle im geladenen Website-Index vorhanden."):"Stelle eine Frage. Die Suche zeigt nur tatsächlich vorhandene Quellen auf DĀR AL TAWḤĪD.";
-  summary.append(msg);
+  msg.textContent=!q?"Frage nach Tawḥīd, Fiqh, Duʿāʾ oder einer Überlieferung. Es erscheinen nur unsere vorhandenen Veröffentlichungen.":found.length?"Zu „"+q+"“ habe ich "+document.querySelectorAll("#searchResults a.list-row").length+" Fundstellen in den geladenen Website-Inhalten gefunden. Prüfe die vollständige Aussage unter dem jeweiligen Quellenlink.":"Zu „"+q+"“ wurde in den derzeit verfügbaren Website-Inhalten kein passender Beleg gefunden. Ich erfinde keine religiöse Antwort.";
+  summary.append(heading,msg);
+  if(found.length){
+   const links=document.createElement("div");links.className="dar-v8-chat-source-links";
+   for(const original of found){
+    const link=document.createElement("a");link.className="desktop-link dar-v8-chat-source";link.href=original.href;
+    link.dataset.page=original.getAttribute("data-page")||"suche";
+    const label=document.createElement("span");label.textContent=original.querySelector("strong")?.textContent||original.textContent.trim().slice(0,160);
+    link.append(label);links.append(link);
+   }
+   summary.append(links);
+  }
  }
  form.addEventListener("submit",e=>{e.preventDefault();input.dispatchEvent(new Event("input",{bubbles:true}));update();document.getElementById("searchResults")?.scrollIntoView({block:"nearest",behavior:"smooth"})});
  input.addEventListener("input",update);
- document.querySelectorAll("[data-v8-ask]").forEach(btn=>btn.addEventListener("click",()=>{input.value=btn.getAttribute("data-v8-ask")||"";input.dispatchEvent(new Event("input",{bubbles:true}));update()}));
+ input.addEventListener("focus",()=>{document.body.classList.add("v8-chat-focused");requestAnimationFrame(()=>input.scrollIntoView({block:"center",behavior:"smooth"}))});
+ input.addEventListener("blur",()=>document.body.classList.remove("v8-chat-focused"));
+ document.querySelectorAll("[data-v8-ask]").forEach(btn=>btn.addEventListener("click",()=>{input.value=btn.getAttribute("data-v8-ask")||"";input.dispatchEvent(new Event("input",{bubbles:true}));update();input.focus()}));
  update();
 }
 function init(key,ctx){
