@@ -126,7 +126,15 @@ function createEngine(options){
   // NEVER silently call a translator or substitute an unapproved religious translation.
   const translation=record?.translations?.[code];
   if(code==="de")return{locale:"de",body:String(record?.bodyDe||""),pending:false};
-  if(translation?.status==="approved"&&translation?.editorialReviewed===true&&translation?.sourceId===record.id)
+  // A status flag by itself never authorizes distribution of religious translations.
+  // Both original and translation must carry the same nonempty canonical revision.
+  if(translation?.status==="approved"&&translation?.editorialReviewed===true&&
+     translation?.sourceId===record.id&&typeof record?.sourceHash==="string"&&
+     record.sourceHash.length===64&&translation.sourceHash===record.sourceHash&&
+     translation.reviewer?.linguistic&&translation.reviewer?.religious&&
+     translation.reviewer?.arabicOriginalChecked===true&&
+     translation.reviewer?.sourcesChecked===true&&translation.reviewedAt&&
+     typeof translation.body==="string"&&translation.body.trim())
    return{locale:code,body:translation.body,pending:false};
   return{locale:"de",body:String(record?.bodyDe||""),pending:true,notice:t("unverified",code)};
  }
