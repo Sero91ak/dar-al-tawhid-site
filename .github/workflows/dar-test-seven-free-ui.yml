@@ -10,6 +10,7 @@ on:
       - 'test/i18n/test-canonical-visible-titles.cjs'
       - 'test/i18n/test-seven-approved-content.cjs'
       - 'test/i18n/audit-visible-title-coverage.cjs'
+      - 'test/i18n/audit-nonpost-content-coverage.cjs'
       - 'test/i18n/audit-captured-ui.cjs'
       - 'test/assets/dar-adult-central-content.js'
       - 'test/i18n/adult-visible-title-drafts-seven.json'
@@ -50,6 +51,7 @@ jobs:
           node test/assets/dar-adult-central-catalog.test.cjs
           node test/i18n/test-seven-approved-content.cjs
           node test/i18n/audit-visible-title-coverage.cjs
+          node test/i18n/audit-nonpost-content-coverage.cjs
           node - <<'NODE'
           const fs=require('node:fs');
           const raw=fs.readFileSync('test/i18n/adult-ui-locales-seven.json','utf8');
