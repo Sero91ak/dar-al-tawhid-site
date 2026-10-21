@@ -76,8 +76,11 @@ def main():
                 _,missing=resolve_text_originals(text,reg["textClips"],
                                                  native_mapping,native_assets)
                 for needed in missing:
-                    if needed in registered or needed in quarantined:continue
+                    if needed in registered:continue
+                    # An unsettled Flow original may ALSO be quarantined:
+                    # keep its paid reservation in the blocked-cost queue.
                     if needed in reserved:expected_reserved.add(needed)
+                    elif needed in quarantined:continue
                     elif digest(needed) in uncertain_hashes:
                         expected_uncertain.add(digest(needed))
                     elif needed not in missing9:
