@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "scope": "KIDS_QUIZ_V4_REVIEW_ONLY_ASR_PROVENANCE",
+  "date": "2026-10-22",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "flowUrl": "https://elevenlabs.io/app/flows/6jy3hYoAm24ViUmTGlvk",
+  "technical": "Three original clips newly generated; each auto-transcribed by eleven_scribe_v1 with verbatim source match",
+  "asrCannotVerify": "native Fuṣḥā phonemes, makhārij, vowel lengths, tajwid, owner auditory consent or pronunciation dictionary use",
+  "pronunciationDictionaryVerifiedForConnectorCreative": false,
+  "publicReleaseAllowed": false,
+  "recordings": [
+    {
+      "questionId": "kids-quiz-624",
+      "part": "question",
+      "source": "Was lehrt Sūrat ash-Sharḥ nach dem Ende einer Aufgabe?",
+      "v4GenerationId": "zzXJWv2JBGxX9M4LOhb9",
+      "asr": "Was lehrt Sūrat ash-Sharḥ nach dem Ende einer Aufgabe?",
+      "credits": 52.32956828193832,
+      "transcriptGenerationId": "",
+      "asrTextMatchesSource": true,
+      "humanPronunciationApproved": false,
+      "mp3AssignedToPublicApp": false
+    },
+    {
+      "questionId": "kids-quiz-332",
+      "part": "explanation",
+      "source": "Allah erfüllte Sein Versprechen und tröstete Mūsās Mutter.",
+      "v4GenerationId": "pY6qZXS4RxK21jYECdmh",
+      "asr": "Allah erfüllte Sein Versprechen und tröstete Mūsās Mutter.",
+      "credits": 56.20583259911895,
+      "transcriptGenerationId": "",
+      "asrTextMatchesSource": true,
+      "humanPronunciationApproved": false,
+      "mp3AssignedToPublicApp": false
+    },
+    {
+      "questionId": "kids-quiz-859",
+      "part": "explanation",
+      "source": "Luqmāns Rat lehrt maßvolles Auftreten und eine ruhige Stimme.",
+      "v4GenerationId": "WATQYughEOMdK8YOLKkL",
+      "asr": "Luqmāns Rat lehrt maßvolles Auftreten und eine ruhige Stimme.",
+      "credits": 59.1130308370044,
+      "transcriptGenerationId": "",
+      "asrTextMatchesSource": true,
+      "humanPronunciationApproved": false,
+      "mp3AssignedToPublicApp": false
+    }
+  ]
+}
