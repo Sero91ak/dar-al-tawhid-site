@@ -1,7 +1,7 @@
 name: KIDS V4 Import Existing Paid Creative Candidates (review only)
 on:
   push:
-    branches: [review/kids-quiz-v4-batch-001-020-20261014]
+    branches: [review/kids-quiz-v4-batch-001-020-20261014, review/kids-v4-audio-safe-import-20261022]
     paths: ['kids/review-only/quiz-v4-creative-v4candidate-transfer-20261022.json']
 permissions:
   contents: write
@@ -15,7 +15,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: review/kids-quiz-v4-batch-001-020-20261014
+          ref: review/kids-v4-audio-safe-import-20261022
           fetch-depth: 2
       - name: Install FFmpeg and FFprobe for genuine MP3 verification
         shell: bash
@@ -59,11 +59,11 @@ jobs:
           git add kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-handover-latest.json
           git commit -m "audio(kids review): import real V4 candidate originals with SHA, keep live blocked"
           for attempt in 1 2 3; do
-            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+            if git push origin HEAD:review/kids-v4-audio-safe-import-20261022; then
               echo 'Saved genuine V4 originals safely in review; public release stays OFF.'
               exit 0
             fi
-            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git fetch origin review/kids-v4-audio-safe-import-20261022
             git rebase FETCH_HEAD
           done
           echo 'GitHub push failed. Recover original MP3s from artifact; do not rebill.' >&2
