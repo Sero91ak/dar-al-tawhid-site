@@ -35,9 +35,12 @@ const dynamicQuran=makeText("Qurʾān · 8 Fundstellen"),
  dynamicStatements=makeText("Aussagen im Qurʾān · 3"),
  preservedSource=makeText("Qurʾān · 8 Fundstellen",true);
 const numericPosts=makeText("18 Beiträge"),numericSurahs=makeText("7 Sūren · 26 Āyāt"),
- dynamicAyahLink=makeText("Im Qurʾān öffnen · 2:45");
+ dynamicAyahLink=makeText("Im Qurʾān öffnen · 2:45"),
+ dynamicSurahButton=makeText("Sūrah Al-Baqarah öffnen"),
+ dynamicSurahCount=makeText("114 Suren mit Arabisch und Lautschrift."),
+ dynamicDuaCount=makeText("5 bekannte Duʿāʾ nach Themen.");
 const nodes=[primary,prayer,weekday,original,excluded,dynamicQuran,dynamicStatements,preservedSource,
- numericPosts,numericSurahs,dynamicAyahLink];
+ numericPosts,numericSurahs,dynamicAyahLink,dynamicSurahButton,dynamicSurahCount,dynamicDuaCount];
 const props={
  nodeType:1,children:[],textContent:"📖 Wer Gutes zeigt, bekommt Anteil am Lohn",
  closest:()=>({getAttribute:()=> "wer-gutes-zeigt-bekommt-anteil-am-lohn-198"}),
@@ -114,6 +117,18 @@ for(const locale of EXPECTED){
     (locale==="tr"?"Kur'ân'da aç":pack.translations[locale]["Im Qurʾān öffnen"])+" · 2:45",
     locale+" Quran reference control");
  }
+ const messages={
+  tr:["Sûre Al-Baqarah aç","114 sûre; Arapça ve okunuşlarıyla.","Konulara göre 5 bilinen dua."],
+  en:["Open Sūrah Al-Baqarah","114 surahs with Arabic and transliteration.","5 known supplications by topic."],
+  ar:["فتح سورة Al-Baqarah","114 سورة بالنص العربي واللفظ المنقول.","5 أدعية معروفة بحسب الموضوع."],
+  ku:["Sûreya Al-Baqarah veke","114 sûre bi Erebî û vegotina dengî.","5 duayên naskirî li gor mijaran."],
+  ckb:["سوورەتی Al-Baqarah بکەرەوە","114 سوورەت بە عەرەبی و خوێندنەوەی دەنگی.","5 دوعای ناسراو بەپێی بابەت."],
+  bs:["Otvori suru Al-Baqarah","114 sura s arapskim tekstom i transkripcijom.","5 poznatih dova po temama."]
+ };
+ const expectedMessages=locale==="de"?["Sūrah Al-Baqarah öffnen","114 Suren mit Arabisch und Lautschrift.","5 bekannte Duʿāʾ nach Themen."]:messages[locale];
+ assert.equal(dynamicSurahButton.nodeValue,expectedMessages[0],locale+" surah button");
+ assert.equal(dynamicSurahCount.nodeValue,expectedMessages[1],locale+" full Quran count");
+ assert.equal(dynamicDuaCount.nodeValue,expectedMessages[2],locale+" summary count");
  for(const term of ["Geprüfte Beziehungen","Umstrittene Angaben (bewusst öffnen)",
                    "nicht sicher überliefert","Keine Treffer."]){
   assert(locale==="de"||pack.translations[locale][term]?.trim(),locale+" missing "+term);
