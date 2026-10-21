@@ -128,7 +128,7 @@ function validateScreensaverMetadata() {
   const listed = Array.isArray(index.files) ? index.files : [];
   const sums = listed.reduce((n, item) => n + Number(item.count || 0), 0);
   if (sums !== count) fail("screensaver index file counts do not match canonical records");
-  if (listed.some(item => /(?:^|\\/)rotation\\.json$/.test(String(item.path || "")))) fail("screensaver index incorrectly points to rotation rules");
+  if (listed.some(item => String(item.path || "").split("/").pop() === "rotation.json")) fail("screensaver index incorrectly points to rotation rules");
   const sourcePath = "../hadith/library-shell.json";
   if (listed.length !== 1 || listed[0].path !== sourcePath) fail("screensaver entries-index must use canonical hadith library-shell");
   if (!Array.isArray(screensaver.entriesPaths) || screensaver.entriesPaths.length !== 1 ||
