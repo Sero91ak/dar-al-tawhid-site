@@ -10,6 +10,7 @@ on:
       - 'test/i18n/test-canonical-visible-titles.cjs'
       - 'test/i18n/test-seven-approved-content.cjs'
       - 'test/i18n/audit-visible-title-coverage.cjs'
+      - 'test/i18n/audit-captured-ui.cjs'
       - 'test/assets/dar-adult-central-content.js'
       - 'test/i18n/adult-visible-title-drafts-seven.json'
       - 'test/assets/dar-test-turkish-ui.js'
@@ -76,6 +77,8 @@ jobs:
 
       - name: Capture 15 DAR TEST section UI inventories
         run: python3 test/i18n/capture-visible-ui.py
+      - name: Audit actual UI labels across fifteen sections
+        run: node test/i18n/audit-captured-ui.cjs
       - name: Archive QA-only untranslated UI candidate inventory
         if: always()
         uses: actions/upload-artifact@v4
