@@ -1,0 +1,66 @@
+name: KIDS V4 Import Next Three Already Generated Master Originals
+on:
+  push:
+    branches:
+      - review/kids-v4-audio-safe-import-20261022
+    paths:
+      - kids/review-only/quiz-v4-creative-v4candidate-transfer-second-20261022.json
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-second-three-existing-paid-audio-20261022
+  cancel-in-progress: false
+jobs:
+  download-paid-mp3s:
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-v4-audio-safe-import-20261022
+      - name: Ensure MP3 decoder
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null; then
+            sudo apt-get -o Acquire::Retries=1 -o DPkg::Lock::Timeout=20 update -y
+            sudo apt-get -o Acquire::Retries=1 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+      - name: Import three actually completed V4 source MP3s with SHA and generation ID verification
+        run: |
+          set -euo pipefail
+          python3 kids/tools/import_quiz_v4_second_three_20261022.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.load(open('kids/data/quiz-v4-450-original-clip-registry.json'))
+          x=json.load(open('kids/review-only/quiz-v4-creative-v4candidate-transfer-second-results-20261022.json'))
+          assert len(r['textClips'])==1783 and x['count']==3, (len(r['textClips']),x.get('count'))
+          assert r['live'] is False and x['publicReleaseAllowed'] is False
+          print('SECOND_3_GENUINE_V4_IMPORTS_PASS_NO_SPEECH_SYNTHESIS')
+          PY
+      - name: Commit only immutable originals, original register and second receipts
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-second-three-audio
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git rm kids/review-only/quiz-v4-creative-v4candidate-transfer-second-20261022.json
+          git add kids/assets/kids-quiz-audio/v4-curated450-review/
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/review-only/quiz-v4-creative-v4candidate-transfer-second-results-20261022.json
+          git commit -m "audio(kids review): preserve next three already paid eleven_v4 originals; no live release"
+          if git push origin HEAD:review/kids-v4-audio-safe-import-20261022; then exit 0; fi
+          git fetch origin review/kids-v4-audio-safe-import-20261022
+          git rebase FETCH_HEAD
+          git push origin HEAD:review/kids-v4-audio-safe-import-20261022
+      - name: Keep real paid original bytes as downloadable artifact even if push fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-next-three-real-owner-voice-original-mp3-backup
+          if-no-files-found: warn
+          retention-days: 90
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/33d013f848b22057cd2decf5d820e81.mp3
+            kids/assets/kids-quiz-audio/v4-curated450-review/b49298effc4ee1c60e69cc1f9d6f893.mp3
+            kids/assets/kids-quiz-audio/v4-curated450-review/3eb724c62e4397c4d82154ccbb46e73.mp3
+            kids/review-only/quiz-v4-creative-v4candidate-transfer-second-results-20261022.json
