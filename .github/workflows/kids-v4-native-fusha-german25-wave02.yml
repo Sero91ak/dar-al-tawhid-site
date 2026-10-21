@@ -1,0 +1,77 @@
+name: KIDS V4 Native Fusha German Connectors Wave02
+on:
+  push:
+    branches:
+      - review/kids-quiz-v4-batch-001-020-20261014
+    paths:
+      - kids/review-only/quiz-v4-native-fusha-german25-wave02-trigger.json
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-german-fusha25-wave02-paid-once
+  cancel-in-progress: false
+jobs:
+  second-capped-twentyfive-german-master-wave:
+    if: >-
+      github.repository == 'Sero91ak/dar-al-tawhid-site' &&
+      github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
+      github.event.head_commit.message == 'audio(kids): start exact German Fusha wave02 owner V4 originals 20261021'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      KIDS_V4_OWNER_450_BULK_EXPLICIT: 'YES'
+      KIDS_V4_EXPLICIT_SPEND_APPROVAL: 'YES'
+    steps:
+      - name: Checkout latest reviewed canonical quiz, PLS and paid receipts
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          fetch-depth: 0
+      - name: Verify owner exactly authorized one SHA-pinned bounded source batch
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          owner=json.loads(Path('kids/review-only/quiz-v4-native-fusha-german25-wave02-trigger.json').read_text(encoding='utf-8'))
+          assert owner=={
+            'scope':'KIDS_V4_450_DE_MASTER_COMPONENTS_FOR_NATIVE_FUSHA',
+            'sourceReviewGitBlob':'e914581ac79e1047a8b4197a4b11d25ec7b941c3',
+            'maxNewExactGermanOriginals':25,
+            'maximumEstimatedCredits':750,
+            'modelId':'eleven_v4',
+            'voiceId':'DkU7j9uO4ZEtLD2iRZSH',
+            'pronunciationDictionaryId':'Q8w3SxtoVo8NSjsnlJEd',
+            'pronunciationDictionaryVersion':'wSzgkGpAwEDiTak8DApc',
+            'ownerHeldBadPronunciationForbidden':True,
+            'noSecondPaidAttemptForUncertainOrPaidText':True,
+            'humanApprovalNotClaimed':True,
+            'publicReleaseAllowed':False
+          },'Incorrect exact owner cost cap or source SHA'
+          assert json.loads(Path('kids/data/quiz-curation-release.json').read_text())['enabled'] is False
+          PY
+          python3 -m py_compile kids/tools/produce_quiz_v4_native_fusha_german_wave02.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/produce_quiz_v4_native_fusha_german_wave02.py --audit
+      - name: Install audio decoding tools before any paid POST
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null; then sudo apt-get -qq update && sudo apt-get -y -qq install ffmpeg; fi
+          command -v ffprobe
+      - name: Produce at most 25 paid master originals, each journaled to GitHub before and after
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce_quiz_v4_native_fusha_german_wave02.py --produce
+      - name: Archive immutable genuine originals and receipts even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-native-fusha-german-wave02-originals-never-repurchase
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/data/quiz-v4-20261021-native-fusha-german25-wave02-ledger.json
+            kids/assets/kids-quiz-audio/v4-native-fusha-german-components-review/
