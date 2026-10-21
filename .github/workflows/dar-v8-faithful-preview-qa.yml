@@ -1,0 +1,82 @@
+name: Verify Faithful V8 Browser Shell
+on:
+  push:
+    branches:
+      - feat/public-desktop-v8-faithful-shell-20261021
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  visual:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate embedded JS syntax
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const html=fs.readFileSync('desktop-preview/index.html','utf8');
+          const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map(x=>x[1]).filter(x=>x.trim());
+          scripts.forEach((s,i)=>{try{new Function(s)}catch(e){throw Error('Script '+i+': '+e.message)}});
+          if(!html.includes('id="darV8Sidebar"')||!html.includes('id="darV8PrayerStrip"'))throw Error('V8 shell incomplete');
+          console.log('PASS: scripts='+scripts.length);
+          NODE
+      - name: Start local canonical browser website
+        run: |
+          mkdir -p __v8_visual_test
+          cp desktop-preview/index.html __v8_visual_test/index.html
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/dar-v8-http.log 2>&1 &
+          echo $! > /tmp/dar-v8-http.pid
+          sleep 2
+      - name: Render real CSS and components on desktop, phone and Fold
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --quiet selenium
+          python - <<'PY'
+          from selenium import webdriver
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          import os
+          os.makedirs('/tmp/v8-faithful-shots',exist_ok=True)
+          opts=Options()
+          for a in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--hide-scrollbars'):opts.add_argument(a)
+          driver=webdriver.Chrome(options=opts)
+          try:
+            for name,width,height in [('desktop',1440,900),('iphone',393,844),('fold',840,900)]:
+              driver.set_window_size(width,height)
+              driver.get('http://127.0.0.1:8765/__v8_visual_test/index.html?page=start')
+              WebDriverWait(driver,30).until(lambda d: len(d.find_elements(By.CSS_SELECTOR,'#darV8FinderForm'))>0)
+              state=driver.execute_script("""const $=x=>document.getElementById(x);const box=x=>$(x).getBoundingClientRect();
+                const sidebar=$('darV8Sidebar'),bar=document.querySelector('.dar-v8-topbar');
+                const a=box('darV8TopWelcome'),p=box('darV8PrayerStrip'),source=document.querySelector('.isnad-ribbon').getBoundingClientRect(),player=box('quranAudioPlayer');
+                return {width:innerWidth,sidebar:getComputedStyle(sidebar).display,topbar:getComputedStyle(bar).display,
+                  helloHeight:a.height,helloVisible:getComputedStyle($('darV8TopWelcome')).display!=='none',
+                  order:a.top<p.top&&p.top<source.top&&source.top<player.top,
+                  terms:document.querySelectorAll('.dar-v8-term').length,prayers:document.querySelectorAll('[data-v8-prayer]').length,
+                  finder:!!$('darV8FinderForm'),daily:!!$('darV8Daily'),books:!!$('darV8Books'),
+                  qa:!!$('qaAudio'),loc:!!$('prLocate'),horizontalOverflow:document.documentElement.scrollWidth-innerWidth,
+                  pageError:document.querySelector('#pageRoot')?.innerText?.slice(0,100)}
+                """)
+              print(name,state,flush=True)
+              driver.save_screenshot('/tmp/v8-faithful-shots/'+name+'.png')
+              if not all((state['helloVisible'],state['order'],state['terms']==3,state['prayers']==5,state['finder'],state['daily'],state['books'],state['qa'],state['loc'],state['horizontalOverflow']<=2)):
+                raise RuntimeError(name+' V8 visual integration failed: '+str(state))
+              if name=='desktop' and (state['sidebar']!='flex' or state['topbar']!='flex'):
+                raise RuntimeError('Desktop must show V8 sidebar and topbar')
+              if name!='desktop' and state['sidebar']!='none':
+                raise RuntimeError('Existing mobile navigation must not be replaced')
+          finally:driver.quit()
+          PY
+      - name: Archive screenshots for design comparison
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-faithful-v8-desktop-iphone-fold
+          path: /tmp/v8-faithful-shots/*.png
+          retention-days: 7
+          if-no-files-found: warn
