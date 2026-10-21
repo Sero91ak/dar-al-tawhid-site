@@ -252,6 +252,32 @@ async function fetchVersionBuild(base) {
     if (!ok) throw new Error(`Dar Test full-width stylesheet not live: ${label}`);
   }
 
+  // DAR_TEST_HOME_PARITY_BORDERLESS_V51_LIVE_GATE:
+  // The visible Home is #darHomeHtmlParityV1, NOT legacy .dv3/.top-shell.
+  // Verify the actual injected JS URL and stylesheet rules on BOTH origins.
+  for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
+    let ok = false;
+    for (let attempt = 1; attempt <= 5; attempt++) {
+      const shell = await fetchText(base + "/index.html?dhp-borderless-v51=" + Date.now());
+      const runtime = await fetchText(base + "/assets/dar-home-html-parity-v1.js?v=20261021-v51-borderless");
+      const linked = shell.status === 200 &&
+        shell.text.includes("/test/assets/dar-home-html-parity-v1.js?v=20261021-v51-borderless");
+      const valid = runtime.status === 200 &&
+        runtime.text.includes("DAR_TEST_HOME_PARITY_BORDERLESS_V51") &&
+        runtime.text.includes("body.is-home-route #darHomeHtmlParityV1") &&
+        runtime.text.includes("#darHomeHtmlParityV1 .dhp-content") &&
+        runtime.text.includes("max-width:1280px!important") &&
+        runtime.text.includes("content:none!important;display:none!important;-webkit-mask:none!important");
+      ok = linked && valid;
+      console.log("home-parity-borderless-v51 " + label +
+        ": html=" + shell.status + " link=" + linked + " js=" + runtime.status +
+        " rules=" + valid + " ok=" + ok + " attempt=" + attempt + "/5");
+      if (ok) break;
+      if (attempt < 5) await new Promise(resolve => setTimeout(resolve, 2500));
+    }
+    if (!ok) throw new Error("Dar Test Home V51 actual rendered borderless runtime not LIVE: " + label);
+  }
+
   // DAR_TEST_HADITH_SHARH_INLINE_V1308: prove the actual served Test shell
   // contains the inline canonical reader, not only a version.json bump or
   // an unused dynamically injected script. Never check visitor or Kids routes.
