@@ -683,12 +683,11 @@ private struct DATCompactPrayerInfo: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             HStack(spacing: 3) {
-                DATEmojiIcon(emoji: "🗓️", size: 12)
                 Text(entry.date, format: .dateTime.weekday(.abbreviated).day().month(.abbreviated).locale(Locale(identifier: "de_DE")))
                     .foregroundStyle(Color(red: 0.62, green: 0.22, blue: 0.18))
                     .lineLimit(1)
-                    .minimumScaleFactor(0.78)
-                    .font(.system(size: 10.2, weight: .bold, design: .rounded))
+                    .minimumScaleFactor(0.82)
+                    .font(.system(size: 10.8, weight: .bold, design: .rounded))
             }
             .layoutPriority(2)
             .frame(maxWidth: .infinity, alignment: .center)
