@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>DĀR AL TAWḤĪD — Smart Knowledge Portal · V3</title>
+<style>
+:root {font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;color-scheme:light;--bg:#f2f5ef;--surface:#fbfcf8;--ink:#163129;--muted:#748178;--line:#dfe6dc;--primary:#315c48;--gold:#94713f;--hero:#0d281e}
+*{box-sizing:border-box}html{overscroll-behavior-y:none}body{margin:0;background:var(--bg);color:var(--ink);overscroll-behavior-y:none;min-height:100vh}body.dark{color-scheme:dark;--bg:#071712;--surface:#10251e;--ink:#f1f4ec;--muted:#a6b8ab;--line:#294238;--primary:#a9cdb0;--gold:#dbba80;--hero:#071911}
+button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.shell{max-width:1800px;min-height:100vh;display:grid;grid-template-columns:252px minmax(0,1fr);margin:auto}
+.side{border-right:1px solid var(--line);background:var(--surface);padding:29px 20px;display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
+.logo{display:flex;align-items:center;gap:10px;margin-bottom:52px}.mark{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#193d2b;color:#f1d6a1;font:30px Georgia,serif;flex:none}.logo strong{font:600 16px Georgia,serif;letter-spacing:.06em;white-space:nowrap}.logo small{display:block;font-size:8px;color:var(--gold);letter-spacing:.17em;font-weight:750;margin-top:7px}
+.nav-heading,.eyebrow{font-size:10px;font-weight:750;letter-spacing:.18em;color:var(--gold);text-transform:uppercase}.nav-heading{color:var(--muted);margin:0 14px 15px}
+.nav{display:grid;gap:4px}.nav a{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:620;padding:13px 14px;border-radius:12px;transition:.18s}.nav a:hover,.nav a.active{background:color-mix(in srgb,var(--primary) 11%,transparent);color:var(--primary)}.nav i{font-style:normal;color:var(--gold);font-size:16px;width:20px;text-align:center}.side-end{margin-top:auto;padding:21px 13px 0;border-top:1px solid var(--line)}.side-end strong{font-size:12px}.side-end p{color:var(--muted);font-size:11px;line-height:1.7}
+.content{min-width:0;padding:0 clamp(23px,4.1vw,72px) 40px}.top{height:83px;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:13px}.crumb{font-size:12px;color:var(--muted)}.crumb strong{color:var(--ink)}.controls{display:flex;align-items:center;gap:10px}.search-button,.circle{height:41px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:30px}.search-button{min-width:229px;text-align:left;padding:0 17px;color:var(--muted);font-size:12px}.circle{width:41px;font-size:17px}.search-button:hover,.circle:hover{border-color:var(--gold)}
+.intro{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;padding:39px 0 24px}.intro h1{font:500 clamp(32px,3.5vw,48px)/1.08 Georgia,serif;letter-spacing:-.04em;margin:11px 0}.intro p{margin:0;font-size:13px;color:var(--muted);line-height:1.6}.datetime{text-align:right;font-size:12px;color:var(--muted);line-height:1.9}
+.hero{position:relative;overflow:hidden;min-height:345px;display:flex;align-items:center;padding:clamp(28px,4.8vw,65px);border-radius:20px;color:#f3f3e9;background:radial-gradient(ellipse at 83% 10%,#a0874c48,transparent 38%),linear-gradient(105deg,#081f1a 10%,#173b30 73%,#3c5b47 100%)}
+.hero:before{content:"";position:absolute;inset:0;opacity:.21;background:repeating-linear-gradient(110deg,transparent 0 16px,#ffe6a410 17px,transparent 19px 72px);mask-image:linear-gradient(90deg,transparent 24%,#000 100%);pointer-events:none}
+.hero:after{content:"۞";position:absolute;right:5%;top:5%;font:clamp(190px,25vw,380px) Georgia,serif;color:#ffe4ae12;pointer-events:none}
+.hero-body{position:relative;z-index:1;max-width:620px}.hero .eyebrow{color:#ddc492}.hero h2{font:500 clamp(33px,3.6vw,53px)/1.09 Georgia,serif;letter-spacing:-.04em;margin:19px 0 14px}.hero p{line-height:1.78;font-size:13px;max-width:480px;color:#dce9df}.hero-actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:25px}.btn{display:inline-flex;justify-content:center;align-items:center;gap:11px;padding:13px 20px;font-size:12px;font-weight:700;border-radius:40px}.btn.primary{background:#f1e4c7;color:#173126}.btn.outline{border:1px solid #cedfc6aa;color:#f3f3e9}.btn:hover{transform:translateY(-1px)}
+.dashboard{display:grid;grid-template-columns:minmax(0,1.7fr) minmax(260px,.82fr);gap:31px;margin-top:34px}.section-h{display:flex;align-items:baseline;justify-content:space-between;gap:9px;margin-bottom:17px}.section-h h3,.rail h3{font:500 23px Georgia,serif;margin:0}.section-h span{font-size:11px;color:var(--muted)}.tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}.tile{display:flex;flex-direction:column;justify-content:space-between;min-height:163px;padding:21px 19px;background:var(--surface);border-top:1px solid var(--line);border-radius:0 0 15px 15px;transition:transform .2s,box-shadow .2s}.tile:hover{transform:translateY(-3px);box-shadow:0 12px 35px #18382712}.tile-top{display:flex;justify-content:space-between;font:27px Georgia,serif;color:var(--gold)}.tile-top small{font:18px Arial,sans-serif}.tile h4{font:500 21px Georgia,serif;margin:16px 0 6px}.tile p{margin:0;font-size:12px;color:var(--muted);line-height:1.5}
+.quote{margin-top:30px;padding:24px 26px;border-top:1px solid var(--line);background:var(--surface);border-radius:0 0 15px 15px}.quote blockquote{font:400 clamp(18px,1.8vw,24px)/1.5 Georgia,serif;margin:15px 0 12px}.quote p{font-size:11px;color:var(--muted);line-height:1.7;margin:0}.quote a{color:var(--gold);font-weight:700}
+.rail{display:flex;flex-direction:column;gap:22px}.rail section{background:var(--surface);padding:22px;border-top:1px solid var(--line);border-radius:0 0 15px 15px}.rail h3{font-size:20px;margin:9px 0 16px}.rail p{color:var(--muted);font-size:12px;line-height:1.7}.prayer{display:flex;gap:14px;align-items:center;margin:13px 0 18px}.prayer-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:50%;font:30px Georgia,serif;background:color-mix(in srgb,var(--gold) 11%,transparent);color:var(--gold)}.prayer strong{display:block;font-size:13px}.prayer small{display:block;font-size:11px;color:var(--muted);margin-top:6px}.rowlink{border-top:1px solid var(--line);padding:13px 0 0;display:flex;justify-content:space-between;font-size:12px;font-weight:650}.rowlink span{color:var(--gold)}.fav{padding:10px 0;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:650}.star{border:0;background:transparent;color:var(--muted);font-size:23px}.star.saved{color:var(--gold)}.footer{display:flex;justify-content:space-between;gap:15px;border-top:1px solid var(--line);margin-top:36px;padding-top:22px;color:var(--muted);font-size:11px}.footer a{font-weight:700;color:var(--gold)}
+.mobile-nav,.mobile-logo{display:none}
+dialog{width:min(600px,calc(100vw - 30px));max-height:80vh;padding:0;border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface);color:var(--ink);box-shadow:0 25px 95px #0004}dialog::backdrop{background:#00110d99;backdrop-filter:blur(3px)}.search-head{padding:16px 18px;display:flex;gap:10px;border-bottom:1px solid var(--line)}.search-head input{flex:1;min-width:0;border:0;background:transparent;color:var(--ink);outline:none;font-size:15px}.search-head button{border:0;background:transparent;color:var(--muted);font-size:23px}.results{padding:12px;max-height:55vh;overflow-y:auto}.result{display:block;border-radius:9px;padding:13px 15px}.result:hover{background:color-mix(in srgb,var(--primary) 10%,transparent)}.result strong{font-size:13px}.result small{display:block;margin-top:5px;font-size:11px;color:var(--muted)}.search-note{border-top:1px solid var(--line);padding:12px 19px;color:var(--muted);font-size:11px;line-height:1.5}
+@media(max-width:1100px){.shell{grid-template-columns:215px minmax(0,1fr)}.side{padding:24px 13px}.logo strong{font-size:13px}.content{padding-left:29px;padding-right:29px}.dashboard{grid-template-columns:1fr;gap:22px}.rail{display:grid;grid-template-columns:1fr 1fr;gap:14px}.rail section:last-child{grid-column:1/-1}}
+@media(max-width:850px){.shell{display:block}.side{display:none}.content{padding:0 20px 102px}.top{height:70px}.crumb{display:none}.mobile-logo{display:flex;align-items:center;gap:8px;font:600 16px Georgia,serif;white-space:nowrap}.mobile-logo .mark{height:35px;width:35px;font-size:24px}.mobile-nav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:10;background:var(--surface);border-top:1px solid var(--line);padding:13px 9px calc(12px + env(safe-area-inset-bottom));justify-content:space-around;gap:5px}.mobile-nav a{font-size:10px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:7px;min-width:50px}.mobile-nav b{font-size:17px;font-weight:400;color:var(--gold)}.intro{padding-top:32px}.datetime{display:none}.hero{min-height:330px}.footer{margin-top:24px}}
+@media(max-width:600px){.content{padding-left:17px;padding-right:17px}.search-button{min-width:41px;width:41px;text-align:center;padding:0;font-size:0}.search-button:before{content:"⌕";font-size:23px;display:block}.circle{width:40px;height:40px}.controls{gap:7px}.intro h1{font-size:32px}.hero{border-radius:0;margin:0 -17px;padding:26px;min-height:340px}.hero h2{font-size:35px}.hero p{font-size:12px}.dashboard{margin-top:27px}.section-h h3{font-size:21px}.tiles{gap:8px}.tile{min-height:150px;padding:15px}.tile h4{font-size:18px}.tile p{font-size:11px}.rail{display:block}.rail section{margin-bottom:16px}.footer{display:flex;flex-direction:column;gap:4px;line-height:1.7}.quote{padding:20px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;scroll-behavior:auto!important}}
+/* Smart Knowledge Chat v2 · isolated presentation only */
+.chat-hub{margin:32px 0 0;position:relative;border-radius:22px;background:var(--surface);border:1px solid var(--line);box-shadow:0 19px 50px rgba(18,53,35,.045);overflow:hidden}.chat-hub::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,transparent,var(--gold),var(--primary),transparent);opacity:.7}.chat-header{padding:28px 30px 22px;display:flex;align-items:start;justify-content:space-between;gap:15px}.chat-title{display:flex;align-items:center;gap:14px}.chat-logo{width:50px;height:50px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(145deg,#285240,#092b24);color:#d5b77d;box-shadow:0 11px 27px rgba(7,28,21,.13);font:29px Georgia,serif}.chat-title h2{font:500 clamp(24px,2.6vw,32px) Georgia,serif;letter-spacing:-.035em;margin:4px 0 7px}.chat-title p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}.chat-mode{display:flex;gap:7px;align-items:center;font-size:10px;font-weight:650;white-space:nowrap;color:var(--primary);background:color-mix(in srgb,var(--primary) 9%,transparent);border-radius:99px;padding:8px 11px}.chat-mode::before{content:"";width:6px;height:6px;border-radius:50%;background:#66a783}.chat-body{display:grid;grid-template-columns:minmax(0,1fr) 236px;border-top:1px solid var(--line)}.chat-conversation{min-width:0;display:flex;flex-direction:column}.chat-stream{height:355px;overflow-y:auto;padding:22px 29px;overscroll-behavior:contain;display:flex;flex-direction:column;gap:16px;scrollbar-color:var(--line) transparent}.chat-message{max-width:96%;font-size:12px;line-height:1.72}.chat-message.user{align-self:flex-end;padding:13px 18px;border-radius:18px 18px 4px 18px;background:#305a48;color:#fff;max-width:84%;font-size:13px}.chat-message.bot{align-self:flex-start;min-width:0;width:100%}.chat-bot-label{color:var(--gold);font-size:10px;font-weight:820;letter-spacing:.11em;text-transform:uppercase;margin-bottom:7px}.chat-message .bot-copy{color:var(--ink);margin:0 0 10px;font-size:12px;line-height:1.75}.chat-message .bot-note{color:var(--muted);font-size:11px;margin:11px 0 0;line-height:1.65}.chat-message .bot-note strong{color:var(--ink)}.chat-result{display:block;padding:12px 14px;border-left:2px solid var(--line);background:color-mix(in srgb,var(--primary) 3%,transparent);margin-top:8px;color:inherit;border-radius:0 9px 9px 0;transition:border-color .2s,background .2s}.chat-result:hover{border-left-color:var(--gold);background:color-mix(in srgb,var(--primary) 8%,transparent)}.chat-result-top{display:flex;align-items:center;justify-content:space-between;gap:10px}.chat-result-category{font-size:9px;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;font-weight:800}.chat-result-arrow{font-size:15px;color:var(--gold)}.chat-result strong{display:block;font-size:13px;line-height:1.48;margin-top:4px}.chat-result .excerpt{display:block;color:var(--muted);font-size:11px;line-height:1.65;margin-top:6px;max-width:680px}.chat-result .source-ref{display:block;color:var(--gold);font-size:10px;margin-top:7px;line-height:1.6}.chat-result .relevance{font-size:10px;margin-top:5px;color:var(--muted)}.chat-chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:11px}.chat-chip{border:1px solid var(--line);border-radius:99px;color:var(--primary);background:var(--surface);padding:7px 12px;font-size:11px;line-height:1.35}.chat-chip:hover{border-color:var(--gold)}.chat-composer{padding:14px 20px 18px;border-top:1px solid var(--line);position:relative}.chat-inputbox{display:flex;align-items:flex-end;gap:10px;background:var(--bg);border:1px solid var(--line);border-radius:15px;padding:9px 10px 9px 16px}.chat-inputbox:focus-within{border-color:var(--gold)}.chat-inputbox textarea{background:transparent;color:var(--ink);border:0;outline:0;resize:none;flex:1;min-width:0;min-height:27px;max-height:110px;font:13px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;padding:4px 0}.chat-inputbox textarea::placeholder{color:var(--muted)}.chat-send{width:38px;height:38px;display:grid;place-items:center;border:0;border-radius:12px;background:#285641;color:white;font-size:20px}.chat-send:disabled{opacity:.4;cursor:default}.chat-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 3px 0;font-size:10px;color:var(--muted)}.chat-learn{background:transparent;border:0;color:var(--gold);text-decoration:underline;text-underline-offset:3px;padding:0;font-size:10px}.chat-suggest{position:absolute;bottom:calc(100% - 5px);left:20px;right:20px;max-height:200px;overflow-y:auto;background:var(--surface);border:1px solid var(--line);box-shadow:0 -15px 35px #082d2519;border-radius:12px;z-index:3;padding:6px}.chat-suggest[hidden]{display:none}.chat-suggest button{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;border:0;background:transparent;text-align:left;padding:10px 13px;border-radius:7px;color:var(--ink);font-size:12px}.chat-suggest button:hover,.chat-suggest button:focus-visible{background:color-mix(in srgb,var(--primary) 10%,transparent)}.chat-suggest small{font-size:10px;color:var(--muted)}.chat-side{border-left:1px solid var(--line);padding:23px 18px;background:color-mix(in srgb,var(--primary) 2%,var(--surface))}.chat-side .eyebrow{font-size:9px}.chat-side h3{font:500 20px Georgia,serif;margin:10px 0}.chat-side p{font-size:11px;line-height:1.65;color:var(--muted)}.chat-topic{width:100%;display:flex;gap:9px;align-items:center;text-align:left;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);font-size:12px;padding:13px 4px}.chat-topic span:first-child{color:var(--gold);font-size:17px}.chat-topic span:last-child{margin-left:auto;color:var(--muted)}.chat-source-status{border-top:1px solid var(--line);padding-top:16px;margin-top:21px;font-size:10px;line-height:1.75;color:var(--muted)}.chat-source-status strong{color:var(--ink)}.chat-source-status button{display:block;border:0;padding:8px 0 0;background:transparent;color:var(--gold);font-weight:700;font-size:10px}.chat-empty{padding:10px 0 12px;color:var(--muted);font-size:12px}.chat-thinking{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:11px}.chat-dot{width:5px;height:5px;border-radius:50%;background:var(--gold);animation:chat-bob .8s ease-in-out infinite alternate}.chat-dot:nth-child(2){animation-delay:.18s}.chat-dot:nth-child(3){animation-delay:.36s}@keyframes chat-bob{to{transform:translateY(-5px);opacity:.5}}
+@media(max-width:1090px){.chat-body{grid-template-columns:minmax(0,1fr) 200px}.chat-side{padding:19px 12px}.chat-header{padding:23px 20px}.chat-stream{padding:20px}}
+@media(max-width:740px){.chat-body{grid-template-columns:1fr}.chat-side{display:none}.chat-hub{margin:25px 0 0;border-radius:17px}.chat-header{padding:19px 16px 17px;gap:9px}.chat-title{gap:9px}.chat-logo{width:42px;height:42px;border-radius:11px;font-size:24px}.chat-title h2{font-size:24px}.chat-title p{font-size:11px}.chat-mode{font-size:0;padding:8px}.chat-mode::before{width:7px;height:7px}.chat-stream{height:365px;padding:17px 15px}.chat-composer{padding:11px 10px 14px}.chat-foot{flex-wrap:wrap}.chat-suggest{left:10px;right:10px}.chat-result{padding:12px 11px}}
+@media(prefers-reduced-motion:reduce){.chat-dot{animation:none}.chat-result{transition:none}}
+
+/* V3 — Compact smart capsules, visual hierarchy, meaningful 3D assets */
+.smart-daily{display:grid;grid-template-columns:minmax(0,1.13fr) minmax(0,1fr);gap:14px;margin:20px 0 0}
+.smart-prayer,.smart-player{border-radius:28px;background:var(--surface);border:1px solid var(--line);padding:19px 21px 17px;min-width:0;box-shadow:0 13px 38px #192e2310}
+.smart-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;color:var(--gold);font-size:11px;font-weight:650}
+.smart-head a,.smart-bottom a{font-size:11px;color:var(--gold);white-space:nowrap;font-weight:700}
+.smart-eyebrow{display:flex;align-items:center;gap:7px;letter-spacing:.12em;font-size:10px;font-weight:780}.smart-eyebrow img{object-fit:contain;filter:drop-shadow(0 3px 7px #0002)}
+.smart-location{font-size:10px;font-weight:600;color:var(--muted);max-width:48%;text-align:right}
+.smart-prayer-next{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 2px 10px}
+.smart-prayer-next h3{margin:5px 0 4px;font:500 27px Georgia,serif}.smart-prayer-next p{font-size:11px;color:var(--gold);margin:0}.smart-prayer-next strong{font:500 clamp(23px,2.5vw,36px) Georgia,serif;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.smart-muted,.smart-status{font-size:11px;color:var(--muted);line-height:1.5}.smart-status{font-size:10px;margin-top:10px}
+.prayer-pills{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;margin-top:8px}
+.prayer-pills span{min-width:0;border-radius:13px;background:color-mix(in srgb,var(--primary) 5%,transparent);padding:10px 3px;text-align:center;font-size:11px;color:var(--ink);line-height:1.5;font-variant-numeric:tabular-nums}
+.prayer-pills span b,.prayer-pills span em{display:block;white-space:nowrap;font-style:normal}.prayer-pills span b{font-size:10px;font-weight:750}.prayer-pills span em{font-size:12px}
+.prayer-pills .selected{background:color-mix(in srgb,var(--gold) 18%,transparent);color:var(--ink)}
+.smart-bottom{display:flex;gap:7px;align-items:center;justify-content:space-between;margin-top:15px;border-top:1px solid var(--line);padding-top:12px;flex-wrap:wrap}
+.smart-ghost{color:var(--primary);font-size:11px;font-weight:700;background:transparent;border:0;padding:3px 0}
+.smart-player h3{font:500 26px Georgia,serif;margin:2px 0 6px}.smart-player>p{margin:0;min-height:17px}
+.player-controls{display:flex;align-items:center;gap:9px;margin-top:18px}
+.player-step{width:36px;height:36px;flex:none;border-radius:50%;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:23px}
+.player-toggle{width:47px;height:47px;flex:none;border-radius:50%;border:0;color:#fff;background:#245840;font-size:18px;text-align:center}
+.player-now{min-width:0;display:flex;flex-direction:column;gap:3px;margin-left:6px}
+.player-now strong{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.player-now span{font-size:10px;color:var(--muted);line-height:1.4}
+.player-form{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.player-form label{font-size:10px;color:var(--muted);font-weight:650;min-width:0}.player-form select{width:100%;border:1px solid var(--line);background:var(--bg);border-radius:12px;margin-top:5px;color:var(--ink);min-height:36px;max-width:100%;font-size:12px;padding:4px 6px;text-overflow:ellipsis}
+.smart-tiles{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.smart-tiles .tile{min-height:133px;border:1px solid var(--line);border-radius:25px;padding:12px 14px;background:color-mix(in srgb,var(--surface) 95%,transparent)}.smart-tiles .tile-top{align-items:start;line-height:1}.smart-tiles .tile h4{font:500 17px Georgia,serif;margin:6px 0 4px}.smart-tiles .tile p{font-size:10px;line-height:1.4}.smart-tiles .smart-3d{width:49px;height:49px;object-fit:contain;filter:drop-shadow(0 6px 8px #0002)}.smart-tiles .tile-top small{color:var(--gold);font-size:12px}
+.chat-hub{border-radius:29px}.chat-inputbox{border-radius:19px}.chat-inputbox textarea{font-size:16px!important;line-height:1.45!important}.chat-suggest button{font-size:13px}.chat-finish{display:none;background:transparent;border:1px solid var(--line);border-radius:50px;padding:8px 12px;color:var(--ink);font-size:12px}.chat-header-actions{display:flex;gap:8px;align-items:center}
+body.chat-focus{overflow:hidden!important;overscroll-behavior:none;touch-action:pan-x pan-y}
+body.chat-focus .chat-hub{position:fixed!important;z-index:1500!important;top:var(--chat-top,0px)!important;left:0!important;right:0!important;margin:0!important;height:var(--chat-h,100dvh)!important;min-height:0!important;border-radius:0!important;border:0!important;display:flex!important;flex-direction:column!important}
+body.chat-focus .chat-header{padding:11px 16px 10px;flex:none}
+body.chat-focus .chat-header h2{font-size:21px;margin:2px 0 1px}
+body.chat-focus .chat-header .eyebrow{font-size:9px}
+body.chat-focus .chat-header p{display:none}
+body.chat-focus .chat-logo{width:36px;height:36px;font-size:17px}
+body.chat-focus .chat-mode{display:none}
+body.chat-focus .chat-finish{display:inline-flex}
+body.chat-focus .chat-body{flex:1!important;min-height:0!important;display:flex!important;overflow:hidden!important}
+body.chat-focus .chat-side{display:none!important}
+body.chat-focus .chat-conversation{display:flex!important;min-height:0!important;flex:1!important;overflow:hidden!important}
+body.chat-focus .chat-stream{height:auto!important;flex:1 1 auto!important;min-height:0!important;overflow-y:auto!important;padding:10px 16px!important;overscroll-behavior:contain}
+body.chat-focus .chat-composer{flex:none!important;background:var(--surface);padding:8px 12px max(8px,env(safe-area-inset-bottom))!important}
+body.chat-focus .chat-foot{font-size:9px}
+body.chat-focus .chat-inputbox{border-radius:17px}
+@media(max-width:1100px){.smart-daily{grid-template-columns:1fr 1fr}.smart-tiles{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:850px){.smart-daily{grid-template-columns:1fr 1fr}}
+@media(max-width:700px){.smart-daily{grid-template-columns:1fr;margin:14px -1px}.smart-prayer,.smart-player{border-radius:25px;padding:17px 15px}.smart-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.smart-tiles .tile{min-height:124px;padding:12px 13px;border-radius:24px}.smart-tiles .tile h4{font-size:17px;margin:4px 0 4px}.smart-tiles .smart-3d{width:44px;height:44px}.smart-tiles .tile p{font-size:10px}.smart-prayer-next strong{font-size:31px}.smart-player h3{font-size:24px}.prayer-pills span{padding:9px 2px}.prayer-pills span b{font-size:9px}.prayer-pills span em{font-size:11px}.smart-ghost{font-size:11px}body.chat-focus .chat-title{gap:8px}body.chat-focus .chat-header{gap:5px}}
+@media(max-width:370px){.smart-tiles .tile h4{font-size:15px}.prayer-pills span b{font-size:8px}.prayer-pills span em{font-size:10px}.smart-head{font-size:10px}.smart-location{font-size:9px}}
+
+</style>
+<script id="prayer-math-preview-fallback">
+/* Calculation port of the project's widgets/shared/prayer-math.js. Preview-only fallback, no fabricated clock values. */
+(function(g){'use strict';if(g.DarPrayerMath)return;
+const rad=v=>v*Math.PI/180,deg=v=>v*180/Math.PI,angle=v=>(v%360+360)%360,hour=v=>(v%24+24)%24;
+const dayOfYear=d=>Math.floor((d-new Date(d.getFullYear(),0,0))/86400000);
+function sun(date,lat,lon,offset,morning){const n=dayOfYear(date),lh=lon/15,t=n+((morning?6:18)-lh)/24,m=.9856*t-3.289,l=angle(m+1.916*Math.sin(rad(m))+.020*Math.sin(rad(2*m))+282.634);let ra=angle(deg(Math.atan(.91764*Math.tan(rad(l)))));ra=(ra+Math.floor(l/90)*90-Math.floor(ra/90)*90)/15;const sd=.39782*Math.sin(rad(l)),cd=Math.cos(Math.asin(sd)),ch=(Math.cos(rad(90+offset))-sd*Math.sin(rad(lat)))/(cd*Math.cos(rad(lat)));if(ch>1||ch< -1)return null;let H=(morning?360-deg(Math.acos(ch)):deg(Math.acos(ch)))/15;return hour(H+ra-.06571*t-6.622-lh-date.getTimezoneOffset()/60)}
+function noon(d,lat,lon){const a=sun(d,lat,lon,.833,true),b=sun(d,lat,lon,.833,false);return a==null||b==null?12:hour((a+b)/2)}
+function asr(d,lat,lon,factor){const n=noon(d,lat,lon),dec=23.45*Math.sin(rad(360/365*(284+dayOfYear(d)))),x=deg(Math.atan(1/(factor+Math.tan(rad(Math.abs(lat-dec))))));const ch=(Math.sin(rad(x))-Math.sin(rad(lat))*Math.sin(rad(dec)))/(Math.cos(rad(lat))*Math.cos(rad(dec)));return ch>1||ch< -1?n+4:hour(n+deg(Math.acos(ch))/15)}
+function formatHour(x){if(x==null||!Number.isFinite(x))return'--:--';let hr=Math.floor(hour(x)),mm=Math.round((hour(x)-hr)*60);if(mm>=60){mm=0;hr=(hr+1)%24}return String(hr).padStart(2,'0')+':'+String(mm).padStart(2,'0')}
+function calculateDayTimes(d,lat,lon,opts={}){const a=Number(opts.angle)||12,f=Number(opts.asrFactor)||1;return[{key:'fajr',time:sun(d,lat,lon,a,true)},{key:'sunrise',time:sun(d,lat,lon,.833,true)},{key:'dhuhr',time:noon(d,lat,lon)},{key:'asr',time:asr(d,lat,lon,f)},{key:'maghrib',time:sun(d,lat,lon,.833,false)},{key:'isha',time:sun(d,lat,lon,a,false)}]}
+g.DarPrayerMath={calculateDayTimes,formatHour,VERSION:'preview-math-fallback'};
+})(window);
+</script>
+<script src="https://dar-al-tawhid.de/widgets/shared/prayer-math.js" defer></script>
+</head>
+<body>
+<div class="shell">
+<aside class="side">
+ <a href="https://dar-al-tawhid.de/" class="logo"><span class="mark">د</span><span><strong>DĀR AL TAWḤĪD</strong><small>QURʾĀN · SUNNAH · ĀṮĀR</small></span></a>
+ <div class="nav-heading">WISSENSPORTAL</div>
+ <nav class="nav">
+ <a class="active" href="#start"><i>⌂</i>Übersicht</a>
+ <a href="https://dar-al-tawhid.de/?page=quran"><i>۞</i>Qurʾān</a>
+ <a href="https://dar-al-tawhid.de/?page=beitraege"><i>✎</i>Beiträge</a>
+ <a href="https://dar-al-tawhid.de/?page=bibliothek"><i>▤</i>Bibliothek</a>
+ <a href="https://dar-al-tawhid.de/#hadith"><i>✧</i>Ḥadīṯ & Āṯār</a>
+ <a href="https://dar-al-tawhid.de/?page=wissen"><i>✧</i>Wissen & Lernen</a>
+ <a href="https://dar-al-tawhid.de/?page=dua"><i>☾</i>Duʿāʾ</a>
+ <a href="https://dar-al-tawhid.de/?page=gebetszeiten"><i>◷</i>Gebetszeiten</a>
+ <a href="https://dar-al-tawhid.de/?page=mehr"><i>⋯</i>Weitere Bereiche</a>
+ </nav>
+ <div class="side-end"><strong>Wissen mit Quellen</strong><p>Ein ruhiger Ort für Qurʾān, Sunnah und authentische Überlieferungen.</p></div>
+</aside>
+<div class="content" id="start">
+ <header class="top"><div class="crumb">Wissensportal &nbsp; / &nbsp; <strong>Übersicht</strong></div><div class="mobile-logo"><span class="mark">د</span>DĀR AL TAWḤĪD</div><div class="controls"><button class="search-button" id="searchOpen" aria-label="Bereichssuche öffnen">⌕ &nbsp; Bereiche durchsuchen …</button><button class="circle" id="theme" aria-label="Hell oder dunkel wechseln">☾</button><a class="circle" style="display:grid;place-items:center;text-decoration:none" href="https://dar-al-tawhid.de/" title="Bestehende Website öffnen" aria-label="Website öffnen">↗</a></div></header>
+ <main>
+ <div class="intro"><div><div class="eyebrow">Willkommen im Wissensportal</div><h1 id="greeting">As-salāmu ʿalaikum</h1><p>Dein Zugang zu Wissen aus Qurʾān und Sunnah.</p></div><div class="datetime"><div id="today"></div><div id="time"></div></div></div>
+ <section class="hero"><div class="hero-body"><div class="eyebrow">DĀR AL TAWḤĪD · WISSEN VERTIEFEN</div><h2>Wissen entdecken.<br>Mit Quellen verstehen.</h2><p>Qurʾān, authentische Überlieferungen und die Aussagen der Salaf – übersichtlich, gründlich und ohne Ablenkung.</p><div class="hero-actions"><a class="btn primary" href="https://dar-al-tawhid.de/?page=quran">Qurʾān öffnen &nbsp; ↗</a><a class="btn outline" href="https://dar-al-tawhid.de/?page=wissen">Wissensbereiche &nbsp; →</a></div></div></section>
+
+<section class="smart-daily" id="dashboardDaily" aria-label="Gebetszeiten und Qurʾān-Player">
+<div class="smart-prayer" aria-labelledby="prayerSmartTitle">
+  <div class="smart-head"><span class="smart-eyebrow"><img src="https://dar-al-tawhid.de/assets/dar-3d-icons/prayer.png" alt="" width="30" height="30">GEBETSZEITEN</span><span id="prayLocation" class="smart-location">Beispielort Rheinbach</span></div>
+  <div class="smart-prayer-next"><div><span class="smart-muted">Nächstes Gebet</span><h3 id="nextPrayerLabel">Standort vorbereiten</h3><p id="prayCountdown">Aktuelle Gebetszeiten werden berechnet.</p></div><strong id="nextPrayerClock">--:--</strong></div>
+  <div class="prayer-pills" id="prayerPills"><span>Fajr --:--</span><span>Ẓuhr --:--</span><span>ʿAṣr --:--</span><span>Maghrib --:--</span><span>ʿIshāʾ --:--</span></div>
+  <div class="smart-bottom"><button type="button" id="prayerLocate" class="smart-ghost">⌖ &nbsp; Meinen Standort verwenden</button><a href="https://dar-al-tawhid.de/#prayer">Alle Gebetseinstellungen ↗</a></div>
+  <div class="smart-status" id="prayStatus" role="status">Vorschau: Beispielort Rheinbach. Echte Standortberechnung erst nach deiner Zustimmung.</div>
+</div>
+<div class="smart-player" aria-labelledby="smartPlayerTitle">
+  <div class="smart-head"><span class="smart-eyebrow"><img src="https://dar-al-tawhid.de/assets/dar-3d-icons/audio.png" alt="" width="30" height="30">QURʾĀN-AUDIO</span><a href="https://dar-al-tawhid.de/#quran">Qurʾān öffnen ↗</a></div>
+  <h3 id="smartPlayerTitle">Qurʾān-Player</h3><p class="smart-muted" id="playerStatus">Rezitation aus unserem Audio-Katalog – per Klick starten.</p>
+  <div class="player-controls"><button type="button" class="player-step" id="prevAyah" aria-label="Vorherige Āyah">‹</button><button type="button" class="player-toggle" id="togglePlayer" aria-label="Wiedergabe starten">▶</button><button type="button" class="player-step" id="nextAyah" aria-label="Nächste Āyah">›</button><div class="player-now"><strong id="playerCurrent">al-Fātiḥah · 1:1</strong><span id="playerHint">Berühre ▶ zum Hören</span></div></div>
+  <div class="player-form"><label>Sūrah<select id="selectSurah"><option value="1">1 · al-Fātiḥah</option><option value="112">112 · al-Iḫlāṣ</option><option value="113">113 · al-Falaq</option><option value="114">114 · an-Nās</option></select></label><label>Rezitator<select id="selectReciter"><option value="ar.alafasy">Mišārī al-ʿAfāsī</option><option value="ar.husary">Maḥmūd al-Ḥuṣarī</option><option value="ar.minshawi">Muḥammad al-Minšāwī</option></select></label></div>
+  <div class="smart-bottom"><span class="smart-status">Audio benötigt eine Verbindung. Kein Autoplay.</span><a href="https://dar-al-tawhid.de/#quran-player">Vollständigen Player ↗</a></div>
+</div>
+</section>
+
+<section class="chat-hub" id="knowledgeChat" aria-labelledby="chatHead"><div class="chat-header"><div class="chat-title"><div class="chat-logo" aria-hidden="true">۞</div><div><div class="eyebrow">SMART KNOWLEDGE · OHNE KI-API</div><h2 id="chatHead">Dein Wissenschat</h2><p>Fragen stellen · Fundstellen finden · Nachweise öffnen</p></div></div><div class="chat-header-actions"><span class="chat-mode" title="Keine externe KI-API; lokale Suchlogik">LOKALE SUCHE</span><button id="chatDone" class="chat-finish" type="button" aria-label="Chatansicht schließen">Fertig ✕</button></div></div><div class="chat-body"><div class="chat-conversation"><div class="chat-stream" id="chatStream" role="log" aria-live="polite" aria-relevant="additions"></div><form id="chatComposer" class="chat-composer"><div class="chat-suggest" id="chatSuggestions" hidden></div><div class="chat-inputbox"><textarea id="chatInput" rows="1" maxlength="340" enterkeyhint="send" aria-label="Stelle eine Frage zur Website" placeholder="Was sagen die Salaf über Īmān?" autocomplete="off"></textarea><button class="chat-send" id="chatSend" type="submit" aria-label="Frage absenden" disabled>↑</button></div><div class="chat-foot"><span>Nur DĀR AL TAWḤĪD · Keine erfundenen Antworten</span><button class="chat-learn" type="button" id="chatReset">Lernverlauf zurücksetzen / deaktivieren</button></div></form></div><aside class="chat-side"><div class="eyebrow">SCHNELL ENTDECKEN</div><h3>Worüber möchtest du lernen?</h3><p>Diese Fragen durchsuchen bekannte Inhaltsstellen, nicht das freie Internet.</p><button class="chat-topic" type="button" data-ask-knowledge="Tawḥīd und Einzigkeit Allahs"><span>۞</span>Tawḥīd <span>→</span></button><button class="chat-topic" type="button" data-ask-knowledge="Qurʾān Tafsīr Īmān"><span>◈</span>Qurʾān & Tafsīr <span>→</span></button><button class="chat-topic" type="button" data-ask-knowledge="Ḥadīṯ Sunnah"><span>✧</span>Sunnah & Ḥadīṯ <span>→</span></button><button class="chat-topic" type="button" data-ask-knowledge="Duʿāʾ Vergebung"><span>☾</span>Duʿāʾ & Dhikr <span>→</span></button><div class="chat-source-status"><strong id="chatStatus">Index wird vorbereitet</strong><br><span id="chatCount">— Einträge</span><br>Beim Tippen werden lokale Vorschläge erzeugt. Nur angeklickte Treffer gewichten spätere Suchen im selben Browser stärker.<button type="button" data-ask-knowledge="Welche Bücher gibt es über Iǧmāʿ?">Bibliothek durchsuchen →</button></div></aside></div></section>
+ <div class="dashboard">
+  <div><div class="section-h"><h3>Dein Zugang zum Wissen</h3><span>Direkte Verknüpfungen</span></div><div class="tiles smart-tiles"><a class="tile" href="https://dar-al-tawhid.de/#quran" aria-label="Qurʾān öffnen"><div class="tile-top"><img class="smart-3d" src="https://dar-al-tawhid.de/assets/dar-3d-icons/quran.png" alt="" width="50" height="50" loading="lazy" decoding="async"><small>↗</small></div><div><h4>Qurʾān</h4><p>Lesen · Tafsīr · Tadabbur</p></div></a>
+<a class="tile" href="https://dar-al-tawhid.de/#hadith" aria-label="Ḥadīṯ öffnen"><div class="tile-top"><img class="smart-3d" src="https://dar-al-tawhid.de/assets/dar-3d-icons/hadith.png" alt="" width="50" height="50" loading="lazy" decoding="async"><small>↗</small></div><div><h4>Ḥadīṯ</h4><p>Sunnah · Āṯār · Salaf</p></div></a>
+<a class="tile" href="https://dar-al-tawhid.de/#bibliothek" aria-label="Bibliothek öffnen"><div class="tile-top"><img class="smart-3d" src="https://dar-al-tawhid.de/assets/dar-3d-icons/library.png" alt="" width="50" height="50" loading="lazy" decoding="async"><small>↗</small></div><div><h4>Bibliothek</h4><p>Bücher · PDFs · Quellen</p></div></a>
+<a class="tile" href="https://dar-al-tawhid.de/#posts" aria-label="Beiträge öffnen"><div class="tile-top"><img class="smart-3d" src="https://dar-al-tawhid.de/assets/dar-3d-icons/posts.png" alt="" width="50" height="50" loading="lazy" decoding="async"><small>↗</small></div><div><h4>Beiträge</h4><p>Geprüfte Aussagen</p></div></a>
+<a class="tile" href="https://dar-al-tawhid.de/#ilm" aria-label="Wissenszentrum öffnen"><div class="tile-top"><img class="smart-3d" src="https://dar-al-tawhid.de/assets/dar-3d-icons/ilm.png" alt="" width="50" height="50" loading="lazy" decoding="async"><small>↗</small></div><div><h4>Wissenszentrum</h4><p>ʿAqīdah · Fiqh · Manhaj</p></div></a>
+<a class="tile" href="https://dar-al-tawhid.de/?page=mehr" aria-label="Lernen &amp; Quiz öffnen"><div class="tile-top"><img class="smart-3d" src="https://dar-al-tawhid.de/assets/dar-3d-icons/quiz.png" alt="" width="50" height="50" loading="lazy" decoding="async"><small>↗</small></div><div><h4>Lernen &amp; Quiz</h4><p>Wissen festigen</p></div></a></div><article class="quote"><div class="eyebrow">GRUNDSATZ DES WISSENS</div><blockquote>„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</blockquote><p>Muḥammad ibn Sīrīn · Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn.<br><a href="https://dar-al-tawhid.de/">Zum Wissensbereich ↗</a></p></article></div>
+  <div class="rail">
+   <section><div class="eyebrow">MEINE WISSENSWEGE</div><h3>Direkt weiterlesen</h3><p>Der Qurʾān-Player und deine Gebetsübersicht sind jetzt direkt im oberen Dashboard erreichbar.</p><a class="rowlink" href="#dashboardDaily">Tageszentrale <span>↑</span></a><a class="rowlink" href="https://dar-al-tawhid.de/#hadith">Ḥadīṯ-Bibliothek <span>↗</span></a></section>
+   <section><div class="eyebrow">PERSÖNLICH</div><h3>Meine Schnellzugriffe</h3><p>Markiere wichtige Bereiche. Deine Auswahl wird nur in diesem Browser gespeichert.</p><div id="favorites"></div></section>
+   <section><div class="eyebrow">SMART SEARCH</div><h3>Intelligente Bereichssuche</h3><p>Finde Qurʾān, Bibliothek und Themen wie Tawḥīd oder Īmān anhand verschiedener Schreibweisen. Noch keine generative KI oder Inhaltssuche.</p><button class="rowlink" style="width:100%;border-right:0;border-left:0;border-bottom:0;background:transparent;color:var(--ink);cursor:pointer;text-align:left" id="searchRail">Suche öffnen <span>↗</span></button></section>
+  </div>
+ </div>
+ </main>
+ <footer class="footer"><span>DĀR AL TAWḤĪD · Smart Dashboard V3 · Entwurf, nicht veröffentlicht</span><a href="https://dar-al-tawhid.de/">Aktuelle Website öffnen ↗</a></footer>
+</div>
+</div>
+<nav class="mobile-nav" aria-label="Mobile Navigation"><a href="#start"><b>⌂</b>Start</a><a href="https://dar-al-tawhid.de/?page=quran"><b>۞</b>Qurʾān</a><a href="https://dar-al-tawhid.de/?page=beitraege"><b>✎</b>Beiträge</a><a href="https://dar-al-tawhid.de/#hadith"><b>✧</b>Ḥadīṯ</a><a href="https://dar-al-tawhid.de/?page=mehr"><b>⋯</b>Mehr</a></nav>
+<dialog id="dialog"><div class="search-head"><span>⌕</span><input id="query" placeholder="Suche nach Qurʾān, Tauhid, Iman …" aria-label="Website-Bereiche suchen" autocomplete="off"><button id="searchClose" aria-label="Schließen">×</button></div><div id="results" class="results"></div><div class="search-note">Vorschau: Die Suche findet Website-Bereiche, nicht einzelne Verse oder Beiträge. Esc schließt die Suche.</div></dialog>
+<script>
+(function(){
+'use strict';
+const site='https://dar-al-tawhid.de/', data=[
+['Qurʾān','?page=quran','Koran, Rezitation, Tafsīr und Tadabbur','quran koran qur’an qurʾan lesen rezitation'],
+['Beiträge','?page=beitraege','Geprüfte Beiträge und Quellen','beiträge texte gelehrte salaf athar'],
+['Bibliothek','?page=bibliothek','Bücher und PDF-Sammlungen','bücher buch pdf sammlung bibliothek'],
+['Wissen & Lernen','?page=wissen','Tawḥīd, Īmān, ʿAqīdah und Fiqh','wissen lernen tawhid tauhid iman īmān aqida aqidah sunnah fiqh'],
+['Duʿāʾ','?page=dua','Bittgebete und Dhikr','dua duʿāʾ duaa dhikr bittgebete'],
+['Gebetszeiten','?page=gebetszeiten','Gebetszeiten nach Standort','gebet salah salat fajr dhuhr asr maghrib isha'],
+['Weitere Bereiche','?page=mehr','Weitere Funktionen und Werkzeuge','mehr werkzeuge qibla zakat']];
+const $=id=>document.getElementById(id);
+function read(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch{return d}}
+function store(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
+const norm=s=>String(s).toLocaleLowerCase('de').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[ʿʾ’']/g,'').replace(/ḥ/g,'h').replace(/ṣ/g,'s').replace(/ṭ/g,'t').replace(/ā/g,'a').replace(/ī/g,'i').replace(/ū/g,'u');
+let dark=read('dat-dashboard-dark',false);
+function theme(){document.body.classList.toggle('dark',dark);$('theme').textContent=dark?'☼':'☾'}
+$('theme').onclick=()=>{dark=!dark;store('dat-dashboard-dark',dark);theme()};theme();
+let fav=read('dat-dashboard-fav',['?page=quran','?page=bibliothek']);
+function favorites(){$('favorites').replaceChildren();data.slice(0,5).forEach(([title,path])=>{const row=document.createElement('div');row.className='fav';const link=document.createElement('a');link.href=site+path;link.textContent=title;const b=document.createElement('button');b.className='star'+(fav.includes(path)?' saved':'');b.textContent=fav.includes(path)?'★':'☆';b.setAttribute('aria-label',title+' als Schnellzugriff wählen');b.onclick=()=>{fav=fav.includes(path)?fav.filter(x=>x!==path):[...fav,path];store('dat-dashboard-fav',fav);favorites()};row.append(link,b);$('favorites').append(row)})}favorites();
+const dlg=$('dialog');
+function render(){const terms=norm($('query').value).split(/\s+/).filter(Boolean);const filtered=data.filter(row=>terms.every(t=>norm(row[0]+' '+row[2]+' '+row[3]).includes(t)));$('results').replaceChildren();if(!filtered.length){$('results').textContent='Kein passender Bereich gefunden.';return}filtered.forEach(([title,path,desc])=>{const a=document.createElement('a');a.className='result';a.href=site+path;const s=document.createElement('strong');s.textContent=title;const sm=document.createElement('small');sm.textContent=desc;a.append(s,sm);$('results').append(a)})}
+function open(){render();dlg.showModal();$('query').focus()}
+$('searchOpen').onclick=open;$('searchRail').onclick=open;$('searchClose').onclick=()=>dlg.close();$('query').oninput=render;
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();open()}});
+function clock(){let d=new Date(),h=d.getHours();$('greeting').textContent='As-salāmu ʿalaikum';$('today').textContent=new Intl.DateTimeFormat('de-DE',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(d);$('time').textContent=new Intl.DateTimeFormat('de-DE',{hour:'2-digit',minute:'2-digit'}).format(d)+' Uhr'}clock();setInterval(clock,30000);
+})();
+</script>
+<script>
+/* DĀR AL TAWḤĪD · Smart Knowledge Chat V2
+   Zero external LLM APIs · local adaptive ranking · only indexed site content.
+   Never invent fatwas, hadith, verses or source references.
+*/
+(function(){'use strict';
+const ORIGIN='https://dar-al-tawhid.de';
+const $=id=>document.getElementById(id);
+const ui={stream:$('chatStream'),input:$('chatInput'),send:$('chatSend'),tips:$('chatSuggestions'),status:$('chatStatus'),count:$('chatCount'),reset:$('chatReset'),composer:$('chatComposer')};
+if(!ui.stream||!ui.input)return;
+const isOwnSite=location.hostname==='dar-al-tawhid.de';
+const stop=new Set('was wie wo wann wer wieso warum weshalb ist sind war waren hat haben kann koennen können ich du wir ihr der die das den dem des ein eine einen einer eines und oder zu zur zum mit bei uber über aus von vor in im am auf durch für fuer bitte mir mich mein meine unserer unsere euer etwas alles sagt sagte sagen sagte gesagt finde finden gesucht suche suchst gibt es gibt dazu davon darüber nach dern welches welche welcher welchen hierzu einem mal denn eigentlich zeigen zeig erklaere erklare erklär'.split(' '));
+const canonicalGroups={
+ tawhid:['tauhid','tawhid','tawheed','tawḥīd','einzigkeit','monotheismus','allah allein','توحيد'],
+ iman:['iman','iiman','imaan','īmān','glaube','glauben','إيمان'],
+ shirk:['shirk','schirk','schirkh','beigesellung','beigesellen','شرك'],
+ aqidah:['aqidah','aqida','akida','ʿaqīdah','glaubenslehre'],
+ quran:['quran','qurʾān','koran','qur’an','qur an','rezitation','قرآن'],
+ hadith:['hadith','hadis','hadeeth','ḥadīṯ','ḥadīth','überlieferung','حديث'],
+ dua:['dua','duaa','duʿāʾ','bittgebet','دعاء'],
+ salah:['salah','salat','gebet','gebetszeiten','namaz','beten','صلاة'],
+ tafsir:['tafsir','tafsīr','auslegung','exegese','تفسير'],
+ salaf:['salaf','sahaba','ṣaḥābah','sahabah','gefährten','tabiin','tābiʿīn'],
+ kufr:['kufr','kafir','unglaube','كفر'],
+ sabr:['sabr','geduld','geduldig','صبر'],
+ fikh:['fiqh','fikh','rechtslehre'],
+ zakat:['zakat','zakāt','zakah','almosensteuer'],
+ istiwa:['istiwa','istiwāʾ','thron','erhabenheit'],
+ nuzul:['nuzul','nuzūl','herabkommen'],
+ jannah:['jannah','dschanna','paradies'],
+ tauba:['tawba','tawbah','tauba','reue','vergebung'],
+ ijma:['ijma','iǧmāʿ','idschma','idjma','konsens','الإجماع']
+};
+const alias=new Map();
+function normal(s){return String(s??'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f\u064b-\u065f]/g,'').replace(/[ʿʾ‘’'ʼ]/g,'').replace(/ß/g,'ss').replace(/æ/g,'ae').replace(/ḥ/g,'h').replace(/ḍ/g,'d').replace(/ṣ/g,'s').replace(/ṭ/g,'t').replace(/ẓ/g,'z').replace(/ḫ/g,'kh').replace(/ǧ/g,'j').replace(/ā/g,'a').replace(/ī/g,'i').replace(/ū/g,'u').replace(/[^\p{L}\p{N}]+/gu,' ').replace(/\s+/g,' ').trim()}
+Object.entries(canonicalGroups).forEach(([key,arr])=>arr.forEach(v=>alias.set(normal(v),key)));
+const sections=[
+ {id:'nav-quran',title:'Qurʾān lesen und studieren',kind:'Bereich',excerpt:'Qurʾān-Reader, Sūrah, Rezitation, Übersetzung und Tadabbur.',url:'/?page=quran',searchText:'quran tafsir tafsīr verse surah lesung rezitation tadabbur',reference:''},
+ {id:'nav-posts',title:'Beiträge und Überlieferungen',kind:'Bereich',excerpt:'Beiträge über Qurʾān, Sunnah, ʿAqīdah, Salaf und islamisches Wissen.',url:'/?page=beitraege',searchText:'beiträge gelehrte athar hadith sunnah salaf iman tawhid fiqh',reference:''},
+ {id:'nav-lib',title:'Bibliothek und PDF-Sammlungen',kind:'Bereich',excerpt:'Veröffentlichte Bücher und PDFs aus DĀR AL TAWḤĪD.',url:'/?page=bibliothek',searchText:'bibliothek buch bücher pdf ijma taqlid fiqh',reference:''},
+ {id:'nav-wissen',title:'Wissenszentrum',kind:'Bereich',excerpt:'Lernbereiche zu ʿAqīdah, Tawḥīd, Īmān, Sunnah und Fiqh.',url:'/?page=wissen',searchText:'wissen aqidah fiqh tawhid iman shirk kufr salaf tafsir',reference:''},
+ {id:'nav-dua',title:'Duʿāʾ-Sammlung',kind:'Bereich',excerpt:'Bittgebete aus dem Qurʾān und aus der Sunnah.',url:'/?page=dua',searchText:'dua duaa bittgebet sabr geduld vergebung',reference:''},
+ {id:'nav-prayer',title:'Gebetszeiten und Standort',kind:'Bereich',excerpt:'Lokale Zeiten für die Pflichtgebete und Gebetserinnerungen.',url:'/?page=gebetszeiten',searchText:'gebetszeiten gebet salat salah fajr dhuhr asr maghrib isha',reference:''},
+ {id:'nav-more',title:'Weitere Werkzeuge',kind:'Bereich',excerpt:'Weitere Funktionen der bestehenden Website.',url:'/?page=mehr',searchText:'mehr qibla zakat quiz werkzeuge',reference:''}
+];
+const samples=[
+ {id:'lib-ijtihad',title:'Al Ijtihad wa Taqlid',kind:'Bibliothek',excerpt:'PDF-Veröffentlichung aus der DĀR AL TAWḤĪD Bibliothek.',url:'/assets/library/pdfs/pub-20260817-001-v1-1.pdf',searchText:'ijtihad taqlid fiqh nachahmung rechtsschule',reference:'Bibliothek · Al Ijtihad wa Taqlid'},
+ {id:'lib-adillah',title:'Taarud al Adillah',kind:'Bibliothek',excerpt:'Veröffentlichung zum Umgang mit Belegen.',url:'/assets/library/pdfs/pub-20260812-001-v1-0.pdf',searchText:'taarud adillah beweise widerspruch usul aqida',reference:'Bibliothek · Taarud al Adillah'},
+ {id:'lib-ijma',title:'Al Ijma',kind:'Bibliothek',excerpt:'PDF-Veröffentlichung zum Iǧmāʿ.',url:'/assets/library/pdfs/pub-20260809-001-v1-0.pdf',searchText:'ijma konsens übereinstimmung gelehrte',reference:'Bibliothek · Al Ijma'},
+ {id:'dua-001',title:'Unser Herr, gib uns Gutes in Dunyā und Ākhirah',kind:'Duʿāʾ',excerpt:'Unser Herr, gib uns im Diesseits Gutes und im Jenseits Gutes und bewahre uns vor der Strafe des Feuers.',reference:'Qurʾān 2:201',url:'/?page=dua',searchText:'bittgebet gut diesseits jenseits dunya akhirah rabbana'},
+ {id:'dua-002',title:'Duʿāʾ um Geduld und festen Stand',kind:'Duʿāʾ',excerpt:'Unser Herr, gieße Geduld über uns aus, festige unsere Schritte und hilf uns gegen das ungläubige Volk.',reference:'Qurʾān 2:250',url:'/?page=dua',searchText:'geduld sabr standhaft festigkeit'},
+ {id:'dua-003',title:'Unser Herr, nimm uns nicht für Vergessen und Fehler zur Rechenschaft',kind:'Duʿāʾ',excerpt:'Unser Herr, nimm uns nicht zur Rechenschaft, wenn wir vergessen oder Fehler machen.',reference:'Qurʾān 2:286',url:'/?page=dua',searchText:'vergessen fehler vergebung'},
+ {id:'dua-004',title:'Duʿāʾ um Vergebung der Sünden und Festigkeit',kind:'Duʿāʾ',excerpt:'Unser Herr, vergib uns unsere Sünden und unser Übermaß in unserer Angelegenheit und festige unsere Schritte.',reference:'Qurʾān 3:147',url:'/?page=dua',searchText:'vergebung reue tawbah sünden festigkeit'},
+];
+let docs=[],knownIds=new Set(),indexMode='vorschau',lastTopic='',didFetch=false;
+let visited=load('dat_knowledge_clicks_v2',{}),learnOn=load('dat_knowledge_learn_v2',false);
+function load(k,f){try{const v=JSON.parse(localStorage.getItem(k));return v??f}catch(e){return f}}
+function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function topic(w){let s=normal(w);return alias.get(s)||s}
+function tokens(v){return normal(v).split(' ').filter(s=>s.length>1&&!stop.has(s)).map(topic)}
+function dist(a,b){if(Math.abs(a.length-b.length)>2)return 9;let prior=Array.from({length:b.length+1},(_,j)=>j);for(let i=1;i<=a.length;i++){let next=[i];for(let j=1;j<=b.length;j++)next[j]=Math.min(next[j-1]+1,prior[j]+1,prior[j-1]+(a[i-1]!==b[j-1]));prior=next}return prior[b.length]}
+function tokenizeDoc(d){let title=normal(d.title),body=normal([d.excerpt,d.body,d.searchText,d.speaker,d.work,d.reference,(d.contextHints||[]).join(' ')].join(' '));let ts=tokens(title),bs=tokens(body);return {title,body,ts,bs,all:new Set([...ts,...bs])}}
+function ingest(arr){let changed=false;for(let d of arr){if(!d||!d.title)continue;d.id=String(d.id||d.title);let u=String(d.url||'');if(!u)u='/?page=wissen';try{let obj=new URL(u,ORIGIN);if(obj.origin!==ORIGIN)continue;d.url=obj.pathname+obj.search+obj.hash}catch(e){continue}d.kind=String(d.kind||'Fundstelle');d.excerpt=String(d.excerpt||'').slice(0,400);d.reference=String(d.reference||'');d._index=tokenizeDoc(d);if(!knownIds.has(d.id)){docs.push(d);knownIds.add(d.id);changed=true}}
+return changed}
+function seed(){docs=[];knownIds.clear();ingest([...samples,...sections])}seed();
+function hitScore(d,q,qt,allowFuzzy=false){let entry=d._index;if(!entry||!qt.length)return 0;let s=0,matched=0;const title=entry.title,body=entry.body;for(let w of qt){let score=0;if(entry.ts.includes(w)||title.includes(w))score=8;else if(entry.all.has(w))score=4;else if(body.includes(w))score=2.5;else if(allowFuzzy&&w.length>=4&&entry.ts.some(x=>x.length>=3&&Math.abs(x.length-w.length)<=2&&dist(x,w)<=(w.length<6?1:2)))score=2.2;if(score){matched++;s+=score}}
+s*=Math.pow(matched/qt.length,1.55);if(matched===qt.length)s+=3;if(title.includes(normal(q)))s+=7;if(learnOn)s+=Math.min(4,Number(visited[d.id]||0)*.55);if(d.kind==='Bereich')s*=.8;return s}
+function search(q,limit=5){const qt=tokens(q);if(!qt.length)return [];let arr=docs.map(d=>({d,score:hitScore(d,q,qt)})).filter(x=>x.score>1.6);if(arr.length<limit){const exactIds=new Set(arr.map(x=>x.d.id));for(const d of docs){if(exactIds.has(d.id))continue;const score=hitScore(d,q,qt,true);if(score>1.6)arr.push({d,score})}}arr.sort((a,b)=>b.score-a.score);return arr.slice(0,limit)}
+function txt(tag,cls,str){let e=document.createElement(tag);if(cls)e.className=cls;e.textContent=String(str??'');return e}
+function append(node){ui.stream.appendChild(node);ui.stream.scrollTop=ui.stream.scrollHeight}
+function bot(){let e=txt('div','chat-message bot','');e.appendChild(txt('div','chat-bot-label','DĀR · Wissensfinder'));return e}
+function note(box,msg){box.appendChild(txt('p','bot-note',msg))}
+function chips(box,arr){const out=txt('div','chat-chips','');arr.forEach(q=>{let b=txt('button','chat-chip',q);b.type='button';b.onclick=()=>submit(q);out.appendChild(b)});box.appendChild(out)}
+function submit(q){q=String(q||'').trim().slice(0,340);if(!q)return;ui.tips.hidden=true;let user=txt('div','chat-message user',q);append(user);ui.input.value='';resize();let b=bot(),answers=search(q,6);let qt=tokens(q);const follow=/^(und |was ist mit|was sagen|zeige mehr|dazu |gibt es auch)/i.test(q);if(follow&&lastTopic&&qt.length<=3){let combined=search(lastTopic+' '+q,6);if(combined.length&&(!answers.length||combined[0].score>answers[0].score))answers=combined}
+if(qt.length)lastTopic=q;
+if(!answers.length){b.appendChild(txt('p','bot-copy','Ich finde dazu in den aktuell geladenen Inhalten keine ausreichend passende Fundstelle. Ich erfinde deshalb keine religiöse Antwort.'));note(b,indexMode==='vorschau'?'Die HTML-Vorschau enthält nur Beispiel- und Bereichsdaten. Nach Einbindung auf unserer Domain wird der umfassende Wissensindex geladen.':'Versuche einen Gelehrtennamen, einen Begriff oder eine Qurʾān-Stelle. Nicht jeder Bereich ist schon indexiert.');chips(b,['Tawḥīd','Duʿāʾ um Geduld','Iǧmāʿ']);append(b);return}
+b.appendChild(txt('p','bot-copy','Ich habe '+answers.length+' passende '+(answers.length===1?'Fundstelle':'Fundstellen')+' aus DĀR AL TAWḤĪD gefunden. Hier sind die besten Treffer – mit Beleg, soweit in unseren Daten hinterlegt:'));
+for(const {d,score} of answers){let link=txt('a','chat-result','');link.href=ORIGIN+d.url;link.target='_blank';link.rel='noopener noreferrer';link.appendChild(txt('div','chat-result-top',''));link.lastChild.appendChild(txt('span','chat-result-category',d.kind));link.lastChild.appendChild(txt('span','chat-result-arrow','↗'));link.appendChild(txt('strong','',d.title));if(d.excerpt)link.appendChild(txt('span','excerpt',d.excerpt.slice(0,220)));if(d.reference)link.appendChild(txt('span','source-ref',d.reference));link.addEventListener('click',()=>{if(!learnOn)return;visited[d.id]=Math.min(60,Number(visited[d.id]||0)+1);save('dat_knowledge_clicks_v2',visited)});b.appendChild(link)}
+note(b,indexMode==='vorschau'?'Vorschau-Modus: Die vollständige Website-Suche ist noch nicht aktiviert.':'Antworten sind Fundstellen, keine automatisch erstellten Fatwā oder Erklärungen. Öffne die Originalquelle.');let relevant=qt.find(w=>canonicalGroups[w]);if(relevant)chips(b,['Mehr zu '+relevant,'Quellen zu '+relevant]);append(b)}
+function resize(){ui.input.style.height='auto';ui.input.style.height=Math.min(112,ui.input.scrollHeight)+'px';ui.send.disabled=!ui.input.value.trim()}
+function suggest(){let q=ui.input.value.trim();resize();if(q.length<2){ui.tips.hidden=true;return}let found=search(q,4);ui.tips.replaceChildren();if(!found.length){ui.tips.hidden=true;return}for(const {d} of found){let b=txt('button','',d.title);b.type='button';b.appendChild(txt('small','','↗ '+d.kind));b.onclick=()=>submit(d.title);ui.tips.appendChild(b)}ui.tips.hidden=false}
+ui.input.addEventListener('input',suggest);ui.input.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();submit(ui.input.value)}if(e.key==='Escape')ui.tips.hidden=true});ui.composer.addEventListener('submit',e=>{e.preventDefault();submit(ui.input.value)});
+document.querySelectorAll('[data-ask-knowledge]').forEach(b=>b.addEventListener('click',()=>submit(b.getAttribute('data-ask-knowledge'))));
+ui.reset.addEventListener('click',()=>{visited={};save('dat_knowledge_clicks_v2',{});learnOn=!learnOn;save('dat_knowledge_learn_v2',learnOn);ui.reset.textContent=learnOn?'Lernverlauf zurücksetzen / deaktivieren':'Lokales Lernen aktivieren';status()});
+function status(){ui.status.textContent= indexMode==='vorschau'?'Demo: Beispielinhalte + Bereiche':indexMode==='online'?'Website-Indizes aktiv':indexMode==='partial'?'Teilindex geladen · einige Quellen fehlen':'Index nicht erreichbar · Grunddaten';ui.count.textContent=docs.length.toLocaleString('de-DE')+' Einträge verfügbar';ui.reset.textContent=learnOn?'Lernverlauf zurücksetzen / deaktivieren':'Lokales Lernen aktivieren'}
+async function loadOnline(){if(didFetch||!isOwnSite)return;didFetch=true;let loaded=0;let loadedSources=0;const endpoints=[
+ {url:'/data/ilm-knowledge-index.json',parse:data=>((data&&data.entries)||[]).map(d=>({...d,kind:({post:'Beiträge',posts:'Beiträge',quran:'Qurʾān',sunnah:'Ḥadīṯ',athar:'Āṯār',dua:'Duʿāʾ',quiz:'Quiz'}[d.kind]||d.kind),url: d.route?.view==='quran-surah'?'/?page=quran':d.route?.view==='dua'?'/?page=dua':d.route?.view==='post'?'/?page=beitraege':d.route?.view==='more'?'/?page=mehr':'/?page=wissen'}))},
+ {url:'/data/library-publications.json',parse:data=>(data.publications||[]).map(d=>({id:'library-'+d.id,title:d.title,kind:'Bibliothek',excerpt:d.description||d.subtitle||d.topic||'PDF-Veröffentlichung',reference: d.category||'',searchText:[d.topic,d.category,(d.searchAliases||[]).join(' '),(d.tags||[]).join(' ')].join(' '),url:d.pdfUrl||'/?page=bibliothek'}))},
+ {url:'/data/quran-search-keywords.json',parse:data=>{if(Array.isArray(data))data.forEach(row=>{let key=normal(row.id||row.label);if(!key)return;for(let s of (row.terms||[]))alias.set(normal(s),key)});return []}}
+ ];
+ const outcomes=await Promise.allSettled(endpoints.map(async ep=>{const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),15000);try{let r=await fetch(ep.url,{cache:'default',credentials:'same-origin',signal:controller.signal});if(!r.ok)throw Error('Status '+r.status);let data=await r.json();return ep.parse(data)}finally{clearTimeout(timer)}}));
+ for(const o of outcomes)if(o.status==='fulfilled'){loadedSources++;let list=Array.isArray(o.value)?o.value:[];loaded+=list.length;ingest(list)}
+ indexMode=loaded?(loadedSources===endpoints.length?'online':'partial'):'offline';status();if(loaded){let msg=bot();msg.appendChild(txt('p','bot-copy','Der Website-Index ist nun bereit: '+docs.length.toLocaleString('de-DE')+' Einträge können durchsucht werden. Stelle deine Frage in normaler Sprache.'));append(msg)}
+ }
+function begin(){let b=bot();b.appendChild(txt('p','bot-copy','As-salāmu ʿalaikum! Ich bin der Wissensfinder von DĀR AL TAWḤĪD. Frag mich beispielsweise nach Tawḥīd, einem Gelehrten, einer Duʿāʾ oder einer Qurʾān-Stelle. Ich suche ausschließlich in unseren bekannten Website-Inhalten und zeige dir die Fundstellen.'));chips(b,['Was finde ich über Tawḥīd?','Duʿāʾ bei Schwierigkeiten','Bücher über Iǧmāʿ']);append(b);status();if(isOwnSite)loadOnline()}
+begin();
+})();
+</script>
+<script>
+(function(){'use strict';
+const $=id=>document.getElementById(id);
+// Camera/location access is only requested on explicit action, no unconsented location storage.
+let place={name:'Beispiel Rheinbach',lat:50.6256,lon:6.9491,example:true};
+const prayerKeys=[['fajr','Fajr'],['dhuhr','Ẓuhr'],['asr','ʿAṣr'],['maghrib','Maghrib'],['isha','ʿIshāʾ']];
+let lastDate='',lastPrayers=[];
+function prayerAt(day,key){let item=day.find(x=>x.key===key);return item&&Number.isFinite(item.time)?item:null}
+function renderPrayers(){
+ const engine=window.DarPrayerMath;if(!engine||typeof engine.calculateDayTimes!=='function'){$('prayStatus').textContent='Berechnung konnte noch nicht geladen werden. Öffne die Gebetszeiten auf der Website.';return}
+ const now=new Date(), dateKey=now.toDateString(),today=engine.calculateDayTimes(now,place.lat,place.lon,{angle:12,asrFactor:1});
+ let scheduled=prayerKeys.map(([key,name])=>{const p=prayerAt(today,key);if(!p)return null;const date=new Date(now);date.setHours(0,0,0,0);date.setMinutes(Math.round(p.time*60));return{key,name,date,display:engine.formatHour(p.time)}}).filter(Boolean);
+ if(!scheduled.length){$('prayStatus').textContent='Für diesen Standort können keine Gebetszeiten berechnet werden.';return}
+ lastPrayers=scheduled;lastDate=dateKey;
+ let next=scheduled.find(x=>x.date>now);
+ if(!next){let tomorrow=new Date(now);tomorrow.setDate(tomorrow.getDate()+1);const all=engine.calculateDayTimes(tomorrow,place.lat,place.lon,{angle:12,asrFactor:1});const fajr=prayerAt(all,'fajr');if(fajr){const when=new Date(tomorrow);when.setHours(0,0,0,0);when.setMinutes(Math.round(fajr.time*60));next={key:'fajr',name:'Fajr · morgen',date:when,display:engine.formatHour(fajr.time)}}}
+ $('prayLocation').textContent=place.name;
+ $('nextPrayerLabel').textContent=next?next.name:'–';$('nextPrayerClock').textContent=next?next.display:'--:--';
+ const mins=next?Math.max(0,Math.ceil((next.date-now)/60000)):0;
+ $('prayCountdown').textContent=next?'In '+(mins>=60?Math.floor(mins/60)+' Std. ':'')+String(mins%60).padStart(2,'0')+' Min.':'Keine weitere Zeit gefunden';
+ const pills=$('prayerPills');pills.replaceChildren();scheduled.forEach(p=>{const span=document.createElement('span');if(next&&p.key===next.key)span.className='selected';const b=document.createElement('b');b.textContent=p.name;const em=document.createElement('em');em.textContent=p.display;span.append(b,em);pills.appendChild(span)});
+ $('prayStatus').textContent=place.example?'Berechnet mit unseren Gebetszeitregeln (12°/Standard-ʿAṣr). Beispielort Rheinbach – nicht automatisch dein Standort.':'Berechnet aus deinem freigegebenen Standort (12°/Standard-ʿAṣr). Standort wird nicht gespeichert.';
+}
+$('prayerLocate').addEventListener('click',()=>{
+ if(!navigator.geolocation){$('prayStatus').textContent='Der Browser stellt keine Standortfunktion bereit.';return}
+ $('prayStatus').textContent='Standortfreigabe wird angefragt …';navigator.geolocation.getCurrentPosition(pos=>{place={name:'Mein Standort',lat:pos.coords.latitude,lon:pos.coords.longitude,example:false};renderPrayers()},err=>{$('prayStatus').textContent='Standort nicht verfügbar ('+err.code+'). Die Beispielzeiten für Rheinbach bleiben sichtbar.'},{enableHighAccuracy:false,timeout:14000,maximumAge:900000});
+});
+let tries=0;function startPrayers(){tries++;if(window.DarPrayerMath?.calculateDayTimes)renderPrayers();else if(tries<12)setTimeout(startPrayers,500);else $('prayStatus').textContent='Gebetsberechnung derzeit nicht erreichbar. Bitte den Gebetszeiten-Bereich öffnen.'}startPrayers();setInterval(()=>{if(window.DarPrayerMath?.calculateDayTimes)renderPrayers()},30000);
+const catalogue={1:{label:'al-Fātiḥah',start:1,count:7},112:{label:'al-Iḫlāṣ',start:6222,count:4},113:{label:'al-Falaq',start:6226,count:5},114:{label:'an-Nās',start:6231,count:6}};
+let player={surah:1,verse:1,edition:'ar.alafasy',playing:false};const audio=new Audio();audio.preload='none';
+function updatePlayer(){const meta=catalogue[player.surah];$('playerCurrent').textContent=meta.label+' · '+player.surah+':'+player.verse;$('togglePlayer').textContent=audio.paused?'▶':'❚❚';$('togglePlayer').setAttribute('aria-label',audio.paused?'Wiedergabe starten':'Wiedergabe pausieren');$('playerHint').textContent='Āyah '+player.verse+' von '+meta.count}
+function currentAudioUrl(){const idx=catalogue[player.surah].start+player.verse-1;return 'https://dar-al-tawhid.de/quran-audio/'+encodeURIComponent(player.edition)+'/'+idx+'.mp3'}
+function play(){const url=currentAudioUrl();if(audio.src!==url){audio.src=url;audio.load()}const p=audio.play();if(p&&p.catch)p.catch(()=>{$('playerStatus').textContent='Audio momentan nicht abrufbar. Öffne den vollständigen Qurʾān-Player.'});$('playerStatus').textContent='Rezitation · '+$('selectReciter').selectedOptions[0].textContent;updatePlayer()}
+function step(n){player.verse+=n;if(player.verse<1)player.verse=catalogue[player.surah].count;if(player.verse>catalogue[player.surah].count)player.verse=1;const wasPlaying=!audio.paused;audio.pause();audio.removeAttribute('src');audio.load();updatePlayer();if(wasPlaying)play()}
+$('togglePlayer').addEventListener('click',()=>{if(!audio.paused)audio.pause();else play();updatePlayer()});$('prevAyah').addEventListener('click',()=>step(-1));$('nextAyah').addEventListener('click',()=>step(1));$('selectSurah').addEventListener('change',()=>{audio.pause();player.surah=Number($('selectSurah').value);player.verse=1;audio.removeAttribute('src');audio.load();updatePlayer()});$('selectReciter').addEventListener('change',()=>{audio.pause();player.edition=$('selectReciter').value;audio.removeAttribute('src');audio.load();updatePlayer()});audio.addEventListener('ended',()=>{if(player.verse<catalogue[player.surah].count){step(1);play()}else{$('playerStatus').textContent='Ende der Sūrah erreicht';updatePlayer()}});audio.addEventListener('error',()=>{$('playerStatus').textContent='Audio konnte nicht geladen werden. Website-Player öffnen.'});audio.addEventListener('playing',updatePlayer);audio.addEventListener('pause',updatePlayer);updatePlayer();
+// On narrow touch devices, keep the chat in the visible viewport above the soft keyboard.
+const input=$('chatInput'),panel=$('knowledgeChat'),vv=window.visualViewport;
+let savedScroll=0,active=false;
+function syncViewport(){if(!active)return;const h=vv?vv.height:window.innerHeight,top=vv?vv.offsetTop:0;document.documentElement.style.setProperty('--chat-h',Math.max(260,h)+'px');document.documentElement.style.setProperty('--chat-top',top+'px');requestAnimationFrame(()=>{$('chatStream').scrollTop=$('chatStream').scrollHeight})}
+function focusChat(){if(!matchMedia('(max-width: 850px)').matches)return;if(active)return;active=true;savedScroll=window.scrollY;document.body.classList.add('chat-focus');syncViewport()}
+function closeChat(){if(!active)return;active=false;input.blur();document.body.classList.remove('chat-focus');document.documentElement.style.removeProperty('--chat-h');document.documentElement.style.removeProperty('--chat-top');window.scrollTo({top:savedScroll,behavior:'instant'});setTimeout(()=>panel.scrollIntoView({block:'center',behavior:'instant'}),50)}
+input.addEventListener('focus',focusChat);
+$('chatDone').addEventListener('click',closeChat);
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&active)closeChat()});
+if(vv){vv.addEventListener('resize',syncViewport);vv.addEventListener('scroll',syncViewport)}
+window.addEventListener('orientationchange',()=>setTimeout(syncViewport,300));
+new MutationObserver(()=>{if(active)requestAnimationFrame(()=>{$('chatStream').scrollTop=$('chatStream').scrollHeight})}).observe($('chatStream'),{childList:true});
+})();
+</script>
+</body>
+</html>
