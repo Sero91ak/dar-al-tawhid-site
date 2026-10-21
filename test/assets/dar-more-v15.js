@@ -1,6 +1,18 @@
 /* DAR Mehr V1.5 | shared functional UI; scoped to the adult Mehr view only. */
 (function(){
 "use strict";
+
+/* Shared adult TEST language runtime. No production, Kids, API or paid model access. */
+if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(location.pathname)
+    &&!window.__DAR_TEST_TR_UI_SCRIPT_LOADING){
+ window.__DAR_TEST_TR_UI_SCRIPT_LOADING=true;
+ const trScript=document.createElement("script");
+ trScript.src="/test/assets/dar-test-turkish-ui.js?v=20261021-core1";
+ trScript.async=true;
+ trScript.onerror=()=>{window.__DAR_TEST_TR_UI_SCRIPT_LOADING=false};
+ (document.head||document.documentElement).appendChild(trScript);
+}
+
 if(window.DAR_MORE_V15)return;
 const rootClass="dar-more-v15";
 const categories=[["wissen","Wissen","Lernen & Wissen","prophets"],["alltag","Alltag","Alltag & Gebet","prayer"],["werkzeuge","Werkzeuge","Werkzeuge & Assistenten","zakat"],["persoenlich","Persönlich","Persönlich","saved"],["app","App","App","settings"]];
@@ -52,12 +64,13 @@ function localeChoices(){
  '<div class="dm-locale-copy"><strong>Sprache · Dil</strong><small>Türkische Inhalte werden nach Quellen- und Sprachprüfung freigegeben.</small></div>'+
  '<div class="dm-locale-choices">'+
  [['de','Deutsch'],['tr','Türkçe']].map(([code,label])=>'<button type="button" data-dm-locale="'+code+'" aria-pressed="'+(value===code)+'">'+label+'</button>').join('')+
- '</div></section>';
+ '</div><a class="dm-i18n-reader-link" href="/test/i18n/?post=hasan-al-basri-selbstpruefung-20261021-481">'+
+ (value==="tr"?"Geprüfte Textfassung öffnen · İncele":"Sprachfassung prüfen · DAR TEST")+'</a></section>';
 }
 function ensureLocaleCss(){
  if(document.getElementById("dar-test-more-locale-css"))return;
  const el=document.createElement("style");el.id="dar-test-more-locale-css";
- el.textContent='.dar-more-v15 .dm-locale{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:12px 0;padding:12px 2px;border-block:1px solid color-mix(in srgb,currentColor 18%,transparent);color:inherit}.dm-locale-copy{display:grid;gap:5px;flex:1 1 170px}.dm-locale-copy strong{font-size:14px}.dm-locale-copy small{font-size:11px;opacity:.79;line-height:1.4}.dm-locale-choices{display:flex;gap:7px}.dar-more-v15 .dm-locale-choices button{min-height:42px;padding:9px 14px;border:1px solid color-mix(in srgb,currentColor 26%,transparent);border-radius:999px;color:inherit;background:transparent;font:600 12px system-ui,-apple-system,sans-serif;cursor:pointer}.dar-more-v15 .dm-locale-choices button[aria-pressed="true"]{border-color:var(--accent-gold,#bba273);background:color-mix(in srgb,var(--accent-gold,#bba273) 13%,transparent)}.dar-more-v15 .dm-locale-choices button:focus-visible{outline:2px solid var(--accent-gold,#bba273);outline-offset:3px}';
+ el.textContent='.dar-more-v15 .dm-i18n-reader-link{color:var(--gold,#d4b978);display:inline-flex;align-items:center;min-height:42px;font:650 12px system-ui,-apple-system,sans-serif;padding:7px 0;text-underline-offset:4px}.dar-more-v15 .dm-locale{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:12px 0;padding:12px 2px;border-block:1px solid color-mix(in srgb,currentColor 18%,transparent);color:inherit}.dm-locale-copy{display:grid;gap:5px;flex:1 1 170px}.dm-locale-copy strong{font-size:14px}.dm-locale-copy small{font-size:11px;opacity:.79;line-height:1.4}.dm-locale-choices{display:flex;gap:7px}.dar-more-v15 .dm-locale-choices button{min-height:42px;padding:9px 14px;border:1px solid color-mix(in srgb,currentColor 26%,transparent);border-radius:999px;color:inherit;background:transparent;font:600 12px system-ui,-apple-system,sans-serif;cursor:pointer}.dar-more-v15 .dm-locale-choices button[aria-pressed="true"]{border-color:var(--accent-gold,#bba273);background:color-mix(in srgb,var(--accent-gold,#bba273) 13%,transparent)}.dar-more-v15 .dm-locale-choices button:focus-visible{outline:2px solid var(--accent-gold,#bba273);outline-offset:3px}';
  document.head.append(el);
 }
 const moreTheme=()=>document.documentElement.getAttribute("data-theme")||"dark";
