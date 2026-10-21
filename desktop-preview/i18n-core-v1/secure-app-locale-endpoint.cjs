@@ -78,6 +78,7 @@ function createLocalePreferenceApi(options={}) {
       });
     }catch{return result(503,{ok:false,error:"lookup_unavailable"});}
     if(!own || own.ownerVerified!==true ||
+       own.subject!==identity.subject ||
        own.subscriptionId!==subscriptionId ||
        own.onesignalAppId!==allowedAppId ||
        own.environment!==environment){
