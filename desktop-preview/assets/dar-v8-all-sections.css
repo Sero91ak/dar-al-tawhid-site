@@ -122,3 +122,16 @@ body.desktop-overhaul-v18.dar-v8-night .page-intro:not(.v8-global-page-hero){bac
 @media(prefers-reduced-motion:reduce){
  body.desktop-overhaul-v18 :is(.real-grid-item,.rule-card,.pub-card,.dua-real,.source-work,.more-row,.real-cover,.feature-card,.category-card,.list-row){transition:none!important}
 }
+
+/* Quran reader small-screen intrinsic sizing fix: never let a book page widen the whole UI. */
+@media(max-width:959px){
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .quran-reading-zone{margin-inline:0!important;padding-inline:8px!important;overflow:clip}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] :is(.quran-layout,.quran-sidebar,.quran-surah-nav,.book-stage,.book-rim,.book-shell,.book-page,.book-loading,.book-controls){min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .quran-layout{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .quran-surah-nav{grid-template-columns:repeat(3,minmax(0,1fr))!important;overflow-x:hidden}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .quran-surah-nav a{min-width:0!important;overflow-wrap:anywhere;font-size:10px!important}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .book-stage{padding-inline:4px!important}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .book-rim{padding-inline:4px!important}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .book-page{padding-inline:clamp(12px,4vw,25px)!important}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .book-controls{display:flex!important;flex-wrap:wrap!important;justify-content:center}
+}
