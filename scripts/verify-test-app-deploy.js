@@ -442,6 +442,17 @@ async function fetchVersionBuild(base) {
           &&source.includes("quran-player")
           &&sequence;
         ok=linked&&present;
+        if (!linked && attempt===1) {
+          const refs=(shell.text.match(/<script[^>]+(?:darTestHomeHtmlParityV1|dar-home-html-parity-v1\\.js)[^>]*>/gi)||[]).slice(0,5);
+          console.log("HTML parity delivered refs "+label+":",JSON.stringify(refs));
+          console.log("HTML parity shell diagnostics "+label+":",JSON.stringify({
+            bodyClose:shell.text.includes("</body>"),htmlClose:shell.text.includes("</html>"),
+            marker:shell.text.includes("darTestHomeHtmlParityV1"),
+            current:shell.text.includes("v56-compact-welcome"),oldV53:shell.text.includes("v53-footer-flow"),
+            oldV55:shell.text.includes("v55-source-salam"),
+            length:shell.text.length
+          }));
+        }
         console.log("HTML parity "+label+": shell="+shell.status+" linked="+linked+" js="+js.status+" runtime="+present+" attempt="+attempt+"/5");
         if(ok)break;
       }catch(e){console.log("HTML parity "+label+": "+(e.message||e))}
