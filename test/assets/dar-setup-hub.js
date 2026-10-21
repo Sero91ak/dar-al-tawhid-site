@@ -1,6 +1,18 @@
 /* DAR Setup Hub — web + test parity with iOS setup card */
 (function () {
   "use strict";
+
+/* Shared adult TEST language runtime. No production, Kids, API or paid model access. */
+if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(location.pathname)
+    &&!window.__DAR_TEST_TR_UI_SCRIPT_LOADING){
+ window.__DAR_TEST_TR_UI_SCRIPT_LOADING=true;
+ const trScript=document.createElement("script");
+ trScript.src="/test/assets/dar-test-turkish-ui.js?v=20261021-core1";
+ trScript.async=true;
+ trScript.onerror=()=>{window.__DAR_TEST_TR_UI_SCRIPT_LOADING=false};
+ (document.head||document.documentElement).appendChild(trScript);
+}
+
   var MARKER = "DAR_SETUP_HUB_V1";
   var SETTINGS_KEY = "darPrayerSettingsV1";
   var ROOT_ID = "dar-setup-hub";
