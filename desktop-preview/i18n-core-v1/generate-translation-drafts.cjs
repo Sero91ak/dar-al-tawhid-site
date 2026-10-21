@@ -52,7 +52,12 @@ async function generate(rec){
  const item=index.get(rec.id), abort=new AbortController(), timer=setTimeout(()=>abort.abort(),95000);
  try{
   const response=await fetch(apiUrl,{method:"POST",signal:abort.signal,headers:{"authorization":"Bearer "+apiKey,"content-type":"application/json"},
-    body:JSON.stringify({model,temperature:0.1,max_tokens:MAX_TOKENS,response_format:{type:"json_object"},
+    body:JSON.stringify({model,temperature:0.1,max_tokens:MAX_TOKENS,response_format:{type:"json_schema",json_schema:{
+        name:"dar_editorial_translation_fields",strict:true,
+        schema:{type:"object",properties:Object.fromEntries(Object.entries(item.fields).map(([name,value])=>[
+          name,typeof value==="string"?{type:"string"}:{type:"array",items:{type:"string"}}
+        ])),required:Object.keys(item.fields),additionalProperties:false}
+      }},
       messages:[{role:"system",content:systemText},{role:"user",content:JSON.stringify({targetLanguage:LANGS[rec.locale],id:item.id,fields:item.fields,immutable:item.immutable,terminologySpellingHints:glossaryHints(item.fields),terminologyNote:"These are canonical spelling hints only; they are NOT translations, legal rulings or definitions. Use context and preserve sourced meaning."})}]})});
   if(!response.ok)throw Error("Provider HTTP "+response.status);
   const raw=await response.json();const fields=JSON.parse(String(raw.choices?.[0]?.message?.content||""));
