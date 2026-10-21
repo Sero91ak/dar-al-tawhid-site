@@ -1,0 +1,22 @@
+#!/usr/bin/env node
+"use strict";
+const assert=require("node:assert/strict"),fs=require("node:fs"),vm=require("node:vm"),path=require("node:path");
+const code=fs.readFileSync(path.join(__dirname,"../../test/assets/dar-adult-localized-content.js"),"utf8");
+const window={fetch:async()=>({ok:false})};
+vm.runInNewContext(code,{window,console});const {resolve}=window.DARTestApprovedContent;
+const source={id:"post:x",kind:"post",sourceHash:"abc",fields:{title:"Deutsch",body:"Quellentext"},immutable:{source:"Qurʾān 2:1"}};
+const record={id:"post:x",kind:"post",locale:"tr",sourceHash:"abc",translationStatus:"approved",fields:{title:"Türkçe",body:"Türkçe metin"},immutable:{source:"fake"}};
+const pack={schemaVersion:1,locale:"tr",originalLocale:"de",records:[record]};
+assert.equal(resolve(source,"de",pack).fields.title,"Deutsch");
+assert.equal(resolve(source,"tr",pack).fields.title,"Türkçe");
+assert.equal(resolve(source,"tr",pack).immutable.source,"Qurʾān 2:1");
+assert.equal(resolve(source,"tr",{...pack,records:[{...record,translationStatus:"draft"}]}).pending,true);
+assert.equal(resolve(source,"tr",{...pack,records:[{...record,sourceHash:"old"}]}).pending,true);
+assert.equal(resolve(source,"tr",{...pack,records:[record,record]}).pending,true);
+assert.equal(resolve(source,"tr",{...pack,records:[{...record,fields:{title:"Türkçe"}}]}).pending,true);
+assert.equal(resolve(source,"tr",null).fields.body,"Quellentext");
+const draftPath=path.join(__dirname,"translations/tr/post/hasan-al-basri-selbstpruefung-20261021-481-9b9306807c.json");
+const draft=JSON.parse(fs.readFileSync(draftPath,"utf8"));
+assert.equal(draft.status,"draft");assert.equal(draft.locale,"tr");assert.equal(draft.modelUsage.total_tokens,927);
+assert.equal(draft.reviewer,null);
+console.log("PASS: approved-only reader, revision guard, original immutable fields, unique manuscript, Turkish draft gated");
