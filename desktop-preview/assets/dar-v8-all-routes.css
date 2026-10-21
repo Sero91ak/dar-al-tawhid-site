@@ -199,3 +199,36 @@ body.desktop-overhaul-v18 :is(.dar-v8-side-link,.dar-v8-mobile-dock a,.dar-v8-mo
 @media(prefers-reduced-motion:reduce){
  body.desktop-overhaul-v18 #pageRoot :is(.real-post,.dua-real,.more-row,.real-cover,.source-work,.pub-card,.rule-card,.list-row,.category-card){transition:none!important;transform:none!important}
 }
+
+
+/* Qurʾān reader: mobile intrinsic-width fix verified by Chrome V8 acceptance.
+   Surah navigator and book must stay within the single reading column;
+   preserve actual scrolling inside the surah list and existing book controls. */
+@media(max-width:860px){
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] #pageRoot .quran-reading-zone,
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] #pageRoot .quran-layout{
+  display:block!important;width:100%!important;max-width:100%!important;
+  min-width:0!important;box-sizing:border-box!important
+ }
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] #pageRoot .quran-sidebar,
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] #pageRoot .book-stage{
+  display:block!important;width:100%!important;max-width:100%!important;min-width:0!important;
+  margin-left:auto!important;margin-right:auto!important;box-sizing:border-box!important
+ }
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] #pageRoot .quran-surah-nav{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  overflow-x:hidden!important;overflow-y:auto!important;
+  box-sizing:border-box!important
+ }
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] #pageRoot .quran-surah-nav a{
+  display:block;min-width:0!important;max-width:100%!important;
+  overflow-wrap:anywhere;white-space:normal
+ }
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] #pageRoot .book-rim,
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] #pageRoot .book-shell,
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] #pageRoot .book-page{
+  width:100%!important;max-width:100%!important;min-width:0!important;
+  box-sizing:border-box!important
+ }
+}
