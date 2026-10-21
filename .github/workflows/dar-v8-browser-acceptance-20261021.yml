@@ -6,6 +6,7 @@ on:
       - fix/v8-immersive-mobile-tablet-20261021
       - fix/browser-v8-visual-audit-1905-20261021
       - fix/v8-quran-player-modal-20261021
+      - fix/v8-player-phone-selector-clip-20261021
     paths:
       - 'desktop-preview/**'
       - '.github/workflows/dar-v8-browser-acceptance-20261021.yml'
@@ -20,7 +21,7 @@ permissions:
 jobs:
   browser:
     # Only test the isolated V8 browser review lane.
-    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021' || github.head_ref == 'fix/browser-v8-visual-audit-1905-20261021' || github.head_ref == 'fix/v8-quran-player-modal-20261021'
+    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021' || github.head_ref == 'fix/browser-v8-visual-audit-1905-20261021' || github.head_ref == 'fix/v8-quran-player-modal-20261021' || github.head_ref == 'fix/v8-player-phone-selector-clip-20261021'
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
@@ -175,6 +176,8 @@ jobs:
                 raise RuntimeError('Fullscreen button overlaps Surah subtitle: '+str(geometry))
               if len(geometry['selectors'])!=3 or any(s['width']<65 or s['display']=='none' for s in geometry['selectors']):
                 raise RuntimeError('Surah/Ayah/Reciter selector not usable: '+str(geometry))
+              if any(s['top']<geometry['pt']-3 or s['bottom']>geometry['pb']+5 for s in geometry['selectors']):
+                raise RuntimeError('Fullscreen selector clipped outside its dialog: '+str(geometry))
               driver.save_screenshot(output+'/'+device+'-player-fullscreen.png')
               driver.find_element(By.ID,'darV8PlayerFullscreen').click()
               closed=driver.execute_script("return !document.body.classList.contains('dar-v8-player-fullscreen')")
