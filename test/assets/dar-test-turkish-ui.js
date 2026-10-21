@@ -168,6 +168,40 @@ const EXTRA_ENTRIES=[
 ["App, Qurʾān, Duʿāʾ und Beiträge","Uygulama, Kur'ân, dua ve yazılar"]
 ];
 const dictionary=new Map([...ENTRIES,...EXTRA_ENTRIES]),backward=new Map(),ambiguous=new Set();
+/* Optional central interface catalog: one static asset, no client AI or paid calls.
+   Existing reviewed manual phrases take precedence; Arabic/source text excluded below. */
+const manualKeys=new Set(dictionary.keys());
+let remoteCatalogState="not-loaded";
+const CATALOG_PATH="/test/i18n/ui-tr.generated.json";
+function catalogSafe(de,tr){
+ if(typeof de!=="string"||typeof tr!=="string")return false;
+ if(de.trim()!==de||tr.trim()!==tr||de.length<2||de.length>180||tr.length<1||tr.length>220)return false;
+ if(/[\u0600-\u06ff]/.test(de)||/[<>]/.test(de+tr))return false;
+ if(/https?:\/\/|[\r\n]/.test(de+tr))return false;
+ return true;
+}
+async function loadCatalog(fetcher=global.fetch?.bind(global)){
+ if(remoteCatalogState==="loaded")return dictionary.size;
+ if(typeof fetcher!=="function"){remoteCatalogState="unavailable";return dictionary.size}
+ remoteCatalogState="loading";
+ try{
+  const response=await fetcher(CATALOG_PATH,{credentials:"same-origin",cache:"no-store"});
+  if(!response?.ok)throw Error("Catalog unavailable");
+  const data=await response.json();
+  if(data?.schemaVersion!==1||data.locale!=="tr"||data.sourceLocale!=="de"||
+     data.scope!=="adult-test-ui-only"||!data.entries||typeof data.entries!=="object"||
+     Array.isArray(data.entries))throw Error("Invalid UI catalog");
+  let added=0;
+  for(const [de,tr] of Object.entries(data.entries)){
+   if(!catalogSafe(de,tr)||manualKeys.has(de))continue;
+   dictionary.set(de,tr);added++;
+  }
+  remoteCatalogState="loaded";
+  schedule();
+  return dictionary.size;
+ }catch(_){remoteCatalogState="unavailable";return dictionary.size}
+}
+
 function translateExact(value){
  const known=dictionary.get(value);
  if(known!==undefined)return known;
@@ -175,6 +209,29 @@ function translateExact(value){
  if(count)return count[1]+" işlev";
  const results=value.match(/^(\d+)\s+Ergebnisse$/);
  if(results)return results[1]+" sonuç";
+ // Parameterized UI messages are rendered with changing dates/counts/titles.
+ // Translate only their action/count labels; never translate the underlying source title.
+ const quantity=value.match(/^(\d+)\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt)$/);
+ const amounts={Veröffentlichungen:"yayın",Beiträge:"yazı",Seiten:"sayfa",
+    Themenbereiche:"konu alanı",Aussagen:"söz",gemerkt:"kaydedildi"};
+ if(quantity)return quantity[1]+" "+amounts[quantity[2]];
+ const ayat=value.match(/^(\d+)\s+Āyāt\s*·\s*(Mekkanisch|Medinensisch)$/);
+ if(ayat)return ayat[1]+" âyet · "+(ayat[2]==="Mekkanisch"?"Mekkî":"Medenî");
+ const surahs=value.match(/^(\d+)\s+Sūren\s*·\s*(\d+)\s+Āyāt$/);
+ if(surahs)return surahs[1]+" sûre · "+surahs[2]+" âyet";
+ const rate=value.match(/^(\d+(?:[.,]\d+)?)%\s+Trefferquote$/);
+ if(rate)return rate[1]+"% başarı oranı";
+ const choice=value.match(/^(\d+)\/(\d+)\s+gewählt$/);
+ if(choice)return choice[1]+"/"+choice[2]+" seçildi";
+ const listCount=value.match(/^(.{2,90}),\s*(\d+)\s+Veröffentlichungen$/);
+ if(listCount)return listCount[1]+", "+listCount[2]+" yayın";
+ const pageCount=value.match(/^(.{2,90})\s*·\s*(\d+)\s+Seiten$/);
+ if(pageCount)return (dictionary.get(pageCount[1])||pageCount[1])+" · "+pageCount[2]+" sayfa";
+ const range=value.match(/^Sūrenbereich wechseln, aktuell (\d+)[–-](\d+)$/);
+ if(range)return "Sûre aralığını değiştir, şu an "+range[1]+"–"+range[2];
+ const action=value.match(/^(.{2,160}) öffnen$/);
+ if(action&&!/[<>\u0600-\u06ff]/.test(action[1]))
+   return action[1]+" aç";
  return null;
 }
 
@@ -242,6 +299,7 @@ function schedule(){
  else Promise.resolve().then(run);
 }
 function boot(){
+ loadCatalog();
  schedule();
  if(!global.MutationObserver||!global.document?.body)return;
  new global.MutationObserver(changes=>{
@@ -262,6 +320,10 @@ if(typeof global.document?.createElement==="function"&&global.document.head&&
  tag.defer=true;
  global.document.head.appendChild(tag);
 }
-global.DarTestTurkishUI={apply,schedule,locale:currentLocale,translatedKeys:dictionary.size,
+global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,
+  get translatedKeys(){return dictionary.size},
+  get catalogStatus(){return remoteCatalogState},
+  hasTranslation:(de)=>dictionary.has(de),
+  translateValue:translateExact,
   contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};
 })(window);

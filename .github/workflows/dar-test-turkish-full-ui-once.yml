@@ -1,0 +1,85 @@
+name: DAR TEST UI-only Turkish Complete Catalog (once)
+
+on:
+  push:
+    branches:
+      - feature/dar-test-ui-turkish-completion-20261021
+    paths:
+      - '.github/workflows/dar-test-turkish-full-ui-once.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dar-test-tr-ui-once-20261021
+  cancel-in-progress: false
+
+jobs:
+  localize-adult-interface:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check German UI dictionary and translation generator syntax
+        run: |
+          node --check test/assets/dar-test-turkish-ui.js
+          node --check test/i18n/generate-ui-tr.cjs
+          node test/assets/dar-test-turkish-ui.test.cjs
+          node test/i18n/test-ui-generated-loader.cjs
+      - name: Start local DAR TEST (no visitor release)
+        shell: bash
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-ui-only-test.log 2>&1 &
+          sleep 3
+      - name: Inspect 15 actual adult-app sections and capture untranslated UI source
+        run: python3 test/i18n/capture-visible-ui.py
+      - name: Preview missing UI labels before spending API tokens
+        run: node test/i18n/generate-ui-tr.cjs
+      - name: Translate only missing interface texts with bounded OpenAI API use
+        env:
+          DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
+          DAR_I18N_AI_API_URL: https://api.openai.com/v1/chat/completions
+          DAR_I18N_AI_MODEL: gpt-4.1
+          DAR_I18N_PROVIDER_APPROVED: 'yes'
+        run: node test/i18n/generate-ui-tr.cjs --generate
+      - name: Validate generated pack contains only UI keys and no client model calls
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const f='test/i18n/ui-tr.generated.json';
+          const v=JSON.parse(fs.readFileSync(f,'utf8'));
+          if(v.schemaVersion!==1||v.locale!=='tr'||v.sourceLocale!=='de'||
+            v.scope!=='adult-test-ui-only'||Object.keys(v.entries||{}).length<25||
+            v.modelCalls>16||!Number.isFinite(v.modelTokens))throw Error('Bad UI catalog');
+          for(const [de,tr] of Object.entries(v.entries)){
+           if(de.length>180||tr.length>220||/[<>\r\n\u0600-\u06ff]/.test(de+tr))
+            throw Error('Invalid/possibly religious UI entry: '+de);
+          }
+          console.log('PASS: '+Object.keys(v.entries).length+' additional UI texts in one reusable static pack');
+          NODE
+          node test/assets/dar-test-turkish-ui.test.cjs
+      - name: Commit once to DAR TEST UI branch, no public deployment
+        shell: bash
+        run: |
+          git add test/i18n/ui-tr.generated.json
+          git -c user.name="github-actions[bot]" \
+            -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "feat(dar-test-ui): store Turkish interface-only catalog for all 15 areas"
+          git push origin HEAD:refs/heads/feature/dar-test-ui-turkish-completion-20261021
+      - name: Retain source inventory and generated UI translations for audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-test-adult-ui-turkish-single-generation
+          path: |
+            test/i18n/qa/ui-candidates.json
+            test/i18n/ui-tr.generated.json
+          if-no-files-found: warn
+          retention-days: 14
