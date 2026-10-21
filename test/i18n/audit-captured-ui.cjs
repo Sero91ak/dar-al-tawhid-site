@@ -23,3 +23,9 @@ for(const [route,items] of inv.routes.map(route=>[route,missing.filter(x=>x.rout
 }
 const sorted=missing.sort((a,b)=>b.routes.length-a.routes.length||b.count-a.count);
 sorted.slice(0,100).forEach(x=>console.log("MISSING_UI",JSON.stringify({de:x.de,routes:x.routes,observed:x.count})));
+
+const priority=["home","prayer","quran","propheten","quiz","duas","settings","more","scholars","qibla","hadith","frauen"];
+for(const route of priority){
+ const rows=missing.filter(x=>x.routes.includes(route));
+ console.log("PRIORITY_UI",route,JSON.stringify(rows.slice(0,120).map(x=>x.de)));
+}
