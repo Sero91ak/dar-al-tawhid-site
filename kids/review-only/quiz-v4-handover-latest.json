@@ -3,7 +3,7 @@
   "app": "TAWḤĪD KIDS",
   "branch": "review/kids-quiz-v4-batch-001-020-20261014",
   "pullRequest": "https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143",
-  "basedOnReviewedCommit": "742b15cafd73dd1aebee5ac39c0f6883e9dad970",
+  "basedOnReviewedCommit": "678ab0964dd7b2e337516eae163f368c166929b8",
   "modelId": "eleven_v4",
   "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "totalCanonicalQuestions": 900,
@@ -28,37 +28,37 @@
     },
     "7-8": {
       "questions": 150,
-      "completeFourPartQuestions": 131,
+      "completeFourPartQuestions": 139,
       "availableParts": {
-        "question": 141,
+        "question": 144,
         "correct": 150,
         "retry": 150,
-        "explanation": 135
+        "explanation": 142
       },
       "missingParts": {
-        "explanation": 15,
-        "question": 9
+        "explanation": 8,
+        "question": 6
       }
     },
     "9-10": {
       "questions": 150,
-      "completeFourPartQuestions": 116,
+      "completeFourPartQuestions": 134,
       "availableParts": {
-        "question": 135,
+        "question": 138,
         "correct": 150,
         "retry": 150,
-        "explanation": 124
+        "explanation": 142
       },
       "missingParts": {
-        "explanation": 26,
-        "question": 15
+        "explanation": 8,
+        "question": 12
       }
     }
   },
-  "uniqueVerifiedQuizMP3s": 763,
-  "reusedSpeechPartAssignments": 1553,
-  "fourPartAudioQuestions": 317,
-  "missingPartsQuestions": 133,
+  "uniqueVerifiedQuizMP3s": 794,
+  "reusedSpeechPartAssignments": 1584,
+  "fourPartAudioQuestions": 343,
+  "missingPartsQuestions": 107,
   "remainingNewV4UniqueSegmentsByCostAudit": 75,
   "remainingNewV4TextCodepoints": 5068,
   "older300CompactSpokenDraftCount": 300,
