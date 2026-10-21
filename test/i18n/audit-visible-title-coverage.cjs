@@ -12,7 +12,10 @@ for(const name of fs.readdirSync(postsDir).filter(x=>x.endsWith(".md"))){
  const s=fs.readFileSync(path.join(postsDir,name),"utf8");
  const front=s.startsWith("---\n")?s.split(/\n---(?:\r)?\n/,1)[0]:"";
  const id=front.match(/^id:\s*"([^"]+)"/m)?.[1];
- const title=front.match(/^title:\s*"([^"]+)"/m)?.[1];
+ const rawTitle=front.match(/^title:\s*(.+)$/m)?.[1]?.trim()||"";
+ const title=rawTitle.startsWith('"')&&rawTitle.endsWith('"')?
+   JSON.parse(rawTitle):rawTitle.startsWith("'")&&rawTitle.endsWith("'")?
+   rawTitle.slice(1,-1):rawTitle;
  if(id&&title)originalPosts.push({id,title});
 }
 const duaRows=JSON.parse(fs.readFileSync(path.join(root,"content/duas/duas.json"),"utf8"));
