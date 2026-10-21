@@ -129,7 +129,7 @@ for(const locale of EXPECTED){
   tr:["Sûre Al-Baqarah aç","114 sûre, Arapça metin ve okunuş","5 bilinen konuya göre dua"],
   en:["Open Sūrah Al-Baqarah","114 surahs with Arabic and transliteration","5 known supplications by topic"],
   ar:["افتح سورة Al-Baqarah","114 سور بالنص العربي والنقل الصوتي","5 أدعية معروفة مصنفة حسب الموضوع"],
-  ku:["Sûreya Al-Baqarah veke","114 sûre bi erebî û nivîsandina dengî","5 duayên naskirî li gor mijaran"],
+  ku:["Sûreya Al-Baqarah veke","114 sûre bi erebî û nivîsandina dengî","5 duayên naskirî li gorî mijaran"],
   ckb:["سوورەتی Al-Baqarah بکەرەوە","114 سوورەت بە عەرەبی و نووسینی دەنگی","5 دوعای ناسراو بەپێی بابەت"],
   bs:["Otvori suru Al-Baqarah","114 sura s arapskim tekstom i transkripcijom","5 poznatih dova po temama"]
  };
