@@ -279,6 +279,17 @@ function adultTopScrollBoundaryAddon() {
   return '<link rel="stylesheet" id="darAdultTopScrollCssV1" href="/assets/dar-adult-top-scroll-boundary-v1.css?v=20261020-no-overlay-v8">' +
     '<script defer id="darAdultTopScrollJsV1" src="/assets/dar-adult-top-scroll-boundary-v1.js?v=20261020-no-overlay-v8"></' + 'script>';
 }
+
+/* DĀR adult identity header v2 – mounted only in native iOS/Android and dedicated PWA.
+ * The public browser website keeps its own navigation and is not overlaid.
+ * No Kids, native OS code, push, prayer calculation, SW or scroll handlers changed. */
+function activateAdultGlobalBrandV2(html) {
+  if (typeof html !== "string" || html.includes('id="darAdultGlobalBrandStyleV2"')) return html;
+  const addon = '<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261021b">' +
+                '<script defer id="darAdultGlobalBrandScriptV2" src="/assets/dar-adult-brand-header-v2.js?v=20261021b"></' + 'script>';
+  return html.includes("</html>") ? html.replace("</html>", addon + "</html>") : html + addon;
+}
+
 function activateAdultCompactHero(html) {
   if (typeof html !== "string") return html;
   // Clean only known injected Hero tags. Never remove the underlying native
@@ -1467,7 +1478,7 @@ export default {
         }
       }
       headers.set("Content-Type", "text/html; charset=utf-8");
-      html = assetResponse.ok ? activateAdultCompactHero(html) : html;
+      html = assetResponse.ok ? activateAdultGlobalBrandV2(activateAdultCompactHero(html)) : html;
       return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
     }
 
@@ -1680,7 +1691,7 @@ export default {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
       let html = await assetResponse.text();
-      if (assetResponse.ok) html = activateAdultCompactHero(html);
+      if (assetResponse.ok) html = activateAdultGlobalBrandV2(activateAdultCompactHero(html));
       if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
         const frauenAddon = liveFrauenNativeAddon();
         html = html.includes("</body>") ? html.replace("</body>", frauenAddon + "</body>") : html + frauenAddon;

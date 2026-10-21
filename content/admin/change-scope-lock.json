@@ -8618,6 +8618,18 @@
         "cloudflare/test-app-worker.js"
       ],
       "expiresAt": "2026-11-21T23:59:00.000Z"
+    },
+    {
+      "id": "adult-global-brand-header-v2-20261021",
+      "at": "2026-10-21T21:55:00+02:00",
+      "approvedBy": "user-explicit-global-web-app-native-app-header-and-prayer-scroll-20261021",
+      "reason": "Only adult native iOS/Android and /pwa shell: fixed theme-colored brand logo, subtitle Qurʾān Sunnah Āthār above logo title, remove duplicate home brand, prayer card first. Public browser marketing website untouched; no Kids, iOS builds, service workers, prayers logic or push.",
+      "paths": [
+        "assets/dar-adult-brand-header-v2.js",
+        "assets/dar-adult-brand-header-v2.css",
+        "cloudflare/site-router.js"
+      ],
+      "expiresAt": "2026-11-21T23:59:00.000Z"
     }
   ],
   "enabled": true
