@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "scope": "KIDS_QUIZ_QURAN_PRONUNCIATION_DIAGNOSTIC_ONLY",
+  "createdAt": "2026-10-22",
+  "branch": "review/kids-quiz-v4-batch-001-020-20261014",
+  "source": "ElevenLabs connected workspace speech generation",
+  "voice": {
+    "name": "Serhat Abu Malik – Master",
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "modelId": "eleven_v4"
+  },
+  "pilot": {
+    "text": "الْقُرْآنُ.",
+    "script": "Arabic",
+    "purpose": "Listen to isolated pronunciation of Qurʾān before any mixed German/Arabic quiz production",
+    "flowId": "vxynLLauWTl1LHG6909e",
+    "flowUrl": "https://elevenlabs.io/app/flows/vxynLLauWTl1LHG6909e",
+    "generationId": "gzgSIH3N5v0fQkLOZOpv",
+    "sessionId": "KhX5MAVVk7n9h1HqbwNO",
+    "durationSeconds": 1.28,
+    "creditsReported": 10.659726872246695,
+    "status": "generated-awaiting-independent-fusha-hearing-review"
+  },
+  "qualityGate": {
+    "quranTermHumanApproved": false,
+    "quranVerseRecitationAllowed": false,
+    "mixedLanguageMasterApproved": false,
+    "appPublished": false,
+    "questionsCompletedFromPilot": 0,
+    "doNotRerenderSamePromptWithoutRecoveryCheck": true
+  },
+  "preservation": "Keep this generation in ElevenLabs. Not part of approved 450-question production or public audio manifest. The German master pronunciation dictionary is not guaranteed to have been applied by the connected creative speech route; a human auditory check is mandatory before adopting it.",
+  "otherPriority": {
+    "selectedQuestions": 450,
+    "technicallyComplete": 343,
+    "stillIncomplete": 107,
+    "ninePreviouslyPaidOriginalsStillNeedRecovery": 9,
+    "newUniqueSegmentsAccordingToReviewPlan": 21
+  }
+}
