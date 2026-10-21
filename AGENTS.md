@@ -1,5 +1,15 @@
 # DAR AL TAWHID Projektregeln
 
+## DĀR AL TAWḤĪD Zentrum · Mehrsprachige Beiträge (Regel 22.10.2026)
+
+**Eine Beitrags-ID, ein Q-Quellenlink, beliebig viele registrierte Sprachen.** Diese neue globale Erwachsenen-Regel ist im bestehenden `desktop-preview/i18n-core-v1/GLOBAL_PUBLISHING_RULE.md`, Abschnitt 6, verbindlich spezifiziert. Sie ergänzt die bisherigen fachlichen Quellen-, Prüf-, Publikations- und Push-Freigaberegeln und hebt keine Sperre auf.
+
+- Ein Beitrag und eine Q-Nummer werden **nicht** pro Sprache dupliziert. Zentrale Sprachregistrierung: `desktop-preview/i18n-core-v1/locales.json`. Der Bestand muss dynamisch auf neue Sprachcodes (8., 9., 10. usw.) reagieren; nur geprüfte Übersetzungen dürfen erscheinen.
+- Zehn unterschiedliche bestehende Beiträge pro redaktionellem Übersetzungs-Batch, jeweils alle registrierten Zielsprachen, bestehende Fassungen deduplizieren, Quellen- und Sachprüfung. Read-only Arbeitsliste: `desktop-preview/i18n-core-v1/select-post-batch.cjs`.
+- Das App-Sprachprofil entscheidet über den angezeigten Text **und künftig** über die Sprache von Beitrags-, Tages- und Gebetsbenachrichtigungen. Dafür muss die gewählte Sprache je Empfänger technisch in die Geräte-Push-Zustellung gelangen; nicht einfach die OS-Sprache verwenden. **Das ist noch Integrationsarbeit und keine erfolgte Live-Funktion.**
+- `push live` bedeutet wie bisher Inhaltsveröffentlichung, **keinen** Gerätebenachrichtigungsversand. Push-Implementierungen nur mit den separaten, geschützten Freigaben für die jeweilige Spur ändern. Kids ausgeschlossen.
+- Keine externe/verbrauchsabhängige Übersetzungs-API ohne Kostenfreigabe; manuelle Chat-Übersetzungen können ohne zusätzlichen Übersetzungsdienst vorbereitet werden. Bezahlungsfreiheit von API-, Hosting- oder Push-Infrastruktur nie pauschal versprechen.
+
 Du darfst nur den ausdrücklich genannten Bereich ändern.
 
 Bestehende Funktionen, Buttons, Layouts, Push-Benachrichtigungen, Gebetszeiten, Qibla-Kompass, Beiträge, Suchfunktion, Filter, Service Worker, Manifest und App-Struktur dürfen nicht entfernt, vereinfacht oder umgebaut werden.
