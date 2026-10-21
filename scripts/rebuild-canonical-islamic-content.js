@@ -208,7 +208,11 @@ function rebuildHadith() {
   if (fs.existsSync(syncStatusPath)) {
     try { previousStatus = JSON.parse(fs.readFileSync(syncStatusPath, "utf8")); } catch (_) {}
   }
-  const rebuiltAt = previousStatus &&
+  // One-time cache epoch: the tvOS app may already have cached the broken
+  // pre-repair screensaver catalog. Keep the normal stable timestamp behavior,
+  // but force one newer catalog version so installed apps replace that cache.
+  const screensaverCacheEpoch = "2026-10-21T18:20:00.000Z";
+  const stableRebuiltAt = previousStatus &&
     previousStatus.contentRevision === contentRevision &&
     previousStatus.hadithCount === allRecords.length &&
     previousStatus.hadithLatestId === latest &&
@@ -217,6 +221,9 @@ function rebuildHadith() {
     previousStatus.rebuiltAt
       ? previousStatus.rebuiltAt
       : new Date().toISOString();
+  const rebuiltAt = stableRebuiltAt < screensaverCacheEpoch
+    ? screensaverCacheEpoch
+    : stableRebuiltAt;
 
   const stamp = {
     schemaVersion: 1,
