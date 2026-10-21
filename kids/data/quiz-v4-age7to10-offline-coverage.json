@@ -6,9 +6,9 @@
   "elevenLabsCreditsSpent": 0,
   "humanListeningApprovalsCreated": 0,
   "originalMP3sCreatedBySynthesis": 0,
-  "sourceOriginalsVerified": 1266,
-  "uniqueFullAudioClipsAvailable": 500,
-  "newOfflineComposites": 474,
+  "sourceOriginalsVerified": 1285,
+  "uniqueFullAudioClipsAvailable": 507,
+  "newOfflineComposites": 481,
   "byAge": {
     "7-8": {
       "questions": 150,
@@ -28,22 +28,22 @@
     },
     "9-10": {
       "questions": 150,
-      "completeFourPartQuestions": 110,
+      "completeFourPartQuestions": 114,
       "availableFieldCounts": {
-        "question": 124,
+        "question": 128,
         "correct": 150,
         "retry": 150,
-        "explanation": 115
+        "explanation": 118
       },
       "missingFieldCounts": {
-        "question": 26,
+        "question": 22,
         "correct": 0,
         "retry": 0,
-        "explanation": 35
+        "explanation": 32
       }
     }
   },
-  "missingUniqueOriginalSegments": 128,
+  "missingUniqueOriginalSegments": 111,
   "missingOriginalSegmentsByFrequency": [
     {
       "fragment": "Taqwā.",
@@ -214,15 +214,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Grundbotschaft nennt Allah über die Gesandten?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Jeder Gesandte brachte einen anderen Gott.",
       "requiredByFields": 1
     },
     {
       "fragment": "Nur einige Menschen sollen Allah dienen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Welche Grundbotschaft nennt Allah über die Gesandten?",
       "requiredByFields": 1
     },
     {
@@ -290,23 +290,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Die Engel beruhigen sie und verkünden ihnen das Paradies.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Welche frohe Botschaft nennt Qurʾān 41:30 für standhafte Gläubige?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sie werden vor jeder Prüfung im Leben bewahrt.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wer sagt: Unser Herr ist Allah, und dann standhaft bleibt, dem bringen die Engel Trost und die frohe Botschaft des Paradieses.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Der Prophet ﷺ lehrte, dass Allah dem Suchenden nützlichen Wissens einen Weg zum Paradies erleichtert.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge?",
       "requiredByFields": 1
     },
     {
@@ -319,10 +307,6 @@
     },
     {
       "fragment": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge?",
       "requiredByFields": 1
     },
     {
@@ -354,34 +338,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie leben ohne Verantwortung füreinander.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sie unterstützen einander, gebieten Gutes, verbieten Verwerfliches und verrichten Gebet und Zakāh.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Welche gemeinsamen Aufgaben nennt Qurʾān 9:71 für gläubige Männer und Frauen?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Allah beschreibt gläubige Männer und Frauen als Unterstützer voneinander, die Gutes gebieten, Verwerfliches verbieten, beten und Zakāh geben.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Nach jeder Entscheidung nur auf sich selbst vertrauen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Welche Reihenfolge lehrt Qurʾān 3:159 im Umgang mit Menschen und Entscheidungen?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sanft sein, vergeben, beraten und nach dem Entschluss auf Allah vertrauen.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes?",
       "requiredByFields": 1
     },
@@ -398,19 +354,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sie geschieht außerhalb von Allahs Wissen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Der Gläubige darf jede Hoffnung verlieren.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Was lehrt Qurʾān 64:11 über eine Prüfung, die einen Menschen trifft?",
       "requiredByFields": 1
     },
     {
+      "fragment": "Sie geschieht außerhalb von Allahs Wissen.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Sie geschieht mit Allahs Erlaubnis, und Glaube an Allah führt das Herz.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Der Gläubige darf jede Hoffnung verlieren.",
       "requiredByFields": 1
     },
     {
@@ -438,7 +394,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Du hast aus Versehen etwas kaputt gemacht und wirst gefragt. Welcher Grundsatz hilft dir hier am besten?",
+      "fragment": "Auch wenn es unangenehm ist, bleibt man ehrlich.",
       "requiredByFields": 1
     },
     {
@@ -446,7 +402,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Auch wenn es unangenehm ist, bleibt man ehrlich.",
+      "fragment": "Du hast aus Versehen etwas kaputt gemacht und wirst gefragt. Welcher Grundsatz hilft dir hier am besten?",
       "requiredByFields": 1
     },
     {
@@ -458,14 +414,6 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "In einer Gruppe wird falsches Reden automatisch richtig.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Über Abwesende reden wir nicht schlecht hinter ihrem Rücken.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Andere reden schlecht über einen Freund, der nicht da ist. Welcher Grundsatz hilft dir hier am besten?",
       "requiredByFields": 1
     },
@@ -474,27 +422,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "In einer Gruppe wird falsches Reden automatisch richtig.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Über Abwesende reden wir nicht schlecht hinter ihrem Rücken.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah verbietet üble Nachrede über Abwesende.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Auf jede Gemeinheit muss eine größere Gemeinheit folgen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Auf schlechtes Verhalten antworten wir möglichst mit etwas Besserem.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Gutes Verhalten gilt nur bei Freunden.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Jemand sagt etwas Gemeines zu dir. Welcher Grundsatz hilft dir hier am besten?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Allah lehrt, Schlechtes mit dem Besseren abzuwehren.",
       "requiredByFields": 1
     },
     {
@@ -502,15 +438,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Zu Hause schläft jemand. Welcher Grundsatz hilft dir hier am besten?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Rücksicht auf andere ist beim Sprechen unwichtig.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Lauter sprechen bedeutet immer, recht zu haben.",
+      "fragment": "Zu Hause schläft jemand. Welcher Grundsatz hilft dir hier am besten?",
       "requiredByFields": 1
     },
     {
@@ -518,7 +450,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Du hast selbst etwas Falsches getan. Welcher Grundsatz hilft dir hier am besten?",
+      "fragment": "Für eigene Fehler sollte immer jemand anderes verantwortlich sein.",
       "requiredByFields": 1
     },
     {
@@ -530,7 +462,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Für eigene Fehler sollte immer jemand anderes verantwortlich sein.",
+      "fragment": "Du hast selbst etwas Falsches getan. Welcher Grundsatz hilft dir hier am besten?",
       "requiredByFields": 1
     },
     {
@@ -538,19 +470,19 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Auf Salām antwortet man am besten mit Spott.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Einen guten Gruß soll man absichtlich ignorieren.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Einen Salām erwidern wir freundlich und angemessen.",
+      "fragment": "Ein Kind sagt dir freundlich Salām. Welcher Grundsatz hilft dir hier am besten?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Ein Kind sagt dir freundlich Salām. Welcher Grundsatz hilft dir hier am besten?",
+      "fragment": "Auf Salām antwortet man am besten mit Spott.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Einen Salām erwidern wir freundlich und angemessen.",
       "requiredByFields": 1
     },
     {
