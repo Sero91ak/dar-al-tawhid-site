@@ -114,9 +114,40 @@ def protect_paid_texts(root: Path, registry: dict, ledger: dict) -> set[str]:
                     raise RuntimeError("Connected audio claimed imported without verified MP3 and paid receipt")
             if status != "IMPORTED_ORIGINAL_MP3_VERIFIED":
                 pending_flow.add(spoken)
-    # Record both already-paid, currently queued and unimported flow originals
-    # before allowing ANY new provider request.
-    return charged | reserved | set(recorded) | pending_flow
+    # An earlier provider POST may have consumed credits without ever
+    # returning a confirmation or MP3. Protect its ORIGINAL source SHA too.
+    # Never infer "unpaid" from the absence of a generated audio file.
+    older_journal=root/"kids/data/quiz-v4-older-stage1-request-journal.json"
+    uncertain=set()
+    if older_journal.is_file():
+        j=json.loads(older_journal.read_text(encoding="utf-8"))
+        if j.get("modelId")!=MODEL or j.get("voiceId")!=VOICE or not isinstance(j.get("entries"),list):
+            raise RuntimeError("Prior uncertain charged request journal malformed; no new synthesis")
+        pending_hashes={r.get("textSHA256") for r in j["entries"]
+                        if r.get("status")=="REQUEST_STARTED_UNCONFIRMED"}
+        if None in pending_hashes:
+            raise RuntimeError("Uncertain paid original lacks text SHA; stop")
+        if pending_hashes:
+            p=root/"kids/data/quiz-v4-curated-450-production-review.json"
+            plan=json.loads(p.read_text(encoding="utf-8"))
+            if len(plan.get("recipes",[]))!=450:
+                raise RuntimeError("Uncertain paid original cannot be matched to source review")
+            candidates=set()
+            for row in plan["recipes"]:
+                for part in ("question","correct","retry","explanation"):
+                    rec=row[part]
+                    candidates.add(rec["text"])
+                    candidates.update(rec.get("segments",[]))
+            for speech in candidates:
+                if hashlib.sha256(speech.encode("utf-8")).hexdigest() in pending_hashes:
+                    uncertain.add(speech)
+            if {hashlib.sha256(text.encode("utf-8")).hexdigest() for text in uncertain}!=pending_hashes:
+                raise RuntimeError("Unresolved provider request SHA not in canonical quiz; never repurchase")
+            if uncertain & charged:
+                raise RuntimeError("Uncertain paid original has been charged again; reconcile first")
+    # Protect saved paid takes, the nine old Flow originals, reserved connected
+    # Flow and uncertain POSTs before allowing ANY new text-to-speech request.
+    return charged | reserved | set(recorded) | pending_flow | uncertain
 
 
 def prohibit_prepaid_selection(spoken: str, protected: set[str]) -> None:
