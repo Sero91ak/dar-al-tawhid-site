@@ -1,0 +1,3487 @@
+{
+  "schemaVersion": 1,
+  "scope": "KIDS_V4_1777_REGISTRY_ORIGINALS_REMAINING107_EXACT_SPEECH_GAPS",
+  "modelId": "eleven_v4",
+  "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "ownerGermanDictionary": {
+    "id": "Q8w3SxtoVo8NSjsnlJEd",
+    "version": "wSzgkGpAwEDiTak8DApc",
+    "entries": 10099
+  },
+  "selectedQuestions": 450,
+  "originalMP3RegistryCount": 1777,
+  "productionTechnicallyComposableCount": 343,
+  "quizPlayerActuallyStagedCount": 317,
+  "assemblyNeedsResyncBy": 26,
+  "questionsStillWithoutOneOrMoreSafeOriginals": 107,
+  "remainingByAgeBand": {
+    "4-6": 80,
+    "7-8": 11,
+    "9-10": 16
+  },
+  "distinctBlockingSources": 49,
+  "blockingOccurrencesByReason": {
+    "MISSING_PREPAID_GENERATION": 132,
+    "PREPAID_ORIGINAL_NOT_RECOVERED": 57,
+    "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT": 21,
+    "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED": 8,
+    "PROVIDER_FLOW_GENERATION_SUBMITTED_DO_NOT_RETRY": 1,
+    "QUARANTINED_PRONUNCIATION": 10,
+    "UNCERTAIN_CHARGED_REQUEST_DO_NOT_RETRY": 1
+  },
+  "nineUnrecoveredProviderGenerationIDs": [
+    "GvXeGQ9Kr1lVy7LEAv5T",
+    "DX5z8FWaCS4FDx3KrloO",
+    "AToalNGbxiRe1zfOnDG3",
+    "FGX65uXKWBnjULDxg3X1",
+    "KIgCxJO3RDxhsIFJSYUB",
+    "UUmC2fDiXaV5W1IQSumA",
+    "aoKJuahenrKHfUE5OD9j",
+    "2xy9ZLej1wPTrnvAr9p7",
+    "1UAwmEQ77D4BmA9DttHZ"
+  ],
+  "pronunciationQuarantineProtectedOriginalCount": 10,
+  "sourceList": [
+    {
+      "text": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+      "reason": "MISSING_PREPAID_GENERATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-001",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-006",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-011",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-016",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-051",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-056",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-061",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-066",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-101",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-106",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-151",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-156",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-161",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-166",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-211",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-216",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-256",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-261",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-306",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-311",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-356",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-366",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-406",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-451",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-456",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-601",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-606",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-616",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-656",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-681",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-691",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-696",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-706",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-711",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-716",
+          "part": "correct"
+        }
+      ]
+    },
+    {
+      "text": "generation:DX5z8FWaCS4FDx3KrloO",
+      "reason": "MISSING_PREPAID_GENERATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-001",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-006",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-011",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-016",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-051",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-056",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-061",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-066",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-101",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-106",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-151",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-156",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-161",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-166",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-211",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-216",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-256",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-261",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-306",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-311",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-356",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-366",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-406",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-451",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-456",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-601",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-606",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-616",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-656",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-681",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-691",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-696",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-706",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-711",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-716",
+          "part": "retry"
+        }
+      ]
+    },
+    {
+      "text": "generation:aoKJuahenrKHfUE5OD9j",
+      "reason": "MISSING_PREPAID_GENERATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-002",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-007",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-012",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-017",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-052",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-057",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-062",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-102",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-107",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-112",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-117",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-152",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-157",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-162",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-167",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-207",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-212",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-307",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-312",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-352",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-357",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-452",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-462",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-502",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-517",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-607",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-612",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-692",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-697",
+          "part": "correct"
+        },
+        {
+          "questionId": "kids-quiz-707",
+          "part": "correct"
+        }
+      ]
+    },
+    {
+      "text": "generation:2xy9ZLej1wPTrnvAr9p7",
+      "reason": "MISSING_PREPAID_GENERATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-002",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-007",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-012",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-017",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-052",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-057",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-062",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-102",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-107",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-112",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-117",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-152",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-157",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-162",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-167",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-207",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-212",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-307",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-312",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-352",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-357",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-452",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-462",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-502",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-517",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-607",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-612",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-692",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-697",
+          "part": "retry"
+        },
+        {
+          "questionId": "kids-quiz-707",
+          "part": "retry"
+        }
+      ]
+    },
+    {
+      "text": "Schau, was du schon alles weißt.",
+      "reason": "PREPAID_ORIGINAL_NOT_RECOVERED",
+      "uses": [
+        {
+          "questionId": "kids-quiz-002",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-054",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-058",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-062",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-066",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-102",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-106",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-114",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-118",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-154",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-162",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-166",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-214",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-218",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-306",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-354",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-366",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-406",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-414",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-418",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-454",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-462",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-502",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-510",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-514",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-518",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-606",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-618",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-706",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+      "reason": "PREPAID_ORIGINAL_NOT_RECOVERED",
+      "uses": [
+        {
+          "questionId": "kids-quiz-002",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-052",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-057",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-062",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-102",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-107",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-112",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-117",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-152",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-157",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-162",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-167",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-207",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-212",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-307",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-312",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-352",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-357",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-452",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-462",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-502",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-517",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-607",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-612",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-692",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-697",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-707",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Taqwā.",
+      "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "uses": [
+        {
+          "questionId": "kids-quiz-041",
+          "part": "question"
+        },
+        {
+          "questionId": "kids-quiz-094",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "generation:AToalNGbxiRe1zfOnDG3",
+      "reason": "MISSING_PREPAID_GENERATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-001",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Ist Allah Einer?",
+      "reason": "PREPAID_ORIGINAL_NOT_RECOVERED",
+      "uses": [
+        {
+          "questionId": "kids-quiz-002",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "generation:1UAwmEQ77D4BmA9DttHZ",
+      "reason": "MISSING_PREPAID_GENERATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-002",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Allah beschreibt den Qurʾān als Rechtleitung für die Muttaqīn.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-023",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Den Zorn zurückhalten und verzeihen.",
+      "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "uses": [
+        {
+          "questionId": "kids-quiz-031",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Sofort beleidigen.",
+      "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "uses": [
+        {
+          "questionId": "kids-quiz-031",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Etwas kaputt machen.",
+      "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "uses": [
+        {
+          "questionId": "kids-quiz-031",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-036",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Viel Geld.",
+      "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "uses": [
+        {
+          "questionId": "kids-quiz-041",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Eine berühmte Familie.",
+      "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "uses": [
+        {
+          "questionId": "kids-quiz-041",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Allah nennt Taqwā als Maßstab der besonderen Ehre bei Ihm.",
+      "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "uses": [
+        {
+          "questionId": "kids-quiz-041",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Im Rabīʿ al-Awwal.",
+      "reason": "PROVIDER_FLOW_GENERATION_SUBMITTED_DO_NOT_RETRY",
+      "uses": [
+        {
+          "questionId": "kids-quiz-045",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Glücksspiele spielen.",
+      "reason": "QUARANTINED_PRONUNCIATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-046",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Angeben.",
+      "reason": "QUARANTINED_PRONUNCIATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-046",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam.",
+      "reason": "QUARANTINED_PRONUNCIATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-046",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
+      "reason": "UNCERTAIN_CHARGED_REQUEST_DO_NOT_RETRY",
+      "uses": [
+        {
+          "questionId": "kids-quiz-080",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Zur al-Masǧid al-Ḥarām in Makkah.",
+      "reason": "QUARANTINED_PRONUNCIATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-097",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-097",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Halāle und gute Nahrung.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-131",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Allah befiehlt, von dem Halālen und Guten auf der Erde zu essen.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-131",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Allah nahm Ādams Reue an und nennt Sich den Reue-Annehmenden und Barmherzigen.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-177",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Der längste Qurʾān-Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-189",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Allah erlaubt das Halāle und Gute und warnt vor den Schritten des Shayṭān.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-271",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-276",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Mit wessen Erlaubnis geschahen die Wunder ʿĪsās?",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-278",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān wiederholt, dass ʿĪsās Zeichen mit Allahs Erlaubnis geschahen.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-278",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Was gab Allah Mūsās Mutter ein, als sie Angst um ihn hatte?",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-331",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Allah beruhigte Mūsās Mutter und versprach, ihn zu ihr zurückzubringen.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-331",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Allah erfüllte Sein Versprechen und tröstete Mūsās Mutter.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-332",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge?",
+      "reason": "QUARANTINED_PRONUNCIATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-485",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
+      "reason": "QUARANTINED_PRONUNCIATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-485",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Es gibt keinen Unterschied zwischen Ḥalāl und Ḥarām.",
+      "reason": "QUARANTINED_PRONUNCIATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-485",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-485",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Die Qurʾān-Duʿāʾ bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-499",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Was lehrt Sūrat ash-Sharḥ nach dem Ende einer Aufgabe?",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-624",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Was zeigt die Geschichte Ayyūbs in Qurʾān 21:83–84 über Prüfungen?",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-640",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Welche Verbindung macht Sulaymāns Duʿāʾ in Qurʾān 27:19 deutlich?",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-641",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "ʿIbādah und Duʿāʾ richten wir an Allah allein.",
+      "reason": "QUARANTINED_PRONUNCIATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-809",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Ghībah ist erlaubt, solange die Person es nicht hört.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-839",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Luqmāns Rat lehrt maßvolles Auftreten und eine ruhige Stimme.",
+      "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT",
+      "uses": [
+        {
+          "questionId": "kids-quiz-859",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Gute Taten und ʿIbādah werden aufrichtig für Allah getan.",
+      "reason": "QUARANTINED_PRONUNCIATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-873",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Wir machen ʿIbādah nicht, um vor Menschen Eindruck zu machen.",
+      "reason": "QUARANTINED_PRONUNCIATION",
+      "uses": [
+        {
+          "questionId": "kids-quiz-877",
+          "part": "question"
+        }
+      ]
+    }
+  ],
+  "affectedQuestions": [
+    {
+      "questionId": "kids-quiz-001",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry",
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "explanation",
+          "source": "generation:AToalNGbxiRe1zfOnDG3",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-002",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry",
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "question",
+          "source": "Ist Allah Einer?",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "explanation",
+          "source": "generation:1UAwmEQ77D4BmA9DttHZ",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-006",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-007",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-011",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-012",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-016",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-017",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-023",
+      "ageBand": "7-8",
+      "missingParts": [
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "explanation",
+          "source": "Allah beschreibt den Qurʾān als Rechtleitung für die Muttaqīn.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-031",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Den Zorn zurückhalten und verzeihen.",
+          "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+        },
+        {
+          "part": "question",
+          "source": "Sofort beleidigen.",
+          "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+        },
+        {
+          "part": "question",
+          "source": "Etwas kaputt machen.",
+          "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-036",
+      "ageBand": "9-10",
+      "missingParts": [
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "explanation",
+          "source": "nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-041",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Taqwā.",
+          "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+        },
+        {
+          "part": "question",
+          "source": "Viel Geld.",
+          "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+        },
+        {
+          "part": "question",
+          "source": "Eine berühmte Familie.",
+          "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+        },
+        {
+          "part": "explanation",
+          "source": "Allah nennt Taqwā als Maßstab der besonderen Ehre bei Ihm.",
+          "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-045",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Im Rabīʿ al-Awwal.",
+          "reason": "PROVIDER_FLOW_GENERATION_SUBMITTED_DO_NOT_RETRY"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-046",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Glücksspiele spielen.",
+          "reason": "QUARANTINED_PRONUNCIATION"
+        },
+        {
+          "part": "question",
+          "source": "Angeben.",
+          "reason": "QUARANTINED_PRONUNCIATION"
+        },
+        {
+          "part": "explanation",
+          "source": "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam.",
+          "reason": "QUARANTINED_PRONUNCIATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-051",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-052",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-054",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-056",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-057",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-058",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-061",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-062",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-066",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-080",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
+          "reason": "UNCERTAIN_CHARGED_REQUEST_DO_NOT_RETRY"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-094",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Taqwā.",
+          "reason": "PROVIDER_FLOW_RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-097",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Zur al-Masǧid al-Ḥarām in Makkah.",
+          "reason": "QUARANTINED_PRONUNCIATION"
+        },
+        {
+          "part": "explanation",
+          "source": "und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-101",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-102",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-106",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-107",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-112",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-114",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-117",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-118",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-131",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Halāle und gute Nahrung.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        },
+        {
+          "part": "explanation",
+          "source": "Allah befiehlt, von dem Halālen und Guten auf der Erde zu essen.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-151",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-152",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-154",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-156",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-157",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-161",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-162",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-166",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-167",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-177",
+      "ageBand": "7-8",
+      "missingParts": [
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "explanation",
+          "source": "Allah nahm Ādams Reue an und nennt Sich den Reue-Annehmenden und Barmherzigen.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-189",
+      "ageBand": "9-10",
+      "missingParts": [
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "explanation",
+          "source": "Der längste Qurʾān-Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-207",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-211",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-212",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-214",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-216",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-218",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-256",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-261",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-271",
+      "ageBand": "7-8",
+      "missingParts": [
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "explanation",
+          "source": "Allah erlaubt das Halāle und Gute und warnt vor den Schritten des Shayṭān.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-276",
+      "ageBand": "7-8",
+      "missingParts": [
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "explanation",
+          "source": "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-278",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Mit wessen Erlaubnis geschahen die Wunder ʿĪsās?",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        },
+        {
+          "part": "explanation",
+          "source": "Der Qurʾān wiederholt, dass ʿĪsās Zeichen mit Allahs Erlaubnis geschahen.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-306",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-307",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-311",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-312",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-331",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Was gab Allah Mūsās Mutter ein, als sie Angst um ihn hatte?",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        },
+        {
+          "part": "explanation",
+          "source": "Allah beruhigte Mūsās Mutter und versprach, ihn zu ihr zurückzubringen.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-332",
+      "ageBand": "7-8",
+      "missingParts": [
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "explanation",
+          "source": "Allah erfüllte Sein Versprechen und tröstete Mūsās Mutter.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-352",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-354",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-356",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-357",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-366",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-406",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-414",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-418",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-451",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-452",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-454",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-456",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-462",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-485",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge?",
+          "reason": "QUARANTINED_PRONUNCIATION"
+        },
+        {
+          "part": "question",
+          "source": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
+          "reason": "QUARANTINED_PRONUNCIATION"
+        },
+        {
+          "part": "question",
+          "source": "Es gibt keinen Unterschied zwischen Ḥalāl und Ḥarām.",
+          "reason": "QUARANTINED_PRONUNCIATION"
+        },
+        {
+          "part": "explanation",
+          "source": "erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-499",
+      "ageBand": "9-10",
+      "missingParts": [
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "explanation",
+          "source": "Die Qurʾān-Duʿāʾ bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-502",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-510",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-514",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-517",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-518",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-601",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-606",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-607",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-612",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-616",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-618",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-624",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Was lehrt Sūrat ash-Sharḥ nach dem Ende einer Aufgabe?",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-640",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Was zeigt die Geschichte Ayyūbs in Qurʾān 21:83–84 über Prüfungen?",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-641",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Welche Verbindung macht Sulaymāns Duʿāʾ in Qurʾān 27:19 deutlich?",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-656",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-681",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-691",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-692",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-696",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-697",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-706",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Schau, was du schon alles weißt.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-707",
+      "ageBand": "4-6",
+      "missingParts": [
+        "question",
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+          "reason": "PREPAID_ORIGINAL_NOT_RECOVERED"
+        },
+        {
+          "part": "correct",
+          "source": "generation:aoKJuahenrKHfUE5OD9j",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:2xy9ZLej1wPTrnvAr9p7",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-711",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-716",
+      "ageBand": "4-6",
+      "missingParts": [
+        "correct",
+        "retry"
+      ],
+      "sources": [
+        {
+          "part": "correct",
+          "source": "generation:GvXeGQ9Kr1lVy7LEAv5T",
+          "reason": "MISSING_PREPAID_GENERATION"
+        },
+        {
+          "part": "retry",
+          "source": "generation:DX5z8FWaCS4FDx3KrloO",
+          "reason": "MISSING_PREPAID_GENERATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-809",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "ʿIbādah und Duʿāʾ richten wir an Allah allein.",
+          "reason": "QUARANTINED_PRONUNCIATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-839",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Ghībah ist erlaubt, solange die Person es nicht hört.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-859",
+      "ageBand": "9-10",
+      "missingParts": [
+        "explanation"
+      ],
+      "sources": [
+        {
+          "part": "explanation",
+          "source": "Luqmāns Rat lehrt maßvolles Auftreten und eine ruhige Stimme.",
+          "reason": "NEW_TEXT_NEEDS_DICTIONARY_AND_AUDIT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-873",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Gute Taten und ʿIbādah werden aufrichtig für Allah getan.",
+          "reason": "QUARANTINED_PRONUNCIATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-877",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "sources": [
+        {
+          "part": "question",
+          "source": "Wir machen ʿIbādah nicht, um vor Menschen Eindruck zu machen.",
+          "reason": "QUARANTINED_PRONUNCIATION"
+        }
+      ]
+    }
+  ],
+  "publicReleaseEnabled": false,
+  "humanListeningApproved": false,
+  "newElevenLabsCreditsSpentByThisAudit": 0
+}
