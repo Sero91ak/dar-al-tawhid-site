@@ -172,7 +172,7 @@ function resolveRecipientPush({ event, copies, subscription, registry = registry
   const contentId = String(event.contentId || "").trim();
   const qNum = Number(event.qNumber);
   const hasQ = event.qNumber !== undefined && event.qNumber !== null && String(event.qNumber).trim() !== "";
-  if (hasQ && (!Number.isSafeInteger(qNum) || qNum <= 0)) {
+  if (hasQ && (!Number.isSafeInteger(qNum) || qNum <= 0 || event.qRegistryVerified !== true)) {
     throw new Error("Unverified or invalid canonical Q number");
   }
   const qUrl = hasQ ? "https://dar-al-tawhid.de/q/" + qNum + "/" : undefined;
