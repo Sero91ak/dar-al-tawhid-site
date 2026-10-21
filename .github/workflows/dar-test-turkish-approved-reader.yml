@@ -44,6 +44,7 @@ jobs:
           node test/assets/dar-test-turkish-ui.test.cjs
           node --check test/assets/dar-adult-central-content.js
           node test/assets/dar-adult-central-content.test.cjs
+          node test/assets/dar-adult-central-catalog.test.cjs
           node test/assets/dar-test-turkish-content.test.cjs
           node scripts/verify-adult-post-language-manifests.cjs
       - name: Verify TEST-only route references and no client-side OpenAI calls
