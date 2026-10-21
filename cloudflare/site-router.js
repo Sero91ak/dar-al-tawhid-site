@@ -286,7 +286,7 @@ function adultTopScrollBoundaryAddon() {
 function activateAdultGlobalBrandV2(html) {
   if (typeof html !== "string" || html.includes('id="darAdultGlobalBrandStyleV2"')) return html;
   const addon = '<link rel="stylesheet" id="darAdultGlobalBrandStyleV2" href="/assets/dar-adult-brand-header-v2.css?v=20261021d-compact">' +
-                '<script defer id="darAdultGlobalBrandScriptV2" src="/assets/dar-adult-brand-header-v2.js?v=20261021d-compact"></' + 'script>';
+                '<script defer id="darAdultGlobalBrandScriptV2" src="/assets/dar-adult-brand-header-v2.js?v=20261021e-prayer-first"></' + 'script>';
   return html.includes("</html>") ? html.replace("</html>", addon + "</html>") : html + addon;
 }
 
