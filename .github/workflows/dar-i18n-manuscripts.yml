@@ -7,6 +7,13 @@ on:
       - feature/adult-multilingual-core-20261021
     paths:
       - 'content/posts/**'
+      - 'q/_registry/shortlinks.json'
+      - 'apple-tv/hadith/**'
+      - 'content/duas/duas.json'
+      - 'data/quiz-questions.json'
+      - 'data/learning-content.json'
+      - 'content/learning/**'
+      - 'lernen/**'
   workflow_dispatch:
     inputs:
       item_id:
@@ -16,9 +23,9 @@ on:
       locale:
         description: 'Draft locale or all'
         required: false
-        default: all
+        default: tr
         type: choice
-        options: [all, ar, en, tr, ku, ckb, bs]
+        options: [tr]
 
 permissions:
   contents: write
@@ -26,7 +33,7 @@ permissions:
 
 concurrency:
   group: dar-i18n-manuscripts-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   generate:
@@ -77,11 +84,20 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          args=(--generate --inventory "$RUNNER_TEMP/worklist.json" --output "$RUNNER_TEMP/generated-drafts" --max-requests 6 --max-source-chars 9000 --max-output-tokens 5000 --locale "${SELECT_LOCALE:-all}")
+          args=(--generate --inventory "$RUNNER_TEMP/worklist.json" --output "$RUNNER_TEMP/generated-drafts" --max-requests 1 --max-source-chars 9000 --max-output-tokens 3300 --locale tr)
+          # Turkish pilot phase: reject other locales before any billable request.
+          if [[ -n "${SELECT_LOCALE:-}" && "${SELECT_LOCALE}" != "tr" ]]; then
+            echo "::error::Pilot allows only Turkish translations." >&2
+            exit 1
+          fi
           if [[ -n "${SELECT_ID:-}" ]]; then
             node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs "${args[@]}" --id "$SELECT_ID"
           elif [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
-            mapfile -t changed < <(git diff --name-only HEAD^ HEAD -- 'content/posts/*.md' | head -n 2)
+            mapfile -t changed < <(git diff --name-only HEAD^ HEAD -- \
+              'content/posts/*.md' 'q/_registry/shortlinks.json' \
+              'apple-tv/hadith/**/*.json' 'content/duas/duas.json' \
+              'data/quiz-questions.json' 'data/learning-content.json' \
+              'content/learning/**/*.json' 'lernen/**/index.html' | head -n 1)
             for source_path in "${changed[@]}"; do
               node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs "${args[@]}" --source-path "$source_path"
             done
