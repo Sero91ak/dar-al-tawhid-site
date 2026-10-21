@@ -4,10 +4,12 @@
   "totalVerifiedEntries": 3359,
   "files": [
     {
-      "path": "rotation.json",
-      "count": 1
+      "path": "../hadith/library-shell.json",
+      "count": 3359
     }
   ],
-  "mergeRule": "rotation.json steuert shuffleBag und Gewichte 5/5/5 (hadith, athar, quranTad). HAD-Karten aus hadith/catalog.json. quranTad aus quran/tadabbur plus Qurʾān-Reader. defaultModule hadith gilt nur für die Bibliothek.",
-  "fallback": "Der Bildschirmschoner-Inhalt ist derzeit nicht verfügbar."
+  "mergeRule": "Each screensaver record comes from hadith/library-shell.json records (hadith/athar). rotation.json only configures shuffleBag and module weights 5/5/5, never contains entries. Quran/Tadabbur come separately from quran/tadabbur.",
+  "fallback": "Der Bildschirmschoner-Inhalt ist derzeit nicht verfügbar.",
+  "sourceCollectionKey": "records",
+  "rotationConfigPath": "rotation.json"
 }
