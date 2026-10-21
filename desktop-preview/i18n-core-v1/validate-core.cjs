@@ -43,6 +43,7 @@ const {execFileSync}=require("node:child_process");
 const offlinePushChecks=[
  "test-push-i18n-resolver.cjs",
  "test-app-locale-push-adapter.cjs",
+ "test-secure-app-locale-endpoint.cjs",
  "test-push-copy-nine-languages.cjs",
  "dry-run-push-nine-languages.cjs",
  "audit-push-i18n.cjs"
