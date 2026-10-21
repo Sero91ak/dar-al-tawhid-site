@@ -279,6 +279,19 @@ function installPlayer(){
  const close=d.createElement("button");close.id="darV8PlayerBackdrop";close.type="button";close.className="dar-v8-player-backdrop";close.setAttribute("aria-label","Player schließen");close.addEventListener("click",()=>togglePlayer(false));d.body.append(close);
 }
 let v8VisibleViewportBound=false,v8ActivePicker=null,v8PickerListenersBound=false;
+
+let v8NoPinchGuardInstalled=false;
+function installMobileGestureGuard(){
+ if(v8NoPinchGuardInstalled||!w.matchMedia?.("(pointer:coarse)").matches)return;
+ v8NoPinchGuardInstalled=true;
+ // iOS WebKit can still permit gesture scaling in embedded browsers despite meta viewport.
+ // Stop multitouch zoom but preserve one-finger vertical scrolling and every input control.
+ const guard=e=>{if(e.cancelable)e.preventDefault()};
+ d.addEventListener("gesturestart",guard,{passive:false});
+ d.addEventListener("gesturechange",guard,{passive:false});
+ d.addEventListener("touchmove",e=>{if(e.touches?.length>1&&e.cancelable)e.preventDefault()},{passive:false});
+}
+
 function syncVisualViewport(){
  const height=Math.round(w.visualViewport?.height||w.innerHeight);
  if(height>0)d.documentElement.style.setProperty("--v8-visible-height",height+"px");
@@ -401,7 +414,7 @@ function syncV8Route(){
 
 function init(key){
  if(currentPage && currentPage!==key){closePicker();if(d.body.classList.contains("dar-v8-player-fullscreen"))togglePlayer(false)}
- currentPage=key;setupLanguages();installPlayer();setupVisualViewport();setupTouchPlayerPicker();colorLocale();updateLocaleNotice();syncV8Route();
+ currentPage=key;setupLanguages();installPlayer();setupVisualViewport();installMobileGestureGuard();setupTouchPlayerPicker();colorLocale();updateLocaleNotice();syncV8Route();
  if(key==="suche")initChat();
  if(key==="quran")initQuran();
  if(key==="einstellungen")settings();
