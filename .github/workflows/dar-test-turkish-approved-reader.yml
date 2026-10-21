@@ -1,0 +1,54 @@
+name: DAR TEST Turkish approved-content reader
+
+on:
+  push:
+    branches:
+      - feature/dar-test-tr-approved-content-20261021
+  pull_request:
+    paths:
+      - 'test/assets/dar-test-turkish-content*'
+      - 'test/assets/dar-more-v15.js'
+      - 'test/i18n/**'
+      - 'content/i18n/adult-posts/**'
+      - '.github/workflows/dar-test-turkish-approved-reader.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  approved-content-only:
+    name: Zero-cost TR post reader and editorial gate
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify parser and source-translation provenance
+        run: |
+          node --check test/assets/dar-test-turkish-content.js
+          node --check test/assets/dar-more-v15.js
+          node test/assets/dar-test-turkish-content.test.cjs
+          node scripts/verify-adult-post-language-manifests.cjs
+      - name: Verify TEST-only route references and no client-side OpenAI calls
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs=require('fs');
+          const route=fs.readFileSync('test/i18n/index.html','utf8');
+          const more=fs.readFileSync('test/assets/dar-more-v15.js','utf8');
+          const reader=fs.readFileSync('test/assets/dar-test-turkish-content.js','utf8');
+          if(!route.includes('/test/assets/dar-test-turkish-content.js'))throw Error('Missing isolated reader');
+          if(!more.includes('/test/i18n/?post='))throw Error('Missing More entry point');
+          if(!reader.includes('publicDisplayAllowed!==true') || !reader.includes('currentHash!==manifest.sourceHash'))
+            throw Error('Missing approval or source fingerprint gate');
+          if(/api\.openai\.com|DAR_I18N_AI_API_KEY/.test(reader+route))
+            throw Error('Client-side OpenAI request or secret reference detected');
+          if(route.includes('src="/assets/'))throw Error('Production assets unexpectedly injected');
+          console.log('PASS: TEST-only module, no external paid calls, publication gate enabled.');
+          NODE
