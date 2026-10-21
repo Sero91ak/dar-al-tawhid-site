@@ -10,6 +10,7 @@ on:
       - 'test/assets/dar-test-turkish-ui*'
       - 'test/assets/dar-adult-central-content*'
       - 'test/assets/dar-test-turkish-browser-smoke.py'
+      - 'test/assets/dar-test-turkish-coverage-audit.py'
       - 'test/assets/dar-home-v3-compact.js'
       - 'test/assets/dar-setup-hub.js'
       - 'test/assets/dar-more-v15.js'
@@ -81,3 +82,14 @@ jobs:
         run: |
           python3 -m pip install --quiet selenium
           python3 test/assets/dar-test-turkish-browser-smoke.py
+
+      - name: Survey all adult Test routes for still-untranslated UI
+        run: python3 test/assets/dar-test-turkish-coverage-audit.py
+      - name: Preserve coverage report for the next Turkish UI pass
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-test-tr-15-route-ui-audit
+          path: test/i18n/qa/turkish-ui-coverage.json
+          retention-days: 14
+          if-no-files-found: warn
