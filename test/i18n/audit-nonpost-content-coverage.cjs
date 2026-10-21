@@ -6,7 +6,7 @@
 const fs=require("fs"),path=require("path"),assert=require("assert/strict");
 const root=path.resolve(__dirname,"../..");
 const read=p=>JSON.parse(fs.readFileSync(path.join(root,p),"utf8"));
-const surahFiles=fs.readdirSync(path.join(root,"content/quran")).filter(f=>/^\\d{3}\\.json$/.test(f));
+const surahFiles=fs.readdirSync(path.join(root,"content/quran")).filter(f=>/^\d{3}\.json$/.test(f));
 let totalVerses=0,withArabic=0,withGermanMeaning=0;
 const verseIds=new Set();
 for(const file of surahFiles){
