@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-turkish-ui-qa-exact-workflow-20261021",
+      "at": "2026-10-21T23:25:00+02:00",
+      "approvedBy": "user-explicit-complete-turkish-adult-website-webapp-ui-20261021",
+      "reason": "Only release the separately Chrome-tested adult German/Turkish UI layer to website/PWA/WKWebView. Strictly allow the single new non-secret Turkish UI QA workflow so change-scope-lock guard can pass. No other workflows, GitHub secrets, Kids/native sources, prayer engines or content approved. GlobalLock remains true.",
+      "paths": [
+        ".github/workflows/dar-adult-visitor-tr-ui-parity.yml"
+      ],
+      "expiresAt": "2026-10-23T23:59:00.000Z"
+    },
+    {
       "id": "public-browser-v8-qa-release-20261021",
       "at": "2026-10-21T18:28:00+02:00",
       "approvedBy": "user-explicit-browser-html-v8-full-smart-portal-push-live-20261021",
