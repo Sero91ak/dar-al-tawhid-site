@@ -259,12 +259,14 @@ async function fetchVersionBuild(base) {
   for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
     let ok = false;
     for (let attempt = 1; attempt <= 5; attempt++) {
-      const shell = await fetchText(base + "/index.html?dhp-capsules-v52=" + Date.now());
-      const runtime = await fetchText(base + "/assets/dar-home-html-parity-v1.js?v=20261021-v52-elegant-capsules");
+      const shell = await fetchText(base + "/index.html?dhp-capsules-v53=" + Date.now());
+      const runtime = await fetchText(base + "/assets/dar-home-html-parity-v1.js?v=20261021-v53-footer-flow");
       const linked = shell.status === 200 &&
-        shell.text.includes("/test/assets/dar-home-html-parity-v1.js?v=20261021-v52-elegant-capsules");
+        shell.text.includes("/test/assets/dar-home-html-parity-v1.js?v=20261021-v53-footer-flow");
       const checks = [
         "DAR_TEST_HOME_ELEGANT_CAPSULE_V52",
+        "DAR_TEST_LAST_ROW_FOOTER_FLOW_V53",
+        "grid-auto-rows:minmax(108px,auto)!important",
         "#darHomeHtmlParityV1 .dhp-content",
         "max-width:1280px!important",
         "--dhp-capsule-rim:",
@@ -285,13 +287,13 @@ async function fetchVersionBuild(base) {
       ];
       const valid = runtime.status === 200 && checks.every(s => runtime.text.includes(s));
       ok = linked && valid;
-      console.log("home-elegant-capsules-v52 " + label +
+      console.log("home-elegant-capsules-v53 " + label +
         ": html=" + shell.status + " link=" + linked + " js=" + runtime.status +
         " rules=" + valid + " ok=" + ok + " attempt=" + attempt + "/5");
       if (ok) break;
       if (attempt < 5) await new Promise(resolve => setTimeout(resolve, 2500));
     }
-    if (!ok) throw new Error("Dar Test V52 interactive capsule theme-glow runtime not LIVE: " + label);
+    if (!ok) throw new Error("Dar Test V53 capsule layout and theme-glow runtime not LIVE: " + label);
   }
 
   // DAR_TEST_HADITH_SHARH_INLINE_V1308: prove the actual served Test shell
@@ -414,7 +416,7 @@ async function fetchVersionBuild(base) {
     for(let attempt=1;attempt<=5;attempt++){
       try{
         const shell=await fetchText(base+"/?parity-v1368="+Date.now());
-        const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261021-v52-elegant-capsules");
+        const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261021-v53-footer-flow");
         const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"')&&shell.text.includes("v52-elegant-capsules");
         const source=js.text||"";
         const sequence=source.indexOf('class="dhp-welcome"')>=0
