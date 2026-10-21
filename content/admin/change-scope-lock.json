@@ -8630,6 +8630,17 @@
         "cloudflare/site-router.js"
       ],
       "expiresAt": "2026-11-21T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-home-remove-double-brand-v4-20261021",
+      "at": "2026-10-21T22:26:00+02:00",
+      "approvedBy": "user-explicit-duplicate-removal-prayer-top-scroll-20261021",
+      "reason": "Remove reproducible duplicate V4.7 Home brand and gold lead-in from DAR TEST DOM, move the original prayer hub to first scrollable slot; existing theme-brand rail and scroll guard preserved; no Kids, Apple TV or iOS build.",
+      "paths": [
+        "test/assets/dar-home-v47-layout.js",
+        "cloudflare/test-app-worker.js"
+      ],
+      "expiresAt": "2026-11-21T23:59:00.000Z"
     }
   ],
   "enabled": true
