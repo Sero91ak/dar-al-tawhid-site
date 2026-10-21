@@ -2942,11 +2942,12 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
    if(container.id==="darV8Books"){var foot=document.createElement("small");foot.textContent=summary||"DĀR AL TAWḤĪD";wrap.appendChild(foot)}
    wrap.appendChild(anchor);container.appendChild(wrap)
   }
+  function dayPostUrl(p1){var post=(realData.posts||[]).find(function(x){return x.id===p1.id||x.file===p1.file});return post?p("beitrag","id="+encodeURIComponent(post.id)):p("beitraege")}
   var day=document.getElementById("darV8Daily");
   if(day)fetch("/content/updates/daily.json",{cache:"no-cache"}).then(function(res){if(!res.ok)throw Error("daily");return res.json()}).then(function(d){
    if(!document.getElementById("darV8Daily"))return;
    day.replaceChildren();
-   if(d.recommendation){var p1=d.recommendation;card(day,"Beitrag des Tages",p1.title,p1.snippet,p("beitrag","file="+encodeURIComponent(p1.file||"")),"beitrag",false)}
+   if(d.recommendation){var p1=d.recommendation;card(day,"Beitrag des Tages",p1.title,p1.snippet,dayPostUrl(p1),"beitrag",false)}
    if(d.dua){var p2=d.dua;card(day,"Duʿāʾ des Tages",p2.title,p2.snippet,p("dua","id="+encodeURIComponent(p2.id||"")),"dua",false)}
   }).catch(function(){day.textContent="Tagesinhalte konnten gerade nicht geladen werden."});
   var books=document.getElementById("darV8Books");
@@ -2954,7 +2955,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
    if(!document.getElementById("darV8Books"))return;
    var list=(v.publications||[]).filter(function(x){return x.status!=="archived"&&x.id}).sort(function(a,b){return String(b.publishedAt||"").localeCompare(String(a.publishedAt||""))}).slice(0,3);
    books.replaceChildren();
-   list.forEach(function(pub,i){card(books,i===0?"Neueste Veröffentlichung":"Bibliothek",pub.title,pub.category||pub.topic||"",p("werk","id="+encodeURIComponent(pub.id)+"&kind=publication"),"werk",i===0)});
+   list.forEach(function(pub,i){card(books,i===0?"Neueste Veröffentlichung":"Bibliothek",pub.title,pub.category||pub.topic||"",p("werk","type=pub&id="+encodeURIComponent(pub.id)),"werk",i===0)});
    if(!list.length)books.textContent="Noch keine Bibliothekswerke verfügbar."
   }).catch(function(){books.textContent="Bibliothek konnte gerade nicht geladen werden."});
  }
@@ -3813,8 +3814,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 
  renders.start=function(){
   var posts=realData.posts.slice(0,4),duas=realData.duas.slice(0,2),pubs=realData.publications.slice(0,4),props=realData.prophets.slice(0,5);
-  return realIntro("DĀR AL TAWḤĪD","Qurʾān, Sunnah und überliefertes Wissen.","Lies den Qurʾān, höre Rezitation, öffne geprüfte Beiträge, Duʿāʾ, Werke und Quellen.")+
-   '<section class="hero reveal"><div><div class="hero-ar" dir="rtl">ٱهْدِنَا ٱلصِّرَاطَ ٱلْمُسْتَقِيمَ</div><div class="hero-trans">„Leite uns den geraden Weg.“</div><span class="hero-ref">Qurʾān · al-Fātiḥah 1:6</span></div><div class="hero-note">Qurʾān lesen oder hören, Wissen nachschlagen und Quellen direkt öffnen.</div></section>'+
+  return darSmartIntro()+
    ''+
    '<section class="section parchment reveal"><div class="section-head"><h2>Ausgewählte Beiträge</h2><a class="text-link desktop-link" data-page="beitraege" href="'+pUrl("beitraege")+'">Alle Beiträge</a></div><div class="two-reading-cols">'+posts.map(function(x){return '<a class="rule-card desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'"><div class="kicker">'+escBook(x.category||"Wissen")+'</div><h3>'+escBook(cleanTitle(x.title))+'</h3><p>'+escBook(x.speaker||x.work||"")+'</p></a>'}).join("")+'</div></section>'+
    '<section class="section reveal"><div class="section-head"><h2>Duʿāʾ</h2><a class="text-link desktop-link" data-page="dua" href="'+pUrl("dua")+'">Alle Duʿāʾ</a></div><div class="two-reading-cols">'+duas.map(function(d){return '<a class="dua-real desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><div class="real-source"><b>Quelle:</b> '+escBook(d.source)+'</div></a>'}).join("")+'</div></section>'+
