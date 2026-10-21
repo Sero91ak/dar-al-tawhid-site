@@ -71,6 +71,13 @@ for(const locale of EXPECTED){
  assert.equal(prayer.nodeValue,locale==="de"?"Faǧr":(locale==="tr"?"Sabah (Fecr)":v["Faǧr"]),locale+" prayer");
  assert.equal(props.textContent,locale==="de"?titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].sourceTitle:
     titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].translations[locale],locale+" post title");
+ const dynamicNames={tr:"Sûre Al-Kahf aç",en:"Open Sūrah Al-Kahf",
+  ar:"افتح سورة Al-Kahf",ku:"Sûreya Al-Kahf veke",
+  ckb:"سوورەتی Al-Kahf بکەرەوە",bs:"Otvori suru Al-Kahf"};
+ const oneRoute=runtime.translateValue("Sūrah Al-Kahf öffnen",locale);
+ assert.equal(oneRoute,locale==="de"?null:dynamicNames[locale],locale+" surah opening CTA");
+ const summary=runtime.translateValue("114 Suren mit Arabisch und Lautschrift.",locale);
+ assert(locale==="de"?summary===null:summary?.startsWith("114 "),locale+" compact Quran library summary");
  const idOne=titles.records["post:ahmad-quran-kalam-allah-001"];
  const idTwo=titles.records["post:abu-hatim-quran-kalam-allah-001"];
  assert.equal(repeatedA.textContent,locale==="de"?idOne.sourceTitle:idOne.translations[locale],locale+" repeated title A");
