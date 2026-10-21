@@ -262,3 +262,259 @@ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .toolbar button[aria-pre
  background:color-mix(in srgb,var(--v8-gold) 17%,var(--v8-paper))!important;
  border-color:var(--v8-gold)!important
 }
+
+
+/* V8 Immersive responsive system / v9.
+   A single fluid canvas: no card-inside-card chat, with keyboard-safe controls
+   and functional content, not an enlarged screenshot of the desktop view. */
+html:has(body.desktop-overhaul-v18){-webkit-text-size-adjust:100%;text-size-adjust:100%;overscroll-behavior-y:none}
+body.desktop-overhaul-v18{overflow-x:clip;overscroll-behavior-y:none}
+body.desktop-overhaul-v18 :is(a,button,select,[role="button"],summary){touch-action:manipulation}
+body.desktop-overhaul-v18 :is(input,textarea,select),
+body.desktop-overhaul-v18 #pageRoot :is(input[type="search"],input[type="text"]){
+ font-size:16px!important;letter-spacing:normal!important
+}
+body.desktop-overhaul-v18 *{box-sizing:border-box}
+body.desktop-overhaul-v18 .dar-v8-workspace{min-width:0}
+body.desktop-overhaul-v18 .dar-v8-topbar{
+ width:100%;max-width:1640px;box-sizing:border-box;box-shadow:none;
+ background:var(--v8-bg)!important;
+}
+body.desktop-overhaul-v18 .dar-v8-breadcrumb{display:flex!important;gap:8px;min-width:0;align-items:center}
+body.desktop-overhaul-v18 .dar-v8-brand-seal{
+ display:block;width:34px;height:34px;min-width:34px;object-fit:contain;
+ background:transparent!important;border:0!important;box-shadow:none!important;filter:drop-shadow(0 2px 5px #18352b24)
+}
+body.desktop-overhaul-v18 .dar-v8-brand-name{font:700 12px/1.3 Georgia,serif;letter-spacing:.045em;color:var(--v8-ink);white-space:nowrap}
+body.desktop-overhaul-v18 .dar-v8-crumb-arrow{font-size:14px;color:var(--v8-gold)}
+body.desktop-overhaul-v18 .dar-v8-top-search{background:transparent!important;border-color:var(--v8-line)}
+body.desktop-overhaul-v18 .dar-v8-sidebar :is(.dar-v8-side-brand,.dar-v8-side-brand *){box-shadow:none!important}
+body.desktop-overhaul-v18 :is(.dar-v8-top-actions,.dar-v8-topbar){min-width:0}
+body.desktop-overhaul-v18 .dar-v8-top-actions{flex-shrink:0}
+body.desktop-overhaul-v18 .dar-v8-top-icon{flex:none;min-width:39px;min-height:39px}
+body.desktop-overhaul-v18 .dar-v8-workspace>.v8-welcome,
+body.desktop-overhaul-v18 .dar-v8-workspace>.isnad-ribbon,
+body.desktop-overhaul-v18 .dar-v8-workspace>.v8-real-player,
+body.desktop-overhaul-v18 .dar-v8-workspace>.v8-real-prayer{max-width:1500px;width:100%;margin-inline:auto}
+body.desktop-overhaul-v18 #pageRoot{max-width:1640px;margin-inline:auto;min-width:0}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-recent-link strong{
+ display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;line-clamp:3;
+ overflow:hidden!important;overflow-wrap:anywhere;font:500 clamp(17px,1.5vw,22px)/1.35 Georgia,serif!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-recent-link{
+ min-width:0;min-height:unset;border-radius:18px;overflow:hidden
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-verse-ar{overflow-wrap:anywhere}
+body.desktop-overhaul-v18 #pageRoot :is(.dar-v8-day,.dar-v8-book,.dar-v8-recent-link,.dar-v8-discover-link){transition:border-color .18s ease,filter .18s ease!important}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-book img.dar-v8-book-cover{
+ display:block;max-height:190px;height:clamp(116px,15vw,190px);
+ object-fit:contain;margin:4px auto 10px;background:transparent;border:0
+}
+/* Prayer: remove the visual double-shell and preserve the live countdown. */
+body.desktop-overhaul-v18 .v8-real-prayer{
+ border:1px solid var(--v8-line)!important;border-radius:20px;background:var(--v8-paper)!important;
+ padding:12px 16px;box-shadow:none!important
+}
+body.desktop-overhaul-v18 .v8-real-prayer>.top-tool-card,
+body.desktop-overhaul-v18 .v8-real-prayer #prayerRiver,
+body.desktop-overhaul-v18 .v8-real-prayer .prayer-inner{
+ background:transparent!important;box-shadow:none!important;border:none!important
+}
+body.desktop-overhaul-v18 .v8-real-prayer #prayerRiver{margin:0!important;padding:0!important}
+body.desktop-overhaul-v18 .v8-real-prayer #darV8PrayerStrip{background:transparent!important}
+
+/* Messenger is its own dedicated app screen, not another card in a scroll page. */
+body.desktop-overhaul-v18[data-dar-v8-route="suche"] #pageRoot{
+ padding-top:0!important;padding-bottom:0!important;max-width:none!important;
+}
+body.desktop-overhaul-v18[data-dar-v8-route="suche"] #pageRoot>.dar-v8-messenger{
+ width:100%!important;max-width:1400px!important;min-width:0!important;
+ display:flex!important;flex-direction:column!important;
+ background:var(--v8-bg)!important;box-shadow:none!important;
+}
+body.desktop-overhaul-v18 #pageRoot>.dar-v8-messenger::before{
+ opacity:.06!important;filter:saturate(.35);background-position:center
+}
+body.desktop-overhaul-v18 .dar-v8-messenger-header{
+ background:transparent!important;box-shadow:none!important;
+ border-bottom:1px solid var(--v8-line)!important
+}
+body.desktop-overhaul-v18 .dar-v8-messenger-header>img{background:transparent!important;border:0!important}
+body.desktop-overhaul-v18 .dar-v8-messenger-divider{padding:7px 10px 4px!important}
+body.desktop-overhaul-v18 .dar-v8-messages{
+ background:transparent!important;overflow-y:auto!important;overscroll-behavior:contain;
+ scrollbar-width:thin;gap:12px!important
+}
+body.desktop-overhaul-v18 .dar-v8-bubble{
+ max-width:min(86%,760px);background:color-mix(in srgb,var(--v8-paper) 80%,var(--v8-bg))!important;
+ box-shadow:none!important;backdrop-filter:none!important;border:1px solid var(--v8-line)!important;
+ padding:12px 15px!important;border-radius:17px 17px 17px 5px!important
+}
+body.desktop-overhaul-v18 .dar-v8-bubble.is-user{
+ border-radius:17px 17px 5px 17px!important;max-width:85%;
+ background:color-mix(in srgb,var(--v8-gold) 12%,var(--v8-paper))!important;
+}
+body.desktop-overhaul-v18 .dar-v8-bubble-sources{
+ display:flex!important;flex-direction:column!important;gap:0!important;
+ padding-top:5px;margin-top:3px;border-top:1px solid var(--v8-line);max-width:100%;
+}
+body.desktop-overhaul-v18 .dar-v8-bubble-source{
+ border:0!important;border-bottom:1px solid var(--v8-line)!important;border-radius:0!important;
+ background:transparent!important;padding:10px 2px!important;box-shadow:none!important;gap:3px!important;
+}
+body.desktop-overhaul-v18 .dar-v8-bubble-source:last-child{border-bottom:0!important}
+body.desktop-overhaul-v18 .dar-v8-bubble-source strong{
+ font:500 clamp(13px,1.3vw,16px)/1.35 Georgia,serif!important;color:var(--v8-ink)!important
+}
+body.desktop-overhaul-v18 .dar-v8-bubble-source span{font-size:9px!important}
+body.desktop-overhaul-v18 .dar-v8-bubble-source small{
+ display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;
+ max-width:100%;overflow:hidden!important;line-height:1.45!important
+}
+body.desktop-overhaul-v18 .dar-v8-messenger-composer{background:var(--v8-bg)!important}
+body.desktop-overhaul-v18 .dar-v8-messenger-composer .dar-v8-chat-inputrow{
+ width:100%!important;min-width:0!important;max-width:none!important;border-radius:16px!important;
+ background:var(--v8-paper)!important;box-shadow:none!important
+}
+body.desktop-overhaul-v18 .dar-v8-messenger-composer #siteSearch{
+ font-size:16px!important;line-height:1.4!important;min-height:44px!important;min-width:0!important;
+ text-overflow:ellipsis
+}
+body.desktop-overhaul-v18 .dar-v8-messenger-composer button{min-width:50px}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-messenger .dar-v8-chat-samples{
+ background:transparent!important;border-top:1px solid var(--v8-line);scroll-snap-type:x proximity
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-messenger .dar-v8-chat-samples button{scroll-snap-align:start}
+
+/* Full audio panel is available from the header even on non-Qurʾān pages. */
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player{
+ display:flex!important;visibility:visible!important;opacity:1!important;
+ overflow-y:auto!important;overscroll-behavior:contain
+}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-wrap{min-width:0!important}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-main{
+ display:flex!important;gap:12px;flex-wrap:wrap
+}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player #quranAudioPlayer.qa26-player{
+ background:transparent!important;border:0!important;box-shadow:none!important;
+}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-nav{min-width:44px;min-height:44px}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-controls{
+ display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:end!important
+}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-field{
+ min-width:0!important;width:100%!important;max-width:100%!important
+}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player select{font-size:16px!important}
+.dar-v8-picker-overlay[hidden]{display:none!important}
+.dar-v8-picker-overlay{
+ position:fixed;inset:0;z-index:1200;background:rgba(5,22,17,.62);backdrop-filter:blur(7px);
+ display:flex;justify-content:center;align-items:end;padding:env(safe-area-inset-top) 0 0
+}
+.dar-v8-picker-panel{
+ width:min(600px,100%);max-height:min(80dvh,850px);overflow:hidden;
+ background:var(--v8-paper);color:var(--v8-ink);border:1px solid var(--v8-line);
+ border-radius:25px 25px 0 0;padding:16px 18px calc(16px + env(safe-area-inset-bottom));
+ box-shadow:0 -16px 55px #0004;display:flex;flex-direction:column;gap:10px
+}
+.dar-v8-picker-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.dar-v8-picker-head strong{font:500 23px Georgia,serif}
+.dar-v8-picker-head button{
+ min-width:42px;min-height:42px;background:transparent;border:1px solid var(--v8-line);
+ border-radius:13px;color:var(--v8-ink);font-size:21px
+}
+.dar-v8-picker-panel input{width:100%;min-height:50px;border:1px solid var(--v8-line);
+ border-radius:13px;background:var(--v8-bg);color:var(--v8-ink);padding:11px 14px;font-size:16px!important}
+.dar-v8-picker-options{overflow:auto;overscroll-behavior:contain;display:grid;gap:2px;min-height:80px}
+.dar-v8-picker-options button{
+ min-height:47px;padding:12px 11px;text-align:start;border:0;border-bottom:1px solid var(--v8-line);
+ background:transparent;color:var(--v8-ink);font:500 15px/1.4 system-ui
+}
+.dar-v8-picker-options button[aria-selected="true"]{color:var(--v8-gold);font-weight:800}
+/* Single-column phone, two-column tablets, expansive landscape canvas. */
+@media(max-width:959px){
+ body.desktop-overhaul-v18 .dar-v8-workspace{
+  width:100%!important;max-width:100%!important;margin:0!important;padding-inline:max(9px,env(safe-area-inset-left))!important;
+  padding-right:max(9px,env(safe-area-inset-right))!important
+ }
+ body.desktop-overhaul-v18 .dar-v8-topbar{
+  display:flex!important;gap:8px!important;min-height:57px!important;max-width:100%!important;
+  padding:6px 0!important;position:sticky!important;top:0!important;z-index:260!important
+ }
+ body.desktop-overhaul-v18 .dar-v8-breadcrumb{flex:1!important;overflow:hidden!important;gap:5px!important}
+ body.desktop-overhaul-v18 .dar-v8-brand-seal{width:28px;height:28px;min-width:28px}
+ body.desktop-overhaul-v18 .dar-v8-brand-name{font-size:clamp(10px,1.8vw,12px)!important;letter-spacing:0!important}
+ body.desktop-overhaul-v18 .dar-v8-crumb-arrow,
+ body.desktop-overhaul-v18 #darV8BreadLabel{display:none!important}
+ body.desktop-overhaul-v18 .dar-v8-top-actions{flex:0 0 auto;gap:4px!important}
+ body.desktop-overhaul-v18 .dar-v8-top-search{
+  height:39px!important;max-width:39px!important;width:39px!important;
+  min-width:39px!important;padding:0!important;justify-content:center;
+  font-size:23px!important;border-radius:50%!important
+ }
+ body.desktop-overhaul-v18 .dar-v8-top-search .dar-v8-search-text{display:none!important}
+ body.desktop-overhaul-v18 .dar-v8-top-icon{min-height:39px!important;min-width:39px!important;padding:0!important}
+ body.desktop-overhaul-v18 .dar-v8-lang-toggle{max-width:86px!important;min-height:39px!important;padding:0 6px!important;border-radius:20px}
+ body.desktop-overhaul-v18 .dar-v8-workspace>.v8-welcome{margin-top:14px!important}
+ body.desktop-overhaul-v18 #pageRoot{width:100%!important;padding-inline:0!important}
+ body.desktop-overhaul-v18 #pageRoot>.dar-v8-messenger{
+  width:100%!important;height:calc(100dvh - 145px - env(safe-area-inset-bottom))!important;
+  min-height:420px!important;margin:0!important;border:0!important;border-radius:0!important;
+  box-shadow:none!important;background:var(--v8-bg)!important
+ }
+ body.desktop-overhaul-v18 .dar-v8-messenger-header{padding-inline:5px!important}
+ body.desktop-overhaul-v18 .dar-v8-messenger-header button{border:0!important}
+ body.desktop-overhaul-v18 .dar-v8-messenger-header h2{font-size:18px!important}
+ body.desktop-overhaul-v18 .dar-v8-bubble{max-width:92%!important}
+ body.desktop-overhaul-v18 .dar-v8-bubble.is-user{max-width:84%!important}
+ body.desktop-overhaul-v18 .dar-v8-messenger-composer{padding:9px 4px 12px!important}
+ body.desktop-overhaul-v18 .dar-v8-messenger-composer>p{display:none!important}
+ body.desktop-overhaul-v18 #pageRoot>.dar-v8-messenger .dar-v8-chat-samples{padding-inline:5px!important}
+ body.desktop-overhaul-v18.v8-chat-focused .dar-v8-mobile-dock{visibility:hidden!important;pointer-events:none!important}
+ body.desktop-overhaul-v18.v8-chat-focused #pageRoot>.dar-v8-messenger{
+  height:calc(var(--v8-visible-height,100dvh) - 58px - env(safe-area-inset-top))!important
+ }
+ body.desktop-overhaul-v18 .dar-v8-mobile-dock{
+  width:calc(100vw - 20px)!important;max-width:600px!important;
+  left:50%;bottom:calc(8px + env(safe-area-inset-bottom));z-index:300!important
+ }
+ body.desktop-overhaul-v18 .dar-v8-mobile-dock img{width:clamp(27px,5vw,34px);height:clamp(27px,5vw,34px)}
+ body.desktop-overhaul-v18 .v8-real-prayer{
+  border-radius:18px!important;padding:11px 9px!important;margin-inline:0!important;width:100%!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-recent-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-discover-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body.desktop-overhaul-v18 #pageRoot :is(.dar-v8-day,.dar-v8-book){min-width:0!important}
+}
+@media(max-width:600px){
+ body.desktop-overhaul-v18 .dar-v8-workspace{
+  padding-inline:max(7px,env(safe-area-inset-left))!important;
+  padding-right:max(7px,env(safe-area-inset-right))!important
+ }
+ body.desktop-overhaul-v18 .dar-v8-brand-seal{width:26px;height:26px;min-width:26px}
+ body.desktop-overhaul-v18 .dar-v8-brand-name{font-size:10px!important;max-width:118px;overflow:hidden;text-overflow:ellipsis}
+ body.desktop-overhaul-v18 .dar-v8-topbar{gap:3px!important}
+ body.desktop-overhaul-v18 .dar-v8-top-actions{gap:3px!important}
+ body.desktop-overhaul-v18 .dar-v8-lang-toggle{max-width:76px!important;font-size:10px!important}
+ body.desktop-overhaul-v18 .dar-v8-top-icon{min-width:36px!important;min-height:36px!important}
+ body.desktop-overhaul-v18 .dar-v8-top-search{width:35px!important;min-width:35px!important;max-width:35px!important;height:35px!important}
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-recent-grid{grid-template-columns:1fr!important}
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-messenger-header>img{width:32px;height:32px}
+ body.desktop-overhaul-v18 #pageRoot>.dar-v8-messenger{height:calc(100dvh - 142px - env(safe-area-inset-bottom))!important}
+ body.desktop-overhaul-v18 .dar-v8-messenger-composer button{min-width:49px;padding:7px 10px!important}
+ body.desktop-overhaul-v18 .dar-v8-messenger-composer button [data-v8-ui-key]{display:none}
+ body.desktop-overhaul-v18 .dar-v8-messenger-composer button span[aria-hidden]{font-size:23px}
+ body.desktop-overhaul-v18 .dar-v8-messenger-composer #siteSearch{font-size:16px!important}
+ body.desktop-overhaul-v18 .dar-v8-picker-panel{max-height:76dvh;padding-inline:12px}
+ body.desktop-overhaul-v18 .dar-v8-recent-link strong{-webkit-line-clamp:3!important;line-clamp:3!important}
+}
+@media(min-width:960px) and (max-width:1360px){
+ body.desktop-overhaul-v18 .dar-v8-workspace{padding-inline:clamp(18px,2.3vw,36px)!important}
+ body.desktop-overhaul-v18 #pageRoot>.dar-v8-messenger{height:calc(100dvh - 100px)}
+}
+@media(min-width:1361px){
+ body.desktop-overhaul-v18 .dar-v8-workspace{padding-inline:clamp(25px,3vw,64px)!important}
+ body.desktop-overhaul-v18 .dar-v8-workspace .dar-v8-topbar{max-width:1640px!important}
+ body.desktop-overhaul-v18 #pageRoot>.dar-v8-messenger{height:min(850px,calc(100dvh - 120px))!important}
+ body.desktop-overhaul-v18 .dar-v8-recent-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
