@@ -48,11 +48,15 @@ const props={
  closest:()=>({getAttribute:()=> "wer-gutes-zeigt-bekommt-anteil-am-lohn-198"}),
  getAttribute:()=>null
 };
+const libraryHost={
+ attrs:{"data-nav":"post","data-value":"ahmad-quran-kalam-allah-001",
+        "aria-label":"📖 Der Qurʾān ist Allahs Wort öffnen"},
+ getAttribute(name){return this.attrs[name]??null},
+ setAttribute(name,value){this.attrs[name]=value}
+};
 const libraryCard={
  nodeType:1,children:[],textContent:"📖 Der Qurʾān ist Allahs Wort",
- closest:()=>({getAttribute:(name)=>name==="data-nav"?"post":
-   name==="data-value"?"ahmad-quran-kalam-allah-001":null}),
- getAttribute:()=>null
+ closest:()=>libraryHost,getAttribute:()=>null
 };
 const repeatedA={
  nodeType:1,children:[],textContent:"📖 Der Qurʾān ist Allahs Wort",
@@ -94,6 +98,14 @@ for(const locale of EXPECTED){
  assert.equal(repeatedA.textContent,locale==="de"?idOne.sourceTitle:idOne.translations[locale],locale+" repeated title A");
  assert.equal(repeatedB.textContent,locale==="de"?idTwo.sourceTitle:idTwo.translations[locale],locale+" repeated title B");
  assert.equal(libraryCard.textContent,locale==="de"?idOne.sourceTitle:idOne.translations[locale],locale+" library post title bound by canonical ID");
+ const accessibility={
+  tr:t=>t+" içeriğini aç",en:t=>"Open "+t,ar:t=>"افتح "+t,
+  ku:t=>t+" veke",ckb:t=>t+" بکەرەوە",bs:t=>"Otvori "+t
+ };
+ const expectedAria=locale==="de"?idOne.sourceTitle+" öffnen":
+   accessibility[locale](idOne.translations[locale]);
+ assert.equal(libraryHost.getAttribute("aria-label"),expectedAria,locale+" localized post card accessibility");
+
  assert.equal(original.nodeValue,"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً","Arabic source modified");
  assert.equal(excluded.nodeValue,"Nicht authentisch belegt","source text modified");
  assert.equal(doc.documentElement.dir,["ar","ckb"].includes(locale)?"rtl":"ltr");
