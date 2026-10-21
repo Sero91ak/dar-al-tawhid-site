@@ -40,13 +40,13 @@
       "uniqueTexts": 3,
       "affectedQuestions": 50
     },
-    "other_or_unconfirmed_request": {
-      "uniqueTexts": 1,
-      "affectedQuestions": 1
-    },
     "reserved_existing_elevenlabs_flow_mp3": {
       "uniqueTexts": 10,
       "affectedQuestions": 5
+    },
+    "provider_uncertain_paid_request_recover_not_regenerate": {
+      "uniqueTexts": 1,
+      "affectedQuestions": 1
     }
   },
   "affectedUnfinishedQuestionCount": 104,
@@ -1232,7 +1232,7 @@
     },
     {
       "text": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
-      "category": "other_or_unconfirmed_request",
+      "category": "provider_uncertain_paid_request_recover_not_regenerate",
       "usedBy": [
         {
           "questionId": "kids-quiz-080",
@@ -1241,7 +1241,8 @@
         }
       ],
       "originalGenerationId": null,
-      "providerFlowStatus": null
+      "providerFlowStatus": null,
+      "previousUnconfirmedRequestTextSha256": "fc4f586cf59297c43335f3aae64428bdf00fb10ec362ffb33c9620ff9a851f70"
     },
     {
       "text": "Allah nennt Taqwā als Maßstab der besonderen Ehre bei Ihm.",
