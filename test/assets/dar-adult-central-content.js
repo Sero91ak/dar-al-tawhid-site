@@ -83,7 +83,71 @@ function create(opts={}){
   return {id,requestedLocale:"tr",displayLocale:"tr",pending:false,status:"approved",
    fields:doc.fields,immutable:german.immutable,sourceHash:currentHash};
  }
- return {resolve,available,manifest,locale,clearCache:()=>requests.clear()};
+ const catalogueCache=new Map();
+ function canonical(path){
+  if(!["/content/duas/duas.json","/data/quiz-questions.json",
+       "/data/learning-content.json","/content/learning/lessons-index.json"].includes(path))
+    throw Error("Unknown canonical content catalogue");
+  if(!catalogueCache.has(path)){
+   const task=fetcher(path,{cache:"no-store",credentials:"same-origin"})
+    .then(r=>{if(!r.ok)throw Error("Canonical content HTTP "+r.status);return r.json()})
+    .catch(e=>{catalogueCache.delete(path);throw e});
+   catalogueCache.set(path,task);
+  }
+  return catalogueCache.get(path);
+ }
+ function nonEmpty(obj){
+  return Object.fromEntries(Object.entries(obj).filter(([,v])=>
+   typeof v==="string"?!!v.trim():Array.isArray(v)&&v.length>0));
+ }
+ async function resolveById(kind,id,selectedLocale=locale()){
+  if(!KINDS.has(kind)||!id?.startsWith(kind+":"))throw Error("Invalid canonical ID");
+  const ref=id.slice(kind.length+1);
+  let fields=null,immutable=null,record=null;
+  if(kind==="dua"){
+   const rows=await canonical("/content/duas/duas.json");
+   if(!Array.isArray(rows))throw Error("Invalid original du'a catalogue");
+   record=rows.find(d=>String(d.id)===ref);
+   if(record){
+    fields=nonEmpty({title:record.title||"",meaning:record.de||"",occasion:record.occasion||""});
+    immutable={arabicOriginal:record.ar||"",transliteration:record.tr||"",
+      source:record.src||record.source||"",type:record.type||""};
+   }
+  }else if(kind==="quiz"){
+   const doc=await canonical("/data/quiz-questions.json");
+   const rows=Array.isArray(doc)?doc:doc?.questions;
+   if(!Array.isArray(rows))throw Error("Invalid original quiz catalogue");
+   record=rows.find(q=>String(q.id)===ref&&q.status!=="draft");
+   if(record){
+    fields=nonEmpty({question:record.question||record.text||"",
+       answers:Array.isArray(record.answers)?record.answers:[],
+       explanation:record.explanation||"",topic:record.topic||"",category:record.category||""});
+    immutable={correctIndex:record.correctIndex,source:record.source||"",
+      sourceLinks:record.sourceLinks||[],sensitivity:record.sensitivity||"",
+      reviewStatus:record.reviewStatus||""};
+   }
+  }else if(kind==="learning"){
+   const targets=["/data/learning-content.json","/content/learning/lessons-index.json"];
+   for(const target of targets){
+    let doc=null;try{doc=await canonical(target)}catch(_){continue}
+    const rows=Array.isArray(doc)?doc:Array.isArray(doc?.lessons)?doc.lessons:doc?.items;
+    if(!Array.isArray(rows))continue;
+    record=rows.find(l=>String(l.id)===ref);
+    if(record){
+     fields=nonEmpty({title:record.title||"",body:record.body||record.text||"",
+       explanation:record.explanation||""});
+     immutable={source:record.source||"",sourceLinks:record.sourceLinks||[]};break;
+    }
+   }
+  }else{
+   throw Error("This record type requires caller-supplied canonical fields and immutable source metadata");
+  }
+  if(!record||!fields||!Object.keys(fields).length)throw Error("Canonical original is not indexed");
+  return resolve(kind,id,{fields,immutable},selectedLocale);
+ }
+ return {resolve,resolveById,available,manifest,locale,clearCache:()=>{
+  requests.clear();catalogueCache.clear();}};
+
 }
 global.DarAdultCentralContent={create,locale,base:BASE,storageKey:KEY,
  scope:"shared-approved-pack-v1"};
