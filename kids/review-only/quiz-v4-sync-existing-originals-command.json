@@ -27,7 +27,7 @@
   "ownerPronunciationHoldManifest": "kids/data/quiz-v4-owner-pronunciation-hold-20261021.json",
   "requireQuarantineOfRejectedOriginals": 7,
   "requireNoPriorPaidTextRegeneration": true,
-  "latestPurpose": "Rebuild canonical 450 four-part V4 quiz from 1777 independently SHA-verified paid originals, two native Fusha master sources and pronunciation quarantine; no additional synthesis, no public release",
+  "latestPurpose": "2026-10-21 refresh ALL 450 from 1777 verified paid V4 originals; fix stale review-stage 317 vs current quarantine-aware 343; no new credits",
   "accountForSevenOwnerPronunciationHolds": true,
   "strictReportAndStagingCoverageAgreement": true,
   "progressQuarantineFixCommit": "283a1480910401351545df67f8552b8d59077655",
@@ -48,5 +48,7 @@
   "wave04AtomicReceiptImportCommit": "218467c18fc9a514c4c2b5104fc7d13bb124c417",
   "newElevenLabsCreditsSpentByThisSynchronization": 0,
   "requireExactFourVerifiedPlaybacksBeforeCountingComplete": true,
-  "zeroCreditRefreshReviewNonce": "2026-10-21-genuine-originals-1777-playable-parts-rebuild-01"
+  "zeroCreditRefreshReviewNonce": "2026-10-21-genuine-originals-1777-playable-parts-rebuild-01",
+  "expectedCurrentRegisteredOriginals": 1777,
+  "requiredNoHumanListeningApproval": true
 }
