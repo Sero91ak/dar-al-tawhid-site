@@ -19,14 +19,19 @@ try{
  write("content/duas/duas.json",[{id:"dua-1",title:"Unser Herr",ar:"رَبَّنَا",tr:"Rabbanā",de:"Unser Herr",src:"Qurʾān 2:201"}]);
  write("data/quiz-questions.json",[{id:"quiz-1",question:"Frage?",answers:["Eins","Zwei"],correctIndex:0,explanation:"Auslegung",source:"Qurʾān 51:56",status:"published"}]);
  write("data/learning-content.json",{lessons:[{id:"lesson-1",title:"Lektion",body:"Lehrtext",source:"Qurʾān 112:1"}]});
+ write("lernen/a/index.html",'<script>const questions=[{q:"Frage A?",a:["Ja","Nein"],correct:0,why:"Weil A."}];</script>');
+ write("lernen/b/index.html",'<script>const questions=[{title:"Frage B?",hint:"Hinweis B",options:["Ja","Nein"],correct:1,why:"Weil B."}];</script>');
+ write("lernen/c/index.html",'<script>const questions=[{q:"Frage C?",choices:["Ja","Nein"],correct:1,why:"Weil C."}];</script>');
+
  const first=generate();
- assert.equal(first.summary.contentItems,6);
- assert.equal(first.summary.translationTasks,36);
- assert.equal(first.summary.unfinished,36);
- assert.equal(first.summary.newItems,6);
+ assert.equal(first.summary.contentItems,9);
+ assert.equal(first.summary.translationTasks,54);
+ assert.equal(first.summary.unfinished,54);
+ assert.equal(first.summary.newItems,9);
  assert.equal(first.items.find(x=>x.kind==="dua").immutable.transliteration,"Rabbanā");
  assert.equal(first.items.find(x=>x.kind==="dua").immutable.arabicOriginal,"رَبَّنَا");
  assert.equal(first.items.find(x=>x.kind==="quiz").immutable.correctIndex,0);
+ assert.equal(first.summary.byKind.learning,4);
  const second=generate();assert.equal(second.summary.changedItems,0);assert.equal(second.summary.newItems,0);
  write("content/posts/one.md",'---\nid: "one"\ntitle: "Tawḥīd"\nsource: "Qurʾān 51:56"\n---\n\nVollständig revidierter Text.');
  const changed=generate();assert.equal(changed.summary.changedItems,1);
