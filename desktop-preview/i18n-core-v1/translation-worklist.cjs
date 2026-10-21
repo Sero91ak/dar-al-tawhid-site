@@ -37,9 +37,12 @@ function frontmatter(raw){
 }
 function scanPosts(){
  const index=json("content/posts/posts-index.json");
- if(!Array.isArray(index?.files)){issues.push({kind:"post",issue:"missing-posts-index"});return}
- for(const f of index.files){
-  const name=typeof f==="string"?f:f?.name;
+ const indexed=Array.isArray(index?.files)?index.files.map(f=>typeof f==="string"?f:f?.name):[];
+ let onDisk=[];
+ try{onDisk=fs.readdirSync(path.join(ROOT,"content/posts")).filter(name=>name.endsWith(".md"))}
+ catch(_){if(!indexed.length)issues.push({kind:"post",issue:"posts-directory-unavailable"})}
+ const candidates=[...new Set([...indexed,...onDisk])];
+ for(const name of candidates){
   if(!/^[a-zA-Z0-9_.-]+\.md$/.test(name||""))continue;
   const sourcePath="content/posts/"+name,raw=read(sourcePath);
   if(raw===null){issues.push({kind:"post",file:name,issue:"indexed-file-missing"});continue}
