@@ -1,0 +1,101 @@
+name: Public Browser V8 All Routes Visual QA
+on:
+  push:
+    branches:
+      - feat/public-v8-all-sections-20261021
+    paths:
+      - 'desktop-preview/**'
+      - '.github/workflows/dar-v8-all-sections-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Validate JS and icon assets
+        run: |
+          node --check desktop-preview/assets/dar-v8-cross-pages.js
+          node - <<'NODE'
+          const fs=require('fs');
+          const html=fs.readFileSync('desktop-preview/index.html','utf8');
+          const scripts=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map(x=>x[1]).filter(Boolean);
+          scripts.forEach((code,i)=>{new Function(code)});
+          for(const key of ['dar-v8-cross-pages.js','dar-v8-all-sections.css','hadith:hadith','v8ChatReply'])
+            if(!html.includes(key))throw Error('Missing shell integration '+key);
+          for(const key of ['home','quran','posts','dua','ilm','more','hadith','library','frauen','prayer','spark']){
+            if(!fs.existsSync('assets/dar-3d-icons/'+key+'.png'))throw Error('Missing 3D icon: '+key);
+          }
+          console.log('PASS: '+scripts.length+' inline scripts and all 3D assets');
+          NODE
+      - name: Start browser test server
+        shell: bash
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-v8-all-routes-http.log 2>&1 &
+          sleep 2
+      - name: Test every main navigation route on desktop mobile and Fold
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install --quiet selenium
+          python - <<'PY'
+          import os, time, json
+          from selenium import webdriver
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          out='/tmp/dar-v8-all-sections-shots'
+          os.makedirs(out,exist_ok=True)
+          opt=Options()
+          for flag in ['--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--hide-scrollbars']:
+            opt.add_argument(flag)
+          opt.set_capability('goog:loggingPrefs',{'browser':'ALL'})
+          driver=webdriver.Chrome(options=opt)
+          routes=['start','quran','beitraege','dua','wissen','bibliothek','hadith','frauen','gebetszeiten','mehr','suche','quiz']
+          devices=[('desktop',1440,900),('iphone',393,844),('fold',840,900)]
+          try:
+            for name,width,height in devices:
+              driver.set_window_size(width,height)
+              for route in routes:
+                driver.get('http://127.0.0.1:8765/desktop-preview/index.html?page='+route)
+                WebDriverWait(driver,30).until(lambda d: d.execute_script("return document.body?.dataset?.darV8Route === arguments[0]",route))
+                WebDriverWait(driver,30).until(lambda d: d.execute_script("return !!document.getElementById('darV8MobileDock') && !!document.querySelector('#pageRoot')"))
+                if route!='start':
+                  WebDriverWait(driver,15).until(lambda d: d.execute_script("return !!document.querySelector('#pageRoot .v8-global-page-hero')"))
+                state=driver.execute_script("""const $=x=>document.getElementById(x);
+                  const hero=document.querySelector('#pageRoot .v8-global-page-hero'),side=$('darV8Sidebar'),dock=$('darV8MobileDock');
+                  const active=[...dock.querySelectorAll('a.active')].map(x=>x.dataset.page);
+                  return {route:document.body.dataset.darV8Route,overflow:document.documentElement.scrollWidth-innerWidth,
+                  sidebar:getComputedStyle(side).display,doc:getComputedStyle(dock).display,dockCount:dock.querySelectorAll('a').length,
+                  hero:hero?{display:getComputedStyle(hero).display,height:hero.getBoundingClientRect().height,icon:!!hero.querySelector('img')}:null,
+                  content:$('#pageRoot').innerText.slice(0,110),active:active};
+                """)
+                if state['overflow']>3: raise RuntimeError(name+' '+route+' horizontal overflow '+str(state))
+                if state['dockCount']!=6: raise RuntimeError(name+' '+route+' missing 6-tab dock '+str(state))
+                if name=='desktop' and state['sidebar']!='flex':raise RuntimeError('Desktop sidebar not visible '+route)
+                if name!='desktop' and state['doc']=='none':raise RuntimeError('Mobile dock not visible '+route)
+                if route!='start' and (not state['hero'] or not state['hero']['icon'] or state['hero']['height']<110):
+                  raise RuntimeError(name+' '+route+' route hero missing '+str(state))
+                if route=='hadith':
+                  if not driver.find_elements(By.ID,'v8HadithResults'):raise RuntimeError('Hadith route falls back to start')
+                  WebDriverWait(driver,30).until(lambda d: d.execute_script("return !!document.getElementById('v8HadithResults')?.dataset.v8Ready"))
+                if route=='suche':
+                  if not driver.find_elements(By.ID,'v8ChatReply'):raise RuntimeError('Chat route not initialized')
+                if route in ['start','quran','beitraege','dua','wissen','bibliothek','hadith','gebetszeiten','mehr','suche']:
+                  driver.save_screenshot(out+'/'+name+'-'+route+'.png')
+                print(json.dumps({'device':name,'route':route,'overflow':state['overflow'],'active':state['active']}),flush=True)
+            print('PASS: 36 route/viewport combinations, 3D icons, desktop sidebar, 6-tab mobile navigation, chat and hadith.')
+          finally:driver.quit()
+          PY
+      - name: Upload all route snapshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-v8-all-sections-desktop-iphone-fold
+          path: /tmp/dar-v8-all-sections-shots/*.png
+          retention-days: 7
+          if-no-files-found: warn
