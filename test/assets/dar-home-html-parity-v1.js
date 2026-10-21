@@ -305,7 +305,7 @@ function stylesheet(){
  "body.is-home-route #darHomeHtmlParityV1{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;}",
  "#darHomeHtmlParityV1 .dhp-footer{height:auto!important;min-height:0!important;margin-top:16px!important;margin-bottom:0!important;padding-bottom:0!important;}",
  "#darHomeHtmlParityV1 .dhp-library-tile::before,#darHomeHtmlParityV1 .dhp-library-tile::after{pointer-events:none!important;}",
- "@media(max-width:699px){#darHomeHtmlParityV1 .dhp-library{grid-auto-rows:minmax(108px,auto)!important;}#darHomeHtmlParityV1 .dhp-library-tile{min-height:108px!important;padding-block:10px 12px!important;}#darHomeHtmlParityV1 .dhp-content{padding-bottom:calc(var(--dar-nav-height,76px) + env(safe-area-inset-bottom,0px) + 12px)!important;}}"
+ "@media(max-width:699px){#darHomeHtmlParityV1 .dhp-library{grid-auto-rows:minmax(108px,auto)!important;}#darHomeHtmlParityV1 .dhp-library-tile{min-height:108px!important;padding-block:10px 12px!important;}#darHomeHtmlParityV1 .dhp-content{padding-bottom:calc(var(--dar-nav-height,76px) + env(safe-area-inset-bottom,0px) + 12px)!important;}}",
  /* DAR_TEST_HOME_PRAYER_FIRST_ACTUAL_V54: the parity renderer, not .top-shell, is visible! */
  "#darHomeHtmlParityV1 .dhp-content{padding-top:0!important;}",
  "#darHomeHtmlParityV1 .dhp-content>.dhp-prayer:first-child{margin-top:4px!important;}",
