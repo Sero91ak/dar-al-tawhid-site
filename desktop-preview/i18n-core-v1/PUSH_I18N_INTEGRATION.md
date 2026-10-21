@@ -5,8 +5,8 @@ Status: Entwurf, kein Live-Versand, nur Erwachsenen-App. Kids-App ausgeschlossen
 ## Architektur
 
 1. Sprachregister: desktop-preview/i18n-core-v1/locales.json. Derzeit de, ar, en, tr, ku, ckb, bs, fr, es. Beliebig erweiterbar; neu registrierte Codes sind erst nach redaktioneller Freigabe lieferbar.
-2. Jede Installation bzw. OneSignal-Subscription erhält das Tag dar_app_locale aus der **in der App ausdrücklich gewählten Sprache**. Die Betriebssystemsprache darf eine explizite App-Sprache nicht überschreiben.
-3. Nach App-Sprachwechsel muss die bestehende Browser-/PWA-/Native-Bridge OneSignal.User.addTags({dar_app_locale: code}) setzen und dieselbe Sprache in die vorhandene Server-Registrierung zur Subscription-ID schreiben. Ebenso nach OneSignal-Login, Reinstallation und Subscription-Wechsel; kein automatisches Push-Opt-in.
+2. Jede Installation bzw. OneSignal-Subscription erhält eine eigene **serverseitig geschützte** Zuordnung app_locale, aus der **in der App ausdrücklich gewählten Sprache**. OneSignal.User-`addTags` und `setLanguage` sind USER-gebunden und **kein verlässlicher Ort für unterschiedliche Sprachen zweier Geräte desselben OneSignal-Users**. Das Backend nimmt nie die Betriebssystemsprache als Ersatz einer expliziten App-Wahl.
+3. Nach App-Sprachwechsel muss die Browser-/PWA-/Native-Bridge die Sprache per **authentifiziertem Backend-Endpunkt** auf die aktuelle Subscription-ID schreiben und die bestätigte Antwort prüfen. Der bloße Besitz/Empfang einer öffentlichen Subscription-ID ist kein Identitätsnachweis. Kein Client darf direkt mit anonymem PostgREST eine beliebige Zeile ändern. Ebenso nach OneSignal-Login, Reinstallation und Subscription-Wechsel; kein automatisches Push-Opt-in.
 4. Native iOS und Android müssen dieselbe Sprache übertragen. Keine neue App-ID und keine zusätzliche Subscription pro Sprachwechsel.
 5. Der Server wählt pro **Subscription** eine bereits geprüfte Übersetzung. Für Kurmancî/Soranî nicht auf mutmaßliche OneSignal-/OS-Sprachcodes verlassen. Bei individuell adressierten Pushs kann das bereits lokalisierte Textpaar über den technischen OneSignal-Fallback-Schlüssel en zugestellt werden. Es bleibt inhaltlich die gewählte Sprache.
 6. Keine unfertigen Fachübersetzungen: Status approved und passende kanonische Revision erfordern; sonst die geprüfte deutsche Fassung verwenden, im Zielbereich Übersetzungsstatus kennzeichnen.
@@ -46,3 +46,12 @@ Testkriterien: nur Admin/Test-Abonnements im Staging, Push-Opt-in wahren, je Tes
 ## Sicherheitsbefund
 
 Eine Repository-Suche fand eine als OneSignal-API-Schlüssel bezeichnete Zeichenkette in .replit. Schlüssel nie ins Chatprotokoll kopieren. Gültigkeit und Berechtigungen prüfen und einen aktiven Schlüssel rotieren, bevor produktive Änderungen freigeschaltet werden. Git-Historie dabei mitbedenken.
+
+
+## Bestätigter Datenbank-/Berechtigungsbefund am 22.10.2026
+
+- Supabase-Projekt: DĀR Erwachsene, Tabelle public.prayer_push_registrations. RLS ist zwar aktiviert, doch alle drei bestehenden Client-Policies haben qual=true bzw. with_check=true. Direkte Prüfung ergab für anon SELECT, INSERT und UPDATE jeweils true.
+- cloudflare/prayer-push-scheduler.js lädt die Registrierung derzeit mit dem öffentlichen SUPABASE_ANON_KEY. Eine sofortige RLS-Sperre **würde den laufenden Gebets-Push gefährden**. Deshalb kein ungetestetes Durchschalten, keine heimliche Migration.
+- Neue app_locale-Werte dürfen **nicht** in diesem öffentlich zugänglichen Registrierungsbestand veröffentlicht werden. Es liegt ein nicht angewendeter Entwurf in push-app-locale-proposed-migration.sql für eine separate serverseitig lesbare Tabelle public.dar_push_subscription_locales vor: RLS und Force RLS, keine anon/authenticated grants, ausschließlich service_role.
+- Zur produktiven Nutzung braucht es einen neuen Eigentumsnachweis über eine authentifizierte, serverseitige API. OneSignal-Subscription-ID allein ist kein Authentifizierungsfaktor. SQL-Entwurf nicht ohne separate DB-/Push-Freigabe ausführen.
+- Vor Schließen der alten Client-Policies: Gebets-Scheduler mit sicherem Server-Credential verbinden, bestehende öffentliche Browser-Registrierung durch authentifizierte API ersetzen und alle drei Push-Spuren plus Opt-out real prüfen; danach minimale RLS-Policies und Grants setzen.
