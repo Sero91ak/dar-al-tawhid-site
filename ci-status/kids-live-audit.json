@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-21T20:18:45Z",
-  "trigger": "workflow_run",
-  "finishedDeployConclusion": "success",
-  "finishedDeployRun": "39668636397",
+  "timestamp": "2026-10-21T20:33:53Z",
+  "trigger": "push",
+  "finishedDeployConclusion": null,
+  "finishedDeployRun": null,
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -71,6 +71,24 @@
   },
   "lastDeployRuns": [
     {
+      "conclusion": null,
+      "created_at": "2026-10-21T20:33:30Z",
+      "head_sha": "74e8bb3a4bdf3d05dd17bd86a70a07d0bc9ff5d5",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39671338941",
+      "id": 39671338941,
+      "status": "pending",
+      "updated_at": "2026-10-21T20:33:31Z"
+    },
+    {
+      "conclusion": null,
+      "created_at": "2026-10-21T20:32:59Z",
+      "head_sha": "32603241f4f09fbc5e8a93c639f3fe754768e71c",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39671265375",
+      "id": 39671265375,
+      "status": "in_progress",
+      "updated_at": "2026-10-21T20:33:39Z"
+    },
+    {
       "conclusion": "success",
       "created_at": "2026-10-21T20:14:54Z",
       "head_sha": "a1d9169a74d478f27d2e3e5adfdf020657c60dd3",
@@ -105,24 +123,6 @@
       "id": 39667519869,
       "status": "completed",
       "updated_at": "2026-10-21T20:09:17Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-10-21T20:03:30Z",
-      "head_sha": "73fa9fb9b5dd4f5f82a0932ff1be3ce0b44acd7c",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39666986820",
-      "id": 39666986820,
-      "status": "completed",
-      "updated_at": "2026-10-21T20:06:19Z"
-    },
-    {
-      "conclusion": "failure",
-      "created_at": "2026-10-21T20:02:31Z",
-      "head_sha": "f1a8c51e610c27fc495a40a89fe2f0f6fd880013",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39666840218",
-      "id": 39666840218,
-      "status": "completed",
-      "updated_at": "2026-10-21T20:04:52Z"
     }
   ]
 }
