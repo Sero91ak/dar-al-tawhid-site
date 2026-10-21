@@ -4196,6 +4196,7 @@ renders.beitraege=function(){
  }
  renders.quran=function(){
   return realIntro("QURʾĀN","Lesen wie in einem aufgeschlagenen Buch.","Suche nach Sūrah, Āyah oder einem Begriff im geöffneten Text. Beispiel: 2:255.")+
+   '<section class="dar-v8-quran-audio-launch" aria-label="Qurʾān hören"><div><span class="dar-v8-section-kicker">REZITATION · 114 SŪREN</span><strong>Qurʾān anhören</strong><small>Eine Audio-Engine · Sūrah · Āyah · Rezitator wählen</small></div><button type="button" id="darV8QuranAudioLaunch" aria-label="Qurʾān-Player öffnen">Player öffnen ↗</button></section>'+
    '<section class="quran-reading-zone section parchment reveal">'+smartSearchHtml("bookQuranSearch","Sūrah, Āyah (z. B. 2:255) oder Begriff suchen …","bookQuranSearchStatus")+
    '<div class="toolbar"><button class="tool active" type="button">Buchansicht</button><button class="tool" type="button">Arabisch + Deutsch</button><button class="tool" type="button">Lautschrift</button><button class="tool" type="button">Tafsīr</button><button class="tool" type="button">Tadabbur</button></div>'+
    '<div class="quran-layout"><aside class="sidebar quran-sidebar"><div class="side-title">Sūrah auswählen</div><nav class="side-nav quran-surah-nav" id="bookSurahNav"><span style="font-size:10px;color:#8b8275">Sūrah-Verzeichnis wird geladen …</span></nav></aside>'+
