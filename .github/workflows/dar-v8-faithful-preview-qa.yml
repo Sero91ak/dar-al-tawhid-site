@@ -83,6 +83,43 @@ jobs:
                 raise RuntimeError('Desktop must show V8 sidebar and topbar')
               if name!='desktop' and state['sidebar']!='none':
                 raise RuntimeError('Existing mobile navigation must not be replaced')
+            # Regression: every public V8 navigation route must display its own V8 content.
+            driver.set_window_size(1440,900)
+            for route in ('quran','beitraege','hadith','bibliothek','frauen','wissen','suche','dua','gebetszeiten','mehr','quiz'):
+              driver.get('http://127.0.0.1:8765/__v8_visual_test/index.html?page='+route)
+              WebDriverWait(driver,35).until(lambda d: len(d.find_elements(By.CSS_SELECTOR,'.dar-v8-route-hero'))>0)
+              data=driver.execute_script('''return {route:document.body.dataset.v8Route,hero:document.querySelector('.dar-v8-route-hero h1')?.textContent,root:document.getElementById('pageRoot')?.textContent?.length||0,overflow:document.documentElement.scrollWidth-innerWidth}''')
+              print('route',route,data,flush=True)
+              if not data['hero'] or data['root']<150 or data['overflow']>4:raise RuntimeError('Incomplete V8 route: '+route+' '+str(data))
+              if route=='gebetszeiten':
+                if not driver.find_elements(By.ID,'darV8PrayerOverview'): raise RuntimeError('Gebetszeiten reverted to old route')
+                if len(driver.find_elements(By.CSS_SELECTOR,'[data-v8-copy-prayer]'))!=5:raise RuntimeError('Missing V8 prayer detail times')
+              if route=='hadith' and not driver.find_elements(By.ID,'darV8HadithQuery'):raise RuntimeError('Missing V8 hadith search')
+              if route=='suche' and not driver.find_elements(By.ID,'darV8ChatForm'):raise RuntimeError('Missing interactive V8 question form')
+              if route=='quran':
+                el=driver.find_element(By.ID,'quranAudioPlayer')
+                if not el.is_displayed():raise RuntimeError('Quran route audio player hidden')
+                driver.find_element(By.ID,'darV8PlayerExpand').click()
+                display=driver.execute_script("return getComputedStyle(document.getElementById('darV8PlayerControls')).display")
+                if display=='none':raise RuntimeError('Quran route player expand broken')
+                driver.save_screenshot('/tmp/v8-faithful-shots/desktop-quran-open.png')
+            # Mobile V8 navigation and its functional More sheet.
+            driver.set_window_size(393,844)
+            driver.get('http://127.0.0.1:8765/__v8_visual_test/index.html?page=start')
+            WebDriverWait(driver,35).until(lambda d: d.find_element(By.ID,'darV8MobileDock').is_displayed())
+            driver.find_element(By.ID,'darV8MoreToggle').click()
+            sheet=driver.find_element(By.ID,'darV8MoreSheet')
+            if not sheet.is_displayed():raise RuntimeError('V8 More sheet did not open on smartphone')
+            driver.save_screenshot('/tmp/v8-faithful-shots/iphone-more-open.png')
+            sheet.find_element(By.CSS_SELECTOR,'[data-page="gebetszeiten"]').click()
+            WebDriverWait(driver,20).until(lambda d: len(d.find_elements(By.ID,'darV8PrayerOverview'))>0)
+            driver.save_screenshot('/tmp/v8-faithful-shots/iphone-prayer-open.png')
+            driver.find_element(By.CSS_SELECTOR,'#darV8MobileDock [data-page="quran"]').click()
+            WebDriverWait(driver,20).until(lambda d: d.find_element(By.ID,'quranAudioPlayer').is_displayed())
+            driver.find_element(By.ID,'darV8PlayerExpand').click()
+            if driver.execute_script("return getComputedStyle(document.getElementById('darV8PlayerControls')).display")=='none':raise RuntimeError('Mobile Quran player expand broken')
+            driver.save_screenshot('/tmp/v8-faithful-shots/iphone-quran-expanded.png')
+            print('V8 public route and mobile interaction regression PASS',flush=True)
           finally:driver.quit()
           PY
       - name: Archive screenshots for design comparison
