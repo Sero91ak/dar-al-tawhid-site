@@ -12,6 +12,7 @@ from collections import Counter
 from pathlib import Path
 from import_quiz_v4_prepaid_flow_originals import original_metadata
 from quiz_v4_quarantine import quarantined_originals
+from quiz_v4_native_fusha_reuse import load_mapping, expand_slot
 
 ROOT=Path(__file__).resolve().parents[2]
 PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
@@ -91,6 +92,7 @@ def main():
     blocked_texts,blocked_generations=quarantined_originals(ROOT)
     original={text:media for text,media in registry["textClips"].items()
               if text not in blocked_texts}
+    native_mixed_mapping, native_master_assets=load_mapping(ROOT)
     paid_known={q["questionId"]:q for q in old["items"]}
     if len(old["items"])!=20:raise RuntimeError("Previously paid 20 originals disappeared")
     all_paid_ids={take["generationId"] for q in old["items"] for take in q["recordings"]}
@@ -145,21 +147,23 @@ def main():
             if part["mode"]!="compose-from-segments" or " ".join(part["segments"])!=text:
                 raise RuntimeError("Broken V4 utterance contract")
             segments=part["segments"]
-            unavailable=[segment for segment in segments if segment not in original]
+            matched_originals,matched_pauses,unavailable=expand_slot(
+                part,original,native_mixed_mapping,native_master_assets)
             if unavailable:
                 for segment in unavailable:
                     missing.add(segment);missing_used[segment]+=1
                 reasons[kind]="earlier-paid-original-flow-fragments-not-imported"
                 continue
             if text not in text_audio:
-                clips=[source_mp3(original[s]) for s in segments]
+                clips=[source_mp3(row) for row in matched_originals]
                 key=hsum((VOICE+"|"+MODEL+"|"+text+"|"+
-                    json.dumps(part.get("pauseAfterMs",[]))).encode())[:32]
+                    json.dumps(part.get("pauseAfterMs",[]))+("|mixedSHA:"+
+                    json.dumps([hashfile(c) for c in clips]) if len(clips)!=len(segments) else "")).encode())[:32]
                 target=OUT/(key+".mp3")
                 if len(clips)==1:
                     composed=clips[0]
                 else:
-                    if not target.is_file():assemble(clips,part.get("pauseAfterMs") or [240]*(len(clips)-1),target)
+                    if not target.is_file():assemble(clips,matched_pauses,target)
                     composed=target
                 source_mp3({"url":"/"+str(composed.relative_to(ROOT)),
                             "sha256":hashfile(composed),"voiceId":VOICE,"modelId":MODEL})
