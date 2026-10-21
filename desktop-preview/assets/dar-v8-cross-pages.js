@@ -108,14 +108,23 @@ function hadithPage(){
   if(!box.isConnected)return;rows=Array.isArray(data)?data.filter(x=>x.germanStatus==="verified"&&x.id&&x.german):[];hadithCache=rows;render()
  }).catch(()=>{if(box.isConnected)box.textContent="Die Ḥadīṯ-Suchliste ist momentan nicht erreichbar. Die übrigen Bereiche bleiben verfügbar."});
 }
+function decorateMore(){
+ for(const a of d.querySelectorAll("#pageRoot .more-row")){
+  if(a.dataset.v8IconReady)return;
+  const route=new URL(a.href,location.href).searchParams.get("page")||"more";
+  const art=pages[route]?.icon||"more";a.insertBefore(icon(art,"v8-more-3d"),a.firstChild);a.dataset.v8IconReady="true";
+ }
+}
 function onRendered(key=current()){
  syncNav(key);if(key!=="start")decorateHero(key);
+ if(key==="mehr")decorateMore();
  if(key==="suche")setChat();
  if(key==="hadith")hadithPage();
  const dockEl=d.getElementById("darV8MobileDock");if(dockEl)dockEl.setAttribute("aria-label","Hauptnavigation · "+(pages[key]?.label||"Start"));
 }
 function boot(){
  buildNavigation();onRendered();
+ const topAudio=d.getElementById("darV8TopAudio");if(topAudio)topAudio.addEventListener("click",()=>d.body.classList.toggle("v8-show-player"),true);
  const root=d.getElementById("pageRoot");
  if(root){const watch=new MutationObserver(()=>{const key=current();onRendered(key)});watch.observe(root,{childList:true,subtree:false})}
  w.addEventListener("popstate",()=>onRendered());
