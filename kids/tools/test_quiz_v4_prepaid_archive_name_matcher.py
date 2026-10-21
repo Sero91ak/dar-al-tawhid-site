@@ -10,6 +10,7 @@ import json
 from pathlib import Path
 from recover_quiz_v4_nine_from_github_action_archives import (
     original_id_from_export_name, sample_historical_archives,
+    disjoint_second_pass_samples, SECOND_PASS_SAMPLES_PER_NAME,
     MAX_SAMPLES_PER_NAME, ROOT)
 
 def main():
@@ -40,6 +41,15 @@ def main():
     assert len({x["id"] for x in spread})==6
     assert len([x for x in spread if 20<=x["id"]<=80])>=3
     assert sample_historical_archives([])==[]
+    # Second pass looks only at unseen archive identities. Old results retain
+    # their identifiers and are neither fabricated nor silently replaced.
+    more=disjoint_second_pass_samples(hundred)
+    assert len(more)==SECOND_PASS_SAMPLES_PER_NAME==16
+    assert not ({a["id"] for a in more} & {a["id"] for a in spread})
+    assert len({a["id"] for a in more})==16
+    assert disjoint_second_pass_samples([])==[]
+    assert len(disjoint_second_pass_samples(hundred[:5]))==0
+
     assert [x["id"] for x in sample_historical_archives(hundred[:3])]==[0,1,2]
     # Each named source family gets a bounded representative group, never
     # an entire 48-item quota solely from its newest snapshots.
