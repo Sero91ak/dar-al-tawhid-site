@@ -12,6 +12,7 @@ on:
       - 'test/i18n/audit-visible-title-coverage.cjs'
       - 'test/i18n/audit-nonpost-content-coverage.cjs'
       - 'test/i18n/audit-captured-ui.cjs'
+      - 'test/i18n/test-all-routes-seven.py'
       - 'test/assets/dar-adult-central-content.js'
       - 'test/i18n/adult-visible-title-drafts-seven.json'
       - 'test/assets/dar-test-turkish-ui.js'
@@ -77,6 +78,8 @@ jobs:
       - name: Verify all language pickers and RTL in Chromium
         run: python3 test/i18n/test-seven-browser-smoke.py
 
+      - name: Verify all 15 SPA routes across seven languages and RTL
+        run: python3 test/i18n/test-all-routes-seven.py
       - name: Capture 15 DAR TEST section UI inventories
         run: python3 test/i18n/capture-visible-ui.py
       - name: Audit actual UI labels across fifteen sections
