@@ -53,7 +53,8 @@ for(const locale of EXPECTED){
  assert.equal(doc.documentElement.dir,["ar","ckb"].includes(locale)?"rtl":"ltr");
  if(locale==="en") assert(/Wednesday|October/.test(weekday.nodeValue),"Calendar month/day not localized");
 }
-assert.equal(weekday.nodeValue,"Mittwoch, 21. Oktober 2026".replace(/Mittwoch|Oktober/g,x=>x),"calendar failed to restore German");
+lng="de";runtime.apply();
+assert.equal(weekday.nodeValue,"Mittwoch, 21. Oktober 2026","calendar failed to restore German");
 assert.equal(runtime.formatCalendarDate("2026-10-21T12:00:00Z","en",{weekday:"long",timeZone:"UTC"}),"Wednesday");
 assert(runtime.translatePrayerName("Maghrib","en")==="Maghrib");
 assert(runtime.translatePrayerName("Maghrib","tr")==="Akşam");
