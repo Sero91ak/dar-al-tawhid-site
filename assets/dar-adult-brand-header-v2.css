@@ -43,3 +43,80 @@ html.dar-adult-global-brand-ready body.is-home-route .top-shell{margin-top:0!imp
 html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #headerPrayerStatus{margin-top:0!important}
 @media(max-width:390px){#darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(17px,5.35vw,22px)!important}#darAdultBrandHeaderV2 .dtbh-tagline{font-size:clamp(8.5px,2.25vw,10px)!important}}
 @media(min-width:720px){#darAdultBrandHeaderV2 .dtbh-logo{width:64px!important;height:64px!important;flex-basis:64px!important}#darAdultBrandHeaderV2 .dtbh-name{font-size:27px!important}}
+
+
+/* DAR_ADULT_BRAND_PRAYER_START_V3 · remove duplicate home brand, compact to iOS Safe Area. */
+#darAdultBrandHeaderV2{
+  padding-top:env(safe-area-inset-top,0px)!important;
+  padding-bottom:4px!important;
+  padding-inline-start:max(11px,env(safe-area-inset-left,0px))!important;
+  padding-inline-end:max(11px,env(safe-area-inset-right,0px))!important;
+}
+#darAdultBrandHeaderV2 .dtbh-row{min-height:53px!important;gap:9px!important}
+#darAdultBrandHeaderV2 .dtbh-logo{
+  width:clamp(49px,13.5vw,54px)!important;
+  height:clamp(49px,13.5vw,54px)!important;
+  flex:0 0 clamp(49px,13.5vw,54px)!important;
+}
+#darAdultBrandHeaderV2 .dtbh-copy{gap:3px!important;min-width:0!important}
+#darAdultBrandHeaderV2 .dtbh-tagline{
+  display:block!important;order:0!important;
+  font-size:clamp(9px,2.45vw,11px)!important;
+  line-height:1.25!important;letter-spacing:0!important;
+  font-weight:750!important;text-transform:none!important;
+  white-space:normal!important;
+}
+#darAdultBrandHeaderV2 .dtbh-name{
+  display:block!important;order:1!important;
+  font-size:clamp(17px,5.05vw,25px)!important;
+  font-weight:800!important;line-height:1.1!important;
+  letter-spacing:0!important;white-space:nowrap!important;
+}
+#darAdultBrandHeaderV2 .dtbh-toggle{
+  width:43px!important;height:43px!important;
+  flex:0 0 43px!important;
+  border-radius:13px!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header :is(.header-row--brand-only,.dar-v47-leadin),
+html.dar-adult-global-brand-ready.dar-home-v47-layout.dar-home-v1194 body.is-home-route .top-shell .header :is(.header-row--brand-only,.dar-v47-leadin){
+  display:none!important;visibility:hidden!important;
+  height:0!important;min-height:0!important;
+  max-height:0!important;margin:0!important;padding:0!important;
+  border:0!important;overflow:hidden!important;
+  order:-99!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell,
+html.dar-adult-global-brand-ready.dar-home-v47-layout.dar-home-v1194 body.is-home-route .top-shell{
+  padding-top:0!important;margin-top:0!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header,
+html.dar-adult-global-brand-ready.dar-home-v47-layout.dar-home-v1194 body.is-home-route .top-shell .header{
+  padding-top:0!important;margin-top:0!important;
+  gap:0!important;min-height:0!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #headerPrayerStatus,
+html.dar-adult-global-brand-ready.dar-home-v47-layout.dar-home-v1194 body.is-home-route .top-shell .header #headerPrayerStatus.header-prayer-hub{
+  order:-100!important;
+  margin-top:0!important;
+  position:relative!important;
+  top:auto!important;bottom:auto!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #dv3HeaderActions{
+  display:none!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad{
+  margin-top:8px!important;
+}
+@media(min-width:720px){
+  #darAdultBrandHeaderV2 .dtbh-row{min-height:56px!important}
+  #darAdultBrandHeaderV2 .dtbh-logo{width:56px!important;height:56px!important;flex:0 0 56px!important}
+  #darAdultBrandHeaderV2 .dtbh-name{font-size:26px!important}
+  #darAdultBrandHeaderV2 .dtbh-tagline{font-size:11px!important}
+}
+@media(max-width:359px){
+  #darAdultBrandHeaderV2 .dtbh-row{gap:6px!important}
+  #darAdultBrandHeaderV2 .dtbh-logo{width:44px!important;height:44px!important;flex-basis:44px!important}
+  #darAdultBrandHeaderV2 .dtbh-toggle{width:40px!important;height:40px!important;flex-basis:40px!important}
+  #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(15px,4.9vw,19px)!important}
+  #darAdultBrandHeaderV2 .dtbh-tagline{font-size:9px!important}
+}
