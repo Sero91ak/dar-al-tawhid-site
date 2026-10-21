@@ -151,6 +151,13 @@ def original_mp3(key,spoken,*,language="de"):
             "no charged V4 generation until a verified and personally accepted "
             "auditory pilot plus fresh owner authorization"
         )
+    # Fail closed for any Quran reference, Arabic script, or phonetically
+    # rejected source even if a caller bypasses the batch planner.
+    if source_requires_separate_pronunciation_approval(spoken):
+        raise RuntimeError(
+            "OWNER_PRONUNCIATION_SOURCE_REVIEW_REQUIRED: Quran/Arabic audio "
+            "cannot be purchased from the unapproved German alias pipeline"
+        )
     # This is the common paid HTTP POST used by multiple old workflows.
     # NO workflow may quietly render 20+ new takes while the first correctly
     # dictionary-bound recording still awaits the user's hearing verdict.
