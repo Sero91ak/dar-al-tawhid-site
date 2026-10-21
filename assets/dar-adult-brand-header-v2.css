@@ -120,3 +120,95 @@ html.dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad{
   #darAdultBrandHeaderV2 .dtbh-name{font-size:clamp(15px,4.9vw,19px)!important}
   #darAdultBrandHeaderV2 .dtbh-tagline{font-size:9px!important}
 }
+
+
+/* ADULT_BRAND_COMPACT_TOP_V3_20261021
+ * Actual V4.7 / V4.8 duplicate: #darHomeV47Leadin + .header-row--brand-only.
+ * Keep the original native prayer DOM and its live updater.
+ * No extra scroll container, no gesture interception, no changes to status-bar pixels. */
+@media(max-width:699px){
+  #darAdultBrandHeaderV2{
+    padding-top:max(env(safe-area-inset-top,0px),var(--dar-native-safe-top,0px))!important;
+    padding-bottom:4px!important;
+    padding-inline:clamp(10px,3vw,14px)!important;
+    min-height:0!important;
+  }
+  #darAdultBrandHeaderV2 .dtbh-row{
+    display:grid!important;
+    grid-template-columns:42px minmax(0,1fr) 42px!important;
+    grid-template-rows:auto 42px!important;
+    align-items:center!important;
+    gap:3px 9px!important;
+    min-height:0!important;
+    max-width:100%!important;
+  }
+  #darAdultBrandHeaderV2 .dtbh-copy{display:contents!important}
+  #darAdultBrandHeaderV2 .dtbh-tagline{
+    grid-column:1 / -1!important;grid-row:1!important;
+    display:block!important;
+    min-width:0!important;
+    margin:0 0 1px!important;
+    padding:0!important;
+    width:auto!important;
+    font:750 clamp(9px,2.65vw,11px)/1.22 system-ui,-apple-system,sans-serif!important;
+    letter-spacing:0!important;
+    text-transform:none!important;
+    color:var(--dtbh-muted)!important;
+    -webkit-text-fill-color:var(--dtbh-muted)!important;
+    opacity:1!important;
+    visibility:visible!important;
+    white-space:nowrap!important;
+  }
+  #darAdultBrandHeaderV2 .dtbh-logo{
+    grid-row:2!important;grid-column:1!important;
+    width:42px!important;height:42px!important;
+    flex:0 0 42px!important;
+    object-fit:contain!important;
+  }
+  #darAdultBrandHeaderV2 .dtbh-name{
+    grid-row:2!important;grid-column:2!important;
+    margin:0!important;
+    font:750 clamp(18px,5.4vw,24px)/1.08 Georgia,"Iowan Old Style",serif!important;
+    letter-spacing:-.025em!important;
+    white-space:nowrap!important;
+  }
+  #darAdultBrandHeaderV2 .dtbh-toggle{
+    grid-row:2!important;grid-column:3!important;
+    width:40px!important;height:40px!important;
+    flex:0 0 40px!important;
+    border-radius:12px!important;
+  }
+}
+@media(min-width:700px){
+  #darAdultBrandHeaderV2{padding-bottom:8px!important}
+  #darAdultBrandHeaderV2 .dtbh-logo{width:46px!important;height:46px!important;flex-basis:46px!important}
+  #darAdultBrandHeaderV2 .dtbh-copy{display:flex!important;flex-direction:column!important;gap:3px!important}
+  #darAdultBrandHeaderV2 .dtbh-tagline{order:0!important;display:block!important;visibility:visible!important}
+  #darAdultBrandHeaderV2 .dtbh-name{order:1!important;font-size:24px!important}
+  #darAdultBrandHeaderV2 .dtbh-row{min-height:48px!important}
+}
+html:has(#darAdultBrandHeaderV2) body.is-home-route .top-shell .header > #darHomeV47Leadin,
+html:has(#darAdultBrandHeaderV2) body.is-home-route .top-shell .header > .dar-v47-leadin,
+html:has(#darAdultBrandHeaderV2) body.is-home-route .top-shell .header .header-row--brand-only{
+ display:none!important;
+ visibility:hidden!important;
+ max-height:0!important;height:0!important;min-height:0!important;
+ margin:0!important;padding:0!important;border:0!important;
+ overflow:hidden!important;
+}
+html:has(#darAdultBrandHeaderV2) body.is-home-route .top-shell{
+ padding-top:0!important;margin-top:0!important;
+}
+html:has(#darAdultBrandHeaderV2) body.is-home-route .top-shell .header{
+ padding-top:0!important;
+ min-height:0!important;
+ margin-top:0!important;
+ row-gap:0!important;
+}
+html:has(#darAdultBrandHeaderV2) body.is-home-route .top-shell .header #headerPrayerStatus.header-prayer-hub{
+ order:-10!important;
+ margin-top:4px!important;
+}
+html:has(#darAdultBrandHeaderV2) body.is-home-route .top-shell .header .hero-text{
+ display:none!important;
+}
