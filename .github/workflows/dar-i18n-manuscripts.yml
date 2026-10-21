@@ -55,10 +55,13 @@ jobs:
           set -euo pipefail
           if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
             branch="i18n/manuscripts-${GITHUB_SHA:0:12}"
-            if gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/${branch}" >/dev/null 2>&1; then
+            if status="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/${branch}" 2>&1)"; then
               echo "skip=true" >> "$GITHUB_OUTPUT"
               echo "Sprachmanuskripte für diesen Commit sind bereits in einem Review-Branch gespeichert." >> "$GITHUB_STEP_SUMMARY"
               exit 0
+            elif ! grep -q "HTTP 404" <<< "$status"; then
+              echo "GitHub-Zustand unklar: zum Schutz vor Doppelabrechnung kein Modellaufruf." >&2
+              exit 1
             fi
           fi
           echo "skip=false" >> "$GITHUB_OUTPUT"
