@@ -14,6 +14,7 @@ from pathlib import Path
 
 from quiz_v4_first150_offline_join import assemble, hashfile, probe, source_mp3
 from quiz_v4_quarantine import quarantined_originals
+from quiz_v4_native_fusha_reuse import load_mapping, expand_slot
 
 ROOT = Path(__file__).resolve().parents[2]
 PLAN = ROOT / "kids/data/quiz-v4-curated-450-production-review.json"
@@ -66,6 +67,7 @@ def main():
                if text not in blocked_texts}
     generation={gid:audio for gid,audio in registry["generationClips"].items()
                 if gid not in blocked_generations}
+    mixed_mapping,native_assets=load_mapping(ROOT)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     # Strict source audio verification is cached only within this invocation.
     verified_source = {}
@@ -107,10 +109,9 @@ def main():
                     segments = part["segments"]
                     if not isinstance(segments, list) or not segments or " ".join(segments) != text:
                         raise RuntimeError("V4 segmented utterance text is not exact")
-                    pauses = checked_pauses(part, segments)
-                    missing = [s for s in segments if s not in originals]
+                    matched,pauses,missing=expand_slot(part,originals,mixed_mapping,native_assets)
                     if not missing:
-                        original_paths = [source(originals[s]) for s in segments]
+                        original_paths=[source(r) for r in matched]
                 else:
                     raise RuntimeError("Unrecognized V4 part mode")
                 if missing:
@@ -126,6 +127,8 @@ def main():
                     token = digest(json.dumps({
                         "voice": VOICE, "model": MODEL,
                         "segments": part["segments"], "pauseAfterMs": pauses,
+                        "joinedSourceShas": [hashfile(p) for p in original_paths]
+                            if len(original_paths)!=len(part["segments"]) else [],
                     }, ensure_ascii=False, sort_keys=True))
                     mp3 = OUTPUT_DIR / (token[:40] + ".mp3")
                     if not mp3.is_file():
