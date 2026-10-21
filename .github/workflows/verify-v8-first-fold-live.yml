@@ -65,6 +65,18 @@ jobs:
               time.sleep(.35)
               driver.save_screenshot("/tmp/dar-v8-live/"+label+"-finder.png")
               print(label,state,flush=True)
+              if label=="desktop":
+                field=driver.find_element(By.ID,"darV8FinderQuery")
+                field.clear()
+                field.send_keys("Tawḥīd")
+                driver.find_element(By.CSS_SELECTOR,"#darV8FinderForm button[type=submit]").click()
+                WebDriverWait(driver,20).until(lambda d: "page=suche" in d.current_url)
+                WebDriverWait(driver,20).until(lambda d: len(d.find_elements(By.CSS_SELECTOR,"#searchResults .list-row"))>0)
+                rowcount=len(driver.find_elements(By.CSS_SELECTOR,"#searchResults .list-row"))
+                if rowcount<1: raise RuntimeError("Knowledge search found no website sources")
+                driver.save_screenshot("/tmp/dar-v8-live/desktop-search-results.png")
+                print("knowledge_search",{"query":"Tawḥīd","results":rowcount,"url":driver.current_url},flush=True)
+              
               print('browser_console',driver.get_log('browser')[-12:],flush=True)
               if state['display']=='none' or state['opacity']=='0' or not state['visible'] or not state['order'] or not state['home'] or not state['finder'] or state['terms']<3 or not state['daily'] or not state['books']: failed.append(label)
             if failed: raise RuntimeError('V8 welcome not rendered for: '+','.join(failed))
