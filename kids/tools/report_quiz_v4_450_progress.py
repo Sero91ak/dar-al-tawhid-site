@@ -9,6 +9,7 @@ import hashlib
 from collections import Counter
 from pathlib import Path
 from quiz_v4_quarantine import quarantined_originals
+from quiz_v4_native_fusha_reuse import load_mapping, expand_slot
 
 ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/"kids/data/quiz-v4-450-production-status.json"
@@ -80,13 +81,18 @@ def main():
     available=set(clips)-blocked_texts
     good={t for t,v in clips.items() if t in available and v.get("audioListeningApproved") is True}
     paid_gen={gid:v for gid,v in verified["generationClips"].items() if gid not in blocked_ids}
+    mixed_mapping,native_assets=load_mapping(ROOT)
+    eligible_for_count={text:row for text,row in clips.items() if text in available}
+    eligible_for_hearing={text:row for text,row in clips.items() if text in good}
     def available_slot(row,kind,human=False):
         x=row[kind]
         if x["mode"]=="existing-paid-exact":
             clip=paid_gen.get(x["generationId"])
             return isinstance(clip,dict) and (not human or clip.get("audioListeningApproved") is True)
         if x["mode"]!="compose-from-segments":raise RuntimeError("Unsupported V4 contract")
-        return all((t in good if human else t in available) for t in x["segments"])
+        originals=eligible_for_hearing if human else eligible_for_count
+        _parts,_pauses,missing=expand_slot(x,originals,mixed_mapping,native_assets)
+        return not missing
     counts={}
     for age in ("4-6","7-8","9-10"):
         rows=[q for q in planned["recipes"] if q["ageBand"]==age]
@@ -110,6 +116,8 @@ def main():
         "priorPaidFlowOriginalCount":56,
         "priorPaidFlowOriginalsNotRecovered":max(0,56-len(verified["generationClips"])),
         "quarantinedOriginalsStoredButNotPlayable":len(set(clips)&blocked_texts),
+        "nativeArabicSharedOriginalCount":len(native_assets),
+        "mixedGermanArabicCanonicalSourceCount":len(mixed_mapping),
         "savedMP3TechnicallyAudited":qa.get("savedClipCount",0)
            if qa.get("overallTechnicalPass") else 0,
         "savedMP3HumanListeningApproved":len(good),
