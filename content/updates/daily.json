@@ -1,38 +1,20 @@
 {
-  "date": "2026-10-21",
+  "date": "2026-10-22",
   "timezone": "Europe/Berlin",
-  "generated": "2026-10-20T22:00:58.138Z",
+  "generated": "2026-10-21T22:00:30.777Z",
   "source": "dar-daily-no-repeat-rotation",
   "recommendation": {
-    "id": "athar-widerlegung-qadar-wird-nicht-mit-meinung-bestritten-304",
-    "title": "Athar-Widerlegung: Qadar wird nicht mit Meinung bestritten",
-    "file": "athar-widerlegung-qadar-wird-nicht-mit-meinung-bestritten-304.md",
-    "category": "Widerlegung",
-    "scholar": "Ibn ʿUmar",
-    "snippet": "„Ibn ʿUmar distanzierte sich von denjenigen, die den Qadar leugneten, und sagte sinngemäß: Wenn einer von ihnen Gold wie Uḥud spenden würde, würde Allah es nicht annehmen, bis er an den Qadar glaubt.“"
+    "id": "aishah-scham-darf-nicht-vom-wissen-abhalten-450",
+    "title": "Die Scham darf dich nicht vom Wissen abhalten",
+    "file": "aussagen-der-sahabiyyat-450-die-scham-darf-dich-nicht-vom-wissen-abhal.md",
+    "category": "Aussagen der Ṣaḥābiyyāt",
+    "scholar": "ʿĀʾishah رضي الله عنها",
+    "snippet": "🖋️ ʿĀʾishah رضي الله عنها sagte:"
   },
   "dua": {
-    "id": "dua-004-ighfir-dhunubana",
-    "title": "Duʿāʾ um Vergebung der Sünden und Festigkeit",
-    "snippet": "Unser Herr, vergib uns unsere Sünden und unser Übermaß in unserer Angelegenheit und festige unsere Schritte.",
+    "id": "dua-005-faghfir-lana",
+    "title": "Vergib uns und erbarme Dich unser",
+    "snippet": "Unser Herr, wir glauben, so vergib uns und erbarme Dich unser, denn Du bist der Beste der Barmherzigen.",
     "category": "Vergebung"
-  },
-  "rotation": {
-    "recommendation": {
-      "cycle": 0,
-      "poolSize": 480,
-      "remaining": 444
-    },
-    "dua": {
-      "cycle": 0,
-      "poolSize": 97,
-      "remaining": 62,
-      "sources": {
-        "markdown": 97,
-        "total": 97,
-        "poolSize": 97,
-        "canonicalSource": "content/duas/dua-*.md"
-      }
-    }
   }
 }
