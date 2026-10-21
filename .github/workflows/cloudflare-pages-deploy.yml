@@ -580,6 +580,11 @@ jobs:
           grep -F -q 'HISTORICAL_SHARE_FALLBACKS' "$SHARE_JS" || { echo "::error::Historischer Bildbeitrag-Fallback live fehlt"; exit 1; }
           echo "Live Bildbeitrag-Renderer: Syntax + historischer Fix OK"
 
+      - name: Apple-TV-Bildschirmschoner-Livequellen prüfen
+        env:
+          SITE_URL: "https://dar-al-tawhid.de"
+        run: node scripts/verify-apple-tv-live.js
+
       - name: Notfall-Rollback bei kaputtem Live-Deploy
         if: ${{ failure() && steps.publish.outcome == 'success' }}
         shell: bash

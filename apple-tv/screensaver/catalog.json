@@ -24,7 +24,7 @@
   "lastUpdated": "2026-10-21T11:19:53.834Z",
   "entriesIndexPath": "entries-index.json",
   "entriesPaths": [
-    "rotation.json"
+    "../hadith/library-shell.json"
   ],
   "rotationConfigPath": "rotation.json",
   "contentSource": {
@@ -56,5 +56,7 @@
     "enabled": true,
     "text": "Der Bildschirmschoner-Inhalt ist derzeit nicht verfügbar."
   },
-  "contentRevision": "24633a2f3ba2c8f7b18bf52b"
+  "contentRevision": "24633a2f3ba2c8f7b18bf52b",
+  "entriesCollectionKey": "records",
+  "entriesSourceRule": "Screensaver records are loaded from the canonical Hadith/Āṯār library-shell; rotation.json contains only shuffle rules, never screen entries."
 }
