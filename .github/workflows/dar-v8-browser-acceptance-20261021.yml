@@ -114,7 +114,9 @@ jobs:
               else:
                 driver.find_element(By.CSS_SELECTOR,'.dar-v8-top-search').click()
                 WebDriverWait(driver,25).until(lambda d:d.execute_script('return document.body.dataset.darV8Route==="suche"'))
-              driver.find_element(By.CSS_SELECTOR,'[data-v8-ask="Was ist Tawḥīd?"]').click()
+              chip=driver.find_element(By.CSS_SELECTOR,'[data-v8-ask="Was ist Tawḥīd?"]')
+              driver.execute_script("arguments[0].scrollIntoView({block:'center',inline:'nearest',behavior:'instant'})",chip)
+              chip.click()
               answer=driver.execute_script("return !!document.querySelector('#darV8ChatSummary strong') && document.getElementById('siteSearch').value.length>0")
               if not answer:raise RuntimeError('Source chat examples not wired')
             print('PASS: all 36 route/device configurations, navigation, More, player and source chat')
