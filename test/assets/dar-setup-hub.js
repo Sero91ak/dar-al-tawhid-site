@@ -240,6 +240,11 @@
   }
 
   function ensureCss() {
+    if (!document.getElementById("dar-test-settings-locale-css")) {
+      var newStyle=document.createElement("style");newStyle.id="dar-test-settings-locale-css";
+      newStyle.textContent='.dar-setup-hub__locale-row{gap:12px;flex-wrap:wrap}.dar-setup-hub__locale-choices{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.dar-setup-hub__locale-choices button{min-height:42px;padding:9px 13px;border:1px solid color-mix(in srgb,currentColor 25%,transparent);border-radius:999px;background:transparent;color:inherit;font:600 12px system-ui,-apple-system,sans-serif;cursor:pointer}.dar-setup-hub__locale-choices button[aria-pressed="true"]{border-color:var(--gold,#bba273);background:color-mix(in srgb,var(--gold,#bba273) 13%,transparent)}.dar-setup-hub__locale-choices button:focus-visible{outline:2px solid var(--gold,#bba273);outline-offset:3px}';
+      document.head.appendChild(newStyle);
+    }
     if (document.querySelector('link[href*="dar-setup-hub.css"]') || document.getElementById("dar-setup-hub-style-link")) return;
     var link = document.createElement("link");
     link.id = "dar-setup-hub-style-link";
@@ -247,11 +252,7 @@
     var base = location.pathname.indexOf("/test/") === 0 ? "/test/assets/" : "/assets/";
     link.href = base + "dar-setup-hub.css?v=8";
     document.head.appendChild(link);
-    if (!document.getElementById("dar-test-settings-locale-css")) {
-      var style=document.createElement("style");style.id="dar-test-settings-locale-css";
-      style.textContent='.dar-setup-hub__locale-row{gap:12px;flex-wrap:wrap}.dar-setup-hub__locale-choices{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.dar-setup-hub__locale-choices button{min-height:42px;padding:9px 13px;border:1px solid color-mix(in srgb,currentColor 25%,transparent);border-radius:999px;background:transparent;color:inherit;font:600 12px system-ui,-apple-system,sans-serif;cursor:pointer}.dar-setup-hub__locale-choices button[aria-pressed="true"]{border-color:var(--gold,#bba273);background:color-mix(in srgb,var(--gold,#bba273) 13%,transparent)}.dar-setup-hub__locale-choices button:focus-visible{outline:2px solid var(--gold,#bba273);outline-offset:3px}';
-      document.head.appendChild(style);
-    }
+
   }
 
   function mountIntoSettings() {
