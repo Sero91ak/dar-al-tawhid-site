@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "kind": "adult-canonical-post-language-index",
+  "contentId": "post:hasan-al-basri-selbstpruefung-20261021-481",
+  "postId": "hasan-al-basri-selbstpruefung-20261021-481",
+  "canonicalLocale": "de",
+  "canonicalPath": "/content/posts/hasan-al-basri-selbstpruefung-20261021-481.md",
+  "sourceId": "qsource:48",
+  "sourcePath": "/q/48/",
+  "sourceHash": "1b23c06f80e027d53c1bb33c91b7f6ae4ba36bd0f43f8ca900fff4dcb215a0d0",
+  "qsourceHash": "c6e8be18457b6990e810b52565a200914cdb483cfb53bb27cbfba257a121f044",
+  "sourceHashPolicy": "expected canonical fingerprint when post becomes published and is included in posts-index; draft publication is blocked",
+  "supportedLocales": [
+    "de",
+    "ar",
+    "en",
+    "tr",
+    "ku",
+    "ckb",
+    "bs"
+  ],
+  "status": "draft-awaiting-editorial-approval",
+  "kidsExcluded": true,
+  "globalAdultIntegration": "not-connected-to-production-locale-readers",
+  "policy": "No public localized article until the source and each target locale pass independent linguistic/religious review; no 99.9-percent accuracy claim without a measured audit",
+  "languages": {
+    "de": {
+      "name": "Deutsch",
+      "status": "original-draft",
+      "publicDisplayAllowed": false,
+      "path": "/content/posts/hasan-al-basri-selbstpruefung-20261021-481.md",
+      "review": "pending-article-publication"
+    },
+    "ar": {
+      "name": "العربية الفصحى",
+      "status": "draft",
+      "publicDisplayAllowed": false,
+      "path": "/desktop-preview/i18n-core-v1/translations/ar/post/hasan-al-basri-selbstpruefung-20261021-481-074b61b8f8.json",
+      "qsourcePath": "/desktop-preview/i18n-core-v1/translations/ar/qsource/48-d8b2f9ad92.json",
+      "review": "independent-linguistic-and-religious-review-required"
+    },
+    "en": {
+      "name": "English",
+      "status": "draft",
+      "publicDisplayAllowed": false,
+      "path": "/desktop-preview/i18n-core-v1/translations/en/post/hasan-al-basri-selbstpruefung-20261021-481-074b61b8f8.json",
+      "qsourcePath": "/desktop-preview/i18n-core-v1/translations/en/qsource/48-d8b2f9ad92.json",
+      "review": "independent-linguistic-and-religious-review-required"
+    },
+    "tr": {
+      "name": "Türkçe",
+      "status": "draft",
+      "publicDisplayAllowed": false,
+      "path": "/desktop-preview/i18n-core-v1/translations/tr/post/hasan-al-basri-selbstpruefung-20261021-481-074b61b8f8.json",
+      "qsourcePath": "/desktop-preview/i18n-core-v1/translations/tr/qsource/48-d8b2f9ad92.json",
+      "review": "independent-linguistic-and-religious-review-required"
+    },
+    "ku": {
+      "name": "Kurmancî",
+      "status": "draft",
+      "publicDisplayAllowed": false,
+      "path": "/desktop-preview/i18n-core-v1/translations/ku/post/hasan-al-basri-selbstpruefung-20261021-481-074b61b8f8.json",
+      "qsourcePath": "/desktop-preview/i18n-core-v1/translations/ku/qsource/48-d8b2f9ad92.json",
+      "review": "independent-linguistic-and-religious-review-required"
+    },
+    "ckb": {
+      "name": "سۆرانی",
+      "status": "draft",
+      "publicDisplayAllowed": false,
+      "path": "/desktop-preview/i18n-core-v1/translations/ckb/post/hasan-al-basri-selbstpruefung-20261021-481-074b61b8f8.json",
+      "qsourcePath": "/desktop-preview/i18n-core-v1/translations/ckb/qsource/48-d8b2f9ad92.json",
+      "review": "independent-linguistic-and-religious-review-required"
+    },
+    "bs": {
+      "name": "Bosanski",
+      "status": "draft",
+      "publicDisplayAllowed": false,
+      "path": "/desktop-preview/i18n-core-v1/translations/bs/post/hasan-al-basri-selbstpruefung-20261021-481-074b61b8f8.json",
+      "qsourcePath": "/desktop-preview/i18n-core-v1/translations/bs/qsource/48-d8b2f9ad92.json",
+      "review": "independent-linguistic-and-religious-review-required"
+    }
+  }
+}
