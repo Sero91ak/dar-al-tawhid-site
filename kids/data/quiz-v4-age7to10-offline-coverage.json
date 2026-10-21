@@ -6,21 +6,21 @@
   "elevenLabsCreditsSpent": 0,
   "humanListeningApprovalsCreated": 0,
   "originalMP3sCreatedBySynthesis": 0,
-  "sourceOriginalsVerified": 1298,
-  "uniqueFullAudioClipsAvailable": 514,
-  "newOfflineComposites": 488,
+  "sourceOriginalsVerified": 1314,
+  "uniqueFullAudioClipsAvailable": 517,
+  "newOfflineComposites": 491,
   "byAge": {
     "7-8": {
       "questions": 150,
-      "completeFourPartQuestions": 128,
+      "completeFourPartQuestions": 129,
       "availableFieldCounts": {
-        "question": 137,
+        "question": 139,
         "correct": 150,
         "retry": 150,
         "explanation": 134
       },
       "missingFieldCounts": {
-        "question": 13,
+        "question": 11,
         "correct": 0,
         "retry": 0,
         "explanation": 16
@@ -30,20 +30,20 @@
       "questions": 150,
       "completeFourPartQuestions": 115,
       "availableFieldCounts": {
-        "question": 130,
+        "question": 131,
         "correct": 150,
         "retry": 150,
         "explanation": 123
       },
       "missingFieldCounts": {
-        "question": 20,
+        "question": 19,
         "correct": 0,
         "retry": 0,
         "explanation": 27
       }
     }
   },
-  "missingUniqueOriginalSegments": 83,
+  "missingUniqueOriginalSegments": 88,
   "missingOriginalSegmentsByFrequency": [
     {
       "fragment": "Taqwā.",
@@ -54,27 +54,31 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah und Seinem Gesandten ﷺ.",
+      "fragment": "Allah und Seinem Gesandten",
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah befiehlt den Gehorsam gegenüber Ihm und Seinem Gesandten ﷺ.",
+      "fragment": "Allah befiehlt den Gehorsam gegenüber Ihm und Seinem Gesandten",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Gesandte Allahs ﷺ.",
+      "fragment": "ein schönes Vorbild.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah nennt den Gesandten ﷺ ein schönes Vorbild.",
+      "fragment": "Allah nennt den Gesandten",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ verband den Īmān mit gutem Reden oder Schweigen.",
+      "fragment": "verband den Īmān mit gutem Reden oder Schweigen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ verbot, dem Nachbarn Schaden zuzufügen.",
+      "fragment": "verbot, dem Nachbarn Schaden zuzufügen.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Sofort beleidigen.",
       "requiredByFields": 1
     },
     {
@@ -86,19 +90,15 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sofort beleidigen.",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Essensregel lehrte der Prophet ﷺ einem Jungen?",
+      "fragment": "Welche Essensregel lehrte der Prophet",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ lehrte: Allahs Namen nennen, mit der rechten Hand essen und von dem essen, was vor einem liegt.",
+      "fragment": "lehrte: Allahs Namen nennen, mit der rechten Hand essen und von dem essen, was vor einem liegt.",
       "requiredByFields": 1
     },
     {
@@ -142,19 +142,23 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Gabe nennt Qurʾān 94:4 für den Propheten ﷺ?",
+      "fragment": "Welche Gabe nennt Qurʾān 94:4 für den Propheten",
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah sagt zum Propheten ﷺ, dass Er seine Erwähnung erhöht hat.",
+      "fragment": ", dass Er seine Erwähnung erhöht hat.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ nannte das Entfernen von Schaden vom Weg eine Ṣadaqah.",
+      "fragment": "Allah sagt zum Propheten",
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah befiehlt dem Propheten ﷺ zu sagen, dass Gebet, Opfer, Leben und Tod Allah gehören.",
+      "fragment": "nannte das Entfernen von Schaden vom Weg eine Ṣadaqah.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "zu sagen, dass Gebet, Opfer, Leben und Tod Allah gehören.",
       "requiredByFields": 1
     },
     {
@@ -162,35 +166,31 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Wie reagierte Ayyūb عليه السلام in seiner schweren Prüfung?",
+      "fragment": "in seiner schweren Prüfung?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Was tat Mūsā عليه السلام, nachdem er den Frauen geholfen hatte?",
+      "fragment": ", nachdem er den Frauen geholfen hatte?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Worum bat Sulaymān عليه السلام in Qurʾān 27:19?",
+      "fragment": "erklärte Iḥsān im Ḥadīṯ Jibrīl.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ erklärte Iḥsān im Ḥadīṯ Jibrīl.",
+      "fragment": "nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Der Prophet ﷺ beschrieb den Muslim als jemanden, vor dessen Zunge und Hand die Muslime sicher sind.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Viel Geld.",
+      "fragment": "beschrieb den Muslim als jemanden, vor dessen Zunge und Hand die Muslime sicher sind.",
       "requiredByFields": 1
     },
     {
       "fragment": "Eine berühmte Familie.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Viel Geld.",
       "requiredByFields": 1
     },
     {
@@ -202,11 +202,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Glücksspiele spielen.",
+      "fragment": "Angeben.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Angeben.",
+      "fragment": "Glücksspiele spielen.",
       "requiredByFields": 1
     },
     {
@@ -214,7 +214,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah erklärte, dass Er vor Muḥammad ﷺ keinen Gesandten sandte, ohne ihm die Anbetung Allahs allein einzugeben.",
+      "fragment": "keinen Gesandten sandte, ohne ihm die Anbetung Allahs allein einzugeben.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Allah erklärte, dass Er vor Muḥammad",
       "requiredByFields": 1
     },
     {
@@ -222,35 +226,43 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Allah befahl dem Propheten ﷺ und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
+      "fragment": "und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Was sagte der Prophet ﷺ über Ṣadaqah und Vermögen?",
+      "fragment": "Allah befahl dem Propheten",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ lehrte, dass Ṣadaqah Vermögen nicht vermindert; Allah gibt dafür Segen und Lohn.",
+      "fragment": "über Ṣadaqah und Vermögen?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ lehrte, dass Handlungen nach den Absichten bewertet werden und jeder das erhält, was er beabsichtigt.",
+      "fragment": "Was sagte der Prophet",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ lehrte, dass Allah beständige gute Taten liebt, selbst wenn sie gering sind.",
+      "fragment": "lehrte, dass Ṣadaqah Vermögen nicht vermindert; Allah gibt dafür Segen und Lohn.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ erklärte, dass Allah nicht auf Aussehen und Vermögen schaut, sondern auf Herzen und Taten.",
+      "fragment": "lehrte, dass Handlungen nach den Absichten bewertet werden und jeder das erhält, was er beabsichtigt.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Grundregel lehrt der Prophet ﷺ über den Dīn?",
+      "fragment": "lehrte, dass Allah beständige gute Taten liebt, selbst wenn sie gering sind.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ lehrte, dass der Dīn leicht ist und warnte vor Überforderung und Übertreibung.",
+      "fragment": "erklärte, dass Allah nicht auf Aussehen und Vermögen schaut, sondern auf Herzen und Taten.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Welche Grundregel lehrt der Prophet",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "lehrte, dass der Dīn leicht ist und warnte vor Überforderung und Übertreibung.",
       "requiredByFields": 1
     },
     {
@@ -258,27 +270,35 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Was lehrte der Prophet ﷺ neben dem Streben nach Nützlichem?",
+      "fragment": "neben dem Streben nach Nützlichem?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ lehrte, nach dem Nützlichen zu streben, Allah um Hilfe zu bitten und nicht hilflos aufzugeben.",
+      "fragment": "lehrte, nach dem Nützlichen zu streben, Allah um Hilfe zu bitten und nicht hilflos aufzugeben.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche Warnung gab der Prophet ﷺ über fehlende Barmherzigkeit?",
+      "fragment": "über fehlende Barmherzigkeit?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ verband Barmherzigkeit gegenüber anderen mit dem Empfang von Barmherzigkeit.",
+      "fragment": "Welche Warnung gab der Prophet",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ befahl, zu erleichtern und nicht zu erschweren sowie frohe Botschaft zu geben und nicht abzuschrecken.",
+      "fragment": "verband Barmherzigkeit gegenüber anderen mit dem Empfang von Barmherzigkeit.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ lehrte, dass Allah dem Suchenden nützlichen Wissens einen Weg zum Paradies erleichtert.",
+      "fragment": "befahl, zu erleichtern und nicht zu erschweren sowie frohe Botschaft zu geben und nicht abzuschrecken.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "lehrte, dass Allah dem Suchenden nützlichen Wissens einen Weg zum Paradies erleichtert.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
       "requiredByFields": 1
     },
     {
@@ -290,31 +310,35 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
+      "fragment": "erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
+      "fragment": "Wie fasste der Prophet",
       "requiredByFields": 1
     },
     {
-      "fragment": "Wie fasste der Prophet ﷺ einen wichtigen Teil des Dīn in Ṣaḥīḥ Muslim 55 zusammen?",
+      "fragment": "einen wichtigen Teil des Dīn in Ṣaḥīḥ Muslim 55 zusammen?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ sagte, der Dīn sei Naṣīḥah: gegenüber Allah, Seinem Buch, Seinem Gesandten, den Verantwortlichen und den Muslimen.",
+      "fragment": "sagte, der Dīn sei Naṣīḥah: gegenüber Allah, Seinem Buch, Seinem Gesandten, den Verantwortlichen und den Muslimen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Mit welchem Bild beschrieb der Prophet ﷺ die Haltung zur Dunyā?",
+      "fragment": "Mit welchem Bild beschrieb der Prophet",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ riet, in der Dunyā wie ein Fremder oder ein Reisender zu sein.",
+      "fragment": "die Haltung zur Dunyā?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ lehrte, dass selbst kleinere Leiden für den Muslim ein Grund für die Tilgung von Sünden sein können.",
+      "fragment": "riet, in der Dunyā wie ein Fremder oder ein Reisender zu sein.",
+      "requiredByFields": 1
+    },
+    {
+      "fragment": "lehrte, dass selbst kleinere Leiden für den Muslim ein Grund für die Tilgung von Sünden sein können.",
       "requiredByFields": 1
     },
     {
@@ -322,27 +346,23 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Nähe zum Propheten ﷺ im Paradies.",
+      "fragment": "für die Betreuung eines Waisenkindes?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes?",
+      "fragment": "Welche besondere Belohnung nennt der Prophet",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ sagte, dass er und der Betreuer eines Waisenkindes im Paradies eng beieinander sein werden.",
+      "fragment": "sagte, dass er und der Betreuer eines Waisenkindes im Paradies eng beieinander sein werden.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ lehrte, dass derjenige, der auf Gutes hinweist, einen Lohn wie der Ausführende erhält.",
+      "fragment": "lehrte, dass derjenige, der auf Gutes hinweist, einen Lohn wie der Ausführende erhält.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Dem Propheten ﷺ zu folgen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Allah befiehlt dem Propheten ﷺ zu sagen: Wer Allah liebt, soll ihm folgen; dann liebt und vergibt Allah.",
+      "fragment": "zu sagen: Wer Allah liebt, soll ihm folgen; dann liebt und vergibt Allah.",
       "requiredByFields": 1
     },
     {
@@ -354,7 +374,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Der Prophet ﷺ lehrte, dass Hilfe in der Not eine große Belohnung im Jenseits hat.",
+      "fragment": "lehrte, dass Hilfe in der Not eine große Belohnung im Jenseits hat.",
       "requiredByFields": 1
     },
     {
