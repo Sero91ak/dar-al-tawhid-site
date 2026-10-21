@@ -8588,6 +8588,16 @@
         ".github/workflows/dar-v8-all-sections-qa.yml"
       ],
       "expiresAt": "2026-11-05T23:59:59Z"
+    },
+    {
+      "id": "browser-v8-acceptance-workflow-live-20261021",
+      "at": "2026-10-21T18:30:00+02:00",
+      "approvedBy": "user-explicit-html-v8-browser-site-live-deploy-20261021",
+      "reason": "Öffentliches Browser-V8 mit geprüfter Messenger-Oberfläche, Qurʾān-Player und 7 Bedienoberflächen-Sprachen live veröffentlichen. Nur der dedizierte bereits geprüfte Browser-V8-Selenium-Akzeptanzworkflow wird für den Produktions-Health-Guard freigeschaltet. Keine Entsperrung anderer Workflows, Kids, Native Apps, Qibla, Push, Worker-Secrets oder allgemeiner Schutzmechanismen.",
+      "paths": [
+        ".github/workflows/dar-v8-browser-acceptance-20261021.yml"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
     }
   ],
   "enabled": true
