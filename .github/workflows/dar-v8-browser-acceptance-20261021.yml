@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - review/browser-v8-preview-isolation-20261021
+      - fix/v8-immersive-mobile-tablet-20261021
     paths:
       - 'desktop-preview/**'
       - '.github/workflows/dar-v8-browser-acceptance-20261021.yml'
@@ -17,7 +18,7 @@ permissions:
 jobs:
   browser:
     # Only test the isolated V8 browser review lane.
-    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021'
+    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021'
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
@@ -31,6 +32,8 @@ jobs:
           const html=fs.readFileSync('desktop-preview/index.html','utf8');
           const route=fs.readFileSync('desktop-preview/assets/dar-v8-route-platform.js','utf8');
           new Function(route);
+          new Function(fs.readFileSync('desktop-preview/assets/dar-v8-portal-live.js','utf8'));
+          if(!html.includes('maximum-scale=1')||!html.includes('user-scalable=no'))throw Error('Mobile zoom contract missing');
           const scripts=[...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
             .filter(x=>!/(?:^|\s)src\s*=/.test(x[1])&&x[2].trim());
           for(const s of scripts)new Function(s[2]);
@@ -63,7 +66,7 @@ jobs:
               opt.add_argument(flag)
           driver=webdriver.Chrome(options=opt)
           routes=['start','quran','beitraege','hadith','wissen','suche','bibliothek','frauen','dua','gebetszeiten','mehr','quiz']
-          devices=[('desktop',1440,900),('phone',393,852),('fold',840,900)]
+          devices=[('desktop',1440,900),('phone',393,852),('fold',840,900),('tablet-portrait',768,1024),('tablet-landscape',1024,768),('wide',1920,1080)]
           try:
             for device,width,height in devices:
               driver.set_window_size(width,height)
@@ -90,14 +93,23 @@ jobs:
                   }).filter(x=>x.width>0&&x.right>innerWidth+4).sort((a,b)=>b.right-a.right).slice(0,16)""")
                   raise RuntimeError('Horizontal overflow '+str(state)+' elements '+json.dumps(culprit,ensure_ascii=False))
                 if state['dockLinks']!=4:raise RuntimeError('Expected four bottom links plus More: '+str(state))
-                if (device=='desktop')!=(state['side']=='flex'):raise RuntimeError('Sidebar breakpoint: '+str(state))
-                if (device!='desktop')!=(state['dock']!='none'):raise RuntimeError('Dock breakpoint: '+str(state))
+                if (width>=960)!=(state['side']=='flex'):raise RuntimeError('Sidebar breakpoint: '+str(state))
+                if (width<960)!=(state['dock']!='none'):raise RuntimeError('Dock breakpoint: '+str(state))
                 if page!='start' and not state['hero']:raise RuntimeError('V8 route hero missing: '+page)
                 if page!='start' and state['welcome']!='none':raise RuntimeError('Duplicate greeting on '+page)
                 if page=='gebetszeiten' and not state['prayer']:raise RuntimeError('Prayer page still legacy')
                 if page=='hadith' and not state['hadith']:raise RuntimeError('Hadith page missing')
                 if page=='suche' and not state['chat']:raise RuntimeError('Chat page missing')
                 if page=='suche' and not driver.find_elements(By.ID,'darV8Messages'):raise RuntimeError('Messenger history not mounted')
+                if page=='suche':
+                  geometry=driver.execute_script("""const el=document.querySelector('#pageRoot>.dar-v8-messenger'),r=el.getBoundingClientRect(),
+                    search=document.getElementById('siteSearch'),bar=document.querySelector('.dar-v8-topbar'),brand=document.querySelector('.dar-v8-brand-seal');
+                    return {left:r.left,right:r.right,width:r.width,inputFont:parseFloat(getComputedStyle(search).fontSize),
+                      topbarVisible:getComputedStyle(bar).display!=='none',sealRight:brand?.getBoundingClientRect().right};""")
+                  if geometry['inputFont']<16:raise RuntimeError('iPhone input focus zoom risk '+str(geometry))
+                  if geometry['width']<width*.83:raise RuntimeError('Messenger not full-width '+str(geometry))
+                  if not geometry['topbarVisible']:raise RuntimeError('V8 topbar hidden '+str(geometry))
+                  if geometry['sealRight'] is None or geometry['sealRight']>width:raise RuntimeError('Brand seal clipped '+str(geometry))
                 if page in ['start','suche','gebetszeiten','quran','frauen','hadith','mehr']:
                   driver.save_screenshot(output+'/'+device+'-'+page+'.png')
               driver.get('http://127.0.0.1:8765/desktop-preview/index.html?page=start')
@@ -106,7 +118,13 @@ jobs:
               driver.find_element(By.ID,'darV8PlayerExpand').click()
               expanded=driver.execute_script("return document.getElementById('darV8PlayerExpand').getAttribute('aria-expanded')")
               if expanded!='true':raise RuntimeError('Mini player expand did not respond')
-              if device!='desktop':
+              driver.find_element(By.ID,'darV8PlayerFullscreen').click()
+              visible=driver.execute_script("return document.body.classList.contains('dar-v8-player-fullscreen') && getComputedStyle(document.querySelector('.v8-real-player')).display!=='none'")
+              if not visible:raise RuntimeError('Full Quran player did not open')
+              driver.find_element(By.ID,'darV8PlayerFullscreen').click()
+              closed=driver.execute_script("return !document.body.classList.contains('dar-v8-player-fullscreen')")
+              if not closed:raise RuntimeError('Full Quran player did not close')
+              if width<960:
                 driver.find_element(By.ID,'darV8MoreToggle').click()
                 visible=driver.execute_script("return document.getElementById('darV8MoreSheet').hidden")
                 if visible:raise RuntimeError('More sheet did not open')
@@ -130,7 +148,7 @@ jobs:
               selected=driver.execute_script("return document.getElementById('darV8LanguageSelect').value")
               if selected!='tr':raise RuntimeError('Language settings did not reflect preference')
               driver.execute_script("document.getElementById('darV8LanguageSelect').value='de';document.getElementById('darV8LanguageSelect').dispatchEvent(new Event('change',{bubbles:true}))")
-            print('PASS: all 36 route/device configurations, navigation, More, player and source chat')
+            print('PASS: all 72 route/device configurations, navigation, More, player and source chat')
           finally:
             driver.quit()
           PY
