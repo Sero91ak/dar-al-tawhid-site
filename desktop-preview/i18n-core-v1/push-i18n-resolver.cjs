@@ -90,7 +90,10 @@ function canonicalUrl(event) {
   if (!id) throw new Error("Non-prayer event requires canonical contentId");
   if (event.type === "daily_dua") return "https://dar-al-tawhid.de/#dua/" + encodeURIComponent(id);
   if (event.type === "daily_ayah") return String(event.deepLink);
-  return "https://dar-al-tawhid.de/#post/" + encodeURIComponent(id);
+  // The canonical content ID can be a namespaced post:<id>. The actual
+  // visitor app opens its verified post slug instead of that content-ID.
+  const routeId = event.type === "new_post" ? String(event.postSlug || "") : id;
+  return "https://dar-al-tawhid.de/#post/" + encodeURIComponent(routeId);
 }
 
 function validateEvent(event) {
@@ -119,6 +122,12 @@ function validateEvent(event) {
     }
     if (!String(event.sourceHash || "").trim()) {
       throw new Error("Non-prayer push requires canonical source revision");
+    }
+    if (kind === "new_post" &&
+        (event.routeVerified !== true ||
+         !/^[a-z0-9][a-z0-9._-]{0,160}$/i.test(String(event.postSlug || "")) ||
+         String(event.postSlug || "").includes(".."))) {
+      throw new Error("New post requires verified canonical visitor route slug");
     }
     if (kind === "daily_ayah" && (event.routeVerified !== true ||
         !/^https:\/\/dar-al-tawhid\.de\/#quran(?:\/|$)/.test(String(event.deepLink || "")))) {
