@@ -37,6 +37,14 @@ def main():
     original=load(CATALOG).get("items") or []
     voice=load(PLAN)
     cfg=load(FLAG)
+    # A correct model ID, PLS dictionary, waveform and SHA do NOT establish
+    # correct Arabic makhārij/Tajwīd. Owner rejected pronunciation 2026-10-21.
+    pronunciation_hold=load(ROOT/"kids/data/quiz-v4-pronunciation-hold.json")
+    phonetic_quality_approved=(
+        pronunciation_hold.get("productionPaused") is False and
+        pronunciation_hold.get("humanPronunciationApproved") is True and
+        pronunciation_hold.get("humanListeningQualityGateReleased") is True
+    )
     if len(selected)!=450 or len(reserved)!=450:
         raise RuntimeError("Expected exactly 450 in both selection and archive")
     if len(original)!=900 or Counter(q["ageBand"] for q in selected)!=COUNTS:
@@ -76,7 +84,7 @@ def main():
         passed=sum(all(r[k]["text"] in approved for k in FIELDS) for r in rows)
         by_age[age]={"total":150,"fullyAudibleAndApproved":passed}
     config_enabled=cfg.get("enabled") is True
-    allowed=(config_enabled and not errors and
+    allowed=(config_enabled and phonetic_quality_approved and not errors and
              all(x["fullyAudibleAndApproved"]==150 for x in by_age.values()))
     status={"curatedQuestions":450,"reservedForLater":450,"ageCounts":{"4-6":150,"7-8":150,"9-10":150},
        "uniqueFullAudioTextKeys":len(keys),
@@ -87,6 +95,8 @@ def main():
        "quarantinedAlreadyApprovedKeys":len(quarantined_approved),
        "byAge":by_age,"errorCounts":dict(errors),
        "releaseSwitchEnabled":config_enabled,
+       "ownerArabicPronunciationApproved":phonetic_quality_approved,
+       "ownerPronunciationHoldActive":pronunciation_hold.get("productionPaused") is not False,
        "releaseAllowed":allowed and not a.ignore_flag,
        "creditsSpentByGuard":0}
     print(json.dumps(status,ensure_ascii=False,indent=2))
