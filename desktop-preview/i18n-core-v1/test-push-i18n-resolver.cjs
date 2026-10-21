@@ -20,7 +20,8 @@ const baseEvent = {
 };
 const postEvent = {
   type: "new_post", eventKey: "post:readable-article|revision-1",
-  contentId: "post:readable-article", qNumber: 271, sourceHash:"sha-1", environment:"test"
+  contentId: "post:readable-article", postSlug:"readable-article", routeVerified:true,
+  qNumber: 271, sourceHash:"sha-1", environment:"test"
 };
 
 test("nine adult languages, Arabic and Soranî RTL", () => {
@@ -138,9 +139,15 @@ test("one content ID and URL independent of 9 translations", () => {
   assert.equal(fr.payload.data.source_url,"https://dar-al-tawhid.de/q/271/");
   assert.equal(fr.payload.data.source_url,es.payload.data.source_url);
   assert.equal(fr.payload.url,es.payload.url);
-  assert.equal(fr.payload.url,"https://dar-al-tawhid.de/#post/post%3Areadable-article");
+  assert.equal(fr.payload.url,"https://dar-al-tawhid.de/#post/readable-article");
 });
 
+test("new article cannot push to a guessed or unverified page",()=>{
+ const s={subscription_id:"s",app_locale:"de",push_opted_in:true,enabled:true,app_environment:"test"};
+ assert.throws(()=>resolveRecipientPush({event:{...postEvent,routeVerified:false},copies,subscription:s}),/verified canonical visitor route/);
+ assert.throws(()=>resolveRecipientPush({event:{...postEvent,postSlug:"../../admin"},copies,subscription:s}),/verified canonical visitor route/);
+ assert.throws(()=>resolveRecipientPush({event:{...postEvent,postSlug:""},copies,subscription:s}),/verified canonical visitor route/);
+});
 test("source revision, independent Āyah opt-in and exact target time",()=>{
  const subscription={subscription_id:"s",app_locale:"en",push_opted_in:true,enabled:true,app_environment:"test"};
  const attempt=(event)=>resolveRecipientPush({event,copies,subscription});
