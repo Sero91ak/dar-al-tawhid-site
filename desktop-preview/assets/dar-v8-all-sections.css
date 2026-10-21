@@ -396,3 +396,10 @@ body.desktop-overhaul-v18 :is(.dar-v8-mobile-tab,.dar-v8-side-link,.toolbar .too
 @media(prefers-reduced-motion:reduce){
  body.desktop-overhaul-v18 .toolbar{scroll-behavior:auto!important}
 }
+
+/* Keyboard owns the lower viewport while writing; native iOS accessibility
+   zoom remains available. Dock returns immediately on blur. */
+@media(max-width:959px){
+ body.desktop-overhaul-v18.v8-keyboard-active .dar-v8-mobile-dock{display:none!important}
+ body.desktop-overhaul-v18.v8-keyboard-active .dar-v8-workspace{padding-bottom:calc(24px + env(safe-area-inset-bottom))!important}
+}
