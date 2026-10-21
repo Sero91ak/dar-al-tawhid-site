@@ -9,7 +9,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
     &&!window.__DAR_TEST_TR_UI_SCRIPT_LOADING){
  window.__DAR_TEST_TR_UI_SCRIPT_LOADING=true;
  const trScript=document.createElement("script");
- trScript.src="/test/assets/dar-test-turkish-ui.js?v=20261021-core1";
+ trScript.src="/test/assets/dar-test-turkish-ui.js?v=20261022-sections2";
  trScript.async=true;
  trScript.onerror=()=>{window.__DAR_TEST_TR_UI_SCRIPT_LOADING=false};
  (document.head||document.documentElement).appendChild(trScript);
