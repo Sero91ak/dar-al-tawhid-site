@@ -115,6 +115,23 @@ function resolveRecipientPush({ event, copies, subscription, registry = registry
   const kind = validateEvent(event);
   const subId = String(subscription && (subscription.subscription_id || subscription.subscriptionId) || "").trim();
   if (!subId) throw new Error("Missing subscriptionId");
+  // Fail closed. The actual channel-specific consent and OneSignal status
+  // must ALSO be rechecked by the protected production sender before sending.
+  if (subscription.enabled !== true || subscription.push_opted_in !== true) {
+    throw new Error("Missing active push opt-in for subscription");
+  }
+  if (!["test", "production"].includes(String(event.environment || ""))) {
+    throw new Error("Missing explicit target environment");
+  }
+  if (String(subscription.app_environment || "") !== event.environment) {
+    throw new Error("Subscription environment mismatch");
+  }
+  if (kind === "daily_dua" && subscription.daily_dua_enabled !== true) {
+    throw new Error("Daily Duʿāʾ not enabled");
+  }
+  if (kind === "daily_recommendation" && subscription.daily_recommendation_enabled !== true) {
+    throw new Error("Daily recommendation not enabled");
+  }
   const appLocale = subscription.app_locale || subscription.appLocale || registry.defaultLocale;
   const params = {
     time: event.time || "",
