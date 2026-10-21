@@ -58,7 +58,7 @@ def load_mapping(root=ROOT):
         # The stored mapping trims surrounding source spaces at the component
         # boundary. Do not guess text alignment: compare after separating the
         # exact two special Arabic terms and normalizing whitespace only.
-        normalize=lambda s:" ".join(s.split())
+        normalize=lambda s:"".join(s.split())
         if normalize("".join(rebuilt))!=normalize(text):
             raise RuntimeError("KIDS_FUSHA_MIX: German/Arabic source text changed: "+text)
         if text in phrases and phrases[text]!=pieces:
