@@ -56,14 +56,16 @@ function renderOurApps(){
 }
 
 const localeKey="darAdultPreferredLocaleV1";
-function currentLocale(){try{return localStorage.getItem(localeKey)==="tr"?"tr":"de"}catch(_){return"de"}}
-function setLocale(code){if(code!=="de"&&code!=="tr")return;try{localStorage.setItem(localeKey,code)}catch(_){}window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:code}}));sync();}
+const localeChoicesList=[["de","Deutsch"],["tr","Türkçe"],["en","English"],["ar","العربية"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"]];
+const localeCodes=new Set(localeChoicesList.map(x=>x[0]));
+function currentLocale(){try{return localeCodes.has(localStorage.getItem(localeKey))?localStorage.getItem(localeKey):"de"}catch(_){return"de"}}
+function setLocale(code){if(!localeCodes.has(code))return;try{localStorage.setItem(localeKey,code)}catch(_){}window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:code}}));sync();}
 function localeChoices(){
  const value=currentLocale();
  return '<section class="dm-locale" role="group" aria-label="Sprache wählen / Dil seçimi">'+
  '<div class="dm-locale-copy"><strong>Sprache · Dil</strong><small>Türkische Inhalte werden nach Quellen- und Sprachprüfung freigegeben.</small></div>'+
  '<div class="dm-locale-choices">'+
- [['de','Deutsch'],['tr','Türkçe']].map(([code,label])=>'<button type="button" data-dm-locale="'+code+'" aria-pressed="'+(value===code)+'">'+label+'</button>').join('')+
+ localeChoicesList.map(([code,label])=>'<button type="button" data-dm-locale="'+code+'" aria-pressed="'+(value===code)+'">'+label+'</button>').join('')+
  '</div><a class="dm-i18n-reader-link" href="/test/i18n/?post=hasan-al-basri-selbstpruefung-20261021-481">'+
  (value==="tr"?"Geprüfte Textfassung öffnen · İncele":"Sprachfassung prüfen · DAR TEST")+'</a></section>';
 }
