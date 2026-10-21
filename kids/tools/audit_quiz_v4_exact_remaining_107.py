@@ -129,10 +129,14 @@ def run():
             for age in ("4-6","7-8","9-10")}
     require(all(counts[age]+summary["byAge"][age]["completeFourPartQuestions"]==150
                 for age in counts), "age-band completeness mismatch")
-    old_hits={gid:len([x for x in incomplete if any(
-        x2.get("previouslyPaidGenerationId")==gid for seq in
-        x["missingAudioParts"].values() for x2 in seq)])
-        for gid in old_by_id}
+    # Some 4–6 year questions use these same prepaid originals as literal
+    # segments instead of generation-ID slots. Count both forms of reuse.
+    old_hits={gid:sum(any(
+        x2.get("previouslyPaidGenerationId")==gid or
+        x2["sourceTextSha256"]==sha(original["originalSpokenText"])
+        for seq in row["missingAudioParts"].values() for x2 in seq)
+        for row in incomplete)
+        for gid,original in old_by_id.items()}
     report={
       "schemaVersion":1,"scope":"KIDS_V4_450_CURRENT_EXACT_SOURCE_BLOCKERS_REVIEW",
       "voiceId":registry["voiceId"],"modelId":registry["modelId"],
