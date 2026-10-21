@@ -5,6 +5,7 @@ on:
       - review/browser-v8-preview-isolation-20261021
       - fix/v8-immersive-mobile-tablet-20261021
       - fix/browser-v8-visual-audit-1905-20261021
+      - fix/v8-quran-player-modal-20261021
     paths:
       - 'desktop-preview/**'
       - '.github/workflows/dar-v8-browser-acceptance-20261021.yml'
@@ -19,7 +20,7 @@ permissions:
 jobs:
   browser:
     # Only test the isolated V8 browser review lane.
-    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021' || github.head_ref == 'fix/browser-v8-visual-audit-1905-20261021'
+    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021' || github.head_ref == 'fix/browser-v8-visual-audit-1905-20261021' || github.head_ref == 'fix/v8-quran-player-modal-20261021'
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
@@ -34,6 +35,7 @@ jobs:
           const route=fs.readFileSync('desktop-preview/assets/dar-v8-route-platform.js','utf8');
           new Function(route);
           new Function(fs.readFileSync('desktop-preview/assets/dar-v8-portal-live.js','utf8'));
+          if(!html.includes('class="v8-player-label"')||!html.includes('id="qaSurah"')||!html.includes('id="qaReciter"'))throw Error('Player DOM contract');
           if(!html.includes('maximum-scale=1')||!html.includes('user-scalable=no'))throw Error('Mobile zoom contract missing');
           const scripts=[...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
             .filter(x=>!/(?:^|\s)src\s*=/.test(x[1])&&x[2].trim());
@@ -99,6 +101,15 @@ jobs:
                 if page!='start' and not state['hero']:raise RuntimeError('V8 route hero missing: '+page)
                 if page!='start' and state['welcome']!='none':raise RuntimeError('Duplicate greeting on '+page)
                 if page=='gebetszeiten' and not state['prayer']:raise RuntimeError('Prayer page still legacy')
+                if page=='gebetszeiten':
+                  prayer=driver.execute_script("""const p=document.getElementById('darV8PrayerOverview'),g=p.querySelector('.dar-v8-prayer-grid'),
+                     n=p.querySelector('[data-v8-next-prayer]'),clock=p.querySelector('[data-v8-live-countdown]'),
+                     loc=p.querySelector('[data-v8-location]'),rc=g.getBoundingClientRect();
+                     return {next:!!n,countdown:!!clock,location:!!loc,columns:getComputedStyle(g).gridTemplateColumns.split(' ').length,
+                       right:rc.right,innerWidth:innerWidth};""")
+                  if not all(prayer[x] for x in ['next','countdown','location']):raise RuntimeError('Prayer readable widgets missing '+str(prayer))
+                  if prayer['right']>prayer['innerWidth']+3:raise RuntimeError('Prayer grid overflows '+str(prayer))
+
                 if page=='hadith' and not state['hadith']:raise RuntimeError('Hadith page missing')
                 if page=='suche' and not state['chat']:raise RuntimeError('Chat page missing')
                 if page=='quran':
@@ -140,6 +151,31 @@ jobs:
               driver.find_element(By.ID,'darV8PlayerFullscreen').click()
               visible=driver.execute_script("return document.body.classList.contains('dar-v8-player-fullscreen') && getComputedStyle(document.querySelector('.v8-real-player')).display!=='none'")
               if not visible:raise RuntimeError('Full Quran player did not open')
+              geometry=driver.execute_script("""const p=document.querySelector('.v8-real-player'), b=document.getElementById('darV8PlayerFullscreen'),
+                h=p.querySelector('.v8-player-label'), controls=p.querySelector('.qa26-controls'),
+                selects=[...p.querySelectorAll('#qaSurah,#qaAyah,#qaReciter')];
+                const pr=p.getBoundingClientRect(),br=b.getBoundingClientRect(),hr=h.getBoundingClientRect(),
+                  sr=h.querySelector('span')?.getBoundingClientRect();
+                return {pw:pr.width,ph:pr.height,pl:pr.left,pr:pr.right,pt:pr.top,pb:pr.bottom,
+                  bw:br.width,br:br.right,bl:br.left,bt:br.top,bb:br.bottom,headerTop:hr.top,headerBottom:hr.bottom,
+                  spanRight:sr?.right||0,spanLeft:sr?.left||0,spanWidth:sr?.width||0,
+                  viewWidth:innerWidth,viewHeight:innerHeight,cols:getComputedStyle(controls).gridTemplateColumns,
+                  selectors:selects.map(x=>({visible:getComputedStyle(x).visibility,display:getComputedStyle(x).display,
+                    width:x.getBoundingClientRect().width,top:x.getBoundingClientRect().top,bottom:x.getBoundingClientRect().bottom}))};""")
+              print(json.dumps({'device':device,'playerModal':geometry},ensure_ascii=False),flush=True)
+              if geometry['pl']<-2 or geometry['pr']>geometry['viewWidth']+2 or geometry['pt']<-2 or geometry['pb']>geometry['viewHeight']+2:
+                raise RuntimeError('Fullscreen player escapes viewport: '+str(geometry))
+              if geometry['ph']>geometry['viewHeight']*.92 and width>=960:
+                raise RuntimeError('Huge blank fullscreen panel still present: '+str(geometry))
+              if geometry['bt']<geometry['headerTop']-2 or geometry['bb']>geometry['headerBottom']+3:
+                raise RuntimeError('Fullscreen button not aligned to player header: '+str(geometry))
+              if geometry['br']>geometry['pr']+2 or geometry['bl']<geometry['pl']-2:
+                raise RuntimeError('Fullscreen button outside player: '+str(geometry))
+              if geometry['spanWidth']>0 and geometry['spanLeft']<geometry['br'] and geometry['spanRight']>geometry['bl']:
+                raise RuntimeError('Fullscreen button overlaps Surah subtitle: '+str(geometry))
+              if len(geometry['selectors'])!=3 or any(s['width']<65 or s['display']=='none' for s in geometry['selectors']):
+                raise RuntimeError('Surah/Ayah/Reciter selector not usable: '+str(geometry))
+              driver.save_screenshot(output+'/'+device+'-player-fullscreen.png')
               driver.find_element(By.ID,'darV8PlayerFullscreen').click()
               closed=driver.execute_script("return !document.body.classList.contains('dar-v8-player-fullscreen')")
               if not closed:raise RuntimeError('Full Quran player did not close')
