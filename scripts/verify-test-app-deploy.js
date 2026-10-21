@@ -417,7 +417,7 @@ async function fetchVersionBuild(base) {
       try{
         const shell=await fetchText(base+"/?parity-v1368="+Date.now());
         const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261022-v56-compact-welcome");
-        const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"')&&shell.text.includes("v55-source-salam");
+        const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"')&&shell.text.includes("v56-compact-welcome");
         const source=js.text||"";
         const sequence=source.indexOf('class="dhp-welcome"')>=0
           &&source.indexOf('class="dhp-isnad"')>source.indexOf('class="dhp-welcome"');
