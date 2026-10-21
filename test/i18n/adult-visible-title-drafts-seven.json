@@ -5,7 +5,7 @@
   "mode": "editorial-title-draft",
   "paidApiCalls": 0,
   "bodyTranslation": false,
-  "editorialNotice": "Short visible title renderings drafted in ChatGPT, not Quran/du'a source translations. Never change Arabic originals or canonical German title. Reviewer approval required for production.",
+  "editorialNotice": "Only visible short title drafts, not Quranic Arabic, Quran meaning or hadith text. Six-language drafts require native linguistic and religious editorial review prior to public release.",
   "records": {
     "post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198": {
       "kind": "post",
@@ -304,6 +304,214 @@
         "ku": "Perwerdigarê me, dilovanî û zanîna te her tiştî digire",
         "ckb": "پەروەردگارمان، ڕەحمەت و زانستت هەموو شتێک دەگرێتەوە",
         "bs": "Gospodaru naš, sve obuhvataš milošću i znanjem"
+      }
+    },
+    "dua:dua-018-adkhilhum-jannat-adn": {
+      "kind": "dua",
+      "id": "dua-018-adkhilhum-jannat-adn",
+      "sourceTitle": "Lass sie in die Gärten von ʿAdn eintreten",
+      "translations": {
+        "tr": "Onları Adn cennetlerine girdir",
+        "en": "Admit them into the Gardens of ʿAdn",
+        "ar": "أدخلهم جنات عدن",
+        "ku": "Wan têxe baxçeyên ʿAdnê",
+        "ckb": "بیانخە ناو بەهەشتەکانی عەدن",
+        "bs": "Uvedi ih u džennetske bašče ʿAdna"
+      }
+    },
+    "dua:dua-019-qihim-sayyiat": {
+      "kind": "dua",
+      "id": "dua-019-qihim-sayyiat",
+      "sourceTitle": "Bewahre sie vor schlechten Taten",
+      "translations": {
+        "tr": "Onları kötülüklerden koru",
+        "en": "Protect them from evil deeds",
+        "ar": "قهم السيئات",
+        "ku": "Wan ji kiryarên xerab biparêze",
+        "ckb": "لە کردەوە خراپەکان بیانپارێزە",
+        "bs": "Sačuvaj ih od loših djela"
+      }
+    },
+    "dua:dua-020-rabbana-ghfir-lana-ikhwan": {
+      "kind": "dua",
+      "id": "dua-020-rabbana-ghfir-lana-ikhwan",
+      "sourceTitle": "Vergib uns und unseren Brüdern, die uns im Glauben vorausgingen",
+      "translations": {
+        "tr": "Bizi ve imanda bizden önce gelen kardeşlerimizi bağışla",
+        "en": "Forgive us and our brothers who preceded us in faith",
+        "ar": "اغفر لنا ولإخواننا الذين سبقونا بالإيمان",
+        "ku": "Me û birayên me yên di baweriyê de berî me hatine bibexşîne",
+        "ckb": "لێمان خۆشبە و لە براکانمان کە پێش ئێمە باوەڕیان هێناوە",
+        "bs": "Oprosti nama i našoj braći koja su nas pretekla u vjerovanju"
+      }
+    },
+    "dua:dua-021-la-ghill": {
+      "kind": "dua",
+      "id": "dua-021-la-ghill",
+      "sourceTitle": "Lass keinen Groll in unseren Herzen gegen die Gläubigen",
+      "translations": {
+        "tr": "Kalplerimizde müminlere karşı kin bırakma",
+        "en": "Leave no resentment toward believers in our hearts",
+        "ar": "لا تجعل في قلوبنا غلًّا للذين آمنوا",
+        "ku": "Di dilên me de li hember bawermendan kîn nehêle",
+        "ckb": "لە دڵماندا کینە بۆ باوەڕداران مەهێڵە",
+        "bs": "Ne ostavi u našim srcima zlobe prema vjernicima"
+      }
+    },
+    "dua:dua-022-tawakkalna-anabna": {
+      "kind": "dua",
+      "id": "dua-022-tawakkalna-anabna",
+      "sourceTitle": "Auf Dich vertrauen wir und zu Dir kehren wir zurück",
+      "translations": {
+        "tr": "Sana tevekkül eder, Sana döneriz",
+        "en": "In You we place our trust, and to You we return",
+        "ar": "عليك توكلنا وإليك أنبنا",
+        "ku": "Em pişta xwe bi te digirin û ber bi te ve vedigerin",
+        "ckb": "پشتت پێ دەبەستین و بۆ لای تۆ دەگەڕێینەوە",
+        "bs": "U Tebe se uzdamo i Tebi se vraćamo"
+      }
+    },
+    "dua:dua-023-la-tajalna-fitna": {
+      "kind": "dua",
+      "id": "dua-023-la-tajalna-fitna",
+      "sourceTitle": "Mache uns nicht zur Versuchung für die Ungläubigen",
+      "translations": {
+        "tr": "Bizi inkâr edenler için bir imtihan vesilesi kılma",
+        "en": "Do not make us a trial for those who disbelieve",
+        "ar": "لا تجعلنا فتنة للذين كفروا",
+        "ku": "Me ji bo kesên ku bawer nakin neke ceribandin",
+        "ckb": "مەمانکە تاقیکردنەوە بۆ ئەوانەی باوەڕ ناکەن",
+        "bs": "Ne učini nas iskušenjem za nevjernike"
+      }
+    },
+    "dua:dua-024-atmim-nurana": {
+      "kind": "dua",
+      "id": "dua-024-atmim-nurana",
+      "sourceTitle": "Vollende unser Licht und vergib uns",
+      "translations": {
+        "tr": "Nurumuzu tamamla ve bizi bağışla",
+        "en": "Perfect our light and forgive us",
+        "ar": "أتمم لنا نورنا واغفر لنا",
+        "ku": "Ronahiya me temam bike û me bibexşîne",
+        "ckb": "ڕووناکییەکەمان تەواو بکە و لێمان خۆشبە",
+        "bs": "Upotpuni nam naše svjetlo i oprosti nam"
+      }
+    },
+    "dua:dua-025-qunut-witr": {
+      "kind": "dua",
+      "id": "dua-025-qunut-witr",
+      "sourceTitle": "Duʿāʾ al-Qunūt im Witr",
+      "translations": {
+        "tr": "Vitir namazında Kunut duası",
+        "en": "Qunūt supplication in Witr prayer",
+        "ar": "دعاء القنوت في صلاة الوتر",
+        "ku": "Duʿaya Qunût di nimêja Witrê de",
+        "ckb": "دوعای قونوت لە نوێژی وێتر",
+        "bs": "Kunut-dova u vitr-namazu"
+      }
+    },
+    "dua:dua-026-ya-muqallib": {
+      "kind": "dua",
+      "id": "dua-026-ya-muqallib",
+      "sourceTitle": "O Wender der Herzen, festige mein Herz",
+      "translations": {
+        "tr": "Ey kalpleri çeviren, kalbimi sabit kıl",
+        "en": "O Turner of hearts, keep my heart firm",
+        "ar": "يا مقلب القلوب ثبت قلبي",
+        "ku": "Ey guherînerê dilan, dilê min bi hêz bihêle",
+        "ckb": "ئەی گۆڕەری دڵەکان، دڵم جێگیر بکە",
+        "bs": "O Ti Koji okrećeš srca, učvrsti moje srce"
+      }
+    },
+    "dua:dua-027-allahumma-inni-asaluka-huda": {
+      "kind": "dua",
+      "id": "dua-027-allahumma-inni-asaluka-huda",
+      "sourceTitle": "Bitte um Rechtleitung, Taqwā, Keuschheit und Genügsamkeit",
+      "translations": {
+        "tr": "Hidayet, takvâ, iffet ve kanaat dileği",
+        "en": "Seeking guidance, piety, chastity and contentment",
+        "ar": "طلب الهدى والتقى والعفاف والغنى",
+        "ku": "Daxwaza rêberî, teqwa, pakî û têrkeriyê",
+        "ckb": "داواکردنی ڕێنمایی و تەقوا و پاکدامەنی و قەناعەت",
+        "bs": "Molba za uputu, bogobojaznost, čednost i zadovoljstvo"
+      }
+    },
+    "dua:dua-028-allahumma-inni-audhu-bika-min-ilm-la-yanfa": {
+      "kind": "dua",
+      "id": "dua-028-allahumma-inni-audhu-bika-min-ilm-la-yanfa",
+      "sourceTitle": "Schutz vor Wissen, das nicht nützt",
+      "translations": {
+        "tr": "Fayda vermeyen bilgiden Allah'a sığınmak",
+        "en": "Seeking protection from knowledge that does not benefit",
+        "ar": "الاستعاذة من علم لا ينفع",
+        "ku": "Penabirin ji zanîna bê feyde",
+        "ckb": "پەنا بردن لە زانستی بێسوود",
+        "bs": "Traženje zaštite od znanja koje ne koristi"
+      }
+    },
+    "dua:dua-029-audhu-bika-min-zawal": {
+      "kind": "dua",
+      "id": "dua-029-audhu-bika-min-zawal",
+      "sourceTitle": "Schutz vor dem Verschwinden der Gunst",
+      "translations": {
+        "tr": "Nimetin kaybolmasından Allah'a sığınmak",
+        "en": "Seeking protection from the loss of blessings",
+        "ar": "الاستعاذة من زوال النعمة",
+        "ku": "Penabirin ji windabûna nîmetan",
+        "ckb": "پەنا بردن لە لەدەستدانی نیعمەت",
+        "bs": "Traženje zaštite od nestanka blagodati"
+      }
+    },
+    "dua:dua-030-audhu-bika-min-jahd": {
+      "kind": "dua",
+      "id": "dua-030-audhu-bika-min-jahd",
+      "sourceTitle": "Schutz vor schwerer Prüfung und schlechtem Schicksal",
+      "translations": {
+        "tr": "Ağır imtihanlardan ve kötü kaderden korunma dileği",
+        "en": "Seeking refuge from severe trials and an adverse fate",
+        "ar": "الاستعاذة من شدة البلاء وسوء القضاء",
+        "ku": "Penabirin ji ceribandinên dijwar û qederê xirab",
+        "ckb": "پەنا بردن لە تاقیکردنەوەی سەخت و چارەنووسی خراپ",
+        "bs": "Traženje zaštite od teških iskušenja i loše sudbine"
+      }
+    },
+    "dua:dua-031-rabbana-la-tuzigh-qulubana": {
+      "kind": "dua",
+      "id": "dua-031-rabbana-la-tuzigh-qulubana",
+      "sourceTitle": "Duʿāʾ um festen Iman und Barmherzigkeit",
+      "translations": {
+        "tr": "İmanda sebat ve rahmet için dua",
+        "en": "Supplication for steadfast faith and mercy",
+        "ar": "دعاء للثبات على الإيمان والرحمة",
+        "ku": "Duʿa ji bo mayîna di baweriyê de û dilovaniyê",
+        "ckb": "دوعا بۆ جێگیری لە ئیمان و ڕەحمەت",
+        "bs": "Dova za postojanost u imanu i milost"
+      }
+    },
+    "dua:dua-032-rabbi-zidni-ilma": {
+      "kind": "dua",
+      "id": "dua-032-rabbi-zidni-ilma",
+      "sourceTitle": "Duʿāʾ um mehr Wissen",
+      "translations": {
+        "tr": "İlmin artması için dua",
+        "en": "Supplication for increased knowledge",
+        "ar": "دعاء لزيادة العلم",
+        "ku": "Duʿa ji bo zêdebûna zanînê",
+        "ckb": "دوعا بۆ زیادبوونی زانست",
+        "bs": "Dova za povećanje znanja"
+      }
+    },
+    "dua:dua-033-rabbana-wa-la-tahmil-alayna-isran": {
+      "kind": "dua",
+      "id": "dua-033-rabbana-wa-la-tahmil-alayna-isran",
+      "sourceTitle": "Duʿāʾ gegen schwere Last",
+      "translations": {
+        "tr": "Ağır yüklerden korunmak için dua",
+        "en": "Supplication against heavy burdens",
+        "ar": "دعاء لرفع الأعباء الثقيلة",
+        "ku": "Duʿa ji bo xilasbûna ji barên giran",
+        "ckb": "دوعا بۆ پاراستن لە بارە قورسەکان",
+        "bs": "Dova za zaštitu od teških tereta"
       }
     }
   }
