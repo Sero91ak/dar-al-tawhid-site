@@ -981,3 +981,87 @@ body.desktop-overhaul-v18 #pageRoot .smart-search-dock .smart-search-input::-web
   touch-action:pan-y!important
  }
 }
+
+
+/* Prayer: one responsive reading hierarchy without nested opaque blocks. */
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-overview{
+ max-width:1200px;margin:15px auto 22px;padding:clamp(14px,2.3vw,26px)!important;
+ border:1px solid var(--v8-ui-divider)!important;border-radius:21px!important;
+ background:var(--v8-paper)!important;box-shadow:none!important;min-width:0!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-head{
+ display:flex;align-items:center;justify-content:space-between;gap:15px;min-width:0
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-head>div{min-width:0}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-head h2{
+ font:500 clamp(22px,2.8vw,33px)/1.25 Georgia,serif!important;
+ color:var(--v8-ui-ink)!important;margin:5px 0
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-head p{
+ font:500 12px/1.7 system-ui!important;color:var(--v8-ui-muted)!important;margin:0
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-head [data-v8-location]{
+ flex:none;min-height:44px;padding:9px 16px!important;border:1px solid var(--v8-ui-divider)!important;
+ border-radius:999px!important;background:transparent!important;
+ color:var(--v8-ui-ink)!important;font:700 12px system-ui!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-head [data-v8-location]:is(:hover,:focus-visible){
+ box-shadow:0 0 0 2px var(--v8-ui-focus)!important;border-color:var(--v8-ui-gold)!important;outline:0!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-live{
+ display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center;
+ padding:17px 2px;margin:12px 0 16px;border-top:1px solid var(--v8-ui-divider);
+ border-bottom:1px solid var(--v8-ui-divider);background:transparent!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-live>div{
+ display:grid;align-content:center;gap:4px;min-width:0
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-live>div:last-child{text-align:right}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-live span{
+ font:750 10px/1.5 system-ui!important;letter-spacing:.11em;color:var(--v8-ui-gold)!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-live strong{
+ font:650 clamp(22px,2.5vw,33px)/1.2 Georgia,serif!important;
+ font-variant-numeric:tabular-nums;color:var(--v8-ui-ink)!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-live small{
+ font:500 12px/1.5 system-ui;color:var(--v8-ui-muted)!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-grid{
+ display:grid!important;grid-template-columns:repeat(5,minmax(0,1fr))!important;
+ gap:8px!important;min-width:0!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-cell{
+ display:grid;align-content:center;justify-items:center;gap:5px;min-width:0;
+ padding:15px 6px!important;min-height:80px;
+ border:1px solid var(--v8-ui-divider)!important;border-radius:15px!important;
+ background:transparent!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-cell span{
+ font:650 12px/1.25 system-ui!important;color:var(--v8-ui-ink)!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-cell strong{
+ font:700 clamp(17px,2vw,23px)/1.25 Georgia,serif!important;
+ font-variant-numeric:tabular-nums;color:var(--v8-ui-ink)!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-status{
+ margin:12px 0 0!important;font:500 12px/1.6 system-ui!important;
+ color:var(--v8-ui-muted)!important
+}
+@media(max-width:640px){
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-overview{
+  padding:13px 11px!important;border-radius:17px!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-head{align-items:flex-start}
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-head [data-v8-location]{
+  padding:8px 10px!important;min-height:42px;max-width:125px;white-space:normal
+ }
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-live{gap:9px!important;margin:12px 0!important;padding:12px 1px!important}
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-live strong{font-size:clamp(20px,6vw,26px)!important}
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px!important}
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-cell{min-height:65px!important;padding:9px 6px!important}
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-cell strong{font-size:20px!important}
+}
+@media(min-width:641px) and (max-width:940px){
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
