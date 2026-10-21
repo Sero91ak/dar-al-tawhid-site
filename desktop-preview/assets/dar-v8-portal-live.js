@@ -39,6 +39,22 @@ function colorLocale(){
  const notice=d.getElementById("darV8TranslationNotice");if(notice)notice.textContent=locale()==="de"?"Deutsche Originaltexte und Quellen bleiben unverändert.":t("unverified");
  const root=d.getElementById("darV8LocalePanel");if(root){root.lang=locale();root.dir=["ar","ckb"].includes(locale())?"rtl":"ltr"}
  const labels=d.querySelectorAll("[data-v8-ui-key]");labels.forEach(el=>{const tx=t(el.dataset.v8UiKey);if(tx)el.textContent=tx});
+
+ const translationRoutes={start:"start",quran:"quran",beitraege:"posts",hadith:"hadith",bibliothek:"library",frauen:"women",mehr:"more"};
+ for(const [route,key] of Object.entries(translationRoutes)){
+  const title=t(key);
+  d.querySelectorAll('.dar-v8-mobile-dock [data-v8-route="'+route+'"] > span').forEach(el=>{el.textContent=title});
+  d.querySelectorAll('.dar-v8-sidebar [data-v8-route="'+route+'"] span').forEach(el=>{if(!el.querySelector("img"))el.textContent=title});
+ }
+ const routeKey=translationRoutes[d.body?.dataset?.darV8Route];
+ if(routeKey){
+  const routeHero=d.querySelector("#pageRoot .dar-v8-route-copy h1");
+  if(routeHero)routeHero.textContent=t(routeKey);
+  const routeBreadcrumb=d.getElementById("darV8BreadLabel");
+  if(routeBreadcrumb)routeBreadcrumb.textContent=t(routeKey);
+ }
+ const chatKicker=d.querySelector(".dar-v8-messenger-header>div>span");
+ if(chatKicker)chatKicker.textContent="DĀR AL TAWḤĪD · "+t("searchTitle");
  const input=d.getElementById("siteSearch");if(input)input.placeholder=t("searchPlaceholder");
  const label=d.getElementById("darV8SourceSearchLabel");if(label)label.textContent=t("searchExplain");
 }
@@ -139,7 +155,9 @@ function initChat(){
  d.querySelectorAll("[data-v8-ask]").forEach(btn=>btn.addEventListener("click",()=>{input.value=btn.dataset.v8Ask||"";form.requestSubmit()}));
  d.getElementById("darV8ChatClear")?.addEventListener("click",()=>{log.replaceChildren();appendMessage("bot",t("searchExplain"));input.focus()});
  d.getElementById("darV8ChatBack")?.addEventListener("click",()=>{location.href="/?page=start"});
- const original=new URLSearchParams(location.search).get("q");
+ input.addEventListener("focus",()=>{d.body.classList.add("v8-chat-focused");syncVisualViewport()});
+ input.addEventListener("blur",()=>{d.body.classList.remove("v8-chat-focused");syncVisualViewport()});
+  const original=new URLSearchParams(location.search).get("q");
  if(original){input.value=original;form.requestSubmit()}
  colorLocale();
 }
@@ -245,6 +263,7 @@ function updateBookMode(host){
 
 function togglePlayer(force){
  const on=typeof force==="boolean"?force:!d.body.classList.contains("dar-v8-player-fullscreen");
+ if(!on)closePicker();
  d.body.classList.toggle("dar-v8-player-fullscreen",on);
  const player=d.querySelector(".v8-real-player"),control=d.getElementById("darV8PlayerFullscreen");
  if(player){player.setAttribute("aria-label",on?"Qurʾān Vollbild-Player":"Qurʾān Mini-Player");if(on){player.classList.add("dar-v8-controls-open");d.getElementById("darV8PlayerExpand")?.setAttribute("aria-expanded","true")}}
@@ -258,8 +277,90 @@ function installPlayer(){
  player.append(b);b.addEventListener("click",()=>togglePlayer());
  const close=d.createElement("button");close.id="darV8PlayerBackdrop";close.type="button";close.className="dar-v8-player-backdrop";close.setAttribute("aria-label","Player schließen");close.addEventListener("click",()=>togglePlayer(false));d.body.append(close);
 }
+let v8VisibleViewportBound=false,v8ActivePicker=null,v8PickerListenersBound=false;
+function syncVisualViewport(){
+ const height=Math.round(w.visualViewport?.height||w.innerHeight);
+ if(height>0)d.documentElement.style.setProperty("--v8-visible-height",height+"px");
+}
+function setupVisualViewport(){
+ if(v8VisibleViewportBound)return;v8VisibleViewportBound=true;
+ syncVisualViewport();w.visualViewport?.addEventListener("resize",syncVisualViewport,{passive:true});
+ w.addEventListener("orientationchange",syncVisualViewport,{passive:true});
+ w.addEventListener("resize",syncVisualViewport,{passive:true});
+}
+function closePicker(){
+ if(!v8ActivePicker)return;
+ v8ActivePicker.hidden=true;v8ActivePicker=null;
+}
+function openPicker(select){
+ if(!select?.options?.length)return;
+ const heading=select.closest("label")?.querySelector("span")?.textContent||select.getAttribute("aria-label")||"Auswahl";
+ let overlay=d.getElementById("darV8PickerOverlay");
+ if(!overlay){
+  overlay=element("section","dar-v8-picker-overlay");overlay.id="darV8PickerOverlay";overlay.hidden=true;
+  overlay.setAttribute("role","dialog");overlay.setAttribute("aria-modal","true");
+  const sheet=element("div","dar-v8-picker-panel");
+  const head=element("div","dar-v8-picker-head");
+  const title=element("strong","");title.id="darV8PickerTitle";
+  const close=element("button","","✕");close.type="button";close.setAttribute("aria-label","Auswahl schließen");
+  close.addEventListener("click",closePicker);head.append(title,close);
+  const search=element("input","");search.id="darV8PickerQuery";search.type="search";search.placeholder="Suchen …";search.setAttribute("aria-label","In Auswahl suchen");
+  const list=element("div","dar-v8-picker-options");list.id="darV8PickerOptions";list.setAttribute("role","listbox");
+  sheet.append(head,search,list);overlay.append(sheet);d.body.append(overlay);
+  overlay.addEventListener("click",e=>{if(e.target===overlay)closePicker()});
+  search.addEventListener("input",()=>paintPicker(select));
+  overlay.addEventListener("keydown",e=>{if(e.key==="Escape"){e.preventDefault();closePicker();select.focus({preventScroll:true})}});
+ }
+ v8ActivePicker=overlay;overlay.hidden=false;
+ d.getElementById("darV8PickerTitle").textContent=heading;
+ d.getElementById("darV8PickerQuery").value="";
+ paintPicker(select);
+}
+function paintPicker(select){
+ const list=d.getElementById("darV8PickerOptions");if(!list)return;
+ const term=norm(d.getElementById("darV8PickerQuery")?.value||"");
+ const choices=[...select.options].filter(o=>!o.disabled&&(!term||norm(o.text).includes(term)));
+ list.replaceChildren();
+ if(!choices.length){list.append(element("p","", "Keine passende Auswahl"));return}
+ const frag=d.createDocumentFragment();
+ choices.forEach(option=>{
+  const btn=element("button","",option.text.trim()||option.value);btn.type="button";
+  btn.setAttribute("role","option");btn.setAttribute("aria-selected",String(select.value===option.value));
+  btn.addEventListener("click",()=>{
+   const changed=select.value!==option.value;
+   select.value=option.value;
+   if(changed)select.dispatchEvent(new Event("change",{bubbles:true}));
+   closePicker();
+  });
+  frag.append(btn);
+ });list.append(frag);
+}
+function setupTouchPlayerPicker(){
+ if(v8PickerListenersBound||!w.matchMedia?.("(pointer:coarse)").matches)return;
+ v8PickerListenersBound=true;
+ for(const id of ["qaSurah","qaAyah","qaReciter"]){
+  const el=d.getElementById(id);if(!el)continue;
+  // Touch selection uses a real in-page list instead of iOS's giant native select wheel.
+  // Mouse and keyboard keep the native accessible <select>.
+  let alreadyOpened=false;
+  el.addEventListener("touchstart",e=>{if(e.cancelable)e.preventDefault();e.stopPropagation();alreadyOpened=true;openPicker(el)},{passive:false});
+  el.addEventListener("click",e=>{if(!w.matchMedia("(pointer:coarse)").matches)return;e.preventDefault();e.stopPropagation();if(!alreadyOpened)openPicker(el);alreadyOpened=false});
+ }
+}
+function updateLocaleNotice(){
+ let note=d.getElementById("darV8LocaleNotice");
+ if(!note){note=element("p","dar-v8-locale-notice");note.id="darV8LocaleNotice";
+  d.querySelector(".dar-v8-topbar")?.after(note)}
+ if(!note)return;
+ note.hidden=locale()==="de";
+ if(!note.hidden)note.textContent=t("unverified")+" · "+t("readGerman");
+}
+w.addEventListener("dar-v8-locale-changed",updateLocaleNotice);
+
 function init(key){
- currentPage=key;setupLanguages();installPlayer();colorLocale();
+ if(currentPage && currentPage!==key){closePicker();if(d.body.classList.contains("dar-v8-player-fullscreen"))togglePlayer(false)}
+ currentPage=key;setupLanguages();installPlayer();setupVisualViewport();setupTouchPlayerPicker();colorLocale();updateLocaleNotice();
+ colorLocale();
  if(key==="suche")initChat();
  if(key==="quran")initQuran();
  if(key==="einstellungen")settings();
