@@ -209,6 +209,29 @@ function translateExact(value){
  if(count)return count[1]+" işlev";
  const results=value.match(/^(\d+)\s+Ergebnisse$/);
  if(results)return results[1]+" sonuç";
+ // Parameterized UI messages are rendered with changing dates/counts/titles.
+ // Translate only their action/count labels; never translate the underlying source title.
+ const quantity=value.match(/^(\d+)\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt)$/);
+ const amounts={Veröffentlichungen:"yayın",Beiträge:"yazı",Seiten:"sayfa",
+    Themenbereiche:"konu alanı",Aussagen:"söz",gemerkt:"kaydedildi"};
+ if(quantity)return quantity[1]+" "+amounts[quantity[2]];
+ const ayat=value.match(/^(\d+)\s+Āyāt\s*·\s*(Mekkanisch|Medinensisch)$/);
+ if(ayat)return ayat[1]+" âyet · "+(ayat[2]==="Mekkanisch"?"Mekkî":"Medenî");
+ const surahs=value.match(/^(\d+)\s+Sūren\s*·\s*(\d+)\s+Āyāt$/);
+ if(surahs)return surahs[1]+" sûre · "+surahs[2]+" âyet";
+ const rate=value.match(/^(\d+(?:[.,]\d+)?)%\s+Trefferquote$/);
+ if(rate)return rate[1]+"% başarı oranı";
+ const choice=value.match(/^(\d+)\/(\d+)\s+gewählt$/);
+ if(choice)return choice[1]+"/"+choice[2]+" seçildi";
+ const listCount=value.match(/^(.{2,90}),\s*(\d+)\s+Veröffentlichungen$/);
+ if(listCount)return listCount[1]+", "+listCount[2]+" yayın";
+ const pageCount=value.match(/^(.{2,90})\s*·\s*(\d+)\s+Seiten$/);
+ if(pageCount)return (dictionary.get(pageCount[1])||pageCount[1])+" · "+pageCount[2]+" sayfa";
+ const range=value.match(/^Sūrenbereich wechseln, aktuell (\d+)[–-](\d+)$/);
+ if(range)return "Sûre aralığını değiştir, şu an "+range[1]+"–"+range[2];
+ const action=value.match(/^(.{2,160}) öffnen$/);
+ if(action&&!/[<>\u0600-\u06ff]/.test(action[1]))
+   return action[1]+" aç";
  return null;
 }
 
@@ -301,5 +324,6 @@ global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,
   get translatedKeys(){return dictionary.size},
   get catalogStatus(){return remoteCatalogState},
   hasTranslation:(de)=>dictionary.has(de),
+  translateValue:translateExact,
   contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};
 })(window);
