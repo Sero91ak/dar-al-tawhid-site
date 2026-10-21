@@ -1,0 +1,114 @@
+name: DAR Turkish Adult Posts One-Time Backfill (100 max)
+
+on:
+  push:
+    branches:
+      - feature/tr-backfill-100-20261021
+    paths:
+      - '.github/workflows/dar-tr-backfill-100-once.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: dar-tr-backfill-100-20261021
+  cancel-in-progress: false
+
+jobs:
+  bounded-translation:
+    if: ${{ github.run_attempt == 1 }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify canonical source and approval contracts
+        run: |
+          node desktop-preview/i18n-core-v1/validate-core.cjs
+          node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
+          node scripts/verify-adult-post-language-manifests.cjs
+      - name: Draft at most 100 remaining Turkish canonical posts, saving each block
+        env:
+          DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
+          DAR_I18N_AI_API_URL: https://api.openai.com/v1/chat/completions
+          DAR_I18N_AI_MODEL: gpt-4.1
+          DAR_I18N_PROVIDER_APPROVED: 'yes'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -z "$DAR_I18N_AI_API_KEY" ]]; then
+            echo "::error::OpenAI translation secret absent"
+            exit 1
+          fi
+          requests=0
+          for batch in 1 2 3 4 5; do
+            node desktop-preview/i18n-core-v1/translation-worklist.cjs \
+              --out "$RUNNER_TEMP/dar-tr-backfill-worklist.json" > "$RUNNER_TEMP/dar-tr-status-$batch.json"
+            eligible="$(node - "$RUNNER_TEMP/dar-tr-backfill-worklist.json" <<'NODE'
+          const fs=require('fs');
+          const w=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
+          console.log(w.queue.filter(x=>x.locale==='tr'&&x.kind==='post'&&
+           ['pending','stale'].includes(x.state)&&!w.items.find(y=>y.id===x.id)?.immutable?.sourceReviewBlocked).length);
+          NODE
+            )"
+            if [[ "$eligible" -eq 0 ]]; then
+              echo "No remaining eligible German post source for Turkish draft"
+              break
+            fi
+            out="$RUNNER_TEMP/tr-backfill-batches/batch-$batch"
+            mkdir -p "$out"
+            node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs \
+              --generate \
+              --inventory "$RUNNER_TEMP/dar-tr-backfill-worklist.json" \
+              --output "$out" --locale tr --kind post \
+              --max-requests 20 --max-source-chars 7000 --max-output-tokens 3500
+            dir="$out/desktop-preview/i18n-core-v1/translations/tr/post"
+            node - "$RUNNER_TEMP/dar-tr-backfill-worklist.json" "$dir" <<'NODE'
+          const fs=require('fs'),path=require('path');
+          const work=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
+          const byPath=new Map(work.queue.map(r=>[r.translationPath,r]));
+          const dir=process.argv[3],names=fs.existsSync(dir)?fs.readdirSync(dir).filter(f=>f.endsWith('.json')):[];
+          if(!names.length||names.length>20)throw Error('Invalid paid call count: '+names.length);
+          let tokens=0;
+          for(const n of names){
+           const q=byPath.get('desktop-preview/i18n-core-v1/translations/tr/post/'+n);
+           const rec=JSON.parse(fs.readFileSync(path.join(dir,n),'utf8'));
+           if(!q||q.id!==rec.id||q.locale!=='tr'||q.sourceHash!==rec.sourceHash||
+              rec.status!=='draft'||rec.reviewer!==null||!rec.fields?.title||!rec.fields?.body)
+              throw Error('Invalid or unreviewed canonical draft: '+n);
+           tokens+=Number(rec.modelUsage?.total_tokens||0);
+          }
+          console.log('PASS batch:',names.length,'unapproved Turkish manuscripts,',tokens,'tokens');
+          NODE
+            dest_dir="desktop-preview/i18n-core-v1/translations/tr/post"
+            mkdir -p "$dest_dir"
+            for file in "$dir"/*.json; do
+              dest="$dest_dir/$(basename "$file")"
+              if [[ -e "$dest" ]]; then
+                echo "::error::A stored draft already exists, refusing duplicate: $dest"
+                exit 1
+              fi
+              cp "$file" "$dest"
+            done
+            git add "$dest_dir"
+            git -c user.name="github-actions[bot]" \
+              -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+              commit -m "chore(i18n): Turkish adult post drafts, batch $batch of five (unapproved)"
+            git push origin HEAD:refs/heads/feature/tr-backfill-100-20261021
+            requests=$((requests+20))
+            echo "Saved batch $batch to review branch (maximum request ceiling 100)"
+          done
+          echo "Turkish draft backfill pass completed; no approved content published." >> "$GITHUB_STEP_SUMMARY"
+      - name: Preserve any paid outputs even if later push fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-tr-paid-backfill-review-only
+          path: ${{ runner.temp }}/tr-backfill-batches/
+          if-no-files-found: warn
+          retention-days: 14
