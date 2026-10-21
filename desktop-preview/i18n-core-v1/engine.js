@@ -51,7 +51,7 @@ function editDistanceAtMostTwo(a,b){
 }
 function safeSameOriginUrl(raw, origin){
  try{
-  const url=new URL(raw||"/",origin);
+  const url=new global.URL(raw||"/",origin);
   return url.origin===origin ? url.pathname+url.search+url.hash : null;
  }catch(_){return null}
 }
