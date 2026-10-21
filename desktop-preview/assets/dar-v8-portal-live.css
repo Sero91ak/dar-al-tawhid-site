@@ -852,3 +852,42 @@ body.desktop-overhaul-v18 .v8-real-prayer .dar-v8-countdown{
  body.desktop-overhaul-v18 #pageRoot .dar-v8-quran-audio-launch small{font-size:10px!important}
  body.desktop-overhaul-v18 #pageRoot #darV8QuranAudioLaunch{min-height:42px;padding:8px 10px;font-size:11px}
 }
+
+
+/* Search-dock tap focus: glow the existing capsule, not the text/input's rectangle.
+   This also repairs hardcoded beige/gray fields on the night appearance. */
+body.desktop-overhaul-v18 #pageRoot .smart-search-dock{
+ border:1px solid var(--v8-ui-divider)!important;
+ border-radius:22px!important;
+ background:var(--v8-ui-field)!important;box-shadow:none!important
+}
+body.desktop-overhaul-v18 #pageRoot .smart-search-dock:focus-within{
+ border-color:var(--v8-ui-gold)!important;
+ box-shadow:0 0 0 3px var(--v8-ui-focus)!important;
+}
+body.desktop-overhaul-v18 #pageRoot .smart-search-dock .smart-search-input,
+body.desktop-overhaul-v18 #pageRoot .smart-search-dock .smart-search-input:focus,
+body.desktop-overhaul-v18 #pageRoot .smart-search-dock .smart-search-input:focus-visible{
+ border:0!important;border-radius:0!important;background:transparent!important;
+ outline:0!important;box-shadow:none!important;filter:none!important;
+ color:var(--v8-ui-ink)!important;font-size:16px!important
+}
+body.desktop-overhaul-v18 #pageRoot .smart-search-dock .smart-search-input::placeholder{
+ color:var(--v8-ui-muted)!important;opacity:1!important
+}
+body.desktop-overhaul-v18 #pageRoot .smart-search-dock :is(.smart-search-icon,.smart-search-status){
+ color:var(--v8-ui-gold)!important;opacity:1!important
+}
+body.desktop-overhaul-v18 #pageRoot .smart-search-dock :is(.smart-search-icon,.smart-search-input,.smart-search-status)::before,
+body.desktop-overhaul-v18 #pageRoot .smart-search-dock :is(.smart-search-icon,.smart-search-input,.smart-search-status)::after{
+ background:transparent!important;box-shadow:none!important;border:0!important;outline:0!important
+}
+body.desktop-overhaul-v18 #pageRoot .smart-search-dock .smart-search-input::-webkit-search-cancel-button{
+ -webkit-appearance:none;appearance:none
+}
+@media(max-width:959px){
+ body.desktop-overhaul-v18 #pageRoot .smart-search-dock{
+  position:sticky!important;top:59px!important;z-index:45;
+  padding:0 9px!important;max-width:100%!important;border-radius:19px!important
+ }
+}
