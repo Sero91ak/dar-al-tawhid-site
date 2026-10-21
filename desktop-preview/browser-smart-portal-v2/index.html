@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f2f4ee">
+<title>DĀR AL TAWḤĪD · Smart Knowledge Portal · Wissenschat V2</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;--paper:#f3f5ef;--panel:#fbfcf9;--white:#fff;--ink:#172e26;--muted:#69776c;--green:#315a48;--gold:#9b783e;--line:rgba(35,65,49,.13);--shadow:0 16px 52px rgba(26,47,37,.06);--hero:#122b25;--side:268px}
+*{box-sizing:border-box}html{background:var(--paper);overscroll-behavior-y:none}body{margin:0;color:var(--ink);background:var(--paper);min-height:100dvh;overscroll-behavior-y:none}body.dark{--paper:#071712;--panel:#0d211b;--white:#10261e;--ink:#edf3e9;--muted:#9bb5a5;--green:#b8d6b6;--gold:#d8b776;--line:rgba(211,231,214,.12);--shadow:0 22px 55px rgba(0,0,0,.13);--hero:#061611;color-scheme:dark}button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:4px}::selection{background:#c7b083;color:#10251d}
+.shell{display:grid;grid-template-columns:var(--side) minmax(0,1fr);min-height:100dvh;max-width:1900px;margin:auto}.sidebar{height:100dvh;position:sticky;top:0;display:flex;flex-direction:column;background:var(--panel);border-right:1px solid var(--line);padding:31px 22px 22px;z-index:15}.identity{display:flex;gap:13px;align-items:center;margin-bottom:43px;min-width:0}.emblem{flex:none;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#213f32;color:#f8ebca;font:26px Georgia,serif;box-shadow:inset 0 0 0 1px #d7b77b55}.brand{min-width:0}.brand strong{display:block;font:600 16px Georgia,serif;letter-spacing:.055em;white-space:nowrap}.brand small{display:block;color:var(--gold);font-size:9px;font-weight:750;letter-spacing:.15em;margin-top:6px;white-space:nowrap}.nav-cap{color:var(--muted);letter-spacing:.19em;text-transform:uppercase;font-size:9px;font-weight:800;padding:4px 13px 12px}.nav{display:flex;flex-direction:column;gap:4px}.navlink{min-height:46px;display:flex;align-items:center;gap:12px;padding:0 13px;border-radius:12px;font-size:13px;font-weight:620;transition:background .2s}.navlink:hover{background:rgba(83,117,93,.09)}.navlink.current{background:rgba(107,134,104,.14);color:var(--green)}.navlink svg{width:19px;height:19px;stroke-width:1.65;flex:none}.sidebar-bottom{margin-top:auto;padding-top:18px;border-top:1px solid var(--line)}.sidebar-bottom p{font-size:11px;color:var(--muted);line-height:1.7;margin:7px 11px 0}.sidebar-bottom .mini-head{font-size:11px;font-weight:740;padding:0 11px}
+.page{min-width:0;padding:0 clamp(22px,4.1vw,82px) 78px}.topbar{height:85px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line)}.crumb{display:flex;align-items:center;gap:11px;color:var(--muted);font-size:12px}.crumb strong{color:var(--ink);font-weight:650}.actions{display:flex;align-items:center;gap:10px}.action{border:1px solid var(--line);width:41px;height:41px;display:grid;place-items:center;background:var(--panel);color:var(--ink);border-radius:50%;transition:transform .18s,background .18s}.action:hover{transform:translateY(-1px);background:var(--paper)}.action svg{width:18px;height:18px}.search-button{border:1px solid var(--line);background:var(--panel);color:var(--muted);min-width:224px;height:42px;border-radius:40px;display:flex;align-items:center;gap:10px;padding:0 14px;text-align:left;font-size:12px}.search-button svg{width:16px;height:16px}.search-button span{flex:1}.key{border:1px solid var(--line);border-radius:5px;padding:3px 5px;color:var(--muted);font-size:10px}
+.eyebrow{color:var(--gold);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.21em}.intro{padding:44px 0 24px;display:flex;justify-content:space-between;gap:20px;align-items:end}.intro h1{font:500 clamp(31px,3.5vw,49px)/1.07 Georgia,"Times New Roman",serif;letter-spacing:-.044em;margin:11px 0}.intro p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}.today{text-align:right;font-size:12px;color:var(--muted);line-height:1.8}.today strong{font-size:13px;color:var(--ink);font-weight:650}
+.hero{isolation:isolate;position:relative;overflow:hidden;min-height:350px;border-radius:22px;background:linear-gradient(90deg,rgba(7,29,21,.97),rgba(10,35,29,.88) 45%,rgba(7,35,29,.3) 100%),url("https://dar-al-tawhid.de/assets/feed-backgrounds/auto/mosque/bg-pro-mosque-60.webp") center 48%/cover no-repeat,#0d2921;color:#f7f8ef;display:flex;align-items:center;padding:clamp(30px,5vw,65px)}.hero:after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 90% 7%,rgba(222,190,113,.25),transparent 35%)}.hero-inner{max-width:570px}.hero .eyebrow{color:#dbc591}.hero h2{font:500 clamp(32px,3.6vw,53px)/1.1 Georgia,serif;letter-spacing:-.036em;margin:16px 0 14px}.hero p{font-size:14px;line-height:1.8;color:#e4ece4;max-width:470px}.hero-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:23px}.primary,.secondary{display:inline-flex;align-items:center;justify-content:center;min-height:43px;border-radius:999px;padding:0 21px;font-size:12px;font-weight:740;gap:12px;transition:transform .2s}.primary:hover,.secondary:hover{transform:translateY(-2px)}.primary{background:#f0e5ca;color:#183127}.secondary{border:1px solid #e8e5d66b;color:#fbf6e9}.hero-aside{position:absolute;bottom:25px;right:33px;color:#eee3c0;font-size:10px;letter-spacing:.13em}
+.main-grid{display:grid;grid-template-columns:minmax(0,1.78fr) minmax(250px,.83fr);gap:32px;margin-top:33px;align-items:start}.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:15px;margin-bottom:17px}.section-head h3{font:500 23px Georgia,serif;letter-spacing:-.02em;margin:0}.section-head small{font-size:11px;color:var(--muted)}.text-link{font-size:11px;font-weight:720;color:var(--gold)}.link-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.feature{padding:22px 20px 19px;border-top:1px solid var(--line);background:linear-gradient(155deg,var(--panel),transparent);border-radius:2px 2px 14px 14px;min-height:160px;display:flex;flex-direction:column;transition:background .2s,transform .2s}.feature:hover{background:var(--panel);transform:translateY(-2px)}.feature .feature-top{display:flex;justify-content:space-between;align-items:center}.feature .symbol{color:var(--gold);font:30px Georgia,serif}.feature .arrow{color:var(--muted);font-size:19px}.feature h4{font:500 21px Georgia,serif;margin:21px 0 7px}.feature p{font-size:12px;line-height:1.6;margin:0;color:var(--muted)}.quote{margin:30px 0 0;padding:25px 29px;border-top:1px solid var(--line);background:var(--panel);border-radius:0 0 16px 16px}.quote .eyebrow{font-size:9px}.quote blockquote{font:400 clamp(18px,1.8vw,25px)/1.45 Georgia,serif;margin:15px 0 12px}.quote .source{font-size:11px;color:var(--muted);line-height:1.6}.quote a{color:var(--gold);font-weight:750}
+.rail{display:flex;flex-direction:column;gap:23px}.rail-panel{padding:22px 21px;border-top:1px solid var(--line);background:var(--panel);border-radius:0 0 16px 16px}.rail-panel h3{font:500 19px Georgia,serif;margin:0 0 16px}.prayer-state{display:flex;align-items:center;gap:12px;padding:14px 0 15px}.prayer-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(148,124,75,.11);color:var(--gold);font:27px Georgia,serif}.prayer-state strong{display:block;font-size:13px;font-weight:690}.prayer-state span{display:block;font-size:11px;color:var(--muted);margin-top:5px;line-height:1.5}.rail-link{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-top:1px solid var(--line);font-size:12px;font-weight:630}.rail-link span:last-child{color:var(--gold)}.tiny{font-size:11px;line-height:1.6;color:var(--muted)}.rec-list{display:flex;flex-direction:column;gap:8px}.rec{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.rec a{font-size:12px;font-weight:650;line-height:1.5}.rec small{display:block;color:var(--muted);font-size:10px;margin-top:5px}.save{background:transparent;border:0;color:var(--muted);font-size:20px;padding:4px}.save.active{color:var(--gold)}.below{margin-top:35px;padding:22px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;align-items:center}.below h3{font:500 24px Georgia,serif;margin:0 0 8px}.below p{font-size:12px;line-height:1.6;color:var(--muted);margin:0}.below a{flex:none;border:1px solid var(--line);padding:13px 19px;border-radius:99px;font-size:12px;font-weight:680}.footer{margin-top:35px;border-top:1px solid var(--line);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:11px;color:var(--muted)}.footer a{color:var(--green);font-weight:650}.mobile-brand,.mobile-dock{display:none}
+dialog{padding:0;border:1px solid var(--line);border-radius:19px;width:min(600px,calc(100vw - 28px));max-height:min(78vh,710px);overflow:hidden;color:var(--ink);background:var(--panel);box-shadow:0 30px 100px #0004}dialog::backdrop{background:rgba(3,15,12,.58);backdrop-filter:blur(3px)}.search-modal-head{display:flex;align-items:center;gap:12px;padding:17px 20px;border-bottom:1px solid var(--line)}.search-modal-head svg{width:21px;height:21px}.search-modal-head input{flex:1;min-width:0;outline:none!important;border:0;background:transparent;color:var(--ink);font-size:15px}.search-modal-head button{border:0;background:transparent;color:var(--muted);font-size:21px}.results{padding:13px;overflow-y:auto;max-height:55vh}.result{padding:13px;display:flex;align-items:center;gap:15px;border-radius:10px}.result:hover,.result:focus-visible{background:rgba(126,145,115,.1)}.result .rsymbol{font-size:22px;color:var(--gold);width:30px;text-align:center}.result strong{font-size:13px}.result small{display:block;color:var(--muted);margin-top:4px;font-size:11px}.result .go{margin-left:auto;color:var(--gold)}.hint{font-size:10px;color:var(--muted);padding:11px 19px;border-top:1px solid var(--line)}
+@media(min-width:1400px){.page{padding-left:70px;padding-right:70px}.hero{min-height:390px}.main-grid{gap:39px}}@media(max-width:1150px){:root{--side:220px}.sidebar{padding:27px 13px}.brand strong{font-size:13px}.brand small{font-size:8px}.page{padding-left:32px;padding-right:32px}.main-grid{grid-template-columns:minmax(0,1fr) 260px;gap:20px}.feature{padding:18px 16px}}
+@media(max-width:940px){.shell{grid-template-columns:minmax(0,1fr)}.sidebar{display:none}.mobile-brand{display:flex;align-items:center;gap:10px;font-family:Georgia,serif;font-size:15px;font-weight:700;white-space:nowrap}.mobile-brand .emblem{height:34px;width:34px;font-size:20px}.crumb{display:none}.topbar{height:73px}.page{padding:0 clamp(18px,4vw,42px) 110px}.main-grid{grid-template-columns:1fr;gap:24px}.rail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.mobile-dock{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:30;justify-content:space-around;gap:4px;background:color-mix(in srgb,var(--panel) 95%,transparent);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:11px 12px calc(11px + env(safe-area-inset-bottom))}.mobile-dock a{display:flex;align-items:center;flex-direction:column;gap:5px;font-size:10px;color:var(--muted);min-width:54px}.mobile-dock a:first-child{color:var(--green);font-weight:800}.mobile-dock svg{width:20px;height:20px}}
+@media(max-width:650px){.topbar{height:67px}.search-button{min-width:40px;width:41px;height:41px;justify-content:center;padding:0}.search-button span,.search-button .key{display:none}.action{width:39px;height:39px}.actions{gap:7px}.intro{padding:29px 0 22px}.intro h1{font-size:33px}.today{display:none}.hero{margin-left:-18px;margin-right:-18px;border-radius:0;min-height:350px;padding:30px 25px}.hero h2{font-size:36px}.hero p{font-size:13px}.hero-aside{display:none}.main-grid{margin-top:27px}.link-grid{gap:8px}.feature{min-height:145px;padding:16px 14px}.feature h4{font-size:17px;margin:17px 0 6px}.feature p{font-size:11px}.feature .symbol{font-size:24px}.rail{grid-template-columns:1fr}.quote{padding:22px 19px}.below{align-items:flex-start;flex-direction:column}.footer{flex-direction:column;align-items:flex-start;margin-top:8px}.section-head h3{font-size:21px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+
+/* Standalone preview UI: knowledge chat; no app or push code touched */
+.k-chat{margin:28px 0 12px;background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+.k-chat header{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;padding:25px 28px}
+.k-chat h3{font:500 27px Georgia,serif;margin:7px 0 8px}.k-chat header p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}
+.k-tag{font-size:10px;color:var(--green);background:color-mix(in srgb,var(--green) 9%,transparent);padding:8px 12px;border-radius:50px;white-space:nowrap}
+.k-layout{display:grid;grid-template-columns:minmax(0,1fr) 220px;border-top:1px solid var(--line)}
+.k-main{min-width:0;display:flex;flex-direction:column}.k-log{height:335px;overflow:auto;overscroll-behavior:contain;padding:20px 25px;display:flex;flex-direction:column;gap:16px}
+.k-msg{max-width:100%;font-size:12px;line-height:1.65}.k-msg.person{align-self:flex-end;border-radius:16px 16px 3px 16px;padding:11px 16px;background:#2e5d49;color:white;max-width:85%;font-size:13px}
+.k-title{font-size:10px;font-weight:750;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.k-msg p{font-size:12px;line-height:1.7;margin:3px 0 10px}
+.k-hit{display:block;padding:11px 13px;border-left:2px solid var(--line);background:color-mix(in srgb,var(--green) 4%,transparent);border-radius:0 9px 9px 0;margin-top:8px}
+.k-hit:hover{border-left-color:var(--gold);background:color-mix(in srgb,var(--green) 9%,transparent)}.k-hit small{color:var(--gold);font-size:10px;letter-spacing:.04em}.k-hit strong{display:block;font-size:13px;margin:5px 0}.k-hit span{display:block;font-size:11px;color:var(--muted);line-height:1.55}
+.k-chips{display:flex;gap:7px;flex-wrap:wrap;margin:11px 0}.k-chips button{border:1px solid var(--line);border-radius:99px;padding:8px 12px;background:transparent;color:var(--ink);font-size:11px}
+.k-chips button:hover{border-color:var(--gold)}
+.k-form{position:relative;border-top:1px solid var(--line);padding:12px 18px}.k-input-row{display:flex;align-items:flex-end;gap:10px;border-radius:12px;border:1px solid var(--line);background:var(--paper);padding:9px 10px 9px 13px}
+.k-input-row:focus-within{border-color:var(--gold)}.k-input-row textarea{min-height:32px;max-height:95px;resize:none;flex:1;background:transparent;border:0;outline:0;min-width:0;color:var(--ink);font:13px/1.55 Arial,sans-serif}
+.k-input-row button{background:#285943;border:0;border-radius:10px;color:white;width:38px;height:38px;font-size:18px}.k-input-row button:disabled{opacity:.4;cursor:default}
+.k-foot{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;color:var(--muted);font-size:10px;padding:10px 2px 0}.k-foot button{border:0;background:transparent;color:var(--gold);font-size:10px;text-decoration:underline}
+.k-suggest{position:absolute;bottom:100%;left:18px;right:18px;max-height:180px;overflow-y:auto;background:var(--panel);border:1px solid var(--line);padding:6px;border-radius:12px;box-shadow:0 12px 30px #0002;z-index:10}.k-suggest[hidden]{display:none}
+.k-suggest button{width:100%;text-align:left;padding:10px 12px;border-radius:7px;background:transparent;border:0;color:var(--ink);font-size:12px}.k-suggest button:hover{background:color-mix(in srgb,var(--green) 9%,transparent)}
+.k-side{border-left:1px solid var(--line);padding:19px 16px;background:color-mix(in srgb,var(--green) 2%,var(--panel))}
+.k-side h4{font:500 19px Georgia,serif;margin:8px 0 10px}.k-side p{font-size:11px;color:var(--muted);line-height:1.65;margin-bottom:19px}
+.k-topic{display:block;width:100%;border:0;border-top:1px solid var(--line);background:transparent;text-align:left;padding:13px 0;color:var(--ink);font-size:12px}
+.k-status{border-top:1px solid var(--line);padding-top:15px;margin-top:18px;font-size:10px;line-height:1.65;color:var(--muted)}
+@media(max-width:900px){.k-layout{grid-template-columns:1fr}.k-side{display:none}}
+@media(max-width:650px){.k-chat{margin:20px -18px 22px;border-radius:0}.k-chat header{padding:20px 18px}.k-chat h3{font-size:24px}.k-tag{font-size:0;min-width:10px;padding:8px}.k-tag::after{content:'●';font-size:12px}.k-log{height:340px;padding:17px 14px}.k-form{padding:10px 12px}.k-suggest{left:12px;right:12px}}
+
+
+/* WISSENSCHAT V2, nur Browser-Dashboard */
+.wk{margin-top:31px;overflow:hidden;border:1px solid var(--line);border-radius:20px;background:var(--panel);box-shadow:var(--shadow)}
+.wk-head{padding:25px 27px;display:flex;justify-content:space-between;gap:20px;align-items:center}
+.wk-logo{width:48px;height:48px;display:grid;place-items:center;background:#1a3e2f;color:#e7c992;border-radius:14px;font:30px Georgia,serif}
+.wk-name{display:flex;gap:13px;align-items:center}.wk-head h2{font:500 27px Georgia,serif;margin:3px 0}.wk-head p{margin:0;color:var(--muted);font-size:11px}
+.wk-tag{font-size:10px;color:var(--green);border:1px solid var(--line);padding:7px 9px;border-radius:50px;white-space:nowrap}
+.wk-grid{display:grid;grid-template-columns:minmax(0,1fr) 213px;border-top:1px solid var(--line)}
+.wk-chat{min-width:0}.wk-history{height:345px;overflow-y:auto;padding:21px 25px;display:flex;flex-direction:column;gap:14px;overscroll-behavior:contain}
+.wk-turn{max-width:100%;font-size:12px;line-height:1.7}.wk-turn.me{align-self:flex-end;background:#2a5b45;color:white;padding:12px 15px;border-radius:14px 14px 3px 14px;max-width:82%}
+.wk-turn.ai{width:100%}.wk-by{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:750;margin-bottom:6px}
+.wk-turn p{font-size:12px;line-height:1.6;margin:6px 0 13px}.wk-hit{display:block;padding:11px 13px;margin:8px 0;border-left:2px solid var(--line);background:color-mix(in srgb,var(--green) 4%,transparent);border-radius:0 8px 8px 0}
+.wk-hit:hover{border-left-color:var(--gold)}.wk-hit b{display:block;font-size:13px}.wk-hit small{display:block;font-size:10px;color:var(--muted);margin:3px 0}.wk-hit em{display:block;color:var(--gold);font-size:10px;font-style:normal;margin-top:6px}
+.wk-compose{border-top:1px solid var(--line);padding:13px 17px 17px;position:relative}.wk-input-line{border:1px solid var(--line);border-radius:13px;padding:9px 10px 9px 14px;background:var(--paper);display:flex;align-items:center;gap:10px}
+.wk-input-line input{border:0;background:transparent;color:var(--ink);outline:0;min-width:0;flex:1;font-size:13px}.wk-submit{width:38px;height:36px;background:#28543c;color:white;border:0;border-radius:9px;font-size:18px}
+.wk-helper{padding-top:9px;display:flex;justify-content:space-between;gap:10px;font-size:10px;color:var(--muted)}.wk-helper button{background:transparent;border:0;color:var(--gold);font-size:10px}
+.wk-suggestions{position:absolute;bottom:100%;left:17px;right:17px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:7px;box-shadow:var(--shadow);max-height:175px;overflow-y:auto}
+.wk-suggestions[hidden]{display:none}.wk-suggestions button{display:block;width:100%;text-align:left;color:var(--ink);border:0;background:transparent;padding:9px;border-radius:8px;font-size:12px}.wk-suggestions button:hover{background:var(--paper)}
+.wk-sidebar{padding:23px 15px;border-left:1px solid var(--line)}.wk-sidebar h3{font:500 18px Georgia,serif;margin:8px 0 15px}.wk-topic{display:block;background:transparent;color:var(--ink);width:100%;text-align:left;border:0;border-bottom:1px solid var(--line);padding:13px 3px;font-size:12px}.wk-topic:hover{color:var(--gold)}.wk-sidebar p{font-size:11px;line-height:1.65;color:var(--muted)}.wk-state{margin-top:23px;border-top:1px solid var(--line);padding-top:14px;font-size:10px;line-height:1.7;color:var(--muted)}
+@media(max-width:900px){.wk-grid{grid-template-columns:1fr}.wk-sidebar{display:none}}@media(max-width:650px){.wk-head{padding:19px 16px}.wk-head h2{font-size:23px}.wk-logo{width:38px;height:38px;font-size:24px}.wk-tag{font-size:0;padding:7px}.wk-tag:before{content:'●';font-size:10px}.wk-history{padding:16px;height:365px}.wk-compose{padding:10px}.wk-suggestions{left:10px;right:10px}}
+
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3V10zM9 20v-7h6v7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6c-3-3-7-3-10-2v15c4-1 7-1 10 2 3-3 6-3 10-2V4c-3-1-7-1-10 2zm0 0v15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z" fill="none" stroke="currentColor" stroke-linejoin="round"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15.6A9 9 0 0 1 8.4 4 9.1 9.1 0 1 0 20 15.6z" stroke="currentColor" fill="none" stroke-linejoin="round" stroke-width="1.7"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M19 5l-2 2M7 17l-2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 6v6l4 2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></symbol>
+</svg>
+<div class="shell">
+<aside class="sidebar" aria-label="Hauptnavigation">
+ <a class="identity" href="https://dar-al-tawhid.de/" title="Zur bestehenden Website">
+  <span class="emblem" aria-hidden="true">د</span><span class="brand"><strong>DĀR AL TAWḤĪD</strong><small>QURʾĀN · SUNNAH · ĀṮĀR</small></span>
+ </a>
+ <div class="nav-cap">Wissensportal</div>
+ <nav class="nav">
+  <a class="navlink current" href="#start" aria-current="page"><svg><use href="#i-home"/></svg>Übersicht</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=quran"><svg><use href="#i-book"/></svg>Qurʾān</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=beitraege"><svg><use href="#i-grid"/></svg>Beiträge</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=bibliothek"><svg><use href="#i-book"/></svg>Bibliothek</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=wissen"><svg><use href="#i-grid"/></svg>Wissen & Lernen</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=dua"><svg><use href="#i-moon"/></svg>Duʿāʾ</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=gebetszeiten"><svg><use href="#i-clock"/></svg>Gebetszeiten</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=mehr"><svg><use href="#i-grid"/></svg>Weitere Bereiche</a>
+ </nav>
+ <div class="sidebar-bottom"><div class="mini-head">Wissen mit Quellen</div><p>Geprüfte Inhalte, klare Navigation und ein ruhiger Ort zum Lernen.</p><p style="color:var(--gold);margin-top:16px">SMART KNOWLEDGE PORTAL · V1</p></div>
+</aside>
+<div class="page" id="start">
+ <header class="topbar">
+  <div class="crumb"><span>Wissensportal</span><span style="color:var(--gold)">/</span><strong>Übersicht</strong></div>
+  <div class="mobile-brand"><span class="emblem" aria-hidden="true">د</span>DĀR AL TAWḤĪD</div>
+  <div class="actions">
+    <button id="openSearch" class="search-button" type="button" aria-label="Bereiche suchen"><svg><use href="#i-search"/></svg><span>Bereiche durchsuchen …</span><span class="key">⌘ K</span></button>
+    <button class="action" id="themeToggle" aria-label="Erscheinungsbild wechseln" type="button"><svg><use href="#i-moon"/></svg></button>
+    <a class="action" href="https://dar-al-tawhid.de/" aria-label="Aktuelle Website öffnen" title="Aktuelle Website öffnen" style="font-size:21px">↗</a>
+  </div>
+ </header>
+ <main>
+  <section class="intro" aria-label="Begrüßung">
+   <div><div class="eyebrow">WILLKOMMEN IM WISSENSPORTAL</div><h1 id="greeting">As-salāmu ʿalaikum</h1><p>Dein Zugang zu authentischem Wissen aus Qurʾān und Sunnah.</p></div>
+   <div class="today"><strong id="todayDate">—</strong><br><span id="todayTime">—</span></div>
+  </section>
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero-inner">
+      <div class="eyebrow">DĀR AL TAWḤĪD · WISSEN VERTIEFEN</div>
+      <h2 id="heroTitle">Wissen entdecken.<br>Mit Quellen verstehen.</h2>
+      <p>Qurʾān, authentische Überlieferungen und Aussagen der frühen Gelehrten – übersichtlich und ohne Ablenkung.</p>
+      <div class="hero-actions"><a class="primary" href="https://dar-al-tawhid.de/?page=quran">Qurʾān öffnen <span>↗</span></a><a class="secondary" href="https://dar-al-tawhid.de/?page=wissen">Wissensbereiche <span>→</span></a></div>
+    </div>
+    <div class="hero-aside">QURʾĀN · SUNNAH · SALAF</div>
+  </section>
+
+<section class="k-chat" id="knowledgeChat" aria-labelledby="knowledgeTitle">
+<header><div><div class="eyebrow">SMART KNOWLEDGE · 0 € KI-API-KOSTEN</div><h3 id="knowledgeTitle">Dein Wissenschat</h3><p>Stelle Fragen in Alltagssprache. Finde geprüfte Website-Fundstellen statt erfundener KI-Antworten.</p></div><div class="k-tag">LOKALE SUCHE</div></header>
+<div class="k-layout"><div class="k-main">
+<div class="k-log" id="kLog" role="log" aria-live="polite"></div>
+<form class="k-form" id="kForm">
+<div id="kSuggest" class="k-suggest" hidden></div>
+<div class="k-input-row"><textarea id="kInput" aria-label="Frage an den Wissenschat" placeholder="Was sagen die Salaf über Īmān?" rows="1" maxlength="360"></textarea><button id="kSend" type="submit" disabled aria-label="Frage stellen">↑</button></div>
+<div class="k-foot"><span id="kStatus">Vorschau · Quellenindex wird geprüft</span><button type="button" id="kLearn">Lokales Lernen deaktivieren & Daten löschen</button></div>
+</form></div>
+<aside class="k-side"><div class="eyebrow">FRAGEN ZUM STARTEN</div><h4>Was möchtest du wissen?</h4><p>Der Chat sucht ausschließlich auf DĀR AL TAWḤĪD, nicht im freien Internet.</p>
+<button class="k-topic" type="button" data-k-question="Was finde ich zu Tawḥīd?">۞ &nbsp; Tawḥīd & Einzigkeit →</button>
+<button class="k-topic" type="button" data-k-question="Duʿāʾ um Geduld">☾ &nbsp; Duʿāʾ & Dhikr →</button>
+<button class="k-topic" type="button" data-k-question="Bücher über Iǧmāʿ">▤ &nbsp; Bibliothek & PDFs →</button>
+<button class="k-topic" type="button" data-k-question="Was ist der Unterschied zwischen Īmān und Kufr?">✧ &nbsp; Īmān & Kufr →</button>
+<div class="k-status"><strong id="kCount">Beispielquellen laden ...</strong><br>Quellen aus der eigenen Website. Beim Tippen: Vorschläge; nach Klicks: lokale Gewichtung. Ohne fremde API.</div></aside></div></section>
+  
+<section class="wk" id="knowledgeChat" aria-labelledby="knowledgeTitle">
+  <div class="wk-head"><div class="wk-name"><div class="wk-logo" aria-hidden="true">۞</div><div><div class="eyebrow">DĀR · SMART KNOWLEDGE</div><h2 id="knowledgeTitle">Dein Wissenschat</h2><p>Fragen stellen · Fundstellen finden · Quellen öffnen</p></div></div><span class="wk-tag">OHNE KI-API</span></div>
+  <div class="wk-grid"><div class="wk-chat">
+    <div class="wk-history" id="knowledgeHistory" role="log" aria-live="polite"></div>
+    <form class="wk-compose" id="knowledgeForm">
+      <div class="wk-suggestions" id="knowledgeSuggestions" hidden></div>
+      <div class="wk-input-line"><input id="knowledgeInput" autocomplete="off" maxlength="280" aria-label="Stelle eine Frage zu DĀR AL TAWḤĪD" placeholder="Was sagen die Salaf über Īmān?"><button class="wk-submit" type="submit" aria-label="Frage absenden">↑</button></div>
+      <div class="wk-helper"><span>Nur Website-Inhalte. Keine erfundenen Antworten.</span><button type="button" id="knowledgeReset">Lokales Lernen löschen</button></div>
+    </form>
+  </div><aside class="wk-sidebar"><div class="eyebrow">WISSEN ENTDECKEN</div><h3>Was möchtest du wissen?</h3>
+    <button type="button" class="wk-topic" data-query="Tawḥīd">۞ &nbsp; Tawḥīd</button>
+    <button type="button" class="wk-topic" data-query="Duʿāʾ um Geduld">☾ &nbsp; Duʿāʾ</button>
+    <button type="button" class="wk-topic" data-query="Qurʾān und Tafsīr">◈ &nbsp; Qurʾān & Tafsīr</button>
+    <button type="button" class="wk-topic" data-query="Iǧmāʿ">▤ &nbsp; Bibliothek</button>
+    <div class="wk-state" id="knowledgeStatus">Beispieldaten. Bei Einbindung auf dar-al-tawhid.de wird der vorhandene Wissensindex geladen.</div>
+  </aside></div>
+</section>
+
+<div class="main-grid">
+    <div>
+      <div class="section-head"><h3>Dein Zugang zum Wissen</h3><small>Direkte Verknüpfungen</small></div>
+      <div class="link-grid">
+        <a class="feature" href="https://dar-al-tawhid.de/?page=quran"><div class="feature-top"><span class="symbol">۞</span><span class="arrow">↗</span></div><h4>Qurʾān</h4><p>Lesen, hören und studieren.</p></a>
+        <a class="feature" href="https://dar-al-tawhid.de/?page=bibliothek"><div class="feature-top"><span class="symbol">▤</span><span class="arrow">↗</span></div><h4>Bibliothek</h4><p>Bücher, Sammlungen und Quellen.</p></a>
+        <a class="feature" href="https://dar-al-tawhid.de/?page=beitraege"><div class="feature-top"><span class="symbol">✧</span><span class="arrow">↗</span></div><h4>Beiträge</h4><p>Wissensbeiträge mit Nachweisen.</p></a>
+        <a class="feature" href="https://dar-al-tawhid.de/?page=wissen"><div class="feature-top"><span class="symbol">◈</span><span class="arrow">↗</span></div><h4>Wissenszentrum</h4><p>Islamische Themen systematisch lernen.</p></a>
+      </div>
+      <article class="quote" aria-labelledby="quoteTitle">
+       <span class="eyebrow">GRUNDSATZ DES WISSENS</span>
+       <blockquote id="quoteTitle">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</blockquote>
+       <div class="source">Muḥammad ibn Sīrīn · Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn.<br><a href="https://www.islamweb.net/ar/fatwa/38541/" target="_blank" rel="noopener noreferrer">Originalnachweis bei Islamweb ↗</a></div>
+      </article>
+    </div>
+    <aside class="rail" aria-label="Persönlicher Schnellzugriff">
+      <div class="rail-panel">
+        <div class="eyebrow" style="margin-bottom:12px">DEIN TAG</div><h3>Gebete & Orientierung</h3>
+        <div class="prayer-state"><div class="prayer-icon" aria-hidden="true">☾</div><div><strong>Gebetszeiten ansehen</strong><span>Deine genauen Zeiten werden im bestehenden Gebetsbereich ermittelt.</span></div></div>
+        <a class="rail-link" href="https://dar-al-tawhid.de/?page=gebetszeiten"><span>Standort und Zeiten öffnen</span><span>↗</span></a>
+        <a class="rail-link" href="https://dar-al-tawhid.de/?page=dua"><span>Duʿāʾ-Bereich</span><span>↗</span></a>
+      </div>
+      <div class="rail-panel">
+        <div class="eyebrow" style="margin-bottom:12px">PERSÖNLICH</div><h3>Meine Schnellzugriffe</h3><p class="tiny">Markiere deine wichtigsten Bereiche. Diese Auswahl wird nur in deinem Browser gespeichert.</p>
+        <div class="rec-list" id="favorites"></div>
+      </div>
+      <div class="rail-panel">
+        <div class="eyebrow" style="margin-bottom:12px">SMART SEARCH · VORSCHAU</div><h3>Finde deinen Bereich</h3><p class="tiny">Bereichssuche mit deutschen Begriffen und bekannten Schreibweisen wie Tawḥīd, Tauhid und Īmān. Eine echte Inhalts-KI wird erst nach Quellenindexierung angebunden.</p>
+        <button class="rail-link" id="railSearch" type="button" style="background:none;border-left:0;border-right:0;border-bottom:0;width:100%;color:var(--ink)"><span>Suche öffnen</span><span>↗</span></button>
+      </div>
+    </aside>
+  </div>
+  <section class="below" aria-label="Weiterlernen"><div><div class="eyebrow" style="margin-bottom:10px">WEITERLERNEN</div><h3>Wissen, das weiterführt.</h3><p>Entdecke Quellen, Überlieferungen und thematische Lernbereiche im bestehenden Portal.</p></div><a href="https://dar-al-tawhid.de/?page=wissen">Wissenszentrum öffnen ↗</a></section>
+ </main>
+ <footer class="footer"><span>© DĀR AL TAWḤĪD · Designvorschau, nicht die öffentliche Website</span><a href="https://dar-al-tawhid.de/">Zur aktuellen Website ↗</a></footer>
+</div>
+</div>
+<nav class="mobile-dock" aria-label="Mobile Navigation"><a href="#start"><svg><use href="#i-home"/></svg>Start</a><a href="https://dar-al-tawhid.de/?page=quran"><svg><use href="#i-book"/></svg>Qurʾān</a><a href="https://dar-al-tawhid.de/?page=beitraege"><svg><use href="#i-grid"/></svg>Beiträge</a><a href="https://dar-al-tawhid.de/?page=bibliothek"><svg><use href="#i-book"/></svg>Bibliothek</a><a href="https://dar-al-tawhid.de/?page=mehr"><svg><use href="#i-grid"/></svg>Mehr</a></nav>
+<dialog id="searchDialog" aria-label="Bereiche durchsuchen">
+ <div class="search-modal-head"><svg><use href="#i-search"/></svg><input id="searchInput" autocomplete="off" spellcheck="false" placeholder="Qurʾān, Tawḥīd, Īmān, Gebet ..." aria-label="Suchbegriff"><button type="button" id="closeSearch" aria-label="Suche schließen">×</button></div>
+ <div class="results" id="searchResults" aria-live="polite"></div><div class="hint">Vorschau: Die Suche findet aktuell Website-Bereiche, noch keine einzelnen Qurʾān-Verse oder Beiträge. ESC schließt die Suche.</div>
+</dialog>
+<script>
+(function(){
+'use strict';
+var site='https://dar-al-tawhid.de/';
+var entries=[
+{title:'Qurʾān',description:'Lesen, hören und Tafsīr entdecken',path:'?page=quran',tags:'koran quran qur’an qurʾan qurān surah ayah tafsir tadabbur rezitation'},
+{title:'Beiträge',description:'Veröffentlichte Texte mit Nachweisen',path:'?page=beitraege',tags:'beitrag post aussagen gelehrte athar salaf überlieferungen'},
+{title:'Bibliothek',description:'Bücher und PDF-Sammlungen',path:'?page=bibliothek',tags:'bibliothek pdf buch bücher sammlung lesen'},
+{title:'Wissen & Lernen',description:'Themen, Tawḥīd, Īmān und ʿAqīdah',path:'?page=wissen',tags:'wissen lernen tawhid tauhid tawḥīd aqida aqidah ʿaqidah iman īmān fiqh sunnah'},
+{title:'Duʿāʾ',description:'Bittgebete und Erinnerungen',path:'?page=dua',tags:'dua duaa duʿāʾ bittgebet dhikr'},
+{title:'Gebetszeiten',description:'Standort und Gebetsübersicht',path:'?page=gebetszeiten',tags:'gebet salah salat namaz fajr dhuhr asr maghrib isha standort'},
+{title:'Weitere Bereiche',description:'Zusätzliche Werkzeuge und Inhalte',path:'?page=mehr',tags:'mehr werkzeuge zakat qibla einstellungen'}
+];
+function get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}
+function set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function normalize(v){return String(v||'').toLocaleLowerCase('de').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[ʿʾ’']/g,'').replace(/ḥ/g,'h').replace(/ḍ/g,'d').replace(/ṭ/g,'t').replace(/ṣ/g,'s').replace(/ā/g,'a').replace(/ī/g,'i').replace(/ū/g,'u').replace(/ǧ/g,'g').replace(/ḫ/g,'h').replace(/ẓ/g,'z').replace(/[^a-z0-9äöüß ]/g,' ').replace(/\s+/g,' ').trim()}
+var dialog=document.getElementById('searchDialog'),input=document.getElementById('searchInput'),results=document.getElementById('searchResults');
+function renderResults(){
+var q=normalize(input.value);var words=q.split(' ').filter(Boolean);
+var list=entries.filter(function(v){var hay=normalize(v.title+' '+v.tags+' '+v.description);return !words.length||words.every(function(w){return hay.indexOf(w)>=0})});
+results.textContent='';
+if(!list.length){var empty=document.createElement('p');empty.className='tiny';empty.style.padding='16px';empty.textContent='Kein passender Bereich. Die vollständige Inhaltssuche ist noch nicht Teil dieser Vorschau.';results.appendChild(empty);return}
+list.forEach(function(v){var a=document.createElement('a');a.className='result';a.href=site+v.path;var icon=document.createElement('span');icon.className='rsymbol';icon.setAttribute('aria-hidden','true');icon.textContent='◈';var body=document.createElement('span');var title=document.createElement('strong');title.textContent=v.title;var small=document.createElement('small');small.textContent=v.description;body.append(title,small);var go=document.createElement('span');go.className='go';go.textContent='↗';a.append(icon,body,go);results.appendChild(a)})
+}
+function show(){renderResults();if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');input.focus()}
+function close(){if(typeof dialog.close==='function')dialog.close();else dialog.removeAttribute('open')}
+document.getElementById('openSearch').addEventListener('click',show);
+document.getElementById('railSearch').addEventListener('click',show);
+document.getElementById('closeSearch').addEventListener('click',close);
+dialog.addEventListener('click',function(e){if(e.target===dialog)close()});
+document.addEventListener('keydown',function(e){if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();show()}if(e.key==='/'&&!dialog.open&&document.activeElement.tagName!=='INPUT'){e.preventDefault();show()}});
+input.addEventListener('input',renderResults);
+var theme=get('dat-smart-theme','light');
+function paintTheme(){document.body.classList.toggle('dark',theme==='dark');document.getElementById('themeToggle').innerHTML=theme==='dark'?'<svg><use href="#i-sun"/></svg>':'<svg><use href="#i-moon"/></svg>';document.querySelector('meta[name="theme-color"]').setAttribute('content',theme==='dark'?'#071712':'#f2f4ee')}
+document.getElementById('themeToggle').addEventListener('click',function(){theme=theme==='dark'?'light':'dark';set('dat-smart-theme',theme);paintTheme()});paintTheme();
+var selected=get('dat-smart-favs',['?page=quran','?page=bibliothek']);
+function favorites(){var target=document.getElementById('favorites');target.textContent='';entries.slice(0,5).forEach(function(v){var row=document.createElement('div');row.className='rec';var a=document.createElement('a');a.href=site+v.path;a.textContent=v.title;var b=document.createElement('button');b.className='save'+(selected.includes(v.path)?' active':'');b.setAttribute('aria-label',(selected.includes(v.path)?'Aus Schnellzugriff entfernen: ':'Zu Schnellzugriff hinzufügen: ')+v.title);b.textContent=selected.includes(v.path)?'★':'☆';b.addEventListener('click',function(){selected=selected.includes(v.path)?selected.filter(function(x){return x!==v.path}):selected.concat(v.path);set('dat-smart-favs',selected);favorites()});row.append(a,b);target.appendChild(row)})}
+favorites();
+function updateClock(){var d=new Date();var h=d.getHours();document.getElementById('greeting').textContent=h<11?'As-salāmu ʿalaikum · Guten Morgen':h<18?'As-salāmu ʿalaikum · Guten Tag':'As-salāmu ʿalaikum · Guten Abend';document.getElementById('todayDate').textContent=new Intl.DateTimeFormat('de-DE',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(d);document.getElementById('todayTime').textContent=new Intl.DateTimeFormat('de-DE',{hour:'2-digit',minute:'2-digit'}).format(d)+' Uhr'}
+updateClock();setInterval(updateClock,30000);
+})();
+</script>
+<script>
+(function(){"use strict";
+const O="https://dar-al-tawhid.de", by=id=>document.getElementById(id);
+const ui={log:by("kLog"),input:by("kInput"),suggest:by("kSuggest"),status:by("kStatus"),count:by("kCount"),learn:by("kLearn"),send:by("kSend")};
+if(!ui.log||!ui.input)return;
+const stop=new Set("was wie wer wo wann woher wieso warum ist sind hat haben über uber zu zur aus bei der die das den dem des und oder eine einen ein einer einem etwas welches welche welcher bitte mir mich unsere unser sagen sagt sagte finde finden ich du wir ihr dort dazu hierzu auch schon jetzt noch denn zum für fuer ein mit nach gibt es".split(" "));
+const aliases={tawhid:"tawhid tauhid tawḥīd tawheed توحيد einzigkeit monotheismus",iman:"iman iiman īmān imaan glaube glauben إيمان",shirk:"shirk schirk beigesellung شرك",quran:"quran qurʾān koran koran قرآن qur an",aqidah:"aqidah aqida akida ʿaqīdah glaubenslehre",dua:"dua duaa duʿāʾ bittgebet دعاء",hadith:"hadith hadeeth hadis ḥadīṯ ḥadīth sunnah حديث",salaf:"salaf sahaba ṣaḥābah sahabah tābiʿīn tabiun",salah:"salah salat ṣalāh beten gebet gebetszeiten صلاة",kufr:"kufr kafir unglaube كفر",sabr:"sabr geduld geduldig",tafsir:"tafsir tafsīr koranauslegung",zakat:"zakat zakāt",ijma:"ijma iǧmāʿ idschma konsens",fiqh:"fiqh fikh rechtslehre"};
+const normalize=s=>String(s??"").toLocaleLowerCase("de").normalize("NFD").replace(/[\u0300-\u036f\u064b-\u065f]/g,"").replace(/[ʿʾ‘’'ʼ]/g,"").replace(/[āīūḥṣḍṭẓ]/g,ch=>({ā:"a",ī:"i",ū:"u",ḥ:"h",ṣ:"s",ḍ:"d",ṭ:"t",ẓ:"z"}[ch]||ch)).replace(/[^\p{L}\p{N}]+/gu," ").replace(/\s+/g," ").trim();
+const groups=new Map();Object.entries(aliases).forEach(([k,str])=>{str.split(" ").forEach(v=>groups.set(normalize(v),k));groups.set(k,k)});
+const toks=q=>normalize(q).split(" ").filter(t=>t.length>1&&!stop.has(t)).map(w=>groups.get(w)||w);
+const localRead=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}};
+const localSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let clicks=localRead("dat_chat_clicks_v3",{}),personal=localRead("dat_chat_optin_v3",true),mode="demo",previous="",db=[];
+function doc(d){if(!d||!d.title)return null;let u;try{u=new URL(String(d.url||""),O);if(u.origin!==O)return null}catch(e){return null}
+const item={id:String(d.id||d.title),title:String(d.title).slice(0,250),kind:String(d.kind||"Fundstelle"),excerpt:String(d.excerpt||"").slice(0,340),reference:String(d.reference||""),url:u.pathname+u.search+u.hash,words:[],titleWords:[]};item.titleWords=toks(item.title);
+item.words=[...new Set(toks([item.title,item.excerpt,item.reference,String(d.searchText||"").slice(0,1200)].join(" ")))].slice(0,160);return item}
+function add(list){const seen=new Set(db.map(x=>x.id));for(const raw of list){let d=doc(raw);if(d&&!seen.has(d.id)){db.push(d);seen.add(d.id)}}}
+add([
+{id:"section-quran",title:"Qurʾān und Tafsīr",kind:"Bereich",excerpt:"Qurʾān-Reader, Sūrah, Tafsīr, Rezitation und Tadabbur",searchText:"quran iman tawhid koran tafsir",url:"/#quran"},
+{id:"section-posts",title:"Beiträge und Überlieferungen",kind:"Bereich",excerpt:"Qurʾān, Sunnah, Salaf, ʿAqīdah und Fiqh",searchText:"salaf iman kufr sunnah hadith",url:"/?page=beitraege"},
+{id:"section-wissen",title:"Wissenszentrum",kind:"Bereich",excerpt:"Themen zu Tawḥīd, Īmān und ʿAqīdah",searchText:"tawhid iman shirk kufr ijma",url:"/?page=wissen"},
+{id:"section-dua",title:"Duʿāʾ Sammlung",kind:"Bereich",excerpt:"Bittgebete, Dhikr, Geduld und Vergebung",searchText:"dua gebet sabr geduld",url:"/?page=dua"},
+{id:"section-library",title:"Bibliothek",kind:"Bereich",excerpt:"Bücher und PDF-Veröffentlichungen",searchText:"buch bücher pdf ijma",url:"/?page=bibliothek"},
+{id:"pdf-ijtihad",title:"Al Ijtihad wa Taqlid",kind:"PDF",excerpt:"Veröffentlichung aus unserer Bibliothek",reference:"Bibliothek · Iǧtihād und Taqlīd",searchText:"ijtihad taqlid fiqh",url:"/assets/library/pdfs/pub-20260817-001-v1-1.pdf"},
+{id:"pdf-ijma",title:"Al Ijma",kind:"PDF",excerpt:"Veröffentlichung zum Iǧmāʿ",reference:"Bibliothek · Al Ijma",searchText:"ijma konsens",url:"/assets/library/pdfs/pub-20260809-001-v1-0.pdf"},
+{id:"dua-sabr",title:"Duʿāʾ um Geduld und festen Stand",kind:"Duʿāʾ",excerpt:"Unser Herr, gieße Geduld über uns aus, festige unsere Schritte.",reference:"Qurʾān 2:250",searchText:"sabr geduld standhaft",url:"/#dua/dua-002-sabr-thabbit"},
+{id:"dua-dunya",title:"Unser Herr, gib uns Gutes",kind:"Duʿāʾ",excerpt:"Unser Herr, gib uns Gutes im Diesseits und Jenseits.",reference:"Qurʾān 2:201",searchText:"dua jenseits dunya",url:"/#dua/dua-001-rabbana-atina"}
+]);
+function distance(a,b){if(Math.abs(a.length-b.length)>2)return 5;let p=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let n=[i];for(let j=1;j<=b.length;j++)n[j]=Math.min(n[j-1]+1,p[j]+1,p[j-1]+Number(a[i-1]!==b[j-1]));p=n}return p[b.length]}
+function score(d,q){const terms=toks(q);if(!terms.length)return 0;let points=0,hits=0;for(const t of terms){let s=0;if(d.titleWords.includes(t))s=10;else if(d.words.includes(t))s=5;else if(d.titleWords.some(x=>x.startsWith(t)&&t.length>=3))s=6;else if(d.words.some(x=>x.startsWith(t)&&t.length>=4))s=3;else if(t.length>=4&&d.titleWords.some(x=>distance(t,x)<=(t.length<6?1:2)))s=2;if(s){hits++;points+=s}}if(!hits)return 0;points*=Math.pow(hits/terms.length,1.6);if(hits===terms.length)points+=4;if(d.kind==="Bereich")points*=.72;if(personal)points+=Math.min(2,Number(clicks[d.id]||0)*.35);return points}
+function find(q,max=5){return db.map(d=>({d,s:score(d,q)})).filter(x=>x.s>2).sort((a,b)=>b.s-a.s).slice(0,max)}
+function el(tag,cls,text){let n=document.createElement(tag);if(cls)n.className=cls;if(text!=null)n.textContent=String(text);return n}
+function output(node){ui.log.appendChild(node);ui.log.scrollTop=ui.log.scrollHeight}
+function msg(){let n=el("div","k-msg");n.appendChild(el("div","k-title","DĀR · Wissensfinder"));return n}
+function chips(box,arr){let area=el("div","k-chips");arr.forEach(q=>{let b=el("button","",q);b.type="button";b.onclick=()=>submit(q);area.appendChild(b)});box.appendChild(area)}
+function submit(q){q=String(q||"").trim().slice(0,360);if(!q)return;ui.suggest.hidden=true;output(el("div","k-msg person",q));ui.input.value="";resize();let terms=toks(q);let hits=find(q,5);
+if(/^(und|was ist mit|zeige mehr|dazu|andere)/i.test(q)&&previous&&terms.length<=3){let extended=find(previous+" "+q,5);if(extended.length&&(!hits.length||extended[0].s>hits[0].s))hits=extended}
+if(terms.length)previous=q;let m=msg();
+if(!hits.length){m.appendChild(el("p","", "Dazu finde ich im aktuell verfügbaren Index keine ausreichend passende Fundstelle. Ich erfinde keine Antwort und keine Quellen."));m.appendChild(el("p","",mode==="demo"?"Diese HTML-Vorschau hat nur Beispieldaten. Nach Website-Einbindung werden die öffentlich freigegebenen Inhaltsindizes durchsucht.":"Präzisiere Gelehrter, Thema, Vers oder Quellwerk."));chips(m,["Tawḥīd","Duʿāʾ um Geduld","Iǧmāʿ"]);output(m);return}
+m.appendChild(el("p","", "Ich habe "+hits.length+" passende "+(hits.length===1?"Fundstelle":"Fundstellen")+" auf DĀR AL TAWḤĪD gefunden. Öffne die Treffer für den vollständigen Zusammenhang."));
+for(const {d} of hits){let a=el("a","k-hit");a.href=O+d.url;a.target="_blank";a.rel="noopener noreferrer";a.appendChild(el("small","",d.kind+" ↗"));a.appendChild(el("strong","",d.title));if(d.excerpt)a.appendChild(el("span","",d.excerpt));if(d.reference)a.appendChild(el("small","",d.reference));a.addEventListener("click",()=>{if(!personal)return;clicks[d.id]=Math.min(30,(Number(clicks[d.id]||0)+1));localSet("dat_chat_clicks_v3",clicks)});m.appendChild(a)}
+m.appendChild(el("p","",mode==="demo"?"Vorschau mit Beispielquellen. Vollständige Suche erst auf der Website.":"Suchtreffer sind keine neu formulierte Fatwā oder freie KI-Antwort."));output(m)}
+function resize(){ui.input.style.height="auto";ui.input.style.height=Math.min(95,ui.input.scrollHeight)+"px";ui.send.disabled=!ui.input.value.trim()}
+function suggest(){resize();let q=ui.input.value.trim();ui.suggest.replaceChildren();if(q.length<2){ui.suggest.hidden=true;return}let found=find(q,4);ui.suggest.hidden=!found.length;found.forEach(({d})=>{let b=el("button","",d.title+" ↗");b.type="button";b.onclick=()=>submit(d.title);ui.suggest.appendChild(b)})}
+by("kForm").addEventListener("submit",e=>{e.preventDefault();submit(ui.input.value)});
+ui.input.addEventListener("input",suggest);ui.input.addEventListener("keydown",e=>{if(e.key==="Enter"&&!e.shiftKey&&!e.isComposing){e.preventDefault();submit(ui.input.value)}if(e.key==="Escape")ui.suggest.hidden=true});
+document.querySelectorAll("[data-k-question]").forEach(x=>x.addEventListener("click",()=>submit(x.getAttribute("data-k-question"))));
+ui.learn.addEventListener("click",()=>{personal=!personal;clicks={};localSet("dat_chat_clicks_v3",{});localSet("dat_chat_optin_v3",personal);refresh()});
+function refresh(){ui.status.textContent=mode==="demo"?"Vorschau · Beispielquellen":mode==="online"?"Website-Index geladen":"Nur Grunddaten verfügbar";ui.count.textContent=db.length.toLocaleString("de-DE")+" Suchdatensätze";ui.learn.textContent=personal?"Lokales Lernen deaktivieren & Daten löschen":"Lokales Lernen aktivieren"}
+async function online(){if(location.hostname!=="dar-al-tawhid.de")return;const endpoints=[
+["/data/ilm-knowledge-index.json",data=>(data.entries||[]).map(d=>({id:d.id,title:d.title,kind:({quran:"Qurʾān",dua:"Duʿāʾ",athar:"Āṯār",sunnah:"Ḥadīṯ",posts:"Beitrag",quiz:"Quiz"}[d.kind]||d.kind),excerpt:d.excerpt,reference:d.reference,searchText:[d.searchText||"",d.body||"",...(d.contextHints||[])].join(" ").slice(0,1500),url:d.route?.view==="post"?"/#post/"+encodeURIComponent(d.route.value):d.route?.view==="dua"?"/#dua/"+encodeURIComponent(d.route.value):d.route?.view==="quran-surah"?"/#quran-surah/"+encodeURIComponent(d.route.value):"/?page="+(d.route?.view==="more"?"mehr":"wissen")}))],
+["/data/library-publications.json",data=>(data.publications||[]).map(d=>({id:"lib-"+d.id,title:d.title,kind:"Bibliothek",excerpt:d.description||d.subtitle||d.topic||"Buch aus unserer Bibliothek",reference:d.category,searchText:[d.topic,d.category,(d.tags||[]).join(" "),(d.searchAliases||[]).join(" ")].join(" "),url:d.pdfUrl||"/?page=bibliothek"}))],
+["/data/quran-search-keywords.json",data=>{(Array.isArray(data)?data:[]).forEach(d=>{let key=normalize(d.id||d.label);if(key)(d.terms||[]).forEach(t=>groups.set(normalize(t),key))});return []}]
+];
+let loaded=0;const all=await Promise.allSettled(endpoints.map(async ([url,parser])=>{let timeout=new AbortController(),timer=setTimeout(()=>timeout.abort(),12000);try{let r=await fetch(url,{signal:timeout.signal,cache:"default"});if(!r.ok)throw Error(r.status);return parser(await r.json())}finally{clearTimeout(timer)}}));for(const r of all)if(r.status==="fulfilled"){let a=r.value||[];add(a);loaded+=a.length}mode=loaded?"online":"offline";refresh();if(loaded){let b=msg();b.appendChild(el("p","",db.length.toLocaleString("de-DE")+" Einträge aus den Website-Indizes geladen. Frag jetzt nach einem Thema oder Gelehrten."));output(b)}}
+let intro=msg();intro.appendChild(el("p","","As-salāmu ʿalaikum! Stelle eine Frage zu unserem Wissen. Ich finde passende Seiten, Originalauszüge und Quellenhinweise. Freie KI-Antworten ohne Belege werden nicht erzeugt."));chips(intro,["Was finde ich über Tawḥīd?","Duʿāʾ um Geduld","Bücher über Iǧmāʿ"]);output(intro);refresh();online();
+})();</script>
+
+<script>
+/* Website-beschränkte Suche; keine LLM-API; lokales Ranking */
+(function(){
+'use strict';
+const origin='https://dar-al-tawhid.de',H=document.getElementById('knowledgeHistory'),I=document.getElementById('knowledgeInput'),S=document.getElementById('knowledgeSuggestions'),Q=document.getElementById('knowledgeStatus');
+if(!H||!I)return;
+const dictionary={tawhid:['tauhid','tawheed','einzigkeit','توحيد'],iman:['imān','īmān','glaube','glauben','إيمان'],dua:['duʿāʾ','duaa','bittgebet'],quran:['koran','qurʾān','قرآن'],shirk:['schirk','beigesellung'],salaf:['sahaba','sahabah','tābiʿīn'],geduld:['sabr','standhaftigkeit'],ijma:['iǧmāʿ','konsens']};
+const norm=t=>String(t||'').toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f\u064b-\u065f]/g,'').replace(/[ʿʾ‘’']/g,'').replace(/ḥ/g,'h').replace(/ṣ/g,'s').replace(/ṭ/g,'t').replace(/ā/g,'a').replace(/ī/g,'i').replace(/ū/g,'u').replace(/[^\p{L}\p{N}]+/gu,' ').trim();
+const aliases=new Map();Object.entries(dictionary).forEach(([k,items])=>[k,...items].forEach(x=>aliases.set(norm(x),k)));
+const words=t=>norm(t).split(/\s+/).filter(w=>w.length>2&&!['was','wie','wer','wo','wann','und','der','die','das','eine','einer','bei','mit','aus','von','uber','ich','mir','über','gibt','finde','sagen','dazu','alle','welche','suche'].includes(w)).map(w=>aliases.get(w)||w);
+const seeds=[
+{id:'nav-quran',title:'Qurʾān',kind:'Bereich',text:'Quran Koran Tafsir Tadabbur Rezitation Verse Sūrah',url:'/?page=quran'},
+{id:'nav-wissen',title:'Wissenszentrum – Tawḥīd und Īmān',kind:'Bereich',text:'Tawhid Tauhid Iman Aqidah Salaf Glaubenslehre',url:'/?page=wissen'},
+{id:'nav-dua',title:'Duʿāʾ-Sammlung',kind:'Bereich',text:'Bittgebet Geduld Vergebung Sabr',url:'/?page=dua'},
+{id:'nav-posts',title:'Beiträge und Überlieferungen',kind:'Bereich',text:'Salaf Sunnah Hadith Athar Texte',url:'/?page=beitraege'},
+{id:'nav-library',title:'Bibliothek und PDFs',kind:'Bereich',text:'Bücher Ijma Fiqh Taqlid Ijtihad',url:'/?page=bibliothek'},
+{id:'pub-ijma',title:'Al Ijma',kind:'Bibliothek',text:'Ijma Konsens',url:'/assets/library/pdfs/pub-20260809-001-v1-0.pdf'},
+{id:'pub-ijtihad',title:'Al Ijtihad wa Taqlid',kind:'Bibliothek',text:'Fiqh Ijtihad Taqlid',url:'/assets/library/pdfs/pub-20260817-001-v1-1.pdf'},
+{id:'dua-sabr',title:'Duʿāʾ um Geduld und festen Stand',kind:'Duʿāʾ',text:'Unser Herr gieße Geduld über uns aus und festige unsere Schritte',reference:'Qurʾān 2:250',url:'/?page=dua'},
+{id:'dua-good',title:'Unser Herr, gib uns Gutes im Diesseits und Jenseits',kind:'Duʿāʾ',text:'Bittgebet Güte Dunya Akhira',reference:'Qurʾān 2:201',url:'/?page=dua'}];
+let data=seeds.slice(), clicks={};try{clicks=JSON.parse(localStorage.getItem('dat-kchat-ranking')||'{}')}catch{}
+function node(tag,cls,value){let e=document.createElement(tag);if(cls)e.className=cls;if(value!==undefined)e.textContent=value;return e}
+function write(box){H.appendChild(box);H.scrollTop=H.scrollHeight}
+function score(d,query,more=false){let terms=words(query);let hay=norm([d.title,d.text,d.reference].join(' '));let hayWords=words(hay),title=norm(d.title);let n=0;
+for(let w of terms){if(title.includes(w))n+=8;else if(hayWords.includes(w))n+=5;else if(hay.includes(w))n+=3;else if(more&&w.length>4&&hayWords.some(h=>Math.abs(h.length-w.length)<=1&&h.slice(0,3)===w.slice(0,3)))n+=1}
+return terms.length?n/Math.pow(terms.length,0.8)+Math.min(3,(clicks[d.id]||0)*.5):0}
+function find(q,max=5){let sorted=data.map(d=>({d,s:score(d,q)})).filter(x=>x.s>1.8).sort((a,b)=>b.s-a.s);if(sorted.length<max){const ids=new Set(sorted.map(x=>x.d.id));sorted.push(...data.filter(d=>!ids.has(d.id)).map(d=>({d,s:score(d,q,true)})).filter(x=>x.s>1.8))}return sorted.sort((a,b)=>b.s-a.s).slice(0,max)}
+function ask(query){query=String(query||'').trim().slice(0,280);if(!query)return;S.hidden=true;write(node('div','wk-turn me',query));I.value='';let bot=node('div','wk-turn ai');bot.appendChild(node('div','wk-by','DĀR · Wissensfinder'));const found=find(query);
+bot.appendChild(node('p','',found.length?'Das habe ich in unseren Website-Inhalten gefunden. Öffne die Fundstelle für den vollständigen Wortlaut und die Quellen.':'Dazu finde ich im derzeit geladenen Index keinen ausreichend passenden Nachweis. Ich erfinde keine Antwort. Bitte präzisiere die Frage.'));
+for(let d of found.map(x=>x.d)){let a=node('a','wk-hit');a.href=origin+d.url;a.target='_blank';a.rel='noopener noreferrer';a.appendChild(node('small','',d.kind));a.appendChild(node('b','',d.title));if(d.text)a.appendChild(node('small','',String(d.text).slice(0,170)));if(d.reference)a.appendChild(node('em','',d.reference));a.addEventListener('click',()=>{clicks[d.id]=Math.min(30,(clicks[d.id]||0)+1);try{localStorage.setItem('dat-kchat-ranking',JSON.stringify(clicks))}catch{}});bot.appendChild(a)}write(bot)}
+function suggestions(){S.replaceChildren();if(I.value.trim().length<2){S.hidden=true;return}for(let o of find(I.value,4)){let b=node('button','',o.d.title);b.type='button';b.addEventListener('click',()=>ask(o.d.title));S.appendChild(b)}S.hidden=!S.childElementCount}
+I.addEventListener('input',suggestions);I.addEventListener('keydown',e=>{if(e.key==='Escape')S.hidden=true});
+document.getElementById('knowledgeForm').addEventListener('submit',e=>{e.preventDefault();ask(I.value)});
+document.querySelectorAll('[data-query]').forEach(b=>b.addEventListener('click',()=>ask(b.dataset.query)));
+document.getElementById('knowledgeReset').onclick=()=>{clicks={};try{localStorage.removeItem('dat-kchat-ranking')}catch{};Q.textContent='Der lokale Lernverlauf wurde zurückgesetzt.'};
+let hello=node('div','wk-turn ai');hello.appendChild(node('div','wk-by','DĀR · Wissensfinder'));hello.appendChild(node('p','','As-salāmu ʿalaikum! Frag nach Tawḥīd, einem Qurʾān-Thema, einer Duʿāʾ oder einer Veröffentlichung. Ich suche auf DĀR AL TAWḤĪD und zeige passende Fundstellen statt erfundener Antworten.'));write(hello);
+if(location.hostname==='dar-al-tawhid.de'){Promise.allSettled([
+fetch('/data/ilm-knowledge-index.json').then(r=>r.ok?r.json():null),
+fetch('/data/library-publications.json').then(r=>r.ok?r.json():null)
+]).then(list=>{let c=0;for(let [i,result] of list.entries()){if(result.status!=='fulfilled'||!result.value)continue;
+let rows=i===0?(result.value.entries||[]).map(v=>({id:String(v.id),title:v.title,kind:v.kind,text:[v.searchText,v.excerpt,v.speaker,v.work].join(' '),reference:v.reference,url:v.route?.view==='quran-surah'?'/?page=quran':v.route?.view==='dua'?'/?page=dua':v.route?.view==='post'?'/?page=beitraege':'/?page=wissen'})):(result.value.publications||[]).map(v=>({id:'lib-'+v.id,title:v.title,kind:'Bibliothek',text:[v.description,v.topic,v.category].join(' '),reference:v.category,url:v.pdfUrl||'/?page=bibliothek'}));
+for(let d of rows){if(!d.title)continue;try{let u=new URL(d.url,origin);if(u.origin!==origin)continue;data.push(d);c++}catch{}}}Q.textContent=c?data.length.toLocaleString('de-DE')+' indexierte Website-Fundstellen verfügbar. Keine KI-API.':'Website-Index nicht erreichbar; Grundsuche bleibt verfügbar.';})}
+})();
+</script>
+
+</body>
+</html>
