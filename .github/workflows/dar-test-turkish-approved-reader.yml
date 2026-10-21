@@ -8,6 +8,7 @@ on:
     paths:
       - 'test/assets/dar-test-turkish-content*'
       - 'test/assets/dar-test-turkish-ui*'
+      - 'test/assets/dar-test-turkish-browser-smoke.py'
       - 'test/assets/dar-home-v3-compact.js'
       - 'test/assets/dar-setup-hub.js'
       - 'test/assets/dar-more-v15.js'
@@ -66,3 +67,14 @@ jobs:
           if(route.includes('src="/assets/'))throw Error('Production assets unexpectedly injected');
           console.log('PASS: TEST-only module, no external paid calls, publication gate enabled.');
           NODE
+
+      - name: Serve adult Test app locally
+        shell: bash
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-test-tr-ui.log 2>&1 &
+          sleep 3
+      - name: Verify real Chrome German/Turkish UI language changes
+        shell: bash
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 test/assets/dar-test-turkish-browser-smoke.py
