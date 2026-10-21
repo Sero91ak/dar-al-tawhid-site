@@ -1,0 +1,2777 @@
+{
+  "schemaVersion": 1,
+  "scope": "KIDS_V4_450_CURRENT_EXACT_SOURCE_BLOCKERS_REVIEW",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "masterDictionaryRules": 10099,
+  "selectedQuestions": 450,
+  "completeFourPartQuestions": 343,
+  "incompleteQuestions": 107,
+  "incompleteByAge": {
+    "4-6": 80,
+    "7-8": 11,
+    "9-10": 16
+  },
+  "realOriginalMP3sRecorded": 1777,
+  "uniqueMissingSourceTexts": 49,
+  "blockersByUniqueQuestion": {
+    "EXISTING_RESERVED_CONNECTED_FLOW": 4,
+    "OLDER_ALREADY_PAID_NINE_ORIGINAL": 80,
+    "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED": 18,
+    "OWNER_QUARANTINED_PRONUNCIATION": 6,
+    "PAID_REQUEST_UNCONFIRMED_NO_RETRY": 1
+  },
+  "categoriesOverlapAcrossQuestions": true,
+  "previouslyPaidNineNeverChargeAgain": [
+    {
+      "generationId": "1UAwmEQ77D4BmA9DttHZ",
+      "originalTextSha256": "64adc74f20fd3329329bb627f697e619d475580fa047fbe54423c8ed021d9660",
+      "affectedQuestions": 1,
+      "alreadyPaid": true,
+      "requiresOriginalRecovery": true,
+      "newSynthesisAllowed": false
+    },
+    {
+      "generationId": "2xy9ZLej1wPTrnvAr9p7",
+      "originalTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+      "affectedQuestions": 30,
+      "alreadyPaid": true,
+      "requiresOriginalRecovery": true,
+      "newSynthesisAllowed": false
+    },
+    {
+      "generationId": "AToalNGbxiRe1zfOnDG3",
+      "originalTextSha256": "db20b330d676393a4285f186b4d12303febef03f41fb07c0efb3da25a9211260",
+      "affectedQuestions": 1,
+      "alreadyPaid": true,
+      "requiresOriginalRecovery": true,
+      "newSynthesisAllowed": false
+    },
+    {
+      "generationId": "DX5z8FWaCS4FDx3KrloO",
+      "originalTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+      "affectedQuestions": 35,
+      "alreadyPaid": true,
+      "requiresOriginalRecovery": true,
+      "newSynthesisAllowed": false
+    },
+    {
+      "generationId": "FGX65uXKWBnjULDxg3X1",
+      "originalTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+      "affectedQuestions": 0,
+      "alreadyPaid": true,
+      "requiresOriginalRecovery": true,
+      "newSynthesisAllowed": false
+    },
+    {
+      "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+      "originalTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+      "affectedQuestions": 35,
+      "alreadyPaid": true,
+      "requiresOriginalRecovery": true,
+      "newSynthesisAllowed": false
+    },
+    {
+      "generationId": "KIgCxJO3RDxhsIFJSYUB",
+      "originalTextSha256": "b7cb7402711cd57c1d87a1ccba5d5fac1b3ba7baf5bad780c3dac550e3f49dce",
+      "affectedQuestions": 0,
+      "alreadyPaid": true,
+      "requiresOriginalRecovery": true,
+      "newSynthesisAllowed": false
+    },
+    {
+      "generationId": "UUmC2fDiXaV5W1IQSumA",
+      "originalTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+      "affectedQuestions": 0,
+      "alreadyPaid": true,
+      "requiresOriginalRecovery": true,
+      "newSynthesisAllowed": false
+    },
+    {
+      "generationId": "aoKJuahenrKHfUE5OD9j",
+      "originalTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+      "affectedQuestions": 30,
+      "alreadyPaid": true,
+      "requiresOriginalRecovery": true,
+      "newSynthesisAllowed": false
+    }
+  ],
+  "missingDistinctSourceCategories": {
+    "OLDER_ALREADY_PAID_NINE_ORIGINAL": 9,
+    "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED": 21,
+    "EXISTING_RESERVED_CONNECTED_FLOW": 8,
+    "OWNER_QUARANTINED_PRONUNCIATION": 10,
+    "PAID_REQUEST_UNCONFIRMED_NO_RETRY": 1
+  },
+  "sharedNativeArabicOriginalsStillReservedForHumanHearingApproval": true,
+  "ownerRejectedPronunciationStillBlocked": true,
+  "newElevenLabsCreditsSpentByAudit": 0,
+  "actualElevenLabsSynthesisCalls": 0,
+  "humanListeningApproved": false,
+  "publicReleaseEnabled": false,
+  "questions": [
+    {
+      "questionId": "kids-quiz-001",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ],
+        "explanation": [
+          {
+            "sourceTextSha256": "db20b330d676393a4285f186b4d12303febef03f41fb07c0efb3da25a9211260",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "AToalNGbxiRe1zfOnDG3"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-002",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          },
+          {
+            "sourceTextSha256": "b7cb7402711cd57c1d87a1ccba5d5fac1b3ba7baf5bad780c3dac550e3f49dce",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          },
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ],
+        "explanation": [
+          {
+            "sourceTextSha256": "64adc74f20fd3329329bb627f697e619d475580fa047fbe54423c8ed021d9660",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "1UAwmEQ77D4BmA9DttHZ"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-006",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-007",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-011",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-012",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-016",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-017",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-023",
+      "ageBand": "7-8",
+      "missingAudioParts": {
+        "explanation": [
+          {
+            "sourceTextSha256": "85b21ae546baedf84eeb01fcb70560697bfce2ee4ccdbd3b03c14fd91bd1caad",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-031",
+      "ageBand": "7-8",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f61315c7fd09b325a685b9682917d124c9c132ae2e8b6965d66613d21d6db91e",
+            "reason": "EXISTING_RESERVED_CONNECTED_FLOW"
+          },
+          {
+            "sourceTextSha256": "0ea5f9ee190759019ce3cdd2322d756a8062ed00c1925f5f759ccfa4a158bea4",
+            "reason": "EXISTING_RESERVED_CONNECTED_FLOW"
+          },
+          {
+            "sourceTextSha256": "3a6cb0a42b1c41a9f1439cde7ae0b5ac8a7d836c2852e128b1fd076d4965fd86",
+            "reason": "EXISTING_RESERVED_CONNECTED_FLOW"
+          }
+        ]
+      },
+      "blockers": [
+        "EXISTING_RESERVED_CONNECTED_FLOW"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-036",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "explanation": [
+          {
+            "sourceTextSha256": "5109fd9ad8549a04eb127130c49e3ebbe3d63f1bc19dd0fb08cff6b606b764c7",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-041",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "28e0b40b0a26df80db84d1b821cba380eb080de6ed8e48d35be91429d67f3a2a",
+            "reason": "EXISTING_RESERVED_CONNECTED_FLOW"
+          },
+          {
+            "sourceTextSha256": "c265ab0d6a574a70d90d169bc81cb84320465ce7e9f5a88a34d22c01c6317231",
+            "reason": "EXISTING_RESERVED_CONNECTED_FLOW"
+          },
+          {
+            "sourceTextSha256": "714d54ae7924cfcb2c825b0034bafb8ab7782232a2f4077c4d655473547c84e3",
+            "reason": "EXISTING_RESERVED_CONNECTED_FLOW"
+          }
+        ],
+        "explanation": [
+          {
+            "sourceTextSha256": "becd22c0112b03fa2cce2b4bee0b0c9c140833304a6551eb4a010ccac14ea6b1",
+            "reason": "EXISTING_RESERVED_CONNECTED_FLOW"
+          }
+        ]
+      },
+      "blockers": [
+        "EXISTING_RESERVED_CONNECTED_FLOW"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-045",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "4c7da6824790eb5523bd9917b508c0e12339443228b8d5ce840445946724d32e",
+            "reason": "EXISTING_RESERVED_CONNECTED_FLOW"
+          }
+        ]
+      },
+      "blockers": [
+        "EXISTING_RESERVED_CONNECTED_FLOW"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-046",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
+            "reason": "OWNER_QUARANTINED_PRONUNCIATION"
+          },
+          {
+            "sourceTextSha256": "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
+            "reason": "OWNER_QUARANTINED_PRONUNCIATION"
+          }
+        ],
+        "explanation": [
+          {
+            "sourceTextSha256": "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30",
+            "reason": "OWNER_QUARANTINED_PRONUNCIATION"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_QUARANTINED_PRONUNCIATION"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-051",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-052",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-054",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-056",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-057",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-058",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-061",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-062",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          },
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-066",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-080",
+      "ageBand": "7-8",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "fc4f586cf59297c43335f3aae64428bdf00fb10ec362ffb33c9620ff9a851f70",
+            "reason": "PAID_REQUEST_UNCONFIRMED_NO_RETRY"
+          }
+        ]
+      },
+      "blockers": [
+        "PAID_REQUEST_UNCONFIRMED_NO_RETRY"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-094",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "28e0b40b0a26df80db84d1b821cba380eb080de6ed8e48d35be91429d67f3a2a",
+            "reason": "EXISTING_RESERVED_CONNECTED_FLOW"
+          }
+        ]
+      },
+      "blockers": [
+        "EXISTING_RESERVED_CONNECTED_FLOW"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-097",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "ea93b6d688f10fb06d9718331ee5107b5f19b79b354b1f13b1083d6135a33467",
+            "reason": "OWNER_QUARANTINED_PRONUNCIATION"
+          }
+        ],
+        "explanation": [
+          {
+            "sourceTextSha256": "9671c7475546348997d12185d1047030f2059d5c886b71f35d4df477053683a3",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED",
+        "OWNER_QUARANTINED_PRONUNCIATION"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-101",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-102",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          },
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-106",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-107",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-112",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-114",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-117",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-118",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-131",
+      "ageBand": "7-8",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "10f57a8b9debddee8f81752342f7826d662d4f1580bd5f3549f8498ab48e3292",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ],
+        "explanation": [
+          {
+            "sourceTextSha256": "3b5971737a02434d3ae8aafb2c67c9d68733c7b1184519fce1f7666835d29c84",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-151",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-152",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-154",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-156",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-157",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-161",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-162",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          },
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-166",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-167",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-177",
+      "ageBand": "7-8",
+      "missingAudioParts": {
+        "explanation": [
+          {
+            "sourceTextSha256": "33d013f848b22057cd2decf5d820e81b41b83e825cb14bcfaebebc634ea5de69",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-189",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "explanation": [
+          {
+            "sourceTextSha256": "98615fe4ee3e8850e7c05203fab890afa895350ae365512c38e5eb3f3ef61341",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-207",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-211",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-212",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-214",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-216",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-218",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-256",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-261",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-271",
+      "ageBand": "7-8",
+      "missingAudioParts": {
+        "explanation": [
+          {
+            "sourceTextSha256": "14afc3b0a4d906a6b904f55ce0cde04f976e51f3665e01644431d5da23c14305",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-276",
+      "ageBand": "7-8",
+      "missingAudioParts": {
+        "explanation": [
+          {
+            "sourceTextSha256": "a07bbdc08379567eaab7aa1dc68a8bffe40fd35bd9bde110a7c9c5ca24ba4c15",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-278",
+      "ageBand": "7-8",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "9d3b835954e5ef2473bf2bc02e631f0c9f2b44610c807779dad1eb404564c189",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ],
+        "explanation": [
+          {
+            "sourceTextSha256": "667ba3a84e3ad85ce8fd0ca7bd30215df197bd1ed3c7df6d2798525619732055",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-306",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-307",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-311",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-312",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-331",
+      "ageBand": "7-8",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "b49298effc4ee1c60e69cc1f9d6f89372b03a3f88a2e6994b38058a668f727eb",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ],
+        "explanation": [
+          {
+            "sourceTextSha256": "3eb724c62e4397c4d82154ccbb46e73b90989d80f49417d99c72971fe8e06c42",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-332",
+      "ageBand": "7-8",
+      "missingAudioParts": {
+        "explanation": [
+          {
+            "sourceTextSha256": "df12fa28b41c8bb951df507eefb8e0e31b3fba44cf1740924121f0baedf76f0d",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-352",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-354",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-356",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-357",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-366",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-406",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-414",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-418",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-451",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-452",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-454",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-456",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-462",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          },
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-485",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "0522ed83008bed6325172d08caa67f550019919b7d577dcb7011bddd7465cd7d",
+            "reason": "OWNER_QUARANTINED_PRONUNCIATION"
+          },
+          {
+            "sourceTextSha256": "a281f24e7592aa0561bfa54c21385f690f303ee5e7e5fe610d73f6389765042e",
+            "reason": "OWNER_QUARANTINED_PRONUNCIATION"
+          },
+          {
+            "sourceTextSha256": "1effaf9c1f91b9a2dcdf3d56d214af98d3b84ff9347dcaf7e5d652d3ec464dea",
+            "reason": "OWNER_QUARANTINED_PRONUNCIATION"
+          }
+        ],
+        "explanation": [
+          {
+            "sourceTextSha256": "e75971ec212dd4930adee825f69f367815630bfebf38b27b1ba8618a16787749",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED",
+        "OWNER_QUARANTINED_PRONUNCIATION"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-499",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "explanation": [
+          {
+            "sourceTextSha256": "a33039602d0761e000db69fd4fd71ed4f93b05ce20d491e13cb2d5d57fb101d5",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-502",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          },
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-510",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-514",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-517",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-518",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-601",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-606",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-607",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-612",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-616",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-618",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-624",
+      "ageBand": "7-8",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "edefe5bce1264de3a5d00297d7e60890235f377c6de5b652cd5d2d40446446ab",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-640",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "38b3f26904571bf99262b07a68bcf35d37b806d44159a69c26341ed01f49e75b",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-641",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "b6879ce332bbb41b00f040947688bd4d5cbd597530548d9e5d9c0db8732a5bec",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-656",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-681",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-691",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-692",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-696",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-697",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-706",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "f0cc4b468104d0cb665c3914f26ca7aba6e9ee76c787def65a00fe640cd0e1c5",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-707",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7d5cc50a63f6c7e0ae1cd907982c67835d3ddb52f7b085b235f6ff8b42593be4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+          }
+        ],
+        "correct": [
+          {
+            "sourceTextSha256": "43310ed2acf6e64a63aab1f75c4e82f283fb607f2a639c699c35f5e92ea9ff25",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "aoKJuahenrKHfUE5OD9j"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "d97cef82c51a3fe7c4e82c73b6e299cce0bfc0e45f96fce37773c9063a466891",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "2xy9ZLej1wPTrnvAr9p7"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-711",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-716",
+      "ageBand": "4-6",
+      "missingAudioParts": {
+        "correct": [
+          {
+            "sourceTextSha256": "63b2fcb7d31dd185ed46a072edb3d2c7496c09ad3b972d92e20008ed0b76e8f2",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "GvXeGQ9Kr1lVy7LEAv5T"
+          }
+        ],
+        "retry": [
+          {
+            "sourceTextSha256": "9d04a82b408e857136b03518b459fa4840cc0f625662c77e1f91e5306f7e24e4",
+            "reason": "OLDER_ALREADY_PAID_NINE_ORIGINAL",
+            "previouslyPaidGenerationId": "DX5z8FWaCS4FDx3KrloO"
+          }
+        ]
+      },
+      "blockers": [
+        "OLDER_ALREADY_PAID_NINE_ORIGINAL"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-809",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "0e0bddb961e27e3e0afd7da7c8f66bbf55ac42442d5a1857f2cecf908bdc9fa5",
+            "reason": "OWNER_QUARANTINED_PRONUNCIATION"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_QUARANTINED_PRONUNCIATION"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-839",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "7718291e519cf53721819d27d78fab4b8b26897eb9640ac284ef677078bc382d",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-859",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "explanation": [
+          {
+            "sourceTextSha256": "2b976c63a048dd3356ed7d27544ef8bb1be274a0c17ea65728e5334b58e5d093",
+            "reason": "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_MASTER_PRONUNCIATION_VERIFICATION_REQUIRED"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-873",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "1788fd23ec6a09fead7cc5fa768012008be7d424dbd9104116e2f1e2136801aa",
+            "reason": "OWNER_QUARANTINED_PRONUNCIATION"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_QUARANTINED_PRONUNCIATION"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-877",
+      "ageBand": "9-10",
+      "missingAudioParts": {
+        "question": [
+          {
+            "sourceTextSha256": "20a981c7c9616f0d3f834d8f3a910f91b7bc05571ce5e61564c3b450dd6d994f",
+            "reason": "OWNER_QUARANTINED_PRONUNCIATION"
+          }
+        ]
+      },
+      "blockers": [
+        "OWNER_QUARANTINED_PRONUNCIATION"
+      ],
+      "publicReleaseAllowed": false,
+      "rechargePreviouslyPaidAllowed": false
+    }
+  ]
+}
