@@ -92,6 +92,7 @@ on:
       - admin/**
       - pwa/**
       - quelle/**
+      # Screensaver catalog cache epoch must reach the production worker.
       - apple-tv/**
       - content/quran-athar/de/**
       - data/hadith-library/**
