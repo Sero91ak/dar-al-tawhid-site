@@ -1,0 +1,115 @@
+name: KIDS V4 Restore Existing Paid MP3s Into Quiz (one-time GET)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/review-only/quiz-v4-signed-originals-one-time-private-transfer.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tawhid-kids-v4-expiring-originals-one-time-import
+  cancel-in-progress: false
+
+jobs:
+  import-previously-paid-originals:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site' && github.event.pull_request.head.ref == 'review/kids-quiz-v4-batch-001-020-20261014'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Import exact signed ElevenLabs originals with GET only (ZERO additional credits)
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f kids/review-only/quiz-v4-signed-originals-one-time-private-transfer.json ]; then
+            echo 'Signed one-time manifest already deleted. No new audio purchases or fetches.'
+            exit 0
+          fi
+          if ! command -v ffprobe >/dev/null 2>&1 || ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get -o Acquire::Retries=0 update -qq
+            sudo apt-get -o Acquire::Retries=0 install -y ffmpeg
+          fi
+          command -v ffprobe
+          python3 -m py_compile kids/tools/import_quiz_v4_signed_paid_originals_once.py
+          python3 kids/tools/import_quiz_v4_signed_paid_originals_once.py
+      - name: Compose actual MP3 files for existing quiz questions and verify SHA
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -f kids/review-only/quiz-v4-signed-originals-one-time-private-transfer.json ]; then
+            exit 0
+          fi
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          q=json.loads(Path('kids/review-only/quiz-v4-signed-originals-import-result.json').read_text())
+          assert 1<=q['alreadyPaidOriginalsImported']<=10 and q['newTTSGenerations']==q['newCreditsSpent']==0
+          status=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          assert status['uniqueNewOriginalMP3sStored']>=394
+          assert status['completedQuestionsWithAllFourAudioParts']>=80
+          assert status['appReleaseFlagEnabled'] is False
+          print('PASS: genuine prepaid V4 provider originals now stored and linked to verified quiz assignments.')
+          PY
+          touch "$RUNNER_TEMP/kids-v4-signed-audio-import-qa-pass"
+      - name: Remove expiring provider access links and save only permanent hashed MP3s
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-signed-original-import
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          if [ -f kids/review-only/quiz-v4-signed-originals-one-time-private-transfer.json ]; then
+            git rm --force kids/review-only/quiz-v4-signed-originals-one-time-private-transfer.json
+          fi
+          if [ -f "$RUNNER_TEMP/kids-v4-signed-audio-import-qa-pass" ]; then
+            git add kids/assets/kids-quiz-audio/v4-curated450-review/
+            git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+            git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+            git add kids/data/quiz-v4-connected-flow-originals-ledger.json
+            git add kids/data/quiz-v4-450-original-clip-registry.json
+            git add kids/data/quiz-v4-450-paid-generation-ledger.json
+            git add kids/data/quiz-v4-450-production-status.json
+            git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+            git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+            git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+            git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+            git add kids/review-only/quiz-v4-signed-originals-import-result.json
+          fi
+          if git diff --cached --quiet; then
+            echo 'No temporary access URL or new permanent MP3 changes remain.'
+            exit 0
+          fi
+          git commit -m 'audio(kids): preserve paid Serhat V4 original MP3s and clear expiring provider links'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+              echo 'Private quiz review updated. Paid original source retained; child release switch unchanged.'
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Backup verified paid MP3 bytes without provider access links
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-ten-existing-paid-original-mp3-import
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+            kids/data/quiz-v4-connected-flow-originals-ledger.json
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/review-only/quiz-v4-signed-originals-import-result.json

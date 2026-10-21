@@ -1,0 +1,154 @@
+name: KIDS V4 All 450 Exact Missing Originals Recording Plan (no TTS)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/plan_quiz_v4_all450_exact_paid_original_waves.py'
+      - 'kids/tools/produce_quiz_v4_450_exact_manual_wave.py'
+      - 'kids/tools/import_quiz_v4_connected_flow_originals.py'
+      - 'kids/tools/recover_quiz_v4_flows_history_exact.py'
+      - 'kids/tools/recover_quiz_v4_prepaid9_via_flows_get.py'
+      - 'kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py'
+      - 'kids/tools/quiz_v4_no_double_charge_guard.py'
+      - 'kids/data/quiz-v4-connected-flow-originals-ledger.json'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-450-paid-generation-ledger.json'
+      - 'kids/data/quiz-v4-missing9-prepaid-originals.json'
+      - 'kids/data/quiz-v4-older-stage1-request-journal.json'
+      - '.github/workflows/kids-v4-450-full-original-recording-queue.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-450-exact-original-recording-queue-no-credits
+  cancel-in-progress: false
+
+jobs:
+  verify-450-immutable-question-recipes:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Build current all-450 source-hash-safe MP3 generation plan, no credits
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/plan_quiz_v4_all450_exact_paid_original_waves.py kids/tools/produce_quiz_v4_450_exact_manual_wave.py kids/tools/import_quiz_v4_connected_flow_originals.py
+          python3 kids/tools/import_quiz_v4_connected_flow_originals.py --audit
+          python3 kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py
+          python3 kids/tools/plan_quiz_v4_all450_exact_paid_original_waves.py --out "$RUNNER_TEMP/v4-all450-next-recording-waves.json"
+          python3 - <<'PY'
+          import json,os,hashlib
+          from pathlib import Path
+          p=json.loads((Path(os.environ['RUNNER_TEMP'])/'v4-all450-next-recording-waves.json').read_text(encoding='utf-8'))
+          registry=json.loads(Path('kids/data/quiz-v4-450-original-clip-registry.json').read_text(encoding='utf-8'))
+          paid=json.loads(Path('kids/data/quiz-v4-missing9-prepaid-originals.json').read_text(encoding='utf-8'))
+          q=set()
+          for wave in p['recordingWaves']:
+              assert 0<wave['uniqueOriginals']<=25
+              assert wave['estimatedCreditsNotInvoice']<=2000
+              assert not wave['publicReleaseAllowed'] and wave['requiresFreshSourceLedgerAudit']
+              assert wave['requiresExplicitCreditAuthorization']
+              assert wave['userVoiceAndClassicalArabicPronunciationListeningApprovalPending']
+              for row in wave['exactTexts']:
+                  assert row['textSHA256']==hashlib.sha256(row['text'].encode('utf-8')).hexdigest()
+                  assert row['text'] not in registry['textClips']
+                  assert row['text'] not in {x['originalSpokenText'] for x in paid['items']}
+                  assert row['textSHA256'] not in q
+                  q.add(row['textSHA256'])
+          assert len(q)==p['trulyUnrecordedDistinctTextCount']
+          assert p['selectedQuizQuestions']==450 and p['ageCounts']=={'4-6':150,'7-8':150,'9-10':150}
+          assert p['modelId']=='eleven_v4' and p['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert not p['humanListeningApproved'] and not p['publicQuizReleaseEnabled']
+          assert p['newElevenLabsCreditsSpentByPlanner']==0
+          assert p['historicalNineOriginalsMayNotBeRegenerated']
+          assert json.loads(Path('kids/data/quiz-curation-release.json').read_text())['enabled'] is False
+          print('PASS: all remaining original V4 speech fragments scheduled exactly once. No billing or release.')
+          PY
+      - name: Keep one immutable source plan for technical reviews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-450-all-missing-original-v4-wave-schedule-no-credits
+          retention-days: 30
+          if-no-files-found: warn
+          path: ${{ runner.temp }}/v4-all450-next-recording-waves.json
+
+  recover-prepaid-provider-history-mp3:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          persist-credentials: true
+      - name: Recover previously charged ORIGINAL V4 MP3s (provider history GET only)
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/recover_quiz_v4_flows_history_exact.py
+          python3 kids/tools/recover_quiz_v4_flows_history_exact.py --audit
+          python3 kids/tools/recover_quiz_v4_prepaid9_via_flows_get.py
+          python3 kids/tools/recover_quiz_v4_prepaid9_via_flows_get.py --restore
+          python3 kids/tools/recover_quiz_v4_flows_history_exact.py --restore --limit 10
+      - name: Build real clips in original 450 questions (still review only)
+        run: |
+          set -euo pipefail
+          python3 kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+      - name: Save genuine MP3 bytes and source hash ledger into review branch ONLY
+        run: |
+          set -euo pipefail
+          git config user.name "tawhid-kids-v4-original-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add kids/assets/kids-quiz-audio/v4-connected-flow-original-review/
+          git add kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-connected-flow-originals-ledger.json
+          git add kids/data/quiz-v4-paid-flow-import-status.json
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/data/quiz-v4-450-paid-generation-ledger.json
+          git add kids/data/quiz-v4-first150-composed-preview.json
+          git add kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json
+          git add kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-connected-flow-original-import-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          if git diff --cached --quiet; then
+            echo "No new source MP3 changes to commit; no duplicate attempt."
+          else
+            git commit -m "audio(kids): import authentic paid V4 Flow originals and compose private quiz files"
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+            git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014
+          fi
+      - name: Preserve genuine imported MP3s and paid receipts even if later QA fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-connected-paid-originals-provider-history-no-extra-credits
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-connected-flow-original-review/
+            kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
+            kids/data/quiz-v4-connected-flow-originals-ledger.json
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json

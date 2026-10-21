@@ -1,0 +1,63 @@
+name: KIDS V4 Quarantined Audio Playback Regression (0 credits)
+on:
+  push:
+    branches:
+      - review/kids-quiz-v4-batch-001-020-20261014
+    paths:
+      - '.github/workflows/kids-v4-quarantined-audio-regression-free.yml'
+      - 'kids/tools/quiz_v4_quarantine.py'
+      - 'kids/tools/test_quiz_v4_quarantine.py'
+      - 'kids/tools/quiz_v4_first150_offline_join.py'
+      - 'kids/tools/quiz_v4_age7to10_offline_join.py'
+      - 'kids/tools/stage_quiz_v4_existing_mp3_import.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  test-rejected-paid-mp3-not-playable:
+    if: github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - name: Checkout only nonlive review with already-paid MP3 originals
+        uses: actions/checkout@v4
+      - name: Verify no released quiz and no ElevenLabs credentials
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          assert json.loads(Path('kids/data/quiz-curation-release.json').read_text())['enabled'] is False
+          print('PASS: no ElevenLabs API key, no TTS, no public publication')
+          PY
+      - name: Validate no wrong-dictionary audio can be composed or imported
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/quiz_v4_quarantine.py kids/tools/test_quiz_v4_quarantine.py kids/tools/quiz_v4_first150_offline_join.py kids/tools/quiz_v4_age7to10_offline_join.py kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/test_quiz_v4_quarantine.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          q=json.loads(Path('kids/review-only/quiz-v4-450-actual-mp3-import.json').read_text())
+          target=q['questions']['kids-quiz-046']
+          assert 'question' in target['missing']
+          assert 'explanation' in target['missing']
+          assert target['humanListeningApproved'] is False
+          assert target['publicPlaybackAuthorized'] is False
+          s=json.loads(Path('kids/review-only/quiz-v4-450-actual-mp3-import-summary.json').read_text())
+          assert s['publicReleaseEnabled'] is False and s['newElevenLabsCreditsSpent']==0
+          print('PASS: quarantined original excluded from real 450 playback staging')
+          PY
+      - name: Preserve private zero-TTS test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-quiz-bad-pronunciation-blocking-zero-credits
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            kids/data/quiz-v4-age7to10-offline-coverage.json
+            kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+            kids/review-only/quiz-v4-450-actual-mp3-import.json

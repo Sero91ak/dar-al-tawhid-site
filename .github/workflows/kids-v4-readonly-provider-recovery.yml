@@ -1,0 +1,79 @@
+name: KIDS V4 Direct GET Previously Paid Originals (no credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/try_free_v4_paid_flow_get.py'
+      - '.github/workflows/kids-v4-readonly-provider-recovery.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-readonly-get-prepaid-originals
+  cancel-in-progress: false
+
+jobs:
+  recover-originals-only:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Ask official ElevenLabs API to download already-paid originals, NO GENERATION
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          python3 -m py_compile kids/tools/try_free_v4_paid_flow_get.py
+          python3 kids/tools/try_free_v4_paid_flow_get.py
+      - name: Import downloaded originals into reviewed MP3 registry with SHA/codec/duration checks
+        run: |
+          set -euo pipefail
+          if find kids/paid-flow-originals-inbox -maxdepth 1 -name '*.mp3' -print -quit 2>/dev/null | grep -q .; then
+            python3 kids/tools/import_quiz_v4_prepaid_flow_originals.py --directory kids/paid-flow-originals-inbox
+            python3 kids/tools/quiz_v4_first150_offline_join.py
+            python3 kids/tools/qa_quiz_v4_first150_composed.py
+          else
+            echo "No paid originals could be downloaded; no original files modified, no synthesis charged."
+          fi
+      - name: Save sanitized provider status and only genuine recovered MP3s on review branch
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-original-v4-recovery-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-paid-flow-official-get-retry.json
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/data/quiz-v4-paid-flow-import-status.json
+          git add kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-first150-composed-preview.json
+          git add kids/data/quiz-v4-first150-composed-technical-qa.json
+          git add kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          if git diff --cached --quiet; then
+            echo "No new files to save."
+            exit 0
+          fi
+          git commit -m "audit(kids): retry paid Flow MP3 free retrieval and record original API entitlement"
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          for n in 1 2 3; do
+            if git push origin HEAD:"$branch"; then exit 0; fi
+            git fetch origin "$branch"
+            if ! git rebase FETCH_HEAD; then
+              echo "::error::Already retrieved MP3s preserved in workflow artifact; no second TTS."
+              exit 1
+            fi
+          done
+          exit 1
+      - if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: paid-v4-flow-originals-free-recovery-backup
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            kids/paid-flow-originals-inbox/*.mp3
+            kids/data/quiz-v4-paid-flow-official-get-retry.json
+            kids/data/quiz-v4-paid-flow-import-status.json

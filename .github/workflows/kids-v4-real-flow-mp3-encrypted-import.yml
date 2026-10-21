@@ -1,0 +1,123 @@
+name: KIDS V4 Import REAL Existing Flow MP3 Into Quiz (no new TTS)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/data/v4-new-audio-envelope-review/sealed-oaep.json'
+      - 'kids/tools/import_quiz_v4_encrypted_flow_originals.py'
+      - '.github/workflows/kids-v4-real-flow-mp3-encrypted-import.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tawhid-kids-real-v4-flow-original-transfer
+  cancel-in-progress: false
+
+jobs:
+  download-encrypted-existing-mp3:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout private V4 review branch (not live)
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+
+      - name: Check for encrypted preexisting real generation
+        id: input
+        run: |
+          if test -s kids/data/v4-new-audio-envelope-review/sealed-oaep.json; then
+            echo 'present=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'present=false' >> "$GITHUB_OUTPUT"
+            echo 'Original encrypted envelope already consumed; no audio regeneration.'
+          fi
+
+      - name: Decode and verify REAL existing V4 MP3, never synthesize
+        if: steps.input.outputs.present == 'true'
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/import_quiz_v4_encrypted_flow_originals.py
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          command -v ffmpeg
+          command -v ffprobe
+          python3 kids/tools/import_quiz_v4_encrypted_flow_originals.py
+
+      - name: Commit paid original MP3 and SHA ledger BEFORE any assembled audio QA
+        if: steps.input.outputs.present == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name kids-v4-real-original-import
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/assets/kids-quiz-audio/v4-curated450-review/
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/data/quiz-v4-450-paid-generation-ledger.json
+          git add kids/review-only/quiz-v4-generated-awaiting-original-import.json
+          git rm -f -- kids/data/v4-new-audio-envelope-review/sealed-oaep.json
+          git commit -m 'audio(kids V4): import true ElevenLabs flow MP3 into private quiz and save paid receipt'
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+              echo 'Real original V4 MP3 safely stored before downstream work.'
+              break
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+            if [ "$attempt" = 4 ]; then
+              echo '::error::Original MP3 not pushed. Recover GitHub artifact, never synthesize again.'
+              exit 1
+            fi
+          done
+
+      - name: Compose older 7–10 V4 quiz from saved real originals
+        if: steps.input.outputs.present == 'true'
+        run: |
+          set -euo pipefail
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+
+      - name: Save composed quiz MP3 updates in private review only
+        if: steps.input.outputs.present == 'true'
+        run: |
+          set -euo pipefail
+          git config user.name kids-v4-real-quiz-audio-join
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/ kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-first150-audio-status.json kids/data/quiz-v4-first150-composed-preview.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-handover-latest.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'audio(kids V4): join real new V4 original MP3 into 450 quiz review'
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then exit 0; fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          echo '::error::Original bytes already committed; retry only free offline quiz assembly.'
+          exit 1
+
+      - name: Preserve charged MP3 and receipts even if any step fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-real-flow-originals-mp3-safekeeping
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json
+            kids/review-only/quiz-v4-generated-awaiting-original-import.json

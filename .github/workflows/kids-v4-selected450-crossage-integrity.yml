@@ -1,0 +1,61 @@
+name: KIDS V4 All 450 Cross-Age Real MP3 Integrity (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/qa_quiz_v4_selected450_crossage.py'
+      - '.github/workflows/kids-v4-selected450-crossage-integrity.yml'
+      - 'kids/data/quiz-v4-first150-composed-preview.json'
+      - 'kids/data/quiz-v4-age7to10-composed-preview.json'
+      - 'kids/data/quiz-v4-first150-audio-status.json'
+      - 'kids/data/quiz-v4-age7to10-offline-coverage.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-selected450-crossage-qa-only
+  cancel-in-progress: false
+
+jobs:
+  audit-existing-v4-original-audio:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout only offline KIDS review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Confirm ffprobe is available
+        run: |
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          command -v ffprobe
+      - name: Verify all 450 real V4 audio assignments, codec, SHA and release flag
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/qa_quiz_v4_selected450_crossage.py
+          python3 kids/tools/qa_quiz_v4_selected450_crossage.py
+          python3 - <<'PY'
+          import json
+          r=json.load(open("kids/review-only/quiz-v4-selected450-crossage-integrity.json"))
+          assert r["selectedQuestions"]==450
+          assert r["audioFieldAssignments"]==1800
+          assert r["existingAudioFieldAssignments"]+r["missingAudioFieldAssignments"]==1800
+          assert r["humanApprovedAudioFieldAssignments"]==0
+          assert r["newVoiceGenerationsCreated"]==0 and r["elevenLabsCreditsSpent"]==0
+          assert r["readyForLive"] is False and r["livePublished"] is False
+          assert r["reviewOnly"] is True
+          print("PASS: each real cross-age V4 MP3 SHA/codec checked, public app untouched")
+          PY
+      - name: Save INTERNAL audit report as a non-published downloadable artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-selected450-crossage-original-mp3-audit
+          retention-days: 90
+          if-no-files-found: warn
+          path: kids/review-only/quiz-v4-selected450-crossage-integrity.json

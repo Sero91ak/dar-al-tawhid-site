@@ -1,0 +1,88 @@
+name: KIDS V4 Import Paid ElevenLabs Originals Direct Into Quiz (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/review-only/quiz-v4-connected-temporary-original-urls.json'
+      - '.github/workflows/kids-v4-import-confirmed-elevenlabs-originals-direct.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-direct-real-original-import-single-writer
+  cancel-in-progress: false
+
+jobs:
+  download-verify-and-integrate-originals:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          persist-credentials: true
+      - name: Recover already-paid master originals, protect costs
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f kids/review-only/quiz-v4-connected-temporary-original-urls.json || {
+            echo 'Temporary original URLs already cleaned; never repeat paid fetch.'; exit 0;
+          }
+          python3 -m py_compile kids/tools/import_quiz_v4_signed_connected_originals.py
+          python3 kids/tools/import_quiz_v4_signed_connected_originals.py --audit
+          python3 kids/tools/import_quiz_v4_signed_connected_originals.py --fetch-and-import
+          python3 kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py
+          python3 kids/tools/quiz_v4_no_double_charge_guard.py
+          git config user.name 'TAWHID KIDS V4 original media bot'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add kids/assets/kids-quiz-audio/v4-connected-flow-original-review/
+          git add kids/data/quiz-v4-connected-flow-originals-ledger.json
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/data/quiz-v4-450-paid-generation-ledger.json
+          git add kids/review-only/quiz-v4-connected-flow-original-import-status.json
+          git add -u kids/review-only/quiz-v4-connected-temporary-original-urls.json
+          git diff --cached --quiet && { echo 'No new verified originals to commit'; exit 1; }
+          git commit -m 'audio(kids): integrate ten original ElevenLabs V4 takes directly and delete signed transport URLs'
+          git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014
+      - name: Recompose all existing V4 quiz playback audio from actual originals
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -f kids/review-only/quiz-v4-connected-temporary-original-urls.json ]; then
+            echo 'Provider originals not imported yet; no fake playback'; exit 1
+          fi
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-first150-composed-preview.json
+          git add kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json
+          git add kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'audio(kids): place new verified V4 clips into appropriate private quiz question parts'
+            git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014
+          fi
+          echo 'Real MP3s linked to questions in quiz review. No new synthesis; release switch remains off.'
+      - name: Backup actual paid source MP3s, without temporary signed URLs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-ten-confirmed-elevenlabs-v4-originals
+          if-no-files-found: warn
+          retention-days: 30
+          path: |
+            kids/assets/kids-quiz-audio/v4-connected-flow-original-review/
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json
+            kids/data/quiz-v4-connected-flow-originals-ledger.json
+            kids/review-only/quiz-v4-450-actual-mp3-import-summary.json

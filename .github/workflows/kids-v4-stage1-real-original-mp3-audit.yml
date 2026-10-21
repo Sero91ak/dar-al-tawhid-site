@@ -1,0 +1,59 @@
+name: KIDS V4 First Paid Originals Real MP3 Integrity (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/audit_quiz_v4_stage1_paid_mp3_integrity.py'
+      - 'kids/tools/generate_quiz_v4_older_stage1_exact.py'
+      - 'kids/data/quiz-v4-older-stage1-usage.json'
+      - 'kids/data/quiz-v4-older-stage1-request-journal.json'
+      - 'kids/data/quiz-v4-450-paid-generation-ledger.json'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-450-saved-mp3-technical-qa.json'
+      - 'kids/review-only/quiz-v4-450-actual-mp3-import-summary.json'
+      - '.github/workflows/kids-v4-stage1-real-original-mp3-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  verify-actual-mp3-original-and-receipt-pairs:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout internal audio review branch only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Verify real saved MP3 bytes and correct invoices without synthesizing speech
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/audit_quiz_v4_stage1_paid_mp3_integrity.py
+          python3 kids/tools/audit_quiz_v4_stage1_paid_mp3_integrity.py --save-report
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('kids/review-only/quiz-v4-stage1-real-paid-mp3-integrity.json')
+          audit=json.loads(p.read_text(encoding='utf-8'))
+          assert audit['first20OlderQuizStagePlannedUniqueOriginals']==65
+          assert audit['stageOriginalsActuallyPaidAndSaved']>=10
+          assert audit['stageOriginalsActuallyPaidAndSaved']+audit['stageOriginalsRemaining']==65
+          assert audit['stageOriginalsAmbiguousPaidRequestCount']==0
+          assert audit['stageOriginalMP3sPassedByteSHAAndTechnicalQA']==audit['stageOriginalsActuallyPaidAndSaved']
+          assert audit['providerRequestIdsPresent']==audit['stageOriginalsActuallyPaidAndSaved']
+          assert audit['stagedFourPartQuizQuestions']>=76
+          assert audit['humanListeningApproved'] is False
+          assert audit['publicReleaseAllowed'] is False
+          assert audit['newElevenLabsCallsByAudit']==audit['newCreditsByAudit']==0
+          print('PASS real stage1 V4 originals byte hashes, journal, paid receipts, technical QA and 450 quiz mapping')
+          PY
+      - name: Retain private detailed audit as GitHub Actions artifact (no public deploy)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-stage1-verified-real-paid-originals-audit
+          retention-days: 90
+          if-no-files-found: warn
+          path: kids/review-only/quiz-v4-stage1-real-paid-mp3-integrity.json

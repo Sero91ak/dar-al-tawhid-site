@@ -5875,14 +5875,37 @@ function normalizeStudioQuizItems(data){
   return out;
 }
 function fetchKidsQuiz(){
+  // Quiz shortlist remains DISABLED until exact V4 MP3 and listening QA.
+  // Existing 900 canonical questions and progress are never overwritten.
+  var curated=fetch("/kids/data/quiz-curation-release.json?v=20261014-selection1",{cache:"no-store"})
+    .then(function(r){return r.ok?r.json():{enabled:false}})
+    .then(function(cfg){
+      if(!cfg||cfg.enabled!==true)return null;
+      if(Number(cfg.curatedQuestions)!==450||Number(cfg.curatedPerAgeBand)!==150)throw new Error("kids-quiz-curation-count");
+      return fetch("/kids/data/quiz-kids-curated-450-review.json?v=20261014-selection1",{cache:"no-store"})
+        .then(function(resp){if(!resp.ok)throw new Error("kids-quiz-curated-data");return resp.json()})
+        .then(function(payload){
+          var rows=Array.isArray(payload.items)?payload.items:[];
+          var seen=Object.create(null),count={"4-6":0,"7-8":0,"9-10":0};
+          rows.forEach(function(q){
+            if(!q||seen[q.id]||count[q.ageBand]===undefined)throw new Error("kids-quiz-curated-invalid");
+            seen[q.id]=true;count[q.ageBand]++;
+          });
+          if(rows.length!==450||count["4-6"]!==150||count["7-8"]!==150||count["9-10"]!==150){
+            throw new Error("kids-quiz-curated-age-count");
+          }
+          return seen;
+        });
+    }).then(function(ids){return {enabled:!!ids,ids:ids}})
+      .catch(function(){return {enabled:false,ids:null}});
   var base=fetch("/kids/data/quiz-kids.json?v=900",{cache:"no-store"})
     .then(function(r){if(!r.ok)throw new Error("quiz-data");return r.json()});
   var studio=fetch("/content/kids/content-index.json?v=1107",{cache:"force-cache"})
     .then(function(r){return r.ok?r.json():{items:[]}})
     .catch(function(){return{items:[]}});
-  return Promise.all([base,studio])
+  return Promise.all([base,studio,curated])
     .then(function(parts){
-      var data=parts[0],studioData=parts[1];
+      var data=parts[0],studioData=parts[1],curation=parts[2];
       if(!data||data.namespace!=="dar-kids-quiz"||data.adultQuizDependency!==false)throw new Error("kids-quiz-namespace");
       var artwork=data.artwork||{};
       kidsQuizArtwork=artwork.ageBands||{};
@@ -5901,7 +5924,13 @@ function fetchKidsQuiz(){
           q.reviewStatus==="approved" &&
           /^kids-quiz-\d{3}$/.test(String(q.id||""));
       });
-      kidsQuizPool=baseItems.concat(normalizeStudioQuizItems(studioData));
+      if(curation&&curation.enabled&&curation.ids){
+        baseItems=baseItems.filter(function(q){return !!curation.ids[q.id]});
+        if(baseItems.length!==450)throw new Error("kids-quiz-curation-original-catalog-mismatch");
+      }
+      // Curated V4 launch is exactly 450 canonical questions; standalone studio
+      // content remains available in the original 900-question compatibility mode.
+      kidsQuizPool=(curation&&curation.enabled)?baseItems:baseItems.concat(normalizeStudioQuizItems(studioData));
       window.kidsQuizPool=kidsQuizPool;
       kidsQuizLoaded=true;
       try{window.dispatchEvent(new CustomEvent("dar-kids-quiz-loaded",{detail:{count:kidsQuizPool.length}}))}catch(e){}
@@ -6974,7 +7003,7 @@ if("requestIdleCallback" in window)requestIdleCallback(laterKids,{timeout:6000})
 
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"cc4ac04648774872a036edb959747bd5","r":1,"spa":2}' crossorigin="anonymous"></script>
 <script src="/kids/content-studio-feed.js?v=studio8"></script>
-<script src="/kids/owner-voice.js?v=8"></script>
+<script src="/kids/owner-voice.js?v=9-quiz-v4-preview-20261017"></script>
 <script src="/kids/dua-word-meanings-v1.js?v=2"></script>
 <script src="/kids/dua-phonetic-alignment-v1.js?v=1"></script>
 <script src="/kids/dua-smart-learn.js?v=1312"></script>

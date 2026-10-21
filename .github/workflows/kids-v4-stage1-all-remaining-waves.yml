@@ -1,0 +1,84 @@
+name: KIDS V4 Remaining Older-Stage Recording Waves (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/plan_quiz_v4_stage1_remaining_waves.py'
+      - 'kids/tools/generate_quiz_v4_older_stage1_exact.py'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-450-paid-generation-ledger.json'
+      - 'kids/data/quiz-v4-older-stage1-request-journal.json'
+      - 'kids/data/quiz-v4-older-stage1-usage.json'
+      - '.github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json'
+      - '.github/workflows/kids-v4-stage1-all-remaining-waves.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-stage1-remaining-waves-zero-credits
+  cancel-in-progress: false
+
+jobs:
+  build-immutable-source-sha-recording-plan:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: All remaining stages – exact originals, never paid, never live
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/plan_quiz_v4_stage1_remaining_waves.py
+          python3 kids/tools/plan_quiz_v4_stage1_remaining_waves.py --output "$RUNNER_TEMP/kids-v4-stage1-remaining-waves.json"
+          python3 - <<'PY'
+          import json,os
+          from pathlib import Path
+          p=json.loads((Path(os.environ["RUNNER_TEMP"])/"kids-v4-stage1-remaining-waves.json").read_text(encoding="utf-8"))
+          waves=p["recordingWaves"]
+          sha=[h for w in waves for h in w["exactTextSHA256"]]
+          assert p["modelId"]=="eleven_v4" and p["voiceId"]=="DkU7j9uO4ZEtLD2iRZSH"
+          assert len(sha)==len(set(sha))==p["unrecordedOriginals"]
+          assert (
+              p["alreadyStoredStageOriginals"]
+              +p["reservedFlowOriginalsNotYetInGithub"]
+              +p["uncertainPreviousPaidRequestsQuarantined"]
+              +p["newOriginalsEligibleForSeparatePaidApproval"]==65
+          ), 'One of 65 exact stage1 original texts was omitted or double counted'
+          assert p["totalStillMissingOriginalMP3s"]==(
+              p["reservedFlowOriginalsNotYetInGithub"]
+              +p["uncertainPreviousPaidRequestsQuarantined"]
+              +p["unrecordedOriginals"]
+          ), 'Quarantined previously charged original omitted from missing audio count'
+          assert p["mustNotRebuyUncertainOriginals"] is True
+          assert p["historyOrBackupRecoveryRequiredForUncertain"]==(
+              p["uncertainPreviousPaidRequestsQuarantined"]>0
+          )
+          assert len(p["uncertainRequestExactTextSHA256"])==p["uncertainPreviousPaidRequestsQuarantined"]
+          assert not set(sha).intersection(p["uncertainRequestExactTextSHA256"]), 'Unconfirmed previous POST would be bought twice'
+          assert p["newOriginalsEligibleForSeparatePaidApproval"]==len(sha)
+          assert p["reservedFlowTakesMustNotBeRegenerated"] and (
+              p["providerStatusReconciliationRequiredForReserved"]==
+              (p["reservedFlowOriginalsNotYetInGithub"]>0)
+          )
+          assert sum(w["uniqueNewOriginals"] for w in waves)==len(sha)
+          assert all(0<w["uniqueNewOriginals"]<=10 and w["estimatedCreditsNotAnInvoice"]<=850 for w in waves)
+          assert all(w["manualFreshFingerprintRequired"] and not w["automaticallyAuthorized"] for w in waves)
+          assert p["newCreditsSpentByPlanner"]==p["speechSynthesisCallsByPlanner"]==0
+          assert not p["published"] and not p["humanHearingApprovalProvided"]
+          assert p["earlierPrepaidNineMustNeverBeRegenerated"] and p["wavesAfterFirstAreProvisionalUntilFreshRegistryAndLedgerAudit"]
+          assert json.loads(Path("kids/data/quiz-curation-release.json").read_text())["enabled"] is False
+          print("PASS: complete, nonduplicated future stage schedule; no speech charge, no live changes.")
+          PY
+      - name: Retain private exact upcoming speech SHA roadmap
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-stage1-remaining-original-recording-waves-zero-credits
+          retention-days: 30
+          if-no-files-found: warn
+          path: ${{ runner.temp }}/kids-v4-stage1-remaining-waves.json

@@ -1,0 +1,162 @@
+name: KIDS V4 Recover 9 Prepaid MP3s From Past GitHub Audio Archives (zero speech credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/recover_quiz_v4_nine_from_github_action_archives.py'
+      - 'kids/tools/test_quiz_v4_prepaid_archive_name_matcher.py'
+      - '.github/workflows/kids-v4-scan-previous-paid-audio-backups.yml'
+  push:
+    branches: [review/kids-quiz-v4-batch-001-020-20261014]
+    paths:
+      - 'kids/review-only/quiz-v4-second-pass-owner-trigger.json'
+
+permissions:
+  actions: read
+  contents: write
+
+concurrency:
+  group: kids-v4-search-real-previously-paid-github-audio-archives
+  cancel-in-progress: false
+
+jobs:
+  restore-only-existing-mp3s:
+    if: >-
+      (github.event_name == 'pull_request' &&
+       github.event.pull_request.number == 1143 &&
+       github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site') ||
+      (github.event_name == 'push' &&
+       github.repository == 'Sero91ak/dar-al-tawhid-site' &&
+       github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
+       github.event.head_commit.message == 'audio(kids): second-pass recovery of nine prepaid V4 originals')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout real private V4 originals review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+
+      - name: Verify review-only second-pass trigger
+        if: github.event_name == 'push'
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          obj=json.loads(Path('kids/review-only/quiz-v4-second-pass-owner-trigger.json').read_text(encoding='utf-8'))
+          assert obj=={
+            'scope':'KIDS_V4_NINE_PREPAID_ORIGINALS_ZERO_CREDIT_SECOND_ARCHIVE_PASS',
+            'maxNewElevenLabsSpeechRequests':0,
+            'previouslyPaidGenerationIdsExpected':9,
+            'maximumAdditionalArchivesPerName':16,
+            'disjointFromFirstArchiveSample':True,
+            'reviewOnly':True,
+            'publicReleaseAllowed':False
+          }
+          assert json.loads(Path('kids/data/quiz-curation-release.json').read_text())['enabled'] is False
+          print('PASS verified source identity and strict zero-synthesis original-only recovery')
+          PY
+
+      - name: Install MP3 codec inspection tools
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null || ! command -v ffmpeg >/dev/null; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 update -qq
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+
+      - name: Search only historical V4 original audio backup artifacts and import real matches
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KIDS_V4_ARCHIVE_SCAN_PHASE: ${{ github.event_name == 'push' && 'second-pass' || 'baseline' }}
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/recover_quiz_v4_nine_from_github_action_archives.py
+          python3 -m py_compile kids/tools/test_quiz_v4_prepaid_archive_name_matcher.py
+          python3 kids/tools/test_quiz_v4_prepaid_archive_name_matcher.py
+          python3 kids/tools/recover_quiz_v4_nine_from_github_action_archives.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          f=Path('kids/review-only/quiz-v4-nine-originals-github-archive-recovery.json')
+          report=json.loads(f.read_text(encoding='utf-8'))
+          assert report['repo']=='Sero91ak/dar-al-tawhid-site'
+          assert report['modelId']=='eleven_v4'
+          assert report['masterVoiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert report['newElevenLabsCreditsSpent']==0
+          assert report['elevenLabsSpeechSynthesisCalls']==0
+          assert not report['publicReleaseAllowed']
+          assert report['afterMissingCount']+report['newOriginalsImported']==report['beforeMissingCount']
+          print('PAID_OLD_MP3_ARTIFACT_SCAN_VERIFIED',report['newOriginalsImported'],'new authentic archive matches')
+          PY
+
+      - name: Reassemble audio for all 450 private review questions ONLY after genuine original recovery
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,subprocess
+          report=json.load(open('kids/review-only/quiz-v4-nine-originals-github-archive-recovery.json'))
+          if not report['newOriginalsImported']:
+              print('No real missing MP3s recovered. Preserve all existing 276 MP3s, never spend speech credits.')
+              raise SystemExit(0)
+          jobs=[
+              ['python3','kids/tools/qa_quiz_v4_saved_mp3.py'],
+              ['python3','kids/tools/quiz_v4_first150_offline_join.py'],
+              ['python3','kids/tools/quiz_v4_age7to10_offline_join.py'],
+              ['python3','kids/tools/qa_quiz_v4_first150_composed.py'],
+              ['python3','kids/tools/report_quiz_v4_450_progress.py'],
+              ['python3','kids/tools/stage_quiz_v4_existing_mp3_import.py'],
+              ['python3','kids/tools/write_quiz_v4_handover.py'],
+              ['python3','kids/tools/quiz_v4_selected450_release_gate.py','--ignore-flag'],
+          ]
+          for cmd in jobs:subprocess.run(cmd,check=True)
+          coverage=json.load(open('kids/data/quiz-v4-first150-audio-status.json'))
+          if report['afterMissingCount']==0:
+              assert coverage['completeFourPartQuestions']==150, 'All 56 originals saved but first 150 NOT complete'
+          assert not coverage['readyForLive'], 'Automatic release forbidden'
+          PY
+
+      - name: Save only recovered original bytes, technical MP3 mappings and bounded search evidence
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-prepaid-archive-recovery-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/quiz-v4-nine-originals-github-archive-recovery.json
+          git add kids/data/quiz-v4-paid-flow-import-status.json kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/ kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-first150-audio-status.json kids/data/quiz-v4-first150-composed-preview.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-handover-latest.json
+          if git diff --cached --quiet; then
+            echo 'No artifact change to commit; never generate replacement TTS.'
+            exit 0
+          fi
+          git commit -m 'audio(kids v4): search old original MP3 backup artifacts without new voice charges'
+          for retry in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+              echo 'Historical original search result saved ONLY to draft review.'
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          echo 'Do not resynthesize paid originals: inspect the recoverable GitHub artifact.'
+          exit 1
+
+      - name: Keep any recovered originals even if later QA fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-prepaid-nine-github-archives-safe-restore
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/review-only/quiz-v4-nine-originals-github-archive-recovery.json
+            kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
+            kids/data/quiz-v4-paid-flow-import-status.json
+            kids/data/quiz-v4-450-original-clip-registry.json

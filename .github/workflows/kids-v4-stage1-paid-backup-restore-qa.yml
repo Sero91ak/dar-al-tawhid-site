@@ -1,0 +1,44 @@
+name: KIDS V4 Paid Original Backup Recovery Guard (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/restore_quiz_v4_stage1_paid_run_backup.py'
+      - 'kids/tools/test_quiz_v4_stage1_paid_backup_restore.py'
+      - '.github/workflows/kids-v4-stage1-paid-backup-restore-qa.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-stage1-paid-backup-recovery-no-credits
+  cancel-in-progress: false
+
+jobs:
+  test-recovery-without-billing-or-fake-mp3:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out actual private V4 branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Ensure offline MP3 probe, never invoke ElevenLabs
+        run: |
+          set -euo pipefail
+          command -v ffprobe || sudo apt-get -o Acquire::Retries=0 install -y ffmpeg
+          python3 -m py_compile kids/tools/restore_quiz_v4_stage1_paid_run_backup.py
+          python3 -m py_compile kids/tools/test_quiz_v4_stage1_paid_backup_restore.py
+      - name: Verify unconfirmed paid request and genuine MP3 bytes cannot be recreated
+        run: |
+          set -euo pipefail
+          python3 kids/tools/test_quiz_v4_stage1_paid_backup_restore.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('kids/data/quiz-curation-release.json')
+          assert json.loads(p.read_text(encoding='utf-8'))['enabled'] is False
+          print('PASS: actual public quiz release is OFF; 0 ElevenLabs calls')
+          PY

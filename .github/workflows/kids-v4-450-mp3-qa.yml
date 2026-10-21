@@ -1,0 +1,60 @@
+name: KIDS V4 450 Saved Originals Audio QA (no TTS)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/qa_quiz_v4_saved_mp3.py'
+      - 'kids/tools/report_quiz_v4_450_progress.py'
+      - '.github/workflows/kids-v4-450-mp3-qa.yml'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/assets/kids-quiz-audio/v4-curated450-review/**'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-450-original-mp3-qa-review
+  cancel-in-progress: false
+
+jobs:
+  verify-stored-audio:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+
+      - name: FFmpeg decoder for exact original MP3 technical QA
+        run: |
+          if ! command -v ffmpeg || ! command -v ffprobe; then
+            sudo apt-get update -qq
+            sudo apt-get install -y -qq ffmpeg
+          fi
+
+      - name: Check MP3 hashes, playable codec, levels, voice and unresolved listening approvals
+        run: |
+          python3 -m py_compile kids/tools/qa_quiz_v4_saved_mp3.py kids/tools/report_quiz_v4_450_progress.py kids/tools/test_report_quiz_v4_450_progress.py
+          python3 kids/tools/test_report_quiz_v4_450_progress.py -v
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+
+      - name: Persist technical QA only on the review branch
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          for n in 1 2 3; do
+            git fetch origin "$branch"
+            git reset --hard FETCH_HEAD
+            python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+            git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json kids/data/quiz-v4-450-production-status.json
+            if git diff --cached --quiet; then exit 0; fi
+            git commit -m 'qa(kids-v4): document MP3 technical checks, listening still pending'
+            if git push origin HEAD:"$branch"; then exit 0; fi
+          done
+          exit 1

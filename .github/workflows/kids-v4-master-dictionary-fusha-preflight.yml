@@ -1,0 +1,52 @@
+name: KIDS V4 Master Dictionary and Fusha Correctness Preflight (NO TTS)
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/generate_quiz_v4_450_paid_batch02.py'
+      - 'kids/tools/generate_quiz_v4_older_stage1_exact.py'
+      - 'kids/tools/test_quiz_v4_canonical_dictionary_payload.py'
+      - 'kids/tools/quiz_v4_quarantine.py'
+      - 'kids/tools/test_quiz_v4_quarantine.py'
+      - 'kids/tools/quiz_v4_age7to10_offline_join.py'
+      - 'kids/tools/quiz_v4_first150_offline_join.py'
+      - 'kids/tools/stage_quiz_v4_existing_mp3_import.py'
+      - 'kids/data/quiz-v4-pronunciation-hold.json'
+      - '.github/workflows/kids-v4-master-dictionary-fusha-preflight.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  master-10099-lexicon:
+    if: github.event_name == 'workflow_dispatch' || github.event.pull_request.number == 1143
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout exact review branch (nothing published)
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Check actual API model + dictionary + native Arabic before any paid calls
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/generate_quiz_v4_450_paid_batch02.py kids/tools/generate_quiz_v4_older_stage1_exact.py kids/tools/test_quiz_v4_canonical_dictionary_payload.py kids/tools/quiz_v4_quarantine.py kids/tools/test_quiz_v4_quarantine.py kids/tools/quiz_v4_age7to10_offline_join.py kids/tools/quiz_v4_first150_offline_join.py kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/test_quiz_v4_quarantine.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --audit
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          h=json.loads(Path('kids/data/quiz-v4-pronunciation-hold.json').read_text())
+          # The owner authorized ONLY a single lexicon-correct pilot.
+          assert h['productionPaused'] is False
+          assert h['dictionaryProviderVerified'] is True
+          assert h['ownerRestartAuthorized'] is True
+          assert h['authorizedNewOriginalsBeforeHearing']==1
+          assert h['humanListeningQualityGateReleased'] is False
+          assert h['humanPronunciationApproved'] is False
+          assert h['publicQuizAudioReleaseAuthorized'] is False
+          release=json.loads(Path('kids/data/quiz-curation-release.json').read_text())
+          assert release['enabled'] is False
+          print('ZERO CREDIT PREFLIGHT: verified exact V4 lexicon + Fuṣḥā and old-bad-audio quarantine; single hearing pilot only, no broad TTS')
+          PY

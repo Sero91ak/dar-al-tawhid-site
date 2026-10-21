@@ -1,0 +1,54 @@
+name: KIDS V4 Next100 Exact Master-Dictionary Waves (zero credits)
+on:
+  push:
+    branches:
+      - review/kids-quiz-v4-batch-001-020-20261014
+    paths:
+      - kids/tools/plan_quiz_v4_next100_dictionary_safe.py
+      - .github/workflows/kids-v4-next100-dictionary-safe-waves-no-credits.yml
+permissions:
+  contents: read
+jobs:
+  protected-first100-450:
+    if: github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Verify canonical dedupe guards + exact dictionary version
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/plan_quiz_v4_next100_dictionary_safe.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+      - name: Produce a 100-source, zero-credit exact priority plan
+        run: |
+          set -euo pipefail
+          python3 kids/tools/audit_quiz_v4_all450_master_lexicon.py
+          python3 kids/tools/plan_quiz_v4_next100_dictionary_safe.py
+          python3 - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          r=json.loads(Path('kids/review-only/quiz-v4-next100-master-dictionary-safe-plan.json').read_text(encoding='utf-8'))
+          assert r['selected450QuestionCount']==450 and r['dictionaryRuleCount']==10099
+          assert r['newOriginalsPrepared']==100 and not r['readyToBillAutomatically']
+          assert r['nextActualPaidOriginalsMustNotBeGeneratedWithoutQualityGate'] is True
+          assert r['newElevenLabsCallsMade']==0 and r['newElevenLabsCreditsSpent']==0
+          assert len(set(x['sourceTextSHA256'] for wave in r['waves'] for x in wave['items']))==100
+          for wave in r['waves']:
+            assert wave['newExactOriginalCount']<=10 and wave['estimatedCreditsNotInvoice']<=850
+            assert all(hashlib.sha256(x['spokenText'].encode('utf-8')).hexdigest()==x['sourceTextSHA256'] for x in wave['items'])
+          assert json.loads(Path('kids/data/quiz-curation-release.json').read_text())['enabled'] is False
+          print('PASS 100 new distinct source originals, split into bounded waves; no money spent')
+          PY
+      - name: Archive exact read-only wave plan for the 450 selected questions
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-next100-real-originals-no-duplicate-no-credits
+          retention-days: 30
+          if-no-files-found: warn
+          path:
+            kids/review-only/quiz-v4-next100-master-dictionary-safe-plan.json

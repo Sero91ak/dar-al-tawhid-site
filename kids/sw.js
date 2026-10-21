@@ -550,7 +550,7 @@ self.addEventListener("fetch",function(event){
     return;
   }
   /* QUIZ LEARNING CENTER: network-first so 900-question data, dashboard logic and layout never regress to a stale pack. */
-  if(url.pathname==="/kids/data/quiz-kids.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-v4-bridge.js"){
+  if(url.pathname==="/kids/data/quiz-kids.json"||url.pathname==="/kids/data/quiz-curation-release.json"||url.pathname==="/kids/data/quiz-kids-curated-450-review.json"||url.pathname==="/kids/quiz-library.js"||url.pathname==="/kids/quiz-library.css"||url.pathname==="/kids/quiz-v4-bridge.js"){
     event.respondWith(networkFirst(request));
     return;
   }

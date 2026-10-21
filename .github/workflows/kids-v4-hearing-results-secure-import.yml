@@ -1,0 +1,90 @@
+name: KIDS V4 Verified Hearing Results Import (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/import_quiz_v4_human_hearing_reviews.py'
+      - 'kids/tools/test_quiz_v4_human_hearing_review_import.py'
+      - 'kids/review-only/hearing-submissions/**'
+      - 'kids/review-only/quiz-v4-450-actual-mp3-import.json'
+      - '.github/workflows/kids-v4-hearing-results-secure-import.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-450-hearing-claims-private-review
+  cancel-in-progress: false
+
+jobs:
+  verify-and-record-private-review:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout KIDS original V4 review branch only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Run strict synthetic forgery and cross-age safety tests
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/import_quiz_v4_human_hearing_reviews.py
+          python3 -m py_compile kids/tools/test_quiz_v4_human_hearing_review_import.py
+          python3 kids/tools/test_quiz_v4_human_hearing_review_import.py
+      - name: Import ONLY actual offline review submissions, if provided
+        run: |
+          set -euo pipefail
+          python3 kids/tools/import_quiz_v4_human_hearing_reviews.py
+          python3 kids/tools/import_quiz_v4_human_hearing_reviews.py --check
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json')
+          d=json.loads(p.read_text())
+          assert d['modelId']=='eleven_v4' and d['masterVoiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert d['reviewerIdentityAuthenticated'] is False
+          assert d['humanApprovalVerifiedByImporter'] is False
+          assert d['publicPlaybackApprovedCount']==0
+          assert d['publicReleaseAllowed'] is False
+          assert d['newElevenLabsCreditsSpent']==0
+          assert d['rawReviewerNamesOrNotesCommitted'] is False
+          assert all('note' not in issue for issue in d['reportedIssuesByTextSha'].values())
+          assert 'reviewerName' not in d
+          if not d['ageSubmitted']:
+              assert d['claimedApprovalClipCount']==0
+              assert d['submittedIssueClipCount']==0
+          print('PASS: SHA-verified self-attested hearing review, no false approval, no credits.')
+          PY
+      - name: Save normalized results WITHOUT names or audio release changes
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-hearing-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json
+          git add kids/review-only/QUIZ-V4-HOERPRUEFUNG-IMPORTSTATUS.md
+          if git diff --cached --quiet; then
+            echo "No new hearing review decisions to record."
+            exit 0
+          fi
+          git commit -m "review(kids V4): record genuine submitted hearing claims with MP3 SHA validation, no release"
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+              echo "Hearing review results staged, public release not authorized."
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          exit 1
+      - name: Preserve normalized private QA ledger for later reviews
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-hearing-claims-verified-review
+          if-no-files-found: warn
+          retention-days: 90
+          path: |
+            kids/review-only/quiz-v4-450-human-hearing-submission-ledger.json
+            kids/review-only/QUIZ-V4-HOERPRUEFUNG-IMPORTSTATUS.md

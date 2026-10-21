@@ -1,0 +1,1385 @@
+{
+  "schemaVersion": 1,
+  "scope": "KIDS_V4_450_REMAINING_ORIGINAL_AUDIO_DIAGNOSTICS_NO_CREDITS",
+  "date": "2026-10-21",
+  "live": false,
+  "humanListeningApproved": false,
+  "source": {
+    "repository": "Sero91ak/dar-al-tawhid-site",
+    "branch": "review/kids-quiz-v4-batch-001-020-20261014",
+    "planGitBlobSha": "5cfcb5bd92b7bec1aeecf2d164978677f8d8c5c4",
+    "registryGitBlobSha": "ec64474b589c1e246268566ad7dcefdbb566e2e4"
+  },
+  "current": {
+    "selectedQuestions": 450,
+    "completeFourPartQuestions": 316,
+    "missingCompleteFourPartQuestions": 134,
+    "originalMP3sSaved": 1691,
+    "originalsWithoutOriginalMP3FromStatus": 75,
+    "unimportedHistoricalPaidMP3s": 9,
+    "connectedUnimportedFlowEntries": 10,
+    "oldStageUnconfirmedRequests": 1
+  },
+  "notes": [
+    "Original count by source segments may differ from production-status total because historical paid exact modes and connected Flow reservations are separate.",
+    "Never regenerate historical paid originals or uncertain POST requests.",
+    "Arabic mixed-script utterances require explicit accurate separation or human-approved pronunciation in the owner voice before paid synthesis.",
+    "No human pronunciation approval or public release is implied by technical audio QA."
+  ],
+  "missingSourceTextCount": 78,
+  "breakdown": {
+    "missing_verified_owner_dictionary_pronunciation": {
+      "uniqueTexts": 18,
+      "affectedQuestions": 15
+    },
+    "mixed_arabic_script_needs_separate_arabic_voice_segment": {
+      "uniqueTexts": 46,
+      "affectedQuestions": 33
+    },
+    "old_prepaid_mp3_recovery": {
+      "uniqueTexts": 3,
+      "affectedQuestions": 50
+    },
+    "reserved_existing_elevenlabs_flow_mp3": {
+      "uniqueTexts": 10,
+      "affectedQuestions": 5
+    },
+    "provider_uncertain_paid_request_recover_not_regenerate": {
+      "uniqueTexts": 1,
+      "affectedQuestions": 1
+    }
+  },
+  "affectedUnfinishedQuestionCount": 104,
+  "pendingUnimportedOldGenerationIds": [
+    {
+      "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+      "text": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!"
+    },
+    {
+      "generationId": "DX5z8FWaCS4FDx3KrloO",
+      "text": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!"
+    },
+    {
+      "generationId": "AToalNGbxiRe1zfOnDG3",
+      "text": "Das merken wir uns: Wir dienen Allah allein."
+    },
+    {
+      "generationId": "FGX65uXKWBnjULDxg3X1",
+      "text": "Schau, was du schon alles weißt."
+    },
+    {
+      "generationId": "KIgCxJO3RDxhsIFJSYUB",
+      "text": "Ist Allah Einer?"
+    },
+    {
+      "generationId": "UUmC2fDiXaV5W1IQSumA",
+      "text": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein."
+    },
+    {
+      "generationId": "aoKJuahenrKHfUE5OD9j",
+      "text": "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Du lernst immer mehr!"
+    },
+    {
+      "generationId": "2xy9ZLej1wPTrnvAr9p7",
+      "text": "Du lernst mit jedem Versuch. Hör noch einmal genau hin!"
+    },
+    {
+      "generationId": "1UAwmEQ77D4BmA9DttHZ",
+      "text": "Das merken wir uns: Sūrat al-Iḫlāṣ lehrt: Allah ist Einer."
+    }
+  ],
+  "heldSourceTexts": [
+    {
+      "text": "Allah befiehlt, von dem Halālen und Guten auf der Erde zu essen.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-131",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah beruhigte Mūsās Mutter und versprach, ihn zu ihr zurückzubringen.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-331",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah beschreibt den Qurʾān als Rechtleitung für die Muttaqīn.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-023",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah erfüllte Sein Versprechen und tröstete Mūsās Mutter.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-332",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah erlaubt das Halāle und Gute und warnt vor den Schritten des Shayṭān.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-271",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah nahm Ādams Reue an und nennt Sich den Reue-Annehmenden und Barmherzigen.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-177",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der längste Qurʾān-Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-189",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-276",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Qurʾān wiederholt, dass ʿĪsās Zeichen mit Allahs Erlaubnis geschahen.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-278",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Die Qurʾān-Duʿāʾ bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-499",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Ghībah ist erlaubt, solange die Person es nicht hört.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-839",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Halāle und gute Nahrung.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-131",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Luqmāns Rat lehrt maßvolles Auftreten und eine ruhige Stimme.",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-859",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Mit wessen Erlaubnis geschahen die Wunder ʿĪsās?",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-278",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Was gab Allah Mūsās Mutter ein, als sie Angst um ihn hatte?",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-331",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Was lehrt Sūrat ash-Sharḥ nach dem Ende einer Aufgabe?",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-624",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Was zeigt die Geschichte Ayyūbs in Qurʾān 21:83–84 über Prüfungen?",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-640",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Welche Verbindung macht Sulaymāns Duʿāʾ in Qurʾān 27:19 deutlich?",
+      "category": "missing_verified_owner_dictionary_pronunciation",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-641",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah befahl dem Propheten ﷺ und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-097",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah befiehlt dem Propheten ﷺ zu sagen, dass Gebet, Opfer, Leben und Tod Allah gehören.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-573",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah befiehlt dem Propheten ﷺ zu sagen: Wer Allah liebt, soll ihm folgen; dann liebt und vergibt Allah.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-600",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah befiehlt den Gehorsam gegenüber Ihm und Seinem Gesandten ﷺ.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-024",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah erklärte, dass Er vor Muḥammad ﷺ keinen Gesandten sandte, ohne ihm die Anbetung Allahs allein einzugeben.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-085",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah nennt den Gesandten ﷺ ein schönes Vorbild.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-025",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah sagt zum Propheten ﷺ, dass Er seine Erwähnung erhöht hat.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-482",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Allah und Seinem Gesandten ﷺ.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-024",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Dem Propheten ﷺ zu folgen.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-600",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Gesandte Allahs ﷺ.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-025",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ befahl, zu erleichtern und nicht zu erschweren sowie frohe Botschaft zu geben und nicht abzuschrecken.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-199",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ beschrieb den Muslim als jemanden, vor dessen Zunge und Hand die Muslime sicher sind.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-040",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte Iḥsān im Ḥadīṯ Jibrīl.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-035",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte, dass Allah nicht auf Aussehen und Vermögen schaut, sondern auf Herzen und Taten.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-137",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-485",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass Allah beständige gute Taten liebt, selbst wenn sie gering sind.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-136",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass Allah dem Suchenden nützlichen Wissens einen Weg zum Paradies erleichtert.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-450",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass der Dīn leicht ist und warnte vor Überforderung und Übertreibung.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-138",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass derjenige, der auf Gutes hinweist, einen Lohn wie der Ausführende erhält.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-587",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass Handlungen nach den Absichten bewertet werden und jeder das erhält, was er beabsichtigt.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-135",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass Hilfe in der Not eine große Belohnung im Jenseits hat.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-649",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass Ṣadaqah Vermögen nicht vermindert; Allah gibt dafür Segen und Lohn.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-099",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, dass selbst kleinere Leiden für den Muslim ein Grund für die Tilgung von Sünden sein können.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-488",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte, nach dem Nützlichen zu streben, Allah um Hilfe zu bitten und nicht hilflos aufzugeben.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-196",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ lehrte: Allahs Namen nennen, mit der rechten Hand essen und von dem essen, was vor einem liegt.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-084",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ nannte das Entfernen von Schaden vom Weg eine Ṣadaqah.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-534",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-036",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ riet, in der Dunyā wie ein Fremder oder ein Reisender zu sein.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-487",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ sagte, dass er und der Betreuer eines Waisenkindes im Paradies eng beieinander sein werden.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-586",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ sagte, der Dīn sei Naṣīḥah: gegenüber Allah, Seinem Buch, Seinem Gesandten, den Verantwortlichen und den Muslimen.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-486",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ verband Barmherzigkeit gegenüber anderen mit dem Empfang von Barmherzigkeit.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-198",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ verband den Īmān mit gutem Reden oder Schweigen.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-027",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Der Prophet ﷺ verbot, dem Nachbarn Schaden zuzufügen.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-028",
+          "part": "explanation",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Mit welchem Bild beschrieb der Prophet ﷺ die Haltung zur Dunyā?",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-487",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Nähe zum Propheten ﷺ im Paradies.",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-586",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Was lehrte der Prophet ﷺ neben dem Streben nach Nützlichem?",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-196",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Was sagte der Prophet ﷺ über Ṣadaqah und Vermögen?",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-099",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Was tat Mūsā عليه السلام, nachdem er den Frauen geholfen hatte?",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-631",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes?",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-586",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Welche Essensregel lehrte der Prophet ﷺ einem Jungen?",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-084",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Welche Gabe nennt Qurʾān 94:4 für den Propheten ﷺ?",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-482",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Welche Grundregel lehrt der Prophet ﷺ über den Dīn?",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-138",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Welche Warnung gab der Prophet ﷺ über fehlende Barmherzigkeit?",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-198",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Wie fasste der Prophet ﷺ einen wichtigen Teil des Dīn in Ṣaḥīḥ Muslim 55 zusammen?",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-486",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Wie reagierte Ayyūb عليه السلام in seiner schweren Prüfung?",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-630",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Worum bat Sulaymān عليه السلام in Qurʾān 27:19?",
+      "category": "mixed_arabic_script_needs_separate_arabic_voice_segment",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-632",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+      "category": "old_prepaid_mp3_recovery",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-002",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-052",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-057",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-062",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-102",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-107",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-112",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-117",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-152",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-157",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-162",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-167",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-207",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-212",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-307",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-312",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-352",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-357",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-452",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-462",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-502",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-517",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-607",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-612",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-692",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-697",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-707",
+          "part": "question",
+          "age": "4-6"
+        }
+      ],
+      "originalGenerationId": "UUmC2fDiXaV5W1IQSumA",
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Ist Allah Einer?",
+      "category": "old_prepaid_mp3_recovery",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-002",
+          "part": "question",
+          "age": "4-6"
+        }
+      ],
+      "originalGenerationId": "KIgCxJO3RDxhsIFJSYUB",
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Schau, was du schon alles weißt.",
+      "category": "old_prepaid_mp3_recovery",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-002",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-054",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-058",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-062",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-066",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-102",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-106",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-114",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-118",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-154",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-162",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-166",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-214",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-218",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-306",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-354",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-366",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-406",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-414",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-418",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-454",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-462",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-502",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-510",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-514",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-518",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-606",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-618",
+          "part": "question",
+          "age": "4-6"
+        },
+        {
+          "questionId": "kids-quiz-706",
+          "part": "question",
+          "age": "4-6"
+        }
+      ],
+      "originalGenerationId": "FGX65uXKWBnjULDxg3X1",
+      "providerFlowStatus": null
+    },
+    {
+      "text": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
+      "category": "provider_uncertain_paid_request_recover_not_regenerate",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-080",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": null,
+      "previousUnconfirmedRequestTextSha256": "fc4f586cf59297c43335f3aae64428bdf00fb10ec362ffb33c9620ff9a851f70"
+    },
+    {
+      "text": "Allah nennt Taqwā als Maßstab der besonderen Ehre bei Ihm.",
+      "category": "reserved_existing_elevenlabs_flow_mp3",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-041",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+    },
+    {
+      "text": "Angeben.",
+      "category": "reserved_existing_elevenlabs_flow_mp3",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-046",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT"
+    },
+    {
+      "text": "Den Zorn zurückhalten und verzeihen.",
+      "category": "reserved_existing_elevenlabs_flow_mp3",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-031",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+    },
+    {
+      "text": "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam.",
+      "category": "reserved_existing_elevenlabs_flow_mp3",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-046",
+          "part": "explanation",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT"
+    },
+    {
+      "text": "Eine berühmte Familie.",
+      "category": "reserved_existing_elevenlabs_flow_mp3",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-041",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+    },
+    {
+      "text": "Etwas kaputt machen.",
+      "category": "reserved_existing_elevenlabs_flow_mp3",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-031",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+    },
+    {
+      "text": "Im Rabīʿ al-Awwal.",
+      "category": "reserved_existing_elevenlabs_flow_mp3",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-045",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": "GENERATION_SUBMITTED_DO_NOT_RETRY"
+    },
+    {
+      "text": "Sofort beleidigen.",
+      "category": "reserved_existing_elevenlabs_flow_mp3",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-031",
+          "part": "question",
+          "age": "7-8"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+    },
+    {
+      "text": "Taqwā.",
+      "category": "reserved_existing_elevenlabs_flow_mp3",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-041",
+          "part": "question",
+          "age": "9-10"
+        },
+        {
+          "questionId": "kids-quiz-094",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+    },
+    {
+      "text": "Viel Geld.",
+      "category": "reserved_existing_elevenlabs_flow_mp3",
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-041",
+          "part": "question",
+          "age": "9-10"
+        }
+      ],
+      "originalGenerationId": null,
+      "providerFlowStatus": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED"
+    }
+  ],
+  "newSpeechCreditsSpentByAudit": 0,
+  "publicReleaseEnabled": false
+}

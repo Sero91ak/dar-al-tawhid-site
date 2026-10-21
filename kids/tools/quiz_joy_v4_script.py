@@ -63,7 +63,7 @@ SUCCESS = {
 RETRY = {
     "4-6": (
         "Noch nicht ganz. Bismi-llāh bedeutet: Im Namen Allahs. Versuch es noch einmal!",
-        "In schāʾ Allāh – wenn Allah will – klappt es beim nächsten Versuch. Denk in Ruhe nach!",
+        "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
         "Du lernst mit jedem Versuch. Hör noch einmal genau hin!",
         "Das war noch nicht richtig. Nimm dir Zeit und versuche es wieder!",
         "Noch einmal versuchen, in schāʾ Allāh. Du darfst dir Zeit lassen!",

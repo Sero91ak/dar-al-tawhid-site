@@ -1,0 +1,3965 @@
+{
+  "schemaVersion": 1,
+  "scope": "TAWHID_KIDS_450_PRIVATE_SELF_ATTESTED_HEARING_SUBMISSIONS",
+  "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "knownRealV4TextClips": 794,
+  "ageSubmitted": [],
+  "claimedApprovalClipCount": 0,
+  "submittedIssueClipCount": 0,
+  "claimsConflictingWithIssues": [],
+  "allClaimsRequireIndependentAuthorization": true,
+  "reviewerIdentityAuthenticated": false,
+  "humanApprovalVerifiedByImporter": false,
+  "publicPlaybackApprovedCount": 0,
+  "publicReleaseAllowed": false,
+  "newElevenLabsCreditsSpent": 0,
+  "rawReviewerNamesOrNotesCommitted": false,
+  "byAge": {
+    "4-6": {
+      "questions": 150,
+      "fourPartTechnical": 70,
+      "allFourSelfAttestedUnverified": 0,
+      "questionsWithReportedIssue": 0
+    },
+    "7-8": {
+      "questions": 150,
+      "fourPartTechnical": 139,
+      "allFourSelfAttestedUnverified": 0,
+      "questionsWithReportedIssue": 0
+    },
+    "9-10": {
+      "questions": 150,
+      "fourPartTechnical": 134,
+      "allFourSelfAttestedUnverified": 0,
+      "questionsWithReportedIssue": 0
+    }
+  },
+  "selfAttestedAudioClaimsByTextSha": {},
+  "reportedIssuesByTextSha": {},
+  "questionReviewStates": {
+    "kids-quiz-001": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "explanation",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-002": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "explanation",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-003": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-004": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-005": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-006": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-007": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-008": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-009": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-010": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-011": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-012": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-013": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-014": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-015": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-016": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-017": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-018": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-019": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-020": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-022": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-023": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-024": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-025": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-026": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-027": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-028": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-030": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-031": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-032": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-033": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-034": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-035": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-036": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-037": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-040": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-041": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation",
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-043": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-044": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-045": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-046": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation",
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-047": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-048": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-050": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-051": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-052": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-053": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-054": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-055": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-056": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-057": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-058": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-059": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-061": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-062": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-063": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-064": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-065": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-066": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-068": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-069": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-070": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-071": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-073": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-074": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-079": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-080": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-082": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-083": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-084": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-085": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-086": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-087": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-089": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-091": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-092": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-093": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-094": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-095": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-096": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-097": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation",
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-099": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-100": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-101": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-102": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-103": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-104": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-105": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-106": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-107": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-108": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-109": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-112": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-114": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-115": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-117": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-118": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-120": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-121": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-122": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-124": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-125": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-127": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-129": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-131": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation",
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-133": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-134": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-135": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-136": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-137": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-138": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-139": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-141": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-146": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-147": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-148": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-150": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-151": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-152": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-153": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-154": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-155": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-156": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-157": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-159": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-160": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-161": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-162": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-164": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-166": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-167": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-168": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-169": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-170": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-171": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-172": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-173": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-174": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-175": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-176": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-177": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-178": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-179": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-180": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-183": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-184": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-187": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-188": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-189": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-193": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-194": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-196": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-198": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-199": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-200": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-204": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-205": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-207": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-208": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-209": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-211": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-212": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-213": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-214": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-216": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-218": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-220": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-221": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-222": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-223": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-224": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-225": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-226": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-227": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-228": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-229": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-230": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-231": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-233": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-234": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-235": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-236": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-237": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-240": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-244": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-245": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-246": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-247": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-249": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-250": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-256": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-260": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-261": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-264": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-265": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-268": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-270": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-271": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-272": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-273": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-274": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-276": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-277": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-278": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation",
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-281": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-285": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-286": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-288": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-289": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-292": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-295": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-296": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-297": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-298": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-299": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-300": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-304": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-305": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-306": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-307": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-308": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-311": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-312": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-313": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-320": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-321": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-322": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-323": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-328": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-330": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-331": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation",
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-332": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-333": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-334": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-335": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-338": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-339": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-344": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-352": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-354": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-355": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-356": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-357": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-359": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-360": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-363": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-364": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-366": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-369": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-374": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-375": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-376": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-383": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-386": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-387": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-388": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-389": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-390": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-398": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-405": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-406": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-414": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-418": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-420": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-428": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-431": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-432": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-437": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-438": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-444": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-450": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-451": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-452": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-454": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-456": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-459": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-462": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-463": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-464": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-465": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-470": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-473": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-474": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-476": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-479": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-482": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-483": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-484": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-485": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation",
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-486": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-487": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-488": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-491": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-492": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-493": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-494": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-495": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-496": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-498": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-499": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-500": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-502": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-503": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-505": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-510": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-513": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-514": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-515": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-517": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-518": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-520": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-526": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-528": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-529": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-530": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-531": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-532": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-534": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-535": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-539": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-541": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-553": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-560": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-565": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-568": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-573": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-583": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-586": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-587": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-589": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-590": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-591": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-592": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-594": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-596": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-597": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-599": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-600": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-601": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-604": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-606": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-607": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-612": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-613": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-615": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-616": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-618": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-619": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-621": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-622": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-624": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-625": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-626": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-629": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-630": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-631": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-632": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-633": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-634": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-635": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-636": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-638": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-639": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-640": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-641": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-643": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-644": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-649": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-650": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-653": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-655": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-656": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-681": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-683": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-684": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-685": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-688": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-691": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-692": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-696": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-697": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-706": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-707": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "question",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-708": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-711": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-716": {
+      "ageBand": "4-6",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "correct",
+        "retry"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-717": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-719": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-721": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-723": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-725": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-727": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-729": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-731": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-743": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-745": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-749": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-751": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-753": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-761": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-769": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-771": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-773": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-777": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-779": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-781": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-783": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-785": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-787": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-791": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-793": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-795": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-797": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-799": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-805": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-807": {
+      "ageBand": "7-8",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-809": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-811": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-813": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-815": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-817": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-819": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-821": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-823": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-829": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-831": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-835": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-837": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-839": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-841": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-845": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-853": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-855": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-859": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "explanation"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-861": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-863": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-865": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-869": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-873": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-875": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-877": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [
+        "question"
+      ],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-879": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-881": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-883": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-885": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-887": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-889": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-891": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-893": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    },
+    "kids-quiz-899": {
+      "ageBand": "9-10",
+      "selfAttestedParts": [],
+      "reportedIssueParts": [],
+      "missingOriginalParts": [],
+      "fourPartSelfAttestedPendingIdentityReview": false,
+      "publicPlaybackApproved": false
+    }
+  }
+}

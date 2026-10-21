@@ -1,0 +1,120 @@
+name: KIDS 150 First Age 4-6 V4 Cost-Controlled Campaign
+
+on:
+  workflow_dispatch:
+    inputs:
+      authorize_new_credit_spend:
+        description: "Explicit manual permission for NEW paid ElevenLabs synthesis"
+        required: true
+        type: choice
+        options:
+          - "NO"
+          - "YES"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+
+jobs:
+  produce-first-150-age4-6:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.authorize_new_credit_spend == 'YES' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
+    runs-on: ubuntu-latest
+    timeout-minutes: 100
+    steps:
+      - name: Checkout full review branch (never public main)
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          persist-credentials: true
+
+      - name: Preflight data integrity, MP3 decoder and 150-question invoice estimate
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/quiz_v4_first150_costed_campaign.py
+          python3 kids/tools/quiz_v4_first150_costed_campaign.py --audit
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          command -v ffmpeg
+          command -v ffprobe
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+
+      - name: Make and immediately save each capped batch, no retries on charged failures
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-voice-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          # Up to 12 batches * <= 30 clips covers all of age 4-6's
+          # 279 expected new segments, reusing the 72 original MP3s.
+          for wave in $(seq 1 12); do
+            echo "KIDS_150_START_WAVE $wave / 12"
+            # Reconcile the previous pushed batch against the newest branch.
+            # Before EVERY new credit spend, NEVER on an uncommitted snapshot.
+            git fetch origin "$branch"
+            if ! git diff --quiet || ! git diff --cached --quiet; then
+              echo "::error::Uncommitted original recordings detected. Stop to prevent duplicate charges."
+              exit 1
+            fi
+            if [ "$(git rev-parse HEAD)" != "$(git rev-parse FETCH_HEAD)" ]; then
+              git rebase FETCH_HEAD
+            fi
+            python3 kids/tools/quiz_v4_first150_costed_campaign.py --audit
+            python3 kids/tools/quiz_v4_first150_costed_campaign.py --produce --limit 30
+            python3 kids/tools/qa_quiz_v4_saved_mp3.py
+            python3 kids/tools/report_quiz_v4_450_progress.py
+            git add kids/assets/kids-quiz-audio/v4-curated450-review/
+            git add kids/data/quiz-v4-450-original-clip-registry.json
+            git add kids/data/quiz-v4-450-paid-generation-ledger.json
+            git add kids/data/quiz-v4-first150-last-wave.json
+            git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+            git add kids/data/quiz-v4-450-production-status.json
+            if git diff --cached --quiet; then
+              echo "No new original audio needed; age 4-6 paid-segment production complete."
+              break
+            fi
+            git commit -m "audio(kids 4-6): save and QA originals for first 150, wave $wave, review-only"
+            delivered=0
+            for pushtry in 1 2 3 4; do
+              if git push origin HEAD:"$branch"; then
+                delivered=1
+                break
+              fi
+              git fetch origin "$branch"
+              if ! git rebase FETCH_HEAD; then
+                echo "::error::A concurrent edit conflicts; original MP3 bytes preserved in artifact, do NOT re-generate."
+                exit 1
+              fi
+            done
+            if [ "$delivered" -ne 1 ]; then
+              echo "::error::Unable to save already-paid audio to remote. STOP and recover artifact."
+              exit 1
+            fi
+            echo "KIDS_150_WAVE_COMMITTED $wave"
+          done
+          python3 kids/tools/quiz_v4_first150_costed_campaign.py --audit
+          echo "Original MP3 recording phases done. Full release still requires earlier Flow paid audio and human QA."
+
+      - name: Recover all original charged MP3 bytes even on failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-first150-original-mp3-immutable-backup
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json
+            kids/data/quiz-v4-first150-last-wave.json
+            kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+            kids/data/quiz-v4-450-production-status.json

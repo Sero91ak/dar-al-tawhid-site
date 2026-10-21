@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "app": "TAWḤĪD KIDS",
+  "reviewDate": "2026-10-21",
+  "scope": "existing paid V4 originals - owner pronunciation complaints",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "dictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+  "dictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
+  "originals": [
+    {
+      "sourceText": "Gute Taten und ʿIbādah werden aufrichtig für Allah getan.",
+      "audioUrl": "/kids/assets/kids-quiz-audio/v4-curated450-review/f0fc87531f283366057b1a1f123624b9.mp3",
+      "mp3Sha256": "d90a240bba1631664298aeb7e6b138ba4b101f3544a979b0852ff7cc031d7af4",
+      "ownerFeedback": "owner_rejected",
+      "blockedForQuizPlayback": true,
+      "blockedForPublicRelease": true,
+      "retainPaidOriginal": true,
+      "allowBlindRegeneration": false
+    },
+    {
+      "sourceText": "ʿIbādah und Duʿāʾ richten wir an Allah allein.",
+      "audioUrl": "/kids/assets/kids-quiz-audio/v4-curated450-review/15dc3196a4845519aff945ba69eb46eb.mp3",
+      "mp3Sha256": "e27f92aae6dcd2f972b0e235c8eb9e2c02944cff637fc1d5519c637b458d9598",
+      "ownerFeedback": "owner_rejected",
+      "blockedForQuizPlayback": true,
+      "blockedForPublicRelease": true,
+      "retainPaidOriginal": true,
+      "allowBlindRegeneration": false
+    },
+    {
+      "sourceText": "Wir machen ʿIbādah nicht, um vor Menschen Eindruck zu machen.",
+      "audioUrl": "/kids/assets/kids-quiz-audio/v4-curated450-review/8d2e754a7d47f27dff81db82c1a2b1b6.mp3",
+      "mp3Sha256": "37cd12f27a6761299ea0ccb017fc4de242ebfec7b72fc04b844f98af44857aaa",
+      "ownerFeedback": "owner_rejected",
+      "blockedForQuizPlayback": true,
+      "blockedForPublicRelease": true,
+      "retainPaidOriginal": true,
+      "allowBlindRegeneration": false
+    },
+    {
+      "sourceText": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge?",
+      "audioUrl": "/kids/assets/kids-quiz-audio/v4-curated450-review/70cb885bef692caa3f8392b80b3ab146.mp3",
+      "mp3Sha256": "c7149a76e4aa7d630d70d28e7eee51abea6fa8cfd0270dd133eceeed4d27610a",
+      "ownerFeedback": "owner_listening_review_requested",
+      "blockedForQuizPlayback": true,
+      "blockedForPublicRelease": true,
+      "retainPaidOriginal": true,
+      "allowBlindRegeneration": false
+    },
+    {
+      "sourceText": "Es gibt keinen Unterschied zwischen Ḥalāl und Ḥarām.",
+      "audioUrl": "/kids/assets/kids-quiz-audio/v4-curated450-review/10faee18efb70afc9270184f216c348b.mp3",
+      "mp3Sha256": "c0a17c1e1df1e87b532614e0aefb085e96ab1ffb399a447245104784d58f2445",
+      "ownerFeedback": "owner_listening_review_requested",
+      "blockedForQuizPlayback": true,
+      "blockedForPublicRelease": true,
+      "retainPaidOriginal": true,
+      "allowBlindRegeneration": false
+    },
+    {
+      "sourceText": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
+      "audioUrl": "/kids/assets/kids-quiz-audio/v4-curated450-review/5c90b6e067dfd9f12c6c8710dc855d74.mp3",
+      "mp3Sha256": "e72958c32c44d870a73f77674364afd2eedebf5d41b75674a345be4555880dea",
+      "ownerFeedback": "owner_listening_review_requested",
+      "blockedForQuizPlayback": true,
+      "blockedForPublicRelease": true,
+      "retainPaidOriginal": true,
+      "allowBlindRegeneration": false
+    },
+    {
+      "sourceText": "Zur al-Masǧid al-Ḥarām in Makkah.",
+      "audioUrl": "/kids/assets/kids-quiz-audio/v4-curated450-review/f5d4b9f5e1a3fc95cc62229dcd08b547.mp3",
+      "mp3Sha256": "20ac11f3a6dbc186c484661676fb2e975cdd9cc17b1752e1d1a04342dd86056f",
+      "ownerFeedback": "owner_listening_review_requested",
+      "blockedForQuizPlayback": true,
+      "blockedForPublicRelease": true,
+      "retainPaidOriginal": true,
+      "allowBlindRegeneration": false
+    }
+  ],
+  "observedMasterDictionaryAliases": {
+    "ʿIbādah": "-Ibaadah",
+    "Ḥalāl": "Halaal",
+    "Ḥarām": "Haraam"
+  },
+  "phoneticsToValidate": [
+    {
+      "text": "ʿIbādah",
+      "arabic": "عِبَادَة",
+      "issue": "Leading hyphen in owner de-DE alias and accurate ʿayn must be resolved, not changed by silent German substitution"
+    },
+    {
+      "text": "Ḥalāl",
+      "arabic": "حَلَال",
+      "issue": "Verify ḥāʾ / ح and long ā sound, not German h / short vowels"
+    },
+    {
+      "text": "Ḥarām",
+      "arabic": "حَرَام",
+      "issue": "Verify ḥāʾ / ح and long ā sound, not German h / short vowels"
+    }
+  ],
+  "humanListeningApproved": false,
+  "publicReleaseAllowed": false,
+  "newCreditsSpentForAudit": 0,
+  "notes": [
+    "Do not erase original MP3s or paid billing ledger entries.",
+    "Never regenerate affected original without a verified new pronunciation profile and explicit user listening approval.",
+    "No Quran text synthesized: existing Quran reciter source remains authoritative.",
+    "Playback hold protects public quiz; existing originals may still be previewed for the owner."
+  ]
+}

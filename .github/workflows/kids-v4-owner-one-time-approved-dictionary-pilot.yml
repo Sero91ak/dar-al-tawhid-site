@@ -1,0 +1,124 @@
+name: KIDS V4 One-Time Owner-Authorized Master Dictionary Audio Pilot
+
+on:
+  push:
+    branches:
+      - review/kids-quiz-v4-batch-001-020-20261014
+    paths:
+      - kids/review-only/quiz-v4-one-time-owner-pilot-command.json
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tawhid-kids-single-owner-dictionary-pilot-20261019
+  cancel-in-progress: false
+
+jobs:
+  authorized-single-master-dictionary-audio:
+    if: >-
+      github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' && github.event.head_commit.message == 'audio(kids): owner-authorized single authentic dictionary V4 hearing pilot [20261019]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      KIDS_V4_STAGE1_APPROVED_CANONICAL_450: 'YES'
+      KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL: 'YES'
+      KIDS_V4_STAGE1_SAMPLE_ONLY: 'YES'
+      KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256: 'b362862446aec6ab315421ed7d8d77bd1bfc56908e593c611456791f05d56dd6'
+
+    steps:
+      - name: Checkout ONLY private review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+
+      - name: Verify exact owner authorization, 10099 rules and absent original BEFORE charging
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/generate_quiz_v4_450_paid_batch02.py kids/tools/generate_quiz_v4_older_stage1_exact.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/test_quiz_v4_quarantine.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/verify_quiz_v4_master_dictionary_provider_get_only.py
+          python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --audit
+          python3 - <<'PY'
+          import json,os,hashlib
+          from pathlib import Path
+          command=json.loads(Path('kids/review-only/quiz-v4-one-time-owner-pilot-command.json').read_text(encoding='utf-8'))
+          batch=json.loads(Path('kids/review-only/quiz-v4-older-stage1-next-recording-batch.json').read_text(encoding='utf-8'))
+          hold=json.loads(Path('kids/data/quiz-v4-pronunciation-hold.json').read_text(encoding='utf-8'))
+          journal=json.loads(Path('kids/data/quiz-v4-older-stage1-request-journal.json').read_text(encoding='utf-8'))
+          release=json.loads(Path('kids/data/quiz-curation-release.json').read_text(encoding='utf-8'))
+          phrase='Qurʾān 5:6 nennt die grundlegenden Pflichtteile des Wuḍūʾ.'
+          sha=hashlib.sha256(phrase.encode('utf-8')).hexdigest()
+          assert command['schemaVersion']==1 and command['ownerAuthorizedPaidOneTake'] is True
+          assert command['speechTextSha256']==sha and command['maximumNewPaidGenerations']==1
+          assert command['voiceId']=='DkU7j9uO4ZEtLD2iRZSH' and command['modelId']=='eleven_v4'
+          assert command['dictionaryId']==hold['dictionaryId']=='Q8w3SxtoVo8NSjsnlJEd'
+          assert command['dictionaryVersionId']==hold['dictionaryVersionId']=='wSzgkGpAwEDiTak8DApc'
+          assert command['dictionaryRuleCount']==hold['dictionaryRuleCount']==10099
+          assert batch['manualApprovalMustMatchExactBatchFingerprintSHA256']==os.environ['KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256']
+          assert sha in batch['nextExactTextSha256']
+          assert not any(x['textSHA256']==sha for x in journal['entries'])
+          assert not any(x.get('dictionaryPilot20261019') is True for x in journal['entries'])
+          assert hold['productionPaused'] is False and hold['ownerRestartAuthorized'] is True
+          assert hold['dictionaryProviderVerified'] is True and hold['authorizedNewOriginalsBeforeHearing']==1
+          assert hold['humanListeningQualityGateReleased'] is False
+          assert command['humanAudioApprovalClaimed'] is False
+          assert release['enabled'] is False
+          print('PASS: at most one new genuine V4 original; correctly pinned 10099-rule dictionary and no duplicate spend')
+          PY
+
+      - name: Produce ONE authentic V4 original with PRE/POST request journal and remote MP3 checkpoint
+        run: |
+          set -euo pipefail
+          python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --produce
+
+      - name: Compose genuine recorded originals into private quiz for offline hearing
+        run: |
+          set -euo pipefail
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+
+      - name: Commit internal listening preview only and NEVER enable public release
+        run: |
+          set -euo pipefail
+          git config user.name tawhid-kids-v4-master-pilot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-450-original-clip-registry.json kids/data/quiz-v4-450-paid-generation-ledger.json
+          git add kids/data/quiz-v4-older-stage1-usage.json kids/data/quiz-v4-older-stage1-request-journal.json
+          git add kids/assets/kids-quiz-audio/v4-curated450-review/ kids/assets/kids-quiz-audio/v4-first150-composed-review/ kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-450-production-status.json kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-older-stage1-next-recording-batch.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'audio(kids): save real dictionary V4 pilot and offline quiz review [skip ci]'
+            for attempt in 1 2 3 4; do
+              git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014 && exit 0
+              git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+              git rebase FETCH_HEAD || exit 1
+            done
+            exit 1
+          fi
+
+      - name: Preserve all charged original audio and receipts EVEN ON FAILURE
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-owner-authentic-dictionary-single-take-safekeeping
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json
+            kids/data/quiz-v4-older-stage1-request-journal.json
+            kids/data/quiz-v4-older-stage1-usage.json

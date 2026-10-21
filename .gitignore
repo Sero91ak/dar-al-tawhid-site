@@ -16,3 +16,22 @@ android/app/google-services.json
 *.p8
 ios/**/asc.env
 ios/**/AuthKey_*.p8
+# KIDS V4 internal hearing review artifacts: never publish in the website tree
+/kids/review-only/quiz-v4-first150-hearing-review.html
+/kids/review-only/quiz-v4-first150-hearing-bundle.zip
+
+# KIDS older 300 private original-audio review bundle (GitHub artifact only)
+/kids/review-only/quiz-v4-older300/
+/kids/review-only/quiz-v4-older300-review.zip
+/kids/review-only/quiz-v4-age7to10-hearing-review.html
+/kids/review-only/quiz-v4-age7to10-hearing-bundle.zip
+/kids/review-only/quiz-v4-selected450-crossage-integrity.json
+/kids/review-only/quiz-v4-450-deduplicated-unrecorded-originals.json
+/kids/review-only/quiz-v4-older-40-text-content-review.html
+/kids/review-only/quiz-v4-older-40-text-content-review.zip
+
+# KIDS V4: raw human hearing exports may contain reviewer names and must
+# only be processed in a private local environment, NEVER committed as inputs.
+# Only the validated, name-free hearing submission ledger may enter GitHub.
+/kids/review-only/hearing-submissions/
+/kids/review-only/quiz-v4-450-master-hearing-bundle.zip

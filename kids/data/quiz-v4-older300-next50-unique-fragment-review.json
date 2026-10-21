@@ -1,0 +1,1590 @@
+{
+  "schemaVersion": 1,
+  "scope": "TAWḤĪD KIDS V4 older 300 source-text recording queue; REVIEW ONLY",
+  "sourcePlan": "kids/data/quiz-v4-curated-450-production-review.json",
+  "existingRegistry": "kids/data/quiz-v4-450-original-clip-registry.json",
+  "ageBands": [
+    "7-8",
+    "9-10"
+  ],
+  "canonical450Preserved": true,
+  "originalNineStillMustBeImportedForAgeFourSix": true,
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "newTTSCreditsAuthorized": 0,
+  "actualTTSSynthesisPerformed": false,
+  "livePublished": false,
+  "humanAudioApproved": false,
+  "creditEstimateNotClaimed": true,
+  "ranking": "Deterministic greedy: lowest additional unique source characters per question, alternating older age groups; this is purely a technical preparation order, not a pedagogical ranking.",
+  "alreadyFourPartCompleteQuestions": {
+    "7-8": 2,
+    "9-10": 0
+  },
+  "queuedQuestionCounts": {
+    "7-8": 25,
+    "9-10": 25
+  },
+  "selectedForFutureProduction": 50,
+  "uniqueAdditionalTextsInQueue": 198,
+  "uniqueAdditionalCharactersInQueue": 6692,
+  "sourceTextCharactersNaiveWithoutQueueDedup": 6795,
+  "remainingSelectedQuestionsOutsideQueue": 248,
+  "queue": [
+    {
+      "priority": 1,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-034",
+      "category": "Fiqh",
+      "additionalUniqueFragments": 1,
+      "additionalCharacters": 13,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Nur freitags."
+      ]
+    },
+    {
+      "priority": 2,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-050",
+      "category": "Aḫlāq",
+      "additionalUniqueFragments": 3,
+      "additionalCharacters": 75,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Zwischen ihnen Frieden stiften.",
+        "Den Streit verbreiten.",
+        "Eine Seite verspotten."
+      ]
+    },
+    {
+      "priority": 3,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-026",
+      "category": "Wissen",
+      "additionalUniqueFragments": 3,
+      "additionalCharacters": 54,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Leute des Wissens fragen.",
+        "Einfach raten.",
+        "Etwas erfinden."
+      ]
+    },
+    {
+      "priority": 4,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-048",
+      "category": "Adab",
+      "additionalUniqueFragments": 3,
+      "additionalCharacters": 79,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Erlaubnis einholen und grüßen.",
+        "Einfach hineingehen.",
+        "Nur laut rufen und eintreten."
+      ]
+    },
+    {
+      "priority": 5,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-033",
+      "category": "Aḫlāq",
+      "additionalUniqueFragments": 2,
+      "additionalCharacters": 55,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Nur wenn Freunde zuhören.",
+        "Allah verbietet üble Nachrede."
+      ]
+    },
+    {
+      "priority": 6,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-045",
+      "category": "Ṣawm",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 80,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Im Ramaḍān.",
+        "Im Muḥarram.",
+        "Im Rabīʿ al-Awwal.",
+        "Allah ordnet das Fasten des Ramaḍān an."
+      ]
+    },
+    {
+      "priority": 7,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-031",
+      "category": "Aḫlāq",
+      "additionalUniqueFragments": 3,
+      "additionalCharacters": 74,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Den Zorn zurückhalten und verzeihen.",
+        "Sofort beleidigen.",
+        "Etwas kaputt machen."
+      ]
+    },
+    {
+      "priority": 8,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-389",
+      "category": "Wissen",
+      "additionalUniqueFragments": 2,
+      "additionalCharacters": 83,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Was sollen Menschen tun, wenn sie etwas nicht wissen?",
+        "Raten und als sicher ausgeben."
+      ]
+    },
+    {
+      "priority": 9,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-022",
+      "category": "Īmān",
+      "additionalUniqueFragments": 2,
+      "additionalCharacters": 84,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Nur für Erwachsene.",
+        "Der Glaube an den Jüngsten Tag gehört zu den Grundlagen des Īmān."
+      ]
+    },
+    {
+      "priority": 10,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-043",
+      "category": "Ṣalāh",
+      "additionalUniqueFragments": 3,
+      "additionalCharacters": 84,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Die Gebete zu bewahren.",
+        "Gebete beliebig auszulassen.",
+        "Nur einmal in der Woche zu beten."
+      ]
+    },
+    {
+      "priority": 11,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-520",
+      "category": "Īmān",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 105,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Welche zwei Dinge verneint Āyat al-Kursī für Allah?",
+        "Schlummer und Schlaf.",
+        "Wissen und Macht.",
+        "Hören und Sehen."
+      ]
+    },
+    {
+      "priority": 12,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-041",
+      "category": "Taqwā",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 96,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Taqwā.",
+        "Viel Geld.",
+        "Eine berühmte Familie.",
+        "Allah nennt Taqwā als Maßstab der besonderen Ehre bei Ihm."
+      ]
+    },
+    {
+      "priority": 13,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-025",
+      "category": "Sunnah",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 110,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Der Gesandte Allahs ﷺ.",
+        "Der reichste Mensch.",
+        "Der lauteste Mensch.",
+        "Allah nennt den Gesandten ﷺ ein schönes Vorbild."
+      ]
+    },
+    {
+      "priority": 14,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-046",
+      "category": "Zakāh",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 105,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Zakāh geben.",
+        "Glücksspiele spielen.",
+        "Angeben.",
+        "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam."
+      ]
+    },
+    {
+      "priority": 15,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-023",
+      "category": "Qurʾān",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 115,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Rechtleitung.",
+        "Nur ein Geschichtsbuch.",
+        "Nur für Gelehrte.",
+        "Allah beschreibt den Qurʾān als Rechtleitung für die Muttaqīn."
+      ]
+    },
+    {
+      "priority": 16,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-044",
+      "category": "Fiqh",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 109,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Gesicht, Arme, Kopf und Füße.",
+        "Nur Hände.",
+        "Nur Gesicht.",
+        "Qurʾān 5:6 nennt die grundlegenden Pflichtteile des Wuḍūʾ."
+      ]
+    },
+    {
+      "priority": 17,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-032",
+      "category": "Aḫlāq",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 118,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Frieden stiften.",
+        "Den Streit größer machen.",
+        "Gerüchte verbreiten.",
+        "Allah nennt die Gläubigen Brüder und befiehlt Versöhnung."
+      ]
+    },
+    {
+      "priority": 18,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-087",
+      "category": "Tawḥīd",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 137,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Wen dürfen wir neben Allah anrufen oder anbeten?",
+        "Niemanden.",
+        "Heilige Menschen.",
+        "Allah befiehlt, in den Moscheen niemanden neben Ihm anzurufen."
+      ]
+    },
+    {
+      "priority": 19,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-080",
+      "category": "Adab",
+      "additionalUniqueFragments": 3,
+      "additionalCharacters": 126,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
+        "Nur vor Freunden.",
+        "Allah verbietet verletzende Spitznamen und Herabsetzung."
+      ]
+    },
+    {
+      "priority": 20,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-036",
+      "category": "Islam",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 140,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Das Gebet.",
+        "Ein Glücksbringer.",
+        "Die eigene Meinung.",
+        "Der Prophet ﷺ nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam."
+      ]
+    },
+    {
+      "priority": 21,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-028",
+      "category": "Adab",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 129,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Wir schaden ihm nicht.",
+        "Wir ärgern ihn absichtlich.",
+        "Wir ignorieren jedes Recht.",
+        "Der Prophet ﷺ verbot, dem Nachbarn Schaden zuzufügen."
+      ]
+    },
+    {
+      "priority": 22,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-047",
+      "category": "Adab",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 147,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Güte, Respekt und Barmherzigkeit.",
+        "Spott und Härte.",
+        "Gleichgültigkeit.",
+        "Allah befiehlt Güte zu den Eltern und lehrt eine Duʿāʾ um Barmherzigkeit für sie."
+      ]
+    },
+    {
+      "priority": 23,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-030",
+      "category": "Adab",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 130,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Respektvoll und freundlich.",
+        "Spöttisch.",
+        "Absichtlich verletzend.",
+        "Allah befiehlt gutes und respektvolles Verhalten gegenüber den Eltern."
+      ]
+    },
+    {
+      "priority": 24,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-037",
+      "category": "Īmān",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 164,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Der Glaube an Allahs Bestimmung.",
+        "Der Glaube an Horoskope.",
+        "Der Glaube an Glückszahlen.",
+        "Der Ḥadīṯ Jibrīl nennt den Glauben an die göttliche Bestimmung als Teil des Īmān."
+      ]
+    },
+    {
+      "priority": 25,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-276",
+      "category": "Duʿāʾ",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 124,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Wie rief Zakariyyā seinen Herrn an?",
+        "Leise und demütig.",
+        "Hochmütig.",
+        "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise."
+      ]
+    },
+    {
+      "priority": 26,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-094",
+      "category": "Ṣawm",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 169,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Welches Ziel nennt Qurʾān 2:183 für das Fasten?",
+        "Berühmtheit.",
+        "Wettbewerb im Essen.",
+        "Allah erklärt, dass das Fasten vorgeschrieben wurde, damit die Gläubigen Taqwā entwickeln."
+      ]
+    },
+    {
+      "priority": 27,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-027",
+      "category": "Adab",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 131,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Gutes sprechen oder schweigen.",
+        "Alles weitererzählen.",
+        "Andere beleidigen.",
+        "Der Prophet ﷺ verband den Īmān mit gutem Reden oder Schweigen."
+      ]
+    },
+    {
+      "priority": 28,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-147",
+      "category": "Aḫlāq",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 173,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Was meiden die Diener des Allerbarmers nach Qurʾān 25:72?",
+        "Falsches Zeugnis.",
+        "Gutes Reden.",
+        "Hilfsbereitschaft.",
+        "Allah beschreibt sie als Menschen, die kein falsches Zeugnis ablegen."
+      ]
+    },
+    {
+      "priority": 29,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-070",
+      "category": "Tawḥīd",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 132,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Wovor warnte Luqmān seinen Sohn besonders?",
+        "Vor Shirk.",
+        "Vor Lernen.",
+        "Vor Hilfsbereitschaft.",
+        "Luqmān erklärte, dass Shirk großes Unrecht ist."
+      ]
+    },
+    {
+      "priority": 30,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-095",
+      "category": "Qurʾān",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 178,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Wie beschreibt der Qurʾān Laylat al-Qadr?",
+        "Besser als tausend Monate.",
+        "Wie jeden anderen Abend.",
+        "Nur als historischen Tag.",
+        "Allah sagt, dass Laylat al-Qadr besser als tausend Monate ist."
+      ]
+    },
+    {
+      "priority": 31,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-120",
+      "category": "Qurʾān",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 138,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Was geschah mit dem Feuer, in das Ibrāhīm geworfen wurde?",
+        "Allah machte es kühl und sicher.",
+        "Es verbrannte ihn.",
+        "Es wurde von Menschen gelöscht."
+      ]
+    },
+    {
+      "priority": 32,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-344",
+      "category": "Adab",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 181,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Welche zwei Schritte nennt Qurʾān 24:27 vor dem Betreten fremder Häuser?",
+        "Anklopfen und sofort eintreten.",
+        "Nur den Namen rufen.",
+        "Der Qurʾān verbindet Privatsphäre mit Erlaubnis und Salām."
+      ]
+    },
+    {
+      "priority": 33,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-531",
+      "category": "Wissen",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 138,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Sind Wissende und Nichtwissende gleich?",
+        "Ja, immer.",
+        "Nur nachts.",
+        "Allah fragt, ob Wissende und Nichtwissende gleich sind; sie sind nicht gleich."
+      ]
+    },
+    {
+      "priority": 34,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-035",
+      "category": "Iḥsān",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 182,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht.",
+        "Nur freundlich zu wirken.",
+        "Nur viel zu besitzen.",
+        "Der Prophet ﷺ erklärte Iḥsān im Ḥadīṯ Jibrīl."
+      ]
+    },
+    {
+      "priority": 35,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-231",
+      "category": "Dhikr",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 139,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Wodurch finden Herzen Ruhe?",
+        "Durch das Gedenken Allahs.",
+        "Durch Hochmut.",
+        "Durch Streit.",
+        "Allah sagt, dass die Herzen im Gedenken Allahs Ruhe finden."
+      ]
+    },
+    {
+      "priority": 36,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-386",
+      "category": "Wissen",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 182,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Wen erhöht Allah nach Qurʾān 58:11 in Rangstufen?",
+        "Die Gläubigen und diejenigen mit Wissen.",
+        "Nur Reiche.",
+        "Nur Berühmte.",
+        "Allah hebt Īmān und Wissen als Ursachen besonderer Rangstufen hervor."
+      ]
+    },
+    {
+      "priority": 37,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-024",
+      "category": "Sunnah",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 141,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Allah und Seinem Gesandten ﷺ.",
+        "Nur der eigenen Meinung.",
+        "Jeder Idee im Internet.",
+        "Allah befiehlt den Gehorsam gegenüber Ihm und Seinem Gesandten ﷺ."
+      ]
+    },
+    {
+      "priority": 38,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-338",
+      "category": "Aḫlāq",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 178,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Welche Gruppen nennt Qurʾān 17:26 beim Geben ihrer Rechte?",
+        "Verwandte, Bedürftige und Reisende.",
+        "Nur Händler.",
+        "Allah befiehlt, Verwandten, Bedürftigen und Reisenden ihr Recht zu geben."
+      ]
+    },
+    {
+      "priority": 39,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-129",
+      "category": "Aḫlāq",
+      "additionalUniqueFragments": 3,
+      "additionalCharacters": 150,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Darf Abneigung gegen Menschen uns ungerecht machen?",
+        "Nur manchmal.",
+        "Allah befiehlt Gerechtigkeit und warnt davor, dass Abneigung zu Ungerechtigkeit führt."
+      ]
+    },
+    {
+      "priority": 40,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-091",
+      "category": "Ṣadaqah",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 183,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Was ist besser als eine Gabe, der Verletzung folgt?",
+        "Ein gutes Wort und Vergebung.",
+        "Spott.",
+        "Vorwürfe.",
+        "Allah sagt, ein gutes Wort und Vergebung seien besser als Ṣadaqah, der Verletzung folgt."
+      ]
+    },
+    {
+      "priority": 41,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-277",
+      "category": "Qurʾān",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 153,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Welche Versorgung erhielt Maryam bei der Geburt?",
+        "Frische reife Datteln.",
+        "Goldmünzen.",
+        "Ein Königreich.",
+        "Allah ließ Maryam frische Datteln von der Palme erhalten."
+      ]
+    },
+    {
+      "priority": 42,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-387",
+      "category": "Wissen",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 188,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Welche kurze Duʿāʾ lehrt Qurʾān 20:114?",
+        "Mein Herr, mehre mich an Wissen.",
+        "Mein Herr, mache mich berühmt.",
+        "Mein Herr, gib mir nur Besitz.",
+        "Allah lehrt ausdrücklich, um Zunahme an Wissen zu bitten."
+      ]
+    },
+    {
+      "priority": 43,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-383",
+      "category": "Schöpfung",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 154,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Was geschieht mit toter Erde, wenn Allah Regen sendet?",
+        "Sie wird wieder lebendig.",
+        "Sie verschwindet.",
+        "Sie wird zu Gold.",
+        "Allah nennt die belebte Erde als Zeichen."
+      ]
+    },
+    {
+      "priority": 44,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-096",
+      "category": "Ḥaǧǧ",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 193,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Für wen ist der Ḥaǧǧ zum Haus verpflichtend?",
+        "Für den, der dazu die Möglichkeit hat.",
+        "Für niemanden.",
+        "Nur für Kinder.",
+        "Allah verpflichtet den Ḥaǧǧ für diejenigen, die den Weg dorthin bewältigen können."
+      ]
+    },
+    {
+      "priority": 45,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-079",
+      "category": "Adab",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 156,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Wie behandelt der Qurʾān Verschwendung?",
+        "Er verbietet sie.",
+        "Er empfiehlt sie.",
+        "Er nennt sie immer mutig.",
+        "Allah verbietet Verschwendung und tadelt die Verschwender."
+      ]
+    },
+    {
+      "priority": 46,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-040",
+      "category": "Adab",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 197,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Sie sind vor seiner Zunge und Hand sicher.",
+        "Er verletzt sie mit Worten.",
+        "Er schadet ihnen absichtlich.",
+        "Der Prophet ﷺ beschrieb den Muslim als jemanden, vor dessen Zunge und Hand die Muslime sicher sind."
+      ]
+    },
+    {
+      "priority": 47,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-530",
+      "category": "Tawakkul",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 160,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Was ist Allah für den, der auf Ihn vertraut?",
+        "Allah genügt ihm.",
+        "Er braucht Allah nicht.",
+        "Er soll nur auf Menschen vertrauen.",
+        "Wer auf Allah vertraut, dem genügt Allah."
+      ]
+    },
+    {
+      "priority": 48,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-093",
+      "category": "Ṣadaqah",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 197,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Wovon sollen Gläubige spenden?",
+        "Von guten Dingen, die sie erworben haben.",
+        "Nur von wertlosen Dingen.",
+        "Nur von Dingen, die niemand gebrauchen kann.",
+        "Allah befiehlt, von guten Dingen des Erworbenen zu geben."
+      ]
+    },
+    {
+      "priority": 49,
+      "ageBand": "7-8",
+      "questionId": "kids-quiz-321",
+      "category": "Qurʾān",
+      "additionalUniqueFragments": 4,
+      "additionalCharacters": 161,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Welche Eigenschaft brauchte Mūsā bei seiner Reise mit dem rechtschaffenen Diener?",
+        "Geduld.",
+        "Hochmut.",
+        "Mūsā versprach, geduldig zu sein und nicht ungehorsam zu handeln."
+      ]
+    },
+    {
+      "priority": 50,
+      "ageBand": "9-10",
+      "questionId": "kids-quiz-150",
+      "category": "Ṣalāh",
+      "additionalUniqueFragments": 5,
+      "additionalCharacters": 202,
+      "estimatedTechnicalQuestionCompletenessAfterAuthenticRecording": true,
+      "missingTextFragments": [
+        "Wovon hält das richtig verrichtete Gebet nach Qurʾān 29:45 ab?",
+        "Von schändlichen und verwerflichen Taten.",
+        "Vom Lernen.",
+        "Von guten Taten.",
+        "Allah erklärt, dass das Gebet von Schändlichem und Verwerflichem abhält."
+      ]
+    }
+  ],
+  "sourceTextCharactersSavedViaReuse": 103,
+  "entireOlder300UniqueMissingFragments": 1392,
+  "entireOlder300UniqueMissingCharacters": 65057,
+  "byAgeRemainingUnique": {
+    "7-8": {
+      "unrecordedUniqueTexts": 699,
+      "unrecordedTextCharacters": 29281
+    },
+    "9-10": {
+      "unrecordedUniqueTexts": 723,
+      "unrecordedTextCharacters": 37313
+    }
+  },
+  "deduplicatedFutureRecordingTexts": [
+    {
+      "text": "Nur freitags.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Zwischen ihnen Frieden stiften.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Den Streit verbreiten.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Eine Seite verspotten.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Leute des Wissens fragen.",
+      "requiredBySelectedQuestions": 2
+    },
+    {
+      "text": "Einfach raten.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Etwas erfinden.",
+      "requiredBySelectedQuestions": 2
+    },
+    {
+      "text": "Erlaubnis einholen und grüßen.",
+      "requiredBySelectedQuestions": 2
+    },
+    {
+      "text": "Einfach hineingehen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur laut rufen und eintreten.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur wenn Freunde zuhören.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah verbietet üble Nachrede.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Im Ramaḍān.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Im Muḥarram.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Im Rabīʿ al-Awwal.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah ordnet das Fasten des Ramaḍān an.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Den Zorn zurückhalten und verzeihen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Sofort beleidigen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Etwas kaputt machen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Was sollen Menschen tun, wenn sie etwas nicht wissen?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Raten und als sicher ausgeben.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur für Erwachsene.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Glaube an den Jüngsten Tag gehört zu den Grundlagen des Īmān.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Die Gebete zu bewahren.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Gebete beliebig auszulassen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur einmal in der Woche zu beten.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Welche zwei Dinge verneint Āyat al-Kursī für Allah?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Schlummer und Schlaf.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wissen und Macht.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Hören und Sehen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Taqwā.",
+      "requiredBySelectedQuestions": 2
+    },
+    {
+      "text": "Viel Geld.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Eine berühmte Familie.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah nennt Taqwā als Maßstab der besonderen Ehre bei Ihm.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Gesandte Allahs ﷺ.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der reichste Mensch.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der lauteste Mensch.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah nennt den Gesandten ﷺ ein schönes Vorbild.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Zakāh geben.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Glücksspiele spielen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Angeben.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Rechtleitung.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur ein Geschichtsbuch.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur für Gelehrte.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah beschreibt den Qurʾān als Rechtleitung für die Muttaqīn.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Gesicht, Arme, Kopf und Füße.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur Hände.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur Gesicht.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Qurʾān 5:6 nennt die grundlegenden Pflichtteile des Wuḍūʾ.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Frieden stiften.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Den Streit größer machen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Gerüchte verbreiten.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah nennt die Gläubigen Brüder und befiehlt Versöhnung.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wen dürfen wir neben Allah anrufen oder anbeten?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Niemanden.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Heilige Menschen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah befiehlt, in den Moscheen niemanden neben Ihm anzurufen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur vor Freunden.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah verbietet verletzende Spitznamen und Herabsetzung.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Das Gebet.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Ein Glücksbringer.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Die eigene Meinung.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Prophet ﷺ nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wir schaden ihm nicht.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wir ärgern ihn absichtlich.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wir ignorieren jedes Recht.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Prophet ﷺ verbot, dem Nachbarn Schaden zuzufügen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Güte, Respekt und Barmherzigkeit.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Spott und Härte.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Gleichgültigkeit.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah befiehlt Güte zu den Eltern und lehrt eine Duʿāʾ um Barmherzigkeit für sie.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Respektvoll und freundlich.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Spöttisch.",
+      "requiredBySelectedQuestions": 2
+    },
+    {
+      "text": "Absichtlich verletzend.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah befiehlt gutes und respektvolles Verhalten gegenüber den Eltern.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Glaube an Allahs Bestimmung.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Glaube an Horoskope.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Glaube an Glückszahlen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Ḥadīṯ Jibrīl nennt den Glauben an die göttliche Bestimmung als Teil des Īmān.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wie rief Zakariyyā seinen Herrn an?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Leise und demütig.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Hochmütig.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Welches Ziel nennt Qurʾān 2:183 für das Fasten?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Berühmtheit.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wettbewerb im Essen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah erklärt, dass das Fasten vorgeschrieben wurde, damit die Gläubigen Taqwā entwickeln.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Gutes sprechen oder schweigen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Alles weitererzählen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Andere beleidigen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Prophet ﷺ verband den Īmān mit gutem Reden oder Schweigen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Was meiden die Diener des Allerbarmers nach Qurʾān 25:72?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Falsches Zeugnis.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Gutes Reden.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Hilfsbereitschaft.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah beschreibt sie als Menschen, die kein falsches Zeugnis ablegen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wovor warnte Luqmān seinen Sohn besonders?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Vor Shirk.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Vor Lernen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Vor Hilfsbereitschaft.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Luqmān erklärte, dass Shirk großes Unrecht ist.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wie beschreibt der Qurʾān Laylat al-Qadr?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Besser als tausend Monate.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wie jeden anderen Abend.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur als historischen Tag.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah sagt, dass Laylat al-Qadr besser als tausend Monate ist.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Was geschah mit dem Feuer, in das Ibrāhīm geworfen wurde?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah machte es kühl und sicher.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Es verbrannte ihn.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Es wurde von Menschen gelöscht.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Welche zwei Schritte nennt Qurʾān 24:27 vor dem Betreten fremder Häuser?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Anklopfen und sofort eintreten.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur den Namen rufen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Qurʾān verbindet Privatsphäre mit Erlaubnis und Salām.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Sind Wissende und Nichtwissende gleich?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Ja, immer.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur nachts.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah fragt, ob Wissende und Nichtwissende gleich sind; sie sind nicht gleich.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah so zu dienen, als würdest du Ihn sehen; und wenn nicht, weißt du, dass Er dich sieht.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur freundlich zu wirken.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur viel zu besitzen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Prophet ﷺ erklärte Iḥsān im Ḥadīṯ Jibrīl.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wodurch finden Herzen Ruhe?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Durch das Gedenken Allahs.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Durch Hochmut.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Durch Streit.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah sagt, dass die Herzen im Gedenken Allahs Ruhe finden.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wen erhöht Allah nach Qurʾān 58:11 in Rangstufen?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Die Gläubigen und diejenigen mit Wissen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur Reiche.",
+      "requiredBySelectedQuestions": 2
+    },
+    {
+      "text": "Nur Berühmte.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah hebt Īmān und Wissen als Ursachen besonderer Rangstufen hervor.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah und Seinem Gesandten ﷺ.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur der eigenen Meinung.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Jeder Idee im Internet.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah befiehlt den Gehorsam gegenüber Ihm und Seinem Gesandten ﷺ.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Welche Gruppen nennt Qurʾān 17:26 beim Geben ihrer Rechte?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Verwandte, Bedürftige und Reisende.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur Händler.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah befiehlt, Verwandten, Bedürftigen und Reisenden ihr Recht zu geben.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Darf Abneigung gegen Menschen uns ungerecht machen?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur manchmal.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah befiehlt Gerechtigkeit und warnt davor, dass Abneigung zu Ungerechtigkeit führt.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Was ist besser als eine Gabe, der Verletzung folgt?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Ein gutes Wort und Vergebung.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Spott.",
+      "requiredBySelectedQuestions": 2
+    },
+    {
+      "text": "Vorwürfe.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah sagt, ein gutes Wort und Vergebung seien besser als Ṣadaqah, der Verletzung folgt.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Welche Versorgung erhielt Maryam bei der Geburt?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Frische reife Datteln.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Goldmünzen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Ein Königreich.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah ließ Maryam frische Datteln von der Palme erhalten.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Welche kurze Duʿāʾ lehrt Qurʾān 20:114?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Mein Herr, mehre mich an Wissen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Mein Herr, mache mich berühmt.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Mein Herr, gib mir nur Besitz.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah lehrt ausdrücklich, um Zunahme an Wissen zu bitten.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Was geschieht mit toter Erde, wenn Allah Regen sendet?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Sie wird wieder lebendig.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Sie verschwindet.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Sie wird zu Gold.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah nennt die belebte Erde als Zeichen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Für wen ist der Ḥaǧǧ zum Haus verpflichtend?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Für den, der dazu die Möglichkeit hat.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Für niemanden.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur für Kinder.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah verpflichtet den Ḥaǧǧ für diejenigen, die den Weg dorthin bewältigen können.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wie behandelt der Qurʾān Verschwendung?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Er verbietet sie.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Er empfiehlt sie.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Er nennt sie immer mutig.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah verbietet Verschwendung und tadelt die Verschwender.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Sie sind vor seiner Zunge und Hand sicher.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Er verletzt sie mit Worten.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Er schadet ihnen absichtlich.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Der Prophet ﷺ beschrieb den Muslim als jemanden, vor dessen Zunge und Hand die Muslime sicher sind.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Was ist Allah für den, der auf Ihn vertraut?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah genügt ihm.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Er braucht Allah nicht.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Er soll nur auf Menschen vertrauen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wer auf Allah vertraut, dem genügt Allah.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wovon sollen Gläubige spenden?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Von guten Dingen, die sie erworben haben.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur von wertlosen Dingen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Nur von Dingen, die niemand gebrauchen kann.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah befiehlt, von guten Dingen des Erworbenen zu geben.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Welche Eigenschaft brauchte Mūsā bei seiner Reise mit dem rechtschaffenen Diener?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Geduld.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Hochmut.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Mūsā versprach, geduldig zu sein und nicht ungehorsam zu handeln.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Wovon hält das richtig verrichtete Gebet nach Qurʾān 29:45 ab?",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Von schändlichen und verwerflichen Taten.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Vom Lernen.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Von guten Taten.",
+      "requiredBySelectedQuestions": 1
+    },
+    {
+      "text": "Allah erklärt, dass das Gebet von Schändlichem und Verwerflichem abhält.",
+      "requiredBySelectedQuestions": 1
+    }
+  ]
+}

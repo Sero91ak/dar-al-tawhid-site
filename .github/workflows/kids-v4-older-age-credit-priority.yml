@@ -1,0 +1,89 @@
+name: KIDS V4 Older Ages Credit-Free Recording Priority (40 selected)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/plan_quiz_v4_older_age_priority.py'
+      - '.github/workflows/kids-v4-older-age-credit-priority.yml'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+      - 'kids/data/quiz-v4-missing9-prepaid-originals.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-older-age-credit-free-priority
+  cancel-in-progress: false
+
+jobs:
+  review-cheapest-original-reuse:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out only KIDS V4 audio draft review
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Verify original 900 questions and select cost-saving 20 plus 20
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/plan_quiz_v4_older_age_priority.py
+          python3 kids/tools/plan_quiz_v4_older_age_priority.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path(".github/reports/kids-v4-older-age-no-credit-priority.json")
+          q=json.loads(p.read_text(encoding="utf-8"))
+          assert q["reviewOnly"] and q["live"] is False
+          assert q["authorizedNewPaidSynthesis"] is False and q["newElevenLabsCreditsSpent"]==0
+          assert q["humanListeningApproved"] is False
+          assert q["original900AndCurated450Reserve450Verified"] is True
+          assert q["priorityQuestionsPerAgeBand"]=={"7-8":20,"9-10":20}
+          assert len(q["priorityQuestionSteps"])==40
+          assert len({r["questionId"] for r in q["priorityQuestionSteps"]})==40
+          assert q["remainingOlderAgeSelectedQuestions"]==260
+          assert len(q["preciseUnrecordedOriginalTextQueue"])==q["newDistinctTextCountForFirst40"]
+          assert all(r["synthesized"] is False for r in q["preciseUnrecordedOriginalTextQueue"])
+          assert sum(r["characterCount"] for r in q["preciseUnrecordedOriginalTextQueue"])==q["newCharactersForFirst40"]
+          assert sum(r["incrementalNewCharacters"] for r in q["priorityQuestionSteps"])==q["newCharactersForFirst40"]
+          assert len(q["twoIncrementalTenPerAgeReviewStages"])==2
+          stages=q["twoIncrementalTenPerAgeReviewStages"]
+          assert all(stage["newQuestionsPerAgeBand"]=={"7-8":10,"9-10":10} for stage in stages)
+          assert all(stage["creditsSpent"]==0 and stage["automaticallyExecuted"] is False for stage in stages)
+          assert all(stage["requiresManualApprovalAndHumanListening"] is True for stage in stages)
+          assert len(set(stages[0]["selectedQuestionIds"]+stages[1]["selectedQuestionIds"]))==40
+          assert sum(stage["newOriginalCharacters"] for stage in stages)==q["newCharactersForFirst40"]
+          assert sum(stage["newDistinctOriginals"] for stage in stages)==q["newDistinctTextCountForFirst40"]
+          assert set(stages[1]["projectedFullFourPartQuestionsIfAllPreviousStageFilesVerified"])=={"7-8","9-10"}
+          assert json.loads(Path("kids/data/quiz-curation-release.json").read_text())["enabled"] is False
+          print("PASS_KIDS_V4_OLDER_PRIORITY_FORTY_NO_CREDITS",flush=True)
+          PY
+      - name: Commit human-review-only savings plan to draft branch
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          git add .github/reports/kids-v4-older-age-no-credit-priority.json
+          if git diff --cached --quiet; then
+            echo "Already stored current zero-credit priority list"
+            exit 0
+          fi
+          git commit -m 'plan(kids): save next older V4 40 original-only priority questions, not charged'
+          for n in 1 2 3; do
+            if git push origin HEAD:"$branch"; then exit 0; fi
+            git fetch origin "$branch"
+            if ! git rebase FETCH_HEAD; then exit 1; fi
+          done
+          exit 1
+      - name: Preserve latest review plan even if push conflicts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-olderage-40-questions-savings-plan-no-tts
+          retention-days: 90
+          if-no-files-found: warn
+          path: .github/reports/kids-v4-older-age-no-credit-priority.json

@@ -1,0 +1,102 @@
+name: KIDS Quiz V4 Recovery-First Completion Plan (zero credits)
+
+on:
+  push:
+    branches: [review/kids-quiz-v4-batch-001-020-20261014]
+    paths:
+      - 'kids/review-only/quiz-v4-450-recovery-priority-trigger.json'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/plan_quiz_v4_finish_without_duplicate_credits.py'
+      - 'kids/tools/test_quiz_v4_flow_reservation_cost_guard.py'
+      - 'kids/review-only/quiz-v4-450-actual-mp3-import.json'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-missing9-prepaid-originals.json'
+      - 'kids/data/quiz-v4-connected-flow-originals-ledger.json'
+      - 'kids/tools/quiz_v4_no_double_charge_guard.py'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+      - '.github/workflows/kids-v4-450-recovery-first-finish-plan.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-450-recovery-priority-review-only
+  cancel-in-progress: false
+
+jobs:
+  sort-unpaid-versus-prepaid-audio:
+    if: >-
+      (github.event_name == 'push' &&
+       github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
+       github.event.head_commit.message == 'review(kids v4): run zero-credit verified recovery priority 20261021') ||
+      (github.event_name == 'pull_request' &&
+       github.event.pull_request.number == 1143 &&
+       github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout KIDS V4 private review only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Verify 450 actual quiz audio assignments before payment
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/plan_quiz_v4_finish_without_duplicate_credits.py
+          python3 kids/tools/plan_quiz_v4_finish_without_duplicate_credits.py
+          python3 kids/tools/test_quiz_v4_flow_reservation_cost_guard.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          obj=json.loads(Path('kids/review-only/quiz-v4-450-next-completion-priority.json').read_text())
+          s=obj['summary']
+          assert s['selectedQuestions']==450 and s['modelId']=='eleven_v4'
+          assert s['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert sum(sum(categories.values()) for categories in s['ageCounts'].values())==450
+          stage=json.loads(Path('kids/review-only/quiz-v4-450-actual-mp3-import.json').read_text())
+          assert s['alreadyTechnicallyComplete']==sum(
+            int(row['fourPartTechnicallyReady']) for row in stage['questions'].values())
+          assert s['alreadyTechnicallyComplete']==sum(
+            age['completeFourPartQuestions'] for age in stage['byAge'].values())
+          assert all(not row['publicPlaybackAuthorized'] and not row['humanListeningApproved']
+                     for row in stage['questions'].values())
+          assert s['connectedFlowOriginalTextsPendingOrReserved']==len(obj['connectedFlowOriginalsToRecoverWithoutSecondPurchase'])
+          assert s['reservedFlowOriginalsExcludedFromNewChargeQueue']==len(obj['connectedFlowOriginalsToRecoverWithoutSecondPurchase'])
+          assert all(r['newSynthesisAllowed'] is False for r in obj['connectedFlowOriginalsToRecoverWithoutSecondPurchase'])
+          assert s['missingGenuineNewExactSegments']==len({
+            h for row in obj['possibleNewSpeechPriorityAfterOriginalRecovery'] for h in row['newTextSha256']})
+          assert s['previouslyPaidMissingGenerationCount']==len(obj['historicalAlreadyPaidOriginalRecoveryOrder'])
+          assert all(q['speechGenerationAuthorized'] is False for q in obj['possibleNewSpeechPriorityAfterOriginalRecovery'])
+          assert s['newElevenLabsCreditsSpent']==0 and not s['publicReleaseAllowed']
+          print('PASS: real V4 originals, nine old Flow takes and eight connected Flow reservations excluded from new paid queue.')
+          PY
+      - name: Save no-credit production-priority review to GitHub
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-priority-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/quiz-v4-450-next-completion-priority.json
+          git add kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md
+          if git diff --cached --quiet; then
+            echo "Current priority already stored; 0 credits."
+            exit 0
+          fi
+          git commit -m "review(kids v4): save prepaid-first and deduplicated no-credit completion priorities"
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then exit 0; fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          exit 1
+      - name: Preserve exact completion plan for handover
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-recovery-first-finish-plan
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md
+            kids/review-only/quiz-v4-450-next-completion-priority.json

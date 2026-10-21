@@ -1,0 +1,45 @@
+name: KIDS V4 450 Editorial Content Integrity (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/audit_quiz_v4_450_editorial.py'
+      - 'kids/data/quiz-kids.json'
+      - 'kids/data/quiz-kids-curated-450-review.json'
+      - 'kids/data/quiz-kids-expansion-reserve-450.json'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+      - '.github/workflows/kids-v4-450-editorial-audit.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-450-editorial-read-only
+  cancel-in-progress: false
+
+jobs:
+  structural-and-editorial-audit:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout quiz audio review branch (no changes to public app)
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Verify original 900 and all 450 selected questions
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/audit_quiz_v4_450_editorial.py
+          python3 kids/tools/audit_quiz_v4_450_editorial.py
+      - name: Preserve complete editorial checklist and flags
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-450-editorial-checklist-and-source-audit
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/review-only/quiz-v4-450-editorial-integrity.json
+            kids/review-only/quiz-v4-450-editorial-checklist.csv

@@ -1,0 +1,131 @@
+name: KIDS V4 Connected ElevenLabs Original MP3 Recovery (GET only)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/recover_quiz_v4_connected_get_only.py'
+      - 'kids/tools/import_quiz_v4_connected_flow_originals.py'
+      - 'kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py'
+      - 'kids/data/quiz-v4-connected-flow-originals-ledger.json'
+      - 'kids/tools/import_quiz_v4_encrypted_signed_original.py'
+      - 'kids/data/v4-connected-signed-import/sealed-creative-original.json'
+      - '.github/workflows/kids-v4-connected-paid-originals-free-recovery.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tawhid-kids-connected-flow-paid-original-import
+  cancel-in-progress: false
+
+jobs:
+  retrieve-only-genuine-previously-paid-mp3:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Validate immutable paid receipts and read-only script
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/recover_quiz_v4_connected_get_only.py kids/tools/import_quiz_v4_connected_flow_originals.py kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py
+          python3 kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py
+          python3 kids/tools/import_quiz_v4_connected_flow_originals.py --audit
+          if ! command -v ffprobe >/dev/null 2>&1 || ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=30 update -qq
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=30 install -y ffmpeg
+          fi
+          command -v ffprobe
+          command -v ffmpeg
+      - name: Retrieve confirmed paid originals using ONLY official HTTP GET
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 kids/tools/recover_quiz_v4_connected_get_only.py
+          python3 kids/tools/audit_quiz_v4_connected_flow_paid_receipts.py
+      - name: Import one confirmed original through sealed time-limited provider URL, no new speech
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          envelope=kids/data/v4-connected-signed-import/sealed-creative-original.json
+          if [ -f "$envelope" ]; then
+            python3 -m py_compile kids/tools/import_quiz_v4_encrypted_signed_original.py
+            python3 kids/tools/import_quiz_v4_encrypted_signed_original.py --audit
+            python3 kids/tools/import_quiz_v4_encrypted_signed_original.py --import
+          else
+            echo 'No sealed provider-original URL present; no generation or download.'
+          fi
+      - name: Join and hash-check any newly imported genuine MP3s, keep release disabled
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, subprocess
+          from pathlib import Path
+          p=json.loads(Path("kids/review-only/quiz-v4-connected-flow-get-only-recovery-report.json").read_text(encoding="utf-8"))
+          assert p["newPaidSpeechCalls"]==p["newSynthesisCredits"]==0
+          assert p["publicReleaseEnabled"] is False
+          if not p["importedOriginals"]:
+              print("READ-ONLY recovery did not provide original MP3 bytes. No new ElevenLabs charge or public release.")
+          else:
+              for script in (
+                  "quiz_v4_first150_offline_join.py",
+                  "quiz_v4_age7to10_offline_join.py",
+                  "qa_quiz_v4_saved_mp3.py",
+                  "report_quiz_v4_450_progress.py",
+                  "stage_quiz_v4_existing_mp3_import.py",
+                  "write_quiz_v4_handover.py"):
+                  subprocess.run(["python3", "kids/tools/"+script],check=True)
+              print("Original MP3s stored and all review-only audio assignments recalculated.")
+          PY
+      - name: Preserve only safe MP3 files, receipt journal and private review reports
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-prepaid-creative-recovery
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A kids/data/ kids/review-only/
+          if test -d kids/assets/kids-quiz-audio/v4-connected-flow-original-review; then
+            git add -A kids/assets/kids-quiz-audio/v4-connected-flow-original-review/
+          fi
+          if test -d kids/assets/kids-quiz-audio/v4-first150-composed-review; then
+            git add -A kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          fi
+          if test -d kids/assets/kids-quiz-audio/v4-age7to10-composed-review; then
+            git add -A kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          fi
+          if git diff --cached --quiet; then
+            echo 'No changed provider MP3 receipts or private review files.'
+            exit 0
+          fi
+          git commit -m 'review(kids): preserve verified paid ElevenLabs Creative V4 original MP3 bytes from GET only'
+          for attempt in 1 2 3; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+              echo 'Originals saved on private PR branch; no public deployment.'
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD || {
+              echo 'Conflict after original-MP3 generation import; recovery artifact retained. NEVER repeat TTS.'
+              exit 1
+            }
+          done
+          exit 1
+      - name: Backup already-charged originals even if import validation fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-connected-v4-confirmed-paid-originals-get-recovery
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/review-only/quiz-v4-connected-flow-get-only-recovery-report.json
+            kids/review-only/quiz-v4-connected-flow-original-import-status.json
+            kids/assets/kids-quiz-audio/v4-connected-flow-original-review/
+            kids/data/quiz-v4-connected-flow-originals-ledger.json
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json

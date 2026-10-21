@@ -1,0 +1,95 @@
+name: KIDS V4 All 450 Cross-Age Original MP3 QA (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/qa_quiz_v4_all450_crossage.py'
+      - '.github/workflows/kids-v4-all450-crossage-real-audio-qa.yml'
+      - 'kids/data/quiz-v4-first150-composed-preview.json'
+      - 'kids/data/quiz-v4-age7to10-composed-preview.json'
+      - 'kids/data/quiz-v4-first150-audio-status.json'
+      - 'kids/data/quiz-v4-age7to10-offline-coverage.json'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-all450-crossage-qa-review-once
+  cancel-in-progress: false
+
+jobs:
+  verify-450-original-only-age-assignments:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out KIDS private V4 review branch, not public main
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Ensure ffprobe for local original MP3 verification only
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          command -v ffprobe
+      - name: Validate 450 age assignments and SHA-256 of every used actual MP3
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/qa_quiz_v4_all450_crossage.py
+          python3 kids/tools/qa_quiz_v4_all450_crossage.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path(".github/reports/kids-v4-all450-crossage-technical-qa.json")
+          x=json.loads(p.read_text(encoding="utf-8"))
+          assert x["selectedQuestionsVerified"]==450 and x["preservedReserveQuestions"]==450
+          assert x["humanHearingApproved"] is False
+          assert x["livePublished"] is False and x["newSpeechCreditsSpent"]==0
+          assert x["shaConflictsAcrossAges"]==0
+          assert len(x["ageBandBreakdown"])==3
+          assert all(a["selectedQuestions"]==150 for a in x["ageBandBreakdown"].values())
+          assert x["totalCompleteFourPartQuestions"]==sum(
+              z["fourPartComplete"] for z in x["ageBandBreakdown"].values())
+          assert x["originalBackedFieldAssignments"]==sum(
+              z["originalBackedFieldAssignments"] for z in x["ageBandBreakdown"].values())
+          assert x["uniqueRealMp3PathsWithShaAndCodecChecked"]>0
+          assert json.load(open("kids/data/quiz-curation-release.json"))["enabled"] is False
+          print("PASS_KIDS_ALL450_QA_NO_TTS_NO_RELEASE",flush=True)
+          PY
+      - name: Save reproducible internal QA counts on review branch only
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-review-audio-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          git add .github/reports/kids-v4-all450-crossage-technical-qa.json
+          if git diff --cached --quiet; then
+            echo "Cross-age QA counts unchanged"
+            exit 0
+          fi
+          git commit -m "qa(kids): store all450 source-MP3 and SHA-verified cross-age internal report"
+          for n in 1 2 3; do
+            if git push origin HEAD:"$branch"; then
+              echo "Stored internal report in review branch, no live app changes."
+              exit 0
+            fi
+            git fetch origin "$branch"
+            if ! git rebase FETCH_HEAD; then
+              echo "::error::Cannot safely reconcile QA report; artifact remains available."
+              exit 1
+            fi
+          done
+          exit 1
+      - name: Retain report as GitHub Actions review artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-all450-original-mp3-crossage-audit
+          retention-days: 90
+          if-no-files-found: warn
+          path: .github/reports/kids-v4-all450-crossage-technical-qa.json

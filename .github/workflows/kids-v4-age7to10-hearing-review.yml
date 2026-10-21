@@ -1,0 +1,67 @@
+name: KIDS V4 Age 7–10 Private Offline Listening ZIP (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/build_quiz_v4_age7to10_hearing_review.py'
+      - '.github/workflows/kids-v4-age7to10-hearing-review.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-age7to10-private-hearing-only
+  cancel-in-progress: false
+
+jobs:
+  existing-original-only-hearing-zip:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - name: Read-only checkout of KIDS V4 audio review
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Build private offline hearing page plus authentic original MP3 files
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/build_quiz_v4_age7to10_hearing_review.py
+          python3 kids/tools/build_quiz_v4_age7to10_hearing_review.py
+          python3 - <<'PY'
+          import json,re,zipfile
+          from pathlib import Path
+          archive=Path("kids/review-only/quiz-v4-age7to10-hearing-bundle.zip")
+          manifest=json.load(open("kids/data/quiz-v4-age7to10-composed-preview.json"))
+          summary=json.load(open("kids/data/quiz-v4-age7to10-offline-coverage.json"))
+          with zipfile.ZipFile(archive) as z:
+              files=z.namelist()
+              assert len(files)==len(manifest["entries"])+1, "Wrong real MP3 count"
+              assert files[0]=="kids/review-only/quiz-v4-age7to10-hearing-review.html"
+              assert all(item.endswith(".mp3") for item in files[1:])
+              assert z.testzip() is None
+              html=z.read(files[0]).decode("utf-8")
+              data_match=re.search(r'<script type="application/json" id="review-data">(.*?)</script>',html,re.S)
+              assert data_match, "Missing private hearing payload"
+              data=json.loads(data_match.group(1))
+              assert data["questionCount"]==300 and len(data["parts"])==300
+              expected_full=sum(summary["byAge"][age]["completeFourPartQuestions"] for age in ("7-8","9-10"))
+              assert data["fullQuestions"]==expected_full, "Hearing desk must track current audited coverage"
+              assert data["uniqueAudioFiles"]==len(manifest["entries"]), "Every current audio must be in the offline review"
+              assert "reportedIssuesByTextSha" in html
+              assert "human-auditory-approvals.json" in html
+              scripts=re.findall(r"<script(?![^>]*application/json)[^>]*>(.*?)</script>",html,re.S)
+              assert len(scripts)==1
+              Path("/tmp/tawhid-kids-v4-older-age-hearing.js").write_text(scripts[0],encoding="utf-8")
+          PY
+          node --check /tmp/tawhid-kids-v4-older-age-hearing.js
+          echo "PASS: 300 questions, dynamic current original-only MP3 coverage, zero synthesis, no public site changes"
+      - name: Export internal package as GitHub artifact, never a live app resource
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-age7to10-human-hearing-offline-review
+          retention-days: 90
+          if-no-files-found: warn
+          path: kids/review-only/quiz-v4-age7to10-hearing-bundle.zip

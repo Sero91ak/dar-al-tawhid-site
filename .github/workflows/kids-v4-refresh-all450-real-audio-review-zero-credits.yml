@@ -1,0 +1,165 @@
+name: KIDS V4 Synchronize Real 450 Quiz Audio Review (zero credits)
+on:
+  push:
+    branches:
+      - review/kids-quiz-v4-batch-001-020-20261014
+    paths:
+      - kids/review-only/quiz-v4-sync-existing-originals-command.json
+permissions:
+  contents: write
+concurrency:
+  group: tawhid-kids-v4-all450-zero-credit-import-${{ github.ref_name }}
+  cancel-in-progress: false
+jobs:
+  sync-real-v4-offline-quiz:
+    if: >-
+      github.repository == 'Sero91ak/dar-al-tawhid-site' &&
+      github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
+      github.event.head_commit.message == 'audio(kids V4): import existing master originals into all 450 private quiz IDs [zero-credit]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 65
+    env:
+      ELEVENLABS_API_KEY: ''
+    steps:
+      - name: Checkout only review branch and full original history
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          fetch-depth: 0
+      - name: Confirm zero TTS and app release disabled
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path('kids/review-only/quiz-v4-sync-existing-originals-command.json').read_text(encoding='utf-8'))
+          h=json.loads(Path('kids/data/quiz-v4-pronunciation-hold.json').read_text(encoding='utf-8'))
+          f=json.loads(Path('kids/data/quiz-curation-release.json').read_text(encoding='utf-8'))
+          assert c['sourceOriginalsOnly'] is True
+          assert c['elevenLabsPaidCallsAllowed'] is False
+          assert c['publicReleaseAllowed'] is False and f['enabled'] is False
+          assert h['humanListeningQualityGateReleased'] is False
+          assert h['authorizedNewOriginalsBeforeHearing']==1
+          print('PASS: review only, no paid generation, retain all master MP3 identities')
+          PY
+      - name: Install native MP3 decoder and composer (no TTS, no API credentials)
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null || ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update -qq
+            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+          fi
+          ffprobe -version | head -n 1
+          ffmpeg -version | head -n 1
+      - name: Validate all currently paid genuine originals (including pilot)
+        run: |
+          set -euo pipefail
+          python3 kids/tools/test_quiz_v4_quarantine.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          qa=json.loads(Path('kids/data/quiz-v4-450-saved-mp3-technical-qa.json').read_text(encoding='utf-8'))
+          assert qa['savedClipCount']>=401
+          assert qa['overallTechnicalPass'] is True
+          assert qa['readyForLive'] is False and qa['allHumanListeningApproved'] is False
+          print('PASS: at least 401 exact master originals verified by decoder/SHA, still hearing-review only')
+          PY
+      - name: Recompose 4-6 and 7-10 years from existing MP3 SHA only, then stage 450
+        run: |
+          set -euo pipefail
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          review=json.loads(Path('kids/review-only/quiz-v4-450-actual-mp3-import.json').read_text(encoding='utf-8'))
+          summ=json.loads(Path('kids/review-only/quiz-v4-450-actual-mp3-import-summary.json').read_text(encoding='utf-8'))
+          assert len(review['questions'])==450
+          assert summ['completeFourPartQuestions']>=80
+          assert summ['newElevenLabsCreditsSpent']==0 and summ['publicReleaseEnabled'] is False
+          wrong=review['questions']['kids-quiz-046']
+          assert 'question' in wrong['missing'] and 'explanation' in wrong['missing']
+          correct=review['questions']['kids-quiz-044']
+          assert correct['humanListeningApproved'] is False and correct['publicPlaybackAuthorized'] is False
+          print('PASS 450 review staged: '+str(summ['completeFourPartQuestions'])+' complete four-part; no bad audio and no public release')
+          PY
+      - name: Persist only private review MP3 composites and updated 450 manifests
+        run: |
+          set -euo pipefail
+          git config user.name tawhid-kids-v4-real-originals-only-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          stage_output() {
+            git add kids/assets/kids-quiz-audio/v4-first150-composed-review/ kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+            git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json kids/data/quiz-v4-450-production-status.json
+            git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+            git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+            git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+            git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          }
+          # Only re-encode all 450 MP3 parts when the ORIGINAL registry changes.
+          # Unrelated documentation/source commits may advance HEAD repeatedly:
+          # rebase the already-verified composited MP3 commit instead of
+          # rebuilding every expensive FFmpeg composite after each git push race.
+          for rebuild in 1 2 3 4; do
+            if [ "$rebuild" -gt 1 ]; then
+              git fetch --no-tags origin review/kids-quiz-v4-batch-001-020-20261014
+              git reset --hard FETCH_HEAD
+              python3 kids/tools/qa_quiz_v4_saved_mp3.py
+              python3 kids/tools/quiz_v4_first150_offline_join.py
+              python3 kids/tools/quiz_v4_age7to10_offline_join.py
+              python3 kids/tools/report_quiz_v4_450_progress.py
+              python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+              python3 kids/tools/write_quiz_v4_handover.py
+            fi
+            # Bound the exact paid registry content for this offline compilation.
+            original_sha="$(git rev-parse HEAD:kids/data/quiz-v4-450-original-clip-registry.json)"
+            stage_output
+            if git diff --cached --quiet; then
+              echo 'PASS: latest 450 review manifests already match genuine originals; 0 speech calls'
+              exit 0
+            fi
+            git commit -m 'audio(kids V4): sync existing genuine original MP3s into private 450 review [skip ci]'
+            for push_try in 1 2 3 4 5 6 7 8 9 10 11 12; do
+              if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+                echo 'PASS: complete SHA-proven 450 audio review imported, no new paid originals'
+                exit 0
+              fi
+              git fetch --no-tags origin review/kids-quiz-v4-batch-001-020-20261014
+              # A genuinely NEW original invalidates derived audio. Rebuild.
+              remote_sha="$(git rev-parse FETCH_HEAD:kids/data/quiz-v4-450-original-clip-registry.json)"
+              if [ "$remote_sha" != "$original_sha" ]; then
+                echo 'Master original registry changed; recompose from latest SHA; never publish stale clips'
+                break
+              fi
+              # Original bytes unchanged: replay only our DERIVED audio-review commit.
+              # Never force-push, rewrite paid ledgers, or silently resolve a
+              # source conflict by preferring ours/theirs.
+              if ! git rebase FETCH_HEAD; then
+                git rebase --abort || true
+                echo 'Concurrent review asset conflict; regenerate from remote source instead'
+                break
+              fi
+              echo 'Rebased unchanged-original audio review on newer unrelated branch commits'
+            done
+          done
+          echo 'Offline review could not be safely committed; original paid MP3s and CI artifact preserved'
+          exit 1
+      - name: Archive refreshed genuine master MP3 review data
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-all450-genuine-original-mp3-review-no-credits
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            kids/review-only/quiz-v4-450-actual-mp3-import.json
+            kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+            kids/review-only/quiz-v4-handover-latest.json
+            kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+            kids/data/quiz-v4-age7to10-offline-coverage.json
+            kids/data/quiz-v4-first150-audio-status.json

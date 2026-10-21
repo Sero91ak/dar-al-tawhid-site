@@ -1,0 +1,73 @@
+name: KIDS V4 Owner All 450 - SHA Checkpointed Master Fuṣḥā
+on:
+  push:
+    branches: [review/kids-quiz-v4-batch-001-020-20261014]
+    paths:
+      - kids/review-only/quiz-v4-20261020-bulk-owner-trigger.md
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-owner-20261020-prepare-once
+  cancel-in-progress: false
+jobs:
+  generate-real-owner-v4-and-push-private-kids-audios:
+    if: >-
+      github.repository == 'Sero91ak/dar-al-tawhid-site' &&
+      github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
+      github.event.head_commit.message == 'audio(kids): start checkpointed all450 Fuṣḥā V4 owner credit production'
+    runs-on: ubuntu-latest
+    timeout-minutes: 360
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          fetch-depth: 0
+      - name: Verify Fuṣḥā master library and duplicate-charge guard at zero credit cost
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/produce_quiz_v4_450_owner_bulk_checkpointed.py kids/tools/produce_quiz_v4_450_exact_manual_wave.py kids/tools/generate_quiz_v4_450_paid_batch02.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/verify_quiz_v4_master_dictionary_provider_get_only.py
+          test "$(python3 -c "import json;print(json.load(open('kids/data/quiz-curation-release.json'))['enabled'])")" = "False"
+      - name: Dry-run exact safe next wave without ElevenLabs speech charges
+        env:
+          KIDS_V4_OWNER_450_BULK_EXPLICIT: 'YES'
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce_quiz_v4_450_exact_manual_wave.py --audit
+      - name: Install original MP3 codec validation tools
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null || ! command -v ffprobe >/dev/null; then
+            sudo apt-get -o Acquire::Retries=0 install -y ffmpeg
+          fi
+      - name: Produce deduplicated real V4 originals with 10099 pronunciation rules and GitHub receipts
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          KIDS_V4_OWNER_450_BULK_EXPLICIT: 'YES'
+          KIDS_V4_EXPLICIT_SPEND_APPROVAL: 'YES'
+          KIDS_V4_HUMAN_SOURCE_CHECK: 'YES'
+          KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL: 'YES'
+          KIDS_V4_STAGE1_OWNER_CORRECT_DICTIONARY_BATCH: 'YES'
+          KIDS_V4_STAGE1_SAMPLE_ONLY: 'NO'
+        run: |
+          set -euo pipefail
+          python3 -u kids/tools/produce_quiz_v4_450_owner_bulk_checkpointed.py
+      - name: Preserve authentic originals and charge evidence even after an interrupted wave
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-all450-owner-checkpoint-do-not-repurchase
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json
+            kids/data/quiz-v4-all450-paid-wave-request-journal.json
+            kids/data/quiz-v4-all450-paid-wave-usage-backup.json
+            kids/data/quiz-v4-450-production-status.json
+            kids/review-only/quiz-v4-450-owner-bulk-progress.json

@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "scope": "KIDS_450_UNPAID_V4_SPOKEN_TEXT_FORECAST_REVIEW_ONLY",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "selectedQuestions": 450,
+  "previouslyPaidMissingFlowOriginals": 9,
+  "alreadySavedDistinctV4TextClips": 1777,
+  "uniqueTrulyNewTextFragments": 75,
+  "trulyNewTextCodepoints": 5068,
+  "newTextCodepointsBeforeCrossAgeDedup": 5068,
+  "codepointsSavedByCrossAgeReuse": 0,
+  "crossAgeSharedNewTextFragments": 0,
+  "byAge": {
+    "4-6": {
+      "question": {
+        "uniqueNewSegments": 0,
+        "newTextCodepoints": 0,
+        "newTextAssignments": 0
+      },
+      "correct": {
+        "uniqueNewSegments": 0,
+        "newTextCodepoints": 0,
+        "newTextAssignments": 0
+      },
+      "retry": {
+        "uniqueNewSegments": 0,
+        "newTextCodepoints": 0,
+        "newTextAssignments": 0
+      },
+      "explanation": {
+        "uniqueNewSegments": 0,
+        "newTextCodepoints": 0,
+        "newTextAssignments": 0
+      },
+      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 0,
+      "newCodepointsWithoutCrossAgeDedupe": 0
+    },
+    "7-8": {
+      "question": {
+        "uniqueNewSegments": 15,
+        "newTextCodepoints": 635,
+        "newTextAssignments": 15
+      },
+      "correct": {
+        "uniqueNewSegments": 0,
+        "newTextCodepoints": 0,
+        "newTextAssignments": 0
+      },
+      "retry": {
+        "uniqueNewSegments": 0,
+        "newTextCodepoints": 0,
+        "newTextAssignments": 0
+      },
+      "explanation": {
+        "uniqueNewSegments": 16,
+        "newTextCodepoints": 1097,
+        "newTextAssignments": 16
+      },
+      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 31,
+      "newCodepointsWithoutCrossAgeDedupe": 1732
+    },
+    "9-10": {
+      "question": {
+        "uniqueNewSegments": 17,
+        "newTextCodepoints": 758,
+        "newTextAssignments": 18
+      },
+      "correct": {
+        "uniqueNewSegments": 0,
+        "newTextCodepoints": 0,
+        "newTextAssignments": 0
+      },
+      "retry": {
+        "uniqueNewSegments": 0,
+        "newTextCodepoints": 0,
+        "newTextAssignments": 0
+      },
+      "explanation": {
+        "uniqueNewSegments": 27,
+        "newTextCodepoints": 2578,
+        "newTextAssignments": 27
+      },
+      "allUniqueNewSegmentsWithoutCrossAgeDedupe": 44,
+      "newCodepointsWithoutCrossAgeDedupe": 3336
+    }
+  },
+  "newSpeechNeededForAge4to6": false,
+  "existingUnconfirmedFull450ForecastCredits": 79075.79,
+  "originalForecastNotAnInvoice": true,
+  "earlierAspirationalBudgetCredits": 27860.0,
+  "currentEstimateOverTargetCredits": 51215.79,
+  "derivedForecastCreditsPerNewCodepoint": 15.602958,
+  "approxCodepointCeilingToHitBudgetAtUnchangedForecastRate": 1785,
+  "approxTextReductionPercentageNeededAtSameRate": 64.8,
+  "creditForecastMustBeRecheckedAgainstProviderBilling": true,
+  "candidateTextEditsAuthorized": false,
+  "paidSynthesisAuthorized": false,
+  "creditsSpentByThisAudit": 0,
+  "humanPronunciationApproved": false,
+  "publicReleaseAllowed": false
+}

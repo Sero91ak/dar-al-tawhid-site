@@ -1,0 +1,146 @@
+name: KIDS V4 Owner One Strict Deduplicated Batch (after Preflight)
+on:
+  push:
+    branches: [review/kids-quiz-v4-batch-001-020-20261014]
+    paths:
+      - kids/review-only/quiz-v4-20261020-production-confirmation.md
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-owner-20261020-prepare-once
+  cancel-in-progress: false
+jobs:
+  generate-save-and-assemble-only-uncharged-v4:
+    if: >-
+      github.repository == 'Sero91ak/dar-al-tawhid-site' &&
+      github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
+      github.event.head_commit.message == 'audio(kids): execute only approved October 20 SHA-pinned V4 original wave'
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          fetch-depth: 0
+      - name: Zero-credit independent cost, source, Arabic Fuṣḥā and double-charge preflight
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/produce_quiz_v4_450_exact_manual_wave.py kids/tools/generate_quiz_v4_450_paid_batch02.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/verify_quiz_v4_master_dictionary_provider_get_only.py
+          python3 kids/tools/produce_quiz_v4_450_exact_manual_wave.py --audit
+          python3 - <<'PY'
+          import json,hashlib,subprocess,os
+          from pathlib import Path
+          get=lambda p:json.loads(Path(p).read_text(encoding='utf-8'))
+          approval=get('kids/review-only/quiz-v4-20261020-one-wave-authorization.json')
+          current=get('kids/review-only/quiz-v4-all450-next-exact-paid-wave.json')
+          hold=get('kids/data/quiz-v4-pronunciation-hold.json')
+          assert approval['scope']=='KIDS_450_USER_AUTHORIZED_20261020_ONE_WAVE'
+          assert approval['oneTimeAuthorization'] is True
+          assert approval['authorizedByUserRequestDate']=='2026-10-20'
+          assert approval['exactBatchFingerprintSha256']==current['userMustAuthorizeThisExactBatchFingerprintSHA256']
+          assert approval['exactTextSHA256']==current['exactTextSHA256']
+          assert approval['estimatedCreditsNotInvoice']==current['nextEstimatedCreditsNotInvoice']
+          assert 1<=current['nextOriginalCount']<=approval['maxNewOriginals']==10
+          assert 0<current['nextEstimatedCreditsNotInvoice']<=approval['maxEstimatedCredits']==240
+          assert approval['modelId']==hold['modelId']=='eleven_v4'
+          assert approval['voiceId']==hold['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert approval['dictionaryId']==hold['dictionaryId']=='Q8w3SxtoVo8NSjsnlJEd'
+          assert approval['dictionaryVersionId']==hold['dictionaryVersionId']=='wSzgkGpAwEDiTak8DApc'
+          assert hold['dictionaryProviderVerified'] is True and hold['dictionaryRuleCount']==10099
+          assert get('kids/data/quiz-curation-release.json')['enabled'] is False
+          fields={
+            'expectedRegistryGitBlobSha':'kids/data/quiz-v4-450-original-clip-registry.json',
+            'expectedLedgerGitBlobSha':'kids/data/quiz-v4-450-paid-generation-ledger.json',
+            'expectedPlanGitBlobSha':'kids/data/quiz-v4-curated-450-production-review.json',
+            'expectedHoldGitBlobSha':'kids/data/quiz-v4-pronunciation-hold.json'}
+          for key,path in fields.items():
+            currentblob=subprocess.check_output(['git','hash-object',path],text=True).strip()
+            assert currentblob==approval[key], 'Source changed since owner consent: '+path
+          with open(os.environ['GITHUB_ENV'],'a',encoding='utf-8') as f:
+            f.write('KIDS_V4_APPROVED_BATCH_FINGERPRINT='+approval['exactBatchFingerprintSha256']+'\n')
+            f.write('KIDS_V4_APPROVED_REGISTRY_BLOB_SHA='+approval['expectedRegistryGitBlobSha']+'\n')
+            f.write('KIDS_V4_APPROVED_LEDGER_BLOB_SHA='+approval['expectedLedgerGitBlobSha']+'\n')
+          print('PASS: exact fresh SHA-bound new originals, <=10, <=240 estimated credits; no re-recorded phrases and NO public release')
+          PY
+      - name: Generate genuine eleven_v4 Serhat Master with verified 10099-rule lexicon, save each original SHA immediately
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          KIDS_V4_EXPLICIT_SPEND_APPROVAL: 'YES'
+          KIDS_V4_HUMAN_SOURCE_CHECK: 'YES'
+          KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL: 'YES'
+          KIDS_V4_STAGE1_OWNER_CORRECT_DICTIONARY_BATCH: 'YES'
+          KIDS_V4_STAGE1_SAMPLE_ONLY: 'NO'
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce_quiz_v4_450_exact_manual_wave.py --produce
+      - name: Assemble newly saved original MP3s into the private 450-question quiz ID map
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null || ! command -v ffmpeg >/dev/null; then
+            sudo apt-get -o Acquire::Retries=0 install -y ffmpeg
+          fi
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          get=lambda p:json.loads(Path(p).read_text(encoding='utf-8'))
+          assert get('kids/data/quiz-curation-release.json')['enabled'] is False
+          status=get('kids/data/quiz-v4-450-production-status.json')
+          assert status['selectedTotal']==450 and status['appReleaseFlagEnabled'] is False
+          print('KIDS_V4_REAL_MP3_PRIVATE_REVIEW_COMPLETE',status['completedQuestionsWithAllFourAudioParts'])
+          PY
+      - name: Commit only genuine saved V4 MP3s, verified receipts and internal quiz coverage
+        run: |
+          set -euo pipefail
+          git config user.name tawhid-kids-v4-master-20261020
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/assets/kids-quiz-audio/v4-curated450-review/ kids/assets/kids-quiz-audio/v4-first150-composed-review/ kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-450-original-clip-registry.json kids/data/quiz-v4-450-paid-generation-ledger.json
+          git add kids/data/quiz-v4-all450-paid-wave-request-journal.json kids/data/quiz-v4-all450-paid-wave-usage-backup.json
+          git add kids/data/quiz-v4-450-production-status.json kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/review-only/quiz-v4-all450-next-exact-paid-wave.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          # Handover summaries are regenerated in separate zero-credit jobs.
+          # Do not bundle them with PAID MP3 receipts: unrelated parallel
+          # documentation updates previously caused a rebase conflict after
+          # successful ElevenLabs charges, despite originals being checkpointed.
+          git restore -- kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          if git diff --cached --quiet; then
+            echo 'No original audio changed; zero additional paid call'
+            exit 0
+          fi
+          git commit -m 'audio(kids V4): save newly paid originals and private 450 quiz join [skip ci]'
+          for n in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then exit 0; fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase --autostash FETCH_HEAD || exit 1
+          done
+          echo 'Paid originals remain in artifact; never rerun speech to fix git push' >&2
+          exit 1
+      - name: Preserve every previously charged MP3 and request journal even if later QA or push fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-oct20-paid-originals-do-not-repurchase
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json
+            kids/data/quiz-v4-all450-paid-wave-request-journal.json
+            kids/data/quiz-v4-all450-paid-wave-usage-backup.json
+            kids/review-only/quiz-v4-all450-next-exact-paid-wave.json

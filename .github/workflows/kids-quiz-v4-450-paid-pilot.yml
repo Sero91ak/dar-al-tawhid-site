@@ -1,0 +1,72 @@
+name: KIDS Quiz V4 450 Direct MP3 Paid Pilot (2 originals only)
+
+on:
+  workflow_dispatch:
+    inputs:
+      authorize_new_credit_spend:
+        description: "Explicit manual permission for NEW paid ElevenLabs synthesis"
+        required: true
+        type: choice
+        options:
+          - "NO"
+          - "YES"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+
+jobs:
+  record-two-originals:
+    if: github.event_name == 'workflow_dispatch' && github.event.inputs.authorize_new_credit_spend == 'YES' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - name: Checkout review branch only, no main publication
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+
+      - name: Verify paid budget guard and obtain exactly two original V4 MP3 clips
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          python3 -m py_compile kids/tools/generate_quiz_v4_450_paid_pilot.py
+          python3 kids/tools/generate_quiz_v4_450_paid_pilot.py
+
+      - name: Commit saved originals and exact SHA ledger on review branch
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-voice-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          branch=review/kids-quiz-v4-batch-001-020-20261014
+          git add -A kids/data/quiz-v4-450-original-clip-registry.json kids/data/quiz-v4-450-paid-generation-ledger.json kids/assets/kids-quiz-audio/v4-curated450-review/
+          if git diff --cached --quiet; then
+            echo "Original paid V4 pilot files were already saved; no new paid clips."
+            exit 0
+          fi
+          git commit -m "audio(kids v4): save 2 charged original MP3s and immutable SHA ledger in review"
+          for n in 1 2 3 4; do
+            if git push origin HEAD:"$branch"; then
+              echo "V4 original bytes, SHA registry and paid ledger safely saved to GitHub."
+              exit 0
+            fi
+            git fetch origin "$branch"
+            git rebase FETCH_HEAD
+          done
+          echo "::error::MP3 files could not be pushed; recover from workflow artifact WITHOUT regenerating."
+          exit 1
+
+      - name: Keep a backup of paid original bytes even if git push fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-450-paid-originals-pilot-backup
+          if-no-files-found: warn
+          retention-days: 90
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json

@@ -1,0 +1,44 @@
+name: KIDS V4 Original MP3 Recovery End-to-End Guard (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/test_quiz_v4_prepaid_end_to_end_wiring.py'
+      - '.github/workflows/kids-v4-prepaid-flow-restore.yml'
+      - '.github/workflows/kids-v4-secure-original-import.yml'
+      - '.github/workflows/kids-v4-last9-paid-free-get.yml'
+      - 'kids/data/quiz-v4-paid-flow-import-status.json'
+      - 'kids/review-only/quiz-v4-450-actual-mp3-import-summary.json'
+      - '.github/workflows/kids-v4-prepaid-endtoend-qa.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-zero-cost-nine-originals-full-quiz-import
+  cancel-in-progress: false
+
+jobs:
+  verify-all-three-authentic-original-recovery-lanes:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout only the private KIDS V4 review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Run zero-credit regression for all nine prepaid originals and 450 quiz IDs
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/test_quiz_v4_prepaid_end_to_end_wiring.py
+          python3 kids/tools/test_quiz_v4_prepaid_end_to_end_wiring.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+          python3 - <<'PY'
+          import json
+          p='kids/data/quiz-curation-release.json'
+          assert json.load(open(p,encoding='utf-8'))['enabled'] is False
+          print('PASS: V4 preload and import are read-only, prepaid, release disabled')
+          PY

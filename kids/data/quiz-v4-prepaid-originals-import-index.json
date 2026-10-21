@@ -1,0 +1,711 @@
+{
+  "schema": 1,
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "totalUniqueOriginals": 56,
+  "first150RequiredOriginals": 45,
+  "originalsUsedByMultipleQuestions": 10,
+  "needsNoNewElevenLabsCredits": true,
+  "format": "MP3 44.1k 128kbps original generation",
+  "filenameRule": "<generationId>.mp3",
+  "entries": [
+    {
+      "generationId": "ki4e57kvaTCDQxzLio3o",
+      "expectedFilename": "ki4e57kvaTCDQxzLio3o.mp3",
+      "questionIds": [
+        "kids-quiz-001"
+      ],
+      "part": "question",
+      "text": "Hör einmal aufmerksam zu. Wen beten wir an? Antwort 1: Allah allein. Antwort 2: Menschen. Welche Antwort passt deiner Meinung nach?",
+      "expectedDuration": 10.4,
+      "neededForFirst150": true,
+      "flowId": "3opB2L8NB0ChRtz3I28a"
+    },
+    {
+      "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+      "expectedFilename": "GvXeGQ9Kr1lVy7LEAv5T.mp3",
+      "questionIds": [
+        "kids-quiz-001",
+        "kids-quiz-006",
+        "kids-quiz-011",
+        "kids-quiz-016"
+      ],
+      "part": "correct",
+      "text": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
+      "expectedDuration": 5.68,
+      "neededForFirst150": true,
+      "flowId": "3opB2L8NB0ChRtz3I28a"
+    },
+    {
+      "generationId": "DX5z8FWaCS4FDx3KrloO",
+      "expectedFilename": "DX5z8FWaCS4FDx3KrloO.mp3",
+      "questionIds": [
+        "kids-quiz-001",
+        "kids-quiz-006",
+        "kids-quiz-011",
+        "kids-quiz-016"
+      ],
+      "part": "retry",
+      "text": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
+      "expectedDuration": 5.44,
+      "neededForFirst150": true,
+      "flowId": "3opB2L8NB0ChRtz3I28a"
+    },
+    {
+      "generationId": "AToalNGbxiRe1zfOnDG3",
+      "expectedFilename": "AToalNGbxiRe1zfOnDG3.mp3",
+      "questionIds": [
+        "kids-quiz-001"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Wir dienen Allah allein.",
+      "expectedDuration": 3.44,
+      "neededForFirst150": true,
+      "flowId": "3opB2L8NB0ChRtz3I28a"
+    },
+    {
+      "generationId": "FGX65uXKWBnjULDxg3X1",
+      "expectedFilename": "FGX65uXKWBnjULDxg3X1.mp3",
+      "questionIds": [
+        "kids-quiz-002"
+      ],
+      "part": "question-opening",
+      "text": "Schau, was du schon alles weißt.",
+      "expectedDuration": 2.24,
+      "neededForFirst150": false,
+      "flowId": null
+    },
+    {
+      "generationId": "KIgCxJO3RDxhsIFJSYUB",
+      "expectedFilename": "KIgCxJO3RDxhsIFJSYUB.mp3",
+      "questionIds": [
+        "kids-quiz-002"
+      ],
+      "part": "question-core",
+      "text": "Ist Allah Einer?",
+      "expectedDuration": 1.6,
+      "neededForFirst150": false,
+      "flowId": null
+    },
+    {
+      "generationId": "UUmC2fDiXaV5W1IQSumA",
+      "expectedFilename": "UUmC2fDiXaV5W1IQSumA.mp3",
+      "questionIds": [
+        "kids-quiz-002"
+      ],
+      "part": "question-guidance",
+      "text": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+      "expectedDuration": 5.68,
+      "neededForFirst150": false,
+      "flowId": null
+    },
+    {
+      "generationId": "aoKJuahenrKHfUE5OD9j",
+      "expectedFilename": "aoKJuahenrKHfUE5OD9j.mp3",
+      "questionIds": [
+        "kids-quiz-002",
+        "kids-quiz-007",
+        "kids-quiz-012",
+        "kids-quiz-017"
+      ],
+      "part": "correct",
+      "text": "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Du lernst immer mehr!",
+      "expectedDuration": 5.6,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "2xy9ZLej1wPTrnvAr9p7",
+      "expectedFilename": "2xy9ZLej1wPTrnvAr9p7.mp3",
+      "questionIds": [
+        "kids-quiz-002",
+        "kids-quiz-007",
+        "kids-quiz-012",
+        "kids-quiz-017"
+      ],
+      "part": "retry",
+      "text": "Du lernst mit jedem Versuch. Hör noch einmal genau hin!",
+      "expectedDuration": 3.92,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "1UAwmEQ77D4BmA9DttHZ",
+      "expectedFilename": "1UAwmEQ77D4BmA9DttHZ.mp3",
+      "questionIds": [
+        "kids-quiz-002"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Sūrat al-Iḫlāṣ lehrt: Allah ist Einer.",
+      "expectedDuration": 4.96,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "QdjkO1mvizCsjpZ4GVZH",
+      "expectedFilename": "QdjkO1mvizCsjpZ4GVZH.mp3",
+      "questionIds": [
+        "kids-quiz-003"
+      ],
+      "part": "question",
+      "text": "Du darfst mitdenken. Bewahrt Allah den Qurʾān? Hör gut zu. Was denkst du? Wähle Ja für richtig oder Nein für nicht richtig.",
+      "expectedDuration": 8.88,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "oTZw9J8BXouAWeocufYC",
+      "expectedFilename": "oTZw9J8BXouAWeocufYC.mp3",
+      "questionIds": [
+        "kids-quiz-003",
+        "kids-quiz-008",
+        "kids-quiz-013",
+        "kids-quiz-018"
+      ],
+      "part": "correct",
+      "text": "Al-ḥamdu lillāh! Alles Lob gebührt Allah. Das hast du gut erkannt!",
+      "expectedDuration": 4.8,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "zz0jZ6ybshrDKTqeYHh7",
+      "expectedFilename": "zz0jZ6ybshrDKTqeYHh7.mp3",
+      "questionIds": [
+        "kids-quiz-003",
+        "kids-quiz-008",
+        "kids-quiz-013",
+        "kids-quiz-018"
+      ],
+      "part": "retry",
+      "text": "Das war noch nicht richtig. Nimm dir Zeit und versuche es wieder!",
+      "expectedDuration": 4.08,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "dUcKqsLbtPgtK0Oebtjx",
+      "expectedFilename": "dUcKqsLbtPgtK0Oebtjx.mp3",
+      "questionIds": [
+        "kids-quiz-003"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Allah hat die Bewahrung des Qurʾān versprochen.",
+      "expectedDuration": 4.08,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "TWV0NVT7wCnPytDAd1DZ",
+      "expectedFilename": "TWV0NVT7wCnPytDAd1DZ.mp3",
+      "questionIds": [
+        "kids-quiz-004"
+      ],
+      "part": "question",
+      "text": "Komm, wir probieren eine Wissensfrage. In welchem Monat wurde der Qurʾān herabgesandt? Antwort 1: Ramaḍān. Antwort 2: Muḥarram. Welche Antwort passt deiner Meinung nach?",
+      "expectedDuration": 12,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "fZ1VIkCQEsdIxFQ2hwjF",
+      "expectedFilename": "fZ1VIkCQEsdIxFQ2hwjF.mp3",
+      "questionIds": [
+        "kids-quiz-004",
+        "kids-quiz-009",
+        "kids-quiz-014"
+      ],
+      "part": "correct",
+      "text": "Mā schāʾ Allāh! Deine Antwort ist richtig. Schön, wie du dazulernst!",
+      "expectedDuration": 5.12,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "ddgJqQDhBo32kbRKEMe2",
+      "expectedFilename": "ddgJqQDhBo32kbRKEMe2.mp3",
+      "questionIds": [
+        "kids-quiz-004",
+        "kids-quiz-009",
+        "kids-quiz-014"
+      ],
+      "part": "retry",
+      "text": "Noch einmal versuchen, in schāʾ Allāh. Du darfst dir Zeit lassen!",
+      "expectedDuration": 4.64,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "QMPZdFK2UcLnTQzAeNmI",
+      "expectedFilename": "QMPZdFK2UcLnTQzAeNmI.mp3",
+      "questionIds": [
+        "kids-quiz-004"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Der Qurʾān wurde im Monat Ramaḍān herabgesandt.",
+      "expectedDuration": 4.48,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "gvvqrpjWHAaExFgBVxn8",
+      "expectedFilename": "gvvqrpjWHAaExFgBVxn8.mp3",
+      "questionIds": [
+        "kids-quiz-005"
+      ],
+      "part": "question",
+      "text": "Hör einmal aufmerksam zu. Vor dem Qurʾān-Lesen suchen wir Schutz bei wem? Antwort 1: Bei Allah. Antwort 2: Bei Shayṭān. Welche Antwort passt deiner Meinung nach?",
+      "expectedDuration": 11.84,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "WxoYkACzIX3S8abYxVUj",
+      "expectedFilename": "WxoYkACzIX3S8abYxVUj.mp3",
+      "questionIds": [
+        "kids-quiz-005",
+        "kids-quiz-010",
+        "kids-quiz-015"
+      ],
+      "part": "correct",
+      "text": "Mā schāʾ Allāh! Das heißt: Was Allah gewollt hat. Sehr gut gemacht!",
+      "expectedDuration": 5.6,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "gDb5M7BuACNw47ZwudZ3",
+      "expectedFilename": "gDb5M7BuACNw47ZwudZ3.mp3",
+      "questionIds": [
+        "kids-quiz-005",
+        "kids-quiz-010",
+        "kids-quiz-015"
+      ],
+      "part": "retry",
+      "text": "Noch nicht ganz. Bismi-llāh bedeutet: Im Namen Allahs. Versuch es noch einmal!",
+      "expectedDuration": 5.84,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "9ueos9DiBfnV0vn9lRNg",
+      "expectedFilename": "9ueos9DiBfnV0vn9lRNg.mp3",
+      "questionIds": [
+        "kids-quiz-005"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Vor der Rezitation suchen wir bei Allah Zuflucht vor dem verfluchten Shayṭān.",
+      "expectedDuration": 6.48,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "cqo0lP0WnVegMrRV7v2R",
+      "expectedFilename": "cqo0lP0WnVegMrRV7v2R.mp3",
+      "questionIds": [
+        "kids-quiz-006"
+      ],
+      "part": "question",
+      "text": "Schau, was du schon alles weißt. Gehört der Glaube an die Engel zum Īmān? Überlege kurz. Ist das richtig? Dann tippe auf Ja. Wenn nicht, auf Nein.",
+      "expectedDuration": 10.32,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "H5QwmSxLr7ahVkERWoN2",
+      "expectedFilename": "H5QwmSxLr7ahVkERWoN2.mp3",
+      "questionIds": [
+        "kids-quiz-006"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Zum Īmān gehört der Glaube an Allahs Engel.",
+      "expectedDuration": 4.4,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "YAslUEbjd77bp027Uo1o",
+      "expectedFilename": "YAslUEbjd77bp027Uo1o.mp3",
+      "questionIds": [
+        "kids-quiz-007"
+      ],
+      "part": "question",
+      "text": "Du darfst mitdenken. Wie heißt unser Prophet? Antwort 1: Muḥammad ﷺ. Antwort 2: Mūsā عليه السلام. Welche Antwort passt deiner Meinung nach?",
+      "expectedDuration": 12.24,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "I8esecexVR1VUmiiStEe",
+      "expectedFilename": "I8esecexVR1VUmiiStEe.mp3",
+      "questionIds": [
+        "kids-quiz-007"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Muḥammad ﷺ ist Allahs Gesandter und der letzte Prophet.",
+      "expectedDuration": 6.8,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "clyVrISrx5ErjuiG7NFe",
+      "expectedFilename": "clyVrISrx5ErjuiG7NFe.mp3",
+      "questionIds": [
+        "kids-quiz-008"
+      ],
+      "part": "question",
+      "text": "Komm, wir probieren eine Wissensfrage. Sollen wir dem Gesandten ﷺ folgen? Hör gut zu. Was denkst du? Wähle Ja für richtig oder Nein für nicht richtig.",
+      "expectedDuration": 11.28,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "dJgyn0ueCkR91dnd7cDS",
+      "expectedFilename": "dJgyn0ueCkR91dnd7cDS.mp3",
+      "questionIds": [
+        "kids-quiz-008"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Allah befiehlt, dem Gesandten ﷺ zu gehorchen.",
+      "expectedDuration": 5.92,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "J10ZSClRpcQ6InUW8BY3",
+      "expectedFilename": "J10ZSClRpcQ6InUW8BY3.mp3",
+      "questionIds": [
+        "kids-quiz-009"
+      ],
+      "part": "question",
+      "text": "Hör einmal aufmerksam zu. Sollen wir gute Worte sprechen? Jetzt bist du dran. Wenn es stimmt, wähle Ja. Wenn es nicht stimmt, Nein.",
+      "expectedDuration": 9.36,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "aLorgiuSCXCfhUqt5dNf",
+      "expectedFilename": "aLorgiuSCXCfhUqt5dNf.mp3",
+      "questionIds": [
+        "kids-quiz-009"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Allah lehrt uns, zu den Menschen gute Worte zu sprechen.",
+      "expectedDuration": 5.04,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "Vy04Al9JHiGHpCxJ71Tw",
+      "expectedFilename": "Vy04Al9JHiGHpCxJ71Tw.mp3",
+      "questionIds": [
+        "kids-quiz-010"
+      ],
+      "part": "question",
+      "text": "Schau, was du schon alles weißt. Dürfen wir zu unseren Eltern unfreundlich sein? Was meinst du? Wenn du glaubst, dass es stimmt, wähle Ja. Wenn nicht, wähle Nein.",
+      "expectedDuration": 10.56,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "yMPtDThKOpR6IKPHbcj1",
+      "expectedFilename": "yMPtDThKOpR6IKPHbcj1.mp3",
+      "questionIds": [
+        "kids-quiz-010"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Allah verbietet sogar ein verächtliches Wort gegenüber den Eltern.",
+      "expectedDuration": 5.36,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "e7lTv7dMahCs1GtCpCI5",
+      "expectedFilename": "e7lTv7dMahCs1GtCpCI5.mp3",
+      "questionIds": [
+        "kids-quiz-011"
+      ],
+      "part": "question",
+      "text": "Du darfst mitdenken. Wenn uns jemand mit Salām grüßt, sollen wir antworten? Überlege kurz. Ist das richtig? Dann tippe auf Ja. Wenn nicht, auf Nein.",
+      "expectedDuration": 10.48,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "1UyvifNP12RBOeZ0NWnN",
+      "expectedFilename": "1UyvifNP12RBOeZ0NWnN.mp3",
+      "questionIds": [
+        "kids-quiz-011"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Ein Gruß wird gleich gut oder besser erwidert.",
+      "expectedDuration": 4.48,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "kEEjOsweh2aEq9h2i4hN",
+      "expectedFilename": "kEEjOsweh2aEq9h2i4hN.mp3",
+      "questionIds": [
+        "kids-quiz-012"
+      ],
+      "part": "question",
+      "text": "Komm, wir probieren eine Wissensfrage. Dürfen wir andere Kinder auslachen und verspotten? Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+      "expectedDuration": 10.72,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "heZyGLFXcuaMa8GMuj2W",
+      "expectedFilename": "heZyGLFXcuaMa8GMuj2W.mp3",
+      "questionIds": [
+        "kids-quiz-012"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Allah verbietet, andere Menschen zu verspotten.",
+      "expectedDuration": 4.4,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "63Jjw1si4tLeYyDKjw5V",
+      "expectedFilename": "63Jjw1si4tLeYyDKjw5V.mp3",
+      "questionIds": [
+        "kids-quiz-013"
+      ],
+      "part": "question",
+      "text": "Hör einmal aufmerksam zu. Geben wir geliehene Sachen zurück? Hör gut zu. Was denkst du? Wähle Ja für richtig oder Nein für nicht richtig.",
+      "expectedDuration": 9.76,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "hM2VfSWtDJtFuxhd85nm",
+      "expectedFilename": "hM2VfSWtDJtFuxhd85nm.mp3",
+      "questionIds": [
+        "kids-quiz-013"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Allah befiehlt, anvertraute Dinge den Berechtigten zurückzugeben.",
+      "expectedDuration": 5.52,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "vq2nTmmLnI3nHzWDL5sC",
+      "expectedFilename": "vq2nTmmLnI3nHzWDL5sC.mp3",
+      "questionIds": [
+        "kids-quiz-014"
+      ],
+      "part": "question",
+      "text": "Schau, was du schon alles weißt. Ist Verzeihen etwas Gutes? Jetzt bist du dran. Wenn es stimmt, wähle Ja. Wenn es nicht stimmt, Nein.",
+      "expectedDuration": 9.6,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "40yTB3kLdHUrSSgwuUDJ",
+      "expectedFilename": "40yTB3kLdHUrSSgwuUDJ.mp3",
+      "questionIds": [
+        "kids-quiz-014"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Allah lobt diejenigen, die ihren Zorn zurückhalten und verzeihen.",
+      "expectedDuration": 5.52,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "UmbT8oYPd2lm8zJfZMi3",
+      "expectedFilename": "UmbT8oYPd2lm8zJfZMi3.mp3",
+      "questionIds": [
+        "kids-quiz-015"
+      ],
+      "part": "question",
+      "text": "Du darfst mitdenken. Sieht Allah, was wir tun? Was meinst du? Wenn du glaubst, dass es stimmt, wähle Ja. Wenn nicht, wähle Nein.",
+      "expectedDuration": 8.4,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "1gvYKSQC4WSufCgTGJJa",
+      "expectedFilename": "1gvYKSQC4WSufCgTGJJa.mp3",
+      "questionIds": [
+        "kids-quiz-015"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Im Ḥadīṯ über Iḥsān lehrte der Prophet ﷺ, dass Allah uns sieht.",
+      "expectedDuration": 7.52,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "h3Bh3ejOIBOt4vUVlT8r",
+      "expectedFilename": "h3Bh3ejOIBOt4vUVlT8r.mp3",
+      "questionIds": [
+        "kids-quiz-016"
+      ],
+      "part": "question",
+      "text": "Komm, wir probieren eine Wissensfrage. Sollen wir auf unsere Gebete achten? Überlege kurz. Ist das richtig? Dann tippe auf Ja. Wenn nicht, auf Nein.",
+      "expectedDuration": 10.08,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "86T6VNKlu9GVu80Q0WI5",
+      "expectedFilename": "86T6VNKlu9GVu80Q0WI5.mp3",
+      "questionIds": [
+        "kids-quiz-016"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Allah befiehlt, die Gebete zu bewahren.",
+      "expectedDuration": 4,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "LMzdpuJ5eW3SkiL9FK54",
+      "expectedFilename": "LMzdpuJ5eW3SkiL9FK54.mp3",
+      "questionIds": [
+        "kids-quiz-017"
+      ],
+      "part": "question",
+      "text": "Hör einmal aufmerksam zu. Sollen wir beim Essen verschwenderisch sein? Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+      "expectedDuration": 10.08,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "klBmSK0vYZFnsmjDCUzQ",
+      "expectedFilename": "klBmSK0vYZFnsmjDCUzQ.mp3",
+      "questionIds": [
+        "kids-quiz-017"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Allah erlaubt Essen und Trinken, aber keine Maßlosigkeit.",
+      "expectedDuration": 5.44,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "qRVJETdkA6tqyNfSm65J",
+      "expectedFilename": "qRVJETdkA6tqyNfSm65J.mp3",
+      "questionIds": [
+        "kids-quiz-018"
+      ],
+      "part": "question",
+      "text": "Schau, was du schon alles weißt. Dürfen wir Allah um mehr Wissen bitten? Hör gut zu. Was denkst du? Wähle Ja für richtig oder Nein für nicht richtig.",
+      "expectedDuration": 10.32,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "wrJPUpiOo2YwL3y4vXqH",
+      "expectedFilename": "wrJPUpiOo2YwL3y4vXqH.mp3",
+      "questionIds": [
+        "kids-quiz-018"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Allah lehrt die Bitte: Mein Herr, mehre mich an Wissen.",
+      "expectedDuration": 5.52,
+      "neededForFirst150": true,
+      "flowId": null
+    },
+    {
+      "generationId": "yg3OZMyPDghXCNp1oAVe",
+      "expectedFilename": "yg3OZMyPDghXCNp1oAVe.mp3",
+      "questionIds": [
+        "kids-quiz-019"
+      ],
+      "part": "question",
+      "text": "Nimm dir Zeit für deine Antwort. Warum wurden Menschen und Jinn erschaffen? Antwort 1: Um Allah zu dienen. Antwort 2: Nur zum Spielen. Antwort 3: Nur um reich zu werden. Wähle die Antwort, die du für richtig hältst.",
+      "expectedDuration": 15.36,
+      "neededForFirst150": false,
+      "flowId": null
+    },
+    {
+      "generationId": "MXJIQELO8kt4unfk2wy2",
+      "expectedFilename": "MXJIQELO8kt4unfk2wy2.mp3",
+      "questionIds": [
+        "kids-quiz-019"
+      ],
+      "part": "correct",
+      "text": "Mā schāʾ Allāh! Du hast aufmerksam überlegt. Mach weiter so!",
+      "expectedDuration": 4.56,
+      "neededForFirst150": false,
+      "flowId": null
+    },
+    {
+      "generationId": "53nlCj9DCu1JkXZFBEZI",
+      "expectedFilename": "53nlCj9DCu1JkXZFBEZI.mp3",
+      "questionIds": [
+        "kids-quiz-019"
+      ],
+      "part": "retry",
+      "text": "In schāʾ Allāh – wenn Allah will. Geh die Antworten noch einmal durch.",
+      "expectedDuration": 5.28,
+      "neededForFirst150": false,
+      "flowId": null
+    },
+    {
+      "generationId": "Q9bbw0iwMakXG90uNolq",
+      "expectedFilename": "Q9bbw0iwMakXG90uNolq.mp3",
+      "questionIds": [
+        "kids-quiz-019"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Allah nennt Seine Anbetung als Zweck der Erschaffung von Jinn und Menschen.",
+      "expectedDuration": 6.08,
+      "neededForFirst150": false,
+      "flowId": null
+    },
+    {
+      "generationId": "jdsRsYyahoMQrcQ6xEYV",
+      "expectedFilename": "jdsRsYyahoMQrcQ6xEYV.mp3",
+      "questionIds": [
+        "kids-quiz-020"
+      ],
+      "part": "question",
+      "text": "Hör dir die Frage und die Antworten in Ruhe an. Was lehrt Sūrat al-Iḫlāṣ über Allah? Antwort 1: Allah ist Einer. Antwort 2: Allah hat ein Kind. Antwort 3: Allah braucht Hilfe. Wähle die Antwort, die du für richtig hältst.",
+      "expectedDuration": 17.6,
+      "neededForFirst150": false,
+      "flowId": null
+    },
+    {
+      "generationId": "N6KUNJZuktlS1uTmRNPI",
+      "expectedFilename": "N6KUNJZuktlS1uTmRNPI.mp3",
+      "questionIds": [
+        "kids-quiz-020"
+      ],
+      "part": "correct",
+      "text": "Mā schāʾ Allāh! Das bedeutet: Was Allah gewollt hat. Dein Wissen wächst!",
+      "expectedDuration": 6,
+      "neededForFirst150": false,
+      "flowId": null
+    },
+    {
+      "generationId": "vTRh2ZkXhF0R0jOplwKS",
+      "expectedFilename": "vTRh2ZkXhF0R0jOplwKS.mp3",
+      "questionIds": [
+        "kids-quiz-020"
+      ],
+      "part": "retry",
+      "text": "Kein Problem. Bismi-llāh! Schau dir die Antworten noch einmal genau an.",
+      "expectedDuration": 4.8,
+      "neededForFirst150": false,
+      "flowId": null
+    },
+    {
+      "generationId": "Y06izGfW3lzAWMoW79EG",
+      "expectedFilename": "Y06izGfW3lzAWMoW79EG.mp3",
+      "questionIds": [
+        "kids-quiz-020"
+      ],
+      "part": "explanation",
+      "text": "Das merken wir uns: Sūrat al-Iḫlāṣ lehrt Allahs Einzigkeit und dass Er weder zeugt noch gezeugt wurde.",
+      "expectedDuration": 7.12,
+      "neededForFirst150": false,
+      "flowId": null
+    }
+  ]
+}

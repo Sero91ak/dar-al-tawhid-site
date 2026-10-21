@@ -1,0 +1,41 @@
+{
+  "scope": "KIDS_V4_OLDER_STAGE1_20_QUESTIONS_65_EXACT_ORIGINALS",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "reviewOnly": true,
+  "questionCount": 20,
+  "questions7to8": 10,
+  "questions9to10": 10,
+  "stageExpectedNewOriginals": 65,
+  "previouslyRecordedFirstStageOriginals": 50,
+  "remainingFirstStageOriginals": 15,
+  "reservedOrSubmittedInConnectedFlowNotToRebuy": 10,
+  "uncertainPreviousPaidRequestsNotToRebuy": 1,
+  "uncertainPaidRequestTextSHA256": [
+    "fc4f586cf59297c43335f3aae64428bdf00fb10ec362ffb33c9620ff9a851f70"
+  ],
+  "genuinelyUnreservedTextsEligibleForNewV4": 4,
+  "nextPaidRunOriginalLimit": 10,
+  "manualApprovalMustMatchExactBatchFingerprintSHA256": "14e7d8770294163bd565004438e6420683095b3cbe007581b346da0260708741",
+  "nextExactTextSha256": [
+    "85b21ae546baedf84eeb01fcb70560697bfce2ee4ccdbd3b03c14fd91bd1caad",
+    "50e1ee367eed5a02664b1dc9d49b7d5f7c9f4e899f758070647aa62d525dd6f1",
+    "7d942f6f744f02d59b837f6ad98f204a1c75ccb8d97ce5ca0c5849fe953bb1fd",
+    "998336344ec248219b666842645f4fdbbc837affb40c92a017d4afafb5f9dfa9"
+  ],
+  "questionsThatCouldGainCompleteV4AudioAfterNextRun": [
+    "kids-quiz-023",
+    "kids-quiz-025",
+    "kids-quiz-036"
+  ],
+  "newlyCompleteQuestionCountProjectedFromActualSourceGaps": 3,
+  "audioQualityStillRequiresHumanApproval": true,
+  "nextEstimatedCreditsNotProviderBill": 218.04,
+  "estimatedPerRunCreditsMaximum": 850.0,
+  "previouslyPaidHistoricalFlowTextsInQueue": 0,
+  "paidSynthesisAuthorizedByAudit": false,
+  "newElevenLabsCreditsSpentByAudit": 0,
+  "humanSourceApprovalInPreflight": false,
+  "noBlindRetryAfterProviderError": true,
+  "publicReleaseAllowed": false
+}

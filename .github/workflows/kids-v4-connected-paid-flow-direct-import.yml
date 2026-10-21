@@ -1,0 +1,110 @@
+name: KIDS V4 Import Already Paid ElevenCreative MP3s (GET only, zero credits)
+
+on:
+  push:
+    branches: [review/kids-quiz-v4-batch-001-020-20261014]
+    paths:
+      - 'kids/tools/recover_quiz_v4_connected_flow_originals_get.py'
+      - '.github/workflows/kids-v4-connected-paid-flow-direct-import.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-connected-original-direct-get-import
+  cancel-in-progress: false
+
+jobs:
+  fetch-import-compose-original-audio:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Verify only ten already paid originals may be downloaded
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/recover_quiz_v4_connected_flow_originals_get.py kids/tools/import_quiz_v4_connected_flow_originals.py
+          python3 kids/tools/recover_quiz_v4_connected_flow_originals_get.py --output "$RUNNER_TEMP/paid-kids-v4-flow" --audit
+          python3 kids/tools/import_quiz_v4_connected_flow_originals.py --audit
+      - name: Download provider-confirmed ORIGINAL MP3 bytes using read-only API
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/recover_quiz_v4_connected_flow_originals_get.py --output "$RUNNER_TEMP/paid-kids-v4-flow"
+      - name: Import genuine paid MP3s into each original text's offline quiz index
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 kids/tools/import_quiz_v4_connected_flow_originals.py --directory "$RUNNER_TEMP/paid-kids-v4-flow"
+      - name: Recompose 450 selected quiz questions, verify MP3s and preview (no new TTS)
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then sudo apt-get -o Acquire::Retries=0 install -y ffmpeg; fi
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          release=json.loads(Path('kids/data/quiz-curation-release.json').read_text())
+          reg=json.loads(Path('kids/data/quiz-v4-450-original-clip-registry.json').read_text())
+          flow=json.loads(Path('kids/data/quiz-v4-connected-flow-originals-ledger.json').read_text())
+          assert release['enabled'] is False
+          complete=sum(1 for x in flow['entries'] if x['status']=='IMPORTED_ORIGINAL_MP3_VERIFIED')
+          assert complete>=1 and all(x['sourceText'] in reg['textClips'] for x in flow['entries'] if x['status']=='IMPORTED_ORIGINAL_MP3_VERIFIED')
+          print('PASS:',complete,'previously paid new ElevenCreative originals now actually stored as private quiz MP3s. No new speech charge.')
+          PY
+      - name: Commit actual audio and exact generation receipts only to private review branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name tawhid-kids-v4-original-import
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/assets/kids-quiz-audio/v4-connected-flow-original-review/
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-connected-flow-originals-ledger.json
+          git add kids/data/quiz-v4-450-original-clip-registry.json kids/data/quiz-v4-450-paid-generation-ledger.json
+          git add kids/data/quiz-v4-450-production-status.json kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/review-only/quiz-v4-connected-flow-original-import-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          if git diff --cached --quiet;then echo 'Already imported, no charges'; exit 0;fi
+          git commit -m 'audio(kids): import previously paid original ElevenCreative V4 MP3s into 450 quiz review'
+          for attempt in 1 2 3 4 5 6;do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014;then
+              echo 'SUCCESS: ORIGINAL MP3s and quiz composites saved; visitor app still protected.'
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase -X theirs FETCH_HEAD || exit 1
+          done
+          echo 'WARNING: push contention. Backup artifact has original bytes; never re-synthesize.'
+          exit 1
+      - name: Always back up downloaded MP3s and their paid provider identity
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-10-already-paid-connected-flow-original-mp3-backup
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            ${{ runner.temp }}/paid-kids-v4-flow/
+            kids/assets/kids-quiz-audio/v4-connected-flow-original-review/
+            kids/data/quiz-v4-connected-flow-originals-ledger.json
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/review-only/quiz-v4-connected-flow-original-import-status.json

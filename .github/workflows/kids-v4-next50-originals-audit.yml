@@ -1,0 +1,60 @@
+name: KIDS V4 Next50 Original MP3 Recording Audit (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/generate_quiz_v4_450_paid_batch04.py'
+      - 'kids/tools/quiz_v4_paid50_checkpoint.py'
+      - '.github/workflows/kids-v4-next50-originals-audit.yml'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-450-paid-generation-ledger.json'
+      - 'kids/review-only/quiz-v4-450-next-completion-priority.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-next50-voice-audit-no-charge
+  cancel-in-progress: false
+
+jobs:
+  preview-50-originals:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Check out private V4 review lane
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Audit exactly fifty unique, not yet bought original V4 texts without API key
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/generate_quiz_v4_450_paid_batch04.py kids/tools/quiz_v4_paid50_checkpoint.py
+          python3 kids/tools/generate_quiz_v4_450_paid_batch04.py --audit
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          report=json.loads(Path('kids/review-only/quiz-v4-next50-originals-audit.json').read_text(encoding='utf-8'))
+          assert report['scope']=='PRIVATE_KIDS_V4_NEXT_FIFTY_ORIGINALS'
+          assert report['modelId']=='eleven_v4'
+          assert report['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert report['numberOfOriginalMP3Takes']==50
+          assert len(report['selectedExactTextSHA256'])==len(set(report['selectedExactTextSHA256']))==50
+          expected=hashlib.sha256(json.dumps(report['selectedExactTextSHA256'],separators=(',',':')).encode()).hexdigest()
+          assert report['approvalFingerprintSHA256']==expected
+          assert 0 < report['estimatedCreditsNotInvoice'] <= report['creditsForecastCeiling'] == 2600
+          assert report['existingChargedOriginalsWillNotBeRegenerated'] is True
+          assert report['newCreditsSpentByAudit']==0 and report['publicAppEnabled'] is False
+          assert json.loads(Path('kids/data/quiz-curation-release.json').read_text())['enabled'] is False
+          print('PASS: exactly 50 missing original eleven_v4 texts, immutable SHA, private review, zero credits.')
+          PY
+      - name: Preserve the 50er original text manifest for review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-next50-originals-cost-audit-no-credit
+          retention-days: 30
+          if-no-files-found: warn
+          path: kids/review-only/quiz-v4-next50-originals-audit.json

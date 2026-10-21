@@ -1,0 +1,82 @@
+name: KIDS V4 Age 7-8 and 9-10 Offline Existing MP3 Review (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/build_quiz_v4_older300_offline_review.py'
+      - 'kids/tools/qa_quiz_v4_older300_next50_priority.py'
+      - 'kids/data/quiz-v4-older300-next50-unique-fragment-review.json'
+      - '.github/workflows/kids-v4-older300-offline-review.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-older300-existing-audio-review
+  cancel-in-progress: false
+
+jobs:
+  package-existing-older300-audio:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - name: Checkout TAWḤĪD KIDS private review branch only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Prepare ffmpeg and verify all original MP3s without any TTS
+        run: |
+          if ! command -v ffprobe || ! command -v ffmpeg; then
+            sudo apt-get -o Acquire::Retries=0 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          command -v ffprobe
+          command -v ffmpeg
+          python3 -m py_compile kids/tools/build_quiz_v4_older300_offline_review.py
+      - name: Verify deduplicated source-text queue for next 25 plus 25 questions
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/qa_quiz_v4_older300_next50_priority.py
+          python3 kids/tools/qa_quiz_v4_older300_next50_priority.py
+      - name: Prepare exact original V4 clips for age 7-8 and 9-10
+        run: |
+          set -euo pipefail
+          python3 kids/tools/build_quiz_v4_older300_offline_review.py
+      - name: Validate offline archive and ensure explicit missing flags
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json, pathlib, re, zipfile
+          bundle=pathlib.Path("kids/review-only/quiz-v4-older300-review.zip")
+          with zipfile.ZipFile(bundle) as z:
+              assert z.testzip() is None, "Corrupted original MP3 review archive"
+              report=json.loads(z.read("report.json"))
+              assert report["published"] is False
+              assert report["readyForLive"] is False
+              assert report["audioListeningApproved"] is False
+              assert report["newElevenLabsCreditsSpent"]==0
+              assert report["bands"]["7-8"]["questions"]==150
+              assert report["bands"]["9-10"]["questions"]==150
+              assert sum(report["bands"][b]["availableFieldCounts"][k]
+                         for b in ["7-8","9-10"]
+                         for k in ["question","correct","retry","explanation"])>0
+              clips=[f for f in z.namelist() if f.endswith(".mp3")]
+              assert len(clips)>0 and len(clips)==len(set(clips))
+              for f in clips:
+                  assert f.startswith("audio/"), "Unexpected audio path in offline-only package"
+              html=z.read("index.html").decode("utf-8")
+              scripts=re.findall(r"<script(?![^>]*application/json)[^>]*>(.*?)</script>", html,re.S)
+              assert len(scripts)==1
+              pathlib.Path("/tmp/kids-v4-older300-review.js").write_text(scripts[0], encoding="utf-8")
+              print("PASS_KIDS_V4_OLDER300_OFFLINE_ARCHIVE",len(clips),report["uniquePlayableUtterances"])
+          PY
+          node --check /tmp/kids-v4-older300-review.js
+          echo "PASS: private playable MP3 previews only; source clips preserved; no TTS generation or live deploy"
+      - name: Upload separate offline-only original V4 review bundle
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-older300-existing-audio-offline-review
+          retention-days: 90
+          if-no-files-found: error
+          path: kids/review-only/quiz-v4-older300-review.zip

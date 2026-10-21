@@ -1,0 +1,91 @@
+name: KIDS V4 First20 Older Quiz Source and Answer QA (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/audit_quiz_v4_stage1_sources.py'
+      - '.github/reports/kids-v4-older-age-stage1-exact-voice-preflight.json'
+      - 'kids/review-only/quiz-v4-older-stage1-next-recording-batch.json'
+      - '.github/workflows/kids-v4-stage1-source-answer-qa.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-older-stage1-scholarly-preflight-review-only
+  cancel-in-progress: false
+
+jobs:
+  review-original-text-and-answer-mappings:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout actual private review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+
+      - name: Verify exact twenty approved catalog question keys, all answer choices, spoken text and source mapping
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/audit_quiz_v4_stage1_sources.py
+          python3 kids/tools/audit_quiz_v4_stage1_sources.py
+          python3 kids/tools/test_quiz_v4_older_stage1_exact.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          f=Path('.github/reports/kids-v4-older-stage1-source-and-answer-audit.json')
+          data=json.loads(f.read_text(encoding='utf-8'))
+          assert data['totalQuestions']==20
+          assert data['independentExternalEvidenceLocatedFor']==20
+          assert data['allTwentyEvidenceUrlsOnApprovedDomains'] is True
+          assert all(r['externalEvidenceLocated'] for r in data['records'])
+          assert data['age7to8']==10 and data['age9to10']==10
+          assert data['exactNewSourceTexts']==65
+          next_batch=json.loads(Path('kids/review-only/quiz-v4-older-stage1-next-recording-batch.json').read_text())
+          assert data['previouslyRecordedFirstStageOriginals']+data['remainingNewSourceTexts']==65
+          assert data['remainingNewSourceTexts']==next_batch['remainingFirstStageOriginals']
+          assert data['firstProposedNewV4Texts']==len(next_batch['nextExactTextSha256'])<=10
+          assert data['nextProposedV4OriginalCount']==len(next_batch['nextExactTextSha256'])
+          assert data['fourPossibleQuestionCompletionsAfterActualAudioAndQA']==sorted(next_batch['questionsThatCouldGainCompleteV4AudioAfterNextRun'])
+          assert not data['humanSourceApprovalGranted']
+          assert not data['humanPronunciationApprovalGranted']
+          assert not data['publicReleaseAllowed']
+          assert data['newOriginalMP3BytesCreated']==data['creditsSpent']==0
+          assert all(r['spokenTextAnswerOrderMatches'] and r['questionAndExplanationUnchanged'] for r in data['records'])
+          print('PASS: twenty source mappings and sixty-five exact texts internally consistent; human acceptance still pending.')
+          PY
+
+      - name: Persist audit only to draft PR, not public app
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-stage1-sources-review-bot
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .github/reports/kids-v4-older-stage1-source-and-answer-audit.json
+          git add .github/reports/KIDS-V4-STAGE1-QUELLEN-UND-ANTWORTCHECK.md
+          if git diff --cached --quiet; then
+            echo 'No change in QA source records; zero credits.'
+            exit 0
+          fi
+          git commit -m 'qa(kids V4): save verified original source and answer mapping for first older 20'
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          exit 1
+
+      - name: Preserve exact source audit and annotations
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-older20-private-source-answer-audit
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            .github/reports/kids-v4-older-stage1-source-and-answer-audit.json
+            .github/reports/KIDS-V4-STAGE1-QUELLEN-UND-ANTWORTCHECK.md

@@ -1,0 +1,48 @@
+name: KIDS V4 Paid Batch Post-Import Guard (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/test_quiz_v4_paid_postimport_workflows.py'
+      - 'kids/tools/quiz_v4_first150_costed_campaign.py'
+      - '.github/workflows/kids-v4-450-paid-batch02.yml'
+      - '.github/workflows/kids-v4-450-paid-batch03.yml'
+      - '.github/workflows/kids-v4-paid-postimport-regression.yml'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-post-paid-import-guard-free
+  cancel-in-progress: false
+
+jobs:
+  verify-audio-ready-workflows-without-spending:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Read exact GitHub quiz-review branch (no deploy)
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Guarantee zero unnecessary age 4-6 synthesis and exact 20/50 audio stage import
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/test_quiz_v4_paid_postimport_workflows.py
+          python3 kids/tools/test_quiz_v4_paid_postimport_workflows.py
+          python3 kids/tools/quiz_v4_first150_costed_campaign.py --audit
+          python3 kids/tools/audit_quiz_v4_remaining_audio_credit_budget.py
+          python3 - <<'PY'
+          import json
+          j=json.load(open('kids/review-only/quiz-v4-remaining-unique-audio-credit-breakdown.json'))
+          assert j['selectedQuestions']==450
+          assert not j['newSpeechNeededForAge4to6']
+          assert j['uniqueTrulyNewTextFragments']==1392
+          assert j['byAge']['4-6']['question']['uniqueNewSegments']==0
+          assert j['byAge']['4-6']['explanation']['uniqueNewSegments']==0
+          assert j['paidSynthesisAuthorized'] is False and j['publicReleaseAllowed'] is False
+          print('PASS: zero-credit no-double-charge/post-import workflow preflight')
+          PY

@@ -1,0 +1,48 @@
+name: KIDS V4 All 450 Master Dictionary Coverage - No Credits
+
+on:
+  push:
+    branches:
+      - review/kids-quiz-v4-batch-001-020-20261014
+    paths:
+      - kids/tools/audit_quiz_v4_all450_master_lexicon.py
+      - kids/tools/generate_quiz_v4_450_paid_batch02.py
+      - kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+      - .github/workflows/kids-v4-all450-master-dictionary-audit-no-credits.yml
+
+permissions:
+  contents: read
+
+jobs:
+  dictionary-and-native-fusha-coverage:
+    if: github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout quiz review - no production publishing
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Validate all 450 source utterances with exact 10099-rule lexicon, zero speech
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/audit_quiz_v4_all450_master_lexicon.py
+          python3 -m py_compile kids/tools/generate_quiz_v4_450_paid_batch02.py kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/audit_quiz_v4_all450_master_lexicon.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          x=json.loads(Path('kids/review-only/quiz-v4-all450-master-dictionary-coverage.json').read_text(encoding='utf-8'))
+          assert x['selectedQuestions']==450 and x['dictionaryRuleCount']==10099
+          assert x['newSynthesisCalls']==0 and x['newElevenLabsCreditsSpent']==0
+          assert not x['publicReleaseEnabled'] and not x['sourceContentModified']
+          assert json.loads(Path('kids/data/quiz-curation-release.json').read_text())['enabled'] is False
+          print('PASS all450 owner dictionary and native Fuṣḥā separation report')
+          PY
+      - name: Save Arabic terminology and mixed-language report without synthesizing speech
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-all450-dictionary-Fusha-coverage-zero-credits
+          retention-days: 30
+          path: kids/review-only/quiz-v4-all450-master-dictionary-coverage.json

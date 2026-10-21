@@ -1,0 +1,157 @@
+name: KIDS V4 Fast Exact Ten Original MP3s (single authorized review batch)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/review-only/quiz-v4-authorized-single-fast-batch.json'
+      - '.github/workflows/kids-v4-fast-single-authorized-ten-originals.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+
+jobs:
+  one-ten-originals-only:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - name: Checkout only private review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+
+      - name: Check one-time authorized manifest exists
+        id: license
+        shell: bash
+        run: |
+          if test -s kids/review-only/quiz-v4-authorized-single-fast-batch.json; then
+            echo 'approved=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'approved=false' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Recompute exact current MP3 SHA, no-double-charge and capped expense
+        if: steps.license.outputs.approved == 'true'
+        run: |
+          set -euo pipefail
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --audit
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          m=json.loads(Path('kids/review-only/quiz-v4-authorized-single-fast-batch.json').read_text())
+          p=json.loads(Path('kids/review-only/quiz-v4-older-stage1-next-recording-batch.json').read_text())
+          assert m['mode']=='ONE_TIME_V4_ONLY_NEVER_REPEAT'
+          assert m['approvedExactBatchSha256']==p['manualApprovalMustMatchExactBatchFingerprintSHA256']
+          assert m['modelId']==p['modelId']=='eleven_v4'
+          assert m['voiceId']==p['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert m['maxNewOriginals'] == 10 and len(p['nextExactTextSha256'])<=10
+          assert 0 < p['nextEstimatedCreditsNotProviderBill'] <= m['maxEstimatedCredits']
+          assert m['maxEstimatedCredits'] <= 300
+          assert m['reuseExistingOriginalsFirst'] is True
+          assert m['publicRelease'] is False
+          print('PASS: current exclusive V4 source fingerprints match, max 10 originals / 300 forecast credits.')
+          PY
+
+      - name: Produce only missing V4 originals once under exact SHA and credit cap
+        if: steps.license.outputs.approved == 'true'
+        id: generate
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          KIDS_V4_STAGE1_APPROVED_CANONICAL_450: "YES"
+          KIDS_V4_STAGE1_EXPLICIT_SPEND_APPROVAL: "YES"
+        run: |
+          set -euo pipefail
+          export KIDS_V4_STAGE1_EXPECTED_BATCH_SHA256=$(python3 - <<'PY'
+          import json
+          print(json.load(open('kids/review-only/quiz-v4-authorized-single-fast-batch.json'))['approvedExactBatchSha256'])
+          PY
+          )
+          python3 kids/tools/generate_quiz_v4_older_stage1_exact.py --produce
+
+      - name: Persist every attempted charge and genuine original before any downstream QA
+        if: always() && steps.license.outputs.approved == 'true' && steps.generate.outcome != 'skipped'
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-fast-mp3-safeguard
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/data/quiz-v4-450-paid-generation-ledger.json
+          git add kids/assets/kids-quiz-audio/v4-curated450-review/
+          if [ -f kids/data/quiz-v4-older-stage1-usage.json ]; then
+            git add kids/data/quiz-v4-older-stage1-usage.json
+          fi
+          if [ -f kids/data/quiz-v4-older-stage1-request-journal.json ]; then
+            git add kids/data/quiz-v4-older-stage1-request-journal.json
+          fi
+          if git diff --cached --quiet; then
+            echo 'No MP3s or new requests to persist.'
+            exit 0
+          fi
+          git commit -m 'audio(kids V4): preserve original MP3s and paid POST receipts before QA'
+          for n in 1 2 3; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+              echo 'Original bytes secured in private GitHub.'
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          echo 'Original MP3s backed up as artifact; never retry paid provider POSTs.'
+          exit 1
+
+      - name: Assemble genuine MP3s into the private 450-quiz review
+        if: steps.license.outputs.approved == 'true' && steps.generate.outcome == 'success'
+        run: |
+          set -euo pipefail
+          if ! command -v ffmpeg >/dev/null 2>&1 || ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get -o Acquire::Retries=0 install -y ffmpeg
+          fi
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+
+      - name: Retire the one-time batch authorization and store assembled MP3s
+        if: steps.license.outputs.approved == 'true' && steps.generate.outcome == 'success'
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-fast-audio-join
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git rm -f --ignore-unmatch kids/review-only/quiz-v4-authorized-single-fast-batch.json
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-older-stage1-next-recording-batch.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'audio(kids V4): assemble genuine originals, consume one-time batch consent'
+          for n in 1 2 3; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then exit 0; fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD
+          done
+          echo 'Already paid MP3s secured; recover the free assembly from GitHub artifact.'
+          exit 1
+
+      - name: Always back up real charged MP3s, journal and exact receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-exact-v4-10-originals-do-not-rebuy
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json
+            kids/data/quiz-v4-older-stage1-usage.json
+            kids/data/quiz-v4-older-stage1-request-journal.json

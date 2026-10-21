@@ -1,0 +1,89 @@
+name: KIDS V4 Submitted Flow History Evidence (GET only, zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/probe_quiz_v4_submitted_flow_history.py'
+      - '.github/workflows/kids-v4-submitted-flow-history-get-only.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kids-v4-submitted-flow-history-readonly
+  cancel-in-progress: false
+
+jobs:
+  inspect-submitted-existing-flow-without-generation:
+    if: (github.event_name == 'pull_request' && github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site') || (github.event_name == 'workflow_dispatch' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014')
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout original KIDS V4 review only
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Exact model/voice/text and safe GET-only regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/probe_quiz_v4_submitted_flow_history.py
+          python3 kids/tools/probe_quiz_v4_submitted_flow_history.py --self-test
+          python3 kids/tools/probe_quiz_v4_submitted_flow_history.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path("kids/review-only/quiz-v4-submitted-flow-history-candidates.json").read_text(encoding="utf-8"))
+          assert r["modelId"]=="eleven_v4" and r["voiceId"]=="DkU7j9uO4ZEtLD2iRZSH"
+          assert r["newSynthesisCalls"]==r["newSpeechCreditsSpent"]==r["originalMP3sDownloaded"]==0
+          assert not r["quizAudioRegistryChanged"] and not r["publicReleaseEnabled"]
+          assert all(not i["exactOriginalProven"] and not i["providerAudioImported"] for i in r["items"])
+          print("PASS: unconfirmed original stays quarantined; never rerun TTS")
+          PY
+      - name: Scan provider history only for exact candidates; NO speech POST
+        shell: bash
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 kids/tools/probe_quiz_v4_submitted_flow_history.py --scan
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path("kids/review-only/quiz-v4-submitted-flow-history-candidates.json").read_text(encoding="utf-8"))
+          assert r["newSynthesisCalls"]==r["newSpeechCreditsSpent"]==0
+          assert r["originalMP3sDownloaded"]==0 and not r["quizAudioRegistryChanged"]
+          assert r["unprovenHistoryCandidateMustNotBeImported"]
+          assert not r["publicReleaseEnabled"] and not r["humanHearingApproved"]
+          print("PASS: GET-only history scan complete or safely blocked; no voice credits")
+          PY
+      - name: Preserve metadata candidate report, never URL, audio or key
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name tawhid-kids-v4-readonly-history
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/quiz-v4-submitted-flow-history-candidates.json
+          if git diff --cached --quiet;then
+            echo "No new history evidence."
+            exit 0
+          fi
+          git commit -m 'review(kids V4): record no-credit submitted Flow history candidates [skip ci]'
+          for attempt in 1 2 3;do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014;then
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Preserve evidence on blocked provider access too
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-submitted-flow-history-candidates-get-only
+          retention-days: 30
+          if-no-files-found: warn
+          path: kids/review-only/quiz-v4-submitted-flow-history-candidates.json

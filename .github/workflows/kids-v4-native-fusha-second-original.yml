@@ -1,0 +1,74 @@
+name: KIDS V4 Second Native Fusha Salam Master Original
+on:
+  push:
+    branches:
+      - review/kids-quiz-v4-batch-001-020-20261014
+    paths:
+      - kids/review-only/quiz-v4-native-fusha-two-owner-trigger.json
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-native-fusha-two-20261021-no-repeat
+  cancel-in-progress: false
+jobs:
+  second-native-arabic-master-original:
+    if: >-
+      github.repository == 'Sero91ak/dar-al-tawhid-site' &&
+      github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
+      github.event.head_commit.message == 'audio(kids): start native Alayhi-Salam V4 original pilot 20261021'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      KIDS_V4_OWNER_450_BULK_EXPLICIT: 'YES'
+      KIDS_V4_EXPLICIT_SPEND_APPROVAL: 'YES'
+    steps:
+      - name: Checkout locked reviewed audio branch with full checkpoint history
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          fetch-depth: 0
+      - name: Validate immutable owner one-take approval and original Fuṣḥā dictionary
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          c=json.loads(Path('kids/review-only/quiz-v4-native-fusha-two-owner-trigger.json').read_text(encoding='utf-8'))
+          assert c=={
+            'scope':'KIDS_NATIVE_FUSHA_SINGLE_REVIEW_ORIGINAL',
+            'exactSource':'عليه السلام',
+            'exactSpokenArabic':'عَلَيْهِ السَّلَامُ',
+            'maxNewSpeechCalls':1,
+            'maxEstimatedCredits':240,
+            'modelId':'eleven_v4',
+            'masterVoiceId':'DkU7j9uO4ZEtLD2iRZSH',
+            'humanListeningApprovalClaimed':False,
+            'publicReleaseAllowed':False,
+            'preventBlindPaidRetry':True
+          }, 'Owner Fuṣḥā one-take approval payload mismatch'
+          assert json.loads(Path('kids/data/quiz-curation-release.json').read_text())['enabled'] is False
+          print('PASS one original Fuṣḥā only; no Qurʾān recitation synthesized; public quiz remains closed')
+          PY
+          python3 -m py_compile kids/tools/produce_quiz_v4_native_fusha_alayhi_salam_once.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/produce_quiz_v4_native_fusha_alayhi_salam_once.py --audit
+      - name: Validate MP3 decoder before any provider request
+        run: |
+          if ! command -v ffprobe >/dev/null; then sudo apt-get -qq update && sudo apt-get -y -qq install ffmpeg; fi
+          command -v ffprobe
+      - name: One precisely SHA-guarded native Arabic V4 master original and remote paid checkpoint
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce_quiz_v4_native_fusha_alayhi_salam_once.py --produce
+      - name: Preserve original and paid-request receipt even after failed import
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-native-fusha-two-owner-original-never-repurchase
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/data/quiz-v4-native-fusha-alayhi-salam-original-ledger.json
+            kids/assets/kids-quiz-audio/v4-native-fusha-review/

@@ -1,0 +1,54 @@
+name: KIDS V4 All 450 Missing Speech Dedupe Plan (zero credits)
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - 'kids/tools/plan_quiz_v4_450_zero_credit_dedupe.py'
+      - '.github/workflows/kids-v4-450-zero-credit-dedupe.yml'
+      - 'kids/data/quiz-v4-450-original-clip-registry.json'
+      - 'kids/data/quiz-v4-missing9-prepaid-originals.json'
+      - 'kids/data/quiz-v4-curated-450-production-review.json'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kids-v4-450-unrecorded-crossage-dedupe-only
+  cancel-in-progress: false
+
+jobs:
+  deduplicate-required-unrecorded-v4-fragments:
+    if: github.event.pull_request.number == 1143 && github.event.pull_request.head.repo.full_name == 'Sero91ak/dar-al-tawhid-site'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Read-only checkout KIDS private audio review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+      - name: Compute exact cross-age unrecorded text and preserve prepaid recovery distinction
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/plan_quiz_v4_450_zero_credit_dedupe.py
+          python3 kids/tools/plan_quiz_v4_450_zero_credit_dedupe.py
+          python3 - <<'PY'
+          import hashlib,json
+          q=json.load(open("kids/review-only/quiz-v4-450-deduplicated-unrecorded-originals.json"))
+          assert q["selectedQuestions"]==450 and q["retainedReserveQuestions"]==450
+          assert len(q["pendingUniqueFragments"])==q["uniqueUnrecordedSegmentsAfterCrossAgeDedup"]
+          assert len({x["textSha256"] for x in q["pendingUniqueFragments"]})==len(q["pendingUniqueFragments"])
+          assert len(q["requiredPrepaidOriginalRecovery"])==q["separatePreviouslyPaidOriginalsToRecover"]
+          assert all(hashlib.sha256(x["text"].encode()).hexdigest()==x["textSha256"] for x in q["pendingUniqueFragments"])
+          assert q["paidGenerationAuthorized"] is False and q["newPaidSynthesesLaunched"]==0
+          assert q["creditsSpentByThisPlanner"]==0 and q["publicReleaseAllowed"] is False
+          print("PASS: 450 cross-age texts deduplicated by identical exact original phrase; never paid",flush=True)
+          PY
+      - name: Keep deduplicated text manifest in internal GitHub Actions artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-450-zero-credit-deduplicated-unrecorded-texts
+          retention-days: 90
+          if-no-files-found: warn
+          path: kids/review-only/quiz-v4-450-deduplicated-unrecorded-originals.json

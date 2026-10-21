@@ -1,0 +1,98 @@
+name: KIDS V4 Prepare One Deduplicated 2026-10-20 Owner Wave (No Credits)
+on:
+  push:
+    branches: [review/kids-quiz-v4-batch-001-020-20261014]
+    paths:
+      - kids/review-only/quiz-v4-20261020-produce-request.md
+      - kids/review-only/quiz-v4-20261020-safe-retry-request.md
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-owner-20261020-prepare-once
+  cancel-in-progress: false
+jobs:
+  authorize-exact-current-unique-wave:
+    if: >-
+      github.repository == 'Sero91ak/dar-al-tawhid-site' &&
+      github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
+      (github.event.head_commit.message == 'audio(kids): start October 20 strict original-only V4 wave request' || github.event.head_commit.message == 'audio(kids): retry no-credit V4 audit with protected Fuṣḥā dictionary')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          fetch-depth: 0
+      - name: Verify original master, source, pronunciation lexicon and zero duplicate charges
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          set -euo pipefail
+          test ! -e kids/review-only/quiz-v4-20261020-one-wave-authorization.json
+          python3 -m py_compile kids/tools/produce_quiz_v4_450_exact_manual_wave.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/verify_quiz_v4_master_dictionary_provider_get_only.py
+          python3 kids/tools/produce_quiz_v4_450_exact_manual_wave.py --audit
+          python3 - <<'PY'
+          import json,hashlib,subprocess
+          from pathlib import Path
+          read=lambda p:json.loads(Path(p).read_text(encoding='utf-8'))
+          report=read('kids/review-only/quiz-v4-all450-next-exact-paid-wave.json')
+          hold=read('kids/data/quiz-v4-pronunciation-hold.json')
+          release=read('kids/data/quiz-curation-release.json')
+          reg=read('kids/data/quiz-v4-450-original-clip-registry.json')
+          ledger=read('kids/data/quiz-v4-450-paid-generation-ledger.json')
+          assert release['enabled'] is False
+          assert reg['live'] is False and ledger['live'] is False
+          assert hold['dictionaryProviderVerified'] is True and hold['dictionaryRuleCount']==10099
+          assert hold['dictionaryId']=='Q8w3SxtoVo8NSjsnlJEd'
+          assert hold['dictionaryVersionId']=='wSzgkGpAwEDiTak8DApc'
+          assert 1<=report['nextOriginalCount']<=10
+          assert 0<report['nextEstimatedCreditsNotInvoice']<=240
+          assert len(set(report['exactTextSHA256']))==report['nextOriginalCount']
+          assert report['modelId']=='eleven_v4'
+          assert report['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert report['humanPronunciationReviewRequiredAfterGeneration'] is True
+          assert report['historicalPaidNineRegenerationBlocked'] is True
+          assert report['publicReleaseAllowed'] is False
+          blob=lambda p:subprocess.check_output(['git','hash-object',p],text=True).strip()
+          data={'schemaVersion':1,
+                'scope':'KIDS_450_USER_AUTHORIZED_20261020_ONE_WAVE',
+                'oneTimeAuthorization':True,'authorizedByUserRequestDate':'2026-10-20',
+                'maxNewOriginals':10,'maxEstimatedCredits':240.0,
+                'voiceId':'DkU7j9uO4ZEtLD2iRZSH','modelId':'eleven_v4',
+                'dictionaryId':hold['dictionaryId'],'dictionaryVersionId':hold['dictionaryVersionId'],
+                'expectedRegistryGitBlobSha':blob('kids/data/quiz-v4-450-original-clip-registry.json'),
+                'expectedLedgerGitBlobSha':blob('kids/data/quiz-v4-450-paid-generation-ledger.json'),
+                'expectedPlanGitBlobSha':blob('kids/data/quiz-v4-curated-450-production-review.json'),
+                'expectedHoldGitBlobSha':blob('kids/data/quiz-v4-pronunciation-hold.json'),
+                'exactBatchFingerprintSha256':report['userMustAuthorizeThisExactBatchFingerprintSHA256'],
+                'exactTextSHA256':report['exactTextSHA256'],
+                'estimatedCreditsNotInvoice':report['nextEstimatedCreditsNotInvoice'],
+                'noBlindRetry':True,'publicReleaseAllowed':False,'humanListeningApproved':False}
+          p=Path('kids/review-only/quiz-v4-20261020-one-wave-authorization.json')
+          assert not p.exists()
+          p.write_text(json.dumps(data,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+          print('PASS: a single uniquely hashed V4 master wave authorized within <=240 forecast credits; actual generation not yet started')
+          PY
+      - name: Push immutable one-time authorization (triggers paid workflow with fresh proof)
+        run: |
+          set -euo pipefail
+          git config user.name tawhid-kids-v4-owner-preflight
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/quiz-v4-20261020-one-wave-authorization.json
+          git commit -m 'audio(kids V4): authorize one new deduplicated V4 wave [20261020]'
+          git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+          git rebase origin/review/kids-quiz-v4-batch-001-020-20261014
+          git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014
+      - name: Preserve no-credit authorization evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-oct20-exact-owner-wave-preflight-no-credits
+          retention-days: 90
+          if-no-files-found: ignore
+          path: |
+            kids/review-only/quiz-v4-all450-next-exact-paid-wave.json
+            kids/review-only/quiz-v4-20261020-one-wave-authorization.json
