@@ -375,8 +375,8 @@ function translateExact(value,language="tr"){
  const references=value.match(/^Qurʾān · (\d+) Fundstellen$/);
  if(references){
   const text=language==="tr"?"Kur'an":languagePacks.get(language)?.get("Qurʾān");
-  const places=languagePacks.get(language)?.get("Fundstellen")||
-    (language==="tr"?"Kaynak yerleri":null);
+  const places=DAR_DYNAMIC_UI_UNITS[language]?.Fundstellen||
+    languagePacks.get(language)?.get("Fundstellen");
   return text&&places?text+" · "+references[1]+" "+places:null;
  }
  const statements=value.match(/^(Aussagen im Qurʾān|Aussagen in authentischer Sunnah) · (\d+)$/);
