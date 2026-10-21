@@ -2608,8 +2608,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 </style>
 <link rel="stylesheet" id="darSmartPublicV8" href="/desktop-preview/assets/dar-smart-home-v8-live.css?v=20261021-2-reveal-fixed">
 <link rel="stylesheet" id="darTrueV8Shell" href="/desktop-preview/assets/dar-v8-faithful-shell.css?v=20261021-faithful-v1">
-<link rel="stylesheet" href="/desktop-preview/assets/dar-v8-all-sections.css?v=20261021-global-v1">
-<script src="/desktop-preview/assets/dar-v8-cross-pages.js?v=20261021-global-v1" defer></script>
+<link rel="stylesheet" id="darV8AllRoutesCSS" href="/desktop-preview/assets/dar-v8-all-routes.css?v=20261021-2">
 </head>
 <style id="dar-touch-active-fix">
 @media (hover:none) and (pointer:coarse){
@@ -2661,7 +2660,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 }
 </style>
 <body class="desktop-overhaul-v18">
-<aside class="dar-v8-sidebar" id="darV8Sidebar" aria-label="Wissenszentrum"><a class="dar-v8-side-brand desktop-link" href="/?page=start" data-page="start"><span class="dar-v8-orb" aria-hidden="true">د</span><span><strong>DĀR AL TAWḤĪD</strong><small>SMART KNOWLEDGE</small></span></a><div class="dar-v8-navcaption">WISSENSZENTRUM</div><nav class="dar-v8-side-links"><a class="dar-v8-side-link desktop-link" data-page="start" href="/?page=start"><span class="dar-v8-navdiamond">◈</span>Start</a><a class="dar-v8-side-link desktop-link" data-page="quran" href="/?page=quran"><span class="dar-v8-navdiamond">◈</span>Qurʾān</a><a class="dar-v8-side-link desktop-link" data-page="hadith" href="/?page=hadith"><span class="dar-v8-navdiamond">◈</span>Ḥadīṯ</a><a class="dar-v8-side-link desktop-link" data-page="beitraege" href="/?page=beitraege"><span class="dar-v8-navdiamond">◈</span>Beiträge</a><a class="dar-v8-side-link desktop-link" data-page="bibliothek" href="/?page=bibliothek"><span class="dar-v8-navdiamond">◈</span>Bibliothek</a><a class="dar-v8-side-link desktop-link" data-page="frauen" href="/?page=frauen"><span class="dar-v8-navdiamond">◈</span>Frauen</a><a class="dar-v8-side-link desktop-link" data-page="wissen" href="/?page=wissen"><span class="dar-v8-navdiamond">◈</span>Wissen</a><a class="dar-v8-side-link desktop-link" data-page="mehr" href="/?page=mehr"><span class="dar-v8-navdiamond">◈</span>Mehr</a></nav><div class="dar-v8-side-footer"><strong>QURʾĀN · SUNNAH · SALAF</strong><span>Ein zusammenhängender Ort für Wissen und Quellen.</span></div></aside><div class="dar-v8-workspace" id="darV8Workspace">
+<aside class="dar-v8-sidebar" id="darV8Sidebar" aria-label="Wissenszentrum"><a class="dar-v8-side-brand desktop-link" href="/?page=start" data-page="start"><span class="dar-v8-orb" aria-hidden="true">د</span><span><strong>DĀR AL TAWḤĪD</strong><small>SMART KNOWLEDGE</small></span></a><div class="dar-v8-navcaption">WISSENSZENTRUM</div><nav class="dar-v8-side-links" aria-label="Alle Bereiche"><a class="dar-v8-side-link desktop-link" data-page="start" data-v8-route="start" href="/?page=start"><img class="dar-v8-side-3d" src="/assets/dar-3d-icons/home.png?v=1095" alt="" loading="lazy">Start</a><a class="dar-v8-side-link desktop-link" data-page="quran" data-v8-route="quran" href="/?page=quran"><img class="dar-v8-side-3d" src="/assets/dar-3d-icons/quran.png?v=1095" alt="" loading="lazy">Qurʾān</a><a class="dar-v8-side-link desktop-link" data-page="beitraege" data-v8-route="beitraege" href="/?page=beitraege"><img class="dar-v8-side-3d" src="/assets/dar-3d-icons/posts.png?v=1095" alt="" loading="lazy">Beiträge</a><a class="dar-v8-side-link desktop-link" data-page="hadith" data-v8-route="hadith" href="/?page=hadith"><img class="dar-v8-side-3d" src="/assets/dar-3d-icons/hadith.png?v=1095" alt="" loading="lazy">Ḥadīṯ</a><a class="dar-v8-side-link desktop-link" data-page="dua" data-v8-route="dua" href="/?page=dua"><img class="dar-v8-side-3d" src="/assets/dar-3d-icons/dua.png?v=1095" alt="" loading="lazy">Duʿāʾ</a><a class="dar-v8-side-link desktop-link" data-page="wissen" data-v8-route="wissen" href="/?page=wissen"><img class="dar-v8-side-3d" src="/assets/dar-3d-icons/ilm.png?v=1095" alt="" loading="lazy">Wissen</a><a class="dar-v8-side-link desktop-link" data-page="bibliothek" data-v8-route="bibliothek" href="/?page=bibliothek"><img class="dar-v8-side-3d" src="/assets/dar-3d-icons/library.png?v=1095" alt="" loading="lazy">Bibliothek</a><a class="dar-v8-side-link desktop-link" data-page="frauen" data-v8-route="frauen" href="/?page=frauen"><img class="dar-v8-side-3d" src="/assets/dar-3d-icons/frauen.png?v=1095" alt="" loading="lazy">Frauen</a><a class="dar-v8-side-link desktop-link" data-page="gebetszeiten" data-v8-route="gebetszeiten" href="/?page=gebetszeiten"><img class="dar-v8-side-3d" src="/assets/dar-3d-icons/prayer.png?v=1095" alt="" loading="lazy">Gebetszeiten</a><a class="dar-v8-side-link desktop-link" data-page="quiz" data-v8-route="quiz" href="/?page=quiz"><img class="dar-v8-side-3d" src="/assets/dar-3d-icons/quiz.png?v=1095" alt="" loading="lazy">Quiz</a><a class="dar-v8-side-link desktop-link" data-page="mehr" data-v8-route="mehr" href="/?page=mehr"><img class="dar-v8-side-3d" src="/assets/dar-3d-icons/more.png?v=1095" alt="" loading="lazy">Mehr</a></nav><div class="dar-v8-side-footer"><strong>QURʾĀN · SUNNAH · SALAF</strong><span>Ein zusammenhängender Ort für Wissen und Quellen.</span></div></aside><div class="dar-v8-workspace" id="darV8Workspace">
 <header class="site-header">
  <div class="header-inner">
   <a class="brand desktop-link" href="/?page=start" data-page="start">
@@ -2741,8 +2740,26 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   </div>
  </div>
 </section><main class="page" id="pageRoot"></main></div><!-- /dar-v8-workspace -->
+<nav class="dar-v8-mobile-dock" id="darV8MobileDock" aria-label="DĀR V8 Smartphone-Tabnavigation">
+<a class="desktop-link" href="/?page=start" data-page="start" data-v8-route="start"><img src="/assets/dar-3d-icons/home.png?v=1095" alt=""><span>Start</span></a>
+<a class="desktop-link" href="/?page=quran" data-page="quran" data-v8-route="quran"><img src="/assets/dar-3d-icons/quran.png?v=1095" alt=""><span>Qurʾān</span></a>
+<a class="desktop-link" href="/?page=beitraege" data-page="beitraege" data-v8-route="beitraege"><img src="/assets/dar-3d-icons/posts.png?v=1095" alt=""><span>Beiträge</span></a>
+<a class="desktop-link" href="/?page=wissen" data-page="wissen" data-v8-route="wissen"><img src="/assets/dar-3d-icons/ilm.png?v=1095" alt=""><span>Wissen</span></a>
+<button type="button" id="darV8MoreToggle" data-v8-toggle-more aria-expanded="false" aria-controls="darV8MoreSheet"><img src="/assets/dar-3d-icons/more.png?v=1095" alt=""><span>Mehr</span></button>
+</nav>
+<div id="darV8MoreSheet" class="dar-v8-more-sheet" hidden role="region" aria-label="Weitere V8-Bereiche"><div class="dar-v8-more-heading"><strong>Alle Bereiche</strong><span>Wissenszentrum</span></div><div class="dar-v8-more-grid">
+<a class="desktop-link" data-page="hadith" data-v8-route="hadith" href="/?page=hadith"><img src="/assets/dar-3d-icons/hadith.png" alt="">Ḥadīṯ</a>
+<a class="desktop-link" data-page="dua" data-v8-route="dua" href="/?page=dua"><img src="/assets/dar-3d-icons/dua.png" alt="">Duʿāʾ</a>
+<a class="desktop-link" data-page="bibliothek" data-v8-route="bibliothek" href="/?page=bibliothek"><img src="/assets/dar-3d-icons/library.png" alt="">Bibliothek</a>
+<a class="desktop-link" data-page="frauen" data-v8-route="frauen" href="/?page=frauen"><img src="/assets/dar-3d-icons/frauen.png" alt="">Frauen</a>
+<a class="desktop-link" data-page="gebetszeiten" data-v8-route="gebetszeiten" href="/?page=gebetszeiten"><img src="/assets/dar-3d-icons/prayer.png" alt="">Gebetszeiten</a>
+<a class="desktop-link" data-page="quiz" data-v8-route="quiz" href="/?page=quiz"><img src="/assets/dar-3d-icons/quiz.png" alt="">Quiz</a>
+<a class="desktop-link" data-page="suche" data-v8-route="suche" href="/?page=suche"><img src="/assets/dar-3d-icons/spark.png" alt="">Wissenschat</a>
+<a class="desktop-link" data-page="mehr" data-v8-route="mehr" href="/?page=mehr"><img src="/assets/dar-3d-icons/settings.png" alt="">Alle Werkzeuge</a>
+</div></div>
 
-<script id="darV8ShellInteractions">(function(){var t=document.getElementById("darV8ThemeToggle");function apply(v){document.body.classList.toggle("dar-v8-night",v==="layl");if(t)t.textContent=v==="layl"?"☀":"☾"}try{apply(localStorage.getItem("darV8Theme")==="layl"?"layl":"salbei")}catch(e){apply("salbei")}if(t)t.addEventListener("click",function(){var v=document.body.classList.contains("dar-v8-night")?"salbei":"layl";apply(v);try{localStorage.setItem("darV8Theme",v)}catch(e){}});var a=document.getElementById("darV8TopAudio");if(a)a.addEventListener("click",function(){document.getElementById("quranAudioPlayer")?.scrollIntoView({behavior:"smooth",block:"center"})});var settings=document.getElementById("darV8PrayerSettings");if(settings)settings.addEventListener("click",function(){var section=document.querySelector(".v8-real-prayer");if(!section)return;var opened=section.classList.toggle("dar-v8-prayer-settings-open");settings.setAttribute("aria-expanded",String(opened));settings.textContent=opened?"Einstellungen schließen ×":"Standort ↗";if(opened)document.getElementById("prCityOpen")?.click()});var expand=document.getElementById("darV8PlayerExpand");if(expand)expand.addEventListener("click",function(){var row=document.querySelector(".v8-real-player");if(!row)return;var opened=row.classList.toggle("dar-v8-controls-open");expand.setAttribute("aria-expanded",String(opened));expand.textContent=opened?"⌃":"⌄"});document.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();var input=document.getElementById("darV8FinderQuery")||document.getElementById("siteSearch");if(input)input.focus();else location.href="/?page=suche"}})})();</script>
+<script src="/desktop-preview/assets/dar-v8-route-platform.js?v=20261021-2"></script>
+<script id="darV8ShellInteractions">(function(){var t=document.getElementById("darV8ThemeToggle");function apply(v){document.body.classList.toggle("dar-v8-night",v==="layl");if(t)t.textContent=v==="layl"?"☀":"☾"}try{apply(localStorage.getItem("darV8Theme")==="layl"?"layl":"salbei")}catch(e){apply("salbei")}if(t)t.addEventListener("click",function(){var v=document.body.classList.contains("dar-v8-night")?"salbei":"layl";apply(v);try{localStorage.setItem("darV8Theme",v)}catch(e){}});var a=document.getElementById("darV8TopAudio");if(a)a.addEventListener("click",function(){if(document.body.classList.contains("dar-v8-home")||document.body.classList.contains("dar-v8-quran-route")){document.querySelector(".v8-real-player")?.scrollIntoView({behavior:"smooth",block:"center"})}else{location.href="/?page=quran&player=expanded"}});var settings=document.getElementById("darV8PrayerSettings");if(settings)settings.addEventListener("click",function(){var section=document.querySelector(".v8-real-prayer");if(!section)return;var opened=section.classList.toggle("dar-v8-prayer-settings-open");settings.setAttribute("aria-expanded",String(opened));settings.textContent=opened?"Einstellungen schließen ×":"Standort ↗";if(opened)document.getElementById("prCityOpen")?.click()});var expand=document.getElementById("darV8PlayerExpand");if(expand)expand.addEventListener("click",function(){var row=document.querySelector(".v8-real-player");if(!row)return;var opened=row.classList.toggle("dar-v8-controls-open");expand.setAttribute("aria-expanded",String(opened));expand.textContent=opened?"⌃":"⌄"});document.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();var input=document.getElementById("darV8FinderQuery")||document.getElementById("siteSearch");if(input)input.focus();else location.href="/?page=suche"}})})();</script>
 <script src="/widgets/shared/prayer-math.js"></script>
 <script src="/assets/zakat-engine.js?v=desktop-20261009-4"></script>
 <script src="/assets/zakat-pdf.js?v=desktop-20261009-4"></script>
@@ -2763,7 +2780,6 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   beitrag:["BEITRAG","Dieses Wissen ist Dīn.","Eine Aussage von Ibn Sīrīn über die Sorgfalt bei der Wahl der Quellen des Dīn."],
   quelle:["QUELLE","Nachweis zur Aussage.","Werk, Kapitel, überlieferte Aussage und Direktnachweis auf einen Blick."],
   dua:["DUʿĀʾ","Bittgebete mit Übersetzung und Nachweis.","Arabischer Text, Lautschrift, deutsche Bedeutung und Quelle bleiben klar voneinander unterscheidbar."],
-  hadith:["ḤADĪṮ & ĀṮĀR","Überlieferungen mit Quellen und Einordnung.","Hadithe und Athar nach Werk, Kapitel und Begriff durchsuchen. Die Originalquellen und Einstufungen werden nicht verändert."],
   wissen:["WISSEN","Themen geordnet erschließen.","ʿAqīdah, Fiqh, Sunnah, Āṯār, Gelehrte und Grundlagen lassen sich direkt nach Themen öffnen."],
   bibliothek:["BIBLIOTHEK","Werke lesen und Quellen finden.","Öffne Werke, Dossiers und Sammlungen mit Autor, Fachgebiet und Lesemöglichkeit."],
   gebetszeiten:["GEBETSZEITEN","Gebetszeiten für deinen Standort.","Aktuelles Gebet, nächstes Gebet und laufender Countdown werden aus deinem gespeicherten Standort berechnet."],
@@ -2892,7 +2908,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  }
 
  function suche(){
-  return intro("suche")+'<section class="section parchment reveal"><div class="v8-chat-panel"><div class="v8-chat-title"><img src="/assets/dar-3d-icons/spark.png" alt=""><div><h2>Masǧid al-ʿIlm · Intelligenter Wissenschat</h2><p>Stelle eine Frage. Antworten und Fundstellen basieren ausschließlich auf unseren vorhandenen Beiträgen und Quellen.</p></div></div><div id="v8ChatReply" aria-live="polite"></div><div class="v8-chat-input-wrap"><input id="siteSearch" class="search-input" type="search" placeholder="Frage zu Tawḥīd, Fiqh, Sunnah, Īmān oder anderen Begriffen …" autocomplete="off" aria-label="Frage an den Wissensfinder"><button id="v8ChatSend" type="button">Frage stellen ↗</button></div><div id="searchResults" class="list-lines" style="margin-top:18px"><div class="loading-line">Website-Quellen werden geladen …</div></div></div></section>'+footer()
+  return intro("suche")+'<section class="section parchment reveal"><input id="siteSearch" class="search-input" type="search" placeholder="Qurʾān, Beitrag, Duʿāʾ, Werk, Prophet oder Thema suchen …" autocomplete="off"><div id="searchResults" class="list-lines" style="margin-top:20px"><div class="loading-line">Suchindex wird geladen …</div></div></section>'+footer()
  }
  function thema(){
   var name=new URLSearchParams(location.search).get("name")||"aqidah";
@@ -2937,10 +2953,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
     '</div>'+
    '</div></section>'+footer()
  }
- function hadith(){
-  return intro("hadith")+'<section class="section parchment reveal"><div class="section-head"><h2>Ḥadīṯe und Āṯār nach Quellen</h2><p>Quellengebundene Suche in vorhandenen deutsch geprüften Überlieferungen; Angaben zur Einstufung bleiben unverändert.</p></div><div class="v8-hadith-toolbar"><input id="v8HadithSearch" type="search" placeholder="Ḥadīṯ, Werk, Überlieferer oder islamischen Begriff suchen …" aria-label="Ḥadīṯ-Suchbegriff" autocomplete="off"><span id="v8HadithCount" class="data-count">Index wird geladen …</span></div><div id="v8HadithResults" aria-live="polite"><p class="loading-line">Überlieferungen werden geladen …</p></div><button id="v8HadithMore" type="button" hidden>Weitere Überlieferungen anzeigen ↓</button><p class="real-source" style="margin-top:16px">Quelle: der bestehende deutsch geprüfte Ḥadīṯ-Suchindex. Vollständiger gemeinsamer Datenkatalog: <a href="/apple-tv/hadith/catalog.json" target="_blank" rel="noopener noreferrer">Ḥadīṯ- und Āṯār-Archiv ↗</a>.</p></section>'+footer()
- }
- var renders={start:start,quran:quran,beitraege:beitraege,hadith:hadith,beitrag:beitrag,quelle:quelle,dua:dua,wissen:wissen,bibliothek:bibliothek,gebetszeiten:gebetszeiten,mehr:mehr,downloads:downloads,suche:suche,thema:thema,werk:werk,zakat:zakat,quiz:quiz,propheten:propheten,frauen:frauen,quellen:quellen,einstellungen:einstellungen};
+ var renders={start:start,quran:quran,beitraege:beitraege,beitrag:beitrag,quelle:quelle,dua:dua,wissen:wissen,bibliothek:bibliothek,gebetszeiten:gebetszeiten,mehr:mehr,downloads:downloads,suche:suche,thema:thema,werk:werk,zakat:zakat,quiz:quiz,propheten:propheten,frauen:frauen,quellen:quellen,einstellungen:einstellungen};
 
  function currentPage(){return (new URLSearchParams(location.search).get("page")||"start").toLowerCase()}
 
@@ -2978,10 +2991,11 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  function render(){
   var key=currentPage(); if(!renders[key])key="start";
   document.body.classList.toggle("dar-v8-home",key==="start");
+  document.body.classList.toggle("dar-v8-quran-route",key==="quran");
   document.body.dataset.darV8Route=key;
   var crumb=document.getElementById("darV8BreadLabel");if(crumb)crumb.textContent=key==="start"?"Start":(intros[key]||intros.start)[0];document.querySelectorAll(".dar-v8-side-link").forEach(function(a){a.classList.toggle("active",a.dataset.page===key);if(a.dataset.page===key)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   try{
-   root.innerHTML=renders[key]();
+   root.innerHTML=(key==="start"?"":window.DARV8Routes.htmlFor(key))+renders[key]();
   }catch(err){
    try{console.error("Desktop render:",key,err)}catch(_){}
    root.innerHTML='<section class="page-intro reveal is-visible"><div><div class="eyebrow">DĀR AL TAWḤĪD</div><h1>Qurʾān, Sunnah und Wissen.</h1><p>Die Inhalte werden geladen. Nutze oben die Navigation, um Qurʾān, Beiträge, Duʿāʾ und Bibliothek zu öffnen.</p></div></section>';
@@ -2995,7 +3009,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   if(key==="einstellungen")initSettings();
   initRealPage(key);
   initSmartBrowse(key);
-  if(window.DARV8CrossPages)window.DARV8CrossPages.onRendered(key);
+  if(window.DARV8Routes)window.DARV8Routes.init(key,{searchFold:searchFold});
   if(key==="start")initDarV8Home();
   if(key==="werk")initPdfReaderPage();
   if(window.darSetPwaIcon)window.darSetPwaIcon(darPwaIconId(),false);
@@ -3720,31 +3734,35 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   surah:document.getElementById("qaSurah"),ayah:document.getElementById("qaAyah"),reciter:document.getElementById("qaReciter"),next:document.getElementById("qaNext"),surahs:[],state:{surah:1,ayah:1,reciter:"alafasy"}
  };
  var reciters=[
-  {id:"alafasy",name:"Mišārī Rāšid al-ʿAfāsī",folder:"Alafasy_128kbps"},
-  {id:"minshawi",name:"Muḥammad Ṣiddīq al-Minšāwī",folder:"Minshawy_Murattal_128kbps"},
-  {id:"husary",name:"Maḥmūd Ḫalīl al-Ḥuṣarī",folder:"Husary_128kbps"},
-  {id:"basit",name:"ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad",folder:"Abdul_Basit_Murattal_192kbps"},
-  {id:"sudais",name:"ʿAbd ar-Raḥmān as-Sudais",folder:"Abdurrahmaan_As-Sudais_192kbps"},
-  {id:"maher",name:"Māhir al-Muʿayqlī",folder:"MaherAlMuaiqly128kbps"}
+  {id:"alafasy",name:"Mišārī Rāšid al-ʿAfāsī",folder:"Alafasy_128kbps",edition:"ar.alafasy"},
+  {id:"minshawi",name:"Muḥammad Ṣiddīq al-Minšāwī",folder:"Minshawy_Murattal_128kbps",edition:"ar.minshawi"},
+  {id:"husary",name:"Maḥmūd Ḫalīl al-Ḥuṣarī",folder:"Husary_128kbps",edition:"ar.husary"},
+  {id:"basit",name:"ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad",folder:"Abdul_Basit_Murattal_192kbps",edition:"ar.abdulbasitmurattal"},
+  {id:"sudais",name:"ʿAbd ar-Raḥmān as-Sudais",folder:"Abdurrahmaan_As-Sudais_192kbps",edition:"ar.abdurrahmaansudais"},
+  {id:"maher",name:"Māhir al-Muʿayqlī",folder:"MaherAlMuaiqly128kbps",edition:"ar.mahermuaiqly"}
  ];
  function pad3(n){return String(Number(n)||1).padStart(3,"0")}
  function saveQa(){try{localStorage.setItem("darDesktopQuranAudioV1",JSON.stringify(qa.state))}catch(e){}}
  function loadQa(){try{var s=JSON.parse(localStorage.getItem("darDesktopQuranAudioV1")||"null");if(s){qa.state.surah=Number(s.surah)||1;qa.state.ayah=Number(s.ayah)||1;qa.state.reciter=s.reciter||"alafasy"}}catch(e){}}
  function currentSurah(){return qa.surahs.find(function(x){return Number(x.id)===Number(qa.state.surah)})||qa.surahs[0]}
  function reciter(){return reciters.find(function(x){return x.id===qa.state.reciter})||reciters[0]}
- function audioUrl(){return "https://everyayah.com/data/"+reciter().folder+"/"+pad3(qa.state.surah)+pad3(qa.state.ayah)+".mp3"}
+ function globalAyah(){var n=Number(qa.state.ayah)||1;for(var i=0;i<qa.surahs.length;i++){var s=qa.surahs[i];if(Number(s.id)===Number(qa.state.surah))return n;n+=Number(s.total_verses)||0}return 0}
+ function proxyAudioUrl(){var n=globalAyah(),r=reciter();return n&&r.edition?"/quran-audio/"+encodeURIComponent(r.edition)+"/"+n+".mp3":""}
+ function everyayahAudioUrl(){return "https://everyayah.com/data/"+reciter().folder+"/"+pad3(qa.state.surah)+pad3(qa.state.ayah)+".mp3"}
+ function audioUrl(){return proxyAudioUrl()||everyayahAudioUrl()}
  function fillAyat(){
   var s=currentSurah(),total=s?Number(s.total_verses)||1:1;qa.state.ayah=Math.max(1,Math.min(total,qa.state.ayah));
   qa.ayah.innerHTML="";for(var i=1;i<=total;i++){var o=document.createElement("option");o.value=String(i);o.textContent=String(i);if(i===qa.state.ayah)o.selected=true;qa.ayah.appendChild(o)}
  }
  function updateQaTitle(){var s=currentSurah();qa.title.textContent=(s?s.transliteration:"Qurʾān")+" · Āyah "+qa.state.ayah}
  function setQaSource(autoplay){
-  qa.audio.src=audioUrl();qa.audio.load();updateQaTitle();saveQa();
+  qa.audio.dataset.fallbackUsed="";qa.audio.src=audioUrl();qa.audio.load();updateQaTitle();saveQa();
   try{if(currentPage()==="quran")document.querySelectorAll("[data-book-ayah]").forEach(function(el){el.classList.toggle("is-audio",Number(el.getAttribute("data-book-ayah"))===Number(qa.state.ayah)&&Number(quranBookState.surah)===Number(qa.state.surah))})}catch(e){}
   if("mediaSession" in navigator){try{navigator.mediaSession.metadata=new MediaMetadata({title:(currentSurah()?currentSurah().transliteration:"Qurʾān")+" · Āyah "+qa.state.ayah,artist:reciter().name,album:"DĀR AL TAWḤĪD · Qurʾān"})}catch(e){}}
-  if(autoplay)qa.audio.play().catch(function(){})
+  qa.audio.dataset.wantsPlayback=autoplay?"yes":"no";if(autoplay)qa.audio.play().catch(function(){qa.title.textContent="Audio wird vorbereitet oder ist nicht erreichbar"})
  }
  function stepQa(dir,autoplay){
+  if(!qa.surahs.length){qa.title.textContent="Sūrenliste wird geladen …";return}
   var s=currentSurah(),total=s?Number(s.total_verses)||1:1;var n=qa.state.ayah+dir;
   if(n>total){var si=qa.surahs.findIndex(function(x){return Number(x.id)===Number(qa.state.surah)});si=(si+1)%qa.surahs.length;qa.state.surah=Number(qa.surahs[si].id);qa.surah.value=String(qa.state.surah);qa.state.ayah=1;fillAyat()}
   else if(n<1)qa.state.ayah=1;else qa.state.ayah=n;
@@ -3756,7 +3774,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
    qa.surahs=data.surahs||[];qa.surah.innerHTML="";qa.surahs.forEach(function(s){var o=document.createElement("option");o.value=String(s.id);o.textContent=s.id+" · "+s.transliteration;if(Number(s.id)===Number(qa.state.surah))o.selected=true;qa.surah.appendChild(o)});fillAyat();updateQaTitle()
   }).catch(function(){qa.title.textContent="Qurʾān-Player"});
   qa.prev.onclick=function(){stepQa(-1,!qa.audio.paused)};
-  qa.play.onclick=function(){if(qa.audio.paused){if(!qa.audio.src)setQaSource(false);qa.audio.play().catch(function(){})}else qa.audio.pause()};
+  qa.play.onclick=function(){if(qa.audio.paused){qa.audio.dataset.wantsPlayback="yes";if(!qa.audio.src)setQaSource(false);qa.audio.play().catch(function(){qa.title.textContent="Audio derzeit nicht erreichbar · Rezitator wechseln"})}else{qa.audio.dataset.wantsPlayback="no";qa.audio.pause()}};
   qa.next.onclick=function(){stepQa(1,!qa.audio.paused)};
   qa.surah.onchange=function(){qa.state.surah=Number(qa.surah.value);qa.state.ayah=1;fillAyat();setQaSource(!qa.audio.paused)};
   qa.ayah.onchange=function(){qa.state.ayah=Number(qa.ayah.value);setQaSource(!qa.audio.paused)};
@@ -3765,6 +3783,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   qa.audio.onpause=function(){qa.wrap.classList.remove("is-playing");qa.play.textContent="▶"};
   qa.audio.ontimeupdate=function(){var d=qa.audio.duration||0,c=qa.audio.currentTime||0;qa.progress.style.width=(d?Math.min(100,c/d*100):0)+"%"};
   qa.audio.onended=function(){stepQa(1,true)};
+  qa.audio.onerror=function(){if(qa.audio.dataset.fallbackUsed!=="yes"&&qa.audio.src.includes("/quran-audio/")){var resume=qa.audio.dataset.wantsPlayback==="yes";qa.audio.dataset.fallbackUsed="yes";qa.audio.src=everyayahAudioUrl();qa.audio.load();if(resume)qa.audio.play().catch(function(){qa.title.textContent="Audio derzeit nicht erreichbar · Rezitator wechseln"})}else{qa.title.textContent="Audio derzeit nicht erreichbar · Rezitator wechseln"}};
+  if(new URLSearchParams(location.search).get("player")==="expanded")document.getElementById("darV8PlayerExpand")?.click();
   if("mediaSession" in navigator){try{navigator.mediaSession.setActionHandler("play",function(){qa.audio.play()});navigator.mediaSession.setActionHandler("pause",function(){qa.audio.pause()});navigator.mediaSession.setActionHandler("nexttrack",function(){stepQa(1,true)});navigator.mediaSession.setActionHandler("previoustrack",function(){stepQa(-1,true)})}catch(e){}}
  }
 
@@ -3869,16 +3889,13 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  intros.frauenbereich=["FRAUEN","Geprüfte Inhalte","Aussagen mit Quelle und Direktnachweis."];
 
  renders.start=function(){
-  var posts=realData.posts.slice(0,4),duas=realData.duas.slice(0,2),pubs=realData.publications.slice(0,4),props=realData.prophets.slice(0,5);
   return darSmartIntro()+
-   ''+
-   '<section class="section parchment reveal"><div class="section-head"><h2>Ausgewählte Beiträge</h2><a class="text-link desktop-link" data-page="beitraege" href="'+pUrl("beitraege")+'">Alle Beiträge</a></div><div class="two-reading-cols">'+posts.map(function(x){return '<a class="rule-card desktop-link" data-page="beitrag" href="'+pUrl("beitrag","id="+encodeURIComponent(x.id))+'"><div class="kicker">'+escBook(x.category||"Wissen")+'</div><h3>'+escBook(cleanTitle(x.title))+'</h3><p>'+escBook(x.speaker||x.work||"")+'</p></a>'}).join("")+'</div></section>'+
-   '<section class="section reveal"><div class="section-head"><h2>Duʿāʾ</h2><a class="text-link desktop-link" data-page="dua" href="'+pUrl("dua")+'">Alle Duʿāʾ</a></div><div class="two-reading-cols">'+duas.map(function(d){return '<a class="dua-real desktop-link" data-page="dua" href="'+pUrl("dua","id="+encodeURIComponent(d.id))+'"><div class="eyebrow">'+escBook(d.category)+'</div><h3>'+escBook(d.title)+'</h3><div class="dua-ar" dir="rtl">'+escBook(d.arabic)+'</div><div class="real-source"><b>Quelle:</b> '+escBook(d.source)+'</div></a>'}).join("")+'</div></section>'+
-   '<section class="section parchment reveal"><div class="section-head"><h2>Bibliothek</h2><a class="text-link desktop-link" data-page="bibliothek" href="'+pUrl("bibliothek")+'">Alle Werke</a></div><div class="real-cover-grid">'+pubs.map(function(b){return '<a class="real-cover desktop-link" data-page="werk" href="'+pUrl("werk","type=pub&id="+encodeURIComponent(b.id))+'"><div class="real-cover-visual">'+(b.coverUrl?'<img src="'+escBook(b.coverUrl)+'" alt="">':"")+'</div><h3>'+escBook(b.title)+'</h3><small>'+escBook(b.category||"Publikation")+(b.publishedAt?' · '+escBook(b.publishedAt):"")+'</small></a>'}).join("")+'</div></section>'+
-   '<section class="section reveal"><div class="section-head"><h2>Die Propheten</h2><a class="text-link desktop-link" data-page="propheten" href="'+pUrl("propheten")+'">Alle öffnen</a></div><div class="list-lines">'+props.map(function(x){return '<a class="list-row desktop-link" data-page="prophet" href="'+pUrl("prophet","id="+encodeURIComponent(x.id))+'"><span class="meta">'+(x.uluAlAzm?"Ulū al-ʿAzm":"Prophet")+'</span><strong>'+escBook(x.name)+' '+escBook(x.honorific||"")+'</strong><small>'+escBook(x.people||(x.roles||[]).join(" · "))+'</small></a>'}).join("")+'</div></section>'+footer()
+    '<section class="dar-v8-discover"><div class="dar-v8-section-bar"><div><div class="dar-v8-section-kicker">DEIN WISSENSZENTRUM</div><h2>Alle Bereiche entdecken</h2><p>Jeder Bereich ist direkt zugänglich, mit eigenem Quellen- und Suchkontext.</p></div></div><div class="dar-v8-discover-grid">'+
+    [["quran","Qurʾān","quran.png"],["hadith","Ḥadīṯ","hadith.png"],["beitraege","Beiträge","posts.png"],["dua","Duʿāʾ","dua.png"],["bibliothek","Bibliothek","library.png"],["frauen","Frauen","frauen.png"],["wissen","Wissen","ilm.png"],["gebetszeiten","Gebetszeiten","prayer.png"]].map(function(x){return '<a class="dar-v8-discover-link desktop-link" data-page="'+x[0]+'" href="'+pUrl(x[0])+'"><img src="/assets/dar-3d-icons/'+x[2]+'" alt="" loading="lazy"><strong>'+x[1]+'</strong><span>↗</span></a>'}).join("")+
+    '</div></section>'+footer()
  };
-
- renders.beitraege=function(){
+ 
+renders.beitraege=function(){
   var q=new URLSearchParams(location.search),cat=q.get("cat")||"",cats=[];
   realData.posts.forEach(function(x){if(x.category&&cats.indexOf(x.category)<0)cats.push(x.category)});
   var list=cat?realData.posts.filter(function(x){return x.category===cat}):realData.posts;
@@ -4045,8 +4062,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  };
 
  renders.suche=function(){
-  return realIntro("WISSENSCHAT","Fragen stellen und Fundstellen verstehen.","Die Suche liefert ausschließlich vorhandene Beiträge, Duʿāʾs, Werke und Quelleneinträge – ohne erfundene Antworten.")+
-   '<section class="section parchment reveal"><div class="v8-chat-panel"><div class="v8-chat-title"><img src="/assets/dar-3d-icons/spark.png" alt=""><div><h2>Masǧid al-ʿIlm · Interaktiver Quellenfinder</h2><p>Stelle deine Frage. Erhalte nachweisbare Fundstellen aus dem vorhandenen DĀR-Wissensbestand.</p></div></div><div id="v8ChatReply" aria-live="polite"></div><div class="v8-chat-input-wrap"><input id="siteSearch" type="search" class="search-input" placeholder="Tawḥīd, Īmān, Fiqh, Hadith, Āṯār – frage hier …" autocomplete="off" aria-label="Frage an Masǧid al-ʿIlm"><button id="v8ChatSend" type="button">Frage stellen ↗</button></div><div id="searchResults" class="list-lines" style="margin-top:17px"></div></div></section>'+footer()
+  return realIntro("SUCHE","Die gesamte Wissensseite durchsuchen.","Suche gleichzeitig in Beiträgen, Duʿāʾ, Bibliothek und Propheten.")+
+   '<section class="section parchment reveal"><input id="siteSearch" class="search-input" type="search" placeholder="Begriff, Person, Werk, Duʿāʾ oder Prophet …" autocomplete="off"><div id="searchResults" class="list-lines" style="margin-top:20px"></div></section>'+footer()
  };
  initSearch=function(){
   var input=document.getElementById("siteSearch"),out=document.getElementById("searchResults");if(!input||!out)return;
@@ -4757,6 +4774,39 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  // --- end real visitor content v8 ---
 
  try{initQa()}catch(e){try{console.error("Desktop Quran player:",e)}catch(_){}}
+
+ // V8 routes that must never fall back silently to the start page.
+ renders.hadith=function(){
+  return '<section class="dar-v8-source-module" id="darV8HadithSection">'+
+   '<div class="dar-v8-mini-heading">ḤADĪṮ · ĀṮĀR · ORIGINALQUELLEN</div>'+
+   '<h2>Eine Überlieferung finden</h2><p>Durchsuche unseren katalogisierten Bestand nach Inhalt, Kapitel, Buch, Nummer oder Thema. Grad und Quelle bleiben unverändert.</p>'+
+   '<label for="darV8HadithQuery">Ḥadīṯ oder Stichwort</label>'+
+   '<input class="dar-v8-source-query" type="search" id="darV8HadithQuery" placeholder="Zum Beispiel: Absicht, Īmān oder al-Buḫārī …" maxlength="250" autocomplete="off">'+
+   '<div id="darV8HadithCount" class="dar-v8-result-count">Quelle wird geladen …</div><div id="darV8HadithResults" aria-live="polite"></div></section>'+footer()
+ };
+ renders.gebetszeiten=function(){
+  return '<section class="dar-v8-source-module" id="darV8PrayerOverview">'+
+   '<div class="dar-v8-mini-heading">GEBETSZEITEN · DEIN STANDORT</div>'+
+   '<h2>Die fünf täglichen Gebete</h2><p>Die Zeiten stammen aus unserer bestehenden Standortberechnung. Ohne freigegebenen Standort werden keine Uhrzeiten erfunden.</p>'+
+   '<div class="dar-v8-prayer-grid">'+
+   [["fajr","Fajr"],["dhuhr","Ẓuhr"],["asr","ʿAṣr"],["maghrib","Maġrib"],["isha","ʿIshāʾ"]].map(function(p){return '<div class="dar-v8-prayer-cell"><span>'+p[1]+'</span><strong data-v8-copy-prayer="'+p[0]+'">—</strong></div>'}).join("")+
+   '</div><div class="dar-v8-prayer-status" data-v8-prayer-status>Standort wird vorbereitet …</div>'+
+   '<button type="button" class="dar-v8-inline-action" data-v8-location>Standort auswählen oder aktualisieren ↗</button>'+
+   '</section>'+footer()
+ };
+ renders.suche=function(){
+  return '<section class="dar-v8-knowledge-chat" aria-label="Interaktiver, websitebasierter Wissensfinder">'+
+   '<div class="dar-v8-chat-heading"><div class="dar-v8-chat-symbol"><img src="/assets/dar-3d-icons/spark.png?v=1095" alt=""></div>'+
+   '<div><div class="dar-v8-mini-heading">MASǦID AL-ʿILM · QUELLENBASIERTER CHAT</div>'+
+   '<h2>Was möchtest du heute wissen?</h2><p>Stelle Fragen zu Aqīdah, Fiqh, Qurʾān, Sunnah und Āṯār. Wir finden Belege in unseren bestehenden Inhalten, statt Antworten zu erfinden.</p></div></div>'+
+   '<form id="darV8ChatForm" class="dar-v8-chat-form" role="search">'+
+   '<label for="siteSearch">Deine Frage</label><div class="dar-v8-chat-inputrow"><input id="siteSearch" class="search-input" type="search" maxlength="300" placeholder="Frage stellen, z. B. Was bedeutet Tawḥīd?" autocomplete="off"><button type="submit">Quellen prüfen ↗</button></div></form>'+
+   '<div class="dar-v8-chat-samples"><button type="button" data-v8-ask="Was ist Tawḥīd?">Was ist Tawḥīd?</button><button type="button" data-v8-ask="Was ist Īmān?">Was ist Īmān?</button><button type="button" data-v8-ask="Was bedeutet Uṣūl al-Fiqh?">Uṣūl al-Fiqh</button><button type="button" data-v8-ask="Was ist Shirk?">Shirk</button></div>'+
+   '<div id="darV8ChatSummary" class="dar-v8-chat-summary" aria-live="polite"></div>'+
+   '<div class="dar-v8-result-heading">Fundstellen und Direktnachweise</div><div id="searchResults" class="list-lines dar-v8-chat-results"></div>'+
+   '<div class="dar-v8-source-disclaimer">Nur vorhandene Quellen werden angezeigt. Dies ist kein generativer Fatwā-Dienst.</div></section>'+footer()
+ };
+
  // Never leave the website empty while shared app data is loading.
  try{render()}catch(e){try{console.error("Desktop initial render:",e)}catch(_){}}
  loadDesktopContent().then(function(){render()}).catch(function(err){try{console.error("Desktop content:",err)}catch(_){};render()})
