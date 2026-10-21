@@ -8,6 +8,7 @@ on:
       - feature/tr-openai-first-manuscript-20261021
     paths:
       - '.github/workflows/dar-turkish-openai-single-pilot.yml'
+      - 'desktop-preview/i18n-core-v1/generate-translation-drafts.cjs'
   workflow_dispatch:
 permissions:
   contents: read
@@ -43,7 +44,7 @@ jobs:
         env:
           DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
           DAR_I18N_AI_API_URL: https://api.openai.com/v1/chat/completions
-          DAR_I18N_AI_MODEL: gpt-4.1-mini
+          DAR_I18N_AI_MODEL: gpt-4.1
           DAR_I18N_PROVIDER_APPROVED: 'yes'
         run: |
           set -euo pipefail
