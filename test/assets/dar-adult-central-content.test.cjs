@@ -12,7 +12,7 @@ async function execute(tamper=null,selected="tr"){
  const manifest={schemaVersion:1,locale:"tr",originalLocale:"de",scope:"adult-only",
  onlyApproved:true,records:{[id]:{kind,path:filename,sourceHash:sha}}};
  const record={schemaVersion:1,id,kind,locale:"tr",sourceHash:sha,
-  status:"approved",fields:{title:"Nefis",body:"Onaylı Türkçe metin."},immutable:original.immutable};
+  status:"approved",fields:{title:"Nefis",body:"Onaylı Türkçe metin."},immutable:{...original.immutable}};
  const files={[BASE+"tr/manifest.json"]:manifest,[BASE+filename]:record};
  if(tamper)tamper(files,manifest,record);
  const requested=[];
