@@ -14,6 +14,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from quiz_v4_no_double_charge_guard import protect_paid_texts
 from quiz_v4_quarantine import quarantined_originals
+from quiz_v4_native_fusha_reuse import load_mapping, resolve_text_originals
 
 ROOT=Path(__file__).resolve().parents[2]
 MODEL="eleven_v4"
@@ -62,6 +63,7 @@ def main():
     need(not (charged&set(by_text)),"paid missing Flow text also charged by direct TTS")
     recorded=set(stored)
     blocked_pronunciation_texts, blocked_pronunciation_generation_ids = quarantined_originals(ROOT)
+    native_mapping,native_assets=load_mapping(ROOT)
     # Connected ElevenLabs Flow originals may already be charged or reserved.
     # Exclude them from future paid requests until the ORIGINAL is imported.
     protected=protect_paid_texts(ROOT,reg,ledger)
@@ -100,19 +102,33 @@ def main():
                 need(isinstance(segments,list) and bool(segments) and
                      " ".join(segments)==entry["text"],"wrong exact text/segment join")
                 for segment in segments:
+                    # The canonical mixed German + native Arabic utterance can
+                    # consist of REAL existing MP3 originals even though the
+                    # full sentence has never been synthesized. Expand it
+                    # using the same strict source map as the actual importer.
                     if segment in recorded:
                         if segment in blocked_pronunciation_texts:
                             missing_bad.add(segment)
                         continue
-                    if segment in by_text:
-                        missing_old.update(by_text[segment])
-                    elif segment in pending_flow:
-                        missing_flow.add(segment)
+                    if segment in native_mapping:
+                        _rows,missing_sources=resolve_text_originals(
+                            segment,stored,native_mapping,native_assets)
                     else:
-                        need(segment not in protected,
-                             "previously charged or reserved V4 text in new credit queue")
-                        missing_new.add(segment)
-                        pending[segment].add((qid,age,part))
+                        missing_sources=[segment]
+                    for speech in missing_sources:
+                        if speech in recorded:
+                            if speech in blocked_pronunciation_texts:
+                                missing_bad.add(speech)
+                            continue
+                        if speech in by_text:
+                            missing_old.update(by_text[speech])
+                        elif speech in pending_flow:
+                            missing_flow.add(speech)
+                        else:
+                            need(speech not in protected,
+                                 "previously charged or reserved V4 text in new credit queue")
+                            missing_new.add(speech)
+                            pending[speech].add((qid,age,part))
             else:
                 raise RuntimeError("Unknown V4 recipe mode; refusing paid queue")
             if missing_old or missing_new or missing_flow or missing_bad:
