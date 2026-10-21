@@ -124,16 +124,42 @@ function scanQuiz(){
  }
 }
 function scanLearning(){
- // Optional adult-specific canonical catalog, not Kids Academy (its app is independent).
+ // Optional adult-specific JSON catalogs; never crawl independent Kids Academy.
  const candidates=["data/learning-content.json","content/learning/lessons-index.json"];
- let any=false;
+ let count=0;
  for(const sourcePath of candidates){
   const doc=json(sourcePath);
   const rows=Array.isArray(doc)?doc:Array.isArray(doc?.lessons)?doc.lessons:Array.isArray(doc?.items)?doc.items:null;
-  if(!rows)continue;any=true;
-  for(const l of rows){if(!l?.id)continue;add("learning",l.id,sourcePath,{title:l.title||"",body:l.body||l.text||"",explanation:l.explanation||""},{source:l.source||"",sourceLinks:l.sourceLinks||[]})}
+  if(!rows)continue;
+  for(const l of rows){if(!l?.id)continue;add("learning",l.id,sourcePath,{title:l.title||"",body:l.body||l.text||"",explanation:l.explanation||""},{source:l.source||"",sourceLinks:l.sourceLinks||[]});count++}
  }
- if(!any)issues.push({kind:"learning",issue:"adult-learning-source-schema-not-yet-identified"});
+ // Adult learning pages such as /lernen/tawhid-iman-akhlaq/ contain dedicated
+ // inline quizzes. Extract only a narrow, verified data literal pattern:
+ // no eval, no execution, no alterations to original HTML.
+ let entries=[];
+ try{entries=fs.readdirSync(path.join(ROOT,"lernen"),{withFileTypes:true})}
+ catch(_){}
+ function decoded(quoted){try{return JSON.parse('"'+quoted+'"')}catch(_){return null}}
+ for(const entry of entries){
+  if(!entry.isDirectory()||!/^[a-zA-Z0-9_-]+$/.test(entry.name))continue;
+  const slug=entry.name,sourcePath="lernen/"+slug+"/index.html",html=read(sourcePath);
+  if(!html)continue;
+  const script=html.match(/const\s+questions\s*=\s*\[([\s\S]*?)\]\s*;/);
+  if(!script){issues.push({kind:"learning",file:sourcePath,issue:"html-learning-page-needs-structured-adapter"});continue}
+  const pattern=/\{\s*q:"((?:\\.|[^"\\])*)"\s*,\s*a:\[([^\]]*)\]\s*,\s*correct:(\d+)\s*,\s*why:"((?:\\.|[^"\\])*)"\s*\}/g;
+  let parsed=0,match;
+  while((match=pattern.exec(script[1]))!==null){
+   const question=decoded(match[1]),why=decoded(match[4]);
+   let options=null;try{options=JSON.parse("["+match[2]+"]")}catch(_){}
+   const correct=Number(match[3]);
+   if(!question||!why||!Array.isArray(options)||!options.length||!Number.isSafeInteger(correct)||correct<0||correct>=options.length)continue;
+   parsed++;count++;
+   add("learning",slug+"-question-"+parsed,sourcePath,{question,answers:options,explanation:why,title:slug},
+   {correctIndex:correct,originalHtmlPath:sourcePath,sourcePage:"/lernen/"+slug+"/"});
+  }
+  if(!parsed)issues.push({kind:"learning",file:sourcePath,issue:"inline-learning-quiz-unparsed"});
+ }
+ if(!count)issues.push({kind:"learning",issue:"adult-learning-source-schema-not-yet-identified"});
 }
 function translationPath(item,locale){
  const dir=item.kind;
