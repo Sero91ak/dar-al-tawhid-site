@@ -1,0 +1,86 @@
+{
+  "scope": "KIDS_QUIZ_V4_450_CURRENT_REVIEW_QA",
+  "asOf": "2026-10-22",
+  "sourceEvidence": {
+    "verifiedOfflineGitHubRun": 39691062111,
+    "originalsArchiveArtifactId": 12388598324,
+    "completeQuestions": 426,
+    "incompleteQuestions": 24,
+    "byAge": {
+      "4-6": 150,
+      "7-8": 141,
+      "9-10": 135
+    },
+    "previouslyPaidOldOriginalsRecovered": 9,
+    "previouslyPaidFlowTotalOriginals": 56,
+    "technicalOriginalCheckPassed": true,
+    "safelyCommittedToGitHubBranch": false
+  },
+  "masterVoice": {
+    "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+    "modelId": "eleven_v4"
+  },
+  "candidatesASR": [
+    {
+      "questionId": "kids-quiz-624",
+      "part": "question",
+      "generationId": "zzXJWv2JBGxX9M4LOhb9",
+      "automatedASRMatchedExpectedText": true,
+      "recognizedText": "Was lehrt Sūrat ash-Sharḥ nach dem Ende einer Aufgabe?",
+      "arabicPhoneticQualityProven": false,
+      "humanListeningApproved": false
+    },
+    {
+      "questionId": "kids-quiz-332",
+      "part": "explanation",
+      "generationId": "pY6qZXS4RxK21jYECdmh",
+      "automatedASRMatchedExpectedText": true,
+      "recognizedText": "Allah erfüllte Sein Versprechen und tröstete Mūsās Mutter.",
+      "arabicPhoneticQualityProven": false,
+      "humanListeningApproved": false
+    },
+    {
+      "questionId": "kids-quiz-859",
+      "part": "explanation",
+      "generationId": "WATQYughEOMdK8YOLKkL",
+      "automatedASRMatchedExpectedText": true,
+      "recognizedText": "Luqmāns Rat lehrt maßvolles Auftreten und eine ruhige Stimme.",
+      "arabicPhoneticQualityProven": false,
+      "humanListeningApproved": false
+    },
+    {
+      "questionId": "kids-quiz-177",
+      "part": "explanation",
+      "generationId": "iDBVEZi7Pa9YWyzev5ZQ",
+      "automatedASRMatchedExpectedText": true,
+      "recognizedText": "Allah nahm Ādams Reue an und nennt Sich den Reue-Annehmenden und Barmherzigen.",
+      "arabicPhoneticQualityProven": false,
+      "humanListeningApproved": false
+    },
+    {
+      "questionId": "kids-quiz-331",
+      "part": "question",
+      "generationId": "FoAZ1Qxayxu3Nj8a9zgq",
+      "automatedASRMatchedExpectedText": true,
+      "recognizedText": "Was gab Allah Mūsās Mutter ein, als sie Angst um ihn hatte?",
+      "arabicPhoneticQualityProven": false,
+      "humanListeningApproved": false
+    },
+    {
+      "questionId": "kids-quiz-331",
+      "part": "explanation",
+      "generationId": "O7JafEKW0zTjINa5Ice5",
+      "automatedASRMatchedExpectedText": true,
+      "recognizedText": "Allah beruhigte Mūsās Mutter und versprach, ihn zu ihr zurückzubringen.",
+      "arabicPhoneticQualityProven": false,
+      "humanListeningApproved": false
+    }
+  ],
+  "qaGate": {
+    "voicePronunciationAccepted": false,
+    "actualAyahTTSAllowed": false,
+    "all450AudioReady": false,
+    "liveRelease": false
+  },
+  "nextAction": "Finish artifact-only GitHub original import and then import 6 already generated candidates without retrying any TTS"
+}
