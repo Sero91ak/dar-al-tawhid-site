@@ -170,6 +170,57 @@ const EXTRA_ENTRIES=[
 const dictionary=new Map([...ENTRIES,...EXTRA_ENTRIES]),backward=new Map(),ambiguous=new Set();
 const SUPPORTED=new Set(["de","tr","en","ar","ku","ckb","bs"]);
 const rtl=new Set(["ar","ckb"]),languagePacks=new Map();
+
+const titleByGerman=new Map();
+const originalTitles=new WeakMap();
+const HEADLINE_SELECTORS=[
+ "#dv3Latest .dv3-post-body b","#dhpPosts .dhp-post-capsule h3","#dhpTodayName",
+ ".dua-card h3",".dua-card .dua-title",".duas-card h3",".duas-card .dua-title",
+ "[data-dua-id] .dua-title","[data-post-id] .post-title"
+].join(",");
+function registerTitleData(data){
+ if(data?.schemaVersion!==1||data.scope!=="adult-test-visible-titles-only"||
+    data.mode!=="editorial-title-draft"||data.paidApiCalls!==0||
+    !data.records||typeof data.records!=="object")return false;
+ const prepared=new Map();
+ for(const [key,record] of Object.entries(data.records)){
+  if(key!==(record.kind+":"+record.id)||!["post","dua"].includes(record.kind)||
+     typeof record.sourceTitle!=="string"||record.sourceTitle.length>220||
+     Object.keys(record.translations||{}).sort().join("|")!=="ar|bs|ckb|en|ku|tr")return false;
+  if([...SUPPORTED].filter(x=>x!=="de").some(k=>typeof record.translations[k]!=="string"||!record.translations[k].trim()))
+    return false;
+  if(prepared.has(record.sourceTitle))return false;
+  prepared.set(record.sourceTitle,record);
+ }
+ titleByGerman.clear();for(const [key,val] of prepared)titleByGerman.set(key,val);
+ schedule();return true;
+}
+function updateKnownTitles(locale){
+ const nodes=global.document?.querySelectorAll?.(HEADLINE_SELECTORS);
+ if(!nodes)return;
+ nodes.forEach(element=>{
+  // Deliberately only title-only leaf nodes, never the article or du'a body.
+  if(element.children?.length)return;
+  const current=String(element.textContent||"");
+  let old=originalTitles.get(element);
+  if(old&&current!==old.source&&current!==old.rendered)old=null;
+  if(!old){
+   if(!titleByGerman.has(current))return;
+   old={source:current,rendered:current};originalTitles.set(element,old);
+  }
+  const record=titleByGerman.get(old.source);
+  const id=element.closest?.("[data-dv3-value],[data-dhp-value],[data-post-id],[data-dua-id]");
+  const boundId=id?.getAttribute?.("data-dv3-value")||
+                id?.getAttribute?.("data-dhp-value")||
+                id?.getAttribute?.("data-post-id")||
+                id?.getAttribute?.("data-dua-id");
+  if(boundId&&boundId!==record?.id)return;
+  const desired=locale==="de"?old.source:record?.translations?.[locale]||old.source;
+  if(element.textContent!==desired)element.textContent=desired;
+  old.rendered=desired;
+ });
+}
+
 function registerLocaleData(pack){
  if(pack?.schemaVersion!==1||pack.sourceLocale!=="de"||
     pack.scope!=="adult-interface-only"||pack.noPaidProvider!==true||!pack.translations)return false;
@@ -288,7 +339,7 @@ function translateExact(value,language="tr"){
 }
 
 for(const [de,tr] of ENTRIES){if(backward.has(tr)&&backward.get(tr)!==de)ambiguous.add(tr);else backward.set(tr,de)}
-const EXCLUDE="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],[lang='ar'],[dir='rtl'],[class*='quran-arabic'],[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],[class*='post-content'],[class*='hadith-text'],[class*='qsource-statement'],[class*='source-quote'],[data-canonical-content]";
+const EXCLUDE="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],[lang='ar'],[dir='rtl'],[class*='quran-arabic'],[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],[class*='post-content'],[class*='hadith-text'],[class*='qsource-statement'],[class*='source-quote'],[class*='prophets-quote__de'],[class*='verse-translation'],[class*='dua-meaning'],[data-canonical-content]";
 const originals=new WeakMap(),attributeOriginals=new WeakMap();
 const ATTRS=["placeholder","aria-label","title"];
 function currentLocale(){try{const v=global.localStorage?.getItem(KEY);return SUPPORTED.has(v)?v:"de"}catch(_){return"de"}}
@@ -342,6 +393,7 @@ function apply(root=global.document?.body,locale=currentLocale()){
   if(node.nodeType===3){transformText(node,locale);seen++}
  }
  if(doc.documentElement){doc.documentElement.lang=locale;doc.documentElement.dir=rtl.has(locale)?"rtl":"ltr"}
+ updateKnownTitles(locale);
  return seen;
 }
 let queued=false;
@@ -386,7 +438,8 @@ global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,
   get catalogStatus(){return remoteCatalogState},
   hasTranslation:(de)=>dictionary.has(de),
   translateValue:translateExact,
-  registerLocaleData,supportedLocales:[...SUPPORTED],formatCalendarDate,
+  registerLocaleData,registerTitleData,supportedLocales:[...SUPPORTED],formatCalendarDate,
+  get localizedDraftTitleCount(){return titleByGerman.size},
   translatePrayerName:(source,locale=currentLocale())=>translateExact(source,locale)||source,
   translatedFor:code=>code==="tr"?dictionary.size:(languagePacks.get(code)?.size||0),
   contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};
