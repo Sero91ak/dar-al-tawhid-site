@@ -85,3 +85,5 @@ Neue nummerierte Quellenlinks gehören immer in `q/<nummer>/`.
 - Präzise Quellen, arabischer Originaltext, Primärnachweise und vorhandene Q-Nummern dürfen bei UI-Korrekturen nicht verändert werden.
 
 | `q/47` | Tawḥīd, Īmān und Akhlāq – ein Dīn | `Ibn ʿAbbās; Qatādah` | Tafsīr zu an-Naḥl 16:90: Tawḥīd, Pflichten und guter Charakter. |
+
+| `q/48` | Die Seele zur Rechenschaft ziehen | `al-Ḥasan al-Baṣrī` | Ibn al-Mubārak, az-Zuhd Nr. 307, 1/104; Ibn Abī Shaybah, al-Muṣannaf Nr. 5047, 8/257 – Selbstprüfung vor dem Tag der Abrechnung. |
