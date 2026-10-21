@@ -16,8 +16,8 @@ for(const locale of EXPECTED.slice(1)){
 }
 assert.equal(titles.bodyTranslation,false);
 assert.equal(titles.paidApiCalls,0);
-assert(Object.keys(titles.records).length>=115);
-assert.equal(Object.values(titles.records).filter(x=>x.kind==="post").length>=18,true);
+assert(Object.keys(titles.records).length>=131);
+assert.equal(Object.values(titles.records).filter(x=>x.kind==="post").length>=34,true);
 for(const code of EXPECTED.slice(1)){
  const map=pack.translations[code];
  for(const german of ["API-Nachweis","Weiterlesen ›","Keine Treffer.","Geprüfte Beziehungen","Direktnachweis",
