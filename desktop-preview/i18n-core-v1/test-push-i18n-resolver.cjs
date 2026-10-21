@@ -109,6 +109,13 @@ test("latest subscription wins, and newer unsubscribe blocks stale opt-in", () =
  assert.throws(()=>buildPreview({event:baseEvent,copies,registrations:[old,blocked],registry}),/opt-in/);
 });
 
+test("same timestamp conflict always prefers opt-out, regardless of input order",()=>{
+ const base={subscription_id:"one-sub",app_locale:"fr",enabled:true,push_opted_in:true,
+  app_environment:"test",last_synced_at:"2026-10-22T00:30:00Z"};
+ const disabled={...base,push_opted_in:false,app_locale:"en"};
+ assert.throws(()=>buildPreview({event:baseEvent,copies,registrations:[base,disabled]}),/opt-in/);
+ assert.throws(()=>buildPreview({event:baseEvent,copies,registrations:[disabled,base]}),/opt-in/);
+});
 test("privacy and lane isolation fail closed", () => {
   const base={subscription_id:"approved-recipient",push_opted_in:true,enabled:true,app_environment:"test",app_locale:"en"};
   const attempt=(subscription,event=baseEvent)=>resolveRecipientPush({event,copies,subscription});
