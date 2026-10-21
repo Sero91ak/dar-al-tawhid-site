@@ -50,5 +50,10 @@ try{
  assert(expanded.locales.includes("fr"));
  assert.equal(expanded.summary.translationTasks,63);
  assert.equal(expanded.queue.filter(x=>x.locale==="fr").length,9);
+ const batch=JSON.parse(cp.execFileSync(process.execPath,[path.join(__dirname,"select-post-batch.cjs"),"--inventory",out,"--batch","1"],{encoding:"utf8"}));
+ assert.equal(batch.totalEligiblePosts,1);
+ assert.deepEqual(batch.contentIds,["post:one"]);
+ assert.equal(batch.targetLocales.length,7);
+ assert(batch.items[0].openLocales.includes("fr"));
  console.log("PASS: nine canonical content records, 7→8 dynamic languages, stable SHA, stale review invalidation, immutable Arabic/quiz fields.");
 }catch(e){console.error(e);process.exitCode=1}finally{fs.rmSync(dir,{recursive:true,force:true})}
