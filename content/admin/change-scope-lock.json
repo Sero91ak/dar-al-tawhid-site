@@ -8578,6 +8578,16 @@
         ".github/workflows/dar-v8-faithful-preview-qa.yml"
       ],
       "expiresAt": "2026-11-30T23:59:00Z"
+    },
+    {
+      "id": "adult-browser-v8-cross-page-qa-20261021",
+      "at": "2026-10-21T15:00:00+02:00",
+      "approvedBy": "user-explicit-20261021-full-browser-site-modernization",
+      "reason": "Read-only visual QA for the public browser's all-route V8 responsive rollout; no CI inference, paid models, production pushes, native apps, widget, Kids or sources altered.",
+      "paths": [
+        ".github/workflows/dar-v8-all-sections-qa.yml"
+      ],
+      "expiresAt": "2026-11-05T23:59:59Z"
     }
   ],
   "enabled": true
