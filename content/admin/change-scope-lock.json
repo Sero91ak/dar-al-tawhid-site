@@ -8545,6 +8545,16 @@
         "scripts/verify-test-app-deploy.js"
       ],
       "expiresAt": "2026-11-20T23:59:00.000Z"
+    },
+    {
+      "id": "adult-i18n-worklist-readonly-20261021",
+      "at": "2026-10-21T11:11:00+02:00",
+      "approvedBy": "user-explicit-adult-multilingual-autonomous-translation-inventory-20261021",
+      "reason": "Only a read-only CI inventory workflow for adult multilingual translation staging; no live content, push, native app, prayer, widget or worker changes.",
+      "paths": [
+        ".github/workflows/dar-i18n-translation-inventory.yml"
+      ],
+      "expiresAt": "2026-11-30T23:59:00.000Z"
     }
   ],
   "enabled": true
