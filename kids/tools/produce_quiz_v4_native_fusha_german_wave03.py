@@ -62,6 +62,11 @@ def candidate_batch():
     registry,paid=load(REG),load(PAID)
     require(registry["modelId"]==MODEL and registry["voiceId"]==VOICE and registry["live"] is False,
             "wrong primary original V4 registry")
+    for earlier in load(ROOT/"kids/data/quiz-v4-20261021-native-fusha-german25-wave02-ledger.json")["entries"]:
+        saved=registry["textClips"].get(earlier["sourceText"])
+        require(saved is not None and saved.get("sha256")==earlier["mp3Sha256"]
+                and saved.get("providerRequestId")==earlier["providerRequestId"],
+                "wave02 paid original not imported atomically; STOP to prevent duplicate billing")
     protected=protect_paid_texts(ROOT,registry,paid)
     owner=load(ROOT/"data/pronunciation/elevenlabs-production.json")["pronunciationDictionary"]
     p=ROOT/owner["masterFile"]
