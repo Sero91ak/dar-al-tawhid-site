@@ -101,6 +101,7 @@ jobs:
                   driver.save_screenshot(output+'/'+device+'-'+page+'.png')
               driver.get('http://127.0.0.1:8765/desktop-preview/index.html?page=start')
               WebDriverWait(driver,25).until(lambda d:bool(d.find_elements(By.ID,'darV8PlayerExpand')))
+              driver.execute_script("arguments[0].scrollIntoView({block:'center',inline:'nearest',behavior:'instant'})",driver.find_element(By.ID,'darV8PlayerExpand'))
               driver.find_element(By.ID,'darV8PlayerExpand').click()
               expanded=driver.execute_script("return document.getElementById('darV8PlayerExpand').getAttribute('aria-expanded')")
               if expanded!='true':raise RuntimeError('Mini player expand did not respond')
