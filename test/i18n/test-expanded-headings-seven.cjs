@@ -43,10 +43,18 @@ const props={
  closest:()=>({getAttribute:()=> "wer-gutes-zeigt-bekommt-anteil-am-lohn-198"}),
  getAttribute:()=>null
 };
+const repeatedA={
+ nodeType:1,children:[],textContent:"📖 Der Qurʾān ist Allahs Wort",
+ closest:()=>({getAttribute:()=> "ahmad-quran-kalam-allah-001"}),getAttribute:()=>null
+};
+const repeatedB={
+ nodeType:1,children:[],textContent:"📖 Der Qurʾān ist Allahs Wort",
+ closest:()=>({getAttribute:()=> "abu-hatim-quran-kalam-allah-001"}),getAttribute:()=>null
+};
 const doc={
  documentElement:{lang:"de",dir:"ltr"},body,readyState:"loading",
  createTreeWalker(){let i=-1;return{nextNode:()=>nodes[++i]||null}},
- querySelectorAll:()=>[props],addEventListener:()=>{}
+ querySelectorAll:()=>[props,repeatedA,repeatedB],addEventListener:()=>{}
 };
 let lng="de";
 const w={location:{pathname:"/test/"},document:doc,NodeFilter:{SHOW_ELEMENT:1,SHOW_TEXT:4},
@@ -63,6 +71,10 @@ for(const locale of EXPECTED){
  assert.equal(prayer.nodeValue,locale==="de"?"Faǧr":(locale==="tr"?"Sabah (Fecr)":v["Faǧr"]),locale+" prayer");
  assert.equal(props.textContent,locale==="de"?titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].sourceTitle:
     titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].translations[locale],locale+" post title");
+ const idOne=titles.records["post:ahmad-quran-kalam-allah-001"];
+ const idTwo=titles.records["post:abu-hatim-quran-kalam-allah-001"];
+ assert.equal(repeatedA.textContent,locale==="de"?idOne.sourceTitle:idOne.translations[locale],locale+" repeated title A");
+ assert.equal(repeatedB.textContent,locale==="de"?idTwo.sourceTitle:idTwo.translations[locale],locale+" repeated title B");
  assert.equal(original.nodeValue,"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً","Arabic source modified");
  assert.equal(excluded.nodeValue,"Nicht authentisch belegt","source text modified");
  assert.equal(doc.documentElement.dir,["ar","ckb"].includes(locale)?"rtl":"ltr");
