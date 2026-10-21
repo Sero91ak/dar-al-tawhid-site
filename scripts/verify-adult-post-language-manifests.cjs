@@ -82,9 +82,12 @@ for (const file of files) {
     if (item.canonicalLocale !== "de" || !item.languages?.de) throw Error("German original missing");
     if (post.meta.status !== "published" && item.languages.de.publicDisplayAllowed !== false)
       throw Error("Unpublished German post is publicly marked");
-    const ids = Object.keys(locales).sort();
-    const declared = [...(item.supportedLocales || [])].sort();
-    if (JSON.stringify(ids) !== JSON.stringify(declared)) throw Error("Locale catalog mismatch");
+    const registered = new Set(Object.keys(locales));
+    const declared = [...(item.supportedLocales || [])];
+    if (!declared.includes("de") || declared.some(code => !registered.has(code)) ||
+        new Set(declared).size !== declared.length) throw Error("Unknown, duplicate or missing canonical locale");
+    // New languages are added to the worklist automatically. Legacy manifests may omit them
+    // until reviewed translations are attached; an omitted language is never public.
     for (const code of declared) {
       const lang = item.languages[code];
       if (!lang || lang.name !== locales[code].name) { fail(id, "Language metadata missing: " + code); continue; }
