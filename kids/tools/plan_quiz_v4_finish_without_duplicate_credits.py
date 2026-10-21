@@ -26,6 +26,7 @@ LEDGER=ROOT/"kids/data/quiz-v4-450-paid-generation-ledger.json"
 PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
 NINE=ROOT/"kids/data/quiz-v4-missing9-prepaid-originals.json"
 FLOW=ROOT/"kids/data/quiz-v4-connected-flow-originals-ledger.json"
+OLDER_JOURNAL=ROOT/"kids/data/quiz-v4-older-stage1-request-journal.json"
 STAGE=ROOT/"kids/review-only/quiz-v4-450-actual-mp3-import.json"
 RELEASE=ROOT/"kids/data/quiz-curation-release.json"
 OUT=ROOT/"kids/review-only/quiz-v4-450-next-completion-priority.json"
@@ -73,6 +74,11 @@ def main():
     # Connected ElevenLabs Flow originals may already be charged or reserved.
     # Exclude them from future paid requests until the ORIGINAL is imported.
     protected=protect_paid_texts(ROOT,reg,ledger)
+    uncertain_journal=load(OLDER_JOURNAL)
+    need(uncertain_journal["modelId"]==MODEL and uncertain_journal["voiceId"]==VOICE,
+         "uncertain paid source journal changed")
+    uncertain_hashes={entry["textSHA256"] for entry in uncertain_journal["entries"]
+                      if entry["status"]=="REQUEST_STARTED_UNCONFIRMED"}
     flow=load(FLOW)
     need(flow.get("modelId")==MODEL and flow.get("voiceId")==VOICE
          and flow.get("live") is False, "connected provider Flow identity changed")
@@ -97,7 +103,7 @@ def main():
         need(q_stage["ageBand"]==age and q_stage.get("humanListeningApproved") is False
              and q_stage.get("publicPlaybackAuthorized") is False,
              "stage age or audio permissions changed: "+qid)
-        question_new=set();question_paid=set();question_flow=set();question_bad=set();blocked_parts={}
+        question_new=set();question_paid=set();question_flow=set();question_bad=set();question_uncertain=set();blocked_parts={}
         for part in PARTS:
             entry=recipe[part]
             # The real-MP3 stage has checked every composite's source, voice,
@@ -128,7 +134,7 @@ def main():
                 continue
             need(part in q_stage.get("missing",{}),
                  "unstaged original has no missing marker: "+qid+"/"+part)
-            missing_new=set();missing_old=set();missing_flow=set();missing_bad=set()
+            missing_new=set();missing_old=set();missing_flow=set();missing_bad=set();missing_uncertain=set()
             if entry["mode"]=="existing-paid-exact":
                 gid=entry["generationId"]
                 if gid in blocked_pronunciation_generation_ids:
@@ -163,6 +169,8 @@ def main():
                             missing_old.update(by_text[speech])
                         elif speech in pending_flow:
                             missing_flow.add(speech)
+                        elif txt_hash(speech) in uncertain_hashes:
+                            missing_uncertain.add(speech)
                         else:
                             need(speech not in protected,
                                  "previously charged or reserved V4 text in new credit queue")
@@ -170,15 +178,17 @@ def main():
                             pending[speech].add((qid,age,part))
             else:
                 raise RuntimeError("Unknown V4 recipe mode; refusing paid queue")
-            if missing_old or missing_new or missing_flow or missing_bad:
+            if missing_old or missing_new or missing_flow or missing_bad or missing_uncertain:
                 blocked_parts[part]={"alreadyPaidNotYetImported":sorted(missing_old),
                                      "awaitingConnectedFlowOriginalTextSha256":sorted(txt_hash(x) for x in missing_flow),
                                      "newOriginalTextSha256":sorted(txt_hash(x) for x in missing_new),
-                                     "quarantinedPaidOriginalTextSha256":sorted(txt_hash(x) for x in missing_bad)}
+                                     "quarantinedPaidOriginalTextSha256":sorted(txt_hash(x) for x in missing_bad),
+                                     "uncertainAlreadyAttemptedProviderTextSha256":sorted(txt_hash(x) for x in missing_uncertain)}
             question_new.update(missing_new)
             question_paid.update(missing_old)
             question_flow.update(missing_flow)
             question_bad.update(missing_bad)
+            question_uncertain.update(missing_uncertain)
         missing_sources_by_question[qid]=set(question_new)
         for gid in question_paid:prepaid_uses[gid]+=1
         need(set(q_stage["missing"])==set(blocked_parts),
@@ -187,6 +197,8 @@ def main():
         need(actual_complete==(not blocked_parts),"Staged full-MP3 claim conflicts with originals: "+qid)
         if not blocked_parts:group="complete-v4-review"
         elif question_bad and not question_new and not question_paid and not question_flow:group="await-owner-pronunciation-replacement"
+        elif question_uncertain and question_new:group="both-prepaid-recovery-and-new-v4"
+        elif question_uncertain and not question_new:group="await-uncertain-provider-original"
         elif question_flow and not question_new and not question_paid:group="await-connected-flow-only"
         elif question_paid and not question_new and not question_flow:group="restore-prepaid-originals-only"
         elif (question_paid or question_flow) and not question_new:group="await-other-prepaid-or-reserved-only"
@@ -201,6 +213,7 @@ def main():
             "missingNewTextSha256":sorted(txt_hash(s) for s in question_new),
             "newUniqueSegmentCount":len(question_new),
             "quarantinedPaidPronunciationOriginals":len(question_bad),
+            "uncertainPreviouslyAttemptedSourceSHA256":sorted(txt_hash(x) for x in question_uncertain),
             "incrementalTextCodepointsIfAlone":sum(len(s) for s in question_new),
             "incompleteParts":blocked_parts,
         })
@@ -237,6 +250,7 @@ def main():
                 "priority":len(queue)+1,"questionId":qid,"ageBand":age,
                 "requiresPrepaidRecovery":bool(row["missingPreviouslyPaidGenerationIds"]),
                 "requiresConnectedFlowResolution":bool(row["missingConnectedFlowOriginalTextSha256"]),
+                "requiresPreviouslyUnconfirmedProviderResolution":bool(row["uncertainPreviouslyAttemptedSourceSHA256"]),
                 "incrementalUnrecordedSegmentCount":n_new,
                 "incrementalUnicodeCodepoints":codepoints,
                 "cumulativeNewUniqueSegments":len(chosen),
@@ -259,6 +273,8 @@ def main():
         "previouslyPaidMissingGenerationCount":len(missing9),
         "ownerPronunciationOriginalTextsQuarantined":len(blocked_pronunciation_texts),
         "questionsWaitingOnlyForPronunciationReplacement":sum(by_age[a]["await-owner-pronunciation-replacement"] for a in AGES),
+        "questionsWaitingForUncertainProviderOriginal":sum(by_age[a]["await-uncertain-provider-original"] for a in AGES),
+        "uncertainPreviouslyAttemptedSourceSHA256":sorted(uncertain_hashes),
         "reservedFlowOriginalsExcludedFromNewChargeQueue":len(pending_flow),
         "previouslyPaidMissingGenerationIds":sorted(missing9),
         "missingGenuineNewExactSegments":len(every_new),
