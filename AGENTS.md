@@ -1,5 +1,9 @@
 # DAR AL TAWHID Projektregeln
 
+
+**Spracherweiterung 22.10.2026:** Registrierung `fr` (Französisch) und `es` (Spanisch): insgesamt neun Erwachsenensprachen `de,ar,en,tr,ku,ckb,bs,fr,es`; künftige zehnte und weitere Sprachen weiterhin dynamisch. Beiträge/Q-Link exakt eine ID/Nummer. Für OneSignal wurden **nur 15 nicht versendende neunsprachige Textvorlagen** angelegt und in `desktop-preview/i18n-core-v1/onesignal-nine-language-drafts.json` erfasst. Keine produktive App-Push-Sprachzuordnung, keine Scheduler-/Push-Lock-Änderung und kein Live-Versand erfolgt. Für jede tatsächliche Zustelländerung gelten das Push-Kennwort, die separaten Spur-Marker und die Doppel-Freigabe (unten), auch bei ausdrücklich gewünschter Lokalisierung. App-Sprache der *Installation*, nicht OS-Sprache, ist künftig maßgeblich; weitere Sprachen müssen den offenen Übersetzungsbedarf und die Vorlageninventur erweitern.
+
+
 ## DĀR AL TAWḤĪD Zentrum · Mehrsprachige Beiträge (Regel 22.10.2026)
 
 **Eine Beitrags-ID, ein Q-Quellenlink, beliebig viele registrierte Sprachen.** Diese neue globale Erwachsenen-Regel ist im bestehenden `desktop-preview/i18n-core-v1/GLOBAL_PUBLISHING_RULE.md`, Abschnitt 6, verbindlich spezifiziert. Sie ergänzt die bisherigen fachlichen Quellen-, Prüf-, Publikations- und Push-Freigaberegeln und hebt keine Sperre auf.
