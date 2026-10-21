@@ -6,7 +6,7 @@ on:
     paths:
       - 'test/assets/dar-more-v15.js'
       - 'test/assets/dar-setup-hub.js'
-      - 'test/assets/dar-home-v47-layout.js'
+      - 'test/assets/dar-home-v3-compact.js'
       - '.github/workflows/dar-test-turkish-language-smoke.yml'
   workflow_dispatch:
 
@@ -23,14 +23,14 @@ jobs:
         run: |
           node - <<'NODE'
           const fs=require('fs');
-          const paths=['test/assets/dar-more-v15.js','test/assets/dar-setup-hub.js','test/assets/dar-home-v47-layout.js'];
+          const paths=['test/assets/dar-more-v15.js','test/assets/dar-setup-hub.js','test/assets/dar-home-v3-compact.js'];
           for(const path of paths){const code=fs.readFileSync(path,'utf8');new Function(code); if(!code.includes('darAdultPreferredLocaleV1'))throw Error('Missing shared locale key in '+path);}
           const more=fs.readFileSync(paths[0],'utf8');
           if(!more.includes('localeChoices()+')||!more.includes('data-dm-locale'))throw Error('More locale selector missing');
           const setup=fs.readFileSync(paths[1],'utf8');
           if(!setup.includes('data-dar-setup-locale'))throw Error('Settings locale selector missing');
           const home=fs.readFileSync(paths[2],'utf8');
-          if(!home.includes('darHomeV47Language'))throw Error('Home quick selector missing');
+          if(!home.includes('data-dv3-locale'))throw Error('Home quick selector missing');
           console.log('PASS: all three app locale control sources compile and store the same preference.');
           NODE
       - name: Boot local adult app
@@ -52,11 +52,11 @@ jobs:
             driver.get('http://127.0.0.1:8765/test/')
             driver.execute_script("localStorage.setItem('darAdultPreferredLocaleV1','de')")
             driver.refresh()
-            WebDriverWait(driver,35).until(lambda d: d.execute_script("return !!document.querySelector('#darHomeV47Language')"))
-            home=driver.execute_script("return [...document.querySelectorAll('#darHomeV47Language button')].map(x=>x.textContent)")
+            WebDriverWait(driver,35).until(lambda d: d.execute_script("return !!document.querySelector('#dv3Home')"))
+            home=driver.execute_script("return [...document.querySelectorAll('#dv3Home button')].map(x=>x.textContent)")
             print('Home control:',home,flush=True)
             assert home==['Deutsch','Türkçe']
-            driver.execute_script("document.querySelector('#darHomeV47Language [data-dar-home-locale=tr]').click()")
+            driver.execute_script("document.querySelector('#dv3Home [data-dv3-locale=tr]').click()")
             assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='tr'
             driver.execute_script("if(typeof navigate==='function')navigate('more');else location.hash='#more'")
             WebDriverWait(driver,25).until(lambda d:d.execute_script("return !!document.querySelector('.dar-more-v15 [data-dm-locale=de]')"))
