@@ -214,10 +214,17 @@ ARABIC_UNSEGMENTED=re.compile(r"[\u0621-\u064A]|ﷺ")
 OWNER_PRONUNCIATION_REVIEW_TERMS=re.compile(
     r"(?i)(?<![\w])(?:ʿibādah|ḥalāl|ḥarām)(?![\w])"
 )
+# 2026-10-21: owner rejects Qurʾān/Fuṣḥā audio quality.
+# German de-DE alias "Qur-aan" is not verified Arabic phonetics.
+# True Qurʾān āyāt: ONLY authentic human reciter audio, never TTS.
+OWNER_QURAN_REVIEW_TERMS=re.compile(
+    r"(?i)(?<![\w])(?:qur[ʾ'’]?ān|quran|qur'an|koran|sūrah|sūrat|surah|āyah|āyāt|tilāwah)(?![\w])"
+)
 
 def source_requires_separate_pronunciation_approval(text):
     return bool(ARABIC_UNSEGMENTED.search(text) or UNLISTED_OWNER_TERMS.search(text)
-                or OWNER_PRONUNCIATION_REVIEW_TERMS.search(text))
+                or OWNER_PRONUNCIATION_REVIEW_TERMS.search(text)
+                or OWNER_QURAN_REVIEW_TERMS.search(text))
 
 def choose(plan,registry,protected):
     existing=set((registry.get("textClips") or {}).keys())
