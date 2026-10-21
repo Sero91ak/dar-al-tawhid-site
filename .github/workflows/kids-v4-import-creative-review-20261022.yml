@@ -48,7 +48,7 @@ jobs:
           set -euo pipefail
           git config user.name dar-kids-v4-exact-review-import
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git rm kids/review-only/quiz-v4-creative-v4candidate-transfer-20261022.json
+          # Preserve transient transfer on branch until the original MP3s are secured.
           git add kids/assets/kids-quiz-audio/v4-curated450-review/
           git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ kids/assets/kids-quiz-audio/v4-first150-composed-review/
           git add kids/data/quiz-v4-450-original-clip-registry.json kids/data/quiz-v4-450-saved-mp3-technical-qa.json kids/data/quiz-v4-450-production-status.json
@@ -56,7 +56,7 @@ jobs:
           git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
           git add kids/review-only/quiz-v4-creative-v4candidate-transfer-results-20261022.json
           git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
-          git add kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md kids/review-only/quiz-v4-handover-latest.json
+          # The global handover is refreshed by a separate review job, to avoid concurrent report conflicts.
           git commit -m "audio(kids review): import real V4 candidate originals with SHA, keep live blocked"
           for attempt in 1 2 3; do
             if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
@@ -64,7 +64,7 @@ jobs:
               exit 0
             fi
             git fetch origin review/kids-quiz-v4-batch-001-020-20261014
-            git rebase FETCH_HEAD
+            git rebase -X theirs FETCH_HEAD
           done
           echo 'GitHub push failed. Recover original MP3s from artifact; do not rebill.' >&2
           exit 1
