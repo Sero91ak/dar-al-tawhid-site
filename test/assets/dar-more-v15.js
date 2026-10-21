@@ -1,6 +1,18 @@
 /* DAR Mehr V1.5 | shared functional UI; scoped to the adult Mehr view only. */
 (function(){
 "use strict";
+
+/* Shared adult TEST language runtime. No production, Kids, API or paid model access. */
+if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(location.pathname)
+    &&!window.__DAR_TEST_TR_UI_SCRIPT_LOADING){
+ window.__DAR_TEST_TR_UI_SCRIPT_LOADING=true;
+ const trScript=document.createElement("script");
+ trScript.src="/test/assets/dar-test-turkish-ui.js?v=20261021-core1";
+ trScript.async=true;
+ trScript.onerror=()=>{window.__DAR_TEST_TR_UI_SCRIPT_LOADING=false};
+ (document.head||document.documentElement).appendChild(trScript);
+}
+
 if(window.DAR_MORE_V15)return;
 const rootClass="dar-more-v15";
 const categories=[["wissen","Wissen","Lernen & Wissen","prophets"],["alltag","Alltag","Alltag & Gebet","prayer"],["werkzeuge","Werkzeuge","Werkzeuge & Assistenten","zakat"],["persoenlich","Persönlich","Persönlich","saved"],["app","App","App","settings"]];
