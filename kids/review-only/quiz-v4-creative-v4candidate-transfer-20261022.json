@@ -47,5 +47,6 @@
   ],
   "transferAttempt": 2,
   "importToolFix": "install_ffprobe_before_audio_verify",
-  "workflowActivation": "registered on main; run exactly once; original generation receipts preserved; no new TTS requests"
+  "workflowActivation": "registered on main; run exactly once; original generation receipts preserved; no new TTS requests",
+  "importRetryAfterConcurrentPush": "rebase-compatible-review-20261022; preserve same three generation IDs and signed sources; do not regenerate"
 }
