@@ -1653,6 +1653,65 @@ html[data-theme] body.is-home-route.has-bottom-nav > .app > footer.footer {
 /* Keep the already calibrated native dock clearance exactly where it was:
  * never add another artificial spacer on the page below the footer. */
 
+/* DAR_TEST_DHP_REAL_LAST_ROW_AND_FOOTER_V1404 · 21 Oct 2026.
+ * The current Home is #darHomeHtmlParityV1, a real sibling of #appView.
+ * The previous generic grid fix alone cannot reach this three-column grid.
+ * Remove its redundant bottom-nav reserve; the original fixed dock and body
+ * safe-area clearance remain independently unchanged.
+ */
+html[data-theme] body.is-home-route #darHomeHtmlParityV1 {
+  display:block!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:visible!important;
+}
+html[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-content {
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  margin-bottom:0!important;
+  padding-bottom:0!important;
+  overflow:visible!important;
+}
+html[data-theme] body.is-home-route #darHomeHtmlParityV1 :is(.dhp-library,.dhp-section:has(.dhp-library)) {
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:visible!important;
+  clip-path:none!important;
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+  margin-bottom:0!important;
+}
+html[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-library {
+  display:grid!important;
+  grid-auto-rows:minmax(108px,auto)!important;
+  align-content:start!important;
+  padding-bottom:2px!important;
+}
+html[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-library-tile {
+  position:relative!important;
+  height:auto!important;
+  min-height:108px!important;
+  max-height:none!important;
+  overflow:visible!important;
+  box-sizing:border-box!important;
+  padding-block:10px 13px!important;
+}
+html[data-theme] body.is-home-route #darHomeHtmlParityV1 + #appView.view {
+  display:none!important;
+}
+html[data-theme] body.is-home-route > .app > footer.footer {
+  clear:both!important;
+  margin-top:12px!important;
+}
+@media (min-width:700px) {
+  html[data-theme] body.is-home-route #darHomeHtmlParityV1 .dhp-library {
+    grid-auto-rows:minmax(118px,auto)!important;
+  }
+}
+
 /* DAR_ADULT_HERO_COMPACT_STICKY_AXIS_V1402 · 2026-10-18
  * Same non-destructive responsive contract for adult visitor + test:
  * existing photographic background images survive; sticky media underneath
