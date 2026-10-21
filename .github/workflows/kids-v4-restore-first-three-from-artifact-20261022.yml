@@ -1,0 +1,63 @@
+name: KIDS V4 Restore Three Paid Originals from Actions Backup
+on:
+  push:
+    branches:
+      - review/kids-v4-audio-safe-import-20261022
+    paths:
+      - kids/review-only/quiz-v4-creative-v4candidate-transfer-20261022.json
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: kids-v4-audio-safe-import-20261022
+  cancel-in-progress: false
+jobs:
+  save-originals:
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - name: Checkout dedicated protected review branch
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-v4-audio-safe-import-20261022
+          fetch-depth: 1
+      - name: Retrieve already paid MP3 bytes saved in failed commit's artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: kids-v4-20261022-real-creative-candidate-mp3-backup
+          run-id: 39688590926
+          github-token: ${{ github.token }}
+          path: kids-artifact-backup
+      - name: Verify archived speech and import exact three original MP3s without TTS
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get -o Acquire::Retries=1 -o DPkg::Lock::Timeout=20 update -y
+            sudo apt-get -o Acquire::Retries=1 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          command -v ffprobe
+          python3 -m py_compile kids/tools/restore_quiz_v4_three_from_artifact_20261022.py
+          python3 kids/tools/restore_quiz_v4_three_from_artifact_20261022.py
+      - name: Push only genuine audio bytes plus hashes to dedicated branch
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-artifact-safe-import
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git rm kids/review-only/quiz-v4-creative-v4candidate-transfer-20261022.json
+          git add kids/assets/kids-quiz-audio/v4-curated450-review/
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/review-only/quiz-v4-creative-v4candidate-transfer-results-20261022.json
+          git commit -m "audio(kids review): preserve three paid original V4 MP3s; no public publish"
+          git push origin HEAD:review/kids-v4-audio-safe-import-20261022
+      - name: Additional disaster-recovery ZIP of three original MP3s
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-three-originals-safe-import-20261022
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/edefe5bce1264de3a5d00297d7e60890.mp3
+            kids/assets/kids-quiz-audio/v4-curated450-review/df12fa28b41c8bb951df507eefb8e0e3.mp3
+            kids/assets/kids-quiz-audio/v4-curated450-review/2b976c63a048dd3356ed7d27544ef8bb.mp3
+            kids/review-only/quiz-v4-creative-v4candidate-transfer-results-20261022.json
