@@ -4,6 +4,7 @@ on:
     branches:
       - review/browser-v8-preview-isolation-20261021
       - fix/v8-immersive-mobile-tablet-20261021
+      - feature/tr-language-chooser-v8-20261021
     paths:
       - 'desktop-preview/**'
       - '.github/workflows/dar-v8-browser-acceptance-20261021.yml'
@@ -18,7 +19,7 @@ permissions:
 jobs:
   browser:
     # Only test the isolated V8 browser review lane.
-    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021'
+    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021' || github.head_ref == 'feature/tr-language-chooser-v8-20261021'
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
@@ -99,6 +100,14 @@ jobs:
                 if page!='start' and state['welcome']!='none':raise RuntimeError('Duplicate greeting on '+page)
                 if page=='gebetszeiten' and not state['prayer']:raise RuntimeError('Prayer page still legacy')
                 if page=='hadith' and not state['hadith']:raise RuntimeError('Hadith page missing')
+                if page in ['start','mehr']:
+                  control=driver.execute_script("""const x=document.getElementById('darV8QuickLanguage');
+                    return x&&{buttons:x.querySelectorAll('[data-v8-quick-locale]').length,
+                    deutsch:!!x.querySelector('[data-v8-quick-locale="de"]'),
+                    turkish:!!x.querySelector('[data-v8-quick-locale="tr"]'),
+                    visible:x.getBoundingClientRect().width>0}""")
+                  if not control or control['buttons']!=2 or not control['deutsch'] or not control['turkish'] or not control['visible']:
+                    raise RuntimeError('Missing DE/TR quick language control on '+page+' '+str(control))
                 if page=='suche' and not state['chat']:raise RuntimeError('Chat page missing')
                 if page=='suche' and not driver.find_elements(By.ID,'darV8Messages'):raise RuntimeError('Messenger history not mounted')
                 if page=='suche':
@@ -139,6 +148,18 @@ jobs:
               WebDriverWait(driver,15).until(lambda d:d.execute_script("return document.querySelectorAll('#darV8Messages .dar-v8-bubble.is-user').length>0"))
               answer=driver.execute_script("return {user:document.querySelectorAll('#darV8Messages .dar-v8-bubble.is-user').length,bot:document.querySelectorAll('#darV8Messages .dar-v8-bubble.is-system').length,composer:!!document.getElementById('darV8ChatForm')}")
               if not answer['composer'] or answer['user']<1 or answer['bot']<2:raise RuntimeError('Messenger failed '+str(answer))
+              driver.get('http://127.0.0.1:8765/desktop-preview/index.html?page=start')
+              WebDriverWait(driver,15).until(lambda d:bool(d.find_elements(By.ID,'darV8QuickLanguage')))
+              driver.find_element(By.CSS_SELECTOR,'#darV8QuickLanguage [data-v8-quick-locale="tr"]').click()
+              if driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")!='tr':
+                raise RuntimeError('Turkish quick switch failed on home')
+              driver.get('http://127.0.0.1:8765/desktop-preview/index.html?page=mehr')
+              WebDriverWait(driver,15).until(lambda d:bool(d.find_elements(By.ID,'darV8QuickLanguage')))
+              if driver.find_element(By.CSS_SELECTOR,'#darV8QuickLanguage [data-v8-quick-locale="tr"]').get_attribute('aria-pressed')!='true':
+                raise RuntimeError('Mehr quick switch did not retain Turkish selection')
+              driver.find_element(By.CSS_SELECTOR,'#darV8QuickLanguage [data-v8-quick-locale="de"]').click()
+              driver.get('http://127.0.0.1:8765/desktop-preview/index.html?page=suche')
+              WebDriverWait(driver,15).until(lambda d:bool(d.find_elements(By.ID,'darV8LangToggle')))
               driver.find_element(By.ID,'darV8LangToggle').click()
               driver.find_element(By.CSS_SELECTOR,'#darV8LangMenu [data-lang="tr"]').click()
               lang=driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")
