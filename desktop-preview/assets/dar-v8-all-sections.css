@@ -1,0 +1,152 @@
+/* DĀR AL TAWḤĪD · V8 / all adult browser sections, not home-only.
+ * Applied after original CSS and faithful shell. No visitor/Kids/native selectors.
+ * Verified 3D artwork is reused from /assets/dar-3d-icons/.
+ */
+body.desktop-overhaul-v18{--v8-card:var(--v8-paper,#fcfdf9);--v8-border:var(--v8-line,rgba(36,73,53,.12));--v8-font:var(--v8-ink,#19372a)}
+body.desktop-overhaul-v18 #pageRoot{width:100%;min-width:0}
+body.desktop-overhaul-v18 .dar-v8-sidebar{overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;box-shadow:8px 0 26px rgba(30,52,42,.025)}
+body.desktop-overhaul-v18 .dar-v8-side-link{display:flex;align-items:center;gap:10px;min-height:47px;padding:7px 11px;border-radius:14px;letter-spacing:.01em;font-size:12px}
+body.desktop-overhaul-v18 .dar-v8-side-link .v8-real-3d{width:31px;height:31px;object-fit:contain;flex:none;filter:drop-shadow(0 3px 3px #09191125)}
+body.desktop-overhaul-v18 .dar-v8-side-link.active{background:color-mix(in srgb,var(--v8-gold) 12%,var(--v8-paper));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--v8-gold) 35%,transparent)}
+body.desktop-overhaul-v18 .dar-v8-side-link.active .v8-real-3d{filter:drop-shadow(0 5px 5px #ab915b33)}
+body.desktop-overhaul-v18 .dar-v8-side-brand{margin-bottom:23px}
+body.desktop-overhaul-v18 .dar-v8-side-footer{padding-top:14px}
+body.desktop-overhaul-v18 .dar-v8-mobile-dock{display:none}
+body.desktop-overhaul-v18 .v8-global-page-hero{position:relative;isolation:isolate;display:flex;align-items:center;justify-content:space-between;gap:20px;min-height:200px;margin:22px 0 22px!important;padding:clamp(22px,3vw,36px)!important;border-radius:26px!important;overflow:hidden!important;background:linear-gradient(112deg,rgba(15,49,36,.98) 0%,rgba(22,58,43,.94) 53%,rgba(12,36,28,.84) 100%),url('/assets/post-heroes/topics.webp') center/cover!important;border:1px solid rgba(207,184,124,.24)!important;box-shadow:0 16px 38px rgba(10,31,22,.09)!important;opacity:1!important;transform:none!important;color:#f9f3e7!important}
+body.desktop-overhaul-v18 .v8-global-page-hero>div:first-child{position:relative;z-index:1;min-width:0;max-width:690px;flex:1}
+body.desktop-overhaul-v18 .v8-global-page-hero .eyebrow{font-size:10px!important;font-weight:850!important;letter-spacing:.17em!important;color:#e6cd98!important}
+body.desktop-overhaul-v18 .v8-global-page-hero h1{font-family:Georgia,'Times New Roman',serif!important;font-weight:500!important;line-height:1.19!important;font-size:clamp(27px,3vw,39px)!important;letter-spacing:-.025em!important;color:#fff9eb!important;margin:10px 0!important}
+body.desktop-overhaul-v18 .v8-global-page-hero p{max-width:680px!important;font-size:13px!important;line-height:1.75!important;color:#e6e6d7!important}
+body.desktop-overhaul-v18 .v8-global-page-hero .intro-aside.v8-hero-visual{position:relative;z-index:1;flex:none;min-width:135px;max-width:30%;background:none!important;border:0!important;box-shadow:none!important;display:grid;place-items:center;gap:8px;padding:0!important;color:#ead6a8!important;letter-spacing:.1em!important;font-size:9px!important;text-align:center}
+body.desktop-overhaul-v18 .v8-hero-visual .v8-hero-3d{height:125px;width:125px;object-fit:contain;filter:drop-shadow(0 11px 15px #0006)}
+body.desktop-overhaul-v18 .v8-global-page-actions{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:18px}
+body.desktop-overhaul-v18 .v8-global-action{display:inline-flex;min-height:38px;align-items:center;justify-content:center;gap:5px;border:1px solid #dcc18b77;background:#d9bd87;color:#1d3128!important;border-radius:999px;padding:8px 15px;text-decoration:none;font-size:11px;font-weight:790}
+body.desktop-overhaul-v18 .v8-global-action.secondary{background:transparent;border-color:#fff7cf51;color:#f1e8d5!important}
+body.desktop-overhaul-v18[data-dar-v8-route="quran"] .v8-global-page-hero{background:linear-gradient(112deg,rgba(14,35,42,.97),rgba(23,56,61,.84)),url('/assets/post-heroes/post-reader.webp') center/cover!important}
+body.desktop-overhaul-v18[data-dar-v8-route="beitraege"] .v8-global-page-hero,
+body.desktop-overhaul-v18[data-dar-v8-route="beitrag"] .v8-global-page-hero{background:linear-gradient(112deg,rgba(20,44,35,.96),rgba(39,51,41,.83)),url('/assets/post-heroes/topic-detail.webp') center/cover!important}
+body.desktop-overhaul-v18[data-dar-v8-route="hadith"] .v8-global-page-hero{background:linear-gradient(112deg,rgba(18,37,28,.96),rgba(23,43,30,.72)),url('/assets/ilm/hadith-library-overview-v1267.webp') center/cover!important}
+body.desktop-overhaul-v18[data-dar-v8-route="wissen"] .v8-global-page-hero,
+body.desktop-overhaul-v18[data-dar-v8-route="suche"] .v8-global-page-hero{background:linear-gradient(112deg,rgba(13,36,31,.96),rgba(27,57,39,.75)),url('/assets/ilm/ilm-historical-majlis-v1234.jpg') center/cover!important}
+body.desktop-overhaul-v18[data-dar-v8-route="bibliothek"] .v8-global-page-hero,
+body.desktop-overhaul-v18[data-dar-v8-route="werk"] .v8-global-page-hero{background:linear-gradient(112deg,rgba(40,33,27,.95),rgba(61,48,35,.78)),url('/assets/post-heroes/post-reader.webp') center/cover!important}
+body.desktop-overhaul-v18:not(.dar-v8-home) .ornament-line{display:none!important}
+body.desktop-overhaul-v18:not(.dar-v8-home) .v8-real-prayer,
+body.desktop-overhaul-v18:not(.dar-v8-home) .isnad-ribbon,
+body.desktop-overhaul-v18:not(.dar-v8-home):not([data-dar-v8-route="quran"]) .v8-real-player{display:none!important}
+body.desktop-overhaul-v18.v8-show-player .v8-real-player{display:block!important;position:sticky;top:10px;z-index:26;margin:9px auto!important;max-width:1200px}
+body.desktop-overhaul-v18[data-dar-v8-route="quran"] .v8-real-player{display:block!important}
+body.desktop-overhaul-v18:not(.dar-v8-home) .page-intro+.section{margin-top:4px!important}
+body.desktop-overhaul-v18 .section{border-radius:24px;max-width:100%!important;margin:18px 0!important;padding:clamp(14px,2vw,23px)!important}
+body.desktop-overhaul-v18 .section.parchment{background:var(--v8-paper)!important;border:1px solid var(--v8-border)!important;box-shadow:none!important}
+body.desktop-overhaul-v18 .section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;border-bottom:1px solid var(--v8-border);padding:0 0 12px;margin:0 0 15px}
+body.desktop-overhaul-v18 .section-head h2{font:500 clamp(21px,2.2vw,29px)/1.2 Georgia,serif!important;color:var(--v8-font)!important}
+body.desktop-overhaul-v18 .section-head p,body.desktop-overhaul-v18 .section-head .data-count{font-size:11px;color:var(--v8-muted)!important}
+body.desktop-overhaul-v18 .toolbar{border:0!important;background:transparent!important;display:flex!important;gap:8px;flex-wrap:wrap!important;align-items:center;padding:4px 0 17px!important;box-shadow:none!important}
+body.desktop-overhaul-v18 .toolbar .tool{min-height:39px!important;border:1px solid var(--v8-border)!important;border-radius:999px!important;background:var(--v8-paper)!important;color:var(--v8-font)!important;font-size:12px!important;padding:8px 14px!important}
+body.desktop-overhaul-v18 .toolbar .tool.active{background:color-mix(in srgb,var(--v8-gold) 18%,var(--v8-paper))!important;border-color:var(--v8-gold)!important;color:var(--v8-font)!important}
+body.desktop-overhaul-v18 :is(.real-grid-item,.rule-card,.pub-card,.dua-real,.source-work,.more-row,.real-cover,.feature-card,.category-card,.prayer,.list-row){background:var(--v8-paper)!important;border:1px solid var(--v8-border)!important;border-radius:19px!important;box-shadow:none!important;color:var(--v8-font)!important;transition:transform .16s,border-color .16s,box-shadow .16s!important;max-width:100%;min-width:0}
+body.desktop-overhaul-v18 :is(.real-grid-item,.rule-card,.pub-card,.dua-real,.source-work,.more-row,.real-cover,.feature-card,.category-card,.list-row):hover{transform:translateY(-2px);border-color:var(--v8-gold)!important;box-shadow:0 10px 28px color-mix(in srgb,var(--v8-gold) 10%,transparent)!important}
+body.desktop-overhaul-v18 :is(.rule-card,.real-grid-item,.pub-card,.dua-real,.source-work,.more-row) :is(h2,h3,strong){color:var(--v8-font)!important}
+body.desktop-overhaul-v18 :is(.rule-card,.real-grid-item,.pub-card,.dua-real,.source-work,.more-row) :is(p,small){color:var(--v8-muted)!important}
+body.desktop-overhaul-v18 :is(.search-input,#v8HadithSearch){height:54px;background:var(--v8-paper)!important;border:1px solid var(--v8-border)!important;border-radius:17px!important;color:var(--v8-font)!important;padding:0 17px!important;box-shadow:0 6px 20px rgba(20,40,27,.04)!important;font-size:16px!important}
+body.desktop-overhaul-v18 .more-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+body.desktop-overhaul-v18 .more-row{display:flex;align-items:center;gap:14px;min-height:100px;padding:16px!important}
+body.desktop-overhaul-v18 .more-row .v8-real-3d{height:58px;width:58px;object-fit:contain;flex:none}
+body.desktop-overhaul-v18 .more-row>div:first-of-type{flex:1;min-width:0}
+body.desktop-overhaul-v18 .real-grid{gap:12px!important}
+body.desktop-overhaul-v18 .pub-grid{grid-template-columns:repeat(auto-fit,minmax(186px,1fr))!important;gap:14px!important}
+body.desktop-overhaul-v18 .pub-card .pub-cover{border-radius:13px;overflow:hidden}
+body.desktop-overhaul-v18 .list-lines .list-row{display:block!important;padding:16px 20px!important;margin-bottom:8px}
+body.desktop-overhaul-v18 #searchResults{max-height:none}
+body.desktop-overhaul-v18 .v8-search-intro{font-size:12px;color:var(--v8-muted);line-height:1.7;margin:0 0 18px}
+body.desktop-overhaul-v18 .v8-chat-panel{border:1px solid var(--v8-border);border-radius:24px;background:var(--v8-paper);padding:clamp(17px,2.2vw,28px)}
+body.desktop-overhaul-v18 .v8-chat-title{display:flex;gap:13px;align-items:center;color:var(--v8-font);margin-bottom:13px}
+body.desktop-overhaul-v18 .v8-chat-title img{width:48px;height:48px;object-fit:contain}
+body.desktop-overhaul-v18 .v8-chat-title h2{font:500 23px Georgia,serif!important;margin:0}
+body.desktop-overhaul-v18 .v8-chat-title p{font-size:11px;color:var(--v8-muted);margin:5px 0 0}
+body.desktop-overhaul-v18 .v8-chat-input-wrap{display:flex;gap:8px;align-items:center;background:var(--v8-card);border-radius:17px;border:1px solid var(--v8-border);padding:7px}
+body.desktop-overhaul-v18 #siteSearch{flex:1;min-width:0;border:0!important;box-shadow:none!important;background:transparent!important;height:46px!important}
+body.desktop-overhaul-v18 #v8ChatSend{min-height:44px;background:linear-gradient(120deg,#d6bb83,#ac8b54);color:#1a2e25;border:0;border-radius:12px;padding:0 17px;font-size:12px;font-weight:790;cursor:pointer}
+body.desktop-overhaul-v18 #v8ChatReply{display:grid;gap:12px;margin:13px 0}
+body.desktop-overhaul-v18 .v8-chat-user{justify-self:end;max-width:83%;padding:13px 16px;border-radius:17px 17px 3px 17px;background:color-mix(in srgb,var(--v8-gold) 19%,var(--v8-card));color:var(--v8-font);font-size:13px}
+body.desktop-overhaul-v18 .v8-chat-answer{justify-self:stretch;border:1px solid var(--v8-border);padding:16px;border-radius:17px;background:color-mix(in srgb,var(--v8-ink) 4%,var(--v8-card));display:grid;gap:10px}
+body.desktop-overhaul-v18 .v8-chat-answer>strong{font:500 19px Georgia,serif;color:var(--v8-font)}
+body.desktop-overhaul-v18 .v8-chat-answer>p{font-size:12px;color:var(--v8-muted);line-height:1.7;margin:0}
+body.desktop-overhaul-v18 .v8-chat-answer .list-row{padding:10px 13px!important;margin:0!important;background:var(--v8-paper)!important}
+body.desktop-overhaul-v18 .v8-hadith-toolbar{display:flex;align-items:center;gap:12px;margin:12px 0 22px}
+body.desktop-overhaul-v18 .v8-hadith-toolbar input{flex:1;min-width:0}
+body.desktop-overhaul-v18 #v8HadithResults{display:grid;gap:12px}
+body.desktop-overhaul-v18 .v8-hadith-result{background:var(--v8-paper);border:1px solid var(--v8-border);border-radius:20px;padding:clamp(15px,2vw,23px);display:grid;gap:10px}
+body.desktop-overhaul-v18 .v8-hadith-source{font-size:10px;font-weight:800;letter-spacing:.05em;color:var(--v8-gold)}
+body.desktop-overhaul-v18 .v8-hadith-result p{margin:0;color:var(--v8-font);font:17px/1.7 Georgia,serif}
+body.desktop-overhaul-v18 .v8-hadith-result small{color:var(--v8-muted);font-size:11px}
+body.desktop-overhaul-v18 #v8HadithMore{border:1px solid var(--v8-border);border-radius:999px;background:var(--v8-paper);min-height:44px;padding:10px 18px;color:var(--v8-font);font-size:12px;font-weight:750;cursor:pointer;margin-top:15px}
+body.desktop-overhaul-v18 .v8-hadith-empty{font-size:13px;color:var(--v8-muted)}
+body.desktop-overhaul-v18.dar-v8-night .page-intro:not(.v8-global-page-hero){background:var(--v8-card)!important}
+@media(min-width:960px){
+ body.desktop-overhaul-v18 .dar-v8-sidebar{width:242px;padding:23px 16px 16px}
+ body.desktop-overhaul-v18 .dar-v8-side-footer{margin-top:auto}
+ body.desktop-overhaul-v18 .dar-v8-workspace{margin-left:242px}
+ body.desktop-overhaul-v18 .dar-v8-topbar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--v8-bg) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+}
+@media(max-width:959px){
+ body.desktop-overhaul-v18 .site-header{position:relative!important;z-index:14}
+ body.desktop-overhaul-v18 .main-nav{display:none!important}
+ body.desktop-overhaul-v18 .dar-v8-mobile-dock{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));position:fixed;bottom:calc(8px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:min(620px,calc(100% - 18px));min-height:67px;gap:3px;padding:5px 7px;border:1px solid color-mix(in srgb,var(--v8-gold) 28%,var(--v8-border));border-radius:25px;background:color-mix(in srgb,var(--v8-paper) 92%,transparent);box-shadow:0 11px 43px #0a211c36;backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);z-index:190}
+ body.desktop-overhaul-v18 .dar-v8-mobile-tab{display:flex;flex-direction:column;align-items:center;justify-content:center;text-decoration:none;gap:1px;border-radius:18px;color:var(--v8-muted);font-size:9px;font-weight:730;min-width:0;min-height:53px;padding:3px}
+ body.desktop-overhaul-v18 .dar-v8-mobile-tab .v8-real-3d{width:27px;height:27px;object-fit:contain;filter:drop-shadow(0 2px 3px #061b1529)}
+ body.desktop-overhaul-v18 .dar-v8-mobile-tab.active{background:color-mix(in srgb,var(--v8-gold) 18%,var(--v8-paper));color:var(--v8-font);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--v8-gold) 28%,transparent)}
+ body.desktop-overhaul-v18 .dar-v8-workspace{padding-bottom:calc(95px + env(safe-area-inset-bottom))!important}
+ body.desktop-overhaul-v18 .v8-global-page-hero{min-height:170px;margin:13px 0 14px!important;padding:21px!important}
+ body.desktop-overhaul-v18 .v8-hero-visual .v8-hero-3d{width:92px;height:92px}
+ body.desktop-overhaul-v18 .more-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:620px){
+ body.desktop-overhaul-v18 .v8-global-page-hero{min-height:0;padding:19px!important;align-items:flex-start}
+ body.desktop-overhaul-v18 .v8-global-page-hero h1{font-size:26px!important}
+ body.desktop-overhaul-v18 .v8-global-page-hero p{font-size:12px!important;line-height:1.62!important}
+ body.desktop-overhaul-v18 .v8-hero-visual .v8-hero-3d{height:64px;width:64px}
+ body.desktop-overhaul-v18 .v8-global-page-hero .intro-aside.v8-hero-visual{min-width:64px;max-width:75px}
+ body.desktop-overhaul-v18 .v8-hero-visual span{display:none}
+ body.desktop-overhaul-v18 .v8-global-page-actions{gap:6px;margin-top:12px}
+ body.desktop-overhaul-v18 .v8-global-action{padding:7px 10px;min-height:34px;font-size:10px}
+ body.desktop-overhaul-v18 .more-grid{grid-template-columns:1fr!important}
+ body.desktop-overhaul-v18 .more-row{min-height:84px}
+ body.desktop-overhaul-v18 .more-row .v8-real-3d{height:51px;width:51px}
+ body.desktop-overhaul-v18 .v8-hadith-toolbar{display:block}
+ body.desktop-overhaul-v18 #v8HadithSearch{width:100%}
+ body.desktop-overhaul-v18 #v8ChatSend{padding:0 11px}
+ body.desktop-overhaul-v18 .v8-chat-title h2{font-size:20px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.desktop-overhaul-v18 :is(.real-grid-item,.rule-card,.pub-card,.dua-real,.source-work,.more-row,.real-cover,.feature-card,.category-card,.list-row){transition:none!important}
+}
+
+/* Quran reader small-screen intrinsic sizing fix: never let a book page widen the whole UI. */
+@media(max-width:959px){
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .quran-reading-zone{margin-inline:0!important;padding-inline:8px!important;overflow:clip}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] :is(.quran-layout,.quran-sidebar,.quran-surah-nav,.book-stage,.book-rim,.book-shell,.book-page,.book-loading,.book-controls){min-width:0!important;max-width:100%!important;box-sizing:border-box!important}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .quran-layout{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .quran-surah-nav{grid-template-columns:repeat(3,minmax(0,1fr))!important;overflow-x:hidden}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .quran-surah-nav a{min-width:0!important;overflow-wrap:anywhere;font-size:10px!important}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .book-stage{padding-inline:4px!important}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .book-rim{padding-inline:4px!important}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .book-page{padding-inline:clamp(12px,4vw,25px)!important}
+ body.desktop-overhaul-v18[data-dar-v8-route="quran"] .book-controls{display:flex!important;flex-wrap:wrap!important;justify-content:center}
+}
+
+/* Only home owns the salām and introductory welcome. Subpages start with their
+   own contextual V8 hero, eliminating the repeated welcome seen in recordings. */
+body.desktop-overhaul-v18:not(.dar-v8-home) #darV8TopWelcome{display:none!important;visibility:hidden!important}
+body.desktop-overhaul-v18:not(.dar-v8-home) .v8-global-page-hero{margin-top:14px!important}
+@media(max-width:959px){
+ body.desktop-overhaul-v18:not(.dar-v8-home) .v8-global-page-hero{margin-top:13px!important}
+}
+
+/* Legacy scroll reveal created nearly invisible cards before scrolling on mobile.
+ * Content and controls must be legible as soon as the route is mounted. */
+body.desktop-overhaul-v18 #pageRoot .reveal,
+body.desktop-overhaul-v18 #pageRoot .section,
+body.desktop-overhaul-v18 #pageRoot .page-intro{opacity:1!important;visibility:visible!important;transform:none!important}
+body.desktop-overhaul-v18 #pageRoot .section.is-leaving{opacity:1!important}
