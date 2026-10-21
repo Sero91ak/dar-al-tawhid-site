@@ -67,8 +67,9 @@ for(const locale of EXPECTED){
  assert.equal(excluded.nodeValue,"Nicht authentisch belegt","source text modified");
  assert.equal(doc.documentElement.dir,["ar","ckb"].includes(locale)?"rtl":"ltr");
  const corpus=pack.translations[locale]||{};
+ const referenceUnits={tr:"atıf yeri",en:"references",ar:"مواضع",ku:"cihên çavkaniyê",ckb:"ئاماژە",bs:"referenci"};
  const expectedQuran=locale==="de"?"Qurʾān · 8 Fundstellen":
-   (locale==="tr"?"Kur'an":corpus["Qurʾān"])+" · 8 "+corpus["Fundstellen"];
+   (locale==="tr"?"Kur'an":corpus["Qurʾān"])+" · 8 "+referenceUnits[locale];
  assert.equal(dynamicQuran.nodeValue,expectedQuran,locale+" numeric Quran heading");
  const statement=locale==="de"?"Aussagen im Qurʾān · 3":
    (locale==="tr"?"Kur'ân'daki ifadeler":corpus["Aussagen im Qurʾān"])+" · 3";
