@@ -54,6 +54,8 @@
     "sourceArtifactId": 12387413256,
     "newElevenLabsCreditSpend": 0,
     "retainSourceClipHashes": true,
-    "runBranch": "review/kids-v4-audio-safe-import-20261022"
+    "runBranch": "review/kids-v4-audio-safe-import-20261022",
+    "retryReason": "runner did not have FFprobe preinstalled; installer added to pinned workflow; original protected bytes unchanged",
+    "attempt": 2
   }
 }
