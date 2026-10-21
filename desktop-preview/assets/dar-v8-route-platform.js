@@ -171,7 +171,7 @@ function init(key,ctx){
  updateNav(key);setupMenu();if(prayerWatch&&key!=="gebetszeiten"){prayerWatch.disconnect();prayerWatch=null}
  if(key==="gebetszeiten")initPrayer();
  if(key==="hadith")initHadith(ctx);
- if(key==="suche")enhanceSearch(ctx);
+ if(key==="suche"&&!global.DARV8Portal)enhanceSearch(ctx);
 }
 global.DARV8Routes={htmlFor,init,links,escape};
 })(window);
