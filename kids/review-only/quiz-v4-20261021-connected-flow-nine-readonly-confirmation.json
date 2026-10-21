@@ -1,0 +1,132 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-21",
+  "scope": "KIDS_V4_NINE_PREPAID_FLOW_REFERENCE_VERIFIED_NOT_MEDIA_RECOVERED",
+  "repository": "Sero91ak/dar-al-tawhid-site",
+  "reviewBranch": "review/kids-quiz-v4-batch-001-020-20261014",
+  "flowId": "n2ovmGko2iTlNWTAEqHk",
+  "flowUrl": "https://elevenlabs.io/app/flows/n2ovmGko2iTlNWTAEqHk",
+  "sourceOfExpectedIds": "kids/data/quiz-v4-missing9-prepaid-originals.json",
+  "sourceOfExpectedVoice": "kids/data/quiz-v4-final-nine-paid-flow-recovery.json",
+  "voiceIdExpectedFromRepo": "DkU7j9uO4ZEtLD2iRZSH",
+  "voiceIdIndependentlyReturnedByNodeRead": false,
+  "modelIdConfirmedByProviderNodeRead": "eleven_v4",
+  "flowReadVerifiedStaticNodeCount": 9,
+  "providerNodeReadExactOriginalTextMatches": 9,
+  "originalMP3BytesRetrieved": 0,
+  "importedOriginalCountBeforeAndAfter": 47,
+  "stillMissingOriginalCount": 9,
+  "newElevenLabsSyntheses": 0,
+  "newElevenLabsCreditsSpent": 0,
+  "statusOfAllNine": "STATIC_REFERENCE_EXISTS_AUDIO_EXPORT_NOT_EXPOSED",
+  "historyRecoveryNote": "Earlier original GET requests returned HTTP 402, and history GET candidate text matches had no verified provider-id crosslink; do not relabel candidate audio as original.",
+  "items": [
+    {
+      "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+      "nodeId": "1Dj5Sfvlnu5hmMj3MVMB",
+      "modelId": "eleven_v4",
+      "nodeType": "static_asset",
+      "providerReturnedOriginalText": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
+      "exactTextMatchedExpectedManifest": true,
+      "originalMP3DownloadExposed": false,
+      "originalBytesVerified": false,
+      "newSynthesisForbidden": true
+    },
+    {
+      "generationId": "DX5z8FWaCS4FDx3KrloO",
+      "nodeId": "BYhxL31AuutMyClfZvv2",
+      "modelId": "eleven_v4",
+      "nodeType": "static_asset",
+      "providerReturnedOriginalText": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
+      "exactTextMatchedExpectedManifest": true,
+      "originalMP3DownloadExposed": false,
+      "originalBytesVerified": false,
+      "newSynthesisForbidden": true
+    },
+    {
+      "generationId": "AToalNGbxiRe1zfOnDG3",
+      "nodeId": "6VMkmftaGpXjlZ1SdtdC",
+      "modelId": "eleven_v4",
+      "nodeType": "static_asset",
+      "providerReturnedOriginalText": "Das merken wir uns: Wir dienen Allah allein.",
+      "exactTextMatchedExpectedManifest": true,
+      "originalMP3DownloadExposed": false,
+      "originalBytesVerified": false,
+      "newSynthesisForbidden": true
+    },
+    {
+      "generationId": "FGX65uXKWBnjULDxg3X1",
+      "nodeId": "T9Ta4XeLTcYQQtxJaBQl",
+      "modelId": "eleven_v4",
+      "nodeType": "static_asset",
+      "providerReturnedOriginalText": "Schau, was du schon alles weißt.",
+      "exactTextMatchedExpectedManifest": true,
+      "originalMP3DownloadExposed": false,
+      "originalBytesVerified": false,
+      "newSynthesisForbidden": true
+    },
+    {
+      "generationId": "KIgCxJO3RDxhsIFJSYUB",
+      "nodeId": "iWDoEZzA4MXWOa8AQKM6",
+      "modelId": "eleven_v4",
+      "nodeType": "static_asset",
+      "providerReturnedOriginalText": "Ist Allah Einer?",
+      "exactTextMatchedExpectedManifest": true,
+      "originalMP3DownloadExposed": false,
+      "originalBytesVerified": false,
+      "newSynthesisForbidden": true
+    },
+    {
+      "generationId": "UUmC2fDiXaV5W1IQSumA",
+      "nodeId": "rJTBDC543aqmg11iVNn8",
+      "modelId": "eleven_v4",
+      "nodeType": "static_asset",
+      "providerReturnedOriginalText": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+      "exactTextMatchedExpectedManifest": true,
+      "originalMP3DownloadExposed": false,
+      "originalBytesVerified": false,
+      "newSynthesisForbidden": true
+    },
+    {
+      "generationId": "aoKJuahenrKHfUE5OD9j",
+      "nodeId": "onwsi8RzUiMnQdQFKVDQ",
+      "modelId": "eleven_v4",
+      "nodeType": "static_asset",
+      "providerReturnedOriginalText": "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Du lernst immer mehr!",
+      "exactTextMatchedExpectedManifest": true,
+      "originalMP3DownloadExposed": false,
+      "originalBytesVerified": false,
+      "newSynthesisForbidden": true
+    },
+    {
+      "generationId": "2xy9ZLej1wPTrnvAr9p7",
+      "nodeId": "M4657KPimouNP1UpZmlb",
+      "modelId": "eleven_v4",
+      "nodeType": "static_asset",
+      "providerReturnedOriginalText": "Du lernst mit jedem Versuch. Hör noch einmal genau hin!",
+      "exactTextMatchedExpectedManifest": true,
+      "originalMP3DownloadExposed": false,
+      "originalBytesVerified": false,
+      "newSynthesisForbidden": true
+    },
+    {
+      "generationId": "1UAwmEQ77D4BmA9DttHZ",
+      "nodeId": "K9HbIyvEIkOAcxq6UV7q",
+      "modelId": "eleven_v4",
+      "nodeType": "static_asset",
+      "providerReturnedOriginalText": "Das merken wir uns: Sūrat al-Iḫlāṣ lehrt: Allah ist Einer.",
+      "exactTextMatchedExpectedManifest": true,
+      "originalMP3DownloadExposed": false,
+      "originalBytesVerified": false,
+      "newSynthesisForbidden": true
+    }
+  ],
+  "safety": {
+    "staticFlowReferencesDoNotConstituteMP3Content": true,
+    "mustNotIncreaseStoredOriginalCountOrCompleteQuestionsUntilRealBytesImported": true,
+    "newSynthesisOfNineForbidden": true,
+    "noHumanListeningApprovalsAdded": true,
+    "publicReleaseEnabled": false,
+    "nextAction": "Export exact original files through existing account's original Download action if available; validate with existing paid-flow import workflow. Never click Generate or Regenerate."
+  }
+}
