@@ -17,7 +17,7 @@ jobs:
       github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014' &&
       github.event.head_commit.message == 'audio(kids V4): import existing master originals into all 450 private quiz IDs [zero-credit]'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 65
     env:
       ELEVENLABS_API_KEY: ''
     steps:
@@ -101,11 +101,12 @@ jobs:
             git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
             git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
           }
-          for attempt in 1 2 3 4; do
-            if [ "$attempt" -gt 1 ]; then
-              # SAFE ONLY in this zero-credit pipeline, never in the paid
-              # write-ahead ledger runner. All derived manifests/MP3 composites
-              # are regenerated from the newest original bytes after a race.
+          # Only re-encode all 450 MP3 parts when the ORIGINAL registry changes.
+          # Unrelated documentation/source commits may advance HEAD repeatedly:
+          # rebase the already-verified composited MP3 commit instead of
+          # rebuilding every expensive FFmpeg composite after each git push race.
+          for rebuild in 1 2 3 4; do
+            if [ "$rebuild" -gt 1 ]; then
               git fetch --no-tags origin review/kids-quiz-v4-batch-001-020-20261014
               git reset --hard FETCH_HEAD
               python3 kids/tools/qa_quiz_v4_saved_mp3.py
@@ -115,19 +116,38 @@ jobs:
               python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
               python3 kids/tools/write_quiz_v4_handover.py
             fi
+            # Bound the exact paid registry content for this offline compilation.
+            original_sha="$(git rev-parse HEAD:kids/data/quiz-v4-450-original-clip-registry.json)"
             stage_output
             if git diff --cached --quiet; then
-              echo 'PASS: all 450 review manifests are already current; 0 paid TTS'
+              echo 'PASS: latest 450 review manifests already match genuine originals; 0 speech calls'
               exit 0
             fi
             git commit -m 'audio(kids V4): sync existing genuine original MP3s into private 450 review [skip ci]'
-            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
-              echo 'PASS: exact 450 review manifests committed with latest master original MP3s, no paid synthesis'
-              exit 0
-            fi
-            echo 'Review branch moved during zero-credit compose; reread ORIGINALS from remote, rerun derived outputs instead of conflicting rebase'
+            for push_try in 1 2 3 4 5 6 7 8 9 10 11 12; do
+              if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+                echo 'PASS: complete SHA-proven 450 audio review imported, no new paid originals'
+                exit 0
+              fi
+              git fetch --no-tags origin review/kids-quiz-v4-batch-001-020-20261014
+              # A genuinely NEW original invalidates derived audio. Rebuild.
+              remote_sha="$(git rev-parse FETCH_HEAD:kids/data/quiz-v4-450-original-clip-registry.json)"
+              if [ "$remote_sha" != "$original_sha" ]; then
+                echo 'Master original registry changed; recompose from latest SHA; never publish stale clips'
+                break
+              fi
+              # Original bytes unchanged: replay only our DERIVED audio-review commit.
+              # Never force-push, rewrite paid ledgers, or silently resolve a
+              # source conflict by preferring ours/theirs.
+              if ! git rebase FETCH_HEAD; then
+                git rebase --abort || true
+                echo 'Concurrent review asset conflict; regenerate from remote source instead'
+                break
+              fi
+              echo 'Rebased unchanged-original audio review on newer unrelated branch commits'
+            done
           done
-          echo 'Four safe rebuild attempts failed; private CI artifact preserves outputs; zero paid TTS'
+          echo 'Offline review could not be safely committed; original paid MP3s and CI artifact preserved'
           exit 1
       - name: Archive refreshed genuine master MP3 review data
         if: always()
