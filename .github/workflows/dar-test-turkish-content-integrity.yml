@@ -1,0 +1,69 @@
+name: DAR TEST Turkish Content Integrity
+on:
+  push:
+    branches:
+      - feature/tr-dar-test-content-integration-20261021
+    paths:
+      - 'desktop-preview/i18n-core-v1/**'
+      - 'test/assets/dar-adult-localized-content.js'
+      - 'test/assets/dar-home-v3-compact.js'
+      - 'test/tr-review/**'
+      - '.github/workflows/dar-test-turkish-content-integrity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate-only-no-api:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JS syntax and offline fixtures without paid API calls
+        run: |
+          set -euo pipefail
+          node --check desktop-preview/i18n-core-v1/translation-worklist.cjs
+          node --check desktop-preview/i18n-core-v1/generate-translation-drafts.cjs
+          node --check test/assets/dar-adult-localized-content.js
+          node --check test/assets/dar-home-v3-compact.js
+          node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
+          node desktop-preview/i18n-core-v1/test-tr-approved-reader.cjs
+      - name: Check paid pilot manuscript is stored under the current source ID and remains draft
+        run: |
+          set -euo pipefail
+          node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/tr-inventory.json"
+          node - <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict'),path=require('node:path');
+          const inv=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/tr-inventory.json','utf8'));
+          const id='post:hasan-al-basri-selbstpruefung-20261021-481';
+          const entry=inv.items.find(x=>x.id===id);
+          assert(entry,'Canonical German post not indexed');
+          assert.equal(entry.languages.tr.state,'draft','Unapproved content must remain a draft');
+          const expected='desktop-preview/i18n-core-v1/translations/tr/post/hasan-al-basri-selbstpruefung-20261021-481-9b9306807c.json';
+          assert.equal(entry.languages.tr.translationPath,expected);
+          const tr=JSON.parse(fs.readFileSync(expected,'utf8'));
+          assert.equal(tr.sourceHash,entry.sourceHash);
+          assert.equal(tr.reviewer,null);
+          assert.equal(tr.modelUsage.total_tokens,927);
+          const names=fs.readdirSync(path.dirname(expected)).filter(x=>x.endsWith('.json'));
+          assert.equal(names.length,1,'Duplicate Turkish review records');
+          console.log('PASS: one paid pilot draft, current German source revision, no duplicates or publication.');
+          NODE
+      - name: Confirm build exports German original but never the Turkish draft
+        run: |
+          set -euo pipefail
+          node desktop-preview/i18n-core-v1/build-language-packs.cjs --inventory "$RUNNER_TEMP/tr-inventory.json" --output "$RUNNER_TEMP/packs"
+          node - <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict'),p=process.env.RUNNER_TEMP+'/packs/';
+          const de=JSON.parse(fs.readFileSync(p+'de.json','utf8')),tr=JSON.parse(fs.readFileSync(p+'tr.json','utf8'));
+          const id='post:hasan-al-basri-selbstpruefung-20261021-481';
+          assert(de.records.some(x=>x.id===id));
+          assert(!tr.records.some(x=>x.id===id));
+          console.log('PASS: Turkish unreviewed content excluded from approved language pack.');
+          NODE
