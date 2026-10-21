@@ -14,7 +14,8 @@
   const getSession=config.getSession||(()=>null);
   const network=config.transport||null;
   let current=SUPPORTED.has(read(store,KEY))?read(store,KEY):"de";
-  let pending=false,busy=false;
+  let last={};try{last=JSON.parse(read(store,STATE)||"{}")}catch(_){};
+  let pending=last.locale===current&&last.pending===true,busy=false;
   function emit(code,reason){if(!SUPPORTED.has(code))return false;current=code;put(store,KEY,code);config.onChange(code,reason);return true}
   function state(){return {locale:current,pending,busy,syncAvailable:!!network,authenticated:!!getSession()?.id}}
   async function pull(){
