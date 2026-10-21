@@ -2759,7 +2759,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 </div></div>
 
 <script src="/desktop-preview/assets/dar-v8-route-platform.js?v=20261021-2"></script>
-<script id="darV8ShellInteractions">(function(){var t=document.getElementById("darV8ThemeToggle");function apply(v){document.body.classList.toggle("dar-v8-night",v==="layl");if(t)t.textContent=v==="layl"?"☀":"☾"}try{apply(localStorage.getItem("darV8Theme")==="layl"?"layl":"salbei")}catch(e){apply("salbei")}if(t)t.addEventListener("click",function(){var v=document.body.classList.contains("dar-v8-night")?"salbei":"layl";apply(v);try{localStorage.setItem("darV8Theme",v)}catch(e){}});var a=document.getElementById("darV8TopAudio");if(a)a.addEventListener("click",function(){document.getElementById("quranAudioPlayer")?.scrollIntoView({behavior:"smooth",block:"center"})});var settings=document.getElementById("darV8PrayerSettings");if(settings)settings.addEventListener("click",function(){var section=document.querySelector(".v8-real-prayer");if(!section)return;var opened=section.classList.toggle("dar-v8-prayer-settings-open");settings.setAttribute("aria-expanded",String(opened));settings.textContent=opened?"Einstellungen schließen ×":"Standort ↗";if(opened)document.getElementById("prCityOpen")?.click()});var expand=document.getElementById("darV8PlayerExpand");if(expand)expand.addEventListener("click",function(){var row=document.querySelector(".v8-real-player");if(!row)return;var opened=row.classList.toggle("dar-v8-controls-open");expand.setAttribute("aria-expanded",String(opened));expand.textContent=opened?"⌃":"⌄"});document.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();var input=document.getElementById("darV8FinderQuery")||document.getElementById("siteSearch");if(input)input.focus();else location.href="/?page=suche"}})})();</script>
+<script id="darV8ShellInteractions">(function(){var t=document.getElementById("darV8ThemeToggle");function apply(v){document.body.classList.toggle("dar-v8-night",v==="layl");if(t)t.textContent=v==="layl"?"☀":"☾"}try{apply(localStorage.getItem("darV8Theme")==="layl"?"layl":"salbei")}catch(e){apply("salbei")}if(t)t.addEventListener("click",function(){var v=document.body.classList.contains("dar-v8-night")?"salbei":"layl";apply(v);try{localStorage.setItem("darV8Theme",v)}catch(e){}});var a=document.getElementById("darV8TopAudio");if(a)a.addEventListener("click",function(){if(document.body.classList.contains("dar-v8-home")||document.body.classList.contains("dar-v8-quran-route")){document.querySelector(".v8-real-player")?.scrollIntoView({behavior:"smooth",block:"center"})}else{location.href="/?page=quran&player=expanded"}});var settings=document.getElementById("darV8PrayerSettings");if(settings)settings.addEventListener("click",function(){var section=document.querySelector(".v8-real-prayer");if(!section)return;var opened=section.classList.toggle("dar-v8-prayer-settings-open");settings.setAttribute("aria-expanded",String(opened));settings.textContent=opened?"Einstellungen schließen ×":"Standort ↗";if(opened)document.getElementById("prCityOpen")?.click()});var expand=document.getElementById("darV8PlayerExpand");if(expand)expand.addEventListener("click",function(){var row=document.querySelector(".v8-real-player");if(!row)return;var opened=row.classList.toggle("dar-v8-controls-open");expand.setAttribute("aria-expanded",String(opened));expand.textContent=opened?"⌃":"⌄"});document.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();var input=document.getElementById("darV8FinderQuery")||document.getElementById("siteSearch");if(input)input.focus();else location.href="/?page=suche"}})})();</script>
 <script src="/widgets/shared/prayer-math.js"></script>
 <script src="/assets/zakat-engine.js?v=desktop-20261009-4"></script>
 <script src="/assets/zakat-pdf.js?v=desktop-20261009-4"></script>
@@ -2991,6 +2991,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  function render(){
   var key=currentPage(); if(!renders[key])key="start";
   document.body.classList.toggle("dar-v8-home",key==="start");
+  document.body.classList.toggle("dar-v8-quran-route",key==="quran");
+  document.body.dataset.darV8Route=key;
   var crumb=document.getElementById("darV8BreadLabel");if(crumb)crumb.textContent=key==="start"?"Start":(intros[key]||intros.start)[0];document.querySelectorAll(".dar-v8-side-link").forEach(function(a){a.classList.toggle("active",a.dataset.page===key);if(a.dataset.page===key)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   try{
    root.innerHTML=(key==="start"?"":window.DARV8Routes.htmlFor(key))+renders[key]();
@@ -3732,26 +3734,29 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   surah:document.getElementById("qaSurah"),ayah:document.getElementById("qaAyah"),reciter:document.getElementById("qaReciter"),next:document.getElementById("qaNext"),surahs:[],state:{surah:1,ayah:1,reciter:"alafasy"}
  };
  var reciters=[
-  {id:"alafasy",name:"Mišārī Rāšid al-ʿAfāsī",folder:"Alafasy_128kbps"},
-  {id:"minshawi",name:"Muḥammad Ṣiddīq al-Minšāwī",folder:"Minshawy_Murattal_128kbps"},
-  {id:"husary",name:"Maḥmūd Ḫalīl al-Ḥuṣarī",folder:"Husary_128kbps"},
-  {id:"basit",name:"ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad",folder:"Abdul_Basit_Murattal_192kbps"},
-  {id:"sudais",name:"ʿAbd ar-Raḥmān as-Sudais",folder:"Abdurrahmaan_As-Sudais_192kbps"},
-  {id:"maher",name:"Māhir al-Muʿayqlī",folder:"MaherAlMuaiqly128kbps"}
+  {id:"alafasy",name:"Mišārī Rāšid al-ʿAfāsī",folder:"Alafasy_128kbps",edition:"ar.alafasy"},
+  {id:"minshawi",name:"Muḥammad Ṣiddīq al-Minšāwī",folder:"Minshawy_Murattal_128kbps",edition:"ar.minshawi"},
+  {id:"husary",name:"Maḥmūd Ḫalīl al-Ḥuṣarī",folder:"Husary_128kbps",edition:"ar.husary"},
+  {id:"basit",name:"ʿAbd al-Bāsiṭ ʿAbd aṣ-Ṣamad",folder:"Abdul_Basit_Murattal_192kbps",edition:"ar.abdulbasitmurattal"},
+  {id:"sudais",name:"ʿAbd ar-Raḥmān as-Sudais",folder:"Abdurrahmaan_As-Sudais_192kbps",edition:"ar.abdurrahmaansudais"},
+  {id:"maher",name:"Māhir al-Muʿayqlī",folder:"MaherAlMuaiqly128kbps",edition:"ar.mahermuaiqly"}
  ];
  function pad3(n){return String(Number(n)||1).padStart(3,"0")}
  function saveQa(){try{localStorage.setItem("darDesktopQuranAudioV1",JSON.stringify(qa.state))}catch(e){}}
  function loadQa(){try{var s=JSON.parse(localStorage.getItem("darDesktopQuranAudioV1")||"null");if(s){qa.state.surah=Number(s.surah)||1;qa.state.ayah=Number(s.ayah)||1;qa.state.reciter=s.reciter||"alafasy"}}catch(e){}}
  function currentSurah(){return qa.surahs.find(function(x){return Number(x.id)===Number(qa.state.surah)})||qa.surahs[0]}
  function reciter(){return reciters.find(function(x){return x.id===qa.state.reciter})||reciters[0]}
- function audioUrl(){return "https://everyayah.com/data/"+reciter().folder+"/"+pad3(qa.state.surah)+pad3(qa.state.ayah)+".mp3"}
+ function globalAyah(){var n=Number(qa.state.ayah)||1;for(var i=0;i<qa.surahs.length;i++){var s=qa.surahs[i];if(Number(s.id)===Number(qa.state.surah))return n;n+=Number(s.total_verses)||0}return 0}
+ function proxyAudioUrl(){var n=globalAyah(),r=reciter();return n&&r.edition?"/quran-audio/"+encodeURIComponent(r.edition)+"/"+n+".mp3":""}
+ function everyayahAudioUrl(){return "https://everyayah.com/data/"+reciter().folder+"/"+pad3(qa.state.surah)+pad3(qa.state.ayah)+".mp3"}
+ function audioUrl(){return proxyAudioUrl()||everyayahAudioUrl()}
  function fillAyat(){
   var s=currentSurah(),total=s?Number(s.total_verses)||1:1;qa.state.ayah=Math.max(1,Math.min(total,qa.state.ayah));
   qa.ayah.innerHTML="";for(var i=1;i<=total;i++){var o=document.createElement("option");o.value=String(i);o.textContent=String(i);if(i===qa.state.ayah)o.selected=true;qa.ayah.appendChild(o)}
  }
  function updateQaTitle(){var s=currentSurah();qa.title.textContent=(s?s.transliteration:"Qurʾān")+" · Āyah "+qa.state.ayah}
  function setQaSource(autoplay){
-  qa.audio.src=audioUrl();qa.audio.load();updateQaTitle();saveQa();
+  qa.audio.dataset.fallbackUsed="";qa.audio.src=audioUrl();qa.audio.load();updateQaTitle();saveQa();
   try{if(currentPage()==="quran")document.querySelectorAll("[data-book-ayah]").forEach(function(el){el.classList.toggle("is-audio",Number(el.getAttribute("data-book-ayah"))===Number(qa.state.ayah)&&Number(quranBookState.surah)===Number(qa.state.surah))})}catch(e){}
   if("mediaSession" in navigator){try{navigator.mediaSession.metadata=new MediaMetadata({title:(currentSurah()?currentSurah().transliteration:"Qurʾān")+" · Āyah "+qa.state.ayah,artist:reciter().name,album:"DĀR AL TAWḤĪD · Qurʾān"})}catch(e){}}
   if(autoplay)qa.audio.play().catch(function(){})
@@ -3777,6 +3782,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   qa.audio.onpause=function(){qa.wrap.classList.remove("is-playing");qa.play.textContent="▶"};
   qa.audio.ontimeupdate=function(){var d=qa.audio.duration||0,c=qa.audio.currentTime||0;qa.progress.style.width=(d?Math.min(100,c/d*100):0)+"%"};
   qa.audio.onended=function(){stepQa(1,true)};
+  qa.audio.onerror=function(){if(qa.audio.dataset.fallbackUsed!=="yes"&&qa.audio.src.includes("/quran-audio/")){var resume=!qa.audio.paused;qa.audio.dataset.fallbackUsed="yes";qa.audio.src=everyayahAudioUrl();qa.audio.load();if(resume)qa.audio.play().catch(function(){qa.title.textContent="Audio derzeit nicht erreichbar · Rezitator wechseln"})}else{qa.title.textContent="Audio derzeit nicht erreichbar · Rezitator wechseln"}};
+  if(new URLSearchParams(location.search).get("player")==="expanded")document.getElementById("darV8PlayerExpand")?.click();
   if("mediaSession" in navigator){try{navigator.mediaSession.setActionHandler("play",function(){qa.audio.play()});navigator.mediaSession.setActionHandler("pause",function(){qa.audio.pause()});navigator.mediaSession.setActionHandler("nexttrack",function(){stepQa(1,true)});navigator.mediaSession.setActionHandler("previoustrack",function(){stepQa(-1,true)})}catch(e){}}
  }
 
