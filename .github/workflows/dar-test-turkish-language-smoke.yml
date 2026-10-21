@@ -52,8 +52,8 @@ jobs:
             driver.get('http://127.0.0.1:8765/test/')
             driver.execute_script("localStorage.setItem('darAdultPreferredLocaleV1','de')")
             driver.refresh()
-            WebDriverWait(driver,35).until(lambda d: d.execute_script("return !!document.querySelector('#dv3Home')"))
-            home=driver.execute_script("return [...document.querySelectorAll('#dv3Home button')].map(x=>x.textContent)")
+            WebDriverWait(driver,35).until(lambda d: d.execute_script("return !!document.querySelector('#dv3Home [data-dv3-locale=tr]')"))
+            home=driver.execute_script("return [...document.querySelectorAll('#dv3Home [data-dv3-locale]')].map(x=>x.textContent)")
             print('Home control:',home,flush=True)
             assert home==['Deutsch','Türkçe']
             driver.execute_script("document.querySelector('#dv3Home [data-dv3-locale=tr]').click()")
