@@ -27,7 +27,7 @@
   "ownerPronunciationHoldManifest": "kids/data/quiz-v4-owner-pronunciation-hold-20261021.json",
   "requireQuarantineOfRejectedOriginals": 7,
   "requireNoPriorPaidTextRegeneration": true,
-  "latestPurpose": "Recompose 450 review slots from all currently saved 1743 originals, including concurrent wave02 25, native Arabic reuse, and seven owner pronunciation holds; no TTS",
+  "latestPurpose": "Finish cost-free original-only 450 quiz V4 assembly after 25 wave03 and final 9 wave04 SHA-verified MP3s; enforce seven owner pronunciation holds",
   "accountForSevenOwnerPronunciationHolds": true,
   "strictReportAndStagingCoverageAgreement": true,
   "progressQuarantineFixCommit": "283a1480910401351545df67f8552b8d59077655",
@@ -42,5 +42,10 @@
   "requireRealFourPartAudioAndMP3ShaBeforeCompletion": true,
   "wave02OldPaidReceiptsNeverRerecord": true,
   "registeredOriginalCountAfterWave02": 1743,
-  "coverageMustBeCalculatedFromActualMP3AndQuarantine": true
+  "coverageMustBeCalculatedFromActualMP3AndQuarantine": true,
+  "registeredOriginalsAfterSafeFushaWaves": 1777,
+  "wave03AtomicReceiptImportCommit": "25951092408444e60c24495c0eb55ec1d3b2ce9e",
+  "wave04AtomicReceiptImportCommit": "218467c18fc9a514c4c2b5104fc7d13bb124c417",
+  "newElevenLabsCreditsSpentByThisSynchronization": 0,
+  "requireExactFourVerifiedPlaybacksBeforeCountingComplete": true
 }
