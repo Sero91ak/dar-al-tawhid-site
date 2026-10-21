@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           ref: review/kids-v4-nine-prepaid-artifact-replay-20261022
-          fetch-depth: 1
+          fetch-depth: 10
       - name: Retrieve original nine paid MP3s preserved after Git conflict
         uses: actions/download-artifact@v4
         with:
@@ -53,7 +53,7 @@ jobs:
           python3 kids/tools/report_quiz_v4_450_progress.py
           python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
           python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
-      - name: Commit and publish to new unique output branch, no competing writers
+      - name: Commit directly to the isolated checkout branch with verified ancestry
         run: |
           set -euo pipefail
           git config user.name dar-kids-v4-nine-paid-artifact-replay
@@ -69,7 +69,7 @@ jobs:
           git add kids/data/quiz-v4-450-production-status.json
           git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
           git commit -m "audio(kids review): genuinely recover all 9 paid originals and stage 80 blocked questions"
-          git push origin HEAD:refs/heads/review/kids-v4-nine-originals-imported-20261022
+          git push origin HEAD:refs/heads/review/kids-v4-nine-prepaid-artifact-replay-20261022
       - name: Backup nine original MP3s and review audio assignments
         if: always()
         uses: actions/upload-artifact@v4
