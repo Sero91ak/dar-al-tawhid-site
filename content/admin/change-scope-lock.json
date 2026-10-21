@@ -8608,6 +8608,16 @@
         ".github/workflows/dar-v8-browser-acceptance-20261021.yml"
       ],
       "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
+      "id": "dar-test-brand-header-v1-20261021",
+      "at": "2026-10-21T21:18:00+02:00",
+      "approvedBy": "user-explicit-header-logo-appearance-scroll-under-test-only-20261021",
+      "reason": "Isolated adult DAR TEST fixed theme-colored identity rail (logo, title, Qurʾān/Sunnah/Āthār subtitle, native theme picker) and scroll-under spacer. No visitor App, Kids, push, qibla, Quran, prayer, SW, native code or publication.",
+      "paths": [
+        "cloudflare/test-app-worker.js"
+      ],
+      "expiresAt": "2026-11-21T23:59:00.000Z"
     }
   ],
   "enabled": true
