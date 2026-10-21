@@ -27,5 +27,8 @@
   "ownerPronunciationHoldManifest": "kids/data/quiz-v4-owner-pronunciation-hold-20261021.json",
   "requireQuarantineOfRejectedOriginals": 7,
   "requireNoPriorPaidTextRegeneration": true,
-  "latestPurpose": "Resynchronize private V4 quizzes after owner rejected Ibādah and requested Halāl/Haram voice review, with 0 new paid recordings"
+  "latestPurpose": "Recompute V4 review after seven owner pronunciation holds; never regenerate originals, credit spend zero",
+  "accountForSevenOwnerPronunciationHolds": true,
+  "strictReportAndStagingCoverageAgreement": true,
+  "progressQuarantineFixCommit": "283a1480910401351545df67f8552b8d59077655"
 }
