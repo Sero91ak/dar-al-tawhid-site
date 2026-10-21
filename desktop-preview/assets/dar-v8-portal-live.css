@@ -891,3 +891,16 @@ body.desktop-overhaul-v18 #pageRoot .smart-search-dock .smart-search-input::-web
   padding:0 9px!important;max-width:100%!important;border-radius:19px!important
  }
 }
+
+
+/* A browser tab should behave like an app on touch screens.
+   Vertical page scrolling and text selection remain available; no pinch scaling. */
+@media(pointer:coarse){
+ html:has(body.desktop-overhaul-v18),
+ body.desktop-overhaul-v18,
+ body.desktop-overhaul-v18 .dar-v8-workspace,
+ body.desktop-overhaul-v18 #pageRoot{touch-action:pan-y!important}
+ body.desktop-overhaul-v18 :is(input,textarea,[contenteditable="true"]){
+  touch-action:pan-y!important
+ }
+}
