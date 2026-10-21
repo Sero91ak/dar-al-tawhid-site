@@ -204,7 +204,7 @@ ARABIC_UNSEGMENTED=re.compile(r"[\u0621-\u064A]|ﷺ")
 # Owner auditory feedback on 21 Oct 2026: these three exact root terms
 # require a new approved reading, not another charged German-alias guess.
 OWNER_PRONUNCIATION_REVIEW_TERMS=re.compile(
-    r"(?i)(?<![\\w])(?:ʿibādah|ḥalāl|ḥarām)(?![\\w])"
+    r"(?i)(?<![\w])(?:ʿibādah|ḥalāl|ḥarām)(?![\w])"
 )
 
 def source_requires_separate_pronunciation_approval(text):
