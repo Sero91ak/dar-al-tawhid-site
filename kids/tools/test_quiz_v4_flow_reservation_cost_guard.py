@@ -49,7 +49,7 @@ def main():
     fail_unless(attempts["modelId"]=="eleven_v4" and attempts["voiceId"]==VOICE,
                 "unconfirmed historic provider request identities changed")
     uncertain_hashes={x["textSHA256"] for x in attempts["entries"]
-                      if x["status"]=="REQUEST_STARTED_UNCONFIRMED"
+                      if x["status"]=="REQUEST_STARTED_UNCONFIRMED"}
     registered=set(reg["textClips"])
     fail_unless(not (reserved&registered or reserved&missing9),
                 "connected Flow pending text is already saved or an old nine original")
