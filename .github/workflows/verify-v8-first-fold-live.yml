@@ -1,0 +1,37 @@
+name: Verify V8 Public Website Live Response
+on:
+  push:
+    branches:
+      - diagnostics/public-v8-live-smoke-20261021
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Verify actual public home is V8 first fold, not cached app
+        shell: bash
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp -d)
+          trap 'rm -rf "$tmp"' EXIT
+          ua='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/130.0.0.0 Safari/537.36'
+          cache="${GITHUB_SHA}-$(date +%s)"
+          curl -fL --retry 4 --retry-delay 3 --max-time 30 -A "$ua" -H 'Cache-Control: no-cache' -D "$tmp/root-headers" -o "$tmp/home" "https://dar-al-tawhid.de/?page=start&verify=$cache"
+          curl -fL --retry 4 --retry-delay 3 --max-time 30 -A "$ua" -H 'Cache-Control: no-cache' -o "$tmp/css" "https://dar-al-tawhid.de/desktop-preview/assets/dar-smart-home-v8-live.css?verify=$cache"
+          grep -qi 'x-dar-surface: public-website' "$tmp/root-headers" || { echo 'ERROR: public browser not serving desktop website'; exit 1; }
+          grep -Fq 'id="darV8TopWelcome"' "$tmp/home" || { echo 'ERROR: new first-fold welcome missing from live HTML'; exit 1; }
+          grep -Fq 'id="prayerRiver"' "$tmp/home" || { echo 'ERROR: original prayer dock missing'; exit 1; }
+          grep -Fq 'id="qaAudio"' "$tmp/home" || { echo 'ERROR: original Quran player missing'; exit 1; }
+          grep -Fq 'id="darSmartPublicV8"' "$tmp/home" || { echo 'ERROR: v8 CSS link missing'; exit 1; }
+          grep -Fq '.dar-v8-top-welcome' "$tmp/css" || { echo 'ERROR: new first-fold CSS missing'; exit 1; }
+          node - "$tmp/home" <<'NODE'
+          const fs=require('fs'); const text=fs.readFileSync(process.argv[2],'utf8');
+          const a=text.indexOf('id="darV8TopWelcome"'), p=text.indexOf('id="prayerRiver"'), q=text.indexOf('class="isnad-ribbon"');
+          if(a<0||p<0||q<0||!(a<p&&p<q)) throw Error('V8 order absent: welcome → prayer → Ibn Sirin');
+          console.log(JSON.stringify({firstFoldWelcome:true,originalPrayer:true,originalPlayer:true,welcomeAt:a,prayerAt:p,isnadAt:q,bytes:text.length}));
+          NODE
+          echo '### Live: V8 first fold verified on dar-al-tawhid.de' >> "$GITHUB_STEP_SUMMARY"
+          echo 'New greeting visible before prayer and source ribbon. Original player and prayer elements preserved. Browser-visual rendering still requires real-device check.' >> "$GITHUB_STEP_SUMMARY"
