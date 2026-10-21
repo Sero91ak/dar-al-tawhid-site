@@ -296,7 +296,16 @@ function stylesheet(){
  "#darHomeHtmlParityV1 #dhpSearch:focus-visible{outline:0!important;}",
  "@media(max-width:699px){#darHomeHtmlParityV1 .dhp-content{max-width:100%!important;padding-inline:max(14px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))!important;}}",
  "@media(min-width:700px){#darHomeHtmlParityV1 .dhp-content{max-width:1280px!important;padding-inline:clamp(24px,3vw,44px)!important;}}",
- "@media(prefers-reduced-motion:reduce){#darHomeHtmlParityV1 :is(.dhp-prayer,.dhp-quick,.dhp-search-pill,.dhp-quran-capsule,.dhp-panel,.dhp-today-row,.dhp-post-capsule,.dhp-library-tile,.dhp-head button){transition:none!important;}}"
+ "@media(prefers-reduced-motion:reduce){#darHomeHtmlParityV1 :is(.dhp-prayer,.dhp-quick,.dhp-search-pill,.dhp-quran-capsule,.dhp-panel,.dhp-today-row,.dhp-post-capsule,.dhp-library-tile,.dhp-head button){transition:none!important;}}",
+ "/* DAR_TEST_LAST_ROW_FOOTER_FLOW_V53 · keep final 3 tiles fully visible, eliminate phantom footer gap, all themes */",
+ "#darHomeHtmlParityV1 .dhp-library{height:auto!important;max-height:none!important;overflow:visible!important;align-content:start!important;grid-auto-rows:minmax(112px,auto)!important;padding:0 0 4px!important;}",
+ "#darHomeHtmlParityV1 .dhp-library-tile{position:relative!important;box-sizing:border-box!important;min-height:112px!important;height:auto!important;max-height:none!important;overflow:visible!important;padding:12px 5px 14px!important;}",
+ "#darHomeHtmlParityV1 .dhp-section:has(.dhp-library){height:auto!important;max-height:none!important;overflow:visible!important;padding-bottom:0!important;margin-bottom:0!important;}",
+ "#darHomeHtmlParityV1 .dhp-content{height:auto!important;min-height:0!important;max-height:none!important;padding-bottom:calc(var(--dar-nav-height,76px) + env(safe-area-inset-bottom,0px) + 14px)!important;}",
+ "body.is-home-route #darHomeHtmlParityV1{height:auto!important;min-height:0!important;max-height:none!important;overflow:visible!important;}",
+ "#darHomeHtmlParityV1 .dhp-footer{height:auto!important;min-height:0!important;margin-top:16px!important;margin-bottom:0!important;padding-bottom:0!important;}",
+ "#darHomeHtmlParityV1 .dhp-library-tile::before,#darHomeHtmlParityV1 .dhp-library-tile::after{pointer-events:none!important;}",
+ "@media(max-width:699px){#darHomeHtmlParityV1 .dhp-library{grid-auto-rows:minmax(108px,auto)!important;}#darHomeHtmlParityV1 .dhp-library-tile{min-height:108px!important;padding-block:10px 12px!important;}#darHomeHtmlParityV1 .dhp-content{padding-bottom:calc(var(--dar-nav-height,76px) + env(safe-area-inset-bottom,0px) + 12px)!important;}}"
  ].join("\n");
 }
 function create(){
