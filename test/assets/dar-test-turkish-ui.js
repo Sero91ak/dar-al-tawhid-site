@@ -388,14 +388,14 @@ const DAR_DYNAMIC_UI_UNITS={
 function darDynamicUILocalize(value,language){
  const units=DAR_DYNAMIC_UI_UNITS[language];
  if(!units)return null;
- const q=value.match(/^(\\d+) (Aussagen mit Quellen\\.|Namen und Zuordnungen\\.|Suren mit Arabisch und Lautschrift\\.|bekannte Duʿāʾ nach Themen\\.|geprüfte Werke und zitierte Gelehrte\\.)$/);
+ const q=value.match(/^(\d+) (Aussagen mit Quellen\.|Namen und Zuordnungen\.|Suren mit Arabisch und Lautschrift\.|bekannte Duʿāʾ nach Themen\.|geprüfte Werke und zitierte Gelehrte\.)$/);
  if(q){
   const key={"Aussagen mit Quellen.":"matched","Namen und Zuordnungen.":"names",
    "Suren mit Arabisch und Lautschrift.":"surahs","bekannte Duʿāʾ nach Themen.":"duas",
    "geprüfte Werke und zitierte Gelehrte.":"books"}[q[2]];
   return DAR_UI_FORMATS[language]?.[key]?.(q[1])||null;
  }
- const surahButton=value.match(/^Sūrah ([\\p{L}\\p{M}0-9ʿʾ'’ .-]{2,95}) öffnen$/u);
+ const surahButton=value.match(/^Sūrah ([\p{L}\p{M}0-9ʿʾ'’ .-]{2,95}) öffnen$/u);
  if(surahButton)return DAR_SURAH_OPEN[language]?.(surahButton[1])||null;
  const numeric=value.match(/^(\d+) (Funktionen|Ergebnisse|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Fundstellen|Einträge)$/);
  if(numeric)return numeric[1]+" "+units[numeric[2]];
