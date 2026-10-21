@@ -3,7 +3,7 @@
   "app": "TAWḤĪD KIDS",
   "branch": "review/kids-quiz-v4-batch-001-020-20261014",
   "pullRequest": "https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143",
-  "basedOnReviewedCommit": "996e6b1d6e30a8368bdb9b5a6cc45fd572648b82",
+  "basedOnReviewedCommit": "52504b9a40505bed30ad07a33a05560ecc39e712",
   "modelId": "eleven_v4",
   "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "totalCanonicalQuestions": 900,
@@ -28,53 +28,53 @@
     },
     "7-8": {
       "questions": 150,
-      "completeFourPartQuestions": 55,
+      "completeFourPartQuestions": 128,
       "availableParts": {
-        "question": 61,
+        "question": 137,
         "correct": 150,
         "retry": 150,
-        "explanation": 73
+        "explanation": 134
       },
       "missingParts": {
-        "explanation": 77,
-        "question": 89
+        "explanation": 16,
+        "question": 13
       }
     },
     "9-10": {
       "questions": 150,
-      "completeFourPartQuestions": 62,
+      "completeFourPartQuestions": 118,
       "availableParts": {
-        "question": 69,
+        "question": 135,
         "correct": 150,
         "retry": 150,
-        "explanation": 64
+        "explanation": 123
       },
       "missingParts": {
-        "explanation": 86,
-        "question": 81
+        "explanation": 27,
+        "question": 15
       }
     }
   },
-  "uniqueVerifiedQuizMP3s": 495,
-  "reusedSpeechPartAssignments": 1285,
-  "fourPartAudioQuestions": 187,
-  "missingPartsQuestions": 263,
+  "uniqueVerifiedQuizMP3s": 757,
+  "reusedSpeechPartAssignments": 1547,
+  "fourPartAudioQuestions": 316,
+  "missingPartsQuestions": 134,
   "remainingNewV4UniqueSegmentsByCostAudit": 777,
   "remainingNewV4TextCodepoints": 39913,
   "older300CompactSpokenDraftCount": 300,
   "older300RawFullTextReductionPercent": 24.2,
   "creditBudgetAspirationalTarget": 27860.0,
   "estimatedAudioTextReductionForTargetPercent": 64.8,
-  "recoveryFirstPriorityPlanFresh": false,
+  "recoveryFirstPriorityPlanFresh": true,
   "connectedFlowOriginalsPendingOrReserved": 10,
   "connectedFlowAlreadySubmittedAwaitingImport": 1,
   "connectedFlowReservedUnspentNotToRebuy": 7,
-  "questionsWaitingOnlyForConnectedFlowOriginals": null,
-  "genuinelyNewFragmentsExcludingFlowReservations": null,
-  "onlyAlreadyPaidMP3RecoveryBlockedQuestions": null,
-  "questionsNeedingNewV4Originals": null,
-  "originalV4TextClipsRegistered": 989,
-  "previouslyChargedDirectV4Takes": 942,
+  "questionsWaitingOnlyForConnectedFlowOriginals": 5,
+  "genuinelyNewFragmentsExcludingFlowReservations": 65,
+  "onlyAlreadyPaidMP3RecoveryBlockedQuestions": 80,
+  "questionsNeedingNewV4Originals": 49,
+  "originalV4TextClipsRegistered": 1691,
+  "previouslyChargedDirectV4Takes": 1644,
   "prepaidOriginalsImported": 47,
   "prepaidOriginalsStillMissing": 9,
   "missingGenerationIds": [
@@ -88,7 +88,7 @@
     "UUmC2fDiXaV5W1IQSumA",
     "aoKJuahenrKHfUE5OD9j"
   ],
-  "remainingUniqueSpeechSegmentsEstimate": 777,
+  "remainingUniqueSpeechSegmentsEstimate": 75,
   "remainingEstimatedCreditsForAll450": 79075.79,
   "preciseBillingReconciled": false,
   "masterOfflineHearingPackageBuilder": "kids/tools/build_quiz_v4_all450_master_hearing_review.py",
@@ -102,7 +102,7 @@
   "olderStage1NewTextTakesNotPreviouslyReserved": 4,
   "olderStage1NextExactOriginalCount": 4,
   "olderStage1NextEstimatedCredits": 218.04,
-  "olderStage1NextExactBatchFingerprintSHA256": "825b5816bcce36458f4e4d4700110aa5cbe1fcab040bc9bf90b183eedbde2450",
+  "olderStage1NextExactBatchFingerprintSHA256": "c8fe8ed9cbd2fdf0bcb66a3701d8d82d38c2c0f22430fce45121e974d5e0969c",
   "olderStage1RequiresFreshCanonicalSourceAudit": true,
   "olderStage1RequiresExactBatchFingerprintForPaidRun": true,
   "olderStage1CostForecastUnconfirmed": true,
