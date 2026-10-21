@@ -4045,8 +4045,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  };
 
  renders.suche=function(){
-  return realIntro("SUCHE","Die gesamte Wissensseite durchsuchen.","Suche gleichzeitig in Beiträgen, Duʿāʾ, Bibliothek und Propheten.")+
-   '<section class="section parchment reveal"><input id="siteSearch" class="search-input" type="search" placeholder="Begriff, Person, Werk, Duʿāʾ oder Prophet …" autocomplete="off"><div id="searchResults" class="list-lines" style="margin-top:20px"></div></section>'+footer()
+  return realIntro("WISSENSCHAT","Fragen stellen und Fundstellen verstehen.","Die Suche liefert ausschließlich vorhandene Beiträge, Duʿāʾs, Werke und Quelleneinträge – ohne erfundene Antworten.")+
+   '<section class="section parchment reveal"><div class="v8-chat-panel"><div class="v8-chat-title"><img src="/assets/dar-3d-icons/spark.png" alt=""><div><h2>Masǧid al-ʿIlm · Interaktiver Quellenfinder</h2><p>Stelle deine Frage. Erhalte nachweisbare Fundstellen aus dem vorhandenen DĀR-Wissensbestand.</p></div></div><div id="v8ChatReply" aria-live="polite"></div><div class="v8-chat-input-wrap"><input id="siteSearch" type="search" class="search-input" placeholder="Tawḥīd, Īmān, Fiqh, Hadith, Āṯār – frage hier …" autocomplete="off" aria-label="Frage an Masǧid al-ʿIlm"><button id="v8ChatSend" type="button">Frage stellen ↗</button></div><div id="searchResults" class="list-lines" style="margin-top:17px"></div></div></section>'+footer()
  };
  initSearch=function(){
   var input=document.getElementById("siteSearch"),out=document.getElementById("searchResults");if(!input||!out)return;
