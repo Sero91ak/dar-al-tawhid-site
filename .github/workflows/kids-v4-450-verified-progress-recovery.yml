@@ -1,0 +1,83 @@
+name: KIDS V4 Reconcile 450 Actual MP3 Priority - Zero Credits
+on:
+  push:
+    branches:
+      - review/kids-quiz-v4-batch-001-020-20261014
+    paths:
+      - kids/review-only/quiz-v4-20261021-reconcile-trigger.json
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-20261021-reconcile-fresh-actual-mp3-450
+  cancel-in-progress: false
+jobs:
+  recompute-protected-450-completion:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-quiz-v4-batch-001-020-20261014'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout only owner review branch, with no provider credentials
+        uses: actions/checkout@v4
+        with:
+          ref: review/kids-quiz-v4-batch-001-020-20261014
+          fetch-depth: 0
+      - name: Verify 1777 actual master MP3 registrations without billing or release
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/quiz_v4_no_double_charge_guard.py kids/tools/plan_quiz_v4_finish_without_duplicate_credits.py kids/tools/test_quiz_v4_flow_reservation_cost_guard.py kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/plan_quiz_v4_finish_without_duplicate_credits.py
+          python3 kids/tools/test_quiz_v4_flow_reservation_cost_guard.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          s=json.loads(Path('kids/review-only/quiz-v4-450-next-completion-priority.json').read_text())['summary']
+          p=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          st=json.loads(Path('kids/review-only/quiz-v4-450-actual-mp3-import.json').read_text())
+          flag=json.loads(Path('kids/data/quiz-curation-release.json').read_text())
+          assert s['selectedQuestions']==450 and len(st['questions'])==450
+          assert s['alreadyTechnicallyComplete']==p['completedQuestionsWithAllFourAudioParts']==343
+          assert p['uniqueNewOriginalMP3sStored']==1777
+          assert sum(sum(v.values()) for v in s['ageCounts'].values())==450
+          assert sum(int(q['fourPartTechnicallyReady']) for q in st['questions'].values())==343
+          assert s['previouslyPaidMissingGenerationCount']==9
+          assert s['connectedFlowOriginalTextsPendingOrReserved']==10
+          assert s['missingGenuineNewExactSegments']==21
+          assert len(s['uncertainPreviouslyAttemptedSourceSHA256'])==1
+          assert s['newElevenLabsCreditsSpent']==0 and s['paidSynthesisAuthorized'] is False
+          assert s['humanListeningApproved'] is False and s['publicReleaseAllowed'] is False
+          assert flag['enabled'] is False and st['publicReleaseEnabled'] is False
+          print('PASS: 343/450 V4 SHA-validated; 107 pending; 9 prepaid, 10 reserved, 21 lexical; zero provider calls; live OFF')
+          PY
+      - name: Save verified cost-free 450 completion priorities in GitHub review
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-zero-credit-review-audit
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/quiz-v4-450-next-completion-priority.json kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md
+          if git diff --cached --quiet; then
+            echo "Review priority matches current verified 343/450; no changes"
+            exit 0
+          fi
+          git commit -m 'review(kids V4): save audited 343/450 recovery-first plan [skip ci]'
+          for n in 1 2 3 4; do
+            if git push origin HEAD:review/kids-quiz-v4-batch-001-020-20261014; then
+              echo 'PASS: latest validated plan saved without any ElevenLabs calls'
+              exit 0
+            fi
+            git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Archive exact current completion report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-450-verified-343-current-recovery-priority-no-credits
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/review-only/quiz-v4-450-next-completion-priority.json
+            kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md
