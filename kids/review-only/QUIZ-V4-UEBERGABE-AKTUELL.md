@@ -6,13 +6,13 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `4dc50707f32a8830edbfccbb2a1f3fbff01dcc48`
+- Commit beim Erstellen dieses Berichts: `75b27dc37484306f3391ba7e5586e40fc7e048ae`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **794 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1584 Frage-/Lob-/Retry-/Erklärungsteile**.
 - Technisch vierteilig vollständig: **343/450**, noch unvollständig: **107/450**.
 - Letzter V4-Kostenaudit: **75 neue Sprachfragmente** = **5068 Unicode-Zeichen**; **0 neue Lob-/Retry-Fragmente**, **0 neue V4-Texte für 4–6 Jahre**.
-- Prioritätsliste nach letztem MP3-Import neu berechnen; ursprüngliche V4-Quellen bleiben geschützt.
+- Nach Originalkosten getrennt: **80 Fragen nur durch bereits bezahlte MP3s blockiert**, **19 Fragen benötigen neue V4-Originaltexte**.
 - Alter 4-6: **70/150** komplett; vorhandene Hörteile question=100, correct=85, retry=85, explanation=148.
 - Alter 7-8: **139/150** komplett; vorhandene Hörteile question=144, correct=150, retry=150, explanation=142.
 - Alter 9-10: **134/150** komplett; vorhandene Hörteile question=138, correct=150, retry=150, explanation=142.
@@ -27,7 +27,7 @@
 
 Genauer kostenfreier Restplan: `kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md` und `kids/review-only/quiz-v4-450-next-completion-priority.json`.
 Zusätzliche globale Kostensperre: **10** echte Originaltexte sind im verbundenen ElevenLabs Flow noch reserviert/eingereicht und dürfen nicht erneut in eine kostenpflichtige TTS-Auswahl geraten. **1** davon sind bereits eingereicht, **7** sind vorerst unbezahlt reserviert. Der gesamte Audioabschlussplan unterscheidet diese Originale von wirklich neuen Sprachfragmenten.
-Nur bei frisch erzeugtem Abschlussplan: **Plan muss neu erstellt werden** Fragen warten ausschließlich auf verbundene Flow-Originale. Wirklich neue noch zu generierende V4-Sprachfragmente nach Deduplizierung: **Plan muss neu erstellt werden**. Diese Werte sind keine neue providerbestätigte Abrechnung.
+Nur bei frisch erzeugtem Abschlussplan: **5** Fragen warten ausschließlich auf verbundene Flow-Originale. Wirklich neue noch zu generierende V4-Sprachfragmente nach Deduplizierung: **22**. Diese Werte sind keine neue providerbestätigte Abrechnung.
 
 ## Noch fehlende, **bereits bezahlte** Originalaufnahmen
 
@@ -37,7 +37,7 @@ Generation-IDs: `1UAwmEQ77D4BmA9DttHZ, 2xy9ZLej1wPTrnvAr9p7, AToalNGbxiRe1zfOnDG
 
 Original-Flow: https://elevenlabs.io/app/flows/n2ovmGko2iTlNWTAEqHk
 Alle neun vorhandenen Audioelemente sind im Original-Flow eindeutigen Generation-IDs zugeordnet. Exakte Originaldateinamen und sichere Wiederherstellung: `kids/review-only/QUIZ-V4-LETZTE9-ORIGINALE-EXPORT.md`.
-Frühere GitHub-Backup-Archive bereits gescannt: **18** echte ZIP-Archive, darunter **0** neu wiederhergestellte Generationen. Das ist eine begrenzte, NICHT vollständige Bestandsprüfung. Die erweiterte Suche berücksichtigt zusätzliche Archive/Dateinamen und braucht einen neuen belegten Actions-Lauf.
+Frühere GitHub-Backup-Archive bereits gescannt: **48** echte ZIP-Archive, darunter **0** neu wiederhergestellte Generationen. Das ist eine begrenzte, NICHT vollständige Bestandsprüfung. Die erweiterte Suche berücksichtigt zusätzliche Archive/Dateinamen und braucht einen neuen belegten Actions-Lauf.
 
 ## Zusätzliche kostenfreie Suche in historischen GitHub-Audioarchiven
 
