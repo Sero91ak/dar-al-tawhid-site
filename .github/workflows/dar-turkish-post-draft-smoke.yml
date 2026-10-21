@@ -1,0 +1,64 @@
+name: DAR Turkish Post Draft — Cost Capped Smoke
+
+on:
+  push:
+    branches:
+      - feature/tr-content-draft-smoke-20261021
+    paths:
+      - .github/workflows/dar-turkish-post-draft-smoke.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-tr-single-post-draft
+  cancel-in-progress: false
+
+jobs:
+  translate-one:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Build existing canonical adult content worklist
+        run: |
+          node desktop-preview/i18n-core-v1/validate-core.cjs
+          node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/dar-tr-worklist.json" > "$RUNNER_TEMP/dar-tr-summary.json"
+      - name: Generate exactly one Turkish POST draft via paid OpenAI API
+        env:
+          DAR_I18N_AI_API_URL: https://api.openai.com/v1/chat/completions
+          DAR_I18N_AI_MODEL: gpt-4.1
+          DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
+          DAR_I18N_PROVIDER_APPROVED: 'yes'
+        run: |
+          set -euo pipefail
+          if [[ -z "${DAR_I18N_AI_API_KEY:-}" ]]; then echo "::error::OpenAI API secret missing"; exit 1; fi
+          node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs \
+            --generate \
+            --inventory "$RUNNER_TEMP/dar-tr-worklist.json" \
+            --output "$RUNNER_TEMP/dar-tr-single-draft" \
+            --kind post --locale tr --max-requests 1 \
+            --max-source-chars 3800 --max-output-tokens 2800
+      - name: Validate draft-only output and log metadata without revealing text
+        run: |
+          node - <<'NODE'
+          const fs=require('fs'),path=require('path'),root=path.join(process.env.RUNNER_TEMP,'dar-tr-single-draft');
+          function files(dir){if(!fs.existsSync(dir))return [];return fs.readdirSync(dir,{withFileTypes:true}).flatMap(x=>x.isDirectory()?files(path.join(dir,x.name)):x.name.endsWith('.json')?[path.join(dir,x.name)]:[])}
+          const names=files(root);
+          if(names.length!==1)throw Error('Expected exactly one draft (got '+names.length+')');
+          const draft=JSON.parse(fs.readFileSync(names[0],'utf8'));
+          if(draft.status!=='draft'||draft.locale!=='tr'||!draft.sourceHash||!String(draft.id).startsWith('post:'))throw Error('Unsafe or invalid draft');
+          console.log(JSON.stringify({result:'DRAFT_ONLY',id:draft.id,locale:draft.locale,fields:Object.keys(draft.fields||{}),usage:draft.modelUsage||null},null,2));
+          NODE
+      - name: Save Turkish manuscript for manual linguistic and religious review
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-tr-one-post-draft-not-published
+          path: ${{ runner.temp }}/dar-tr-single-draft/
+          retention-days: 3
+          if-no-files-found: warn
