@@ -6,12 +6,12 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `52504b9a40505bed30ad07a33a05560ecc39e712`
+- Commit beim Erstellen dieses Berichts: `b7bc6282992e26a34dd26832b1f58046cfb4da44`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **757 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1547 Frage-/Lob-/Retry-/Erklärungsteile**.
 - Technisch vierteilig vollständig: **316/450**, noch unvollständig: **134/450**.
-- Letzter V4-Kostenaudit: **777 neue Sprachfragmente** = **39913 Unicode-Zeichen**; **0 neue Lob-/Retry-Fragmente**, **0 neue V4-Texte für 4–6 Jahre**.
+- Letzter V4-Kostenaudit: **75 neue Sprachfragmente** = **5068 Unicode-Zeichen**; **0 neue Lob-/Retry-Fragmente**, **0 neue V4-Texte für 4–6 Jahre**.
 - Nach Originalkosten getrennt: **80 Fragen nur durch bereits bezahlte MP3s blockiert**, **49 Fragen benötigen neue V4-Originaltexte**.
 - Alter 4-6: **70/150** komplett; vorhandene Hörteile question=100, correct=85, retry=85, explanation=148.
 - Alter 7-8: **128/150** komplett; vorhandene Hörteile question=137, correct=150, retry=150, explanation=134.
