@@ -212,3 +212,59 @@ html:has(#darAdultBrandHeaderV2) body.is-home-route .top-shell .header #headerPr
 html:has(#darAdultBrandHeaderV2) body.is-home-route .top-shell .header .hero-text{
  display:none!important;
 }
+
+
+/* DAR_ADULT_APP_HOME_GREETING_CSS_V5
+ * This stylesheet is injected only into native adult and dedicated PWA shells,
+ * never into the separate public desktop/browser site. */
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeSourceV5{
+ display:block!important;order:-30!important;
+ width:100%!important;max-width:100%!important;
+ margin:5px 0 11px!important;
+ padding:0 clamp(12px,3.2vw,32px)!important;
+ background:none!important;border:none!important;box-shadow:none!important;
+ color:var(--dtbh-muted)!important;-webkit-text-fill-color:var(--dtbh-muted)!important;
+ text-transform:uppercase!important;letter-spacing:.105em!important;
+ font:750 clamp(10px,2.85vw,14px)/1.35 system-ui,-apple-system,sans-serif!important;
+ text-align:start!important;
+ overflow-wrap:break-word!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #headerPrayerStatus{
+ order:-20!important;margin-top:0!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5{
+ display:block!important;order:-10!important;width:100%!important;max-width:100%!important;
+ margin:clamp(21px,5vw,36px) 0 clamp(22px,5vw,36px)!important;
+ padding:0 clamp(12px,3.2vw,32px)!important;
+ color:var(--dtbh-ink)!important;background:transparent!important;
+ border:0!important;border-radius:0!important;box-shadow:none!important;
+ text-align:start!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-salam-v5{
+ margin:0!important;padding:0!important;font:650 clamp(22px,5.1vw,36px)/1.23 Georgia,"Iowan Old Style",serif!important;
+ color:var(--dtbh-ink)!important;-webkit-text-fill-color:var(--dtbh-ink)!important;
+ letter-spacing:-.012em!important;overflow-wrap:break-word!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-rule-v5{
+ display:block!important;margin:15px 0 14px!important;
+ height:1px!important;width:min(100%,410px)!important;
+ background:linear-gradient(90deg,var(--dtbh-line),transparent)!important;
+ border:0!important;box-shadow:none!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 p{
+ margin:0!important;padding:0!important;
+ color:var(--dtbh-ink)!important;-webkit-text-fill-color:var(--dtbh-ink)!important;
+ opacity:.89!important;font:400 clamp(14px,3.6vw,17px)/1.63 system-ui,-apple-system,sans-serif!important;
+ text-align:start!important;
+}
+html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 strong{
+ font-weight:750!important;color:var(--dtbh-ink)!important;
+}
+@media(max-width:359px){
+ html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeSourceV5{
+  font-size:9.5px!important;letter-spacing:.065em!important;
+ }
+ html.dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-salam-v5{
+  font-size:21px!important;
+ }
+}
