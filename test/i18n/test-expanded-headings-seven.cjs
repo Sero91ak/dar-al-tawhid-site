@@ -16,13 +16,16 @@ for(const locale of EXPECTED.slice(1)){
 }
 assert.equal(titles.bodyTranslation,false);
 assert.equal(titles.paidApiCalls,0);
-assert(Object.keys(titles.records).length>=13);
+assert(Object.keys(titles.records).length>=23);
 const els=[],body={nodeType:1,closest:()=>null,getAttribute:()=>null};
 const makeText=(value,excluded=false)=>({nodeType:3,nodeValue:value,parentElement:{closest:()=>excluded?({tagName:"CANONICAL"}):null}});
 const primary=makeText("ÜBERLIEFERUNGSMAẞSTAB"),prayer=makeText("Faǧr"),weekday=makeText("Mittwoch, 21. Oktober 2026"),
  original=makeText("رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً",true),
  excluded=makeText("Nicht authentisch belegt",true);
-const nodes=[primary,prayer,weekday,original,excluded];
+const dynamicQuran=makeText("Qurʾān · 8 Fundstellen"),
+ dynamicStatements=makeText("Aussagen im Qurʾān · 3"),
+ preservedSource=makeText("Qurʾān · 8 Fundstellen",true);
+const nodes=[primary,prayer,weekday,original,excluded,dynamicQuran,dynamicStatements,preservedSource];
 const props={
  nodeType:1,children:[],textContent:"📖 Wer Gutes zeigt, bekommt Anteil am Lohn",
  closest:()=>({getAttribute:()=> "wer-gutes-zeigt-bekommt-anteil-am-lohn-198"}),
@@ -40,7 +43,7 @@ vm.runInNewContext(ui,{window:w});
 const runtime=w.DarTestTurkishUI;
 assert(runtime.registerLocaleData(pack));
 assert(runtime.registerTitleData(titles));
-assert.equal(runtime.localizedDraftTitleCount,13);
+assert.equal(runtime.localizedDraftTitleCount,Object.keys(titles.records).length);
 for(const locale of EXPECTED){
  lng=locale;runtime.apply();
  const v=pack.translations[locale];
@@ -51,6 +54,14 @@ for(const locale of EXPECTED){
  assert.equal(original.nodeValue,"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً","Arabic source modified");
  assert.equal(excluded.nodeValue,"Nicht authentisch belegt","source text modified");
  assert.equal(doc.documentElement.dir,["ar","ckb"].includes(locale)?"rtl":"ltr");
+ const corpus=pack.translations[locale]||{};
+ const expectedQuran=locale==="de"?"Qurʾān · 8 Fundstellen":
+   (locale==="tr"?"Kur'an":corpus["Qurʾān"])+" · 8 "+corpus["Fundstellen"];
+ assert.equal(dynamicQuran.nodeValue,expectedQuran,locale+" numeric Quran heading");
+ const statement=locale==="de"?"Aussagen im Qurʾān · 3":
+   (locale==="tr"?"Kur'ân'daki ifadeler":corpus["Aussagen im Qurʾān"])+" · 3";
+ assert.equal(dynamicStatements.nodeValue,statement,locale+" numeric statement heading");
+ assert.equal(preservedSource.nodeValue,"Qurʾān · 8 Fundstellen","A sourced verse note must not be translated");
  if(locale==="en") assert(/Wednesday|October/.test(weekday.nodeValue),"Calendar month/day not localized");
 }
 lng="de";runtime.apply();
