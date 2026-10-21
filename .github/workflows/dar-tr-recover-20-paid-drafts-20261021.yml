@@ -1,0 +1,79 @@
+name: Recover previously paid Turkish translation drafts (no AI)
+
+on:
+  push:
+    branches:
+      - feature/adult-tr-i18n-manuscript-contract-20261021
+    paths:
+      - '.github/workflows/dar-tr-recover-20-paid-drafts-20261021.yml'
+
+permissions:
+  contents: write
+  actions: read
+
+concurrency:
+  group: dar-tr-paid-draft-recovery-20261021
+  cancel-in-progress: false
+
+jobs:
+  restore-already-paid:
+    if: ${{ github.run_attempt == 1 }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          persist-credentials: true
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Download 20 already-paid drafts from exact GitHub Action artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh run download 39670063967 \
+            --repo "$GITHUB_REPOSITORY" \
+            --name dar-tr-five-review-only \
+            --dir "$RUNNER_TEMP/paid-tr"
+      - name: Verify exact source fingerprints and DRAFT statuses before copying
+        shell: bash
+        run: |
+          set -euo pipefail
+          node desktop-preview/i18n-core-v1/translation-worklist.cjs \
+            --out "$RUNNER_TEMP/dar-recovery-worklist.json"
+          node - <<'NODE'
+          const fs=require('node:fs'),path=require('node:path');
+          const root=path.join(process.env.RUNNER_TEMP,'paid-tr');
+          const rel='desktop-preview/i18n-core-v1/translations/tr/post';
+          const dir=path.join(root,rel),names=fs.readdirSync(dir).filter(x=>x.endsWith('.json'));
+          if(names.length!==20)throw Error('Expected exactly 20 already-paid translation drafts');
+          const inv=JSON.parse(fs.readFileSync(path.join(process.env.RUNNER_TEMP,'dar-recovery-worklist.json'),'utf8'));
+          const q=new Map(inv.queue.filter(x=>x.locale==='tr'&&x.kind==='post').map(x=>[x.translationPath,x]));
+          for(const file of names){
+            const p=path.posix.join(rel,file),rec=q.get(p);
+            if(!rec||!['pending','stale'].includes(rec.state))throw Error('Already existing or mismatched: '+p);
+            const data=JSON.parse(fs.readFileSync(path.join(dir,file),'utf8'));
+            if(data.id!==rec.id||data.sourceHash!==rec.sourceHash||data.locale!=='tr'||
+               data.status!=='draft'||data.reviewer!==null||data.generatedBy!=='AI-assisted editorial draft'||
+               !data.fields?.title||!data.fields?.body)throw Error('Invalid translation or source: '+file);
+          }
+          console.log('PASS: 20 exact paid Turkish drafts ready to restore; no model calls');
+          NODE
+      - name: Commit recovered manuscripts to isolated branch without overwrites
+        shell: bash
+        run: |
+          set -euo pipefail
+          source_dir="$RUNNER_TEMP/paid-tr/desktop-preview/i18n-core-v1/translations/tr/post"
+          mkdir -p desktop-preview/i18n-core-v1/translations/tr/post
+          for file in "$source_dir"/*.json; do
+            dest="desktop-preview/i18n-core-v1/translations/tr/post/$(basename "$file")"
+            if [[ -e "$dest" ]]; then echo "::error::Refusing to overwrite $dest"; exit 1; fi
+            cp "$file" "$dest"
+          done
+          git add desktop-preview/i18n-core-v1/translations/tr/post/
+          git -c user.name="github-actions[bot]" \
+            -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -m "chore(i18n): recover twenty paid unapproved Turkish drafts"
+          git push origin HEAD:refs/heads/feature/adult-tr-i18n-manuscript-contract-20261021
