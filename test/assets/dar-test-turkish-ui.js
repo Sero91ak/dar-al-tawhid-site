@@ -193,6 +193,27 @@ function renderHomeWelcome(locale){
 const titleByGerman=new Map();
 let totalKnownTitleRecords=0;
 const originalTitles=new WeakMap();
+const originalPostAria=new WeakMap();
+function localizePostAria(host,sourceTitle,displayTitle,locale){
+ if(host?.getAttribute?.("data-nav")!=="post"||!host?.setAttribute)return;
+ const actual=host.getAttribute("aria-label");
+ if(typeof actual!=="string")return;
+ let state=originalPostAria.get(host);
+ if(state&&actual!==state.source&&actual!==state.rendered){originalPostAria.delete(host);state=null}
+ if(!state){
+  if(actual!==sourceTitle+" öffnen")return;
+  state={source:actual,rendered:actual};originalPostAria.set(host,state);
+ }
+ const formatted={
+  tr:t=>t+" içeriğini aç",en:t=>"Open "+t,ar:t=>"افتح "+t,
+  ku:t=>t+" veke",ckb:t=>t+" بکەرەوە",bs:t=>"Otvori "+t
+ };
+ const translated=locale==="de"?state.source:
+   (formatted[locale]?.(displayTitle)||state.source);
+ if(actual!==translated)host.setAttribute("aria-label",translated);
+ state.rendered=translated;
+}
+
 const HEADLINE_SELECTORS=[
  "#dv3Latest .dv3-post-body b","#dhpPosts .dhp-post-capsule h3","#dhpTodayName",
  ".dua-card h3",".dua-card .dua-title",".duas-card h3",".duas-card .dua-title",
@@ -249,6 +270,7 @@ function updateKnownTitles(locale){
   const desired=locale==="de"?old.source:record.translations?.[locale]||old.source;
   if(element.textContent!==desired)element.textContent=desired;
   old.rendered=desired;
+  localizePostAria(id,old.source,desired,locale);
  });
 }
 
