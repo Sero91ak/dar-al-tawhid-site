@@ -518,3 +518,80 @@ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player select{font-s
  body.desktop-overhaul-v18 #pageRoot>.dar-v8-messenger{height:min(850px,calc(100dvh - 120px))!important}
  body.desktop-overhaul-v18 .dar-v8-recent-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 }
+
+
+/* Qurʾān reading mode: mobile-first scripture typography, no fake hard-cover frame. */
+body.desktop-overhaul-v18 #pageRoot .quran-reading-zone{overflow:visible!important;min-width:0!important}
+body.desktop-overhaul-v18 #pageRoot .quran-reading-zone>.toolbar{
+ display:flex!important;align-items:center;flex-wrap:nowrap!important;
+ gap:7px!important;overflow-x:auto!important;overscroll-behavior-x:contain;
+ scrollbar-width:thin;scroll-snap-type:x proximity;padding:7px 0 11px!important;max-width:100%
+}
+body.desktop-overhaul-v18 #pageRoot .quran-reading-zone>.toolbar button{
+ flex:none!important;white-space:nowrap!important;scroll-snap-align:start;
+ font:650 12px/1.2 system-ui,-apple-system,sans-serif!important;
+ border:1px solid var(--v8-line)!important;border-radius:999px!important;
+ padding:10px 13px!important;background:transparent!important;color:var(--v8-ink)!important;
+}
+body.desktop-overhaul-v18 #pageRoot .quran-reading-zone>.toolbar button.active{
+ border-color:var(--v8-gold)!important;color:var(--v8-gold)!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-quran-global-results{max-height:45dvh}
+body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-controls{
+ display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;
+ padding:14px 0;background:transparent!important
+}
+body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-controls button{
+ min-height:43px;border-radius:12px;border:1px solid var(--v8-line)!important;
+ background:var(--v8-paper)!important;color:var(--v8-ink)!important
+}
+@media(max-width:959px){
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone{
+  padding:0!important;margin-inline:0!important;width:100%!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .quran-sidebar{
+  padding:8px 0 12px!important;margin:0!important;
+  border-bottom:1px solid var(--v8-line)!important;background:transparent!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .quran-surah-nav{
+  max-height:142px!important;overflow-y:auto!important;
+  margin:4px 0!important;padding:0 2px!important;gap:4px!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .quran-surah-nav a{
+  min-height:38px;padding:7px 9px!important;border-bottom:1px solid var(--v8-line)!important;
+  border-radius:5px!important;font:600 11px/1.4 system-ui,-apple-system,sans-serif!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-stage{
+  width:100%!important;margin:0!important;padding:14px 0 0!important;
+  perspective:none!important;background:transparent!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-stage::before{display:none!important}
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-rim{
+  padding:0!important;margin:0!important;border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;border:0!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-shell{
+  min-height:0!important;border:0!important;border-radius:0!important;overflow:visible!important;
+  box-shadow:none!important;background:transparent!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-shell::before,
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-shell::after{display:none!important}
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-page{
+  width:100%!important;min-height:0!important;max-width:none!important;
+  border:0!important;border-radius:0!important;background:transparent!important;
+  box-shadow:none!important;padding:12px clamp(8px,3.4vw,22px)!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-verse{
+  margin:0!important;padding:17px 0!important;border-bottom:1px solid var(--v8-line)!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-verse-ar{
+  font-family:"Amiri Quran","Amiri","Noto Naskh Arabic",serif!important;
+  font-size:clamp(25px,5.2vw,32px)!important;line-height:2.1!important;
+  color:var(--v8-ink)!important;text-align:right!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-verse-de{
+  font:400 clamp(14px,2vw,16px)/1.85 system-ui,-apple-system,sans-serif!important;
+  color:var(--v8-muted)!important;margin-top:10px!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-controls{padding-bottom:18px!important}
+}
