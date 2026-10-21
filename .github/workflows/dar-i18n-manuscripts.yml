@@ -46,7 +46,27 @@ jobs:
           node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
       - name: Determine new and stale language jobs (no push)
         run: node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/worklist.json"
+      - name: Prevent repeated paid calls for the same published commit
+        id: dedupe
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
+            branch="i18n/manuscripts-${GITHUB_SHA:0:12}"
+            if status="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/${branch}" 2>&1)"; then
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+              echo "Sprachmanuskripte für diesen Commit sind bereits in einem Review-Branch gespeichert." >> "$GITHUB_STEP_SUMMARY"
+              exit 0
+            elif ! grep -q "HTTP 404" <<< "$status"; then
+              echo "GitHub-Zustand unklar: zum Schutz vor Doppelabrechnung kein Modellaufruf." >&2
+              exit 1
+            fi
+          fi
+          echo "skip=false" >> "$GITHUB_OUTPUT"
       - name: Generate changed-post language manuscripts (drafts only)
+        if: ${{ steps.dedupe.outputs.skip != 'true' }}
         env:
           DAR_I18N_AI_API_URL: ${{ vars.DAR_I18N_AI_API_URL }}
           DAR_I18N_AI_MODEL: ${{ vars.DAR_I18N_AI_MODEL }}
@@ -82,7 +102,7 @@ jobs:
           cp -R "$generated/." desktop-preview/i18n-core-v1/translations/
           git add desktop-preview/i18n-core-v1/translations
           if git diff --cached --quiet; then echo "No new manuscripts."; exit 0; fi
-          branch="i18n/manuscripts-${GITHUB_RUN_ID}"
+          branch="i18n/manuscripts-${GITHUB_SHA:0:12}"
           git checkout -b "$branch"
           git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "chore(i18n): unreviewed multilingual manuscripts"
           git push origin "HEAD:refs/heads/$branch"
