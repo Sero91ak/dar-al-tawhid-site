@@ -1,0 +1,217 @@
+{
+  "schemaVersion": 1,
+  "scope": "KIDS_V4_450_POST_9_AND_6_ORIGINAL_IMPORT_MISSING_21",
+  "asOfDate": "2026-10-22",
+  "branch": "review/kids-v4-nine-prepaid-artifact-replay-20261022",
+  "ageBreakdown": {
+    "4-6": {
+      "complete": 150,
+      "selected": 150
+    },
+    "7-8": {
+      "complete": 143,
+      "selected": 150
+    },
+    "9-10": {
+      "complete": 136,
+      "selected": 150
+    }
+  },
+  "selected450": 450,
+  "technicallyComplete": 429,
+  "incomplete": 21,
+  "previouslyPaidFlowOriginalsRecovered": 56,
+  "previouslyPaidFlowOriginalsRemaining": 0,
+  "sixExistingOriginalsImportedWithNoNewTTSRequests": true,
+  "remainingRecoveryCategories": {
+    "new-original-v4-needed": 13,
+    "await-connected-flow-only": 4,
+    "await-uncertain-provider-original": 1,
+    "await-owner-pronunciation-replacement": 3
+  },
+  "pendingTrulyNewSpeechTextsFromPreviousPlanAfterSixCandidates": 15,
+  "quarantineExample": {
+    "questionId": "kids-quiz-046",
+    "reason": "User rejected or quarantined constituent original prevents playback even when other recorded fragments are saved; never bypass pronunciation hold",
+    "status": "requires human-validated replacement"
+  },
+  "newSpeechCreditsSpentInThisAnalysis": 0,
+  "publicRelease": false,
+  "allHumanListeningApproved": false,
+  "questions": [
+    {
+      "questionId": "kids-quiz-023",
+      "ageBand": "7-8",
+      "missingParts": [
+        "explanation"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-031",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question"
+      ],
+      "recoveryCategory": "await-connected-flow-only"
+    },
+    {
+      "questionId": "kids-quiz-036",
+      "ageBand": "9-10",
+      "missingParts": [
+        "explanation"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-041",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "recoveryCategory": "await-connected-flow-only"
+    },
+    {
+      "questionId": "kids-quiz-046",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "recoveryCategory": "await-connected-flow-only"
+    },
+    {
+      "questionId": "kids-quiz-080",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question"
+      ],
+      "recoveryCategory": "await-uncertain-provider-original"
+    },
+    {
+      "questionId": "kids-quiz-094",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "recoveryCategory": "await-connected-flow-only"
+    },
+    {
+      "questionId": "kids-quiz-097",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-131",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-189",
+      "ageBand": "9-10",
+      "missingParts": [
+        "explanation"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-271",
+      "ageBand": "7-8",
+      "missingParts": [
+        "explanation"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-276",
+      "ageBand": "7-8",
+      "missingParts": [
+        "explanation"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-278",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-485",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-499",
+      "ageBand": "9-10",
+      "missingParts": [
+        "explanation"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-640",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-641",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-809",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "recoveryCategory": "await-owner-pronunciation-replacement"
+    },
+    {
+      "questionId": "kids-quiz-839",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "recoveryCategory": "new-original-v4-needed"
+    },
+    {
+      "questionId": "kids-quiz-873",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "recoveryCategory": "await-owner-pronunciation-replacement"
+    },
+    {
+      "questionId": "kids-quiz-877",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "recoveryCategory": "await-owner-pronunciation-replacement"
+    }
+  ]
+}
