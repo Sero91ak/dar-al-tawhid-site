@@ -1,6 +1,15 @@
 /* DAR Mehr V1.5 | shared functional UI; scoped to the adult Mehr view only. */
 (function(){
 "use strict";
+/* One shared adult Turkish UI catalog, reused by PWA, desktop and iOS WKWebView. */
+if(!window.__DAR_ADULT_UI_TR_VISITOR_LOADED&&!/^\/test(?:\/|$)/.test(location.pathname)){
+ window.__DAR_ADULT_UI_TR_VISITOR_LOADED=true;
+ const script=document.createElement("script");
+ script.src="/assets/i18n/adult-ui-translate.js?v=20261021-tr-ui1";
+ script.async=true;
+ script.onerror=()=>{window.__DAR_ADULT_UI_TR_VISITOR_LOADED=false};
+ (document.head||document.documentElement).appendChild(script);
+}
 if(window.DAR_MORE_V15)return;
 const rootClass="dar-more-v15";
 const categories=[["wissen","Wissen","Lernen & Wissen","prophets"],["alltag","Alltag","Alltag & Gebet","prayer"],["werkzeuge","Werkzeuge","Werkzeuge & Assistenten","zakat"],["persoenlich","Persönlich","Persönlich","saved"],["app","App","App","settings"]];
@@ -35,6 +44,14 @@ function renderOurApps(){
 }
 
 const moreTheme=()=>document.documentElement.getAttribute("data-theme")||"dark";
+function adultLocaleSelector(){
+ const chosen=(()=>{try{return localStorage.getItem("darAdultPreferredLocaleV1")==="tr"?"tr":"de"}catch(_){return"de"}})();
+ return '<section class="dar-adult-locale-controls" role="group" aria-label="Sprache / Dil">'+
+ '<span class="dar-adult-locale-title">Sprache · Dil</span><span class="dar-adult-locale-choices">'+
+ '<button type="button" data-dar-adult-locale="de" aria-pressed="'+(chosen==="de")+'">Deutsch</button>'+
+ '<button type="button" data-dar-adult-locale="tr" aria-pressed="'+(chosen==="tr")+'">Türkçe</button>'+
+ '</span></section>';
+}
 function render(items,header){
  const data=Array.isArray(items)?items.filter(x=>x&&x.id!=="account"):[];
  if(!categories.some(c=>c[0]===chosen))chosen="wissen";
@@ -54,6 +71,7 @@ function render(items,header){
  return '<section class="'+rootClass+'" data-dm-density="'+density+'">'+head+
  '<div class="dm-actions"><button type="button" class="dm-action" data-dm-search-toggle aria-label="Funktion suchen" aria-expanded="'+searchOpen+'">'+svg("search")+'</button><button type="button" class="dm-action" data-dm-theme-toggle aria-label="Erscheinungsbild auswählen" aria-expanded="'+themeOpen+'">'+svg("palette")+'</button><button type="button" class="dm-action" data-dm-account-toggle aria-label="Konto und Synchronisierung öffnen" aria-expanded="'+accountOpen+'">'+svg("account")+'</button></div>'+
  '<div class="dm-search" '+(searchOpen?'':'hidden')+'><input id="moreFeatureSearch" type="search" placeholder="Funktion suchen…" autocomplete="off" aria-label="Funktion suchen" value="'+safe(query)+'"><button type="button" data-dm-search-close aria-label="Suche schließen">×</button></div>'+
+ adultLocaleSelector()+
  '<nav class="dm-tabs" aria-label="Bereiche">'+cats+'</nav><div class="dm-groups">'+groups+'</div>'+
  '<div class="dm-theme-backdrop" data-dm-theme-backdrop '+(themeOpen?'':'hidden')+'><section class="dm-theme-sheet" role="dialog" aria-modal="true" aria-labelledby="dmThemeTitle"><div class="dm-handle"></div><div class="dm-sheet-head"><div><small>DĀR AL TAWḤĪD · DESIGN</small><h3 id="dmThemeTitle">Erscheinungsbild</h3><p>Farbwelt wählen – die Inhalte bleiben unverändert.</p></div><button type="button" data-dm-theme-close aria-label="Schließen">×</button></div><div class="dm-theme-list">'+options+'</div><div class="dm-density-head">Darstellung</div><div class="dm-density-row"><button type="button" data-dm-density="compact" aria-pressed="'+(density==="compact")+'">Kompakt</button><button type="button" data-dm-density="comfort" aria-pressed="'+(density==="comfort")+'">Komfort</button></div></section></div></section>';
 }
