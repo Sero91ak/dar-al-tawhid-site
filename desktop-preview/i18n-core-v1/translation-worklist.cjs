@@ -78,14 +78,14 @@ function scanHadith(){
     if(!/^HAD-[0-9]+\.json$/.test(filename))continue;
     const sourcePath=path.posix.join(path.posix.dirname(indexPath),filename),item=json(sourcePath);
     if(!item?.id){issues.push({kind:"hadith",file:sourcePath,issue:"canonical-hadith-file-missing"});continue}
-    if(item.sharhStatus==="needs-review"||item.status==="missing")continue;
+    if(item.status==="missing")continue;
     add("hadith",item.id,sourcePath,{
       narratorLine:item.narratorLine||"",speakerLabel:item.speakerLabel||"",
       textMarkdown:item.textMarkdown||"",sharhText:item.sharhText||""
     },{
       recordType:item.recordType||"hadith",source:item.source||"",sourceBook:item.sourceBook||"",
       sourceHadithNumber:item.sourceHadithNumber||"",grade:item.grade||"",
-      sharhReference:item.sharhReference||"",sharhStatus:item.sharhStatus||"",
+      sharhReference:item.sharhReference||"",sharhStatus:item.sharhStatus||"",sourceReviewBlocked:item.sharhStatus==="needs-review"||item.verificationStatus==="needs-review",
       arabicOriginal:item.arabic||item.arabicOriginal||""
     });
     found++;
@@ -142,6 +142,7 @@ function translationPath(item,locale){
  return "desktop-preview/i18n-core-v1/approved/"+locale+"/"+dir+"/"+safe+"-"+suffix+".json";
 }
 function review(file,item,locale){
+ if(item.immutable?.sourceReviewBlocked)return"blocked-source";
  if(!file||typeof file!=="object")return"pending";
  if(file.status!=="approved")return file.status==="draft"?"draft":"pending";
  if(file.id!==item.id||file.locale!==locale||file.sourceHash!==item.sourceHash)return"stale";
@@ -155,7 +156,7 @@ scanPosts();scanQ();scanHadith();scanDua();scanQuiz();scanLearning();
 items.sort((a,b)=>a.kind.localeCompare(b.kind)||a.id.localeCompare(b.id));
 const previous=(()=>{try{return JSON.parse(fs.readFileSync(OUT,"utf8"))}catch(_){return null}})();
 const old=new Map((previous?.items||[]).map(x=>[x.id,x.sourceHash]));
-const queue=[],states={pending:0,draft:0,stale:0,approved:0,"invalid-review":0,"missing-fields":0};
+const queue=[],states={pending:0,draft:0,stale:0,approved:0,"invalid-review":0,"missing-fields":0,"blocked-source":0};
 let newItems=0,changedItems=0;
 for(const item of items){
  if(!old.has(item.id))newItems++;
