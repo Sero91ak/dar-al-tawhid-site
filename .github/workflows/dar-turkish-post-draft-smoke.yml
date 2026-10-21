@@ -6,6 +6,7 @@ on:
       - feature/tr-content-draft-smoke-20261021
     paths:
       - .github/workflows/dar-turkish-post-draft-smoke.yml
+      - desktop-preview/i18n-core-v1/generate-translation-drafts.cjs
   workflow_dispatch:
 
 permissions:
