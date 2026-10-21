@@ -341,7 +341,7 @@
         '<div class="qibla-qv__swipe" data-qibla-swipe="1" aria-hidden="true"></div>' +
         '<div class="qibla-qv__top">' +
           '<div class="qibla-qv__titles">' +
-            '<p class="qibla-qv__kicker" id="qiblaQvTitle">Qibla</p>' +
+            '<p class="qibla-qv__kicker" id="qiblaQvTitle">QIBLA · Suche</p>' +
             '<p class="qibla-qv__sub">Richtung zur Kaʿbah</p>' +
           "</div>" +
           '<button type="button" class="qibla-qv__close" data-qibla-close="1" aria-label="Schließen">×</button>' +
@@ -624,4 +624,13 @@
   root.DARQiblaCalculator = QiblaCalculator;
   root.DARQiblaEngine = engine;
   root.DARQiblaQuickView = QiblaQuickView;
+
+  // Use the existing quick view for legacy web entries and iOS/widget deep-link hints.
+  // The native bridge calls openQiblaFromFloat first, then openQiblaQuickSheet.
+  root.openQiblaQuickSheet = function () {
+    if (root.DARQiblaQuickView && typeof root.DARQiblaQuickView.open === "function") {
+      root.DARQiblaQuickView.open();
+    }
+  };
+  root.openQiblaFromFloat = root.openQiblaQuickSheet;
 })(typeof window !== "undefined" ? window : globalThis);
