@@ -365,8 +365,15 @@
       "sourceTextSHA256": "819fd586d3cced76d0bf0de22992cc8012b496a7f0dcdb420baff6515a87edb8",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
-      "status": "REQUEST_STARTED_UNCONFIRMED",
-      "startedAt": "2026-10-21T08:39:05.701878+00:00"
+      "status": "ORIGINAL_MP3_SAVED_REVIEW_ONLY",
+      "startedAt": "2026-10-21T08:39:05.701878+00:00",
+      "mp3Sha256": "157b74d13661230489cafa627c848c13550737180002f09e736818b7026a2cb3",
+      "mp3Bytes": 43510,
+      "providerRequestId": "fd2TUEKm79NA0GlxiYx5",
+      "audioUrl": "/kids/assets/kids-quiz-audio/v4-native-fusha-german-components-review/e2e0d2d66b1029dca141f504e7832029.mp3",
+      "completedAt": "2026-10-21T08:39:08.896015+00:00",
+      "humanListeningApproved": false,
+      "publicReleaseAllowed": false
     }
   ],
   "startedAt": "2026-10-21T08:37:01.120915+00:00"
