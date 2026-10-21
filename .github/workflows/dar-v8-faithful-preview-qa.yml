@@ -50,6 +50,8 @@ jobs:
             for name,width,height in [('desktop',1440,900),('iphone',393,844),('fold',840,900)]:
               driver.set_window_size(width,height)
               driver.get('http://127.0.0.1:8765/__v8_visual_test/index.html?page=start')
+              driver.execute_script("localStorage.setItem('darDesktopPrayerLocationV1',JSON.stringify({lat:50.6256,lon:6.9491,city:'Rheinbach',angle:12,asrFactor:1}))")
+              driver.refresh()
               WebDriverWait(driver,30).until(lambda d: len(d.find_elements(By.CSS_SELECTOR,'#darV8FinderForm'))>0)
               state=driver.execute_script("""const $=x=>document.getElementById(x);const box=x=>$(x).getBoundingClientRect();
                 const sidebar=$('darV8Sidebar'),bar=document.querySelector('.dar-v8-topbar');
@@ -63,9 +65,20 @@ jobs:
                   pageError:document.querySelector('#pageRoot')?.innerText?.slice(0,100)}
                 """)
               print(name,state,flush=True)
+              computed=driver.execute_script("return {prayers:[...document.querySelectorAll('[data-v8-prayer] b')].map(x=>x.textContent),name:document.getElementById('darV8NextName')?.textContent,count:document.getElementById('darV8Countdown')?.textContent}")
+              print('prayer_math',name,computed,flush=True)
+              if any(x=='—' for x in computed['prayers']): raise RuntimeError('Missing calculated prayer time in '+name)
               driver.save_screenshot('/tmp/v8-faithful-shots/'+name+'.png')
               if not all((state['helloVisible'],state['order'],state['terms']==3,state['prayers']==5,state['finder'],state['daily'],state['books'],state['qa'],state['loc'],state['horizontalOverflow']<=2)):
                 raise RuntimeError(name+' V8 visual integration failed: '+str(state))
+              if name=='desktop':
+                driver.find_element(By.ID,'darV8PlayerExpand').click()
+                opened=driver.execute_script("return getComputedStyle(document.getElementById('darV8PlayerControls')).display")
+                if opened=='none':raise RuntimeError('Surah/Ayah/reciter selection expander broken')
+                driver.find_element(By.ID,'darV8PlayerExpand').click()
+                driver.find_element(By.ID,'darV8ThemeToggle').click()
+                if not driver.execute_script("return document.body.classList.contains('dar-v8-night')"):raise RuntimeError('Dar al-Layl theme toggle failed')
+                driver.find_element(By.ID,'darV8ThemeToggle').click()
               if name=='desktop' and (state['sidebar']!='flex' or state['topbar']!='flex'):
                 raise RuntimeError('Desktop must show V8 sidebar and topbar')
               if name!='desktop' and state['sidebar']!='none':
