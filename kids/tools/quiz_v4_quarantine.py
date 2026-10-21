@@ -33,6 +33,39 @@ def quarantined_originals(root: Path):
             raise RuntimeError("V4 quarantined paid original has invalid voice, SHA or release protection")
         blocked_texts.add(speech)
         blocked_ids.add(gid)
+    # User pronunciation review also covers direct paid MP3 originals that
+    # were generated outside ElevenLabs Creative Flow. Keep the original MP3,
+    # request receipt and SHA intact; reject only their quiz/playback approval.
+    owner_hold=root/"kids/data/quiz-v4-owner-pronunciation-hold-20261021.json"
+    if owner_hold.is_file():
+        approval=json.loads(owner_hold.read_text(encoding="utf-8"))
+        registry=json.loads((root/"kids/data/quiz-v4-450-original-clip-registry.json")
+                            .read_text(encoding="utf-8"))
+        originals=approval.get("originals")
+        if (approval.get("modelId")!="eleven_v4"
+            or approval.get("voiceId")!="DkU7j9uO4ZEtLD2iRZSH"
+            or not isinstance(originals,list) or len(originals)!=7
+            or registry.get("modelId")!="eleven_v4"
+            or registry.get("voiceId")!="DkU7j9uO4ZEtLD2iRZSH"):
+            raise RuntimeError("Owner V4 pronunciation hold/registry invalid; no quiz playback")
+        seen=set()
+        for item in originals:
+            spoken=item.get("sourceText")
+            saved=(registry.get("textClips") or {}).get(spoken)
+            if (not isinstance(spoken,str) or not spoken or spoken in seen
+                or not saved or saved.get("sha256")!=item.get("mp3Sha256")
+                or saved.get("url")!=item.get("audioUrl")
+                or saved.get("voiceId")!="DkU7j9uO4ZEtLD2iRZSH"
+                or saved.get("modelId")!="eleven_v4"
+                or item.get("blockedForQuizPlayback") is not True
+                or item.get("blockedForPublicRelease") is not True
+                or item.get("retainPaidOriginal") is not True
+                or item.get("allowBlindRegeneration") is not False
+                or item.get("ownerFeedback") not in
+                    ("owner_rejected","owner_listening_review_requested")):
+                raise RuntimeError("Owner-rejected V4 MP3 changed; no quiz playback")
+            seen.add(spoken)
+            blocked_texts.add(spoken)
     return blocked_texts,blocked_ids
 
 
