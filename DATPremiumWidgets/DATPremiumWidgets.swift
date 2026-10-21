@@ -1185,6 +1185,7 @@ private struct DATQiblaView: View {
         .padding(.vertical, 7)
         .foregroundStyle(p.fg)
         .containerBackground(p.bg, for: .widget)
+        .widgetURL(URL(string: "daraltawhid://qibla"))
         }
     }
 }
