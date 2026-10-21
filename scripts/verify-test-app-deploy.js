@@ -252,30 +252,46 @@ async function fetchVersionBuild(base) {
     if (!ok) throw new Error(`Dar Test full-width stylesheet not live: ${label}`);
   }
 
-  // DAR_TEST_HOME_PARITY_BORDERLESS_V51_LIVE_GATE:
-  // The visible Home is #darHomeHtmlParityV1, NOT legacy .dv3/.top-shell.
-  // Verify the actual injected JS URL and stylesheet rules on BOTH origins.
+  // DAR_TEST_HOME_ELEGANT_CAPSULE_V52_LIVE_GATE:
+  // No stale V51 stylesheet: verify that the REAL #darHomeHtmlParityV1
+  // is loaded and supplies thin accent borders, theme-dependent glow, and
+  // transparent rectangular wrappers on both separate Test origins.
   for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
     let ok = false;
     for (let attempt = 1; attempt <= 5; attempt++) {
-      const shell = await fetchText(base + "/index.html?dhp-borderless-v51=" + Date.now());
-      const runtime = await fetchText(base + "/assets/dar-home-html-parity-v1.js?v=20261021-v51-borderless");
+      const shell = await fetchText(base + "/index.html?dhp-capsules-v52=" + Date.now());
+      const runtime = await fetchText(base + "/assets/dar-home-html-parity-v1.js?v=20261021-v52-elegant-capsules");
       const linked = shell.status === 200 &&
-        shell.text.includes("/test/assets/dar-home-html-parity-v1.js?v=20261021-v51-borderless");
-      const valid = runtime.status === 200 &&
-        runtime.text.includes("DAR_TEST_HOME_PARITY_BORDERLESS_V51") &&
-        runtime.text.includes("body.is-home-route #darHomeHtmlParityV1") &&
-        runtime.text.includes("#darHomeHtmlParityV1 .dhp-content") &&
-        runtime.text.includes("max-width:1280px!important") &&
-        runtime.text.includes("content:none!important;display:none!important;-webkit-mask:none!important");
+        shell.text.includes("/test/assets/dar-home-html-parity-v1.js?v=20261021-v52-elegant-capsules");
+      const checks = [
+        "DAR_TEST_HOME_ELEGANT_CAPSULE_V52",
+        "#darHomeHtmlParityV1 .dhp-content",
+        "max-width:1280px!important",
+        "--dhp-capsule-rim:",
+        "--dhp-capsule-active-rim:",
+        "--dhp-capsule-glow:",
+        "border:1px solid var(--dhp-capsule-rim)!important",
+        "background:transparent!important;background-image:none!important",
+        "box-shadow:0 0 0 1px",
+        ":is(:active,:focus-visible,:focus-within)",
+        "@media(hover:hover) and (pointer:fine)",
+        'html[data-theme="royal"]',
+        'html[data-theme="bordeaux"]',
+        'html[data-theme="dar-al-layl"]',
+        'html[data-theme="soft"]',
+        'html[data-theme="eisgold"]',
+        'html[data-theme="light"][data-theme-variant="salbei"]',
+        "@media(prefers-reduced-motion:reduce)"
+      ];
+      const valid = runtime.status === 200 && checks.every(s => runtime.text.includes(s));
       ok = linked && valid;
-      console.log("home-parity-borderless-v51 " + label +
+      console.log("home-elegant-capsules-v52 " + label +
         ": html=" + shell.status + " link=" + linked + " js=" + runtime.status +
         " rules=" + valid + " ok=" + ok + " attempt=" + attempt + "/5");
       if (ok) break;
       if (attempt < 5) await new Promise(resolve => setTimeout(resolve, 2500));
     }
-    if (!ok) throw new Error("Dar Test Home V51 actual rendered borderless runtime not LIVE: " + label);
+    if (!ok) throw new Error("Dar Test V52 interactive capsule theme-glow runtime not LIVE: " + label);
   }
 
   // DAR_TEST_HADITH_SHARH_INLINE_V1308: prove the actual served Test shell
