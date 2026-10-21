@@ -1,0 +1,61 @@
+#!/usr/bin/env node
+"use strict";
+const assert=require("node:assert/strict"),fs=require("node:fs"),path=require("node:path"),vm=require("node:vm");
+const ui=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js"),"utf8");
+const pack=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-ui-locales-seven.json"),"utf8"));
+const titles=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-visible-title-drafts-seven.json"),"utf8"));
+const EXPECTED=["de","tr","en","ar","ku","ckb","bs"];
+for(const locale of EXPECTED.slice(1)){
+ const v=pack.translations[locale];
+ assert(Object.keys(v).length>=350,locale+" missing section labels");
+ for(const term of ["ÜBERLIEFERUNGSMAẞSTAB","Gebetskalender","Faǧr","Ẓuhr","ʿAṣr","Maghrib","ʿIshāʾ",
+ "Übersicht","Lebensweg","Aussagen im Qurʾān","Aussagen in authentischer Sunnah",
+ "Gebetszeiten & Kalender","Beitragstitel","Titel der Beiträge","Duʿāʾ öffnen","Willkommen bei DĀR AL TAWḤĪD"]){
+  assert(v[term]?.trim(),locale+" missing "+term);
+ }
+}
+assert.equal(titles.bodyTranslation,false);
+assert.equal(titles.paidApiCalls,0);
+assert(Object.keys(titles.records).length>=13);
+const els=[],body={nodeType:1,closest:()=>null,getAttribute:()=>null};
+const makeText=(value,excluded=false)=>({nodeType:3,nodeValue:value,parentElement:{closest:()=>excluded?({tagName:"CANONICAL"}):null}});
+const primary=makeText("ÜBERLIEFERUNGSMAẞSTAB"),prayer=makeText("Faǧr"),weekday=makeText("Mittwoch, 21. Oktober 2026"),
+ original=makeText("رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً",true),
+ excluded=makeText("Nicht authentisch belegt",true);
+const nodes=[primary,prayer,weekday,original,excluded];
+const props={
+ nodeType:1,children:[],textContent:"📖 Wer Gutes zeigt, bekommt Anteil am Lohn",
+ closest:()=>({getAttribute:()=> "wer-gutes-zeigt-bekommt-anteil-am-lohn-198"}),
+ getAttribute:()=>null
+};
+const doc={
+ documentElement:{lang:"de",dir:"ltr"},body,readyState:"loading",
+ createTreeWalker(){let i=-1;return{nextNode:()=>nodes[++i]||null}},
+ querySelectorAll:()=>[props],addEventListener:()=>{}
+};
+let lng="de";
+const w={location:{pathname:"/test/"},document:doc,NodeFilter:{SHOW_ELEMENT:1,SHOW_TEXT:4},
+ localStorage:{getItem:()=>lng},addEventListener:()=>{}};
+vm.runInNewContext(ui,{window:w});
+const runtime=w.DarTestTurkishUI;
+assert(runtime.registerLocaleData(pack));
+assert(runtime.registerTitleData(titles));
+assert.equal(runtime.localizedDraftTitleCount,13);
+for(const locale of EXPECTED){
+ lng=locale;runtime.apply();
+ const v=pack.translations[locale];
+ assert.equal(primary.nodeValue,locale==="de"?"ÜBERLIEFERUNGSMAẞSTAB":v["ÜBERLIEFERUNGSMAẞSTAB"],locale+" motto");
+ assert.equal(prayer.nodeValue,locale==="de"?"Faǧr":(locale==="tr"?"Sabah (Fecr)":v["Faǧr"]),locale+" prayer");
+ assert.equal(props.textContent,locale==="de"?titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].sourceTitle:
+    titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].translations[locale],locale+" post title");
+ assert.equal(original.nodeValue,"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً","Arabic source modified");
+ assert.equal(excluded.nodeValue,"Nicht authentisch belegt","source text modified");
+ assert.equal(doc.documentElement.dir,["ar","ckb"].includes(locale)?"rtl":"ltr");
+ if(locale==="en") assert(/Wednesday|October/.test(weekday.nodeValue),"Calendar month/day not localized");
+}
+lng="de";runtime.apply();
+assert.equal(weekday.nodeValue,"Mittwoch, 21. Oktober 2026","calendar failed to restore German");
+assert.equal(runtime.formatCalendarDate("2026-10-21T12:00:00Z","en",{weekday:"long",timeZone:"UTC"}),"Wednesday");
+assert(runtime.translatePrayerName("Maghrib","en")==="Maghrib");
+assert(runtime.translatePrayerName("Maghrib","tr")==="Akşam");
+console.log("PASS: seven languages, full welcome/prayer/calendar/prophet UI, 13 identity-checked headings, German rollback and source protection");

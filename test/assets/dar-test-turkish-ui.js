@@ -170,6 +170,76 @@ const EXTRA_ENTRIES=[
 const dictionary=new Map([...ENTRIES,...EXTRA_ENTRIES]),backward=new Map(),ambiguous=new Set();
 const SUPPORTED=new Set(["de","tr","en","ar","ku","ckb","bs"]);
 const rtl=new Set(["ar","ckb"]),languagePacks=new Map();
+
+const specialBlocks=new Map(),welcomeOriginals=new WeakMap();
+function renderHomeWelcome(locale){
+ const document=global.document;
+ const intro=document?.querySelector?.("#darHomeHtmlParityV1 .dhp-intro");
+ if(!intro||!document.createTextNode||!document.createElement)return;
+ let state=welcomeOriginals.get(intro);
+ if(!state){state={original:intro.innerHTML,last:null};welcomeOriginals.set(intro,state)}
+ intro.setAttribute("data-dar-no-translate","home-intro");
+ if(state.last===locale)return;
+ state.last=locale;
+ const translation=locale==="de"?null:specialBlocks.get(locale);
+ if(!translation){if(intro.innerHTML!==state.original)intro.innerHTML=state.original;return}
+ const branded="DĀR AL TAWḤĪD",pos=translation.indexOf(branded);
+ if(pos<0){intro.textContent=translation;return}
+ const brand=document.createElement("strong");
+ brand.textContent=branded;
+ intro.replaceChildren(document.createTextNode(translation.slice(0,pos)),brand,
+                      document.createTextNode(translation.slice(pos+branded.length)));
+}
+const titleByGerman=new Map();
+const originalTitles=new WeakMap();
+const HEADLINE_SELECTORS=[
+ "#dv3Latest .dv3-post-body b","#dhpPosts .dhp-post-capsule h3","#dhpTodayName",
+ ".dua-card h3",".dua-card .dua-title",".duas-card h3",".duas-card .dua-title",
+ "[data-dua-id] .dua-title","[data-post-id] .post-title"
+].join(",");
+function registerTitleData(data){
+ if(data?.schemaVersion!==1||data.scope!=="adult-test-visible-titles-only"||
+    data.mode!=="editorial-title-draft"||data.paidApiCalls!==0||
+    !data.records||typeof data.records!=="object")return false;
+ const prepared=new Map();
+ for(const [key,record] of Object.entries(data.records)){
+  if(key!==(record.kind+":"+record.id)||!["post","dua"].includes(record.kind)||
+     typeof record.sourceTitle!=="string"||record.sourceTitle.length>220||
+     Object.keys(record.translations||{}).sort().join("|")!=="ar|bs|ckb|en|ku|tr")return false;
+  if([...SUPPORTED].filter(x=>x!=="de").some(k=>typeof record.translations[k]!=="string"||!record.translations[k].trim()))
+    return false;
+  if(prepared.has(record.sourceTitle))return false;
+  prepared.set(record.sourceTitle,record);
+ }
+ titleByGerman.clear();for(const [key,val] of prepared)titleByGerman.set(key,val);
+ schedule();return true;
+}
+function updateKnownTitles(locale){
+ const nodes=global.document?.querySelectorAll?.(HEADLINE_SELECTORS);
+ if(!nodes)return;
+ nodes.forEach(element=>{
+  // Deliberately only title-only leaf nodes, never the article or du'a body.
+  if(element.children?.length)return;
+  const current=String(element.textContent||"");
+  let old=originalTitles.get(element);
+  if(old&&current!==old.source&&current!==old.rendered)old=null;
+  if(!old){
+   if(!titleByGerman.has(current))return;
+   old={source:current,rendered:current};originalTitles.set(element,old);
+  }
+  const record=titleByGerman.get(old.source);
+  const id=element.closest?.("[data-dv3-value],[data-dhp-value],[data-post-id],[data-dua-id]");
+  const boundId=id?.getAttribute?.("data-dv3-value")||
+                id?.getAttribute?.("data-dhp-value")||
+                id?.getAttribute?.("data-post-id")||
+                id?.getAttribute?.("data-dua-id");
+  if(boundId&&boundId!==record?.id)return;
+  const desired=locale==="de"?old.source:record?.translations?.[locale]||old.source;
+  if(element.textContent!==desired)element.textContent=desired;
+  old.rendered=desired;
+ });
+}
+
 function registerLocaleData(pack){
  if(pack?.schemaVersion!==1||pack.sourceLocale!=="de"||
     pack.scope!=="adult-interface-only"||pack.noPaidProvider!==true||!pack.translations)return false;
@@ -187,6 +257,13 @@ function registerLocaleData(pack){
   prepared.set(code,dict);
  }
  for(const [key,value] of prepared)languagePacks.set(key,value);
+ specialBlocks.clear();
+ for(const code of SUPPORTED){
+  if(code==="de")continue;
+  const welcome=pack.specialBlocks?.homeWelcome?.[code];
+  if(typeof welcome==="string"&&welcome.length>30&&welcome.length<800&&
+     welcome.includes("DĀR AL TAWḤĪD")&&!/[<>]/.test(welcome))specialBlocks.set(code,welcome);
+ }
  schedule();return true;
 }
 /* Optional central interface catalog: one static asset, no client AI or paid calls.
@@ -223,11 +300,42 @@ async function loadCatalog(fetcher=global.fetch?.bind(global)){
  }catch(_){remoteCatalogState="unavailable";return dictionary.size}
 }
 
+const INTL_LOCALE={de:"de-DE",tr:"tr-TR",en:"en-GB",ar:"ar-EG-u-ca-gregory",ku:"ku-TR",ckb:"ckb-IQ-u-ca-gregory",bs:"bs-BA"};
+const DE_MONTHS=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+const DE_WEEKDAYS=["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"];
+function formatCalendarDate(date,language=currentLocale(),options={weekday:"long",day:"numeric",month:"long",year:"numeric"}){
+ const d=date instanceof Date?date:new Date(date);
+ if(!Number.isFinite(d.getTime()))return "";
+ try{return new Intl.DateTimeFormat(INTL_LOCALE[language]||"de-DE",options).format(d)}
+ catch(_){return new Intl.DateTimeFormat("de-DE",options).format(d)}
+}
+function localizeGermanCalendarLabel(value,language){
+ if(!language||language==="de"||value.length>90||!/[A-Za-zäöüß]/.test(value))return null;
+ let changed=false,result=value;
+ const locale=INTL_LOCALE[language]||"de-DE";
+ for(let month=0;month<12;month++){
+  const pattern=new RegExp("(^|[\\s,])"+DE_MONTHS[month]+"(?=$|[\\s,0-9.])","g");
+  if(!pattern.test(result))continue;
+  let m=DE_MONTHS[month];
+  try{m=new Intl.DateTimeFormat(locale,{month:"long",timeZone:"UTC"}).format(new Date(Date.UTC(2026,month,15)))}catch(_){}
+  result=result.replace(pattern,(_,before)=>before+m);changed=true;
+ }
+ for(let day=0;day<7;day++){
+  const pattern=new RegExp("(^|[\\s,])"+DE_WEEKDAYS[day]+"(?=$|[\\s,0-9.])","g");
+  if(!pattern.test(result))continue;
+  let d=DE_WEEKDAYS[day];
+  try{d=new Intl.DateTimeFormat(locale,{weekday:"long",timeZone:"UTC"}).format(new Date(Date.UTC(2026,0,5+day)))}catch(_){}
+  result=result.replace(pattern,(_,before)=>before+d);changed=true;
+ }
+ return changed?result:null;
+}
 function translateExact(value,language="tr"){
  if(language==="de")return null;
- if(language!=="tr")return languagePacks.get(language)?.get(value)??null;
+ if(language!=="tr")return languagePacks.get(language)?.get(value)??localizeGermanCalendarLabel(value,language);
  const known=dictionary.get(value);
  if(known!==undefined)return known;
+ const extraTurkish=languagePacks.get("tr")?.get(value);
+ if(extraTurkish!==undefined)return extraTurkish;
  const count=value.match(/^(\d+)\s+Funktionen$/);
  if(count)return count[1]+" işlev";
  const results=value.match(/^(\d+)\s+Ergebnisse$/);
@@ -255,11 +363,11 @@ function translateExact(value,language="tr"){
  const action=value.match(/^(.{2,160}) öffnen$/);
  if(action&&!/[<>\u0600-\u06ff]/.test(action[1]))
    return action[1]+" aç";
- return null;
+ return localizeGermanCalendarLabel(value,language);
 }
 
 for(const [de,tr] of ENTRIES){if(backward.has(tr)&&backward.get(tr)!==de)ambiguous.add(tr);else backward.set(tr,de)}
-const EXCLUDE="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],[lang='ar'],[dir='rtl'],[class*='quran-arabic'],[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],[class*='post-content'],[class*='hadith-text'],[class*='qsource-statement'],[class*='source-quote'],[data-canonical-content]";
+const EXCLUDE="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],[lang='ar'],[dir='rtl'],[class*='quran-arabic'],[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],[class*='post-content'],[class*='hadith-text'],[class*='qsource-statement'],[class*='source-quote'],[class*='prophets-quote__de'],[class*='verse-translation'],[class*='dua-meaning'],[data-canonical-content]";
 const originals=new WeakMap(),attributeOriginals=new WeakMap();
 const ATTRS=["placeholder","aria-label","title"];
 function currentLocale(){try{const v=global.localStorage?.getItem(KEY);return SUPPORTED.has(v)?v:"de"}catch(_){return"de"}}
@@ -306,6 +414,7 @@ function apply(root=global.document?.body,locale=currentLocale()){
  if(!root)return 0;
  const doc=global.document;
  if(root.nodeType===1&&!shouldSkip(root))transformAttributes(root,locale);
+ renderHomeWelcome(locale);
  const walker=doc.createTreeWalker(root,global.NodeFilter.SHOW_ELEMENT|global.NodeFilter.SHOW_TEXT);
  let node,seen=0;
  while((node=walker.nextNode())!==null){
@@ -313,6 +422,7 @@ function apply(root=global.document?.body,locale=currentLocale()){
   if(node.nodeType===3){transformText(node,locale);seen++}
  }
  if(doc.documentElement){doc.documentElement.lang=locale;doc.documentElement.dir=rtl.has(locale)?"rtl":"ltr"}
+ updateKnownTitles(locale);
  return seen;
 }
 let queued=false;
@@ -357,7 +467,9 @@ global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,
   get catalogStatus(){return remoteCatalogState},
   hasTranslation:(de)=>dictionary.has(de),
   translateValue:translateExact,
-  registerLocaleData,supportedLocales:[...SUPPORTED],
+  registerLocaleData,registerTitleData,supportedLocales:[...SUPPORTED],formatCalendarDate,
+  get localizedDraftTitleCount(){return titleByGerman.size},
+  translatePrayerName:(source,locale=currentLocale())=>translateExact(source,locale)||source,
   translatedFor:code=>code==="tr"?dictionary.size:(languagePacks.get(code)?.size||0),
   contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};
 })(window);
