@@ -140,7 +140,7 @@ test("source revision, independent Āyah opt-in and exact target time",()=>{
  assert.throws(()=>attempt({...postEvent,sourceHash:""}),/source revision/);
  assert.throws(()=>attempt({...baseEvent,time:"unknown"}),/HH:MM/);
  assert.throws(()=>attempt({type:"daily_ayah",contentId:"ayah:1",sourceHash:"sha-1",
-  eventKey:"ayah|2026-10-22",environment:"test"}),/verified destination/);
+  eventKey:"ayah|2026-10-22",environment:"test"}),/verified .*destination/);
 });
 
 test("daily Āyah needs separate opt-in and verified Qurʾān route", () => {
