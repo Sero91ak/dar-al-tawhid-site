@@ -26,6 +26,6 @@ feed:
 
 Die Abrechnung am Tag der Auferstehung wird für diejenigen **leichter sein**, die *sich bereits im Diesseits selbst zur Rechenschaft gezogen haben.*
 
-**Schwer hingegen wird die Abrechnung** für diejenigen, die ihre Angelegenheiten *ohne Selbstprüfung* geführt haben.“
+**Schwer hingegen wird die Abrechnung** für diejenigen, die ihre Angelegenheiten *ohne Rechenschaft* geführt haben.“
 
-🌙 **Fazit:** **Die Erziehung der eigenen Seele beginnt mit aufrichtiger Selbstprüfung.** Wer seine Fehler erkennt, seine Begierden beherrscht und sich selbst zur Rechenschaft zieht, bemüht sich um die **Läuterung seiner Seele** und den Gehorsam gegenüber Allāh.
+🌙 **Fazit:** **Die Erziehung der eigenen Seele beginnt mit der aufrichtigen Selbstprüfung.** Wer seine Fehler erkennt, seine Begierden beherrscht und sich selbst zur Rechenschaft zieht, bemüht sich um die **Läuterung seiner Seele** und den Gehorsam gegenüber Allāh.
