@@ -6,9 +6,9 @@
   "elevenLabsCreditsSpent": 0,
   "humanListeningApprovalsCreated": 0,
   "originalMP3sCreatedBySynthesis": 0,
-  "sourceOriginalsVerified": 1285,
-  "uniqueFullAudioClipsAvailable": 507,
-  "newOfflineComposites": 481,
+  "sourceOriginalsVerified": 1307,
+  "uniqueFullAudioClipsAvailable": 514,
+  "newOfflineComposites": 488,
   "byAge": {
     "7-8": {
       "questions": 150,
@@ -28,22 +28,22 @@
     },
     "9-10": {
       "questions": 150,
-      "completeFourPartQuestions": 114,
+      "completeFourPartQuestions": 116,
       "availableFieldCounts": {
-        "question": 128,
+        "question": 133,
         "correct": 150,
         "retry": 150,
-        "explanation": 118
+        "explanation": 120
       },
       "missingFieldCounts": {
-        "question": 22,
+        "question": 17,
         "correct": 0,
         "retry": 0,
-        "explanation": 32
+        "explanation": 30
       }
     }
   },
-  "missingUniqueOriginalSegments": 111,
+  "missingUniqueOriginalSegments": 90,
   "missingOriginalSegmentsByFrequency": [
     {
       "fragment": "Taqwā.",
@@ -78,11 +78,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Sofort beleidigen.",
+      "fragment": "Etwas kaputt machen.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Etwas kaputt machen.",
+      "fragment": "Sofort beleidigen.",
       "requiredByFields": 1
     },
     {
@@ -186,11 +186,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Eine berühmte Familie.",
+      "fragment": "Viel Geld.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Viel Geld.",
+      "fragment": "Eine berühmte Familie.",
       "requiredByFields": 1
     },
     {
@@ -211,22 +211,6 @@
     },
     {
       "fragment": "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Jeder Gesandte brachte einen anderen Gott.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Nur einige Menschen sollen Allah dienen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Welche Grundbotschaft nennt Allah über die Gesandten?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Es gibt keinen zu Recht Angebeteten außer Allah, also dient Ihm.",
       "requiredByFields": 1
     },
     {
@@ -298,15 +282,15 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Es gibt keinen Unterschied zwischen Ḥalāl und Ḥarām.",
       "requiredByFields": 1
     },
     {
       "fragment": "Alles Zweifelhaftes ist automatisch erlaubt.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
       "requiredByFields": 1
     },
     {
@@ -338,11 +322,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes?",
+      "fragment": "Nähe zum Propheten ﷺ im Paradies.",
       "requiredByFields": 1
     },
     {
-      "fragment": "Nähe zum Propheten ﷺ im Paradies.",
+      "fragment": "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes?",
       "requiredByFields": 1
     },
     {
@@ -351,26 +335,6 @@
     },
     {
       "fragment": "Der Prophet ﷺ lehrte, dass derjenige, der auf Gutes hinweist, einen Lohn wie der Ausführende erhält.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Was lehrt Qurʾān 64:11 über eine Prüfung, die einen Menschen trifft?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sie geschieht außerhalb von Allahs Wissen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Sie geschieht mit Allahs Erlaubnis, und Glaube an Allah führt das Herz.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Der Gläubige darf jede Hoffnung verlieren.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Der Vers verbindet Prüfungen mit Allahs Erlaubnis und der Rechtleitung des Herzens durch Īmān.",
       "requiredByFields": 1
     },
     {
@@ -398,11 +362,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Eine Lüge ist richtig, wenn sie einen Fehler versteckt.",
+      "fragment": "Du hast aus Versehen etwas kaputt gemacht und wirst gefragt. Welcher Grundsatz hilft dir hier am besten?",
       "requiredByFields": 1
     },
     {
-      "fragment": "Du hast aus Versehen etwas kaputt gemacht und wirst gefragt. Welcher Grundsatz hilft dir hier am besten?",
+      "fragment": "Eine Lüge ist richtig, wenn sie einen Fehler versteckt.",
       "requiredByFields": 1
     },
     {
@@ -414,15 +378,11 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Andere reden schlecht über einen Freund, der nicht da ist. Welcher Grundsatz hilft dir hier am besten?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Ghībah ist erlaubt, solange die Person es nicht hört.",
       "requiredByFields": 1
     },
     {
-      "fragment": "In einer Gruppe wird falsches Reden automatisch richtig.",
+      "fragment": "Andere reden schlecht über einen Freund, der nicht da ist. Welcher Grundsatz hilft dir hier am besten?",
       "requiredByFields": 1
     },
     {
@@ -430,19 +390,11 @@
       "requiredByFields": 1
     },
     {
+      "fragment": "In einer Gruppe wird falsches Reden automatisch richtig.",
+      "requiredByFields": 1
+    },
+    {
       "fragment": "Allah verbietet üble Nachrede über Abwesende.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Wir sprechen angemessen und nicht unnötig laut.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Rücksicht auf andere ist beim Sprechen unwichtig.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Zu Hause schläft jemand. Welcher Grundsatz hilft dir hier am besten?",
       "requiredByFields": 1
     },
     {
@@ -450,43 +402,7 @@
       "requiredByFields": 1
     },
     {
-      "fragment": "Für eigene Fehler sollte immer jemand anderes verantwortlich sein.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Jeder trägt Verantwortung für die eigenen Taten.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Eigene Entscheidungen haben keine Folgen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Du hast selbst etwas Falsches getan. Welcher Grundsatz hilft dir hier am besten?",
-      "requiredByFields": 1
-    },
-    {
       "fragment": "Gutes nützt dem Handelnden und Schlechtes fällt auf ihn selbst zurück.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Einen guten Gruß soll man absichtlich ignorieren.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Ein Kind sagt dir freundlich Salām. Welcher Grundsatz hilft dir hier am besten?",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Auf Salām antwortet man am besten mit Spott.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Einen Salām erwidern wir freundlich und angemessen.",
-      "requiredByFields": 1
-    },
-    {
-      "fragment": "Allah befiehlt, einen Gruß gleich gut oder besser zu erwidern.",
       "requiredByFields": 1
     }
   ],
