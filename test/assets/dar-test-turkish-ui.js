@@ -358,7 +358,7 @@ function darDynamicUILocalize(value,language){
  if(selection)return selection[1]+"/"+selection[2]+" "+units.gewählt;
  const surahRange=value.match(/^Sūrenbereich wechseln, aktuell (\d+)[–-](\d+)$/);
  if(surahRange){
-  const heading=language==="tr"?dictionary.get("Surenbereich"):languagePacks.get(language)?.get("Surenbereich");
+  const heading=language==="tr"?(dictionary.get("Surenbereich")||languagePacks.get("tr")?.get("Surenbereich")):languagePacks.get(language)?.get("Surenbereich");
   return heading?heading+" "+surahRange[1]+"–"+surahRange[2]:null;
  }
  const openAyah=value.match(/^Im Qurʾān öffnen · (\d{1,3}:\d{1,3}(?:[–-]\d{1,3})?)$/);
@@ -494,7 +494,7 @@ function boot(){
     !global.document.getElementById("dar-test-seven-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-seven-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=1";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261022-2";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
