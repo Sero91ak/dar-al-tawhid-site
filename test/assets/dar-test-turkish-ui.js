@@ -191,6 +191,7 @@ function renderHomeWelcome(locale){
                       document.createTextNode(translation.slice(pos+branded.length)));
 }
 const titleByGerman=new Map();
+let totalKnownTitleRecords=0;
 const originalTitles=new WeakMap();
 const HEADLINE_SELECTORS=[
  "#dv3Latest .dv3-post-body b","#dhpPosts .dhp-post-capsule h3","#dhpTodayName",
@@ -208,10 +209,11 @@ function registerTitleData(data){
      Object.keys(record.translations||{}).sort().join("|")!=="ar|bs|ckb|en|ku|tr")return false;
   if([...SUPPORTED].filter(x=>x!=="de").some(k=>typeof record.translations[k]!=="string"||!record.translations[k].trim()))
     return false;
-  if(prepared.has(record.sourceTitle))return false;
-  prepared.set(record.sourceTitle,record);
+  if(!prepared.has(record.sourceTitle))prepared.set(record.sourceTitle,[]);
+  prepared.get(record.sourceTitle).push(record);
  }
  titleByGerman.clear();for(const [key,val] of prepared)titleByGerman.set(key,val);
+ totalKnownTitleRecords=Object.keys(data.records).length;
  schedule();return true;
 }
 function updateKnownTitles(locale){
@@ -227,14 +229,20 @@ function updateKnownTitles(locale){
    if(!titleByGerman.has(current))return;
    old={source:current,rendered:current};originalTitles.set(element,old);
   }
-  const record=titleByGerman.get(old.source);
+  const candidates=titleByGerman.get(old.source)||[];
   const id=element.closest?.("[data-dv3-value],[data-dhp-value],[data-post-id],[data-dua-id]");
   const boundId=id?.getAttribute?.("data-dv3-value")||
                 id?.getAttribute?.("data-dhp-value")||
                 id?.getAttribute?.("data-post-id")||
                 id?.getAttribute?.("data-dua-id");
-  if(boundId&&boundId!==record?.id)return;
-  const desired=locale==="de"?old.source:record?.translations?.[locale]||old.source;
+  // Repeated canonical headings may refer to different posts; resolve by
+  // stable content ID if present, otherwise translate only identical drafts.
+  const record=boundId?candidates.find(r=>r.id===boundId):
+    (candidates.length===1||candidates.every(r=>
+       [...SUPPORTED].every(code=>code==="de"||
+          r.translations[code]===candidates[0].translations[code]))?candidates[0]:null);
+  if(!record)return;
+  const desired=locale==="de"?old.source:record.translations?.[locale]||old.source;
   if(element.textContent!==desired)element.textContent=desired;
   old.rendered=desired;
  });
@@ -524,7 +532,7 @@ global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,
   hasTranslation:(de)=>dictionary.has(de),
   translateValue:translateExact,
   registerLocaleData,registerTitleData,supportedLocales:[...SUPPORTED],formatCalendarDate,
-  get localizedDraftTitleCount(){return titleByGerman.size},
+  get localizedDraftTitleCount(){return totalKnownTitleRecords},
   translatePrayerName:(source,locale=currentLocale())=>translateExact(source,locale)||source,
   translatedFor:code=>code==="tr"?dictionary.size:(languagePacks.get(code)?.size||0),
   contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};
