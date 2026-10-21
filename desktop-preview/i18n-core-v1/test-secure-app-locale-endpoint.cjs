@@ -18,7 +18,7 @@ function setup(overrides={}){
   verifyBearer:async()=>({verified:true,subject:"mock-account-1"}),
   getAuthorizedSubscription:async ({subscriptionId,appId,environment,subject})=>{
    state.calls.push({subscriptionId,appId,environment,subject});
-   return {ownerVerified:true,subscriptionId,onesignalAppId:appId,
+   return {ownerVerified:true,subject:"mock-account-1",subscriptionId,onesignalAppId:appId,
     environment,enabled:true,pushOptedIn:true};
   },
   persistLocale:async (row)=>{
@@ -52,20 +52,28 @@ test("reject missing token, invalid locale, other methods, invalid json",async()
 test("failed verification, forged subject and wrong app cannot write",async()=>{
  const badAuth=setup({verifyBearer:async()=>({verified:false,subject:"mock"})});
  assert.equal((await badAuth.handle(input("es"))).status,401);
- const wrongSub=setup({getAuthorizedSubscription:async()=>({ownerVerified:true,
+ const wrongSub=setup({getAuthorizedSubscription:async()=>({ownerVerified:true,subject:"mock-account-1",
   subscriptionId:"another-device",onesignalAppId:APP_ID,
   environment:"test",enabled:true,pushOptedIn:true})});
  assert.equal((await wrongSub.handle(input("fr"))).status,403);
- const wrongApp=setup({getAuthorizedSubscription:async()=>({ownerVerified:true,
+ const wrongApp=setup({getAuthorizedSubscription:async()=>({ownerVerified:true,subject:"mock-account-1",
   subscriptionId:SUB,onesignalAppId:"wrong",environment:"test",
   enabled:true,pushOptedIn:true})});
  assert.equal((await wrongApp.handle(input("fr"))).status,403);
  assert.equal(wrongApp.state.changes.length,0);
 });
+test("owner lookup cannot authorize a different authenticated subject",async()=>{
+ const attack=setup({getAuthorizedSubscription:async()=>({
+  ownerVerified:true,subject:"not-the-verified-account",subscriptionId:SUB,
+  onesignalAppId:APP_ID,environment:"test",enabled:true,pushOptedIn:true
+ })});
+ assert.equal((await attack.handle(input("fr"))).status,403);
+ assert.equal(attack.state.changes.length,0);
+});
 test("disabled or unsubscribed device cannot change a push preference",async()=>{
  for(const disallowed of [{enabled:false,pushOptedIn:true},{enabled:true,pushOptedIn:false}]){
   const x=setup({getAuthorizedSubscription:async()=>{
-   return {ownerVerified:true,subscriptionId:SUB,onesignalAppId:APP_ID,
+   return {ownerVerified:true,subject:"mock-account-1",subscriptionId:SUB,onesignalAppId:APP_ID,
     environment:"test",...disallowed};
   }});
   assert.equal((await x.handle(input("fr"))).status,412);
@@ -74,7 +82,7 @@ test("disabled or unsubscribed device cannot change a push preference",async()=>
 });
 test("a different environment or unconfirmed database update never returns success",async()=>{
  const wrongEnv=setup({getAuthorizedSubscription:async()=>({
-  ownerVerified:true,subscriptionId:SUB,onesignalAppId:APP_ID,
+  ownerVerified:true,subject:"mock-account-1",subscriptionId:SUB,onesignalAppId:APP_ID,
   environment:"production",enabled:true,pushOptedIn:true
  })});
  assert.equal((await wrongEnv.handle(input("fr"))).status,403);
