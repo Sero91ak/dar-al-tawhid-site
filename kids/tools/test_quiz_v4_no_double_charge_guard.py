@@ -58,10 +58,25 @@ def main():
     connected=json.loads(flow_path.read_text(encoding="utf-8")) if flow_path.is_file() else {"entries":[]}
     connected_pending={e["sourceText"] for e in connected["entries"]
                        if e["status"]!="IMPORTED_ORIGINAL_MP3_VERIFIED"}
+    # Unconfirmed historical ElevenLabs POSTs can already have consumed
+    # credits, despite the original never reaching the MP3 registry.
+    journal=json.loads((ROOT/"kids/data/quiz-v4-older-stage1-request-journal.json")
+                      .read_text(encoding="utf-8"))
+    uncertain_hashes={r["textSHA256"] for r in journal["entries"]
+                      if r["status"]=="REQUEST_STARTED_UNCONFIRMED"}
+    plan=json.loads((ROOT/"kids/data/quiz-v4-curated-450-production-review.json")
+                    .read_text(encoding="utf-8"))
+    candidate_texts={phrase for q in plan["recipes"]
+                     for kind in ("question","correct","retry","explanation")
+                     for phrase in ([q[kind]["text"]]+q[kind].get("segments",[]))}
+    uncertain={text for text in candidate_texts
+               if hashlib.sha256(text.encode("utf-8")).hexdigest() in uncertain_hashes}
+    require({hashlib.sha256(text.encode("utf-8")).hexdigest() for text in uncertain}
+            ==uncertain_hashes,"Unconfirmed provider POST is not protected")
     expected = (set(reg["textClips"]) |
                 {r["text"] for r in ledger["rows"]} |
                 {r["originalSpokenText"] for r in old["items"]} |
-                connected_pending)
+                connected_pending | uncertain)
     require(protected == expected, "Some previously paid or connected pending V4 speech missing from protection")
     for text in connected_pending:
         refused(lambda text=text: prohibit_prepaid_selection(text,protected),
