@@ -12,7 +12,7 @@ const registry = require("./locales.json");
 
 const copies = Object.fromEntries(localeCodes(registry).map((code) => [
   code, {status: code === "de" ? "canonical" : "approved",
-    title: "T-" + code + " {minutes}", body: "B-" + code + " {time}"}
+    title: "T-" + code + " {minutes}", body: "B-" + code + " {time}",sourceHash:"sha-1"}
 ]));
 const baseEvent = {
   type: "prayer", eventKey: "2026-10-22|Europe/Berlin|fajr|advance|05:30",
@@ -20,7 +20,7 @@ const baseEvent = {
 };
 const postEvent = {
   type: "new_post", eventKey: "post:readable-article|revision-1",
-  contentId: "post:readable-article", qNumber: 271, environment:"test"
+  contentId: "post:readable-article", qNumber: 271, sourceHash:"sha-1", environment:"test"
 };
 
 test("nine adult languages, Arabic and Soranî RTL", () => {
@@ -106,10 +106,10 @@ test("privacy and lane isolation fail closed", () => {
   assert.throws(()=>attempt({...base,app_environment:"production"}),/environment mismatch/);
   assert.throws(()=>attempt(base,{...baseEvent,environment:""}),/target environment/);
   assert.throws(()=>attempt(base,{...baseEvent,environment:"production"}),/environment mismatch/);
-  assert.throws(()=>attempt(base,{type:"daily_dua",contentId:"dua:1",eventKey:"daily|2026-10-22",environment:"test"}),/not enabled/);
-  const daily=attempt({...base,daily_dua_enabled:true},{type:"daily_dua",contentId:"dua:1",eventKey:"daily|2026-10-22",environment:"test"});
+  assert.throws(()=>attempt(base,{type:"daily_dua",contentId:"dua:1",sourceHash:"sha-1",eventKey:"daily|2026-10-22",environment:"test"}),/not enabled/);
+  const daily=attempt({...base,daily_dua_enabled:true},{type:"daily_dua",contentId:"dua:1",sourceHash:"sha-1",eventKey:"daily|2026-10-22",environment:"test"});
   assert.match(daily.payload.url,/#dua/);
-  assert.throws(()=>attempt(base,{type:"daily_recommendation",contentId:"post:2",eventKey:"daily|2026-10-22",environment:"test"}),/not enabled/);
+  assert.throws(()=>attempt(base,{type:"daily_recommendation",contentId:"post:2",sourceHash:"sha-1",eventKey:"daily|2026-10-22",environment:"test"}),/not enabled/);
 });
 
 test("one content ID and URL independent of 9 translations", () => {
@@ -119,6 +119,15 @@ test("one content ID and URL independent of 9 translations", () => {
   assert.equal(fr.payload.data.q_number,271);
   assert.equal(fr.payload.url,es.payload.url);
   assert.equal(fr.payload.url,"https://dar-al-tawhid.de/#post/post%3Areadable-article");
+});
+
+test("source revision, independent Āyah opt-in and exact target time",()=>{
+ const subscription={subscription_id:"s",app_locale:"en",push_opted_in:true,enabled:true,app_environment:"test"};
+ const attempt=(event)=>resolveRecipientPush({event,copies,subscription});
+ assert.throws(()=>attempt({...postEvent,sourceHash:""}),/source revision/);
+ assert.throws(()=>attempt({...baseEvent,time:"unknown"}),/HH:MM/);
+ assert.throws(()=>attempt({type:"daily_ayah",contentId:"ayah:1",sourceHash:"sha-1",
+  eventKey:"ayah|2026-10-22",environment:"test"}),/verified destination/);
 });
 
 test("new 10th language is automatically accepted from registry", () => {
