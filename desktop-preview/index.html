@@ -3759,9 +3759,10 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   qa.audio.dataset.fallbackUsed="";qa.audio.src=audioUrl();qa.audio.load();updateQaTitle();saveQa();
   try{if(currentPage()==="quran")document.querySelectorAll("[data-book-ayah]").forEach(function(el){el.classList.toggle("is-audio",Number(el.getAttribute("data-book-ayah"))===Number(qa.state.ayah)&&Number(quranBookState.surah)===Number(qa.state.surah))})}catch(e){}
   if("mediaSession" in navigator){try{navigator.mediaSession.metadata=new MediaMetadata({title:(currentSurah()?currentSurah().transliteration:"Qurʾān")+" · Āyah "+qa.state.ayah,artist:reciter().name,album:"DĀR AL TAWḤĪD · Qurʾān"})}catch(e){}}
-  if(autoplay)qa.audio.play().catch(function(){})
+  qa.audio.dataset.wantsPlayback=autoplay?"yes":"no";if(autoplay)qa.audio.play().catch(function(){qa.title.textContent="Audio wird vorbereitet oder ist nicht erreichbar"})
  }
  function stepQa(dir,autoplay){
+  if(!qa.surahs.length){qa.title.textContent="Sūrenliste wird geladen …";return}
   var s=currentSurah(),total=s?Number(s.total_verses)||1:1;var n=qa.state.ayah+dir;
   if(n>total){var si=qa.surahs.findIndex(function(x){return Number(x.id)===Number(qa.state.surah)});si=(si+1)%qa.surahs.length;qa.state.surah=Number(qa.surahs[si].id);qa.surah.value=String(qa.state.surah);qa.state.ayah=1;fillAyat()}
   else if(n<1)qa.state.ayah=1;else qa.state.ayah=n;
@@ -3773,7 +3774,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
    qa.surahs=data.surahs||[];qa.surah.innerHTML="";qa.surahs.forEach(function(s){var o=document.createElement("option");o.value=String(s.id);o.textContent=s.id+" · "+s.transliteration;if(Number(s.id)===Number(qa.state.surah))o.selected=true;qa.surah.appendChild(o)});fillAyat();updateQaTitle()
   }).catch(function(){qa.title.textContent="Qurʾān-Player"});
   qa.prev.onclick=function(){stepQa(-1,!qa.audio.paused)};
-  qa.play.onclick=function(){if(qa.audio.paused){if(!qa.audio.src)setQaSource(false);qa.audio.play().catch(function(){})}else qa.audio.pause()};
+  qa.play.onclick=function(){if(qa.audio.paused){qa.audio.dataset.wantsPlayback="yes";if(!qa.audio.src)setQaSource(false);qa.audio.play().catch(function(){qa.title.textContent="Audio derzeit nicht erreichbar · Rezitator wechseln"})}else{qa.audio.dataset.wantsPlayback="no";qa.audio.pause()}};
   qa.next.onclick=function(){stepQa(1,!qa.audio.paused)};
   qa.surah.onchange=function(){qa.state.surah=Number(qa.surah.value);qa.state.ayah=1;fillAyat();setQaSource(!qa.audio.paused)};
   qa.ayah.onchange=function(){qa.state.ayah=Number(qa.ayah.value);setQaSource(!qa.audio.paused)};
@@ -3782,7 +3783,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   qa.audio.onpause=function(){qa.wrap.classList.remove("is-playing");qa.play.textContent="▶"};
   qa.audio.ontimeupdate=function(){var d=qa.audio.duration||0,c=qa.audio.currentTime||0;qa.progress.style.width=(d?Math.min(100,c/d*100):0)+"%"};
   qa.audio.onended=function(){stepQa(1,true)};
-  qa.audio.onerror=function(){if(qa.audio.dataset.fallbackUsed!=="yes"&&qa.audio.src.includes("/quran-audio/")){var resume=!qa.audio.paused;qa.audio.dataset.fallbackUsed="yes";qa.audio.src=everyayahAudioUrl();qa.audio.load();if(resume)qa.audio.play().catch(function(){qa.title.textContent="Audio derzeit nicht erreichbar · Rezitator wechseln"})}else{qa.title.textContent="Audio derzeit nicht erreichbar · Rezitator wechseln"}};
+  qa.audio.onerror=function(){if(qa.audio.dataset.fallbackUsed!=="yes"&&qa.audio.src.includes("/quran-audio/")){var resume=qa.audio.dataset.wantsPlayback==="yes";qa.audio.dataset.fallbackUsed="yes";qa.audio.src=everyayahAudioUrl();qa.audio.load();if(resume)qa.audio.play().catch(function(){qa.title.textContent="Audio derzeit nicht erreichbar · Rezitator wechseln"})}else{qa.title.textContent="Audio derzeit nicht erreichbar · Rezitator wechseln"}};
   if(new URLSearchParams(location.search).get("player")==="expanded")document.getElementById("darV8PlayerExpand")?.click();
   if("mediaSession" in navigator){try{navigator.mediaSession.setActionHandler("play",function(){qa.audio.play()});navigator.mediaSession.setActionHandler("pause",function(){qa.audio.pause()});navigator.mediaSession.setActionHandler("nexttrack",function(){stepQa(1,true)});navigator.mediaSession.setActionHandler("previoustrack",function(){stepQa(-1,true)})}catch(e){}}
  }
