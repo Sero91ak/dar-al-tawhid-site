@@ -1,0 +1,112 @@
+name: DAR TEST Turkish new-post review drafts
+on:
+  push:
+    branches:
+      - feature/tr-dar-test-content-integration-20261021
+    paths:
+      - 'content/posts/*.md'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: dar-test-tr-new-post-${{ github.sha }}
+  cancel-in-progress: false
+
+jobs:
+  draft-one-changed-post:
+    # Hard upper bound: one paid OpenAI request for one changed canonical post.
+    # A rerun of a workflow may never make another paid request.
+    if: ${{ github.run_attempt == 1 && github.ref == 'refs/heads/feature/tr-dar-test-content-integration-20261021' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Worklist and unpaid source gate
+        id: gate
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/tr-worklist.json"
+          mapfile -t changed < <(git diff --name-only HEAD^ HEAD -- 'content/posts/*.md' | sort -u)
+          printf '%s\n' "${changed[@]:-}" > "$RUNNER_TEMP/changed-posts.txt"
+          node - <<'NODE'
+          const fs=require('node:fs');
+          const inv=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/tr-worklist.json','utf8'));
+          const changed=fs.readFileSync(process.env.RUNNER_TEMP+'/changed-posts.txt','utf8').trim().split(/\r?\n/).filter(Boolean);
+          const candidates=inv.queue.filter(q=>q.kind==='post'&&q.locale==='tr'&&['pending','stale'].includes(q.state)&&changed.includes(q.sourcePath));
+          const item=candidates.find(q=>{
+            const i=inv.items.find(x=>x.id===q.id);
+            return i&&!i.immutable?.sourceReviewBlocked&&JSON.stringify(i.fields).length<=7000;
+          });
+          fs.appendFileSync(process.env.GITHUB_OUTPUT,'source_path='+(item?.sourcePath||'')+'\n');
+          console.log('One eligible source:',item?.sourcePath||'none','; eligible queue:',candidates.length);
+          NODE
+          ref_name="i18n/dar-test-tr-${GITHUB_SHA:0:12}"
+          echo "review_branch=$ref_name" >> "$GITHUB_OUTPUT"
+          if [[ -n "$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/$ref_name" 2>&1)" ]]; then
+            if gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/$ref_name" >/dev/null 2>&1; then
+              echo "duplicate=true" >> "$GITHUB_OUTPUT"
+              echo "Existing review branch; no repeat model call." >> "$GITHUB_STEP_SUMMARY"
+            else
+              probe="$(gh api "repos/${GITHUB_REPOSITORY}/git/ref/heads/$ref_name" 2>&1 || true)"
+              if ! grep -q 'HTTP 404' <<< "$probe"; then
+                echo "::error::Cannot reliably verify duplicate branch; abort for cost safety"
+                exit 1
+              fi
+              echo "duplicate=false" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+      - name: Generate at most one Turkish manuscript
+        if: ${{ steps.gate.outputs.source_path != '' && steps.gate.outputs.duplicate == 'false' }}
+        env:
+          DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
+          DAR_I18N_AI_API_URL: https://api.openai.com/v1/chat/completions
+          DAR_I18N_AI_MODEL: gpt-4.1
+          DAR_I18N_PROVIDER_APPROVED: 'yes'
+          SOURCE_PATH: ${{ steps.gate.outputs.source_path }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${DAR_I18N_AI_API_KEY:-}" || { echo "::error::Missing server-side OpenAI secret"; exit 1; }
+          node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs \
+            --generate --inventory "$RUNNER_TEMP/tr-worklist.json" \
+            --output "$RUNNER_TEMP/turkish-review" --locale tr --kind post \
+            --source-path "$SOURCE_PATH" --max-requests 1 \
+            --max-source-chars 7000 --max-output-tokens 3300
+      - name: Commit manuscript into isolated review branch (never main)
+        if: ${{ steps.gate.outputs.source_path != '' && steps.gate.outputs.duplicate == 'false' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REVIEW_BRANCH: ${{ steps.gate.outputs.review_branch }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          generated="$RUNNER_TEMP/turkish-review/desktop-preview/i18n-core-v1/translations"
+          if [[ ! -d "$generated" ]]; then echo "No new manuscript generated; no paid retry."; exit 0; fi
+          cp -R "$generated/." desktop-preview/i18n-core-v1/translations/
+          git add desktop-preview/i18n-core-v1/translations/
+          if git diff --cached --quiet; then echo "Unchanged review manuscript; skip."; exit 0; fi
+          git checkout -b "$REVIEW_BRANCH"
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "draft(i18n): Turkish post manuscript, review required"
+          git push origin "HEAD:refs/heads/$REVIEW_BRANCH"
+          gh pr create --base feature/tr-dar-test-content-integration-20261021 --head "$REVIEW_BRANCH" \
+            --draft --title "TEST: Türkischer Beitragsentwurf ${GITHUB_SHA:0:12}" \
+            --body "Ungeprüfter OpenAI-Entwurf. Kein produktiver Merge, keine Besucherfreigabe. Originalquellen, Sprachprüfung, islamwissenschaftliche Prüfung und Revisionsabgleich sind verpflichtend."
+      - name: Keep artifact for recovery
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-test-turkish-new-post-draft
+          path: ${{ runner.temp }}/turkish-review/
+          retention-days: 14
+          if-no-files-found: ignore
