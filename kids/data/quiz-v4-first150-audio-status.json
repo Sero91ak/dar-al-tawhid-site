@@ -2,76 +2,22 @@
   "scope": "TAWḤĪD KIDS · 150 age 4–6 V4 cost-free listening preview",
   "questionCount": 150,
   "newPaidSynthesesForAssembly": 0,
-  "originalMasterMP3sStored": 1769,
-  "completeFourPartQuestions": 70,
+  "originalMasterMP3sStored": 1781,
+  "completeFourPartQuestions": 150,
   "availableFieldCounts": {
-    "question": 100,
-    "correct": 85,
-    "retry": 85,
-    "explanation": 148
+    "question": 150,
+    "correct": 150,
+    "retry": 150,
+    "explanation": 150
   },
-  "importedPreviouslyPaidGenerationIdCount": 47,
-  "missingPreviouslyPaidOriginalTextCount": 9,
-  "missingPreviouslyPaidGenerationIdCount": 9,
-  "missingDirectPaidPartGenerationIdCount": 6,
-  "missingDirectPaidPartGenerationIds": [
-    "1UAwmEQ77D4BmA9DttHZ",
-    "2xy9ZLej1wPTrnvAr9p7",
-    "AToalNGbxiRe1zfOnDG3",
-    "DX5z8FWaCS4FDx3KrloO",
-    "GvXeGQ9Kr1lVy7LEAv5T",
-    "aoKJuahenrKHfUE5OD9j"
-  ],
-  "missingPreviouslyPaidTexts": [
-    {
-      "text": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
-      "requiredByQuestionParts": 35
-    },
-    {
-      "text": "Das merken wir uns: Sūrat al-Iḫlāṣ lehrt: Allah ist Einer.",
-      "requiredByQuestionParts": 1
-    },
-    {
-      "text": "Das merken wir uns: Wir dienen Allah allein.",
-      "requiredByQuestionParts": 1
-    },
-    {
-      "text": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
-      "requiredByQuestionParts": 27
-    },
-    {
-      "text": "Du lernst mit jedem Versuch. Hör noch einmal genau hin!",
-      "requiredByQuestionParts": 30
-    },
-    {
-      "text": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
-      "requiredByQuestionParts": 35
-    },
-    {
-      "text": "Ist Allah Einer?",
-      "requiredByQuestionParts": 1
-    },
-    {
-      "text": "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Du lernst immer mehr!",
-      "requiredByQuestionParts": 30
-    },
-    {
-      "text": "Schau, was du schon alles weißt.",
-      "requiredByQuestionParts": 29
-    }
-  ],
-  "missingPaidOriginalGenerationIds": [
-    "1UAwmEQ77D4BmA9DttHZ",
-    "2xy9ZLej1wPTrnvAr9p7",
-    "AToalNGbxiRe1zfOnDG3",
-    "DX5z8FWaCS4FDx3KrloO",
-    "FGX65uXKWBnjULDxg3X1",
-    "GvXeGQ9Kr1lVy7LEAv5T",
-    "KIgCxJO3RDxhsIFJSYUB",
-    "UUmC2fDiXaV5W1IQSumA",
-    "aoKJuahenrKHfUE5OD9j"
-  ],
-  "originalFlowImportNeeded": true,
+  "importedPreviouslyPaidGenerationIdCount": 56,
+  "missingPreviouslyPaidOriginalTextCount": 0,
+  "missingPreviouslyPaidGenerationIdCount": 0,
+  "missingDirectPaidPartGenerationIdCount": 0,
+  "missingDirectPaidPartGenerationIds": [],
+  "missingPreviouslyPaidTexts": [],
+  "missingPaidOriginalGenerationIds": [],
+  "originalFlowImportNeeded": false,
   "projectedFourPartQuestionCountAfterAuthenticOldPaidImport": 150,
   "projectedBlockedQuestionIdsAfterAuthenticOldPaidImport": [],
   "projectionIsNotAudioProofOrHumanApproval": true,
@@ -81,25 +27,24 @@
     {
       "questionId": "kids-quiz-001",
       "availableAudioParts": [
-        "question"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing",
-        "explanation": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-002",
-      "availableAudioParts": [],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing",
-        "explanation": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "availableAudioParts": [
+        "correct",
+        "explanation",
+        "question",
+        "retry"
+      ],
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-003",
@@ -137,26 +82,24 @@
     {
       "questionId": "kids-quiz-006",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-007",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-008",
@@ -194,26 +137,24 @@
     {
       "questionId": "kids-quiz-011",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-012",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-013",
@@ -251,26 +192,24 @@
     {
       "questionId": "kids-quiz-016",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-017",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-018",
@@ -286,26 +225,24 @@
     {
       "questionId": "kids-quiz-051",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-052",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-053",
@@ -323,12 +260,11 @@
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-055",
@@ -344,38 +280,35 @@
     {
       "questionId": "kids-quiz-056",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-057",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-058",
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-059",
@@ -391,26 +324,24 @@
     {
       "questionId": "kids-quiz-061",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-062",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-063",
@@ -448,14 +379,13 @@
     {
       "questionId": "kids-quiz-066",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-068",
@@ -471,26 +401,24 @@
     {
       "questionId": "kids-quiz-101",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-102",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-103",
@@ -528,26 +456,24 @@
     {
       "questionId": "kids-quiz-106",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-107",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-108",
@@ -574,26 +500,24 @@
     {
       "questionId": "kids-quiz-112",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-114",
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-115",
@@ -609,50 +533,46 @@
     {
       "questionId": "kids-quiz-117",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-118",
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-151",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-152",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-153",
@@ -670,12 +590,11 @@
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-155",
@@ -691,26 +610,24 @@
     {
       "questionId": "kids-quiz-156",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-157",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-159",
@@ -737,26 +654,24 @@
     {
       "questionId": "kids-quiz-161",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-162",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-164",
@@ -772,26 +687,24 @@
     {
       "questionId": "kids-quiz-166",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-167",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-168",
@@ -829,14 +742,13 @@
     {
       "questionId": "kids-quiz-207",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-208",
@@ -863,26 +775,24 @@
     {
       "questionId": "kids-quiz-211",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-212",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-213",
@@ -900,48 +810,44 @@
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-216",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-218",
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-256",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-260",
@@ -957,14 +863,13 @@
     {
       "questionId": "kids-quiz-261",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-264",
@@ -1024,26 +929,24 @@
     {
       "questionId": "kids-quiz-306",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-307",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-308",
@@ -1059,26 +962,24 @@
     {
       "questionId": "kids-quiz-311",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-312",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-313",
@@ -1094,26 +995,24 @@
     {
       "questionId": "kids-quiz-352",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-354",
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-355",
@@ -1129,26 +1028,24 @@
     {
       "questionId": "kids-quiz-356",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-357",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-359",
@@ -1197,14 +1094,13 @@
     {
       "questionId": "kids-quiz-366",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-405",
@@ -1220,86 +1116,79 @@
     {
       "questionId": "kids-quiz-406",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-414",
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-418",
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-451",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-452",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-454",
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-456",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-459",
@@ -1315,14 +1204,13 @@
     {
       "questionId": "kids-quiz-462",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-463",
@@ -1360,14 +1248,13 @@
     {
       "questionId": "kids-quiz-502",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-503",
@@ -1396,12 +1283,11 @@
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-513",
@@ -1419,12 +1305,11 @@
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-515",
@@ -1440,26 +1325,24 @@
     {
       "questionId": "kids-quiz-517",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-518",
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-553",
@@ -1508,14 +1391,13 @@
     {
       "questionId": "kids-quiz-601",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-604",
@@ -1531,38 +1413,35 @@
     {
       "questionId": "kids-quiz-606",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-607",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-612",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-613",
@@ -1589,26 +1468,24 @@
     {
       "questionId": "kids-quiz-616",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-618",
       "availableAudioParts": [
         "correct",
         "explanation",
+        "question",
         "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-653",
@@ -1635,26 +1512,24 @@
     {
       "questionId": "kids-quiz-656",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-681",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-683",
@@ -1703,74 +1578,68 @@
     {
       "questionId": "kids-quiz-691",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-692",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-696",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-697",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-706",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-707",
       "availableAudioParts": [
-        "explanation"
+        "correct",
+        "explanation",
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "question": "earlier-paid-original-flow-fragments-not-imported",
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-708",
@@ -1786,26 +1655,24 @@
     {
       "questionId": "kids-quiz-711",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     },
     {
       "questionId": "kids-quiz-716",
       "availableAudioParts": [
+        "correct",
         "explanation",
-        "question"
+        "question",
+        "retry"
       ],
-      "missingOrBlockedAudioParts": {
-        "correct": "earlier-paid-original-flow-mp3-export-missing",
-        "retry": "earlier-paid-original-flow-mp3-export-missing"
-      },
-      "allFourPartsAvailable": false
+      "missingOrBlockedAudioParts": {},
+      "allFourPartsAvailable": true
     }
   ]
 }
