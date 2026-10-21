@@ -33,8 +33,16 @@ try{
  assert.equal(first.items.find(x=>x.kind==="quiz").immutable.correctIndex,0);
  assert.equal(first.summary.byKind.learning,4);
  const second=generate();assert.equal(second.summary.changedItems,0);assert.equal(second.summary.newItems,0);
+ // Persisted drafts are reused at the same source revision and marked stale when German changes.
+ const initialPost=second.items.find(x=>x.id==="post:one");
+ const draftPath=initialPost.languages.tr.translationPath;
+ write(draftPath,{id:"post:one",locale:"tr",sourceHash:initialPost.sourceHash,status:"draft",
+  fields:{title:"Tevhid",body:"Türkçe inceleme taslağı"},reviewer:null});
+ const draftState=generate();assert.equal(draftState.items.find(x=>x.id==="post:one").languages.tr.state,"draft");
+
  write("content/posts/one.md",'---\nid: "one"\ntitle: "Tawḥīd"\nsource: "Qurʾān 51:56"\n---\n\nVollständig revidierter Text.');
  const changed=generate();assert.equal(changed.summary.changedItems,1);
+ assert.equal(changed.items.find(x=>x.id==="post:one").languages.tr.state,"stale");
  const q=changed.items.find(x=>x.kind==="post");const p=q.languages.ar.translationPath;
  write(p,{id:q.id,locale:"ar",sourceHash:q.sourceHash,status:"approved",fields:{title:"التوحيد",body:"متن عربي للمراجعة"},reviewer:{linguistic:"Reviewer A",religious:"Reviewer B",arabicOriginalChecked:true,sourcesChecked:true},reviewedAt:"2026-10-21"});
  const approved=generate();assert.equal(approved.summary.byState.approved,1);
