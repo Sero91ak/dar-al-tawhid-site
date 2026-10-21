@@ -71,7 +71,7 @@ jobs:
                   const active=[...dock.querySelectorAll('a.active')].map(x=>x.dataset.page);
                   return {route:document.body.dataset.darV8Route,overflow:document.documentElement.scrollWidth-innerWidth,
                   sidebar:getComputedStyle(side).display,doc:getComputedStyle(dock).display,dockCount:dock.querySelectorAll('a').length,
-                  hero:hero?{display:getComputedStyle(hero).display,height:hero.getBoundingClientRect().height,icon:!!hero.querySelector('img')}:null,
+                  hero:hero?{display:getComputedStyle(hero).display,height:hero.getBoundingClientRect().height,icon:!!hero.querySelector('img')}:null, welcomeHidden:getComputedStyle($('darV8TopWelcome')).display==='none',
                   content:$('#pageRoot')?.innerText?.slice(0,110)||'missing',active:active};
                 """)
                 if state['overflow']>3: raise RuntimeError(name+' '+route+' horizontal overflow '+str(state))
@@ -80,6 +80,7 @@ jobs:
                 if name!='desktop' and state['doc']=='none':raise RuntimeError('Mobile dock not visible '+route)
                 if route!='start' and (not state['hero'] or not state['hero']['icon'] or state['hero']['height']<110):
                   raise RuntimeError(name+' '+route+' route hero missing '+str(state))
+                if route!='start' and not state['welcomeHidden']:raise RuntimeError('Repeated home welcome on '+name+' '+route)
                 if route=='hadith':
                   if not driver.find_elements(By.ID,'v8HadithResults'):raise RuntimeError('Hadith route falls back to start')
                   WebDriverWait(driver,30).until(lambda d: d.execute_script("return !!document.getElementById('v8HadithResults')?.dataset.v8Ready"))
