@@ -12,11 +12,11 @@ quelle:{label:"Quellen",icon:"library",group:"wissen"},
 dua:{label:"Duʿāʾ",icon:"dua",group:"dua"},
 wissen:{label:"Wissen",icon:"ilm",group:"wissen"},
 suche:{label:"Wissenschat",icon:"spark",group:"wissen"},
-bibliothek:{label:"Bibliothek",icon:"library",group:"bibliothek"},
-werk:{label:"Werk",icon:"library",group:"bibliothek"},
-hadith:{label:"Ḥadīṯ & Āṯār",icon:"hadith",group:"hadith"},
-gebetszeiten:{label:"Gebetszeiten",icon:"prayer",group:"gebetszeiten"},
-frauen:{label:"Frauen",icon:"frauen",group:"frauen"},
+bibliothek:{label:"Bibliothek",icon:"library",group:"mehr"},
+werk:{label:"Werk",icon:"library",group:"mehr"},
+hadith:{label:"Ḥadīṯ & Āṯār",icon:"hadith",group:"wissen"},
+gebetszeiten:{label:"Gebetszeiten",icon:"prayer",group:"mehr"},
+frauen:{label:"Frauen",icon:"frauen",group:"mehr"},
 frauenbereich:{label:"Frauen",icon:"frauen",group:"frauen"},
 mehr:{label:"Mehr",icon:"more",group:"mehr"},
 quiz:{label:"Quiz",icon:"quiz",group:"mehr"},
@@ -42,7 +42,7 @@ function current(){const k=(new URLSearchParams(location.search).get("page")||"s
 function syncNav(key){
  const item=pages[key]||pages.start;d.body.dataset.darV8Route=key;
  for(const a of d.querySelectorAll(".dar-v8-side-link,.dar-v8-mobile-tab")){
-  const active=a.dataset.page===item.group;
+  const active=a.dataset.page===(a.classList.contains("dar-v8-side-link")?key:item.group);
   a.classList.toggle("active",active);if(active)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current");
  }
  const crumb=d.getElementById("darV8BreadLabel");if(crumb)crumb.textContent=item.label;
