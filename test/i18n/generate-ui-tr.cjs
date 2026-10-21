@@ -70,8 +70,12 @@ async function chunkTranslate(batch){
   if(!response.ok)throw Error("Model HTTP "+response.status);
   const payload=await response.json();tokens+=Number(payload.usage?.total_tokens||0);
   const result=JSON.parse(String(payload.choices?.[0]?.message?.content||""));
-  if(!Array.isArray(result.translations)||result.translations.length!==batch.length)
-    throw Error("Translation length mismatch");
+  if(!Array.isArray(result.translations)||result.translations.length<1||
+     result.translations.length>batch.length)
+    throw Error("Invalid translation response");
+  if(result.translations.length!==batch.length)
+    console.warn("MODEL OUTPUT PARTIAL: "+result.translations.length+" of "+batch.length+
+      " UI strings; keeping verified subset without repeating paid requests");
   const allowed=new Set(batch.map(x=>x.de)),output=new Set();
   for(const rec of result.translations){
    if(!allowed.has(rec.de)||output.has(rec.de))throw Error("Unexpected/duplicate German UI source");
@@ -89,6 +93,10 @@ async function chunkTranslate(batch){
  for(let n=0;n<candidate.length;n+=CHUNK){
   calls++;if(calls>MAX_CALLS)throw Error("Paid request safety cap exceeded");
   await chunkTranslate(candidate.slice(n,n+CHUNK));
+  // Save each paid result immediately so any later failure cannot lose earlier translations.
+  approvedStatic.model=model;approvedStatic.modelCalls=calls;approvedStatic.modelTokens=tokens;
+  approvedStatic.classifiedNonInterface=classifiedNotUi;
+  fs.writeFileSync(outPath,JSON.stringify(approvedStatic,null,2)+"\n");
   console.log("UI batch",calls,"of",Math.ceil(candidate.length/CHUNK),
    "translated",Object.keys(approvedStatic.entries).length,"discarded non-UI",classifiedNotUi);
  }
