@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "kind": "localized-canonical-content-contract",
+  "supports": [
+    "posts",
+    "qsource",
+    "hadith",
+    "dua",
+    "quiz",
+    "learn",
+    "quran-tafsir",
+    "quran-tadabbur"
+  ],
+  "excluded": [
+    "pdf-translation"
+  ],
+  "immutableFields": [
+    "id",
+    "sourceLinks",
+    "sourceIds",
+    "arabicOriginal",
+    "reference",
+    "hadithGrade",
+    "ayahReference"
+  ],
+  "localeFields": [
+    "title",
+    "body",
+    "explanation",
+    "sourceNote",
+    "answerOptions",
+    "quizRationale",
+    "learningSteps"
+  ],
+  "requiredApproval": {
+    "translationStatus": "approved",
+    "linguisticReview": true,
+    "religiousReview": true,
+    "arabicOriginalChecked": true,
+    "sourceIdMatches": true,
+    "revisionMatches": true
+  },
+  "fallback": {
+    "locale": "de",
+    "visibleNotice": true,
+    "noHiddenMachineTranslation": true
+  },
+  "sample": {
+    "id": "post:tawhid-iman-akhlaq-ein-din-480",
+    "kind": "posts",
+    "revision": "original-20261020",
+    "sourceLinks": [
+      "/q/47/"
+    ],
+    "arabicOriginal": null,
+    "reference": "aṭ-Ṭabarī, Tafsīr zu an-Naḥl 16:90",
+    "languages": {
+      "de": {
+        "status": "original",
+        "title": "Tawḥīd, Īmān und Akhlāq – ein Dīn",
+        "bodyPointer": "content/posts/tawhid-iman-akhlaq-ein-din-480.md"
+      },
+      "ar": {
+        "status": "pending",
+        "review": null
+      },
+      "en": {
+        "status": "pending",
+        "review": null
+      },
+      "tr": {
+        "status": "pending",
+        "review": null
+      },
+      "ku": {
+        "status": "pending",
+        "review": null
+      },
+      "ckb": {
+        "status": "pending",
+        "review": null
+      },
+      "bs": {
+        "status": "pending",
+        "review": null
+      }
+    }
+  }
+}

@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/><meta name="robots" content="noindex,nofollow"/><title>DĀR AL TAWḤĪD · International Knowledge Portal · Entwicklungsdemo</title>
+<style>
+:root{font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;--ink:#222b27;--muted:#6d7970;--bg:#f2f3ee;--surface:#fffefa;--line:#dedfd5;--gold:#a28553;--forest:#283f36;--radius:20px;color-scheme:light}
+*{box-sizing:border-box}html{overscroll-behavior-y:none}body{margin:0;background:var(--bg);color:var(--ink);min-height:100dvh;overscroll-behavior-y:none}button,input,select{font:inherit}button{cursor:pointer}a{color:inherit}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.app{min-height:100dvh;display:grid;grid-template-columns:230px minmax(0,1fr)}.rail{position:sticky;top:0;height:100dvh;padding:29px 18px;background:var(--surface);border-inline-end:1px solid var(--line);display:flex;flex-direction:column;gap:29px}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;font:600 16px/1.3 Georgia,serif;letter-spacing:.06em}.seal{display:grid;place-items:center;background:var(--forest);color:#efddbd;font:28px Georgia,serif;width:42px;height:42px;border-radius:50%;flex:none}.rail nav{display:grid;gap:8px}.rail nav a{display:flex;align-items:center;gap:12px;padding:12px;border-radius:12px;text-decoration:none;font-size:13px;color:var(--muted)}.rail nav a:first-child,.rail nav a:hover{background:#f1f3ec;color:var(--ink)}.rail .num{color:var(--gold);min-width:22px;font:19px Georgia,serif}.rail-foot{margin-top:auto;font-size:11px;line-height:1.8;color:var(--muted)}
+.page{min-width:0;padding:0 clamp(17px,4vw,62px) 75px;max-width:1600px}.top{height:76px;border-bottom:1px solid var(--line);display:flex;gap:16px;align-items:center;justify-content:space-between}.top p{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.1em}.lang{display:flex;align-items:center;gap:9px}.lang label{font-size:12px;color:var(--muted)}.lang select{min-width:174px;padding:10px 15px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink);font-size:13px}
+main{max-width:1200px;margin:0 auto}.welcome{padding:34px 0 23px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:center}.overline{text-transform:uppercase;font-size:10px;letter-spacing:.17em;font-weight:800;color:var(--gold);line-height:1.7}.welcome h1{font:500 clamp(30px,3.8vw,49px)/1.16 Georgia,serif;letter-spacing:-.035em;margin:8px 0 10px}.welcome p{font-size:13px;color:var(--muted);line-height:1.7;margin:0;max-width:650px}.welcome .arabic{font:26px/1.8 Georgia,serif;color:var(--gold)}.divider{width:95px;height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:21px 0}
+.search{background:linear-gradient(125deg,#142b23,#26392f);padding:30px clamp(20px,3vw,35px);border-radius:24px;color:#fbf7ec;position:relative;overflow:hidden}.search::before{content:"۞";font:240px Georgia,serif;color:#f4dfaa0b;position:absolute;inset-inline-end:-20px;top:-80px;pointer-events:none}.search-inner{position:relative;max-width:790px}.search h2{font:500 30px Georgia,serif;letter-spacing:-.025em;margin:6px 0 9px}.search p{font-size:12px;line-height:1.6;color:#d3dccc;margin:0 0 19px}.search form{display:flex;gap:7px;background:#fafbf6;border-radius:15px;padding:7px;align-items:center}.search form input{flex:1;min-width:0;border:0;background:transparent;color:#21382d;padding:10px 13px;outline:0;font-size:16px}.search form button{border:0;border-radius:12px;background:#bb9e61;color:#1c2b24;padding:12px 16px;font-size:12px;font-weight:750;min-height:44px}.examples{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.examples button{border:1px solid #e8e5ca4a;border-radius:999px;background:transparent;color:#f8f1d9;padding:9px 13px;font-size:12px}
+.contentgrid{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(250px,.88fr);gap:30px;margin-top:30px}.h{font:500 25px Georgia,serif;margin:0 0 17px}.terms{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.term{min-height:108px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:17px 13px;text-align:start;color:var(--ink);transition:transform .15s,border-color .15s}.term:hover{transform:translateY(-2px);border-color:var(--gold)}.term strong{display:block;font:500 21px Georgia,serif}.term span{display:block;color:var(--gold);font:20px Georgia,serif;margin-top:8px}.results{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:21px;margin-top:24px;min-height:120px}.results-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.results h3{font:500 22px Georgia,serif;margin:0 0 7px}.results-status{font-size:11px;color:var(--muted)}.result{display:block;padding:17px 0;border-bottom:1px solid var(--line);text-decoration:none}.result:last-child{border-bottom:none}.result b{font-size:14px}.result p{font-size:12px;line-height:1.6;color:var(--muted);margin:7px 0 5px}.result small{display:block;color:var(--gold);font-size:10px}.noresults{font-size:13px;color:var(--muted);line-height:1.75}.tag{font-size:10px;background:#f3eee3;color:#947341;border-radius:999px;padding:5px 8px;display:inline-block;margin-inline-start:8px}.sidebar-info{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:21px}.sidebar-info h3{font:500 21px Georgia,serif;margin:0 0 13px}.sidebar-info p{font-size:12px;line-height:1.85;color:var(--muted)}.sidebar-info strong{color:var(--ink)}.sourcepolicy{margin-top:20px;padding:17px 2px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);line-height:1.7}.sourcepolicy b{color:var(--gold)}.metric{border-bottom:1px solid var(--line);padding:12px 0;display:flex;justify-content:space-between;gap:10px;font-size:12px}.metric strong{color:var(--gold)}.footer{margin:37px 0 0;padding:24px 0;border-top:1px solid var(--line);font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.mobile-nav{display:none}
+#i18nRoot[dir="rtl"] .divider{background:linear-gradient(270deg,var(--gold),transparent)}
+#i18nRoot[dir="rtl"] .term,#i18nRoot[dir="rtl"] .search form input{text-align:right}
+@media(max-width:1100px){.app{grid-template-columns:188px minmax(0,1fr)}.contentgrid{grid-template-columns:1fr}.terms{grid-template-columns:repeat(3,minmax(0,1fr))}.rail{padding:22px 10px}.rail .brand{font-size:13px}}
+@media(max-width:760px){.app{display:block}.rail{display:none}.page{padding:0 16px 100px}.top{height:65px}.welcome{padding:24px 0 18px;grid-template-columns:1fr}.welcome .arabic{display:none}.welcome h1{font-size:32px}.search{margin:0 -16px;border-radius:0;padding:25px 19px}.search h2{font-size:25px}.search form{display:flex}.search form button{font-size:0;padding:10px 15px}.search form button::after{content:"→";font-size:20px}.contentgrid{gap:16px;margin-top:23px}.terms{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}.term{min-height:90px;padding:13px 10px;border-radius:18px}.term strong{font-size:17px}.term span{font-size:16px}.mobile-nav{display:flex;position:fixed;z-index:20;bottom:calc(8px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);width:min(680px,calc(100vw - 28px));border:1px solid #beab8557;background:#fff9ebbf;backdrop-filter:blur(26px);border-radius:999px;box-shadow:0 12px 38px #152e2533;min-height:64px;padding:5px 6px;justify-content:space-around;gap:3px}.mobile-nav a{flex:1;display:grid;place-items:center;text-align:center;gap:3px;font-size:10px;text-decoration:none;color:#3e4f43;padding:7px 2px;border-radius:999px}.mobile-nav a:first-child{background:#d6c29b54}.mobile-nav span{font-size:17px}.lang label{display:none}.lang select{min-width:132px;max-width:160px;padding:8px;font-size:12px}}
+@media(max-width:350px){.terms{grid-template-columns:repeat(2,minmax(0,1fr))}.brandmark{font-size:12px}.lang select{min-width:105px;max-width:113px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+</style></head><body>
+<div id="i18nRoot"><div class="app">
+<aside class="rail" aria-label="Navigation"><a class="brand" href="#start"><span class="seal">د</span><span>DĀR AL TAWḤĪD</span></a><nav>
+<a href="#start"><span class="num">⌂</span><span data-dar-i18n="start">Start</span></a>
+<a href="https://dar-al-tawhid.de/?page=quran"><span class="num">۞</span><span data-dar-i18n="quran">Qurʾān</span></a>
+<a href="https://dar-al-tawhid.de/?page=beitraege"><span class="num">◈</span><span data-dar-i18n="posts">Beiträge</span></a>
+<a href="https://dar-al-tawhid.de/?page=hadith"><span class="num">☷</span><span data-dar-i18n="hadith">Ḥadīṯ</span></a>
+<a href="https://dar-al-tawhid.de/?page=bibliothek"><span class="num">▤</span><span data-dar-i18n="library">Bibliothek</span></a>
+<a href="https://dar-al-tawhid.de/?page=mehr"><span class="num">⋯</span><span data-dar-i18n="more">Mehr</span></a>
+</nav><div class="rail-foot">DĀR International Core · Preview V1<br/>Sources only · No invented scholarly answer</div></aside>
+<div class="page"><header class="top"><span style="color:var(--gold);font:500 17px Georgia,serif">DĀR AL TAWḤĪD</span><div class="lang"><label for="language" data-dar-i18n="langPicker">Sprache</label><select id="language" data-dar-locale-select aria-label="Website language"></select></div></header>
+<main id="start">
+<section class="welcome"><div><div class="overline" data-dar-i18n="kicker">Beiträge nach Qurʾān, Sunnah und Āṯār</div><h1 data-dar-i18n="welcome">Willkommen bei DĀR AL TAWḤĪD</h1><p data-dar-i18n="description"></p><div class="divider"></div><p style="font-family:Georgia,serif;color:var(--gold)" data-dar-i18n="greeting"></p></div><span class="arabic" aria-hidden="true">اقْرَأْ وَتَعَلَّمْ</span></section>
+<section class="search" aria-label="Knowledge Finder"><div class="search-inner"><div class="overline" style="color:#cdb883" data-dar-i18n="sourceGuard"></div><h2 data-dar-i18n="searchTitle">Wissensfinder</h2><p data-dar-i18n="searchExplain"></p>
+<form id="finderForm"><input id="finderQuestion" data-dar-i18n-placeholder="searchPlaceholder" placeholder="Was ist Tawḥīd?" autocomplete="off" spellcheck="false" maxlength="300" aria-label="Question"/><button type="submit" data-dar-i18n="searchButton">Frage stellen</button></form><div class="examples" id="quickExamples"><button type="button" data-query="Tawḥīd">Tawḥīd</button><button type="button" data-query="Īmān">Īmān</button><button type="button" data-query="Bidʿah">Bidʿah</button><button type="button" data-query="Uṣūl al-Fiqh">Uṣūl al-Fiqh</button></div>
+</div></section>
+<div class="contentgrid"><div><h2 class="h" data-dar-i18n="knowledge"></h2><div class="terms" id="termCards"></div>
+<section class="results" id="results" aria-live="polite"><div class="results-head"><h3 data-dar-i18n="sources"></h3><span class="results-status" id="resultStatus"></span></div><div id="resultList" class="noresults"></div></section></div>
+<aside><div class="sidebar-info"><h3 data-dar-i18n="status"></h3><p data-dar-i18n="sourceGuard"></p><div class="metric"><span data-dar-i18n="langPicker"></span><strong id="currentLang"></strong></div><div class="metric"><span data-dar-i18n="term"></span><strong id="termCount"></strong></div><div class="metric"><span data-dar-i18n="sources"></span><strong id="sourceCount"></strong></div><p class="sourcepolicy"><b data-dar-i18n="awaiting"></b><br/><span data-dar-i18n="unverified"></span></p></div>
+<p class="sourcepolicy" data-dar-i18n="preview"></p></aside></div>
+<footer class="footer"><span>DĀR AL TAWḤĪD · International knowledge infrastructure</span><span data-dar-i18n="preview"></span></footer>
+</main></div></div>
+<nav class="mobile-nav" aria-label="Mobile preview navigation">
+<a href="#start"><span>⌂</span><b data-dar-i18n="start">Start</b></a>
+<a href="https://dar-al-tawhid.de/?page=quran"><span>۞</span><b data-dar-i18n="quran">Qurʾān</b></a>
+<a href="https://dar-al-tawhid.de/?page=beitraege"><span>◈</span><b data-dar-i18n="posts">Beiträge</b></a>
+<a href="https://dar-al-tawhid.de/?page=hadith"><span>☷</span><b data-dar-i18n="hadith">Hadith</b></a>
+<a href="https://dar-al-tawhid.de/?page=mehr"><span>⋯</span><b data-dar-i18n="more">Mehr</b></a>
+</nav></div>
+<script id="catalog" type="application/json">{"schemaVersion":1,"description":"DĀR adult shared UI locale catalog; editorial content is not translated automatically","defaultLocale":"de","locales":{"de":{"name":"Deutsch","dir":"ltr","messages":{"brand":"DĀR AL TAWḤĪD","kicker":"Beiträge nach Qurʾān, Sunnah und Āṯār","greeting":"As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh","welcome":"Willkommen bei DĀR AL TAWḤĪD","description":"Geprüfte Beiträge aus Qurʾān, authentischer Sunnah und den Āṯār der frühen Imāme.","searchTitle":"Wissensfinder","searchExplain":"Stelle eine Frage – wir durchsuchen ausschließlich unsere vorhandenen Quellen.","searchPlaceholder":"Zum Beispiel: Was ist Tawḥīd?","searchButton":"Frage stellen","searchExamples":"Beispielfragen","knowledge":"Begriffe verstehen","sources":"Quellennachweise","open":"Fundstelle öffnen","noResults":"Zu dieser Frage ist in unserem derzeit erfassten Quellenbestand keine passende Fundstelle vorhanden.","unverified":"Diese Sprachfassung ist noch nicht fachlich geprüft. Der deutsche Originaltext bleibt maßgeblich.","langPicker":"Sprache","prayer":"Gebetszeiten","quran":"Qurʾān","posts":"Beiträge","library":"Bibliothek","hadith":"Ḥadīṯ","women":"Frauen","more":"Mehr","learn":"Lernen","account":"Konto","today":"Heute","dua":"Duʿāʾ","related":"Verwandte Begriffe","published":"Veröffentlichungen","awaiting":"Übersetzung in Vorbereitung","offline":"In der Vorschau: lokale Suchbeispiele","preview":"Entwicklungsvorschau – keine Live-Website","status":"Sprachen für Navigation aktiv; Fachübersetzungen schrittweise geprüft","explanation":"Begriffserklärung","sourceGuard":"Originalquellen bleiben unverändert","back":"Zurück","start":"Start","term":"Begriff","readGerman":"Deutschen Originaltext lesen"}},"ar":{"name":"العربية الفصحى","dir":"rtl","messages":{"brand":"دار التوحيد","kicker":"مقالات من القرآن والسنة وآثار السلف","greeting":"السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللَّهِ وَبَرَكَاتُهُ","welcome":"مرحبًا بكم في دار التوحيد","description":"مقالات موثقة من القرآن والسنة الصحيحة وآثار الأئمة المتقدمين.","searchTitle":"دليل البحث العلمي","searchExplain":"اطرح سؤالك؛ نبحث في المصادر المتاحة لدينا فقط.","searchPlaceholder":"مثال: ما معنى التوحيد؟","searchButton":"ابحث عن الجواب","searchExamples":"أسئلة مقترحة","knowledge":"فهم المصطلحات","sources":"المصادر والمراجع","open":"افتح المصدر","noResults":"لم نجد مصدرًا مطابقًا لهذا السؤال في المحتوى المفهرس حاليًا.","unverified":"لم تُراجع هذه النسخة اللغوية مراجعة علمية بعد. يبقى النص الألماني الأصلي هو المرجع.","langPicker":"اللغة","prayer":"مواقيت الصلاة","quran":"القرآن","posts":"المقالات","library":"المكتبة","hadith":"الحديث","women":"المرأة","more":"المزيد","learn":"التعلّم","account":"الحساب","today":"اليوم","dua":"الدعاء","related":"مصطلحات ذات صلة","published":"الإصدارات","awaiting":"الترجمة قيد الإعداد","offline":"معاينة: أمثلة بحث محلية","preview":"معاينة تطويرية — ليست الموقع المنشور","status":"واجهة متعددة اللغات؛ تتم مراجعة الترجمات الشرعية تباعًا","explanation":"شرح المصطلح","sourceGuard":"تبقى المصادر الأصلية دون تغيير","back":"رجوع","start":"الرئيسية","term":"مصطلح","readGerman":"قراءة النص الألماني الأصلي"}},"en":{"name":"English","dir":"ltr","messages":{"brand":"DĀR AL TAWḤĪD","kicker":"Articles based on the Qurʾān, Sunnah and early reports","greeting":"As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh","welcome":"Welcome to DĀR AL TAWḤĪD","description":"Source-based articles from the Qurʾān, authentic Sunnah, and reports of the early Imams.","searchTitle":"Knowledge finder","searchExplain":"Ask a question. We search only our available sources.","searchPlaceholder":"For example: What is Tawḥīd?","searchButton":"Find sources","searchExamples":"Example questions","knowledge":"Understand key terms","sources":"Source references","open":"Open source","noResults":"No matching source was found in our currently indexed material.","unverified":"This language edition has not yet passed specialist review. The original German text remains authoritative.","langPicker":"Language","prayer":"Prayer times","quran":"Qurʾān","posts":"Articles","library":"Library","hadith":"Ḥadīth","women":"Women","more":"More","learn":"Learning","account":"Account","today":"Today","dua":"Duʿāʾ","related":"Related terms","published":"Publications","awaiting":"Translation in preparation","offline":"Preview: local search samples","preview":"Development preview — not the live site","status":"Navigation localized; specialist translations are being reviewed","explanation":"Explanation","sourceGuard":"Original sources are preserved","back":"Back","start":"Home","term":"Term","readGerman":"Read original German"}},"tr":{"name":"Türkçe","dir":"ltr","messages":{"brand":"DĀR AL TAWḤĪD","kicker":"Kur'an, Sünnet ve selefin rivayetlerine dayalı yazılar","greeting":"Es-selâmü aleyküm ve rahmetullahi ve berekâtüh","welcome":"DĀR AL TAWḤĪD'e hoş geldiniz","description":"Kur'an, sahih Sünnet ve ilk dönem imamlarının rivayetlerine dayanan kaynaklı yazılar.","searchTitle":"İlim kaynakları araması","searchExplain":"Sorunuzu yazın; yalnızca mevcut kaynaklarımızda arama yaparız.","searchPlaceholder":"Örneğin: Tevhid nedir?","searchButton":"Kaynakları bul","searchExamples":"Örnek sorular","knowledge":"Kavramları öğrenin","sources":"Kaynaklar","open":"Kaynağı aç","noResults":"Şu anda dizine eklenmiş kaynaklarımızda uygun bir sonuç bulunamadı.","unverified":"Bu dil sürümü henüz uzman incelemesinden geçmedi. Almanca özgün metin esas alınır.","langPicker":"Dil","prayer":"Namaz vakitleri","quran":"Kur'an","posts":"Yazılar","library":"Kütüphane","hadith":"Hadis","women":"Kadınlar","more":"Diğer","learn":"Öğrenme","account":"Hesap","today":"Bugün","dua":"Dua","related":"İlgili kavramlar","published":"Yayınlar","awaiting":"Çeviri hazırlanıyor","offline":"Önizleme: yerel arama örnekleri","preview":"Geliştirme önizlemesi — canlı site değil","status":"Arayüz dilleri hazır; dinî çeviriler ayrı ayrı inceleniyor","explanation":"Terim açıklaması","sourceGuard":"Özgün kaynaklar değiştirilmez","back":"Geri","start":"Ana sayfa","term":"Terim","readGerman":"Almanca özgün metni oku"}},"ku":{"name":"Kurmancî","dir":"ltr","messages":{"brand":"DĀR AL TAWḤĪD","kicker":"Nivîsên li ser Qurʾān, Sunnah û vegotinên pêşiyan","greeting":"Esselamu aleykum we rehmetullahi we berekatuh","welcome":"Bi xêr hatin DĀR AL TAWḤĪD","description":"Nivîsên bi çavkaniyan ji Qurʾān, Sunnah û vegotinên îmamên berê.","searchTitle":"Lêgerîna çavkaniyên zanînê","searchExplain":"Pirsa xwe binivîse; em tenê di çavkaniyên xwe de digerin.","searchPlaceholder":"Mînak: Tawḥīd çi ye?","searchButton":"Çavkaniyan bibîne","searchExamples":"Pirsên nimûne","knowledge":"Têgînan nas bike","sources":"Çavkanî","open":"Çavkaniyê veke","noResults":"Di çavkaniyên me yên niha hatine navnîşkirin de encameke guncaw nehat dîtin.","unverified":"Ev guhertoya zimanî hêj ji aliyê pisporan ve nehatiye kontrolkirin. Nivîsa resen a almanî bingeh e.","langPicker":"Ziman","prayer":"Demên nimêjê","quran":"Qurʾān","posts":"Nivîs","library":"Pirtûkxane","hadith":"Ḥadîs","women":"Jin","more":"Zêdetir","learn":"Fêrbûn","account":"Hesab","today":"Îro","dua":"Duʿāʾ","related":"Têgînên têkildar","published":"Weşan","awaiting":"Werger di amadekirinê de ye","offline":"Pêşdîtin: nimûneyên lêgerîna herêmî","preview":"Pêşdîtina pêşvebirinê — ne malpera zindî","status":"Zimanê navberê amadekirî ye; wergerên zanistî têne kontrolkirin","explanation":"Ravekirina têgînê","sourceGuard":"Çavkaniyên resen nayên guhartin","back":"Vegere","start":"Destpêk","term":"Têgîn","readGerman":"Nivîsa resen a almanî bixwîne"}},"ckb":{"name":"سۆرانی","dir":"rtl","messages":{"brand":"دار التوحید","kicker":"بابەتەکان لەسەر بنەمای قورئان و سوننەت و ئاسەوار","greeting":"السلام علیکم ورحمة الله وبرکاته","welcome":"بەخێربێن بۆ دار التوحید","description":"بابەتە بەسەرچاوەکان لە قورئان و سوننەتی ڕاست و گێڕانەوەکانی ئیمامانی پێشوو.","searchTitle":"گەڕان بۆ سەرچاوەی زانست","searchExplain":"پرسیارەکەت بنووسە؛ تەنها لە سەرچاوە هەبووەکانماندا دەگەڕێین.","searchPlaceholder":"بۆ نموونە: تەوحید چییە؟","searchButton":"سەرچاوە بدۆزەوە","searchExamples":"پرسیاری نموونە","knowledge":"تێگەیشتن لە زاراوەکان","sources":"سەرچاوەکان","open":"سەرچاوە بکەرەوە","noResults":"لە ناوەڕۆکی ئێستای تۆمارکراودا سەرچاوەیەکی گونجاو نەدۆزرایەوە.","unverified":"ئەم وەشانەی زمانە هێشتا لەلایەن پسپۆڕانەوە پێداچوونەوەی بۆ نەکراوە. دەقی ئەڵمانیی بنەڕەتی سەرچاوەیە.","langPicker":"زمان","prayer":"کاتەکانی نوێژ","quran":"قورئان","posts":"بابەتەکان","library":"کتێبخانە","hadith":"حەدیث","women":"ژنان","more":"زیاتر","learn":"فێربوون","account":"هەژمار","today":"ئەمڕۆ","dua":"دوعا","related":"زاراوە پەیوەندیدارەکان","published":"بڵاوکراوەکان","awaiting":"وەرگێڕان لە ئامادەکردندایە","offline":"پێشبینین: نموونەی گەڕانی ناوخۆیی","preview":"پێشبینینی گەشەپێدان — ماڵپەڕی ڕاستەوخۆ نییە","status":"ڕووکارەکە فرەزمانە؛ وەرگێڕانە زانستییەکان پێداچوونەوەیان بۆ دەکرێت","explanation":"ڕوونکردنەوەی زاراوە","sourceGuard":"سەرچاوە ڕەسەنەکان ناگۆڕدرێن","back":"گەڕانەوە","start":"سەرەکی","term":"زاراوە","readGerman":"دەقی ئەڵمانیی بنەڕەتی بخوێنەوە"}},"bs":{"name":"Bosanski","dir":"ltr","messages":{"brand":"DĀR AL TAWḤĪD","kicker":"Tekstovi zasnovani na Kur'anu, sunnetu i predajama prvih učenjaka","greeting":"Es-selamu alejkum ve rahmetullahi ve berekatuhu","welcome":"Dobro došli u DĀR AL TAWḤĪD","description":"Tekstovi s izvorima iz Kur'ana, vjerodostojnog sunneta i predaja ranih imama.","searchTitle":"Pretraga izvora znanja","searchExplain":"Postavite pitanje; pretražujemo isključivo dostupne izvore.","searchPlaceholder":"Naprimjer: Šta je tevhid?","searchButton":"Pronađi izvore","searchExamples":"Primjeri pitanja","knowledge":"Razumijevanje pojmova","sources":"Izvori i reference","open":"Otvori izvor","noResults":"U trenutno indeksiranoj građi nije pronađen odgovarajući izvor.","unverified":"Ovu jezičku verziju još nisu pregledali stručnjaci. Izvorni njemački tekst ostaje mjerodavan.","langPicker":"Jezik","prayer":"Namaska vremena","quran":"Kur'an","posts":"Tekstovi","library":"Biblioteka","hadith":"Hadis","women":"Žene","more":"Više","learn":"Učenje","account":"Račun","today":"Danas","dua":"Dova","related":"Povezani pojmovi","published":"Publikacije","awaiting":"Prijevod u pripremi","offline":"Pregled: lokalni primjeri pretrage","preview":"Razvojni pregled — nije javna stranica","status":"Navigacija je višejezična; stručni prijevodi se postupno provjeravaju","explanation":"Objašnjenje pojma","sourceGuard":"Izvorni tekstovi ostaju neizmijenjeni","back":"Nazad","start":"Početna","term":"Pojam","readGerman":"Pročitaj izvorni njemački tekst"}}},"reviewPolicy":{"interfaceTranslationStatus":"draft-linguistic-review-required","religiousTranslationStatus":"not-published-without-religious-editor-review","sourcePreservation":true}}</script>
+<script id="terminology" type="application/json">{"schemaVersion":1,"kind":"terminology-alias-index","editorialPolicy":"Search aliases only. NOT theological definitions. Source answers require evidence and translation review.","matchPolicy":{"exactAliasFirst":true,"rtlArabicNormalization":true,"diacriticNormalization":true,"multiWordNormalization":true,"allowFuzzyForLatin":true,"neverInventAnswer":true},"entries":[{"id":"tawhid","arabic":"التوحيد","domain":"ʿAqīdah","aliases":["tawhid","tawḥīd","tauhid","tevhid","tewhid","tewhîd","tewhîdê","تەوحید","توحيد","توحید","التوحيد","einzigkeit allahs","einzigkeit gottes","monotheism","oneness of allah"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"shirk","arabic":"الشرك","domain":"ʿAqīdah","aliases":["shirk","schirk","širk","şirk","schirck","شرك","الشرك","beigesellung","association of partners"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"iman","arabic":"الإيمان","domain":"ʿAqīdah","aliases":["iman","īmān","iiman","imân","imanê","ایمان","ئیمان","ايمان","الإيمان","glaube","glauben","faith","belief"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"kufr","arabic":"الكفر","domain":"ʿAqīdah","aliases":["kufr","küfür","kufur","kufêr","کفر","كفر","الكفر","unglaube","disbelief"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"bidah","arabic":"البدعة","domain":"Manhaǧ","aliases":["bidah","bidʿah","bid'a","bidaah","bidat","bid'at","bidatê","بدعة","البدعة","neuerung","innovation in religion"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"taghut","arabic":"الطاغوت","domain":"ʿAqīdah","aliases":["taghut","ṭāġūt","tagut","tağut","taghout","taġut","طاغوت","الطاغوت","تاغوت"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"aqidah","arabic":"العقيدة","domain":"ʿAqīdah","aliases":["aqidah","aqida","ʿaqīdah","akida","akîde","akide","akîda","عقيدة","العقيدة","glaubenslehre","creed"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"fiqh","arabic":"الفقه","domain":"Fiqh","aliases":["fiqh","fikh","fıkıh","fikih","feqih","fiqih","فقه","الفقه","rechtslehre","jurisprudence"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"usulfiqh","arabic":"أصول الفقه","domain":"Uṣūl","aliases":["usul al fiqh","usul ul fiqh","uṣūl al-fiqh","usul fiqh","usulu'l-fıkıh","أصول الفقه","اصول الفقه","fiqh grundlagen","principles of jurisprudence"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"usul","arabic":"الأصول","domain":"Uṣūl","aliases":["usul","uṣūl","usûl","اصول","الأصول","grundlagen","principles"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"asl","arabic":"الأصل","domain":"Uṣūl","aliases":["asl","aṣl","asıl","اصل","الأصل","grundlage","origin"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"asldin","arabic":"أصل الدين","domain":"ʿAqīdah","aliases":["asl ad din","aṣl ad-dīn","asluddin","asl al din","asludin","أصل الدين","اصل الدين","fundament der religion"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"din","arabic":"الدين","domain":"ʿAqīdah","aliases":["din","dīn","deen","dini","dîn","دين","الدين","religion","glaubensweg"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"quran","arabic":"القرآن","domain":"Qurʾān","aliases":["quran","qurʾān","koran","kur'an","qur'an","qur an","quranê","قرآن","القرآن","قورئان","kitab allah"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"sunnah","arabic":"السنة","domain":"Sunnah","aliases":["sunnah","sunna","sünnet","sünneti","السنة","سنة","سوننەت","prophetische sunnah"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"hadith","arabic":"الحديث","domain":"Ḥadīṯ","aliases":["hadith","ḥadīṯ","hadeeth","hadis","hadîs","حدیث","حديث","الحديث","حەدیث","überlieferung","prophetic hadith"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"athar","arabic":"الأثر","domain":"Āṯār","aliases":["athar","āṯār","āthār","asar","eseri","آثار","أثر","الأثر","berichte der salaf","early reports"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"tafsir","arabic":"التفسير","domain":"Tafsīr","aliases":["tafsir","tafsīr","tefsir","tefsîr","تفسير","التفسير","koranauslegung","exegesis"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"tadabbur","arabic":"التدبر","domain":"Qurʾān","aliases":["tadabbur","tedebbür","tadabbur al quran","تدبر","التدبر","nachdenken über quran"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"dua","arabic":"الدعاء","domain":"Duʿāʾ","aliases":["dua","duʿāʾ","duaa","du'a","dova","duayê","دعاء","الدعاء","دوعا","bittgebet","supplication"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"salah","arabic":"الصلاة","domain":"ʿIbādah","aliases":["salah","salat","ṣalāh","ṣalāt","namaz","nimêj","نماز","صلاة","الصلاة","gebet","prayer"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"ibadah","arabic":"العبادة","domain":"ʿIbādah","aliases":["ibadah","ʿibādah","ibadet","ʿibādat","ibadêt","عبادة","العبادة","anbetung","worship"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"ikhlas","arabic":"الإخلاص","domain":"ʿAqīdah","aliases":["ikhlas","ikhlāṣ","ihlas","ihlâs","اخلاص","الإخلاص","aufrichtigkeit","sincerity"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"taqwa","arabic":"التقوى","domain":"ʿAqīdah","aliases":["taqwa","taqwā","takva","تَقْوَى","تقوى","التقوى","gottesfurcht","god consciousness"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"ijma","arabic":"الإجماع","domain":"Uṣūl","aliases":["ijma","iǧmāʿ","idschma","ijmā","icma","الإجماع","اجماع","konsens","consensus"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"qiyas","arabic":"القياس","domain":"Uṣūl","aliases":["qiyas","qiyās","kıyas","qiyasê","قياس","القياس","analogieschluss","analogy"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"salaf","arabic":"السلف","domain":"Manhaǧ","aliases":["salaf","selef","salaf al salih","السلف","السلف الصالح","frühe generationen","early muslim generations"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"sahabah","arabic":"الصحابة","domain":"Sunnah","aliases":["sahaba","sahabah","ṣaḥābah","sahabe","صحابة","الصحابة","gefährten","companions"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"istighfar","arabic":"الاستغفار","domain":"Duʿāʾ","aliases":["istighfar","istiġfār","istigfar","istiğfar","استغفار","الاستغفار","vergebung erbitten","seeking forgiveness"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"sabr","arabic":"الصبر","domain":"Aḫlāq","aliases":["sabr","ṣabr","sabır","sebîr","صبر","الصبر","geduld","patience"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"adab","arabic":"الأدب","domain":"Aḫlāq","aliases":["adab","edeb","adabê","أدب","الأدب","benehmen","etiquette"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"akhlaq","arabic":"الأخلاق","domain":"Aḫlāq","aliases":["akhlaq","aḫlāq","ahlak","اخلاق","الأخلاق","charakter","morals"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]},{"id":"zakat","arabic":"الزكاة","domain":"Fiqh","aliases":["zakat","zakāt","zekat","zekât","زكاة","الزكاة","pflichtabgabe","almsgiving"],"sourceLanguage":"ar","definitionStatus":"not_provided","reviewStatus":"alias-draft","relatedContentIds":[]}]}</script>
+<script id="examplesData" type="application/json">{"schemaVersion":1,"scope":"adult","summary":"Canonical source examples with German-only original text. Other language bodies intentionally not published.","records":[{"id":"q47-tawhid-iman-akhlaq","kind":"Beitrag · Qurʾān · Āṯār","title":"Tawḥīd, Īmān und Akhlāq – ein Dīn","summary":"Ibn ʿAbbās und Qatādah; Tafsīr zu an-Naḥl 16:90","reference":"aṭ-Ṭabarī, Ǧāmiʿ al-Bayān, Tafsīr zu 16:90; eigener Q47-Nachweis","url":"/q/47/","tags":["tawhid","iman","akhlaq","din","tafsir","athar"],"canonicalTerms":["tawhid","iman","akhlaq","din"],"originalLocale":"de","translationStatus":{"de":"published","ar":"pending","en":"pending","tr":"pending","ku":"pending","ckb":"pending","bs":"pending"}},{"id":"q4-adab","kind":"Quellenlink","title":"Der Dīn ist Naṣīḥah","summary":"Nachweis zur Überlieferung bei Ṣaḥīḥ Muslim, Nr. 55","reference":"Ṣaḥīḥ Muslim 55","url":"/q/4/","tags":["din","hadith","sunnah","nasiha"],"canonicalTerms":["din","hadith"]},{"id":"q3-salaf","kind":"Quellenlink","title":"Halte dich an die Spuren der Salaf","summary":"Āṯār der frühen Gelehrten und ihr Maßstab","reference":"Quellenlink Q3 · al-Awzāʿī","url":"/q/3/","tags":["salaf","athar","sunnah"],"canonicalTerms":["salaf","athar","sunnah"]},{"id":"q40-ikhlas","kind":"Quellenlink","title":"Tawḥīd und Ikhlāṣ","summary":"Belegte Wissensquelle zu Tawḥīd und Aufrichtigkeit","reference":"Quellenlink Q40","url":"/q/40/","tags":["tawhid","ikhlas","ibadah"],"canonicalTerms":["tawhid","ikhlas","ibadah"]},{"id":"q1-wissen","kind":"Quellenlink","title":"Wissen verlangt Handeln","summary":"Quellenarchiv zum Verhältnis zwischen Wissen und Taten","reference":"Quellenlink Q1","url":"/q/1/","tags":["ilm","iman","sunnah","akhlaq"],"canonicalTerms":["iman","akhlaq"]},{"id":"q6-ikhlas-sunnah","kind":"Quellenlink","title":"Aufrichtig und richtig","summary":"Aussage al-Fuḍayls über Ikhlāṣ und Sunnah","reference":"Quellenlink Q6","url":"/q/6/","tags":["ikhlas","sunnah"],"canonicalTerms":["ikhlas","sunnah"]},{"id":"library-ijtihad","kind":"Bibliothek","title":"Al Ijtihad wa Taqlid","summary":"Bibliotheksveröffentlichung über Iǧtihād und Taqlīd","reference":"DĀR AL TAWḤĪD · PDF 17.08.2026","url":"/assets/library/pdfs/pub-20260817-001-v1-1.pdf","tags":["ijtihad","taqlid","fiqh","usulfiqh"],"canonicalTerms":["fiqh","usulfiqh"]},{"id":"library-adillah","kind":"Bibliothek","title":"Taarud al Adillah","summary":"Bibliotheksveröffentlichung zu Beweisen und deren möglichem Widerspruch","reference":"DĀR AL TAWḤĪD · PDF 12.08.2026","url":"/assets/library/pdfs/pub-20260812-001-v1-0.pdf","tags":["fiqh","usulfiqh","dalil"],"canonicalTerms":["fiqh","usulfiqh"]},{"id":"library-ijma","kind":"Bibliothek","title":"Al Ijma","summary":"Bibliotheksveröffentlichung zu Iǧmāʿ","reference":"DĀR AL TAWḤĪD · PDF 09.08.2026","url":"/assets/library/pdfs/pub-20260809-001-v1-0.pdf","tags":["ijma","fiqh","usulfiqh"],"canonicalTerms":["ijma","fiqh","usulfiqh"]},{"id":"section-hadith","kind":"Bereich","title":"Ḥadīṯ-Bibliothek","summary":"Suche in Ḥadīṯ-Sammlungen auf DĀR AL TAWḤĪD","reference":"Eigenes Ḥadīṯ-Archiv","url":"/?page=hadith","tags":["hadith","sunnah"],"canonicalTerms":["hadith","sunnah"]},{"id":"section-dua","kind":"Bereich","title":"Duʿāʾ-Sammlung","summary":"Bittgebete aus Qurʾān und authentischer Sunnah","reference":"Eigene Duʿāʾ-Sammlung","url":"/?page=dua","tags":["dua","ibadah","sunnah"],"canonicalTerms":["dua","ibadah"]},{"id":"section-quran","kind":"Bereich","title":"Qurʾān und Tafsīr","summary":"Qurʾān-Leser, Tafsīr und Tadabbur","reference":"Qurʾān-Bereich","url":"/?page=quran","tags":["quran","tafsir","tadabbur"],"canonicalTerms":["quran","tafsir","tadabbur"]}]}</script>
+<script>/* DĀR AL TAWḤĪD · adult-only internationalization & source-finder foundation.
+ * Safe integration: works only inside an explicitly supplied root. Does not touch existing
+ * app navigation, global document dir, service workers, prayer, audio or push state.
+ * UI wording is provisional pending linguistic review; religious translations require proof.
+ */
+(function(global){
+"use strict";
+const STORAGE_KEY="darAdultPreferredLocaleV1";
+const RTL=new Set(["ar","ckb"]);
+function normalize(value){
+ return String(value==null?"":value).toLocaleLowerCase("und").normalize("NFKD")
+  .replace(/[\u0300-\u036f\u064b-\u065f\u0670\u0640]/g,"")
+  .replace(/[أإآٱ]/g,"ا").replace(/ى/g,"ي").replace(/ة/g,"ه").replace(/ؤ/g,"و").replace(/ئ/g,"ي")
+  .replace(/[ʿʾʻ’']/g,"").replace(/[āīūḥḫṣḍṭẓġǧ]/g,ch=>({ā:"a",ī:"i",ū:"u",ḥ:"h",ḫ:"kh",ṣ:"s",ḍ:"d",ṭ:"t",ẓ:"z",ġ:"gh",ǧ:"j"}[ch]||ch))
+  .replace(/[^\p{L}\p{N}]+/gu," ").trim().replace(/\s+/g," ");
+}
+function preferred(data){
+ let s="";
+ try{s=global.localStorage?.getItem(STORAGE_KEY)||""}catch(_){}
+ if(!s){try{s=global.navigator?.language?.split("-")[0]||""}catch(_){}}
+ return data?.locales?.[s]?s:"de";
+}
+function glossary(entries){
+ const exact=new Map(),multi=[];
+ (entries||[]).forEach(term=>{
+  const aliases=[term.id,term.arabic,...(term.aliases||[])].filter(Boolean);
+  aliases.forEach(x=>{const key=normalize(x);if(!key)return;
+   if(!exact.has(key)) exact.set(key,term.id);
+   if(key.includes(" ")) multi.push([key,term.id]);
+  });
+ });
+ multi.sort((a,b)=>b[0].length-a[0].length);
+ return {exact,multi};
+}
+const STOP=new Set("al el ul as ad at il wa was wie wo wer wann wieso warum ist sind gibt ein eine einen dem der die das den des und oder sowie im in auf am an zu zur zum über uber nach für fuer aus mit ich du wir ihr zeigen zeig suche finde erkläre erklaere erklären erklaren bitte kannst könnten meaning what is the of a an and explain tell show about me please nedir ne demek nedir neye nasıl kim".split(" "));
+function canonicalTokens(str,g){
+ let n=normalize(str);
+ g.multi.forEach(([alias,id])=>{
+  const pattern=" "+alias+" ";
+  n=(" "+n+" ").split(pattern).join(" "+id+" ").trim();
+ });
+ return n.split(" ").filter(t=>t.length>1&&!STOP.has(t)).map(t=>g.exact.get(t)||t);
+}
+function editDistanceAtMostTwo(a,b){
+ if(Math.abs(a.length-b.length)>2)return 3;
+ let p=Array.from({length:b.length+1},(_,i)=>i);
+ for(let i=1;i<=a.length;i++){
+  const row=[i];for(let j=1;j<=b.length;j++)row[j]=Math.min(row[j-1]+1,p[j]+1,p[j-1]+(a[i-1]===b[j-1]?0:1));
+  p=row;
+ }return p[b.length];
+}
+function safeSameOriginUrl(raw, origin){
+ try{
+  const url=new global.URL(raw||"/",origin);
+  return url.origin===origin ? url.pathname+url.search+url.hash : null;
+ }catch(_){return null}
+}
+function sanitizeRecord(record,origin){
+ if(!record||typeof record!=="object")return null;
+ const id=String(record.id||"").trim(),title=String(record.title||record.name||"").trim();
+ if(!id||!title)return null;
+ const url=safeSameOriginUrl(record.url||"/",origin);
+ if(url===null)return null;
+ return {id:id.slice(0,160),title:title.slice(0,260),kind:String(record.kind||"source"),summary:String(record.summary||record.excerpt||"").slice(0,500),reference:String(record.reference||"").slice(0,240),tags:Array.isArray(record.tags)?record.tags.map(String).slice(0,20):[],canonicalTerms:Array.isArray(record.canonicalTerms)?record.canonicalTerms.slice(0,20):[],url,originalLocale:String(record.originalLocale||"de"),translationStatus:record.translationStatus||{}};
+}
+function scoreEntry(doc,raw,g){
+ const parts=canonicalTokens(raw,g);if(!parts.length)return 0;
+ const title=canonicalTokens(doc.title.replace(/DĀR AL TAWḤĪD/gi,""),g), cleanRef=doc.reference.replace(/DĀR AL TAWḤĪD/gi,""), cleanSummary=doc.summary.replace(/DĀR AL TAWḤĪD/gi,""), whole=canonicalTokens([doc.title.replace(/DĀR AL TAWḤĪD/gi,""),cleanSummary,cleanRef,doc.tags.join(" "),doc.canonicalTerms.join(" ")].join(" "),g);
+ const corpus=new Set(whole),titleSet=new Set(title);
+ let hits=0,points=0;
+ parts.forEach(t=>{
+  let p=0;
+  if(titleSet.has(t))p=12;
+  else if(corpus.has(t))p=7;
+  else if(t.length>=4&&[...titleSet].some(x=>x.startsWith(t)))p=5;
+  else if(t.length>=4&&[...corpus].some(x=>x.startsWith(t)))p=3;
+  else if(t.length>=5&&[...titleSet].some(x=>editDistanceAtMostTwo(x,t)<=1))p=2;
+  if(p){hits++;points+=p}
+ });
+ if(!hits)return 0;
+ return points*Math.pow(hits/parts.length,1.3)+(hits===parts.length?5:0);
+}
+function createEngine(options){
+ const data=options.locales,termData=options.terms,root=options.root;
+ if(!data||!termData||!root)throw new Error("DĀR i18n requires locales, terms and an explicit DOM root");
+ let lang=preferred(data);
+ const g=glossary(termData.entries),sources=new Map();
+ const origin=options.origin||"https://dar-al-tawhid.de";
+ function t(key,code=lang){
+  const loc=data.locales[code]||data.locales.de;
+  return loc?.messages?.[key]??data.locales.de.messages[key]??key;
+ }
+ function setLocale(code){
+  if(!data.locales[code])return false;
+  lang=code;
+  root.setAttribute("lang",code);
+  root.setAttribute("dir",data.locales[code].dir|| (RTL.has(code)?"rtl":"ltr"));
+  root.querySelectorAll("[data-dar-i18n]").forEach(el=>{el.textContent=t(el.getAttribute("data-dar-i18n"))});
+  root.querySelectorAll("[data-dar-i18n-placeholder]").forEach(el=>{el.setAttribute("placeholder",t(el.getAttribute("data-dar-i18n-placeholder")))});
+  root.querySelectorAll("[data-dar-locale-select]").forEach(el=>{el.value=code});
+  try{global.localStorage?.setItem(STORAGE_KEY,code)}catch(_){}
+  if(typeof options.onLocaleChange==="function")options.onLocaleChange(code,t);
+  return true;
+ }
+ function addSources(records){
+  let count=0;
+  (Array.isArray(records)?records:[]).forEach(raw=>{
+   const doc=sanitizeRecord(raw,origin);
+   if(doc&&!sources.has(doc.id)){sources.set(doc.id,doc);count++}
+  });
+  return count;
+ }
+ function search(question,limit=8){
+  const query=String(question||"").trim();
+  if(!query)return[];
+  return [...sources.values()].map(doc=>({doc,score:scoreEntry(doc,query,g)}))
+   .filter(x=>x.score>0).sort((a,b)=>b.score-a.score||a.doc.title.localeCompare(b.doc.title))
+   .slice(0,Math.max(1,Math.min(30,limit))).map(x=>({...x.doc,relevance:x.score}));
+ }
+ function termSuggestions(question,limit=5){
+  const n=normalize(question);if(!n)return[];
+  const candidates=termData.entries.filter(row=>([row.id,row.arabic,...row.aliases].map(normalize)).some(a=>a.startsWith(n)||a.includes(" "+n)||n.includes(a)&&a.length>2));
+  return candidates.slice(0,limit).map(row=>({id:row.id,arabic:row.arabic,domain:row.domain}));
+ }
+ function localizedBody(record,code=lang){
+  // NEVER silently call a translator or substitute an unapproved religious translation.
+  const translation=record?.translations?.[code];
+  if(code==="de")return{locale:"de",body:String(record?.bodyDe||""),pending:false};
+  if(translation?.status==="approved"&&translation?.editorialReviewed===true&&translation?.sourceId===record.id)
+   return{locale:code,body:translation.body,pending:false};
+  return{locale:"de",body:String(record?.bodyDe||""),pending:true,notice:t("unverified",code)};
+ }
+ function bind(){
+  root.querySelectorAll("[data-dar-locale-select]").forEach(select=>{
+   select.replaceChildren();
+   Object.entries(data.locales).forEach(([key,locale])=>{
+    const opt=document.createElement("option");opt.value=key;opt.textContent=locale.name;select.appendChild(opt);
+   });
+   select.addEventListener("change",()=>setLocale(select.value));
+  });
+  setLocale(lang);
+ }
+ return {bind,setLocale,locale:()=>lang,t,addSources,search,termSuggestions,localizedBody,stats:()=>({sources:sources.size,terms:termData.entries.length,locale:lang}),normalized:normalize};
+}
+global.DarAdultI18n={createEngine,normalize,canonicalTokens,scoreEntry,preferred};
+})(window);
+</script>
+<script>
+(function(){
+"use strict";
+const $=id=>document.getElementById(id);
+const locales=JSON.parse($("catalog").textContent),terms=JSON.parse($("terminology").textContent),source=JSON.parse($("examplesData").textContent);
+const base=window.DarAdultI18n.createEngine({locales,terms,root:$("i18nRoot"),origin:"https://dar-al-tawhid.de",onLocaleChange:renderMeta});
+base.addSources(source.records);
+function renderMeta(code){$("currentLang").textContent=locales.locales[code].name;$("termCount").textContent=String(terms.entries.length);$("sourceCount").textContent=String(base.stats().sources)}
+function termCards(){
+ const box=$("termCards");
+ for(const id of ["tawhid","iman","shirk","kufr","bidah","taghut","fiqh","usulfiqh","asldin"]){
+  const term=terms.entries.find(x=>x.id===id);if(!term)continue;
+  const b=document.createElement("button");b.className="term";b.type="button";
+  const strong=document.createElement("strong");strong.textContent={tawhid:"Tawḥīd",iman:"Īmān",shirk:"Shirk",kufr:"Kufr",bidah:"Bidʿah",taghut:"Ṭāġūt",fiqh:"Fiqh",usulfiqh:"Uṣūl al-Fiqh",asldin:"Aṣl ad-Dīn"}[id];
+  const ar=document.createElement("span");ar.dir="rtl";ar.lang="ar";ar.textContent=term.arabic;
+  b.append(strong,ar);b.addEventListener("click",()=>{doSearch(term.id);document.getElementById("results").scrollIntoView({block:"start",behavior:"smooth"})});
+  box.appendChild(b);
+ }
+}
+function doSearch(q){
+ const list=$("resultList");list.replaceChildren();
+ const hits=base.search(q,7);$("resultStatus").textContent=hits.length?String(hits.length):"0";
+ if(!hits.length){let p=document.createElement("p");p.textContent=base.t("noResults");list.appendChild(p);return}
+ for(const r of hits){
+  const a=document.createElement("a");a.className="result";a.href="https://dar-al-tawhid.de"+r.url;a.target="_blank";a.rel="noopener noreferrer";
+  const title=document.createElement("b");title.textContent=r.title;
+  const kind=document.createElement("small");kind.textContent=r.kind+" · "+r.reference;
+  const p=document.createElement("p");p.textContent=r.summary;
+  a.append(title,kind,p);
+  if(base.locale()!=="de"){const tag=document.createElement("span");tag.className="tag";tag.textContent=base.t("awaiting");a.appendChild(tag)}
+  list.appendChild(a);
+ }
+}
+$("finderForm").addEventListener("submit",e=>{e.preventDefault();doSearch($("finderQuestion").value)});
+$("quickExamples").querySelectorAll("[data-query]").forEach(b=>b.addEventListener("click",()=>{const v=b.getAttribute("data-query");$("finderQuestion").value=v;doSearch(v)}));
+$("language").addEventListener("change",()=>{const current=$("finderQuestion").value.trim();if(current)doSearch(current)});
+termCards();base.bind();doSearch("tawhid");
+})();
+</script></body></html>
