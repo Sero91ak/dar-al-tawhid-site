@@ -39,6 +39,22 @@ function colorLocale(){
  const notice=d.getElementById("darV8TranslationNotice");if(notice)notice.textContent=locale()==="de"?"Deutsche Originaltexte und Quellen bleiben unverändert.":t("unverified");
  const root=d.getElementById("darV8LocalePanel");if(root){root.lang=locale();root.dir=["ar","ckb"].includes(locale())?"rtl":"ltr"}
  const labels=d.querySelectorAll("[data-v8-ui-key]");labels.forEach(el=>{const tx=t(el.dataset.v8UiKey);if(tx)el.textContent=tx});
+
+ const translationRoutes={start:"start",quran:"quran",beitraege:"posts",hadith:"hadith",bibliothek:"library",frauen:"women",mehr:"more"};
+ for(const [route,key] of Object.entries(translationRoutes)){
+  const title=t(key);
+  d.querySelectorAll('.dar-v8-mobile-dock [data-v8-route="'+route+'"] > span').forEach(el=>{el.textContent=title});
+  d.querySelectorAll('.dar-v8-sidebar [data-v8-route="'+route+'"] span').forEach(el=>{if(!el.querySelector("img"))el.textContent=title});
+ }
+ const routeKey=translationRoutes[d.body?.dataset?.darV8Route];
+ if(routeKey){
+  const routeHero=d.querySelector("#pageRoot .dar-v8-route-copy h1");
+  if(routeHero)routeHero.textContent=t(routeKey);
+  const routeBreadcrumb=d.getElementById("darV8BreadLabel");
+  if(routeBreadcrumb)routeBreadcrumb.textContent=t(routeKey);
+ }
+ const chatKicker=d.querySelector(".dar-v8-messenger-header>div>span");
+ if(chatKicker)chatKicker.textContent="DĀR AL TAWḤĪD · "+t("searchTitle");
  const input=d.getElementById("siteSearch");if(input)input.placeholder=t("searchPlaceholder");
  const label=d.getElementById("darV8SourceSearchLabel");if(label)label.textContent=t("searchExplain");
 }
@@ -344,6 +360,7 @@ w.addEventListener("dar-v8-locale-changed",updateLocaleNotice);
 function init(key){
  if(currentPage && currentPage!==key){closePicker();if(d.body.classList.contains("dar-v8-player-fullscreen"))togglePlayer(false)}
  currentPage=key;setupLanguages();installPlayer();setupVisualViewport();setupTouchPlayerPicker();colorLocale();updateLocaleNotice();
+ colorLocale();
  if(key==="suche")initChat();
  if(key==="quran")initQuran();
  if(key==="einstellungen")settings();
