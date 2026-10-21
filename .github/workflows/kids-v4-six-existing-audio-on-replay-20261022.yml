@@ -1,0 +1,66 @@
+name: KIDS V4 Six Existing Originals - Replay Branch
+on:
+  push:
+    branches:
+      - review/kids-v4-nine-prepaid-artifact-replay-20261022
+    paths:
+      - kids/review-only/quiz-v4-five-existing-originals-transfer-20261022.json
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-six-replay-20261022
+  cancel-in-progress: false
+jobs:
+  import-six-existing:
+    if: github.event.head_commit.message == 'audio(kids review): import six existing V4 originals - trigger'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-v4-nine-prepaid-artifact-replay-20261022
+          fetch-depth: 10
+      - name: Confirm FFprobe is available for real audio file verification
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null; then
+            sudo apt-get -o Acquire::Retries=1 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+      - name: Import exactly six already-generated voice originals with text and ID SHA matching
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/import_quiz_v4_five_existing_provider_originals_20261022.py
+          python3 kids/tools/import_quiz_v4_five_existing_provider_originals_20261022.py
+      - name: Rebuild older-age hearing composites and recalculate question completeness
+        run: |
+          set -euo pipefail
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+      - name: Commit only genuine review MP3s to the same isolated branch
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-six-originals-review
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git rm kids/review-only/quiz-v4-five-existing-originals-transfer-20261022.json
+          git add kids/assets/kids-quiz-audio/v4-curated450-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-450-original-clip-registry.json
+          git add kids/data/quiz-v4-connected-flow-originals-ledger.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/review-only/quiz-v4-five-originals-import-results-20261022.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git commit -m "audio(kids review): preserve six more already generated V4 originals"
+          git push origin HEAD:refs/heads/review/kids-v4-nine-prepaid-artifact-replay-20261022
+      - name: Preserve actual original MP3s if remote commit is unavailable
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-six-existing-original-mp3s-20261022
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-curated450-review/
+            kids/review-only/quiz-v4-five-originals-import-results-20261022.json
