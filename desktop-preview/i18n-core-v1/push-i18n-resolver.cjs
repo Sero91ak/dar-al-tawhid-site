@@ -6,7 +6,6 @@
  * have separately passed the owner's password/approval gates.
  */
 const crypto = require("node:crypto");
-const path = require("node:path");
 const registryDefault = require("./locales.json");
 
 function localeCodes(registry = registryDefault) {
@@ -33,8 +32,11 @@ function normalizeAppLocale(value, registry = registryDefault) {
  * Only the explicit APP preference counts. Never use OneSignal/OS
  * language as the requested language after an in-app selection.
  */
-function appLocaleTagPatch(appLocale, registry = registryDefault) {
-  return { dar_app_locale: normalizeAppLocale(appLocale, registry) };
+function appLocaleRecord(subscriptionId, appLocale, registry = registryDefault) {
+  const id = String(subscriptionId || "").trim();
+  if (!id) throw new Error("Subscription ID required");
+  // NOT a OneSignal.User tag, which can be shared across devices.
+  return { subscription_id: id, app_locale: normalizeAppLocale(appLocale, registry) };
 }
 
 function approvedCopy(copies, code, registry, expectedHash = "") {
@@ -49,12 +51,14 @@ function approvedCopy(copies, code, registry, expectedHash = "") {
 }
 
 function fillParams(str, params) {
-  return String(str).replace(/\{([A-Za-z_]+)\}/g, (_whole, token) => {
+  const result = String(str).replace(/\{([A-Za-z_]+)\}/g, (_whole, token) => {
     if (!Object.prototype.hasOwnProperty.call(params, token)) {
       throw new Error("Unresolved push placeholder: " + token);
     }
     return String(params[token]);
   });
+  if (/\{[^{}]*\}/.test(result)) throw new Error("Push contains unresolved placeholder");
+  return result;
 }
 
 function resolvePushCopy({ copies, appLocale, registry = registryDefault, params = {}, sourceHash = "" }) {
@@ -85,6 +89,7 @@ function canonicalUrl(event) {
   if (event.type === "prayer") return "https://dar-al-tawhid.de/#prayer";
   if (!id) throw new Error("Non-prayer event requires canonical contentId");
   if (event.type === "daily_dua") return "https://dar-al-tawhid.de/#dua/" + encodeURIComponent(id);
+  if (event.type === "daily_ayah") return String(event.deepLink);
   return "https://dar-al-tawhid.de/#post/" + encodeURIComponent(id);
 }
 
@@ -115,8 +120,9 @@ function validateEvent(event) {
     if (!String(event.sourceHash || "").trim()) {
       throw new Error("Non-prayer push requires canonical source revision");
     }
-    if (kind === "daily_ayah" && event.routeVerified !== true) {
-      throw new Error("Daily Āyah needs a verified destination and independent opt-in");
+    if (kind === "daily_ayah" && (event.routeVerified !== true ||
+        !/^https:\/\/dar-al-tawhid\.de\/#quran(?:\/|$)/.test(String(event.deepLink || "")))) {
+      throw new Error("Daily Āyah needs a verified Qurʾān destination and independent opt-in");
     }
   }
   return kind;
@@ -143,6 +149,9 @@ function resolveRecipientPush({ event, copies, subscription, registry = registry
   if (kind === "daily_recommendation" && subscription.daily_recommendation_enabled !== true) {
     throw new Error("Daily recommendation not enabled");
   }
+  if (kind === "daily_ayah" && subscription.daily_ayah_enabled !== true) {
+    throw new Error("Daily Āyah not independently opted in");
+  }
   const appLocale = subscription.app_locale || subscription.appLocale || registry.defaultLocale;
   const params = {
     time: event.time || "",
@@ -163,7 +172,7 @@ function resolveRecipientPush({ event, copies, subscription, registry = registry
   // must never re-send the same event to the same subscription.
   const data = {
     type: kind === "prayer" ? "prayer" : kind,
-    nav: kind === "prayer" ? "prayer" : kind === "daily_dua" ? "dua" : "post",
+    nav: kind === "prayer" ? "prayer" : kind === "daily_dua" ? "dua" : kind === "daily_ayah" ? "quran" : "post",
     content_id: contentId || undefined,
     prayer_key: event.prayerKey || undefined,
     reminder_type: kind === "prayer" ? "prayer_" + event.mode : undefined,
@@ -199,9 +208,11 @@ function buildPreview({ event, copies, registrations, registry = registryDefault
   for (const row of rows) {
     const sid = String(row && (row.subscription_id || row.subscriptionId) || "").trim();
     if (!sid) continue;
-    // Server must supply the newest subscription row first, if duplicates
-    // exist. Never create multiple messages from duplicate registrations.
-    if (!unique.has(sid)) unique.set(sid, row);
+    // Newest registration wins. A newer opt-out MUST override an old opt-in.
+    const previous = unique.get(sid);
+    const updated = Date.parse(String(row.last_synced_at || row.created_at || "")) || 0;
+    const old = Date.parse(String(previous?.last_synced_at || previous?.created_at || "")) || 0;
+    if (!previous || updated > old) unique.set(sid, row);
   }
   const messages = [...unique.values()].map((subscription) =>
     resolveRecipientPush({ event, copies, subscription, registry }));
@@ -213,6 +224,6 @@ function buildPreview({ event, copies, registrations, registry = registryDefault
 }
 
 module.exports = {
-  localeCodes, normalizeAppLocale, appLocaleTagPatch, resolvePushCopy,
+  localeCodes, normalizeAppLocale, appLocaleRecord, resolvePushCopy,
   idempotencyUuid, canonicalUrl, resolveRecipientPush, buildPreview
 };
