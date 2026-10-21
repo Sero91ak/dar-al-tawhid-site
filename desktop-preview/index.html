@@ -4752,7 +4752,9 @@ renders.beitraege=function(){
    '<h2>Was möchtest du heute wissen?</h2><p>Stelle Fragen zu Aqīdah, Fiqh, Qurʾān, Sunnah und Āṯār. Wir finden Belege in unseren bestehenden Inhalten, statt Antworten zu erfinden.</p></div></div>'+
    '<form id="darV8ChatForm" class="dar-v8-chat-form" role="search">'+
    '<label for="siteSearch">Deine Frage</label><div class="dar-v8-chat-inputrow"><input id="siteSearch" class="search-input" type="search" maxlength="300" placeholder="Frage stellen, z. B. Was bedeutet Tawḥīd?" autocomplete="off"><button type="submit">Quellen prüfen ↗</button></div></form>'+
-   '<div class="dar-v8-chat-samples"><button type="button" data-v8-ask="Was ist Tawḥīd?">Was ist Tawḥīd?</button><button type="button" data-v8-ask="Was ist Īmān?">Was ist Īmān?</button><button type="button" data-v8-ask="Was bedeutet Uṣūl al-Fiqh?">Uṣūl al-Fiqh</button><button type="button" data-v8-ask="Was ist Shirk?">Shirk</button></div>'+
+   '<div class="dar-v8-chat-samples" aria-label="Fragen nach Themen">'+
+   [["Tawḥīd","Was ist Tawḥīd?"],["Īmān","Was ist Īmān?"],["Shirk","Was ist Shirk?"],["Bidʿah","Was ist Bidʿah?"],["Kufr","Was ist Kufr?"],["ʿAqīdah","Was ist ʿAqīdah?"],["Fiqh","Was ist Fiqh?"],["Uṣūl al-Fiqh","Was bedeutet Uṣūl al-Fiqh?"],["Ṭāġūt","Was bedeutet Ṭāġūt?"],["Ḥadīṯ","Ḥadīṯ"],["Āṯār","Āṯār"]].map(function(x){return '<button type="button" data-v8-ask="'+escBook(x[1])+'">'+escBook(x[0])+'</button>'}).join("")+
+   '</div>'+
    '<div id="darV8ChatSummary" class="dar-v8-chat-summary" aria-live="polite"></div>'+
    '<div class="dar-v8-result-heading">Fundstellen und Direktnachweise</div><div id="searchResults" class="list-lines dar-v8-chat-results"></div>'+
    '<div class="dar-v8-source-disclaimer">Nur vorhandene Quellen werden angezeigt. Dies ist kein generativer Fatwā-Dienst.</div></section>'+footer()
