@@ -27,8 +27,11 @@
   "ownerPronunciationHoldManifest": "kids/data/quiz-v4-owner-pronunciation-hold-20261021.json",
   "requireQuarantineOfRejectedOriginals": 7,
   "requireNoPriorPaidTextRegeneration": true,
-  "latestPurpose": "Recompute V4 review after seven owner pronunciation holds; never regenerate originals, credit spend zero",
+  "latestPurpose": "Synchronize quiz after atomic import of 27 native Fusha and German owner V4 originals with 7 disputed pronunciations excluded; zero new credit",
   "accountForSevenOwnerPronunciationHolds": true,
   "strictReportAndStagingCoverageAgreement": true,
-  "progressQuarantineFixCommit": "283a1480910401351545df67f8552b8d59077655"
+  "progressQuarantineFixCommit": "283a1480910401351545df67f8552b8d59077655",
+  "registeredOriginalCountAfter20261021FushaWave": 1718,
+  "strictQuarantineAudioCoverageExpected": 313,
+  "atomicPaidReceiptImportCommit": "43a31c7bb4e56913655701c6624504db924b92c5"
 }
