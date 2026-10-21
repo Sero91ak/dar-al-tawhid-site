@@ -7,39 +7,6 @@ if(window.__darHomeV47Layout)return;window.__darHomeV47Layout=true;
 var waiting=false;
 function home(){return !!(document.body&&document.body.classList.contains("is-home-route"))}
 function make(tag,cls,txt){var x=document.createElement(tag);x.className=cls;if(txt)x.textContent=txt;return x}
-var LANGUAGE_KEY="darAdultPreferredLocaleV1";
-function language(){try{return localStorage.getItem(LANGUAGE_KEY)==="tr"?"tr":"de"}catch(_){return"de"}}
-function switchLanguage(code){
- if(code!=="de"&&code!=="tr")return;
- try{localStorage.setItem(LANGUAGE_KEY,code)}catch(_){}
- syncLanguage();
- window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:code}}));
-}
-function syncLanguage(){
- var box=document.getElementById("darHomeV47Language");if(!box)return;
- box.querySelectorAll("[data-dar-home-locale]").forEach(function(btn){btn.setAttribute("aria-pressed",String(btn.dataset.darHomeLocale===language()))});
-}
-function ensureLanguageStyle(){
- if(document.getElementById("dar-test-home-locale-style"))return;
- var style=document.createElement("style");style.id="dar-test-home-locale-style";
- style.textContent='body.is-home-route #darHomeV47Language{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px auto 14px;max-width:100%;padding:10px 0 0;border-top:1px solid color-mix(in srgb,currentColor 22%,transparent);background:transparent;color:inherit;font:600 12px/1.4 system-ui,-apple-system,sans-serif}#darHomeV47Language>span{opacity:.82;margin-right:3px}#darHomeV47Language button{min-height:40px;padding:8px 13px;border:1px solid color-mix(in srgb,currentColor 27%,transparent);border-radius:999px;background:transparent;color:inherit;font:600 12px system-ui,-apple-system,sans-serif;cursor:pointer;touch-action:manipulation}#darHomeV47Language button[aria-pressed="true"]{border-color:var(--gold,#bba273);background:color-mix(in srgb,var(--gold,#bba273) 13%,transparent)}#darHomeV47Language button:focus-visible{outline:2px solid var(--gold,#bba273);outline-offset:2px}';
- document.head.appendChild(style);
-}
-function mountLanguage(header,welcome){
- ensureLanguageStyle();
- var bar=document.getElementById("darHomeV47Language");
- if(!bar){
-  bar=make("nav","dar-v47-language");bar.id="darHomeV47Language";
-  bar.setAttribute("aria-label","Sprache wählen / Dil seçimi");
-  bar.appendChild(make("span","","Sprache / Dil"));
-  [["de","Deutsch"],["tr","Türkçe"]].forEach(function(pair){
-   var btn=make("button","",pair[1]);btn.type="button";btn.dataset.darHomeLocale=pair[0];
-   btn.addEventListener("click",function(){switchLanguage(pair[0])});bar.appendChild(btn);
-  });
- }
- if(bar.parentElement!==header||bar.previousElementSibling!==welcome)welcome.insertAdjacentElement("afterend",bar);
- syncLanguage();
-}
 function sync(){
  if(!home()){document.documentElement.classList.remove("dar-home-v47-layout");return}
  var header=document.querySelector(".top-shell .header");
@@ -61,7 +28,6 @@ function sync(){
   welcome.appendChild(intro);
  }
  if(welcome.parentNode!==header)header.appendChild(welcome);
- mountLanguage(header,welcome);
  /* Original native prayer node stays in place with its own events/update calls. */
  prayer.classList.add("dar-v47-prayer");
  var search=hero&&hero.querySelector(".dt-hero-search-slot");
@@ -86,8 +52,6 @@ function init(){
  if(top)new MutationObserver(queue).observe(top,{childList:true,subtree:true});
  new MutationObserver(queue).observe(document.body,{attributes:true,attributeFilter:["class"]});
  new MutationObserver(queue).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme","data-theme-variant"]});
- window.addEventListener("dar-adult-locale-changed",syncLanguage);
- window.addEventListener("storage",function(e){if(e.key===LANGUAGE_KEY)syncLanguage()});
  document.addEventListener("dar:view-rendered",queue);
  window.addEventListener("hashchange",queue);
  window.addEventListener("pageshow",queue);
