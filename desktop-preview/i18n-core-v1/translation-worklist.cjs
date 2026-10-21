@@ -63,16 +63,43 @@ function scanQ(){
  }
 }
 function scanHadith(){
- const candidate=["test/data/hadith/search-index.json"];
- const sourcePath=candidate.find(p=>Array.isArray(json(p)));
- if(!sourcePath){issues.push({kind:"hadith",issue:"hadith-search-data-unavailable"});return}
- const rows=json(sourcePath);
+ const canonical=json("apple-tv/hadith/catalog.json");
+ if(Array.isArray(canonical?.series)){
+  let found=0;
+  for(const group of canonical.series){
+   const relative=String(group.indexPath||"");
+   if(!/^series\/[0-9-]+\/index\.json$/.test(relative))continue;
+   const indexPath="apple-tv/hadith/"+relative,listing=json(indexPath);
+   if(!Array.isArray(listing?.files)){issues.push({kind:"hadith",file:indexPath,issue:"series-index-unavailable"});continue}
+   for(const filename of listing.files){
+    if(!/^HAD-[0-9]+\.json$/.test(filename))continue;
+    const sourcePath=path.posix.join(path.posix.dirname(indexPath),filename),item=json(sourcePath);
+    if(!item?.id){issues.push({kind:"hadith",file:sourcePath,issue:"canonical-hadith-file-missing"});continue}
+    if(item.sharhStatus==="needs-review"||item.status==="missing")continue;
+    add("hadith",item.id,sourcePath,{
+      narratorLine:item.narratorLine||"",speakerLabel:item.speakerLabel||"",
+      textMarkdown:item.textMarkdown||"",sharhText:item.sharhText||""
+    },{
+      recordType:item.recordType||"hadith",source:item.source||"",sourceBook:item.sourceBook||"",
+      sourceHadithNumber:item.sourceHadithNumber||"",grade:item.grade||"",
+      sharhReference:item.sharhReference||"",sharhStatus:item.sharhStatus||"",
+      arabicOriginal:item.arabic||item.arabicOriginal||""
+    });
+    found++;
+   }
+  }
+  if(canonical.publishedCount&&found!==Number(canonical.publishedCount))
+   issues.push({kind:"hadith",issue:"canonical-published-count-mismatch",expected:canonical.publishedCount,seen:found});
+  return;
+ }
+ // Explicitly flagged fallback for incomplete development fixtures; never claim canonical parity.
+ const sourcePath="test/data/hadith/search-index.json",rows=json(sourcePath);
+ if(!Array.isArray(rows)){issues.push({kind:"hadith",issue:"canonical-hadith-source-unavailable"});return}
  for(const h of rows){
   if(!h?.id)continue;
   add("hadith",h.id,sourcePath,{german:h.german||"",chapterTitle:h.chapterTitle||"",bookTitle:h.bookTitle||""},{bookId:h.bookId||"",hadithNumber:h.hadithNumber||"",grade:h.grade||"",arabicOriginal:h.arabic||"",verifiedGerman:h.germanStatus==="verified"});
  }
- // Staging index is a search copy; final live release needs provenance check against canonical Apple TV catalog.
- issues.push({kind:"hadith",issue:"needs-canonical-apple-tv-source-parity-check"});
+ issues.push({kind:"hadith",issue:"fallback-staging-index-not-canonical"});
 }
 function scanDua(){
  const rows=json("content/duas/duas.json");
