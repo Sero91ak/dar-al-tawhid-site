@@ -8,7 +8,17 @@ body.desktop-overhaul-v18 :is(.dar-v8-route-hero,.dar-v8-source-module,.dar-v8-k
 body.desktop-overhaul-v18 .dar-v8-side-3d{width:32px;height:32px;object-fit:contain;flex:0 0 32px;filter:drop-shadow(0 2px 3px #283a2b1d)}
 body.desktop-overhaul-v18 .dar-v8-side-link{gap:12px}
 body.desktop-overhaul-v18 .dar-v8-mobile-dock,body.desktop-overhaul-v18 .dar-v8-more-sheet{display:none}
-body:not(.dar-v8-home) :is(#darV8TopWelcome,.v8-real-prayer,.isnad-ribbon,.v8-real-player){display:none!important}
+body:not(.dar-v8-home) :is(#darV8TopWelcome,.v8-real-prayer,.isnad-ribbon){display:none!important}
+body:not(.dar-v8-home):not(.dar-v8-quran-route) .v8-real-player{display:none!important}
+body.dar-v8-quran-route .v8-real-player{display:block!important;max-width:1200px;margin:18px auto 20px;padding:0;min-width:0}
+body.dar-v8-quran-route .v8-real-player .qa26-player{border-radius:21px;background:var(--v8-paper);border:1px solid var(--v8-line);color:var(--v8-ink);padding:12px 52px 12px 15px;position:relative}
+body.dar-v8-quran-route .v8-real-player .qa26-controls{display:none!important}
+body.dar-v8-quran-route .v8-real-player.dar-v8-controls-open .qa26-controls{display:flex!important;flex-wrap:wrap;gap:10px;margin-top:14px}
+body.dar-v8-quran-route .v8-real-player .qa26-controls select{min-height:39px;background:var(--v8-paper);color:var(--v8-ink);border:1px solid var(--v8-line);border-radius:10px}
+body.dar-v8-quran-route .v8-real-player #qaPlay{background:#245c42!important;border-radius:50%;color:#fff!important;min-width:44px;min-height:44px}
+body.dar-v8-quran-route .v8-real-player .qa26-title{color:var(--v8-ink)!important}
+body.dar-v8-quran-route .v8-real-player .qa26-kicker{color:var(--v8-gold)!important}
+@media(max-width:590px){body.dar-v8-quran-route .v8-real-player .qa26-controls{flex-direction:column}body.dar-v8-quran-route .v8-real-player .qa26-field{width:100%}}
 body:not(.dar-v8-home) .dar-v8-workspace>.page{padding-top:10px!important}
 body:not(.dar-v8-home) .page-intro{display:none!important}
 body.desktop-overhaul-v18 .dar-v8-route-hero{position:relative;isolation:isolate;overflow:hidden;max-width:1200px;margin:22px auto 20px;padding:clamp(21px,3vw,37px);border-radius:27px;border:1px solid color-mix(in srgb,var(--v8-gold) 28%,var(--v8-line));background:linear-gradient(130deg,color-mix(in srgb,var(--v8-paper) 91%,var(--v8-gold)),color-mix(in srgb,var(--v8-bg) 88%,var(--v8-gold)));color:var(--v8-ink);box-shadow:0 12px 45px #142a2210;display:grid;grid-template-columns:minmax(0,1fr) 165px;gap:10px 20px}
