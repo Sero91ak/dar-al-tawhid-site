@@ -38,6 +38,25 @@ function validateHadith() {
   const catalog = readJson("apple-tv/hadith/catalog.json");
   const manifest = readJson("apple-tv/hadith/manifest.json");
   if (!catalog || !manifest) return;
+  // The installed tvOS client reads policy.authenticOnly before the top-level
+  // field and rejects the whole feed when that nested value is false. A mixed
+  // Hadith/Athar catalog must keep its truthful top-level false and omit the
+  // legacy nested gate; the client then uses its default true for Hadith.
+  if (catalog.language !== "de") fail("tvOS rejects a non-German Hadith catalog");
+  if (!catalog.policy || typeof catalog.policy !== "object" || Array.isArray(catalog.policy)) {
+    fail("tvOS Hadith catalog policy is missing");
+  } else {
+    if (Object.hasOwn(catalog.policy, "authenticOnly")) {
+      fail("tvOS rejects or misreads policy.authenticOnly in the mixed Hadith/Athar catalog");
+    }
+    if (catalog.policy.hadithRequireAuthenticity !== true) fail("Hadith authenticity rule is missing");
+    if (catalog.policy.atharRequireAccurateIsnadStatus !== true) fail("Athar isnad disclosure rule is missing");
+  }
+  if (catalog.authenticOnly !== false) fail("mixed Hadith/Athar catalog must not claim all records authentic");
+  if (!(catalog.hadithCount > 0 && catalog.atharCount > 0) ||
+      catalog.hadithCount + catalog.atharCount !== catalog.totalCount) {
+    fail("tvOS Hadith/Athar counts are empty or inconsistent");
+  }
   const seriesRoot = path.join(ROOT, "apple-tv/hadith/series");
   const ids = [];
   if (fs.existsSync(seriesRoot)) {
@@ -106,6 +125,7 @@ function validateTadabbur() {
     }
   }
   if (loaded !== sum) fail("tadabbur loaded " + loaded + " !== " + sum);
+  if (loaded === 0) fail("tvOS Tadabbur feed is empty");
   const dups = [...new Set(refs.filter((ref, i) => ref && refs.indexOf(ref) !== i))];
   if (dups.length) fail("tadabbur duplicate references: " + dups.length);
   ok("tadabbur entries=" + loaded);
@@ -118,7 +138,8 @@ function validateScreensaverMetadata() {
   const screensaver = readJson("apple-tv/screensaver/catalog.json");
   const index = readJson("apple-tv/screensaver/entries-index.json");
   const sync = readJson("apple-tv/hadith/sync-status.json");
-  if (!hadith || !screensaver || !index || !sync) return;
+  const rotation = readJson("apple-tv/screensaver/rotation.json");
+  if (!hadith || !screensaver || !index || !sync || !rotation) return;
   const count = Number(hadith.totalCount);
   if (Number(screensaver.contentVersion) !== count) fail("screensaver contentVersion is stale");
   if (Number(screensaver.entriesCount) !== count) fail("screensaver entriesCount is stale");
@@ -134,10 +155,18 @@ function validateScreensaverMetadata() {
   if (!Array.isArray(screensaver.entriesPaths) || screensaver.entriesPaths.length !== 1 ||
       screensaver.entriesPaths[0] !== sourcePath) fail("screensaver catalog entriesPaths does not point to canonical record source");
   if (screensaver.rotationConfigPath !== "rotation.json") fail("screensaver rotation config path missing");
+  const weights = rotation.futureModuleMixing && rotation.futureModuleMixing.weights;
+  if (!weights || weights.hadith !== 5 || weights.athar !== 5 || weights.quranTad !== 5) {
+    fail("screensaver Hadith/Athar/Tadabbur 5/5/5 rotation changed");
+  }
   const libraryShell = readJson("apple-tv/hadith/library-shell.json");
   if (libraryShell) {
     const records = Array.isArray(libraryShell.records) ? libraryShell.records : [];
     if (records.length !== count) fail("screensaver library-shell record count mismatch");
+    if (records.filter(rec => rec.recordType === "hadith").length !== hadith.hadithCount ||
+        records.filter(rec => rec.recordType === "athar").length !== hadith.atharCount) {
+      fail("screensaver library-shell Hadith/Athar type counts mismatch");
+    }
     if (!records.some(rec => (rec.recordType === "hadith" || rec.recordType === "athar") &&
           String(rec.textMarkdown || "").trim())) fail("screensaver has no displayable statement records");
   }
