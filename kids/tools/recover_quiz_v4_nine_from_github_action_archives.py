@@ -43,7 +43,11 @@ NAMES=(
 )
 MAX_PAGES_PER_NAME=3
 MAX_ARTIFACTS_DOWNLOADED=48
-MAX_SAMPLES_PER_NAME=6  # do not let repetitive newest backups exhaust entire budget
+MAX_SAMPLES_PER_NAME=6  # baseline, never altered by search phase
+SECOND_PASS_SAMPLES_PER_NAME=16
+ARCHIVE_SEARCH_PHASE=os.environ.get("KIDS_V4_ARCHIVE_SCAN_PHASE","baseline")
+if ARCHIVE_SEARCH_PHASE not in ("baseline","second-pass"):
+    raise RuntimeError("Unsupported original backup search phase; stop")
 MAX_BYTES_DOWNLOADED=300_000_000
 MAX_ARCHIVE_BYTES=16_000_000
 MAX_INDIVIDUAL_MP3_BYTES=6_000_000
@@ -140,6 +144,16 @@ def sample_historical_archives(eligible,limit=MAX_SAMPLES_PER_NAME):
     return [eligible[i] for i in indices]
 
 
+def disjoint_second_pass_samples(eligible,limit=SECOND_PASS_SAMPLES_PER_NAME):
+    """No overlap with the previously executed six-per-name historical scan.
+
+    Read-only deterministic inventory selection, without accepting any MP3 as
+    authentic merely from its archive location or filename.
+    """
+    previous={row["id"] for row in sample_historical_archives(eligible)}
+    unseen=[row for row in eligible if row["id"] not in previous]
+    return sample_historical_archives(unseen,limit)
+
 def main():
     state=load(STATE)
     expected=load(ORIGINALS)
@@ -156,7 +170,8 @@ def main():
            "modelId":"eleven_v4","masterVoiceId":"DkU7j9uO4ZEtLD2iRZSH",
            "repo":REPO,"beforeMissingCount":len(missing),
            "queriedArtifactNames":list(NAMES),"artifactListingsChecked":0,
-           "samplingMethod":"six evenly spread old-to-new archives per backup name",
+           "samplingMethod":("six evenly spread old-to-new archives per backup name" if ARCHIVE_SEARCH_PHASE=="baseline" else "sixteen additional disjoint evenly spread older archives per name"),
+           "searchPhase":ARCHIVE_SEARCH_PHASE,
            "perNameEligibleCount":{},"perNameArchivesExamined":{},
            "eligibleArchivesExamined":0,"archiveDownloadAttempts":0,
            "archiveDownloadFailuresByStatus":{},"archiveCandidatesSeen":0,
@@ -198,7 +213,9 @@ def main():
             continue
         # Use a reproducible mix of recent, middle and old snapshots, never
         # just the six newest. This is NOT a claim of exhaustive inspection.
-        sample=sample_historical_archives(all_eligible)
+        sample=(sample_historical_archives(all_eligible)
+                if ARCHIVE_SEARCH_PHASE=="baseline"
+                else disjoint_second_pass_samples(all_eligible))
         scanned_this_name=0
         for row in sample:
             if not missing or stats["eligibleArchivesExamined"]>=MAX_ARTIFACTS_DOWNLOADED:
