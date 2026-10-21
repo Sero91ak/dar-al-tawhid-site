@@ -110,7 +110,7 @@ function scanDua(){
  for(const d of rows){
   if(!d?.id)continue;
   // "tr" is transliteration, NOT Turkish! Preserve it as immutable phonetic source.
-  add("dua",d.id,"content/duas/duas.json",{title:d.title||"",german:d.de||"",occasion:d.occasion||""},{arabicOriginal:d.ar||"",transliteration:d.tr||"",source:d.src||d.source||"",type:d.type||""});
+  add("dua",d.id,"content/duas/duas.json",{title:d.title||"",meaning:d.de||"",occasion:d.occasion||""},{arabicOriginal:d.ar||"",transliteration:d.tr||"",source:d.src||d.source||"",type:d.type||""});
  }
 }
 function scanQuiz(){
