@@ -65,7 +65,7 @@ function sanitizeRecord(record,origin){
 }
 function scoreEntry(doc,raw,g){
  const parts=canonicalTokens(raw,g);if(!parts.length)return 0;
- const title=canonicalTokens(doc.title,g), cleanRef=doc.reference.replace(/DĀR AL TAWḤĪD/gi,""), whole=canonicalTokens([doc.title,doc.summary,cleanRef,doc.tags.join(" "),doc.canonicalTerms.join(" ")].join(" "),g);
+ const title=canonicalTokens(doc.title.replace(/DĀR AL TAWḤĪD/gi,""),g), cleanRef=doc.reference.replace(/DĀR AL TAWḤĪD/gi,""), cleanSummary=doc.summary.replace(/DĀR AL TAWḤĪD/gi,""), whole=canonicalTokens([doc.title.replace(/DĀR AL TAWḤĪD/gi,""),cleanSummary,cleanRef,doc.tags.join(" "),doc.canonicalTerms.join(" ")].join(" "),g);
  const corpus=new Set(whole),titleSet=new Set(title);
  let hits=0,points=0;
  parts.forEach(t=>{
