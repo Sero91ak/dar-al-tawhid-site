@@ -30,7 +30,7 @@ function hadith(){const a=read("test/data/hadith/search-index.json")||[];(Array.
  add("hadith",{id:"hadith:"+p.id,title:[p.bookTitle,p.hadithNumber].filter(Boolean).join(" · "),summary:p.german,reference:[p.bookTitle,p.chapterTitle,p.grade].filter(Boolean).join(" · "),tags:[p.chapterTitle,p.bookTitle,...(p.tags||[])],url:"/?page=hadith"});
 })}
 function duas(){const x=read("content/duas/duas.json")||{};const a=Array.isArray(x)?x:x.duas||x.items||[];
- (Array.isArray(a)?a:[]).forEach(p=>add("dua",{id:"dua:"+p.id,title:p.title||p.name||"Duʿāʾ",summary:p.de||p.translation_de||p.meaning,reference:p.source||p.reference,tags:[p.occasion,p.category,...(p.tags||[])],url:"/?page=dua"}));
+ (Array.isArray(a)?a:[]).forEach(p=>add("dua",{id:"dua:"+p.id,title:p.title||p.name||"Duʿāʾ",summary:p.de||p.translation_de||p.meaning,reference:p.src||p.source||p.reference,tags:[p.occasion,p.category,p.cat,...(p.tags||[])],url:"/?page=dua"}));
 }
 function quran(){const x=read("data/quran-search-index.json")||{};const a=Array.isArray(x)?x:x.entries||x.verses||[];
  (Array.isArray(a)?a:[]).forEach((p,i)=>{const ref=p.reference||p.ref||(p.surah&&p.ayah?p.surah+":"+p.ayah:null);if(!ref)return;
