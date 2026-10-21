@@ -25,7 +25,10 @@ const primary=makeText("ÜBERLIEFERUNGSMAẞSTAB"),prayer=makeText("Faǧr"),week
 const dynamicQuran=makeText("Qurʾān · 8 Fundstellen"),
  dynamicStatements=makeText("Aussagen im Qurʾān · 3"),
  preservedSource=makeText("Qurʾān · 8 Fundstellen",true);
-const nodes=[primary,prayer,weekday,original,excluded,dynamicQuran,dynamicStatements,preservedSource];
+const numericPosts=makeText("18 Beiträge"),numericSurahs=makeText("7 Sūren · 26 Āyāt"),
+ dynamicAyahLink=makeText("Im Qurʾān öffnen · 2:45");
+const nodes=[primary,prayer,weekday,original,excluded,dynamicQuran,dynamicStatements,preservedSource,
+ numericPosts,numericSurahs,dynamicAyahLink];
 const props={
  nodeType:1,children:[],textContent:"📖 Wer Gutes zeigt, bekommt Anteil am Lohn",
  closest:()=>({getAttribute:()=> "wer-gutes-zeigt-bekommt-anteil-am-lohn-198"}),
@@ -62,6 +65,31 @@ for(const locale of EXPECTED){
    (locale==="tr"?"Kur'ân'daki ifadeler":corpus["Aussagen im Qurʾān"])+" · 3";
  assert.equal(dynamicStatements.nodeValue,statement,locale+" numeric statement heading");
  assert.equal(preservedSource.nodeValue,"Qurʾān · 8 Fundstellen","A sourced verse note must not be translated");
+ const numberTerms={
+  tr:["yazı","sûre","âyet","Kur'ân'da aç"],
+  en:["articles","surahs","verses","Open in the Qurʾān"],
+  ar:["مقالات","سور","آيات","فتح في القرآن"],
+  ku:["gotar","sûre","ayet","Di Qur'anê de vekin"],
+  ckb:["وتار","سوورەت","ئایەت","لە قورئاندا بیکەرەوە"],
+  bs:["članaka","sura","ajeta","Otvori u Kur'anu"]
+ };
+ if(locale==="de"){
+  assert.equal(numericPosts.nodeValue,"18 Beiträge");
+  assert.equal(numericSurahs.nodeValue,"7 Sūren · 26 Āyāt");
+  assert.equal(dynamicAyahLink.nodeValue,"Im Qurʾān öffnen · 2:45");
+ }else{
+  const unit=numberTerms[locale];
+  assert.equal(numericPosts.nodeValue,"18 "+unit[0],locale+" numeric articles");
+  assert.equal(numericSurahs.nodeValue,"7 "+unit[1]+" · 26 "+unit[2],locale+" surah/ayah totals");
+  assert.equal(dynamicAyahLink.nodeValue,
+    (locale==="tr"?"Kur'ân'da aç":pack.translations[locale]["Im Qurʾān öffnen"])+" · 2:45",
+    locale+" Quran reference control");
+ }
+ for(const term of ["Geprüfte Beziehungen","Umstrittene Angaben (bewusst öffnen)",
+                   "nicht sicher überliefert","Keine Treffer."]){
+  assert(locale==="de"||pack.translations[locale][term]?.trim(),locale+" missing "+term);
+ }
+
  if(locale==="en") assert(/Wednesday|October/.test(weekday.nodeValue),"Calendar month/day not localized");
 }
 lng="de";runtime.apply();
