@@ -13,6 +13,7 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 from quiz_v4_no_double_charge_guard import protect_paid_texts
+from quiz_v4_quarantine import quarantined_originals
 
 ROOT=Path(__file__).resolve().parents[2]
 MODEL="eleven_v4"
@@ -60,6 +61,7 @@ def main():
     need(charged<=set(stored),"paid ledger entry missing from MP3 registry")
     need(not (charged&set(by_text)),"paid missing Flow text also charged by direct TTS")
     recorded=set(stored)
+    blocked_pronunciation_texts, blocked_pronunciation_generation_ids = quarantined_originals(ROOT)
     # Connected ElevenLabs Flow originals may already be charged or reserved.
     # Exclude them from future paid requests until the ORIGINAL is imported.
     protected=protect_paid_texts(ROOT,reg,ledger)
@@ -82,13 +84,15 @@ def main():
     for recipe in plan["recipes"]:
         qid,age=recipe["questionId"],recipe["ageBand"]
         need(age in AGES and qid in stage["questions"],"unknown quiz ID/age")
-        question_new=set();question_paid=set();question_flow=set();blocked_parts={}
+        question_new=set();question_paid=set();question_flow=set();question_bad=set();blocked_parts={}
         for part in PARTS:
             entry=recipe[part]
-            missing_new=set();missing_old=set();missing_flow=set()
+            missing_new=set();missing_old=set();missing_flow=set();missing_bad=set()
             if entry["mode"]=="existing-paid-exact":
                 gid=entry["generationId"]
-                if gid not in paid:
+                if gid in blocked_pronunciation_generation_ids:
+                    missing_bad.add("generation:"+gid)
+                elif gid not in paid:
                     need(gid in missing9,"unidentified old paid original: "+str(gid))
                     missing_old.add(gid)
             elif entry["mode"]=="compose-from-segments":
@@ -96,7 +100,10 @@ def main():
                 need(isinstance(segments,list) and bool(segments) and
                      " ".join(segments)==entry["text"],"wrong exact text/segment join")
                 for segment in segments:
-                    if segment in recorded:continue
+                    if segment in recorded:
+                        if segment in blocked_pronunciation_texts:
+                            missing_bad.add(segment)
+                        continue
                     if segment in by_text:
                         missing_old.update(by_text[segment])
                     elif segment in pending_flow:
@@ -108,13 +115,15 @@ def main():
                         pending[segment].add((qid,age,part))
             else:
                 raise RuntimeError("Unknown V4 recipe mode; refusing paid queue")
-            if missing_old or missing_new or missing_flow:
+            if missing_old or missing_new or missing_flow or missing_bad:
                 blocked_parts[part]={"alreadyPaidNotYetImported":sorted(missing_old),
                                      "awaitingConnectedFlowOriginalTextSha256":sorted(txt_hash(x) for x in missing_flow),
-                                     "newOriginalTextSha256":sorted(txt_hash(x) for x in missing_new)}
+                                     "newOriginalTextSha256":sorted(txt_hash(x) for x in missing_new),
+                                     "quarantinedPaidOriginalTextSha256":sorted(txt_hash(x) for x in missing_bad)}
             question_new.update(missing_new)
             question_paid.update(missing_old)
             question_flow.update(missing_flow)
+            question_bad.update(missing_bad)
         for gid in question_paid:prepaid_uses[gid]+=1
         q_stage=stage["questions"][qid]
         need(q_stage["ageBand"]==age,"wrong stage age group")
@@ -123,6 +132,7 @@ def main():
         actual_complete=q_stage["fourPartTechnicallyReady"]
         need(actual_complete==(not blocked_parts),"Staged full-MP3 claim conflicts with originals: "+qid)
         if not blocked_parts:group="complete-v4-review"
+        elif question_bad and not question_new and not question_paid and not question_flow:group="await-owner-pronunciation-replacement"
         elif question_flow and not question_new and not question_paid:group="await-connected-flow-only"
         elif question_paid and not question_new and not question_flow:group="restore-prepaid-originals-only"
         elif (question_paid or question_flow) and not question_new:group="await-other-prepaid-or-reserved-only"
@@ -136,6 +146,7 @@ def main():
             "missingConnectedFlowOriginalTextSha256":sorted(txt_hash(x) for x in question_flow),
             "missingNewTextSha256":sorted(txt_hash(s) for s in question_new),
             "newUniqueSegmentCount":len(question_new),
+            "quarantinedPaidPronunciationOriginals":len(question_bad),
             "incrementalTextCodepointsIfAlone":sum(len(s) for s in question_new),
             "incompleteParts":blocked_parts,
         })
@@ -193,6 +204,8 @@ def main():
         "questionsNeedingAtLeastOneGenuinelyNewOriginal":sum(
             by_age[a]["new-original-v4-needed"]+by_age[a]["both-prepaid-recovery-and-new-v4"] for a in AGES),
         "previouslyPaidMissingGenerationCount":len(missing9),
+        "ownerPronunciationOriginalTextsQuarantined":len(blocked_pronunciation_texts),
+        "questionsWaitingOnlyForPronunciationReplacement":sum(by_age[a]["await-owner-pronunciation-replacement"] for a in AGES),
         "reservedFlowOriginalsExcludedFromNewChargeQueue":len(pending_flow),
         "previouslyPaidMissingGenerationIds":sorted(missing9),
         "missingGenuineNewExactSegments":len(every_new),
@@ -234,6 +247,7 @@ def main():
     lines+=["","**Schon bezahlte Originale noch zu retten:** "+str(len(missing9))+".",
            "**Ungeklärte verbundene Flow-Originale, die nicht erneut gekauft werden dürfen:** "+str(len(pending_flow))+".",
            "**Quizfragen, die nur auf verbundene Flow-Originale warten:** "+str(summary["questionsWaitingOnlyForConnectedFlowOriginals"])+".",
+           "**Durch bestätigte bzw. zu prüfende Aussprache gesperrte Texte:** "+str(len(blocked_pronunciation_texts))+" (niemals automatisch neu bezahlen).",
            "**Neue einzigartige Texte nach echtem Deduplizieren:** "+str(len(every_new))+
            " (nur Berechnungsbasis; keine Credits bestellt).",
            "","## Nächste technische Aktion",
