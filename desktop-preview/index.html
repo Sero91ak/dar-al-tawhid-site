@@ -2608,8 +2608,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 </style>
 <link rel="stylesheet" id="darSmartPublicV8" href="/desktop-preview/assets/dar-smart-home-v8-live.css?v=20261021-2-reveal-fixed">
 <link rel="stylesheet" id="darTrueV8Shell" href="/desktop-preview/assets/dar-v8-faithful-shell.css?v=20261021-faithful-v1">
-<link rel="stylesheet" href="/desktop-preview/assets/dar-v8-all-sections.css?v=20261021-global-v1">
-<script src="/desktop-preview/assets/dar-v8-cross-pages.js?v=20261021-global-v1" defer></script>
+<link rel="stylesheet" href="/desktop-preview/assets/dar-v8-all-sections.css?v=20261021-consistency-2">
+<script src="/desktop-preview/assets/dar-v8-cross-pages.js?v=20261021-consistency-2" defer></script>
 </head>
 <style id="dar-touch-active-fix">
 @media (hover:none) and (pointer:coarse){
@@ -3003,8 +3003,13 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  }
  function navigate(url,push){
   if(push!==false)history.pushState({desktop:true},"",url);
-  root.classList.add("is-leaving");
-  setTimeout(function(){render();root.classList.remove("is-leaving");window.scrollTo({top:0,behavior:"smooth"})},150)
+  // One synchronous route change. Legacy 150ms fade and smooth scroll
+  // caused apparent "flub" and the navigation to jump with the old page.
+  var active=document.activeElement;
+  if(active&&/^(INPUT|TEXTAREA|SELECT)$/.test(active.tagName))active.blur();
+  root.classList.remove("is-leaving");
+  render();
+  window.scrollTo(0,0);
  }
  // Stable internal SPA navigation for the public website.
  // Keep page/search parameters inside the current document instead of round-tripping
