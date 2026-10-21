@@ -1,0 +1,1933 @@
+{
+  "schemaVersion": 1,
+  "scope": "KIDS_V4_450_SHARED_TWO_NATIVE_FUSHA_ORIGINALS_LINKED_TO_CANONICAL_REVIEW",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "ownerDictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+  "ownerDictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
+  "selectedQuizQuestionCount": 450,
+  "masterArabicOriginals": [
+    {
+      "sourceToken": "ﷺ",
+      "spokenText": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+      "realOriginalMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+      "mp3Sha256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+      "providerRequestId": "aN9uC51X2FklFcpcShFF",
+      "verifiedSourceVoiceAndModel": true,
+      "fullyVocalizedNativeArabic": true,
+      "humanPronunciationApproved": false
+    },
+    {
+      "sourceToken": "عليه السلام",
+      "spokenText": "عَلَيْهِ السَّلَامُ",
+      "realOriginalMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/b7d558e17689ae1996c6c00b00822737.mp3",
+      "mp3Sha256": "044f6e2284636498cfb8bdab2e94470281491b7d190ad43fad97e088daea13c9",
+      "providerRequestId": "ajSC52JJqSafsgUItHl1",
+      "verifiedSourceVoiceAndModel": true,
+      "fullyVocalizedNativeArabic": true,
+      "humanPronunciationApproved": false
+    }
+  ],
+  "canonicalMixedAudioOccurrences": 58,
+  "distinctQuestionsWithArabicOriginalReuse": 43,
+  "actualNativeArabicOriginalUses": 58,
+  "additionalDistinctGermanSpeechComponentsRequiringOriginalV4": 87,
+  "existingExactGermanComponentOriginalUsages": 0,
+  "germanOriginalsNeedPinned10099RuleDictionary": true,
+  "examplesOfMissingGermanSegments": [
+    {
+      "sourceText": "Allah und Seinem Gesandten",
+      "usedBy": [
+        "kids-quiz-024:question"
+      ]
+    },
+    {
+      "sourceText": "Allah befiehlt den Gehorsam gegenüber Ihm und Seinem Gesandten",
+      "usedBy": [
+        "kids-quiz-024:explanation"
+      ]
+    },
+    {
+      "sourceText": "Der Gesandte Allahs",
+      "usedBy": [
+        "kids-quiz-025:question"
+      ]
+    },
+    {
+      "sourceText": "Allah nennt den Gesandten",
+      "usedBy": [
+        "kids-quiz-025:explanation"
+      ]
+    },
+    {
+      "sourceText": "ein schönes Vorbild.",
+      "usedBy": [
+        "kids-quiz-025:explanation"
+      ]
+    },
+    {
+      "sourceText": "Was lehrte der Prophet",
+      "usedBy": [
+        "kids-quiz-027:question",
+        "kids-quiz-196:question"
+      ]
+    },
+    {
+      "sourceText": "über unsere Worte?",
+      "usedBy": [
+        "kids-quiz-027:question"
+      ]
+    },
+    {
+      "sourceText": "Der Prophet",
+      "usedBy": [
+        "kids-quiz-027:explanation",
+        "kids-quiz-028:explanation",
+        "kids-quiz-035:explanation",
+        "kids-quiz-036:explanation",
+        "kids-quiz-040:explanation",
+        "kids-quiz-084:explanation",
+        "kids-quiz-099:explanation",
+        "kids-quiz-135:explanation",
+        "kids-quiz-136:explanation",
+        "kids-quiz-137:explanation",
+        "kids-quiz-138:explanation",
+        "kids-quiz-196:explanation",
+        "kids-quiz-198:explanation",
+        "kids-quiz-199:explanation",
+        "kids-quiz-313:explanation",
+        "kids-quiz-450:explanation",
+        "kids-quiz-485:explanation",
+        "kids-quiz-486:explanation",
+        "kids-quiz-487:explanation",
+        "kids-quiz-488:explanation",
+        "kids-quiz-534:explanation",
+        "kids-quiz-586:explanation",
+        "kids-quiz-587:explanation",
+        "kids-quiz-649:explanation"
+      ]
+    },
+    {
+      "sourceText": "verband den Īmān mit gutem Reden oder Schweigen.",
+      "usedBy": [
+        "kids-quiz-027:explanation"
+      ]
+    },
+    {
+      "sourceText": "verbot, dem Nachbarn Schaden zuzufügen.",
+      "usedBy": [
+        "kids-quiz-028:explanation"
+      ]
+    },
+    {
+      "sourceText": "erklärte Iḥsān im Ḥadīṯ Jibrīl.",
+      "usedBy": [
+        "kids-quiz-035:explanation"
+      ]
+    },
+    {
+      "sourceText": "nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
+      "usedBy": [
+        "kids-quiz-036:explanation"
+      ]
+    }
+  ],
+  "requiresSeparateHumanListeningAndQuarantineReview": true,
+  "preparedCanonicalMappingsOnly": true,
+  "fullMixedSentenceAudioAssembled": false,
+  "all450Released": false,
+  "publicReleaseEnabled": false,
+  "additionalElevenLabsCreditsSpentByThisLinking": 0,
+  "items": [
+    {
+      "questionId": "kids-quiz-024",
+      "ageBand": "7-8",
+      "part": "question",
+      "canonicalMixedText": "Allah und Seinem Gesandten ﷺ.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Allah und Seinem Gesandten",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "punctuation_whitespace_unspoken",
+          "source": "."
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-024",
+      "ageBand": "7-8",
+      "part": "explanation",
+      "canonicalMixedText": "Allah befiehlt den Gehorsam gegenüber Ihm und Seinem Gesandten ﷺ.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Allah befiehlt den Gehorsam gegenüber Ihm und Seinem Gesandten",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "punctuation_whitespace_unspoken",
+          "source": "."
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-025",
+      "ageBand": "7-8",
+      "part": "question",
+      "canonicalMixedText": "Der Gesandte Allahs ﷺ.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Gesandte Allahs",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "punctuation_whitespace_unspoken",
+          "source": "."
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-025",
+      "ageBand": "7-8",
+      "part": "explanation",
+      "canonicalMixedText": "Allah nennt den Gesandten ﷺ ein schönes Vorbild.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Allah nennt den Gesandten",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "ein schönes Vorbild.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-027",
+      "ageBand": "7-8",
+      "part": "question",
+      "canonicalMixedText": "Was lehrte der Prophet ﷺ über unsere Worte?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Was lehrte der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "über unsere Worte?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-027",
+      "ageBand": "7-8",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ verband den Īmān mit gutem Reden oder Schweigen.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "verband den Īmān mit gutem Reden oder Schweigen.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-028",
+      "ageBand": "7-8",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ verbot, dem Nachbarn Schaden zuzufügen.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "verbot, dem Nachbarn Schaden zuzufügen.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-035",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ erklärte Iḥsān im Ḥadīṯ Jibrīl.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "erklärte Iḥsān im Ḥadīṯ Jibrīl.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-036",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-040",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ beschrieb den Muslim als jemanden, vor dessen Zunge und Hand die Muslime sicher sind.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "beschrieb den Muslim als jemanden, vor dessen Zunge und Hand die Muslime sicher sind.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-055",
+      "ageBand": "4-6",
+      "part": "question",
+      "canonicalMixedText": "Ist Muḥammad ﷺ der letzte Prophet?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Ist Muḥammad",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "der letzte Prophet?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-055",
+      "ageBand": "4-6",
+      "part": "explanation",
+      "canonicalMixedText": "Allah nennt Muḥammad ﷺ den letzten der Propheten.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Allah nennt Muḥammad",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "den letzten der Propheten.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-084",
+      "ageBand": "7-8",
+      "part": "question",
+      "canonicalMixedText": "Welche Essensregel lehrte der Prophet ﷺ einem Jungen?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Welche Essensregel lehrte der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "einem Jungen?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-084",
+      "ageBand": "7-8",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ lehrte: Allahs Namen nennen, mit der rechten Hand essen und von dem essen, was vor einem liegt.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "lehrte: Allahs Namen nennen, mit der rechten Hand essen und von dem essen, was vor einem liegt.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-085",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Allah erklärte, dass Er vor Muḥammad ﷺ keinen Gesandten sandte, ohne ihm die Anbetung Allahs allein einzugeben.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Allah erklärte, dass Er vor Muḥammad",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "keinen Gesandten sandte, ohne ihm die Anbetung Allahs allein einzugeben.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-097",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Allah befahl dem Propheten ﷺ und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Allah befahl dem Propheten",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-099",
+      "ageBand": "9-10",
+      "part": "question",
+      "canonicalMixedText": "Was sagte der Prophet ﷺ über Ṣadaqah und Vermögen?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Was sagte der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "über Ṣadaqah und Vermögen?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-099",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ lehrte, dass Ṣadaqah Vermögen nicht vermindert; Allah gibt dafür Segen und Lohn.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "lehrte, dass Ṣadaqah Vermögen nicht vermindert; Allah gibt dafür Segen und Lohn.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-101",
+      "ageBand": "4-6",
+      "part": "question",
+      "canonicalMixedText": "Baute Nūḥ عليه السلام ein Schiff auf Allahs Befehl?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Baute Nūḥ",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "عليه السلام",
+          "spokenArabic": "عَلَيْهِ السَّلَامُ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/b7d558e17689ae1996c6c00b00822737.mp3",
+          "existingMP3SHA256": "044f6e2284636498cfb8bdab2e94470281491b7d190ad43fad97e088daea13c9",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "ein Schiff auf Allahs Befehl?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-102",
+      "ageBand": "4-6",
+      "part": "question",
+      "canonicalMixedText": "Machte Allah das Feuer für Ibrāhīm عليه السلام sicher?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Machte Allah das Feuer für Ibrāhīm",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "عليه السلام",
+          "spokenArabic": "عَلَيْهِ السَّلَامُ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/b7d558e17689ae1996c6c00b00822737.mp3",
+          "existingMP3SHA256": "044f6e2284636498cfb8bdab2e94470281491b7d190ad43fad97e088daea13c9",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "sicher?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-103",
+      "ageBand": "4-6",
+      "part": "question",
+      "canonicalMixedText": "Wer ließ das Meer für Mūsā عليه السلام auseinandergehen?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Wer ließ das Meer für Mūsā",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "عليه السلام",
+          "spokenArabic": "عَلَيْهِ السَّلَامُ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/b7d558e17689ae1996c6c00b00822737.mp3",
+          "existingMP3SHA256": "044f6e2284636498cfb8bdab2e94470281491b7d190ad43fad97e088daea13c9",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "auseinandergehen?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-104",
+      "ageBand": "4-6",
+      "part": "question",
+      "canonicalMixedText": "Sah Yūsuf عليه السلام Sterne, Sonne und Mond in seinem Traum?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Sah Yūsuf",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "عليه السلام",
+          "spokenArabic": "عَلَيْهِ السَّلَامُ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/b7d558e17689ae1996c6c00b00822737.mp3",
+          "existingMP3SHA256": "044f6e2284636498cfb8bdab2e94470281491b7d190ad43fad97e088daea13c9",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Sterne, Sonne und Mond in seinem Traum?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-105",
+      "ageBand": "4-6",
+      "part": "question",
+      "canonicalMixedText": "Nannte ʿĪsā عليه السلام sich einen Diener Allahs?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Nannte ʿĪsā",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "عليه السلام",
+          "spokenArabic": "عَلَيْهِ السَّلَامُ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/b7d558e17689ae1996c6c00b00822737.mp3",
+          "existingMP3SHA256": "044f6e2284636498cfb8bdab2e94470281491b7d190ad43fad97e088daea13c9",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "sich einen Diener Allahs?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-135",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ lehrte, dass Handlungen nach den Absichten bewertet werden und jeder das erhält, was er beabsichtigt.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "lehrte, dass Handlungen nach den Absichten bewertet werden und jeder das erhält, was er beabsichtigt.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-136",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ lehrte, dass Allah beständige gute Taten liebt, selbst wenn sie gering sind.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "lehrte, dass Allah beständige gute Taten liebt, selbst wenn sie gering sind.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-137",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ erklärte, dass Allah nicht auf Aussehen und Vermögen schaut, sondern auf Herzen und Taten.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "erklärte, dass Allah nicht auf Aussehen und Vermögen schaut, sondern auf Herzen und Taten.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-138",
+      "ageBand": "9-10",
+      "part": "question",
+      "canonicalMixedText": "Welche Grundregel lehrt der Prophet ﷺ über den Dīn?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Welche Grundregel lehrt der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "über den Dīn?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-138",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ lehrte, dass der Dīn leicht ist und warnte vor Überforderung und Übertreibung.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "lehrte, dass der Dīn leicht ist und warnte vor Überforderung und Übertreibung.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-196",
+      "ageBand": "9-10",
+      "part": "question",
+      "canonicalMixedText": "Was lehrte der Prophet ﷺ neben dem Streben nach Nützlichem?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Was lehrte der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "neben dem Streben nach Nützlichem?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-196",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ lehrte, nach dem Nützlichen zu streben, Allah um Hilfe zu bitten und nicht hilflos aufzugeben.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "lehrte, nach dem Nützlichen zu streben, Allah um Hilfe zu bitten und nicht hilflos aufzugeben.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-198",
+      "ageBand": "9-10",
+      "part": "question",
+      "canonicalMixedText": "Welche Warnung gab der Prophet ﷺ über fehlende Barmherzigkeit?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Welche Warnung gab der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "über fehlende Barmherzigkeit?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-198",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ verband Barmherzigkeit gegenüber anderen mit dem Empfang von Barmherzigkeit.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "verband Barmherzigkeit gegenüber anderen mit dem Empfang von Barmherzigkeit.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-199",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ befahl, zu erleichtern und nicht zu erschweren sowie frohe Botschaft zu geben und nicht abzuschrecken.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "befahl, zu erleichtern und nicht zu erschweren sowie frohe Botschaft zu geben und nicht abzuschrecken.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-261",
+      "ageBand": "4-6",
+      "part": "question",
+      "canonicalMixedText": "Lehnte Ibrāhīm عليه السلام die Anbetung von Götzen ab?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Lehnte Ibrāhīm",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "عليه السلام",
+          "spokenArabic": "عَلَيْهِ السَّلَامُ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/b7d558e17689ae1996c6c00b00822737.mp3",
+          "existingMP3SHA256": "044f6e2284636498cfb8bdab2e94470281491b7d190ad43fad97e088daea13c9",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "die Anbetung von Götzen ab?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-313",
+      "ageBand": "4-6",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ lehrte einem Jungen, Allahs Namen zu nennen und mit rechts zu essen.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "lehrte einem Jungen, Allahs Namen zu nennen und mit rechts zu essen.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-450",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ lehrte, dass Allah dem Suchenden nützlichen Wissens einen Weg zum Paradies erleichtert.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "lehrte, dass Allah dem Suchenden nützlichen Wissens einen Weg zum Paradies erleichtert.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-482",
+      "ageBand": "7-8",
+      "part": "question",
+      "canonicalMixedText": "Welche Gabe nennt Qurʾān 94:4 für den Propheten ﷺ?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Welche Gabe nennt Qurʾān 94:4 für den Propheten",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "punctuation_whitespace_unspoken",
+          "source": "?"
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-482",
+      "ageBand": "7-8",
+      "part": "explanation",
+      "canonicalMixedText": "Allah sagt zum Propheten ﷺ, dass Er seine Erwähnung erhöht hat.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Allah sagt zum Propheten",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": ", dass Er seine Erwähnung erhöht hat.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-485",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-486",
+      "ageBand": "9-10",
+      "part": "question",
+      "canonicalMixedText": "Wie fasste der Prophet ﷺ einen wichtigen Teil des Dīn in Ṣaḥīḥ Muslim 55 zusammen?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Wie fasste der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "einen wichtigen Teil des Dīn in Ṣaḥīḥ Muslim 55 zusammen?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-486",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ sagte, der Dīn sei Naṣīḥah: gegenüber Allah, Seinem Buch, Seinem Gesandten, den Verantwortlichen und den Muslimen.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "sagte, der Dīn sei Naṣīḥah: gegenüber Allah, Seinem Buch, Seinem Gesandten, den Verantwortlichen und den Muslimen.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-487",
+      "ageBand": "9-10",
+      "part": "question",
+      "canonicalMixedText": "Mit welchem Bild beschrieb der Prophet ﷺ die Haltung zur Dunyā?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Mit welchem Bild beschrieb der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "die Haltung zur Dunyā?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-487",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ riet, in der Dunyā wie ein Fremder oder ein Reisender zu sein.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "riet, in der Dunyā wie ein Fremder oder ein Reisender zu sein.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-488",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ lehrte, dass selbst kleinere Leiden für den Muslim ein Grund für die Tilgung von Sünden sein können.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "lehrte, dass selbst kleinere Leiden für den Muslim ein Grund für die Tilgung von Sünden sein können.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-534",
+      "ageBand": "7-8",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ nannte das Entfernen von Schaden vom Weg eine Ṣadaqah.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "nannte das Entfernen von Schaden vom Weg eine Ṣadaqah.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-573",
+      "ageBand": "7-8",
+      "part": "explanation",
+      "canonicalMixedText": "Allah befiehlt dem Propheten ﷺ zu sagen, dass Gebet, Opfer, Leben und Tod Allah gehören.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Allah befiehlt dem Propheten",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "zu sagen, dass Gebet, Opfer, Leben und Tod Allah gehören.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-586",
+      "ageBand": "9-10",
+      "part": "question",
+      "canonicalMixedText": "Welche besondere Belohnung nennt der Prophet ﷺ für die Betreuung eines Waisenkindes?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Welche besondere Belohnung nennt der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "für die Betreuung eines Waisenkindes?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-586",
+      "ageBand": "9-10",
+      "part": "question",
+      "canonicalMixedText": "Nähe zum Propheten ﷺ im Paradies.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Nähe zum Propheten",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "im Paradies.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-586",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ sagte, dass er und der Betreuer eines Waisenkindes im Paradies eng beieinander sein werden.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "sagte, dass er und der Betreuer eines Waisenkindes im Paradies eng beieinander sein werden.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-587",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ lehrte, dass derjenige, der auf Gutes hinweist, einen Lohn wie der Ausführende erhält.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "lehrte, dass derjenige, der auf Gutes hinweist, einen Lohn wie der Ausführende erhält.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-600",
+      "ageBand": "9-10",
+      "part": "question",
+      "canonicalMixedText": "Dem Propheten ﷺ zu folgen.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Dem Propheten",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "zu folgen.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-600",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Allah befiehlt dem Propheten ﷺ zu sagen: Wer Allah liebt, soll ihm folgen; dann liebt und vergibt Allah.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Allah befiehlt dem Propheten",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "zu sagen: Wer Allah liebt, soll ihm folgen; dann liebt und vergibt Allah.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-613",
+      "ageBand": "4-6",
+      "part": "question",
+      "canonicalMixedText": "Rief Ayyūb عليه السلام Allah in seiner Not an?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Rief Ayyūb",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "عليه السلام",
+          "spokenArabic": "عَلَيْهِ السَّلَامُ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/b7d558e17689ae1996c6c00b00822737.mp3",
+          "existingMP3SHA256": "044f6e2284636498cfb8bdab2e94470281491b7d190ad43fad97e088daea13c9",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Allah in seiner Not an?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-615",
+      "ageBand": "4-6",
+      "part": "question",
+      "canonicalMixedText": "Bat Sulaymān عليه السلام Allah, dankbar zu sein?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Bat Sulaymān",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "عليه السلام",
+          "spokenArabic": "عَلَيْهِ السَّلَامُ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/b7d558e17689ae1996c6c00b00822737.mp3",
+          "existingMP3SHA256": "044f6e2284636498cfb8bdab2e94470281491b7d190ad43fad97e088daea13c9",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Allah, dankbar zu sein?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-630",
+      "ageBand": "7-8",
+      "part": "question",
+      "canonicalMixedText": "Wie reagierte Ayyūb عليه السلام in seiner schweren Prüfung?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Wie reagierte Ayyūb",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "عليه السلام",
+          "spokenArabic": "عَلَيْهِ السَّلَامُ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/b7d558e17689ae1996c6c00b00822737.mp3",
+          "existingMP3SHA256": "044f6e2284636498cfb8bdab2e94470281491b7d190ad43fad97e088daea13c9",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "in seiner schweren Prüfung?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-631",
+      "ageBand": "7-8",
+      "part": "question",
+      "canonicalMixedText": "Was tat Mūsā عليه السلام, nachdem er den Frauen geholfen hatte?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Was tat Mūsā",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "عليه السلام",
+          "spokenArabic": "عَلَيْهِ السَّلَامُ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/b7d558e17689ae1996c6c00b00822737.mp3",
+          "existingMP3SHA256": "044f6e2284636498cfb8bdab2e94470281491b7d190ad43fad97e088daea13c9",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": ", nachdem er den Frauen geholfen hatte?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-632",
+      "ageBand": "7-8",
+      "part": "question",
+      "canonicalMixedText": "Worum bat Sulaymān عليه السلام in Qurʾān 27:19?",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Worum bat Sulaymān",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "عليه السلام",
+          "spokenArabic": "عَلَيْهِ السَّلَامُ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/b7d558e17689ae1996c6c00b00822737.mp3",
+          "existingMP3SHA256": "044f6e2284636498cfb8bdab2e94470281491b7d190ad43fad97e088daea13c9",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "in Qurʾān 27:19?",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    },
+    {
+      "questionId": "kids-quiz-649",
+      "ageBand": "9-10",
+      "part": "explanation",
+      "canonicalMixedText": "Der Prophet ﷺ lehrte, dass Hilfe in der Not eine große Belohnung im Jenseits hat.",
+      "sourceStillImmutable": true,
+      "mixedAudioParts": [
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "Der Prophet",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        },
+        {
+          "kind": "native_arabic_fusha_v4_reuse",
+          "sourceToken": "ﷺ",
+          "spokenArabic": "صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ",
+          "existingMP3": "/kids/assets/kids-quiz-audio/v4-native-fusha-review/3b05b4be0453b865ccf1c5921bddc1a2.mp3",
+          "existingMP3SHA256": "26fc50df1849acffdb06b31633525b9bea965dda3b426cc5f192598409b26295",
+          "newPaidRequestNeeded": false,
+          "humanListeningApproved": false
+        },
+        {
+          "kind": "german_master_dictionary_v4_component",
+          "source": "lehrte, dass Hilfe in der Not eine große Belohnung im Jenseits hat.",
+          "alreadySavedOriginal": false,
+          "stillNeedsGermanV4Original": true
+        }
+      ],
+      "currentlyFullMixedReviewAudioPlayable": false
+    }
+  ]
+}
