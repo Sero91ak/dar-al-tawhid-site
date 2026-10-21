@@ -17,6 +17,14 @@ jobs:
         with:
           ref: review/kids-quiz-v4-batch-001-020-20261014
           fetch-depth: 2
+      - name: Install FFmpeg and FFprobe for genuine MP3 verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null || ! command -v ffmpeg >/dev/null; then
+            sudo apt-get -o Acquire::Retries=1 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+          ffprobe -version | sed -n '1p'
       - name: Verify exact unsigned-source metadata and import already generated candidate MP3s
         shell: bash
         run: |
