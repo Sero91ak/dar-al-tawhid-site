@@ -641,3 +641,14 @@ body.desktop-overhaul-v18 #pageRoot>.dar-v8-quick-language{
  body.desktop-overhaul-v18 .dar-v8-quick-language-title{width:100%;font-size:11px}
  body.desktop-overhaul-v18 .dar-v8-quick-language button{font-size:11px;min-height:40px;padding:8px 11px}
 }
+
+/* Mobile bottom-dock Mehr sheet: language preference shares the same key. */
+body.desktop-overhaul-v18 #darV8MoreSheetLanguage{
+ margin:13px 0 0;min-width:0;padding:11px 2px 2px
+}
+body.desktop-overhaul-v18 #darV8MoreSheetLanguage .dar-v8-quick-language-title{flex:0 0 100%}
+body.desktop-overhaul-v18 #darV8MoreSheetLanguage .dar-v8-all-language-link{
+ margin-inline-start:auto;display:inline-flex;align-items:center;min-height:40px;
+ color:var(--v8-ink);font:600 11px/1.4 system-ui,-apple-system,sans-serif;
+ text-decoration:underline;text-decoration-color:var(--v8-gold);text-underline-offset:3px
+}
