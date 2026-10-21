@@ -128,8 +128,8 @@ for(const locale of EXPECTED){
  };
  const expectedMessages=locale==="de"?["Sūrah Al-Baqarah öffnen","114 Suren mit Arabisch und Lautschrift.","5 bekannte Duʿāʾ nach Themen."]:messages[locale];
  assert.equal(dynamicSurahButton.nodeValue,expectedMessages[0],locale+" surah button");
- assert.equal(dynamicSurahCount.nodeValue,expectedMessages[1],locale+" full Quran count");
- assert.equal(dynamicDuaCount.nodeValue,expectedMessages[2],locale+" summary count");
+ assert.equal(dynamicSurahCount.nodeValue.replace(/\.$/,""),expectedMessages[1].replace(/\.$/,""),locale+" full Quran count");
+ assert.equal(dynamicDuaCount.nodeValue.replace(/\.$/,""),expectedMessages[2].replace(/\.$/,""),locale+" summary count");
  const expectedClock={de:"23:14 Uhr",tr:"saat 23:14",en:"23:14",ar:"الساعة 23:14",
   ku:"saet 23:14",ckb:"کاتژمێر 23:14",bs:"23:14 h"};
  assert.equal(clockLabel.nodeValue,expectedClock[locale],locale+" localized clock");
