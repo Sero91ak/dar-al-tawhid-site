@@ -32,7 +32,7 @@ function glossary(entries){
  multi.sort((a,b)=>b[0].length-a[0].length);
  return {exact,multi};
 }
-const STOP=new Set("was wie wo wer wann wieso warum ist sind gibt ein eine einen dem der die das den des und oder sowie im in auf am an zu zur zum über uber nach für fuer aus mit ich du wir ihr zeigen zeig suche finde erkläre erklaere erklären erklaren bitte kannst könnten meaning what is the of a an and explain tell show about me please nedir ne demek nedir neye nasıl kim".split(" "));
+const STOP=new Set("al el ul as ad at il wa was wie wo wer wann wieso warum ist sind gibt ein eine einen dem der die das den des und oder sowie im in auf am an zu zur zum über uber nach für fuer aus mit ich du wir ihr zeigen zeig suche finde erkläre erklaere erklären erklaren bitte kannst könnten meaning what is the of a an and explain tell show about me please nedir ne demek nedir neye nasıl kim".split(" "));
 function canonicalTokens(str,g){
  let n=normalize(str);
  g.multi.forEach(([alias,id])=>{
@@ -65,7 +65,7 @@ function sanitizeRecord(record,origin){
 }
 function scoreEntry(doc,raw,g){
  const parts=canonicalTokens(raw,g);if(!parts.length)return 0;
- const title=canonicalTokens(doc.title,g), whole=canonicalTokens([doc.title,doc.summary,doc.reference,doc.tags.join(" "),doc.canonicalTerms.join(" ")].join(" "),g);
+ const title=canonicalTokens(doc.title,g), cleanRef=doc.reference.replace(/DĀR AL TAWḤĪD/gi,""), whole=canonicalTokens([doc.title,doc.summary,cleanRef,doc.tags.join(" "),doc.canonicalTerms.join(" ")].join(" "),g);
  const corpus=new Set(whole),titleSet=new Set(title);
  let hits=0,points=0;
  parts.forEach(t=>{
