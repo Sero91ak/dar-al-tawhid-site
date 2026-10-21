@@ -82,7 +82,13 @@ jobs:
                     chat:one('#darV8ChatForm')!==null};
                 """)
                 print(json.dumps({'device':device,**state},ensure_ascii=False),flush=True)
-                if state['overflow']>4:raise RuntimeError('Horizontal overflow: '+str(state))
+                if state['overflow']>4:
+                  culprit=driver.execute_script("""return [...document.querySelectorAll('body *')].map(e=>{
+                    const r=e.getBoundingClientRect();return {tag:e.tagName,cls:String(e.className||'').slice(0,120),id:e.id,
+                    left:Math.round(r.left),right:Math.round(r.right),width:Math.round(r.width),sw:e.scrollWidth,
+                    position:getComputedStyle(e).position};
+                  }).filter(x=>x.width>0&&x.right>innerWidth+4).sort((a,b)=>b.right-a.right).slice(0,16)""")
+                  raise RuntimeError('Horizontal overflow '+str(state)+' elements '+json.dumps(culprit,ensure_ascii=False))
                 if state['dockLinks']!=4:raise RuntimeError('Expected four bottom links plus More: '+str(state))
                 if (device=='desktop')!=(state['side']=='flex'):raise RuntimeError('Sidebar breakpoint: '+str(state))
                 if (device!='desktop')!=(state['dock']!='none'):raise RuntimeError('Dock breakpoint: '+str(state))
