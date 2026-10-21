@@ -29,6 +29,32 @@
    const label=button.querySelector("span:last-child");
    if(item&&label)label.textContent=item[code==="tr"?1:0];
   });
+  const setUi=(selector,german,turkish)=>{
+   const el=doc.querySelector(selector);if(el)el.textContent=code==="tr"?turkish:german;
+  };
+  setUi("#dv3Home .dv3-hometitle h2","Startseite","Ana Sayfa");
+  setUi("#dv3Home .dv3-hometitle small","WILLKOMMEN IM DĀR","DĀR'A HOŞ GELDİNİZ");
+  setUi("#dv3LatestTitle","Neueste Beiträge","Son Paylaşımlar");
+  setUi("#dv3QuickTitle","Schnellzugriff","Hızlı Erişim");
+  setUi('#dv3Home .dv3-section-title [data-dv3-nav="recent"]',"Alle lesen →","Tümünü oku →");
+  setUi('#dv3Home .dv3-section-title [data-dv3-nav="more"]',"Alle Bereiche →","Tüm Bölümler →");
+  setUi('#dv3Home .dv3-language > span',"Sprache / Dil","Dil / Sprache");
+  setUi('#dv3Home .dv3-bottom-row [data-dv3-nav="settings"]',"Einstellungen →","Ayarlar →");
+  const homeSearch=doc.querySelector("#dv3Home #homeSearchInput");
+  if(homeSearch)homeSearch.placeholder=code==="tr"?"Bilgi, paylaşımlar, kitaplar ve âlimler ara …":"Suche Wissen, Beiträge, Bücher, Gelehrte …";
+  const settingLabels={
+   notifications:["Benachrichtigungen","Bildirimler"],
+   location:["Standort","Konum"],
+   appearance:["Erscheinungsbild","Görünüm"],
+   font:["Schrift & Lesbarkeit","Yazı ve Okunabilirlik"],
+   icon:["App-Icon","Uygulama Simgesi"]
+  };
+  doc.querySelectorAll('#appView .dsh-home .dsh-row[data-nav="settings"]').forEach(function(btn){
+    const value=btn.getAttribute("data-value"),word=settingLabels[value];
+    if(!word)return;
+    const label=btn.querySelector(".dsh-row-title");
+    if(label)label.textContent=word[code==="tr"?1:0];
+  });
   const heading=doc.querySelector("#appView .dsh-home .dsh-welcome h2");
   if(heading)heading.textContent=code==="tr"?"Uygulama deneyimin":"Dein App-Erlebnis";
  }
@@ -41,6 +67,7 @@
    const active=el.dataset.darAdultLanguageChoice===code;
    el.setAttribute("aria-pressed",String(active));
   });
+  doc.querySelectorAll("#dv3Home [data-dv3-locale]").forEach(function(btn){btn.setAttribute("aria-pressed",String(btn.dataset.dv3Locale===code))});
   doc.querySelectorAll("[data-dar-adult-language-note]").forEach(function(node){
    node.textContent=code==="tr"?
     "Türkçe içerikler inceleme ve onaydan sonra gösterilir. O zamana kadar doğrulanmış Almanca kaynak metin geçerlidir.":
@@ -84,7 +111,8 @@
   const app=doc.getElementById("appView");
   if(!app)return;
   const home=app.querySelector(".home-v380-shell");
-  if(home&&!home.querySelector(".dat-locale-home"))home.prepend(build("home"));
+  // Existing DAR Home V3 already owns the DE/TR picker: never add a duplicate.
+  if(home&&!home.querySelector("#dv3Home [data-dv3-locale]")&&!home.querySelector(".dat-locale-home"))home.prepend(build("home"));
   const more=app.querySelector(".dar-more-v15");
   if(more&&!more.querySelector(".dat-locale-more")){
    const section=build("more");
@@ -111,6 +139,7 @@
   }
   mount();
  }
+ win.addEventListener("dar-adult-locale-changed",function(){apply(read())});
  win.addEventListener("storage",function(event){if(event.key===KEY)apply(read())});
  doc.addEventListener("DOMContentLoaded",boot);
  if(doc.readyState!=="loading")boot();
