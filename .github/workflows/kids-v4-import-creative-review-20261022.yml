@@ -64,6 +64,7 @@ jobs:
               exit 0
             fi
             git fetch origin review/kids-quiz-v4-batch-001-020-20261014
+            git restore --worktree .
             git rebase -X theirs FETCH_HEAD
           done
           echo 'GitHub push failed. Recover original MP3s from artifact; do not rebill.' >&2
