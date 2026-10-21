@@ -3,6 +3,18 @@
    Never patch native visitors, iOS, other routes or the original live hero. */
 (function(){
 "use strict";
+
+/* Shared adult TEST language runtime. No production, Kids, API or paid model access. */
+if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(location.pathname)
+    &&!window.__DAR_TEST_TR_UI_SCRIPT_LOADING){
+ window.__DAR_TEST_TR_UI_SCRIPT_LOADING=true;
+ const trScript=document.createElement("script");
+ trScript.src="/test/assets/dar-test-turkish-ui.js?v=20261021-core1";
+ trScript.async=true;
+ trScript.onerror=()=>{window.__DAR_TEST_TR_UI_SCRIPT_LOADING=false};
+ (document.head||document.documentElement).appendChild(trScript);
+}
+
 if(!/^\/test(?:\/|$)/.test(location.pathname)||/^\/test\/kids(?:\/|$)/.test(location.pathname))return;
 if(window.__DAR_TEST_HOME_V3)return;
 window.__DAR_TEST_HOME_V3=true;
