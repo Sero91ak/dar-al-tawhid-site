@@ -343,25 +343,25 @@ const DAR_DYNAMIC_UI_UNITS={
 function darDynamicUILocalize(value,language){
  const units=DAR_DYNAMIC_UI_UNITS[language];
  if(!units)return null;
- const numeric=value.match(/^(\\d+) (Funktionen|Ergebnisse|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Fundstellen|Einträge)$/);
+ const numeric=value.match(/^(\d+) (Funktionen|Ergebnisse|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Fundstellen|Einträge)$/);
  if(numeric)return numeric[1]+" "+units[numeric[2]];
- const surahs=value.match(/^(\\d+) Sūren · (\\d+) Āyāt$/);
+ const surahs=value.match(/^(\d+) Sūren · (\d+) Āyāt$/);
  if(surahs)return surahs[1]+" "+units.Sūren+" · "+surahs[2]+" "+units.Āyāt;
- const ayat=value.match(/^(\\d+) Āyāt · (Mekkanisch|Medinensisch)$/);
+ const ayat=value.match(/^(\d+) Āyāt · (Mekkanisch|Medinensisch)$/);
  if(ayat){
   const place=language==="tr"?dictionary.get(ayat[2]):languagePacks.get(language)?.get(ayat[2]);
   return place?ayat[1]+" "+units.Āyāt+" · "+place:null;
  }
- const score=value.match(/^(\\d+(?:[.,]\\d+)?)% Trefferquote$/);
+ const score=value.match(/^(\d+(?:[.,]\d+)?)% Trefferquote$/);
  if(score)return score[1]+"% "+units.Trefferquote;
- const selection=value.match(/^(\\d+)\\/(\\d+) gewählt$/);
+ const selection=value.match(/^(\d+)\/(\d+) gewählt$/);
  if(selection)return selection[1]+"/"+selection[2]+" "+units.gewählt;
- const surahRange=value.match(/^Sūrenbereich wechseln, aktuell (\\d+)[–-](\\d+)$/);
+ const surahRange=value.match(/^Sūrenbereich wechseln, aktuell (\d+)[–-](\d+)$/);
  if(surahRange){
   const heading=language==="tr"?dictionary.get("Surenbereich"):languagePacks.get(language)?.get("Surenbereich");
   return heading?heading+" "+surahRange[1]+"–"+surahRange[2]:null;
  }
- const openAyah=value.match(/^Im Qurʾān öffnen · (\\d{1,3}:\\d{1,3}(?:[–-]\\d{1,3})?)$/);
+ const openAyah=value.match(/^Im Qurʾān öffnen · (\d{1,3}:\d{1,3}(?:[–-]\d{1,3})?)$/);
  if(openAyah){
   const label=language==="tr"?dictionary.get("Im Qurʾān öffnen")||languagePacks.get("tr")?.get("Im Qurʾān öffnen"):languagePacks.get(language)?.get("Im Qurʾān öffnen");
   return label?label+" · "+openAyah[1]:null;
