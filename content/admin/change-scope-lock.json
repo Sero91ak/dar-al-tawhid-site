@@ -8556,6 +8556,18 @@
         ".github/workflows/dar-i18n-translation-inventory.yml"
       ],
       "expiresAt": "2026-12-31T23:59:00Z"
+    },
+    {
+      "id": "adult-i18n-q48-post481-central-manifest-20261021",
+      "at": "2026-10-21T13:21:00+02:00",
+      "approvedBy": "user-explicit-20261021-next-free-Q-source-and-global-seven-language-adult-post-publish",
+      "reason": "Authorize only canonical adult-post481 and seven-language routing manifest/README for the user's explicit Q48/global adult publishing request. Six locale files remain unapproved drafts under sourceHash gating. Kids, device push, app navigation, native binaries, provider secrets, and all unrelated areas excluded.",
+      "paths": [
+        "content/i18n/adult-posts/hasan-al-basri-selbstpruefung-20261021-481.json",
+        "content/i18n/adult-posts/README.md",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-12-31T23:59:00.000Z"
     }
   ],
   "enabled": true
