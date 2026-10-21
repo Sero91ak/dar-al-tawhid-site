@@ -56,6 +56,14 @@ jobs:
         run: node scripts/verify-adult-post-language-manifests.cjs
       - name: Verify automatic revision detection with isolated fixtures
         run: node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
+      - name: Offline nine-language push security and content checks (no sending)
+        run: |
+          node desktop-preview/i18n-core-v1/test-push-i18n-resolver.cjs
+          node desktop-preview/i18n-core-v1/test-app-locale-push-adapter.cjs
+          node desktop-preview/i18n-core-v1/test-secure-app-locale-endpoint.cjs
+          node desktop-preview/i18n-core-v1/test-push-copy-nine-languages.cjs
+          node desktop-preview/i18n-core-v1/audit-push-i18n.cjs
+          node desktop-preview/i18n-core-v1/dry-run-push-nine-languages.cjs
       - name: Generate review-only worklist
         shell: bash
         run: |
