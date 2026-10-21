@@ -12,7 +12,9 @@ const inventoryFile=path.resolve(arg("--inventory",path.join(__dirname,"translat
 const OUT=path.resolve(arg("--output",path.join(__dirname,"generated-drafts")));
 const MAX_CALLS=cap("--max-requests",1,20),MAX_SOURCE=cap("--max-source-chars",9000,14000),MAX_TOKENS=cap("--max-output-tokens",5000,8000);
 const LOCALE=arg("--locale","all"),ITEM=arg("--id",""),KIND=arg("--kind",""),SOURCE=arg("--source-path","");
-const LANGS={ar:"Arabic Fuṣḥā (العربية الفصحى)",en:"formal scholarly English",tr:"formal Turkish",ku:"Kurmancî Northern Kurdish",ckb:"Soranî Central Kurdish (RTL)",bs:"formal Bosnian"};
+const LANGUAGE_HINTS={ar:"Arabic Fuṣḥā (العربية الفصحى)",en:"formal scholarly English",tr:"formal Turkish",ku:"Kurmancî Northern Kurdish",ckb:"Soranî Central Kurdish (RTL)",bs:"formal Bosnian"};
+const localeCatalog=JSON.parse(fs.readFileSync(path.join(ROOT,"desktop-preview/i18n-core-v1/locales.json"),"utf8"));
+const LANGS=Object.fromEntries(Object.entries(localeCatalog.locales||{}).filter(([code])=>code!==localeCatalog.defaultLocale).map(([code,value])=>[code,LANGUAGE_HINTS[code]||String(value.name||code)+(value.dir==="rtl"?" (RTL)":"")]));
 
 const {glossaryHints}=require("./glossary-hints.cjs");
 if(LOCALE!=="all"&&!LANGS[LOCALE])throw Error("Unknown locale");
