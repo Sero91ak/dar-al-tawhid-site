@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f2f4ee">
+<title>DĀR AL TAWḤĪD · Smart Knowledge Portal · Designvorschau</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;--paper:#f3f5ef;--panel:#fbfcf9;--white:#fff;--ink:#172e26;--muted:#69776c;--green:#315a48;--gold:#9b783e;--line:rgba(35,65,49,.13);--shadow:0 16px 52px rgba(26,47,37,.06);--hero:#122b25;--side:268px}
+*{box-sizing:border-box}html{background:var(--paper);overscroll-behavior-y:none}body{margin:0;color:var(--ink);background:var(--paper);min-height:100dvh;overscroll-behavior-y:none}body.dark{--paper:#071712;--panel:#0d211b;--white:#10261e;--ink:#edf3e9;--muted:#9bb5a5;--green:#b8d6b6;--gold:#d8b776;--line:rgba(211,231,214,.12);--shadow:0 22px 55px rgba(0,0,0,.13);--hero:#061611;color-scheme:dark}button,input{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:4px}::selection{background:#c7b083;color:#10251d}
+.shell{display:grid;grid-template-columns:var(--side) minmax(0,1fr);min-height:100dvh;max-width:1900px;margin:auto}.sidebar{height:100dvh;position:sticky;top:0;display:flex;flex-direction:column;background:var(--panel);border-right:1px solid var(--line);padding:31px 22px 22px;z-index:15}.identity{display:flex;gap:13px;align-items:center;margin-bottom:43px;min-width:0}.emblem{flex:none;width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#213f32;color:#f8ebca;font:26px Georgia,serif;box-shadow:inset 0 0 0 1px #d7b77b55}.brand{min-width:0}.brand strong{display:block;font:600 16px Georgia,serif;letter-spacing:.055em;white-space:nowrap}.brand small{display:block;color:var(--gold);font-size:9px;font-weight:750;letter-spacing:.15em;margin-top:6px;white-space:nowrap}.nav-cap{color:var(--muted);letter-spacing:.19em;text-transform:uppercase;font-size:9px;font-weight:800;padding:4px 13px 12px}.nav{display:flex;flex-direction:column;gap:4px}.navlink{min-height:46px;display:flex;align-items:center;gap:12px;padding:0 13px;border-radius:12px;font-size:13px;font-weight:620;transition:background .2s}.navlink:hover{background:rgba(83,117,93,.09)}.navlink.current{background:rgba(107,134,104,.14);color:var(--green)}.navlink svg{width:19px;height:19px;stroke-width:1.65;flex:none}.sidebar-bottom{margin-top:auto;padding-top:18px;border-top:1px solid var(--line)}.sidebar-bottom p{font-size:11px;color:var(--muted);line-height:1.7;margin:7px 11px 0}.sidebar-bottom .mini-head{font-size:11px;font-weight:740;padding:0 11px}
+.page{min-width:0;padding:0 clamp(22px,4.1vw,82px) 78px}.topbar{height:85px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid var(--line)}.crumb{display:flex;align-items:center;gap:11px;color:var(--muted);font-size:12px}.crumb strong{color:var(--ink);font-weight:650}.actions{display:flex;align-items:center;gap:10px}.action{border:1px solid var(--line);width:41px;height:41px;display:grid;place-items:center;background:var(--panel);color:var(--ink);border-radius:50%;transition:transform .18s,background .18s}.action:hover{transform:translateY(-1px);background:var(--paper)}.action svg{width:18px;height:18px}.search-button{border:1px solid var(--line);background:var(--panel);color:var(--muted);min-width:224px;height:42px;border-radius:40px;display:flex;align-items:center;gap:10px;padding:0 14px;text-align:left;font-size:12px}.search-button svg{width:16px;height:16px}.search-button span{flex:1}.key{border:1px solid var(--line);border-radius:5px;padding:3px 5px;color:var(--muted);font-size:10px}
+.eyebrow{color:var(--gold);font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.21em}.intro{padding:44px 0 24px;display:flex;justify-content:space-between;gap:20px;align-items:end}.intro h1{font:500 clamp(31px,3.5vw,49px)/1.07 Georgia,"Times New Roman",serif;letter-spacing:-.044em;margin:11px 0}.intro p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}.today{text-align:right;font-size:12px;color:var(--muted);line-height:1.8}.today strong{font-size:13px;color:var(--ink);font-weight:650}
+.hero{isolation:isolate;position:relative;overflow:hidden;min-height:350px;border-radius:22px;background:linear-gradient(90deg,rgba(7,29,21,.97),rgba(10,35,29,.88) 45%,rgba(7,35,29,.3) 100%),url("https://dar-al-tawhid.de/assets/feed-backgrounds/auto/mosque/bg-pro-mosque-60.webp") center 48%/cover no-repeat,#0d2921;color:#f7f8ef;display:flex;align-items:center;padding:clamp(30px,5vw,65px)}.hero:after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(circle at 90% 7%,rgba(222,190,113,.25),transparent 35%)}.hero-inner{max-width:570px}.hero .eyebrow{color:#dbc591}.hero h2{font:500 clamp(32px,3.6vw,53px)/1.1 Georgia,serif;letter-spacing:-.036em;margin:16px 0 14px}.hero p{font-size:14px;line-height:1.8;color:#e4ece4;max-width:470px}.hero-actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:23px}.primary,.secondary{display:inline-flex;align-items:center;justify-content:center;min-height:43px;border-radius:999px;padding:0 21px;font-size:12px;font-weight:740;gap:12px;transition:transform .2s}.primary:hover,.secondary:hover{transform:translateY(-2px)}.primary{background:#f0e5ca;color:#183127}.secondary{border:1px solid #e8e5d66b;color:#fbf6e9}.hero-aside{position:absolute;bottom:25px;right:33px;color:#eee3c0;font-size:10px;letter-spacing:.13em}
+.main-grid{display:grid;grid-template-columns:minmax(0,1.78fr) minmax(250px,.83fr);gap:32px;margin-top:33px;align-items:start}.section-head{display:flex;align-items:baseline;justify-content:space-between;gap:15px;margin-bottom:17px}.section-head h3{font:500 23px Georgia,serif;letter-spacing:-.02em;margin:0}.section-head small{font-size:11px;color:var(--muted)}.text-link{font-size:11px;font-weight:720;color:var(--gold)}.link-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.feature{padding:22px 20px 19px;border-top:1px solid var(--line);background:linear-gradient(155deg,var(--panel),transparent);border-radius:2px 2px 14px 14px;min-height:160px;display:flex;flex-direction:column;transition:background .2s,transform .2s}.feature:hover{background:var(--panel);transform:translateY(-2px)}.feature .feature-top{display:flex;justify-content:space-between;align-items:center}.feature .symbol{color:var(--gold);font:30px Georgia,serif}.feature .arrow{color:var(--muted);font-size:19px}.feature h4{font:500 21px Georgia,serif;margin:21px 0 7px}.feature p{font-size:12px;line-height:1.6;margin:0;color:var(--muted)}.quote{margin:30px 0 0;padding:25px 29px;border-top:1px solid var(--line);background:var(--panel);border-radius:0 0 16px 16px}.quote .eyebrow{font-size:9px}.quote blockquote{font:400 clamp(18px,1.8vw,25px)/1.45 Georgia,serif;margin:15px 0 12px}.quote .source{font-size:11px;color:var(--muted);line-height:1.6}.quote a{color:var(--gold);font-weight:750}
+.rail{display:flex;flex-direction:column;gap:23px}.rail-panel{padding:22px 21px;border-top:1px solid var(--line);background:var(--panel);border-radius:0 0 16px 16px}.rail-panel h3{font:500 19px Georgia,serif;margin:0 0 16px}.prayer-state{display:flex;align-items:center;gap:12px;padding:14px 0 15px}.prayer-icon{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;background:rgba(148,124,75,.11);color:var(--gold);font:27px Georgia,serif}.prayer-state strong{display:block;font-size:13px;font-weight:690}.prayer-state span{display:block;font-size:11px;color:var(--muted);margin-top:5px;line-height:1.5}.rail-link{display:flex;justify-content:space-between;align-items:center;padding:13px 0;border-top:1px solid var(--line);font-size:12px;font-weight:630}.rail-link span:last-child{color:var(--gold)}.tiny{font-size:11px;line-height:1.6;color:var(--muted)}.rec-list{display:flex;flex-direction:column;gap:8px}.rec{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.rec a{font-size:12px;font-weight:650;line-height:1.5}.rec small{display:block;color:var(--muted);font-size:10px;margin-top:5px}.save{background:transparent;border:0;color:var(--muted);font-size:20px;padding:4px}.save.active{color:var(--gold)}.below{margin-top:35px;padding:22px 0;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:20px;align-items:center}.below h3{font:500 24px Georgia,serif;margin:0 0 8px}.below p{font-size:12px;line-height:1.6;color:var(--muted);margin:0}.below a{flex:none;border:1px solid var(--line);padding:13px 19px;border-radius:99px;font-size:12px;font-weight:680}.footer{margin-top:35px;border-top:1px solid var(--line);padding-top:24px;display:flex;align-items:center;justify-content:space-between;gap:20px;font-size:11px;color:var(--muted)}.footer a{color:var(--green);font-weight:650}.mobile-brand,.mobile-dock{display:none}
+dialog{padding:0;border:1px solid var(--line);border-radius:19px;width:min(600px,calc(100vw - 28px));max-height:min(78vh,710px);overflow:hidden;color:var(--ink);background:var(--panel);box-shadow:0 30px 100px #0004}dialog::backdrop{background:rgba(3,15,12,.58);backdrop-filter:blur(3px)}.search-modal-head{display:flex;align-items:center;gap:12px;padding:17px 20px;border-bottom:1px solid var(--line)}.search-modal-head svg{width:21px;height:21px}.search-modal-head input{flex:1;min-width:0;outline:none!important;border:0;background:transparent;color:var(--ink);font-size:15px}.search-modal-head button{border:0;background:transparent;color:var(--muted);font-size:21px}.results{padding:13px;overflow-y:auto;max-height:55vh}.result{padding:13px;display:flex;align-items:center;gap:15px;border-radius:10px}.result:hover,.result:focus-visible{background:rgba(126,145,115,.1)}.result .rsymbol{font-size:22px;color:var(--gold);width:30px;text-align:center}.result strong{font-size:13px}.result small{display:block;color:var(--muted);margin-top:4px;font-size:11px}.result .go{margin-left:auto;color:var(--gold)}.hint{font-size:10px;color:var(--muted);padding:11px 19px;border-top:1px solid var(--line)}
+@media(min-width:1400px){.page{padding-left:70px;padding-right:70px}.hero{min-height:390px}.main-grid{gap:39px}}@media(max-width:1150px){:root{--side:220px}.sidebar{padding:27px 13px}.brand strong{font-size:13px}.brand small{font-size:8px}.page{padding-left:32px;padding-right:32px}.main-grid{grid-template-columns:minmax(0,1fr) 260px;gap:20px}.feature{padding:18px 16px}}
+@media(max-width:940px){.shell{grid-template-columns:minmax(0,1fr)}.sidebar{display:none}.mobile-brand{display:flex;align-items:center;gap:10px;font-family:Georgia,serif;font-size:15px;font-weight:700;white-space:nowrap}.mobile-brand .emblem{height:34px;width:34px;font-size:20px}.crumb{display:none}.topbar{height:73px}.page{padding:0 clamp(18px,4vw,42px) 110px}.main-grid{grid-template-columns:1fr;gap:24px}.rail{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.mobile-dock{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:30;justify-content:space-around;gap:4px;background:color-mix(in srgb,var(--panel) 95%,transparent);backdrop-filter:blur(18px);border-top:1px solid var(--line);padding:11px 12px calc(11px + env(safe-area-inset-bottom))}.mobile-dock a{display:flex;align-items:center;flex-direction:column;gap:5px;font-size:10px;color:var(--muted);min-width:54px}.mobile-dock a:first-child{color:var(--green);font-weight:800}.mobile-dock svg{width:20px;height:20px}}
+@media(max-width:650px){.topbar{height:67px}.search-button{min-width:40px;width:41px;height:41px;justify-content:center;padding:0}.search-button span,.search-button .key{display:none}.action{width:39px;height:39px}.actions{gap:7px}.intro{padding:29px 0 22px}.intro h1{font-size:33px}.today{display:none}.hero{margin-left:-18px;margin-right:-18px;border-radius:0;min-height:350px;padding:30px 25px}.hero h2{font-size:36px}.hero p{font-size:13px}.hero-aside{display:none}.main-grid{margin-top:27px}.link-grid{gap:8px}.feature{min-height:145px;padding:16px 14px}.feature h4{font-size:17px;margin:17px 0 6px}.feature p{font-size:11px}.feature .symbol{font-size:24px}.rail{grid-template-columns:1fr}.quote{padding:22px 19px}.below{align-items:flex-start;flex-direction:column}.footer{flex-direction:column;align-items:flex-start;margin-top:8px}.section-head h3{font-size:21px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+<symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3V10zM9 20v-7h6v7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6c-3-3-7-3-10-2v15c4-1 7-1 10 2 3-3 6-3 10-2V4c-3-1-7-1-10 2zm0 0v15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><path d="M3 3h8v8H3zM13 3h8v8h-8zM3 13h8v8H3zM13 13h8v8h-8z" fill="none" stroke="currentColor" stroke-linejoin="round"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15.6A9 9 0 0 1 8.4 4 9.1 9.1 0 1 0 20 15.6z" stroke="currentColor" fill="none" stroke-linejoin="round" stroke-width="1.7"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M19 5l-2 2M7 17l-2 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 6v6l4 2" fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.7"/></symbol>
+</svg>
+<div class="shell">
+<aside class="sidebar" aria-label="Hauptnavigation">
+ <a class="identity" href="https://dar-al-tawhid.de/" title="Zur bestehenden Website">
+  <span class="emblem" aria-hidden="true">د</span><span class="brand"><strong>DĀR AL TAWḤĪD</strong><small>QURʾĀN · SUNNAH · ĀṮĀR</small></span>
+ </a>
+ <div class="nav-cap">Wissensportal</div>
+ <nav class="nav">
+  <a class="navlink current" href="#start" aria-current="page"><svg><use href="#i-home"/></svg>Übersicht</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=quran"><svg><use href="#i-book"/></svg>Qurʾān</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=beitraege"><svg><use href="#i-grid"/></svg>Beiträge</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=bibliothek"><svg><use href="#i-book"/></svg>Bibliothek</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=wissen"><svg><use href="#i-grid"/></svg>Wissen & Lernen</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=dua"><svg><use href="#i-moon"/></svg>Duʿāʾ</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=gebetszeiten"><svg><use href="#i-clock"/></svg>Gebetszeiten</a>
+  <a class="navlink" href="https://dar-al-tawhid.de/?page=mehr"><svg><use href="#i-grid"/></svg>Weitere Bereiche</a>
+ </nav>
+ <div class="sidebar-bottom"><div class="mini-head">Wissen mit Quellen</div><p>Geprüfte Inhalte, klare Navigation und ein ruhiger Ort zum Lernen.</p><p style="color:var(--gold);margin-top:16px">SMART KNOWLEDGE PORTAL · V1</p></div>
+</aside>
+<div class="page" id="start">
+ <header class="topbar">
+  <div class="crumb"><span>Wissensportal</span><span style="color:var(--gold)">/</span><strong>Übersicht</strong></div>
+  <div class="mobile-brand"><span class="emblem" aria-hidden="true">د</span>DĀR AL TAWḤĪD</div>
+  <div class="actions">
+    <button id="openSearch" class="search-button" type="button" aria-label="Bereiche suchen"><svg><use href="#i-search"/></svg><span>Bereiche durchsuchen …</span><span class="key">⌘ K</span></button>
+    <button class="action" id="themeToggle" aria-label="Erscheinungsbild wechseln" type="button"><svg><use href="#i-moon"/></svg></button>
+    <a class="action" href="https://dar-al-tawhid.de/" aria-label="Aktuelle Website öffnen" title="Aktuelle Website öffnen" style="font-size:21px">↗</a>
+  </div>
+ </header>
+ <main>
+  <section class="intro" aria-label="Begrüßung">
+   <div><div class="eyebrow">WILLKOMMEN IM WISSENSPORTAL</div><h1 id="greeting">As-salāmu ʿalaikum</h1><p>Dein Zugang zu authentischem Wissen aus Qurʾān und Sunnah.</p></div>
+   <div class="today"><strong id="todayDate">—</strong><br><span id="todayTime">—</span></div>
+  </section>
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero-inner">
+      <div class="eyebrow">DĀR AL TAWḤĪD · WISSEN VERTIEFEN</div>
+      <h2 id="heroTitle">Wissen entdecken.<br>Mit Quellen verstehen.</h2>
+      <p>Qurʾān, authentische Überlieferungen und Aussagen der frühen Gelehrten – übersichtlich und ohne Ablenkung.</p>
+      <div class="hero-actions"><a class="primary" href="https://dar-al-tawhid.de/?page=quran">Qurʾān öffnen <span>↗</span></a><a class="secondary" href="https://dar-al-tawhid.de/?page=wissen">Wissensbereiche <span>→</span></a></div>
+    </div>
+    <div class="hero-aside">QURʾĀN · SUNNAH · SALAF</div>
+  </section>
+  <div class="main-grid">
+    <div>
+      <div class="section-head"><h3>Dein Zugang zum Wissen</h3><small>Direkte Verknüpfungen</small></div>
+      <div class="link-grid">
+        <a class="feature" href="https://dar-al-tawhid.de/?page=quran"><div class="feature-top"><span class="symbol">۞</span><span class="arrow">↗</span></div><h4>Qurʾān</h4><p>Lesen, hören und studieren.</p></a>
+        <a class="feature" href="https://dar-al-tawhid.de/?page=bibliothek"><div class="feature-top"><span class="symbol">▤</span><span class="arrow">↗</span></div><h4>Bibliothek</h4><p>Bücher, Sammlungen und Quellen.</p></a>
+        <a class="feature" href="https://dar-al-tawhid.de/?page=beitraege"><div class="feature-top"><span class="symbol">✧</span><span class="arrow">↗</span></div><h4>Beiträge</h4><p>Wissensbeiträge mit Nachweisen.</p></a>
+        <a class="feature" href="https://dar-al-tawhid.de/?page=wissen"><div class="feature-top"><span class="symbol">◈</span><span class="arrow">↗</span></div><h4>Wissenszentrum</h4><p>Islamische Themen systematisch lernen.</p></a>
+      </div>
+      <article class="quote" aria-labelledby="quoteTitle">
+       <span class="eyebrow">GRUNDSATZ DES WISSENS</span>
+       <blockquote id="quoteTitle">„Dieses Wissen ist Dīn, so schaut, von wem ihr euren Dīn nehmt.“</blockquote>
+       <div class="source">Muḥammad ibn Sīrīn · Ṣaḥīḥ Muslim, Muqaddimah, Bāb: al-Isnād min ad-Dīn.<br><a href="https://www.islamweb.net/ar/fatwa/38541/" target="_blank" rel="noopener noreferrer">Originalnachweis bei Islamweb ↗</a></div>
+      </article>
+    </div>
+    <aside class="rail" aria-label="Persönlicher Schnellzugriff">
+      <div class="rail-panel">
+        <div class="eyebrow" style="margin-bottom:12px">DEIN TAG</div><h3>Gebete & Orientierung</h3>
+        <div class="prayer-state"><div class="prayer-icon" aria-hidden="true">☾</div><div><strong>Gebetszeiten ansehen</strong><span>Deine genauen Zeiten werden im bestehenden Gebetsbereich ermittelt.</span></div></div>
+        <a class="rail-link" href="https://dar-al-tawhid.de/?page=gebetszeiten"><span>Standort und Zeiten öffnen</span><span>↗</span></a>
+        <a class="rail-link" href="https://dar-al-tawhid.de/?page=dua"><span>Duʿāʾ-Bereich</span><span>↗</span></a>
+      </div>
+      <div class="rail-panel">
+        <div class="eyebrow" style="margin-bottom:12px">PERSÖNLICH</div><h3>Meine Schnellzugriffe</h3><p class="tiny">Markiere deine wichtigsten Bereiche. Diese Auswahl wird nur in deinem Browser gespeichert.</p>
+        <div class="rec-list" id="favorites"></div>
+      </div>
+      <div class="rail-panel">
+        <div class="eyebrow" style="margin-bottom:12px">SMART SEARCH · VORSCHAU</div><h3>Finde deinen Bereich</h3><p class="tiny">Bereichssuche mit deutschen Begriffen und bekannten Schreibweisen wie Tawḥīd, Tauhid und Īmān. Eine echte Inhalts-KI wird erst nach Quellenindexierung angebunden.</p>
+        <button class="rail-link" id="railSearch" type="button" style="background:none;border-left:0;border-right:0;border-bottom:0;width:100%;color:var(--ink)"><span>Suche öffnen</span><span>↗</span></button>
+      </div>
+    </aside>
+  </div>
+  <section class="below" aria-label="Weiterlernen"><div><div class="eyebrow" style="margin-bottom:10px">WEITERLERNEN</div><h3>Wissen, das weiterführt.</h3><p>Entdecke Quellen, Überlieferungen und thematische Lernbereiche im bestehenden Portal.</p></div><a href="https://dar-al-tawhid.de/?page=wissen">Wissenszentrum öffnen ↗</a></section>
+ </main>
+ <footer class="footer"><span>© DĀR AL TAWḤĪD · Designvorschau, nicht die öffentliche Website</span><a href="https://dar-al-tawhid.de/">Zur aktuellen Website ↗</a></footer>
+</div>
+</div>
+<nav class="mobile-dock" aria-label="Mobile Navigation"><a href="#start"><svg><use href="#i-home"/></svg>Start</a><a href="https://dar-al-tawhid.de/?page=quran"><svg><use href="#i-book"/></svg>Qurʾān</a><a href="https://dar-al-tawhid.de/?page=beitraege"><svg><use href="#i-grid"/></svg>Beiträge</a><a href="https://dar-al-tawhid.de/?page=bibliothek"><svg><use href="#i-book"/></svg>Bibliothek</a><a href="https://dar-al-tawhid.de/?page=mehr"><svg><use href="#i-grid"/></svg>Mehr</a></nav>
+<dialog id="searchDialog" aria-label="Bereiche durchsuchen">
+ <div class="search-modal-head"><svg><use href="#i-search"/></svg><input id="searchInput" autocomplete="off" spellcheck="false" placeholder="Qurʾān, Tawḥīd, Īmān, Gebet ..." aria-label="Suchbegriff"><button type="button" id="closeSearch" aria-label="Suche schließen">×</button></div>
+ <div class="results" id="searchResults" aria-live="polite"></div><div class="hint">Vorschau: Die Suche findet aktuell Website-Bereiche, noch keine einzelnen Qurʾān-Verse oder Beiträge. ESC schließt die Suche.</div>
+</dialog>
+<script>
+(function(){
+'use strict';
+var site='https://dar-al-tawhid.de/';
+var entries=[
+{title:'Qurʾān',description:'Lesen, hören und Tafsīr entdecken',path:'?page=quran',tags:'koran quran qur’an qurʾan qurān surah ayah tafsir tadabbur rezitation'},
+{title:'Beiträge',description:'Veröffentlichte Texte mit Nachweisen',path:'?page=beitraege',tags:'beitrag post aussagen gelehrte athar salaf überlieferungen'},
+{title:'Bibliothek',description:'Bücher und PDF-Sammlungen',path:'?page=bibliothek',tags:'bibliothek pdf buch bücher sammlung lesen'},
+{title:'Wissen & Lernen',description:'Themen, Tawḥīd, Īmān und ʿAqīdah',path:'?page=wissen',tags:'wissen lernen tawhid tauhid tawḥīd aqida aqidah ʿaqidah iman īmān fiqh sunnah'},
+{title:'Duʿāʾ',description:'Bittgebete und Erinnerungen',path:'?page=dua',tags:'dua duaa duʿāʾ bittgebet dhikr'},
+{title:'Gebetszeiten',description:'Standort und Gebetsübersicht',path:'?page=gebetszeiten',tags:'gebet salah salat namaz fajr dhuhr asr maghrib isha standort'},
+{title:'Weitere Bereiche',description:'Zusätzliche Werkzeuge und Inhalte',path:'?page=mehr',tags:'mehr werkzeuge zakat qibla einstellungen'}
+];
+function get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}}
+function set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function normalize(v){return String(v||'').toLocaleLowerCase('de').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[ʿʾ’']/g,'').replace(/ḥ/g,'h').replace(/ḍ/g,'d').replace(/ṭ/g,'t').replace(/ṣ/g,'s').replace(/ā/g,'a').replace(/ī/g,'i').replace(/ū/g,'u').replace(/ǧ/g,'g').replace(/ḫ/g,'h').replace(/ẓ/g,'z').replace(/[^a-z0-9äöüß ]/g,' ').replace(/\s+/g,' ').trim()}
+var dialog=document.getElementById('searchDialog'),input=document.getElementById('searchInput'),results=document.getElementById('searchResults');
+function renderResults(){
+var q=normalize(input.value);var words=q.split(' ').filter(Boolean);
+var list=entries.filter(function(v){var hay=normalize(v.title+' '+v.tags+' '+v.description);return !words.length||words.every(function(w){return hay.indexOf(w)>=0})});
+results.textContent='';
+if(!list.length){var empty=document.createElement('p');empty.className='tiny';empty.style.padding='16px';empty.textContent='Kein passender Bereich. Die vollständige Inhaltssuche ist noch nicht Teil dieser Vorschau.';results.appendChild(empty);return}
+list.forEach(function(v){var a=document.createElement('a');a.className='result';a.href=site+v.path;var icon=document.createElement('span');icon.className='rsymbol';icon.setAttribute('aria-hidden','true');icon.textContent='◈';var body=document.createElement('span');var title=document.createElement('strong');title.textContent=v.title;var small=document.createElement('small');small.textContent=v.description;body.append(title,small);var go=document.createElement('span');go.className='go';go.textContent='↗';a.append(icon,body,go);results.appendChild(a)})
+}
+function show(){renderResults();if(typeof dialog.showModal==='function')dialog.showModal();else dialog.setAttribute('open','');input.focus()}
+function close(){if(typeof dialog.close==='function')dialog.close();else dialog.removeAttribute('open')}
+document.getElementById('openSearch').addEventListener('click',show);
+document.getElementById('railSearch').addEventListener('click',show);
+document.getElementById('closeSearch').addEventListener('click',close);
+dialog.addEventListener('click',function(e){if(e.target===dialog)close()});
+document.addEventListener('keydown',function(e){if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();show()}if(e.key==='/'&&!dialog.open&&document.activeElement.tagName!=='INPUT'){e.preventDefault();show()}});
+input.addEventListener('input',renderResults);
+var theme=get('dat-smart-theme','light');
+function paintTheme(){document.body.classList.toggle('dark',theme==='dark');document.getElementById('themeToggle').innerHTML=theme==='dark'?'<svg><use href="#i-sun"/></svg>':'<svg><use href="#i-moon"/></svg>';document.querySelector('meta[name="theme-color"]').setAttribute('content',theme==='dark'?'#071712':'#f2f4ee')}
+document.getElementById('themeToggle').addEventListener('click',function(){theme=theme==='dark'?'light':'dark';set('dat-smart-theme',theme);paintTheme()});paintTheme();
+var selected=get('dat-smart-favs',['?page=quran','?page=bibliothek']);
+function favorites(){var target=document.getElementById('favorites');target.textContent='';entries.slice(0,5).forEach(function(v){var row=document.createElement('div');row.className='rec';var a=document.createElement('a');a.href=site+v.path;a.textContent=v.title;var b=document.createElement('button');b.className='save'+(selected.includes(v.path)?' active':'');b.setAttribute('aria-label',(selected.includes(v.path)?'Aus Schnellzugriff entfernen: ':'Zu Schnellzugriff hinzufügen: ')+v.title);b.textContent=selected.includes(v.path)?'★':'☆';b.addEventListener('click',function(){selected=selected.includes(v.path)?selected.filter(function(x){return x!==v.path}):selected.concat(v.path);set('dat-smart-favs',selected);favorites()});row.append(a,b);target.appendChild(row)})}
+favorites();
+function updateClock(){var d=new Date();var h=d.getHours();document.getElementById('greeting').textContent=h<11?'As-salāmu ʿalaikum · Guten Morgen':h<18?'As-salāmu ʿalaikum · Guten Tag':'As-salāmu ʿalaikum · Guten Abend';document.getElementById('todayDate').textContent=new Intl.DateTimeFormat('de-DE',{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(d);document.getElementById('todayTime').textContent=new Intl.DateTimeFormat('de-DE',{hour:'2-digit',minute:'2-digit'}).format(d)+' Uhr'}
+updateClock();setInterval(updateClock,30000);
+})();
+</script>
+</body>
+</html>
