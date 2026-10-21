@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "scope": "KIDS_9_PREPAID_V4_ORIGINALS_ZERO_NEW_TTS",
+  "createdAt": "2026-10-22",
+  "flowId": "n2ovmGko2iTlNWTAEqHk",
+  "flowUrl": "https://elevenlabs.io/app/flows/n2ovmGko2iTlNWTAEqHk",
+  "method": "Read-only Scribe transcription of already-paid original sound asset reveals underlying original-generation GCS MP3 source. Preserving source and session identifiers but not expiring signed access tokens.",
+  "note": "Source MP3 URLs were returned for eight originals, actual MP3 bytes not yet imported to GitHub. One Scribe request blocked by connector safety, do not re-synthesize it.",
+  "newSpeechCreditsSpent": 0,
+  "originalMp3sImportedThisAudit": 0,
+  "publicReleaseAuthorized": false,
+  "humanListeningApproved": false,
+  "originals": [
+    {
+      "generationId": "DX5z8FWaCS4FDx3KrloO",
+      "scribeSessionId": "H5P7IMCbi3u31zXqNewp",
+      "text": "In schāʾ Allāh – wenn Allah will – versuche es noch einmal. Denk in Ruhe nach!",
+      "signedSourceSeen": true
+    },
+    {
+      "generationId": "GvXeGQ9Kr1lVy7LEAv5T",
+      "scribeSessionId": "70SAi4kUfT2nhJYfJmQr",
+      "text": "Allāhumma bārik! O Allah, schenke Segen. Du hast richtig geantwortet!",
+      "signedSourceSeen": true
+    },
+    {
+      "generationId": "AToalNGbxiRe1zfOnDG3",
+      "scribeSessionId": "p5O5CrMBahE171P4zEvX",
+      "text": "Das merken wir uns: Wir dienen Allah allein.",
+      "signedSourceSeen": true
+    },
+    {
+      "generationId": "FGX65uXKWBnjULDxg3X1",
+      "scribeSessionId": "eZOpJeHyDX8l32MOscyo",
+      "text": "Schau, was du schon alles weißt.",
+      "signedSourceSeen": true
+    },
+    {
+      "generationId": "KIgCxJO3RDxhsIFJSYUB",
+      "scribeSessionId": "s0gCJfiqR06SL64rm5eT",
+      "text": "Ist Allah Einer?",
+      "signedSourceSeen": true
+    },
+    {
+      "generationId": "UUmC2fDiXaV5W1IQSumA",
+      "scribeSessionId": "gj6BHbpeBiBEq5Vyb3Pi",
+      "text": "Du darfst in Ruhe nachdenken. Wähle Ja, wenn du meinst, es stimmt. Sonst Nein.",
+      "signedSourceSeen": true
+    },
+    {
+      "generationId": "aoKJuahenrKHfUE5OD9j",
+      "scribeSessionId": "42kv5K4dxZsKVOSYYcEW",
+      "text": "Mā schāʾ Allāh! Möge Allah dein Wissen segnen. Du lernst immer mehr!",
+      "signedSourceSeen": true
+    },
+    {
+      "generationId": "1UAwmEQ77D4BmA9DttHZ",
+      "scribeSessionId": "9REwYI6EmTo4aWLycdcK",
+      "text": "Das merken wir uns: Sūrat al-Iḫlāṣ lehrt: Allah ist Einer.",
+      "signedSourceSeen": true
+    },
+    {
+      "generationId": "2xy9ZLej1wPTrnvAr9p7",
+      "signedSourceSeen": false,
+      "blockedReason": "The no-cost read-only Scribe request was blocked by safety checks; no replacement generated."
+    }
+  ]
+}
