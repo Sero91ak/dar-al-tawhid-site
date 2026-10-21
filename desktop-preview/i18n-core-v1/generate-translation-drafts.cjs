@@ -11,7 +11,7 @@ const LIVE=args.includes("--generate"),ROOT=path.resolve(arg("--root",path.join(
 const inventoryFile=path.resolve(arg("--inventory",path.join(__dirname,"translation-worklist.json")));
 const OUT=path.resolve(arg("--output",path.join(__dirname,"generated-drafts")));
 const MAX_CALLS=cap("--max-requests",1,20),MAX_SOURCE=cap("--max-source-chars",9000,14000),MAX_TOKENS=cap("--max-output-tokens",5000,8000);
-const LOCALE=arg("--locale","all"),ITEM=arg("--id",""),KIND=arg("--kind","");
+const LOCALE=arg("--locale","all"),ITEM=arg("--id",""),KIND=arg("--kind",""),SOURCE=arg("--source-path","");
 const LANGS={ar:"Arabic Fuṣḥā (العربية الفصحى)",en:"formal scholarly English",tr:"formal Turkish",ku:"Kurmancî Northern Kurdish",ckb:"Soranî Central Kurdish (RTL)",bs:"formal Bosnian"};
 if(LOCALE!=="all"&&!LANGS[LOCALE])throw Error("Unknown locale");
 const inv=JSON.parse(fs.readFileSync(inventoryFile,"utf8"));
@@ -34,7 +34,7 @@ function validate(item,locale,values){
  if(item.immutable?.sourceReviewBlocked)return "under source review";
  return null;
 }
-const selected=inv.queue.filter(q=>index.has(q.id)&&LANGS[q.locale]&&q.state!=="approved"&&q.state!=="blocked-source"&&(!ITEM||q.id===ITEM)&&(!KIND||q.kind===KIND)&&(LOCALE==="all"||q.locale===LOCALE)&&JSON.stringify(index.get(q.id).fields).length<=MAX_SOURCE).slice(0,MAX_CALLS);
+const selected=inv.queue.filter(q=>index.has(q.id)&&LANGS[q.locale]&&q.state!=="approved"&&q.state!=="blocked-source"&&(!ITEM||q.id===ITEM)&&(!KIND||q.kind===KIND)&&(!SOURCE||index.get(q.id).sourcePath===SOURCE)&&(LOCALE==="all"||q.locale===LOCALE)&&JSON.stringify(index.get(q.id).fields).length<=MAX_SOURCE).slice(0,MAX_CALLS);
 const report={mode:LIVE?"generate-drafts":"dry-run",selected:selected.map(x=>({id:x.id,locale:x.locale})),drafts:0,failures:[],model:LIVE?model:null,requestLimit:MAX_CALLS,sourceCharacterCap:MAX_SOURCE,outputTokenCap:MAX_TOKENS};
 if(!LIVE){console.log(JSON.stringify(report,null,2));process.exit(0)}
 const systemText=[
