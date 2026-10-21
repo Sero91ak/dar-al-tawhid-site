@@ -77,13 +77,33 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 else start();
 })();
 
-/* DAR_TEST_PRAYER_FIRST_V2: preserve existing prayer content and native scroller. */
+/* DAR_ADULT_HOME_PRAYER_FIRST_V4: the existing dynamic prayer hub is the first
+ * Home item. Remove only obsolete V4.7 lead and duplicated branding, leaving
+ * native document scroll and the Qur'an/player flows unchanged. */
 (function(){
+"use strict";
 if(/^\/(?:kids|test\/kids)(?:\/|$)/.test(location.pathname))return;
 var pending=false;
 function order(){
- if(!document.body||!document.body.classList.contains("is-home-route"))return;
- var h=document.querySelector(".top-shell .header"),p=h&&h.querySelector("#headerPrayerStatus");
+ var top=document.querySelector(".top-shell"),h=top&&top.querySelector(".header");
+ if(!h||!document.body)return;
+ if(!document.body.classList.contains("is-home-route")){
+  h.style.removeProperty("padding-top");
+  top.style.removeProperty("padding-top");
+  return;
+ }
+ if(!document.getElementById("darAdultBrandHeaderV2"))return;
+ h.querySelectorAll(".dar-v47-leadin,#darHomeV47Leadin").forEach(function(el){el.remove()});
+ var old=h.querySelector(".header-row--brand-only");
+ if(old){
+  old.hidden=true;old.setAttribute("aria-hidden","true");
+  if(old.style.getPropertyValue("display")!=="none")old.style.setProperty("display","none","important");
+  if(old.style.getPropertyValue("margin")!=="0px")old.style.setProperty("margin","0","important");
+  if(old.style.getPropertyValue("padding")!=="0px")old.style.setProperty("padding","0","important");
+ }
+ h.style.setProperty("padding-top","0","important");
+ top.style.setProperty("padding-top","0","important");
+ var p=h.querySelector("#headerPrayerStatus");
  if(p&&h.firstElementChild!==p)h.insertBefore(p,h.firstElementChild);
 }
 function schedule(){if(pending)return;pending=true;requestAnimationFrame(function(){pending=false;order();});}
