@@ -47,5 +47,13 @@
   ],
   "transferAttempt": 2,
   "importToolFix": "install_ffprobe_before_audio_verify",
-  "workflowActivation": "registered on main; run exactly once; original generation receipts preserved; no new TTS requests"
+  "workflowActivation": "registered on main; run exactly once; original generation receipts preserved; no new TTS requests",
+  "recovery": {
+    "method": "actions-download-artifact-only",
+    "sourceWorkflowRunId": 39688590926,
+    "sourceArtifactId": 12387413256,
+    "newElevenLabsCreditSpend": 0,
+    "retainSourceClipHashes": true,
+    "runBranch": "review/kids-v4-audio-safe-import-20261022"
+  }
 }
