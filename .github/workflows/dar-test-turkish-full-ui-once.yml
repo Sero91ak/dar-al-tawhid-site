@@ -31,6 +31,7 @@ jobs:
           node --check test/assets/dar-test-turkish-ui.js
           node --check test/i18n/generate-ui-tr.cjs
           node test/assets/dar-test-turkish-ui.test.cjs
+          node test/i18n/test-ui-generated-loader.cjs
       - name: Start local DAR TEST (no visitor release)
         shell: bash
         run: |
