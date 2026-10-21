@@ -8,7 +8,14 @@ var waiting=false;
 function home(){return !!(document.body&&document.body.classList.contains("is-home-route"))}
 function make(tag,cls,txt){var x=document.createElement(tag);x.className=cls;if(txt)x.textContent=txt;return x}
 function sync(){
- if(!home()){document.documentElement.classList.remove("dar-home-v47-layout");return}
+ if(!home()){
+  document.documentElement.classList.remove("dar-home-v47-layout");
+  var h=document.querySelector(".top-shell .header");
+  var top=document.querySelector(".top-shell");
+  if(h)h.style.removeProperty("padding-top");
+  if(top)top.style.removeProperty("padding-top");
+  return;
+ }
  var header=document.querySelector(".top-shell .header");
  var row=header&&header.querySelector(".header-row--brand-only");
  var prayer=document.getElementById("headerPrayerStatus");
