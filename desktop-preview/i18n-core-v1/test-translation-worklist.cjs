@@ -12,6 +12,8 @@ function generate(){
  return JSON.parse(fs.readFileSync(out,"utf8"));
 }
 try{
+ const initialCodes=["de","ar","en","tr","ku","ckb","bs"];
+ write("desktop-preview/i18n-core-v1/locales.json",{defaultLocale:"de",locales:Object.fromEntries(initialCodes.map(code=>[code,{name:code,dir:["ar","ckb"].includes(code)?"rtl":"ltr",messages:{}}]))});
  write("content/posts/posts-index.json",{files:[{name:"one.md"}]});
  write("content/posts/one.md",'---\nid: "one"\ntitle: "Tawḥīd"\nsource: "Qurʾān 51:56"\n---\n\nDeutscher Originaltext.');
  write("q/_registry/shortlinks.json",{links:[{number:47,title:"Q47",statementSummary:"Ein Nachweis",sourceLabel:"aṭ-Ṭabarī"}]});
@@ -41,5 +43,12 @@ try{
  write("content/posts/one.md",'---\nid: "one"\ntitle: "Tawḥīd"\nsource: "Qurʾān 51:56"\n---\n\nEin erneuter Originaltext.');
  const stale=generate();assert.equal(stale.items.find(x=>x.id===q.id).languages.ar.state,"stale");
  assert.equal(stale.summary.byState.approved,0);
- console.log("PASS: six content types, 36 locale tasks, stable SHA, changed-source invalidation, Arabic original, transliteration, quiz index and reviewed approval.");
+ const catalog=JSON.parse(fs.readFileSync(path.join(dir,"desktop-preview/i18n-core-v1/locales.json"),"utf8"));
+ catalog.locales.fr={name:"Français",dir:"ltr",messages:{}};
+ write("desktop-preview/i18n-core-v1/locales.json",catalog);
+ const expanded=generate();
+ assert(expanded.locales.includes("fr"));
+ assert.equal(expanded.summary.translationTasks,63);
+ assert.equal(expanded.queue.filter(x=>x.locale==="fr").length,9);
+ console.log("PASS: nine canonical content records, 7→8 dynamic languages, stable SHA, stale review invalidation, immutable Arabic/quiz fields.");
 }catch(e){console.error(e);process.exitCode=1}finally{fs.rmSync(dir,{recursive:true,force:true})}
