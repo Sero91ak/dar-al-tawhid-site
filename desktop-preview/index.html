@@ -3600,19 +3600,53 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
    out.innerHTML=(pRows.length?'<div class="real-posts">'+pRows.map(renderPostEntry).join("")+'</div>':'')+'<div class="section" style="padding-bottom:0"><div class="section-head"><h2>Werke</h2><p>'+bRows.length+' passende Quellenwerke</p></div><div class="source-work-list">'+bRows.map(renderSourceWork).join("")+'</div></div>'
   }).catch(function(){out.innerHTML='<div class="loading-line">Thema konnte gerade nicht geladen werden.</div>'})
  }
+
  function initSearchReal(){
   var input=document.getElementById("siteSearch"),out=document.getElementById("searchResults");if(!input||!out)return;
   input.value=new URLSearchParams(location.search).get("q")||"";
-  Promise.all([loadRealPosts(),jget("/content/duas/duas.json"),jget("/data/library-publications.json"),jget("/data/prophets/index.json"),jget("/data/frauen-bereiche-index.json")]).then(function(all){
-   var items=[];
-   all[0].forEach(function(x){items.push({type:"Beitrag",title:x.title,sub:x.speaker||x.category,url:postHref(x),page:"beitrag"})});
-   (all[1]||[]).slice(0,120).forEach(function(x){items.push({type:"Duʿāʾ",title:x.title,sub:x.cat,url:p("dua","id="+encodeURIComponent(x.id)),page:"dua"})});
-   (all[2].publications||[]).forEach(function(x){items.push({type:"Bibliothek",title:x.title,sub:x.category,url:p("werk","id="+encodeURIComponent(x.id)+"&kind=publication"),page:"werk"})});
-   (all[3].prophets||[]).filter(function(x){return x.profileStatus==="approved"}).forEach(function(x){items.push({type:"Prophet",title:x.name,sub:x.people||"Profil",url:p("propheten","id="+encodeURIComponent(x.id)),page:"propheten"})});
-   (all[4].bereiche||[]).filter(function(x){return x.status==="aktiv"&&x.sichtbareEintraege>0}).forEach(function(x){items.push({type:"Frauen",title:x.titel,sub:x.untertitel,url:p("frauen","cat="+encodeURIComponent(x.kennung)),page:"frauen"})});
-   function paint(){var term=input.value.trim().toLowerCase(),rows=items.filter(function(x){return !term||(x.title+" "+x.sub+" "+x.type).toLowerCase().indexOf(term)>=0}).slice(0,30);out.innerHTML=rows.map(function(x){return '<a class="list-row desktop-link" data-page="'+x.page+'" href="'+x.url+'"><span class="meta">'+escBook(x.type)+'</span><strong>'+escBook(x.title)+'</strong><small>'+escBook(x.sub||"Öffnen")+'</small></a>'}).join("")||'<div class="loading-line">Keine Treffer.</div>'}
-   input.oninput=paint;paint()
-  }).catch(function(){out.innerHTML='<div class="loading-line">Suche konnte gerade nicht geladen werden.</div>'})
+  var data=realData||{},items=[];
+  function add(type,title,fields,page,extra,category){
+   if(!title||!page)return;
+   items.push({type:type,title:String(title),fields:(fields||[]).filter(Boolean).map(String),
+     page:page,extra:extra||"",category:category||""});
+  }
+  (data.posts||[]).forEach(function(x){
+   add("Beitrag",cleanTitle(x.title),[x.title,x.category,x.topic,x.speaker,x.reference,x.work,x.body],"beitrag","id="+encodeURIComponent(x.id),x.category);
+  });
+  (data.duas||[]).forEach(function(x){
+   add("Duʿāʾ",x.title,[x.title,x.category,x.occasion,x.german,x.source],"dua","id="+encodeURIComponent(x.id),x.category);
+  });
+  (data.publications||[]).forEach(function(x){
+   add("Bibliothek",x.title,[x.title,x.category,x.topic,x.description,x.subtitle],"werk","type=pub&id="+encodeURIComponent(x.id),x.category);
+  });
+  (data.quiz||[]).forEach(function(x){
+   add("Quiz",x.question,[x.question,x.topic,x.category,x.explanation,x.source].concat(Array.isArray(x.answers)?x.answers:[]),"quiz","",x.category);
+  });
+  (data.books||[]).forEach(function(x){
+   add("Buch",x.title,[x.title,x.category,x.author,x.description,x.topic],"bibliothek","",x.category);
+  });
+  (data.prophets||[]).forEach(function(x){
+   add("Propheten",x.name,[x.name,x.people,x.roles?.join(" ")],"propheten","id="+encodeURIComponent(x.id),"");
+  });
+  (data.womenAreas||[]).forEach(function(x){
+   add("Frauenbereich",x.titel,[x.titel,x.untertitel,x.kennung],"frauen","cat="+encodeURIComponent(x.kennung),"");
+  });
+  function paint(){
+   var term=input.value.trim(),skip=new Set("was wie wer wo ist sind ein eine der die das den dem des und oder ich mir über für zum zur erkläre erklären bedeutung islam frage bitte kannst du how what does mean in the an a of".split(" "));
+   var tokens=searchFold(term).split(" ").filter(function(t){return t.length>1&&!skip.has(t)}).join(" ");
+   var q=tokens||term,found=!term?items.slice(0,40):items.filter(function(row){return smartMatch([row.title].concat(row.fields),q)});
+   found=found.slice(0,45);
+   out.replaceChildren();
+   if(!found.length){var empty=document.createElement("p");empty.className="loading-line";empty.textContent="Für diese Frage ist in den derzeit durchsuchbaren Website-Inhalten keine passende Fundstelle vorhanden.";out.appendChild(empty);return}
+   found.forEach(function(row){
+    var a=document.createElement("a");a.className="list-row desktop-link";a.dataset.page=row.page;a.href=p(row.page,row.extra);
+    var kind=document.createElement("span");kind.className="meta";kind.textContent=row.type;
+    var title=document.createElement("strong");title.textContent=row.title;
+    var sub=document.createElement("small");sub.textContent=row.category||"Quelle öffnen";
+    a.append(kind,title,sub);out.appendChild(a);
+   })
+  }
+  input.oninput=paint;paint();
  }
  function initRealPage(key){
   if(key==="beitraege")initRealPosts();
