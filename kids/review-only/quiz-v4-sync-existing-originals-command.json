@@ -27,7 +27,7 @@
   "ownerPronunciationHoldManifest": "kids/data/quiz-v4-owner-pronunciation-hold-20261021.json",
   "requireQuarantineOfRejectedOriginals": 7,
   "requireNoPriorPaidTextRegeneration": true,
-  "latestPurpose": "Assemble 450 V4 quiz reviews from 1718 originals including two reuse-verified native Arabic Fusha formulas and 25 owner dictionary German connectors; zero credit",
+  "latestPurpose": "Zero-credit rebuild all 450 V4 quiz question audio with 1743 verified original MP3s after wave02, preserving owner quarantine",
   "accountForSevenOwnerPronunciationHolds": true,
   "strictReportAndStagingCoverageAgreement": true,
   "progressQuarantineFixCommit": "283a1480910401351545df67f8552b8d59077655",
@@ -36,5 +36,10 @@
   "atomicPaidReceiptImportCommit": "43a31c7bb4e56913655701c6624504db924b92c5",
   "zeroCreditNativeMixAssemblyEnabled": true,
   "nativelyVocalizedArabicSources": 2,
-  "previousOwnerPronunciationQuarantineProtected": true
+  "previousOwnerPronunciationQuarantineProtected": true,
+  "registeredOriginalsAsOfWave02": 1743,
+  "paidAudioRequestsAllowed": false,
+  "quarantinedUserPronunciationOriginals": 7,
+  "requireRealFourPartAudioAndMP3ShaBeforeCompletion": true,
+  "wave02OldPaidReceiptsNeverRerecord": true
 }
