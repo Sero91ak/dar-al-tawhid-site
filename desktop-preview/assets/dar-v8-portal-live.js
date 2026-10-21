@@ -163,6 +163,7 @@ function initChat(){
 }
 let bookMode="book";
 function initQuran(){
+ const launch=d.getElementById("darV8QuranAudioLaunch");if(launch)launch.onclick=()=>togglePlayer(true);
  const input=d.getElementById("bookQuranSearch"),host=d.getElementById("bookShell");
  if(!input||!host)return;
  let results=d.getElementById("darV8GlobalQuranResults");
@@ -278,6 +279,19 @@ function installPlayer(){
  const close=d.createElement("button");close.id="darV8PlayerBackdrop";close.type="button";close.className="dar-v8-player-backdrop";close.setAttribute("aria-label","Player schließen");close.addEventListener("click",()=>togglePlayer(false));d.body.append(close);
 }
 let v8VisibleViewportBound=false,v8ActivePicker=null,v8PickerListenersBound=false;
+
+let v8NoPinchGuardInstalled=false;
+function installMobileGestureGuard(){
+ if(v8NoPinchGuardInstalled||!w.matchMedia?.("(pointer:coarse)").matches)return;
+ v8NoPinchGuardInstalled=true;
+ // iOS WebKit can still permit gesture scaling in embedded browsers despite meta viewport.
+ // Stop multitouch zoom but preserve one-finger vertical scrolling and every input control.
+ const guard=e=>{if(e.cancelable)e.preventDefault()};
+ d.addEventListener("gesturestart",guard,{passive:false});
+ d.addEventListener("gesturechange",guard,{passive:false});
+ d.addEventListener("touchmove",e=>{if(e.touches?.length>1&&e.cancelable)e.preventDefault()},{passive:false});
+}
+
 function syncVisualViewport(){
  const height=Math.round(w.visualViewport?.height||w.innerHeight);
  if(height>0)d.documentElement.style.setProperty("--v8-visible-height",height+"px");
@@ -357,10 +371,50 @@ function updateLocaleNotice(){
 }
 w.addEventListener("dar-v8-locale-changed",updateLocaleNotice);
 
+
+/* Home has editorial content only; product ads/install panels belong in Mehr > Downloads.
+   This applies to delayed legacy promotional widgets as well as server-inserted cards. */
+let v8HomePromoObserver=null,v8HomePromoQueued=false;
+function removeRedundantHomePromo(){
+ if(d.body.dataset.darV8Route!=="start")return;
+ const candidates=[...d.querySelectorAll("aside,article,section")].filter(node=>{
+  const content=(node.textContent||"").replace(/\s+/g," ");
+  return content.length<1400&&/DĀR AL TAWḤĪD für iPhone\s*(?:&|und)\s*iPad/i.test(content)
+    &&node.querySelector('a[href*="apps.apple.com"]');
+ });
+ candidates.sort((a,b)=>(a.textContent||"").length-(b.textContent||"").length);
+ for(const node of candidates){
+  if(!node.isConnected)return;
+  if(node.closest("#darV8MoreSheet")||node.closest('[data-dar-v8-route="mehr"]'))continue;
+  node.remove();
+ }
+}
+function setupHomePromoCleanup(){
+ if(!v8HomePromoObserver){
+  v8HomePromoObserver=new MutationObserver(()=>{
+   if(d.body.dataset.darV8Route!=="start"||v8HomePromoQueued)return;
+   v8HomePromoQueued=true;
+   requestAnimationFrame(()=>{v8HomePromoQueued=false;removeRedundantHomePromo()});
+  });
+  v8HomePromoObserver.observe(d.body,{subtree:true,childList:true});
+ }
+ removeRedundantHomePromo();
+}
+/* Side effects must stay on the active page. No stale media or controls retained. */
+function syncV8Route(){
+ const key=d.body.dataset.darV8Route;
+ const isReader=key==="quran";
+ const player=d.querySelector(".v8-real-player");
+ if(player){
+  player.classList.toggle("dar-v8-audio-reader-route",isReader);
+  player.setAttribute("aria-label","Qurʾān-Rezitation");
+ }
+ if(key==="start")setupHomePromoCleanup();
+}
+
 function init(key){
  if(currentPage && currentPage!==key){closePicker();if(d.body.classList.contains("dar-v8-player-fullscreen"))togglePlayer(false)}
- currentPage=key;setupLanguages();installPlayer();setupVisualViewport();setupTouchPlayerPicker();colorLocale();updateLocaleNotice();
- colorLocale();
+ currentPage=key;setupLanguages();installPlayer();setupVisualViewport();installMobileGestureGuard();setupTouchPlayerPicker();colorLocale();updateLocaleNotice();syncV8Route();
  if(key==="suche")initChat();
  if(key==="quran")initQuran();
  if(key==="einstellungen")settings();
