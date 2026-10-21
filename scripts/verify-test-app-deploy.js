@@ -260,9 +260,9 @@ async function fetchVersionBuild(base) {
     let ok = false;
     for (let attempt = 1; attempt <= 5; attempt++) {
       const shell = await fetchText(base + "/index.html?dhp-capsules-v53=" + Date.now());
-      const runtime = await fetchText(base + "/assets/dar-home-html-parity-v1.js?v=20261021-v53-footer-flow");
+      const runtime = await fetchText(base + "/assets/dar-home-html-parity-v1.js?v=20261021-v54-prayer-first");
       const linked = shell.status === 200 &&
-        shell.text.includes("/test/assets/dar-home-html-parity-v1.js?v=20261021-v53-footer-flow");
+        shell.text.includes("/test/assets/dar-home-html-parity-v1.js?v=20261021-v54-prayer-first");
       const checks = [
         "DAR_TEST_HOME_ELEGANT_CAPSULE_V52",
         "DAR_TEST_LAST_ROW_FOOTER_FLOW_V53",
@@ -416,7 +416,7 @@ async function fetchVersionBuild(base) {
     for(let attempt=1;attempt<=5;attempt++){
       try{
         const shell=await fetchText(base+"/?parity-v1368="+Date.now());
-        const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261021-v53-footer-flow");
+        const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261021-v54-prayer-first");
         const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"')&&shell.text.includes("v53-footer-flow");
         const source=js.text||"";
         const sequence=source.indexOf('class="dhp-welcome"')>=0
@@ -427,6 +427,12 @@ async function fetchVersionBuild(base) {
           &&source.includes("dhp-search-pill")
           &&source.includes("dhp-results-head")
           &&source.includes("dhp-today-stack")
+          // Require the actual home parity renderer to begin with prayer, NOT
+          // the historic second logo + title. Builds alone cannot prove this.
+          &&source.includes("DAR_TEST_HOME_PRAYER_FIRST_ACTUAL_V54")
+          &&!source.includes('<div class="dhp-brand">')
+          &&!source.includes("Wissen · Überlieferung · Erkenntnis")
+          &&source.includes("'<button type=\\"button\\" class=\\"dhp-prayer\\"'")
           &&source.includes("wasiyyah.png")
           &&source.includes("quran-player")
           &&sequence;
