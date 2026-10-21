@@ -73,3 +73,14 @@ jobs:
           sleep 3
       - name: Verify all language pickers and RTL in Chromium
         run: python3 test/i18n/test-seven-browser-smoke.py
+
+      - name: Capture 15 DAR TEST section UI inventories
+        run: python3 test/i18n/capture-visible-ui.py
+      - name: Archive QA-only untranslated UI candidate inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-test-seven-section-ui-candidates
+          path: test/i18n/qa/ui-candidates.json
+          if-no-files-found: ignore
+          retention-days: 7
