@@ -7,5 +7,8 @@
   "paidSynthesisRequested": 0,
   "outputBranch": "review/kids-v4-nine-originals-imported-20261022",
   "humanListeningApproved": false,
-  "liveReleaseAuthorized": false
+  "liveReleaseAuthorized": false,
+  "attempt": 2,
+  "outputBranchPrecreatedViaGitHubConnector": true,
+  "retryReason": "Prior GitHub Actions token cannot create a new branch containing workflow files; destination branch now precreated by authorized GitHub connector; no MP3 resynthesis"
 }
