@@ -12,7 +12,7 @@ concurrency:
   cancel-in-progress: false
 jobs:
   import-six-existing:
-    if: github.event.head_commit.message == 'audio(kids review): import six existing V4 originals - trigger'
+    if: "github.event.head_commit.message == 'audio(kids review): import six existing V4 originals - trigger'"
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
