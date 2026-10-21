@@ -242,6 +242,10 @@ function rebuildHadith() {
   if (fs.existsSync(path.join(ssDir, "entries-index.json"))) {
     const idx = JSON.parse(fs.readFileSync(path.join(ssDir, "entries-index.json"), "utf8"));
     idx.totalVerifiedEntries = allRecords.length;
+    // The index MUST reference displayable records, not the rotation rules.
+    idx.files = [{ path: "../hadith/library-shell.json", count: allRecords.length }];
+    idx.sourceCollectionKey = "records";
+    idx.rotationConfigPath = "rotation.json";
     writeJson(path.join(ssDir, "entries-index.json"), idx, true);
   }
 
