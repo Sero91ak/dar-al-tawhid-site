@@ -6,8 +6,16 @@
 if(global.DarAdultCentralContent)return;
 const KEY="darAdultPreferredLocaleV1",BASE="/content/i18n/published";
 const KINDS=new Set(["post","qsource","hadith","dua","quiz","learning"]);
-const NOTICE="Türkçe çeviri henüz onaylanmadı. Almanca asıl metin gösteriliyor.";
-function locale(){try{return global.localStorage?.getItem(KEY)==="tr"?"tr":"de"}catch(_){return"de"}}
+const SUPPORTED=new Set(["de","tr","en","ar","ku","ckb","bs"]);
+const NOTICES={
+ tr:"Türkçe çeviri henüz onaylanmadı. Almanca asıl metin gösteriliyor.",
+ en:"This translation has not yet been approved. The German original is displayed.",
+ ar:"لم تُعتمد هذه الترجمة بعد. يُعرض النص الألماني الأصلي.",
+ ku:"Ev werger hê nehatiye pejirandin. Nivîsa eslî ya almanî tê nîşandan.",
+ ckb:"ئەم وەرگێڕانە هێشتا پەسەند نەکراوە. دەقی ئەڵمانیی ڕەسەن نیشان دەدرێت.",
+ bs:"Ovaj prijevod još nije odobren. Prikazuje se njemački izvornik."
+};
+function locale(){try{const v=global.localStorage?.getItem(KEY);return SUPPORTED.has(v)?v:"de"}catch(_){return"de"}}
 function create(opts={}){
  const fetcher=opts.fetcher||global.fetch?.bind(global);
  const subtle=opts.subtle||global.crypto?.subtle;
@@ -30,15 +38,16 @@ function create(opts={}){
   const result=await subtle.digest("SHA-256",bytes);
   return [...new Uint8Array(result)].map(x=>x.toString(16).padStart(2,"0")).join("");
  }
- function fallback(id,original,reason){
-  return {id,requestedLocale:locale(),displayLocale:"de",status:reason,
-   pending:locale()==="tr",notice:locale()==="tr"?NOTICE:"",fields:original?.fields||{},
-   immutable:original?.immutable||{}};
+ function fallback(id,original,reason,requestedLocale=locale()){
+  return {id,requestedLocale,displayLocale:"de",status:reason,
+   pending:requestedLocale!=="de",notice:NOTICES[requestedLocale]||"",
+   fields:original?.fields||{},immutable:original?.immutable||{}};
  }
- async function manifest(){
+ async function manifest(selectedLocale=locale()){
+  if(!SUPPORTED.has(selectedLocale)||selectedLocale==="de")return null;
   try{
-   const m=await once(BASE+"/tr/manifest.json");
-   if(m?.schemaVersion!==1||m.locale!=="tr"||m.originalLocale!=="de"||
+   const m=await once(BASE+"/"+selectedLocale+"/manifest.json");
+   if(m?.schemaVersion!==1||m.locale!==selectedLocale||m.originalLocale!=="de"||
       m.onlyApproved!==true||m.scope!=="adult-only"||!m.records||
       typeof m.records!=="object"||Array.isArray(m.records))return null;
    return m;
@@ -52,9 +61,10 @@ function create(opts={}){
     Array.isArray(o)&&Array.isArray(v)&&v.length===o.length&&v.every(x=>typeof x==="string"&&!!x.trim());
   });
  }
- async function available(kind,id){
-  if(!KINDS.has(kind)||typeof id!=="string"||!id.startsWith(kind+":"))return false;
-  const m=await manifest();
+ async function available(kind,id,selectedLocale=locale()){
+  if(!KINDS.has(kind)||typeof id!=="string"||!id.startsWith(kind+":")||
+     !SUPPORTED.has(selectedLocale)||selectedLocale==="de")return false;
+  const m=await manifest(selectedLocale);
   return !!(m&&m.records[id]&&m.records[id].kind===kind);
  }
  async function resolve(kind,id,original,selectedLocale=locale()){
@@ -64,23 +74,24 @@ function create(opts={}){
   const german={fields:original.fields,immutable:original.immutable};
   const plain={id,requestedLocale:selectedLocale,displayLocale:"de",pending:false,status:"original",
    fields:german.fields,immutable:german.immutable,notice:""};
-  if(selectedLocale!=="tr")return plain;
-  const m=await manifest(),entry=m?.records?.[id];
-  if(!entry||entry.kind!==kind)return {...fallback(id,german,"awaiting-review"),requestedLocale:"tr",pending:true};
+  if(selectedLocale==="de")return plain;
+  if(!SUPPORTED.has(selectedLocale))throw Error("Unsupported target locale");
+  const m=await manifest(selectedLocale),entry=m?.records?.[id];
+  if(!entry||entry.kind!==kind)return fallback(id,german,"awaiting-review",selectedLocale);
   const currentHash=await hash(german);
-  if(currentHash!==entry.sourceHash)return {...fallback(id,german,"stale-source"),requestedLocale:"tr",pending:true};
+  if(currentHash!==entry.sourceHash)return fallback(id,german,"stale-source",selectedLocale);
   const suffix=(await hash(id)).slice(0,10);
   const safe=id.slice(kind.length+1).replace(/[^a-zA-Z0-9._-]/g,"-").slice(0,110);
-  const expected="tr/"+kind+"/"+safe+"-"+suffix+".json";
-  if(entry.path!==expected)return {...fallback(id,german,"invalid-path"),requestedLocale:"tr",pending:true};
+  const expected=selectedLocale+"/"+kind+"/"+safe+"-"+suffix+".json";
+  if(entry.path!==expected)return fallback(id,german,"invalid-path",selectedLocale);
   let doc;
-  try{doc=await once(BASE+"/"+expected)}catch(_){return {...fallback(id,german,"missing-translation"),requestedLocale:"tr",pending:true}}
-  if(doc?.id!==id||doc?.kind!==kind||doc.locale!=="tr"||
+  try{doc=await once(BASE+"/"+expected)}catch(_){return fallback(id,german,"missing-translation",selectedLocale)}
+  if(doc?.id!==id||doc?.kind!==kind||doc.locale!==selectedLocale||
      doc.sourceHash!==currentHash||doc.status!=="approved"||
      !fieldsMatch(original.fields,doc.fields)||
      JSON.stringify(doc.immutable)!==JSON.stringify(original.immutable))
-    return {...fallback(id,german,"invalid-translation"),requestedLocale:"tr",pending:true};
-  return {id,requestedLocale:"tr",displayLocale:"tr",pending:false,status:"approved",
+    return fallback(id,german,"invalid-translation",selectedLocale);
+  return {id,requestedLocale:selectedLocale,displayLocale:selectedLocale,pending:false,status:"approved",
    fields:doc.fields,immutable:german.immutable,sourceHash:currentHash};
  }
  const catalogueCache=new Map();
