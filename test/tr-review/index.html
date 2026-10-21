@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><title>DĀR AL TAWḤĪD · Türkisch-Prüfbereich · DAR TEST</title>
+<style>
+:root{color-scheme:dark;--bg:#0c1716;--card:#122521;--gold:#e0c994;--line:#82735455;--ink:#edf0e8;--muted:#b9c6bb}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 15% 0%,#1c3e33,transparent 38%),var(--bg);color:var(--ink);font:15px/1.7 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1160px;margin:auto;padding:calc(28px + env(safe-area-inset-top)) 18px 65px}
+a{color:var(--gold)}.brand{font-size:12px;letter-spacing:.16em;font-weight:750;color:var(--gold)}
+h1{font-family:Georgia,serif;font-size:clamp(28px,5vw,43px);font-weight:500;line-height:1.2;margin:14px 0 12px}.lead{color:var(--muted);max-width:800px}
+.rule{height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:24px 0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:20px}
+article{background:linear-gradient(145deg,#18342e,#10201d);border:1px solid var(--line);border-radius:18px;padding:24px;min-width:0}
+header{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
+.pill{border:1px solid #d5b57388;border-radius:100px;color:var(--gold);font-size:11px;letter-spacing:.04em;padding:5px 11px}
+h2{font-size:23px;line-height:1.32;font-weight:620;margin:18px 0;color:#fff9e9}
+.body{white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.9}
+.meta{font-size:12px;color:var(--muted);overflow-wrap:anywhere}
+.error{color:#f4c1b9}.foot{margin:22px 0;font-size:12px;color:var(--muted)}
+@media(max-width:760px){.grid{grid-template-columns:1fr}article{padding:18px}}
+</style></head><body><main>
+<a href="/test/">← Zurück zu DAR TEST</a>
+<p class="brand">DĀR AL TAWḤĪD · EDITORIAL LAB</p>
+<h1>Deutsch · Türkçe</h1>
+<p class="lead">Vergleichsansicht eines kanonischen deutschen Beitrags und seiner einmalig mit OpenAI erzeugten türkischen Fassung. <strong>Der türkische Text ist ein ungeprüfter Entwurf</strong> und wird nicht als veröffentlichte Übersetzung ausgeliefert.</p>
+<div class="rule" role="presentation"></div>
+<div class="grid">
+<article lang="de"><header><span>Deutsches Original</span><span class="pill">KANONISCH</span></header><h2 id="deTitle">Original wird geladen …</h2><div id="deBody" class="body"></div></article>
+<article lang="tr"><header><span>Türkçe · OpenAI GPT-4.1</span><span class="pill">ENTWURF · NICHT FREIGEGEBEN</span></header><h2 id="trTitle">Taslak yükleniyor …</h2><div id="trBody" class="body"></div></article>
+</div>
+<p class="foot" id="status" role="status">Originalquellen und Freigabe werden geprüft …</p>
+<p class="meta">Vor einer Freigabe: Sprachprüfung, islamwissenschaftliche Quellenprüfung, Abgleich der deutschen Revision und unveränderliche arabische Originaltexte. Die Übersetzung wird erst nach der Prüfentscheidung in ein freigegebenes Sprachpaket aufgenommen.</p>
+</main><script>
+"use strict";
+(async()=>{
+ const originalPath="/content/posts/hasan-al-basri-selbstpruefung-20261021-481.md";
+ const draftPath="/desktop-preview/i18n-core-v1/translations/tr/post/hasan-al-basri-selbstpruefung-20261021-481-9b9306807c.json";
+ const status=document.getElementById("status");
+ try{
+  const [sourceResponse,draftResponse]=await Promise.all([fetch(originalPath,{cache:"no-store"}),fetch(draftPath,{cache:"no-store"})]);
+  if(!sourceResponse.ok||!draftResponse.ok)throw Error("Die Original- oder Entwurfsdatei ist nicht verfügbar.");
+  const [raw,draft]=await Promise.all([sourceResponse.text(),draftResponse.json()]);
+  const m=raw.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
+  if(!m)throw Error("Deutsche Quellenmetadaten fehlen.");
+  const meta=Object.fromEntries(m[1].split(/\r?\n/).map(line=>line.match(/^([A-Za-z_][\w-]*):\s*(.+)$/)).filter(Boolean).map(a=>[a[1],a[2].replace(/^["']|["']$/g,"")]));
+  if(draft.id!=="post:"+meta.id||draft.locale!=="tr"||draft.status!=="draft"||draft.reviewer!==null||!draft.fields?.title||!draft.fields?.body||draft.sourcePath!==originalPath.slice(1))throw Error("Entwurf passt nicht eindeutig zum Original.");
+  document.getElementById("deTitle").textContent=meta.title;
+  document.getElementById("deBody").textContent=raw.slice(m[0].length).trim();
+  document.getElementById("trTitle").textContent=draft.fields.title;
+  document.getElementById("trBody").textContent=draft.fields.body;
+  status.textContent="Prüfentwurf gespeichert · "+String(draft.model||"OpenAI")+" · "+Number(draft.modelUsage?.total_tokens||0)+" Tokens · Quellenverweis: "+String(meta.source||"in Originaldatei")+" · Keine Besucherfreigabe";
+ }catch(e){status.textContent="Lade- oder Prüfproblem: "+e.message;status.classList.add("error")}
+})();
+</script></body></html>
