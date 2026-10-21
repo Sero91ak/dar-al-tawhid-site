@@ -1,0 +1,84 @@
+name: KIDS V4 Replay Nine Genuine Prepaid MP3s From Immutable Artifact
+on:
+  push:
+    branches:
+      - review/kids-v4-nine-prepaid-artifact-replay-20261022
+    paths:
+      - kids/review-only/nine-prepaid-originals-artifact-replay-trigger.json
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: kids-v4-nine-prepaid-artifact-one-output-20261022
+  cancel-in-progress: false
+jobs:
+  immutable-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-v4-nine-prepaid-artifact-replay-20261022
+          fetch-depth: 1
+      - name: Retrieve original nine paid MP3s preserved after Git conflict
+        uses: actions/download-artifact@v4
+        with:
+          name: kids-v4-nine-previously-paid-original-mp3s
+          run-id: 39691062111
+          github-token: ${{ github.token }}
+          path: kids-nine-backup
+      - name: Verify actual audio decoder
+        run: |
+          if ! command -v ffprobe >/dev/null; then
+            sudo apt-get -o Acquire::Retries=1 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+      - name: Verify and copy previously paid source MP3s by generation ID, no synthesis
+        run: |
+          set -euo pipefail
+          test -f kids-nine-backup/assets/kids-quiz-audio/v4-paid-flow-original-review/DX5z8FWaCS4FDx3KrloO.mp3
+          python3 kids/tools/import_quiz_v4_prepaid_flow_originals.py --directory kids-nine-backup/assets/kids-quiz-audio/v4-paid-flow-original-review
+          python3 - <<'PY'
+          import json
+          j=json.load(open("kids/data/quiz-v4-paid-flow-import-status.json"))
+          assert j["importedPriorPaidGenerations"]==56,j
+          assert j["remainingPriorPaidGenerations"]==0,j
+          assert not j["livePublicationAllowed"]
+          print("ORIGINAL 56/56 PAID V4 RECORDINGS PRESERVED. No ElevenLabs TTS.")
+          PY
+      - name: Reassemble four original V4 audio parts for all age bands
+        run: |
+          set -euo pipefail
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+      - name: Commit and publish to new unique output branch, no competing writers
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-nine-paid-artifact-replay
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git rm -f kids/review-only/quiz-v4-nine-prepaid-scribe-source-20261022.json || true
+          git rm -f kids/review-only/nine-prepaid-originals-artifact-replay-trigger.json
+          git add kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-450-original-clip-registry.json kids/data/quiz-v4-paid-flow-import-status.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git commit -m "audio(kids review): genuinely recover all 9 paid originals and stage 80 blocked questions"
+          git push origin HEAD:refs/heads/review/kids-v4-nine-originals-imported-20261022
+      - name: Backup nine original MP3s and review audio assignments
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-nine-prepaid-replay-output-originals
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/assets/kids-quiz-audio/v4-paid-flow-original-review/
+            kids/data/quiz-v4-paid-flow-import-status.json
+            kids/data/quiz-v4-first150-audio-status.json
+            kids/data/quiz-v4-450-production-status.json
