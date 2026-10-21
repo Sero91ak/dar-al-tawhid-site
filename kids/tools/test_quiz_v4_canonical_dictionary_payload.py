@@ -29,6 +29,15 @@ def main():
     # Never charge a second take for these exact words during bulk production.
     for spoken in ("Wir machen ʿIbādah.", "Ḥalāl und Ḥarām.", "Ḥarām."):
         assert t.source_requires_separate_pronunciation_approval(spoken), spoken
+    # The owner rejected Quran/Fuṣḥā pronunciation on 2026-10-21.
+    # A model label and German transliteration PLS cannot validate phonetics.
+    for spoken in (
+        "Der Qurʾān lehrt den Īmān.",
+        "Welche Sūrah ist das?",
+        "Was bedeutet Āyah?",
+        "الْقُرْآنُ وَالْإِيمَانُ.",
+    ):
+        assert t.source_requires_separate_pronunciation_approval(spoken), spoken
     assert not t.source_requires_separate_pronunciation_approval("Wie viele Gebete gibt es?")
     english=t.build_canonical_v4_payload("Der Qurʾān lehrt den Īmān.",language="de")
     assert english=={
@@ -64,49 +73,71 @@ def main():
     must_fail(lambda:t.build_canonical_v4_payload("الْقُرْآنُ",language="de"),"V4_GERMAN_SOURCE_CONTAINS_ARABIC")
     must_fail(lambda:t.build_canonical_v4_payload("القرآن",language="ar"),"V4_FUSHA")
     must_fail(lambda:t.build_canonical_v4_payload("Iman.",language="ar"),"V4_FUSHA")
-    # Prove the REAL outgoing HTTP request (not merely an unused helper)
-    # includes the correct dictionary+version, even in the paid code path.
-    # The HTTP transport is mocked: ZERO credits, no network calls.
+    # Safely intercept every transport attempt: no real provider request or fee.
+    # The CANONICAL 10099-rule payload check is separate from auditory quality.
     prior_hold=t.PRONUNCIATION_HOLD
     prior_urlopen=t.urllib.request.urlopen
-    prior_sample=os.environ.get('KIDS_V4_STAGE1_SAMPLE_ONLY')
+    prior_sample=os.environ.get("KIDS_V4_STAGE1_SAMPLE_ONLY")
     try:
         with tempfile.TemporaryDirectory() as folder:
-            h=Path(folder)/"hold.json"
-            h.write_text(json.dumps({"productionPaused":True,"dictionaryProviderVerified":False,"ownerRestartAuthorized":False}))
-            t.PRONUNCIATION_HOLD=h
-            must_fail(lambda:t.original_mp3("NO_REAL_KEY","Der Qurʾān."),"PRONUNCIATION_HOLD")
-            h.write_text(json.dumps({"productionPaused":False,"dictionaryProviderVerified":True,"ownerRestartAuthorized":True,"authorizedNewOriginalsBeforeHearing":1,"humanListeningQualityGateReleased":False}))
-            os.environ['KIDS_V4_STAGE1_SAMPLE_ONLY']='YES'
+            hold=Path(folder)/"hold.json"
+            t.PRONUNCIATION_HOLD=hold
             calls=[]
             class PretendMp3:
                 status=200
-                headers={"Content-Type":"audio/mpeg","request-id":"TEST-FAKE-NOT-A-REAL-RECEIPT"}
+                headers={"Content-Type":"audio/mpeg","request-id":"FAKE-TEST"}
                 def __enter__(self):return self
-                def __exit__(self,*_args):return False
-                def read(self,_n):return b"ID3"+(b"x"*2000)
+                def __exit__(self,*args):return False
+                def read(self,n):return b"ID3"+b"x"*2000
             def intercept(request,**kwargs):
                 calls.append(request)
                 return PretendMp3()
             t.urllib.request.urlopen=intercept
-            audio,_=t.original_mp3("FAKE-TEST-KEY","Der Qurʾān lehrt den Īmān.")
+            # The REAL reviewer rejection is an absolute no-POST hold.
+            hold.write_text(json.dumps({
+                "productionPaused":True,"paidSpeechAuthorized":False,
+                "humanPronunciationApproved":False,
+                "dictionaryProviderVerified":True,
+                "ownerRestartAuthorized":False,
+            }),encoding="utf-8")
+            os.environ["KIDS_V4_STAGE1_SAMPLE_ONLY"]="YES"
+            must_fail(lambda:t.original_mp3("FAKE-KEY","Wie viele Gebete gibt es?"),
+                      "PRONUNCIATION_HOLD")
+            assert not calls, "paused production emitted a POST"
+            # Simulate a future, separately authorized pilot with all gates open;
+            # still block unapproved Quran/Arabic sources at the final paid call.
+            hold.write_text(json.dumps({
+                "productionPaused":False,"paidSpeechAuthorized":True,
+                "humanPronunciationApproved":True,
+                "dictionaryProviderVerified":True,
+                "ownerRestartAuthorized":True,
+                "authorizedNewOriginalsBeforeHearing":1,
+                "humanListeningQualityGateReleased":False,
+            }),encoding="utf-8")
+            for phrase,language in (
+                ("Der Qurʾān lehrt den Īmān.","de"),
+                ("الْقُرْآنُ وَالْإِيمَانُ.","ar"),
+            ):
+                must_fail(lambda p=phrase,l=language:t.original_mp3(
+                    "FAKE-KEY",p,language=l),
+                    "OWNER_PRONUNCIATION_SOURCE_REVIEW_REQUIRED")
+            assert not calls, "Quran/Arabic owner-held source emitted a POST"
+            # Harmless German speech remains testable only under a MOCK future approval.
+            safe="Wie viele Gebete gibt es?"
+            audio,_=t.original_mp3("FAKE-KEY",safe)
             assert audio.startswith(b"ID3") and len(calls)==1
             assert calls[0].get_method()=="POST"
             sent=json.loads(calls[0].data.decode("utf-8"))
-            assert sent==english and sent["language_code"]=="de"
-            assert sent["pronunciation_dictionary_locators"]==english["pronunciation_dictionary_locators"]
-            calls.clear()
-            t.original_mp3("FAKE-TEST-KEY","الْقُرْآنُ وَالْإِيمَانُ.",language="ar")
-            assert len(calls)==1
-            arabic_sent=json.loads(calls[0].data.decode("utf-8"))
-            assert arabic_sent==fusha and "pronunciation_dictionary_locators" not in arabic_sent
+            assert sent==t.build_canonical_v4_payload(safe,language="de")
+            assert sent["pronunciation_dictionary_locators"]==english[
+                "pronunciation_dictionary_locators"]
     finally:
         t.PRONUNCIATION_HOLD=prior_hold
         t.urllib.request.urlopen=prior_urlopen
         if prior_sample is None:
-            os.environ.pop('KIDS_V4_STAGE1_SAMPLE_ONLY',None)
+            os.environ.pop("KIDS_V4_STAGE1_SAMPLE_ONLY",None)
         else:
-            os.environ['KIDS_V4_STAGE1_SAMPLE_ONLY']=prior_sample
+            os.environ["KIDS_V4_STAGE1_SAMPLE_ONLY"]=prior_sample
     old=t.PRONUNCIATION
     try:
         with tempfile.TemporaryDirectory() as folder:
@@ -126,7 +157,7 @@ def main():
             must_fail(lambda:t.build_canonical_v4_payload("Der Qurʾān."),"V4_MASTER_PLS_RULE_COUNT_MISMATCH")
     finally:
         t.PRONUNCIATION=old
-    print("PASS_KIDS_V4_MASTER_10099_RULE_DICTIONARY_PAYLOAD; German Qurʾān/Īmān; exact owner Bismi/Schāʾ aliases; Arabic ﷺ blocked from German TTS; real HTTP mock; ZERO credits")
+    print("PASS_KIDS_V4_MASTER_DICTIONARY_CONFIG_AND_OWNER_QURAN_HOLD; no real TTS request; German aliases NOT counted as Fuṣḥā quality; ZERO credits")
 
 
 if __name__=="__main__":
