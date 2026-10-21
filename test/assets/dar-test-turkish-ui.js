@@ -340,6 +340,43 @@ function localizeGermanCalendarLabel(value,language){
 /* Locale-safe variable UI labels. Never parse or rewrite Qurʾān/ḥadīṯ texts.
  * A changing number is metadata; the fixed unit comes from the UI glossary.
  * This is intentionally restricted to complete short labels. */
+const DAR_UI_FORMATS={
+ tr:{
+  matched:n=>n+" kaynaklı ifade",names:n=>n+" ad ve ilişkilendirme",
+  surahs:n=>n+" sûre, Arapça metin ve okunuş",
+  duas:n=>n+" bilinen konuya göre dua",books:n=>n+" incelenmiş eser ve atıf yapılan âlim"
+ },
+ en:{
+  matched:n=>n+" statements with sources",names:n=>n+" names and associations",
+  surahs:n=>n+" surahs with Arabic and transliteration",
+  duas:n=>n+" known supplications by topic",books:n=>n+" verified works and cited scholars"
+ },
+ ar:{
+  matched:n=>n+" أقوال مع مصادرها",names:n=>n+" أسماء ونسب",
+  surahs:n=>n+" سور بالنص العربي والنقل الصوتي",
+  duas:n=>n+" أدعية معروفة مصنفة حسب الموضوع",books:n=>n+" مؤلفات محققة وعلماء مستشهد بهم"
+ },
+ ku:{
+  matched:n=>n+" gotinên bi çavkanî",names:n=>n+" nav û têkilî",
+  surahs:n=>n+" sûre bi erebî û nivîsandina dengî",
+  duas:n=>n+" duayên naskirî li gorî mijaran",books:n=>n+" berhemên hatine vekolîn û alimên hatine jêgirtin"
+ },
+ ckb:{
+  matched:n=>n+" وتە لەگەڵ سەرچاوە",names:n=>n+" ناو و پەیوەندی",
+  surahs:n=>n+" سوورەت بە عەرەبی و نووسینی دەنگی",
+  duas:n=>n+" دوعای ناسراو بەپێی بابەت",books:n=>n+" بەرهەمی پشکنراو و زانای ئاماژەپێکراو"
+ },
+ bs:{
+  matched:n=>n+" izjava s izvorima",names:n=>n+" imena i poveznica",
+  surahs:n=>n+" sura s arapskim tekstom i transkripcijom",
+  duas:n=>n+" poznatih dova po temama",books:n=>n+" provjerenih djela i citiranih učenjaka"
+ }
+};
+const DAR_SURAH_OPEN={
+ tr:name=>"Sûre "+name+" aç",en:name=>"Open Sūrah "+name,
+ ar:name=>"افتح سورة "+name,ku:name=>"Sûreya "+name+" veke",
+ ckb:name=>"سوورەتی "+name+" بکەرەوە",bs:name=>"Otvori suru "+name
+};
 const DAR_DYNAMIC_UI_UNITS={
  tr:{Funktionen:"işlev",Ergebnisse:"sonuç",Veröffentlichungen:"yayın",Beiträge:"yazı",Seiten:"sayfa",Themenbereiche:"konu alanı",Aussagen:"ifade",gemerkt:"kaydedildi",Fundstellen:"atıf yeri",Einträge:"kayıt",Sūren:"sûre",Āyāt:"âyet",Trefferquote:"isabet oranı",gewählt:"seçildi"},
  en:{Funktionen:"functions",Ergebnisse:"results",Veröffentlichungen:"publications",Beiträge:"articles",Seiten:"pages",Themenbereiche:"topics",Aussagen:"statements",gemerkt:"saved",Fundstellen:"references",Einträge:"entries",Sūren:"surahs",Āyāt:"verses",Trefferquote:"accuracy",gewählt:"selected"},
@@ -351,6 +388,15 @@ const DAR_DYNAMIC_UI_UNITS={
 function darDynamicUILocalize(value,language){
  const units=DAR_DYNAMIC_UI_UNITS[language];
  if(!units)return null;
+ const q=value.match(/^(\\d+) (Aussagen mit Quellen\\.|Namen und Zuordnungen\\.|Suren mit Arabisch und Lautschrift\\.|bekannte Duʿāʾ nach Themen\\.|geprüfte Werke und zitierte Gelehrte\\.)$/);
+ if(q){
+  const key={"Aussagen mit Quellen.":"matched","Namen und Zuordnungen.":"names",
+   "Suren mit Arabisch und Lautschrift.":"surahs","bekannte Duʿāʾ nach Themen.":"duas",
+   "geprüfte Werke und zitierte Gelehrte.":"books"}[q[2]];
+  return DAR_UI_FORMATS[language]?.[key]?.(q[1])||null;
+ }
+ const surahButton=value.match(/^Sūrah ([\\p{L}\\p{M}0-9ʿʾ'’ .-]{2,95}) öffnen$/u);
+ if(surahButton)return DAR_SURAH_OPEN[language]?.(surahButton[1])||null;
  const numeric=value.match(/^(\d+) (Funktionen|Ergebnisse|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Fundstellen|Einträge)$/);
  if(numeric)return numeric[1]+" "+units[numeric[2]];
  const surahs=value.match(/^(\d+) Sūren · (\d+) Āyāt$/);
