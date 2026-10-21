@@ -7,6 +7,13 @@ on:
       - feature/adult-multilingual-core-20261021
     paths:
       - 'content/posts/**'
+      - 'q/_registry/shortlinks.json'
+      - 'apple-tv/hadith/**'
+      - 'content/duas/duas.json'
+      - 'data/quiz-questions.json'
+      - 'data/learning-content.json'
+      - 'content/learning/**'
+      - 'lernen/**'
   workflow_dispatch:
     inputs:
       item_id:
@@ -86,7 +93,11 @@ jobs:
           if [[ -n "${SELECT_ID:-}" ]]; then
             node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs "${args[@]}" --id "$SELECT_ID"
           elif [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
-            mapfile -t changed < <(git diff --name-only HEAD^ HEAD -- 'content/posts/*.md' | head -n 1)
+            mapfile -t changed < <(git diff --name-only HEAD^ HEAD -- \
+              'content/posts/*.md' 'q/_registry/shortlinks.json' \
+              'apple-tv/hadith/**/*.json' 'content/duas/duas.json' \
+              'data/quiz-questions.json' 'data/learning-content.json' \
+              'content/learning/**/*.json' 'lernen/**/index.html' | head -n 1)
             for source_path in "${changed[@]}"; do
               node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs "${args[@]}" --source-path "$source_path"
             done
