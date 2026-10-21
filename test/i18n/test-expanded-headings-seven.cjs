@@ -39,9 +39,10 @@ const numericPosts=makeText("18 Beiträge"),numericSurahs=makeText("7 Sūren · 
  dynamicSurahButton=makeText("Sūrah Al-Baqarah öffnen"),
  dynamicSurahCount=makeText("114 Suren mit Arabisch und Lautschrift."),
  dynamicDuaCount=makeText("5 bekannte Duʿāʾ nach Themen."),
- compactDate=makeText("Mi., 21.10.26"),clockLabel=makeText("23:14 Uhr");
+ compactDate=makeText("Mi., 21.10.26"),clockLabel=makeText("23:14 Uhr"),
+ hijriDate=makeText("11. Dschumada I 1448");
 const nodes=[primary,prayer,weekday,original,excluded,dynamicQuran,dynamicStatements,preservedSource,
- numericPosts,numericSurahs,dynamicAyahLink,dynamicSurahButton,dynamicSurahCount,dynamicDuaCount,compactDate,clockLabel];
+ numericPosts,numericSurahs,dynamicAyahLink,dynamicSurahButton,dynamicSurahCount,dynamicDuaCount,compactDate,clockLabel,hijriDate];
 const props={
  nodeType:1,children:[],textContent:"📖 Wer Gutes zeigt, bekommt Anteil am Lohn",
  closest:()=>({getAttribute:()=> "wer-gutes-zeigt-bekommt-anteil-am-lohn-198"}),
@@ -140,6 +141,12 @@ for(const locale of EXPECTED){
  const expectedClock={de:"23:14 Uhr",tr:"saat 23:14",en:"23:14",ar:"الساعة 23:14",
   ku:"saet 23:14",ckb:"کاتژمێر 23:14",bs:"23:14 h"};
  assert.equal(clockLabel.nodeValue,expectedClock[locale],locale+" localized clock");
+ const hijriExpected={de:"11. Dschumada I 1448",tr:"11 Cemâziyelevvel 1448",
+  en:"11 Jumādā al-Ūlā 1448",ar:"11 جمادى الأولى 1448 هـ",
+  ku:"11 Cemadiya Yekem 1448",ckb:"11 جەمادی یەکەم 1448",
+  bs:"11 Džumadel-ula 1448"};
+ assert.equal(hijriDate.nodeValue,hijriExpected[locale],locale+" Hijri calendar");
+
  if(locale!=="de")assert.notEqual(compactDate.nodeValue,"Mi., 21.10.26",locale+" localized compact calendar");
  else assert.equal(compactDate.nodeValue,"Mi., 21.10.26");
  for(const term of ["Geprüfte Beziehungen","Umstrittene Angaben (bewusst öffnen)",
