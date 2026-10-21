@@ -35,3 +35,27 @@ for(const v of s.records){
  for(const code of supported.filter(x=>x!=="de"))assert.notEqual(v.translationStatus?.[code],"approved","preview cannot publish unreviewed translations");
 }
 console.log("PASS: "+supported.length+" locale catalogs; "+expected.length+" keys each; "+t.entries.length+" terms; "+aliasSeen.size+" aliases; "+s.records.length+" grounded sample records.");
+
+// These are purely offline/no-network checks: no OneSignal calls, deployments,
+// Supabase writes or paid translation providers. Running them here also makes
+// the existing read-only multilingual GitHub CI exercise every new push draft.
+const {execFileSync}=require("node:child_process");
+const offlinePushChecks=[
+ "test-push-i18n-resolver.cjs",
+ "test-app-locale-push-adapter.cjs",
+ "test-push-copy-nine-languages.cjs",
+ "dry-run-push-nine-languages.cjs",
+ "audit-push-i18n.cjs"
+];
+for(const file of offlinePushChecks){
+ try{
+  execFileSync(process.execPath,[path.join(__dirname,file)],{
+   cwd:path.join(__dirname,"../.."),stdio:"pipe",encoding:"utf8",timeout:30000,maxBuffer:1024*1024
+  });
+  console.log("PASS: offline push QA "+file);
+ }catch(error){
+  const logs=String(error.stdout||"")+String(error.stderr||"");
+  throw new Error("Offline push QA FAILED: "+file+"\n"+logs.slice(-5000));
+ }
+}
+
