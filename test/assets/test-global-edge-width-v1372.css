@@ -1738,3 +1738,75 @@ html[data-theme] body.is-frauen-route #appView .dar-immersive-hero-stage{
 }
 
 
+
+/* DAR_TEST_CONTENT_FLOW_LAST_ROW_V1403 · 2026-10-21 · only the adult Test-App.
+ * Fix the clipped lower function-capsule row and the excessive dead scroll
+ * space before the community footer, across existing appearance themes.
+ * This does not change the protected floating tab navigation or scroll engine.
+ * Narrowly excludes dedicated reader, fullscreen feed and dual Fold panes.
+ */
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-ilm-chat-route) > .app,
+html[data-theme] body.has-bottom-nav:not(.is-feed-fullscreen):not(.is-quran-reader-route):not(.is-ilm-chat-route) #appView.view {
+  block-size:auto!important;
+  max-block-size:none!important;
+  min-block-size:0!important;
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+}
+/* Real multi-row navigation grids must never have their last row cut by a
+ * historical fixed-height viewport or inherited mask. Preserve card borders,
+ * interactions, their theme-driven glow and normal spacing. */
+html[data-theme] body.has-bottom-nav #appView :is(
+  .feature-grid,.more-group-grid,.more-quick-access__list,
+  .dv3-quick-grid,.dv3-more-grid,.dm-grid,.dm-cards,
+  .home-v380-shell,.home-line-grid
+) {
+  block-size:auto!important;
+  max-block-size:none!important;
+  overflow-y:visible!important;
+  clip-path:none!important;
+  -webkit-mask-image:none!important;
+  mask-image:none!important;
+}
+html[data-theme] body.has-bottom-nav #appView :is(
+  .feature-section,.more-group,.more-page,
+  .home-v380-section,.dv3-section,.dar-more-v15
+) {
+  block-size:auto!important;
+  max-block-size:none!important;
+  overflow-y:visible!important;
+}
+/* Footer is a real document-flow sibling: no blank reserved panel between
+ * the final fully visible capsule and social channels on Start. */
+html[data-theme] body.is-home-route.has-bottom-nav #appView.view {
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  margin-bottom:0!important;
+  padding-bottom:0!important;
+}
+html[data-theme] body.is-home-route.has-bottom-nav #appView :is(
+  .home-v380-shell,#dv3Home,.dv3-home
+) {
+  min-height:0!important;
+  height:auto!important;
+  max-height:none!important;
+  margin-bottom:0!important;
+  padding-bottom:0!important;
+}
+html[data-theme] body.is-home-route.has-bottom-nav #appView :is(
+  .home-v380-shell,#dv3Home,.dv3-home
+) > :last-child {
+  margin-bottom:0!important;
+}
+html[data-theme] body.is-home-route.has-bottom-nav > .app > footer.footer {
+  position:relative!important;
+  top:auto!important;
+  bottom:auto!important;
+  min-height:0!important;
+  height:auto!important;
+  margin-block:12px 0!important;
+  padding-block:8px 10px!important;
+}
+/* Keep the already calibrated native dock clearance exactly where it was:
+ * never add another artificial spacer on the page below the footer. */
