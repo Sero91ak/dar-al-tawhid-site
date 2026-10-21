@@ -9,6 +9,8 @@ import hashlib
 import json
 from pathlib import Path
 from quiz_v4_no_double_charge_guard import protect_paid_texts
+from quiz_v4_native_fusha_reuse import load_mapping, resolve_text_originals
+from quiz_v4_quarantine import quarantined_originals
 
 ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/"kids/review-only/quiz-v4-450-next-completion-priority.json"
@@ -17,6 +19,7 @@ REG=ROOT/"kids/data/quiz-v4-450-original-clip-registry.json"
 LEDGER=ROOT/"kids/data/quiz-v4-450-paid-generation-ledger.json"
 OLD=ROOT/"kids/data/quiz-v4-missing9-prepaid-originals.json"
 FLOW=ROOT/"kids/data/quiz-v4-connected-flow-originals-ledger.json"
+STAGE=ROOT/"kids/review-only/quiz-v4-450-actual-mp3-import.json"
 PARTS=("question","correct","retry","explanation")
 VOICE="DkU7j9uO4ZEtLD2iRZSH"
 
@@ -31,6 +34,11 @@ def digest(text):
 
 def main():
     report,plan,reg,ledger,nine,flow=map(load,(OUT,PLAN,REG,LEDGER,OLD,FLOW))
+    stage=load(STAGE)
+    native_mapping,native_assets=load_mapping(ROOT)
+    quarantined,quarantined_ids=quarantined_originals(ROOT)
+    fail_unless(len(stage.get("questions",{}))==450 and stage["publicReleaseEnabled"] is False,
+                "actual 450 quiz stage is absent or public")
     protect=protect_paid_texts(ROOT,reg,ledger)
     missing9={r["originalSpokenText"] for r in nine["items"]
               if r["generationId"] not in reg["generationClips"]}
@@ -43,12 +51,30 @@ def main():
     expected=set()
     expected_reserved=set()
     for row in plan["recipes"]:
+        q_stage=stage["questions"][row["questionId"]]
+        fail_unless(q_stage["ageBand"]==row["ageBand"],
+                    "real audio stage age does not match source question")
         for part in PARTS:
             entry=row[part]
+            # Completed composed MP3 parts have already passed SHA and codec
+            # validation. Do not bill fragments of such a part a second time.
+            if part in q_stage["parts"]:
+                fail_unless(part not in q_stage["missing"] and
+                            q_stage["parts"][part]["spokenTextSha256"]==digest(entry["text"]),
+                            "invalid playback SHA in current stage")
+                continue
+            fail_unless(part in q_stage["missing"],
+                        "current quiz stage lacks a missing-part marker")
             for text in entry.get("segments",[]):
-                if text in registered:continue
-                if text in reserved:expected_reserved.add(text)
-                elif text not in missing9:expected.add(text)
+                _,missing=resolve_text_originals(text,reg["textClips"],
+                                                 native_mapping,native_assets)
+                for needed in missing:
+                    if needed in registered or needed in quarantined:continue
+                    if needed in reserved:expected_reserved.add(needed)
+                    elif needed not in missing9:
+                        fail_unless(needed not in protect,
+                                    "unavailable audio was already charged; never rebuy")
+                        expected.add(needed)
     summary=report["summary"]
     fail_unless(summary["selectedQuestions"]==450 and
                 summary["voiceId"]==VOICE and
@@ -73,11 +99,11 @@ def main():
                 "unresolved Flow items marked eligible for new paid TTS")
     totals=sum(sum(groups.values()) for groups in summary["ageCounts"].values())
     fail_unless(totals==450,"unaccounted quiz groups in recovery plan")
-    fail_unless(summary["alreadyTechnicallyComplete"]
-                +summary["questionsBlockedOnlyOnAlreadyPaidNine"]
-                +summary["questionsWaitingOnlyForConnectedFlowOriginals"]
-                +summary["questionsNeedingAtLeastOneGenuinelyNewOriginal"]==450,
-                "one or more quiz questions miscategorized")
+    fail_unless(summary["alreadyTechnicallyComplete"]==
+                sum(int(q["fourPartTechnicallyReady"]) for q in stage["questions"].values()),
+                "recovery report disagrees with SHA-verified staged MP3 count")
+    fail_unless(sum(sum(groups.values()) for groups in summary["ageCounts"].values())==450,
+                "one or more owner-held, prepaid or reserved questions unaccounted for")
     fail_unless(summary["newElevenLabsCreditsSpent"]==0 and
                 summary["paidSynthesisAuthorized"] is False and
                 summary["publicReleaseAllowed"] is False,
