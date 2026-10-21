@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-21",
+  "scope": "KIDS_QUIZ_046_TWO_PREVIOUSLY_PAID_V4_ORIGINALS_SESSION_RECOVERY_READ_ONLY",
+  "sourceLedger": "kids/data/quiz-v4-connected-flow-originals-ledger.json",
+  "flowId": "r6F5uzBi4xnca5w16H4K",
+  "flowUrl": "https://elevenlabs.io/app/flows/r6F5uzBi4xnca5w16H4K",
+  "mediaStatus": "completed",
+  "modelId": "eleven_v4",
+  "generationCount": 2,
+  "providerMasterDownloadUrlsAvailableAtReadTime": true,
+  "shortLivedSignedUrlsPersisted": false,
+  "actualMP3BytesImported": false,
+  "newGenerationCalls": 0,
+  "newCreditsCharged": 0,
+  "questionId": "kids-quiz-046",
+  "originals": [
+    {
+      "sourceText": "Angeben.",
+      "generationId": "15jWoEmEjxXcSEz9r79Z",
+      "sessionId": "6oURnRwueaMXa4kSTH1A",
+      "nodeId": "jjzzenvt9UMDvl4SpjU0",
+      "providerStatus": "completed",
+      "originalMediaDownloadAvailable": true,
+      "pendingRepoImport": true
+    },
+    {
+      "sourceText": "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam.",
+      "generationId": "fXiqKqmUPFZBMOCKBUQ5",
+      "sessionId": "UllZeSYZLnhHUdFAzk5M",
+      "nodeId": "vMytUv5qLmyoQRlAN5Uc",
+      "providerStatus": "completed",
+      "originalMediaDownloadAvailable": true,
+      "pendingRepoImport": true
+    }
+  ],
+  "nextAction": "Retrieve original MP3 bytes using existing ElevenLabs generated-media Download action with these flow and session IDs, then existing safe import_quiz_v4_connected_flow_originals.py; avoid generating, rerunning or paying again.",
+  "humanListeningApproved": false,
+  "liveReleased": false
+}
