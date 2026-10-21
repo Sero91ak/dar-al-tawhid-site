@@ -29,6 +29,7 @@ jobs:
           if(!more.includes('localeChoices()+')||!more.includes('data-dm-locale'))throw Error('More locale selector missing');
           const setup=fs.readFileSync(paths[1],'utf8');
           if(!setup.includes('data-dar-setup-locale'))throw Error('Settings locale selector missing');
+          if(!setup.includes('mountLocaleInActiveSettings'))throw Error('Settings overview mount missing');
           const home=fs.readFileSync(paths[2],'utf8');
           if(!home.includes('data-dv3-locale'))throw Error('Home quick selector missing');
           console.log('PASS: all three app locale control sources compile and store the same preference.');
@@ -64,10 +65,10 @@ jobs:
             driver.execute_script("document.querySelector('.dar-more-v15 [data-dm-locale=de]').click()")
             assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='de'
             driver.execute_script("if(typeof navigate==='function')navigate('settings');else location.hash='#settings'")
-            WebDriverWait(driver,25).until(lambda d:d.execute_script("return !!document.querySelector('#dar-setup-hub [data-dar-setup-locale=tr]')"))
-            driver.execute_script("document.querySelector('#dar-setup-hub [data-dar-setup-locale=tr]').click()")
+            WebDriverWait(driver,25).until(lambda d:d.execute_script("return !!document.querySelector('#darSettingsLocaleChoice [data-dar-setup-locale=tr]')"))
+            driver.execute_script("document.querySelector('#darSettingsLocaleChoice [data-dar-setup-locale=tr]').click()")
             assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='tr'
-            assert driver.execute_script("return document.querySelector('#dar-setup-hub [data-dar-setup-locale=tr]').getAttribute('aria-pressed')")=='true'
+            assert driver.execute_script("return document.querySelector('#darSettingsLocaleChoice [data-dar-setup-locale=tr]').getAttribute('aria-pressed')")=='true'
             print('PASS: adult TEST home, More and Settings share the Turkish choice.')
           finally:
             driver.quit()
