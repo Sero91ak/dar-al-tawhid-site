@@ -340,12 +340,12 @@
         "kids-quiz-045"
       ],
       "sourceAudioPart": "question",
-      "status": "GENERATION_SUBMITTED_DO_NOT_RETRY",
+      "status": "IMPORTED_ORIGINAL_MP3_VERIFIED",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
       "flowId": "1q8pGIR0nRKIekoSCt0j",
-      "generationId": null,
+      "generationId": "ipTUqhARVMXXGJc6Jzln",
       "estimatedCreditsNotInvoice": 17.443,
       "actualProviderCredits": null,
       "humanListeningApproved": false,
@@ -355,7 +355,11 @@
       "providerOriginalAwaitingGenerationIdReconciliation": true,
       "noRepeatPurchaseAllowed": true,
       "sessionId": null,
-      "notes": "ElevenLabs node completed but GitHub commit conflicted before persisting run session; DO NOT REGENERATE. Retrieve original generation from ElevenLabs flow before import."
+      "notes": "ElevenLabs node completed but GitHub commit conflicted before persisting run session; DO NOT REGENERATE. Retrieve original generation from ElevenLabs flow before import.",
+      "originalMP3ImportedIntoGithub": true,
+      "importedMP3SHA256": "e8215227f5efec6e19c07361729ea730b2eef83c417c3f5f7b07066123cc67c3",
+      "originalMP3SHA256": "e8215227f5efec6e19c07361729ea730b2eef83c417c3f5f7b07066123cc67c3",
+      "originalMP3URL": "/kids/assets/kids-quiz-audio/v4-curated450-review/4c7da6824790eb5523bd9917b508c0e1.mp3"
     },
     {
       "sourceText": "Den Zorn zurückhalten und verzeihen.",
@@ -549,7 +553,7 @@
         "kids-quiz-046"
       ],
       "sourceAudioPart": "question",
-      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
+      "status": "IMPORTED_ORIGINAL_MP3_VERIFIED",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -564,12 +568,15 @@
       "providerGenerationDurationSeconds": 0.88,
       "providerStatus": "completed",
       "providerMediaStoredInElevenLabs": true,
-      "originalMP3ImportedIntoGithub": false,
+      "originalMP3ImportedIntoGithub": true,
       "pronunciationReviewStatus": "REJECTED_PENDING_CORRECT_10099_RULE_MASTER_DICTIONARY_AND_FUSHA",
       "blockedForQuizPlayback": true,
       "blockedForPublicRelease": true,
       "missingPronunciationDictionaryAtGeneration": true,
-      "preservePaidGenerationDoNotRebuyAutomatically": true
+      "preservePaidGenerationDoNotRebuyAutomatically": true,
+      "importedMP3SHA256": "c152e43acfb30422231dcb5d47e3579156fc23c1b725fd0fe73227af9bc7fbc6",
+      "originalMP3SHA256": "c152e43acfb30422231dcb5d47e3579156fc23c1b725fd0fe73227af9bc7fbc6",
+      "originalMP3URL": "/kids/assets/kids-quiz-audio/v4-curated450-review/c4c3b83261f03d443b45d98b5d5728d7.mp3"
     },
     {
       "sourceText": "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam.",
@@ -578,7 +585,7 @@
         "kids-quiz-046"
       ],
       "sourceAudioPart": "explanation",
-      "status": "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
+      "status": "IMPORTED_ORIGINAL_MP3_VERIFIED",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -593,12 +600,15 @@
       "providerGenerationDurationSeconds": 4.24,
       "providerStatus": "completed",
       "providerMediaStoredInElevenLabs": true,
-      "originalMP3ImportedIntoGithub": false,
+      "originalMP3ImportedIntoGithub": true,
       "pronunciationReviewStatus": "REJECTED_PENDING_CORRECT_10099_RULE_MASTER_DICTIONARY_AND_FUSHA",
       "blockedForQuizPlayback": true,
       "blockedForPublicRelease": true,
       "missingPronunciationDictionaryAtGeneration": true,
-      "preservePaidGenerationDoNotRebuyAutomatically": true
+      "preservePaidGenerationDoNotRebuyAutomatically": true,
+      "importedMP3SHA256": "63d69d22ada15ae4527cfd5346e01b9aeacb8ae31d9e6205ceab2e9896f15d78",
+      "originalMP3SHA256": "63d69d22ada15ae4527cfd5346e01b9aeacb8ae31d9e6205ceab2e9896f15d78",
+      "originalMP3URL": "/kids/assets/kids-quiz-audio/v4-curated450-review/f8ba8d284a71fe05a4e928d29f7bf2cc.mp3"
     }
   ]
 }
