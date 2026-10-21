@@ -2608,6 +2608,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 </style>
 <link rel="stylesheet" id="darSmartPublicV8" href="/desktop-preview/assets/dar-smart-home-v8-live.css?v=20261021-2-reveal-fixed">
 <link rel="stylesheet" id="darTrueV8Shell" href="/desktop-preview/assets/dar-v8-faithful-shell.css?v=20261021-faithful-v1">
+<link rel="stylesheet" href="/desktop-preview/assets/dar-v8-all-sections.css?v=20261021-global-v1">
+<script src="/desktop-preview/assets/dar-v8-cross-pages.js?v=20261021-global-v1" defer></script>
 </head>
 <style id="dar-touch-active-fix">
 @media (hover:none) and (pointer:coarse){
@@ -2761,6 +2763,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   beitrag:["BEITRAG","Dieses Wissen ist Dīn.","Eine Aussage von Ibn Sīrīn über die Sorgfalt bei der Wahl der Quellen des Dīn."],
   quelle:["QUELLE","Nachweis zur Aussage.","Werk, Kapitel, überlieferte Aussage und Direktnachweis auf einen Blick."],
   dua:["DUʿĀʾ","Bittgebete mit Übersetzung und Nachweis.","Arabischer Text, Lautschrift, deutsche Bedeutung und Quelle bleiben klar voneinander unterscheidbar."],
+  hadith:["ḤADĪṮ & ĀṮĀR","Überlieferungen mit Quellen und Einordnung.","Hadithe und Athar nach Werk, Kapitel und Begriff durchsuchen. Die Originalquellen und Einstufungen werden nicht verändert."],
   wissen:["WISSEN","Themen geordnet erschließen.","ʿAqīdah, Fiqh, Sunnah, Āṯār, Gelehrte und Grundlagen lassen sich direkt nach Themen öffnen."],
   bibliothek:["BIBLIOTHEK","Werke lesen und Quellen finden.","Öffne Werke, Dossiers und Sammlungen mit Autor, Fachgebiet und Lesemöglichkeit."],
   gebetszeiten:["GEBETSZEITEN","Gebetszeiten für deinen Standort.","Aktuelles Gebet, nächstes Gebet und laufender Countdown werden aus deinem gespeicherten Standort berechnet."],
@@ -2889,7 +2892,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  }
 
  function suche(){
-  return intro("suche")+'<section class="section parchment reveal"><input id="siteSearch" class="search-input" type="search" placeholder="Qurʾān, Beitrag, Duʿāʾ, Werk, Prophet oder Thema suchen …" autocomplete="off"><div id="searchResults" class="list-lines" style="margin-top:20px"><div class="loading-line">Suchindex wird geladen …</div></div></section>'+footer()
+  return intro("suche")+'<section class="section parchment reveal"><div class="v8-chat-panel"><div class="v8-chat-title"><img src="/assets/dar-3d-icons/spark.png" alt=""><div><h2>Masǧid al-ʿIlm · Intelligenter Wissenschat</h2><p>Stelle eine Frage. Antworten und Fundstellen basieren ausschließlich auf unseren vorhandenen Beiträgen und Quellen.</p></div></div><div id="v8ChatReply" aria-live="polite"></div><div class="v8-chat-input-wrap"><input id="siteSearch" class="search-input" type="search" placeholder="Frage zu Tawḥīd, Fiqh, Sunnah, Īmān oder anderen Begriffen …" autocomplete="off" aria-label="Frage an den Wissensfinder"><button id="v8ChatSend" type="button">Frage stellen ↗</button></div><div id="searchResults" class="list-lines" style="margin-top:18px"><div class="loading-line">Website-Quellen werden geladen …</div></div></div></section>'+footer()
  }
  function thema(){
   var name=new URLSearchParams(location.search).get("name")||"aqidah";
@@ -2934,7 +2937,10 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
     '</div>'+
    '</div></section>'+footer()
  }
- var renders={start:start,quran:quran,beitraege:beitraege,beitrag:beitrag,quelle:quelle,dua:dua,wissen:wissen,bibliothek:bibliothek,gebetszeiten:gebetszeiten,mehr:mehr,downloads:downloads,suche:suche,thema:thema,werk:werk,zakat:zakat,quiz:quiz,propheten:propheten,frauen:frauen,quellen:quellen,einstellungen:einstellungen};
+ function hadith(){
+  return intro("hadith")+'<section class="section parchment reveal"><div class="section-head"><h2>Ḥadīṯe und Āṯār nach Quellen</h2><p>Quellengebundene Suche in vorhandenen deutsch geprüften Überlieferungen; Angaben zur Einstufung bleiben unverändert.</p></div><div class="v8-hadith-toolbar"><input id="v8HadithSearch" type="search" placeholder="Ḥadīṯ, Werk, Überlieferer oder islamischen Begriff suchen …" aria-label="Ḥadīṯ-Suchbegriff" autocomplete="off"><span id="v8HadithCount" class="data-count">Index wird geladen …</span></div><div id="v8HadithResults" aria-live="polite"><p class="loading-line">Überlieferungen werden geladen …</p></div><button id="v8HadithMore" type="button" hidden>Weitere Überlieferungen anzeigen ↓</button><p class="real-source" style="margin-top:16px">Quelle: der bestehende deutsch geprüfte Ḥadīṯ-Suchindex. Vollständiger gemeinsamer Datenkatalog: <a href="/apple-tv/hadith/catalog.json" target="_blank" rel="noopener noreferrer">Ḥadīṯ- und Āṯār-Archiv ↗</a>.</p></section>'+footer()
+ }
+ var renders={start:start,quran:quran,beitraege:beitraege,hadith:hadith,beitrag:beitrag,quelle:quelle,dua:dua,wissen:wissen,bibliothek:bibliothek,gebetszeiten:gebetszeiten,mehr:mehr,downloads:downloads,suche:suche,thema:thema,werk:werk,zakat:zakat,quiz:quiz,propheten:propheten,frauen:frauen,quellen:quellen,einstellungen:einstellungen};
 
  function currentPage(){return (new URLSearchParams(location.search).get("page")||"start").toLowerCase()}
 
@@ -2972,6 +2978,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
  function render(){
   var key=currentPage(); if(!renders[key])key="start";
   document.body.classList.toggle("dar-v8-home",key==="start");
+  document.body.dataset.darV8Route=key;
   var crumb=document.getElementById("darV8BreadLabel");if(crumb)crumb.textContent=key==="start"?"Start":(intros[key]||intros.start)[0];document.querySelectorAll(".dar-v8-side-link").forEach(function(a){a.classList.toggle("active",a.dataset.page===key);if(a.dataset.page===key)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
   try{
    root.innerHTML=renders[key]();
@@ -2988,6 +2995,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
   if(key==="einstellungen")initSettings();
   initRealPage(key);
   initSmartBrowse(key);
+  if(window.DARV8CrossPages)window.DARV8CrossPages.onRendered(key);
   if(key==="start")initDarV8Home();
   if(key==="werk")initPdfReaderPage();
   if(window.darSetPwaIcon)window.darSetPwaIcon(darPwaIconId(),false);
