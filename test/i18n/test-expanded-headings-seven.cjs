@@ -8,6 +8,15 @@ const EXPECTED=["de","tr","en","ar","ku","ckb","bs"];
 for(const locale of EXPECTED.slice(1)){
  const v=pack.translations[locale];
  assert(Object.keys(v).length>=350,locale+" missing section labels");
+ assert(Object.keys(v).length>=478,locale+" missing Quran/home/library expansion");
+ for(const label of ["Qurʾān-Player","BEITRÄGE NACH QURʾĀN · SUNNAH · AṮĀR",
+   "Die Qurʾān-Texte konnten nicht geladen werden. Bitte erneut versuchen.",
+   "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.",
+   "Bibliothek des Wissens","Überlieferer, frühe Imāme und ihre Werke.",
+   "Mikrofon konnte nicht geöffnet werden."]){
+  assert(v[label]?.trim(),locale+" missing routed UI label "+label);
+ }
+
  for(const term of ["ÜBERLIEFERUNGSMAẞSTAB","Gebetskalender","Faǧr","Ẓuhr","ʿAṣr","Maghrib","ʿIshāʾ",
  "Übersicht","Lebensweg","Aussagen im Qurʾān","Aussagen in authentischer Sunnah",
  "Gebetszeiten & Kalender","Beitragstitel","Titel der Beiträge","Duʿāʾ öffnen","Willkommen bei DĀR AL TAWḤĪD"]){
