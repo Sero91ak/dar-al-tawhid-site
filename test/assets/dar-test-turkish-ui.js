@@ -332,6 +332,19 @@ function localizeGermanCalendarLabel(value,language){
   if(d.getUTCDate()===Number(abbreviated[2])&&d.getUTCMonth()===Number(abbreviated[3])-1)
    try{return new Intl.DateTimeFormat(locale,{weekday:"short",day:"2-digit",month:"2-digit",year:"2-digit",timeZone:"UTC"}).format(d)}catch(_){}
  }
+ const hijri=value.match(/^(\d{1,2})\. Dschumada (I|II) (\d{3,4})$/);
+ if(hijri){
+  const months={
+   tr:["Cemâziyelevvel","Cemâziyelâhir"],
+   en:["Jumādā al-Ūlā","Jumādā al-Ākhirah"],
+   ar:["جمادى الأولى","جمادى الآخرة"],
+   ku:["Cemadiya Yekem","Cemadiya Duyem"],
+   ckb:["جەمادی یەکەم","جەمادی دووەم"],
+   bs:["Džumadel-ula","Džumadel-ahira"]
+  };
+  const target=months[language];
+  if(target)return hijri[1]+" "+target[hijri[2]==="I"?0:1]+" "+hijri[3]+(language==="ar"?" هـ":"");
+ }
  const hour=value.match(/^(\d{2}):(\d{2}) Uhr$/);
  if(hour&&Number(hour[1])<24&&Number(hour[2])<60){
   const shown=hour[1]+":"+hour[2];
