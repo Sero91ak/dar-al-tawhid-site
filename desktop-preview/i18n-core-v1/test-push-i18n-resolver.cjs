@@ -59,6 +59,26 @@ test("approved fallback never publishes unreviewed text", () => {
   assert.notEqual(m.payload.headings.en, "DO NOT SEND");
 });
 
+test("stale source hash blocks translation even when marked approved", () => {
+  const versioned = {
+    ...copies,
+    de:{...copies.de,sourceHash:"new-revision"},
+    fr:{...copies.fr,sourceHash:"old-revision"}
+  };
+  const msg = resolveRecipientPush({
+    event:{...postEvent,sourceHash:"new-revision"},
+    copies:versioned, subscription:{subscription_id:"s",app_locale:"fr"}
+  });
+  assert.equal(msg.copyLocale,"de");
+  assert.equal(msg.fallback,true);
+  const approved = resolveRecipientPush({
+    event:{...postEvent,sourceHash:"new-revision"},
+    copies:{...versioned,fr:{...versioned.fr,sourceHash:"new-revision"}},
+    subscription:{subscription_id:"s",app_locale:"fr"}
+  });
+  assert.equal(approved.copyLocale,"fr");
+});
+
 test("deduplicate by subscription; retry/language change does not resend", () => {
   const p = buildPreview({
     event:baseEvent,copies,
