@@ -7,6 +7,9 @@ on:
       - 'desktop-preview/i18n-core-v1/**'
       - 'test/assets/dar-adult-localized-content.js'
       - 'test/assets/dar-home-v3-compact.js'
+      - 'test/assets/dar-more-v15.js'
+      - 'test/assets/dar-setup-hub.js'
+      - '.github/workflows/dar-test-tr-new-post-drafts.yml'
       - 'test/tr-review/**'
       - '.github/workflows/dar-test-turkish-content-integrity.yml'
   workflow_dispatch:
@@ -32,6 +35,8 @@ jobs:
           node --check desktop-preview/i18n-core-v1/generate-translation-drafts.cjs
           node --check test/assets/dar-adult-localized-content.js
           node --check test/assets/dar-home-v3-compact.js
+          node --check test/assets/dar-more-v15.js
+          node --check test/assets/dar-setup-hub.js
           node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
           node desktop-preview/i18n-core-v1/test-tr-approved-reader.cjs
       - name: Check paid pilot manuscript is stored under the current source ID and remains draft
