@@ -168,5 +168,16 @@ global.addEventListener("dar-adult-locale-changed",schedule);
 global.addEventListener("storage",e=>{if(e.key===KEY)schedule()});
 global.document.addEventListener("dar:view-rendered",schedule);
 if(global.document.readyState==="loading")global.document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-global.DarTestTurkishUI={apply,schedule,locale:currentLocale,translatedKeys:dictionary.size,scope:"adult-test-only"};
+// Load the same reviewed-content consumer used by future adult Web/PWA/WKWebView.
+// This loader is TEST-only; it makes no paid translation/API request.
+if(typeof global.document?.createElement==="function"&&global.document.head&&
+   !global.document.getElementById("dar-test-central-content-runtime")){
+ const tag=global.document.createElement("script");
+ tag.id="dar-test-central-content-runtime";
+ tag.src="/test/assets/dar-adult-central-content.js?v=1";
+ tag.defer=true;
+ global.document.head.appendChild(tag);
+}
+global.DarTestTurkishUI={apply,schedule,locale:currentLocale,translatedKeys:dictionary.size,
+  contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};
 })(window);
