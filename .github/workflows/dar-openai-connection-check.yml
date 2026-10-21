@@ -1,0 +1,60 @@
+name: DAR Turkish OpenAI API Connection Check
+
+on:
+  push:
+    branches:
+      - feature/tr-openai-connection-check-20261021
+    paths:
+      - .github/workflows/dar-openai-connection-check.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-credential:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Verify encrypted repository secret against OpenAI (no billable generation)
+        shell: bash
+        env:
+          DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
+        run: |
+          set -euo pipefail
+
+          if [[ -z "${DAR_I18N_AI_API_KEY:-}" ]]; then
+            echo "::error::The GitHub Actions secret DAR_I18N_AI_API_KEY is missing or empty."
+            exit 1
+          fi
+
+          if [[ "${DAR_I18N_AI_API_KEY}" != sk-* ]]; then
+            echo "::error::The secret must contain only the raw OpenAI API key beginning with sk-, not the complete downloaded file or JSON."
+            exit 1
+          fi
+
+          if [[ "${DAR_I18N_AI_API_KEY}" =~ [[:space:]] ]]; then
+            echo "::error::The secret contains whitespace. Paste only the key value, without quotes or spaces."
+            exit 1
+          fi
+
+          # Authentication-only GET: no model inference, no translation costs.
+          status=$(curl --silent --show-error --max-time 30 \
+            --output "$RUNNER_TEMP/openai-auth-response.json" \
+            --write-out '%{http_code}' \
+            --header "Authorization: Bearer ${DAR_I18N_AI_API_KEY}" \
+            https://api.openai.com/v1/models)
+
+          if [[ "$status" == 200 ]]; then
+            echo "PASS: OpenAI accepted the configured GitHub Actions API key."
+            echo "No content was translated and no billable inference was triggered."
+          elif [[ "$status" == 401 ]]; then
+            echo "::error::OpenAI returned HTTP 401: the key is invalid, revoked, or wrongly copied."
+            exit 1
+          elif [[ "$status" == 403 ]]; then
+            echo "::error::OpenAI returned HTTP 403: access denied for this key/project."
+            exit 1
+          else
+            echo "::error::OpenAI returned HTTP $status. Authentication not confirmed."
+            exit 1
+          fi
