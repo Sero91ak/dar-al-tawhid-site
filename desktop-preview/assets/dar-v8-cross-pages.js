@@ -122,8 +122,18 @@ function onRendered(key=current()){
  if(key==="hadith")hadithPage();
  const dockEl=d.getElementById("darV8MobileDock");if(dockEl)dockEl.setAttribute("aria-label","Hauptnavigation · "+(pages[key]?.label||"Start"));
 }
+function keyboardAndNavigation(){
+ // Never suppress user pinch zoom: a true 16px font-size is enforced in
+ // dar-v8-all-sections.css; hide floating dock only while entering text.
+ const isEditor=el=>!!el&&!!el.matches&&el.matches('input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),textarea,select,[contenteditable="true"]');
+ d.addEventListener("focusin",e=>{if(isEditor(e.target))d.body.classList.add("v8-keyboard-active")});
+ d.addEventListener("focusout",e=>{if(isEditor(e.target)){
+   w.setTimeout(()=>{if(!isEditor(d.activeElement))d.body.classList.remove("v8-keyboard-active")},60);
+ }});
+ d.addEventListener("pointerdown",e=>{if(e.target?.closest?.(".dar-v8-mobile-tab,.dar-v8-side-link"))d.body.classList.remove("v8-keyboard-active")},{passive:true});
+}
 function boot(){
- buildNavigation();onRendered();
+ buildNavigation();keyboardAndNavigation();onRendered();
  const topAudio=d.getElementById("darV8TopAudio");if(topAudio)topAudio.addEventListener("click",()=>d.body.classList.toggle("v8-show-player"),true);
  const root=d.getElementById("pageRoot");
  if(root){const watch=new MutationObserver(()=>{const key=current();onRendered(key)});watch.observe(root,{childList:true,subtree:false})}
