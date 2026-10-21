@@ -18,7 +18,7 @@ async function getResult(code,tamper){
  const manifest={schemaVersion:1,locale:code,originalLocale:"de",scope:"adult-only",
   onlyApproved:true,records:{[id]:{kind,path:rel,sourceHash}}};
  const translated={schemaVersion:1,id,kind,locale:code,sourceHash,status:"approved",
-  fields:{meaning:"Verified target-language placeholder"},immutable:original.immutable};
+  fields:{meaning:"Verified target-language placeholder"},immutable:{...original.immutable}};
  const files={[prefix+code+"/manifest.json"]:manifest,[prefix+rel]:translated};
  if(tamper)tamper(files,manifest,translated);
  const requested=[];
