@@ -143,3 +143,10 @@ body.desktop-overhaul-v18:not(.dar-v8-home) .v8-global-page-hero{margin-top:14px
 @media(max-width:959px){
  body.desktop-overhaul-v18:not(.dar-v8-home) .v8-global-page-hero{margin-top:13px!important}
 }
+
+/* Legacy scroll reveal created nearly invisible cards before scrolling on mobile.
+ * Content and controls must be legible as soon as the route is mounted. */
+body.desktop-overhaul-v18 #pageRoot .reveal,
+body.desktop-overhaul-v18 #pageRoot .section,
+body.desktop-overhaul-v18 #pageRoot .page-intro{opacity:1!important;visibility:visible!important;transform:none!important}
+body.desktop-overhaul-v18 #pageRoot .section.is-leaving{opacity:1!important}
