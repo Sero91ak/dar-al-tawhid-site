@@ -38,7 +38,7 @@ assert.equal(w.DarTestTurkishUI.registerLocaleData(locales),true);
 for(const locale of expected){
  storage.locale=locale;w.DarTestTurkishUI.apply();
  const homepage=locale==="de"?"Startseite":locale==="tr"?"Ana Sayfa":locales.translations[locale].Startseite;
- const prayer=locale==="de"?"Gebetszeiten":locale==="tr"?"Namaz vakitleri":locales.translations[locale].Gebetszeiten;
+ const prayer=locale==="de"?"Gebetszeiten":locale==="tr"?"Namaz Vakitleri":locales.translations[locale].Gebetszeiten;
  assert.equal(nodes[0].nodeValue,homepage,locale+" homepage");
  assert.equal(nodes[1].nodeValue,prayer,locale+" prayer");
  assert.equal(nodes[2].nodeValue,"Originalquellen bleiben unverändert","canonical content MUST remain unchanged");
