@@ -8,6 +8,7 @@ import json
 import hashlib
 from collections import Counter
 from pathlib import Path
+from quiz_v4_quarantine import quarantined_originals
 
 ROOT=Path(__file__).resolve().parents[2]
 OUT=ROOT/"kids/data/quiz-v4-450-production-status.json"
@@ -75,9 +76,10 @@ def main():
     # Verify every physical original, not just a registry entry or a previous QA flag.
     verified=validated_audio_registry(reg)
     clips=verified["textClips"]
-    good={t for t,v in clips.items() if v.get("audioListeningApproved") is True}
-    available=set(clips)
-    paid_gen=verified["generationClips"]
+    blocked_texts, blocked_ids = quarantined_originals(ROOT)
+    available=set(clips)-blocked_texts
+    good={t for t,v in clips.items() if t in available and v.get("audioListeningApproved") is True}
+    paid_gen={gid:v for gid,v in verified["generationClips"].items() if gid not in blocked_ids}
     def available_slot(row,kind,human=False):
         x=row[kind]
         if x["mode"]=="existing-paid-exact":
@@ -102,11 +104,12 @@ def main():
         "sourceAndArchivePreserved":True,"modelId":"eleven_v4",
         "totalSelectedSpeechAssignments":1800,
         "uniqueNewSegmentTarget":planned["newUniqueFragments"],
-        "uniqueNewOriginalMP3sStored":len(available),
+        "uniqueNewOriginalMP3sStored":len(clips),
         "uniqueSegmentsStillWithoutOriginalMP3":len(
-            {x["text"] for x in planned["pendingAudioFragments"]}-available),
+            {x["text"] for x in planned["pendingAudioFragments"]}-set(clips)),
         "priorPaidFlowOriginalCount":56,
-        "priorPaidFlowOriginalsNotRecovered":max(0,56-len(paid_gen)),
+        "priorPaidFlowOriginalsNotRecovered":max(0,56-len(verified["generationClips"])),
+        "quarantinedOriginalsStoredButNotPlayable":len(set(clips)&blocked_texts),
         "savedMP3TechnicallyAudited":qa.get("savedClipCount",0)
            if qa.get("overallTechnicalPass") else 0,
         "savedMP3HumanListeningApproved":len(good),
