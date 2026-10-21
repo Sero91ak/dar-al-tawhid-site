@@ -1,0 +1,62 @@
+name: DAR V8 Turkish Language Smoke
+
+on:
+  push:
+    branches:
+      - feature/tr-language-chooser-v8-20261021
+    paths:
+      - desktop-preview/assets/dar-v8-portal-live.js
+      - desktop-preview/assets/dar-v8-portal-live.css
+      - .github/workflows/dar-v8-turkish-language-smoke.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  language-switch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check JS syntax and selectors
+        run: |
+          node --check desktop-preview/assets/dar-v8-portal-live.js
+          grep -q 'renderMobileMoreLanguage' desktop-preview/assets/dar-v8-portal-live.js
+          grep -q 'dar-v8-quick-language' desktop-preview/assets/dar-v8-portal-live.css
+      - name: Test real browser (no OpenAI calls)
+        run: |
+          python3 -m http.server 8766 --bind 127.0.0.1 >/tmp/dar-tr-server.log 2>&1 &
+          python3 -m pip install --quiet selenium
+          python3 - <<'PY'
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.common.by import By
+          from selenium.webdriver.support.ui import WebDriverWait
+
+          options=Options()
+          for flag in ('--headless=new','--no-sandbox','--disable-dev-shm-usage'):
+            options.add_argument(flag)
+          driver=webdriver.Chrome(options=options)
+          base='http://127.0.0.1:8766/desktop-preview/index.html?page='
+          try:
+            for size in [(393,852),(1440,900)]:
+              driver.set_window_size(*size)
+              driver.get(base+'start')
+              WebDriverWait(driver,25).until(lambda d:bool(d.find_elements(By.ID,'darV8QuickLanguage')))
+              assert len(driver.find_elements(By.CSS_SELECTOR,'#darV8QuickLanguage [data-v8-quick-locale]'))==2
+              driver.execute_script('document.querySelector("#darV8QuickLanguage [data-v8-quick-locale=tr]").click()')
+              assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='tr'
+              driver.get(base+'mehr')
+              WebDriverWait(driver,25).until(lambda d:bool(d.find_elements(By.ID,'darV8QuickLanguage')))
+              assert driver.execute_script("return document.querySelector('#darV8QuickLanguage [data-v8-quick-locale=tr]').getAttribute('aria-pressed')")=='true'
+              assert driver.execute_script("return document.querySelector('#darV8MoreSheetLanguage [data-v8-quick-locale=tr]').getAttribute('aria-pressed')")=='true'
+              driver.get(base+'einstellungen')
+              WebDriverWait(driver,25).until(lambda d:bool(d.find_elements(By.ID,'darV8LanguageSelect')))
+              assert driver.execute_script("return document.getElementById('darV8LanguageSelect').value")=='tr'
+              driver.execute_script("document.getElementById('darV8LanguageSelect').value='de';document.getElementById('darV8LanguageSelect').dispatchEvent(new Event('change',{bubbles:true}))")
+              assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='de'
+              print('PASS: Turkish home / More / bottom sheet / settings on',size,flush=True)
+          finally:
+            driver.quit()
+          PY
