@@ -14,6 +14,7 @@ const data=JSON.parse(fs.readFileSync(file,"utf8"));
 const locales=["de",...data.locales.filter(x=>x!=="de")];
 function read(p){try{return JSON.parse(fs.readFileSync(path.resolve(ROOT,p),"utf8"))}catch(_){return null}}
 function verified(translation,item,code){
+ if(item.immutable?.sourceReviewBlocked)return false;
  if(!translation||translation.status!=="approved"||translation.id!==item.id||translation.locale!==code||translation.sourceHash!==item.sourceHash)return false;
  if(!translation.reviewer?.linguistic||!translation.reviewer?.religious||!translation.reviewer?.arabicOriginalChecked||!translation.reviewer?.sourcesChecked||!translation.reviewedAt)return false;
  const orig=Object.keys(item.fields);
