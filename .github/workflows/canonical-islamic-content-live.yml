@@ -112,7 +112,7 @@ jobs:
           # The screensaver catalog/index must not lag behind the Hadith source catalog.
           # Rebuild timestamps are now stable when the content fingerprint is unchanged,
           # so the self-triggered follow-up workflow becomes a no-op (no deploy loop).
-          git add apple-tv/hadith/series apple-tv/hadith/catalog.json apple-tv/hadith/manifest.json apple-tv/hadith/sync-status.json apple-tv/screensaver/catalog.json apple-tv/screensaver/entries-index.json
+          git add apple-tv/hadith/series apple-tv/hadith/catalog.json apple-tv/hadith/manifest.json apple-tv/hadith/sync-status.json apple-tv/screensaver/catalog.json apple-tv/screensaver/entries-index.json apple-tv/hadith/library-shell.json
           if git diff --cached --quiet; then
             echo "Kein neuer Apple-TV-Datensatz und kein Katalog-Drift – kein zusätzlicher Commit. Created: $created"
             exit 0
