@@ -1,0 +1,73 @@
+name: DAR Turkish OpenAI Single Manuscript Pilot
+
+# Explicitly isolated: one real, published adult post in Turkish.
+# No commits, PR creation, visitor deploys, push notifications or mass translation.
+on:
+  push:
+    branches:
+      - feature/tr-openai-first-manuscript-20261021
+    paths:
+      - '.github/workflows/dar-turkish-openai-single-pilot.yml'
+      - 'desktop-preview/i18n-core-v1/generate-translation-drafts.cjs'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  translate-single:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Prepare canonical translation worklist
+        shell: bash
+        run: |
+          set -euo pipefail
+          node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/dar-tr-worklist.json"
+      - name: Validate exactly one source, Turkish-only, not already translated
+        shell: bash
+        run: |
+          set -euo pipefail
+          node - <<'NODE'
+          const fs=require('fs'),inv=JSON.parse(fs.readFileSync(process.env.RUNNER_TEMP+'/dar-tr-worklist.json','utf8'));
+          const source='content/posts/2026-06-05-keine-tiyarah.md';
+          const tasks=inv.queue.filter(t=>t.sourcePath===source&&t.locale==='tr'&&['pending','stale'].includes(t.state));
+          if(tasks.length!==1)throw Error('Pilot source is already processed, blocked, absent or ambiguous. Refusing to spend credits.');
+          const item=inv.items.find(x=>x.id===tasks[0].id);
+          if(!item || item.immutable?.sourceReviewBlocked || JSON.stringify(item.fields).length>4500)throw Error('Source not approved for bounded pilot');
+          console.log('Safe pilot: one Turkish-language draft, id:',item.id);
+          NODE
+      - name: Generate one Turkish editorial DRAFT with OpenAI
+        shell: bash
+        env:
+          DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
+          DAR_I18N_AI_API_URL: https://api.openai.com/v1/chat/completions
+          DAR_I18N_AI_MODEL: gpt-4.1
+          DAR_I18N_PROVIDER_APPROVED: 'yes'
+        run: |
+          set -euo pipefail
+          test -n "${DAR_I18N_AI_API_KEY:-}" || { echo "::error::Missing OpenAI secret DAR_I18N_AI_API_KEY"; exit 1; }
+          node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs \
+            --generate \
+            --inventory "$RUNNER_TEMP/dar-tr-worklist.json" \
+            --output "$RUNNER_TEMP/turkish-editorial-draft" \
+            --source-path content/posts/2026-06-05-keine-tiyarah.md \
+            --locale tr \
+            --max-requests 1 \
+            --max-source-chars 4500 \
+            --max-output-tokens 2000
+          node - <<'NODE'
+          const fs=require('fs'),path=require('path'),root=path.join(process.env.RUNNER_TEMP,'turkish-editorial-draft');
+          let count=0;function scan(p){for(const e of fs.readdirSync(p,{withFileTypes:true})){const f=path.join(p,e.name);if(e.isDirectory())scan(f);else if(f.endsWith('.json')){const o=JSON.parse(fs.readFileSync(f));if(o.status!=='draft'||o.locale!=='tr'||!o.sourceHash||!o.fields?.body)throw Error('Unsafe draft');count++;console.log('Draft ready for human review. Input tokens:',o.modelUsage?.prompt_tokens??'unknown','Output tokens:',o.modelUsage?.completion_tokens??'unknown');}}}
+          scan(root);if(count!==1)throw Error('Expected exactly one Turkish draft; got '+count);
+          NODE
+      - name: Upload review-only Turkish manuscript
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-turkish-openai-pilot-unapproved
+          path: ${{ runner.temp }}/turkish-editorial-draft/
+          retention-days: 7
+          if-no-files-found: error
