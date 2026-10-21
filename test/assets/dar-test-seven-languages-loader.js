@@ -14,7 +14,7 @@ global.fetch(endpoint,{credentials:"same-origin",cache:"default"})
   if(!global.DarTestTurkishUI?.registerLocaleData?.(data))
    throw Error("Invalid static multilingual UI pack");
   // Separate editorial headline drafts; source IDs/titles are exact-matched, never body copy.
-  global.fetch("/test/i18n/adult-visible-title-drafts-seven.json?v=1",{credentials:"same-origin",cache:"default"})
+  global.fetch("/test/i18n/adult-visible-title-drafts-seven.json?v=20261022-3",{credentials:"same-origin",cache:"default"})
    .then(r=>{if(!r.ok)throw Error("No heading draft pack");return r.json()})
    .then(t=>{global.DarTestTurkishUI?.registerTitleData?.(t)})
    .catch(_=>{/* original German headings remain, no paid request */});
