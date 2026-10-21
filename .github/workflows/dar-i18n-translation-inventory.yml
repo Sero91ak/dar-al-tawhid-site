@@ -16,6 +16,16 @@ on:
       - 'data/learning-content.json'
       - 'content/learning/**'
       - 'desktop-preview/i18n-core-v1/**'
+      - 'content/i18n/adult-posts/**'
+      - 'scripts/verify-adult-post-language-manifests.cjs'
+      - '.github/workflows/dar-i18n-translation-inventory.yml'
+  pull_request:
+    paths:
+      - 'content/posts/**'
+      - 'q/_registry/shortlinks.json'
+      - 'content/i18n/adult-posts/**'
+      - 'desktop-preview/i18n-core-v1/**'
+      - 'scripts/verify-adult-post-language-manifests.cjs'
       - '.github/workflows/dar-i18n-translation-inventory.yml'
   workflow_dispatch:
 
@@ -42,6 +52,8 @@ jobs:
         run: |
           node desktop-preview/i18n-core-v1/validate-core.cjs
           node desktop-preview/i18n-core-v1/test-glossary-hints.cjs
+      - name: Verify canonical adult locale IDs, source hashes and approval gates
+        run: node scripts/verify-adult-post-language-manifests.cjs
       - name: Verify automatic revision detection with isolated fixtures
         run: node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
       - name: Generate review-only worklist
