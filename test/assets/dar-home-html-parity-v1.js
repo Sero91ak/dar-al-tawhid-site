@@ -248,7 +248,23 @@ function stylesheet(){
 "#darHomeHtmlParityV1 .dhp-library-tile{min-height:100px!important;}",
 "#darHomeHtmlParityV1 :is(.dhp-today-row,.dhp-post-capsule,.dhp-library-tile,.dhp-quran-capsule):is(:focus-visible,:hover){box-shadow:0 0 0 4px var(--dhp-focus),0 8px 19px rgba(0,0,0,.06)!important;}",
 "@media(max-width:370px){#darHomeHtmlParityV1 .dhp-welcome{padding:14px 12px!important;}#darHomeHtmlParityV1 .dhp-today-row{padding:11px 12px!important;}#darHomeHtmlParityV1 .dhp-search-pill{padding-left:13px!important;}#darHomeHtmlParityV1 .dhp-results{padding-left:11px!important;padding-right:11px!important;}#darHomeHtmlParityV1 .dhp-result-group{max-width:30%!important;}}",
-"@media(prefers-reduced-motion:reduce){#darHomeHtmlParityV1 *{transition-duration:.01ms!important;animation-duration:.01ms!important;}}"
+"@media(prefers-reduced-motion:reduce){#darHomeHtmlParityV1 *{transition-duration:.01ms!important;animation-duration:.01ms!important;}}",
+ "/* DAR_TEST_HOME_PARITY_BORDERLESS_V51 · actual rendered Home (#darHomeHtmlParityV1), not old .dv3/.top-shell; never affects Visitor or Kids. */",
+ "body.is-home-route :is(.app,.app-shell,.page-shell,#appRoot,#appShell){border:0!important;border-radius:0!important;outline:0!important;box-shadow:none!important;}",
+ "body.is-home-route #darHomeHtmlParityV1{box-sizing:border-box!important;width:100%!important;max-width:100%!important;min-width:0!important;margin-inline:0!important;border:0!important;border-radius:0!important;outline:0!important;box-shadow:none!important;overflow-x:clip!important;}",
+ "body.is-home-route #darHomeHtmlParityV1::before,body.is-home-route #darHomeHtmlParityV1::after{content:none!important;display:none!important;}",
+ "#darHomeHtmlParityV1 .dhp-content{box-sizing:border-box!important;width:100%!important;max-width:1280px!important;min-width:0!important;margin-inline:auto!important;padding-inline:clamp(14px,3vw,38px)!important;}",
+ "#darHomeHtmlParityV1 :is(.dhp-prayer,.dhp-welcome,.dhp-isnad,.dhp-quick,.dhp-search-pill,.dhp-quran-capsule,.dhp-panel,.dhp-today-row,.dhp-post-capsule,.dhp-library-tile,.dhp-results,.dhp-head button,.dhp-result-group,.dhp-seal,.dhp-search-clear,#dhpSearchClear){border:0!important;outline:0!important;box-shadow:none!important;}",
+ "#darHomeHtmlParityV1 :is(.dhp-prayer,.dhp-welcome,.dhp-isnad,.dhp-quick,.dhp-search-pill,.dhp-quran-capsule,.dhp-panel,.dhp-today-row,.dhp-post-capsule,.dhp-library-tile,.dhp-results){background-clip:padding-box!important;}",
+ "#darHomeHtmlParityV1 :is(.dhp-prayer,.dhp-welcome,.dhp-isnad,.dhp-quick,.dhp-search-pill,.dhp-quran-capsule,.dhp-panel,.dhp-today-row,.dhp-post-capsule,.dhp-library-tile,.dhp-results)::before,#darHomeHtmlParityV1 :is(.dhp-prayer,.dhp-welcome,.dhp-isnad,.dhp-quick,.dhp-search-pill,.dhp-quran-capsule,.dhp-panel,.dhp-today-row,.dhp-post-capsule,.dhp-library-tile,.dhp-results)::after{border:0!important;box-shadow:none!important;}",
+ "#darHomeHtmlParityV1 :is(.dhp-today-row,.dhp-post-capsule,.dhp-library-tile,.dhp-quran-capsule)::before{content:none!important;display:none!important;-webkit-mask:none!important;mask:none!important;}",
+ "#darHomeHtmlParityV1 .dhp-isnad::before{content:none!important;display:none!important;}",
+ "#darHomeHtmlParityV1 .dhp-welcome-rule,#darHomeHtmlParityV1 .dhp-brand-rule{background:none!important;border:0!important;box-shadow:none!important;height:0!important;margin-block:0!important;}",
+ "#darHomeHtmlParityV1 .dhp-prayer-footer{border-top:0!important;padding-top:9px!important;}",
+ "#darHomeHtmlParityV1 :is(.dhp-prayer,.dhp-quick,.dhp-quran-capsule,.dhp-panel,.dhp-article,.dhp-library-tile,.dhp-head button,.dhp-today-row,.dhp-post-capsule):is(:hover,:focus-visible){border:0!important;box-shadow:none!important;transform:none!important;}",
+ "#darHomeHtmlParityV1 button:focus-visible,#darHomeHtmlParityV1 input:focus-visible{outline:2px solid var(--dhp-accent)!important;outline-offset:2px!important;}",
+ "@media (max-width:699px){#darHomeHtmlParityV1 .dhp-content{max-width:100%!important;padding-inline:max(14px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))!important;}}",
+ "@media (min-width:700px){#darHomeHtmlParityV1 .dhp-content{max-width:1280px!important;padding-inline:clamp(24px,3vw,44px)!important;}#darHomeHtmlParityV1 .dhp-brand{max-width:100%!important;}}"
  ].join("\n");
 }
 function create(){
