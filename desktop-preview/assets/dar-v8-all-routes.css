@@ -131,3 +131,71 @@ body.desktop-overhaul-v18 .dar-v8-route-link img{filter:drop-shadow(0 5px 8px #0
  body.desktop-overhaul-v18.v8-chat-focused .dar-v8-more-sheet{display:none!important}
  body.desktop-overhaul-v18 .dar-v8-knowledge-chat{scroll-margin-top:12px;scroll-margin-bottom:34px}
 }
+
+
+/* V8 shared section grammar · Beiträge, Ḥadīṯ, Bibliothek, Frauen, Mehr, Wissen, Qurʾān.
+   Old full-width parchment panels are replaced with clear content hierarchy;
+   real interactive cards keep subtle theme-aware borders and focus feedback. */
+body.desktop-overhaul-v18:not(.dar-v8-home) #pageRoot>.section{
+ max-width:1200px!important;min-width:0!important;
+ padding:0!important;margin:16px auto 24px!important;
+ border:0!important;border-radius:0!important;
+ box-shadow:none!important;background:transparent!important
+}
+body.desktop-overhaul-v18 #pageRoot .section-head{
+ display:flex;align-items:end;justify-content:space-between;flex-wrap:wrap;
+ gap:10px 16px;margin:0 0 16px!important;padding:0 0 12px!important;
+ border-bottom:1px solid var(--v8-line)!important;
+ background:transparent!important
+}
+body.desktop-overhaul-v18 #pageRoot .section-head h2{
+ font:500 clamp(21px,2.4vw,29px)/1.2 Georgia,serif!important;
+ color:var(--v8-ink)!important
+}
+body.desktop-overhaul-v18 #pageRoot .section-head p{color:var(--v8-muted)!important;line-height:1.7}
+body.desktop-overhaul-v18 #pageRoot :is(.real-post,.dua-real,.more-row,.real-cover,.source-work,.pub-card,.rule-card,.list-row,.category-card){
+ max-width:100%;min-width:0;
+ background:var(--v8-paper)!important;color:var(--v8-ink)!important;
+ border:1px solid var(--v8-line)!important;border-radius:18px!important;
+ box-shadow:none!important;
+ transition:border-color .2s,box-shadow .2s,transform .2s
+}
+body.desktop-overhaul-v18 #pageRoot :is(.real-post,.dua-real,.more-row,.real-cover,.source-work,.pub-card,.rule-card,.list-row,.category-card) :is(h2,h3,strong){
+ overflow-wrap:anywhere;color:var(--v8-ink)
+}
+body.desktop-overhaul-v18 #pageRoot :is(.list-row,.more-row,.category-card,.real-cover,.pub-card,.rule-card,.dua-real):is(:hover,:focus-visible){
+ border-color:color-mix(in srgb,var(--v8-gold) 60%,var(--v8-line))!important;
+ box-shadow:0 0 0 2px color-mix(in srgb,var(--v8-gold) 11%,transparent)!important;
+ outline:0
+}
+body.desktop-overhaul-v18 #pageRoot :is(.search-input,.dar-v8-source-query,input[type="search"]):focus-visible{
+ outline:2px solid var(--v8-gold)!important;outline-offset:2px!important
+}
+body.desktop-overhaul-v18 #pageRoot :is(.toolbar,.more-grid,.real-cover-grid,.pub-grid,.list-lines,.two-reading-cols){
+ max-width:100%;min-width:0
+}
+body.desktop-overhaul-v18 #pageRoot .toolbar{
+ display:flex;flex-wrap:wrap;gap:7px;align-items:center;
+ background:transparent!important;box-shadow:none!important;
+ border:0!important;padding:0 0 13px!important
+}
+body.desktop-overhaul-v18 #pageRoot .toolbar .tool{
+ border:1px solid var(--v8-line)!important;border-radius:999px!important;
+ background:var(--v8-paper)!important;color:var(--v8-ink)!important;
+ padding:8px 13px!important
+}
+body.desktop-overhaul-v18 #pageRoot .toolbar .tool.active{
+ border-color:var(--v8-gold)!important;
+ background:color-mix(in srgb,var(--v8-gold) 17%,var(--v8-paper))!important
+}
+body.desktop-overhaul-v18 .dar-v8-route-hero :is(.dar-v8-route-link,.dar-v8-route-actions a):focus-visible,
+body.desktop-overhaul-v18 :is(.dar-v8-side-link,.dar-v8-mobile-dock a,.dar-v8-mobile-dock button,.dar-v8-top-search,.dar-v8-top-icon):focus-visible{
+ outline:2px solid var(--v8-gold)!important;outline-offset:2px!important
+}
+@media(max-width:959px){
+ body.desktop-overhaul-v18:not(.dar-v8-home) #pageRoot>.section{margin:10px auto 18px!important}
+ body.desktop-overhaul-v18 #pageRoot .section-head h2{font-size:21px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ body.desktop-overhaul-v18 #pageRoot :is(.real-post,.dua-real,.more-row,.real-cover,.source-work,.pub-card,.rule-card,.list-row,.category-card){transition:none!important;transform:none!important}
+}
