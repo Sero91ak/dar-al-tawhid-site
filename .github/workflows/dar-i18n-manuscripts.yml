@@ -1,0 +1,77 @@
+name: DAR Adult Multilingual Manuscripts
+
+on:
+  push:
+    branches:
+      - main
+      - feature/adult-multilingual-core-20261021
+    paths:
+      - 'content/posts/**'
+      - 'q/_registry/shortlinks.json'
+      - 'content/duas/duas.json'
+      - 'data/quiz-questions.json'
+      - 'apple-tv/hadith/**'
+      - 'lernen/**'
+      - 'desktop-preview/i18n-core-v1/**'
+      - '.github/workflows/dar-i18n-manuscripts.yml'
+  workflow_dispatch:
+    inputs:
+      item_id:
+        description: 'Canonical content id (e.g. post:...), empty for first pending'
+        required: false
+        type: string
+      locale:
+        description: 'Draft locale or all'
+        required: false
+        default: all
+        type: choice
+        options: [all, ar, en, tr, ku, ckb, bs]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-i18n-manuscripts-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generate:
+    if: ${{ vars.DAR_I18N_AI_GENERATE_ENABLED == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate reference catalogs and source state
+        run: |
+          node desktop-preview/i18n-core-v1/validate-core.cjs
+          node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
+      - name: Determine new and stale language jobs (no push)
+        run: node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/worklist.json"
+      - name: Generate capped manuscript drafts (NOT approved)
+        env:
+          DAR_I18N_AI_API_URL: ${{ vars.DAR_I18N_AI_API_URL }}
+          DAR_I18N_AI_MODEL: ${{ vars.DAR_I18N_AI_MODEL }}
+          DAR_I18N_AI_API_KEY: ${{ secrets.DAR_I18N_AI_API_KEY }}
+          DAR_I18N_PROVIDER_APPROVED: ${{ vars.DAR_I18N_PROVIDER_APPROVED }}
+          SELECT_ID: ${{ inputs.item_id }}
+          SELECT_LOCALE: ${{ inputs.locale }}
+        shell: bash
+        run: |
+          locale="${SELECT_LOCALE:-all}"
+          node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs \
+            --generate --inventory "$RUNNER_TEMP/worklist.json" \
+            --output "$RUNNER_TEMP/generated-drafts" \
+            --max-requests 6 --max-source-chars 9000 --max-output-tokens 5000 \
+            --locale "$locale" ${SELECT_ID:+--id "$SELECT_ID"}
+      - name: Upload unapproved draft artifacts only
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-unapproved-language-manuscripts
+          path: ${{ runner.temp }}/generated-drafts/
+          retention-days: 7
+          if-no-files-found: warn
