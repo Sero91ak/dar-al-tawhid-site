@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - feat/public-v8-all-sections-20261021
+      - fix/v8-allroutes-nav-keyboard-surfaces-20261021
     paths:
       - 'desktop-preview/**'
       - '.github/workflows/dar-v8-all-sections-qa.yml'
@@ -92,6 +93,88 @@ jobs:
             print('PASS: 36 route/viewport combinations, 3D icons, desktop sidebar, 6-tab mobile navigation, chat and hadith.')
           finally:driver.quit()
           PY
+      - name: Verify navigation remains fixed, iPhone fields never zoom, and duplicate backgrounds are removed
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from selenium import webdriver
+          from selenium.webdriver.by import By
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          import json, time, os
+          out='/tmp/dar-v8-consistency'
+          os.makedirs(out,exist_ok=True)
+          op=Options()
+          for f in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--hide-scrollbars'): op.add_argument(f)
+          drv=webdriver.Chrome(options=op)
+          def load(route,width,height):
+              drv.set_window_size(width,height)
+              drv.get('http://127.0.0.1:8765/desktop-preview/index.html?page='+route)
+              WebDriverWait(drv,30).until(lambda d: d.execute_script("return document.body?.dataset.darV8Route===arguments[0]",route))
+              WebDriverWait(drv,30).until(lambda d: d.execute_script("return !!document.getElementById('darV8MobileDock')"))
+          try:
+              for device,width,height in [('desktop',1440,900),('iphone',393,844),('fold',840,900)]:
+                  load('beitraege',width,height)
+                  state=drv.execute_script("""const side=document.getElementById('darV8Sidebar'),
+                    head=document.querySelector(innerWidth>=960?'.dar-v8-topbar':'.site-header'),
+                    dock=document.getElementById('darV8MobileDock');
+                    const active=innerWidth>=960?side:dock;
+                    const before=active.getBoundingClientRect();
+                    window.scrollTo(0,Math.max(550,document.body.scrollHeight));
+                    const after=active.getBoundingClientRect();
+                    return {display:getComputedStyle(active).display,position:getComputedStyle(active).position,
+                      topBefore:before.top,topAfter:after.top,headPosition:getComputedStyle(head).position,
+                      dockVisible:getComputedStyle(dock).display,overflow:document.documentElement.scrollWidth-innerWidth};""")
+                  print('fixed_navigation',device,state,flush=True)
+                  if state['overflow']>3 or state['position']!='fixed' or abs(state['topBefore']-state['topAfter'])>3:
+                      raise RuntimeError('Navigation moves with scrolling: '+device+' '+str(state))
+                  if device!='desktop' and state['headPosition'] not in ('sticky','fixed'):
+                      raise RuntimeError('Mobile top header scrolls away: '+str(state))
+                  drv.save_screenshot(out+'/'+device+'-scroll-navigation.png')
+                  if device=='desktop':continue
+                  for route,selector in [('suche','#siteSearch'),('hadith','#v8HadithSearch'),('start','#darV8FinderQuery')]:
+                      load(route,width,height)
+                      WebDriverWait(drv,20).until(lambda d: d.find_element(By.CSS_SELECTOR,selector).is_displayed())
+                      field=drv.find_element(By.CSS_SELECTOR,selector)
+                      field.click()
+                      time.sleep(.15)
+                      focus=drv.execute_script("""const el=document.querySelector(arguments[0]),
+                          dock=document.getElementById('darV8MobileDock');
+                        return {font:parseFloat(getComputedStyle(el).fontSize),
+                          keyboard:document.body.classList.contains('v8-keyboard-active'),
+                          dock:getComputedStyle(dock).display,focus:document.activeElement===el,
+                          overflow:document.documentElement.scrollWidth-innerWidth};""",selector)
+                      print('focus',device,route,focus,flush=True)
+                      if focus['font']<15.9 or not focus['keyboard'] or focus['dock']!='none' or focus['overflow']>3:
+                          raise RuntimeError('Search focus zoom/dock regression '+device+'/'+route+': '+str(focus))
+                      field.send_keys('Tawhid')
+                      drv.save_screenshot(out+'/'+device+'-'+route+'-keyboard.png')
+                      field.clear()
+                      drv.execute_script('arguments[0].blur()',field)
+                      time.sleep(.14)
+                      if drv.execute_script("return getComputedStyle(document.getElementById('darV8MobileDock')).display")=='none':
+                          raise RuntimeError('Dock did not return after blur: '+route)
+                  for route in ['quran','hadith','dua','bibliothek','wissen','suche']:
+                      load(route,width,height)
+                      transparent=drv.execute_script("""const el=document.querySelector('#pageRoot>.section.parchment');
+                        if(!el)return true;
+                        const bg=getComputedStyle(el).backgroundColor;
+                        return bg==='rgba(0, 0, 0, 0)'||bg==='transparent';""")
+                      print('flattened_surface',device,route,transparent,flush=True)
+                      if not transparent: raise RuntimeError('Nested old background remains on '+route)
+              print('PASS: sticky header + fixed dock + 16px iOS fields + transparent outer sections across routes.')
+          finally:
+              drv.quit()
+          PY
+      - name: Upload navigation and keyboard screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-v8-global-navigation-keyboard
+          path: /tmp/dar-v8-consistency/*.png
+          retention-days: 7
+          if-no-files-found: warn
       - name: Upload all route snapshots
         if: always()
         uses: actions/upload-artifact@v4
