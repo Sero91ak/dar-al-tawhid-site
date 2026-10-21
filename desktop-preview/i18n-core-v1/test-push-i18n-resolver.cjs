@@ -6,7 +6,7 @@
  */
 const assert = require("node:assert/strict");
 const test = require("node:test");
-const {localeCodes, normalizeAppLocale, appLocaleTagPatch,
+const {localeCodes, normalizeAppLocale, appLocaleRecord,
   resolvePushCopy, resolveRecipientPush, buildPreview} = require("./push-i18n-resolver.cjs");
 const registry = require("./locales.json");
 
@@ -30,7 +30,7 @@ test("nine adult languages, Arabic and Soranî RTL", () => {
   assert.equal(normalizeAppLocale("fr-FR"), "fr");
   assert.equal(normalizeAppLocale("es_ES"), "es");
   assert.equal(normalizeAppLocale("ckb"), "ckb");
-  assert.deepEqual(appLocaleTagPatch("ku"), {dar_app_locale:"ku"});
+  assert.deepEqual(appLocaleRecord("sub-123","ku"), {subscription_id:"sub-123",app_locale:"ku"});
 });
 
 test("each explicitly chosen app language is resolved, not OS language", () => {
@@ -98,6 +98,17 @@ test("deduplicate by subscription; retry/language change does not resend", () =>
   assert.match(first.payload.idempotency_key,/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-a[0-9a-f]{3}-[0-9a-f]{12}$/);
 });
 
+test("latest subscription wins, and newer unsubscribe blocks stale opt-in", () => {
+ const base={subscription_id:"same",app_environment:"test",app_locale:"fr",enabled:true,push_opted_in:true};
+ const newest={...base,app_locale:"tr",last_synced_at:"2026-10-22T01:10:00Z"};
+ const old={...base,last_synced_at:"2026-10-22T00:01:00Z"};
+ const a=buildPreview({event:baseEvent,copies,registrations:[old,newest],registry});
+ assert.equal(a.messages.length,1);
+ assert.equal(a.messages[0].copyLocale,"tr");
+ const blocked={...newest,push_opted_in:false,last_synced_at:"2026-10-22T01:11:00Z"};
+ assert.throws(()=>buildPreview({event:baseEvent,copies,registrations:[old,blocked],registry}),/opt-in/);
+});
+
 test("privacy and lane isolation fail closed", () => {
   const base={subscription_id:"approved-recipient",push_opted_in:true,enabled:true,app_environment:"test",app_locale:"en"};
   const attempt=(subscription,event=baseEvent)=>resolveRecipientPush({event,copies,subscription});
@@ -130,6 +141,20 @@ test("source revision, independent Āyah opt-in and exact target time",()=>{
  assert.throws(()=>attempt({...baseEvent,time:"unknown"}),/HH:MM/);
  assert.throws(()=>attempt({type:"daily_ayah",contentId:"ayah:1",sourceHash:"sha-1",
   eventKey:"ayah|2026-10-22",environment:"test"}),/verified destination/);
+});
+
+test("daily Āyah needs separate opt-in and verified Qurʾān route", () => {
+ const sample={type:"daily_ayah",environment:"test",eventKey:"ayah|today",
+  contentId:"ayah:1",sourceHash:"sha-1",routeVerified:true,deepLink:"https://dar-al-tawhid.de/#quran/1/1"};
+ const base={subscription_id:"s",app_locale:"de",app_environment:"test",enabled:true,push_opted_in:true};
+ assert.throws(()=>resolveRecipientPush({event:sample,copies,subscription:base}),/independently opted in/);
+ const result=resolveRecipientPush({event:sample,copies,subscription:{...base,daily_ayah_enabled:true}});
+ assert.equal(result.payload.url,sample.deepLink);
+ assert.equal(result.payload.data.nav,"quran");
+ assert.throws(()=>resolveRecipientPush({
+  event:{...sample,deepLink:"https://example.net/bogus"},
+  copies,subscription:{...base,daily_ayah_enabled:true}
+ }),/verified Qurʾān destination/);
 });
 
 test("new 10th language is automatically accepted from registry", () => {
