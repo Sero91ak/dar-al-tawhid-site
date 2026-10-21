@@ -168,7 +168,30 @@ const EXTRA_ENTRIES=[
 ["App, Qurʾān, Duʿāʾ und Beiträge","Uygulama, Kur'ân, dua ve yazılar"]
 ];
 const dictionary=new Map([...ENTRIES,...EXTRA_ENTRIES]),backward=new Map(),ambiguous=new Set();
-function translateExact(value){
+const SUPPORTED=new Set(["de","tr","en","ar","ku","ckb","bs"]);
+const rtl=new Set(["ar","ckb"]);
+const languagePacks=new Map();
+function registerLocaleData(pack){
+ if(pack?.schemaVersion!==1||pack.sourceLocale!=="de"||
+    pack.scope!=="adult-interface-only"||pack.noPaidProvider!==true||!pack.translations)return false;
+ for(const code of SUPPORTED){
+  if(code==="de")continue;
+  const obj=pack.translations[code];
+  if(!obj||typeof obj!=="object"||Array.isArray(obj))return false;
+  const values=new Map();
+  for(const [source,target] of Object.entries(obj)){
+   if(typeof source==="string"&&source.trim()&&source.length<=240&&
+      typeof target==="string"&&target.trim()&&target.length<=400&&
+      !/[<>]/.test(source+target))values.set(source,target);
+  }
+  languagePacks.set(code,values);
+ }
+ schedule();
+ return true;
+}
+function translateExact(value,language="tr"){
+ if(language==="de")return null;
+ if(language!=="tr")return languagePacks.get(language)?.get(value)??null;
  const known=dictionary.get(value);
  if(known!==undefined)return known;
  const count=value.match(/^(\d+)\s+Funktionen$/);
@@ -182,7 +205,7 @@ for(const [de,tr] of ENTRIES){if(backward.has(tr)&&backward.get(tr)!==de)ambiguo
 const EXCLUDE="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],[lang='ar'],[dir='rtl'],[class*='quran-arabic'],[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],[class*='post-content'],[class*='hadith-text'],[class*='qsource-statement'],[class*='source-quote'],[data-canonical-content]";
 const originals=new WeakMap(),attributeOriginals=new WeakMap();
 const ATTRS=["placeholder","aria-label","title"];
-function currentLocale(){try{return global.localStorage?.getItem(KEY)==="tr"?"tr":"de"}catch(_){return"de"}}
+function currentLocale(){try{const v=global.localStorage?.getItem(KEY);return SUPPORTED.has(v)?v:"de"}catch(_){return"de"}}
 function shouldSkip(element){
  if(!element||typeof element.closest!=="function")return false;
  return !!element.closest(EXCLUDE);
@@ -194,11 +217,11 @@ function transformText(node,locale){
  if(state&&current!==state.source&&current!==state.rendered){state=null;originals.delete(node)}
  if(!state){
   const match=current.match(/^(\s*)(.*?)(\s*)$/s);
-  if(!match||translateExact(match[2])===null)return;
+  if(!match||translateExact(match[2],locale)===null)return;
   state={source:current,rendered:current};originals.set(node,state);
  }
- const value=state.source.match(/^(\s*)(.*?)(\s*)$/s),translated=translateExact(value[2]);
- const desired=locale==="tr"?value[1]+translated+value[3]:state.source;
+ const value=state.source.match(/^(\s*)(.*?)(\s*)$/s),translated=translateExact(value[2],locale);
+ const desired=translated!==null?value[1]+translated+value[3]:state.source;
  if(node.nodeValue!==desired)node.nodeValue=desired;
  state.rendered=desired;
 }
@@ -212,10 +235,10 @@ function transformAttributes(element,locale){
   let prior=state[attr];
   if(prior&&actual!==prior.source&&actual!==prior.rendered){delete state[attr];prior=null}
   if(!prior){
-   if(translateExact(actual)===null)continue;
+   if(translateExact(actual,locale)===null)continue;
    prior={source:actual,rendered:actual};state[attr]=prior;
   }
-  const desired=locale==="tr"?translateExact(prior.source):prior.source;
+  const desired=translateExact(prior.source,locale)??prior.source;
   if(actual!==desired)element.setAttribute(attr,desired);
   prior.rendered=desired;
  }
@@ -230,7 +253,10 @@ function apply(root=global.document?.body,locale=currentLocale()){
   if(node.nodeType===1){transformAttributes(node,locale);continue}
   if(node.nodeType===3){transformText(node,locale);seen++}
  }
- if(doc.documentElement)doc.documentElement.lang=locale;
+ if(doc.documentElement){
+  doc.documentElement.lang=locale;
+  doc.documentElement.dir=rtl.has(locale)?"rtl":"ltr";
+ }
  return seen;
 }
 let queued=false;
@@ -242,6 +268,13 @@ function schedule(){
  else Promise.resolve().then(run);
 }
 function boot(){
+ if(global.document?.createElement&&global.document.head&&
+    !global.document.getElementById("dar-test-seven-languages-loader")){
+  const script=global.document.createElement("script");
+  script.id="dar-test-seven-languages-loader";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=1";
+  script.async=true;global.document.head.appendChild(script);
+ }
  schedule();
  if(!global.MutationObserver||!global.document?.body)return;
  new global.MutationObserver(changes=>{
@@ -263,5 +296,7 @@ if(typeof global.document?.createElement==="function"&&global.document.head&&
  global.document.head.appendChild(tag);
 }
 global.DarTestTurkishUI={apply,schedule,locale:currentLocale,translatedKeys:dictionary.size,
+  supportedLocales:[...SUPPORTED],registerLocaleData,
+  translatedFor:code=>code==="tr"?dictionary.size:(languagePacks.get(code)?.size||0),
   contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};
 })(window);
