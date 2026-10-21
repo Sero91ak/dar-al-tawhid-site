@@ -169,23 +169,80 @@ function initQuran(){
   btn.addEventListener("click",()=>{bookMode=btn.dataset.v8QuranMode;btns.forEach(b=>{const on=b===btn;b.classList.toggle("active",on);b.setAttribute("aria-pressed",String(on))});updateBookMode(host)});
  });
  bookMode="book";updateBookMode(host);
+ host.addEventListener("click",e=>{const verse=e.target.closest?.("[data-book-ayah]");if(!verse)return;v8SelectedAyah=Number(verse.dataset.bookAyah);if(bookMode==="tafsir"||bookMode==="tadabbur")updateBookMode(host)});
  const observe=new MutationObserver(()=>updateBookMode(host));observe.observe(host,{childList:true});
 }
-let bookUpdating=false;
+let bookUpdating=false,v8SelectedAyah=0,v8ModeToken=0,v8TadabburPromise=null;
+const v8SurahContent=new Map(),v8TafsirContent=new Map();
+function loadQuranJson(prefix,surah,cache){
+ if(!cache.has(surah))cache.set(surah,fetch(prefix+String(surah).padStart(3,"0")+".json",{cache:"force-cache"}).then(r=>r.ok?r.json():null).catch(()=>null));
+ return cache.get(surah)
+}
+function displayVerified(box,records){
+ box.replaceChildren();
+ records.forEach(x=>{
+  const card=element("article","dar-v8-quran-source-item");
+  card.append(element("strong","",x.title),element("p","",x.text));
+  if(x.source)card.append(element("small","",x.source));box.append(card)
+ })
+}
+function loadTadabbur(){
+ if(w.DarQuranTadabbur?.loadSurah)return Promise.resolve(w.DarQuranTadabbur);
+ if(!v8TadabburPromise)v8TadabburPromise=new Promise((resolve,reject)=>{
+  const s=d.createElement("script");s.src="/assets/quran-tadabbur-shared.js";
+  s.onload=()=>w.DarQuranTadabbur?resolve(w.DarQuranTadabbur):reject(Error("no loader"));
+  s.onerror=()=>reject(Error("source missing"));d.head.append(s)
+ });
+ return v8TadabburPromise;
+}
 function updateBookMode(host){
  if(bookUpdating||!host?.isConnected)return;bookUpdating=true;
+ const token=++v8ModeToken;
  try{
-  const verseNodes=[...host.querySelectorAll("[data-book-ayah]")];
-  if(!verseNodes.length)return;
-  const surah=new URLSearchParams(location.search).get("surah")||"1";
+  const nodes=[...host.querySelectorAll("[data-book-ayah]")];
+  if(!nodes.length)return;
+  const sn=Number(new URLSearchParams(location.search).get("surah"))||1;
+  const available=new Set(nodes.map(x=>Number(x.dataset.bookAyah)));
+  if(!available.has(v8SelectedAyah))v8SelectedAyah=Number(new URLSearchParams(location.search).get("ayah"))||Number(nodes[0].dataset.bookAyah);
+  if(!available.has(v8SelectedAyah))v8SelectedAyah=Number(nodes[0].dataset.bookAyah);
   const box=d.getElementById("darV8QuranModeNote")||element("div","dar-v8-quran-mode-note");
   box.id="darV8QuranModeNote";if(!box.isConnected)host.after(box);
-  if(bookMode==="tafsir"){box.hidden=false;box.textContent="Tafsīr-Modus: Verse antippen, um die jeweils vorhandenen Quellen zu prüfen. Es werden keine Erläuterungen erfunden.";}
-  else if(bookMode==="tadabbur"){box.hidden=false;box.textContent="Tadabbur: Nur geprüfte, tatsächlich veröffentlichte Betrachtungen können angezeigt werden. Originalverse bleiben unverändert.";}
-  else{box.hidden=true;}
   host.classList.toggle("dar-v8-quran-translit-mode",bookMode==="translit");
+  box.hidden=!["tafsir","tadabbur"].includes(bookMode);
+  if(bookMode==="translit"){
+   loadQuranJson("/content/quran/",sn,v8SurahContent).then(data=>{
+    if(!host.isConnected||bookMode!=="translit"||token!==v8ModeToken)return;
+    nodes.forEach(node=>{
+     if(node.querySelector(".dar-v8-verse-translit"))return;
+     const verse=(data?.verses||[]).find(x=>Number(x.id)===Number(node.dataset.bookAyah));
+     if(verse)node.append(element("div","dar-v8-verse-translit",verse.tr_academic||verse.tr_readable||verse.tr||""))
+    })
+   });
+  }
+  if(bookMode==="tafsir"){
+   box.textContent="Tafsīr für Qurʾān "+sn+":"+v8SelectedAyah+" wird aus der vorhandenen Quellenbibliothek geladen …";
+   loadQuranJson("/content/tafsir/de/",sn,v8TafsirContent).then(data=>{
+    if(!box.isConnected||bookMode!=="tafsir"||token!==v8ModeToken)return;
+    const row=(data?.verses||[]).find(x=>Number(x.id)===v8SelectedAyah);
+    if(!row){box.textContent="Für diese Āyah liegt derzeit keine Tafsīr-Erklärung im vorhandenen Bestand vor.";return}
+    const entries=(Array.isArray(row.tafsir)?row.tafsir:[]).filter(x=>x?.text).map(x=>({title:x.source||"Tafsīr",text:x.text,source:data.source||""}));
+    if(row.meaning)entries.unshift({title:"Qurʾān "+sn+":"+v8SelectedAyah+" · Bedeutung",text:row.meaning,source:"Qurʾān-Reader"});
+    displayVerified(box,entries.length?entries:[{title:"Tafsīr",text:"Keine gesonderte Erläuterung vorhanden."}])
+   })
+  }
+  if(bookMode==="tadabbur"){
+   box.textContent="Tadabbur für Qurʾān "+sn+":"+v8SelectedAyah+" wird aus dem geprüften Salaf-Katalog geladen …";
+   loadTadabbur().then(api=>api.loadSurah(sn)).then(data=>{
+    if(!box.isConnected||bookMode!=="tadabbur"||token!==v8ModeToken)return;
+    if(!data?.verified){box.textContent="Geprüfter Tadabbur-Katalog derzeit nicht erreichbar.";return}
+    const list=(data.verses?.get(v8SelectedAyah)?.athar||[]).filter(x=>x?.text)
+      .map(x=>({title:x.person||x.name||"Überlieferung",text:x.text,source:[x.source,x.grading].filter(Boolean).join(" · ")}));
+    displayVerified(box,list.length?list:[{title:"Kein geprüfter Eintrag",text:"Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor."}])
+   }).catch(()=>{if(box.isConnected&&bookMode==="tadabbur"&&token===v8ModeToken)box.textContent="Tadabbur derzeit nicht erreichbar."})
+  }
  }finally{bookUpdating=false}
 }
+
 function togglePlayer(force){
  const on=typeof force==="boolean"?force:!d.body.classList.contains("dar-v8-player-fullscreen");
  d.body.classList.toggle("dar-v8-player-fullscreen",on);
