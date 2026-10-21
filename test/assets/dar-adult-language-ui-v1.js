@@ -11,10 +11,32 @@
  function read(){
   try{const v=win.localStorage.getItem(KEY);return supported.includes(v)?v:"de"}catch(_){return"de"}
  }
+ function localizeShell(code){
+  // Only established navigation labels, never alter routes, icons, links or source texts.
+  const map={home:["Start","Ana Sayfa"],ilm:["ʿIlm","ʿİlm"],recent:["Beiträge","Paylaşımlar"],quran:["Qurʾān","Kurʾân"],more:["Mehr","Diğer"]};
+  doc.querySelectorAll("#bottomNav [data-bottom-nav]").forEach(function(button){
+   const name=button.dataset.bottomNav;
+   const words=map[name];if(!words)return;
+   const label=button.querySelector(":scope > span:last-child");
+   if(label&&!label.classList.contains("nav-icon"))label.textContent=words[code==="tr"?1:0];
+   if(name==="more")button.setAttribute("aria-label",code==="tr"?"Diğer seçenekler. Hızlı erişim için basılı tutun.":"Mehr öffnen. Gedrückt halten für Schnellzugriff.");
+   else if(name==="home")button.setAttribute("aria-label",code==="tr"?"Ana Sayfa":"Startseite");
+   else if(name==="recent")button.setAttribute("aria-label",code==="tr"?"Paylaşımlar":"Beiträge");
+  });
+  const categoryLabels={wissen:["Wissen","Bilgi"],alltag:["Alltag","Günlük hayat"],werkzeuge:["Werkzeuge","Araçlar"],persoenlich:["Persönlich","Kişisel"],app:["App","Uygulama"]};
+  doc.querySelectorAll("#appView .dar-more-v15 [data-dm-category]").forEach(function(button){
+   const item=categoryLabels[button.dataset.dmCategory];
+   const label=button.querySelector("span:last-child");
+   if(item&&label)label.textContent=item[code==="tr"?1:0];
+  });
+  const heading=doc.querySelector("#appView .dsh-home .dsh-welcome h2");
+  if(heading)heading.textContent=code==="tr"?"Uygulama deneyimin":"Dein App-Erlebnis";
+ }
  function apply(code){
   if(!supported.includes(code))return;
   current=code;
   doc.documentElement.dataset.darAdultLocalePreference=code;
+  localizeShell(code);
   doc.querySelectorAll("[data-dar-adult-language-choice]").forEach(function(el){
    const active=el.dataset.darAdultLanguageChoice===code;
    el.setAttribute("aria-pressed",String(active));
