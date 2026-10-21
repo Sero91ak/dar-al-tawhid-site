@@ -48,7 +48,9 @@ function scanPosts(){
   if(raw===null){issues.push({kind:"post",file:name,issue:"indexed-file-missing"});continue}
   const {meta,body}=frontmatter(raw);
   if(meta.status==="draft"||meta.status==="unpublished")continue;
-  add("post",meta.id||name.replace(/\.md$/,""),sourcePath,{title:meta.title||name,body}, {source:meta.source||"",book:meta.book||"",scholar:meta.scholar||"",date:meta.date||"",originalFile:name});
+  const inPublishedIndex=indexed.includes(name);
+  if(!inPublishedIndex)issues.push({kind:"post",file:name,issue:"unindexed-post-held-for-review"});
+  add("post",meta.id||name.replace(/\.md$/,""),sourcePath,{title:meta.title||name,body}, {source:meta.source||"",book:meta.book||"",scholar:meta.scholar||"",date:meta.date||"",originalFile:name,sourceReviewBlocked:!inPublishedIndex});
  }
 }
 function scanQ(){
