@@ -223,9 +223,38 @@ async function loadCatalog(fetcher=global.fetch?.bind(global)){
  }catch(_){remoteCatalogState="unavailable";return dictionary.size}
 }
 
+const INTL_LOCALE={de:"de-DE",tr:"tr-TR",en:"en-GB",ar:"ar-EG-u-ca-gregory",ku:"ku-TR",ckb:"ckb-IQ-u-ca-gregory",bs:"bs-BA"};
+const DE_MONTHS=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+const DE_WEEKDAYS=["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"];
+function formatCalendarDate(date,language=currentLocale(),options={weekday:"long",day:"numeric",month:"long",year:"numeric"}){
+ const d=date instanceof Date?date:new Date(date);
+ if(!Number.isFinite(d.getTime()))return "";
+ try{return new Intl.DateTimeFormat(INTL_LOCALE[language]||"de-DE",options).format(d)}
+ catch(_){return new Intl.DateTimeFormat("de-DE",options).format(d)}
+}
+function localizeGermanCalendarLabel(value,language){
+ if(!language||language==="de"||value.length>90||!/[A-Za-zäöüß]/.test(value))return null;
+ let changed=false,result=value;
+ const locale=INTL_LOCALE[language]||"de-DE";
+ for(let month=0;month<12;month++){
+  const pattern=new RegExp("(^|[\\s,])"+DE_MONTHS[month]+"(?=$|[\\s,0-9.])","g");
+  if(!pattern.test(result))continue;
+  let m=DE_MONTHS[month];
+  try{m=new Intl.DateTimeFormat(locale,{month:"long",timeZone:"UTC"}).format(new Date(Date.UTC(2026,month,15)))}catch(_){}
+  result=result.replace(pattern,(_,before)=>before+m);changed=true;
+ }
+ for(let day=0;day<7;day++){
+  const pattern=new RegExp("(^|[\\s,])"+DE_WEEKDAYS[day]+"(?=$|[\\s,0-9.])","g");
+  if(!pattern.test(result))continue;
+  let d=DE_WEEKDAYS[day];
+  try{d=new Intl.DateTimeFormat(locale,{weekday:"long",timeZone:"UTC"}).format(new Date(Date.UTC(2026,0,5+day)))}catch(_){}
+  result=result.replace(pattern,(_,before)=>before+d);changed=true;
+ }
+ return changed?result:null;
+}
 function translateExact(value,language="tr"){
  if(language==="de")return null;
- if(language!=="tr")return languagePacks.get(language)?.get(value)??null;
+ if(language!=="tr")return languagePacks.get(language)?.get(value)??localizeGermanCalendarLabel(value,language);
  const known=dictionary.get(value);
  if(known!==undefined)return known;
  const count=value.match(/^(\d+)\s+Funktionen$/);
@@ -255,7 +284,7 @@ function translateExact(value,language="tr"){
  const action=value.match(/^(.{2,160}) öffnen$/);
  if(action&&!/[<>\u0600-\u06ff]/.test(action[1]))
    return action[1]+" aç";
- return null;
+ return localizeGermanCalendarLabel(value,language);
 }
 
 for(const [de,tr] of ENTRIES){if(backward.has(tr)&&backward.get(tr)!==de)ambiguous.add(tr);else backward.set(tr,de)}
@@ -357,7 +386,8 @@ global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,
   get catalogStatus(){return remoteCatalogState},
   hasTranslation:(de)=>dictionary.has(de),
   translateValue:translateExact,
-  registerLocaleData,supportedLocales:[...SUPPORTED],
+  registerLocaleData,supportedLocales:[...SUPPORTED],formatCalendarDate,
+  translatePrayerName:(source,locale=currentLocale())=>translateExact(source,locale)||source,
   translatedFor:code=>code==="tr"?dictionary.size:(languagePacks.get(code)?.size||0),
   contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};
 })(window);
