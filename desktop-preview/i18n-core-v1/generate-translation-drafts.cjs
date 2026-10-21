@@ -13,6 +13,8 @@ const OUT=path.resolve(arg("--output",path.join(__dirname,"generated-drafts")));
 const MAX_CALLS=cap("--max-requests",1,20),MAX_SOURCE=cap("--max-source-chars",9000,14000),MAX_TOKENS=cap("--max-output-tokens",5000,8000);
 const LOCALE=arg("--locale","all"),ITEM=arg("--id",""),KIND=arg("--kind",""),SOURCE=arg("--source-path","");
 const LANGS={ar:"Arabic Fuṣḥā (العربية الفصحى)",en:"formal scholarly English",tr:"formal Turkish",ku:"Kurmancî Northern Kurdish",ckb:"Soranî Central Kurdish (RTL)",bs:"formal Bosnian"};
+
+const {glossaryHints}=require("./glossary-hints.cjs");
 if(LOCALE!=="all"&&!LANGS[LOCALE])throw Error("Unknown locale");
 const inv=JSON.parse(fs.readFileSync(inventoryFile,"utf8"));
 if(inv.schemaVersion!==2||!Array.isArray(inv.queue)||!Array.isArray(inv.items))throw Error("Invalid worklist v2");
@@ -51,7 +53,7 @@ async function generate(rec){
  try{
   const response=await fetch(apiUrl,{method:"POST",signal:abort.signal,headers:{"authorization":"Bearer "+apiKey,"content-type":"application/json"},
     body:JSON.stringify({model,temperature:0.1,max_tokens:MAX_TOKENS,response_format:{type:"json_object"},
-      messages:[{role:"system",content:systemText},{role:"user",content:JSON.stringify({targetLanguage:LANGS[rec.locale],id:item.id,fields:item.fields,immutable:item.immutable})}]})});
+      messages:[{role:"system",content:systemText},{role:"user",content:JSON.stringify({targetLanguage:LANGS[rec.locale],id:item.id,fields:item.fields,immutable:item.immutable,terminologySpellingHints:glossaryHints(item.fields),terminologyNote:"These are canonical spelling hints only; they are NOT translations, legal rulings or definitions. Use context and preserve sourced meaning."})}]})});
   if(!response.ok)throw Error("Provider HTTP "+response.status);
   const raw=await response.json();const fields=JSON.parse(String(raw.choices?.[0]?.message?.content||""));
   const error=validate(item,rec.locale,fields);if(error)throw Error(error);

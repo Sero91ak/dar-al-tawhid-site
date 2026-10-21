@@ -38,8 +38,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Validate locale catalogs and reviewer gates
-        run: node desktop-preview/i18n-core-v1/validate-core.cjs
+      - name: Validate locale catalogs, terminology anchors and reviewer gates
+        run: |
+          node desktop-preview/i18n-core-v1/validate-core.cjs
+          node desktop-preview/i18n-core-v1/test-glossary-hints.cjs
       - name: Verify automatic revision detection with isolated fixtures
         run: node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
       - name: Generate review-only worklist
