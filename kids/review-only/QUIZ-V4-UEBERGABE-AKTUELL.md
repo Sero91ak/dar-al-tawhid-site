@@ -6,7 +6,7 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `4a304ea56c526f86e07e453ca454745302c23dc5`
+- Commit beim Erstellen dieses Berichts: `301402044ce0ec81a4fb805f6076b7f82644573f`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **752 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1542 Frage-/Lob-/Retry-/Erklärungsteile**.
@@ -127,7 +127,7 @@ Nur nach wirklicher inhaltlicher und finanzieller Freigabe neue V4-Stimmenaufnah
 Aktuelle zusätzliche Schutzregel: Der V4-Quellenprüfer muss auch nach bereits gespeicherten Teil-Batches mit 55, 45 usw. fehlenden Originalen erneut bestehen. Die kostenpflichtige Stufe berechnet dafür jedes Mal einen SHA-256-Fingerabdruck aus Originalquelle, gespeicherten MP3-Zuordnungen, vorherigen Kostenbelegen und den nächsten genauen Sprechtext-SHAs.
 Nur wenn der ausdrücklich bestätigte Batch-Fingerabdruck exakt zur neu geprüften Quelle und zum aktuellen Ledger passt, darf der Produktionscode überhaupt eine Anfrage an ElevenLabs senden. Bei Abweichung: STOP vor Provider-GET oder TTS-POST; keine stillschweigende Kreditfreigabe.
 Zusätzliche Absicherung: unmittelbar VOR jedem potenziell kostenpflichtigen POST schreibt der Generator einen als UNBESTÄTIGT markierten SHA-/Batch-Eintrag in `kids/data/quiz-v4-older-stage1-request-journal.json` und spiegelt ihn in `kids/data/quiz-v4-older-stage1-usage.json`. Die Usage-Datei ist bereits Teil des GitHub-Actions-Backups mit `if: always()`. Nach erhaltenen originalen MP3-Bytes werden Ledger und Originalregister atomar gespeichert; eine unsichere frühere Abrechnung oder unterbrochene Anfrage verbietet jede erneute Generierung derselben Sprachaufnahme, bis die Originaldatei/Provider-Abbuchung geklärt wurde.
-Aktuell im Reviewprotokoll vorhandener Fingerabdruck: `d0c25e53e6dabd120ff04d5a5d1c33e9e90e352d2b2a7e7abc3e6eae8e0d65f8`. Nach jeder MP3-Ergänzung erneut berechnen.
+Aktuell im Reviewprotokoll vorhandener Fingerabdruck: `5baec27e64796a07596a01a2958461ca442a6c84456ed86b629ee53647887651`. Nach jeder MP3-Ergänzung erneut berechnen.
 
 ## Sicherer echter V4-Originalabruf und Kostenschutz bei Unterbrechung
 
