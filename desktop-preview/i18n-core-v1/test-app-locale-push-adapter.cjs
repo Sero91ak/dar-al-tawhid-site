@@ -43,6 +43,28 @@ test("authenticated backend ack binds locale to the exact subscription",async()=
  assert.equal(result.subscriptionId,"sub-123");
  assert.deepEqual(JSON.parse(JSON.stringify(records)),[{subscriptionId:"sub-123",appLocale:"fr"}]);
 });
+test("native iOS and Android webviews may bridge their own subscription state safely",async()=>{
+ for(const platform of ["ios","android"]){
+  const rows=[];
+  const r=await adapter().syncSelectedAppLocale("es-ES",{
+   registry,
+   getNativeSubscriptionState:async()=>({id:platform+"-test-subscription",optedIn:true}),
+   updateRegistration:async(row)=>{rows.push(row);return {ok:true,subscriptionId:row.subscriptionId,appLocale:row.appLocale};}
+  });
+  assert.equal(r.synced,true);
+  assert.equal(r.locale,"es");
+  assert.equal(r.subscriptionId,platform+"-test-subscription");
+  assert.equal(rows.length,1);
+ }
+});
+test("native bridge cannot override server-side consent by claiming opted in",async()=>{
+ const r=await adapter().syncSelectedAppLocale("fr",{
+  registry,getNativeSubscriptionState:()=>({id:"native-test",optedIn:false}),
+  updateRegistration:()=>{throw Error("must not run");}
+ });
+ assert.equal(r.synced,false);
+ assert.equal(r.reason,"push_not_opted_in");
+});
 test("no false success if secure backend not installed",async()=>{
  const r=await adapter().syncSelectedAppLocale("es",{
   registry,oneSignal:OS()
