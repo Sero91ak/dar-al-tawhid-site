@@ -68,7 +68,27 @@ jobs:
           else
             echo "For historical content a specific canonical item_id is required."
           fi
-      - name: Upload unapproved draft artifacts only
+      - name: Stage manuscripts as DRAFT pull request on canonical main
+        if: ${{ github.ref == 'refs/heads/main' }}
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          generated="$RUNNER_TEMP/generated-drafts/desktop-preview/i18n-core-v1/translations"
+          if [[ ! -d "$generated" ]]; then echo "No draft manuscripts."; exit 0; fi
+          mkdir -p desktop-preview/i18n-core-v1/translations
+          cp -R "$generated/." desktop-preview/i18n-core-v1/translations/
+          git add desktop-preview/i18n-core-v1/translations
+          if git diff --cached --quiet; then echo "No new manuscripts."; exit 0; fi
+          branch="i18n/manuscripts-${GITHUB_RUN_ID}"
+          git checkout -b "$branch"
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" commit -m "chore(i18n): unreviewed multilingual manuscripts"
+          git push origin "HEAD:refs/heads/$branch"
+          gh pr create --base main --head "$branch" --draft --title "DRAFT: Mehrsprachige Beitragsfassungen ${GITHUB_RUN_ID}" --body "Nur redaktionelle Entwürfe. Quellen prüfen, alle sechs Sprachen fachlich freigeben und erst anschließend gesondert veröffentlichen. Keine Änderungen an Push, Gebetszeiten oder Apps."
+      - name: Store review artifacts even when pull-request creation is disabled
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: dar-unapproved-language-manuscripts
