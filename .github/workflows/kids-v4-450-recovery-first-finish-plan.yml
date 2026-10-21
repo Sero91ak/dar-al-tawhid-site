@@ -44,7 +44,14 @@ jobs:
           s=obj['summary']
           assert s['selectedQuestions']==450 and s['modelId']=='eleven_v4'
           assert s['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
-          assert s['alreadyTechnicallyComplete']+s['questionsBlockedOnlyOnAlreadyPaidNine']+s['questionsWaitingOnlyForConnectedFlowOriginals']+s['questionsNeedingAtLeastOneGenuinelyNewOriginal']==450
+          assert sum(sum(categories.values()) for categories in s['ageCounts'].values())==450
+          stage=json.loads(Path('kids/review-only/quiz-v4-450-actual-mp3-import.json').read_text())
+          assert s['alreadyTechnicallyComplete']==sum(
+            int(row['fourPartTechnicallyReady']) for row in stage['questions'].values())
+          assert s['alreadyTechnicallyComplete']==sum(
+            age['completeFourPartQuestions'] for age in stage['byAge'].values())
+          assert all(not row['publicPlaybackAuthorized'] and not row['humanListeningApproved']
+                     for row in stage['questions'].values())
           assert s['connectedFlowOriginalTextsPendingOrReserved']==len(obj['connectedFlowOriginalsToRecoverWithoutSecondPurchase'])
           assert s['reservedFlowOriginalsExcludedFromNewChargeQueue']==len(obj['connectedFlowOriginalsToRecoverWithoutSecondPurchase'])
           assert all(r['newSynthesisAllowed'] is False for r in obj['connectedFlowOriginalsToRecoverWithoutSecondPurchase'])
