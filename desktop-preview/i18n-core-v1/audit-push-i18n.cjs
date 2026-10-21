@@ -10,6 +10,7 @@ const path=require("node:path");
 const {localeCodes}=require("./push-i18n-resolver.cjs");
 const registry=require("./locales.json");
 const manifest=JSON.parse(fs.readFileSync(path.join(__dirname,"onesignal-nine-language-drafts.json"),"utf8"));
+const manuscripts=JSON.parse(fs.readFileSync(path.join(__dirname,"push-copy-nine-languages-draft.json"),"utf8"));
 const expected=[
   ...["fajr","dhuhr","asr","maghrib","isha"].flatMap(key=>["prayer_"+key+"_entry","prayer_"+key+"_advance"]),
   "prayer_tahajjud_entry",
@@ -24,7 +25,11 @@ const missingLanguageReviews=codes.filter(c=>!snapshot.includes(c));
 const retiredLanguages=snapshot.filter(c=>!codes.includes(c));
 const duplicateTemplateIds=Object.values(templates)
   .map(v=>String(v.id||"")).filter((id,i,a)=>!id||a.indexOf(id)!==i);
-const neverPublish=Object.values(templates).every(t=>t.reviewState!=="approved");
+const manuscriptPairs=Object.values(manuscripts.copy||{}).reduce((sum,messages)=>sum+Object.keys(messages).length,0);
+const missingManuscripts=codes.flatMap(code=>
+ expected.filter(key=>!manuscripts.copy?.[code]?.[key]).map(key=>code+":"+key));
+const unreviewedManuscripts=codes.flatMap(code=>
+ expected.filter(key=>manuscripts.copy?.[code]?.[key]?.status!=="approved").map(key=>code+":"+key));
 const report={
   kind:"DĀR OneSignal editorial-only template audit",
   actualRegisteredLocales:codes,
@@ -36,6 +41,10 @@ const report={
   missingLanguageReviews,
   retiredLanguages,
   duplicateTemplateIds,
+  manuscriptPairs,
+  missingManuscripts,
+  unreviewedManuscripts,
+  approvedManuscripts:manuscriptPairs-unreviewedManuscripts.length,
   templatesRequireReview:Object.entries(templates)
     .filter(([,v])=>v.reviewState!=="approved").map(([k])=>k),
   safeToActivate:false,
@@ -43,4 +52,4 @@ const report={
   note:"Neither copied text nor its OneSignal publication status is verified by this offline audit."
 };
 process.stdout.write(JSON.stringify(report,null,2)+"\n");
-if(missingTemplateKeys.length||unknownTemplateKeys.length||duplicateTemplateIds.length)process.exitCode=1;
+if(missingTemplateKeys.length||unknownTemplateKeys.length||duplicateTemplateIds.length||missingManuscripts.length)process.exitCode=1;
