@@ -163,6 +163,7 @@ function initChat(){
 }
 let bookMode="book";
 function initQuran(){
+ const launch=d.getElementById("darV8QuranAudioLaunch");if(launch)launch.onclick=()=>togglePlayer(true);
  const input=d.getElementById("bookQuranSearch"),host=d.getElementById("bookShell");
  if(!input||!host)return;
  let results=d.getElementById("darV8GlobalQuranResults");
