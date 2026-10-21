@@ -8568,6 +8568,16 @@
         "content/admin/change-scope-lock.json"
       ],
       "expiresAt": "2026-12-31T23:59:00.000Z"
+    },
+    {
+      "id": "public-v8-faithful-preview-qa-20261021",
+      "at": "2026-10-21T13:40:00+02:00",
+      "approvedBy": "user-requested-faithful-live-V8-layout-20261021",
+      "reason": "Only a read-only desktop browser visual regression workflow to compare actual V8 shell at desktop, iPhone and Fold widths. No live deploy, push, player or native modifications.",
+      "paths": [
+        ".github/workflows/dar-v8-faithful-preview-qa.yml"
+      ],
+      "expiresAt": "2026-11-30T23:59:00Z"
     }
   ],
   "enabled": true
