@@ -17,7 +17,28 @@ function sync(){
  document.documentElement.classList.add("dar-home-v47-layout");
  var lead=document.getElementById("darHomeV47Leadin");
  if(!lead){lead=make("p","dar-v47-leadin","BEITRÄGE NACH QURʾĀN, SUNNAH & ĀTHĀR");lead.id="darHomeV47Leadin"}
- if(lead.parentNode!==header||lead.nextElementSibling!==row)header.insertBefore(lead,row);
+ // The fixed DĀR brand rail is the ONE brand authority. V4.7 used to
+ // recreate a second gold lead-in + logo/title/subline below it. Keep the
+ // original row in the DOM for older theme hooks, but never show it on Home.
+ var hasFixedBrand=!!document.getElementById("darTestBrandHeaderV1");
+ if(hasFixedBrand){
+  if(lead&&lead.parentNode)lead.remove();
+  row.hidden=true;row.setAttribute("aria-hidden","true");
+  row.style.setProperty("display","none","important");
+  row.style.setProperty("height","0","important");
+  row.style.setProperty("min-height","0","important");
+  row.style.setProperty("margin","0","important");
+  row.style.setProperty("padding","0","important");
+  var top=header.closest(".top-shell");
+  if(top)top.style.setProperty("padding-top","0","important");
+  header.style.setProperty("padding-top","0","important");
+  // Real, live prayer hub, not a cloned or static replacement.
+  if(prayer.parentElement===header&&header.firstElementChild!==prayer)
+   header.insertBefore(prayer,header.firstElementChild);
+ }else{
+  row.hidden=false;row.removeAttribute("aria-hidden");row.style.removeProperty("display");
+  if(lead.parentNode!==header||lead.nextElementSibling!==row)header.insertBefore(lead,row);
+ }
  var welcome=document.getElementById("darHomeV47Welcome");
  if(!welcome){
   welcome=make("section","dar-v47-welcome");welcome.id="darHomeV47Welcome";
@@ -53,6 +74,7 @@ function init(){
  new MutationObserver(queue).observe(document.body,{attributes:true,attributeFilter:["class"]});
  new MutationObserver(queue).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme","data-theme-variant"]});
  document.addEventListener("dar:view-rendered",queue);
+ document.addEventListener("dar:brand-header-mounted",queue);
  window.addEventListener("hashchange",queue);
  window.addEventListener("pageshow",queue);
 }
