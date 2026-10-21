@@ -64,7 +64,7 @@ function selectLanguage(code){if(!supported.includes(code))return;try{localStora
 }
 function renderQuickLanguage(){
  if(currentPage!=="start"&&currentPage!=="mehr")return;
- const host=currentPage==="start"?d.querySelector("#darV8TopWelcome .v8-copy"):d.querySelector("#pageRoot .more-grid");
+ const host=currentPage==="start"?d.querySelector("#darV8TopWelcome .v8-copy"):(d.querySelector("#pageRoot .dar-v8-route-copy")||d.querySelector("#pageRoot .more-grid"));
  if(!host)return;
  let bar=d.getElementById("darV8QuickLanguage");
  if(!bar){
@@ -76,7 +76,7 @@ function renderQuickLanguage(){
   });
   const more=d.createElement("button");more.type="button";more.className="dar-v8-quick-language-more";more.textContent="Weitere Sprachen ▾";more.setAttribute("aria-controls","darV8LangMenu");
   more.addEventListener("click",()=>{const toggle=d.getElementById("darV8LangToggle");if(toggle)toggle.click()});bar.append(more);
-  if(currentPage==="start")host.append(bar);else host.parentElement.insertBefore(bar,host);
+  if(currentPage==="start"||host.classList.contains("dar-v8-route-copy"))host.append(bar);else host.parentElement.insertBefore(bar,host);
  }
  bar.querySelectorAll("[data-v8-quick-locale]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.v8QuickLocale===locale())));
  const more=bar.querySelector(".dar-v8-quick-language-more");
