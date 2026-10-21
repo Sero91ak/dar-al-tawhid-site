@@ -16,11 +16,11 @@ const copies = Object.fromEntries(localeCodes(registry).map((code) => [
 ]));
 const baseEvent = {
   type: "prayer", eventKey: "2026-10-22|Europe/Berlin|fajr|advance|05:30",
-  prayerKey: "fajr", mode: "advance", minutes: 10, time: "05:30"
+  prayerKey: "fajr", mode: "advance", minutes: 10, time: "05:30", environment:"test"
 };
 const postEvent = {
   type: "new_post", eventKey: "post:readable-article|revision-1",
-  contentId: "post:readable-article", qNumber: 271
+  contentId: "post:readable-article", qNumber: 271, environment:"test"
 };
 
 test("nine adult languages, Arabic and Soranî RTL", () => {
@@ -37,7 +37,7 @@ test("each explicitly chosen app language is resolved, not OS language", () => {
   for (const locale of localeCodes(registry)) {
     const m = resolveRecipientPush({
       event: baseEvent, copies,
-      subscription: {subscription_id: "sub-" + locale, app_locale: locale, os_locale:"de"}
+      subscription:{push_opted_in:true,enabled:true,app_environment:"test",subscription_id: "sub-" + locale, app_locale: locale, os_locale:"de"}
     });
     assert.equal(m.appLocale, locale);
     assert.equal(m.copyLocale, locale);
@@ -51,7 +51,7 @@ test("approved fallback never publishes unreviewed text", () => {
   const restricted = {...copies, fr:{status:"draft", title:"DO NOT SEND", body:"DO NOT SEND"}};
   const m = resolveRecipientPush({
     event: baseEvent, copies:restricted,
-    subscription:{subscriptionId:"recipient",appLocale:"fr"}
+    subscription:{push_opted_in:true,enabled:true,app_environment:"test",subscriptionId:"recipient",appLocale:"fr"}
   });
   assert.equal(m.fallback,true);
   assert.equal(m.copyLocale,"de");
@@ -67,14 +67,14 @@ test("stale source hash blocks translation even when marked approved", () => {
   };
   const msg = resolveRecipientPush({
     event:{...postEvent,sourceHash:"new-revision"},
-    copies:versioned, subscription:{subscription_id:"s",app_locale:"fr"}
+    copies:versioned, subscription:{push_opted_in:true,enabled:true,app_environment:"test",subscription_id:"s",app_locale:"fr"}
   });
   assert.equal(msg.copyLocale,"de");
   assert.equal(msg.fallback,true);
   const approved = resolveRecipientPush({
     event:{...postEvent,sourceHash:"new-revision"},
     copies:{...versioned,fr:{...versioned.fr,sourceHash:"new-revision"}},
-    subscription:{subscription_id:"s",app_locale:"fr"}
+    subscription:{push_opted_in:true,enabled:true,app_environment:"test",subscription_id:"s",app_locale:"fr"}
   });
   assert.equal(approved.copyLocale,"fr");
 });
@@ -83,24 +83,38 @@ test("deduplicate by subscription; retry/language change does not resend", () =>
   const p = buildPreview({
     event:baseEvent,copies,
     registrations:[
-      {subscription_id:"same",app_locale:"fr"},
-      {subscription_id:"same",app_locale:"en"},
-      {subscription_id:"other",app_locale:"es"}
+      {subscription_id:"same",push_opted_in:true,enabled:true,app_environment:"test",app_locale:"fr"},
+      {subscription_id:"same",push_opted_in:true,enabled:true,app_environment:"test",app_locale:"en"},
+      {subscription_id:"other",push_opted_in:true,enabled:true,app_environment:"test",app_locale:"es"}
     ]
   });
   assert.equal(p.sent,false);
   assert.equal(p.uniqueRecipients,2);
   assert.equal(p.messages[0].copyLocale,"fr");
   assert.equal(p.messages[1].copyLocale,"es");
-  const first = resolveRecipientPush({event:baseEvent,copies,subscription:{subscription_id:"same",app_locale:"fr"}});
-  const switched = resolveRecipientPush({event:baseEvent,copies,subscription:{subscription_id:"same",app_locale:"en"}});
+  const first = resolveRecipientPush({event:baseEvent,copies,subscription:{push_opted_in:true,enabled:true,app_environment:"test",subscription_id:"same",app_locale:"fr"}});
+  const switched = resolveRecipientPush({event:baseEvent,copies,subscription:{push_opted_in:true,enabled:true,app_environment:"test",subscription_id:"same",app_locale:"en"}});
   assert.equal(first.payload.idempotency_key,switched.payload.idempotency_key);
   assert.match(first.payload.idempotency_key,/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-a[0-9a-f]{3}-[0-9a-f]{12}$/);
 });
 
+test("privacy and lane isolation fail closed", () => {
+  const base={subscription_id:"approved-recipient",push_opted_in:true,enabled:true,app_environment:"test",app_locale:"en"};
+  const attempt=(subscription,event=baseEvent)=>resolveRecipientPush({event,copies,subscription});
+  assert.throws(()=>attempt({...base,push_opted_in:false}),/opt-in/);
+  assert.throws(()=>attempt({...base,enabled:false}),/opt-in/);
+  assert.throws(()=>attempt({...base,app_environment:"production"}),/environment mismatch/);
+  assert.throws(()=>attempt(base,{...baseEvent,environment:""}),/target environment/);
+  assert.throws(()=>attempt(base,{...baseEvent,environment:"production"}),/environment mismatch/);
+  assert.throws(()=>attempt(base,{type:"daily_dua",contentId:"dua:1",eventKey:"daily|2026-10-22",environment:"test"}),/not enabled/);
+  const daily=attempt({...base,daily_dua_enabled:true},{type:"daily_dua",contentId:"dua:1",eventKey:"daily|2026-10-22",environment:"test"});
+  assert.match(daily.payload.url,/#dua/);
+  assert.throws(()=>attempt(base,{type:"daily_recommendation",contentId:"post:2",eventKey:"daily|2026-10-22",environment:"test"}),/not enabled/);
+});
+
 test("one content ID and URL independent of 9 translations", () => {
-  const fr = resolveRecipientPush({event:postEvent,copies,subscription:{subscription_id:"one",app_locale:"fr"}});
-  const es = resolveRecipientPush({event:postEvent,copies,subscription:{subscription_id:"two",app_locale:"es"}});
+  const fr = resolveRecipientPush({event:postEvent,copies,subscription:{push_opted_in:true,enabled:true,app_environment:"test",subscription_id:"one",app_locale:"fr"}});
+  const es = resolveRecipientPush({event:postEvent,copies,subscription:{push_opted_in:true,enabled:true,app_environment:"test",subscription_id:"two",app_locale:"es"}});
   assert.equal(fr.payload.data.content_id,postEvent.contentId);
   assert.equal(fr.payload.data.q_number,271);
   assert.equal(fr.payload.url,es.payload.url);
@@ -122,14 +136,14 @@ test("new 10th language is automatically accepted from registry", () => {
 
 test("invalid prayer windows and missing IDs fail closed", () => {
   assert.throws(() => resolveRecipientPush({
-    event:{...baseEvent,minutes:1573},copies,subscription:{subscription_id:"x"}
+    event:{...baseEvent,minutes:1573},copies,subscription:{push_opted_in:true,enabled:true,app_environment:"test",subscription_id:"x"}
   }),/Invalid advance/);
   assert.throws(() => resolveRecipientPush({
     event:{type:"daily_dua",eventKey:"2026-10-22"},
-    copies,subscription:{subscription_id:"x"}
+    copies,subscription:{push_opted_in:true,enabled:true,app_environment:"test",subscription_id:"x"}
   }),/contentId/);
   assert.throws(() => resolveRecipientPush({
     event:baseEvent,copies:{fr:{status:"draft",title:"draft",body:"draft"}},
-    subscription:{subscription_id:"x",appLocale:"fr"}
+    subscription:{push_opted_in:true,enabled:true,app_environment:"test",subscription_id:"x",appLocale:"fr"}
   }),/No approved/);
 });
