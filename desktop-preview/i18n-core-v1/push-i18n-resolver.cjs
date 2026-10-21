@@ -212,7 +212,13 @@ function buildPreview({ event, copies, registrations, registry = registryDefault
     const previous = unique.get(sid);
     const updated = Date.parse(String(row.last_synced_at || row.created_at || "")) || 0;
     const old = Date.parse(String(previous?.last_synced_at || previous?.created_at || "")) || 0;
-    if (!previous || updated > old) unique.set(sid, row);
+    const rowInactive = row.enabled !== true || row.push_opted_in !== true;
+    const prevInactive = previous && (previous.enabled !== true || previous.push_opted_in !== true);
+    // If registration timestamps tie (or both are absent), a disabled/
+    // unsubscribed row must never lose to an otherwise sendable row.
+    if (!previous || updated > old || (updated === old && rowInactive && !prevInactive)) {
+      unique.set(sid, row);
+    }
   }
   const messages = [...unique.values()].map((subscription) =>
     resolveRecipientPush({ event, copies, subscription, registry }));
