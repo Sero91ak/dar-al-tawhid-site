@@ -84,6 +84,21 @@
     return !!(window.webkit && window.webkit.messageHandlers);
   }
 
+  var LOCALE_KEY = "darAdultPreferredLocaleV1";
+  function activeLocale() {
+    try { return localStorage.getItem(LOCALE_KEY) === "tr" ? "tr" : "de"; } catch (_) { return "de"; }
+  }
+  function applyLocaleChoice(value) {
+    if (value !== "de" && value !== "tr") return;
+    try { localStorage.setItem(LOCALE_KEY,value); } catch (_) {}
+    updateLocaleButtons();
+    window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:value}}));
+  }
+  function updateLocaleButtons() {
+    document.querySelectorAll("#dar-setup-hub [data-dar-setup-locale]").forEach(function(btn){
+      btn.setAttribute("aria-pressed",String(btn.getAttribute("data-dar-setup-locale")===activeLocale()));
+    });
+  }
   function renderHtml() {
     var s = readSettings();
     var locOk = hasLocation(s);
@@ -97,6 +112,7 @@
       '    <p class="dar-setup-hub__sub">Standort, Gebetszeiten, Mitteilungen und Widgets</p>',
       "  </header>",
       '  <div class="dar-setup-hub__list">',
+      '    <div class="dar-setup-hub__row dar-setup-hub__locale-row"><div class="dar-setup-hub__copy"><strong>Sprache · Dil</strong><span>Türkisch und Deutsch auswählen. Fachtexte nur in geprüften Fassungen.</span></div><div class="dar-setup-hub__locale-choices" role="group" aria-label="App-Sprache"><button type="button" data-dar-setup-locale="de" aria-pressed="' + (activeLocale() === "de") + '">Deutsch</button><button type="button" data-dar-setup-locale="tr" aria-pressed="' + (activeLocale() === "tr") + '">Türkçe</button></div></div>',
       '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Standort</strong><span>Für genaue Gebetszeiten und Widgets</span></div><button type="button" class="' +
         locBtnClass +
         '" data-dar-setup-action="location">Öffnen</button></div>',
@@ -184,7 +200,11 @@
     host.setAttribute("data-dar-setup-bound", "1");
     host.addEventListener("click", function (ev) {
       var btn = ev.target && ev.target.closest && ev.target.closest("[data-dar-setup-action]");
-      if (!btn || !host.contains(btn)) return;
+      if (!btn || !host.contains(btn)) {
+        var localeBtn = ev.target && ev.target.closest && ev.target.closest("[data-dar-setup-locale]");
+        if (localeBtn && host.contains(localeBtn)) applyLocaleChoice(localeBtn.getAttribute("data-dar-setup-locale"));
+        return;
+      }
       var action = btn.getAttribute("data-dar-setup-action") || "";
       if (action === "location") {
         openLocation();
@@ -227,6 +247,11 @@
     var base = location.pathname.indexOf("/test/") === 0 ? "/test/assets/" : "/assets/";
     link.href = base + "dar-setup-hub.css?v=8";
     document.head.appendChild(link);
+    if (!document.getElementById("dar-test-settings-locale-css")) {
+      var style=document.createElement("style");style.id="dar-test-settings-locale-css";
+      style.textContent='.dar-setup-hub__locale-row{gap:12px;flex-wrap:wrap}.dar-setup-hub__locale-choices{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.dar-setup-hub__locale-choices button{min-height:42px;padding:9px 13px;border:1px solid color-mix(in srgb,currentColor 25%,transparent);border-radius:999px;background:transparent;color:inherit;font:600 12px system-ui,-apple-system,sans-serif;cursor:pointer}.dar-setup-hub__locale-choices button[aria-pressed="true"]{border-color:var(--gold,#bba273);background:color-mix(in srgb,var(--gold,#bba273) 13%,transparent)}.dar-setup-hub__locale-choices button:focus-visible{outline:2px solid var(--gold,#bba273);outline-offset:3px}';
+      document.head.appendChild(style);
+    }
   }
 
   function mountIntoSettings() {
@@ -246,6 +271,8 @@
     return null;
   }
 
+  window.addEventListener("dar-adult-locale-changed",updateLocaleButtons);
+  window.addEventListener("storage",function(event){if(event.key===LOCALE_KEY)updateLocaleButtons();});
   function onSettingsRoute() {
     try {
       var view = "";
