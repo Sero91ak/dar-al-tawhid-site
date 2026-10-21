@@ -16,5 +16,23 @@
     "title": "Duʿāʾ um Vergebung der Sünden und Festigkeit",
     "snippet": "Unser Herr, vergib uns unsere Sünden und unser Übermaß in unserer Angelegenheit und festige unsere Schritte.",
     "category": "Vergebung"
+  },
+  "rotation": {
+    "recommendation": {
+      "cycle": 0,
+      "poolSize": 480,
+      "remaining": 444
+    },
+    "dua": {
+      "cycle": 0,
+      "poolSize": 97,
+      "remaining": 62,
+      "sources": {
+        "markdown": 97,
+        "total": 97,
+        "poolSize": 97,
+        "canonicalSource": "content/duas/dua-*.md"
+      }
+    }
   }
 }
