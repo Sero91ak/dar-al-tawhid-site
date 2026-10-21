@@ -60,6 +60,19 @@ function create(options={}){
   const listed=Array.isArray(index?.files)&&index.files.some(f=>(typeof f==="string"?f:f?.name)===slug+".md");
   if(!listed||post.meta.status!=="published")return fallback(id,fields,"unpublished",lang);
   if(lang==="de")return fallback(id,fields,"original",lang);
+  // Prefer the central publish-once pack. The same endpoint later serves Web/PWA/WKWebView.
+  if(global.DarAdultCentralContent){
+   const sourceImmutable={source:post.meta.source||"",book:post.meta.book||"",
+    scholar:post.meta.scholar||"",date:post.meta.date||"",originalFile:slug+".md",
+    sourceReviewBlocked:false};
+   try{
+    const central=global.DarAdultCentralContent.create({fetcher,subtle,TextEncoder:Encoder});
+    const selected=await central.resolve("post",id,{fields,immutable:sourceImmutable},"tr");
+    if(selected.status==="approved")return {id,requestedLocale:"tr",displayLocale:"tr",
+     status:"approved",pending:false,fields:selected.fields,originalFields:fields,
+     sourceHash:selected.sourceHash};
+   }catch(_){/* No pack or unsupported crypto -> original legacy reader fallback */ }
+  }
   let manifest;
   try{manifest=await read("/content/i18n/adult-posts/"+slug+".json","json")}
   catch(_){return fallback(id,fields,"translation-unavailable",lang)}
