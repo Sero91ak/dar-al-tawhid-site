@@ -135,3 +135,11 @@ body.desktop-overhaul-v18.dar-v8-night .page-intro:not(.v8-global-page-hero){bac
  body.desktop-overhaul-v18[data-dar-v8-route="quran"] .book-page{padding-inline:clamp(12px,4vw,25px)!important}
  body.desktop-overhaul-v18[data-dar-v8-route="quran"] .book-controls{display:flex!important;flex-wrap:wrap!important;justify-content:center}
 }
+
+/* Only home owns the salām and introductory welcome. Subpages start with their
+   own contextual V8 hero, eliminating the repeated welcome seen in recordings. */
+body.desktop-overhaul-v18:not(.dar-v8-home) #darV8TopWelcome{display:none!important;visibility:hidden!important}
+body.desktop-overhaul-v18:not(.dar-v8-home) .v8-global-page-hero{margin-top:14px!important}
+@media(max-width:959px){
+ body.desktop-overhaul-v18:not(.dar-v8-home) .v8-global-page-hero{margin-top:13px!important}
+}
