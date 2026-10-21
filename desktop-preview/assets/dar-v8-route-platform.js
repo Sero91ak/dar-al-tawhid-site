@@ -5,6 +5,21 @@
 (function(global){"use strict";
 if(global.DARV8Routes)return;
 const iconRoot="/assets/dar-3d-icons/";
+const contextual={
+ quran:[["Buchansicht","quran"],["Passende Belege","suche"],["Duʿāʾs aus Qurʾān","dua"]],
+ beitraege:[["Alle Beiträge","beitraege"],["Gelehrte und Fachgebiete","wissen"],["Originalquellen","quellen"]],
+ beitrag:[["Weitere Beiträge","beitraege"],["Originalnachweise","quellen"],["Wissenschat","suche"]],
+ hadith:[["Überlieferungen durchsuchen","hadith"],["Quellenarchiv","quellen"],["Wissen","wissen"]],
+ dua:[["Duʿāʾs lesen","dua"],["Qurʾān","quran"],["Belege","quellen"]],
+ wissen:[["Themen entdecken","wissen"],["Wissenschat","suche"],["Beiträge","beitraege"]],
+ suche:[["Wissenschat","suche"],["Themen","wissen"],["Ḥadīṯ","hadith"]],
+ bibliothek:[["Publikationen","bibliothek"],["Originalquellen","quellen"],["Wissenschat","suche"]],
+ frauen:[["Frauenbereich","frauen"],["Überlieferungen","hadith"],["Quellen","quellen"]],
+ gebetszeiten:[["Standort und Zeiten","gebetszeiten"],["Duʿāʾs","dua"],["Qurʾān","quran"]],
+ mehr:[["Alle Werkzeuge","mehr"],["Quiz","quiz"],["Einstellungen","einstellungen"]],
+ quiz:[["Fragen prüfen","quiz"],["Wissen","wissen"],["Belege","quellen"]],
+ quellen:[["Nachweise","quellen"],["Publikationen","bibliothek"],["Beiträge","beitraege"]]
+};
 const map={
  start:["Start","home.png","Dein täglicher Zugang zu Wissen und Quellen."],
  quran:["Qurʾān","quran.png","Lesen, hören, Sūren suchen, Tafsīr und Tadabbur nutzen."],
@@ -51,12 +66,14 @@ function htmlFor(key){
  if(key==="start")return "";
  const data=map[key]||[key,"ilm.png","Erkunde alle verfügbaren Inhalte und ihre belegten Quellen."];
  const peers=related[key]||["suche","wissen","bibliothek"];
+ const back='<div class="dar-v8-route-history" aria-label="Seitennavigation"><button type="button" data-v8-nav-back aria-label="Zurück zur vorherigen Seite">← <span>Zurück</span></button><button type="button" data-v8-nav-forward aria-label="Zur nächsten Seite">→</button><a class="desktop-link" data-page="start" href="/?page=start" aria-label="Zur Startseite">⌂ Start</a></div>';
  return '<section class="dar-v8-route-hero" aria-label="'+escape(data[0])+'">'+
  '<div class="dar-v8-route-copy"><div class="dar-v8-route-eyebrow">DĀR AL TAWḤĪD <span> / </span> SMART KNOWLEDGE</div>'+
  '<h1>'+escape(data[0])+'</h1><p>'+escape(data[2])+'</p>'+
- '<div class="dar-v8-route-actions">'+anchor("suche","Wissenschat öffnen")+
+ '<div class="dar-v8-route-actions">'+back+anchor("suche","Wissenschat öffnen")+
  '</div></div><div class="dar-v8-route-visual" aria-hidden="true">'+img(data[1])+'</div>'+
- '<div class="dar-v8-route-related"><span>WEITER ENTDECKEN</span>'+peers.map(x=>anchor(x)).join("")+'</div></section>';
+ '<div class="dar-v8-route-related"><span>WEITER ENTDECKEN</span>'+peers.map(x=>anchor(x)).join("")+'</div></section>'+
+ '<nav class="dar-v8-route-tabs" aria-label="Bereichsaktionen">'+(contextual[key]||[["Wissenschat","suche"],["Quellen","quellen"],["Zur Startseite","start"]]).map(x=>anchor(x[1],x[0])).join("")+'</nav>';
 }
 let prayerWatch=null,menuBound=false;
 function updateNav(key){
@@ -76,9 +93,14 @@ function setupMenu(){
   const b=e.target.closest?.("[data-v8-toggle-more]");
   const sheet=document.getElementById("darV8MoreSheet"),toggle=document.getElementById("darV8MoreToggle");
   if(b&&sheet){const opened=sheet.hidden;sheet.hidden=!opened;toggle?.setAttribute("aria-expanded",String(opened));return}
+  const back=e.target.closest?.("[data-v8-nav-back]"),forward=e.target.closest?.("[data-v8-nav-forward]");
+  if(back){e.preventDefault();const state=history.state||{};if(Number(state.darV8Sequence||0)>0){history.back()}else{global.location.assign("/?page=start")}return}
+  if(forward){e.preventDefault();history.forward();return}
   if(sheet&&!sheet.hidden&&!e.target.closest?.("#darV8MoreSheet")){sheet.hidden=true;toggle?.setAttribute("aria-expanded","false")}
  });
  document.addEventListener("keydown",e=>{
+  if(e.altKey&&e.key==="ArrowLeft"){e.preventDefault();if(Number((history.state||{}).darV8Sequence||0)>0)history.back();else global.location.assign("/?page=start");return}
+  if(e.altKey&&e.key==="ArrowRight"){e.preventDefault();history.forward();return}
   if(e.key==="Escape"){const m=document.getElementById("darV8MoreSheet");if(m)m.hidden=true;document.getElementById("darV8MoreToggle")?.setAttribute("aria-expanded","false")}
  });
 }
