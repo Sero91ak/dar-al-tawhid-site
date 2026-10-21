@@ -7,6 +7,9 @@ on:
   pull_request:
     paths:
       - 'test/assets/dar-test-turkish-content*'
+      - 'test/assets/dar-test-turkish-ui*'
+      - 'test/assets/dar-home-v3-compact.js'
+      - 'test/assets/dar-setup-hub.js'
       - 'test/assets/dar-more-v15.js'
       - 'test/i18n/**'
       - 'content/i18n/adult-posts/**'
@@ -32,6 +35,10 @@ jobs:
         run: |
           node --check test/assets/dar-test-turkish-content.js
           node --check test/assets/dar-more-v15.js
+          node --check test/assets/dar-home-v3-compact.js
+          node --check test/assets/dar-setup-hub.js
+          node --check test/assets/dar-test-turkish-ui.js
+          node test/assets/dar-test-turkish-ui.test.cjs
           node test/assets/dar-test-turkish-content.test.cjs
           node scripts/verify-adult-post-language-manifests.cjs
       - name: Verify TEST-only route references and no client-side OpenAI calls
@@ -45,6 +52,13 @@ jobs:
           const reader=fs.readFileSync('test/assets/dar-test-turkish-content.js','utf8');
           if(!route.includes('/test/assets/dar-test-turkish-content.js'))throw Error('Missing isolated reader');
           if(!more.includes('/test/i18n/?post='))throw Error('Missing More entry point');
+          const home=fs.readFileSync('test/assets/dar-home-v3-compact.js','utf8');
+          const settings=fs.readFileSync('test/assets/dar-setup-hub.js','utf8');
+          const localeUi=fs.readFileSync('test/assets/dar-test-turkish-ui.js','utf8');
+          if(![home,more,settings].every(x=>x.includes('/test/assets/dar-test-turkish-ui.js')))
+             throw Error('One or more TEST language controls do not load the Turkish UI runtime');
+          if(!localeUi.includes('data-canonical-content')||!localeUi.includes('post-body'))
+             throw Error('Canonical religious content exclusion missing');
           if(!reader.includes('publicDisplayAllowed!==true') || !reader.includes('currentHash!==manifest.sourceHash'))
             throw Error('Missing approval or source fingerprint gate');
           if(/api\.openai\.com|DAR_I18N_AI_API_KEY/.test(reader+route))
