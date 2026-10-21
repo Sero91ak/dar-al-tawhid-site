@@ -321,6 +321,19 @@ function localizeGermanCalendarLabel(value,language){
  if(!language||language==="de"||value.length>90||!/[A-Za-zäöüß]/.test(value))return null;
  let changed=false,result=value;
  const locale=INTL_LOCALE[language]||"de-DE";
+ // Gregorian UI date formatted by the app as "Mi., 21.10.26" (not source material).
+ const abbreviated=value.match(/^(Mo|Di|Mi|Do|Fr|Sa|So)\., (\d{1,2})\.(\d{1,2})\.(\d{2})$/);
+ if(abbreviated){
+  const d=new Date(Date.UTC(2000+Number(abbreviated[4]),Number(abbreviated[3])-1,Number(abbreviated[2])));
+  if(d.getUTCDate()===Number(abbreviated[2])&&d.getUTCMonth()===Number(abbreviated[3])-1)
+   try{return new Intl.DateTimeFormat(locale,{weekday:"short",day:"2-digit",month:"2-digit",year:"2-digit",timeZone:"UTC"}).format(d)}catch(_){}
+ }
+ const hour=value.match(/^(\d{2}):(\d{2}) Uhr$/);
+ if(hour&&Number(hour[1])<24&&Number(hour[2])<60){
+  const shown=hour[1]+":"+hour[2];
+  return ({tr:"saat "+shown,en:shown,ar:"الساعة "+shown,ku:"saet "+shown,ckb:"کاتژمێر "+shown,bs:shown+" h"})[language]||shown;
+ }
+
  for(let month=0;month<12;month++){
   const pattern=new RegExp("(^|[\\s,])"+DE_MONTHS[month]+"(?=$|[\\s,0-9.])","g");
   if(!pattern.test(result))continue;
