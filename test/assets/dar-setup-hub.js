@@ -95,9 +95,23 @@
     window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:value}}));
   }
   function updateLocaleButtons() {
+    var turkish=activeLocale()==="tr";
     document.querySelectorAll("#dar-setup-hub [data-dar-setup-locale],#darSettingsLocaleChoice [data-dar-setup-locale]").forEach(function(btn){
       btn.setAttribute("aria-pressed",String(btn.getAttribute("data-dar-setup-locale")===activeLocale()));
     });
+    function labelWithin(root,selector,de,tu){
+      var node=root&&root.querySelector(selector);
+      if(node)node.textContent=turkish?tu:de;
+    }
+    var settings=document.getElementById("darSettingsLocaleChoice");
+    labelWithin(settings,".dsh-group-head span","Sprache · Dil","Dil · Sprache");
+    labelWithin(settings,".dsh-row-copy strong","Sprache auswählen","Dil seçin");
+    labelWithin(settings,".dsh-row-copy small","Türkisch und Deutsch. Fachbeiträge erscheinen erst nach Prüfung in der gewählten Sprache.","Türkçe ve Almanca. Dinî yazılar yalnızca uzman incelemesinden sonra seçilen dilde yayımlanır.");
+    var hub=document.getElementById(ROOT_ID);
+    labelWithin(hub,".dar-setup-hub__locale-row strong","Sprache · Dil","Dil · Sprache");
+    labelWithin(hub,".dar-setup-hub__locale-row .dar-setup-hub__copy span","Türkisch und Deutsch auswählen. Fachtexte nur in geprüften Fassungen.","Türkçe veya Almanca seçin. Dinî içerikler yalnızca onaylı çevirilerle gösterilir.");
+    labelWithin(hub,".dar-setup-hub__title","DĀR AL TAWḤĪD Einrichtung","DĀR AL TAWḤĪD Kurulum");
+    labelWithin(hub,".dar-setup-hub__sub","Standort, Gebetszeiten, Mitteilungen und Widgets","Konum, namaz vakitleri, bildirimler ve widget'lar");
   }
   function renderHtml() {
     var s = readSettings();
@@ -289,7 +303,8 @@
         '<div class="dsh-row-copy"><strong>Sprache auswählen</strong><small>Türkisch und Deutsch. Fachbeiträge erscheinen erst nach Prüfung in der gewählten Sprache.</small></div>'+
         '<div class="dar-setup-hub__locale-choices" role="group" aria-label="App-Sprache">'+
         '<button type="button" data-dar-setup-locale="de">Deutsch</button>'+
-        '<button type="button" data-dar-setup-locale="tr">Türkçe</button></div></div></div>';
+        '<button type="button" data-dar-setup-locale="tr">Türkçe</button></div></div></div>'+
+        '<div style="padding:4px 14px 12px;font-size:12px"><a href="/test/tr-review/" data-settings-tr-review style="color:inherit;text-decoration:underline;text-underline-offset:4px">Türkischen OpenAI-Entwurf prüfen / Türkçe taslağı incele →</a></div>';
       var welcome=home.querySelector(".dsh-welcome");
       if(welcome)welcome.insertAdjacentElement("afterend",block);
       else home.insertBefore(block,home.firstChild);
