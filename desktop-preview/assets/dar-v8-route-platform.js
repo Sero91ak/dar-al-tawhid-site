@@ -88,13 +88,19 @@ function refreshPrayer(){
  const times=pane.querySelectorAll("[data-v8-copy-prayer]");
  times.forEach(el=>{const from=source?.querySelector('[data-v8-prayer="'+el.getAttribute("data-v8-copy-prayer")+'"] b');el.textContent=from?.textContent?.trim()||"—"});
  const next=document.getElementById("darV8NextName"),time=document.getElementById("darV8NextTime"),count=document.getElementById("darV8Countdown");
- const out=pane.querySelector("[data-v8-prayer-status]");if(out)out.textContent=[next?.textContent,time?.textContent,count?.textContent].filter(Boolean).join(" · ");
+ const nextOut=pane.querySelector("[data-v8-next-prayer]"),timeOut=pane.querySelector("[data-v8-next-time]"),countOut=pane.querySelector("[data-v8-live-countdown]");
+ if(nextOut)nextOut.textContent=next?.textContent?.trim()||"—";
+ if(timeOut)timeOut.textContent=time?.textContent?.trim()||"Standort erforderlich";
+ if(countOut)countOut.textContent=count?.textContent?.trim()||"--:--:--";
+ const out=pane.querySelector("[data-v8-prayer-status]");
+ const sourceCity=document.getElementById("prLocation")?.textContent?.trim();
+ if(out)out.textContent=sourceCity||"Die Zeiten werden aus der gewählten Stadt oder dem Standort berechnet.";
 }
 function initPrayer(){
  if(prayerWatch){prayerWatch.disconnect();prayerWatch=null}
  const root=document.getElementById("darV8PrayerOverview");if(!root)return;
  refreshPrayer();
- const source=document.getElementById("darV8PrayerStrip");
+ const source=document.querySelector(".v8-real-prayer");
  if(source&&global.MutationObserver){prayerWatch=new MutationObserver(refreshPrayer);prayerWatch.observe(source,{subtree:true,childList:true,characterData:true})}
  root.querySelector("[data-v8-location]")?.addEventListener("click",()=>{
   const sourceButton=document.getElementById("prLocate")||document.getElementById("prCityOpen");
