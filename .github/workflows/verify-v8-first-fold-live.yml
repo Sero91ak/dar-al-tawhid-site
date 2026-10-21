@@ -9,86 +9,82 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 6
+    timeout-minutes: 12
     steps:
-      - name: Verify actual public home is V8 first fold, not cached app
+      - name: Verify live V8 browser files served by Cloudflare
         shell: bash
         run: |
           set -euo pipefail
-          tmp=$(mktemp -d)
-          trap 'rm -rf "$tmp"' EXIT
-          ua='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/130.0.0.0 Safari/537.36'
-          cache="${GITHUB_SHA}-$(date +%s)"
-          curl -fL --retry 4 --retry-delay 3 --max-time 30 -A "$ua" -H 'Cache-Control: no-cache' -D "$tmp/root-headers" -o "$tmp/home" "https://dar-al-tawhid.de/?page=start&verify=$cache"
-          curl -fL --retry 4 --retry-delay 3 --max-time 30 -A "$ua" -H 'Cache-Control: no-cache' -o "$tmp/css" "https://dar-al-tawhid.de/desktop-preview/assets/dar-v8-faithful-shell.css?verify=$cache"
-          grep -qi 'x-dar-surface: public-website' "$tmp/root-headers" || { echo 'ERROR: public browser not serving desktop website'; exit 1; }
-          grep -Fq 'id="darV8TopWelcome"' "$tmp/home" || { echo 'ERROR: new first-fold welcome missing from live HTML'; exit 1; }
-          grep -Fq 'id="prayerRiver"' "$tmp/home" || { echo 'ERROR: original prayer dock missing'; exit 1; }
-          grep -Fq 'id="qaAudio"' "$tmp/home" || { echo 'ERROR: original Quran player missing'; exit 1; }
-          grep -Fq 'id="darSmartPublicV8"' "$tmp/home" || { echo 'ERROR: v8 CSS link missing'; exit 1; }
-          grep -Fq '.dar-v8-sidebar' "$tmp/css" || { echo 'ERROR: faithful V8 sidebar stylesheet missing'; exit 1; }
-          grep -Fq 'id="darV8Sidebar"' "$tmp/home" || { echo 'ERROR: new V8 navigation absent from live HTML'; exit 1; }
-          grep -Fq 'id="darTrueV8Shell"' "$tmp/home" || { echo 'ERROR: new V8 CSS link missing'; exit 1; }
-          node - "$tmp/home" <<'NODE'
-          const fs=require('fs'); const text=fs.readFileSync(process.argv[2],'utf8');
-          const a=text.indexOf('id="darV8TopWelcome"'), p=text.indexOf('id="prayerRiver"'), q=text.indexOf('class="isnad-ribbon"');
-          if(a<0||p<0||q<0||!(a<p&&p<q)) throw Error('V8 order absent: welcome → prayer → Ibn Sirin');
-          console.log(JSON.stringify({firstFoldWelcome:true,originalPrayer:true,originalPlayer:true,welcomeAt:a,prayerAt:p,isnadAt:q,bytes:text.length}));
-          NODE
-          echo '### Live: V8 first fold verified on dar-al-tawhid.de' >> "$GITHUB_STEP_SUMMARY"
-          echo 'New greeting visible before prayer and source ribbon. Original player and prayer elements preserved. Browser-visual rendering still requires real-device check.' >> "$GITHUB_STEP_SUMMARY"
-
-      - name: Verify rendered V8 first fold in headless desktop and mobile Chrome
+          tmp=$(mktemp -d); trap 'rm -rf "$tmp"' EXIT
+          query="v8-audit-$(date +%s)"
+          curl -fLSs --retry 4 --retry-delay 4 -A 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/131.0.0.0 Safari/537.36' -H 'Cache-Control: no-cache' -o "$tmp/home" "https://dar-al-tawhid.de/?page=start&$query"
+          curl -fLSs --retry 4 --retry-delay 4 -o "$tmp/routes" "https://dar-al-tawhid.de/desktop-preview/assets/dar-v8-route-platform.js?$query"
+          curl -fLSs --retry 4 --retry-delay 4 -o "$tmp/css" "https://dar-al-tawhid.de/desktop-preview/assets/dar-v8-all-routes.css?$query"
+          grep -Fq 'id="darV8MobileDock"' "$tmp/home" || { echo 'New V8 bottom tabs absent from live HTML'; exit 1; }
+          grep -Fq 'dar-v8-route-platform.js' "$tmp/home" || { echo 'New V8 route engine not served'; exit 1; }
+          grep -Fq 'function enhanceSearch' "$tmp/routes" || { echo 'New V8 knowledge finder not served'; exit 1; }
+          grep -Fq 'dar-v8-quran-route' "$tmp/css" || { echo 'New player state not served'; exit 1; }
+          echo 'PASS: live HTML / V8 routes / CSS'
+      - name: Test real desktop iPhone and Fold page interactions
         shell: bash
         run: |
-          set -euo pipefail
           python -m pip install --quiet selenium
           python - <<'PY'
-          import os, time
+          import json,time,os
           from selenium import webdriver
           from selenium.webdriver.common.by import By
-          from selenium.webdriver.chrome.options import Options
           from selenium.webdriver.support.ui import WebDriverWait
-          os.makedirs('/tmp/dar-v8-live',exist_ok=True)
-          opts=Options()
-          for value in ['--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--hide-scrollbars']: opts.add_argument(value)
-          opts.set_capability('goog:loggingPrefs',{'browser':'ALL'})
-          driver=webdriver.Chrome(options=opts)
-          failed=[]
+          from selenium.webdriver.chrome.options import Options
+          os.makedirs('/tmp/dar-v8-public-live',exist_ok=True)
+          opt=Options()
+          for x in ('--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu','--hide-scrollbars'):opt.add_argument(x)
+          opt.set_capability('goog:loggingPrefs',{'browser':'ALL'})
+          driver=webdriver.Chrome(options=opt)
+          base='https://dar-al-tawhid.de/?page='
           try:
-            for label,width,height in [('desktop',1440,900),('iphone',393,844),('fold',840,900)]:
-              driver.set_window_size(width,height)
-              driver.get('https://dar-al-tawhid.de/?page=start&v8check='+str(int(time.time())))
-              time.sleep(5)
-              state=driver.execute_script('''const w=document.getElementById('darV8TopWelcome');const p=document.getElementById('darV8PrayerStrip');const q=document.querySelector('.isnad-ribbon');const player=document.getElementById('quranAudioPlayer');const a=w?.getBoundingClientRect(),b=p?.getBoundingClientRect(),r=q?.getBoundingClientRect(),c=player?.getBoundingClientRect();return {url:location.href,display:w?getComputedStyle(w).display:'missing',opacity:w?getComputedStyle(w).opacity:'unknown',visible:!!a&&a.height>60,finder:!!document.getElementById('darV8FinderForm'),order:!!a&&!!b&&!!r&&!!c&&a.top<b.top&&b.top<r.top&&r.top<c.top,width:innerWidth,overflow:document.documentElement.scrollWidth-innerWidth,home:document.body.classList.contains('dar-v8-home'),bodyClass:document.body.className,rootLength:document.getElementById('pageRoot')?.innerHTML?.length,rootText:document.getElementById('pageRoot')?.innerText?.slice(0,180),greetingText:w?.innerText?.slice(0,160),terms:document.querySelectorAll('.dar-v8-term').length,daily:!!document.getElementById('darV8Daily'),books:!!document.getElementById('darV8Books'),sidebar:document.getElementById('darV8Sidebar')?getComputedStyle(document.getElementById('darV8Sidebar')).display:'missing',topbar:document.querySelector('.dar-v8-topbar')?getComputedStyle(document.querySelector('.dar-v8-topbar')).display:'missing',prayers:document.querySelectorAll('[data-v8-prayer]').length,player:!!document.getElementById('qaAudio')}''')
-              driver.save_screenshot('/tmp/dar-v8-live/'+label+'.png')
-              el=driver.find_element(By.ID,"darV8FinderForm")
-              driver.execute_script('arguments[0].scrollIntoView({block:"center"})',el)
-              time.sleep(.35)
-              driver.save_screenshot("/tmp/dar-v8-live/"+label+"-finder.png")
-              print(label,state,flush=True)
-              if label=="desktop":
-                field=driver.find_element(By.ID,"darV8FinderQuery")
-                field.clear()
-                field.send_keys("Tawḥīd")
-                driver.find_element(By.CSS_SELECTOR,"#darV8FinderForm button[type=submit]").click()
-                WebDriverWait(driver,20).until(lambda d: "page=suche" in d.current_url)
-                WebDriverWait(driver,20).until(lambda d: len(d.find_elements(By.CSS_SELECTOR,"#searchResults .list-row"))>0)
-                rowcount=len(driver.find_elements(By.CSS_SELECTOR,"#searchResults .list-row"))
-                if rowcount<1: raise RuntimeError("Knowledge search found no website sources")
-                driver.save_screenshot("/tmp/dar-v8-live/desktop-search-results.png")
-                print("knowledge_search",{"query":"Tawḥīd","results":rowcount,"url":driver.current_url},flush=True)
-              
-              print('browser_console',driver.get_log('browser')[-12:],flush=True)
-              if state['display']=='none' or state['opacity']=='0' or not state['visible'] or not state['order'] or not state['home'] or not state['finder'] or state['terms']<3 or state['prayers']!=5 or not state['player'] or not state['daily'] or not state['books'] or (label=='desktop' and (state['sidebar']!='flex' or state['topbar']!='flex')) or (label!='desktop' and state['sidebar']!='none'): failed.append(label)
-            if failed: raise RuntimeError('V8 welcome not rendered for: '+','.join(failed))
-          finally: driver.quit()
+            for device,w,h in [('desktop',1440,900),('iphone',393,844),('fold',840,900)]:
+              driver.set_window_size(w,h)
+              for route in ['start','quran','beitraege','hadith','bibliothek','frauen','wissen','suche','dua','gebetszeiten','mehr','quiz']:
+                driver.get(base+route+'&qa='+str(time.time_ns()))
+                if route=='start':
+                  WebDriverWait(driver,25).until(lambda d: len(d.find_elements(By.ID,'darV8FinderForm'))>0)
+                else:
+                  WebDriverWait(driver,25).until(lambda d: len(d.find_elements(By.CSS_SELECTOR,'.dar-v8-route-hero'))>0)
+                state=driver.execute_script("""const hero=document.querySelector('.dar-v8-route-hero'),side=document.getElementById('darV8Sidebar'),dock=document.getElementById('darV8MobileDock');return {url:location.href,route:document.body.dataset.v8Route||document.body.dataset.darV8Route,hero:!!hero&&hero.getBoundingClientRect().height>95,sidebar:getComputedStyle(side).display,tabbar:getComputedStyle(dock).display,tabs:dock.querySelectorAll('a').length,overflow:document.documentElement.scrollWidth-innerWidth,content:document.getElementById('pageRoot')?.innerText?.length||0}""")
+                print('live',device,route,json.dumps(state,ensure_ascii=False),flush=True)
+                if state['overflow']>5:raise RuntimeError('Horizontal page overflow '+device+' '+route)
+                if state['tabs']!=4:raise RuntimeError('Mobile V8 navigation does not contain expected four links and one More button')
+                if device=='desktop' and state['sidebar']!='flex':raise RuntimeError('Desktop sidebar hidden')
+                if device!='desktop' and state['tabbar']=='none':raise RuntimeError('Mobile tabbar hidden')
+                if route!='start' and (not state['hero'] or state['content']<100):raise RuntimeError('V8 route not rendered: '+route)
+                if device=='desktop' and route in ('start','quran','gebetszeiten','suche','hadith'):
+                  driver.save_screenshot('/tmp/dar-v8-public-live/desktop-'+route+'.png')
+                if device=='iphone' and route in ('start','quran','gebetszeiten','suche'):
+                  driver.save_screenshot('/tmp/dar-v8-public-live/iphone-'+route+'.png')
+                if route=='gebetszeiten':
+                  if not driver.find_elements(By.ID,'darV8PrayerOverview'):raise RuntimeError('Old prayer page displayed')
+                  if len(driver.find_elements(By.CSS_SELECTOR,'[data-v8-copy-prayer]'))!=5:raise RuntimeError('V8 prayer details incomplete')
+                if route=='quran':
+                  player=driver.find_element(By.ID,'quranAudioPlayer')
+                  if not player.is_displayed():raise RuntimeError('Player not visible on Qurʾān page')
+                  driver.find_element(By.ID,'darV8PlayerExpand').click()
+                  if driver.execute_script("return getComputedStyle(document.getElementById('darV8PlayerControls')).display")=='none':
+                    raise RuntimeError('Qurʾān controls not expanding')
+                if route=='suche' and not driver.find_elements(By.ID,'darV8ChatForm'):raise RuntimeError('Wissenschat missing')
+              if device!='desktop':
+                driver.get(base+'start&qa='+str(time.time_ns()))
+                WebDriverWait(driver,25).until(lambda d:d.find_element(By.ID,'darV8MoreToggle').is_displayed())
+                driver.find_element(By.ID,'darV8MoreToggle').click()
+                if not driver.find_element(By.ID,'darV8MoreSheet').is_displayed():raise RuntimeError('Mobile More sheet cannot open')
+                driver.save_screenshot('/tmp/dar-v8-public-live/'+device+'-more.png')
+            print('PASS: 36 live route/device combinations, prayer, Quran expand and smartphone More')
+          finally:driver.quit()
           PY
-      - name: Store rendered V8 live screenshots
+      - name: Upload live rendering captures
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: dar-public-v8-live-desktop-iphone-fold
-          path: /tmp/dar-v8-live/*.png
-          retention-days: 3
+          name: dar-v8-all-routes-live-desktop-iphone-fold
+          path: /tmp/dar-v8-public-live/*.png
+          retention-days: 5
           if-no-files-found: warn
