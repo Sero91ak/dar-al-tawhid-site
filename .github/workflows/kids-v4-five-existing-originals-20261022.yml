@@ -2,7 +2,7 @@ name: KIDS V4 Import Six Existing Voice Originals (zero synthesis)
 on:
   push:
     branches:
-      - review/kids-v4-audio-safe-import-20261022
+      - review/kids-v4-nine-originals-imported-20261022
     paths:
       - kids/review-only/quiz-v4-five-existing-originals-transfer-20261022.json
 permissions:
@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: review/kids-v4-audio-safe-import-20261022
+          ref: review/kids-v4-nine-originals-imported-20261022
           fetch-depth: 1
       - name: Prepare actual MP3 verification
         run: |
@@ -52,7 +52,7 @@ jobs:
           git add kids/review-only/quiz-v4-five-originals-import-results-20261022.json
           git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
           git commit -m "audio(kids review): preserve six more already generated V4 originals"
-          git push origin HEAD:review/kids-v4-audio-safe-import-20261022
+          git push origin HEAD:refs/heads/review/kids-v4-six-existing-originals-imported-20261022
       - name: Save recovery artifact independent of Git push
         if: always()
         uses: actions/upload-artifact@v4
