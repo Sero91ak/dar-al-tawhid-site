@@ -208,7 +208,11 @@ const ATTRS=["placeholder","aria-label","title"];
 function currentLocale(){try{const v=global.localStorage?.getItem(KEY);return SUPPORTED.has(v)?v:"de"}catch(_){return"de"}}
 function shouldSkip(element){
  if(!element||typeof element.closest!=="function")return false;
- return !!element.closest(EXCLUDE);
+ const excluded=element.closest(EXCLUDE);
+ // The document root itself is RTL for Arabic and Sorani UI. That root must
+ // never be mistaken for a protected Arabic source-quotation container.
+ if(excluded&&excluded===global.document?.documentElement&&rtl.has(currentLocale()))return false;
+ return !!excluded;
 }
 function transformText(node,locale){
  const parent=node.parentElement;if(!parent||shouldSkip(parent))return;
