@@ -262,22 +262,50 @@ function updateBookMode(host){
  }finally{bookUpdating=false}
 }
 
+let playerRestoreFocus=null;
 function togglePlayer(force){
  const on=typeof force==="boolean"?force:!d.body.classList.contains("dar-v8-player-fullscreen");
+ const player=d.querySelector(".v8-real-player"),control=d.getElementById("darV8PlayerFullscreen");
+ if(!player||!control)return;
+ if(on){playerRestoreFocus=d.activeElement instanceof HTMLElement?d.activeElement:null}
  if(!on)closePicker();
  d.body.classList.toggle("dar-v8-player-fullscreen",on);
- const player=d.querySelector(".v8-real-player"),control=d.getElementById("darV8PlayerFullscreen");
- if(player){player.setAttribute("aria-label",on?"Qurʾān Vollbild-Player":"Qurʾān Mini-Player");if(on){player.classList.add("dar-v8-controls-open");d.getElementById("darV8PlayerExpand")?.setAttribute("aria-expanded","true")}}
- if(control){control.setAttribute("aria-expanded",String(on));control.textContent=on?"✕ Schließen":"⛶ Vollansicht";}
- d.body.style.overflow=on?"hidden":"";
+ player.setAttribute("role",on?"dialog":"region");
+ if(on)player.setAttribute("aria-modal","true");else player.removeAttribute("aria-modal");
+ player.setAttribute("aria-label",on?"Qurʾān – Rezitations-Player":"Qurʾān – Mini-Player");
+ player.classList.toggle("dar-v8-controls-open",on||player.classList.contains("dar-v8-controls-open"));
+ if(on){
+  const expand=d.getElementById("darV8PlayerExpand");
+  if(expand)expand.setAttribute("aria-expanded","true");
+  const controls=d.getElementById("darV8PlayerControls");
+  if(controls)controls.hidden=false;
+ }
+ control.setAttribute("aria-expanded",String(on));
+ control.setAttribute("aria-label",on?"Vollbild-Player schließen":"Qurʾān-Player in voller Ansicht öffnen");
+ control.textContent=on?"✕ Schließen":"⛶ Vollansicht";
+ d.body.classList.toggle("dar-v8-player-dialog-open",on);
+ if(on){control.focus({preventScroll:true})}
+ else if(playerRestoreFocus?.isConnected && playerRestoreFocus!==control){
+  playerRestoreFocus.focus({preventScroll:true});playerRestoreFocus=null;
+ }
 }
 function installPlayer(){
  if(d.getElementById("darV8PlayerFullscreen"))return;
  const player=d.querySelector(".v8-real-player");if(!player)return;
- const b=element("button","dar-v8-player-fullscreen-toggle","⛶ Vollansicht");b.id="darV8PlayerFullscreen";b.type="button";b.setAttribute("aria-expanded","false");
- player.append(b);b.addEventListener("click",()=>togglePlayer());
- const close=d.createElement("button");close.id="darV8PlayerBackdrop";close.type="button";close.className="dar-v8-player-backdrop";close.setAttribute("aria-label","Player schließen");close.addEventListener("click",()=>togglePlayer(false));d.body.append(close);
+ const label=player.querySelector(".v8-player-label");
+ if(!label)return;
+ const b=element("button","dar-v8-player-fullscreen-toggle","⛶ Vollansicht");
+ b.id="darV8PlayerFullscreen";b.type="button";b.setAttribute("aria-expanded","false");
+ b.setAttribute("aria-controls","quranAudioPlayer");b.setAttribute("aria-label","Qurʾān-Player in voller Ansicht öffnen");
+ // The button is a header control. Never position it over the label or audio content.
+ label.append(b);
+ b.addEventListener("click",()=>togglePlayer());
+ const close=d.createElement("button");close.id="darV8PlayerBackdrop";close.type="button";
+ close.className="dar-v8-player-backdrop";close.setAttribute("aria-label","Player schließen");
+ close.addEventListener("click",()=>togglePlayer(false));d.body.append(close);
+ d.addEventListener("keydown",e=>{if(e.key==="Escape"&&d.body.classList.contains("dar-v8-player-fullscreen")){e.preventDefault();togglePlayer(false)}});
 }
+
 let v8VisibleViewportBound=false,v8ActivePicker=null,v8PickerListenersBound=false;
 
 let v8NoPinchGuardInstalled=false;
