@@ -237,3 +237,28 @@ body.desktop-overhaul-v18 :is(.dar-v8-day,.dar-v8-book,.dar-v8-recent-link):focu
 @media(prefers-reduced-motion:reduce){
  body.desktop-overhaul-v18 :is(.dar-v8-bubble,.dar-v8-messenger,.dar-v8-quran-result){transition:none!important;scroll-behavior:auto!important}
 }
+
+/* Canonical Qurʾān reader presentation: no additional background-box stack. */
+body.desktop-overhaul-v18 #pageRoot .dar-v8-quran-mode-note{
+ max-width:100%;border-top:1px solid var(--v8-line);border-radius:0;background:transparent!important;
+ padding:18px 2px;margin:12px 0 8px;color:var(--v8-ink)!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-quran-mode-note[hidden]{display:none!important}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-quran-source-item{
+ padding:15px 2px;border:0;border-bottom:1px solid var(--v8-line);background:transparent!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-quran-source-item strong{
+ font:500 clamp(18px,2vw,24px)/1.3 Georgia,serif;color:var(--v8-ink)!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-quran-source-item p{
+ font:400 14px/1.9 system-ui,-apple-system,sans-serif;color:var(--v8-ink)!important;margin:8px 0
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-quran-source-item small{color:var(--v8-gold);font-size:11px}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-verse-translit{
+ padding:7px 0 4px;text-align:left;direction:ltr;font:500 13px/1.9 system-ui,-apple-system,sans-serif;
+ color:var(--v8-gold);border-top:1px solid var(--v8-line)
+}
+body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .toolbar button[aria-pressed="true"]{
+ background:color-mix(in srgb,var(--v8-gold) 17%,var(--v8-paper))!important;
+ border-color:var(--v8-gold)!important
+}
