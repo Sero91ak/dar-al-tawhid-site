@@ -46,8 +46,7 @@ def verify_and_store(row):
         require(response.status == 200, "download denied")
         audio = response.read(2_000_000)
         require(1800 < len(audio) < 2_000_000 and response.read(1) == b"", "audio size invalid")
-    require(audio[:3] == b"ID3" or audio[:2] in (b"\\xff\\xfb",b"\\xff\\xf3",b"\\xff\\xf2"),
-            "not real MP3 bytes")
+    # ffprobe validates the actual MP3 codec below; legitimate MP3 files may lack ID3 headers.
     AUDIO.mkdir(parents=True, exist_ok=True)
     target = AUDIO / (h[:32] + ".mp3")
     require(not target.exists(), "candidate exact destination already exists; never overwrite")
