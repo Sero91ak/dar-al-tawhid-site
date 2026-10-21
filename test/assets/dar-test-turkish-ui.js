@@ -429,14 +429,14 @@ function darDynamicUILocalize(value,language){
   return label?label+" · "+openAyah[1]:null;
  }
  const template=DAR_DYNAMIC_UI_MESSAGES[language];
- const openSurah=value.match(/^Sūrah ([^<>\\n]{2,80}) öffnen$/);
+ const openSurah=value.match(/^Sūrah ([^<>\n]{2,80}) öffnen$/);
  if(openSurah)return template.surah.replace("{name}",openSurah[1]);
  const countPatterns=[
-  [/^(\\d+) Suren mit Arabisch und Lautschrift\\.$/,"allSurahs"],
-  [/^(\\d+) geprüfte Werke und zitierte Gelehrte\\.$/,"works"],
-  [/^(\\d+) bekannte Duʿāʾ nach Themen\\.$/,"duas"],
-  [/^(\\d+) Aussagen mit Quellen\\.$/,"statements"],
-  [/^(\\d+) Namen und Zuordnungen\\.$/,"names"]
+  [/^(\d+) Suren mit Arabisch und Lautschrift\.$/,"allSurahs"],
+  [/^(\d+) geprüfte Werke und zitierte Gelehrte\.$/,"works"],
+  [/^(\d+) bekannte Duʿāʾ nach Themen\.$/,"duas"],
+  [/^(\d+) Aussagen mit Quellen\.$/,"statements"],
+  [/^(\d+) Namen und Zuordnungen\.$/,"names"]
  ];
  for(const [pattern,key] of countPatterns){
   const match=value.match(pattern);
