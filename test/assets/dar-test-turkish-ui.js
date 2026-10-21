@@ -196,7 +196,10 @@ const originalTitles=new WeakMap();
 const HEADLINE_SELECTORS=[
  "#dv3Latest .dv3-post-body b","#dhpPosts .dhp-post-capsule h3","#dhpTodayName",
  ".dua-card h3",".dua-card .dua-title",".duas-card h3",".duas-card .dua-title",
- "[data-dua-id] .dua-title","[data-post-id] .post-title"
+ "[data-dua-id] .dua-title","[data-post-id] .post-title",
+ ".qsrc-post-item[data-nav='post'] .qsrc-post-item-title",
+ ".post-card[data-nav='post'] h3",
+ ".home-v380-post-preview[data-nav='post'] .home-v380-post-title"
 ].join(",");
 function registerTitleData(data){
  if(data?.schemaVersion!==1||data.scope!=="adult-test-visible-titles-only"||
@@ -230,11 +233,12 @@ function updateKnownTitles(locale){
    old={source:current,rendered:current};originalTitles.set(element,old);
   }
   const candidates=titleByGerman.get(old.source)||[];
-  const id=element.closest?.("[data-dv3-value],[data-dhp-value],[data-post-id],[data-dua-id]");
+  const id=element.closest?.("[data-dv3-value],[data-dhp-value],[data-post-id],[data-dua-id],[data-nav='post'][data-value]");
   const boundId=id?.getAttribute?.("data-dv3-value")||
                 id?.getAttribute?.("data-dhp-value")||
                 id?.getAttribute?.("data-post-id")||
-                id?.getAttribute?.("data-dua-id");
+                id?.getAttribute?.("data-dua-id")||
+                (id?.getAttribute?.("data-nav")==="post"?id?.getAttribute?.("data-value"):null);
   // Repeated canonical headings may refer to different posts; resolve by
   // stable content ID if present, otherwise translate only identical drafts.
   const record=boundId?candidates.find(r=>r.id===boundId):
