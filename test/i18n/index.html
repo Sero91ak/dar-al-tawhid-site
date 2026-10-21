@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>DĀR AL TAWḤĪD · DAR TEST · Türkçe İçerik</title>
+<style>
+:root{color-scheme:dark;--gold:#e6cb93;--text:#eeeae1;--dim:#b5baae;--line:rgba(230,203,147,.3)}
+*{box-sizing:border-box}body{margin:0;min-height:100svh;background:radial-gradient(ellipse at 50% -30%,#245048 0%,#101f1c 52%,#0a1313 100%);color:var(--text);font:16px/1.65 system-ui,-apple-system,sans-serif}
+main{width:min(900px,100%);margin:0 auto;padding:max(22px,env(safe-area-inset-top)) 22px max(60px,env(safe-area-inset-bottom))}
+a{color:var(--gold)}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;border-bottom:1px solid var(--line);padding-bottom:19px}.brand{letter-spacing:.16em;font:500 clamp(16px,3vw,23px) Georgia,serif;color:var(--gold)}
+.kicker{font-size:11px;letter-spacing:.19em;font-weight:750;color:var(--gold);margin-top:44px}.deck{max-width:660px;color:var(--dim)}h1{font:500 clamp(29px,5vw,49px)/1.22 Georgia,serif;letter-spacing:-.025em;overflow-wrap:anywhere}
+.choice{display:flex;gap:8px;margin:21px 0 26px}.choice button{background:transparent;border:1px solid var(--line);color:var(--text);border-radius:999px;padding:10px 24px;min-height:44px;font:650 14px system-ui;cursor:pointer}.choice button[aria-pressed="true"]{background:var(--gold);color:#17211d}
+.status{font-size:12px;color:var(--gold);margin:15px 0}.notice{border-left:2px solid var(--gold);padding:10px 16px;color:var(--gold);background:rgba(230,203,147,.045);margin:16px 0 23px}
+article{border-top:1px solid var(--line);padding-top:22px}article h2{font:500 clamp(23px,4vw,34px)/1.4 Georgia,serif;overflow-wrap:anywhere}#body{white-space:pre-wrap;overflow-wrap:anywhere;line-height:1.95}footer{border-top:1px solid var(--line);margin-top:50px;padding-top:18px;color:var(--dim);font-size:12px}
+[hidden]{display:none!important}:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style></head><body><main>
+<header class="top"><div class="brand">DĀR AL TAWḤĪD</div><a href="/test/" id="back">Zur Test-App</a></header>
+<div class="kicker">DAR TEST · DE / TR · REDAKTIONELLE PRÜFUNG</div>
+<h1 id="heading">Beiträge in der ausgewählten Sprache</h1>
+<p class="deck" id="intro">Nur fachlich und sprachlich freigegebene Übersetzungen erscheinen auf Türkisch. Bis dahin bleibt die deutsche Originalfassung sichtbar.</p>
+<div class="choice" role="group" aria-label="Sprache wählen">
+ <button type="button" data-locale="de">Deutsch</button>
+ <button type="button" data-locale="tr">Türkçe</button>
+</div>
+<div role="status" id="state" class="status" aria-live="polite"></div>
+<div class="notice" id="notice" hidden></div>
+<article aria-live="polite"><h2 id="title"></h2><div id="body"></div></article>
+<footer id="footer">Quellen, arabische Originaltexte und die deutsche Ausgangsfassung bleiben unverändert. Keine automatische Veröffentlichung.</footer>
+</main>
+<script src="/test/assets/dar-test-turkish-content.js"></script>
+<script>
+(function(){"use strict";
+ const byId=id=>document.getElementById(id),store=window.DarTestTurkishContent;
+ const slug=new URLSearchParams(location.search).get("post")||"hasan-al-basri-selbstpruefung-20261021-481";
+ const reader=store.create();let sequence=0;
+ function strings(code){
+  const tr=code==="tr";
+  byId("back").textContent=tr?"Test uygulamasına dön":"Zur Test-App";
+  byId("heading").textContent=tr?"Seçilen dilde yazılar":"Beiträge in der ausgewählten Sprache";
+  byId("intro").textContent=tr?"Yalnızca ilmî ve dil bakımından onaylanmış çeviriler Türkçe gösterilir. İnceleme tamamlanana kadar Almanca asıl metin görünür.":"Nur fachlich und sprachlich freigegebene Übersetzungen erscheinen auf Türkisch. Bis dahin bleibt die deutsche Originalfassung sichtbar.";
+  byId("footer").textContent=tr?"Kaynaklar, Arapça asıl metinler ve Almanca kaynak metin değişmeden kalır. Otomatik yayımlama yok.":"Quellen, arabische Originaltexte und die deutsche Ausgangsfassung bleiben unverändert. Keine automatische Veröffentlichung.";
+ }
+ async function render(){
+  const run=++sequence,locale=store.getLocale();
+  strings(locale);
+  document.querySelectorAll("[data-locale]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.locale===locale)));
+  byId("state").textContent=locale==="tr"?"İçerik kontrol ediliyor …":"Inhalt wird geprüft …";
+  byId("notice").hidden=true;
+  try{
+   const result=await reader.getPost(slug,locale);
+   if(run!==sequence)return;
+   document.querySelector("article").lang=result.displayLocale;
+   byId("title").textContent=result.fields.title;
+   byId("body").textContent=result.fields.body;
+   byId("state").textContent=result.status==="approved"?"Türkçe · redaktionell freigegeben":result.status==="original"?"Deutsch · Original":locale==="tr"?"Türkçe · Prüfung ausstehend · "+result.status:"Deutsch · Original";
+   if(result.pending){byId("notice").textContent=result.notice;byId("notice").hidden=false}
+  }catch(e){
+   if(run!==sequence)return;
+   byId("state").textContent="Inhalt derzeit nicht überprüfbar / İçerik şu anda doğrulanamıyor";
+   byId("title").textContent="";byId("body").textContent="";byId("notice").hidden=true;
+  }
+ }
+ document.querySelectorAll("[data-locale]").forEach(btn=>btn.addEventListener("click",()=>store.setLocale(btn.dataset.locale)));
+ window.addEventListener("dar-adult-locale-changed",render);
+ window.addEventListener("storage",e=>{if(e.key===store.storageKey)render()});
+ render();
+})();
+</script></body></html>
