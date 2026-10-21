@@ -30,10 +30,19 @@ Status: Entwurf, kein Live-Versand, nur Erwachsenen-App. Kids-App ausgeschlossen
 - push-i18n-resolver.cjs: nur Berechnung, keine Netz-/OneSignal-Anbindung; Sprach-/Fallback- und ID-Auflösung
 - test-push-i18n-resolver.cjs: Offline-Fälle für neun Sprachen, zehnte Sprache, RTL, Sprachwechsel, Duplikate, ID, Platzhalter
 - audit-push-i18n.cjs: nicht sendende Inventur der OneSignal-Entwürfe und des Sprachregisters
+- push-copy-nine-languages-draft.json: 135 sprachspezifische Titel-/Textpaare für die 15 Ereignisse; alle status=draft
+- push-app-locale-proposed-migration.sql: isolierte RLS-Datenbanktabelle; absichtlich NICHT angewandt
+- test-push-copy-nine-languages.cjs: exakt 9×15 Paare, 5/10/15-Minuten-Dynamik, Quelle/Sprachregister
+- dry-run-push-nine-languages.cjs: neun rein synthetische Einwilligungen, keine echten Empfänger
+
 
 Offline-Prüfung:
     node desktop-preview/i18n-core-v1/test-push-i18n-resolver.cjs
     node desktop-preview/i18n-core-v1/audit-push-i18n.cjs
+    node desktop-preview/i18n-core-v1/test-app-locale-push-adapter.cjs
+    node desktop-preview/i18n-core-v1/test-push-copy-nine-languages.cjs
+    node desktop-preview/i18n-core-v1/dry-run-push-nine-languages.cjs
+
 
 ## Bedingungen für die geschützte Live-Anbindung
 
