@@ -105,3 +105,29 @@ body.desktop-overhaul-v18 :is(.dar-v8-source-query,.dar-v8-chat-inputrow input){
  body.desktop-overhaul-v18 .dar-v8-source-module,body.desktop-overhaul-v18 .dar-v8-knowledge-chat{padding:16px;border-radius:18px}
 }
 @media(prefers-reduced-motion:reduce){body.desktop-overhaul-v18 *{scroll-behavior:auto!important}}
+
+
+/* Existing Runway/Adobe-style artwork integrated per section, source backgrounds
+   are decorative; source text/links are the canonical live content. */
+body.desktop-overhaul-v18 .dar-v8-route-hero{
+ background:linear-gradient(106deg,rgba(17,44,34,.97) 0%,rgba(24,53,41,.92) 53%,rgba(22,47,40,.76) 100%),url('/assets/post-heroes/topics.webp') center/cover!important;
+ border-color:rgba(215,186,121,.30)!important;color:#fff8e9!important;
+}
+body.desktop-overhaul-v18 .dar-v8-route-copy h1{color:#fff8e9!important}
+body.desktop-overhaul-v18 .dar-v8-route-copy p{color:#dfebe1!important}
+body.desktop-overhaul-v18 .dar-v8-route-eyebrow,body.desktop-overhaul-v18 .dar-v8-route-related>span{color:#d8be86!important}
+body.desktop-overhaul-v18 .dar-v8-route-related{border-top-color:rgba(235,218,166,.25)!important}
+body.desktop-overhaul-v18 .dar-v8-route-link{background:rgba(255,255,255,.13)!important;color:#fff9e7!important;border-color:rgba(237,209,157,.29)!important}
+body.desktop-overhaul-v18 .dar-v8-route-link .arrow{color:#edd39c}
+body.desktop-overhaul-v18[data-dar-v8-route="quran"] .dar-v8-route-hero{background:linear-gradient(103deg,rgba(13,37,44,.98),rgba(29,56,64,.85)),url('/assets/post-heroes/post-reader.webp') center/cover!important}
+body.desktop-overhaul-v18:is([data-dar-v8-route="beitraege"],[data-dar-v8-route="beitrag"]) .dar-v8-route-hero{background:linear-gradient(103deg,rgba(16,48,37,.96),rgba(43,60,43,.83)),url('/assets/post-heroes/topic-detail.webp') center/cover!important}
+body.desktop-overhaul-v18[data-dar-v8-route="hadith"] .dar-v8-route-hero{background:linear-gradient(103deg,rgba(12,36,28,.97),rgba(19,47,34,.83)),url('/assets/ilm/hadith-library-overview-v1267.webp') center/cover!important}
+body.desktop-overhaul-v18:is([data-dar-v8-route="wissen"],[data-dar-v8-route="suche"]) .dar-v8-route-hero{background:linear-gradient(103deg,rgba(12,37,32,.96),rgba(26,56,40,.82)),url('/assets/ilm/ilm-historical-majlis-v1234.jpg') center/cover!important}
+body.desktop-overhaul-v18:is([data-dar-v8-route="bibliothek"],[data-dar-v8-route="werk"]) .dar-v8-route-hero{background:linear-gradient(103deg,rgba(39,31,22,.97),rgba(63,48,34,.82)),url('/assets/post-heroes/post-reader.webp') center/cover!important}
+body.desktop-overhaul-v18 .dar-v8-route-link img{filter:drop-shadow(0 5px 8px #050f0a55)}
+/* Keyboard-focused source questions: keep reading area reachable above mobile keyboard. */
+@media(max-width:959px){
+ body.desktop-overhaul-v18.v8-chat-focused .dar-v8-mobile-dock{visibility:hidden!important;pointer-events:none!important}
+ body.desktop-overhaul-v18.v8-chat-focused .dar-v8-more-sheet{display:none!important}
+ body.desktop-overhaul-v18 .dar-v8-knowledge-chat{scroll-margin-top:12px;scroll-margin-bottom:34px}
+}
