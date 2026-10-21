@@ -16,7 +16,7 @@ for(const locale of EXPECTED.slice(1)){
 }
 assert.equal(titles.bodyTranslation,false);
 assert.equal(titles.paidApiCalls,0);
-assert(Object.keys(titles.records).length>=23);
+assert(Object.keys(titles.records).length>=103);
 const els=[],body={nodeType:1,closest:()=>null,getAttribute:()=>null};
 const makeText=(value,excluded=false)=>({nodeType:3,nodeValue:value,parentElement:{closest:()=>excluded?({tagName:"CANONICAL"}):null}});
 const primary=makeText("ÜBERLIEFERUNGSMAẞSTAB"),prayer=makeText("Faǧr"),weekday=makeText("Mittwoch, 21. Oktober 2026"),
