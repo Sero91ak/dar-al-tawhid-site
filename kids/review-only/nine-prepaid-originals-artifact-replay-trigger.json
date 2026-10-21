@@ -8,7 +8,9 @@
   "outputBranch": "review/kids-v4-nine-originals-imported-20261022",
   "humanListeningApproved": false,
   "liveReleaseAuthorized": false,
-  "attempt": 2,
+  "attempt": 3,
   "outputBranchPrecreatedViaGitHubConnector": true,
-  "retryReason": "Prior GitHub Actions token cannot create a new branch containing workflow files; destination branch now precreated by authorized GitHub connector; no MP3 resynthesis"
+  "retryReason": "Push to dedicated tracking checkout branch, not a remote branch unseen by shallow clone; reuses exact 9 archived MP3 originals",
+  "targetBranch": "review/kids-v4-nine-prepaid-artifact-replay-20261022",
+  "checkoutDepth": 10
 }
