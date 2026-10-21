@@ -155,6 +155,16 @@
   ],
   "unlockedScopes": [
     {
+      "id": "public-browser-v8-qa-release-20261021",
+      "at": "2026-10-21T18:28:00+02:00",
+      "approvedBy": "user-explicit-browser-html-v8-full-smart-portal-push-live-20261021",
+      "reason": "User explicitly requested immediate V8 browser-website live release; narrowly allow ONLY the associated V8 browser Chrome QA workflow. Global lock remains enabled; no Secrets, Workers, Kids, native Apps, Push or unrelated workflows opened.",
+      "paths": [
+        ".github/workflows/dar-v8-browser-acceptance-20261021.yml"
+      ],
+      "expiresAt": "2026-10-23T23:59:00.000Z"
+    },
+    {
       "id": "adult-immersive-hero-test-20261018",
       "at": "2026-10-18T07:25:00+02:00",
       "approvedBy": "user-explicit-global-immersive-hero-scroll-under-test-visitor-desktop-20261018",
