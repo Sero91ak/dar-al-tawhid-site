@@ -606,3 +606,187 @@ body.desktop-overhaul-v18 .dar-v8-locale-notice[hidden]{display:none!important}
 @media(max-width:959px){
  body.desktop-overhaul-v18 .dar-v8-locale-notice{font-size:10px;padding:5px 2px}
 }
+
+
+/* 2026-10-21 / video 19:05 / V8 visual correction.
+   Shared theme-contrast and focus rules replace overlapping legacy box treatments.
+   Outer interactive capsule receives light; content itself never receives a rectangular focus box. */
+body.desktop-overhaul-v18{
+ --v8-ui-ink:#183328;--v8-ui-muted:#455e50;--v8-ui-gold:#775829;
+ --v8-ui-field:#f9faf6;--v8-ui-divider:rgba(35,68,48,.19);
+ --v8-ui-focus:rgba(116,91,42,.30);
+}
+body.desktop-overhaul-v18.dar-v8-night{
+ --v8-ui-ink:#f5f1e5;--v8-ui-muted:#ccd5ca;--v8-ui-gold:#e6cb8b;
+ --v8-ui-field:#161d19;--v8-ui-divider:rgba(221,202,159,.29);
+ --v8-ui-focus:rgba(223,197,139,.35);
+}
+body.desktop-overhaul-v18 :is(
+ .dar-v8-brand-name,.dar-v8-breadcrumb,.v8-copy h1,.v8-copy h2,
+ .dar-v8-section-bar h2,.dar-v8-publication strong,.dar-v8-card-caption,
+ .dar-v8-verse-ar,.dar-v8-route-copy h1,.dar-v8-messenger-header h2,
+ .dar-v8-bubble-copy,.dar-v8-bubble-source strong,.dar-v8-prayer-next strong
+){color:var(--v8-ui-ink)!important}
+body.desktop-overhaul-v18 :is(
+ .v8-copy p,.dar-v8-section-bar p,.dar-v8-card-caption,
+ .dar-v8-bubble-source small,.dar-v8-messenger-header small,
+ .dar-v8-source-disclaimer,.book-verse-de,.book-ref,
+ .book-position,.dar-v8-verse p,.dar-v8-recent-link small,
+ .dar-v8-bubble-time,.dar-v8-prayer-next small
+){color:var(--v8-ui-muted)!important}
+body.desktop-overhaul-v18 :is(.dar-v8-section-kicker,.type,.dar-v8-card-open,.dar-v8-text-action){color:var(--v8-ui-gold)!important}
+body.desktop-overhaul-v18 .dar-v8-route-hero :is(h1,h2,.dar-v8-route-copy h1){color:#fffaf0!important}
+body.desktop-overhaul-v18 .dar-v8-route-hero :is(p,small){color:#e4eae1!important}
+body.desktop-overhaul-v18 .dar-v8-route-hero :is(.dar-v8-route-eyebrow,.dar-v8-route-related>span){color:#eed59e!important}
+body.desktop-overhaul-v18 .dar-v8-finder :is(h1,h2,strong){color:#fff8e8!important}
+body.desktop-overhaul-v18 .dar-v8-finder :is(p,small){color:#e6eae0!important}
+body.desktop-overhaul-v18 .dar-v8-breadcrumb .dar-v8-brand-seal{
+ width:31px!important;height:31px!important;min-width:31px!important;object-fit:cover!important;
+ opacity:.47!important;mix-blend-mode:multiply!important;background:transparent!important;
+ filter:grayscale(1) contrast(1.3)!important;
+ -webkit-mask-image:radial-gradient(circle,black 23%,rgba(0,0,0,.68) 47%,transparent 74%)!important;
+ mask-image:radial-gradient(circle,black 23%,rgba(0,0,0,.68) 47%,transparent 74%)!important;
+ box-shadow:none!important;border:0!important;border-radius:0!important
+}
+body.desktop-overhaul-v18.dar-v8-night .dar-v8-breadcrumb .dar-v8-brand-seal{
+ mix-blend-mode:screen!important;filter:grayscale(1) invert(1) contrast(1.25)!important;opacity:.43!important
+}
+body.desktop-overhaul-v18 .dar-v8-sidebar .dar-v8-side-watermark{
+ display:block;width:50px;height:50px;min-width:50px;object-fit:cover;
+ opacity:.34;mix-blend-mode:multiply;filter:grayscale(1) contrast(1.25);
+ -webkit-mask-image:radial-gradient(circle,black 30%,transparent 72%);
+ mask-image:radial-gradient(circle,black 30%,transparent 72%);
+ background:transparent;border:0;box-shadow:none
+}
+body.desktop-overhaul-v18.dar-v8-night .dar-v8-sidebar .dar-v8-side-watermark{
+ opacity:.42;mix-blend-mode:screen;filter:grayscale(1) invert(1) contrast(1.3)
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-publication{
+ border:1px solid var(--v8-ui-divider)!important;border-radius:18px!important;
+ padding:0!important;min-width:0!important;max-width:100%!important;
+ background:var(--v8-paper)!important;box-shadow:none!important;overflow:hidden!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-publication::before,
+body.desktop-overhaul-v18 #pageRoot .dar-v8-publication::after{content:none!important;display:none!important}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-publication .dar-v8-card-action{
+ display:grid!important;grid-template-columns:72px minmax(0,1fr);align-content:center;align-items:center;
+ column-gap:13px;row-gap:4px;min-height:113px;max-width:100%;padding:14px!important;
+ text-decoration:none!important;color:var(--v8-ui-ink)!important;background:transparent!important;
+ border:0!important;box-shadow:none!important;border-radius:inherit
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-publication .dar-v8-publication-art{
+ grid-column:1;grid-row:1/span 4;width:72px;height:82px;min-width:0;min-height:0;
+ display:grid;place-items:center;overflow:hidden;background:transparent!important;
+ border:0!important;border-radius:0!important;box-shadow:none!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-publication .dar-v8-book-cover{
+ width:100%!important;height:100%!important;max-height:none!important;max-width:none!important;
+ margin:0!important;padding:0!important;object-fit:contain!important;
+ background:transparent!important;mix-blend-mode:normal!important;border-radius:3px!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-publication .dar-v8-publication-art-fallback{
+ font:600 10px/1.4 Georgia,serif;text-align:center;color:var(--v8-ui-gold);border-left:2px solid var(--v8-ui-gold)!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-publication .type{
+ grid-column:2;grid-row:1;font-size:9px!important;letter-spacing:.12em!important;margin:0!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-publication strong{
+ grid-column:2;grid-row:2;font:500 clamp(15px,1.5vw,19px)/1.3 Georgia,serif!important;
+ overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;line-clamp:2;margin:0!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-publication small{
+ grid-column:2;grid-row:3;font:500 11px/1.35 system-ui!important;
+ white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--v8-ui-muted)!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-publication .dar-v8-card-open{
+ grid-column:2;grid-row:4;font:700 11px/1.3 system-ui!important;margin:2px 0 0!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-bookgrid{
+ display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+ gap:10px!important;max-width:100%!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-bookgrid>.dar-v8-publication:nth-child(n+3){display:none!important}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-library{
+ margin:15px auto 10px!important;padding:0!important;max-width:1200px!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-library .dar-v8-section-bar{margin-bottom:8px!important}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-library h2{font-size:clamp(19px,2.1vw,26px)!important}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-card-action:focus-visible,
+body.desktop-overhaul-v18 #pageRoot .dar-v8-publication:focus-within{
+ outline:none!important;box-shadow:0 0 0 2px var(--v8-ui-focus)!important;
+ border-color:var(--v8-ui-gold)!important
+}
+body.desktop-overhaul-v18 :is(.dar-v8-term,.dar-v8-discover-link,.dar-v8-recent-link,.dar-v8-bubble-source,
+ .dar-v8-chat-samples button,.dar-v8-mobile-dock a,.dar-v8-mobile-dock button,.more-row,
+ .search-result-row,.dar-v8-route-link,.dar-v8-card-action):is(:hover,:focus-visible,:active){
+ outline:0!important;border-color:var(--v8-ui-gold)!important;
+ box-shadow:0 0 0 2px var(--v8-ui-focus)!important;
+ -webkit-tap-highlight-color:transparent!important;filter:none!important
+}
+body.desktop-overhaul-v18 :is(.dar-v8-term,.dar-v8-discover-link,.dar-v8-recent-link,.dar-v8-bubble-source,
+ .dar-v8-chat-samples button,.dar-v8-mobile-dock a,.dar-v8-mobile-dock button,.more-row,
+ .search-result-row,.dar-v8-route-link,.dar-v8-card-action) :is(span,strong,em,img,small,b,i):is(:focus,:focus-visible,:active){
+ outline:0!important;border:0!important;box-shadow:none!important;background:transparent!important
+}
+body.desktop-overhaul-v18 :is(.dar-v8-chat-inputrow,.dar-v8-form,.search-input,.quran-reading-zone){
+ -webkit-tap-highlight-color:transparent!important
+}
+body.desktop-overhaul-v18 #pageRoot :is(.dar-v8-chat-inputrow,.dar-v8-form):focus-within{
+ border:1px solid var(--v8-ui-gold)!important;border-radius:16px!important;
+ box-shadow:0 0 0 3px var(--v8-ui-focus)!important;background:var(--v8-ui-field)!important
+}
+body.desktop-overhaul-v18 #pageRoot :is(.dar-v8-chat-inputrow,.dar-v8-form) input:is(:focus,:focus-visible){
+ outline:none!important;box-shadow:none!important;border:0!important;
+ background:transparent!important;color:var(--v8-ui-ink)!important
+}
+body.desktop-overhaul-v18 #pageRoot :is(input[type=search],input[type=text],input[type=email],textarea,select){
+ color:var(--v8-ui-ink)!important;background-color:var(--v8-ui-field)!important;
+ caret-color:var(--v8-ui-ink)!important
+}
+body.desktop-overhaul-v18 #pageRoot input::placeholder{
+ opacity:1!important;color:var(--v8-ui-muted)!important
+}
+body.desktop-overhaul-v18 #pageRoot :is(.search-input,.dar-v8-source-query,input[type=search]):focus-visible{
+ outline:0!important;box-shadow:0 0 0 2px var(--v8-ui-focus)!important
+}
+body.desktop-overhaul-v18 #pageRoot .book-verse-ar,
+body.desktop-overhaul-v18 #pageRoot .book-surah,
+body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-verse-ar{
+ color:var(--v8-ui-ink)!important;text-shadow:none!important;opacity:1!important
+}
+body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-page{
+ background:var(--v8-paper)!important;color:var(--v8-ui-ink)!important
+}
+body.desktop-overhaul-v18 #pageRoot .quran-reading-zone .book-verse-de{
+ color:var(--v8-ui-muted)!important;opacity:1!important
+}
+body.desktop-overhaul-v18 #pageRoot .quran-reading-zone :is(.side-title,.book-position,.book-ref){
+ color:var(--v8-ui-muted)!important;opacity:1!important
+}
+body.desktop-overhaul-v18 #pageRoot .quran-reading-zone :is(.quran-surah-nav a,.book-controls button){
+ color:var(--v8-ui-ink)!important;background:var(--v8-paper)!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-grid :is(.dar-v8-prayer-cell strong,.dar-v8-prayer-cell span){
+ color:var(--v8-ui-ink)!important;opacity:1!important
+}
+body.desktop-overhaul-v18 #pageRoot .dar-v8-prayer-cell{
+ background:var(--v8-paper)!important;border-color:var(--v8-ui-divider)!important
+}
+body.desktop-overhaul-v18 .dar-v8-prayer-strip>div span,
+body.desktop-overhaul-v18 .dar-v8-prayer-strip>div b{color:var(--v8-ui-ink)!important}
+body.desktop-overhaul-v18 .v8-real-prayer :is(.prayer-next b,.prayer-current b,.dar-v8-countdown){
+ color:var(--v8-ui-ink)!important;opacity:1!important
+}
+body.desktop-overhaul-v18 .dar-v8-real-player,
+body.desktop-overhaul-v18 .v8-real-player .qa26-player{
+ color:var(--v8-ui-ink)!important
+}
+@media(max-width:660px){
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-bookgrid{grid-template-columns:1fr!important;gap:8px!important}
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-publication .dar-v8-card-action{
+  grid-template-columns:61px minmax(0,1fr);min-height:102px;padding:11px 13px!important
+ }
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-publication .dar-v8-publication-art{width:61px;height:73px}
+ body.desktop-overhaul-v18 #pageRoot .dar-v8-library{margin:10px auto 8px!important}
+ body.desktop-overhaul-v18 .dar-v8-mobile-dock{box-shadow:0 4px 19px rgba(0,0,0,.13)!important}
+}
