@@ -152,6 +152,12 @@ function resolveRecipientPush({ event, copies, subscription, registry = registry
   const resolved = resolvePushCopy({ copies, appLocale, registry, params, sourceHash: String(event.sourceHash || "") });
   const url = canonicalUrl(event);
   const contentId = String(event.contentId || "").trim();
+  const qNum = Number(event.qNumber);
+  const hasQ = event.qNumber !== undefined && event.qNumber !== null && String(event.qNumber).trim() !== "";
+  if (hasQ && (!Number.isSafeInteger(qNum) || qNum <= 0)) {
+    throw new Error("Unverified or invalid canonical Q number");
+  }
+  const qUrl = hasQ ? "https://dar-al-tawhid.de/q/" + qNum + "/" : undefined;
   const dedupeSeed = [kind, event.eventKey, contentId, subId].join("|");
   // The locale is deliberately not in this key: switching app language
   // must never re-send the same event to the same subscription.
@@ -163,7 +169,8 @@ function resolveRecipientPush({ event, copies, subscription, registry = registry
     reminder_type: kind === "prayer" ? "prayer_" + event.mode : undefined,
     app_locale: resolved.requestedLocale,
     copy_locale: resolved.usedLocale,
-    q_number: event.qNumber || undefined,
+    q_number: hasQ ? qNum : undefined,
+    source_url: qUrl,
     url
   };
   return {
