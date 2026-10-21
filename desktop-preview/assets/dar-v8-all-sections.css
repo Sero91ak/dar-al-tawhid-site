@@ -150,3 +150,249 @@ body.desktop-overhaul-v18 #pageRoot .reveal,
 body.desktop-overhaul-v18 #pageRoot .section,
 body.desktop-overhaul-v18 #pageRoot .page-intro{opacity:1!important;visibility:visible!important;transform:none!important}
 body.desktop-overhaul-v18 #pageRoot .section.is-leaving{opacity:1!important}
+
+
+/* ── V8 cross-route consistency / 2026-10-21
+ * No new UI skin. Repairs conflicting legacy layers and browser ergonomics
+ * across ALL public desktop routes; does not style visitor/PWA/native apps.
+ */
+
+/* Only one scroll root: the document. No rubber-band pull-down or side scroll.
+ * Leave content scrollable and do not globally cancel touch gestures. */
+html:has(body.desktop-overhaul-v18),
+html:has(body.desktop-overhaul-v18) body{
+ overscroll-behavior-x:none;
+ overscroll-behavior-y:none;
+}
+body.desktop-overhaul-v18{
+ overflow-x:clip;
+ min-height:100dvh;
+ -webkit-text-size-adjust:100%;
+}
+body.desktop-overhaul-v18 .dar-v8-workspace,
+body.desktop-overhaul-v18 #pageRoot,
+body.desktop-overhaul-v18 #pageRoot>.section{
+ min-width:0;
+ box-sizing:border-box;
+}
+
+/* Permanent navigation is independent of vertical page scrolling.
+ * Desktop: fixed left navigation, one sticky topbar.
+ * Tablet/iPhone/Fold: preserved modern six-tab bottom dock and compact header.
+ */
+@media(min-width:960px){
+ body.desktop-overhaul-v18 .dar-v8-sidebar{
+  position:fixed!important;
+  inset:0 auto 0 0!important;
+  height:100dvh!important;
+  overflow-y:auto!important;
+  overscroll-behavior:contain!important;
+ }
+ body.desktop-overhaul-v18 .dar-v8-topbar{
+  position:sticky!important;
+  top:0!important;
+  z-index:100!important;
+  background:color-mix(in srgb,var(--v8-bg) 96%,transparent)!important;
+  -webkit-backdrop-filter:blur(20px);
+  backdrop-filter:blur(20px);
+ }
+ body.desktop-overhaul-v18 .dar-v8-mobile-dock{display:none!important}
+}
+@media(max-width:959px){
+ body.desktop-overhaul-v18 .dar-v8-workspace>.site-header{
+  position:sticky!important;
+  top:0!important;
+  z-index:160!important;
+  margin:0!important;
+  background:color-mix(in srgb,var(--v8-bg) 97%,transparent)!important;
+  -webkit-backdrop-filter:blur(20px);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--v8-line);
+  box-shadow:0 2px 14px rgba(19,42,30,.035);
+ }
+ body.desktop-overhaul-v18 .dar-v8-mobile-dock{
+  position:fixed!important;
+  inset:auto auto calc(7px + env(safe-area-inset-bottom)) 50%!important;
+  transform:translate3d(-50%,0,0)!important;
+  width:min(620px,calc(100vw - 18px))!important;
+  z-index:990!important;
+  contain:layout style;
+  backface-visibility:hidden;
+  isolation:isolate;
+  touch-action:manipulation;
+ }
+ body.desktop-overhaul-v18 .dar-v8-mobile-tab{
+  min-width:0;
+  min-height:53px!important;
+  -webkit-tap-highlight-color:transparent;
+ }
+ body.desktop-overhaul-v18 .dar-v8-workspace{
+  padding-bottom:calc(102px + env(safe-area-inset-bottom))!important;
+ }
+ body.desktop-overhaul-v18 #pageRoot>.site-footer{
+  padding-bottom:12px!important;
+ }
+}
+/* Fold: keep the dock one logical row rather than overflow into two columns. */
+@media(min-width:580px) and (max-width:959px){
+ body.desktop-overhaul-v18 .dar-v8-mobile-dock{
+  grid-template-columns:repeat(6,minmax(0,1fr))!important;
+  max-width:620px;
+ }
+}
+
+/* Safari focuses inputs <16px by magnifying the entire viewport.
+ * Use a genuine minimum font size. DO NOT block user-initiated pinch zoom.
+ * Font-size needs to win against all legacy field and inline styles. */
+@supports (-webkit-touch-callout:none){
+ body.desktop-overhaul-v18 :is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  textarea,select,
+  #siteSearch,#darV8FinderQuery,#v8HadithSearch,
+  .search-input,.pr-city-input-row input,.v8-chat-input-wrap input
+ ){
+  font-size:16px!important;
+  line-height:1.4!important;
+  -webkit-text-size-adjust:100%;
+ }
+}
+@media(max-width:959px){
+ body.desktop-overhaul-v18 :is(
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+  textarea,select,
+  #siteSearch,#darV8FinderQuery,#v8HadithSearch,
+  .search-input
+ ){font-size:16px!important}
+ body.desktop-overhaul-v18 .v8-chat-input-wrap{
+  min-width:0;
+  background:transparent!important;
+  border:1px solid var(--v8-border)!important;
+  box-shadow:none!important;
+  padding:5px!important;
+  gap:6px!important;
+ }
+ body.desktop-overhaul-v18 .v8-chat-input-wrap>input{
+  min-height:45px;
+  width:100%;
+  flex:1 1 auto;
+  background:transparent!important;
+  border:0!important;
+  border-radius:12px!important;
+  box-shadow:none!important;
+ }
+ body.desktop-overhaul-v18 .v8-chat-input-wrap>#v8ChatSend{
+  flex:none;
+  min-height:44px!important;
+  white-space:nowrap;
+ }
+}
+
+/* No box inside a second box inside a photo/hero.
+ * The root content section is a transparent layout surface; cards remain
+ * distinct surfaces. The Qurʾān reader and source documents retain theirs. */
+body.desktop-overhaul-v18 #pageRoot>.section.parchment{
+ background:transparent!important;
+ border:0!important;
+ box-shadow:none!important;
+ padding:0!important;
+ border-radius:0!important;
+}
+body.desktop-overhaul-v18 #pageRoot>.section:not(.parchment):not(.quran-reading-zone){
+ background:transparent!important;
+ border:0!important;
+ box-shadow:none!important;
+}
+body.desktop-overhaul-v18 #pageRoot .v8-chat-panel{
+ background:var(--v8-paper)!important;
+ border:1px solid var(--v8-border)!important;
+ box-shadow:0 11px 28px rgba(16,39,27,.045)!important;
+}
+body.desktop-overhaul-v18 #pageRoot .v8-chat-panel>.v8-chat-title,
+body.desktop-overhaul-v18 #pageRoot .v8-chat-panel>#v8ChatReply,
+body.desktop-overhaul-v18 #pageRoot .v8-chat-panel>.v8-chat-input-wrap{
+ background:transparent;
+ box-shadow:none;
+}
+body.desktop-overhaul-v18 #pageRoot .v8-chat-answer{
+ background:transparent!important;
+ box-shadow:none!important;
+}
+body.desktop-overhaul-v18 #pageRoot .v8-chat-answer .list-row{
+ background:transparent!important;
+ border:0!important;
+ border-radius:0!important;
+ border-bottom:1px solid var(--v8-border)!important;
+ box-shadow:none!important;
+}
+body.desktop-overhaul-v18 #pageRoot :is(.real-posts,.list-lines,.source-work-list,.more-grid,.dua-index){
+ min-width:0;
+ background:transparent!important;
+ box-shadow:none!important;
+}
+body.desktop-overhaul-v18 #pageRoot .list-lines .list-row,
+body.desktop-overhaul-v18 #pageRoot .source-work-list>.source-work{
+ border-radius:0!important;
+ border-width:0 0 1px!important;
+ border-color:var(--v8-border)!important;
+ background:transparent!important;
+ box-shadow:none!important;
+ margin-bottom:0!important;
+}
+body.desktop-overhaul-v18 #pageRoot .list-lines .list-row:hover,
+body.desktop-overhaul-v18 #pageRoot .source-work-list>.source-work:hover{
+ transform:none!important;
+ background:color-mix(in srgb,var(--v8-gold) 6%,transparent)!important;
+}
+body.desktop-overhaul-v18 #pageRoot .v8-global-page-hero{
+ box-shadow:none!important;
+ border-color:color-mix(in srgb,var(--v8-gold) 20%,transparent)!important;
+}
+body.desktop-overhaul-v18 #pageRoot .v8-global-page-hero :is(
+ .intro-aside,.v8-hero-visual,.v8-global-page-actions
+ ){
+ box-shadow:none!important;
+}
+body.desktop-overhaul-v18 #pageRoot .v8-global-page-hero :is(.v8-global-action,.v8-global-action.secondary){
+ box-shadow:none!important;
+}
+/* Keep editorial and document backgrounds from being flattened by global
+ * root-section transparency; the actual reading canvas is still intact. */
+body.desktop-overhaul-v18[data-dar-v8-route="quran"] #pageRoot .book-page,
+body.desktop-overhaul-v18[data-dar-v8-route="werk"] #pageRoot .book-page{
+ background:var(--v8-paper);
+}
+/* Tab groups stay inside the viewport below the site header; do not
+ * multiply sticky containers or create a second fixed header. */
+@media(min-width:960px){
+ body.desktop-overhaul-v18 #pageRoot>.section .toolbar{
+  position:sticky!important;
+  top:76px!important;
+  z-index:29!important;
+  background:color-mix(in srgb,var(--v8-bg) 95%,transparent)!important;
+  backdrop-filter:blur(15px);
+  border-radius:0!important;
+ }
+}
+@media(max-width:959px){
+ body.desktop-overhaul-v18 #pageRoot>.section .toolbar{
+  position:sticky!important;
+  top:var(--dar-v8-mobile-header-height,64px)!important;
+  z-index:35!important;
+  background:color-mix(in srgb,var(--v8-bg) 95%,transparent)!important;
+  backdrop-filter:blur(15px);
+  border-radius:0!important;
+  max-width:100%!important;
+ }
+}
+body.desktop-overhaul-v18 :is(.dar-v8-side-link,.dar-v8-mobile-tab,.toolbar .tool){
+ scroll-margin-top:85px;
+}
+/* Strong keyboard focus with no accidental empty rectangles from legacy tap
+ * effects. */
+body.desktop-overhaul-v18 :is(.dar-v8-mobile-tab,.dar-v8-side-link,.toolbar .tool):focus-visible{
+ outline:2px solid var(--v8-gold)!important;
+ outline-offset:2px!important;
+}
+@media(prefers-reduced-motion:reduce){
+ body.desktop-overhaul-v18 .toolbar{scroll-behavior:auto!important}
+}
