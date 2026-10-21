@@ -150,3 +150,108 @@ body.dar-v8-night .dar-v8-day,body.dar-v8-night .dar-v8-term{background:var(--v8
  body.dar-v8-home .dar-v8-dailygrid{grid-template-columns:1fr!important}
 }
 @media(prefers-reduced-motion:reduce){.dar-v8-side-link{transition:none}}
+
+
+/* V8 fidelity correction: one unbroken prayer surface, true compact player. */
+body.dar-v8-home section.v8-real-prayer.top-tools-cluster{
+ width:100%!important;max-width:1200px!important;min-height:0!important;height:auto!important;
+ position:relative!important;overflow:visible!important;display:block!important;box-sizing:border-box!important;
+ margin:12px auto 0!important;padding:13px 17px 13px!important;
+ background:var(--v8-paper)!important;color:var(--v8-ink)!important;
+}
+body.dar-v8-home .v8-real-prayer .top-tool-card.top-tool-prayer{
+ display:block!important;position:static!important;min-height:0!important;height:auto!important;
+ overflow:visible!important;padding:0!important;margin:0!important;background:transparent!important;
+}
+body.dar-v8-home .v8-real-prayer .prayer-river.prayer26{
+ width:100%!important;min-height:0!important;height:auto!important;margin:0!important;
+ overflow:visible!important;box-shadow:none!important;background:transparent!important;
+ padding:0!important;position:relative!important;
+}
+body.dar-v8-home .v8-real-prayer .prayer-river::before,
+body.dar-v8-home .v8-real-prayer .prayer-river::after,
+body.dar-v8-home .v8-real-prayer .prayer-inner::before{content:none!important;display:none!important}
+body.dar-v8-home .v8-real-prayer .prayer-river .prayer-inner{
+ padding:7px 0!important;min-height:0!important;height:auto!important;max-height:none!important;
+ background:transparent!important;border:0!important;overflow:visible!important
+}
+body.dar-v8-home .v8-real-prayer .prayer-next b,
+body.dar-v8-home .v8-real-prayer .prayer-next .prayer-label,
+body.dar-v8-home .v8-real-prayer #prNextTime,
+body.dar-v8-home .v8-real-prayer #prCountdown{color:var(--v8-ink)!important}
+body.dar-v8-home .v8-real-prayer #prCountdown{font:750 17px/1.3 Inter,-apple-system,sans-serif!important}
+body.dar-v8-home .v8-real-prayer .dar-v8-prayer-strip{
+ display:grid!important;position:relative!important;clear:both!important;
+ width:100%!important;max-width:100%!important;height:auto!important;
+ margin:10px 0 5px!important;padding:0!important;z-index:1!important
+}
+body.dar-v8-home .v8-real-prayer .dar-v8-prayer-strip>div{
+ background:color-mix(in srgb,var(--v8-ink) 5%,var(--v8-paper))!important;
+ border-radius:13px!important;min-height:50px!important;color:var(--v8-ink)!important
+}
+body.dar-v8-home .v8-real-prayer .dar-v8-prayer-strip b{color:var(--v8-ink)!important}
+body.dar-v8-home .v8-real-prayer .pr-city-toolbar{height:auto!important;min-height:0!important}
+body.dar-v8-home section.isnad-ribbon{position:relative!important;clear:both!important;float:none!important;margin:14px auto 11px!important;z-index:0!important}
+body.dar-v8-home .isnad-ribbon .isnad-label{color:var(--v8-gold)!important}
+body.dar-v8-home .isnad-ribbon .isnad-quote b{font-weight:510!important}
+body.dar-v8-home .isnad-ribbon .isnad-quote{margin:7px 0!important;padding:0!important}
+body.dar-v8-home .v8-real-player .qa26-wrap,
+body.dar-v8-home .v8-real-player .top-tool-card.top-tool-player,
+body.dar-v8-home .v8-real-player .qa26-player{height:auto!important;min-height:0!important;overflow:visible!important}
+body.dar-v8-home .v8-real-player #quranAudioPlayer.qa26-player{
+ position:relative!important;display:block!important;border:1px solid var(--v8-line)!important;
+ background:var(--v8-paper)!important;color:var(--v8-ink)!important;
+ border-radius:19px!important;box-shadow:none!important;
+ padding:9px 58px 9px 15px!important;max-width:100%!important;width:100%!important
+}
+body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-main{
+ display:flex!important;flex-direction:row!important;align-items:center!important;
+ width:100%!important;min-height:47px!important;height:auto!important;
+ gap:10px!important;padding:0!important;margin:0!important;background:transparent!important;
+}
+body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-now,
+body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-now *{
+ min-width:0!important;max-width:100%!important;color:var(--v8-ink)!important
+}
+body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-kicker{
+ color:var(--v8-gold)!important;font-size:9px!important;line-height:1.5!important
+}
+body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-title{
+ font:500 17px/1.3 Georgia,serif!important;color:var(--v8-ink)!important;
+ white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important
+}
+body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-nav{
+ background:transparent!important;border:0!important;color:var(--v8-gold)!important;
+ min-width:25px!important;width:25px!important;min-height:36px!important;
+ padding:0!important;margin:0!important;box-shadow:none!important
+}
+body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-progress{background:var(--v8-line)!important}
+body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-controls{
+ display:none!important;height:auto!important;min-height:0!important;
+ background:var(--v8-paper)!important;border-top:1px solid var(--v8-line)!important;
+ padding:10px 0 0!important;margin:8px 0 0!important;
+}
+body.dar-v8-home .v8-real-player.dar-v8-controls-open #quranAudioPlayer .qa26-controls{
+ display:flex!important;flex-wrap:wrap!important;gap:9px!important;align-items:end!important
+}
+body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-field{min-width:115px!important;flex:1!important}
+body.dar-v8-home .v8-real-player #quranAudioPlayer select{
+ color:var(--v8-ink)!important;background:var(--v8-paper)!important;
+ border:1px solid var(--v8-line)!important;border-radius:10px!important;
+ font-size:13px!important;min-height:37px!important;max-width:100%!important
+}
+.dar-v8-expand{
+ position:absolute;right:10px;top:50%;transform:translateY(-50%);
+ width:38px;height:38px;display:grid;place-items:center;border:0;
+ background:color-mix(in srgb,var(--v8-ink) 7%,var(--v8-paper));
+ color:var(--v8-ink);border-radius:50%;font-size:19px;cursor:pointer
+}
+body.dar-v8-home .v8-real-player.dar-v8-controls-open .dar-v8-expand{top:33px;transform:none}
+@media(max-width:580px){
+ body.dar-v8-home section.v8-real-prayer.top-tools-cluster{padding:11px 12px 10px!important}
+ body.dar-v8-home .v8-real-prayer .prayer-inner{gap:4px 8px!important}
+ body.dar-v8-home .v8-real-player #quranAudioPlayer.qa26-player{padding:8px 53px 8px 11px!important}
+ body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-title{font-size:15px!important}
+ body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-controls{flex-direction:column!important;align-items:stretch!important}
+ body.dar-v8-home .v8-real-player #quranAudioPlayer .qa26-field{width:100%!important;flex:none!important}
+}
