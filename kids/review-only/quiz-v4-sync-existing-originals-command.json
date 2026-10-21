@@ -22,5 +22,10 @@
   "zeroCreditRecompositionPass": "after-positive-exact-11-original-paid-ledger-reconciliation",
   "conflictSafeDerivedArtifactRebuild": true,
   "doNotModifyPaidReceiptsOrOriginalBytes": true,
-  "originallyPaidV4PilotReconciled": true
+  "originallyPaidV4PilotReconciled": true,
+  "ownerPronunciationHoldReviewDate": "2026-10-21",
+  "ownerPronunciationHoldManifest": "kids/data/quiz-v4-owner-pronunciation-hold-20261021.json",
+  "requireQuarantineOfRejectedOriginals": 7,
+  "requireNoPriorPaidTextRegeneration": true,
+  "latestPurpose": "Resynchronize private V4 quizzes after owner rejected Ibādah and requested Halāl/Haram voice review, with 0 new paid recordings"
 }
