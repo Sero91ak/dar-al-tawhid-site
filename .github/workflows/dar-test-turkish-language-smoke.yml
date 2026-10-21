@@ -1,0 +1,74 @@
+name: DAR TEST Turkish Language UI Smoke
+on:
+  push:
+    branches:
+      - feature/tr-dar-test-language-20261021
+    paths:
+      - 'test/assets/dar-more-v15.js'
+      - 'test/assets/dar-setup-hub.js'
+      - 'test/assets/dar-home-v47-layout.js'
+      - '.github/workflows/dar-test-turkish-language-smoke.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify TEST-only language functionality and JavaScript syntax
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const paths=['test/assets/dar-more-v15.js','test/assets/dar-setup-hub.js','test/assets/dar-home-v47-layout.js'];
+          for(const path of paths){const code=fs.readFileSync(path,'utf8');new Function(code); if(!code.includes('darAdultPreferredLocaleV1'))throw Error('Missing shared locale key in '+path);}
+          const more=fs.readFileSync(paths[0],'utf8');
+          if(!more.includes('localeChoices()+')||!more.includes('data-dm-locale'))throw Error('More locale selector missing');
+          const setup=fs.readFileSync(paths[1],'utf8');
+          if(!setup.includes('data-dar-setup-locale'))throw Error('Settings locale selector missing');
+          const home=fs.readFileSync(paths[2],'utf8');
+          if(!home.includes('darHomeV47Language'))throw Error('Home quick selector missing');
+          console.log('PASS: all three app locale control sources compile and store the same preference.');
+          NODE
+      - name: Boot local adult app
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-test-tr.log 2>&1 &
+          sleep 3
+      - name: Verify rendered adult Test app routes
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 - <<'PY'
+          from selenium import webdriver
+          from selenium.webdriver.chrome.options import Options
+          from selenium.webdriver.support.ui import WebDriverWait
+          opt=Options()
+          for f in ['--headless=new','--no-sandbox','--disable-dev-shm-usage','--disable-gpu']:opt.add_argument(f)
+          driver=webdriver.Chrome(options=opt)
+          try:
+            driver.set_window_size(393,852)
+            driver.get('http://127.0.0.1:8765/test/')
+            driver.execute_script("localStorage.setItem('darAdultPreferredLocaleV1','de')")
+            driver.refresh()
+            WebDriverWait(driver,35).until(lambda d: d.execute_script("return !!document.querySelector('#darHomeV47Language')"))
+            home=driver.execute_script("return [...document.querySelectorAll('#darHomeV47Language button')].map(x=>x.textContent)")
+            print('Home control:',home,flush=True)
+            assert home==['Deutsch','Türkçe']
+            driver.execute_script("document.querySelector('#darHomeV47Language [data-dar-home-locale=tr]').click()")
+            assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='tr'
+            driver.execute_script("if(typeof navigate==='function')navigate('more');else location.hash='#more'")
+            WebDriverWait(driver,25).until(lambda d:d.execute_script("return !!document.querySelector('.dar-more-v15 [data-dm-locale=de]')"))
+            assert driver.execute_script("return document.querySelector('.dar-more-v15 [data-dm-locale=tr]').getAttribute('aria-pressed')")=='true'
+            driver.execute_script("document.querySelector('.dar-more-v15 [data-dm-locale=de]').click()")
+            assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='de'
+            driver.execute_script("if(typeof navigate==='function')navigate('settings');else location.hash='#settings'")
+            WebDriverWait(driver,25).until(lambda d:d.execute_script("return !!document.querySelector('#dar-setup-hub [data-dar-setup-locale=tr]')"))
+            driver.execute_script("document.querySelector('#dar-setup-hub [data-dar-setup-locale=tr]').click()")
+            assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='tr'
+            assert driver.execute_script("return document.querySelector('#dar-setup-hub [data-dar-setup-locale=tr]').getAttribute('aria-pressed')")=='true'
+            print('PASS: adult TEST home, More and Settings share the Turkish choice.')
+          finally:
+            driver.quit()
+          PY
