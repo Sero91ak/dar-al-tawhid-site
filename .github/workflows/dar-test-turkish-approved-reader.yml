@@ -8,7 +8,9 @@ on:
     paths:
       - 'test/assets/dar-test-turkish-content*'
       - 'test/assets/dar-test-turkish-ui*'
+      - 'test/assets/dar-adult-central-content*'
       - 'test/assets/dar-test-turkish-browser-smoke.py'
+      - 'test/assets/dar-test-turkish-coverage-audit.py'
       - 'test/assets/dar-home-v3-compact.js'
       - 'test/assets/dar-setup-hub.js'
       - 'test/assets/dar-more-v15.js'
@@ -40,6 +42,9 @@ jobs:
           node --check test/assets/dar-setup-hub.js
           node --check test/assets/dar-test-turkish-ui.js
           node test/assets/dar-test-turkish-ui.test.cjs
+          node --check test/assets/dar-adult-central-content.js
+          node test/assets/dar-adult-central-content.test.cjs
+          node test/assets/dar-adult-central-catalog.test.cjs
           node test/assets/dar-test-turkish-content.test.cjs
           node scripts/verify-adult-post-language-manifests.cjs
       - name: Verify TEST-only route references and no client-side OpenAI calls
@@ -78,3 +83,14 @@ jobs:
         run: |
           python3 -m pip install --quiet selenium
           python3 test/assets/dar-test-turkish-browser-smoke.py
+
+      - name: Survey all adult Test routes for still-untranslated UI
+        run: python3 test/assets/dar-test-turkish-coverage-audit.py
+      - name: Preserve coverage report for the next Turkish UI pass
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-test-tr-15-route-ui-audit
+          path: test/i18n/qa/turkish-ui-coverage.json
+          retention-days: 14
+          if-no-files-found: warn

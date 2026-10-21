@@ -93,7 +93,91 @@ const ENTRIES=[
 ["Passwort","Şifre"],["E-Mail","E-posta"],["Benutzername","Kullanıcı adı"],
 ["Schriftgröße","Yazı boyutu"],["Sprache ändern","Dili değiştir"]
 ];
-const dictionary=new Map(ENTRIES),backward=new Map(),ambiguous=new Set();
+const EXTRA_ENTRIES=[
+["Qurʾān durchsuchen","Kur'ân'da ara"],
+["Sūrah, Āyah oder Begriff suchen","Sûre, âyet veya kavram ara"],
+["Ǧuzʾ · Sūrah · Āyah Öffnen ⌄","Cüz · Sûre · Âyet Aç ⌄"],
+["☀ Bildschirm an","☀ Ekranı açık tut"],
+["▶ Lernen mit Wiedergabe","▶ Dinleyerek öğren"],
+["Qurʾān lesen · Sūrah auswählen","Kur'ân oku · Sûre seç"],
+["Surenverzeichnis","Sûre Listesi"],["Alle","Tümü"],
+["Mekkanisch","Mekkî"],["Medinensisch","Medenî"],
+["Sūrenbereich wechseln 01–20 ⌄","Sûre aralığını değiştir 01–20 ⌄"],
+["Bücher","Kitaplar"],["Werk, Autor oder Kategorie suchen…","Eser, yazar veya kategori ara…"],
+["Bücher und Themen durchsuchen","Kitap ve konuları ara"],
+["Bibliothek durchsuchen","Kütüphanede ara"],
+["Thema: Alle Kategorien ▾","Konu: Tüm Kategoriler ▾"],
+["Neu im Regal","Yeni Eklenenler"],["Themenregale","Konu Rafları"],
+["Alle Veröffentlichungen","Tüm Yayınlar"],
+["Name, Kuniyah oder Schreibweise","İsim, künye veya yazılış ara"],
+["Schnellauswahl","Hızlı Seçim"],
+["Historische Generation","Tarihî Nesil"],["Alphabetisch","Alfabetik"],
+["Meiste Beiträge","En Fazla Yazı"],["Wenigste Beiträge","En Az Yazı"],
+["Zuletzt angesehen","Son Görüntülenenler"],
+["Keine Person gefunden","Kişi bulunamadı"],["Zurücksetzen","Sıfırla"],
+["Duʿāʾ suchen nach Anlass, Thema, Arabisch, Deutsch oder Quelle…",
+ "Duruma, konuya, Arapçaya, Almancaya veya kaynağa göre dua ara…"],
+["Vergebung & Reue","Bağışlanma ve Tövbe"],
+["Wissen, Urteil & Īmān","İlim, Hüküm ve İman"],
+["Familie & Nachkommen","Aile ve Nesil"],
+["Qurʾān & Rechtleitung","Kur'ân ve Hidayet"],
+["Ḥadīṯ-Bibliothek","Hadis Kütüphanesi"],
+["Ḥadīṯ suchen nach Werk, Kitāb, Bāb, Nummer oder Šarḥ…",
+ "Eser, kitap, bâb, numara veya şerhe göre hadis ara…"],
+["Weitere Werke","Diğer Eserler"],
+["Frauen im Islam","İslam'da Kadınlar"],
+["Thema, Aussage, Person oder Werk suchen","Konu, söz, kişi veya eser ara"],
+["Wissen geordnet nach Lebensbereichen","Hayat Alanlarına Göre İlim"],
+["Grundlagen des Dīn","Dinin Temelleri"],
+["Fiqh der Frauen","Kadın Fıkhı"],
+["Frauen der ersten Generationen","İlk Nesillerdeki Kadınlar"],
+["Ehe, Familie & Erziehung","Evlilik, Aile ve Eğitim"],
+["Wissen, Adab & Daʿwah","İlim, Edep ve Davet"],
+["Besondere Zeiten & Lebensabschnitte","Özel Zamanlar ve Hayat Dönemleri"],
+["Die Propheten","Peygamberler"],
+["Name, Volk, Ereignis, Sūrah …","İsim, kavim, olay, sûre …"],
+["Din-Quiz","Din Bilgisi Testi"],["Auswahl","Seçim"],
+["THEMA","KONU"],["FRAGENANZAHL","SORU SAYISI"],["MODUS","MOD"],
+["Quiz starten","Testi başlat"],["Schnellrunde","Hızlı Tur"],
+["AUSWERTUNG","DEĞERLENDİRME"],["Statistik","İstatistik"],
+["Trefferquote","Doğru Yanıt Oranı"],["Ort","Konum"],
+["Kompass","Pusula"],
+["Live Activities ein- oder ausschalten","Canlı Etkinlikleri aç veya kapat"],
+["Dein App-Erlebnis","Uygulama Deneyimin"],
+["Schrift & Lesbarkeit","Yazı ve Okunabilirlik"],
+["App-Icon","Uygulama Simgesi"],["Symbol für den Startbildschirm","Ana ekran simgesi"],
+["Über diese App","Bu Uygulama Hakkında"],
+["Version, Inhalte und Informationen","Sürüm, İçerikler ve Bilgiler"],
+["Qurʾān Player","Kur'ân Oynatıcı"],
+["Hadith-Bibliothek","Hadis Kütüphanesi"],
+["PDFs, Bücher und Themenhefte von DĀR AL TAWḤĪD.",
+ "DĀR AL TAWḤĪD PDF'leri, kitapları ve konu kitapçıkları."],
+["Neue Bildbeiträge und ruhige Empfehlungen.","Yeni görsel yazılar ve özenli tavsiyeler."],
+["Strukturierte Wissensprüfung nach Themen und Stufen.",
+ "Konu ve seviyelere göre düzenli bilgi sınaması."],
+["114 Suren mit Arabisch und Lautschrift.","Arapçası ve okunuşuyla 114 sûre."],
+["Hören, mitlesen, Āyah für Āyah.","Âyet âyet dinle ve takip et."],
+["Hadith-Werke mit Büchern, Kapiteln und Filterung.",
+ "Kitap, bölüm ve filtrelemelerle hadis eserleri."],
+["Wissensassistent mit belegten Antworten aus DĀR AL TAWḤĪD.",
+ "DĀR AL TAWḤĪD kaynaklarına dayalı yanıtlar sunan ilim asistanı."],
+["Qurʾān · Sunnah · authentische Überlieferungen","Kur'ân · Sünnet · Sahih Rivayetler"],
+["Benachrichtigungen einstellen","Bildirimleri ayarla"],
+["Einstellungen öffnen","Ayarları aç"],["Qurʾān weiterlesen","Kur'ân okumaya devam et"],
+["Einstellungen →","Ayarlar →"],["📲 App speichern","📲 Uygulamayı kaydet"],
+["App, Qurʾān, Duʿāʾ und Beiträge","Uygulama, Kur'ân, dua ve yazılar"]
+];
+const dictionary=new Map([...ENTRIES,...EXTRA_ENTRIES]),backward=new Map(),ambiguous=new Set();
+function translateExact(value){
+ const known=dictionary.get(value);
+ if(known!==undefined)return known;
+ const count=value.match(/^(\d+)\s+Funktionen$/);
+ if(count)return count[1]+" işlev";
+ const results=value.match(/^(\d+)\s+Ergebnisse$/);
+ if(results)return results[1]+" sonuç";
+ return null;
+}
+
 for(const [de,tr] of ENTRIES){if(backward.has(tr)&&backward.get(tr)!==de)ambiguous.add(tr);else backward.set(tr,de)}
 const EXCLUDE="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],[lang='ar'],[dir='rtl'],[class*='quran-arabic'],[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],[class*='post-content'],[class*='hadith-text'],[class*='qsource-statement'],[class*='source-quote'],[data-canonical-content]";
 const originals=new WeakMap(),attributeOriginals=new WeakMap();
@@ -110,10 +194,10 @@ function transformText(node,locale){
  if(state&&current!==state.source&&current!==state.rendered){state=null;originals.delete(node)}
  if(!state){
   const match=current.match(/^(\s*)(.*?)(\s*)$/s);
-  if(!match||!dictionary.has(match[2]))return;
+  if(!match||translateExact(match[2])===null)return;
   state={source:current,rendered:current};originals.set(node,state);
  }
- const value=state.source.match(/^(\s*)(.*?)(\s*)$/s),translated=dictionary.get(value[2]);
+ const value=state.source.match(/^(\s*)(.*?)(\s*)$/s),translated=translateExact(value[2]);
  const desired=locale==="tr"?value[1]+translated+value[3]:state.source;
  if(node.nodeValue!==desired)node.nodeValue=desired;
  state.rendered=desired;
@@ -128,10 +212,10 @@ function transformAttributes(element,locale){
   let prior=state[attr];
   if(prior&&actual!==prior.source&&actual!==prior.rendered){delete state[attr];prior=null}
   if(!prior){
-   if(!dictionary.has(actual))continue;
+   if(translateExact(actual)===null)continue;
    prior={source:actual,rendered:actual};state[attr]=prior;
   }
-  const desired=locale==="tr"?dictionary.get(prior.source):prior.source;
+  const desired=locale==="tr"?translateExact(prior.source):prior.source;
   if(actual!==desired)element.setAttribute(attr,desired);
   prior.rendered=desired;
  }
@@ -168,5 +252,16 @@ global.addEventListener("dar-adult-locale-changed",schedule);
 global.addEventListener("storage",e=>{if(e.key===KEY)schedule()});
 global.document.addEventListener("dar:view-rendered",schedule);
 if(global.document.readyState==="loading")global.document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
-global.DarTestTurkishUI={apply,schedule,locale:currentLocale,translatedKeys:dictionary.size,scope:"adult-test-only"};
+// Load the same reviewed-content consumer used by future adult Web/PWA/WKWebView.
+// This loader is TEST-only; it makes no paid translation/API request.
+if(typeof global.document?.createElement==="function"&&global.document.head&&
+   !global.document.getElementById("dar-test-central-content-runtime")){
+ const tag=global.document.createElement("script");
+ tag.id="dar-test-central-content-runtime";
+ tag.src="/test/assets/dar-adult-central-content.js?v=1";
+ tag.defer=true;
+ global.document.head.appendChild(tag);
+}
+global.DarTestTurkishUI={apply,schedule,locale:currentLocale,translatedKeys:dictionary.size,
+  contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};
 })(window);
