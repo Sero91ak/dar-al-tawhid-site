@@ -2609,7 +2609,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 <link rel="stylesheet" id="darSmartPublicV8" href="/desktop-preview/assets/dar-smart-home-v8-live.css?v=20261021-2-reveal-fixed">
 <link rel="stylesheet" id="darTrueV8Shell" href="/desktop-preview/assets/dar-v8-faithful-shell.css?v=20261021-faithful-v1">
 <link rel="stylesheet" id="darV8AllRoutesCSS" href="/desktop-preview/assets/dar-v8-all-routes.css?v=20261021-2">
-<link rel="stylesheet" id="darV8ConversationCSS" href="/desktop-preview/assets/dar-v8-portal-live.css?v=20261021-video1905-v10">
+<link rel="stylesheet" id="darV8ConversationCSS" href="/desktop-preview/assets/dar-v8-portal-live.css?v=20261021-quran-modal-v11">
 </head>
 <style id="dar-touch-active-fix">
 @media (hover:none) and (pointer:coarse){
@@ -2741,8 +2741,8 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 <a class="desktop-link" data-page="mehr" data-v8-route="mehr" href="/?page=mehr"><img src="/assets/dar-3d-icons/settings.png" alt="">Alle Werkzeuge</a>
 </div></div>
 
-<script src="/desktop-preview/assets/dar-v8-route-platform.js?v=20261021-2"></script>
-<script src="/desktop-preview/assets/dar-v8-portal-live.js?v=20261021-video1905-v10"></script>
+<script src="/desktop-preview/assets/dar-v8-route-platform.js?v=20261021-quran-modal-v11"></script>
+<script src="/desktop-preview/assets/dar-v8-portal-live.js?v=20261021-quran-modal-v11"></script>
 <script id="darV8ShellInteractions">(function(){var t=document.getElementById("darV8ThemeToggle");function apply(v){document.body.classList.toggle("dar-v8-night",v==="layl");if(t)t.textContent=v==="layl"?"☀":"☾"}try{apply(localStorage.getItem("darV8Theme")==="layl"?"layl":"salbei")}catch(e){apply("salbei")}if(t)t.addEventListener("click",function(){var v=document.body.classList.contains("dar-v8-night")?"salbei":"layl";apply(v);try{localStorage.setItem("darV8Theme",v)}catch(e){}});var a=document.getElementById("darV8TopAudio");if(a)a.addEventListener("click",function(){if(window.DARV8Portal){window.DARV8Portal.togglePlayer();return;}if(document.body.classList.contains("dar-v8-home")||document.body.classList.contains("dar-v8-quran-route")){document.querySelector(".v8-real-player")?.scrollIntoView({behavior:"smooth",block:"center"})}else{location.href="/?page=quran&player=expanded"}});var settings=document.getElementById("darV8PrayerSettings");if(settings)settings.addEventListener("click",function(){var section=document.querySelector(".v8-real-prayer");if(!section)return;var opened=section.classList.toggle("dar-v8-prayer-settings-open");settings.setAttribute("aria-expanded",String(opened));settings.textContent=opened?"Einstellungen schließen ×":"Standort ↗";if(opened)document.getElementById("prCityOpen")?.click()});var expand=document.getElementById("darV8PlayerExpand");if(expand)expand.addEventListener("click",function(){var row=document.querySelector(".v8-real-player");if(!row)return;var opened=row.classList.toggle("dar-v8-controls-open");expand.setAttribute("aria-expanded",String(opened));expand.textContent=opened?"⌃":"⌄"});document.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();var input=document.getElementById("darV8FinderQuery")||document.getElementById("siteSearch");if(input)input.focus();else location.href="/?page=suche"}})})();</script>
 <script src="/widgets/shared/prayer-math.js"></script>
 <script src="/assets/zakat-engine.js?v=desktop-20261009-4"></script>
