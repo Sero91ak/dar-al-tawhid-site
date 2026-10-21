@@ -77,39 +77,66 @@ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",
 else start();
 })();
 
-/* DAR_ADULT_HOME_PRAYER_FIRST_V4: the existing dynamic prayer hub is the first
- * Home item. Remove only obsolete V4.7 lead and duplicated branding, leaving
- * native document scroll and the Qur'an/player flows unchanged. */
+/* DAR_ADULT_APP_HOME_GREETING_V5 · app-only, no desktop injection.
+ * Keep the single fixed branded rail. Scrollable content begins with the
+ * Qurʾān/Sunnah/Āthār source line, the ORIGINAL live prayer hub, then the
+ * restored complete Salām and welcome text. Other routes unaffected. */
 (function(){
 "use strict";
 if(/^\/(?:kids|test\/kids)(?:\/|$)/.test(location.pathname))return;
-var pending=false;
+var queued=false;
+function isHome(){return !!(document.body&&document.body.classList.contains("is-home-route"))}
+function make(tag,id,cls,html){
+ var x=document.createElement(tag);x.id=id;x.className=cls;x.innerHTML=html;return x;
+}
 function order(){
  var top=document.querySelector(".top-shell"),h=top&&top.querySelector(".header");
  if(!h||!document.body)return;
- if(!document.body.classList.contains("is-home-route")){
-  h.style.removeProperty("padding-top");
-  top.style.removeProperty("padding-top");
-  return;
+ if(!isHome()){
+  h.style.removeProperty("padding-top");top.style.removeProperty("padding-top");return;
  }
+ // Only the adult native app / dedicated PWA gets this injected header.
  if(!document.getElementById("darAdultBrandHeaderV2"))return;
+ var p=h.querySelector("#headerPrayerStatus");if(!p)return;
  h.querySelectorAll(".dar-v47-leadin,#darHomeV47Leadin").forEach(function(el){el.remove()});
- var old=h.querySelector(".header-row--brand-only");
- if(old){
-  old.hidden=true;old.setAttribute("aria-hidden","true");
-  if(old.style.getPropertyValue("display")!=="none")old.style.setProperty("display","none","important");
-  if(old.style.getPropertyValue("margin")!=="0px")old.style.setProperty("margin","0","important");
-  if(old.style.getPropertyValue("padding")!=="0px")old.style.setProperty("padding","0","important");
+ var legacy=h.querySelector(".header-row--brand-only");
+ if(legacy){
+  legacy.hidden=true;legacy.setAttribute("aria-hidden","true");
+  legacy.style.setProperty("display","none","important");
+  legacy.style.setProperty("margin","0","important");
+  legacy.style.setProperty("padding","0","important");
  }
  h.style.setProperty("padding-top","0","important");
  top.style.setProperty("padding-top","0","important");
- var p=h.querySelector("#headerPrayerStatus");
- if(p&&h.firstElementChild!==p)h.insertBefore(p,h.firstElementChild);
+ var kicker=h.querySelector("#darAdultHomeSourceV5");
+ if(!kicker) kicker=make("div","darAdultHomeSourceV5","dar-adult-home-source-v5",
+   "Beiträge nach Qurʾān, Sunnah und Āthār");
+ var welcome=h.querySelector("#darAdultHomeWelcomeV5");
+ if(!welcome)welcome=make("section","darAdultHomeWelcomeV5","dar-adult-home-welcome-v5",
+  '<h2 class="dar-adult-home-salam-v5">As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh</h2>'+
+  '<span class="dar-adult-home-rule-v5" aria-hidden="true"></span>'+
+  '<p>Willkommen bei <strong>DĀR AL TAWḤĪD</strong> – einer geordneten Wissens-App mit Beiträgen aus <strong>Qurʾān</strong>, <strong>Sunnah</strong>, den <strong>Āthār der frühen Imāme</strong> und einer umfangreichen Duʿāʾ-Sammlung aus Qurʾān und authentischer Sunnah.</p>');
+ welcome.setAttribute("aria-label","Willkommen bei DĀR AL TAWḤĪD");
+ // Idempotent three-part sequence: never clone prayer, disturb its data,
+ // force scrollTop or create independent scroll containers.
+ if(kicker.parentElement!==h||h.firstElementChild!==kicker)h.insertBefore(kicker,h.firstElementChild);
+ if(p.previousElementSibling!==kicker)h.insertBefore(p,kicker.nextElementSibling);
+ if(welcome.parentElement!==h||welcome.previousElementSibling!==p)
+  h.insertBefore(welcome,p.nextElementSibling);
 }
-function schedule(){if(pending)return;pending=true;requestAnimationFrame(function(){pending=false;order();});}
-document.addEventListener("dar:view-rendered",schedule);
-window.addEventListener("hashchange",schedule);
-window.addEventListener("pageshow",schedule);
-function boot(){schedule();var h=document.querySelector(".top-shell .header");if(h)new MutationObserver(schedule).observe(h,{childList:true});}
-if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
+function queue(){
+ if(queued)return;queued=true;
+ requestAnimationFrame(function(){queued=false;try{order()}catch(e){console.warn("DAR home greeting",e)}});
+}
+document.addEventListener("dar:view-rendered",queue);
+window.addEventListener("hashchange",queue);
+window.addEventListener("pageshow",queue);
+function boot(){
+ queue();
+ var h=document.querySelector(".top-shell .header");
+ if(h)new MutationObserver(queue).observe(h,{childList:true});
+ new MutationObserver(queue).observe(document.body,{attributes:true,attributeFilter:["class"]});
+}
+if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});
+else boot();
 })();
