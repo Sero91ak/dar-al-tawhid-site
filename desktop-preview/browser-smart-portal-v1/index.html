@@ -215,7 +215,7 @@ const groups=new Map();Object.entries(aliases).forEach(([k,str])=>{str.split(" "
 const toks=q=>normalize(q).split(" ").filter(t=>t.length>1&&!stop.has(t)).map(w=>groups.get(w)||w);
 const localRead=(k,f)=>{try{return JSON.parse(localStorage.getItem(k))??f}catch(e){return f}};
 const localSet=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
-let clicks=localRead("dat_chat_clicks_v3",{}),personal=localRead("dat_chat_optin_v3",true),mode="demo",previous="",db=[];
+let clicks=localRead("dat_chat_clicks_v3",{}),personal=localRead("dat_chat_optin_v3",false),mode="demo",previous="",db=[];
 function doc(d){if(!d||!d.title)return null;let u;try{u=new URL(String(d.url||""),O);if(u.origin!==O)return null}catch(e){return null}
 const item={id:String(d.id||d.title),title:String(d.title).slice(0,250),kind:String(d.kind||"Fundstelle"),excerpt:String(d.excerpt||"").slice(0,340),reference:String(d.reference||""),url:u.pathname+u.search+u.hash,words:[],titleWords:[]};item.titleWords=toks(item.title);
 item.words=[...new Set(toks([item.title,item.excerpt,item.reference,String(d.searchText||"").slice(0,1200)].join(" ")))].slice(0,160);return item}
