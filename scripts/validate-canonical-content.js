@@ -123,6 +123,24 @@ function validateScreensaverMetadata() {
   if (Number(screensaver.contentVersion) !== count) fail("screensaver contentVersion is stale");
   if (Number(screensaver.entriesCount) !== count) fail("screensaver entriesCount is stale");
   if (Number(index.totalVerifiedEntries) !== count) fail("screensaver entries-index is stale");
+  // Rotation configuration is NOT a data file. A valid source must contain
+  // renderable records or the tvOS app can show its "no content" fallback.
+  const listed = Array.isArray(index.files) ? index.files : [];
+  const sums = listed.reduce((n, item) => n + Number(item.count || 0), 0);
+  if (sums !== count) fail("screensaver index file counts do not match canonical records");
+  if (listed.some(item => /(?:^|\\/)rotation\\.json$/.test(String(item.path || "")))) fail("screensaver index incorrectly points to rotation rules");
+  const sourcePath = "../hadith/library-shell.json";
+  if (listed.length !== 1 || listed[0].path !== sourcePath) fail("screensaver entries-index must use canonical hadith library-shell");
+  if (!Array.isArray(screensaver.entriesPaths) || screensaver.entriesPaths.length !== 1 ||
+      screensaver.entriesPaths[0] !== sourcePath) fail("screensaver catalog entriesPaths does not point to canonical record source");
+  if (screensaver.rotationConfigPath !== "rotation.json") fail("screensaver rotation config path missing");
+  const libraryShell = readJson("apple-tv/hadith/library-shell.json");
+  if (libraryShell) {
+    const records = Array.isArray(libraryShell.records) ? libraryShell.records : [];
+    if (records.length !== count) fail("screensaver library-shell record count mismatch");
+    if (!records.some(rec => (rec.recordType === "hadith" || rec.recordType === "athar") &&
+          String(rec.textMarkdown || "").trim())) fail("screensaver has no displayable statement records");
+  }
   if (Number(sync.hadithCount) !== count) fail("apple-tv/hadith sync-status hadithCount is stale");
   if (String(sync.hadithLatestId) !== String(hadith.latestId)) fail("apple-tv/hadith sync-status latest ID is stale");
   if (Number(sync.atharCount) !== Number(hadith.atharCount)) fail("apple-tv/hadith sync-status atharCount is stale");
