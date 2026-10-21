@@ -232,3 +232,15 @@ body.desktop-overhaul-v18 :is(.dar-v8-side-link,.dar-v8-mobile-dock a,.dar-v8-mo
   box-sizing:border-box!important
  }
 }
+
+/* Fixed bottom tabbar must never obscure the Qurʾān mini-player's controls
+   after user/browser scroll-to-focus on a compact phone viewport. */
+@media(max-width:959px){
+ body.desktop-overhaul-v18 .v8-real-player,
+ body.desktop-overhaul-v18 #darV8PlayerExpand{
+  scroll-margin-top:85px;scroll-margin-bottom:calc(125px + env(safe-area-inset-bottom))
+ }
+ body.desktop-overhaul-v18 .dar-v8-workspace{
+  padding-bottom:calc(110px + env(safe-area-inset-bottom))!important
+ }
+}
