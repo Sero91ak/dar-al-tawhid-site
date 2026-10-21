@@ -37,10 +37,11 @@ function appLocaleTagPatch(appLocale, registry = registryDefault) {
   return { dar_app_locale: normalizeAppLocale(appLocale, registry) };
 }
 
-function approvedCopy(copies, code, registry) {
+function approvedCopy(copies, code, registry, expectedHash = "") {
   if (!localeCodes(registry).includes(code)) return null;
   const item = copies && copies[code];
   if (!item || typeof item !== "object") return null;
+  if (expectedHash && String(item.sourceHash || "") !== expectedHash) return null;
   const state = String(item.status || item.state || "");
   if (!(state === "approved" || (code === registry.defaultLocale && state === "canonical"))) return null;
   if (!String(item.title || "").trim() || !String(item.body || "").trim()) return null;
@@ -56,10 +57,10 @@ function fillParams(str, params) {
   });
 }
 
-function resolvePushCopy({ copies, appLocale, registry = registryDefault, params = {} }) {
+function resolvePushCopy({ copies, appLocale, registry = registryDefault, params = {}, sourceHash = "" }) {
   const requested = normalizeAppLocale(appLocale, registry);
-  const selected = approvedCopy(copies, requested, registry);
-  const fallback = approvedCopy(copies, registry.defaultLocale, registry);
+  const selected = approvedCopy(copies, requested, registry, sourceHash);
+  const fallback = approvedCopy(copies, registry.defaultLocale, registry, sourceHash);
   if (!selected && !fallback) throw new Error("No approved canonical push copy");
   const active = selected || fallback;
   const used = selected ? requested : registry.defaultLocale;
@@ -120,7 +121,7 @@ function resolveRecipientPush({ event, copies, subscription, registry = registry
     minutes: event.minutes === undefined ? "" : Number(event.minutes),
     prayer: event.prayerKey || ""
   };
-  const resolved = resolvePushCopy({ copies, appLocale, registry, params });
+  const resolved = resolvePushCopy({ copies, appLocale, registry, params, sourceHash: String(event.sourceHash || "") });
   const url = canonicalUrl(event);
   const contentId = String(event.contentId || "").trim();
   const dedupeSeed = [kind, event.eventKey, contentId, subId].join("|");
