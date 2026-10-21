@@ -2,10 +2,10 @@
   "schemaVersion": 1,
   "scope": "KIDS_QUIZ_450_V4_INTERNAL_AUDIO_IMPORT",
   "questionsStaged": 450,
-  "uniqueRealMP3TextKeys": 752,
-  "uniqueRealMP3Hashes": 752,
-  "completeFourPartQuestions": 314,
-  "notCompleteFourPartQuestions": 136,
+  "uniqueRealMP3TextKeys": 757,
+  "uniqueRealMP3Hashes": 757,
+  "completeFourPartQuestions": 316,
+  "notCompleteFourPartQuestions": 134,
   "byAge": {
     "4-6": {
       "questions": 150,
@@ -39,16 +39,16 @@
     },
     "9-10": {
       "questions": 150,
-      "completeFourPartQuestions": 116,
+      "completeFourPartQuestions": 118,
       "availableParts": {
-        "question": 133,
+        "question": 135,
         "correct": 150,
         "retry": 150,
-        "explanation": 120
+        "explanation": 123
       },
       "missingParts": {
-        "explanation": 30,
-        "question": 17
+        "explanation": 27,
+        "question": 15
       }
     }
   },
