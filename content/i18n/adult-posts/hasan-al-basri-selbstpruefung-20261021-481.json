@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "kind": "adult-canonical-post-language-index",
+  "contentId": "post:hasan-al-basri-selbstpruefung-20261021-481",
+  "postId": "hasan-al-basri-selbstpruefung-20261021-481",
+  "canonicalPath": "/content/posts/hasan-al-basri-selbstpruefung-20261021-481.md",
+  "sourcePath": "/q/48/",
+  "sourceHash": "868ec2af55b71a2441e24848d9e149f106f538d8d52b3bf085afb7168f937465",
+  "sourceHashAlgorithm": "sha256-canonical-translation-worklist-fields",
+  "canonicalLocale": "de",
+  "supportedLocales": [
+    "de",
+    "ar",
+    "en",
+    "tr",
+    "ku",
+    "ckb",
+    "bs"
+  ],
+  "sourceReferences": [
+    "Ibn al-Mubārak, az-Zuhd wa-r-Raqāʾiq Nr. 307, 1/104",
+    "Ibn Abī Shaybah, al-Muṣannaf, Kitāb az-Zuhd, 8/257, Abschnitt Nr. 23"
+  ],
+  "kidsExcluded": true,
+  "globalAdultIntegration": "pending-native-and-web-locale-consumer-wiring",
+  "languages": {
+    "de": {
+      "name": "Deutsch",
+      "status": "original",
+      "publicDisplayAllowed": true,
+      "path": "/content/posts/hasan-al-basri-selbstpruefung-20261021-481.md",
+      "review": "verified-canonical-german"
+    },
+    "ar": {
+      "name": "العربية الفصحى",
+      "status": "draft",
+      "publicDisplayAllowed": false,
+      "path": "/desktop-preview/i18n-core-v1/translations/ar/post/hasan-al-basri-selbstpruefung-20261021-481-074b61b8f8.json",
+      "review": "linguistic-and-religious-review-pending"
+    },
+    "en": {
+      "name": "English",
+      "status": "draft",
+      "publicDisplayAllowed": false,
+      "path": "/desktop-preview/i18n-core-v1/translations/en/post/hasan-al-basri-selbstpruefung-20261021-481-074b61b8f8.json",
+      "review": "linguistic-and-religious-review-pending"
+    },
+    "tr": {
+      "name": "Türkçe",
+      "status": "draft",
+      "publicDisplayAllowed": false,
+      "path": "/desktop-preview/i18n-core-v1/translations/tr/post/hasan-al-basri-selbstpruefung-20261021-481-074b61b8f8.json",
+      "review": "linguistic-and-religious-review-pending"
+    },
+    "ku": {
+      "name": "Kurmancî",
+      "status": "draft",
+      "publicDisplayAllowed": false,
+      "path": "/desktop-preview/i18n-core-v1/translations/ku/post/hasan-al-basri-selbstpruefung-20261021-481-074b61b8f8.json",
+      "review": "linguistic-and-religious-review-pending"
+    },
+    "ckb": {
+      "name": "سۆرانی",
+      "status": "draft",
+      "publicDisplayAllowed": false,
+      "path": "/desktop-preview/i18n-core-v1/translations/ckb/post/hasan-al-basri-selbstpruefung-20261021-481-074b61b8f8.json",
+      "review": "linguistic-and-religious-review-pending"
+    },
+    "bs": {
+      "name": "Bosanski",
+      "status": "draft",
+      "publicDisplayAllowed": false,
+      "path": "/desktop-preview/i18n-core-v1/translations/bs/post/hasan-al-basri-selbstpruefung-20261021-481-074b61b8f8.json",
+      "review": "linguistic-and-religious-review-pending"
+    }
+  }
+}

@@ -36,7 +36,7 @@ function validate(item,locale,values){
  if(item.immutable?.sourceReviewBlocked)return "under source review";
  return null;
 }
-const selected=inv.queue.filter(q=>index.has(q.id)&&LANGS[q.locale]&&q.state!=="approved"&&q.state!=="blocked-source"&&(!ITEM||q.id===ITEM)&&(!KIND||q.kind===KIND)&&(!SOURCE||index.get(q.id).sourcePath===SOURCE)&&(LOCALE==="all"||q.locale===LOCALE)&&JSON.stringify(index.get(q.id).fields).length<=MAX_SOURCE).slice(0,MAX_CALLS);
+const selected=inv.queue.filter(q=>index.has(q.id)&&LANGS[q.locale]&&(q.state==="pending"||q.state==="stale"||args.includes("--refresh-drafts")&&q.state==="draft")&&(!ITEM||q.id===ITEM)&&(!KIND||q.kind===KIND)&&(!SOURCE||index.get(q.id).sourcePath===SOURCE)&&(LOCALE==="all"||q.locale===LOCALE)&&JSON.stringify(index.get(q.id).fields).length<=MAX_SOURCE).slice(0,MAX_CALLS);
 const report={mode:LIVE?"generate-drafts":"dry-run",selected:selected.map(x=>({id:x.id,locale:x.locale})),drafts:0,failures:[],model:LIVE?model:null,requestLimit:MAX_CALLS,sourceCharacterCap:MAX_SOURCE,outputTokenCap:MAX_TOKENS};
 if(!LIVE){console.log(JSON.stringify(report,null,2));process.exit(0)}
 const systemText=[
