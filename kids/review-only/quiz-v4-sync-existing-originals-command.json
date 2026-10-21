@@ -27,7 +27,7 @@
   "ownerPronunciationHoldManifest": "kids/data/quiz-v4-owner-pronunciation-hold-20261021.json",
   "requireQuarantineOfRejectedOriginals": 7,
   "requireNoPriorPaidTextRegeneration": true,
-  "latestPurpose": "Rebuild 450 private quiz audio from 1,777 SHA-backed V4 originals and reconcile stale 317 staged vs 343 production on 2026-10-21; zero new credits",
+  "latestPurpose": "Execute corrected conflict-safe zero-credit review import of existing 1777 V4 original MP3s. Reconcile source-coverable 343/450 with staged 317/450, no fresh ElevenLabs generation.",
   "accountForSevenOwnerPronunciationHolds": true,
   "strictReportAndStagingCoverageAgreement": true,
   "progressQuarantineFixCommit": "283a1480910401351545df67f8552b8d59077655",
@@ -55,5 +55,7 @@
   "existingStagedFourPartsBeforeRebuild": 317,
   "existingProductionCompleteClaimBeforeRebuild": 343,
   "requireQuarantineForOwnerRejected": true,
-  "requireRealComposedMP3ForEveryStagedReadyPart": true
+  "requireRealComposedMP3ForEveryStagedReadyPart": true,
+  "regressionRunFixCommit": "f95e621ef053facc290037997d594a4c1231a0f6",
+  "triggerRevision": 2
 }
