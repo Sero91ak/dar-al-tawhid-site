@@ -1224,6 +1224,27 @@ private struct DATQiblaLargeView: View {
     }
 
     @ViewBuilder
+    private var hijriHeaderLabel: some View {
+        let value = entry.snapshot.hijriLabel.isEmpty ? "Hijri-Datum folgt" : entry.snapshot.hijriLabel
+        let parts = value.split(separator: " ", maxSplits: 1, omittingEmptySubsequences: true)
+        HStack(spacing: 4) {
+            DATEmojiIcon(emoji: "🌙", size: 13)
+            if let number = parts.first, parts.count > 1 {
+                Text(String(number))
+                    .foregroundStyle(Color(red: 0.86, green: 0.05, blue: 0.03))
+                Text(String(parts[1]))
+                    .foregroundStyle(Color.black.opacity(0.86))
+            } else {
+                Text(value)
+                    .foregroundStyle(Color.black.opacity(0.86))
+            }
+        }
+        .font(.system(size: 10, weight: .semibold, design: .rounded))
+        .lineLimit(1)
+        .minimumScaleFactor(0.62)
+    }
+
+    @ViewBuilder
     private func prayerCell(_ prayer: DATPrayer, isLast: Bool) -> some View {
         let isNext = DATPrayerName.matches(prayer.name, nextName)
         let isCurrent = !isNext && currentName.map { DATPrayerName.matches(prayer.name, $0) } == true
@@ -1296,12 +1317,7 @@ private struct DATQiblaLargeView: View {
                         .foregroundStyle(p.calendarTint)
                         .lineLimit(1)
                         .minimumScaleFactor(0.65)
-                    HStack(spacing: 4) {
-                        DATEmojiIcon(emoji: "🌙", size: 13)
-                        Text(entry.snapshot.hijriLabel.isEmpty ? "Hijri-Datum folgt" : entry.snapshot.hijriLabel)
-                    }
-                    .font(.system(size: 10, weight: .medium, design: .rounded))
-                    .foregroundStyle(p.hijriTint)
+                    hijriHeaderLabel
                 }
             }
             .padding(.top, 2)
