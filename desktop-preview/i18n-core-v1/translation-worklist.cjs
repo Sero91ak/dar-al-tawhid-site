@@ -146,15 +146,23 @@ function scanLearning(){
   if(!html)continue;
   const script=html.match(/const\s+questions\s*=\s*\[([\s\S]*?)\]\s*;/);
   if(!script){issues.push({kind:"learning",file:sourcePath,issue:"html-learning-page-needs-structured-adapter"});continue}
-  const pattern=/\{\s*q:"((?:\\.|[^"\\])*)"\s*,\s*a:\[([^\]]*)\]\s*,\s*correct:(\d+)\s*,\s*why:"((?:\\.|[^"\\])*)"\s*\}/g;
-  let parsed=0,match;
-  while((match=pattern.exec(script[1]))!==null){
-   const question=decoded(match[1]),why=decoded(match[4]);
+  const patterns=[
+   {re:/\{\s*q:"((?:\\.|[^"\\])*)"\s*,\s*a:\[([^\]]*)\]\s*,\s*correct:(\d+)\s*,\s*why:"((?:\\.|[^"\\])*)"\s*\}/g,style:"q-a"},
+   {re:/\{\s*title:"((?:\\.|[^"\\])*)"\s*,\s*hint:"((?:\\.|[^"\\])*)"\s*,\s*options:\[([^\]]*)\]\s*,\s*correct:(\d+)\s*,\s*why:"((?:\\.|[^"\\])*)"\s*\}/g,style:"title-options"},
+   {re:/\{\s*q:"((?:\\.|[^"\\])*)"\s*,\s*choices:\[([^\]]*)\]\s*,\s*correct:(\d+)\s*,\s*why:"((?:\\.|[^"\\])*)"\s*\}/g,style:"q-choices"}
+  ];
+  const matches=[];
+  for(const pattern of patterns){let match;while((match=pattern.re.exec(script[1]))!==null)matches.push({match,index:match.index,style:pattern.style})}
+  matches.sort((a,b)=>a.index-b.index);
+  let parsed=0;
+  for(const item of matches){
+   const match=item.match,question=decoded(match[1]),why=decoded(match[4]);
    let options=null;try{options=JSON.parse("["+match[2]+"]")}catch(_){}
    const correct=Number(match[3]);
    if(!question||!why||!Array.isArray(options)||!options.length||!Number.isSafeInteger(correct)||correct<0||correct>=options.length)continue;
    parsed++;count++;
-   add("learning",slug+"-question-"+parsed,sourcePath,{question,answers:options,explanation:why,title:slug},
+   const hint=item.style==="title-options"?decoded(match[0].match(/hint:"((?:\\.|[^"\\])*)"/)?.[1]||""):"";
+   add("learning",slug+"-question-"+parsed,sourcePath,{question,answers:options,explanation:why,title:slug,hint},
    {correctIndex:correct,originalHtmlPath:sourcePath,sourcePage:"/lernen/"+slug+"/"});
   }
   if(!parsed)issues.push({kind:"learning",file:sourcePath,issue:"inline-learning-quiz-unparsed"});
