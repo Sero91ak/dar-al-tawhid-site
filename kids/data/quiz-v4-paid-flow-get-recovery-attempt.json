@@ -73,79 +73,72 @@
   "publicReleaseAllowed": false,
   "historyFlowSearch": {
     "usedOnlyReadOnlyGET": true,
-    "pagesInspected": 4,
+    "pagesInspected": 1,
     "httpCodes": [
-      200,
-      200,
-      200,
-      200
+      0
     ],
-    "historyRowsInspected": 343,
+    "historyRowsInspected": 0,
     "historyPrivacySafeAggregateDiagnostics": {
       "correctVoiceAndModelRows": 0,
-      "sourceFlowsRows": 343,
+      "sourceFlowsRows": 0,
       "rowsWithSpokenText": 0,
-      "rowsWithDialogue": 343,
+      "rowsWithDialogue": 0,
       "textMatchesIgnoringSourceFilter": 0,
       "historyIdMatchesOldGeneration": 0,
       "requestIdMatchesOldGeneration": 0,
-      "dialogueItemsWithText": 343,
-      "dialogueItemsWithExpectedVoice": 343,
-      "dialogueItemsWithExactOriginalText": 10,
-      "singleSpeakerDialogueOriginalMatches": 10,
-      "dialogueFieldNames": [
-        "text",
-        "voice_id",
-        "voice_name"
-      ]
+      "dialogueItemsWithText": 0,
+      "dialogueItemsWithExpectedVoice": 0,
+      "dialogueItemsWithExactOriginalText": 0,
+      "singleSpeakerDialogueOriginalMatches": 0,
+      "dialogueFieldNames": []
     },
-    "candidateExactTextMatches": 10,
+    "candidateExactTextMatches": 0,
     "strongOriginalIdLinks": 0,
     "unlinkedOriginals": 9,
     "noUnverifiedAudioAutolabelledAsOriginal": true,
     "perGeneration": {
       "1UAwmEQ77D4BmA9DttHZ": {
-        "exactTextAndVoiceHistoryMatches": 1,
+        "exactTextAndVoiceHistoryMatches": 0,
         "directProviderIdCrosslink": false,
         "needsOriginalMp3Export": true
       },
       "2xy9ZLej1wPTrnvAr9p7": {
-        "exactTextAndVoiceHistoryMatches": 1,
+        "exactTextAndVoiceHistoryMatches": 0,
         "directProviderIdCrosslink": false,
         "needsOriginalMp3Export": true
       },
       "AToalNGbxiRe1zfOnDG3": {
-        "exactTextAndVoiceHistoryMatches": 1,
+        "exactTextAndVoiceHistoryMatches": 0,
         "directProviderIdCrosslink": false,
         "needsOriginalMp3Export": true
       },
       "DX5z8FWaCS4FDx3KrloO": {
-        "exactTextAndVoiceHistoryMatches": 1,
+        "exactTextAndVoiceHistoryMatches": 0,
         "directProviderIdCrosslink": false,
         "needsOriginalMp3Export": true
       },
       "FGX65uXKWBnjULDxg3X1": {
-        "exactTextAndVoiceHistoryMatches": 1,
+        "exactTextAndVoiceHistoryMatches": 0,
         "directProviderIdCrosslink": false,
         "needsOriginalMp3Export": true
       },
       "GvXeGQ9Kr1lVy7LEAv5T": {
-        "exactTextAndVoiceHistoryMatches": 2,
+        "exactTextAndVoiceHistoryMatches": 0,
         "directProviderIdCrosslink": false,
         "needsOriginalMp3Export": true
       },
       "KIgCxJO3RDxhsIFJSYUB": {
-        "exactTextAndVoiceHistoryMatches": 1,
+        "exactTextAndVoiceHistoryMatches": 0,
         "directProviderIdCrosslink": false,
         "needsOriginalMp3Export": true
       },
       "UUmC2fDiXaV5W1IQSumA": {
-        "exactTextAndVoiceHistoryMatches": 1,
+        "exactTextAndVoiceHistoryMatches": 0,
         "directProviderIdCrosslink": false,
         "needsOriginalMp3Export": true
       },
       "aoKJuahenrKHfUE5OD9j": {
-        "exactTextAndVoiceHistoryMatches": 1,
+        "exactTextAndVoiceHistoryMatches": 0,
         "directProviderIdCrosslink": false,
         "needsOriginalMp3Export": true
       }
