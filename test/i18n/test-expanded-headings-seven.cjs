@@ -38,9 +38,10 @@ const numericPosts=makeText("18 Beiträge"),numericSurahs=makeText("7 Sūren · 
  dynamicAyahLink=makeText("Im Qurʾān öffnen · 2:45"),
  dynamicSurahButton=makeText("Sūrah Al-Baqarah öffnen"),
  dynamicSurahCount=makeText("114 Suren mit Arabisch und Lautschrift."),
- dynamicDuaCount=makeText("5 bekannte Duʿāʾ nach Themen.");
+ dynamicDuaCount=makeText("5 bekannte Duʿāʾ nach Themen."),
+ compactDate=makeText("Mi., 21.10.26"),clockLabel=makeText("23:14 Uhr");
 const nodes=[primary,prayer,weekday,original,excluded,dynamicQuran,dynamicStatements,preservedSource,
- numericPosts,numericSurahs,dynamicAyahLink,dynamicSurahButton,dynamicSurahCount,dynamicDuaCount];
+ numericPosts,numericSurahs,dynamicAyahLink,dynamicSurahButton,dynamicSurahCount,dynamicDuaCount,compactDate,clockLabel];
 const props={
  nodeType:1,children:[],textContent:"📖 Wer Gutes zeigt, bekommt Anteil am Lohn",
  closest:()=>({getAttribute:()=> "wer-gutes-zeigt-bekommt-anteil-am-lohn-198"}),
@@ -129,6 +130,11 @@ for(const locale of EXPECTED){
  assert.equal(dynamicSurahButton.nodeValue,expectedMessages[0],locale+" surah button");
  assert.equal(dynamicSurahCount.nodeValue,expectedMessages[1],locale+" full Quran count");
  assert.equal(dynamicDuaCount.nodeValue,expectedMessages[2],locale+" summary count");
+ const expectedClock={de:"23:14 Uhr",tr:"saat 23:14",en:"23:14",ar:"الساعة 23:14",
+  ku:"saet 23:14",ckb:"کاتژمێر 23:14",bs:"23:14 h"};
+ assert.equal(clockLabel.nodeValue,expectedClock[locale],locale+" localized clock");
+ if(locale!=="de")assert.notEqual(compactDate.nodeValue,"Mi., 21.10.26",locale+" localized compact calendar");
+ else assert.equal(compactDate.nodeValue,"Mi., 21.10.26");
  for(const term of ["Geprüfte Beziehungen","Umstrittene Angaben (bewusst öffnen)",
                    "nicht sicher überliefert","Keine Treffer."]){
   assert(locale==="de"||pack.translations[locale][term]?.trim(),locale+" missing "+term);
