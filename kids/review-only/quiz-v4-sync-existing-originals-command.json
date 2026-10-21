@@ -27,7 +27,7 @@
   "ownerPronunciationHoldManifest": "kids/data/quiz-v4-owner-pronunciation-hold-20261021.json",
   "requireQuarantineOfRejectedOriginals": 7,
   "requireNoPriorPaidTextRegeneration": true,
-  "latestPurpose": "2026-10-21 refresh ALL 450 from 1777 verified paid V4 originals; fix stale review-stage 317 vs current quarantine-aware 343; no new credits",
+  "latestPurpose": "Sync ALL 450 question real V4 MP3 playback map with 1777 authentic originals (343 currently composable vs 317 old stage); enforce 7 owner-rejected clips blocked and zero ElevenLabs credits",
   "accountForSevenOwnerPronunciationHolds": true,
   "strictReportAndStagingCoverageAgreement": true,
   "progressQuarantineFixCommit": "283a1480910401351545df67f8552b8d59077655",
@@ -48,7 +48,7 @@
   "wave04AtomicReceiptImportCommit": "218467c18fc9a514c4c2b5104fc7d13bb124c417",
   "newElevenLabsCreditsSpentByThisSynchronization": 0,
   "requireExactFourVerifiedPlaybacksBeforeCountingComplete": true,
-  "zeroCreditRefreshReviewNonce": "2026-10-21-genuine-originals-1777-playable-parts-rebuild-01",
+  "zeroCreditRefreshReviewNonce": "2026-10-21-1777-originals-stage-vs-real-343-review-only-run-02",
   "expectedCurrentRegisteredOriginals": 1777,
   "requiredNoHumanListeningApproval": true
 }
