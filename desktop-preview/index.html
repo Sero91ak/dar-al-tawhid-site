@@ -2609,6 +2609,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 <link rel="stylesheet" id="darSmartPublicV8" href="/desktop-preview/assets/dar-smart-home-v8-live.css?v=20261021-2-reveal-fixed">
 <link rel="stylesheet" id="darTrueV8Shell" href="/desktop-preview/assets/dar-v8-faithful-shell.css?v=20261021-faithful-v1">
 <link rel="stylesheet" id="darV8AllRoutesCSS" href="/desktop-preview/assets/dar-v8-all-routes.css?v=20261021-2">
+<link rel="stylesheet" id="darV8ConversationCSS" href="/desktop-preview/assets/dar-v8-portal-live.css?v=20261021-chat7-v1">
 </head>
 <style id="dar-touch-active-fix">
 @media (hover:none) and (pointer:coarse){
@@ -2938,7 +2939,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
    wrap.appendChild(kicker);wrap.appendChild(heading);
    if(summary){var description=document.createElement("p");description.textContent=summary;wrap.appendChild(description)}
    var anchor=document.createElement("a");anchor.href=href;anchor.className="desktop-link";anchor.dataset.page=page;anchor.textContent="Öffnen ↗";
-   if(container.id==="darV8Books"){var foot=document.createElement("small");foot.textContent=summary||"DĀR AL TAWḤĪD";wrap.appendChild(foot)}
+   if(container.id==="darV8Books"){if(arguments.length>7&&arguments[7]){var img=document.createElement("img");img.className="dar-v8-book-cover";img.alt="Buchcover";img.loading="lazy";img.src=arguments[7];wrap.appendChild(img)}var foot=document.createElement("small");foot.textContent=summary||"DĀR AL TAWḤĪD";wrap.appendChild(foot)}
    wrap.appendChild(anchor);container.appendChild(wrap)
   }
   function dayPostUrl(p1){var post=(realData.posts||[]).find(function(x){return x.id===p1.id||x.file===p1.file});return post?p("beitrag","id="+encodeURIComponent(post.id)):p("beitraege")}
@@ -2954,7 +2955,7 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
    if(!document.getElementById("darV8Books"))return;
    var list=(v.publications||[]).filter(function(x){return x.status!=="archived"&&x.id}).sort(function(a,b){return String(b.publishedAt||"").localeCompare(String(a.publishedAt||""))}).slice(0,3);
    books.replaceChildren();
-   list.forEach(function(pub,i){card(books,i===0?"Neueste Veröffentlichung":"Bibliothek",pub.title,pub.category||pub.topic||"",p("werk","type=pub&id="+encodeURIComponent(pub.id)),"werk",i===0)});
+   list.forEach(function(pub,i){card(books,i===0?"Neueste Veröffentlichung":"Bibliothek",pub.title,pub.category||pub.topic||"",p("werk","type=pub&id="+encodeURIComponent(pub.id)),"werk",i===0,pub.coverUrl||"")});
    if(!list.length)books.textContent="Noch keine Bibliothekswerke verfügbar."
   }).catch(function(){books.textContent="Bibliothek konnte gerade nicht geladen werden."});
  }
