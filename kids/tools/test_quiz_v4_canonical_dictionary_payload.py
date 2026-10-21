@@ -25,6 +25,11 @@ def must_fail(callback,marker):
 
 
 def main():
+    # Auditory owner rejected ʿIbādah; Ḥalāl/Ḥarām need hearing.
+    # Never charge a second take for these exact words during bulk production.
+    for spoken in ("Wir machen ʿIbādah.", "Ḥalāl und Ḥarām.", "Ḥarām."):
+        assert t.source_requires_separate_pronunciation_approval(spoken), spoken
+    assert not t.source_requires_separate_pronunciation_approval("Wie viele Gebete gibt es?")
     english=t.build_canonical_v4_payload("Der Qurʾān lehrt den Īmān.",language="de")
     assert english=={
         "text":"Der Qurʾān lehrt den Īmān.",
