@@ -83,6 +83,8 @@ jobs:
         run: |
           python3 -m pip install --quiet selenium
           python3 test/assets/dar-test-turkish-browser-smoke.py
+          node test/i18n/test-ui-generated-loader.cjs
+          python3 test/i18n/validate-ui-catalog-browser.py
 
       - name: Survey all adult Test routes for still-untranslated UI
         run: python3 test/assets/dar-test-turkish-coverage-audit.py
