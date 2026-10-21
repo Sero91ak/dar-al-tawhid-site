@@ -532,11 +532,12 @@ async function finalizeDarTestHomeV1193(asset) {
     const smartSrc = '<script defer id="darTestSmartHomeV3" src="/test/assets/dar-home-library-v1194.js?v=20261020-smart-v4"></script>';
     html = html.includes("</body>") ? html.replace("</body>", smartSrc + "\n</body>") : html + smartSrc;
   }
-  // HTML_PREVIEW_PARITY_V1: render HTML V3 layout over native Test home only.
+  // DAR_TEST_PARITY_CURRENT_SCRIPT_AUTHORITY_V55: refresh an existing
+  // <script id="darTestHomeHtmlParityV1"> from cached HTML before reinjecting.
+  // A bare includes(id) skipped version upgrades, leaving the old visible UI.
+  html = html.replace(/<script\b(?=[^>]*\bid=["']darTestHomeHtmlParityV1["'])[^>]*>\s*<\/script>\s*/gi, "");
   const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261022-v55-source-salam"></script>';
-  if (!html.includes('id="darTestHomeHtmlParityV1"')) {
-    html = html.includes("</body>") ? html.replace("</body>", parityScript + "\n</body>") : html + parityScript;
-  }
+  html = html.includes("</body>") ? html.replace("</body>", parityScript + "\n</body>") : html + parityScript;
   // DAR_ADULT_TOP_SCROLL_BOUNDARY_V1: every adult Dar Test route uses
   // the real document scroll; clamp downward drags at the top without
   // locking vertical lists, prayers, Qurʾān or the bottom navigation.
