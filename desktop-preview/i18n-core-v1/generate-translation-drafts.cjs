@@ -14,20 +14,7 @@ const MAX_CALLS=cap("--max-requests",1,20),MAX_SOURCE=cap("--max-source-chars",9
 const LOCALE=arg("--locale","all"),ITEM=arg("--id",""),KIND=arg("--kind",""),SOURCE=arg("--source-path","");
 const LANGS={ar:"Arabic Fuṣḥā (العربية الفصحى)",en:"formal scholarly English",tr:"formal Turkish",ku:"Kurmancî Northern Kurdish",ckb:"Soranî Central Kurdish (RTL)",bs:"formal Bosnian"};
 
-/* Canonical glossary is a spelling/alias hint, never an interpretation or ruling.
- * Restrict hints to terms visibly present in each source to avoid context drift.
- */
-const TERM_SOURCE=JSON.parse(fs.readFileSync(path.join(__dirname,"terms.json"),"utf8")).entries;
-const folded=x=>" "+String(x||"").toLowerCase().normalize("NFKD").replace(/\p{M}/gu,"").replace(/[ʿʾʼ‘’]/g,"").replace(/[^\p{L}\p{N}]+/gu," ").trim()+" ";
-function glossaryHints(fields){
- const raw=Object.values(fields||{}).flat().filter(x=>typeof x==="string").join(" ");
- const text=folded(raw);
- return TERM_SOURCE.filter(t=>{
-  const aliases=[t.id,t.arabic,...(t.aliases||[])];
-  return aliases.some(a=>{const k=folded(a).trim();return k.length>=3&&text.includes(" "+k+" ")})
- }).slice(0,32).map(t=>({conceptId:t.id,arabicSpelling:t.arabic,domain:t.domain}));
-}
-
+const {glossaryHints}=require("./glossary-hints.cjs");
 if(LOCALE!=="all"&&!LANGS[LOCALE])throw Error("Unknown locale");
 const inv=JSON.parse(fs.readFileSync(inventoryFile,"utf8"));
 if(inv.schemaVersion!==2||!Array.isArray(inv.queue)||!Array.isArray(inv.items))throw Error("Invalid worklist v2");
