@@ -180,8 +180,10 @@ function translationPath(item,locale){
 function review(file,item,locale){
  if(item.immutable?.sourceReviewBlocked)return"blocked-source";
  if(!file||typeof file!=="object")return"pending";
- if(file.status!=="approved")return file.status==="draft"?"draft":"pending";
+ // Revisions invalidate ALL stored manuscripts, including pending draft manuscripts.
+ // An old draft is never silently treated as current and never blocks a new revision.
  if(file.id!==item.id||file.locale!==locale||file.sourceHash!==item.sourceHash)return"stale";
+ if(file.status!=="approved")return file.status==="draft"?"draft":"pending";
  if(!file.reviewer?.linguistic||!file.reviewer?.religious||!file.reviewedAt)return"invalid-review";
  const keys=Object.keys(item.fields),texts=file.fields||{};
  if(keys.some(k=>typeof item.fields[k]==="string"?!String(texts[k]||"").trim():!Array.isArray(texts[k])||texts[k].length!==item.fields[k].length))return"missing-fields";
