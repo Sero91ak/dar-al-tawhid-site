@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "scope": "KIDS_V4_ONE_CONCURRENT_DUPLICATE_PROVIDER_POST_SAFETY_INCIDENT",
+  "date": "2026-10-21",
+  "runId": 39570649491,
+  "jobId": 119123662652,
+  "originalText": "Allah nennt Muḥammad",
+  "originalTextSha256": "4c3ff33d15b5c03cc0f22783b39a9e9e3372b8441031a01f485970022481c7fd",
+  "facts": [
+    "Concurrent previously completed wave02 recorded exact text and stored its original MP3 in registry before this duplicate wave reached POST.",
+    "Duplicate wave logged REQUEST_STARTED_UNCONFIRMED then executed original_mp3 without raising an HTTP error.",
+    "Traceback occurred only after returned raw MP3, on require(not target.exists()), so this duplicate POST returned audio but was not persisted.",
+    "Do not retry this text or claim the additional returned MP3 is recovered."
+  ],
+  "registeredExistingMP3Sha256": "6844342c65117af5781d79d8d024500bb11aba31218494a930e958f0d0dac61c",
+  "registeredExistingProviderRequestId": "IQ7shEDJemZyv9eIxEHq",
+  "unpersistedDuplicateProviderRequestId": null,
+  "duplicatePostSuccessInferredFromControlFlow": true,
+  "exactAdditionalChargedCreditsKnown": false,
+  "chargedCreditAmount": null,
+  "synthesisRequestsToRepeat": 0,
+  "previousOriginalPreserved": true,
+  "pronunciationReviewStillRequired": true,
+  "publicReleaseAllowed": false,
+  "repairCommits": [
+    "b3db815ed3e81f9ecde0e25d8047ef6a84ef2853",
+    "f113543e112a989882341c5724ff5754f537d68c"
+  ]
+}
