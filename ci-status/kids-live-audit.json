@@ -1,8 +1,8 @@
 {
-  "timestamp": "2026-10-21T11:11:25Z",
+  "timestamp": "2026-10-21T11:15:02Z",
   "trigger": "workflow_run",
   "finishedDeployConclusion": "success",
-  "finishedDeployRun": "39589807261",
+  "finishedDeployRun": "39590101230",
   "live": {
     "buildId": "kids-shell-v1421-learn-center-dua-fourth-salaf-in-hoeren",
     "label": "KIDS · V1.09.22",
@@ -71,6 +71,24 @@
   },
   "lastDeployRuns": [
     {
+      "conclusion": null,
+      "created_at": "2026-10-21T11:12:12Z",
+      "head_sha": "be4b8ec66a51732168e066ea878744a93595df28",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39590195236",
+      "id": 39590195236,
+      "status": "queued",
+      "updated_at": "2026-10-21T11:14:49Z"
+    },
+    {
+      "conclusion": "success",
+      "created_at": "2026-10-21T11:11:28Z",
+      "head_sha": "db70fdb09a5d4b7070be22ce113613c376248f11",
+      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39590101230",
+      "id": 39590101230,
+      "status": "completed",
+      "updated_at": "2026-10-21T11:14:49Z"
+    },
+    {
       "conclusion": "success",
       "created_at": "2026-10-21T11:09:04Z",
       "head_sha": "dd15d8e9aa583a18b466731a7c3ec4a313e6d893",
@@ -105,24 +123,6 @@
       "id": 39585343117,
       "status": "completed",
       "updated_at": "2026-10-21T10:34:44Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-10-21T10:22:17Z",
-      "head_sha": "69aefb9c3249f098dd6857844601ff4d0233b7fb",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39584091644",
-      "id": 39584091644,
-      "status": "completed",
-      "updated_at": "2026-10-21T10:24:33Z"
-    },
-    {
-      "conclusion": "success",
-      "created_at": "2026-10-21T10:10:13Z",
-      "head_sha": "eb59960de9036ac9052081be460b104fd744a712",
-      "html_url": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39582587215",
-      "id": 39582587215,
-      "status": "completed",
-      "updated_at": "2026-10-21T10:12:31Z"
     }
   ]
 }
