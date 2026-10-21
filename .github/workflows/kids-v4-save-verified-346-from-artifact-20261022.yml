@@ -1,0 +1,84 @@
+name: KIDS V4 Save Verified 346 Review MP3 Assembly from Backup
+on:
+  push:
+    branches:
+      - review/kids-v4-audio-safe-import-20261022
+    paths:
+      - kids/review-only/quiz-v4-save-346-audio-checkpoint-20261022.json
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: kids-v4-safe-346-committed-review
+  cancel-in-progress: false
+jobs:
+  import-verified-assembly:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-v4-audio-safe-import-20261022
+      - uses: actions/download-artifact@v4
+        with:
+          name: kids-v4-safe-three-question-composed-review-20261022
+          run-id: 39690859878
+          github-token: ${{ github.token }}
+          path: kids-offline-assembled-backup
+      - name: Restore only verified 346-question snapshot and 3 genuine offline audio composites
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,shutil,hashlib
+          from pathlib import Path
+          root=Path('.')
+          src=root/'kids-offline-assembled-backup'
+          assert (src/'data/quiz-v4-450-production-status.json').is_file()
+          r=json.loads((src/'data/quiz-v4-450-production-status.json').read_text())
+          original=json.loads((root/'kids/data/quiz-v4-450-original-clip-registry.json').read_text())
+          assert len(original['textClips'])==1780 and original['live'] is False
+          assert r['completedQuestionsWithAllFourAudioParts']==346
+          assert r['livePublished'] is False and r['appReleaseFlagEnabled'] is False
+          assert r['ageBreakdown']['7-8']['completeAllFourOriginalAudios']==141
+          assert r['ageBreakdown']['9-10']['completeAllFourOriginalAudios']==135
+          names=['0f8c1efb46e729dc3a877f391876cc946d178b85.mp3',
+                 '2b29e1d9ce6e1c9e5b30a8b6702849af385482ef.mp3',
+                 'd201ee1b1776781eebc241557aba89a4deba9e94.mp3']
+          for name in names:
+              origin=src/'assets/kids-quiz-audio/v4-age7to10-composed-review'/name
+              target=root/'kids/assets/kids-quiz-audio/v4-age7to10-composed-review'/name
+              assert origin.is_file() and 1800<origin.stat().st_size<1_000_000, name
+              digest=hashlib.sha256(origin.read_bytes()).hexdigest()
+              assert len(digest)==64
+              if target.is_file():
+                  assert hashlib.sha256(target.read_bytes()).hexdigest()==digest
+              else:
+                  target.parent.mkdir(parents=True,exist_ok=True)
+                  shutil.copy2(origin,target)
+          for part in ('quiz-v4-450-production-status.json',
+                       'quiz-v4-age7to10-composed-preview.json',
+                       'quiz-v4-age7to10-offline-coverage.json'):
+              assert (src/'data'/part).is_file()
+              shutil.copy2(src/'data'/part,root/'kids/data'/part)
+          summary=src/'review-only/quiz-v4-450-actual-mp3-import-summary.json'
+          assert summary.is_file()
+          shutil.copy2(summary,root/'kids/review-only'/summary.name)
+          print('REAL_COMPOSED_MP3S_PRESERVED: 3; COMPLETE_QUESTIONS: 346; LIVE_RELEASE: OFF')
+          PY
+      - name: Commit small immutable validated restore, rebase onto latest protected branch
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-346-offline-restore
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          if git diff --cached --quiet; then
+            echo "Three composed MP3s and verified 346 report already saved"
+            exit 0
+          fi
+          git commit -m "audio(kids review): save composed MP3s and proven 346/450 coverage; release off"
+          if git push origin HEAD:review/kids-v4-audio-safe-import-20261022; then exit 0; fi
+          git fetch origin review/kids-v4-audio-safe-import-20261022
+          git rebase FETCH_HEAD
+          git push origin HEAD:review/kids-v4-audio-safe-import-20261022
