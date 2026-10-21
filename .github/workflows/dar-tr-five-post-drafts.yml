@@ -1,4 +1,4 @@
-name: DAR Adult Turkish Five-Post Draft Pilot
+name: DAR Adult Turkish 20-Post Draft Pilot
 
 on:
   push:
@@ -11,11 +11,11 @@ permissions:
   contents: write
 
 concurrency:
-  group: dar-tr-five-post-drafts-once-20261021
+  group: dar-tr-translation-draft-pilot-20261021
   cancel-in-progress: false
 
 jobs:
-  generate-five-drafts:
+  generate-twenty-drafts:
     if: ${{ github.run_attempt == 1 }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
@@ -53,14 +53,14 @@ jobs:
           node desktop-preview/i18n-core-v1/generate-translation-drafts.cjs \
             --generate --inventory "$RUNNER_TEMP/translation-worklist.json" \
             --output "$RUNNER_TEMP/tr-review-only" --locale tr --kind post \
-            --max-requests 5 --max-source-chars 7000 --max-output-tokens 3500
+            --max-requests 20 --max-source-chars 7000 --max-output-tokens 3500
       - name: Require drafts and matching source fingerprints
         run: |
           node - <<'NODE'
           const fs=require('fs'),path=require('path');
           const dir=path.join(process.env.RUNNER_TEMP,'tr-review-only/desktop-preview/i18n-core-v1/translations/tr/post');
           const files=fs.existsSync(dir)?fs.readdirSync(dir).filter(x=>x.endsWith('.json')):[];
-          if(!files.length||files.length>5)throw Error('Expected 1 to 5 Turkish drafts: '+files.length);
+          if(!files.length||files.length>20)throw Error('Expected 1 to 20 Turkish drafts: '+files.length);
           let tokens=0;
           for(const file of files){
             const v=JSON.parse(fs.readFileSync(path.join(dir,file),'utf8'));
@@ -89,7 +89,7 @@ jobs:
           git add desktop-preview/i18n-core-v1/translations/tr/post/
           git -c user.name="github-actions[bot]" \
             -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
-            commit -m "chore(i18n): store five unreviewed Turkish drafts"
+            commit -m "chore(i18n): store up to twenty unreviewed Turkish drafts"
           git push origin "HEAD:refs/heads/feature/adult-tr-i18n-manuscript-contract-20261021"
       - name: Upload archive for editorial review
         if: always()
