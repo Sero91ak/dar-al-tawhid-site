@@ -1,0 +1,81 @@
+name: KIDS V4 Rebuild 450 Internal Audio after Verified Originals
+on:
+  push:
+    branches:
+      - review/kids-v4-audio-safe-import-20261022
+    paths:
+      - kids/review-only/quiz-v4-creative-v4candidate-transfer-results-20261022.json
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-safe-review-offline-assemble-20261022
+  cancel-in-progress: false
+jobs:
+  assemble-450:
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-v4-audio-safe-import-20261022
+      - name: Ensure FFmpeg audio tools
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null || ! command -v ffmpeg >/dev/null; then
+            sudo apt-get -o Acquire::Retries=1 -o DPkg::Lock::Timeout=20 update -y
+            sudo apt-get -o Acquire::Retries=1 -o DPkg::Lock::Timeout=20 install -y ffmpeg
+          fi
+      - name: Verify exactly three genuine prior V4 imports and keep public release disabled
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('.')
+          proof=json.loads((root/'kids/review-only/quiz-v4-creative-v4candidate-transfer-results-20261022.json').read_text())
+          clips=json.loads((root/'kids/data/quiz-v4-450-original-clip-registry.json').read_text())
+          assert proof['savedOriginals']==3 and proof['newVoiceCredits']==0
+          assert clips['live'] is False and clips['modelId']=='eleven_v4'
+          assert len(clips['textClips'])==1780
+          assert len({row['sha256'] for row in proof['receipts']})==3
+          assert all(any(x.get('sha256')==row['sha256'] and x.get('audioListeningApproved') is False
+                         for x in clips['textClips'].values()) for row in proof['receipts'])
+          assert json.loads((root/'kids/data/quiz-curation-release.json').read_text())['enabled'] is False
+          PY
+      - name: Re-assemble internal 7 to 10-year-old V4 quizzes from genuine MP3 only
+        run: |
+          set -euo pipefail
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/quiz_v4_selected450_release_gate.py --ignore-flag
+          python3 - <<'PY'
+          import json
+          r=json.load(open('kids/data/quiz-v4-450-production-status.json'))
+          assert r['completedQuestionsWithAllFourAudioParts']>=346, r['completedQuestionsWithAllFourAudioParts']
+          assert r['appReleaseFlagEnabled'] is False and r['livePublished'] is False
+          print('UPDATED_V4_REVIEW_COMPLETE',r['completedQuestionsWithAllFourAudioParts'],'OUT_OF',r['selectedTotal'])
+          PY
+      - name: Save real QA-verified composed 450 review progress, no live app
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-review-offline-assembly
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git commit -m "audio(kids review): compose genuine V4 MP3 audio for three more quiz items; keep release closed"
+          git push origin HEAD:review/kids-v4-audio-safe-import-20261022
+      - name: Preserve offline reviewed quiz parts even if push fails
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-safe-three-question-composed-review-20261022
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/data/quiz-v4-450-production-status.json
+            kids/data/quiz-v4-age7to10-offline-coverage.json
+            kids/data/quiz-v4-age7to10-composed-preview.json
+            kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+            kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
