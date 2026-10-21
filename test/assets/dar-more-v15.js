@@ -82,6 +82,7 @@ function render(items,header){
  '<div class="dm-actions"><button type="button" class="dm-action" data-dm-search-toggle aria-label="Funktion suchen" aria-expanded="'+searchOpen+'">'+svg("search")+'</button><button type="button" class="dm-action" data-dm-theme-toggle aria-label="Erscheinungsbild in Einstellungen öffnen" aria-expanded="'+themeOpen+'">'+svg("palette")+'</button><button type="button" class="dm-action" data-dm-account-toggle aria-label="Konto und Synchronisierung öffnen" aria-expanded="'+accountOpen+'">'+svg("account")+'</button></div>'+
  '<div class="dm-search" '+(searchOpen?'':'hidden')+'><input id="moreFeatureSearch" type="search" placeholder="Funktion suchen…" autocomplete="off" aria-label="Funktion suchen" value="'+safe(query)+'"><button type="button" data-dm-search-close aria-label="Suche schließen">×</button></div>'+
  localeChoices()+
+ '<div style="margin:0 0 14px;font-size:12px"><a href="/test/tr-review/" style="color:inherit;text-decoration:underline;text-underline-offset:4px" data-tr-review-link>Türkischen OpenAI-Entwurf prüfen →</a></div>'+
  '<nav class="dm-tabs" aria-label="Bereiche">'+cats+'</nav><div class="dm-groups">'+groups+'</div>'+
  '<div class="dm-theme-backdrop" data-dm-theme-backdrop '+(themeOpen?'':'hidden')+'><section class="dm-theme-sheet" role="dialog" aria-modal="true" aria-labelledby="dmThemeTitle"><div class="dm-handle"></div><div class="dm-sheet-head"><div><small>DĀR AL TAWḤĪD · DESIGN</small><h3 id="dmThemeTitle">Erscheinungsbild</h3><p>Farbwelt wählen – die Inhalte bleiben unverändert.</p></div><button type="button" data-dm-theme-close aria-label="Schließen">×</button></div><div class="dm-theme-list">'+options+'</div><div class="dm-density-head">Darstellung</div><div class="dm-density-row"><button type="button" data-dm-density="compact" aria-pressed="'+(density==="compact")+'">Kompakt</button><button type="button" data-dm-density="comfort" aria-pressed="'+(density==="comfort")+'">Komfort</button></div></section></div></section>';
 }
@@ -107,6 +108,33 @@ function sync(){
  });
  root.querySelectorAll("[data-dm-category]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.getAttribute("data-dm-category")===chosen)));
  root.querySelectorAll("[data-dm-locale]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.dmLocale===currentLocale())));
+ const turkish=currentLocale()==="tr";
+ const translated={
+  "wissen":"Bilgi","alltag":"Günlük Hayat","werkzeuge":"Araçlar",
+  "persoenlich":"Kişisel","app":"Uygulama"
+ };
+ root.querySelectorAll("[data-dm-category]").forEach(btn=>{
+  const span=btn.querySelector("span");const original=categories.find(c=>c[0]===btn.dataset.dmCategory);
+  if(span&&original)span.textContent=turkish?(translated[original[0]]||original[1]):original[1];
+ });
+ const groupTr={wissen:"Öğrenme ve Bilgi",alltag:"Günlük Hayat ve Namaz",werkzeuge:"Araçlar ve Asistanlar",persoenlich:"Kişisel",app:"Uygulama"};
+ root.querySelectorAll("[data-dm-group]").forEach(section=>{
+  const group=section.dataset.dmGroup,title=section.querySelector(".dm-group-head h3");
+  const original=categories.find(x=>x[0]===group);
+  if(title&&original)title.textContent=turkish?groupTr[group]:original[2];
+  const count=section.querySelector("[data-dm-count]");
+  if(count)count.textContent=count.textContent.replace(/ Funktionen$| İşlev$/,"")+(turkish?" İşlev":" Funktionen");
+ });
+ const localCopy=root.querySelector(".dm-locale-copy");
+ if(localCopy){
+  const strong=localCopy.querySelector("strong"),small=localCopy.querySelector("small");
+  if(strong)strong.textContent=turkish?"Dil · Sprache":"Sprache · Dil";
+  if(small)small.textContent=turkish?"Türkçe içerikler ancak kaynak ve dil incelemesinden sonra yayımlanır.":"Türkische Inhalte werden nach Quellen- und Sprachprüfung freigegeben.";
+ }
+ const search=root.querySelector("#moreFeatureSearch");
+ if(search)search.placeholder=turkish?"İşlev ara …":"Funktion suchen…";
+ const previewLink=root.querySelector("[data-tr-review-link]");
+ if(previewLink)previewLink.textContent=turkish?"Türkçe OpenAI taslağını incele →":"Türkischen OpenAI-Entwurf prüfen →";
  const src=root.querySelector("#moreFeatureSearch");if(src&&src.value!==query)src.value=query;
  root.setAttribute("data-dm-density",density);
  root.classList.toggle("dm-searching",!!query);
