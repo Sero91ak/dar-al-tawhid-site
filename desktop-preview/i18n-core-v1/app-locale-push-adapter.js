@@ -33,7 +33,14 @@
     var locale = normalized(chosenCode, config.registry);
     var OS = config.oneSignal;
     var push = OS && OS.User && OS.User.PushSubscription;
-    if (!push) return {synced:false,reason:"onesignal_unavailable",locale:locale};
+    // Native WKWebView/Android WebView may not have the Web OneSignal SDK.
+    // A bridge may supply device-scoped subscription state for the exact app
+    // installation. This is a UI hint ONLY: the server independently verifies
+    // ownership, app ID, environment and consent before changing its mapping.
+    if (!push && typeof config.getNativeSubscriptionState === "function") {
+      push = await config.getNativeSubscriptionState();
+    }
+    if (!push) return {synced:false,reason:"subscription_state_unavailable",locale:locale};
     var id = String(push.id || "").trim();
     if (!id) return {synced:false,reason:"no_subscription",locale:locale};
     if (push.optedIn !== true) {
