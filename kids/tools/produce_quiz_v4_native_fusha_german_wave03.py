@@ -168,9 +168,18 @@ def main():
         LEDGER.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\n",encoding="utf-8")
         persist_remote_paid_checkpoint(LEDGER,purpose="German-Fusha-W03-%02d-request-start"%index)
         # Exactly one paid request for this text; never automatically retry.
-        raw,request_id=original_mp3(key,speech,language="de")
         target=OUT/(digest(VOICE+"\n"+MODEL+"\n"+speech)[:32]+".mp3")
-        require(not target.exists(),"paid original file already exists outside journal")
+        require(not target.exists(),"already paid MP3 exists; STOP BEFORE POST")
+        subprocess.run(["git","fetch","--no-tags","origin",
+            "review/kids-quiz-v4-batch-001-020-20261014"],
+            cwd=ROOT,check=True,capture_output=True,text=True,timeout=120)
+        remote=subprocess.run(["git","show",
+            "FETCH_HEAD:kids/data/quiz-v4-450-original-clip-registry.json"],
+            cwd=ROOT,check=True,capture_output=True,text=True,timeout=30)
+        remote_saved=json.loads(remote.stdout).get("textClips",{})
+        require(speech not in remote_saved,
+                "concurrent paid original already registered; STOP BEFORE POST")
+        raw,request_id=original_mp3(key,speech,language="de")
         target.write_bytes(raw)
         metadata=json.loads(subprocess.run(["ffprobe","-v","error","-show_entries",
                    "format=duration:stream=codec_name,codec_type","-of","json",str(target)],
