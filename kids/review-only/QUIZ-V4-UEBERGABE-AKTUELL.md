@@ -6,13 +6,13 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `48e3d88d99c1a71ea595931f4cabfaf313113782`
+- Commit beim Erstellen dieses Berichts: `535b9e44c5e5f7248d4c46fcc329f87f7bb502c5`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
 - Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **794 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1584 Frage-/Lob-/Retry-/Erklärungsteile**.
 - Technisch vierteilig vollständig: **343/450**, noch unvollständig: **107/450**.
 - Letzter V4-Kostenaudit: **75 neue Sprachfragmente** = **5068 Unicode-Zeichen**; **0 neue Lob-/Retry-Fragmente**, **0 neue V4-Texte für 4–6 Jahre**.
-- Nach Originalkosten getrennt: **80 Fragen nur durch bereits bezahlte MP3s blockiert**, **19 Fragen benötigen neue V4-Originaltexte**.
+- Nach Originalkosten getrennt: **80 Fragen nur durch bereits bezahlte MP3s blockiert**, **18 Fragen benötigen neue V4-Originaltexte**.
 - Alter 4-6: **70/150** komplett; vorhandene Hörteile question=100, correct=85, retry=85, explanation=148.
 - Alter 7-8: **139/150** komplett; vorhandene Hörteile question=144, correct=150, retry=150, explanation=142.
 - Alter 9-10: **134/150** komplett; vorhandene Hörteile question=138, correct=150, retry=150, explanation=142.
@@ -27,7 +27,7 @@
 
 Genauer kostenfreier Restplan: `kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md` und `kids/review-only/quiz-v4-450-next-completion-priority.json`.
 Zusätzliche globale Kostensperre: **10** echte Originaltexte sind im verbundenen ElevenLabs Flow noch reserviert/eingereicht und dürfen nicht erneut in eine kostenpflichtige TTS-Auswahl geraten. **1** davon sind bereits eingereicht, **7** sind vorerst unbezahlt reserviert. Der gesamte Audioabschlussplan unterscheidet diese Originale von wirklich neuen Sprachfragmenten.
-Nur bei frisch erzeugtem Abschlussplan: **5** Fragen warten ausschließlich auf verbundene Flow-Originale. Wirklich neue noch zu generierende V4-Sprachfragmente nach Deduplizierung: **22**. Diese Werte sind keine neue providerbestätigte Abrechnung.
+Nur bei frisch erzeugtem Abschlussplan: **5** Fragen warten ausschließlich auf verbundene Flow-Originale. Wirklich neue noch zu generierende V4-Sprachfragmente nach Deduplizierung: **21**. Diese Werte sind keine neue providerbestätigte Abrechnung.
 
 ## Noch fehlende, **bereits bezahlte** Originalaufnahmen
 
