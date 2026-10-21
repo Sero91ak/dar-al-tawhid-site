@@ -44,3 +44,16 @@
 @media(max-width:1050px){.dar-v8-bookgrid{grid-template-columns:1fr 1fr}.dar-v8-book.featured{grid-column:1/-1}.dar-v8-terms{gap:7px}}
 @media(max-width:700px){.dar-v8-welcome{padding:19px 0 16px}.dar-v8-kicker{font-size:9px;letter-spacing:.09em}.dar-v8-kicker:before{width:16px}.dar-v8-welcome h1{font-size:28px}.dar-v8-welcome p:not(.dar-v8-salam){font-size:12px;line-height:1.6}.dar-v8-salam{font-size:17px}.dar-v8-term{border-radius:16px;min-height:57px;padding:10px}.dar-v8-term b{font-size:15px}.dar-v8-term span{font-size:15px}.dar-v8-finder{border-radius:18px;margin:19px 0;padding:18px}.dar-v8-form{gap:6px}.dar-v8-form button{padding:0 12px}.dar-v8-dailygrid{grid-template-columns:1fr}.dar-v8-day{min-height:0}.dar-v8-bookgrid{grid-template-columns:1fr}.dar-v8-book.featured{grid-column:auto}.dar-v8-book{min-height:125px}}
 @media(prefers-reduced-motion:reduce){.dar-v8-term{transition:none}}
+
+
+/* Actual first fold, not a second invisible welcome inside pageRoot. */
+.dar-v8-top-welcome{display:none;max-width:1220px;width:calc(100% - clamp(30px,5vw,90px));margin:0 auto;padding:18px 0 14px}
+body.dar-v8-home .dar-v8-top-welcome{display:block}
+body.dar-v8-home .top-tools-cluster{margin-top:0}
+body.dar-v8-home .dar-v8-top-welcome h1{margin-block:5px 7px}
+body.dar-v8-home .dar-v8-top-welcome p:not(.dar-v8-salam){max-width:870px;margin-top:5px}
+@media(max-width:700px){
+ .dar-v8-top-welcome{width:calc(100% - 28px);padding:15px 0 12px}
+ body.dar-v8-home .dar-v8-top-welcome h1{font-size:25px;line-height:1.16}
+ body.dar-v8-home .dar-v8-top-welcome .dar-v8-salam{font-size:16px;line-height:1.35}
+}
