@@ -52,7 +52,7 @@ async function generate(rec){
  const item=index.get(rec.id), abort=new AbortController(), timer=setTimeout(()=>abort.abort(),95000);
  try{
   const response=await fetch(apiUrl,{method:"POST",signal:abort.signal,headers:{"authorization":"Bearer "+apiKey,"content-type":"application/json"},
-    body:JSON.stringify({model,temperature:0.1,max_tokens:MAX_TOKENS,response_format:{type:"json_object"},
+    body:JSON.stringify({model,...(/^gpt-(?:5|6)(?:[.-]|$)/.test(model)?{reasoning_effort:"low",max_completion_tokens:MAX_TOKENS}:{temperature:0.1,max_tokens:MAX_TOKENS}),response_format:{type:"json_object"},
       messages:[{role:"system",content:systemText},{role:"user",content:JSON.stringify({targetLanguage:LANGS[rec.locale],id:item.id,fields:item.fields,immutable:item.immutable,terminologySpellingHints:glossaryHints(item.fields),terminologyNote:"These are canonical spelling hints only; they are NOT translations, legal rulings or definitions. Use context and preserve sourced meaning."})}]})});
   if(!response.ok)throw Error("Provider HTTP "+response.status);
   const raw=await response.json();const fields=JSON.parse(String(raw.choices?.[0]?.message?.content||""));
