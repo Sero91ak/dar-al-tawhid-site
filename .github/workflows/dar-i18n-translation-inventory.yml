@@ -1,0 +1,56 @@
+name: DAR Adult Multilingual Translation Inventory
+
+on:
+  push:
+    branches:
+      - main
+      - feature/adult-multilingual-core-20261021
+    paths:
+      - 'content/posts/**'
+      - 'q/_registry/shortlinks.json'
+      - 'q/**/index.html'
+      - 'test/data/hadith/search-index.json'
+      - 'apple-tv/hadith/**'
+      - 'content/duas/duas.json'
+      - 'data/quiz-questions.json'
+      - 'data/learning-content.json'
+      - 'content/learning/**'
+      - 'desktop-preview/i18n-core-v1/**'
+      - '.github/workflows/dar-i18n-translation-inventory.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: dar-adult-i18n-inventory-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  inventory:
+    name: Read-only multilingual source inventory
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate locale catalogs and reviewer gates
+        run: node desktop-preview/i18n-core-v1/validate-core.cjs
+      - name: Verify automatic revision detection with isolated fixtures
+        run: node desktop-preview/i18n-core-v1/test-translation-worklist.cjs
+      - name: Generate review-only worklist
+        shell: bash
+        run: |
+          node desktop-preview/i18n-core-v1/translation-worklist.cjs --out "$RUNNER_TEMP/dar-translation-worklist.json" > "$RUNNER_TEMP/dar-translation-summary.json"
+          node -e 'const fs=require("fs");const x=JSON.parse(fs.readFileSync(process.argv[1],"utf8"));const s=x.summary;fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,"## DĀR Mehrsprachigkeits-Warteschlange\n\n"+JSON.stringify(s,null,2)+"\n\nOffene Aufgaben sind **keine geprüften Übersetzungen**. Keine Änderungen an der Live-Website oder den Apps.\n")' "$RUNNER_TEMP/dar-translation-worklist.json"
+      - name: Store immutable worklist as review artifact only
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-adult-translation-worklist
+          path: ${{ runner.temp }}/dar-translation-worklist.json
+          retention-days: 7
+          if-no-files-found: error
