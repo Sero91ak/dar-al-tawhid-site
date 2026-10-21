@@ -171,6 +171,25 @@ const dictionary=new Map([...ENTRIES,...EXTRA_ENTRIES]),backward=new Map(),ambig
 const SUPPORTED=new Set(["de","tr","en","ar","ku","ckb","bs"]);
 const rtl=new Set(["ar","ckb"]),languagePacks=new Map();
 
+const specialBlocks=new Map(),welcomeOriginals=new WeakMap();
+function renderHomeWelcome(locale){
+ const document=global.document;
+ const intro=document?.querySelector?.("#darHomeHtmlParityV1 .dhp-intro");
+ if(!intro||!document.createTextNode||!document.createElement)return;
+ let state=welcomeOriginals.get(intro);
+ if(!state){state={original:intro.innerHTML,last:null};welcomeOriginals.set(intro,state)}
+ intro.setAttribute("data-dar-no-translate","home-intro");
+ if(state.last===locale)return;
+ state.last=locale;
+ const translation=locale==="de"?null:specialBlocks.get(locale);
+ if(!translation){if(intro.innerHTML!==state.original)intro.innerHTML=state.original;return}
+ const branded="DĀR AL TAWḤĪD",pos=translation.indexOf(branded);
+ if(pos<0){intro.textContent=translation;return}
+ const brand=document.createElement("strong");
+ brand.textContent=branded;
+ intro.replaceChildren(document.createTextNode(translation.slice(0,pos)),brand,
+                      document.createTextNode(translation.slice(pos+branded.length)));
+}
 const titleByGerman=new Map();
 const originalTitles=new WeakMap();
 const HEADLINE_SELECTORS=[
@@ -238,6 +257,13 @@ function registerLocaleData(pack){
   prepared.set(code,dict);
  }
  for(const [key,value] of prepared)languagePacks.set(key,value);
+ specialBlocks.clear();
+ for(const code of SUPPORTED){
+  if(code==="de")continue;
+  const welcome=pack.specialBlocks?.homeWelcome?.[code];
+  if(typeof welcome==="string"&&welcome.length>30&&welcome.length<800&&
+     welcome.includes("DĀR AL TAWḤĪD")&&!/[<>]/.test(welcome))specialBlocks.set(code,welcome);
+ }
  schedule();return true;
 }
 /* Optional central interface catalog: one static asset, no client AI or paid calls.
@@ -388,6 +414,7 @@ function apply(root=global.document?.body,locale=currentLocale()){
  if(!root)return 0;
  const doc=global.document;
  if(root.nodeType===1&&!shouldSkip(root))transformAttributes(root,locale);
+ renderHomeWelcome(locale);
  const walker=doc.createTreeWalker(root,global.NodeFilter.SHOW_ELEMENT|global.NodeFilter.SHOW_TEXT);
  let node,seen=0;
  while((node=walker.nextNode())!==null){
