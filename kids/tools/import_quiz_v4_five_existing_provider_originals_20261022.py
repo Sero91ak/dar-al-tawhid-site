@@ -22,10 +22,10 @@ def save(p,j):p.write_text(json.dumps(j,ensure_ascii=False,indent=2)+"\n",encodi
 
 def main():
     inputs=load(INPUT)
-    ok(inputs["scope"]=="KIDS_V4_FIVE_PREGENERATED_REVIEW_ONLY" and inputs["newSpeechRequests"]==0 and inputs["publicRelease"] is False,"unsafe delivery scope")
+    ok(inputs["scope"]=="KIDS_V4_SIX_PREGENERATED_REVIEW_ONLY" and inputs["newSpeechRequests"]==0 and inputs["publicRelease"] is False,"unsafe delivery scope")
     items=inputs["items"]
     ok(len(items)==6,"not the specified six existing originals")
-    ok(len(set(x["textSha256"] for x in items))==5 and len(set(x["generationId"] for x in items))==5,"duplicate audio source")
+    ok(len(set(x["textSha256"] for x in items))==6 and len(set(x["generationId"] for x in items))==6,"duplicate audio source")
     reg,priority,connected=load(REG),load(PRIORITY),load(CONNECTED)
     ok(reg.get("live") is False and reg.get("voiceId")==VOICE and reg.get("modelId")=="eleven_v4","wrong registry")
     pendingNew={h for q in priority["possibleNewSpeechPriorityAfterOriginalRecovery"] for h in q["newTextSha256"]}
@@ -76,7 +76,7 @@ def main():
         receipts.append({"questionId":x["questionId"],"part":x["part"],"generationId":x["generationId"],
                          "textSha256":h,"sha256":sha,"url":link,"durationSeconds":round(seconds,3)})
     save(REG,reg);save(CONNECTED,connected)
-    save(RESULT,{"scope":"FIVE_V4_EXISTING_ORIGINALS_IMPORTED_REVIEW_ONLY",
+    save(RESULT,{"scope":"SIX_V4_EXISTING_ORIGINALS_IMPORTED_REVIEW_ONLY",
         "count":len(receipts),"newSpeechRequests":0,"newSpeechCreditsSpent":0,
         "pronunciationApproved":False,"publicRelease":False,"receipts":receipts})
     print("IMPORTED_EXISTING_SIX_V4_ORIGINALS",len(receipts),"TTS_CREDITS=0")
