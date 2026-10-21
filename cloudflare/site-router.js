@@ -1478,7 +1478,8 @@ export default {
         }
       }
       headers.set("Content-Type", "text/html; charset=utf-8");
-      html = assetResponse.ok ? activateAdultGlobalBrandV2(activateAdultCompactHero(html)) : html;
+      html = assetResponse.ok ? activateAdultCompactHero(html) : html;
+      if (assetResponse.ok) html = activateAdultGlobalBrandV2(html);
       return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
     }
 
@@ -1691,7 +1692,8 @@ export default {
         return new Response(null, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
       }
       let html = await assetResponse.text();
-      if (assetResponse.ok) html = activateAdultGlobalBrandV2(activateAdultCompactHero(html));
+      if (assetResponse.ok) html = activateAdultCompactHero(html);
+      if (assetResponse.ok) html = activateAdultGlobalBrandV2(html);
       if (assetResponse.ok && !html.includes("frauen-live-adapter.js")) {
         const frauenAddon = liveFrauenNativeAddon();
         html = html.includes("</body>") ? html.replace("</body>", frauenAddon + "</body>") : html + frauenAddon;
