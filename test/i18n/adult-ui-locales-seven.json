@@ -2356,5 +2356,15 @@
     }
   },
   "editingNote": "Static adult UI text without paid OpenAI API calls; language copy requires in-app linguistic QA (particularly Kurdish varieties). Original religious content is excluded.",
-  "reviewStatus": "editorial UI drafts, canonical religious passages and article bodies remain untouched"
+  "reviewStatus": "editorial UI drafts, canonical religious passages and article bodies remain untouched",
+  "specialBlocks": {
+    "homeWelcome": {
+      "tr": "DĀR AL TAWḤĪD'e hoş geldiniz. Kur'ân, sahih Sünnet, ilk dönem imamlarının rivayetleri ve Kur'ân ile sahih Sünnet'ten derlenen duaları bir araya getiren düzenli bir ilim uygulamasıdır.",
+      "en": "Welcome to DĀR AL TAWḤĪD – a structured knowledge app with articles based on the Qur'an, authentic Sunnah and reports of the early imams, alongside an extensive collection of supplications drawn from the Qur'an and authentic Sunnah.",
+      "ar": "مرحبًا بكم في DĀR AL TAWḤĪD، تطبيق معرفي منظم يضم مقالات تستند إلى القرآن والسنة الصحيحة وآثار الأئمة المتقدمين، ومجموعة من الأدعية من القرآن والسنة الصحيحة.",
+      "ku": "Bi xêr hatin DĀR AL TAWḤĪD – sepaneke zanînê ya rêkûpêk bi gotarên li ser Qur'an, Suneta rast û rîwayetên îmamên pêşîn, herwiha berhevokeke berfireh a duayan ji Qur'an û Suneta rast.",
+      "ckb": "بەخێربێن بۆ DĀR AL TAWḤĪD؛ ئەپێکی زانستی ڕێکخراوە کە وتارەکانی پشت بە قورئان، سوننەتی ڕەسەن و ڕیوایەتەکانی ئیمامانی پێشین دەبەستن، لەگەڵ کۆمەڵەیەکی فراوانی دوعا لە قورئان و سوننەتی ڕەسەن.",
+      "bs": "Dobro došli u DĀR AL TAWḤĪD – uređenu aplikaciju znanja s objavama zasnovanim na Kur'anu, vjerodostojnom sunnetu i predanjima ranih imama, uz opsežnu zbirku dova iz Kur'ana i vjerodostojnog sunneta."
+    }
+  }
 }
