@@ -313,6 +313,15 @@ function stylesheet(){
  "#darHomeHtmlParityV1 .dhp-greeting{font-size:clamp(22px,5.3vw,36px)!important;line-height:1.23!important;}",
 
  "#darHomeHtmlParityV1 .dhp-content>.dhp-prayer:first-child{margin-top:4px!important;}",
+
+ /* DAR_TEST_HOME_WELCOME_DENSITY_V56: actual app Home renderer, no duplicate design. */
+ "#darHomeHtmlParityV1 .dhp-welcome{display:block!important;height:auto!important;min-height:0!important;margin:clamp(12px,3.3vw,17px) 0 5px!important;padding:0!important;}",
+ "#darHomeHtmlParityV1 .dhp-greeting{font:650 clamp(19px,4.8vw,27px)/1.18 Georgia,serif!important;margin:0!important;letter-spacing:-.014em!important;text-wrap:pretty!important;}",
+ "#darHomeHtmlParityV1 .dhp-welcome-rule{height:1px!important;width:min(64%,320px)!important;margin:9px 0!important;background:linear-gradient(90deg,var(--dhp-line),transparent)!important;}",
+ "#darHomeHtmlParityV1 .dhp-intro{font:400 clamp(13px,3.48vw,15.5px)/1.45 system-ui,-apple-system,sans-serif!important;margin:0!important;padding:0!important;max-width:72ch!important;text-wrap:pretty!important;}",
+ "#darHomeHtmlParityV1 .dhp-isnad{margin:7px 0 10px!important;padding:5px 0 7px!important;min-height:0!important;}",
+ "#darHomeHtmlParityV1 .dhp-isnad-label{margin-bottom:5px!important;}",
+ "#darHomeHtmlParityV1 .dhp-quote{line-height:1.42!important;}",
  "html,html body{overscroll-behavior-y:none!important;}",
  ].join("\n");
 }
