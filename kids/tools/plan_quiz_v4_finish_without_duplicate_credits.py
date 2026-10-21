@@ -13,7 +13,7 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 from quiz_v4_no_double_charge_guard import protect_paid_texts
-from quiz_v4_quarantine import quarantined_originals
+from quiz_v4_quarantine import quarantined_originals, blocked_full_utterances
 from quiz_v4_native_fusha_reuse import load_mapping, resolve_text_originals
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -64,6 +64,12 @@ def main():
     recorded=set(stored)
     blocked_pronunciation_texts, blocked_pronunciation_generation_ids = quarantined_originals(ROOT)
     native_mapping,native_assets=load_mapping(ROOT)
+    blocked_utterances=blocked_full_utterances(plan["recipes"],blocked_pronunciation_texts,blocked_pronunciation_generation_ids)
+    production=load(ROOT/"kids/data/quiz-v4-450-production-status.json")
+    need(production["completedQuestionsWithAllFourAudioParts"]==sum(
+         int(x["fourPartTechnicallyReady"]) for x in stage["questions"].values()),
+         "stage differs from actual production progress; regenerate cost-free audio staging")
+    stage_sha_cache={}
     # Connected ElevenLabs Flow originals may already be charged or reserved.
     # Exclude them from future paid requests until the ORIGINAL is imported.
     protected=protect_paid_texts(ROOT,reg,ledger)
@@ -83,12 +89,45 @@ def main():
     every_new=set()
     prepaid_uses=Counter()
     by_age=defaultdict(lambda:Counter())
+    missing_sources_by_question={}
     for recipe in plan["recipes"]:
         qid,age=recipe["questionId"],recipe["ageBand"]
         need(age in AGES and qid in stage["questions"],"unknown quiz ID/age")
+        q_stage=stage["questions"][qid]
+        need(q_stage["ageBand"]==age and q_stage.get("humanListeningApproved") is False
+             and q_stage.get("publicPlaybackAuthorized") is False,
+             "stage age or audio permissions changed: "+qid)
         question_new=set();question_paid=set();question_flow=set();question_bad=set();blocked_parts={}
         for part in PARTS:
             entry=recipe[part]
+            # The real-MP3 stage has checked every composite's source, voice,
+            # codec, exact text and owner quarantine. An already playable
+            # composite MUST NOT be treated as another paid source gap.
+            staged=q_stage.get("parts",{}).get(part)
+            if staged is not None:
+                need(part not in q_stage.get("missing",{}),
+                     "stage simultaneously present and missing: "+qid+"/"+part)
+                need(entry["text"] not in blocked_utterances
+                     and staged.get("spokenTextSha256")==txt_hash(entry["text"])
+                     and staged.get("modelId")==MODEL and staged.get("voiceId")==VOICE
+                     and staged.get("reviewOnly") is True
+                     and staged.get("audioListeningApproved") is False,
+                     "real V4 stage mismatched or quarantined: "+qid+"/"+part)
+                url=staged.get("url")
+                need(isinstance(url,str) and url.startswith("/kids/assets/kids-quiz-audio/")
+                     and url.endswith(".mp3") and ".." not in url and "?" not in url,
+                     "unsafe staged MP3 path: "+qid+"/"+part)
+                target=(ROOT/url.lstrip("/")).resolve()
+                need(target.is_relative_to((ROOT/"kids/assets/kids-quiz-audio").resolve())
+                     and target.is_file() and target.stat().st_size==staged.get("bytes"),
+                     "staged original missing or size changed: "+qid+"/"+part)
+                if url not in stage_sha_cache:
+                    stage_sha_cache[url]=hashlib.sha256(target.read_bytes()).hexdigest()
+                need(stage_sha_cache[url]==staged.get("sha256"),
+                     "staged MP3 bytes fail original SHA check: "+qid+"/"+part)
+                continue
+            need(part in q_stage.get("missing",{}),
+                 "unstaged original has no missing marker: "+qid+"/"+part)
             missing_new=set();missing_old=set();missing_flow=set();missing_bad=set()
             if entry["mode"]=="existing-paid-exact":
                 gid=entry["generationId"]
@@ -140,9 +179,8 @@ def main():
             question_paid.update(missing_old)
             question_flow.update(missing_flow)
             question_bad.update(missing_bad)
+        missing_sources_by_question[qid]=set(question_new)
         for gid in question_paid:prepaid_uses[gid]+=1
-        q_stage=stage["questions"][qid]
-        need(q_stage["ageBand"]==age,"wrong stage age group")
         need(set(q_stage["missing"])==set(blocked_parts),
              "Stage MP3 missing parts do not match real originals: "+qid)
         actual_complete=q_stage["fourPartTechnicallyReady"]
@@ -186,8 +224,7 @@ def main():
                    and r["status"] in ("new-original-v4-needed","both-prepaid-recovery-and-new-v4")]
         while available:
             def fragments(row):
-                return {s for part in PARTS for s in rec_lookup[row["questionId"]][part].get("segments",[])
-                        if s in every_new}
+                return missing_sources_by_question[row["questionId"]]
             ranked=[]
             for row in available:
                 unique=fragments(row)-chosen
