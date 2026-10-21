@@ -308,6 +308,8 @@ function translateExact(value,language="tr"){
  if(language!=="tr")return languagePacks.get(language)?.get(value)??localizeGermanCalendarLabel(value,language);
  const known=dictionary.get(value);
  if(known!==undefined)return known;
+ const extraTurkish=languagePacks.get("tr")?.get(value);
+ if(extraTurkish!==undefined)return extraTurkish;
  const count=value.match(/^(\d+)\s+Funktionen$/);
  if(count)return count[1]+" işlev";
  const results=value.match(/^(\d+)\s+Ergebnisse$/);
