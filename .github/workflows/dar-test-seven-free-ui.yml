@@ -6,6 +6,8 @@ on:
     paths:
       - 'test/i18n/adult-ui-locales-seven.json'
       - 'test/i18n/test-seven-*'
+      - 'test/i18n/test-expanded-headings-seven.cjs'
+      - 'test/i18n/adult-visible-title-drafts-seven.json'
       - 'test/assets/dar-test-turkish-ui.js'
       - 'test/assets/dar-test-seven-languages-loader.js'
       - 'test/assets/dar-home-v3-compact.js'
@@ -37,16 +39,21 @@ jobs:
           node --check test/assets/dar-setup-hub.js
           node test/assets/dar-test-turkish-ui.test.cjs
           node test/i18n/test-seven-locales.cjs
+          node test/i18n/test-expanded-headings-seven.cjs
           node - <<'NODE'
           const fs=require('node:fs');
           const raw=fs.readFileSync('test/i18n/adult-ui-locales-seven.json','utf8');
           const pack=JSON.parse(raw);
           const loader=fs.readFileSync('test/assets/dar-test-seven-languages-loader.js','utf8');
+          const titleDrafts=JSON.parse(fs.readFileSync('test/i18n/adult-visible-title-drafts-seven.json','utf8'));
+          if(titleDrafts.bodyTranslation!==false||titleDrafts.paidApiCalls!==0||
+             titleDrafts.scope!=='adult-test-visible-titles-only'||
+             Object.keys(titleDrafts.records||{}).length<13)throw Error('Unsafe title draft pack');
           if(!pack.noPaidProvider||pack.scope!=='adult-interface-only')throw Error('Not an offline static UI pack');
           if(/api\.openai\.com|DAR_I18N_AI_API_KEY|chat\/completions/i.test(raw+loader))
             throw Error('Paid model endpoint or secret must not be in UI browser runtime');
           for(const locale of ['tr','en','ar','ku','ckb','bs'])
-            if(Object.keys(pack.translations[locale]||{}).length<160)throw Error('Incomplete language catalog '+locale);
+            if(Object.keys(pack.translations[locale]||{}).length<350)throw Error('Incomplete language catalog '+locale);
           console.log('PASS 7 UI catalogs; 0 OpenAI API requests.');
           NODE
       - name: Start local adult test app
