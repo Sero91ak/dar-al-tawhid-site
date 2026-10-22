@@ -1,0 +1,323 @@
+/* DĀR AL TAWḤĪD · TEST APP · V8 GLOBAL DESIGN LAYER
+   Visual-only redesign across ALL adult test routes. No content rewrite.
+   Existing source/reader/audio/share/notification/location/locale engines OWN
+   their actions and data. Remove this CSS link to revert the visual layer. */
+html.dar-v8-global-test {
+  --v8-paper:var(--card,#18231d);
+  --v8-ink:var(--text,#f0e9dd);
+  --v8-muted:var(--muted,#b6b3aa);
+  --v8-gold:var(--gold2,#d6b77f);
+  --v8-line:color-mix(in srgb,var(--v8-gold) 20%,transparent);
+  --v8-line-strong:color-mix(in srgb,var(--v8-gold) 39%,transparent);
+  --v8-wash:color-mix(in srgb,var(--v8-paper) 88%,var(--bg,#101712));
+  --v8-surface:color-mix(in srgb,var(--v8-paper) 95%,transparent);
+  --v8-gutter:clamp(12px,2.6vw,28px);
+  --v8-editorial:Georgia,"Cormorant Garamond",serif;
+  --v8-sans:Inter,system-ui,-apple-system,sans-serif;
+}
+html.dar-v8-global-test[data-theme="light"],
+html.dar-v8-global-test[data-theme="soft"],
+html.dar-v8-global-test[data-theme="eisgold"] {
+  --v8-paper:var(--card,#fffefb);--v8-ink:var(--text,#24352f);
+  --v8-muted:var(--muted,#66766c);
+  --v8-wash:color-mix(in srgb,var(--v8-paper) 84%,#e9eee8);
+}
+html.dar-v8-global-test[data-theme="royal"] {--v8-wash:color-mix(in srgb,var(--v8-paper) 80%,#09192b)}
+html.dar-v8-global-test[data-theme="bordeaux"] {--v8-wash:color-mix(in srgb,var(--v8-paper) 84%,#341c2a)}
+
+/* Unified application shell, never overwrite a reading surface's inner colors. */
+html.dar-v8-global-test body:not(.is-feed-fullscreen) {
+  overflow-x:clip;
+}
+html.dar-v8-global-test body:not(.is-feed-fullscreen) .app {
+  min-width:0;box-sizing:border-box;
+}
+html.dar-v8-global-test body .top-shell.theme-hero-shell {
+  position:relative;isolation:isolate;
+  background:transparent!important;
+  border:0!important;box-shadow:none!important;
+  padding-inline:var(--v8-gutter)!important;
+  margin:0!important;
+}
+html.dar-v8-global-test body .top-shell .header.theme-hero-surface {
+  min-height:0!important;margin:0!important;
+  padding:calc(11px + env(safe-area-inset-top,0px)) 0 7px!important;
+  background:transparent!important;border:0!important;
+  box-shadow:none!important;
+}
+html.dar-v8-global-test body .top-shell .header-row--brand-only {
+  display:flex!important;align-items:center!important;
+  justify-content:space-between!important;
+  gap:clamp(5px,1.5vw,16px)!important;
+  padding:0!important;margin:0!important;
+  min-width:0;
+}
+html.dar-v8-global-test body .top-shell .header-row--brand-only .brand {
+  display:flex;min-width:0;flex:1 1 auto;
+  align-items:center;gap:9px;
+}
+html.dar-v8-global-test body .top-shell .brand-main {
+  min-width:0;display:flex;align-items:center;gap:8px;
+}
+html.dar-v8-global-test body .top-shell .brand-main .logo {
+  width:clamp(30px,4vw,44px)!important;height:clamp(30px,4vw,44px)!important;
+  object-fit:contain;flex:none;
+}
+html.dar-v8-global-test body .top-shell .brand-title {
+  font-family:var(--v8-editorial)!important;
+  font-weight:650!important;
+  font-size:clamp(16px,2.1vw,24px)!important;
+  letter-spacing:.055em!important;
+  line-height:1.05!important;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;
+}
+html.dar-v8-global-test body .top-shell .brand-kicker-row{
+  font-family:var(--v8-sans);font-size:10px;letter-spacing:.09em;
+  max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+html.dar-v8-global-test body .top-shell .hero-text {
+  margin:0!important;padding:0!important;
+  display:none!important; /* The single V8 welcome component lives on Home. */
+}
+html.dar-v8-global-test body .top-shell>.isnad {
+  display:none!important; /* Source quote remains inside Home editorial design. */
+}
+html.dar-v8-global-test body .header-prayer-hub {
+  max-width:100%;min-width:0;
+  border-radius:16px;
+}
+/* Top navigation acts as a quiet native command strip, not a duplicate hero. */
+html.dar-v8-global-test body .app-bar {
+  display:flex;align-items:center;gap:12px;min-width:0;
+  min-height:44px!important;
+  padding:6px var(--v8-gutter)!important;
+  margin:0!important;
+  border-block:1px solid var(--v8-line)!important;
+  background:color-mix(in srgb,var(--v8-paper) 72%,transparent)!important;
+  box-shadow:none!important;
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+}
+html.dar-v8-global-test body .app-bar .crumb {
+  font-size:clamp(11px,1.5vw,13px);font-weight:630;
+  min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+html.dar-v8-global-test body .app-bar .app-actions {display:flex;align-items:center;gap:5px;min-width:0}
+html.dar-v8-global-test body .app-bar :is(.back-btn,.home-btn) {
+  min-height:36px!important;padding:6px 10px!important;
+  border-radius:11px!important;
+  border-color:var(--v8-line)!important;
+  box-shadow:none!important;
+  font-size:12px!important;line-height:1.15;
+}
+html.dar-v8-global-test body #appView.view {
+  width:100%;min-width:0;max-width:100%;
+  margin:0 auto;box-sizing:border-box;
+  overflow-x:clip;
+}
+/* Global editorial headings: shared compact hierarchy, not oversized banners. */
+html.dar-v8-global-test body #appView .view-head:not(.view-head-home),
+html.dar-v8-global-test body #appView .qov-header,
+html.dar-v8-global-test body #appView .topics-hub>.view-head,
+html.dar-v8-global-test body #appView .dua-hub>.view-head{
+  position:relative;min-width:0;
+  margin-block:3px 15px!important;
+  padding:clamp(17px,2.6vw,30px)!important;
+  border:1px solid var(--v8-line)!important;
+  border-radius:clamp(17px,2vw,23px)!important;
+  background:linear-gradient(120deg,
+     color-mix(in srgb,var(--v8-paper) 93%,transparent),
+     color-mix(in srgb,var(--v8-gold) 5%,var(--v8-paper)))!important;
+  box-shadow:0 10px 31px rgba(0,0,0,.035)!important;
+}
+html.dar-v8-global-test body #appView .view-head:not(.view-head-home) h2 {
+  font:650 clamp(24px,3.2vw,34px)/1.12 var(--v8-editorial)!important;
+  letter-spacing:-.018em!important;max-width:100%;overflow-wrap:break-word;
+}
+html.dar-v8-global-test body #appView .view-head:not(.view-head-home) .eyebrow{
+  font:720 10px/1.4 var(--v8-sans)!important;
+  letter-spacing:.16em;color:var(--v8-gold)!important;
+}
+html.dar-v8-global-test body #appView .view-head:not(.view-head-home) .view-desc{
+  font:450 clamp(12px,1.5vw,14px)/1.45 var(--v8-sans)!important;
+  color:var(--v8-muted)!important;max-width:67ch;
+}
+/* V8 Home keeps the single compact greeting, real prayer widget and player. */
+html.dar-v8-global-test body.is-home-route #appView .view-head-home{
+  margin-bottom:8px!important;
+}
+html.dar-v8-global-test body.is-home-route #appView .home-start-title{
+  font-size:clamp(19px,3vw,29px)!important;
+}
+html.dar-v8-global-test body.is-home-route #appView .dv3-home {
+  min-width:0;max-width:100%;
+}
+html.dar-v8-global-test body.is-home-route #appView :is(
+ .dv3-intro,.dv3-greeting,.dv3-standard,.dv3-search,.home-v380-section
+) {min-width:0;max-width:100%;box-sizing:border-box}
+
+/* Browseable content grids: same rhythm for the entire app, not just Duo. */
+html.dar-v8-global-test body:is(
+ .is-topics-route,.is-dua-hub-route,.is-quiz-route,.is-more-route,
+ .is-source-library-route,.is-books-library-route,.is-scholars-route
+) #appView :is(
+ .topics-theme-grid,.dua-theme-grid,.folder-grid,.latest-grid,
+ .lib-grid,.post-grid,.grid-list,.more-group-grid,.books-library-list
+) {gap:clamp(9px,1.4vw,18px)!important;min-width:0}
+html.dar-v8-global-test body #appView :is(
+ .topics-theme-card,.dua-theme-card,.folder-card,.lib-card,.book-library-card,
+ .post-card,.post-row,.dua-row,.info-card,.list-card
+):not(.post-reader):not(.dua-detail-box) {
+  min-width:0;box-sizing:border-box;
+  border-radius:clamp(14px,2vw,21px)!important;
+  border-color:var(--v8-line)!important;
+  box-shadow:0 4px 22px rgba(0,0,0,.035)!important;
+}
+html.dar-v8-global-test body #appView :is(
+ .topics-theme-card,.dua-theme-card,.folder-card,.lib-card,
+ .post-card,.post-row,.dua-row
+):not(.post-reader) {
+  transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;
+}
+@media(hover:hover) and (pointer:fine){
+ html.dar-v8-global-test body #appView :is(
+   .topics-theme-card,.dua-theme-card,.folder-card,.lib-card,
+   .post-card,.post-row,.dua-row
+ ):hover {
+   transform:translateY(-2px);
+   border-color:var(--v8-line-strong)!important;
+   box-shadow:0 10px 32px rgba(0,0,0,.075)!important;
+ }
+}
+html.dar-v8-global-test body #appView :is(
+ .topics-theme-card,.dua-theme-card,.folder-card,.post-row,.dua-row
+) :is(h2,h3,strong) {
+  overflow-wrap:anywhere;line-height:1.3;
+}
+html.dar-v8-global-test body #appView :is(
+ .topics-theme-grid,.dua-theme-grid,.post-grid,.lib-grid,.books-library-list
+) > * {min-width:0}
+html.dar-v8-global-test body #appView :is(
+ .main-search,.search-pro-panel,.search-panel,.search-input-shell
+) {max-width:100%;min-width:0;box-sizing:border-box}
+html.dar-v8-global-test body #appView :is(
+ .main-search input[type="search"],.search-pro-panel input[type="search"]
+) {min-width:0;max-width:100%;font-size:max(16px,1rem)!important}
+/* A real settings navigation structure, preserving old functions. */
+html.dar-v8-global-test body.is-settings-route #appView .dsh-home {
+  gap:clamp(10px,1.8vw,18px);
+  align-items:start;
+}
+html.dar-v8-global-test body.is-settings-route #appView .dsh-home>.dsh-welcome {
+  border:1px solid var(--v8-line)!important;border-radius:20px!important;
+  background:linear-gradient(120deg,var(--v8-surface),var(--v8-wash))!important;
+}
+html.dar-v8-global-test body.is-settings-route #appView .dsh-group {
+  min-width:0;
+}
+html.dar-v8-global-test body.is-settings-route #appView .dsh-group-head span {
+  font-size:11px!important;letter-spacing:.12em;
+}
+html.dar-v8-global-test body.is-settings-route #appView .dsh-list {
+  border-color:var(--v8-line)!important;border-radius:18px!important;
+  background:var(--v8-surface)!important;
+}
+html.dar-v8-global-test body.is-settings-route #appView .dsh-row {
+  min-width:0;min-height:70px;align-items:center;
+}
+html.dar-v8-global-test body.is-settings-route #appView .dsh-row-main {
+  min-width:0;
+}
+html.dar-v8-global-test body.is-settings-route #appView .dsh-row-title{
+  font-size:clamp(13px,1.45vw,15px)!important;
+}
+html.dar-v8-global-test body.is-settings-route #appView .dsh-row-sub{
+  font-size:clamp(11px,1.35vw,12.5px)!important;line-height:1.42!important;
+}
+/* Presentation-only: the original 9-language picker decides availability. */
+html.dar-v8-global-test body .dal-modal .dal-pane{
+  max-width:min(98vw,780px);box-sizing:border-box;
+}
+html.dar-v8-global-test body .dal-modal .dal-option{
+  min-height:58px!important;
+}
+html.dar-v8-global-test body :is(
+ .dar-v8-quick-btn,.dsh-row,.dal-option,.bottom-nav-btn
+):focus-visible{
+  outline:2px solid var(--v8-gold)!important;outline-offset:3px!important;
+}
+/* Readers, original citations, Arabic typography, media, and share engines
+   are NOT restyled internally. Keep action toolbar visible and tappable. */
+html.dar-v8-global-test body .post-reader-actions{
+  display:flex;align-items:center;gap:5px;
+  flex-wrap:nowrap;min-width:0;max-width:100%;
+}
+html.dar-v8-global-test body .post-reader-actions [data-post-share-open] {
+  min-width:44px;min-height:44px;white-space:nowrap;
+}
+html.dar-v8-global-test body #appView :is(
+ .post-reader,.post-body,.dua-detail-box,.quran-ayah-list,.qrc-shell,
+ .lib-detail,.source-library-page,.qsrc-detail,
+ [data-post-reader],[data-dua-reader]
+) {overflow-wrap:break-word;min-width:0}
+html.dar-v8-global-test body #appView :is(
+ .post-reader,.post-body,.dua-detail-box,.quran-ayah-list
+) :is(a,button){touch-action:manipulation}
+html.dar-v8-global-test body :is(
+ .post-share-overlay,.share-dialog,.dar-share-sheet,
+ .quran-ayah-menu,.qrc-ayah-menu,.dua-share-sheet
+) {z-index:max(900, var(--share-z-index,900))}
+/* Responsive layout tokens tuned by available space, not phone model. */
+@media(min-width:600px){
+ html.dar-v8-global-test body #appView .topics-theme-grid,
+ html.dar-v8-global-test body #appView .dua-theme-grid {
+   grid-template-columns:repeat(2,minmax(0,1fr))!important
+ }
+ html.dar-v8-global-test body #appView .main-search{
+   max-width:100%;
+ }
+}
+@media(min-width:1060px){
+ html.dar-v8-global-test body #appView .topics-theme-grid,
+ html.dar-v8-global-test body #appView .dua-theme-grid{
+   grid-template-columns:repeat(3,minmax(0,1fr))!important
+ }
+}
+@media(max-width:599.98px){
+ html.dar-v8-global-test{--v8-gutter:max(10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))}
+ html.dar-v8-global-test body .top-shell>.isnad{display:none!important}
+ html.dar-v8-global-test body .app-bar{
+   gap:5px;min-height:40px!important;padding-block:3px!important
+ }
+ html.dar-v8-global-test body .app-bar :is(.back-btn,.home-btn){
+   font-size:11px!important;padding:5px 7px!important;min-height:34px!important
+ }
+ html.dar-v8-global-test body .app-bar .crumb{font-size:11px}
+ html.dar-v8-global-test body #appView .view-head:not(.view-head-home){
+   margin-bottom:10px!important;padding:15px!important;border-radius:17px!important
+ }
+ html.dar-v8-global-test body #appView .view-head:not(.view-head-home) h2{
+   font-size:clamp(21px,6vw,27px)!important
+ }
+ html.dar-v8-global-test body #appView .view-head:not(.view-head-home) .view-desc{
+   font-size:12px!important
+ }
+ html.dar-v8-global-test body #appView .topics-theme-grid,
+ html.dar-v8-global-test body #appView .dua-theme-grid{
+   grid-template-columns:1fr!important
+ }
+ html.dar-v8-global-test body .post-reader-actions [data-post-share-open]{
+   min-height:40px;min-width:40px;padding-inline:7px
+ }
+}
+/* Long labels from Turkish/Arabic/Kurmancî/French/Spanish must not overflow. */
+html.dar-v8-global-test[dir="rtl"] body #appView :is(
+ .dua-row,.post-row,.topics-theme-card,.dua-theme-card,.dsh-row
+) {text-align:start}
+html.dar-v8-global-test body #appView :is(
+ .dsh-row,.dua-row,.post-row,.topics-theme-card,.dua-theme-card
+) {min-width:0}
+@media(prefers-reduced-motion:reduce){
+ html.dar-v8-global-test body #appView :is(
+  .topics-theme-card,.dua-theme-card,.folder-card,.lib-card,.post-card,.post-row,.dua-row
+ ){transition:none!important;transform:none!important}
+}
