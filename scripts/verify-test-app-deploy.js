@@ -260,9 +260,9 @@ async function fetchVersionBuild(base) {
     let ok = false;
     for (let attempt = 1; attempt <= 5; attempt++) {
       const shell = await fetchText(base + "/index.html?dhp-capsules-v53=" + Date.now());
-      const runtime = await fetchText(base + "/assets/dar-home-html-parity-v1.js?v=20261022-v56-compact-welcome");
+      const runtime = await fetchText(base + "/assets/dar-home-html-parity-v1.js?v=20261022-v57-editorial-separators");
       const linked = shell.status === 200 &&
-        shell.text.includes("/test/assets/dar-home-html-parity-v1.js?v=20261022-v56-compact-welcome");
+        shell.text.includes("/test/assets/dar-home-html-parity-v1.js?v=20261022-v57-editorial-separators");
       const checks = [
         "DAR_TEST_HOME_ELEGANT_CAPSULE_V52",
         "DAR_TEST_LAST_ROW_FOOTER_FLOW_V53",
@@ -283,6 +283,10 @@ async function fetchVersionBuild(base) {
         '--dhp-capsule-accent:#a27791',
         '--dhp-capsule-accent:#a18a4f',
         '--dhp-capsule-accent:#8e9d77',
+        "DAR TEST HOME EDITORIAL HIERARCHY V57",
+        ".dhp-home-source-v55::after",
+        ".dhp-welcome::before",
+        ".dhp-isnad-label::after",
         "@media(prefers-reduced-motion:reduce)"
       ];
       const valid = runtime.status === 200 && checks.every(s => runtime.text.includes(s));
@@ -416,7 +420,7 @@ async function fetchVersionBuild(base) {
     for(let attempt=1;attempt<=5;attempt++){
       try{
         const shell=await fetchText(base+"/?parity-v1368="+Date.now());
-        const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261022-v56-compact-welcome");
+        const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261022-v57-editorial-separators");
         const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"')&&shell.text.includes("v56-compact-welcome");
         const source=js.text||"";
         const sequence=source.indexOf('class="dhp-welcome"')>=0
