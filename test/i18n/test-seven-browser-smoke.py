@@ -9,6 +9,8 @@ for flag in ["--headless=new","--no-sandbox","--disable-dev-shm-usage","--disabl
 driver=webdriver.Chrome(options=options)
 locales=[("de","ltr"),("tr","ltr"),("en","ltr"),("ar","rtl"),
          ("ku","ltr"),("ckb","rtl"),("bs","ltr"),("fr","ltr"),("es","ltr")]
+names={"de":"Deutsch","tr":"Türkçe","en":"English","ar":"العربية الفصحى",
+       "ku":"Kurmancî","ckb":"سۆرانی","bs":"Bosanski","fr":"Français","es":"Español"}
 try:
     driver.set_window_size(390,844)
     driver.get("http://127.0.0.1:8765/test/")
@@ -29,6 +31,9 @@ try:
             "document.documentElement.lang===arguments[0] && document.documentElement.dir===arguments[1]",
             lang,direction))
         assert driver.execute_script("return !document.querySelector('#darAdultLanguagePicker')"), "Picker failed to close"
+        wait.until(lambda d:d.execute_script(
+            "return document.querySelector('#dv3HeaderActions [data-dv3-language-label]')?.textContent===arguments[0]",
+            names[lang]))
         print("PASS HOME CAPSULE",lang,"direction",direction,flush=True)
     for name in ["more","settings"]:
         driver.execute_script("if(typeof navigate==='function')navigate(arguments[0]);else location.hash='#'+arguments[0]",name)
