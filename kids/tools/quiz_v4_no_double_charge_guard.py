@@ -113,10 +113,26 @@ def protect_paid_texts(root: Path, registry: dict, ledger: dict) -> set[str]:
                 raise RuntimeError("Connected pending MP3 conflicts with saved registry")
             if status == "IMPORTED_ORIGINAL_MP3_VERIFIED":
                 original = recorded.get(spoken)
-                if (not original or spoken not in charged
+                # Historical private imports use several equivalent receipt
+                # schemas. Only demand fields that were actually recorded; an
+                # absent optional generation-id column is NOT an MP3 failure.
+                # SHA, exact text, paid receipt and source identity are still
+                # mandatory and are checked before considering the take safe.
+                receipt = next((p for p in rows if p["text"] == spoken), None)
+                reference_url = item.get("originalMP3URL") or item.get("savedURL")
+                ref_generation = (original.get("originalGenerationId")
+                                  or original.get("generationId")) if original else None
+                if (not original or not receipt or spoken not in charged
                         or original.get("sha256") != item.get("importedMP3SHA256")
-                        or original.get("originalGenerationId") != item.get("generationId")):
-                    raise RuntimeError("Connected audio claimed imported without verified MP3 and paid receipt")
+                        or original.get("sha256") != receipt.get("mp3Sha256")
+                        or item.get("sourceTextSHA256") != hashlib.sha256(
+                            spoken.encode("utf-8")).hexdigest()
+                        or (reference_url and original.get("url") != reference_url)
+                        or (ref_generation is not None and
+                            ref_generation != item.get("generationId"))):
+                    raise RuntimeError(
+                        "Connected original receipt verification failed: paid "
+                        "SHA, source URL, or generation ID mismatch")
             if status == "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY":
                 original=recorded.get(spoken)
                 if (not original or spoken not in charged
