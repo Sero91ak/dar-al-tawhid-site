@@ -7,6 +7,7 @@ on:
       - 'test/i18n/adult-ui-locales-seven.json'
       - 'test/i18n/test-seven-*'
       - 'test/i18n/test-subpages-nine.cjs'
+      - 'test/i18n/test-nine-accessibility-attrs.cjs'
       - 'test/i18n/test-turkish-catalog-parity.cjs'
       - 'test/i18n/test-nine-browser-subpages.py'
       - 'test/i18n/test-expanded-headings-seven.cjs'
@@ -54,6 +55,7 @@ jobs:
           node test/i18n/test-nine-dynamic-ui.cjs
           node test/i18n/test-nine-native-bridge.cjs
           node test/i18n/test-subpages-nine.cjs
+          node test/i18n/test-nine-accessibility-attrs.cjs
           node test/i18n/test-turkish-catalog-parity.cjs
           node - <<'NODE'
           const fs=require('node:fs'),assert=require('node:assert/strict');
