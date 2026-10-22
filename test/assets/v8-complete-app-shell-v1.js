@@ -12,6 +12,7 @@ var SECTIONS=[
  ["home","Start","home.png","Startseite"],
  ["quran","Qurʾān","quran.png","Qurʾān lesen"],
  ["recent","Beiträge","posts.png","Beiträge lesen"],
+ ["topics","ʿIlm & Wissen","ilm.png","Themen und Wissen"],
  ["duas","Duʿāʾ","dua.png","Duʿāʾ-Bibliothek"],
  ["books","Quellen","library.png","Quellenbibliothek"],
  ["bibliothek","PDF-Bibliothek","library.png","PDF-Bibliothek"],
@@ -20,12 +21,26 @@ var SECTIONS=[
  ["frauen","Frauen","frauen.png","Frauenbereich"],
  ["quiz","Quiz","quiz.png","Dīn-Quiz"],
  ["prayer","Gebetszeiten","prayer.png","Gebetszeiten"],
- ["settings","Einstellungen","settings.png","Einstellungen"]
+ ["saved","Favoriten","saved.png","Gespeicherte Beiträge"],
+ ["account","Konto","lock.png","Konto und Anmeldung"],
+ ["settings","Einstellungen","settings.png","Einstellungen"],
+ ["more","Mehr","more.png","Weitere Bereiche"]
 ];
 function make(tag,cls,txt){var el=d.createElement(tag);if(cls)el.className=cls;if(txt!=null)el.textContent=txt;return el}
 function currentRoute(){
  var h=(w.location.hash||"#home").replace(/^#/,"").split("/")[0];
  return h||"home";
+}
+function sidebarParent(route){
+ if(["post","topic","news","news-detail","series"].indexOf(route)>=0)return "recent";
+ if(["quran-surah","quran-player","quran-topic","quran-topics","quran-search"].indexOf(route)>=0)return "quran";
+ if(["dua","dua-cat","dua-detail"].indexOf(route)>=0)return "duas";
+ if(["bibliothek-detail","bibliothek-reader"].indexOf(route)>=0)return "bibliothek";
+ if(["quellen-book","quellen-scholar","book"].indexOf(route)>=0)return "books";
+ if(["scholar","scholar-detail"].indexOf(route)>=0)return "scholars";
+ if(["jummah","qibla","calendar"].indexOf(route)>=0)return "prayer";
+ if(["notifications"].indexOf(route)>=0)return "settings";
+ return route;
 }
 function navigate(view){
  if(typeof w.navigate==="function"){w.navigate(view);return}
@@ -77,7 +92,7 @@ function syncSection(){
  if(sidebar){
   sidebar.querySelectorAll("[data-v8-section-nav]").forEach(function(button){
     var key=button.dataset.v8SectionNav;
-    var active=key===route||(key==="recent"&&route==="post");
+    var active=key===sidebarParent(route);
     button.classList.toggle("is-active",active);
     if(active)button.setAttribute("aria-current","page");
     else button.removeAttribute("aria-current");
