@@ -1,0 +1,113 @@
+name: KIDS V4 Q041 Two Owner Master German Original MP3s – private only
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths: ['.github/workflows/kids-v4-q041-two-real-german-originals-once-20261022.yml']
+permissions:
+  contents: write
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+jobs:
+  owner-requested-041-existing-reserved-german:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      KIDS_Q041_ONE_TIME_OWNER_SAFE_GERMAN: 'YES'
+    steps:
+      - name: Checkout private review head with old original checkpoints
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Fast-forward branch before any paid operation
+        run: |
+          set -euo pipefail
+          git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+          git merge --ff-only FETCH_HEAD
+          test ! -e kids/review-only/quiz-v4-q041-two-german-paid-once-journal.json
+      - name: Verify correct voice and German-only source texts and strict source receipts
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/produce_kids_v4_q041_safe_german_two_review_20261022.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/test_quiz_v4_canonical_dictionary_payload.py
+          python3 kids/tools/produce_kids_v4_q041_safe_german_two_review_20261022.py --audit
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          h=json.loads(Path('kids/data/quiz-v4-pronunciation-hold.json').read_text())
+          r=json.loads(Path('kids/data/quiz-curation-release.json').read_text())
+          assert h['productionPaused'] is True and h['humanPronunciationApproved'] is False
+          assert h['publicQuizAudioReleaseAuthorized'] is False and r['enabled'] is False
+          print('PASS 2 German-only prior-reserved exact texts; Taqwa/Arabic fragments remain held')
+          PY
+      - name: Prepare MP3 codec tools
+        run: |
+          if ! command -v ffprobe >/dev/null || ! command -v ffmpeg >/dev/null; then
+            sudo apt-get -qq update
+            sudo apt-get -qq install -y ffmpeg
+          fi
+      - name: Produce exactly two source SHA-bound German Master V4 originals
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce_kids_v4_q041_safe_german_two_review_20261022.py --produce
+      - name: Validate saved originals and rebuild private 450 review only
+        run: |
+          set -euo pipefail
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          base=Path('kids')
+          s=json.loads((base/'data/quiz-v4-450-production-status.json').read_text())
+          qa=json.loads((base/'data/quiz-v4-450-saved-mp3-technical-qa.json').read_text())
+          assert s['completedQuestionsWithAllFourAudioParts']>=430
+          assert s['ageBreakdown']['7-8']['completeAllFourOriginalAudios']>=144
+          assert qa['overallTechnicalPass']
+          assert s['livePublished'] is False and not s['all450AudioReadyToPublish']
+          print('KIDS_Q041_GERMAN_ORIGINALS_RECORDED_NO_ARABIC_BYPASS',{
+               'fullQuestions':s['completedQuestionsWithAllFourAudioParts'],
+               'originalClips':qa['savedClipCount'],'release':False})
+          PY
+      - name: Commit only protected private review originals/composites
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-owner-master-review
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-450-production-status.json kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          if ! git diff --cached --quiet; then
+             git commit -m 'review(kids V4): Q041 genuine German master response clips, retain Arabic QA hold [skip ci]'
+             for t in 1 2 3; do
+               git push origin HEAD:review/kids-v4-nine-prepaid-artifact-replay-20261022 && exit 0
+               git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+               git rebase FETCH_HEAD || exit 1
+             done
+             exit 1
+          fi
+      - name: Back up source paid journal and MP3 originals even on error
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-q041-2-genuine-v4-master-originals-immutable-private-review
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/review-only/quiz-v4-q041-two-german-paid-once-journal.json
+            kids/data/quiz-v4-connected-flow-originals-ledger.json
+            kids/data/quiz-v4-450-paid-generation-ledger.json
+            kids/data/quiz-v4-450-original-clip-registry.json
+            kids/assets/kids-quiz-audio/v4-curated450-review/
