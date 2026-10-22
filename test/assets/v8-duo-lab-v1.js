@@ -123,7 +123,7 @@
         a.type="button";a.hidden=true;
         a.setAttribute("data-nav",action==="account"?"account":"settings");
         if(action==="appearance")a.setAttribute("data-value","appearance");
-        b.appendChild(a);a.click();a.remove();
+        d.body.appendChild(a);a.click();a.remove();
       }
     });
   }
