@@ -8,9 +8,9 @@
 - Arabischer Qurʾān-Wortlaut, vorhandene ursprüngliche Ḥadīṯ-Worte, Überlieferungsgrad, Quellenlink, Sprecher, Originalnummern und Quiz-Antwortindex dürfen durch das Generieren **nie** überschrieben werden.
 
 ## 2. Sprachmanuskripte
-- Zusätzliche redaktionelle Sprachfassungen: `ar` (klassisch-korrektes Fuṣḥā), `en`, `tr` (Türkisch), `ku` (Kurmancî), `ckb` (Soranî, RTL), `bs` (Bosnisch).
+- Zusätzliche redaktionelle Sprachfassungen laut dynamischem `locales.json` (Stand 22.10.2026): `ar` (klassisch-korrektes Fuṣḥā), `en`, `tr` (Türkisch), `ku` (Kurmancî), `ckb` (Soranî, RTL), `bs` (Bosnisch), `fr` (Französisch), `es` (Spanisch). Zusammen mit deutschem Original `de` sind es neun Sprachen. Keine harte Beschränkung auf diese neun bei späteren Erweiterungen.
 - Ein serverseitiger Modellaufruf wird ausschließlich bei aktiviertem `DAR_I18N_AI_GENERATE_ENABLED=true`, bestätigter Anbieterfreigabe `DAR_I18N_PROVIDER_APPROVED=yes` und geheimem Provider-Schlüssel ausgeführt.
-- **Kosten begrenzt:** Standardlauf maximal zwei neue Beitragsdateien und maximal sechs Modellanfragen je Beitragsdatei; historischer Rückstand bleibt separat. Kein GitHub-Models-Dienst (eingestellt).
+- **Kosten begrenzt:** Standardlauf maximal zwei neue Beitragsdateien und maximal acht Modellanfragen je Beitragsdatei (eine je aktivierter Zielsprache); historischer Rückstand bleibt separat. Kein GitHub-Models-Dienst (eingestellt).
 - Modellantworten sind ausnahmslos **Entwürfe** (`status=draft`). Sie werden, wenn GitHub-PR-Erstellung zugelassen ist, als **Draft Pull Request** hinterlegt; ansonsten als kurzlebiges Actions-Prüfartefakt. **Nie** automatisch freigeben oder live publizieren.
 
 ## 3. Redaktionelle Freigabe
