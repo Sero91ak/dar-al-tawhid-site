@@ -459,6 +459,40 @@ function localizeSavedLocation(value,language){
    languagePacks.get(language)?.get("Standort gespeichert:");
  return translated?translated+" "+match[1]:null;
 }
+/* Dynamic weather is app chrome, not religious/article/source content.
+ * Preserve original city and degree values; translate bounded status patterns only. */
+const WEATHER_UI_COPY={
+ tr:["{city} için hava durumu yükleniyor …","şu anda kullanılamıyor"],
+ en:["Loading weather for {city} …","currently unavailable"],
+ ar:["جارٍ تحميل الطقس لـ{city} …","غير متاح حاليًا"],
+ ku:["Rewşa hewayê ji bo {city} tê barkirin …","niha ne berdest e"],
+ ckb:["کەشوهەوای {city} بار دەکرێت …","ئێستا بەردەست نییە"],
+ bs:["Učitavanje vremena za {city} …","trenutno nije dostupno"],
+ fr:["Chargement de la météo pour {city} …","actuellement indisponible"],
+ es:["Cargando el tiempo de {city} …","no disponible actualmente"]
+};
+const WEATHER_CONDITIONS="Klar|Leicht bewölkt|Nebel|Regen|Schnee|Schauer|Schneeschauer|Gewitter";
+function localizeWeatherStatus(value,language){
+ const copy=WEATHER_UI_COPY[language];
+ if(!copy||value.length>180)return null;
+ const label=language==="tr"?(dictionary.get("Wetter")||languagePacks.get("tr")?.get("Wetter")):
+  languagePacks.get(language)?.get("Wetter");
+ if(!label)return null;
+ const condition=(name)=>language==="tr"?(dictionary.get(name)||languagePacks.get("tr")?.get(name)):
+  languagePacks.get(language)?.get(name);
+ const loading=value.match(/^Wetter für ([^<>\r\n]{2,90}) wird geladen …$/u);
+ if(loading&&!/[{}]/.test(loading[1]))
+  return copy[0].replace("{city}",loading[1]);
+ const finished=value.match(new RegExp("^Wetter · ([^:\\r\\n<>]{2,90}): (-?[0-9]{1,2}) °C · ("+WEATHER_CONDITIONS+")$","u"));
+ if(finished&&!/[{}]/.test(finished[1])){
+  const result=condition(finished[3]);
+  if(result)return label+" · "+finished[1]+": "+finished[2]+" °C · "+result;
+ }
+ const missing=value.match(/^Wetter · ([^:\r\n<>]{2,90}): derzeit nicht verfügbar$/u);
+ if(missing&&!/[{}]/.test(missing[1]))
+  return label+" · "+missing[1]+": "+copy[1];
+ return null;
+}
 const PROTECTED_SOURCE_QUOTE="„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“";
 function translateExact(value,language="tr"){
  // Source quotation is editorial content, not a localizable interface control.
@@ -479,6 +513,8 @@ function translateExact(value,language="tr"){
     languagePacks.get(language)?.get(statements[1]);
   return head?head+" · "+statements[2]:null;
  }
+ const weatherLabel=localizeWeatherStatus(value,language);
+ if(weatherLabel!==null)return weatherLabel;
  const locationLabel=localizeSavedLocation(value,language);
  if(locationLabel!==null)return locationLabel;
  const shortDate=localizeGermanShortDate(value,language);
