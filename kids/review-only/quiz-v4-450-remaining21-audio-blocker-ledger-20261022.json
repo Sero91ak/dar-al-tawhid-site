@@ -20,8 +20,9 @@
   "missingDistinctFragments": 33,
   "byBlocker": {
     "RESERVED_UNCONFIRMED_TTS": 7,
-    "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT": 16,
-    "QUARANTINED_PRONUNCIATION": 10
+    "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT": 15,
+    "QUARANTINED_PRONUNCIATION": 10,
+    "PREVIOUS_PROVIDER_REQUEST_UNCONFIRMED_DO_NOT_REBUY": 1
   },
   "ageComplete": {
     "4-6": 150,
@@ -84,7 +85,13 @@
       "missingParts": [
         "explanation"
       ],
-      "missingFragments": []
+      "missingFragments": [
+        {
+          "part": "explanation",
+          "text": "nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        }
+      ]
     },
     {
       "questionId": "kids-quiz-041",
@@ -151,7 +158,7 @@
         {
           "part": "question",
           "text": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
-          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+          "blocker": "PREVIOUS_PROVIDER_REQUEST_UNCONFIRMED_DO_NOT_REBUY"
         }
       ]
     },
@@ -181,6 +188,11 @@
           "part": "question",
           "text": "Zur al-Masǧid al-Ḥarām in Makkah.",
           "blocker": "QUARANTINED_PRONUNCIATION"
+        },
+        {
+          "part": "explanation",
+          "text": "und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
         }
       ]
     },
@@ -288,6 +300,11 @@
           "part": "question",
           "text": "Es gibt keinen Unterschied zwischen Ḥalāl und Ḥarām.",
           "blocker": "QUARANTINED_PRONUNCIATION"
+        },
+        {
+          "part": "explanation",
+          "text": "erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
         }
       ]
     },
@@ -389,5 +406,18 @@
         }
       ]
     }
-  ]
+  ],
+  "verifiedExactSourceAudit": {
+    "workflowRun": "https://github.com/Sero91ak/dar-al-tawhid-site/actions/runs/39757354135",
+    "status": "PASS",
+    "protectedReviewOnly": true,
+    "sourcePreviewAlignedAll21Questions": true,
+    "missingAudioPartsMatched": 27,
+    "previouslyOmittedSourcePartsCorrected": 3,
+    "unresolvedPreviouslySubmittedQuestion": "kids-quiz-080",
+    "noUnmappedOriginalSegmentReferences": true,
+    "newSynthesisCreditsSpent": 0,
+    "noHumanPronunciationApprovalClaimed": true,
+    "note": "7 reserved but unspent distinct texts are not confirmed already-paid originals; do not represent them as recovered or record them until pilot and provider reconciliation."
+  }
 }
