@@ -75,6 +75,7 @@ struct DarAlTawhidApp: App {
     @UIApplicationDelegateAdaptor(DarAppDelegate.self) private var appDelegate
     @Environment(\.scenePhase) private var scenePhase
     @StateObject private var router = DarAppRouter()
+    @State private var languageStore = DarLanguageStore()
 
     init() {
         // Boot surface = loading theme ink until live page theme arrives.
@@ -85,8 +86,18 @@ struct DarAlTawhidApp: App {
 
     var body: some Scene {
         WindowGroup {
-            WebAppView(destination: router.destination, openURL: router.webURL)
+            WebAppView(
+                destination: router.destination,
+                openURL: router.webURL,
+                preferredLocale: languageStore.localeIdentifier,
+                hasManualLocale: languageStore.hasManualSelection,
+                onWebLocaleChange: { rawLocale in
+                    languageStore.acceptWebLocale(rawLocale)
+                }
+            )
                 .ignoresSafeArea() // theme/webview chrome only; content padded via global iOS scaffold CSS
+                .environment(languageStore)
+                .environment(\.locale, languageStore.locale)
                 .background(Color(red: 0.02, green: 0.02, blue: 0.01))
                 .onOpenURL { url in
                     router.open(url)
