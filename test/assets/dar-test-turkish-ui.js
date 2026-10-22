@@ -215,12 +215,8 @@ function localizePostAria(host,sourceTitle,displayTitle,locale){
 }
 
 const HEADLINE_SELECTORS=[
- "#dv3Latest .dv3-post-body b","#dhpPosts .dhp-post-capsule h3","#dhpTodayName",
  ".dua-card h3",".dua-card .dua-title",".duas-card h3",".duas-card .dua-title",
- "[data-dua-id] .dua-title","[data-post-id] .post-title",
- ".qsrc-post-item[data-nav='post'] .qsrc-post-item-title",
- ".post-card[data-nav='post'] h3",
- ".home-v380-post-preview[data-nav='post'] .home-v380-post-title"
+ "[data-dua-id] .dua-title"
 ].join(",");
 function registerTitleData(data){
  if(data?.schemaVersion!==1||data.scope!=="adult-test-visible-titles-only"||
@@ -266,7 +262,7 @@ function updateKnownTitles(locale){
     (candidates.length===1||candidates.every(r=>
        [...SUPPORTED].every(code=>code==="de"||
           r.translations[code]===candidates[0].translations[code]))?candidates[0]:null);
-  if(!record)return;
+  if(!record||record.kind!=="dua")return; // entire Beiträge section excluded
   const desired=locale==="de"?old.source:record.translations?.[locale]||old.source;
   if(element.textContent!==desired)element.textContent=desired;
   old.rendered=desired;
@@ -572,8 +568,12 @@ function transformAttributes(element,locale){
   prior.rendered=desired;
  }
 }
+function isPostRoute(){
+ const route=String(global.location?.hash||"").replace(/^#\/?/,"").split(/[/?]/)[0].toLowerCase();
+ return ["post","posts","recent","beitraege","beiträge","article"].includes(route);
+}
 function apply(root=global.document?.body,locale=currentLocale()){
- if(!root)return 0;
+ if(!root||isPostRoute())return 0;
  const doc=global.document;
  if(root.nodeType===1&&!shouldSkip(root))transformAttributes(root,locale);
  renderHomeWelcome(locale);
