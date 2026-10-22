@@ -18,7 +18,7 @@ const jsPaths=[
  "test/assets/dar-test-seven-languages-loader.js",
  "scripts/restore-dar-test-v8.cjs"
 ];
-for(const p of jsPaths){new vm.Script(read(p),{filename:p});console.log("Syntax OK",p)}
+for(const p of jsPaths){new vm.Script(read(p).replace(/^#![^\n]*\n/,""),{filename:p});console.log("Syntax OK",p)}
 const pack=JSON.parse(read("test/i18n/adult-ui-locales-nine-v8.json"));
 const list=["de","tr","en","ar","ku","ckb","bs","fr","es"];
 assert.deepEqual(pack.availableLocales,list);
