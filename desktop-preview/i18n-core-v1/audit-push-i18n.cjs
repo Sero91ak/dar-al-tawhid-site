@@ -29,7 +29,8 @@ const manuscriptPairs=Object.values(manuscripts.copy||{}).reduce((sum,messages)=
 const missingManuscripts=codes.flatMap(code=>
  expected.filter(key=>!manuscripts.copy?.[code]?.[key]).map(key=>code+":"+key));
 const unreviewedManuscripts=codes.flatMap(code=>
- expected.filter(key=>manuscripts.copy?.[code]?.[key]?.status!=="approved").map(key=>code+":"+key));
+ expected.filter(key=>manuscripts.copy?.[code]?.[key]?.status!=="approved" ||
+   manuscripts.copy?.[code]?.[key]?.reviewMethod!=="AI_assisted_editorial").map(key=>code+":"+key));
 const report={
   kind:"DĀR OneSignal editorial-only template audit",
   actualRegisteredLocales:codes,
@@ -44,12 +45,16 @@ const report={
   manuscriptPairs,
   missingManuscripts,
   unreviewedManuscripts,
-  approvedManuscripts:manuscriptPairs-unreviewedManuscripts.length,
+  approvedGenericManuscripts:manuscriptPairs-unreviewedManuscripts.length,
+  modelEditorialReviewOnly:manuscripts.review?.nativeSpeakerCertified===false,
+  religiousReviewScope:manuscripts.review?.scope||null,
+  providerTemplatesNotProductionApproved:Object.values(templates).every(v=>v.reviewState!=="approved"),
   templatesRequireReview:Object.entries(templates)
     .filter(([,v])=>v.reviewState!=="approved").map(([k])=>k),
   safeToActivate:false,
+  countsAsLiveApproval:false,
   nonSending:true,
   note:"Neither copied text nor its OneSignal publication status is verified by this offline audit."
 };
 process.stdout.write(JSON.stringify(report,null,2)+"\n");
-if(missingTemplateKeys.length||unknownTemplateKeys.length||duplicateTemplateIds.length||missingManuscripts.length)process.exitCode=1;
+if(missingTemplateKeys.length||unknownTemplateKeys.length||duplicateTemplateIds.length||missingManuscripts.length||unreviewedManuscripts.length)process.exitCode=1;
