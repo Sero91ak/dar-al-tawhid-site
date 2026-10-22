@@ -10,7 +10,7 @@
 ## 2. Sprachmanuskripte
 - Zusätzliche redaktionelle Sprachfassungen laut dynamischem `locales.json` (Stand 22.10.2026): `ar` (klassisch-korrektes Fuṣḥā), `en`, `tr` (Türkisch), `ku` (Kurmancî), `ckb` (Soranî, RTL), `bs` (Bosnisch), `fr` (Französisch), `es` (Spanisch). Zusammen mit deutschem Original `de` sind es neun Sprachen. Keine harte Beschränkung auf diese neun bei späteren Erweiterungen.
 - Ein serverseitiger Modellaufruf wird ausschließlich bei aktiviertem `DAR_I18N_AI_GENERATE_ENABLED=true`, bestätigter Anbieterfreigabe `DAR_I18N_PROVIDER_APPROVED=yes` und geheimem Provider-Schlüssel ausgeführt.
-- **Kosten begrenzt:** Standardlauf maximal zwei neue Beitragsdateien und maximal acht Modellanfragen je Beitragsdatei (eine je aktivierter Zielsprache); historischer Rückstand bleibt separat. Kein GitHub-Models-Dienst (eingestellt).
+- **Kosten begrenzt:** Standardlauf maximal zwei neue Beitragsdateien und maximal sechs Modellanfragen je Beitragsdatei pro Standardlauf; alle acht Zielsprachen benötigen derzeit mehrere kontrollierte Teilbatches oder eine ausdrücklich freigegebene Limit-Erweiterung; historischer Rückstand bleibt separat. Kein GitHub-Models-Dienst (eingestellt).
 - Modellantworten sind ausnahmslos **Entwürfe** (`status=draft`). Sie werden, wenn GitHub-PR-Erstellung zugelassen ist, als **Draft Pull Request** hinterlegt; ansonsten als kurzlebiges Actions-Prüfartefakt. **Nie** automatisch freigeben oder live publizieren.
 
 ## 3. Redaktionelle Freigabe
