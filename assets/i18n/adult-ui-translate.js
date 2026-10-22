@@ -124,22 +124,25 @@ function mountSettingsChooser(){
  const home=global.document.querySelector("#appView .dsh-shell.dsh-home,#appView .settings-one-page");
  if(!home||home.querySelector("#darAdultLanguageControl"))return;
  const root=global.document.createElement("section");
- root.id="darAdultLanguageControl";root.className="dar-adult-locale-controls";
- root.setAttribute("aria-label","Sprache / Dil");
- root.innerHTML='<span class="dar-adult-locale-title">Sprache · Dil</span>'+
-  '<span class="dar-adult-locale-choices" role="group" aria-label="Sprache wählen">'+
-  '<button type="button" data-dar-adult-locale="de">Deutsch</button>'+
-  '<button type="button" data-dar-adult-locale="tr">Türkçe</button></span>';
+ root.id="darAdultLanguageControl";
+ root.className="dal-entry dal-entry-settings";
+ root.setAttribute("data-dar-language-entry","settings");
+ root.setAttribute("data-dar-no-translate","picker");
+ root.setAttribute("aria-label","Sprache wählen");
  const after=home.querySelector(".dsh-welcome");
  if(after)after.insertAdjacentElement("afterend",root);
  else home.insertBefore(root,home.firstChild);
  syncButtons();
 }
 function boot(){
- const style=global.document.createElement("style");
- style.id="dar-adult-ui-locale-css";
- style.textContent='.dar-adult-locale-controls{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin:12px 0;padding:12px 14px;border:1px solid color-mix(in srgb,currentColor 20%,transparent);border-radius:16px;color:inherit}.dar-adult-locale-title{font-weight:650;font-size:13px}.dar-adult-locale-choices{display:flex;gap:7px}.dar-adult-locale-choices button{min-height:40px;padding:8px 14px;border:1px solid color-mix(in srgb,currentColor 26%,transparent);border-radius:999px;background:transparent;color:inherit;cursor:pointer;font-size:12px;font-weight:650}.dar-adult-locale-choices button[aria-pressed=true]{border-color:#bba273;background:rgba(187,162,115,.17)}.dar-adult-locale-choices button:focus-visible{outline:2px solid #bba273;outline-offset:3px}';
- global.document.head?.appendChild(style);
+ if(!global.DARAdultLanguagePickerV1&&!global.__DAR_LANGUAGE_PICKER_LOADING){
+  global.__DAR_LANGUAGE_PICKER_LOADING=true;
+  const script=global.document.createElement("script");
+  script.src="/assets/i18n/adult-language-picker-v1.js?v=20261022-01";
+  script.async=true;
+  script.onerror=()=>{global.__DAR_LANGUAGE_PICKER_LOADING=false};
+  global.document.head?.appendChild(script);
+ }
  load();mountSettingsChooser();
  if(global.MutationObserver&&global.document.body)new MutationObserver(()=>schedule())
   .observe(global.document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:attrs});

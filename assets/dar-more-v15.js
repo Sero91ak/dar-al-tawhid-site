@@ -1,6 +1,16 @@
 /* DAR Mehr V1.5 | shared functional UI; scoped to the adult Mehr view only. */
 (function(){
 "use strict";
+/* One shared, cache-versioned nine-language picker. */
+if(!window.DARAdultLanguagePickerV1&&!window.__DAR_LANGUAGE_PICKER_LOADING){
+ window.__DAR_LANGUAGE_PICKER_LOADING=true;
+ const picker=document.createElement("script");
+ picker.src="/assets/i18n/adult-language-picker-v1.js?v=20261022-01";
+ picker.async=true;
+ picker.onerror=()=>{window.__DAR_LANGUAGE_PICKER_LOADING=false};
+ (document.head||document.documentElement).appendChild(picker);
+}
+
 /* One shared adult Turkish UI catalog, reused by PWA, desktop and iOS WKWebView. */
 if(!window.__DAR_ADULT_UI_TR_VISITOR_LOADED&&!/^\/test(?:\/|$)/.test(location.pathname)){
  window.__DAR_ADULT_UI_TR_VISITOR_LOADED=true;
@@ -45,12 +55,7 @@ function renderOurApps(){
 
 const moreTheme=()=>document.documentElement.getAttribute("data-theme")||"dark";
 function adultLocaleSelector(){
- const chosen=(()=>{try{return localStorage.getItem("darAdultPreferredLocaleV1")==="tr"?"tr":"de"}catch(_){return"de"}})();
- return '<section class="dar-adult-locale-controls" role="group" aria-label="Sprache / Dil">'+
- '<span class="dar-adult-locale-title">Sprache · Dil</span><span class="dar-adult-locale-choices">'+
- '<button type="button" data-dar-adult-locale="de" aria-pressed="'+(chosen==="de")+'">Deutsch</button>'+
- '<button type="button" data-dar-adult-locale="tr" aria-pressed="'+(chosen==="tr")+'">Türkçe</button>'+
- '</span></section>';
+ return '<section data-dar-language-entry="quick" class="dal-entry dal-entry-quick" aria-label="Sprache wählen"></section>';
 }
 function render(items,header){
  const data=Array.isArray(items)?items.filter(x=>x&&x.id!=="account"):[];
