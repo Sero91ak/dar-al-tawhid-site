@@ -329,6 +329,17 @@
       "source": "preexisting-original-v4-offline-join",
       "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
     },
+    "Nimm dir Zeit für deine Antwort. Was ist besser, wenn wir wütend sind? Antwort 1: Den Zorn zurückhalten und verzeihen. Antwort 2: Sofort beleidigen. Antwort 3: Etwas kaputt machen. Wähle die Antwort, die du für richtig hältst.": {
+      "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/1c5738becedc8e0a2e5d0f772f83d0d2c222cfd1.mp3",
+      "sha256": "61771ca74343a6699b0ce37af104cd46ec0294b358548826b24ce07ae6d8cb67",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "modelId": "eleven_v4",
+      "qaApproval": "pending-human-auditory-review",
+      "audioListeningApproved": false,
+      "approvedForPlayback": false,
+      "source": "preexisting-original-v4-offline-join",
+      "status": "PRIVATE_REVIEW_ONLY_NOT_PUBLISHED"
+    },
     "Das merken wir uns: Allah lobt diejenigen, die ihren Zorn zurückhalten und verzeihen.": {
       "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/40yTB3kLdHUrSSgwuUDJ.mp3",
       "sha256": "6dc7f6e2c451bdf1851bc1a376440e8d7cf38686356255aeae4672c0d8a28464",
@@ -6509,12 +6520,10 @@
       "ageBand": "7-8",
       "parts": {
         "question": {
-          "available": false,
-          "missingOriginalSegments": [
-            "Den Zorn zurückhalten und verzeihen.",
-            "Etwas kaputt machen.",
-            "Sofort beleidigen."
-          ]
+          "available": true,
+          "textSha256": "d30e8e74cb575b036d0b34a89baa8c3b5f2039cd419c02494bdc84e7e549eb57",
+          "mp3Sha256": "61771ca74343a6699b0ce37af104cd46ec0294b358548826b24ce07ae6d8cb67",
+          "url": "/kids/assets/kids-quiz-audio/v4-age7to10-composed-review/1c5738becedc8e0a2e5d0f772f83d0d2c222cfd1.mp3"
         },
         "correct": {
           "available": true,
@@ -6535,7 +6544,7 @@
           "url": "/kids/assets/kids-quiz-audio/v4-paid-flow-original-review/40yTB3kLdHUrSSgwuUDJ.mp3"
         }
       },
-      "allFourPartsAvailable": false
+      "allFourPartsAvailable": true
     },
     "kids-quiz-032": {
       "ageBand": "7-8",
@@ -10833,9 +10842,7 @@
         "question": {
           "available": false,
           "missingOriginalSegments": [
-            "Eine berühmte Familie.",
-            "Taqwā.",
-            "Viel Geld."
+            "Taqwā."
           ]
         },
         "correct": {

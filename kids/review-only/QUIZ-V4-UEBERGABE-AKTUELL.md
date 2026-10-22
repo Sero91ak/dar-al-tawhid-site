@@ -6,18 +6,18 @@
 
 - GitHub: https://github.com/Sero91ak/dar-al-tawhid-site/pull/1143
 - Arbeitszweig: `review/kids-quiz-v4-batch-001-020-20261014`
-- Commit beim Erstellen dieses Berichts: `27c76f07c102de0d31173c21b78ba730f8a7b4e2`
+- Commit beim Erstellen dieses Berichts: `7e5a80c502690bf973ca55ea3aae0c03c93820f4`
 - Originalkatalog: **900**, davon **450 ausgewählt (150 je Altersgruppe)** und **450 Reserve**; ursprüngliche IDs beibehalten.
 - WICHTIG: Bei den 450 ausgewählten Originalfragen sind `reviewStatus=approved` und `verification=approved` bereits dokumentiert. Keinen neuen pauschalen Inhaltsprüfungsdurchgang anstoßen; Arbeitsziel bleibt die echte MP3-Audiofertigstellung und separate Hörprüfung.
-- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **794 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1584 Frage-/Lob-/Retry-/Erklärungsteile**.
-- Technisch vierteilig vollständig: **343/450**, noch unvollständig: **107/450**.
+- Im Quiz-Reviewbestand zugeordnete echte V4-MP3s: **858 unterschiedliche MP3-SHAs**, mehrfach wiederverwendet für **1774 Frage-/Lob-/Retry-/Erklärungsteile**.
+- Technisch vierteilig vollständig: **430/450**, noch unvollständig: **20/450**.
 - Letzter V4-Kostenaudit: **75 neue Sprachfragmente** = **5068 Unicode-Zeichen**; **0 neue Lob-/Retry-Fragmente**, **0 neue V4-Texte für 4–6 Jahre**.
-- Nach Originalkosten getrennt: **80 Fragen nur durch bereits bezahlte MP3s blockiert**, **18 Fragen benötigen neue V4-Originaltexte**.
-- Alter 4-6: **70/150** komplett; vorhandene Hörteile question=100, correct=85, retry=85, explanation=148.
-- Alter 7-8: **139/150** komplett; vorhandene Hörteile question=144, correct=150, retry=150, explanation=142.
-- Alter 9-10: **134/150** komplett; vorhandene Hörteile question=138, correct=150, retry=150, explanation=142.
-- Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **47 importiert**, **9 noch ohne heruntergeladene Original-MP3-Datei**.
-- Zusätzlich im Originalregister: **1777 Textschlüssel**, davon **1730 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
+- Prioritätsliste nach letztem MP3-Import neu berechnen; ursprüngliche V4-Quellen bleiben geschützt.
+- Alter 4-6: **150/150** komplett; vorhandene Hörteile question=150, correct=150, retry=150, explanation=150.
+- Alter 7-8: **144/150** komplett; vorhandene Hörteile question=147, correct=150, retry=150, explanation=145.
+- Alter 9-10: **136/150** komplett; vorhandene Hörteile question=139, correct=150, retry=150, explanation=143.
+- Ursprünglich bezahlte ElevenLabs-Flow-Aufnahmen: **56**, davon **56 importiert**, **0 noch ohne heruntergeladene Original-MP3-Datei**.
+- Zusätzlich im Originalregister: **1800 Textschlüssel**, davon **1735 direkte bezahlte V4-Ledger-Einträge**; keine doppelten Text- oder Provider-Request-IDs im geprüften Ledger.
 - Erste neue V4-Aufnahmerunde für ältere Kinder: **21 ECHTE Original-MP3s** mit **21 eindeutigen Anbieter-Anfragebelegen**; dafür geschätzte **486.47 Credits**. **Tatsächliche Provider-Abbuchung bisher NICHT abgeglichen**.
 - ACHTUNG: **1 ungeklärte(r) V4-POST-Versuch(e)** sind ohne bestätigte MP3 gespeichert und von neuen kostenpflichtigen Anfragen AUSGESCHLOSSEN. Zuerst Originalbytes/Kostenbeleg klären, keinesfalls den betreffenden Text nochmals synthetisieren.
 - Kosten ausschließlich für den kostenlosen Import-/QA-/Berichtslauf: **0 neue ElevenLabs-Sprachcredits**. Diese Null gilt NICHT für die bereits kostenpflichtig generierten V4-Originalaufnahmen.
@@ -26,14 +26,14 @@
 - Rückimportierte Selbstauskünfte zur Hörprüfung: **0**; gemeldete Audiofehler: **0**. Diese Einträge sind noch KEINE unabhängig bestätigte Freigabe.
 
 Genauer kostenfreier Restplan: `kids/review-only/QUIZ-V4-NAECHSTE-SCHRITTE.md` und `kids/review-only/quiz-v4-450-next-completion-priority.json`.
-Zusätzliche globale Kostensperre: **10** echte Originaltexte sind im verbundenen ElevenLabs Flow noch reserviert/eingereicht und dürfen nicht erneut in eine kostenpflichtige TTS-Auswahl geraten. **1** davon sind bereits eingereicht, **7** sind vorerst unbezahlt reserviert. Der gesamte Audioabschlussplan unterscheidet diese Originale von wirklich neuen Sprachfragmenten.
-Nur bei frisch erzeugtem Abschlussplan: **5** Fragen warten ausschließlich auf verbundene Flow-Originale. Wirklich neue noch zu generierende V4-Sprachfragmente nach Deduplizierung: **21**. Diese Werte sind keine neue providerbestätigte Abrechnung.
+Zusätzliche globale Kostensperre: **7** echte Originaltexte sind im verbundenen ElevenLabs Flow noch reserviert/eingereicht und dürfen nicht erneut in eine kostenpflichtige TTS-Auswahl geraten. **0** davon sind bereits eingereicht, **2** sind vorerst unbezahlt reserviert. Der gesamte Audioabschlussplan unterscheidet diese Originale von wirklich neuen Sprachfragmenten.
+Nur bei frisch erzeugtem Abschlussplan: **Plan muss neu erstellt werden** Fragen warten ausschließlich auf verbundene Flow-Originale. Wirklich neue noch zu generierende V4-Sprachfragmente nach Deduplizierung: **Plan muss neu erstellt werden**. Diese Werte sind keine neue providerbestätigte Abrechnung.
 
 ## Noch fehlende, **bereits bezahlte** Originalaufnahmen
 
 Die neun historischen `eleven_v4`-Originale existieren als ElevenLabs-Flow-Assets; der bisherige direkte API-GET ist mit `HTTP 402 paid_plan_required` blockiert. **Nicht neu synthetisieren.**
 
-Generation-IDs: `1UAwmEQ77D4BmA9DttHZ, 2xy9ZLej1wPTrnvAr9p7, AToalNGbxiRe1zfOnDG3, DX5z8FWaCS4FDx3KrloO, FGX65uXKWBnjULDxg3X1, GvXeGQ9Kr1lVy7LEAv5T, KIgCxJO3RDxhsIFJSYUB, UUmC2fDiXaV5W1IQSumA, aoKJuahenrKHfUE5OD9j`.
+Generation-IDs: ``.
 
 Original-Flow: https://elevenlabs.io/app/flows/n2ovmGko2iTlNWTAEqHk
 Alle neun vorhandenen Audioelemente sind im Original-Flow eindeutigen Generation-IDs zugeordnet. Exakte Originaldateinamen und sichere Wiederherstellung: `kids/review-only/QUIZ-V4-LETZTE9-ORIGINALE-EXPORT.md`.
