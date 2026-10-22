@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""One-off protected German-only voice V4 fragments for Quiz 031.
+"""One-off protected German-only voice V4 fragments for Quiz 041.
 
 No Arabic/Quran/Taqwa/halal/haram texts, no release. Permanent pre-POST
 GitHub payment journal, exact owner Master and pinned PLS, immutable source
@@ -80,10 +80,12 @@ def preflight():
     check(flow["voiceId"]==VOICE and flow["modelId"]==MODEL and
           reg["voiceId"]==VOICE and reg["modelId"]==MODEL,
           "master speaker not available")
-    q=next(x for x in gaps["openQuestions"] if x["questionId"]=="kids-quiz-031")
-    check(q["missingParts"]==["question"] and
-          set(x["text"] for x in q["missingFragments"])==set(SOURCES),
-          "question 031 has drifted from real 3 missing original fragments")
+    q=next(x for x in gaps["openQuestions"] if x["questionId"]=="kids-quiz-041")
+    check(q["missingParts"]==["question","explanation"] and
+          set(SOURCES) <= set(x["text"] for x in q["missingFragments"]) and
+          all(x["blocker"]=="RESERVED_UNCONFIRMED_TTS"
+              for x in q["missingFragments"] if x["text"] in SOURCES),
+          "question 041 two German answer fragments are not reserved")
     estimated=sum(len(s) for s in SOURCES)*0.969066
     check(estimated<=MAX_ESTIMATED_CREDITS,"estimated credit cap exceeded")
     rows=[x for x in flow["entries"] if x.get("sourceText") in SOURCES]
@@ -108,7 +110,7 @@ def preflight():
             "ownerRequestedAll21Now":True,
             "newArabicSpeechRequests":0,"publicReleaseAllowed":False,
             "humanPronunciationApproved":False,
-            "sourceQuestionId":"kids-quiz-031",
+            "sourceQuestionId":"kids-quiz-041",
             "voiceId":VOICE,"modelId":MODEL,
             "expectedOriginalTexts":[{"source":s,"sha256":sha(s)} for s in SOURCES]}
 
