@@ -353,3 +353,31 @@ html.dar-v8-shell body :is(.post-reader-top-btn,[data-post-share-open]){
 @media(prefers-reduced-motion:reduce){
  html.dar-v8-shell *{scroll-behavior:auto!important}
 }
+
+
+/* V8 capacity bridge: legacy DarFold keeps data-fold-dual="0" below 900px.
+   The split may be shown at 760px only when V8 has verified remaining reader
+   capacity. Explicitly reveal both *existing* panes; never recreate markup. */
+@media(min-width:760px) and (min-height:560px){
+ html.dar-v8-shell.dar-v8-duo-open body .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"]){
+  display:grid!important;grid-template-columns:minmax(215px,35%) minmax(0,1fr)!important
+ }
+ html.dar-v8-shell.dar-v8-duo-open body .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"])>.dar-fold__rail,
+ html.dar-v8-shell.dar-v8-duo-open body .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"])>.dar-fold__pane{
+  display:block!important;visibility:visible!important;
+  width:100%!important;max-width:100%!important;min-width:0!important;
+ }
+ html.dar-v8-shell.dar-v8-duo-open body .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"])>.dar-fold__rail{
+  position:sticky!important;top:8px!important;
+  max-height:calc(100dvh - 110px)!important;overflow-y:auto!important;
+ }
+ html.dar-v8-shell.dar-v8-duo-open body .dar-fold[data-fold-mode="dual"]:not([data-fold-force="single"])>.dar-fold__pane{
+  padding:0 2px 26px 0!important;
+ }
+}
+/* Landscape phone under safe height: preserve single pane and bottom tabs. */
+@media(max-height:559.98px){
+ html.dar-v8-shell body .dar-fold[data-fold-mode="dual"]{
+  display:block!important;grid-template-columns:1fr!important
+ }
+}
