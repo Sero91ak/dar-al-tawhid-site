@@ -63,6 +63,21 @@ for(const [locale,expected] of Object.entries(metaExamples)){
  assert.equal(t("Al-Baqarah",locale),null,"Surah name must remain untouched");
  assert.equal(t("قُلْ هُوَ اللَّهُ أَحَدٌ",locale),null,"Arabic verse must remain untouched");
 }
+// Only six allowlisted taxonomy names may precede an interface publication count.
+for(const locale of ["tr","en","ar","ku","ckb","bs","fr","es"]){
+ const publication=t("Qurʾān, 1 Veröffentlichungen",locale);
+ assert(publication?.startsWith("Qurʾān, "),"Must preserve original Qurʾān taxonomy: "+locale);
+ assert(!publication.includes("Veröffentlichungen"),"Count suffix is not localized: "+locale);
+ const family=t("Familie, 5 Veröffentlichungen",locale);
+ assert(family&&!family.includes("Veröffentlichungen"),"Family count not localized: "+locale);
+ const range=t("Sūrenbereich wechseln, aktuell 01–20",locale);
+ assert(range&&!range.includes("wechseln")&&!range.includes("aktuell"),"Surah-range ARIA label missing: "+locale);
+ const loc=({tr:"tr-TR",en:"en-GB",ar:"ar-EG-u-ca-gregory",ku:"ku-TR",ckb:"ckb-IQ-u-ca-gregory",bs:"bs-BA",fr:"fr-FR",es:"es-ES"})[locale];
+ const fmt=n=>new Intl.NumberFormat(loc,{useGrouping:false,minimumIntegerDigits:2}).format(n);
+ assert(range.includes(fmt(1)+"–"+fmt(20)),"Range must retain leading zero and native digits: "+locale);
+ assert.equal(t("al-Adab al-Mufrad, 3 Veröffentlichungen",locale),null,
+  "Never generalize metadata translation to a bibliographic work title: "+locale);
+}
 assert.equal(t("1 Ergebnisse","de"),null);
 assert.equal(t("123 unknown count","es"),null);
 assert.equal(t("Al-Muwatta öffnen","fr"),null,"Book title should not be generically translated");
