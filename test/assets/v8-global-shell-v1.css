@@ -79,8 +79,9 @@ html.dar-v8-global-test body .top-shell .hero-text {
   margin:0!important;padding:0!important;
   display:none!important; /* The single V8 welcome component lives on Home. */
 }
-html.dar-v8-global-test body .top-shell>.isnad {
-  display:none!important; /* Source quote remains inside Home editorial design. */
+html.dar-v8-global-test body:not(.is-home-route) .top-shell>.isnad,
+html.dar-v8-global-test.dar-v8-home-editorial-ready body.is-home-route .top-shell>.isnad {
+  display:none!important; /* Only once the original source has been cloned on Home. */
 }
 html.dar-v8-global-test body .header-prayer-hub {
   max-width:100%;min-width:0;
@@ -284,7 +285,7 @@ html.dar-v8-global-test body :is(
 }
 @media(max-width:599.98px){
  html.dar-v8-global-test{--v8-gutter:max(10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))}
- html.dar-v8-global-test body .top-shell>.isnad{display:none!important}
+ html.dar-v8-global-test.dar-v8-home-editorial-ready body.is-home-route .top-shell>.isnad{display:none!important}
  html.dar-v8-global-test body .app-bar{
    gap:5px;min-height:40px!important;padding-block:3px!important
  }
