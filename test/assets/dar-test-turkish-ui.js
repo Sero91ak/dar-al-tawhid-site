@@ -329,6 +329,49 @@ function localizeGermanCalendarLabel(value,language){
  }
  return changed?result:null;
 }
+
+/* Strictly bounded numeric *interface* labels. The UI runtime never edits
+ * attributed material, Quran verses, book titles or any source-backed node.
+ * Plural categories and glyphs use Intl, without network/API calls.
+ */
+const NUMERIC_UI_KEYS=["Ergebnisse","Funktionen","Veröffentlichungen","Beiträge","Seiten","Themenbereiche","Aussagen","gemerkt"];
+const NUMERIC_UI_WORDS={"tr":[["sonuç","sonuç"],["işlev","işlev"],["yayın","yayın"],["yazı","yazı"],["sayfa","sayfa"],["konu alanı","konu alanı"],["söz","söz"],["kaydedildi","kaydedildi"]],"en":[["result","results"],["feature","features"],["publication","publications"],["article","articles"],["page","pages"],["topic","topics"],["statement","statements"],["saved","saved"]],"ar":[["نتيجة","نتائج","نتيجتان"],["وظيفة","وظائف","وظيفتان"],["إصدار","إصدارات","إصداران"],["مقال","مقالات","مقالان"],["صفحة","صفحات","صفحتان"],["قسم موضوعي","أقسام موضوعية","قسمان موضوعيان"],["قول","أقوال","قولان"],["محفوظ","محفوظ","محفوظ"]],"ku":[["encam","encam"],["taybetmendî","taybetmendî"],["weşan","weşan"],["gotar","gotar"],["rûpel","rûpel"],["beşên mijaran","beşên mijaran"],["gotin","gotin"],["hate tomarkirin","hate tomarkirin"]],"ckb":[["ئەنجام","ئەنجام"],["تایبەتمەندی","تایبەتمەندی"],["بڵاوکراوە","بڵاوکراوە"],["وتار","وتار"],["لاپەڕە","لاپەڕە"],["بەشی بابەت","بەشی بابەت"],["وتە","وتە"],["پاشەکەوتکراو","پاشەکەوتکراو"]],"bs":[["rezultat","rezultata"],["funkcija","funkcije"],["publikacija","publikacije"],["objava","objave"],["stranica","stranice"],["tematska oblast","tematske oblasti"],["izjava","izjave"],["sačuvano","sačuvano"]],"fr":[["résultat","résultats"],["fonctionnalité","fonctionnalités"],["publication","publications"],["article","articles"],["page","pages"],["thème","thèmes"],["déclaration","déclarations"],["élément enregistré","éléments enregistrés"]],"es":[["resultado","resultados"],["función","funciones"],["publicación","publicaciones"],["artículo","artículos"],["página","páginas"],["categoría temática","categorías temáticas"],["declaración","declaraciones"],["elemento guardado","elementos guardados"]]};
+function localizeNumericUI(value,language){
+ if(language==="de"||!NUMERIC_UI_WORDS[language])return null;
+ const loc=INTL_LOCALE[language]||"de-DE";
+ const matched=value.match(/^([0-9]{1,7}) (Ergebnisse|Funktionen|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt)$/);
+ if(matched){
+  const n=Number(matched[1]);
+  const words=NUMERIC_UI_WORDS[language][NUMERIC_UI_KEYS.indexOf(matched[2])];
+  if(!words)return null;
+  let plural="other";
+  try{plural=new Intl.PluralRules(loc).select(n)}catch(_){plural=n===1?"one":"other"}
+  const label=language==="ar"?(plural==="two"?words[2]:plural==="few"||plural==="zero"?words[1]:words[0]):
+    plural==="one"?words[0]:words[1];
+  let number=matched[1];
+  try{number=new Intl.NumberFormat(loc,{useGrouping:false}).format(n)}catch(_){}
+  return number+" "+label;
+ }
+ if(language==="tr")return null; // Preserve the existing, reviewed Turkish percentage/selection formats.
+ const percentage=value.match(/^([0-9]{1,3}(?:[.,][0-9])?)% Trefferquote$/);
+ if(percentage){
+  const n=Number(percentage[1].replace(",","."));
+  if(n>100)return null;
+  let pc=percentage[1]+"%";
+  try{pc=new Intl.NumberFormat(loc,{style:"percent",maximumFractionDigits:1}).format(n/100)}catch(_){}
+  const label=languagePacks.get(language)?.get("Trefferquote");
+  return label?label+": "+pc:null;
+ }
+ const selected=value.match(/^([0-9]{1,5})\/([0-9]{1,5}) gewählt$/);
+ if(selected){
+  const captions={en:"selected",ar:"تم الاختيار",ku:"hat hilbijartin",ckb:"هەڵبژێردرا",bs:"odabrano",fr:"sélectionnés",es:"seleccionados"};
+  const label=captions[language];if(!label)return null;
+  const fmt=x=>{try{return new Intl.NumberFormat(loc,{useGrouping:false}).format(Number(x))}catch(_){return x}};
+  return fmt(selected[1])+"/"+fmt(selected[2])+" "+label;
+ }
+ return null;
+}
+
 const PROTECTED_SOURCE_QUOTE="„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“";
 function translateExact(value,language="tr"){
  // Source quotation is editorial content, not a localizable interface control.
@@ -349,6 +392,8 @@ function translateExact(value,language="tr"){
     languagePacks.get(language)?.get(statements[1]);
   return head?head+" · "+statements[2]:null;
  }
+ const numericUI=localizeNumericUI(value,language);
+ if(numericUI!==null)return numericUI;
  if(language!=="tr")return languagePacks.get(language)?.get(value)??localizeGermanCalendarLabel(value,language);
  const known=dictionary.get(value);
  if(known!==undefined)return known;
