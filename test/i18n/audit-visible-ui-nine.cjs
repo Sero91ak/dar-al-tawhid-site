@@ -40,7 +40,7 @@ const sourceOnlyRoutes=new Set(["books","bibliothek","propheten","quran"]);
 const preservedBrands=new Set(["Instagram","Telegram","WhatsApp","by Serhat Abu Malik"]);
 const editorialFragments=new Set([", authentischer","und den","Wissen aus"]);
 const runtimeShortDate=/^(?:Mo|Di|Mi|Do|Fr|Sa|So)\., [0-9]{2}\.[0-9]{2}\.[0-9]{2}$/;
-const dynamicCityStatus=/^Standort gespeichert: [^<>\\r\\n]{2,90}$/;
+const dynamicCityStatus=/^Standort gespeichert: [^<>\r\n]{2,90}$/;
 const terminologyReview=new Set([
  "Adab und Tazkiyah","Āthār und Ḥadīṯ","Fiqh und Uṣūl",
  "ʿAqīdah und Sunnah","ʿAqīdah und Widerlegungen",
