@@ -62,6 +62,7 @@ jobs:
           node desktop-preview/i18n-core-v1/test-app-locale-push-adapter.cjs
           node desktop-preview/i18n-core-v1/test-secure-app-locale-endpoint.cjs
           node desktop-preview/i18n-core-v1/test-push-copy-nine-languages.cjs
+          node desktop-preview/i18n-core-v1/test-push-test-preview.cjs
           node desktop-preview/i18n-core-v1/audit-push-i18n.cjs
           node desktop-preview/i18n-core-v1/dry-run-push-nine-languages.cjs
       - name: Generate review-only worklist
