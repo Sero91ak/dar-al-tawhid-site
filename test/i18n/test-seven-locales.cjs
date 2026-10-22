@@ -15,7 +15,7 @@ const countByLocale={};
 for(const locale of expected.slice(1)){
  const dict=locales.translations[locale];
  const values=Object.keys(dict);
- assert(values.length>=420,locale+" lacks basic UI vocabulary");
+ assert(values.length>=473,locale+" lacks basic UI vocabulary");
  assert(values.every(x=>x.trim()&&typeof dict[x]==="string"&&dict[x].trim()));
  for(const label of ["Startseite","Mehr","Gebetszeiten","Einstellungen","Suche","Konto","Suchen","Heute","Qurʾān","Duʿāʾ"]){
   assert(dict[label],locale+" missing "+label);
@@ -39,6 +39,10 @@ const w={document:doc,location:{pathname:"/test/"},NodeFilter:{SHOW_ELEMENT:1,SH
 vm.runInNewContext(code,{window:w,Map,Set,WeakMap,Promise,Uint8Array});
 assert.deepEqual(Array.from(w.DarTestTurkishUI.supportedLocales),expected);
 assert.equal(w.DarTestTurkishUI.registerLocaleData(locales),true);
+for(const locale of expected){
+ assert.equal(w.DarTestTurkishUI.translateValue(germanSourceKey,locale),null,
+  "A religious quotation cannot be translated by the interface engine: "+locale);
+}
 for(const locale of expected){
  storage.locale=locale;w.DarTestTurkishUI.apply();
  const homepage=locale==="de"?"Startseite":locale==="tr"?"Ana Sayfa":locales.translations[locale].Startseite;
