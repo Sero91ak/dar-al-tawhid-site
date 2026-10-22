@@ -19,21 +19,40 @@ LANGUAGES = ["de", "tr", "en", "ar", "ku", "ckb", "bs", "fr", "es"]
 RTL = {"ar", "ckb"}
 KEY = "darAdultPreferredLocaleV1"
 CONTROL_SNAPSHOT = r"""
-const controls = [];
+const rows = [], attrs = [], seen = new Set();
+const excluded = '[data-dar-no-translate],[data-canonical-content],'+
+                 '[class*="post-content"],[class*="post-body"],'+
+                 '[class*="hadith-text"],[class*="quran-arabic"],'+
+                 '[class*="source-quote"],[class*="verse-translation"],'+
+                 '[class*="dua-meaning"],[lang="ar"]';
+function visible(el) {
+ if (el.closest(excluded+'[hidden],[aria-hidden="true"]')) return false;
+ const s = getComputedStyle(el);
+ return s.display !== 'none' && s.visibility !== 'hidden' &&
+        el.getClientRects().length > 0;
+}
+function add(value, kind) {
+ const s=String(value||'').replace(/\s+/g,' ').trim();
+ if (s.length < 2 || s.length > 140 || /[<>]/.test(s)) return;
+ const hash=kind+'\t'+s;
+ if (seen.has(hash)) return;
+ seen.add(hash);rows.push({kind:kind,text:s});
+}
 for (const el of document.querySelectorAll(
- 'button,label,summary,[role="tab"],[role="menuitem"],input[placeholder],textarea[placeholder]')) {
- if (el.closest('[data-dar-no-translate],[data-canonical-content],'+
-                '[class*="post-content"],[class*="hadith-text"],[class*="quran-arabic"]')) continue;
- const st = getComputedStyle(el);
- if (st.display === "none" || st.visibility === "hidden" || el.getClientRects().length === 0) continue;
- const texts = [el.getAttribute("aria-label"), el.getAttribute("placeholder"),
-                el.getAttribute("title"), el.textContent];
- for (let s of texts) {
-  s = String(s || "").replace(/\s+/g, " ").trim();
-  if (s.length > 1 && s.length <= 140 && !/[\u0600-\u06ff]/.test(s)) controls.push(s);
+ 'button,label,summary,[role="tab"],[role="menuitem"],input[placeholder],textarea[placeholder],[aria-label],[title]')) {
+ if (!visible(el)) continue;
+ for (const prop of ['placeholder','aria-label','title']) {
+  const value=el.getAttribute(prop);
+  if (value) { add(value,prop); attrs.push(value.replace(/\s+/g,' ').trim()); }
+ }
+ if (el.matches('button,label,summary,[role="tab"],[role="menuitem"]')) {
+  // Include only short leaf label nodes; never swallow a full article/card body.
+  for (const child of el.childNodes)
+   if (child.nodeType === Node.TEXT_NODE) add(child.nodeValue,'text');
  }
 }
-return [...new Set(controls)];
+return {rows:rows, attributes:[...new Set(attrs)],
+        visibleCharacters:(document.querySelector('#appView')?.innerText||'').trim().length};
 """
 options = Options()
 for flag in ["--headless=new", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu"]:
@@ -58,7 +77,6 @@ try:
             "return document.documentElement.lang===arguments[0] && document.documentElement.dir===arguments[1]",
             locale, direction))
         dictionary = pack["translations"].get(locale, {})
-        untranslated = set(dictionary)
         translated = set(dictionary.values())
         for route in ROUTES:
             driver.execute_script(
@@ -69,15 +87,25 @@ try:
                 "document.documentElement.lang===arguments[0] && "
                 "localStorage.getItem(arguments[1])===arguments[0]", locale, KEY))
             time.sleep(.15)
-            values = driver.execute_script(CONTROL_SNAPSHOT)
-            german_matches = [] if locale == "de" else sorted(set(values) & untranslated)
-            localized_matches = [] if locale == "de" else sorted(set(values) & translated)
+            time.sleep(.15)
+            snapshot = driver.execute_script(CONTROL_SNAPSHOT)
+            values = {x["text"] for x in snapshot["rows"]}
+            attributes = set(snapshot["attributes"])
+            # Only genuinely translated interface labels count as a known-German leak.
+            # Identical words/proper names and religious-source titles are excluded.
+            translatable = {k for k,v in dictionary.items() if v != k}
+            german_matches = [] if locale == "de" else sorted(values & translatable)
+            german_attributes = [] if locale == "de" else sorted(attributes & translatable)
+            localized_matches = [] if locale == "de" else sorted(values & translated)
             records.append({"language": locale, "route": route, "direction": direction,
-                            "controls": len(values), "knownGermanLabels": german_matches[:35],
+                            "controls": len(snapshot["rows"]),
+                            "visibleCharacters": snapshot["visibleCharacters"],
+                            "knownGermanLabels": german_matches,
+                            "knownGermanAttributes": german_attributes,
                             "translatedControlCount": len(localized_matches)})
-            print("SUBPAGE", locale, route, "controls", len(values),
-                  "localized", len(localized_matches),
-                  "known German", len(german_matches), flush=True)
+            print("SUBPAGE", locale, route, "controls", len(snapshot["rows"]),
+                  "localized", len(localized_matches), "German UI", len(german_matches),
+                  "German attributes", len(german_attributes), flush=True)
         assert driver.execute_script("return localStorage.getItem(arguments[0])", KEY) == locale
     driver.execute_script("""
         localStorage.setItem(arguments[0],"de");
@@ -95,5 +123,11 @@ with open("test/i18n/qa/browser-subpages-nine.json", "w", encoding="utf-8") as o
                "languages":LANGUAGES, "records":records,
                "note":"German hits are review candidates; source titles and authored content are excluded."},
               out, indent=2, ensure_ascii=False)
-print("PASS 135 language-route checks, RTL, persistent preference, German reset; "
-      "read-only untranslated-control report written", flush=True)
+failed_attributes = [item for item in records if item["knownGermanAttributes"]]
+blank_routes = [item for item in records if item["visibleCharacters"] < 10]
+assert len(records) == len(ROUTES) * len(LANGUAGES), "Incomplete route-language scan"
+assert not failed_attributes, "German UI attribute fallbacks: " + str(failed_attributes[:15])
+assert not blank_routes, "Blank subpage routes: " + str(blank_routes[:15])
+print("PASS 135 language-route checks, RTL, persistent preference, German reset, "
+      "no known German UI attribute fallbacks and no blank routes; "
+      "untranslated-control report written", flush=True)
