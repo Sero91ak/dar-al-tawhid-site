@@ -24,6 +24,12 @@ try:
             "return localStorage.getItem('darAdultPreferredLocaleV1')===arguments[0]&&"+
             "document.documentElement.lang===arguments[0]&&document.documentElement.dir===arguments[1]",
             lang,direction))
+        # Verify a real localized DOM attribute, not only a selected language code.
+        wait.until(lambda d:d.execute_script(
+            "const source='Sprache wählen / Dil seçimi';"
+            "const expected=window.DarTestTurkishUI.translateValue(source,arguments[0])||source;"
+            "return document.querySelector('#dv3Home .dv3-language')?.getAttribute('aria-label')===expected",
+            lang))
         pressed=driver.execute_script(
             "return document.querySelectorAll('#dv3Home [data-dv3-locale][aria-pressed=\"true\"]').length")
         assert pressed==1, "Exactly one pressed locale, got "+str(pressed)
