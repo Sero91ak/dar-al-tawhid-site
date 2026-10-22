@@ -5,6 +5,8 @@
  */
 
 import { pickPrayerEntryVariant, buildAdvancePushBody, PRAYER_TITLE_EMOJI, sanitizePrayerPushText, hasBlockedPrayerPhrase } from "./prayer-push-copy.js";
+import approvedPushCopy from "../desktop-preview/i18n-core-v1/push-copy-nine-languages-draft.json" with { type: "json" };
+import { prayerMessage } from "./push-nine-language-copy.js";
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
 import { writePrayerStatusToStore } from "./prayer-status-store.js";
 
@@ -347,43 +349,26 @@ function notifyTitle(prayer, mode, group) {
 
 function notifyCopy(prayer, mode, group) {
   const timeLabel = prayer.time == null ? "" : formatHour(prayer.time);
-  const m = normAdvance(group.advanceMinutes);
-  if (mode === "advance") {
-    const title = notifyTitle(prayer, mode, group);
-    const body = buildAdvancePushBody(prayer.key, m, timeLabel);
-    return {
-      headings: { de: sanitizePrayerPushText(title), en: sanitizePrayerPushText(title) },
-      contents: { de: sanitizePrayerPushText(body), en: sanitizePrayerPushText(body) }
-    };
-  }
-  const variant = pickPrayerEntryVariant(prayer.key, timeLabel);
-  return {
-    headings: {
-      de: sanitizePrayerPushText(variant.title),
-      en: sanitizePrayerPushText(variant.title)
-    },
-    contents: {
-      de: sanitizePrayerPushText(variant.body),
-      en: sanitizePrayerPushText(variant.body)
-    }
-  };
+  const minutes = normAdvance(group.advanceMinutes);
+  // Keep the existing calculation, scheduler and 5/10/15-minute setting.
+  // OneSignal resolves the selected language from the existing user profile;
+  // the translations follow exactly the original German prayer emojis.
+  return prayerMessage(approvedPushCopy, prayer.key, mode, minutes, timeLabel);
 }
 
 function enforcePrayerCopyGuard(copy) {
   const title = sanitizePrayerPushText(copy?.headings?.de || "");
   const body = sanitizePrayerPushText(copy?.contents?.de || "");
   const blocked = hasBlockedPrayerPhrase(title) || hasBlockedPrayerPhrase(body);
-  return {
-    headings: {
-      de: title,
-      en: sanitizePrayerPushText(copy?.headings?.en || title)
-    },
-    contents: {
-      de: body,
-      en: sanitizePrayerPushText(copy?.contents?.en || body)
-    },
-    blocked
-  };
+  // Do not accidentally discard approved Turkish/French/Arabic/other values.
+  // The canonical German title/body still drive the existing content guard.
+  const headings = Object.fromEntries(Object.entries(copy?.headings || {})
+    .map(([lang, value]) => [lang, sanitizePrayerPushText(value)]));
+  const contents = Object.fromEntries(Object.entries(copy?.contents || {})
+    .map(([lang, value]) => [lang, sanitizePrayerPushText(value)]));
+  headings.de = title;
+  contents.de = body;
+  return { headings, contents, blocked };
 }
 
 async function uuidFrom(seed) {
