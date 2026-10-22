@@ -43,6 +43,22 @@ for(const code of ["tr","en","ar","ku","ckb","bs","fr","es"]){
  assert.equal(t("„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“",code),null,
   "Never translate an attributed scholarly quote in general UI runtime");
 }
+const metaExamples={
+ tr:["109 âyet · Mekkî","114 sûre · 6236 âyet"],
+ en:["109 verses · Meccan","114 surahs · 6236 verses"],
+ ar:["١٠٩ آية · مكية","١١٤ سورة · ٦٢٣٦ آية"],
+ ku:["109 ayet · Mekkî","114 sûre · 6236 ayet"],
+ ckb:["109 ئایەت · مەککی","114 سوورەت · 6236 ئایەت"],
+ bs:["109 ajeta · mekanska","114 sura · 6236 ajeta"],
+ fr:["109 versets · mecquois","114 sourates · 6236 versets"],
+ es:["109 aleyas · mequí","114 suras · 6236 aleyas"]
+};
+for(const [locale,expected] of Object.entries(metaExamples)){
+ assert.equal(t("109 Āyāt · Mekkanisch",locale),expected[0],"Surah period display "+locale);
+ assert.equal(t("114 Sūren · 6236 Āyāt",locale),expected[1],"Surah collection display "+locale);
+ assert.equal(t("Al-Baqarah",locale),null,"Surah name must remain untouched");
+ assert.equal(t("قُلْ هُوَ اللَّهُ أَحَدٌ",locale),null,"Arabic verse must remain untouched");
+}
 assert.equal(t("1 Ergebnisse","de"),null);
 assert.equal(t("123 unknown count","es"),null);
 assert.equal(t("Al-Muwatta öffnen","fr"),null,"Book title should not be generically translated");
