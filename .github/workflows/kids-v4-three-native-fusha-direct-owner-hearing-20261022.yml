@@ -1,0 +1,80 @@
+name: KIDS V4 Existing Three Native Fusha Master Hearing Originals
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths:
+      - '.github/workflows/kids-v4-three-native-fusha-direct-owner-hearing-20261022.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  zero-credit-existing-originals:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      ELEVENLABS_API_KEY: ''
+    steps:
+      - name: Checkout genuine existing private-review originals
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Confirm owner quality hold, original SHA and exact cloned master V4
+        run: |
+          python3 - <<'PY'
+          import json,hashlib,html,shutil
+          from pathlib import Path
+          root=Path.cwd()
+          data=json.loads((root/'kids/data/quiz-v4-native-arabic-owner-three-auditory-pilot-ledger.json').read_text(encoding='utf8'))
+          hold=json.loads((root/'kids/data/quiz-v4-pronunciation-hold.json').read_text(encoding='utf8'))
+          assert data['voiceId']=='DkU7j9uO4ZEtLD2iRZSH' and data['modelId']=='eleven_v4'
+          assert len(data['entries'])==3
+          assert hold['productionPaused'] is True and hold['publicQuizAudioReleaseAuthorized'] is False
+          assert data['humanPronunciationApproved'] is False and data['publicReleaseAllowed'] is False
+          out=root/'kids/review-only/native-fusha-v4-three-owner-hearing-offline'
+          out.mkdir(parents=True,exist_ok=True)
+          rows=[]
+          for pos,item in enumerate(data['entries'],1):
+              src=root/item['originalUrl'].lstrip('/')
+              assert src.is_file() and src.suffix=='.mp3'
+              raw=src.read_bytes()
+              assert len(raw)==item['mp3Bytes'] and hashlib.sha256(raw).hexdigest()==item['mp3Sha256'], item['ownerTerm']
+              assert item['humanPronunciationApproved'] is False and item['publicReleaseAllowed'] is False
+              name=f'{pos}-{item["ownerTerm"]}.mp3'
+              shutil.copy2(src,out/name)
+              rows.append((item['ownerTerm'],item['sourceText'],name,item['mp3Sha256']))
+          page=['<!doctype html><html lang="de"><head><meta charset="utf-8">',
+                '<meta name="viewport" content="width=device-width, initial-scale=1">',
+                '<title>Serhat Master V4 – private Fuṣḥā-Hörprüfung</title>',
+                '<style>body{background:#0b2728;color:#f7eccf;font-family:system-ui;margin:0}',
+                'main{max-width:620px;margin:24px auto;padding:24px}',
+                '.item{background:#17393b;border:1px solid #b99a60;border-radius:18px;',
+                'padding:22px;margin:16px 0}audio{width:100%}h2{font-weight:500}',
+                'small{opacity:.8;display:block;margin-top:12px;overflow-wrap:anywhere}',
+                '.arabic{font-size:30px;direction:rtl}</style></head><body><main>',
+                '<h1>DĀR AL TAWḤĪD KIDS · V4</h1>',
+                '<p>Nur vorhandene Serhat-Master-Originalaufnahmen für deine Hörentscheidung.',
+                'Keine automatische Fuṣḥā-Freigabe. Kein Live-Push und keine neuen Sprachcredits.</p>']
+          for label,arabic,name,sha in rows:
+              page.extend(['<section class="item"><h2>'+html.escape(label)+'</h2>',
+                           '<p class="arabic">'+html.escape(arabic)+'</p>',
+                           '<audio controls preload="metadata" src="'+html.escape(name,quote=True)+'"></audio>',
+                           '<small>Original SHA-256 '+sha+'</small></section>'])
+          page.extend(['<p>Erst nach ausdrücklicher positiver Hörprüfung darf die',
+                       'Sperre für weitere neue bezahlte Aufnahmen gesondert geprüft werden.</p>',
+                       '</main></body></html>'])
+          (out/'START-HIER.html').write_text('\n'.join(page),encoding='utf8')
+          (out/'PROVENANCE.json').write_text(json.dumps({
+             'modelId':data['modelId'],'voiceId':data['voiceId'],
+             'originals':[{'ownerTerm':label,'text':a,'filename':filename,'sha256':sha} for label,a,filename,sha in rows],
+             'newTTSRequests':0,'newCredits':0,'humanApproved':False,'publicRelease':False
+          },ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+          print('PASS 3 original Serhat Master eleven_v4 WAV/MP3 SHA files ready for owner listening; no credits, no release')
+          PY
+      - name: Private review originals as ZIP artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-three-native-fusha-owner-hearing-no-new-credits
+          retention-days: 30
+          if-no-files-found: error
+          path: kids/review-only/native-fusha-v4-three-owner-hearing-offline/
