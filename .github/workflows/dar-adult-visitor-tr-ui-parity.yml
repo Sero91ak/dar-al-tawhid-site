@@ -7,6 +7,7 @@ on:
       - 'assets/i18n/adult-ui-translate.js'
       - 'assets/i18n/visitor-tr-ui-smoke.py'
       - 'assets/dar-more-v15.js'
+      - 'scripts/home-premium-v380-fragment.js'
       - '.github/workflows/dar-adult-visitor-tr-ui-parity.yml'
 
 permissions:
@@ -27,6 +28,7 @@ jobs:
         run: |
           node --check assets/i18n/adult-ui-translate.js
           node --check assets/dar-more-v15.js
+          node --check scripts/home-premium-v380-fragment.js
           node - <<'NODE'
           const fs=require('fs');
           const p=JSON.parse(fs.readFileSync('assets/i18n/adult-ui-de-tr.json','utf8'));
