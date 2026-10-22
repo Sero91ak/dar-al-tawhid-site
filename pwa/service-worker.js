@@ -1,6 +1,6 @@
 /* DĀR AL TAWḤĪD — isolated Android PWA service worker. Scope /pwa/ only.
- * Fast return v4: preserve existing v3 cache, use local shell and immutable
- * assets on repeat launches. Update shell only periodically in background.
+ * Adult language parity v5: preserve existing v3 cache but prefer fresh
+ * shared visitor shell on every online PWA launch, with fast offline fallback.
  * Mutable content stays online-first with offline fallback.
  * No root website, Kids, iOS or OneSignal handlers are changed.
  */
@@ -9,8 +9,7 @@ const CACHE_PREFIX='dar-al-tawhid-pwa-';
 const CACHE_VERSION=CACHE_PREFIX+'v3';
 const SHELL_URL='/pwa/?pwa=1';
 const SHELL_META='/pwa/__cached_shell_freshness_v1';
-const SHELL_REFRESH_MS=30*60*1000;
-
+const SHELL_NETWORK_BUDGET_MS=1600;
 async function storeShell(response){
   if(!response||!response.ok||response.redirected)return;
   const cache=await caches.open(CACHE_VERSION);
@@ -19,17 +18,21 @@ async function storeShell(response){
     headers:{'Content-Type':'text/plain','Cache-Control':'no-store'}
   }));
 }
-async function periodicallyRefreshShell(request){
+// Online-first canonical visitor shell. A timed offline/cache fallback retains
+// fast launches and preserves every existing downloaded page or audio file.
+async function freshShellWithOfflineFallback(request,event){
   const cache=await caches.open(CACHE_VERSION);
-  const meta=await cache.match(SHELL_META);
-  const last=meta?Number(await meta.text()):0;
-  if(last&&Date.now()-last<SHELL_REFRESH_MS)return;
-  // Let the app paint before the large HTML is refreshed.
-  await new Promise(resolve=>setTimeout(resolve,2000));
-  try{
-    const current=await fetch(request,{cache:'no-store'});
-    if(current&&current.ok)await storeShell(current.clone());
-  }catch(error){}
+  const stored=await cache.match(SHELL_URL);
+  const update=fetch(request,{cache:'no-store'})
+    .then(async response=>{
+      if(!response||!response.ok||response.redirected)return null;
+      await storeShell(response.clone());
+      return response;
+    }).catch(()=>null);
+  event.waitUntil(update.then(()=>null));
+  if(!stored)return (await update)||Response.error();
+  const timeout=new Promise(resolve=>setTimeout(()=>resolve(null),SHELL_NETWORK_BUDGET_MS));
+  return (await Promise.race([update,timeout]))||stored;
 }
 // Small background package for the first offline visit. Never prefetch
 // streaming media, whole libraries or gigabytes of application projects.
@@ -76,6 +79,14 @@ function cacheable(u,request){
   return /^(?:\/assets\/|\/content\/|\/data\/|\/q\/|\/quellen\/|\/widgets\/|\/apple-tv\/)/.test(u.pathname)||
     /\.(?:css|js|json|png|jpe?g|webp|svg|woff2?|mp3|m4a|aac|ogg)$/i.test(u.pathname);
 }
+function liveLocaleAsset(u){
+  return new Set([
+    '/assets/i18n/adult-language-picker-v1.js',
+    '/assets/i18n/adult-ui-translate.js',
+    '/assets/i18n/adult-ui-de-tr.json',
+    '/assets/dar-more-v15.js'
+  ]).has(u.pathname);
+}
 function staticVersionedAsset(u){
   // Only cache-first assets with explicit version keys: a changed URL
   // receives fresh files. Mutable data and media remain network-first.
@@ -104,21 +115,7 @@ self.addEventListener('fetch',event=>{
       return;
     }
 
-    event.respondWith((async()=>{
-      const cache=await caches.open(CACHE_VERSION);
-      const stored=await cache.match(SHELL_URL);
-      if(stored){
-        event.waitUntil(periodicallyRefreshShell(request).catch(()=>null));
-        return stored;
-      }
-      try{
-        const live=await fetch(request,{cache:'no-store'});
-        if(live&&live.ok)event.waitUntil(storeShell(live.clone()).catch(()=>null));
-        return live;
-      }catch(error){
-        return (await cache.match(SHELL_URL))||Response.error();
-      }
-    })());
+    event.respondWith(freshShellWithOfflineFallback(request,event));
     return;
   }
   if(u.pathname==='/manifest.json'||u.pathname==='/version.json'){
@@ -129,7 +126,7 @@ self.addEventListener('fetch',event=>{
   event.respondWith((async()=>{
     const cache=await caches.open(CACHE_VERSION);
     // Previously opened, versioned CSS, JS and images open immediately offline.
-    const staticAsset=staticVersionedAsset(u);
+    const staticAsset=staticVersionedAsset(u)&&!liveLocaleAsset(u);
     if(staticAsset){
       const stored=await cache.match(request);
       if(stored)return stored;
