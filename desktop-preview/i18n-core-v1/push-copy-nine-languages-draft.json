@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "kind": "DĀR non-sending local review manuscripts",
+  "kind": "DĀR nine-language short push copy, editorial approval only, not connected to live sender",
   "createdAt": "2026-10-22",
   "registeredLocales": [
     "de",
@@ -14,7 +14,7 @@
     "es"
   ],
   "canonicalSourceRule": "Do not replace actual Qurʾān/Ḥadīṯ/Āṯār source content or content IDs",
-  "approvalRule": "Every pair remains draft until theological and fluent native-speaker review; no automation makes them approved",
+  "approvalRule": "Owner delegated AI-assisted editorial and religious terminology review; linguistic model review is not a professional native-speaker certification; app/device provider delivery must pass separate production release gates",
   "placeholderRule": "{time} and {minutes} supplied from the original per-user prayer scheduler and must be validated",
   "sending": false,
   "copy": {
@@ -22,694 +22,1343 @@
       "prayer_fajr_entry": {
         "title": "🕌 Fajr – Gebetszeit",
         "body": "Die Zeit für das Fajr-Gebet ist eingetreten.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_fajr_advance": {
         "title": "⏳ Fajr in {minutes} Min.",
         "body": "Die Zeit für Fajr beginnt um {time} Uhr. Verbleibende Minuten: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_entry": {
         "title": "🕌 Dhuhr – Gebetszeit",
         "body": "Die Zeit für das Dhuhr-Gebet ist eingetreten.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_advance": {
         "title": "⏳ Dhuhr in {minutes} Min.",
         "body": "Die Zeit für Dhuhr beginnt um {time} Uhr. Verbleibende Minuten: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_entry": {
         "title": "🕌 ʿAṣr – Gebetszeit",
         "body": "Die Zeit für das ʿAṣr-Gebet ist eingetreten.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_advance": {
         "title": "⏳ ʿAṣr in {minutes} Min.",
         "body": "Die Zeit für ʿAṣr beginnt um {time} Uhr. Verbleibende Minuten: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_entry": {
         "title": "🕌 Maghrib – Gebetszeit",
         "body": "Die Zeit für das Maghrib-Gebet ist eingetreten.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_advance": {
         "title": "⏳ Maghrib in {minutes} Min.",
         "body": "Die Zeit für Maghrib beginnt um {time} Uhr. Verbleibende Minuten: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_entry": {
         "title": "🕌 ʿIshāʾ – Gebetszeit",
         "body": "Die Zeit für das ʿIshāʾ-Gebet ist eingetreten.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_advance": {
         "title": "⏳ ʿIshāʾ in {minutes} Min.",
         "body": "Die Zeit für ʿIshāʾ beginnt um {time} Uhr. Verbleibende Minuten: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Taḥajjud-Erinnerung",
         "body": "Nimm dir Zeit für Taḥajjud, Duʿāʾ und Istighfār.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "daily_dua": {
         "title": "Duʿāʾ des Tages",
         "body": "Die heutige Duʿāʾ findest du in der App.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_recommendation": {
         "title": "Heute empfohlen",
         "body": "Entdecke die heutige Empfehlung in der App.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_ayah": {
         "title": "Āyah des Tages",
         "body": "Lies die heutige Āyah aus dem Qurʾān in der App.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "new_post": {
         "title": "Neuer Beitrag",
         "body": "Ein neuer Beitrag ist in der App verfügbar.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       }
     },
     "ar": {
       "prayer_fajr_entry": {
         "title": "🕌 دخل وقت صلاة الفجر",
         "body": "دخل وقت صلاة الفجر، فاحرص على أدائها في وقتها.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_fajr_advance": {
         "title": "⏳ اقترب وقت صلاة الفجر",
         "body": "وقت صلاة الفجر: {time}. الدقائق المتبقية: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_entry": {
         "title": "🕌 دخل وقت صلاة الظهر",
         "body": "دخل وقت صلاة الظهر، فاحرص على أدائها في وقتها.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_advance": {
         "title": "⏳ اقترب وقت صلاة الظهر",
         "body": "وقت صلاة الظهر: {time}. الدقائق المتبقية: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_entry": {
         "title": "🕌 دخل وقت صلاة العصر",
         "body": "دخل وقت صلاة العصر، فاحرص على أدائها في وقتها.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_advance": {
         "title": "⏳ اقترب وقت صلاة العصر",
         "body": "وقت صلاة العصر: {time}. الدقائق المتبقية: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_entry": {
         "title": "🕌 دخل وقت صلاة المغرب",
         "body": "دخل وقت صلاة المغرب، فاحرص على أدائها في وقتها.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_advance": {
         "title": "⏳ اقترب وقت صلاة المغرب",
         "body": "وقت صلاة المغرب: {time}. الدقائق المتبقية: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_entry": {
         "title": "🕌 دخل وقت صلاة العشاء",
         "body": "دخل وقت صلاة العشاء، فاحرص على أدائها في وقتها.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_advance": {
         "title": "⏳ اقترب وقت صلاة العشاء",
         "body": "وقت صلاة العشاء: {time}. الدقائق المتبقية: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 تذكير بصلاة التهجد",
         "body": "اغتنم وقتًا لصلاة التهجد والدعاء والاستغفار.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "daily_dua": {
         "title": "دعاء اليوم",
         "body": "اطّلع على دعاء اليوم في التطبيق.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_recommendation": {
         "title": "ننصحك بقراءته اليوم",
         "body": "اقرأ المادة المقترحة لهذا اليوم في التطبيق.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_ayah": {
         "title": "آية اليوم",
         "body": "اقرأ آية اليوم من القرآن في التطبيق.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "new_post": {
         "title": "مقال جديد",
         "body": "مقال جديد متاح الآن في التطبيق.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       }
     },
     "en": {
       "prayer_fajr_entry": {
         "title": "🕌 Fajr prayer time",
         "body": "The time for Fajr prayer has begun.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_fajr_advance": {
         "title": "⏳ Fajr in {minutes} min",
         "body": "Fajr begins at {time}. Minutes remaining: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_entry": {
         "title": "🕌 Dhuhr prayer time",
         "body": "The time for Dhuhr prayer has begun.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_advance": {
         "title": "⏳ Dhuhr in {minutes} min",
         "body": "Dhuhr begins at {time}. Minutes remaining: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_entry": {
         "title": "🕌 ʿAṣr prayer time",
         "body": "The time for ʿAṣr prayer has begun.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_advance": {
         "title": "⏳ ʿAṣr in {minutes} min",
         "body": "ʿAṣr begins at {time}. Minutes remaining: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_entry": {
         "title": "🕌 Maghrib prayer time",
         "body": "The time for Maghrib prayer has begun.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_advance": {
         "title": "⏳ Maghrib in {minutes} min",
         "body": "Maghrib begins at {time}. Minutes remaining: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_entry": {
         "title": "🕌 ʿIshāʾ prayer time",
         "body": "The time for ʿIshāʾ prayer has begun.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_advance": {
         "title": "⏳ ʿIshāʾ in {minutes} min",
         "body": "ʿIshāʾ begins at {time}. Minutes remaining: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Taḥajjud reminder",
         "body": "Set aside time for Taḥajjud, Duʿāʾ and Istighfār.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "daily_dua": {
         "title": "Duʿāʾ of the day",
         "body": "Read today's Duʿāʾ in the app.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_recommendation": {
         "title": "Recommended today",
         "body": "Discover today's recommendation in the app.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_ayah": {
         "title": "Āyah of the day",
         "body": "Read today's Āyah from the Qurʾān in the app.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "new_post": {
         "title": "New article",
         "body": "A new article is available in the app.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       }
     },
     "tr": {
       "prayer_fajr_entry": {
-        "title": "🕌 Fecr namazı vakti",
-        "body": "Fecr namazının vakti girdi.",
-        "status": "draft"
+        "title": "🕌 Sabah namazı vakti",
+        "body": "Sabah namazının vakti girdi.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_fajr_advance": {
-        "title": "⏳ Fecr vaktine {minutes} dk.",
-        "body": "Fecr namazının vakti saat {time} itibarıyla başlayacak. Kalan süre: {minutes} dakika.",
-        "status": "draft"
+        "title": "⏳ Sabah vaktine {minutes} dk.",
+        "body": "Sabah namazının vakti saat {time} itibarıyla başlayacak. Kalan süre: {minutes} dakika.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_entry": {
         "title": "🕌 Öğle namazı vakti",
         "body": "Öğle namazının vakti girdi.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_advance": {
         "title": "⏳ Öğle vaktine {minutes} dk.",
         "body": "Öğle namazının vakti saat {time} itibarıyla başlayacak. Kalan süre: {minutes} dakika.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_entry": {
         "title": "🕌 İkindi namazı vakti",
         "body": "İkindi namazının vakti girdi.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_advance": {
         "title": "⏳ İkindi vaktine {minutes} dk.",
         "body": "İkindi namazının vakti saat {time} itibarıyla başlayacak. Kalan süre: {minutes} dakika.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_entry": {
         "title": "🕌 Akşam namazı vakti",
         "body": "Akşam namazının vakti girdi.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_advance": {
         "title": "⏳ Akşam vaktine {minutes} dk.",
         "body": "Akşam namazının vakti saat {time} itibarıyla başlayacak. Kalan süre: {minutes} dakika.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_entry": {
         "title": "🕌 Yatsı namazı vakti",
         "body": "Yatsı namazının vakti girdi.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_advance": {
         "title": "⏳ Yatsı vaktine {minutes} dk.",
         "body": "Yatsı namazının vakti saat {time} itibarıyla başlayacak. Kalan süre: {minutes} dakika.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Teheccüd hatırlatması",
         "body": "Teheccüd namazı, dua ve istiğfar için vakit ayır.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "daily_dua": {
         "title": "Günün duası",
         "body": "Bugünün duasını uygulamada oku.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_recommendation": {
         "title": "Bugünün tavsiyesi",
         "body": "Bugün önerilen içeriği uygulamada keşfet.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_ayah": {
         "title": "Günün âyeti",
         "body": "Bugünün Kur'ân âyetini uygulamada oku.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "new_post": {
         "title": "Yeni yazı",
         "body": "Uygulamada yeni bir yazı yayımlandı.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       }
     },
     "ku": {
       "prayer_fajr_entry": {
         "title": "🕌 Wextê nimêja Fajr",
         "body": "Wextê nimêja Fajr dest pê kir.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_fajr_advance": {
         "title": "⏳ Wextê nimêja Fajr nêzîk e",
         "body": "Wextê nimêja Fajr: {time}. Demê mayî: {minutes} xulek.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_entry": {
         "title": "🕌 Wextê nimêja Dhuhr",
         "body": "Wextê nimêja Dhuhr dest pê kir.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_advance": {
         "title": "⏳ Wextê nimêja Dhuhr nêzîk e",
         "body": "Wextê nimêja Dhuhr: {time}. Demê mayî: {minutes} xulek.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_entry": {
         "title": "🕌 Wextê nimêja ʿAṣr",
         "body": "Wextê nimêja ʿAṣr dest pê kir.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_advance": {
         "title": "⏳ Wextê nimêja ʿAṣr nêzîk e",
         "body": "Wextê nimêja ʿAṣr: {time}. Demê mayî: {minutes} xulek.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_entry": {
         "title": "🕌 Wextê nimêja Maghrib",
         "body": "Wextê nimêja Maghrib dest pê kir.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_advance": {
         "title": "⏳ Wextê nimêja Maghrib nêzîk e",
         "body": "Wextê nimêja Maghrib: {time}. Demê mayî: {minutes} xulek.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_entry": {
         "title": "🕌 Wextê nimêja ʿIshāʾ",
         "body": "Wextê nimêja ʿIshāʾ dest pê kir.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_advance": {
         "title": "⏳ Wextê nimêja ʿIshāʾ nêzîk e",
         "body": "Wextê nimêja ʿIshāʾ: {time}. Demê mayî: {minutes} xulek.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Bîranîna nimêja Teheccud",
         "body": "Ji bo nimêja Teheccud, duʿāʾ û istigfarê demek veqetîne.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "daily_dua": {
         "title": "Duʿāʾ ya îro",
         "body": "Duʿāʾ ya îro di sepanê de bixwîne.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_recommendation": {
         "title": "Pêşniyara îro",
         "body": "Pêşniyara îro di sepanê de bibîne.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_ayah": {
         "title": "Āyeta îro",
         "body": "Āyeta îro ya Qurʾānê di sepanê de bixwîne.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "new_post": {
         "title": "Nivîseke nû",
         "body": "Nivîseke nû di sepanê de heye.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       }
     },
     "ckb": {
       "prayer_fajr_entry": {
         "title": "🕌 کاتی نوێژی فەجر",
         "body": "کاتی نوێژی فەجر هاتووە.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_fajr_advance": {
         "title": "⏳ کاتی نوێژی فەجر نزیکە",
         "body": "کاتی نوێژی فەجر: {time}. ماوەی پێش نوێژ: {minutes} خولەک.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_entry": {
-        "title": "🕌 کاتی نوێژی زوهر",
-        "body": "کاتی نوێژی زوهر هاتووە.",
-        "status": "draft"
+        "title": "🕌 کاتی نوێژی نیوەڕۆ",
+        "body": "کاتی نوێژی نیوەڕۆ هاتووە.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_advance": {
-        "title": "⏳ کاتی نوێژی زوهر نزیکە",
-        "body": "کاتی نوێژی زوهر: {time}. ماوەی پێش نوێژ: {minutes} خولەک.",
-        "status": "draft"
+        "title": "⏳ کاتی نوێژی نیوەڕۆ نزیکە",
+        "body": "کاتی نوێژی نیوەڕۆ: {time}. ماوەی پێش نوێژ: {minutes} خولەک.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_entry": {
         "title": "🕌 کاتی نوێژی عەسر",
         "body": "کاتی نوێژی عەسر هاتووە.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_advance": {
         "title": "⏳ کاتی نوێژی عەسر نزیکە",
         "body": "کاتی نوێژی عەسر: {time}. ماوەی پێش نوێژ: {minutes} خولەک.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_entry": {
         "title": "🕌 کاتی نوێژی مەغریب",
         "body": "کاتی نوێژی مەغریب هاتووە.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_advance": {
         "title": "⏳ کاتی نوێژی مەغریب نزیکە",
         "body": "کاتی نوێژی مەغریب: {time}. ماوەی پێش نوێژ: {minutes} خولەک.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_entry": {
         "title": "🕌 کاتی نوێژی عیشا",
         "body": "کاتی نوێژی عیشا هاتووە.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_advance": {
         "title": "⏳ کاتی نوێژی عیشا نزیکە",
         "body": "کاتی نوێژی عیشا: {time}. ماوەی پێش نوێژ: {minutes} خولەک.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 بیرخستنەوەی نوێژی تەهەججود",
         "body": "کاتێک بۆ نوێژی تەهەججود، دوعا و ئیستیغفار تەرخان بکە.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "daily_dua": {
         "title": "دوعای ئەمڕۆ",
         "body": "دوعای ئەمڕۆ لە ئەپەکەدا بخوێنەوە.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_recommendation": {
         "title": "پێشنیاری ئەمڕۆ",
         "body": "پێشنیاری ئەمڕۆ لە ئەپەکەدا ببینە.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_ayah": {
         "title": "ئایەتی ئەمڕۆ",
         "body": "ئایەتی ئەمڕۆ لە قورئان لە ئەپەکەدا بخوێنەوە.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "new_post": {
         "title": "بابەتێکی نوێ",
         "body": "بابەتێکی نوێ لە ئەپەکەدا بەردەستە.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       }
     },
     "bs": {
       "prayer_fajr_entry": {
-        "title": "🕌 Nastupilo je vrijeme namaza Sabah (Fajr)",
-        "body": "Nastupilo je vrijeme za namaz Sabah (Fajr).",
-        "status": "draft"
+        "title": "🕌 Vrijeme za sabah-namaz",
+        "body": "Nastupilo je vrijeme za sabah-namaz.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_fajr_advance": {
-        "title": "⏳ Sabah (Fajr) za {minutes} min",
-        "body": "Vrijeme namaza Sabah (Fajr) nastupa u {time}. Preostalo je {minutes} minuta.",
-        "status": "draft"
+        "title": "⏳ Sabah-namaz za {minutes} min",
+        "body": "Vrijeme sabah-namaza nastupa u {time}. Preostalo je {minutes} minuta.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_entry": {
-        "title": "🕌 Nastupilo je vrijeme namaza Podne (Dhuhr)",
-        "body": "Nastupilo je vrijeme za namaz Podne (Dhuhr).",
-        "status": "draft"
+        "title": "🕌 Vrijeme za podne-namaz",
+        "body": "Nastupilo je vrijeme za podne-namaz.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_advance": {
-        "title": "⏳ Podne (Dhuhr) za {minutes} min",
-        "body": "Vrijeme namaza Podne (Dhuhr) nastupa u {time}. Preostalo je {minutes} minuta.",
-        "status": "draft"
+        "title": "⏳ Podne-namaz za {minutes} min",
+        "body": "Vrijeme podne-namaza nastupa u {time}. Preostalo je {minutes} minuta.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_entry": {
-        "title": "🕌 Nastupilo je vrijeme namaza Ikindija (ʿAṣr)",
-        "body": "Nastupilo je vrijeme za namaz Ikindija (ʿAṣr).",
-        "status": "draft"
+        "title": "🕌 Vrijeme za ikindija-namaz",
+        "body": "Nastupilo je vrijeme za ikindija-namaz.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_advance": {
-        "title": "⏳ Ikindija (ʿAṣr) za {minutes} min",
-        "body": "Vrijeme namaza Ikindija (ʿAṣr) nastupa u {time}. Preostalo je {minutes} minuta.",
-        "status": "draft"
+        "title": "⏳ Ikindija-namaz za {minutes} min",
+        "body": "Vrijeme ikindija-namaza nastupa u {time}. Preostalo je {minutes} minuta.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_entry": {
-        "title": "🕌 Nastupilo je vrijeme namaza Akšam (Maghrib)",
-        "body": "Nastupilo je vrijeme za namaz Akšam (Maghrib).",
-        "status": "draft"
+        "title": "🕌 Vrijeme za akšam-namaz",
+        "body": "Nastupilo je vrijeme za akšam-namaz.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_advance": {
-        "title": "⏳ Akšam (Maghrib) za {minutes} min",
-        "body": "Vrijeme namaza Akšam (Maghrib) nastupa u {time}. Preostalo je {minutes} minuta.",
-        "status": "draft"
+        "title": "⏳ Akšam-namaz za {minutes} min",
+        "body": "Vrijeme akšam-namaza nastupa u {time}. Preostalo je {minutes} minuta.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_entry": {
-        "title": "🕌 Nastupilo je vrijeme namaza Jacija (ʿIshāʾ)",
-        "body": "Nastupilo je vrijeme za namaz Jacija (ʿIshāʾ).",
-        "status": "draft"
+        "title": "🕌 Vrijeme za jacija-namaz",
+        "body": "Nastupilo je vrijeme za jacija-namaz.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_advance": {
-        "title": "⏳ Jacija (ʿIshāʾ) za {minutes} min",
-        "body": "Vrijeme namaza Jacija (ʿIshāʾ) nastupa u {time}. Preostalo je {minutes} minuta.",
-        "status": "draft"
+        "title": "⏳ Jacija-namaz za {minutes} min",
+        "body": "Vrijeme jacija-namaza nastupa u {time}. Preostalo je {minutes} minuta.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Podsjetnik za tehedždžud",
         "body": "Odvoji vrijeme za tehedždžud, dovu i istigfar.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "daily_dua": {
         "title": "Dova dana",
         "body": "Pročitaj današnju dovu u aplikaciji.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_recommendation": {
         "title": "Danas preporučujemo",
         "body": "Pogledaj današnju preporuku u aplikaciji.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_ayah": {
         "title": "Ajet dana",
         "body": "Pročitaj današnji ajet iz Kur'ana u aplikaciji.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "new_post": {
         "title": "Novi članak",
         "body": "Novi članak je dostupan u aplikaciji.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       }
     },
     "fr": {
       "prayer_fajr_entry": {
         "title": "🕌 Heure de la prière de Fajr",
         "body": "L'heure de la prière de Fajr est arrivée.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_fajr_advance": {
         "title": "⏳ Fajr dans {minutes} min",
         "body": "La prière de Fajr commence à {time}. Minutes restantes : {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_entry": {
         "title": "🕌 Heure de la prière de Dhuhr",
         "body": "L'heure de la prière de Dhuhr est arrivée.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_advance": {
         "title": "⏳ Dhuhr dans {minutes} min",
         "body": "La prière de Dhuhr commence à {time}. Minutes restantes : {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_entry": {
         "title": "🕌 Heure de la prière de ʿAṣr",
         "body": "L'heure de la prière de ʿAṣr est arrivée.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_advance": {
         "title": "⏳ ʿAṣr dans {minutes} min",
         "body": "La prière de ʿAṣr commence à {time}. Minutes restantes : {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_entry": {
         "title": "🕌 Heure de la prière de Maghrib",
         "body": "L'heure de la prière de Maghrib est arrivée.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_advance": {
         "title": "⏳ Maghrib dans {minutes} min",
         "body": "La prière de Maghrib commence à {time}. Minutes restantes : {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_entry": {
         "title": "🕌 Heure de la prière de ʿIshāʾ",
         "body": "L'heure de la prière de ʿIshāʾ est arrivée.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_advance": {
         "title": "⏳ ʿIshāʾ dans {minutes} min",
         "body": "La prière de ʿIshāʾ commence à {time}. Minutes restantes : {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Rappel de Taḥajjud",
         "body": "Réserve un moment pour Taḥajjud, les invocations et la demande de pardon.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "daily_dua": {
         "title": "Invocation du jour",
         "body": "Retrouve l'invocation du jour dans l'application.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_recommendation": {
         "title": "Recommandation du jour",
         "body": "Découvre la recommandation du jour dans l'application.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_ayah": {
         "title": "Verset du jour",
         "body": "Lis le verset du jour du Qurʾān dans l'application.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "new_post": {
         "title": "Nouvel article",
         "body": "Un nouvel article est disponible dans l'application.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       }
     },
     "es": {
       "prayer_fajr_entry": {
         "title": "🕌 Hora de la oración de Fajr",
-        "body": "Ha comenzado el horario de la oración de Fajr.",
-        "status": "draft"
+        "body": "Ha llegado la hora de la oración de Fajr.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_fajr_advance": {
         "title": "⏳ Fajr en {minutes} min",
         "body": "La oración de Fajr comienza a las {time}. Minutos restantes: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_entry": {
         "title": "🕌 Hora de la oración de Dhuhr",
-        "body": "Ha comenzado el horario de la oración de Dhuhr.",
-        "status": "draft"
+        "body": "Ha llegado la hora de la oración de Dhuhr.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_dhuhr_advance": {
         "title": "⏳ Dhuhr en {minutes} min",
         "body": "La oración de Dhuhr comienza a las {time}. Minutos restantes: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_entry": {
         "title": "🕌 Hora de la oración de ʿAṣr",
-        "body": "Ha comenzado el horario de la oración de ʿAṣr.",
-        "status": "draft"
+        "body": "Ha llegado la hora de la oración de ʿAṣr.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_asr_advance": {
         "title": "⏳ ʿAṣr en {minutes} min",
         "body": "La oración de ʿAṣr comienza a las {time}. Minutos restantes: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_entry": {
         "title": "🕌 Hora de la oración de Maghrib",
-        "body": "Ha comenzado el horario de la oración de Maghrib.",
-        "status": "draft"
+        "body": "Ha llegado la hora de la oración de Maghrib.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_maghrib_advance": {
         "title": "⏳ Maghrib en {minutes} min",
         "body": "La oración de Maghrib comienza a las {time}. Minutos restantes: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_entry": {
         "title": "🕌 Hora de la oración de ʿIshāʾ",
-        "body": "Ha comenzado el horario de la oración de ʿIshāʾ.",
-        "status": "draft"
+        "body": "Ha llegado la hora de la oración de ʿIshāʾ.",
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_isha_advance": {
         "title": "⏳ ʿIshāʾ en {minutes} min",
         "body": "La oración de ʿIshāʾ comienza a las {time}. Minutos restantes: {minutes}.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Recordatorio de Taḥajjud",
         "body": "Dedica un momento a Taḥajjud, a las súplicas y a pedir perdón.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": false
       },
       "daily_dua": {
         "title": "Súplica del día",
         "body": "Lee la súplica de hoy en la aplicación.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_recommendation": {
         "title": "Recomendado hoy",
         "body": "Descubre la recomendación de hoy en la aplicación.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "daily_ayah": {
         "title": "Āyah del día",
         "body": "Lee la āyah de hoy del Qurʾān en la aplicación.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       },
       "new_post": {
         "title": "Nuevo artículo",
         "body": "Hay un nuevo artículo disponible en la aplicación.",
-        "status": "draft"
+        "status": "approved",
+        "reviewMethod": "AI_assisted_editorial",
+        "reviewDate": "2026-10-22",
+        "reviewScope": "generic_notification_copy_only",
+        "requiresRuntimeContentVerification": true
       }
     }
+  },
+  "review": {
+    "date": "2026-10-22",
+    "authorizedBy": "project owner in conversation on 2026-10-22",
+    "reviewerType": "AI-assisted multilingual editorial review, not human native-specialist audit",
+    "scope": "short generic notification titles and messages only; no Quran/Hadith quotations or grade claims",
+    "approvedCount": 135,
+    "languageCodes": [
+      "de",
+      "ar",
+      "en",
+      "tr",
+      "ku",
+      "ckb",
+      "bs",
+      "fr",
+      "es"
+    ],
+    "decisions": "Generic editorial copy accepted for integration testing and future approved copy inventory. No provider send authorization, scheduling or content-specific sourceHash verification.",
+    "corrections": {
+      "tr": [
+        {
+          "key": "prayer_fajr_entry",
+          "reason": "Gebräuchliche türkische Gebetsbezeichnung Sabah namazı statt Fecr namazı"
+        },
+        {
+          "key": "prayer_fajr_advance",
+          "reason": "Gebräuchliche türkische Gebetsbezeichnung Sabah namazı statt Fecr namazı"
+        }
+      ],
+      "ckb": [
+        {
+          "key": "prayer_dhuhr_entry",
+          "reason": "Gebräuchliche soranische Bezeichnung نوێژی نیوەڕۆ statt unüblicher Umschrift زوهر"
+        },
+        {
+          "key": "prayer_dhuhr_advance",
+          "reason": "Gebräuchliche soranische Bezeichnung نوێژی نیوەڕۆ statt unüblicher Umschrift زوهر"
+        }
+      ],
+      "bs": [
+        {
+          "key": "prayer_fajr_entry",
+          "reason": "Korrekte bosnische Fallbeugung und lokaler Gebetsname"
+        },
+        {
+          "key": "prayer_fajr_advance",
+          "reason": "Bosnisch: Genitiv -namaza und dynamische Vorwarnzeit"
+        },
+        {
+          "key": "prayer_dhuhr_entry",
+          "reason": "Korrekte bosnische Fallbeugung und lokaler Gebetsname"
+        },
+        {
+          "key": "prayer_dhuhr_advance",
+          "reason": "Bosnisch: Genitiv -namaza und dynamische Vorwarnzeit"
+        },
+        {
+          "key": "prayer_asr_entry",
+          "reason": "Korrekte bosnische Fallbeugung und lokaler Gebetsname"
+        },
+        {
+          "key": "prayer_asr_advance",
+          "reason": "Bosnisch: Genitiv -namaza und dynamische Vorwarnzeit"
+        },
+        {
+          "key": "prayer_maghrib_entry",
+          "reason": "Korrekte bosnische Fallbeugung und lokaler Gebetsname"
+        },
+        {
+          "key": "prayer_maghrib_advance",
+          "reason": "Bosnisch: Genitiv -namaza und dynamische Vorwarnzeit"
+        },
+        {
+          "key": "prayer_isha_entry",
+          "reason": "Korrekte bosnische Fallbeugung und lokaler Gebetsname"
+        },
+        {
+          "key": "prayer_isha_advance",
+          "reason": "Bosnisch: Genitiv -namaza und dynamische Vorwarnzeit"
+        }
+      ],
+      "es": [
+        {
+          "key": "prayer_fajr_entry",
+          "reason": "Spanisch: natürliche Formulierung für Eintritt des Gebetszeitpunkts"
+        },
+        {
+          "key": "prayer_dhuhr_entry",
+          "reason": "Spanisch: natürliche Formulierung für Eintritt des Gebetszeitpunkts"
+        },
+        {
+          "key": "prayer_asr_entry",
+          "reason": "Spanisch: natürliche Formulierung für Eintritt des Gebetszeitpunkts"
+        },
+        {
+          "key": "prayer_maghrib_entry",
+          "reason": "Spanisch: natürliche Formulierung für Eintritt des Gebetszeitpunkts"
+        },
+        {
+          "key": "prayer_isha_entry",
+          "reason": "Spanisch: natürliche Formulierung für Eintritt des Gebetszeitpunkts"
+        }
+      ]
+    },
+    "nativeSpeakerCertified": false,
+    "prayerTimesCalculationReviewed": false,
+    "pushRoutingApproved": false,
+    "deviceDeliveryApproved": false
   }
 }
