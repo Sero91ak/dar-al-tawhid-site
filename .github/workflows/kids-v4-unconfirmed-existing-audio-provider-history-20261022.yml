@@ -57,8 +57,17 @@ jobs:
                   'newSynthesisRequests':0,'newElevenLabsSpeechCredits':0,
                   'humanPronunciationApproved':False,'publicReleaseAllowed':False,
                   'queries':[],'results':[]}
-          key=__import__('os').environ.get('ELEVENLABS_API_KEY','')
-          if not key:
+          raw_key=__import__('os').environ.get('ELEVENLABS_API_KEY','')
+          key=raw_key.strip()
+          output['credentialsFormat']={
+            'hasValue':bool(key),
+            'containsWhitespaceInside':any(c.isspace() for c in key),
+            'containsNonASCII':any(ord(c)>127 for c in key),
+            'trimmedOuterWhitespace':len(raw_key)!=len(key)
+          }
+          if key and (any(ord(c)<33 or ord(c)>126 for c in key)):
+              output['providerAccess']='INVALID_SECRET_ASCII_FORMAT_NO_REQUEST'
+          elif not key:
               output['providerAccess']='MISSING_SECRET_NO_PROVIDER_REQUEST'
           else:
               output['providerAccess']='READ_ONLY'
@@ -91,8 +100,19 @@ jobs:
                                       'httpStatus':e.code,'readOnly':True})
                           break
                       except (OSError,ValueError,RuntimeError) as e:
+                          # Only sanitized error class: never print any API credential,
+                          # unsafe request headers or provider response body.
+                          msg=str(e).lower()
+                          err='UNKNOWN_PROVIDER_OR_NETWORK_EXCEPTION'
+                          if 'header' in msg:err='REQUEST_HEADER_REJECTED'
+                          elif 'invalid url' in msg or 'unknown url' in msg:err='MALFORMED_URL'
+                          elif 'proxy' in msg:err='PROXY_CONFIGURATION'
+                          elif 'utf' in msg or 'ascii' in msg:err='NONASCII_CREDENTIAL_OR_RESPONSE'
+                          elif 'quota' in msg or 'timeout' in msg:err='PROVIDER_LIMIT_OR_TIMEOUT'
                           output['queries'].append({'source':source,'page':page,
-                                      'errorClass':type(e).__name__,'readOnly':True})
+                                      'errorClass':type(e).__name__,
+                                      'sanitizedReason':err,
+                                      'readOnly':True})
                           break
                       rows=data.get('history',[])
                       output['queries'].append({'source':source,'page':page,'resultCount':len(rows),
