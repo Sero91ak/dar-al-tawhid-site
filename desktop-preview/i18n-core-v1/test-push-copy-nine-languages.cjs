@@ -42,7 +42,12 @@ test("135 explicitly delegated editorially approved generic copy pairs, not live
    const item=data.copy[code][key];
    assert.equal(item.status,"approved",code+":"+key);
    assert.equal(item.reviewMethod,"AI_assisted_editorial");
-   assert.equal(item.reviewScope,"generic_notification_copy_only");
+   const scope = key.startsWith("prayer_")
+     ? "exact_production_German_semantic_parity"
+     : (key==="daily_dua"||key==="daily_recommendation")
+       ? "configured_German_fallback_semantic_parity"
+       : "generic_notification_copy_only";
+   assert.equal(item.reviewScope,scope,code+":"+key+" review scope");
    assert.equal(item.requiresRuntimeContentVerification,["daily_dua","daily_recommendation","daily_ayah","new_post"].includes(key));
    assert.ok(typeof item.title==="string"&&item.title.trim(),code+":"+key+" missing title");
    assert.ok(typeof item.body==="string"&&item.body.trim(),code+":"+key+" missing body");
