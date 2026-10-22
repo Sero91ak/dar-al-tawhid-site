@@ -32,6 +32,20 @@ body.desktop-overhaul-v18 :is(.dar-v8-lang-toggle,.dar-v8-player-fullscreen-togg
 }
 .dar-v8-language-menu button:hover,
 .dar-v8-language-menu button:focus-visible{background:color-mix(in srgb,var(--v8-gold) 13%,var(--v8-paper));border-color:var(--v8-line)}
+.dar-v8-language-menu button[aria-pressed="true"]{
+ border-color:color-mix(in srgb,var(--v8-gold) 58%,transparent);
+ background:color-mix(in srgb,var(--v8-gold) 12%,var(--v8-paper));
+ box-shadow:inset 3px 0 0 var(--v8-gold)
+}
+.dar-v8-language-menu button:disabled{
+ opacity:.58;cursor:not-allowed;
+ border-color:color-mix(in srgb,var(--v8-line) 60%,transparent);
+ font-weight:500
+}
+.dar-v8-language-menu button:disabled:is(:hover,:focus-visible){
+ background:transparent;border-color:color-mix(in srgb,var(--v8-line) 60%,transparent)
+}
+.dar-v8-language-settings option:disabled{color:var(--v8-muted)}
 .dar-v8-language-menu small{color:var(--v8-muted);font-size:11px;line-height:1.65;padding:8px 4px}
 body.desktop-overhaul-v18 .dar-v8-language-settings{
  max-width:1200px;margin:15px auto 25px;padding:clamp(18px,3vw,29px) 0;
