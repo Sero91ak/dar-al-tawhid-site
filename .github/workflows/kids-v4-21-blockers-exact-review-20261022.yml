@@ -5,6 +5,7 @@ on:
       - review/kids-v4-nine-prepaid-artifact-replay-20261022
     paths:
       - '.github/workflows/kids-v4-21-blockers-exact-review-20261022.yml'
+      - 'kids/review-only/quiz-v4-450-remaining21-audio-blocker-ledger-20261022.json'
   workflow_dispatch:
 permissions:
   contents: read
@@ -71,10 +72,33 @@ jobs:
                       {'exact':v,'classification':categories.get(v,'UNMAPPED_NEEDS_SOURCE_INSPECTION')}
                       for v in segments
                   ]})
+              exactActual={(p['part'],segment['exact'])
+                           for p in partrows for segment in p['missingSourceSegments']}
+              exactLedger={(row['part'],row['text']) for row in q['missingFragments']}
+              assert exactActual==exactLedger, (qid, sorted(exactActual-exactLedger),
+                                                 sorted(exactLedger-exactActual))
               missingParts+=len(actually_missing)
               results.append({'questionId':qid,'ageBand':q['ageBand'],
                               'missingParts':partrows})
           assert len(results)==21 and missingParts==27
+          allDistinct={segment['exact']:segment['classification']
+                      for q in results for part in q['missingParts']
+                      for segment in part['missingSourceSegments']}
+          assert len(allDistinct)==33, ('missing distinct original refs',len(allDistinct))
+          mapCategory={
+              'PREVIOUSLY_RESERVED_PROVIDER_UNRECONCILED':'RESERVED_UNCONFIRMED_TTS',
+              'NOT_YET_GENERATED_AFTER_OWNER_AUDITORY_PILOT':'NEW_V4_REQUIRED_AFTER_APPROVED_PILOT',
+              'PREVIOUS_PROVIDER_REQUEST_UNCONFIRMED':'PREVIOUS_PROVIDER_REQUEST_UNCONFIRMED_DO_NOT_REBUY',
+              'QUARANTINED_PREVIOUS_ORIGINAL':'QUARANTINED_PRONUNCIATION',
+              'BLOCKED_EXISTING_ORIGINAL':'QUARANTINED_PRONUNCIATION',
+          }
+          byBlocker={}
+          for cat in allDistinct.values():
+              assert cat in mapCategory, cat
+              kind=mapCategory[cat]
+              byBlocker[kind]=byBlocker.get(kind,0)+1
+          assert byBlocker==gaps['byBlocker'],(byBlocker,gaps['byBlocker'])
+          assert fresh['newTextCount']==15 and fresh['newCharacters']==1055
           from collections import Counter
           classificationCounts=Counter(
               segment['classification']
