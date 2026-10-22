@@ -155,6 +155,20 @@
   ],
   "unlockedScopes": [
     {
+        "id": "adult-onesignal-app-locale-sync-safe-20261022",
+        "at": "2026-10-22T05:50:42.672Z",
+        "approvedBy": "user-explicit-20261022-one-signal-selected-app-language-push",
+        "reason": "Client-only adult OneSignal setLanguage for already selected app language, and presentation-only reviewed-copies helper. No permission requests, subscriptions, live sender changes, prayer calculations or Kids app.",
+        "paths": [
+            "assets/dar-onesignal-language-sync.js",
+            "cloudflare/push-nine-language-copy.js",
+            "cloudflare/site-router.js",
+            "desktop-preview/i18n-core-v1/test-safe-onesignal-app-locale.cjs",
+            "content/admin/change-scope-lock.json"
+        ],
+        "expiresAt": "2026-11-06T23:59:00.000Z"
+    },
+    {
       "id": "push-secure-actions-secret-gate-20261022",
       "at": "2026-10-22T06:50:00+02:00",
       "approvedBy": "user-explicit-20261022-activate-multilingual-push-with-existing-protection",
