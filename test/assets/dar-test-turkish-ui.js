@@ -576,7 +576,13 @@ function isPostRoute(){
  return ["post","posts","recent","beitraege","beiträge","article"].includes(route);
 }
 function apply(root=global.document?.body,locale=currentLocale()){
- if(!root||isPostRoute())return 0;
+ if(!root)return 0;
+ if(isPostRoute()){
+  const html=global.document?.documentElement;
+  if(html){html.lang=locale;html.dir=rtl.has(locale)?"rtl":"ltr"}
+  // Posts remain in German, but the selected app language is still reflected.
+  return 0;
+ }
  const doc=global.document;
  if(root.nodeType===1&&!shouldSkip(root))transformAttributes(root,locale);
  renderHomeWelcome(locale);
