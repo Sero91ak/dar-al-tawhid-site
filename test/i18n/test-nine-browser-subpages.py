@@ -42,9 +42,9 @@ function add(value, kind) {
  seen.add(hash);rows.push({kind:kind,text:s});
 }
 for (const el of document.querySelectorAll(
- 'button,label,summary,[role="tab"],[role="menuitem"],input[placeholder],textarea[placeholder],[aria-label],[title]')) {
+ 'button,label,summary,[role="tab"],[role="menuitem"],input[placeholder],textarea[placeholder],[aria-label],[aria-description],[title],img[alt]')) {
  if (!visible(el)) continue;
- for (const prop of ['placeholder','aria-label','title']) {
+ for (const prop of ['placeholder','aria-label','aria-description','title','alt']) {
   const value=el.getAttribute(prop);
   if (value) { add(value,prop); attrs.push(value.replace(/\s+/g,' ').trim()); }
  }
