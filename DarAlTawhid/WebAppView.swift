@@ -132,6 +132,14 @@ struct WebAppView: UIViewRepresentable {
             window.Notification.requestPermission=function(){return Promise.resolve("granted")};
           }catch(e){}
         })();
+        """
+        userContentController.addUserScript(
+            WKUserScript(
+                source: iosNativePushBridge,
+                injectionTime: .atDocumentStart,
+                forMainFrameOnly: true
+            )
+        )
         let localeBridge = """
         (function(){
           if(window.__darAdultLocaleBridgeInstalled)return;
@@ -159,6 +167,7 @@ struct WebAppView: UIViewRepresentable {
           };
           window.addEventListener(eventName,function(event){
             var d=event&&event.detail;
+            if(d&&typeof d === "object"&&d.source === "native")return;
             var value=typeof d==="string"?d:(d&&(d.locale||d.language||d.identifier));
             if(!value){try{value=localStorage.getItem(key)||"";}catch(e){}}
             send(value);
@@ -171,14 +180,6 @@ struct WebAppView: UIViewRepresentable {
         userContentController.addUserScript(
             WKUserScript(
                 source: localeBridge,
-                injectionTime: .atDocumentStart,
-                forMainFrameOnly: true
-            )
-        )
-        """
-        userContentController.addUserScript(
-            WKUserScript(
-                source: iosNativePushBridge,
                 injectionTime: .atDocumentStart,
                 forMainFrameOnly: true
             )
@@ -865,6 +866,7 @@ struct WebAppView: UIViewRepresentable {
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushReactivate")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darPushExternalId")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppIcon")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darLanguageChanged")
             NotificationCenter.default.removeObserver(self)
         }
 
@@ -1015,18 +1017,6 @@ struct WebAppView: UIViewRepresentable {
                 }
                 return
             }
-        func updateLocale(_ locale: String, hasManualLocale: Bool) {
-            guard self.preferredLocale != locale || self.hasManualLocale != hasManualLocale else { return }
-            self.preferredLocale = locale
-            self.hasManualLocale = hasManualLocale
-            guard hasCompletedInitialLoad, let webView else { return }
-            let escapedLocale = locale
-                .replacingOccurrences(of: "\\", with: "\\\\")
-                .replacingOccurrences(of: "\"", with: "\\\"")
-            let force = hasManualLocale ? "true" : "false"
-            let js = "window.__darApplyNativeAdultLocale && window.__darApplyNativeAdultLocale(\"\(escapedLocale)\", \(force));"
-            webView.evaluateJavaScript(js, completionHandler: nil)
-        }
             if message.name == "darPushTest" {
                 let body = message.body as? [String: Any] ?? [:]
                 DarPushNotifications.showTest(
@@ -1120,6 +1110,19 @@ struct WebAppView: UIViewRepresentable {
             let href = (body["href"] as? String).flatMap(URL.init(string:))
             let sourceURL = href ?? webView?.url ?? DarAppShell.launchURL
             openLibraryPDF(slug: slug, sourceURL: sourceURL)
+        }
+
+        func updateLocale(_ locale: String, hasManualLocale: Bool) {
+            guard self.preferredLocale != locale || self.hasManualLocale != hasManualLocale else { return }
+            self.preferredLocale = locale
+            self.hasManualLocale = hasManualLocale
+            guard hasCompletedInitialLoad, let webView else { return }
+            let escapedLocale = locale
+                .replacingOccurrences(of: "\\", with: "\\\\")
+                .replacingOccurrences(of: "\"", with: "\\\"")
+            let force = hasManualLocale ? "true" : "false"
+            let js = "window.__darApplyNativeAdultLocale && window.__darApplyNativeAdultLocale(\"\(escapedLocale)\", \(force));"
+            webView.evaluateJavaScript(js, completionHandler: nil)
         }
 
         func webView(
