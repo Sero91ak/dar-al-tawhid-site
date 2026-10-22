@@ -78,7 +78,7 @@
       } catch (_) {}
       var bounds = measure();
       return bounds.width >= 760 && bounds.height >= 560 && !bounds.keyboard
-        ? "left" : "bottom";
+        ? (document.documentElement.dir === "rtl" ? "right" : "left") : "bottom";
     }
     return "bottom";
   }
