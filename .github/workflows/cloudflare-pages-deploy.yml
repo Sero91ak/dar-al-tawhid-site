@@ -491,6 +491,8 @@ jobs:
           INTEGRITY_BASE_REF: ${{ github.event.before || '' }}
           CHANGE_SCOPE_LOCK_COMMIT_ONLY: "1"
           GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
+          # The existing SHA256 password gate stays enforced, but the secret is never in a commit.
+          DAR_PUSH_UNLOCK_PASSWORD: ${{ secrets.DAR_PUSH_UNLOCK_PASSWORD }}
         run: |
           node scripts/app-health-check.js
           if [ "${{ needs.classify.outputs.kids_touched }}" = "true" ]; then
