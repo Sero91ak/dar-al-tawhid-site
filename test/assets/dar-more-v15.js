@@ -60,7 +60,7 @@ function renderOurApps(){
   <button type="button" class="dm-exact-action dm-exact-kids-locked" disabled aria-label="TAWḤĪD KIDS ist noch nicht verfügbar"><span class="dm-exact-sr">Demnächst verfügbar</span></button>
  </article>
  </div>
- <p class="dm-showcase-footnote">Gerätedarstellungen mit Werbemotiven aus unserer Vorschau. Keine App-Store-Screenshots.</p>
+ <p class="dm-showcase-footnote">Gerätedarstellungen mit Werbemotiven aus unserer Vorschau. Keine App-Store-Screenshots.</p><a class="dm-i18n-reader-link" href="/test/i18n/?post=hasan-al-basri-selbstpruefung-20261021-481">Sprachfassung prüfen · DAR TEST</a>
  </section>`;
 }
 
