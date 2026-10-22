@@ -38,7 +38,7 @@ const bySection={
 };
 for(const code of codes){
  const strings=pack.translations[code];
- assert(strings&&Object.keys(strings).length>=786,"Insufficient "+code+" UI entries");
+ assert(strings&&Object.keys(strings).length>=800,"Insufficient "+code+" UI entries");
  for(const [section,labels] of Object.entries(bySection))
   for(const source of labels){
    const localized=strings[source];
