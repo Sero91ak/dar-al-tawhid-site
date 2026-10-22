@@ -42,6 +42,10 @@ jobs:
       - name: Refresh derived audio previews and QA in the ephemeral runner only
         run: |
           set -euo pipefail
+          if ! command -v ffprobe >/dev/null || ! command -v ffmpeg >/dev/null; then
+            sudo apt-get update -qq
+            sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq ffmpeg
+          fi
           command -v ffprobe
           command -v ffmpeg
           python3 kids/tools/qa_quiz_v4_saved_mp3.py
