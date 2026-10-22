@@ -52,7 +52,7 @@ for(const locale of ["tr","en","ar","ku","ckb","bs","fr","es"]){
  assert(nonLatin?.endsWith(" القاهرة"),"Non-Latin city names must remain intact: "+locale);
  assert.equal(t("Standort gespeichert: <script>",locale),null,
   "HTML should never be interpreted as a dynamic location caption");
- assert.equal(t("Standort gespeichert: Bad\\nInput",locale),null,
+ assert.equal(t("Standort gespeichert: Bad\nInput",locale),null,
   "Multiline input must not become a dynamic location caption");
 }
 // Weather status is dynamically assembled on Home. Translate app chrome only;
