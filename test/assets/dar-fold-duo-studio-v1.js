@@ -20,7 +20,9 @@
     var rail=Math.min(310,Math.max(228,Math.round(width*.335)));
     var room=width-rail-34;
     var split=width>=680&&height>=500&&room>=370;
-    e.dataset.darStudioMode=split?"split":width>=600?"medium":"compact";
+    var desktop=split&&width>=800&&height>=560&&(room-74)>=390;
+    e.dataset.darStudioCapacity=split?"dual":"single";
+    e.dataset.darStudioMode=desktop?"desktop":split?"split":width>=600?"medium":"compact";
     e.style.setProperty("--dar-studio-rail",rail+"px");
   }
   function original(){
@@ -46,6 +48,53 @@
       '<button class="dar-studio-action dar-studio-original" type="button" data-dar-fold-action="original" aria-label="Zur Originalansicht zurück">Zurück</button>';
     target.appendChild(bar);
   }
+
+  // One visible navigation at a time: desktop rail forwards to the REAL
+  // bottom-nav buttons, preserving their original routing and handlers.
+  var tabs=[
+    ["home","Start","home.png"],
+    ["ilm","ʿIlm","ilm.png"],
+    ["recent","Beiträge","posts.png"],
+    ["quran","Qurʾān","quran.png"],
+    ["more","Mehr","more.png"]
+  ];
+  function sideRail(){
+    if(d.getElementById("darStudioSideNav"))return;
+    var nav=d.createElement("nav");nav.id="darStudioSideNav";nav.className="dar-studio-side";
+    nav.setAttribute("aria-label","Hauptnavigation bei großem Display");
+    nav.innerHTML='<span class="dar-studio-side-logo" aria-hidden="true">د</span>'+
+      tabs.map(function(tab){
+        return '<button class="dar-studio-side-btn" type="button" data-dar-studio-route="'+tab[0]+'" aria-label="'+tab[1]+'" title="'+tab[1]+'">'+
+          '<img src="/test/assets/dar-3d-icons/'+tab[2]+'" alt="" loading="lazy" decoding="async"><span>'+tab[1]+'</span></button>';
+      }).join("");
+    d.documentElement.appendChild(nav);
+  }
+  function syncSide(){
+    var all=d.querySelectorAll("#darStudioSideNav [data-dar-studio-route]");
+    if(!all.length)return;
+    var active=d.querySelector("#bottomNav .bottom-nav-btn.active,#bottomNav .bottom-nav-btn.is-active,#bottomNav .bottom-nav-btn[aria-current='page']");
+    var name=active&&active.getAttribute("data-bottom-nav");
+    if(!name){
+      var hash=(w.location.hash||"").toLowerCase();
+      name=hash.indexOf("quran")>=0?"quran":hash.indexOf("ilm")>=0?"ilm":
+        hash.indexOf("post")>=0||hash.indexOf("recent")>=0?"recent":
+        hash.indexOf("more")>=0||hash.indexOf("settings")>=0?"more":"home";
+    }
+    all.forEach(function(btn){
+      var isActive=btn.getAttribute("data-dar-studio-route")===name;
+      btn.classList.toggle("is-active",isActive);
+      if(isActive)btn.setAttribute("aria-current","page");
+      else btn.removeAttribute("aria-current");
+    });
+  }
+  d.addEventListener("click",function(ev){
+    var button=ev.target.closest&&ev.target.closest("[data-dar-studio-route]");
+    if(!button)return;
+    ev.preventDefault();ev.stopPropagation();
+    var target=d.querySelector('#bottomNav [data-bottom-nav="'+button.getAttribute("data-dar-studio-route")+'"]');
+    if(target)target.click();
+    schedule();
+  },true);
   function panel(){
     var home=d.querySelector("#appView .dsh-shell.dsh-home");
     if(!home||home.querySelector(".dar-studio-settings"))return;
@@ -63,7 +112,7 @@
     var welcome=home.querySelector(".dsh-welcome");
     if(welcome)welcome.after(p);else home.prepend(p);
   }
-  function enhance(){dimensions();header();panel()}
+  function enhance(){dimensions();header();sideRail();panel();syncSide()}
   function schedule(){
     if(scheduled)return;scheduled=true;
     (w.requestAnimationFrame||function(fn){setTimeout(fn,0)})(function(){scheduled=false;enhance()});
@@ -89,5 +138,7 @@
   w.addEventListener("orientationchange",schedule,{passive:true});
   if(w.visualViewport)w.visualViewport.addEventListener("resize",schedule,{passive:true});
   w.addEventListener("pageshow",schedule,{passive:true});
+  w.addEventListener("hashchange",schedule,{passive:true});
+  d.addEventListener("dar:view-rendered",schedule);
   w.DARFoldDuoStudio=Object.freeze({refresh:schedule,returnToOriginal:original});
 })(window,document);
