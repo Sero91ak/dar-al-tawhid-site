@@ -36,6 +36,16 @@ Bei jeder Aufgabe:
 15. **Änderungen an der privaten Admin-App** (`admin/**`, inkl. KI-Video-Studio) werden **direkt gepusht und live für die Admin-App ausgerollt**, sobald sie fertig sind: Commit → Push auf `main` (bzw. Deploy-Workflow `deploy-live-admin-app`) → Admin-UI ist aktuell. Kein separates „push live“ abwarten.
 16. Das betrifft **nicht** die Besucher-App und **nicht** automatische Besucher-Pushs. Feed-/Push-Aktionen aus dem Video-Studio bleiben manuell.
 
+## Erwachsenen-Besucher-Parität: Website ↔ Android-PWA (22.10.2026)
+
+**Verbindliche Regel:** Jede Änderung an der Erwachsenen-Besucher-App, die Navigation, Sprachen, UI-Elemente, Einstellungen oder gemeinsame Web-Assets betrifft, gilt zugleich für die installierte Android-PWA unter `/pwa/?pwa=1`, die Android-WebView und gemeinsame iOS-WKWebView-Oberflächen, sofern diese denselben Webcode verwenden. Keine eigenständigen Sprachkopien pro Oberfläche. Die eigenständige Kinder-App ist ausdrücklich ausgeschlossen.
+
+- Die Android-PWA erhält HTML aus der kanonischen Erwachsenen-`index.html` über `cloudflare/site-router.js`; ihr isolierter Service Worker `pwa/service-worker.js` darf diese Sprache/UI nicht dauerhaft durch eine alte Offline-Shell verdecken. Online bevorzugt frische Besucher-HTML, offline gilt der gesicherte Cache.
+- Eine zentrale Spracheinstellung `darAdultPreferredLocaleV1` und die gemeinsame Sprachauswahl `assets/i18n/adult-language-picker-v1.js` für Besucher- und PWA-Oberfläche. Sprachpakete nur dann aktivieren, wenn die zugehörige UI-Fassung real geladen und verfügbar ist. Nicht freigegebene Fassungen sichtbar als „Demnächst verfügbar“. Neue Sprachen aus zentralem Register berücksichtigen; Arabisch und Soranî rechts-nach-links.
+- Bei jeder Besucher-App-UI-Änderung `node scripts/adult-language-pwa-parity-guard.cjs` ausführen und auf Mobilbrowser **und** installierter Android-PWA die Änderung kontrollieren. Der CI-Check gehört zum App Health Check.
+- Bestehende Offline-Daten, Medien, Service-Worker-Scope und Installationskennung der Android-PWA bewahren. Keine pauschale Cache-Löschung oder erzwungene Neuinstallation. Inhaltliche oder religiöse Übersetzungen brauchen weiterhin eigene Prüfung und Freigabe.
+- Ein GitHub-Merge beweist keine Android-PWA-Live-Auslieferung. Cloudflare-Deploy, neue Netz-Hülle, Offline-Fallback und die tatsächliche Darstellung auf dem Gerät getrennt prüfen.
+
 ## App-Spuren (Sprache verstehen – Kids eigenständig)
 
 17. **Kids ist eine eigenständige App.** „Global“, „alle Apps“, „überall“, „iOS“, „Web-App“, „Website“, „Apple TV“ meinen **nicht** die Kids-App. Kids nur ändern, wenn der Nutzer ausdrücklich **Kids** / **Kinder-App** sagt.
