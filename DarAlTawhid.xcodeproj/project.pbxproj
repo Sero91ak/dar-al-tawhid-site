@@ -45,6 +45,7 @@
 		CF5CFE4A3089E4F10013C426 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CF5CFE483089E4F10013C426 /* InfoPlist.xcstrings */; };
 		CF5CFE4B3089E4F10013C426 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CF5CFE493089E4F10013C426 /* Localizable.xcstrings */; };
 		CF5CFE593089E4F10013C426 /* InfoPlist.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = CF5CFE583089E4F10013C426 /* InfoPlist.xcstrings */; };
+		CF5CFE5F308A05870013C426 /* DarLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF5CFE5E308A05870013C426 /* DarLanguage.swift */; };
 		CF79AADC3086B0C6008C8051 /* DarPermissionOnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF79AADB3086B0C6008C8051 /* DarPermissionOnboardingView.swift */; };
 		CF8DBA96307170E900A53AFF /* DarCarPlayAudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8DBA95307170E900A53AFF /* DarCarPlayAudioService.swift */; };
 		CF8DBA98307170F600A53AFF /* DarCarPlaySceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF8DBA97307170F600A53AFF /* DarCarPlaySceneDelegate.swift */; };
@@ -282,6 +283,7 @@
 		CF5CFE483089E4F10013C426 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		CF5CFE493089E4F10013C426 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		CF5CFE583089E4F10013C426 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
+		CF5CFE5E308A05870013C426 /* DarLanguage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarLanguage.swift; sourceTree = "<group>"; };
 		CF79AADB3086B0C6008C8051 /* DarPermissionOnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarPermissionOnboardingView.swift; sourceTree = "<group>"; };
 		CF8DBA95307170E900A53AFF /* DarCarPlayAudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarCarPlayAudioService.swift; sourceTree = "<group>"; };
 		CF8DBA97307170F600A53AFF /* DarCarPlaySceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarCarPlaySceneDelegate.swift; sourceTree = "<group>"; };
@@ -543,6 +545,7 @@
 				CFD58C0D3085F5F3002BE8B2 /* StandByRoyalDashboardView.swift */,
 				CFD58C0F3085F60D002BE8B2 /* StandByRoyalSettingsView.swift */,
 				CF79AADB3086B0C6008C8051 /* DarPermissionOnboardingView.swift */,
+				CF5CFE5E308A05870013C426 /* DarLanguage.swift */,
 			);
 			path = DarAlTawhid;
 			sourceTree = "<group>";
@@ -1101,6 +1104,7 @@
 				A10000000000000000000008 /* DarWidgetStore.swift in Sources */,
 				A10000000000000000000009 /* DarPrayerEngine.swift in Sources */,
 				CFFD3AF63065465A005EB105 /* DATWidgetSnapshotModels.swift in Sources */,
+				CF5CFE5F308A05870013C426 /* DarLanguage.swift in Sources */,
 				CFECE9A1305DC9BB008EFB06 /* DarWidgetLocationService.swift in Sources */,
 				B50000000000000000000001 /* DarPrayerPushCopy.swift in Sources */,
 				CF79AADC3086B0C6008C8051 /* DarPermissionOnboardingView.swift in Sources */,
