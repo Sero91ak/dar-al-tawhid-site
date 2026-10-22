@@ -20,8 +20,9 @@ assert.ok(root.includes("/assets/i18n/adult-language-picker-v1.js?v="),"Adult ro
 assert.ok(root.includes("/assets/dar-more-v15.js?v="),"Adult root has no Mehr runtime");
 assert.ok(more.includes('data-dar-language-entry="quick"'),"Mehr does not mount shared picker");
 assert.ok(translate.includes('data-dar-language-entry","settings"'),"Settings does not mount shared picker");
-for(const file of [picker,more,translate])
+for(const file of [picker,translate])
   assert.ok(file.includes("darAdultPreferredLocaleV1"),"Locale preference diverges");
+assert.ok(!more.includes("localStorage.setItem(\"darAdultPreferredLocaleV1\""),"Mehr must use shared picker rather than a second preference writer");
 assert.ok(router.includes('const target = new URL("/", url.origin)'),"PWA no longer reuses canonical adult root HTML");
 assert.ok(router.includes('X-Dar-Surface", "android-pwa-app"'),"Dedicated PWA surface missing");
 assert.ok(sw.includes("freshShellWithOfflineFallback(request,event)"),"PWA keeps stale language HTML");
