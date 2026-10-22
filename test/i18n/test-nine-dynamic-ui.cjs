@@ -65,6 +65,15 @@ for(const [locale,expected] of Object.entries(metaExamples)){
 }
 // Only six allowlisted taxonomy names may precede an interface publication count.
 for(const locale of ["tr","en","ar","ku","ckb","bs","fr","es"]){
+ const shortDate=t("Do., 22.10.26",locale);
+ const expectedShortDate=new Intl.DateTimeFormat({
+  tr:"tr-TR",en:"en-GB",ar:"ar-EG-u-ca-gregory",ku:"ku-TR",
+  ckb:"ckb-IQ-u-ca-gregory",bs:"bs-BA",fr:"fr-FR",es:"es-ES"
+ }[locale],{weekday:"short",day:"2-digit",month:"2-digit",year:"2-digit",timeZone:"UTC"})
+  .format(new Date(Date.UTC(2026,9,22)));
+ assert.equal(shortDate,expectedShortDate,"Gregorian status date "+locale);
+ assert.equal(t("Mo., 22.10.26",locale),null,"Reject mismatched Gregorian weekday "+locale);
+ assert.equal(t("Do., 32.10.26",locale),null,"Reject impossible Gregorian date "+locale);
  const time=t("Duʿāʾ 09:00 · Empfehlung 12:00",locale);
  assert(time&&time.includes("09:00")&&time.includes("12:00")&&!time.includes("Empfehlung"),
   "Timed UI status must translate its labels and preserve scheduled times: "+locale);
