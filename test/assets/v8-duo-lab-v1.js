@@ -100,13 +100,21 @@
     topActions=dom("div","dar-v8-quick-actions");
     topActions.id="darV8QuickActions";
     var items=[
-      ["language","🌐","Sprachauswahl öffnen"],
-      ["account","♙","Konto öffnen"],
-      ["appearance","◉","Farben und Erscheinungsbild öffnen"]
+      ["language","","Sprachauswahl öffnen"],
+      ["account","lock.png","Konto öffnen"],
+      ["appearance","image.png","Farben und Erscheinungsbild öffnen"]
     ];
     items.forEach(function(a){
-      var b=dom("button","dar-v8-quick-btn",a[1]);
+      var b=dom("button","dar-v8-quick-btn");
       b.type="button";b.dataset.v8Quick=a[0];b.setAttribute("aria-label",a[2]);
+      if(a[1]){
+        var img=dom("img","dar-v8-quick-3d");
+        img.src="/test/assets/dar-3d-icons/"+a[1];img.alt="";img.decoding="async";
+        b.appendChild(img);
+      }else{
+        var globe=dom("span","dar-v8-quick-language-icon","🌐");
+        globe.setAttribute("aria-hidden","true");b.appendChild(globe);
+      }
       b.title=a[2];topActions.appendChild(b);
     });
     row.appendChild(topActions);
