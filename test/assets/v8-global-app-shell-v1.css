@@ -1,0 +1,282 @@
+/* DĀR AL TAWḤĪD · V8 GLOBAL TEST SHELL · 2026-10-22
+   ONE exterior design for all adult DAR TEST routes.
+   Protected: post/dua/Qur'an content, audio engines, links, share actions, forms.
+   Scope: html.dar-v8-global only; no edits to shared or production CSS. */
+html.dar-v8-global {
+  --v8-bg:#f5f6f1; --v8-panel:#fffefb; --v8-panel-soft:#f0f2eb;
+  --v8-ink:#19322b; --v8-ink-soft:#52675d; --v8-muted:#748479;
+  --v8-border:rgba(36,72,58,.15); --v8-gold:#a4844c;
+  --v8-forest:#153c32; --v8-shadow:0 18px 54px rgba(20,45,35,.07);
+  --v8-radius:22px; --v8-gutter:clamp(12px,2.65vw,30px);
+  --v8-nav-space:92px; --v8-ui-font:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+}
+html.dar-v8-global:is([data-theme="dark"],[data-theme="royal"],[data-theme="bordeaux"],[data-theme="dar-al-layl"]){
+  --v8-bg:#0e1917;--v8-panel:#16241f;--v8-panel-soft:#1a2c25;
+  --v8-ink:#f2f3e9;--v8-ink-soft:#b8cbbf;--v8-muted:#93a99b;
+  --v8-border:rgba(223,220,183,.15);--v8-gold:#dfc18b;
+  --v8-forest:#163c31;--v8-shadow:0 18px 50px rgba(0,0,0,.15)
+}
+html.dar-v8-global[data-theme="royal"]{
+  --v8-bg:#081629;--v8-panel:#12233b;--v8-panel-soft:#182d45;
+  --v8-ink:#f6ebd7;--v8-ink-soft:#b4c0ca;--v8-muted:#9caebb;
+  --v8-border:rgba(214,200,164,.18);--v8-gold:#e4c580;--v8-forest:#163b55
+}
+html.dar-v8-global[data-theme="bordeaux"]{
+  --v8-bg:#20161b;--v8-panel:#342630;--v8-panel-soft:#3d2b37;
+  --v8-ink:#f3e9dc;--v8-ink-soft:#c1b4b9;--v8-muted:#b4a5aa;
+  --v8-border:rgba(220,185,157,.19);--v8-gold:#e0b786;--v8-forest:#49303a
+}
+html.dar-v8-global:is([data-theme="soft"],[data-theme="eisgold"]){
+  --v8-bg:#f6f0e9;--v8-panel:#fffaf2;--v8-panel-soft:#f4e9df;
+  --v8-ink:#303a31;--v8-ink-soft:#58635c;--v8-gold:#a48649
+}
+html.dar-v8-global[data-theme-variant="salbei"]{
+  --v8-bg:#e9f0e9;--v8-panel:#f8fff8;--v8-panel-soft:#e8eee8;
+  --v8-ink:#203c32;--v8-ink-soft:#557162;--v8-forest:#315346
+}
+html.dar-v8-global body:not(.is-feed-fullscreen):not(.is-ilm-chat-route){
+  font-family:var(--v8-ui-font);color:var(--v8-ink);
+  background-color:var(--v8-bg);min-width:0;
+}
+html.dar-v8-global body:not(.is-feed-fullscreen):not(.is-ilm-chat-route) .app{
+  display:block;min-width:0;width:100%;max-width:none;box-sizing:border-box;
+}
+html.dar-v8-global body .app > .top-shell{
+  margin:0!important;padding:9px var(--v8-gutter) 0!important;
+  width:100%!important;max-width:100%!important;box-sizing:border-box;
+  border:0!important;min-height:0!important;
+  background:var(--v8-bg)!important;box-shadow:none!important
+}
+html.dar-v8-global body .app > .top-shell .header{
+  padding:8px 0 6px!important;margin:0!important;min-height:0!important;
+  border:0!important;background:transparent!important;
+  box-shadow:none!important
+}
+html.dar-v8-global body .app > .top-shell .brand{
+  min-width:0!important;max-width:100%;flex:1 1 auto
+}
+html.dar-v8-global body .app > .top-shell .brand-kicker-row{
+  font-size:clamp(9px,.95vw,11px);letter-spacing:.11em;opacity:.75
+}
+html.dar-v8-global body .app > .top-shell .brand-main{
+  display:flex;align-items:center;gap:10px;min-width:0;max-width:100%
+}
+html.dar-v8-global body .app > .top-shell .brand-main .logo{
+  width:clamp(40px,4vw,56px)!important;height:clamp(40px,4vw,56px)!important;
+  object-fit:contain;flex:none
+}
+html.dar-v8-global body .app > .top-shell .brand-title{
+  font-size:clamp(16px,1.9vw,26px)!important;line-height:1.08!important;
+  letter-spacing:.035em!important;max-width:100%;min-width:0;
+  overflow-wrap:normal;text-overflow:ellipsis;white-space:nowrap
+}
+/* The salam and the source rubric belong to HOME only: suppress duplicate
+   global hero clutter on all other app routes, never suppress post content. */
+html.dar-v8-global body:not(.is-home-route) .app > .top-shell .hero-text,
+html.dar-v8-global body:not(.is-home-route) .app > .top-shell > .isnad{
+  display:none!important
+}
+html.dar-v8-global body:not(.is-home-route) .app > .top-shell .header-prayer-hub{
+  max-width:min(100%,460px);margin:0 0 5px auto!important
+}
+html.dar-v8-global body.is-home-route .app > .top-shell .hero-text{
+  margin:6px 0 8px!important;padding:0!important;
+  max-width:min(100%,76ch)!important
+}
+html.dar-v8-global body.is-home-route .app > .top-shell .hero-text .salam{
+  font-size:clamp(17px,2.7vw,28px)!important;line-height:1.25!important
+}
+html.dar-v8-global body.is-home-route .app > .top-shell .hero-text .intro{
+  font-size:clamp(12px,1.2vw,15px)!important;line-height:1.45!important;
+  max-width:68ch
+}
+html.dar-v8-global body.is-home-route .app > .top-shell .isnad{
+  margin:7px 0 8px!important;padding:11px 16px!important;
+  border-top:1px solid var(--v8-border)!important;
+  border-bottom:1px solid var(--v8-border)!important;
+  box-shadow:none!important;border-radius:0!important;
+  background:transparent!important
+}
+html.dar-v8-global body.is-home-route .app > .top-shell .isnad-quote{
+  font-size:clamp(12px,1.3vw,16px)!important;line-height:1.4!important;
+  max-width:72ch
+}
+html.dar-v8-global body .app > .app-bar{
+  display:flex;align-items:center;gap:10px;min-width:0;
+  padding:5px var(--v8-gutter) 9px!important;
+  margin:0!important;min-height:0!important;
+  background:var(--v8-bg)!important;border-bottom:1px solid var(--v8-border)!important;
+  box-shadow:none!important;overflow:visible
+}
+html.dar-v8-global body .app > .app-bar :is(.app-actions,.post-reader-actions){
+  display:flex;align-items:center;gap:6px;min-width:0
+}
+html.dar-v8-global body .app > .app-bar #crumb{
+  flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;
+  font-size:clamp(11px,1.1vw,13px);color:var(--v8-muted)
+}
+html.dar-v8-global body .app > .app-bar :is(#backBtn,#homeBtn){
+  border-radius:12px!important;min-height:38px!important;
+  padding:7px 10px!important;white-space:nowrap
+}
+html.dar-v8-global body .app > #appView{
+  box-sizing:border-box!important;min-width:0!important;width:100%!important;
+  max-width:100%!important;margin:0!important;
+  padding:12px var(--v8-gutter) calc(var(--v8-nav-space) + env(safe-area-inset-bottom,0px))!important;
+  background:transparent!important;box-shadow:none!important
+}
+/* Unified editorial mastheads from the EXISTING SPA renderer. */
+html.dar-v8-global body #appView > .view-head,
+html.dar-v8-global body #appView .topics-hub > .view-head,
+html.dar-v8-global body #appView .topic-collection-page > .view-head,
+html.dar-v8-global body #appView .qov-page .qov-header{
+  isolation:isolate;position:relative;
+  padding:clamp(16px,2.35vw,28px)!important;
+  border:1px solid var(--v8-border)!important;
+  border-radius:var(--v8-radius)!important;
+  background:linear-gradient(130deg,color-mix(in srgb,var(--v8-forest) 8%,var(--v8-panel)),var(--v8-panel))!important;
+  color:var(--v8-ink)!important;
+  margin:0 0 clamp(10px,1.8vw,19px)!important;
+  min-height:0!important;box-shadow:var(--v8-shadow)!important;
+  box-sizing:border-box!important;max-width:100%!important
+}
+html.dar-v8-global body #appView .view-head :is(h1,h2),
+html.dar-v8-global body #appView .qov-page .qov-header :is(h1,h2){
+  font-family:"Cormorant Garamond",Georgia,serif!important;
+  font-size:clamp(24px,3.9vw,39px)!important;font-weight:650!important;
+  line-height:1.12!important;letter-spacing:-.016em!important;
+  margin:0 0 5px!important;color:var(--v8-ink)!important;
+}
+html.dar-v8-global body #appView .view-head .view-desc{
+  max-width:70ch;font-size:clamp(12px,1.25vw,15px)!important;
+  line-height:1.5!important;color:var(--v8-ink-soft)!important
+}
+html.dar-v8-global body #appView .view-head .eyebrow{
+  color:var(--v8-gold)!important;letter-spacing:.13em;
+  font-size:10px!important
+}
+/* One card geometry across existing library/knowledge, prayers, utilities.
+   Do not target .article, .post-body, verse runs, dua language blocks or shares. */
+html.dar-v8-global body #appView :is(
+  .post-grid,.folder-grid,.latest-grid,.grid-list,.lib-grid,
+  .dua-theme-grid,.topics-theme-grid,.feature-grid,.more-group-grid
+){
+  min-width:0!important;max-width:100%!important;
+  gap:clamp(9px,1.45vw,16px)!important
+}
+html.dar-v8-global body #appView :is(
+  .folder-card,.post-card,.list-card,.info-card,.dua-card,
+  .topics-theme-card,.dua-theme-card,.lib-card,.post-row,
+  .dua-row,.account-summary-card,.feature-card
+){
+  min-width:0!important;box-sizing:border-box!important;
+  border-radius:clamp(16px,1.9vw,22px)!important;
+  border-color:var(--v8-border)!important;
+  box-shadow:0 9px 28px color-mix(in srgb,var(--v8-ink) 5%,transparent);
+}
+html.dar-v8-global body #appView :is(
+  .post-row,.dua-row,.feature-card,.folder-card,.topics-theme-card,.dua-theme-card
+):is(:hover,:focus-within){
+  border-color:color-mix(in srgb,var(--v8-gold) 65%,transparent)!important
+}
+html.dar-v8-global body #appView :is(
+  .feature-section,.more-group,.prayer-overview,.account-panel,
+  .about-page,.zakat-view,.calendar-premium-page,.notification-center-page,
+  .settings-one-page,.books-library-shell,.source-library-page,
+  .qov-page,.quiz-shell,.dua-collection-page,.topic-collection-page
+){
+  min-width:0;max-width:100%;box-sizing:border-box
+}
+html.dar-v8-global body #appView :is(
+  .feature-section,.more-group,.account-panel,.about-page,.zakat-view,
+  .notification-center-page,.settings-one-page,.source-library-page
+){
+  border-radius:var(--v8-radius)
+}
+html.dar-v8-global body #appView :is(input,textarea,select){
+  max-width:100%;box-sizing:border-box;scroll-margin-top:12px
+}
+html.dar-v8-global body #appView :is(button,a,[role="button"]):focus-visible{
+  outline:2px solid var(--v8-gold);outline-offset:2px
+}
+/* Preserve every original readable document & its native sharing actions.
+   Narrow only the OUTER stage; allow internal source layout and RTL direction. */
+html.dar-v8-global body:is(
+  .is-post-route,.is-dua-route,.is-quran-reader-route,.is-library-reader-route
+) #appView{
+  --v8-reader-measure:min(100%,76ch)
+}
+html.dar-v8-global body:is(
+  .is-post-route,.is-dua-route,.is-quran-reader-route,.is-library-reader-route
+) #appView :is(
+  .article,.post-reader,.post-body,.dua-detail-box,.quran-ayah-list,.qrc-shell,.lib-detail
+){
+  box-sizing:border-box;min-width:0;max-width:var(--v8-reader-measure,100%);
+  margin-inline:auto
+}
+html.dar-v8-global body #appView :is(
+  .article-actions,.post-reader-actions,.dua-actions,.quran-ayah-actions,
+  .post-share-actions,.share-actions
+){
+  visibility:visible;pointer-events:auto
+}
+html.dar-v8-global body #appView :is(
+  .article,.post-body,.dua-detail-box,.quran-ayah-list
+) :is(a,button,[role="button"]){
+  touch-action:manipulation
+}
+html.dar-v8-global body :is(
+  .post-share-sheet,.post-reader-share-sheet,.dua-share-sheet,
+  .quran-ayah-action-sheet,.qrc-ayah-menu,.share-panel
+){
+  max-width:100%;box-sizing:border-box;overflow-wrap:break-word
+}
+/* Existing external social links stay visible and clickable. */
+html.dar-v8-global body .footer :is(a,button),
+html.dar-v8-global body #appView :is(a[href*="t.me/"],a[href*="whatsapp.com/"],a[href*="instagram.com/"]){
+  visibility:visible;pointer-events:auto
+}
+@media(max-width:599.98px){
+  html.dar-v8-global{--v8-gutter:max(10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px),2.4vw);--v8-radius:18px}
+  html.dar-v8-global body .app > .top-shell{padding-top:5px!important}
+  html.dar-v8-global body .app > .top-shell .brand-kicker-row{display:none}
+  html.dar-v8-global body .app > .top-shell .brand-main .logo{width:37px!important;height:37px!important}
+  html.dar-v8-global body .app > .app-bar{padding-top:3px!important;padding-bottom:6px!important}
+  html.dar-v8-global body .app > .app-bar :is(#backBtn,#homeBtn){font-size:11px!important;padding:6px 8px!important;min-height:34px!important}
+  html.dar-v8-global body .app > #appView{padding-top:8px!important}
+  html.dar-v8-global body #appView > .view-head,
+  html.dar-v8-global body #appView .topics-hub>.view-head,
+  html.dar-v8-global body #appView .qov-page .qov-header{
+    padding:14px!important;border-radius:17px!important;margin-bottom:10px!important
+  }
+  html.dar-v8-global body #appView .view-head :is(h1,h2){font-size:clamp(23px,5.5vw,28px)!important}
+  html.dar-v8-global body #appView :is(
+    .post-grid,.folder-grid,.latest-grid,.lib-grid,.feature-grid,.more-group-grid
+  ){grid-template-columns:minmax(0,1fr)!important}
+}
+@media(min-width:600px) and (max-width:899.98px){
+  html.dar-v8-global body #appView :is(.folder-grid,.latest-grid,.lib-grid,.feature-grid,.more-group-grid){
+    grid-template-columns:repeat(2,minmax(0,1fr))!important
+  }
+}
+@media(min-width:900px){
+  html.dar-v8-global body:not(.is-ilm-chat-route):not(.is-feed-fullscreen) #appView > :is(
+    .post-grid,.folder-grid,.latest-grid,.lib-grid
+  ){display:grid;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  html.dar-v8-global body #appView > .view-head{
+    display:block;max-width:none!important
+  }
+  html.dar-v8-global body #appView :is(.more-group-grid,.feature-grid){
+    grid-template-columns:repeat(3,minmax(0,1fr))!important
+  }
+  html.dar-v8-global body.is-home-route #appView .home-v380-shell{max-width:100%!important}
+}
+/* Never apply global cards/rail styling to a fullscreen player/chat, keyboard,
+   video overlay, image crop tool, or native-reader dialog. */
+html.dar-v8-global body.is-ilm-chat-route .dar-v8-duo-rail,
+html.dar-v8-global body.is-feed-fullscreen .dar-v8-duo-rail{
+  display:none!important
+}
+@media(prefers-reduced-motion:reduce){
+  html.dar-v8-global body #appView :is(.folder-card,.post-card,.dua-row,.post-row){transition:none!important}
+}
