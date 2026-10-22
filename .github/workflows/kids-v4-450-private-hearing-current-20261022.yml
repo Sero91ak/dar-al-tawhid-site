@@ -39,6 +39,16 @@ jobs:
           assert status['modelId'] == 'eleven_v4'
           print('PASS: no new TTS, no owner approval invented, no public release')
           PY
+      - name: Refresh derived audio previews and QA in the ephemeral runner only
+        run: |
+          set -euo pipefail
+          command -v ffprobe
+          command -v ffmpeg
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/qa_quiz_v4_first150_composed.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
       - name: Generate the actual offline 450-question hearing package from saved original MP3s
         run: |
           set -euo pipefail
