@@ -36,7 +36,11 @@ async function run(){
  locale="ckb";
  const res=await win.DARPushLocaleSync.pushLocale();
  assert.equal(res.reason,"individual_delivery_required");
- assert.deepEqual(requests,["tr","fr"]);
+ assert.equal(res.fallbackLocale,"de");
+ assert.deepEqual(requests,["tr","fr","de"]);
+ const repeat=await win.DARPushLocaleSync.pushLocale();
+ assert.equal(repeat.unchanged,true);
+ assert.deepEqual(requests,["tr","fr","de"]);
  assert.equal(permissions,0);
  assert.equal(subscribes,0);
  console.log(JSON.stringify({ok:true,turkishProviderLanguageSynced:true,languageSwitchSynced:true,unsupportedProviderLocaleFailsClosed:true,routes:["visitor","test","public-browser"],promptedForPermissions:false}));
