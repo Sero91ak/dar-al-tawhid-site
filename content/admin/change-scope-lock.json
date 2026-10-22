@@ -155,6 +155,22 @@
   ],
   "unlockedScopes": [
     {
+      "id": "adult-nine-language-test-20261022",
+      "at": "2026-10-22T00:00:00+02:00",
+      "approvedBy": "user-explicit-20261022-adult-nine-language-test",
+      "reason": "Eng begrenzte technische Lokalisierungsarbeit für die neunsprachige Erwachsenen-Testspur. Native iOS-Hülle, gemeinsame Web-Sprachressourcen, DAR TEST, Android/PWA und Desktop-I18n dürfen vorbereitet und geprüft werden. globalLock bleibt aktiv; keine produktive Veröffentlichung, keine Kids-/TV-/Push-/Widget-/Gebetszeiten-/Originalinhaltsänderung.",
+      "paths": [
+        "test/i18n/",
+        "test/assets/",
+        "assets/i18n/",
+        "desktop-preview/i18n-core-v1/",
+        "ios/DarAlTawhid/",
+        "android/",
+        "pwa/"
+      ],
+      "expiresAt": "2026-11-05T23:59:00+01:00"
+    },
+    {
         "id": "adult-onesignal-app-locale-sync-safe-20261022",
         "at": "2026-10-22T05:50:42.672Z",
         "approvedBy": "user-explicit-20261022-one-signal-selected-app-language-push",
