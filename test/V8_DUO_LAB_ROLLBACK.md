@@ -36,3 +36,16 @@ Durch Entfernen der beiden Referenzen aus `test/index.html` wird das neue Layout
 - RTL (Arabisch, Soranî), 9 Sprachbezeichnungen, Freigabezustände, Tastaturfokus, dynamische Schriftgröße, Dark/Light/Farbschemata und VoiceOver prüfen.
 - Gebetszeiten/GPS, Qurʾān-Player, Duʿāʾ, Quellenlinks, Downloads, Kontodaten, Push und Widgets bleiben unberührt.
 - Überprüfung der tatsächlichen visuellen Darstellung und der integrierten Gerätefunktionen steht aus. Ein erfolgreicher Syntaxcheck ist noch kein erfolgreicher End-to-End-Test.
+
+## V8 Full-App-Ausbaustufe (22.10.2026)
+
+Zusätzlich isoliert enthalten und durch nur zwei weitere HTML-Referenzen aktivierbar:
+- `test/assets/v8-complete-app-shell-v1.css` – globales visuelles System für Startseite, alle Hub-Bereiche, Navigations-/Topbar, Karten und Einstellungen; bestehende 8 Themes werden respektiert.
+- `test/assets/v8-complete-app-shell-v1.js` – nutzt bestehenden Router und Original-3D-Assets; Sekundärnavigation im breiten Zustand, keine neuen Lese-/Share-Engines.
+- `test/tools/v8-complete-shell-qa.cjs` – nicht-invasiver QA-Guard für Quellen, Sprache, Reader und Social Links.
+
+**Geschützte Kerne:** Beiträge und Quellenbelege, Original-Share-Schaltflächen und Social Links (Telegram, WhatsApp, Instagram), Qurʾān-Āyāt/Rezitation, Duʿāʾ, PDF-Leser, QR-/Deep-Links, Gebetszeiten/GPS, Benachrichtigungen, Kontosynchronisierung, native Hüllen/Widgets. Keine Originaldateien aus diesen Funktionsbereichen wurden geändert.
+
+**WICHTIG:** Die visuelle Freigabe aller Unterseiten (Safari, Fold, iPad) und die echte Prüfung der Original-Share-Flows sind noch offen. Kein Merge/Cloudflare-Deploy. Ein Branch ersetzt keine nutzbare Live-Test-URL.
+
+**Ein-Wort-Rollback:** `ZURÜCK` = *komplette V8-Änderungskette dieses isolierten Branches* zurück zum Original-Commit `18e42c4c21f48f3d16da2759c868c33c03659629`. Geschützt durch die vorab gespeicherte Basis. Kein Merge in main vor Freigabe.
