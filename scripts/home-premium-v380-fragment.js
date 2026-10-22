@@ -1,3 +1,16 @@
+/* Shared non-post adult locale bootstrap for desktop/large-screen home as well
+ * as the visitor/PWA/iOS WebView. Safe when Mehr loaded it already. */
+(function(){
+ if(window.__DAR_ADULT_UI_TR_VISITOR_LOADED||
+    /^\/(?:test|kids)(?:\/|$)/.test(location.pathname))return;
+ window.__DAR_ADULT_UI_TR_VISITOR_LOADED=true;
+ const script=document.createElement("script");
+ script.src="/assets/i18n/adult-ui-translate.js?v=20261022-global-nonposts";
+ script.async=true;
+ script.onerror=()=>{window.__DAR_ADULT_UI_TR_VISITOR_LOADED=false};
+ (document.head||document.documentElement).appendChild(script);
+})();
+
 
 const HOME_LAST_SYNC_KEY="darHomeLastSyncV1";
 function getHomeLastSyncTime(){try{const raw=localStorage.getItem(HOME_LAST_SYNC_KEY);return raw?JSON.parse(raw):null}catch(e){return null}}

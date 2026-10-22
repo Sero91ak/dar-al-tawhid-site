@@ -5,7 +5,7 @@
 if(!window.__DAR_ADULT_UI_TR_VISITOR_LOADED&&!/^\/test(?:\/|$)/.test(location.pathname)){
  window.__DAR_ADULT_UI_TR_VISITOR_LOADED=true;
  const script=document.createElement("script");
- script.src="/assets/i18n/adult-ui-translate.js?v=20261021-tr-ui1";
+ script.src="/assets/i18n/adult-ui-translate.js?v=20261022-global-nonposts";
  script.async=true;
  script.onerror=()=>{window.__DAR_ADULT_UI_TR_VISITOR_LOADED=false};
  (document.head||document.documentElement).appendChild(script);

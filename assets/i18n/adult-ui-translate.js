@@ -5,20 +5,107 @@
  */
 (function(global){"use strict";
 if(/^\/test(?:\/|$)/.test(global.location.pathname)||global.DARAdultUI18n)return;
-const KEY="darAdultPreferredLocaleV1",URI="/assets/i18n/adult-ui-de-tr.json";
+const KEY="darAdultPreferredLocaleV1",URI="/assets/i18n/adult-ui-de-tr.json?v=20261022-global-nonposts";
 const catalog=new Map(),originalTexts=new WeakMap(),originalAttributes=new WeakMap();
 const deny="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],"+
  "[lang='ar'],[dir='rtl'],[data-canonical-content],[class*='quran-arabic'],"+
  "[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],"+
  "[class*='post-content'],[class*='hadith-text'],[class*='source-quote'],"+
- "[class*='qsource-statement'],[class*='hadith-narration'],[class*='dua-arabic']";
+ "[class*='qsource-statement'],[class*='hadith-narration'],[class*='dua-arabic'],"+
+ "article[data-nav='post'],[data-post-id],[data-post-body],[data-page='post'],"+
+ "[data-view='post'],[data-route='post'],[class*='post-card'],[class*='post-title'],"+
+ "[class*='post-detail'],[class*='post-excerpt'],[class*='post-preview'],"+
+ "[class*='sf-post'],[class*='feed-post'],[class*='post-row'],[class*='post-feed'],"+
+ "[class*='prophets-quote__de'],[class*='prophets-quote__ar'],"+
+ "[class*='prophets-quote__meta'],[class*='prophets-quote__title'],"+
+ "[class*='prophets-detail__sub'],[class*='prophets-verse__text'],"+
+ "[class*='prophets-verse__arabic'],[class*='prophets-source-panel__meta'],"+
+ "[class*='quran-translation'],[class*='ayah-translation'],[class*='verse-translation'],"+
+ "[class*='hadith-quote'],[class*='dua-meaning'],[class*='duas-meaning']";
 const attrs=["placeholder","aria-label","title"];
 let state="pending",queued=false;
 function locale(){try{return global.localStorage.getItem(KEY)==="tr"?"tr":"de"}catch(_){return"de"}}
+function isPostRoute(){
+ const pathname=String(global.location?.pathname||"");
+ const route=String(global.location?.hash||"").replace(/^#\/?/,"").split(/[/?]/)[0].toLowerCase();
+ return /^\/(?:p|posts|beitrag|beitraege)(?:\/|$)/i.test(pathname)||
+   ["post","posts","recent","beitraege","beiträge","article"].includes(route);
+}
 function excluded(el){return !!(el&&typeof el.closest==="function"&&el.closest(deny))}
+// Dynamic *interface* labels only. Sources, sūrah names, and religious text stay canonical.
+// Calendar chrome is a formatted UI value, not a verse/date quotation.
+// Reject invalid dates rather than guessing and never change the canonical date.
+const DE_GREGORIAN_MONTHS=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+function translateTurkishCalendarUI(value){
+ let m=value.match(/^(Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag), (\d{1,2})\. (Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember) (20\d{2})$/);
+ if(m){
+  const index=DE_GREGORIAN_MONTHS.indexOf(m[3]);
+  const date=new Date(Date.UTC(Number(m[4]),index,Number(m[2])));
+  if(date.getUTCDate()!==Number(m[2])||date.getUTCMonth()!==index)return null;
+  return new Intl.DateTimeFormat("tr-TR",{weekday:"long",day:"numeric",month:"long",year:"numeric",timeZone:"UTC"}).format(date);
+ }
+ m=value.match(/^(Mo|Di|Mi|Do|Fr|Sa|So)\., (\d{1,2})\.(\d{1,2})\.(\d{2})$/);
+ if(m){
+  const date=new Date(Date.UTC(2000+Number(m[4]),Number(m[3])-1,Number(m[2])));
+  if(date.getUTCDate()!==Number(m[2])||date.getUTCMonth()!==Number(m[3])-1)return null;
+  return new Intl.DateTimeFormat("tr-TR",{weekday:"short",day:"2-digit",month:"2-digit",year:"2-digit",timeZone:"UTC"}).format(date);
+ }
+ m=value.match(/^(\d{1,2})\. Dschumada (I|II) (\d{3,4})$/);
+ if(m)return m[1]+" "+(m[2]==="I"?"Cemâziyelevvel":"Cemâziyelâhir")+" "+m[3];
+ m=value.match(/^(\d{2}):(\d{2}) Uhr$/);
+ if(m&&Number(m[1])<24&&Number(m[2])<60)return "saat "+m[1]+":"+m[2];
+ return null;
+}
+function translateDynamicAdultUI(value){
+ let m=value.match(/^(\d+) (Aussagen mit Quellen\.|Namen und Zuordnungen\.|Suren mit Arabisch und Lautschrift\.|bekannte Duʿāʾ nach Themen\.|geprüfte Werke und zitierte Gelehrte\.)$/);
+ if(m){
+  const units={"Aussagen mit Quellen.":"kaynaklı ifade","Namen und Zuordnungen.":"isim ve ilişkilendirme",
+    "Suren mit Arabisch und Lautschrift.":"Arapçası ve okunuşuyla sûre",
+    "bekannte Duʿāʾ nach Themen.":"konuya göre bilinen dua",
+    "geprüfte Werke und zitierte Gelehrte.":"incelenmiş eser ve anılan âlim"};
+  return m[1]+" "+units[m[2]];
+ }
+ m=value.match(/^Sūrah ([\p{L}\p{M}0-9ʿʾ'’ .-]{2,95}) öffnen$/u);
+ if(m)return "Sûre "+m[1]+" aç";
+ m=value.match(/^(\d+) (Sūren) · (\d+) Āyāt$/);
+ if(m)return m[1]+" sûre · "+m[3]+" âyet";
+ m=value.match(/^Im Qurʾān öffnen · (\d{1,3}:\d{1,3}(?:[–-]\d{1,3})?)$/);
+ if(m)return "Kur'ân'da aç · "+m[1];
+ m=value.match(/^Qurʾān · (\d+) Fundstellen$/);
+ if(m)return "Kur'ân · "+m[1]+" kaynak yeri";
+ m=value.match(/^(Aussagen im Qurʾān|Aussagen in authentischer Sunnah) · (\d+)$/);
+ if(m)return (catalog.get(m[1])||m[1])+" · "+m[2];
+ return null;
+}
+const DE_CALENDAR_MONTHS=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+const DE_CALENDAR_DAYS=["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"];
+function trCalendarLabel(value){
+ if(typeof value!=="string"||value.length>85)return null;
+ const full=value.match(/^(Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag), (\d{1,2})\. (Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember) (\d{4})$/);
+ if(full){
+  const year=+full[4],month=DE_CALENDAR_MONTHS.indexOf(full[3]),day=+full[2],d=new Date(Date.UTC(year,month,day));
+  if(d.getUTCFullYear()===year&&d.getUTCMonth()===month&&d.getUTCDate()===day&&
+     DE_CALENDAR_DAYS[(d.getUTCDay()+6)%7]===full[1])
+   return new Intl.DateTimeFormat("tr-TR",{weekday:"long",day:"numeric",month:"long",year:"numeric",timeZone:"UTC"}).format(d);
+ }
+ const short=value.match(/^(Mo|Di|Mi|Do|Fr|Sa|So)\., (\d{1,2})\.(\d{1,2})\.(\d{2})$/);
+ if(short){
+  const day=+short[2],month=+short[3]-1,year=2000+Number(short[4]),d=new Date(Date.UTC(year,month,day));
+  const weekdays=["Mo","Di","Mi","Do","Fr","Sa","So"];
+  if(d.getUTCFullYear()===year&&d.getUTCMonth()===month&&d.getUTCDate()===day&&weekdays[(d.getUTCDay()+6)%7]===short[1])
+   return new Intl.DateTimeFormat("tr-TR",{weekday:"short",day:"2-digit",month:"2-digit",year:"2-digit",timeZone:"UTC"}).format(d);
+ }
+ const hijri=value.match(/^(\d{1,2})\. Dschumada (I|II) (\d{3,4})$/);
+ if(hijri)return hijri[1]+" "+(hijri[2]==="I"?"Cemâziyelevvel":"Cemâziyelâhir")+" "+hijri[3];
+ const clock=value.match(/^(\d{2}):(\d{2}) Uhr$/);
+ if(clock&&+clock[1]<24&&+clock[2]<60)return "saat "+clock[1]+":"+clock[2];
+ return null;
+}
 function translate(value){
  if(typeof value!=="string")return null;
  const v=catalog.get(value);if(v!==undefined)return v;
+ const dynamic=translateDynamicAdultUI(value);if(dynamic!==null)return dynamic;
+ const calendar=translateTurkishCalendarUI(value);if(calendar!==null)return calendar;
  const counts=value.match(/^(\d+)\s+(Funktionen|Ergebnisse|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt)$/);
  const words={Funktionen:"işlev",Ergebnisse:"sonuç",Veröffentlichungen:"yayın",Beiträge:"yazı",
   Seiten:"sayfa",Themenbereiche:"konu alanı",Aussagen:"söz",gemerkt:"kaydedildi"};
@@ -37,8 +124,27 @@ function translate(value){
  if(pages)return (catalog.get(pages[1])||pages[1])+" · "+pages[2]+" sayfa";
  const range=value.match(/^Sūrenbereich wechseln, aktuell (\d+)[–-](\d+)$/);
  if(range)return "Sûre aralığını değiştir, şu an "+range[1]+"–"+range[2];
+ const references=value.match(/^Qurʾān · (\d+) Fundstellen$/);
+ if(references)return "Kur'ân · "+references[1]+" kaynak yeri";
+ const prophets=value.match(/^(Aussagen im Qurʾān|Aussagen in authentischer Sunnah) · (\d+)$/);
+ if(prophets)return (catalog.get(prophets[1])||prophets[1])+" · "+prophets[2];
+ const summaries=value.match(/^(\d+) (Aussagen mit Quellen\.|Namen und Zuordnungen\.|Suren mit Arabisch und Lautschrift\.|bekannte Duʿāʾ nach Themen\.|geprüfte Werke und zitierte Gelehrte\.)$/);
+ if(summaries){
+  const patterns={
+   "Aussagen mit Quellen.":n=>n+" kaynaklı ifade",
+   "Namen und Zuordnungen.":n=>n+" isim ve ilişki",
+   "Suren mit Arabisch und Lautschrift.":n=>"Arapça metin ve okunuşuyla "+n+" sûre",
+   "bekannte Duʿāʾ nach Themen.":n=>"Konulara göre "+n+" dua",
+   "geprüfte Werke und zitierte Gelehrte.":n=>n+" incelenmiş eser ve alıntılanan âlim"
+  };
+  return patterns[summaries[2]](summaries[1]);
+ }
+ const openSurah=value.match(/^Sūrah ([\p{L}\p{M}0-9ʿʾ'’ .-]{2,95}) öffnen$/u);
+ if(openSurah)return "Sûre "+openSurah[1]+" aç";
+ const date=trCalendarLabel(value);if(date!==null)return date;
  const open=value.match(/^(.{2,160}) öffnen$/);
- if(open&&!/[<>\u0600-\u06ff]/.test(open[1]))return open[1]+" aç";
+ if(open&&catalog.has(open[1])&&!/[<>\u0600-\u06ff]/.test(open[1]))
+  return catalog.get(open[1])+" aç";
  return null;
 }
 function textNode(node,code){
@@ -71,6 +177,12 @@ function attributes(el,code){
 }
 function apply(root=global.document.body){
  if(!root)return 0;
+ // Beiträge stay German while the application language remains Turkish.
+ if(isPostRoute()){
+  if(global.document.documentElement)global.document.documentElement.lang=locale();
+  syncButtons();
+  return 0;
+ }
  const lang=locale();
  if(lang==="tr"&&!catalog.size)return 0;
  const filter=global.NodeFilter;
@@ -146,6 +258,8 @@ function boot(){
  schedule();
 }
 global.addEventListener("dar-adult-locale-changed",schedule);
+global.addEventListener("hashchange",schedule);
+global.addEventListener("popstate",schedule);
 global.addEventListener("storage",e=>{if(e.key===KEY)schedule()});
 global.document.addEventListener("dar:view-rendered",schedule);
 global.document.addEventListener("click",e=>{
