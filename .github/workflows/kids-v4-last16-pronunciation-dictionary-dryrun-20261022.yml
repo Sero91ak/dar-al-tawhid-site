@@ -1,4 +1,4 @@
-name: KIDS V4 Last Sixteen German Fuṣḥā Dictionary Prefight (no TTS)
+name: KIDS V4 Last 15 New + 1 Unconfirmed German Fusha Dictionary Preflight (no TTS)
 on:
   push:
     branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
@@ -16,7 +16,7 @@ jobs:
         with:
           ref: review/kids-v4-nine-prepaid-artifact-replay-20261022
           fetch-depth: 1
-      - name: Validate actual 10099-rule pronunciation dictionary and sixteen exact unfinished source strings, no network
+      - name: Validate actual 10099-rule dictionary, 15 new strings and 1 unreconciled paid request, no network
         run: |
           set -euo pipefail
           python3 -m py_compile kids/tools/validate_quiz_v4_remaining16_dictionary_preflight.py
