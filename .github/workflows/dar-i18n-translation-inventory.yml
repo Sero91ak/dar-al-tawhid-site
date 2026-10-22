@@ -54,6 +54,8 @@ jobs:
           node desktop-preview/i18n-core-v1/test-glossary-hints.cjs
       - name: Audit nine-language UI coverage across desktop, Test and visitor/PWA
         run: node desktop-preview/i18n-core-v1/audit-nine-ui-coverage.cjs
+      - name: Check nine-language preference sync release safety
+        run: node desktop-preview/i18n-core-v1/test-nine-locale-sync.cjs
       - name: Verify canonical adult locale IDs, source hashes and approval gates
         run: node scripts/verify-adult-post-language-manifests.cjs
       - name: Verify automatic revision detection with isolated fixtures
