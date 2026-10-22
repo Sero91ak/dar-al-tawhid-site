@@ -1,0 +1,38 @@
+name: DAR Adult Push i18n Protected Full Diff Gate
+on:
+  pull_request:
+    paths:
+      - "cloudflare/prayer-push-scheduler.js"
+      - "cloudflare/daily-push-scheduler.js"
+      - "assets/dar-onesignal-language-sync.js"
+      - "cloudflare/push-nine-language-copy.js"
+      - "cloudflare/site-router.js"
+      - "desktop-preview/i18n-core-v1/test-live-push-i18n-bridge.cjs"
+      - "content/admin/change-scope-lock.json"
+      - ".github/workflows/dar-push-i18n-protected-diff.yml"
+permissions:
+  contents: read
+jobs:
+  verify-entire-pr-diff:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout full PR graph for exact base comparison
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify complete PR scope and independent push password
+        env:
+          INTEGRITY_BASE_REF: ${{ github.event.pull_request.base.sha }}
+          DAR_PUSH_UNLOCK_PASSWORD: ${{ secrets.DAR_PUSH_UNLOCK_PASSWORD }}
+          GITHUB_COMMIT_MESSAGE: "push-global-freigabe gebets-push freigeben tages-push freigeben push-lanes-multi-freigabe"
+        run: |
+          set -eu
+          test -n "$INTEGRITY_BASE_REF" || { echo "::error::Cannot verify PR base SHA"; exit 1; }
+          git cat-file -e "$INTEGRITY_BASE_REF"
+          node scripts/push-lanes-guard.js
+          node scripts/change-scope-lock-guard.js
+      - name: Strict offline provider language and Turkish sync checks
+        run: |
+          node desktop-preview/i18n-core-v1/test-live-push-i18n-bridge.cjs
+          node desktop-preview/i18n-core-v1/test-onesignal-live-language-bridge.cjs
