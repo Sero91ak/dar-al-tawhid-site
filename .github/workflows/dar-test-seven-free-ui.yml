@@ -7,6 +7,7 @@ on:
       - 'test/i18n/adult-ui-locales-seven.json'
       - 'test/i18n/test-seven-*'
       - 'test/i18n/test-subpages-nine.cjs'
+      - 'test/i18n/test-nine-browser-subpages.py'
       - 'test/i18n/test-expanded-headings-seven.cjs'
       - 'test/i18n/test-nine-registry.cjs'
       - 'test/i18n/test-nine-dynamic-ui.cjs'
@@ -92,6 +93,8 @@ jobs:
           sleep 3
       - name: Verify all language pickers and RTL in Chromium
         run: python3 test/i18n/test-seven-browser-smoke.py
+      - name: Verify nine languages on all 15 app subpages (read-only)
+        run: python3 test/i18n/test-nine-browser-subpages.py
       - name: Inventory 15 app routes and report missing interface strings (read-only)
         run: |
           python3 test/i18n/capture-visible-ui.py
