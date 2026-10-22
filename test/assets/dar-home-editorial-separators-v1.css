@@ -184,3 +184,41 @@ html[data-app-path="test"].dar-home-v3:not(.dar-adult-global-brand-ready) body.i
   padding-top:15px!important;
   border-top:1px solid var(--dv3-line)!important;
 }
+
+/* DAR_TEST_V59_COMPACT_FALLBACK_20261022 */
+/* Nur für die ältere Test-Shell ohne aktiven Parity-Renderer. */
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route
+.top-shell .header #darAdultHomeWelcomeV5 {
+  margin-block:14px 10px!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route
+.top-shell .header #darAdultHomeWelcomeV5::before {
+  margin-bottom:12px!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route
+.top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-salam-v5 {
+  font-size:clamp(20px,3.6vw,24px)!important;
+  line-height:1.19!important;
+  text-wrap:balance!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route
+.top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-rule-v5 {
+  margin-block:10px!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route
+.top-shell .header #darAdultHomeWelcomeV5 p {
+  font-size:clamp(13px,2.2vw,15px)!important;
+  line-height:1.47!important;
+  text-wrap:balance!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route
+.top-shell > .isnad {
+  margin-block:13px 16px!important;
+  padding-block:11px!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route
+.top-shell > .isnad .isnad-quote {
+  font-size:clamp(14px,2.25vw,16px)!important;
+  line-height:1.43!important;
+  text-wrap:balance!important;
+}
