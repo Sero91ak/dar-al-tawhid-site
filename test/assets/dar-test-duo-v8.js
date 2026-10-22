@@ -108,6 +108,17 @@ tags.append(span);
 wrap.append(h,p,entry,tags);
 return wrap;
 }
+function updateLanguageStatuses(){
+var panel=d.getElementById("darDuoV8LanguageSettings");
+if(!panel)return;
+var tags=panel.querySelectorAll(".dar-duo-languages span");
+LANGUAGES.forEach(function(item,i){
+var available=false;
+try{available=!!(w.DARAdultLanguagePickerV1&&w.DARAdultLanguagePickerV1.available(item[0]))}catch(_){}
+var label=item[1]+(available?" ✓":" · geplant");
+if(tags[i]&&tags[i].textContent!==label)tags[i].textContent=label;
+});
+}
 function addSettings(){
 var view=d.getElementById("appView");if(!view)return;
 var home=view.querySelector(".dsh-shell.dsh-home");
@@ -117,6 +128,7 @@ var box=languagesBox();var groups=home.querySelector(".dsh-group");
 home.insertBefore(box,groups||null);
 if(w.DARAdultLanguagePickerV1)w.DARAdultLanguagePickerV1.refresh();
 }
+updateLanguageStatuses();
 if(!d.getElementById("darDuoV8NavSettings")){
 var section=navOptions();
 var note=home.querySelector(":scope > .dsh-note");
