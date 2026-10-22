@@ -1,0 +1,150 @@
+name: KIDS V4 Recover Unconfirmed Previous ElevenLabs History (GET only)
+on:
+  push:
+    branches:
+      - review/kids-v4-nine-prepaid-artifact-replay-20261022
+    paths:
+      - '.github/workflows/kids-v4-unconfirmed-existing-audio-provider-history-20261022.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: kids-v4-history-recovery-read-only
+  cancel-in-progress: false
+jobs:
+  original-audio-history-get-only:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    steps:
+      - name: Checkout private review branch, read-only
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Recover exact existing original TTS history without creating speech
+        run: |
+          python3 - <<'PY'
+          import json,urllib.request,urllib.error,urllib.parse,hashlib,time
+          from pathlib import Path
+          from datetime import datetime,timezone
+          root=Path.cwd()
+          read=lambda p:json.loads((root/p).read_text(encoding='utf8'))
+          ledger=read('kids/data/quiz-v4-connected-flow-originals-ledger.json')
+          hold=read('kids/data/quiz-v4-pronunciation-hold.json')
+          plan=read('kids/review-only/quiz-v4-16-new-text-dictionary-preflight-20261022.json')
+          assert hold['productionPaused'] is True and hold['paidSpeechAuthorized'] is False
+          assert hold['publicQuizAudioReleaseAuthorized'] is False and hold['humanPronunciationApproved'] is False
+          assert ledger['voiceId']==hold['voiceId']=='DkU7j9uO4ZEtLD2iRZSH'
+          assert ledger['modelId']==hold['modelId']=='eleven_v4'
+          targets={e['sourceText']:{
+                'sourceTextSha256':e['sourceTextSHA256'],
+                'queueState':e['status']
+            } for e in ledger['entries']
+            if e['status']=='RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED'}
+          uncertain=plan['previouslyAttemptedExcludedFromNewTTS']
+          targets[uncertain['text']]={'sourceTextSha256':uncertain['sourceTextSHA256'],
+                    'queueState':uncertain['journalStatus']}
+          assert len(targets)==8
+          assert all(hashlib.sha256(t.encode('utf8')).hexdigest()==v['sourceTextSha256']
+                     for t,v in targets.items())
+          dest=root/'kids/review-only/existing-provider-history-original-recovery'
+          dest.mkdir(parents=True,exist_ok=True)
+          output={'scope':'KIDS_V4_RECOVER_ONLY_ALREADY_GENERATED_V4_MASTER_ORIGINALS',
+                  'source':'ElevenLabs history GET only','voiceId':ledger['voiceId'],
+                  'modelId':ledger['modelId'],'requestedExactPriorTexts':len(targets),
+                  'newSynthesisRequests':0,'newElevenLabsSpeechCredits':0,
+                  'humanPronunciationApproved':False,'publicReleaseAllowed':False,
+                  'queries':[],'results':[]}
+          key=__import__('os').environ.get('ELEVENLABS_API_KEY','')
+          if not key:
+              output['providerAccess']='MISSING_SECRET_NO_PROVIDER_REQUEST'
+          else:
+              output['providerAccess']='READ_ONLY'
+              found={}
+              start=int(datetime(2026,10,13,tzinfo=timezone.utc).timestamp())
+              for source in ('TTS','Flows'):
+                  cursor=None
+                  for page in range(5):
+                      q={'voice_id':ledger['voiceId'],'model_id':'eleven_v4',
+                         'date_after_unix':str(start),'source':source,'page_size':1000}
+                      if cursor:q['start_after_history_item_id']=cursor
+                      url='https://api.elevenlabs.io/v1/history?'+urllib.parse.urlencode(q)
+                      req=urllib.request.Request(url,headers={'xi-api-key':key,'Accept':'application/json'})
+                      try:
+                          with urllib.request.urlopen(req,timeout=38) as response:
+                              body=response.read(3500000)
+                              data=json.loads(body)
+                      except urllib.error.HTTPError as e:
+                          output['queries'].append({'source':source,'page':page,
+                                      'httpStatus':e.code,'readOnly':True})
+                          break
+                      except (OSError,ValueError) as e:
+                          output['queries'].append({'source':source,'page':page,
+                                      'errorClass':type(e).__name__,'readOnly':True})
+                          break
+                      rows=data.get('history',[])
+                      output['queries'].append({'source':source,'page':page,'resultCount':len(rows),
+                                                'hasMore':data.get('has_more',False)})
+                      for h in rows:
+                          if h.get('voice_id')!=ledger['voiceId'] or h.get('model_id')!='eleven_v4':
+                              continue
+                          t=h.get('text')
+                          if t not in targets:
+                              continue
+                          hid=h.get('history_item_id')
+                          if isinstance(hid,str) and hid and hid not in found:
+                              found[hid]={'sourceText':t,'historyItemId':hid,
+                                         'dateUnix':h.get('date_unix'),
+                                         'source':h.get('source'),'requestId':h.get('request_id')}
+                      if not data.get('has_more') or not rows:break
+                      cursor=data.get('last_history_item_id')
+                      if not cursor:break
+              for hid,meta in found.items():
+                  path='/v1/history/'+urllib.parse.quote(hid,safe='')+'/audio'
+                  req=urllib.request.Request('https://api.elevenlabs.io'+path,
+                    headers={'xi-api-key':key,'Accept':'audio/mpeg'})
+                  result=dict(meta)
+                  try:
+                      with urllib.request.urlopen(req,timeout=42) as response:
+                          raw=response.read(2200000)
+                      if not 1500<len(raw)<2200000 or not(raw.startswith(b'ID3') or raw[:1]==b'\xff'):
+                          result['recoveryStatus']='INVALID_AUDIO_DO_NOT_IMPORT'
+                      else:
+                          sha=hashlib.sha256(raw).hexdigest()
+                          name=sha[:32]+'.mp3'
+                          (dest/name).write_bytes(raw)
+                          result.update(recoveryStatus='RECOVERED_FOR_PRIVATE_HEARING',
+                                        originalSha256=sha,filename=name,bytes=len(raw),
+                                        pronunciationAudited=False)
+                  except urllib.error.HTTPError as e:
+                      result.update(recoveryStatus='HISTORY_AUDIO_UNAVAILABLE',
+                                    httpStatus=e.code)
+                  except OSError as e:
+                      result.update(recoveryStatus='HISTORY_AUDIO_UNAVAILABLE',
+                                    errorClass=type(e).__name__)
+                  output['results'].append(result)
+              output['notFoundExactTexts']=[{'sha256':v['sourceTextSha256'],
+                   'text':text,'status':'NOT_PRESENT_IN_SEARCHED_PROVIDER_HISTORY'}
+                    for text,v in targets.items() if text not in
+                    {f['sourceText'] for f in found.values()}]
+          (dest/'PROVIDER-RECOVERY-RESULTS.json').write_text(
+              json.dumps(output,ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+          print('KIDS_V4_READ_ONLY_HISTORY_RECOVERY '+json.dumps({
+            'providerAccess':output.get('providerAccess'),
+            'exactTargets':len(targets),
+            'matchedHistoryItems':len(output['results']),
+            'recoveredAudioFiles':sum(r.get('recoveryStatus')=='RECOVERED_FOR_PRIVATE_HEARING'
+                                      for r in output['results']),
+            'queryStatuses':output['queries'],'newTTSCredits':0,
+            'publicRelease':False},ensure_ascii=False))
+          PY
+      - name: Preserve original paid audio and confidential SHA audit
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-original-history-recovery-no-generation
+          retention-days: 30
+          if-no-files-found: warn
+          path: kids/review-only/existing-provider-history-original-recovery/
