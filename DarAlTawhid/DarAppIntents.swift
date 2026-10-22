@@ -2,22 +2,35 @@ import AppIntents
 import Foundation
 
 enum DarWidgetLook: String, AppEnum {
-    case eisgold
-    case tinte
-    case pergament
-    case royal
-    case bordeaux
-    case app
+    // Keep the previous raw values so existing widget configurations migrate safely.
+    case app = "app"
+    case automatisch = "automatisch"
+    case klassischHell = "klassisch-hell"
+    case pergament = "pergament"
+    case eisgold = "eisgold"
+    case petrol = "petrol"
+    case klassischDunkel = "tinte"
+    case salbeiElfenbein = "salbeiElfenbein"
+    case sanftElegant = "soft"
+    case royalNachtblau = "royal"
+    case bordeauxRoyalPremium = "bordeaux"
+    case darAlLayl = "dar-al-layl"
 
-    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Farbe"
+    static var typeDisplayRepresentation: TypeDisplayRepresentation = "Erscheinungsbild"
 
     static var caseDisplayRepresentations: [DarWidgetLook: DisplayRepresentation] = [
-        .eisgold: "Eisgold",
-        .tinte: "Tinte",
+        .app: "App-Design",
+        .automatisch: "Automatisch",
+        .klassischHell: "Klassisch Hell",
         .pergament: "Pergament",
-        .royal: "Royal",
-        .bordeaux: "Bordeaux",
-        .app: "App-Thema"
+        .eisgold: "Eisgold",
+        .petrol: "Petrol",
+        .klassischDunkel: "Klassisch Dunkel",
+        .salbeiElfenbein: "Salbei Elfenbein",
+        .sanftElegant: "Sanft Elegant",
+        .royalNachtblau: "Royal Nachtblau",
+        .bordeauxRoyalPremium: "Bordeaux Royal Premium",
+        .darAlLayl: "Dār al-Layl"
     ]
 }
 

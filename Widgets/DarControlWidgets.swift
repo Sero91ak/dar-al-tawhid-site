@@ -1,17 +1,16 @@
 import SwiftUI
 import WidgetKit
-import AppIntents
 
 @available(iOSApplicationExtension 18.0, *)
 struct DarPrayerControlWidget: ControlWidget {
     var body: some ControlWidgetConfiguration {
         StaticControlConfiguration(kind: "de.daraltawhid.control.prayer") {
             ControlWidgetButton(action: OpenPrayerIntent()) {
-                Label("Gebet", systemImage: "moon.stars.fill")
+                Label("Gebetszeiten", systemImage: "clock")
             }
         }
-        .displayName("Nächstes Gebet")
-        .description("Öffnet die Gebetszeiten.")
+        .displayName("Gebetszeiten")
+        .description("Öffnet die Gebetszeiten in DĀR AL TAWḤĪD.")
     }
 }
 
@@ -20,10 +19,10 @@ struct DarQiblaControlWidget: ControlWidget {
     var body: some ControlWidgetConfiguration {
         StaticControlConfiguration(kind: "de.daraltawhid.control.qibla") {
             ControlWidgetButton(action: OpenQiblaIntent()) {
-                Label("Qibla", systemImage: "location.north.line.fill")
+                Label("Qibla", systemImage: "location.north.circle")
             }
         }
         .displayName("Qibla")
-        .description("Öffnet den Kompass nach Mekka.")
+        .description("Öffnet den Qibla-Kompass in DĀR AL TAWḤĪD.")
     }
 }
