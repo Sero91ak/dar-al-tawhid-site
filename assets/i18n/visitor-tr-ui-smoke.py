@@ -48,7 +48,11 @@ try:
  '<section class="dynamic-ui"><span data-i18n-count>114 Sūren · 6236 Āyāt</span>'+
  '<button data-i18n-open>Sūrah Al-Baqarah öffnen</button>'+
  '<span data-i18n-sources>Qurʾān · 8 Fundstellen</span>'+
- '<span data-i18n-duas>5 bekannte Duʿāʾ nach Themen.</span></section>'+
+ '<span data-i18n-duas>5 bekannte Duʿāʾ nach Themen.</span>'+
+ '<span data-i18n-gregorian>Donnerstag, 22. Oktober 2026</span>'+
+ '<span data-i18n-compact>Do., 22.10.26</span>'+
+ '<span data-i18n-hijri>12. Dschumada I 1448</span>'+
+ '<span data-i18n-clock>06:49 Uhr</span></section>'+
  '<section class="prophet-panel"><h3>Propheten</h3><span>Überlieferungsmaßstab</span></section>'+
  '<article data-nav="post" data-value="fixture-post"><h3>Gebetszeiten</h3></article>'+
  '<div data-post-id="fixture-post">Einstellungen</div>'+
@@ -66,6 +70,10 @@ try:
  assert driver.execute_script("""return document.querySelector('[data-i18n-open]')?.textContent==='Sûre Al-Baqarah aç'"""),"Qur'an opening action should be localized"
  assert driver.execute_script("""return document.querySelector('[data-i18n-sources]')?.textContent==="Kur'ân · 8 kaynak yeri" """),"Qur'an reference count should be localized"
  assert driver.execute_script("""return document.querySelector('[data-i18n-duas]')?.textContent==='5 konuya göre bilinen dua'"""),"Dua summary should be localized"
+ assert driver.execute_script("""return document.querySelector('[data-i18n-gregorian]')?.textContent.includes('Ekim 2026')"""),"Gregorian calendar should be localized"
+ assert driver.execute_script("""return document.querySelector('[data-i18n-compact]')?.textContent!=='Do., 22.10.26'"""),"Compact date should be localized"
+ assert driver.execute_script("""return document.querySelector('[data-i18n-hijri]')?.textContent==='12 Cemâziyelevvel 1448'"""),"Hijri month should be localized"
+ assert driver.execute_script("""return document.querySelector('[data-i18n-clock]')?.textContent==='saat 06:49'"""),"Clock label should be localized"
  
  assert driver.execute_script("""return document.querySelector('#darGlobalTurkishFixture article h3')?.textContent==='Gebetszeiten'"""),"Beiträge article card must not be translated"
  assert driver.execute_script("""return document.querySelector('#darGlobalTurkishFixture [data-post-id]')?.textContent==='Einstellungen'"""),"Post content must stay in German"
@@ -80,6 +88,8 @@ try:
  w.until(lambda d:d.execute_script("""return [...document.querySelectorAll('.dar-more-v15 [data-dm-category]')].some(el=>el.textContent.includes('Wissen'))"""))
  assert driver.execute_script("""return document.querySelector('[data-i18n-count]')?.textContent==='114 Sūren · 6236 Āyāt'"""),"German count should be restored"
  assert driver.execute_script("""return document.querySelector('[data-i18n-open]')?.textContent==='Sūrah Al-Baqarah öffnen'"""),"German Quran control should be restored"
+ assert driver.execute_script("""return document.querySelector('[data-i18n-gregorian]')?.textContent==='Donnerstag, 22. Oktober 2026'"""),"Gregorian date should revert"
+ assert driver.execute_script("""return document.querySelector('[data-i18n-hijri]')?.textContent==='12. Dschumada I 1448'"""),"Hijri date should revert"
  print("PASS public modules: reversible German locale",flush=True)
  driver.execute_script("""document.getElementById('appView').innerHTML=
  '<div class="dsh-shell dsh-home"><div class="dsh-welcome">Einstellungen</div></div>'""")
