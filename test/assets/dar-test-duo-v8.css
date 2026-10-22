@@ -136,3 +136,38 @@ html.dar-test-duo-v8 #bottomNav .dar3d-icon { object-fit: contain; }
 @media (prefers-reduced-motion: reduce) {
   html.dar-test-duo-v8 .dar-duo-tool { transition: none!important; }
 }
+
+
+/* Fold navigation setting: existing nav controller, never duplicate tabs. */
+html.dar-test-duo-v8 .dar-duo-nav-options {
+ display: grid; grid-template-columns: repeat(2,minmax(0,1fr));
+ gap: 8px; padding: 10px; border: 1px solid var(--duo-line);
+ border-radius: 18px; background: var(--duo-surface);
+}
+html.dar-test-duo-v8 .dar-duo-nav-options button {
+ min-width: 0; min-height: 44px; border-radius: 12px; padding: 8px 10px;
+ border: 1px solid var(--duo-line); background: transparent;
+ color: var(--duo-ink); font: 650 12px system-ui,sans-serif;
+ touch-action: manipulation; cursor: pointer;
+}
+html.dar-test-duo-v8 .dar-duo-nav-options button[aria-pressed="true"] {
+ border-color: var(--duo-gold);
+ background: color-mix(in srgb, var(--duo-gold) 15%, transparent);
+ box-shadow: inset 3px 0 0 var(--duo-gold);
+}
+html.dar-test-duo-v8 .dar-duo-nav-options button:focus-visible {
+ outline: 2px solid var(--duo-gold); outline-offset: 2px;
+}
+/* When the real existing navigation sits in its side rail,
+   preserve enough content for a full reader. */
+@media(min-width:760px) and (max-width:899.98px) {
+ html.dar-test-duo-v8[data-dar-nav-position="left"] .dar-fold[data-fold-mode="dual"],
+ html.dar-test-duo-v8[data-dar-nav-position="right"] .dar-fold[data-fold-mode="dual"] {
+   grid-template-columns: minmax(0,1fr)!important;
+ }
+}
+@media(min-width:900px) {
+ html.dar-test-duo-v8[data-dar-duo-viewport="open"] .dar-fold[data-fold-mode="dual"] {
+   grid-template-columns: clamp(215px, 30%, 335px) minmax(0,1fr);
+ }
+}
