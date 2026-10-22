@@ -1,0 +1,116 @@
+name: KIDS V4 Exact 21-Question Source-Gap Reconciliation (zero credits)
+on:
+  push:
+    branches:
+      - review/kids-v4-nine-prepaid-artifact-replay-20261022
+    paths:
+      - '.github/workflows/kids-v4-21-blockers-exact-review-20261022.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  reconcile-all-21:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      ELEVENLABS_API_KEY: ''
+    steps:
+      - name: Checkout protected review data without write credentials
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Reconcile every original segment without TTS
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('kids')
+          read=lambda name:json.loads((root/name).read_text(encoding='utf-8'))
+          preview=read('data/quiz-v4-age7to10-composed-preview.json')
+          gaps=read('review-only/quiz-v4-450-remaining21-audio-blocker-ledger-20261022.json')
+          status=read('data/quiz-v4-450-production-status.json')
+          ledger=read('data/quiz-v4-connected-flow-originals-ledger.json')
+          fresh=read('review-only/quiz-v4-16-new-text-dictionary-preflight-20261022.json')
+          hold=read('data/quiz-v4-pronunciation-hold.json')
+          qhold=read('data/quiz-v4-owner-pronunciation-hold-20261021.json')
+          assert status['completedQuestionsWithAllFourAudioParts']==429
+          assert gaps['technicallyMissing']==21
+          assert hold['productionPaused'] is True and hold['paidSpeechAuthorized'] is False
+          assert status['livePublished'] is False
+          assert preview['published'] is False
+          assert len(preview['questions'])==300
+          categories={}
+          for e in ledger['entries']:
+              if e['status']=='RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED':
+                  categories[e['sourceText']]='PREVIOUSLY_RESERVED_PROVIDER_UNRECONCILED'
+          for e in qhold['originals']:
+              categories[e['sourceText']]='QUARANTINED_PREVIOUS_ORIGINAL'
+          for e in fresh['items']:
+              categories[e['text']]='NOT_YET_GENERATED_AFTER_OWNER_AUDITORY_PILOT'
+          old=fresh['previouslyAttemptedExcludedFromNewTTS']
+          categories[old['text']]='PREVIOUS_PROVIDER_REQUEST_UNCONFIRMED'
+          for e in ledger['entries']:
+              if e.get('blockedForQuizPlayback'):
+                  categories[e['sourceText']]='BLOCKED_EXISTING_ORIGINAL'
+          results=[]
+          missingParts=0
+          for q in gaps['openQuestions']:
+              qid=q['questionId']
+              row=preview['questions'][qid]
+              assert row['ageBand']==q['ageBand']
+              assert row['allFourPartsAvailable'] is False
+              actually_missing=sorted(k for k,p in row['parts'].items() if p['available'] is False)
+              assert actually_missing==sorted(q['missingParts']), (qid,actually_missing,q['missingParts'])
+              partrows=[]
+              for part in actually_missing:
+                  source=row['parts'][part]
+                  segments=source.get('missingOriginalSegments',[])
+                  assert segments, (qid,part,'unexplained missing part')
+                  partrows.append({'part':part,'missingSourceSegments':[
+                      {'exact':v,'classification':categories.get(v,'UNMAPPED_NEEDS_SOURCE_INSPECTION')}
+                      for v in segments
+                  ]})
+              missingParts+=len(actually_missing)
+              results.append({'questionId':qid,'ageBand':q['ageBand'],
+                              'missingParts':partrows})
+          assert len(results)==21 and missingParts==27
+          unmapped=[(r['questionId'],p['part'],s['exact'])
+                    for r in results for p in r['missingParts'] for s in p['missingSourceSegments']
+                    if s['classification']=='UNMAPPED_NEEDS_SOURCE_INSPECTION']
+          result={
+             'schemaVersion':1,'scope':'KIDS_V4_CURRENT_21_GAPS_EXACT_SOURCE_RECONCILIATION',
+             'modelId':'eleven_v4','voiceId':'DkU7j9uO4ZEtLD2iRZSH',
+             'selectedQuestions':450,'completeQuestions':429,'incompleteQuestions':21,
+             'missingAudioParts':missingParts,'ownerPronunciationApproved':False,
+             'paidSynthesisAuthorized':False,'newProviderGenerationCalls':0,
+             'publicReleaseAllowed':False,'unmappedMissingSegmentReferences':unmapped,
+             'questions':results
+          }
+          output=root/'review-only/quiz-v4-21-source-gap-audit-current.json'
+          output.write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          summary=['# DAR KIDS – 21 fehlende Quizfragen / technische Quellprüfung',
+                   '429/450 vierteilig vorhanden; 21 offen; 27 fehlende Hörteile. '
+                   '0 neue ElevenLabs-Aufnahmen. Keine Freigabe.','']
+          for q in results:
+              for p in q['missingParts']:
+                  summary.append('## '+q['questionId']+' / '+p['part'])
+                  summary.extend('- '+s['classification']+': '+s['exact']
+                                 for s in p['missingSourceSegments'])
+          summary+=['','Unkartierte Quellsegmente: '+str(len(unmapped))]
+          (root/'review-only/QUIZ-V4-21-GAP-AUDIT-CURRENT.md').write_text(
+             '\n'.join(summary)+'\n',encoding='utf-8')
+          print('KIDS_V4_EXACT_MISSING_21 '+json.dumps({
+             'questions':len(results),'missingParts':missingParts,
+             'unmapped':unmapped,'newCreditsSpent':0},ensure_ascii=False))
+          PY
+      - name: Preserve diagnosis privately, never upload to public site
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-21-gaps-current-review-no-credits
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            kids/review-only/quiz-v4-21-source-gap-audit-current.json
+            kids/review-only/QUIZ-V4-21-GAP-AUDIT-CURRENT.md
