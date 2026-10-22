@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 1,
+  "scope": "DAR_KIDS_V4_REMAINING16_DICTIONARY_PREFLIGHT_NO_GENERATION",
+  "asOf": "2026-10-22",
+  "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "languageCode": "de",
+  "dictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+  "dictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
+  "newTextCount": 16,
+  "newCharacters": 1108,
+  "newSpeechCreditsAllowed": 0,
+  "requiresOwnerApprovedListeningPilot": true,
+  "publicReleaseAllowed": false,
+  "sources": [
+    "kids/data/quiz-v4-age7to10-offline-coverage.json",
+    "kids/data/quiz-v4-connected-flow-originals-ledger.json",
+    "kids/data/quiz-v4-owner-pronunciation-hold-20261021.json",
+    "kids/data/quiz-v4-curated-450-production-review.json",
+    "kids/review-only/quiz-v4-450-remaining21-audio-blocker-ledger-20261022.json"
+  ],
+  "items": [
+    {
+      "text": "Allah beschreibt den Qurʾān als Rechtleitung für die Muttaqīn.",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-023",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-080",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Halāle und gute Nahrung.",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-131",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Allah befiehlt, von dem Halālen und Guten auf der Erde zu essen.",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-131",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Allah erlaubt das Halāle und Gute und warnt vor den Schritten des Shayṭān.",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-271",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-276",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Mit wessen Erlaubnis geschahen die Wunder ʿĪsās?",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-278",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Der Qurʾān wiederholt, dass ʿĪsās Zeichen mit Allahs Erlaubnis geschahen.",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-278",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-036",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-097",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Der längste Qurʾān-Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-189",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-485",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Die Qurʾān-Duʿāʾ bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-499",
+          "part": "explanation"
+        }
+      ]
+    },
+    {
+      "text": "Was zeigt die Geschichte Ayyūbs in Qurʾān 21:83–84 über Prüfungen?",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-640",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Welche Verbindung macht Sulaymāns Duʿāʾ in Qurʾān 27:19 deutlich?",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-641",
+          "part": "question"
+        }
+      ]
+    },
+    {
+      "text": "Ghībah ist erlaubt, solange die Person es nicht hört.",
+      "requiredByFields": 1,
+      "usedBy": [
+        {
+          "questionId": "kids-quiz-839",
+          "part": "question"
+        }
+      ]
+    }
+  ]
+}
