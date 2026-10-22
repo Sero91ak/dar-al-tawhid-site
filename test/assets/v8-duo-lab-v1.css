@@ -84,3 +84,15 @@ html button.dar-v8-quick-btn:active{transform:scale(.97)}
 }
 @media(max-height:560px){html .dar-v8-duo-rail{display:none!important}}
 @media(prefers-reduced-motion:reduce){html .dar-v8-duo-rail *,html button.dar-v8-quick-btn{transition:none!important}}
+
+
+/* Native original 3D assets within the three global quick controls. */
+html .dar-v8-quick-btn img.dar-v8-quick-3d{
+ display:block;width:25px;height:25px;max-width:100%;object-fit:contain;
+}
+html .dar-v8-quick-btn .dar-v8-quick-language-icon{
+ display:block;font-size:19px;line-height:1;
+}
+@media(max-width:430px){
+ html .dar-v8-quick-btn img.dar-v8-quick-3d{width:22px;height:22px}
+}
