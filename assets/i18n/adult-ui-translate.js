@@ -15,7 +15,13 @@ const deny="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-
  "article[data-nav='post'],[data-post-id],[data-post-body],[data-page='post'],"+
  "[data-view='post'],[data-route='post'],[class*='post-card'],[class*='post-title'],"+
  "[class*='post-detail'],[class*='post-excerpt'],[class*='post-preview'],"+
- "[class*='sf-post'],[class*='feed-post'],[class*='post-row'],[class*='post-feed']";
+ "[class*='sf-post'],[class*='feed-post'],[class*='post-row'],[class*='post-feed'],"+
+ "[class*='prophets-quote__de'],[class*='prophets-quote__ar'],"+
+ "[class*='prophets-quote__meta'],[class*='prophets-quote__title'],"+
+ "[class*='prophets-detail__sub'],[class*='prophets-verse__text'],"+
+ "[class*='prophets-verse__arabic'],[class*='prophets-source-panel__meta'],"+
+ "[class*='quran-translation'],[class*='ayah-translation'],[class*='verse-translation'],"+
+ "[class*='hadith-quote'],[class*='dua-meaning'],[class*='duas-meaning']";
 const attrs=["placeholder","aria-label","title"];
 let state="pending",queued=false;
 function locale(){try{return global.localStorage.getItem(KEY)==="tr"?"tr":"de"}catch(_){return"de"}}
