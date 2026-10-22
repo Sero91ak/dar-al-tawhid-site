@@ -44,7 +44,7 @@ jobs:
           node test/assets/dar-test-turkish-ui.test.cjs
           node test/i18n/test-seven-locales.cjs
           node test/i18n/test-nine-registry.cjs
-          node test/i18n/audit-visible-ui-nine.cjs
+          node test/i18n/audit-visible-ui-nine.cjs --self-test
           node test/i18n/test-expanded-headings-seven.cjs
           node test/i18n/test-canonical-visible-titles.cjs
           node - <<'NODE'
