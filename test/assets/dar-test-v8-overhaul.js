@@ -59,9 +59,11 @@
   return '<button type="button" data-dv8-'+attribute+'="'+esc(value)+'" aria-pressed="'+(value===actual)+'">'+esc(label)+'</button>';
  }
  function preferences(){
+  const themes=[["light","Klassisch Hell","#f2eee3"],["eisgold","Eisgold","#d8eefb"],["salbei","Salbei Elfenbein","#b6cbb6"],["soft","Sanft Elegant","#f2e6e2"],["dark","Klassisch Dunkel","#050706"],["royal","Royal Nachtblau","#07162c"],["bordeaux","Bordeaux Royal","#5d3640"],["dar-al-layl","Dār al-Layl","#15271f"]];
   const density=get(STORAGE_DENSITY,"compact");
   const motion=get(STORAGE_MOTION,"system");
   return '<div class="dat-v8-preferences" data-dar-no-translate="v8-controls">'+
+    '<details class="dat-v8-palette"><summary>Farbwelten & Erscheinungsbilder · 8</summary><div class="dat-v8-palette-grid">'+themes.map(([key,name,color])=>'<button type="button" data-dv8-theme="'+key+'" aria-label="'+name+'" title="'+name+'"><i style="background:'+color+'" aria-hidden="true"></i><span>'+name+'</span></button>').join('')+'</div></details>'+
     '<div class="dsh-group-head"><span>Oberfläche & Geräte</span></div>'+
     '<div class="dat-v8-preference-group" role="group" aria-label="Darstellungsdichte">'+
        optionButton("Kompakt","compact",density,"density")+optionButton("Komfort","comfort",density,"density")+
@@ -121,6 +123,10 @@
   if(navBtn){e.preventDefault();nav(navBtn.dataset.dv8Nav,navBtn.dataset.dv8Value||"");return}
   const language=e.target.closest("[data-dv8-language]");
   if(language){e.preventDefault();w.DARAdultLanguagePickerV1?.open?.("settings",language);return}
+  const palette=e.target.closest("[data-dv8-theme]");
+  if(palette){e.preventDefault();const theme=palette.dataset.dv8Theme;
+    if(typeof w.applyTheme==="function"){w.applyTheme(theme);schedule()}
+    else nav("settings","appearance");return}
   const dense=e.target.closest("[data-dv8-density]");
   if(dense){set(STORAGE_DENSITY,dense.dataset.dv8Density);schedule();
    d.querySelectorAll("[data-dv8-density]").forEach(b=>b.setAttribute("aria-pressed",String(b===dense)));return}
