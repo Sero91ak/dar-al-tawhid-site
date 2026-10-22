@@ -24,11 +24,16 @@ const bySection={
  more:["Weitere Bereiche öffnen","Weitere Funktionen und Einstellungen","Zeiten & Erinnerungen"],
  content_ui:["Bild konnte nicht geteilt werden. Bitte kurz warten und erneut versuchen.","Weitere Beiträge laden…"],
  learn:["Āyah gespeichert. Nächste Āyah wird geladen.","Live-Worterkennung ist auf diesem Gerät nicht verfügbar. Aufnahme läuft trotzdem."],
- chat:["Gespräch & Einstellungen","Menü schließen","Zurück zum ʿIlm-Chat"]
+ chat:["Gespräch & Einstellungen","Menü schließen","Zurück zum ʿIlm-Chat","Geprüfte Quellen","Fundstellen prüfen","Fragevorschläge","Quellen werden geprüft …","Weitere Belege","Passende Inhalte der App"],
+ feed:["Beitrag lesen","Bild wird vorbereitet…","Bildbeitrag erstellen und teilen","Feed aktualisieren","Noch keine Bildbeiträge im Feed.","Wissen weitergeben"],
+ home_content:["Bittgebet des Tages","Bücher & PDFs","Neueste Veröffentlichungen","Suchtext löschen","Meist gelesen"],
+ settings_extended:["Hintergrundaktualisierung ausschalten","Hintergrundaktualisierung erlauben","Daten für Widgets und Watch aktualisieren","Ort wird ermittelt …"],
+ quran_extended:["Textgröße","Lautstärke","Timer aus","Vorige Āyah","Wiedergabe beenden","Sūrah zufällig"],
+ hadith_extended:["Die Bibliothek ist gerade nicht erreichbar.","Werke · Kitāb · Bāb · Nummer","Šarḥ – Erklärung zum Ḥadīṯ"]
 };
 for(const code of codes){
  const strings=pack.translations[code];
- assert(strings&&Object.keys(strings).length>=621,"Insufficient "+code+" UI entries");
+ assert(strings&&Object.keys(strings).length>=752,"Insufficient "+code+" UI entries");
  for(const [section,labels] of Object.entries(bySection))
   for(const source of labels){
    const localized=strings[source];
@@ -44,4 +49,4 @@ for(const token of ["[data-canonical-content]","[class*='source-quote']","[class
  assert(source.includes(token),"Protected source/bridge guard missing: "+token);
 }
 console.log("PASS: "+codes.length+" target locales, "+Object.keys(bySection).length+
- " functional UI categories, 621+ labels and protected source/bridge guards");
+ " functional UI categories, 752+ labels and protected source/bridge guards");
