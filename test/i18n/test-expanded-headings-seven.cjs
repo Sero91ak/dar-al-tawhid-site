@@ -84,8 +84,7 @@ for(const locale of EXPECTED){
  const v=pack.translations[locale];
  assert.equal(primary.nodeValue,locale==="de"?"ÜBERLIEFERUNGSMAẞSTAB":v["ÜBERLIEFERUNGSMAẞSTAB"],locale+" motto");
  assert.equal(prayer.nodeValue,locale==="de"?"Faǧr":(locale==="tr"?"Sabah (Fecr)":v["Faǧr"]),locale+" prayer");
- assert.equal(props.textContent,locale==="de"?titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].sourceTitle:
-    titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].translations[locale],locale+" post title");
+ assert.equal(props.textContent,titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].sourceTitle,locale+" Beiträge titles explicitly excluded");
  const dynamicNames={tr:"Sûre Al-Kahf aç",en:"Open Sūrah Al-Kahf",
   ar:"افتح سورة Al-Kahf",ku:"Sûreya Al-Kahf veke",
   ckb:"سوورەتی Al-Kahf بکەرەوە",bs:"Otvori suru Al-Kahf"};
@@ -95,15 +94,14 @@ for(const locale of EXPECTED){
  assert(locale==="de"?summary===null:summary?.startsWith("114 "),locale+" compact Quran library summary");
  const idOne=titles.records["post:ahmad-quran-kalam-allah-001"];
  const idTwo=titles.records["post:abu-hatim-quran-kalam-allah-001"];
- assert.equal(repeatedA.textContent,locale==="de"?idOne.sourceTitle:idOne.translations[locale],locale+" repeated title A");
- assert.equal(repeatedB.textContent,locale==="de"?idTwo.sourceTitle:idTwo.translations[locale],locale+" repeated title B");
- assert.equal(libraryCard.textContent,locale==="de"?idOne.sourceTitle:idOne.translations[locale],locale+" library post title bound by canonical ID");
+ assert.equal(repeatedA.textContent,idOne.sourceTitle,locale+" unmodified Beiträge title A");
+ assert.equal(repeatedB.textContent,idTwo.sourceTitle,locale+" unmodified Beiträge title B");
+ assert.equal(libraryCard.textContent,idOne.sourceTitle,locale+" unmodified Beiträge card");
  const accessibility={
   tr:t=>t+" içeriğini aç",en:t=>"Open "+t,ar:t=>"افتح "+t,
   ku:t=>t+" veke",ckb:t=>t+" بکەرەوە",bs:t=>"Otvori "+t
  };
- const expectedAria=locale==="de"?idOne.sourceTitle+" öffnen":
-   accessibility[locale](idOne.translations[locale]);
+ const expectedAria=idOne.sourceTitle+" öffnen";
  assert.equal(libraryHost.getAttribute("aria-label"),expectedAria,locale+" localized post card accessibility");
 
  assert.equal(original.nodeValue,"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً","Arabic source modified");
