@@ -1,0 +1,30 @@
+{
+  "estimatedCreditCeiling": 110,
+  "estimatedCreditsNotInvoice": 71.71,
+  "ownerRequestedAll21Now": true,
+  "newArabicSpeechRequests": 0,
+  "publicReleaseAllowed": false,
+  "humanPronunciationApproved": false,
+  "sourceQuestionId": "kids-quiz-031",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "expectedOriginalTexts": [
+    {
+      "source": "Den Zorn zurückhalten und verzeihen.",
+      "sha256": "f61315c7fd09b325a685b9682917d124c9c132ae2e8b6965d66613d21d6db91e"
+    },
+    {
+      "source": "Sofort beleidigen.",
+      "sha256": "0ea5f9ee190759019ce3cdd2322d756a8062ed00c1925f5f759ccfa4a158bea4"
+    },
+    {
+      "source": "Etwas kaputt machen.",
+      "sha256": "3a6cb0a42b1c41a9f1439cde7ae0b5ac8a7d836c2852e128b1fd076d4965fd86"
+    }
+  ],
+  "schemaVersion": 1,
+  "status": "STARTED_WITH_REMOTE_PREPOST_CHECKPOINT",
+  "startedAt": "2026-10-22T14:54:40.991534+00:00",
+  "providerRequests": [],
+  "actualChargesUnknown": true
+}
