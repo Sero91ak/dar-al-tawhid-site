@@ -33,7 +33,7 @@ try:
  w.until(lambda d:d.execute_script("return !!window.DARAdultUI18n"))
  w.until(lambda d:d.execute_script("return window.DARAdultUI18n.catalogStatus==='loaded'"))
  count=driver.execute_script("return window.DARAdultUI18n.translatedKeys")
- assert count>=350,f"Shared catalog has only {count} Turkish UI entries"
+ assert count>=640,f"Shared catalog has only {count} Turkish UI entries"
  driver.execute_script("""
  const root=document.getElementById('appView');
  root.innerHTML=window.DAR_MORE_V15.render(
@@ -41,11 +41,30 @@ try:
   (title)=>'<header><h2>'+title+'</h2></header>');
  window.DAR_MORE_V15.sync();
  """)
+ driver.execute_script("""
+ const fixture=document.createElement('section');
+ fixture.id='darGlobalTurkishFixture';
+ fixture.innerHTML='<section class="prayer-panel"><h2>Gebetszeiten</h2><button title="Gebetszeiten anzeigen">Einstellungen</button></section>'+
+ '<section class="prophet-panel"><h3>Propheten</h3><span>Überlieferungsmaßstab</span></section>'+
+ '<article data-nav="post" data-value="fixture-post"><h3>Gebetszeiten</h3></article>'+
+ '<div data-post-id="fixture-post">Einstellungen</div>'+
+ '<p lang="ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>';
+ document.getElementById('appView').appendChild(fixture);
+ """)
  w.until(lambda d:d.execute_script("return !!document.querySelector('.dar-more-v15 [data-dar-adult-locale=tr]')"))
  driver.execute_script("document.querySelector('.dar-more-v15 [data-dar-adult-locale=tr]').click()")
  w.until(lambda d:d.execute_script("return document.documentElement.lang==='tr'"))
  w.until(lambda d:d.execute_script("""return [...document.querySelectorAll('.dar-more-v15 [data-dm-category]')].some(el=>el.textContent.includes('İlim'))"""))
  assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=="tr"
+ w.until(lambda d:d.execute_script("""return document.querySelector('#darGlobalTurkishFixture .prayer-panel h2')?.textContent==='Namaz Vakitleri'"""))
+ assert driver.execute_script("""return document.querySelector('#darGlobalTurkishFixture .prayer-panel button')?.textContent==='Ayarlar'""")
+ assert driver.execute_script("""return document.querySelector('#darGlobalTurkishFixture article h3')?.textContent==='Gebetszeiten'"""),"Beiträge article card must not be translated"
+ assert driver.execute_script("""return document.querySelector('#darGlobalTurkishFixture [data-post-id]')?.textContent==='Einstellungen'"""),"Post content must stay in German"
+ assert driver.execute_script("""return document.querySelector('#darGlobalTurkishFixture [lang=ar]')?.textContent==='بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'"""),"Quran Arabic must be preserved"
+ driver.execute_script("""location.hash='#post/fixture-post';document.getElementById('appView').insertAdjacentHTML('beforeend','<span id="postRouteTurkishGuard">Gebetszeiten</span>');window.DARAdultUI18n.apply()""")
+ assert driver.execute_script("return document.getElementById('postRouteTurkishGuard').textContent")=="Gebetszeiten","Post route must be excluded"
+ driver.execute_script("""location.hash='#more';document.getElementById('postRouteTurkishGuard').remove();window.DARAdultUI18n.apply()""")
+
  print("PASS public modules: More controls and visible Turkish labels",flush=True)
  driver.execute_script("document.querySelector('.dar-more-v15 [data-dar-adult-locale=de]').click()")
  w.until(lambda d:d.execute_script("return document.documentElement.lang==='de'"))
