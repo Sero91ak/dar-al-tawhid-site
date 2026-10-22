@@ -122,17 +122,39 @@ def protect_paid_texts(root: Path, registry: dict, ledger: dict) -> set[str]:
                 reference_url = item.get("originalMP3URL") or item.get("savedURL")
                 ref_generation = (original.get("originalGenerationId")
                                   or original.get("generationId")) if original else None
-                if (not original or not receipt or spoken not in charged
-                        or original.get("sha256") != item.get("importedMP3SHA256")
-                        or original.get("sha256") != receipt.get("mp3Sha256")
-                        or item.get("sourceTextSHA256") != hashlib.sha256(
-                            spoken.encode("utf-8")).hexdigest()
-                        or (reference_url and original.get("url") != reference_url)
-                        or (ref_generation is not None and
-                            ref_generation != item.get("generationId"))):
+                source_matches = bool(
+                    original
+                    and item.get("sourceTextSHA256") ==
+                        hashlib.sha256(spoken.encode("utf-8")).hexdigest()
+                    and original.get("sha256") == item.get("importedMP3SHA256")
+                    and original.get("voiceId") == VOICE
+                    and original.get("modelId") == MODEL
+                    and (not reference_url or original.get("url") == reference_url)
+                    and (ref_generation is None or
+                         ref_generation == item.get("generationId")))
+                # The direct-paid batch has a local credit receipt. ElevenLabs
+                # Creative imports may be charged entirely inside the
+                # connected account, with no second GitHub paid ledger row.
+                # In that case, require the ORIGINAL provider generation ID
+                # and SHA in the immutable registry; never invent a charge.
+                direct_receipt = bool(
+                    receipt
+                    and spoken in charged
+                    and original
+                    and receipt.get("mp3Sha256") == original.get("sha256"))
+                flow_provider_receipt = bool(
+                    not receipt
+                    and spoken not in charged
+                    and original
+                    and item.get("provider") == "ElevenLabs"
+                    and original.get("providerGenerationId") ==
+                        item.get("generationId")
+                    and isinstance(item.get("generationId"), str)
+                    and bool(item.get("generationId")))
+                if not source_matches or not (direct_receipt or flow_provider_receipt):
                     raise RuntimeError(
-                        "Connected original receipt verification failed: paid "
-                        "SHA, source URL, or generation ID mismatch")
+                        "Connected original receipt verification failed: "
+                        "source SHA, provider generation, paid SHA or URL mismatch")
             if status == "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY":
                 original=recorded.get(spoken)
                 if (not original or spoken not in charged
