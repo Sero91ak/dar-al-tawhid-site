@@ -583,7 +583,7 @@ function translateExact(value,language="tr"){
 for(const [de,tr] of ENTRIES){if(backward.has(tr)&&backward.get(tr)!==de)ambiguous.add(tr);else backward.set(tr,de)}
 const EXCLUDE="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],[lang='ar'],[dir='rtl'],[class*='quran-arabic'],[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],[class*='post-content'],[class*='hadith-text'],[class*='qsource-statement'],[class*='source-quote'],[class*='prophets-quote__de'],[class*='verse-translation'],[class*='dua-meaning'],[data-canonical-content],.prophets-quote__de,.prophets-quote__ar,.prophets-quote__meta,.prophets-quote__title,.prophets-detail__sub,.prophets-verse__text,.prophets-verse__arabic";
 const originals=new WeakMap(),attributeOriginals=new WeakMap();
-const ATTRS=["placeholder","aria-label","title"];
+const ATTRS=["placeholder","aria-label","aria-description","title","alt"];
 function currentLocale(){try{const v=global.localStorage?.getItem(KEY);return SUPPORTED.has(v)?v:"de"}catch(_){return"de"}}
 function shouldSkip(element){
  if(!element||typeof element.closest!=="function")return false;
