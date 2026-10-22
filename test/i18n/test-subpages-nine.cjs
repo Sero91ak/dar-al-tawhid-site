@@ -40,7 +40,7 @@ for(const code of codes){
  assert(!Object.hasOwn(strings,protectedVerse),"Protected quote in UI dictionary "+code);
 }
 const source=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js"),"utf8");
-for(const token of ["[data-canonical-content]","[class*='source-quote']","[class*='hadith-text']","[class*='quran-arabic']","source:\"native\""]){
+for(const token of ["[data-canonical-content]","[class*='source-quote']","[class*='hadith-text']","[class*='quran-arabic']","event?.detail?.source===\"native\""]){
  assert(source.includes(token),"Protected source/bridge guard missing: "+token);
 }
 console.log("PASS: "+codes.length+" target locales, "+Object.keys(bySection).length+
