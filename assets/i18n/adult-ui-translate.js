@@ -5,16 +5,26 @@
  */
 (function(global){"use strict";
 if(/^\/test(?:\/|$)/.test(global.location.pathname)||global.DARAdultUI18n)return;
-const KEY="darAdultPreferredLocaleV1",URI="/assets/i18n/adult-ui-de-tr.json";
+const KEY="darAdultPreferredLocaleV1",URI="/assets/i18n/adult-ui-de-tr.json?v=20261022-global-nonposts";
 const catalog=new Map(),originalTexts=new WeakMap(),originalAttributes=new WeakMap();
 const deny="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],"+
  "[lang='ar'],[dir='rtl'],[data-canonical-content],[class*='quran-arabic'],"+
  "[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],"+
  "[class*='post-content'],[class*='hadith-text'],[class*='source-quote'],"+
- "[class*='qsource-statement'],[class*='hadith-narration'],[class*='dua-arabic']";
+ "[class*='qsource-statement'],[class*='hadith-narration'],[class*='dua-arabic'],"+
+ "article[data-nav='post'],[data-post-id],[data-post-body],[data-page='post'],"+
+ "[data-view='post'],[data-route='post'],[class*='post-card'],[class*='post-title'],"+
+ "[class*='post-detail'],[class*='post-excerpt'],[class*='post-preview'],"+
+ "[class*='sf-post'],[class*='feed-post'],[class*='post-row'],[class*='post-feed']";
 const attrs=["placeholder","aria-label","title"];
 let state="pending",queued=false;
 function locale(){try{return global.localStorage.getItem(KEY)==="tr"?"tr":"de"}catch(_){return"de"}}
+function isPostRoute(){
+ const pathname=String(global.location?.pathname||"");
+ const route=String(global.location?.hash||"").replace(/^#\/?/,"").split(/[/?]/)[0].toLowerCase();
+ return /^\/(?:p|posts|beitrag|beitraege)(?:\/|$)/i.test(pathname)||
+   ["post","posts","recent","beitraege","beiträge","article"].includes(route);
+}
 function excluded(el){return !!(el&&typeof el.closest==="function"&&el.closest(deny))}
 function translate(value){
  if(typeof value!=="string")return null;
@@ -38,7 +48,8 @@ function translate(value){
  const range=value.match(/^Sūrenbereich wechseln, aktuell (\d+)[–-](\d+)$/);
  if(range)return "Sûre aralığını değiştir, şu an "+range[1]+"–"+range[2];
  const open=value.match(/^(.{2,160}) öffnen$/);
- if(open&&!/[<>\u0600-\u06ff]/.test(open[1]))return open[1]+" aç";
+ if(open&&catalog.has(open[1])&&!/[<>\u0600-\u06ff]/.test(open[1]))
+  return catalog.get(open[1])+" aç";
  return null;
 }
 function textNode(node,code){
@@ -70,7 +81,8 @@ function attributes(el,code){
  }
 }
 function apply(root=global.document.body){
- if(!root)return 0;
+ // User scope: the entire Beiträge area is intentionally left in German.
+ if(!root||isPostRoute())return 0;
  const lang=locale();
  if(lang==="tr"&&!catalog.size)return 0;
  const filter=global.NodeFilter;
