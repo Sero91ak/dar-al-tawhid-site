@@ -16,6 +16,17 @@ try:
     wait.until(lambda d:d.execute_script("return !!window.DarTestTurkishUI"))
     wait.until(lambda d:d.execute_script("return window.__DarTestSevenLocalesReady===true"))
     wait.until(lambda d:d.execute_script("return document.querySelectorAll('#dv3Home [data-dv3-locale]').length===7"))
+    wait.until(lambda d:d.execute_script("return !!document.querySelector('#darAdultBrandHeaderV2 .dtbh-toggle')"))
+    assert driver.execute_script("""return [...document.querySelectorAll('#darAdultBrandHeaderV2 .dtbh-row > button')].map(x=>x.classList.contains('dtbh-language-shortcut')?'language':x.classList.contains('dtbh-account-shortcut')?'account':x.classList.contains('dtbh-toggle')?'palette':'other').join(',')""") == "language,account,palette"
+    driver.execute_script("document.querySelector('#darAdultBrandHeaderV2 .dtbh-language-shortcut').click()")
+    wait.until(lambda d:d.execute_script("return !!document.querySelector('#darAdultLanguagePicker [data-dal-locale=tr]')"))
+    driver.execute_script("document.querySelector('#darAdultLanguagePicker [data-dal-close]').click()")
+    driver.execute_script("document.querySelector('#darAdultBrandHeaderV2 .dtbh-toggle').click()")
+    assert driver.execute_script("return !document.querySelector('#darAdultBrandPaletteV2').hidden")
+    driver.execute_script("document.querySelector('#darAdultBrandHeaderV2 .dtbh-toggle').click()")
+    driver.execute_script("const f=window.navigate;window.__accountHeaderCall=null;window.navigate=function(){window.__accountHeaderCall=[...arguments]};document.querySelector('#darAdultBrandHeaderV2 .dtbh-account-shortcut').click();window.navigate=f")
+    assert driver.execute_script("return window.__accountHeaderCall && window.__accountHeaderCall[0]==='account'")
+    print("PASS: mounted TEST header language/account/palette order and behavior",flush=True)
     for lang,direction in locales:
         driver.execute_script(
             "document.querySelector('#dv3Home [data-dv3-locale=\"'+arguments[0]+'\"]').click()",
