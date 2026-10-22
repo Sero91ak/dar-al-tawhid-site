@@ -15,7 +15,7 @@ const countByLocale={};
 for(const locale of expected.slice(1)){
  const dict=locales.translations[locale];
  const values=Object.keys(dict);
- assert(values.length>=473,locale+" lacks basic UI vocabulary");
+ assert(values.length>=524,locale+" lacks basic UI vocabulary");
  assert(values.every(x=>x.trim()&&typeof dict[x]==="string"&&dict[x].trim()));
  for(const label of ["Startseite","Mehr","Gebetszeiten","Einstellungen","Suche","Konto","Suchen","Heute","Qurʾān","Duʿāʾ"]){
   assert(dict[label],locale+" missing "+label);
