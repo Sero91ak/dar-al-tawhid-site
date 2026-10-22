@@ -81,8 +81,13 @@ function attributes(el,code){
  }
 }
 function apply(root=global.document.body){
- // User scope: the entire Beiträge area is intentionally left in German.
- if(!root||isPostRoute())return 0;
+ if(!root)return 0;
+ // Beiträge stay German while the application language remains Turkish.
+ if(isPostRoute()){
+  if(global.document.documentElement)global.document.documentElement.lang=locale();
+  syncButtons();
+  return 0;
+ }
  const lang=locale();
  if(lang==="tr"&&!catalog.size)return 0;
  const filter=global.NodeFilter;
