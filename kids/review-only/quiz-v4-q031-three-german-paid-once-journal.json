@@ -29,11 +29,16 @@
     {
       "sourceText": "Den Zorn zurückhalten und verzeihen.",
       "sourceSha256": "f61315c7fd09b325a685b9682917d124c9c132ae2e8b6965d66613d21d6db91e",
-      "status": "REQUEST_STARTED_UNCONFIRMED",
+      "status": "ORIGINAL_MP3_SAVED_PRIVATE_REVIEW",
       "startedAt": "2026-10-22T14:54:43.279230+00:00",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
-      "publicReleaseAllowed": false
+      "publicReleaseAllowed": false,
+      "originalMP3Sha256": "996d3e5e19dff64d52233e630b4f08678c4d6e182c22d5fceddab64588a6b1f1",
+      "originalMP3": "/kids/assets/kids-quiz-audio/v4-curated450-review/f61315c7fd09b325a685b9682917d124.mp3",
+      "providerRequestId": "yNeSvfYkpvCmvftresyI",
+      "bytes": 43510,
+      "completedAt": "2026-10-22T14:54:47.997663+00:00"
     }
   ],
   "actualChargesUnknown": true

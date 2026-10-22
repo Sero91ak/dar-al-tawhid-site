@@ -368,7 +368,7 @@
         "kids-quiz-031"
       ],
       "sourceAudioPart": "question",
-      "status": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "status": "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -377,7 +377,10 @@
       "estimatedCreditsNotInvoice": 34.886,
       "actualProviderCredits": null,
       "humanListeningApproved": false,
-      "publicReleaseAllowed": false
+      "publicReleaseAllowed": false,
+      "importedMP3SHA256": "996d3e5e19dff64d52233e630b4f08678c4d6e182c22d5fceddab64588a6b1f1",
+      "providerRequestId": "yNeSvfYkpvCmvftresyI",
+      "originalMP3": "/kids/assets/kids-quiz-audio/v4-curated450-review/f61315c7fd09b325a685b9682917d124.mp3"
     },
     {
       "sourceText": "Sofort beleidigen.",
