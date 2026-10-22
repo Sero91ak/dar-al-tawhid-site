@@ -1,0 +1,132 @@
+name: KIDS V4 Q031 Existing Genuine Originals – Repair Metadata and Confirm 430/450 (zero TTS)
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths: ['.github/workflows/kids-v4-q031-original-mp3-metadata-reconcile-430-20261022.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+jobs:
+  repair-actual-mp3-metadata-and-reassemble:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      ELEVENLABS_API_KEY: ''
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Match exact existing three original MP3 hashes and fill missing byte length
+        run: |
+          python3 - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          root=Path.cwd()
+          r=root/'kids/data/quiz-v4-450-original-clip-registry.json'
+          j=root/'kids/review-only/quiz-v4-q031-three-german-paid-once-journal.json'
+          p=root/'kids/data/quiz-v4-450-paid-generation-ledger.json'
+          f=root/'kids/data/quiz-v4-connected-flow-originals-ledger.json'
+          hold=json.loads((root/'kids/data/quiz-v4-pronunciation-hold.json').read_text())
+          rel=json.loads((root/'kids/data/quiz-curation-release.json').read_text())
+          assert hold['productionPaused'] is True and hold['humanPronunciationApproved'] is False
+          assert hold['publicQuizAudioReleaseAuthorized'] is False and rel['enabled'] is False
+          reg=json.loads(r.read_text());journal=json.loads(j.read_text())
+          ledger=json.loads(p.read_text());flow=json.loads(f.read_text())
+          assert journal['status']=='THREE_GERMAN_ORIGINALS_SAVED_PRIVATE_REVIEW'
+          assert len(journal['providerRequests'])==3
+          charged={a['text']:a for a in ledger['rows']}
+          refs={a['sourceText']:a for a in flow['entries']}
+          for item in journal['providerRequests']:
+              text=item['sourceText']
+              assert item['status']=='ORIGINAL_MP3_SAVED_PRIVATE_REVIEW'
+              rec=reg['textClips'].get(text)
+              assert rec and rec['sha256']==item['originalMP3Sha256']
+              assert rec['textSha256']==hashlib.sha256(text.encode('utf8')).hexdigest()
+              assert rec['voiceId']=='DkU7j9uO4ZEtLD2iRZSH' and rec['modelId']=='eleven_v4'
+              assert charged[text]['mp3Sha256']==rec['sha256']
+              assert refs[text]['importedMP3SHA256']==rec['sha256']
+              assert refs[text]['status']=='DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY'
+              file=(root/rec['url'].lstrip('/')).resolve()
+              assert file.is_relative_to(root/'kids/assets/kids-quiz-audio') and file.is_file()
+              raw=file.read_bytes()
+              assert hashlib.sha256(raw).hexdigest()==rec['sha256']
+              assert len(raw)==item['bytes'] and len(raw)>1500
+              assert raw.startswith(b'ID3') or raw[:1]==b'\xff'
+              assert rec.get('bytes') in (None,len(raw))
+              assert rec.get('audioListeningApproved') in (None,False)
+              rec['bytes']=len(raw)
+              rec['audioListeningApproved']=False
+              rec['qaApproval']='pending-human-auditory-review'
+              rec['status']='PRIVATE_REVIEW_ONLY_NOT_PUBLISHED'
+          r.write_text(json.dumps(reg,ensure_ascii=False,indent=2)+'\n')
+          print('Q031_SOURCE_BYTE_SHA_MATCH 3/3: original MP3 stored, paid metadata corrected, no new synthesis')
+          PY
+      - name: Verify all stored original MP3 metadata and rebuild authentic 430-question preview
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null || ! command -v ffmpeg >/dev/null; then
+            sudo apt-get -qq update
+            sudo apt-get -qq install -y ffmpeg
+          fi
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/qa_quiz_v4_saved_mp3.py
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root=Path('kids')
+          p=json.loads((root/'data/quiz-v4-450-production-status.json').read_text())
+          summary=json.loads((root/'review-only/quiz-v4-450-actual-mp3-import-summary.json').read_text())
+          audio=json.loads((root/'data/quiz-v4-age7to10-composed-preview.json').read_text())
+          q=audio['questions']['kids-quiz-031']
+          assert q['allFourPartsAvailable'] is True
+          assert p['completedQuestionsWithAllFourAudioParts']==430
+          assert summary['completeFourPartQuestions']==430
+          assert p['ageBreakdown']['7-8']['completeAllFourOriginalAudios']==144
+          assert not p['all450AudioReadyToPublish'] and not p['livePublished']
+          assert summary['humanListeningApprovals']==0 and not summary['publicReleaseEnabled']
+          print('KIDS_V4_Q031_430_OF_450_GENUINE_MP3_TECHNICAL_PASS',p['completedQuestionsWithAllFourAudioParts'])
+          PY
+      - name: Commit only private genuine original receipts and 430-question listening previews
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-original-metadata-audit
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-v4-450-original-clip-registry.json kids/data/quiz-v4-450-production-status.json
+          git add kids/data/quiz-v4-450-saved-mp3-technical-qa.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/ kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          if git diff --cached --quiet; then
+             echo "No changes"; exit 0
+          fi
+          git commit -m 'review(kids V4): verify original MP3 byte hashes and stage 430 of 450 privately [skip ci]'
+          for retry in 1 2 3; do
+            git push origin HEAD:review/kids-v4-nine-prepaid-artifact-replay-20261022 && exit 0
+            git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Preserve proof and private review artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-430-genuine-private-mp3-no-new-tts
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            kids/data/quiz-v4-450-production-status.json
+            kids/data/quiz-v4-age7to10-offline-coverage.json
+            kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+            kids/review-only/quiz-v4-q031-three-german-paid-once-journal.json
