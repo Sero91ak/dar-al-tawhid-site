@@ -92,6 +92,7 @@ def protect_paid_texts(root: Path, registry: dict, ledger: dict) -> set[str]:
             "GENERATED_AWAITING_ORIGINAL_MP3_IMPORT",
             "PROVIDER_REJECTED_NO_CHARGE_VERIFY",
             "IMPORTED_ORIGINAL_MP3_VERIFIED",
+            "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY",
         }
         for item in flow["entries"]:
             spoken = item.get("sourceText")
@@ -102,9 +103,13 @@ def protect_paid_texts(root: Path, registry: dict, ledger: dict) -> set[str]:
                     or item.get("modelId") != MODEL or item.get("voiceId") != VOICE
                     or status not in statuses or spoken in pending_flow):
                 raise RuntimeError("Connected paid text identity/status mismatch")
-            if spoken in reserved or (spoken in charged and status != "IMPORTED_ORIGINAL_MP3_VERIFIED"):
+            if spoken in reserved or (spoken in charged and status not in (
+                    "IMPORTED_ORIGINAL_MP3_VERIFIED",
+                    "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY")):
                 raise RuntimeError("Connected V4 speech already paid through another source")
-            if spoken in recorded and status != "IMPORTED_ORIGINAL_MP3_VERIFIED":
+            if spoken in recorded and status not in (
+                    "IMPORTED_ORIGINAL_MP3_VERIFIED",
+                    "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY"):
                 raise RuntimeError("Connected pending MP3 conflicts with saved registry")
             if status == "IMPORTED_ORIGINAL_MP3_VERIFIED":
                 original = recorded.get(spoken)
@@ -112,7 +117,17 @@ def protect_paid_texts(root: Path, registry: dict, ledger: dict) -> set[str]:
                         or original.get("sha256") != item.get("importedMP3SHA256")
                         or original.get("originalGenerationId") != item.get("generationId")):
                     raise RuntimeError("Connected audio claimed imported without verified MP3 and paid receipt")
-            if status != "IMPORTED_ORIGINAL_MP3_VERIFIED":
+            if status == "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY":
+                original=recorded.get(spoken)
+                if (not original or spoken not in charged
+                        or original.get("sha256") != item.get("importedMP3SHA256")
+                        or original.get("url") != item.get("originalMP3")
+                        or original.get("originalType") != "owner-master-v4-direct-dictionary"
+                        or item.get("humanListeningApproved") is not False
+                        or item.get("publicReleaseAllowed") is not False):
+                    raise RuntimeError("Q031 genuine saved dictionary V4 original receipt invalid; stop")
+            if status not in ("IMPORTED_ORIGINAL_MP3_VERIFIED",
+                    "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY"):
                 pending_flow.add(spoken)
     # An earlier provider POST may have consumed credits without ever
     # returning a confirmation or MP3. Protect its ORIGINAL source SHA too.
