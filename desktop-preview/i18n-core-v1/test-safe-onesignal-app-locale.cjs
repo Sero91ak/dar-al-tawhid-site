@@ -29,6 +29,20 @@ assert.doesNotMatch(script,/\.optIn\s*\(|requestPermission\s*\(/);
  locale="ckb";
  const fallback=await global.DARPushLocaleSync.pushLocale();
  assert.equal(fallback.reason,"individual_delivery_required");
+ assert.equal(fallback.fallbackLocale,"de");
+ assert.equal(sent[sent.length-1],"de","Unsupported locale must clear stale Turkish provider language");
  assert.ok(sent.every(code=>code!=="ckb"));
+ const native={
+  OneSignal:{User:{async setLanguage(code){sent.push("NATIVE_WRONG_"+code)}}},
+  DAR_IOS_ONESIGNAL_ID:"native-test-sub",
+  document:{readyState:"complete"},
+  localStorage:{getItem(){return "tr"}},
+  addEventListener(){}
+ };
+ vm.runInNewContext(script,{window:native});
+ const nativeAttempt=await native.DARPushLocaleSync.pushLocale();
+ assert.equal(nativeAttempt.reason,"native_sdk_locale_bridge_required");
+ assert.ok(!sent.some(x=>x.startsWith("NATIVE_WRONG")));
+
  console.log(JSON.stringify({passed:true,turkish:true,french:true,kurdishFailsClosed:true,subscriptionsChanged:false,notificationsSent:0}));
 })().catch(e=>{console.error(e);process.exitCode=1});
