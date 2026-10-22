@@ -35,7 +35,7 @@ const sourceLike=s=>{
  * A bibliographic title can appear inside a button. Keep those titles in the
  * report without pretending they are missing app chrome translations. */
 const selfNames=new Set(Object.values(pack.names));
-const runtimeNumeric=/^(?:[0-9]{1,7} (?:Ergebnisse|Funktionen|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt)|[0-9]{1,3}(?:[.,][0-9])?% Trefferquote|[0-9]{1,5}[/][0-9]{1,5} gewählt)$/;
+const runtimeNumeric=/^(?:[0-9]{1,7} (?:Ergebnisse|Funktionen|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt)|[0-9]{1,3}(?:[.,][0-9])?% Trefferquote|[0-9]{1,5}[/][0-9]{1,5} gewählt|[0-9]{1,4} Āyāt · (?:Mekkanisch|Medinensisch)|[0-9]{1,4} Sūren · [0-9]{1,6} Āyāt)$/;
 function candidateCategory(label,routes){
  if(selfNames.has(label))return "language-name-preserve";
  if(runtimeNumeric.test(label))return "dynamic-runtime-covered";
@@ -58,7 +58,8 @@ if(process.argv.includes("--self-test")){
  assert.equal(candidateCategory("0% Trefferquote",["quiz"]),"dynamic-runtime-covered");
  assert.equal(candidateCategory("5/5 gewählt",["settings"]),"dynamic-runtime-covered");
  assert.equal(candidateCategory("07:24 Uhr",["home"]),"dynamic-value-review");
- assert.equal(candidateCategory("109 Āyāt · Mekkanisch",["quran"]),"dynamic-value-review");
+ assert.equal(candidateCategory("109 Āyāt · Mekkanisch",["quran"]),"dynamic-runtime-covered");
+ assert.equal(candidateCategory("114 Sūren · 6236 Āyāt",["quran"]),"dynamic-runtime-covered");
  assert.equal(candidateCategory("al-Adab al-Mufrad",["books"]),"source-or-name-review");
  assert.equal(candidateCategory("Einstellungen öffnen",["settings"]),"interface-review");
  console.log("PASS: audit classifies language autonyms, numeric status, source titles and app UI separately");
