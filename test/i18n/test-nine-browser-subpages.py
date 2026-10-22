@@ -26,7 +26,7 @@ const excluded = '[data-dar-no-translate],[data-canonical-content],'+
                  '[class*="source-quote"],[class*="verse-translation"],'+
                  '[class*="dua-meaning"],[lang="ar"]';
 function visible(el) {
- if (el.closest(excluded+'[hidden],[aria-hidden="true"]')) return false;
+ if (el.closest(excluded+', [hidden], [aria-hidden="true"]')) return false;
  const s = getComputedStyle(el);
  return s.display !== 'none' && s.visibility !== 'hidden' &&
         el.getClientRects().length > 0;
