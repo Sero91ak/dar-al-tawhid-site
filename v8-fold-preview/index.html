@@ -780,7 +780,8 @@ setInterval(()=>{if(state.page==='prayer'){$('#prayerCurrentClock')&&( $('#praye
 /* Gateway to the unmodified original engine; source: test/assets/dar-quran-player.js.
    Original methods: launchGlobalPlayer(), launchLearnPlayer(). */
 const V8_QURAN_SOURCE_BASE=(function(){
-  const originIsDar=/(^|\\.)dar-al-tawhid\\.de$/i.test(location.hostname)||/\\.workers\\.dev$/i.test(location.hostname);
+  const host=location.hostname.toLowerCase();
+  const originIsDar=host==='dar-al-tawhid.de'||host.endsWith('.dar-al-tawhid.de')||host==='dar-al-tawhid-test.sero91ak.workers.dev';
   return originIsDar?new URL('/test/',location.origin):new URL('https://dar-al-tawhid.de/test/');
 })();
 let v8GatewayMode=null;
