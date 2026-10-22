@@ -155,6 +155,24 @@
   ],
   "unlockedScopes": [
     {
+        "id": "adult-onesignal-nine-language-text-delivery-20261022",
+        "at": "2026-10-22T05:42:29.347Z",
+        "approvedBy": "user-explicit-20261022-live-onesignal-selected-languages-without-prayer-time-changes",
+        "reason": "Strictly localize adult prayer and daily OneSignal message text using reviewed texts, preserve prayer times, cron, existing dedupe, recipient consent and German emojis. Do not change Kids app, service credentials, prayer calculations or add new notifications; existing push password and lane gates remain enforced.",
+        "paths": [
+            "cloudflare/prayer-push-scheduler.js",
+            "cloudflare/daily-push-scheduler.js",
+            "cloudflare/push-nine-language-copy.js",
+            "cloudflare/site-router.js",
+            "assets/dar-onesignal-language-sync.js",
+            ".github/workflows/dar-i18n-translation-inventory.yml",
+            "desktop-preview/i18n-core-v1/test-live-push-i18n-bridge.cjs",
+            "desktop-preview/i18n-core-v1/test-onesignal-live-language-bridge.cjs",
+            "content/admin/change-scope-lock.json"
+        ],
+        "expiresAt": "2026-11-06T23:59:00.000Z"
+    },
+    {
       "id": "push-secure-actions-secret-gate-20261022",
       "at": "2026-10-22T06:50:00+02:00",
       "approvedBy": "user-explicit-20261022-activate-multilingual-push-with-existing-protection",
