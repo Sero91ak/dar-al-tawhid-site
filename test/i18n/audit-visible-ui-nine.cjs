@@ -35,8 +35,10 @@ const sourceLike=s=>{
  * A bibliographic title can appear inside a button. Keep those titles in the
  * report without pretending they are missing app chrome translations. */
 const selfNames=new Set(Object.values(pack.names));
+const runtimeNumeric=/^(?:[0-9]{1,7} (?:Ergebnisse|Funktionen|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt)|[0-9]{1,3}(?:[.,][0-9])?% Trefferquote|[0-9]{1,5}[/][0-9]{1,5} gewählt)$/;
 function candidateCategory(label,routes){
  if(selfNames.has(label))return "language-name-preserve";
+ if(runtimeNumeric.test(label))return "dynamic-runtime-covered";
  if(/^\d|\d{1,2}:\d{2}(?:\s|$)|\b\d{1,2}\.\d{1,2}\.\d{4}\b/.test(label))
   return "dynamic-value-review";
  const onlyContentRoutes=routes.length>0&&routes.every(route=>
@@ -52,7 +54,9 @@ function candidateCategory(label,routes){
 if(process.argv.includes("--self-test")){
  const assert=require("node:assert/strict");
  assert.equal(candidateCategory("Bosanski",["home","more"]),"language-name-preserve");
- assert.equal(candidateCategory("0 gemerkt",["quiz"]),"dynamic-value-review");
+ assert.equal(candidateCategory("0 gemerkt",["quiz"]),"dynamic-runtime-covered");
+ assert.equal(candidateCategory("0% Trefferquote",["quiz"]),"dynamic-runtime-covered");
+ assert.equal(candidateCategory("5/5 gewählt",["settings"]),"dynamic-runtime-covered");
  assert.equal(candidateCategory("07:24 Uhr",["home"]),"dynamic-value-review");
  assert.equal(candidateCategory("109 Āyāt · Mekkanisch",["quran"]),"dynamic-value-review");
  assert.equal(candidateCategory("al-Adab al-Mufrad",["books"]),"source-or-name-review");
@@ -105,5 +109,7 @@ if(process.argv.includes("--write-report")){
 if(process.argv.includes("--full"))console.log(JSON.stringify(report,null,2));
 else console.log(JSON.stringify({scanSource:report.scanSource,scanRoutes:report.scanRoutes,
  auditedCandidates:report.auditedCandidates,fullyCoveredInAllTargetLocales:report.fullyCoveredInAllTargetLocales,
- catalogMissingCandidates:report.untranslatedCandidates.length,reviewCategoryCounts:report.reviewCategoryCounts,
+ catalogMissingCandidates:report.untranslatedCandidates.length,
+ runtimeHandledDynamicCandidates:report.reviewCategoryCounts["dynamic-runtime-covered"]||0,
+ reviewCategoryCounts:report.reviewCategoryCounts,
  reviewFirst:report.reviewFirst,scanErrors:report.scanErrors,notes:report.notes},null,2));
