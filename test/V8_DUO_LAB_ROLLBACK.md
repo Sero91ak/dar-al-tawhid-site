@@ -14,11 +14,15 @@ Arbeitszweig: `feat/test-v8-duo-nine-locale-rollback-20261022`
 
 Auf Wunsch `ZURÜCK` **alle Arbeiten dieses V8-Umbaus** einschließlich der späteren Arbeitsschritte stoppen und den V8-Arbeitszweig zum gesicherten Ausgangscommit zurücksetzen (nur nach Prüfung auf gleichzeitige Änderungen, mit SHA-Schutz). Keine manuelle Einzelrücknahme erforderlich. Falls Teile zwischenzeitlich in andere Branches übernommen worden sind, diese separat mit ihren Release-SHAs rückgängig machen, ohne fremde Arbeiten zu löschen. **Nicht eigenständig einen Live-Release auslösen.**
 
-Zwei eingebundene Dateien aktivieren den Stand nur in DAR TEST:
+Sechs eingebundene Dateien aktivieren den gesamten globalen Umbau nur in DAR TEST:
 - `test/assets/v8-duo-lab-v1.js`
 - `test/assets/v8-duo-lab-v1.css`
+- `test/assets/v8-global-shell-v1.js` (gemeinsame Routen-Oberfläche, bestehende Teilen-Buttons und Social-Links bleiben erhalten)
+- `test/assets/v8-global-shell-v1.css` (übergreifende Layout-, Theme-, Karten- und Einstellungsstruktur)
+- `test/assets/v8-home-editorial-20261022.js` (Salam und originalen Quellennachweis wiederverwenden)
+- `test/assets/v8-home-editorial-20261022.css` (kompakte V8-Startseite, alte Sieben-Sprachen-Leiste ausblenden)
 
-Durch Entfernen der beiden Referenzen aus `test/index.html` wird das neue Layout deaktiviert. Ursprüngliche App-Engine, Daten, Inhaltskataloge, Spracheinstellungen, native iOS-Hülle und CSS-Dateien bleiben unverändert.
+Durch Entfernen sämtlicher sechs Referenzen aus `test/index.html` wird der **gesamte neue Umbau** deaktiviert, unabhängig davon, wie viele weitere optische Schritte auf diesem Branch folgen. Für eine vollständige Rücksetzung des isolierten Testzweigs ist der unveränderliche Basis-Commit oben maßgeblich. Ursprüngliche App-Engine, Daten, Inhaltskataloge, Spracheinstellungen, native iOS-Hülle und CSS-Dateien bleiben unverändert.
 
 ## Was die erste Fassung tatsächlich tut
 
@@ -49,3 +53,11 @@ Zusätzlich isoliert enthalten und durch nur zwei weitere HTML-Referenzen aktivi
 **WICHTIG:** Die visuelle Freigabe aller Unterseiten (Safari, Fold, iPad) und die echte Prüfung der Original-Share-Flows sind noch offen. Kein Merge/Cloudflare-Deploy. Ein Branch ersetzt keine nutzbare Live-Test-URL.
 
 **Ein-Wort-Rollback:** `ZURÜCK` = *komplette V8-Änderungskette dieses isolierten Branches* zurück zum Original-Commit `18e42c4c21f48f3d16da2759c868c33c03659629`. Geschützt durch die vorab gespeicherte Basis. Kein Merge in main vor Freigabe.
+
+## Kontrolle 22.10.2026 — globaler V8-Ausbau
+
+- Neue Oberfläche betrifft **alle** adulten Test-App-Routen; Fold/Duo ist nur ein responsiver Zustand.
+- CSS/JS-Modulreferenzen sind ausschließlich an die Test-HTML angehängt. Der komplette bisherige `test/index.html`-Quelltext ist bytegleich zu `main`, sobald die neuen Modulkopfzeilen entfernt werden (im isolierten Branch geprüft).
+- Die ursprünglichen Reader, Gebetszeiten, Duʿāʾ, Qurʾān-Verse, Nachweise, Quellenlinks, Social-Media-Links und `data-post-share-open` werden nicht überschrieben.
+- Keine Kern-Funktion aufgrund optischer Änderungen ersetzen oder verstecken. Original-Share-Buttons weiterhin mindestens 40–44px klickbar.
+- **Nicht erledigt:** Gerätetests, RTL-/Sprachpaket-End-to-End-Tests, Cloudflare-Testdeployment und Visual-Abnahme. Nicht als produktionsfertig bezeichnen.
