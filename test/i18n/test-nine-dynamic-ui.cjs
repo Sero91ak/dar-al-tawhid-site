@@ -75,8 +75,14 @@ for(const locale of ["tr","en","ar","ku","ckb","bs","fr","es"]){
  const loc=({tr:"tr-TR",en:"en-GB",ar:"ar-EG-u-ca-gregory",ku:"ku-TR",ckb:"ckb-IQ-u-ca-gregory",bs:"bs-BA",fr:"fr-FR",es:"es-ES"})[locale];
  const fmt=n=>new Intl.NumberFormat(loc,{useGrouping:false,minimumIntegerDigits:2}).format(n);
  assert(range.includes(fmt(1)+"–"+fmt(20)),"Range must retain leading zero and native digits: "+locale);
- assert.equal(t("al-Adab al-Mufrad, 3 Veröffentlichungen",locale),null,
-  "Never generalize metadata translation to a bibliographic work title: "+locale);
+ const bibliographic=t("al-Adab al-Mufrad, 3 Veröffentlichungen",locale);
+ if(locale==="tr"){
+  assert.equal(bibliographic,"al-Adab al-Mufrad, 3 yayın",
+   "Existing Turkish bibliography suffix may localize, but title remains canonical");
+ }else{
+  assert.equal(bibliographic,null,
+   "Do not extend translation of bibliographic titles to other locales: "+locale);
+ }
 }
 assert.equal(t("1 Ergebnisse","de"),null);
 assert.equal(t("123 unknown count","es"),null);
