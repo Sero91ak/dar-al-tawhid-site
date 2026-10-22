@@ -1,0 +1,355 @@
+/* DĀR AL TAWḤĪD · V8 GLOBAL VISUAL SYSTEM · TEST ONLY · 2026-10-22
+   Adapts the supplied Fold/Duo V8 HTML aesthetic to the existing full DAR TEST
+   SPA. Uses the theme engine's own palette variables and existing original
+   3D assets. NO reader text changes; NO content reparenting or share overrides. */
+html.dar-v8-shell{
+ --v8-app-bg:var(--bg,#f5f6f1);
+ --v8-panel:var(--card,#fffefb);
+ --v8-elevated:var(--theme-surface-elevated,var(--card,#fffefb));
+ --v8-text:var(--text,#19322b);
+ --v8-muted:var(--muted,#748479);
+ --v8-gold:var(--gold2,var(--gold,#b69866));
+ --v8-border:color-mix(in srgb,var(--v8-gold) 21%,transparent);
+ --v8-soft-border:color-mix(in srgb,var(--v8-text) 10%,transparent);
+ --v8-wash:color-mix(in srgb,var(--v8-panel) 86%,var(--v8-app-bg));
+ --v8-shadow:0 13px 39px rgba(0,0,0,.055);
+ --v8-radius:22px;
+ --v8-row-gap:12px;
+ --v8-content-gutter:clamp(11px,2.6vw,28px);
+}
+html.dar-v8-shell,html.dar-v8-shell body{
+ max-width:100%;min-width:0;overflow-x:clip;
+}
+html.dar-v8-shell body:not(.is-ilm-chat-route){
+ background-color:var(--v8-app-bg);
+}
+html.dar-v8-shell body .app{min-width:0;max-width:100%;box-sizing:border-box}
+html.dar-v8-shell body .app>*{min-width:0;box-sizing:border-box}
+/* One coherent header, not repeated massive marketing heroes. */
+html.dar-v8-shell body .top-shell.dar-v8-header-shell{
+ width:100%;max-width:100%;
+ border:0;border-bottom:1px solid var(--v8-soft-border);
+ margin:0!important;padding:10px var(--v8-content-gutter) 8px!important;
+ border-radius:0!important;background-color:var(--v8-wash)!important;
+ box-shadow:none!important;overflow:visible;
+}
+html.dar-v8-shell body .top-shell .header{
+ min-height:0!important;height:auto!important;
+ margin:0!important;padding:0!important;max-width:100%!important;
+ border:0!important;background-color:transparent!important;
+ box-shadow:none!important;
+}
+html.dar-v8-shell body .top-shell .header-row--brand-only{
+ min-height:48px;max-width:100%;gap:8px;align-items:center!important;
+}
+html.dar-v8-shell body .top-shell .brand{
+ min-width:0;max-width:100%;flex:1 1 auto;
+}
+html.dar-v8-shell body .top-shell .brand-main{
+ display:flex;min-width:0;align-items:center;gap:8px;
+}
+html.dar-v8-shell body .top-shell .brand-main .logo{
+ display:block;width:clamp(34px,5vw,46px);height:clamp(34px,5vw,46px);
+ flex:none;object-fit:contain;
+}
+html.dar-v8-shell body .top-shell .brand-title{
+ font-size:clamp(15px,2.3vw,22px)!important;
+ line-height:1.14!important;white-space:normal;letter-spacing:.055em;
+ text-wrap:balance;
+}
+html.dar-v8-shell body .top-shell .brand-kicker-row small{
+ font-size:clamp(8px,.9vw,10px);letter-spacing:.085em;
+}
+html.dar-v8-shell body:not(.is-home-route) .top-shell :is(.hero-text,.isnad){
+ display:none!important;
+}
+html.dar-v8-shell body.is-home-route .top-shell .hero-text{
+ display:grid!important;gap:5px;
+ padding:8px 0 2px!important;margin:0!important;min-height:0!important;
+}
+html.dar-v8-shell body.is-home-route .top-shell .hero-text .salam{
+ font-size:clamp(15px,2.4vw,21px)!important;line-height:1.26!important;
+ font-weight:650;letter-spacing:-.012em;text-wrap:balance;
+}
+html.dar-v8-shell body.is-home-route .top-shell .hero-text .intro{
+ font-size:clamp(11px,1.4vw,13px)!important;line-height:1.42!important;
+ max-width:85ch;
+}
+html.dar-v8-shell body.is-home-route .top-shell .isnad{
+ padding:8px 2px 5px!important;margin:8px 0 0!important;
+ border:0!important;border-top:1px solid var(--v8-soft-border)!important;
+ border-radius:0!important;box-shadow:none!important;background:transparent!important;
+ display:grid;gap:2px;min-height:0!important;
+}
+html.dar-v8-shell body.is-home-route .top-shell .isnad :is(.isnad-label,.isnad-source){
+ font-size:10px!important;line-height:1.33!important;letter-spacing:.035em;
+}
+html.dar-v8-shell body.is-home-route .top-shell .isnad-quote{
+ font-size:clamp(12px,1.6vw,15px)!important;line-height:1.36!important;
+}
+html.dar-v8-shell body .top-shell #headerPrayerStatus{
+ max-width:100%;min-width:0;
+}
+/* Standard toolbar: existing Back/Home/Breadcrumb and reader share actions. */
+html.dar-v8-shell body .app-bar{
+ display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+ max-width:100%;min-height:48px;
+ margin:0!important;padding:6px var(--v8-content-gutter)!important;
+ border:0!important;border-bottom:1px solid var(--v8-soft-border)!important;
+ background-color:var(--v8-app-bg)!important;
+ box-shadow:none!important;
+}
+html.dar-v8-shell body .app-bar .app-actions{display:flex;gap:6px;min-width:0}
+html.dar-v8-shell body .app-bar :is(.back-btn,.home-btn){
+ min-height:38px;max-width:100%;border-radius:12px!important;
+ font-size:12px!important;white-space:normal;
+}
+html.dar-v8-shell body .app-bar .crumb{
+ flex:1 1 auto;min-width:0;max-width:100%;font-size:11px!important;
+ line-height:1.3;color:var(--v8-muted);overflow-wrap:anywhere;
+}
+html.dar-v8-shell body .app-bar .post-reader-actions{
+ flex:0 0 auto;max-width:100%;position:relative;z-index:4;
+}
+/* Shared page stage, all routes: 1 content gutter only. */
+html.dar-v8-shell body #appView.view{
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ margin:0 auto!important;
+ padding:clamp(10px,2vw,21px) var(--v8-content-gutter)
+  calc(96px + env(safe-area-inset-bottom,0px))!important;
+ box-sizing:border-box!important;
+ overflow-x:clip;
+}
+html.dar-v8-shell body #appView>.view-head{
+ width:100%!important;max-width:100%!important;min-width:0!important;
+ margin:0 0 14px!important;
+ padding:clamp(16px,2.8vw,28px)!important;
+ min-height:0!important;height:auto!important;
+ border:1px solid var(--v8-border)!important;border-radius:var(--v8-radius)!important;
+ box-shadow:var(--v8-shadow)!important;overflow:hidden;
+}
+html.dar-v8-shell body #appView>.view-head :is(h1,h2,.view-title){
+ font-size:clamp(21px,3.6vw,34px)!important;
+ line-height:1.13!important;text-wrap:balance;
+}
+html.dar-v8-shell body #appView>.view-head .view-desc{
+ font-size:clamp(12px,1.55vw,14px)!important;line-height:1.42!important;
+ max-width:70ch!important;
+}
+/* Consistent touchable, original cards rather than a separate demo data set.
+   Scoped to hubs, never article, reader, source citations or share dialogs. */
+html.dar-v8-shell body #appView :is(
+ .dv3-home,.home-v380-shell,.topics-hub,.dua-hub,.more-page,
+ .books-library-shell,.source-library-page,.qov-page,.prayer-overview,
+ .quiz-home,.quiz-shell,.scholars-index,.account-panel,
+ .zakat-view,.calendar-premium-page,.notification-center-page
+ ){min-width:0;max-width:100%}
+html.dar-v8-shell body #appView :is(
+ .dv3-section,.dv3-quick,.dv3-post,.dv3-tawhid,
+ .topics-theme-card,.dua-theme-card,.more-feature-row,.more-group,
+ .qov-surah-card,.quran-surah-card,.library-card,.book-library-card,
+ .books-library-card,.quiz-card,.quiz-home-panel,.account-panel
+ ){
+ box-sizing:border-box;min-width:0;
+ border-radius:clamp(16px,2vw,22px);
+}
+html.dar-v8-shell body #appView :is(
+ .dv3-quick,.dv3-post,.topics-theme-card,.dua-theme-card,
+ .qov-surah-card,.quran-surah-card,.library-card,.book-library-card,
+ .books-library-card
+ ):focus-visible{outline:2px solid var(--v8-gold);outline-offset:2px}
+/* Home gets intentional structure and rhythm, avoiding nested marketing cards. */
+html.dar-v8-shell body.is-home-route #appView .home-v380-shell{
+ width:100%;max-width:100%;margin:0;padding:0;min-width:0;
+}
+html.dar-v8-shell body.is-home-route #appView :is(.dv3-home,.dv3-quick-grid,.dv3-posts){
+ min-width:0;width:100%;max-width:100%;
+}
+html.dar-v8-shell body.is-home-route #appView .dv3-home{
+ display:grid;gap:clamp(11px,1.5vw,18px);
+}
+html.dar-v8-shell body.is-home-route #appView .dv3-hometitle{
+ display:flex;align-items:center;gap:12px;min-width:0;
+ margin:0;padding:0 3px;
+}
+html.dar-v8-shell body.is-home-route #appView .dv3-hometitle h2{
+ font-size:clamp(19px,2.7vw,26px)!important;line-height:1.15;
+}
+html.dar-v8-shell body.is-home-route #appView .dv3-quick-grid{
+ display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;
+}
+html.dar-v8-shell body.is-home-route #appView .dv3-quick{
+ width:100%;max-width:100%;min-width:0;min-height:82px;
+ box-shadow:none!important;
+ border:1px solid var(--v8-border)!important;
+}
+html.dar-v8-shell body.is-home-route #appView .dv3-quick img{object-fit:contain}
+html.dar-v8-shell body.is-home-route #appView .dv3-posts{
+ display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px;
+}
+html.dar-v8-shell body.is-home-route #appView .dv3-post{
+ text-align:start;min-width:0;max-width:100%;
+ border:1px solid var(--v8-soft-border)!important;
+}
+html.dar-v8-shell body.is-home-route #appView :is(.dv3-post-body,.dv3-post-body b){
+ min-width:0;overflow-wrap:anywhere;
+}
+/* Hide V3's obsolete 7-locale selector, which bypasses the 9-locale
+   availability gate. Global header + Settings both use official picker. */
+html.dar-v8-shell body.is-home-route #appView #dv3Home>.dv3-language{display:none!important}
+/* Old V3 header controls would duplicate our language/account/color trio. */
+html.dar-v8-shell body .top-shell #dv3HeaderActions{display:none!important}
+/* The original page-specific posters/heroes remain, but share alignment. */
+html.dar-v8-shell body #appView :is(
+ .qov-header,.dua-hub>.view-head,.topics-hub>.view-head,
+ .more-page>.view-head,.quiz-hero,.calendar-premium-page>.cal-tl-head
+ ){
+ max-width:100%!important;min-width:0;
+ border-radius:var(--v8-radius);
+}
+html.dar-v8-shell body #appView :is(
+ .dua-theme-grid,.topics-theme-grid,.folder-grid,.latest-grid,.lib-grid
+ ){min-width:0;max-width:100%;gap:clamp(9px,1.4vw,17px)!important}
+/* Settings: preserve entire original notification, location, themes, icons,
+   language availability, font sliders. Only layout/rhythm is redesigned. */
+html.dar-v8-shell body.is-settings-route #appView .dsh-shell{
+ width:100%!important;max-width:100%!important;min-width:0;
+}
+html.dar-v8-shell body.is-settings-route #appView .dsh-home .dsh-group{
+ min-width:0;max-width:100%;
+}
+html.dar-v8-shell body.is-settings-route #appView .dsh-home .dsh-group-head{
+ margin:0 2px 9px!important;
+}
+html.dar-v8-shell body.is-settings-route #appView .dsh-list{
+ border-color:var(--v8-border)!important;
+ border-radius:18px!important;overflow:hidden;
+}
+html.dar-v8-shell body.is-settings-route #appView .dsh-list .dsh-row{
+ min-width:0;max-width:100%;min-height:67px!important;
+}
+html.dar-v8-shell body.is-settings-route #appView .dsh-row-icon{
+ border-radius:12px;
+}
+html.dar-v8-shell body.is-settings-route #appView .dsh-detail-content{
+ min-width:0;width:100%;max-width:100%;
+}
+html.dar-v8-shell body.is-settings-route #appView .dsh-detail-content :is(
+ .theme-switch-panel,.app-icon-panel,.app-font-panel,
+ .notification-center-page,.dar-permission-location
+ ){min-width:0;max-width:100%}
+/* RTL metadata belongs to the language picker, not a forced global text
+   direction, which would corrupt source transliteration and verse numbering. */
+html.dar-v8-shell .dal-option[dir="ltr"] .dal-name[dir="rtl"]{
+ direction:rtl;text-align:start;
+}
+/* Layout owners for tablet/open fold. Keep existing reader scroll + selection. */
+@media(min-width:600px){
+ html.dar-v8-shell body #appView.view{
+  padding-inline:clamp(16px,2.5vw,32px)!important;
+  padding-bottom:calc(44px + env(safe-area-inset-bottom,0px))!important;
+ }
+ html.dar-v8-shell body.is-home-route #appView .dv3-quick-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+ }
+ html.dar-v8-shell body #appView :is(.dua-theme-grid,.topics-theme-grid){
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+ }
+}
+@media(min-width:880px){
+ html.dar-v8-shell body.is-home-route #appView .dv3-quick-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+ }
+ html.dar-v8-shell body #appView :is(.dua-theme-grid,.topics-theme-grid){
+  grid-template-columns:repeat(3,minmax(0,1fr));
+ }
+}
+/* At desktop-wide sizes the new V8 dashboard is a real app-side knowledge
+   sidebar, not just a stretched phone. All links use the original router. */
+@media(min-width:1080px) and (min-height:560px){
+ html.dar-v8-shell.dar-v8-duo-open body:not(.is-ilm-chat-route) .app{
+  padding-inline-start:252px!important;
+  padding-inline-end:0!important;
+ }
+ html.dar-v8-shell .dar-v8-duo-rail.dar-v8-global-rail{
+  width:226px!important;padding:17px 11px!important;gap:12px!important;
+  border-radius:22px;
+  align-items:stretch;
+ }
+ html.dar-v8-shell .dar-v8-duo-rail-head{
+  display:flex;align-items:center;gap:9px;padding:1px 3px 11px;
+  border-bottom:1px solid var(--v8-border);
+ }
+ html.dar-v8-shell .dar-v8-duo-rail-name{font-size:13px!important}
+ html.dar-v8-shell .dar-v8-rail-expanded-title{
+  display:block;max-width:113px;overflow:hidden;
+  font:600 10px Georgia,serif;line-height:1.3;letter-spacing:.06em;
+ }
+ html.dar-v8-shell .dar-v8-duo-rail-links{display:none!important}
+ html.dar-v8-shell .dar-v8-global-secondary{
+  display:flex;min-height:0;flex-direction:column;overflow:auto;
+  margin-top:3px;flex:1 1 auto;
+ }
+ html.dar-v8-shell .dar-v8-global-secondary-label{
+  color:var(--v8-muted);font:700 10px system-ui,-apple-system,sans-serif;
+  letter-spacing:.16em;margin:2px 8px 10px;
+ }
+ html.dar-v8-shell .dar-v8-global-secondary-list{display:grid;gap:3px}
+ html.dar-v8-shell button.dar-v8-section-link{
+  width:100%;display:flex;align-items:center;gap:11px;
+  min-height:44px;padding:5px 10px;
+  background:transparent;border:1px solid transparent;
+  border-radius:13px;color:var(--v8-text);text-align:start;
+  font:600 12px/1.25 system-ui,-apple-system,sans-serif;cursor:pointer;
+ }
+ html.dar-v8-shell button.dar-v8-section-link.is-active{
+  color:var(--v8-gold);background:color-mix(in srgb,var(--v8-gold) 13%,transparent);
+  border-color:var(--v8-border);
+ }
+ html.dar-v8-shell button.dar-v8-section-link:focus-visible{
+  outline:2px solid var(--v8-gold);outline-offset:2px;
+ }
+ html.dar-v8-shell button.dar-v8-section-link .dar-v8-section-image{
+  display:block;width:29px;height:29px;object-fit:contain;flex:none;
+ }
+ html.dar-v8-shell body.is-home-route #appView .dv3-home{
+  max-width:1440px;margin-inline:auto;
+ }
+ html.dar-v8-shell body.is-home-route #appView .dv3-bottom{
+  min-width:0;
+ }
+}
+@media(max-width:1079.98px){
+ html.dar-v8-shell .dar-v8-global-secondary,
+ html.dar-v8-shell .dar-v8-rail-expanded-title{display:none!important}
+}
+/* Very small outer screen: no horizontal scrollbar and 44px accessible
+   targets where possible without changing the actual share/player controls. */
+@media(max-width:599.98px){
+ html.dar-v8-shell body .top-shell.dar-v8-header-shell{
+  padding:7px max(9px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px)) 6px!important;
+ }
+ html.dar-v8-shell body .app-bar{padding:5px 10px!important;gap:6px}
+ html.dar-v8-shell body #appView.view{
+  padding:10px max(10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px))
+   calc(104px + env(safe-area-inset-bottom,0px))!important;
+ }
+ html.dar-v8-shell body #appView>.view-head{padding:14px!important;border-radius:18px!important}
+ html.dar-v8-shell body.is-home-route #appView .dv3-quick-grid{gap:8px}
+ html.dar-v8-shell body.is-home-route #appView .dv3-quick{min-height:76px}
+}
+/* Never hide, crop or restyle actual content/share widgets.
+   Those still own their independent typography and actions. */
+html.dar-v8-shell body #appView :is(
+ .post-reader,.post-body,.quran-ayah-list,.quran-reader-shell,.qrc-shell,
+ .dua-detail-box,.article,.post-share-modal,.qrc-sheet,.ilm-message-list
+ ){min-width:0;max-width:100%}
+html.dar-v8-shell body .post-reader-actions [data-post-share-open]{
+ visibility:visible;pointer-events:auto;
+}
+html.dar-v8-shell body :is(.post-reader-top-btn,[data-post-share-open]){
+ touch-action:manipulation;
+}
+@media(prefers-reduced-motion:reduce){
+ html.dar-v8-shell *{scroll-behavior:auto!important}
+}
