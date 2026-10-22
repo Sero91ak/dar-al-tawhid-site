@@ -389,7 +389,7 @@
         "kids-quiz-031"
       ],
       "sourceAudioPart": "question",
-      "status": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "status": "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -398,7 +398,10 @@
       "estimatedCreditsNotInvoice": 17.443,
       "actualProviderCredits": null,
       "humanListeningApproved": false,
-      "publicReleaseAllowed": false
+      "publicReleaseAllowed": false,
+      "importedMP3SHA256": "48734aafab8f7a95d625e571c2c2bd783f639809c04ab704c18289240c09eced",
+      "providerRequestId": "yuq6TocM4jqMJpBhFpOe",
+      "originalMP3": "/kids/assets/kids-quiz-audio/v4-curated450-review/0ea5f9ee190759019ce3cdd2322d756a.mp3"
     },
     {
       "sourceText": "Etwas kaputt machen.",
