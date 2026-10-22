@@ -33,4 +33,29 @@ check(html.includes("renderNotificationCenter("),"location/notifications source 
 check(adaptive.includes("DarAdaptiveLayout = api"),"existing responsive engine unchanged");
 check(css.includes("dar-v8-duo-open")&&css.includes(".dar-fold"),"expanded layout scoped to test flag");
 check(read("test/V8_DUO_LAB_ROLLBACK.md").includes("18e42c4c21f48f3d16da2759c868c33c03659629"),"documented rollback baseline");
-process.stdout.write("V8 Duo QA contract: "+checks+" checks OK (visual/device QA remains open)\n");
+const globalShell=read("test/assets/v8-global-shell-v1.js");
+const globalStyle=read("test/assets/v8-global-shell-v1.css");
+const homeShell=read("test/assets/v8-home-editorial-20261022.js");
+const homeStyle=read("test/assets/v8-home-editorial-20261022.css");
+new vm.Script(globalShell,{filename:"v8-global-shell-v1.js"});checks++;
+new vm.Script(homeShell,{filename:"v8-home-editorial-20261022.js"});checks++;
+for(const id of [
+  "darV8GlobalShellCSS","darV8GlobalShellJS",
+  "darV8EditorialHomeCSS","darV8EditorialHomeJS"
+]){
+  check(html.split('id="'+id+'"').length===2,"one global V8 link "+id);
+}
+check(globalShell.includes("preserveShareUI()"),"social and native sharing detection survives");
+check(globalShell.includes('footer .footer-social-link'),"original social channel links reused");
+check(homeShell.includes("origin.cloneNode(true)"),"original Ibn Sirin citation cloned, not paraphrased");
+check(homeShell.includes("dar-v8-home-editorial-ready"),"original citation only hidden after safe clone");
+check(homeStyle.includes(".dv3-language{display:none"),"outdated seven-language home row hidden");
+check(homeStyle.includes(".dar-v8-editorial-salam"),"one compact source-backed Salam");
+check(globalStyle.includes(".post-reader-actions [data-post-share-open]"),"original post share target remains visible");
+check(globalStyle.includes(".dar-fold"),"Fold responsive rules remain scope-limited");
+check(html.includes("data-post-share-open"),"original share HTML still present");
+check(html.includes("function renderDuas()"),"original Dua renderer still present");
+check(html.includes("function renderQuran()"),"original Quran renderer still present");
+check(html.includes('class="footer-social-link"')||html.includes('footer-social-link'),"original social links present");
+
+process.stdout.write("V8 global / Duo QA contract: "+checks+" checks OK (visual/device QA remains open)\n");
