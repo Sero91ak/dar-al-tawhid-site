@@ -75,6 +75,16 @@ jobs:
               results.append({'questionId':qid,'ageBand':q['ageBand'],
                               'missingParts':partrows})
           assert len(results)==21 and missingParts==27
+          from collections import Counter
+          classificationCounts=Counter(
+              segment['classification']
+              for q in results for part in q['missingParts'] for segment in part['missingSourceSegments']
+          )
+          focus=[q for q in results
+                 if q['questionId'] in ('kids-quiz-036','kids-quiz-097','kids-quiz-485')]
+          print('KIDS_V4_FRAGMENT_CLASSIFICATIONS '+json.dumps(
+              dict(sorted(classificationCounts.items())),ensure_ascii=False))
+          print('KIDS_V4_SPECIAL_SOURCE_GAPS '+json.dumps(focus,ensure_ascii=False))
           unmapped=[(r['questionId'],p['part'],s['exact'])
                     for r in results for p in r['missingParts'] for s in p['missingSourceSegments']
                     if s['classification']=='UNMAPPED_NEEDS_SOURCE_INSPECTION']
