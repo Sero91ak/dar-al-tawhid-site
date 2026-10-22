@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+"use strict";
+const fs=require("node:fs");
+const assert=require("node:assert/strict");
+const path=require("node:path");
+const dir=__dirname;
+const html=fs.readFileSync(path.join(dir,"push-test-preview.html"),"utf8");
+const corpus=JSON.parse(fs.readFileSync(path.join(dir,"push-copy-nine-languages-draft.json"),"utf8"));
+const registry=JSON.parse(fs.readFileSync(path.join(dir,"locales.json"),"utf8"));
+const locales=Object.keys(registry.locales);
+const events=Object.keys(corpus.copy.de);
+assert.equal(locales.length,9);
+assert.equal(events.length,15);
+assert.ok(html.includes("darAdultPreferredLocaleV1"),"must inspect existing adult app language");
+assert.ok(html.includes("push-copy-nine-languages-draft.json"),"must use reviewed single source");
+assert.ok(html.includes("cache:'no-store'"),"must show latest review source");
+assert.ok(html.includes("Nur Textvorschau"),"must clearly identify a preview");
+assert.ok(html.includes('source.copy?.[code]?.[key]'),"must select the chosen app language");
+assert.ok(html.includes("current.status!=='approved'"),"must fail closed for unapproved copy");
+for(const language of locales)assert.ok(html.includes(language+':"')||html.includes(language+':"'),"language missing in UI");
+for(const event of events)assert.ok(html.includes(event+':"'),"event missing in UI");
+assert.doesNotMatch(html,/OneSignal\.User|Notification\.requestPermission|send_message\s*\(|sendMessage\s*\(|\/api\/push\/send/);
+assert.equal(corpus.sending,false);
+console.log(JSON.stringify({status:"pass",kind:"read-only-preview-only",languages:locales.length,events:events.length,delivery:false}));

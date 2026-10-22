@@ -1,0 +1,123 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-22",
+  "kind": "OneSignal-editorial-drafts-not-a-live-delivery-config",
+  "onesignalAppName": "DĀR AL TAWḤĪD APP",
+  "onesignalAppId": "786d7cd6-0455-4434-ab14-0c10a7bc6b1e",
+  "localesRegistry": "desktop-preview/i18n-core-v1/locales.json",
+  "snapshotLocales": [
+    "de",
+    "ar",
+    "en",
+    "tr",
+    "ku",
+    "ckb",
+    "bs",
+    "fr",
+    "es"
+  ],
+  "safety": {
+    "automaticallySending": false,
+    "productionSchedulerModified": false,
+    "templatesAreOnlyCopyDrafts": true,
+    "applyToKids": false,
+    "providerOrOSLanguageIsNotAppLanguage": true,
+    "requiresAppLocaleSyncedToDeviceSubscription": true,
+    "requiresPerLocaleEditorialReview": true,
+    "requiresCanonicalContentIdAtSend": true,
+    "requiresExistingDedupeGuard": true,
+    "requiresPushLockPasswordAndLaneApprovals": true
+  },
+  "templates": {
+    "daily_dua": {
+      "id": "1e77d7e8-f220-4dde-97e4-eb4b86fbfa60",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#dua/<ID>"
+    },
+    "prayer_fajr_entry": {
+      "id": "27531f4b-5d8d-40ea-9b8b-7224c579bd43",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#prayer"
+    },
+    "prayer_fajr_advance": {
+      "id": "7e943cb1-0e69-4620-a066-e2a3e861838f",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#prayer"
+    },
+    "prayer_dhuhr_entry": {
+      "id": "7d548a52-5b2d-41ab-a3fc-a20eabdf24dc",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#prayer"
+    },
+    "prayer_dhuhr_advance": {
+      "id": "70ced58b-3a3e-4b67-8916-0833a6fa3b6f",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#prayer"
+    },
+    "prayer_asr_entry": {
+      "id": "a5c33d17-d2f9-412d-a0fe-45e5d94a8869",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#prayer"
+    },
+    "prayer_asr_advance": {
+      "id": "b1841586-bb72-47d4-b6ed-2f8a35e1f10e",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#prayer"
+    },
+    "prayer_maghrib_entry": {
+      "id": "d0dd7fcd-baaa-4061-82e2-5ef1d717f22c",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#prayer"
+    },
+    "prayer_maghrib_advance": {
+      "id": "89dc4dd4-c041-4b40-95f4-cec4c67d8907",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#prayer"
+    },
+    "prayer_isha_entry": {
+      "id": "b003271c-18ba-4aec-b56e-fee768ae9758",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#prayer"
+    },
+    "prayer_isha_advance": {
+      "id": "2847d841-6eed-43c9-badc-cafe89b66585",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#prayer"
+    },
+    "prayer_tahajjud_entry": {
+      "id": "4535ee5e-1379-4384-b2f0-34ad426b0236",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#prayer"
+    },
+    "daily_recommendation": {
+      "id": "dccb91dc-b917-47aa-bf6e-21aaa9361457",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#post/<ID>"
+    },
+    "daily_ayah": {
+      "id": "a93b1250-e218-4ac6-8631-61acf53dfa09",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#quran"
+    },
+    "new_post": {
+      "id": "b15b3276-8e37-4264-9b6d-a278471ada10",
+      "reviewState": "draft",
+      "contentIdPolicy": "keep canonical existing id at delivery",
+      "preferredUrl": "/#post/<ID>"
+    }
+  }
+}

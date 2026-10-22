@@ -1,0 +1,85 @@
+# DĀR Zentrum – Push-Lokalisierung: Integrationsvertrag
+
+Status: Entwurf, kein Live-Versand, nur Erwachsenen-App. Kids-App ausgeschlossen.
+
+## Architektur
+
+1. Sprachregister: desktop-preview/i18n-core-v1/locales.json. Derzeit de, ar, en, tr, ku, ckb, bs, fr, es. Beliebig erweiterbar; neu registrierte Codes sind erst nach redaktioneller Freigabe lieferbar.
+2. Jede Installation bzw. OneSignal-Subscription erhält eine eigene **serverseitig geschützte** Zuordnung app_locale, aus der **in der App ausdrücklich gewählten Sprache**. OneSignal.User-`addTags` und `setLanguage` sind USER-gebunden und **kein verlässlicher Ort für unterschiedliche Sprachen zweier Geräte desselben OneSignal-Users**. Das Backend nimmt nie die Betriebssystemsprache als Ersatz einer expliziten App-Wahl.
+3. Nach App-Sprachwechsel muss die Browser-/PWA-/Native-Bridge die Sprache per **authentifiziertem Backend-Endpunkt** auf die aktuelle Subscription-ID schreiben und die bestätigte Antwort prüfen. Der bloße Besitz/Empfang einer öffentlichen Subscription-ID ist kein Identitätsnachweis. Kein Client darf direkt mit anonymem PostgREST eine beliebige Zeile ändern. Ebenso nach OneSignal-Login, Reinstallation und Subscription-Wechsel; kein automatisches Push-Opt-in.
+4. Native iOS und Android müssen dieselbe Sprache übertragen. Keine neue App-ID und keine zusätzliche Subscription pro Sprachwechsel.
+5. Der Server wählt pro **Subscription** eine bereits geprüfte Übersetzung. Für Kurmancî/Soranî nicht auf mutmaßliche OneSignal-/OS-Sprachcodes verlassen. Bei individuell adressierten Pushs kann das bereits lokalisierte Textpaar über den technischen OneSignal-Fallback-Schlüssel en zugestellt werden. Es bleibt inhaltlich die gewählte Sprache.
+6. Keine unfertigen Fachübersetzungen: Status approved und passende kanonische Revision erfordern; sonst die geprüfte deutsche Fassung verwenden, im Zielbereich Übersetzungsstatus kennzeichnen.
+7. Deduplizierung über Ereignisart, tatsächliche lokale Zeit/Datum/Modus bzw. Content-ID/Revision und Subscription-ID. **Sprache gehört nicht in den Idempotenzschlüssel.** Vor Umschaltung mit der bisherigen Queue, Collapse-ID, Tages-ID und bestehenden Delivery-Claims abgleichen; niemals alte Ereignisse nachsenden.
+8. Gebets-Scheduler und alle Einstellungen bleiben unverändert: Standort, Zeitzone, Berechnungsmethode, 5/10/15-Minuten-Vorwarnzeit und Taḥajjud. Die Platzhalter {minutes} und {time} werden anhand der Benutzerkonfiguration aufgelöst, niemals als starrer Standardtext verschickt.
+9. Duʿāʾ, Tages-Āyah, Empfehlung und Beiträge behalten eine kanonische Content-ID, Quellenbeleg und Q-Nummer. Ziel-URL und Deep-Link müssen vor Versand mit dem tatsächlichen App-Router abgeglichen werden. Ein neuer Tages-Āyah-Sendekanal erfordert eigene Opt-ins.
+10. Kein kostenpflichtiger Übersetzungs-API-Aufruf ohne Freigabe. Jede Sprache fachlich und sprachlich prüfen.
+
+## Bereits vorhandene Integrationsstellen – bewusst noch unberührt
+
+- index.html und test/index.html: Sprachwahl, syncPrayerPushTags, syncDailyPushTags, savePushRegistration
+- assets/prayer-push-tags.js: Web-OneSignal-Subscription und Umgebung
+- ios/DarAlTawhid/DarAlTawhid/DarPushNotifications.swift: Native-iOS-Registrierung
+- android/app/src/main/java/de/daraltawhid/app/DarPush.kt: Native-Android-Bridge
+- cloudflare/prayer-push-scheduler.js: derzeit deutsche Kopie unter de und en, sendet gebündelt nach Gebetsparametern; benötigt pro-Subscription-Locale-Auflösung
+- cloudflare/daily-push-scheduler.js: derzeit deutsche Kopie unter de und en; sendet bereits pro Subscription
+- desktop-preview/i18n-core-v1/onesignal-nine-language-drafts.json: 15 redaktionelle, nicht sendende OneSignal-Vorlagen
+
+## Neu in diesem Entwurfszweig
+
+- push-i18n-resolver.cjs: nur Berechnung, keine Netz-/OneSignal-Anbindung; Sprach-/Fallback- und ID-Auflösung
+- test-push-i18n-resolver.cjs: Offline-Fälle für neun Sprachen, zehnte Sprache, RTL, Sprachwechsel, Duplikate, ID, Platzhalter
+- audit-push-i18n.cjs: nicht sendende Inventur der OneSignal-Entwürfe und des Sprachregisters
+- push-copy-nine-languages-draft.json: 135 sprachspezifische Titel-/Textpaare für die 15 Ereignisse; alle status=draft
+- push-app-locale-proposed-migration.sql: isolierte RLS-Datenbanktabelle; absichtlich NICHT angewandt
+- test-push-copy-nine-languages.cjs: exakt 9×15 Paare, 5/10/15-Minuten-Dynamik, Quelle/Sprachregister
+- dry-run-push-nine-languages.cjs: neun rein synthetische Einwilligungen, keine echten Empfänger
+
+
+Offline-Prüfung:
+    node desktop-preview/i18n-core-v1/test-push-i18n-resolver.cjs
+    node desktop-preview/i18n-core-v1/audit-push-i18n.cjs
+    node desktop-preview/i18n-core-v1/test-app-locale-push-adapter.cjs
+    node desktop-preview/i18n-core-v1/test-push-copy-nine-languages.cjs
+    node desktop-preview/i18n-core-v1/dry-run-push-nine-languages.cjs
+
+
+## Bedingungen für die geschützte Live-Anbindung
+
+Die ausdrückliche Änderungsanfrage liegt vor. Die Projektregeln verlangen aber zusätzlich das **separat vom Besitzer vorzulegende Push-Kennwort** und Marker für globale sowie spurbezogene Freigabe (Gebet, Tagesinhalt, Beitrag, OneSignal-Kern, Native). Keine Kennwörter in Klartext in Tickets, Docs oder Code. Dazu kommt die explizite Scope-Freigabe in content/admin/change-scope-lock.json. Ohne die Sperren zu erfüllen bleiben alle geschützten Sender und SDK-Integrationen unverändert.
+
+Nächster integrierbarer Schritt nach Freigabe: die Speicherung von dar_app_locale in bestehenden Datenbanken prüfen und erforderliche Migration samt Rollback vorbereiten, Web- und Native-Sync einbauen, produktive Sender die genehmigten Textfassungen wählen lassen, OneSignal-Subscription-Test mit den neun Sprachen durchführen.
+
+Testkriterien: nur Admin/Test-Abonnements im Staging, Push-Opt-in wahren, je Test-Subscription genau eine Nachricht pro Ereignis, korrekte Zeitwerte, korrekter Deep-Link, kein Sprachwechsel-Doppelsend, Android/iOS/Web separat prüfen. Danach bestehende Push-, Lane-, Scope-, Repo- und App-Guards sowie Deployment-Abnahme.
+
+## Sicherheitsbefund
+
+Eine Repository-Suche fand eine als OneSignal-API-Schlüssel bezeichnete Zeichenkette in .replit. Schlüssel nie ins Chatprotokoll kopieren. Gültigkeit und Berechtigungen prüfen und einen aktiven Schlüssel rotieren, bevor produktive Änderungen freigeschaltet werden. Git-Historie dabei mitbedenken.
+
+
+## Bestätigter Datenbank-/Berechtigungsbefund am 22.10.2026
+
+- Supabase-Projekt: DĀR Erwachsene, Tabelle public.prayer_push_registrations. RLS ist zwar aktiviert, doch alle drei bestehenden Client-Policies haben qual=true bzw. with_check=true. Direkte Prüfung ergab für anon SELECT, INSERT und UPDATE jeweils true.
+- cloudflare/prayer-push-scheduler.js lädt die Registrierung derzeit mit dem öffentlichen SUPABASE_ANON_KEY. Eine sofortige RLS-Sperre **würde den laufenden Gebets-Push gefährden**. Deshalb kein ungetestetes Durchschalten, keine heimliche Migration.
+- Neue app_locale-Werte dürfen **nicht** in diesem öffentlich zugänglichen Registrierungsbestand veröffentlicht werden. Es liegt ein nicht angewendeter Entwurf in push-app-locale-proposed-migration.sql für eine separate serverseitig lesbare Tabelle public.dar_push_subscription_locales vor: RLS und Force RLS, keine anon/authenticated grants, ausschließlich service_role.
+- Zur produktiven Nutzung braucht es einen neuen Eigentumsnachweis über eine authentifizierte, serverseitige API. OneSignal-Subscription-ID allein ist kein Authentifizierungsfaktor. SQL-Entwurf nicht ohne separate DB-/Push-Freigabe ausführen.
+- Vor Schließen der alten Client-Policies: Gebets-Scheduler mit sicherem Server-Credential verbinden, bestehende öffentliche Browser-Registrierung durch authentifizierte API ersetzen und alle drei Push-Spuren plus Opt-out real prüfen; danach minimale RLS-Policies und Grants setzen.
+
+
+## Neu geprüft – Routing und native Sprachbrücke
+
+- Der produktive Beitragsversand in scripts/send-post-push.js erzeugt einen Link für den **veröffentlichten Post-Slug**, nicht für einen beliebig mit post: präfigierten internen Content-Key. Deshalb verlangen Entwurfs-Resolver und Tests für new_post nun den separat geprüften postSlug sowie routeVerified=true. Die kanonische content_id und Q-Quellennummer im Payload bleiben unverändert.
+- Das nicht aktivierte app-locale-push-adapter.js akzeptiert eine native iOS-/Android-WebView-Bridge per getNativeSubscriptionState(), wenn im nativen Kontext kein OneSignal-Web-SDK vorhanden ist. Eine Rückgabe aus der Bridge ist **keine serverseitige Eigentumsbestätigung**. Erst der authentifizierte Server bestätigt appId, Subscription, Besitzer, Einwilligung und gespeicherten Sprachwert. Bestehende Native-Push-Dateien wurden nicht verändert.
+- OneSignal Web v16 und das native iOS SDK trennen den User vom aktuellen Geräteabonnement: PushSubscription.optedIn ist eine Device-/Subscription-Eigenschaft, während User.setLanguage/AddTags den OneSignal-User betrifft. Für voneinander abweichende Sprachen auf zwei Geräten desselben Accounts deshalb unbedingt die private Subscription-Zuordnung benutzen.
+- Der vorhandene DĀR-Datenbankbestand zeigte bei der Prüfzeit 49 Zeilen und 45 verschiedene Subscription-IDs. enabled und push_opted_in unterscheiden sich wesentlich; beide Werte separat prüfen, zusätzlich den tatsächlichen Provider-Status. Aggregatdaten sind nur ein Audit-Snapshot.
+- Die CI-Datei .github/workflows/dar-i18n-translation-inventory.yml führt jetzt alle sechs offline Test-/Inventur-Skripte aus. Ein erfolgreicher GitHub-CI-Test beweist **nicht** die reale Zustellung oder fachliche Korrektheit der noch ungeprüften Übersetzungen.
+
+
+## Redaktionelle Textprüfung und Freigabe vom 22.10.2026
+
+- Der Eigentümer hat die AI-gestützte sprachliche und fachliche Redaktion der **Benachrichtigungstexte** ausdrücklich delegiert. Die 9 × 15 = **135 kurzen Textpaare** in push-copy-nine-languages-draft.json sind nach Prüfung von Sinn, orthographischem Gebrauch, technischen Platzhaltern und islamischen Gebetsbegriffen **redaktionell als approved** markiert. Der ursprüngliche Dateiname „draft“ wird aus Kompatibilitätsgründen beibehalten, der Status jedes Eintrags ist maßgeblich.
+- Insgesamt **19 konkrete Korrekturen**: türkischer Fajr-Name „Sabah“ statt unüblichem „Fecr namazı“, soranischer Dhuhr-Begriff „نیوەڕۆ“, bosnische lokale Gebetsnamen mit korrekt gebeugtem „-namaz“ und idiomatischer spanischer Eintrittstext. Arabischer Wortlaut und Kürzel für Inhalte sind davon nicht betroffen.
+- Die Prüfung erfolgt durch ChatGPT als KI-gestützte Redaktion auf Verantwortung des Projektinhabers, **nicht** durch neun unabhängige menschliche Muttersprachler/Fachgelehrte. Die Metadaten enthalten diesen Unterschied (`reviewMethod=AI_assisted_editorial`, `nativeSpeakerCertified=false`).
+- Freigegeben sind **nur die generischen Titel-/Erinnerungsformulierungen**. Beim Duʿāʾ-, Āyah- und Beitrag des Tages bleibt die jeweilige konkrete Quelle, Inhalt-Revision, zugehörige kanonische Beitrags-ID, Q-Registry, Deep-Link und Abonnementeinwilligung bei jedem Versand eigenständig zu verifizieren. Freigabe generischer Sätze ist keine Freigabe eines konkreten ungeprüften Artikels.
+- **Kein Zusammenhang mit einer Änderung der Gebetszeitberechnung.** Zeiten/Methoden/Standort/Countdowns/Cron werden in diesem Arbeitsschritt weder geprüft noch bearbeitet. Die schon vorhandenen dynamischen Platzhalter werden lediglich unverändert transportiert und auf korrekte Textdarstellung geprüft.
+- **Keine Live-/Provider-Freigabe:** Die 15 OneSignal-Vorlagen und ihre IDs bleiben als nicht versendende Vorlagen bestehen; OneSignal-Sender, SDK, Datenbank und bestehende Nutzer-Pushs bleiben unverändert. Produktionsfreigaben/Code-Spursperren bleiben wirksam.

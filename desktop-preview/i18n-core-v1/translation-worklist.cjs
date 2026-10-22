@@ -10,7 +10,9 @@ function param(k,def){const i=args.indexOf(k);return i<0?def:args[i+1]}
 const ROOT=path.resolve(param("--root",path.join(__dirname,"../..")));
 const OUT=path.resolve(param("--out",path.join(__dirname,"translation-worklist.json")));
 const CHECK=args.includes("--check");
-const LOCALES=["ar","en","tr","ku","ckb","bs"];
+const localeCatalog=JSON.parse(fs.readFileSync(path.join(ROOT,"desktop-preview/i18n-core-v1/locales.json"),"utf8"));
+if(!localeCatalog.locales?.de||localeCatalog.defaultLocale!=="de")throw Error("German canonical locale must be registered");
+const LOCALES=Object.keys(localeCatalog.locales).filter(code=>code!==localeCatalog.defaultLocale);
 const KINDS=["post","qsource","hadith","dua","quiz","learning"];
 const read=p=>{try{return fs.readFileSync(path.join(ROOT,p),"utf8")}catch(_){return null}};
 const json=p=>{try{return JSON.parse(read(p))}catch(_){return null}};
