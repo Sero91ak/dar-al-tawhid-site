@@ -1,0 +1,120 @@
+/* DAR TEST V8 · ONE editorial welcome, not another legacy home screen */
+html.dar-v8-global-test.dar-v8-home-editorial-ready body.is-home-route .top-shell>.isnad{display:none!important}
+html.dar-v8-global-test body.is-home-route .dv3-home{max-width:1100px!important;gap:clamp(10px,1.45vw,18px)!important}
+html.dar-v8-global-test body.is-home-route .dv3-hometitle{display:none!important}
+html.dar-v8-global-test body.is-home-route .dv3-language{display:none!important}
+/* The proper 9-language quick picker remains in the header and Settings. */
+html.dar-v8-global-test body.is-home-route .dar-v8-editorial-home{
+  position:relative;isolation:isolate;min-width:0;
+  display:flex;flex-direction:column;gap:7px;
+  margin:0 0 2px!important;
+  padding:clamp(16px,3vw,31px)!important;
+  border:1px solid var(--v8-line)!important;
+  border-radius:clamp(18px,2.4vw,26px)!important;
+  background:
+    radial-gradient(circle at 97% 4%,color-mix(in srgb,var(--v8-gold) 10%,transparent),transparent 36%),
+    linear-gradient(116deg,var(--v8-paper),var(--v8-wash))!important;
+  color:var(--v8-ink)!important;
+  box-shadow:0 13px 38px rgba(0,0,0,.047)!important
+}
+html.dar-v8-global-test body.is-home-route .dar-v8-editorial-overline{
+  color:var(--v8-gold);font:800 clamp(9px,1.15vw,11px)/1.35 var(--v8-sans);
+  letter-spacing:.135em;overflow-wrap:anywhere
+}
+html.dar-v8-global-test body.is-home-route .dar-v8-editorial-salam{
+  font:600 clamp(21px,3.55vw,37px)/1.17 var(--v8-editorial)!important;
+  letter-spacing:-.015em;color:var(--v8-ink)!important;
+  max-width:34ch;overflow-wrap:normal;hyphens:auto;
+  margin:3px 0 0!important
+}
+html.dar-v8-global-test body.is-home-route .dar-v8-editorial-welcome{
+  font:680 clamp(13px,1.75vw,18px)/1.25 var(--v8-sans)!important;
+  color:var(--v8-ink)!important;margin:0!important
+}
+html.dar-v8-global-test body.is-home-route .dar-v8-editorial-description{
+  font:430 clamp(12px,1.45vw,14px)/1.5 var(--v8-sans)!important;
+  max-width:70ch;color:var(--v8-muted)!important;
+  margin:0!important;overflow-wrap:break-word
+}
+html.dar-v8-global-test body.is-home-route .dar-v8-editorial-source{
+  margin-top:8px;min-width:0;padding-top:9px;
+  border-top:1px solid var(--v8-line)
+}
+html.dar-v8-global-test body.is-home-route .dar-v8-editorial-source .isnad{
+  position:relative!important;display:block!important;
+  box-sizing:border-box!important;
+  width:100%!important;min-width:0!important;
+  max-width:100%!important;height:auto!important;min-height:0!important;
+  margin:0!important;padding:0!important;border:0!important;
+  border-radius:0!important;box-shadow:none!important;
+  background:none!important;color:var(--v8-ink)!important
+}
+html.dar-v8-global-test body.is-home-route .dar-v8-editorial-source .isnad-label{
+  font:760 10px/1.45 var(--v8-sans)!important;
+  letter-spacing:.1em!important;color:var(--v8-gold)!important;
+  text-transform:uppercase
+}
+html.dar-v8-global-test body.is-home-route .dar-v8-editorial-source .isnad-quote{
+  display:block!important;font:500 clamp(14px,1.75vw,18px)/1.38 var(--v8-editorial)!important;
+  margin-top:5px!important;max-width:74ch!important;color:var(--v8-ink)!important
+}
+html.dar-v8-global-test body.is-home-route .dar-v8-editorial-source .isnad-source{
+  font:430 clamp(10px,1.25vw,12px)/1.45 var(--v8-sans)!important;
+  margin-top:5px!important;color:var(--v8-muted)!important
+}
+/* Editorial hierarchy across original home cards and real content blocks */
+html.dar-v8-global-test body.is-home-route #dv3Home :is(.dv3-section,.dv3-search-box,.dv3-quick-grid,.dv3-extras){
+  min-width:0!important;max-width:100%!important
+}
+html.dar-v8-global-test body.is-home-route #dv3Home .dv3-section-title h3{
+  font:650 clamp(20px,2.6vw,28px)/1.16 var(--v8-editorial)!important
+}
+html.dar-v8-global-test body.is-home-route #dv3Home :is(.dv3-search-box,.dv3-quick,.dv3-resume-card,.dv3-today-card){
+  border-radius:clamp(15px,1.85vw,22px)!important;
+  border-color:var(--v8-line)!important;
+  box-shadow:0 5px 20px rgba(0,0,0,.035)!important
+}
+html.dar-v8-global-test body.is-home-route #dv3Home .dv3-search-box{
+  min-height:50px!important;height:auto!important
+}
+html.dar-v8-global-test body.is-home-route #dv3Home #homeSearchInput{
+  min-height:48px!important;font-size:16px!important
+}
+html.dar-v8-global-test body.is-home-route #dv3Home .dv3-quick{
+  min-height:73px!important;padding:12px!important;gap:11px!important
+}
+html.dar-v8-global-test body.is-home-route #dv3Home .dv3-quick-icon{
+  flex:0 0 40px!important;width:40px!important;height:40px!important;
+  border-radius:12px!important
+}
+html.dar-v8-global-test body.is-home-route #dv3Home .dv3-quick-icon img{
+  max-width:33px!important;max-height:33px!important
+}
+html.dar-v8-global-test body.is-home-route #dv3Home .dv3-quick-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:clamp(8px,1.4vw,14px)!important
+}
+@media(min-width:980px){
+ html.dar-v8-global-test body.is-home-route #dv3Home .dv3-quick-grid{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important
+ }
+ html.dar-v8-global-test body.is-home-route #dv3Home .dv3-extras{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important
+ }
+}
+@media(max-width:500px){
+ html.dar-v8-global-test body.is-home-route .dar-v8-editorial-home{padding:16px 14px!important;gap:6px}
+ html.dar-v8-global-test body.is-home-route .dar-v8-editorial-overline{font-size:9px!important}
+ html.dar-v8-global-test body.is-home-route .dar-v8-editorial-salam{font-size:clamp(21px,5.6vw,27px)!important}
+ html.dar-v8-global-test body.is-home-route .dar-v8-editorial-welcome{font-size:13px!important}
+ html.dar-v8-global-test body.is-home-route .dar-v8-editorial-description{font-size:12px!important;line-height:1.42!important}
+ html.dar-v8-global-test body.is-home-route .dar-v8-editorial-source .isnad-quote{font-size:15px!important}
+ html.dar-v8-global-test body.is-home-route #dv3Home .dv3-quick{min-height:66px!important;padding:8px!important;gap:7px!important}
+ html.dar-v8-global-test body.is-home-route #dv3Home .dv3-quick-icon{
+  flex-basis:31px!important;width:31px!important;height:31px!important
+ }
+ html.dar-v8-global-test body.is-home-route #dv3Home .dv3-quick-icon img{max-width:26px!important;max-height:26px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ html.dar-v8-global-test body.is-home-route #dv3Home *{scroll-behavior:auto!important}
+}
