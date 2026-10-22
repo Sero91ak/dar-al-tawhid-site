@@ -117,6 +117,8 @@ jobs:
         env:
           GITHUB_COMMIT_MESSAGE: ${{ github.event.head_commit.message }}
           INTEGRITY_BASE_REF: ${{ github.event.before || github.event.pull_request.base.sha || '' }}
+          # Nonprinting GitHub Actions secret; guard still requires correct password SHA and lane markers.
+          DAR_PUSH_UNLOCK_PASSWORD: ${{ secrets.DAR_PUSH_UNLOCK_PASSWORD }}
         run: node scripts/push-lanes-guard.js
 
       - name: Post push hang guard (Beitrags-Push darf nicht hängen)

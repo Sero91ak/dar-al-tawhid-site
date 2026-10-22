@@ -155,6 +155,19 @@
   ],
   "unlockedScopes": [
     {
+      "id": "push-secure-actions-secret-gate-20261022",
+      "at": "2026-10-22T06:50:00+02:00",
+      "approvedBy": "user-explicit-20261022-activate-multilingual-push-with-existing-protection",
+      "reason": "Narrowly link three GitHub Actions gate steps to the existing DAR_PUSH_UNLOCK_PASSWORD secret, retaining SHA256 hash checking, global marker and per-lane approvals; no secrets in git, no provider sends, no push scheduler or prayer code changes.",
+      "paths": [
+        ".github/workflows/canonical-state-guard.yml",
+        ".github/workflows/app-health-check.yml",
+        ".github/workflows/cloudflare-pages-deploy.yml",
+        "content/admin/change-scope-lock.json"
+      ],
+      "expiresAt": "2026-10-31T23:59:00.000Z"
+    },
+    {
       "id": "public-browser-v8-qa-release-20261021",
       "at": "2026-10-21T18:28:00+02:00",
       "approvedBy": "user-explicit-browser-html-v8-full-smart-portal-push-live-20261021",
