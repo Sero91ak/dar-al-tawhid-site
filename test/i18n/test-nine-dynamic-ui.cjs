@@ -65,6 +65,11 @@ for(const [locale,expected] of Object.entries(metaExamples)){
 }
 // Only six allowlisted taxonomy names may precede an interface publication count.
 for(const locale of ["tr","en","ar","ku","ckb","bs","fr","es"]){
+ const time=t("Duʿāʾ 09:00 · Empfehlung 12:00",locale);
+ assert(time&&time.includes("09:00")&&time.includes("12:00")&&!time.includes("Empfehlung"),
+  "Timed UI status must translate its labels and preserve scheduled times: "+locale);
+ assert.equal(t("Duʿāʾ 25:00 · Empfehlung 12:00",locale),null,
+  "Invalid time must not be reinterpreted as interface metadata");
  const publication=t("Qurʾān, 1 Veröffentlichungen",locale);
  assert(publication?.startsWith("Qurʾān, "),"Must preserve original Qurʾān taxonomy: "+locale);
  assert(!publication.includes("Veröffentlichungen"),"Count suffix is not localized: "+locale);
