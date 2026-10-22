@@ -84,8 +84,8 @@ jobs:
           if(/api\.openai\.com|DAR_I18N_AI_API_KEY|chat\/completions/i.test(raw+loader))
             throw Error('Paid model endpoint or secret must not be in UI browser runtime');
           for(const locale of ['tr','en','ar','ku','ckb','bs','fr','es'])
-            if(Object.keys(pack.translations[locale]||{}).length<752)throw Error('Incomplete language catalog '+locale);
-          console.log('PASS 9 UI catalogs with 752+ interface labels each; 0 OpenAI API requests.');
+            if(Object.keys(pack.translations[locale]||{}).length<786)throw Error('Incomplete language catalog '+locale);
+          console.log('PASS 9 UI catalogs with 786+ interface labels each; 0 OpenAI API requests.');
           NODE
       - name: Start local adult test app
         shell: bash
