@@ -9,33 +9,43 @@ if(global.DARPushLocaleSync)return;
 const KEY="darAdultPreferredLocaleV1";
 const SUPPORTED=new Set(["de","en","tr","ar","bs","fr","es"]);
 const ALL=new Set(["de","ar","en","tr","ku","ckb","bs","fr","es"]);
-let generation=0,lastApplied="";
+let generation=0,lastApplied="",pendingLocale="",pendingPromise=null;
 function read(){
  let value="";
  try{value=String(global.localStorage?.getItem(KEY)||"").toLowerCase()}catch(_){}
  return ALL.has(value)?value:"de";
 }
 async function pushLocale(){
- const rev=++generation;
  const locale=read();
  const os=global.OneSignal;
  if(!os?.User || typeof os.User.setLanguage!=="function")
    return {synced:false,reason:"sdk_unavailable",locale};
  if(!SUPPORTED.has(locale)){
-   // OneSignal's built-in language keys do not cover Soranî ckb.
-   // These languages require trusted per-subscription localization.
+   // OneSignal does not support all Kurdish language keys. Do not silently
+   // mark a Kurdish recipient as localized by the built-in provider mapping.
    return {synced:false,reason:"individual_delivery_required",locale};
  }
  if(locale===lastApplied)return {synced:true,locale,unchanged:true};
- try{
-   await os.User.setLanguage(locale);
-   if(rev!==generation)return {synced:false,locale,reason:"language_changed_during_sync"};
-   lastApplied=locale;
-   return {synced:true,locale};
- }catch(_){
-   return {synced:false,locale,reason:"onesignal_language_update_failed"};
+ if(locale===pendingLocale && pendingPromise)return pendingPromise;
+ const rev=++generation;
+ pendingLocale=locale;
+ const task=(async()=>{
+   try{
+     await os.User.setLanguage(locale);
+     if(rev!==generation)return {synced:false,locale,reason:"language_changed_during_sync"};
+     lastApplied=locale;
+     return {synced:true,locale};
+   }catch(_){
+     return {synced:false,locale,reason:"onesignal_language_update_failed"};
+   }
+ })();
+ pendingPromise=task;
+ try{return await task}
+ finally{
+   if(pendingPromise===task){pendingPromise=null;pendingLocale="";}
  }
 }
+
 function boot(){
  pushLocale();
  if(Array.isArray(global.OneSignalDeferred)){
