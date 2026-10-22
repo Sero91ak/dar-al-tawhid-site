@@ -449,7 +449,8 @@
       paint();
       try { if (typeof darGpsStartWatch === "function") darGpsStartWatch(); } catch (e) {}
       var name = "";
-      try { if (typeof reversePrayerCity === "function") name = await reversePrayerCity(lat, lon); } catch (e) {}
+      try { if (typeof window.darResolveLocationCity === "function") name = await window.darResolveLocationCity(lat, lon);
+        else if (typeof reversePrayerCity === "function") name = await reversePrayerCity(lat, lon); } catch (e) {}
       if (serial !== requestId || current().locationMode !== "auto") return;
       var now = current();
       if (!validCoords(Number(now.lat),Number(now.lon)) || Math.abs(Number(now.lat)-lat) > .003 || Math.abs(Number(now.lon)-lon) > .003) return;
@@ -773,14 +774,15 @@
 })();
 
 
-/* DĀR AL TAWḤĪD · Location continuity for live + test · 2026-10-19
-   Native CoreLocation positions, foreground recovery and manual-city protection.
-   Never request background tracking from JavaScript without an explicit action. */
+/* DĀR AL TAWḤĪD · iOS GPS continuity V2 · 2026-10-22
+   The native position is authoritative; place-name lookup is a separate,
+   retryable operation. Manual city selection always wins. No background opt-in. */
 (function(){
   "use strict";
-  if(window.__darLocationContinuityV1)return;
-  window.__darLocationContinuityV1=true;
-  var lastApplied=0, geocodeSerial=0, retryTimer=0;
+  if(window.__darLocationContinuityV2)return;
+  window.__darLocationContinuityV2=true;
+  var lastApplied=0, lastGeocodeAttempt=0, geocodeSerial=0, retryTimer=0, resolving=false;
+  var cacheKey="darLocationResolvedCityV2";
   function current(){try{return typeof getPrayerSettings==="function"?(getPrayerSettings()||{}):{};}catch(e){return {};}}
   function valid(lat,lon,acc){
     return Number.isFinite(lat)&&Number.isFinite(lon)&&lat>=-90&&lat<=90&&lon>=-180&&lon<=180&&
@@ -790,53 +792,124 @@
     var p=Math.PI/180, x=(c-a)*p, y=(d-b)*p*Math.cos((a+c)*p/2);
     return 6371000*Math.sqrt(x*x+y*y);
   }
+  function unresolved(city){
+    return !city||/^(Ort wird|Ortsname|Aktueller Standort|Standort erkannt|GPS erkannt)/i.test(String(city).trim());
+  }
+  function cachedCity(lat,lon){
+    try{
+      var item=JSON.parse(localStorage.getItem(cacheKey)||"null");
+      if(item&&!unresolved(item.city)&&Number.isFinite(item.lat)&&Number.isFinite(item.lon)&&
+        Date.now()-item.time<30*86400000&&distance(lat,lon,item.lat,item.lon)<1500)return item.city;
+    }catch(e){}
+    return "";
+  }
+  function cacheCity(name,lat,lon){
+    try{localStorage.setItem(cacheKey,JSON.stringify({city:name,lat:lat,lon:lon,time:Date.now()}));}catch(e){}
+  }
+  function withTimeout(value,ms){
+    return new Promise(function(resolve,reject){
+      var timer=setTimeout(function(){reject(new Error("geocode_timeout"));},ms);
+      Promise.resolve(value).then(function(x){clearTimeout(timer);resolve(x);},
+        function(e){clearTimeout(timer);reject(e);});
+    });
+  }
+  async function jsonLookup(url){
+    var ctrl=typeof AbortController==="function"?new AbortController():null;
+    var timer=ctrl?setTimeout(function(){ctrl.abort();},6500):null;
+    try{
+      var response=await fetch(url,ctrl?{cache:"no-store",signal:ctrl.signal}:{cache:"no-store"});
+      if(!response.ok)throw new Error("geocode_http_"+response.status);
+      return await response.json();
+    }finally{if(timer)clearTimeout(timer);}
+  }
+  async function resolveCity(lat,lon){
+    var name="";
+    try{
+      if(typeof reversePrayerCity==="function")
+        name=await withTimeout(reversePrayerCity(lat,lon),6500);
+    }catch(e){}
+    if(typeof name==="string"&&name.trim()&&!unresolved(name))return name.trim();
+    // Existing public-site fallback provider; only used if primary lookup fails.
+    try{
+      var url="https://api.bigdatacloud.net/data/reverse-geocode-client?latitude="+
+        encodeURIComponent(lat)+"&longitude="+encodeURIComponent(lon)+"&localityLanguage=de";
+      var data=await jsonLookup(url);
+      name=String(data.city||data.locality||"").trim();
+      if(name&&!unresolved(name))return name;
+    }catch(e){}
+    try{
+      var osm="https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat="+
+        encodeURIComponent(lat)+"&lon="+encodeURIComponent(lon)+"&zoom=10&addressdetails=1&accept-language=de";
+      var result=await jsonLookup(osm), a=result.address||{};
+      name=String(a.city||a.town||a.village||a.municipality||a.hamlet||"").trim();
+      if(name&&!unresolved(name))return name;
+    }catch(e){}
+    return "";
+  }
+  window.darResolveLocationCity=resolveCity;
   function notifyPrayer(s){
     try{if(typeof updateHeaderPrayerStatus==="function")updateHeaderPrayerStatus();}catch(e){}
     try{if(typeof updatePrayerCountdowns==="function")updatePrayerCountdowns();}catch(e){}
     try{window.dispatchEvent(new CustomEvent("dar:location-updated",{detail:{mode:"auto",city:s.city,source:"native"}}));}catch(e){}
     var el=document.getElementById("darPermissionCityText");
-    if(el)el.textContent=(s.city||"Ort wird ermittelt …")+" · GPS automatisch";
+    if(el)el.textContent=(s.city||"GPS erkannt · Ortsname wird gesucht")+" · GPS automatisch";
   }
   async function updatePosition(data){
     var lat=Number(data&&data.lat),lon=Number(data&&(data.lng!=null?data.lng:data.lon));
     var acc=Number(data&&data.acc), t=Number(data&&data.timestamp);
     if(!valid(lat,lon,acc))return;
-    if(t && (t>Date.now()+60000||Date.now()-t>600000))return;
+    if(t&&(t>Date.now()+60000||Date.now()-t>600000))return;
     var s=current();
-    // A new user who has just granted iOS GPS consent starts in Auto mode.
-    // Never overwrite a city previously chosen manually.
+    // An explicit manually selected city is never replaced by CoreLocation.
     if(s.locationMode==="manual"&&(s.locationGranted===true||Number(s.locationUpdatedAt)>0))return;
     if(typeof setPrayerSettings!=="function"){
-      if(!retryTimer)retryTimer=setTimeout(function(){retryTimer=0;void updatePosition(data);},1000);
+      if(!retryTimer)retryTimer=setTimeout(function(){retryTimer=0;void updatePosition(data);},500);
       return;
     }
     var hasOld=s.lat!=null&&s.lon!=null&&Number.isFinite(Number(s.lat))&&Number.isFinite(Number(s.lon));
     var meters=hasOld?distance(Number(s.lat),Number(s.lon),lat,lon):Infinity;
     var age=Date.now()-Number(s.locationUpdatedAt||0);
-    if(meters<700&&age<30*60000)return;
-    // Avoid high-frequency GPS samples triggering expensive push/server refreshes.
-    if(Date.now()-lastApplied<45000&&meters<3000)return;
-    lastApplied=Date.now();
-    var city=meters<1500&&s.city&&s.city!=="Ort wird ermittelt …"
-      ?s.city:"Ort wird ermittelt …";
-    try{
-      setPrayerSettings({lat:lat,lon:lon,city:city,locationMode:"auto",
-        locationGranted:true,locationUpdatedAt:Date.now()});
-    }catch(e){return;}
-    notifyPrayer(current());
+    var missingName=unresolved(s.city);
+    // A recent coordinate fix MUST NOT suppress a missing-city retry.
+    if(meters<700&&age<30*60000&&!missingName&&s.locationMode==="auto")return;
+    var shouldWrite=!hasOld||meters>=700||s.locationMode!=="auto"||s.locationGranted!==true;
+    if(shouldWrite&&Date.now()-lastApplied>=10000){
+      lastApplied=Date.now();
+      var city=meters<1500&&!missingName?s.city:cachedCity(lat,lon)||"GPS erkannt · Ortsname wird gesucht";
+      try{
+        setPrayerSettings({lat:lat,lon:lon,city:city,locationMode:"auto",
+          locationGranted:true,locationUpdatedAt:Date.now()});
+      }catch(e){return;}
+      notifyPrayer(current());
+    }
+    // City reverse-geocoding does not alter coordinates or require a new GPS fix.
+    // Limit retries so returning to the foreground does not hammer providers.
+    var latest=current();
+    if(latest.locationMode==="manual")return;
+    var needsName=unresolved(latest.city)||meters>=700;
+    if(!needsName||resolving||Date.now()-lastGeocodeAttempt<60000)return;
+    lastGeocodeAttempt=Date.now();
+    resolving=true;
     var serial=++geocodeSerial;
     try{
-      if(typeof reversePrayerCity!=="function")return;
-      var name=await reversePrayerCity(lat,lon);
-      if(serial!==geocodeSerial||typeof name!=="string"||!name.trim())return;
+      var name=await resolveCity(lat,lon);
+      if(serial!==geocodeSerial)return;
       var fresh=current();
-      if(fresh.locationMode!=="auto"||Math.abs(Number(fresh.lat)-lat)>.001
-        ||Math.abs(Number(fresh.lon)-lon)>.001)return;
-      if(fresh.city!==name.trim()){
-        setPrayerSettings({city:name.trim()});
+      if(fresh.locationMode!=="auto"||
+        Math.abs(Number(fresh.lat)-lat)>.003||Math.abs(Number(fresh.lon)-lon)>.003)return;
+      if(name){
+        cacheCity(name,lat,lon);
+        if(fresh.city!==name){
+          setPrayerSettings({city:name});
+          notifyPrayer(current());
+        }
+      }else if(unresolved(fresh.city)&&fresh.city!=="GPS erkannt · Ortsname derzeit nicht verfügbar"){
+        setPrayerSettings({city:"GPS erkannt · Ortsname derzeit nicht verfügbar"});
         notifyPrayer(current());
       }
-    }catch(e){ /* GPS coordinates remain authoritative if geocoding fails */ }
+    }catch(e){
+      // Keep the GPS coordinates, last valid city and prayer settings.
+    }finally{resolving=false;}
   }
   function nativeHandler(){
     try{return window.webkit&&window.webkit.messageHandlers&&window.webkit.messageHandlers.darNative;}
@@ -844,10 +917,19 @@
   }
   function requestFresh(){
     var s=current(),handler=nativeHandler();
-    if(!handler||s.locationMode!=="auto")return;
+    // First launch may not yet have locationMode=auto; request native fix anyway.
+    if(!handler||s.locationMode==="manual")return;
     try{handler.postMessage({type:"location-resume"});}catch(e){}
   }
   window.addEventListener("dar-native-location",function(ev){void updatePosition(ev.detail);});
+  window.addEventListener("dar-native-location-status",function(ev){
+    var status=ev.detail||{},s=current();
+    if(s.locationMode==="manual"||!unresolved(s.city))return;
+    if(status.authorization==="denied"||status.authorization==="restricted"){
+      var el=document.getElementById("darPermissionCityText");
+      if(el)el.textContent="Standortfreigabe in iOS gesperrt · Stadt auswählen";
+    }
+  });
   window.addEventListener("pageshow",requestFresh);
   window.addEventListener("focus",requestFresh);
   document.addEventListener("visibilitychange",function(){if(!document.hidden)requestFresh();});
