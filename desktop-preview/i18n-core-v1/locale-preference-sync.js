@@ -56,7 +56,7 @@
   return{select,pull,retry,state,locale:()=>current};
  }
  global.DarAdultLocalePreference={
-  create,registeredLocales:[...REGISTERED],defaultAvailable:[...PREVIEW_READY],
+  create,registeredLocales:[...REGISTERED],defaultAvailable:[...PREVIEW_READY],allowed:[...PREVIEW_READY],
   storageKey:KEY
  };
 })(window);
