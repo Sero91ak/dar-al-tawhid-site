@@ -111,6 +111,9 @@ struct WebAppView: UIViewRepresentable {
         let escapedDevice = deviceId
             .replacingOccurrences(of: "\\", with: "\\\\")
             .replacingOccurrences(of: "\"", with: "\\\"")
+        let escapedLocale = preferredLocale
+            .replacingOccurrences(of: "\\", with: "\\\\")
+            .replacingOccurrences(of: "\"", with: "\\\"")
         let iosNativePushBridge = """
         (function(){
           try{
@@ -146,6 +149,8 @@ struct WebAppView: UIViewRepresentable {
           window.__darAdultLocaleBridgeInstalled=true;
           var key="darAdultPreferredLocaleV1";
           var eventName="dar-adult-locale-changed";
+          var nativeLocale="\(escapedLocale)";
+          var nativeHasManualLocale=\(hasManualLocale ? "true" : "false");
           var supported={de:1,en:1,ar:1,tr:1,ku:1,ckb:1,bs:1,fr:1,es:1};
           function normalize(value){
             var raw=String(value||"").trim().replace(/_/g,"-").toLowerCase();
@@ -174,7 +179,11 @@ struct WebAppView: UIViewRepresentable {
           });
           var existing="";
           try{existing=localStorage.getItem(key)||"";}catch(e){}
-          if(existing)send(existing);
+          if(nativeHasManualLocale&&nativeLocale){
+            window.__darApplyNativeAdultLocale(nativeLocale,true);
+          }else if(existing){
+            send(existing);
+          }
         })();
         """
         userContentController.addUserScript(
