@@ -1480,6 +1480,10 @@ export default {
       headers.set("Content-Type", "text/html; charset=utf-8");
       html = assetResponse.ok ? activateAdultCompactHero(html) : html;
       if (assetResponse.ok) html = activateAdultGlobalBrandV2(html);
+      if (assetResponse.ok && !html.includes("dar-onesignal-language-sync.js")) {
+        const localeTag = '<script defer id="darAdultOneSignalLocaleV1" src="/assets/dar-onesignal-language-sync.js?v=1"></script>';
+        html = html.includes("</body>") ? html.replace("</body>", localeTag + "</body>") : html + localeTag;
+      }
       return new Response(html, { status: assetResponse.status, statusText: assetResponse.statusText, headers });
     }
 
@@ -1729,6 +1733,7 @@ export default {
         const scriptTag = '<script defer src="/desktop-preview/desktop-overhaul.js?v=183"><\/script>';
         if (!html.includes("desktop-overhaul.css")) html = html.replace("</head>", styleTag + "</head>");
         if (!html.includes("desktop-overhaul.js")) html = html.replace("</body>", scriptTag + "</body>");
+        if (!html.includes("dar-onesignal-language-sync.js")) html = html.replace("</body>", '<script defer src="/assets/dar-onesignal-language-sync.js?v=1"></script></body>');
         if (!html.includes("darPublicWebsiteGuardV1")) html = html.replace("</body>", publicWebsiteAddon() + "</body>");
         html = activateAdultCompactHero(html);
       }
@@ -1763,6 +1768,10 @@ export default {
         (url.pathname === "/test" || url.pathname === "/test/" || url.pathname === "/test/index.html");
       if (testHomeHtml && assetResponse.ok) {
         let html = await assetResponse.text();
+        if (!html.includes("dar-onesignal-language-sync.js")) {
+          const tag = '<script defer id="darTestOneSignalLocaleV1" src="/assets/dar-onesignal-language-sync.js?v=1"></script>';
+          html = html.includes("</body>") ? html.replace("</body>", tag + "</body>") : html + tag;
+        }
         // SMART_TEST_HOME_V3: actual public /test/ router, cache-busted test-only Home JS.
         // No visitor, public website, or KIDS HTML is modified by this branch.
         html = html.replace(/dar-home-library-v1194\.js\?v=[^"'\x60\s]+/g,
