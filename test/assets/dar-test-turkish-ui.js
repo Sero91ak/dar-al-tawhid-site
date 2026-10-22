@@ -352,6 +352,29 @@ function localizeNumericUI(value,language){
   try{number=new Intl.NumberFormat(loc,{useGrouping:false}).format(n)}catch(_){}
   return number+" "+label;
  }
+ // Catalogue category counters: strictly bounded taxonomy identifiers, never book titles.
+ const taxonomy=value.match(/^(Familie|Tawḥīd|Fiqh|ʿAqīdah|Sunnah|Qurʾān), ([0-9]{1,7}) Veröffentlichungen$/);
+ if(taxonomy){
+  const category=taxonomy[1];
+  const translatedCategory=category==="Familie"?
+    (language==="tr"?(dictionary.get(category)||languagePacks.get(language)?.get(category)):
+     languagePacks.get(language)?.get(category))||category:category;
+  const localizedCount=localizeNumericUI(taxonomy[2]+" Veröffentlichungen",language);
+  return localizedCount?translatedCategory+", "+localizedCount:null;
+ }
+ // Context-specific ARIA label: only fixed Surah-range controls, no linked scripture.
+ const range=value.match(/^Sūrenbereich wechseln, aktuell ([0-9]{1,3})[–-]([0-9]{1,3})$/);
+ if(range){
+  const texts={
+   tr:"Sûre aralığını değiştir, şu an ",en:"Change surah range, currently ",
+   ar:"تغيير نطاق السور، حاليًا ",ku:"Navbera sûreyan biguherîne, niha ",
+   ckb:"مەودای سوورەتەکان بگۆڕە، ئێستا ",bs:"Promijeni raspon sura, trenutno ",
+   fr:"Changer la plage de sourates, actuellement ",
+   es:"Cambiar intervalo de suras, actualmente "
+  };
+  const fmt=x=>{try{return new Intl.NumberFormat(loc,{useGrouping:false,minimumIntegerDigits:x.length}).format(Number(x))}catch(_){return x}};
+  return texts[language]?texts[language]+fmt(range[1])+"–"+fmt(range[2]):null;
+ }
  if(language==="tr")return null; // Preserve the existing, reviewed Turkish percentage/selection formats.
  const percentage=value.match(/^([0-9]{1,3}(?:[.,][0-9])?)% Trefferquote$/);
  if(percentage){
