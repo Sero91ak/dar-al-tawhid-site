@@ -27,7 +27,7 @@ const requiredSource=Object.keys(pack.translations.en);
 const protectedQuote="„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“";
 assert(requiredSource.includes(protectedQuote),"Expected existing quoted source exclusion");
 const uiLabels=requiredSource.filter(k=>k!==protectedQuote);
-assert(uiLabels.length>=420,"Adult UI baseline unexpectedly shortened");
+assert(uiLabels.length>=473,"Adult UI baseline unexpectedly shortened");
 for(const locale of expected){
  assert.equal(pack.names[locale],registry.locales[locale].name,"Wrong locale name: "+locale);
  if(locale==="de")continue;
