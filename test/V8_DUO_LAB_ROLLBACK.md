@@ -63,3 +63,20 @@ Zusätzlich isoliert enthalten und durch nur zwei weitere HTML-Referenzen aktivi
 - Die ursprünglichen Reader, Gebetszeiten, Duʿāʾ, Qurʾān-Verse, Nachweise, Quellenlinks, Social-Media-Links und `data-post-share-open` werden nicht überschrieben.
 - Keine Kern-Funktion aufgrund optischer Änderungen ersetzen oder verstecken. Original-Share-Buttons weiterhin mindestens 40–44px klickbar.
 - **Nicht erledigt:** Gerätetests, RTL-/Sprachpaket-End-to-End-Tests, Cloudflare-Testdeployment und Visual-Abnahme. Nicht als produktionsfertig bezeichnen.
+
+## Ergänzung: kompletter V8-App-Umbau (22.10.2026)
+
+**Nicht nur Fold/Duo:** Das Ziel ist die einheitliche äußerliche Layout-, Navigations- und Gerätekompatibilitätsstruktur aller Erwachsenen-Testbereiche. Die unten aufgeführten Dateien werden ausschließlich auf dem isolierten Branch verwendet:
+
+- `test/assets/v8-duo-lab-v1.css` und `.js`: dynamische Navigation, Schnellzugriffe und Sprache in Einstellungen.
+- `test/assets/v8-complete-app-shell-v1.css` und `.js`: gesamte V8-Hülle für Hauptbereiche, Layout, Seitenkopf und Gerätetypen.
+- `test/assets/v8-global-shell-v1.css` und `.js`: konsistente Quell-/Social-/Share-Bedienoberflächen sowie responsive Bereichsregeln.
+- `test/assets/v8-home-editorial-20261022.css` und `.js`: eine kompakte Begrüßung und Original-Quellenmaßstab auf der Startseite.
+
+Die zusätzlichen Entwurfsdateien `v8-global-app-shell-v1.css/js` bleiben **deaktiviert**, um drei sich überlagernde globale Style-Engines zu vermeiden.
+
+**Unberührte Bestandteile:** Original-Renderfunktionen `renderPost`, `renderDuas`, Qurʾān-Reader und -Player, Originalbeiträge, Hadīṯe, Quellen-/Q-Links, Social-Media-Kanäle und Teilen-Aktionen, Gebetszeiten/GPS, Push, Konten, Sprach-Verfügbarkeit, Original-3D-Grafiken, Kids, Native iOS und `main`. Die bisherigen 9 Sprach-Codes bleiben in der zentralen Auswahl. Nicht freigegebene Übersetzungen werden dadurch nicht als fertig ausgegeben.
+
+**Validiert:** Original-HTML unverändert bis einschließlich vor dem alten `</html>`; ausschließlich neue CSS-/JS-Referenzen ergänzen die Test-Hülle. Alle vier aktiven V8-JavaScript-Dateien wurden syntaktisch geprüft. 9 Sprach-Codes im bestehenden Picker bestätigt. Visuelle QA und Geräte-End-to-End-Tests **nicht** bestätigt.
+
+**Erst nach Abnahme:** Veröffentlichung nur auf dedizierter Test-Umgebung, niemals implizit auf `main` oder auf der Besucher-App. Der offizielle `deploy-test-app.yml`-Workflow ist aktuell absichtlich ausschließlich für `main` freigeschaltet, daher ist dieser Branch nicht unmittelbar über diesen Workflow deploybar.
