@@ -171,4 +171,15 @@ assert.equal(weekday.nodeValue,"Mittwoch, 21. Oktober 2026","calendar failed to 
 assert.equal(runtime.formatCalendarDate("2026-10-21T12:00:00Z","en",{weekday:"long",timeZone:"UTC"}),"Wednesday");
 assert(runtime.translatePrayerName("Maghrib","en")==="Maghrib");
 assert(runtime.translatePrayerName("Maghrib","tr")==="Akşam");
+
+// The entire Beiträge route is excluded, while the chosen app language remains active.
+w.location.hash="#recent";
+lng="tr";
+const postRouteOriginal=primary.nodeValue;
+runtime.apply();
+assert.equal(primary.nodeValue,postRouteOriginal,"Beiträge route must not be rewritten");
+assert.equal(doc.documentElement.lang,"tr","Post exclusion must not undo the user locale");
+w.location.hash="";
+lng="de";runtime.apply();
+
 console.log("PASS: seven languages, full welcome/prayer/calendar/prophet UI, 13 identity-checked headings, German rollback and source protection");
