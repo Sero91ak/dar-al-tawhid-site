@@ -41,10 +41,10 @@ while((node=walker.nextNode())){
  if(el.closest('.dv3-posts,.book-catalog-card,.ilm-post-body,.hadith-narration,.dua-arabic,.quran-ayah'))continue;
  add(node.nodeValue,'text');
 }
-const attrSelectors=['input[placeholder]','textarea[placeholder]','[aria-label]','[title]'];
+const attrSelectors=['input[placeholder]','textarea[placeholder]','[aria-label]','[aria-description]','[title]','img[alt]'];
 for(const selector of attrSelectors)for(const el of document.querySelectorAll(selector)){
  if(el.closest(excluded)||isHidden(el))continue;
- for(const attr of ['placeholder','aria-label','title'])add(el.getAttribute(attr),'attribute');
+ for(const attr of ['placeholder','aria-label','aria-description','title','alt'])add(el.getAttribute(attr),'attribute');
 }
 return result;
 """
