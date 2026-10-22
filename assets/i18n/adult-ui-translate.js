@@ -26,9 +26,32 @@ function isPostRoute(){
    ["post","posts","recent","beitraege","beiträge","article"].includes(route);
 }
 function excluded(el){return !!(el&&typeof el.closest==="function"&&el.closest(deny))}
+// Dynamic *interface* labels only. Sources, sūrah names, and religious text stay canonical.
+function translateDynamicAdultUI(value){
+ let m=value.match(/^(\d+) (Aussagen mit Quellen\.|Namen und Zuordnungen\.|Suren mit Arabisch und Lautschrift\.|bekannte Duʿāʾ nach Themen\.|geprüfte Werke und zitierte Gelehrte\.)$/);
+ if(m){
+  const units={"Aussagen mit Quellen.":"kaynaklı ifade","Namen und Zuordnungen.":"isim ve ilişkilendirme",
+    "Suren mit Arabisch und Lautschrift.":"Arapçası ve okunuşuyla sûre",
+    "bekannte Duʿāʾ nach Themen.":"konuya göre bilinen dua",
+    "geprüfte Werke und zitierte Gelehrte.":"incelenmiş eser ve anılan âlim"};
+  return m[1]+" "+units[m[2]];
+ }
+ m=value.match(/^Sūrah ([\p{L}\p{M}0-9ʿʾ'’ .-]{2,95}) öffnen$/u);
+ if(m)return "Sûre "+m[1]+" aç";
+ m=value.match(/^(\d+) (Sūren) · (\d+) Āyāt$/);
+ if(m)return m[1]+" sûre · "+m[3]+" âyet";
+ m=value.match(/^Im Qurʾān öffnen · (\d{1,3}:\d{1,3}(?:[–-]\d{1,3})?)$/);
+ if(m)return "Kur'ân'da aç · "+m[1];
+ m=value.match(/^Qurʾān · (\d+) Fundstellen$/);
+ if(m)return "Kur'ân · "+m[1]+" kaynak yeri";
+ m=value.match(/^(Aussagen im Qurʾān|Aussagen in authentischer Sunnah) · (\d+)$/);
+ if(m)return (catalog.get(m[1])||m[1])+" · "+m[2];
+ return null;
+}
 function translate(value){
  if(typeof value!=="string")return null;
  const v=catalog.get(value);if(v!==undefined)return v;
+ const dynamic=translateDynamicAdultUI(value);if(dynamic!==null)return dynamic;
  const counts=value.match(/^(\d+)\s+(Funktionen|Ergebnisse|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt)$/);
  const words={Funktionen:"işlev",Ergebnisse:"sonuç",Veröffentlichungen:"yayın",Beiträge:"yazı",
   Seiten:"sayfa",Themenbereiche:"konu alanı",Aussagen:"söz",gemerkt:"kaydedildi"};
@@ -163,6 +186,8 @@ function boot(){
  schedule();
 }
 global.addEventListener("dar-adult-locale-changed",schedule);
+global.addEventListener("hashchange",schedule);
+global.addEventListener("popstate",schedule);
 global.addEventListener("storage",e=>{if(e.key===KEY)schedule()});
 global.document.addEventListener("dar:view-rendered",schedule);
 global.document.addEventListener("click",e=>{
