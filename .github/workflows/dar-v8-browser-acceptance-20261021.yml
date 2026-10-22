@@ -21,7 +21,7 @@ permissions:
 jobs:
   browser:
     # Only test the isolated V8 browser review lane.
-    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021' || github.head_ref == 'fix/browser-v8-visual-audit-1905-20261021' || github.head_ref == 'fix/v8-quran-player-modal-20261021' || github.head_ref == 'fix/v8-player-phone-selector-clip-20261021'
+    if: github.event_name != 'pull_request' || github.head_ref == 'review/browser-v8-preview-isolation-20261021' || github.head_ref == 'fix/v8-immersive-mobile-tablet-20261021' || github.head_ref == 'fix/browser-v8-visual-audit-1905-20261021' || github.head_ref == 'fix/v8-quran-player-modal-20261021' || github.head_ref == 'fix/v8-player-phone-selector-clip-20261021' || github.head_ref == 'feature/adult-nine-language-desktop-parity-20261022'
     runs-on: ubuntu-latest
     timeout-minutes: 18
     steps:
@@ -55,6 +55,10 @@ jobs:
         run: |
           python3 -m http.server 8765 --bind 127.0.0.1 >/tmp/dar-v8-browser.log 2>&1 &
           sleep 2
+      - name: Verify desktop nine-language selector and release gates
+        run: |
+          python3 -m pip install --quiet selenium
+          python3 desktop-preview/i18n-core-v1/test-nine-language-picker.py
       - name: Check actual Chrome DOM and interactions on all viewports
         run: |
           python3 -m pip install --quiet selenium
