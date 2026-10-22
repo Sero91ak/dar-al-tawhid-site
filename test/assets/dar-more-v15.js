@@ -63,7 +63,7 @@ function setLocale(code){if(!localeCodes.has(code))return;try{localStorage.setIt
 function localeChoices(){
  const value=currentLocale();
  return '<section class="dm-locale" role="group" aria-label="Sprache wählen / Dil seçimi">'+
- '<div class="dm-locale-copy"><strong>Sprache · Dil</strong><small>Türkische Inhalte werden nach Quellen- und Sprachprüfung freigegeben.</small></div>'+
+ '<div class="dm-locale-copy"><strong>Sprache · Dil</strong><small>Fachinhalte in weiteren Sprachen werden nach Quellen- und Sprachprüfung freigegeben.</small></div>'+
  '<div class="dm-locale-choices">'+
  localeChoicesList.map(([code,label])=>'<button type="button" data-dm-locale="'+code+'" aria-pressed="'+(value===code)+'">'+label+'</button>').join('')+
  '</div><a class="dm-i18n-reader-link" href="/test/i18n/?post=hasan-al-basri-selbstpruefung-20261021-481">'+

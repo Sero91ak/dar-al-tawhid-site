@@ -8,6 +8,15 @@ const EXPECTED=["de","tr","en","ar","ku","ckb","bs"];
 for(const locale of EXPECTED.slice(1)){
  const v=pack.translations[locale];
  assert(Object.keys(v).length>=350,locale+" missing section labels");
+ assert(Object.keys(v).length>=478,locale+" missing Quran/home/library expansion");
+ for(const label of ["Qurʾān-Player","BEITRÄGE NACH QURʾĀN · SUNNAH · AṮĀR",
+   "Die Qurʾān-Texte konnten nicht geladen werden. Bitte erneut versuchen.",
+   "Für diesen Vers liegt derzeit keine geprüfte Salaf-Überlieferung vor.",
+   "Bibliothek des Wissens","Überlieferer, frühe Imāme und ihre Werke.",
+   "Mikrofon konnte nicht geöffnet werden."]){
+  assert(v[label]?.trim(),locale+" missing routed UI label "+label);
+ }
+
  for(const term of ["ÜBERLIEFERUNGSMAẞSTAB","Gebetskalender","Faǧr","Ẓuhr","ʿAṣr","Maghrib","ʿIshāʾ",
  "Übersicht","Lebensweg","Aussagen im Qurʾān","Aussagen in authentischer Sunnah",
  "Gebetszeiten & Kalender","Beitragstitel","Titel der Beiträge","Duʿāʾ öffnen","Willkommen bei DĀR AL TAWḤĪD"]){
@@ -25,16 +34,42 @@ const primary=makeText("ÜBERLIEFERUNGSMAẞSTAB"),prayer=makeText("Faǧr"),week
 const dynamicQuran=makeText("Qurʾān · 8 Fundstellen"),
  dynamicStatements=makeText("Aussagen im Qurʾān · 3"),
  preservedSource=makeText("Qurʾān · 8 Fundstellen",true);
-const nodes=[primary,prayer,weekday,original,excluded,dynamicQuran,dynamicStatements,preservedSource];
+const numericPosts=makeText("18 Beiträge"),numericSurahs=makeText("7 Sūren · 26 Āyāt"),
+ dynamicAyahLink=makeText("Im Qurʾān öffnen · 2:45"),
+ dynamicSurahButton=makeText("Sūrah Al-Baqarah öffnen"),
+ dynamicSurahCount=makeText("114 Suren mit Arabisch und Lautschrift."),
+ dynamicDuaCount=makeText("5 bekannte Duʿāʾ nach Themen."),
+ compactDate=makeText("Mi., 21.10.26"),clockLabel=makeText("23:14 Uhr"),
+ hijriDate=makeText("11. Dschumada I 1448");
+const nodes=[primary,prayer,weekday,original,excluded,dynamicQuran,dynamicStatements,preservedSource,
+ numericPosts,numericSurahs,dynamicAyahLink,dynamicSurahButton,dynamicSurahCount,dynamicDuaCount,compactDate,clockLabel,hijriDate];
 const props={
  nodeType:1,children:[],textContent:"📖 Wer Gutes zeigt, bekommt Anteil am Lohn",
  closest:()=>({getAttribute:()=> "wer-gutes-zeigt-bekommt-anteil-am-lohn-198"}),
  getAttribute:()=>null
 };
+const libraryHost={
+ attrs:{"data-nav":"post","data-value":"ahmad-quran-kalam-allah-001",
+        "aria-label":"📖 Der Qurʾān ist Allahs Wort öffnen"},
+ getAttribute(name){return this.attrs[name]??null},
+ setAttribute(name,value){this.attrs[name]=value}
+};
+const libraryCard={
+ nodeType:1,children:[],textContent:"📖 Der Qurʾān ist Allahs Wort",
+ closest:()=>libraryHost,getAttribute:()=>null
+};
+const repeatedA={
+ nodeType:1,children:[],textContent:"📖 Der Qurʾān ist Allahs Wort",
+ closest:()=>({getAttribute:()=> "ahmad-quran-kalam-allah-001"}),getAttribute:()=>null
+};
+const repeatedB={
+ nodeType:1,children:[],textContent:"📖 Der Qurʾān ist Allahs Wort",
+ closest:()=>({getAttribute:()=> "abu-hatim-quran-kalam-allah-001"}),getAttribute:()=>null
+};
 const doc={
  documentElement:{lang:"de",dir:"ltr"},body,readyState:"loading",
  createTreeWalker(){let i=-1;return{nextNode:()=>nodes[++i]||null}},
- querySelectorAll:()=>[props],addEventListener:()=>{}
+ querySelectorAll:()=>[props,repeatedA,repeatedB,libraryCard],addEventListener:()=>{}
 };
 let lng="de";
 const w={location:{pathname:"/test/"},document:doc,NodeFilter:{SHOW_ELEMENT:1,SHOW_TEXT:4},
@@ -49,19 +84,86 @@ for(const locale of EXPECTED){
  const v=pack.translations[locale];
  assert.equal(primary.nodeValue,locale==="de"?"ÜBERLIEFERUNGSMAẞSTAB":v["ÜBERLIEFERUNGSMAẞSTAB"],locale+" motto");
  assert.equal(prayer.nodeValue,locale==="de"?"Faǧr":(locale==="tr"?"Sabah (Fecr)":v["Faǧr"]),locale+" prayer");
- assert.equal(props.textContent,locale==="de"?titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].sourceTitle:
-    titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].translations[locale],locale+" post title");
+ assert.equal(props.textContent,titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].sourceTitle,locale+" Beiträge titles explicitly excluded");
+ const dynamicNames={tr:"Sûre Al-Kahf aç",en:"Open Sūrah Al-Kahf",
+  ar:"افتح سورة Al-Kahf",ku:"Sûreya Al-Kahf veke",
+  ckb:"سوورەتی Al-Kahf بکەرەوە",bs:"Otvori suru Al-Kahf"};
+ const oneRoute=runtime.translateValue("Sūrah Al-Kahf öffnen",locale);
+ assert.equal(oneRoute,locale==="de"?null:dynamicNames[locale],locale+" surah opening CTA");
+ const summary=runtime.translateValue("114 Suren mit Arabisch und Lautschrift.",locale);
+ assert(locale==="de"?summary===null:summary?.startsWith("114 "),locale+" compact Quran library summary");
+ const idOne=titles.records["post:ahmad-quran-kalam-allah-001"];
+ const idTwo=titles.records["post:abu-hatim-quran-kalam-allah-001"];
+ assert.equal(repeatedA.textContent,idOne.sourceTitle,locale+" unmodified Beiträge title A");
+ assert.equal(repeatedB.textContent,idTwo.sourceTitle,locale+" unmodified Beiträge title B");
+ assert.equal(libraryCard.textContent,idOne.sourceTitle,locale+" unmodified Beiträge card");
+ const accessibility={
+  tr:t=>t+" içeriğini aç",en:t=>"Open "+t,ar:t=>"افتح "+t,
+  ku:t=>t+" veke",ckb:t=>t+" بکەرەوە",bs:t=>"Otvori "+t
+ };
+ const expectedAria=idOne.sourceTitle+" öffnen";
+ assert.equal(libraryHost.getAttribute("aria-label"),expectedAria,locale+" localized post card accessibility");
+
  assert.equal(original.nodeValue,"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً","Arabic source modified");
  assert.equal(excluded.nodeValue,"Nicht authentisch belegt","source text modified");
  assert.equal(doc.documentElement.dir,["ar","ckb"].includes(locale)?"rtl":"ltr");
  const corpus=pack.translations[locale]||{};
+ const referenceUnits={tr:"atıf yeri",en:"references",ar:"مواضع",ku:"cihên çavkaniyê",ckb:"ئاماژە",bs:"referenci"};
  const expectedQuran=locale==="de"?"Qurʾān · 8 Fundstellen":
-   (locale==="tr"?"Kur'an":corpus["Qurʾān"])+" · 8 "+corpus["Fundstellen"];
+   (locale==="tr"?"Kur'an":corpus["Qurʾān"])+" · 8 "+referenceUnits[locale];
  assert.equal(dynamicQuran.nodeValue,expectedQuran,locale+" numeric Quran heading");
  const statement=locale==="de"?"Aussagen im Qurʾān · 3":
    (locale==="tr"?"Kur'ân'daki ifadeler":corpus["Aussagen im Qurʾān"])+" · 3";
  assert.equal(dynamicStatements.nodeValue,statement,locale+" numeric statement heading");
  assert.equal(preservedSource.nodeValue,"Qurʾān · 8 Fundstellen","A sourced verse note must not be translated");
+ const numberTerms={
+  tr:["yazı","sûre","âyet","Kur'ân'da aç"],
+  en:["articles","surahs","verses","Open in the Qurʾān"],
+  ar:["مقالات","سور","آيات","فتح في القرآن"],
+  ku:["gotar","sûre","ayet","Di Qur'anê de vekin"],
+  ckb:["وتار","سوورەت","ئایەت","لە قورئاندا بیکەرەوە"],
+  bs:["članaka","sura","ajeta","Otvori u Kur'anu"]
+ };
+ if(locale==="de"){
+  assert.equal(numericPosts.nodeValue,"18 Beiträge");
+  assert.equal(numericSurahs.nodeValue,"7 Sūren · 26 Āyāt");
+  assert.equal(dynamicAyahLink.nodeValue,"Im Qurʾān öffnen · 2:45");
+ }else{
+  const unit=numberTerms[locale];
+  assert.equal(numericPosts.nodeValue,"18 "+unit[0],locale+" numeric articles");
+  assert.equal(numericSurahs.nodeValue,"7 "+unit[1]+" · 26 "+unit[2],locale+" surah/ayah totals");
+  assert.equal(dynamicAyahLink.nodeValue,
+    (locale==="tr"?"Kur'ân'da aç":pack.translations[locale]["Im Qurʾān öffnen"])+" · 2:45",
+    locale+" Quran reference control");
+ }
+ const messages={
+  tr:["Sûre Al-Baqarah aç","114 sûre, Arapça metin ve okunuş","5 bilinen konuya göre dua"],
+  en:["Open Sūrah Al-Baqarah","114 surahs with Arabic and transliteration","5 known supplications by topic"],
+  ar:["افتح سورة Al-Baqarah","114 سور بالنص العربي والنقل الصوتي","5 أدعية معروفة مصنفة حسب الموضوع"],
+  ku:["Sûreya Al-Baqarah veke","114 sûre bi erebî û nivîsandina dengî","5 duayên naskirî li gorî mijaran"],
+  ckb:["سوورەتی Al-Baqarah بکەرەوە","114 سوورەت بە عەرەبی و نووسینی دەنگی","5 دوعای ناسراو بەپێی بابەت"],
+  bs:["Otvori suru Al-Baqarah","114 sura s arapskim tekstom i transkripcijom","5 poznatih dova po temama"]
+ };
+ const expectedMessages=locale==="de"?["Sūrah Al-Baqarah öffnen","114 Suren mit Arabisch und Lautschrift.","5 bekannte Duʿāʾ nach Themen."]:messages[locale];
+ assert.equal(dynamicSurahButton.nodeValue,expectedMessages[0],locale+" surah button");
+ assert.equal(dynamicSurahCount.nodeValue.replace(/\.$/,""),expectedMessages[1].replace(/\.$/,""),locale+" full Quran count");
+ assert.equal(dynamicDuaCount.nodeValue.replace(/\.$/,""),expectedMessages[2].replace(/\.$/,""),locale+" summary count");
+ const expectedClock={de:"23:14 Uhr",tr:"saat 23:14",en:"23:14",ar:"الساعة 23:14",
+  ku:"saet 23:14",ckb:"کاتژمێر 23:14",bs:"23:14 h"};
+ assert.equal(clockLabel.nodeValue,expectedClock[locale],locale+" localized clock");
+ const hijriExpected={de:"11. Dschumada I 1448",tr:"11 Cemâziyelevvel 1448",
+  en:"11 Jumādā al-Ūlā 1448",ar:"11 جمادى الأولى 1448 هـ",
+  ku:"11 Cemadiya Yekem 1448",ckb:"11 جەمادی یەکەم 1448",
+  bs:"11 Džumadel-ula 1448"};
+ assert.equal(hijriDate.nodeValue,hijriExpected[locale],locale+" Hijri calendar");
+
+ if(locale!=="de")assert.notEqual(compactDate.nodeValue,"Mi., 21.10.26",locale+" localized compact calendar");
+ else assert.equal(compactDate.nodeValue,"Mi., 21.10.26");
+ for(const term of ["Geprüfte Beziehungen","Umstrittene Angaben (bewusst öffnen)",
+                   "nicht sicher überliefert","Keine Treffer."]){
+  assert(locale==="de"||pack.translations[locale][term]?.trim(),locale+" missing "+term);
+ }
+
  if(locale==="en") assert(/Wednesday|October/.test(weekday.nodeValue),"Calendar month/day not localized");
 }
 lng="de";runtime.apply();
@@ -69,4 +171,15 @@ assert.equal(weekday.nodeValue,"Mittwoch, 21. Oktober 2026","calendar failed to 
 assert.equal(runtime.formatCalendarDate("2026-10-21T12:00:00Z","en",{weekday:"long",timeZone:"UTC"}),"Wednesday");
 assert(runtime.translatePrayerName("Maghrib","en")==="Maghrib");
 assert(runtime.translatePrayerName("Maghrib","tr")==="Akşam");
+
+// The entire Beiträge route is excluded, while the chosen app language remains active.
+w.location.hash="#recent";
+lng="tr";
+const postRouteOriginal=primary.nodeValue;
+runtime.apply();
+assert.equal(primary.nodeValue,postRouteOriginal,"Beiträge route must not be rewritten");
+assert.equal(doc.documentElement.lang,"tr","Post exclusion must not undo the user locale");
+w.location.hash="";
+lng="de";runtime.apply();
+
 console.log("PASS: seven languages, full welcome/prayer/calendar/prophet UI, 13 identity-checked headings, German rollback and source protection");

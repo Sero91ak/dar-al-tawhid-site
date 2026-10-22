@@ -191,11 +191,32 @@ function renderHomeWelcome(locale){
                       document.createTextNode(translation.slice(pos+branded.length)));
 }
 const titleByGerman=new Map();
+let totalKnownTitleRecords=0;
 const originalTitles=new WeakMap();
+const originalPostAria=new WeakMap();
+function localizePostAria(host,sourceTitle,displayTitle,locale){
+ if(host?.getAttribute?.("data-nav")!=="post"||!host?.setAttribute)return;
+ const actual=host.getAttribute("aria-label");
+ if(typeof actual!=="string")return;
+ let state=originalPostAria.get(host);
+ if(state&&actual!==state.source&&actual!==state.rendered){originalPostAria.delete(host);state=null}
+ if(!state){
+  if(actual!==sourceTitle+" öffnen")return;
+  state={source:actual,rendered:actual};originalPostAria.set(host,state);
+ }
+ const formatted={
+  tr:t=>t+" içeriğini aç",en:t=>"Open "+t,ar:t=>"افتح "+t,
+  ku:t=>t+" veke",ckb:t=>t+" بکەرەوە",bs:t=>"Otvori "+t
+ };
+ const translated=locale==="de"?state.source:
+   (formatted[locale]?.(displayTitle)||state.source);
+ if(actual!==translated)host.setAttribute("aria-label",translated);
+ state.rendered=translated;
+}
+
 const HEADLINE_SELECTORS=[
- "#dv3Latest .dv3-post-body b","#dhpPosts .dhp-post-capsule h3","#dhpTodayName",
  ".dua-card h3",".dua-card .dua-title",".duas-card h3",".duas-card .dua-title",
- "[data-dua-id] .dua-title","[data-post-id] .post-title"
+ "[data-dua-id] .dua-title"
 ].join(",");
 function registerTitleData(data){
  if(data?.schemaVersion!==1||data.scope!=="adult-test-visible-titles-only"||
@@ -208,10 +229,11 @@ function registerTitleData(data){
      Object.keys(record.translations||{}).sort().join("|")!=="ar|bs|ckb|en|ku|tr")return false;
   if([...SUPPORTED].filter(x=>x!=="de").some(k=>typeof record.translations[k]!=="string"||!record.translations[k].trim()))
     return false;
-  if(prepared.has(record.sourceTitle))return false;
-  prepared.set(record.sourceTitle,record);
+  if(!prepared.has(record.sourceTitle))prepared.set(record.sourceTitle,[]);
+  prepared.get(record.sourceTitle).push(record);
  }
  titleByGerman.clear();for(const [key,val] of prepared)titleByGerman.set(key,val);
+ totalKnownTitleRecords=Object.keys(data.records).length;
  schedule();return true;
 }
 function updateKnownTitles(locale){
@@ -227,16 +249,24 @@ function updateKnownTitles(locale){
    if(!titleByGerman.has(current))return;
    old={source:current,rendered:current};originalTitles.set(element,old);
   }
-  const record=titleByGerman.get(old.source);
-  const id=element.closest?.("[data-dv3-value],[data-dhp-value],[data-post-id],[data-dua-id]");
+  const candidates=titleByGerman.get(old.source)||[];
+  const id=element.closest?.("[data-dv3-value],[data-dhp-value],[data-post-id],[data-dua-id],[data-nav='post'][data-value]");
   const boundId=id?.getAttribute?.("data-dv3-value")||
                 id?.getAttribute?.("data-dhp-value")||
                 id?.getAttribute?.("data-post-id")||
-                id?.getAttribute?.("data-dua-id");
-  if(boundId&&boundId!==record?.id)return;
-  const desired=locale==="de"?old.source:record?.translations?.[locale]||old.source;
+                id?.getAttribute?.("data-dua-id")||
+                (id?.getAttribute?.("data-nav")==="post"?id?.getAttribute?.("data-value"):null);
+  // Repeated canonical headings may refer to different posts; resolve by
+  // stable content ID if present, otherwise translate only identical drafts.
+  const record=boundId?candidates.find(r=>r.id===boundId):
+    (candidates.length===1||candidates.every(r=>
+       [...SUPPORTED].every(code=>code==="de"||
+          r.translations[code]===candidates[0].translations[code]))?candidates[0]:null);
+  if(!record||record.kind!=="dua")return; // entire Beiträge section excluded
+  const desired=locale==="de"?old.source:record.translations?.[locale]||old.source;
   if(element.textContent!==desired)element.textContent=desired;
   old.rendered=desired;
+  localizePostAria(id,old.source,desired,locale);
  });
 }
 
@@ -313,6 +343,32 @@ function localizeGermanCalendarLabel(value,language){
  if(!language||language==="de"||value.length>90||!/[A-Za-zäöüß]/.test(value))return null;
  let changed=false,result=value;
  const locale=INTL_LOCALE[language]||"de-DE";
+ // Gregorian UI date formatted by the app as "Mi., 21.10.26" (not source material).
+ const abbreviated=value.match(/^(Mo|Di|Mi|Do|Fr|Sa|So)\., (\d{1,2})\.(\d{1,2})\.(\d{2})$/);
+ if(abbreviated){
+  const d=new Date(Date.UTC(2000+Number(abbreviated[4]),Number(abbreviated[3])-1,Number(abbreviated[2])));
+  if(d.getUTCDate()===Number(abbreviated[2])&&d.getUTCMonth()===Number(abbreviated[3])-1)
+   try{return new Intl.DateTimeFormat(locale,{weekday:"short",day:"2-digit",month:"2-digit",year:"2-digit",timeZone:"UTC"}).format(d)}catch(_){}
+ }
+ const hijri=value.match(/^(\d{1,2})\. Dschumada (I|II) (\d{3,4})$/);
+ if(hijri){
+  const months={
+   tr:["Cemâziyelevvel","Cemâziyelâhir"],
+   en:["Jumādā al-Ūlā","Jumādā al-Ākhirah"],
+   ar:["جمادى الأولى","جمادى الآخرة"],
+   ku:["Cemadiya Yekem","Cemadiya Duyem"],
+   ckb:["جەمادی یەکەم","جەمادی دووەم"],
+   bs:["Džumadel-ula","Džumadel-ahira"]
+  };
+  const target=months[language];
+  if(target)return hijri[1]+" "+target[hijri[2]==="I"?0:1]+" "+hijri[3]+(language==="ar"?" هـ":"");
+ }
+ const hour=value.match(/^(\d{2}):(\d{2}) Uhr$/);
+ if(hour&&Number(hour[1])<24&&Number(hour[2])<60){
+  const shown=hour[1]+":"+hour[2];
+  return ({tr:"saat "+shown,en:shown,ar:"الساعة "+shown,ku:"saet "+shown,ckb:"کاتژمێر "+shown,bs:shown+" h"})[language]||shown;
+ }
+
  for(let month=0;month<12;month++){
   const pattern=new RegExp("(^|[\\s,])"+DE_MONTHS[month]+"(?=$|[\\s,0-9.])","g");
   if(!pattern.test(result))continue;
@@ -329,6 +385,91 @@ function localizeGermanCalendarLabel(value,language){
  }
  return changed?result:null;
 }
+/* Locale-safe variable UI labels. Never parse or rewrite Qurʾān/ḥadīṯ texts.
+ * A changing number is metadata; the fixed unit comes from the UI glossary.
+ * This is intentionally restricted to complete short labels. */
+const DAR_UI_FORMATS={
+ tr:{
+  matched:n=>n+" kaynaklı ifade",names:n=>n+" ad ve ilişkilendirme",
+  surahs:n=>n+" sûre, Arapça metin ve okunuş",
+  duas:n=>n+" bilinen konuya göre dua",books:n=>n+" incelenmiş eser ve atıf yapılan âlim"
+ },
+ en:{
+  matched:n=>n+" statements with sources",names:n=>n+" names and associations",
+  surahs:n=>n+" surahs with Arabic and transliteration",
+  duas:n=>n+" known supplications by topic",books:n=>n+" verified works and cited scholars"
+ },
+ ar:{
+  matched:n=>n+" أقوال مع مصادرها",names:n=>n+" أسماء ونسب",
+  surahs:n=>n+" سور بالنص العربي والنقل الصوتي",
+  duas:n=>n+" أدعية معروفة مصنفة حسب الموضوع",books:n=>n+" مؤلفات محققة وعلماء مستشهد بهم"
+ },
+ ku:{
+  matched:n=>n+" gotinên bi çavkanî",names:n=>n+" nav û têkilî",
+  surahs:n=>n+" sûre bi erebî û nivîsandina dengî",
+  duas:n=>n+" duayên naskirî li gorî mijaran",books:n=>n+" berhemên hatine vekolîn û alimên hatine jêgirtin"
+ },
+ ckb:{
+  matched:n=>n+" وتە لەگەڵ سەرچاوە",names:n=>n+" ناو و پەیوەندی",
+  surahs:n=>n+" سوورەت بە عەرەبی و نووسینی دەنگی",
+  duas:n=>n+" دوعای ناسراو بەپێی بابەت",books:n=>n+" بەرهەمی پشکنراو و زانای ئاماژەپێکراو"
+ },
+ bs:{
+  matched:n=>n+" izjava s izvorima",names:n=>n+" imena i poveznica",
+  surahs:n=>n+" sura s arapskim tekstom i transkripcijom",
+  duas:n=>n+" poznatih dova po temama",books:n=>n+" provjerenih djela i citiranih učenjaka"
+ }
+};
+const DAR_SURAH_OPEN={
+ tr:name=>"Sûre "+name+" aç",en:name=>"Open Sūrah "+name,
+ ar:name=>"افتح سورة "+name,ku:name=>"Sûreya "+name+" veke",
+ ckb:name=>"سوورەتی "+name+" بکەرەوە",bs:name=>"Otvori suru "+name
+};
+const DAR_DYNAMIC_UI_UNITS={
+ tr:{Funktionen:"işlev",Ergebnisse:"sonuç",Veröffentlichungen:"yayın",Beiträge:"yazı",Seiten:"sayfa",Themenbereiche:"konu alanı",Aussagen:"ifade",gemerkt:"kaydedildi",Fundstellen:"atıf yeri",Einträge:"kayıt",Sūren:"sûre",Āyāt:"âyet",Trefferquote:"isabet oranı",gewählt:"seçildi"},
+ en:{Funktionen:"functions",Ergebnisse:"results",Veröffentlichungen:"publications",Beiträge:"articles",Seiten:"pages",Themenbereiche:"topics",Aussagen:"statements",gemerkt:"saved",Fundstellen:"references",Einträge:"entries",Sūren:"surahs",Āyāt:"verses",Trefferquote:"accuracy",gewählt:"selected"},
+ ar:{Funktionen:"وظائف",Ergebnisse:"نتائج",Veröffentlichungen:"منشورات",Beiträge:"مقالات",Seiten:"صفحات",Themenbereiche:"موضوعات",Aussagen:"أقوال",gemerkt:"محفوظة",Fundstellen:"مواضع",Einträge:"مدخلات",Sūren:"سور",Āyāt:"آيات",Trefferquote:"نسبة الإجابات الصحيحة",gewählt:"مختارة"},
+ ku:{Funktionen:"kar",Ergebnisse:"encam",Veröffentlichungen:"weşan",Beiträge:"gotar",Seiten:"rûpel",Themenbereiche:"mijar",Aussagen:"gotin",gemerkt:"hatin tomarkirin",Fundstellen:"cihên çavkaniyê",Einträge:"têketin",Sūren:"sûre",Āyāt:"ayet",Trefferquote:"rêjeya bersivên rast",gewählt:"hatin hilbijartin"},
+ ckb:{Funktionen:"ئەرک",Ergebnisse:"ئەنجام",Veröffentlichungen:"بڵاوکراوە",Beiträge:"وتار",Seiten:"لاپەڕە",Themenbereiche:"بابەت",Aussagen:"وتە",gemerkt:"پاشەکەوتکراو",Fundstellen:"ئاماژە",Einträge:"تۆمار",Sūren:"سوورەت",Āyāt:"ئایەت",Trefferquote:"ڕێژەی وەڵامی ڕاست",gewählt:"هەڵبژێردراوە"},
+ bs:{Funktionen:"funkcija",Ergebnisse:"rezultata",Veröffentlichungen:"objava",Beiträge:"članaka",Seiten:"stranica",Themenbereiche:"tema",Aussagen:"izjava",gemerkt:"sačuvano",Fundstellen:"referenci",Einträge:"unosa",Sūren:"sura",Āyāt:"ajeta",Trefferquote:"uspješnosti",gewählt:"odabrano"}
+};
+function darDynamicUILocalize(value,language){
+ const units=DAR_DYNAMIC_UI_UNITS[language];
+ if(!units)return null;
+ const q=value.match(/^(\d+) (Aussagen mit Quellen\.|Namen und Zuordnungen\.|Suren mit Arabisch und Lautschrift\.|bekannte Duʿāʾ nach Themen\.|geprüfte Werke und zitierte Gelehrte\.)$/);
+ if(q){
+  const key={"Aussagen mit Quellen.":"matched","Namen und Zuordnungen.":"names",
+   "Suren mit Arabisch und Lautschrift.":"surahs","bekannte Duʿāʾ nach Themen.":"duas",
+   "geprüfte Werke und zitierte Gelehrte.":"books"}[q[2]];
+  return DAR_UI_FORMATS[language]?.[key]?.(q[1])||null;
+ }
+ const surahButton=value.match(/^Sūrah ([\p{L}\p{M}0-9ʿʾ'’ .-]{2,95}) öffnen$/u);
+ if(surahButton)return DAR_SURAH_OPEN[language]?.(surahButton[1])||null;
+ const numeric=value.match(/^(\d+) (Funktionen|Ergebnisse|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Fundstellen|Einträge)$/);
+ if(numeric)return numeric[1]+" "+units[numeric[2]];
+ const surahs=value.match(/^(\d+) Sūren · (\d+) Āyāt$/);
+ if(surahs)return surahs[1]+" "+units.Sūren+" · "+surahs[2]+" "+units.Āyāt;
+ const ayat=value.match(/^(\d+) Āyāt · (Mekkanisch|Medinensisch)$/);
+ if(ayat){
+  const place=language==="tr"?dictionary.get(ayat[2]):languagePacks.get(language)?.get(ayat[2]);
+  return place?ayat[1]+" "+units.Āyāt+" · "+place:null;
+ }
+ const score=value.match(/^(\d+(?:[.,]\d+)?)% Trefferquote$/);
+ if(score)return score[1]+"% "+units.Trefferquote;
+ const selection=value.match(/^(\d+)\/(\d+) gewählt$/);
+ if(selection)return selection[1]+"/"+selection[2]+" "+units.gewählt;
+ const surahRange=value.match(/^Sūrenbereich wechseln, aktuell (\d+)[–-](\d+)$/);
+ if(surahRange){
+  const heading=language==="tr"?(dictionary.get("Surenbereich")||languagePacks.get("tr")?.get("Surenbereich")):languagePacks.get(language)?.get("Surenbereich");
+  return heading?heading+" "+surahRange[1]+"–"+surahRange[2]:null;
+ }
+ const openAyah=value.match(/^Im Qurʾān öffnen · (\d{1,3}:\d{1,3}(?:[–-]\d{1,3})?)$/);
+ if(openAyah){
+  const label=language==="tr"?dictionary.get("Im Qurʾān öffnen")||languagePacks.get("tr")?.get("Im Qurʾān öffnen"):languagePacks.get(language)?.get("Im Qurʾān öffnen");
+  return label?label+" · "+openAyah[1]:null;
+ }
+ return null;
+}
 function translateExact(value,language="tr"){
  if(language==="de")return null;
  // Localize the numeric *UI heading* generated by the Prophets profile, never
@@ -336,8 +477,8 @@ function translateExact(value,language="tr"){
  const references=value.match(/^Qurʾān · (\d+) Fundstellen$/);
  if(references){
   const text=language==="tr"?"Kur'an":languagePacks.get(language)?.get("Qurʾān");
-  const places=languagePacks.get(language)?.get("Fundstellen")||
-    (language==="tr"?"Kaynak yerleri":null);
+  const places=DAR_DYNAMIC_UI_UNITS[language]?.Fundstellen||
+    languagePacks.get(language)?.get("Fundstellen");
   return text&&places?text+" · "+references[1]+" "+places:null;
  }
  const statements=value.match(/^(Aussagen im Qurʾān|Aussagen in authentischer Sunnah) · (\d+)$/);
@@ -346,6 +487,8 @@ function translateExact(value,language="tr"){
     languagePacks.get(language)?.get(statements[1]);
   return head?head+" · "+statements[2]:null;
  }
+ const dynamicUI=darDynamicUILocalize(value,language);
+ if(dynamicUI!==null)return dynamicUI;
  if(language!=="tr")return languagePacks.get(language)?.get(value)??localizeGermanCalendarLabel(value,language);
  const known=dictionary.get(value);
  if(known!==undefined)return known;
@@ -382,7 +525,10 @@ function translateExact(value,language="tr"){
 }
 
 for(const [de,tr] of ENTRIES){if(backward.has(tr)&&backward.get(tr)!==de)ambiguous.add(tr);else backward.set(tr,de)}
-const EXCLUDE="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],[lang='ar'],[dir='rtl'],[class*='quran-arabic'],[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],[class*='post-content'],[class*='hadith-text'],[class*='qsource-statement'],[class*='source-quote'],[class*='prophets-quote__de'],[class*='verse-translation'],[class*='dua-meaning'],[data-canonical-content],.prophets-quote__de,.prophets-quote__ar,.prophets-quote__meta,.prophets-quote__title,.prophets-detail__sub,.prophets-verse__text,.prophets-verse__arabic";
+const EXCLUDE="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],[lang='ar'],[dir='rtl'],[class*='quran-arabic'],[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],[class*='post-content'],[class*='hadith-text'],[class*='qsource-statement'],[class*='source-quote'],[class*='prophets-quote__de'],[class*='verse-translation'],[class*='dua-meaning'],[data-canonical-content],.prophets-quote__de,.prophets-quote__ar,.prophets-quote__meta,.prophets-quote__title,.prophets-detail__sub,.prophets-verse__text,.prophets-verse__arabic,"+
+"[data-post-id],[data-post-body],[data-page=post],[data-view=post],article[data-nav=post],"+
+"[class*=post-card],[class*=post-title],[class*=post-detail],[class*=post-excerpt],"+
+"[class*=post-preview],[class*=sf-post],[class*=feed-post]";
 const originals=new WeakMap(),attributeOriginals=new WeakMap();
 const ATTRS=["placeholder","aria-label","title"];
 function currentLocale(){try{const v=global.localStorage?.getItem(KEY);return SUPPORTED.has(v)?v:"de"}catch(_){return"de"}}
@@ -425,8 +571,18 @@ function transformAttributes(element,locale){
   prior.rendered=desired;
  }
 }
+function isPostRoute(){
+ const route=String(global.location?.hash||"").replace(/^#\/?/,"").split(/[/?]/)[0].toLowerCase();
+ return ["post","posts","recent","beitraege","beiträge","article"].includes(route);
+}
 function apply(root=global.document?.body,locale=currentLocale()){
  if(!root)return 0;
+ if(isPostRoute()){
+  const html=global.document?.documentElement;
+  if(html){html.lang=locale;html.dir=rtl.has(locale)?"rtl":"ltr"}
+  // Posts remain in German, but the selected app language is still reflected.
+  return 0;
+ }
  const doc=global.document;
  if(root.nodeType===1&&!shouldSkip(root))transformAttributes(root,locale);
  renderHomeWelcome(locale);
@@ -453,7 +609,7 @@ function boot(){
     !global.document.getElementById("dar-test-seven-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-seven-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=1";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261022-3";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
@@ -483,7 +639,7 @@ global.DarTestTurkishUI={apply,schedule,locale:currentLocale,loadCatalog,
   hasTranslation:(de)=>dictionary.has(de),
   translateValue:translateExact,
   registerLocaleData,registerTitleData,supportedLocales:[...SUPPORTED],formatCalendarDate,
-  get localizedDraftTitleCount(){return titleByGerman.size},
+  get localizedDraftTitleCount(){return totalKnownTitleRecords},
   translatePrayerName:(source,locale=currentLocale())=>translateExact(source,locale)||source,
   translatedFor:code=>code==="tr"?dictionary.size:(languagePacks.get(code)?.size||0),
   contentStore:()=>global.DarAdultCentralContent?.create()||null,scope:"adult-test-only"};

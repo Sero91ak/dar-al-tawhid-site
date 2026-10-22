@@ -13,7 +13,10 @@ for(const name of posts){
  const head=raw.startsWith("---\n")?raw.split(/\n---(?:\r)?\n/,1)[0]:null;
  if(!head)continue;
  const id=head.match(/^id:\s*"([^"]+)"/m)?.[1];
- const title=head.match(/^title:\s*"([^"]+)"/m)?.[1];
+ const rawTitle=head.match(/^title:\s*(.+)$/m)?.[1]?.trim()||"";
+ const title=rawTitle.startsWith('"')&&rawTitle.endsWith('"')?
+   JSON.parse(rawTitle):rawTitle.startsWith("'")&&rawTitle.endsWith("'")?
+   rawTitle.slice(1,-1):rawTitle;
  if(id&&title)index.set(id,title);
 }
 const duas=JSON.parse(fs.readFileSync(path.join(root,"content/duas/duas.json"),"utf8"));
