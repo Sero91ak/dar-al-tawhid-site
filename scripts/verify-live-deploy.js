@@ -64,7 +64,8 @@ async function waitForPublicWebsite(url) {
       text.includes("DĀR AL TAWḤĪD") &&
       text.includes("desktop-overhaul") &&
       text.includes("darPublicWebsiteGuardV1") &&
-      !text.includes('id="darDedicatedPwaBootV2"');
+      !text.includes('id="darDedicatedPwaBootV2"') &&
+      text.includes('/desktop-preview/assets/dar-v8-portal-live.js?v=20261022-nine-ready1');
     const ok = status === 200 && surface === "public-website" && htmlOk;
     console.log(
       `verify-public: ${url} -> ${status} (cf=${cf}, surface=${surface || "n/a"}, attempt ${attempt}/${ATTEMPTS}, html=${htmlOk ? "ok" : "fail"})`
@@ -91,7 +92,8 @@ async function main() {
       testBuild,
       "canonical-source-library.js",
       "Quellenbibliothek",
-      testBuild.includes("v360") ? "QURAN_OVERVIEW_V360" : "quran-surah-card"
+      testBuild.includes("v360") ? "QURAN_OVERVIEW_V360" : "quran-surah-card",
+      "/assets/i18n/adult-language-picker-v1.js?v=20261022-picker-activation2"
     ]);
     if (!assetOk || !booksOk || !scholarsOk || !htmlOk) failed += 1;
     else console.log(`verify: Test-App Quellenbibliothek live OK (${testBuild})`);
@@ -109,16 +111,21 @@ async function main() {
       `${SITE_URL}/service-worker.js?cb=${Date.now()}`,
       ["PUBLIC_WEBSITE_NETWORK_ONLY_V1"]
     );
-    let visitorOk = await waitForHtmlIncludes(`${SITE_URL}/`, [visitorBuild], nativeHeaders);
+    let visitorOk = await waitForHtmlIncludes(`${SITE_URL}/`, [visitorBuild, "/assets/i18n/adult-language-picker-v1.js?v=20261022-picker-activation2"], nativeHeaders);
     if (!visitorOk) {
-      visitorOk = await waitForHtmlIncludes(`${SITE_URL}/index.html`, [visitorBuild], nativeHeaders);
+      visitorOk = await waitForHtmlIncludes(`${SITE_URL}/index.html`, [visitorBuild, "/assets/i18n/adult-language-picker-v1.js?v=20261022-picker-activation2"], nativeHeaders);
     }
     const pwaOk = await waitForHtmlIncludes(`${SITE_URL}/pwa/?pwa=1`, [
       visitorBuild,
       "darDedicatedPwaBootV2",
       "__DAR_PWA_DEDICATED_APP=true",
-      'dataset.appPath="android-pwa"'
+      'dataset.appPath="android-pwa"',
+      "/assets/i18n/adult-language-picker-v1.js?v=20261022-picker-activation2"
     ]);
+    const pwaLocaleWorkerOk = await waitForHtmlIncludes(
+      `${SITE_URL}/pwa/service-worker.js?locale-verify=20261022`,
+      ["freshShellWithOfflineFallback", "liveLocaleAsset(u)", "CACHE_PREFIX+'v3'"]
+    );
     const publicInstallManifestOk = await waitForHtmlIncludes(`${SITE_URL}/install-manifest.json`, [
       '"scope": "/"',
       '"start_url": "/pwa/?pwa=1"',
@@ -206,9 +213,9 @@ async function main() {
       200
     );
 
-    if (!iosScrollHtmlOk || !iosScrollCssOk || !iosScrollJsOk || !responsiveHtmlOk || !responsiveCssOk || !publicWebsiteOk || !publicIsolationSwOk || !publicInstallManifestOk || !publicInstallWorkerOk || !visitorOk || !pwaOk || !pwaInstallerOk || !downloadButtonsOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
+    if (!iosScrollHtmlOk || !iosScrollCssOk || !iosScrollJsOk || !responsiveHtmlOk || !responsiveCssOk || !publicWebsiteOk || !publicIsolationSwOk || !publicInstallManifestOk || !publicInstallWorkerOk || !visitorOk || !pwaOk || !pwaLocaleWorkerOk || !pwaInstallerOk || !downloadButtonsOk || zakatVer < expectZakat || !voiceStudioOk || !voiceVersionOk || !pronunciationOk) {
       console.error(
-        `verify: Besucher-App fehlgeschlagen (ios-scroll-html=${iosScrollHtmlOk ? "ok" : "fail"}, ios-scroll-css=${iosScrollCssOk ? "ok" : "fail"}, ios-scroll-js=${iosScrollJsOk ? "ok" : "fail"}, responsive-html=${responsiveHtmlOk ? "ok" : "fail"}, responsive-css=${responsiveCssOk ? "ok" : "fail"}, public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, public-install-manifest=${publicInstallManifestOk ? "ok" : "fail"}, public-install-sw=${publicInstallWorkerOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, pwa-install=${pwaInstallerOk ? "ok" : "fail"}, downloads=${downloadButtonsOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
+        `verify: Besucher-App fehlgeschlagen (ios-scroll-html=${iosScrollHtmlOk ? "ok" : "fail"}, ios-scroll-css=${iosScrollCssOk ? "ok" : "fail"}, ios-scroll-js=${iosScrollJsOk ? "ok" : "fail"}, responsive-html=${responsiveHtmlOk ? "ok" : "fail"}, responsive-css=${responsiveCssOk ? "ok" : "fail"}, public=${publicWebsiteOk ? "ok" : "fail"}, web-sw-isolation=${publicIsolationSwOk ? "ok" : "fail"}, public-install-manifest=${publicInstallManifestOk ? "ok" : "fail"}, public-install-sw=${publicInstallWorkerOk ? "ok" : "fail"}, native-build=${visitorOk ? visitorBuild : "fail"}, android-pwa=${pwaOk ? "ok" : "fail"}, pwa-language-worker=${pwaLocaleWorkerOk ? "ok" : "fail"}, pwa-install=${pwaInstallerOk ? "ok" : "fail"}, downloads=${downloadButtonsOk ? "ok" : "fail"}, zakat=v${zakatVer || "?"}, voice=${voiceStudioOk ? "ok" : "fail"}, voice-version=${voiceVersionOk ? "ok" : "fail"}, pronunciation=${pronunciationOk ? "ok" : "fail"})`
       );
       failed += 1;
     } else {
