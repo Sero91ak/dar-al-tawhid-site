@@ -118,12 +118,11 @@
         var picker=w.DARAdultLanguagePickerV1;
         if(picker&&typeof picker.open==="function")picker.open("quick",b);
       } else {
-        // Delegate to the original SPA navigation; do not invent an account engine.
-        var a=d.createElement("button");
-        a.type="button";a.hidden=true;
-        a.setAttribute("data-nav",action==="account"?"account":"settings");
-        if(action==="appearance")a.setAttribute("data-value","appearance");
-        d.body.appendChild(a);a.click();a.remove();
+        // Reuse the original SPA router, not an unbound synthetic button.
+        var route=action==="account"?"account":"settings";
+        var value=action==="appearance"?"appearance":"";
+        if(typeof w.navigate==="function")w.navigate(route,value);
+        else w.location.hash="#"+route+(value?"/"+value:"");
       }
     });
   }
