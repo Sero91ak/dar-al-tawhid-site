@@ -56,8 +56,12 @@ def main():
     # Those source texts are protected too; do not treat them as unbilled.
     flow_path=ROOT/"kids/data/quiz-v4-connected-flow-originals-ledger.json"
     connected=json.loads(flow_path.read_text(encoding="utf-8")) if flow_path.is_file() else {"entries":[]}
+    imported_review_statuses={
+        "IMPORTED_ORIGINAL_MP3_VERIFIED",
+        "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY",
+    }
     connected_pending={e["sourceText"] for e in connected["entries"]
-                       if e["status"]!="IMPORTED_ORIGINAL_MP3_VERIFIED"}
+                       if e["status"] not in imported_review_statuses}
     # Unconfirmed historical ElevenLabs POSTs can already have consumed
     # credits, despite the original never reaching the MP3 registry.
     journal=json.loads((ROOT/"kids/data/quiz-v4-older-stage1-request-journal.json")
