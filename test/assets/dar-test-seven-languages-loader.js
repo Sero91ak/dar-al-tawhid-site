@@ -1,4 +1,4 @@
-/* Static seven-language adult UI pack loader.
+/* Static nine-language adult UI pack loader (legacy URL kept for compatibility).
  * No OpenAI API, no translation billing; no source or user data uploaded.
  * Used only by DAR TEST until formally reviewed for public clients.
  */
