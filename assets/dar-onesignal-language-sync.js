@@ -17,6 +17,14 @@ function read(){
 }
 async function pushLocale(){
  const locale=read();
+ // A native WKWebView/Android WebView can expose a Web OneSignal object
+ // unrelated to the native SDK that owns the real push subscription.
+ // Never synchronize the wrong OneSignal user. Native SDK bridge/release
+ // must explicitly implement setLanguage on that native subscription.
+ if(global.DAR_IOS_ONESIGNAL_ID || global.DAR_ANDROID_ONESIGNAL_ID ||
+    global.webkit?.messageHandlers?.darPushSettings || global.DarNative){
+   return {synced:false,locale,reason:"native_sdk_locale_bridge_required"};
+ }
  const os=global.OneSignal;
  if(!os?.User || typeof os.User.setLanguage!=="function")
    return {synced:false,reason:"sdk_unavailable",locale};
