@@ -1,0 +1,46 @@
+name: KIDS V4 Imported Original SHA Provenance Diagnostics (read only)
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths: ['.github/workflows/kids-v4-connected-paid-original-provenance-diagnostics-20261022.yml']
+permissions:
+  contents: read
+jobs:
+  inspect-source-identity:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Inspect selected prepaid V4 SHA and provider identity without audio generation
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          r=json.loads(Path('kids/data/quiz-v4-450-original-clip-registry.json').read_text())
+          p=json.loads(Path('kids/data/quiz-v4-450-paid-generation-ledger.json').read_text())
+          f=json.loads(Path('kids/data/quiz-v4-connected-flow-originals-ledger.json').read_text())
+          costs={row['text']:row for row in p['rows']}
+          rows=[]
+          for e in f['entries']:
+              if e['status']!='IMPORTED_ORIGINAL_MP3_VERIFIED':continue
+              text=e['sourceText']
+              original=r['textClips'].get(text)
+              cost=costs.get(text)
+              row={'text':text,'saved':bool(original),'paid':bool(cost),
+                   'voiceMatch':bool(original and original.get('voiceId')==f['voiceId']),
+                   'modelMatch':bool(original and original.get('modelId')==f['modelId']),
+                   'shaMatch':bool(original and original.get('sha256')==e.get('importedMP3SHA256')),
+                   'generationIdExpected':e.get('generationId'),
+                   'originalRecordGenerationId':original.get('originalGenerationId') if original else None,
+                   'originalRecordGenerationIdAlt':original.get('generationId') if original else None,
+                   'originalUrlMatch':bool(original and
+                      original.get('url') in (e.get('originalMP3URL'),e.get('savedURL'))),
+                   'paidShaMatch':bool(cost and original and cost['mp3Sha256']==original['sha256']),
+                   'hasSourceSHA':bool(original and original.get('textSha256')),
+                   'recordKeys':sorted(original.keys()) if original else []}
+              rows.append(row)
+          print('KIDS_V4_ORIGINAL_SHA_PROVENANCE_DIAG '+json.dumps(rows,ensure_ascii=False))
+          PY
