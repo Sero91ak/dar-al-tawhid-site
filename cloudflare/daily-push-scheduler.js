@@ -5,6 +5,8 @@
  */
 
 import { separatePushLaunchUrls } from "./push-launch-urls.js";
+import approvedPushCopy from "../desktop-preview/i18n-core-v1/push-copy-nine-languages-draft.json" with { type: "json" };
+import { dailyMessage } from "./push-nine-language-copy.js";
 import { writeNamedStatusToStore } from "./prayer-status-store.js";
 
 const DEFAULT_ONESIGNAL_APP_ID = "786d7cd6-0455-4434-ab14-0c10a7bc6b1e";
@@ -430,6 +432,12 @@ function buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionId,
   const snippet = String(item?.snippet || "").trim();
   const body = [itemTitle, snippet].filter(Boolean).join(snippet ? " – " : "") ||
     (isDua ? "Heutige Duʿāʾ aus Qurʾān & Sunnah." : "Heute empfohlener Beitrag.");
+  const localized = dailyMessage(approvedPushCopy, isDua ? "daily_dua" : "daily_recommendation");
+  // German live text retains its existing actual item title and snippet.
+  // Other languages receive approved generic source-safe wording until the
+  // selected daily article/duʿāʾ has a reviewed matching content translation.
+  localized.headings.de = title;
+  localized.contents.de = body;
   const origin = siteOrigin(env);
   const url = isDua
     ? `${origin}/#dua/${encodeURIComponent(item.id)}`
@@ -439,8 +447,8 @@ function buildDailyPushPayload(env, kind, item, config, dateKey, subscriptionId,
     app_id: String(env.ONESIGNAL_APP_ID || DEFAULT_ONESIGNAL_APP_ID).trim(),
     target_channel: "push",
     include_subscription_ids: [subscriptionId],
-    headings: { de: title, en: title },
-    contents: { de: body, en: body },
+    headings: localized.headings,
+    contents: localized.contents,
     ios_sound: "default",
     ttl: 3600,
     url,
