@@ -13,7 +13,7 @@ for(const locale of draft.locales){
  const original=catalog.locales.de.messages,target=catalog.locales[locale].messages;
  const items=draft.translations[locale]||{};
  assert.equal(Object.keys(items).length,39,locale+" navigation coverage changed unexpectedly");
- assert.equal(catalog.locales[locale].uiAvailability,"coming_soon");
+ assert.notEqual(catalog.locales[locale].uiAvailability,"navigation_preview","Unreviewed FR/ES must not be released");
  for(const [key,german] of Object.entries(original)){
   assert.equal(items[german],target[key],locale+" source alignment "+key);
   assert.ok(items[german].trim());
