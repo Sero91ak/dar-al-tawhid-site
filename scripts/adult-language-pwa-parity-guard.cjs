@@ -37,6 +37,8 @@ const testIndex=read("test/index.html");
 assert.ok(testIndex.includes('id="darTestAdultBrandHeaderShortcutV1"')&&
  testIndex.includes('id="darTestAdultBrandHeaderShortcutStyleV1"'),
  "DAR TEST /test/ must actually load the same interactive header as visitor mobile/PWA");
+assert.ok(root.includes('id="darAdultGlobalBrandStyleV2"')&&root.includes('id="darAdultGlobalBrandScriptV2"'),
+ "Adult visitor web-app root must load header even without native/PWA UA");
 const headerJs=read("assets/dar-adult-brand-header-v2.js");
 const headerCss=read("assets/dar-adult-brand-header-v2.css");
 const vm=require("node:vm");
