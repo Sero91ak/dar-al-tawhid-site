@@ -49,7 +49,7 @@ assert.ok(translate.includes('RELEASED_UI_LOCALES=new Set(["de"])')&&
  translate.includes('if(!RELEASED_UI_LOCALES.has(code))return false'),
  "Unreviewed Turkish visitor translation must be released explicitly");
 assert.ok(picker.includes('if(!TEST)return false')&&
- picker.includes('ITEMS.filter(function(l){return TEST||available(l.code)}'),
+ picker.includes('ITEMS.filter(function(l){return available(l.code)}'),
  "Visitor picker must hide unreleased languages");
 function mockPicker(path,chosen,runtime){
  const sandbox={
