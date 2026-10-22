@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><title>DĀR | 9 Sprachen Push-Vorschau</title>
+<style>
+:root{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;color-scheme:dark;--line:#354740;--gold:#dec08b}
+*{box-sizing:border-box}
+body{margin:0;min-height:100dvh;background:linear-gradient(160deg,#10231f,#1f302c 65%,#152420);color:#f4eee2}
+main{max-width:700px;margin:auto;padding:32px 17px 70px}
+h1{margin:4px 0 12px;font:normal clamp(27px,6vw,40px)/1.2 Georgia,serif;color:#efdeb8}
+small,.muted{color:#b5c0b7} .eyebrow{color:var(--gold);letter-spacing:.15em;font-size:11px}
+.notice{padding:13px 15px;border:1px solid #9c8a63;border-radius:12px;background:#2c3026;font-size:13px;line-height:1.65}
+.fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:24px 0}
+label{display:block;font-size:13px;color:#e3d4b6;line-height:1.7}
+select,input{display:block;width:100%;padding:12px 13px;min-height:46px;color:#fff;background:#283b33;border:1px solid #56665b;border-radius:12px;font:inherit}
+.full{grid-column:1/-1}
+.preview{padding:14px;background:#44524b;border-radius:24px;margin-top:8px}
+.bubble{display:flex;gap:12px;align-items:flex-start;background:#f3f3ed;color:#1d2520;border-radius:16px;padding:15px;min-height:105px;box-shadow:0 8px 24px #0003}
+.logo{flex:0 0 40px;display:grid;place-items:center;width:40px;height:40px;background:#233d33;color:#eed6a1;border-radius:11px;font:bold 16px Georgia,serif}
+.bubbleContent{min-width:0;flex:1}
+.heading{font-size:15px;font-weight:720;line-height:1.45;overflow-wrap:anywhere}
+.body{margin-top:6px;font-size:14px;line-height:1.55;overflow-wrap:anywhere}
+.meta{display:flex;justify-content:space-between;color:#515d55;font-size:11px;margin:0 0 6px}
+.code{margin-top:17px;font-size:12px;color:#c5d0c6}
+.status{font-size:12px;color:#d0b786;margin-top:17px}
+@media(max-width:470px){.fields{grid-template-columns:1fr}.full{grid-column:auto}}
+</style></head>
+<body><main>
+<div class="eyebrow">DĀR AL TAWḤĪD · ENTWICKLUNGS-VORSCHAU</div>
+<h1>Push-Nachrichten in 9 Sprachen</h1>
+<p class="muted">Hier kannst du z. B. Türkisch auswählen und sehen, wie die Nachricht auf dem Gerät aussehen würde.</p>
+<div class="notice"><strong>Nur Textvorschau.</strong> Diese Seite registriert kein Gerät, fordert keine Benachrichtigungsrechte an und versendet keinen echten Push. Für den realen Versand müssen die getrennten Sicherheitsfreigaben abgeschlossen sein.</div>
+<div class="fields">
+<label class="full">Sprache
+<select id="locale" aria-label="Push-Sprache"></select></label>
+<label class="full">Nachrichtentyp
+<select id="event" aria-label="Nachrichtenart"></select></label>
+<label>Vorwarnung (Minuten)<select id="minutes"><option value="5">5</option><option value="10" selected>10</option><option value="15">15</option></select></label>
+<label>Beispieluhrzeit<input id="time" type="time" value="06:30"></label>
+</div>
+<div class="preview"><div class="bubble" id="notification" role="status" aria-live="polite">
+<div class="logo">DĀR</div><div class="bubbleContent">
+<div class="meta"><span>DĀR AL TAWḤĪD</span><span>Vorschau</span></div>
+<div class="heading" id="titleText">Lade Sprachvorlagen …</div><div class="body" id="bodyText"></div>
+</div></div></div>
+<div class="code" id="source">Sprache: –</div>
+<div class="status" id="status">Lade lokal geprüfte Textvorlagen …</div>
+</main>
+<script>
+(function(){
+'use strict';
+const $=id=>document.getElementById(id);
+const langs={de:"Deutsch",ar:"العربية",en:"English",tr:"Türkçe",ku:"Kurmancî",ckb:"سۆرانی",bs:"Bosanski",fr:"Français",es:"Español"};
+const events={
+prayer_fajr_entry:"Fajr · Gebetseintritt",prayer_fajr_advance:"Fajr · Vorwarnung",
+prayer_dhuhr_entry:"Dhuhr · Gebetseintritt",prayer_dhuhr_advance:"Dhuhr · Vorwarnung",
+prayer_asr_entry:"ʿAṣr · Gebetseintritt",prayer_asr_advance:"ʿAṣr · Vorwarnung",
+prayer_maghrib_entry:"Maghrib · Gebetseintritt",prayer_maghrib_advance:"Maghrib · Vorwarnung",
+prayer_isha_entry:"ʿIshāʾ · Gebetseintritt",prayer_isha_advance:"ʿIshāʾ · Vorwarnung",
+prayer_tahajjud_entry:"Taḥajjud · Erinnerung",
+daily_dua:"Duʿāʾ des Tages",daily_recommendation:"Heute empfohlen",
+daily_ayah:"Āyah des Tages",new_post:"Neuer Beitrag"};
+for(const [code,name] of Object.entries(langs))$('locale').add(new Option(name,code));
+for(const [key,name] of Object.entries(events))$('event').add(new Option(name,key));
+const params=new URLSearchParams(location.search);
+const requested=params.get('lang')||'';
+let saved='';try{saved=localStorage.getItem('darAdultPreferredLocaleV1')||''}catch(_){}
+$('locale').value=langs[requested]?requested:langs[saved]?saved:'tr';
+$('event').value=events[params.get('event')]?params.get('event'):'prayer_fajr_advance';
+let source=null;
+function render(){
+if(!source)return;
+const code=$('locale').value,key=$('event').value;
+const current=source.copy?.[code]?.[key];
+if(!current||current.status!=='approved'){
+$('titleText').textContent='Keine redaktionell geprüfte Fassung';
+$('bodyText').textContent='Für diese Auswahl steht keine freigegebene Vorlage bereit.';
+$('status').textContent='Nicht freigegeben';return;
+}
+const vals={minutes:$('minutes').value,time:$('time').value};
+const interpolate=v=>String(v).replace(/\{(minutes|time)\}/g,(_m,k)=>vals[k]);
+$('titleText').textContent=interpolate(current.title);
+$('bodyText').textContent=interpolate(current.body);
+$('notification').dir=(code==='ar'||code==='ckb')?'rtl':'ltr';
+$('source').textContent='App-Sprache: '+code+' · Vorlage: '+key+' · redaktionell freigegeben';
+$('status').textContent='Text geprüft · Quelle/echter Push-Versand separat gesperrt';
+$('minutes').disabled=!key.endsWith('_advance');
+$('time').disabled=!key.endsWith('_advance');
+}
+for(const id of ['locale','event','minutes','time'])$(id).addEventListener('change',render);
+fetch('./push-copy-nine-languages-draft.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('HTTP '+r.status);return r.json()}).then(data=>{source=data;render()}).catch(err=>{
+$('titleText').textContent='Sprachpaket nicht erreichbar';$('status').textContent=String(err.message||err);
+});
+})();
+</script>
+</body></html>
