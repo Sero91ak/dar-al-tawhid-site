@@ -39,11 +39,16 @@
     {
       "sourceText": "Eine berühmte Familie.",
       "sourceSha256": "714d54ae7924cfcb2c825b0034bafb8ab7782232a2f4077c4d655473547c84e3",
-      "status": "REQUEST_STARTED_UNCONFIRMED",
+      "status": "ORIGINAL_MP3_SAVED_PRIVATE_REVIEW",
       "startedAt": "2026-10-22T15:36:07.696244+00:00",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
-      "publicReleaseAllowed": false
+      "publicReleaseAllowed": false,
+      "originalMP3Sha256": "61c38aae7d7bed7be50f939fac0627660c324deb6e60521838ff76123a54da86",
+      "originalMP3": "/kids/assets/kids-quiz-audio/v4-curated450-review/714d54ae7924cfcb2c825b0034bafb8a.mp3",
+      "providerRequestId": "phKKS8t6vmdGvQdLcNXM",
+      "bytes": 26792,
+      "completedAt": "2026-10-22T15:36:10.003693+00:00"
     }
   ],
   "actualChargesUnknown": true

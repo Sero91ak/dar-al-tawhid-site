@@ -470,7 +470,7 @@
         "kids-quiz-041"
       ],
       "sourceAudioPart": "question",
-      "status": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "status": "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -479,7 +479,10 @@
       "estimatedCreditsNotInvoice": 21.319,
       "actualProviderCredits": null,
       "humanListeningApproved": false,
-      "publicReleaseAllowed": false
+      "publicReleaseAllowed": false,
+      "importedMP3SHA256": "61c38aae7d7bed7be50f939fac0627660c324deb6e60521838ff76123a54da86",
+      "providerRequestId": "phKKS8t6vmdGvQdLcNXM",
+      "originalMP3": "/kids/assets/kids-quiz-audio/v4-curated450-review/714d54ae7924cfcb2c825b0034bafb8a.mp3"
     },
     {
       "sourceText": "Allah nennt Taqwā als Maßstab der besonderen Ehre bei Ihm.",
