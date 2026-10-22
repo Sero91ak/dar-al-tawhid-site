@@ -352,6 +352,19 @@ function localizeNumericUI(value,language){
   try{number=new Intl.NumberFormat(loc,{useGrouping:false}).format(n)}catch(_){}
   return number+" "+label;
  }
+ // Times are interface scheduling labels only; preserve HH:MM and do not
+ // touch the text of an actual prayer, supplication or source quotation.
+ const scheduleStatus=value.match(/^Duʿāʾ ((?:[01][0-9]|2[0-3]):[0-5][0-9]) · Empfehlung ((?:[01][0-9]|2[0-3]):[0-5][0-9])$/);
+ if(scheduleStatus){
+  const names={
+   tr:["Dua","Öneri"],en:["Duʿāʾ","Recommendation"],
+   ar:["الدعاء","التوصية"],ku:["Duʿa","Pêşniyar"],
+   ckb:["دوعا","پێشنیار"],bs:["Dova","Preporuka"],
+   fr:["Invocation","Recommandation"],es:["Súplica","Recomendación"]
+  };
+  const pair=names[language];
+  return pair?pair[0]+" "+scheduleStatus[1]+" · "+pair[1]+" "+scheduleStatus[2]:null;
+ }
  // Catalogue category counters: strictly bounded taxonomy identifiers, never book titles.
  const taxonomy=value.match(/^(Familie|Tawḥīd|Fiqh|ʿAqīdah|Sunnah|Qurʾān), ([0-9]{1,7}) Veröffentlichungen$/);
  if(taxonomy){
