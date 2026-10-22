@@ -1,0 +1,191 @@
+/* DĀR AL TAWḤĪD · Test-Startseite · redaktionelle Gliederung v1
+   Ausschließlich /test/#home. Originales Gebetszeiten-Element, Salām,
+   Quellenaussage, Qurʾān- und Lern-Player sowie Navigation bleiben intakt.
+   Nutzt die acht vorhandenen Erscheinungsbilder, keine festen Goldflächen. */
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route {
+  --dar-home-ed-gold:var(--dtbh-muted,var(--dv3-gold,#cbb379));
+  --dar-home-ed-line:var(--dtbh-line,rgba(205,174,111,.35));
+  --dar-home-ed-ink:var(--dtbh-ink,var(--dv3-ink,#f0e7d6));
+}
+
+/* 01 · Quellen-Leitsatz: eigenständige Einleitung statt lose Zeile. */
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeSourceV5 {
+  position:relative!important;
+  width:100%!important;
+  margin:clamp(9px,2.3vw,15px) 0 clamp(14px,3vw,20px)!important;
+  padding:0 clamp(12px,3.2vw,32px) 0!important;
+  color:var(--dar-home-ed-gold)!important;
+  -webkit-text-fill-color:var(--dar-home-ed-gold)!important;
+  font-weight:800!important;
+  letter-spacing:.09em!important;
+  line-height:1.45!important;
+  text-wrap:balance!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeSourceV5::after {
+  content:""!important;
+  display:block!important;
+  height:1px!important;
+  margin-top:clamp(10px,2.7vw,16px)!important;
+  width:100%!important;
+  background:linear-gradient(90deg,var(--dar-home-ed-gold) 0%,var(--dar-home-ed-line) 36%,transparent 100%)!important;
+  opacity:.76!important;
+  pointer-events:none!important;
+}
+
+/* 02 · Gebetszeiten: unverändert interaktiv, großzügiger abgesetzt. */
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell .header #headerPrayerStatus {
+  position:relative!important;
+  margin-block:0!important;
+  flex-shrink:0!important;
+}
+
+/* 03 · Salām: durch eigene feine Linie von der Gebetskarte getrennt. */
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 {
+  display:block!important;
+  position:relative!important;
+  margin:clamp(16px,3.8vw,25px) 0 clamp(14px,3vw,21px)!important;
+  padding:0 clamp(12px,3.2vw,32px)!important;
+  max-width:100%!important;
+  min-width:0!important;
+  overflow:visible!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5::before {
+  content:""!important;
+  display:block!important;
+  width:100%!important;
+  height:1px!important;
+  margin:0 0 clamp(17px,3.4vw,24px)!important;
+  background:linear-gradient(90deg,transparent 0%,var(--dar-home-ed-line) 17%,var(--dar-home-ed-gold) 50%,var(--dar-home-ed-line) 83%,transparent 100%)!important;
+  opacity:.67!important;
+  pointer-events:none!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-salam-v5 {
+  display:block!important;
+  margin:0!important;
+  color:var(--dar-home-ed-ink)!important;
+  -webkit-text-fill-color:var(--dar-home-ed-ink)!important;
+  line-height:1.24!important;
+  text-wrap:pretty!important;
+  overflow-wrap:break-word!important;
+}
+
+/* 04 · Trennlinie zwischen Salām und Willkommensbeschreibung. */
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-rule-v5 {
+  display:block!important;
+  position:relative!important;
+  height:1px!important;
+  width:min(100%,520px)!important;
+  margin:clamp(13px,2.7vw,19px) 0 clamp(13px,2.6vw,18px)!important;
+  background:linear-gradient(90deg,var(--dar-home-ed-gold) 0%,var(--dar-home-ed-line) 52%,transparent 100%)!important;
+  opacity:.85!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 .dar-adult-home-rule-v5::after {
+  content:""!important;
+  position:absolute!important;
+  inset-inline-start:0!important;
+  top:-2px!important;
+  width:5px!important;height:5px!important;
+  border-radius:50%!important;
+  background:var(--dar-home-ed-gold)!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 p {
+  margin:0!important;
+  max-width:66ch!important;
+  line-height:1.56!important;
+  color:var(--dar-home-ed-ink)!important;
+  -webkit-text-fill-color:var(--dar-home-ed-ink)!important;
+  opacity:.9!important;
+  text-wrap:pretty!important;
+}
+
+/* 05 · Überlieferungsmaßstab: ruhiger editorischer Zitatblock. */
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad {
+  display:block!important;
+  position:relative!important;
+  min-width:0!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  margin:clamp(5px,1.7vw,12px) 0 clamp(17px,3.8vw,28px)!important;
+  padding:clamp(15px,3vw,20px) clamp(13px,3.2vw,28px) clamp(15px,3.1vw,21px)!important;
+  border-top:1px solid var(--dar-home-ed-line)!important;
+  border-bottom:1px solid var(--dar-home-ed-line)!important;
+  border-inline-start:2px solid color-mix(in srgb,var(--dar-home-ed-gold) 65%,transparent)!important;
+  border-inline-end:0!important;
+  border-radius:0 11px 11px 0!important;
+  background:linear-gradient(115deg,color-mix(in srgb,var(--dar-home-ed-gold) 5%,transparent),transparent 78%)!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad .isnad-label {
+  display:flex!important;
+  align-items:center!important;
+  gap:clamp(9px,2vw,15px)!important;
+  margin:0 0 clamp(10px,2.3vw,16px)!important;
+  color:var(--dar-home-ed-gold)!important;
+  -webkit-text-fill-color:var(--dar-home-ed-gold)!important;
+  font-weight:850!important;
+  letter-spacing:.1em!important;
+  line-height:1.3!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad .isnad-label::after {
+  content:""!important;
+  display:block!important;
+  flex:1 1 auto!important;
+  height:1px!important;
+  min-width:12px!important;
+  background:linear-gradient(90deg,var(--dar-home-ed-line),transparent)!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad .isnad-quote {
+  display:block!important;
+  width:100%!important;
+  max-width:64ch!important;
+  margin:0!important;
+  font-family:Georgia,"Iowan Old Style",serif!important;
+  font-weight:550!important;
+  line-height:1.48!important;
+  color:var(--dar-home-ed-ink)!important;
+  -webkit-text-fill-color:var(--dar-home-ed-ink)!important;
+  text-wrap:pretty!important;
+}
+html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad .isnad-source {
+  display:block!important;
+  width:100%!important;
+  margin-top:clamp(9px,2.1vw,14px)!important;
+  text-align:start!important;
+  line-height:1.45!important;
+}
+
+/* Enge Smartphones und geöffnete Fold-Geräte bleiben ohne eigene Scrollzone. */
+@media(max-width:359px) {
+  html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeSourceV5 {
+    letter-spacing:.055em!important;
+  }
+  html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad {
+    padding-inline:12px!important;
+  }
+}
+@media(min-width:700px) {
+  html[data-app-path="test"].dar-adult-global-brand-ready body.is-home-route .top-shell .header #darAdultHomeWelcomeV5 {
+    margin-top:25px!important;
+  }
+}
+
+/* Offline / direkte Test-Shell ohne Worker-Markenkopf: gleiche Gliederung. */
+html[data-app-path="test"].dar-home-v3:not(.dar-adult-global-brand-ready) body.is-home-route .top-shell .header-row--brand-only {
+  padding-bottom:11px!important;
+  border-bottom:1px solid var(--dv3-line)!important;
+}
+html[data-app-path="test"].dar-home-v3:not(.dar-adult-global-brand-ready) body.is-home-route .top-shell .hero-text {
+  padding-top:17px!important;
+  border-top:1px solid var(--dv3-line)!important;
+  margin-top:17px!important;
+}
+html[data-app-path="test"].dar-home-v3:not(.dar-adult-global-brand-ready) body.is-home-route .top-shell .hero-text .intro {
+  padding-top:10px!important;
+  margin-top:11px!important;
+  border-top:1px solid var(--dv3-line)!important;
+}
+html[data-app-path="test"].dar-home-v3:not(.dar-adult-global-brand-ready) body.is-home-route .top-shell > .isnad {
+  padding-top:15px!important;
+  border-top:1px solid var(--dv3-line)!important;
+}
