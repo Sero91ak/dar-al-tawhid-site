@@ -125,7 +125,7 @@ function setSection(){
  root.classList.add("dar-v8-unified");
  var host=d.getElementById("appView");
  if(host&&host.dataset.v8Family!==family)host.dataset.v8Family=family;
- enhanceToolbar();enhanceRail();revealSocialLinks();preserveShareUI();
+ enhanceToolbar();if(!w.__DAR_V8_COMPLETE_SHELL_V1)enhanceRail();revealSocialLinks();preserveShareUI();
 }
 function raf(){
  if(scheduled)return;
