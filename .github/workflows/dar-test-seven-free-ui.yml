@@ -1,4 +1,4 @@
-name: DAR TEST Seven Languages — Zero Paid API
+name: DAR TEST Nine Languages — Zero Paid API
 
 on:
   pull_request:
@@ -7,6 +7,11 @@ on:
       - 'test/i18n/adult-ui-locales-seven.json'
       - 'test/i18n/test-seven-*'
       - 'test/i18n/test-expanded-headings-seven.cjs'
+      - 'test/i18n/test-nine-registry.cjs'
+      - 'test/i18n/test-nine-dynamic-ui.cjs'
+      - 'test/i18n/test-nine-native-bridge.cjs'
+      - 'test/i18n/audit-visible-ui-nine.cjs'
+      - 'test/i18n/ui-tr.generated.json'
       - 'test/i18n/test-canonical-visible-titles.cjs'
       - 'test/i18n/adult-visible-title-drafts-seven.json'
       - 'test/assets/dar-test-turkish-ui.js'
@@ -21,7 +26,7 @@ permissions:
   contents: read
 
 jobs:
-  seven-ui:
+  nine-ui:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
@@ -40,6 +45,10 @@ jobs:
           node --check test/assets/dar-setup-hub.js
           node test/assets/dar-test-turkish-ui.test.cjs
           node test/i18n/test-seven-locales.cjs
+          node test/i18n/test-nine-registry.cjs
+          node test/i18n/test-nine-dynamic-ui.cjs
+          node test/i18n/test-nine-native-bridge.cjs
+          node test/i18n/audit-visible-ui-nine.cjs --self-test
           node test/i18n/test-expanded-headings-seven.cjs
           node test/i18n/test-canonical-visible-titles.cjs
           node - <<'NODE'
@@ -54,9 +63,9 @@ jobs:
           if(!pack.noPaidProvider||pack.scope!=='adult-interface-only')throw Error('Not an offline static UI pack');
           if(/api\.openai\.com|DAR_I18N_AI_API_KEY|chat\/completions/i.test(raw+loader))
             throw Error('Paid model endpoint or secret must not be in UI browser runtime');
-          for(const locale of ['tr','en','ar','ku','ckb','bs'])
-            if(Object.keys(pack.translations[locale]||{}).length<350)throw Error('Incomplete language catalog '+locale);
-          console.log('PASS 7 UI catalogs; 0 OpenAI API requests.');
+          for(const locale of ['tr','en','ar','ku','ckb','bs','fr','es'])
+            if(Object.keys(pack.translations[locale]||{}).length<540)throw Error('Incomplete language catalog '+locale);
+          console.log('PASS 9 UI catalogs; 0 OpenAI API requests.');
           NODE
       - name: Start local adult test app
         shell: bash
@@ -66,3 +75,7 @@ jobs:
           sleep 3
       - name: Verify all language pickers and RTL in Chromium
         run: python3 test/i18n/test-seven-browser-smoke.py
+      - name: Inventory 15 app routes and report missing interface strings (read-only)
+        run: |
+          python3 test/i18n/capture-visible-ui.py
+          node test/i18n/audit-visible-ui-nine.cjs --write-report

@@ -3,15 +3,19 @@
 const assert=require("node:assert/strict"),fs=require("node:fs"),vm=require("node:vm"),path=require("node:path");
 const locales=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-ui-locales-seven.json"),"utf8"));
 const code=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js"),"utf8");
-const expected=["de","tr","en","ar","ku","ckb","bs"];
+const expected=["de","tr","en","ar","ku","ckb","bs","fr","es"];
 assert.deepEqual(locales.availableLocales,expected);
 assert.equal(locales.noPaidProvider,true);
 assert.deepEqual(Object.keys(locales.translations).sort(),expected.filter(x=>x!=="de").sort());
+const germanSourceKey="„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“";
+for(const locale of ["fr","es"]){
+ assert.equal(locales.translations[locale][germanSourceKey],undefined,"Religious quote needs separate review");
+}
 const countByLocale={};
 for(const locale of expected.slice(1)){
  const dict=locales.translations[locale];
  const values=Object.keys(dict);
- assert(values.length>=160,locale+" lacks basic UI vocabulary");
+ assert(values.length>=540,locale+" lacks basic UI vocabulary");
  assert(values.every(x=>x.trim()&&typeof dict[x]==="string"&&dict[x].trim()));
  for(const label of ["Startseite","Mehr","Gebetszeiten","Einstellungen","Suche","Konto","Suchen","Heute","Qurʾān","Duʿāʾ"]){
   assert(dict[label],locale+" missing "+label);
@@ -36,6 +40,10 @@ vm.runInNewContext(code,{window:w,Map,Set,WeakMap,Promise,Uint8Array});
 assert.deepEqual(Array.from(w.DarTestTurkishUI.supportedLocales),expected);
 assert.equal(w.DarTestTurkishUI.registerLocaleData(locales),true);
 for(const locale of expected){
+ assert.equal(w.DarTestTurkishUI.translateValue(germanSourceKey,locale),null,
+  "A religious quotation cannot be translated by the interface engine: "+locale);
+}
+for(const locale of expected){
  storage.locale=locale;w.DarTestTurkishUI.apply();
  const homepage=locale==="de"?"Startseite":locale==="tr"?"Ana Sayfa":locales.translations[locale].Startseite;
  const prayer=locale==="de"?"Gebetszeiten":locale==="tr"?"Namaz Vakitleri":locales.translations[locale].Gebetszeiten;
@@ -51,4 +59,4 @@ assert.equal(nodes[0].nodeValue,"Startseite","German return must be lossless");
 const here=fs.readFileSync(path.join(__dirname,"../assets/dar-test-seven-languages-loader.js"),"utf8");
 assert(!here.includes("api.openai.com"),"Client must never use paid translation API");
 assert(here.includes("/test/i18n/adult-ui-locales-seven.json"),"Require fixed static same-origin locale pack");
-console.log("PASS: 7 languages in 3 language selectors, "+JSON.stringify(countByLocale)+", DE restoration, source protection and RTL");
+console.log("PASS: 9 languages in 3 language selectors, "+JSON.stringify(countByLocale)+", DE restoration, source protection and RTL");

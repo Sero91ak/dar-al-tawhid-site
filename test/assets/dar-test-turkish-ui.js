@@ -168,7 +168,7 @@ const EXTRA_ENTRIES=[
 ["App, Qurʾān, Duʿāʾ und Beiträge","Uygulama, Kur'ân, dua ve yazılar"]
 ];
 const dictionary=new Map([...ENTRIES,...EXTRA_ENTRIES]),backward=new Map(),ambiguous=new Set();
-const SUPPORTED=new Set(["de","tr","en","ar","ku","ckb","bs"]);
+const SUPPORTED=new Set(["de","tr","en","ar","ku","ckb","bs","fr","es"]);
 const rtl=new Set(["ar","ckb"]),languagePacks=new Map();
 
 const specialBlocks=new Map(),welcomeOriginals=new WeakMap();
@@ -206,7 +206,7 @@ function registerTitleData(data){
   if(key!==(record.kind+":"+record.id)||!["post","dua"].includes(record.kind)||
      typeof record.sourceTitle!=="string"||record.sourceTitle.length>220||
      Object.keys(record.translations||{}).sort().join("|")!=="ar|bs|ckb|en|ku|tr")return false;
-  if([...SUPPORTED].filter(x=>x!=="de").some(k=>typeof record.translations[k]!=="string"||!record.translations[k].trim()))
+  if(["tr","en","ar","ku","ckb","bs"].some(k=>typeof record.translations[k]!=="string"||!record.translations[k].trim()))
     return false;
   if(prepared.has(record.sourceTitle))return false;
   prepared.set(record.sourceTitle,record);
@@ -300,7 +300,7 @@ async function loadCatalog(fetcher=global.fetch?.bind(global)){
  }catch(_){remoteCatalogState="unavailable";return dictionary.size}
 }
 
-const INTL_LOCALE={de:"de-DE",tr:"tr-TR",en:"en-GB",ar:"ar-EG-u-ca-gregory",ku:"ku-TR",ckb:"ckb-IQ-u-ca-gregory",bs:"bs-BA"};
+const INTL_LOCALE={de:"de-DE",tr:"tr-TR",en:"en-GB",ar:"ar-EG-u-ca-gregory",ku:"ku-TR",ckb:"ckb-IQ-u-ca-gregory",bs:"bs-BA",fr:"fr-FR",es:"es-ES"};
 const DE_MONTHS=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
 const DE_WEEKDAYS=["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"];
 function formatCalendarDate(date,language=currentLocale(),options={weekday:"long",day:"numeric",month:"long",year:"numeric"}){
@@ -329,7 +329,130 @@ function localizeGermanCalendarLabel(value,language){
  }
  return changed?result:null;
 }
+
+/* Strictly bounded numeric *interface* labels. The UI runtime never edits
+ * attributed material, Quran verses, book titles or any source-backed node.
+ * Plural categories and glyphs use Intl, without network/API calls.
+ */
+const NUMERIC_UI_KEYS=["Ergebnisse","Funktionen","Veröffentlichungen","Beiträge","Seiten","Themenbereiche","Aussagen","gemerkt"];
+const NUMERIC_UI_WORDS={"tr":[["sonuç","sonuç"],["işlev","işlev"],["yayın","yayın"],["yazı","yazı"],["sayfa","sayfa"],["konu alanı","konu alanı"],["söz","söz"],["kaydedildi","kaydedildi"]],"en":[["result","results"],["feature","features"],["publication","publications"],["article","articles"],["page","pages"],["topic","topics"],["statement","statements"],["saved","saved"]],"ar":[["نتيجة","نتائج","نتيجتان"],["وظيفة","وظائف","وظيفتان"],["إصدار","إصدارات","إصداران"],["مقال","مقالات","مقالان"],["صفحة","صفحات","صفحتان"],["قسم موضوعي","أقسام موضوعية","قسمان موضوعيان"],["قول","أقوال","قولان"],["محفوظ","محفوظ","محفوظ"]],"ku":[["encam","encam"],["taybetmendî","taybetmendî"],["weşan","weşan"],["gotar","gotar"],["rûpel","rûpel"],["beşên mijaran","beşên mijaran"],["gotin","gotin"],["hate tomarkirin","hate tomarkirin"]],"ckb":[["ئەنجام","ئەنجام"],["تایبەتمەندی","تایبەتمەندی"],["بڵاوکراوە","بڵاوکراوە"],["وتار","وتار"],["لاپەڕە","لاپەڕە"],["بەشی بابەت","بەشی بابەت"],["وتە","وتە"],["پاشەکەوتکراو","پاشەکەوتکراو"]],"bs":[["rezultat","rezultata","rezultata"],["funkcija","funkcije","funkcija"],["publikacija","publikacije","publikacija"],["objava","objave","objava"],["stranica","stranice","stranica"],["tematska oblast","tematske oblasti","tematskih oblasti"],["izjava","izjave","izjava"],["sačuvano","sačuvano"]],"fr":[["résultat","résultats"],["fonctionnalité","fonctionnalités"],["publication","publications"],["article","articles"],["page","pages"],["thème","thèmes"],["déclaration","déclarations"],["élément enregistré","éléments enregistrés"]],"es":[["resultado","resultados"],["función","funciones"],["publicación","publicaciones"],["artículo","artículos"],["página","páginas"],["categoría temática","categorías temáticas"],["declaración","declaraciones"],["elemento guardado","elementos guardados"]]};
+function localizeNumericUI(value,language){
+ if(language==="de"||!NUMERIC_UI_WORDS[language])return null;
+ const loc=INTL_LOCALE[language]||"de-DE";
+ const matched=value.match(/^([0-9]{1,7}) (Ergebnisse|Funktionen|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt)$/);
+ if(matched){
+  const n=Number(matched[1]);
+  const words=NUMERIC_UI_WORDS[language][NUMERIC_UI_KEYS.indexOf(matched[2])];
+  if(!words)return null;
+  let plural="other";
+  try{plural=new Intl.PluralRules(loc).select(n)}catch(_){plural=n===1?"one":"other"}
+  const label=language==="ar"?(plural==="two"?words[2]:plural==="few"||plural==="zero"?words[1]:words[0]):
+    language==="bs"?(plural==="one"?words[0]:plural==="few"?words[1]:words[2]):(plural==="one"?words[0]:words[1]);
+  let number=matched[1];
+  try{number=new Intl.NumberFormat(loc,{useGrouping:false}).format(n)}catch(_){}
+  return number+" "+label;
+ }
+ // Times are interface scheduling labels only; preserve HH:MM and do not
+ // touch the text of an actual prayer, supplication or source quotation.
+ const scheduleStatus=value.match(/^Duʿāʾ ((?:[01][0-9]|2[0-3]):[0-5][0-9]) · Empfehlung ((?:[01][0-9]|2[0-3]):[0-5][0-9])$/);
+ if(scheduleStatus){
+  const names={
+   tr:["Dua","Öneri"],en:["Duʿāʾ","Recommendation"],
+   ar:["الدعاء","التوصية"],ku:["Duʿa","Pêşniyar"],
+   ckb:["دوعا","پێشنیار"],bs:["Dova","Preporuka"],
+   fr:["Invocation","Recommandation"],es:["Súplica","Recomendación"]
+  };
+  const pair=names[language];
+  return pair?pair[0]+" "+scheduleStatus[1]+" · "+pair[1]+" "+scheduleStatus[2]:null;
+ }
+ // Catalogue category counters: strictly bounded taxonomy identifiers, never book titles.
+ const taxonomy=value.match(/^(Familie|Tawḥīd|Fiqh|ʿAqīdah|Sunnah|Qurʾān), ([0-9]{1,7}) Veröffentlichungen$/);
+ if(taxonomy){
+  const category=taxonomy[1];
+  const translatedCategory=category==="Familie"?
+    (language==="tr"?(dictionary.get(category)||languagePacks.get(language)?.get(category)):
+     languagePacks.get(language)?.get(category))||category:category;
+  const localizedCount=localizeNumericUI(taxonomy[2]+" Veröffentlichungen",language);
+  return localizedCount?translatedCategory+", "+localizedCount:null;
+ }
+ // Context-specific ARIA label: only fixed Surah-range controls, no linked scripture.
+ const range=value.match(/^Sūrenbereich wechseln, aktuell ([0-9]{1,3})[–-]([0-9]{1,3})$/);
+ if(range){
+  const texts={
+   tr:"Sûre aralığını değiştir, şu an ",en:"Change surah range, currently ",
+   ar:"تغيير نطاق السور، حاليًا ",ku:"Navbera sûreyan biguherîne, niha ",
+   ckb:"مەودای سوورەتەکان بگۆڕە، ئێستا ",bs:"Promijeni raspon sura, trenutno ",
+   fr:"Changer la plage de sourates, actuellement ",
+   es:"Cambiar intervalo de suras, actualmente "
+  };
+  const fmt=x=>{try{return new Intl.NumberFormat(loc,{useGrouping:false,minimumIntegerDigits:x.length}).format(Number(x))}catch(_){return x}};
+  return texts[language]?texts[language]+fmt(range[1])+"–"+fmt(range[2]):null;
+ }
+ if(language==="tr")return null; // Preserve the existing, reviewed Turkish percentage/selection formats.
+ const percentage=value.match(/^([0-9]{1,3}(?:[.,][0-9])?)% Trefferquote$/);
+ if(percentage){
+  const n=Number(percentage[1].replace(",","."));
+  if(n>100)return null;
+  let pc=percentage[1]+"%";
+  try{pc=new Intl.NumberFormat(loc,{style:"percent",maximumFractionDigits:1}).format(n/100)}catch(_){}
+  const label=languagePacks.get(language)?.get("Trefferquote");
+  return label?label+": "+pc:null;
+ }
+ const selected=value.match(/^([0-9]{1,5})\/([0-9]{1,5}) gewählt$/);
+ if(selected){
+  const captions={en:"selected",ar:"تم الاختيار",ku:"hat hilbijartin",ckb:"هەڵبژێردرا",bs:"odabrano",fr:"sélectionnés",es:"seleccionados"};
+  const label=captions[language];if(!label)return null;
+  const fmt=x=>{try{return new Intl.NumberFormat(loc,{useGrouping:false}).format(Number(x))}catch(_){return x}};
+  return fmt(selected[1])+"/"+fmt(selected[2])+" "+label;
+ }
+ return null;
+}
+
+
+/* Structured Quran-player METADATA only: count, classification and collection
+ * size. Do not alter Arabic verses, translation bodies, surah names or citations.
+ */
+const QURAN_META_LABELS={"tr":["âyet","sûre","Mekkî","Medenî"],"en":["verse","surah","Meccan","Medinan"],"ar":["آية","سورة","مكية","مدنية"],"ku":["ayet","sûre","Mekkî","Medînî"],"ckb":["ئایەت","سوورەت","مەککی","مەدەنی"],"bs":["ajet","sura","mekanska","medinska"],"fr":["verset","sourate","mecquois","médinois"],"es":["aleya","sura","mequí","medinés"]};
+function localizeQuranMetadata(value,language){
+ const labels=QURAN_META_LABELS[language];
+ if(!labels||language==="de")return null;
+ const loc=INTL_LOCALE[language]||"de-DE";
+ const fmt=raw=>{try{return new Intl.NumberFormat(loc,{useGrouping:false}).format(Number(raw))}catch(_){return raw}};
+ const word=(name,n)=>{
+  if(language==="en"||language==="fr"||language==="es")return name+(n===1?"":"s");
+  if(language==="ar"&&n>=3&&n<=10)return name==="آية"?"آيات":"سور";
+  if(language==="bs")return name==="ajet"?(n===1?"ajet":n>=2&&n<=4?"ajeta":"ajeta"):(n===1?"sura":"sura");
+  return name;
+ };
+ const period=value.match(/^([0-9]{1,4}) Āyāt · (Mekkanisch|Medinensisch)$/);
+ if(period)return fmt(period[1])+" "+word(labels[0],Number(period[1]))+" · "+
+   (period[2]==="Mekkanisch"?labels[2]:labels[3]);
+ const collection=value.match(/^([0-9]{1,4}) Sūren · ([0-9]{1,6}) Āyāt$/);
+ if(collection)return fmt(collection[1])+" "+word(labels[1],Number(collection[1]))+
+   " · "+fmt(collection[2])+" "+word(labels[0],Number(collection[2]));
+ return null;
+}
+
+/* Short Gregorian date labels are interface chrome, never manuscript dates.
+ * Reject impossible dates or mismatched weekday labels instead of guessing. */
+function localizeGermanShortDate(value,language){
+ if(!language||language==="de")return null;
+ const parts=value.match(/^(Mo|Di|Mi|Do|Fr|Sa|So)\., ([0-9]{2})\.([0-9]{2})\.([0-9]{2})$/);
+ if(!parts)return null;
+ const day=Number(parts[2]),month=Number(parts[3]),year=2000+Number(parts[4]);
+ const date=new Date(Date.UTC(year,month-1,day));
+ if(date.getUTCDate()!==day||date.getUTCMonth()!==month-1)return null;
+ const germanWeekdays=["So","Mo","Di","Mi","Do","Fr","Sa"];
+ if(germanWeekdays[date.getUTCDay()]!==parts[1])return null;
+ try{return new Intl.DateTimeFormat(INTL_LOCALE[language]||"de-DE",
+  {weekday:"short",day:"2-digit",month:"2-digit",year:"2-digit",timeZone:"UTC"}).format(date)}
+ catch(_){return null}
+}
+
+const PROTECTED_SOURCE_QUOTE="„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“";
 function translateExact(value,language="tr"){
+ // Source quotation is editorial content, not a localizable interface control.
+ if(value===PROTECTED_SOURCE_QUOTE)return null;
  if(language==="de")return null;
  // Localize the numeric *UI heading* generated by the Prophets profile, never
  // the linked verse text, sūrah title, Arabic original or its German explanation.
@@ -346,6 +469,12 @@ function translateExact(value,language="tr"){
     languagePacks.get(language)?.get(statements[1]);
   return head?head+" · "+statements[2]:null;
  }
+ const shortDate=localizeGermanShortDate(value,language);
+ if(shortDate!==null)return shortDate;
+ const metadata=localizeQuranMetadata(value,language);
+ if(metadata!==null)return metadata;
+ const numericUI=localizeNumericUI(value,language);
+ if(numericUI!==null)return numericUI;
  if(language!=="tr")return languagePacks.get(language)?.get(value)??localizeGermanCalendarLabel(value,language);
  const known=dictionary.get(value);
  if(known!==undefined)return known;
@@ -453,7 +582,7 @@ function boot(){
     !global.document.getElementById("dar-test-seven-languages-loader")){
   const script=global.document.createElement("script");
   script.id="dar-test-seven-languages-loader";
-  script.src="/test/assets/dar-test-seven-languages-loader.js?v=1";
+  script.src="/test/assets/dar-test-seven-languages-loader.js?v=20261022-nine-ui3";
   script.async=true;global.document.head.appendChild(script);
  }
  loadCatalog();
@@ -463,7 +592,21 @@ function boot(){
   if(changes.some(x=>x.type==="childList"||x.type==="characterData"||x.type==="attributes"))schedule();
  }).observe(global.document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:ATTRS});
 }
-global.addEventListener("dar-adult-locale-changed",schedule);
+// WKWebView contract: bridge explicit UI selections to native preferences.
+// Native-origin changes use detail.source="native" and must not echo back.
+// Browser/PWA runs unchanged when no iOS message handler is registered.
+function notifyNativeLocale(event){
+ if(event?.detail?.source==="native")return;
+ const code=event?.detail?.locale;
+ if(!SUPPORTED.has(code)||currentLocale()!==code)return;
+ const bridge=global.webkit?.messageHandlers?.darLanguageChanged;
+ if(typeof bridge?.postMessage!=="function")return;
+ try{bridge.postMessage({locale:code})}catch(_){}
+}
+global.addEventListener("dar-adult-locale-changed",event=>{
+ schedule();
+ notifyNativeLocale(event);
+});
 global.addEventListener("storage",e=>{if(e.key===KEY)schedule()});
 global.document.addEventListener("dar:view-rendered",schedule);
 if(global.document.readyState==="loading")global.document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
