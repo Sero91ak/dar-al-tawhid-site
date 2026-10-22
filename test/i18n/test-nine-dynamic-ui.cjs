@@ -55,6 +55,24 @@ for(const locale of ["tr","en","ar","ku","ckb","bs","fr","es"]){
  assert.equal(t("Standort gespeichert: Bad\\nInput",locale),null,
   "Multiline input must not become a dynamic location caption");
 }
+// Weather status is dynamically assembled on Home. Translate app chrome only;
+ // city names, Celsius values and sacred/source text must stay unchanged.
+for(const locale of ["tr","en","ar","ku","ckb","bs","fr","es"]){
+ for(const phrase of ["Wetter für Bonn wird geladen …",
+      "Wetter · Bonn: 18 °C · Leicht bewölkt",
+      "Wetter · Bonn: -8 °C · Schneeschauer",
+      "Wetter · Bonn: derzeit nicht verfügbar"]){
+  const localized=t(phrase,locale);
+  assert(localized&&localized.includes("Bonn")&&!localized.includes("Wetter"),
+   "Weather dynamic label not fully localized: "+locale+" / "+phrase);
+  if(phrase.includes("18 °C"))assert(localized.includes("18 °C"),"Celsius reading modified: "+locale);
+  if(phrase.includes("-8 °C"))assert(localized.includes("-8 °C"),"Negative Celsius reading modified: "+locale);
+ }
+ assert.equal(t("Wetter · <script>: 18 °C · Klar",locale),null,
+  "Unsafe weather markup must not be translated");
+ assert.equal(t("Wetter · Bonn: 200 °C · Regen",locale),null,
+  "Unbounded weather value must remain untranslated");
+}
 const metaExamples={
  tr:["109 âyet · Mekkî","114 sûre · 6236 âyet"],
  en:["109 verses · Meccan","114 surahs · 6236 verses"],
