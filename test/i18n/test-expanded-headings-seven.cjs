@@ -7,7 +7,7 @@ const titles=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-visible-title
 const EXPECTED=["de","tr","en","ar","ku","ckb","bs","fr","es"];
 for(const locale of EXPECTED.slice(1)){
  const v=pack.translations[locale];
- assert(Object.keys(v).length>=539,locale+" missing section labels");
+ assert(Object.keys(v).length>=540,locale+" missing section labels");
  for(const term of ["ÜBERLIEFERUNGSMAẞSTAB","Gebetskalender","Faǧr","Ẓuhr","ʿAṣr","Maghrib","ʿIshāʾ",
  "Übersicht","Lebensweg","Aussagen im Qurʾān","Aussagen in authentischer Sunnah",
  "Gebetszeiten & Kalender","Beitragstitel","Titel der Beiträge","Duʿāʾ öffnen","Willkommen bei DĀR AL TAWḤĪD"]){
