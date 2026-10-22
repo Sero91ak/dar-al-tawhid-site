@@ -97,7 +97,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
   }
 
   var LOCALE_KEY = "darAdultPreferredLocaleV1";
-  var LOCALE_CHOICES=[["de","Deutsch"],["tr","Türkçe"],["en","English"],["ar","العربية"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"]];
+  var LOCALE_CHOICES=[["de","Deutsch"],["tr","Türkçe"],["en","English"],["ar","العربية"],["ku","Kurmancî"],["ckb","سۆرانی"],["bs","Bosanski"],["fr","Français"],["es","Español"]];
   var LOCALE_CODES=new Set(LOCALE_CHOICES.map(function(x){return x[0]}));
   function localeButtons(){return LOCALE_CHOICES.map(function(x){return '<button type="button" data-dar-setup-locale="'+x[0]+'" aria-pressed="'+String(activeLocale()===x[0])+'">'+x[1]+'</button>'}).join("")}
   function activeLocale() {
