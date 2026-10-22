@@ -6,13 +6,14 @@ const assert=require("node:assert/strict");
 const fs=require("node:fs"),path=require("node:path"),vm=require("node:vm");
 const src=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js"),"utf8");
 const KEY="darAdultPreferredLocaleV1";
-function makeRuntime(pathname="/test/",withBridge=true){
+function makeRuntime(pathname="/test/",withBridge=true,nativeScriptInstalled=false){
  const listeners=new Map(),storage=new Map(),posted=[];
  const document={readyState:"loading",addEventListener(){},body:null};
  const window={location:{pathname},document,
   localStorage:{getItem(k){return storage.get(k)||null},setItem(k,v){storage.set(k,v)}},
   addEventListener(name,fn){const a=listeners.get(name)||[];a.push(fn);listeners.set(name,a)}
  };
+ if(nativeScriptInstalled)window.__darAdultLocaleBridgeInstalled=true;
  if(withBridge)window.webkit={messageHandlers:{darLanguageChanged:{
   postMessage(data){posted.push(data)}
  }}};
@@ -37,10 +38,16 @@ assert.equal(x.posted.length,before,"Unknown language sent to native");
 x.storage.set(KEY,"de");
 x.dispatch("tr","native");
 assert.equal(x.posted.length,before,"Native update caused second echo");
+// In an actual iOS WKWebView, injected native JS owns event forwarding.
+const nativeOwned=makeRuntime("/test/",true,true);
+nativeOwned.dispatch("ar");
+nativeOwned.dispatch("tr");
+assert.equal(nativeOwned.posted.length,0,"Duplicate native locale message from the second UI listener");
+assert.equal(nativeOwned.window.DarTestTurkishUI.locale(),"tr");
 const browser=makeRuntime("/test/",false);
 browser.dispatch("fr");
 assert.equal(browser.window.DarTestTurkishUI.locale(),"fr");
 assert.equal(browser.posted.length,0);
 assert.equal(makeRuntime("/test/kids/").window.DarTestTurkishUI,undefined);
 assert.equal(makeRuntime("/").window.DarTestTurkishUI,undefined);
-console.log("PASS: web-to-native nine-language bridge, stored preference, native echo suppression, offline/browser and Kids/visitor isolation");
+console.log("PASS: web-to-native nine-language bridge, stored preference, native echo suppression, single native message owner, offline/browser and Kids/visitor isolation");
