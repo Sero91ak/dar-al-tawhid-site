@@ -36,19 +36,24 @@ const sourceLike=s=>{
  * report without pretending they are missing app chrome translations. */
 const selfNames=new Set(Object.values(pack.names));
 const runtimeNumeric=/^(?:[0-9]{1,7} (?:Ergebnisse|Funktionen|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt)|[0-9]{1,3}(?:[.,][0-9])?% Trefferquote|[0-9]{1,5}[/][0-9]{1,5} gewählt|[0-9]{1,4} Āyāt · (?:Mekkanisch|Medinensisch)|[0-9]{1,4} Sūren · [0-9]{1,6} Āyāt)$/;
+const sourceOnlyRoutes=new Set(["books","bibliothek","propheten","quran"]);
+const terminologyReview=new Set([
+ "Adab und Tazkiyah","Āthār und Ḥadīṯ","Fiqh und Uṣūl",
+ "ʿAqīdah und Sunnah","ʿAqīdah und Widerlegungen",
+ "Kufr und Ṭāghūt","Biografien und Āthār","Biografien und Tārīkh",
+ "Wissen und Adab","Rijāl und Biografien","Tawḥīd & ʿAqīdah"
+]);
 function candidateCategory(label,routes){
  if(selfNames.has(label))return "language-name-preserve";
  if(runtimeNumeric.test(label))return "dynamic-runtime-covered";
  if(/^\d|\d{1,2}:\d{2}(?:\s|$)|\b\d{1,2}\.\d{1,2}\.\d{4}\b/.test(label))
   return "dynamic-value-review";
- const onlyContentRoutes=routes.length>0&&routes.every(route=>
-  ["books","bibliothek","propheten","quran"].includes(route));
- if(onlyContentRoutes&&(
-  /^(?:al[- ]|Al-|as[- ]|aṣ-|at-|aṭ-|Ibn |Abū |Muḥammad |Aḥmad |Kitāb |Ṣaḥīḥ |Tafsīr |Sharḥ |Muṣannaf |Sūrah |ʿAbd |ʿUthmān |Jāmiʿ )/i.test(label)||
-  (routes.includes("books")&&label.length>35)|| 
-  (routes.includes("bibliothek")&&/,?\s*\d+\s*(?:Seiten|Veröffentlichungen|\d{2}\.\d{2}\.\d{4})/.test(label))||
-  (routes.includes("propheten")&&label.length<35&&!/\s/.test(label))
- ))return "source-or-name-review";
+ if(terminologyReview.has(label))return "religious-taxonomy-review";
+ const onlyContentRoutes=routes.length>0&&routes.every(route=>sourceOnlyRoutes.has(route));
+ if(onlyContentRoutes)return "source-or-name-review";
+ if((/^(?:Allah allein anbeten\.|Tawḥīd im Mittelpunkt\.|Muslim, Ṣaḥīḥ Muslim,)/.test(label))||
+   (/^(?:Qurʾān · Sunnah|Folgt für mehr Wissen)/.test(label)&&label.length>45))
+  return "editorial-copy-review";
  return "interface-review";
 }
 if(process.argv.includes("--self-test")){
@@ -61,6 +66,8 @@ if(process.argv.includes("--self-test")){
  assert.equal(candidateCategory("109 Āyāt · Mekkanisch",["quran"]),"dynamic-runtime-covered");
  assert.equal(candidateCategory("114 Sūren · 6236 Āyāt",["quran"]),"dynamic-runtime-covered");
  assert.equal(candidateCategory("al-Adab al-Mufrad",["books"]),"source-or-name-review");
+ assert.equal(candidateCategory("Aḍwāʾ al-Bayān öffnen",["books"]),"source-or-name-review");
+ assert.equal(candidateCategory("Adab und Tazkiyah",["books"]),"religious-taxonomy-review");
  assert.equal(candidateCategory("Einstellungen öffnen",["settings"]),"interface-review");
  console.log("PASS: audit classifies language autonyms, numeric status, source titles and app UI separately");
 }
