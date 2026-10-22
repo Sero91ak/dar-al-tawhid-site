@@ -1,0 +1,23 @@
+name: KIDS V4 Last Sixteen German Fuṣḥā Dictionary Prefight (no TTS)
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths:
+      - kids/tools/validate_quiz_v4_remaining16_dictionary_preflight.py
+      - kids/review-only/quiz-v4-16-new-text-dictionary-preflight-20261022.json
+permissions:
+  contents: read
+jobs:
+  validate-without-spending:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: review/kids-v4-nine-prepaid-artifact-replay-20261022
+          fetch-depth: 1
+      - name: Validate actual 10099-rule pronunciation dictionary and sixteen exact unfinished source strings, no network
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/validate_quiz_v4_remaining16_dictionary_preflight.py
+          python3 kids/tools/validate_quiz_v4_remaining16_dictionary_preflight.py
