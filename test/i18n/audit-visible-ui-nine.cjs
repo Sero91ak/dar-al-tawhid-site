@@ -31,6 +31,24 @@ const sourceLike=s=>{
  if(s.length>105&&/(Qurʾān|Sunnah|Ḥadīṯ|Ṣaḥāb|Gelehrte|Āthār|Prophet)/i.test(s))return true;
  return false;
 };
+/* Candidate classifications are review queues, not authorization to translate.
+ * A bibliographic title can appear inside a button. Keep those titles in the
+ * report without pretending they are missing app chrome translations. */
+const selfNames=new Set(Object.values(pack.names));
+function candidateCategory(label,routes){
+ if(selfNames.has(label))return "language-name-preserve";
+ if(/^\\d|\\d{1,2}:\\d{2}(?:\\s|$)|\\b\\d{1,2}\\.\\d{1,2}\\.\\d{4}\\b/.test(label))
+  return "dynamic-value-review";
+ const onlyContentRoutes=routes.length>0&&routes.every(route=>
+  ["books","bibliothek","propheten","quran"].includes(route));
+ if(onlyContentRoutes&&(
+  /^(?:al[- ]|Al-|as[- ]|aṣ-|at-|aṭ-|Ibn |Abū |Muḥammad |Aḥmad |Kitāb |Ṣaḥīḥ |Tafsīr |Sharḥ |Muṣannaf |Sūrah |ʿAbd |ʿUthmān |Jāmiʿ )/i.test(label)||
+  (routes.includes("books")&&label.length>35)|| 
+  (routes.includes("bibliothek")&&/,?\\s*\\d+\\s*(?:Seiten|Veröffentlichungen|\\d{2}\\.\\d{2}\\.\\d{4})/.test(label))||
+  (routes.includes("propheten")&&label.length<35&&!/\\s/.test(label))
+ ))return "source-or-name-review";
+ return "interface-review";
+}
 const targets=Object.keys(registry.locales).filter(code=>code!=="de");
 const unique=new Map();
 for(const row of candidateRows){
@@ -45,7 +63,7 @@ let fullyCovered=0;
 for(const row of unique.values()){
  const missingLocales=targets.filter(code=>!pack.translations[code]?.[row.de]?.trim());
  if(!missingLocales.length){fullyCovered++;continue;}
- missing.push({de:row.de,routes:[...row.routes].sort(),missingLocales,candidateOnly:true});
+ missing.push({de:row.de,routes:[...row.routes].sort(),missingLocales,reviewCategory:candidateCategory(row.de,[...row.routes]),candidateOnly:true});
 }
 missing.sort((a,b)=>b.routes.length-a.routes.length||a.de.localeCompare(b.de,"de"));
 const coverage={};
@@ -55,17 +73,27 @@ for(const code of targets){
   missing:missingCount,percent:unique.size?
    Math.round((unique.size-missingCount)*10000/unique.size)/100:100};
 }
+const reviewCategoryCounts={};
+for(const candidate of missing)
+ reviewCategoryCounts[candidate.reviewCategory]=(reviewCategoryCounts[candidate.reviewCategory]||0)+1;
+const reviewFirst=missing.filter(x=>x.reviewCategory==="interface-review").slice(0,45)
+ .map(x=>({de:x.de,routes:x.routes}));
 const report={schemaVersion:1,scope:"adult-test-ui-audit-not-publishing",
  sourceLocale:"de",registeredLanguages:Object.keys(registry.locales),
  scanSource:scanned?"15-route-browser-scan":"stored-Turkish-ui-candidate-index",
  scanRoutes:scanned?.routes||[],scanErrors:scanned?.errors||[],
  auditedCandidates:unique.size,fullyCoveredInAllTargetLocales:fullyCovered,
- languageCoverage:coverage,untranslatedCandidates:missing,
- notes:"Review each candidate as UI before adding translations. Source texts, citations, Quran, Hadith and authored posts must not be auto-translated. No paid provider is contacted."};
+ languageCoverage:coverage,reviewCategoryCounts,reviewFirst,untranslatedCandidates:missing,
+ notes:"Counts describe unmatched strings in the shared static UI pack, NOT a measured percentage of fully localized interface screens. Some are language autonyms, dynamic values, source titles or terms already handled by another runtime. Review each candidate as UI before adding translations. Qurʾān, ḥadīṯ, citations and authored posts must not be auto-translated. No paid provider is contacted."};
 if(process.argv.includes("--write-report")){
  const output=path.join(__dirname,"qa/ui-gaps-nine.json");
  fs.mkdirSync(path.dirname(output),{recursive:true});
  fs.writeFileSync(output,JSON.stringify(report,null,2)+"\n");
  console.log("Wrote "+output);
 }
-console.log(JSON.stringify(report,null,2));
+// The full report is written to the runner only when explicitly requested.
+if(process.argv.includes("--full"))console.log(JSON.stringify(report,null,2));
+else console.log(JSON.stringify({scanSource:report.scanSource,scanRoutes:report.scanRoutes,
+ auditedCandidates:report.auditedCandidates,fullyCoveredInAllTargetLocales:report.fullyCoveredInAllTargetLocales,
+ catalogMissingCandidates:report.untranslatedCandidates.length,reviewCategoryCounts:report.reviewCategoryCounts,
+ reviewFirst:report.reviewFirst,scanErrors:report.scanErrors,notes:report.notes},null,2));
