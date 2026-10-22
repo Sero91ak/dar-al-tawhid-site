@@ -95,7 +95,7 @@ html.dat-v8-overhaul body .bottom-nav-btn{min-width:0}
 html.dat-v8-overhaul body .bottom-nav-btn .nav-icon{max-height:36px}
 /* Desktop/Fold expanded: real application navigation with original 3D assets. */
 #datV8Rail{display:none}
-@media(min-width:800px){
+@media(min-width:740px){
  html.dat-v8-overhaul{--dv8-rail-width:76px}
  html.dat-v8-overhaul body .app{
   width:calc(100% - var(--dv8-rail-width));max-width:none!important;
@@ -144,7 +144,7 @@ html.dat-v8-overhaul body .bottom-nav-btn .nav-icon{max-height:36px}
  html.dat-v8-overhaul #appView .dv3-more-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
  html.dat-v8-overhaul #appView .dsh-home .dsh-group{max-width:100%}
 }
-@media(max-width:799px){
+@media(max-width:739px){
  html.dat-v8-overhaul #appView{padding-inline:clamp(9px,2.4vw,18px);padding-bottom:calc(88px + env(safe-area-inset-bottom,0px))}
  html.dat-v8-overhaul #appView .dv3-home{padding-inline:0}
  html.dat-v8-overhaul #appView .dsh-shell{padding:12px}
@@ -164,4 +164,25 @@ html.dat-v8-overhaul[data-dv8-motion="reduce"] *::after{
 }
 @media(prefers-reduced-motion:reduce){
  html.dat-v8-overhaul *{scroll-behavior:auto!important}
+}
+
+/* Consolidate 9 old homepage chips into the shared one-click picker. */
+html.dat-v8-overhaul #dv3Home .dv3-language{display:none!important}
+html.dat-v8-overhaul #dv3Home .dat-v8-home-tools{
+ display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-wrap:wrap;margin-left:auto
+}
+html.dat-v8-overhaul #dv3Home .dat-v8-home-tools .dal-entry{width:auto;max-width:270px;min-width:0}
+html.dat-v8-overhaul #dv3Home .dat-v8-home-tools .dal-row{
+ min-height:42px;padding:7px 10px;border:1px solid var(--dv8-line);border-radius:999px;
+ background:var(--dv8-surface);color:var(--dv8-text)
+}
+html.dat-v8-overhaul #dv3Home .dat-v8-home-tools [data-dv8-nav]{
+ display:grid;place-items:center;min-width:42px;min-height:42px;padding:5px;
+ border:1px solid var(--dv8-line);border-radius:999px;background:var(--dv8-surface);color:var(--dv8-text)
+}
+html.dat-v8-overhaul #dv3Home .dat-v8-home-tools [data-dv8-nav] img{width:28px;height:28px;object-fit:contain}
+@media(max-width:520px){
+ html.dat-v8-overhaul #dv3Home .dv3-hometitle{flex-wrap:wrap}
+ html.dat-v8-overhaul #dv3Home .dat-v8-home-tools{width:100%;justify-content:flex-start;margin-left:0}
+ html.dat-v8-overhaul #dv3Home .dat-v8-home-tools .dal-entry{flex:1;max-width:none}
 }
