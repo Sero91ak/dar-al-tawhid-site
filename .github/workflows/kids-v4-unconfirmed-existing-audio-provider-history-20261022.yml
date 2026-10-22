@@ -72,6 +72,10 @@ jobs:
           else:
               output['providerAccess']='READ_ONLY'
               found={}
+              exactTextButModelMissing=0
+              exactTextOtherModel=0
+              exactTextMatchingModel=0
+              exactTextNoVoice=0
               start=int(datetime(2026,10,13,tzinfo=timezone.utc).timestamp())
               for source in ('TTS','Flows'):
                   cursor=None
@@ -118,20 +122,36 @@ jobs:
                       output['queries'].append({'source':source,'page':page,'resultCount':len(rows),
                                                 'hasMore':data.get('has_more',False)})
                       for h in rows:
-                          if h.get('voice_id')!=ledger['voiceId'] or h.get('model_id')!='eleven_v4':
-                              continue
                           t=h.get('text')
                           if t not in targets:
+                              continue
+                          if h.get('voice_id')!=ledger['voiceId']:
+                              exactTextNoVoice+=1
+                              continue
+                          mid=h.get('model_id')
+                          if mid=='eleven_v4':exactTextMatchingModel+=1
+                          elif mid in (None,''):exactTextButModelMissing+=1
+                          else:exactTextOtherModel+=1
+                          if mid not in ('eleven_v4',None,''):
                               continue
                           hid=h.get('history_item_id')
                           if isinstance(hid,str) and hid and hid not in found:
                               found[hid]={'sourceText':t,'historyItemId':hid,
                                          'dateUnix':h.get('date_unix'),
-                                         'source':h.get('source'),'requestId':h.get('request_id')}
+                                         'source':h.get('source'),'requestId':h.get('request_id'),
+                                         'historyModelIdPresent':bool(mid),
+                                         'needsProviderV4Provenance':not bool(mid)}
                       if not data.get('has_more') or not rows:break
                       cursor=data.get('last_history_item_id')
                       if not cursor:break
+              output['matchingTextProviderMetadata']={
+                  'voiceV4':exactTextMatchingModel,
+                  'voiceUnspecifiedModel':exactTextButModelMissing,
+                  'voiceWrongModel':exactTextOtherModel,
+                  'otherVoice':exactTextNoVoice}
               for hid,meta in found.items():
+                  # Without V4 provenance, a recovered file remains private and
+                  # explicitly excluded from the original V4 registry.
                   path='/v1/history/'+urllib.parse.quote(hid,safe='')+'/audio'
                   req=urllib.request.Request('https://api.elevenlabs.io'+path,
                     headers={'xi-api-key':key,'Accept':'audio/mpeg'})
