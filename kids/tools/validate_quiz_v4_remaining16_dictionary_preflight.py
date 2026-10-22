@@ -1,16 +1,18 @@
 #!/usr/bin/env python3
-"""Zero-cost, fail-closed audit of exactly sixteen never-recorded V4 quiz texts.
+"""Zero-cost, fail-closed audit of 15 genuinely new V4 texts plus one uncertain old request.
 
 GitHub Actions execution confirms actual 10,099-rule pinned PLS and original voice.
 NEVER sends a request to ElevenLabs or alters live application data.
 """
 from __future__ import annotations
 import json
+import hashlib
 from pathlib import Path
 from generate_quiz_v4_450_paid_batch02 import build_canonical_v4_payload
 
 ROOT = Path(__file__).resolve().parents[2]
 QUEUE=ROOT/"kids/review-only/quiz-v4-16-new-text-dictionary-preflight-20261022.json"
+JOURNAL=ROOT/"kids/data/quiz-v4-older-stage1-request-journal.json"
 REG=ROOT/"kids/data/quiz-v4-450-original-clip-registry.json"
 PLAN=ROOT/"kids/data/quiz-v4-curated-450-production-review.json"
 HOLD=ROOT/"kids/data/quiz-v4-pronunciation-hold.json"
@@ -24,8 +26,8 @@ def require(ok,why):
     if not ok: raise RuntimeError("V4_PREFLIGHT_STOP: "+why)
 
 def main():
-    q,r,p,h,led,qh=map(load,(QUEUE,REG,PLAN,HOLD,CONNECTED,QHOLD))
-    require(q.get("newTextCount")==16 and len(q.get("items") or [])==16,"exact 16 candidates")
+    q,r,p,h,led,qh,journal=map(load,(QUEUE,REG,PLAN,HOLD,CONNECTED,QHOLD,JOURNAL))
+    require(q.get("newTextCount")==15 and len(q.get("items") or [])==15,"exact 15 never-recorded candidates")
     require(q.get("newSpeechCreditsAllowed")==0 and q.get("publicReleaseAllowed") is False,"review only")
     require(q.get("masterVoiceId")==VOICE and q.get("modelId")==MODEL and q.get("languageCode")=="de","wrong speaker or language")
     require(q.get("dictionaryId")=="Q8w3SxtoVo8NSjsnlJEd"
@@ -40,12 +42,21 @@ def main():
     blocked={x["sourceText"] for x in qh["originals"]}
     blocked.update(x["sourceText"] for x in led["entries"] if x.get("blockedForQuizPlayback"))
     original=set(r.get("textClips") or {})
+    uncertain=q.get("previouslyAttemptedExcludedFromNewTTS") or {}
+    unsafe_sha=uncertain.get("sourceTextSHA256")
+    require(uncertain.get("questionId")=="kids-quiz-080" and uncertain.get("allowNewSynthesis") is False
+            and uncertain.get("chargeReconciled") is False, "uncertain 080 provider request must stay held")
+    require(hashlib.sha256(uncertain.get("text","").encode("utf-8")).hexdigest()==unsafe_sha,
+            "uncertain request exact text SHA changed")
+    require(any(e.get("textSHA256")==unsafe_sha and e.get("status")=="REQUEST_STARTED_UNCONFIRMED"
+                for e in journal.get("entries", [])), "uncertain paid request missing from provider journal")
     seen=set()
     for x in q["items"]:
         text=x["text"]
         require(text not in seen,"candidate repeated")
         seen.add(text)
-        require(text not in original and text not in reserved and text not in blocked,
+        require(text not in original and text not in reserved and text not in blocked
+                and hashlib.sha256(text.encode("utf-8")).hexdigest()!=unsafe_sha,
                 "already paid, reserved or pronunciation-rejected candidate")
         require(len(x.get("usedBy") or [])>=1,"missing exact question reference")
         for used in x["usedBy"]:
@@ -64,8 +75,8 @@ def main():
                 "dictionary not actually attached to payload")
     require(sum(len(x["text"]) for x in q["items"])==q["newCharacters"],
             "new text character count drift")
-    print("KIDS_V4_REMAINING_16_PREFLIGHT_PASS: 16 exact non-duplicate texts;",
-          "dictionary provider/version, real SHA and owner hold verified;",
+    print("KIDS_V4_REMAINING_15_PREFLIGHT_PASS: 15 genuinely new non-duplicate texts;",
+          "one unconfirmed provider request quarantined; dictionary provider/version, real SHA and owner hold verified;",
           "ZERO TTS CREDITS; NOT PUBLICLY APPROVED.")
 
 if __name__ == "__main__":
