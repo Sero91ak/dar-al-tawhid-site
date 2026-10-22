@@ -1,6 +1,16 @@
 /* DAR Mehr V1.5 | shared functional UI; scoped to the adult Mehr view only. */
 (function(){
 "use strict";
+/* One shared, cache-versioned nine-language picker. */
+if(!window.DARAdultLanguagePickerV1&&!window.__DAR_LANGUAGE_PICKER_LOADING){
+ window.__DAR_LANGUAGE_PICKER_LOADING=true;
+ const picker=document.createElement("script");
+ picker.src="/assets/i18n/adult-language-picker-v1.js?v=20261022-01";
+ picker.async=true;
+ picker.onerror=()=>{window.__DAR_LANGUAGE_PICKER_LOADING=false};
+ (document.head||document.documentElement).appendChild(picker);
+}
+
 
 /* Shared adult TEST language runtime. No production, Kids, API or paid model access. */
 if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(location.pathname)
@@ -51,7 +61,7 @@ function renderOurApps(){
   <button type="button" class="dm-exact-action dm-exact-kids-locked" disabled aria-label="TAWḤĪD KIDS ist noch nicht verfügbar"><span class="dm-exact-sr">Demnächst verfügbar</span></button>
  </article>
  </div>
- <p class="dm-showcase-footnote">Gerätedarstellungen mit Werbemotiven aus unserer Vorschau. Keine App-Store-Screenshots.</p>
+ <p class="dm-showcase-footnote">Gerätedarstellungen mit Werbemotiven aus unserer Vorschau. Keine App-Store-Screenshots.</p><a class="dm-i18n-reader-link" href="/test/i18n/?post=hasan-al-basri-selbstpruefung-20261021-481">Sprachfassung prüfen · DAR TEST</a>
  </section>`;
 }
 
@@ -61,13 +71,7 @@ const localeCodes=new Set(localeChoicesList.map(x=>x[0]));
 function currentLocale(){try{return localeCodes.has(localStorage.getItem(localeKey))?localStorage.getItem(localeKey):"de"}catch(_){return"de"}}
 function setLocale(code){if(!localeCodes.has(code))return;try{localStorage.setItem(localeKey,code)}catch(_){}window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:code}}));sync();}
 function localeChoices(){
- const value=currentLocale();
- return '<section class="dm-locale" role="group" aria-label="Sprache wählen / Dil seçimi">'+
- '<div class="dm-locale-copy"><strong>Sprache · Dil</strong><small>Fachtexte werden nach Quellen- und Sprachprüfung freigegeben.</small></div>'+
- '<div class="dm-locale-choices">'+
- localeChoicesList.map(([code,label])=>'<button type="button" data-dm-locale="'+code+'" aria-pressed="'+(value===code)+'">'+label+'</button>').join('')+
- '</div><a class="dm-i18n-reader-link" href="/test/i18n/?post=hasan-al-basri-selbstpruefung-20261021-481">'+
- (value==="tr"?"Geprüfte Textfassung öffnen · İncele":"Sprachfassung prüfen · DAR TEST")+'</a></section>';
+ return '<section data-dar-language-entry="quick" class="dal-entry dal-entry-quick" aria-label="Sprache wählen"></section>';
 }
 function ensureLocaleCss(){
  if(document.getElementById("dar-test-more-locale-css"))return;
