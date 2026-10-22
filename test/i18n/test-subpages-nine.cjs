@@ -28,19 +28,19 @@ const bySection={
  feed:["Beitrag lesen","Bild wird vorbereitet…","Bildbeitrag erstellen und teilen","Feed aktualisieren","Noch keine Bildbeiträge im Feed.","Wissen weitergeben"],
  home_content:["Bittgebet des Tages","Bücher & PDFs","Neueste Veröffentlichungen","Suchtext löschen","Meist gelesen"],
  settings_extended:["Hintergrundaktualisierung ausschalten","Hintergrundaktualisierung erlauben","Daten für Widgets und Watch aktualisieren","Ort wird ermittelt …"],
- quran_extended:["Textgröße","Lautstärke","Timer aus","Vorige Āyah","Wiedergabe beenden","Sūrah zufällig"],
+ quran_extended:["Textgröße","Lautstärke","Timer aus","Vorige Āyah","Wiedergabe beenden","Sūrah zufällig","Qurʾān Player öffnen","Minuten"],
  hadith_extended:["Die Bibliothek ist gerade nicht erreichbar.","Werke · Kitāb · Bāb · Nummer","Šarḥ – Erklärung zum Ḥadīṯ"],
  weather:["Klar","Leicht bewölkt","Schneeschauer","Gewitter","Wetter: Standort in Gebetszeiten festlegen"],
  player_error:["Sūrah-Verzeichnis unvollständig","Keine Audio-Dateien für diesen Rezitator",
                "Wiedergabe konnte nicht gestartet werden.","Player-Optionen",
                "Synchron zur Rezitation","15 Sekunden vor","Sleep-Timer"],
- nav_more:["Mitteilungen","App-Update erforderlich","Nachweise","Sammlungen","Grundlagen"],
+ nav_more:["Mitteilungen","App-Update erforderlich","Nachweise","Sammlungen","Grundlagen","Widget-Ziele öffnen","Neue Sprachauswahl öffnen"],
  expanded_study:["DĀR AL TAWḤĪD Einrichtung","Schnellsuche im Wissen","Weiterlernen",
                  "Vollständiger Zugang","Qurʾān · Āyah","Sūrah + Rezitator","Optionen"]
 };
 for(const code of codes){
  const strings=pack.translations[code];
- assert(strings&&Object.keys(strings).length>=800,"Insufficient "+code+" UI entries");
+ assert(strings&&Object.keys(strings).length>=804,"Insufficient "+code+" UI entries");
  for(const [section,labels] of Object.entries(bySection))
   for(const source of labels){
    const localized=strings[source];
@@ -56,4 +56,4 @@ for(const token of ["[data-canonical-content]","[class*='source-quote']","[class
  assert(source.includes(token),"Protected source/bridge guard missing: "+token);
 }
 console.log("PASS: "+codes.length+" target locales, "+Object.keys(bySection).length+
- " functional UI categories, 800+ labels and protected source/bridge guards");
+ " functional UI categories, 804+ labels and protected source/bridge guards");
