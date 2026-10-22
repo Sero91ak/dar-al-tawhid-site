@@ -73,6 +73,15 @@ for(const locale of ["tr","en","ar","ku","ckb","bs","fr","es"]){
  assert.equal(t("Wetter · Bonn: 200 °C · Regen",locale),null,
   "Unbounded weather value must remain untranslated");
 }
+for(const code of ["tr","en","ar","ku","ckb","bs","fr","es"]){
+ for(const count of [1,3,15]){
+  const result=t("Weitere "+count+" Treffer anzeigen",code);
+  assert(result&&result!=="Weitere "+count+" Treffer anzeigen"&&!/Treffer anzeigen/.test(result),
+   "Untranslated dynamic research-chat controls: "+code+" / "+count);
+ }
+ assert.equal(t("Weitere 12345 Treffer anzeigen",code),null,
+  "Do not reinterpret arbitrary numbers as bounded research UI: "+code);
+}
 const metaExamples={
  tr:["109 âyet · Mekkî","114 sûre · 6236 âyet"],
  en:["109 verses · Meccan","114 surahs · 6236 verses"],
