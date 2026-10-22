@@ -8,7 +8,8 @@ from __future__ import annotations
 import json
 import hashlib
 from pathlib import Path
-from generate_quiz_v4_450_paid_batch02 import build_canonical_v4_payload
+from generate_quiz_v4_450_paid_batch02 import (build_canonical_v4_payload,
+    source_requires_separate_pronunciation_approval)
 
 ROOT = Path(__file__).resolve().parents[2]
 QUEUE=ROOT/"kids/review-only/quiz-v4-16-new-text-dictionary-preflight-20261022.json"
@@ -51,10 +52,14 @@ def main():
     require(any(e.get("textSHA256")==unsafe_sha and e.get("status")=="REQUEST_STARTED_UNCONFIRMED"
                 for e in journal.get("entries", [])), "uncertain paid request missing from provider journal")
     seen=set()
+    at_risk=[]
     for x in q["items"]:
         text=x["text"]
         require(text not in seen,"candidate repeated")
         seen.add(text)
+        if source_requires_separate_pronunciation_approval(text):
+            at_risk.append({'sourceText':text,'usedBy':x['usedBy'],
+                            'reason':'REQUIRES_ARABIC_FUSHA_PHONETIC_REVIEW_BEFORE_ANY_PAID_TTS'})
         require(text not in original and text not in reserved and text not in blocked
                 and hashlib.sha256(text.encode("utf-8")).hexdigest()!=unsafe_sha,
                 "already paid, reserved or pronunciation-rejected candidate")
@@ -75,9 +80,28 @@ def main():
                 "dictionary not actually attached to payload")
     require(sum(len(x["text"]) for x in q["items"])==q["newCharacters"],
             "new text character count drift")
-    print("KIDS_V4_REMAINING_15_PREFLIGHT_PASS: 15 genuinely new non-duplicate texts;",
-          "one unconfirmed provider request quarantined; dictionary provider/version, real SHA and owner hold verified;",
-          "ZERO TTS CREDITS; NOT PUBLICLY APPROVED.")
+    # A valid dictionary locator alone never proves any pronunciation. All
+    # 15 currently awaiting speech are mixed with Qur'an/Arabic terms that
+    # the paid-production path deliberately blocks, EVEN IF owner consent
+    # eventually releases the global halt. Audit this second gate explicitly.
+    require(len(at_risk)==15,"the source phonetic-risk profile changed; re-audit before charging")
+    report={'schemaVersion':1,'scope':'KIDS_450_LAST_15_PRONUNCIATION_RISK',
+            'modelId':MODEL,'voiceId':VOICE,'dictionaryId':q['dictionaryId'],
+            'dictionaryVersionId':q['dictionaryVersionId'],
+            'uniqueNewTextCount':len(q['items']),
+            'phoneticApprovalRequiredCount':len(at_risk),
+            'dictionaryVersionCheckPassed':True,
+            'thisDoesNotAuthorizePaidSpeech':True,
+            'allTextsProductionBlockedUntilPhoneticReview':True,
+            'ownerPronunciationApproved':False,
+            'newElevenLabsRequests':0,'publicReleaseAllowed':False,
+            'items':at_risk}
+    output=ROOT/"kids/review-only/quiz-v4-15-arabic-phonetic-risks-dryrun-report.json"
+    output.write_text(json.dumps(report,ensure_ascii=False,indent=2)+"\\n",encoding="utf-8")
+    print("KIDS_V4_REMAINING_15_PREFLIGHT_PASS: 15 truly new texts are non-duplicate;",
+          "ALL 15 currently have Arabic/Quran phonetic production risks;",
+          "the 10,099-rule dictionary locator alone is NOT pronunciation approval;",
+          "080 prior request remains held. ZERO TTS CREDITS; NO LIVE RELEASE.")
 
 if __name__ == "__main__":
     main()
