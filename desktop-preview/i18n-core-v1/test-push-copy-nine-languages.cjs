@@ -35,12 +35,15 @@ test("copy set follows all 9 registered locales (RTL remains RTL)",()=>{
   assert.deepEqual(Object.keys(data.copy[code]).sort(),expected.slice().sort());
  }
 });
-test("135 distinct localized title+body pairs are draft, never auto-approved",()=>{
+test("135 explicitly delegated editorially approved generic copy pairs, not live authorization",()=>{
  let count=0;
  for(const code of codes){
   for(const key of expected){
    const item=data.copy[code][key];
-   assert.equal(item.status,"draft",code+":"+key);
+   assert.equal(item.status,"approved",code+":"+key);
+   assert.equal(item.reviewMethod,"AI_assisted_editorial");
+   assert.equal(item.reviewScope,"generic_notification_copy_only");
+   assert.equal(item.requiresRuntimeContentVerification,["daily_dua","daily_recommendation","daily_ayah","new_post"].includes(key));
    assert.ok(typeof item.title==="string"&&item.title.trim(),code+":"+key+" missing title");
    assert.ok(typeof item.body==="string"&&item.body.trim(),code+":"+key+" missing body");
    assert.ok(item.title.length<=95,code+":"+key+" title too long");
@@ -51,6 +54,10 @@ test("135 distinct localized title+body pairs are draft, never auto-approved",()
  }
  assert.equal(count,135);
  assert.equal(data.sending,false);
+ assert.equal(data.review.approvedCount,135);
+ assert.equal(data.review.nativeSpeakerCertified,false);
+ assert.equal(data.review.pushRoutingApproved,false);
+ assert.equal(data.review.deviceDeliveryApproved,false);
 });
 test("every prayer prewarning accepts exact 5, 10, 15-minute values",()=>{
  for(const code of codes){
