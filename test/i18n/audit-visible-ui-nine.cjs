@@ -37,6 +37,9 @@ const sourceLike=s=>{
 const selfNames=new Set(Object.values(pack.names));
 const runtimeNumeric=/^(?:[0-9]{1,7} (?:Ergebnisse|Funktionen|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt)|[0-9]{1,3}(?:[.,][0-9])?% Trefferquote|[0-9]{1,5}[/][0-9]{1,5} gewählt|[0-9]{1,4} Āyāt · (?:Mekkanisch|Medinensisch)|[0-9]{1,4} Sūren · [0-9]{1,6} Āyāt|(?:Familie|Tawḥīd|Fiqh|ʿAqīdah|Sunnah|Qurʾān), [0-9]{1,7} Veröffentlichungen|Sūrenbereich wechseln, aktuell [0-9]{1,3}[–-][0-9]{1,3}|Duʿāʾ (?:[01][0-9]|2[0-3]):[0-5][0-9] · Empfehlung (?:[01][0-9]|2[0-3]):[0-5][0-9])$/;
 const sourceOnlyRoutes=new Set(["books","bibliothek","propheten","quran"]);
+const preservedBrands=new Set(["Instagram","Telegram","WhatsApp","by Serhat Abu Malik"]);
+const editorialFragments=new Set([", authentischer","und den","Wissen aus"]);
+const runtimeShortDate=/^(?:Mo|Di|Mi|Do|Fr|Sa|So)\., [0-9]{2}\.[0-9]{2}\.[0-9]{2}$/;
 const terminologyReview=new Set([
  "Adab und Tazkiyah","Āthār und Ḥadīṯ","Fiqh und Uṣūl",
  "ʿAqīdah und Sunnah","ʿAqīdah und Widerlegungen",
@@ -45,6 +48,9 @@ const terminologyReview=new Set([
 ]);
 function candidateCategory(label,routes){
  if(selfNames.has(label))return "language-name-preserve";
+ if(preservedBrands.has(label))return "brand-or-signature-preserve";
+ if(editorialFragments.has(label))return "editorial-fragment-review";
+ if(runtimeShortDate.test(label))return "dynamic-runtime-covered";
  if(runtimeNumeric.test(label))return "dynamic-runtime-covered";
  if(/^\d|\d{1,2}:\d{2}(?:\s|$)|\b\d{1,2}\.\d{1,2}\.\d{4}\b/.test(label))
   return "dynamic-value-review";
@@ -68,6 +74,10 @@ if(process.argv.includes("--self-test")){
  assert.equal(candidateCategory("Tawḥīd, 24 Veröffentlichungen",["bibliothek"]),"dynamic-runtime-covered");
  assert.equal(candidateCategory("Sūrenbereich wechseln, aktuell 01–20",["quran"]),"dynamic-runtime-covered");
  assert.equal(candidateCategory("Duʿāʾ 09:00 · Empfehlung 12:00",["prayer"]),"dynamic-runtime-covered");
+ assert.equal(candidateCategory("Do., 22.10.26",["home"]),"dynamic-runtime-covered");
+ assert.equal(candidateCategory("Instagram",["home"]),"brand-or-signature-preserve");
+ assert.equal(candidateCategory("by Serhat Abu Malik",["home"]),"brand-or-signature-preserve");
+ assert.equal(candidateCategory("und den",["home"]),"editorial-fragment-review");
  assert.equal(candidateCategory("al-Adab al-Mufrad",["books"]),"source-or-name-review");
  assert.equal(candidateCategory("Aḍwāʾ al-Bayān öffnen",["books"]),"source-or-name-review");
  assert.equal(candidateCategory("Adab und Tazkiyah",["books"]),"religious-taxonomy-review");
