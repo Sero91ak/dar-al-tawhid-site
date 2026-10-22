@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "scope": "DAR_KIDS_V4_CREATIVE_SIX_DICTIONARY_ACTUAL_PARAMETERS_AUDIT",
+  "sourceFlowId": "6jy3hYoAm24ViUmTGlvk",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "masterDictionaryExpected": {
+    "dictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
+    "versionId": "wSzgkGpAwEDiTak8DApc"
+  },
+  "actualAttachedDictionaryLocators": [],
+  "testedCreativeGenerationCount": 6,
+  "generatedSpeechWasActuallyDictionaryEnabled": false,
+  "automaticSpeechToTextMatchedAllSix": true,
+  "automaticSpeechToTextIsNotPhoneticApproval": true,
+  "humanListeningApproved": false,
+  "publicReleaseAllowed": false,
+  "noFurtherCreditSpendForThisAudit": true,
+  "recommendation": "Do not approve or repurchase these existing recordings before actual owner auditory approval and a new fully dictionary-bound pilot. Use the direct production generator's pronunciation_dictionary_locators, not the Creative speech wrapper for Fuṣḥā-critical words.",
+  "sourceNodesVerifiedIndividually": true,
+  "recordings": [
+    {
+      "generationId": "zzXJWv2JBGxX9M4LOhb9",
+      "questionId": "kids-quiz-624",
+      "part": "question",
+      "text": "Was lehrt Sūrat ash-Sharḥ nach dem Ende einer Aufgabe?",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "actualPronunciationDictionaryLocators": [],
+      "humanApproval": false
+    },
+    {
+      "generationId": "pY6qZXS4RxK21jYECdmh",
+      "questionId": "kids-quiz-332",
+      "part": "explanation",
+      "text": "Allah erfüllte Sein Versprechen und tröstete Mūsās Mutter.",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "actualPronunciationDictionaryLocators": [],
+      "humanApproval": false
+    },
+    {
+      "generationId": "WATQYughEOMdK8YOLKkL",
+      "questionId": "kids-quiz-859",
+      "part": "explanation",
+      "text": "Luqmāns Rat lehrt maßvolles Auftreten und eine ruhige Stimme.",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "actualPronunciationDictionaryLocators": [],
+      "humanApproval": false
+    },
+    {
+      "generationId": "iDBVEZi7Pa9YWyzev5ZQ",
+      "questionId": "kids-quiz-177",
+      "part": "explanation",
+      "text": "Allah nahm Ādams Reue an und nennt Sich den Reue-Annehmenden und Barmherzigen.",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "actualPronunciationDictionaryLocators": [],
+      "humanApproval": false
+    },
+    {
+      "generationId": "FoAZ1Qxayxu3Nj8a9zgq",
+      "questionId": "kids-quiz-331",
+      "part": "question",
+      "text": "Was gab Allah Mūsās Mutter ein, als sie Angst um ihn hatte?",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "actualPronunciationDictionaryLocators": [],
+      "humanApproval": false
+    },
+    {
+      "generationId": "O7JafEKW0zTjINa5Ice5",
+      "questionId": "kids-quiz-331",
+      "part": "explanation",
+      "text": "Allah beruhigte Mūsās Mutter und versprach, ihn zu ihr zurückzubringen.",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "actualPronunciationDictionaryLocators": [],
+      "humanApproval": false
+    }
+  ]
+}
