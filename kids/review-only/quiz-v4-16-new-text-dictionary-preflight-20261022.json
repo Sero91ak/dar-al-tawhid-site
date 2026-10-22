@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "scope": "DAR_KIDS_V4_REMAINING16_DICTIONARY_PREFLIGHT_NO_GENERATION",
+  "scope": "DAR_KIDS_V4_REMAINING_15_TRULY_NEW_TEXTS_PLUS_1_PREVIOUSLY_ATTEMPTED_HELD",
   "asOf": "2026-10-22",
   "masterVoiceId": "DkU7j9uO4ZEtLD2iRZSH",
   "modelId": "eleven_v4",
   "languageCode": "de",
   "dictionaryId": "Q8w3SxtoVo8NSjsnlJEd",
   "dictionaryVersionId": "wSzgkGpAwEDiTak8DApc",
-  "newTextCount": 16,
-  "newCharacters": 1108,
+  "newTextCount": 15,
+  "newCharacters": 1055,
   "newSpeechCreditsAllowed": 0,
   "requiresOwnerApprovedListeningPilot": true,
   "publicReleaseAllowed": false,
@@ -27,16 +27,6 @@
         {
           "questionId": "kids-quiz-023",
           "part": "explanation"
-        }
-      ]
-    },
-    {
-      "text": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
-      "requiredByFields": 1,
-      "usedBy": [
-        {
-          "questionId": "kids-quiz-080",
-          "part": "question"
         }
       ]
     },
@@ -180,5 +170,14 @@
         }
       ]
     }
-  ]
+  ],
+  "previouslyAttemptedExcludedFromNewTTS": {
+    "questionId": "kids-quiz-080",
+    "text": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
+    "sourceTextSHA256": "fc4f586cf59297c43335f3aae64428bdf00fb10ec362ffb33c9620ff9a851f70",
+    "journalStatus": "REQUEST_STARTED_UNCONFIRMED",
+    "chargeReconciled": false,
+    "allowNewSynthesis": false,
+    "nextAction": "Read/recover original provider request; never charge a duplicate until the original is reconciled"
+  }
 }
