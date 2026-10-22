@@ -5,6 +5,8 @@ const ui=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js")
 const pack=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-ui-locales-seven.json"),"utf8"));
 const titles=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-visible-title-drafts-seven.json"),"utf8"));
 const EXPECTED=["de","tr","en","ar","ku","ckb","bs"];
+assert.deepEqual(pack.availableLocales,[...EXPECTED,"fr","es"]);
+assert.deepEqual(pack.pendingLocales,["fr","es"]);
 for(const locale of EXPECTED.slice(1)){
  const v=pack.translations[locale];
  assert(Object.keys(v).length>=350,locale+" missing section labels");
@@ -69,4 +71,4 @@ assert.equal(weekday.nodeValue,"Mittwoch, 21. Oktober 2026","calendar failed to 
 assert.equal(runtime.formatCalendarDate("2026-10-21T12:00:00Z","en",{weekday:"long",timeZone:"UTC"}),"Wednesday");
 assert(runtime.translatePrayerName("Maghrib","en")==="Maghrib");
 assert(runtime.translatePrayerName("Maghrib","tr")==="Akşam");
-console.log("PASS: seven languages, full welcome/prayer/calendar/prophet UI, 13 identity-checked headings, German rollback and source protection");
+console.log("PASS: seven translated locales plus two registered pending locales, full welcome/prayer/calendar/prophet UI, 13 identity-checked headings, German rollback and source protection");

@@ -10,8 +10,12 @@
     "ar",
     "ku",
     "ckb",
-    "bs"
+    "bs",
+    "fr",
+    "es"
   ],
+  "translatedLocales": ["de", "tr", "en", "ar", "ku", "ckb", "bs"],
+  "pendingLocales": ["fr", "es"],
   "rtlLocales": [
     "ar",
     "ckb"
@@ -2563,7 +2567,9 @@
       "Heute für dich": "Danas za tebe",
       "Willkommen zurück": "Dobro došli nazad",
       "Überlieferungsmaßstab prüfen": "Pregledaj kriterije predaja"
-    }
+    },
+    "fr": {},
+    "es": {}
   },
   "editingNote": "Static adult UI text without paid OpenAI API calls; language copy requires in-app linguistic QA (particularly Kurdish varieties). Original religious content is excluded.",
   "reviewStatus": "editorial UI drafts, canonical religious passages and article bodies remain untouched",
