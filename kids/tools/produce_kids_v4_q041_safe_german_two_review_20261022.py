@@ -181,6 +181,9 @@ def main():
         clip={"url":"/"+str(target.relative_to(ROOT)),
               "sha256":digest,"textSha256":sha(source),"voiceId":VOICE,
               "modelId":MODEL,"originalType":"owner-master-v4-direct-dictionary",
+              "bytes":len(raw),"audioListeningApproved":False,
+              "qaApproval":"pending-human-auditory-review",
+              "status":"PRIVATE_REVIEW_ONLY_NOT_PUBLISHED",
               "pronunciationApproved":False,
               "publicReleaseAllowed":False}
         reg["textClips"][source]=clip
