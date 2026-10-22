@@ -1,0 +1,393 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-22",
+  "scope": "DAR_KIDS_450_V4_REVIEW_ONLY_REMAINING_21",
+  "branch": "review/kids-v4-nine-prepaid-artifact-replay-20261022",
+  "sourcePaths": [
+    "kids/review-only/quiz-v4-450-actual-mp3-import.json",
+    "kids/data/quiz-v4-curated-450-production-review.json",
+    "kids/data/quiz-v4-age7to10-offline-coverage.json",
+    "kids/data/quiz-v4-connected-flow-originals-ledger.json",
+    "kids/data/quiz-v4-owner-pronunciation-hold-20261021.json",
+    "kids/data/quiz-v4-450-production-status.json"
+  ],
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "modelId": "eleven_v4",
+  "selected": 450,
+  "technicallyCompleted": 429,
+  "technicallyMissing": 21,
+  "missingPartsCount": 27,
+  "missingDistinctFragments": 33,
+  "byBlocker": {
+    "RESERVED_UNCONFIRMED_TTS": 7,
+    "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT": 16,
+    "QUARANTINED_PRONUNCIATION": 10
+  },
+  "ageComplete": {
+    "4-6": 150,
+    "7-8": 143,
+    "9-10": 136
+  },
+  "historical56PaidOriginalsRecovered": true,
+  "technicalCompleteIsNotHumanApproved": true,
+  "pronunciationApproval": false,
+  "publicReleaseAllowed": false,
+  "noDuplicateSynthesis": true,
+  "requirementsBeforePublicPush": [
+    "Exact original speech fragments saved with SHA-256 and matching model and voice",
+    "Pronunciation hold resolved by owner-approved auditory pilot; Arabic/Fuṣḥā articulation validated, not ASR alone",
+    "Previously paid or quarantined audio not resynthesized blindly",
+    "Release gate passing; four approved audio fields on each of 450 questions"
+  ],
+  "openQuestions": [
+    {
+      "questionId": "kids-quiz-023",
+      "ageBand": "7-8",
+      "missingParts": [
+        "explanation"
+      ],
+      "missingFragments": [
+        {
+          "part": "explanation",
+          "text": "Allah beschreibt den Qurʾān als Rechtleitung für die Muttaqīn.",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-031",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Den Zorn zurückhalten und verzeihen.",
+          "blocker": "RESERVED_UNCONFIRMED_TTS"
+        },
+        {
+          "part": "question",
+          "text": "Sofort beleidigen.",
+          "blocker": "RESERVED_UNCONFIRMED_TTS"
+        },
+        {
+          "part": "question",
+          "text": "Etwas kaputt machen.",
+          "blocker": "RESERVED_UNCONFIRMED_TTS"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-036",
+      "ageBand": "9-10",
+      "missingParts": [
+        "explanation"
+      ],
+      "missingFragments": []
+    },
+    {
+      "questionId": "kids-quiz-041",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Taqwā.",
+          "blocker": "RESERVED_UNCONFIRMED_TTS"
+        },
+        {
+          "part": "question",
+          "text": "Viel Geld.",
+          "blocker": "RESERVED_UNCONFIRMED_TTS"
+        },
+        {
+          "part": "question",
+          "text": "Eine berühmte Familie.",
+          "blocker": "RESERVED_UNCONFIRMED_TTS"
+        },
+        {
+          "part": "explanation",
+          "text": "Allah nennt Taqwā als Maßstab der besonderen Ehre bei Ihm.",
+          "blocker": "RESERVED_UNCONFIRMED_TTS"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-046",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Glücksspiele spielen.",
+          "blocker": "QUARANTINED_PRONUNCIATION"
+        },
+        {
+          "part": "question",
+          "text": "Angeben.",
+          "blocker": "QUARANTINED_PRONUNCIATION"
+        },
+        {
+          "part": "explanation",
+          "text": "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam.",
+          "blocker": "QUARANTINED_PRONUNCIATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-080",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-094",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Taqwā.",
+          "blocker": "RESERVED_UNCONFIRMED_TTS"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-097",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Zur al-Masǧid al-Ḥarām in Makkah.",
+          "blocker": "QUARANTINED_PRONUNCIATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-131",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Halāle und gute Nahrung.",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        },
+        {
+          "part": "explanation",
+          "text": "Allah befiehlt, von dem Halālen und Guten auf der Erde zu essen.",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-189",
+      "ageBand": "9-10",
+      "missingParts": [
+        "explanation"
+      ],
+      "missingFragments": [
+        {
+          "part": "explanation",
+          "text": "Der längste Qurʾān-Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-271",
+      "ageBand": "7-8",
+      "missingParts": [
+        "explanation"
+      ],
+      "missingFragments": [
+        {
+          "part": "explanation",
+          "text": "Allah erlaubt das Halāle und Gute und warnt vor den Schritten des Shayṭān.",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-276",
+      "ageBand": "7-8",
+      "missingParts": [
+        "explanation"
+      ],
+      "missingFragments": [
+        {
+          "part": "explanation",
+          "text": "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-278",
+      "ageBand": "7-8",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Mit wessen Erlaubnis geschahen die Wunder ʿĪsās?",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        },
+        {
+          "part": "explanation",
+          "text": "Der Qurʾān wiederholt, dass ʿĪsās Zeichen mit Allahs Erlaubnis geschahen.",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-485",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question",
+        "explanation"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge?",
+          "blocker": "QUARANTINED_PRONUNCIATION"
+        },
+        {
+          "part": "question",
+          "text": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
+          "blocker": "QUARANTINED_PRONUNCIATION"
+        },
+        {
+          "part": "question",
+          "text": "Es gibt keinen Unterschied zwischen Ḥalāl und Ḥarām.",
+          "blocker": "QUARANTINED_PRONUNCIATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-499",
+      "ageBand": "9-10",
+      "missingParts": [
+        "explanation"
+      ],
+      "missingFragments": [
+        {
+          "part": "explanation",
+          "text": "Die Qurʾān-Duʿāʾ bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-640",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Was zeigt die Geschichte Ayyūbs in Qurʾān 21:83–84 über Prüfungen?",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-641",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Welche Verbindung macht Sulaymāns Duʿāʾ in Qurʾān 27:19 deutlich?",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-809",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "ʿIbādah und Duʿāʾ richten wir an Allah allein.",
+          "blocker": "QUARANTINED_PRONUNCIATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-839",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Ghībah ist erlaubt, solange die Person es nicht hört.",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-873",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Gute Taten und ʿIbādah werden aufrichtig für Allah getan.",
+          "blocker": "QUARANTINED_PRONUNCIATION"
+        }
+      ]
+    },
+    {
+      "questionId": "kids-quiz-877",
+      "ageBand": "9-10",
+      "missingParts": [
+        "question"
+      ],
+      "missingFragments": [
+        {
+          "part": "question",
+          "text": "Wir machen ʿIbādah nicht, um vor Menschen Eindruck zu machen.",
+          "blocker": "QUARANTINED_PRONUNCIATION"
+        }
+      ]
+    }
+  ]
+}
