@@ -186,3 +186,18 @@ html.dat-v8-overhaul #dv3Home .dat-v8-home-tools [data-dv8-nav] img{width:28px;h
  html.dat-v8-overhaul #dv3Home .dat-v8-home-tools{width:100%;justify-content:flex-start;margin-left:0}
  html.dat-v8-overhaul #dv3Home .dat-v8-home-tools .dal-entry{flex:1;max-width:none}
 }
+
+html.dat-v8-overhaul #appView .dat-v8-palette{margin:8px 0 14px;border-bottom:1px solid var(--dv8-line);padding-bottom:12px}
+html.dat-v8-overhaul #appView .dat-v8-palette summary{cursor:pointer;color:var(--dv8-gold);font-weight:700;font-size:13px;min-height:42px;display:flex;align-items:center;list-style-position:inside}
+html.dat-v8-overhaul #appView .dat-v8-palette-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:7px 0 10px}
+html.dat-v8-overhaul #appView .dat-v8-palette-grid button{
+ display:flex;align-items:center;gap:9px;text-align:start;min-width:0;min-height:48px;
+ border-radius:13px;border:1px solid var(--dv8-line);background:var(--dv8-surface);
+ color:var(--dv8-text);padding:9px;cursor:pointer
+}
+html.dat-v8-overhaul #appView .dat-v8-palette-grid i{
+ display:inline-block;flex:0 0 29px;width:29px;height:29px;border-radius:50%;
+ border:1px solid color-mix(in srgb,currentColor 27%,transparent);box-shadow:inset 0 0 0 2px rgba(255,255,255,.18)
+}
+html.dat-v8-overhaul #appView .dat-v8-palette-grid button span{min-width:0;font-size:12px;overflow-wrap:anywhere}
+@media(min-width:740px){html.dat-v8-overhaul #appView .dat-v8-palette-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
