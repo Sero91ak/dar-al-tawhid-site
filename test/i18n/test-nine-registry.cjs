@@ -25,9 +25,10 @@ assert.equal(pack.noPaidProvider,true);
 assert.deepEqual(Object.keys(pack.translations).sort(),expected.filter(k=>k!=="de").sort());
 const requiredSource=Object.keys(pack.translations.en);
 const protectedQuote="„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“";
-assert(requiredSource.includes(protectedQuote),"Expected existing quoted source exclusion");
-const uiLabels=requiredSource.filter(k=>k!==protectedQuote);
-assert(uiLabels.length>=540,"Adult UI baseline unexpectedly shortened");
+assert(!requiredSource.includes(protectedQuote),
+ "Scholarly source quotation must not be stored as interface copy");
+const uiLabels=requiredSource;
+assert(uiLabels.length>=800,"Adult UI baseline unexpectedly shortened");
 for(const locale of expected){
  assert.equal(pack.names[locale],registry.locales[locale].name,"Wrong locale name: "+locale);
  if(locale==="de")continue;
@@ -36,10 +37,8 @@ for(const locale of expected){
   assert.equal(typeof target[key],"string",locale+" has no UI text for "+key);
   assert(target[key].trim(),locale+" has a blank UI text for "+key);
  }
- if(locale==="fr"||locale==="es"){
-  assert.equal(target[protectedQuote],undefined,
-   "Do not silently translate an authored scholarly quote as ordinary UI");
- }
+ assert.equal(target[protectedQuote],undefined,
+  "No authored scholarly quote is allowed in an interface catalog: "+locale);
  const direction=registry.locales[locale].dir;
  assert.equal(pack.rtlLocales.includes(locale),direction==="rtl",
   "RTL registry mismatch: "+locale);
@@ -63,4 +62,4 @@ for(const oldPhrase of [
  "Türkisch und Deutsch. Fachbeiträge erscheinen erst nach Prüfung in der gewählten Sprache.",
  "Türkische Inhalte werden nach Quellen- und Sprachprüfung freigegeben."
 ]) assert(!(setup+more).includes(oldPhrase),"Outdated German/Turkish-only language claim in UI");
-console.log("PASS: nine language codes, central registry alignment, 540 shared UI labels, updated UI guidance, RTL, player controls, protected sources and zero paid translation requests");
+console.log("PASS: nine language codes, central registry alignment, 800 shared UI labels, updated UI guidance, RTL, player controls, protected sources and zero paid translation requests");
