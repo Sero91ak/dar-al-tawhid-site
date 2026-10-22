@@ -493,6 +493,26 @@ function localizeWeatherStatus(value,language){
   return label+" · "+missing[1]+": "+copy[1];
  return null;
 }
+/* Search-result count belongs to the research-chat controls, not a source reference. */
+function localizeMoreResults(value,language){
+ if(language==="de"||!SUPPORTED.has(language))return null;
+ const hit=value.match(/^Weitere ([0-9]{1,4}) Treffer anzeigen$/);
+ if(!hit)return null;
+ const count=Number(hit[1]);
+ const loc=INTL_LOCALE[language]||"de-DE";
+ let n=hit[1];
+ try{n=new Intl.NumberFormat(loc,{useGrouping:false}).format(count)}catch(_){}
+ const captions={
+  tr:"{n} sonuç daha göster",en:"Show {n} more {unit}",
+  ar:"عرض {n} من النتائج الإضافية",ku:"{n} encamên din nîşan bide",
+  ckb:"پیشاندانی {n} ئەنجامی تر",bs:"Prikaži još {n} rezultata",
+  fr:"Afficher {n} {unit} supplémentaires",es:"Mostrar {n} resultados más"
+ };
+ let format=captions[language];if(!format)return null;
+ if(language==="en")format=format.replace("{unit}",count===1?"result":"results");
+ if(language==="fr")format=format.replace("{unit}",count===1?"résultat":"résultats");
+ return format.replace("{n}",n);
+}
 const PROTECTED_SOURCE_QUOTE="„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“";
 function translateExact(value,language="tr"){
  // Source quotation is editorial content, not a localizable interface control.
@@ -513,6 +533,8 @@ function translateExact(value,language="tr"){
     languagePacks.get(language)?.get(statements[1]);
   return head?head+" · "+statements[2]:null;
  }
+ const moreResults=localizeMoreResults(value,language);
+ if(moreResults!==null)return moreResults;
  const weatherLabel=localizeWeatherStatus(value,language);
  if(weatherLabel!==null)return weatherLabel;
  const locationLabel=localizeSavedLocation(value,language);
