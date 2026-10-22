@@ -5,6 +5,7 @@ Tests persistence, language direction, SPA navigation and safe UI-control covera
 Untranslated control candidates are recorded for review, not auto-published.
 Does NOT translate authored content, religious passages, article bodies or source quotes.
 """
+import hashlib
 import json
 import os
 import time
@@ -53,8 +54,11 @@ for (const el of document.querySelectorAll(
    if (child.nodeType === Node.TEXT_NODE) add(child.nodeValue,'text');
  }
 }
+const display=(document.querySelector('#appView')?.innerText||'')+' '+
+ (document.querySelector('#darHomeHtmlParityV1')?.innerText||'');
 return {rows:rows, attributes:[...new Set(attrs)],
-        visibleCharacters:(document.querySelector('#appView')?.innerText||'').trim().length};
+        visibleCharacters:display.trim().length,
+        routeText:display.replace(/\\s+/g,' ').trim().slice(0,3500)};
 """
 options = Options()
 for flag in ["--headless=new", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu"]:
@@ -99,7 +103,9 @@ try:
             german_matches = [] if locale == "de" else sorted(values & translatable)
             german_attributes = [] if locale == "de" else sorted(attributes & translatable)
             localized_matches = [] if locale == "de" else sorted(values & translated)
+            signature = hashlib.sha256(snapshot["routeText"].encode("utf-8")).hexdigest()[:16]
             records.append({"language": locale, "route": route, "direction": direction,
+                            "routeTextHash": signature,
                             "controls": len(snapshot["rows"]),
                             "visibleCharacters": snapshot["visibleCharacters"],
                             "knownGermanLabels": german_matches,
@@ -130,10 +136,14 @@ blank_routes = [item for item in records if item["visibleCharacters"] < 10]
 empty_control_locales = [code for code in LANGUAGES
                          if not any(item["controls"] > 0 for item in records
                                     if item["language"] == code)]
+# Language state alone proves nothing if navigation failed or old pages were cached.
+unchanged_route_locales = [code for code in LANGUAGES
+     if len({item["routeTextHash"] for item in records if item["language"] == code}) < 10]
 assert len(records) == len(ROUTES) * len(LANGUAGES), "Incomplete route-language scan"
 assert not failed_attributes, "German UI attribute fallbacks: " + str(failed_attributes[:15])
 assert not blank_routes, "Blank subpage routes: " + str(blank_routes[:15])
 assert not empty_control_locales, "Locale UI controls were not captured: " + str(empty_control_locales)
+assert not unchanged_route_locales, "Navigation did not show distinct subpages: " + str(unchanged_route_locales)
 print("PASS 135 language-route checks, RTL, persistent preference, German reset, "
       "no known German UI attribute fallbacks and no blank routes; "
       "untranslated-control report written", flush=True)
