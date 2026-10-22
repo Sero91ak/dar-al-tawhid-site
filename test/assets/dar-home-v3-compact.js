@@ -234,6 +234,7 @@ document.addEventListener("input",function(e){
 });
 document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;const p=document.getElementById("dv3ThemePanel");if(p&&!p.hidden){p.hidden=true;e.preventDefault();}});
 window.addEventListener("dar-adult-locale-changed",syncLanguageButtons);
+window.addEventListener("dar-adult-ui-languages-ready",syncLanguageButtons);
 window.addEventListener("storage",function(e){if(e.key===LANGUAGE_KEY)syncLanguageButtons()});
 document.addEventListener("dar:view-rendered",queue);
 window.addEventListener("hashchange",queue);
