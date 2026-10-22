@@ -17,24 +17,37 @@ function read(){
 }
 async function pushLocale(){
  const locale=read();
+ // A native WKWebView/Android WebView can expose a Web OneSignal object
+ // unrelated to the native SDK that owns the real push subscription.
+ // Never synchronize the wrong OneSignal user. Native SDK bridge/release
+ // must explicitly implement setLanguage on that native subscription.
+ if(global.DAR_IOS_ONESIGNAL_ID || global.DAR_ANDROID_ONESIGNAL_ID ||
+    global.webkit?.messageHandlers?.darPushSettings || global.DarNative){
+   return {synced:false,locale,reason:"native_sdk_locale_bridge_required"};
+ }
  const os=global.OneSignal;
  if(!os?.User || typeof os.User.setLanguage!=="function")
    return {synced:false,reason:"sdk_unavailable",locale};
- if(!SUPPORTED.has(locale)){
-   // OneSignal does not support all Kurdish language keys. Do not silently
-   // mark a Kurdish recipient as localized by the built-in provider mapping.
-   return {synced:false,reason:"individual_delivery_required",locale};
- }
- if(locale===lastApplied)return {synced:true,locale,unchanged:true};
- if(locale===pendingLocale && pendingPromise)return pendingPromise;
+ // Kurdish needs a per-subscription verified delivery path. Meanwhile,
+ // force the current OneSignal user away from any stale language (e.g. tr)
+ // to the documented, reviewed German fallback rather than sending Turkish
+ // after the app language has changed to Soranî.
+ const providerLocale=SUPPORTED.has(locale)?locale:"de";
+ const fallback=providerLocale!==locale;
+ if(providerLocale===lastApplied)return fallback
+   ? {synced:false,locale,reason:"individual_delivery_required",fallbackLocale:"de",unchanged:true}
+   : {synced:true,locale,unchanged:true};
+ if(providerLocale===pendingLocale && pendingPromise)return pendingPromise;
  const rev=++generation;
- pendingLocale=locale;
+ pendingLocale=providerLocale;
  const task=(async()=>{
    try{
-     await os.User.setLanguage(locale);
+     await os.User.setLanguage(providerLocale);
      if(rev!==generation)return {synced:false,locale,reason:"language_changed_during_sync"};
-     lastApplied=locale;
-     return {synced:true,locale};
+     lastApplied=providerLocale;
+     return fallback
+       ? {synced:false,locale,reason:"individual_delivery_required",fallbackLocale:"de"}
+       : {synced:true,locale};
    }catch(_){
      return {synced:false,locale,reason:"onesignal_language_update_failed"};
    }
