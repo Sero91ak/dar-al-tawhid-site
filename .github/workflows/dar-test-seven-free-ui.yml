@@ -1,4 +1,4 @@
-name: DAR TEST Seven Languages — Zero Paid API
+name: DAR TEST Nine Languages — Zero Paid API
 
 on:
   pull_request:
@@ -21,7 +21,7 @@ permissions:
   contents: read
 
 jobs:
-  seven-ui:
+  nine-ui:
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
@@ -54,9 +54,9 @@ jobs:
           if(!pack.noPaidProvider||pack.scope!=='adult-interface-only')throw Error('Not an offline static UI pack');
           if(/api\.openai\.com|DAR_I18N_AI_API_KEY|chat\/completions/i.test(raw+loader))
             throw Error('Paid model endpoint or secret must not be in UI browser runtime');
-          for(const locale of ['tr','en','ar','ku','ckb','bs'])
-            if(Object.keys(pack.translations[locale]||{}).length<350)throw Error('Incomplete language catalog '+locale);
-          console.log('PASS 7 UI catalogs; 0 OpenAI API requests.');
+          for(const locale of ['tr','en','ar','ku','ckb','bs','fr','es'])
+            if(Object.keys(pack.translations[locale]||{}).length<420)throw Error('Incomplete language catalog '+locale);
+          console.log('PASS 9 UI catalogs; 0 OpenAI API requests.');
           NODE
       - name: Start local adult test app
         shell: bash
