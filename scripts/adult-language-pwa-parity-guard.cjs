@@ -33,6 +33,10 @@ assert.ok(!sw.includes("caches.delete(CACHE_VERSION)"),"PWA erases saved offline
 assert.ok(picker.includes("Demnächst verfügbar")&&picker.includes("available(code)"),"Unreleased language fallback missing");
 for(const path of ["index.html","assets/dar-more-v15.js","assets/i18n/adult-ui-translate.js","assets/i18n/adult-language-picker-v1.js","pwa/service-worker.js"])
   assert.ok(fs.existsSync(path),"Missing required visitor/PWA asset: "+path);
+const testIndex=read("test/index.html");
+assert.ok(testIndex.includes('id="darTestAdultBrandHeaderShortcutV1"')&&
+ testIndex.includes('id="darTestAdultBrandHeaderShortcutStyleV1"'),
+ "DAR TEST /test/ must actually load the same interactive header as visitor mobile/PWA");
 const headerJs=read("assets/dar-adult-brand-header-v2.js");
 const headerCss=read("assets/dar-adult-brand-header-v2.css");
 const vm=require("node:vm");
