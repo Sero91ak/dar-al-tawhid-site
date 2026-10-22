@@ -1,0 +1,216 @@
+/* DĀR AL TAWḤĪD · V8 visual integration for the isolated /test app.
+   Visual layer only: existing routes, data, hero images and 3D assets remain authoritative. */
+
+html[data-dar-v8="true"] {
+  --v8-bg: var(--theme-page-bg, var(--bg, #f4f6f1));
+  --v8-paper: var(--theme-card, var(--card, #fffefb));
+  --v8-ink: var(--text, #19322b);
+  --v8-muted: var(--muted, #748479);
+  --v8-line: color-mix(in srgb, var(--gold2, #a4844c) 22%, transparent);
+  --v8-accent: var(--gold2, #a4844c);
+  --v8-forest: var(--forest, #153c32);
+  --v8-radius: 22px;
+}
+
+html[data-dar-v8="true"] body {
+  background: var(--v8-bg) !important;
+  color: var(--v8-ink);
+}
+
+html[data-dar-v8="true"] body > .app {
+  width: 100%;
+  max-width: 1540px;
+  margin: 0 auto;
+  background: transparent;
+}
+
+/* V8 header: open and calm, without a second navigation row. */
+html[data-dar-v8="true"] .top-shell,
+html[data-dar-v8="true"] .theme-hero-shell {
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+html[data-dar-v8="true"] .header,
+html[data-dar-v8="true"] .theme-hero-surface {
+  background: color-mix(in srgb, var(--v8-bg) 88%, transparent) !important;
+  border-bottom: 1px solid var(--v8-line) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(18px) saturate(1.05);
+  -webkit-backdrop-filter: blur(18px) saturate(1.05);
+}
+
+html[data-dar-v8="true"] .header-row,
+html[data-dar-v8="true"] .hero-text,
+html[data-dar-v8="true"] .isnad,
+html[data-dar-v8="true"] .app-bar {
+  width: min(100%, 1460px);
+  margin-inline: auto;
+}
+
+html[data-dar-v8="true"] .brand-title,
+html[data-dar-v8="true"] .crumb,
+html[data-dar-v8="true"] .home-v380-title,
+html[data-dar-v8="true"] #appView h1,
+html[data-dar-v8="true"] #appView h2,
+html[data-dar-v8="true"] #appView h3 {
+  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif !important;
+}
+
+html[data-dar-v8="true"] .hero-text,
+html[data-dar-v8="true"] .isnad,
+html[data-dar-v8="true"] .app-bar {
+  border-color: var(--v8-line) !important;
+}
+
+html[data-dar-v8="true"] .hero-text {
+  padding-block: 12px !important;
+}
+
+html[data-dar-v8="true"] .isnad {
+  background: color-mix(in srgb, var(--v8-paper) 88%, transparent) !important;
+  border: 1px solid var(--v8-line) !important;
+  border-radius: 0 0 var(--v8-radius) var(--v8-radius) !important;
+  box-shadow: none !important;
+}
+
+html[data-dar-v8="true"] .app-bar {
+  background: color-mix(in srgb, var(--v8-bg) 86%, transparent) !important;
+  border-block: 1px solid var(--v8-line) !important;
+  box-shadow: none !important;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* Existing home content keeps its real image/data slots, while its surfaces follow V8. */
+html[data-dar-v8="true"] body.is-home-route #appView,
+html[data-dar-v8="true"] body.is-home-route .home-v380-shell,
+html[data-dar-v8="true"] body.is-home-route .home-v380-section {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-color: transparent !important;
+}
+
+html[data-dar-v8="true"] body.is-home-route :is(.home-v380-quran-hero, .home-line-tawhid, .home-v380-open-row, .home-v380-lib-card, .home-line-row, .home-v380-post-card, .home-v380-section-card) {
+  border: 1px solid var(--v8-line) !important;
+  border-radius: var(--v8-radius) !important;
+  background: color-mix(in srgb, var(--v8-paper) 94%, transparent) !important;
+  box-shadow: 0 10px 30px color-mix(in srgb, var(--v8-ink) 7%, transparent) !important;
+}
+
+html[data-dar-v8="true"] body.is-home-route :is(.home-v380-quran-hero, .home-line-tawhid) {
+  background: linear-gradient(118deg, color-mix(in srgb, var(--v8-forest) 94%, #0a211b), var(--v8-forest)) !important;
+  color: #fffdf3 !important;
+  border-color: color-mix(in srgb, var(--v8-accent) 38%, transparent) !important;
+}
+
+html[data-dar-v8="true"] body.is-home-route :is(.home-v380-quran-hero, .home-line-tawhid) :is(h1, h2, h3, strong, b) {
+  font-family: "Iowan Old Style", "Palatino Linotype", Georgia, serif !important;
+}
+
+html[data-dar-v8="true"] body.is-home-route :is(.home-v380-section-title, .home-v380-heading, .home-line-heading) {
+  letter-spacing: .02em;
+  color: var(--v8-ink) !important;
+}
+
+/* Existing original 3D images remain the only image source for navigation/cards. */
+html[data-dar-v8="true"] :is(#bottomNav, .bottom-nav) {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  background: color-mix(in srgb, var(--v8-paper) 76%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--v8-accent) 38%, transparent) !important;
+  box-shadow: 0 12px 34px color-mix(in srgb, var(--v8-ink) 16%, transparent), inset 0 1px rgba(255,255,255,.5) !important;
+  backdrop-filter: blur(24px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.2) !important;
+}
+
+html[data-dar-v8="true"] :is(#bottomNav, .bottom-nav) .bottom-nav-btn {
+  width: 100% !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  flex: none !important;
+  position: relative !important;
+}
+
+/* The legacy test stylesheet has an older flex override. Keep hit areas
+   deterministic for WebKit accessibility and touch dispatch. */
+html[data-dar-v8="true"] #bottomNav.bottom-nav {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+}
+
+html[data-dar-v8="true"] #bottomNav.bottom-nav .bottom-nav-btn {
+  display: flex !important;
+  width: 100% !important;
+  max-width: none !important;
+  min-width: 0 !important;
+  flex: none !important;
+  transform: none !important;
+  -webkit-transform: none !important;
+}
+
+html[data-dar-v8="true"] :is(#bottomNav, .bottom-nav) .bottom-nav-btn.active,
+html[data-dar-v8="true"] :is(#bottomNav, .bottom-nav) .bottom-nav-btn.is-active,
+html[data-dar-v8="true"] :is(#bottomNav, .bottom-nav) .bottom-nav-btn[aria-current="page"] {
+  background: color-mix(in srgb, var(--v8-accent) 16%, transparent) !important;
+  color: var(--v8-ink) !important;
+  border-radius: 999px !important;
+}
+
+html[data-dar-v8="true"] :is(#bottomNav, .bottom-nav) img.dar3d-icon {
+  object-fit: contain !important;
+  filter: drop-shadow(0 3px 4px color-mix(in srgb, var(--v8-ink) 18%, transparent));
+}
+
+html[data-dar-v8="true"] #appView {
+  min-height: calc(100dvh - 110px);
+  padding-bottom: calc(100px + env(safe-area-inset-bottom, 0px)) !important;
+}
+
+@media (min-width: 760px) {
+  html[data-dar-v8="true"] body > .app {
+    padding-inline: clamp(14px, 3vw, 42px);
+  }
+
+  html[data-dar-v8="true"] #appView {
+    padding-inline: 0 !important;
+  }
+
+  html[data-dar-v8="true"] body.is-home-route #appView .home-v380-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1.08fr) minmax(300px, .92fr);
+    gap: clamp(14px, 2vw, 26px);
+    align-items: start;
+  }
+
+  html[data-dar-v8="true"] body.is-home-route #appView .home-v380-shell > * {
+    min-width: 0;
+  }
+
+  html[data-dar-v8="true"] :is(#bottomNav, .bottom-nav) {
+    max-width: min(680px, calc(100vw - 48px)) !important;
+  }
+}
+
+@media (max-width: 759px) {
+  html[data-dar-v8="true"] .header-row,
+  html[data-dar-v8="true"] .hero-text,
+  html[data-dar-v8="true"] .isnad,
+  html[data-dar-v8="true"] .app-bar {
+    padding-inline: max(14px, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px)) !important;
+  }
+
+  html[data-dar-v8="true"] .brand-title {
+    font-size: clamp(22px, 6vw, 30px) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-dar-v8="true"] *,
+  html[data-dar-v8="true"] *::before,
+  html[data-dar-v8="true"] *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
