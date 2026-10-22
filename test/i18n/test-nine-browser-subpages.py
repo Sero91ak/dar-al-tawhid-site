@@ -26,7 +26,9 @@ const excluded = '[data-dar-no-translate],[data-canonical-content],'+
                  '[class*="source-quote"],[class*="verse-translation"],'+
                  '[class*="dua-meaning"],[lang="ar"]';
 function visible(el) {
- if (el.closest(excluded+', [hidden], [aria-hidden="true"]')) return false;
+ const forbidden=el.closest(excluded+', [hidden], [aria-hidden="true"]');
+ // <html lang="ar"> is the UI locale, not a Quran/Arabic content block.
+ if (forbidden && forbidden !== document.documentElement) return false;
  const s = getComputedStyle(el);
  return s.display !== 'none' && s.visibility !== 'hidden' &&
         el.getClientRects().length > 0;
@@ -125,9 +127,13 @@ with open("test/i18n/qa/browser-subpages-nine.json", "w", encoding="utf-8") as o
               out, indent=2, ensure_ascii=False)
 failed_attributes = [item for item in records if item["knownGermanAttributes"]]
 blank_routes = [item for item in records if item["visibleCharacters"] < 10]
+empty_control_locales = [code for code in LANGUAGES
+                         if not any(item["controls"] > 0 for item in records
+                                    if item["language"] == code)]
 assert len(records) == len(ROUTES) * len(LANGUAGES), "Incomplete route-language scan"
 assert not failed_attributes, "German UI attribute fallbacks: " + str(failed_attributes[:15])
 assert not blank_routes, "Blank subpage routes: " + str(blank_routes[:15])
+assert not empty_control_locales, "Locale UI controls were not captured: " + str(empty_control_locales)
 print("PASS 135 language-route checks, RTL, persistent preference, German reset, "
       "no known German UI attribute fallbacks and no blank routes; "
       "untranslated-control report written", flush=True)
