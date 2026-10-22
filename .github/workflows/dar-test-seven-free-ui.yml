@@ -6,6 +6,7 @@ on:
     paths:
       - 'test/i18n/adult-ui-locales-seven.json'
       - 'test/i18n/test-seven-*'
+      - 'test/i18n/test-subpages-nine.cjs'
       - 'test/i18n/test-expanded-headings-seven.cjs'
       - 'test/i18n/test-nine-registry.cjs'
       - 'test/i18n/test-nine-dynamic-ui.cjs'
@@ -50,6 +51,7 @@ jobs:
           node test/i18n/test-nine-registry.cjs
           node test/i18n/test-nine-dynamic-ui.cjs
           node test/i18n/test-nine-native-bridge.cjs
+          node test/i18n/test-subpages-nine.cjs
           node - <<'NODE'
           const fs=require('node:fs'),assert=require('node:assert/strict');
           const more=fs.readFileSync('test/assets/dar-more-v15.js','utf8');
@@ -79,8 +81,8 @@ jobs:
           if(/api\.openai\.com|DAR_I18N_AI_API_KEY|chat\/completions/i.test(raw+loader))
             throw Error('Paid model endpoint or secret must not be in UI browser runtime');
           for(const locale of ['tr','en','ar','ku','ckb','bs','fr','es'])
-            if(Object.keys(pack.translations[locale]||{}).length<540)throw Error('Incomplete language catalog '+locale);
-          console.log('PASS 9 UI catalogs; 0 OpenAI API requests.');
+            if(Object.keys(pack.translations[locale]||{}).length<621)throw Error('Incomplete language catalog '+locale);
+          console.log('PASS 9 UI catalogs with 621+ interface labels each; 0 OpenAI API requests.');
           NODE
       - name: Start local adult test app
         shell: bash
