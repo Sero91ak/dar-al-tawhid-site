@@ -131,6 +131,7 @@ with open("test/i18n/qa/browser-subpages-nine.json", "w", encoding="utf-8") as o
                "languages":LANGUAGES, "records":records,
                "note":"German hits are review candidates; source titles and authored content are excluded."},
               out, indent=2, ensure_ascii=False)
+failed_controls = [item for item in records if item["knownGermanLabels"]]
 failed_attributes = [item for item in records if item["knownGermanAttributes"]]
 blank_routes = [item for item in records if item["visibleCharacters"] < 10]
 empty_control_locales = [code for code in LANGUAGES
@@ -140,10 +141,11 @@ empty_control_locales = [code for code in LANGUAGES
 unchanged_route_locales = [code for code in LANGUAGES
      if len({item["routeTextHash"] for item in records if item["language"] == code}) < 10]
 assert len(records) == len(ROUTES) * len(LANGUAGES), "Incomplete route-language scan"
+assert not failed_controls, "Untranslated known interface controls: " + str(failed_controls[:15])
 assert not failed_attributes, "German UI attribute fallbacks: " + str(failed_attributes[:15])
 assert not blank_routes, "Blank subpage routes: " + str(blank_routes[:15])
 assert not empty_control_locales, "Locale UI controls were not captured: " + str(empty_control_locales)
 assert not unchanged_route_locales, "Navigation did not show distinct subpages: " + str(unchanged_route_locales)
 print("PASS 135 language-route checks, RTL, persistent preference, German reset, "
-      "no known German UI attribute fallbacks and no blank routes; "
+      "no known German interface control fallbacks and no blank routes; "
       "untranslated-control report written", flush=True)
