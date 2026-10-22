@@ -53,7 +53,8 @@ try:
  '<span data-i18n-compact>Do., 22.10.26</span>'+
  '<span data-i18n-hijri>12. Dschumada I 1448</span>'+
  '<span data-i18n-clock>06:49 Uhr</span></section>'+
- '<section class="prophet-panel"><h3>Propheten</h3><span>Überlieferungsmaßstab</span></section>'+
+ '<section class="prophet-panel"><h3>Propheten</h3><span>Überlieferungsmaßstab</span>'+
+ '<p class="prophets-quote__de" data-i18n-source>Gebetszeiten</p></section>'+
  '<article data-nav="post" data-value="fixture-post"><h3>Gebetszeiten</h3></article>'+
  '<div data-post-id="fixture-post">Einstellungen</div>'+
  '<p lang="ar">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>';
@@ -77,6 +78,7 @@ try:
  
  assert driver.execute_script("""return document.querySelector('#darGlobalTurkishFixture article h3')?.textContent==='Gebetszeiten'"""),"Beiträge article card must not be translated"
  assert driver.execute_script("""return document.querySelector('#darGlobalTurkishFixture [data-post-id]')?.textContent==='Einstellungen'"""),"Post content must stay in German"
+ assert driver.execute_script("""return document.querySelector('[data-i18n-source]')?.textContent==='Gebetszeiten'"""),"Unapproved prophetic narration must remain original"
  assert driver.execute_script("""return document.querySelector('#darGlobalTurkishFixture [lang=ar]')?.textContent==='بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'"""),"Quran Arabic must be preserved"
  driver.execute_script("""location.hash='#post/fixture-post';document.getElementById('appView').insertAdjacentHTML('beforeend','<span id="postRouteTurkishGuard">Gebetszeiten</span>');window.DARAdultUI18n.apply()""")
  assert driver.execute_script("return document.getElementById('postRouteTurkishGuard').textContent")=="Gebetszeiten","Post route must be excluded"
