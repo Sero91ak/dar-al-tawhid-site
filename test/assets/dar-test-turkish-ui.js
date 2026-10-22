@@ -597,6 +597,9 @@ function boot(){
 // Browser/PWA runs unchanged when no iOS message handler is registered.
 function notifyNativeLocale(event){
  if(event?.detail?.source==="native")return;
+ // The native WKUserScript already forwards this event to Swift.
+ // Do not send a second identical message from the UI translation runtime.
+ if(global.__darAdultLocaleBridgeInstalled===true)return;
  const code=event?.detail?.locale;
  if(!SUPPORTED.has(code)||currentLocale()!==code)return;
  const bridge=global.webkit?.messageHandlers?.darLanguageChanged;
