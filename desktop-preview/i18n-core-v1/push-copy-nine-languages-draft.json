@@ -20,121 +20,147 @@
   "copy": {
     "de": {
       "prayer_fajr_entry": {
-        "title": "🕌 Fajr – Gebetszeit",
-        "body": "Die Zeit für das Fajr-Gebet ist eingetreten.",
+        "title": "✨ Fajr-Zeit ist eingetreten",
+        "body": "Steh auf für Allah und verrichte dein Fajr-Gebet rechtzeitig.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_fajr_advance": {
-        "title": "⏳ Fajr in {minutes} Min.",
-        "body": "Die Zeit für Fajr beginnt um {time} Uhr. Verbleibende Minuten: {minutes}.",
+        "title": "✨ Fajr in {minutes} Min",
+        "body": "In {minutes} Min · {time} Uhr. Fajr naht — bereite dich vor und verrichte das Gebet für Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_entry": {
-        "title": "🕌 Dhuhr – Gebetszeit",
-        "body": "Die Zeit für das Dhuhr-Gebet ist eingetreten.",
+        "title": "☀️ Dhuhr-Zeit ist eingetreten",
+        "body": "Unterbrich deine Beschäftigung und verrichte dein Dhuhr-Gebet für Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_advance": {
-        "title": "⏳ Dhuhr in {minutes} Min.",
-        "body": "Die Zeit für Dhuhr beginnt um {time} Uhr. Verbleibende Minuten: {minutes}.",
+        "title": "☀️ Dhuhr in {minutes} Min",
+        "body": "In {minutes} Min · {time} Uhr. Dhuhr naht — unterbrich deinen Tag und verrichte das Gebet für Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_entry": {
-        "title": "🕌 ʿAṣr – Gebetszeit",
-        "body": "Die Zeit für das ʿAṣr-Gebet ist eingetreten.",
+        "title": "🌤️ ʿAṣr-Zeit ist eingetreten",
+        "body": "Bewahre dein ʿAṣr-Gebet und verrichte es rechtzeitig für Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_advance": {
-        "title": "⏳ ʿAṣr in {minutes} Min.",
-        "body": "Die Zeit für ʿAṣr beginnt um {time} Uhr. Verbleibende Minuten: {minutes}.",
+        "title": "🌤️ ʿAṣr in {minutes} Min",
+        "body": "In {minutes} Min · {time} Uhr. ʿAṣr naht — bewahre dieses Gebet und verrichte es rechtzeitig für Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_entry": {
-        "title": "🕌 Maghrib – Gebetszeit",
-        "body": "Die Zeit für das Maghrib-Gebet ist eingetreten.",
+        "title": "🌥️ Maghrib-Zeit ist eingetreten",
+        "body": "Die Sonne ist untergegangen — verrichte jetzt dein Maghrib-Gebet für Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_advance": {
-        "title": "⏳ Maghrib in {minutes} Min.",
-        "body": "Die Zeit für Maghrib beginnt um {time} Uhr. Verbleibende Minuten: {minutes}.",
+        "title": "🌥️ Maghrib in {minutes} Min",
+        "body": "In {minutes} Min · {time} Uhr. Maghrib naht — verrichte das Gebet ohne Aufschub für Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_entry": {
-        "title": "🕌 ʿIshāʾ – Gebetszeit",
-        "body": "Die Zeit für das ʿIshāʾ-Gebet ist eingetreten.",
+        "title": "🌙 ʿIshāʾ-Zeit ist eingetreten",
+        "body": "Beende deinen Tag mit dem ʿIshāʾ-Gebet für Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_advance": {
-        "title": "⏳ ʿIshāʾ in {minutes} Min.",
-        "body": "Die Zeit für ʿIshāʾ beginnt um {time} Uhr. Verbleibende Minuten: {minutes}.",
+        "title": "🌙 ʿIshāʾ in {minutes} Min",
+        "body": "In {minutes} Min · {time} Uhr. ʿIshāʾ naht — beende deinen Tag mit dem Gebet für Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Taḥajjud-Erinnerung",
-        "body": "Nimm dir Zeit für Taḥajjud, Duʿāʾ und Istighfār.",
+        "body": "Nutze die letzte Nachtzeit für Taḥajjud, Duʿāʾ und Istighfār.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "daily_dua": {
         "title": "Duʿāʾ des Tages",
-        "body": "Die heutige Duʿāʾ findest du in der App.",
+        "body": "Eine kurze Erinnerung aus Qurʾān & Sunnah – öffne die App und lies die heutige Duʿāʾ.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_recommendation": {
         "title": "Heute empfohlen",
-        "body": "Entdecke die heutige Empfehlung in der App.",
+        "body": "Ein ausgewählter Beitrag für dich – Wissen aus Qurʾān, Sunnah und den Āthār.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_ayah": {
         "title": "Āyah des Tages",
@@ -157,121 +183,147 @@
     },
     "ar": {
       "prayer_fajr_entry": {
-        "title": "🕌 دخل وقت صلاة الفجر",
-        "body": "دخل وقت صلاة الفجر، فاحرص على أدائها في وقتها.",
+        "title": "✨ دخل وقت صلاة الفجر",
+        "body": "قم لله وأدِّ صلاة الفجر في وقتها.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_fajr_advance": {
-        "title": "⏳ اقترب وقت صلاة الفجر",
-        "body": "وقت صلاة الفجر: {time}. الدقائق المتبقية: {minutes}.",
+        "title": "✨ صلاة الفجر بعد {minutes} دقائق",
+        "body": "بعد {minutes} دقائق · الساعة {time}. اقترب الفجر — فاستعد وأدِّ الصلاة لله.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_entry": {
-        "title": "🕌 دخل وقت صلاة الظهر",
-        "body": "دخل وقت صلاة الظهر، فاحرص على أدائها في وقتها.",
+        "title": "☀️ دخل وقت صلاة الظهر",
+        "body": "اترك ما يشغلك قليلًا وأدِّ صلاة الظهر لله.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_advance": {
-        "title": "⏳ اقترب وقت صلاة الظهر",
-        "body": "وقت صلاة الظهر: {time}. الدقائق المتبقية: {minutes}.",
+        "title": "☀️ صلاة الظهر بعد {minutes} دقائق",
+        "body": "بعد {minutes} دقائق · الساعة {time}. اقترب الظهر — فاترك أشغالك وأدِّ الصلاة لله.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_entry": {
-        "title": "🕌 دخل وقت صلاة العصر",
-        "body": "دخل وقت صلاة العصر، فاحرص على أدائها في وقتها.",
+        "title": "🌤️ دخل وقت صلاة العصر",
+        "body": "حافظ على صلاة العصر وأدِّها في وقتها لله.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_advance": {
-        "title": "⏳ اقترب وقت صلاة العصر",
-        "body": "وقت صلاة العصر: {time}. الدقائق المتبقية: {minutes}.",
+        "title": "🌤️ صلاة العصر بعد {minutes} دقائق",
+        "body": "بعد {minutes} دقائق · الساعة {time}. اقترب العصر — فحافظ على هذه الصلاة وأدِّها في وقتها لله.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_entry": {
-        "title": "🕌 دخل وقت صلاة المغرب",
-        "body": "دخل وقت صلاة المغرب، فاحرص على أدائها في وقتها.",
+        "title": "🌥️ دخل وقت صلاة المغرب",
+        "body": "غربت الشمس — فأدِّ صلاة المغرب الآن لله.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_advance": {
-        "title": "⏳ اقترب وقت صلاة المغرب",
-        "body": "وقت صلاة المغرب: {time}. الدقائق المتبقية: {minutes}.",
+        "title": "🌥️ صلاة المغرب بعد {minutes} دقائق",
+        "body": "بعد {minutes} دقائق · الساعة {time}. اقترب المغرب — فأدِّ الصلاة دون تأخير لله.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_entry": {
-        "title": "🕌 دخل وقت صلاة العشاء",
-        "body": "دخل وقت صلاة العشاء، فاحرص على أدائها في وقتها.",
+        "title": "🌙 دخل وقت صلاة العشاء",
+        "body": "اختم يومك بصلاة العشاء لله.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_advance": {
-        "title": "⏳ اقترب وقت صلاة العشاء",
-        "body": "وقت صلاة العشاء: {time}. الدقائق المتبقية: {minutes}.",
+        "title": "🌙 صلاة العشاء بعد {minutes} دقائق",
+        "body": "بعد {minutes} دقائق · الساعة {time}. اقترب العشاء — فاختم يومك بالصلاة لله.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_tahajjud_entry": {
-        "title": "🌙 تذكير بصلاة التهجد",
-        "body": "اغتنم وقتًا لصلاة التهجد والدعاء والاستغفار.",
+        "title": "🌙 تذكير بالتهجد",
+        "body": "اغتنم آخر الليل للتهجد والدعاء والاستغفار.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "daily_dua": {
         "title": "دعاء اليوم",
-        "body": "اطّلع على دعاء اليوم في التطبيق.",
+        "body": "تذكير قصير من القرآن والسنة — افتح التطبيق واقرأ دعاء اليوم.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_recommendation": {
-        "title": "ننصحك بقراءته اليوم",
-        "body": "اقرأ المادة المقترحة لهذا اليوم في التطبيق.",
+        "title": "المقترح اليوم",
+        "body": "مقال مختار لك — علم من القرآن والسنة والآثار.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_ayah": {
         "title": "آية اليوم",
@@ -294,121 +346,147 @@
     },
     "en": {
       "prayer_fajr_entry": {
-        "title": "🕌 Fajr prayer time",
-        "body": "The time for Fajr prayer has begun.",
+        "title": "✨ The time for Fajr has begun",
+        "body": "Rise for Allah and perform your Fajr prayer on time.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_fajr_advance": {
-        "title": "⏳ Fajr in {minutes} min",
-        "body": "Fajr begins at {time}. Minutes remaining: {minutes}.",
+        "title": "✨ Fajr in {minutes} min",
+        "body": "In {minutes} min · {time}. Fajr is approaching — prepare yourself and pray for Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_entry": {
-        "title": "🕌 Dhuhr prayer time",
-        "body": "The time for Dhuhr prayer has begun.",
+        "title": "☀️ The time for Dhuhr has begun",
+        "body": "Pause your activities and perform your Dhuhr prayer for Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_advance": {
-        "title": "⏳ Dhuhr in {minutes} min",
-        "body": "Dhuhr begins at {time}. Minutes remaining: {minutes}.",
+        "title": "☀️ Dhuhr in {minutes} min",
+        "body": "In {minutes} min · {time}. Dhuhr is approaching — pause your day and pray for Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_entry": {
-        "title": "🕌 ʿAṣr prayer time",
-        "body": "The time for ʿAṣr prayer has begun.",
+        "title": "🌤️ The time for ʿAṣr has begun",
+        "body": "Guard your ʿAṣr prayer and perform it on time for Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_advance": {
-        "title": "⏳ ʿAṣr in {minutes} min",
-        "body": "ʿAṣr begins at {time}. Minutes remaining: {minutes}.",
+        "title": "🌤️ ʿAṣr in {minutes} min",
+        "body": "In {minutes} min · {time}. ʿAṣr is approaching — guard this prayer and perform it on time for Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_entry": {
-        "title": "🕌 Maghrib prayer time",
-        "body": "The time for Maghrib prayer has begun.",
+        "title": "🌥️ The time for Maghrib has begun",
+        "body": "The sun has set — perform your Maghrib prayer now for Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_advance": {
-        "title": "⏳ Maghrib in {minutes} min",
-        "body": "Maghrib begins at {time}. Minutes remaining: {minutes}.",
+        "title": "🌥️ Maghrib in {minutes} min",
+        "body": "In {minutes} min · {time}. Maghrib is approaching — pray without delay for Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_entry": {
-        "title": "🕌 ʿIshāʾ prayer time",
-        "body": "The time for ʿIshāʾ prayer has begun.",
+        "title": "🌙 The time for ʿIshāʾ has begun",
+        "body": "End your day with the ʿIshāʾ prayer for Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_advance": {
-        "title": "⏳ ʿIshāʾ in {minutes} min",
-        "body": "ʿIshāʾ begins at {time}. Minutes remaining: {minutes}.",
+        "title": "🌙 ʿIshāʾ in {minutes} min",
+        "body": "In {minutes} min · {time}. ʿIshāʾ is approaching — end your day with prayer for Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Taḥajjud reminder",
-        "body": "Set aside time for Taḥajjud, Duʿāʾ and Istighfār.",
+        "body": "Use the final part of the night for Taḥajjud, Duʿāʾ and Istighfār.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "daily_dua": {
         "title": "Duʿāʾ of the day",
-        "body": "Read today's Duʿāʾ in the app.",
+        "body": "A short reminder from the Qurʾān and Sunnah — open the app and read today's Duʿāʾ.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_recommendation": {
         "title": "Recommended today",
-        "body": "Discover today's recommendation in the app.",
+        "body": "A selected article for you — knowledge from the Qurʾān, Sunnah and Āthār.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_ayah": {
         "title": "Āyah of the day",
@@ -431,121 +509,147 @@
     },
     "tr": {
       "prayer_fajr_entry": {
-        "title": "🕌 Sabah namazı vakti",
-        "body": "Sabah namazının vakti girdi.",
+        "title": "✨ Sabah namazı vakti girdi",
+        "body": "Allah için kalk ve sabah namazını vaktinde kıl.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_fajr_advance": {
-        "title": "⏳ Sabah vaktine {minutes} dk.",
-        "body": "Sabah namazının vakti saat {time} itibarıyla başlayacak. Kalan süre: {minutes} dakika.",
+        "title": "✨ Sabah namazına {minutes} dk",
+        "body": "{minutes} dk sonra · saat {time}. Sabah namazı yaklaşıyor — hazırlan ve namazını Allah için kıl.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_entry": {
-        "title": "🕌 Öğle namazı vakti",
-        "body": "Öğle namazının vakti girdi.",
+        "title": "☀️ Öğle namazı vakti girdi",
+        "body": "İşine ara ver ve öğle namazını Allah için kıl.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_advance": {
-        "title": "⏳ Öğle vaktine {minutes} dk.",
-        "body": "Öğle namazının vakti saat {time} itibarıyla başlayacak. Kalan süre: {minutes} dakika.",
+        "title": "☀️ Öğle namazına {minutes} dk",
+        "body": "{minutes} dk sonra · saat {time}. Öğle namazı yaklaşıyor — işine ara ver ve namazını Allah için kıl.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_entry": {
-        "title": "🕌 İkindi namazı vakti",
-        "body": "İkindi namazının vakti girdi.",
+        "title": "🌤️ İkindi namazı vakti girdi",
+        "body": "İkindi namazını koru ve Allah için vaktinde kıl.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_advance": {
-        "title": "⏳ İkindi vaktine {minutes} dk.",
-        "body": "İkindi namazının vakti saat {time} itibarıyla başlayacak. Kalan süre: {minutes} dakika.",
+        "title": "🌤️ İkindi namazına {minutes} dk",
+        "body": "{minutes} dk sonra · saat {time}. İkindi namazı yaklaşıyor — bu namazı koru ve Allah için vaktinde kıl.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_entry": {
-        "title": "🕌 Akşam namazı vakti",
-        "body": "Akşam namazının vakti girdi.",
+        "title": "🌥️ Akşam namazı vakti girdi",
+        "body": "Güneş battı — akşam namazını geciktirmeden Allah için kıl.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_advance": {
-        "title": "⏳ Akşam vaktine {minutes} dk.",
-        "body": "Akşam namazının vakti saat {time} itibarıyla başlayacak. Kalan süre: {minutes} dakika.",
+        "title": "🌥️ Akşam namazına {minutes} dk",
+        "body": "{minutes} dk sonra · saat {time}. Akşam namazı yaklaşıyor — namazını Allah için geciktirmeden kıl.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_entry": {
-        "title": "🕌 Yatsı namazı vakti",
-        "body": "Yatsı namazının vakti girdi.",
+        "title": "🌙 Yatsı namazı vakti girdi",
+        "body": "Gününü Allah için yatsı namazıyla tamamla.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_advance": {
-        "title": "⏳ Yatsı vaktine {minutes} dk.",
-        "body": "Yatsı namazının vakti saat {time} itibarıyla başlayacak. Kalan süre: {minutes} dakika.",
+        "title": "🌙 Yatsı namazına {minutes} dk",
+        "body": "{minutes} dk sonra · saat {time}. Yatsı namazı yaklaşıyor — gününü Allah için namazla tamamla.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Teheccüd hatırlatması",
-        "body": "Teheccüd namazı, dua ve istiğfar için vakit ayır.",
+        "body": "Gecenin son vaktini teheccüd, dua ve istiğfar için değerlendir.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "daily_dua": {
         "title": "Günün duası",
-        "body": "Bugünün duasını uygulamada oku.",
+        "body": "Kur'ân ve Sünnet'ten kısa bir hatırlatma — uygulamayı aç ve bugünün duasını oku.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_recommendation": {
-        "title": "Bugünün tavsiyesi",
-        "body": "Bugün önerilen içeriği uygulamada keşfet.",
+        "title": "Bugün önerilen",
+        "body": "Senin için seçilmiş bir yazı — Kur'ân, Sünnet ve âsârdan ilim.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_ayah": {
         "title": "Günün âyeti",
@@ -568,121 +672,147 @@
     },
     "ku": {
       "prayer_fajr_entry": {
-        "title": "🕌 Wextê nimêja Fajr",
-        "body": "Wextê nimêja Fajr dest pê kir.",
+        "title": "✨ Wextê nimêja Fajr dest pê kir",
+        "body": "Ji bo Allah rabe û nimêja Fajr di dema xwe de bike.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_fajr_advance": {
-        "title": "⏳ Wextê nimêja Fajr nêzîk e",
-        "body": "Wextê nimêja Fajr: {time}. Demê mayî: {minutes} xulek.",
+        "title": "✨ Fajr piştî {minutes} xulekan",
+        "body": "Piştî {minutes} xulekan · saet {time}. Fajr nêzîk dibe — xwe amade bike û ji bo Allah nimêjê bike.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_entry": {
-        "title": "🕌 Wextê nimêja Dhuhr",
-        "body": "Wextê nimêja Dhuhr dest pê kir.",
+        "title": "☀️ Wextê nimêja Dhuhr dest pê kir",
+        "body": "Karên xwe rawestîne û nimêja Dhuhr ji bo Allah bike.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_advance": {
-        "title": "⏳ Wextê nimêja Dhuhr nêzîk e",
-        "body": "Wextê nimêja Dhuhr: {time}. Demê mayî: {minutes} xulek.",
+        "title": "☀️ Dhuhr piştî {minutes} xulekan",
+        "body": "Piştî {minutes} xulekan · saet {time}. Dhuhr nêzîk dibe — karê xwe rawestîne û ji bo Allah nimêjê bike.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_entry": {
-        "title": "🕌 Wextê nimêja ʿAṣr",
-        "body": "Wextê nimêja ʿAṣr dest pê kir.",
+        "title": "🌤️ Wextê nimêja ʿAṣr dest pê kir",
+        "body": "Nimêja ʿAṣr biparêze û ji bo Allah di dema xwe de bike.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_advance": {
-        "title": "⏳ Wextê nimêja ʿAṣr nêzîk e",
-        "body": "Wextê nimêja ʿAṣr: {time}. Demê mayî: {minutes} xulek.",
+        "title": "🌤️ ʿAṣr piştî {minutes} xulekan",
+        "body": "Piştî {minutes} xulekan · saet {time}. ʿAṣr nêzîk dibe — vê nimêjê biparêze û di dema xwe de ji bo Allah bike.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_entry": {
-        "title": "🕌 Wextê nimêja Maghrib",
-        "body": "Wextê nimêja Maghrib dest pê kir.",
+        "title": "🌥️ Wextê nimêja Maghrib dest pê kir",
+        "body": "Roj ava bû — niha nimêja Maghrib ji bo Allah bê derengî bike.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_advance": {
-        "title": "⏳ Wextê nimêja Maghrib nêzîk e",
-        "body": "Wextê nimêja Maghrib: {time}. Demê mayî: {minutes} xulek.",
+        "title": "🌥️ Maghrib piştî {minutes} xulekan",
+        "body": "Piştî {minutes} xulekan · saet {time}. Maghrib nêzîk dibe — nimêjê bê derengî ji bo Allah bike.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_entry": {
-        "title": "🕌 Wextê nimêja ʿIshāʾ",
-        "body": "Wextê nimêja ʿIshāʾ dest pê kir.",
+        "title": "🌙 Wextê nimêja ʿIshāʾ dest pê kir",
+        "body": "Roja xwe bi nimêja ʿIshāʾ ji bo Allah bi dawî bike.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_advance": {
-        "title": "⏳ Wextê nimêja ʿIshāʾ nêzîk e",
-        "body": "Wextê nimêja ʿIshāʾ: {time}. Demê mayî: {minutes} xulek.",
+        "title": "🌙 ʿIshāʾ piştî {minutes} xulekan",
+        "body": "Piştî {minutes} xulekan · saet {time}. ʿIshāʾ nêzîk dibe — roja xwe bi nimêjê ji bo Allah bi dawî bike.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_tahajjud_entry": {
-        "title": "🌙 Bîranîna nimêja Teheccud",
-        "body": "Ji bo nimêja Teheccud, duʿāʾ û istigfarê demek veqetîne.",
+        "title": "🌙 Bîranîna Teheccudê",
+        "body": "Dawiya şevê ji bo Teheccud, duʿāʾ û istigfarê bi kar bîne.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "daily_dua": {
         "title": "Duʿāʾ ya îro",
-        "body": "Duʿāʾ ya îro di sepanê de bixwîne.",
+        "body": "Bîranîneke kurt ji Qurʾān û Sunnahê — sepanê veke û duʿāʾ ya îro bixwîne.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_recommendation": {
         "title": "Pêşniyara îro",
-        "body": "Pêşniyara îro di sepanê de bibîne.",
+        "body": "Nivîseke ji bo te hatiye hilbijartin — zanîn ji Qurʾān, Sunnah û Āṯāran.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_ayah": {
         "title": "Āyeta îro",
@@ -705,121 +835,147 @@
     },
     "ckb": {
       "prayer_fajr_entry": {
-        "title": "🕌 کاتی نوێژی فەجر",
-        "body": "کاتی نوێژی فەجر هاتووە.",
+        "title": "✨ کاتی نوێژی فەجر هات",
+        "body": "بۆ خوای گەورە هەستە و نوێژی فەجر لە کاتی خۆیدا بکە.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_fajr_advance": {
-        "title": "⏳ کاتی نوێژی فەجر نزیکە",
-        "body": "کاتی نوێژی فەجر: {time}. ماوەی پێش نوێژ: {minutes} خولەک.",
+        "title": "✨ نوێژی فەجر لە دوای {minutes} خولەک",
+        "body": "لە دوای {minutes} خولەک · کاتژمێر {time}. کاتی فەجر نزیکە — ئامادە بە و بۆ خوای گەورە نوێژ بکە.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_entry": {
-        "title": "🕌 کاتی نوێژی نیوەڕۆ",
-        "body": "کاتی نوێژی نیوەڕۆ هاتووە.",
+        "title": "☀️ کاتی نوێژی نیوەڕۆ هات",
+        "body": "کارەکانت بوەستێنە و نوێژی نیوەڕۆ بۆ خوای گەورە بکە.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_advance": {
-        "title": "⏳ کاتی نوێژی نیوەڕۆ نزیکە",
-        "body": "کاتی نوێژی نیوەڕۆ: {time}. ماوەی پێش نوێژ: {minutes} خولەک.",
+        "title": "☀️ نوێژی نیوەڕۆ لە دوای {minutes} خولەک",
+        "body": "لە دوای {minutes} خولەک · کاتژمێر {time}. کاتی نیوەڕۆ نزیکە — کارەکانت بوەستێنە و بۆ خوای گەورە نوێژ بکە.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_entry": {
-        "title": "🕌 کاتی نوێژی عەسر",
-        "body": "کاتی نوێژی عەسر هاتووە.",
+        "title": "🌤️ کاتی نوێژی عەسر هات",
+        "body": "پارێزگاری لە نوێژی عەسر بکە و لە کاتی خۆیدا بۆ خوای گەورە ئەنجامی بدە.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_advance": {
-        "title": "⏳ کاتی نوێژی عەسر نزیکە",
-        "body": "کاتی نوێژی عەسر: {time}. ماوەی پێش نوێژ: {minutes} خولەک.",
+        "title": "🌤️ نوێژی عەسر لە دوای {minutes} خولەک",
+        "body": "لە دوای {minutes} خولەک · کاتژمێر {time}. کاتی عەسر نزیکە — پارێزگاری لەم نوێژە بکە و لە کاتی خۆیدا بیخە بەجێ.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_entry": {
-        "title": "🕌 کاتی نوێژی مەغریب",
-        "body": "کاتی نوێژی مەغریب هاتووە.",
+        "title": "🌥️ کاتی نوێژی مەغریب هات",
+        "body": "خۆر ئاوا بووە — ئێستا نوێژی مەغریب بەبێ دواخستن بۆ خوای گەورە بکە.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_advance": {
-        "title": "⏳ کاتی نوێژی مەغریب نزیکە",
-        "body": "کاتی نوێژی مەغریب: {time}. ماوەی پێش نوێژ: {minutes} خولەک.",
+        "title": "🌥️ نوێژی مەغریب لە دوای {minutes} خولەک",
+        "body": "لە دوای {minutes} خولەک · کاتژمێر {time}. کاتی مەغریب نزیکە — نوێژەکە بەبێ دواخستن بۆ خوای گەورە بکە.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_entry": {
-        "title": "🕌 کاتی نوێژی عیشا",
-        "body": "کاتی نوێژی عیشا هاتووە.",
+        "title": "🌙 کاتی نوێژی عیشا هات",
+        "body": "ڕۆژەکەت بە نوێژی عیشا بۆ خوای گەورە کۆتایی پێ بهێنە.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_advance": {
-        "title": "⏳ کاتی نوێژی عیشا نزیکە",
-        "body": "کاتی نوێژی عیشا: {time}. ماوەی پێش نوێژ: {minutes} خولەک.",
+        "title": "🌙 نوێژی عیشا لە دوای {minutes} خولەک",
+        "body": "لە دوای {minutes} خولەک · کاتژمێر {time}. کاتی عیشا نزیکە — ڕۆژەکەت بە نوێژ بۆ خوای گەورە کۆتایی پێ بهێنە.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_tahajjud_entry": {
-        "title": "🌙 بیرخستنەوەی نوێژی تەهەججود",
-        "body": "کاتێک بۆ نوێژی تەهەججود، دوعا و ئیستیغفار تەرخان بکە.",
+        "title": "🌙 بیرخستنەوەی تەهەججود",
+        "body": "کۆتایی شەو بۆ تەهەججود و دوعا و داواکردنی لێخۆشبوون بەکاربهێنە.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "daily_dua": {
         "title": "دوعای ئەمڕۆ",
-        "body": "دوعای ئەمڕۆ لە ئەپەکەدا بخوێنەوە.",
+        "body": "بیرخستنەوەیەکی کورت لە قورئان و سوننەت — ئەپەکە بکەرەوە و دوعای ئەمڕۆ بخوێنەوە.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_recommendation": {
         "title": "پێشنیاری ئەمڕۆ",
-        "body": "پێشنیاری ئەمڕۆ لە ئەپەکەدا ببینە.",
+        "body": "بابەتێکی هەڵبژێردراو بۆ تۆ — زانیاری لە قورئان و سوننەت و ئاسار.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_ayah": {
         "title": "ئایەتی ئەمڕۆ",
@@ -842,121 +998,147 @@
     },
     "bs": {
       "prayer_fajr_entry": {
-        "title": "🕌 Vrijeme za sabah-namaz",
-        "body": "Nastupilo je vrijeme za sabah-namaz.",
+        "title": "✨ Nastupilo je vrijeme za sabah-namaz",
+        "body": "Ustani radi Allaha i klanjaj sabah-namaz na vrijeme.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_fajr_advance": {
-        "title": "⏳ Sabah-namaz za {minutes} min",
-        "body": "Vrijeme sabah-namaza nastupa u {time}. Preostalo je {minutes} minuta.",
+        "title": "✨ sabah-namaz za {minutes} min",
+        "body": "Za {minutes} min · u {time}. Bliži se sabah — pripremi se i klanjaj radi Allaha.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_entry": {
-        "title": "🕌 Vrijeme za podne-namaz",
-        "body": "Nastupilo je vrijeme za podne-namaz.",
+        "title": "☀️ Nastupilo je vrijeme za podne-namaz",
+        "body": "Prekini svoje obaveze i klanjaj podne-namaz radi Allaha.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_advance": {
-        "title": "⏳ Podne-namaz za {minutes} min",
-        "body": "Vrijeme podne-namaza nastupa u {time}. Preostalo je {minutes} minuta.",
+        "title": "☀️ podne-namaz za {minutes} min",
+        "body": "Za {minutes} min · u {time}. Bliži se podne — prekini obaveze i klanjaj radi Allaha.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_entry": {
-        "title": "🕌 Vrijeme za ikindija-namaz",
-        "body": "Nastupilo je vrijeme za ikindija-namaz.",
+        "title": "🌤️ Nastupilo je vrijeme za ikindija-namaz",
+        "body": "Čuvaj ikindija-namaz i klanjaj ga na vrijeme radi Allaha.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_advance": {
-        "title": "⏳ Ikindija-namaz za {minutes} min",
-        "body": "Vrijeme ikindija-namaza nastupa u {time}. Preostalo je {minutes} minuta.",
+        "title": "🌤️ ikindija-namaz za {minutes} min",
+        "body": "Za {minutes} min · u {time}. Bliži se ikindija — čuvaj ovaj namaz i klanjaj ga na vrijeme radi Allaha.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_entry": {
-        "title": "🕌 Vrijeme za akšam-namaz",
-        "body": "Nastupilo je vrijeme za akšam-namaz.",
+        "title": "🌥️ Nastupilo je vrijeme za akšam-namaz",
+        "body": "Sunce je zašlo — sada bez odgađanja klanjaj akšam-namaz radi Allaha.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_advance": {
-        "title": "⏳ Akšam-namaz za {minutes} min",
-        "body": "Vrijeme akšam-namaza nastupa u {time}. Preostalo je {minutes} minuta.",
+        "title": "🌥️ akšam-namaz za {minutes} min",
+        "body": "Za {minutes} min · u {time}. Bliži se akšam — klanjaj bez odgađanja radi Allaha.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_entry": {
-        "title": "🕌 Vrijeme za jacija-namaz",
-        "body": "Nastupilo je vrijeme za jacija-namaz.",
+        "title": "🌙 Nastupilo je vrijeme za jacija-namaz",
+        "body": "Završi svoj dan jacija-namazom radi Allaha.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_advance": {
-        "title": "⏳ Jacija-namaz za {minutes} min",
-        "body": "Vrijeme jacija-namaza nastupa u {time}. Preostalo je {minutes} minuta.",
+        "title": "🌙 jacija-namaz za {minutes} min",
+        "body": "Za {minutes} min · u {time}. Bliži se jacija — završi dan namazom radi Allaha.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Podsjetnik za tehedždžud",
-        "body": "Odvoji vrijeme za tehedždžud, dovu i istigfar.",
+        "body": "Iskoristi posljednji dio noći za tehedždžud, dovu i istigfar.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "daily_dua": {
         "title": "Dova dana",
-        "body": "Pročitaj današnju dovu u aplikaciji.",
+        "body": "Kratak podsjetnik iz Kur'ana i Sunneta — otvori aplikaciju i pročitaj današnju dovu.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_recommendation": {
         "title": "Danas preporučujemo",
-        "body": "Pogledaj današnju preporuku u aplikaciji.",
+        "body": "Odabrani članak za tebe — znanje iz Kur'ana, Sunneta i predaja prvih generacija.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_ayah": {
         "title": "Ajet dana",
@@ -979,121 +1161,147 @@
     },
     "fr": {
       "prayer_fajr_entry": {
-        "title": "🕌 Heure de la prière de Fajr",
-        "body": "L'heure de la prière de Fajr est arrivée.",
+        "title": "✨ L'heure de Fajr est arrivée",
+        "body": "Lève-toi pour Allah et accomplis la prière de Fajr à l'heure.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_fajr_advance": {
-        "title": "⏳ Fajr dans {minutes} min",
-        "body": "La prière de Fajr commence à {time}. Minutes restantes : {minutes}.",
+        "title": "✨ Fajr dans {minutes} min",
+        "body": "Dans {minutes} min · à {time}. Fajr approche — prépare-toi et accomplis la prière pour Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_entry": {
-        "title": "🕌 Heure de la prière de Dhuhr",
-        "body": "L'heure de la prière de Dhuhr est arrivée.",
+        "title": "☀️ L'heure de Dhuhr est arrivée",
+        "body": "Interromps tes activités et accomplis la prière de Dhuhr pour Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_advance": {
-        "title": "⏳ Dhuhr dans {minutes} min",
-        "body": "La prière de Dhuhr commence à {time}. Minutes restantes : {minutes}.",
+        "title": "☀️ Dhuhr dans {minutes} min",
+        "body": "Dans {minutes} min · à {time}. Dhuhr approche — interromps tes activités et accomplis la prière pour Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_entry": {
-        "title": "🕌 Heure de la prière de ʿAṣr",
-        "body": "L'heure de la prière de ʿAṣr est arrivée.",
+        "title": "🌤️ L'heure de ʿAṣr est arrivée",
+        "body": "Préserve la prière de ʿAṣr et accomplis-la à l'heure pour Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_advance": {
-        "title": "⏳ ʿAṣr dans {minutes} min",
-        "body": "La prière de ʿAṣr commence à {time}. Minutes restantes : {minutes}.",
+        "title": "🌤️ ʿAṣr dans {minutes} min",
+        "body": "Dans {minutes} min · à {time}. ʿAṣr approche — préserve cette prière et accomplis-la à l'heure pour Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_entry": {
-        "title": "🕌 Heure de la prière de Maghrib",
-        "body": "L'heure de la prière de Maghrib est arrivée.",
+        "title": "🌥️ L'heure de Maghrib est arrivée",
+        "body": "Le soleil s'est couché — accomplis maintenant la prière de Maghrib pour Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_advance": {
-        "title": "⏳ Maghrib dans {minutes} min",
-        "body": "La prière de Maghrib commence à {time}. Minutes restantes : {minutes}.",
+        "title": "🌥️ Maghrib dans {minutes} min",
+        "body": "Dans {minutes} min · à {time}. Maghrib approche — accomplis la prière sans tarder pour Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_entry": {
-        "title": "🕌 Heure de la prière de ʿIshāʾ",
-        "body": "L'heure de la prière de ʿIshāʾ est arrivée.",
+        "title": "🌙 L'heure de ʿIshāʾ est arrivée",
+        "body": "Termine ta journée par la prière de ʿIshāʾ pour Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_advance": {
-        "title": "⏳ ʿIshāʾ dans {minutes} min",
-        "body": "La prière de ʿIshāʾ commence à {time}. Minutes restantes : {minutes}.",
+        "title": "🌙 ʿIshāʾ dans {minutes} min",
+        "body": "Dans {minutes} min · à {time}. ʿIshāʾ approche — termine ta journée par la prière pour Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Rappel de Taḥajjud",
-        "body": "Réserve un moment pour Taḥajjud, les invocations et la demande de pardon.",
+        "body": "Profite de la dernière partie de la nuit pour Taḥajjud, les invocations et la demande de pardon.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "daily_dua": {
         "title": "Invocation du jour",
-        "body": "Retrouve l'invocation du jour dans l'application.",
+        "body": "Un bref rappel tiré du Qurʾān et de la Sunnah — ouvre l'application et lis l'invocation du jour.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_recommendation": {
-        "title": "Recommandation du jour",
-        "body": "Découvre la recommandation du jour dans l'application.",
+        "title": "Recommandé aujourd'hui",
+        "body": "Un article sélectionné pour toi — des connaissances tirées du Qurʾān, de la Sunnah et des Āthār.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_ayah": {
         "title": "Verset du jour",
@@ -1116,121 +1324,147 @@
     },
     "es": {
       "prayer_fajr_entry": {
-        "title": "🕌 Hora de la oración de Fajr",
-        "body": "Ha llegado la hora de la oración de Fajr.",
+        "title": "✨ Ha llegado la hora de Fajr",
+        "body": "Levántate por Allah y realiza la oración del Fajr a tiempo.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_fajr_advance": {
-        "title": "⏳ Fajr en {minutes} min",
-        "body": "La oración de Fajr comienza a las {time}. Minutos restantes: {minutes}.",
+        "title": "✨ Fajr en {minutes} min",
+        "body": "En {minutes} min · a las {time}. Se acerca el Fajr — prepárate y realiza la oración por Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "✨",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_entry": {
-        "title": "🕌 Hora de la oración de Dhuhr",
-        "body": "Ha llegado la hora de la oración de Dhuhr.",
+        "title": "☀️ Ha llegado la hora de Dhuhr",
+        "body": "Interrumpe tus actividades y realiza la oración del Dhuhr por Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_dhuhr_advance": {
-        "title": "⏳ Dhuhr en {minutes} min",
-        "body": "La oración de Dhuhr comienza a las {time}. Minutos restantes: {minutes}.",
+        "title": "☀️ Dhuhr en {minutes} min",
+        "body": "En {minutes} min · a las {time}. Se acerca el Dhuhr — interrumpe tus actividades y realiza la oración por Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "☀️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_entry": {
-        "title": "🕌 Hora de la oración de ʿAṣr",
-        "body": "Ha llegado la hora de la oración de ʿAṣr.",
+        "title": "🌤️ Ha llegado la hora de ʿAṣr",
+        "body": "Cuida la oración del ʿAṣr y realízala a tiempo por Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_asr_advance": {
-        "title": "⏳ ʿAṣr en {minutes} min",
-        "body": "La oración de ʿAṣr comienza a las {time}. Minutos restantes: {minutes}.",
+        "title": "🌤️ ʿAṣr en {minutes} min",
+        "body": "En {minutes} min · a las {time}. Se acerca el ʿAṣr — cuida esta oración y realízala a tiempo por Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌤️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_entry": {
-        "title": "🕌 Hora de la oración de Maghrib",
-        "body": "Ha llegado la hora de la oración de Maghrib.",
+        "title": "🌥️ Ha llegado la hora de Maghrib",
+        "body": "El sol se ha puesto — realiza ahora la oración del Maghrib por Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_maghrib_advance": {
-        "title": "⏳ Maghrib en {minutes} min",
-        "body": "La oración de Maghrib comienza a las {time}. Minutos restantes: {minutes}.",
+        "title": "🌥️ Maghrib en {minutes} min",
+        "body": "En {minutes} min · a las {time}. Se acerca el Maghrib — realiza la oración sin demora por Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌥️",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_entry": {
-        "title": "🕌 Hora de la oración de ʿIshāʾ",
-        "body": "Ha llegado la hora de la oración de ʿIshāʾ.",
+        "title": "🌙 Ha llegado la hora de ʿIshāʾ",
+        "body": "Termina tu día con la oración del ʿIshāʾ por Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_isha_advance": {
-        "title": "⏳ ʿIshāʾ en {minutes} min",
-        "body": "La oración de ʿIshāʾ comienza a las {time}. Minutos restantes: {minutes}.",
+        "title": "🌙 ʿIshāʾ en {minutes} min",
+        "body": "En {minutes} min · a las {time}. Se acerca el ʿIshāʾ — termina tu día con la oración por Allah.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "prayer_tahajjud_entry": {
         "title": "🌙 Recordatorio de Taḥajjud",
-        "body": "Dedica un momento a Taḥajjud, a las súplicas y a pedir perdón.",
+        "body": "Aprovecha la última parte de la noche para Taḥajjud, las súplicas y pedir perdón.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": false
+        "reviewScope": "exact_production_German_semantic_parity",
+        "requiresRuntimeContentVerification": false,
+        "productionGermanEmoji": "🌙",
+        "productionCopySource": "cloudflare/prayer-push-copy.js"
       },
       "daily_dua": {
         "title": "Súplica del día",
-        "body": "Lee la súplica de hoy en la aplicación.",
+        "body": "Un breve recordatorio del Qurʾān y la Sunnah — abre la aplicación y lee la súplica de hoy.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_recommendation": {
         "title": "Recomendado hoy",
-        "body": "Descubre la recomendación de hoy en la aplicación.",
+        "body": "Un artículo seleccionado para ti — conocimiento del Qurʾān, la Sunnah y los Āthār.",
         "status": "approved",
         "reviewMethod": "AI_assisted_editorial",
         "reviewDate": "2026-10-22",
-        "reviewScope": "generic_notification_copy_only",
-        "requiresRuntimeContentVerification": true
+        "reviewScope": "configured_German_fallback_semantic_parity",
+        "requiresRuntimeContentVerification": true,
+        "productionGermanEmoji": "",
+        "productionCopySource": "content/admin/daily-push.json"
       },
       "daily_ayah": {
         "title": "Āyah del día",
@@ -1360,5 +1594,30 @@
     "prayerTimesCalculationReviewed": false,
     "pushRoutingApproved": false,
     "deviceDeliveryApproved": false
+  },
+  "productionParity": {
+    "reviewedAt": "2026-10-22",
+    "authorization": "Owner explicitly authorized text localization only; do not alter prayer times, scheduler, queue, recipients or other send settings",
+    "originals": [
+      "cloudflare/prayer-push-copy.js",
+      "cloudflare/prayer-push-scheduler.js",
+      "content/admin/daily-push.json",
+      "cloudflare/daily-push-scheduler.js"
+    ],
+    "emojiRules": {
+      "fajr": "✨",
+      "dhuhr": "☀️",
+      "asr": "🌤️",
+      "maghrib": "🌥️",
+      "isha": "🌙",
+      "tahajjud": "🌙",
+      "daily_dua": "",
+      "daily_recommendation": ""
+    },
+    "reviewedPrayerAndDailyPairs": 117,
+    "otherExistingApprovedPairsUnchanged": 18,
+    "modelReviewOnly": true,
+    "liveDeliveryUnchanged": true,
+    "dynamicDailyPostTitleNotAutomaticallyTranslated": true
   }
 }
