@@ -48,6 +48,30 @@ function translateDynamicAdultUI(value){
  if(m)return (catalog.get(m[1])||m[1])+" · "+m[2];
  return null;
 }
+const DE_CALENDAR_MONTHS=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+const DE_CALENDAR_DAYS=["Montag","Dienstag","Mittwoch","Donnerstag","Freitag","Samstag","Sonntag"];
+function trCalendarLabel(value){
+ if(typeof value!=="string"||value.length>85)return null;
+ const full=value.match(/^(Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag), (\d{1,2})\. (Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember) (\d{4})$/);
+ if(full){
+  const year=+full[4],month=DE_CALENDAR_MONTHS.indexOf(full[3]),day=+full[2],d=new Date(Date.UTC(year,month,day));
+  if(d.getUTCFullYear()===year&&d.getUTCMonth()===month&&d.getUTCDate()===day&&
+     DE_CALENDAR_DAYS[(d.getUTCDay()+6)%7]===full[1])
+   return new Intl.DateTimeFormat("tr-TR",{weekday:"long",day:"numeric",month:"long",year:"numeric",timeZone:"UTC"}).format(d);
+ }
+ const short=value.match(/^(Mo|Di|Mi|Do|Fr|Sa|So)\., (\d{1,2})\.(\d{1,2})\.(\d{2})$/);
+ if(short){
+  const day=+short[2],month=+short[3]-1,year=2000+Number(short[4]),d=new Date(Date.UTC(year,month,day));
+  const weekdays=["Mo","Di","Mi","Do","Fr","Sa","So"];
+  if(d.getUTCFullYear()===year&&d.getUTCMonth()===month&&d.getUTCDate()===day&&weekdays[(d.getUTCDay()+6)%7]===short[1])
+   return new Intl.DateTimeFormat("tr-TR",{weekday:"short",day:"2-digit",month:"2-digit",year:"2-digit",timeZone:"UTC"}).format(d);
+ }
+ const hijri=value.match(/^(\d{1,2})\. Dschumada (I|II) (\d{3,4})$/);
+ if(hijri)return hijri[1]+" "+(hijri[2]==="I"?"Cemâziyelevvel":"Cemâziyelâhir")+" "+hijri[3];
+ const clock=value.match(/^(\d{2}):(\d{2}) Uhr$/);
+ if(clock&&+clock[1]<24&&+clock[2]<60)return "saat "+clock[1]+":"+clock[2];
+ return null;
+}
 function translate(value){
  if(typeof value!=="string")return null;
  const v=catalog.get(value);if(v!==undefined)return v;
@@ -70,6 +94,24 @@ function translate(value){
  if(pages)return (catalog.get(pages[1])||pages[1])+" · "+pages[2]+" sayfa";
  const range=value.match(/^Sūrenbereich wechseln, aktuell (\d+)[–-](\d+)$/);
  if(range)return "Sûre aralığını değiştir, şu an "+range[1]+"–"+range[2];
+ const references=value.match(/^Qurʾān · (\d+) Fundstellen$/);
+ if(references)return "Kur'ân · "+references[1]+" kaynak yeri";
+ const prophets=value.match(/^(Aussagen im Qurʾān|Aussagen in authentischer Sunnah) · (\d+)$/);
+ if(prophets)return (catalog.get(prophets[1])||prophets[1])+" · "+prophets[2];
+ const summaries=value.match(/^(\d+) (Aussagen mit Quellen\.|Namen und Zuordnungen\.|Suren mit Arabisch und Lautschrift\.|bekannte Duʿāʾ nach Themen\.|geprüfte Werke und zitierte Gelehrte\.)$/);
+ if(summaries){
+  const patterns={
+   "Aussagen mit Quellen.":n=>n+" kaynaklı ifade",
+   "Namen und Zuordnungen.":n=>n+" isim ve ilişki",
+   "Suren mit Arabisch und Lautschrift.":n=>"Arapça metin ve okunuşuyla "+n+" sûre",
+   "bekannte Duʿāʾ nach Themen.":n=>"Konulara göre "+n+" dua",
+   "geprüfte Werke und zitierte Gelehrte.":n=>n+" incelenmiş eser ve alıntılanan âlim"
+  };
+  return patterns[summaries[2]](summaries[1]);
+ }
+ const openSurah=value.match(/^Sūrah ([\p{L}\p{M}0-9ʿʾ'’ .-]{2,95}) öffnen$/u);
+ if(openSurah)return "Sûre "+openSurah[1]+" aç";
+ const date=trCalendarLabel(value);if(date!==null)return date;
  const open=value.match(/^(.{2,160}) öffnen$/);
  if(open&&catalog.has(open[1])&&!/[<>\u0600-\u06ff]/.test(open[1]))
   return catalog.get(open[1])+" aç";
