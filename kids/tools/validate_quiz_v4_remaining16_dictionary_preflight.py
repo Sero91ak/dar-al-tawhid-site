@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 """Zero-cost, fail-closed audit of exactly sixteen never-recorded V4 quiz texts.
+
+GitHub Actions execution confirms actual 10,099-rule pinned PLS and original voice.
 NEVER sends a request to ElevenLabs or alters live application data.
 """
 from __future__ import annotations
