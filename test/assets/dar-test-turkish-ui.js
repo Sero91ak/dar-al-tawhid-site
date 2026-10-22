@@ -449,6 +449,16 @@ function localizeGermanShortDate(value,language){
  catch(_){return null}
 }
 
+/* Dynamic location UI status: preserve the selected city exactly as given. */
+function localizeSavedLocation(value,language){
+ if(language==="de"||!SUPPORTED.has(language)||value.length>140)return null;
+ const match=value.match(/^Standort gespeichert: ([^\\r\\n<>]{2,90})$/u);
+ if(!match||/[{}]/.test(match[1]))return null;
+ const translated=language==="tr"?
+   (dictionary.get("Standort gespeichert:")||languagePacks.get("tr")?.get("Standort gespeichert:")):
+   languagePacks.get(language)?.get("Standort gespeichert:");
+ return translated?translated+" "+match[1]:null;
+}
 const PROTECTED_SOURCE_QUOTE="„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“";
 function translateExact(value,language="tr"){
  // Source quotation is editorial content, not a localizable interface control.
@@ -469,6 +479,8 @@ function translateExact(value,language="tr"){
     languagePacks.get(language)?.get(statements[1]);
   return head?head+" · "+statements[2]:null;
  }
+ const locationLabel=localizeSavedLocation(value,language);
+ if(locationLabel!==null)return locationLabel;
  const shortDate=localizeGermanShortDate(value,language);
  if(shortDate!==null)return shortDate;
  const metadata=localizeQuranMetadata(value,language);
