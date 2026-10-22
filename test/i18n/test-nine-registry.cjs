@@ -27,7 +27,7 @@ const requiredSource=Object.keys(pack.translations.en);
 const protectedQuote="„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“";
 assert(requiredSource.includes(protectedQuote),"Expected existing quoted source exclusion");
 const uiLabels=requiredSource.filter(k=>k!==protectedQuote);
-assert(uiLabels.length>=473,"Adult UI baseline unexpectedly shortened");
+assert(uiLabels.length>=506,"Adult UI baseline unexpectedly shortened");
 for(const locale of expected){
  assert.equal(pack.names[locale],registry.locales[locale].name,"Wrong locale name: "+locale);
  if(locale==="de")continue;
@@ -49,5 +49,18 @@ for(const locale of expected.filter(x=>x!=="de")){
  assert(pack.translations[locale]["Qurʾān Player"],"Missing player UI: "+locale);
  assert(pack.translations[locale]["Schlaf-Timer"],"Missing playback control: "+locale);
  assert(pack.translations[locale]["Einstellungen"],"Missing settings: "+locale);
+ for(const label of ["Sprache wählen / Dil seçimi","Ort","🔔 Push-Einstellungen öffnen",
+ "Sprache auswählen. Fachtexte nur in geprüften Fassungen.",
+ "Fachbeiträge erscheinen erst nach Prüfung in der gewählten Sprache.",
+ "Fachtexte werden nach Quellen- und Sprachprüfung freigegeben."]){
+  assert(pack.translations[locale][label]?.trim(),"Missing current UI or language guidance: "+locale+" / "+label);
+ }
 }
-console.log("PASS: nine language codes, central registry alignment, 420 shared UI labels, Arabic/Sorani RTL, player controls, source exclusion and zero paid translation requests");
+const setup=fs.readFileSync(path.join(root,"test/assets/dar-setup-hub.js"),"utf8");
+const more=fs.readFileSync(path.join(root,"test/assets/dar-more-v15.js"),"utf8");
+for(const oldPhrase of [
+ "Türkisch und Deutsch auswählen. Fachtexte nur in geprüften Fassungen.",
+ "Türkisch und Deutsch. Fachbeiträge erscheinen erst nach Prüfung in der gewählten Sprache.",
+ "Türkische Inhalte werden nach Quellen- und Sprachprüfung freigegeben."
+]) assert(!(setup+more).includes(oldPhrase),"Outdated German/Turkish-only language claim in UI");
+console.log("PASS: nine language codes, central registry alignment, 506 shared UI labels, updated UI guidance, RTL, player controls, protected sources and zero paid translation requests");
