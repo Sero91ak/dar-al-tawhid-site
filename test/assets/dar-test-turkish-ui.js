@@ -372,6 +372,31 @@ function localizeNumericUI(value,language){
  return null;
 }
 
+
+/* Structured Quran-player METADATA only: count, classification and collection
+ * size. Do not alter Arabic verses, translation bodies, surah names or citations.
+ */
+const QURAN_META_LABELS={"tr":["âyet","sûre","Mekkî","Medenî"],"en":["verse","surah","Meccan","Medinan"],"ar":["آية","سورة","مكية","مدنية"],"ku":["ayet","sûre","Mekkî","Medînî"],"ckb":["ئایەت","سوورەت","مەککی","مەدەنی"],"bs":["ajet","sura","mekanska","medinska"],"fr":["verset","sourate","mecquois","médinois"],"es":["aleya","sura","mequí","medinés"]};
+function localizeQuranMetadata(value,language){
+ const labels=QURAN_META_LABELS[language];
+ if(!labels||language==="de")return null;
+ const loc=INTL_LOCALE[language]||"de-DE";
+ const fmt=raw=>{try{return new Intl.NumberFormat(loc,{useGrouping:false}).format(Number(raw))}catch(_){return raw}};
+ const word=(name,n)=>{
+  if(language==="en"||language==="fr"||language==="es")return name+(n===1?"":"s");
+  if(language==="ar"&&n>=3&&n<=10)return name==="آية"?"آيات":"سور";
+  if(language==="bs")return name==="ajet"?(n===1?"ajet":n>=2&&n<=4?"ajeta":"ajeta"):(n===1?"sura":"sura");
+  return name;
+ };
+ const period=value.match(/^([0-9]{1,4}) Āyāt · (Mekkanisch|Medinensisch)$/);
+ if(period)return fmt(period[1])+" "+word(labels[0],Number(period[1]))+" · "+
+   (period[2]==="Mekkanisch"?labels[2]:labels[3]);
+ const collection=value.match(/^([0-9]{1,4}) Sūren · ([0-9]{1,6}) Āyāt$/);
+ if(collection)return fmt(collection[1])+" "+word(labels[1],Number(collection[1]))+
+   " · "+fmt(collection[2])+" "+word(labels[0],Number(collection[2]));
+ return null;
+}
+
 const PROTECTED_SOURCE_QUOTE="„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“";
 function translateExact(value,language="tr"){
  // Source quotation is editorial content, not a localizable interface control.
@@ -392,6 +417,8 @@ function translateExact(value,language="tr"){
     languagePacks.get(language)?.get(statements[1]);
   return head?head+" · "+statements[2]:null;
  }
+ const metadata=localizeQuranMetadata(value,language);
+ if(metadata!==null)return metadata;
  const numericUI=localizeNumericUI(value,language);
  if(numericUI!==null)return numericUI;
  if(language!=="tr")return languagePacks.get(language)?.get(value)??localizeGermanCalendarLabel(value,language);
