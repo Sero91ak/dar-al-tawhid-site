@@ -51,4 +51,4 @@ assert.equal(nodes[0].nodeValue,"Startseite","German return must be lossless");
 const here=fs.readFileSync(path.join(__dirname,"../assets/dar-test-seven-languages-loader.js"),"utf8");
 assert(!here.includes("api.openai.com"),"Client must never use paid translation API");
 assert(here.includes("/test/i18n/adult-ui-locales-seven.json"),"Require fixed static same-origin locale pack");
-console.log("PASS: 9 languages in 3 language selectors, +JSON.stringify(countByLocale)+", DE restoration, source protection and RTL");
+console.log("PASS: 9 languages in 3 language selectors, "+JSON.stringify(countByLocale)+", DE restoration, source protection and RTL");
