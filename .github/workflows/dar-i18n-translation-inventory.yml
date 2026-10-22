@@ -63,6 +63,8 @@ jobs:
           node desktop-preview/i18n-core-v1/test-secure-app-locale-endpoint.cjs
           node desktop-preview/i18n-core-v1/test-push-copy-nine-languages.cjs
           node desktop-preview/i18n-core-v1/test-push-production-emoji-parity.cjs
+          node desktop-preview/i18n-core-v1/test-live-push-i18n-bridge.cjs
+          node desktop-preview/i18n-core-v1/test-onesignal-live-language-bridge.cjs
           node desktop-preview/i18n-core-v1/test-push-test-preview.cjs
           node desktop-preview/i18n-core-v1/audit-push-i18n.cjs
           node desktop-preview/i18n-core-v1/dry-run-push-nine-languages.cjs
