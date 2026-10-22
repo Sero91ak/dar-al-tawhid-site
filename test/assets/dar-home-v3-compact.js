@@ -3,6 +3,16 @@
    Never patch native visitors, iOS, other routes or the original live hero. */
 (function(){
 "use strict";
+/* Reuse the shared, merged PR #1395 language picker; no second list on Home. */
+if(!window.DARAdultLanguagePickerV1&&!window.__DAR_LANGUAGE_PICKER_LOADING){
+ window.__DAR_LANGUAGE_PICKER_LOADING=true;
+ const script=document.createElement("script");
+ script.src="/assets/i18n/adult-language-picker-v1.js?v=20261022-01";
+ script.async=true;
+ script.onerror=()=>{window.__DAR_LANGUAGE_PICKER_LOADING=false};
+ (document.head||document.documentElement).appendChild(script);
+}
+
 
 /* Shared adult TEST language runtime. No production, Kids, API or paid model access. */
 if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(location.pathname)
@@ -38,12 +48,16 @@ const LANGUAGE_CHOICES=[["de","Deutsch"],["tr","Türkçe"],["en","English"],["ar
 const LANGUAGE_CODES=new Set(LANGUAGE_CHOICES.map(x=>x[0]));
 function currentLanguage(){try{return LANGUAGE_CODES.has(localStorage.getItem(LANGUAGE_KEY))?localStorage.getItem(LANGUAGE_KEY):"de"}catch(_){return"de"}}
 function syncLanguageButtons(){
- document.querySelectorAll("#dv3Home [data-dv3-locale]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.dv3Locale===currentLanguage())));
-}
-function setLanguage(code){
- if(!LANGUAGE_CODES.has(code))return;
- try{localStorage.setItem(LANGUAGE_KEY,code)}catch(_){}
- syncLanguageButtons();window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:code}}));
+ const btn=document.querySelector("#dv3HeaderActions [data-dv3-open-language]");
+ if(!btn)return;
+ const code=window.DARAdultLanguagePickerV1?.read?.()||currentLanguage();
+ const label=LANGUAGE_CHOICES.find(item=>item[0]===code)?.[1]||"Deutsch";
+ const caption=window.DarTestTurkishUI?.translateValue?.("Sprache auswählen",code)||"Sprache auswählen";
+ const el=btn.querySelector("[data-dv3-language-label]");
+ if(el&&el.textContent!==label)el.textContent=label;
+ btn.lang=code;
+ btn.setAttribute("aria-label",caption+": "+label);
+ btn.setAttribute("title",caption);
 }
 
 const icon=(name)=>'<img src="/test/assets/dar-3d-icons/'+name+'.png" loading="lazy" alt="" decoding="async">';
@@ -59,9 +73,7 @@ const more=LINKS.slice(4).map((x,i)=>'<button class="dv3-more-link" type="button
 const swatches=THEMES.map(([k,v])=>'<button type="button" data-dv3-theme="'+k+'" aria-pressed="false"><span class="dv3-color dv3-color--'+k+'"></span>'+esc(v)+'</button>').join("");
 return '<div id="dv3Home" class="dv3-home" data-v3-version="3.1">'+
   '<div class="dv3-hometitle"><div><small>WILLKOMMEN IM DĀR</small><h2>Startseite</h2></div><button class="dv3-accountlink" type="button" data-dv3-nav="account" aria-label="Konto öffnen oder registrieren">'+icon("lock")+'<span>Konto / Registrieren</span><b>→</b></button></div>'+
-  '<div class="dv3-language" role="group" aria-label="Sprache wählen / Dil seçimi"><span>Sprache / Dil</span>'+
- LANGUAGE_CHOICES.map(([code,label])=>'<button type="button" data-dv3-locale="'+code+'" aria-pressed="'+(currentLanguage()===code)+'">'+label+'</button>').join('')+
- '</div>'+
+
   '<div id="dv3Weather" class="dv3-weather" role="status" aria-live="polite">Wetterdaten werden geladen …</div>'+
   '<div class="dv3-search-box"><label class="dv3-search-label" for="homeSearchInput"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7"/><path d="m16 16 5 5"/></svg></label><input id="homeSearchInput" type="search" autocomplete="off" enterkeyhint="search" placeholder="Suche Wissen, Beiträge, Bücher, Gelehrte …" aria-label="Beiträge, Gelehrte und Bücher suchen"><button type="button" id="dv3SearchClear" aria-label="Suche löschen" hidden>×</button></div>'+
   '<button type="button" class="dv3-tawhid" data-dv3-nav="tawhid-guide"><span class="dv3-ornament" aria-hidden="true"></span><span class="dv3-kicker">GRUNDLAGEN DES GLAUBENS</span><strong>Tawḥīd &amp; ʿAqīdah</strong><span class="dv3-description">Allah allein anbeten. Die Glaubensgrundlagen nach Qurʾān, Sunnah und dem Verständnis der Salaf.</span><span class="dv3-tawhid-footer">Bedeutung, Belege &amp; Quellen entdecken <b>→</b></span></button>'+
@@ -88,9 +100,15 @@ function ensureTopControls(){
  const row=document.querySelector(".top-shell .header-row--brand-only");if(!row)return;
  if(!row.querySelector("#dv3HeaderActions")){
   const el=document.createElement("div");el.id="dv3HeaderActions";el.className="dv3-top-actions";
-  el.innerHTML='<button type="button" class="dv3-tool" data-dv3-theme-open aria-label="Erscheinungsbild wechseln" title="Farbwelt">◐</button><button type="button" class="dv3-tool" data-dv3-nav="settings" data-dv3-value="notifications" aria-label="Benachrichtigungen einstellen" title="Benachrichtigungen"><img src="/test/assets/dar-3d-icons/bell.png" alt=""></button><button type="button" class="dv3-tool" data-dv3-nav="settings" aria-label="Einstellungen öffnen" title="Einstellungen"><img src="/test/assets/dar-3d-icons/settings.png" alt=""></button>';
+  el.innerHTML='<button type="button" class="dv3-tool dv3-header-language" data-dv3-open-language data-dar-no-translate="picker" aria-haspopup="dialog"><span class="dv3-header-lang-globe" aria-hidden="true">◎</span><span data-dv3-language-label dir="auto">Deutsch</span></button><button type="button" class="dv3-tool" data-dv3-theme-open aria-label="Erscheinungsbild wechseln" title="Farbwelt">◐</button><button type="button" class="dv3-tool" data-dv3-nav="settings" data-dv3-value="notifications" aria-label="Benachrichtigungen einstellen" title="Benachrichtigungen"><img src="/test/assets/dar-3d-icons/bell.png" alt=""></button><button type="button" class="dv3-tool" data-dv3-nav="settings" aria-label="Einstellungen öffnen" title="Einstellungen"><img src="/test/assets/dar-3d-icons/settings.png" alt=""></button>';
   row.appendChild(el);
  }
+ if(!document.getElementById("dv3-header-language-style")){
+  const style=document.createElement("style");style.id="dv3-header-language-style";
+  style.textContent="#dv3HeaderActions [data-dv3-open-language]{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:5px;min-width:45px;max-width:135px;min-height:42px;padding:7px 10px;border-radius:999px;border:1px solid rgba(185,154,93,.5);font:650 12px/1.2 system-ui,-apple-system,sans-serif;white-space:nowrap;overflow:hidden;cursor:pointer;color:inherit;background:color-mix(in srgb,var(--dsh-panel,#fff) 82%,transparent)}#dv3HeaderActions [data-dv3-open-language] [data-dv3-language-label]{min-width:0;overflow:hidden;text-overflow:ellipsis}#dv3HeaderActions [data-dv3-open-language]:focus-visible{outline:2px solid #ba9a57;outline-offset:2px}@media(max-width:390px){#dv3HeaderActions [data-dv3-open-language]{max-width:92px;padding-inline:6px;font-size:11px}}";
+  (document.head||document.documentElement).appendChild(style);
+ }
+ syncLanguageButtons();
  const k=row.querySelector(".brand-kicker-row small");
  if(k&&k.textContent!=="BEITRÄGE NACH QURʾĀN · SUNNAH · AṮĀR")k.textContent="BEITRÄGE NACH QURʾĀN · SUNNAH · AṮĀR";
  const main=row.querySelector(".brand-main"),title=main?.querySelector(".brand-title-refined");
@@ -189,9 +207,14 @@ function queue(){
  if(scheduled)return;scheduled=true;requestAnimationFrame(()=>{scheduled=false;try{sync()}catch(e){console.warn("DAR test home v3:",e)}});
 }
 document.addEventListener("click",function(e){
- const button=e.target.closest?.("[data-dv3-locale],[data-dv3-nav],[data-dv3-theme-open],[data-dv3-theme],[data-dv3-close],#dv3SearchClear");
+ const button=e.target.closest?.("[data-dv3-open-language],[data-dv3-nav],[data-dv3-theme-open],[data-dv3-theme],[data-dv3-close],#dv3SearchClear");
  if(!button||!/^\/test(?:\/|$)/.test(location.pathname))return;
- if(button.hasAttribute("data-dv3-locale")){e.preventDefault();e.stopPropagation();setLanguage(button.dataset.dv3Locale);return;}
+ if(button.hasAttribute("data-dv3-open-language")){
+  e.preventDefault();e.stopPropagation();
+  if(window.DARAdultLanguagePickerV1?.open)window.DARAdultLanguagePickerV1.open("quick",button);
+  else nativeNav("more");
+  return;
+ }
  if(button.hasAttribute("data-dv3-nav")){
   e.preventDefault();e.stopPropagation();nativeNav(button.dataset.dv3Nav,button.dataset.dv3Value);return;
  }
