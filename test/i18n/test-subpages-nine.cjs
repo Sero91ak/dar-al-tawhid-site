@@ -34,7 +34,9 @@ const bySection={
  player_error:["Sūrah-Verzeichnis unvollständig","Keine Audio-Dateien für diesen Rezitator",
                "Wiedergabe konnte nicht gestartet werden.","Player-Optionen",
                "Synchron zur Rezitation","15 Sekunden vor","Sleep-Timer"],
- nav_more:["Mitteilungen","App-Update erforderlich","Nachweise","Sammlungen","Grundlagen"]
+ nav_more:["Mitteilungen","App-Update erforderlich","Nachweise","Sammlungen","Grundlagen"],
+ expanded_study:["DĀR AL TAWḤĪD Einrichtung","Schnellsuche im Wissen","Weiterlernen",
+                 "Vollständiger Zugang","Qurʾān · Āyah","Sūrah + Rezitator","Optionen"]
 };
 for(const code of codes){
  const strings=pack.translations[code];
@@ -54,4 +56,4 @@ for(const token of ["[data-canonical-content]","[class*='source-quote']","[class
  assert(source.includes(token),"Protected source/bridge guard missing: "+token);
 }
 console.log("PASS: "+codes.length+" target locales, "+Object.keys(bySection).length+
- " functional UI categories, 786+ labels and protected source/bridge guards");
+ " functional UI categories, 800+ labels and protected source/bridge guards");
