@@ -18,12 +18,17 @@ function existsAtBase(path){
 }
 function main(){
  const branch=run(["branch","--show-current"]);
- assert(branch && branch!=="main" && branch!=="master","Refuse direct main/master rollback");
+ assert(branch==="feature/dar-test-v8-overhaul-20261022",
+  "Refuse rollback outside the protected V8 feature branch");
  const status=run(["status","--porcelain"]);
  assert(!status,"Refuse rollback over uncommitted work; clean worktree required");
  run(["cat-file","-e",BASE+"^{commit}"]);
- const names=run(["diff","--name-only",BASE,"HEAD","--","test/"]).split("\n").filter(Boolean);
- const changed=names.filter(x=>x.startsWith("test/")&&!x.startsWith("test/kids/"));
+ const changed=run(["diff","--name-only",BASE,"HEAD"]).split("\n").filter(Boolean);
+ assert(!changed.some(x=>x.startsWith("test/kids/")||x.startsWith("kids/")||
+    x.startsWith("ios/")),"Unexpected protected native/Kids changes in the V8 feature branch");
+ // Include all V8 branch changes: adult test code, CI workflow adjustments,
+ // metadata, QA files and the rollback helper itself. Never touch main.
+
  console.log("Adult DAR TEST V8 baseline:",BASE);
  console.log("Target branch:",branch);
  for(const path of changed)console.log((existsAtBase(path)?"RESTORE ":"REMOVE  ")+path);
@@ -34,7 +39,8 @@ function main(){
   if(existsAtBase(path))run(["restore","--source="+BASE,"--staged","--worktree","--",path]);
   else run(["rm","-f","--",path]);
  }
- console.log("Adult DAR TEST rollback staged; review diff and run guards before commit/deploy.");
+ console.log("Complete V8 feature-branch rollback staged, including workflow/QA files.");
+ console.log("Review diff, commit the revert and publish only via the gated adult test deployment.");
 }
 if(require.main===module)main();
 module.exports={BASE};
