@@ -57,21 +57,21 @@ html[data-dar-fold-studio="1"] .dsh-detail .dsh-detail-content :is(button,input,
 html[data-dar-fold-studio="1"] .app,html[data-dar-fold-studio="1"] .view,html[data-dar-fold-studio="1"] .more-page{max-width:100%;min-width:0;box-sizing:border-box}
 /* Expanded usable workspace: master-detail with a real reading width.
    The original Fold controller is intentionally left intact. */
-html[data-dar-fold-studio="1"][data-dar-studio-mode="split"] body #appView .dar-fold[data-fold-mode="dual"]{
+html[data-dar-fold-studio="1"][data-dar-studio-capacity="dual"] body #appView .dar-fold[data-fold-mode="dual"]{
   display:grid!important;grid-template-columns:var(--dar-studio-rail,245px) minmax(0,1fr)!important;
   column-gap:var(--dfs-gap)!important;width:100%!important;min-width:0!important;align-items:start!important;
 }
-html[data-dar-fold-studio="1"][data-dar-studio-mode="split"] body #appView .dar-fold[data-fold-mode="dual"]>.dar-fold__rail{
+html[data-dar-fold-studio="1"][data-dar-studio-capacity="dual"] body #appView .dar-fold[data-fold-mode="dual"]>.dar-fold__rail{
   display:block!important;position:sticky!important;top:calc(env(safe-area-inset-top,0px) + 8px)!important;
   max-height:calc(100dvh - env(safe-area-inset-top,0px) - 30px)!important;
   min-width:0!important;max-width:100%!important;width:100%!important;
   overflow-y:auto!important;overscroll-behavior:contain!important;padding:0 10px 20px 0!important;
 }
-html[data-dar-fold-studio="1"][data-dar-studio-mode="split"] body #appView .dar-fold[data-fold-mode="dual"]>.dar-fold__pane{
+html[data-dar-fold-studio="1"][data-dar-studio-capacity="dual"] body #appView .dar-fold[data-fold-mode="dual"]>.dar-fold__pane{
   display:block!important;min-width:0!important;max-width:100%!important;width:100%!important;
   overflow:visible!important;padding:0 0 26px!important;
 }
-html[data-dar-fold-studio="1"][data-dar-studio-mode="split"] body #appView .dar-fold__pane :is(.post-reader,.post-body,.quran-ayah-list,.dua-detail-box,.article){
+html[data-dar-fold-studio="1"][data-dar-studio-capacity="dual"] body #appView .dar-fold__pane :is(.post-reader,.post-body,.quran-ayah-list,.dua-detail-box,.article){
   max-width:min(100%,46rem)!important;margin-inline:auto;
 }
 @media(min-width:700px){
@@ -90,4 +90,83 @@ html[data-dar-fold-studio="1"][data-dar-studio-mode="split"] body #appView .dar-
 }
 @media(prefers-reduced-motion:reduce){
  html[data-dar-fold-studio="1"] .dar-studio-action,html[data-dar-fold-studio="1"] .dar-studio-quick{transition:none!important}
+}
+
+/* Studio-only desktop rail with original 3D imagery. The original #bottomNav
+   remains mounted for original handlers; it is visually retired only in
+   desktop-capacity mode. Compact and mid-size layouts remain untouched. */
+html[data-dar-fold-studio="1"] .dar-studio-side{display:none}
+html[data-dar-fold-studio="1"][data-dar-studio-mode="desktop"] body .app{
+  width:calc(100% - 76px)!important;max-width:calc(100% - 76px)!important;
+  margin-inline-start:76px!important;margin-inline-end:0!important;
+  padding-inline:0!important;box-sizing:border-box!important;
+}
+html[data-dar-fold-studio="1"][data-dar-studio-mode="desktop"] #bottomNav.bottom-nav{
+  opacity:0!important;pointer-events:none!important;visibility:hidden!important;
+}
+html[data-dar-fold-studio="1"][data-dar-studio-mode="desktop"] .dar-studio-side{
+  position:fixed!important;z-index:2140;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:5px;
+  box-sizing:border-box;inset-block-start:max(11px,env(safe-area-inset-top,0px));
+  inset-inline-start:max(7px,env(safe-area-inset-left,0px));
+  width:66px;max-height:calc(100dvh - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px) - 22px);
+  padding:12px 6px;border-radius:24px;overflow-y:auto;overscroll-behavior:contain;
+  border:1px solid var(--dfs-line);background:var(--dfs-panel);
+  box-shadow:0 10px 28px rgba(0,0,0,.12);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+}
+html[data-dar-fold-studio="1"][data-dar-studio-mode="desktop"] .dar-studio-side-logo{
+  font-family:serif;font-size:23px;line-height:1;color:var(--gold2,#c4a36b);
+  margin-bottom:6px;border-bottom:1px solid var(--dfs-line);
+  width:42px;text-align:center;padding:0 0 10px;
+}
+html[data-dar-fold-studio="1"][data-dar-studio-mode="desktop"] .dar-studio-side-btn{
+  appearance:none;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:1px;width:53px;min-height:57px;flex:none;padding:6px 3px;
+  border:1px solid transparent;border-radius:14px;background:transparent;color:var(--dfs-ink);
+  cursor:pointer;font:600 9px/1.2 system-ui,sans-serif;touch-action:manipulation;
+}
+html[data-dar-fold-studio="1"][data-dar-studio-mode="desktop"] .dar-studio-side-btn img{
+  width:30px;height:30px;object-fit:contain;
+}
+html[data-dar-fold-studio="1"][data-dar-studio-mode="desktop"] .dar-studio-side-btn.is-active{
+  border-color:var(--dfs-line);background:color-mix(in srgb,var(--gold2,#c4a36b) 13%,transparent)
+}
+html[data-dar-fold-studio="1"] .dar-studio-side-btn:focus-visible{
+  outline:2px solid var(--gold2,#c4a36b);outline-offset:1px;
+}
+html[data-dar-fold-studio="1"][dir="rtl"][data-dar-studio-mode="desktop"] body .app{
+  margin-inline-start:76px!important;margin-inline-end:0!important;
+}
+html[data-dar-fold-studio="1"] body.is-quran-reader-route .dar-studio-side{
+  opacity:.15;pointer-events:none;
+}
+/* Existing eight themes remain functional: present their original preview
+   buttons as a generous, tappable palette rather than changing theme APIs. */
+html[data-dar-fold-studio="1"] body.is-settings-route .dsh-detail[data-settings-page="appearance"] .theme-switch-panel{
+  padding:clamp(14px,2.5vw,24px)!important;border-radius:22px!important;
+}
+html[data-dar-fold-studio="1"] body.is-settings-route .dsh-detail[data-settings-page="appearance"] .theme-switch-head{
+  margin-bottom:16px;min-width:0;
+}
+html[data-dar-fold-studio="1"] body.is-settings-route .dsh-detail[data-settings-page="appearance"] .theme-switch-row{
+  display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:11px!important;min-width:0!important;width:100%!important;
+  overflow:visible!important;padding:0!important;
+}
+html[data-dar-fold-studio="1"] body.is-settings-route .dsh-detail[data-settings-page="appearance"] .theme-switch-btn{
+  width:100%!important;max-width:none!important;min-width:0!important;min-height:130px!important;
+  padding:12px!important;display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  gap:8px!important;border-radius:17px!important;white-space:normal!important;
+}
+html[data-dar-fold-studio="1"] body.is-settings-route .dsh-detail[data-settings-page="appearance"] .theme-preview{
+  width:100%!important;min-height:72px!important;flex:1 0 72px!important;
+}
+html[data-dar-fold-studio="1"] body.is-settings-route .dsh-detail[data-settings-page="appearance"] .theme-switch-btn.is-active{
+  outline:2px solid var(--gold2,#c4a36b)!important;outline-offset:1px!important;
+}
+@media(min-width:760px){
+ html[data-dar-fold-studio="1"] body.is-settings-route .dsh-detail[data-settings-page="appearance"] .theme-switch-row{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important
+ }
 }
