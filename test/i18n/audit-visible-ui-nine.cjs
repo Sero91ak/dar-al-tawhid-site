@@ -37,17 +37,27 @@ const sourceLike=s=>{
 const selfNames=new Set(Object.values(pack.names));
 function candidateCategory(label,routes){
  if(selfNames.has(label))return "language-name-preserve";
- if(/^\\d|\\d{1,2}:\\d{2}(?:\\s|$)|\\b\\d{1,2}\\.\\d{1,2}\\.\\d{4}\\b/.test(label))
+ if(/^\d|\d{1,2}:\d{2}(?:\s|$)|\b\d{1,2}\.\d{1,2}\.\d{4}\b/.test(label))
   return "dynamic-value-review";
  const onlyContentRoutes=routes.length>0&&routes.every(route=>
   ["books","bibliothek","propheten","quran"].includes(route));
  if(onlyContentRoutes&&(
   /^(?:al[- ]|Al-|as[- ]|aṣ-|at-|aṭ-|Ibn |Abū |Muḥammad |Aḥmad |Kitāb |Ṣaḥīḥ |Tafsīr |Sharḥ |Muṣannaf |Sūrah |ʿAbd |ʿUthmān |Jāmiʿ )/i.test(label)||
   (routes.includes("books")&&label.length>35)|| 
-  (routes.includes("bibliothek")&&/,?\\s*\\d+\\s*(?:Seiten|Veröffentlichungen|\\d{2}\\.\\d{2}\\.\\d{4})/.test(label))||
-  (routes.includes("propheten")&&label.length<35&&!/\\s/.test(label))
+  (routes.includes("bibliothek")&&/,?\s*\d+\s*(?:Seiten|Veröffentlichungen|\d{2}\.\d{2}\.\d{4})/.test(label))||
+  (routes.includes("propheten")&&label.length<35&&!/\s/.test(label))
  ))return "source-or-name-review";
  return "interface-review";
+}
+if(process.argv.includes("--self-test")){
+ const assert=require("node:assert/strict");
+ assert.equal(candidateCategory("Bosanski",["home","more"]),"language-name-preserve");
+ assert.equal(candidateCategory("0 gemerkt",["quiz"]),"dynamic-value-review");
+ assert.equal(candidateCategory("07:24 Uhr",["home"]),"dynamic-value-review");
+ assert.equal(candidateCategory("109 Āyāt · Mekkanisch",["quran"]),"dynamic-value-review");
+ assert.equal(candidateCategory("al-Adab al-Mufrad",["books"]),"source-or-name-review");
+ assert.equal(candidateCategory("Einstellungen öffnen",["settings"]),"interface-review");
+ console.log("PASS: audit classifies language autonyms, numeric status, source titles and app UI separately");
 }
 const targets=Object.keys(registry.locales).filter(code=>code!=="de");
 const unique=new Map();
