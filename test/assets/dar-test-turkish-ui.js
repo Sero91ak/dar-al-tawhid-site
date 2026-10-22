@@ -215,12 +215,8 @@ function localizePostAria(host,sourceTitle,displayTitle,locale){
 }
 
 const HEADLINE_SELECTORS=[
- "#dv3Latest .dv3-post-body b","#dhpPosts .dhp-post-capsule h3","#dhpTodayName",
  ".dua-card h3",".dua-card .dua-title",".duas-card h3",".duas-card .dua-title",
- "[data-dua-id] .dua-title","[data-post-id] .post-title",
- ".qsrc-post-item[data-nav='post'] .qsrc-post-item-title",
- ".post-card[data-nav='post'] h3",
- ".home-v380-post-preview[data-nav='post'] .home-v380-post-title"
+ "[data-dua-id] .dua-title"
 ].join(",");
 function registerTitleData(data){
  if(data?.schemaVersion!==1||data.scope!=="adult-test-visible-titles-only"||
@@ -266,7 +262,7 @@ function updateKnownTitles(locale){
     (candidates.length===1||candidates.every(r=>
        [...SUPPORTED].every(code=>code==="de"||
           r.translations[code]===candidates[0].translations[code]))?candidates[0]:null);
-  if(!record)return;
+  if(!record||record.kind!=="dua")return; // entire Beiträge section excluded
   const desired=locale==="de"?old.source:record.translations?.[locale]||old.source;
   if(element.textContent!==desired)element.textContent=desired;
   old.rendered=desired;
@@ -529,7 +525,10 @@ function translateExact(value,language="tr"){
 }
 
 for(const [de,tr] of ENTRIES){if(backward.has(tr)&&backward.get(tr)!==de)ambiguous.add(tr);else backward.set(tr,de)}
-const EXCLUDE="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],[lang='ar'],[dir='rtl'],[class*='quran-arabic'],[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],[class*='post-content'],[class*='hadith-text'],[class*='qsource-statement'],[class*='source-quote'],[class*='prophets-quote__de'],[class*='verse-translation'],[class*='dua-meaning'],[data-canonical-content],.prophets-quote__de,.prophets-quote__ar,.prophets-quote__meta,.prophets-quote__title,.prophets-detail__sub,.prophets-verse__text,.prophets-verse__arabic";
+const EXCLUDE="script,style,noscript,textarea,pre,code,[contenteditable],[data-dar-no-translate],[lang='ar'],[dir='rtl'],[class*='quran-arabic'],[class*='ayah-ar'],[class*='arabic-text'],[class*='post-body'],[class*='post-content'],[class*='hadith-text'],[class*='qsource-statement'],[class*='source-quote'],[class*='prophets-quote__de'],[class*='verse-translation'],[class*='dua-meaning'],[data-canonical-content],.prophets-quote__de,.prophets-quote__ar,.prophets-quote__meta,.prophets-quote__title,.prophets-detail__sub,.prophets-verse__text,.prophets-verse__arabic,"+
+"[data-post-id],[data-post-body],[data-page=post],[data-view=post],article[data-nav=post],"+
+"[class*=post-card],[class*=post-title],[class*=post-detail],[class*=post-excerpt],"+
+"[class*=post-preview],[class*=sf-post],[class*=feed-post]";
 const originals=new WeakMap(),attributeOriginals=new WeakMap();
 const ATTRS=["placeholder","aria-label","title"];
 function currentLocale(){try{const v=global.localStorage?.getItem(KEY);return SUPPORTED.has(v)?v:"de"}catch(_){return"de"}}
@@ -572,8 +571,12 @@ function transformAttributes(element,locale){
   prior.rendered=desired;
  }
 }
+function isPostRoute(){
+ const route=String(global.location?.hash||"").replace(/^#\/?/,"").split(/[/?]/)[0].toLowerCase();
+ return ["post","posts","recent","beitraege","beiträge","article"].includes(route);
+}
 function apply(root=global.document?.body,locale=currentLocale()){
- if(!root)return 0;
+ if(!root||isPostRoute())return 0;
  const doc=global.document;
  if(root.nodeType===1&&!shouldSkip(root))transformAttributes(root,locale);
  renderHomeWelcome(locale);
