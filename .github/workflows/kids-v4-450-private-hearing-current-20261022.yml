@@ -1,0 +1,77 @@
+name: KIDS V4 450 Current Private Hearing Review (zero TTS credits)
+on:
+  push:
+    branches:
+      - review/kids-v4-nine-prepaid-artifact-replay-20261022
+    paths:
+      - .github/workflows/kids-v4-450-private-hearing-current-20261022.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: kids-v4-450-current-private-hearing-${{ github.ref_name }}
+  cancel-in-progress: false
+jobs:
+  verified-master-hearing:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      ELEVENLABS_API_KEY: ''
+    steps:
+      - name: Read review branch only
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Confirm this is a non-publishing zero-credit audit
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          hold=json.loads(Path('kids/data/quiz-v4-pronunciation-hold.json').read_text())
+          status=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          assert hold['productionPaused'] is True
+          assert hold['paidSpeechAuthorized'] is False
+          assert hold['humanListeningQualityGateReleased'] is False
+          assert status['selectedTotal'] == 450
+          assert status['appReleaseFlagEnabled'] is False
+          assert status['livePublished'] is False
+          assert status['modelId'] == 'eleven_v4'
+          print('PASS: no new TTS, no owner approval invented, no public release')
+          PY
+      - name: Generate the actual offline 450-question hearing package from saved original MP3s
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/build_quiz_v4_all450_master_hearing_review.py
+          python3 kids/tools/build_quiz_v4_all450_master_hearing_review.py
+      - name: Compare generated hearing manifest against actual protected registry
+        run: |
+          python3 - <<'PY'
+          import json, zipfile
+          from pathlib import Path
+          status=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          p=Path('kids/review-only/quiz-v4-450-master-hearing-bundle.zip')
+          with zipfile.ZipFile(p) as z:
+              assert z.testzip() is None
+              m=json.loads(z.read('V4-HOERPRUEFUNG-NACHWEIS.json'))
+              assert m['questions'] == 450
+              assert m['full'] == status['completedQuestionsWithAllFourAudioParts'], (m['full'],status['completedQuestionsWithAllFourAudioParts'])
+              assert m['modelId'] == 'eleven_v4'
+              assert m['masterVoiceId'] == 'DkU7j9uO4ZEtLD2iRZSH'
+              assert m['humanListeningApprovals'] == 0
+              assert m['publicReleaseAllowed'] is False
+              assert m['newElevenLabsCreditsSpent'] == 0
+              assert 'START-HIER.html' in z.namelist()
+              assert len(m['mp3Sha256ByRelativePath']) == len([n for n in z.namelist() if n.endswith('.mp3')])
+              print('PASS: protected current private hearing package, '+str(m['full'])+'/450 exact originals; no new recordings')
+          PY
+      - name: Retain private, offline hearing ZIP only
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: tawhid-kids-v4-450-current-private-hearing-20261022
+          retention-days: 30
+          if-no-files-found: error
+          path: |
+            kids/review-only/quiz-v4-450-master-hearing-bundle.zip
+            kids/review-only/QUIZ-V4-GESAMT-HOERPRUEFUNG-STATUS.md
