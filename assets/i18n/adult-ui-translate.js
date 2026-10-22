@@ -27,6 +27,29 @@ function isPostRoute(){
 }
 function excluded(el){return !!(el&&typeof el.closest==="function"&&el.closest(deny))}
 // Dynamic *interface* labels only. Sources, sūrah names, and religious text stay canonical.
+// Calendar chrome is a formatted UI value, not a verse/date quotation.
+// Reject invalid dates rather than guessing and never change the canonical date.
+const DE_GREGORIAN_MONTHS=["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+function translateTurkishCalendarUI(value){
+ let m=value.match(/^(Montag|Dienstag|Mittwoch|Donnerstag|Freitag|Samstag|Sonntag), (\d{1,2})\. (Januar|Februar|März|April|Mai|Juni|Juli|August|September|Oktober|November|Dezember) (20\d{2})$/);
+ if(m){
+  const index=DE_GREGORIAN_MONTHS.indexOf(m[3]);
+  const date=new Date(Date.UTC(Number(m[4]),index,Number(m[2])));
+  if(date.getUTCDate()!==Number(m[2])||date.getUTCMonth()!==index)return null;
+  return new Intl.DateTimeFormat("tr-TR",{weekday:"long",day:"numeric",month:"long",year:"numeric",timeZone:"UTC"}).format(date);
+ }
+ m=value.match(/^(Mo|Di|Mi|Do|Fr|Sa|So)\., (\d{1,2})\.(\d{1,2})\.(\d{2})$/);
+ if(m){
+  const date=new Date(Date.UTC(2000+Number(m[4]),Number(m[3])-1,Number(m[2])));
+  if(date.getUTCDate()!==Number(m[2])||date.getUTCMonth()!==Number(m[3])-1)return null;
+  return new Intl.DateTimeFormat("tr-TR",{weekday:"short",day:"2-digit",month:"2-digit",year:"2-digit",timeZone:"UTC"}).format(date);
+ }
+ m=value.match(/^(\d{1,2})\. Dschumada (I|II) (\d{3,4})$/);
+ if(m)return m[1]+" "+(m[2]==="I"?"Cemâziyelevvel":"Cemâziyelâhir")+" "+m[3];
+ m=value.match(/^(\d{2}):(\d{2}) Uhr$/);
+ if(m&&Number(m[1])<24&&Number(m[2])<60)return "saat "+m[1]+":"+m[2];
+ return null;
+}
 function translateDynamicAdultUI(value){
  let m=value.match(/^(\d+) (Aussagen mit Quellen\.|Namen und Zuordnungen\.|Suren mit Arabisch und Lautschrift\.|bekannte Duʿāʾ nach Themen\.|geprüfte Werke und zitierte Gelehrte\.)$/);
  if(m){
@@ -76,6 +99,7 @@ function translate(value){
  if(typeof value!=="string")return null;
  const v=catalog.get(value);if(v!==undefined)return v;
  const dynamic=translateDynamicAdultUI(value);if(dynamic!==null)return dynamic;
+ const calendar=translateTurkishCalendarUI(value);if(calendar!==null)return calendar;
  const counts=value.match(/^(\d+)\s+(Funktionen|Ergebnisse|Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt)$/);
  const words={Funktionen:"işlev",Ergebnisse:"sonuç",Veröffentlichungen:"yayın",Beiträge:"yazı",
   Seiten:"sayfa",Themenbereiche:"konu alanı",Aussagen:"söz",gemerkt:"kaydedildi"};
