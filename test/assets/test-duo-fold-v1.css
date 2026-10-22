@@ -1,0 +1,50 @@
+/* DAR TEST only · iPhone Duo / Fold / iPad adaptive polish.
+   Styles apply only when companion stage controller classifies the viewport.
+   Do not override the existing player, reader, scroll, side-nav or themes. */
+html[data-dar-duo-stage] body,
+html[data-dar-duo-stage] #appView { min-width:0; }
+html[data-dar-duo-stage] :is(.dsh-shell,.dsh-group,.dsh-list,.dsh-detail,.dal-pane,.dar-fold__rail,.dar-fold__pane) { min-width:0;box-sizing:border-box; }
+html[data-dar-duo-stage] :is(.dsh-row-title,.dsh-row-sub,.dal-label,.dal-current,.dal-name) { overflow-wrap:anywhere; }
+html[data-dar-duo-stage] :is(.dal-modal,.dsh-shell) { -webkit-text-size-adjust:100%;text-size-adjust:100%; }
+/* Keep the outer, closed display comfortable with one-handed, readable controls. */
+@media (max-width:599.98px) {
+  html[data-dar-duo-stage="compact"] body.is-settings-route .dsh-shell {
+    padding-inline:max(10px,env(safe-area-inset-left,0px),env(safe-area-inset-right,0px));
+  }
+  html[data-dar-duo-stage="compact"] .dal-pane { width:100%;max-height:92dvh;padding-inline:clamp(12px,4vw,22px); }
+  html[data-dar-duo-stage="compact"] .dal-row .dal-label { min-width:0; }
+  html[data-dar-duo-stage="compact"] .dal-current { max-width:40%; }
+}
+/* The partially unfolded or Split View window gets one column, not a squashed desktop. */
+@media (min-width:600px) and (max-width:899.98px) {
+  html[data-dar-duo-stage="medium"] body.is-settings-route .dsh-shell { padding-inline:clamp(12px,2.2vw,24px); }
+  html[data-dar-duo-stage="medium"] body.is-settings-route .dsh-shell > .dsh-group { width:100%; }
+  html[data-dar-duo-stage="medium"] .dal-modal { align-items:center;padding:max(14px,env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) max(14px,env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px)); }
+  html[data-dar-duo-stage="medium"] .dal-pane { border-radius:24px;max-height:85dvh;width:min(100%,620px); }
+}
+/* Only when the existing capacity engine confirms a real two-column viewport. */
+@media (min-width:900px) and (min-height:560px) {
+  html[data-dar-duo-stage="expanded"] body.is-settings-route .dsh-shell {
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    align-items:start;
+    gap:16px clamp(14px,2vw,24px);
+    padding-inline:clamp(16px,2.5vw,32px);
+  }
+  html[data-dar-duo-stage="expanded"] body.is-settings-route .dsh-shell > :is(.dsh-welcome,.dsh-detail,.dsh-note,.dsh-back,.dsh-detail-intro,.settings-one-page) { grid-column:1/-1; }
+  html[data-dar-duo-stage="expanded"] body.is-settings-route .dsh-shell > .dsh-group { min-width:0;margin-bottom:0; }
+  html[data-dar-duo-stage="expanded"] body.is-settings-route .dsh-welcome { padding-block:16px;margin-bottom:4px; }
+  html[data-dar-duo-stage="expanded"] body.is-settings-route .dsh-row { min-height:66px; }
+  html[data-dar-duo-stage="expanded"] body.is-settings-route .dsh-detail-content { max-width:min(100%,900px);margin-inline:auto; }
+  html[data-dar-duo-stage="expanded"] .dal-modal {
+    align-items:center;
+    padding:max(20px,env(safe-area-inset-top,0px)) max(20px,env(safe-area-inset-right,0px)) max(20px,env(safe-area-inset-bottom,0px)) max(20px,env(safe-area-inset-left,0px));
+  }
+  html[data-dar-duo-stage="expanded"] .dal-pane { width:min(100%,660px);max-height:min(86dvh,820px);border-radius:26px; }
+  html[data-dar-duo-stage="expanded"] body.is-settings-route :is(.theme-switch-panel,.app-icon-panel,.app-font-panel) { max-width:100%; }
+  html[data-dar-duo-stage="expanded"] .dar-fold__rail,
+  html[data-dar-duo-stage="expanded"] .dar-fold__pane { scroll-margin-block-start:calc(env(safe-area-inset-top,0px) + 12px); }
+}
+@media (prefers-reduced-motion:reduce) {
+ html[data-dar-duo-stage] :is(.dal-pane,.dsh-row,.dar-fold__rail,.dar-fold__pane) { scroll-behavior:auto; }
+}
