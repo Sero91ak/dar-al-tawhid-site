@@ -43,6 +43,18 @@ for(const code of ["tr","en","ar","ku","ckb","bs","fr","es"]){
  assert.equal(t("„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“",code),null,
   "Never translate an attributed scholarly quote in general UI runtime");
 }
+for(const locale of ["tr","en","ar","ku","ckb","bs","fr","es"]){
+ const city="Bonn";
+ const result=t("Standort gespeichert: "+city,locale);
+ assert(result&&result.endsWith(" "+city)&&!result.startsWith("Standort gespeichert:"),
+  "Saved-location status must translate its prefix but keep the city: "+locale);
+ const nonLatin=t("Standort gespeichert: القاهرة",locale);
+ assert(nonLatin?.endsWith(" القاهرة"),"Non-Latin city names must remain intact: "+locale);
+ assert.equal(t("Standort gespeichert: <script>",locale),null,
+  "HTML should never be interpreted as a dynamic location caption");
+ assert.equal(t("Standort gespeichert: Bad\\nInput",locale),null,
+  "Multiline input must not become a dynamic location caption");
+}
 const metaExamples={
  tr:["109 âyet · Mekkî","114 sûre · 6236 âyet"],
  en:["109 verses · Meccan","114 surahs · 6236 verses"],
