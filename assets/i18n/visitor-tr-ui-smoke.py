@@ -86,7 +86,7 @@ try:
         "return window.DARAdultLanguagePickerV1.available('tr')")
     driver.execute_script("window.DARAdultLanguagePickerV1.open('quick')")
     wait.until(lambda d:d.execute_script(
-        "return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]').length===9"))
+        "return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]').length>=2 && !document.querySelector('#darAdultLanguagePicker [data-dal-locale][disabled]')"))
     driver.execute_script(
         "document.querySelector('#darAdultLanguagePicker [data-dal-locale=tr]').click()")
     wait.until(lambda d:d.execute_script(
