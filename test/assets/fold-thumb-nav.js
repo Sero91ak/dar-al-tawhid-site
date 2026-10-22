@@ -69,10 +69,17 @@
   ];
 
   function readPreference() {
-    /* SETTINGS_NAVI_REMOVED_TEST_ONLY_20261016 */
-    /* Position der Tab-Leiste nicht mehr konfigurierbar.
-       Auch ältere gespeicherte Rechts-/Links-Werte lösen keine Side-Rail aus.
-       Das ursprüngliche #bottomNav mit allen 3D-Icons bleibt unverändert. */
+    /* V8 isolated TEST opt-in: re-enable the existing single navigation node.
+       The legacy baseline remains bottom-only when the V8 switch is off. */
+    if (root.classList.contains("dar-test-duo-v8")) {
+      try {
+        var selected = global.localStorage.getItem("darDuoNavChoiceV8") || "auto";
+        if (VALID[selected]) return selected;
+      } catch (_) {}
+      var bounds = measure();
+      return bounds.width >= 760 && bounds.height >= 560 && !bounds.keyboard
+        ? "left" : "bottom";
+    }
     return "bottom";
   }
 
