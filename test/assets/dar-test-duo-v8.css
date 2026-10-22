@@ -1,0 +1,138 @@
+/* DAR TEST V8 DUO · isolated, opt-out and theme-neutral. Never loaded by / or /pwa. */
+html.dar-test-duo-v8 {
+  --duo-gold: var(--gold2, var(--theme-accent, #c5a46e));
+  --duo-line: color-mix(in srgb, var(--duo-gold) 24%, transparent);
+  --duo-surface: color-mix(in srgb, var(--card, #14241f) 93%, transparent);
+  --duo-ink: var(--text, #f7f2e7);
+  --duo-gutter: clamp(10px, 2.3vw, 25px);
+}
+html.dar-test-duo-v8 body { max-width: 100%; overflow-x: clip; }
+html.dar-test-duo-v8 .app, html.dar-test-duo-v8 #appView { min-width: 0; }
+html.dar-test-duo-v8 #appView :is(.view-head,.qov-header,.dsh-shell,.more-page,.account-panel) { min-width: 0; box-sizing: border-box; }
+html.dar-test-duo-v8 .app-bar { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+html.dar-test-duo-v8 #darDuoV8QuickTools {
+  display: flex; flex: 0 1 auto; align-items: center; justify-content: flex-end;
+  flex-wrap: nowrap; gap: 5px; margin-inline-start: auto; min-width: 0;
+  padding-inline: 3px;
+}
+html.dar-test-duo-v8 .dar-duo-tool {
+  display: inline-grid; place-items: center; appearance: none;
+  min-width: 38px; min-height: 38px; padding: 4px 7px;
+  background: var(--duo-surface); color: var(--duo-ink);
+  border: 1px solid var(--duo-line); border-radius: 13px;
+  box-shadow: 0 5px 17px rgba(0,0,0,.07); font: 700 13px system-ui,sans-serif;
+  cursor: pointer; touch-action: manipulation;
+}
+html.dar-test-duo-v8 .dar-duo-tool svg { width: 19px; height: 19px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+html.dar-test-duo-v8 .dar-duo-tool:focus-visible,
+html.dar-test-duo-v8 .dar-duo-settings-rail button:focus-visible {
+  outline: 2px solid var(--duo-gold); outline-offset: 3px;
+}
+html.dar-test-duo-v8 .dar-duo-tool--reset { min-width: 56px; font-size: 11px; color: var(--duo-gold); }
+html.dar-test-duo-v8 .dsh-shell { --dsh-accent: var(--duo-gold); }
+html.dar-test-duo-v8 .dsh-welcome {
+  padding: clamp(14px,2.5vw,22px);
+  margin-bottom: 14px;
+}
+html.dar-test-duo-v8 .dsh-welcome h2 { font-size: clamp(20px,3.1vw,28px); }
+html.dar-test-duo-v8 .dsh-group { min-width: 0; margin: 0 0 12px; }
+html.dar-test-duo-v8 .dsh-group .dsh-list {
+  border-radius: 17px; background: var(--duo-surface);
+}
+html.dar-test-duo-v8 .dsh-group .dsh-row {
+  min-height: 62px; padding-block: 9px;
+}
+html.dar-test-duo-v8 .dsh-group .dsh-row-icon {
+  width: 39px; height: 39px; flex-basis: 39px;
+}
+html.dar-test-duo-v8 #darDuoV8LanguageSettings {
+  margin: 0 0 12px;
+  padding: 13px 15px;
+  border: 1px solid var(--duo-line); border-radius: 18px;
+  background: var(--duo-surface); color: var(--duo-ink);
+}
+html.dar-test-duo-v8 #darDuoV8LanguageSettings h3 {
+  margin: 0 0 3px; font: 700 15px system-ui,sans-serif;
+}
+html.dar-test-duo-v8 #darDuoV8LanguageSettings p {
+  margin: 0 0 8px; font-size: 12px; line-height: 1.4; opacity: .77;
+}
+html.dar-test-duo-v8 #darDuoV8LanguageSettings .dal-entry {
+  margin: 0!important;
+}
+html.dar-test-duo-v8 #darDuoV8LanguageSettings .dal-row {
+  background: color-mix(in srgb, var(--duo-surface) 85%, transparent);
+  box-shadow: none;
+}
+html.dar-test-duo-v8 #darDuoV8LanguageSettings .dar-duo-languages {
+  margin: 10px 0 0; display: flex; flex-wrap: wrap; gap: 5px;
+  font-size: 11px; opacity: .85; line-height: 1.5;
+}
+html.dar-test-duo-v8 #darDuoV8LanguageSettings .dar-duo-languages span {
+  padding: 3px 7px; border: 1px solid var(--duo-line); border-radius: 9px;
+}
+html.dar-test-duo-v8 .dar-duo-settings-rail {
+  display: none; min-width: 0; align-self: start;
+  border: 1px solid var(--duo-line); border-radius: 19px;
+  background: var(--duo-surface); padding: 10px;
+}
+html.dar-test-duo-v8 .dar-duo-settings-rail strong {
+  display: block; margin: 5px 8px 9px; font-size: 11px;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--duo-gold);
+}
+html.dar-test-duo-v8 .dar-duo-settings-rail button {
+  display: block; width: 100%; text-align: start; padding: 11px 10px;
+  border: 0; border-radius: 11px; background: transparent;
+  color: var(--duo-ink); font: 650 13px system-ui,sans-serif;
+  cursor: pointer;
+}
+html.dar-test-duo-v8 .dar-duo-settings-rail button[aria-current="page"],
+html.dar-test-duo-v8 .dar-duo-settings-rail button:hover {
+  background: color-mix(in srgb, var(--duo-gold) 14%, transparent);
+}
+html.dar-test-duo-v8 .dsh-detail-content,
+html.dar-test-duo-v8 .dsh-detail-intro,
+html.dar-test-duo-v8 .dsh-detail .dsh-note { min-width: 0; }
+html.dar-test-duo-v8 #bottomNav .dar3d-icon { object-fit: contain; }
+@media (min-width: 600px) {
+  html.dar-test-duo-v8 .dsh-home {
+    display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); align-items: start;
+    column-gap: clamp(13px,2vw,22px); row-gap: 5px;
+  }
+  html.dar-test-duo-v8 .dsh-home > .dsh-welcome,
+  html.dar-test-duo-v8 .dsh-home > #darDuoV8LanguageSettings,
+  html.dar-test-duo-v8 .dsh-home > .dsh-note { grid-column: 1 / -1; }
+}
+@media (min-width: 760px) and (min-height: 560px) {
+  html.dar-test-duo-v8[data-dar-duo-viewport="open"] .dsh-detail {
+    display: grid; grid-template-columns: minmax(205px, 29%) minmax(0,1fr);
+    column-gap: clamp(13px,2vw,25px); align-items: start;
+  }
+  html.dar-test-duo-v8[data-dar-duo-viewport="open"] .dsh-detail > .dsh-back { grid-column: 1 / -1; }
+  html.dar-test-duo-v8[data-dar-duo-viewport="open"] .dsh-detail > .dar-duo-settings-rail {
+    display: block; grid-column: 1; grid-row: 2 / span 3;
+    position: sticky; top: calc(10px + env(safe-area-inset-top,0px));
+  }
+  html.dar-test-duo-v8[data-dar-duo-viewport="open"] .dsh-detail > :is(.dsh-detail-intro,.dsh-detail-content,.dsh-note) { grid-column: 2; }
+  html.dar-test-duo-v8[data-dar-duo-viewport="open"] .dar-fold[data-fold-mode="dual"] {
+    display: grid; grid-template-columns: clamp(215px, 33%, 335px) minmax(0,1fr);
+    gap: clamp(12px,1.9vw,20px); width: 100%; min-width: 0;
+  }
+  html.dar-test-duo-v8[data-dar-duo-viewport="open"] .dar-fold[data-fold-mode="dual"] > .dar-fold__pane,
+  html.dar-test-duo-v8[data-dar-duo-viewport="open"] .dar-fold[data-fold-mode="dual"] > .dar-fold__rail {
+    display: block; min-width: 0; max-width: 100%;
+  }
+}
+@media (max-width: 759.98px), (max-height: 559.98px) {
+  html.dar-test-duo-v8 .dar-fold[data-fold-mode="dual"] { grid-template-columns: minmax(0,1fr); }
+}
+@media (max-width: 480px) {
+  html.dar-test-duo-v8 .app-bar { gap: 4px; }
+  html.dar-test-duo-v8 #darDuoV8QuickTools { gap: 3px; }
+  html.dar-test-duo-v8 .dar-duo-tool { min-width: 34px; min-height: 36px; padding: 4px 6px; }
+  html.dar-test-duo-v8 .dar-duo-tool--reset { min-width: 50px; font-size: 10px; }
+  html.dar-test-duo-v8 #darDuoV8LanguageSettings { padding: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html.dar-test-duo-v8 .dar-duo-tool { transition: none!important; }
+}
