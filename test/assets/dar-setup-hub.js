@@ -127,7 +127,7 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
       '    <p class="dar-setup-hub__sub">Standort, Gebetszeiten, Mitteilungen und Widgets</p>',
       "  </header>",
       '  <div class="dar-setup-hub__list">',
-      '    <div class="dar-setup-hub__row dar-setup-hub__locale-row"><div class="dar-setup-hub__copy"><strong>Sprache · Dil</strong><span>Türkisch und Deutsch auswählen. Fachtexte nur in geprüften Fassungen.</span></div><div class="dar-setup-hub__locale-choices" role="group" aria-label="App-Sprache">' + localeButtons() + '</div></div>',
+      '    <div class="dal-entry dal-entry-settings" data-dar-language-entry="settings" data-dar-no-translate="picker"></div>',
       '    <div class="dar-setup-hub__row"><div class="dar-setup-hub__copy"><strong>Standort</strong><span>Für genaue Gebetszeiten und Widgets</span></div><button type="button" class="' +
         locBtnClass +
         '" data-dar-setup-action="location">Öffnen</button></div>',
@@ -297,13 +297,9 @@ if(/^\/test(?:\/|$)/.test(location.pathname)&&!/^\/test\/kids(?:\/|$)/.test(loca
     if(!block) {
       block=document.createElement("section");
       block.id="darSettingsLocaleChoice";
-      block.className="dsh-group dar-test-settings-locale-live";
-      block.setAttribute("aria-label","Sprache und Inhalt / Dil ve içerik");
-      block.innerHTML='<div class="dsh-group-head"><span>Sprache · Dil</span></div>'+
-        '<div class="dsh-list"><div class="dsh-row dar-test-settings-locale-row">'+
-        '<div class="dsh-row-copy"><strong>Sprache auswählen</strong><small>Türkisch und Deutsch. Fachbeiträge erscheinen erst nach Prüfung in der gewählten Sprache.</small></div>'+
-        '<div class="dar-setup-hub__locale-choices" role="group" aria-label="App-Sprache">'+
-        localeButtons()+'</div></div></div>';
+      block.className="dal-entry dal-entry-settings";
+      block.setAttribute("data-dar-language-entry","settings");
+      block.setAttribute("data-dar-no-translate","picker");
       var welcome=home.querySelector(".dsh-welcome");
       if(welcome)welcome.insertAdjacentElement("afterend",block);
       else home.insertBefore(block,home.firstChild);
