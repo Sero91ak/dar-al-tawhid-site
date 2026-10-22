@@ -16,25 +16,20 @@ try:
     wait.until(lambda d:d.execute_script("return !!window.DarTestTurkishUI"))
     wait.until(lambda d:d.execute_script("return window.__DarTestSevenLocalesReady===true"))
     wait.until(lambda d:d.execute_script("return !!window.DARAdultLanguagePickerV1 && window.DARAdultLanguagePickerV1.locales.length===9"))
-    wait.until(lambda d:d.execute_script("return document.querySelectorAll('#dv3Home [data-dv3-locale]').length===9"))
+    wait.until(lambda d:d.execute_script("return !!document.querySelector('#dv3HeaderActions [data-dv3-open-language]')"))
+    assert driver.execute_script("return !document.querySelector('#dv3Home [data-dv3-locale]')"), "Legacy nine-tile Home picker must be absent"
     for lang,direction in locales:
-        driver.execute_script(
-            "document.querySelector('#dv3Home [data-dv3-locale=\"'+arguments[0]+'\"]').click()",
-            lang)
+        driver.execute_script("document.querySelector('#dv3HeaderActions [data-dv3-open-language]').click()")
+        wait.until(lambda d:d.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]').length===9"))
+        button='#darAdultLanguagePicker [data-dal-locale="'+lang+'"]'
+        assert not driver.execute_script("return document.querySelector(arguments[0]).disabled",button), "Unavailable Test locale "+lang
+        driver.execute_script("document.querySelector(arguments[0]).click()",button)
         wait.until(lambda d:d.execute_script(
-            "return localStorage.getItem('darAdultPreferredLocaleV1')===arguments[0]&&"+
-            "document.documentElement.lang===arguments[0]&&document.documentElement.dir===arguments[1]",
+            "return localStorage.getItem('darAdultPreferredLocaleV1')===arguments[0] && "
+            "document.documentElement.lang===arguments[0] && document.documentElement.dir===arguments[1]",
             lang,direction))
-        # Verify a real localized DOM attribute, not only a selected language code.
-        wait.until(lambda d:d.execute_script(
-            "const source='Sprache wählen / Dil seçimi';"
-            "const expected=window.DarTestTurkishUI.translateValue(source,arguments[0])||source;"
-            "return document.querySelector('#dv3Home .dv3-language')?.getAttribute('aria-label')===expected",
-            lang))
-        pressed=driver.execute_script(
-            "return document.querySelectorAll('#dv3Home [data-dv3-locale][aria-pressed=\"true\"]').length")
-        assert pressed==1, "Exactly one pressed locale, got "+str(pressed)
-        print("PASS HOME",lang,"direction",direction,flush=True)
+        assert driver.execute_script("return !document.querySelector('#darAdultLanguagePicker')"), "Picker failed to close"
+        print("PASS HOME CAPSULE",lang,"direction",direction,flush=True)
     for name in ["more","settings"]:
         driver.execute_script("if(typeof navigate==='function')navigate(arguments[0]);else location.hash='#'+arguments[0]",name)
         selector='.dar-more-v15 [data-dal-open="quick"]' if name=="more" else '#darSettingsLocaleChoice [data-dal-open="settings"]'
