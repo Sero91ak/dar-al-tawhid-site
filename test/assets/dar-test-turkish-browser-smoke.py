@@ -28,7 +28,7 @@ try:
     print("PASS German: reverse switch restores original labels",flush=True)
     driver.execute_script("document.querySelector('#dv3Home [data-dv3-locale=tr]').click()")
     driver.execute_script("if(typeof navigate==='function')navigate('more');else location.hash='#more'")
-    w.until(lambda d: d.execute_script("return !!document.querySelector('.dar-more-v15 [data-dm-locale=tr]')"))
+    w.until(lambda d: d.execute_script("return !!document.querySelector('.dar-more-v15 [data-dal-open=quick]')"))
     w.until(lambda d: d.execute_script("return [...document.querySelectorAll('.dar-more-v15 [data-dm-category]')].some(x=>x.textContent.includes('İlim'))"))
     print("PASS Turkish: More category localized",flush=True)
 finally:
