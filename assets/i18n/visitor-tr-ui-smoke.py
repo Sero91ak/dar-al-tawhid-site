@@ -80,7 +80,7 @@ try:
  w.until(lambda d:d.execute_script("""return [...document.querySelectorAll('.dar-more-v15 [data-dm-category]')].some(el=>el.textContent.includes('Wissen'))"""))
  assert driver.execute_script("""return document.querySelector('[data-i18n-count]')?.textContent==='114 Sūren · 6236 Āyāt'"""),"German count should be restored"
  assert driver.execute_script("""return document.querySelector('[data-i18n-open]')?.textContent==='Sūrah Al-Baqarah öffnen'"""),"German Quran control should be restored"
-  print("PASS public modules: reversible German locale",flush=True)
+ print("PASS public modules: reversible German locale",flush=True)
  driver.execute_script("""document.getElementById('appView').innerHTML=
  '<div class="dsh-shell dsh-home"><div class="dsh-welcome">Einstellungen</div></div>'""")
  w.until(lambda d:d.execute_script("return !!document.querySelector('#darAdultLanguageControl')"))
