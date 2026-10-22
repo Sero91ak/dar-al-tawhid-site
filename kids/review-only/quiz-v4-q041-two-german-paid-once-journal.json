@@ -21,6 +21,16 @@
   "schemaVersion": 1,
   "status": "STARTED_WITH_REMOTE_PREPOST_CHECKPOINT",
   "startedAt": "2026-10-22T15:35:57.470501+00:00",
-  "providerRequests": [],
+  "providerRequests": [
+    {
+      "sourceText": "Viel Geld.",
+      "sourceSha256": "c265ab0d6a574a70d90d169bc81cb84320465ce7e9f5a88a34d22c01c6317231",
+      "status": "REQUEST_STARTED_UNCONFIRMED",
+      "startedAt": "2026-10-22T15:36:00.361754+00:00",
+      "modelId": "eleven_v4",
+      "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+      "publicReleaseAllowed": false
+    }
+  ],
   "actualChargesUnknown": true
 }
