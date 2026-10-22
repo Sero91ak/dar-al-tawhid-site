@@ -4,7 +4,8 @@
  * a local PIN is a server identity. No API calls are made without a transport.
  */
 (function(global){"use strict";
- const SUPPORTED=new Set(["de","ar","en","tr","ku","ckb","bs"]);
+ // The catalog remains extensible; editorial availability is separate.
+ const SUPPORTED=new Set(["de","ar","en","tr","ku","ckb","bs","fr","es"]);
  const KEY="darAdultPreferredLocaleV1",STATE="darAdultLocaleSyncV1";
  const read=(s,k)=>{try{return s.getItem(k)}catch(_){return null}};
  const put=(s,k,v)=>{try{s.setItem(k,v);return true}catch(_){return false}};
