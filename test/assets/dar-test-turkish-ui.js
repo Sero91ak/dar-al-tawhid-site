@@ -452,7 +452,7 @@ function localizeGermanShortDate(value,language){
 /* Dynamic location UI status: preserve the selected city exactly as given. */
 function localizeSavedLocation(value,language){
  if(language==="de"||!SUPPORTED.has(language)||value.length>140)return null;
- const match=value.match(/^Standort gespeichert: ([^\\r\\n<>]{2,90})$/u);
+ const match=value.match(/^Standort gespeichert: ([^\r\n<>]{2,90})$/u);
  if(!match||/[{}]/.test(match[1]))return null;
  const translated=language==="tr"?
    (dictionary.get("Standort gespeichert:")||languagePacks.get("tr")?.get("Standort gespeichert:")):
