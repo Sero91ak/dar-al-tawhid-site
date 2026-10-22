@@ -417,3 +417,7 @@ html.dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad.dt-isna
   max-height:40px!important;
  }
 }
+
+/* DAR_ADULT_HEADER_RTL_STABLE_V1: keep the fixed brand/actions physically
+   Sprache → Konto → Farbe even while Arabic/Soranî document body is RTL. */
+#darAdultBrandHeaderV2 .dtbh-row{direction:ltr!important}
