@@ -536,7 +536,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // <script id="darTestHomeHtmlParityV1"> from cached HTML before reinjecting.
   // A bare includes(id) skipped version upgrades, leaving the old visible UI.
   html = html.replace(/<script\b(?=[^>]*\bid=["']darTestHomeHtmlParityV1["'])[^>]*>\s*<\/script>\s*/gi, "");
-  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261022-v56-compact-welcome"></script>';
+  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261022-v57-editorial-separators"></script>';
   html = html.includes("</body>") ? html.replace("</body>", parityScript + "\n</body>") : html + parityScript;
   // DAR_ADULT_TOP_SCROLL_BOUNDARY_V1: every adult Dar Test route uses
   // the real document scroll; clamp downward drags at the top without
