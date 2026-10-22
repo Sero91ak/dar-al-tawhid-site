@@ -433,6 +433,22 @@ function localizeQuranMetadata(value,language){
  return null;
 }
 
+/* Short Gregorian date labels are interface chrome, never manuscript dates.
+ * Reject impossible dates or mismatched weekday labels instead of guessing. */
+function localizeGermanShortDate(value,language){
+ if(!language||language==="de")return null;
+ const parts=value.match(/^(Mo|Di|Mi|Do|Fr|Sa|So)\., ([0-9]{2})\.([0-9]{2})\.([0-9]{2})$/);
+ if(!parts)return null;
+ const day=Number(parts[2]),month=Number(parts[3]),year=2000+Number(parts[4]);
+ const date=new Date(Date.UTC(year,month-1,day));
+ if(date.getUTCDate()!==day||date.getUTCMonth()!==month-1)return null;
+ const germanWeekdays=["So","Mo","Di","Mi","Do","Fr","Sa"];
+ if(germanWeekdays[date.getUTCDay()]!==parts[1])return null;
+ try{return new Intl.DateTimeFormat(INTL_LOCALE[language]||"de-DE",
+  {weekday:"short",day:"2-digit",month:"2-digit",year:"2-digit",timeZone:"UTC"}).format(date)}
+ catch(_){return null}
+}
+
 const PROTECTED_SOURCE_QUOTE="„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“";
 function translateExact(value,language="tr"){
  // Source quotation is editorial content, not a localizable interface control.
@@ -453,6 +469,8 @@ function translateExact(value,language="tr"){
     languagePacks.get(language)?.get(statements[1]);
   return head?head+" · "+statements[2]:null;
  }
+ const shortDate=localizeGermanShortDate(value,language);
+ if(shortDate!==null)return shortDate;
  const metadata=localizeQuranMetadata(value,language);
  if(metadata!==null)return metadata;
  const numericUI=localizeNumericUI(value,language);
