@@ -43,6 +43,14 @@ async function run(){
  assert.deepEqual(requests,["tr","fr","de"]);
  assert.equal(permissions,0);
  assert.equal(subscribes,0);
+ // A native subscription cannot be retagged through a Web SDK user.
+ const nativeUser={OneSignal:os,DAR_IOS_ONESIGNAL_ID:"native-sub",
+  document:doc,localStorage:{getItem(){return "tr"}},
+  addEventListener(){}};
+ vm.runInNewContext(source,{window:nativeUser});
+ const blocked=await nativeUser.DARPushLocaleSync.pushLocale();
+ assert.equal(blocked.reason,"native_sdk_locale_bridge_required");
+ assert.deepEqual(requests,["tr","fr","de"]);
  console.log(JSON.stringify({ok:true,turkishProviderLanguageSynced:true,languageSwitchSynced:true,unsupportedProviderLocaleFailsClosed:true,routes:["visitor","test","public-browser"],promptedForPermissions:false}));
 }
 run().catch(e=>{console.error(e);process.exitCode=1});
