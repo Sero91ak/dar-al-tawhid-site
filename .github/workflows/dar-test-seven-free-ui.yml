@@ -17,6 +17,7 @@ on:
       - 'test/assets/dar-test-turkish-ui.js'
       - 'test/assets/dar-test-seven-languages-loader.js'
       - 'test/assets/dar-home-v3-compact.js'
+      - 'assets/i18n/adult-language-picker-v1.js'
       - 'test/assets/dar-more-v15.js'
       - 'test/assets/dar-setup-hub.js'
       - '.github/workflows/dar-test-seven-free-ui.yml'
@@ -41,6 +42,7 @@ jobs:
           node --check test/assets/dar-test-turkish-ui.js
           node --check test/assets/dar-test-seven-languages-loader.js
           node --check test/assets/dar-home-v3-compact.js
+          node --check assets/i18n/adult-language-picker-v1.js
           node --check test/assets/dar-more-v15.js
           node --check test/assets/dar-setup-hub.js
           node test/assets/dar-test-turkish-ui.test.cjs
@@ -48,6 +50,19 @@ jobs:
           node test/i18n/test-nine-registry.cjs
           node test/i18n/test-nine-dynamic-ui.cjs
           node test/i18n/test-nine-native-bridge.cjs
+          node - <<'NODE'
+          const fs=require('node:fs'),assert=require('node:assert/strict');
+          const more=fs.readFileSync('test/assets/dar-more-v15.js','utf8');
+          const settings=fs.readFileSync('test/assets/dar-setup-hub.js','utf8');
+          const shared=fs.readFileSync('assets/i18n/adult-language-picker-v1.js','utf8');
+          assert(more.includes('data-dar-language-entry="quick"'),'More must use existing shared language capsule');
+          assert(settings.includes('data-dar-language-entry="settings"'),'Settings must use existing shared full-page picker');
+          assert(!more.includes('class="dm-locale" role="group"'),'Legacy More language tiles must not return');
+          assert(!settings.includes('block.className="dsh-group dar-test-settings-locale-live"'),'Legacy Settings language tiles must not return');
+          assert(shared.includes('darAdultPreferredLocaleV1'),'Shared stored language key missing');
+          assert(shared.includes('dar-adult-locale-changed'),'Shared language event missing');
+          console.log('PASS: no duplicate language pickers; PR #1395 selector reused');
+          NODE
           node test/i18n/audit-visible-ui-nine.cjs --self-test
           node test/i18n/test-expanded-headings-seven.cjs
           node test/i18n/test-canonical-visible-titles.cjs
