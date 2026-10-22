@@ -14,15 +14,17 @@ Arbeitszweig: `feat/test-v8-duo-nine-locale-rollback-20261022`
 
 Auf Wunsch `ZURÜCK` **alle Arbeiten dieses V8-Umbaus** einschließlich der späteren Arbeitsschritte stoppen und den V8-Arbeitszweig zum gesicherten Ausgangscommit zurücksetzen (nur nach Prüfung auf gleichzeitige Änderungen, mit SHA-Schutz). Keine manuelle Einzelrücknahme erforderlich. Falls Teile zwischenzeitlich in andere Branches übernommen worden sind, diese separat mit ihren Release-SHAs rückgängig machen, ohne fremde Arbeiten zu löschen. **Nicht eigenständig einen Live-Release auslösen.**
 
-Sechs eingebundene Dateien aktivieren den gesamten globalen Umbau nur in DAR TEST:
+Acht eingebundene Dateien aktivieren den gesamten globalen Umbau nur in DAR TEST:
 - `test/assets/v8-duo-lab-v1.js`
 - `test/assets/v8-duo-lab-v1.css`
+- `test/assets/v8-complete-app-shell-v1.js` (einheitliche Routen- und Seitenleiste)
+- `test/assets/v8-complete-app-shell-v1.css` (V8-Layout für sämtliche Testbereiche)
 - `test/assets/v8-global-shell-v1.js` (gemeinsame Routen-Oberfläche, bestehende Teilen-Buttons und Social-Links bleiben erhalten)
 - `test/assets/v8-global-shell-v1.css` (übergreifende Layout-, Theme-, Karten- und Einstellungsstruktur)
 - `test/assets/v8-home-editorial-20261022.js` (Salam und originalen Quellennachweis wiederverwenden)
 - `test/assets/v8-home-editorial-20261022.css` (kompakte V8-Startseite, alte Sieben-Sprachen-Leiste ausblenden)
 
-Durch Entfernen sämtlicher sechs Referenzen aus `test/index.html` wird der **gesamte neue Umbau** deaktiviert, unabhängig davon, wie viele weitere optische Schritte auf diesem Branch folgen. Für eine vollständige Rücksetzung des isolierten Testzweigs ist der unveränderliche Basis-Commit oben maßgeblich. Ursprüngliche App-Engine, Daten, Inhaltskataloge, Spracheinstellungen, native iOS-Hülle und CSS-Dateien bleiben unverändert.
+Durch Entfernen sämtlicher acht Referenzen aus `test/index.html` wird der **gesamte neue Umbau** deaktiviert, unabhängig davon, wie viele weitere optische Schritte auf diesem Branch folgen. Für eine vollständige Rücksetzung des isolierten Testzweigs ist der unveränderliche Basis-Commit oben maßgeblich. Ursprüngliche App-Engine, Daten, Inhaltskataloge, Spracheinstellungen, native iOS-Hülle und CSS-Dateien bleiben unverändert.
 
 ## Was die erste Fassung tatsächlich tut
 
