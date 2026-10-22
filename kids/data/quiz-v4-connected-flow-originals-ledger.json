@@ -449,7 +449,7 @@
         "kids-quiz-041"
       ],
       "sourceAudioPart": "question",
-      "status": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "status": "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -458,7 +458,10 @@
       "estimatedCreditsNotInvoice": 9.691,
       "actualProviderCredits": null,
       "humanListeningApproved": false,
-      "publicReleaseAllowed": false
+      "publicReleaseAllowed": false,
+      "importedMP3SHA256": "ff71059e6f5605a35da2341e49214e31fca5b1da8f030b0b17ddbe4c231d2889",
+      "providerRequestId": "m73D3oP8MS1jnAbhPEkR",
+      "originalMP3": "/kids/assets/kids-quiz-audio/v4-curated450-review/c265ab0d6a574a70d90d169bc81cb843.mp3"
     },
     {
       "sourceText": "Eine berühmte Familie.",
