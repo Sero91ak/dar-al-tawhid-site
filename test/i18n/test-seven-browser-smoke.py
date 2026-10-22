@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Zero-cost browser QA for one shared seven-language adult DAR TEST UI."""
+"""Zero-cost browser QA for nine adult DAR TEST UI language choices."""
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.support.ui import WebDriverWait
@@ -8,14 +8,14 @@ for flag in ["--headless=new","--no-sandbox","--disable-dev-shm-usage","--disabl
     options.add_argument(flag)
 driver=webdriver.Chrome(options=options)
 locales=[("de","ltr"),("tr","ltr"),("en","ltr"),("ar","rtl"),
-         ("ku","ltr"),("ckb","rtl"),("bs","ltr")]
+         ("ku","ltr"),("ckb","rtl"),("bs","ltr"),("fr","ltr"),("es","ltr")]
 try:
     driver.set_window_size(390,844)
     driver.get("http://127.0.0.1:8765/test/")
     wait=WebDriverWait(driver,40)
     wait.until(lambda d:d.execute_script("return !!window.DarTestTurkishUI"))
     wait.until(lambda d:d.execute_script("return window.__DarTestSevenLocalesReady===true"))
-    wait.until(lambda d:d.execute_script("return document.querySelectorAll('#dv3Home [data-dv3-locale]').length===7"))
+    wait.until(lambda d:d.execute_script("return document.querySelectorAll('#dv3Home [data-dv3-locale]').length===9"))
     for lang,direction in locales:
         driver.execute_script(
             "document.querySelector('#dv3Home [data-dv3-locale=\"'+arguments[0]+'\"]').click()",
@@ -31,8 +31,8 @@ try:
     for name in ["more","settings"]:
         driver.execute_script("if(typeof navigate==='function')navigate(arguments[0]);else location.hash='#'+arguments[0]",name)
         selector='.dar-more-v15 [data-dm-locale]' if name=="more" else '#darSettingsLocaleChoice [data-dar-setup-locale]'
-        wait.until(lambda d:d.execute_script("return document.querySelectorAll(arguments[0]).length===7",selector))
-        print("PASS 7-LANGUAGE SELECTOR",name,flush=True)
+        wait.until(lambda d:d.execute_script("return document.querySelectorAll(arguments[0]).length===9",selector))
+        print("PASS 9-LANGUAGE SELECTOR",name,flush=True)
     driver.execute_script("localStorage.setItem('darAdultPreferredLocaleV1','de');window.dispatchEvent(new CustomEvent('dar-adult-locale-changed',{detail:{locale:'de'}}))")
     wait.until(lambda d:d.execute_script("return document.documentElement.lang==='de'&&document.documentElement.dir==='ltr'"))
     print("PASS LOSSLESS GERMAN RETURN; no external translation API calls",flush=True)
