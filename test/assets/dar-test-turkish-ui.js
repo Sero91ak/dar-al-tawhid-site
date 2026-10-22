@@ -592,7 +592,21 @@ function boot(){
   if(changes.some(x=>x.type==="childList"||x.type==="characterData"||x.type==="attributes"))schedule();
  }).observe(global.document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:ATTRS});
 }
-global.addEventListener("dar-adult-locale-changed",schedule);
+// WKWebView contract: bridge explicit UI selections to native preferences.
+// Native-origin changes use detail.source="native" and must not echo back.
+// Browser/PWA runs unchanged when no iOS message handler is registered.
+function notifyNativeLocale(event){
+ if(event?.detail?.source==="native")return;
+ const code=event?.detail?.locale;
+ if(!SUPPORTED.has(code)||currentLocale()!==code)return;
+ const bridge=global.webkit?.messageHandlers?.darLanguageChanged;
+ if(typeof bridge?.postMessage!=="function")return;
+ try{bridge.postMessage({locale:code})}catch(_){}
+}
+global.addEventListener("dar-adult-locale-changed",event=>{
+ schedule();
+ notifyNativeLocale(event);
+});
 global.addEventListener("storage",e=>{if(e.key===KEY)schedule()});
 global.document.addEventListener("dar:view-rendered",schedule);
 if(global.document.readyState==="loading")global.document.addEventListener("DOMContentLoaded",boot,{once:true});else boot();
