@@ -400,3 +400,20 @@ html.dar-adult-global-brand-ready body.is-home-route .top-shell > .isnad.dt-isna
   border-color:var(--dtbh-muted)!important;
  }
 }
+
+/* DAR_ADULT_HEADER_WORDMARK_NARROW_V2
+ * Preserve the complete Unicode brand name at 320–390px; allow two lines
+ * rather than eliding the final part behind three touch controls. */
+@media(max-width:440px){
+ #darAdultBrandHeaderV2 .dtbh-name{
+  white-space:normal!important;
+  text-overflow:clip!important;
+  overflow:visible!important;
+  word-break:normal!important;
+  overflow-wrap:normal!important;
+  text-wrap:balance!important;
+  line-height:1.05!important;
+  font-size:clamp(13px,4.1vw,18px)!important;
+  max-height:40px!important;
+ }
+}
