@@ -19,7 +19,14 @@ var TEST=/^\/test(?:\/|$)/.test(w.location.pathname)&&!/^\/test\/kids(?:\/|$)/.t
 var modal=null,origin=null,oldOverflow="",scheduled=false;
 var text={
  de:{language:"Sprache",choose:"Sprache wählen",subtitle:"Sprache der Bedienoberfläche",soon:"Demnächst verfügbar",back:"Zurück",close:"Schließen",ready:"Verfügbar",active:"Ausgewählt",note:"Noch nicht freigegebene Sprachfassungen lassen sich nicht aktivieren."},
- tr:{language:"Dil",choose:"Dil seçin",subtitle:"Uygulama arayüzü dili",soon:"Yakında",back:"Geri",close:"Kapat",ready:"Kullanılabilir",active:"Seçili",note:"Henüz hazır olmayan diller seçilemez."}
+ tr:{language:"Dil",choose:"Dil seçin",subtitle:"Uygulama arayüzü dili",soon:"Yakında",back:"Geri",close:"Kapat",ready:"Kullanılabilir",active:"Seçili",note:"Henüz hazır olmayan diller seçilemez."},
+ en:{language:"Language",choose:"Choose language",subtitle:"App interface language",soon:"Coming soon",back:"Back",close:"Close",ready:"Available",active:"Selected",note:"Languages not yet released cannot be selected."},
+ ar:{language:"اللغة",choose:"اختر اللغة",subtitle:"لغة واجهة التطبيق",soon:"متاحة قريبًا",back:"رجوع",close:"إغلاق",ready:"متاحة",active:"المحددة",note:"لا يمكن اختيار اللغات التي لم تُنشر بعد."},
+ ku:{language:"Ziman",choose:"Ziman hilbijêre",subtitle:"Zimanê navrûya sepanê",soon:"Di demeke nêz de",back:"Vegere",close:"Bigire",ready:"Berdest",active:"Hilbijartî",note:"Zimanên ku hîn nehatine weşandin nayên hilbijartin."},
+ ckb:{language:"زمان",choose:"زمان هەڵبژێرە",subtitle:"زمانی ڕووکارەکەی ئەپ",soon:"بەم زووانە",back:"گەڕانەوە",close:"داخستن",ready:"بەردەستە",active:"هەڵبژێردراوە",note:"زمانەکانی هێشتا بڵاونەکراونەتەوە ناتوانرێن هەڵبژێردرێن."},
+ bs:{language:"Jezik",choose:"Odaberite jezik",subtitle:"Jezik aplikacije",soon:"Uskoro dostupno",back:"Nazad",close:"Zatvori",ready:"Dostupno",active:"Odabrano",note:"Jezici koji još nisu dostupni ne mogu se odabrati."},
+ fr:{language:"Langue",choose:"Choisir la langue",subtitle:"Langue de l’interface",soon:"Bientôt disponible",back:"Retour",close:"Fermer",ready:"Disponible",active:"Sélectionnée",note:"Les langues non publiées ne peuvent pas être sélectionnées."},
+ es:{language:"Idioma",choose:"Elegir idioma",subtitle:"Idioma de la interfaz",soon:"Próximamente",back:"Volver",close:"Cerrar",ready:"Disponible",active:"Seleccionado",note:"Los idiomas aún no disponibles no se pueden seleccionar."}
 };
 function t(){return text[read()]||text.de}
 function item(code){return ITEMS.find(function(x){return x.code===code})}
