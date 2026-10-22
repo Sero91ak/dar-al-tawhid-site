@@ -410,7 +410,7 @@
         "kids-quiz-031"
       ],
       "sourceAudioPart": "question",
-      "status": "RESERVED_UNSPENT_DO_NOT_RETRY_UNTIL_RECONCILED",
+      "status": "DIRECT_MASTER_V4_DICTIONARY_MP3_IMPORTED_REVIEW_ONLY",
       "provider": "ElevenLabs",
       "modelId": "eleven_v4",
       "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
@@ -419,7 +419,10 @@
       "estimatedCreditsNotInvoice": 19.381,
       "actualProviderCredits": null,
       "humanListeningApproved": false,
-      "publicReleaseAllowed": false
+      "publicReleaseAllowed": false,
+      "importedMP3SHA256": "9ead00d3669e9192f145fae713f1982730cb1ad78d2c613f47a729e04c28ce9b",
+      "providerRequestId": "Zq8Y6MQFWfTJr4QmP0uU",
+      "originalMP3": "/kids/assets/kids-quiz-audio/v4-curated450-review/3a6cb0a42b1c41a9f1439cde7ae0b5ac.mp3"
     },
     {
       "sourceText": "Taqwā.",
