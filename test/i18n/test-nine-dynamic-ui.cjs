@@ -48,7 +48,11 @@ const metaExamples={
  en:["109 verses · Meccan","114 surahs · 6236 verses"],
  ar:["١٠٩ آية · مكية","١١٤ سورة · ٦٢٣٦ آية"],
  ku:["109 ayet · Mekkî","114 sûre · 6236 ayet"],
- ckb:["109 ئایەت · مەککی","114 سوورەت · 6236 ئایەت"],
+ ckb:[
+  new Intl.NumberFormat("ckb-IQ-u-ca-gregory",{useGrouping:false}).format(109)+" ئایەت · مەککی",
+  new Intl.NumberFormat("ckb-IQ-u-ca-gregory",{useGrouping:false}).format(114)+" سوورەت · "+
+   new Intl.NumberFormat("ckb-IQ-u-ca-gregory",{useGrouping:false}).format(6236)+" ئایەت"
+ ],
  bs:["109 ajeta · mekanska","114 sura · 6236 ajeta"],
  fr:["109 versets · mecquois","114 sourates · 6236 versets"],
  es:["109 aleyas · mequí","114 suras · 6236 aleyas"]
