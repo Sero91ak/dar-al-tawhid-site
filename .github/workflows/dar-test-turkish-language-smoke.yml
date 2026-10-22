@@ -32,7 +32,7 @@ jobs:
           node - <<'NODE'
           const fs=require('fs');
           const paths=['test/assets/dar-more-v15.js','test/assets/dar-setup-hub.js','test/assets/dar-home-v3-compact.js','assets/i18n/adult-language-picker-v1.js'];
-          for(const path of paths){const code=fs.readFileSync(path,'utf8');new Function(code); if(!code.includes('darAdultPreferredLocaleV1')&&!code.includes('darAdultPreferredLocaleV1'.toUpperCase())&&!code.includes('darAdultPreferredLocaleV1'))throw Error('Missing shared locale key in '+path);}
+          for(const path of paths){const code=fs.readFileSync(path,'utf8');new Function(code); if(!code.includes('darAdultPreferredLocaleV1'))throw Error('Missing shared locale key in '+path);}
           const more=fs.readFileSync(paths[0],'utf8');
           if(!more.includes('localeChoices()+')||!more.includes('data-dar-language-entry'))throw Error('More language picker mount missing');
           const setup=fs.readFileSync(paths[1],'utf8');
@@ -64,7 +64,7 @@ jobs:
             WebDriverWait(driver,35).until(lambda d: d.execute_script("return !!document.querySelector('#dv3Home [data-dv3-locale=tr]')"))
             home=driver.execute_script("return [...document.querySelectorAll('#dv3Home [data-dv3-locale]')].map(x=>x.textContent)")
             print('Home control:',home,flush=True)
-            assert home==['Deutsch','Türkçe']
+            assert home==['Deutsch','Türkçe','English','العربية','Kurmancî','سۆرانی','Bosanski']
             driver.execute_script("document.querySelector('#dv3Home [data-dv3-locale=tr]').click()")
             assert driver.execute_script("return localStorage.getItem('darAdultPreferredLocaleV1')")=='tr'
             driver.execute_script("if(typeof navigate==='function')navigate('more');else location.hash='#more'")
