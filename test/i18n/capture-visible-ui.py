@@ -8,6 +8,7 @@ that change user data, quiz answers or content.
 import collections, json, os, re, time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 
 ROUTES=["home","recent","quran","books","bibliothek","scholars","duas",
@@ -51,7 +52,14 @@ return result;
 options=Options()
 for arg in ["--headless=new","--no-sandbox","--disable-dev-shm-usage","--disable-gpu"]:
  options.add_argument(arg)
-driver=webdriver.Chrome(options=options)
+chrome_binary=os.environ.get("DAR_CHROME_BINARY")
+if chrome_binary:
+ options.binary_location=chrome_binary
+chromedriver_path=os.environ.get("DAR_CHROMEDRIVER")
+service=Service(executable_path=chromedriver_path) if chromedriver_path else None
+driver=webdriver.Chrome(service=service,options=options)
+driver.set_page_load_timeout(45)
+driver.set_script_timeout(45)
 seen=collections.defaultdict(lambda:{"count":0,"routes":set(),"kinds":set()})
 error=[]
 try:
