@@ -40,6 +40,7 @@ const sourceOnlyRoutes=new Set(["books","bibliothek","propheten","quran"]);
 const preservedBrands=new Set(["Instagram","Telegram","WhatsApp","by Serhat Abu Malik"]);
 const editorialFragments=new Set([", authentischer","und den","Wissen aus"]);
 const runtimeShortDate=/^(?:Mo|Di|Mi|Do|Fr|Sa|So)\., [0-9]{2}\.[0-9]{2}\.[0-9]{2}$/;
+const dynamicCityStatus=/^Standort gespeichert: [^<>\\r\\n]{2,90}$/;
 const terminologyReview=new Set([
  "Adab und Tazkiyah","Āthār und Ḥadīṯ","Fiqh und Uṣūl",
  "ʿAqīdah und Sunnah","ʿAqīdah und Widerlegungen",
@@ -51,6 +52,7 @@ function candidateCategory(label,routes){
  if(preservedBrands.has(label))return "brand-or-signature-preserve";
  if(editorialFragments.has(label))return "editorial-fragment-review";
  if(runtimeShortDate.test(label))return "dynamic-runtime-covered";
+ if(dynamicCityStatus.test(label))return "dynamic-runtime-covered";
  if(runtimeNumeric.test(label))return "dynamic-runtime-covered";
  if(/^\d|\d{1,2}:\d{2}(?:\s|$)|\b\d{1,2}\.\d{1,2}\.\d{4}\b/.test(label))
   return "dynamic-value-review";
@@ -75,6 +77,8 @@ if(process.argv.includes("--self-test")){
  assert.equal(candidateCategory("Sūrenbereich wechseln, aktuell 01–20",["quran"]),"dynamic-runtime-covered");
  assert.equal(candidateCategory("Duʿāʾ 09:00 · Empfehlung 12:00",["prayer"]),"dynamic-runtime-covered");
  assert.equal(candidateCategory("Do., 22.10.26",["home"]),"dynamic-runtime-covered");
+ assert.equal(candidateCategory("Standort gespeichert: Bonn",["settings"]),"dynamic-runtime-covered");
+ assert.equal(candidateCategory("Standort gespeichert: <script>",["settings"]),"interface-review");
  assert.equal(candidateCategory("Instagram",["home"]),"brand-or-signature-preserve");
  assert.equal(candidateCategory("by Serhat Abu Malik",["home"]),"brand-or-signature-preserve");
  assert.equal(candidateCategory("und den",["home"]),"editorial-fragment-review");
