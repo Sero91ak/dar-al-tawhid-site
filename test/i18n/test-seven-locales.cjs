@@ -7,11 +7,15 @@ const expected=["de","tr","en","ar","ku","ckb","bs","fr","es"];
 assert.deepEqual(locales.availableLocales,expected);
 assert.equal(locales.noPaidProvider,true);
 assert.deepEqual(Object.keys(locales.translations).sort(),expected.filter(x=>x!=="de").sort());
+const germanSourceKey="„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“";
+for(const locale of ["fr","es"]){
+ assert.equal(locales.translations[locale][germanSourceKey],undefined,"Religious quote needs separate review");
+}
 const countByLocale={};
 for(const locale of expected.slice(1)){
  const dict=locales.translations[locale];
  const values=Object.keys(dict);
- assert(values.length>=(["fr","es"].includes(locale)?200:160),locale+" lacks basic UI vocabulary");
+ assert(values.length>=420,locale+" lacks basic UI vocabulary");
  assert(values.every(x=>x.trim()&&typeof dict[x]==="string"&&dict[x].trim()));
  for(const label of ["Startseite","Mehr","Gebetszeiten","Einstellungen","Suche","Konto","Suchen","Heute","Qurʾān","Duʿāʾ"]){
   assert(dict[label],locale+" missing "+label);
