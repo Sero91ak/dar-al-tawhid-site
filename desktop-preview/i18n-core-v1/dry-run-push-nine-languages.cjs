@@ -2,7 +2,7 @@
 "use strict";
 /**
  * Complete DĀR adult synthetic 9-language push proof (no network).
- * Content/approvals are TEST FIXTURES ONLY. Real manuscripts stay draft.
+ * Device/dispatch are TEST FIXTURES ONLY. Generic manuscripts are editorially reviewed but NOT a live delivery approval.
  *
  * Five prayer-entry + fifteen (5 prayers x 5/10/15 min) advance
  * + one Taḥajjud + four daily/article = 25 event configurations.
@@ -51,8 +51,9 @@ for(const scenario of cases){
  const copies=Object.fromEntries(languages.map(code=>{
   const draft=manuscript.copy[code]?.[scenario.key];
   assert.ok(draft,code+":"+scenario.key);
-  assert.equal(draft.status,"draft","Never rely on draft as approved");
-  // Simulated reviewed copy exists *only in memory for an offline fixture*.
+  assert.equal(draft.status,"approved","Generic notification text must pass delegated editorial review");
+  // Synthetic revision binding exists ONLY in memory for offline fixture; the
+  // real daily/post content still requires verified sourceHash, opt-in and link.
   return [code,{title:draft.title,body:draft.body,status:"approved",
    sourceHash:"test-only-revision"}];
  }));
@@ -89,7 +90,8 @@ assert.equal(count,225);
 assert.equal(allIds.size,225);
 process.stdout.write(JSON.stringify({
  dryRun:true,networkRequests:0,liveNotificationsSent:0,
- reviewedContentInMemoryFixtureOnly:true,storedManuscriptsRemainDraft:true,
+ syntheticSourceRevisionInMemoryOnly:true,storedGenericCopyEditoriallyApproved:true,
+ productionDispatchAuthorized:false,
  languageCount:languages.length,distinctTestEventConfigurations:cases.length,
  syntheticDeliveries:count,idempotencyKeys:allIds.size,success:true,
  coverage:perEvent
