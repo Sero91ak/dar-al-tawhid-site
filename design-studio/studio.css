@@ -172,3 +172,20 @@ h3 {font-size:12px}
   .inspector {top:55px;width:min(85vw,320px)}
 }
 @media (prefers-reduced-motion:reduce) {*{scroll-behavior:auto!important;transition:none!important}}
+
+/* Compact touch-editing controls */
+.mobile-side-toggle,.close-inspector {display:none}
+@media(max-width:850px){
+  .close-inspector {display:block;position:absolute;top:16px;right:13px}
+  .inspector-top {position:relative;padding-right:50px}
+}
+@media(max-width:600px){
+  .mobile-side-toggle {display:block;flex:none}
+  .sidebar {position:fixed;left:0;top:55px;bottom:0;width:min(82vw,300px);z-index:1200;box-shadow:16px 0 50px #000a}
+  .sidebar.mobile-visible {display:flex}
+  .canvas-toolbar {height:auto;min-height:102px;padding-top:9px;padding-bottom:9px}
+  .field-device label,.device-dims,.toolbar-separator,.mode-hint {display:none}
+  .field-device select {width:168px}
+  .canvas-toolbar .compact-field select {max-width:118px}
+  .viewport {padding:14px 10px 40px}
+}
