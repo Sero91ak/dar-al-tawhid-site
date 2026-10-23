@@ -1,8 +1,8 @@
 /* DĀR AL TAWḤĪD · owner-only standalone Social Redaktion.
  * No browser PIN, public fallback, or authentication via client-side JS.
- * Requires two PRIVATE Cloudflare Worker secrets:
- *   EDITORIAL_OWNER_PASSWORD, EDITORIAL_OWNER_SESSION_SECRET.
- * Missing either secret => fail closed (503); never leak the protected HTML.
+ * Reuses the already established private Academy owner credentials when available.
+ * Optional overrides: EDITORIAL_OWNER_PASSWORD and EDITORIAL_OWNER_SESSION_SECRET.
+ * Missing credentials still fail closed: never leak private editorial assets.
  */
 const ROOT="/redaktion", COOKIE="dar_editorial_owner_v1", TTL=6*60*60;
 function route(path){
@@ -63,8 +63,10 @@ function redirect(cookie){
 }
 export async function editorialOwnerAccess(request,url,env){
  if(!route(url.pathname))return null;
- const password=String(env&&env.EDITORIAL_OWNER_PASSWORD||"");
- const signing=String(env&&env.EDITORIAL_OWNER_SESSION_SECRET||"");
+ // Reuse the pre-existing server-side Academy owner credentials when available.
+ // Editorial sessions remain separate and expire after six hours.
+ const password=String(env&&(env.EDITORIAL_OWNER_PASSWORD||env.ACADEMY_OWNER_PASSWORD)||"");
+ const signing=String(env&&(env.EDITORIAL_OWNER_SESSION_SECRET||env.ACADEMY_OWNER_SESSION_SECRET)||"");
  if(!password||!signing||signing.length<32)return loginPage("Privater Serverzugang ist noch nicht eingerichtet.",503);
  const p=url.pathname;
  if(p===ROOT+"/login"&&request.method==="POST"){
