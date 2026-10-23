@@ -1,0 +1,75 @@
+name: KIDS V4 Halal Reuse Correct Owner Native Fuṣḥā (zero new credits)
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths: ['.github/workflows/kids-v4-halal-native-approved-sentence-reuse-20261023.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-owner-correct-Halal-native-isolated-source
+  cancel-in-progress: false
+jobs:
+  native-halal-join-private:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      ELEVENLABS_API_KEY: ''
+    steps:
+      - name: Checkout protected original native V4 and rejected German original
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Join approved native حَلَال without any provider synthesis
+        run: |
+          set -euo pipefail
+          git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+          git merge --ff-only FETCH_HEAD
+          python3 -m py_compile kids/tools/assemble_owner_halal_native_prior_approved_20261023.py
+          if ! command -v ffmpeg >/dev/null 2>&1; then
+            sudo apt-get -qq update
+            sudo apt-get -qq install -y ffmpeg
+          fi
+          python3 kids/tools/assemble_owner_halal_native_prior_approved_20261023.py
+          python3 - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          p=Path('kids/review-only/kids-v4-halal-native-arabic-reused-composite-audit-20261023.json')
+          j=json.loads(p.read_text())
+          assert j['sourceText']=='Nahrung, die Halal und gut ist.'
+          assert j['spokenNativeArabicInserted']=='حَلَال'
+          assert j['nativeOriginalSHA256']=='559a6fe9e1ed4d132b8001376758f3b101c86c39f788f331af999a23eac32ee5'
+          assert j['newElevenLabsProviderCalls']==j['newCreditsSpent']==0
+          assert j['publicReleaseAllowed'] is False and not j['liveAppUpdated']
+          assert not j['newFullSentenceOwnerListeningApproved']
+          f=Path(j['assembledMP3'].lstrip('/'))
+          assert hashlib.sha256(f.read_bytes()).hexdigest()==j['assembledMP3SHA256']
+          print('KIDS_OWNER_APPROVED_HALAL_NATIVE_IN_GERMAN_QA_PASS_PRIVATE',j['assembledMP3'])
+          PY
+      - name: Commit audition only, never touch 450 protected production/release registry
+        run: |
+          set -euo pipefail
+          git config user.name kids-halal-native-fusha-owner-reuse
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/kids-v4-halal-native-arabic-reused-composite-audit-20261023.json
+          git add kids/assets/kids-quiz-audio/v4-halal-native-joined-owner-review-20261023/
+          git diff --cached --quiet && exit 0
+          git commit -m 'review(kids V4): actual owner-approved native Halal reuse in full German clip without new credits [skip ci]'
+          for try in 1 2 3; do
+            if git push origin HEAD:review/kids-v4-nine-prepaid-artifact-replay-20261022; then exit 0; fi
+            git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Keep original native Arabic reuse hearing pack
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-owner-native-halal-original-in-german-sentence-review
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            kids/review-only/kids-v4-halal-native-arabic-reused-composite-audit-20261023.json
+            kids/assets/kids-quiz-audio/v4-halal-native-joined-owner-review-20261023/
