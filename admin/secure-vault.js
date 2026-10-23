@@ -19,8 +19,8 @@
   const base64ToBytes = value => Uint8Array.from(atob(value), c => c.charCodeAt(0));
   const available = () => !!(window.isSecureContext && window.crypto && crypto.subtle && crypto.getRandomValues);
   const record = () => {
-    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "null"); }
-    catch (_) { return null; }
+    try { const raw = localStorage.getItem(STORAGE_KEY); return raw === null ? null : JSON.parse(raw); }
+    catch (_) { return { version: -1 }; }
   };
   const refresh = () => {
     if (typeof window.renderShell === "function" && window.getAdminCurrentTab?.() === "kennwoerter") window.renderShell();
@@ -30,13 +30,13 @@
     if (!root) return;
     root.querySelectorAll('input[type="password"],input[data-secret-field]').forEach(el => { el.value = ""; });
   };
-  function lock() {
+  function lock(redraw = true) {
     if (session.timeout) clearTimeout(session.timeout);
     session.timeout = null;
     session.key = null;
     session.entries = null;
     clearSensitiveInputs();
-    refresh();
+    if (redraw) refresh();
   }
   function touch() {
     if (session.timeout) clearTimeout(session.timeout);
@@ -66,7 +66,7 @@
   }
   async function create(passphrase) {
     if (!available()) throw new Error("Dieser Browser unterstützt keinen sicheren Tresor.");
-    if (record()) throw new Error("Ein Tresor besteht bereits.");
+    if (record()) throw new Error("Ein Tresor besteht bereits oder der gespeicherte Datensatz ist beschädigt. Keine Überschreibung.");
     if (passphrase.length < 14) throw new Error("Mindestens 14 Zeichen für das Tresor-Passwort.");
     const salt = crypto.getRandomValues(new Uint8Array(16));
     const key = await derive(passphrase, salt, ITERATIONS);
