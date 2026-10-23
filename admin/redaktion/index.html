@@ -7,7 +7,7 @@
 <meta name="theme-color" content="#08120f">
 <title>DĀR ADMIN · Redaktionsatelier</title>
 <!-- Standalone visits always enter through the existing DAR Admin app. This is navigation, not server-side auth. -->
-<script>if(window.self===window.top)window.location.replace("/admin/?tab=social");</script>
+<script>if(window.self===window.top){window.location.replace("/admin/?tab=social")}else{document.documentElement.classList.add("dar-admin-embedded")}</script>
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="stylesheet" href="/admin/redaktion/workspace.css?v=1">
