@@ -349,6 +349,23 @@ function translateExact(value,language="tr"){
     languagePacks.get(language)?.get(statements[1]);
   return head?head+" · "+statements[2]:null;
  }
+ const dynamicLabels={
+  Veröffentlichungen:{ar:"منشورات",ku:"weşan",ckb:"بڵاوکراوە",bs:"publikacija",fr:"publications",es:"publicaciones"},
+  Beiträge:{ar:"مقالات",ku:"nivîs",ckb:"بابەت",bs:"tekstova",fr:"articles",es:"artículos"},
+  Seiten:{ar:"صفحات",ku:"rûpel",ckb:"لاپەڕە",bs:"stranice",fr:"pages",es:"páginas"},
+  Themenbereiche:{ar:"مجالات",ku:"qadên mijaran",ckb:"بوارەکانی بابەت",bs:"tematske oblasti",fr:"thèmes",es:"áreas temáticas"},
+  Aussagen:{ar:"أقوال",ku:"gotin",ckb:"وتەکان",bs:"izjave",fr:"paroles",es:"afirmaciones"},
+  gemerkt:{ar:"محفوظ",ku:"tomarkirî",ckb:"هەڵگیراو",bs:"sačuvano",fr:"enregistré",es:"guardado"},
+  Funktionen:{ar:"وظائف",ku:"fonksiyon",ckb:"کارەکان",bs:"funkcija",fr:"fonctions",es:"funciones"},
+  Ergebnisse:{ar:"نتائج",ku:"encam",ckb:"ئەنجام",bs:"rezultata",fr:"résultats",es:"resultados"}
+ };
+ const dynamic=value.match(/^(\d+)\s+(Veröffentlichungen|Beiträge|Seiten|Themenbereiche|Aussagen|gemerkt|Funktionen|Ergebnisse)$/);
+ if(dynamic&&dynamicLabels[dynamic[2]]?.[language])return dynamic[1]+" "+dynamicLabels[dynamic[2]][language];
+ const editorialLabels={
+  "AKTUELLE VERÖFFENTLICHUNG":{tr:"GÜNCEL YAYIN",en:"CURRENT PUBLICATION",ar:"المنشور الحالي",ku:"WEŞANA NIHAÎ",ckb:"بڵاوکراوەی ئێستا",bs:"TRENUTNA PUBLIKACIJA",fr:"PUBLICATION ACTUELLE",es:"PUBLICACIÓN ACTUAL"},
+  "WEITERER BEITRAG":{tr:"DİĞER YAZI",en:"ANOTHER ARTICLE",ar:"مقال آخر",ku:"NIVÎSEKE DIN",ckb:"بابەتێکی تر",bs:"DRUGI TEKST",fr:"AUTRE ARTICLE",es:"OTRO ARTÍCULO"}
+ };
+ if(editorialLabels[value]?.[language])return editorialLabels[value][language];
  if(language!=="tr")return languagePacks.get(language)?.get(value)??localizeGermanCalendarLabel(value,language);
  const known=dictionary.get(value);
  if(known!==undefined)return known;

@@ -43,9 +43,8 @@ AREA_MARKERS = {
     "scholars": "body.is-scholars-route .scholars-index",
 }
 PROTECTED_SELECTORS = (
-    "[data-canonical-content], .post-body, .post-content, .quran-ayah, "
-    ".quran-arabic, .ayah-ar, .hadith-text, .source-quote, .post-card, .post-row, .article, "
-    ".prophets-quote__ar, .prophets-verse__text, [data-dar-no-translate]:not([data-dar-no-translate='picker'])"
+    "[data-canonical-content], .quran-ayah, .quran-arabic, .ayah-ar, "
+    ".hadith-text, .source-quote, .prophets-quote__ar, .prophets-verse__text"
 )
 UI_EXCLUSION_SELECTOR = (
     "[data-canonical-content], .post-body, .post-content, .quran-ayah, "
