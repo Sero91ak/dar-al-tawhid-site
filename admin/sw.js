@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'dar-admin-stats-v77';
+const CACHE_VERSION = 'dar-admin-stats-v78';
 /* live-verify: dar-admin-single-mode-v67 */
 const SHELL = [
   '/admin/manifest.json',
@@ -45,18 +45,25 @@ self.addEventListener('fetch', (event) => {
   if (request.mode === 'navigate') return;
   if (url.pathname === '/admin/' || url.pathname === '/admin/index.html') return;
 
-  event.respondWith(
-    caches.match(request).then((cached) => {
-      const network = fetch(request).then((response) => {
-        if (response && response.ok && response.status === 200 && response.type === 'basic') {
-          const copy = response.clone();
-          caches.open(CACHE_VERSION).then((cache) => cache.put(request, copy)).catch(() => null);
-        }
-        return response;
-      }).catch(() => cached);
-      return cached || network;
-    })
-  );
+  // App code is network-first. Never prefer an outdated CSS/JS bundle while online.
+  // Navigations, HTML, API-like responses and private data are NEVER cached here.
+  const staticAsset=/\.(?:js|css|png|jpg|jpeg|webp|svg|ico|woff2?)$/i.test(url.pathname);
+  if(!staticAsset)return;
+  event.respondWith((async()=>{
+    let cached=await caches.match(request);
+    try{
+      const response=await fetch(request,{cache:"no-store"});
+      if(response&&response.ok&&response.status===200&&response.type==="basic"){
+        const copy=response.clone();
+        const cache=await caches.open(CACHE_VERSION);
+        await cache.put(request,copy).catch(()=>{});
+      }
+      return response;
+    }catch(error){
+      if(cached)return cached;
+      throw error;
+    }
+  })());
 });
 
 self.addEventListener('notificationclick', (event) => {
