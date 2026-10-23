@@ -1,0 +1,32 @@
+name: KIDS V4 Halal Terminology – Read Only Source Audit
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths: ['.github/workflows/kids-v4-halal-owner-terminology-audit-20261023.yml']
+permissions:
+  contents: read
+jobs:
+  inspect-owner-terms:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: List relevant original quiz and V4 text fields, no changes
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          P=Path('kids')
+          for filename in ['data/quiz-kids-curated-450-review.json','data/quiz-v4-curated-450-production-review.json']:
+              x=json.loads((P/filename).read_text())
+              print('STRUCT',filename,[(k,type(v).__name__) for k,v in x.items() if k!='items' and k!='recipes'][:35])
+              arr=x.get('recipes',x.get('items',[]))
+              print('ITEMS',filename,len(arr))
+              for i,z in enumerate(arr):
+                  txt=json.dumps(z,ensure_ascii=False)
+                  if 'halāl' in txt.lower() or 'halāle' in txt.lower():
+                      if (z.get('questionId') in ('kids-quiz-109','kids-quiz-131','kids-quiz-271') or 
+                          z.get('id') in ('kids-quiz-109','kids-quiz-131','kids-quiz-271')):
+                          print('TARGET',filename,json.dumps(z,ensure_ascii=False)[:5500])
+              print('PENDING',filename,[z for z in x.get('pendingAudioFragments',[]) if any(v in json.dumps(z,ensure_ascii=False) for v in ('Halāle','Halālen','halāle','Halāl'))][:15])
+          PY
