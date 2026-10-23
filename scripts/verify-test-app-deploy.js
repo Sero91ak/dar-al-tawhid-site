@@ -446,7 +446,7 @@ async function fetchVersionBuild(base) {
       try{
         const shell=await fetchText(base+"/?parity-v1368="+Date.now());
         const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261023-v60-single-visible-home");
-        const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"')&&shell.text.includes("v59-compact-rhythm");
+        const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"')&&shell.text.includes("v60-single-visible-home");
         const source=js.text||"";
         const sequence=source.indexOf('class="dhp-welcome"')>=0
           &&source.indexOf('class="dhp-isnad"')>source.indexOf('class="dhp-welcome"');
@@ -480,7 +480,7 @@ async function fetchVersionBuild(base) {
           console.log("HTML parity shell diagnostics "+label+":",JSON.stringify({
             bodyClose:shell.text.includes("</body>"),htmlClose:shell.text.includes("</html>"),
             marker:shell.text.includes("darTestHomeHtmlParityV1"),
-            current:shell.text.includes("v59-compact-rhythm"),oldV53:shell.text.includes("v53-footer-flow"),
+            current:shell.text.includes("v60-single-visible-home"),oldV53:shell.text.includes("v53-footer-flow"),
             oldV55:shell.text.includes("v55-source-salam"),
             length:shell.text.length
           }));
