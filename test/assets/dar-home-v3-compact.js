@@ -59,8 +59,9 @@ const more=LINKS.slice(4).map((x,i)=>'<button class="dv3-more-link" type="button
 const swatches=THEMES.map(([k,v])=>'<button type="button" data-dv3-theme="'+k+'" aria-pressed="false"><span class="dv3-color dv3-color--'+k+'"></span>'+esc(v)+'</button>').join("");
 return '<div id="dv3Home" class="dv3-home" data-v3-version="3.1">'+
   '<div class="dv3-hometitle"><div><small>WILLKOMMEN IM DĀR</small><h2>Startseite</h2></div><button class="dv3-accountlink" type="button" data-dv3-nav="account" aria-label="Konto öffnen oder registrieren">'+icon("lock")+'<span>Konto / Registrieren</span><b>→</b></button></div>'+
-  // Single shared nine-language picker. Do not render the obsolete seven-language bar.
-  '<div class="dv3-language" data-dar-language-entry="quick" aria-label="9 Sprachen · Schnellauswahl"></div>'+
+  '<div class="dv3-language" role="group" aria-label="Sprache wählen / Dil seçimi"><span>Sprache / Dil</span>'+
+ LANGUAGE_CHOICES.map(([code,label])=>'<button type="button" data-dv3-locale="'+code+'" aria-pressed="'+(currentLanguage()===code)+'">'+label+'</button>').join('')+
+ '</div>'+
   '<div id="dv3Weather" class="dv3-weather" role="status" aria-live="polite">Wetterdaten werden geladen …</div>'+
   '<div class="dv3-search-box"><label class="dv3-search-label" for="homeSearchInput"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="10.7" cy="10.7" r="7"/><path d="m16 16 5 5"/></svg></label><input id="homeSearchInput" type="search" autocomplete="off" enterkeyhint="search" placeholder="Suche Wissen, Beiträge, Bücher, Gelehrte …" aria-label="Beiträge, Gelehrte und Bücher suchen"><button type="button" id="dv3SearchClear" aria-label="Suche löschen" hidden>×</button></div>'+
   '<button type="button" class="dv3-tawhid" data-dv3-nav="tawhid-guide"><span class="dv3-ornament" aria-hidden="true"></span><span class="dv3-kicker">GRUNDLAGEN DES GLAUBENS</span><strong>Tawḥīd &amp; ʿAqīdah</strong><span class="dv3-description">Allah allein anbeten. Die Glaubensgrundlagen nach Qurʾān, Sunnah und dem Verständnis der Salaf.</span><span class="dv3-tawhid-footer">Bedeutung, Belege &amp; Quellen entdecken <b>→</b></span></button>'+
@@ -170,18 +171,11 @@ function sync(){
   lastPosts="";lastCity="";
   return;
  }
- // The canonical V3 home can be mounted without the legacy v380 wrapper.
- // Activate its scoped stylesheet as soon as its actual root exists, otherwise
- // WebKit renders intrinsic SVG dimensions (giant search icon) and unstyled cards.
- const root=document.getElementById("dv3Home");
- if(!root)return; // No parallel home renderer or legacy fallback.
- document.documentElement.classList.add("dar-home-v3");
  const shell=document.querySelector("#appView .home-v380-shell");
+ if(!shell)return;
  ensureTopControls();rearrangeHeader();
- if(!shell){
-  syncLanguageButtons();renderLatest();fetchWeather();
-  return;
- }
+ const root=document.getElementById("dv3Home");
+ if(!root)return; // Single canonical renderer owns the home; never insert a second layout.
  const searchBlock=shell.querySelector("#homeSearchBlock");
  const searchField=root.querySelector(".dv3-search-box");
  if(searchBlock&&searchField&&searchField.nextElementSibling!==searchBlock)searchField.insertAdjacentElement("afterend",searchBlock);

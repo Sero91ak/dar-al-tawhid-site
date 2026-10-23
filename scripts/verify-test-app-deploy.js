@@ -154,23 +154,6 @@ async function fetchVersionBuild(base) {
     throw new Error(`workers.dev Test-App liefert noch nicht ${TEST_EXPECT_BUILD}: ${workersBase}/`);
   }
 
-  // DAR_TEST_ONE_VISIBLE_HOME_V60: verify the actual deployed HTML and runtime,
-  // rather than accepting only the long-unchanged app-shell-v1371 build ID.
-  // This catches stale Worker rewrites and cached pre-repair assets on both origins.
-  for (const [label, base] of [["public", publicBase], ["workers.dev", workersBase]]) {
-    const shell = await fetchText(`${base}/index.html?single-home-v60=${Date.now()}`);
-    const runtime = await fetchText(`${base}/assets/dar-home-html-parity-v1.js?v=20261023-v60-single-visible-home`);
-    const linked = shell.status === 200 &&
-      shell.text.includes("dar-home-html-parity-v1.js?v=20261023-v60-single-visible-home");
-    const guarded = runtime.status === 200 &&
-      runtime.text.includes("DAR_TEST_ONE_VISIBLE_HOME_V60") &&
-      runtime.text.includes('classList.add("dar-test-parity-active")');
-    console.log(`single-visible-home ${label}: shell=${shell.status} linked=${linked} runtime=${runtime.status} guarded=${guarded}`);
-    if (!linked || !guarded) {
-      throw new Error(`Test Home V60 not actually published to ${label}; legacy duplicate home may still be visible`);
-    }
-  }
-
   // DAR_TEST_PWA_BOOT_NO_REDIRECT_GUARD_20261016: Installed iOS/Android test PWA must boot without a 302.
   // The ordinary fetchText() intentionally follows redirects for other routes;
   // that would hide a broken /test/?env=staging&source=pwa&v=1371 start_url.
@@ -277,9 +260,9 @@ async function fetchVersionBuild(base) {
     let ok = false;
     for (let attempt = 1; attempt <= 5; attempt++) {
       const shell = await fetchText(base + "/index.html?dhp-capsules-v53=" + Date.now());
-      const runtime = await fetchText(base + "/assets/dar-home-html-parity-v1.js?v=20261023-v60-single-visible-home");
+      const runtime = await fetchText(base + "/assets/dar-home-html-parity-v1.js?v=20261022-v59-compact-rhythm");
       const linked = shell.status === 200 &&
-        shell.text.includes("/test/assets/dar-home-html-parity-v1.js?v=20261023-v60-single-visible-home");
+        shell.text.includes("/test/assets/dar-home-html-parity-v1.js?v=20261022-v59-compact-rhythm");
       const checks = [
         "DAR_TEST_HOME_ELEGANT_CAPSULE_V52",
         "DAR_TEST_LAST_ROW_FOOTER_FLOW_V53",
@@ -445,8 +428,8 @@ async function fetchVersionBuild(base) {
     for(let attempt=1;attempt<=5;attempt++){
       try{
         const shell=await fetchText(base+"/?parity-v1368="+Date.now());
-        const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261023-v60-single-visible-home");
-        const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"')&&shell.text.includes("v60-single-visible-home");
+        const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261022-v59-compact-rhythm");
+        const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"')&&shell.text.includes("v59-compact-rhythm");
         const source=js.text||"";
         const sequence=source.indexOf('class="dhp-welcome"')>=0
           &&source.indexOf('class="dhp-isnad"')>source.indexOf('class="dhp-welcome"');
@@ -480,7 +463,7 @@ async function fetchVersionBuild(base) {
           console.log("HTML parity shell diagnostics "+label+":",JSON.stringify({
             bodyClose:shell.text.includes("</body>"),htmlClose:shell.text.includes("</html>"),
             marker:shell.text.includes("darTestHomeHtmlParityV1"),
-            current:shell.text.includes("v60-single-visible-home"),oldV53:shell.text.includes("v53-footer-flow"),
+            current:shell.text.includes("v59-compact-rhythm"),oldV53:shell.text.includes("v53-footer-flow"),
             oldV55:shell.text.includes("v55-source-salam"),
             length:shell.text.length
           }));

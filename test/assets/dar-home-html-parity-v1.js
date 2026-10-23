@@ -342,11 +342,6 @@ function stylesheet(){
  "#darHomeHtmlParityV1 .dhp-quickbar{margin-top:0!important;}",
  "@media(max-width:359px){#darHomeHtmlParityV1 .dhp-greeting{font-size:19px!important;}#darHomeHtmlParityV1 .dhp-isnad{padding-inline:12px!important;}#darHomeHtmlParityV1 .dhp-home-source-v55{letter-spacing:.06em!important;}}",
  "@media(min-width:700px){#darHomeHtmlParityV1 .dhp-welcome{margin-top:18px!important;}#darHomeHtmlParityV1 .dhp-isnad{margin-top:18px!important;}}",
- "/* DAR_TEST_ONE_VISIBLE_HOME_V60: original SPA supplies live data and must not appear below the dashboard. */",
- "html.dar-test-parity-active body.is-home-route .top-shell,html.dar-test-parity-active body.is-home-route #appView#appView{display:none!important;visibility:hidden!important;max-height:0!important;overflow:hidden!important;}",
- "html.dar-test-parity-active body.is-home-route #darHomeHtmlParityV1{display:block!important;visibility:visible!important;position:relative!important;min-height:0!important;}",
- "html.dar-test-parity-active body.is-home-route #darHomeHtmlParityV1 .dhp-search-icon{max-width:27px!important;max-height:27px!important;font-size:25px!important;line-height:1!important;overflow:hidden!important;}",
- "html.dar-test-parity-active body.is-home-route #darHomeHtmlParityV1 .dhp-search-icon svg{width:21px!important;height:21px!important;max-width:21px!important;max-height:21px!important;}",
  "html,html body{overscroll-behavior-y:none!important;}",
  ].join("\n");
 }
@@ -505,12 +500,8 @@ function modal(){
  if(root&&p&&p.parentElement!==root)root.appendChild(p);
 }
 function sync(){
- if(!document.body||!document.body.classList.contains("is-home-route")){
-  document.documentElement.classList.remove("dar-test-parity-active");
-  return;
- }
+ if(!document.body||!document.body.classList.contains("is-home-route"))return;
  var root=create();if(!root)return;
- document.documentElement.classList.add("dar-test-parity-active");
  updateBrand();updatePrayer();recent();quran();modal();
 }
 function queue(){if(pending)return;pending=true;requestAnimationFrame(function(){pending=false;try{sync()}catch(e){console.warn("Test Home parity",e)}})}
