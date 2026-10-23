@@ -1,0 +1,117 @@
+name: KIDS V4 Owner Halal Invariant Fix – Three Questions, No Wrong Audio
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths:
+      - '.github/workflows/kids-v4-owner-halal-invariant-rewrite-and-reassemble-20261023.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-halal-owner-terminology-correction
+  cancel-in-progress: false
+jobs:
+  apply-exact-owner-correction:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 28
+    env:
+      ELEVENLABS_API_KEY: ''
+    steps:
+      - name: Checkout private Kids V4 review and exact paid original source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Apply owner's exact Halal wording to only 109, 131, 271
+        run: |
+          set -euo pipefail
+          git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+          git merge --ff-only FETCH_HEAD
+          python3 -m py_compile kids/tools/apply_kids_quiz_halal_terminology_owner_correction_20261023.py
+          python3 -m py_compile kids/tools/quiz_v4_quarantine.py
+          python3 kids/tools/apply_kids_quiz_halal_terminology_owner_correction_20261023.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          source=json.loads(Path('kids/data/quiz-kids-curated-450-review.json').read_text())
+          plan=json.loads(Path('kids/data/quiz-v4-curated-450-production-review.json').read_text())
+          fixes=json.loads(Path('kids/data/quiz-v4-halal-invariant-owner-correction-20261023.json').read_text())
+          assert len(source['items'])==450 and len(plan['recipes'])==450
+          assert source['sourceTextsUnmodified'] is False
+          assert len(fixes['changedExactV4SpeechFragments'])==5
+          assert fixes['publicReleaseAllowed'] is False
+          for id in fixes['affectedQuestionIds']:
+              q=next(x for x in source['items'] if x['id']==id)
+              recipe=next(x for x in plan['recipes'] if x['questionId']==id)
+              assert '"Halāle' not in json.dumps([q,recipe],ensure_ascii=False)
+              assert 'Halālen' not in json.dumps([q,recipe],ensure_ascii=False)
+              assert 'Halal' in json.dumps([q,recipe],ensure_ascii=False)
+          print('PASS_HALAL_INVARIANT_3_QUIZZES_5_EXACT_TTS_SOURCE_FRAGMENTS; no spent credits')
+          PY
+      - name: Rebuild listening preview without rejected audio
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null 2>&1; then
+            sudo apt-get -qq update
+            sudo apt-get -qq install -y ffmpeg
+          fi
+          python3 kids/tools/quiz_v4_first150_offline_join.py
+          python3 kids/tools/quiz_v4_age7to10_offline_join.py
+          python3 kids/tools/report_quiz_v4_450_progress.py
+          python3 kids/tools/stage_quiz_v4_existing_mp3_import.py
+          python3 kids/tools/write_quiz_v4_handover.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          data=json.loads(Path('kids/data/quiz-v4-450-production-status.json').read_text())
+          print('OWNER_HALAL_CORRECTION_RECOMPUTED_AUDIO_COUNTS',
+                data['completedQuestionsWithAllFourAudioParts'],
+                json.dumps(data['ageBreakdown'],ensure_ascii=False))
+          assert data['completedQuestionsWithAllFourAudioParts'] <= 430
+          assert data['completedQuestionsWithAllFourAudioParts'] >= 428
+          assert data['questionsHumanListeningApproved']==0
+          assert not data['livePublished'] and not data['all450AudioReadyToPublish']
+          summary=json.loads(Path('kids/review-only/quiz-v4-450-actual-mp3-import-summary.json').read_text())
+          assert summary['completeFourPartQuestions']==data['completedQuestionsWithAllFourAudioParts']
+          assert summary['humanListeningApprovals']==0 and not summary['publicReleaseEnabled']
+          PY
+      - name: Commit corrected quiz content and source-audio protection to review
+        run: |
+          set -euo pipefail
+          git config user.name dar-kids-v4-halal-owner-wording
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/data/quiz-kids-curated-450-review.json
+          git add kids/data/quiz-v4-curated-450-production-review.json
+          git add kids/data/quiz-v4-halal-invariant-owner-correction-20261023.json
+          git add kids/data/quiz-v4-450-production-status.json
+          git add kids/data/quiz-v4-first150-composed-preview.json kids/data/quiz-v4-first150-audio-status.json
+          git add kids/data/quiz-v4-age7to10-composed-preview.json kids/data/quiz-v4-age7to10-offline-coverage.json
+          git add kids/review-only/quiz-v4-450-actual-mp3-import.json kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
+          git add kids/review-only/quiz-v4-handover-latest.json kids/review-only/QUIZ-V4-UEBERGABE-AKTUELL.md
+          git add kids/assets/kids-quiz-audio/v4-first150-composed-review/
+          git add kids/assets/kids-quiz-audio/v4-age7to10-composed-review/
+          if git diff --cached --quiet; then
+             echo 'No owner correction changed'; exit 0
+          fi
+          git commit -m 'fix(kids): owner Halal invariant, correct 3 quiz texts and block invalid V4 pronunciation [skip ci]'
+          for i in 1 2 3; do
+            if git push origin HEAD:review/kids-v4-nine-prepaid-artifact-replay-20261022; then exit 0; fi
+            git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Preserve exact correction and original source receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-owner-halal-invariant-source-correction-review
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            kids/data/quiz-v4-halal-invariant-owner-correction-20261023.json
+            kids/data/quiz-v4-450-production-status.json
+            kids/data/quiz-v4-first150-audio-status.json
+            kids/data/quiz-v4-age7to10-offline-coverage.json
+            kids/review-only/quiz-v4-450-actual-mp3-import-summary.json
