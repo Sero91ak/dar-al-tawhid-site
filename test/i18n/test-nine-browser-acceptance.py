@@ -74,13 +74,17 @@ def protected_snapshot(driver):
 def translatable_ui_labels(driver):
     return driver.execute_script(
         """const excluded = arguments[0];
-        return [...document.querySelectorAll('body *')]
+        const values = [...document.querySelectorAll('body *')]
           .filter(e => { const r=e.getBoundingClientRect();
                          return r.width>0 && r.height>0 && !e.children.length &&
                                 !e.closest(excluded); })
-          .map(e => (e.textContent || '').trim()).filter(Boolean)
-          .filter((value, index, all) => all.indexOf(value) === index)
-          .slice(0, 220);""", UI_EXCLUSION_SELECTOR
+          .map(e => (e.textContent || '').trim()).filter(Boolean);
+        const labelled = [...document.querySelectorAll('button,[role=button],input,textarea,[title]')]
+          .filter(e => { const r=e.getBoundingClientRect();
+                         return r.width>0 && r.height>0 && !e.closest(excluded); })
+          .flatMap(e => [e.getAttribute('aria-label'), e.getAttribute('title'), e.getAttribute('placeholder')])
+          .map(value => (value || '').trim()).filter(Boolean);
+        return [...new Set([...values, ...labelled])].slice(0, 320);""", UI_EXCLUSION_SELECTOR
     )
 
 
