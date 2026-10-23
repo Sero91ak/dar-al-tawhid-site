@@ -162,9 +162,14 @@
     if(!frame)return;
     function resize(){
       if(!frame.isConnected)return;
+      const full=document.body.classList.contains("dar-editorial-fullscreen");
+      const viewport=window.visualViewport;
+      const visibleBottom=(viewport?.offsetTop||0)+(viewport?.height||window.innerHeight);
       const top=frame.getBoundingClientRect().top;
-      const room=window.innerHeight-top-(document.body.classList.contains("dar-editorial-fullscreen")?0:10);
-      frame.style.height=Math.max(420,room)+"px";
+      const foldDock=!full&&(window.matchMedia("(max-width:1199px)").matches||document.body.classList.contains("dar-admin-fold-viewport"));
+      const dock=foldDock?Math.max(60,parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--dar-bottom-viewport-reserve"))||60):0;
+      const room=Math.max(280,Math.floor(visibleBottom-top-dock-(full?0:12)));
+      frame.style.height=room+"px";
     }
     const fullscreen=document.getElementById("darEditorFullscreen");
     const closeFullscreen=()=>{
@@ -180,6 +185,10 @@
     if(global.__darEditorResize)window.removeEventListener("resize",global.__darEditorResize);
     global.__darEditorResize=resize;
     window.addEventListener("resize",resize,{passive:true});
+    window.addEventListener("orientationchange",resize,{passive:true});
+    if(global.__darEditorVisualResize)window.visualViewport?.removeEventListener("resize",global.__darEditorVisualResize);
+    global.__darEditorVisualResize=resize;
+    window.visualViewport?.addEventListener("resize",resize,{passive:true});
     if(global.__darEditorEsc)window.removeEventListener("keydown",global.__darEditorEsc);
     global.__darEditorEsc=e=>{if(e.key==="Escape"&&document.body.classList.contains("dar-editorial-fullscreen"))closeFullscreen()};
     window.addEventListener("keydown",global.__darEditorEsc);
