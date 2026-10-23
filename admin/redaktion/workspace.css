@@ -337,3 +337,16 @@ body.dar-editor-embedded #postText,body.dar-editor-embedded .preview{
  min-width:0!important;max-width:100%!important;overflow-wrap:anywhere
 }
 body.dar-editor-embedded .preview{word-break:normal!important}
+
+/* Progressive enhancement on a genuine dual-display hinge. Browsers without
+   Viewport Segments retain the 34/66 fluid layout above. */
+@media (horizontal-viewport-segments: 2){
+ body.dar-editor-embedded .layout{
+  display:grid!important;
+  grid-template-columns:minmax(0,env(viewport-segment-width 0 0)) minmax(0,env(viewport-segment-width 1 0))!important;
+  column-gap:max(0px,calc(env(viewport-segment-left 1 0) - env(viewport-segment-right 0 0)))!important;
+  align-items:start!important
+ }
+ body.dar-editor-embedded .sidebar{min-width:0!important}
+ body.dar-editor-embedded .work{min-width:0!important}
+}
