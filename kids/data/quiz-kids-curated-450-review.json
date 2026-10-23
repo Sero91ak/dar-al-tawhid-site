@@ -6880,7 +6880,7 @@
       ],
       "success": "Richtig. Sehr gut!",
       "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
-      "explanation": "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
+      "explanation": "Der Qurʾān beschreibt den leisen, verborgenen Ruf von Zakariyyā.",
       "sourceType": "Qurʾān",
       "source": "Qurʾān 19:3",
       "status": "published",
@@ -6952,7 +6952,7 @@
       ],
       "success": "Richtig. Sehr gut!",
       "retry": "Noch nicht. Hör gut zu und versuch es noch einmal.",
-      "explanation": "Der Qurʾān wiederholt, dass ʿĪsās Zeichen mit Allahs Erlaubnis geschahen.",
+      "explanation": "Der Qurʾān wiederholt, dass die Zeichen von ʿĪsā mit Allahs Erlaubnis geschahen.",
       "sourceType": "Qurʾān",
       "source": "Qurʾān 3:49",
       "status": "published",
@@ -12427,7 +12427,7 @@
       "scene": "heart",
       "category": "Ṣabr",
       "topic": "Ayyūbs Duʿāʾ",
-      "question": "Was zeigt die Geschichte Ayyūbs in Qurʾān 21:83–84 über Prüfungen?",
+      "question": "Was zeigt die Geschichte von Ayyūb im Qurʾān 21:83–84 über Prüfungen?",
       "answers": [
         {
           "id": "a1",
@@ -12463,7 +12463,7 @@
       "scene": "heart",
       "category": "Dankbarkeit",
       "topic": "Sulaymāns Verständnis von Dank",
-      "question": "Welche Verbindung macht Sulaymāns Duʿāʾ in Qurʾān 27:19 deutlich?",
+      "question": "Welche Verbindung macht das Duʿāʾ von Sulaymān im Qurʾān 27:19 deutlich?",
       "answers": [
         {
           "id": "a1",
@@ -16107,5 +16107,19 @@
     ],
     "noAudioVoiceApprovalImplied": true,
     "liveReleaseNotAllowed": true
+  },
+  "additionalNativeArabicNamePronunciationSourceCorrections": {
+    "date": "2026-10-23",
+    "scope": [
+      "kids-quiz-276",
+      "kids-quiz-278",
+      "kids-quiz-640",
+      "kids-quiz-641"
+    ],
+    "originalCanonicalSourceUnmodified": true,
+    "answerChoicesUnmodified": true,
+    "reason": "Avoid foreign proper-name German possessive -s; native Fuṣḥā names read independently",
+    "newTextHumanListeningApproved": false,
+    "publicReleaseAuthorized": false
   }
 }

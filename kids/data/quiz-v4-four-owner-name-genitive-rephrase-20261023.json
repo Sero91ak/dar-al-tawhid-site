@@ -1,0 +1,59 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-23",
+  "purpose": "Native Fuṣḥā names without German possessive suffix and no change to canonical Qurʾān references",
+  "catalogCount": 450,
+  "affectedQuestions": [
+    "kids-quiz-276",
+    "kids-quiz-278",
+    "kids-quiz-640",
+    "kids-quiz-641"
+  ],
+  "sourceEdits": [
+    {
+      "questionId": "kids-quiz-276",
+      "part": "explanation",
+      "old": "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
+      "new": "Der Qurʾān beschreibt den leisen, verborgenen Ruf von Zakariyyā.",
+      "originalSHA256": "a07bbdc08379567eaab7aa1dc68a8bffe40fd35bd9bde110a7c9c5ca24ba4c15",
+      "newSHA256": "550b9edb7f04d7699e16435f3718051b445ad507cdc33ff185a6a3a787d56c6e",
+      "sourceCitation": "Qurʾān 19:3",
+      "meaningAndCorrectAnswerUnchanged": true
+    },
+    {
+      "questionId": "kids-quiz-278",
+      "part": "explanation",
+      "old": "Der Qurʾān wiederholt, dass ʿĪsās Zeichen mit Allahs Erlaubnis geschahen.",
+      "new": "Der Qurʾān wiederholt, dass die Zeichen von ʿĪsā mit Allahs Erlaubnis geschahen.",
+      "originalSHA256": "667ba3a84e3ad85ce8fd0ca7bd30215df197bd1ed3c7df6d2798525619732055",
+      "newSHA256": "e9ac5f7999ba3c20f6086b7f19f7a339eb369f10950f32d4ce8a5517ff7b80ed",
+      "sourceCitation": "Qurʾān 3:49",
+      "meaningAndCorrectAnswerUnchanged": true
+    },
+    {
+      "questionId": "kids-quiz-640",
+      "part": "question",
+      "old": "Was zeigt die Geschichte Ayyūbs in Qurʾān 21:83–84 über Prüfungen?",
+      "new": "Was zeigt die Geschichte von Ayyūb im Qurʾān 21:83–84 über Prüfungen?",
+      "originalSHA256": "38b3f26904571bf99262b07a68bcf35d37b806d44159a69c26341ed01f49e75b",
+      "newSHA256": "7f2ed257ee64be9e007642d1e070f48a285b1dd211e297d1bcb5a98fa0f9a7aa",
+      "sourceCitation": "Qurʾān 21:83–84",
+      "meaningAndCorrectAnswerUnchanged": true
+    },
+    {
+      "questionId": "kids-quiz-641",
+      "part": "question",
+      "old": "Welche Verbindung macht Sulaymāns Duʿāʾ in Qurʾān 27:19 deutlich?",
+      "new": "Welche Verbindung macht das Duʿāʾ von Sulaymān im Qurʾān 27:19 deutlich?",
+      "originalSHA256": "b6879ce332bbb41b00f040947688bd4d5cbd597530548d9e5d9c0db8732a5bec",
+      "newSHA256": "cda6ca0e6f262fc5afbe8423d3aee24cae13901b14e81fd814332543732f9593",
+      "sourceCitation": "Qurʾān 27:19",
+      "meaningAndCorrectAnswerUnchanged": true
+    }
+  ],
+  "estimatedCharacterChange": 20,
+  "newAudioGeneratedBySourceRewrite": false,
+  "newCreditsSpent": 0,
+  "humanListeningApproved": false,
+  "publicQuizReleaseAllowed": false
+}
