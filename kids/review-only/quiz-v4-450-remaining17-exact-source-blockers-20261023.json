@@ -1,0 +1,376 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-10-23",
+  "scope": "KIDS_450_TRUE_REMAINING17_REVIEW_ONLY_NO_NEW_CREDITS",
+  "selectedQuestions": 450,
+  "technicallyCompleteQuestions": 433,
+  "incompleteQuestions": 17,
+  "missingDistinctSourceTexts": 23,
+  "missingSourceReferences": 24,
+  "ageBreakdownIncomplete": {
+    "7-8": 3,
+    "9-10": 14
+  },
+  "sourceDistinctCountsByBlocker": {
+    "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT": 10,
+    "RESERVED_UNCONFIRMED_TTS": 2,
+    "QUARANTINED_PRONUNCIATION": 10,
+    "PREVIOUS_PROVIDER_REQUEST_UNCONFIRMED_DO_NOT_REBUY": 1
+  },
+  "sourceReferenceCountsByBlocker": {
+    "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT": 10,
+    "RESERVED_UNCONFIRMED_TTS": 3,
+    "QUARANTINED_PRONUNCIATION": 10,
+    "PREVIOUS_PROVIDER_REQUEST_UNCONFIRMED_DO_NOT_REBUY": 1
+  },
+  "savedOriginalMP3sTechnicallyVerified": 1815,
+  "humanAuditoryApprovedQuestions": 0,
+  "newElevenLabsRequestsMadeByAudit": 0,
+  "additionalCreditsByAudit": 0,
+  "livePublished": false,
+  "all450Ready": false,
+  "requirementsToClose": [
+    "Reconcile one provider-unconfirmed source before any repeat payment",
+    "Use native, fully vocalized Arabic V4 word sources for problematic terms; no German 'Hala' alias fallback",
+    "Keep previously charged/owner-rejected V4 originals quarantined; when rerecording corrected segments, preserve full old receipts and verify distinct source hashes",
+    "Verify each of 23 source texts with original MP3 bytes SHA, ffprobe and spoken-text alignment",
+    "Complete private 450/450 four-part playback map, then get real owner hearing QA before any public Kids app release"
+  ],
+  "questions": [
+    {
+      "questionId": "kids-quiz-036",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "explanation",
+          "text": "nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.",
+          "sha256": "5109fd9ad8549a04eb127130c49e3ebbe3d63f1bc19dd0fb08cff6b606b764c7",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT",
+          "existingPaidOrProtected": false,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-041",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "question",
+          "text": "Taqwā.",
+          "sha256": "28e0b40b0a26df80db84d1b821cba380eb080de6ed8e48d35be91429d67f3a2a",
+          "blocker": "RESERVED_UNCONFIRMED_TTS",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        },
+        {
+          "part": "explanation",
+          "text": "Allah nennt Taqwā als Maßstab der besonderen Ehre bei Ihm.",
+          "sha256": "becd22c0112b03fa2cce2b4bee0b0c9c140833304a6551eb4a010ccac14ea6b1",
+          "blocker": "RESERVED_UNCONFIRMED_TTS",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-046",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "question",
+          "text": "Glücksspiele spielen.",
+          "sha256": "b2d0fa85da2b67a406322bc56712930d0bf58cc6181be3e09bb598968f4098c1",
+          "blocker": "QUARANTINED_PRONUNCIATION",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": true,
+          "auditoryApprovalRequired": true
+        },
+        {
+          "part": "question",
+          "text": "Angeben.",
+          "sha256": "c4c3b83261f03d443b45d98b5d5728d735026f39b339444b2879d7f70a2a6a59",
+          "blocker": "QUARANTINED_PRONUNCIATION",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": true,
+          "auditoryApprovalRequired": true
+        },
+        {
+          "part": "explanation",
+          "text": "Der Qurʾān befiehlt an vielen Stellen Gebet und Zakāh gemeinsam.",
+          "sha256": "f8ba8d284a71fe05a4e928d29f7bf2ccdc12a48ca47459e557765ff0805adf30",
+          "blocker": "QUARANTINED_PRONUNCIATION",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": true,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-080",
+      "ageBand": "7-8",
+      "missingSourceFragments": [
+        {
+          "part": "question",
+          "text": "Dürfen wir andere mit beleidigenden Spitznamen rufen?",
+          "sha256": "fc4f586cf59297c43335f3aae64428bdf00fb10ec362ffb33c9620ff9a851f70",
+          "blocker": "PREVIOUS_PROVIDER_REQUEST_UNCONFIRMED_DO_NOT_REBUY",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-094",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "question",
+          "text": "Taqwā.",
+          "sha256": "28e0b40b0a26df80db84d1b821cba380eb080de6ed8e48d35be91429d67f3a2a",
+          "blocker": "RESERVED_UNCONFIRMED_TTS",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-097",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "question",
+          "text": "Zur al-Masǧid al-Ḥarām in Makkah.",
+          "sha256": "ea93b6d688f10fb06d9718331ee5107b5f19b79b354b1f13b1083d6135a33467",
+          "blocker": "QUARANTINED_PRONUNCIATION",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": true,
+          "auditoryApprovalRequired": true
+        },
+        {
+          "part": "explanation",
+          "text": "und den Gläubigen, sich im Gebet zur al-Masǧid al-Ḥarām zu wenden.",
+          "sha256": "9671c7475546348997d12185d1047030f2059d5c886b71f35d4df477053683a3",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT",
+          "existingPaidOrProtected": false,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-189",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "explanation",
+          "text": "Der längste Qurʾān-Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.",
+          "sha256": "98615fe4ee3e8850e7c05203fab890afa895350ae365512c38e5eb3f3ef61341",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT",
+          "existingPaidOrProtected": false,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-276",
+      "ageBand": "7-8",
+      "missingSourceFragments": [
+        {
+          "part": "explanation",
+          "text": "Der Qurʾān beschreibt Zakariyyās Ruf als verborgen und leise.",
+          "sha256": "a07bbdc08379567eaab7aa1dc68a8bffe40fd35bd9bde110a7c9c5ca24ba4c15",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT",
+          "existingPaidOrProtected": false,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-278",
+      "ageBand": "7-8",
+      "missingSourceFragments": [
+        {
+          "part": "explanation",
+          "text": "Der Qurʾān wiederholt, dass ʿĪsās Zeichen mit Allahs Erlaubnis geschahen.",
+          "sha256": "667ba3a84e3ad85ce8fd0ca7bd30215df197bd1ed3c7df6d2798525619732055",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT",
+          "existingPaidOrProtected": false,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-485",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "question",
+          "text": "Welche Regel lehrt der Ḥadīṯ über Ḥalāl, Ḥarām und zweifelhafte Dinge?",
+          "sha256": "0522ed83008bed6325172d08caa67f550019919b7d577dcb7011bddd7465cd7d",
+          "blocker": "QUARANTINED_PRONUNCIATION",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": true,
+          "auditoryApprovalRequired": true
+        },
+        {
+          "part": "question",
+          "text": "Ḥalāl und Ḥarām sind klar; bei Zweifelhaftem ist Vorsicht gut.",
+          "sha256": "a281f24e7592aa0561bfa54c21385f690f303ee5e7e5fe610d73f6389765042e",
+          "blocker": "QUARANTINED_PRONUNCIATION",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": true,
+          "auditoryApprovalRequired": true
+        },
+        {
+          "part": "question",
+          "text": "Es gibt keinen Unterschied zwischen Ḥalāl und Ḥarām.",
+          "sha256": "1effaf9c1f91b9a2dcdf3d56d214af98d3b84ff9347dcaf7e5d652d3ec464dea",
+          "blocker": "QUARANTINED_PRONUNCIATION",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": true,
+          "auditoryApprovalRequired": true
+        },
+        {
+          "part": "explanation",
+          "text": "erklärte, dass Ḥalāl und Ḥarām klar sind und dazwischen zweifelhafte Dinge liegen; wer sie meidet, schützt Dīn und Ehre.",
+          "sha256": "e75971ec212dd4930adee825f69f367815630bfebf38b27b1ba8618a16787749",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT",
+          "existingPaidOrProtected": false,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-499",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "explanation",
+          "text": "Die Qurʾān-Duʿāʾ bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.",
+          "sha256": "a33039602d0761e000db69fd4fd71ed4f93b05ce20d491e13cb2d5d57fb101d5",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT",
+          "existingPaidOrProtected": false,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-640",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "question",
+          "text": "Was zeigt die Geschichte Ayyūbs in Qurʾān 21:83–84 über Prüfungen?",
+          "sha256": "38b3f26904571bf99262b07a68bcf35d37b806d44159a69c26341ed01f49e75b",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT",
+          "existingPaidOrProtected": false,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-641",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "question",
+          "text": "Welche Verbindung macht Sulaymāns Duʿāʾ in Qurʾān 27:19 deutlich?",
+          "sha256": "b6879ce332bbb41b00f040947688bd4d5cbd597530548d9e5d9c0db8732a5bec",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT",
+          "existingPaidOrProtected": false,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-809",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "question",
+          "text": "ʿIbādah und Duʿāʾ richten wir an Allah allein.",
+          "sha256": "0e0bddb961e27e3e0afd7da7c8f66bbf55ac42442d5a1857f2cecf908bdc9fa5",
+          "blocker": "QUARANTINED_PRONUNCIATION",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": true,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-839",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "question",
+          "text": "Ghībah ist erlaubt, solange die Person es nicht hört.",
+          "sha256": "7718291e519cf53721819d27d78fab4b8b26897eb9640ac284ef677078bc382d",
+          "blocker": "NEW_V4_REQUIRED_AFTER_APPROVED_PILOT",
+          "existingPaidOrProtected": false,
+          "oldInvalidAudioMustNotPlay": false,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-873",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "question",
+          "text": "Gute Taten und ʿIbādah werden aufrichtig für Allah getan.",
+          "sha256": "1788fd23ec6a09fead7cc5fa768012008be7d424dbd9104116e2f1e2136801aa",
+          "blocker": "QUARANTINED_PRONUNCIATION",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": true,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    },
+    {
+      "questionId": "kids-quiz-877",
+      "ageBand": "9-10",
+      "missingSourceFragments": [
+        {
+          "part": "question",
+          "text": "Wir machen ʿIbādah nicht, um vor Menschen Eindruck zu machen.",
+          "sha256": "20a981c7c9616f0d3f834d8f3a910f91b7bc05571ce5e61564c3b450dd6d994f",
+          "blocker": "QUARANTINED_PRONUNCIATION",
+          "existingPaidOrProtected": true,
+          "oldInvalidAudioMustNotPlay": true,
+          "auditoryApprovalRequired": true
+        }
+      ],
+      "publicReleaseAllowed": false
+    }
+  ]
+}
