@@ -235,3 +235,64 @@ html.dar-v8-glass-test body.is-home-route #appView #darHomeHtmlParityV1 .dhp-lib
  .dhp-quick,.dhp-library-tile,.dhp-today-row,.dhp-quran-capsule
  ){transition:none!important;transform:none!important}
 }
+
+
+/* DAR_TEST_V8_FIXED_DOCK_GEOMETRY_V3_20261023
+   The canonical test bottom-nav v1119/v1120 owns position:fixed and the
+   height. Match/exceed that scoped specificity rather than switching
+   #bottomNav to position:relative. Preserve the same dock on every route. */
+@media(max-width:899px){
+ html.dar-v8-glass-test[data-theme] body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+ html.dar-v8-glass-test[data-theme] body.has-bottom-nav #bottomNav.bottom-nav,
+ html.dar-v8-glass-test body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav{
+  position:fixed!important;
+  left:max(10px,env(safe-area-inset-left,0px))!important;
+  right:auto!important;
+  top:auto!important;
+  width:calc(100vw - 86px)!important;
+  max-width:min(830px,calc(100vw - 86px))!important;
+  margin:0!important;
+  height:var(--dar-nav-height,69px)!important;
+  min-height:var(--dar-nav-height,69px)!important;
+  max-height:var(--dar-nav-height,69px)!important;
+  bottom:calc(max(7px,calc(env(safe-area-inset-bottom,0px) - 18px)) + 3mm)!important;
+  display:flex!important;
+  flex-direction:row!important;
+  align-items:stretch!important;
+  gap:2px!important;
+  overflow:hidden!important;
+  z-index:1200!important;
+  background:var(--v8-g-bg)!important;
+  background-image:linear-gradient(155deg,rgba(255,255,255,.18),transparent 51%)!important;
+  border-color:var(--v8-g-stroke)!important;
+  -webkit-backdrop-filter:blur(28px) saturate(1.3)!important;
+  backdrop-filter:blur(28px) saturate(1.3)!important;
+  box-shadow:var(--v8-g-shadow)!important;
+ }
+ html.dar-v8-glass-test[data-theme] body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav .bottom-nav-btn,
+ html.dar-v8-glass-test[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn{
+  flex:1 1 20%!important;
+  width:20%!important;
+  min-width:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+ }
+ html.dar-v8-glass-test #darV8GlassLens{
+  z-index:1220!important;
+  bottom:calc(max(7px,calc(env(safe-area-inset-bottom,0px) - 18px)) + 3mm + 8px)!important;
+ }
+ html.dar-v8-glass-test[dir="rtl"][data-theme] body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+ html.dar-v8-glass-test[dir="rtl"][data-theme] body.has-bottom-nav #bottomNav.bottom-nav{
+  left:auto!important;right:max(10px,env(safe-area-inset-right,0px))!important;
+ }
+}
+@media(max-width:390px){
+ html.dar-v8-glass-test[data-theme] body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+ html.dar-v8-glass-test[data-theme] body.has-bottom-nav #bottomNav.bottom-nav{
+  width:calc(100vw - 79px)!important;max-width:calc(100vw - 79px)!important;
+ }
+}
+html.dar-v8-glass-test[data-v8-viewport="expanded"] body:has(#darV8IntegratedRail) #bottomNav.bottom-nav{
+ display:none!important;
+}
+html.dar-v8-glass-test[data-v8-viewport="expanded"] #darV8GlassLens{display:none!important}
