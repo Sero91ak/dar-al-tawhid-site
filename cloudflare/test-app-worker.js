@@ -494,7 +494,7 @@ async function finalizeDarTestHomeV1193(asset) {
   }
   // Same visual fix as the public-domain site router, for the separate
   // dedicated Test Worker origin. Only affects the adult Test Home.
-  const homeV3Css = '<link rel="stylesheet" id="darTestHomeV3ActualRoute" href="/test/assets/dar-home-v3-compact.css?v=20261019-home-plain-v2">';
+  const homeV3Css = '<link rel="stylesheet" id="darTestHomeV3ActualRoute" href="/test/assets/dar-home-v3-compact.css?v=20261023-home-geometry-v3">';
   const photoRemoveCss = '<link rel="stylesheet" id="darTestHomeNoPhotosActualRouteV2" href="/test/assets/home-background-remove-v2.css?v=20261019-photo-free-v2">';
   html = html.replace(/<link\b[^>]*\bid=["']darTestHomeNoBackgroundsV1["'][^>]*>\s*/gi, "");
   if (!html.includes('id="darTestHomeV3ActualRoute"')) {
@@ -544,7 +544,7 @@ async function finalizeDarTestHomeV1193(asset) {
   // <script id="darTestHomeHtmlParityV1"> from cached HTML before reinjecting.
   // A bare includes(id) skipped version upgrades, leaving the old visible UI.
   html = html.replace(/<script\b(?=[^>]*\bid=["']darTestHomeHtmlParityV1["'])[^>]*>\s*<\/script>\s*/gi, "");
-  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261022-v59-compact-rhythm"></script>';
+  const parityScript = '<script defer id="darTestHomeHtmlParityV1" src="/test/assets/dar-home-html-parity-v1.js?v=20261023-v60-single-visible-home"></script>';
   html = html.includes("</body>") ? html.replace("</body>", parityScript + "\n</body>") : html + parityScript;
   // DAR_ADULT_TOP_SCROLL_BOUNDARY_V1: every adult Dar Test route uses
   // the real document scroll; clamp downward drags at the top without
@@ -562,7 +562,7 @@ async function finalizeDarTestHomeV1193(asset) {
   }
   const headers = new Headers(asset.headers);
   headers.set("X-DAR-Test-Scroll-Boundary", "v3");
-  headers.set("X-DAR-Test-Home", "html-parity-v50-20261020");
+  headers.set("X-DAR-Test-Home", "single-visible-home-v60-20261023");
   headers.set("Cache-Control", "no-store, no-cache, must-revalidate, max-age=0");
   headers.set("Pragma", "no-cache");
   headers.delete("Content-Length");
