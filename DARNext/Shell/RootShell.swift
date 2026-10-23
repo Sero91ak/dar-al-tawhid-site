@@ -2,6 +2,7 @@ import SwiftUI
 
 struct RootShell: View {
     let environment: AppEnvironment
+    let audioEngine: QuranAudioEngine
     @State private var selectedTab = RootTab.start
 
     var body: some View {
@@ -37,7 +38,15 @@ struct RootShell: View {
             .tag(RootTab.more)
         }
         .tint(.white)
+        .environment(audioEngine)
+        .safeAreaInset(edge: .bottom, spacing: 8) {
+            if audioEngine.currentTrack != nil {
+                QuranMiniPlayer(engine: audioEngine)
+                    .padding(.horizontal, 12)
+            }
+        }
     }
+
 }
 
 private enum RootTab: Hashable {

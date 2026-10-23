@@ -50,6 +50,7 @@ struct QuranSurahView: View {
     var focusAyah: Int? = nil
     @State private var surah: QuranSurah?
     @State private var errorMessage: String?
+    @Environment(QuranAudioEngine.self) private var audioEngine
 
     var body: some View {
         ScrollViewReader { proxy in
@@ -92,6 +93,19 @@ struct QuranSurahView: View {
             }
         }
         .navigationTitle("Qurʾān \(number)")
+        .toolbar {
+            ToolbarItem(placement: .primaryAction) {
+                Button {
+                    Task {
+                        await audioEngine.loadSurah(surah: number, reciterID: QuranAudioSourceAdapter.defaultReciter)
+                        audioEngine.play()
+                    }
+                } label: {
+                    Label("Audio starten", systemImage: "play.circle")
+                }
+                .accessibilityLabel("Sūrah-Audio starten")
+            }
+        }
         .task {
             do {
                 surah = try await repository.quranSurah(number: number)

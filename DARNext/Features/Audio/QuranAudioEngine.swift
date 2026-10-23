@@ -26,6 +26,10 @@ final class QuranAudioEngine {
     private(set) var currentTime: TimeInterval = 0
     private(set) var duration: TimeInterval = 0
     private(set) var lastError: String?
+    private(set) var playlist: [QuranAudioTrack] = []
+    private(set) var playlistIndex = 0
+    private(set) var availableReciters: [QuranAudioReciter] = []
+    private(set) var selectedReciterID = QuranAudioSourceAdapter.defaultReciter
     var playbackRate = 1.0 {
         didSet { player?.rate = isPlaying ? Float(playbackRate) : 0 }
     }
@@ -38,6 +42,62 @@ final class QuranAudioEngine {
     private var remoteCommandsConfigured = false
 
     func load(_ track: QuranAudioTrack) {
+        playlist = [track]
+        playlistIndex = 0
+        loadTrack(track)
+    }
+
+    func loadSurah(surah: Int, reciterID: String, adapter: QuranAudioSourceAdapter = .shared) async {
+        do {
+            selectedReciterID = reciterID
+            let tracks = try await adapter.tracks(surah: surah, reciterID: reciterID)
+            guard !tracks.isEmpty else {
+                lastError = "Für diese Sūrah wurde keine geprüfte Audioquelle gefunden."
+                return
+            }
+            playlist = tracks
+            playlistIndex = 0
+            loadTrack(tracks[0])
+        } catch {
+            lastError = "Audioquellen konnten nicht geladen werden: \(error.localizedDescription)"
+        }
+    }
+
+    func loadReciters(adapter: QuranAudioSourceAdapter = .shared) async {
+        do {
+            availableReciters = try await adapter.reciters()
+        } catch {
+            lastError = "Rezitatoren konnten nicht geladen werden: \(error.localizedDescription)"
+        }
+    }
+
+    func selectReciter(_ reciterID: String) async {
+        guard let surahNumber = currentTrack?.surahNumber else {
+            selectedReciterID = reciterID
+            return
+        }
+        await loadSurah(surah: surahNumber, reciterID: reciterID)
+    }
+
+    func nextAyah() {
+        guard playlistIndex + 1 < playlist.count else { return }
+        playlistIndex += 1
+        loadTrack(playlist[playlistIndex])
+        play()
+    }
+
+    func previousAyah() {
+        if currentTime > 3 {
+            seek(to: 0)
+            return
+        }
+        guard playlistIndex > 0 else { return }
+        playlistIndex -= 1
+        loadTrack(playlist[playlistIndex])
+        play()
+    }
+
+    private func loadTrack(_ track: QuranAudioTrack) {
         guard track.sourceURL.isFileURL || track.sourceURL.scheme != nil else {
             lastError = "Die Audioquelle ist ungültig."
             return
@@ -135,8 +195,17 @@ final class QuranAudioEngine {
     private func handlePlaybackEnded() {
         switch repeatMode {
         case .off:
-            isPlaying = false
-        case .track, .ayah:
+            if playlistIndex + 1 < playlist.count {
+                playlistIndex += 1
+                loadTrack(playlist[playlistIndex])
+                play()
+            } else {
+                isPlaying = false
+            }
+        case .track:
+            seek(to: 0)
+            play()
+        case .ayah:
             seek(to: 0)
             play()
         }

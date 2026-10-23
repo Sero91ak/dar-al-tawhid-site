@@ -56,6 +56,14 @@ struct DashboardView: View {
                 }
                 .accessibilityLabel("DAR-Bibliothek durchsuchen")
             }
+            ToolbarItem(placement: .topBarTrailing) {
+                NavigationLink {
+                    DashboardAssistantView(repository: repository)
+                } label: {
+                    Image(systemName: "text.bubble.fill")
+                }
+                .accessibilityLabel("Wissensassistent")
+            }
         }
         .sheet(isPresented: $isSearchPresented) {
             NavigationStack {
