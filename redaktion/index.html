@@ -36,6 +36,7 @@
     <section class="panel" aria-label="Sprachfassungen">
       <div class="row space"><h3>Sprachfassungen</h3><span class="status" id="revisionStatus">Entwurf</span></div>
       <div id="languages" class="locale-tabs" role="tablist" aria-label="Beitragssprache"></div>
+      <div class="editor-smartbar"><span class="studio-state">✦ SOCIAL COPY STUDIO</span><span class="dim">Originalzeichen bleiben beim Kopieren erhalten</span><button type="button" class="btn primary" id="copyAllTop">✧ Ganze Sprache kopieren</button></div>
       <div class="editor-grid">
         <div><div class="editor-head"><h3 id="editorLabel">Text bearbeiten</h3><span id="langStatus" class="status">Offen</span></div>
           <label for="postText">Kompletter Social-Media-Beitrag</label>
@@ -48,7 +49,7 @@
         <div><div class="editor-head"><h3>Vorschau</h3><span id="previewLang" class="status">Deutsch</span></div>
           <article class="preview-outer"><div class="preview-top">DĀR AL TAWḤĪD · ORIGINALTYPOGRAFIE</div><div class="preview" id="preview" dir="auto">Wähle links einen Beitrag aus.</div></article>
           <label for="platform">Social-Media-Ausgabe</label><select id="platform" class="field"><option value="telegram">Telegram · mit vier Hashtags</option><option value="instagram">Instagram · mit vier Hashtags</option><option value="whatsapp">WhatsApp · ohne Hashtags</option></select>
-          <div class="actions"><button class="btn primary" id="copyAll" type="button">Gesamten Beitrag kopieren</button><button class="btn" id="shareAll" type="button">Teilen ↗</button></div>
+          <div class="actions"><button class="btn primary" id="copyAll" type="button">Gesamten Beitrag kopieren</button><button class="btn" id="copyWithSources" type="button">Beitrag + Quellenbelege kopieren</button><button class="btn" id="shareAll" type="button">Teilen ↗</button></div>
           <div id="copyNotice" class="status" aria-live="polite"></div>
         </div>
       </div>
@@ -56,7 +57,8 @@
     <section class="panel" aria-label="Quellen und Direktnachweise">
       <div class="row space"><h3>Originalnachweise · einzelne Links</h3><button id="refreshSources" class="btn" type="button">Quellen neu laden</button></div>
       <p class="help">Karten aus dem verknüpften Beitrag und – nach Prüfung der Q-Nummer – aus der Original-Quellenseite. Jeder Nachweis kann einzeln geöffnet oder als vollständige URL kopiert werden. Autoren, Werke, Nummern und Seiten bleiben erhalten, wenn sie in der Originalquelle stehen.</p>
-      <div id="sourceCards"></div>
+      <div class="source-summary"><div><small>Eine kanonische Quelle</small><strong id="canonicalSourceTitle">Q-Quellenseite des Beitrags</strong><p>Für alle neun Sprachen dieselbe überprüfte Adresse.</p></div><button class="btn primary" id="copyCanonical" type="button">Quellenlink kopieren</button></div>
+      <div class="row space"><h3>Einzelne Originalnachweise</h3><button type="button" id="copySourceList" class="btn">Alle Nachweislinks kopieren</button></div><div id="sourceCards"></div>
       <label for="sourceTitle">Eigenen geprüften Direktnachweis hinzufügen</label><input id="sourceTitle" class="field" placeholder="Autor – Buch, Band, Seite, Nummer">
       <label for="sourceUrl">Vollständige Original-URL</label><input id="sourceUrl" class="field" type="url" placeholder="https://...">
       <div class="actions"><button id="addSource" class="btn" type="button">Nachweis zum lokalen Entwurf hinzufügen</button></div>
