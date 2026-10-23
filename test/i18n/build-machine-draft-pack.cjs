@@ -47,7 +47,11 @@ for(const item of checkpoint.items){
  const translations={};
  let immutable=null;
  for(const locale of checkpoint.locales){
-  const matches=byLocale[locale].filter(doc=>doc.id===item.id&&doc.sourceHash===item.sourceHash);
+  let matches=byLocale[locale].filter(doc=>doc.id===item.id&&doc.sourceHash===item.sourceHash);
+  if(matches.length>1){
+   const preferred=matches.filter(doc=>doc.draftStatus==="machine-reviewed-draft"&&doc.humanApproval===false&&doc.reviewer===null);
+   if(preferred.length===1)matches=preferred;
+  }
   if(matches.length!==1)throw Error("Missing matching draft for "+item.id+" "+locale);
   const doc=matches[0];
   if(doc.status!=="draft"||doc.humanApproval!==false||doc.reviewer!==null)throw Error("Draft is not machine-only: "+item.id+" "+locale);
