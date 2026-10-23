@@ -159,6 +159,20 @@
 			remoteGlobalIDString = CF28178E3083FFB300454145;
 			remoteInfo = DATPrayerLiveActivityExtension;
 		};
+		CF5C001A308B5AC70013C426 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000070 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF5C000A308B5AC60013C426;
+			remoteInfo = DARNext;
+		};
+		CF5C0024308B5AC70013C426 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A10000000000000000000070 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CF5C000A308B5AC60013C426;
+			remoteInfo = DARNext;
+		};
 		CFA162A6305844C600E70795 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = A10000000000000000000070 /* Project object */;
@@ -278,6 +292,9 @@
 		C90000000000000000000013 /* OneSignalNotificationServiceExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OneSignalNotificationServiceExtension.entitlements; sourceTree = "<group>"; };
 		CF28178F3083FFB300454145 /* DATPrayerLiveActivityExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = DATPrayerLiveActivityExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF4C7762306DA58700025265 /* DarAlTawhidTVMobile.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DarAlTawhidTVMobile.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF5C000B308B5AC60013C426 /* DARNext.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DARNext.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF5C0019308B5AC70013C426 /* DARNextTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DARNextTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF5C0023308B5AC70013C426 /* DARNextUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DARNextUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF5CFE443089E4F10013C426 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
 		CF5CFE453089E4F10013C426 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		CF5CFE483089E4F10013C426 /* InfoPlist.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = InfoPlist.xcstrings; sourceTree = "<group>"; };
@@ -399,6 +416,9 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CF2817923083FFB400454145 /* DATPrayerLiveActivity */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (CF28179F3083FFB500454145 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DATPrayerLiveActivity; sourceTree = "<group>"; };
 		CF4C7763306DA58700025265 /* DarAlTawhidTVMobile */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DarAlTawhidTVMobile; sourceTree = "<group>"; };
+		CF5C000C308B5AC60013C426 /* DARNext */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DARNext; sourceTree = "<group>"; };
+		CF5C001C308B5AC70013C426 /* DARNextTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DARNextTests; sourceTree = "<group>"; };
+		CF5C0026308B5AC70013C426 /* DARNextUITests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DARNextUITests; sourceTree = "<group>"; };
 		CFA1629F305844C500E70795 /* DarAlTawhidWatch Watch App */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "DarAlTawhidWatch Watch App"; sourceTree = "<group>"; };
 		CFA162B43058464B00E70795 /* DarAlTawhidWatchWidgets */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (CFA162C33058464C00E70795 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = DarAlTawhidWatchWidgets; sourceTree = "<group>"; };
 		CFA163B7305A0CE500E70795 /* DarAlTawhidTV */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = DarAlTawhidTV; sourceTree = "<group>"; };
@@ -449,6 +469,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CF4C775F306DA58600025265 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0008308B5AC60013C426 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0016308B5AC70013C426 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0020308B5AC70013C426 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -507,6 +548,9 @@
 				CFA163B7305A0CE500E70795 /* DarAlTawhidTV */,
 				CF4C7763306DA58700025265 /* DarAlTawhidTVMobile */,
 				CF2817923083FFB400454145 /* DATPrayerLiveActivity */,
+				CF5C000C308B5AC60013C426 /* DARNext */,
+				CF5C001C308B5AC70013C426 /* DARNextTests */,
+				CF5C0026308B5AC70013C426 /* DARNextUITests */,
 				A10000000000000000000032 /* Frameworks */,
 				CFFD3B0230654B93005EB105 /* DATWeatherAttributionView.swift */,
 				CFFD3B0430654BB2005EB105 /* DATWeatherAttributionNotification.swift */,
@@ -583,6 +627,9 @@
 				CF4C7762306DA58700025265 /* DarAlTawhidTVMobile.app */,
 				0811D69A1ABB849654DF69CD /* DATPremiumWidgetsExtension.appex */,
 				CF28178F3083FFB300454145 /* DATPrayerLiveActivityExtension.appex */,
+				CF5C000B308B5AC60013C426 /* DARNext.app */,
+				CF5C0019308B5AC70013C426 /* DARNextTests.xctest */,
+				CF5C0023308B5AC70013C426 /* DARNextUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -819,6 +866,74 @@
 			productReference = CF4C7762306DA58700025265 /* DarAlTawhidTVMobile.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CF5C000A308B5AC60013C426 /* DARNext */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF5C0029308B5AC70013C426 /* Build configuration list for PBXNativeTarget "DARNext" */;
+			buildPhases = (
+				CF5C0007308B5AC60013C426 /* Sources */,
+				CF5C0008308B5AC60013C426 /* Frameworks */,
+				CF5C0009308B5AC60013C426 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				CF5C000C308B5AC60013C426 /* DARNext */,
+			);
+			name = DARNext;
+			packageProductDependencies = (
+			);
+			productName = DARNext;
+			productReference = CF5C000B308B5AC60013C426 /* DARNext.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CF5C0018308B5AC70013C426 /* DARNextTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF5C002C308B5AC70013C426 /* Build configuration list for PBXNativeTarget "DARNextTests" */;
+			buildPhases = (
+				CF5C0015308B5AC70013C426 /* Sources */,
+				CF5C0016308B5AC70013C426 /* Frameworks */,
+				CF5C0017308B5AC70013C426 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF5C001B308B5AC70013C426 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CF5C001C308B5AC70013C426 /* DARNextTests */,
+			);
+			name = DARNextTests;
+			packageProductDependencies = (
+			);
+			productName = DARNextTests;
+			productReference = CF5C0019308B5AC70013C426 /* DARNextTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CF5C0022308B5AC70013C426 /* DARNextUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CF5C002F308B5AC70013C426 /* Build configuration list for PBXNativeTarget "DARNextUITests" */;
+			buildPhases = (
+				CF5C001F308B5AC70013C426 /* Sources */,
+				CF5C0020308B5AC70013C426 /* Frameworks */,
+				CF5C0021308B5AC70013C426 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CF5C0025308B5AC70013C426 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				CF5C0026308B5AC70013C426 /* DARNextUITests */,
+			);
+			name = DARNextUITests;
+			packageProductDependencies = (
+			);
+			productName = DARNextUITests;
+			productReference = CF5C0023308B5AC70013C426 /* DARNextUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		CFA1629D305844C500E70795 /* DarAlTawhidWatch Watch App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CFA162AC305844C600E70795 /* Build configuration list for PBXNativeTarget "DarAlTawhidWatch Watch App" */;
@@ -903,6 +1018,17 @@
 					CF4C7761306DA58600025265 = {
 						CreatedOnToolsVersion = 27.0;
 					};
+					CF5C000A308B5AC60013C426 = {
+						CreatedOnToolsVersion = 27.1;
+					};
+					CF5C0018308B5AC70013C426 = {
+						CreatedOnToolsVersion = 27.1;
+						TestTargetID = CF5C000A308B5AC60013C426;
+					};
+					CF5C0022308B5AC70013C426 = {
+						CreatedOnToolsVersion = 27.1;
+						TestTargetID = CF5C000A308B5AC60013C426;
+					};
 					CFA1629D305844C500E70795 = {
 						CreatedOnToolsVersion = 26.6;
 					};
@@ -943,6 +1069,9 @@
 				CF4C7761306DA58600025265 /* DarAlTawhidTVMobile */,
 				0579DA03A2078CF1BA021B2D /* DATPremiumWidgetsExtension */,
 				CF28178E3083FFB300454145 /* DATPrayerLiveActivityExtension */,
+				CF5C000A308B5AC60013C426 /* DARNext */,
+				CF5C0018308B5AC70013C426 /* DARNextTests */,
+				CF5C0022308B5AC70013C426 /* DARNextUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -1037,6 +1166,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		CF4C7760306DA58600025265 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0009308B5AC60013C426 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0017308B5AC70013C426 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0021308B5AC70013C426 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1138,6 +1288,27 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CF5C0007308B5AC60013C426 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C0015308B5AC70013C426 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CF5C001F308B5AC70013C426 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CFA1629A305844C500E70795 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1173,6 +1344,16 @@
 			isa = PBXTargetDependency;
 			target = CF28178E3083FFB300454145 /* DATPrayerLiveActivityExtension */;
 			targetProxy = CF28179A3083FFB500454145 /* PBXContainerItemProxy */;
+		};
+		CF5C001B308B5AC70013C426 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CF5C000A308B5AC60013C426 /* DARNext */;
+			targetProxy = CF5C001A308B5AC70013C426 /* PBXContainerItemProxy */;
+		};
+		CF5C0025308B5AC70013C426 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CF5C000A308B5AC60013C426 /* DARNext */;
+			targetProxy = CF5C0024308B5AC70013C426 /* PBXContainerItemProxy */;
 		};
 		CFA162A7305844C600E70795 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1719,6 +1900,173 @@
 			};
 			name = Release;
 		};
+		CF5C002A308B5AC70013C426 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daraltawhid.darnext.DARNext;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CF5C002B308B5AC70013C426 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daraltawhid.darnext.DARNext;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		CF5C002D308B5AC70013C426 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daraltawhid.darnext.DARNextTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DARNext.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DARNext";
+			};
+			name = Debug;
+		};
+		CF5C002E308B5AC70013C426 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daraltawhid.darnext.DARNextTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/DARNext.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/DARNext";
+			};
+			name = Release;
+		};
+		CF5C0030308B5AC70013C426 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daraltawhid.darnext.DARNextUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DARNext;
+			};
+			name = Debug;
+		};
+		CF5C0031308B5AC70013C426 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 27.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.daraltawhid.darnext.DARNextUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = DARNext;
+			};
+			name = Release;
+		};
 		CFA162AA305844C600E70795 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1998,6 +2346,33 @@
 			buildConfigurations = (
 				CF4C776B306DA58800025265 /* Debug */,
 				CF4C776C306DA58800025265 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF5C0029308B5AC70013C426 /* Build configuration list for PBXNativeTarget "DARNext" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF5C002A308B5AC70013C426 /* Debug */,
+				CF5C002B308B5AC70013C426 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF5C002C308B5AC70013C426 /* Build configuration list for PBXNativeTarget "DARNextTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF5C002D308B5AC70013C426 /* Debug */,
+				CF5C002E308B5AC70013C426 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CF5C002F308B5AC70013C426 /* Build configuration list for PBXNativeTarget "DARNextUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CF5C0030308B5AC70013C426 /* Debug */,
+				CF5C0031308B5AC70013C426 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
