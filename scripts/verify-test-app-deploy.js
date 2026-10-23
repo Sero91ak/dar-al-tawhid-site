@@ -20,6 +20,12 @@ const TEST_EXPECT_BUILD =
   process.env.EXPECT_TEST_BUILD ||
   JSON.parse(fs.readFileSync(path.join(ROOT_DIR, "test/version.json"), "utf8")).buildId;
 
+// Live verification must use the exact canonical script version injected by the Worker.
+const PARITY_SCRIPT_SRC = (fs.readFileSync(path.join(ROOT_DIR, "cloudflare/test-app-worker.js"), "utf8")
+  .match(/\/test\/assets\/dar-home-html-parity-v1\.js\?v=[A-Za-z0-9._-]+/) || [])[0];
+if (!PARITY_SCRIPT_SRC) throw new Error("Test Worker lacks Home parity script");
+const PARITY_SCRIPT_REL = PARITY_SCRIPT_SRC.replace(/^\/test\//, "/");
+
 function normalizeTestBase(raw, fallback) {
   let base = String(raw || fallback || PUBLIC_TEST_BASE).trim().replace(/\/$/, "");
   if (!base) base = fallback || PUBLIC_TEST_BASE;
@@ -260,9 +266,9 @@ async function fetchVersionBuild(base) {
     let ok = false;
     for (let attempt = 1; attempt <= 5; attempt++) {
       const shell = await fetchText(base + "/index.html?dhp-capsules-v53=" + Date.now());
-      const runtime = await fetchText(base + "/assets/dar-home-html-parity-v1.js?v=20261022-v59-compact-rhythm");
+      const runtime = await fetchText(base + PARITY_SCRIPT_REL);
       const linked = shell.status === 200 &&
-        shell.text.includes("/test/assets/dar-home-html-parity-v1.js?v=20261022-v59-compact-rhythm");
+        shell.text.includes(PARITY_SCRIPT_SRC);
       const checks = [
         "DAR_TEST_HOME_ELEGANT_CAPSULE_V52",
         "DAR_TEST_LAST_ROW_FOOTER_FLOW_V53",
@@ -428,8 +434,8 @@ async function fetchVersionBuild(base) {
     for(let attempt=1;attempt<=5;attempt++){
       try{
         const shell=await fetchText(base+"/?parity-v1368="+Date.now());
-        const js=await fetchText(base+"/assets/dar-home-html-parity-v1.js?v=20261022-v59-compact-rhythm");
-        const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"')&&shell.text.includes("v59-compact-rhythm");
+        const js=await fetchText(base+PARITY_SCRIPT_REL);
+        const linked=shell.status===200&&shell.text.includes('id="darTestHomeHtmlParityV1"')&&shell.text.includes(PARITY_SCRIPT_SRC);
         const source=js.text||"";
         const sequence=source.indexOf('class="dhp-welcome"')>=0
           &&source.indexOf('class="dhp-isnad"')>source.indexOf('class="dhp-welcome"');
@@ -463,7 +469,7 @@ async function fetchVersionBuild(base) {
           console.log("HTML parity shell diagnostics "+label+":",JSON.stringify({
             bodyClose:shell.text.includes("</body>"),htmlClose:shell.text.includes("</html>"),
             marker:shell.text.includes("darTestHomeHtmlParityV1"),
-            current:shell.text.includes("v59-compact-rhythm"),oldV53:shell.text.includes("v53-footer-flow"),
+            current:shell.text.includes(PARITY_SCRIPT_SRC),oldV53:shell.text.includes("v53-footer-flow"),
             oldV55:shell.text.includes("v55-source-salam"),
             length:shell.text.length
           }));
