@@ -4,9 +4,9 @@ const assert=require("node:assert/strict"),fs=require("node:fs"),path=require("n
 const ui=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js"),"utf8");
 const pack=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-ui-locales-seven.json"),"utf8"));
 const titles=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-visible-title-drafts-seven.json"),"utf8"));
-const EXPECTED=["de","tr","en","ar","ku","ckb","bs"];
-assert.deepEqual(pack.availableLocales,[...EXPECTED,"fr","es"]);
-assert.deepEqual(pack.pendingLocales,["fr","es"]);
+const EXPECTED=["de","tr","en","ar","ku","ckb","bs","es"];
+assert.deepEqual(pack.availableLocales,[...EXPECTED.slice(0,-1),"fr","es"]);
+assert.deepEqual(pack.pendingLocales,["fr"]);
 for(const locale of EXPECTED.slice(1)){
  const v=pack.translations[locale];
  assert(Object.keys(v).length>=350,locale+" missing section labels");
@@ -51,8 +51,9 @@ for(const locale of EXPECTED){
  const v=pack.translations[locale];
  assert.equal(primary.nodeValue,locale==="de"?"ÜBERLIEFERUNGSMAẞSTAB":v["ÜBERLIEFERUNGSMAẞSTAB"],locale+" motto");
  assert.equal(prayer.nodeValue,locale==="de"?"Faǧr":(locale==="tr"?"Sabah (Fecr)":v["Faǧr"]),locale+" prayer");
- assert.equal(props.textContent,locale==="de"?titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].sourceTitle:
-    titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"].translations[locale],locale+" post title");
+ const postRecord=titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"];
+ const expectedPostTitle=locale==="de"||locale==="es"?postRecord.sourceTitle:postRecord.translations[locale];
+ assert.equal(props.textContent,expectedPostTitle,locale+" post title remains excluded for Spanish");
  assert.equal(original.nodeValue,"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً","Arabic source modified");
  assert.equal(excluded.nodeValue,"Nicht authentisch belegt","source text modified");
  assert.equal(doc.documentElement.dir,["ar","ckb"].includes(locale)?"rtl":"ltr");
@@ -71,4 +72,4 @@ assert.equal(weekday.nodeValue,"Mittwoch, 21. Oktober 2026","calendar failed to 
 assert.equal(runtime.formatCalendarDate("2026-10-21T12:00:00Z","en",{weekday:"long",timeZone:"UTC"}),"Wednesday");
 assert(runtime.translatePrayerName("Maghrib","en")==="Maghrib");
 assert(runtime.translatePrayerName("Maghrib","tr")==="Akşam");
-console.log("PASS: seven translated locales plus two registered pending locales, full welcome/prayer/calendar/prophet UI, 13 identity-checked headings, German rollback and source protection");
+console.log("PASS: eight translated UI locales plus one registered pending locale, full welcome/prayer/calendar/prophet UI, post exclusion, German rollback and source protection");

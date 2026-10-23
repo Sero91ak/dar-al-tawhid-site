@@ -11,10 +11,18 @@ const pack = JSON.parse(fs.readFileSync(path.join(root, "test/i18n/adult-ui-loca
 const locales = ["de", "tr", "en", "ar", "ku", "ckb", "bs", "fr", "es"];
 const pages = ["Startseite", "Qurʾān Player", "Duʿāʾ", "Bibliothek", "Gebetszeiten", "Qibla", "Suche", "Konto", "Einstellungen"];
 const sourceKeys = Object.keys(pack.translations.tr || {});
+const protectedSourceKeys = new Set([
+    "Qibla", "Ḥadīṯ", "Duʿāʾ", "Qurʾān", "Audio", "DĀR AL TAWḤĪD",
+    "As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh",
+    "Tafsīr", "Tadabbur", "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",
+    "Fajr", "Faǧr", "Ẓuhr", "Dhuhr", "Zuhr", "ʿAṣr", "Asr", "Maghrib",
+    "ʿIshāʾ", "Isha", "Rāwī", "Nabī / Rasūl",
+    "„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“"
+]);
 const rows = locales.map(locale => {
     const dictionary = locale === "de" ? {} : (pack.translations[locale] || {});
     const missing = sourceKeys.filter(key => locale !== "de" && !String(dictionary[key] || "").trim());
-    const germanRest = sourceKeys.filter(key => locale !== "de" && dictionary[key] === key);
+    const germanRest = sourceKeys.filter(key => locale !== "de" && dictionary[key] === key && !protectedSourceKeys.has(key));
     return {
         locale,
         direction: ["ar", "ckb"].includes(locale) ? "rtl" : "ltr",
