@@ -1,11 +1,73 @@
 {
-  "generatedAt": "2026-07-22T21:28:12.504Z",
-  "scannedPosts": 451,
-  "uniqueBooksInPosts": 136,
-  "addedWorks": 0,
-  "aliasedTitles": 0,
+  "generatedAt": "2026-09-30T10:58:34.288Z",
+  "scannedPosts": 466,
+  "uniqueBooksInPosts": 146,
+  "addedWorks": 5,
+  "aliasedTitles": 5,
   "skippedBooks": 0,
-  "added": [],
-  "aliased": [],
+  "added": [
+    {
+      "id": "al-diya-as-sariq-fi-radd-subuhat-al-madiq-al-mariq-kasf-gayahib-az-zalam",
+      "title": "al-Ḍiyāʾ aš-Šāriq fī radd šubuhāt al-māḏiq al-māriq; Kašf Ġayāhib aẓ-Ẓalām ʿan Awhām Ǧalāʾ al-Awhām",
+      "author": "Sulaymān b. Suḥmān",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [],
+      "postCount": 1
+    },
+    {
+      "id": "tafsir-und-fiqh-werke",
+      "title": "Tafsīr und Fiqh-Werke",
+      "author": "aṭ-Ṭabarī zu an-Nisāʾ 4:60; al-Māwardī",
+      "category": "Tafsīr",
+      "aliases": [],
+      "postCount": 1
+    },
+    {
+      "id": "iqtida-al-ilm-al-amal",
+      "title": "Iqtiḍāʾ al-ʿIlm al-ʿAmal",
+      "author": "al-Khaṭīb al-Baghdādī",
+      "category": "Quellenwerk",
+      "aliases": [],
+      "postCount": 1
+    },
+    {
+      "id": "al-mugalasah-wa-gawahir-al-ilm",
+      "title": "al-Muǧālasah wa-Ǧawāhir al-ʿIlm",
+      "author": "al-Dīnawarī",
+      "category": "ʿAqīdah und Sunnah",
+      "aliases": [],
+      "postCount": 1
+    },
+    {
+      "id": "ash-shifa-bi-tarif-huquq-al-mustafa",
+      "title": "ash-Shifāʾ bi-taʿrīf ḥuqūq al-Muṣṭafā",
+      "author": "al-Qāḍī ʿIyāḍ",
+      "category": "Quellenwerk",
+      "aliases": [],
+      "postCount": 1
+    }
+  ],
+  "aliased": [
+    {
+      "book": "Ṣaḥīḥ al-Buḫārī und Ṣaḥīḥ Muslim",
+      "workId": "sahih-al-bukhari"
+    },
+    {
+      "book": "Manāqib ash-Shāfiʿī",
+      "workId": "diwan-ash-shafii-manaqib-ash-shafii"
+    },
+    {
+      "book": "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah; Iʿlām al-Muwaqqiʿīn",
+      "workId": "sharh-usul-itiqad-lalakai"
+    },
+    {
+      "book": "Ḥilyat al-Awliyāʾ; al-Ikhlāṣ wa-n-Niyyah",
+      "workId": "hilyat-al-awliya"
+    },
+    {
+      "book": "Ḥilyat al-Awliyāʾ; Jāmiʿ Bayān al-ʿIlm wa-Faḍlih",
+      "workId": "jami-bayan-al-ilm"
+    }
+  ],
   "skipped": []
 }

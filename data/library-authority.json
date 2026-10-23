@@ -83,7 +83,9 @@
     {
       "id": "diwan-ash-shafii-manaqib-ash-shafii",
       "title": "Dīwān ash-Shāfiʿī / Manāqib ash-Shāfiʿī",
-      "aliases": [],
+      "aliases": [
+        "Manāqib ash-Shāfiʿī"
+      ],
       "author": "ash-Shāfiʿī in seinen bekannten Weisheiten über Wissen und Geduld.",
       "category": "Adab und Tazkiyah",
       "verified": true,
@@ -144,7 +146,8 @@
       "aliases": [
         "Hilyat al-Awliya",
         "Ḥilyat al-Awliyāʾ",
-        "Gharāʾib Mālik ibn Anas / Ḥilyat al-Awliyāʾ"
+        "Gharāʾib Mālik ibn Anas / Ḥilyat al-Awliyāʾ",
+        "Ḥilyat al-Awliyāʾ; al-Ikhlāṣ wa-n-Niyyah"
       ],
       "author": "Abū Nuʿaym al-Aṣbahānī",
       "category": "Biografien und Āthār",
@@ -370,7 +373,8 @@
         "Ṣaḥīḥ al-Bukhārī / Fatḥ al-Bārī",
         "Ṣaḥīḥ al-Bukhārī / Fatḥ al-Bārī Ibn Rajab / as-Sunan al-Kubrā",
         "Ṣaḥīḥ al-Buḫārī; Ṣaḥīḥ Muslim",
-        "Ṣaḥīḥ al-Bukhārī / Ṣaḥīḥ Muslim"
+        "Ṣaḥīḥ al-Bukhārī / Ṣaḥīḥ Muslim",
+        "Ṣaḥīḥ al-Buḫārī und Ṣaḥīḥ Muslim"
       ],
       "author": "Muḥammad ibn Ismāʿīl al-Bukhārī",
       "category": "Ḥadīṯ",
@@ -554,6 +558,15 @@
       "autoDiscovered": true
     },
     {
+      "id": "ash-shifa-bi-tarif-huquq-al-mustafa",
+      "title": "ash-Shifāʾ bi-taʿrīf ḥuqūq al-Muṣṭafā",
+      "aliases": [],
+      "author": "al-Qāḍī ʿIyāḍ",
+      "category": "Quellenwerk",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
       "id": "ibtal-al-hiyal",
       "title": "Ibṭāl al-Ḥiyal",
       "aliases": [],
@@ -569,6 +582,15 @@
         "ad-Durar as-Saniyyah fī l-Ajwibah an-Najdiyyah"
       ],
       "author": "Ḥamad ibn ʿAtīq",
+      "category": "Quellenwerk",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
+      "id": "iqtida-al-ilm-al-amal",
+      "title": "Iqtiḍāʾ al-ʿIlm al-ʿAmal",
+      "aliases": [],
+      "author": "al-Khaṭīb al-Baghdādī",
       "category": "Quellenwerk",
       "verified": true,
       "autoDiscovered": true
@@ -719,6 +741,15 @@
       "verified": true
     },
     {
+      "id": "tafsir-und-fiqh-werke",
+      "title": "Tafsīr und Fiqh-Werke",
+      "aliases": [],
+      "author": "aṭ-Ṭabarī zu an-Nisāʾ 4:60; al-Māwardī",
+      "category": "Tafsīr",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
       "id": "kitab-at-tawhid-miaw",
       "title": "Kitāb at-Tawḥīd",
       "aliases": [
@@ -734,7 +765,8 @@
       "title": "Jāmiʿ Bayān al-ʿIlm wa Faḍlih",
       "aliases": [
         "Jami Bayan al-Ilm",
-        "Jāmiʿ Bayān al-ʿIlm"
+        "Jāmiʿ Bayān al-ʿIlm",
+        "Ḥilyat al-Awliyāʾ; Jāmiʿ Bayān al-ʿIlm wa-Faḍlih"
       ],
       "author": "Ibn ʿAbd al-Barr",
       "category": "Wissen und Adab",
@@ -750,6 +782,15 @@
       "autoDiscovered": true
     },
     {
+      "id": "al-diya-as-sariq-fi-radd-subuhat-al-madiq-al-mariq-kasf-gayahib-az-zalam",
+      "title": "al-Ḍiyāʾ aš-Šāriq fī radd šubuhāt al-māḏiq al-māriq; Kašf Ġayāhib aẓ-Ẓalām ʿan Awhām Ǧalāʾ al-Awhām",
+      "aliases": [],
+      "author": "Sulaymān b. Suḥmān",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
+    },
+    {
       "id": "al-ibanah-ibn-battah",
       "title": "al-Ibānah al-Kubrā",
       "aliases": [
@@ -759,6 +800,15 @@
       "author": "Ibn Baṭṭah al-ʿUkbarī",
       "category": "ʿAqīdah und Sunnah",
       "verified": true
+    },
+    {
+      "id": "al-mugalasah-wa-gawahir-al-ilm",
+      "title": "al-Muǧālasah wa-Ǧawāhir al-ʿIlm",
+      "aliases": [],
+      "author": "al-Dīnawarī",
+      "category": "ʿAqīdah und Sunnah",
+      "verified": true,
+      "autoDiscovered": true
     },
     {
       "id": "ar-risalah",
@@ -903,7 +953,8 @@
         "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah wa’l-Jamāʿah",
         "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
         "Khalq Afʿāl al-ʿIbād; Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
-        "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah"
+        "Šarḥ Uṣūl Iʿtiqād Ahl as-Sunnah",
+        "Sharḥ Uṣūl Iʿtiqād Ahl as-Sunnah; Iʿlām al-Muwaqqiʿīn"
       ],
       "author": "Hibat Allāh al-Lālakāʾī",
       "category": "ʿAqīdah und Sunnah",
