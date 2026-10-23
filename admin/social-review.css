@@ -112,3 +112,27 @@ body:has(.admin-editorial-host) .topbar{
   padding-right:max(12px,env(safe-area-inset-right))!important
  }
 }
+
+/* ADMIN_EDITORIAL_WIDESCREEN_V3: full-viewport workbench, no popout */
+.admin-editorial-popout{
+ appearance:none;cursor:pointer;background:none;border:0;border-bottom:1px solid #ba9f66;
+ border-radius:0;color:#ead09a;font:700 12px/1.4 inherit;padding:8px 0;
+}
+body.dar-editorial-fullscreen{overflow:hidden!important}
+body.dar-editorial-fullscreen .admin-editorial-host{
+ position:fixed!important;inset:0!important;z-index:2000!important;
+ width:100vw!important;height:100dvh!important;
+ display:flex;flex-direction:column;background:#081410!important;
+ padding-top:env(safe-area-inset-top)!important;
+ padding-bottom:env(safe-area-inset-bottom)!important;
+}
+body.dar-editorial-fullscreen .admin-editorial-hostbar{flex:none;min-height:52px}
+body.dar-editorial-fullscreen .admin-editorial-host iframe{
+ display:block;flex:1;min-height:0!important;height:100%!important;
+ background:#081410!important
+}
+body.dar-editorial-fullscreen .admin-editorial-hostbar span{display:none}
+@media(max-width:767px){
+ .admin-editorial-hostbar small{font-size:9px}
+ body.dar-editorial-fullscreen .admin-editorial-hostbar{padding-left:max(12px,env(safe-area-inset-left));padding-right:max(12px,env(safe-area-inset-right))}
+}
