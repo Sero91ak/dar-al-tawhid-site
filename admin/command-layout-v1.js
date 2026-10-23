@@ -112,7 +112,7 @@
   const height=window.visualViewport?.height||window.innerHeight||0;
   const touch=window.matchMedia?.("(pointer:coarse)")?.matches===true;
   // A touch device can be an unfolded phone, tablet or an app in split-window mode.
-  const foldMedium=touch&&width>=650&&width<1440;
+  const foldMedium=touch&&width>=650&&width<1680;
   document.body.classList.toggle("dar-admin-fold-viewport",foldMedium);
   document.documentElement.style.setProperty("--dar-admin-window-width",width+"px");
   document.documentElement.style.setProperty("--dar-admin-window-height",height+"px");
