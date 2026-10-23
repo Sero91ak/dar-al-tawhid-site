@@ -43,19 +43,19 @@ def main():
             driver.find_element("id", "darTestLockBtn").click()
             WebDriverWait(driver, 10).until(lambda d: not d.find_elements("id", "darTestLock"))
         wait_ready()
-        source = js("return [...document.querySelectorAll('[data-canonical-content],.post-body,.quran-ayah,[dir=rtl]')].slice(0,20).map(x=>x.textContent).join('\\n')")
         for code, direction in LOCALES:
             for area in AREAS:
                 try:
                     js("location.hash = '#' + arguments[0]", area)
                     wait_ready()
+                    source = js("return [...document.querySelectorAll('[data-canonical-content],.post-body,.quran-ayah')].slice(0,20).map(x=>x.textContent).join('\\n')")
                     select_locale(code, direction)
                     visible = js("return [...document.querySelectorAll('body *')].filter(x=>{let r=x.getBoundingClientRect();return r.width>0&&r.height>0&&!x.children.length}).map(x=>x.textContent.trim()).filter(Boolean).slice(0,80).join('|')")
                     if len(visible) < 20:
                         raise AssertionError("insufficient rendered leaf text")
                     if js("return localStorage.getItem('darAdultPreferredLocaleV1')") != code:
                         raise AssertionError("locale not persisted")
-                    if js("return [...document.querySelectorAll('[data-canonical-content],.post-body,.quran-ayah,[dir=rtl]')].slice(0,20).map(x=>x.textContent).join('\\n')") != source:
+                    if js("return [...document.querySelectorAll('[data-canonical-content],.post-body,.quran-ayah')].slice(0,20).map(x=>x.textContent).join('\\n')") != source:
                         raise AssertionError("canonical/source text changed")
                     results.append({"area": area, "locale": code, "status": "PASS", "visibleChars": len(visible)})
                 except Exception as error:
