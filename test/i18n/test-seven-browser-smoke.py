@@ -8,7 +8,7 @@ for flag in ["--headless=new","--no-sandbox","--disable-dev-shm-usage","--disabl
     options.add_argument(flag)
 driver=webdriver.Chrome(options=options)
 locales=[("de","ltr"),("tr","ltr"),("en","ltr"),("ar","rtl"),
-         ("ku","ltr"),("ckb","rtl"),("bs","ltr")]
+         ("ku","ltr"),("ckb","rtl"),("bs","ltr"),("fr","ltr"),("es","ltr")]
 try:
     driver.set_window_size(390,844)
     driver.get("http://127.0.0.1:8765/test/")
@@ -34,10 +34,10 @@ try:
         wait.until(lambda d:d.execute_script("return !!document.querySelector(arguments[0])",selector))
         driver.execute_script("document.querySelector(arguments[0]).click()",selector)
         wait.until(lambda d:d.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]').length===9"))
-        assert driver.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]:not([disabled])').length")==7
-        assert driver.execute_script("return document.querySelector('#darAdultLanguagePicker [data-dal-locale=fr]').disabled && document.querySelector('#darAdultLanguagePicker [data-dal-locale=es]').disabled")
+        assert driver.execute_script("return document.querySelectorAll('#darAdultLanguagePicker [data-dal-locale]:not([disabled])').length")==9
+        assert driver.execute_script("return !document.querySelector('#darAdultLanguagePicker [data-dal-locale=fr]').disabled && !document.querySelector('#darAdultLanguagePicker [data-dal-locale=es]').disabled")
         driver.execute_script("document.querySelector('#darAdultLanguagePicker [data-dal-close]').click()")
-        print("PASS 9-LANGUAGE PICKER with 7 active and 2 pending",name,flush=True)
+        print("PASS 9-LANGUAGE PICKER with 9 active",name,flush=True)
     driver.execute_script("localStorage.setItem('darAdultPreferredLocaleV1','de');window.dispatchEvent(new CustomEvent('dar-adult-locale-changed',{detail:{locale:'de'}}))")
     wait.until(lambda d:d.execute_script("return document.documentElement.lang==='de'&&document.documentElement.dir==='ltr'"))
     print("PASS LOSSLESS GERMAN RETURN; no external translation API calls",flush=True)
