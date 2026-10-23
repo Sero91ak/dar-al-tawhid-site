@@ -2656,6 +2656,42 @@ body.desktop-overhaul-v18 .v8-quiz-arena :is(button,select):focus-visible{outlin
 @media(max-width:740px){body.desktop-overhaul-v18 .v8-quiz-filters,body.desktop-overhaul-v18 .v8-quiz-answers{grid-template-columns:1fr}body.desktop-overhaul-v18 .v8-quiz-panel{padding:19px 16px}body.desktop-overhaul-v18 .v8-quiz-actions .v8-quiz-primary{flex:1}}
 @media(prefers-reduced-motion:reduce){body.desktop-overhaul-v18 .v8-quiz-arena *{transition:none!important;animation:none!important}}
 </style>
+
+<style id="darV8PlayerUsableV2">
+/* DAR_V8_PLAYER_USABLE_V2_20261023: real public V8 player, no native/Kids. */
+body.desktop-overhaul-v18 .v8-real-player #darV8PlayerExpand{display:inline-flex!important;align-items:center;justify-content:center;gap:5px;width:auto!important;min-width:45px;max-width:100%;height:37px;min-height:37px;padding:8px 11px!important;border-radius:999px!important;font:750 11px system-ui,sans-serif!important;white-space:nowrap}
+body.desktop-overhaul-v18 .v8-real-player #darV8PlayerExpand span{font:inherit;color:inherit}
+body.desktop-overhaul-v18 .v8-real-player .dar-v8-qa-tools{display:none!important;gap:10px;align-items:center;flex-wrap:wrap;margin:13px 0 0;padding:12px 0 0;border-top:1px solid var(--v8-line);color:var(--v8-ink)}
+body.desktop-overhaul-v18 .v8-real-player.dar-v8-controls-open .dar-v8-qa-tools,body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-tools{display:flex!important}
+body.desktop-overhaul-v18 .v8-real-player .dar-v8-qa-tools label{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:750}
+body.desktop-overhaul-v18 .v8-real-player .dar-v8-qa-tools :is(select,button){min-height:41px;padding:8px 12px;border-radius:12px;border:1px solid var(--v8-line);background:var(--v8-paper);color:var(--v8-ink);font-size:13px;cursor:pointer}
+body.desktop-overhaul-v18 .v8-real-player .dar-v8-qa-tools button[aria-pressed="true"]{border-color:var(--v8-gold);background:color-mix(in srgb,var(--v8-gold) 18%,var(--v8-paper))}
+body.desktop-overhaul-v18 .v8-real-player .dar-v8-qa-tools output{margin-inline-start:auto;color:var(--v8-muted);font-variant-numeric:tabular-nums;font-size:12px}
+body.desktop-overhaul-v18 .v8-real-player .qa26-progress{height:9px;min-height:9px;cursor:pointer;border-radius:999px;overflow:hidden;touch-action:pan-y}
+body.desktop-overhaul-v18 .v8-real-player .qa26-progress:focus-visible{outline:2px solid var(--v8-gold)!important;outline-offset:4px!important}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen>.dar-v8-player-backdrop{z-index:19980!important}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player{z-index:19990!important;overscroll-behavior:contain!important}
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .qa26-controls,
+body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-tools{visibility:visible!important;opacity:1!important}
+@media(max-width:740px){
+ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player{
+  inset:max(10px,env(safe-area-inset-top)) 10px max(10px,env(safe-area-inset-bottom)) 10px!important;
+  top:max(10px,env(safe-area-inset-top))!important;left:10px!important;
+  right:10px!important;bottom:max(10px,env(safe-area-inset-bottom))!important;
+  transform:none!important;width:calc(100% - 20px)!important;max-width:none!important;
+  max-height:none!important;padding:17px!important;border-radius:21px!important;
+  overflow-y:auto!important;-webkit-overflow-scrolling:touch!important
+ }
+ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player #quranAudioPlayer.qa26-player .qa26-controls{
+  display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:10px!important;
+  height:auto!important;min-height:0!important
+ }
+ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-tools{flex-direction:column;align-items:stretch}
+ body.desktop-overhaul-v18.dar-v8-player-fullscreen .v8-real-player .dar-v8-qa-tools output{margin-inline-start:0}
+ body.desktop-overhaul-v18 .v8-real-player #darV8PlayerExpand span{font-size:10px}
+}
+@media(prefers-reduced-motion:reduce){body.desktop-overhaul-v18 .v8-real-player *{scroll-behavior:auto!important;transition:none!important}}
+</style>
 </head>
 <style id="dar-touch-active-fix">
 @media (hover:none) and (pointer:coarse){
@@ -2758,11 +2794,16 @@ body.desktop-overhaul-v18 .v8-quiz-arena :is(button,select):focus-visible{outlin
      </div>
      <button id="qaNext" class="qa26-nav qa26-next" type="button" aria-label="Nächste Āyah">›</button>
     </div>
-    <button class="dar-v8-expand" type="button" id="darV8PlayerExpand" aria-expanded="false" aria-controls="darV8PlayerControls" aria-label="Sūrah, Vers und Rezitator auswählen">⌄</button>
+    <button class="dar-v8-expand" type="button" id="darV8PlayerExpand" aria-expanded="false" aria-controls="darV8PlayerControls" aria-label="Qurʾān-Player und Auswahl öffnen">⚙ <span>Auswahl</span></button>
     <div id="darV8PlayerControls" class="qa26-controls" aria-label="Qurʾān-Auswahl">
      <label class="qa26-field qa26-surah" for="qaSurah"><span>Sūrah</span><select id="qaSurah" aria-label="Sūrah auswählen"></select></label>
      <label class="qa26-field qa26-ayah" for="qaAyah"><span>Āyah</span><select id="qaAyah" aria-label="Āyah auswählen"></select></label>
      <label class="qa26-field qa26-reciter" for="qaReciter"><span>Rezitator</span><select id="qaReciter" aria-label="Rezitator auswählen"></select></label>
+    </div>
+    <div id="darV8QaTools" class="dar-v8-qa-tools" aria-label="Wiedergabe-Einstellungen">
+     <label for="darV8QaSpeed">Tempo<select id="darV8QaSpeed" aria-label="Wiedergabegeschwindigkeit"><option value="0.75">0,75 ×</option><option value="1" selected>1 ×</option><option value="1.25">1,25 ×</option><option value="1.5">1,5 ×</option></select></label>
+     <button type="button" id="darV8QaRepeat" aria-pressed="false">↻ Vers wiederholen: Aus</button>
+     <output id="darV8QaTime" aria-live="off">0:00 / 0:00</output>
     </div>
    </section>
    <audio id="qaAudio" preload="metadata"></audio>
@@ -2789,7 +2830,7 @@ body.desktop-overhaul-v18 .v8-quiz-arena :is(button,select):focus-visible{outlin
 
 <script src="/desktop-preview/assets/dar-v8-route-platform.js?v=20261021-quran-modal-v11"></script>
 <script src="/desktop-preview/assets/dar-v8-portal-live.js?v=20261021-quran-modal-v11"></script>
-<script id="darV8ShellInteractions">(function(){var t=document.getElementById("darV8ThemeToggle");function apply(v){document.body.classList.toggle("dar-v8-night",v==="layl");if(t)t.textContent=v==="layl"?"☀":"☾"}try{apply(localStorage.getItem("darV8Theme")==="layl"?"layl":"salbei")}catch(e){apply("salbei")}if(t)t.addEventListener("click",function(){var v=document.body.classList.contains("dar-v8-night")?"salbei":"layl";apply(v);try{localStorage.setItem("darV8Theme",v)}catch(e){}});var a=document.getElementById("darV8TopAudio");if(a)a.addEventListener("click",function(){if(window.DARV8Portal){window.DARV8Portal.togglePlayer();return;}if(document.body.classList.contains("dar-v8-home")||document.body.classList.contains("dar-v8-quran-route")){document.querySelector(".v8-real-player")?.scrollIntoView({behavior:"smooth",block:"center"})}else{location.href="/?page=quran&player=expanded"}});var settings=document.getElementById("darV8PrayerSettings");if(settings)settings.addEventListener("click",function(){var section=document.querySelector(".v8-real-prayer");if(!section)return;var opened=section.classList.toggle("dar-v8-prayer-settings-open");settings.setAttribute("aria-expanded",String(opened));settings.textContent=opened?"Einstellungen schließen ×":"Standort ↗";if(opened)document.getElementById("prCityOpen")?.click()});var expand=document.getElementById("darV8PlayerExpand");if(expand)expand.addEventListener("click",function(){var row=document.querySelector(".v8-real-player");if(!row)return;var opened=row.classList.toggle("dar-v8-controls-open");expand.setAttribute("aria-expanded",String(opened));expand.textContent=opened?"⌃":"⌄"});document.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();var input=document.getElementById("darV8FinderQuery")||document.getElementById("siteSearch");if(input)input.focus();else location.href="/?page=suche"}})})();</script>
+<script id="darV8ShellInteractions">(function(){var t=document.getElementById("darV8ThemeToggle");function apply(v){document.body.classList.toggle("dar-v8-night",v==="layl");if(t)t.textContent=v==="layl"?"☀":"☾"}try{apply(localStorage.getItem("darV8Theme")==="layl"?"layl":"salbei")}catch(e){apply("salbei")}if(t)t.addEventListener("click",function(){var v=document.body.classList.contains("dar-v8-night")?"salbei":"layl";apply(v);try{localStorage.setItem("darV8Theme",v)}catch(e){}});var a=document.getElementById("darV8TopAudio");if(a)a.addEventListener("click",function(){if(window.DARV8Portal){window.DARV8Portal.togglePlayer();return;}if(document.body.classList.contains("dar-v8-home")||document.body.classList.contains("dar-v8-quran-route")){document.querySelector(".v8-real-player")?.scrollIntoView({behavior:"smooth",block:"center"})}else{location.href="/?page=quran&player=expanded"}});var settings=document.getElementById("darV8PrayerSettings");if(settings)settings.addEventListener("click",function(){var section=document.querySelector(".v8-real-prayer");if(!section)return;var opened=section.classList.toggle("dar-v8-prayer-settings-open");settings.setAttribute("aria-expanded",String(opened));settings.textContent=opened?"Einstellungen schließen ×":"Standort ↗";if(opened)document.getElementById("prCityOpen")?.click()});var expand=document.getElementById("darV8PlayerExpand");if(expand)expand.addEventListener("click",function(){var row=document.querySelector(".v8-real-player");if(!row)return;var opened=row.classList.toggle("dar-v8-controls-open");var controls=document.getElementById("darV8PlayerControls");if(controls)controls.hidden=!opened;var tools=document.getElementById("darV8QaTools");if(tools)tools.hidden=!opened;expand.setAttribute("aria-expanded",String(opened));expand.innerHTML=opened?"⌃ <span>Schließen</span>":"⚙ <span>Auswahl</span>";if(opened&&window.matchMedia&&window.matchMedia("(max-width:740px)").matches&&window.DARV8Portal)window.DARV8Portal.togglePlayer(true)});document.addEventListener("keydown",function(e){if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==="k"){e.preventDefault();var input=document.getElementById("darV8FinderQuery")||document.getElementById("siteSearch");if(input)input.focus();else location.href="/?page=suche"}})})();</script>
 <script src="/widgets/shared/prayer-math.js"></script>
 <script src="/assets/zakat-engine.js?v=desktop-20261009-4"></script>
 <script src="/assets/zakat-pdf.js?v=desktop-20261009-4"></script>
@@ -3814,8 +3855,46 @@ body.desktop-overhaul-v18 .v8-quiz-arena :is(button,select):focus-visible{outlin
   qa.reciter.onchange=function(){qa.state.reciter=qa.reciter.value;setQaSource(!qa.audio.paused)};
   qa.audio.onplay=function(){qa.wrap.classList.add("is-playing");qa.play.textContent="❚❚";updateQaTitle()};
   qa.audio.onpause=function(){qa.wrap.classList.remove("is-playing");qa.play.textContent="▶"};
-  qa.audio.ontimeupdate=function(){var d=qa.audio.duration||0,c=qa.audio.currentTime||0;qa.progress.style.width=(d?Math.min(100,c/d*100):0)+"%"};
-  qa.audio.onended=function(){stepQa(1,true)};
+  /* DAR_V8_PLAYER_USABLE_V2_20261023: progress, repeat, speed, controls. */
+  function qaTime(n){n=Number.isFinite(n)?Math.max(0,Math.floor(n)):0;return Math.floor(n/60)+":"+String(n%60).padStart(2,"0")}
+  var qaSpeed=document.getElementById("darV8QaSpeed"),qaRepeat=document.getElementById("darV8QaRepeat"),qaTimeLabel=document.getElementById("darV8QaTime"),qaBar=qa.progress&&qa.progress.parentElement;
+  if(qaSpeed)qaSpeed.onchange=function(){qa.audio.playbackRate=Number(qaSpeed.value)||1};
+  if(qaRepeat)qaRepeat.onclick=function(){var on=qaRepeat.getAttribute("aria-pressed")!=="true";qaRepeat.setAttribute("aria-pressed",String(on));qaRepeat.textContent=on?"↻ Vers wiederholen: Ein":"↻ Vers wiederholen: Aus"};
+  function qaUpdateProgress(){
+   var duration=Number.isFinite(qa.audio.duration)?qa.audio.duration:0,current=qa.audio.currentTime||0;
+   var percent=duration?Math.min(100,Math.max(0,current/duration*100)):0;
+   qa.progress.style.width=percent+"%";
+   if(qaTimeLabel)qaTimeLabel.textContent=qaTime(current)+" / "+qaTime(duration);
+   if(qaBar)qaBar.setAttribute("aria-valuenow",String(Math.round(percent)))
+  }
+  qa.audio.ontimeupdate=qaUpdateProgress;
+  qa.audio.onloadedmetadata=qaUpdateProgress;
+  if(qaBar){
+   qaBar.setAttribute("role","slider");qaBar.setAttribute("tabindex","0");
+   qaBar.setAttribute("aria-label","Wiedergabeposition");
+   qaBar.setAttribute("aria-valuemin","0");qaBar.setAttribute("aria-valuemax","100");
+   qaBar.setAttribute("aria-valuenow","0");
+   qaBar.onclick=function(e){
+    var duration=qa.audio.duration,rect=qaBar.getBoundingClientRect();
+    if(!Number.isFinite(duration)||duration<=0||!rect.width)return;
+    qa.audio.currentTime=Math.max(0,Math.min(duration,(e.clientX-rect.left)/rect.width*duration));
+    qaUpdateProgress()
+   };
+   qaBar.onkeydown=function(e){
+    if(e.key!=="ArrowRight"&&e.key!=="ArrowLeft"&&e.key!=="Home"&&e.key!=="End")return;
+    if(!Number.isFinite(qa.audio.duration)||qa.audio.duration<=0)return;
+    e.preventDefault();
+    var delta=e.key==="ArrowRight"?5:e.key==="ArrowLeft"?-5:0;
+    qa.audio.currentTime=e.key==="Home"?0:e.key==="End"?qa.audio.duration:Math.max(0,Math.min(qa.audio.duration,qa.audio.currentTime+delta));
+    qaUpdateProgress()
+   }
+  }
+  qa.audio.onended=function(){
+   if(qaRepeat&&qaRepeat.getAttribute("aria-pressed")==="true"){
+    qa.audio.currentTime=0;qa.audio.play().catch(function(){qa.title.textContent="Wiedergabe nicht erreichbar"});return
+   }
+   stepQa(1,true)
+  };
   qa.audio.onerror=function(){if(qa.audio.dataset.fallbackUsed!=="yes"&&qa.audio.src.includes("/quran-audio/")){var resume=qa.audio.dataset.wantsPlayback==="yes";qa.audio.dataset.fallbackUsed="yes";qa.audio.src=everyayahAudioUrl();qa.audio.load();if(resume)qa.audio.play().catch(function(){qa.title.textContent="Audio derzeit nicht erreichbar · Rezitator wechseln"})}else{qa.title.textContent="Audio derzeit nicht erreichbar · Rezitator wechseln"}};
   if(new URLSearchParams(location.search).get("player")==="expanded")document.getElementById("darV8PlayerExpand")?.click();
   if("mediaSession" in navigator){try{navigator.mediaSession.setActionHandler("play",function(){qa.audio.play()});navigator.mediaSession.setActionHandler("pause",function(){qa.audio.pause()});navigator.mediaSession.setActionHandler("nexttrack",function(){stepQa(1,true)});navigator.mediaSession.setActionHandler("previoustrack",function(){stepQa(-1,true)})}catch(e){}}
