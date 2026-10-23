@@ -17,9 +17,10 @@
   "completedBatches": [
     1,
     2,
-    3
+    3,
+    4
   ],
-  "nextBatch": 4,
+  "nextBatch": 5,
   "items": [
     {
       "id": "post:354-547",
@@ -518,6 +519,176 @@
       "id": "post:ahmad-taqwa-und-akhirah-001",
       "sourceHash": "38c00fd4772c30a7183eb2442d8b8bd4ce1806d5c2655d19eee4b52d6ea506d8",
       "batch": 3,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ahmad-vorsicht-bei-ijma-behauptung-001",
+      "sourceHash": "345acc906011fb92abfae89d5e8995fb238c282a727685f107f369286d95f06c",
+      "batch": 4,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ahmad-wer-hadith-zurueckweist-001",
+      "sourceHash": "57d24ced08e3b33575ec23be31b89ac1c0834f13c33947b080d44ad3bffa1bde",
+      "batch": 4,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ahmad-wissen-gleicht-nichts-001",
+      "sourceHash": "a9c028e1c52105c42dfc8b7fa2a7ba624d24c9c8f9ebb6024c0626bf7a7483b0",
+      "batch": 4,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ahmad-zeichen-des-suchenden-001",
+      "sourceHash": "924c997f425405ec3c09253bfa3c78a0b71ee4c3747c99f01f43972a768bc11b",
+      "batch": 4,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ahmadiyyah-akhir-al-masajid-129",
+      "sourceHash": "1c69b05dd96a9230f9e1ccdd5be0fb9b5e64e6379843158911d49fa465eba425",
+      "batch": 4,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ahmadiyyah-al-aqib-letzter-prophet-130",
+      "sourceHash": "39eb3eb74f8ec42fcc720071ff058d0163744492944a4c0a053e7301fdfe6824",
+      "batch": 4,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aishah-frauen-ansar-wissen-551",
+      "sourceHash": "5e158d87d646a71d496c5f8450b5172d691bfc30eb9c5b09ea5d58a4488831a8",
+      "batch": 4,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aishah-scham-darf-nicht-vom-wissen-abhalten-450",
+      "sourceHash": "bd3ccb87d30622d15069f357106d2dc5c4c88d18c913afba5f9ea423b2e9230e",
+      "batch": 4,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:akhirah-macht-die-zunge-ernst-228",
+      "sourceHash": "9bafd4318859e78fed6e8d98fb44fa6d090adebdcc5dd059c2c0cc5f7610bcbc",
+      "batch": 4,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:akhlak-besten-mit-charakter-001",
+      "sourceHash": "c4941750f2ee41617f4890211930b4d7afef02d2dbff94443555d402aefa74a1",
+      "batch": 4,
       "status": "draft",
       "humanApproval": false,
       "locales": {
