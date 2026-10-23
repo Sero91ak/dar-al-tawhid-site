@@ -154,7 +154,7 @@
       '<div class="admin-editorial-hostbar"><div><small>DĀR ADMIN / REDAKTION</small>'+
       '<strong>Redaktionsatelier</strong><span>Neun Sprachen · Kanonische Beiträge · Originalnachweise</span></div>'+
       '<button type="button" id="darEditorFullscreen" class="admin-editorial-popout" aria-pressed="false">Widescreen öffnen ↗</button></div>'+
-      '<iframe id="darAdminEditorialFrame" title="DĀR AL TAWḤĪD Redaktion" src="/admin/redaktion/?v=1" referrerpolicy="same-origin"></iframe>'+
+      '<div id="darAdminEditorialStatus" class="admin-editorial-loading" aria-live="polite">Redaktionsatelier wird geladen …</div><iframe id="darAdminEditorialFrame" title="DĀR AL TAWḤĪD Redaktion" src="/admin/redaktion/?v=1" referrerpolicy="same-origin"></iframe>'+
       '</section>';
   }
   function bindImmersiveAtelier(){
@@ -183,7 +183,22 @@
     if(global.__darEditorEsc)window.removeEventListener("keydown",global.__darEditorEsc);
     global.__darEditorEsc=e=>{if(e.key==="Escape"&&document.body.classList.contains("dar-editorial-fullscreen"))closeFullscreen()};
     window.addEventListener("keydown",global.__darEditorEsc);
-    frame.addEventListener("load",resize,{once:true});
+    frame.addEventListener("load",()=>{
+      resize();
+      const indicator=document.getElementById("darAdminEditorialStatus");
+      if(!indicator)return;
+      let healthy=false;
+      try{healthy=!!frame.contentDocument?.getElementById("postText")&&!!frame.contentDocument?.getElementById("catalog")}catch(_){}
+      if(healthy){indicator.hidden=true;return}
+      indicator.hidden=false;
+      indicator.textContent="Die Redaktionsdatei wurde noch nicht korrekt ausgeliefert. Bitte den Cloudflare-Produktionsdeploy prüfen.";
+      const retry=document.createElement("button");retry.type="button";retry.textContent="Erneut laden";
+      retry.className="btn";retry.onclick=()=>{
+        indicator.textContent="Redaktionsatelier wird neu geladen …";
+        frame.src="/admin/redaktion/?v="+Date.now();
+      };
+      indicator.appendChild(retry);
+    });
     resize();
   }
   global.DARAdminSocialReview={render:renderImmersiveAtelier,bind:bindImmersiveAtelier,renderLegacy:render,bindLegacy:bind};
