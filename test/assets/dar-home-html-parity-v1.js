@@ -9,9 +9,11 @@ if(!/^\/test(?:\/|$)/.test(location.pathname)||/^\/test\/kids(?:\/|$)/.test(loca
 if(window.__darHomeHtmlParityV1)return;
 window.__darHomeHtmlParityV1=true;
 var ID="darHomeHtmlParityV1", pending=false, lastItems="", inputTimer=null, clock=0;
+/* DAR TEST HOME SHORTCUTS V60: no duplicate appearance/settings tiles.
+ * The fixed header owns appearance; Einstellungen remains in Mehr. */
 var quicks=[
- ["qibla","qibla.png","Qibla"],["theme","spark.png","Design"],
- ["settings","settings.png","Einstellungen"],["library","library.png","Bibliothek"]
+ ["qibla","qibla.png","Qibla-Suche"],
+ ["library","library.png","Bibliothek"]
 ];
 var links=[
  ["frauen","frauen.png","Frauen","Wissen & Fiqh"],["hadith","hadith.png","Ḥadīṯ-Werke","Sammlungen"],
@@ -31,6 +33,40 @@ function route(dest,val){if(dest==="library")dest="bibliothek"; // Open the real
  try{if(typeof window.navigate==="function"){window.navigate(dest,val||"");return}}catch(e){}
  try{if(typeof navigate==="function"){navigate(dest,val||"");return}}catch(e){}
  location.hash="#"+dest+(val?"/"+encodeURIComponent(val):"");
+}
+/* DAR TEST QIBLA QUICK V60: prefer the existing native quick sheet.
+ * Never navigate to the full Qibla settings/compass route on shortcut tap.
+ * Reuse the established browser QiblaQuickView when the native sheet is absent. */
+function openQuickQibla(){
+ try{
+  if(typeof window.openQiblaQuickSheet==="function"){window.openQiblaQuickSheet();return}
+  if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.open==="function"){
+   window.DARQiblaQuickView.open();return;
+  }
+ }catch(e){console.warn("Qibla quick view initial open",e)}
+ if(window.__darTestQiblaQuickLoading)return;
+ window.__darTestQiblaQuickLoading=true;
+ if(!document.querySelector('link[data-dar-test-qibla-quick-v60]')){
+  var css=document.createElement("link");css.rel="stylesheet";
+  css.href="/assets/qibla-quick-view.css?v=test-qibla-v60";
+  css.setAttribute("data-dar-test-qibla-quick-v60","");
+  document.head.appendChild(css);
+ }
+ function finish(){
+  window.__darTestQiblaQuickLoading=false;
+  if(window.DARQiblaQuickView&&typeof window.DARQiblaQuickView.open==="function"){
+   window.DARQiblaQuickView.open();return;
+  }
+  route("qibla");
+ }
+ var existing=document.querySelector('script[data-dar-test-qibla-quick-v60]');
+ if(existing){existing.addEventListener("load",finish,{once:true});existing.addEventListener("error",function(){window.__darTestQiblaQuickLoading=false;route("qibla")},{once:true});return}
+ var script=document.createElement("script");
+ script.src="/assets/qibla-quick-view.js?v=test-qibla-v60";
+ script.async=true;script.setAttribute("data-dar-test-qibla-quick-v60","");
+ script.onload=finish;
+ script.onerror=function(){window.__darTestQiblaQuickLoading=false;route("qibla")};
+ document.head.appendChild(script);
 }
 function nativeText(node,query){var el=node&&node.querySelector(query);return el?String(el.textContent||"").replace(/\s+/g," ").trim():""}
 function html(){
@@ -342,6 +378,12 @@ function stylesheet(){
  "#darHomeHtmlParityV1 .dhp-quickbar{margin-top:0!important;}",
  "@media(max-width:359px){#darHomeHtmlParityV1 .dhp-greeting{font-size:19px!important;}#darHomeHtmlParityV1 .dhp-isnad{padding-inline:12px!important;}#darHomeHtmlParityV1 .dhp-home-source-v55{letter-spacing:.06em!important;}}",
  "@media(min-width:700px){#darHomeHtmlParityV1 .dhp-welcome{margin-top:18px!important;}#darHomeHtmlParityV1 .dhp-isnad{margin-top:18px!important;}}",
+ /* DAR TEST SHORTCUT DENSITY V60: two useful large shortcuts, no duplicated theme/settings. */
+ "#darHomeHtmlParityV1 .dhp-quickbar{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;margin:10px 0 13px!important;}",
+ "#darHomeHtmlParityV1 .dhp-quick{min-height:66px!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:center!important;gap:10px!important;padding:9px 13px!important;border-radius:17px!important;text-align:start!important;}",
+ "#darHomeHtmlParityV1 .dhp-quick .dhp-icon3d{width:38px!important;height:38px!important;flex:0 0 38px!important;}",
+ "#darHomeHtmlParityV1 .dhp-quick b{font-size:clamp(12px,2.8vw,14px)!important;line-height:1.25!important;}",
+ "@media(max-width:359px){#darHomeHtmlParityV1 .dhp-quick{padding:8px!important;gap:6px!important;}#darHomeHtmlParityV1 .dhp-quick .dhp-icon3d{width:32px!important;height:32px!important;flex-basis:32px!important;}}",
  "html,html body{overscroll-behavior-y:none!important;}",
  ].join("\n");
 }
@@ -376,6 +418,7 @@ function click(e){
  if(!btn)return;
  e.preventDefault();
  var name=btn.getAttribute("data-dhp-route");
+ if(name==="qibla"){openQuickQibla();return}
  if(name==="theme"){
   var old=document.querySelector("#dv3HeaderActions [data-dv3-theme-open]");
   if(old){old.click();return}
