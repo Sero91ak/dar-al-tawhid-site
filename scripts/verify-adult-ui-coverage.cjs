@@ -21,7 +21,7 @@ const protectedSourceKeys = new Set([
     "Tafsīr", "Tadabbur", "As-Salāmu ʿalaykum wa Raḥmatullāhi wa Barakātuh",
     "Fajr", "Faǧr", "Ẓuhr", "Dhuhr", "Zuhr", "ʿAṣr", "Asr", "Maghrib",
     "ʿIshāʾ", "Isha", "Rāwī", "Nabī / Rasūl",
-    "„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.„"
+    "„Dieses Wissen ist Religion. So achtet darauf, von wem ihr eure Religion nehmt.“"
 ]);
 // These values intentionally match the German source key in the target
 // language: they are valid loanwords, proper names, or established UI terms,
