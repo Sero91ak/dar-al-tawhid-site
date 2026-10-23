@@ -138,7 +138,9 @@ def navigate_area(driver, area):
            }
            location.hash = '#' + arguments[0]; return 'hash-fallback';""", area
     )
-    wait = WebDriverWait(driver, 35)
+    # A missing route marker is a concrete FAIL; keep the full matrix moving
+    # so every area/locale still receives a result and screenshot.
+    wait = WebDriverWait(driver, 8)
     wait.until(lambda d: d.execute_script("return document.readyState === 'complete'"))
     wait.until(lambda d: d.execute_script(
         "return !!document.querySelector(arguments[0])", selector
