@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "scope": "THREE_QUIZ_189_499_839_NATIVE_FUSHA_PRIVATE_REVIEW",
+  "createdAt": "2026-10-23T17:13:43.406988+00:00",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "fullSources": {
+    "Ghībah ist erlaubt, solange die Person es nicht hört.": "kids-quiz-839",
+    "Der längste Qurʾān-Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.": "kids-quiz-189",
+    "Die Qurʾān-Duʿāʾ bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.": "kids-quiz-499"
+  },
+  "sourceUnits": {
+    "Ghībah ist erlaubt, solange die Person es nicht hört.": [
+      {
+        "sourceToken": "Ghībah",
+        "sourceSpoken": "غِيبَة",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": " ist erlaubt, solange die Person es nicht hört.",
+        "sourceSpoken": "ist erlaubt, solange die Person es nicht hört.",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      }
+    ],
+    "Der längste Qurʾān-Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.": [
+      {
+        "sourceToken": "Der längste ",
+        "sourceSpoken": "Der längste",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Qurʾān",
+        "sourceSpoken": "الْقُرْآن",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": "-Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.",
+        "sourceSpoken": "Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      }
+    ],
+    "Die Qurʾān-Duʿāʾ bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.": [
+      {
+        "sourceToken": "Die ",
+        "sourceSpoken": "Die",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Qurʾān",
+        "sourceSpoken": "الْقُرْآن",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": "Duʿāʾ",
+        "sourceSpoken": "دُعَاء",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": " bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.",
+        "sourceSpoken": "bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      }
+    ]
+  },
+  "newSourcesPlanned": {
+    "غِيبَة": "ar",
+    "ist erlaubt, solange die Person es nicht hört.": "de",
+    "Der längste": "de",
+    "الْقُرْآن": "ar",
+    "Vers lehrt sorgfältige Dokumentation von Schulden und gerechte Zeugenschaft.": "de",
+    "Die": "de",
+    "دُعَاء": "ar",
+    "bittet Allah um Gutes im Diesseits und Jenseits und um Schutz vor der Strafe des Feuers.": "de"
+  },
+  "estimatedCreditsNotInvoice": 298.9,
+  "publicRelease": false,
+  "humanHearingApproved": false,
+  "providerRequestsAllowed": 8,
+  "payments": [],
+  "composites": [],
+  "status": "STARTED_PREPAYMENT_REMOTE_CHECKPOINT"
+}
