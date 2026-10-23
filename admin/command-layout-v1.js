@@ -114,6 +114,8 @@
   // A touch device can be an unfolded phone, tablet or an app in split-window mode.
   const foldMedium=touch&&width>=650&&width<1680;
   document.body.classList.toggle("dar-admin-fold-viewport",foldMedium);
+  document.body.dataset.darWindowCapacity=width<680?"compact":width<1200?"medium":"wide";
+  document.body.classList.toggle("dar-admin-visual-window",client>0&&visual>260&&client-visual>60);
   document.documentElement.style.setProperty("--dar-admin-window-width",width+"px");
   document.documentElement.style.setProperty("--dar-admin-window-height",height+"px");
  }
