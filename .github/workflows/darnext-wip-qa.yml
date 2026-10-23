@@ -1,0 +1,48 @@
+name: DAR NEXT WIP iPad QA
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  darnext-qa:
+    name: DAR NEXT iPad WIP (non-release)
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Record Xcode and simulator availability
+        run: |
+          xcode-select -p
+          xcodebuild -version
+          xcrun simctl list runtimes
+
+      - name: Verify DAR NEXT scheme and required iPad runtime
+        run: |
+          xcodebuild -list -project DarAlTawhid.xcodeproj
+          xcrun simctl list runtimes | grep -E 'iOS 27|iOS 18|iOS 17' || true
+
+      - name: Run DAR NEXT tests without parallel execution
+        run: |
+          mkdir -p "$RUNNER_TEMP/darnext-derived-data"
+          xcodebuild test \
+            -project DarAlTawhid.xcodeproj \
+            -scheme DARNext \
+            -destination 'platform=iOS Simulator,name=iPad Pro 13-inch (M5)' \
+            -derivedDataPath "$RUNNER_TEMP/darnext-derived-data" \
+            -resultBundlePath "$RUNNER_TEMP/DARNext-iPad-WIP.xcresult" \
+            -parallel-testing-enabled NO \
+            -parallelizeTargets NO
+
+      - name: Archive WIP result bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: darnext-ipad-wip-xcresult
+          path: |
+            ${{ runner.temp }}/DARNext-iPad-WIP.xcresult
+            ${{ runner.temp }}/darnext-derived-data/Logs
+          if-no-files-found: warn
