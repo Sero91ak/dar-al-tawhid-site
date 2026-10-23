@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "createdDate": "2026-10-23",
+  "scope": "KIDS_QUIZ_HALAL_OWNER_SECOND_PHONETIC_CORRECTION",
+  "ownerFeedback": "Halal wird nicht nach Fusha ausgesprochen kein v4 hala hast du beim letzten ,als richtig gemacht",
+  "currentQuizDisplayedWord": "Halal",
+  "approvedNativeSourceText": "حَلَال",
+  "approvedNativeTerm": "Ḥalāl",
+  "approvedNativeSourceLedger": "kids/data/quiz-v4-native-arabic-owner-three-auditory-pilot-ledger.json",
+  "ownerApprovalEvidence": "kids/review-only/kids-v4-three-arabic-audition-owner-verdict-20261023.json",
+  "approvedNativeOriginalSHA256": "559a6fe9e1ed4d132b8001376758f3b101c86c39f788f331af999a23eac32ee5",
+  "nativeOriginalURL": "/kids/assets/kids-quiz-audio/v4-native-fusha-pronunciation-pilots-review/2309137250d0436c6ecd3f6adedc9ed9.mp3",
+  "rejectedSourceText": "Nahrung, die Halal und gut ist.",
+  "rejectedProviderOriginalSHA256": "d758ef39a4a8229d5fd127d7fae137271b6ac0acd7a241718200f6f63ce5d5c1",
+  "rejectedOriginalURL": "/kids/assets/kids-quiz-audio/v4-owner-corrected-halal-pilot-review-20261023/91b6293ea34087f3c8fafac529e2bef2.mp3",
+  "rejectedProviderReceipt": "kids/review-only/kids-v4-one-corrected-halal-v4-master-audition-20261023.json",
+  "reason": "Owner hears German V4 as Hala without final L; native fully vocalized Fuṣḥā Halāl isolated source was correct. No blind resynthesis of the full sentence.",
+  "mustNeverReuseRejectedFullGermanTake": true,
+  "approvedNativeOriginalMayBeReusedInMixedComposition": true,
+  "allowedSourceAssembly": [
+    "Nahrung, die",
+    "حَلَال",
+    "und gut ist."
+  ],
+  "mixedSentenceHearingApproved": false,
+  "privateOnly": true,
+  "publicReleaseAllowed": false,
+  "newCreditsSpentByManifest": 0
+}
