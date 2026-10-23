@@ -1,5 +1,5 @@
 {
-  "status": "REQUEST_STARTED_UNCONFIRMED",
+  "status": "ORIGINAL_MP3_SAVED_PRIVATE_OWNER_AUDITION",
   "sourceText": "Nahrung, die Halal und gut ist.",
   "sourceSHA256": "91b6293ea34087f3c8fafac529e2bef21e01ddd4053adc0014ac9e19bef1930e",
   "modelId": "eleven_v4",
@@ -7,5 +7,10 @@
   "ownerCorrection": "Only Halal, never Halāle/Halālen",
   "requestedSourceOwnerHearingApproved": false,
   "publicReleaseAllowed": false,
-  "newRequestLimit": 1
+  "newRequestLimit": 1,
+  "bytes": 41838,
+  "originalMP3SHA256": "d758ef39a4a8229d5fd127d7fae137271b6ac0acd7a241718200f6f63ce5d5c1",
+  "originalMP3": "/kids/assets/kids-quiz-audio/v4-owner-corrected-halal-pilot-review-20261023/91b6293ea34087f3c8fafac529e2bef2.mp3",
+  "providerRequestId": "W9ApzRRzHVrz9h0kevpI",
+  "ownerHearingApproved": false
 }
