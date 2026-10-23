@@ -4,9 +4,9 @@ const assert=require("node:assert/strict"),fs=require("node:fs"),path=require("n
 const ui=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js"),"utf8");
 const pack=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-ui-locales-seven.json"),"utf8"));
 const titles=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-visible-title-drafts-seven.json"),"utf8"));
-const EXPECTED=["de","tr","en","ar","ku","ckb","bs","es"];
-assert.deepEqual(pack.availableLocales,[...EXPECTED.slice(0,-1),"fr","es"]);
-assert.deepEqual(pack.pendingLocales,["fr"]);
+const EXPECTED=["de","tr","en","ar","ku","ckb","bs","fr","es"];
+assert.deepEqual(pack.availableLocales,EXPECTED);
+assert.deepEqual(pack.pendingLocales,[]);
 for(const locale of EXPECTED.slice(1)){
  const v=pack.translations[locale];
  assert(Object.keys(v).length>=350,locale+" missing section labels");
@@ -52,7 +52,7 @@ for(const locale of EXPECTED){
  assert.equal(primary.nodeValue,locale==="de"?"ÜBERLIEFERUNGSMAẞSTAB":v["ÜBERLIEFERUNGSMAẞSTAB"],locale+" motto");
  assert.equal(prayer.nodeValue,locale==="de"?"Faǧr":(locale==="tr"?"Sabah (Fecr)":v["Faǧr"]),locale+" prayer");
  const postRecord=titles.records["post:wer-gutes-zeigt-bekommt-anteil-am-lohn-198"];
- const expectedPostTitle=locale==="de"||locale==="es"?postRecord.sourceTitle:postRecord.translations[locale];
+ const expectedPostTitle=locale==="de"||locale==="fr"||locale==="es"?postRecord.sourceTitle:postRecord.translations[locale];
  assert.equal(props.textContent,expectedPostTitle,locale+" post title remains excluded for Spanish");
  assert.equal(original.nodeValue,"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً","Arabic source modified");
  assert.equal(excluded.nodeValue,"Nicht authentisch belegt","source text modified");
