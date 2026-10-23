@@ -37,6 +37,8 @@ on:
       - scripts/cf-pages-build.js
       - scripts/sync-app-build-ids.js
       - scripts/overlay-test-staging-from-branch.js
+      - scripts/activate-test-v8-shell.js
+      - scripts/verify-test-app-deploy.js
       - scripts/app-stability-guard.js
       - scripts/app-stability-repair.js
       - scripts/library-deploy-guard.js
