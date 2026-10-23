@@ -105,6 +105,8 @@ function draw(){
  $("qNumber").value=state.q||"";
  $("qStatus").textContent=state.qConfirmed?"Q-"+state.q+" · Originalseite bestätigt":"Noch kein geprüfter Quellenlink. Q-Nummer nur nach Prüfung eintragen.";
  $("copyQ").disabled=!state.qConfirmed;$("openQ").disabled=!state.qConfirmed;
+ $("copyCanonical").disabled=!state.qConfirmed;
+ $("canonicalSourceTitle").textContent=state.qConfirmed?"dar-al-tawhid.de/q/"+state.q+"/":"Noch keine bestätigte Q-Seite";
  $("reviewCounter").textContent=LANGS.filter(x=>state.reviews[x[0]]).length+"/9 geprüft";
  $("revisionStatus").textContent=state.file?"Kanonischer GitHub-Beitrag · "+state.revision.slice(0,9):"Lokaler, unveröffentlichter Entwurf";
  drawTabs();
@@ -125,6 +127,7 @@ function updatePreview(){
  $("validation").textContent=errs.length?errs.join(" · "):"Textstruktur vollständig. Fachbegriffe, Originalzitate und sinngemäße Wiedergabe gesondert prüfen.";
  $("approveBtn").disabled=errs.length>0;
  $("copyAll").disabled=!text;$("shareAll").disabled=!text;
+ $("copyAllTop").disabled=!text;$("copyWithSources").disabled=!text;
  $("copyQuote").disabled=!text;
 }
 async function copy(text){
@@ -173,6 +176,10 @@ function card(title,url,sub,index){
  actions.append(link,cp);content.append(heading,desc,actions);root.append(icon,content);
  return root;
 }
+function sourceListText(){
+ const seen=new Set();return [...qLinks,...canonicalLinks,...(state?.extraLinks||[])].map(x=>({title:String(x.title||"Originalnachweis").trim(),url:absolute(x.url)})).filter(x=>{if(!x.url||seen.has(x.url))return false;seen.add(x.url);return true}).map((x,i)=>(i+1)+". "+x.title+"\n"+x.url).join("\n\n");
+}
+function wholeWithSources(){const main=sourceText();if(!main)return "";const sources=sourceListText();return main+(sources?"\n\n━━ ORIGINALNACHWEISE ━━\n"+sources:"");}
 function drawSources(){
  const wrapper=$("sourceCards");wrapper.replaceChildren();
  const seen=new Set(),links=[...qLinks,...canonicalLinks,...(state?.extraLinks||[])];
@@ -321,6 +328,10 @@ function bind(){
  $("copySelection").onclick=()=>copy($("postText").value.slice($("postText").selectionStart,$("postText").selectionEnd));
  $("copyQuote").onclick=()=>copy(quoteOnly());
  $("copyAll").onclick=()=>copy(sourceText());
+ $("copyAllTop").onclick=()=>copy(sourceText());
+ $("copyWithSources").onclick=()=>copy(wholeWithSources());
+ $("copySourceList").onclick=()=>copy(sourceListText());
+ $("copyCanonical").onclick=()=>state?.qConfirmed&&copy("dar-al-tawhid.de/q/"+state.q+"/");
  $("shareAll").onclick=share;
  $("approveBtn").onclick=()=>{
   if(!state||validation().length)return;
