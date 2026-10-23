@@ -229,6 +229,7 @@ def run():
     for flag in ("--headless=new", "--no-sandbox", "--disable-dev-shm-usage", "--disable-gpu", "--window-size=390,844"):
         options.add_argument(flag)
     results = []
+    auxiliary_results = []
     driver = None
     startup_error = None
     try:
@@ -319,17 +320,28 @@ def run():
             set_locale(driver, code, direction)
 
         # Real dialog interaction and German round-trip, including RTL screenshot evidence.
-        set_locale(driver, "ar", "rtl")
-        driver.execute_script("location.hash='#home'")
-        WebDriverWait(driver, 15).until(lambda d: d.find_element(By.CSS_SELECTOR, "[data-dal-open='settings'], [data-dal-open='quick']"))
-        driver.find_element(By.CSS_SELECTOR, "[data-dal-open='settings'], [data-dal-open='quick']").click()
-        WebDriverWait(driver, 10).until(lambda d: d.find_element(By.CSS_SELECTOR, "#darAdultLanguagePicker[role='dialog']"))
-        driver.save_screenshot(str(OUT / "dialog-ar-rtl.png"))
-        driver.find_element(By.CSS_SELECTOR, "#darAdultLanguagePicker [data-dal-locale='de']").click()
-        WebDriverWait(driver, 10).until(lambda d: d.execute_script(
-            "return document.documentElement.lang === 'de' && document.documentElement.dir === 'ltr'"
-        ))
-        driver.save_screenshot(str(OUT / "roundtrip-de.png"))
+        # The picker is rendered in the real More route, not on the home route.
+        try:
+            set_locale(driver, "ar", "rtl")
+            navigate_area(driver, "more")
+            WebDriverWait(driver, 15).until(lambda d: d.find_element(
+                By.CSS_SELECTOR, ".dar-more-v15 [data-dal-open='quick']"
+            ))
+            driver.find_element(
+                By.CSS_SELECTOR, ".dar-more-v15 [data-dal-open='quick']"
+            ).click()
+            WebDriverWait(driver, 10).until(lambda d: d.find_element(
+                By.CSS_SELECTOR, "#darAdultLanguagePicker[role='dialog']"
+            ))
+            driver.save_screenshot(str(OUT / "dialog-ar-rtl.png"))
+            driver.find_element(By.CSS_SELECTOR, "#darAdultLanguagePicker [data-dal-locale='de']").click()
+            WebDriverWait(driver, 10).until(lambda d: d.execute_script(
+                "return document.documentElement.lang === 'de' && document.documentElement.dir === 'ltr'"
+            ))
+            driver.save_screenshot(str(OUT / "roundtrip-de.png"))
+            auxiliary_results.append({"name": "dialog-and-roundtrip", "status": "PASS"})
+        except Exception as error:
+            auxiliary_results.append({"name": "dialog-and-roundtrip", "status": "FAIL", "error": repr(error)})
     finally:
         if driver is not None:
             driver.quit()
@@ -342,13 +354,15 @@ def run():
         "fail": sum(r["status"] == "FAIL" for r in checks),
         "blocked": sum(r["status"] == "BLOCKED" for r in checks),
         "results": results,
+        "auxiliary": auxiliary_results,
+        "auxiliaryFailures": sum(r["status"] == "FAIL" for r in auxiliary_results),
         "screenshots": sorted(p.name for p in OUT.glob("*.png")),
         "humanLinguisticApproval": "NOT_GRANTED",
         "generatedAt": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
     }
     (OUT / "results.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps(report, ensure_ascii=False, indent=2))
-    raise SystemExit(0 if report["checks"] == 135 and report["fail"] == 0 else 1)
+    raise SystemExit(0 if report["checks"] == 135 and report["fail"] == 0 and report["auxiliaryFailures"] == 0 else 1)
 
 
 if __name__ == "__main__":
