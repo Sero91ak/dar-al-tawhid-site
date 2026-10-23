@@ -1,0 +1,139 @@
+/**
+ * DĀR AL TAWḤĪD — classic glass navigation, mobile and tablet TEST only.
+ * An enhancement of the existing #bottomNav, NOT a new navigation controller.
+ * It keeps all five real routes, their 3D icons, quick actions and state.
+ * Actual Apple Liquid Glass requires the native SwiftUI/UIKit tab bar.
+ */
+@media (max-width:1399px) {
+  html {
+    --dar-classic-glass-edge:rgba(237,221,185,.40);
+    --dar-classic-glass-glow:rgba(255,255,255,.24);
+    --dar-classic-glass-fill:rgba(13,34,29,.61);
+    --dar-classic-glass-depth:rgba(0,0,0,.18);
+    --dar-classic-active-fill:rgba(200,171,102,.20);
+    --dar-classic-active-edge:rgba(234,210,151,.38);
+  }
+
+  html[data-theme="light"],
+  html[data-theme="soft"],
+  html[data-theme="eisgold"] {
+    --dar-classic-glass-edge:rgba(140,117,82,.27);
+    --dar-classic-glass-glow:rgba(255,255,255,.84);
+    --dar-classic-glass-fill:rgba(254,251,243,.71);
+    --dar-classic-glass-depth:rgba(59,49,35,.08);
+    --dar-classic-active-fill:rgba(156,126,70,.15);
+    --dar-classic-active-edge:rgba(142,110,64,.28);
+  }
+
+  html[data-theme="royal"] {
+    --dar-classic-glass-edge:rgba(205,187,146,.36);
+    --dar-classic-glass-fill:rgba(12,31,52,.62);
+    --dar-classic-active-fill:rgba(218,184,114,.16);
+  }
+  html[data-theme="bordeaux"] {
+    --dar-classic-glass-fill:rgba(43,27,36,.66);
+  }
+  html[data-theme="dar-al-layl"],
+  html[data-theme="dark"] {
+    --dar-classic-glass-fill:rgba(11,31,26,.67);
+  }
+
+  html body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+  html[data-theme] body.has-bottom-nav #appChromeDock.app-chrome-dock #bottomNav.bottom-nav,
+  html body.has-bottom-nav #bottomNav.bottom-nav,
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav {
+    /* Preserve the original dock geometry, fixed position, route behavior and safe area. */
+    background:linear-gradient(154deg,var(--dar-classic-glass-glow),transparent 27%),var(--dar-classic-glass-fill)!important;
+    border:1px solid var(--dar-classic-glass-edge)!important;
+    box-shadow:0 14px 31px var(--dar-classic-glass-depth),0 2px 8px rgba(0,0,0,.06),inset 0 1px 0 var(--dar-classic-glass-glow)!important;
+    -webkit-backdrop-filter:blur(26px) saturate(1.24)!important;
+    backdrop-filter:blur(26px) saturate(1.24)!important;
+    border-radius:999px!important;
+    isolation:isolate!important;
+    /* Avoid expensive / unstable repaint animations on the glass container. */
+    transition:background-color .18s ease,border-color .18s ease!important;
+  }
+
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn,
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn {
+    min-width:0!important;
+    -webkit-tap-highlight-color:transparent!important;
+    touch-action:manipulation!important;
+    transition:color .17s ease,filter .17s ease!important;
+  }
+
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active::before,
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.active::before,
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before,
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn.is-pressed::before {
+    background:linear-gradient(160deg,rgba(255,255,255,.14),transparent 58%),var(--dar-classic-active-fill)!important;
+    border-color:var(--dar-classic-active-edge)!important;
+    box-shadow:0 3px 11px rgba(0,0,0,.10),inset 0 1px 0 var(--dar-classic-glass-glow)!important;
+    -webkit-backdrop-filter:blur(13px) saturate(1.2)!important;
+    backdrop-filter:blur(13px) saturate(1.2)!important;
+  }
+
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon,
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon {
+    width:31px!important;
+    height:31px!important;
+    min-width:31px!important;
+    min-height:31px!important;
+    padding:1px!important;
+    transform:none!important;
+  }
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon,
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn .nav-icon img.dar3d-icon {
+    display:block!important;
+    width:100%!important;
+    height:100%!important;
+    object-fit:contain!important;
+    opacity:1!important;
+    filter:drop-shadow(0 2px 3px rgba(0,0,0,.23))!important;
+  }
+
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon),
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn > span:not(.nav-icon) {
+    letter-spacing:.01em!important;
+    font-size:clamp(9px,1.1vw,11px)!important;
+    line-height:1.13!important;
+    font-weight:620!important;
+    overflow:visible!important;
+    text-overflow:clip!important;
+    white-space:nowrap!important;
+  }
+
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:focus-visible,
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:focus-visible {
+    outline:2px solid #d7ba78!important;
+    outline-offset:3px!important;
+  }
+
+  html body.has-bottom-nav #bottomNav.bottom-nav .bottom-nav-btn:active img.dar3d-icon {
+    transform:scale(.92)!important;
+  }
+}
+
+/* iPad/large foldables: stay a compact floating pill, not a desktop sidebar. */
+@media (min-width:700px) and (max-width:1399px) {
+  html body.has-bottom-nav #bottomNav.bottom-nav,
+  html[data-theme] body.has-bottom-nav #bottomNav.bottom-nav {
+    max-width:min(690px,calc(100vw - 44px))!important;
+  }
+}
+
+/* Graceful fallback on devices without a blur compositor. */
+@supports not ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))) {
+  @media (max-width:1399px) {
+    html body.has-bottom-nav #bottomNav.bottom-nav {
+      background:var(--bottom-nav-bg)!important;
+    }
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  html body.has-bottom-nav #bottomNav.bottom-nav,
+  html body.has-bottom-nav #bottomNav.bottom-nav * {
+    animation-duration:0.01ms!important;
+    transition-duration:0.01ms!important;
+  }
+}
