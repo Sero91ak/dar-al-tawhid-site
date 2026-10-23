@@ -1,0 +1,87 @@
+name: KIDS V4 Owner Approved 3 Native Words - Contextual Master Hearing
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths:
+      - '.github/workflows/kids-v4-three-owner-approved-context-auditions-20261023.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+jobs:
+  private-three-owner-context-audition:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+      KIDS_V4_APPROVED_NATIVE_THREE_CONTEXTUAL_TRIAL: 'YES'
+    steps:
+      - name: Checkout exact protected private source and original receipts
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Fast forward before any billable V4 text-to-speech call
+        run: |
+          set -euo pipefail
+          git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+          git merge --ff-only FETCH_HEAD
+          test ! -e kids/review-only/quiz-v4-contextual-three-owner-audition-paid-once-ledger-20261023.json
+      - name: Strict source SHA, owner-approved native terms, pinned model and dictionary audit
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/produce_quiz_v4_three_contextual_owner_pilots_20261023.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 kids/tools/produce_quiz_v4_three_contextual_owner_pilots_20261023.py --audit
+      - name: Verify MP3 tools present
+        run: |
+          set -euo pipefail
+          if ! command -v ffprobe >/dev/null 2>&1; then
+             sudo apt-get -qq update
+             sudo apt-get -qq install -y ffmpeg
+          fi
+      - name: Generate exactly three private dictionary-bound contextual MP3 originals
+        run: |
+          set -euo pipefail
+          python3 kids/tools/produce_quiz_v4_three_contextual_owner_pilots_20261023.py --produce
+      - name: Create owner-friendly hearing pack from genuine stored context MP3 bytes
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,hashlib
+          from pathlib import Path
+          p=Path('kids/review-only/quiz-v4-contextual-three-owner-audition-paid-once-ledger-20261023.json')
+          j=json.loads(p.read_text())
+          assert j['status']=='THREE_CONTEXTUAL_ORIGINALS_SAVED_PRIVATE_PENDING_HEARING'
+          assert len(j['entries'])==3 and not j['publicReleaseAuthorized']
+          dest=Path('kids/review-only/context-owner-three-listening-pack-20261023')
+          dest.mkdir(parents=True,exist_ok=True)
+          for index,row in enumerate(j['entries'],1):
+              assert row['status']=='ORIGINAL_MP3_SAVED_AWAITING_CONTEXT_OWNER_LISTENING'
+              source=Path(row['originalUrl'].lstrip('/'))
+              raw=source.read_bytes()
+              assert hashlib.sha256(raw).hexdigest()==row['mp3Sha256']
+              assert len(raw)==row['mp3Bytes']
+              (dest/f'context-{index:02d}.mp3').write_bytes(raw)
+          (dest/'HEAR-FIRST.json').write_text(json.dumps({
+             'samples':[{'index':i,'sourceText':e['sourceText'],
+               'file':f'context-{i:02d}.mp3','SHA256':e['mp3Sha256']}
+                for i,e in enumerate(j['entries'],1)],
+             'notApproved':True,'ownerVerdictNeeded':True,'publicRelease':False,
+             'notes':'One-time original ElevenLabs V4 model and Serhat master voice with pinned 10099-rule German PLS. Listen specifically to Arabic words in full German sentences.'
+          },ensure_ascii=False,indent=2)+'\n',encoding='utf8')
+          print('KIDS_V4_CONTEXTUAL_OWNER_THREE_LISTENING_PACK_READY 3 exact originals; public OFF')
+          PY
+      - name: Back up originals even if provider or GH failed; never auto-retry
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-three-contextual-master-owner-listening-20261023
+          retention-days: 90
+          if-no-files-found: warn
+          path: |
+            kids/review-only/quiz-v4-contextual-three-owner-audition-paid-once-ledger-20261023.json
+            kids/review-only/context-owner-three-listening-pack-20261023/
