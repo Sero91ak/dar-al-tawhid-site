@@ -84,6 +84,15 @@ jobs:
           node scripts/overlay-test-staging-from-branch.js
           node scripts/app-stability-repair.js
 
+      # The library overlay deliberately protects test/index.html. Promote the
+      # adult V8 shell explicitly, without replacing the existing Test shell.
+      - name: Dar Test V8 Integrated Shell aus Staging aktivieren
+        run: |
+          git checkout origin/test-library-canonical -- \
+            test/assets/v8-integrated-shell-v1.css \
+            test/assets/v8-integrated-shell-v1.js
+          node scripts/activate-test-v8-shell.js
+
       # Keep the approved adult Test Quran Player independent of other branches.
       # This affects only /test resources, never visitor or KIDS application code.
       - name: Dar Test Adult Quran V10.8-R canonical assets
