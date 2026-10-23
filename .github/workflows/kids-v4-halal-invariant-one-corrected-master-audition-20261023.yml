@@ -1,0 +1,134 @@
+name: KIDS V4 Correct Halal – One Owner Audition Exact Text
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths: ['.github/workflows/kids-v4-halal-invariant-one-corrected-master-audition-20261023.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: tawhid-kids-v4-450-shared-paid-queue
+  cancel-in-progress: false
+jobs:
+  one-corrected-master-original:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    env:
+      ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+    steps:
+      - name: Checkout immutable source receipts and owner corrected private KIDS V4
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Exactly one owner-corrected Halal V4 audio with durable pre-POST receipt
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,hashlib,os,subprocess,urllib.request
+          from pathlib import Path
+          import sys
+          sys.path.insert(0,'kids/tools')
+          from quiz_v4_no_double_charge_guard import protect_paid_texts
+          from generate_quiz_v4_450_paid_batch02 import build_canonical_v4_payload,subscription
+          root=Path.cwd()
+          text='Nahrung, die Halal und gut ist.'
+          branch='review/kids-v4-nine-prepaid-artifact-replay-20261022'
+          source_hash=hashlib.sha256(text.encode()).hexdigest()
+          receipt=root/'kids/review-only/kids-v4-one-corrected-halal-v4-master-audition-20261023.json'
+          dest=root/'kids/assets/kids-quiz-audio/v4-owner-corrected-halal-pilot-review-20261023'
+          mp3=dest/(source_hash[:32]+'.mp3')
+          rd=lambda p:json.loads((root/p).read_text(encoding='utf8'))
+          def req(ok,msg):
+              if not ok: raise RuntimeError('ONE_HALAL_OWNER_CORRECTED_SAMPLE_STOP: '+msg)
+          def git(*args):
+              x=subprocess.run(['git',*args],capture_output=True,text=True,timeout=70)
+              req(x.returncode==0,'git checkpoint '+args[0])
+              return x.stdout.strip()
+          def checkpoint(message,*paths):
+              git('config','user.name','dar-kids-halal-owner-pronunciation')
+              git('config','user.email','41898282+github-actions[bot]@users.noreply.github.com')
+              git('add','--',*(str(p.relative_to(root)) for p in paths))
+              req(bool(git('diff','--cached','--name-only')),'empty paid receipt')
+              git('commit','-m','review(kids V4): '+message+' [skip ci]')
+              git('push','origin','HEAD:'+branch)
+              local=git('rev-parse','HEAD')
+              remote=git('ls-remote','--heads','origin',branch).split()
+              req(remote and remote[0]==local,'paid receipt not durably saved on remote')
+          git('fetch','origin',branch)
+          git('merge','--ff-only','FETCH_HEAD')
+          req(not receipt.exists() and not mp3.exists(),'one-time audio already attempted')
+          correction=rd('kids/data/quiz-v4-halal-invariant-owner-correction-20261023.json')
+          registry=rd('kids/data/quiz-v4-450-original-clip-registry.json')
+          ledger=rd('kids/data/quiz-v4-450-paid-generation-ledger.json')
+          plan=rd('kids/data/quiz-v4-curated-450-production-review.json')
+          hold=rd('kids/data/quiz-v4-pronunciation-hold.json')
+          req(correction['wordToDisplayAndSpeakExactly']=='Halal'
+             and correction['ownerCorrectionDate']=='2026-10-23'
+             and correction['publicReleaseAllowed'] is False
+             and correction['newCorrectedAudioGenerated'] is False,
+             'owner correction missing')
+          req(hold['productionPaused'] and not hold['humanPronunciationApproved']
+             and not hold['publicQuizAudioReleaseAuthorized'],
+             'owner quality gate altered')
+          req(text in {x['text'] for x in plan['pendingAudioFragments']},'not an exact revised quiz utterance')
+          req(text not in protect_paid_texts(root,registry,ledger) and text not in registry['textClips'],
+             'already charged original, do not buy again')
+          payload=build_canonical_v4_payload(text,language='de')
+          req(payload['text']==text and payload['model_id']=='eleven_v4'
+             and payload['language_code']=='de'
+             and payload['pronunciation_dictionary_locators']==[{
+                'pronunciation_dictionary_id':'Q8w3SxtoVo8NSjsnlJEd',
+                'version_id':'wSzgkGpAwEDiTak8DApc'}],
+             'voice/dictionary payload not exact')
+          key=os.environ.get('ELEVENLABS_API_KEY','').strip()
+          req(key and all(33<=ord(x)<=126 for x in key),'invalid ElevenLabs secret')
+          req(subscription(key)>80,'insufficient ElevenLabs credits')
+          record={'status':'REQUEST_STARTED_UNCONFIRMED',
+             'sourceText':text,'sourceSHA256':source_hash,
+             'modelId':'eleven_v4','voiceId':'DkU7j9uO4ZEtLD2iRZSH',
+             'ownerCorrection':'Only Halal, never Halāle/Halālen',
+             'requestedSourceOwnerHearingApproved':False,
+             'publicReleaseAllowed':False,
+             'newRequestLimit':1}
+          receipt.parent.mkdir(parents=True,exist_ok=True)
+          receipt.write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
+          checkpoint('Halal correction exact one-shot pre-POST protected journal',receipt)
+          request=urllib.request.Request(
+             'https://api.elevenlabs.io/v1/text-to-speech/DkU7j9uO4ZEtLD2iRZSH?output_format=mp3_44100_128',
+             data=json.dumps(payload,ensure_ascii=False).encode('utf8'),method='POST',
+             headers={'xi-api-key':key,'Accept':'audio/mpeg','Content-Type':'application/json'})
+          # A network failure is ambiguous billing. Persist the original
+          # pre-POST journal and NEVER retry this billed text blindly.
+          with urllib.request.urlopen(request,timeout=100) as response:
+              raw=response.read(1000000)
+              provider_id=response.headers.get('request-id') or response.headers.get('xi-request-id')
+              req(response.status==200,'unexpected provider response, DO NOT RETRY')
+          req(len(raw)>1500 and (raw.startswith(b'ID3') or raw[:1]==b'\xff'),
+              'invalid possibly charged audio, DO NOT RETRY')
+          dest.mkdir(parents=True,exist_ok=True)
+          mp3.write_bytes(raw)
+          sha=hashlib.sha256(raw).hexdigest()
+          record.update(status='ORIGINAL_MP3_SAVED_PRIVATE_OWNER_AUDITION',
+             bytes=len(raw),originalMP3SHA256=sha,
+             originalMP3='/'+str(mp3.relative_to(root)),
+             providerRequestId=provider_id,ownerHearingApproved=False,
+             publicReleaseAllowed=False)
+          receipt.write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\n')
+          checkpoint('save genuine owner corrected Halal private Master V4 sample',receipt,mp3)
+          print('KIDS_V4_REAL_CORRECTED_HALAL_MASTER_ORIGINAL_PRIVATE',json.dumps({
+             'spokenText':text,'sha':sha,'bytes':len(raw),
+             'voice':'DkU7j9uO4ZEtLD2iRZSH','model':'eleven_v4',
+             'newRequests':1,'publicRelease':False},ensure_ascii=False))
+          PY
+      - name: Preserve original correct-source owner hearing pack
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-owner-halal-wording-corrected-one-master-audio
+          retention-days: 60
+          if-no-files-found: warn
+          path: |
+            kids/review-only/kids-v4-one-corrected-halal-v4-master-audition-20261023.json
+            kids/assets/kids-quiz-audio/v4-owner-corrected-halal-pilot-review-20261023/
