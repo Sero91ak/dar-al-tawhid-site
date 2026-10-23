@@ -173,7 +173,15 @@
   "publicRelease": false,
   "humanHearingApproved": false,
   "providerRequestsAllowed": 15,
-  "payments": [],
+  "payments": [
+    {
+      "text": "Der",
+      "textSHA256": "b5edfa5343a4e1b2805b2f74df853a471da8903becc9679aa246bf34966a03b2",
+      "language": "de",
+      "status": "REQUEST_STARTED_UNCONFIRMED",
+      "requestStartedAt": "2026-10-23T17:34:45.756717+00:00"
+    }
+  ],
   "composites": [],
   "status": "STARTED_PREPAYMENT_REMOTE_CHECKPOINT"
 }
