@@ -85,7 +85,15 @@
   "publicRelease": false,
   "humanHearingApproved": false,
   "providerRequestsAllowed": 8,
-  "payments": [],
+  "payments": [
+    {
+      "text": "غِيبَة",
+      "textSHA256": "77d8173fba221c108f5cdd1b0c819a92eedb352cba7de4b72f781170067bdf9c",
+      "language": "ar",
+      "status": "REQUEST_STARTED_UNCONFIRMED",
+      "requestStartedAt": "2026-10-23T17:13:46.258492+00:00"
+    }
+  ],
   "composites": [],
   "status": "STARTED_PREPAYMENT_REMOTE_CHECKPOINT"
 }
