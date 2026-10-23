@@ -2,11 +2,13 @@
 <html lang="de">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow,noarchive">
 <meta name="theme-color" content="#08120f">
 <title>Redaktionsatelier · DĀR AL TAWḤĪD</title>
-<link rel="stylesheet" href="/redaktion/style.css?v=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="stylesheet" href="/redaktion/style.css?v=3">
 </head>
 <body>
 <div class="shell">
@@ -15,15 +17,16 @@
   <div class="header-actions"><span class="tag">Eigentümer-Zugang</span><form action="/redaktion/logout" method="post"><button class="btn" type="submit">Abmelden</button></form></div>
 </header>
 <section class="intro"><span class="kicker">BEITRÄGE · SPRACHKONTROLLE · SOCIAL MEDIA</span><h2>Ein Beitrag. Neun Sprachen.<br>Alle Originalnachweise.</h2><div class="line"></div><p>Vollständige Texte mit kopierbarer Unicode-Schrift, klarer Quellenführung und unveränderter Beitrags-ID. Alle Sprachfassungen lassen sich einzeln bearbeiten, kontrollieren und für Social Media übernehmen.</p></section>
-<main class="layout">
-  <aside class="panel sidebar" aria-label="Beitragsauswahl">
+<nav class="mobile-work-tabs" aria-label="Arbeitsbereiche"><button type="button" class="mobile-tab active" data-mobile-view="catalog">Bibliothek</button><button type="button" class="mobile-tab" data-mobile-view="editor">Beitrag</button><button type="button" class="mobile-tab" data-mobile-view="sources">Quellen</button></nav>
+<main class="layout" id="studioLayout">
+  <aside class="panel sidebar" data-work-section="catalog" aria-label="Beitragsauswahl">
     <h3>Beiträge aus GitHub</h3><div class="dim" id="catalogStatus">Lade Beitragsindex…</div>
     <label for="postSearch">Beitrag suchen</label><input id="postSearch" class="field" type="search" placeholder="ID, Datum oder Titel">
     <div id="catalog" class="library-list"></div>
     <button id="newDraft" class="btn" type="button">+ Neuer, noch unveröffentlichter Beitrag</button>
     <div class="dim">Die Beitragsliste wird aus dem kanonischen GitHub-Bestand geladen. Kein neuer Duplikat-Eintrag bei Sprachwechsel.</div>
   </aside>
-  <div class="work">
+  <div class="work" data-work-section="editor">
     <section class="panel" aria-label="Beitragsinformationen">
       <div class="row space"><h3 id="selectedTitle">Beitrag auswählen</h3><span id="reviewCounter" class="tag">0/9 geprüft</span></div>
       <div class="post-meta">
@@ -54,7 +57,7 @@
         </div>
       </div>
     </section>
-    <section class="panel" aria-label="Quellen und Direktnachweise">
+    <section class="panel" data-sub-section="sources" aria-label="Quellen und Direktnachweise">
       <div class="row space"><h3>Originalnachweise · einzelne Links</h3><button id="refreshSources" class="btn" type="button">Quellen neu laden</button></div>
       <p class="help">Karten aus dem verknüpften Beitrag und – nach Prüfung der Q-Nummer – aus der Original-Quellenseite. Jeder Nachweis kann einzeln geöffnet oder als vollständige URL kopiert werden. Autoren, Werke, Nummern und Seiten bleiben erhalten, wenn sie in der Originalquelle stehen.</p>
       <div class="source-summary"><div><small>Eine kanonische Quelle</small><strong id="canonicalSourceTitle">Q-Quellenseite des Beitrags</strong><p>Für alle neun Sprachen dieselbe überprüfte Adresse.</p></div><button class="btn primary" id="copyCanonical" type="button">Quellenlink kopieren</button></div>
@@ -72,6 +75,6 @@
 </main>
 <footer class="footer">DĀR AL TAWḤĪD · by Serhat Abu Malik · Nur Eigentümer · Kein automatischer Geräte-Push</footer>
 </div>
-<script src="/redaktion/editor.js?v=1" defer></script>
+<script src="/redaktion/editor.js?v=3" defer></script>
 </body>
 </html>
