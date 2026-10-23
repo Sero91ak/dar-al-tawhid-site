@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "scope": "ONE_QUIZ_036_FOUR_NATIVE_FUSHA_TERMS_PRIVATE_REVIEW",
+  "createdAt": "2026-10-23T17:25:24.288223+00:00",
+  "modelId": "eleven_v4",
+  "voiceId": "DkU7j9uO4ZEtLD2iRZSH",
+  "fullSources": {
+    "nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.": "kids-quiz-036"
+  },
+  "sourceUnits": {
+    "nannte Schahāda, Gebet, Zakāh, Ḥaǧǧ und Fasten im Ramaḍān als Säulen des Islam.": [
+      {
+        "sourceToken": "nannte ",
+        "sourceSpoken": "nannte",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Schahāda",
+        "sourceSpoken": "الشَّهَادَة",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": ", Gebet, ",
+        "sourceSpoken": ", Gebet,",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Zakāh",
+        "sourceSpoken": "زَكَاة",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": "Ḥaǧǧ",
+        "sourceSpoken": "الْحَجّ",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": " und Fasten im ",
+        "sourceSpoken": "und Fasten im",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      },
+      {
+        "sourceToken": "Ramaḍān",
+        "sourceSpoken": "رَمَضَان",
+        "language": "ar",
+        "type": "native_v4_fusha"
+      },
+      {
+        "sourceToken": " als Säulen des Islam.",
+        "sourceSpoken": "als Säulen des Islam.",
+        "language": "de",
+        "type": "owner_dictionary_german_v4"
+      }
+    ]
+  },
+  "newSourcesPlanned": {
+    "nannte": "de",
+    "الشَّهَادَة": "ar",
+    ", Gebet,": "de",
+    "زَكَاة": "ar",
+    "الْحَجّ": "ar",
+    "und Fasten im": "de",
+    "رَمَضَان": "ar",
+    "als Säulen des Islam.": "de"
+  },
+  "estimatedCreditsNotInvoice": 97.6,
+  "publicRelease": false,
+  "humanHearingApproved": false,
+  "providerRequestsAllowed": 8,
+  "payments": [],
+  "composites": [],
+  "status": "STARTED_PREPAYMENT_REMOTE_CHECKPOINT"
+}
