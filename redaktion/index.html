@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#08120f">
+<title>Redaktionsatelier · DĀR AL TAWḤĪD</title>
+<link rel="stylesheet" href="/redaktion/style.css?v=1">
+</head>
+<body>
+<div class="shell">
+<header class="top">
+  <div class="brand"><img src="/watermark-my-logo-full.png" alt=""><div><h1>DĀR AL TAWḤĪD</h1><small>by Serhat Abu Malik · PRIVATES REDAKTIONSATELIER</small></div></div>
+  <div class="header-actions"><span class="tag">Eigentümer-Zugang</span><form action="/redaktion/logout" method="post"><button class="btn" type="submit">Abmelden</button></form></div>
+</header>
+<section class="intro"><span class="kicker">BEITRÄGE · SPRACHKONTROLLE · SOCIAL MEDIA</span><h2>Ein Beitrag. Neun Sprachen.<br>Alle Originalnachweise.</h2><div class="line"></div><p>Vollständige Texte mit kopierbarer Unicode-Schrift, klarer Quellenführung und unveränderter Beitrags-ID. Alle Sprachfassungen lassen sich einzeln bearbeiten, kontrollieren und für Social Media übernehmen.</p></section>
+<main class="layout">
+  <aside class="panel sidebar" aria-label="Beitragsauswahl">
+    <h3>Beiträge aus GitHub</h3><div class="dim" id="catalogStatus">Lade Beitragsindex…</div>
+    <label for="postSearch">Beitrag suchen</label><input id="postSearch" class="field" type="search" placeholder="ID, Datum oder Titel">
+    <div id="catalog" class="library-list"></div>
+    <button id="newDraft" class="btn" type="button">+ Neuer, noch unveröffentlichter Beitrag</button>
+    <div class="dim">Die Beitragsliste wird aus dem kanonischen GitHub-Bestand geladen. Kein neuer Duplikat-Eintrag bei Sprachwechsel.</div>
+  </aside>
+  <div class="work">
+    <section class="panel" aria-label="Beitragsinformationen">
+      <div class="row space"><h3 id="selectedTitle">Beitrag auswählen</h3><span id="reviewCounter" class="tag">0/9 geprüft</span></div>
+      <div class="post-meta">
+        <div class="meta-box"><small>Kanonische Beitrags-ID</small><strong id="postIdDisplay">Noch keine Auswahl</strong></div>
+        <div class="meta-box"><small>Quelle / Werk</small><strong id="sourceMetaDisplay">–</strong></div>
+      </div>
+      <div class="row"><label for="qNumber">Gemeinsame Q-Nummer</label><input id="qNumber" class="field" style="max-width:120px" inputmode="numeric" placeholder="z. B. 48"><button id="checkQ" class="btn" type="button">Q-Link prüfen</button></div>
+      <div class="row"><span id="qStatus">Noch keine Q-Seite zugewiesen.</span><button id="copyQ" class="btn" type="button" disabled>Q-Link kopieren</button><button id="openQ" class="btn" type="button" disabled>Q-Seite öffnen ↗</button></div>
+    </section>
+    <section class="panel" aria-label="Sprachfassungen">
+      <div class="row space"><h3>Sprachfassungen</h3><span class="status" id="revisionStatus">Entwurf</span></div>
+      <div id="languages" class="locale-tabs" role="tablist" aria-label="Beitragssprache"></div>
+      <div class="editor-grid">
+        <div><div class="editor-head"><h3 id="editorLabel">Text bearbeiten</h3><span id="langStatus" class="status">Offen</span></div>
+          <label for="postText">Kompletter Social-Media-Beitrag</label>
+          <textarea id="postText" dir="auto" spellcheck="false" placeholder="📖 𝐓𝐢𝐭𝐞𝐥&#10;#DarAlTawhid #Sprecher #Thema #Thema&#10;&#10;🖋️ Aussage&#10;&#10;📝 Quelle&#10;&#10;🌙 Fazit"></textarea>
+          <div class="editor-tools"><button class="btn" id="formatBold" type="button">𝐅𝐞𝐭𝐭</button><button class="btn" id="formatItalic" type="button">𝑲𝒖𝒓𝒔𝒊𝒗</button><button class="btn" id="copySelection" type="button">Markierung kopieren</button></div>
+          <div class="dim">Markiere einzelne Wörter für Unicode-Fettschrift oder Kursivschrift. Diakritische Zeichen bleiben unverändert. Der Rohtext wird exakt kopiert.</div>
+          <div class="actions"><button class="btn" id="approveBtn" type="button">Sprachfassung prüfen ✓</button><button class="btn" id="copyQuote" type="button">🖋️ Aussage kopieren</button></div>
+          <div id="validation" class="notice">Zunächst eine Beitragsfassung auswählen.</div>
+        </div>
+        <div><div class="editor-head"><h3>Vorschau</h3><span id="previewLang" class="status">Deutsch</span></div>
+          <article class="preview-outer"><div class="preview-top">DĀR AL TAWḤĪD · ORIGINALTYPOGRAFIE</div><div class="preview" id="preview" dir="auto">Wähle links einen Beitrag aus.</div></article>
+          <label for="platform">Social-Media-Ausgabe</label><select id="platform" class="field"><option value="telegram">Telegram · mit vier Hashtags</option><option value="instagram">Instagram · mit vier Hashtags</option><option value="whatsapp">WhatsApp · ohne Hashtags</option></select>
+          <div class="actions"><button class="btn primary" id="copyAll" type="button">Gesamten Beitrag kopieren</button><button class="btn" id="shareAll" type="button">Teilen ↗</button></div>
+          <div id="copyNotice" class="status" aria-live="polite"></div>
+        </div>
+      </div>
+    </section>
+    <section class="panel" aria-label="Quellen und Direktnachweise">
+      <div class="row space"><h3>Originalnachweise · einzelne Links</h3><button id="refreshSources" class="btn" type="button">Quellen neu laden</button></div>
+      <p class="help">Karten aus dem verknüpften Beitrag und – nach Prüfung der Q-Nummer – aus der Original-Quellenseite. Jeder Nachweis kann einzeln geöffnet oder als vollständige URL kopiert werden. Autoren, Werke, Nummern und Seiten bleiben erhalten, wenn sie in der Originalquelle stehen.</p>
+      <div id="sourceCards"></div>
+      <label for="sourceTitle">Eigenen geprüften Direktnachweis hinzufügen</label><input id="sourceTitle" class="field" placeholder="Autor – Buch, Band, Seite, Nummer">
+      <label for="sourceUrl">Vollständige Original-URL</label><input id="sourceUrl" class="field" type="url" placeholder="https://...">
+      <div class="actions"><button id="addSource" class="btn" type="button">Nachweis zum lokalen Entwurf hinzufügen</button></div>
+    </section>
+    <section class="panel"><h3>Redaktionsarchiv · Entwürfe sichern</h3>
+      <p class="help">Lesender GitHub-Abgleich für bestehende Beitrags-IDs, Originaltexte und Q-Nachweise. Eigene Social-Media-Fassungen werden in dieser Ausbaustufe nur auf diesem Gerät gespeichert; es erfolgt noch kein GitHub-Schreibvorgang und kein automatisches Veröffentlichen.</p>
+      <div class="actions"><button id="exportDraft" class="btn" type="button">Neun Sprachen als JSON sichern ↓</button>
+      <label class="btn" for="importDraft" style="margin:0;cursor:pointer">Gesicherte Texte importieren ↑<input type="file" id="importDraft" accept=".json,application/json"></label></div><div id="importStatus" aria-live="polite"></div>
+    </section>
+  </div>
+</main>
+<footer class="footer">DĀR AL TAWḤĪD · by Serhat Abu Malik · Nur Eigentümer · Kein automatischer Geräte-Push</footer>
+</div>
+<script src="/redaktion/editor.js?v=1" defer></script>
+</body>
+</html>
