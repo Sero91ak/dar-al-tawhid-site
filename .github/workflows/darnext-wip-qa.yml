@@ -1,6 +1,9 @@
 name: DAR NEXT WIP iPad QA
 
 on:
+  push:
+    branches:
+      - codex/darnext-phase4-wip-2026-10-23
   workflow_dispatch:
 
 permissions:
@@ -9,7 +12,7 @@ permissions:
 jobs:
   darnext-qa:
     name: DAR NEXT iPad WIP (non-release)
-    runs-on: macos-15
+    runs-on: xcode-27
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
@@ -20,10 +23,24 @@ jobs:
           xcodebuild -version
           xcrun simctl list runtimes
 
-      - name: Verify DAR NEXT scheme and required iPad runtime
+      - name: Verify DAR NEXT scheme and select an available iPad destination
         run: |
           xcodebuild -list -project DarAlTawhid.xcodeproj
           xcrun simctl list runtimes | grep -E 'iOS 27|iOS 18|iOS 17' || true
+          xcodebuild -showdestinations -project DarAlTawhid.xcodeproj -scheme DARNext | tee "$RUNNER_TEMP/darnext-destinations.txt"
+          destination_line="$(grep 'platform:iOS Simulator' "$RUNNER_TEMP/darnext-destinations.txt" | grep 'name:iPad' | head -n 1 || true)"
+          if [ -z "$destination_line" ]; then
+            echo 'No available iPad Simulator destination was reported by xcodebuild.' >&2
+            exit 1
+          fi
+          destination_id="$(printf '%s\n' "$destination_line" | sed -n 's/.*id:\([^,}]*\).*/\1/p' | tr -d '[:space:]')"
+          destination_name="$(printf '%s\n' "$destination_line" | sed -n 's/.*name:\([^}]*\).*/\1/p' | sed 's/[[:space:]]*$//')"
+          if [ -z "$destination_id" ] || [ -z "$destination_name" ]; then
+            echo "Could not parse iPad destination: $destination_line" >&2
+            exit 1
+          fi
+          echo "Selected iPad destination: $destination_name ($destination_id)"
+          echo "DAR_NEXT_DESTINATION=platform=iOS Simulator,id=$destination_id" >> "$GITHUB_ENV"
 
       - name: Run DAR NEXT tests without parallel execution
         run: |
@@ -31,7 +48,7 @@ jobs:
           xcodebuild test \
             -project DarAlTawhid.xcodeproj \
             -scheme DARNext \
-            -destination 'platform=iOS Simulator,name=iPad Pro 13-inch (M5)' \
+            -destination "$DAR_NEXT_DESTINATION" \
             -derivedDataPath "$RUNNER_TEMP/darnext-derived-data" \
             -resultBundlePath "$RUNNER_TEMP/DARNext-iPad-WIP.xcresult" \
             -parallel-testing-enabled NO \
