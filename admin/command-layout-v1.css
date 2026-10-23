@@ -335,3 +335,66 @@ body.dar-admin-login #panel .login .hint{
  body.dar-admin-login #panel .login{padding:28px 22px 40px!important;align-self:start!important}
  body.dar-admin-login #panel .login .login-logo{width:42px!important;height:42px!important}
 }
+
+/* Consistent internal sections: remove the remnants of the old capsule construction. */
+body.dar-admin-workspace #panel .metric,
+body.dar-admin-workspace #panel .mini,
+body.dar-admin-workspace #panel .quick,
+body.dar-admin-workspace #panel .planner-item,
+body.dar-admin-workspace #panel .news-row,
+body.dar-admin-workspace #panel .feed-image-panel,
+body.dar-admin-workspace #panel .quellen-result-row,
+body.dar-admin-workspace #panel .ordner-row,
+body.dar-admin-workspace #panel .quellen-search-panel,
+body.dar-admin-workspace #panel .quellen-editor-panel{
+ border-radius:0!important;box-shadow:none!important;
+ background:transparent!important;border-color:var(--dar-c-border)!important
+}
+body.dar-admin-workspace #panel .metric,
+body.dar-admin-workspace #panel .mini,
+body.dar-admin-workspace #panel .quick,
+body.dar-admin-workspace #panel .planner-item{
+ border:0!important;border-left:1px solid var(--dar-c-border)!important;
+ border-bottom:1px solid var(--dar-c-border)!important;padding:clamp(13px,1.25vw,21px)!important
+}
+body.dar-admin-workspace #panel .metric span{
+ font-weight:650!important;font-variant-numeric:tabular-nums!important;
+ font-size:clamp(24px,2.9vw,43px)!important
+}
+body.dar-admin-workspace #panel .news-row,
+body.dar-admin-workspace #panel .quellen-result-row{
+ border:0!important;border-bottom:1px solid var(--dar-c-border)!important
+}
+body.dar-admin-workspace #panel .news-workspace,
+body.dar-admin-workspace #panel .quellen-studio,
+body.dar-admin-workspace #panel .ordner-studio,
+body.dar-admin-workspace #panel .admin-actions-layout{
+ width:100%!important;max-width:none!important
+}
+body.dar-admin-workspace #panel .quellen-grid{
+ grid-template-columns:minmax(260px,.36fr) minmax(0,.64fr)!important;
+ gap:0!important;border-top:1px solid var(--dar-c-border)!important
+}
+body.dar-admin-workspace #panel .quellen-grid>.panel+ .panel{
+ border-left:1px solid var(--dar-c-border)!important;padding-left:clamp(15px,1.9vw,31px)!important
+}
+body.dar-admin-workspace #panel .admin-form-grid,
+body.dar-admin-workspace #panel .planner-grid{column-gap:20px!important;row-gap:14px!important}
+body.dar-admin-workspace #panel .admin-form-grid .wide{
+ grid-column:1/-1!important
+}
+@media(min-width:700px) and (max-width:819px){
+ body.dar-admin-workspace #panel{padding:18px!important}
+ body.dar-admin-workspace #panel .folder-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+ body.dar-admin-workspace #panel .folder-card{min-height:110px!important}
+}
+@media(max-width:819px){
+ body.dar-admin-workspace #panel .quellen-grid{display:block!important}
+ body.dar-admin-workspace #panel .quellen-grid>.panel+.panel{
+  border-left:0!important;padding-left:0!important
+ }
+ body.dar-admin-workspace #panel .admin-form-grid,
+ body.dar-admin-workspace #panel .planner-grid{
+  grid-template-columns:1fr!important
+ }
+}
