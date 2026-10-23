@@ -2610,6 +2610,223 @@ a:focus:not(:focus-visible),button:focus:not(:focus-visible),[role="button"]:foc
 <link rel="stylesheet" id="darTrueV8Shell" href="/desktop-preview/assets/dar-v8-faithful-shell.css?v=20261021-faithful-v1">
 <link rel="stylesheet" id="darV8AllRoutesCSS" href="/desktop-preview/assets/dar-v8-all-routes.css?v=20261021-2">
 <link rel="stylesheet" id="darV8ConversationCSS" href="/desktop-preview/assets/dar-v8-portal-live.css?v=20261021-quran-modal-v12">
+
+<style id="darV8ActualPublicImmersive20261023">
+/* DAR_V8_ACTUAL_PUBLIC_IMMERSIVE_V1_20261023
+   Canonical PUBLIC WEBSITE /?page=start, not #appView/native. Real V8
+   workspace / welcome / dashboard. Existing content and routing untouched. */
+body.desktop-overhaul-v18.dar-v8-home #darV8Workspace{
+ --dar-v8-art-height:clamp(360px,73svh,720px);
+ --dar-v8-art-opacity:.96;
+ --dar-v8-art-offset:0px;
+ position:relative;
+ isolation:isolate;
+ overflow:visible!important;
+}
+body.desktop-overhaul-v18 #darV8ActualImmersiveScene{display:none}
+body.desktop-overhaul-v18.dar-v8-home.dar-v8-immersive-ready #darV8ActualImmersiveScene{
+ display:block;
+ position:sticky;
+ top:0;
+ height:var(--dar-v8-art-height);
+ margin:0 0 calc(-1 * var(--dar-v8-art-height));
+ width:100%;
+ min-width:0;
+ pointer-events:none;
+ isolation:isolate;
+ overflow:hidden;
+ opacity:var(--dar-v8-art-opacity);
+ z-index:0;
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8ActualImmersiveScene::before{
+ content:"";
+ position:absolute;
+ inset:-48px 0 0;
+ background:
+  linear-gradient(90deg,rgba(3,20,19,.88) 0%,rgba(4,27,24,.63) 54%,rgba(6,25,22,.38) 100%),
+  linear-gradient(0deg,rgba(7,23,21,.30),transparent 65%),
+  url("/assets/home-v1194/hero-wide-adobe.jpg") 63% 37%/cover no-repeat;
+ transform:translate3d(0,var(--dar-v8-art-offset),0) scale(1.045);
+ -webkit-mask-image:linear-gradient(to bottom,#000 0%,#000 59%,transparent 100%);
+ mask-image:linear-gradient(to bottom,#000 0%,#000 59%,transparent 100%);
+ will-change:transform;
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8Workspace > :is(
+ .dar-v8-topbar,#darV8TopWelcome,.v8-real-prayer,.isnad-ribbon,.v8-real-player,#pageRoot
+){
+ position:relative;
+ z-index:1;
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome{
+ position:relative!important;
+ isolation:isolate;
+ overflow:hidden!important;
+ display:block!important;
+ visibility:visible!important;
+ opacity:1!important;
+ transform:none!important;
+ width:100%!important;
+ max-width:none!important;
+ min-height:clamp(260px,39svh,415px)!important;
+ margin:0 0 clamp(13px,2vw,23px)!important;
+ padding:clamp(21px,3.6vw,43px)!important;
+ border-radius:0 0 clamp(19px,2.2vw,30px) clamp(19px,2.2vw,30px)!important;
+ border:0!important;
+ background:
+  linear-gradient(90deg,rgba(3,20,19,.9),rgba(5,28,25,.68) 58%,rgba(5,26,23,.4)),
+  url("/assets/home-v1194/hero-wide-adobe.jpg") 63% 37%/cover no-repeat!important;
+ box-shadow:none!important;
+}
+body.desktop-overhaul-v18.dar-v8-home.dar-v8-immersive-ready #darV8TopWelcome{
+ background:transparent!important;
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome::after{
+ content:"";position:absolute;inset:auto 0 0;height:32%;z-index:0;
+ pointer-events:none;
+ background:linear-gradient(to bottom,transparent,rgba(5,23,21,.52));
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome > *{
+ position:relative;z-index:1;max-width:100%;
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome :is(
+ .v8-headline,.v8-headline span,.v8-arabic-top,.v8-copy h1,.v8-copy h2,
+ .v8-copy p,.v8-copy p b,.v8-identity
+){
+ color:#f9f2e4!important;
+ -webkit-text-fill-color:#f9f2e4!important;
+ text-shadow:0 2px 16px rgba(0,0,0,.38);
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome :is(
+ .v8-headline strong,.v8-copy h1 span,.v8-copy h2 strong,.v8-arabic-top
+){
+ color:#ecd296!important;-webkit-text-fill-color:#ecd296!important;
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome .v8-headline{
+ border-bottom-color:rgba(231,203,145,.34)!important;
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome .v8-welcome-body{
+ margin-top:clamp(15px,2vw,25px);
+ align-items:center;
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome .v8-copy h1{
+ font-size:clamp(25px,3.25vw,41px)!important;
+ line-height:1.15!important;
+ max-width:850px;
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome .v8-copy h2{
+ font-size:clamp(17px,2vw,23px)!important;
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome .v8-copy p{
+ max-width:680px;
+ font-size:clamp(12px,1.07vw,14px)!important;
+ line-height:1.58;
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome .v8-identity{
+ color:#f4dba8!important;
+ border-color:rgba(234,202,136,.35)!important;
+ background:rgba(8,34,30,.42)!important;
+ backdrop-filter:blur(9px);
+ -webkit-backdrop-filter:blur(9px);
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8HeroShortcuts{
+ display:flex;flex-wrap:wrap;align-items:center;gap:9px;
+ margin-top:clamp(14px,2vw,24px);
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8HeroShortcuts .dar-v8-hero-pill{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:41px;padding:9px 16px;border-radius:999px;
+ border:1px solid rgba(235,205,148,.46);
+ color:#fff6e7!important;-webkit-text-fill-color:#fff6e7!important;
+ background:rgba(8,35,31,.64);
+ backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+ text-decoration:none;font:700 12px/1.2 system-ui,-apple-system,sans-serif;
+ box-shadow:0 4px 18px rgba(4,20,18,.11);
+ transition:transform .42s cubic-bezier(.2,1.28,.34,1),
+  background .24s ease,border-color .24s ease;
+}
+body.desktop-overhaul-v18.dar-v8-home #darV8HeroShortcuts .dar-v8-hero-pill:focus-visible{
+ outline:2px solid #f4d695!important;outline-offset:3px!important;
+}
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ body.desktop-overhaul-v18.dar-v8-home #darV8HeroShortcuts .dar-v8-hero-pill:hover{
+  transform:translate3d(0,-3px,0);background:rgba(12,56,46,.82);
+ }
+ body.desktop-overhaul-v18.dar-v8-home #pageRoot :is(
+  .dar-v8-day,.dar-v8-book,.dar-v8-recent-link,.dar-v8-discover-link
+ ):hover{
+  transform:translate3d(0,-3px,0)!important;
+  box-shadow:0 14px 29px rgba(6,26,22,.12)!important;
+ }
+}
+@media(prefers-reduced-motion:no-preference){
+ body.desktop-overhaul-v18.dar-v8-home #pageRoot :is(
+  .dar-v8-day,.dar-v8-book,.dar-v8-recent-link,.dar-v8-discover-link
+ ){
+  transition:transform .48s cubic-bezier(.2,1.2,.34,1),
+   box-shadow .34s ease,border-color .34s ease!important;
+ }
+}
+@media(hover:none) and (pointer:coarse) and (prefers-reduced-motion:no-preference){
+ body.desktop-overhaul-v18.dar-v8-home #darV8HeroShortcuts .dar-v8-hero-pill:active{
+  transform:scale(.966)!important;
+ }
+}
+@media(max-width:740px){
+ body.desktop-overhaul-v18.dar-v8-home #darV8Workspace{
+  --dar-v8-art-height:clamp(380px,80svh,660px);
+ }
+ body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome{
+  min-height:clamp(295px,47svh,470px)!important;
+  padding:clamp(16px,4vw,24px)!important;
+ }
+ body.desktop-overhaul-v18.dar-v8-home #darV8ActualImmersiveScene::before{
+  background-image:
+   linear-gradient(90deg,rgba(3,20,19,.9) 0%,rgba(4,26,23,.72) 67%,rgba(5,26,23,.51) 100%),
+   url("/assets/home-v1194/hero-mobile-adobe.jpg");
+  background-position:center,65% 27%;
+  background-size:cover;
+ }
+ body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome{
+  background:
+   linear-gradient(90deg,rgba(3,20,19,.89),rgba(5,28,25,.60)),
+   url("/assets/home-v1194/hero-mobile-adobe.jpg") 65% 27%/cover no-repeat!important;
+ }
+ body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome .v8-headline{
+  flex-wrap:wrap;gap:4px 12px;
+ }
+ body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome .v8-arabic-top{
+  font-size:clamp(13px,3.4vw,17px)!important;white-space:normal;
+ }
+ body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome .v8-welcome-body{
+  gap:10px;align-items:flex-start;
+ }
+ body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome .v8-copy h1{
+  font-size:clamp(23px,5.6vw,31px)!important;
+ }
+ body.desktop-overhaul-v18.dar-v8-home #darV8TopWelcome .v8-identity{
+  display:none!important;
+ }
+ body.desktop-overhaul-v18.dar-v8-home #darV8HeroShortcuts{gap:7px}
+ body.desktop-overhaul-v18.dar-v8-home #darV8HeroShortcuts .dar-v8-hero-pill{
+  min-height:38px;padding:9px 13px;font-size:11px;
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ body.desktop-overhaul-v18.dar-v8-home #darV8ActualImmersiveScene::before{
+  transform:none!important;will-change:auto!important;
+ }
+ body.desktop-overhaul-v18.dar-v8-home #darV8HeroShortcuts .dar-v8-hero-pill,
+ body.desktop-overhaul-v18.dar-v8-home #pageRoot :is(.dar-v8-day,.dar-v8-book,.dar-v8-recent-link,.dar-v8-discover-link){
+  transition:none!important;transform:none!important;
+ }
+}
+@media print{
+ #darV8ActualImmersiveScene{display:none!important}
+ body.desktop-overhaul-v18 #darV8TopWelcome{
+  background:none!important;color:#111!important;
+ }
+}
+</style>
 </head>
 <style id="dar-touch-active-fix">
 @media (hover:none) and (pointer:coarse){
@@ -4891,5 +5108,74 @@ renders.beitraege=function(){
 <script defer src="/desktop-preview/dar-public-app-promo-v1.js?v=20261017-1"></script>
 <link rel="stylesheet" id="darAdultVisualContinuityV1391" href="/assets/dar-adult-visual-continuity-v1391.css?v=20261017-hero-surfaces-v1">
 
+
+<script id="darV8ActualPublicImmersiveRuntime20261023">
+/* DAR_V8_ACTUAL_PUBLIC_IMMERSIVE_V1_20261023
+   No overrides of window scroll or click router. No location reload.
+   Presentational sticky background with bidirectional natural scrolling. */
+(function(){
+ "use strict";
+ if(window.__DAR_V8_PUBLIC_IMMERSIVE_V1)return;
+ window.__DAR_V8_PUBLIC_IMMERSIVE_V1=true;
+ var host=null,stage=null,queued=false,reduce=false;
+ function scene(){
+  host=document.getElementById("darV8Workspace");
+  var welcome=document.getElementById("darV8TopWelcome");
+  if(!host||!welcome||!document.body)return;
+  if(!stage){
+   stage=document.createElement("div");
+   stage.id="darV8ActualImmersiveScene";
+   stage.setAttribute("aria-hidden","true");
+   host.insertBefore(stage,welcome);
+  }
+  document.body.classList.add("dar-v8-immersive-ready");
+  if(!document.getElementById("darV8HeroShortcuts")){
+   var row=document.createElement("nav");
+   row.id="darV8HeroShortcuts";
+   row.setAttribute("aria-label","Schnellzugriff");
+   ["beitraege","quran","dua"].forEach(function(name){
+    var source=document.querySelector(".dar-v8-side-link[data-page='"+name+"']");
+    var link=document.createElement("a");
+    link.className="desktop-link dar-v8-hero-pill";
+    link.href="/?page="+encodeURIComponent(name);
+    link.dataset.page=name;
+    link.textContent=(source&&source.textContent.trim())||name;
+    row.appendChild(link);
+   });
+   welcome.appendChild(row);
+  }
+  frame();
+ }
+ function frame(){
+  queued=false;
+  if(!document.body||!document.body.classList.contains("dar-v8-home")||!host)return;
+  reduce=!!(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var rect=host.getBoundingClientRect(),vh=Math.max(1,window.innerHeight||document.documentElement.clientHeight||760);
+  var p=Math.max(0,Math.min(1,(-rect.top)/Math.max(vh*1.35,580)));
+  var opacity=reduce?1:Math.max(.05,1-p*.93);
+  var offset=reduce?0:Math.round(-p*36);
+  var alpha=opacity.toFixed(3),shift=offset+"px";
+  if(host.style.getPropertyValue("--dar-v8-art-opacity")!==alpha)
+    host.style.setProperty("--dar-v8-art-opacity",alpha);
+  if(host.style.getPropertyValue("--dar-v8-art-offset")!==shift)
+    host.style.setProperty("--dar-v8-art-offset",shift);
+ }
+ function schedule(){
+  if(queued)return;queued=true;
+  requestAnimationFrame(frame);
+ }
+ function boot(){
+  scene();
+  window.addEventListener("scroll",schedule,{passive:true});
+  window.addEventListener("resize",schedule,{passive:true});
+  window.addEventListener("pageshow",schedule,{passive:true});
+  if(window.MutationObserver&&document.body){
+   new MutationObserver(schedule).observe(document.body,{attributes:true,attributeFilter:["class","data-dar-v8-route"]});
+  }
+ }
+ if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",boot,{once:true});
+ else boot();
+})();
+</script>
 </body>
 </html>
