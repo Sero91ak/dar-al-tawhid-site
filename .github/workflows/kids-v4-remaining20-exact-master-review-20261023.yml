@@ -1,0 +1,72 @@
+name: KIDS V4 Exact Twenty Remaining – 430 SHA MP3 audit (no TTS)
+on:
+  push:
+    branches: [review/kids-v4-nine-prepaid-artifact-replay-20261022]
+    paths: 
+      - '.github/workflows/kids-v4-remaining20-exact-master-review-20261023.yml'
+      - 'kids/tools/audit_quiz_v4_remaining20_20261023.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: kids-v4-remaining20-source-audit-20261023
+  cancel-in-progress: false
+jobs:
+  exact-missing-originals:
+    if: github.repository == 'Sero91ak/dar-al-tawhid-site' && github.ref_name == 'review/kids-v4-nine-prepaid-artifact-replay-20261022'
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    env:
+      ELEVENLABS_API_KEY: ''
+    steps:
+      - name: Checkout protected KIDS V4 master files
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: true
+      - name: Validate last five original MP3 SHA hashes, remaining questions and prior pronunciation hold
+        run: |
+          set -euo pipefail
+          python3 -m py_compile kids/tools/audit_quiz_v4_remaining20_20261023.py
+          python3 kids/tools/audit_quiz_v4_remaining20_20261023.py
+          python3 kids/tools/test_quiz_v4_no_double_charge_guard.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('kids/review-only/quiz-v4-450-exact-remaining20-master-v4-20261023.json')
+          a=json.loads(p.read_text())
+          assert a['actualFourPartCompleted']==430 and a['stillNotFourPartComplete']==20
+          assert a['remainingDistinctSourceTexts']==28
+          assert len(a['questions'])==20
+          assert a['newCreditSpendingAuthorized'] is False
+          assert a['releasedToVisitors'] is False and a['approvedForPublicQuiz'] is False
+          print('KIDS_V4_430_OF_450_TRUE_STATE_CONFIRMED; review-only protected')
+          PY
+      - name: Save canonical remaining20 review manifest to protected branch
+        run: |
+          set -euo pipefail
+          git config user.name kids-v4-remaining20-source-checkpoint
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add kids/review-only/quiz-v4-450-exact-remaining20-master-v4-20261023.json
+          git add kids/review-only/KIDS-V4-450-OFFENE-20-20261023.md
+          if git diff --cached --quiet; then
+            echo 'No stale remaining20 changes'
+            exit 0
+          fi
+          git commit -m 'review(kids V4): 20 true open questions and 28 SHA source fragments, no credits [skip ci]'
+          for n in 1 2 3; do
+            if git push origin HEAD:review/kids-v4-nine-prepaid-artifact-replay-20261022; then exit 0; fi
+            git fetch origin review/kids-v4-nine-prepaid-artifact-replay-20261022
+            git rebase FETCH_HEAD || exit 1
+          done
+          exit 1
+      - name: Preserve exact no-charge audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: kids-v4-430-of-450-exact-remaining20-source-audit
+          retention-days: 30
+          if-no-files-found: warn
+          path: |
+            kids/review-only/quiz-v4-450-exact-remaining20-master-v4-20261023.json
+            kids/review-only/KIDS-V4-450-OFFENE-20-20261023.md
