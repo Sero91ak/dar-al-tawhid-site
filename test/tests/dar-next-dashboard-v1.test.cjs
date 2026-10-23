@@ -48,7 +48,7 @@ test("responsive behavior, contrast and reduced-motion handling remain explicit"
  assert.match(css,/@media\(min-width:1100px\)/);
  assert.match(css,/prefers-reduced-motion:reduce/);
  assert.match(css,/focus-visible/);
- assert.match(css,/aria/);
+ assert.match(js,/aria-modal/);
  assert.equal((css.match(/\{/g)||[]).length,(css.match(/\}/g)||[]).length);
 });
 
