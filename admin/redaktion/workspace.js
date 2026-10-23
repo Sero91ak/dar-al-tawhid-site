@@ -377,5 +377,13 @@ function bind(){
  };
  $("exportDraft").onclick=download;$("importDraft").onchange=importFile;
 }
-bind();bindMobile();loadCatalog();
+bind();bindMobile();
+const foldCompactMode=window.matchMedia("(max-width:679px)");
+const onViewportMode=event=>{
+  // Keep the open article on folded/narrow devices; do not reset the draft.
+  if(event.matches)setMobileView(state?.id?"editor":"catalog");
+};
+if(foldCompactMode.addEventListener)foldCompactMode.addEventListener("change",onViewportMode);
+else foldCompactMode.addListener(onViewportMode);
+loadCatalog();
 })();
