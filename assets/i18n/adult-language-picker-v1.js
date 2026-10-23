@@ -35,10 +35,9 @@ function available(code){
  if(TEST){
   var runtime=w.DarTestTurkishUI;
   if(!runtime||!Array.isArray(runtime.supportedLocales)||runtime.supportedLocales.indexOf(code)<0)return false;
-  if(code==="tr")return runtime.translatedKeys>0;
   return w.__DarTestSevenLocalesReady===true&&typeof runtime.translatedFor==="function"&&runtime.translatedFor(code)>0;
  }
- return code==="tr"&&!!w.DARAdultUI18n&&w.DARAdultUI18n.translatedKeys>0;
+ return !!w.DARAdultUI18n&&typeof w.DARAdultUI18n.translatedFor==="function"&&w.DARAdultUI18n.translatedFor(code)>0;
 }
 function read(){
  var code="de";try{code=w.localStorage.getItem(KEY)||"de"}catch(_){}

@@ -50,11 +50,14 @@ struct WebAppView: UIViewRepresentable {
     var destination: DarDeepLink.Destination? = nil
     var openURL: URL? = nil
     var openNonce: UUID = UUID()
+    var preferredLocale: String = DarAppLanguage.fromSystemPreferredLanguages().localeIdentifier
+    var hasManualLocale: Bool = false
+    var onWebLocaleChange: ((String) -> Void)?
 
     private static let launchURL = DarAppShell.launchURL
 
     func makeCoordinator() -> Coordinator {
-        Coordinator()
+        Coordinator(preferredLocale: preferredLocale, hasManualLocale: hasManualLocale, onWebLocaleChange: onWebLocaleChange)
     }
 
     func makeUIView(context: Context) -> UIView {
@@ -78,6 +81,7 @@ struct WebAppView: UIViewRepresentable {
         userContentController.add(context.coordinator, name: "darQuranNowPlaying")
         userContentController.add(context.coordinator, name: "darShareImage")
         userContentController.add(context.coordinator, name: "darNative")
+        userContentController.add(context.coordinator, name: "darLanguageChanged")
         let deviceId = DarPushNotifications.deviceId()
         let escapedDevice = deviceId
             .replacingOccurrences(of: "\\", with: "\\\\")
@@ -112,6 +116,19 @@ struct WebAppView: UIViewRepresentable {
                 forMainFrameOnly: true
             )
         )
+        let localeBridge = """
+        (function(){
+          if(window.__darAdultLocaleBridgeInstalled)return;
+          window.__darAdultLocaleBridgeInstalled=true;
+          var key="darAdultPreferredLocaleV1",supported={de:1,en:1,ar:1,tr:1,ku:1,ckb:1,bs:1,fr:1,es:1};
+          function normalize(value){var raw=String(value||"").trim().replace(/_/g,"-").toLowerCase();var base=raw.split("-")[0];return supported[base]?base:"";}
+          function post(value){value=normalize(value);if(value){try{webkit.messageHandlers.darLanguageChanged.postMessage({locale:value})}catch(e){}}}
+          window.__darApplyNativeAdultLocale=function(value,force){value=normalize(value);if(!value)return;var current="";try{current=normalize(localStorage.getItem(key)||"")}catch(e){}if(!force&&current)return;try{localStorage.setItem(key,value)}catch(e){}try{window.dispatchEvent(new CustomEvent("dar-adult-locale-changed",{detail:{locale:value,source:"native"}}))}catch(e){}};
+          window.addEventListener("dar-adult-locale-changed",function(e){post(e&&e.detail&&e.detail.locale)});
+          try{var existing=localStorage.getItem(key)||"";if(existing)post(existing)}catch(e){}
+        })();
+        """
+        userContentController.addUserScript(WKUserScript(source: localeBridge, injectionTime: .atDocumentStart, forMainFrameOnly: true))
         let iosNoGlassBoot = """
         (function(){
           try{
@@ -691,6 +708,7 @@ struct WebAppView: UIViewRepresentable {
     }
 
     func updateUIView(_ view: UIView, context: Context) {
+        context.coordinator.updateLocale(preferredLocale, hasManualLocale: hasManualLocale)
         if context.coordinator.lastOpenNonce != openNonce {
             context.coordinator.lastOpenNonce = openNonce
             if let openURL {
@@ -704,6 +722,24 @@ struct WebAppView: UIViewRepresentable {
     }
 
     final class Coordinator: NSObject, WKNavigationDelegate, WKUIDelegate, WKScriptMessageHandler {
+        private var preferredLocale: String
+        private var hasManualLocale: Bool
+        private let onWebLocaleChange: ((String) -> Void)?
+
+        init(preferredLocale: String, hasManualLocale: Bool, onWebLocaleChange: ((String) -> Void)?) {
+            self.preferredLocale = preferredLocale
+            self.hasManualLocale = hasManualLocale
+            self.onWebLocaleChange = onWebLocaleChange
+        }
+
+        func updateLocale(_ locale: String, hasManualLocale: Bool) {
+            guard preferredLocale != locale || self.hasManualLocale != hasManualLocale else { return }
+            preferredLocale = locale
+            self.hasManualLocale = hasManualLocale
+            let escaped = Self.jsString(locale)
+            let force = hasManualLocale ? "true" : "false"
+            webView?.evaluateJavaScript("window.__darApplyNativeAdultLocale && window.__darApplyNativeAdultLocale(\(escaped),\(force));", completionHandler: nil)
+        }
         private struct LibraryPublication: Decodable {
             let id: String?
             let slug: String?
@@ -835,6 +871,7 @@ struct WebAppView: UIViewRepresentable {
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darAppIcon")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darQuranNowPlaying")
             webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darNative")
+            webView?.configuration.userContentController.removeScriptMessageHandler(forName: "darLanguageChanged")
             NotificationCenter.default.removeObserver(self)
         }
 
@@ -1114,6 +1151,11 @@ struct WebAppView: UIViewRepresentable {
         }
 
         func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
+            if message.name == "darLanguageChanged" {
+                let body = message.body as? [String: Any] ?? [:]
+                if let locale = body["locale"] as? String { onWebLocaleChange?(locale) }
+                return
+            }
             if message.name == "darNative" {
                 let body = message.body as? [String: Any] ?? [:]
                 if (body["type"] as? String) == "qibla-quick-exit" {

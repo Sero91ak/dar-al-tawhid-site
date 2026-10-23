@@ -1,6 +1,63 @@
 import SwiftUI
+import Combine
 import UIKit
 import WidgetKit
+
+enum DarAppLanguage: String, CaseIterable, Identifiable, Codable, Equatable {
+    case de, en, ar, tr, ku, ckb, bs, fr, es
+
+    static let storageKey = "darAdultPreferredLocaleV1"
+    var id: String { rawValue }
+    var localeIdentifier: String { rawValue }
+    var isRightToLeft: Bool { self == .ar || self == .ckb }
+
+    static func fromSystemPreferredLanguages(_ languages: [String] = Locale.preferredLanguages) -> Self {
+        for language in languages {
+            let base = language.replacingOccurrences(of: "_", with: "-").split(separator: "-").first.map(String.init)?.lowercased() ?? ""
+            if let match = allCases.first(where: { $0.rawValue == base }) { return match }
+        }
+        return .de
+    }
+
+    static func supported(from rawValue: String) -> Self? {
+        let base = rawValue.trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: "_", with: "-").split(separator: "-").first.map(String.init)?.lowercased() ?? ""
+        return allCases.first(where: { $0.rawValue == base })
+    }
+}
+
+@MainActor
+final class DarLanguageStore: ObservableObject {
+    private let defaults: UserDefaults
+    @Published private(set) var hasManualSelection: Bool
+    @Published var selectedLanguage: DarAppLanguage
+
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        if let stored = defaults.string(forKey: DarAppLanguage.storageKey), let language = DarAppLanguage.supported(from: stored) {
+            selectedLanguage = language
+            hasManualSelection = true
+        } else {
+            selectedLanguage = DarAppLanguage.fromSystemPreferredLanguages()
+            hasManualSelection = false
+        }
+    }
+
+    var locale: Locale { Locale(identifier: selectedLanguage.localeIdentifier) }
+    var localeIdentifier: String { selectedLanguage.localeIdentifier }
+
+    func select(_ language: DarAppLanguage) {
+        guard selectedLanguage != language || !hasManualSelection else { return }
+        selectedLanguage = language
+        hasManualSelection = true
+        defaults.set(language.rawValue, forKey: DarAppLanguage.storageKey)
+    }
+
+    func acceptWebLocale(_ rawValue: String) {
+        guard let language = DarAppLanguage.supported(from: rawValue) else { return }
+        select(language)
+    }
+}
 
 final class DarAppDelegate: NSObject, UIApplicationDelegate {
     func application(
@@ -60,6 +117,7 @@ extension Notification.Name {
 struct DarAlTawhidApp: App {
     @UIApplicationDelegateAdaptor(DarAppDelegate.self) private var appDelegate
     @StateObject private var router = DarAppRouter()
+    @StateObject private var languageStore = DarLanguageStore()
 
     init() {
         let ink = DarWidgetStore.load().inkHex.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -88,8 +146,18 @@ struct DarAlTawhidApp: App {
 
     var body: some Scene {
         WindowGroup {
-            WebAppView(destination: router.destination, openURL: router.webURL, openNonce: router.openNonce)
+            WebAppView(
+                destination: router.destination,
+                openURL: router.webURL,
+                openNonce: router.openNonce,
+                preferredLocale: languageStore.localeIdentifier,
+                hasManualLocale: languageStore.hasManualSelection,
+                onWebLocaleChange: { languageStore.acceptWebLocale($0) }
+            )
                 .ignoresSafeArea()
+                .environmentObject(languageStore)
+                .environment(\.locale, languageStore.locale)
+                .environment(\.layoutDirection, languageStore.selectedLanguage.isRightToLeft ? .rightToLeft : .leftToRight)
                 .background(Color(uiColor: WebAppView.Coordinator.storedSurfaceColor()))
                 .onOpenURL { url in
                     router.open(url)

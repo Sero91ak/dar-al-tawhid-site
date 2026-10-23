@@ -157,6 +157,7 @@ global.document.addEventListener("click",e=>{
 },true);
 global.DARAdultUI18n={load,apply,setLocale,locale,translate,
  get catalogStatus(){return state},get translatedKeys(){return catalog.size},
+ translatedFor:code=>code==="tr"?catalog.size:0,
  scope:"adult-visitor-website-pwa-wkwebview"};
 if(global.document.readyState==="loading")global.document.addEventListener("DOMContentLoaded",boot,{once:true});
 else boot();
