@@ -73,7 +73,15 @@
   "publicRelease": false,
   "humanHearingApproved": false,
   "providerRequestsAllowed": 8,
-  "payments": [],
+  "payments": [
+    {
+      "text": "nannte",
+      "textSHA256": "e2bcfa4d84b3c1d54972ea584bd454c4d4a85eda0f640868e46d5f46fabf62af",
+      "language": "de",
+      "status": "REQUEST_STARTED_UNCONFIRMED",
+      "requestStartedAt": "2026-10-23T17:25:26.556252+00:00"
+    }
+  ],
   "composites": [],
   "status": "STARTED_PREPAYMENT_REMOTE_CHECKPOINT"
 }
