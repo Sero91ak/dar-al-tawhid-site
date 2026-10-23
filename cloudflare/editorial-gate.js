@@ -18,9 +18,24 @@ function html(s,status=200){return new Response(s,{status,headers:hdr({"Content-
 "Content-Security-Policy":"default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; img-src 'self' data:; base-uri 'none'; frame-ancestors 'none'"})});}
 function escape(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 function loginPage(error="",status=200){
-  return html(`<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow,noarchive"><title>Private Redaktion · DĀR AL TAWḤĪD</title><style>
-  :root{color-scheme:dark}*{box-sizing:border-box}body{min-height:100dvh;margin:0;padding:30px 16px;display:grid;place-items:center;background:radial-gradient(ellipse at 55% -10%,#254238,transparent 70%),#08120f;color:#f0e8d6;font:15px/1.7 system-ui,sans-serif}main{width:min(100%,430px);border:1px solid #74633f;border-radius:23px;padding:clamp(22px,5vw,39px);background:#12221e;box-shadow:0 30px 90px #0008}small{font-size:11px;letter-spacing:.18em;color:#e0c184}h1{font:normal 32px Georgia,serif;color:#e1c98e;margin:8px 0}p{color:#c8d2c5}label{display:block;margin:22px 0 7px}input,button{width:100%;min-height:50px;border-radius:13px;font:inherit}input{background:#0b1714;color:#fff;border:1px solid #7d826e;padding:12px}button{border:0;background:#d8c18b;color:#17261e;font-weight:850;margin-top:12px}strong{color:#ffdbad}.line{width:75px;height:1px;background:#ae9566;margin:20px 0}
-</style></head><body><main><small>DĀR AL TAWḤĪD · NUR EIGENTÜMER</small><h1>Redaktionsatelier</h1><div class="line"></div><p>Neun Sprachen, Social-Media-Beiträge und Originalnachweise. Einmal anmelden – sechs Stunden lang ohne erneute Passworteingabe öffnen.</p>${error?'<p role="alert"><strong>'+escape(error)+'</strong></p>':''}<form method="post" action="/redaktion/login"><label for="password">Privates Redaktionspasswort</label><input id="password" name="password" type="password" maxlength="256" autocomplete="current-password" required autofocus><button type="submit">Redaktion öffnen →</button></form><p><small>Serverseitig geschützter Zugang · keine öffentliche Beiträge-Seite</small></p></main></body></html>`,status);
+  return html(`<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="robots" content="noindex,nofollow,noarchive"><title>Private Redaktion · DĀR AL TAWḤĪD</title><style>
+:root{color-scheme:dark}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;min-height:100dvh;display:grid;place-items:center;padding:calc(28px + env(safe-area-inset-top)) 18px calc(28px + env(safe-area-inset-bottom));background:radial-gradient(ellipse at 50% -25%,#315242 0,transparent 61%),radial-gradient(circle at bottom right,#193126 0,transparent 49%),#08120f;color:#eee8da;font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{width:min(100%,450px);padding:clamp(24px,6vw,41px);border:1px solid rgba(223,196,137,.48);border-radius:26px;background:linear-gradient(150deg,#1b352a,#0e201a 79%);box-shadow:0 28px 85px #0009,inset 0 1px #e8d6a222}
+small{display:block;color:#e1cc9a;font-size:11px;font-weight:750;letter-spacing:.18em}
+h1{margin:14px 0 10px;font:normal clamp(30px,6.5vw,39px)/1.18 Georgia,serif;letter-spacing:-.025em;color:#efd7a0}
+p{font-size:14px;color:#c4d2c5;margin:9px 0 0}
+label{display:block;color:#efdfb9;font-size:13px;font-weight:750;margin:25px 0 8px}
+input{width:100%;min-height:54px;padding:12px 15px;border:1px solid #8b926e;border-radius:13px;background:#091a14;color:white;font:16px/1.5 system-ui,sans-serif}
+input:focus-visible,button:focus-visible{outline:3px solid #ecd398;outline-offset:3px}
+button{width:100%;min-height:54px;margin-top:14px;background:#e3c88c;color:#14261b;font:800 16px/1.2 system-ui,sans-serif;border:0;border-radius:13px;cursor:pointer}
+button:active{transform:scale(.99)}
+strong{color:#ffe1a9}
+.line{width:80px;height:1px;margin:23px 0 5px;background:linear-gradient(90deg,transparent,#ddbf79,transparent)}
+.note{margin-top:22px;padding-top:13px;border-top:1px solid #d8bd7e44;text-align:center;font-size:11px;color:#aebfae}
+@media(max-width:550px){body{align-items:center}main{border-radius:22px;padding:27px 23px}}
+</style></head><body><main><small>DĀR AL TAWḤĪD · NUR EIGENTÜMER</small><h1>Redaktionsatelier</h1><div class="line"></div><p>Neun Sprachen, Social-Media-Beiträge und Originalnachweise. Einmal anmelden. Danach ist dein privater Redaktionsbereich sechs Stunden lang ohne weitere Passworteingabe geöffnet.</p>${error?'<p role="alert"><strong>'+escape(error)+'</strong></p>':''}<form method="post" action="/redaktion/login"><label for="password">Privates Redaktionspasswort</label><input id="password" name="password" type="password" maxlength="256" autocomplete="current-password" required autofocus><button type="submit">Redaktion öffnen →</button></form><div class="note">DĀR AL TAWḤĪD · Privater Zugang · 6 Stunden</div></main></body></html>`,status);
 }
 function b64(bytes){let s="";for(const b of bytes)s+=String.fromCharCode(b);return btoa(s).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/g,"");}
 async function mac(secret,payload){
