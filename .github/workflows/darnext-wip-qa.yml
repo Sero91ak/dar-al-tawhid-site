@@ -51,8 +51,7 @@ jobs:
             -destination "$DAR_NEXT_DESTINATION" \
             -derivedDataPath "$RUNNER_TEMP/darnext-derived-data" \
             -resultBundlePath "$RUNNER_TEMP/DARNext-iPad-WIP.xcresult" \
-            -parallel-testing-enabled NO \
-            -parallelizeTargets NO
+            -parallel-testing-enabled NO
 
       - name: Archive WIP result bundle
         if: always()
