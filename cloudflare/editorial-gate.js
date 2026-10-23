@@ -63,38 +63,21 @@ function redirect(cookie){
 }
 export async function editorialOwnerAccess(request,url,env){
  if(!route(url.pathname))return null;
- // Reuse the pre-existing server-side Academy owner credentials when available.
- // Editorial sessions remain separate and expire after six hours.
- const password=String(env&&(env.EDITORIAL_OWNER_PASSWORD||env.ACADEMY_OWNER_PASSWORD)||"");
- const signing=String(env&&(env.EDITORIAL_OWNER_SESSION_SECRET||env.ACADEMY_OWNER_SESSION_SECRET)||"");
- if(!password||!signing||signing.length<32)return loginPage("Privater Serverzugang ist noch nicht eingerichtet.",503);
+ // Temporary public editorial test. No server-side write or publish route.
+ // Explicitly allow only the four static editor resources.
  const p=url.pathname;
- if(p===ROOT+"/login"&&request.method==="POST"){
-   if(request.headers.get("Origin")!==url.origin)return loginPage("Anmeldung nicht angenommen.",403);
-   if(Number(request.headers.get("Content-Length")||0)>2048)return loginPage("Ungültige Anfrage.",413);
-   const form=await request.formData().catch(()=>null);
-   const supplied=String(form?.get("password")||"");
-   if(supplied.length>256||!(await equal(supplied,password)))return loginPage("Das eingegebene Passwort stimmt nicht mit dem aktuell am Server hinterlegten Redaktionspasswort überein. Die Test-App verwendet möglicherweise einen anderen Anmeldeweg.",401);
-   const exp=Math.floor(Date.now()/1000)+TTL;
-   const sig=await mac(signing,"editorial-owner-v1|"+exp);
-   return redirect(COOKIE+"=v1."+exp+"."+sig+"; HttpOnly; Secure; SameSite=Strict; Path="+ROOT+"; Max-Age="+TTL);
- }
- if(p===ROOT+"/logout"&&request.method==="POST"){
-   if(request.headers.get("Origin")!==url.origin)return loginPage("Abmeldung nicht angenommen.",403);
-   return redirect(COOKIE+"=; HttpOnly; Secure; SameSite=Strict; Path="+ROOT+"; Max-Age=0");
- }
- if(request.method!=="GET"&&request.method!=="HEAD")return new Response("Method Not Allowed",{status:405,headers:hdr({"Allow":"GET, HEAD"})});
- if(!(await session(request,signing)))return loginPage();
- if(p===ROOT+"/login"||p===ROOT+"/logout")return redirect();
  const allowed=new Set([ROOT,ROOT+"/",ROOT+"/index.html",ROOT+"/editor.js",ROOT+"/style.css"]);
  if(!allowed.has(p))return new Response("Not Found",{status:404,headers:hdr()});
- const target=new URL(url.toString());target.pathname=(p===ROOT||p===ROOT+"/index.html")?ROOT+"/":p;
+ if(request.method!=="GET"&&request.method!=="HEAD")
+  return new Response("Method Not Allowed",{status:405,headers:hdr({"Allow":"GET, HEAD"})});
+ const target=new URL(url.toString());
+ target.pathname=(p===ROOT||p===ROOT+"/index.html")?ROOT+"/":p;
  const asset=await env.ASSETS.fetch(new Request(target.toString(),{method:"GET"}));
  if(!asset.ok||asset.status>=300)return new Response("Redaktionsseite nicht verfügbar",{status:503,headers:hdr()});
  const headers=new Headers(asset.headers);
  for(const [k,v]of Object.entries(hdr()))headers.set(k,v);
  if(p===ROOT||p===ROOT+"/"||p===ROOT+"/index.html")headers.set("Content-Type","text/html; charset=utf-8");
- headers.set("Content-Security-Policy","default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'");
+ headers.set("Content-Security-Policy","default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'");
  headers.delete("ETag");headers.delete("Content-Length");
  return new Response(request.method==="HEAD"?null:asset.body,{status:200,headers});
 }
