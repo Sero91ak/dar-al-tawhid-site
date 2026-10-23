@@ -105,7 +105,7 @@
   }
   async function store(id, label, value, overwrite) {
     if (!session.key || !session.entries) throw new Error("Tresor zuerst entsperren.");
-    if (!id || !label || !value) throw new Error("Name und Schlüssel fehlen.");
+    if (!id || !label || !String(value).trim()) throw new Error("Name und Schlüssel fehlen.");
     if (Object.prototype.hasOwnProperty.call(session.entries, id) && !overwrite)
       throw new Error("Eintrag existiert bereits. Zum Ersetzen ausdrücklich bestätigen.");
     const before = session.entries;
@@ -193,7 +193,7 @@
       const label = slot === "custom" ? custom : (chosen ? chosen.label : custom);
       const id = slot === "custom" ? "custom:" + custom.toLocaleLowerCase("de") : slot;
       const input = byId("vaultNewSecret");
-      const value = input.value.trim();
+      const value = input.value;
       if (!slot) throw new Error("Bitte zuerst den Dienst auswählen.");
       if (!label) throw new Error("Bitte den Namen des Dienstes eingeben.");
       await store(id, label, value, byId("vaultOverwrite").checked);
