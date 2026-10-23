@@ -3,9 +3,12 @@
 const assert=require("node:assert/strict"),fs=require("node:fs"),path=require("node:path"),vm=require("node:vm");
 const pack=JSON.parse(fs.readFileSync(path.join(__dirname,"../i18n/adult-content-machine-drafts.json"),"utf8"));
 const source=fs.readFileSync(path.join(__dirname,"dar-test-machine-drafts.js"),"utf8");
+const checkpoint=JSON.parse(fs.readFileSync(path.join(__dirname,"../../desktop-preview/i18n-core-v1/content-batch-checkpoint.json"),"utf8"));
 assert.equal(pack.humanApproval,false);
 assert.equal(pack.status,"draft");
-assert.equal(Object.keys(pack.records).length,10);
+assert.equal(Object.keys(pack.records).length,checkpoint.items.length);
+assert.equal(checkpoint.humanApproval,false);
+assert.equal(checkpoint.nextBatch,checkpoint.completedBatches.length+1);
 for(const record of Object.values(pack.records)){
  assert.equal(record.humanApproval,false);
  assert.equal(record.status,"draft");
