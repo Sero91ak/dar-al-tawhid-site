@@ -40,6 +40,10 @@ function validateTranslation(item,locale,value){
  if(/https?:\/\//i.test(value.title+"\n"+value.body))fail(item.id+" "+locale+" contains an external URL");
  if(RTL.has(locale)&&!/[\u0600-\u06ff]/.test(value.body))fail(item.id+" "+locale+" is not RTL script");
  if(!RTL.has(locale)&&!/[A-Za-zÇĞİÖŞÜçğıöşüÊêÎîÛûŞş]/.test(value.body))fail(item.id+" "+locale+" has no target-script prose");
+ if(item.fields.body.includes("🖋️")&&!value.body.includes("🖋️"))fail(item.id+" "+locale+" dropped the speaker marker");
+ if(item.fields.body.includes("🌙")&&!value.body.includes("🌙"))fail(item.id+" "+locale+" dropped the conclusion marker");
+ const ratio=value.body.length/Math.max(item.fields.body.length,1);
+ if(ratio<0.35||ratio>3.6)fail(item.id+" "+locale+" length ratio "+ratio.toFixed(2)+" is implausible");
 }
 function draftRecord(item,locale,value){
  return {
