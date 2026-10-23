@@ -4,6 +4,7 @@ on:
   workflow_dispatch:
   pull_request:
     branches:
+      - codex/i18n-9-integration
       - codex/i18n-9-integration-20261023
       - codex/native-localization-9-languages-full-20261022
 
