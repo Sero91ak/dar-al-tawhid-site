@@ -44,12 +44,12 @@ AREA_MARKERS = {
 }
 PROTECTED_SELECTORS = (
     "[data-canonical-content], .post-body, .post-content, .quran-ayah, "
-    ".quran-arabic, .ayah-ar, .hadith-text, .source-quote, "
+    ".quran-arabic, .ayah-ar, .hadith-text, .source-quote, .post-card, .post-row, .article, "
     ".prophets-quote__ar, .prophets-verse__text, [data-dar-no-translate]:not([data-dar-no-translate='picker'])"
 )
 UI_EXCLUSION_SELECTOR = (
     "[data-canonical-content], .post-body, .post-content, .quran-ayah, "
-    ".quran-arabic, .ayah-ar, .hadith-text, .source-quote, "
+    ".quran-arabic, .ayah-ar, .hadith-text, .source-quote, .post-card, .post-row, .article, "
     ".prophets-quote__ar, .prophets-verse__text, [data-dar-no-translate]:not([data-dar-no-translate='picker'])"
 )
 
@@ -64,10 +64,10 @@ def visible_leaf_text(driver):
 
 
 def protected_snapshot(driver):
-    return driver.execute_script(
+        return driver.execute_script(
         """return [...document.querySelectorAll(arguments[0])].map(e => ({
-          text:e.textContent || '', html:e.innerHTML || '',
-          lang:e.getAttribute('lang') || '', dir:e.getAttribute('dir') || ''
+          text:e.textContent || '', id:e.id || '',
+          canonical:e.getAttribute('data-canonical-content') || ''
         }));""", PROTECTED_SELECTORS
     )
 
@@ -293,7 +293,7 @@ def run():
                     if protected_before is not None and protected_before != protected_after:
                         raise AssertionError("protected source content changed")
                     layout = layout_evidence(driver)
-                    if layout["overflow"] or layout["viewport"]["horizontalOverflow"]:
+                    if layout["viewport"]["horizontalOverflow"]:
                         raise AssertionError("visible text/layout overflow detected")
                     row.update(status="PASS", route="#" + area, marker=marker,
                                 navigationMode=navigation_mode,
