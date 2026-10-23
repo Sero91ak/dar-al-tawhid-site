@@ -48,7 +48,7 @@ PROTECTED_SELECTORS = (
 )
 UI_EXCLUSION_SELECTOR = (
     "[data-canonical-content], .post-body, .post-content, .quran-ayah, "
-    ".quran-arabic, .ayah-ar, .hadith-text, .source-quote, .post-card, .post-row, .article, "
+    ".quran-arabic, .ayah-ar, .hadith-text, .source-quote, .post-card, .post-row, "
     ".prophets-quote__ar, .prophets-verse__text, [data-dar-no-translate]:not([data-dar-no-translate='picker'])"
 )
 
