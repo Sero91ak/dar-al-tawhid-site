@@ -8,14 +8,23 @@ if(!/^\/test(?:\/|$)/.test(location.pathname)||/^\/test\/kids(?:\/|$)/.test(loca
 var HEADER_ID="darTestBrandHeaderV1";
 var LOGO="/app-logo-original.png";
 var ICONS={
- language:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-3.5 3.6-3.5 14.4 0 18M12 3c3.5 3.6 3.5 14.4 0 18"/>',
- account:'<circle cx="12" cy="8" r="3.5"/><path d="M5 21c.5-4.1 3-6.3 7-6.3s6.5 2.2 7 6.3"/>'
+ language:"/test/assets/header-icons/globe-3d.svg",
+ account:"/test/assets/header-icons/account-3d.svg",
+ palette:"/test/assets/header-icons/palette-3d.svg"
 };
+function icon(kind){
+ var i=document.createElement("img");
+ i.className="dtbh-icon-3d";
+ i.src=ICONS[kind]+"?v=20261023-three-dimensional";
+ i.alt="";i.setAttribute("aria-hidden","true");
+ i.width=36;i.height=36;i.decoding="async";i.draggable=false;
+ return i;
+}
 function button(label,kind){
  var b=document.createElement("button");
  b.type="button";b.className="dtbh-action dtbh-action-"+kind;
  b.setAttribute("aria-label",label);b.setAttribute("title",label);
- b.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">'+ICONS[kind]+'</svg>';
+ b.appendChild(icon(kind));
  return b;
 }
 function picker(trigger,remaining){
@@ -53,7 +62,7 @@ function setup(){
  function keepOriginalLogo(){
   if(logo.getAttribute("src")!==LOGO)logo.setAttribute("src",LOGO);
  }
- logo.width=64;logo.height=64;
+ logo.width=56;logo.height=56;
  logo.setAttribute("decoding","async");logo.setAttribute("loading","eager");
  logo.setAttribute("fetchpriority","high");
  keepOriginalLogo();
@@ -66,6 +75,8 @@ function setup(){
  account.addEventListener("click",function(e){e.preventDefault();openAccount();});
  theme.setAttribute("title","Erscheinungsbild auswählen");
  theme.setAttribute("aria-label","Erscheinungsbild auswählen");
+ // Preserve the original toggle element and its bound palette click listener.
+ theme.replaceChildren(icon("palette"));
  actions.appendChild(language);actions.appendChild(account);actions.appendChild(theme);
  row.appendChild(actions);
  h.dataset.premiumHeaderV2="ready";
