@@ -146,5 +146,30 @@
       state=fresh();save();notice="Neuer Entwurf begonnen.";rerender();
     };
   }
-  global.DARAdminSocialReview={render,bind};
+
+  /* Immersive editorial surface inside the EXISTING authenticated Admin SPA.
+     Legacy Social Review renderer remains available for recovery. */
+  function renderImmersiveAtelier(){
+    return '<section class="admin-editorial-host" data-no-collapse aria-label="Redaktionsatelier">'+
+      '<div class="admin-editorial-hostbar"><div><small>DĀR ADMIN / REDAKTION</small>'+
+      '<strong>Redaktionsatelier</strong><span>Neun Sprachen · Kanonische Beiträge · Originalnachweise</span></div>'+
+      '<a href="/admin/redaktion/" target="_blank" rel="noopener" class="admin-editorial-popout">Arbeitsfläche separat öffnen ↗</a></div>'+
+      '<iframe id="darAdminEditorialFrame" title="DĀR AL TAWḤĪD Redaktion" src="/admin/redaktion/?v=1" referrerpolicy="same-origin"></iframe>'+
+      '</section>';
+  }
+  function bindImmersiveAtelier(){
+    const frame=document.getElementById("darAdminEditorialFrame");
+    if(!frame)return;
+    function resize(){
+      if(!frame.isConnected)return;
+      const top=frame.getBoundingClientRect().top;
+      const room=window.innerHeight-top-10;
+      frame.style.height=Math.max(420,room)+"px";
+    }
+    resize();
+    frame.addEventListener("load",resize,{once:true});
+    window.addEventListener("resize",resize,{passive:true});
+  }
+  global.DARAdminSocialReview={render:renderImmersiveAtelier,bind:bindImmersiveAtelier,renderLegacy:render,bindLegacy:bind};
+
 })(window);
