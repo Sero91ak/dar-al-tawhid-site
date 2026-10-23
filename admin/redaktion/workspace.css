@@ -230,3 +230,18 @@ body{background:#081310;background-image:none;touch-action:pan-y}
  .footer{font-size:10px}
 }
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* Native Admin SPA host owns the header: editorial iframe is a content workbench. */
+html.dar-admin-embedded .top,html.dar-admin-embedded .intro,html.dar-admin-embedded .footer{display:none!important}
+html.dar-admin-embedded .shell{height:auto;min-height:100dvh}
+html.dar-admin-embedded .sidebar{height:100dvh;max-height:100dvh;top:0}
+html.dar-admin-embedded .layout{min-height:100dvh}
+@media(max-width:767px){
+ html.dar-admin-embedded .sidebar{height:auto;max-height:none}
+ html.dar-admin-embedded .shell{padding-bottom:env(safe-area-inset-bottom)}
+ html.dar-admin-embedded .mobile-work-tabs{top:0}
+ html.dar-admin-embedded .layout{min-height:calc(100dvh - 48px)}
+}
+@media(min-width:768px) and (max-width:1180px){
+ html.dar-admin-embedded .sidebar{height:100dvh;max-height:100dvh}
+}
