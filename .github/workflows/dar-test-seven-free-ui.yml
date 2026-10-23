@@ -65,4 +65,14 @@ jobs:
           python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/dar-seven-ui-browser.log 2>&1 &
           sleep 3
       - name: Verify all language pickers and RTL in Chromium
+        env:
+          DAR_TEST_PASSWORD: ${{ secrets.DAR_TEST_PASSWORD }}
         run: python3 test/i18n/test-seven-browser-smoke.py
+      - name: Upload 135-check browser evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dar-test-i18n-browser-20261023
+          path: QA/i18n-browser-20261023/
+          retention-days: 14
+          if-no-files-found: warn

@@ -81,7 +81,7 @@ function renderLatest(){
  lastPosts=sig;el.dataset.ready="1";
  el.innerHTML=data.length?data.map((p,i)=>{
   const line=[p.scholar,p.category].filter(Boolean).join(" · ");
-  return '<button type="button" class="dv3-post" data-dv3-nav="post" data-dv3-value="'+esc(p.id)+'"><span class="dv3-post-icon">'+(i===0?"▤":"✒")+'</span><span class="dv3-post-body"><small>'+(i===0?"AKTUELLE VERÖFFENTLICHUNG":"WEITERER BEITRAG")+'</small><b>'+esc(p.title)+'</b><em>'+esc(line||"Qurʾān · Sunnah · Aṯār")+'</em></span><span class="dv3-post-arrow" aria-hidden="true">→</span></button>';
+  return '<button type="button" class="dv3-post" data-dv3-nav="post" data-dv3-value="'+esc(p.id)+'"><span class="dv3-post-icon">'+(i===0?"▤":"✒")+'</span><span class="dv3-post-body"><small data-dar-ui-label="editorial-card-label">'+(i===0?"AKTUELLE VERÖFFENTLICHUNG":"WEITERER BEITRAG")+'</small><b>'+esc(p.title)+'</b><em>'+esc(line||"Qurʾān · Sunnah · Aṯār")+'</em></span><span class="dv3-post-arrow" aria-hidden="true">→</span></button>';
  }).join(""):'<button type="button" class="dv3-post" data-dv3-nav="recent">Alle Veröffentlichungen ansehen →</button>';
 }
 function ensureTopControls(){

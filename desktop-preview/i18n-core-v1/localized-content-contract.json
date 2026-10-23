@@ -9,7 +9,9 @@
     "quiz",
     "learn",
     "quran-tafsir",
-    "quran-tadabbur"
+    "quran-tadabbur",
+    "audio-description",
+    "search-result"
   ],
   "excluded": [
     "pdf-translation"
@@ -59,6 +61,14 @@
         "status": "original",
         "title": "Tawḥīd, Īmān und Akhlāq – ein Dīn",
         "bodyPointer": "content/posts/tawhid-iman-akhlaq-ein-din-480.md"
+      },
+      "fr": {
+        "status": "pending",
+        "review": null
+      },
+      "es": {
+        "status": "pending",
+        "review": null
       },
       "ar": {
         "status": "pending",
