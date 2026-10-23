@@ -20,19 +20,23 @@ enum DarWidgetTheme {
 
     static func palette(for snap: DarWidgetSnapshot, look: DarWidgetLook = .app) -> DarWidgetPalette {
         switch look {
-        case .app:
+        case .app, .automatisch:
             if let custom = customFromSnapshot(snap) { return custom }
             return named(snap.themeId)
         case .eisgold:
             return iceGold()
-        case .tinte:
+        case .klassischDunkel, .darAlLayl:
             return named("dark")
-        case .pergament:
+        case .pergament, .klassischHell:
             return named("light")
-        case .royal:
+        case .royalNachtblau:
             return named("royal")
-        case .bordeaux:
+        case .bordeauxRoyalPremium:
             return named("bordeaux")
+        case .petrol, .salbeiElfenbein:
+            return named("aurora")
+        case .sanftElegant:
+            return named("soft")
         }
     }
 

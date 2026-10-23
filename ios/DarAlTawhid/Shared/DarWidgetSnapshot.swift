@@ -14,6 +14,21 @@ struct DarIslamicEvent: Codable, Identifiable, Hashable {
     let daysUntil: Int
 }
 
+enum DarSourceFormat {
+    static func display(_ raw: String, fallback: String = "") -> String {
+        var value = raw
+        for token in ["📝 ", "🖋️ ", "📖 "] {
+            value = value.replacingOccurrences(of: token, with: "")
+        }
+        value = value.trimmingCharacters(in: .whitespacesAndNewlines)
+        if value.isEmpty { value = fallback.trimmingCharacters(in: .whitespacesAndNewlines) }
+        if let separator = value.firstIndex(of: ";") {
+            value = String(value[..<separator]).trimmingCharacters(in: .whitespaces)
+        }
+        return value
+    }
+}
+
 struct DarWidgetSnapshot: Codable, Equatable {
     var themeId: String
     var inkHex: String
@@ -54,6 +69,9 @@ struct DarWidgetSnapshot: Codable, Equatable {
     var hijriDay: String
     var hijriMonthYear: String
     var islamicEvents: [DarIslamicEvent]
+
+    var postSourceLine: String { DarSourceFormat.display(postSource, fallback: postCategory) }
+    var duaSourceLine: String { DarSourceFormat.display(duaSource, fallback: duaCategory) }
 
     var dailyOpenHash: String {
         if postId.isEmpty { return "#home" }
