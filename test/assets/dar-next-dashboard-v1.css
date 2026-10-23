@@ -93,3 +93,31 @@ html.dar-next-v1 [data-darnext-animate]{animation:darNextAppear .52s both cubic-
  html.dar-next-v1 [data-darnext-animate]{animation:none!important}
  html.dar-next-v1 .dar-next-btn,html.dar-next-v1 .dar-next-launcher,html.dar-next-v1 .dar-next-palette__tile,html.dar-next-v1 #bottomNav .bottom-nav-btn{transition:none!important}
 }
+
+/* Wide-screen information architecture: retain every canonical V3 Home component,
+   arrange the real components in a two-column editorial dashboard. */
+@media(min-width:1100px){
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-home{
+  width:100%!important;max-width:920px!important;
+  display:grid!important;grid-template-columns:minmax(0,1.08fr) minmax(0,.92fr)!important;
+  gap:14px 16px!important;align-items:start
+ }
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-hometitle,
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-language,
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-search-box{grid-column:1/-1}
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-tawhid{grid-column:1;grid-row:auto}
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-section[aria-labelledby="dv3LatestTitle"]{grid-column:2}
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-section[aria-labelledby="dv3QuickTitle"]{grid-column:1}
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-bottom{grid-column:2;align-self:start}
+ html.dar-next-v1.dar-home-v3 body.is-home-route #appView .dv3-quick-grid{grid-template-columns:1fr 1fr}
+}
+/* Polished existing ʿIlm conversation, not a replacement AI backend. */
+html.dar-next-v1 body.dar-next-is-ilm .ilm-message-list{
+ background-image:radial-gradient(ellipse at 50% -10%,rgba(173,145,88,.08),transparent 60%)
+}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-user-bubble{border-radius:18px 18px 5px 18px}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-assistant-message{border-radius:18px 18px 18px 5px}
+html.dar-next-v1 body.dar-next-is-ilm .ilm-chat-input:focus-visible{outline:2px solid var(--dn-gold)!important;outline-offset:2px}
+@media(min-width:1100px){
+ html.dar-next-v1 body.dar-next-is-ilm .ilm-chat-shell{max-width:min(1120px,100%);margin-inline:auto}
+}
