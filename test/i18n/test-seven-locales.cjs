@@ -2,9 +2,11 @@
 "use strict";
 const assert=require("node:assert/strict"),fs=require("node:fs"),vm=require("node:vm"),path=require("node:path");
 const locales=JSON.parse(fs.readFileSync(path.join(__dirname,"adult-ui-locales-seven.json"),"utf8"));
+const inventory=require(path.join(__dirname,"adult-ui-web-inventory.cjs"));
 const code=fs.readFileSync(path.join(__dirname,"../assets/dar-test-turkish-ui.js"),"utf8");
 const expected=["de","tr","en","ar","ku","ckb","bs","fr","es"];
 const translated=["tr","en","ar","ku","ckb","bs","fr","es"];
+const expectedUiTextCount=421+inventory.expandedWebKeys.length;
 assert.deepEqual(locales.availableLocales,expected);
 assert.deepEqual(locales.translatedLocales,["de",...translated]);
 assert.deepEqual(locales.pendingLocales,[]);
@@ -14,8 +16,9 @@ const countByLocale={};
 for(const locale of translated){
  const dict=locales.translations[locale];
  const values=Object.keys(dict);
- assert(values.length>=160,locale+" lacks basic UI vocabulary");
+ assert.equal(values.length,expectedUiTextCount,locale+" UI inventory count");
  assert(values.every(x=>x.trim()&&typeof dict[x]==="string"&&dict[x].trim()));
+ for(const key of inventory.expandedWebKeys)assert(dict[key]?.trim(),locale+" missing expanded web UI key "+key);
  for(const label of ["Startseite","Mehr","Gebetszeiten","Einstellungen","Suche","Konto","Suchen","Heute","Qurʾān","Duʿāʾ"]){
   assert(dict[label],locale+" missing "+label);
  }
@@ -49,11 +52,18 @@ for(const locale of expected){
  assert.equal(doc.documentElement.lang,locale);
  assert.equal(doc.documentElement.dir,["ar","ckb"].includes(locale)?"rtl":"ltr");
 }
-assert.equal(w.DarTestTurkishUI.translatedFor("fr"),421);
-assert.equal(w.DarTestTurkishUI.translatedFor("es"),421);
+assert.equal(w.DarTestTurkishUI.translatedFor("fr"),expectedUiTextCount);
+assert.equal(w.DarTestTurkishUI.translatedFor("es"),expectedUiTextCount);
 storage.locale="de";w.DarTestTurkishUI.apply();
 assert.equal(nodes[0].nodeValue,"Startseite","German return must be lossless");
 const here=fs.readFileSync(path.join(__dirname,"../assets/dar-test-seven-languages-loader.js"),"utf8");
 assert(!here.includes("api.openai.com"),"Client must never use paid translation API");
 assert(here.includes("/test/i18n/adult-ui-locales-seven.json"),"Require fixed static same-origin locale pack");
+for(const file of inventory.sourceFiles){
+ const source=fs.readFileSync(path.join(__dirname,"..","..",file),"utf8");
+ for(const key of inventory.expandedWebKeys){
+  const marker=inventory.sourceMarkers[key]||key;
+  assert(inventory.sourceFiles.some(candidate=>fs.readFileSync(path.join(__dirname,"..","..",candidate),"utf8").includes(marker)),"Expanded UI key is not present in approved source files: "+key);
+ }
+}
 console.log("PASS: 9 registered locales (9 translated) in 3 language selectors, "+JSON.stringify(countByLocale)+", DE restoration, source protection and RTL");

@@ -8,6 +8,7 @@ const path = require("node:path");
 
 const root = path.resolve(__dirname, "..");
 const pack = JSON.parse(fs.readFileSync(path.join(root, "test/i18n/adult-ui-locales-seven.json"), "utf8"));
+const inventory = require(path.join(root, "test/i18n/adult-ui-web-inventory.cjs"));
 const locales = ["de", "tr", "en", "ar", "ku", "ckb", "bs", "fr", "es"];
 const pages = [
     "Startseite", "Qurʾān Player", "Duʿāʾ", "Bibliothek", "Hörbücher",
@@ -15,6 +16,17 @@ const pages = [
     "Mehr", "Navigation", "Dialoge", "Unterseiten"
 ];
 const sourceKeys = Object.keys(pack.translations.tr || {});
+const expectedSourceTextCount = 421 + inventory.expandedWebKeys.length;
+if (sourceKeys.length !== expectedSourceTextCount) {
+    throw new Error(`Expected ${expectedSourceTextCount} UI texts, found ${sourceKeys.length}`);
+}
+for (const key of inventory.expandedWebKeys) {
+    const marker = inventory.sourceMarkers[key] || key;
+    const found = inventory.sourceFiles.some(file =>
+        fs.readFileSync(path.join(root, file), "utf8").includes(marker)
+    );
+    if (!found) throw new Error(`Expanded UI key is not present in approved source files: ${key}`);
+}
 const protectedSourceKeys = new Set([
     "Qibla", "Ḥadīṯ", "Duʿāʾ", "Qurʾān", "Audio", "DĀR AL TAWḤĪD",
     "As-salāmu ʿalaikum wa raḥmatullāhi wa barakātuh",
@@ -28,7 +40,8 @@ const protectedSourceKeys = new Set([
 // not untranslated German copy.
 const validUnchangedUiKeys = new Set([
     "Kompakt", "Kontakt", "Start", "App", "Qibla", "Audio", "Downloads",
-    "DĀR AL TAWḤĪD", "Fajr", "Dhuhr", "Asr", "Maghrib", "Isha", "Prophet", "Name"
+    "DĀR AL TAWḤĪD", "DĀR AL TAWḤĪD · {page}", "Fajr", "Dhuhr", "Asr", "Maghrib", "Isha",
+    "Prophet", "Name", "Story", "Ḥadīṯ & Āṯār", "Zakāt"
 ]);
 const rows = locales.map(locale => {
     const dictionary = locale === "de" ? {} : (pack.translations[locale] || {});
@@ -50,6 +63,8 @@ const result = {
     scope: "adult-interface-only",
     excluded: ["posts", "Qurʾān originals", "religious source quotations"],
     sourceTextCount: sourceKeys.length,
+    expandedWebUiTextCount: inventory.expandedWebKeys.length,
+    expandedWebUiSourceFiles: inventory.sourceFiles,
     pages,
     locales: rows,
     rtlLocales: ["ar", "ckb"],
