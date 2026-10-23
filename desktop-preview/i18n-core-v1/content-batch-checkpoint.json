@@ -18,9 +18,14 @@
     1,
     2,
     3,
-    4
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
   ],
-  "nextBatch": 5,
+  "nextBatch": 10,
   "items": [
     {
       "id": "post:354-547",
@@ -689,6 +694,856 @@
       "id": "post:akhlak-besten-mit-charakter-001",
       "sourceHash": "c4941750f2ee41617f4890211930b4d7afef02d2dbff94443555d402aefa74a1",
       "batch": 4,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:akhlak-schlechter-charakter-verdirbt-taten-001",
+      "sourceHash": "bb585e56aff17b45e342094ca828ac3e642f3ef83a6aeaaf5e8498d1991b3aa9",
+      "batch": 5,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:akhlak-schwerste-tat-waage-001",
+      "sourceHash": "ed345e257b1aa3f250bb7c3629c24766e34085890dc0122ebacc26dd61ec130c",
+      "batch": 5,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:akhlak-vollkommener-iman-001",
+      "sourceHash": "24e552ea181cd0534bbb857bde32b3ee0765f6ff9dc012ebcda33d1598d7a5f6",
+      "batch": 5,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:akhlaq-bedeutet-gute-zur-familie-236",
+      "sourceHash": "2f8a5302501415fc40aff28256ade6050c91d3049e8ca68643977863a34e12bc",
+      "batch": 5,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:al-ajurri-groesstes-geschenk-im-paradies-161",
+      "sourceHash": "a6c3324124ff97c865da822ca96c539d8ebaa4ade7b6eaff9216619cac65b7f4",
+      "batch": 5,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:al-awzai-sifat-allah-ueber-dem-thron-001",
+      "sourceHash": "c67d39a4f640beac4cb7652e18e7b1fe1bde3799d46f4f48c2d66069e8ca5a4c",
+      "batch": 5,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:al-awzai-sunnah-athar-001",
+      "sourceHash": "efad04ca028347c292c90b169e3c3e4bfe7fa0efd4326c38346766acd4ba7980",
+      "batch": 5,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:al-barbahari-bidah-athar-001",
+      "sourceHash": "d4a51131c55ae5bcb440d5773bc31a805c8ac495e0cc05518615fd939c1899c1",
+      "batch": 5,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:al-fudayl-ibn-iyad-folge-der-rechtleitung-440",
+      "sourceHash": "121bf614556aabd35f0a32203952103c1e9bb66952b76b55980077f60ee4049e",
+      "batch": 5,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:al-fudayl-zuhd-qanaah-001",
+      "sourceHash": "51a475a140475a0bfe8a560d0804bed7f94516c360f8f62ba45b79fe098d7c95",
+      "batch": 5,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:al-hasan-al-basri-gute-taten-und-furcht-434",
+      "sourceHash": "93f91feeb7b256de0f02a5540b98e6af32c5d31c0a58f65af4976cf95ad97292",
+      "batch": 6,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:al-lalakai-sifat-durch-offenbarung-001",
+      "sourceHash": "6405d589483cfe494953e68cf1b473cf30ce95276f381e9eeeacf58f9bc0f738",
+      "batch": 6,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:al-qurtubi-istiwa-bedeutung-bekannt-133",
+      "sourceHash": "863269c2a8a825d7ab55962dd36ac6369e9d4fec8ed0726b2b7e845acdafe98c",
+      "batch": 6,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ali-ibn-abi-talib-kinder-der-akhirah-437",
+      "sourceHash": "2fda5a94eab8e57bb4c9642052f82e7da0e0ef2a5e661e3d8d23a33693d8cd69",
+      "batch": 6,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:allahs-hand-und-die-groesse-der-schoepfung-in-seiner-hand-117",
+      "sourceHash": "c2d8b524e5dc4d8548edef6a1c7996d91af3b11c58d8bd8e146ba3c23c99eaaf",
+      "batch": 6,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:allahs-rechte-hand-widerlegung-gegen-tawil-109",
+      "sourceHash": "e4c7a895a9621a68c889272ca5c4209afcec2cc7fa99170b20fdeeb4e3e54843",
+      "batch": 6,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:allahs-stimme-nicht-wie-die-stimmen-der-schoepfung-112",
+      "sourceHash": "089993701050695f3d51a2ecfd2e6fa7c9f77bfd0605c33b247f74abd414f2c2",
+      "batch": 6,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:amali-sind-nur-nach-niyyah-199",
+      "sourceHash": "ed62a7f72e626978198f6e5053ffece211417420c0d5f770948a0dd29797ed19",
+      "batch": 6,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:amanah-und-iman-gehoeren-zusammen-458",
+      "sourceHash": "07bf60d6b7bbf6c319fd7d4e85c19d186a3630766d85a2973b42398dde462392",
+      "batch": 6,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ant-colony-justice-20261013-474",
+      "sourceHash": "f81d74234977626c4cbf18f8076011f72b4ac1851830101757602af7f7fd1b70",
+      "batch": 6,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-069-dieses-wissen-ist-din",
+      "sourceHash": "32ea3be88a16311498d857386f0c388a46daa78bbb1eb36a3e7f16106400e975",
+      "batch": 7,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-070-der-quran-ist-nicht-erschaffen",
+      "sourceHash": "a32a192b580ebd0df4ff6bcd18936a5198bdfc790b6ece031b42fe9b5eb4129c",
+      "batch": 7,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-071-ahmad-ibn-hanbal-ueber-den-erschaffenen-quran",
+      "sourceHash": "d3ad98e88f2e8fd1a196845c19a536a0410042bca81b8b231a11180125538972",
+      "batch": 7,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-072-iman-ist-wort-und-tat",
+      "sourceHash": "c7cb7f8179460e0700d67087803f2b59fb540acbd4a1085afc449d221c44b920",
+      "batch": 7,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-073-der-iman-nimmt-zu-und-ab",
+      "sourceHash": "aed569764bc992adab3a0b322d91543aa173b3539d6272c7f0b2c9fd55d732e8",
+      "batch": 7,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-074-die-sifat-ohne-wie-frage",
+      "sourceHash": "5ce3e7c23cd31654d463456e24f392d912a75bd3635abfdd23e9bef831925d9b",
+      "batch": 7,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-075-paradies-und-hoelle-sind-erschaffen",
+      "sourceHash": "08b68f283dfa363f26b5b0c97b1731ca677e1dcea7cd865b00d8fed646176a0f",
+      "batch": 7,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-076-die-glaeubigen-sehen-ihren-herrn",
+      "sourceHash": "556b28482e3d5759191a4696e03da1fe3e4a3103b0691e51b3f4532ec3f52af3",
+      "batch": 7,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-077-dua-ist-anbetung",
+      "sourceHash": "54780e288afac490a203b8d6cedf838e7e094e618389bac4f5a57ee41a8fb7ed",
+      "batch": 7,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-078-der-massstab-bei-ahl-al-ahwa",
+      "sourceHash": "44549b47f097082fdc1c3f9f84edb5890c003cbf280677b99420bd820c047189",
+      "batch": 7,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-allah-wird-im-jenseits-gesehen-248",
+      "sourceHash": "d8ddead5c4ffbead749138fde00d0c5906ff24d0bd1e2d549a9a651b460d4848",
+      "batch": 8,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-die-waage-am-juengsten-tag-ist-wahr-258",
+      "sourceHash": "8ddeb37a02096af939dc1f771e496244385febf29887c6e5cc52fe8a8c5f625a",
+      "batch": 8,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:aqidah-iman-ist-wort-und-tat-250",
+      "sourceHash": "c333da15806152da28e091f167a41caa6398708600c7b5905838300e07ebc354",
+      "batch": 8,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:asad-musa-nuzul-zur-abrechnung-425",
+      "sourceHash": "786426eaa58d798cff6e2b71ee0d989d34efa35b2c0b22f511c78c6e9ea456e1",
+      "batch": 8,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ash-shafii-ijma-nicht-leichtfertig-behaupten-438",
+      "sourceHash": "3c2a1c6384366ddb2eb171fbdb008b3590a31c2883478e853ea1d98a1b06122c",
+      "batch": 8,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:at-tabari-muhakamah-wir-hoeren-und-gehorchen-353",
+      "sourceHash": "534133c0c4d1eeaac1f1f2ac5813632245b6c755c9b6eaa5212e1e870e5ce3a5",
+      "batch": 8,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:ata-fudul-al-kalam-zungen-disziplin-taqwa-168",
+      "sourceHash": "4d92bd6bbea0bd3e387f79cd79385b45f0f70ff4ee4df48f867538d5c70e430c",
+      "batch": 8,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-ahl-al-ahwa-nicht-zuhoeren-309",
+      "sourceHash": "b70e63c5b024f352ceb73089765771aed01ef75629150f14024b2873562aad06",
+      "batch": 8,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-ahl-al-bidah-erkennt-man-an-ihrem-angriff-auf-ahl-al-athar-301",
+      "sourceHash": "56372b9d37b779b6c777d8dbe9344ddb6784ad496f7c596e0a829a14518c3e1d",
+      "batch": 8,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-ahl-al-kalam-verwerfen-die-athar-302",
+      "sourceHash": "ceb76b890832b4ba57b2c2d3cb4f515cd63f71ee4fa9ccbb7b90397b9763ac3f",
+      "batch": 8,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-ahl-al-ray-greifen-ahl-al-hadith-an-303",
+      "sourceHash": "e52bc6fdad49de86bd220847169bc7fb94a4ba36d1674b13d82cd03efebd1734",
+      "batch": 9,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-bidah-ist-nicht-kleinzureden-315",
+      "sourceHash": "b71c100a64a004166a67f250beb929f40ef2b952abb8e35ed05ac3890176da04",
+      "batch": 9,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-der-hadith-wird-nicht-wegen-meinung-verlassen-312",
+      "sourceHash": "3b8e075ab3f9f1a1517a4a56ef8a790de845a1d30bcc7c6cd6459fce3aa1d95b",
+      "batch": 9,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-der-quran-ist-nicht-erschaffen-307",
+      "sourceHash": "c1d08eb2eab3997bbe266257a768fe22644d80643b8fab38da542b34a0f0d8f8",
+      "batch": 9,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-der-weg-ist-athar-nicht-spekulation-311",
+      "sourceHash": "366c86b48d740a136fae3cc3b60fac5cee749617951c75d0fcfad8dc4d567d2e",
+      "batch": 9,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-die-khawarij-verliessen-durch-fehlverstaendnis-305",
+      "sourceHash": "800abb9aae8eea18759fbf023d0bc467078cda923ea87111189eef48a050a1db",
+      "batch": 9,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-die-sunnah-ist-arche-nuh-317",
+      "sourceHash": "0b4b88fa36d004b135b5d3d263c07ed7d585523360e4f0b9ab21eb1dd66dda16",
+      "batch": 9,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-dieses-wissen-ist-din-310",
+      "sourceHash": "636db8b7d2683aaec0d761c3e9b10cf421d3259c291116113fed603f8f8906ea",
+      "batch": 9,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-isnad-ist-die-waffe-des-glaeubigen-314",
+      "sourceHash": "b3d650084388ed9f0b0e85c73ad970ef85fb678dad93cd3742100582939f2f9d",
+      "batch": 9,
+      "status": "draft",
+      "humanApproval": false,
+      "locales": {
+        "ar": "machine-reviewed-draft",
+        "en": "machine-reviewed-draft",
+        "tr": "machine-reviewed-draft",
+        "ku": "machine-reviewed-draft",
+        "ckb": "machine-reviewed-draft",
+        "bs": "machine-reviewed-draft",
+        "fr": "machine-reviewed-draft",
+        "es": "machine-reviewed-draft"
+      }
+    },
+    {
+      "id": "post:athar-widerlegung-istiwa-wird-bestaetigt-ohne-wie-308",
+      "sourceHash": "a8b093ba9f84271f416896c28530a2e5340d99ab7383a2e9ccc2614a971794ee",
+      "batch": 9,
       "status": "draft",
       "humanApproval": false,
       "locales": {
