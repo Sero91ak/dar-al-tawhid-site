@@ -107,12 +107,14 @@
  }
  function syncState(){
   if(!adminActive()){
+   document.body.classList.add("dar-admin-login");
    document.body.classList.remove("dar-admin-workspace","dar-editorial-fullscreen");
    if(rail)rail.hidden=true;
    if(bar)bar.hidden=true;
    if(more)more.hidden=true;
    return;
   }
+  document.body.classList.remove("dar-admin-login");
   document.body.classList.add("dar-admin-workspace");
   buildRail();buildMobile();
   rail.hidden=false;bar.hidden=false;
