@@ -90,6 +90,9 @@ on:
       - _headers
       - _redirects
       - admin/**
+      # Private editorial atelier assets and its server-side owner access gate.
+      - redaktion/**
+      - cloudflare/editorial-gate.js
       - pwa/**
       - quelle/**
       # Screensaver catalog cache epoch must reach the production worker.
